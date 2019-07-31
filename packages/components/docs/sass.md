@@ -3876,8 +3876,6 @@ Define theme variables from a map of tokens
   - [active-01 [variable]](#active-01-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [carbon--theme [variable]](#carbon--theme-variable)
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--white [variable]
 
@@ -3956,8 +3954,6 @@ $carbon--theme--white: (
 - **Type**: `Map`
 - **Aliased**:
   - `carbon--theme`
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--g10 [variable]
 
@@ -4034,8 +4030,6 @@ $carbon--theme--g10: (
 
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--g90 [variable]
 
@@ -4188,8 +4182,6 @@ $carbon--theme--g100: (
 
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--v9 [variable]
 
@@ -4285,7 +4277,6 @@ $carbon--theme: $carbon--theme--white;
 - **Alias**: `carbon--theme--white`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅interactive-01 [variable]
 
@@ -5204,7 +5195,6 @@ $hover-secondary: map-get($carbon--theme, 'hover-secondary');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [listbox [mixin]](#listbox-mixin)
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [tags [mixin]](#tags-mixin)
 
 ### ✅active-secondary [variable]
@@ -14234,18 +14224,8 @@ Inline notification styles
       color: $inverse-link;
     }
 
-    @if $carbon--theme == $carbon--theme--white {
-      @include carbon--theme($carbon--theme--g100) {
-        &:hover {
-          background-color: $hover-secondary;
-        }
-      }
-    } @else if $carbon--theme == $carbon--theme--g10 {
-      @include carbon--theme($carbon--theme--g100) {
-        &:hover {
-          background-color: $hover-secondary;
-        }
-      }
+    &:hover {
+      background-color: $inverse-hover-ui;
     }
   }
 
@@ -14301,7 +14281,6 @@ Inline notification styles
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [prefix [variable]](#prefix-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -14319,11 +14298,6 @@ Inline notification styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [inverse-link [variable]](#inverse-link-variable)
-  - [carbon--theme [variable]](#carbon--theme-variable)
-  - [carbon--theme--white [variable]](#carbon--theme--white-variable)
-  - [carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
-  - [hover-secondary [variable]](#hover-secondary-variable)
-  - [carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [link-01 [variable]](#link-01-variable)
 

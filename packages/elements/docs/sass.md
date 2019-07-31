@@ -162,6 +162,7 @@
   - [✅active-ui [variable]](#active-ui-variable)
   - [✅selected-ui [variable]](#selected-ui-variable)
   - [✅hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [✅inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [✅hover-danger [variable]](#hover-danger-variable)
   - [✅active-danger [variable]](#active-danger-variable)
   - [✅hover-row [variable]](#hover-row-variable)
@@ -3338,6 +3339,7 @@ Define theme variables from a map of tokens
   $active-ui: map-get($theme, 'active-ui') !global;
   $selected-ui: map-get($theme, 'selected-ui') !global;
   $hover-selected-ui: map-get($theme, 'hover-selected-ui') !global;
+  $inverse-hover-ui: map-get($theme, 'inverse-hover-ui') !global;
   $hover-danger: map-get($theme, 'hover-danger') !global;
   $active-danger: map-get($theme, 'active-danger') !global;
   $hover-row: map-get($theme, 'hover-row') !global;
@@ -3399,6 +3401,7 @@ Define theme variables from a map of tokens
     --active-ui: #{map-get($theme, 'active-ui')};
     --selected-ui: #{map-get($theme, 'selected-ui')};
     --hover-selected-ui: #{map-get($theme, 'hover-selected-ui')};
+    --inverse-hover-ui: #{map-get($theme, 'inverse-hover-ui')};
     --hover-danger: #{map-get($theme, 'hover-danger')};
     --active-danger: #{map-get($theme, 'active-danger')};
     --hover-row: #{map-get($theme, 'hover-row')};
@@ -3505,6 +3508,7 @@ Define theme variables from a map of tokens
   - [active-ui [variable]](#active-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [active-danger [variable]](#active-danger-variable)
   - [hover-row [variable]](#hover-row-variable)
@@ -3574,6 +3578,7 @@ $carbon--theme--white: (
   hover-ui: #e5e5e5,
   active-ui: #bebebe,
   selected-ui: #dcdcdc,
+  inverse-hover-ui: #4c4c4c,
   hover-selected-ui: #cacaca,
   hover-danger: #ba1b23,
   active-danger: #750e13,
@@ -3652,6 +3657,7 @@ $carbon--theme--g10: (
   hover-ui: #e5e5e5,
   active-ui: #bebebe,
   selected-ui: #dcdcdc,
+  inverse-hover-ui: #4c4c4c,
   hover-selected-ui: #cacaca,
   hover-danger: #ba1b23,
   active-danger: #750e13,
@@ -3728,6 +3734,7 @@ $carbon--theme--g90: (
   hover-ui: #4c4c4c,
   active-ui: #6f6f6f,
   selected-ui: #565656,
+  inverse-hover-ui: #e5e5e5,
   hover-selected-ui: #656565,
   hover-danger: #ba1b23,
   active-danger: #750e13,
@@ -3804,6 +3811,7 @@ $carbon--theme--g100: (
   hover-ui: #353535,
   active-ui: #565656,
   selected-ui: #3d3d3d,
+  inverse-hover-ui: #e5e5e5,
   hover-selected-ui: #4c4c4c,
   hover-danger: #ba1b23,
   active-danger: #750e13,
@@ -3880,6 +3888,7 @@ $carbon--theme--v9: (
   hover-ui: #eef4fc,
   active-ui: #dfeafa,
   selected-ui: #eef4fc,
+  inverse-hover-ui: #4c4c4c,
   hover-selected-ui: #dfeafa,
   hover-danger: #c70014,
   active-danger: #ad1625,
@@ -4714,6 +4723,22 @@ Data table selected row hover
 
 ```scss
 $hover-selected-ui: map-get($carbon--theme, 'hover-selected-ui');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-hover-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-hover-ui: map-get($carbon--theme, 'inverse-hover-ui');
 ```
 
 </details>
