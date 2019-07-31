@@ -1,0 +1,39 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/spacing';
+
+/// @type Value
+/// @access public
+/// @group accordion
+$accordion-flex-direction: row-reverse !default;
+
+/// @type Value
+/// @access public
+/// @group accordion
+$accordion-justify-content: flex-start !default;
+
+/// @type Value
+/// @access public
+/// @group accordion
+$accordion-arrow-margin: 0 $carbon--spacing-05 0 0 !default;
+
+/// Computed accordion header height after the header has been built
+/// @type Value
+/// @access public
+/// @group accordion
+$accordion-heading-height: carbon--mini-units(4) !default;
+
+/// @type Value
+/// @access public
+/// @group accordion
+$accordion-title-margin: 0 0 0 $carbon--spacing-05 !default;
+
+/// @type Value
+/// @access public
+/// @group accordion
+$accordion-content-padding: 0 0 0 $carbon--spacing-05 !default;

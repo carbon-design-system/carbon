@@ -227,6 +227,7 @@
   - [✅display-02 [variable]](#display-02-variable)
   - [✅display-03 [variable]](#display-03-variable)
   - [✅display-04 [variable]](#display-04-variable)
+  - [❌defaultTokens [variable]](#defaulttokens-variable)
   - [✅tokens [variable]](#tokens-variable)
   - [✅properties [mixin]](#properties-mixin)
   - [✅strip-unit [function]](#strip-unit-function)
@@ -237,13 +238,38 @@
   - [✅carbon--type-icon-size [function]](#carbon--type-icon-size-function)
   - [✅carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 - [accordion](#accordion)
-  - [❌accordion [mixin]](#accordion-mixin)
+  - [✅accordion [mixin]](#accordion-mixin)
+  - [✅accordion-flex-direction [variable]](#accordion-flex-direction-variable)
+  - [✅accordion-justify-content [variable]](#accordion-justify-content-variable)
+  - [✅accordion-arrow-margin [variable]](#accordion-arrow-margin-variable)
+  - [✅accordion-heading-height [variable]](#accordion-heading-height-variable)
+  - [✅accordion-title-margin [variable]](#accordion-title-margin-variable)
+  - [✅accordion-content-padding [variable]](#accordion-content-padding-variable)
 - [breadcrumb](#breadcrumb)
   - [❌breadcrumb [mixin]](#breadcrumb-mixin)
 - [button](#button)
-  - [❌button [mixin]](#button-mixin)
+  - [✅button [mixin]](#button-mixin)
   - [❌button-base [mixin]](#button-base-mixin)
   - [❌button-theme [mixin]](#button-theme-mixin)
+  - [✅button-border-radius [variable]](#button-border-radius-variable)
+  - [✅button-border-width [variable]](#button-border-width-variable)
+  - [✅button-outline-width [variable]](#button-outline-width-variable)
+  - [✅button-outline-offset [variable]](#button-outline-offset-variable)
+  - [✅button-outline [variable]](#button-outline-variable)
+  - [✅button-height [variable]](#button-height-variable)
+  - [✅button-field-height [variable]](#button-field-height-variable)
+  - [✅button-small-height [variable]](#button-small-height-variable)
+  - [✅button-padding-l [variable]](#button-padding-l-variable)
+  - [✅button-padding-r [variable]](#button-padding-r-variable)
+  - [✅⚠️button-font-weight [variable]](#button-font-weight-variable)
+  - [✅⚠️button-font-size [variable]](#button-font-size-variable)
+  - [✅⚠️button-padding [variable]](#button-padding-variable)
+  - [✅⚠️button-padding-field [variable]](#button-padding-field-variable)
+  - [✅⚠️button-padding-sm [variable]](#button-padding-sm-variable)
+  - [✅⚠️button-padding-lg [variable]](#button-padding-lg-variable)
+  - [✅⚠️button-padding-ghost [variable]](#button-padding-ghost-variable)
+  - [✅⚠️button-padding-ghost-field [variable]](#button-padding-ghost-field-variable)
+  - [✅⚠️button-padding-ghost-sm [variable]](#button-padding-ghost-sm-variable)
 - [checkbox](#checkbox)
   - [❌checkbox [mixin]](#checkbox-mixin)
 - [code-snippet](#code-snippet)
@@ -387,7 +413,6 @@
   - [❌shell-side-nav-accent-01 [variable]](#shell-side-nav-accent-01-variable)
   - [❌unit [variable]](#unit-variable)
 - [general](#general)
-  - [✅accordion-arrow-size [variable]](#accordion-arrow-size-variable)
   - [✅spacing--columns--first [variable]](#spacing--columns--first-variable)
   - [✅spacing--columns--before [variable]](#spacing--columns--before-variable)
   - [✅spacing--cell--activity [variable]](#spacing--cell--activity-variable)
@@ -7506,8 +7531,6 @@ $caption-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅label-01 [variable]
 
@@ -7527,8 +7550,6 @@ $label-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅helper-text-01 [variable]
 
@@ -7548,8 +7569,6 @@ $helper-text-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅body-short-01 [variable]
 
@@ -7569,8 +7588,6 @@ $body-short-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅body-long-01 [variable]
 
@@ -7590,8 +7607,6 @@ $body-long-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅body-short-02 [variable]
 
@@ -7611,8 +7626,6 @@ $body-short-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅body-long-02 [variable]
 
@@ -7632,8 +7645,6 @@ $body-long-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅code-01 [variable]
 
@@ -7653,8 +7664,6 @@ $code-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅code-02 [variable]
 
@@ -7674,8 +7683,6 @@ $code-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅heading-01 [variable]
 
@@ -7695,8 +7702,6 @@ $heading-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-01 [variable]
 
@@ -7711,8 +7716,6 @@ $productive-heading-01: $heading-01;
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅heading-02 [variable]
 
@@ -7732,8 +7735,6 @@ $heading-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-02 [variable]
 
@@ -7748,8 +7749,6 @@ $productive-heading-02: $heading-02;
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-03 [variable]
 
@@ -7769,8 +7768,6 @@ $productive-heading-03: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-04 [variable]
 
@@ -7790,8 +7787,6 @@ $productive-heading-04: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-05 [variable]
 
@@ -7811,8 +7806,6 @@ $productive-heading-05: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-06 [variable]
 
@@ -7832,8 +7825,6 @@ $productive-heading-06: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-07 [variable]
 
@@ -7853,8 +7844,6 @@ $productive-heading-07: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-01 [variable]
 
@@ -7869,8 +7858,6 @@ $expressive-heading-01: $heading-01;
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-02 [variable]
 
@@ -7885,8 +7872,6 @@ $expressive-heading-02: $heading-02;
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-03 [variable]
 
@@ -7915,8 +7900,6 @@ $expressive-heading-03: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-04 [variable]
 
@@ -7945,8 +7928,6 @@ $expressive-heading-04: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-05 [variable]
 
@@ -7983,8 +7964,6 @@ $expressive-heading-05: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-06 [variable]
 
@@ -8021,8 +8000,6 @@ $expressive-heading-06: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-paragraph-01 [variable]
 
@@ -8052,8 +8029,6 @@ $expressive-paragraph-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅quotation-01 [variable]
 
@@ -8090,8 +8065,6 @@ $quotation-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅quotation-02 [variable]
 
@@ -8128,8 +8101,6 @@ $quotation-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅display-01 [variable]
 
@@ -8165,8 +8136,6 @@ $display-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅display-02 [variable]
 
@@ -8202,8 +8171,6 @@ $display-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅display-03 [variable]
 
@@ -8244,8 +8211,6 @@ $display-03: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅display-04 [variable]
 
@@ -8279,6 +8244,52 @@ $display-04: (
       letter-spacing: -0.96px,
     ),
   ),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ❌defaultTokens [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$defaultTokens: (
+  caption-01: $caption-01,
+  label-01: $label-01,
+  helper-text-01: $helper-text-01,
+  body-short-01: $body-short-01,
+  body-short-02: $body-short-02,
+  body-long-01: $body-long-01,
+  body-long-02: $body-long-02,
+  code-01: $code-01,
+  code-02: $code-02,
+  heading-01: $heading-01,
+  heading-02: $heading-02,
+  productive-heading-01: $productive-heading-01,
+  productive-heading-02: $productive-heading-02,
+  productive-heading-03: $productive-heading-03,
+  productive-heading-04: $productive-heading-04,
+  productive-heading-05: $productive-heading-05,
+  productive-heading-06: $productive-heading-06,
+  productive-heading-07: $productive-heading-07,
+  expressive-paragraph-01: $expressive-paragraph-01,
+  expressive-heading-01: $expressive-heading-01,
+  expressive-heading-02: $expressive-heading-02,
+  expressive-heading-03: $expressive-heading-03,
+  expressive-heading-04: $expressive-heading-04,
+  expressive-heading-05: $expressive-heading-05,
+  expressive-heading-06: $expressive-heading-06,
+  quotation-01: $quotation-01,
+  quotation-02: $quotation-02,
+  display-01: $display-01,
+  display-02: $display-02,
+  display-03: $display-03,
+  display-04: $display-04,
 );
 ```
 
@@ -8339,6 +8350,8 @@ $tokens: (
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
   - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
   - [accordion [mixin]](#accordion-mixin)
+  - [button [mixin]](#button-mixin)
+  - [button-base [mixin]](#button-base-mixin)
 
 ### ✅properties [mixin]
 
@@ -8657,6 +8670,7 @@ Translate font size to icon size
   - [carbon--type-icon-scale [variable]](#carbon--type-icon-scale-variable)
 - **Used by**:
   - [accordion [mixin]](#accordion-mixin)
+  - [button-base [mixin]](#button-base-mixin)
 
 ### ✅carbon--type-theme [mixin]
 
@@ -8667,85 +8681,13 @@ Define type variables from a map of tokens
 
 ```scss
 @mixin carbon--type-theme($themedTokens: $tokens) {
-  $caption-01: map-get($themedTokens, 'caption-01') !global;
-  $label-01: map-get($themedTokens, 'label-01') !global;
-  $helper-text-01: map-get($themedTokens, 'helper-text-01') !global;
-  $body-short-01: map-get($themedTokens, 'body-short-01') !global;
-  $body-short-02: map-get($themedTokens, 'body-short-02') !global;
-  $body-long-01: map-get($themedTokens, 'body-long-01') !global;
-  $body-long-02: map-get($themedTokens, 'body-long-02') !global;
-  $code-01: map-get($themedTokens, 'code-01') !global;
-  $code-02: map-get($themedTokens, 'code-02') !global;
-  $heading-01: map-get($themedTokens, 'heading-01') !global;
-  $heading-02: map-get($themedTokens, 'heading-02') !global;
-  $productive-heading-01: map-get(
-    $themedTokens,
-    'productive-heading-01'
-  ) !global;
-  $productive-heading-02: map-get(
-    $themedTokens,
-    'productive-heading-02'
-  ) !global;
-  $productive-heading-03: map-get(
-    $themedTokens,
-    'productive-heading-03'
-  ) !global;
-  $productive-heading-04: map-get(
-    $themedTokens,
-    'productive-heading-04'
-  ) !global;
-  $productive-heading-05: map-get(
-    $themedTokens,
-    'productive-heading-05'
-  ) !global;
-  $productive-heading-06: map-get(
-    $themedTokens,
-    'productive-heading-06'
-  ) !global;
-  $productive-heading-07: map-get(
-    $themedTokens,
-    'productive-heading-07'
-  ) !global;
-  $expressive-paragraph-01: map-get(
-    $themedTokens,
-    'expressive-paragraph-01'
-  ) !global;
-  $expressive-heading-01: map-get(
-    $themedTokens,
-    'expressive-heading-01'
-  ) !global;
-  $expressive-heading-02: map-get(
-    $themedTokens,
-    'expressive-heading-02'
-  ) !global;
-  $expressive-heading-03: map-get(
-    $themedTokens,
-    'expressive-heading-03'
-  ) !global;
-  $expressive-heading-04: map-get(
-    $themedTokens,
-    'expressive-heading-04'
-  ) !global;
-  $expressive-heading-05: map-get(
-    $themedTokens,
-    'expressive-heading-05'
-  ) !global;
-  $expressive-heading-06: map-get(
-    $themedTokens,
-    'expressive-heading-06'
-  ) !global;
-  $quotation-01: map-get($themedTokens, 'quotation-01') !global;
-  $quotation-02: map-get($themedTokens, 'quotation-02') !global;
-  $display-01: map-get($themedTokens, 'display-01') !global;
-  $display-02: map-get($themedTokens, 'display-02') !global;
-  $display-03: map-get($themedTokens, 'display-03') !global;
-  $display-04: map-get($themedTokens, 'display-04') !global;
+  $tokens: $themedTokens !global;
 
   @content;
 
   // Reset to default type tokens after apply in content
-  @if $themedTokens != $tokens {
-    @include carbon--type-theme();
+  @if $tokens != $defaultTokens {
+    @include carbon--type-theme($defaultTokens);
   }
 }
 ```
@@ -8762,42 +8704,12 @@ Define type variables from a map of tokens
 - **Content**: Pass in your custom declaration blocks to be used after the token
   maps set theming variables.
 - **Requires**:
-  - [caption-01 [variable]](#caption-01-variable)
-  - [label-01 [variable]](#label-01-variable)
-  - [helper-text-01 [variable]](#helper-text-01-variable)
-  - [body-short-01 [variable]](#body-short-01-variable)
-  - [body-short-02 [variable]](#body-short-02-variable)
-  - [body-long-01 [variable]](#body-long-01-variable)
-  - [body-long-02 [variable]](#body-long-02-variable)
-  - [code-01 [variable]](#code-01-variable)
-  - [code-02 [variable]](#code-02-variable)
-  - [heading-01 [variable]](#heading-01-variable)
-  - [heading-02 [variable]](#heading-02-variable)
-  - [productive-heading-01 [variable]](#productive-heading-01-variable)
-  - [productive-heading-02 [variable]](#productive-heading-02-variable)
-  - [productive-heading-03 [variable]](#productive-heading-03-variable)
-  - [productive-heading-04 [variable]](#productive-heading-04-variable)
-  - [productive-heading-05 [variable]](#productive-heading-05-variable)
-  - [productive-heading-06 [variable]](#productive-heading-06-variable)
-  - [productive-heading-07 [variable]](#productive-heading-07-variable)
-  - [expressive-paragraph-01 [variable]](#expressive-paragraph-01-variable)
-  - [expressive-heading-01 [variable]](#expressive-heading-01-variable)
-  - [expressive-heading-02 [variable]](#expressive-heading-02-variable)
-  - [expressive-heading-03 [variable]](#expressive-heading-03-variable)
-  - [expressive-heading-04 [variable]](#expressive-heading-04-variable)
-  - [expressive-heading-05 [variable]](#expressive-heading-05-variable)
-  - [expressive-heading-06 [variable]](#expressive-heading-06-variable)
-  - [quotation-01 [variable]](#quotation-01-variable)
-  - [quotation-02 [variable]](#quotation-02-variable)
-  - [display-01 [variable]](#display-01-variable)
-  - [display-02 [variable]](#display-02-variable)
-  - [display-03 [variable]](#display-03-variable)
-  - [display-04 [variable]](#display-04-variable)
   - [tokens [variable]](#tokens-variable)
+  - [defaultTokens [variable]](#defaulttokens-variable)
 
 ## accordion
 
-### ❌accordion [mixin]
+### ✅accordion [mixin]
 
 Accordion styles
 
@@ -8806,9 +8718,6 @@ Accordion styles
 
 ```scss
 @mixin accordion() {
-  /// Accordion arrow size in rems
-  /// @access private
-  /// @group accordion
   $accordion-arrow-size: carbon--type-icon-size(
     map-get(map-get($tokens, 'body-long-01'), 'font-size')
   );
@@ -8977,16 +8886,116 @@ Accordion styles
 - **Requires**:
   - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
   - [carbon--type-icon-size [function]](#carbon--type-icon-size-function)
-  - [accordion-arrow-size [variable]](#accordion-arrow-size-variable)
   - [tokens [variable]](#tokens-variable)
   - [prefix [variable]](#prefix-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [accordion-justify-content [variable]](#accordion-justify-content-variable)
+  - [accordion-heading-height [variable]](#accordion-heading-height-variable)
+  - [accordion-flex-direction [variable]](#accordion-flex-direction-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [accordion-arrow-margin [variable]](#accordion-arrow-margin-variable)
   - [ui-05 [variable]](#ui-05-variable)
+  - [accordion-title-margin [variable]](#accordion-title-margin-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
+
+### ✅accordion-flex-direction [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$accordion-flex-direction: row-reverse;
+```
+
+</details>
+
+- **Group**: [accordion](#accordion)
+- **Type**: `Value`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+
+### ✅accordion-justify-content [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$accordion-justify-content: flex-start;
+```
+
+</details>
+
+- **Group**: [accordion](#accordion)
+- **Type**: `Value`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+
+### ✅accordion-arrow-margin [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$accordion-arrow-margin: 0 $carbon--spacing-05 0 0;
+```
+
+</details>
+
+- **Group**: [accordion](#accordion)
+- **Type**: `Value`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+
+### ✅accordion-heading-height [variable]
+
+Computed accordion header height after the header has been built
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$accordion-heading-height: carbon--mini-units(4);
+```
+
+</details>
+
+- **Group**: [accordion](#accordion)
+- **Type**: `Value`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+
+### ✅accordion-title-margin [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$accordion-title-margin: 0 0 0 $carbon--spacing-05;
+```
+
+</details>
+
+- **Group**: [accordion](#accordion)
+- **Type**: `Value`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+
+### ✅accordion-content-padding [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$accordion-content-padding: 0 0 0 $carbon--spacing-05;
+```
+
+</details>
+
+- **Group**: [accordion](#accordion)
+- **Type**: `Value`
 
 ## breadcrumb
 
@@ -9061,7 +9070,7 @@ Breadcrumb styles
 
 ## button
 
-### ❌button [mixin]
+### ✅button [mixin]
 
 Button styles
 
@@ -9176,7 +9185,7 @@ Button styles
       currentColor,
       $active-ui
     );
-    padding: $button-padding-ghost;
+    padding-right: rem($button-padding-l);
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -9212,11 +9221,11 @@ Button styles
     }
 
     &.#{$prefix}--btn--sm {
-      padding: $button-padding-ghost-sm;
+      padding-right: rem($button-padding-l);
     }
 
     &.#{$prefix}--btn--field {
-      padding: $button-padding-ghost-field;
+      padding-right: rem($button-padding-l);
     }
   }
 
@@ -9240,7 +9249,7 @@ Button styles
   .#{$prefix}--btn--icon-only,
   .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only,
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
-    padding-right: rem(13px);
+    padding-right: rem($button-padding-l);
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -9270,14 +9279,23 @@ Button styles
   }
 
   .#{$prefix}--btn--sm {
-    min-height: rem(32px);
-    padding: $button-padding-sm;
+    $button-padding-y: (
+        $button-small-height - rem($button-border-width * 2) - map-get(map-get($tokens, 'body-short-01'), 'line-height')
+      ) / 2;
+
+    padding: $button-padding-y rem($button-padding-r) $button-padding-y rem(
+        $button-padding-l
+      );
   }
 
   .#{$prefix}--btn--field {
-    height: 40px;
-    min-height: 40px;
-    padding: $button-padding-field;
+    $button-padding-y: (
+        $button-field-height - rem($button-border-width * 2) - map-get(map-get($tokens, 'body-short-01'), 'line-height')
+      ) / 2;
+
+    padding: $button-padding-y rem($button-padding-r) $button-padding-y rem(
+        $button-padding-l
+      );
   }
 
   // Skeleton State
@@ -9310,12 +9328,18 @@ Button styles
   - [link-01 [variable]](#link-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
+  - [button-padding-l [variable]](#button-padding-l-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [support-01 [variable]](#support-01-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [icon-03 [variable]](#icon-03-variable)
   - [active-danger [variable]](#active-danger-variable)
+  - [button-border-width [variable]](#button-border-width-variable)
+  - [button-small-height [variable]](#button-small-height-variable)
+  - [tokens [variable]](#tokens-variable)
+  - [button-padding-r [variable]](#button-padding-r-variable)
+  - [button-field-height [variable]](#button-field-height-variable)
 
 ### ❌button-base [mixin]
 
@@ -9329,13 +9353,32 @@ Button base styles
   @include reset;
   @include type-style('body-short-01');
 
+  $button-padding-y: (
+      $button-height - rem($button-border-width * 2) - map-get(map-get($tokens, 'body-short-01'), 'line-height')
+    ) / 2;
+
+  $button-icon-size: carbon--type-icon-size(
+    map-get(map-get($tokens, 'body-short-01'), 'font-size')
+  );
+
+  $button-icon-margin-y: (
+      $button-height - rem($button-border-width * 2) - ($button-padding-y * 2) -
+        $button-icon-size
+    ) / 2;
+
+  $button-icon-margin-x: (
+      $button-height - rem($button-border-width * 2) -
+        (rem($button-padding-l) * 2) - $button-icon-size
+    ) / 2;
+
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
   flex-shrink: 0;
-  min-height: rem($button-height);
-  padding: $button-padding;
+  padding: $button-padding-y rem($button-padding-r) $button-padding-y rem(
+      $button-padding-l
+    );
   border-radius: $button-border-radius;
   text-align: left;
   text-decoration: none;
@@ -9357,8 +9400,9 @@ Button base styles
     position: absolute;
     right: rem(16px);
     flex-shrink: 0;
-    width: rem(16px);
-    height: rem(16px);
+    width: $button-icon-size;
+    height: $button-icon-size;
+    margin: $button-icon-margin-y $button-icon-margin-x;
     transition: all $duration--fast-01 motion(entrance, productive);
   }
 }
@@ -9368,6 +9412,14 @@ Button base styles
 
 - **Group**: [button](#button)
 - **Requires**:
+  - [carbon--type-icon-size [function]](#carbon--type-icon-size-function)
+  - [button-height [variable]](#button-height-variable)
+  - [button-border-width [variable]](#button-border-width-variable)
+  - [tokens [variable]](#tokens-variable)
+  - [button-padding-l [variable]](#button-padding-l-variable)
+  - [button-padding-r [variable]](#button-padding-r-variable)
+  - [button-border-radius [variable]](#button-border-radius-variable)
+  - [button-outline-width [variable]](#button-outline-width-variable)
   - [prefix [variable]](#prefix-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
@@ -9430,6 +9482,314 @@ Button variant styles
   - [disabled-02 [variable]](#disabled-02-variable)
 - **Used by**:
   - [button [mixin]](#button-mixin)
+
+### ✅button-border-radius [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-border-radius: 0;
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Number`
+- **Used by**:
+  - [button-base [mixin]](#button-base-mixin)
+
+### ✅button-border-width [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-border-width: 3px;
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Number`
+- **Used by**:
+  - [button [mixin]](#button-mixin)
+  - [button-base [mixin]](#button-base-mixin)
+
+### ✅button-outline-width [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-outline-width: 1px;
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Number`
+- **Used by**:
+  - [button-base [mixin]](#button-base-mixin)
+
+### ✅button-outline-offset [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-outline-offset: -5px;
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Number`
+
+### ✅button-outline [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-outline: 1px solid $ibm-color__white-0;
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Value`
+
+### ✅button-height [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-height: carbon--mini-units(6);
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Number`
+- **Used by**:
+  - [button-base [mixin]](#button-base-mixin)
+
+### ✅button-field-height [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-field-height: carbon--mini-units(5);
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Number`
+- **Used by**:
+  - [button [mixin]](#button-mixin)
+
+### ✅button-small-height [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-small-height: carbon--mini-units(4);
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Number`
+- **Used by**:
+  - [button [mixin]](#button-mixin)
+
+### ✅button-padding-l [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-padding-l: 12px;
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Number`
+- **Used by**:
+  - [button [mixin]](#button-mixin)
+  - [button-base [mixin]](#button-base-mixin)
+
+### ✅button-padding-r [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-padding-r: 60px;
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Number`
+- **Used by**:
+  - [button [mixin]](#button-mixin)
+  - [button-base [mixin]](#button-base-mixin)
+
+### ✅⚠️button-font-weight [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-font-weight: 400;
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Number`
+- **Deprecated**: (For v10) Button is getting `font-weight` from a type token.
+
+### ✅⚠️button-font-size [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-font-size: 0.875rem;
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Number`
+- **Deprecated**: (For v10) Button is getting `font-size` from a type token.
+
+### ✅⚠️button-padding [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-padding: calc(0.875rem - 3px) 60px calc(0.875rem - 3px) 12px;
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Value`
+- **Used by**:
+  - [pagination-nav [mixin]](#pagination-nav-mixin)
+- **Deprecated**: Padding is now calculated based on `$button-height` and
+  `line-height` from a type token.
+
+### ✅⚠️button-padding-field [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-padding-field: calc(0.675rem - 3px) 60px calc(0.675rem - 3px) 12px;
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Value`
+- **Deprecated**: Padding is now calculated based on `$button-height` and
+  `line-height` from a type token.
+
+### ✅⚠️button-padding-sm [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-padding-sm: calc(0.375rem - 3px) 60px calc(0.375rem - 3px) 12px;
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Value`
+- **Deprecated**: Padding is now calculated based on `$button-height` and
+  `line-height` from a type token.
+
+### ✅⚠️button-padding-lg [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-padding-lg: $carbon--spacing-04;
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Number`
+- **Deprecated**: (For v10) This token is no longer getting used.
+
+### ✅⚠️button-padding-ghost [variable]
+
+Uses the same padding-y as normal buttons, but removes extra padding-right
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-padding-ghost: calc(0.875rem - 3px) 12px;
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Number`
+- **Deprecated**: No longer used as `$button-padding-l` is used to override
+  right padding.
+
+### ✅⚠️button-padding-ghost-field [variable]
+
+Uses the same padding-y as field buttons, but removes extra padding-right
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-padding-ghost-field: calc(0.675rem - 3px) 12px;
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Number`
+- **Deprecated**: No longer used as `$button-padding-l` is used to override
+  right padding.
+
+### ✅⚠️button-padding-ghost-sm [variable]
+
+Uses the same padding-y as small buttons, but removes extra padding-right
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-padding-ghost-sm: calc(0.375rem - 3px) 1rem;
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Type**: `Number`
+- **Deprecated**: No longer used as `$button-padding-l` is used to override
+  right padding.
 
 ## checkbox
 
@@ -15761,6 +16121,7 @@ Pagination nav base styles
 - **Requires**:
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [prefix [variable]](#prefix-variable)
+  - [button-padding [variable]](#button-padding-variable)
 
 ## progress-indicator
 
@@ -21501,25 +21862,6 @@ $unit: 0.5rem;
   - [Link](https://github.com/IBM/carbon-components/pull/1032#discussion_r210418579)
 
 ## general
-
-### ✅accordion-arrow-size [variable]
-
-Accordion arrow size in rems @access private @group accordion
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$accordion-arrow-size: carbon--type-icon-size(
-  map-get(map-get($tokens, 'body-long-01'), 'font-size')
-);
-```
-
-</details>
-
-- **Group**: [general](#general)
-- **Used by**:
-  - [accordion [mixin]](#accordion-mixin)
 
 ### ✅spacing--columns--first [variable]
 

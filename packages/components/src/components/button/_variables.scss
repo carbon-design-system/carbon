@@ -1,0 +1,116 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
+
+/// @type Number
+/// @access public
+/// @group button
+$button-border-radius: 0 !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$button-border-width: 3px !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$button-outline-width: 1px !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$button-outline-offset: -5px !default;
+
+/// @type Value
+/// @access public
+/// @group button
+$button-outline: 1px solid $ibm-color__white-0 !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$button-height: carbon--mini-units(6) !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$button-field-height: carbon--mini-units(5) !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$button-small-height: carbon--mini-units(4) !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$button-padding-l: 12px !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$button-padding-r: 60px !default;
+
+/// @type Number
+/// @access public
+/// @group button
+/// @deprecated (For v10) Button is getting `font-weight` from a type token.
+$button-font-weight: 400 !default;
+
+/// @type Number
+/// @access public
+/// @group button
+/// @deprecated (For v10) Button is getting `font-size` from a type token.
+$button-font-size: 0.875rem !default;
+
+/// @type Value
+/// @access public
+/// @group button
+/// @deprecated Padding is now calculated based on `$button-height` and `line-height` from a type token.
+$button-padding: calc(0.875rem - 3px) 60px calc(0.875rem - 3px) 12px !default;
+
+/// @type Value
+/// @access public
+/// @group button
+/// @deprecated Padding is now calculated based on `$button-height` and `line-height` from a type token.
+$button-padding-field: calc(0.675rem - 3px) 60px calc(0.675rem - 3px) 12px !default;
+
+/// @type Value
+/// @access public
+/// @group button
+/// @deprecated Padding is now calculated based on `$button-height` and `line-height` from a type token.
+$button-padding-sm: calc(0.375rem - 3px) 60px calc(0.375rem - 3px) 12px !default;
+
+/// @type Number
+/// @access public
+/// @group button
+/// @deprecated (For v10) This token is no longer getting used.
+$button-padding-lg: $carbon--spacing-04 !default;
+
+/// Uses the same padding-y as normal buttons, but removes extra padding-right
+/// @type Number
+/// @access public
+/// @group button
+/// @deprecated No longer used as `$button-padding-l` is used to override right padding.
+$button-padding-ghost: calc(0.875rem - 3px) 12px !default;
+
+/// Uses the same padding-y as field buttons, but removes extra padding-right
+/// @type Number
+/// @access public
+/// @group button
+/// @deprecated No longer used as `$button-padding-l` is used to override right padding.
+$button-padding-ghost-field: calc(0.675rem - 3px) 12px !default;
+
+/// Uses the same padding-y as small buttons, but removes extra padding-right
+/// @type Number
+/// @access public
+/// @group button
+/// @deprecated No longer used as `$button-padding-l` is used to override right padding.
+$button-padding-ghost-sm: calc(0.375rem - 3px) 1rem !default;

@@ -58,6 +58,7 @@
   - [✅display-02 [variable]](#display-02-variable)
   - [✅display-03 [variable]](#display-03-variable)
   - [✅display-04 [variable]](#display-04-variable)
+  - [❌defaultTokens [variable]](#defaulttokens-variable)
   - [✅tokens [variable]](#tokens-variable)
   - [✅properties [mixin]](#properties-mixin)
   - [✅strip-unit [function]](#strip-unit-function)
@@ -1907,8 +1908,6 @@ $caption-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅label-01 [variable]
 
@@ -1928,8 +1927,6 @@ $label-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅helper-text-01 [variable]
 
@@ -1949,8 +1946,6 @@ $helper-text-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅body-short-01 [variable]
 
@@ -1970,8 +1965,6 @@ $body-short-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅body-long-01 [variable]
 
@@ -1991,8 +1984,6 @@ $body-long-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅body-short-02 [variable]
 
@@ -2012,8 +2003,6 @@ $body-short-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅body-long-02 [variable]
 
@@ -2033,8 +2022,6 @@ $body-long-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅code-01 [variable]
 
@@ -2054,8 +2041,6 @@ $code-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅code-02 [variable]
 
@@ -2075,8 +2060,6 @@ $code-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅heading-01 [variable]
 
@@ -2096,8 +2079,6 @@ $heading-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-01 [variable]
 
@@ -2112,8 +2093,6 @@ $productive-heading-01: $heading-01;
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅heading-02 [variable]
 
@@ -2133,8 +2112,6 @@ $heading-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-02 [variable]
 
@@ -2149,8 +2126,6 @@ $productive-heading-02: $heading-02;
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-03 [variable]
 
@@ -2170,8 +2145,6 @@ $productive-heading-03: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-04 [variable]
 
@@ -2191,8 +2164,6 @@ $productive-heading-04: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-05 [variable]
 
@@ -2212,8 +2183,6 @@ $productive-heading-05: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-06 [variable]
 
@@ -2233,8 +2202,6 @@ $productive-heading-06: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-07 [variable]
 
@@ -2254,8 +2221,6 @@ $productive-heading-07: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-01 [variable]
 
@@ -2270,8 +2235,6 @@ $expressive-heading-01: $heading-01;
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-02 [variable]
 
@@ -2286,8 +2249,6 @@ $expressive-heading-02: $heading-02;
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-03 [variable]
 
@@ -2316,8 +2277,6 @@ $expressive-heading-03: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-04 [variable]
 
@@ -2346,8 +2305,6 @@ $expressive-heading-04: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-05 [variable]
 
@@ -2384,8 +2341,6 @@ $expressive-heading-05: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-06 [variable]
 
@@ -2422,8 +2377,6 @@ $expressive-heading-06: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-paragraph-01 [variable]
 
@@ -2453,8 +2406,6 @@ $expressive-paragraph-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅quotation-01 [variable]
 
@@ -2491,8 +2442,6 @@ $quotation-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅quotation-02 [variable]
 
@@ -2529,8 +2478,6 @@ $quotation-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅display-01 [variable]
 
@@ -2566,8 +2513,6 @@ $display-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅display-02 [variable]
 
@@ -2603,8 +2548,6 @@ $display-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅display-03 [variable]
 
@@ -2645,8 +2588,6 @@ $display-03: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
-- **Used by**:
-  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅display-04 [variable]
 
@@ -2680,6 +2621,54 @@ $display-04: (
       letter-spacing: -0.96px,
     ),
   ),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ❌defaultTokens [variable]
+
+Used to compare with `$tokens` map so tokens can be reset to their default
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$defaultTokens: (
+  caption-01: $caption-01,
+  label-01: $label-01,
+  helper-text-01: $helper-text-01,
+  body-short-01: $body-short-01,
+  body-short-02: $body-short-02,
+  body-long-01: $body-long-01,
+  body-long-02: $body-long-02,
+  code-01: $code-01,
+  code-02: $code-02,
+  heading-01: $heading-01,
+  heading-02: $heading-02,
+  productive-heading-01: $productive-heading-01,
+  productive-heading-02: $productive-heading-02,
+  productive-heading-03: $productive-heading-03,
+  productive-heading-04: $productive-heading-04,
+  productive-heading-05: $productive-heading-05,
+  productive-heading-06: $productive-heading-06,
+  productive-heading-07: $productive-heading-07,
+  expressive-paragraph-01: $expressive-paragraph-01,
+  expressive-heading-01: $expressive-heading-01,
+  expressive-heading-02: $expressive-heading-02,
+  expressive-heading-03: $expressive-heading-03,
+  expressive-heading-04: $expressive-heading-04,
+  expressive-heading-05: $expressive-heading-05,
+  expressive-heading-06: $expressive-heading-06,
+  quotation-01: $quotation-01,
+  quotation-02: $quotation-02,
+  display-01: $display-01,
+  display-02: $display-02,
+  display-03: $display-03,
+  display-04: $display-04,
 );
 ```
 
@@ -3062,85 +3051,13 @@ Define type variables from a map of tokens
 
 ```scss
 @mixin carbon--type-theme($themedTokens: $tokens) {
-  $caption-01: map-get($themedTokens, 'caption-01') !global;
-  $label-01: map-get($themedTokens, 'label-01') !global;
-  $helper-text-01: map-get($themedTokens, 'helper-text-01') !global;
-  $body-short-01: map-get($themedTokens, 'body-short-01') !global;
-  $body-short-02: map-get($themedTokens, 'body-short-02') !global;
-  $body-long-01: map-get($themedTokens, 'body-long-01') !global;
-  $body-long-02: map-get($themedTokens, 'body-long-02') !global;
-  $code-01: map-get($themedTokens, 'code-01') !global;
-  $code-02: map-get($themedTokens, 'code-02') !global;
-  $heading-01: map-get($themedTokens, 'heading-01') !global;
-  $heading-02: map-get($themedTokens, 'heading-02') !global;
-  $productive-heading-01: map-get(
-    $themedTokens,
-    'productive-heading-01'
-  ) !global;
-  $productive-heading-02: map-get(
-    $themedTokens,
-    'productive-heading-02'
-  ) !global;
-  $productive-heading-03: map-get(
-    $themedTokens,
-    'productive-heading-03'
-  ) !global;
-  $productive-heading-04: map-get(
-    $themedTokens,
-    'productive-heading-04'
-  ) !global;
-  $productive-heading-05: map-get(
-    $themedTokens,
-    'productive-heading-05'
-  ) !global;
-  $productive-heading-06: map-get(
-    $themedTokens,
-    'productive-heading-06'
-  ) !global;
-  $productive-heading-07: map-get(
-    $themedTokens,
-    'productive-heading-07'
-  ) !global;
-  $expressive-paragraph-01: map-get(
-    $themedTokens,
-    'expressive-paragraph-01'
-  ) !global;
-  $expressive-heading-01: map-get(
-    $themedTokens,
-    'expressive-heading-01'
-  ) !global;
-  $expressive-heading-02: map-get(
-    $themedTokens,
-    'expressive-heading-02'
-  ) !global;
-  $expressive-heading-03: map-get(
-    $themedTokens,
-    'expressive-heading-03'
-  ) !global;
-  $expressive-heading-04: map-get(
-    $themedTokens,
-    'expressive-heading-04'
-  ) !global;
-  $expressive-heading-05: map-get(
-    $themedTokens,
-    'expressive-heading-05'
-  ) !global;
-  $expressive-heading-06: map-get(
-    $themedTokens,
-    'expressive-heading-06'
-  ) !global;
-  $quotation-01: map-get($themedTokens, 'quotation-01') !global;
-  $quotation-02: map-get($themedTokens, 'quotation-02') !global;
-  $display-01: map-get($themedTokens, 'display-01') !global;
-  $display-02: map-get($themedTokens, 'display-02') !global;
-  $display-03: map-get($themedTokens, 'display-03') !global;
-  $display-04: map-get($themedTokens, 'display-04') !global;
+  $tokens: $themedTokens !global;
 
   @content;
 
   // Reset to default type tokens after apply in content
-  @if $themedTokens != $tokens {
-    @include carbon--type-theme();
+  @if $tokens != $defaultTokens {
+    @include carbon--type-theme($defaultTokens);
   }
 }
 ```
@@ -3157,35 +3074,5 @@ Define type variables from a map of tokens
 - **Content**: Pass in your custom declaration blocks to be used after the token
   maps set theming variables.
 - **Requires**:
-  - [caption-01 [variable]](#caption-01-variable)
-  - [label-01 [variable]](#label-01-variable)
-  - [helper-text-01 [variable]](#helper-text-01-variable)
-  - [body-short-01 [variable]](#body-short-01-variable)
-  - [body-short-02 [variable]](#body-short-02-variable)
-  - [body-long-01 [variable]](#body-long-01-variable)
-  - [body-long-02 [variable]](#body-long-02-variable)
-  - [code-01 [variable]](#code-01-variable)
-  - [code-02 [variable]](#code-02-variable)
-  - [heading-01 [variable]](#heading-01-variable)
-  - [heading-02 [variable]](#heading-02-variable)
-  - [productive-heading-01 [variable]](#productive-heading-01-variable)
-  - [productive-heading-02 [variable]](#productive-heading-02-variable)
-  - [productive-heading-03 [variable]](#productive-heading-03-variable)
-  - [productive-heading-04 [variable]](#productive-heading-04-variable)
-  - [productive-heading-05 [variable]](#productive-heading-05-variable)
-  - [productive-heading-06 [variable]](#productive-heading-06-variable)
-  - [productive-heading-07 [variable]](#productive-heading-07-variable)
-  - [expressive-paragraph-01 [variable]](#expressive-paragraph-01-variable)
-  - [expressive-heading-01 [variable]](#expressive-heading-01-variable)
-  - [expressive-heading-02 [variable]](#expressive-heading-02-variable)
-  - [expressive-heading-03 [variable]](#expressive-heading-03-variable)
-  - [expressive-heading-04 [variable]](#expressive-heading-04-variable)
-  - [expressive-heading-05 [variable]](#expressive-heading-05-variable)
-  - [expressive-heading-06 [variable]](#expressive-heading-06-variable)
-  - [quotation-01 [variable]](#quotation-01-variable)
-  - [quotation-02 [variable]](#quotation-02-variable)
-  - [display-01 [variable]](#display-01-variable)
-  - [display-02 [variable]](#display-02-variable)
-  - [display-03 [variable]](#display-03-variable)
-  - [display-04 [variable]](#display-04-variable)
   - [tokens [variable]](#tokens-variable)
+  - [defaultTokens [variable]](#defaulttokens-variable)
