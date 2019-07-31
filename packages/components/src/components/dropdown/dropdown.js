@@ -15,6 +15,7 @@ import on from '../../globals/js/misc/on';
 
 const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
+// @question does/should dropdown actually use Floating Menu?
 class Dropdown extends mixin(
   createComponent,
   initComponentBySearch,
@@ -40,6 +41,10 @@ class Dropdown extends mixin(
   constructor(element, options) {
     super(element, options);
     this.triggerNode = this.element.querySelector(this.options.selectorTrigger);
+    // only want to grab the menuNode IF it's using the latest a11y HTML structure
+    this.menuNode = this.triggerNode
+      ? this.element.querySelector(this.options.selectorMenu)
+      : null;
 
     this.manage(
       on(this.element.ownerDocument, 'click', event => {
@@ -83,6 +88,9 @@ class Dropdown extends mixin(
    * Opens and closes the dropdown menu.
    * @param {Event} [event] The event triggering this method.
    */
+  // @question this function is called every time I click on the document and executes for
+  //    every dropdown within the page. Is there a reason for that?
+  //    Seems like unnecessary memory usage for listeners
   _toggle(event) {
     const isDisabled = this.element.classList.contains(
       this.options.classDisabled
@@ -107,6 +115,7 @@ class Dropdown extends mixin(
     ) {
       const isOpen = this.element.classList.contains(this.options.classOpen);
       const isOfSelf = this.element.contains(event.target);
+      // Determine if the open className should be added, removed, or toggled
       const actions = {
         add: isOfSelf && event.which === 40 && !isOpen,
         remove: (!isOfSelf || event.which === 27) && isOpen,
@@ -115,19 +124,56 @@ class Dropdown extends mixin(
       Object.keys(actions).forEach(action => {
         if (actions[action]) {
           this.element.classList[action](this.options.classOpen);
-          this.element.focus();
         }
       });
+
       const listItems = toArray(
         this.element.querySelectorAll(this.options.selectorItem)
       );
-      listItems.forEach(item => {
-        if (this.element.classList.contains(this.options.classOpen)) {
-          item.tabIndex = 0;
-        } else {
-          item.tabIndex = -1;
+
+      // @todo can conditionals for elements existing once legacy structure is depreciated
+      if (this.element.classList.contains(this.options.classOpen)) {
+        // toggled open
+        if (this.triggerNode) {
+          this.triggerNode.setAttribute('aria-expanded', 'true');
         }
-      });
+        (this.menuNode || this.element).focus();
+        if (this.menuNode) {
+          const selectedNode = this.menuNode.querySelector(
+            this.options.selectorItemSelected
+          );
+          this.menuNode.setAttribute(
+            'aria-activedescendant',
+            (selectedNode || listItems[0]).id
+          );
+          (selectedNode || listItems[0]).classList.add(
+            this.options.classFocused
+          );
+        }
+      } else if (isOfSelf || actions.remove) {
+        // toggled close
+        (this.triggerNode || this.element).focus();
+        if (this.triggerNode) {
+          this.triggerNode.setAttribute('aria-expanded', 'false');
+        }
+        if (this.menuNode) {
+          this.menuNode.removeAttribute('aria-activedescendant');
+          this.element
+            .querySelector(this.options.selectorItemFocused)
+            .classList.remove(this.options.classFocused);
+        }
+      }
+
+      // @todo can remove once legacy structure is depreciated
+      if (!this.triggerNode) {
+        listItems.forEach(item => {
+          if (this.element.classList.contains(this.options.classOpen)) {
+            item.tabIndex = 0;
+          } else {
+            item.tabIndex = -1;
+          }
+        });
+      }
     }
   }
 
@@ -135,17 +181,30 @@ class Dropdown extends mixin(
    * @returns {Element} Currently highlighted element.
    */
   getCurrentNavigation() {
-    const focused = this.element.ownerDocument.activeElement;
-    return focused.nodeType === Node.ELEMENT_NODE &&
-      focused.matches(this.options.selectorItem)
-      ? focused
-      : null;
+    let focusedNode;
+
+    if (this.triggerNode) {
+      const focusedId = this.menuNode.getAttribute('aria-activedescendant');
+      focusedNode = focusedId
+        ? this.menuNode.querySelector(`#${focusedId}`)
+        : null;
+    } else {
+      const focused = this.element.ownerDocument.activeElement;
+      focusedNode =
+        focused.nodeType === Node.ELEMENT_NODE &&
+        focused.matches(this.options.selectorItem)
+          ? focused
+          : null;
+    }
+
+    return focusedNode;
   }
 
   /**
    * Moves up/down the focus.
    * @param {number} direction The direction of navigating.
    */
+  // @todo create issue it's a better UX to move the focus when the user hovers so they stay in sync
   navigate(direction) {
     const items = toArray(
       this.element.querySelectorAll(this.options.selectorItem)
@@ -172,7 +231,17 @@ class Dropdown extends mixin(
         !current.parentNode.matches(this.options.selectorItemHidden) &&
         !current.matches(this.options.selectorItemSelected)
       ) {
-        current.focus();
+        // @todo remove conditional once legacy structure is depreciated
+        if (this.triggerNode) {
+          const previouslyFocused = this.menuNode.querySelector(
+            this.options.selectorItemFocused
+          );
+          current.classList.add(this.options.classFocused);
+          this.menuNode.setAttribute('aria-activedescendant', current.id);
+          previouslyFocused.classList.remove(this.options.classFocused);
+        } else {
+          current.focus();
+        }
         break;
       }
     }
@@ -241,10 +310,12 @@ class Dropdown extends mixin(
   /**
    * The component options.
    * If `options` is specified in the constructor, {@linkcode Dropdown.create .create()}, or {@linkcode Dropdown.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode Dropdown.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode Dropdown.init .init()} works.
    * @member Dropdown.options
    * @type {object}
    * @property {string} selectorInit The CSS selector to find selectors.
+   * @property {string} [selectorTrigger] The CSS selector to find trigger button when using a11y compliant markup.
+   * @property {string} [selectorMenu] The CSS selector to find menu list when using a11y compliant markup.
    * @property {string} [selectorText] The CSS selector to find the element showing the selected item.
    * @property {string} [selectorTextInner] The CSS selector to find the element showing the selected item, used for inline mode.
    * @property {string} [selectorItem] The CSS selector to find clickable areas in dropdown items.
@@ -252,7 +323,9 @@ class Dropdown extends mixin(
    *   The CSS selector to find hidden dropdown items.
    *   Used to skip dropdown items for keyboard navigation.
    * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
+   * @property {string} [selectorItemFocused] The CSS selector to find the clickable area in the focused dropdown item.
    * @property {string} [classSelected] The CSS class for the selected dropdown item.
+   * @property {string} [classFocused] The CSS class for the focused dropdown item.
    * @property {string} [classOpen] The CSS class for the open state.
    * @property {string} [classDisabled] The CSS class for the disabled state.
    * @property {string} [eventBeforeSelected]
@@ -265,12 +338,15 @@ class Dropdown extends mixin(
     return {
       selectorInit: '[data-dropdown]',
       selectorTrigger: `button.${prefix}--dropdown-text`,
+      selectorMenu: `.${prefix}--dropdown-list`,
       selectorText: `.${prefix}--dropdown-text`,
       selectorTextInner: `.${prefix}--dropdown-text__inner`,
       selectorItem: `.${prefix}--dropdown-link`,
       selectorItemSelected: `.${prefix}--dropdown--selected`,
+      selectorItemFocused: `.${prefix}--dropdown--focused`,
       selectorItemHidden: `[hidden],[aria-hidden="true"]`,
       classSelected: `${prefix}--dropdown--selected`,
+      classFocused: `${prefix}--dropdown--focused`,
       classOpen: `${prefix}--dropdown--open`,
       classDisabled: `${prefix}--dropdown--disabled`,
       eventBeforeSelected: 'dropdown-beingselected',
