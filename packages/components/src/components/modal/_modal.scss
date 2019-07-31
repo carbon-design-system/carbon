@@ -55,7 +55,12 @@
     }
 
     .#{$prefix}--text-input,
-    .#{$prefix}--select-input {
+    .#{$prefix}--text-area,
+    .#{$prefix}--search-input,
+    .#{$prefix}--select-input,
+    .#{$prefix}--dropdown,
+    .#{$prefix}--dropdown-list,
+    .#{$prefix}--number input[type='number'] {
       background-color: $field-02;
     }
   }
