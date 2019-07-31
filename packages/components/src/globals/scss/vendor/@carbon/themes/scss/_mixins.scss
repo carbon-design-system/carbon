@@ -74,6 +74,7 @@
   $active-ui: map-get($theme, 'active-ui') !global;
   $selected-ui: map-get($theme, 'selected-ui') !global;
   $hover-selected-ui: map-get($theme, 'hover-selected-ui') !global;
+  $inverse-hover-ui: map-get($theme, 'inverse-hover-ui') !global;
   $hover-danger: map-get($theme, 'hover-danger') !global;
   $active-danger: map-get($theme, 'active-danger') !global;
   $hover-row: map-get($theme, 'hover-row') !global;
@@ -135,6 +136,7 @@
     --active-ui: #{map-get($theme, 'active-ui')};
     --selected-ui: #{map-get($theme, 'selected-ui')};
     --hover-selected-ui: #{map-get($theme, 'hover-selected-ui')};
+    --inverse-hover-ui: #{map-get($theme, 'inverse-hover-ui')};
     --hover-danger: #{map-get($theme, 'hover-danger')};
     --active-danger: #{map-get($theme, 'active-danger')};
     --hover-row: #{map-get($theme, 'hover-row')};
