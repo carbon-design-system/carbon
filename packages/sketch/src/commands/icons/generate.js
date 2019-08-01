@@ -123,8 +123,7 @@ export function generate() {
           },
         };
 
-        // TODO: remove optional object until we figure out namespace issue
-        const info = findIconByName(name) || {};
+        const info = findIconByName(name);
         const categories = info.categories;
         let symbolName = name;
 
@@ -226,8 +225,6 @@ function normalize(icons) {
       return acc;
     }
     const name = icon.basename;
-    // Drop size from prefix
-    // const name = [...icon.prefix.slice(1), icon.basename].join('/');
     if (acc[name]) {
       return {
         ...acc,
