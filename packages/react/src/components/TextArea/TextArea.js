@@ -59,6 +59,7 @@ const TextArea = React.forwardRef(function TextArea(
 ) {
   const [textareaVal, setInput] = useState(defaultValue);
   const isControlled = useRef(other.value !== undefined).current;
+  const value = isControlled ? other.value || defaultValue : textareaVal;
   const textareaProps = {
     id,
     onChange: evt => {
@@ -92,7 +93,7 @@ const TextArea = React.forwardRef(function TextArea(
           {labelContent}
           <CharCounter
             disabled={other.disabled}
-            count={isControlled ? other.value.length : textareaVal.length}
+            count={value.length}
             maxLength={maxLength}
           />
         </div>
@@ -115,7 +116,7 @@ const TextArea = React.forwardRef(function TextArea(
           {helperContent}
           <CharCounter
             disabled={other.disabled}
-            count={isControlled ? other.value.length : textareaVal.length}
+            count={value.length}
             maxLength={maxLength}
           />
         </div>
@@ -146,16 +147,16 @@ const TextArea = React.forwardRef(function TextArea(
       aria-invalid={invalid || null}
       aria-describedby={invalid ? errorId : null}
       disabled={other.disabled}
-      value={isControlled ? other.value : textareaVal}
+      value={value}
       onInput={e => setInput(e.target.value)}
       readOnly={readOnly}
     />
   );
 
   const input =
-    readOnly && (other.value || defaultValue || textareaVal) ? (
+    readOnly && value ? (
       <Tooltip showIcon={false} triggerText={inputField}>
-        {other.value || defaultValue || textareaVal}
+        {value}
       </Tooltip>
     ) : (
       inputField

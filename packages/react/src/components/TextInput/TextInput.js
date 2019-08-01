@@ -62,6 +62,7 @@ const TextInput = React.forwardRef(function TextInput(
 ) {
   const [inputVal, setInput] = useState(defaultValue);
   const isControlled = useRef(other.value !== undefined).current;
+  const value = isControlled ? other.value || other.defaultValue : inputVal;
   const errorId = id + '-error-msg';
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,
@@ -106,7 +107,7 @@ const TextInput = React.forwardRef(function TextInput(
           {labelContent}
           <CharCounter
             disabled={other.disabled}
-            count={isControlled ? other.value.length : inputVal.length}
+            count={value.length}
             maxLength={maxLength}
           />
         </div>
@@ -122,14 +123,14 @@ const TextInput = React.forwardRef(function TextInput(
   const inputField = (
     <input
       {...textInputProps({ invalid, sharedTextInputProps, errorId })}
-      value={isControlled ? other.value : inputVal}
+      value={value}
       onInput={e => setInput(e.target.value)}
     />
   );
   const input =
-    readOnly && (other.value || other.defaultValue || inputVal) ? (
+    readOnly && value ? (
       <Tooltip showIcon={false} triggerText={inputField}>
-        {other.value || other.defaultValue || inputVal}
+        {value}
       </Tooltip>
     ) : (
       inputField
@@ -144,7 +145,7 @@ const TextInput = React.forwardRef(function TextInput(
           {helperContent}
           <CharCounter
             disabled={other.disabled}
-            count={isControlled ? other.value.length : inputVal.length}
+            count={value.length}
             maxLength={maxLength}
           />
         </div>
