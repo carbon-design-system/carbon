@@ -120,8 +120,10 @@ class Dropdown extends mixin(
         remove: (!isOfSelf || event.which === 27) && isOpen,
         toggle: isOfSelf && event.which !== 27 && event.which !== 40,
       };
+      let changedState = false;
       Object.keys(actions).forEach(action => {
         if (actions[action]) {
+          changedState = true;
           this.element.classList[action](this.options.classOpen);
         }
       });
@@ -131,7 +133,10 @@ class Dropdown extends mixin(
       );
 
       // @todo remove conditionals for elements existing once legacy structure is depreciated
-      if (this.element.classList.contains(this.options.classOpen)) {
+      if (
+        changedState &&
+        this.element.classList.contains(this.options.classOpen)
+      ) {
         // toggled open
         if (this.triggerNode) {
           this.triggerNode.setAttribute('aria-expanded', 'true');
@@ -149,7 +154,7 @@ class Dropdown extends mixin(
             this.options.classFocused
           );
         }
-      } else if (isOfSelf || actions.remove) {
+      } else if (changedState && (isOfSelf || actions.remove)) {
         // toggled close
         (this.triggerNode || this.element).focus();
         if (this.triggerNode) {
