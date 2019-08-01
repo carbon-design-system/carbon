@@ -49,7 +49,7 @@ Table.propTypes = {
   /**
    * `normal` Change the row height of table
    */
-  size: PropTypes.oneOf(['compact', 'small', 'normal', 'tall']),
+  size: PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
 
   /**
    * `false` If true, will use a width of 'auto' instead of 100%

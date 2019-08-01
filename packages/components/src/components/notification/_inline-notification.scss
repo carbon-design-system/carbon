@@ -147,18 +147,8 @@
       color: $inverse-link;
     }
 
-    @if $carbon--theme == $carbon--theme--white {
-      @include carbon--theme($carbon--theme--g100) {
-        &:hover {
-          background-color: $hover-secondary;
-        }
-      }
-    } @else if $carbon--theme == $carbon--theme--g10 {
-      @include carbon--theme($carbon--theme--g100) {
-        &:hover {
-          background-color: $hover-secondary;
-        }
-      }
+    &:hover {
+      background-color: $inverse-hover-ui;
     }
   }
 
