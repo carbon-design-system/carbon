@@ -229,7 +229,8 @@ const useIcon = kindProp =>
   }[kindProp]);
 
 const NotificationIcon = ({ icon, notificationType, kind, iconDescription }) => {
-  const NotificationIconX = icon || useIcon(kind);
+  const defaultIcon = useIcon(kind);
+  const NotificationIconX = icon || defaultIcon;
   return !NotificationIconX ? null : (
     <NotificationIconX
       className={`${prefix}--${notificationType}-notification__icon`}>
