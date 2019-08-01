@@ -95,6 +95,15 @@
       color: $inverse-01;
     }
 
+    &:focus {
+      color: $text-04;
+      background-color: $interactive-03;
+    }
+
+    &:active {
+      background-color: $active-primary;
+    }
+
     &:disabled,
     &:hover:disabled,
     &:focus:disabled,
@@ -167,12 +176,20 @@
     }
   }
 
-  .#{$prefix}--btn--icon-only {
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
     @include tooltip--trigger('icon', 'bottom');
+    outline: $button-outline-width solid transparent;
+    outline-offset: -4px;
   }
 
-  .#{$prefix}--btn--icon-only:focus svg {
-    outline: none;
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
+    border-color: $focus;
+    outline-color: $ui-02;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
+    svg {
+    outline-color: transparent;
   }
 
   .#{$prefix}--btn--icon-only--top {
