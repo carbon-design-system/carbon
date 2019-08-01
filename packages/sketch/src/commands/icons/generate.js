@@ -8,13 +8,40 @@
 /* global MSSVGImporter, NSString, NSUTF8StringEncoding */
 
 import { toString } from '@carbon/icon-helpers';
-import { Document, Rectangle, Shape, SymbolMaster } from 'sketch/dom';
+import { Artboard, Document, Rectangle, Shape } from 'sketch/dom';
 import { command } from '../command';
 import { syncColorStyles } from '../../sharedStyles/colors';
 import { groupByKey } from '../../tools/grouping';
 import { findOrCreatePage, selectPage } from '../../tools/page';
+import { syncSymbol } from '../../tools/symbols';
 
 const meta = require('@carbon/icons/build-info.json');
+const metadata = require('@carbon/icons/metadata.json');
+const { icons } = metadata;
+
+function findIconByName(name) {
+  const [basename, ...variants] = name.split('--');
+  const iconEntry = icons.find(icon => {
+    return icon.name === basename;
+  });
+
+  if (!iconEntry) {
+    console.log(`Unable to find the following icon by name ${name}`);
+    return iconEntry;
+  }
+
+  if (variants.length > 0) {
+    const icon = iconEntry.variants.find(variant => {
+      return variant.name === name;
+    });
+    return {
+      ...iconEntry,
+      ...icon,
+    };
+  }
+
+  return iconEntry;
+}
 
 export function generate() {
   command('commands/icons/generate', () => {
@@ -96,16 +123,21 @@ export function generate() {
           },
         };
 
-        let symbolName =
-          sizes.length !== 1
-            ? `category/${name}/${icon.size}`
-            : `category/${name}`;
+        // TODO: remove optional object until we figure out namespace issue
+        const info = findIconByName(name) || {};
+        const categories = info.categories;
+        let symbolName = name;
 
-        if (icon.original) {
-          symbolName = `${symbolName}*`;
+        if (sizes.length !== 1) {
+          symbolName = `${name} / ${icon.size}`;
         }
 
-        const artboard = new SymbolMaster({
+        if (Array.isArray(categories) && categories.length > 0) {
+          const [category] = categories;
+          symbolName = `${category.name} / ${category.subcategory} / ${symbolName}`;
+        }
+
+        const artboard = new Artboard({
           name: symbolName,
           frame: new Rectangle(X_OFFSET, Y_OFFSET, icon.size, icon.size),
           layers: [layer],
@@ -167,7 +199,12 @@ export function generate() {
         artboard.layers.push(shape, ...innerPaths);
         group.remove();
 
-        return artboard;
+        return syncSymbol(document, artboard.name, {
+          name: artboard.name,
+          frame: artboard.frame,
+          layers: artboard.layers,
+          background: artboard.background,
+        });
       });
     });
 
@@ -188,8 +225,9 @@ function normalize(icons) {
     if (!icon.size) {
       return acc;
     }
+    const name = icon.basename;
     // Drop size from prefix
-    const name = [...icon.prefix.slice(1), icon.basename].join('/');
+    // const name = [...icon.prefix.slice(1), icon.basename].join('/');
     if (acc[name]) {
       return {
         ...acc,
