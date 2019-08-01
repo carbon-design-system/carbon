@@ -1,0 +1,12 @@
+categories:
+  - name: categorieName
+    members:
+    - pictogram1
+    - pictogram2
+    - pictogramN
+  - name: categorieName2
+    members:
+    - pictogram1
+    - pictogram2
+    - pictogramN
+
