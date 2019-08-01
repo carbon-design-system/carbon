@@ -2,18 +2,46 @@
 
 ## About
 
-What is the endgame?
+Inspired by the release process of [VSCode](https://github.com/Microsoft/vscode/wiki/Development-Process#end-game), Carbon follows a release process that we refer to as the endgame. Given that our work is structured in a series of projects across an iteration, the endgame is an opportunity in the final week of an iteration for us to coordinate final deliverables, run verification testing, and lean on the Carbon community to help verify pre-release builds.
 
-Who runs the endgame?
+### Meet the endgame team
 
-Meet the team:
+Every release cycle, we have three team members participate in running the endgame in addition to their project-specific responsibilities. Running the endgame involves a variety of tasks outlined in our [timeline](#timeline). This endgame team is composed of a release leader, and two side-kicks. There should be at minimum one designer and one developer in each endgame team.
 
-- Leader (design or development)
-- Sidekicks
-  - 1 from design
-  - 1 from development
-  
-### Rotation
+The objectives of the release leader include the following:
+
+- Coordinate the initial project proposals into a single iteration cycle planning issue that is shared in our issue tracker
+- Share through an external blog the top-level objectives of the projects we're working for a given cycle
+- Help coordinate across projects throughout the project cycle in order to run a succesful endgame
+- Help to familiarize sidekicks with the endgame process so each of them may run a future endgame
+- Successfully run the endgame at the conclusion of a release cycle
+
+The objectives of the release sidekicks include:
+
+- Assisting the release leader in endgame tasks at the end of the release cycle
+- Creating documentation to make the onboarding process easier for future sidekicks
+- Learning and understanding how to run a future endgame process
+
+After a release cycle completes, the endgame team will be reorganized. The endgame leader will become a sidekick to help out with the release, and one of the sidekicks will become the new endgame leader. New team members will fill in the remaining sidekick role over time.
+
+At a high-level, this sequence might look like the following:
+
+Given the team:
+- A (Developer)
+- B (Developer)
+- C (Designer)
+- D (Designer)
+- E (Developer)
+
+|            | Leader        | Sidekick 1    | Sidekick 2    |
+| ---------- | ------------- | ------------- | ------------- |
+| Rotation 1 | A (Developer) | B (Developer) | C (Designer)  |
+| Rotation 2 | B (Developer) | C (Designer)  | A (Developer) |
+| Rotation 3 | C (Designer)  | D (Developer) | B (Developer) |
+| Rotation 4 | D (Developer) | E (Designer)  | C (Designer)  |
+| Rotation 5 | E (Designer)  | A (Developer) | D (Developer) |
+
+## Timeline
 
 ## Releases
 
