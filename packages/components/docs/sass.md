@@ -3891,7 +3891,7 @@ Carbon's white color theme
 ```scss
 $carbon--theme--white: (
   interactive-01: #0062ff,
-  interactive-02: #171717,
+  interactive-02: #3d3d3d,
   interactive-03: #0062ff,
   interactive-04: #0062ff,
   ui-background: #ffffff,
@@ -3946,7 +3946,7 @@ $carbon--theme--white: (
   skeleton-01: #e5e5e5,
   skeleton-02: #bebebe,
   brand-01: #0062ff,
-  brand-02: #171717,
+  brand-02: #3d3d3d,
   brand-03: #0062ff,
   active-01: #bebebe,
   hover-field: #e5e5e5,
@@ -3970,7 +3970,7 @@ Carbon's g10 color theme
 ```scss
 $carbon--theme--g10: (
   interactive-01: #0062ff,
-  interactive-02: #171717,
+  interactive-02: #3d3d3d,
   interactive-03: #0062ff,
   interactive-04: #0062ff,
   ui-background: #f3f3f3,
@@ -4025,7 +4025,7 @@ $carbon--theme--g10: (
   skeleton-01: #e5e5e5,
   skeleton-02: #bebebe,
   brand-01: #0062ff,
-  brand-02: #171717,
+  brand-02: #3d3d3d,
   brand-03: #0062ff,
   active-01: #bebebe,
   hover-field: #e5e5e5,
@@ -4454,6 +4454,7 @@ $ui-02: map-get($carbon--theme, 'ui-02');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -5118,6 +5119,7 @@ $focus: map-get($carbon--theme, 'focus');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
@@ -8888,6 +8890,15 @@ Button styles
       color: $inverse-01;
     }
 
+    &:focus {
+      color: $text-04;
+      background-color: $interactive-03;
+    }
+
+    &:active {
+      background-color: $active-primary;
+    }
+
     &:disabled,
     &:hover:disabled,
     &:focus:disabled,
@@ -8960,12 +8971,20 @@ Button styles
     }
   }
 
-  .#{$prefix}--btn--icon-only {
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
     @include tooltip--trigger('icon', 'bottom');
+    outline: $button-outline-width solid transparent;
+    outline-offset: -4px;
   }
 
-  .#{$prefix}--btn--icon-only:focus svg {
-    outline: none;
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
+    border-color: $focus;
+    outline-color: $ui-02;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
+    svg {
+    outline-color: transparent;
   }
 
   .#{$prefix}--btn--icon-only--top {
@@ -9052,6 +9071,8 @@ Button styles
   - [active-ui [variable]](#active-ui-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [hover-primary-text [variable]](#hover-primary-text-variable)
+  - [focus [variable]](#focus-variable)
+  - [ui-02 [variable]](#ui-02-variable)
   - [support-01 [variable]](#support-01-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [icon-03 [variable]](#icon-03-variable)
@@ -9099,7 +9120,6 @@ Button base styles
     flex-shrink: 0;
     width: rem(16px);
     height: rem(16px);
-    transition: all $duration--fast-01 motion(entrance, productive);
   }
 }
 ```
