@@ -430,6 +430,11 @@ export class InlineNotification extends Component {
     kind: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
 
     /**
+     * Specify whether you are using the low contrast variant of the InlineNotification.
+     */
+    lowContrast: PropTypes.bool,
+
+    /**
      * Specify the title
      */
     title: PropTypes.string.isRequired,
