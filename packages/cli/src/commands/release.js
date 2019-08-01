@@ -65,7 +65,7 @@ async function release({ bump }) {
   logger.stop();
   logger.start(`Finding next available version for bump: ${bump}`);
 
-  const nextTag = semver.inc(latestTag, 'patch');
+  const nextTag = semver.inc(latestTag, bump);
 
   logger.info(`Bumping ${latestTag} to ${nextTag}`);
   logger.stop();
