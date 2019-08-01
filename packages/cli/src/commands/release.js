@@ -171,7 +171,7 @@ async function release({ bump }) {
     [
       'lerna',
       'version',
-      'patch',
+      bump,
       '--no-push',
       '--no-git-tag-version',
       '--exact',
