@@ -15,7 +15,6 @@ import on from '../../globals/js/misc/on';
 
 const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
-// @question does/should dropdown actually use Floating Menu?
 class Dropdown extends mixin(
   createComponent,
   initComponentBySearch,
@@ -131,7 +130,7 @@ class Dropdown extends mixin(
         this.element.querySelectorAll(this.options.selectorItem)
       );
 
-      // @todo can conditionals for elements existing once legacy structure is depreciated
+      // @todo remove conditionals for elements existing once legacy structure is depreciated
       if (this.element.classList.contains(this.options.classOpen)) {
         // toggled open
         if (this.triggerNode) {
@@ -164,7 +163,7 @@ class Dropdown extends mixin(
         }
       }
 
-      // @todo can remove once legacy structure is depreciated
+      // @todo remove once legacy structure is depreciated
       if (!this.triggerNode) {
         listItems.forEach(item => {
           if (this.element.classList.contains(this.options.classOpen)) {
