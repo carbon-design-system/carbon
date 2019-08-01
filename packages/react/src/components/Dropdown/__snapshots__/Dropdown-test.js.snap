@@ -70,6 +70,7 @@ exports[`Dropdown should render 1`] = `
         id="test-dropdown"
         innerRef={[Function]}
         isOpen={false}
+        light={false}
         type="default"
       >
         <div
@@ -242,6 +243,7 @@ exports[`Dropdown should render custom item components 1`] = `
         id="test-dropdown"
         innerRef={[Function]}
         isOpen={true}
+        light={false}
         type="default"
       >
         <div
@@ -571,6 +573,7 @@ exports[`Dropdown should render with strings as items 1`] = `
         id="test-dropdown"
         innerRef={[Function]}
         isOpen={true}
+        light={false}
         type="default"
       >
         <div
