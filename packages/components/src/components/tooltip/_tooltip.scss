@@ -361,6 +361,15 @@
     word-wrap: break-word;
     color: $inverse-01;
 
+    &:focus {
+      box-shadow: 0 0 0 1px $ui-background, 0 0 0 3px $focus;
+      outline: 0;
+
+      .#{$prefix}--tooltip__caret {
+        box-shadow: 1px 1px 0 0 $ui-background, 3px 3px 0 0 $focus;
+      }
+    }
+
     p {
       @include type-style('body-short-01');
     }
@@ -425,6 +434,13 @@
         top: 50%;
         right: auto;
         transform: rotate(135deg) translate(-50%, 50%);
+      }
+    }
+
+    &[data-floating-menu-direction='left']:focus,
+    &[data-floating-menu-direction='right']:focus {
+      .#{$prefix}--tooltip__caret {
+        box-shadow: 1px 1px 0 0 $ui-background, 2px 2px 0px 1px $focus;
       }
     }
   }

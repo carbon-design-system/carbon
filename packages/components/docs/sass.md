@@ -4402,6 +4402,7 @@ $ui-background: map-get($carbon--theme, 'ui-background');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅ui-01 [variable]
 
@@ -5128,6 +5129,7 @@ $focus: map-get($carbon--theme, 'focus');
   - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
   - [toggle [mixin]](#toggle-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅hover-primary [variable]
 
@@ -18818,6 +18820,15 @@ Tooltip styles
     word-wrap: break-word;
     color: $inverse-01;
 
+    &:focus {
+      box-shadow: 0 0 0 1px $ui-background, 0 0 0 3px $focus;
+      outline: 0;
+
+      .#{$prefix}--tooltip__caret {
+        box-shadow: 1px 1px 0 0 $ui-background, 3px 3px 0 0 $focus;
+      }
+    }
+
     p {
       @include type-style('body-short-01');
     }
@@ -18882,6 +18893,13 @@ Tooltip styles
         top: 50%;
         right: auto;
         transform: rotate(135deg) translate(-50%, 50%);
+      }
+    }
+
+    &[data-floating-menu-direction='left']:focus,
+    &[data-floating-menu-direction='right']:focus {
+      .#{$prefix}--tooltip__caret {
+        box-shadow: 1px 1px 0 0 $ui-background, 2px 2px 0px 1px $focus;
       }
     }
   }
@@ -19046,6 +19064,8 @@ Tooltip styles
   - [inverse-02 [variable]](#inverse-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [ui-background [variable]](#ui-background-variable)
+  - [focus [variable]](#focus-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [inverse-link [variable]](#inverse-link-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
