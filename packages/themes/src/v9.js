@@ -68,6 +68,7 @@ export const activeTertiary = '#414f59';
 export const hoverUI = '#EEF4FC';
 export const activeUI = '#DFEAFA';
 export const selectedUI = '#EEF4FC';
+export const inverseHoverUI = '#4c4c4c';
 
 export const hoverSelectedUI = '#DFEAFA';
 
