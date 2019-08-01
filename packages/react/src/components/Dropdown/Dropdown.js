@@ -234,6 +234,7 @@ export default class Dropdown extends React.Component {
               isOpen={isOpen}
               invalid={invalid}
               invalidText={invalidText}
+              light={light}
               {...getRootProps({ refKey: 'innerRef' })}>
               {invalid && (
                 <WarningFilled16
