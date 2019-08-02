@@ -18825,7 +18825,7 @@ Tooltip styles
       outline: 0;
 
       .#{$prefix}--tooltip__caret {
-        box-shadow: 1px 1px 0 0 $ui-background, 3px 3px 0 0 $focus;
+        box-shadow: 1px 1px 0 0 $ui-background, 2px 2px 0 1px $focus;
       }
     }
 
@@ -18893,13 +18893,6 @@ Tooltip styles
         top: 50%;
         right: auto;
         transform: rotate(135deg) translate(-50%, 50%);
-      }
-    }
-
-    &[data-floating-menu-direction='left']:focus,
-    &[data-floating-menu-direction='right']:focus {
-      .#{$prefix}--tooltip__caret {
-        box-shadow: 1px 1px 0 0 $ui-background, 2px 2px 0px 1px $focus;
       }
     }
   }
