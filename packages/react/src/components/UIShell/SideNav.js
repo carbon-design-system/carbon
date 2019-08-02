@@ -69,10 +69,14 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     [`${prefix}--side-nav__overlay-active`]: expanded,
   });
 
-  // for all children, add the expansion state as prop in case they need to show/hide themselves
-  const childrenWithExpandedState = React.Children.map(children, child => {
-    return React.cloneElement(child, { isSideNavExpanded: expanded });
-  });
+  let childrenToRender = children;
+
+  // if a rail, pass the expansion state as a prop, so children can update themselves to match
+  if (isRail) {
+    childrenToRender = React.Children.map(children, child => {
+      return React.cloneElement(child, { isSideNavExpanded: expanded });
+    });
+  }
 
   return (
     <>
@@ -85,7 +89,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         onBlur={event => handleToggle(event, false)}
         onMouseEnter={() => handleToggle(true)}
         onMouseLeave={() => handleToggle(false)}>
-        {childrenWithExpandedState}
+        {childrenToRender}
       </nav>
     </>
   );
