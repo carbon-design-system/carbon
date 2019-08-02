@@ -3536,7 +3536,7 @@ Carbon's white color theme
 ```scss
 $carbon--theme--white: (
   interactive-01: #0062ff,
-  interactive-02: #171717,
+  interactive-02: #3d3d3d,
   interactive-03: #0062ff,
   interactive-04: #0062ff,
   ui-background: #ffffff,
@@ -3591,7 +3591,7 @@ $carbon--theme--white: (
   skeleton-01: #e5e5e5,
   skeleton-02: #bebebe,
   brand-01: #0062ff,
-  brand-02: #171717,
+  brand-02: #3d3d3d,
   brand-03: #0062ff,
   active-01: #bebebe,
   hover-field: #e5e5e5,
@@ -3615,7 +3615,7 @@ Carbon's g10 color theme
 ```scss
 $carbon--theme--g10: (
   interactive-01: #0062ff,
-  interactive-02: #171717,
+  interactive-02: #3d3d3d,
   interactive-03: #0062ff,
   interactive-04: #0062ff,
   ui-background: #f3f3f3,
@@ -3670,7 +3670,7 @@ $carbon--theme--g10: (
   skeleton-01: #e5e5e5,
   skeleton-02: #bebebe,
   brand-01: #0062ff,
-  brand-02: #171717,
+  brand-02: #3d3d3d,
   brand-03: #0062ff,
   active-01: #bebebe,
   hover-field: #e5e5e5,
