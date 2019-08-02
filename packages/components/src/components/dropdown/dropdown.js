@@ -39,11 +39,6 @@ class Dropdown extends mixin(
    */
   constructor(element, options) {
     super(element, options);
-    this.triggerNode = this.element.querySelector(this.options.selectorTrigger);
-    // only want to grab the menuNode IF it's using the latest a11y HTML structure
-    this.menuNode = this.triggerNode
-      ? this.element.querySelector(this.options.selectorMenu)
-      : null;
 
     this.manage(
       on(this.element.ownerDocument, 'click', event => {
@@ -86,10 +81,9 @@ class Dropdown extends mixin(
   /**
    * Opens and closes the dropdown menu.
    * @param {Event} [event] The event triggering this method.
+   *
+   * @todo https://github.com/carbon-design-system/carbon/issues/3641
    */
-  // @question this function is called every time I click on the document and executes for
-  //    every dropdown within the page. Is there a reason for that?
-  //    Seems like unnecessary memory usage for listeners
   _toggle(event) {
     const isDisabled = this.element.classList.contains(
       this.options.classDisabled
@@ -99,12 +93,16 @@ class Dropdown extends mixin(
       return;
     }
 
+    const triggerNode = this.element.querySelector(
+      this.options.selectorTrigger
+    );
+
     if (
       // User presses down arrow
       (event.which === 40 &&
         !event.target.matches(this.options.selectorItem)) ||
       // User presses space or enter and the trigger is not a button
-      (!this.triggerNode &&
+      (!triggerNode &&
         [13, 32].indexOf(event.which) >= 0 &&
         !event.target.matches(this.options.selectorItem)) ||
       // User presses esc
@@ -131,6 +129,10 @@ class Dropdown extends mixin(
       const listItems = toArray(
         this.element.querySelectorAll(this.options.selectorItem)
       );
+      // only want to grab the listNode IF it's using the latest a11y HTML structure
+      const listNode = triggerNode
+        ? this.element.querySelector(this.options.selectorMenu)
+        : null;
 
       // @todo remove conditionals for elements existing once legacy structure is depreciated
       if (
@@ -138,15 +140,15 @@ class Dropdown extends mixin(
         this.element.classList.contains(this.options.classOpen)
       ) {
         // toggled open
-        if (this.triggerNode) {
-          this.triggerNode.setAttribute('aria-expanded', 'true');
+        if (triggerNode) {
+          triggerNode.setAttribute('aria-expanded', 'true');
         }
-        (this.menuNode || this.element).focus();
-        if (this.menuNode) {
-          const selectedNode = this.menuNode.querySelector(
+        (listNode || this.element).focus();
+        if (listNode) {
+          const selectedNode = listNode.querySelector(
             this.options.selectorItemSelected
           );
-          this.menuNode.setAttribute(
+          listNode.setAttribute(
             'aria-activedescendant',
             (selectedNode || listItems[0]).id
           );
@@ -156,12 +158,12 @@ class Dropdown extends mixin(
         }
       } else if (changedState && (isOfSelf || actions.remove)) {
         // toggled close
-        (this.triggerNode || this.element).focus();
-        if (this.triggerNode) {
-          this.triggerNode.setAttribute('aria-expanded', 'false');
+        (triggerNode || this.element).focus();
+        if (triggerNode) {
+          triggerNode.setAttribute('aria-expanded', 'false');
         }
-        if (this.menuNode) {
-          this.menuNode.removeAttribute('aria-activedescendant');
+        if (listNode) {
+          listNode.removeAttribute('aria-activedescendant');
           this.element
             .querySelector(this.options.selectorItemFocused)
             .classList.remove(this.options.classFocused);
@@ -169,7 +171,7 @@ class Dropdown extends mixin(
       }
 
       // @todo remove once legacy structure is depreciated
-      if (!this.triggerNode) {
+      if (!triggerNode) {
         listItems.forEach(item => {
           if (this.element.classList.contains(this.options.classOpen)) {
             item.tabIndex = 0;
@@ -187,11 +189,12 @@ class Dropdown extends mixin(
   getCurrentNavigation() {
     let focusedNode;
 
-    if (this.triggerNode) {
-      const focusedId = this.menuNode.getAttribute('aria-activedescendant');
-      focusedNode = focusedId
-        ? this.menuNode.querySelector(`#${focusedId}`)
-        : null;
+    // Using the latest semantic markup structure where trigger is a button
+    // @todo remove conditional once legacy structure is depreciated
+    if (this.element.querySelector(this.options.selectorTrigger)) {
+      const listNode = this.element.querySelector(this.options.selectorMenu);
+      const focusedId = listNode.getAttribute('aria-activedescendant');
+      focusedNode = focusedId ? listNode.querySelector(`#${focusedId}`) : null;
     } else {
       const focused = this.element.ownerDocument.activeElement;
       focusedNode =
@@ -235,13 +238,17 @@ class Dropdown extends mixin(
         !current.parentNode.matches(this.options.selectorItemHidden) &&
         !current.matches(this.options.selectorItemSelected)
       ) {
+        // Using the latest semantic markup structure where trigger is a button
         // @todo remove conditional once legacy structure is depreciated
-        if (this.triggerNode) {
-          const previouslyFocused = this.menuNode.querySelector(
+        if (this.element.querySelector(this.options.selectorTrigger)) {
+          const listNode = this.element.querySelector(
+            this.options.selectorMenu
+          );
+          const previouslyFocused = listNode.querySelector(
             this.options.selectorItemFocused
           );
           current.classList.add(this.options.classFocused);
-          this.menuNode.setAttribute('aria-activedescendant', current.id);
+          listNode.setAttribute('aria-activedescendant', current.id);
           previouslyFocused.classList.remove(this.options.classFocused);
         } else {
           current.focus();
@@ -268,7 +275,8 @@ class Dropdown extends mixin(
     if (this.element.dispatchEvent(eventStart)) {
       if (this.element.dataset.dropdownType !== 'navigation') {
         const selectorText =
-          !this.triggerNode && this.element.dataset.dropdownType !== 'inline'
+          !this.element.querySelector(this.options.selectorTrigger) &&
+          this.element.dataset.dropdownType !== 'inline'
             ? this.options.selectorText
             : this.options.selectorTextInner;
         const text = this.element.querySelector(selectorText);
