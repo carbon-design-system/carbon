@@ -336,10 +336,8 @@ class FloatingMenu extends mixin(
           this.element.focus();
           const elementTabindex = this.element.getAttribute('tabindex');
           if (__DEV__) {
-            // @question the demo that doesn't have interactive elements is throwing this warning
-            //    despite that i have tabindex="0" and the statement in the first parameter is "false"
             warning(
-              !elementTabindex || elementTabindex === '-1',
+              elementTabindex === null || elementTabindex === '-1',
               'Floating Menus without interactive elements must include tabindex="0" on the floating element.'
             );
           }
