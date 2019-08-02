@@ -42,7 +42,6 @@ async function build({ cwd }) {
 
       await Promise.all(
         BUNDLE_FORMATS.map(async ({ format, directory }) => {
-          console.log('oh yeah');
           const bundle = await rollup({
             input: jsFilepath,
             external: ['@carbon/icon-helpers'],
