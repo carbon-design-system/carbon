@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import ListBoxMenuIcon from './ListBoxMenuIcon';
 import ListBoxSelection from './ListBoxSelection';
 import childrenOf from '../../prop-types/childrenOf';
+import { WarningFilled16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
 
@@ -56,8 +57,8 @@ ListBoxField.propTypes = {
   children: childrenOf([
     ListBoxMenuIcon,
     ListBoxSelection,
+    WarningFilled16,
     'span',
-    'svg',
     'input',
   ]),
 
