@@ -20,10 +20,7 @@ exports[`SideNav should render 1`] = `
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <h2
-      isSideNavExpanded={false}
-      key=".0"
-    >
+    <h2>
       Navigation
     </h2>
   </nav>

@@ -642,11 +642,16 @@ storiesOf('UI Shell', module)
     'SideNav Rail w/Header',
     withReadme(readme, () => (
       <HeaderContainer
-        render={() => (
+        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
           <>
             <Header aria-label="IBM Platform Name">
               <SkipToContent />
-              <HeaderMenuButton aria-label="Open menu" isCollapsible />
+              <HeaderMenuButton
+                aria-label="Open menu"
+                isCollapsible
+                onClick={onClickSideNavExpand}
+                isActive={isSideNavExpanded}
+              />
               <HeaderName href="#" prefix="IBM">
                 [Platform]
               </HeaderName>
@@ -677,7 +682,10 @@ storiesOf('UI Shell', module)
                   <AppSwitcher20 />
                 </HeaderGlobalAction>
               </HeaderGlobalBar>
-              <SideNav aria-label="Side navigation" isRail>
+              <SideNav
+                aria-label="Side navigation"
+                isRail
+                expanded={isSideNavExpanded}>
                 <SideNavItems>
                   <SideNavMenu renderIcon={Fade16} title="Category title">
                     <SideNavMenuItem href="javascript:void(0)">
