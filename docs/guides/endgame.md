@@ -6,7 +6,7 @@ Inspired by the release process of [VSCode](https://github.com/Microsoft/vscode/
 
 ### Meet the endgame team
 
-Every release cycle, we have three team members participate in running the endgame in addition to their project-specific responsibilities. Running the endgame involves a variety of tasks outlined in our [timeline](#timeline). This endgame team is composed of a release leader, and two side-kicks. There should be at minimum one designer and one developer in each endgame team.
+Every release cycle, we have three team members participate in running the endgame in addition to their project-specific responsibilities. Running the endgame involves a variety of tasks outlined in our [timeline](#timeline). This endgame team is composed of a release leader, and two sidekicks. There should be at minimum one designer and one developer in each endgame team.
 
 The objectives of the release leader include the following:
 
@@ -42,6 +42,82 @@ Given the team:
 | Rotation 5 | E (Designer)  | A (Developer) | D (Developer) |
 
 ## Timeline
+
+Release cycles tend to last between four and six weeks. During that time, the endgame team is responsible for the following high-level milestones:
+
+- [Week 1: Project planning](#week-1-project-planning)
+- [Week 2: Project work](#week-2-project-work)
+- [Week 3: Pre-endgame planning](#week-3-pre-endgame-planning)
+- [Week 4: The endgame](#week-4-the-endgame)
+- [Week 5: Release](#week-5-release)
+
+### Week 1: Project planning
+
+### Week 2: Project work
+
+### Week 3: Pre-endgame planning
+
+### Week 4: The endgame
+
+Checklist:
+
+- [ ] Create endgame issue and pin it to the Carbon repo
+- [ ] Collect feedback from teams for critical dates
+
+#### Templates
+
+<details>
+  <summary>Issue template</summary>
+  
+```md
+Title: {Month} 20XX Endgame
+
+This is the endgame schedule for our Month 20XX iteration, which includes the following projects:
+
+- [Project 1](#project-1)
+- [Project 2](#project-2)
+- [Project 3](#project-3)
+
+## Schedule
+
+- Endgame leader: @username
+- Endgame sidekicks: @username (role), @username (role)
+- XX/YY: Code freeze (EOD)
+- XX/YY: Endgame done
+- XX/YY: Expected release date
+
+### Monday XX/YY
+
+- [ ] Set endgame-specific branch protection rules
+- [ ] Coordinate delivery or resolution of the following items:
+  - [ ]
+- [ ] Start code freeze (EOD)
+
+### Tuesday XX/YY
+
+- [ ] First Release Candidate cut
+- [ ] Complete first round of smoke tests
+- [ ] Share with Carbon Insiders for first round of testing
+
+### Wednesday XX/YY
+
+- [ ] Collect first round of feedback from Carbon Insiders (if available)
+- [ ] Triage release-specific issues and bucket them into two categories:
+  - [ ] Stop release
+  - [ ] Ship with known issues
+- [ ] Coordinate merging of bug fixes related to release
+- [ ] Cut next Release Candidate, if applicable
+  - [ ] Share newest release with Carbon Insiders for additional rounds of testing
+
+### Thursday XX/YY
+
+### Friday XX/YY
+
+### Monday XX/YY
+```
+</details>
+
+### Week 5: Release
 
 ## Releases
 
