@@ -143,7 +143,7 @@ class FloatingMenu extends mixin(
     }
     this.manage(
       on(this.element.ownerDocument, 'keydown', event => {
-        this._handleKeyPress(event);
+        this._handleKeydown(event);
       })
     );
   }
@@ -153,16 +153,16 @@ class FloatingMenu extends mixin(
    * @param {Event} event The triggering event.
    * @private
    */
-  _handleKeyPress(event) {
+  _handleKeydown(event) {
     const key = event.which;
     const { triggerNode, refNode } = this.options;
-    const isOfDialog = this.element.contains(event.target);
+    const isOfMenu = this.element.contains(event.target);
 
     switch (key) {
       // Esc
       case 27:
         this.changeState('hidden', getLaunchingDetails(event), () => {
-          if (isOfDialog) {
+          if (isOfMenu) {
             (triggerNode || refNode).focus();
           }
         });
