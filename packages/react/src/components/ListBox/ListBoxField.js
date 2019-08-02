@@ -53,7 +53,13 @@ ListBoxField.propTypes = {
   /**
    * Provide the contents of your ListBoxField
    */
-  children: childrenOf([ListBoxMenuIcon, ListBoxSelection, 'span', 'input']),
+  children: childrenOf([
+    ListBoxMenuIcon,
+    ListBoxSelection,
+    'span',
+    'svg',
+    'input',
+  ]),
 
   /**
    * Specify a custom `id`
