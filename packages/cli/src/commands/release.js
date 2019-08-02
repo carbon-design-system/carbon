@@ -168,14 +168,7 @@ async function release({ bump }) {
 
   await execa(
     'yarn',
-    [
-      'lerna',
-      'version',
-      bump,
-      '--no-push',
-      '--no-git-tag-version',
-      '--exact',
-    ],
+    ['lerna', 'version', bump, '--no-push', '--no-git-tag-version', '--exact'],
     {
       stdio: 'inherit',
     }
