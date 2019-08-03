@@ -213,4 +213,4 @@ async function build({ cwd }) {
   reporter.success('Done! 🎉');
 }
 
-module.exports = build;
+module.exports = { build, createModuleFromInfo };

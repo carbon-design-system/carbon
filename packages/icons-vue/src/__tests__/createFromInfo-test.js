@@ -55,7 +55,8 @@ describe('createFromInfo', () => {
     let render;
 
     beforeEach(async () => {
-      createModuleFromInfo = require('../createFromInfo').createModuleFromInfo;
+      createModuleFromInfo = require('../../tasks/build.js')
+        .createModuleFromInfo;
 
       descriptor = {
         attrs: {
