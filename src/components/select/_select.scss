@@ -60,6 +60,10 @@
       box-shadow: 0 2px 0 0 $support-01;
     }
 
+    &[data-invalid] ~ .#{$prefix}--select__arrow {
+      bottom: 2.25rem;
+    }
+
     &:focus ~ .#{$prefix}--label {
       color: $brand-01;
     }
@@ -96,10 +100,6 @@
     width: rem(10px);
     height: rem(5px);
     pointer-events: none;
-  }
-
-  &[data-invalid] ~ .#{$prefix}--select__arrow {
-    bottom: 2.25rem;
   }
 
   .#{$prefix}--select-optgroup,
