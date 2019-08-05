@@ -275,7 +275,9 @@ class FloatingMenu extends mixin(
           this._place();
         });
       }
-      this._getContainer().appendChild(this.element);
+      this._getContainer().appendChild(
+        this.options.wrapperNode || this.element
+      );
       this._place();
       // IE11 puts focus on elements with `.focus()`, even ones without `tabindex` attribute
       if (!this.element.hasAttribute(this.options.attribAvoidFocusOnOpen)) {
