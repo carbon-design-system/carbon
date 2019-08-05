@@ -136,11 +136,18 @@ class Tooltip extends mixin(
         throw new Error('Cannot find the target tooltip.');
       }
 
+      const wrapperNode = tooltip.parentNode.matches(
+        this.options.selectorWrapper
+      )
+        ? tooltip.parentNode
+        : null;
+
       // Lazily create a component instance for tooltip
       this.tooltip = FloatingMenu.create(tooltip, {
         refNode: this.element,
         classShown: this.options.classShown,
         offset: this.options.objMenuOffset,
+        wrapperNode,
       });
       this._hookOn(tooltip);
       this.children.push(this.tooltip);
@@ -222,6 +229,7 @@ class Tooltip extends mixin(
     const { prefix } = settings;
     return {
       selectorInit: '[data-tooltip-trigger]',
+      selectorWrapper: `.${prefix}--tooltip-wrapper`,
       classShown: `${prefix}--tooltip--shown`,
       attribTooltipTarget: 'data-tooltip-target',
       objMenuOffset: getMenuOffset,
