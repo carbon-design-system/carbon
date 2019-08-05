@@ -135,6 +135,14 @@
     margin-bottom: $carbon--spacing-09;
     color: $text-01;
     font-weight: 400;
+
+    &:focus {
+      // @question: couldn't find a helper that this the wider focus style
+      outline: 2px solid $focus;
+      // @question: is graceful degradation okay for IE11?
+      //    The user would still see the top and bottom border but can not see the right or left side
+      outline-offset: -2px;
+    }
   }
 
   .#{$prefix}--modal-content > * {
