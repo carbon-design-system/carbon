@@ -12268,6 +12268,18 @@ Dropdown styles
     transform-origin: 50% 45%;
   }
 
+  button.#{$prefix}--dropdown-text {
+    // button-reset mixin contradicts with bx--dropdown-text styles
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
   .#{$prefix}--dropdown-text {
     @include type-style('body-short-01');
     display: block;
@@ -12283,6 +12295,7 @@ Dropdown styles
 
   .#{$prefix}--dropdown-list {
     @include reset;
+    @include focus-outline('reset');
     @include layer('overlay');
     @include type-style('body-short-01');
     background-color: $ui-01;
@@ -12346,16 +12359,17 @@ Dropdown styles
     overflow: hidden;
     white-space: nowrap;
 
-    &:focus {
-      @include focus-outline('outline');
-      margin: 0;
-      padding: rem(11px) rem(16px);
-    }
-
     &:hover {
       color: $text-01;
       border-color: transparent;
     }
+  }
+
+  .#{$prefix}--dropdown--focused,
+  .#{$prefix}--dropdown-link:focus {
+    @include focus-outline('outline');
+    margin: 0;
+    padding: rem(11px) rem(16px);
   }
 
   .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
