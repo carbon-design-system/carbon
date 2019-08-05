@@ -216,5 +216,3 @@ async function build({ cwd }) {
 build({ cwd: path.resolve(__dirname, '../') }).catch(error => {
   console.log(error);
 });
-
-module.exports = { build, createModuleFromInfo };
