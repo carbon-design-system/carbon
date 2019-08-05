@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
@@ -28,17 +28,14 @@ export default function FileUploaderDropContainer(props) {
     [`${prefix}--file__drop-container--drag-over`]: isActive,
     [className]: className,
   });
-  const handleChange = useCallback(
-    evt => {
-      onAddFiles(evt, {
-        addedFiles:
-          evt.type === 'drop'
-            ? [...evt.dataTransfer.files]
-            : [...evt.target.files],
-      });
-    },
-    [onAddFiles]
-  );
+  const handleChange = evt =>
+    onAddFiles(evt, {
+      addedFiles:
+        evt.type === 'drop'
+          ? [...evt.dataTransfer.files]
+          : [...evt.target.files],
+    });
+
   return (
     <div
       className={`${prefix}--file`}
