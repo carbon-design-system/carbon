@@ -8,9 +8,6 @@
 import React from 'react';
 import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
-import ListBoxMenuIcon from './ListBoxMenuIcon';
-import ListBoxSelection from './ListBoxSelection';
-import childrenOf from '../../prop-types/childrenOf';
 
 const { prefix } = settings;
 
@@ -37,7 +34,7 @@ ListBoxField.propTypes = {
   /**
    * Provide the contents of your ListBoxField
    */
-  children: childrenOf([ListBoxMenuIcon, ListBoxSelection, 'span', 'input']),
+  children: PropTypes.node,
 
   /**
    * Specify a custom `id`
