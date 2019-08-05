@@ -10,8 +10,7 @@
     {{#unless inline}}
     <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
     {{/unless}}
-    {{!-- @todo is there any reason we need the `id` on this element? It's not needed for a11y --}}
-    <div data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value id="{{default.idSuffix}}"
+    <div data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value
       class="{{@root.prefix}}--dropdown {{#if up}}{{@root.prefix}}--dropdown--up{{/if}} {{#if light}}{{@root.prefix}}--dropdown--light{{/if}} {{#if inline}}{{@root.prefix}}--dropdown--inline{{/if}}">
       <button class="{{@root.prefix}}--dropdown-text" aria-haspopup="true" aria-expanded="false" aria-controls="{{default.idSuffix}}-menu" aria-labelledby="{{default.idSuffix}}-label {{default.idSuffix}}-value" type="button">
         <span class="{{@root.prefix}}--dropdown-text__inner" id="{{default.idSuffix}}-value">{{#unless inline}} Dropdown option {{else}}Inline Dropdown label{{/unless}}</span>
@@ -36,8 +35,7 @@
     <span id="{{helper.idSuffix}}-label" class="{{@root.prefix}}--label">Dropdown label</span>
     <div class="{{@root.prefix}}--form__helper-text">Optional helper text here; if message is more than one line text
       should wrap (~100 character count maximum)</div>
-    {{!-- @todo is there any reason we need the `id` on this element? It's not needed for a11y --}}
-    <div data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value id="{{helper.idSuffix}}"
+    <div data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value
       class="{{@root.prefix}}--dropdown {{#if up}}{{@root.prefix}}--dropdown--up{{/if}} {{#if light}}{{@root.prefix}}--dropdown--light{{/if}} {{#if inline}}{{@root.prefix}}--dropdown--inline{{/if}}">
       <button class="{{@root.prefix}}--dropdown-text" aria-haspopup="true" aria-expanded="false" aria-controls="{{helper.idSuffix}}-menu" aria-labelledby="{{helper.idSuffix}}-label {{helper.idSuffix}}-value" type="button">
         <span class="{{@root.prefix}}--dropdown-text__inner" id="{{helper.idSuffix}}-value">{{#unless inline}} Dropdown option {{else}}Inline Dropdown label{{/unless}}</span>
@@ -57,8 +55,6 @@
 </div>
 {{/unless}}
 
-Hello: {{disabled.idSuffix}}
-
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--dropdown__wrapper {{#if inline}}{{@root.prefix}}--dropdown__wrapper--inline{{/if}}">
     <span id="{{disabled.idSuffix}}-label" class="{{@root.prefix}}--label {{@root.prefix}}--label--disabled" aria-disabled="true">Dropdown label</span>
@@ -67,8 +63,7 @@ Hello: {{disabled.idSuffix}}
       here; if message is more than one line text
       should wrap (~100 character count maximum)</div>
     {{/unless}}
-    {{!-- @todo is there any reason we need the `id` on this element? It's not needed for a11y --}}
-    <div data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value id="{{disabled.idSuffix}}"
+    <div data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value
       class="{{@root.prefix}}--dropdown{{#if up}} {{@root.prefix}}--dropdown--up{{/if}}{{#if light}} {{@root.prefix}}--dropdown--light{{/if}}{{#if inline}} {{@root.prefix}}--dropdown--inline{{/if}} {{@root.prefix}}--dropdown--disabled">
       <button disabled class="{{@root.prefix}}--dropdown-text" aria-haspopup="true" aria-expanded="false" aria-controls="{{disabled.idSuffix}}-menu" aria-labelledby="{{disabled.idSuffix}}-label {{disabled.idSuffix}}-value" type="button">
         <span class="{{@root.prefix}}--dropdown-text__inner" id="{{disabled.idSuffix}}-value">{{#unless inline}} Dropdown option {{else}}Inline Dropdown label{{/unless}}</span>
@@ -96,8 +91,7 @@ Hello: {{disabled.idSuffix}}
       here; if message is more than one line text
       should wrap (~100 character count maximum)</div>
     {{/unless}}
-    {{!-- @todo is there any reason we need the `id` on this element? It's not needed for a11y --}}
-    <div data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value id="{{invalid.idSuffix}}"
+    <div data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value
       class="{{@root.prefix}}--dropdown {{@root.prefix}}--dropdown--invalid {{#if up}}{{@root.prefix}}--dropdown--up{{/if}} {{#if light}}{{@root.prefix}}--dropdown--light{{/if}}{{#if inline}} {{@root.prefix}}--dropdown--inline{{/if}}"
       data-invalid>
       <button  class="{{@root.prefix}}--dropdown-text" aria-haspopup="true" aria-expanded="false" aria-controls="{{invalid.idSuffix}}-menu" aria-labelledby="{{invalid.idSuffix}}-label {{invalid.idSuffix}}-value" type="button">
