@@ -18771,13 +18771,17 @@ Tooltip styles
     align-items: center;
     color: $text-02;
 
+    &:focus {
+      @include focus-outline('border');
+    }
+
     .#{$prefix}--tooltip__trigger {
       margin-left: $carbon--spacing-03;
     }
   }
 
-  .#{$prefix}--tooltip__label:focus {
-    @include focus-outline('border');
+  .#{$prefix}--tooltip__trigger svg {
+    fill: $icon-02;
   }
 
   .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only) {
@@ -18790,12 +18794,6 @@ Tooltip styles
     &:focus {
       @include focus-outline('border');
       fill: $hover-primary;
-    }
-
-    path,
-    polygon,
-    circle {
-      fill: $icon-02;
     }
   }
 
@@ -19041,8 +19039,8 @@ Tooltip styles
   - [prefix [variable]](#prefix-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [hover-primary [variable]](#hover-primary-variable)
   - [icon-02 [variable]](#icon-02-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
