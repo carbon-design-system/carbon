@@ -142,7 +142,11 @@ class DatePicker extends mixin(
       this.manage(
         on(this.element, 'keydown', e => {
           if (e.which === 40) {
-            this.calendar.calendarContainer.focus();
+            (
+              this.calendar.selectedDateElem ||
+              this.calendar.todayDateElem ||
+              this.calendar.calendarContainer
+            ).focus();
           }
         })
       );
@@ -496,6 +500,7 @@ class DatePicker extends mixin(
       selectorFlatpickrMonthYearContainer: '.flatpickr-current-month',
       selectorFlatpickrYearContainer: '.numInputWrapper',
       selectorFlatpickrCurrentMonth: '.cur-month',
+      selectorCurrentDay: `.${prefix}--date-picker__day.today`,
       classCalendarContainer: `${prefix}--date-picker__calendar`,
       classMonth: `${prefix}--date-picker__month`,
       classWeekdays: `${prefix}--date-picker__weekdays`,

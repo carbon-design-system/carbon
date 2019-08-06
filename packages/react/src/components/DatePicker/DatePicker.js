@@ -402,7 +402,11 @@ export default class DatePicker extends Component {
     if (this.inputField) {
       this.inputField.addEventListener('keydown', e => {
         if (e.which === 40) {
-          cal.calendarContainer.focus();
+          (
+            cal.selectedDateElem ||
+            cal.todayDateElem ||
+            cal.calendarContainer
+          ).focus();
         }
       });
       this.inputField.addEventListener('change', this.onChange);
@@ -411,6 +415,15 @@ export default class DatePicker extends Component {
       this.toInputField.addEventListener('blur', evt => {
         if (!this.cal.calendarContainer.contains(evt.relatedTarget)) {
           this.cal.close();
+        }
+      });
+      this.toInputField.addEventListener('keydown', e => {
+        if (e.which === 40) {
+          (
+            cal.selectedDateElem ||
+            cal.todayDateElem ||
+            cal.calendarContainer
+          ).focus();
         }
       });
       this.toInputField.addEventListener('change', this.onChange);
