@@ -14004,6 +14004,10 @@ Modal styles
     margin-bottom: $carbon--spacing-09;
     color: $text-01;
     font-weight: 400;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 
   .#{$prefix}--modal-content > * {
