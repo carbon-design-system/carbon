@@ -47,6 +47,12 @@
       "handler": "generateIcons"
     },
     {
+      "name": "Sync icon symbols",
+      "identifier": "carbon.elements.icons.sync",
+      "script": "commands/index.js",
+      "handler": "syncIcons"
+    },
+    {
       "name": "Run symbol-id-sync fixture",
       "identifier": "carbon.elements.icons.fixture.symbol-id-sync",
       "script": "commands/index.js",
@@ -78,6 +84,7 @@
       {
         "title": "Icons",
         "items": [
+          "carbon.elements.icons.sync",
           "carbon.elements.icons.generate"
         ]
       },
