@@ -20,15 +20,16 @@ export function generate() {
     const document = Document.getSelectedDocument();
     const page = selectPage(findOrCreatePage(document, 'Color'));
     const sharedStyles = syncColorStyles(document);
-    const { blackAndWhite, colors, support } = groupByKey(
+    const { black, white, colors, support } = groupByKey(
       sharedStyles,
       sharedStyle => {
         const { name } = sharedStyle;
         const [_category, swatch] = name.split('/');
         switch (swatch) {
           case 'black':
+            return 'black';
           case 'white':
-            return 'blackAndWhite';
+            return 'white';
           case 'yellow':
           case 'orange':
             return 'support';
@@ -41,23 +42,24 @@ export function generate() {
     let X_OFFSET = 0;
     let Y_OFFSET = 0;
 
-    for (const sharedStyle of blackAndWhite) {
-      createSymbolFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
-      X_OFFSET = X_OFFSET + ARTBOARD_WIDTH + ARTBOARD_MARGIN;
-    }
-
-    X_OFFSET = 0;
-    Y_OFFSET = Y_OFFSET + ARTBOARD_HEIGHT + ARTBOARD_MARGIN;
-
     const swatches = groupByKey(colors, sharedStyle => {
       const [_category, swatch] = sharedStyle.name.split('/');
       return swatch;
     });
 
-    for (const swatch of Object.keys(swatches)) {
-      for (const sharedStyle of swatches[swatch]) {
+    for (const swatch of Object.keys(swatches).sort(sortBySwatchName)) {
+      for (const sharedStyle of swatches[swatch].sort(sortBySwatchGrade)) {
         createSymbolFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
         X_OFFSET = X_OFFSET + ARTBOARD_WIDTH + ARTBOARD_MARGIN;
+      }
+
+      // We have a special case for `gray` where we want to add the color
+      // `white` to the end of the swatch (e.g. `white-0`) and `black` to the
+      // beginning of the swatch (`black-100`)
+      if (swatch === 'gray') {
+        createSymbolFromSharedStyle(white[0], page, X_OFFSET, Y_OFFSET);
+        const offset = 0 - ARTBOARD_WIDTH - ARTBOARD_MARGIN;
+        createSymbolFromSharedStyle(black[0], page, offset, Y_OFFSET);
       }
 
       X_OFFSET = 0;
@@ -83,6 +85,10 @@ function createSymbolFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
     style: sharedStyle.style,
   });
 
+  // Reset border if a Sketch instance has the default style with a border for
+  // rectangles
+  rectangle.style.borders = [];
+
   const artboard = new SymbolMaster({
     parent,
     name: `${category}/${colorName}`,
@@ -91,4 +97,27 @@ function createSymbolFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
   });
 
   return artboard;
+}
+
+const order = [
+  'red',
+  'magenta',
+  'purple',
+  'blue',
+  'cyan',
+  'teal',
+  'green',
+  'cool-gray',
+  'gray',
+  'warm-gray',
+];
+
+function sortBySwatchName(a, b) {
+  return order.indexOf(a) - order.indexOf(b);
+}
+
+function sortBySwatchGrade(a, b) {
+  const [_categoryA, _swatchA, gradeA] = a.name.split('/');
+  const [_categoryB, _swatchB, gradeB] = b.name.split('/');
+  return parseInt(gradeB, 10) - parseInt(gradeA, 10);
 }
