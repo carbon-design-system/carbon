@@ -5125,7 +5125,6 @@ $focus: map-get($carbon--theme, 'focus');
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [modal [mixin]](#modal-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -14007,11 +14006,7 @@ Modal styles
     font-weight: 400;
 
     &:focus {
-      // @question: couldn't find a helper that this the wider focus style
-      outline: 2px solid $focus;
-      // @question: is graceful degradation okay for IE11?
-      //    The user would still see the top and bottom border but can not see the right or left side
-      outline-offset: -2px;
+      @include focus-outline('outline');
     }
   }
 
@@ -14086,7 +14081,6 @@ Modal styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [text-01 [variable]](#text-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
-  - [focus [variable]](#focus-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
