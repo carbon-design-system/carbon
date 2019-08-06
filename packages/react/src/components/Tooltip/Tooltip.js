@@ -181,8 +181,8 @@ class Tooltip extends Component {
   _tooltipEl = null;
 
   componentDidMount() {
-    if (!this._debouncedHandleHover) {
-      this._debouncedHandleHover = debounce(this._handleHover, 200);
+    if (!this._debouncedHandleFocus) {
+      this._debouncedHandleFocus = debounce(this._handleHover, 200);
     }
     requestAnimationFrame(() => {
       this.getTriggerPosition();
@@ -192,9 +192,9 @@ class Tooltip extends Component {
   }
 
   componentWillUnmount() {
-    if (this._debouncedHandleHover) {
-      this._debouncedHandleHover.cancel();
-      this._debouncedHandleHover = null;
+    if (this._debouncedHandleFocus) {
+      this._debouncedHandleFocus.cancel();
+      this._debouncedHandleFocus = null;
     }
 
     document.removeEventListener('keydown', this.handleEscKeyPress, false);
@@ -244,11 +244,11 @@ class Tooltip extends Component {
   };
 
   /**
-   * The debounced version of the `mouseover`/`mouseout`/`focus`/`blur` event handler.
+   * The debounced version of the `focus`/`blur` event handler.
    * @type {Function}
    * @private
    */
-  _debouncedHandleHover = null;
+  _debouncedHandleFocus = null;
 
   /**
    * @returns {Element} The DOM element where the floating menu is placed in.
@@ -259,13 +259,26 @@ class Tooltip extends Component {
     document.body;
 
   handleMouse = evt => {
-    if (evt.type === 'click') {
+    const state = {
+      focus: 'over',
+      blur: 'out',
+      click: 'click',
+    }[evt.type];
+    const hadContextMenu = this._hasContextMenu;
+    this._hasContextMenu = evt.type === 'contextmenu';
+    if (state === 'click') {
       evt.stopPropagation();
       const shouldOpen = !this.state.open;
       if (shouldOpen) {
         this.getTriggerPosition();
       }
       this.setState({ open: shouldOpen });
+    } else if (
+      state &&
+      (state !== 'out' || !hadContextMenu) &&
+      this._debouncedHandleFocus
+    ) {
+      this._debouncedHandleFocus(state, evt.relatedTarget);
     }
   };
 

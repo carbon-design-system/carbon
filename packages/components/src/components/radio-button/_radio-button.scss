@@ -61,7 +61,7 @@
     @include reset;
     background-color: transparent;
     border-radius: 50%;
-    border: $radio-border-width solid $ui-05;
+    border: $radio-border-width solid $icon-01;
     flex-shrink: 0;
     height: rem(18px);
     width: rem(18px);
@@ -74,7 +74,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-color: $ui-05;
+    border-color: $icon-01;
 
     &:before {
       content: '';
@@ -83,7 +83,7 @@
       width: 0.5rem;
       height: 0.5rem;
       border-radius: 50%;
-      background-color: $ui-05;
+      background-color: $icon-01;
 
       // Allow the selected button to be seen in Windows HCM for IE/Edge
       @media screen and (-ms-high-contrast: active) {

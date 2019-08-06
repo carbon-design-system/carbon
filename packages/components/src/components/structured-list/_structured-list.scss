@@ -47,17 +47,17 @@
 
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
-    background-color: $ui-01;
+    background-color: $hover-row;
     cursor: pointer;
-    border-bottom: 1px solid $ui-01;
+    border-bottom: 1px solid $hover-row;
   }
 
   .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected {
-    background-color: $ui-03;
+    background-color: $selected-ui;
   }
 
   .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--header-row {
-    border-bottom: 1px solid $ui-03;
+    border-bottom: 1px solid $selected-ui;
     cursor: inherit;
   }
 
@@ -140,7 +140,7 @@
   .#{$prefix}--structured-list-input:checked
     + .#{$prefix}--structured-list-td
     .#{$prefix}--structured-list-svg {
-    fill: $text-01;
+    fill: $icon-01;
   }
 
   // Skeleton State
