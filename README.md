@@ -64,8 +64,9 @@ we support!
   how-to docs and guidelines
 - [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions
   to this repo.
-- [🏃‍♀️ Migration Guides](./docs/migration)
-  - [v9 to v10](./docs/migration/migrate-to-10.x.md)
+- 🏃‍♀️ Migration Guides
+  - [v9 to v10 (vanilla)](./packages/components/docs/migration/migrate-to-10.x.md)
+  - [v9 to v10 (v6 to v7 React)](./packages/components/docs/migration/migrate-to-7.x.md)
 
 ## 🙌 Contributing
 
