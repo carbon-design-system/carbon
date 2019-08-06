@@ -11,31 +11,30 @@
 @import './vendor/@carbon/elements/scss/themes/themes';
 
 /// Theme variables
-/// @access private
-/// @group global-themes
+
 /// @type Value
 /// @access public
-/// @group global
+/// @group global-themes
 $input-border: 1px solid transparent !default;
 
 /// @type Number
 /// @access public
-/// @group global
+/// @group global-themes
 $input-label-weight: 400 !default;
 
 /// @type Color
 /// @access public
-/// @group global
+/// @group global-themes
 $disabled: $disabled-02 !default;
 
 /// @type Color
 /// @access public
-/// @group global
+/// @group global-themes
 $disabled-background-color: $disabled-01 !default;
 
 /// @type Color
 /// @access public
-/// @group global
+/// @group global-themes
 $focus: $ibm-color__blue-60 !default;
 
 // Link
@@ -72,12 +71,12 @@ $button-font-size: 0.875rem !default;
 
 /// @type Number
 /// @access public
-/// @group
+/// @group button
 $button-border-radius: 0 !default;
 
 /// @type Number
 /// @access public
-/// @group
+/// @group button
 $button-height: 48px !default;
 
 /// @type Value
