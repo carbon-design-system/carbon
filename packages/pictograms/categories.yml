@@ -1,9 +1,28 @@
 categories:
-  - name: categorieName
+  - name: Action
     members:
-    - pictogram1
-    - pictogram2
-    - pictogramN
+    - cloud download
+    - cloud upload
+    - crop
+    - delete
+    - do not
+    - download
+    - download alternate
+    - embed
+    - export
+    - export alternate
+    - heart
+    - launch
+    - maximize
+    - minimize
+    - paper clip
+    - refresh
+    - renew
+    - repeat
+    - reset
+    - trash
+    - upload
+    - upload alternate
   - name: categorieName2
     members:
     - pictogram1
