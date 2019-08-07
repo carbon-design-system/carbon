@@ -15,18 +15,22 @@ const { categories } = require('@carbon/icons/metadata.json');
 export function generate() {
   command('commands/icons/generate', () => {
     const document = Document.getSelectedDocument();
-    // const symbols = syncIconSymbols(document);
-    const symbols = document.getSymbols();
+    const symbols = syncIconSymbols(document);
     const page = selectPage(findOrCreatePage(document, 'Icons Template'));
     const groups = [];
     let PAGE_X_OFFSET = 0;
     let PAGE_Y_OFFSET = 0;
 
     for (const category of categories) {
-      const categoryText = createTextLayer({
+      const categoryText = new Text({
         frame: new Rectangle(0, 0),
         text: category.name,
-        fontSize: 32,
+        style: {
+          fontFamily: 'IBM Plex Sans',
+          fontSize: 32,
+          fontWeight: 4,
+          lineHeight: 40,
+        },
       });
       const group = new Group({
         name: category.name,
@@ -40,10 +44,15 @@ export function generate() {
 
       for (const subcategory of category.subcategories) {
         const iconsGroupedByBase = getIconsGroupedByBase(subcategory.members);
-        const subcategoryText = createTextLayer({
+        const subcategoryText = new Text({
           frame: new Rectangle(0, 0),
           text: subcategory.name,
-          fontSize: 24,
+          style: {
+            fontFamily: 'IBM Plex Sans',
+            fontSize: 20,
+            fontWeight: 4,
+            lineHeight: 26,
+          },
         });
         const subcategoryGroup = new Group({
           name: subcategory.name,
@@ -59,7 +68,6 @@ export function generate() {
 
         for (const icons of iconsGroupedByBase) {
           for (const icon of icons) {
-            console.log(COLUMN_COUNT);
             const symbol = symbols.find(symbol => {
               const parts = symbol.name.split('/').map(string => string.trim());
               const [_type, _category, _subcategory, name, size] = parts;
@@ -114,15 +122,4 @@ function getIconsGroupedByBase(members) {
       };
     }, {})
   );
-}
-
-function createTextLayer({ text, frame, fontSize }) {
-  return new Text({
-    frame,
-    text,
-    style: {
-      fontFamily: 'IBM Plex Sans',
-      fontSize,
-    },
-  });
 }

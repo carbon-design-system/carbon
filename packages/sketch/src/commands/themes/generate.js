@@ -52,6 +52,8 @@ function createSymbolFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
     style: sharedStyle.style,
   });
 
+  rectangle.style.borders = [];
+
   const artboard = new SymbolMaster({
     parent,
     name: sharedStyle.name,
