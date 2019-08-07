@@ -13,6 +13,7 @@ import l10n from 'flatpickr/dist/l10n/index';
 import rangePlugin from 'flatpickr/dist/plugins/rangePlugin';
 import { settings } from 'carbon-components';
 import DatePickerInput from '../DatePickerInput';
+import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -401,7 +402,7 @@ export default class DatePicker extends Component {
   addKeyboardEvents = cal => {
     if (this.inputField) {
       this.inputField.addEventListener('keydown', e => {
-        if (e.which === 40) {
+        if (match(e, keys.ArrowDown)) {
           (
             cal.selectedDateElem ||
             cal.todayDateElem ||
@@ -418,7 +419,7 @@ export default class DatePicker extends Component {
         }
       });
       this.toInputField.addEventListener('keydown', e => {
-        if (e.which === 40) {
+        if (match(e, keys.ArrowDown)) {
           (
             cal.selectedDateElem ||
             cal.todayDateElem ||

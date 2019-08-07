@@ -142,6 +142,7 @@ class DatePicker extends mixin(
       this.manage(
         on(this.element, 'keydown', e => {
           if (e.which === 40) {
+            e.preventDefault();
             (
               this.calendar.selectedDateElem ||
               this.calendar.todayDateElem ||
