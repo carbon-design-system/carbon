@@ -8,7 +8,7 @@
 /* global MSSVGImporter, NSString, NSUTF8StringEncoding */
 
 import { toString } from '@carbon/icon-helpers';
-import { Artboard, Document, Rectangle, Shape } from 'sketch/dom';
+import { Artboard, Rectangle, Shape } from 'sketch/dom';
 import { syncColorStyles } from '../../sharedStyles/colors';
 import { groupByKey } from '../../tools/grouping';
 import { findOrCreatePage, selectPage } from '../../tools/page';
