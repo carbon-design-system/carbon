@@ -28,7 +28,7 @@
 
 ## Getting started
 
-Carbon is built using a collection of packages all built in the same git
+Carbon is built using a collection of packages all built in the same Git
 repository. You might have heard this setup described as a
 [monorepo](https://en.wikipedia.org/wiki/Monorepo).
 
@@ -37,7 +37,7 @@ dependencies and publishing our packages. These include:
 
 - [Yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/) for handling
   dependencies across all packages
-- [Lerna](https://lernajs.io/) for publishing packages, tagging versions, and
+- [Lerna](https://lerna.js.org/) for publishing packages, tagging versions, and
   more
 
 In order for you to install all the dependencies in this project, you'll need to
@@ -64,8 +64,7 @@ yarn build
 ```
 
 Afterwards, you should be good to go! For more information about how we handle
-dependencies, definitely take a look at our write-up
-[here](#dependency-management)
+dependencies, take a look at our write-up [here](#dependency-management).
 
 ## Common tasks
 
@@ -77,7 +76,7 @@ want to run:
 | `yarn build`                      | Uses `lerna` to run the `build` script in each package                                                        |
 | `yarn clean`                      | Resets the state of the project by removing all `node_modules` and running the `clean` script in each package |
 | `yarn doctoc`                     | Runs `doctoc` on all files in the `doctoc` directory                                                          |
-| `yarn format`, `yarn format:diff` | Format files using prettier, check if files have been formatted                                               |
+| `yarn format`, `yarn format:diff` | Format files using Prettier, check if files have been formatted                                               |
 | `yarn sync`                       | Sync package files across the project                                                                         |
 
 In addition, you can use `yarn` to run `bin` files using the `yarn <bin>`
@@ -143,7 +142,7 @@ additional files that you can include in your project, most notably a common
 
 For example, in `@carbon/colors` we can import the `carbon--colors` mixin by
 importing `@carbon/colors/scss/mixins.scss`. These types of files are guaranteed
-to have no, or minimal, side-effects. The only side-effects that are admitted
+to have no, or minimal, side-effects. The only side-effects that are emitted
 are global variable initializations as this is required behavior in newer
 versions of Sass.
 
@@ -155,12 +154,12 @@ control when these side-effects are applied in your project.
 This project follows a structured format for writing commit messages. The main
 benefit of this approached approach is that we can use these details to
 automatically generate things like changelogs, in addition to clarifying what
-changes correspond to when looking at our git history.
+changes correspond to when looking at our Git history.
 
 ### Commit message format
 
 _Parts of this section are duplicated from
-[Angular's commit conventions](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines)_
+[Angular's commit conventions](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines)_.
 
 Each commit message consists of a **header**, a **body** and a **footer**. The
 header has a special format that includes a type, a scope and a subject:
@@ -182,7 +181,7 @@ are a few validation rules that we also enforce, namely that:
 Most of these rules are to help with integration of `git` with common tools.
 
 _Note: we check for this commit format using a tool called
-[`commitlint`](https://commitlint.js.org/#/)_
+[`commitlint`](https://commitlint.js.org/#/)_.
 
 ### Type
 
@@ -190,7 +189,7 @@ Must be one of the following:
 
 - **build**: Changes that affect the build system or external dependencies
 - **chore**: Changes that do not affect the meaning of the code (white-space,
-  formatting, missing semi-colons, etc)
+  formatting, missing semi-colons, etc.)
 - **ci**: Changes to our CI configuration files and scripts
 - **docs**: Documentation only changes
 - **feat**: A new feature
