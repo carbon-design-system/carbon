@@ -204,22 +204,25 @@ export default class ComboBox extends React.Component {
     event.stopPropagation();
   };
 
-  handleOnInputValueChange = (inputValue, { setHighlightedIndex }) => {
-    const { onInputChange } = this.props;
+  handleOnStateChange = (newState, { setHighlightedIndex }) => {
+    if (Object.prototype.hasOwnProperty.call(newState, 'inputValue')) {
+      const { inputValue } = newState;
+      const { onInputChange } = this.props;
 
-    setHighlightedIndex(findHighlightedIndex(this.props, inputValue));
+      setHighlightedIndex(findHighlightedIndex(this.props, inputValue));
 
-    this.setState(
-      () => ({
-        // Default to empty string if we have a false-y `inputValue`
-        inputValue: inputValue || '',
-      }),
-      () => {
-        if (onInputChange) {
-          onInputChange(inputValue);
+      this.setState(
+        () => ({
+          // Default to empty string if we have a false-y `inputValue`
+          inputValue: inputValue || '',
+        }),
+        () => {
+          if (onInputChange) {
+            onInputChange(inputValue);
+          }
         }
-      }
-    );
+      );
+    }
   };
 
   onToggleClick = isOpen => event => {
@@ -276,7 +279,7 @@ export default class ComboBox extends React.Component {
       <Downshift
         {...downshiftProps}
         onChange={this.handleOnChange}
-        onInputValueChange={this.handleOnInputValueChange}
+        onStateChange={this.handleOnStateChange}
         inputValue={this.state.inputValue || ''}
         itemToString={itemToString}
         defaultSelectedItem={initialSelectedItem}>
