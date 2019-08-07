@@ -41,7 +41,7 @@
       "handler": "generateType"
     },
     {
-      "name": "Generate icon page and symbols",
+      "name": "Generate icon page",
       "identifier": "carbon.elements.icons.generate",
       "script": "commands/index.js",
       "handler": "generateIcons"
