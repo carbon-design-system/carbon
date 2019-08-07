@@ -37,7 +37,9 @@ export function syncThemeColorStyles(document) {
         const { type } = meta.colors.find(group => {
           return group.tokens.includes(token);
         });
-        const name = `${theme} / ${type} tokens / ${formatTokenName(token)}`;
+        const name = `theme / ${theme.toLowerCase()} / ${type} tokens / ${formatTokenName(
+          token
+        )}`;
         return syncColorStyle(document, name, themes[theme][token]);
       });
   });
