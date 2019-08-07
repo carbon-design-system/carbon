@@ -12270,6 +12270,18 @@ Dropdown styles
     transform-origin: 50% 45%;
   }
 
+  button.#{$prefix}--dropdown-text {
+    // button-reset mixin contradicts with bx--dropdown-text styles
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
   .#{$prefix}--dropdown-text {
     @include type-style('body-short-01');
     display: block;
@@ -12285,6 +12297,7 @@ Dropdown styles
 
   .#{$prefix}--dropdown-list {
     @include reset;
+    @include focus-outline('reset');
     @include layer('overlay');
     @include type-style('body-short-01');
     background-color: $ui-01;
@@ -12348,16 +12361,17 @@ Dropdown styles
     overflow: hidden;
     white-space: nowrap;
 
-    &:focus {
-      @include focus-outline('outline');
-      margin: 0;
-      padding: rem(11px) rem(16px);
-    }
-
     &:hover {
       color: $text-01;
       border-color: transparent;
     }
+  }
+
+  .#{$prefix}--dropdown--focused,
+  .#{$prefix}--dropdown-link:focus {
+    @include focus-outline('outline');
+    margin: 0;
+    padding: rem(11px) rem(16px);
   }
 
   .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
@@ -13992,6 +14006,10 @@ Modal styles
     margin-bottom: $carbon--spacing-09;
     color: $text-01;
     font-weight: 400;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 
   .#{$prefix}--modal-content > * {
@@ -18773,13 +18791,17 @@ Tooltip styles
     align-items: center;
     color: $text-02;
 
+    &:focus {
+      @include focus-outline('border');
+    }
+
     .#{$prefix}--tooltip__trigger {
       margin-left: $carbon--spacing-03;
     }
   }
 
-  .#{$prefix}--tooltip__label:focus {
-    @include focus-outline('border');
+  .#{$prefix}--tooltip__trigger svg {
+    fill: $icon-02;
   }
 
   .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only) {
@@ -18792,12 +18814,6 @@ Tooltip styles
     &:focus {
       @include focus-outline('border');
       fill: $hover-primary;
-    }
-
-    path,
-    polygon,
-    circle {
-      fill: $icon-02;
     }
   }
 
@@ -19052,8 +19068,8 @@ Tooltip styles
   - [prefix [variable]](#prefix-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [hover-primary [variable]](#hover-primary-variable)
   - [icon-02 [variable]](#icon-02-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
