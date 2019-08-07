@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Document, Rectangle, ShapePath, SymbolMaster } from 'sketch/dom';
+import { Artboard, Document, Rectangle, ShapePath } from 'sketch/dom';
 import { command } from '../command';
 import { syncColorStyles } from '../../sharedStyles/colors';
 import { findOrCreatePage, selectPage } from '../../tools/page';
@@ -49,7 +49,7 @@ export function generate() {
 
     for (const swatch of Object.keys(swatches).sort(sortBySwatchName)) {
       for (const sharedStyle of swatches[swatch].sort(sortBySwatchGrade)) {
-        createSymbolFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
+        createArtboardFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
         X_OFFSET = X_OFFSET + ARTBOARD_WIDTH + ARTBOARD_MARGIN;
       }
 
@@ -57,9 +57,9 @@ export function generate() {
       // `white` to the end of the swatch (e.g. `white-0`) and `black` to the
       // beginning of the swatch (`black-100`)
       if (swatch === 'gray') {
-        createSymbolFromSharedStyle(white[0], page, X_OFFSET, Y_OFFSET);
+        createArtboardFromSharedStyle(white[0], page, X_OFFSET, Y_OFFSET);
         const offset = 0 - ARTBOARD_WIDTH - ARTBOARD_MARGIN;
-        createSymbolFromSharedStyle(black[0], page, offset, Y_OFFSET);
+        createArtboardFromSharedStyle(black[0], page, offset, Y_OFFSET);
       }
 
       X_OFFSET = 0;
@@ -67,13 +67,13 @@ export function generate() {
     }
 
     for (const sharedStyle of support) {
-      createSymbolFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
+      createArtboardFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
       X_OFFSET = X_OFFSET + ARTBOARD_WIDTH + ARTBOARD_MARGIN;
     }
   });
 }
 
-function createSymbolFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
+function createArtboardFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
   const [category, swatch, grade] = sharedStyle.name.split('/');
 
   const colorName = grade ? `${swatch}/${swatch}-${grade}` : swatch;
@@ -89,7 +89,7 @@ function createSymbolFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
   // rectangles
   rectangle.style.borders = [];
 
-  const artboard = new SymbolMaster({
+  const artboard = new Artboard({
     parent,
     name: `${category}/${colorName}`,
     frame: new Rectangle(offsetX, offsetY, ARTBOARD_WIDTH, ARTBOARD_HEIGHT),
