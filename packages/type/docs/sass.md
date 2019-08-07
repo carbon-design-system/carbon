@@ -270,6 +270,8 @@ Set the `font-weight` property with the value for a given name
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [carbon--font-weight [function]](#carbon--font-weight-function)
+- **Used by**:
+  - [carbon--type-reset [mixin]](#carbon--type-reset-mixin)
 
 ### ✅carbon--font-face-mono [mixin]
 
@@ -752,14 +754,44 @@ Include a type reset for a given body and mono font family
     -moz-osx-font-smoothing: grayscale;
   }
 
-  // IBM Plex uses semibold instead of bold, as a result we need to map
-  // tags that use `font-weight: bold` to the semibold value
-  strong {
-    font-weight: 600;
-  }
-
   code {
     font-family: $mono-font-family;
+  }
+
+  h1 {
+    @include type-style('productive-heading-05');
+  }
+
+  h2 {
+    @include type-style('productive-heading-04');
+  }
+
+  h3 {
+    @include type-style('productive-heading-03');
+  }
+
+  h4 {
+    @include type-style('productive-heading-02');
+  }
+
+  h5 {
+    @include type-style('productive-heading-01');
+  }
+
+  p {
+    @include type-style('body-long-02');
+  }
+
+  a {
+    color: $link-01;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  strong {
+    @include carbon--font-weight('semibold');
   }
 }
 ```
@@ -775,6 +807,8 @@ Include a type reset for a given body and mono font family
 | `$mono-font-family` | The font family used on elements that require mono fonts, like the `<code>` element | `String` | `carbon--font-family('mono')` |
 
 - **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
 
 ### ✅carbon--font-face-sans [mixin]
 
