@@ -337,7 +337,7 @@ class FloatingMenu extends mixin(
           const elementTabindex = this.element.getAttribute('tabindex');
           if (__DEV__) {
             warning(
-              elementTabindex === null || elementTabindex === '-1',
+              elementTabindex !== null && parseInt(elementTabindex, 10) > -1,
               'Floating Menus without interactive elements must include tabindex="0" on the floating element.'
             );
           }
