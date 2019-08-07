@@ -17,7 +17,6 @@ import FloatingMenu, {
   DIRECTION_BOTTOM,
 } from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
-import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
 /**
@@ -99,7 +98,6 @@ class Tooltip extends mixin(
   constructor(element, options) {
     super(element, options);
     this._hookOn(element);
-    this._hookCloseActions(element);
   }
 
   /**
@@ -107,14 +105,6 @@ class Tooltip extends mixin(
    * @type {boolean}
    */
   _hasContextMenu = false;
-
-  /**
-   * The handle for `click` event listener.
-   * Used for "click-outside-tooltip" feature.
-   * @type {Handle}
-   * @private
-   */
-  _handleClickListener;
 
   /**
    * A method called when this widget is created upon events.
@@ -162,19 +152,7 @@ class Tooltip extends mixin(
     this.tooltip.changeState(
       state,
       Object.assign(detail, { delegatorNode: this.element }),
-      () => {
-        if (this._handleClickListener) {
-          this._handleClickListener = this.unmanage(
-            this._handleClickListener
-          ).release();
-        }
-
-        if (state === 'shown') {
-          this._hookCloseActions(this.element);
-        }
-
-        if (typeof callback === 'function') callback();
-      }
+      callback
     );
   }
 
@@ -222,40 +200,35 @@ class Tooltip extends mixin(
   }
 
   /**
-   * Attaches event handlers to hide the tooltip.
-   * @param {Element} element The element to attach the events to.
-   * @private
-   */
-  _hookCloseActions(element) {
-    this._handleClickListener = this.manage(
-      on(element.ownerDocument, 'click', evt => {
-        if (
-          !eventMatches(
-            evt,
-            element.getAttribute(this.options.attribTooltipTarget)
-          ) &&
-          !(element.contains(evt.target) || evt.target === element)
-        ) {
-          this.changeState('hidden', evt);
-        }
-      })
-    );
-  }
-
-  /**
    * Handles click/focus events.
    * @param {object} params The parameters.
+   * @param {Element} params.relatedTarget The element that focus went to. (For `blur` event)
    * @param {string} params.type The event type triggering this method.
+   * @param {boolean} params.hadContextMenu
    * @param {object} params.details The event details.
    * @private
    */
-  _handleClick({ type, details }) {
+  _handleClick({ relatedTarget, type, hadContextMenu, details }) {
     const state = {
       click: 'shown',
       keydown: 'shown',
+      blur: 'hidden',
+      touchleave: 'hidden',
+      touchcancel: 'hidden',
     }[type];
 
-    this.changeState(state, details);
+    let shouldPreventClose;
+    if (type === 'blur') {
+      // Note: SVGElement in IE11 does not have `.contains()`
+      const wentToSelf =
+        (relatedTarget &&
+          (this.element.contains && this.element.contains(relatedTarget))) ||
+        (this.tooltip && this.tooltip.element.contains(relatedTarget));
+      shouldPreventClose = hadContextMenu || wentToSelf;
+    }
+    if (!shouldPreventClose) {
+      this.changeState(state, details);
+    }
   }
 
   static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
