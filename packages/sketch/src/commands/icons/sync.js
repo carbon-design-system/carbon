@@ -8,10 +8,18 @@
 import { Document } from 'sketch/dom';
 import { command } from '../command';
 import { syncIconSymbols } from './shared';
+import { findOrCreateSymbolPage } from '../../tools/page';
 
 export function sync() {
   command('commands/icons/sync', () => {
     const document = Document.getSelectedDocument();
-    syncIconSymbols(document);
+    const symbolsPage = findOrCreateSymbolPage(document);
+    const symbols = document.getSymbols();
+    syncIconSymbols(
+      document,
+      Array.from(symbols),
+      symbolsPage,
+      document.sharedLayerStyles
+    );
   });
 }

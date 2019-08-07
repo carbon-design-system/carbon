@@ -11,15 +11,18 @@ import { toString } from '@carbon/icon-helpers';
 import { Artboard, Rectangle, Shape } from 'sketch/dom';
 import { syncColorStyles } from '../../sharedStyles/colors';
 import { groupByKey } from '../../tools/grouping';
-import { findOrCreatePage, selectPage } from '../../tools/page';
 import { syncSymbol } from '../../tools/symbols';
 
 const meta = require('@carbon/icons/build-info.json');
 const metadata = require('@carbon/icons/metadata.json');
 const { icons } = metadata;
 
-export function syncIconSymbols(document) {
-  const page = selectPage(findOrCreatePage(document, 'icons'));
+export function syncIconSymbols(
+  document,
+  symbols,
+  symbolsPage,
+  sharedLayerStyles
+) {
   const sharedStyles = syncColorStyles(document);
   const [sharedStyle] = sharedStyles.filter(
     ({ name }) => name === 'color/black'
@@ -47,21 +50,28 @@ export function syncIconSymbols(document) {
   // This will allow you to focus only on the icon named 'name-to-find'
   const start = 0;
   const end = iconNames.length;
-  // const end = 10;
 
   // We keep track of the current X and Y offsets at the top-level, each
   // iteration of an icon set should reset the X_OFFSET and update the
   // Y_OFFSET with the maximum size in the icon set.
+  const ARTBOARD_MARGIN = 32;
+  const INITIAL_Y_OFFSET =
+    symbolsPage.layers.reduce((acc, layer) => {
+      if (layer.frame.y + layer.frame.height > acc) {
+        return layer.frame.y + layer.frame.height;
+      }
+      return acc;
+    }, 0) + 32;
   let X_OFFSET = 0;
-  let Y_OFFSET = 0;
+  let Y_OFFSET = INITIAL_Y_OFFSET;
   let maxSize = -Infinity;
 
-  const symbols = iconNames.slice(start, end).flatMap((name, i) => {
+  const symbolsToSync = iconNames.slice(start, end).flatMap((name, i) => {
     const sizes = icons[name];
 
     X_OFFSET = 0;
     if (i !== 0) {
-      Y_OFFSET = Y_OFFSET + maxSize + 32;
+      Y_OFFSET = Y_OFFSET + maxSize + ARTBOARD_MARGIN;
     }
     maxSize = -Infinity;
 
@@ -174,18 +184,17 @@ export function syncIconSymbols(document) {
       artboard.layers.push(shape, ...innerPaths);
       group.remove();
 
-      return syncSymbol(document, artboard.name, {
+      return syncSymbol(symbols, sharedLayerStyles, artboard.name, {
         name: artboard.name,
         frame: artboard.frame,
         layers: artboard.layers,
         background: artboard.background,
+        parent: symbolsPage,
       });
     });
   });
 
-  page.layers.push(...symbols);
-
-  return symbols;
+  return symbolsToSync;
 }
 
 /**

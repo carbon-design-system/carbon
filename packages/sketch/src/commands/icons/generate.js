@@ -8,15 +8,14 @@
 import { Document, Text, Rectangle, Group } from 'sketch/dom';
 import { command } from '../command';
 import { findOrCreatePage, selectPage } from '../../tools/page';
-import { syncIconSymbols } from './shared';
 
 const { categories } = require('@carbon/icons/metadata.json');
 
 export function generate() {
   command('commands/icons/generate', () => {
     const document = Document.getSelectedDocument();
-    const symbols = syncIconSymbols(document);
-    const page = selectPage(findOrCreatePage(document, 'icons template'));
+    const symbols = document.getSymbols();
+    const page = selectPage(findOrCreatePage(document, 'icons'));
     const groups = [];
     let PAGE_X_OFFSET = 0;
     let PAGE_Y_OFFSET = 0;
