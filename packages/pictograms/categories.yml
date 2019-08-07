@@ -132,3 +132,101 @@ categories:
     - saas enablement
     - single sign-on
     - softlayer enablement
+  - name: Cloud
+    members:
+    - gear
+    - podcast
+    - slider
+    - toggle
+    - video
+    - video
+    - video chat
+    - video play
+    - webcast
+  - name: Data Analytics
+    members:
+    - analyze
+    - chart bar
+    - chart bubble line
+    - chart line
+    - chart scatterplot
+    - flow chart
+    - flow chart detail
+    - heat map
+    - rank
+    - report
+    - secure data
+    - user analytics
+  - name: Data Analytics
+    members:
+    - archive
+    - data backup
+    - data processing
+    - data storage
+    - hard drive
+    - hard drive network
+    - server rack
+    - servers
+  - name: Design and Development
+    members:
+    - app developer
+    - application
+    - design and development 01
+    - design and development 02
+    - feedback
+    - idea
+    - ideate
+    - path
+    - pattern
+    - user insights
+    - web developer
+    - windows
+  - name: Device Interaction
+    members:
+    - mobile add
+    - mobile chat
+    - mobile devices
+    - mobile phone
+    - swipe left
+    - swipe right
+    - touch
+    - touch gesture
+    - touch id
+    - touch screen
+    - touch swipe
+  - name: Education
+    members:
+    - college
+    - education
+    - university
+  - name: Electronics
+    members:
+    - air conditioner
+    - camera
+    - chip circuit
+    - chip credit
+    - chip debit
+    - desktop
+    - electric
+    - headphones
+    - printer
+    - telephone
+    - television
+    - washer
+  - name: Enforcement
+    members:
+    - capitol
+    - justice
+    - parliament
+    - police
+  - name: File
+    members:
+    - duplicate file
+    - envelope
+    - file backup
+    - file transfer
+    - folder
+    - rich text format
+  - name: File
+    members:
+    -
