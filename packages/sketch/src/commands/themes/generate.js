@@ -20,7 +20,7 @@ const ARTBOARD_MARGIN_HORIZONTAL = 40;
 export function generate() {
   command('commands/themes/generate', () => {
     const document = Document.getSelectedDocument();
-    const page = selectPage(findOrCreatePage(document, 'Themes'));
+    const page = selectPage(findOrCreatePage(document, 'themes'));
     const sharedStyles = syncThemeColorStyles(document);
 
     const tokens = groupByKey(sharedStyles, sharedStyle => {

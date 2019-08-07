@@ -18,7 +18,7 @@ const ARTBOARD_MARGIN = 8;
 export function generate() {
   command('commands/colors/generate', () => {
     const document = Document.getSelectedDocument();
-    const page = selectPage(findOrCreatePage(document, 'Color'));
+    const page = selectPage(findOrCreatePage(document, 'color'));
     const sharedStyles = syncColorStyles(document);
     const { black, white, colors, support } = groupByKey(
       sharedStyles,

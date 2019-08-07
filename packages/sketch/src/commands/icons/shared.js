@@ -19,7 +19,7 @@ const metadata = require('@carbon/icons/metadata.json');
 const { icons } = metadata;
 
 export function syncIconSymbols(document) {
-  const page = selectPage(findOrCreatePage(document, 'Icon Symbols'));
+  const page = selectPage(findOrCreatePage(document, 'icons'));
   const sharedStyles = syncColorStyles(document);
   const [sharedStyle] = sharedStyles.filter(
     ({ name }) => name === 'color/black'

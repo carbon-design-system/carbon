@@ -16,7 +16,7 @@ export function generate() {
   command('commands/icons/generate', () => {
     const document = Document.getSelectedDocument();
     const symbols = syncIconSymbols(document);
-    const page = selectPage(findOrCreatePage(document, 'Icons Template'));
+    const page = selectPage(findOrCreatePage(document, 'icons template'));
     const groups = [];
     let PAGE_X_OFFSET = 0;
     let PAGE_Y_OFFSET = 0;
