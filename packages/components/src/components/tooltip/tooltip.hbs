@@ -5,7 +5,7 @@
   LICENSE file in the root directory of this source tree.
 -->
 
-{{!-- Using the trigger label as the tooltip label (can be repetitive for screen reader users) --}}
+<!-- Using the trigger label as the tooltip label (can be repetitive for screen reader users) -->
 <div id="{{noHeading.idSuffix}}-label" class="{{@root.prefix}}--tooltip__label">
   Tooltip label
   {{!-- @todo add aria-expanded once JavaScript can toggle it --}}
@@ -15,11 +15,11 @@
     {{ carbon-icon 'Information16' }}
   </div>
 </div>
-<div class="{{@root.prefix}}--tooltip-wrapper">
-  {{!-- @todo add aria-hidden once JavaScript can toggle it --}}
-  <div id="{{noHeading.idSuffix}}" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip"
-    data-avoid-focus-on-open role="dialog" aria-describedby="{{noHeading.idSuffix}}-body" aria-labelledby="{{noHeading.idSuffix}}-label">
-    <span class="{{@root.prefix}}--tooltip__caret"></span>
+{{!-- @todo add aria-hidden once JavaScript can toggle it --}}
+<div id="{{noHeading.idSuffix}}" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip"
+  data-avoid-focus-on-open role="dialog" aria-describedby="{{noHeading.idSuffix}}-body" aria-labelledby="{{noHeading.idSuffix}}-label">
+  <span class="{{@root.prefix}}--tooltip__caret"></span>
+  <div class="{{@root.prefix}}--tooltip__content">
     <p id="{{noHeading.idSuffix}}-body" >This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is
       needed
       please use a modal instead.</p>
@@ -33,8 +33,7 @@
   <span tabindex="0"></span>
 </div>
 
-
-{{!-- Tooltip with visible label within tooltip --}}
+<!-- Tooltip with visible label within tooltip -->
 <div id="{{heading.idSuffix}}-label" class="{{@root.prefix}}--tooltip__label">
   Tooltip label
   {{!-- @todo add aria-expanded once JavaScript can toggle it --}}
@@ -44,11 +43,11 @@
     {{ carbon-icon 'Information16' }}
   </div>
 </div>
-<div class="{{@root.prefix}}--tooltip-wrapper">
-  {{!-- @todo add aria-hidden once JavaScript can toggle it --}}
-  <div id="{{heading.idSuffix}}" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip"
-    data-avoid-focus-on-open role="dialog" aria-describedby="{{heading.idSuffix}}-body" aria-labelledby="{{heading.idSuffix}}-heading">
-    <span class="{{@root.prefix}}--tooltip__caret"></span>
+{{!-- @todo add aria-hidden once JavaScript can toggle it --}}
+<div id="{{heading.idSuffix}}" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip"
+  data-avoid-focus-on-open role="dialog" aria-describedby="{{heading.idSuffix}}-body" aria-labelledby="{{heading.idSuffix}}-heading">
+  <span class="{{@root.prefix}}--tooltip__caret"></span>
+  <div class="{{@root.prefix}}--tooltip__content">
     <h4 id="{{heading.idSuffix}}-heading">Heading within a Tooltip</h4>
     <p id="{{heading.idSuffix}}-body" >This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is
       needed
@@ -62,7 +61,7 @@
   <span tabindex="0"></span>
 </div>
 
-{{!-- Tooltip without visible label (not recommended for WCAG 2.1) --}}
+<!-- Tooltip without visible label (not recommended for WCAG 2.1) -->
 <div id="{{label.idSuffix}}-label" class="{{@root.prefix}}--tooltip__label">
   Tooltip label
   {{!-- @todo add aria-expanded once JavaScript can toggle it --}}
@@ -72,11 +71,11 @@
     {{ carbon-icon 'Information16' }}
   </div>
 </div>
-<div class="{{@root.prefix}}--tooltip-wrapper">
-  {{!-- @todo add aria-hidden once JavaScript can toggle it --}}
-  <div id="{{label.idSuffix}}" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip"
-    data-avoid-focus-on-open role="dialog" aria-describedby="{{label.idSuffix}}-body" aria-label="Tooltip label">
-    <span class="{{@root.prefix}}--tooltip__caret"></span>
+{{!-- @todo add aria-hidden once JavaScript can toggle it --}}
+<div id="{{label.idSuffix}}" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip"
+  data-avoid-focus-on-open role="dialog" aria-describedby="{{label.idSuffix}}-body" aria-label="Tooltip label">
+  <span class="{{@root.prefix}}--tooltip__caret"></span>
+  <div class="{{@root.prefix}}--tooltip__content">
     <p id="{{label.idSuffix}}-body" >This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is
       needed
       please use a modal instead.</p>
