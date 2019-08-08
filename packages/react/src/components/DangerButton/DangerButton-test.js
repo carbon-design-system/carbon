@@ -8,7 +8,7 @@
 import React from 'react';
 import DangerButton from '../DangerButton';
 import { shallow, mount } from 'enzyme';
-import Search16 from '@carbon/icons-react/lib/search/16';
+import { Search16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;

@@ -6,8 +6,7 @@
  */
 
 import React from 'react';
-import Search16 from '@carbon/icons-react/lib/search/16';
-import Close20 from '@carbon/icons-react/lib/close/20';
+import { Search16, Close20 } from '@carbon/icons-react';
 import Search from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
 import { mount, shallow } from 'enzyme';
@@ -28,14 +27,11 @@ describe('Search', () => {
 
     const label = wrapper.find('label');
     const textInput = wrapper.find('input');
-    const container = wrapper.find('[role="search"]');
+    const container = wrapper.find(`.${prefix}--search`);
 
     describe('container', () => {
       it('should add extra classes that are passed via className', () => {
         expect(container.hasClass('extra-class')).toEqual(true);
-      });
-      it('should have the role of search', () => {
-        expect(container.props().role).toEqual('search');
       });
     });
 
@@ -132,7 +128,7 @@ describe('Search', () => {
         />
       );
 
-      const smallContainer = small.find('[role="search"]');
+      const smallContainer = small.find(`.${prefix}--search`);
 
       it('renders correct search icon', () => {
         const icons = small.find(Search16);

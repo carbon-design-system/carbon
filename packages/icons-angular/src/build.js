@@ -5,19 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const icons = require('@carbon/icons/meta.json');
+const icons = require('@carbon/icons/build-info.json');
 const { toString } = require('@carbon/icon-helpers');
 const { reporter } = require('@carbon/cli-reporter');
 const fs = require('fs-extra');
-const { join, dirname } = require('path');
+const { dirname } = require('path');
 const { param } = require('change-case');
 const ngc = require('@angular/compiler-cli/src/main');
 const { rollup } = require('rollup');
-const {
-  componentTemplate,
-  moduleTemplate,
-  storyTemplate,
-} = require('./templates');
+const { componentTemplate, storyTemplate } = require('./templates');
 const clean = require('./clean');
 const paths = require('./paths');
 

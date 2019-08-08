@@ -190,7 +190,7 @@ $list-box-menu-width: rem(300px);
 
   // Inline variant for a `list-box`
   .#{$prefix}--list-box.#{$prefix}--list-box--inline {
-    background-color: $field-02;
+    background-color: $ui-background;
     border-width: 0;
 
     &:hover {
@@ -344,10 +344,6 @@ $list-box-menu-width: rem(300px);
     &:focus {
       @include focus-outline('outline');
     }
-  }
-
-  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__selection {
-    right: rem(57px); // 33px + 1.5rem when invalid
   }
 
   .#{$prefix}--list-box__selection > svg {

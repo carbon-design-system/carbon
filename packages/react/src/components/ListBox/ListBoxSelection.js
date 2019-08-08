@@ -8,7 +8,7 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Close16 from '@carbon/icons-react/lib/close/16';
+import { Close16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -23,8 +23,8 @@ const ListBoxSelection = ({
   selectionCount,
   translateWithId: t,
 }) => {
-  const className = cx({
-    [`${prefix}--list-box__selection`]: true,
+  const className = cx(`${prefix}--list-box__selection`, {
+    [`${prefix}--tag--filter`]: selectionCount,
     [`${prefix}--list-box__selection--multi`]: selectionCount,
   });
   const handleOnClick = event => {
@@ -32,6 +32,8 @@ const ListBoxSelection = ({
     clearSelection(event);
   };
   const handleOnKeyDown = event => {
+    event.stopPropagation();
+
     // When a user hits ENTER, we'll clear the selection
     if (event.keyCode === 13) {
       clearSelection(event);

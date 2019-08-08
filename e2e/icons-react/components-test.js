@@ -9,21 +9,20 @@
 
 'use strict';
 
-const path = require('path');
-const meta = require('../../packages/icons/meta.json');
+const meta = require('../../packages/icons/build-info.json');
 
 describe('@carbon/icons-react', () => {
-  test.each(meta.map(icon => [icon.moduleName, icon]))(
+  test('entrypoint is require-able', () => {
+    expect(() => {
+      require('@carbon/icons-react');
+    }).not.toThrow();
+  });
+
+  test.each(meta.map(icon => [icon.moduleName, icon.outputOptions.file]))(
     '%s is require-able',
-    (name, icon) => {
-      const filepath = path.resolve(
-        __dirname,
-        '../../packages/icons-react',
-        icon.outputOptions.file.replace(/es/, 'lib')
-      );
-      expect(() => {
-        require(filepath);
-      }).not.toThrow();
+    (name, file) => {
+      expect(require('@carbon/icons-react')[name]).toBeDefined();
+      expect(require(`@carbon/icons-react/${file}`)).toBeDefined();
     }
   );
 });

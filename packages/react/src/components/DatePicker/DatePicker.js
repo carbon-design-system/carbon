@@ -13,6 +13,7 @@ import l10n from 'flatpickr/dist/l10n/index';
 import rangePlugin from 'flatpickr/dist/plugins/rangePlugin';
 import { settings } from 'carbon-components';
 import DatePickerInput from '../DatePickerInput';
+import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -27,6 +28,88 @@ l10n.en.weekdays.shorthand.forEach((day, index) => {
 });
 
 const forEach = Array.prototype.forEach;
+
+/**
+ * @param {number} monthNumber The month number.
+ * @param {boolean} shorthand `true` to use shorthand month.
+ * @param {Locale} locale The Flatpickr locale data.
+ * @returns {string} The month string.
+ */
+const monthToStr = (monthNumber, shorthand, locale) =>
+  locale.months[shorthand ? 'shorthand' : 'longhand'][monthNumber];
+
+/**
+ * @param {object} config Plugin configuration.
+ * @param {boolean} [config.shorthand] `true` to use shorthand month.
+ * @param {string} config.selectorFlatpickrMonthYearContainer The CSS selector for the container of month/year selection UI.
+ * @param {string} config.selectorFlatpickrYearContainer The CSS selector for the container of year selection UI.
+ * @param {string} config.selectorFlatpickrCurrentMonth The CSS selector for the text-based month selection UI.
+ * @param {string} config.classFlatpickrCurrentMonth The CSS class for the text-based month selection UI.
+ * @returns {Plugin} A Flatpickr plugin to use text instead of `<select>` for month picker.
+ */
+const carbonFlatpickrMonthSelectPlugin = config => fp => {
+  const setupElements = () => {
+    if (!fp.monthElements) {
+      return;
+    }
+    fp.monthElements.forEach(elem => {
+      if (!elem.parentNode) return;
+      elem.parentNode.removeChild(elem);
+    });
+    fp.monthElements.splice(
+      0,
+      fp.monthElements.length,
+      ...fp.monthElements.map(() => {
+        // eslint-disable-next-line no-underscore-dangle
+        const monthElement = fp._createElement(
+          'span',
+          config.classFlatpickrCurrentMonth
+        );
+        monthElement.textContent = monthToStr(
+          fp.currentMonth,
+          config.shorthand === true,
+          fp.l10n
+        );
+        fp.yearElements[0]
+          .closest(config.selectorFlatpickrMonthYearContainer)
+          .insertBefore(
+            monthElement,
+            fp.yearElements[0].closest(config.selectorFlatpickrYearContainer)
+          );
+        return monthElement;
+      })
+    );
+  };
+
+  const updateCurrentMonth = () => {
+    const monthStr = monthToStr(
+      fp.currentMonth,
+      config.shorthand === true,
+      fp.l10n
+    );
+    fp.yearElements.forEach(elem => {
+      const currentMonthContainer = elem.closest(
+        config.selectorFlatpickrMonthYearContainer
+      );
+      Array.prototype.forEach.call(
+        currentMonthContainer.querySelectorAll('.cur-month'),
+        monthElement => {
+          monthElement.textContent = monthStr;
+        }
+      );
+    });
+  };
+
+  const register = () => {
+    fp.loadedPlugins.push('carbonFlatpickrMonthSelectPlugin');
+  };
+
+  return {
+    onMonthChange: updateCurrentMonth,
+    onOpen: updateCurrentMonth,
+    onReady: [setupElements, updateCurrentMonth, register],
+  };
+};
 
 export default class DatePicker extends Component {
   static propTypes = {
@@ -199,6 +282,11 @@ export default class DatePicker extends Component {
     onChange: PropTypes.func,
 
     /**
+     * The `close` event handler.
+     */
+    onClose: PropTypes.func,
+
+    /**
      * The minimum date that a user can start picking from.
      */
     minDate: PropTypes.string,
@@ -234,10 +322,10 @@ export default class DatePicker extends Component {
       datePickerType,
       dateFormat,
       locale,
-      onChange,
       minDate,
       maxDate,
       value,
+      onClose,
     } = this.props;
     if (datePickerType === 'single' || datePickerType === 'range') {
       const onHook = (electedDates, dateStr, instance) => {
@@ -257,18 +345,27 @@ export default class DatePicker extends Component {
           locale: l10n[locale],
           minDate: minDate,
           maxDate: maxDate,
-          plugins:
+          plugins: [
             datePickerType === 'range'
-              ? [new rangePlugin({ input: this.toInputField })]
-              : '',
+              ? new rangePlugin({ input: this.toInputField, position: 'left' })
+              : () => {},
+            carbonFlatpickrMonthSelectPlugin({
+              selectorFlatpickrMonthYearContainer: '.flatpickr-current-month',
+              selectorFlatpickrYearContainer: '.numInputWrapper',
+              selectorFlatpickrCurrentMonth: '.cur-month',
+              classFlatpickrCurrentMonth: 'cur-month',
+            }),
+          ],
           clickOpens: true,
           nextArrow: this.rightArrowHTML(),
           prevArrow: this.leftArrowHTML(),
           onChange: (...args) => {
+            const { onChange } = this.props;
             if (onChange) {
               onChange(...args);
             }
           },
+          onClose,
           onReady: onHook,
           onMonthChange: onHook,
           onYearChange: onHook,
@@ -305,15 +402,30 @@ export default class DatePicker extends Component {
   addKeyboardEvents = cal => {
     if (this.inputField) {
       this.inputField.addEventListener('keydown', e => {
-        if (e.which === 40) {
-          cal.calendarContainer.focus();
+        if (match(e, keys.ArrowDown)) {
+          (
+            cal.selectedDateElem ||
+            cal.todayDateElem ||
+            cal.calendarContainer
+          ).focus();
         }
       });
       this.inputField.addEventListener('change', this.onChange);
     }
     if (this.toInputField) {
-      this.toInputField.addEventListener('blur', () => {
-        this.cal.close();
+      this.toInputField.addEventListener('blur', evt => {
+        if (!this.cal.calendarContainer.contains(evt.relatedTarget)) {
+          this.cal.close();
+        }
+      });
+      this.toInputField.addEventListener('keydown', e => {
+        if (match(e, keys.ArrowDown)) {
+          (
+            cal.selectedDateElem ||
+            cal.todayDateElem ||
+            cal.calendarContainer
+          ).focus();
+        }
       });
       this.toInputField.addEventListener('change', this.onChange);
     }

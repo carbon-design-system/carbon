@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { isForwardRef } from 'react-is';
 import debounce from 'lodash.debounce';
 import classNames from 'classnames';
-import Information from '@carbon/icons-react/lib/information/16';
+import { Information16 as Information } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import FloatingMenu, {
   DIRECTION_LEFT,
@@ -20,7 +20,7 @@ import FloatingMenu, {
 } from '../../internal/FloatingMenu';
 import ClickListener from '../../internal/ClickListener';
 import mergeRefs from '../../tools/mergeRefs';
-import { keys, keyCodes, matches as keyDownMatch } from '../../tools/key';
+import { keys, matches as keyDownMatch } from '../../internal/keyboard';
 import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
 
 const { prefix } = settings;
@@ -181,8 +181,8 @@ class Tooltip extends Component {
   _tooltipEl = null;
 
   componentDidMount() {
-    if (!this._debouncedHandleHover) {
-      this._debouncedHandleHover = debounce(this._handleHover, 200);
+    if (!this._debouncedHandleFocus) {
+      this._debouncedHandleFocus = debounce(this._handleHover, 200);
     }
     requestAnimationFrame(() => {
       this.getTriggerPosition();
@@ -192,9 +192,9 @@ class Tooltip extends Component {
   }
 
   componentWillUnmount() {
-    if (this._debouncedHandleHover) {
-      this._debouncedHandleHover.cancel();
-      this._debouncedHandleHover = null;
+    if (this._debouncedHandleFocus) {
+      this._debouncedHandleFocus.cancel();
+      this._debouncedHandleFocus = null;
     }
 
     document.removeEventListener('keydown', this.handleEscKeyPress, false);
@@ -244,11 +244,11 @@ class Tooltip extends Component {
   };
 
   /**
-   * The debounced version of the `mouseover`/`mouseout`/`focus`/`blur` event handler.
+   * The debounced version of the `focus`/`blur` event handler.
    * @type {Function}
    * @private
    */
-  _debouncedHandleHover = null;
+  _debouncedHandleFocus = null;
 
   /**
    * @returns {Element} The DOM element where the floating menu is placed in.
@@ -259,13 +259,26 @@ class Tooltip extends Component {
     document.body;
 
   handleMouse = evt => {
-    if (evt.type === 'click') {
+    const state = {
+      focus: 'over',
+      blur: 'out',
+      click: 'click',
+    }[evt.type];
+    const hadContextMenu = this._hasContextMenu;
+    this._hasContextMenu = evt.type === 'contextmenu';
+    if (state === 'click') {
       evt.stopPropagation();
       const shouldOpen = !this.state.open;
       if (shouldOpen) {
         this.getTriggerPosition();
       }
       this.setState({ open: shouldOpen });
+    } else if (
+      state &&
+      (state !== 'out' || !hadContextMenu) &&
+      this._debouncedHandleFocus
+    ) {
+      this._debouncedHandleFocus(state, evt.relatedTarget);
     }
   };
 
@@ -281,19 +294,12 @@ class Tooltip extends Component {
   };
 
   handleKeyPress = event => {
-    if (keyDownMatch(event, [keys.ESC, keyCodes.ESC, keyCodes.IEESC])) {
+    if (keyDownMatch(event, [keys.Escape])) {
       event.stopPropagation();
       this.setState({ open: false });
     }
 
-    if (
-      keyDownMatch(event, [
-        keys.ENTER,
-        keyCodes.ENTER,
-        keys.SPACE,
-        keyCodes.SPACE,
-      ])
-    ) {
+    if (keyDownMatch(event, [keys.Enter, keys.Space])) {
       event.stopPropagation();
       this.setState({ open: !this.state.open });
     }
@@ -301,7 +307,7 @@ class Tooltip extends Component {
 
   handleEscKeyPress = event => {
     const { open } = this.state;
-    if (open && keyDownMatch(event, [keys.ESC, keyCodes.ESC, keyCodes.IEESC])) {
+    if (open && keyDownMatch(event, [keys.Escape])) {
       return this.setState({ open: false });
     }
   };

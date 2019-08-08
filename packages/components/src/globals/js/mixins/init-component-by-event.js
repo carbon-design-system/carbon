@@ -25,7 +25,7 @@ export default function(ToMix) {
      * If the given element indicates that it's an component of this class, instantiates it.
      * Otherwise, instantiates this component by clicking on this component in the given node.
      * @param {Node} target The DOM node to instantiate this component in. Should be a document or an element.
-     * @param {Object} [options] The component options.
+     * @param {object} [options] The component options.
      * @param {string} [options.selectorInit] The CSS selector to find this component.
      * @returns {Handle} The handle to remove the event listener to handle clicking.
      */

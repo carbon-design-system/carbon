@@ -31,23 +31,6 @@ module.exports = {
       },
     },
     {
-      name: 'character-counter',
-      label: 'Text Input with character counter',
-      context: {
-        charCounter: true,
-        maxLength: 100,
-      },
-    },
-    {
-      name: 'character-counter--light',
-      label: 'Text Input with character counter (light)',
-      context: {
-        charCounter: true,
-        maxLength: 100,
-        light: true,
-      },
-    },
-    {
       name: 'password',
       label: 'Password Input',
       context: {
@@ -58,25 +41,6 @@ module.exports = {
       name: 'password--light',
       label: 'Password Input (Light)',
       context: {
-        light: true,
-        password: true,
-      },
-    },
-    {
-      name: 'password--character-counter',
-      label: 'Password Input with character counter',
-      context: {
-        charCounter: true,
-        maxLength: 100,
-        password: true,
-      },
-    },
-    {
-      name: 'password--light--character-counter',
-      label: 'Password Input with character counter (Light)',
-      context: {
-        charCounter: true,
-        maxLength: 100,
         light: true,
         password: true,
       },

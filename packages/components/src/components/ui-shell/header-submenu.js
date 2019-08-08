@@ -280,7 +280,7 @@ export default class HeaderSubmenu extends mixin(
    * properties in this object are overriden for the instance being create and
    * how {@linkcode HeaderSubmenu.init .init()} works.
    * @member HeaderSubmenu.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The data attribute to find side navs.
    */
   static get options() {

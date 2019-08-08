@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Search20 from '@carbon/icons-react/lib/search/20';
-import Notification20 from '@carbon/icons-react/lib/notification/20';
-import AppSwitcher20 from '@carbon/icons-react/lib/app-switcher/20';
+import { Search20, Notification20, AppSwitcher20 } from '@carbon/icons-react';
 
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
@@ -27,6 +25,7 @@ import {
   HeaderGlobalBar,
   HeaderGlobalAction,
   HeaderPanel,
+  HeaderSideNavItems,
   SkipToContent,
   SideNav,
   // Temporarily comment these out until they are needed again
@@ -39,7 +38,7 @@ import {
   SideNavMenuItem,
   Switcher,
   SwitcherItem,
-  SwitcherItemLink,
+  SwitcherDivider,
 } from '../UIShell';
 
 const Fade16 = () => (
@@ -111,60 +110,25 @@ const StoryContent = () => {
       </div>
     </div>
   );
-  return <Content id="main-content">{content}</Content>;
+  return (
+    <Content
+      id="main-content"
+      style={{
+        backgroundColor: '#f3f3f3',
+        margin: '0',
+        height: '100vh',
+        width: '100%',
+      }}>
+      {content}
+    </Content>
+  );
 };
 
 // Ideally, we'd have a <UIShell> component that could help make using these
 // components much simpler. In the interim, we're going to create presentational
 // components and try and piece them together to figure out what are standard
 // usage patterns for each to see what kind of component API we should expose
-storiesOf('[Experimental] UI Shell', module)
-  .add(
-    'Header',
-    withReadme(readme, () => (
-      <Header>
-        <HeaderMenuButton
-          aria-label="Open menu"
-          onClick={action('Menu clicked')}
-        />
-        <HeaderName href="#" prefix="IBM">
-          [Platform]
-        </HeaderName>
-        <HeaderNavigation aria-label="IBM [Platform]">
-          <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-          <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-          <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-          <HeaderMenu aria-label="Link 4">
-            <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-            <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-            <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-          </HeaderMenu>
-        </HeaderNavigation>
-        <HeaderGlobalBar>
-          <HeaderGlobalAction
-            aria-label="Search"
-            onClick={action('search click')}>
-            <Search20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction
-            aria-label="Notifications"
-            onClick={action('notification click')}>
-            <Notification20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction
-            aria-label="App Switcher"
-            onClick={action('app-switcher click')}>
-            <AppSwitcher20 />
-          </HeaderGlobalAction>
-        </HeaderGlobalBar>
-      </Header>
-    )),
-    {
-      info: {
-        text: '[Experimental] UI Shell',
-      },
-    }
-  )
+storiesOf('UI Shell', module)
   .add(
     'Header Base',
     withReadme(readme, () => (
@@ -176,37 +140,52 @@ storiesOf('[Experimental] UI Shell', module)
     ))
   )
   .add(
-    'Header Base w/ Menu',
-    withReadme(readme, () => (
-      <Header aria-label="IBM Platform Name">
-        <HeaderMenuButton
-          aria-label="Open menu"
-          onClick={action('Menu clicked')}
-        />
-        <HeaderName href="#" prefix="IBM">
-          [Platform]
-        </HeaderName>
-      </Header>
-    ))
-  )
-  .add(
     'Header Base w/ Navigation',
     withReadme(readme, () => (
-      <Header aria-label="IBM Platform Name">
-        <HeaderName href="#" prefix="IBM">
-          [Platform]
-        </HeaderName>
-        <HeaderNavigation aria-label="IBM [Platform]">
-          <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-          <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-          <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-          <HeaderMenu aria-label="Link 4">
-            <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-            <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-            <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-          </HeaderMenu>
-        </HeaderNavigation>
-      </Header>
+      <HeaderContainer
+        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+          <>
+            <Header aria-label="IBM Platform Name">
+              <SkipToContent />
+              <HeaderMenuButton
+                aria-label="Open menu"
+                onClick={onClickSideNavExpand}
+                isActive={isSideNavExpanded}
+              />
+              <HeaderName href="#" prefix="IBM">
+                [Platform]
+              </HeaderName>
+              <HeaderNavigation aria-label="IBM [Platform]">
+                <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+                <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+                  <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+                </HeaderMenu>
+              </HeaderNavigation>
+              <SideNav
+                aria-label="Side navigation"
+                expanded={isSideNavExpanded}
+                isPersistent={false}>
+                <SideNavItems>
+                  <HeaderSideNavItems>
+                    <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+                    <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+                      <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+                      <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                      <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+                    </HeaderMenu>
+                  </HeaderSideNavItems>
+                </SideNavItems>
+              </SideNav>
+            </Header>
+          </>
+        )}
+      />
     ))
   )
   .add(
@@ -237,6 +216,255 @@ storiesOf('[Experimental] UI Shell', module)
     ))
   )
   .add(
+    'Header Base w/ Navigation and Actions',
+    withReadme(readme, () => (
+      <HeaderContainer
+        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+          <>
+            <Header aria-label="IBM Platform Name">
+              <SkipToContent />
+              <HeaderMenuButton
+                aria-label="Open menu"
+                onClick={onClickSideNavExpand}
+                isActive={isSideNavExpanded}
+              />
+              <HeaderName href="#" prefix="IBM">
+                [Platform]
+              </HeaderName>
+              <HeaderNavigation aria-label="IBM [Platform]">
+                <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+                <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+                  <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+                </HeaderMenu>
+              </HeaderNavigation>
+              <HeaderGlobalBar>
+                <HeaderGlobalAction
+                  aria-label="Search"
+                  onClick={action('search click')}>
+                  <Search20 />
+                </HeaderGlobalAction>
+                <HeaderGlobalAction
+                  aria-label="Notifications"
+                  onClick={action('notification click')}>
+                  <Notification20 />
+                </HeaderGlobalAction>
+                <HeaderGlobalAction
+                  aria-label="App Switcher"
+                  onClick={action('app-switcher click')}>
+                  <AppSwitcher20 />
+                </HeaderGlobalAction>
+              </HeaderGlobalBar>
+              <SideNav
+                aria-label="Side navigation"
+                expanded={isSideNavExpanded}
+                isPersistent={false}>
+                <SideNavItems>
+                  <HeaderSideNavItems>
+                    <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+                    <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+                      <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+                      <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                      <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+                    </HeaderMenu>
+                  </HeaderSideNavItems>
+                </SideNavItems>
+              </SideNav>
+            </Header>
+          </>
+        )}
+      />
+    ))
+  )
+  .add(
+    'Header Base w/ Navigation, Actions and SideNav',
+    withReadme(readme, () => (
+      <HeaderContainer
+        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+          <>
+            <Header aria-label="IBM Platform Name">
+              <SkipToContent />
+              <HeaderMenuButton
+                aria-label="Open menu"
+                onClick={onClickSideNavExpand}
+                isActive={isSideNavExpanded}
+              />
+              <HeaderName href="#" prefix="IBM">
+                [Platform]
+              </HeaderName>
+              <HeaderNavigation aria-label="IBM [Platform]">
+                <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+                <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+                  <HeaderMenuItem href="#one">Sub-link 1</HeaderMenuItem>
+                  <HeaderMenuItem href="#two">Sub-link 2</HeaderMenuItem>
+                  <HeaderMenuItem href="#three">Sub-link 3</HeaderMenuItem>
+                </HeaderMenu>
+              </HeaderNavigation>
+              <HeaderGlobalBar>
+                <HeaderGlobalAction
+                  aria-label="Search"
+                  onClick={action('search click')}>
+                  <Search20 />
+                </HeaderGlobalAction>
+                <HeaderGlobalAction
+                  aria-label="Notifications"
+                  onClick={action('notification click')}>
+                  <Notification20 />
+                </HeaderGlobalAction>
+                <HeaderGlobalAction
+                  aria-label="App Switcher"
+                  onClick={action('app-switcher click')}>
+                  <AppSwitcher20 />
+                </HeaderGlobalAction>
+              </HeaderGlobalBar>
+              <SideNav
+                aria-label="Side navigation"
+                expanded={isSideNavExpanded}>
+                <SideNavItems>
+                  <HeaderSideNavItems hasDivider={true}>
+                    <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+                    <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+                      <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+                      <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                      <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+                    </HeaderMenu>
+                  </HeaderSideNavItems>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavMenu
+                    renderIcon={Fade16}
+                    title="Category title"
+                    isActive={true}>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                    Link
+                  </SideNavLink>
+                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                    Link
+                  </SideNavLink>
+                </SideNavItems>
+              </SideNav>
+            </Header>
+            <StoryContent />
+          </>
+        )}
+      />
+    ))
+  )
+  .add(
+    'Header Base w/ SideNav',
+    withReadme(readme, () => (
+      <HeaderContainer
+        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+          <>
+            <Header aria-label="IBM Platform Name">
+              <SkipToContent />
+              <HeaderMenuButton
+                aria-label="Open menu"
+                onClick={onClickSideNavExpand}
+                isActive={isSideNavExpanded}
+              />
+              <HeaderName href="#" prefix="IBM">
+                [Platform]
+              </HeaderName>
+              <SideNav
+                aria-label="Side navigation"
+                expanded={isSideNavExpanded}>
+                <SideNavItems>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavMenu
+                    renderIcon={Fade16}
+                    title="Category title"
+                    isActive={true}>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                    Link
+                  </SideNavLink>
+                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                    Link
+                  </SideNavLink>
+                </SideNavItems>
+              </SideNav>
+            </Header>
+            <StoryContent />
+          </>
+        )}
+      />
+    ))
+  )
+  .add(
     'Header Base w/ Actions and Right Panel',
     withReadme(readme, () => (
       <Header aria-label="IBM Platform Name">
@@ -261,7 +489,7 @@ storiesOf('[Experimental] UI Shell', module)
             <AppSwitcher20 />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
-        <HeaderPanel expanded />
+        <HeaderPanel aria-label="Header Panel" expanded />
       </Header>
     ))
   )
@@ -290,77 +518,30 @@ storiesOf('[Experimental] UI Shell', module)
             <AppSwitcher20 />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
-        <HeaderPanel expanded>
-          <Switcher>
-            <SwitcherItem>
-              <SwitcherItemLink isSelected href="javascript:void(0)">
-                Link
-              </SwitcherItemLink>
+        <HeaderPanel aria-label="Header Panel" expanded>
+          <Switcher role="menu" aria-label="Switcher Container">
+            <SwitcherItem isSelected aria-label="Link 1" href="#">
+              Link 1
             </SwitcherItem>
-            <SwitcherItem>
-              <SwitcherItemLink href="javascript:void(0)">
-                Link
-              </SwitcherItemLink>
+            <SwitcherDivider />
+            <SwitcherItem href="#" aria-label="Link 2">
+              Link 2
             </SwitcherItem>
-            <SwitcherItem>
-              <SwitcherItemLink href="javascript:void(0)">
-                Link
-              </SwitcherItemLink>
+            <SwitcherItem href="#" aria-label="Link 3">
+              Link 3
             </SwitcherItem>
-            <SwitcherItem>
-              <SwitcherItemLink href="javascript:void(0)">
-                Link
-              </SwitcherItemLink>
+            <SwitcherItem href="#" aria-label="Link 4">
+              Link 4
             </SwitcherItem>
-            <SwitcherItem>
-              <SwitcherItemLink href="javascript:void(0)">
-                Link
-              </SwitcherItemLink>
+            <SwitcherItem href="#" aria-label="Link 5">
+              Link 5
             </SwitcherItem>
-            <SwitcherItem>
-              <SwitcherItemLink href="javascript:void(0)">
-                Link
-              </SwitcherItemLink>
+            <SwitcherDivider />
+            <SwitcherItem href="#" aria-label="Link 6">
+              Link 6
             </SwitcherItem>
           </Switcher>
         </HeaderPanel>
-      </Header>
-    ))
-  )
-  .add(
-    'Header Base w/ Navigation and Actions',
-    withReadme(readme, () => (
-      <Header aria-label="IBM Platform Name">
-        <HeaderName href="#" prefix="IBM">
-          [Platform]
-        </HeaderName>
-        <HeaderNavigation aria-label="IBM [Platform]">
-          <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-          <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-          <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-          <HeaderMenu aria-label="Link 4">
-            <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-            <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-            <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-          </HeaderMenu>
-        </HeaderNavigation>
-        <HeaderGlobalBar>
-          <HeaderGlobalAction
-            aria-label="Search"
-            onClick={action('search click')}>
-            <Search20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction
-            aria-label="Notifications"
-            onClick={action('notification click')}>
-            <Notification20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction
-            aria-label="App Switcher"
-            onClick={action('app-switcher click')}>
-            <AppSwitcher20 />
-          </HeaderGlobalAction>
-        </HeaderGlobalBar>
       </Header>
     ))
   )
@@ -378,6 +559,17 @@ storiesOf('[Experimental] UI Shell', module)
               <SideNavMenuItem href="javascript:void(0)">
                 L0 menu item
               </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu title="L0 menu" isActive={true}>
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
               <SideNavMenuItem aria-current="page" href="javascript:void(0)">
                 L0 menu item
               </SideNavMenuItem>
@@ -389,18 +581,7 @@ storiesOf('[Experimental] UI Shell', module)
               <SideNavMenuItem href="javascript:void(0)">
                 L0 menu item
               </SideNavMenuItem>
-              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
-                L0 menu item
-              </SideNavMenuItem>
               <SideNavMenuItem href="javascript:void(0)">
-                L0 menu item
-              </SideNavMenuItem>
-            </SideNavMenu>
-            <SideNavMenu title="L0 menu">
-              <SideNavMenuItem href="javascript:void(0)">
-                L0 menu item
-              </SideNavMenuItem>
-              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
                 L0 menu item
               </SideNavMenuItem>
               <SideNavMenuItem href="javascript:void(0)">
@@ -427,6 +608,14 @@ storiesOf('[Experimental] UI Shell', module)
           <SideNavItems>
             <SideNavMenu renderIcon={Fade16} title="Category title">
               <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu
+              renderIcon={Fade16}
+              title="Category title"
+              isActive={true}>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
               <SideNavMenuItem aria-current="page" href="javascript:void(0)">
                 Link
               </SideNavMenuItem>
@@ -434,16 +623,7 @@ storiesOf('[Experimental] UI Shell', module)
             </SideNavMenu>
             <SideNavMenu renderIcon={Fade16} title="Category title">
               <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
-                Link
-              </SideNavMenuItem>
               <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-            </SideNavMenu>
-            <SideNavMenu renderIcon={Fade16} title="Category title">
-              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
-                Link
-              </SideNavMenuItem>
               <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
             </SideNavMenu>
             <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
@@ -456,106 +636,5 @@ storiesOf('[Experimental] UI Shell', module)
         </SideNav>
         <StoryContent />
       </>
-    ))
-  )
-  .add(
-    'SideNav w/ Header',
-    withReadme(readme, () => (
-      <HeaderContainer
-        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
-          <>
-            <Header aria-label="IBM Platform Name">
-              <SkipToContent />
-              <HeaderMenuButton
-                aria-label="Open menu"
-                onClick={onClickSideNavExpand}
-                isActive={isSideNavExpanded}
-              />
-              <HeaderName href="#" prefix="IBM">
-                [Platform]
-              </HeaderName>
-              <HeaderNavigation aria-label="IBM [Platform]">
-                <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-                <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-                <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-                <HeaderMenu aria-label="Link 4">
-                  <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-                  <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-                  <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-                </HeaderMenu>
-              </HeaderNavigation>
-              <HeaderGlobalBar>
-                <HeaderGlobalAction
-                  aria-label="Search"
-                  onClick={action('search click')}>
-                  <Search20 />
-                </HeaderGlobalAction>
-                <HeaderGlobalAction
-                  aria-label="Notifications"
-                  onClick={action('notification click')}>
-                  <Notification20 />
-                </HeaderGlobalAction>
-                <HeaderGlobalAction
-                  aria-label="App Switcher"
-                  onClick={action('app-switcher click')}>
-                  <AppSwitcher20 />
-                </HeaderGlobalAction>
-              </HeaderGlobalBar>
-              <SideNav
-                aria-label="Side navigation"
-                expanded={isSideNavExpanded}>
-                <SideNavItems>
-                  <SideNavMenu renderIcon={Fade16} title="Category title">
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem
-                      aria-current="page"
-                      href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                  </SideNavMenu>
-                  <SideNavMenu renderIcon={Fade16} title="Category title">
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem
-                      aria-current="page"
-                      href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                  </SideNavMenu>
-                  <SideNavMenu renderIcon={Fade16} title="Category title">
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem
-                      aria-current="page"
-                      href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                  </SideNavMenu>
-                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                    Link
-                  </SideNavLink>
-                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                    Link
-                  </SideNavLink>
-                </SideNavItems>
-              </SideNav>
-            </Header>
-            <StoryContent />
-          </>
-        )}
-      />
     ))
   );

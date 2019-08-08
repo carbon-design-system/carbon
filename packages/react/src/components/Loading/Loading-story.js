@@ -7,14 +7,14 @@
 
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-
-import { withKnobs, boolean } from '@storybook/addon-knobs';
+import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import Loading from '../Loading';
 
 const props = () => ({
   active: boolean('Active (active)', true),
   withOverlay: boolean('With overlay (withOverlay)', false),
   small: boolean('Small (small)', false),
+  description: text('Description (description)', 'Active loading indicator'),
 });
 
 storiesOf('Loading', module)

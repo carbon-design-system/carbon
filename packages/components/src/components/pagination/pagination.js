@@ -9,6 +9,7 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import handles from '../../globals/js/mixins/handles';
+import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
 class Pagination extends mixin(
@@ -21,7 +22,7 @@ class Pagination extends mixin(
    * @extends CreateComponent
    * @extends InitComponentBySearch
    * @param {HTMLElement} element The element working as a pagination component.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @property {string} [selectorInit] The CSS selector to find pagination components.
    * @property {string} [selectorItemsPerPageInput]
    *   The CSS selector to find the input that determines the number of items per page.
@@ -43,14 +44,14 @@ class Pagination extends mixin(
 
     this.manage(
       on(this.element, 'click', evt => {
-        if (evt.target.matches(this.options.selectorPageBackward)) {
+        if (eventMatches(evt, this.options.selectorPageBackward)) {
           const detail = {
             initialEvt: evt,
             element: evt.target,
             direction: 'backward',
           };
           this._emitEvent(this.options.eventPageChange, detail);
-        } else if (evt.target.matches(this.options.selectorPageForward)) {
+        } else if (eventMatches(evt, this.options.selectorPageForward)) {
           const detail = {
             initialEvt: evt,
             element: evt.target,
@@ -63,14 +64,14 @@ class Pagination extends mixin(
 
     this.manage(
       on(this.element, 'input', evt => {
-        if (evt.target.matches(this.options.selectorItemsPerPageInput)) {
+        if (eventMatches(evt, this.options.selectorItemsPerPageInput)) {
           const detail = {
             initialEvt: evt,
             element: evt.target,
             value: evt.target.value,
           };
           this._emitEvent(this.options.eventItemsPerPage, detail);
-        } else if (evt.target.matches(this.options.selectorPageNumberInput)) {
+        } else if (eventMatches(evt, this.options.selectorPageNumberInput)) {
           const detail = {
             initialEvt: evt,
             element: evt.target,
@@ -85,7 +86,7 @@ class Pagination extends mixin(
   /**
    * Dispatches a custom event
    * @param {string} evtName name of the event to be dispatched.
-   * @param {Object} detail contains the original event and any other necessary details.
+   * @param {object} detail contains the original event and any other necessary details.
    */
   _emitEvent = (evtName, detail) => {
     const event = new CustomEvent(`${evtName}`, {

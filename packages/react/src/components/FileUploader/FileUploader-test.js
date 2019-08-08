@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import CloseFilled16 from '@carbon/icons-react/lib/close--filled/16';
+import { CloseFilled16 } from '@carbon/icons-react';
 import FileUploader, { FileUploaderButton, Filename } from '../FileUploader';
 import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
 import { mount, shallow } from 'enzyme';
@@ -74,8 +74,8 @@ describe('FileUploaderButton', () => {
       expect(wrapper.find('input').prop('disabled')).toEqual(true);
     });
 
-    it('does not have default role', () => {
-      expect(mountWrapper.props().role).not.toBeTruthy();
+    it('does have default role', () => {
+      expect(mountWrapper.props().role).toBeTruthy();
     });
 
     it('resets the input value onClick', () => {

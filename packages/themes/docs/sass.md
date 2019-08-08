@@ -14,6 +14,7 @@
   - [✅carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
   - [✅carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
   - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
+  - [✅carbon--theme--v9 [variable]](#carbon--theme--v9-variable)
   - [✅carbon--theme [variable]](#carbon--theme-variable)
   - [✅interactive-01 [variable]](#interactive-01-variable)
   - [✅interactive-02 [variable]](#interactive-02-variable)
@@ -33,6 +34,7 @@
   - [✅icon-02 [variable]](#icon-02-variable)
   - [✅icon-03 [variable]](#icon-03-variable)
   - [✅link-01 [variable]](#link-01-variable)
+  - [✅inverse-link [variable]](#inverse-link-variable)
   - [✅field-01 [variable]](#field-01-variable)
   - [✅field-02 [variable]](#field-02-variable)
   - [✅inverse-01 [variable]](#inverse-01-variable)
@@ -58,6 +60,7 @@
   - [✅active-ui [variable]](#active-ui-variable)
   - [✅selected-ui [variable]](#selected-ui-variable)
   - [✅hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [✅inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [✅hover-danger [variable]](#hover-danger-variable)
   - [✅active-danger [variable]](#active-danger-variable)
   - [✅hover-row [variable]](#hover-row-variable)
@@ -86,7 +89,7 @@ Define theme variables from a map of tokens
 <summary>Source code</summary>
 
 ```scss
-@mixin carbon--theme($theme: $carbon--theme) {
+@mixin carbon--theme($theme: $carbon--theme, $emit-custom-properties: false) {
   $interactive-01: map-get($theme, 'interactive-01') !global;
   $interactive-02: map-get($theme, 'interactive-02') !global;
   $interactive-03: map-get($theme, 'interactive-03') !global;
@@ -105,6 +108,7 @@ Define theme variables from a map of tokens
   $icon-02: map-get($theme, 'icon-02') !global;
   $icon-03: map-get($theme, 'icon-03') !global;
   $link-01: map-get($theme, 'link-01') !global;
+  $inverse-link: map-get($theme, 'inverse-link') !global;
   $field-01: map-get($theme, 'field-01') !global;
   $field-02: map-get($theme, 'field-02') !global;
   $inverse-01: map-get($theme, 'inverse-01') !global;
@@ -130,6 +134,7 @@ Define theme variables from a map of tokens
   $active-ui: map-get($theme, 'active-ui') !global;
   $selected-ui: map-get($theme, 'selected-ui') !global;
   $hover-selected-ui: map-get($theme, 'hover-selected-ui') !global;
+  $inverse-hover-ui: map-get($theme, 'inverse-hover-ui') !global;
   $hover-danger: map-get($theme, 'hover-danger') !global;
   $active-danger: map-get($theme, 'active-danger') !global;
   $hover-row: map-get($theme, 'hover-row') !global;
@@ -146,6 +151,69 @@ Define theme variables from a map of tokens
   $active-01: map-get($theme, 'active-01') !global;
   $hover-field: map-get($theme, 'hover-field') !global;
 
+  @if $emit-custom-properties == true {
+    --interactive-01: #{map-get($theme, 'interactive-01')};
+    --interactive-02: #{map-get($theme, 'interactive-02')};
+    --interactive-03: #{map-get($theme, 'interactive-03')};
+    --interactive-04: #{map-get($theme, 'interactive-04')};
+    --ui-background: #{map-get($theme, 'ui-background')};
+    --ui-01: #{map-get($theme, 'ui-01')};
+    --ui-02: #{map-get($theme, 'ui-02')};
+    --ui-03: #{map-get($theme, 'ui-03')};
+    --ui-04: #{map-get($theme, 'ui-04')};
+    --ui-05: #{map-get($theme, 'ui-05')};
+    --text-01: #{map-get($theme, 'text-01')};
+    --text-02: #{map-get($theme, 'text-02')};
+    --text-03: #{map-get($theme, 'text-03')};
+    --text-04: #{map-get($theme, 'text-04')};
+    --icon-01: #{map-get($theme, 'icon-01')};
+    --icon-02: #{map-get($theme, 'icon-02')};
+    --icon-03: #{map-get($theme, 'icon-03')};
+    --link-01: #{map-get($theme, 'link-01')};
+    --inverse-link: #{map-get($theme, 'inverse-link')};
+    --field-01: #{map-get($theme, 'field-01')};
+    --field-02: #{map-get($theme, 'field-02')};
+    --inverse-01: #{map-get($theme, 'inverse-01')};
+    --inverse-02: #{map-get($theme, 'inverse-02')};
+    --support-01: #{map-get($theme, 'support-01')};
+    --support-02: #{map-get($theme, 'support-02')};
+    --support-03: #{map-get($theme, 'support-03')};
+    --support-04: #{map-get($theme, 'support-04')};
+    --inverse-support-01: #{map-get($theme, 'inverse-support-01')};
+    --inverse-support-02: #{map-get($theme, 'inverse-support-02')};
+    --inverse-support-03: #{map-get($theme, 'inverse-support-03')};
+    --inverse-support-04: #{map-get($theme, 'inverse-support-04')};
+    --overlay-01: #{map-get($theme, 'overlay-01')};
+    --focus: #{map-get($theme, 'focus')};
+    --hover-primary: #{map-get($theme, 'hover-primary')};
+    --active-primary: #{map-get($theme, 'active-primary')};
+    --hover-primary-text: #{map-get($theme, 'hover-primary-text')};
+    --hover-secondary: #{map-get($theme, 'hover-secondary')};
+    --active-secondary: #{map-get($theme, 'active-secondary')};
+    --hover-tertiary: #{map-get($theme, 'hover-tertiary')};
+    --active-tertiary: #{map-get($theme, 'active-tertiary')};
+    --hover-ui: #{map-get($theme, 'hover-ui')};
+    --active-ui: #{map-get($theme, 'active-ui')};
+    --selected-ui: #{map-get($theme, 'selected-ui')};
+    --hover-selected-ui: #{map-get($theme, 'hover-selected-ui')};
+    --inverse-hover-ui: #{map-get($theme, 'inverse-hover-ui')};
+    --hover-danger: #{map-get($theme, 'hover-danger')};
+    --active-danger: #{map-get($theme, 'active-danger')};
+    --hover-row: #{map-get($theme, 'hover-row')};
+    --visited-link: #{map-get($theme, 'visited-link')};
+    --disabled-01: #{map-get($theme, 'disabled-01')};
+    --disabled-02: #{map-get($theme, 'disabled-02')};
+    --disabled-03: #{map-get($theme, 'disabled-03')};
+    --highlight: #{map-get($theme, 'highlight')};
+    --skeleton-01: #{map-get($theme, 'skeleton-01')};
+    --skeleton-02: #{map-get($theme, 'skeleton-02')};
+    --brand-01: #{map-get($theme, 'brand-01')};
+    --brand-02: #{map-get($theme, 'brand-02')};
+    --brand-03: #{map-get($theme, 'brand-03')};
+    --active-01: #{map-get($theme, 'active-01')};
+    --hover-field: #{map-get($theme, 'hover-field')};
+  }
+
   @content;
   // Reset to default theme after apply in content
   @if $theme != $carbon--theme {
@@ -158,9 +226,10 @@ Define theme variables from a map of tokens
 
 - **Parameters**:
 
-| Name     | Description         | Type  | Default value    |
-| -------- | ------------------- | ----- | ---------------- |
-| `$theme` | Map of theme tokens | `Map` | `$carbon--theme` |
+| Name                      | Description                                   | Type   | Default value    |
+| ------------------------- | --------------------------------------------- | ------ | ---------------- |
+| `$theme`                  | Map of theme tokens                           | `Map`  | `$carbon--theme` |
+| `$emit-custom-properties` | Output CSS Custom Properties for theme tokens | `Bool` | `false`          |
 
 **Example**:
 
@@ -208,6 +277,7 @@ Define theme variables from a map of tokens
   - [icon-02 [variable]](#icon-02-variable)
   - [icon-03 [variable]](#icon-03-variable)
   - [link-01 [variable]](#link-01-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [field-01 [variable]](#field-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
@@ -233,6 +303,7 @@ Define theme variables from a map of tokens
   - [active-ui [variable]](#active-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [active-danger [variable]](#active-danger-variable)
   - [hover-row [variable]](#hover-row-variable)
@@ -260,7 +331,7 @@ Carbon's white color theme
 ```scss
 $carbon--theme--white: (
   interactive-01: #0062ff,
-  interactive-02: #171717,
+  interactive-02: #3d3d3d,
   interactive-03: #0062ff,
   interactive-04: #0062ff,
   ui-background: #ffffff,
@@ -277,6 +348,7 @@ $carbon--theme--white: (
   icon-02: #565656,
   icon-03: #ffffff,
   link-01: #0062ff,
+  inverse-link: #6ea6ff,
   field-01: #f3f3f3,
   field-02: #ffffff,
   inverse-01: #ffffff,
@@ -301,6 +373,7 @@ $carbon--theme--white: (
   hover-ui: #e5e5e5,
   active-ui: #bebebe,
   selected-ui: #dcdcdc,
+  inverse-hover-ui: #4c4c4c,
   hover-selected-ui: #cacaca,
   hover-danger: #ba1b23,
   active-danger: #750e13,
@@ -313,7 +386,7 @@ $carbon--theme--white: (
   skeleton-01: #e5e5e5,
   skeleton-02: #bebebe,
   brand-01: #0062ff,
-  brand-02: #171717,
+  brand-02: #3d3d3d,
   brand-03: #0062ff,
   active-01: #bebebe,
   hover-field: #e5e5e5,
@@ -337,7 +410,7 @@ Carbon's g10 color theme
 ```scss
 $carbon--theme--g10: (
   interactive-01: #0062ff,
-  interactive-02: #171717,
+  interactive-02: #3d3d3d,
   interactive-03: #0062ff,
   interactive-04: #0062ff,
   ui-background: #f3f3f3,
@@ -354,6 +427,7 @@ $carbon--theme--g10: (
   icon-02: #565656,
   icon-03: #ffffff,
   link-01: #0062ff,
+  inverse-link: #6ea6ff,
   field-01: #ffffff,
   field-02: #f3f3f3,
   inverse-01: #ffffff,
@@ -378,6 +452,7 @@ $carbon--theme--g10: (
   hover-ui: #e5e5e5,
   active-ui: #bebebe,
   selected-ui: #dcdcdc,
+  inverse-hover-ui: #4c4c4c,
   hover-selected-ui: #cacaca,
   hover-danger: #ba1b23,
   active-danger: #750e13,
@@ -390,7 +465,7 @@ $carbon--theme--g10: (
   skeleton-01: #e5e5e5,
   skeleton-02: #bebebe,
   brand-01: #0062ff,
-  brand-02: #171717,
+  brand-02: #3d3d3d,
   brand-03: #0062ff,
   active-01: #bebebe,
   hover-field: #e5e5e5,
@@ -429,6 +504,7 @@ $carbon--theme--g90: (
   icon-02: #bebebe,
   icon-03: #ffffff,
   link-01: #6ea6ff,
+  inverse-link: #0062ff,
   field-01: #3d3d3d,
   field-02: #565656,
   inverse-01: #171717,
@@ -445,14 +521,15 @@ $carbon--theme--g90: (
   focus: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  hover-primary-text: #97c1ff,
   hover-secondary: #606060,
   active-secondary: #3d3d3d,
   hover-tertiary: #f3f3f3,
   active-tertiary: #bebebe,
-  hover-ui: #353535,
+  hover-ui: #4c4c4c,
   active-ui: #6f6f6f,
   selected-ui: #565656,
+  inverse-hover-ui: #e5e5e5,
   hover-selected-ui: #656565,
   hover-danger: #ba1b23,
   active-danger: #750e13,
@@ -461,14 +538,14 @@ $carbon--theme--g90: (
   disabled-01: #3d3d3d,
   disabled-02: #565656,
   disabled-03: #8c8c8c,
-  highlight: #061f80,
+  highlight: #054ada,
   skeleton-01: #353535,
   skeleton-02: #565656,
   brand-01: #0062ff,
   brand-02: #6f6f6f,
   brand-03: #ffffff,
   active-01: #6f6f6f,
-  hover-field: #353535,
+  hover-field: #4c4c4c,
 );
 ```
 
@@ -504,6 +581,7 @@ $carbon--theme--g100: (
   icon-02: #bebebe,
   icon-03: #ffffff,
   link-01: #6ea6ff,
+  inverse-link: #0062ff,
   field-01: #282828,
   field-02: #3d3d3d,
   inverse-01: #171717,
@@ -520,7 +598,7 @@ $carbon--theme--g100: (
   focus: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  hover-primary-text: #97c1ff,
   hover-secondary: #606060,
   active-secondary: #3d3d3d,
   hover-tertiary: #f3f3f3,
@@ -528,6 +606,7 @@ $carbon--theme--g100: (
   hover-ui: #353535,
   active-ui: #565656,
   selected-ui: #3d3d3d,
+  inverse-hover-ui: #e5e5e5,
   hover-selected-ui: #4c4c4c,
   hover-danger: #ba1b23,
   active-danger: #750e13,
@@ -536,7 +615,7 @@ $carbon--theme--g100: (
   disabled-01: #282828,
   disabled-02: #3d3d3d,
   disabled-03: #6f6f6f,
-  highlight: #061f80,
+  highlight: #0530ad,
   skeleton-01: #353535,
   skeleton-02: #3d3d3d,
   brand-01: #0062ff,
@@ -544,6 +623,83 @@ $carbon--theme--g100: (
   brand-03: #ffffff,
   active-01: #565656,
   hover-field: #353535,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Map`
+
+### ✅carbon--theme--v9 [variable]
+
+Carbon's v9 color theme
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--theme--v9: (
+  interactive-01: #3d70b2,
+  interactive-02: #5a6872,
+  interactive-03: #5a6872,
+  interactive-04: #3d70b2,
+  ui-background: #f4f7fb,
+  ui-01: #ffffff,
+  ui-02: #f4f7fb,
+  ui-03: #dfe3e6,
+  ui-04: #8897a2,
+  ui-05: #5a6872,
+  text-01: #152935,
+  text-02: #5a6872,
+  text-03: #cdd1d4,
+  text-04: #ffffff,
+  icon-01: #3d70b2,
+  icon-02: #5a6872,
+  icon-03: #ffffff,
+  link-01: #3d70b2,
+  inverse-link: #5596e6,
+  field-01: #ffffff,
+  field-02: #f4f7fb,
+  inverse-01: #ffffff,
+  inverse-02: #272d33,
+  support-01: #e0182d,
+  support-02: #5aa700,
+  support-03: #efc100,
+  support-04: #5aaafa,
+  inverse-support-01: #ff5050,
+  inverse-support-02: #8cd211,
+  inverse-support-03: #fdd600,
+  inverse-support-04: #5aaafa,
+  overlay-01: rgba(223, 227, 230, 0.5),
+  focus: #3d70b2,
+  hover-primary: #30588c,
+  active-primary: #30588c,
+  hover-primary-text: #294c86,
+  hover-secondary: #4d5b65,
+  active-secondary: #414f59,
+  hover-tertiary: #5a6872,
+  active-tertiary: #414f59,
+  hover-ui: #eef4fc,
+  active-ui: #dfeafa,
+  selected-ui: #eef4fc,
+  inverse-hover-ui: #4c4c4c,
+  hover-selected-ui: #dfeafa,
+  hover-danger: #c70014,
+  active-danger: #ad1625,
+  hover-row: #eef4fc,
+  visited-link: #294c86,
+  disabled-01: #fafbfd,
+  disabled-02: #dfe3e6,
+  disabled-03: #cdd1d4,
+  highlight: #f4f7fb,
+  skeleton-01: rgba(61, 112, 178, 0.1),
+  skeleton-02: rgba(61, 112, 178, 0.1),
+  brand-01: #3d70b2,
+  brand-02: #5a6872,
+  brand-03: #5a6872,
+  active-01: #dfeafa,
+  hover-field: #eef4fc,
 );
 ```
 
@@ -892,6 +1048,22 @@ Primary links; Ghost button
 
 ```scss
 $link-01: map-get($carbon--theme, 'link-01');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-link [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-link: map-get($carbon--theme, 'inverse-link');
 ```
 
 </details>
@@ -1346,6 +1518,22 @@ Data table selected row hover
 
 ```scss
 $hover-selected-ui: map-get($carbon--theme, 'hover-selected-ui');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-hover-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-hover-ui: map-get($carbon--theme, 'inverse-hover-ui');
 ```
 
 </details>

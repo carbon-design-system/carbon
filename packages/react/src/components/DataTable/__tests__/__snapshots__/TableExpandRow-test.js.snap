@@ -37,34 +37,38 @@ exports[`DataTable.TableExpandRow should render 1`] = `
                   className="bx--table-expand__button"
                   onClick={[MockFunction]}
                 >
-                  <ChevronRight16
+                  <ForwardRef(ChevronRight16)
                     className="bx--table-expand__svg"
-                    height={16}
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 16 16"
-                    width={16}
-                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <svg
-                      aria-hidden={true}
+                    <Icon
                       className="bx--table-expand__svg"
-                      focusable="false"
                       height={16}
                       preserveAspectRatio="xMidYMid meet"
-                      style={
-                        Object {
-                          "willChange": "transform",
-                        }
-                      }
                       viewBox="0 0 16 16"
                       width={16}
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <path
-                        d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
-                      />
-                    </svg>
-                  </ChevronRight16>
+                      <svg
+                        aria-hidden={true}
+                        className="bx--table-expand__svg"
+                        focusable="false"
+                        height={16}
+                        preserveAspectRatio="xMidYMid meet"
+                        style={
+                          Object {
+                            "willChange": "transform",
+                          }
+                        }
+                        viewBox="0 0 16 16"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
+                        />
+                      </svg>
+                    </Icon>
+                  </ForwardRef(ChevronRight16)>
                 </button>
               </td>
             </TableCell>

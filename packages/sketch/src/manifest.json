@@ -45,6 +45,18 @@
       "identifier": "carbon.elements.icons.generate",
       "script": "commands/index.js",
       "handler": "generateIcons"
+    },
+    {
+      "name": "Run symbol-id-sync fixture",
+      "identifier": "carbon.elements.icons.fixture.symbol-id-sync",
+      "script": "commands/index.js",
+      "handler": "testSyncSymbolId"
+    },
+    {
+      "name": "Run shared-styles-sync fixture",
+      "identifier": "carbon.elements.icons.fixture.shared-styles-sync",
+      "script": "commands/index.js",
+      "handler": "testSyncSharedStyles"
     }
   ],
   "menu": {
@@ -74,6 +86,13 @@
         "items": [
           "carbon.elements.type.sync",
           "carbon.elements.type.generate"
+        ]
+      },
+      {
+        "title": "Test",
+        "items": [
+          "carbon.elements.icons.fixture.symbol-id-sync",
+          "carbon.elements.icons.fixture.shared-styles-sync"
         ]
       }
     ]

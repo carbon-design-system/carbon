@@ -9,7 +9,6 @@
 
 const { reporter } = require('@carbon/cli-reporter');
 const { pascal } = require('change-case');
-const del = require('del');
 const fs = require('fs-extra');
 const path = require('path');
 const prettier = require('prettier');
@@ -18,9 +17,9 @@ const { flatMapAsync } = require('./tools');
 const { parse } = require('./svgo');
 const optimize = require('./optimize');
 
-const SCALED_SIZES = [24, 20];
+const SCALED_SIZES = [24, 20, 16];
 const prettierOptions = {
-  parser: 'babylon',
+  parser: 'babel',
   printWidth: 80,
   singleQuote: true,
   trailingComma: 'es5',
@@ -60,7 +59,7 @@ async function build(source, { cwd } = {}) {
 
   // Build up icon index. Useful for looking up size info for a particular icon.
   const index = optimized.reduce((acc, icon) => {
-    const { basename, prefix, size } = icon;
+    const { basename, prefix } = icon;
     const key = getIndexName(basename, prefix);
     if (acc[key]) {
       return {
@@ -103,7 +102,7 @@ async function build(source, { cwd } = {}) {
   reporter.info('Building JavaScript modules...');
 
   const output = await flatMapAsync(files, async file => {
-    const { basename, descriptor, moduleName, prefix, size, source } = file;
+    const { basename, moduleName, prefix, size, source } = file;
     const formattedPrefix = prefix.filter(step => isNaN(step));
     const moduleFolder = path.join(esmFolder, ...formattedPrefix, basename);
     const jsFilepath = path.join(
@@ -140,7 +139,6 @@ async function build(source, { cwd } = {}) {
   });
 
   reporter.info('Building module entrypoints...');
-  const moduleNames = files.map(file => file.moduleName);
   const entrypoint = prettier.format(
     files.reduce((acc, file) => {
       const { moduleName, descriptor } = file;
@@ -191,9 +189,13 @@ async function build(source, { cwd } = {}) {
     };
   });
 
-  await fs.writeJson(path.resolve(__dirname, '../meta.json'), formattedOutput, {
-    spaces: 2,
-  });
+  await fs.writeJson(
+    path.resolve(__dirname, '../build-info.json'),
+    formattedOutput,
+    {
+      spaces: 2,
+    }
+  );
 
   reporter.success('Done! 🎉');
 }
@@ -234,7 +236,7 @@ function createIconSource(file, descriptor) {
 }
 
 async function createDescriptorFromFile(file) {
-  const { basename, size, optimized, original, prefix } = file;
+  const { basename, size, optimized, original } = file;
   const info = await parse(optimized.data, basename);
   const descriptor = {
     ...info,
@@ -264,7 +266,7 @@ async function createDescriptorFromFile(file) {
   };
 }
 
-function getIndexName(basename, prefix, size) {
+function getIndexName(basename, prefix) {
   return prefix
     .filter(part => isNaN(part))
     .concat(basename)

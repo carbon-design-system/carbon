@@ -94,7 +94,7 @@ describe('DataTable', () => {
               </TableBatchActions>
               <TableToolbarContent>
                 <TableToolbarSearch
-                  persistant
+                  persistent
                   onChange={onInputChange}
                   id="custom-id"
                 />

@@ -11,8 +11,9 @@ import { settings } from 'carbon-components';
 
 import { withKnobs, select, text, number } from '@storybook/addon-knobs';
 import Tooltip from '../Tooltip';
+import Button from '../Button';
 
-import OverflowMenuVertical16 from '@carbon/icons-react/lib/overflow-menu--vertical/16';
+import { OverflowMenuVertical16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
 const directions = {
@@ -76,11 +77,7 @@ storiesOf('Tooltip', module)
             <a href="/" className={`${prefix}--link`}>
               Learn More
             </a>
-            <button
-              className={`${prefix}--btn ${prefix}--btn--primary`}
-              type="button">
-              Create
-            </button>
+            <Button size="small">Create</Button>
           </div>
         </Tooltip>
       </div>
@@ -109,11 +106,7 @@ storiesOf('Tooltip', module)
             <a href="/" className={`${prefix}--link`}>
               Learn More
             </a>
-            <button
-              className={`${prefix}--btn ${prefix}--btn--primary`}
-              type="button">
-              Create
-            </button>
+            <Button size="small">Create</Button>
           </div>
         </Tooltip>
       </div>
@@ -142,11 +135,7 @@ storiesOf('Tooltip', module)
             <a href="/" className={`${prefix}--link`}>
               Learn More
             </a>
-            <button
-              className={`${prefix}--btn ${prefix}--btn--primary`}
-              type="button">
-              Create
-            </button>
+            <Button size="small">Create</Button>
           </div>
         </Tooltip>
       </div>
@@ -175,11 +164,7 @@ storiesOf('Tooltip', module)
             <a href="/" className={`${prefix}--link`}>
               Learn More
             </a>
-            <button
-              className={`${prefix}--btn ${prefix}--btn--primary`}
-              type="button">
-              Create
-            </button>
+            <Button size="small">Create</Button>
           </div>
         </Tooltip>
       </div>

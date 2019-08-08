@@ -5,7 +5,7 @@ const BABEL_ENV = process.env.BABEL_ENV;
 module.exports = () => ({
   presets: [
     [
-      '@babel/preset-env',
+      require.resolve('@babel/preset-env'),
       {
         modules: BABEL_ENV === 'es' ? false : 'commonjs',
         targets: {

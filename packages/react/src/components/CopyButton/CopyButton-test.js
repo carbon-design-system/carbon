@@ -7,7 +7,7 @@
 
 import React from 'react';
 import CopyButton from '../CopyButton';
-import Copy16 from '@carbon/icons-react/lib/copy/16';
+import { Copy16 } from '@carbon/icons-react';
 import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
 
