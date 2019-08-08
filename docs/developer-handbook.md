@@ -142,9 +142,9 @@ additional files that you can include in your project, most notably a common
 
 For example, in `@carbon/colors` we can import the `carbon--colors` mixin by
 importing `@carbon/colors/scss/mixins.scss`. These types of files are guaranteed
-to have no, or minimal, side-effects. The only side-effects that are emitted
-are global variable initializations as this is required behavior in newer
-versions of Sass.
+to have no, or minimal, side-effects. The only side-effects that are emitted are
+global variable initializations as this is required behavior in newer versions
+of Sass.
 
 Using these `mixins.scss` entrypoints allows you as an application developer to
 control when these side-effects are applied in your project.
