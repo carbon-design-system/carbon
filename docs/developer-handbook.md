@@ -153,9 +153,9 @@ control when these side-effects are applied in your project.
 ## Commit conventions
 
 This project follows a structured format for writing commit messages. The main
-benefit of this approached approach is that we can use these details to
-automatically generate things like changelogs, in addition to clarifying what
-changes correspond to when looking at our Git history.
+benefit of this approach is that we can use these details to automatically
+generate things like changelogs, in addition to clarifying what changes
+correspond to when looking at our Git history.
 
 ### Commit message format
 
