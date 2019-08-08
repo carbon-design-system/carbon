@@ -7,6 +7,7 @@
 
 @import '../vendor/@carbon/layout/convert';
 @import 'font-family';
+@import './styles.scss';
 
 /// Include a type reset for a given body and mono font family
 /// @param {Number} $base-font-size [$carbon--base-font-size] - The base font size for your document
@@ -36,27 +37,27 @@
   }
 
   h1 {
-    @include type-style('productive-heading-05');
+    @include carbon--type-style('productive-heading-05');
   }
 
   h2 {
-    @include type-style('productive-heading-04');
+    @include carbon--type-style('productive-heading-04');
   }
 
   h3 {
-    @include type-style('productive-heading-03');
+    @include carbon--type-style('productive-heading-03');
   }
 
   h4 {
-    @include type-style('productive-heading-02');
+    @include carbon--type-style('productive-heading-02');
   }
 
   h5 {
-    @include type-style('productive-heading-01');
+    @include carbon--type-style('productive-heading-01');
   }
 
   p {
-    @include type-style('body-long-02');
+    @include carbon--type-style('body-long-02');
   }
 
   a {

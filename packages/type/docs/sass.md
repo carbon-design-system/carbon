@@ -759,27 +759,27 @@ Include a type reset for a given body and mono font family
   }
 
   h1 {
-    @include type-style('productive-heading-05');
+    @include carbon--type-style('productive-heading-05');
   }
 
   h2 {
-    @include type-style('productive-heading-04');
+    @include carbon--type-style('productive-heading-04');
   }
 
   h3 {
-    @include type-style('productive-heading-03');
+    @include carbon--type-style('productive-heading-03');
   }
 
   h4 {
-    @include type-style('productive-heading-02');
+    @include carbon--type-style('productive-heading-02');
   }
 
   h5 {
-    @include type-style('productive-heading-01');
+    @include carbon--type-style('productive-heading-01');
   }
 
   p {
-    @include type-style('body-long-02');
+    @include carbon--type-style('body-long-02');
   }
 
   a {
@@ -808,6 +808,7 @@ Include a type reset for a given body and mono font family
 
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
   - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
 
 ### ✅carbon--font-face-sans [mixin]
@@ -2965,3 +2966,4 @@ fixed contexts.
   - [tokens [variable]](#tokens-variable)
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
+  - [carbon--type-reset [mixin]](#carbon--type-reset-mixin)
