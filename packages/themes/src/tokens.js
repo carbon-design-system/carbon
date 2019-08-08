@@ -71,6 +71,7 @@ const colors = [
 
   'selectedUI',
   'hoverSelectedUI',
+  'inverseHoverUI',
 
   'hoverDanger',
   'activeDanger',
