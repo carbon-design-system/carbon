@@ -748,7 +748,7 @@ Include a type reset for a given body and mono font family
 
   body {
     font-family: $body-font-family;
-    font-weight: 400;
+    @include carbon--font-weight('regular');
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -783,7 +783,7 @@ Include a type reset for a given body and mono font family
   }
 
   a {
-    color: $link-01;
+    color: #0062ff;
   }
 
   em {
@@ -808,8 +808,8 @@ Include a type reset for a given body and mono font family
 
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
-  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
   - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
 
 ### ✅carbon--font-face-sans [mixin]
 

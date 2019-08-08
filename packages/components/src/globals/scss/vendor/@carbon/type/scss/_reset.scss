@@ -7,7 +7,7 @@
 
 @import '@carbon/layout/scss/convert';
 @import 'font-family';
-@import './styles.scss';
+@import 'styles';
 
 /// Include a type reset for a given body and mono font family
 /// @param {Number} $base-font-size [$carbon--base-font-size] - The base font size for your document
@@ -26,7 +26,7 @@
 
   body {
     font-family: $body-font-family;
-    font-weight: 400;
+    @include carbon--font-weight('regular');
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -61,7 +61,7 @@
   }
 
   a {
-    color: $link-01;
+    color: #0062ff;
   }
 
   em {

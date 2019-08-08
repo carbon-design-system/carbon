@@ -26,7 +26,7 @@
 
   body {
     font-family: $body-font-family;
-    font-weight: 400;
+    @include carbon--font-weight('regular');
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -61,7 +61,7 @@
   }
 
   a {
-    color: $link-01;
+    color: #0062ff;
   }
 
   em {
