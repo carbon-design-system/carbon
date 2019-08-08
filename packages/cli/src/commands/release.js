@@ -52,6 +52,8 @@ async function release({ bump }) {
 
   logger.start('Getting latest tag');
 
+  // Make sure we've fetched the latest tags from upstream
+  await execa('git', ['pull', 'upstream', '--tags']);
   const { stdout: tagInfo } = await execa('git', [
     'tag',
     '-l',
