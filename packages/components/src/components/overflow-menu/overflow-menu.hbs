@@ -11,10 +11,10 @@
     <span class="{{@root.prefix}}--assistive-text">Overflow</span>
     {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
   </button>
-  <div class="{{@root.prefix}}--overflow-menu-wrapper">
-    <ul class="{{@root.prefix}}--overflow-menu-options" tabindex="-1" role="menu"
-      aria-labelledby="{{idSuffix.default}}-trigger" data-floating-menu-direction="{{direction}}"
-      id="{{idSuffix.default}}">
+  <div class="{{@root.prefix}}--overflow-menu-options" tabindex="-1" role="menu"
+    aria-labelledby="{{idSuffix.default}}-trigger" data-floating-menu-direction="{{direction}}"
+    id="{{idSuffix.default}}">
+    <ul  class="{{@root.prefix}}--overflow-menu-options__content">
       {{#each items}}
       <li
         class="{{@root.prefix}}--overflow-menu-options__option {{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled {{/if}} {{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger {{/if}}">
@@ -39,10 +39,10 @@
     <span class="{{@root.prefix}}--assistive-text">Overflow</span>
     {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
   </button>
-  <div class="{{@root.prefix}}--overflow-menu-wrapper">
-    <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1"
-      data-floating-menu-direction="{{direction}}" role="menu" aria-labelledby="{{idSuffix.flip}}-trigger"
-      id="{{idSuffix.flip}}">
+  <div class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1"
+    data-floating-menu-direction="{{direction}}" role="menu" aria-labelledby="{{idSuffix.flip}}-trigger"
+    id="{{idSuffix.flip}}">
+    <ul  class="{{@root.prefix}}--overflow-menu-options__content">
       {{#each items}}
       <li
         class="{{@root.prefix}}--overflow-menu-options__option {{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled {{/if}} {{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger {{/if}}">
@@ -66,10 +66,10 @@
     <span class="{{@root.prefix}}--assistive-text">Overflow</span>
     {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
   </button>
-  <div class="{{@root.prefix}}--overflow-menu-wrapper">
-    <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1"
-      data-floating-menu-direction="{{direction}}" role="menu" aria-labelledby="{{idSuffix.link}}-trigger"
-      id="{{idSuffix.link}}">
+  <div class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1"
+    data-floating-menu-direction="{{direction}}" role="menu" aria-labelledby="{{idSuffix.link}}-trigger"
+    id="{{idSuffix.link}}">
+    <ul  class="{{@root.prefix}}--overflow-menu-options__content">
       {{#each items}}
       <li
         class="{{@root.prefix}}--overflow-menu-options__option{{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled{{/if}}{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}">

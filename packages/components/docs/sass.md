@@ -14986,6 +14986,10 @@ Overflow menu styles
     display: flex;
   }
 
+  .#{$prefix}--overflow-menu-options__content {
+    width: 100%;
+  }
+
   .#{$prefix}--overflow-menu-options__option {
     @include reset;
     display: flex;
