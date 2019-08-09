@@ -8221,7 +8221,7 @@ icons:
           - name: Brand
             subcategory: IBM
   - name: 3D-Cursor
-    friendly_name: 3 d cursor
+    friendly_name: 3D cursor
     usage: This is a description for usage
     categories:
       - name: Enterprise
@@ -8231,7 +8231,7 @@ icons:
     sizes:
       - 32
   - name: 3D-MPR-Toggle
-    friendly_name: 3 d mpr toggle
+    friendly_name: 3D mpr toggle
     usage: This is a description for usage
     categories:
       - name: Enterprise
@@ -8241,7 +8241,7 @@ icons:
     sizes:
       - 32
   - name: 3D-curve
-    friendly_name: 3 d curve
+    friendly_name: 3D curve
     usage: This is a description for usage
     categories: []
     aliases:
@@ -8250,7 +8250,7 @@ icons:
       - spline
     variants:
       - name: 3D-curve--auto-colon
-        friendly_name: 3 d curve auto colon
+        friendly_name: 3D curve auto colon
         usage: This is a description for usage
         sizes:
           - 32
@@ -8258,7 +8258,7 @@ icons:
           - name: Enterprise
             subcategory: Health
       - name: 3D-curve--auto-vessels
-        friendly_name: 3 d curve auto vessels
+        friendly_name: 3D curve auto vessels
         usage: This is a description for usage
         sizes:
           - 32
@@ -8266,7 +8266,7 @@ icons:
           - name: Enterprise
             subcategory: Health
       - name: 3D-curve--manual
-        friendly_name: 3 d curve manual
+        friendly_name: 3D curve manual
         usage: This is a description for usage
         sizes:
           - 32
@@ -8274,7 +8274,7 @@ icons:
           - name: Enterprise
             subcategory: Health
   - name: 3D-software
-    friendly_name: 3 d software
+    friendly_name: 3D software
     usage: This is a description for usage
     categories:
       - name: Enterprise
@@ -8471,7 +8471,7 @@ icons:
     sizes:
       - 32
   - name: iCA-3D
-    friendly_name: I ca 3 d
+    friendly_name: I ca 3D
     usage: This is a description for usage
     categories:
       - name: Enterprise
