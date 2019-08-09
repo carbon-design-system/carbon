@@ -48,11 +48,8 @@ export function syncIconSymbols(
   //  const start = 50;
   //  const end = 51;
   // This will allow you to focus only on the icon named 'name-to-find'
-  const start = iconNames.findIndex(name => {
-    return name === 'error--filled';
-  });
-  const end = start + 1;
-  // const end = iconNames.length;
+  const start = 0;
+  const end = iconNames.length;
 
   // We keep track of the current X and Y offsets at the top-level, each
   // iteration of an icon set should reset the X_OFFSET and update the
