@@ -1,9 +1,84 @@
-$css--font-face: true;
-$css--reset: true;
+////////////////////////////////////////////////////////////////////////////////
+// These token transformations and defining custom properties in the `:root`
+// declaration block would need to be done in Carbon's default build. This set-
+// up is just to demonstrate how we can theme with custom properties.
+////////////////////////////////////////////////////////////////////////////////
 
-$prefix: 'bx';
+@import '~carbon-components/src/globals/scss/vendor/@carbon/elements/scss/themes/mixins';
+@import '~carbon-components/src/globals/scss/vendor/@carbon/elements/scss/type/font-family';
+@import '~carbon-components/src/globals/scss/vendor/@carbon/elements/scss/type/styles';
 
-// IMPORTANT: This import path should _not_ be used outside our source tree
-// as `src` directory is _not_ meant to be shipped in our NPM package.
-// Use e.g. `@import '~carbon-components/scss/globals/scss/styles.scss'` instead.
-@import '~carbon-components/src/globals/scss/styles.scss'; // SEE THE NOTE ABOVE
+// transform color tokens as custom property variables instead of hex values
+// `$interactive-01: #0062ff;` becomes `$interactive-01: var(--interactive-01);`
+@each $key in map-keys($carbon--theme--white) {
+  $carbon--theme: map-merge(
+    $carbon--theme,
+    (
+      $key: var(--#{$key}),
+    )
+  );
+}
+
+// initialize custom properties
+// `--interactive-01: #0062ff;`
+:root {
+  @include carbon--theme($carbon--theme--white, true);
+
+  @each $tokenKey, $tokenValue in $tokens {
+    @each $key, $value in map-remove($tokenValue, 'breakpoints') {
+      --#{$tokenKey}-#{$key}: #{$value};
+    }
+  }
+}
+
+// transform type tokens as custom property variables instead px, rem, etc.
+@each $tokenKey, $token in $tokens {
+  $tokenIndex: index(($tokens), ($tokenKey $token));
+  $tokenNoBreakpoints: map-remove($token, 'breakpoints');
+
+  @each $propertyKey, $property in $tokenNoBreakpoints {
+    $propertyIndex: index(($token), ($propertyKey $property));
+    $propertyValue: var(--#{$tokenKey}-#{$propertyKey});
+
+    $tokenNoBreakpoints: map-merge(
+      $tokenNoBreakpoints,
+      (
+        $propertyKey: $propertyValue,
+      )
+    );
+  }
+
+  $tokens: map-merge(
+    $tokens,
+    (
+      $tokenKey: $tokenNoBreakpoints,
+    )
+  );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Below is an example of how one would build a custom theme.
+////////////////////////////////////////////////////////////////////////////////
+
+// import Carbon
+@import '~carbon-components/src/globals/scss/styles.scss';
+
+// treats accordion like a zone so the type changes affect the title and content
+.#{$prefix}--accordion {
+  --body-long-01-font-size: 1rem;
+  --body-long-01-line-height: 1.5rem;
+  --body-long-01-letter-spacing: 0;
+}
+
+// treats the element like a zone to override properties
+.#{$prefix}--accordion__heading {
+  --padding-top: #{rem(12px)};
+  --padding-bottom: #{rem(12px)};
+}
+
+// treats the element like a zone to override properties
+.#{$prefix}--accordion__arrow {
+  --flex-basis: 1.25rem;
+  --width: 1.25rem;
+  --height: 1.25rem;
+}

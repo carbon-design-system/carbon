@@ -503,7 +503,7 @@ $tokens: (
   display-02: $display-02,
   display-03: $display-03,
   display-04: $display-04,
-);
+) !default;
 
 /// @param {Map} $map
 /// @access public
