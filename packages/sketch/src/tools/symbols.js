@@ -89,7 +89,11 @@ function syncSymbolLayers(sharedLayerStyles, original, proposed) {
         });
 
         if (sharedStyle) {
+          const opacity = originalLayer.style.opacity;
           originalLayer.style.syncWithSharedStyle(sharedStyle);
+          // We'll want to keep things like opacity from being overridden by the
+          // shared style as we use it to hide layers in certain icons
+          originalLayer.style.opacity = opacity;
         }
       }
 
