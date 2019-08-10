@@ -227,6 +227,293 @@ categories:
     - file transfer
     - folder
     - rich text format
-  - name: File
+  - name: Healthcare
     members:
-    -
+    - care
+    - doctor
+    - heart health
+    - hospital
+    - medical
+    - medical charts
+    - medical staff
+    - pill bottle 1
+    - pills
+    - stethoscope
+  - name: Home
+    members:
+    - door handle
+    - faucet
+    - home front
+    - home garage
+    - home profile
+    - intercom
+    - shower
+    - wireless modem
+    - wireless xhome
+  - name: IBM
+    members:
+    - bee
+    - enterprise design thinking
+    - enterprise design thinking alternate
+    - eye
+    - ibm ix
+    - progress
+  - name: Industry
+    members:
+    - agriculture
+    - bulldozer
+    - farm
+    - oil pump
+    - oil rig
+    - power
+    - recycle
+    - refinery
+    - satellite
+    - satellite
+    - steel
+    - telecom
+    - tractor
+    - weather
+    - wheat
+    - wind power
+    - wine
+    - wrecking ball
+  - name: Internet of Things
+    members:
+    - build
+    - connect
+    - iot munich
+    - solve
+    - transform
+  - name: Life Science
+    members:
+    - cell
+    - dna
+    - erlenmeyer flask
+    - heart
+    - lungs
+    - magnify
+    - microorganisms
+    - microscope
+    - mortar and pestle
+    - petri culture
+    - test tubes
+    - virus
+  - name: Lifestyle
+    members:
+    - apple
+    - cherries
+    - hard ice cream
+    - perfume
+    - scale
+    - soft ice cream
+    - stationary bicycle
+    - tennis
+    - yoga 1
+    - yoga 2
+    - yoga 3
+    - yoga 4
+  - name: Location
+    members:
+    - americas
+    - asia-australia
+    - europe-africa
+    - globe
+    - globe locations
+    - location
+  - name: Machine Learning
+    members:
+    - intelligence
+    - machine learning 1
+    - machine learning 2
+    - machine learning 3
+    - machine learning 4
+    - machine learning 5
+    - machine learning 6
+  - name: Manufacturing
+    members:
+    - delivery truck
+    - factory
+    - forklift
+    - robot
+    - robotics
+    - tools
+  - name: Networking
+    members:
+    - global network
+    - integration
+    - network
+    - network services
+    - networking 01
+    - networking 02
+    - networking 03
+    - networking 04
+    - networking 05
+    - private network 01
+    - private network 01 alt
+    - private network 02
+    - private network 02 alt
+    - reset hybrid cloud
+    - reset settings
+    - support services
+    - transform
+  - name: People
+    members:
+    - advocate
+    - expand user
+    - face dissatisfied
+    - face neutral
+    - face satisfied
+    - face very dissatisfied
+    - face very satisfied
+    - group
+    - handicap
+    - handicap active
+    - high five
+    - key users
+    - multitask
+    - partner relationship
+    - person 01
+    - person 02
+    - person 03
+    - person 04
+    - person 05
+    - person 06
+    - person 07
+    - person 08
+    - person 09
+    - renew team
+    - user search
+  - name: Retail
+    members:
+    - bag
+    - coat hanger
+    - credit card
+    - customer service
+    - price
+    - receipt
+    - shop
+    - shopping cart
+    - sneaker
+    - tags
+  - name: Security
+    members:
+    - firewall
+    - lock
+    - lock alt 01
+    - locked network
+    - locked network alt 01
+    - secure profile
+    - security
+    - security shield
+    - unlock
+    - unlock alt 01
+  - name: Status
+    members:
+    - question
+    - warning
+    - warning alternate
+  - name: Strategy
+    members:
+    - financial consultant
+    - financial gain
+    - financial news
+    - global finance euro
+    - global finance sterling
+    - innovate
+    - presentation
+    - presenter
+    - puzzle
+    - strategy
+    - strategy direct
+    - strategy move
+    - strategy play
+    - streamline
+    - target
+    - target area
+  - name: Time
+    members:
+    - calendar
+    - calendar date
+    - calendar event
+    - meter
+    - speedometer
+    - time
+    - timelapse
+  - name: Transportation
+    members:
+    - airplane
+    - automobile
+    - bicycle
+    - bus
+    - electric charge
+    - engine
+    - fuel
+    - spaceship
+    - steering-wheel
+    - train
+  - name: Watson
+    members:
+    - alchamy language alphabet a expanded
+    - alchemy data-news
+    - alchemy language
+    - alchemy vision
+    - analyzes data
+    - concept expansion
+    - concept insights
+    - conversation
+    - data insights
+    - deliver insights
+    - dialogue
+    - document conversion
+    - knows dark data
+    - language
+    - language 01
+    - language 02
+    - language 03
+    - language 04
+    - language translation
+    - language translation alphabet a expanded
+    - natural language classifier
+    - personality insights
+    - question and answer
+    - relationship extraction
+    - retrieve and rank
+    - speech
+    - speech alphabet a expanded
+    - speech to text
+    - text to speech
+    - tone analyzer
+    - tradeoff analytics
+    - vision
+    - visual insights
+    - visual recognition
+    - watson avatar
+  - name: Weather
+    members:
+    - cloudy
+    - cloudy dewy
+    - cloudy hazy
+    - cloudy humid
+    - cloudy partial
+    - cloudy windy
+    - fog
+    - hail
+    - hail heavy
+    - hail mixed
+    - hazy
+    - humid
+    - hurricane
+    - lightning
+    - night clear
+    - overcast
+    - rainy
+    - rainy heavy
+    - snow
+    - sunny
+    - sunny hazy
+    - temperature high
+    - temperature low
+    - tornado
+    - weather
+    - windy
