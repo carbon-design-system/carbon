@@ -301,7 +301,11 @@ class Tooltip extends Component {
 
     if (keyDownMatch(event, [keys.Enter, keys.Space])) {
       event.stopPropagation();
-      this.setState({ open: !this.state.open });
+      const shouldOpen = !this.state.open;
+      if (shouldOpen) {
+        this.getTriggerPosition();
+      }
+      this.setState({ open: shouldOpen });
     }
   };
 
