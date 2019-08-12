@@ -171,6 +171,30 @@ storiesOf('${moduleName}', module)
 
 const STORYBOOK_DIR = path.resolve(__dirname, '../examples/storybook/stories');
 
+// async function build({ cwd }) {
+//   const bundle = await rollup({
+//     input: {
+//       'nested/a': '__chunk_a__',
+//       b: '__chunk_b__',
+//     },
+//     external: [],
+//     plugins: [
+//       virtual({
+//         __chunk_a__: 'export const a = 1',
+//         __chunk_b__: 'export const b = 1',
+//       }),
+//     ],
+//   });
+
+//   await bundle.write({
+//     format: 'esm',
+//     dir: 'es',
+//     // file: 'es/index.js',
+//   });
+
+//   return;
+// }
+
 /**
  * Build is what we'll call to kick off the whole process.
  *
