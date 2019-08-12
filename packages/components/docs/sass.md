@@ -2239,6 +2239,7 @@ Generate a media query for a given breakpoint
   - [carbon--largest-breakpoint [mixin]](#carbon--largest-breakpoint-mixin)
   - [fluid-type [mixin]](#fluid-type-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
+  - [form [mixin]](#form-mixin)
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
@@ -10670,7 +10671,7 @@ Data table core styles
     background-color: $ui-03;
   }
 
-  .#{$prefix}--data-table th:first-of-type:not(.#{$prefix}--table-expand th) {
+  .#{$prefix}--data-table th:first-of-type:not(.#{$prefix}--table-expand) {
     padding-left: $spacing-05;
   }
 
@@ -12774,17 +12775,15 @@ Form styles
     z-index: 0;
     opacity: 1;
     margin-bottom: $carbon--spacing-03;
+
+    @include carbon--breakpoint('sm') {
+      max-width: 75%;
+    }
   }
 
   .#{$prefix}--label--disabled,
   .#{$prefix}--form__helper-text--disabled {
     color: $disabled-02;
-  }
-
-  @media (min-width: breakpoint('sm')) {
-    .#{$prefix}--form__helper-text {
-      max-width: 75%;
-    }
   }
 }
 ```
@@ -12793,6 +12792,7 @@ Form styles
 
 - **Group**: [form](#form)
 - **Requires**:
+  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
@@ -14667,7 +14667,7 @@ Number input styles
       fill: $disabled;
     }
 
-    appearance: textfield; // Firefox: Hide spinner (up and down buttons)
+    -moz-appearance: textfield; // Firefox: Hide spinner (up and down buttons)
 
     &::-ms-clear {
       display: none; // IE: Hide "clear-field" `x` button on input field
@@ -16938,7 +16938,6 @@ Tabs styles
       box-shadow: none;
       z-index: auto;
       transition: inherit;
-      max-height: auto;
       width: auto;
     }
   }
@@ -17298,14 +17297,9 @@ Tag styles
 
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
+    @include skeleton;
     width: rem(60px);
-
-    &:after {
-      @include skeleton;
-      content: '';
-      height: rem(6px);
-      width: 100%;
-    }
+    overflow: hidden;
   }
 }
 ```
