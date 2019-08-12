@@ -225,6 +225,10 @@ $selected-ui: map-get($carbon--theme, 'selected-ui') !default;
 /// @access public
 /// @group @carbon/themes
 $hover-selected-ui: map-get($carbon--theme, 'hover-selected-ui') !default;
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$inverse-hover-ui: map-get($carbon--theme, 'inverse-hover-ui') !default;
 /// Danger hover; `$support-01` hover
 /// @type Color
 /// @access public

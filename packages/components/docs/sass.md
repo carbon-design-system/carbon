@@ -163,6 +163,7 @@
   - [✅active-ui [variable]](#active-ui-variable)
   - [✅selected-ui [variable]](#selected-ui-variable)
   - [✅hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [✅inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [✅hover-danger [variable]](#hover-danger-variable)
   - [✅active-danger [variable]](#active-danger-variable)
   - [✅hover-row [variable]](#hover-row-variable)
@@ -2280,6 +2281,7 @@ Generate a media query for a given breakpoint
   - [carbon--largest-breakpoint [mixin]](#carbon--largest-breakpoint-mixin)
   - [fluid-type [mixin]](#fluid-type-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
+  - [form [mixin]](#form-mixin)
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
@@ -3735,6 +3737,7 @@ Define theme variables from a map of tokens
   $active-ui: map-get($theme, 'active-ui') !global;
   $selected-ui: map-get($theme, 'selected-ui') !global;
   $hover-selected-ui: map-get($theme, 'hover-selected-ui') !global;
+  $inverse-hover-ui: map-get($theme, 'inverse-hover-ui') !global;
   $hover-danger: map-get($theme, 'hover-danger') !global;
   $active-danger: map-get($theme, 'active-danger') !global;
   $hover-row: map-get($theme, 'hover-row') !global;
@@ -3796,6 +3799,7 @@ Define theme variables from a map of tokens
     --active-ui: #{map-get($theme, 'active-ui')};
     --selected-ui: #{map-get($theme, 'selected-ui')};
     --hover-selected-ui: #{map-get($theme, 'hover-selected-ui')};
+    --inverse-hover-ui: #{map-get($theme, 'inverse-hover-ui')};
     --hover-danger: #{map-get($theme, 'hover-danger')};
     --active-danger: #{map-get($theme, 'active-danger')};
     --hover-row: #{map-get($theme, 'hover-row')};
@@ -3902,6 +3906,7 @@ Define theme variables from a map of tokens
   - [active-ui [variable]](#active-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [active-danger [variable]](#active-danger-variable)
   - [hover-row [variable]](#hover-row-variable)
@@ -3918,8 +3923,6 @@ Define theme variables from a map of tokens
   - [active-01 [variable]](#active-01-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [carbon--theme [variable]](#carbon--theme-variable)
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--white [variable]
 
@@ -3931,7 +3934,7 @@ Carbon's white color theme
 ```scss
 $carbon--theme--white: (
   interactive-01: #0062ff,
-  interactive-02: #171717,
+  interactive-02: #3d3d3d,
   interactive-03: #0062ff,
   interactive-04: #0062ff,
   ui-background: #ffffff,
@@ -3973,6 +3976,7 @@ $carbon--theme--white: (
   hover-ui: #e5e5e5,
   active-ui: #bebebe,
   selected-ui: #dcdcdc,
+  inverse-hover-ui: #4c4c4c,
   hover-selected-ui: #cacaca,
   hover-danger: #ba1b23,
   active-danger: #750e13,
@@ -3985,7 +3989,7 @@ $carbon--theme--white: (
   skeleton-01: #e5e5e5,
   skeleton-02: #bebebe,
   brand-01: #0062ff,
-  brand-02: #171717,
+  brand-02: #3d3d3d,
   brand-03: #0062ff,
   active-01: #bebebe,
   hover-field: #e5e5e5,
@@ -3998,8 +4002,6 @@ $carbon--theme--white: (
 - **Type**: `Map`
 - **Aliased**:
   - `carbon--theme`
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--g10 [variable]
 
@@ -4011,7 +4013,7 @@ Carbon's g10 color theme
 ```scss
 $carbon--theme--g10: (
   interactive-01: #0062ff,
-  interactive-02: #171717,
+  interactive-02: #3d3d3d,
   interactive-03: #0062ff,
   interactive-04: #0062ff,
   ui-background: #f3f3f3,
@@ -4053,6 +4055,7 @@ $carbon--theme--g10: (
   hover-ui: #e5e5e5,
   active-ui: #bebebe,
   selected-ui: #dcdcdc,
+  inverse-hover-ui: #4c4c4c,
   hover-selected-ui: #cacaca,
   hover-danger: #ba1b23,
   active-danger: #750e13,
@@ -4065,7 +4068,7 @@ $carbon--theme--g10: (
   skeleton-01: #e5e5e5,
   skeleton-02: #bebebe,
   brand-01: #0062ff,
-  brand-02: #171717,
+  brand-02: #3d3d3d,
   brand-03: #0062ff,
   active-01: #bebebe,
   hover-field: #e5e5e5,
@@ -4076,8 +4079,6 @@ $carbon--theme--g10: (
 
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--g90 [variable]
 
@@ -4131,6 +4132,7 @@ $carbon--theme--g90: (
   hover-ui: #4c4c4c,
   active-ui: #6f6f6f,
   selected-ui: #565656,
+  inverse-hover-ui: #e5e5e5,
   hover-selected-ui: #656565,
   hover-danger: #ba1b23,
   active-danger: #750e13,
@@ -4207,6 +4209,7 @@ $carbon--theme--g100: (
   hover-ui: #353535,
   active-ui: #565656,
   selected-ui: #3d3d3d,
+  inverse-hover-ui: #e5e5e5,
   hover-selected-ui: #4c4c4c,
   hover-danger: #ba1b23,
   active-danger: #750e13,
@@ -4230,8 +4233,6 @@ $carbon--theme--g100: (
 
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--v9 [variable]
 
@@ -4285,6 +4286,7 @@ $carbon--theme--v9: (
   hover-ui: #eef4fc,
   active-ui: #dfeafa,
   selected-ui: #eef4fc,
+  inverse-hover-ui: #4c4c4c,
   hover-selected-ui: #dfeafa,
   hover-danger: #c70014,
   active-danger: #ad1625,
@@ -4327,7 +4329,6 @@ $carbon--theme: $carbon--theme--white;
 - **Alias**: `carbon--theme--white`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅interactive-01 [variable]
 
@@ -4496,6 +4497,7 @@ $ui-02: map-get($carbon--theme, 'ui-02');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -4595,7 +4597,6 @@ $ui-05: map-get($carbon--theme, 'ui-05');
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
-  - [radio-button [mixin]](#radio-button-mixin)
   - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -4620,7 +4621,6 @@ $text-01: map-get($carbon--theme, 'text-01');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [accordion [mixin]](#accordion-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
@@ -4741,6 +4741,7 @@ $icon-01: map-get($carbon--theme, 'icon-01');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
@@ -4748,6 +4749,7 @@ $icon-01: map-get($carbon--theme, 'icon-01');
   - [modal [mixin]](#modal-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
 
 ### ✅icon-02 [variable]
@@ -5160,6 +5162,7 @@ $focus: map-get($carbon--theme, 'focus');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
@@ -5246,7 +5249,6 @@ $hover-secondary: map-get($carbon--theme, 'hover-secondary');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [listbox [mixin]](#listbox-mixin)
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [tags [mixin]](#tags-mixin)
 
 ### ✅active-secondary [variable]
@@ -5330,6 +5332,7 @@ $hover-ui: map-get($carbon--theme, 'hover-ui');
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -5381,6 +5384,8 @@ $selected-ui: map-get($carbon--theme, 'selected-ui');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [search [mixin]](#search-mixin)
@@ -5403,6 +5408,23 @@ $hover-selected-ui: map-get($carbon--theme, 'hover-selected-ui');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+
+### ✅inverse-hover-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-hover-ui: map-get($carbon--theme, 'inverse-hover-ui');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅hover-danger [variable]
 
@@ -5702,7 +5724,6 @@ $hover-field: map-get($carbon--theme, 'hover-field');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [search [mixin]](#search-mixin)
 - **Deprecated**: This may not be available in future releases
 
@@ -8912,6 +8933,15 @@ Button styles
       color: $inverse-01;
     }
 
+    &:focus {
+      color: $text-04;
+      background-color: $interactive-03;
+    }
+
+    &:active {
+      background-color: $active-primary;
+    }
+
     &:disabled,
     &:hover:disabled,
     &:focus:disabled,
@@ -8984,12 +9014,20 @@ Button styles
     }
   }
 
-  .#{$prefix}--btn--icon-only {
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
     @include tooltip--trigger('icon', 'bottom');
+    outline: $button-outline-width solid transparent;
+    outline-offset: -4px;
   }
 
-  .#{$prefix}--btn--icon-only:focus svg {
-    outline: none;
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
+    border-color: $focus;
+    outline-color: $ui-02;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
+    svg {
+    outline-color: transparent;
   }
 
   .#{$prefix}--btn--icon-only--top {
@@ -9076,6 +9114,8 @@ Button styles
   - [active-ui [variable]](#active-ui-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [hover-primary-text [variable]](#hover-primary-text-variable)
+  - [focus [variable]](#focus-variable)
+  - [ui-02 [variable]](#ui-02-variable)
   - [support-01 [variable]](#support-01-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [icon-03 [variable]](#icon-03-variable)
@@ -9123,7 +9163,6 @@ Button base styles
     flex-shrink: 0;
     width: rem(16px);
     height: rem(16px);
-    transition: all $duration--fast-01 motion(entrance, productive);
   }
 }
 ```
@@ -9299,8 +9338,8 @@ Checkbox styles
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
-    background-color: $text-01;
-    border-color: $text-01;
+    background-color: $icon-01;
+    border-color: $icon-01;
     border-width: 1px;
   }
 
@@ -9379,7 +9418,7 @@ Checkbox styles
   - [prefix [variable]](#prefix-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
-  - [text-01 [variable]](#text-01-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [focus [variable]](#focus-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
@@ -10672,7 +10711,7 @@ Data table core styles
     background-color: $ui-03;
   }
 
-  .#{$prefix}--data-table th:first-of-type:not(.#{$prefix}--table-expand th) {
+  .#{$prefix}--data-table th:first-of-type:not(.#{$prefix}--table-expand) {
     padding-left: $spacing-05;
   }
 
@@ -10842,8 +10881,8 @@ Data table core styles
     td,
   tr.#{$prefix}--data-table--selected td {
     color: $text-01;
-    background-color: $ui-03;
-    border-top: 1px solid $ui-03;
+    background-color: $selected-ui;
+    border-top: 1px solid $selected-ui;
     border-bottom: 1px solid $active-ui; //bottom border acts as separator from other rows
   }
 
@@ -10866,8 +10905,8 @@ Data table core styles
     tr:last-of-type:nth-child(even).#{$prefix}--data-table--selected
     td,
   tr.#{$prefix}--data-table--selected:last-of-type td {
-    border-top: 1px solid $ui-03; // doesn't need separators
-    border-bottom: 1px solid $ui-03;
+    border-top: 1px solid $selected-ui; // doesn't need separators
+    border-bottom: 1px solid $selected-ui;
   }
 
   // zebra select - odd child
@@ -11112,6 +11151,7 @@ Data table core styles
   - [hover-field [variable]](#hover-field-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
 
 ### ❌data-table-expandable [mixin]
@@ -11154,7 +11194,7 @@ Data table expandable styles
     padding-top: 0;
     padding-bottom: 0;
     border: 0;
-    background-color: $hover-field;
+    background-color: $hover-ui;
     transition: padding $duration--moderate-01 motion(standard, productive), background-color
         $duration--moderate-01 motion(standard, productive);
   }
@@ -11218,27 +11258,27 @@ Data table expandable styles
   // hovering on collapsed parent
   tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row):first-of-type:hover
     td {
-    border-top: 1px solid $hover-field;
-    border-bottom: 1px solid $hover-field;
+    border-top: 1px solid $hover-ui;
+    border-bottom: 1px solid $hover-ui;
   }
 
   // hovering on expanded parent
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td {
-    background-color: $hover-field;
-    border-top: 1px solid $hover-field;
+    background-color: $hover-ui;
+    border-top: 1px solid $hover-ui;
     border-bottom: 1px solid $ui-03;
     color: $text-01;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
-    border-bottom: 1px solid $hover-field; // first td doesn't have a visible border
+    border-bottom: 1px solid $hover-ui; // first td doesn't have a visible border
   }
 
   // child row when hovering on expanded parent
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
     + tr[data-child-row]
     td {
-    background-color: $hover-field;
+    background-color: $hover-ui;
     color: $text-01;
     border-bottom: 1px solid $ui-03;
   }
@@ -11250,19 +11290,19 @@ Data table expandable styles
 
   //hovering on expanded child row (class added to parent)
   tr.#{$prefix}--expandable-row--hover {
-    background-color: $hover-field;
+    background-color: $hover-ui;
   }
 
   tr.#{$prefix}--expandable-row--hover td {
-    background-color: $hover-field;
+    background-color: $hover-ui;
     border-bottom: 1px solid $ui-03;
-    border-top: 1px solid $hover-field;
+    border-top: 1px solid $hover-ui;
     color: $text-01;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td:first-of-type {
-    border-bottom: 1px solid $hover-field; // first parent td doesnt have visible bottom border
+    border-bottom: 1px solid $hover-ui; // first parent td doesnt have visible bottom border
   }
 
   //----------------------------------------------------------------------------
@@ -11337,7 +11377,7 @@ Data table expandable styles
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td.#{$prefix}--table-expand
     + td::after {
-    background: $hover-field;
+    background: $hover-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected
@@ -11351,21 +11391,21 @@ Data table expandable styles
   //----------------------------------------------------------------------------
   // parent collapsed
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:first-of-type td {
-    background: $ui-03;
+    background: $selected-ui;
     border-top: 1px solid $active-ui;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $active-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected td {
-    background: $ui-03;
+    background: $selected-ui;
     color: $text-01;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $active-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:last-of-type td {
-    background: $ui-03;
+    background: $selected-ui;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $ui-03;
   }
@@ -11385,7 +11425,7 @@ Data table expandable styles
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
     td:first-of-type {
     border-bottom: 1px solid transparent;
-    box-shadow: 0 1px $ui-03; //no visible border when expanded
+    box-shadow: 0 1px $selected-ui; //no visible border when expanded
   }
 
   // parent expanded hover
@@ -11408,7 +11448,7 @@ Data table expandable styles
     + tr[data-child-row]
     td {
     color: $text-01;
-    background-color: $hover-field;
+    background-color: $hover-ui;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $active-ui;
     border-top: 1px solid $active-ui;
@@ -11428,7 +11468,7 @@ Data table expandable styles
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
     + tr[data-child-row]
     td {
-    background: $ui-03;
+    background: $selected-ui;
   }
 }
 ```
@@ -11440,12 +11480,13 @@ Data table expandable styles
   - [prefix [variable]](#prefix-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
-  - [hover-field [variable]](#hover-field-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
   - [text-01 [variable]](#text-01-variable)
   - [focus [variable]](#focus-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [ui-01 [variable]](#ui-01-variable)
+  - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
 
@@ -12270,6 +12311,18 @@ Dropdown styles
     transform-origin: 50% 45%;
   }
 
+  button.#{$prefix}--dropdown-text {
+    // button-reset mixin contradicts with bx--dropdown-text styles
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
   .#{$prefix}--dropdown-text {
     @include type-style('body-short-01');
     display: block;
@@ -12285,6 +12338,7 @@ Dropdown styles
 
   .#{$prefix}--dropdown-list {
     @include reset;
+    @include focus-outline('reset');
     @include layer('overlay');
     @include type-style('body-short-01');
     background-color: $ui-01;
@@ -12348,16 +12402,17 @@ Dropdown styles
     overflow: hidden;
     white-space: nowrap;
 
-    &:focus {
-      @include focus-outline('outline');
-      margin: 0;
-      padding: rem(11px) rem(16px);
-    }
-
     &:hover {
       color: $text-01;
       border-color: transparent;
     }
+  }
+
+  .#{$prefix}--dropdown--focused,
+  .#{$prefix}--dropdown-link:focus {
+    @include focus-outline('outline');
+    margin: 0;
+    padding: rem(11px) rem(16px);
   }
 
   .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
@@ -12760,17 +12815,15 @@ Form styles
     z-index: 0;
     opacity: 1;
     margin-bottom: $carbon--spacing-03;
+
+    @include carbon--breakpoint('sm') {
+      max-width: 75%;
+    }
   }
 
   .#{$prefix}--label--disabled,
   .#{$prefix}--form__helper-text--disabled {
     color: $disabled-02;
-  }
-
-  @media (min-width: breakpoint('sm')) {
-    .#{$prefix}--form__helper-text {
-      max-width: 75%;
-    }
   }
 }
 ```
@@ -12779,6 +12832,7 @@ Form styles
 
 - **Group**: [form](#form)
 - **Requires**:
+  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
@@ -13912,7 +13966,12 @@ Modal styles
     }
 
     .#{$prefix}--text-input,
-    .#{$prefix}--select-input {
+    .#{$prefix}--text-area,
+    .#{$prefix}--search-input,
+    .#{$prefix}--select-input,
+    .#{$prefix}--dropdown,
+    .#{$prefix}--dropdown-list,
+    .#{$prefix}--number input[type='number'] {
       background-color: $field-02;
     }
   }
@@ -13953,7 +14012,7 @@ Modal styles
 
   .#{$prefix}--modal-header,
   .#{$prefix}--modal-content {
-    width: 75%;
+    padding-right: 25%;
     padding-left: 1rem;
   }
 
@@ -13987,6 +14046,10 @@ Modal styles
     margin-bottom: $carbon--spacing-09;
     color: $text-01;
     font-weight: 400;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 
   .#{$prefix}--modal-content > * {
@@ -14267,18 +14330,8 @@ Inline notification styles
       color: $inverse-link;
     }
 
-    @if $carbon--theme == $carbon--theme--white {
-      @include carbon--theme($carbon--theme--g100) {
-        &:hover {
-          background-color: $hover-secondary;
-        }
-      }
-    } @else if $carbon--theme == $carbon--theme--g10 {
-      @include carbon--theme($carbon--theme--g100) {
-        &:hover {
-          background-color: $hover-secondary;
-        }
-      }
+    &:hover {
+      background-color: $inverse-hover-ui;
     }
   }
 
@@ -14334,7 +14387,6 @@ Inline notification styles
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [prefix [variable]](#prefix-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -14352,11 +14404,7 @@ Inline notification styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [inverse-link [variable]](#inverse-link-variable)
-  - [carbon--theme [variable]](#carbon--theme-variable)
-  - [carbon--theme--white [variable]](#carbon--theme--white-variable)
-  - [carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
-  - [hover-secondary [variable]](#hover-secondary-variable)
-  - [carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
+  - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [link-01 [variable]](#link-01-variable)
 
@@ -14659,7 +14707,7 @@ Number input styles
       fill: $disabled;
     }
 
-    appearance: textfield; // Firefox: Hide spinner (up and down buttons)
+    -moz-appearance: textfield; // Firefox: Hide spinner (up and down buttons)
 
     &::-ms-clear {
       display: none; // IE: Hide "clear-field" `x` button on input field
@@ -15867,7 +15915,7 @@ Radio button styles
     @include reset;
     background-color: transparent;
     border-radius: 50%;
-    border: $radio-border-width solid $ui-05;
+    border: $radio-border-width solid $icon-01;
     flex-shrink: 0;
     height: rem(18px);
     width: rem(18px);
@@ -15880,7 +15928,7 @@ Radio button styles
     display: flex;
     align-items: center;
     justify-content: center;
-    border-color: $ui-05;
+    border-color: $icon-01;
 
     &:before {
       content: '';
@@ -15889,7 +15937,7 @@ Radio button styles
       width: 0.5rem;
       height: 0.5rem;
       border-radius: 50%;
-      background-color: $ui-05;
+      background-color: $icon-01;
 
       // Allow the selected button to be seen in Windows HCM for IE/Edge
       @media screen and (-ms-high-contrast: active) {
@@ -15989,7 +16037,7 @@ Radio button styles
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
-  - [ui-05 [variable]](#ui-05-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [focus [variable]](#focus-variable)
 
 ## search
@@ -16288,6 +16336,14 @@ Select styles
     // Select text renders a little high on Firefox
     @-moz-document url-prefix() {
       padding-top: rem(4px);
+
+      // Removes dotted inner focus
+      &:-moz-focusring,
+      &::-moz-focus-inner {
+        color: transparent;
+        text-shadow: 0 0 0 #000;
+        background-image: none;
+      }
     }
 
     &:focus {
@@ -16922,7 +16978,6 @@ Tabs styles
       box-shadow: none;
       z-index: auto;
       transition: inherit;
-      max-height: auto;
       width: auto;
     }
   }
@@ -17282,14 +17337,9 @@ Tag styles
 
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
+    @include skeleton;
     width: rem(60px);
-
-    &:after {
-      @include skeleton;
-      content: '';
-      height: rem(6px);
-      width: 100%;
-    }
+    overflow: hidden;
   }
 }
 ```
@@ -18775,13 +18825,17 @@ Tooltip styles
     align-items: center;
     color: $text-02;
 
+    &:focus {
+      @include focus-outline('border');
+    }
+
     .#{$prefix}--tooltip__trigger {
       margin-left: $carbon--spacing-03;
     }
   }
 
-  .#{$prefix}--tooltip__label:focus {
-    @include focus-outline('border');
+  .#{$prefix}--tooltip__trigger svg {
+    fill: $icon-02;
   }
 
   .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only) {
@@ -18794,12 +18848,6 @@ Tooltip styles
     &:focus {
       @include focus-outline('border');
       fill: $hover-primary;
-    }
-
-    path,
-    polygon,
-    circle {
-      fill: $icon-02;
     }
   }
 
@@ -19045,8 +19093,8 @@ Tooltip styles
   - [prefix [variable]](#prefix-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [hover-primary [variable]](#hover-primary-variable)
   - [icon-02 [variable]](#icon-02-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)

@@ -21,13 +21,14 @@ const { black, white, orange, yellow, ...swatches } = colors;
 export function syncColorStyles(document) {
   const sharedStyles = Object.keys(swatches).flatMap(swatchName => {
     const name = formatTokenName(swatchName);
-    return Object.keys(swatches[swatchName]).map(grade => {
+    const result = Object.keys(swatches[swatchName]).map(grade => {
       return syncColorStyle(
         document,
         formatSharedStyleName(name, grade),
         swatches[swatchName][grade]
       );
     });
+    return result;
   });
 
   const singleColors = [
@@ -50,5 +51,5 @@ export function syncColorStyles(document) {
  * @returns {string}
  */
 function formatSharedStyleName(name, grade) {
-  return ['color', name, grade].filter(Boolean).join('/');
+  return ['color', name.split('-').join(' '), grade].filter(Boolean).join('/');
 }
