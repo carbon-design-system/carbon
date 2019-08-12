@@ -46,7 +46,7 @@ describe('Test tooltip', function() {
 
     it('Should hide the tooltip upon clicking outside of tooltip', function() {
       floating.classList.add('bx--tooltip--shown');
-      document.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      element.dispatchEvent(new CustomEvent('blur', { bubbles: true }));
       expect(floating.classList.contains('bx--tooltip--shown')).toBe(false);
     });
 
