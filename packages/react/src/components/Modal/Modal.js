@@ -167,11 +167,13 @@ export default class Modal extends Component {
   };
 
   handleKeyDown = evt => {
-    if (evt.which === 27) {
-      this.props.onRequestClose(evt);
-    }
-    if (evt.which === 13 && this.props.shouldSubmitOnEnter) {
-      this.props.onRequestSubmit(evt);
+    if (this.props.open) {
+      if (evt.which === 27) {
+        this.props.onRequestClose(evt);
+      }
+      if (evt.which === 13 && this.props.shouldSubmitOnEnter) {
+        this.props.onRequestSubmit(evt);
+      }
     }
   };
 

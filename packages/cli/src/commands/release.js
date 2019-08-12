@@ -8,12 +8,10 @@
 'use strict';
 
 const parse = require('@commitlint/parse');
-const chalk = require('chalk');
 const execa = require('execa');
 const { prompt } = require('inquirer');
 const semver = require('semver');
-const createLogger = require('../createLogger');
-const displayBanner = require('../displayBanner');
+const { createLogger, displayBanner } = require('../logger');
 
 // All supported commit types from our conventional-changelog preset
 const types = [
@@ -32,8 +30,11 @@ const types = [
 
 // Filter supported commit types per release bump
 const typesByReleaseBump = {
+  minor: types,
   patch: types.filter(type => type !== 'feat'),
 };
+
+const logger = createLogger('release');
 
 /**
  * Create a branch with the commits necessary to generate a release for the
@@ -49,9 +50,10 @@ const typesByReleaseBump = {
 async function release({ bump }) {
   displayBanner();
 
-  const logger = createLogger('release');
   logger.start('Getting latest tag');
 
+  // Make sure we've fetched the latest tags from upstream
+  await execa('git', ['pull', 'upstream', 'master', '--tags']);
   const { stdout: tagInfo } = await execa('git', [
     'tag',
     '-l',
@@ -73,15 +75,98 @@ async function release({ bump }) {
   logger.stop();
 
   const branchName = `chore/release-${nextTag}`;
-  logger.start(`Creating branch: ${branchName} from tag ${latestTag}`);
+  logger.start(`Creating branch: ${branchName}`);
 
-  await execa('git', ['checkout', latestTag]);
+  if (bump === 'patch') {
+    logger.info(`Using tag ${latestTag} as base`);
+    // If we're bumping for a patch release, we'll need to base our release off
+    // of the previous known tag
+    await execa('git', ['checkout', latestTag]);
+  } else {
+    logger.info(`Using master branch as base`);
+    // If we're publishing other releases, we'll need to base our release off of
+    // the latest stable `master` branch
+    await fetchLatestFromUpstream();
+  }
   await execa('git', ['checkout', '-b', branchName]);
 
   logger.stop();
 
-  const commitRange = `${latestTag}...master`;
+  if (bump === 'patch') {
+    const commitRange = `${latestTag}...master`;
+    await cherryPickCommitsFrom(commitRange, bump);
+  }
 
+  // After making sure our base branch is up-to-date, let's go ahead and reset
+  // our project and rebuild everything from a known state. This is helpful for
+  // getting rid of any local inconsistencies. Ultimately this process
+  // replicates what we do in our Continuous Integration checks.
+  await resetProjectState();
+
+  // Just in case there are any freshly generated files after running the steps
+  // above, we'll check to see if the local branch is dirty before proceeding
+  await checkIfBranchIsDirty();
+
+  // Call out to lerna to handle versioning changed packages
+  await execa(
+    'yarn',
+    ['lerna', 'version', bump, '--no-push', '--no-git-tag-version', '--exact'],
+    {
+      stdio: 'inherit',
+    }
+  );
+
+  logger.start('Creating final commit');
+  logger.info(
+    'The next step will be to manually create a Pull Request for this branch'
+  );
+
+  const versionCommitMessage = 'chore(release): update package versions';
+  await execa('git', ['add', '-A']);
+  await execa('git', ['commit', '-m', versionCommitMessage]);
+
+  logger.stop();
+}
+
+/**
+ * For certain release types, we want to be certain that our base branch is
+ * up-to-date with the upstream remote. This helper will first check that the
+ * upstream remote exists, and create it if it does not, and then will pull the
+ * latest changes into the local project.
+ *
+ * @returns {void}
+ */
+async function fetchLatestFromUpstream() {
+  try {
+    // This command will fail is no upstream is present, with `catch` we can
+    // create the appropriate remote before running the next commands
+    await execa('git', ['remote', 'get-url', 'upstream']);
+  } catch {
+    await execa('git', [
+      'remote',
+      'add',
+      'upstream',
+      'git@github.com:carbon-design-system/carbon.git',
+    ]);
+  }
+  await execa('git', ['checkout', 'master']);
+  await execa('git', ['pull', 'upstream', 'master']);
+}
+
+/**
+ * When working with patch releases, we'll want to cherry pick commits that are
+ * found in the commit range between two tags. This helper also considers the
+ * version bump and the types of commits found. Depending on the bump certain
+ * commit types will be included. If an appropriate commit type is not found,
+ * we'll prompt the user for whether or not to include it. If a merge conflict
+ * occurs, we'll prompt the user to address it before proceeding.
+ *
+ * @param {string} commitRange - the two tags we'll want to grab commits from.
+ * The format should follow `tagA...tagB`, where tagA is older than tagB.
+ * @param {string} bump - the version bump
+ * @returns {void}
+ */
+async function cherryPickCommitsFrom(commitRange, bump) {
   logger.start(`Getting commits to cherry-pick from ${commitRange}`);
 
   const { stdout: commitInfo } = await execa('git', [
@@ -167,25 +252,64 @@ async function release({ bump }) {
   }
 
   logger.stop();
+}
 
-  await execa(
-    'yarn',
-    ['lerna', 'version', bump, '--no-push', '--no-git-tag-version', '--exact'],
-    {
-      stdio: 'inherit',
-    }
-  );
+/**
+ * When working with multiple local environments, it's helpful to reset the
+ * project to a known state. This helper will try and clean everything up so
+ * that the environment is clean and good-to-go moving forward. Most of the
+ * steps in this method ultimately reflect what we do in Continous Integration
+ * environments, with the addition of a `clean` command to remove generated
+ * artifacts locally.
+ *
+ * @returns {void}
+ */
+async function resetProjectState() {
+  logger.start('Resetting the project to a known state');
 
-  logger.start('Creating final commit');
-  logger.info(
-    'The next step will be to manually create a Pull Request for this branch'
-  );
+  logger.info('Cleaning any local artifacts or node_modules');
+  // Make sure that our tooling is defined before running clean
+  await execa('yarn', ['install', '--offline']);
+  await execa('yarn', ['clean']);
 
-  const versionCommitMessage = 'chore(release): update package versions';
-  await execa('git', ['add', '-A']);
-  await execa('git', ['commit', '-m', versionCommitMessage]);
+  logger.info('Installing known dependencies from offline mirror');
+  await execa('yarn', ['install', '--offline']);
+
+  logger.info('Building packages from source');
+  await execa('yarn', ['build']);
 
   logger.stop();
+}
+
+/**
+ * When working with generated files, sometimes we'll want to check if the
+ * working branch is dirty and if the caller wants to commit these files as part
+ * of the release process.
+ *
+ * @returns {void}
+ */
+async function checkIfBranchIsDirty() {
+  const { stdout } = await execa('git', ['status', '--porcelain']);
+  if (stdout !== '') {
+    const { confirmed } = await prompt([
+      {
+        type: 'confirm',
+        name: 'confirmed',
+        message:
+          'The git status of the project is currently not clean. Would ' +
+          'you like to commit these changes to the project?',
+      },
+    ]);
+
+    if (confirmed) {
+      await execa('git', ['add', '-A']);
+      await execa('git', [
+        'commit',
+        '-m',
+        'chore(project): sync generated files [skip ci]',
+      ]);
+    }
+  }
 }
 
 module.exports = {
@@ -194,7 +318,7 @@ module.exports = {
   builder(yargs) {
     yargs.positional('bump', {
       describe: 'choose a release version to bump',
-      choices: ['patch'],
+      choices: ['minor', 'patch'],
       default: 'patch',
     });
   },
