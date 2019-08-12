@@ -133,4 +133,72 @@ update the React component accordingly.
 
 ## Community components
 
+### What are community components?
+
+Community components are our new model for Carbon "add-ons", or custom component
+libaries which teams created on an as-needed basis. Our new model is different
+in a few ways:
+
+- **Development environment:** Unlike the old "add-on" model, community
+  components will no longer live in individual, per-team repos. Instead, they
+  will all live in the same `@carbon/community` package. This allows us to
+  provide a consistent API and a single workspace that is the source of truth
+  for community components, not just for development purposes but also for
+  consuming purposes. By having community components live in the same package,
+  we will be able to better surface your contributions.
+- **Tiered system:** We want to make contributing easy, but want to encourage
+  improvement, maintenance and contribution. Thus, we've created a 3-tiered
+  system for contributing community components. In order to contribute a
+  community component, your component must at least meet our lowest tier
+  requirements.
+
+  _If we're only required to meet the bottom tier requirements, why would we
+  want to create more work for ourselves by trying to meet the mid or top tier
+  requirements, though?_
+
+  Good question. Carbon will be endorsing top tier components as being on the
+  same design and development level as core Carbon components. This means that
+  we will prioritize them when we surface these components on our website. It is
+  our goal that by endorsing these and surfacing them more notably, more users
+  will use and contribute to your component and make it easier for you to
+  maintain it.
+
+### Tier requirements
+
+#### Bottom tier
+
+- [ ] Must pass
+      [WCAG A rating](https://www.w3.org/WAI/WCAG21/quickref/?versions=2.0&currentsidebar=%23col_customize&levels=aa%2Caaa&techniques=advisory&technologies=pdf)
+- [ ] Browser support for Chrome, Safari and Firefox
+- [ ] Should be using SASS
+- [ ] Should be using design tokens
+- [ ] Include component documentation
+- [ ] Must be v10 or later version of Carbon
+
+#### Mid tier
+
+- [ ] Meet all tier 1 requirements
+- [ ] Pass AVT 1 and 2 testing
+- [ ] Should be responsive
+- [ ] Should use `${$prefix}`
+- [ ] Should be using our class naming methodology
+
+#### Top tier
+
+- [ ] Meet all tier 1 and 2 requirements
+- [ ] Must pass
+      [WCAG AA rating](https://www.w3.org/WAI/WCAG21/quickref/?versions=2.0&currentsidebar=%23col_customize&levels=aaa&techniques=advisory&technologies=pdf&showtechniques=312)
+- [ ] Pass AVT 1, 2 & 3 testing
+- [ ] Browser support for Edge and IE11
+- [ ] Theming capabilities
+- [ ] Must include unit tests
+- [ ] Should have motion
+- [ ] Must have a React version
+
+### How do I contribute a community component?
+
+### Why should I contribute a community component?
+
+### What happens if my community component is used enough to be part of "core" Carbon?
+
 ## GitHub labels
