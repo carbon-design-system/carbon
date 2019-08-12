@@ -363,7 +363,7 @@
     color: $inverse-01;
 
     &:focus {
-      box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px #ffffff;
+      box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px $ui-background;
       outline: 0;
     }
 
@@ -378,6 +378,10 @@
     .#{$prefix}--link {
       color: $inverse-link;
       font-size: rem(14px);
+
+      &:focus {
+        outline: 1px solid $inverse-focus;
+      }
 
       &:active {
         color: $inverse-01;
@@ -394,7 +398,7 @@
       border-bottom: $caret-size solid $inverse-02;
       position: absolute;
       left: 0;
-      top: $caret-size * -1;
+      top: calc(#{$caret-size * -1} + 1px);
       right: 0;
       width: 0;
       height: 0;
@@ -422,14 +426,14 @@
     &[data-floating-menu-direction='top'] {
       .#{$prefix}--tooltip__caret {
         top: auto;
-        bottom: $caret-size * -1;
+        bottom: calc(#{$caret-size * -1} + 1px);
         transform: rotate(180deg);
       }
     }
 
     &[data-floating-menu-direction='right'] {
       .#{$prefix}--tooltip__caret {
-        left: $caret-size * -1;
+        left: calc(#{$caret-size * -1} + 1px);
         top: 50%;
         right: auto;
         transform: rotate(270deg) translate(50%, -50%);

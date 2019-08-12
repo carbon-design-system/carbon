@@ -4403,6 +4403,7 @@ $ui-background: map-get($carbon--theme, 'ui-background');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅ui-01 [variable]
 
@@ -18832,7 +18833,7 @@ Tooltip styles
     color: $inverse-01;
 
     &:focus {
-      box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px #ffffff;
+      box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px $ui-background;
       outline: 0;
     }
 
@@ -18847,6 +18848,10 @@ Tooltip styles
     .#{$prefix}--link {
       color: $inverse-link;
       font-size: rem(14px);
+
+      &:focus {
+        outline: 1px solid $inverse-focus;
+      }
 
       &:active {
         color: $inverse-01;
@@ -18863,7 +18868,7 @@ Tooltip styles
       border-bottom: $caret-size solid $inverse-02;
       position: absolute;
       left: 0;
-      top: $caret-size * -1;
+      top: calc(#{$caret-size * -1} + 1px);
       right: 0;
       width: 0;
       height: 0;
@@ -18891,14 +18896,14 @@ Tooltip styles
     &[data-floating-menu-direction='top'] {
       .#{$prefix}--tooltip__caret {
         top: auto;
-        bottom: $caret-size * -1;
+        bottom: calc(#{$caret-size * -1} + 1px);
         transform: rotate(180deg);
       }
     }
 
     &[data-floating-menu-direction='right'] {
       .#{$prefix}--tooltip__caret {
-        left: $caret-size * -1;
+        left: calc(#{$caret-size * -1} + 1px);
         top: 50%;
         right: auto;
         transform: rotate(270deg) translate(50%, -50%);
@@ -19066,6 +19071,7 @@ Tooltip styles
   - [inverse-02 [variable]](#inverse-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [ui-background [variable]](#ui-background-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [inverse-link [variable]](#inverse-link-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
