@@ -44,7 +44,7 @@ describe('Test tooltip', function() {
       expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
     });
 
-    it('Should hide the tooltip upon clicking outside of tooltip', function() {
+    it('Should hide the tooltip upon blurring', function() {
       floating.classList.add('bx--tooltip--shown');
       element.dispatchEvent(new CustomEvent('blur', { bubbles: true }));
       expect(floating.classList.contains('bx--tooltip--shown')).toBe(false);

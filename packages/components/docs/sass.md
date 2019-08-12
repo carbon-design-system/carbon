@@ -18845,12 +18845,18 @@ Tooltip styles
       padding-right: $carbon--spacing-07;
     }
 
+    .#{$prefix}--btn:focus {
+      border-color: $inverse-focus;
+      outline-color: $inverse-02;
+    }
+
     .#{$prefix}--link {
       color: $inverse-link;
       font-size: rem(14px);
 
       &:focus {
         outline: 1px solid $inverse-focus;
+        outline-offset: 2px;
       }
 
       &:active {
