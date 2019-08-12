@@ -7,21 +7,39 @@
 
 'use strict';
 
-const parse = require('@commitlint/parse');
-const fs = require('fs-extra');
 const execa = require('execa');
 const { prompt } = require('inquirer');
-const path = require('path');
 const semver = require('semver');
-const createLogger = require('../createLogger');
-const displayBanner = require('../displayBanner');
+const { createLogger, displayBanner } = require('../logger');
+const { generate } = require('../changelog');
 
 const logger = createLogger('publish');
 
-async function publish({ tag }) {
+/**
+ * Publish is the counterpart to the `release` command and is responsible for
+ * taking the current state of the project and publishing it to a given package
+ * registry. In addition, this command will handle local operations like
+ * creating git tags, making sure npm dist-tag's for packages are correct, and
+ * will generate a changelog to be used in a GitHub release.
+ *
+ * @param {object} args
+ * @param {string} args.tag - the tag to publish
+ * @param {string} args.gitRemote - the git remote to use for commits
+ * @param {boolean} args.noGitTagVersion - specify whether to push to the git
+ * remote
+ * @param {string} args.registry - the registry to publish to
+ * @param {boolean} args.skipReset - specify whether to skip the project reset
+ * stage
+ * @returns {void}
+ */
+async function publish({ tag, ...flags }) {
+  const { gitRemote, noGitTagVersion, registry, skipReset } = flags;
+  const lastTag = await getLastGitTag();
+  const packages = await getPackages();
+
   displayBanner();
 
-  logger.start('Validating the given tag');
+  logger.start(`Validating the tag: ${tag}`);
 
   if (tag[0] !== 'v') {
     throw new Error(
@@ -39,207 +57,175 @@ async function publish({ tag }) {
 
   logger.start('Resetting the project to a known state');
 
-  // logger.info('Pulling latest from upstream for master');
-  // await execa('git', ['checkout', 'master']);
-  // await execa('git', ['pull', 'upstream']);
+  if (!skipReset) {
+    const type = semver.diff(lastTag, tag);
 
-  // logger.info('Cleaning any local artifacts or node_modules');
-  // // Make sure that our tooling is defined before running clean
-  // await execa('yarn', ['install', '--offline']);
-  // await execa('yarn', ['clean']);
+    if (type !== 'patch' && type !== 'prepatch') {
+      logger.info('Fetching latest from upstream master');
+      await execa('git', ['checkout', 'master']);
+      await execa('git', ['pull', 'upstream', 'master']);
+    }
 
-  // logger.info('Installing known dependencies from offline mirror');
-  // await execa('yarn', ['install', '--offline']);
+    logger.info('Cleaning any local artifacts or node_modules');
+    // Make sure that our tooling is defined before running clean
+    await execa('yarn', ['install', '--offline']);
+    await execa('yarn', ['clean']);
 
-  // logger.info('Building packages from source');
-  // await execa('yarn', ['build']);
+    logger.info('Installing known dependencies from offline mirror');
+    await execa('yarn', ['install', '--offline']);
+
+    logger.info('Building packages from source');
+    await execa('yarn', ['build']);
+  }
 
   logger.stop();
 
   logger.start('Checking project for out-of-sync generated files');
-  // const { stdout } = await execa('git', ['status', '--porcelain']);
-  // if (stdout !== '') {
-  // const { confirmed } = await prompt([
-  // {
-  // type: 'confirm',
-  // name: 'confirmed',
-  // message:
-  // 'The git status of the project is currently not clean. Would ' +
-  // 'you like to commit these changes to the project?',
-  // },
-  // ]);
 
-  // if (confirmed) {
-  // await execa('git', ['add', '-A']);
-  // await execa('git', [
-  // 'commit',
-  // '-m',
-  // 'chore(project): sync generated files [skip ci]',
-  // ]);
-  // }
-  // }
+  const { stdout } = await execa('git', ['status', '--porcelain']);
+  if (stdout !== '') {
+    throw new Error(
+      'There are generated files that are out-of-sync. Please wait for ' +
+        'these changes to be committed upstream or commit manually'
+    );
+  }
 
   logger.stop();
 
   logger.start('Publishing packages');
   logger.info('Logging into npm');
 
-  // try {
-  // // This command will fail if the user is unauthenticated
-  // await execa('npm', ['whoami']);
-  // } catch {
-  // await execa('npm', ['login'], {
-  // stdio: 'inherit',
-  // });
-  // }
-
-  // // This is going to update all the package.json files with new version
-  // await execa(
-  // 'yarn',
-  // ['lerna', 'publish', 'from-package', '--dist-tag', 'next'],
-  // {
-  // stdio: 'inherit',
-  // }
-  // );
-
-  logger.stop();
-
-  // const answers = await prompt([
-  // {
-  // type: 'confirm',
-  // name: 'tags',
-  // message: 'Would you like to update the package tags from next to latest?',
-  // },
-  // ]);
-
-  // if (answers.tags) {
-  // //
-  // }
-
-  logger.start('Generating git tag and pushing to upstream');
-
-  logger.info(`Generating the tag ${tag}`);
-  // await execa('git', ['tag', '-a', tag, '-m', tag]);
-
-  // const { upstream } = await prompt([
-  // {
-  // type: 'confirm',
-  // name: 'upstream',
-  // message: `Should we push the tag ${tag} upstream?`,
-  // },
-  // ]);
-
-  // if (upstream) {
-  // logger.info(`Pushing the tag ${tag} upstream`);
-  // // await execa('git', ['push', 'upstream', tag]);
-  // }
-
-  logger.stop();
-
-  // Generate changelog
-  logger.start('Generating the changelog');
-
-  logger.info('Getting package folders');
-  const { stdout: packageInfo } = await execa('ls', ['packages']);
-  const packages = packageInfo
-    .split('\n')
-    .map(folder => {
-      const directory = path.join(process.cwd(), 'packages', folder);
-      const packageJsonPath = path.join(directory, 'package.json');
-      const packageJson = fs.readJsonSync(packageJsonPath);
-
-      return {
-        directory,
-        packageJson,
-      };
-    })
-    .filter(({ directory, packageJson }) => {
-      const stats = fs.statSync(directory);
-      if (!stats.isDirectory()) {
-        return false;
-      }
-
-      if (packageJson.private === 'true') {
-        return false;
-      }
-
-      return true;
+  try {
+    // This command will fail if the user is unauthenticated
+    await execa('npm', ['whoami', '--registry', registry]);
+  } catch {
+    await execa('npm', ['login'], {
+      stdio: 'inherit',
     });
+  }
 
+  // Publish packages using `lerna`, we default to placing these under the
+  // `next` tag instead of `latest` so that we can verify the release.
+  await execa(
+    'yarn',
+    [
+      'lerna',
+      'publish',
+      'from-package',
+      '--dist-tag',
+      'next',
+      '--registry',
+      registry,
+    ],
+    {
+      stdio: 'inherit',
+    }
+  );
+
+  logger.stop();
+
+  // We specify a stopping point so that the operator can verify the packages
+  // published as intended before setting the `latest` dist-tag
+  const answers = await prompt([
+    {
+      type: 'confirm',
+      name: 'tags',
+      message: 'Would you like to update the package tags from next to latest?',
+    },
+  ]);
+
+  if (answers.tags) {
+    logger.start('Setting npm dist tags to latest');
+
+    for (const { name, version } of packages) {
+      logger.info(`Setting npm dist-tag for ${name}@${version} to latest`);
+      await execa('npm', [
+        'dist-tag',
+        'add',
+        `${name}@${version}`,
+        'latest',
+        '--registry',
+        registry,
+      ]);
+    }
+
+    logger.stop();
+  }
+
+  if (!noGitTagVersion) {
+    logger.start('Generating git tag and pushing to upstream');
+
+    logger.info(`Generating the tag ${tag}`);
+    await execa('git', ['tag', '-a', tag, '-m', tag]);
+
+    const { remote } = await prompt([
+      {
+        type: 'confirm',
+        name: 'remote',
+        message: `Should we push the tag ${tag} to the ${gitRemote} remote?`,
+      },
+    ]);
+
+    if (remote) {
+      logger.info(`Pushing the tag ${tag} to the ${gitRemote} remote`);
+      await execa('git', ['push', gitRemote, tag]);
+    }
+
+    logger.stop();
+  }
+
+  logger.start('Generating the changelog');
+  logger.info(`Using commits from ${lastTag}...${tag}`);
+
+  const changelog = await generate(packages, lastTag, tag);
+  logger.stop();
+
+  const { display } = await prompt([
+    {
+      type: 'confirm',
+      name: 'display',
+      message: 'Display contents of generated changelog for release?',
+    },
+  ]);
+
+  if (display) {
+    // eslint-disable-next-line no-console
+    console.log(changelog);
+  }
+}
+
+/**
+ * Gets the last known git tag from the `git tag` sub-command.
+ * @returns {string}
+ */
+async function getLastGitTag() {
   const { stdout: tagInfo } = await execa('git', [
     'tag',
     '-l',
     '--sort=-v:refname',
   ]);
   const tags = tagInfo.split('\n');
-  const [latestTag, lastTag] = tags;
-  const commitRange = `${lastTag}...${latestTag}`;
+  return tags[0];
+}
 
-  logger.info(`Using commits from ${commitRange}`);
-
-  const allCommits = await Promise.all(
-    packages.map(async pkg => {
-      const { stdout } = await execa('git', [
-        'rev-list',
-        commitRange,
-        '--oneline',
-        '--',
-        pkg.directory,
-      ]);
-      if (stdout === '') {
-        return {
-          ...pkg,
-          commits: [],
-        };
-      }
-
-      const commits = await Promise.all(
-        stdout.split('\n').map(async commit => {
-          const hash = commit.slice(0, 9);
-          const text = commit.slice(10);
-          const info = await parse(text);
-
-          return {
-            info,
-            hash,
-            text,
-          };
-        })
-      );
-
-      return {
-        ...pkg,
-        commits,
-      };
-    })
-  );
-  const commitsToInclude = allCommits.filter(
-    ({ commits }) => commits.length > 0
-  );
-
-  const sections = [
-    {
-      title: 'Bug fixes :bug:',
-      types: ['fix'],
-    },
-    {
-      title: 'New features :rocket:',
-      types: ['feat'],
-    },
-    {
-      title: 'Documentation :memo:',
-      types: ['docs'],
-    },
-    {
-      title: 'Housekeeping :house:',
-      types: ['build', 'ci', 'chore', 'perf', 'refactor', 'revert', 'test'],
-    },
-  ];
-
-  logger.stop();
-
-  // Create new branch with updated package numbers to commit as PR
-  // Find linked PRs or issues and notify of this release
+/**
+ * Lists the packages for the current project using the `lerna list` command
+ * @returns {Array<PackageInfo>}
+ */
+async function getPackages() {
+  const { stdout: lernaListOutput } = await execa('yarn', [
+    'lerna',
+    'list',
+    '--json',
+  ]);
+  return JSON.parse(
+    // Clean-up output by stripping out `yarn` information related to the
+    // command and how long it took to run
+    lernaListOutput
+      .split('\n')
+      .slice(2, -1)
+      .join('\n')
+  ).filter(pkg => !pkg.private);
 }
 
 module.exports = {
@@ -249,6 +235,34 @@ module.exports = {
   builder(yargs) {
     yargs.positional('tag', {
       describe: 'the version tag associated with the release',
+      type: 'string',
+    });
+
+    yargs.option('skip-reset', {
+      demandOption: false,
+      default: false,
+      describe: 'Skip the project reset step',
+      type: 'boolean',
+    });
+
+    yargs.option('registry', {
+      demandOption: false,
+      describe: 'Specify registry URL',
+      default: 'https://registry.npmjs.org/',
+      type: 'string',
+    });
+
+    yargs.option('no-git-tag-version', {
+      demandOption: false,
+      describe: 'Do not commit or tag version changes',
+      default: false,
+      type: 'boolean',
+    });
+
+    yargs.option('git-remote', {
+      demandOption: false,
+      describe: 'Push git changes to the specified remote.',
+      default: 'upstream',
       type: 'string',
     });
   },
