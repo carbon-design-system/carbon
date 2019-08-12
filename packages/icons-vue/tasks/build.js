@@ -207,11 +207,14 @@ async function build({ cwd }) {
       // and create a Filepath for our icon module
       const jsFilepath = path.join(cwd, info.outputOptions.file);
 
-      // HELP! JOSH!
+      // Ensure the directory exist -- if it doesn't create it
       await fs.ensureDir(path.dirname(jsFilepath));
+      // write source to jsFilePath
       await fs.writeFile(jsFilepath, source);
 
-      // Map over the bundles and adjust the outputs according to outputOptions
+      /**
+       * THIS PART IS CONFUSING!
+       */
       await Promise.all(
         BUNDLE_FORMATS.map(async ({ format, directory }) => {
           const bundle = await rollup({
@@ -279,6 +282,7 @@ async function build({ cwd }) {
   reporter.success('Done! 🎉');
 }
 
+// Call the build function passing in the current working directory
 build({ cwd: path.resolve(__dirname, '../') }).catch(error => {
   console.log(error);
 });
