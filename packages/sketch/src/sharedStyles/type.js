@@ -50,6 +50,7 @@ export function syncTextStyles(document) {
       );
 
       sharedTextStyle.style.textColor = '#000000ff';
+      sharedTextStyle.style.borders = [];
 
       return sharedTextStyle;
     });
