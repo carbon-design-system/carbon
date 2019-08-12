@@ -1,6 +1,6 @@
 import EventManager from '../utils/event-manager';
 import FloatingMenu from '../../src/components/floating-menu/floating-menu';
-import HTML from '../../html/overflow-menu/overflow-menu.html'; // Use ul.bx--overflow-menu-options for testing
+import HTML from '../../html/overflow-menu/overflow-menu.html'; // Use .bx--overflow-menu-options for testing
 
 describe('Test floating menu', function() {
   describe('Constructor', function() {
@@ -64,7 +64,7 @@ describe('Test floating menu', function() {
     tempDiv.innerHTML = HTML;
 
     beforeAll(function() {
-      element = tempDiv.querySelector('ul.bx--overflow-menu-options');
+      element = tempDiv.querySelector('.bx--overflow-menu-options');
       document.body.appendChild(element);
       refNode = document.createElement('div');
       document.body.appendChild(refNode);
@@ -237,7 +237,7 @@ describe('Test floating menu', function() {
     beforeAll(function() {
       window.pageXOffset = 0;
       window.pageYOffset = 0;
-      element = tempDiv.querySelector('ul.bx--overflow-menu-options');
+      element = tempDiv.querySelector('.bx--overflow-menu-options');
       spyOn(element, 'getBoundingClientRect').and.callFake(() => ({
         width: 400,
         height: 400,
@@ -348,7 +348,7 @@ describe('Test floating menu', function() {
     beforeEach(function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
-      element = container.querySelector('ul.bx--overflow-menu-options');
+      element = container.querySelector('.bx--overflow-menu-options');
       document.body.appendChild(container);
       menu = new FloatingMenu(element, {
         refNode,
@@ -406,7 +406,7 @@ describe('Test floating menu', function() {
     tempDiv.innerHTML = HTML;
 
     beforeAll(function() {
-      element = tempDiv.querySelector('ul.bx--overflow-menu-options');
+      element = tempDiv.querySelector('.bx--overflow-menu-options');
       document.body.appendChild(element);
       refNode = document.createElement('div');
       document.body.appendChild(refNode);
@@ -470,7 +470,7 @@ describe('Test floating menu', function() {
     tempDiv.innerHTML = HTML;
 
     beforeAll(function() {
-      element = tempDiv.querySelector('ul.bx--overflow-menu-options');
+      element = tempDiv.querySelector('.bx--overflow-menu-options');
       document.body.appendChild(element);
       primaryFocusNode = element.querySelector(
         '[data-floating-menu-primary-focus]'
