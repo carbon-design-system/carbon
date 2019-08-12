@@ -4772,7 +4772,6 @@ $link-01: map-get($carbon--theme, 'link-01');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [carbon--type-reset [mixin]](#carbon--type-reset-mixin)
   - [button [mixin]](#button-mixin)
   - [link [mixin]](#link-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -6401,7 +6400,7 @@ Include a type reset for a given body and mono font family
   }
 
   a {
-    // color: $link-01;
+    color: #0062ff;
   }
 
   em {
@@ -6428,7 +6427,6 @@ Include a type reset for a given body and mono font family
 - **Requires**:
   - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
-  - [link-01 [variable]](#link-01-variable)
 
 ### ✅carbon--font-face-sans [mixin]
 
