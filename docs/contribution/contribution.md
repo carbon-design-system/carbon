@@ -15,7 +15,7 @@ contributing environment. Please take a look at our
 
 ## Overview
 
-#### Who can contribute?
+### Who can contribute?
 
 Anyone! We mean it. The one and only requirement is you'll need a
 [public GitHub account](https://github.com/join), as all our assets live on
@@ -38,7 +38,7 @@ GitHub.
   design and development forces, which would be presented in a GitHub issue and
   subsequent PR.
 
-#### What is the contribution process?
+### What is the contribution process?
 
 1. **Issue:** Check repo for an _existing_ issue related to your contribution
    first. If none exist, open a new issue. Be sure to check the right repo.
@@ -63,19 +63,19 @@ GitHub.
    if you're contributing to component work which has website documentation
    related to your contribution.
 
-   Here are some contribution quick tips:
+Here are some contribution quick tips:
 
-   - **Do** fill out the required template for contributions entirely; this
-     pertains to both issues and PRs.
-   - **Do** add or update tests for any contributions that require it.
-   - **Do** follow existing coding and writing styles.
-   - **Do** follow proper commit messages syntax.
-   - **Do** lint your code.
-   - **Do not** branch off another branch.
-   - **Do not** include unrelated changes in the same PR.
-   - **Do not** create one massive PR if it can be broken up into smaller PRs.
+- **Do** fill out the required template for contributions entirely; this
+  pertains to both issues and PRs.
+- **Do** add or update tests for any contributions that require it.
+- **Do** follow existing coding and writing styles.
+- **Do** follow proper commit messages syntax.
+- **Do** lint your code.
+- **Do not** branch off another branch.
+- **Do not** include unrelated changes in the same PR.
+- **Do not** create one massive PR if it can be broken up into smaller PRs.
 
-#### What projects can I contribute to?
+### What projects can I contribute to?
 
 - [`carbon-components`](https://github.com/carbon-design-system/carbon/tree/master/packages/components)
 - [`carbon-components-react`](https://github.com/carbon-design-system/carbon/tree/master/packages/react)
@@ -95,7 +95,7 @@ GitHub.
 And more! You can view a complete list of our packages
 [here](https://github.com/carbon-design-system/carbon/tree/master/packages).
 
-#### Besides some of the obvious contributions mentioned above, how else can I contribute?
+### Besides some of the obvious contributions mentioned above, how else can I contribute?
 
 Great question! Contribution does not require creating or maintaining our
 assets. Here are some other ways you can contribute, which don't require much
@@ -112,14 +112,14 @@ work:
   opening an issue alone makes a big difference! Be sure to completely fill out
   the issue template to best help us understand what is going wrong.
 
-#### What if I want to contribute a new feature or custom component?
+### What if I want to contribute a new feature or custom component?
 
 If you're contributing code to Carbon Components, we will only accept bug fixes.
 If you want to contribute a custom component, new feature, or a variation of an
 existing component, our new community components package is the way to go. For
 more details on this, checkout our community components section below.
 
-#### If I'm contributing code, am I required to contribute it for all frameworks?
+### If I'm contributing code, am I required to contribute it for all frameworks?
 
 If you've been working with Carbon for a while, you know that we have code
 assets in vanilla JS, React, Vue and Angular. While the core team only maintains
