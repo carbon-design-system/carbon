@@ -4403,7 +4403,6 @@ $ui-background: map-get($carbon--theme, 'ui-background');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
-  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅ui-01 [variable]
 
@@ -5130,7 +5129,6 @@ $focus: map-get($carbon--theme, 'focus');
   - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
   - [toggle [mixin]](#toggle-mixin)
-  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅hover-primary [variable]
 
@@ -18779,6 +18777,9 @@ Tooltip styles
 
 ```scss
 @mixin tooltip() {
+  // Caret's original size was 13.75px square
+  $caret-size: rem(6.875px);
+
   .#{$prefix}--tooltip__label {
     @include type-style('label-01');
     display: inline-flex;
@@ -18831,12 +18832,8 @@ Tooltip styles
     color: $inverse-01;
 
     &:focus {
-      box-shadow: 0 0 0 1px $ui-background, 0 0 0 3px $focus;
+      box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px #ffffff;
       outline: 0;
-
-      .#{$prefix}--tooltip__caret {
-        box-shadow: 1px 1px 0 0 $ui-background, 2px 2px 0 1px $focus;
-      }
     }
 
     p {
@@ -18861,14 +18858,15 @@ Tooltip styles
     }
 
     .#{$prefix}--tooltip__caret {
+      border-left: $caret-size solid transparent;
+      border-right: $caret-size solid transparent;
+      border-bottom: $caret-size solid $inverse-02;
       position: absolute;
-      background: $inverse-02;
       left: 0;
-      top: rem(-4px);
+      top: $caret-size * -1;
       right: 0;
-      transform: rotate(-135deg);
-      width: 0.6rem;
-      height: 0.6rem;
+      width: 0;
+      height: 0;
       margin: 0 auto;
       content: '';
     }
@@ -18884,25 +18882,26 @@ Tooltip styles
       .#{$prefix}--tooltip__caret {
         left: auto;
         top: 50%;
-        right: rem(-4px);
-        transform: rotate(-45deg) translate(50%, -50%);
+        // left position has an additional space between caret and tooltip
+        right: calc(#{$caret-size * -1} + 1px);
+        transform: rotate(90deg) translate(50%, -50%);
       }
     }
 
     &[data-floating-menu-direction='top'] {
       .#{$prefix}--tooltip__caret {
         top: auto;
-        bottom: rem(-4px);
-        transform: rotate(45deg);
+        bottom: $caret-size * -1;
+        transform: rotate(180deg);
       }
     }
 
     &[data-floating-menu-direction='right'] {
       .#{$prefix}--tooltip__caret {
-        left: rem(-4px);
+        left: $caret-size * -1;
         top: 50%;
         right: auto;
-        transform: rotate(135deg) translate(-50%, 50%);
+        transform: rotate(270deg) translate(50%, -50%);
       }
     }
   }
@@ -19067,8 +19066,6 @@ Tooltip styles
   - [inverse-02 [variable]](#inverse-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
-  - [ui-background [variable]](#ui-background-variable)
-  - [focus [variable]](#focus-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [inverse-link [variable]](#inverse-link-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
