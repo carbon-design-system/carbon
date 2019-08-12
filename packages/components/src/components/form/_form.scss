@@ -106,17 +106,15 @@
     z-index: 0;
     opacity: 1;
     margin-bottom: $carbon--spacing-03;
+
+    @include carbon--breakpoint('sm') {
+      max-width: 75%;
+    }
   }
 
   .#{$prefix}--label--disabled,
   .#{$prefix}--form__helper-text--disabled {
     color: $disabled-02;
-  }
-
-  @media (min-width: breakpoint('sm')) {
-    .#{$prefix}--form__helper-text {
-      max-width: 75%;
-    }
   }
 }
 

@@ -35,3 +35,18 @@ export function selectPage(page) {
   page.selected = true;
   return page;
 }
+
+/**
+ * Find or create a Symbol page to store symbols in the document
+ * @param {Document} document
+ * @returns {Page}
+ */
+export function findOrCreateSymbolPage(document) {
+  const page = Page.getSymbolsPage(document);
+  if (page) {
+    return page;
+  }
+  const symbolsPage = Page.createSymbolsPage();
+  symbolsPage.parent = document;
+  return symbolsPage;
+}

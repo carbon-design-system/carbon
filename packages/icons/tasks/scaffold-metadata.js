@@ -136,12 +136,19 @@ async function scaffold() {
           }
           return size;
         });
-        return acc.concat({
+        const result = {
           name,
           friendly_name: sentenceCase(name),
           usage: 'This is a description for usage',
           sizes,
-        });
+        };
+
+        if (categoryInformation[name]) {
+          const { category, subcategory } = categoryInformation[name];
+          result.categories = [{ name: category, subcategory }];
+        }
+
+        return acc.concat(result);
       }, []);
     }
 
