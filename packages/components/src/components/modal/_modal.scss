@@ -101,7 +101,7 @@
 
   .#{$prefix}--modal-header,
   .#{$prefix}--modal-content {
-    width: 75%;
+    padding-right: 25%;
     padding-left: 1rem;
   }
 
@@ -135,6 +135,10 @@
     margin-bottom: $carbon--spacing-09;
     color: $text-01;
     font-weight: 400;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 
   .#{$prefix}--modal-content > * {
