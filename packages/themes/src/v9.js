@@ -53,7 +53,7 @@ export const overlay01 = 'rgba(223, 227, 230, 0.5)';
 
 // Interaction states
 export const focus = '#3d70b2';
-export const inverseTokenUi = '#3d70b2';
+export const inverseFocus = '#3d70b2';
 
 export const hoverPrimary = '#30588c';
 export const activePrimary = '#30588c';
