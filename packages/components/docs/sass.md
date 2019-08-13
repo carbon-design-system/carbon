@@ -6377,22 +6377,26 @@ Include a type reset for a given body and mono font family
   }
 
   h1 {
-    @include carbon--type-style('productive-heading-05');
+    @include carbon--type-style('productive-heading-06');
   }
 
   h2 {
-    @include carbon--type-style('productive-heading-04');
+    @include carbon--type-style('productive-heading-05');
   }
 
   h3 {
-    @include carbon--type-style('productive-heading-03');
+    @include carbon--type-style('productive-heading-04');
   }
 
   h4 {
-    @include carbon--type-style('productive-heading-02');
+    @include carbon--type-style('productive-heading-03');
   }
 
   h5 {
+    @include carbon--type-style('productive-heading-02');
+  }
+
+  h6 {
     @include carbon--type-style('productive-heading-01');
   }
 
