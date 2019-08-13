@@ -138,5 +138,9 @@ module.exports = ({ config, mode }) => {
     plugins: [new FeatureFlagProxyPlugin()],
   };
 
+  config.plugins = config.plugins.filter(
+    p => String(p.resourceRegExp) !== '/core-js/'
+  );
+
   return config;
 };
