@@ -157,7 +157,7 @@ categories:
     - report
     - secure data
     - user analytics
-  - name: Data Analytics
+  - name: Data Storage
     members:
     - archive
     - data backup
