@@ -126,7 +126,7 @@ function getMarkdownTitle(lastTag, latestTag) {
   const month = now.getMonth() + 1;
   const url = `${compareUrl}/${lastTag}...${latestTag}`;
 
-  return `# [${latestTag}](${url}) (${year}-${day}-${month})`;
+  return `# [${latestTag}](${url}) (${year}-${month}-${day})`;
 }
 
 /**
