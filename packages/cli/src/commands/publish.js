@@ -11,6 +11,7 @@ const execa = require('execa');
 const { prompt } = require('inquirer');
 const semver = require('semver');
 const { generate } = require('../changelog');
+const { fetchLatestFromUpstream } = require('../git');
 const { createLogger, displayBanner } = require('../logger');
 
 const logger = createLogger('publish');
@@ -68,8 +69,7 @@ async function publish({ tag, ...flags }) {
 
     if (type !== 'patch' && type !== 'prepatch') {
       logger.info('Fetching latest from upstream master');
-      await execa('git', ['checkout', 'master']);
-      await execa('git', ['pull', 'upstream', 'master']);
+      await fetchLatestFromUpstream();
     }
 
     logger.info('Cleaning any local artifacts or node_modules');
