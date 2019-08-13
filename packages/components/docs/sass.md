@@ -13771,8 +13771,8 @@ Modal styles
 
   .#{$prefix}--modal-header,
   .#{$prefix}--modal-content {
-    width: 75%;
     padding-left: 1rem;
+    padding-right: 3rem;
   }
 
   .#{$prefix}--modal-header,
