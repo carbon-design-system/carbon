@@ -2239,6 +2239,7 @@ Generate a media query for a given breakpoint
   - [carbon--largest-breakpoint [mixin]](#carbon--largest-breakpoint-mixin)
   - [fluid-type [mixin]](#fluid-type-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
+  - [form [mixin]](#form-mixin)
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
@@ -10704,7 +10705,7 @@ Data table core styles
     background-color: $ui-03;
   }
 
-  .#{$prefix}--data-table th:first-of-type:not(.#{$prefix}--table-expand th) {
+  .#{$prefix}--data-table th:first-of-type:not(.#{$prefix}--table-expand) {
     padding-left: $spacing-05;
   }
 
@@ -12304,6 +12305,18 @@ Dropdown styles
     transform-origin: 50% 45%;
   }
 
+  button.#{$prefix}--dropdown-text {
+    // button-reset mixin contradicts with bx--dropdown-text styles
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
   .#{$prefix}--dropdown-text {
     @include type-style('body-short-01');
     display: block;
@@ -12319,6 +12332,7 @@ Dropdown styles
 
   .#{$prefix}--dropdown-list {
     @include reset;
+    @include focus-outline('reset');
     @include layer('overlay');
     @include type-style('body-short-01');
     background-color: $ui-01;
@@ -12382,16 +12396,17 @@ Dropdown styles
     overflow: hidden;
     white-space: nowrap;
 
-    &:focus {
-      @include focus-outline('outline');
-      margin: 0;
-      padding: rem(11px) rem(16px);
-    }
-
     &:hover {
       color: $text-01;
       border-color: transparent;
     }
+  }
+
+  .#{$prefix}--dropdown--focused,
+  .#{$prefix}--dropdown-link:focus {
+    @include focus-outline('outline');
+    margin: 0;
+    padding: rem(11px) rem(16px);
   }
 
   .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
@@ -12794,17 +12809,15 @@ Form styles
     z-index: 0;
     opacity: 1;
     margin-bottom: $carbon--spacing-03;
+
+    @include carbon--breakpoint('sm') {
+      max-width: 75%;
+    }
   }
 
   .#{$prefix}--label--disabled,
   .#{$prefix}--form__helper-text--disabled {
     color: $disabled-02;
-  }
-
-  @media (min-width: breakpoint('sm')) {
-    .#{$prefix}--form__helper-text {
-      max-width: 75%;
-    }
   }
 }
 ```
@@ -12813,6 +12826,7 @@ Form styles
 
 - **Group**: [form](#form)
 - **Requires**:
+  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
@@ -13200,7 +13214,7 @@ List box styles
     border-bottom: 1px solid $ui-04;
     cursor: pointer;
     color: $text-01;
-    transition: all $duration--fast-02 motion(standard, productive);
+    transition: all $duration--fast-01 motion(standard, productive);
 
     &:hover {
       background-color: $hover-ui;
@@ -13436,7 +13450,7 @@ List box styles
     position: absolute;
     right: $carbon--spacing-05;
     height: 100%;
-    transition: transform $duration--fast-02 motion(standard, productive);
+    transition: transform $duration--fast-01 motion(standard, productive);
     cursor: pointer;
   }
 
@@ -13460,7 +13474,7 @@ List box styles
     width: rem(30px);
     cursor: pointer;
     user-select: none;
-    transition: background-color $duration--fast-02 motion(standard, productive);
+    transition: background-color $duration--fast-01 motion(standard, productive);
 
     &:focus {
       @include focus-outline('outline');
@@ -13538,6 +13552,7 @@ List box styles
     cursor: pointer;
     user-select: none;
     position: relative;
+    transition: background $duration--fast-01 motion(standard, productive);
 
     &:hover {
       background-color: $hover-ui;
@@ -13596,6 +13611,8 @@ List box styles
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    transition: border-color $duration--fast-01 motion(standard, productive), color
+        $duration--fast-01 motion(standard, productive);
 
     &:focus {
       @include focus-outline('outline');
@@ -13632,6 +13649,14 @@ List box styles
     background-color: $hover-ui;
     color: $text-01;
     border-color: transparent;
+  }
+
+  .#{$prefix}--list-box__menu-item--highlighted
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--list-box__menu-item--highlighted
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: transparent;
   }
 
   .#{$prefix}--list-box__menu-item--highlighted
@@ -14026,6 +14051,10 @@ Modal styles
     margin-bottom: $carbon--spacing-09;
     color: $text-01;
     font-weight: 400;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 
   .#{$prefix}--modal-content > * {
@@ -14683,7 +14712,7 @@ Number input styles
       fill: $disabled;
     }
 
-    appearance: textfield; // Firefox: Hide spinner (up and down buttons)
+    -moz-appearance: textfield; // Firefox: Hide spinner (up and down buttons)
 
     &::-ms-clear {
       display: none; // IE: Hide "clear-field" `x` button on input field
@@ -16954,7 +16983,6 @@ Tabs styles
       box-shadow: none;
       z-index: auto;
       transition: inherit;
-      max-height: auto;
       width: auto;
     }
   }
@@ -17314,14 +17342,9 @@ Tag styles
 
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
+    @include skeleton;
     width: rem(60px);
-
-    &:after {
-      @include skeleton;
-      content: '';
-      height: rem(6px);
-      width: 100%;
-    }
+    overflow: hidden;
   }
 }
 ```
@@ -18807,13 +18830,17 @@ Tooltip styles
     align-items: center;
     color: $text-02;
 
+    &:focus {
+      @include focus-outline('border');
+    }
+
     .#{$prefix}--tooltip__trigger {
       margin-left: $carbon--spacing-03;
     }
   }
 
-  .#{$prefix}--tooltip__label:focus {
-    @include focus-outline('border');
+  .#{$prefix}--tooltip__trigger svg {
+    fill: $icon-02;
   }
 
   .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only) {
@@ -18826,12 +18853,6 @@ Tooltip styles
     &:focus {
       @include focus-outline('border');
       fill: $hover-primary;
-    }
-
-    path,
-    polygon,
-    circle {
-      fill: $icon-02;
     }
   }
 
@@ -19077,8 +19098,8 @@ Tooltip styles
   - [prefix [variable]](#prefix-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [hover-primary [variable]](#hover-primary-variable)
   - [icon-02 [variable]](#icon-02-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
