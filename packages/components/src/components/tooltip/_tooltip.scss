@@ -376,7 +376,7 @@
     }
 
     .#{$prefix}--btn:focus {
-      border-color: $inverse-focus;
+      border-color: $inverse-focus-ui;
       outline-color: $inverse-02;
     }
 
@@ -385,7 +385,7 @@
       font-size: rem(14px);
 
       &:focus {
-        outline: 1px solid $inverse-focus;
+        outline: 1px solid $inverse-focus-ui;
         outline-offset: 2px;
       }
 
