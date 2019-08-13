@@ -10,10 +10,23 @@
 const execa = require('execa');
 const { prompt } = require('inquirer');
 const semver = require('semver');
-const { createLogger, displayBanner } = require('../logger');
 const { generate } = require('../changelog');
+const { createLogger, displayBanner } = require('../logger');
 
 const logger = createLogger('publish');
+// Enqueue tasks to run at the end of the command where we want to "clean-up"
+// the environment
+const deferred = [];
+function defer(thunk) {
+  deferred.push(thunk);
+}
+async function cleanup() {
+  for (let i = deferred.length - 1; i >= 0; i--) {
+    const task = deferred[i];
+    await task;
+  }
+  deferred.length = 0;
+}
 
 /**
  * Publish is the counterpart to the `release` command and is responsible for
@@ -22,18 +35,11 @@ const logger = createLogger('publish');
  * creating git tags, making sure npm dist-tag's for packages are correct, and
  * will generate a changelog to be used in a GitHub release.
  *
- * @param {object} args
- * @param {string} args.tag - the tag to publish
- * @param {string} args.gitRemote - the git remote to use for commits
- * @param {boolean} args.noGitTagVersion - specify whether to push to the git
- * remote
- * @param {string} args.registry - the registry to publish to
- * @param {boolean} args.skipReset - specify whether to skip the project reset
- * stage
+ * @param {object}
  * @returns {void}
  */
 async function publish({ tag, ...flags }) {
-  const { gitRemote, noGitTagVersion, registry, skipReset } = flags;
+  const { gitRemote, noGitTagVersion, noPush, registry, skipReset } = flags;
   const lastTag = await getLastGitTag();
   const packages = await getPackages();
 
@@ -104,6 +110,16 @@ async function publish({ tag, ...flags }) {
     });
   }
 
+  logger.info(`Setting the npm registry to ${registry}`);
+  const { stdout: originalRegistryUrl } = await execa('npm', [
+    'get',
+    'registry',
+  ]);
+  if (originalRegistryUrl !== registry) {
+    await execa('npm', ['set', 'registry', registry]);
+    defer(() => execa('npm', ['set', 'registry', originalRegistryUrl]));
+  }
+
   // Publish packages using `lerna`, we default to placing these under the
   // `next` tag instead of `latest` so that we can verify the release.
   await execa(
@@ -139,25 +155,19 @@ async function publish({ tag, ...flags }) {
 
     for (const { name, version } of packages) {
       logger.info(`Setting npm dist-tag for ${name}@${version} to latest`);
-      await execa('npm', [
-        'dist-tag',
-        'add',
-        `${name}@${version}`,
-        'latest',
-        '--registry',
-        registry,
-      ]);
+      await execa('npm', ['dist-tag', 'add', `${name}@${version}`, 'latest']);
     }
 
     logger.stop();
   }
 
   if (!noGitTagVersion) {
-    logger.start('Generating git tag and pushing to upstream');
-
-    logger.info(`Generating the tag ${tag}`);
+    logger.start(`Generating the git tag ${tag}`);
     await execa('git', ['tag', '-a', tag, '-m', tag]);
+    logger.stop();
+  }
 
+  if (!noPush) {
     const { remote } = await prompt([
       {
         type: 'confirm',
@@ -167,11 +177,10 @@ async function publish({ tag, ...flags }) {
     ]);
 
     if (remote) {
-      logger.info(`Pushing the tag ${tag} to the ${gitRemote} remote`);
+      logger.start(`Pushing the tag ${tag} to the ${gitRemote} remote`);
       await execa('git', ['push', gitRemote, tag]);
+      logger.stop();
     }
-
-    logger.stop();
   }
 
   logger.start('Generating the changelog');
@@ -254,7 +263,7 @@ module.exports = {
 
     yargs.option('no-git-tag-version', {
       demandOption: false,
-      describe: 'Do not commit or tag version changes',
+      describe: 'Do not commit or tag version changes.',
       default: false,
       type: 'boolean',
     });
@@ -265,6 +274,19 @@ module.exports = {
       default: 'upstream',
       type: 'string',
     });
+
+    yargs.option('no-push', {
+      demandOption: false,
+      describe: 'Do not push tagged commit to git remote.',
+      default: false,
+      type: 'boolean',
+    });
   },
-  handler: publish,
+  async handler(...args) {
+    try {
+      await publish(...args);
+    } finally {
+      await cleanup();
+    }
+  },
 };
