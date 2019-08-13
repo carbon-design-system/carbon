@@ -151,7 +151,7 @@
   - [✅inverse-support-04 [variable]](#inverse-support-04-variable)
   - [✅overlay-01 [variable]](#overlay-01-variable)
   - [✅focus [variable]](#focus-variable)
-  - [✅inverse-focus [variable]](#inverse-focus-variable)
+  - [✅inverse-token-ui [variable]](#inverse-token-ui-variable)
   - [✅hover-primary [variable]](#hover-primary-variable)
   - [✅active-primary [variable]](#active-primary-variable)
   - [✅hover-primary-text [variable]](#hover-primary-text-variable)
@@ -3329,7 +3329,7 @@ Define theme variables from a map of tokens
   $inverse-support-04: map-get($theme, 'inverse-support-04') !global;
   $overlay-01: map-get($theme, 'overlay-01') !global;
   $focus: map-get($theme, 'focus') !global;
-  $inverse-focus: map-get($theme, 'inverse-focus') !global;
+  $inverse-token-ui: map-get($theme, 'inverse-token-ui') !global;
   $hover-primary: map-get($theme, 'hover-primary') !global;
   $active-primary: map-get($theme, 'active-primary') !global;
   $hover-primary-text: map-get($theme, 'hover-primary-text') !global;
@@ -3392,7 +3392,7 @@ Define theme variables from a map of tokens
     --inverse-support-04: #{map-get($theme, 'inverse-support-04')};
     --overlay-01: #{map-get($theme, 'overlay-01')};
     --focus: #{map-get($theme, 'focus')};
-    --inverse-focus: #{map-get($theme, 'inverse-focus')};
+    --inverse-token-ui: #{map-get($theme, 'inverse-token-ui')};
     --hover-primary: #{map-get($theme, 'hover-primary')};
     --active-primary: #{map-get($theme, 'active-primary')};
     --hover-primary-text: #{map-get($theme, 'hover-primary-text')};
@@ -3500,7 +3500,7 @@ Define theme variables from a map of tokens
   - [inverse-support-04 [variable]](#inverse-support-04-variable)
   - [overlay-01 [variable]](#overlay-01-variable)
   - [focus [variable]](#focus-variable)
-  - [inverse-focus [variable]](#inverse-focus-variable)
+  - [inverse-token-ui [variable]](#inverse-token-ui-variable)
   - [hover-primary [variable]](#hover-primary-variable)
   - [active-primary [variable]](#active-primary-variable)
   - [hover-primary-text [variable]](#hover-primary-text-variable)
@@ -3572,7 +3572,7 @@ $carbon--theme--white: (
   inverse-support-04: #408bfc,
   overlay-01: rgba(23, 23, 23, 0.5),
   focus: #0062ff,
-  inverse-focus: #ffffff,
+  inverse-token-ui: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
   hover-primary-text: #054ada,
@@ -3652,7 +3652,7 @@ $carbon--theme--g10: (
   inverse-support-04: #408bfc,
   overlay-01: rgba(23, 23, 23, 0.5),
   focus: #0062ff,
-  inverse-focus: #ffffff,
+  inverse-token-ui: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
   hover-primary-text: #054ada,
@@ -3730,7 +3730,7 @@ $carbon--theme--g90: (
   inverse-support-04: #0062ff,
   overlay-01: rgba(23, 23, 23, 0.7),
   focus: #ffffff,
-  inverse-focus: #0062ff,
+  inverse-token-ui: #0062ff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
   hover-primary-text: #97c1ff,
@@ -3808,7 +3808,7 @@ $carbon--theme--g100: (
   inverse-support-04: #0062ff,
   overlay-01: rgba(23, 23, 23, 0.7),
   focus: #ffffff,
-  inverse-focus: #0062ff,
+  inverse-token-ui: #0062ff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
   hover-primary-text: #97c1ff,
@@ -3886,7 +3886,7 @@ $carbon--theme--v9: (
   inverse-support-04: #5aaafa,
   overlay-01: rgba(223, 227, 230, 0.5),
   focus: #3d70b2,
-  inverse-focus: #3d70b2,
+  inverse-token-ui: #3d70b2,
   hover-primary: #30588c,
   active-primary: #30588c,
   hover-primary-text: #294c86,
@@ -4539,13 +4539,13 @@ $focus: map-get($carbon--theme, 'focus');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
-### ✅inverse-focus [variable]
+### ✅inverse-token-ui [variable]
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-$inverse-focus: map-get($carbon--theme, 'inverse-focus');
+$inverse-token-ui: map-get($carbon--theme, 'inverse-token-ui');
 ```
 
 </details>

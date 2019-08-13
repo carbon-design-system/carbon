@@ -173,7 +173,7 @@ $focus: map-get($carbon--theme, 'focus') !default;
 /// @type Color
 /// @access public
 /// @group @carbon/themes
-$inverse-focus: map-get($carbon--theme, 'inverse-focus') !default;
+$inverse-token-ui: map-get($carbon--theme, 'inverse-token-ui') !default;
 /// `$interactive-01` hover
 /// @type Color
 /// @access public

@@ -55,7 +55,7 @@ const colors = [
 
   // Interactive states
   'focus',
-  'inverseFocus',
+  'inverseTokenUi',
 
   'hoverPrimary',
   'activePrimary',
@@ -188,7 +188,7 @@ export const unstable__meta = {
       type: 'interactive',
       tokens: [
         'focus',
-        'inverseFocus',
+        'inverseTokenUi',
         'hoverPrimary',
         'hoverPrimaryText',
         'hoverSecondary',
