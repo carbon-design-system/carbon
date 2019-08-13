@@ -68,15 +68,9 @@ class FileUploader extends mixin(
     return `
       <div class="${this.options.classLoadingAnimation}">
         <div data-inline-loading-spinner class="${this.options.classLoading}">
-          <svg class="${
-            this.options.classLoadingSvg
-          }" viewBox="-75 -75 150 150">
-            <circle class="${
-              this.options.classLoadingBackground
-            }" cx="0" cy="0" r="37.5" />
-            <circle class="${
-              this.options.classLoadingStroke
-            }" cx="0" cy="0" r="37.5" />
+          <svg class="${this.options.classLoadingSvg}" viewBox="-75 -75 150 150">
+            <circle class="${this.options.classLoadingBackground}" cx="0" cy="0" r="37.5" />
+            <circle class="${this.options.classLoadingStroke}" cx="0" cy="0" r="37.5" />
           </svg>
         </div>
       </div>`;
@@ -84,9 +78,7 @@ class FileUploader extends mixin(
 
   _closeButtonHTML() {
     return `
-      <button class="${
-        this.options.classFileClose
-      }" type="button" aria-label="close">
+      <button class="${this.options.classFileClose}" type="button" aria-label="close">
       <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16">
       <path fill="#231F20" d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"/>
       </svg>
