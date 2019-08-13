@@ -13178,7 +13178,7 @@ List box styles
     border-bottom: 1px solid $ui-04;
     cursor: pointer;
     color: $text-01;
-    transition: all $duration--fast-02 motion(standard, productive);
+    transition: all $duration--fast-01 motion(standard, productive);
 
     &:hover {
       background-color: $hover-ui;
@@ -13414,7 +13414,7 @@ List box styles
     position: absolute;
     right: $carbon--spacing-05;
     height: 100%;
-    transition: transform $duration--fast-02 motion(standard, productive);
+    transition: transform $duration--fast-01 motion(standard, productive);
     cursor: pointer;
   }
 
@@ -13438,7 +13438,7 @@ List box styles
     width: rem(30px);
     cursor: pointer;
     user-select: none;
-    transition: background-color $duration--fast-02 motion(standard, productive);
+    transition: background-color $duration--fast-01 motion(standard, productive);
 
     &:focus {
       @include focus-outline('outline');
@@ -13516,6 +13516,7 @@ List box styles
     cursor: pointer;
     user-select: none;
     position: relative;
+    transition: background $duration--fast-01 motion(standard, productive);
 
     &:hover {
       background-color: $hover-ui;
@@ -13574,6 +13575,8 @@ List box styles
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    transition: border-color $duration--fast-01 motion(standard, productive), color
+        $duration--fast-01 motion(standard, productive);
 
     &:focus {
       @include focus-outline('outline');
@@ -13610,6 +13613,14 @@ List box styles
     background-color: $hover-ui;
     color: $text-01;
     border-color: transparent;
+  }
+
+  .#{$prefix}--list-box__menu-item--highlighted
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--list-box__menu-item--highlighted
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: transparent;
   }
 
   .#{$prefix}--list-box__menu-item--highlighted
