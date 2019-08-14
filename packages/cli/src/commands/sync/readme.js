@@ -14,8 +14,8 @@ const createRemark = require('remark');
 const monorepo = require('./remark/remark-monorepo');
 
 const packageDenyList = new Set([
-  'carbon-components',
-  'carbon-components-react',
+  '@rocketosftware/carbon-components',
+  '@rocketsoftware/carbon-components-react',
   '@carbon/sketch',
 ]);
 

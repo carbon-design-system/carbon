@@ -7868,7 +7868,7 @@ fixed contexts.
   - [tokens [variable]](#tokens-variable)
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
-<<<<<<< HEAD
+  - [carbon--type-reset [mixin]](#carbon--type-reset-mixin)
 
 ## @rocketsoftware/grid
 
@@ -7926,6 +7926,3 @@ $prefix: 'bx';
 
 - **Group**: [@rocketsoftware/grid](#rocketsoftwaregrid)
 - **Type**: `String`
-=======
-  - [carbon--type-reset [mixin]](#carbon--type-reset-mixin)
->>>>>>> upstream/master

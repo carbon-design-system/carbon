@@ -14024,10 +14024,6 @@ Modal styles
 
   .#{$prefix}--modal-header,
   .#{$prefix}--modal-content {
-<<<<<<< HEAD
-=======
-    padding-right: 25%;
->>>>>>> upstream/master
     padding-left: 1rem;
     padding-right: 3rem;
   }

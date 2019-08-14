@@ -7,14 +7,14 @@
 
 /* global MSSVGImporter, NSString, NSUTF8StringEncoding */
 
-import { toString } from '@carbon/icon-helpers';
+import { toString } from '@rocketsoftware/icon-helpers';
 import { Artboard, Rectangle, Shape } from 'sketch/dom';
 import { syncColorStyles } from '../../sharedStyles/colors';
 import { groupByKey } from '../../tools/grouping';
 import { syncSymbol } from '../../tools/symbols';
 
-const meta = require('@carbon/icons/build-info.json');
-const metadata = require('@carbon/icons/metadata.json');
+const meta = require('@rocketsoftware/icons/build-info.json');
+const metadata = require('@rocketsoftware/icons/metadata.json');
 const { icons } = metadata;
 
 export function syncIconSymbols(
