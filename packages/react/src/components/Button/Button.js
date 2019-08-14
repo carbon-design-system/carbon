@@ -63,7 +63,7 @@ const Button = React.forwardRef(function Button(
     <ButtonImageElement
       aria-label={iconDescription}
       className={`${prefix}--btn__icon`}
-      aria-hidden={true}
+      aria-hidden="true"
     />
   );
 

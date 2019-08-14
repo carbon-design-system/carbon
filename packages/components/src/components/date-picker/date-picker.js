@@ -142,7 +142,12 @@ class DatePicker extends mixin(
       this.manage(
         on(this.element, 'keydown', e => {
           if (e.which === 40) {
-            this.calendar.calendarContainer.focus();
+            e.preventDefault();
+            (
+              this.calendar.selectedDateElem ||
+              this.calendar.todayDateElem ||
+              this.calendar.calendarContainer
+            ).focus();
           }
         })
       );
