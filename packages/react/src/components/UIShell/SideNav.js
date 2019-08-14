@@ -64,7 +64,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     [`${prefix}--side-nav`]: true,
     [`${prefix}--side-nav--expanded`]: expanded,
     [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav,
-    [`${prefix}--side-nav--rail`]: isRail, // this needs a tweak - controlled but has css
+    [`${prefix}--side-nav--rail`]: isRail,
     [customClassName]: !!customClassName,
     [`${prefix}--side-nav--ux`]: isChildOfHeader,
     [`${prefix}--side-nav--hidden`]: !isPersistent,
