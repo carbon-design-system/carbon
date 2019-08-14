@@ -27,7 +27,7 @@
     "@rocketsoftware/icon-helpers": "^0.0.3"
   },
   "devDependencies": {
-    "@carbon/cli-reporter": "^10.2.0",
+    "@carbon/cli-reporter": "10.3.0",
     "@rocketsoftware/icons": "^0.0.3",
     "fs-extra": "^7.0.1",
     "prettier": "^1.17.0",

@@ -267,7 +267,7 @@ export default class Tabs extends React.Component {
               onClick={this.handleDropdownClick}>
               {selectedLabel}
             </a>
-            <ChevronDownGlyph aria-hidden>
+            <ChevronDownGlyph aria-hidden="true">
               {iconDescription && <title>{iconDescription}</title>}
             </ChevronDownGlyph>
           </div>

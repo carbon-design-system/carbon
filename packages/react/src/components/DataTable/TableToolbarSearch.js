@@ -17,7 +17,7 @@ const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
 const translationKeys = {
   'carbon.table.toolbar.search.label': 'Filter table',
-  'carbon.table.toolbar.search.placeholder': 'Search',
+  'carbon.table.toolbar.search.placeholder': 'Filter table',
 };
 const translateWithId = id => {
   return translationKeys[id];

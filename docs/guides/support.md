@@ -1,5 +1,28 @@
 # Carbon core support and maintenance
 
+<!-- prettier-ignore-start -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [Overview](#overview)
+  - [What does "ongoing support" mean?](#what-does-ongoing-support-mean)
+  - [What repositories do we support?](#what-repositories-do-we-support)
+- [Issues](#issues)
+  - [Types of issues](#types-of-issues)
+  - [Triaging a new issue](#triaging-a-new-issue)
+  - [Severity](#severity)
+  - [Priority](#priority)
+  - [Other labels](#other-labels)
+  - [Alerting a team or subject matter expert](#alerting-a-team-or-subject-matter-expert)
+- [Pull requests](#pull-requests)
+  - [WIP, RFC, and Draft pull requests](#wip-rfc-and-draft-pull-requests)
+  - [Pull requests with failing tests or merge conflicts](#pull-requests-with-failing-tests-or-merge-conflicts)
+  - [Pull Request Reviews](#pull-request-reviews)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- prettier-ignore-end -->
+
 ## Overview
 
 Ongoing support for Carbon latest and previous version (which will be

@@ -62,6 +62,8 @@ export const icon03 = white;
 
 export const link01 = blue40;
 
+export const inverseLink = blue60;
+
 export const field01 = gray90;
 export const field02 = gray80;
 
@@ -97,6 +99,7 @@ export const activeTertiary = gray30;
 export const hoverUI = '#353535';
 export const activeUI = gray70;
 export const selectedUI = gray80;
+export const inverseHoverUI = '#e5e5e5';
 
 export const hoverSelectedUI = '#4c4c4c';
 

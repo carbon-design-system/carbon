@@ -298,6 +298,7 @@
 
     &:focus {
       @include focus-outline('outline');
+      outline-color: $interactive-01;
     }
   }
 
@@ -356,7 +357,7 @@
 
   .#{$prefix}--date-picker__day.selected,
   .flatpickr-day.selected {
-    color: $inverse-01;
+    color: $text-04;
     background: $interactive-01;
   }
 
@@ -384,7 +385,7 @@
 
   .#{$prefix}--date-picker__day.endRange.inRange.selected,
   .flatpickr-day.endRange.inRange.selected {
-    color: $inverse-01;
+    color: $text-04;
     background: $interactive-01;
   }
 

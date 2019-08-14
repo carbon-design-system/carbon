@@ -43,27 +43,23 @@ export const ProgressStep = ({ ...props }) => {
     }
   };
 
-  const currentSvg = current && (
-    <svg>
-      <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
-      <title>{description}</title>
-    </svg>
-  );
-
-  const completeSvg = complete && (
-    <CheckmarkOutline16 aria-label={description} role="img">
-      <title>{description}</title>
-    </CheckmarkOutline16>
-  );
-  const incompleteSvg = (() => {
-    if (complete) {
-      return null;
-    }
+  const SVGIcon = ({ complete, current, description, invalid, prefix }) => {
     if (invalid) {
+      return <Warning16 className={`${prefix}--progress__warning`} />;
+    }
+    if (current) {
       return (
-        <Warning16 className={`${prefix}--progress__warning`}>
+        <svg>
+          <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
           <title>{description}</title>
-        </Warning16>
+        </svg>
+      );
+    }
+    if (complete) {
+      return (
+        <CheckmarkOutline16 role="img">
+          <title>{description}</title>
+        </CheckmarkOutline16>
       );
     }
     return (
@@ -72,7 +68,7 @@ export const ProgressStep = ({ ...props }) => {
         <path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z" />
       </svg>
     );
-  })();
+  };
 
   return (
     <li className={classes}>
@@ -84,7 +80,13 @@ export const ProgressStep = ({ ...props }) => {
         tabIndex={!current && onClick ? 0 : -1}
         onClick={!current ? onClick : undefined}
         onKeyDown={handleKeyDown}>
-        {currentSvg || completeSvg || incompleteSvg}
+        <SVGIcon
+          complete={complete}
+          current={current}
+          description={description}
+          invalid={invalid}
+          prefix={prefix}
+        />
         <ProgressStepLabel className={`${prefix}--progress-label`}>
           {label}
         </ProgressStepLabel>

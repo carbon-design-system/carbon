@@ -301,6 +301,8 @@ class NumberInput extends Component {
       'aria-label': ariaLabel,
     };
 
+    const errorId = `${id}-error-id`;
+
     const buttonProps = {
       disabled,
       type: 'button',
@@ -311,7 +313,9 @@ class NumberInput extends Component {
     if (invalid || (!allowEmpty && this.state.value === '')) {
       inputWrapperProps['data-invalid'] = true;
       error = (
-        <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+        <div className={`${prefix}--form-requirement`} id={errorId}>
+          {invalidText}
+        </div>
       );
     }
 
@@ -381,6 +385,9 @@ class NumberInput extends Component {
                 {helper}
                 <div className={`${prefix}--number__input-wrapper`}>
                   <input
+                    data-invalid={invalid || null}
+                    aria-invalid={invalid || null}
+                    aria-describedby={errorId}
                     type="number"
                     pattern="[0-9]*"
                     {...other}

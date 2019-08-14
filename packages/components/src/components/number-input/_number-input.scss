@@ -56,7 +56,7 @@
       fill: $disabled;
     }
 
-    appearance: textfield; // Firefox: Hide spinner (up and down buttons)
+    -moz-appearance: textfield; // Firefox: Hide spinner (up and down buttons)
 
     &::-ms-clear {
       display: none; // IE: Hide "clear-field" `x` button on input field

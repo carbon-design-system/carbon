@@ -351,6 +351,7 @@ export default class FilterableMultiSelect extends React.Component {
                   <ListBox.Field
                     id={id}
                     disabled={disabled}
+                    translateWithId={translateWithId}
                     {...getButtonProps({ disabled })}>
                     {selectedItem.length > 0 && (
                       <ListBox.Selection

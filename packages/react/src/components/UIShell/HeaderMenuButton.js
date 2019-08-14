@@ -21,6 +21,7 @@ const HeaderMenuButton = ({
   className: customClassName,
   onClick,
   isActive,
+  isCollapsible,
   ...rest
 }) => {
   const className = cx({
@@ -29,6 +30,7 @@ const HeaderMenuButton = ({
     [`${prefix}--header__menu-trigger`]: true,
     [`${prefix}--header__action--active`]: isActive,
     [`${prefix}--header__menu-toggle`]: true,
+    [`${prefix}--header__menu-toggle__hidden`]: !isCollapsible,
   });
   const accessibilityLabel = {
     'aria-label': ariaLabel,

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from '@rocketsoftware/carbon-components';
-import { ChevronDownGlyph, WarningFilled16 } from '@rocketsoftware/icons-react';
+import { ChevronDown16, WarningFilled16 } from '@rocketsoftware/icons-react';
 
 const { prefix } = settings;
 
@@ -73,11 +73,11 @@ const Select = React.forwardRef(function Select(
           ref={ref}>
           {children}
         </select>
-        <ChevronDownGlyph
+        <ChevronDown16
           className={`${prefix}--select__arrow`}
           aria-label={iconDescription}>
           <title>{iconDescription}</title>
-        </ChevronDownGlyph>
+        </ChevronDown16>
         {invalid && (
           <WarningFilled16 className={`${prefix}--select__invalid-icon`} />
         )}

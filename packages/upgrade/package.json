@@ -1,8 +1,8 @@
 {
-  "name": "carbon-upgrade",
+  "name": "@carbon/upgrade",
   "private": true,
-  "description": "[Experimental] A tool for upgrading Carbon versions",
-  "version": "0.0.8",
+  "description": "A tool for upgrading Carbon versions",
+  "version": "10.4.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-upgrade": "./bin/carbon-upgrade.js"
@@ -26,7 +26,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "scripts": {},
   "dependencies": {
     "chalk": "^2.4.2",
     "change-case": "^3.1.0",

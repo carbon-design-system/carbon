@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+import warning from 'warning';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -103,10 +103,18 @@ class Modal extends mixin(
         this.element.offsetWidth > 0 &&
         this.element.offsetHeight > 0
       ) {
-        (
+        this.previouslyFocusedNode = this.element.ownerDocument.activeElement;
+        const focusableItem =
           this.element.querySelector(this.options.selectorPrimaryFocus) ||
-          this.element
-        ).focus();
+          this.element.querySelector(settings.selectorTabbable);
+        focusableItem.focus();
+        if (__DEV__) {
+          warning(
+            focusableItem,
+            `Modals need to contain a focusable element by either using ` +
+              `\`${this.options.selectorPrimaryFocus}\` or settings.selectorTabbable.`
+          );
+        }
       }
       callback();
     };
@@ -136,6 +144,13 @@ class Modal extends mixin(
         this.options.classBody,
         false
       );
+      if (this.options.selectorFocusOnClose || this.previouslyFocusedNode) {
+        (
+          this.element.ownerDocument.querySelector(
+            this.options.selectorFocusOnClose
+          ) || this.previouslyFocusedNode
+        ).focus();
+      }
     } else if (state === 'shown') {
       this.element.classList.toggle(this.options.classVisible, true);
       this.element.ownerDocument.body.classList.toggle(
@@ -191,7 +206,7 @@ class Modal extends mixin(
         selector => !eventMatches(evt, selector)
       )
     ) {
-      this.element.focus();
+      this.element.querySelector(settings.selectorTabbable).focus();
     }
   };
 
@@ -211,6 +226,8 @@ class Modal extends mixin(
    * @property {string} selectorInit The CSS class to find modal dialogs.
    * @property {string} [selectorModalClose] The selector to find elements that close the modal.
    * @property {string} [selectorPrimaryFocus] The CSS selector to determine the element to put focus when modal gets open.
+   * @property {string} [selectorFocusOnClose] The CSS selector to determine the element to put focus when modal closes.
+   *   If undefined, focus returns to the previously focused element prior to the modal opening.
    * @property {string} attribInitTarget The attribute name in the launcher buttons to find target modal dialogs.
    * @property {string[]} [selectorsFloatingMenu]
    *   The CSS selectors of floating menus.

@@ -18,7 +18,11 @@ describe('@rocketsoftware/icons-react', () => {
     }).not.toThrow();
   });
 
-  test.each(meta.map(icon => [icon.moduleName]))('%s is require-able', name => {
-    expect(require('@rocketsoftware/icons-react')[name]).toBeDefined();
-  });
+  test.each(meta.map(icon => [icon.moduleName, icon.outputOptions.file]))(
+    '%s is require-able',
+    (name, file) => {
+      expect(require('@rocketsoftware/icons-react')[name]).toBeDefined();
+      expect(require(`@rocketsoftware/icons-react/${file}`)).toBeDefined();
+    }
+  );
 });

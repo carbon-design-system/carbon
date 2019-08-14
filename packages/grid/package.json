@@ -27,11 +27,11 @@
     "clean": "rimraf scss/_inlined scss/vendor"
   },
   "dependencies": {
-    "@carbon/import-once": "^10.2.0",
-    "@rocketsoftware/layout": "0.0.1"
+    "@carbon/import-once": "10.3.0",
+    "@rocketsoftware/layout": "0.0.3"
   },
   "devDependencies": {
-    "@carbon/bundler": "^10.2.0",
+    "@carbon/bundler": "10.4.0",
     "rimraf": "^2.6.3"
   },
   "eyeglass": {

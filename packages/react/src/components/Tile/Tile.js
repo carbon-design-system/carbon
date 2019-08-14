@@ -188,6 +188,11 @@ export class SelectableTile extends Component {
     title: PropTypes.string,
 
     /**
+     * The empty handler of the `<input>`.
+     */
+    onChange: PropTypes.func,
+
+    /**
      * The description of the checkmark icon.
      */
     iconDescription: PropTypes.string,
@@ -205,6 +210,7 @@ export class SelectableTile extends Component {
     selected: false,
     handleClick: () => {},
     handleKeyDown: () => {},
+    onChange: () => {},
     tabIndex: 0,
   };
 
@@ -265,6 +271,7 @@ export class SelectableTile extends Component {
       className,
       handleClick, // eslint-disable-line
       handleKeyDown, // eslint-disable-line
+      onChange,
       ...other
     } = this.props;
 
@@ -287,6 +294,7 @@ export class SelectableTile extends Component {
           id={id}
           className={`${prefix}--tile-input`}
           value={value}
+          onChange={onChange}
           type="checkbox"
           name={name}
           title={title}

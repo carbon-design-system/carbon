@@ -1,7 +1,11 @@
 {
   "name": "@rocketsoftware/elements",
   "description": "A collection of design elements in code for the IBM Design Language",
+<<<<<<< HEAD
   "version": "0.0.3",
+=======
+  "version": "10.5.0",
+>>>>>>> upstream/master
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -31,7 +35,7 @@
     "clean": "rimraf es lib umd && node tasks/clean.js"
   },
   "dependencies": {
-    "@carbon/import-once": "^10.2.0",
+    "@carbon/import-once": "10.3.0",
     "@rocketsoftware/colors": "^0.0.3",
     "@rocketsoftware/grid": "^0.0.3",
     "@rocketsoftware/icons": "^0.0.3",
@@ -41,7 +45,7 @@
     "@rocketsoftware/type": "^0.0.3"
   },
   "devDependencies": {
-    "@carbon/bundler": "^10.2.0",
+    "@carbon/bundler": "10.4.0",
     "fs-extra": "^7.0.1",
     "klaw-sync": "^6.0.0",
     "replace-in-file": "^3.4.2",

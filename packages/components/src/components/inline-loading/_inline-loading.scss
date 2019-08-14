@@ -56,7 +56,7 @@
 
   .#{$prefix}--inline-loading__checkmark {
     fill: none;
-    stroke: $interactive-01;
+    stroke: $interactive-04;
     transform-origin: 50% 50%;
     stroke-width: 1.8;
     stroke-dasharray: 12;
@@ -67,7 +67,7 @@
   }
 
   .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
-    stroke: $interactive-01;
+    stroke: $interactive-04;
   }
   /* If IE11 Don't show check animation */
   @media screen and (-ms-high-contrast: active),

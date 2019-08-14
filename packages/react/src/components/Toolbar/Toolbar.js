@@ -68,9 +68,11 @@ ToolbarItem.defaultProps = {
   placeHolderText: 'Provide placeHolderText',
 };
 
-export const ToolbarTitle = ({ title }) => (
-  <li className={`${prefix}--toolbar-menu__title`}>{title}</li>
-);
+export const ToolbarTitle = React.forwardRef(({ title }, ref) => (
+  <li ref={ref} className={`${prefix}--toolbar-menu__title`}>
+    {title}
+  </li>
+));
 
 ToolbarTitle.propTypes = {
   /**
@@ -79,9 +81,11 @@ ToolbarTitle.propTypes = {
   title: PropTypes.string,
 };
 
-export const ToolbarOption = ({ children }) => (
-  <li className={`${prefix}--toolbar-menu__option`}>{children}</li>
-);
+export const ToolbarOption = React.forwardRef(({ children }, ref) => (
+  <li ref={ref} className={`${prefix}--toolbar-menu__option`}>
+    {children}
+  </li>
+));
 
 ToolbarOption.propTypes = {
   /**
@@ -90,8 +94,8 @@ ToolbarOption.propTypes = {
   children: PropTypes.node,
 };
 
-export const ToolbarDivider = () => (
-  <hr className={`${prefix}--toolbar-menu__divider`} />
-);
+export const ToolbarDivider = React.forwardRef((props, ref) => (
+  <hr ref={ref} className={`${prefix}--toolbar-menu__divider`} />
+));
 
 export default Toolbar;

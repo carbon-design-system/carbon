@@ -38,6 +38,7 @@ We're always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
 check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
-## 📝 License
+Thanks goes to these
+[wonderful people :key:](https://github.com/kentcdodds/all-contributors#emoji-key):
 
 Licensed under the [Apache 2.0 License](/LICENSE).

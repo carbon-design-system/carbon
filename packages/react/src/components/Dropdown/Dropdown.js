@@ -234,6 +234,7 @@ export default class Dropdown extends React.Component {
               isOpen={isOpen}
               invalid={invalid}
               invalidText={invalidText}
+              light={light}
               {...getRootProps({ refKey: 'innerRef' })}>
               {invalid && (
                 <WarningFilled16
@@ -244,6 +245,8 @@ export default class Dropdown extends React.Component {
                 id={id}
                 tabIndex="0"
                 disabled={disabled}
+                aria-disabled={disabled}
+                translateWithId={translateWithId}
                 {...getButtonProps({ disabled })}>
                 <span
                   className={`${prefix}--list-box__label`}

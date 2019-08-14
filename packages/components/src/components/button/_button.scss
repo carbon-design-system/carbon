@@ -37,9 +37,9 @@
   .#{$prefix}--btn {
     @include button-base;
 
-    &.#{$prefix}--btn--disabled > .#{$prefix}--btn__icon svg,
-    &:disabled > .#{$prefix}--btn__icon svg {
-      fill: $ui-04;
+    &.#{$prefix}--btn--disabled > svg.#{$prefix}--btn__icon,
+    &:disabled > svg.#{$prefix}--btn__icon {
+      fill: $disabled-03;
     }
   }
 
@@ -55,7 +55,7 @@
       transparent,
       $text-04,
       $hover-primary,
-      $text-04,
+      currentColor,
       $active-primary
     );
 
@@ -70,7 +70,7 @@
       transparent,
       $text-04,
       $hover-secondary,
-      $text-04,
+      currentColor,
       $active-secondary
     );
 
@@ -86,13 +86,22 @@
       $interactive-03,
       $interactive-03,
       $hover-tertiary,
-      $interactive-03,
+      currentColor,
       $active-tertiary,
       1px
     );
 
     &:hover {
       color: $inverse-01;
+    }
+
+    &:focus {
+      color: $text-04;
+      background-color: $interactive-03;
+    }
+
+    &:active {
+      background-color: $active-primary;
     }
 
     &:disabled,
@@ -118,9 +127,9 @@
     @include button-theme(
       transparent,
       transparent,
-      $interactive-04,
+      $link-01,
       $hover-ui,
-      $interactive-04,
+      currentColor,
       $active-ui
     );
     padding: $button-padding-ghost;
@@ -132,10 +141,10 @@
 
     &:hover,
     &:active {
-      color: $interactive-04;
+      color: $hover-primary-text;
 
       .#{$prefix}--btn__icon path {
-        fill: $interactive-04;
+        fill: $hover-primary-text;
       }
     }
 
@@ -161,10 +170,26 @@
     &.#{$prefix}--btn--sm {
       padding: $button-padding-ghost-sm;
     }
+
+    &.#{$prefix}--btn--field {
+      padding: $button-padding-ghost-field;
+    }
   }
 
-  .#{$prefix}--btn--icon-only {
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
     @include tooltip--trigger('icon', 'bottom');
+    outline: $button-outline-width solid transparent;
+    outline-offset: -4px;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
+    border-color: $focus;
+    outline-color: $ui-02;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
+    svg {
+    outline-color: transparent;
   }
 
   .#{$prefix}--btn--icon-only--top {
