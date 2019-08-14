@@ -150,6 +150,12 @@ async function check() {
 }
 
 const aliasesSchema = Joi.array().items(Joi.string());
+const categorySchema = Joi.array().items(
+  Joi.object().keys({
+    name: Joi.string().required(),
+    subcategory: Joi.string().required(),
+  })
+);
 
 const baseIconSchema = Joi.object().keys({
   name: Joi.string().required(),
@@ -160,17 +166,10 @@ const baseIconSchema = Joi.object().keys({
     Joi.string().only('glyph')
   ),
   aliases: aliasesSchema,
+  categories: categorySchema.required(),
 });
 
-const categorySchema = Joi.array().items(
-  Joi.object().keys({
-    name: Joi.string().required(),
-    subcategory: Joi.string().required(),
-  })
-);
-
 const iconSchema = baseIconSchema.keys({
-  categories: categorySchema.required(),
   aliases: Joi.array()
     .items(Joi.string())
     .required(),
