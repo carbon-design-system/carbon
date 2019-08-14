@@ -161,6 +161,7 @@
   ); // space between caret and trigger button
   $caret-height: rem(5px);
   $caret-width: rem(8px);
+  $body-spacing: $caret-spacing + $caret-height - rem(1px);
   $translate-caret: #{$caret-height} + #{$caret-spacing};
   $translate-body: 100% + #{$caret-spacing} + #{$caret-height};
   $rotate-caret: set-caret-rotation($position);
@@ -202,9 +203,10 @@
       transform: translate(calc(#{$translate-caret}), -50%);
     }
     @if ($position == 'bottom') {
+      bottom: -$caret-spacing;
       border-width: 0 rem(4px) rem(5px) rem(4px);
       border-color: transparent transparent $inverse-02 transparent;
-      transform: translate(-50%, calc(#{$translate-caret}));
+      transform: translate(-50%, 100%);
     }
     @if ($position == 'left') {
       border-width: rem(4px) 0 rem(4px) rem(5px);
@@ -239,7 +241,8 @@
     @if ($position == 'bottom') {
       @if ($align == 'start') {
         left: 0;
-        transform: translate(0, calc(#{$translate-body}));
+        bottom: -$body-spacing;
+        transform: translate(0, 100%);
       } @else if ($align == 'end') {
         right: 0;
         left: initial;
@@ -258,7 +261,8 @@
     &.#{$prefix}--tooltip--a11y + .#{$prefix}--assistive-text {
       @if ($position == 'bottom') {
         @if ($align == 'start') {
-          transform: translate(0, calc(#{$translate-body} - 1px));
+          bottom: -$body-spacing;
+          transform: translate(0, 100%);
         } @else if ($align == 'end') {
           transform: translate(0, calc(#{$translate-body} - 1px));
         } @else {
