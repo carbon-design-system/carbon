@@ -19,7 +19,8 @@
       </button>
     </div>
 
-    <div class="{{@root.prefix}}--modal-content">
+    <!-- Note: Modals with content that scrolls, at any viewport, requires `tabindex="0"` on the `bx--modal-content` element -->
+    <div class="{{@root.prefix}}--modal-content" {{#if hasScrollingContent}}tabindex="0"{{/if}}>
       {{#if hasInput}}
       <div class="{{@root.prefix}}--form-item">
         <label for="text-input-{{idSuffix}}" class="{{@root.prefix}}--label">Text Input label</label>
@@ -32,6 +33,45 @@
         tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
         facilisi.
         Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+
+        {{#if hasScrollingContent}}
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue
+        vitae
+        tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
+        facilisi.
+        Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue
+        vitae
+        tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
+        facilisi.
+        Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue
+        vitae
+        tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
+        facilisi.
+        Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+        <h3>Lorem ipsum</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue
+        vitae
+        tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
+        facilisi.
+        Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue
+        vitae
+        tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
+        facilisi.
+        Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue
+        vitae
+        tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
+        facilisi.
+        Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue
+        vitae
+        tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
+        facilisi.
+        Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+        {{/if}}
       {{/if}}
     </div>
 
