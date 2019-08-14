@@ -639,6 +639,45 @@ storiesOf('UI Shell', module)
     ))
   )
   .add(
+    'SideNav Rail',
+    withReadme(readme, () => (
+      <>
+        <SideNav aria-label="Side navigation" isRail>
+          <SideNavItems>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                Link
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                Link
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                Link
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+              Link
+            </SideNavLink>
+            <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+              Link
+            </SideNavLink>
+          </SideNavItems>
+        </SideNav>
+        <StoryContent />
+      </>
+    ))
+  )
+  .add(
     'SideNav Rail w/Header',
     withReadme(readme, () => (
       <HeaderContainer

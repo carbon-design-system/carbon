@@ -34,6 +34,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useState(defaultExpanded);
+  const [expandedViaHoverState, setExpandedViaHoverState] = useState(
+    defaultExpanded
+  );
   const expanded = controlled ? expandedProp : expandedState;
   const handleToggle = (event, value = !expanded) => {
     if (!controlled) {
@@ -41,6 +44,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     }
     if (onToggle) {
       onToggle(event, value);
+    }
+    if (controlled && isRail) {
+      setExpandedViaHoverState(event);
     }
   };
 
@@ -58,7 +64,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     [`${prefix}--side-nav`]: true,
     [`${prefix}--side-nav--expanded`]: expanded,
     [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav,
-    [`${prefix}--side-nav--rail`]: isRail,
+    [`${prefix}--side-nav--rail`]: isRail, // this needs a tweak - controlled but has css
     [customClassName]: !!customClassName,
     [`${prefix}--side-nav--ux`]: isChildOfHeader,
     [`${prefix}--side-nav--hidden`]: !isPersistent,
@@ -74,7 +80,13 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   // if a rail, pass the expansion state as a prop, so children can update themselves to match
   if (isRail) {
     childrenToRender = React.Children.map(children, child => {
-      return React.cloneElement(child, { isSideNavExpanded: expanded });
+      // if we are controlled, check for if we have hovered over or the expanded state, else just use the expanded state (uncontrolled)
+      let currentExpansionState = controlled
+        ? expandedViaHoverState || expanded
+        : expanded;
+      return React.cloneElement(child, {
+        isSideNavExpanded: currentExpansionState,
+      });
     });
   }
 
