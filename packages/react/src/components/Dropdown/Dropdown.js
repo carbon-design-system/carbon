@@ -245,6 +245,7 @@ export default class Dropdown extends React.Component {
                 id={id}
                 tabIndex="0"
                 disabled={disabled}
+                aria-disabled={disabled}
                 translateWithId={translateWithId}
                 {...getButtonProps({ disabled })}>
                 <span
