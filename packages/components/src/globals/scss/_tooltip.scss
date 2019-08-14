@@ -239,16 +239,16 @@
       transform: translate(calc(#{$translate-body}), -50%);
     }
     @if ($position == 'bottom') {
+      bottom: -$body-spacing;
       @if ($align == 'start') {
         left: 0;
-        bottom: -$body-spacing;
         transform: translate(0, 100%);
       } @else if ($align == 'end') {
         right: 0;
         left: initial;
         transform: translate(0, calc(#{$translate-body}));
       } @else {
-        transform: translate(-50%, calc(#{$translate-body}));
+        transform: translate(-50%, 100%);
       }
     }
     @if ($position == 'left') {
@@ -260,13 +260,13 @@
   @if $tooltip-type == 'definition' {
     &.#{$prefix}--tooltip--a11y + .#{$prefix}--assistive-text {
       @if ($position == 'bottom') {
+        bottom: -$body-spacing;
         @if ($align == 'start') {
-          bottom: -$body-spacing;
           transform: translate(0, 100%);
         } @else if ($align == 'end') {
           transform: translate(0, calc(#{$translate-body} - 1px));
         } @else {
-          transform: translate(-50%, calc(#{$translate-body} - 1px));
+          transform: translate(-50%, 100%);
         }
       }
     }
