@@ -249,7 +249,7 @@ categories:
     - intercom
     - shower
     - wireless modem
-    - wireless xhome
+    - wireless home
   - name: IBM
     members:
     - bee
@@ -454,7 +454,7 @@ categories:
     - train
   - name: Watson
     members:
-    - alchamy language alphabet a expanded
+    - alchemy language alphabet a expanded
     - alchemy data-news
     - alchemy language
     - alchemy vision
