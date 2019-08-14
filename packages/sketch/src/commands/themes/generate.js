@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Document, Rectangle, ShapePath, SymbolMaster } from 'sketch/dom';
+import { Artboard, Document, Rectangle, ShapePath } from 'sketch/dom';
 import { command } from '../command';
 import { findOrCreatePage, selectPage } from '../../tools/page';
 import { groupByKey } from '../../tools/grouping';
@@ -20,11 +20,13 @@ const ARTBOARD_MARGIN_HORIZONTAL = 40;
 export function generate() {
   command('commands/themes/generate', () => {
     const document = Document.getSelectedDocument();
-    const page = selectPage(findOrCreatePage(document, 'Themes'));
+    const page = selectPage(findOrCreatePage(document, 'themes'));
     const sharedStyles = syncThemeColorStyles(document);
 
     const tokens = groupByKey(sharedStyles, sharedStyle => {
-      const [_category, token] = sharedStyle.name.split('/');
+      const [_namespace, _category, _group, token] = sharedStyle.name.split(
+        '/'
+      );
       return token.trim();
     });
 
@@ -33,7 +35,7 @@ export function generate() {
 
     for (const token of Object.keys(tokens)) {
       for (const sharedStyle of tokens[token]) {
-        createSymbolFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
+        createArtboardFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
         X_OFFSET = X_OFFSET + ARTBOARD_WIDTH + ARTBOARD_MARGIN_HORIZONTAL;
       }
 
@@ -43,7 +45,7 @@ export function generate() {
   });
 }
 
-function createSymbolFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
+function createArtboardFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
   const rectangle = new ShapePath({
     name: 'Color',
     frame: new Rectangle(0, 0, ARTBOARD_WIDTH, ARTBOARD_HEIGHT),
@@ -52,7 +54,9 @@ function createSymbolFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
     style: sharedStyle.style,
   });
 
-  const artboard = new SymbolMaster({
+  rectangle.style.borders = [];
+
+  const artboard = new Artboard({
     parent,
     name: sharedStyle.name,
     frame: new Rectangle(offsetX, offsetY, ARTBOARD_WIDTH, ARTBOARD_HEIGHT),

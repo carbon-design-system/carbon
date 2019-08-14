@@ -21,6 +21,10 @@ async function main({ argv }) {
     .strict()
     .fail((message, error, yargs) => {
       if (error) {
+        if (error.stderr) {
+          console.error(error.stderr);
+          process.exit(1);
+        }
         throw error;
       }
       console.log(message);
