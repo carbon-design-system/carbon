@@ -246,7 +246,7 @@
       } @else if ($align == 'end') {
         right: 0;
         left: initial;
-        transform: translate(0, calc(#{$translate-body}));
+        transform: translate(0, 100%);
       } @else {
         transform: translate(-50%, 100%);
       }
@@ -261,10 +261,8 @@
     &.#{$prefix}--tooltip--a11y + .#{$prefix}--assistive-text {
       @if ($position == 'bottom') {
         bottom: -$body-spacing;
-        @if ($align == 'start') {
+        @if ($align == 'start' or $align == 'end') {
           transform: translate(0, 100%);
-        } @else if ($align == 'end') {
-          transform: translate(0, calc(#{$translate-body} - 1px));
         } @else {
           transform: translate(-50%, 100%);
         }
