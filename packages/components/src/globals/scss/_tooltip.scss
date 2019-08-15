@@ -211,9 +211,10 @@
       transform: translate(-50%, 100%);
     }
     @if ($position == 'left') {
+      left: -$caret-spacing;
       border-width: rem(4px) 0 rem(4px) rem(5px);
       border-color: transparent transparent transparent $inverse-02;
-      transform: translate(calc(-1 * (#{$translate-caret})), -50%);
+      transform: translate(-100%, -50%);
     }
   }
 
@@ -256,7 +257,8 @@
       }
     }
     @if ($position == 'left') {
-      transform: translate(calc(-1 * (#{$translate-body})), -50%);
+      left: -$body-spacing;
+      transform: translate(-100%, -50%);
     }
   }
 
