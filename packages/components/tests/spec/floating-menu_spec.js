@@ -103,7 +103,7 @@ describe('Test floating menu', function() {
     it('Should have show() method show menu', function() {
       const spy = jasmine.createSpy();
       events.on(menu.element, 'floating-menu-shown', spy);
-      menu.show();
+      menu.show(); // This causes the hide test to fail
       expect(
         element.classList.contains('my-floating-menu-open'),
         'Menu state'
@@ -117,7 +117,7 @@ describe('Test floating menu', function() {
 
     it('Should call callback of show() method after it finishes', function() {
       const spy = jasmine.createSpy();
-      menu.show(spy);
+      menu.show(spy); // This causes the hide test to fail
       menu.element.dispatchEvent(
         new CustomEvent('transitionend', { bubbles: true })
       );
@@ -151,6 +151,7 @@ describe('Test floating menu', function() {
       expect(spy, 'floating-menu-beinghidden event').not.toHaveBeenCalled();
     });
 
+    // Failing test when `menu.show()` is called 3 or more times in previous tests
     it('Should have hide() method hide menu', function() {
       menu.show();
       menu.element.dispatchEvent(
@@ -498,7 +499,6 @@ describe('Test floating menu', function() {
     it('Should focus back on the trigger button when floating menu loses focus', function() {
       const hasFocusin = 'onfocusin' in window;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
-      primaryFocusNode.focus();
       menu.changeState('shown', {});
       spyOn(HTMLElement.prototype, 'focus');
       // Firefox does not fire `onfocus` event with `input.focus()` call, presumably when the window does not have focus

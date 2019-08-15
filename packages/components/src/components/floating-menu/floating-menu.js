@@ -307,12 +307,8 @@ class FloatingMenu extends mixin(
       );
     }
 
-    const isHidden = state !== 'shown';
-    this.element.setAttribute('aria-hidden', isHidden.toString());
-    (triggerNode || refNode).setAttribute(
-      'aria-expanded',
-      (!isHidden).toString()
-    );
+    this.element.setAttribute('aria-hidden', (!shown).toString());
+    (triggerNode || refNode).setAttribute('aria-expanded', shown.toString());
 
     this.element.classList.toggle(classShown, shown);
     if (classRefShown) {
