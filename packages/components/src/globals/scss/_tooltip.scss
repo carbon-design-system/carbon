@@ -161,7 +161,7 @@
   ); // space between caret and trigger button
   $caret-height: rem(5px);
   $caret-width: rem(8px);
-  $body-spacing: $caret-spacing + $caret-height - rem(1px);
+  $body-spacing: $caret-spacing + $caret-height;
   $translate-caret: #{$caret-height} + #{$caret-spacing};
   $translate-body: 100% + #{$caret-spacing} + #{$caret-height};
   $rotate-caret: set-caret-rotation($position);
@@ -260,7 +260,9 @@
   @if $tooltip-type == 'definition' {
     &.#{$prefix}--tooltip--a11y + .#{$prefix}--assistive-text {
       @if ($position == 'bottom') {
-        bottom: -$body-spacing;
+        bottom: -(
+            $body-spacing - rem(1px)
+          ); // carryover from https://github.com/carbon-design-system/carbon/pull/3151/files#diff-93734be0784e9530b6d14a7b03b0d352R261-R265
         @if ($align == 'start' or $align == 'end') {
           transform: translate(0, 100%);
         } @else {
