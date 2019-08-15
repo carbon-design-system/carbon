@@ -307,13 +307,6 @@ class FloatingMenu extends mixin(
       );
     }
 
-    this.element.setAttribute('aria-hidden', (!shown).toString());
-    (triggerNode || refNode).setAttribute('aria-expanded', shown.toString());
-
-    this.element.classList.toggle(classShown, shown);
-    if (classRefShown) {
-      refNode.classList.toggle(classRefShown, shown);
-    }
     if (state === 'shown') {
       if (!this.hResize) {
         this.hResize = optimizedResize.add(() => {
@@ -322,6 +315,16 @@ class FloatingMenu extends mixin(
       }
       this._getContainer().appendChild(this.element);
       this._place();
+    }
+
+    this.element.setAttribute('aria-hidden', (!shown).toString());
+    (triggerNode || refNode).setAttribute('aria-expanded', shown.toString());
+
+    this.element.classList.toggle(classShown, shown);
+    if (classRefShown) {
+      refNode.classList.toggle(classRefShown, shown);
+    }
+    if (state === 'shown') {
       // IE11 puts focus on elements with `.focus()`, even ones without `tabindex` attribute
       if (!this.element.hasAttribute(this.options.attribAvoidFocusOnOpen)) {
         const primaryFocusNode = this.element.querySelector(

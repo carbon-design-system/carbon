@@ -103,7 +103,7 @@ describe('Test floating menu', function() {
     it('Should have show() method show menu', function() {
       const spy = jasmine.createSpy();
       events.on(menu.element, 'floating-menu-shown', spy);
-      menu.show(); // This causes the hide test to fail
+      menu.show();
       expect(
         element.classList.contains('my-floating-menu-open'),
         'Menu state'
@@ -117,7 +117,7 @@ describe('Test floating menu', function() {
 
     it('Should call callback of show() method after it finishes', function() {
       const spy = jasmine.createSpy();
-      menu.show(spy); // This causes the hide test to fail
+      menu.show(spy);
       menu.element.dispatchEvent(
         new CustomEvent('transitionend', { bubbles: true })
       );
@@ -151,7 +151,6 @@ describe('Test floating menu', function() {
       expect(spy, 'floating-menu-beinghidden event').not.toHaveBeenCalled();
     });
 
-    // Failing test when `menu.show()` is called 3 or more times in previous tests
     it('Should have hide() method hide menu', function() {
       menu.show();
       menu.element.dispatchEvent(
@@ -168,7 +167,6 @@ describe('Test floating menu', function() {
         element.classList.contains('my-floating-menu-trigger-open'),
         'Trigger button state'
       ).toBe(false);
-      // Specific assertion failing
       expect(spy, 'floating-menu-hidden event').toHaveBeenCalled();
     });
 
