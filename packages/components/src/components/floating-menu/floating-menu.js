@@ -314,7 +314,6 @@ class FloatingMenu extends mixin(
         });
       }
       this._getContainer().appendChild(this.element);
-      this._place();
     }
 
     this.element.setAttribute('aria-hidden', (!shown).toString());
@@ -325,6 +324,8 @@ class FloatingMenu extends mixin(
       refNode.classList.toggle(classRefShown, shown);
     }
     if (state === 'shown') {
+      this._place();
+
       // IE11 puts focus on elements with `.focus()`, even ones without `tabindex` attribute
       if (!this.element.hasAttribute(this.options.attribAvoidFocusOnOpen)) {
         const primaryFocusNode = this.element.querySelector(
