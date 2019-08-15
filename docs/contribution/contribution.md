@@ -146,6 +146,7 @@ in a few ways:
   for community components, not just for development purposes but also for
   consuming purposes. By having community components live in the same package,
   we will be able to better surface your contributions.
+
 - **Tiered system:** We want to make contributing easy, but want to encourage
   improvement, maintenance and contribution. Thus, we've created a 3-tiered
   system for contributing community components. In order to contribute a
@@ -163,12 +164,26 @@ in a few ways:
   will use and contribute to your component and make it easier for you to
   maintain it.
 
+- **Website documentation:** Unlike before, when "add-ons" weren't really
+  surfaced in any of our documentation, community components will have a
+  gallery, coupled with component specific documentation, on our website. This
+  will allow the rest of the community to find and consume custom components
+  easier and thus reduce design and development effort. We also want to
+  encourage community members to contribute back, not just to Carbon, but to the
+  community components they're using as well. Just because core Carbon won't be
+  maintaining these, doesn't mean you can't contribute to them!
+
+- **Maintainers:** This is the one and only part of our community components
+  model that remains the same as our former "add-ons" model. The core Carbon
+  team will not be responsible for maintaining community components, rather the
+  responsiblity to maintain them will fall on the team who contributed the
+  component.
+
 ### Tier requirements
 
 #### Bottom tier
 
-- [ ] Must pass
-      [WCAG A rating](https://www.w3.org/WAI/WCAG21/quickref/?versions=2.0&currentsidebar=%23col_customize&levels=aa%2Caaa&techniques=advisory&technologies=pdf)
+- [ ] Semantic HTML
 - [ ] Browser support for Chrome, Safari and Firefox
 - [ ] Should be using SASS
 - [ ] Should be using design tokens
@@ -178,7 +193,8 @@ in a few ways:
 #### Mid tier
 
 - [ ] Meet all tier 1 requirements
-- [ ] Pass AVT 1 and 2 testing
+- [ ] Must pass
+      [WCAG A rating](https://www.w3.org/WAI/WCAG21/quickref/?versions=2.0&currentsidebar=%23col_customize&levels=aa%2Caaa&techniques=advisory&technologies=pdf)
 - [ ] Should be responsive
 - [ ] Should use `${$prefix}`
 - [ ] Should be using our class naming methodology
@@ -188,7 +204,7 @@ in a few ways:
 - [ ] Meet all tier 1 and 2 requirements
 - [ ] Must pass
       [WCAG AA rating](https://www.w3.org/WAI/WCAG21/quickref/?versions=2.0&currentsidebar=%23col_customize&levels=aaa&techniques=advisory&technologies=pdf&showtechniques=312)
-- [ ] Pass AVT 1, 2 & 3 testing
+      (Pass AVT 1, 2 & 3 testing)
 - [ ] Browser support for Edge and IE11
 - [ ] Theming capabilities
 - [ ] Must include unit tests
@@ -197,7 +213,45 @@ in a few ways:
 
 ### How do I contribute a community component?
 
+Contributing a community component is quite similar to our regular contribution
+process.
+
+1. **Issue:** Check repo for an _existing_ issue related to your contribution
+   first. If none exist, open a new issue. Be sure to use the _community
+   component issue template_ so that the issue will receive the right labels. We
+   reserve the right to close any issues that haven't been filled out properly
+   according to the issue template.
+2. **Contributor License Agreement:** Before you can contribute any code, we
+   need you to sign a Contributor License Agreement (CLA).
+3. **Development environment:** If you haven't already, fork and clone whichever
+   repo you want to contribute to. Then, create a new branch and add your
+   contribution in it. Checkout our
+   [Developer Handbook](../developer-handbook.md) to read up on our best coding
+   practices and proper commit messages.
+4. **Pull request:** Submit a PR. Be sure to fill out the community component PR
+   template. Include any design assets that are being evaluated as part of your
+   PR.
+5. **Approval:** Get PR approved by design and developers, or make any necessary
+   changes for approval. This process may be quick or take a few iterations of
+   feedback-update.
+6. **Documentation:** After design and dev have approved and merged PR, add your
+   community component to our website gallery by following the same steps for a
+   website contribution.
+
 ### Why should I contribute a community component?
+
+The purpose of community components is to reduce the design and development
+effort for Carbon users. By creating a path for contributing and surfacing
+custom components, users can then collaborate on work with teams who are using
+similar components, as well as focus on developing other assets that haven't
+been contributed.
+
+The short and sweet is:
+
+- You'll save time creating new assets since you can use and contribute to
+  existing community components
+- If you're building a community component, you'll have a way to surface it and
+  thus get more users and contributors to help maintain it
 
 ### What happens if my community component is used enough to be part of "core" Carbon?
 
