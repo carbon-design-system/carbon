@@ -447,6 +447,11 @@
     }
   }
 
+  .#{$prefix}--tooltip__heading {
+    @include carbon--type-style('heading-01');
+    margin-bottom: $spacing-03;
+  }
+
   .#{$prefix}--tooltip--shown {
     display: block;
   }

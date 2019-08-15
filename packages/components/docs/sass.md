@@ -2893,6 +2893,7 @@ $spacing-03: $carbon--spacing-03;
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ### ✅spacing-04 [variable]
@@ -8618,6 +8619,7 @@ fixed contexts.
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [carbon--type-reset [mixin]](#carbon--type-reset-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ## accordion
@@ -18994,6 +18996,11 @@ Tooltip styles
     }
   }
 
+  .#{$prefix}--tooltip__heading {
+    @include carbon--type-style('heading-01');
+    margin-bottom: $spacing-03;
+  }
+
   .#{$prefix}--tooltip--shown {
     display: block;
   }
@@ -19144,6 +19151,7 @@ Tooltip styles
 
 - **Group**: [tooltip](#tooltip)
 - **Requires**:
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
   - [prefix [variable]](#prefix-variable)
@@ -19158,6 +19166,7 @@ Tooltip styles
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [inverse-link [variable]](#inverse-link-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
 
 ## ui-shell
