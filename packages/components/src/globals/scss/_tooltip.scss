@@ -231,7 +231,7 @@
       } @else if ($align == 'end') {
         right: 0;
         left: initial;
-        transform: translate(0, calc(-1 * (#{$translate-body})));
+        transform: translate(0, -100%);
       } @else {
         left: 50%;
         transform: translate(-50%, -100%);
