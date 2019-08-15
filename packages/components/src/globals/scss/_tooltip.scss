@@ -162,9 +162,6 @@
   $caret-height: rem(5px);
   $caret-width: rem(8px);
   $body-spacing: $caret-spacing + $caret-height;
-  $translate-caret: #{$caret-height} + #{$caret-spacing};
-  $translate-body: 100% + #{$caret-spacing} + #{$caret-height};
-  $rotate-caret: set-caret-rotation($position);
 
   // @todo Simplify CSS selectors on next major release
   &::before,
