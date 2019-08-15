@@ -313,6 +313,7 @@ export default class ComboBox extends React.Component {
               <input
                 className={`${prefix}--text-input`}
                 aria-label={ariaLabel}
+                aria-disabled={disabled}
                 aria-controls={`${id}__menu`}
                 aria-autocomplete="list"
                 ref={this.textInput}
