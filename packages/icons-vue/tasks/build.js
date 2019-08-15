@@ -53,13 +53,19 @@ async function build() {
     createIconComponent(icon.moduleName, icon.descriptor)
   );
 
-  const entrypoint = `export const CarbonIconsVue = {
-  install(Vue, options) {
-    const { components } = options;
+  const entrypoint = `/**
+  //  * Copyright IBM Corp. 2019, 2019
+  //  *
+  //  * This source code is licensed under the Apache-2.0 license found in the
+  //  * LICENSE file in the root directory of this source tree.
+  //  */
 
-    ${modules.map(({ source }) => `Vue.component(${source.name})`).join('\n')}
-  },
-}`;
+  import Icon from './Icon.js';
+
+  ${modules.map(({ source }) => `export ${source}`).join('\n')}
+
+  export { Icon };
+  `;
 
   const bundle = await rollup({
     input: '__entrypoint__.js',
@@ -204,8 +210,7 @@ export default ${moduleName};`;
 function createIconComponent(moduleName, descriptor) {
   const { attrs, content } = descriptor;
   const { width, height, viewBox } = attrs;
-  const source = `{
-  name: '${moduleName}',
+  const source = `Vue.component('${moduleName}',  {
   functional: true,
   // We use title as the prop name as it is not a valid attribute for an SVG
   // HTML element
@@ -241,7 +246,7 @@ function createIconComponent(moduleName, descriptor) {
       children,
     ]);
   },
-};`;
+});`;
 
   return {
     source,
