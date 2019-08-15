@@ -156,6 +156,37 @@ const sections = [
           </div>
         ),
       },
+      {
+        name: 'Hide column per breakpoint',
+        description:
+          'Use the column helpers to specify a column span of 0 at different widths',
+        content: () => (
+          <div className="bx--grid">
+            <div className="bx--row">
+              <div className="bx--col-sm-1 bx--col-md-2 bx--col-lg-6">
+                <div className="outside">
+                  <div className="inside">Never Hidden</div>
+                </div>
+              </div>
+              <div className="bx--col-sm-2 bx--col-md-0 bx--col-lg-6">
+                <div className="outside">
+                  <div className="inside">Hidden on Medium Screens</div>
+                </div>
+              </div>
+              <div className="bx--col-sm-0 bx--col-md-3 bx--col-lg-4">
+                <div className="outside">
+                  <div className="inside">Hidden on Small Screens</div>
+                </div>
+              </div>
+              <div className="bx--col-sm-1 bx--col-md-3 bx--col-lg-0">
+                <div className="outside">
+                  <div className="inside">Hidden on Large Screens</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ),
+      },
     ],
   },
   {
