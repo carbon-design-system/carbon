@@ -60,6 +60,8 @@ async function build() {
     createIconComponent(icon.moduleName, icon.descriptor)
   );
 
+  console.log(modules);
+
   const entrypoint = `/**
  * Copyright IBM Corp. 2019, 2019
  *

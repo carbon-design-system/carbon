@@ -53,19 +53,13 @@ async function build() {
     createIconComponent(icon.moduleName, icon.descriptor)
   );
 
-  const entrypoint = `/**
- * Copyright IBM Corp. 2019, 2019
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
+  const entrypoint = `export const CarbonIconsVue = {
+  install(Vue, options) {
+    const { components } = options;
 
-import { getAttributes } from '@carbon/icon-helpers';
-
-${modules.map(({ source }) => `export ${source}`).join('\n')}
-
-export { Icon };
-`;
+    ${modules.map(({ source }) => `Vue.component(${source.name})`).join('\n')}
+  },
+}`;
 
   const bundle = await rollup({
     input: '__entrypoint__.js',
@@ -73,8 +67,8 @@ export { Icon };
     plugins: [
       virtual({
         '__entrypoint__.js': entrypoint,
-        './Icon.js': fs.readFileSync(
-          path.resolve(__dirname, '../src/Icon.js'),
+        './Icon.vue': fs.readFileSync(
+          path.resolve(__dirname, '../src/Icon.vue'),
           'utf8'
         ),
       }),
@@ -184,8 +178,8 @@ export default ${moduleName};`;
       // the shared Icon.js module that is used as the base for all components
       virtual({
         ...commonjsInputs,
-        './Icon.js': fs.readFileSync(
-          path.resolve(__dirname, '../src/Icon.js'),
+        './Icon.vue': fs.readFileSync(
+          path.resolve(__dirname, '../src/Icon.vue'),
           'utf8'
         ),
       }),
