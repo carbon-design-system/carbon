@@ -199,3 +199,9 @@
     @include carbon--icons;
   }
 }
+
+@include exports('css--default-type') {
+  @if variable-exists(css--default-type) == false or $css--default-type==true {
+    @include carbon--default-type;
+  }
+}
