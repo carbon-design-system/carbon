@@ -168,6 +168,7 @@ describe('Test floating menu', function() {
         element.classList.contains('my-floating-menu-trigger-open'),
         'Trigger button state'
       ).toBe(false);
+      // Specific assertion failing
       expect(spy, 'floating-menu-hidden event').toHaveBeenCalled();
     });
 

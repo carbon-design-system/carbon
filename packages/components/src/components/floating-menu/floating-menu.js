@@ -337,8 +337,8 @@ class FloatingMenu extends mixin(
           focusableNode.focus();
         } else {
           this.element.focus();
-          const elementTabindex = this.element.getAttribute('tabindex');
           if (__DEV__) {
+            const elementTabindex = this.element.getAttribute('tabindex');
             warning(
               elementTabindex !== null && parseInt(elementTabindex, 10) > -1,
               'Floating Menus without interactive elements must include tabindex="0" on the floating element.'
