@@ -234,7 +234,7 @@
         transform: translate(0, calc(-1 * (#{$translate-body})));
       } @else {
         left: 50%;
-        transform: translate(-50%, calc(-1 * (#{$translate-body})));
+        transform: translate(-50%, -100%);
       }
     }
     @if ($position == 'right') {
