@@ -57,7 +57,7 @@ neque repellendus impedit! Sunt architecto tempora ipsum
 - Item B
 - Item C
 
-**Where we got luck**
+**Where we got lucky**
 
 - Item A
 - Item B
