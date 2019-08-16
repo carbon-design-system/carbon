@@ -1,6 +1,6 @@
 ---
 date: 2019-10-21
-authors: @carbon-bot
+authors: carbon-bot
 ---
 
 # Title of postmortem
