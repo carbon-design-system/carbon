@@ -1,6 +1,6 @@
 ---
-Date: 2019-08-15
-Authors: @joshblack
+date: 2019-08-15
+authors: @joshblack
 ---
 
 # `@carbon/icons-angular` v10.5.0 broken build

@@ -1,7 +1,6 @@
 ---
-Date: 2019-10-21
-Authors: @carbon-bot
-Status: Complete
+date: 2019-10-21
+authors: @carbon-bot
 ---
 
 # Title of postmortem
@@ -24,12 +23,6 @@ Dolor aliquam similique beatae nemo deserunt. Totam distinctio nemo a iusto
 beatae Maiores quis pariatur placeat repellendus accusantium Perspiciatis
 tempore perferendis aperiam laborum reiciendis enim. Natus laudantium
 dignissimos repellat quia
-
-**Trigger**
-
-Dolor ea dolor error optio doloremque! A rem veniam ipsum laudantium qui.
-Deserunt sit natus ex qui rem Mollitia vel consequuntur nobis sunt autem
-possimus quod Ullam itaque molestias hic
 
 **Resolution**
 
@@ -72,7 +65,7 @@ neque repellendus impedit! Sunt architecto tempora ipsum
 
 ## Timeline
 
-2015-10-21 **(all times UTC)**
+2015-10-21 **(all times in UTC)**
 
 - 14:51 Ipsum reprehenderit impedit facere explicabo fugiat.
 
