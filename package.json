@@ -2,7 +2,7 @@
   "name": "carbon",
   "private": true,
   "version": "0.0.0",
-  "repository": "git@github.com:carbon-design-system/carbon.git",
+  "repository": "git@github.com:RocketSoftware/carbon.git",
   "license": "Apache-2.0",
   "engines": {
     "node": "10.x"
