@@ -37,12 +37,12 @@ categories:
     - stairs--plan--view
   - name: Cities
     members:
-    - amsterdam--canal
+   - amsterdam--canal
     - amsterdam--farm
     - amsterdam--windmill
     - austin
     - bangalore
-    - basel
+#    - basel
     - beijing--municipal
     - beijing--tower
     - berlin--brandenburg
@@ -67,16 +67,16 @@ categories:
     - nyc--brooklyn
     - nyc--manhattan
     - nyc--manhattan--alt
-    - portland
+#    - portland
     - rome
     - san--francisco
     - san--francisco--fog
     - sao--paulo
     - sao--paulo--expanded--base
     - seattle
-    - shanghai
+#    - shanghai
     - singapore
-    - stockholm
+#    - stockholm
     - tel--aviv
     - tokyo--cherry--blossom
     - tokyo--gates
@@ -208,6 +208,8 @@ categories:
     - chip--circuit
     - chip--credit
     - chip--debit
+    - console
+    - console wireless
     - desktop
     - electric
     - headphones
@@ -215,6 +217,7 @@ categories:
     - telephone
     - television
     - washer
+    - wifi
   - name: Enforcement
     members:
     - capitol
@@ -288,6 +291,15 @@ categories:
     - iot--munich
     - solve
     - transform
+  - name: Learning
+    members:
+    - intelligence
+    - machine--learning--01
+    - machine--learning--02
+    - machine--learning--03
+    - machine--learning--04
+    - machine--learning--05
+    - machine--learning--06
   - name: Life Science
     members:
     - cell
@@ -326,15 +338,6 @@ categories:
     - globe
     - globe--locations
     - location
-  - name: Machine Learning
-    members:
-    - intelligence
-    - machine--learning--01
-    - machine--learning--02
-    - machine--learning--03
-    - machine--learning--04
-    - machine--learning--05
-    - machine--learning--06
   - name: Manufacturing
     members:
     - delivery--truck
