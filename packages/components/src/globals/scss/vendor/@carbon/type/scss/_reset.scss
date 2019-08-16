@@ -36,6 +36,15 @@
     font-family: $mono-font-family;
   }
 
+  strong {
+    @include carbon--font-weight('semibold');
+  }
+}
+
+/// Include default type styles
+/// @access public
+/// @group @carbon/type
+@mixin carbon--default-type {
   h1 {
     @include carbon--type-style('productive-heading-06');
   }
@@ -70,9 +79,5 @@
 
   em {
     font-style: italic;
-  }
-
-  strong {
-    @include carbon--font-weight('semibold');
   }
 }
