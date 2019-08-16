@@ -6,3 +6,4 @@
  */
 
 export { generate } from './generate';
+export { sync } from './sync';

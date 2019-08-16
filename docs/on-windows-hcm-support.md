@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## Table of Contents
+
+- [What is Windows High Contrast Mode](#what-is-windows-high-contrast-mode)
+- [Edge/Internet Explorer](#edgeinternet-explorer)
+- [Chrome](#chrome)
+- [Firefox](#firefox)
+- [Carbon support for WHCM moving forward](#carbon-support-for-whcm-moving-forward)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 **Carbon Component supports High Contrast mode for Windows 10 on Chrome, Edge,
 and Internet Explorer.** Notable by it's absence is Firefox. For background on
 why you need to understand Windows High Contrast Mode and how the three browser

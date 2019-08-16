@@ -32,12 +32,12 @@ exports[`DataTable.TableBatchAction should render 1`] = `
       type="button"
     >
       <ForwardRef(AddFilled16)
-        aria-hidden={true}
+        aria-hidden="true"
         aria-label="Add"
         className="bx--btn__icon"
       >
         <Icon
-          aria-hidden={true}
+          aria-hidden="true"
           aria-label="Add"
           className="bx--btn__icon"
           height={16}
@@ -47,7 +47,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
           xmlns="http://www.w3.org/2000/svg"
         >
           <svg
-            aria-hidden={true}
+            aria-hidden="true"
             aria-label="Add"
             className="bx--btn__icon"
             focusable="false"
