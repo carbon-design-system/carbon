@@ -39,8 +39,8 @@ neque repellendus impedit! Sunt architecto tempora ipsum
 
 **Action Items**
 
-| Action item | Type | Owner | Bug |
-| ----------- | ---- | ----- | --- |
+| Action item | Owner | Bug |
+| ----------- | ----- | --- |
 
 
 ## Lessons learned
