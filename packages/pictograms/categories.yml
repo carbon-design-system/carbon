@@ -354,10 +354,10 @@ categories:
     - networking--03
     - networking--04
     - networking--05
+    - private--network
     - private--network--01
+    - private--network--alt
     - private--network--alt--01
-    - private--network--02
-    - private--network--alt--02
     - reset--hybrid--cloud
     - reset--settings
     - support--services
@@ -405,14 +405,14 @@ categories:
     members:
     - firewall
     - lock
-    - lock--alt--01
+    - lock--alt
     - locked--network
-    - locked--network--alt--01
+    - locked--network--alt
     - secure--profile
     - security
     - security--shield
     - unlock
-    - unlock--alt--01
+    - unlock--alt
   - name: Status
     members:
     - question
@@ -459,7 +459,7 @@ categories:
     - train
   - name: Watson
     members:
-    - alchemy--language--alphabet--a expanded
+    - alchemy--language--alphabet--expanded
     - alchemy--data-news
     - alchemy--language
     - alchemy--vision
@@ -478,14 +478,14 @@ categories:
     - language--03
     - language--04
     - language--translation
-    - language--translation--alphabet--a expanded
+    - language--translation--alphabet--a--expanded
     - natural--language--classifier
     - personality--insights
     - question--and--answer
     - relationship--extraction
     - retrieve--and--rank
     - speech
-    - speech--alphabet--a expanded
+    - speech--alphabet--a--expanded
     - speech--to--text
     - text--to--speech
     - tone--analyzer
