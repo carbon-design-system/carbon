@@ -45,8 +45,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     if (onToggle) {
       onToggle(event, value);
     }
-    if (controlled && isRail) {
-      setExpandedViaHoverState(event);
+    if (controlled || isRail) {
+      setExpandedViaHoverState(value);
     }
   };
 
@@ -62,7 +62,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   const className = cx({
     [`${prefix}--side-nav`]: true,
-    [`${prefix}--side-nav--expanded`]: expanded,
+    [`${prefix}--side-nav--expanded`]: expanded || expandedViaHoverState,
     [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav,
     [`${prefix}--side-nav--rail`]: isRail,
     [customClassName]: !!customClassName,
@@ -99,8 +99,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         {...accessibilityLabel}
         onFocus={event => handleToggle(event, true)}
         onBlur={event => handleToggle(event, false)}
-        onMouseEnter={() => handleToggle(true)}
-        onMouseLeave={() => handleToggle(false)}>
+        onMouseEnter={() => handleToggle({}, true)}
+        onMouseLeave={() => handleToggle({}, false)}>
         {childrenToRender}
       </nav>
     </>
