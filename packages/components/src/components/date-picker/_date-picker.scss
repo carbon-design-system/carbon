@@ -104,10 +104,14 @@
     }
 
     &:disabled {
-      color: $disabled;
+      color: $disabled-02;
       background-color: $disabled-background-color;
       border-bottom: 1px solid transparent;
       cursor: not-allowed;
+    }
+
+    &:disabled::placeholder {
+      color: $disabled-02;
     }
 
     &:disabled:hover {
