@@ -5,7 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { white, g10, g90, g100, formatTokenName } from '@carbon/themes';
+import {
+  white,
+  g10,
+  g90,
+  g100,
+  formatTokenName,
+  unstable__meta as meta,
+} from '@carbon/themes';
 import { syncColorStyle } from '../tools/sharedStyles';
 
 /**
@@ -22,10 +29,19 @@ export function syncThemeColorStyles(document) {
   };
 
   const sharedStyles = Object.keys(themes).flatMap(theme => {
-    return Object.keys(themes[theme]).map(token => {
-      const name = `${theme} / ${formatTokenName(token)}`;
-      return syncColorStyle(document, name, themes[theme][token]);
-    });
+    return Object.keys(themes[theme])
+      .filter(token => {
+        return !meta.deprecated.includes(token);
+      })
+      .map(token => {
+        const { type } = meta.colors.find(group => {
+          return group.tokens.includes(token);
+        });
+        const name = `theme / ${theme.toLowerCase()} / ${type} tokens / ${formatTokenName(
+          token
+        )}`;
+        return syncColorStyle(document, name, themes[theme][token]);
+      });
   });
 
   return sharedStyles;
