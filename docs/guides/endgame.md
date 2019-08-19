@@ -57,12 +57,19 @@ Release cycles tend to last between four and six weeks. During that time, the en
 
 ### Week 3: Pre-endgame planning
 
+Checklist:
+
+- [ ] Reach out to teams and figure out critical dependencies that are ship/no-ship criteria
+  - Document these in the endgame issue for the Monday task
+- [ ] Create endgame issue and pin it to the Carbon repo by end of week
+
 ### Week 4: The endgame
 
 Checklist:
 
-- [ ] Create endgame issue and pin it to the Carbon repo
-- [ ] Collect feedback from teams for critical dates
+- Collect feedback from teams for critical dates
+- Follow-up and help to coordinate delivery of items
+- Make determination on ship/no-ship together with endgame team
 
 #### Templates
 
@@ -111,9 +118,22 @@ This is the endgame schedule for our Month 20XX iteration, which includes the fo
 
 ### Thursday XX/YY
 
+- [ ] Collect second round of feedback from Carbon Insiders (if available)
+- [ ] Coordinate merging of bug fixes related to release
+- [ ] Cut next Release Candidate, if applicable
+  - [ ] Share newest release with Carbon Insiders for additional rounds of testing
+
 ### Friday XX/YY
 
+- [ ] Collect final round of feedback from Carbon Insiders (if available)
+- [ ] Run final smoke tests on release
+- [ ] Make determination to release on following Monday
+
 ### Monday XX/YY
+
+- [ ] Release Monday morning
+- [ ] Coordinate release communications on Slack and Twitter
+- [ ] Summarize top-level release notes for next blog post
 ```
 </details>
 
