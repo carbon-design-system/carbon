@@ -192,6 +192,15 @@ reach out to the designer to let them know you're interested in building their
 component; you should find that all of the design assets needed for development
 already live in the package directory and all they're missing is code.
 
+**If my contribution is `code only`/`design only`, do I leave my initial
+contribution issue open when I merge my PR?**
+
+No. Please close the issue so that Carbon knows that you already have a package
+directory assigned. Instead, open a `need help` issue, and add a label depending
+on if you need a dev or design contributor to help (`need dev`/ `need design`).
+You can reference your original issue in this issue so that potential
+contributors can see the history.
+
 **How does the component status on the website gallery card work? (draft, beta,
 stable)**
 
@@ -201,11 +210,51 @@ your component stable even if you haven't met all of the guidelines. The purpose
 of the component status is to show the community whether your component will be
 undergoing major changes, is still undergoing testing or is ready to be used.
 
+**Why do contributions have issues and website cards?**
+
+The Carbon community has a variety of users, which means that people work in
+different spaces and use different tools. We have found that even though
+developers live on GitHub and are accustomed to opening and checking issues,
+designers often times don't find that as useful for learning about existing
+efforts. Part of our vision for this community components model was to make
+contributing and learning how/what to contribute easier. Having an issue and a
+website card with useful information (i.e. draft/beta/stable status,
+`code only`/`design only`) will allow more people to learn about existing
+efforts and how to help than if this information only lived on the website or on
+GitHub.
+
+**How do I include my design assets in the component package?**
+
+If you're contributing design, you will add your sketch files to the community
+components [box folder](url here). In the monorepo, we will include the
+following files upon the creation of your directory: `behavior.md`,
+`history.md`, `visuals.md`, `readme.md`, `package.json`, and `rules.js`. The
+first three are the ones that pertain most to design documentation and guidance.
+You need to include a link of the box file in the `visuals.md` for people to
+find. The rest of the documentation will consist of written explanations aided
+with images.
+
 **What if I don't know React?**
 
 No worries! We don't require contributions in any specific frameworks. You can
 contribute code in vanilla, React, Vue or Angular. The only time we require
 React-first contributions is if you're contributing to core Carbon Components.
+
+**I've contributed a community component, is there a process to update the
+component?**
+
+Great question! Our monorepo is community/contributor lead. Other than when we
+create your package directory, the Carbon team is really hands off on this. You
+can continue to update package versions, merge bug fixes, etc. as you see fit.
+
+**How do I report bugs for community components?**
+
+Like in the Carbon monorepo, open an issue (bug template). Be sure to tag the
+package codeowners in the issue so it's brought to their attention. If you have
+maintainer rights, add a label for the package the issue pertains to. If you
+don't have maintainer rights, the codeowner will add the package label. It is
+essential that the issue receives a bug and a package label so that package
+maintainers can search issues easily for their component.
 
 **What if I don't want to be a maintainer but want to contribute?**
 
@@ -237,17 +286,6 @@ Process:
    to determine if the component will be published in core Carbon.
 3. **Response:** The CDSWG will respond with their decision. If they vote to
    publish, the maintainership changes from the contributor to the Carbon team.
-
-**How do I include my design assets in the component package?**
-
-If you're contributing design, you will add your sketch files to the community
-components [box folder](url here). In the monorepo, we will include the
-following files upon the creation of your directory: `behavior.md`,
-`history.md`, `visuals.md`, `readme.md`, `package.json`, and `rules.js`. The
-first three are the ones that pertain most to design documentation and guidance.
-You need to include a link of the box file in the `visuals.md` for people to
-find. The rest of the documentation will consist of written explanations aided
-with images.
 
 **What are the production guidelines for usage images?**
 
