@@ -99,8 +99,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         {...accessibilityLabel}
         onFocus={event => handleToggle(event, true)}
         onBlur={event => handleToggle(event, false)}
-        onMouseEnter={() => handleToggle({}, true)}
-        onMouseLeave={() => handleToggle({}, false)}>
+        onMouseEnter={() => handleToggle(true, true)}
+        onMouseLeave={() => handleToggle(false, false)}>
         {childrenToRender}
       </nav>
     </>
