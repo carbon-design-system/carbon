@@ -155,6 +155,13 @@ development guidelines on this list.
 7. **Website final status:** Once you've completed and merged your component,
    update your website card to the final status.
 
+<img src='./images/completeness_criteria.png' alt='example of website gallery card for community component'/>
+
+The image above shows an example of a community component card in the website
+gallery. You will be able to see the completeness percentage (based on how many
+component checklist items they meet), component status (circle in the upper
+right corner), and more information.
+
 ### FAQ
 
 **Why should I contribute a community component?**
