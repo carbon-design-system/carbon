@@ -82,6 +82,7 @@ exports[`Dropdown should render 1`] = `
           tabIndex="-1"
         >
           <ListBoxField
+            aria-disabled={false}
             aria-expanded={false}
             aria-haspopup={true}
             aria-label="open menu"
@@ -98,6 +99,7 @@ exports[`Dropdown should render 1`] = `
           >
             <div
               aria-controls={null}
+              aria-disabled={false}
               aria-expanded={false}
               aria-haspopup={true}
               aria-label="Open menu"
@@ -255,6 +257,7 @@ exports[`Dropdown should render custom item components 1`] = `
           tabIndex="-1"
         >
           <ListBoxField
+            aria-disabled={false}
             aria-expanded={true}
             aria-haspopup={true}
             aria-label="close menu"
@@ -271,6 +274,7 @@ exports[`Dropdown should render custom item components 1`] = `
           >
             <div
               aria-controls="test-dropdown__menu"
+              aria-disabled={false}
               aria-expanded={true}
               aria-haspopup={true}
               aria-label="Close menu"
@@ -585,6 +589,7 @@ exports[`Dropdown should render with strings as items 1`] = `
           tabIndex="-1"
         >
           <ListBoxField
+            aria-disabled={false}
             aria-expanded={true}
             aria-haspopup={true}
             aria-label="close menu"
@@ -601,6 +606,7 @@ exports[`Dropdown should render with strings as items 1`] = `
           >
             <div
               aria-controls="test-dropdown__menu"
+              aria-disabled={false}
               aria-expanded={true}
               aria-haspopup={true}
               aria-label="Close menu"
