@@ -43,7 +43,25 @@ It is based off of our new contribution model.
   community components. The responsibility to maintain them will fall on the
   team who contributed the component.
 
+<img src='./images/contribution_repo_diagram.png' alt='community components model diagram'/>
+
+The diagram above illustrates one way we could implement this vision for
+community contribution. In this model we would need both a Core Carbon and a
+Community monorepo. The Community repo would consume packages from Core Carbon
+repo and both monorepos would need to run on the same spec model (this has not
+been implemented yet). In order to accurately represent downloads and activity
+for a specific component on the Carbon website, components would need to live in
+the Community monorepo as packages.
+
 ### Component checklist
+
+This check-list consists of a series of agreed upon acceptance criteria (put
+forth by Carbon designers and developers) that lives in the `package.json` file
+as a set of boolean config objects. Each spec will need some meta data (i.e.
+first major release when it was introduced) before we can badge it.
+Contributions can then be evaluated according to the completion of the spec.
+Some of the criteria can be tested through automation, some will be
+self-reported.
 
 In order to contribute a community component, the only _truly_ required items
 are the basic guidelines. This allows us to give you a unique package directory
@@ -52,11 +70,10 @@ development guidelines on this list.
 
 **Basic (always required)**
 
-- [ ] Unique design or feature (not a feature/functionality that our components
-      have)
+- [ ] Unique design or feature
 - [ ] Unique component name
 
-**Artifact (added in [community box folder](link here))**
+**Design artifacts (added in [community box folder](link here))**
 
 - [ ] Component drawing (in Sketch / XD / Sigma) template link
 - [ ] States: default, hover, active, disabled, etc
@@ -92,9 +109,9 @@ development guidelines on this list.
 
 **Responsiveness**
 
-- [ ] Mobile (sm, md)
-- [ ] Desktop (lg, xlg)
-- [ ] Large format (max)
+- [ ] Mobile (`sm`, `md`)
+- [ ] Desktop (`lg`, `xlg`)
+- [ ] Large format (`max`)
 
 **Accessibility**
 
@@ -117,21 +134,6 @@ development guidelines on this list.
 - [ ] IE11
 - [ ] Edge
 
-_**What happens if I don't have a designer or developer to meet all of the
-guidelines?**_
-
-Our hope with community components is that we create a path that allows anyone
-to contribute regardless of the completion. By creating a single environment for
-this we hope to connect contributors who need a designer or developer to help
-out. Part of our effort in helping contributors who don't have the means to
-complete the checklist includes displaying these contribution on our website
-gallery as `code only` or `design only` assets.
-
-_**Can I contribute to `code only` or `design only` assets?**_
-
-YES! We encourage you to combine efforts on these components. Our main goal is
-to have a community lead library.
-
 ### Process
 
 1. **Contributor License Agreement:** Before you can contribute any code, we
@@ -153,7 +155,9 @@ to have a community lead library.
 7. **Website final status:** Once you've completed and merged your component,
    update your website card to the final status.
 
-### Why should I contribute a community component?
+### FAQ
+
+**Why should I contribute a community component?**
 
 The purpose of community components is to reduce the design and development
 effort for Carbon users. By creating a path for contributing and surfacing
@@ -168,4 +172,83 @@ The short and sweet is:
 - If you're building a community component, you'll have a way to surface it and
   thus get more users and contributors to help maintain it
 
-### What happens if my community component is used enough to be part of "core" Carbon?
+**What happens if I don't have a designer or developer to meet all of the
+guidelines?**
+
+Our hope with community components is that we create a path that allows anyone
+to contribute regardless of the completion. By creating a single environment for
+this we hope to connect contributors who need a designer or developer to help
+out. Part of our effort in helping contributors who don't have the means to
+complete the checklist includes displaying these contribution on our website
+gallery as `code only` or `design only` assets.
+
+**Can I contribute to `code only` or `design only` assets?**
+
+YES! We encourage you to combine efforts on these components. Our main goal is
+to have a community lead library. If you're a designer interested in
+contributing to `code only` assets, reach out to the codeowner to work with
+them. If you're a developer interested in contributing to `design only` assets,
+reach out to the designer to let them know you're interested in building their
+component; you should find that all of the design assets needed for development
+already live in the package directory and all they're missing is code.
+
+**How does the component status on the website gallery card work? (draft, beta,
+stable)**
+
+The component status is a self assigned status. This does not depend on how many
+of the design or development guidelines you've checked off. You can consider
+your component stable even if you haven't met all of the guidelines. The purpose
+of the component status is to show the community whether your component will be
+undergoing major changes, is still undergoing testing or is ready to be used.
+
+**What if I don't know React?**
+
+No worries! We don't require contributions in any specific frameworks. You can
+contribute code in vanilla, React, Vue or Angular. The only time we require
+React-first contributions is if you're contributing to core Carbon Components.
+
+**What if I don't want to be a maintainer but want to contribute?**
+
+In order for community components to work, we depend on users maintaining their
+contribution. If you don't want to maintain a community component, you can
+contribute to existing community components or contribute bug fixes to core
+Carbon.
+
+**What happens if my community component is used enough to be part of "core"
+Carbon?**
+
+The end goal of community components is not about making it into core Carbon.
+The end goal is to make our community components high quality and create a space
+to surface these contributions. There are very few instances in which community
+components will be accepted into core Carbon. Some instances would be if your
+component is challenging a basic assumption or design of an existing component,
+or if it has a clear business value. If you feel your component is essential
+enough to be part of core Carbon, these are the next steps to submit a proposal:
+
+- [ ] **Quality:** 100% of the component guidelines have to be met
+- [ ] **Business case:** Present a clear user business value with metrics
+- [ ] **Research:** If it replicates an existing component or pattern, is there
+      evidence to show your variant is better?
+
+Process:
+
+1. **Issue:** Open an issue with your proposal that includes the above criteria.
+2. **Review:** The Carbon Design System Working Group will review your proposal
+   to determine if the component will be published in core Carbon.
+3. **Response:** The CDSWG will respond with their decision. If they vote to
+   publish, the maintainership changes from the contributor to the Carbon team.
+
+**How do I include my design assets in the component package?**
+
+If you're contributing design, you will add your sketch files to the community
+components [box folder](url here). In the monorepo, we will include the
+following files upon the creation of your directory: `behavior.md`,
+`history.md`, `visuals.md`, `readme.md`, `package.json`, and `rules.js`. The
+first three are the ones that pertain most to design documentation and guidance.
+You need to include a link of the box file in the `visuals.md` for people to
+find. The rest of the documentation will consist of written explanations aided
+with images.
+
+**What are the production guidelines for usage images?**
+
+TBD
