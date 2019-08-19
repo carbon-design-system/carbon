@@ -8839,6 +8839,11 @@ Breadcrumb styles
   .#{$prefix}--breadcrumb-item.#{$prefix}--breadcrumb-item--current
     .#{$prefix}--link {
     color: $text-01;
+    cursor: auto;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   // Skeleton State
