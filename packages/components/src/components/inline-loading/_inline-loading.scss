@@ -19,6 +19,7 @@
   .#{$prefix}--inline-loading {
     display: flex;
     width: 100%;
+    min-height: 2rem;
     align-items: center;
 
     .#{$prefix}--loading__svg circle {
@@ -64,6 +65,14 @@
     animation-name: stroke;
     animation-duration: 0.25s;
     animation-fill-mode: forwards;
+  }
+
+  .#{$prefix}--inline-loading--error {
+    fill: $support-01;
+
+    &[hidden] {
+      display: none;
+    }
   }
 
   .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
