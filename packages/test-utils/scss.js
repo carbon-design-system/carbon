@@ -222,10 +222,17 @@ function createSassUtil(compiler) {
   };
 }
 
+function testAll(sassutils, describeCallback) {
+  for (const util of sassutils) {
+    describeCallback(util);
+  }
+}
+
 module.exports = {
   createSassUtil,
   createConvert,
   createCreateSassRenderer,
   createSassAsync,
   createImporter,
+  testAll
 };

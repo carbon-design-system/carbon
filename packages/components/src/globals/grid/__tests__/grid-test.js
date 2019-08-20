@@ -7,83 +7,81 @@
  * @jest-environment node
  */
 
-const { createSassUtil } = require('@carbon/test-utils/scss');
+const { createSassUtil, testAll } = require('@carbon/test-utils/scss');
 
-const tests = useDartSass => {
+testAll(
   // eslint-disable-next-line global-require
-  let sassUtil = createSassUtil(require('node-sass'));
-  if (useDartSass) {
-    // eslint-disable-next-line global-require
-    sassUtil = createSassUtil(require('sass'));
-  }
-
-  const { createSassRenderer } = sassUtil;
-  const render = createSassRenderer(
-    __dirname,
-    `
+  [createSassUtil(require('node-sass')), createSassUtil(require('sass'))],
+  sassUtil => {
+    const { createSassRenderer } = sassUtil;
+    const render = createSassRenderer(
+      __dirname,
+      `
 $css--font-face: false;
 $css--helpers: false;
 $css--body: false;
 $css--use-layer: false;
 $css--reset: false;
 $css--plex: false;
-`
-  ).renderer;
+  `
+    ).renderer;
 
-  describe('_grid.scss', () => {
-    it('should generate grid code when the grid feature flag is on', async () => {
-      const { result } = await render(`
+    describe('_grid.scss', () => {
+      it('should generate grid code when the grid feature flag is on', async () => {
+        const { result } = await render(`
 @import '../grid';
-`);
-      expect(result.css.toString()).toMatchSnapshot();
-    });
+  `);
+        expect(result.css.toString()).toMatchSnapshot();
+      });
 
-    it('should export a 12 column grid by default', async () => {
-      const { result } = await render(`
+      it('should export a 12 column grid by default', async () => {
+        const { result } = await render(`
 @import '../grid';
-`);
-      const output = result.css.toString();
-      const breakpoints = ['lg', 'xlg', 'max'];
+  `);
+        const output = result.css.toString();
+        const breakpoints = ['lg', 'xlg', 'max'];
 
-      for (const breakpoint of breakpoints) {
-        expect(output).toEqual(expect.stringContaining(`col-${breakpoint}-12`));
-        expect(output).not.toEqual(
-          expect.stringContaining(`col-${breakpoint}-13`)
-        );
+        for (const breakpoint of breakpoints) {
+          expect(output).toEqual(
+            expect.stringContaining(`col-${breakpoint}-12`)
+          );
+          expect(output).not.toEqual(
+            expect.stringContaining(`col-${breakpoint}-13`)
+          );
 
-        expect(output).toEqual(
-          expect.stringContaining(`--offset-${breakpoint}-11`)
-        );
-        expect(output).not.toEqual(
-          expect.stringContaining(`--offset-${breakpoint}-12`)
-        );
-      }
-    });
+          expect(output).toEqual(
+            expect.stringContaining(`--offset-${breakpoint}-11`)
+          );
+          expect(output).not.toEqual(
+            expect.stringContaining(`--offset-${breakpoint}-12`)
+          );
+        }
+      });
 
-    it('should export a 16 column grid behind a flag', async () => {
-      const { result } = await render(`
+      it('should export a 16 column grid behind a flag', async () => {
+        const { result } = await render(`
 $feature-flags: (grid-columns-16: true);
 @import '../grid';
-`);
-      const output = result.css.toString();
-      const breakpoints = ['lg', 'xlg', 'max'];
+  `);
+        const output = result.css.toString();
+        const breakpoints = ['lg', 'xlg', 'max'];
 
-      for (const breakpoint of breakpoints) {
-        expect(output).toEqual(expect.stringContaining(`col-${breakpoint}-16`));
-        expect(output).not.toEqual(
-          expect.stringContaining(`col-${breakpoint}-17`)
-        );
+        for (const breakpoint of breakpoints) {
+          expect(output).toEqual(
+            expect.stringContaining(`col-${breakpoint}-16`)
+          );
+          expect(output).not.toEqual(
+            expect.stringContaining(`col-${breakpoint}-17`)
+          );
 
-        expect(output).toEqual(
-          expect.stringContaining(`--offset-${breakpoint}-15`)
-        );
-        expect(output).not.toEqual(
-          expect.stringContaining(`--offset-${breakpoint}-16`)
-        );
-      }
+          expect(output).toEqual(
+            expect.stringContaining(`--offset-${breakpoint}-15`)
+          );
+          expect(output).not.toEqual(
+            expect.stringContaining(`--offset-${breakpoint}-16`)
+          );
+        }
+      });
     });
-  });
-};
-
-tests(false);
-tests(true);
+  }
+);
