@@ -136,6 +136,11 @@
     padding-right: $carbon--spacing-09;
   }
 
+  .#{$prefix}--date-picker__input:disabled ~ .#{$prefix}--date-picker__icon {
+    fill: $disabled-02;
+    cursor: not-allowed;
+  }
+
   .#{$prefix}--date-picker--range
     > .#{$prefix}--date-picker-container:first-child {
     margin-right: rem(1px);
