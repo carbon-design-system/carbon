@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+<g id="berlin_cathedral">
+	<rect style="fill:#FFFFFF;" width="48" height="48"/>
+	<g id="berlin_cathedral_1_">
+		<g>
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" d="M18,39V18c0-3.314,2.686-6,6-6s6,2.686,6,6
+				v21"/>
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" d="M10,36V18c0-1.657,1.343-3,3-3s3,1.343,3,3
+				v18"/>
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" d="M32,36V18c0-1.657,1.343-3,3-3s3,1.343,3,3
+				v18"/>
+			
+				<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="10" y1="18" x2="16" y2="18"/>
+			
+				<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="32" y1="18" x2="38" y2="18"/>
+			
+				<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="10" y1="24" x2="38" y2="24"/>
+			
+				<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="18" y1="18" x2="30" y2="18"/>
+			
+				<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="20" y1="32" x2="28" y2="32"/>
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" d="M20,39v-7c0-2.209,1.791-4,4-4s4,1.791,4,4v7
+				"/>
+			
+				<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+				10,31 13,28 16,31 			"/>
+			
+				<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+				32,31 35,28 38,31 			"/>
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+				M22,14c0-1.105,0.895-2,2-2s2,0.895,2,2"/>
+			
+				<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="22" y1="14" x2="22" y2="18"/>
+			
+				<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="26" y1="14" x2="26" y2="18"/>
+			
+				<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="24" y1="9" x2="24" y2="12"/>
+			<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" points="12,36 12,32 14,32 14,36 			"/>
+			<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" points="34,36 34,32 36,32 36,36 			"/>
+			<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" points="23,39 23,34 25,34 25,39 			"/>
+			
+				<circle style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" cx="24" cy="27" r="1"/>
+			
+				<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+				23,24 23,21 24,20 25,21 25,24 			"/>
+		</g>
+		<g>
+			<circle cx="13" cy="21" r="0.5"/>
+			<circle cx="20.5" cy="21" r="0.5"/>
+			<circle cx="27.5" cy="21" r="0.5"/>
+			<circle cx="35" cy="21" r="0.5"/>
+			<circle cx="35" cy="13" r="0.5"/>
+			<circle cx="13" cy="13" r="0.5"/>
+		</g>
+	</g>
+</g>
+<g id="Layer_1">
+</g>
+</svg>

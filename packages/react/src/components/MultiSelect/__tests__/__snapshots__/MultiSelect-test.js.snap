@@ -94,6 +94,7 @@ exports[`MultiSelect should render 1`] = `
             tabIndex="-1"
           >
             <ListBoxField
+              aria-disabled={false}
               aria-expanded={false}
               aria-haspopup={true}
               aria-label="open menu"
@@ -110,6 +111,7 @@ exports[`MultiSelect should render 1`] = `
             >
               <div
                 aria-controls={null}
+                aria-disabled={false}
                 aria-expanded={false}
                 aria-haspopup={true}
                 aria-label="Open menu"
