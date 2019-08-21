@@ -83,4 +83,15 @@ describe('SideNavMenu', () => {
       wrapper.find('li').hasClass(`${prefix}--side-nav__item--active`)
     ).toBe(true);
   });
+
+  it('should include a css class to render the large varient is large prop is set', () => {
+    wrapper = mount(<SideNavMenu {...mockProps} />);
+    expect(
+      wrapper.find('li').hasClass(`${prefix}--side-nav__item--large`)
+    ).toBe(false);
+    wrapper.setProps({ large: true });
+    expect(
+      wrapper.find('li').hasClass(`${prefix}--side-nav__item--large`)
+    ).toBe(true);
+  });
 });

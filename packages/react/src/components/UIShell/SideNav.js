@@ -89,7 +89,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         isSideNavExpanded: currentExpansionState,
       });
     });
-  
+  }
+
   const eventHanders = {
     onFocus: event => handleToggle(event, true),
     onBlur: event => handleToggle(event, false),
