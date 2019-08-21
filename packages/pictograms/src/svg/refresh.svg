@@ -2,9 +2,9 @@
 <!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<g id="security">
-	<path id="security_1_" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" d="M24,9l-11,6c0,0,0,8,0,13
-		c0,6,5,11,11,11s11-5,11-11c0-7,0-13,0-13L24,9z"/>
+<g id="refresh">
+	<path id="refresh_1_" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" d="M21,21l-6-6l6-6 M10,24v13
+		c0,1.105,0.895,2,2,2h24c1.105,0,2-0.895,2-2V17c0-1.105-0.895-2-2-2H15"/>
 </g>
 <g id="Layer_1">
 </g>
