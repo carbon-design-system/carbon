@@ -81,7 +81,7 @@ const TextArea = React.forwardRef(function TextArea(
     [`${prefix}--label--disabled`]: other.disabled,
   });
 
-  const label = (() => {
+  const TextAreaLabel = () => {
     const labelContent = labelText && (
       <label htmlFor={id} className={labelClasses}>
         {labelText}
@@ -100,13 +100,13 @@ const TextArea = React.forwardRef(function TextArea(
       );
     }
     return labelContent;
-  })();
+  };
 
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
   });
 
-  const helper = (() => {
+  const TextAreaHelperText = () => {
     const helperContent = helperText ? (
       <div className={helperTextClasses}>{helperText}</div>
     ) : null;
@@ -124,7 +124,7 @@ const TextArea = React.forwardRef(function TextArea(
     }
 
     return helperContent;
-  })();
+  };
 
   const errorId = id + '-error-msg';
 
@@ -164,8 +164,8 @@ const TextArea = React.forwardRef(function TextArea(
 
   return (
     <div className={`${prefix}--form-item`}>
-      {label}
-      {helper}
+      <TextAreaLabel />
+      <TextAreaHelperText />
       <div
         className={`${prefix}--text-area__wrapper`}
         data-invalid={invalid || null}>

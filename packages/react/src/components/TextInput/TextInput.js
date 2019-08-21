@@ -95,7 +95,7 @@ const TextInput = React.forwardRef(function TextInput(
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
   });
-  const label = (() => {
+  const TextInputLabel = () => {
     const labelContent = labelText && (
       <label htmlFor={id} className={labelClasses}>
         {labelText}
@@ -114,7 +114,7 @@ const TextInput = React.forwardRef(function TextInput(
       );
     }
     return labelContent;
-  })();
+  };
   const error = invalid ? (
     <div className={`${prefix}--form-requirement`} id={errorId}>
       {invalidText}
@@ -135,7 +135,7 @@ const TextInput = React.forwardRef(function TextInput(
     ) : (
       inputField
     );
-  const helper = (() => {
+  const TextInputHelperText = () => {
     const helperContent = helperText ? (
       <div className={helperTextClasses}>{helperText}</div>
     ) : null;
@@ -153,12 +153,12 @@ const TextInput = React.forwardRef(function TextInput(
     }
 
     return helperContent;
-  })();
+  };
 
   return (
     <div className={`${prefix}--form-item ${prefix}--text-input-wrapper`}>
-      {label}
-      {helper}
+      <TextInputLabel />
+      <TextInputHelperText />
       <div
         className={`${prefix}--text-input__field-wrapper`}
         data-invalid={invalid || null}>
