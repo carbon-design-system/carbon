@@ -46,6 +46,11 @@
     align-items: center;
     opacity: 0;
     pointer-events: none;
+
+    // IE media query
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      display: inline-block;
+    }
   }
 
   &::before,
@@ -100,6 +105,11 @@
     transform: translateX(-50%);
     pointer-events: none;
     background-color: $inverse-02;
+
+    // IE media query
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      width: rem(208px);
+    }
   }
 
   &::after {
@@ -229,7 +239,7 @@
         transform: translate(0, -100%);
       } @else if ($align == 'end') {
         right: 0;
-        left: initial;
+        left: auto;
         transform: translate(0, -100%);
       } @else {
         left: 50%;
@@ -247,7 +257,7 @@
         transform: translate(0, 100%);
       } @else if ($align == 'end') {
         right: 0;
-        left: initial;
+        left: auto;
         transform: translate(0, 100%);
       } @else {
         transform: translate(-50%, 100%);
