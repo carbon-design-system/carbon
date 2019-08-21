@@ -165,7 +165,6 @@ class Tooltip extends Component {
   };
 
   static defaultProps = {
-    open: false,
     direction: DIRECTION_BOTTOM,
     renderIcon: Information,
     showIcon: true,
@@ -204,13 +203,11 @@ class Tooltip extends Component {
     /**
      * so that tooltip can be controlled programmatically through this `open` prop
      */
-    const { prevOpen } = state;
-    return prevOpen === open
-      ? null
-      : {
-          open,
-          prevOpen: open,
-        };
+	const currOpenState = state.open;
+	return (typeof open !== 'undefined' && currOpenState !== open)
+		? {
+			open
+		} : null;
   }
 
   getTriggerPosition = () => {
