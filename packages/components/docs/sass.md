@@ -189,6 +189,7 @@
   - [✅carbon--font-face-mono [mixin]](#carbon--font-face-mono-mixin)
   - [✅prefix [variable]](#prefix-variable)
   - [✅carbon--type-reset [mixin]](#carbon--type-reset-mixin)
+  - [✅carbon--default-type [mixin]](#carbon--default-type-mixin)
   - [✅carbon--font-face-sans [mixin]](#carbon--font-face-sans-mixin)
   - [✅carbon--get-type-size [function]](#carbon--get-type-size-function)
   - [✅carbon--type-scale [variable]](#carbon--type-scale-variable)
@@ -6376,6 +6377,35 @@ Include a type reset for a given body and mono font family
     font-family: $mono-font-family;
   }
 
+  strong {
+    @include carbon--font-weight('semibold');
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name                | Description                                                                         | Type     | Default value                 |
+| ------------------- | ----------------------------------------------------------------------------------- | -------- | ----------------------------- |
+| `$base-font-size`   | The base font size for your document                                                | `Number` | `$carbon--base-font-size`     |
+| `$body-font-family` | The font family used on the `<body>` element                                        | `String` | `carbon--font-family('sans')` |
+| `$mono-font-family` | The font family used on elements that require mono fonts, like the `<code>` element | `String` | `carbon--font-family('mono')` |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
+
+### ✅carbon--default-type [mixin]
+
+Include default type styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon--default-type() {
   h1 {
     @include carbon--type-style('productive-heading-06');
   }
@@ -6411,26 +6441,13 @@ Include a type reset for a given body and mono font family
   em {
     font-style: italic;
   }
-
-  strong {
-    @include carbon--font-weight('semibold');
-  }
 }
 ```
 
 </details>
 
-- **Parameters**:
-
-| Name                | Description                                                                         | Type     | Default value                 |
-| ------------------- | ----------------------------------------------------------------------------------- | -------- | ----------------------------- |
-| `$base-font-size`   | The base font size for your document                                                | `Number` | `$carbon--base-font-size`     |
-| `$body-font-family` | The font family used on the `<body>` element                                        | `String` | `carbon--font-family('sans')` |
-| `$mono-font-family` | The font family used on elements that require mono fonts, like the `<code>` element | `String` | `carbon--font-family('mono')` |
-
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
-  - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
 
 ### ✅carbon--font-face-sans [mixin]
@@ -8590,7 +8607,7 @@ fixed contexts.
   - [tokens [variable]](#tokens-variable)
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
-  - [carbon--type-reset [mixin]](#carbon--type-reset-mixin)
+  - [carbon--default-type [mixin]](#carbon--default-type-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ## accordion
@@ -8822,6 +8839,11 @@ Breadcrumb styles
   .#{$prefix}--breadcrumb-item.#{$prefix}--breadcrumb-item--current
     .#{$prefix}--link {
     color: $text-01;
+    cursor: auto;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   // Skeleton State
@@ -9878,7 +9900,7 @@ Content switcher styles
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    height: rem(32px);
+    height: rem(40px);
   }
 
   .#{$prefix}--content-switcher--disabled {
@@ -9894,7 +9916,6 @@ Content switcher styles
     display: inline-flex;
     align-items: center;
     width: 100%;
-    height: rem(40px);
     padding: $carbon--spacing-03 $carbon--spacing-05;
     margin: 0;
     white-space: nowrap;
