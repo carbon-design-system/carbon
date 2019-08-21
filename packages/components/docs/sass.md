@@ -8839,6 +8839,11 @@ Breadcrumb styles
   .#{$prefix}--breadcrumb-item.#{$prefix}--breadcrumb-item--current
     .#{$prefix}--link {
     color: $text-01;
+    cursor: auto;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   // Skeleton State
@@ -9895,7 +9900,7 @@ Content switcher styles
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    height: rem(32px);
+    height: rem(40px);
   }
 
   .#{$prefix}--content-switcher--disabled {
@@ -9911,7 +9916,6 @@ Content switcher styles
     display: inline-flex;
     align-items: center;
     width: 100%;
-    height: rem(40px);
     padding: $carbon--spacing-03 $carbon--spacing-05;
     margin: 0;
     white-space: nowrap;
