@@ -106,13 +106,20 @@ export class SideNavMenu extends React.Component {
     const { isExpanded } = this.state;
 
     let hasActiveChild;
-    if (children && typeof children === Object) {
-      hasActiveChild = children.some(child => {
-        if (child.props.isActive === true || child.props['aria-current']) {
-          return true;
-        }
-        return false;
-      });
+    if (children) {
+      // if we have children, either a single or multiple, find if it is active
+      hasActiveChild = Array.isArray(children)
+        ? children.some(child => {
+            if (
+              child.props &&
+              (child.props.isActive === true || child.props['aria-current'])
+            ) {
+              return true;
+            }
+            return false;
+          })
+        : children.props &&
+          (children.props.isActive === true || children.props['aria-current']);
     }
 
     const className = cx({
