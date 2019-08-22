@@ -22,6 +22,7 @@ import ClickListener from '../../internal/ClickListener';
 import mergeRefs from '../../tools/mergeRefs';
 import { keys, matches as keyDownMatch } from '../../internal/keyboard';
 import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
+import { useControlledStateWithValue } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -73,7 +74,16 @@ const getMenuOffset = (menuBody, menuDirection) => {
 };
 
 class Tooltip extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.isControlled = props.open !== undefined;
+    if (useControlledStateWithValue && this.isControlled) {
+      // Skips the logic of setting initial state if this component is controlled
+      return;
+    }
+    const open = useControlledStateWithValue ? props.defaultOpen : props.open;
+    this.state = { open };
+  }
 
   static propTypes = {
     /**
@@ -85,6 +95,11 @@ class Tooltip extends Component {
      * The ID of the tooltip content.
      */
     tooltipId: PropTypes.string,
+
+    /**
+     * Optional starting value for uncontrolled state
+     */
+    defaultOpen: PropTypes.bool,
 
     /**
      * Open/closed state.
