@@ -137,13 +137,8 @@ async function build() {
 
   const iconMap = reformatIcons();
 
-  const iconMap2 = new Map();
-  iconMap2.set('add', iconMap.get('add'));
-  iconMap2.set('Q/composer-edit', iconMap.get('Q/composer-edit'));
-  iconMap2.set('caret--down', iconMap.get('caret--down'));
-
   reporter.log('Generating source components...');
-  await generateComponents(iconMap2);
+  await generateComponents(iconMap);
 
   // TODO: remove in v11
   // legacy steps
@@ -155,7 +150,7 @@ async function build() {
   // TODO: keep in v11
   // build the storybook examples
   reporter.log('Generating storybook examples...');
-  buildExamples(iconMap2);
+  buildExamples(iconMap);
 }
 
 module.exports = build;
