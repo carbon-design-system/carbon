@@ -34,6 +34,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useState(defaultExpanded);
+  const [expandedViaHoverState, setExpandedViaHoverState] = useState(
+    defaultExpanded
+  );
   const expanded = controlled ? expandedProp : expandedState;
   const handleToggle = (event, value = !expanded) => {
     if (!controlled) {
@@ -41,6 +44,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     }
     if (onToggle) {
       onToggle(event, value);
+    }
+    if (controlled || isRail) {
+      setExpandedViaHoverState(value);
     }
   };
 
@@ -56,7 +62,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   const className = cx({
     [`${prefix}--side-nav`]: true,
-    [`${prefix}--side-nav--expanded`]: expanded,
+    [`${prefix}--side-nav--expanded`]: expanded || expandedViaHoverState,
     [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav,
     [`${prefix}--side-nav--rail`]: isRail,
     [customClassName]: !!customClassName,
@@ -69,6 +75,21 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     [`${prefix}--side-nav__overlay-active`]: expanded,
   });
 
+  let childrenToRender = children;
+
+  // if a rail, pass the expansion state as a prop, so children can update themselves to match
+  if (isRail) {
+    childrenToRender = React.Children.map(children, child => {
+      // if we are controlled, check for if we have hovered over or the expanded state, else just use the expanded state (uncontrolled)
+      let currentExpansionState = controlled
+        ? expandedViaHoverState || expanded
+        : expanded;
+      return React.cloneElement(child, {
+        isSideNavExpanded: currentExpansionState,
+      });
+    });
+  }
+
   return (
     <>
       {isFixedNav ? null : <div className={overlayClassName} />}
@@ -78,9 +99,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         {...accessibilityLabel}
         onFocus={event => handleToggle(event, true)}
         onBlur={event => handleToggle(event, false)}
-        onMouseEnter={() => handleToggle(true)}
-        onMouseLeave={() => handleToggle(false)}>
-        {children}
+        onMouseEnter={() => handleToggle(true, true)}
+        onMouseLeave={() => handleToggle(false, false)}>
+        {childrenToRender}
       </nav>
     </>
   );
