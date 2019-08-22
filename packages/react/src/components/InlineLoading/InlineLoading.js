@@ -58,7 +58,7 @@ export default function InlineLoading({
     <p className={`${prefix}--inline-loading__text`}>{description}</p>
   );
   const loading = getLoading();
-  const loadingAnimation = !loading ? (
+  const loadingAnimation = loading && <div className={`${prefix}--inline-loading__animation`}>{loading}</div>
     undefined
   ) : (
     <div className={`${prefix}--inline-loading__animation`}>{loading}</div>
