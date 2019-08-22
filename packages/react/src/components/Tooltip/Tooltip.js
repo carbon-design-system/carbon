@@ -293,6 +293,7 @@ class Tooltip extends Component {
     document.body;
 
   handleMouse = evt => {
+    evt.persist();
     const state = {
       focus: 'over',
       blur: 'out',
