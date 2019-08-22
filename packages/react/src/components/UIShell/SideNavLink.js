@@ -60,6 +60,12 @@ SideNavLink.propTypes = {
    * Specify the text content for the link
    */
   children: PropTypes.string.isRequired,
+
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded: PropTypes.bool,
 };
 
 SideNavLink.defaultProps = {

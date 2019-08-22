@@ -48,6 +48,12 @@ export class SideNavMenu extends React.Component {
      * be closed.
      */
     defaultExpanded: PropTypes.bool,
+
+    /**
+     * Property to indicate if the side nav container is open (or not). Use to
+     * keep local state and styling in step with the SideNav expansion state.
+     */
+    isSideNavExpanded: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -55,10 +61,32 @@ export class SideNavMenu extends React.Component {
     isActive: false,
   };
 
+  static getDerivedStateFromProps = (props, state) => {
+    let derivedState = null;
+
+    if (props.isSideNavExpanded === false && state.isExpanded === true) {
+      derivedState = {
+        isExpanded: props.isSideNavExpanded,
+        wasPreviouslyExpanded: true,
+      };
+    } else if (
+      props.isSideNavExpanded === true &&
+      state.wasPreviouslyExpanded === true
+    ) {
+      derivedState = {
+        isExpanded: props.isSideNavExpanded,
+        wasPreviouslyExpanded: false,
+      };
+    }
+
+    return derivedState;
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       isExpanded: props.defaultExpanded || false,
+      wasPreviouslyExpanded: props.defaultExpanded || false,
     };
   }
 
@@ -78,13 +106,20 @@ export class SideNavMenu extends React.Component {
     const { isExpanded } = this.state;
 
     let hasActiveChild;
-    if (children && typeof children === Object) {
-      hasActiveChild = children.some(child => {
-        if (child.props.isActive === true || child.props['aria-current']) {
-          return true;
-        }
-        return false;
-      });
+    if (children) {
+      // if we have children, either a single or multiple, find if it is active
+      hasActiveChild = Array.isArray(children)
+        ? children.some(child => {
+            if (
+              child.props &&
+              (child.props.isActive === true || child.props['aria-current'])
+            ) {
+              return true;
+            }
+            return false;
+          })
+        : children.props &&
+          (children.props.isActive === true || children.props['aria-current']);
     }
 
     const className = cx({
