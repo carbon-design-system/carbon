@@ -292,7 +292,9 @@ class Tooltip extends Component {
     this._hasContextMenu = evt.type === 'contextmenu';
     if (state === 'click') {
       evt.stopPropagation();
-      const shouldOpen = !this.state.open;
+      const shouldOpen = this.isControlled
+        ? !this.props.open
+        : !this.state.open;
       if (shouldOpen) {
         this.getTriggerPosition();
       }
@@ -325,7 +327,9 @@ class Tooltip extends Component {
 
     if (keyDownMatch(event, [keys.Enter, keys.Space])) {
       event.stopPropagation();
-      const shouldOpen = !this.state.open;
+      const shouldOpen = this.isControlled
+        ? !this.props.open
+        : !this.state.open;
       if (shouldOpen) {
         this.getTriggerPosition();
       }
@@ -334,7 +338,7 @@ class Tooltip extends Component {
   };
 
   handleEscKeyPress = event => {
-    const { open } = this.state;
+    const { open } = this.isControlled ? this.props : this.state;
     if (open && keyDownMatch(event, [keys.Escape])) {
       return this._handleUserInputOpenClose(event, { open: false });
     }
@@ -367,7 +371,7 @@ class Tooltip extends Component {
       ...other
     } = this.props;
 
-    const { open } = this.state;
+    const { open } = this.isControlled ? this.props : this.state;
 
     const tooltipClasses = classNames(
       `${prefix}--tooltip`,
