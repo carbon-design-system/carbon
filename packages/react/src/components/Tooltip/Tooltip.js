@@ -182,7 +182,7 @@ class Tooltip extends Component {
 
   componentDidMount() {
     if (!this._debouncedHandleFocus) {
-      this._debouncedHandleFocus = debounce(this._handleHover, 200);
+      this._debouncedHandleFocus = debounce(this._handleFocus, 200);
     }
     requestAnimationFrame(() => {
       this.getTriggerPosition();
@@ -221,11 +221,12 @@ class Tooltip extends Component {
   };
 
   /**
-   * Handles `mouseover`/`mouseout`/`focus`/`blur` event.
+   * Handles `focus`/`blur` event.
    * @param {string} state `over` to show the tooltip, `out` to hide the tooltip.
-   * @param {Element} [relatedTarget] For handing `mouseout` event, indicates where the mouse pointer is gone.
+   * @param {Element} [evt] For handing `mouseout` event, indicates where the mouse pointer is gone.
    */
-  _handleHover = (state, relatedTarget) => {
+  _handleFocus = (state, evt) => {
+    const { relatedTarget } = evt;
     if (state === 'over') {
       this.getTriggerPosition();
       this.setState({ open: true });
@@ -278,7 +279,7 @@ class Tooltip extends Component {
       (state !== 'out' || !hadContextMenu) &&
       this._debouncedHandleFocus
     ) {
-      this._debouncedHandleFocus(state, evt.relatedTarget);
+      this._debouncedHandleFocus(state, evt);
     }
   };
 
