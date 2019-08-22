@@ -18,7 +18,6 @@ module.exports = async function clean() {
     remove(paths.STORIES),
     remove(paths.DIST),
     remove(paths.BAZEL_OUT),
-    remove(paths.PACKAGE),
     remove('yarn.lock'),
   ]);
 };
