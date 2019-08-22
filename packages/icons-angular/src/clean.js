@@ -12,8 +12,12 @@ module.exports = async function clean() {
   return Promise.all([
     remove(paths.TS),
     remove(paths.LIB),
+    remove(paths.UMD),
     remove(paths.WASTE),
     remove(paths.EXAMPLES_LIB),
     remove(paths.STORIES),
+    remove(paths.DIST),
+    remove(paths.BAZEL_OUT),
+    remove('yarn.lock'),
   ]);
 };

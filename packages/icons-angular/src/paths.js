@@ -14,4 +14,8 @@ module.exports = {
   WASTE: resolve(__dirname, '../waste'),
   EXAMPLES_LIB: resolve(__dirname, '../examples/storybook/lib'),
   STORIES: resolve(__dirname, '../examples/storybook/stories'),
+  DIST: resolve(__dirname, '../dist'),
+  BAZEL_OUT: resolve(__dirname, '../bazel-out'),
+  NPM_PACKAGE: resolve(__dirname, '../dist/bin/ts/npm_package'),
+  PACKAGE: resolve(__dirname, '../package'),
 };
