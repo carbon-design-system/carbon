@@ -46,9 +46,7 @@
   }
 
   .#{$prefix}--inline-loading__checkmark-container {
-    width: 0.75rem;
-    position: absolute;
-    top: 0.75rem;
+    fill: $interactive-01;
 
     &[hidden] {
       display: none;
@@ -69,6 +67,8 @@
 
   .#{$prefix}--inline-loading--error {
     fill: $support-01;
+    width: rem(16px);
+    height: rem(16px);
 
     &[hidden] {
       display: none;

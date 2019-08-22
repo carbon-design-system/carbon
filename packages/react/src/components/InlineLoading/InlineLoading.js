@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Error20 } from '@carbon/icons-react';
+import { CheckmarkFilled16, Error20 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate';
 import Loading from '../Loading';
@@ -37,15 +37,9 @@ export default function InlineLoading({
         }
       }, successDelay);
       return (
-        <svg
+        <CheckmarkFilled16
           className={`${prefix}--inline-loading__checkmark-container ${prefix}--inline-loading__svg`}
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 10 10">
-          <polyline
-            className={`${prefix}--inline-loading__checkmark`}
-            points="0.74 3.4 3.67 6.34 9.24 0.74"
-          />
-        </svg>
+        />
       );
     }
     if (status === 'active') {
