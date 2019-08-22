@@ -4,7 +4,7 @@ daysUntilStale: 30
 daysUntilClose: 3
 # Issues with these labels will never be considered stale
 exemptLabels:
-  - 'type: a11y ♿️'
+  - 'type: a11y ♿'
   - 'type: bug 🐛'
   - 'Severity 1 🚨'
   - 'priority: high'

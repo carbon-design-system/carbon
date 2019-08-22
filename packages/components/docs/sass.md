@@ -17791,7 +17791,7 @@ Tile styles
 
   .#{$prefix}--tile--expandable {
     overflow: hidden;
-    transition: $duration--moderate-01 motion(standard, productive);
+    transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
   .#{$prefix}--tile-content__above-the-fold {
@@ -17800,21 +17800,25 @@ Tile styles
 
   .#{$prefix}--tile-content__below-the-fold {
     display: block;
+    visibility: hidden;
     opacity: 0;
-    transition: $duration--fast-02 motion(standard, productive);
+    transition: opacity $duration--fast-02 motion(standard, productive), visibility
+        $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--tile--is-expanded {
     overflow: visible;
-    transition: $duration--fast-02 motion(standard, productive);
+    transition: max-height $duration--fast-02 motion(standard, productive);
 
     .#{$prefix}--tile__chevron svg {
       transform: rotate(-180deg);
     }
 
     .#{$prefix}--tile-content__below-the-fold {
+      visibility: visible;
       opacity: 1;
-      transition: $duration--fast-02 motion(standard, productive);
+      transition: opacity $duration--fast-02 motion(standard, productive), visibility
+          $duration--fast-02 motion(standard, productive);
     }
   }
 
