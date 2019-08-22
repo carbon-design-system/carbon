@@ -10,7 +10,7 @@ import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import { withReadme } from 'storybook-readme';
 import readme from './README.md';
 
-const readmeURL = 'https://goo.gl/dq6CEK';
+const readmeURL = 'https://bit.ly/2Z9PGsC';
 
 const props = () => ({
   useZebraStyles: boolean('Zebra row styles (useZebraStyles)', false),

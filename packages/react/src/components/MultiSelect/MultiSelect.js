@@ -314,11 +314,14 @@ export default class MultiSelect extends React.Component {
                     id={id}
                     tabIndex="0"
                     disabled={disabled}
+                    aria-disabled={disabled}
+                    translateWithId={translateWithId}
                     {...getButtonProps({ disabled })}>
                     {selectedItem.length > 0 && (
                       <ListBox.Selection
                         clearSelection={!disabled ? clearSelection : noop}
                         selectionCount={selectedItem.length}
+                        translateWithId={translateWithId}
                       />
                     )}
                     <span className={`${prefix}--list-box__label`}>

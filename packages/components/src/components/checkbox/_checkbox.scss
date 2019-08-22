@@ -109,8 +109,8 @@
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
-    background-color: $text-01;
-    border-color: $text-01;
+    background-color: $icon-01;
+    border-color: $icon-01;
     border-width: 1px;
   }
 

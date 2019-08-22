@@ -18,12 +18,13 @@ Use these modifiers with `.bx--form-item[data-text-input]` class.
 
 #### Options
 
-| Option                             | Default Selector                                   | Description                                         |
-| ---------------------------------- | -------------------------------------------------- | --------------------------------------------------- |
-| `selectorInit`                     | `[data-text-input]`                                | The selector to find the text input form groups     |
-| `selectorPasswordField`            | `.bx--text-input[data-toggle-password-visibility]` | The selector to find the input field                |
-| `selectorPasswordVisibilityButton` | `.bx--text-input--password__visibility`            | The selector to find the password visibility toggle |
-| `passwordIsVisible`                | `.bx--text-input--password-visible`                | The className for a field with visible passwords    |
+| Option                              | Default Selector                                                      | Description                                                 |
+| ----------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------- |
+| `selectorInit`                      | `[data-text-input]`                                                   | The selector to find the text input form groups             |
+| `selectorPasswordField`             | `.bx--text-input[data-toggle-password-visibility]`                    | The selector to find the input field                        |
+| `selectorPasswordVisibilityButton`  | `.bx--text-input--password__visibility__toggle`                       | The selector to find the password visibility toggle         |
+| `selectorPasswordVisibilityTooltip` | `.bx--text-input--password__visibility__toggle > .bx--assistive-text` | The selector to find the password visibility toggle tooltip |
+| `passwordIsVisible`                 | `.bx--text-input--password-visible`                                   | The className for a field with visible passwords            |
 
 #### Classes
 

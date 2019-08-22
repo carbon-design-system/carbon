@@ -8,9 +8,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { SideNavMenu } from '../SideNavMenu';
+import { settings } from 'carbon-components';
+const { prefix } = settings;
 
 describe('SideNavMenu', () => {
-  let mockProps;
+  let mockProps, wrapper;
 
   beforeEach(() => {
     mockProps = {
@@ -23,16 +25,62 @@ describe('SideNavMenu', () => {
     };
   });
 
+  afterEach(() => {
+    wrapper && wrapper.unmount();
+  });
+
   it('should render', () => {
-    const wrapper = mount(<SideNavMenu {...mockProps} />);
+    wrapper = mount(<SideNavMenu {...mockProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should expand the menu when the button ref is clicked', () => {
-    const wrapper = mount(<SideNavMenu {...mockProps} />);
+    wrapper = mount(<SideNavMenu {...mockProps} />);
     expect(wrapper.state('isExpanded')).toBe(false);
     expect(mockProps.buttonRef).toHaveBeenCalledTimes(1);
     wrapper.find('button').simulate('click');
     expect(wrapper.state('isExpanded')).toBe(true);
+  });
+
+  it('should reset expanded state if the isSideNavExpanded prop is false', () => {
+    wrapper = mount(<SideNavMenu {...mockProps} />);
+    expect(wrapper.state('isExpanded')).toBe(false);
+    expect(wrapper.state('wasPreviouslyExpanded')).toBe(false);
+    wrapper.setState({ isExpanded: true });
+    expect(wrapper.state('isExpanded')).toBe(true);
+    expect(wrapper.state('wasPreviouslyExpanded')).toBe(false);
+    // set the prop to false. This should force isExpanded from true to false, and update wasPreviouslyExpanded to true
+    wrapper.setProps({ isSideNavExpanded: false });
+    expect(wrapper.state('isExpanded')).toBe(false);
+    expect(wrapper.state('wasPreviouslyExpanded')).toBe(true);
+  });
+
+  it('should reset expanded state if the SideNav was collapsed/expanded', () => {
+    wrapper = mount(<SideNavMenu {...mockProps} />);
+    wrapper.setState({ isExpanded: false, wasPreviouslyExpanded: true });
+    // set the prop to false. This should force isExpanded from true to false, and update wasPreviouslyExpanded to true
+    wrapper.setProps({ isSideNavExpanded: true });
+    expect(wrapper.state('isExpanded')).toBe(true);
+    expect(wrapper.state('wasPreviouslyExpanded')).toBe(false);
+  });
+
+  it('should add the correct active class if a child is active', () => {
+    wrapper = mount(<SideNavMenu {...mockProps} />);
+    expect(
+      wrapper.find('li').hasClass(`${prefix}--side-nav__item--active`)
+    ).toBe(false);
+    // add a (single) child which is active
+    wrapper.setProps({
+      children: <p isActive={true}>Test</p>,
+    });
+    expect(
+      wrapper.find('li').hasClass(`${prefix}--side-nav__item--active`)
+    ).toBe(true);
+    wrapper.setProps({
+      children: ['entry one', <p aria-current={'page'}>entry two</p>],
+    });
+    expect(
+      wrapper.find('li').hasClass(`${prefix}--side-nav__item--active`)
+    ).toBe(true);
   });
 });

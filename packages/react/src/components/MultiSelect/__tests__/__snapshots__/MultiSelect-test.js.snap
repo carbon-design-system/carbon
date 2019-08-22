@@ -94,6 +94,7 @@ exports[`MultiSelect should render 1`] = `
             tabIndex="-1"
           >
             <ListBoxField
+              aria-disabled={false}
               aria-expanded={false}
               aria-haspopup={true}
               aria-label="open menu"
@@ -105,13 +106,15 @@ exports[`MultiSelect should render 1`] = `
               onKeyDown={[Function]}
               role="button"
               tabIndex="0"
+              translateWithId={[Function]}
               type="button"
             >
               <div
                 aria-controls={null}
+                aria-disabled={false}
                 aria-expanded={false}
                 aria-haspopup={true}
-                aria-label="open menu"
+                aria-label="Open menu"
                 aria-owns={null}
                 className="bx--list-box__field"
                 data-toggle={true}

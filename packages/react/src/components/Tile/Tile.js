@@ -188,6 +188,11 @@ export class SelectableTile extends Component {
     title: PropTypes.string,
 
     /**
+     * The empty handler of the `<input>`.
+     */
+    onChange: PropTypes.func,
+
+    /**
      * The description of the checkmark icon.
      */
     iconDescription: PropTypes.string,
@@ -205,6 +210,7 @@ export class SelectableTile extends Component {
     selected: false,
     handleClick: () => {},
     handleKeyDown: () => {},
+    onChange: () => {},
     tabIndex: 0,
   };
 
@@ -265,6 +271,7 @@ export class SelectableTile extends Component {
       className,
       handleClick, // eslint-disable-line
       handleKeyDown, // eslint-disable-line
+      onChange,
       ...other
     } = this.props;
 
@@ -287,6 +294,7 @@ export class SelectableTile extends Component {
           id={id}
           className={`${prefix}--tile-input`}
           value={value}
+          onChange={onChange}
           type="checkbox"
           name={name}
           title={title}
@@ -426,6 +434,21 @@ export class ExpandableTile extends Component {
     );
   };
 
+  handleKeyDown = evt => {
+    if (matches(evt, [keys.Enter, keys.Space])) {
+      evt.persist();
+      this.setState(
+        {
+          expanded: !this.state.expanded,
+        },
+        () => {
+          this.setMaxHeight();
+          this.props.handleClick(evt);
+        }
+      );
+    }
+  };
+
   getChildren = () => {
     return React.Children.map(this.props.children, child => child);
   };
@@ -440,23 +463,24 @@ export class ExpandableTile extends Component {
       tileMaxHeight, // eslint-disable-line
       tilePadding, // eslint-disable-line
       handleClick, // eslint-disable-line
-      expanded, // eslint-disable-line
       tileCollapsedIconText, // eslint-disable-line
       tileExpandedIconText, // eslint-disable-line
       ...other
     } = this.props;
 
+    const { expanded } = this.state;
+
     const classes = classNames(
       `${prefix}--tile`,
       `${prefix}--tile--expandable`,
       {
-        [`${prefix}--tile--is-expanded`]: this.state.expanded,
+        [`${prefix}--tile--is-expanded`]: expanded,
       },
       className
     );
 
     const tileStyle = {
-      maxHeight: this.state.expanded
+      maxHeight: expanded
         ? null
         : this.state.tileMaxHeight + this.state.tilePadding,
     };
@@ -474,20 +498,18 @@ export class ExpandableTile extends Component {
         className={classes}
         {...other}
         onClick={this.handleClick}
+        onKeyPress={this.handleKeyDown}
         tabIndex={tabIndex}>
         <button
           className={`${prefix}--tile__chevron`}
-          aria-labelledby={buttonId}>
+          aria-labelledby={buttonId}
+          aria-expanded={expanded}>
           <ChevronDown16
             id={buttonId}
-            aria-label={
-              this.state.expanded ? tileExpandedIconText : tileCollapsedIconText
-            }
-            alt={
-              this.state.expanded ? tileExpandedIconText : tileCollapsedIconText
-            }
+            aria-label={expanded ? tileExpandedIconText : tileCollapsedIconText}
+            alt={expanded ? tileExpandedIconText : tileCollapsedIconText}
             description={
-              this.state.expanded ? tileExpandedIconText : tileCollapsedIconText
+              expanded ? tileExpandedIconText : tileCollapsedIconText
             }
           />
         </button>

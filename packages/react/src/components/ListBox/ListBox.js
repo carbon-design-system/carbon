@@ -9,11 +9,7 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
-import ListBoxField from './ListBoxField';
-import ListBoxMenu from './ListBoxMenu';
 import { ListBoxType } from './ListBoxPropTypes';
-import childrenOf from '../../prop-types/childrenOf';
-import { WarningFilled16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
 
@@ -73,7 +69,10 @@ const ListBox = ({
 };
 
 ListBox.propTypes = {
-  children: childrenOf([ListBoxField, ListBoxMenu, WarningFilled16]),
+  /**
+   * Provide the contents of your ListBox
+   */
+  children: PropTypes.node,
 
   /**
    * Specify a class name to be applied on the containing list box node

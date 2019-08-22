@@ -40,7 +40,7 @@ export class FileUploaderButton extends Component {
      * Provide the label text to be read by screen readers when interacting with
      * this control
      */
-    labelText: PropTypes.string,
+    labelText: PropTypes.node,
 
     /**
      * Specify whether you want the component to list the files that have been
@@ -106,6 +106,7 @@ export class FileUploaderButton extends Component {
     onClick: () => {},
     accept: [],
     disabled: false,
+    role: 'button',
   };
 
   static getDerivedStateFromProps({ labelText }, state) {
@@ -159,7 +160,6 @@ export class FileUploaderButton extends Component {
     return (
       <>
         <label
-          role="button"
           tabIndex={tabIndex || 0}
           className={classes}
           onKeyDown={evt => {

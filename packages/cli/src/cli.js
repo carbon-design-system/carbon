@@ -19,6 +19,18 @@ async function main({ argv }) {
   cli
     .commandDir('commands')
     .strict()
+    .fail((message, error, yargs) => {
+      if (error) {
+        if (error.stderr) {
+          console.error(error.stderr);
+          process.exit(1);
+        }
+        throw error;
+      }
+      console.log(message);
+      console.log(yargs.help());
+      process.exit(1);
+    })
     .parse(argv.slice(2)).argv;
 }
 

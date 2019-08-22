@@ -35,7 +35,7 @@
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.4.4",
-    "@carbon/cli": "10.3.0",
+    "@carbon/cli": "10.5.0",
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
     "babel-jest": "^24.8.0",
@@ -46,7 +46,7 @@
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.3.5",
     "eslint": "^6.0.0",
-    "eslint-config-carbon": "10.3.0",
+    "eslint-config-carbon": "10.4.0",
     "fs-extra": "^7.0.1",
     "glob": "^7.1.4",
     "husky": "^2.1.0",
@@ -86,6 +86,22 @@
         0,
         "always",
         "lower-case"
+      ],
+      "type-enum": [
+        2,
+        "always",
+        [
+          "build",
+          "ci",
+          "chore",
+          "docs",
+          "feat",
+          "fix",
+          "perf",
+          "refactor",
+          "revert",
+          "test"
+        ]
       ]
     }
   },
@@ -130,7 +146,8 @@
     ],
     "moduleFileExtensions": [
       "js",
-      "json"
+      "json",
+      "node"
     ],
     "reporters": [
       "default",
