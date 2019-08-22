@@ -9230,6 +9230,7 @@ Button variant styles
     background-color: $disabled-02;
     border-color: $disabled-02;
     text-decoration: none;
+    outline-color: $disabled-02;
   }
 
   &:active {
