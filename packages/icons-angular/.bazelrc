@@ -10,6 +10,6 @@ build --symlink_prefix=dist/
 
 build --experimental_allow_incremental_repository_updates
 
-build --local_cpu_resources=2
+build --local_cpu_resources=1
 
-build --local_ram_resources=4000
+build --local_ram_resources=2000
