@@ -12,7 +12,7 @@
 and our React components in `v10` uses `@carbon/icons-react` library which hosts
 newer icons introduced in `v10` and works right as React components.
 
-You can still use `<Icon>`, but `name` prop of `<Icon>` has been removed in
+While you can still use the `<Icon>` component, the `name` prop has been removed in
 `v10`, given the name-lookup approach loses the ability of pick and choose icons
 to be included in application's build. The alternative is `icon` prop, which
 takes a
