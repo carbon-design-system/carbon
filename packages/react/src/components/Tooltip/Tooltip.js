@@ -22,6 +22,7 @@ import ClickListener from '../../internal/ClickListener';
 import mergeRefs from '../../tools/mergeRefs';
 import { keys, matches as keyDownMatch } from '../../internal/keyboard';
 import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
+import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 import { useControlledStateWithValue } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
@@ -177,6 +178,16 @@ class Tooltip extends Component {
      * Optional prop to specify the tabIndex of the Tooltip
      */
     tabIndex: PropTypes.number,
+
+    /**
+     * * the signature of the event handler will be:
+     * * `onChange(event, { open })` where:
+     *   * `event` is the (React) raw event
+     *   * `open` is the new value
+     */
+    onChange: !useControlledStateWithValue
+      ? PropTypes.func
+      : requiredIfValueExists(PropTypes.func),
   };
 
   static defaultProps = {
