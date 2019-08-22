@@ -11,7 +11,7 @@ const { reporter } = require('@carbon/cli-reporter');
 const fs = require('fs-extra');
 const { dirname } = require('path');
 const { param } = require('change-case');
-const ngc = require('@angular/compiler-cli/src/main');
+// const ngc = require('@angular/compiler-cli/src/main');
 
 // file templates
 const {
@@ -142,9 +142,9 @@ async function build() {
 
   // TODO: remove in v11
   // legacy steps
-  reporter.log('Compiling and generating modules...');
+  // reporter.log('Compiling and generating modules...');
   // run the angular compiler over everything
-  ngc.main(['-p', './config/tsconfig-aot.json']);
+  // ngc.main(['-p', './config/tsconfig-aot.json']);
   // end legacy steps
 
   // TODO: keep in v11
