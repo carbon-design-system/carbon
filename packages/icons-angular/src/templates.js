@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { param } = require('change-case');
-const { pascal } = require('change-case');
+const { param, pascal } = require('change-case');
+const { basename } = require('path');
 
 const componentTemplate = (iconName, className, svg, attrs) => `
 import {
@@ -119,78 +119,126 @@ export class ${className}Directive implements AfterViewInit {
 export class ${className}Module {}
 `;
 
-const iconStoryTemplate = icon => `.add("${icon.moduleName}", () => ({
-  template: \`
-    <p>Component <code>&lt;ibm-icon-${param(
-      icon.moduleName
-    )}&gt;&lt;/ibm-icon-${param(icon.moduleName)}&gt;</code></p>
-    <ibm-icon-${param(icon.moduleName)}></ibm-icon-${param(icon.moduleName)}>
-    <p>Directive <code>&lt;svg ibmIcon${pascal(
-      icon.moduleName
-    )}&gt;&lt;/svg&gt;</code></p>
-    <svg ibmIcon${pascal(icon.moduleName)}></svg>
-  \`
-}))
-.add("${icon.moduleName} with label", () => ({
-  template: \`
-    <ibm-icon-${param(
-      icon.moduleName
-    )} ariaLabel="label for the icon"></ibm-icon-${param(icon.moduleName)}>
-    <svg ibmIcon${pascal(icon.moduleName)} ariaLabel="label for the icon"></svg>
-  \`
-}))
-.add("${icon.moduleName} with title", () => ({
-  template: \`
-    <ibm-icon-${param(icon.moduleName)} title="icon title"></ibm-icon-${param(
-  icon.moduleName
-)}>
-    <svg ibmIcon${pascal(icon.moduleName)} title="icon title"></svg>
-  \`
-}))
-.add("${icon.moduleName} with class on the SVG", () => ({
-  template: \`
-    <ibm-icon-${param(
-      icon.moduleName
-    )} innerClass="test-class another-class"></ibm-icon-${param(
-  icon.moduleName
-)}>
-    <svg ibmIcon${pascal(
-      icon.moduleName
-    )} class="test-class another-class"></svg>
-  \`
-}))`;
+const publicApiExport = (iconName, className) => `
+export { ${className}, ${className}Directive, ${className}Module } from "./${iconName}";
+`;
 
-const gerateIconStories = icons => {
-  let value = '';
-  for (const icon of icons) {
-    value += iconStoryTemplate(icon);
-  }
-  return value;
-};
+const publicApi = icons =>
+  icons.reduce(
+    (str, icon) =>
+      str +
+      publicApiExport(
+        basename(icon.outputOptions.file, '.ts'),
+        icon.moduleName
+      ),
+    ''
+  );
 
-const generateStoryImports = icons => {
-  let imports = '';
-  for (const icon of icons) {
-    imports += `import { ${
-      icon.moduleName
-    }Module } from "./../${icon.outputOptions.file.replace('es', 'lib')}"\n`;
-  }
-  return imports;
-};
+const rootPublicApi = baseNames =>
+  baseNames.reduce(
+    (str, name) => `
+  ${str}
+  export * from "@carbon/icons-angular/${name}";
+`,
+    ''
+  );
 
-const storyTemplate = (basename, icons) => `
-import { storiesOf, moduleMetadata } from "@storybook/angular";
+const formatBazelDeps = baseNames =>
+  baseNames.reduce(
+    (names, name) => `
+    ${names}
+    "//ts/${name}:${param(name)}",
+  `,
+    ''
+  );
 
-${generateStoryImports(icons)}
+const formatBazelGlobals = baseNames =>
+  baseNames.reduce(
+    (names, name) => `
+    ${names}
+    "@carbon/icons-angular/${name}": "carbon.iconsAngular.${name
+      .split('/')
+      .join('.')}",
+  `,
+    ''
+  );
 
-storiesOf("${basename}", module)
-  .addDecorator(moduleMetadata({
-    imports: [ ${icons.map(i => `${i.moduleName}Module`).join(', ')} ],
-  }))
-  ${gerateIconStories(icons)};
+const rootBuildBazel = baseNames => `
+package(default_visibility = ["//visibility:public"])
+
+load("@npm_angular_bazel//:index.bzl", "ng_module", "ng_package")
+load("@npm_bazel_typescript//:defs.bzl", "ts_library")
+
+# Root "@carbon/icons-angular" entry-point.
+ng_module(
+    name = "icons-angular",
+    srcs = glob(
+        ["*.ts"]
+    ),
+    # There is currently a problem with this which will be fixed by https://github.com/angular/angular/pull/32185
+    bundle_dts = False,
+    tsconfig = ":tsconfig-build.json",
+    module_name = "@carbon/icons-angular",
+    flat_module_out_file = "icons-angular",
+    deps = [
+        ${formatBazelDeps(baseNames)}
+        "@npm//@angular/core",
+        "@npm//tslib",
+        "@npm//rxjs",
+    ],
+)
+
+ts_library(
+    name = "typings",
+    srcs = [":typings.d.ts"],
+    tsconfig = "carbon_icons_angular/tsconfig.json"
+)
+
+# Creates the @carbon/icons-angular package published to npm.
+ng_package(
+    name = "npm_package",
+    srcs = ["package.json"],
+    entry_point = ":index.ts",
+    entry_point_name = "icons-angular",
+    globals = {
+        "tslib": "tslib",
+        "@angular/core": "ng.core",
+        ${formatBazelGlobals(baseNames)}
+        "@carbon/icon-helpers": "carbon.iconHelpers"
+    },
+    deps = [
+        ${formatBazelDeps(baseNames)}
+        ":icons-angular"
+    ]
+)`;
+
+const iconBuildBazel = name => `
+load("@npm_angular_bazel//:index.bzl", "ng_module")
+
+ng_module(
+    name = "${param(name)}",
+    srcs = glob(
+        ["**/*.ts"]
+    ),
+    # There is currently a problem with this which will be fixed by https://github.com/angular/angular/pull/32185
+    bundle_dts = False,
+    visibility = ["//visibility:public"],
+    tsconfig = "//ts:tsconfig-build.json",
+    module_name = "@carbon/icons-angular/${name}",
+    flat_module_out_file = "${param(name)}",
+    deps = [
+        "//ts:typings",
+        "@npm//@angular/core",
+        "@npm//tslib",
+        "@npm//rxjs"
+    ],
+)
 `;
 
 module.exports = {
   componentTemplate,
-  storyTemplate,
+  rootBuildBazel,
+  iconBuildBazel,
+  publicApi,
+  rootPublicApi,
 };

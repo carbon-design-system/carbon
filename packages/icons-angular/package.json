@@ -7,10 +7,6 @@
   "main": "lib/index.js",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-angular",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
-  "files": [
-    "lib",
-    "umd"
-  ],
   "keywords": [
     "ibm",
     "elements",
@@ -24,7 +20,13 @@
     "access": "public"
   },
   "scripts": {
-    "build": "node tasks/build.js",
+    "build": "yarn build:generate && yarn build:bazel && yarn build:package",
+    "build:generate": "node tasks/build.js",
+    "build:bazel": "yarn copy && yarn bazel build //ts:npm_package",
+    "build:package": "node tasks/package.js",
+    "bazel": "bazel",
+    "copy": "cp src/tsconfig-build.json src/typings.d.ts package.json ts && yarn copy:yarn-lock",
+    "copy:yarn-lock": "cp ../../yarn.lock ./",
     "clean": "node tasks/clean.js"
   },
   "peerDependencies": {
@@ -35,6 +37,10 @@
     "@carbon/icon-helpers": "10.4.0"
   },
   "devDependencies": {
+    "@angular/bazel": "8.2.2",
+    "@bazel/bazel": "0.28.1",
+    "@bazel/typescript": "0.36.0",
+    "@bazel/karma": "^0.36.0",
     "@angular/compiler": "6.1.10",
     "@angular/compiler-cli": "6.1.10",
     "@angular/core": "6.1.10",
@@ -42,8 +48,8 @@
     "@carbon/icons": "10.5.0",
     "change-case": "3.0.2",
     "fs-extra": "7.0.1",
-    "rollup": "^0.66.6",
-    "typescript": "2.9.2"
+    "typescript": "2.9.2",
+    "zone.js": "0.10.2"
   },
   "sideEffects": false
 }
