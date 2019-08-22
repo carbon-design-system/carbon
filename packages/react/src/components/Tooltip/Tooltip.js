@@ -228,6 +228,14 @@ class Tooltip extends Component {
         };
   }
 
+  _handleUserInputOpenClose = (event, { open }) => {
+    this.setState({ open }, () => {
+      if (this.props.onChange) {
+        this.props.onChange(event, { open });
+      }
+    });
+  };
+
   getTriggerPosition = () => {
     if (this.triggerEl) {
       const triggerPosition = this.triggerEl.getBoundingClientRect();
@@ -244,7 +252,7 @@ class Tooltip extends Component {
     const { relatedTarget } = evt;
     if (state === 'over') {
       this.getTriggerPosition();
-      this.setState({ open: true });
+      this._handleUserInputOpenClose(evt, { open: true });
     } else {
       // Note: SVGElement in IE11 does not have `.contains()`
       const shouldPreventClose =
@@ -254,7 +262,7 @@ class Tooltip extends Component {
           this.triggerEl.contains(relatedTarget)) ||
           (this._tooltipEl && this._tooltipEl.contains(relatedTarget)));
       if (!shouldPreventClose) {
-        this.setState({ open: false });
+        this._handleUserInputOpenClose(evt, { open: false });
       }
     }
   };
@@ -288,7 +296,7 @@ class Tooltip extends Component {
       if (shouldOpen) {
         this.getTriggerPosition();
       }
-      this.setState({ open: shouldOpen });
+      this._handleUserInputOpenClose(evt, { open: shouldOpen });
     } else if (
       state &&
       (state !== 'out' || !hadContextMenu) &&
@@ -305,14 +313,14 @@ class Tooltip extends Component {
       this._tooltipEl &&
       this._tooltipEl.contains(evt.target);
     if (!shouldPreventClose) {
-      this.setState({ open: false });
+      this._handleUserInputOpenClose(evt, { open: false });
     }
   };
 
   handleKeyPress = event => {
     if (keyDownMatch(event, [keys.Escape])) {
       event.stopPropagation();
-      this.setState({ open: false });
+      this._handleUserInputOpenClose(event, { open: false });
     }
 
     if (keyDownMatch(event, [keys.Enter, keys.Space])) {
@@ -321,14 +329,14 @@ class Tooltip extends Component {
       if (shouldOpen) {
         this.getTriggerPosition();
       }
-      this.setState({ open: shouldOpen });
+      this._handleUserInputOpenClose(event, { open: shouldOpen });
     }
   };
 
   handleEscKeyPress = event => {
     const { open } = this.state;
     if (open && keyDownMatch(event, [keys.Escape])) {
-      return this.setState({ open: false });
+      return this._handleUserInputOpenClose(event, { open: false });
     }
   };
 
