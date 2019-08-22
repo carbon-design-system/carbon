@@ -42,13 +42,13 @@ export default function InlineLoading({
         />
       );
     }
-    if (status === 'active') {
+    if (status === 'inactive' || status === 'active') {
       return (
         <Loading
           small
           description={iconDescription}
           withOverlay={false}
-          active
+          active={status === 'active'}
         />
       );
     }

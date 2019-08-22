@@ -71,7 +71,11 @@ class InlineLoading extends mixin(
         this.options.classLoadingStop,
         state !== states.ACTIVE
       );
-      toggleAttribute(spinner, 'hidden', state !== states.ACTIVE);
+      toggleAttribute(
+        spinner,
+        'hidden',
+        state !== states.INACTIVE && state !== states.ACTIVE
+      );
     }
 
     if (finished) {
