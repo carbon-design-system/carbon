@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+<g id="london">
+	<rect style="fill:#FFFFFF;" width="48" height="48"/>
+	<g id="london_2_">
+		<g>
+			
+				<circle style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" cx="24" cy="24" r="11"/>
+			
+				<circle style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" cx="24" cy="24" r="13"/>
+		</g>
+		<g>
+			<circle cx="24" cy="9" r="0.5"/>
+			<circle cx="24" cy="39" r="0.5"/>
+			<circle cx="20.118" cy="9.511" r="0.5"/>
+			<circle cx="16.5" cy="11.01" r="0.5"/>
+			<circle cx="31.5" cy="36.99" r="0.5"/>
+			<circle cx="13.393" cy="13.393" r="0.5"/>
+			<circle cx="34.607" cy="34.607" r="0.5"/>
+			<circle cx="11.01" cy="16.5" r="0.5"/>
+			<circle cx="36.99" cy="31.5" r="0.5"/>
+			<circle cx="9.511" cy="20.118" r="0.5"/>
+			<circle cx="38.489" cy="27.882" r="0.5"/>
+			<circle cx="9" cy="24" r="0.5"/>
+			<circle cx="39" cy="24" r="0.5"/>
+			<circle cx="9.511" cy="27.882" r="0.5"/>
+			<circle cx="38.489" cy="20.118" r="0.5"/>
+			<circle cx="11.01" cy="31.5" r="0.5"/>
+			<circle cx="36.99" cy="16.5" r="0.5"/>
+			<circle cx="13.393" cy="34.607" r="0.5"/>
+			<circle cx="34.607" cy="13.393" r="0.5"/>
+			<circle cx="16.5" cy="36.99" r="0.5"/>
+			<circle cx="31.5" cy="11.01" r="0.5"/>
+			<circle cx="27.882" cy="9.511" r="0.5"/>
+		</g>
+		<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" points="20,39 24,24 
+			28,39 		"/>
+	</g>
+</g>
+<g id="Layer_1">
+</g>
+</svg>
