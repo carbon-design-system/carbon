@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+<g id="robot">
+	<g id="robot_2_">
+		<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" d="M25,39
+			c0-1.105,0.895-2,2-2s2,0.895,2,2H25z M20,9V14h8V9H20z M24,14v3 M29,17H19v13h10V17z M11,24.17l0.828,0.243
+			c0.613,0.18,1.262-0.174,1.442-0.787l0,0c0.18-0.613-0.174-1.262-0.787-1.442L11.856,22l-0.002,0L11,22.5 M18.5,12.5v-2
+			 M29.5,12.5v-2 M26,11.5L26,11.5c0-0.552-0.448-1-1-1h-2c-0.552,0-1,0.448-1,1v0c0,0.552,0.448,1,1,1h2
+			C25.552,12.5,26,12.052,26,11.5z M18.999,18h-1c-1.105,0-2,0.895-2,2c0,1.105,0.895,2,2,2h1 M28.999,22h1c1.105,0,2-0.895,2-2
+			c0-1.105-0.895-2-2-2h-1 M13.316,23.333L16.203,25h-0.008l0.866-3.233 M37,22.5L36.175,22l-0.002,0l-0.627,0.184
+			c-0.613,0.18-0.967,0.829-0.787,1.442v0c0.18,0.613,0.829,0.967,1.442,0.787L37,24.17 M30.967,21.767L31.834,25h-0.008
+			l2.887-1.667 M27,30v7"/>
+		<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+			M21,30v7 M23,39c0-1.105-0.895-2-2-2s-2,0.895-2,2H23z"/>
+	</g>
+</g>
+<g id="Layer_1">
+</g>
+</svg>

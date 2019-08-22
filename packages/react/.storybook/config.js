@@ -15,7 +15,8 @@ addParameters({
   options: {
     theme: {
       brandTitle: 'carbon components react',
-      brandUrl: 'https://github.com/IBM/carbon-components-react',
+      brandUrl:
+        'https://github.com/carbon-design-system/carbon/tree/master/packages/react',
     },
   },
 });
