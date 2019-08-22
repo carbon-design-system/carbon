@@ -5,12 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import warning from 'warning';
 import mixin from '../../globals/js/misc/mixin';
+import settings from '../../globals/js/settings';
 import createComponent from '../../globals/js/mixins/create-component';
 import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
+import handles from '../../globals/js/mixins/handles';
 import trackBlur from '../../globals/js/mixins/track-blur';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import optimizedResize from '../../globals/js/misc/resize';
+import on from '../../globals/js/misc/on';
 
 /**
  * The structure for the position of floating menu.
@@ -94,7 +98,8 @@ export const getFloatingPosition = ({
 class FloatingMenu extends mixin(
   createComponent,
   eventedShowHideState,
-  trackBlur
+  trackBlur,
+  handles
 ) {
   /**
    * Floating menu.
@@ -136,6 +141,35 @@ class FloatingMenu extends mixin(
         this.options.direction
       );
     }
+    this.manage(
+      on(this.element.ownerDocument, 'keydown', event => {
+        this._handleKeydown(event);
+      })
+    );
+  }
+
+  /**
+   * Handles key press on document.
+   * @param {Event} event The triggering event.
+   * @private
+   */
+  _handleKeydown(event) {
+    const key = event.which;
+    const { triggerNode, refNode } = this.options;
+    const isOfMenu = this.element.contains(event.target);
+
+    switch (key) {
+      // Esc
+      case 27:
+        this.changeState('hidden', getLaunchingDetails(event), () => {
+          if (isOfMenu) {
+            (triggerNode || refNode).focus();
+          }
+        });
+        break;
+      default:
+        break;
+    }
   }
 
   /**
@@ -147,7 +181,8 @@ class FloatingMenu extends mixin(
       const { refNode, triggerNode } = this.options;
 
       if (
-        this.element.contains(event.relatedTarget) &&
+        (event.relatedTarget === null ||
+          this.element.contains(event.relatedTarget)) &&
         refNode &&
         event.target !== refNode
       ) {
@@ -177,7 +212,7 @@ class FloatingMenu extends mixin(
 
     if (!refNode) {
       throw new Error(
-        'Cannot find the refernce node for positioning floating menu.'
+        'Cannot find the reference node for positioning floating menu.'
       );
     }
 
@@ -259,16 +294,13 @@ class FloatingMenu extends mixin(
    */
   _changeState(state, detail, callback) {
     const shown = state === 'shown';
-    const { refNode, classShown, classRefShown } = this.options;
+    const { refNode, classShown, classRefShown, triggerNode } = this.options;
     if (!refNode) {
       throw new TypeError(
-        'Cannot find the refernce node for changing the style.'
+        'Cannot find the reference node for changing the style.'
       );
     }
-    this.element.classList.toggle(classShown, shown);
-    if (classRefShown) {
-      refNode.classList.toggle(classRefShown, shown);
-    }
+
     if (state === 'shown') {
       if (!this.hResize) {
         this.hResize = optimizedResize.add(() => {
@@ -276,13 +308,41 @@ class FloatingMenu extends mixin(
         });
       }
       this._getContainer().appendChild(this.element);
+    }
+
+    this.element.setAttribute('aria-hidden', (!shown).toString());
+    (triggerNode || refNode).setAttribute('aria-expanded', shown.toString());
+
+    this.element.classList.toggle(classShown, shown);
+    if (classRefShown) {
+      refNode.classList.toggle(classRefShown, shown);
+    }
+    if (state === 'shown') {
       this._place();
+
       // IE11 puts focus on elements with `.focus()`, even ones without `tabindex` attribute
       if (!this.element.hasAttribute(this.options.attribAvoidFocusOnOpen)) {
-        (
-          this.element.querySelector(this.options.selectorPrimaryFocus) ||
-          this.element
-        ).focus();
+        const primaryFocusNode = this.element.querySelector(
+          this.options.selectorPrimaryFocus
+        );
+        const focusableNode = this.element.querySelector(
+          settings.selectorTabbable
+        );
+
+        if (primaryFocusNode) {
+          primaryFocusNode.focus();
+        } else if (focusableNode) {
+          focusableNode.focus();
+        } else {
+          this.element.focus();
+          if (__DEV__) {
+            const elementTabindex = this.element.getAttribute('tabindex');
+            warning(
+              elementTabindex !== null && parseInt(elementTabindex, 10) > -1,
+              'Floating Menus without interactive elements must include tabindex="0" on the floating element.'
+            );
+          }
+        }
       }
     }
     if (state === 'hidden' && this.hResize) {

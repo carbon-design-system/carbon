@@ -44,7 +44,7 @@
     }
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $hover-selected-ui;
     }
   }
 
@@ -137,6 +137,10 @@
 
   .#{$prefix}--overflow-menu-options--open {
     display: flex;
+  }
+
+  .#{$prefix}--overflow-menu-options__content {
+    width: 100%;
   }
 
   .#{$prefix}--overflow-menu-options__option {

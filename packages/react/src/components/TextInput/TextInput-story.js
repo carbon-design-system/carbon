@@ -70,8 +70,18 @@ const props = {
       ['start', 'center', 'end'],
       'center'
     ),
+    hidePasswordLabel: text(
+      '"Hide password" tooltip label for password visibility toggle (hidePasswordLabel)',
+      'Hide password'
+    ),
+    showPasswordLabel: text(
+      '"Show password" tooltip label for password visibility toggle (showPasswordLabel)',
+      'Show password'
+    ),
   }),
 };
+
+TextInput.displayName = 'TextInput';
 
 storiesOf('TextInput', module)
   .addDecorator(withKnobs)
@@ -96,12 +106,14 @@ storiesOf('TextInput', module)
   )
   .add(
     'Toggle password visibility',
-    () => (
-      <TextInput.PasswordInput
-        {...props.TextInputProps()}
-        {...props.PasswordInputProps()}
-      />
-    ),
+    () => {
+      return (
+        <TextInput.PasswordInput
+          {...props.TextInputProps()}
+          {...props.PasswordInputProps()}
+        />
+      );
+    },
     {
       info: {
         text: `
@@ -112,12 +124,21 @@ storiesOf('TextInput', module)
   )
   .add(
     'Fully controlled toggle password visibility',
-    () => (
-      <ControlledPasswordInputApp
-        {...props.TextInputProps()}
-        {...props.PasswordInputProps()}
-      />
-    ),
+    () => {
+      ControlledPasswordInputApp.__docgenInfo = {
+        ...TextInput.PasswordInput.__docgenInfo,
+        props: {
+          ...TextInput.PasswordInput.__docgenInfo.props,
+        },
+      };
+
+      return (
+        <ControlledPasswordInputApp
+          {...props.TextInputProps()}
+          {...props.PasswordInputProps()}
+        />
+      );
+    },
     {
       info: {
         text: `

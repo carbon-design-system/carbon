@@ -1,7 +1,15 @@
+/**
+ * Copyright IBM Corp. 2019
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const rtlcss = require('rtlcss');
+const customProperties = require('postcss-custom-properties');
 
 const useExternalCss =
   process.env.CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS === 'true';
@@ -32,7 +40,7 @@ const styleLoaders = [
         const autoPrefixer = require('autoprefixer')({
           overrideBrowserslist: ['last 1 version', 'ie >= 11'],
         });
-        return !useRtl ? [autoPrefixer] : [autoPrefixer, rtlcss];
+        return [customProperties(), autoPrefixer, ...(useRtl ? [rtlcss] : [])];
       },
       sourceMap: useStyleSourceMap,
     },
@@ -44,6 +52,7 @@ const styleLoaders = [
       data: `
         $feature-flags: (
           ui-shell: true,
+          enable-css-custom-properties: true,
         );
       `,
       sourceMap: useStyleSourceMap,
@@ -100,7 +109,7 @@ module.exports = ({ config, mode }) => {
     test: /-story\.jsx?$/,
     loaders: [
       {
-        loader: require.resolve('@storybook/addon-storysource/loader'),
+        loader: require.resolve('@storybook/source-loader'),
         options: {
           prettierConfig: {
             parser: 'babylon',

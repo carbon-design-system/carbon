@@ -183,6 +183,10 @@
     left: 0;
     background: $skeleton-02;
     animation: 3000ms ease-in-out skeleton infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
   }
 }
 

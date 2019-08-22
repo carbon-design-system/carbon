@@ -365,7 +365,7 @@ module.exports = {
       context: {
         columns: columnsSmall,
         rows,
-        sticky: true,
+        sticky: false,
       },
     },
     {
@@ -402,6 +402,18 @@ module.exports = {
         columns: columnsSmall,
         rows,
         zebra: true,
+      },
+    },
+    {
+      name: 'sticky',
+      label: 'Sticky header (experimental)',
+      meta: {
+        linkOnly: true,
+      },
+      context: {
+        columns: columnsSmall,
+        rows,
+        sticky: true,
       },
     },
     {
@@ -633,7 +645,7 @@ module.exports = {
         sortLabel: 'Sort rows by this header in descending order',
         hasToolbar: true,
         sort: true,
-        sticky: true,
+        sticky: false,
       },
     },
     {

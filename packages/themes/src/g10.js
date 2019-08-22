@@ -17,6 +17,7 @@ import {
   gray10,
   gray20,
   gray30,
+  gray40,
   gray50,
   gray60,
   gray70,
@@ -54,9 +55,10 @@ export const ui04 = gray50;
 export const ui05 = gray100;
 
 export const text01 = gray100;
-export const text02 = gray70;
-export const text03 = gray50;
+export const text02 = gray80;
+export const text03 = gray40;
 export const text04 = white;
+export const text05 = gray60;
 
 export const icon01 = gray100;
 export const icon02 = gray70;
@@ -84,8 +86,11 @@ export const inverseSupport04 = blue50;
 
 export const overlay01 = rgba(gray100, 0.5);
 
+export const danger = red60;
+
 // Interaction states
 export const focus = blue60;
+export const inverseFocusUi = white;
 
 export const hoverPrimary = '#0353e9';
 export const activePrimary = blue80;
@@ -120,6 +125,39 @@ export const highlight = blue20;
 
 export const skeleton01 = '#e5e5e5';
 export const skeleton02 = gray30;
+
+// Type
+export { caption01 } from './white';
+export { label01 } from './white';
+export { helperText01 } from './white';
+export { bodyShort01 } from './white';
+export { bodyLong01 } from './white';
+export { bodyShort02 } from './white';
+export { bodyLong02 } from './white';
+export { code01 } from './white';
+export { code02 } from './white';
+export { heading01 } from './white';
+export { productiveHeading01 } from './white';
+export { heading02 } from './white';
+export { productiveHeading02 } from './white';
+export { productiveHeading03 } from './white';
+export { productiveHeading04 } from './white';
+export { productiveHeading05 } from './white';
+export { productiveHeading06 } from './white';
+export { productiveHeading07 } from './white';
+export { expressiveHeading01 } from './white';
+export { expressiveHeading02 } from './white';
+export { expressiveHeading03 } from './white';
+export { expressiveHeading04 } from './white';
+export { expressiveHeading05 } from './white';
+export { expressiveHeading06 } from './white';
+export { expressiveParagraph01 } from './white';
+export { quotation01 } from './white';
+export { quotation02 } from './white';
+export { display01 } from './white';
+export { display02 } from './white';
+export { display03 } from './white';
+export { display04 } from './white';
 
 // Deprecated ☠️
 export const brand01 = interactive01;

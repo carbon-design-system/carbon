@@ -12,8 +12,8 @@ Modifiers are used with various form-related classes.
 
 #### Using Form Requirement
 
-Bluemix Components provides HTML attribtues and CSS to enable form validations
-for each input or control.
+Carbon Components provide HTML attributes and CSS to enable form validation for
+each input or control.
 
 For example, here's a **Form Item** with a required text input.
 
@@ -55,7 +55,7 @@ appear.
 
 #### HTML
 
-Bluemix Components provides inputs (checkboxes, text-inputs, etc.) and some
+Carbon Components provides inputs (checkboxes, text-inputs, etc.) and some
 default styles for forms:
 
 - `.bx--form-item`
@@ -67,7 +67,7 @@ Make use of HTML to compose and structure forms appropriate to your project's
 needs.
 
 For example, here's a simple form for a login page that uses a mix of HTML and
-Bluemix Components.
+Carbon Components.
 
 ```html
 <form>

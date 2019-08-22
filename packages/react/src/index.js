@@ -17,7 +17,7 @@ export ComposedModal, {
   ModalBody,
   ModalFooter,
 } from './components/ComposedModal';
-export ContentSwitcher, { Switch } from './components/ContentSwitcher';
+export ContentSwitcher from './components/ContentSwitcher';
 export Copy from './components/Copy';
 export CopyButton from './components/CopyButton';
 export DangerButton from './components/DangerButton';
@@ -50,6 +50,8 @@ export Dropdown from './components/Dropdown';
 export FileUploader, {
   Filename,
   FileUploaderButton,
+  FileUploaderDropContainer,
+  FileUploaderItem,
 } from './components/FileUploader';
 export Form from './components/Form';
 export FormGroup from './components/FormGroup';
@@ -89,6 +91,7 @@ export SecondaryButton from './components/SecondaryButton';
 export Select from './components/Select';
 export SelectItem from './components/SelectItem';
 export SelectItemGroup from './components/SelectItemGroup';
+export Switch from './components/Switch';
 export Slider from './components/Slider';
 export {
   StructuredListWrapper,

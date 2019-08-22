@@ -79,5 +79,10 @@
     <div class="{{@root.prefix}}--modal-footer">
       <button class="{{@root.prefix}}--btn {{classCloseButton}}" type="button" data-modal-close>Secondary button</button>
       <button class="{{@root.prefix}}--btn {{classPrimaryButton}}" type="button" {{#if labelPrimaryButton}} aria-label="{{labelPrimaryButton}}"
-        {{/if}} {{#unless hasInput}} data-modal-primary-focus{{/unless}}>Primary button</button> </div> {{/if}} </div>
-        </div>
+        {{/if}} {{#unless hasInput}} data-modal-primary-focus{{/unless}}>Primary button</button>
+    </div>
+    {{/if}}
+  </div>
+  <!-- Note: focusable span allows for focus wrap feature within Modals -->
+  <span tabindex="0"></span>
+</div>

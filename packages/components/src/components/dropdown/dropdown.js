@@ -74,6 +74,22 @@ class Dropdown extends mixin(
       this.navigate(direction);
       event.preventDefault(); // Prevents up/down keys from scrolling container
     } else {
+      // get selected item
+      // in v10.0, the anchor elements fire click events on Enter keypress when a dropdown item is selected
+      // in v10.5 (#3586), focus is no longer placed on the dropdown items and is instead kept fixed on the ul menu
+      // so we need to manually call getCurrentNavigation and select the item
+      const item = this.getCurrentNavigation();
+      if (
+        item &&
+        isOpen &&
+        (event.which === 13 || event.which === 32) &&
+        !this.element.ownerDocument.activeElement.matches(
+          this.options.selectorItem
+        )
+      ) {
+        event.preventDefault();
+        this.select(item);
+      }
       this._toggle(event);
     }
   }
@@ -101,8 +117,8 @@ class Dropdown extends mixin(
       // User presses down arrow
       (event.which === 40 &&
         !event.target.matches(this.options.selectorItem)) ||
-      // User presses space or enter and the trigger is not a button
-      (!triggerNode &&
+      // User presses space or enter and the trigger is not a button OR event is not fired by trigger
+      ((!triggerNode || !triggerNode.contains(event.target)) &&
         [13, 32].indexOf(event.which) >= 0 &&
         !event.target.matches(this.options.selectorItem)) ||
       // User presses esc
@@ -158,15 +174,20 @@ class Dropdown extends mixin(
         }
       } else if (changedState && (isOfSelf || actions.remove)) {
         // toggled close
-        (triggerNode || this.element).focus();
+        // timer is used to call focus AFTER the click event on
+        // trigger button (which is caused by keypress e.g. during keyboard navigation)
+        setTimeout(() => (triggerNode || this.element).focus(), 0);
         if (triggerNode) {
           triggerNode.setAttribute('aria-expanded', 'false');
         }
         if (listNode) {
           listNode.removeAttribute('aria-activedescendant');
-          this.element
-            .querySelector(this.options.selectorItemFocused)
-            .classList.remove(this.options.classFocused);
+          const focusedItem = this.element.querySelector(
+            this.options.selectorItemFocused
+          );
+          if (focusedItem) {
+            focusedItem.classList.remove(this.options.classFocused);
+          }
         }
       }
 

@@ -52,12 +52,12 @@
     }
 
     &:visited {
-      color: $link-01;
+      color: $visited-link;
     }
-  }
 
-  .#{$prefix}--link--visited {
-    color: $visited-link;
+    &:visited:hover {
+      color: $hover-primary-text;
+    }
   }
 
   .#{$prefix}--link--disabled {
@@ -67,6 +67,26 @@
     color: $disabled-02;
     font-weight: 400;
     cursor: not-allowed;
+  }
+
+  .#{$prefix}--link.#{$prefix}--link--inline {
+    text-decoration: underline;
+
+    &:hover {
+      color: $hover-primary-text;
+    }
+
+    &:focus {
+      text-decoration: none;
+    }
+
+    &:visited {
+      text-decoration: none;
+    }
+  }
+
+  .#{$prefix}--link--disabled.#{$prefix}--link--inline {
+    text-decoration: underline;
   }
 }
 

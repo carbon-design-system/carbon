@@ -25,6 +25,12 @@ const LinkPropTypes = {
    * alternative tag names or custom components like `Link` from `react-router`.
    */
   element: PropTypes.elementType,
+
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded: PropTypes.bool,
 };
 
 Link.displayName = 'Link';

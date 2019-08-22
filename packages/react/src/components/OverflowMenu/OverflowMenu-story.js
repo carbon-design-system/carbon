@@ -9,8 +9,10 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import { withReadme } from 'storybook-readme';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
+import OverflowREADME from './README.md';
 
 const directions = {
   'Bottom of the trigger button (bottom)': 'bottom',
@@ -62,17 +64,6 @@ const OverflowMenuExample = ({ overflowMenuProps, overflowMenuItemProps }) => (
         isDelete
       />
     </OverflowMenu>
-    <OverflowMenu {...overflowMenuProps}>
-      <OverflowMenuItem
-        {...overflowMenuItemProps}
-        itemText="Option 1"
-        primaryFocus
-      />
-      <OverflowMenuItem
-        {...overflowMenuItemProps}
-        itemText="Option 2 is an example of a really long string and how we recommend handling this"
-      />
-    </OverflowMenu>
   </>
 );
 
@@ -80,12 +71,12 @@ storiesOf('OverflowMenu', module)
   .addDecorator(withKnobs)
   .add(
     'basic',
-    () => (
+    withReadme(OverflowREADME, () => (
       <OverflowMenuExample
         overflowMenuProps={props.menu()}
         overflowMenuItemProps={props.menuItem()}
       />
-    ),
+    )),
     {
       info: {
         text: `
@@ -97,7 +88,7 @@ storiesOf('OverflowMenu', module)
   )
   .add(
     'with links',
-    () => (
+    withReadme(OverflowREADME, () => (
       <OverflowMenuExample
         overflowMenuProps={props.menu()}
         overflowMenuItemProps={{
@@ -105,7 +96,7 @@ storiesOf('OverflowMenu', module)
           href: 'https://www.ibm.com',
         }}
       />
-    ),
+    )),
     {
       info: {
         text: `
@@ -119,18 +110,17 @@ storiesOf('OverflowMenu', module)
   )
   .add(
     'custom trigger',
-    () => (
+    withReadme(OverflowREADME, () => (
       <OverflowMenuExample
         overflowMenuProps={{
           ...props.menu(),
+          ariaLabel: null,
           style: { width: 'auto' },
-          renderIcon: () => (
-            <div style={{ padding: '0 1rem' }}>Custom trigger</div>
-          ),
+          renderIcon: () => <div style={{ padding: '0 1rem' }}>Menu</div>,
         }}
         overflowMenuItemProps={props.menuItem()}
       />
-    ),
+    )),
     {
       info: {
         text: `

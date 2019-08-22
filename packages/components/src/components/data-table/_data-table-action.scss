@@ -17,11 +17,12 @@
   //TOOLBAR
   //-------------------------------------------------
   .#{$prefix}--table-toolbar {
-    display: flex;
-    width: 100%;
     background: $ui-01;
+    display: flex;
     height: $layout-04;
+    overflow: hidden;
     position: relative; //need for batch actions
+    width: 100%;
   }
 
   .#{$prefix}--toolbar-content {
@@ -230,6 +231,11 @@
   .#{$prefix}--toolbar-action:focus:not([disabled]),
   .#{$prefix}--toolbar-action:active:not([disabled]) {
     @include focus-outline('outline');
+
+    &.#{$prefix}--toolbar-search-container-expandable {
+      // The focus style is handled by search input in it, need to avoid duplicate animation
+      outline: none;
+    }
   }
 
   .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {

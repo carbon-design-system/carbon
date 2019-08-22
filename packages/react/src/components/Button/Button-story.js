@@ -105,6 +105,8 @@ const props = {
   },
 };
 
+Button.displayName = 'Button';
+
 const CustomLink = ({ children, href, ...other }) => (
   <a href={href} {...other}>
     {children}

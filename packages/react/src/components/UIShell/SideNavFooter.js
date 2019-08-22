@@ -59,6 +59,12 @@ SideNavFooter.propTypes = {
    * with. Useful for controlling the expansion state of the side navigation.
    */
   onToggle: PropTypes.func.isRequired,
+
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded: PropTypes.bool,
 };
 
 SideNavFooter.defaultProps = {

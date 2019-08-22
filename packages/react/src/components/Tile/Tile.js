@@ -6,7 +6,6 @@
  */
 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
@@ -15,7 +14,6 @@ import {
   ChevronDown16,
 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
-import uid from '../../tools/uniqueId';
 
 const { prefix } = settings;
 
@@ -30,11 +28,27 @@ export class Tile extends Component {
      * The CSS class names.
      */
     className: PropTypes.string,
+
+    /**
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
+     */
+    light: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    light: false,
   };
 
   render() {
-    const { children, className, ...other } = this.props;
-    const tileClasses = classNames(`${prefix}--tile`, className);
+    const { children, className, light, ...other } = this.props;
+    const tileClasses = classNames(
+      `${prefix}--tile`,
+      {
+        [`${prefix}--tile--light`]: light,
+      },
+      className
+    );
     return (
       <div className={tileClasses} {...other}>
         {children}
@@ -66,12 +80,19 @@ export class ClickableTile extends Component {
      * The rel property for the link.
      */
     rel: PropTypes.string,
+
+    /**
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
     clicked: false,
     handleClick: () => {},
     handleKeyDown: () => {},
+    light: false,
   };
 
   handleClick = evt => {
@@ -120,6 +141,7 @@ export class ClickableTile extends Component {
       handleClick, // eslint-disable-line
       handleKeyDown, // eslint-disable-line
       clicked, // eslint-disable-line
+      light,
       ...other
     } = this.props;
 
@@ -129,6 +151,7 @@ export class ClickableTile extends Component {
       `${prefix}--tile--clickable`,
       {
         [`${prefix}--tile--is-clicked`]: this.state.clicked,
+        [`${prefix}--tile--light`]: light,
       },
       className
     );
@@ -201,6 +224,12 @@ export class SelectableTile extends Component {
      * Specify the tab index of the wrapper element
      */
     tabIndex: PropTypes.number,
+
+    /**
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -212,6 +241,7 @@ export class SelectableTile extends Component {
     handleKeyDown: () => {},
     onChange: () => {},
     tabIndex: 0,
+    light: false,
   };
 
   handleClick = evt => {
@@ -272,6 +302,7 @@ export class SelectableTile extends Component {
       handleClick, // eslint-disable-line
       handleKeyDown, // eslint-disable-line
       onChange,
+      light,
       ...other
     } = this.props;
 
@@ -280,6 +311,7 @@ export class SelectableTile extends Component {
       `${prefix}--tile--selectable`,
       {
         [`${prefix}--tile--is-selected`]: this.state.selected,
+        [`${prefix}--tile--light`]: light,
       },
       className
     );
@@ -339,6 +371,11 @@ export class ExpandableTile extends Component {
     expanded: PropTypes.bool,
 
     /**
+     * optional handler to decide whether to ignore a click. returns false if click should be ignored
+     */
+    onBeforeClick: PropTypes.func,
+
+    /**
      * The `tabindex` attribute.
      */
     tabIndex: PropTypes.number,
@@ -357,15 +394,23 @@ export class ExpandableTile extends Component {
      * An ID that can be provided to aria-labelledby
      */
     id: PropTypes.string,
+
+    /**
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
     tabIndex: 0,
     expanded: false,
     tileMaxHeight: '0',
+    onBeforeClick: () => true,
     handleClick: () => {},
-    tileCollapsedIconText: 'Expand',
-    tileExpandedIconText: 'Collapse',
+    tileCollapsedIconText: 'Interact to expand Tile',
+    tileExpandedIconText: 'Interact to collapse Tile',
+    light: false,
   };
 
   static getDerivedStateFromProps(
@@ -398,16 +443,16 @@ export class ExpandableTile extends Component {
   }
 
   componentDidMount = () => {
-    if (this.refs[0]) {
-      this.aboveTheFold = ReactDOM.findDOMNode(this.refs[0]); // eslint-disable-line
-    }
     const getStyle = window.getComputedStyle(this.tile, null);
-    this.setState({
-      tileMaxHeight: this.aboveTheFold.getBoundingClientRect().height,
-      tilePadding:
-        parseInt(getStyle.getPropertyValue('padding-top'), 10) +
-        parseInt(getStyle.getPropertyValue('padding-bottom'), 10),
-    });
+
+    if (this.aboveTheFold) {
+      this.setState({
+        tileMaxHeight: this.aboveTheFold.getBoundingClientRect().height,
+        tilePadding:
+          parseInt(getStyle.getPropertyValue('padding-top'), 10) +
+          parseInt(getStyle.getPropertyValue('padding-bottom'), 10),
+      });
+    }
   };
 
   componentDidUpdate = prevProps => {
@@ -422,6 +467,7 @@ export class ExpandableTile extends Component {
     });
 
   handleClick = evt => {
+    if (!this.props.onBeforeClick(evt)) return;
     evt.persist();
     this.setState(
       {
@@ -434,12 +480,24 @@ export class ExpandableTile extends Component {
     );
   };
 
-  getChildren = () => {
-    return React.Children.map(this.props.children, child => child);
+  handleKeyDown = evt => {
+    if (matches(evt, [keys.Enter, keys.Space])) {
+      evt.persist();
+      this.setState(
+        {
+          expanded: !this.state.expanded,
+        },
+        () => {
+          this.setMaxHeight();
+          this.props.handleClick(evt);
+        }
+      );
+    }
   };
 
-  // a unique ID generated for use in aria-labelledby if one isn't providedj
-  uid = uid();
+  getChildren = () => {
+    return React.Children.toArray(this.props.children);
+  };
 
   render() {
     const {
@@ -448,30 +506,32 @@ export class ExpandableTile extends Component {
       tileMaxHeight, // eslint-disable-line
       tilePadding, // eslint-disable-line
       handleClick, // eslint-disable-line
-      expanded, // eslint-disable-line
       tileCollapsedIconText, // eslint-disable-line
       tileExpandedIconText, // eslint-disable-line
+      light,
       ...other
     } = this.props;
+
+    const { expanded } = this.state;
 
     const classes = classNames(
       `${prefix}--tile`,
       `${prefix}--tile--expandable`,
       {
-        [`${prefix}--tile--is-expanded`]: this.state.expanded,
+        [`${prefix}--tile--is-expanded`]: expanded,
+        [`${prefix}--tile--light`]: light,
       },
       className
     );
 
     const tileStyle = {
-      maxHeight: this.state.expanded
+      maxHeight: expanded
         ? null
         : this.state.tileMaxHeight + this.state.tilePadding,
     };
-    const content = this.getChildren().map((child, index) => {
-      return React.cloneElement(child, { ref: index });
-    });
-    const buttonId = this.props.id ? `${this.props.id}__button` : this.uid;
+
+    const childrenAsArray = this.getChildren();
+
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
       <div
@@ -482,29 +542,26 @@ export class ExpandableTile extends Component {
         className={classes}
         {...other}
         onClick={this.handleClick}
+        onKeyPress={this.handleKeyDown}
         tabIndex={tabIndex}>
-        <button
-          className={`${prefix}--tile__chevron`}
-          aria-labelledby={buttonId}>
-          <ChevronDown16
-            id={buttonId}
-            aria-label={
-              this.state.expanded ? tileExpandedIconText : tileCollapsedIconText
-            }
-            alt={
-              this.state.expanded ? tileExpandedIconText : tileCollapsedIconText
-            }
-            description={
-              this.state.expanded ? tileExpandedIconText : tileCollapsedIconText
-            }
-          />
-        </button>
         <div
           ref={tileContent => {
             this.tileContent = tileContent;
-          }}
-          className={`${prefix}--tile-content`}>
-          {content}
+          }}>
+          <div
+            ref={aboveTheFold => {
+              this.aboveTheFold = aboveTheFold;
+            }}
+            className={`${prefix}--tile-content`}>
+            {childrenAsArray[0]}
+          </div>
+          <button
+            aria-expanded={expanded}
+            aria-label={expanded ? tileExpandedIconText : tileCollapsedIconText}
+            className={`${prefix}--tile__chevron`}>
+            <ChevronDown16 />
+          </button>
+          <div className={`${prefix}--tile-content`}>{childrenAsArray[1]}</div>
         </div>
       </div>
     );

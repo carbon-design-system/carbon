@@ -4,6 +4,7 @@ categories:
       - name: Controls
         members:
           - dashboard
+          - fit-to-screen
           - forward--10
           - forward--30
           - forward--5
@@ -57,11 +58,15 @@ categories:
           - attachment
           - brightness-contrast
           - color-palette
+          - color-switch
           - contrast
           - corner
           - crop
           - cut
+          - dot-mark
           - draw
+          - drop-photo
+          - drop-photo--filled
           - edit
           - edit--off
           - erase
@@ -75,7 +80,18 @@ categories:
           - no-image
           - opacity
           - paint-brush
+          - paragraph
+          - percentage
+          - percentage--filled
           - quotes
+          - rotate--clockwise
+          - rotate--clockwise--alt
+          - rotate--clockwise--alt--filled
+          - rotate--clockwise--filled
+          - rotate--counterclockwise
+          - rotate--counterclockwise--alt
+          - rotate--counterclockwise--alt--filled
+          - rotate--counterclockwise--filled
           - save
           - spell-check
           - spray-paint
@@ -95,6 +111,7 @@ categories:
           - text--kerning
           - text--leading
           - text--line-spacing
+          - text--new-line
           - text--scale
           - text--selection
           - text--small-caps
@@ -147,6 +164,7 @@ categories:
           - up-to-top
           - zoom--in
           - zoom--out
+          - zoom--reset
       - name: Operations
         members:
           - add-comment
@@ -234,6 +252,8 @@ categories:
           - checkbox--checked--filled
           - checkbox--undeterminate
           - checkbox--undeterminate--filled
+          - checkbox--indeterminate
+          - checkbox--indeterminate--filled
           - column
           - favorite
           - favorite--filled
@@ -271,6 +291,8 @@ categories:
           - thumbnail--2
           - thumbs-down
           - thumbs-up
+          - trophy
+          - trophy--filled
           - unlocked
           - video
           - video--filled
@@ -288,6 +310,7 @@ categories:
         members:
           - bee
           - carbon
+          - cloud-app
           - edt-loop
           - ibm-cloud
           - ibm-security
@@ -295,14 +318,16 @@ categories:
           - watson--machine-learning
       - name: Social
         members:
-          - logo--delicious
           - logo--digg
           - logo--facebook
           - logo--flickr
           - logo--github
+          - logo--glassdoor
           - logo--google
+          - logo--instagram
           - logo--linkedin
           - logo--livestream
+          - logo--medium
           - logo--pinterest
           - logo--quora
           - logo--skype
@@ -311,8 +336,8 @@ categories:
           - logo--tumblr
           - logo--twitter
           - logo--xing
+          - logo--yelp
           - logo--youtube
-          - logo--stumbleupon
   - name: Enterprise
     subcategories:
       - name: Commerce
@@ -337,6 +362,7 @@ categories:
           - 3D-curve--auto-colon
           - 3D-curve--auto-vessels
           - 3D-curve--manual
+          - 3D-iCa
           - 3D-MPR-Toggle
           - 3rd-party-connected
           - 3D-software
@@ -351,13 +377,14 @@ categories:
           - circle-measurement
           - cobb-angle
           - cross-reference
+          - denominate
           - dicom--6000
           - dicom--overlay
+          - dna
           - exam-mode
           - fusion-blender
           - hanging-protocol
           - health-cross
-          - iCA-3D
           - image--medical
           - launch-study--1
           - launch-study--2
@@ -367,6 +394,7 @@ categories:
           - medication
           - medication--alert
           - medication--reminder
+          - nominate
           - page-scroll
           - pet-image--B
           - pet-image--O
@@ -473,11 +501,14 @@ categories:
           - number--small--7
           - number--small--8
           - number--small--9
+          - omega
+          - sigma
       - name: Data
         members:
           - activity
           - analytics
           - archive
+          - blockchain
           - chart--bar
           - chart--bubble
           - chart--line
@@ -488,6 +519,7 @@ categories:
           - chart--venn-diagram
           - classifier--language
           - concept
+          - container-software
           - data--1
           - data--2
           - data--base
@@ -507,6 +539,8 @@ categories:
           - flow
           - flow--data
           - flow--stream
+          - hybrid-networking
+          - managed-solutions
           - network--1
           - network--2
           - network--3
@@ -516,6 +550,7 @@ categories:
           - query-queue
           - report
           - report--data
+          - schematics
           - share-knowledge
           - table
           - table--split
@@ -528,6 +563,8 @@ categories:
           - tree-view--alt
           - type-pattern
           - types
+          - virtual-machine
+          - virtual-private-cloud
           - visual-recognition
       - name: File
         members:
@@ -564,6 +601,7 @@ categories:
           - folder
           - folder--add
           - folder--details
+          - folder--off
           - folder--shared
           - GIF
           - HD
@@ -591,8 +629,10 @@ categories:
           - playlist
           - PNG
           - popup
+          - product
           - RAW
           - scale
+          - SDK
           - SQL
           - SVG
           - table-of-contents
@@ -650,6 +690,9 @@ categories:
       - name: User
         members:
           - accessibility
+          - accessibility--alt
+          - accessibility--color
+          - accessibility--color--filled
           - collaborate
           - education
           - events
@@ -715,9 +758,19 @@ categories:
           - bus
           - cafe
           - car
+          - charging-station
+          - charging-station--filled
           - compass
           - delivery-truck
           - departure
+          - earth
+          - earth--americas
+          - earth--americas--filled
+          - earth--europe-africa
+          - earth--europe-africa--filled
+          - earth--filled
+          - earth--southeast-asia
+          - earth--southeast-asia--filled
           - globe
           - help-desk
           - hotel
@@ -742,6 +795,7 @@ categories:
           - hurricane
           - partly-cloudy
           - sunny
+          - sunrise
           - sunset
           - temperature
   - name: Tools
@@ -790,9 +844,12 @@ categories:
           - iot--platform
           - keyboard
           - laptop
+          - logo--openshift
+          - logo--vmware
           - mail--all
           - mobile
           - mobile--add
+          - mobile--audio
           - mobile--check
           - mobile--download
           - mobile--landscape
@@ -818,9 +875,12 @@ categories:
           - calibrate
           - cursor--1
           - cursor--2
+          - meter
+          - microscope
           - portfolio
           - ruler
           - ruler--alt
           - scalpel
+          - stamp
           - tool-box
           - tools

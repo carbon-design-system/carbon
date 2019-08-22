@@ -8,9 +8,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import SideNavItem from '../SideNavItem';
+import { settings } from 'carbon-components';
+const { prefix } = settings;
 
 describe('SideNavItem', () => {
-  let mockProps;
+  let mockProps, wrapper;
 
   beforeEach(() => {
     mockProps = {
@@ -19,8 +21,23 @@ describe('SideNavItem', () => {
     };
   });
 
+  afterEach(() => {
+    wrapper && wrapper.unmount();
+  });
+
   it('should render', () => {
-    const wrapper = mount(<SideNavItem {...mockProps} />);
+    wrapper = mount(<SideNavItem {...mockProps} />);
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should include a css class to render the large varient is large prop is set', () => {
+    wrapper = mount(<SideNavItem {...mockProps} />);
+    expect(
+      wrapper.find('li').hasClass(`${prefix}--side-nav__item--large`)
+    ).toBe(false);
+    wrapper.setProps({ large: true });
+    expect(
+      wrapper.find('li').hasClass(`${prefix}--side-nav__item--large`)
+    ).toBe(true);
   });
 });

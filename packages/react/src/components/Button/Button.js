@@ -171,7 +171,7 @@ Button.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * If specifying the `icon` prop, provide a description for that icon that can
+   * If specifying the `renderIcon` prop, provide a description for that icon that can
    * be read by screen readers
    */
   iconDescription: props => {

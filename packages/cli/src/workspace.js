@@ -7,6 +7,7 @@
 
 'use strict';
 
+const execa = require('execa');
 const fs = require('fs-extra');
 const path = require('path');
 const packageJson = require('../../../package.json');
@@ -35,6 +36,27 @@ function workspace(fn) {
   return (...args) => fn(...args, env);
 }
 
+/**
+ * Lists the packages for the current project using the `lerna list` command
+ * @returns {Array<PackageInfo>}
+ */
+async function getPackages() {
+  const { stdout: lernaListOutput } = await execa('yarn', [
+    'lerna',
+    'list',
+    '--json',
+  ]);
+  return JSON.parse(
+    // Clean-up output by stripping out `yarn` information related to the
+    // command and how long it took to run
+    lernaListOutput
+      .split('\n')
+      .slice(2, -1)
+      .join('\n')
+  ).filter(pkg => !pkg.private);
+}
+
 module.exports = {
   workspace,
+  getPackages,
 };

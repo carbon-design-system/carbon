@@ -96,12 +96,12 @@
     }
 
     &:focus {
-      color: $text-04;
+      color: $inverse-01;
       background-color: $interactive-03;
     }
 
     &:active {
-      background-color: $active-primary;
+      color: $inverse-01;
     }
 
     &:disabled,
@@ -112,6 +112,7 @@
     &.#{$prefix}--btn--disabled:focus {
       background: transparent;
       color: $disabled;
+      outline: none;
 
       & > .#{$prefix}--btn__icon path {
         fill: $disabled;
@@ -161,6 +162,7 @@
       color: $disabled;
       background: transparent;
       border-color: transparent;
+      outline: none;
 
       .#{$prefix}--btn__icon path {
         fill: $disabled;
@@ -217,10 +219,8 @@
 
   .#{$prefix}--btn--danger {
     @include button-theme(
-      // $support-01, TODO: replace with updated token
-        #dc222b,
-      // $support-01, TODO: replace with updated token
-        #dc222b,
+      $danger,
+      $danger,
       $text-04,
       $hover-danger,
       $icon-03,

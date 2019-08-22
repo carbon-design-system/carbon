@@ -220,12 +220,15 @@ export default class Modal extends Component {
   }
 
   initialFocus = focusContainerElement => {
-    const primaryFocusElement = focusContainerElement
-      ? focusContainerElement.querySelector(this.props.selectorPrimaryFocus)
+    const containerElement = focusContainerElement || this.innerModal.current;
+    const primaryFocusElement = containerElement
+      ? containerElement.querySelector(this.props.selectorPrimaryFocus)
       : null;
+
     if (primaryFocusElement) {
       return primaryFocusElement;
     }
+
     return this.button && this.button.current;
   };
 
@@ -235,6 +238,10 @@ export default class Modal extends Component {
       target.focus();
     }
   };
+
+  componentWillUnmount() {
+    toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+  }
 
   componentDidMount() {
     toggleClass(

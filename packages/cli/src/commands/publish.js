@@ -13,6 +13,7 @@ const semver = require('semver');
 const { generate } = require('../changelog');
 const { fetchLatestFromUpstream } = require('../git');
 const { createLogger, displayBanner } = require('../logger');
+const { getPackages } = require('../workspace');
 
 const logger = createLogger('publish');
 // Enqueue tasks to run at the end of the command where we want to "clean-up"
@@ -215,26 +216,6 @@ async function getLastGitTag() {
   ]);
   const tags = tagInfo.split('\n');
   return tags[0];
-}
-
-/**
- * Lists the packages for the current project using the `lerna list` command
- * @returns {Array<PackageInfo>}
- */
-async function getPackages() {
-  const { stdout: lernaListOutput } = await execa('yarn', [
-    'lerna',
-    'list',
-    '--json',
-  ]);
-  return JSON.parse(
-    // Clean-up output by stripping out `yarn` information related to the
-    // command and how long it took to run
-    lernaListOutput
-      .split('\n')
-      .slice(2, -1)
-      .join('\n')
-  ).filter(pkg => !pkg.private);
 }
 
 module.exports = {

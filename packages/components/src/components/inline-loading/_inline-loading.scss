@@ -19,6 +19,7 @@
   .#{$prefix}--inline-loading {
     display: flex;
     width: 100%;
+    min-height: 2rem;
     align-items: center;
 
     .#{$prefix}--loading__svg circle {
@@ -45,9 +46,14 @@
   }
 
   .#{$prefix}--inline-loading__checkmark-container {
-    width: 0.75rem;
-    position: absolute;
-    top: 0.75rem;
+    fill: $interactive-04;
+
+    // For deprecated older markup
+    &.#{$prefix}--inline-loading__svg {
+      width: 0.75rem;
+      position: absolute;
+      top: 0.75rem;
+    }
 
     &[hidden] {
       display: none;
@@ -64,6 +70,16 @@
     animation-name: stroke;
     animation-duration: 0.25s;
     animation-fill-mode: forwards;
+  }
+
+  .#{$prefix}--inline-loading--error {
+    fill: $support-01;
+    width: rem(16px);
+    height: rem(16px);
+
+    &[hidden] {
+      display: none;
+    }
   }
 
   .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {

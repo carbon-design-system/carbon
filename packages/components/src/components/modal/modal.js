@@ -199,9 +199,12 @@ class Modal extends mixin(
    * @private
    */
   _handleFocusin = evt => {
+    const focusWrapNode =
+      this.element.querySelector(this.options.selectorModalContainer) ||
+      this.element;
     if (
       this.element.classList.contains(this.options.classVisible) &&
-      !this.element.contains(evt.target) &&
+      !focusWrapNode.contains(evt.target) &&
       this.options.selectorsFloatingMenus.every(
         selector => !eventMatches(evt, selector)
       )
@@ -228,6 +231,7 @@ class Modal extends mixin(
    * @property {string} [selectorPrimaryFocus] The CSS selector to determine the element to put focus when modal gets open.
    * @property {string} [selectorFocusOnClose] The CSS selector to determine the element to put focus when modal closes.
    *   If undefined, focus returns to the previously focused element prior to the modal opening.
+   * @property {string} [selectorModalContainer] The CSS selector for the content container of the modal for focus wrap feature.
    * @property {string} attribInitTarget The attribute name in the launcher buttons to find target modal dialogs.
    * @property {string[]} [selectorsFloatingMenu]
    *   The CSS selectors of floating menus.
@@ -259,6 +263,7 @@ class Modal extends mixin(
         `.${prefix}--tooltip`,
         '.flatpickr-calendar',
       ],
+      selectorModalContainer: `.${prefix}--modal-container`,
       classVisible: 'is-visible',
       classBody: `${prefix}--body--with-modal-open`,
       attribInitTarget: 'data-modal-target',

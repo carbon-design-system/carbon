@@ -87,8 +87,8 @@ describe('CopyButton', () => {
       expect(feedbackWrapper.state().showFeedback).toBe(false);
       feedbackWrapper.simulate('click');
       expect(feedbackWrapper.state().showFeedback).toBe(true);
-      expect(setTimeout.mock.calls.length).toBe(1);
-      expect(setTimeout.mock.calls[0][1]).toBe(5000);
+      expect(setTimeout.mock.calls.length).toBe(2);
+      expect(setTimeout.mock.calls[1][1]).toBe(5000);
       jest.runAllTimers();
       expect(feedbackWrapper.state().showFeedback).toBe(false);
     });

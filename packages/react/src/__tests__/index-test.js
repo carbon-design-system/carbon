@@ -45,6 +45,8 @@ describe('Carbon Components React', () => {
         "ExpandableTile",
         "FileUploader",
         "FileUploaderButton",
+        "FileUploaderDropContainer",
+        "FileUploaderItem",
         "FileUploaderSkeleton",
         "Filename",
         "Form",

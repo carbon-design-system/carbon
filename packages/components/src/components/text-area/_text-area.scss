@@ -41,7 +41,6 @@
     & ~ .#{$prefix}--form__helper-text {
       margin-top: 0;
       order: 2;
-      font-style: italic;
     }
 
     & ~ .#{$prefix}--form-requirement {
@@ -62,7 +61,7 @@
   }
 
   .#{$prefix}--text-area::placeholder {
-    @include placeholder-colors;
+    color: $text-05;
     @include type-style('body-long-01');
     opacity: 1;
   }

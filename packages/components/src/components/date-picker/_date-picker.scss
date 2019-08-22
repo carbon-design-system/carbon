@@ -40,6 +40,7 @@
   .#{$prefix}--date-picker-input__wrapper {
     display: flex;
     align-items: center;
+    position: relative;
 
     ~ .#{$prefix}--form-requirement {
       max-height: rem(200px);
@@ -104,10 +105,14 @@
     }
 
     &:disabled {
-      color: $disabled;
+      color: $disabled-02;
       background-color: $disabled-background-color;
       border-bottom: 1px solid transparent;
       cursor: not-allowed;
+    }
+
+    &:disabled::placeholder {
+      color: $disabled-02;
     }
 
     &:disabled:hover {
@@ -116,6 +121,7 @@
 
     &::placeholder {
       @include placeholder-colors;
+      opacity: 1;
     }
   }
 
@@ -125,10 +131,18 @@
     fill: $icon-01;
     cursor: pointer;
     z-index: 1;
+    // vertically center icon within parent container on IE11
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
     padding-right: $carbon--spacing-09;
+  }
+
+  .#{$prefix}--date-picker__input:disabled ~ .#{$prefix}--date-picker__icon {
+    fill: $disabled-02;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--date-picker--range

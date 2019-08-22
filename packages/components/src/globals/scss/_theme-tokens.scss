@@ -10,6 +10,10 @@
 @import 'spacing';
 @import './vendor/@carbon/elements/scss/themes/themes';
 
+// The load order of tokens versus themes matter, so we use `carbon--theme` here
+// to make sure that they're in sync if one has diverged from the other.
+@include carbon--theme();
+
 /// Theme variables
 
 /// @type Value
@@ -37,12 +41,18 @@ $disabled-background-color: $disabled-01 !default;
 /// @group global-themes
 $focus: $ibm-color__blue-60 !default;
 
+/// @type Color
+/// @access public
+/// @group global-themes
+$inverse-focus-ui: $ibm-color__white-0 !default;
+
 // Link
 
 /// @type Color
 /// @access public
 /// @group link
-$link-visited: $ibm-color__purple-60 !default;
+/// @deprecated
+$link-visited: $visited-link !default;
 
 /// @type Color
 /// @access public
@@ -152,7 +162,7 @@ $accordion-justify-content: flex-start !default;
 /// @type Value
 /// @access public
 /// @group accordion
-$accordion-arrow-margin: 0 $carbon--spacing-05 0 0 !default;
+$accordion-arrow-margin: 2px $carbon--spacing-05 0 0 !default;
 
 /// @type Value
 /// @access public
@@ -262,7 +272,7 @@ $notification-error-background-color: $ibm-color__red-10 !default;
 /// @access public
 /// @group notification
 $notification-warning-background-color: mix(
-  $ibm-color__yellow-20,
+  $ibm-color__yellow-30,
   $ibm-color__white-0,
   15%
 ) !default;
@@ -325,22 +335,22 @@ $structured-list-text-transform: none !default;
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-color: 3px solid $ibm-color__gray-30 !default;
+$tab-underline-color: 3px solid $ui-03 !default;
 
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-color-hover: 3px solid $ibm-color__gray-60 !default;
+$tab-underline-color-hover: 3px solid $ui-04 !default;
 
 /// @type Color
 /// @access public
 /// @group tabs
-$tab-text-disabled: $ibm-color__gray-30 !default;
+$tab-text-disabled: $disabled-02 !default;
 
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-disabled: 3px solid $ibm-color__gray-10 !default;
+$tab-underline-disabled: 3px solid $disabled-01 !default;
 
 // Skeleton Loading
 

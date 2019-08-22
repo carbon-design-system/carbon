@@ -1,348 +1,64 @@
 # Contributing
 
-## Requirements
-
-Set up your SSH Key GitHub account and install node.js 4 or higher.
-
-- [Generating SSH Keys - GitHub](https://help.github.com/articles/generating-ssh-keys/)
-- [`nvm` (Node Version Manager)](https://github.com/creationix/nvm) to use the
-  `Node 6`.
-
-Contributing to carbon-components requires that you can run this repo locally on
-your computer.
-
-## Coding style
-
-### Class names
-
-Prefix all class names with `#{$prefix}--` in SCSS, which is replaced with
-`bx--` by default, and design systems inheriting Carbon can override. This
-prefix prevents potential conflicts with class names from the user.
-
-**HTML**
-
-```html
-<div
-  class="bx--inline-notification bx--inline-notification--error"
-  role="alert"
->
-  <div class="bx--inline-notification__details">...</div>
-</div>
-```
-
-**SCSS**
-
-```scss
-.#{$prefix}--inline-notification {
-  ...
-}
-
-.#{$prefix}--inline-notification__details {
-  ...
-}
-```
-
-Follow BEM naming convention for classes. Again, the only thing we do
-differently is prefix all classes with `#{$prefix}--`.
-
-```scss
-.#{$prefix}--block
-.#{$prefix}--block__element
-.#{$prefix}--block--modifier
-```
-
-Avoid nesting selectors, this will make it easier to maintain in the future.
-
-```scss
-// Don't do this
-.#{$prefix}--inline-notification {
-  .#{$prefix}--btn {
-    &:hover {
-      svg {
-        ...
-      }
-    }
-  }
-}
-
-// Do this instead
-.#{$prefix}--inline-notification .#{$prefix}--btn {
-    &:hover svg {
-      ...
-    }
-  }
-}
-```
-
-### Sass documentation
-
-[SassDoc](http://sassdoc.com) is used to document the Carbon Sass source.
-SassDoc annotations start each line with `///`; do not use `///` in non-SassDoc
-comments.
-
-For consistency, capitalize types (used in `@type`, `@param`, `@return`) and
-descriptions (used in `@param`, `@return`, `@deprecated`, `@example`, `@link`).
-
-The following annotations are used:
-
-**Required annotations**
-
-- [Description](http://sassdoc.com/annotations/#description) - can be one line
-  or multiple lines
-- [`@access`](http://sassdoc.com/annotations/#access) - `public` or `private`,
-  where public items make up our public API
-- [`@group`](http://sassdoc.com/annotations/#group) - typically a package or
-  component name
-- [`@type`](http://sassdoc.com/annotations/#type) - allowed on **variables**,
-  (e.g. `Map`, `Color`, `Number`)
-- [`@param`](http://sassdoc.com/annotations/#parameter) - allowed on
-  **functions** and **mixins**, include the type, name, and description, with a
-  default value if there is one (e.g.
-  `@param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name`)
-- [`@return`](http://sassdoc.com/annotations/#return) - allowed on
-  **functions**, include the type and description (e.g.
-  `@return {Number} In px`)
-- [`@alias`](http://sassdoc.com/annotations/#alias) - do not include the `$` if
-  aliasing a variable
-- [`@content`](http://sassdoc.com/annotations/#content) - allowed on **mixins**,
-  describe the usage of content
-- [`@deprecated`](http://sassdoc.com/annotations/#deprecated) - context around
-  possible replacements or when the item will no longer be available
-
-  **Optional annotations**
-
-- [`@example`](http://sassdoc.com/annotations/#example) - if the usage isn't
-  straight forward or there are multiple use cases
-- [`@link`](http://sassdoc.com/annotations/#link) - if there's a related link to
-  reference
-
-  **Examples**
-
-```scss
-// Variable example
-
-/// Primary interactive color; Primary buttons
-/// @type Color
-/// @access public
-/// @group @carbon/themes
-$interactive-01: map-get($carbon--theme, interactive-01) !default;
-
-// Mixin example
-
-/// Create the container for a grid. Will cause full-bleed for the grid unless
-/// max-width properties are added with `make-container-max-widths`
-/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
-/// @access private
-/// @group @carbon/grid
-@mixin carbon--make-container($breakpoints: $carbon--grid-breakpoints) {
-}
-
-// Function example
-
-/// Compute the type size for the given type scale step
-/// @param {Number} $step - Type scale step
-/// @return {Number} In px
-/// @access public
-/// @group @carbon/type
-@function carbon--get-type-size($step) {
-}
-```
-
-### Start a new `block` or `element`?
-
-A nested element can use a new block name as long as the styles are independent
-of the parent.
-
-```html
-<div class="bx--component">
-  <button class="bx--component-button">Button</button>
-</div>
-```
-
-:point_up: The `#{$prefix}--component-button` class implies that this button has
-independent styles from its parent. Generally, it's preferred to start a new
-block.
-
-### Red flags
-
-Avoid names with multiple `__element` names:
-
-- :x: `.#{$prefix}--card__list__item`
-- :white_check_mark: `.#{$prefix}--card-item`
-- :white_check_mark: `.#{$prefix}--card__item`
-
-## Files and folders
-
-All components belong in `src/components` in their own folder.
-
-Name files and folders using **singular** form; not plural.
-
-```
-button
-  - button.hbs
-  - _button.scss
-  - button.js
-  - button.config.js
-```
-
-Also note that all variants of a component can live in a single HBS, SCSS and JS
-file respectively. For example, while there are many button variants (primary,
-secondary, etc.), they're all contained in those single source files in the
-button folder.
-
-## Defining markups for components and their variants
-
-There are two ways to define markups for components and their variants:
-
-1. Defining markup with no conditional or data interpolations
-2. Defining markup with conditionals or data interpolations
-
-### Defining markup with no conditional or data interpolations
-
-Defining markup with no conditional or data interpolation is as easy as adding a
-`.hbs` file to the component directory. No `.config.js` file in the component
-directory is required in this case. One thing to note is that If there is a
-`.hbs` file whose basename is exactly the same as the component name, other
-`.hbs` files has to be in `componentname--variantname.hbs` format.
-
-### Defining markup with conditionals or data interpolations
-
-Defining markup with conditionals or data interpolations requires creating
-`.config.js` file, which is a
-[JavaScript module format of Fractal configuration](https://fractal.build/guide/core-concepts/configuration-files.html#configuration-file-formats),
-in component directory. `.hbs` files are rendered with the data given via
-`context` property in `variants[n]` (below).
-
-Supported
-[properties in `.config.js`](https://fractal.build/guide/components/configuration-reference.html#component-properties)
-are the following:
-
-- [`default`](https://fractal.build/guide/components/configuration#default): The
-  default variant name
-- [`variants`](https://fractal.build/guide/components/configuration#variant-properties) -
-  An array of objects, supporting the following properties:
-  - `name`: The variant name
-  - `label`: The variant name shown in dev env UI
-  - `notes`: A short explainer the variant shown in dev env UI
-  - `context`: The data used for rendering `.hbs`
-  - `view`: The basename of the `.hbs` file for variant markup (Unlike
-    [default Fractal environment](https://fractal.build/guide/components/configuration#view),
-    this property should point to the basename of a `.hbs` file under `demo`
-    directory or `src` directory, _without_ its path)
-  - `preview`: The basename of the `.hbs` file for the markup that lays out the
-    variant markup, in "full render" mode (Unlike
-    [default Fractal environment](https://fractal.build/guide/components/configuration#preview),
-    this property should point to the basename of a `.hbs` file under `demo`
-    directory or `src` directory, _without_ `@` symbol)
-  - `meta`: Some metadata. Carbon vanilla development environment reads the
-    following ones specifically:
-    - `linkOnly`: Only full-page demo is allowed
-    - `useIframe`: Use of `<iframe>` for non full-page demo
-    - `xVersionOnly`: Supports "experimental" theme only
-    - `xVersionNotSupported`: "Experimental" theme is not supported
-
-What `.hbs` file is used for rendering a variant is determined by searching for
-`.hbs` files in `demo` or `src` directory and find one whose basename matches
-one of the following (the priority is the following order):
-
-1. `view` property in `variants[n]`
-2. Variant handle, which takes a format of `componentname--variantname` format
-3. Component handle, which is `componentname`
-
-## Working on JavaScript-framework-specific styles
-
-JavaScript-framework-specific is _not_ recommended as we strive to create styles
-that are framework-neutral. However, there are some rare cases where
-framework-specific cannot be avoided, and some of those make sense to be in
-maintained by core style library here.
-
-There are a couple ways to work on framework-specific style.
-
-### Using `npm link`/`yarn link`
-
-This is the most straightforward way. When in the directory of your
-`carbon-components` folder, run the following command:
-
-```bash
-yarn link
-```
-
-You should see a success message similar to:
-
-```bash
-success Registered "carbon-components".
-info You can now run `yarn link "carbon-components"` in the projects where you want to use this package and it will be used instead.
-```
-
-Now, go to the folder where `carbon-components-angular` is located and run:
-
-```bash
-yarn link carbon-components
-```
-
-You should see a success message similar to:
-
-```bash
-success Using linked package for "carbon-components".
-```
-
-The `yarn link` command will allow us to point the `carbon-components` package
-under `node_modules` to the folder on our filesystem. So, if we make a change in
-`carbon-components` and re-compile the project it will update in the Storybook
-environment for `carbon-components-angular`.
-
-In addition, if you would like to have your changes to styles automatically
-compile and update Storybook you can run the following command in the
-`carbon-components` folder on your machine:
-
-```bash
-yarn gulp watch -s
-```
-
-This will execute the `watch` command in `gulpfile.js`. As a result, whenever
-you make a change to the project styles it will automatically copy over into the
-`scss` folder which Storybook uses in `carbon-components-angular`.
-
-### Pointing NPM dependency of `carbon-components` right to the source code
-
-Though above approach is the most straightforward, it involves an overhead of
-having to run build process at `carbon-components`, in addition to one at
-framework variant repo, upon every Sass code change.
-
-To avoid such overhead, you can point NPM dependency of `carbon-components`
-right to the source code, though there is a caveat that our future change to
-directory structure, etc. may make such steps no longer work. Here are the
-steps:
-
-```sh
-> cd /path/to/carbon-components-angular/node_modules/carbon-components
-> mv scss scss.orig
-> ln -s /path/to/carbon-components/src scss
-```
-
-Then edits of `.scss` files in `/path/to/carbon-components/src` will be
-reflected to the development environment of your framework variant repository.
-You don't need to do anything in `carbon-components` side.
+## Our contribution model
+
+Carbon Design System is an **open source** project at IBM. We pride ourselves in
+open and inclusive design and development. If you're wondering more about our
+contribution process, you're in the right place. First off, thank you for your
+interest! This project is made possible not just by the core Carbon team, but
+also by several community members who have invested their own time to give back
+to the Carbon community.
+
+## Code of conduct
+
+We value all of our community members, and thus want to foster a positive
+contributing environment. Please take a look at our
+[code of conduct](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md#carbon-code-of-conduct)
+before engaging in our workspaces.
+
+## Prerequisites
+
+Before contributing to Carbon, you should make sure you have the following tools
+installed:
+
+- [Node.js](https://nodejs.org/en/download/) v10 or above here or follow their
+  installation through a package manager
+  [here](https://nodejs.org/en/download/package-manager/))
+  - If you're on macOS, we recommend using
+    [`nvm`](https://github.com/nvm-sh/nvm) to help manage different versions of
+    Node.js [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md) as your
+    version manager for Node.
+- Git
+- [Yarn](https://yarnpkg.com/en/docs/install)
+
+You'll also need a code editor to make changes to Carbon. There are many to
+choose from but some popular options are
+[VSCode](https://code.visualstudio.com/), [Atom](https://atom.io), and
+[Sublime](https://www.sublimetext.com/).
+
+With that all in place, you're ready to start contributing to Carbon!
 
 ## Start contributing
 
 ### 1. Fork the repo:
 
-Go to [carbon-components](https://github.com/IBM/carbon-components) and click
-the `Fork` button in the top-right corner.
+Go to
+[Carbon's repository on GitHub](https://github.com/carbon-design-system/carbon)
+and click the `Fork` button in the top-right corner. This will create a copy
+repo of Carbon associated with your account.
 
 ### 2. Clone your fork:
 
 1.  Go to your [GitHub Repositories](https://github.com/settings/repositories).
-1.  Click on `[your_github_username]/carbon-components`.
+1.  Click on `[your_github_username]/carbon`.
 1.  Click on the `Clone or Download` button and copy the URL from the
     `Clone with SSH` option. It should start with `git@github.com...`
 
 In your terminal:
 
 ```sh
-git clone git@github.com:[your_github_username]/carbon-components.git
-cd carbon-components
+git clone git@github.com:[your_github_username]/carbon.git
+cd carbon
 ```
 
 See [GitHub docs](https://help.github.com/articles/fork-a-repo/) for more
@@ -350,51 +66,79 @@ details.
 
 ### 3. Add upstream remotes
 
-When you clone your forked repo, doing a `git remote -v` will show that the
-`origin` remote is set up for you already by default. This should be pointing to
-your forked repo.
+When you clone your forked repo, running `git remote -v` will show that the
+`origin` is pointing to your forked repo by default.
 
-Add the `IBM/carbon-components` repo to your remote (this can be useful to
-update your fork of new changes down the road):
+Now you need to add the `carbon-design-system/carbon` repo as your upstream
+remote branch:
 
 ```sh
 # Add the upstream remote to your repo
-git remote add upstream git@github.com:IBM/carbon-components.git
+git remote add upstream git@github.com:carbon-design-system/carbon.git
 
 # Verify the remote was added
 git remote -v
 ```
 
-When you do `git remote -v`, you'll see these remotes:
+Your terminal should output something like this:
 
-- `origin`: connection to your fork
-- `upstream`: connection to the original repo.
+```sh
+origin  [your forked repo] (fetch)
+origin  [your forked repo] (push)
+upstream    git@github.com:carbon-design-system/carbon.git (fetch)
+upstream    git@github.com:carbon-design-system/carbon.git (push)
+```
 
 ### 4. Work in a branch
 
-- Always work in a branch.
-- Submit pull requests from a branch.
-- All commits must follow the convention outlined
-  [here](https://github.com/conventional-changelog/conventional-changelog/blob/v0.5.3/conventions/angular.md).
+When contributing to Carbon, your work should always be done in a branch off of
+your repo, this is also how you will submit your pull request when your work is
+done.
 
-### 5. Start the server
+To create a new branch, ensure you are in your forked branch in your terminal
+and run:
 
 ```sh
-npm run dev
-
-# or
-
-yarn dev
+git pull origin master
+git checkout -b {your-branch-name}
 ```
 
-Once it's done building, you can start editing source code or creating new
-components. The system is set up to automatically bundle your changes/additions.
-Visit http://localhost:3000 to see the changes happen on the fly.
+### 5. Build and start the development server
 
-Options:
+From the root directory of your fork, run:
 
-- `-b`: Enable breaking changes for the next release
-- `-e`: Enable experimental features
+```sh
+# To install the project's dependies
+yarn install --offline
+
+# To build the project:
+yarn build
+```
+
+To get your development server running and to start coding, you'll need to
+navigate to the package in which you will be working. For example, if you plan
+on contributing to our React components, you can enter in your command line
+`cd packages/react` and then run:
+
+```sh
+
+yarn storybook
+```
+
+This will start a development server where you can see any changes you are
+making to components in our react components Storybook.
+
+The command to start the server will differ depending on which package you are
+working within. To find out which command you'll need to run, you can check the
+`scripts` in the package's `package.json`.
+
+Once it's done building, you can edit source code or create new components. The
+system is set up to automatically bundle your changes/additions. Visit
+http://localhost:9000 to see the changes happen on the fly.
+
+For information about our coding style, such as how we name our classes and our
+file structure, go to our
+[developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md#coding-style)
 
 ### 6. Test your JavaScript code
 
@@ -402,76 +146,31 @@ If you're contributing to our JavaScript code, test your changes by running our
 test commands:
 
 ```sh
-gulp test:unit
+yarn test
 ```
 
-If you add any features to our JavaScript code, make sure to add tests so that
-your code is covered. Tests are written in
-[Mocha](https://mochajs.org)/[Chai](http://chaijs.com). You can see if your code
-is covered by looking at carbon-components/tests/coverage/\*/index.html after
-running test.
+For more extensive testing information, see our
+[developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md#common-tasks)
 
-If your change may hit some browser quirks, use `-b` option, like:
-
-```sh
-gulp test:unit -b IE -b Firefox
-```
-
-(Other browsers tests can run with are: `Safari`, `Chrome` and `ChromeHeadless`)
-
-If you are very sure that your change affects a specific set of components, you
-can use `-f` option, like:
-
-```sh
-gulp test:unit -f tests/spec/fab_spec.js
-```
-
-Other options for testing are:
-
-- `-d`/`--debug`: Stop generating code coverage report. Useful to debug your
-  code when running test.
-- `-k`/`--keepalive`: Keep running test runner even after test ends. Test will
-  restart running when you make changes to any test files or any files under
-  test.
-- `-v`/`--verbose`: Let Karma emit detailed log.
-
-### 7. Test your HTML/CSS code for a11y
-
-If you're contributing to our HTML/CSS code, a11y compliance of your code should
-be tested.
-
-To do so, you can test your changes by running our test commands:
-
-```sh
-gulp test:a11y
-```
-
-If you are very sure that your change affects a specific set of components, you
-can use `--name` option, like:
-
-```sh
-gulp test:a11y --name dropdown
-```
-
-The a11y test may report potential issues that should be handled in
-application-level, not in carbon-components code. In such case, you can ignore
-those issues by adding an item to `shouldIssueBeIgnoredForRule` table in
-[tests/a11y/global-ignore-aat-issues.js](https://github.com/IBM/carbon-components/blob/master/tests/a11y/global-ignore-aat-issues.js).
-The table is keyed by something like `wcag20.tech.h59.linkValid` which helps
-identifying what RPT rule to ignore. You can specify `true` to the value which
-ignores all violations of the rule, or a function which takes the DOM element
-violating the rule and returns `true` if such violation should be ignored.
-
-### 8. Make a pull request
+### 7. Make a pull request
 
 **Note:** Before you make a pull request,
 [search](https://github.com/IBM/carbon-components/issues) the issues to see if a
 similar issue has already been submitted. If a similar issue has been submitted,
 assign yourself or ask to be assigned to the issue by posting a comment. If the
-issue does not exist, create a new issue.
+issue does not exist, please make a new issue. Issues give us context about what
+you are contributing and expedite the process to getting your contributions
+merged into Carbon. It's a win for everybody :tada:
 
 When you're at a good stopping place and you're ready for feedback from other
 contributors and maintainers, **push your commits to your fork**:
+
+To do so, go to your terminal and run:
+
+```sh
+git add -A
+git commit -m "YOUR  COMMIT MESSAGE HERE"
+```
 
 #### Commit tip
 
@@ -484,58 +183,19 @@ contributors and maintainers, **push your commits to your fork**:
 >
 > **Commit message format:**
 
-```
-<type>(<scope>): <subject>
-<BLANK LINE>
-<body>
-<BLANK LINE>
-<footer>
-```
+For more information about how to write your commit message, view our commit
+conventions detailed in a our
+[developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md#commit-conventions).
 
-_Do not submit pull requests from the `master` branch of your fork._
+After your changes are commited, run:
 
-```
-git checkout -b { YOUR_BRANCH_NAME }
-git add .
-git commit -m "fix(table): IE11 positioning error" -m "Fixes #34"
-```
-
-- [Close a commit via commit message](https://help.github.com/articles/closing-issues-via-commit-messages/)
-
-```
-git push origin { YOUR_BRANCH_NAME }
+```sh
+git push -u origin { YOUR_BRANCH_NAME }
 ```
 
 In your browser, navigate to
-[IBM/carbon-components](https://github.com/IBM/carbon-components) and click the
-button that reads `Compare & pull request`
-
-> **Is it a Breaking Change?**
-
-> We want to respect semver. It's important to discern whether your pull request
-> contains breaking changes or not. Sometimes, renaming or removing things in
-> the code can result in breaking changes.
-
-> Here are some examples of breaking changes... changing, renaming or removing
-> any of the following:
->
-> - HTML attributes
-> - Folders or Files
-> - Any SCSS `@mixin`, `$variable` or `function`
-> - Any JS `function` or `class`
-
-> We also practice **graceful deprecation** when something is slated to be
-> removed -- we mark it as deprecated in the current version and remove it in
-> the next major version.
-
-Before you create a pull request, change the base branch depending on what kind
-of change you're submitting.
-
-- Pull requests with **non-breaking changes** like patches and minor updates use
-  the `master` as the base branch.
-- Pull requests with **breaking changes** use the latest `major version number`
-  branch as the base branch (i.e. `7.0.0` or whatever the next major version
-  is).
+[carbon-design-system/carbon-](https://github.com/carbon-design-system/carbon)
+and click the button that reads `Compare & pull request`
 
 Write a title and description then click `Create pull request`
 
@@ -547,9 +207,120 @@ Stay up to date with the activity in your pull request. Maintainers from the
 Design System team will be reviewing your work and making comments, asking
 questions and suggesting changes to be made before they merge your code.
 
-:tada: You no longer need to squash commits :tada:
-
-When you need to make a change, add, commit and push to your branch normally.
+When you need to make a change, use the same method detailed above except you no
+longer need to run `git push -u origin { YOUR_BRANCH_NAME }` just `git push`.
 
 Once all revisions to your pull request are complete, someone from Design
 Systems will squash and merge your commits for you.
+
+## FAQ
+
+### Who can contribute?
+
+Anyone! We mean it. The one and only requirement is you'll need a
+[public GitHub account](https://github.com/join), as all our assets live on
+GitHub.
+
+- **Development:** If coding is your thing, you can help us by contributing bug
+  fixes or community components. Checkout our
+  [Developer Handbook](../developer-handbook.md) to get your dev environment set
+  up, read up on our best practices and more.
+- **Design:** Design contributions can vary from visual assets, UX interactions,
+  motion design, Sketch kit bug fixes and more.
+- **Content:** Our documentation is just as important as our design and code
+  assets. Whether it's updating our current docs, or adding new
+  [patterns](./patterns), anyone can contribute to our
+  [website content](https://github.com/carbon-design-system/carbon-website).
+- **Research:** Carbon is made up of developers and designers, but
+  unfortunately, no dedicated researchers. If you're a researcher and have
+  findings that you think could improve Carbon users' experience, you're in the
+  right place. This kind of contribution is most effective if coupled with
+  design and development forces, which would be presented in a GitHub issue and
+  subsequent PR.
+
+### What is the contribution process?
+
+1. **Issue:** Check repo for an _existing_ issue related to your contribution
+   first. If none exist, open a new issue. Be sure to check the right repo.
+   (i.e. Don't open an issue for website documentation in the `carbon`
+   monorepo.) We reserve the right to close any issues that haven't been filled
+   out properly according to the issue template.
+2. **Contributor License Agreement:** Before you can contribute any code, we
+   need you to sign a Contributor License Agreement (CLA). Code doesn't just
+   mean "components"; if you're contributing to our website docs, you're
+   contributing code. ;)
+3. **Development environment:** If you haven't already, fork and clone whichever
+   repo you want to contribute to. Then, create a new branch and add your
+   contribution in it. Checkout our
+   [Developer Handbook](../developer-handbook.md) to read up on our best coding
+   practices and proper commit messages.
+4. **Pull request:** Submit a PR. Be sure to fill out the template properly.
+5. **Approval:** Get PR approved by design and developers, or make any necessary
+   changes for approval. This process may be quick or take a few iterations of
+   feedback-update.
+6. **Documentation:** After design and dev have approved and merged PR, update
+   any website documentation if necessary. One of the best examples for this is
+   if you're contributing to component work which has website documentation
+   related to your contribution.
+
+Here are some contribution quick tips:
+
+- **Do** check repos for existing issues.
+- **Do** fill out the required template for contributions entirely; this
+  pertains to both issues and PRs.
+- **Do** add or update tests for any contributions that require it.
+- **Do** follow existing coding and writing styles.
+- **Do** follow proper commit messages syntax.
+- **Do not** branch off another branch.
+- **Do not** include unrelated changes in the same PR.
+- **Do not** create one massive PR if it can be broken up into smaller PRs.
+
+### What projects can I contribute to?
+
+- [`carbon-components`](https://github.com/carbon-design-system/carbon/tree/master/packages/components)
+- [`carbon-components-react`](https://github.com/carbon-design-system/carbon/tree/master/packages/react)
+- [`carbon-website`](https://github.com/carbon-design-system/carbon-website)
+- [`gatsby-theme-carbon`](https://github.com/carbon-design-system/gatsby-theme-carbon)
+- [`carbon-design-kit`](https://github.com/carbon-design-system/carbon-design-kit)
+- [`@carbon/elements`](https://github.com/carbon-design-system/carbon/tree/master/packages/elements)
+- [`@carbon/type`](https://github.com/carbon-design-system/carbon/tree/master/packages/type)
+- [`@carbon/colors`](https://github.com/carbon-design-system/carbon/tree/master/packages/colors)
+- [`@carbon/grid`](https://github.com/carbon-design-system/carbon/tree/master/packages/grid)
+- [`@carbon/icons`](https://github.com/carbon-design-system/carbon/tree/master/packages/icons)
+- [`@carbon/layout`](https://github.com/carbon-design-system/carbon/tree/master/packages/layout)
+- [`@carbon/motion`](https://github.com/carbon-design-system/carbon/tree/master/packages/motion)
+- [`@carbon/themes`](https://github.com/carbon-design-system/carbon/tree/master/packages/themes)
+- [`@carbon/icons-react`](https://github.com/carbon-design-system/carbon/tree/master/packages/icons-react)
+
+And more! You can view a complete list of our packages
+[here](https://github.com/carbon-design-system/carbon/tree/master/packages).
+
+### Besides some of the obvious contributions mentioned above, how else can I contribute?
+
+Great question! Contribution does not require creating or maintaining our
+assets. Here are some other ways you can contribute, which don't require much
+work:
+
+- **Join our slack community and interact with other users.** We have hundreds
+  of users world wide, and quite a small team in comparison. While we try our
+  best to answer questions on slack, it's not always possible to answer
+  everything. One of the easiest ways to help us it to jump in on slack
+  conversations if there's something you know the answer to! Some of our most
+  popular slack channels include `#carbon-components`, `#carbon-react`,
+  `#carbon-design-system`, `#carbon-ng`, `#carbon-vue`, `#carbon-announcements`,
+  `#carbon-community-components`.
+- **Report bugs.** Even if you don't have the time to contribute a bug fix,
+  opening an issue alone makes a big difference! Be sure to completely fill out
+  the issue template to best help us understand what is going wrong.
+
+### If I'm contributing code, am I required to contribute it for all frameworks?
+
+If you've been working with Carbon for a while, you know that we have code
+assets in vanilla JS, React, Vue and Angular. While the core team only maintains
+the vanilla and React components, we work closely with the Vue and Angular teams
+to maintain parity. The core team also develops with a React first approach,
+which means that our vanilla components will never be ahead of React, though it
+may not be true for the other way around. If you're contributing a bug fix in a
+vanilla component which also exists in the React version, you can either
+contribute a fix for the React version as well or open an issue so that we can
+update the React component accordingly.
