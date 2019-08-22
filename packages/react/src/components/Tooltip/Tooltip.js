@@ -191,7 +191,6 @@ class Tooltip extends Component {
   };
 
   static defaultProps = {
-    open: false,
     direction: DIRECTION_BOTTOM,
     renderIcon: Information,
     showIcon: true,
