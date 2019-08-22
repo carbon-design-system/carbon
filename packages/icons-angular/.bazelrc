@@ -10,4 +10,8 @@ build --symlink_prefix=dist/
 
 build --experimental_allow_incremental_repository_updates
 
+build --local_cpu_resources=2
+
+build --local_ram_resources=3000
+
 startup --host_jvm_args=-Xmx3G
