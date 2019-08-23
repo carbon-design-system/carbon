@@ -18616,7 +18616,7 @@ rollup-plugin-terser@^4.0.0:
     serialize-javascript "^1.6.1"
     terser "^3.14.1"
 
-rollup-plugin-virtual@^1.0.0, rollup-plugin-virtual@^1.0.1:
+rollup-plugin-virtual@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/rollup-plugin-virtual/-/rollup-plugin-virtual-1.0.1.tgz#8227c94c605b981adfe433ea74de3551e42ffeb4"
   integrity sha512-HCTBpV8MwP5lNzZrHD2moVxHIToHU1EkzkKGVj6Z0DcgUfxrxrZmeQirQeLz2yhnkJqRjwiVywK9CS8jDYakrw==
