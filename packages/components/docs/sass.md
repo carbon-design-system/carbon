@@ -20393,6 +20393,10 @@ UI shell side nav
     color: $ibm-color__gray-100;
   }
 
+  .#{$prefix}--side-nav__item--large {
+    height: mini-units(6);
+  }
+
   //----------------------------------------------------------------------------
   // Side-nav > Navigation > {Menu,Submenu}
   //----------------------------------------------------------------------------
@@ -20440,6 +20444,12 @@ UI shell side nav
     .#{$prefix}--side-nav__submenu-chevron
     > svg {
     transform: rotate(180deg);
+  }
+
+  .#{$prefix}--side-nav__item--large {
+    .#{$prefix}--side-nav__submenu {
+      height: mini-units(6);
+    }
   }
 
   .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
@@ -20527,6 +20537,12 @@ UI shell side nav
     padding: 0 mini-units(2);
     transition: color $duration--fast-02, background-color $duration--fast-02,
       outline $duration--fast-02;
+  }
+
+  .#{$prefix}--side-nav__item--large {
+    a.#{$prefix}--side-nav__link {
+      height: mini-units(6);
+    }
   }
 
   a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text,
