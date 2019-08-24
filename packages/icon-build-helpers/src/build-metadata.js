@@ -13,18 +13,13 @@ const fs = require('fs-extra');
 const path = require('path');
 const yaml = require('js-yaml');
 
-const METADATA_PATH = path.resolve(__dirname, '../metadata.yml');
-const METADATA_OUTPUT = path.resolve(__dirname, '../metadata.json');
-const CATEGORIES_DEFINITION_PATH = path.resolve(__dirname, '../categories.yml');
-
-async function build() {
-  const metadata = yaml.safeLoad(await fs.readFile(METADATA_PATH, 'utf8'));
-  const categories = yaml.safeLoad(
-    await fs.readFile(CATEGORIES_DEFINITION_PATH, 'utf8')
-  );
+async function buildMetadata({ categoriesPath, metadataPath }, { cwd }) {
+  const metadata = yaml.safeLoad(await fs.readFile(metadataPath, 'utf8'));
+  const categories = yaml.safeLoad(await fs.readFile(categoriesPath, 'utf8'));
+  const outputPath = path.join(cwd, 'metadata.json');
 
   await fs.writeJson(
-    METADATA_OUTPUT,
+    outputPath,
     { ...metadata, ...categories },
     {
       spaces: 2,
@@ -32,7 +27,4 @@ async function build() {
   );
 }
 
-build().catch(error => {
-  console.log(error);
-  process.exitCode = 1;
-});
+module.exports = buildMetadata;

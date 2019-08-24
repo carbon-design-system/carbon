@@ -10,26 +10,19 @@
 'use strict';
 
 const fs = require('fs-extra');
-const path = require('path');
 const Joi = require('joi');
 const yaml = require('js-yaml');
 const search = require('../src/search');
-
-const CATEGORIES_PATH = path.resolve(__dirname, '../categories.yml');
-const METADATA_PATH = path.resolve(__dirname, '../metadata.yml');
-const ICONS_DIRECTORY = path.resolve(__dirname, '../src/svg');
 
 // Checks:
 // 1) That all icons are present in metadata
 // 2) That all icons have a category
 // 3) If an icon has a size in source, make sure it exists in metadata
-async function check() {
+async function check({ categoriesPath, metadataPath, iconsPath }) {
   const categoriesConfig = yaml.safeLoad(
-    await fs.readFile(CATEGORIES_PATH, 'utf8')
+    await fs.readFile(categoriesPath, 'utf8')
   );
-  const metadataConfig = yaml.safeLoad(
-    await fs.readFile(METADATA_PATH, 'utf8')
-  );
+  const metadataConfig = yaml.safeLoad(await fs.readFile(metadataPath, 'utf8'));
   const { error, value: iconMetadata } = Joi.validate(
     metadataConfig,
     metadataSchema
@@ -48,7 +41,7 @@ async function check() {
 
   const { icons: metadata } = iconMetadata;
   const { categories } = categoriesMetadata;
-  const icons = await search(ICONS_DIRECTORY);
+  const icons = await search(iconsPath);
 
   const missingIconsFromMetadata = [];
   const missingVariantFromMetadata = [];
@@ -196,7 +189,4 @@ const metadataSchema = Joi.object().keys({
     .required(),
 });
 
-check().catch(error => {
-  console.log(error);
-  process.exit(1);
-});
+module.exports = check;

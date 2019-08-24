@@ -198,7 +198,13 @@ const plugins = [
   {
     // Remove any ids or data attributes that are included in SVG source files.
     removeAttrs: {
-      attrs: ['class', 'data-name', 'fill'],
+      attrs: [
+        'class',
+        'data-name',
+        // Remove all fill attributes where the value is not "none"
+        // https://github.com/svg/svgo/pull/977
+        '*:fill:((?!^none$).)*',
+      ],
     },
   },
 ];

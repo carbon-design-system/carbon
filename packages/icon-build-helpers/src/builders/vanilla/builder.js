@@ -13,11 +13,11 @@ const fs = require('fs-extra');
 const path = require('path');
 const prettier = require('prettier');
 const { rollup } = require('rollup');
-const { flatMapAsync } = require('./tools');
+const { flatMapAsync } = require('../../tools');
 const { parse } = require('./svgo');
 const optimize = require('./optimize');
+const virtual = require('../plugins/virtual');
 
-const SCALED_SIZES = [24, 20, 16];
 const prettierOptions = {
   parser: 'babel',
   printWidth: 80,
@@ -26,34 +26,23 @@ const prettierOptions = {
   proseWrap: 'always',
 };
 
-async function build(source, { cwd } = {}) {
+async function builder(source, { cwd } = {}) {
   const optimized = await optimize(source, { cwd });
 
   reporter.info(`Building the module source for ${optimized.length} icons...`);
 
-  const packageJson = await findPackageJsonFor(cwd);
-  const {
-    main: commonjsEntrypoint = 'lib/index.js',
-    module: esmEntrypoint = 'es/index.js',
-    umd: umdEntrypoint = 'umd/index.js',
-  } = packageJson;
-  const esmFolder = path.dirname(esmEntrypoint);
   const BUNDLE_FORMATS = [
     {
-      format: 'cjs',
-      directory: path.join(cwd, path.dirname(commonjsEntrypoint)),
+      directory: 'es',
+      file: path.join(cwd, 'es/index.js'),
+      format: 'esm',
     },
     {
-      format: 'umd',
-      directory: path.join(cwd, path.dirname(umdEntrypoint)),
+      directory: 'lib',
+      file: path.join(cwd, 'lib/index.js'),
+      format: 'cjs',
     },
   ];
-
-  reporter.info(
-    `Building bundle types: [es, ${BUNDLE_FORMATS.map(b => b.format).join(
-      ', '
-    )}] ` + `under: [${BUNDLE_FORMATS.map(b => b.directory).join(', ')}]`
-  );
 
   reporter.info('Building module source...');
 
@@ -77,6 +66,7 @@ async function build(source, { cwd } = {}) {
     };
   }, {});
 
+  const SCALED_SIZES = [24, 20, 16];
   const files = await flatMapAsync(optimized, async file => {
     const { basename, size, prefix } = file;
 
@@ -101,72 +91,90 @@ async function build(source, { cwd } = {}) {
 
   reporter.info('Building JavaScript modules...');
 
-  const output = await flatMapAsync(files, async file => {
-    const { basename, moduleName, prefix, size, source } = file;
+  const inputs = files.map(file => {
+    const { basename, prefix, size, source } = file;
     const formattedPrefix = prefix.filter(step => isNaN(step));
-    const moduleFolder = path.join(esmFolder, ...formattedPrefix, basename);
-    const jsFilepath = path.join(
-      moduleFolder,
-      size ? `${size}.js` : 'index.js'
-    );
+    const moduleFolder = path.join(...formattedPrefix, basename);
+    const filepath = path.join(moduleFolder, size ? `${size}.js` : 'index.js');
 
-    await fs.ensureDir(moduleFolder);
-    await fs.writeFile(jsFilepath, source);
-
-    const esm = {
+    return {
       ...file,
-      outputOptions: {
-        format: 'esm',
-        file: jsFilepath,
-      },
+      filepath,
+      source,
     };
-    await Promise.all(
-      BUNDLE_FORMATS.map(async ({ format, directory }) => {
-        const bundle = await rollup({
-          input: jsFilepath,
-        });
-        const outputOptions = {
-          format,
-          file: jsFilepath.replace(/es/, directory),
-        };
-        if (format === 'umd') {
-          outputOptions.name = moduleName;
-        }
-        await bundle.write(outputOptions);
-      })
-    );
-    return esm;
   });
+
+  const bundle = await rollup({
+    input: inputs.reduce(
+      (acc, input) => ({
+        ...acc,
+        [input.filepath]: input.filepath,
+      }),
+      {}
+    ),
+    external: [],
+    plugins: [
+      virtual(
+        inputs.reduce(
+          (acc, input) => ({
+            ...acc,
+            [input.filepath]: input.source,
+          }),
+          {}
+        )
+      ),
+    ],
+  });
+
+  await Promise.all(
+    BUNDLE_FORMATS.map(({ directory, format }) => {
+      return bundle.write({
+        dir: directory,
+        format,
+        // We already specify `.js` in the `filepath` used in `input` above
+        entryFileNames: '[name]',
+      });
+    })
+  );
 
   reporter.info('Building module entrypoints...');
-  const entrypoint = prettier.format(
-    files.reduce((acc, file) => {
-      const { moduleName, descriptor } = file;
-      return (
-        acc + `\nexport const ${moduleName} = ${JSON.stringify(descriptor)}`
-      );
-    }, ''),
-    prettierOptions
-  );
-  await fs.writeFile(esmEntrypoint, entrypoint);
+
+  let entrypoint = `/**
+ * Copyright IBM Corp. 2019, 2019
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+`;
+
+  for (const file of files) {
+    const { moduleName, descriptor } = file;
+    const value = JSON.stringify(descriptor);
+    entrypoint += `\nexport const ${moduleName} = ${value}`;
+  }
 
   const entrypointBundle = await rollup({
-    input: esmEntrypoint,
+    input: '__entrypoint__.js',
+    external: [],
+    plugins: [
+      virtual({
+        '__entrypoint__.js': prettier.format(entrypoint, prettierOptions),
+      }),
+    ],
   });
+
   await Promise.all(
-    BUNDLE_FORMATS.map(({ format, directory }) => {
+    BUNDLE_FORMATS.map(({ format, file }) => {
       const outputOptions = {
         format,
-        file: esmEntrypoint.replace(/es/, directory),
+        file,
       };
-      if (format === 'umd') {
-        outputOptions.name = 'CarbonIcons';
-      }
+
       return entrypointBundle.write(outputOptions);
     })
   );
 
-  const formattedOutput = output.map(icon => {
+  const formattedOutput = inputs.map(input => {
     const {
       filename,
       basename,
@@ -175,8 +183,8 @@ async function build(source, { cwd } = {}) {
       descriptor,
       moduleName,
       original,
-      outputOptions,
-    } = icon;
+      filepath,
+    } = input;
     return {
       filename,
       basename,
@@ -185,36 +193,43 @@ async function build(source, { cwd } = {}) {
       descriptor,
       moduleName,
       original,
-      outputOptions,
+      outputOptions: {
+        file: path.join('es', filepath),
+      },
     };
   });
 
-  await fs.writeJson(
-    path.resolve(__dirname, '../build-info.json'),
-    formattedOutput,
-    {
-      spaces: 2,
-    }
-  );
+  await fs.writeJson(path.join(cwd, 'build-info.json'), formattedOutput, {
+    spaces: 2,
+  });
 
   reporter.success('Done! 🎉');
 }
 
-function getModuleName(name, size, prefixParts) {
+function getModuleName(name, size, prefixParts, descriptor) {
+  const width = parseInt(descriptor.attrs.width, 10);
+  const height = parseInt(descriptor.attrs.height, 10);
   const prefix = prefixParts
     .filter(size => isNaN(size))
     .map(pascal)
     .join('');
+  const isGlyph = width < 16 || height < 16;
 
   if (prefix !== '') {
     if (!size) {
-      return prefix + pascal(name) + 'Glyph';
+      if (isGlyph) {
+        return prefix + pascal(name) + 'Glyph';
+      }
+      return prefix + pascal(name);
     }
     return prefix + pascal(name) + size;
   }
 
   if (!size) {
-    return pascal(name) + 'Glyph';
+    if (isGlyph) {
+      return pascal(name) + 'Glyph';
+    }
+    return pascal(name);
   }
 
   if (isNaN(name[0])) {
@@ -231,7 +246,7 @@ function createIconSource(file, descriptor) {
       `export default ${JSON.stringify(descriptor)};`,
       prettierOptions
     ),
-    moduleName: getModuleName(basename, size, prefix),
+    moduleName: getModuleName(basename, size, prefix, descriptor),
   };
 }
 
@@ -273,18 +288,4 @@ function getIndexName(basename, prefix) {
     .join('/');
 }
 
-async function findPackageJsonFor(filepath) {
-  let workingDirectory = path.dirname(filepath);
-  while (workingDirectory !== path.dirname(workingDirectory)) {
-    const files = await fs.readdir(workingDirectory);
-    if (files.indexOf('package.json') !== -1) {
-      return fs.readFile(path.join(workingDirectory, 'package.json'), 'utf8');
-    }
-    workingDirectory = path.dirname(workingDirectory);
-  }
-  throw new Error(
-    `Unable to find a corresponding \`package.json\` for file: \`${filepath}\``
-  );
-}
-
-module.exports = build;
+module.exports = builder;
