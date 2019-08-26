@@ -2515,15 +2515,20 @@
   resolved "https://registry.yarnpkg.com/@rocketsoftware/colors/-/colors-0.0.3.tgz#dcf323caddb205f4f5bf1435aec80531fb79b889"
   integrity sha512-sSCfSjhYszs1ZH9FLf8UUDCxGSIEnCZ20ltpX+3FMN4b8Poll1fTxh17aGbFbD+B/rarlXZtIpRkt4MietWCEQ==
 
-"@rocketsoftware/layout@0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/layout/-/layout-0.0.1.tgz#0b8d3e5293dba95c7f2a7f043f8387cdcab06bfd"
-  integrity sha512-fW+ZrqxU/cyVN4yD7xhPnw7H7fC7yeWVz8h6Bzlk4JC3RmDBbtt7iaITSUpg6e3YcpXjmvXjXKdAN6hDIwzDhA==
+"@rocketsoftware/icon-helpers@0.0.4", "@rocketsoftware/icon-helpers@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/icon-helpers/-/icon-helpers-0.0.4.tgz#bac7d7311b9c6ae2af40548127caf7f17fdf9d4f"
+  integrity sha512-O7TGsuGIAeHyJ5bQoVwOmZ85ho09cKpKBJJhxXwqykOzXqVn+Toj1Ab7BRMkl8p37reiKccW9UwWWS/laVz4NQ==
 
-"@rocketsoftware/motion@0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/motion/-/motion-0.0.1.tgz#815e025938021327276f8c85f0bb72a7d0ad36ae"
-  integrity sha512-ZYNZAgGJdl/jApVic+S8X+m4JCLF9u+4c0zU82NiShIiJStzANx3MFojgzHIoez0JD5aLVLYSA4vFDFJvYEMZg==
+"@rocketsoftware/icons@0.0.4", "@rocketsoftware/icons@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/icons/-/icons-0.0.4.tgz#b14c81544f94b3f774e9d075c26bb4b96237cc59"
+  integrity sha512-6bFhvQyfpTFRV2O2atyOMO/FxZj/n8HFkOSWjVl2Z15zjT1D1BlErkTcQwXVqHOSbSy1RTPlczK8V3dmi47nAA==
+
+"@rocketsoftware/themes@0.0.5":
+  version "0.0.4"
+  dependencies:
+    "@rocketsoftware/colors" "0.0.5"
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
