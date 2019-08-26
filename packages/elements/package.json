@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/elements",
   "description": "A collection of design elements in code for the IBM Design Language",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -38,7 +38,7 @@
     "@rocketsoftware/layout": "0.0.1",
     "@rocketsoftware/motion": "0.0.1",
     "@rocketsoftware/themes": "0.0.4",
-    "@rocketsoftware/type": "0.0.4"
+    "@rocketsoftware/type": "^0.0.5"
   },
   "devDependencies": {
     "@carbon/bundler": "10.4.0",

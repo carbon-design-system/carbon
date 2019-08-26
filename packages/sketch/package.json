@@ -2,7 +2,7 @@
   "name": "@carbon/sketch",
   "private": true,
   "description": "Tooling for generating a sketch plugin to bring code to design",
-  "version": "10.5.0",
+  "version": "0.0.5",
   "license": "Apache-2.0",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/sketch",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
@@ -28,7 +28,7 @@
     "@rocketsoftware/icon-helpers": "^0.0.4",
     "@rocketsoftware/icons": "^0.0.4",
     "@rocketsoftware/themes": "^0.0.4",
-    "@rocketsoftware/type": "^0.0.4",
+    "@rocketsoftware/type": "^0.0.5",
     "@skpm/builder": "^0.7.0",
     "color-string": "^1.5.3",
     "skpm": "^1.2.0"
