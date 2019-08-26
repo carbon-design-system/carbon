@@ -2510,32 +2510,15 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
-"@rocketsoftware/colors@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/colors/-/colors-0.0.4.tgz#88a3a9c08cec6014111a436c6999fa5eeefa53ab"
-  integrity sha512-in759VKTiWroJOeE/phvBp+hLGq3Ed9cp60I1gneTPkl2j9RSm4780uDs1DzBEAywELJrWkMJuVGJBHBOkKuHw==
-
-"@rocketsoftware/colors@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/colors/-/colors-0.0.3.tgz#dcf323caddb205f4f5bf1435aec80531fb79b889"
-  integrity sha512-sSCfSjhYszs1ZH9FLf8UUDCxGSIEnCZ20ltpX+3FMN4b8Poll1fTxh17aGbFbD+B/rarlXZtIpRkt4MietWCEQ==
-
-"@rocketsoftware/icon-helpers@0.0.4", "@rocketsoftware/icon-helpers@^0.0.4":
+"@rocketsoftware/icon-helpers@0.0.4":
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/@rocketsoftware/icon-helpers/-/icon-helpers-0.0.4.tgz#bac7d7311b9c6ae2af40548127caf7f17fdf9d4f"
   integrity sha512-O7TGsuGIAeHyJ5bQoVwOmZ85ho09cKpKBJJhxXwqykOzXqVn+Toj1Ab7BRMkl8p37reiKccW9UwWWS/laVz4NQ==
 
-"@rocketsoftware/icons@0.0.4", "@rocketsoftware/icons@^0.0.4":
+"@rocketsoftware/icons@0.0.4":
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/@rocketsoftware/icons/-/icons-0.0.4.tgz#b14c81544f94b3f774e9d075c26bb4b96237cc59"
   integrity sha512-6bFhvQyfpTFRV2O2atyOMO/FxZj/n8HFkOSWjVl2Z15zjT1D1BlErkTcQwXVqHOSbSy1RTPlczK8V3dmi47nAA==
-
-"@rocketsoftware/themes@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/themes/-/themes-0.0.4.tgz#ddd65fc7dbefd0c16403a9018f3b14ac5f9ca7d7"
-  integrity sha512-ZRbC6NRleHZRLQrIjLjVL7M+RVOOFLkVxHJDdhk4iuJaRlDibWqJ40UGpM5qdrNa/yE06svRwRDireV72/g7BA==
-  dependencies:
-    "@rocketsoftware/colors" "0.0.4"
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
