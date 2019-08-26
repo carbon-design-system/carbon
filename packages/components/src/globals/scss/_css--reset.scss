@@ -31,7 +31,7 @@
 }
 
 @include exports('css--reset') {
-  @if variable-exists(css--reset) == false or $css--reset==true {
+  @if variable-exists(css--reset) == false or $css--reset == true {
     // http://cssreset.com/scripts/eric-meyer-reset-css/
     html,
     body,
@@ -197,5 +197,12 @@
 
     @include carbon--type-reset;
     @include carbon--icons;
+  }
+}
+
+@include exports('css--default-type') {
+  @if variable-exists(css--default-type) == false or $css--default-type == true
+  {
+    @include carbon--default-type;
   }
 }

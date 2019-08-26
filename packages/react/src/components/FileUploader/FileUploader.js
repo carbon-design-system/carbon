@@ -152,6 +152,7 @@ export class FileUploaderButton extends Component {
       className,
       {
         [`${prefix}--btn--${buttonKind}`]: buttonKind,
+        [`${prefix}--btn--disabled`]: disabled,
       }
     );
 
@@ -160,7 +161,8 @@ export class FileUploaderButton extends Component {
     return (
       <>
         <label
-          tabIndex={tabIndex || 0}
+          tabIndex={disabled ? -1 : tabIndex || 0}
+          aria-disabled={disabled}
           className={classes}
           onKeyDown={evt => {
             if (evt.which === 13 || evt.which === 32) {
