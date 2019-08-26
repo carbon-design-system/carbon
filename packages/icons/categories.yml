@@ -337,6 +337,7 @@ categories:
           - 3D-curve--auto-colon
           - 3D-curve--auto-vessels
           - 3D-curve--manual
+          - 3D-iCa
           - 3D-MPR-Toggle
           - 3rd-party-connected
           - 3D-software
@@ -357,7 +358,6 @@ categories:
           - fusion-blender
           - hanging-protocol
           - health-cross
-          - iCA-3D
           - image--medical
           - launch-study--1
           - launch-study--2
