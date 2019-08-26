@@ -32,12 +32,12 @@
   },
   "dependencies": {
     "@carbon/import-once": "10.3.0",
-    "@rocketsoftware/colors": "0.0.4",
-    "@rocketsoftware/grid": "0.0.4",
-    "@rocketsoftware/icons": "0.0.4",
-    "@rocketsoftware/layout": "0.0.1",
-    "@rocketsoftware/motion": "0.0.1",
-    "@rocketsoftware/themes": "0.0.4",
+    "@rocketsoftware/colors": "0.0.5",
+    "@rocketsoftware/grid": "0.0.5",
+    "@rocketsoftware/icons": "0.0.5",
+    "@rocketsoftware/layout": "0.0.5",
+    "@rocketsoftware/motion": "0.0.5",
+    "@rocketsoftware/themes": "0.0.5",
     "@rocketsoftware/type": "^0.0.5"
   },
   "devDependencies": {

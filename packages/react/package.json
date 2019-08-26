@@ -32,13 +32,13 @@
     "storybook": "start-storybook -p 9000"
   },
   "peerDependencies": {
-    "@rocketsoftware/carbon-components": "0.0.4",
+    "@rocketsoftware/carbon-components": "0.0.5",
     "carbon-icons": "^7.0.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
   "dependencies": {
-    "@rocketsoftware/icons-react": "0.0.4",
+    "@rocketsoftware/icons-react": "0.0.5",
     "classnames": "2.2.6",
     "downshift": "^1.31.14",
     "flatpickr": "4.6.1",
