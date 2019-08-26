@@ -54,11 +54,17 @@ export class SideNavMenu extends React.Component {
      * keep local state and styling in step with the SideNav expansion state.
      */
     isSideNavExpanded: PropTypes.bool,
+    
+    /** 
+     * Specify if this is a large variation of the SideNavMenu
+     */
+    large: PropTypes.bool,
   };
 
   static defaultProps = {
     defaultExpanded: false,
     isActive: false,
+    large: false,
   };
 
   static getDerivedStateFromProps = (props, state) => {
@@ -102,6 +108,7 @@ export class SideNavMenu extends React.Component {
       renderIcon: IconElement,
       isActive,
       title,
+      large,
     } = this.props;
     const { isExpanded } = this.state;
 
@@ -127,6 +134,7 @@ export class SideNavMenu extends React.Component {
       [`${prefix}--side-nav__item--active`]:
         isActive || (hasActiveChild && !isExpanded),
       [`${prefix}--side-nav__item--icon`]: IconElement,
+      [`${prefix}--side-nav__item--large`]: large,
       [customClassName]: !!customClassName,
     });
     return (

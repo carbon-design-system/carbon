@@ -21,6 +21,7 @@ const SideNavLink = ({
   children,
   renderIcon: IconElement,
   isActive,
+  large,
   ...rest
 }) => {
   const className = cx({
@@ -30,7 +31,7 @@ const SideNavLink = ({
   });
 
   return (
-    <SideNavItem>
+    <SideNavItem large={large}>
       <Link {...rest} className={className}>
         {IconElement && (
           <SideNavIcon small>
@@ -66,10 +67,16 @@ SideNavLink.propTypes = {
    * keep local state and styling in step with the SideNav expansion state.
    */
   isSideNavExpanded: PropTypes.bool,
+  
+  /**
+   * Specify if this is a large variation of the SideNavLink
+   */
+  large: PropTypes.bool,
 };
 
 SideNavLink.defaultProps = {
   element: 'a',
+  large: false,
 };
 
 export const createCustomSideNavLink = element => props => {
