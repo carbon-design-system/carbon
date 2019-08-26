@@ -46,7 +46,14 @@
   }
 
   .#{$prefix}--inline-loading__checkmark-container {
-    fill: $interactive-01;
+    fill: $interactive-04;
+
+    // For deprecated older markup
+    &.#{$prefix}--inline-loading__svg {
+      width: 0.75rem;
+      position: absolute;
+      top: 0.75rem;
+    }
 
     &[hidden] {
       display: none;
