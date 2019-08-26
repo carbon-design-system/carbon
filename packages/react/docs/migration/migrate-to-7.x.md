@@ -57,7 +57,7 @@ for more information on migrating from v9 to v10.
 | `FormGroup`           | No breaking changes                                                 |
 | `FormItem`            | No breaking changes                                                 |
 | `FormLabel`           | No breaking changes                                                 |
-| `Icon`                | The `name` prop has been removed                                    |
+| `Icon`                | [Migrate](../../src/components/Icon/migrate-to-7.x.md)              |
 | `InlineCheckbox`      | [Migrate](../../src/components/InlineCheckbox/migrate-to-7.x.md)    |
 | `InlineLoading`       | No breaking changes                                                 |
 | `Link`                | No breaking changes                                                 |
