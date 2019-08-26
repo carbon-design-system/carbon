@@ -5890,6 +5890,8 @@ Set the `font-weight` property with the value for a given name
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [carbon--font-weight [function]](#carbon--font-weight-function)
+- **Used by**:
+  - [carbon--type-reset [mixin]](#carbon--type-reset-mixin)
 
 ### ✅carbon--font-face-mono [mixin]
 
@@ -6364,20 +6366,54 @@ Include a type reset for a given body and mono font family
 
   body {
     font-family: $body-font-family;
-    font-weight: 400;
+    @include carbon--font-weight('regular');
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  // IBM Plex uses semibold instead of bold, as a result we need to map
-  // tags that use `font-weight: bold` to the semibold value
-  strong {
-    font-weight: 600;
-  }
-
   code {
     font-family: $mono-font-family;
+  }
+
+  h1 {
+    @include carbon--type-style('productive-heading-06');
+  }
+
+  h2 {
+    @include carbon--type-style('productive-heading-05');
+  }
+
+  h3 {
+    @include carbon--type-style('productive-heading-04');
+  }
+
+  h4 {
+    @include carbon--type-style('productive-heading-03');
+  }
+
+  h5 {
+    @include carbon--type-style('productive-heading-02');
+  }
+
+  h6 {
+    @include carbon--type-style('productive-heading-01');
+  }
+
+  p {
+    @include carbon--type-style('body-long-02');
+  }
+
+  a {
+    color: #0062ff;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  strong {
+    @include carbon--font-weight('semibold');
   }
 }
 ```
@@ -6393,6 +6429,9 @@ Include a type reset for a given body and mono font family
 | `$mono-font-family` | The font family used on elements that require mono fonts, like the `<code>` element | `String` | `carbon--font-family('mono')` |
 
 - **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
 
 ### ✅carbon--font-face-sans [mixin]
 
@@ -8551,6 +8590,7 @@ fixed contexts.
   - [tokens [variable]](#tokens-variable)
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
+  - [carbon--type-reset [mixin]](#carbon--type-reset-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ## accordion
@@ -13178,7 +13218,7 @@ List box styles
     border-bottom: 1px solid $ui-04;
     cursor: pointer;
     color: $text-01;
-    transition: all $duration--fast-02 motion(standard, productive);
+    transition: all $duration--fast-01 motion(standard, productive);
 
     &:hover {
       background-color: $hover-ui;
@@ -13414,7 +13454,7 @@ List box styles
     position: absolute;
     right: $carbon--spacing-05;
     height: 100%;
-    transition: transform $duration--fast-02 motion(standard, productive);
+    transition: transform $duration--fast-01 motion(standard, productive);
     cursor: pointer;
   }
 
@@ -13438,7 +13478,7 @@ List box styles
     width: rem(30px);
     cursor: pointer;
     user-select: none;
-    transition: background-color $duration--fast-02 motion(standard, productive);
+    transition: background-color $duration--fast-01 motion(standard, productive);
 
     &:focus {
       @include focus-outline('outline');
@@ -13516,6 +13556,7 @@ List box styles
     cursor: pointer;
     user-select: none;
     position: relative;
+    transition: background $duration--fast-01 motion(standard, productive);
 
     &:hover {
       background-color: $hover-ui;
@@ -13574,6 +13615,8 @@ List box styles
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    transition: border-color $duration--fast-01 motion(standard, productive), color
+        $duration--fast-01 motion(standard, productive);
 
     &:focus {
       @include focus-outline('outline');
@@ -13610,6 +13653,14 @@ List box styles
     background-color: $hover-ui;
     color: $text-01;
     border-color: transparent;
+  }
+
+  .#{$prefix}--list-box__menu-item--highlighted
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--list-box__menu-item--highlighted
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: transparent;
   }
 
   .#{$prefix}--list-box__menu-item--highlighted

@@ -66,7 +66,7 @@ we support!
   to this repo.
 - 🏃‍♀️ Migration Guides
   - [v9 to v10 (vanilla)](./packages/components/docs/migration/migrate-to-10.x.md)
-  - [v9 to v10 (v6 to v7 React)](./packages/components/docs/migration/migrate-to-7.x.md)
+  - [v9 to v10 (v6 to v7 React)](./packages/react/docs/migration/migrate-to-7.x.md)
 
 ## 🙌 Contributing
 
