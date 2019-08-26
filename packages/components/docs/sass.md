@@ -189,6 +189,7 @@
   - [✅carbon--font-face-mono [mixin]](#carbon--font-face-mono-mixin)
   - [✅prefix [variable]](#prefix-variable)
   - [✅carbon--type-reset [mixin]](#carbon--type-reset-mixin)
+  - [✅carbon--default-type [mixin]](#carbon--default-type-mixin)
   - [✅carbon--font-face-sans [mixin]](#carbon--font-face-sans-mixin)
   - [✅carbon--get-type-size [function]](#carbon--get-type-size-function)
   - [✅carbon--type-scale [variable]](#carbon--type-scale-variable)
@@ -5504,6 +5505,7 @@ $disabled-02: map-get($carbon--theme, 'disabled-02');
   - [checkbox [mixin]](#checkbox-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [form [mixin]](#form-mixin)
   - [link [mixin]](#link-mixin)
@@ -6376,6 +6378,35 @@ Include a type reset for a given body and mono font family
     font-family: $mono-font-family;
   }
 
+  strong {
+    @include carbon--font-weight('semibold');
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name                | Description                                                                         | Type     | Default value                 |
+| ------------------- | ----------------------------------------------------------------------------------- | -------- | ----------------------------- |
+| `$base-font-size`   | The base font size for your document                                                | `Number` | `$carbon--base-font-size`     |
+| `$body-font-family` | The font family used on the `<body>` element                                        | `String` | `carbon--font-family('sans')` |
+| `$mono-font-family` | The font family used on elements that require mono fonts, like the `<code>` element | `String` | `carbon--font-family('mono')` |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
+
+### ✅carbon--default-type [mixin]
+
+Include default type styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon--default-type() {
   h1 {
     @include carbon--type-style('productive-heading-06');
   }
@@ -6411,26 +6442,13 @@ Include a type reset for a given body and mono font family
   em {
     font-style: italic;
   }
-
-  strong {
-    @include carbon--font-weight('semibold');
-  }
 }
 ```
 
 </details>
 
-- **Parameters**:
-
-| Name                | Description                                                                         | Type     | Default value                 |
-| ------------------- | ----------------------------------------------------------------------------------- | -------- | ----------------------------- |
-| `$base-font-size`   | The base font size for your document                                                | `Number` | `$carbon--base-font-size`     |
-| `$body-font-family` | The font family used on the `<body>` element                                        | `String` | `carbon--font-family('sans')` |
-| `$mono-font-family` | The font family used on elements that require mono fonts, like the `<code>` element | `String` | `carbon--font-family('mono')` |
-
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
-  - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
 
 ### ✅carbon--font-face-sans [mixin]
@@ -8590,7 +8608,7 @@ fixed contexts.
   - [tokens [variable]](#tokens-variable)
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
-  - [carbon--type-reset [mixin]](#carbon--type-reset-mixin)
+  - [carbon--default-type [mixin]](#carbon--default-type-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ## accordion
@@ -8822,6 +8840,11 @@ Breadcrumb styles
   .#{$prefix}--breadcrumb-item.#{$prefix}--breadcrumb-item--current
     .#{$prefix}--link {
     color: $text-01;
+    cursor: auto;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   // Skeleton State
@@ -9207,6 +9230,7 @@ Button variant styles
     background-color: $disabled-02;
     border-color: $disabled-02;
     text-decoration: none;
+    outline-color: $disabled-02;
   }
 
   &:active {
@@ -9878,7 +9902,7 @@ Content switcher styles
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    height: rem(32px);
+    height: rem(40px);
   }
 
   .#{$prefix}--content-switcher--disabled {
@@ -9894,7 +9918,6 @@ Content switcher styles
     display: inline-flex;
     align-items: center;
     width: 100%;
-    height: rem(40px);
     padding: $carbon--spacing-03 $carbon--spacing-05;
     margin: 0;
     white-space: nowrap;
@@ -11802,10 +11825,14 @@ Date picker styles
     }
 
     &:disabled {
-      color: $disabled;
+      color: $disabled-02;
       background-color: $disabled-background-color;
       border-bottom: 1px solid transparent;
       cursor: not-allowed;
+    }
+
+    &:disabled::placeholder {
+      color: $disabled-02;
     }
 
     &:disabled:hover {
@@ -11814,6 +11841,7 @@ Date picker styles
 
     &::placeholder {
       @include placeholder-colors;
+      opacity: 1;
     }
   }
 
@@ -11827,6 +11855,11 @@ Date picker styles
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
     padding-right: $carbon--spacing-09;
+  }
+
+  .#{$prefix}--date-picker__input:disabled ~ .#{$prefix}--date-picker__icon {
+    fill: $disabled-02;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--date-picker--range
@@ -12186,6 +12219,7 @@ Date picker styles
   - [field-01 [variable]](#field-01-variable)
   - [text-01 [variable]](#text-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [ui-01 [variable]](#ui-01-variable)
@@ -17762,7 +17796,7 @@ Tile styles
 
   .#{$prefix}--tile--expandable {
     overflow: hidden;
-    transition: $duration--moderate-01 motion(standard, productive);
+    transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
   .#{$prefix}--tile-content__above-the-fold {
@@ -17771,21 +17805,25 @@ Tile styles
 
   .#{$prefix}--tile-content__below-the-fold {
     display: block;
+    visibility: hidden;
     opacity: 0;
-    transition: $duration--fast-02 motion(standard, productive);
+    transition: opacity $duration--fast-02 motion(standard, productive), visibility
+        $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--tile--is-expanded {
     overflow: visible;
-    transition: $duration--fast-02 motion(standard, productive);
+    transition: max-height $duration--fast-02 motion(standard, productive);
 
     .#{$prefix}--tile__chevron svg {
       transform: rotate(-180deg);
     }
 
     .#{$prefix}--tile-content__below-the-fold {
+      visibility: visible;
       opacity: 1;
-      transition: $duration--fast-02 motion(standard, productive);
+      transition: opacity $duration--fast-02 motion(standard, productive), visibility
+          $duration--fast-02 motion(standard, productive);
     }
   }
 
@@ -20359,6 +20397,10 @@ UI shell side nav
     color: $ibm-color__gray-100;
   }
 
+  .#{$prefix}--side-nav__item--large {
+    height: mini-units(6);
+  }
+
   //----------------------------------------------------------------------------
   // Side-nav > Navigation > {Menu,Submenu}
   //----------------------------------------------------------------------------
@@ -20406,6 +20448,12 @@ UI shell side nav
     .#{$prefix}--side-nav__submenu-chevron
     > svg {
     transform: rotate(180deg);
+  }
+
+  .#{$prefix}--side-nav__item--large {
+    .#{$prefix}--side-nav__submenu {
+      height: mini-units(6);
+    }
   }
 
   .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
@@ -20493,6 +20541,12 @@ UI shell side nav
     padding: 0 mini-units(2);
     transition: color $duration--fast-02, background-color $duration--fast-02,
       outline $duration--fast-02;
+  }
+
+  .#{$prefix}--side-nav__item--large {
+    a.#{$prefix}--side-nav__link {
+      height: mini-units(6);
+    }
   }
 
   a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text,
