@@ -8470,8 +8470,8 @@ icons:
       - swing
     sizes:
       - 32
-  - name: iCA-3D
-    friendly_name: I ca 3D
+  - name: 3D-iCa
+    friendly_name: 3D iCa
     usage: This is a description for usage
     categories:
       - name: Enterprise
