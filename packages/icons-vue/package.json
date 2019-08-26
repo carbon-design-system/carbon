@@ -21,7 +21,7 @@
   },
   "scripts": {
     "build": "yarn clean && node tasks/build.js",
-    "clean": "rimraf es lib umd"
+    "clean": "rimraf es lib"
   },
   "dependencies": {
     "@carbon/icon-helpers": "10.4.0"
@@ -32,8 +32,7 @@
     "fs-extra": "^7.0.1",
     "prettier": "^1.17.0",
     "rimraf": "^2.6.2",
-    "rollup": "^0.66.6",
-    "rollup-plugin-virtual": "^1.0.1",
+    "rollup": "^1.15.1",
     "vue": "^2.6.8"
   },
   "sideEffects": false
