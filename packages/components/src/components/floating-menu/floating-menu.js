@@ -180,12 +180,6 @@ class FloatingMenu extends mixin(
       this.changeState('hidden', getLaunchingDetails(event));
       const { refNode, triggerNode } = this.options;
 
-      // @question: there is a bug with setting relatedTarget for when a user clicks on a focusable
-      //    element. In that instance, the target should retain focus but close the floating menu.
-      //    Currently, it's keeping the relatedTarget as an element within the floating menu so it's
-      //    passes this.element.contains(event.relatedTarget) and there is no way to differentiate
-      //    between a "mouse click" and "keyboard focus". This can be tested by adding a
-      //    text input anywhere on the page the user can click on when the menu is open
       if (
         (event.relatedTarget === null ||
           this.element.contains(event.relatedTarget)) &&
