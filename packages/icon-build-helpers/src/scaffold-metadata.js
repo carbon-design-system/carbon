@@ -11,24 +11,17 @@
 
 const { sentenceCase } = require('change-case');
 const fs = require('fs-extra');
-const path = require('path');
 const yaml = require('js-yaml');
-const search = require('../src/search');
+const search = require('./search');
 
-const SVG_DIR = path.resolve(__dirname, '../src/svg');
-const METADATA_OUTPUT = path.resolve(__dirname, '../metadata.yml');
-const CATEGORIES_DEFINITION_PATH = path.resolve(__dirname, '../categories.yml');
-
-async function scaffold() {
-  const metadata = yaml.safeLoad(
-    await fs.readFileSync(METADATA_OUTPUT, 'utf8')
-  );
+async function scaffold({ categoriesPath, metadataPath, iconsPath }) {
+  const metadata = yaml.safeLoad(await fs.readFileSync(metadataPath, 'utf8'));
   const categoriesJson = yaml.safeLoad(
-    await fs.readFileSync(CATEGORIES_DEFINITION_PATH, 'utf8')
+    await fs.readFileSync(categoriesPath, 'utf8')
   );
 
   // Get all of our icon files from the SVG directory
-  const iconFiles = await search(SVG_DIR);
+  const iconFiles = await search(iconsPath);
 
   // Group icons by a common basename, collecting all sizes
   const iconsGroupedByBasename = iconFiles.reduce((acc, icon) => {
@@ -155,9 +148,7 @@ async function scaffold() {
     return icon;
   });
 
-  await fs.writeFile(METADATA_OUTPUT, yaml.safeDump({ icons: icons }), 'utf8');
+  await fs.writeFile(metadataPath, yaml.safeDump({ icons: icons }), 'utf8');
 }
 
-scaffold().catch(error => {
-  console.error(error);
-});
+module.exports = scaffold;

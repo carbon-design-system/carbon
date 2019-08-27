@@ -9,12 +9,11 @@
 
 const { reporter } = require('@carbon/cli-reporter');
 const fs = require('fs-extra');
-const path = require('path');
 const { svgo } = require('./svgo');
-const { flatMapAsync } = require('./tools');
-const search = require('./search');
+const { flatMapAsync } = require('../../tools');
+const search = require('../../search');
 
-async function optimize(folder, { cwd, buildDir = `${cwd}/svg` } = {}) {
+async function optimize(folder) {
   reporter.info(`Optimizing icons in the folder: \`${folder}\``);
 
   const files = await search(folder);
@@ -34,17 +33,6 @@ async function optimize(folder, { cwd, buildDir = `${cwd}/svg` } = {}) {
       optimized,
     };
   });
-
-  await Promise.all(
-    optimized.map(async file => {
-      const { filename, prefix, optimized } = file;
-      const outputDir = path.join(buildDir, ...prefix);
-      const target = path.join(outputDir, filename);
-
-      await fs.ensureDir(outputDir);
-      await fs.writeFile(target, optimized.data);
-    })
-  );
 
   reporter.success(`Successfully optimized ${optimized.length} icons 🎉`);
 
