@@ -18,7 +18,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
   >
     <Search
       aria-hidden={true}
-      className="className bx--search-maginfier"
+      className="custom-class"
       closeButtonLabelText="Clear search input"
       id="custom-id"
       labelText="Filter table"
@@ -29,7 +29,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
       value=""
     >
       <div
-        className="bx--search bx--search--sm className bx--search-maginfier"
+        className="bx--search bx--search--sm custom-class"
       >
         <ForwardRef(Search16)
           className="bx--search-magnifier"
