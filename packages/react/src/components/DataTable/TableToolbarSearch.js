@@ -59,11 +59,6 @@ const TableToolbarSearch = ({
       persistent || persistant,
   });
 
-  const searchClasses = cx({
-    className,
-    [`${prefix}--search-maginfier`]: true,
-  });
-
   const handleExpand = (event, value = !expanded) => {
     if (!controlled && (!persistent || (!persistent && !persistant))) {
       setExpandedState(value);
@@ -92,7 +87,7 @@ const TableToolbarSearch = ({
       <Search
         {...rest}
         small
-        className={searchClasses}
+        className={className}
         value={value}
         id={id}
         aria-hidden={!expanded}
