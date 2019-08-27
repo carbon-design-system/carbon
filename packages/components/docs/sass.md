@@ -1860,7 +1860,7 @@ $carbon--grid-breakpoints: (
   ),
   max: (
     columns: 16,
-    margin: carbon--rem(16px),
+    margin: carbon--rem(24px),
     width: carbon--rem(1584px),
   ),
 );
@@ -4942,6 +4942,7 @@ $support-01: map-get($carbon--theme, 'support-01');
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
+  - [inline-loading [mixin]](#inline-loading-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -12922,6 +12923,7 @@ Inline loading styles
   .#{$prefix}--inline-loading {
     display: flex;
     width: 100%;
+    min-height: 2rem;
     align-items: center;
 
     .#{$prefix}--loading__svg circle {
@@ -12948,9 +12950,14 @@ Inline loading styles
   }
 
   .#{$prefix}--inline-loading__checkmark-container {
-    width: 0.75rem;
-    position: absolute;
-    top: 0.75rem;
+    fill: $interactive-04;
+
+    // For deprecated older markup
+    &.#{$prefix}--inline-loading__svg {
+      width: 0.75rem;
+      position: absolute;
+      top: 0.75rem;
+    }
 
     &[hidden] {
       display: none;
@@ -12967,6 +12974,16 @@ Inline loading styles
     animation-name: stroke;
     animation-duration: 0.25s;
     animation-fill-mode: forwards;
+  }
+
+  .#{$prefix}--inline-loading--error {
+    fill: $support-01;
+    width: rem(16px);
+    height: rem(16px);
+
+    &[hidden] {
+      display: none;
+    }
   }
 
   .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
@@ -12996,6 +13013,7 @@ Inline loading styles
   - [prefix [variable]](#prefix-variable)
   - [text-02 [variable]](#text-02-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
+  - [support-01 [variable]](#support-01-variable)
 
 ## link
 
