@@ -76,6 +76,14 @@ categories:
           - opacity
           - paint-brush
           - quotes
+          - rotate--clockwise
+          - rotate--clockwise--alt
+          - rotate--clockwise--alt--filled
+          - rotate--clockwise--filled
+          - rotate--counterclockwise
+          - rotate--counterclockwise--alt
+          - rotate--counterclockwise--alt--filled
+          - rotate--counterclockwise--filled
           - save
           - spell-check
           - spray-paint
@@ -288,6 +296,7 @@ categories:
         members:
           - bee
           - carbon
+          - cloud-app
           - edt-loop
           - ibm-cloud
           - ibm-security
@@ -300,6 +309,7 @@ categories:
           - logo--facebook
           - logo--flickr
           - logo--github
+          - logo--glassdoor
           - logo--google
           - logo--linkedin
           - logo--livestream
@@ -352,6 +362,7 @@ categories:
           - circle-measurement
           - cobb-angle
           - cross-reference
+          - denominate
           - dicom--6000
           - dicom--overlay
           - exam-mode
@@ -367,6 +378,7 @@ categories:
           - medication
           - medication--alert
           - medication--reminder
+          - nominate
           - page-scroll
           - pet-image--B
           - pet-image--O
@@ -564,6 +576,7 @@ categories:
           - folder
           - folder--add
           - folder--details
+          - folder--off
           - folder--shared
           - GIF
           - HD
@@ -593,6 +606,7 @@ categories:
           - popup
           - RAW
           - scale
+          - SDK
           - SQL
           - SVG
           - table-of-contents
@@ -718,6 +732,14 @@ categories:
           - compass
           - delivery-truck
           - departure
+          - earth
+          - earth--americas
+          - earth--americas--filled
+          - earth--europe-africa
+          - earth--europe-africa--filled
+          - earth--filled
+          - earth--southeast-asia
+          - earth--southeast-asia--filled
           - globe
           - help-desk
           - hotel
@@ -737,11 +759,11 @@ categories:
           - cloud--lightning
           - cloud--rain
           - cloud--snow
-          - fog
           - humidity
           - hurricane
           - partly-cloudy
           - sunny
+          - sunrise
           - sunset
           - temperature
   - name: Tools

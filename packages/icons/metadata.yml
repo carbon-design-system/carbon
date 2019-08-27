@@ -833,6 +833,14 @@ icons:
         categories:
           - name: Organization
             subcategory: File
+      - name: folder--off
+        friendly_name: Folder off
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Organization
+            subcategory: File
       - name: folder--shared
         friendly_name: Folder shared
         usage: This is a description for usage
@@ -2547,6 +2555,16 @@ icons:
       - unedited
     sizes:
       - 32
+  - name: SDK
+    friendly_name: Sdk
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: File
+    aliases:
+      - SDK
+    sizes:
+      - 32
   - name: SQL
     friendly_name: Sql
     usage: This is a description for usage
@@ -3599,6 +3617,16 @@ icons:
         categories:
           - name: Tools
             subcategory: Technology
+  - name: cloud-app
+    friendly_name: Cloud app
+    usage: This is a description for usage
+    categories:
+      - name: Brand
+        subcategory: IBM
+    aliases:
+      - cloud-app
+    sizes:
+      - 32
   - name: cloud-foundry
     friendly_name: Cloud foundry
     usage: This is a description for usage
@@ -4152,6 +4180,73 @@ icons:
       - doodle
     sizes:
       - 32
+  - name: earth
+    friendly_name: Earth
+    usage: This is a description for usage
+    categories:
+      - name: Planning
+        subcategory: Travel
+    aliases:
+      - earth
+    sizes:
+      - 32
+    variants:
+      - name: earth--americas--filled
+        friendly_name: Earth americas filled
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Planning
+            subcategory: Travel
+      - name: earth--americas
+        friendly_name: Earth americas
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Planning
+            subcategory: Travel
+      - name: earth--europe-africa--filled
+        friendly_name: Earth europe africa filled
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Planning
+            subcategory: Travel
+      - name: earth--europe-africa
+        friendly_name: Earth europe africa
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Planning
+            subcategory: Travel
+      - name: earth--filled
+        friendly_name: Earth filled
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Planning
+            subcategory: Travel
+      - name: earth--southeast-asia--filled
+        friendly_name: Earth southeast asia filled
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Planning
+            subcategory: Travel
+      - name: earth--southeast-asia
+        friendly_name: Earth southeast asia
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Planning
+            subcategory: Travel
   - name: edt-loop
     friendly_name: Edt loop
     usage: This is a description for usage
@@ -4550,16 +4645,6 @@ icons:
         categories:
           - name: Organization
             subcategory: Data
-  - name: fog
-    friendly_name: Fog
-    usage: This is a description for usage
-    categories:
-      - name: Planning
-        subcategory: Weather
-    aliases:
-      - fog
-    sizes:
-      - 32
   - name: fork
     friendly_name: Fork
     usage: This is a description for usage
@@ -5374,6 +5459,14 @@ icons:
             subcategory: Social
       - name: logo--github
         friendly_name: Logo github
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Brand
+            subcategory: Social
+      - name: logo--glassdoor
+        friendly_name: Logo glassdoor
         usage: This is a description for usage
         sizes:
           - 32
@@ -6851,6 +6944,71 @@ icons:
       - launch
     sizes:
       - 32
+    variants:
+      - name: rotate--clockwise--alt--filled
+        friendly_name: Rotate clockwise alt filled
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Formatting
+      - name: rotate--clockwise--alt
+        friendly_name: Rotate clockwise alt
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Formatting
+      - name: rotate--clockwise--filled
+        friendly_name: Rotate clockwise filled
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Formatting
+      - name: rotate--clockwise
+        friendly_name: Rotate clockwise
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Formatting
+      - name: rotate--counterclockwise--alt--filled
+        friendly_name: Rotate counterclockwise alt filled
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Formatting
+      - name: rotate--counterclockwise--alt
+        friendly_name: Rotate counterclockwise alt
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Formatting
+      - name: rotate--counterclockwise--filled
+        friendly_name: Rotate counterclockwise filled
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Formatting
+      - name: rotate--counterclockwise
+        friendly_name: Rotate counterclockwise
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Formatting
   - name: row
     friendly_name: Row
     usage: This is a description for usage
@@ -7323,6 +7481,16 @@ icons:
         subcategory: Weather
     aliases:
       - sunny
+    sizes:
+      - 32
+  - name: sunrise
+    friendly_name: Sunrise
+    usage: This is a description for usage
+    categories:
+      - name: Planning
+        subcategory: Weather
+    aliases:
+      - sunrise
     sizes:
       - 32
   - name: sunset
@@ -8250,7 +8418,7 @@ icons:
       - spline
     variants:
       - name: 3D-curve--auto-colon
-        friendly_name: 3D curve auto colon
+        friendly_name: 3 d curve auto colon
         usage: This is a description for usage
         sizes:
           - 32
@@ -8258,7 +8426,7 @@ icons:
           - name: Enterprise
             subcategory: Health
       - name: 3D-curve--auto-vessels
-        friendly_name: 3D curve auto vessels
+        friendly_name: 3 d curve auto vessels
         usage: This is a description for usage
         sizes:
           - 32
@@ -8266,7 +8434,7 @@ icons:
           - name: Enterprise
             subcategory: Health
       - name: 3D-curve--manual
-        friendly_name: 3D curve manual
+        friendly_name: 3 d curve manual
         usage: This is a description for usage
         sizes:
           - 32
@@ -8409,6 +8577,16 @@ icons:
       - refer
     sizes:
       - 32
+  - name: denominate
+    friendly_name: Denominate
+    usage: This is a description for usage
+    categories:
+      - name: Enterprise
+        subcategory: Health
+    aliases:
+      - denominate
+    sizes:
+      - 32
   - name: dicom
     friendly_name: Dicom
     usage: This is a description for usage
@@ -8538,6 +8716,16 @@ icons:
         subcategory: Health
     aliases:
       - mammogram
+    sizes:
+      - 32
+  - name: nominate
+    friendly_name: Nominate
+    usage: This is a description for usage
+    categories:
+      - name: Enterprise
+        subcategory: Health
+    aliases:
+      - nominate
     sizes:
       - 32
   - name: page-scroll
