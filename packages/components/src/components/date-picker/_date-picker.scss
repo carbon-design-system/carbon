@@ -104,10 +104,14 @@
     }
 
     &:disabled {
-      color: $disabled;
+      color: $disabled-02;
       background-color: $disabled-background-color;
       border-bottom: 1px solid transparent;
       cursor: not-allowed;
+    }
+
+    &:disabled::placeholder {
+      color: $disabled-02;
     }
 
     &:disabled:hover {
@@ -116,6 +120,7 @@
 
     &::placeholder {
       @include placeholder-colors;
+      opacity: 1;
     }
   }
 
@@ -129,6 +134,11 @@
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
     padding-right: $carbon--spacing-09;
+  }
+
+  .#{$prefix}--date-picker__input:disabled ~ .#{$prefix}--date-picker__icon {
+    fill: $disabled-02;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--date-picker--range
