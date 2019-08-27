@@ -1646,7 +1646,7 @@ $carbon--grid-breakpoints: (
   ),
   max: (
     columns: 16,
-    margin: carbon--rem(16px),
+    margin: carbon--rem(24px),
     width: carbon--rem(1584px),
   ),
 );
