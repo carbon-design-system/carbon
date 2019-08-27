@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useMemo, useRef, useState, useEffect } from 'react';
 import { settings } from 'carbon-components';
 import Search from '../Search';
 import setupGetInstanceId from './tools/instanceId';
@@ -34,7 +34,7 @@ const TableToolbarSearch = ({
   onExpand,
   persistent,
   persistant,
-  id = `data-table-search-${getInstanceId()}`,
+  id,
   ...rest
 }) => {
   const { current: controlled } = useRef(expandedProp !== undefined);
@@ -42,12 +42,13 @@ const TableToolbarSearch = ({
   const expanded = controlled ? expandedProp : expandedState;
   const searchRef = useRef(null);
   const [value, setValue] = useState('');
+  const uniqueId = useMemo(getInstanceId, []);
 
   useEffect(() => {
-    if (searchRef.current) {
+    if (!controlled && expandedState && searchRef.current) {
       searchRef.current.querySelector('input').focus();
     }
-  });
+  }, [controlled, expandedState]);
 
   const searchContainerClasses = cx({
     [searchContainerClass]: searchContainerClass,
@@ -77,7 +78,7 @@ const TableToolbarSearch = ({
 
   return (
     <div
-      tabIndex="0"
+      tabIndex={expandedState ? '-1' : '0'}
       role="searchbox"
       ref={searchRef}
       onClick={event => handleExpand(event, true)}
@@ -89,7 +90,7 @@ const TableToolbarSearch = ({
         small
         className={className}
         value={value}
-        id={id}
+        id={typeof id !== 'undefined' ? id : uniqueId}
         aria-hidden={!expanded}
         labelText={labelText || t('carbon.table.toolbar.search.label')}
         placeHolderText={
