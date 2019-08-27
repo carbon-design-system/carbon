@@ -35,7 +35,7 @@
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.4.4",
-    "@carbon/cli": "10.4.0",
+    "@carbon/cli": "10.5.0",
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
     "babel-jest": "^24.8.0",

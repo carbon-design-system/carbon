@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+<g id="melbourne">
+	<rect style="fill:#FFFFFF;" width="48" height="48"/>
+	<g id="melbourne_1_">
+		
+			<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" x1="19.5" y1="10" x2="29.5" y2="10"/>
+		
+			<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="18.5" y1="24" x2="30.5" y2="24"/>
+		
+			<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+			21.5,10 24.5,14 27.5,10 		"/>
+		
+			<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="22.5" y1="16" x2="26.5" y2="16"/>
+		<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+			M18.5,20c0-1.105,0.895-2,2-2h8c1.105,0,2,0.895,2,2"/>
+		
+			<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="22.5" y1="18" x2="22.5" y2="24"/>
+		
+			<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="18.5" y1="20" x2="18.5" y2="24"/>
+		
+			<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="26.5" y1="18" x2="26.5" y2="24"/>
+		
+			<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="30.5" y1="20" x2="30.5" y2="24"/>
+		<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+			M16,20c0-3.314,2.686-6,6-6h5c3.314,0,6,2.686,6,6v8c0,1.105-0.895,2-2,2H18c-1.105,0-2-0.895-2-2V20z"/>
+		
+			<circle style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" cx="24.5" cy="27" r="1"/>
+		
+			<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="20" y1="32" x2="16" y2="38"/>
+		
+			<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="29" y1="32" x2="33" y2="38"/>
+		<circle cx="20.5" cy="26" r="0.5"/>
+		<circle cx="28.5" cy="26" r="0.5"/>
+		<circle cx="20.5" cy="28" r="0.5"/>
+		<circle cx="28.5" cy="28" r="0.5"/>
+	</g>
+</g>
+<g id="Layer_1">
+</g>
+</svg>

@@ -86,6 +86,7 @@ export const overlay01 = rgba(gray100, 0.5);
 
 // Interaction states
 export const focus = blue60;
+export const inverseFocusUi = white;
 
 export const hoverPrimary = '#0353e9';
 export const activePrimary = blue80;

@@ -46,6 +46,11 @@
     align-items: center;
     opacity: 0;
     pointer-events: none;
+
+    // IE media query
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      display: inline-block;
+    }
   }
 
   &::before,
@@ -100,6 +105,18 @@
     transform: translateX(-50%);
     pointer-events: none;
     background-color: $inverse-02;
+
+    // IE media query
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      width: rem(208px);
+    }
+    // Edge 12-15 and Edge 16 feature queries
+    @supports (-ms-accelerator: true) {
+      width: rem(208px);
+    }
+    @supports (-ms-ime-align: auto) {
+      width: rem(208px);
+    }
   }
 
   &::after {
@@ -161,9 +178,7 @@
   ); // space between caret and trigger button
   $caret-height: rem(5px);
   $caret-width: rem(8px);
-  $translate-caret: #{$caret-height} + #{$caret-spacing};
-  $translate-body: 100% + #{$caret-spacing} + #{$caret-height};
-  $rotate-caret: set-caret-rotation($position);
+  $body-spacing: $caret-spacing + $caret-height;
 
   // @todo Simplify CSS selectors on next major release
   &::before,
@@ -192,24 +207,28 @@
 
   &::before {
     @if ($position == 'top') {
+      top: -$caret-spacing;
       border-width: rem(5px) rem(4px) 0 rem(4px);
       border-color: $inverse-02 transparent transparent transparent;
-      transform: translate(-50%, calc(-1 * (#{$translate-caret})));
+      transform: translate(-50%, -100%);
     }
     @if ($position == 'right') {
+      right: -$caret-spacing;
       border-width: rem(4px) rem(5px) rem(4px) 0;
       border-color: transparent $inverse-02 transparent transparent;
-      transform: translate(calc(#{$translate-caret}), -50%);
+      transform: translate(100%, -50%);
     }
     @if ($position == 'bottom') {
+      bottom: -$caret-spacing;
       border-width: 0 rem(4px) rem(5px) rem(4px);
       border-color: transparent transparent $inverse-02 transparent;
-      transform: translate(-50%, calc(#{$translate-caret}));
+      transform: translate(-50%, 100%);
     }
     @if ($position == 'left') {
+      left: -$caret-spacing;
       border-width: rem(4px) 0 rem(4px) rem(5px);
       border-color: transparent transparent transparent $inverse-02;
-      transform: translate(calc(-1 * (#{$translate-caret})), -50%);
+      transform: translate(-100%, -50%);
     }
   }
 
@@ -221,35 +240,39 @@
   &:hover + .#{$prefix}--assistive-text,
   &:focus + .#{$prefix}--assistive-text {
     @if ($position == 'top') {
+      top: -$body-spacing;
       @if ($align == 'start') {
         left: 0;
-        transform: translate(0, calc(-1 * (#{$translate-body})));
+        transform: translate(0, -100%);
       } @else if ($align == 'end') {
         right: 0;
-        left: initial;
-        transform: translate(0, calc(-1 * (#{$translate-body})));
+        left: auto;
+        transform: translate(0, -100%);
       } @else {
         left: 50%;
-        transform: translate(-50%, calc(-1 * (#{$translate-body})));
+        transform: translate(-50%, -100%);
       }
     }
     @if ($position == 'right') {
-      transform: translate(calc(#{$translate-body}), -50%);
+      right: -$body-spacing;
+      transform: translate(100%, -50%);
     }
     @if ($position == 'bottom') {
+      bottom: -$body-spacing;
       @if ($align == 'start') {
         left: 0;
-        transform: translate(0, calc(#{$translate-body}));
+        transform: translate(0, 100%);
       } @else if ($align == 'end') {
         right: 0;
-        left: initial;
-        transform: translate(0, calc(#{$translate-body}));
+        left: auto;
+        transform: translate(0, 100%);
       } @else {
-        transform: translate(-50%, calc(#{$translate-body}));
+        transform: translate(-50%, 100%);
       }
     }
     @if ($position == 'left') {
-      transform: translate(calc(-1 * (#{$translate-body})), -50%);
+      left: -$body-spacing;
+      transform: translate(-100%, -50%);
     }
   }
 
@@ -257,12 +280,13 @@
   @if $tooltip-type == 'definition' {
     &.#{$prefix}--tooltip--a11y + .#{$prefix}--assistive-text {
       @if ($position == 'bottom') {
-        @if ($align == 'start') {
-          transform: translate(0, calc(#{$translate-body} - 1px));
-        } @else if ($align == 'end') {
-          transform: translate(0, calc(#{$translate-body} - 1px));
+        bottom: -(
+            $body-spacing - rem(1px)
+          ); // carryover from https://github.com/carbon-design-system/carbon/pull/3151/files#diff-93734be0784e9530b6d14a7b03b0d352R261-R265
+        @if ($align == 'start' or $align == 'end') {
+          transform: translate(0, 100%);
         } @else {
-          transform: translate(-50%, calc(#{$translate-body} - 1px));
+          transform: translate(-50%, 100%);
         }
       }
     }
