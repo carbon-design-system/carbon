@@ -330,22 +330,22 @@ $structured-list-text-transform: none !default;
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-color: 3px solid $ibm-color__gray-30 !default;
+$tab-underline-color: 3px solid $ui-03 !default;
 
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-color-hover: 3px solid $ibm-color__gray-60 !default;
+$tab-underline-color-hover: 3px solid $ui-04 !default;
 
 /// @type Color
 /// @access public
 /// @group tabs
-$tab-text-disabled: $ibm-color__gray-30 !default;
+$tab-text-disabled: $disabled-02 !default;
 
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-disabled: 3px solid $ibm-color__gray-10 !default;
+$tab-underline-disabled: 3px solid $disabled-01 !default;
 
 // Skeleton Loading
 
