@@ -226,7 +226,7 @@ describe('Tooltip', () => {
       const icon = wrapper.find(Information);
       icon.simulate('keyDown', { which: 'x' });
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-      expect(wrapper.find('Tooltip').instance().state.open).toEqual(false);
+      expect(wrapper.find('Tooltip').instance().state.open).toBeFalsy();
     });
 
     it('A different key press does not change state when custom icon is set', () => {
@@ -242,13 +242,13 @@ describe('Tooltip', () => {
       const icon = wrapper.find('.custom-icon');
       icon.simulate('keyDown', { which: 'x' });
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-      expect(wrapper.find('Tooltip').instance().state.open).toEqual(false);
+      expect(wrapper.find('Tooltip').instance().state.open).toBeFalsy();
     });
 
     it('should be in a closed state after handleOutsideClick() is invoked', () => {
       const rootWrapper = mount(<Tooltip clickToOpen triggerText="Tooltip" />);
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-      expect(rootWrapper.find('Tooltip').instance().state.open).toEqual(false);
+      expect(rootWrapper.find('Tooltip').instance().state.open).toBeFalsy();
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
       rootWrapper
         .find('Tooltip')
