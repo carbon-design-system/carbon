@@ -78,8 +78,9 @@ TooltipDefinition.propTypes = {
 
   /**
    * Provide the text that will be displayed in the tooltip when it is rendered.
+   * TODO: rename this prop (will be a breaking change)
    */
-  tooltipText: PropTypes.string.isRequired,
+  tooltipText: PropTypes.node.isRequired,
 };
 
 TooltipDefinition.defaultProps = {
