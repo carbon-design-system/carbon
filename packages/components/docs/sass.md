@@ -151,6 +151,7 @@
   - [✅inverse-support-04 [variable]](#inverse-support-04-variable)
   - [✅overlay-01 [variable]](#overlay-01-variable)
   - [✅focus [variable]](#focus-variable)
+  - [✅inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [✅hover-primary [variable]](#hover-primary-variable)
   - [✅active-primary [variable]](#active-primary-variable)
   - [✅hover-primary-text [variable]](#hover-primary-text-variable)
@@ -1859,7 +1860,7 @@ $carbon--grid-breakpoints: (
   ),
   max: (
     columns: 16,
-    margin: carbon--rem(16px),
+    margin: carbon--rem(24px),
     width: carbon--rem(1584px),
   ),
 );
@@ -2893,6 +2894,7 @@ $spacing-03: $carbon--spacing-03;
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ### ✅spacing-04 [variable]
@@ -3685,6 +3687,7 @@ Define theme variables from a map of tokens
   $inverse-support-04: map-get($theme, 'inverse-support-04') !global;
   $overlay-01: map-get($theme, 'overlay-01') !global;
   $focus: map-get($theme, 'focus') !global;
+  $inverse-focus-ui: map-get($theme, 'inverse-focus-ui') !global;
   $hover-primary: map-get($theme, 'hover-primary') !global;
   $active-primary: map-get($theme, 'active-primary') !global;
   $hover-primary-text: map-get($theme, 'hover-primary-text') !global;
@@ -3747,6 +3750,7 @@ Define theme variables from a map of tokens
     --inverse-support-04: #{map-get($theme, 'inverse-support-04')};
     --overlay-01: #{map-get($theme, 'overlay-01')};
     --focus: #{map-get($theme, 'focus')};
+    --inverse-focus-ui: #{map-get($theme, 'inverse-focus-ui')};
     --hover-primary: #{map-get($theme, 'hover-primary')};
     --active-primary: #{map-get($theme, 'active-primary')};
     --hover-primary-text: #{map-get($theme, 'hover-primary-text')};
@@ -3854,6 +3858,7 @@ Define theme variables from a map of tokens
   - [inverse-support-04 [variable]](#inverse-support-04-variable)
   - [overlay-01 [variable]](#overlay-01-variable)
   - [focus [variable]](#focus-variable)
+  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [hover-primary [variable]](#hover-primary-variable)
   - [active-primary [variable]](#active-primary-variable)
   - [hover-primary-text [variable]](#hover-primary-text-variable)
@@ -3925,6 +3930,7 @@ $carbon--theme--white: (
   inverse-support-04: #408bfc,
   overlay-01: rgba(23, 23, 23, 0.5),
   focus: #0062ff,
+  inverse-focus-ui: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
   hover-primary-text: #054ada,
@@ -4004,6 +4010,7 @@ $carbon--theme--g10: (
   inverse-support-04: #408bfc,
   overlay-01: rgba(23, 23, 23, 0.5),
   focus: #0062ff,
+  inverse-focus-ui: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
   hover-primary-text: #054ada,
@@ -4081,6 +4088,7 @@ $carbon--theme--g90: (
   inverse-support-04: #0062ff,
   overlay-01: rgba(23, 23, 23, 0.7),
   focus: #ffffff,
+  inverse-focus-ui: #0062ff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
   hover-primary-text: #97c1ff,
@@ -4158,6 +4166,7 @@ $carbon--theme--g100: (
   inverse-support-04: #0062ff,
   overlay-01: rgba(23, 23, 23, 0.7),
   focus: #ffffff,
+  inverse-focus-ui: #0062ff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
   hover-primary-text: #97c1ff,
@@ -4235,6 +4244,7 @@ $carbon--theme--v9: (
   inverse-support-04: #5aaafa,
   overlay-01: rgba(223, 227, 230, 0.5),
   focus: #3d70b2,
+  inverse-focus-ui: #3d70b2,
   hover-primary: #30588c,
   active-primary: #30588c,
   hover-primary-text: #294c86,
@@ -4404,6 +4414,7 @@ $ui-background: map-get($carbon--theme, 'ui-background');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅ui-01 [variable]
 
@@ -4931,6 +4942,7 @@ $support-01: map-get($carbon--theme, 'support-01');
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
+  - [inline-loading [mixin]](#inline-loading-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -5130,6 +5142,23 @@ $focus: map-get($carbon--theme, 'focus');
   - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
   - [toggle [mixin]](#toggle-mixin)
+
+### ✅inverse-focus-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-focus-ui: map-get($carbon--theme, 'inverse-focus-ui');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅hover-primary [variable]
 
@@ -8609,6 +8638,7 @@ fixed contexts.
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [carbon--default-type [mixin]](#carbon--default-type-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ## accordion
@@ -10274,6 +10304,11 @@ Data table action styles
   .#{$prefix}--toolbar-action:focus:not([disabled]),
   .#{$prefix}--toolbar-action:active:not([disabled]) {
     @include focus-outline('outline');
+
+    &.#{$prefix}--toolbar-search-container-expandable {
+      // The focus style is handled by search input in it, need to avoid duplicate animation
+      outline: none;
+    }
   }
 
   .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
@@ -12888,6 +12923,7 @@ Inline loading styles
   .#{$prefix}--inline-loading {
     display: flex;
     width: 100%;
+    min-height: 2rem;
     align-items: center;
 
     .#{$prefix}--loading__svg circle {
@@ -12914,9 +12950,14 @@ Inline loading styles
   }
 
   .#{$prefix}--inline-loading__checkmark-container {
-    width: 0.75rem;
-    position: absolute;
-    top: 0.75rem;
+    fill: $interactive-04;
+
+    // For deprecated older markup
+    &.#{$prefix}--inline-loading__svg {
+      width: 0.75rem;
+      position: absolute;
+      top: 0.75rem;
+    }
 
     &[hidden] {
       display: none;
@@ -12933,6 +12974,16 @@ Inline loading styles
     animation-name: stroke;
     animation-duration: 0.25s;
     animation-fill-mode: forwards;
+  }
+
+  .#{$prefix}--inline-loading--error {
+    fill: $support-01;
+    width: rem(16px);
+    height: rem(16px);
+
+    &[hidden] {
+      display: none;
+    }
   }
 
   .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
@@ -12962,6 +13013,7 @@ Inline loading styles
   - [prefix [variable]](#prefix-variable)
   - [text-02 [variable]](#text-02-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
+  - [support-01 [variable]](#support-01-variable)
 
 ## link
 
@@ -18866,6 +18918,9 @@ Tooltip styles
 
 ```scss
 @mixin tooltip() {
+  // Caret's original size was 13.75px square
+  $caret-size: rem(6.875px);
+
   .#{$prefix}--tooltip__label {
     @include type-style('label-01');
     display: inline-flex;
@@ -18917,6 +18972,11 @@ Tooltip styles
     word-wrap: break-word;
     color: $inverse-01;
 
+    &:focus {
+      box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px $ui-background;
+      outline: 0;
+    }
+
     p {
       @include type-style('body-short-01');
     }
@@ -18925,9 +18985,19 @@ Tooltip styles
       padding-right: $carbon--spacing-07;
     }
 
+    .#{$prefix}--btn:focus {
+      border-color: $inverse-focus-ui;
+      outline-color: $inverse-02;
+    }
+
     .#{$prefix}--link {
       color: $inverse-link;
       font-size: rem(14px);
+
+      &:focus {
+        outline: 1px solid $inverse-focus-ui;
+        outline-offset: 2px;
+      }
 
       &:active {
         color: $inverse-01;
@@ -18939,14 +19009,15 @@ Tooltip styles
     }
 
     .#{$prefix}--tooltip__caret {
+      border-left: $caret-size solid transparent;
+      border-right: $caret-size solid transparent;
+      border-bottom: $caret-size solid $inverse-02;
       position: absolute;
-      background: $inverse-02;
       left: 0;
-      top: rem(-4px);
+      top: calc(#{$caret-size * -1} + 1px);
       right: 0;
-      transform: rotate(-135deg);
-      width: 0.6rem;
-      height: 0.6rem;
+      width: 0;
+      height: 0;
       margin: 0 auto;
       content: '';
     }
@@ -18962,27 +19033,33 @@ Tooltip styles
       .#{$prefix}--tooltip__caret {
         left: auto;
         top: 50%;
-        right: rem(-4px);
-        transform: rotate(-45deg) translate(50%, -50%);
+        // left position has an additional space between caret and tooltip
+        right: calc(#{$caret-size * -1} + 1px);
+        transform: rotate(90deg) translate(50%, -50%);
       }
     }
 
     &[data-floating-menu-direction='top'] {
       .#{$prefix}--tooltip__caret {
         top: auto;
-        bottom: rem(-4px);
-        transform: rotate(45deg);
+        bottom: calc(#{$caret-size * -1} + 1px);
+        transform: rotate(180deg);
       }
     }
 
     &[data-floating-menu-direction='right'] {
       .#{$prefix}--tooltip__caret {
-        left: rem(-4px);
+        left: calc(#{$caret-size * -1} + 1px);
         top: 50%;
         right: auto;
-        transform: rotate(135deg) translate(-50%, 50%);
+        transform: rotate(270deg) translate(50%, -50%);
       }
     }
+  }
+
+  .#{$prefix}--tooltip__heading {
+    @include carbon--type-style('heading-01');
+    margin-bottom: $spacing-03;
   }
 
   .#{$prefix}--tooltip--shown {
@@ -19135,6 +19212,7 @@ Tooltip styles
 
 - **Group**: [tooltip](#tooltip)
 - **Requires**:
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
   - [prefix [variable]](#prefix-variable)
@@ -19145,8 +19223,11 @@ Tooltip styles
   - [inverse-02 [variable]](#inverse-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [ui-background [variable]](#ui-background-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [inverse-link [variable]](#inverse-link-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
 
 ## ui-shell
