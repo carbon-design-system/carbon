@@ -466,7 +466,7 @@ expansion:
 
 In practice, the combination of these components looks like the following:
 
-```js
+```jsx
 <DataTable
   rows={initialRows}
   headers={headers}
@@ -676,7 +676,7 @@ Table components for selection and for batch actions, which include:
 
 In practice, this looks like the following:
 
-```js
+```jsx
 <DataTable
   rows={initialRows}
   headers={headers}

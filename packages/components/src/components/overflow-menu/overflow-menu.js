@@ -150,14 +150,6 @@ class OverflowMenu extends mixin(
    * @param {Function} callback Callback called when change in state completes.
    */
   changeState(state, detail, callback) {
-    // @todo Can clean up to use `this.triggerNode` once non-compliant code is deprecated
-    const triggerElement = this.triggerNode ? 'triggerNode' : 'element';
-    if (state === 'hidden') {
-      this[triggerElement].setAttribute('aria-expanded', 'false');
-    } else {
-      this[triggerElement].setAttribute('aria-expanded', 'true');
-    }
-
     if (!this.optionMenu) {
       const optionMenu = this.element.querySelector(
         this.options.selectorOptionMenu
@@ -285,14 +277,6 @@ class OverflowMenu extends mixin(
     const triggerElement = triggerNode ? 'triggerNode' : 'element';
 
     switch (key) {
-      // Esc
-      case 27:
-        this.changeState('hidden', getLaunchingDetails(event), () => {
-          if (isOfMenu) {
-            this[triggerElement].focus();
-          }
-        });
-        break;
       // Enter || Space bar
       case 13:
       case 32: {
