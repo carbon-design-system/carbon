@@ -52,6 +52,9 @@ describe('Test Inline Loading', function() {
           .hasAttribute('hidden')
       ).toBe(true);
       expect(
+        elem.querySelector('[data-inline-loading-error]').hasAttribute('hidden')
+      ).toBe(true);
+      expect(
         elem
           .querySelector('[data-inline-loading-text-active]')
           .hasAttribute('hidden')
@@ -59,6 +62,11 @@ describe('Test Inline Loading', function() {
       expect(
         elem
           .querySelector('[data-inline-loading-text-finished]')
+          .hasAttribute('hidden')
+      ).toBe(true);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-text-error]')
           .hasAttribute('hidden')
       ).toBe(true);
     });
@@ -83,6 +91,9 @@ describe('Test Inline Loading', function() {
           .hasAttribute('hidden')
       ).toBe(true);
       expect(
+        elem.querySelector('[data-inline-loading-error]').hasAttribute('hidden')
+      ).toBe(true);
+      expect(
         elem
           .querySelector('[data-inline-loading-text-active]')
           .hasAttribute('hidden')
@@ -90,6 +101,11 @@ describe('Test Inline Loading', function() {
       expect(
         elem
           .querySelector('[data-inline-loading-text-finished]')
+          .hasAttribute('hidden')
+      ).toBe(true);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-text-error]')
           .hasAttribute('hidden')
       ).toBe(true);
     });
@@ -114,6 +130,9 @@ describe('Test Inline Loading', function() {
           .hasAttribute('hidden')
       ).toBe(true);
       expect(
+        elem.querySelector('[data-inline-loading-error]').hasAttribute('hidden')
+      ).toBe(true);
+      expect(
         elem
           .querySelector('[data-inline-loading-text-active]')
           .hasAttribute('hidden')
@@ -121,6 +140,11 @@ describe('Test Inline Loading', function() {
       expect(
         elem
           .querySelector('[data-inline-loading-text-finished]')
+          .hasAttribute('hidden')
+      ).toBe(true);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-text-error]')
           .hasAttribute('hidden')
       ).toBe(true);
     });
@@ -145,6 +169,9 @@ describe('Test Inline Loading', function() {
           .hasAttribute('hidden')
       ).toBe(false);
       expect(
+        elem.querySelector('[data-inline-loading-error]').hasAttribute('hidden')
+      ).toBe(true);
+      expect(
         elem
           .querySelector('[data-inline-loading-text-active]')
           .hasAttribute('hidden')
@@ -154,17 +181,61 @@ describe('Test Inline Loading', function() {
           .querySelector('[data-inline-loading-text-finished]')
           .hasAttribute('hidden')
       ).toBe(false);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-text-error]')
+          .hasAttribute('hidden')
+      ).toBe(true);
+    });
+
+    it('Should hide elements for active states when the state is set to error', function() {
+      instance = new InlineLoading(
+        elem.querySelector('[data-inline-loading]')
+      ).setState('error');
+      expect(
+        elem
+          .querySelector('[data-inline-loading-spinner]')
+          .classList.contains('bx--loading--stop')
+      ).toBe(true);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-spinner]')
+          .hasAttribute('hidden')
+      ).toBe(true);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-finished]')
+          .hasAttribute('hidden')
+      ).toBe(true);
+      expect(
+        elem.querySelector('[data-inline-loading-error]').hasAttribute('hidden')
+      ).toBe(false);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-text-active]')
+          .hasAttribute('hidden')
+      ).toBe(true);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-text-finished]')
+          .hasAttribute('hidden')
+      ).toBe(true);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-text-error]')
+          .hasAttribute('hidden')
+      ).toBe(false);
     });
 
     it('Should throw if a wrong state is passed in', function() {
       instance = new InlineLoading(document.createElement('div'));
       expect(() => instance.setState()).toThrowError(
         Error,
-        'One of the following value should be given as the state: inactive, active, finished'
+        'One of the following value should be given as the state: inactive, active, finished, error'
       );
       expect(() => instance.setState('foo')).toThrowError(
         Error,
-        'One of the following value should be given as the state: inactive, active, finished'
+        'One of the following value should be given as the state: inactive, active, finished, error'
       );
     });
 
