@@ -38,7 +38,7 @@ export default function InlineLoading({
       }, successDelay);
       return (
         <CheckmarkFilled16
-          className={`${prefix}--inline-loading__checkmark-container ${prefix}--inline-loading__svg`}
+          className={`${prefix}--inline-loading__checkmark-container`}
         />
       );
     }
