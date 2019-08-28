@@ -66,8 +66,8 @@
       position: absolute;
       display: block;
       cursor: pointer;
-      left: 3px;
-      top: 3px;
+      left: rem(3px);
+      top: rem(3px);
       width: rem(18px);
       height: rem(18px);
       background-color: $ui-03;
@@ -80,8 +80,8 @@
   .#{$prefix}--toggle__check {
     fill: $ui-03;
     position: absolute;
-    left: 6px;
-    top: 6px;
+    left: rem(6px);
+    top: rem(6px);
     z-index: 1;
     transition: $duration--fast-01 motion(exit, productive);
     transform: scale(0.2);
@@ -126,7 +126,7 @@
 
     &:after {
       background-color: $icon-03;
-      transform: translateX(24px);
+      transform: translateX(rem(24px));
     }
   }
 
@@ -213,8 +213,8 @@
     &:after {
       width: rem(10px);
       height: rem(10px);
-      top: 3px;
-      left: 3px;
+      top: rem(3px);
+      left: rem(3px);
     }
   }
 
@@ -222,7 +222,7 @@
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__check {
     fill: $support-02;
-    transform: scale(1) translateX(16px);
+    transform: scale(1) translateX(rem(16px));
   }
 
   .#{$prefix}--toggle--small
@@ -236,7 +236,7 @@
     .#{$prefix}--toggle__appearance {
     &:after {
       margin-left: 0px;
-      transform: translateX(17px);
+      transform: translateX(rem(17px));
     }
   }
 
@@ -292,8 +292,8 @@
     &::after {
       box-sizing: border-box;
       position: absolute;
-      top: 3px;
-      left: 3px;
+      top: rem(3px);
+      left: rem(3px);
       display: block;
       width: rem(18px);
       height: rem(18px);
@@ -335,7 +335,7 @@
 
     &::after {
       background-color: $icon-03;
-      transform: translateX(24px);
+      transform: translateX(rem(24px));
     }
   }
 
@@ -416,12 +416,12 @@
 
   .#{$prefix}--toggle-input--small:checked + .#{$prefix}--toggle-input__label {
     > .#{$prefix}--toggle__switch::after {
-      transform: translateX(17px);
+      transform: translateX(rem(17px));
     }
 
     .#{$prefix}--toggle__check {
       fill: $support-02;
-      transform: scale(1) translateX(16px);
+      transform: scale(1) translateX(rem(16px));
     }
   }
 
