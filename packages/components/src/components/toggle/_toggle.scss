@@ -82,6 +82,8 @@
     position: absolute;
     left: rem(6px);
     top: rem(6px);
+    width: rem(6px);
+    height: rem(5px);
     z-index: 1;
     transition: $duration--fast-01 motion(exit, productive);
     transform: scale(0.2);
