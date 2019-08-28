@@ -759,6 +759,7 @@ categories:
           - cloud--lightning
           - cloud--rain
           - cloud--snow
+          - fog
           - humidity
           - hurricane
           - partly-cloudy

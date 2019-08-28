@@ -4645,6 +4645,16 @@ icons:
         categories:
           - name: Organization
             subcategory: Data
+  - name: fog
+    friendly_name: Fog
+    usage: This is a description for usage
+    categories:
+      - name: Planning
+        subcategory: Weather
+    aliases:
+      - fog
+    sizes:
+      - 32
   - name: fork
     friendly_name: Fork
     usage: This is a description for usage
