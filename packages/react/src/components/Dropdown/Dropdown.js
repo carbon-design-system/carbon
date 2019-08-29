@@ -12,6 +12,8 @@ import React from 'react';
 import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import { match } from '../../internal/keyboard/match';
+import * as keys from '../../internal/keyboard/keys';
 
 const { prefix } = settings;
 
@@ -225,6 +227,7 @@ export default class Dropdown extends React.Component {
             getButtonProps,
             getItemProps,
             getLabelProps,
+            toggleMenu,
           }) => (
             <ListBox
               id={id}
@@ -247,7 +250,14 @@ export default class Dropdown extends React.Component {
                 disabled={disabled}
                 aria-disabled={disabled}
                 translateWithId={translateWithId}
-                {...getButtonProps({ disabled })}>
+                {...getButtonProps({
+                  onKeyDown: event => {
+                    if (match(event, keys.Enter)) {
+                      toggleMenu();
+                    }
+                  },
+                  disabled,
+                })}>
                 <span
                   className={`${prefix}--list-box__label`}
                   {...getLabelProps()}>

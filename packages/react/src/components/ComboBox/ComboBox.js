@@ -12,6 +12,8 @@ import React from 'react';
 import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import { match } from '../../internal/keyboard/match';
+import * as keys from '../../internal/keyboard/keys';
 
 const { prefix } = settings;
 
@@ -200,10 +202,6 @@ export default class ComboBox extends React.Component {
     }
   };
 
-  handleOnInputKeyDown = event => {
-    event.stopPropagation();
-  };
-
   handleOnStateChange = (newState, { setHighlightedIndex }) => {
     if (Object.prototype.hasOwnProperty.call(newState, 'inputValue')) {
       const { inputValue } = newState;
@@ -293,6 +291,7 @@ export default class ComboBox extends React.Component {
           selectedItem,
           highlightedIndex,
           clearSelection,
+          toggleMenu,
         }) => (
           <ListBox
             className={className}
@@ -322,7 +321,13 @@ export default class ComboBox extends React.Component {
                   disabled,
                   id,
                   placeholder,
-                  onKeyDown: this.handleOnInputKeyDown,
+                  onKeyDown: event => {
+                    event.stopPropagation();
+
+                    if (match(event, keys.Enter)) {
+                      toggleMenu();
+                    }
+                  },
                 })}
               />
               {invalid && (
