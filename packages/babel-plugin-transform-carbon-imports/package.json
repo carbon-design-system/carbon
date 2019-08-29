@@ -1,0 +1,28 @@
+{
+  "name": "babel-plugin-transform-carbon-imports",
+  "private": true,
+  "description": "Babel plugin to transform imports for projects using the Carbon Design System",
+  "version": "9.1.2",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/babel-plugin-transform-carbon-imports",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "homepage": "http://carbondesignsystem.com",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "carbon-components-react": "5.x || 6.x"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "carbon-components-react": "6.x"
+  }
+}

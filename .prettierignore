@@ -48,3 +48,6 @@ packages/components/docs/js
 
 # Yarn
 **/.yarn/**
+
+# Test fixtures
+**/__testfixtures__/**
