@@ -12,8 +12,7 @@ import React from 'react';
 import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
-import { match } from '../../internal/keyboard/match';
-import * as keys from '../../internal/keyboard/keys';
+import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
