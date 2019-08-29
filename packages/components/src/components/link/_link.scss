@@ -68,6 +68,23 @@
     font-weight: 400;
     cursor: not-allowed;
   }
+
+  .#{$prefix}--link--inline {
+    text-decoration: underline;
+
+    &:hover {
+      color: $hover-primary-text;
+    }
+
+    &:visited {
+      color: $link-visited;
+    }
+
+    &:visited,
+    &.#{$prefix}--link--disabled {
+      text-decoration: none;
+    }
+  }
 }
 
 @include exports('link') {
