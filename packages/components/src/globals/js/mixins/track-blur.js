@@ -20,6 +20,7 @@ function trackBlur(ToMix) {
       super(element, options);
       const hasFocusin = 'onfocusin' in window;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
+      const focusoutEventName = hasFocusin ? 'focusout' : 'blur';
       this.manage(
         on(
           this.element.ownerDocument,
@@ -28,6 +29,18 @@ function trackBlur(ToMix) {
             if (
               !(this.options.contentNode || this.element).contains(event.target)
             ) {
+              this.handleBlur(event);
+            }
+          },
+          !hasFocusin
+        )
+      );
+      this.manage(
+        on(
+          this.element.ownerDocument,
+          focusoutEventName,
+          event => {
+            if (!event.relatedTarget) {
               this.handleBlur(event);
             }
           },

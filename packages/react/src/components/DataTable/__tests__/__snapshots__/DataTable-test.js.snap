@@ -2235,7 +2235,6 @@ exports[`DataTable should render 1`] = `
                 >
                   <Search
                     aria-hidden={true}
-                    className="bx--search-maginfier"
                     closeButtonLabelText="Clear search input"
                     id="custom-id"
                     labelText="Filter table"
@@ -2246,7 +2245,7 @@ exports[`DataTable should render 1`] = `
                     value=""
                   >
                     <div
-                      className="bx--search bx--search--sm bx--search-maginfier"
+                      className="bx--search bx--search--sm"
                     >
                       <ForwardRef(Search16)
                         className="bx--search-magnifier"

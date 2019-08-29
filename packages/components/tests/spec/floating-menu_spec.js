@@ -299,7 +299,7 @@ describe('Test floating menu', function() {
           menu.show();
         }).toThrowError(
           TypeError,
-          'Cannot find the refernce node for changing the style.'
+          'Cannot find the reference node for changing the style.'
         );
       } finally {
         menu.options.refNode = refNode;
@@ -498,7 +498,6 @@ describe('Test floating menu', function() {
     it('Should focus back on the trigger button when floating menu loses focus', function() {
       const hasFocusin = 'onfocusin' in window;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
-      primaryFocusNode.focus();
       menu.changeState('shown', {});
       spyOn(HTMLElement.prototype, 'focus');
       // Firefox does not fire `onfocus` event with `input.focus()` call, presumably when the window does not have focus
