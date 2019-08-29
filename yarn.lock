@@ -5746,6 +5746,24 @@ capture-stack-trace@^1.0.0:
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"
   integrity sha512-mYQLZnx5Qt1JgB1WEiMCf2647plpGeQ2NMR/5L0HNZzGQo4fuSPnK+wjfPnKZV0aiJDgzmWqqkV/g7JD+DW0qw==
 
+carbon-components-react@6.x:
+  version "6.115.7"
+  resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-6.115.7.tgz#a23f48140d575933d455fe7b45f6974f6fb113d5"
+  integrity sha512-ua+rFU/fr8h8zV5B55/f2yTwkuKOeTvSRRczsHN9WyM4J1WtWWyuFeklpEPrv4kgRkJ0uO9wRE9rICUqlT52fw==
+  dependencies:
+    "@carbon/icons-react" "^0.0.1-beta.2"
+    classnames "2.2.6"
+    downshift "^1.31.14"
+    flatpickr "4.5.5"
+    focus-trap-react "^6.0.0"
+    invariant "^2.2.3"
+    lodash.debounce "^4.0.8"
+    lodash.isequal "^4.5.0"
+    lodash.omit "^4.5.0"
+    react-is "^16.8.2"
+    warning "^3.0.0"
+    window-or-global "^1.0.1"
+
 carbon-components-react@^6.0.0:
   version "6.115.5"
   resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-6.115.5.tgz#19f4e53c78aa7064e443a487e3c646cf4b956c07"
