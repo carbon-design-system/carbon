@@ -37,7 +37,7 @@ categories:
     - stairs--plan--view
   - name: Cities
     members:
-   - amsterdam--canal
+    - amsterdam--canal
     - amsterdam--farm
     - amsterdam--windmill
     - austin
