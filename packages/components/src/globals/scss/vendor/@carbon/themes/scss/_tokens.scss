@@ -170,6 +170,10 @@ $overlay-01: map-get($carbon--theme, 'overlay-01') !default;
 /// @access public
 /// @group @carbon/themes
 $focus: map-get($carbon--theme, 'focus') !default;
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$inverse-focus-ui: map-get($carbon--theme, 'inverse-focus-ui') !default;
 /// `$interactive-01` hover
 /// @type Color
 /// @access public
