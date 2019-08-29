@@ -96,7 +96,7 @@
     padding: if(
       $tooltip-type == 'definition',
       rem(8px) rem(16px),
-      rem(2px) rem(16px)
+      rem(3px) rem(16px)
     );
     border-radius: rem(2px);
     color: $inverse-01;
