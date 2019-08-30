@@ -91,7 +91,7 @@ categories:
     members:
     - active--server
     - api
-    - automated--modular--management
+    - automate--modular--management
     - cloud--analytics
     - cloud--assets
     - cloud--builder--professional--services
@@ -209,7 +209,7 @@ categories:
     - chip--credit
     - chip--debit
     - console
-    - console wireless
+    - console--wireless
     - desktop
     - electric
     - headphones
@@ -333,7 +333,7 @@ categories:
   - name: Location
     members:
     - americas
-    - asia-australia
+    - asia--australia
     - europe-africa
     - globe
     - globe--locations
@@ -458,11 +458,11 @@ categories:
     - engine
     - fuel
     - spaceship
-    - steering-wheel
+    - steering--wheel
     - train
   - name: Watson
     members:
-    - alchemy--language--alphabet--expanded
+    - alchemy--language--alphabet--a--expanded
     - alchemy--data-news
     - alchemy--language
     - alchemy--vision
