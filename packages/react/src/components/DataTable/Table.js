@@ -39,7 +39,7 @@ export const Table = ({
     </table>
   );
   return stickyHeader ? (
-    <section className="bx--data-table_inner-container">{table}</section>
+    <section className="${prefix}--data-table_inner-container">{table}</section>
   ) : (
     table
   );
