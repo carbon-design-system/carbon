@@ -109,6 +109,12 @@ export default class DataTable extends React.Component {
      * Specify whether the control should be a radio button or inline checkbox
      */
     radio: PropTypes.bool,
+
+    /**
+     * Specify whether the header should be sticky.
+     * Still experimental: may not work with every combination of table props
+     */
+    stickyHeader: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -339,6 +345,7 @@ export default class DataTable extends React.Component {
       isSortable,
       useStaticWidth,
       shouldShowBorder,
+      stickyHeader,
     } = this.props;
     return {
       useZebraStyles,
@@ -346,6 +353,7 @@ export default class DataTable extends React.Component {
       isSortable,
       useStaticWidth,
       shouldShowBorder,
+      stickyHeader,
     };
   };
 
