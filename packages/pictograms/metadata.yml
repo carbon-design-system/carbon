@@ -260,7 +260,7 @@ icons:
     aliases:
       - berlin
     variants:
-      - name: berlin--brandenberg
+      - name: berlin--brandenburg
         friendly_name: Berlin brandenberg
         usage: This is a description for usage
       - name: berlin--cathedral
@@ -280,16 +280,12 @@ icons:
       - name: Transportation
     aliases:
       - bicycle
-  - name: block
-    friendly_name: Block
+  - name: blockchain
+    friendly_name: Blockchain
     usage: This is a description for usage
     categories: []
     aliases:
       - block
-    variants:
-      - name: block--chain
-        friendly_name: Block chain
-        usage: This is a description for usage
   - name: build
     friendly_name: Build
     usage: This is a description for usage
@@ -647,16 +643,6 @@ icons:
       - name: Watson
     aliases:
       - conversation
-  - name: copenhagan
-    friendly_name: Copenhagan
-    usage: This is a description for usage
-    categories: []
-    aliases:
-      - copenhagan
-    variants:
-      - name: copenhagan--planetarium
-        friendly_name: Copenhagan planetarium
-        usage: This is a description for usage
   - name: copenhagen
     friendly_name: Copenhagen
     usage: This is a description for usage
@@ -664,6 +650,9 @@ icons:
     aliases:
       - copenhagen
     variants:
+      - name: copenhagen--planetarium
+        friendly_name: Copenhagan planetarium
+        usage: This is a description for usage
       - name: copenhagen--snekkja
         friendly_name: Copenhagen snekkja
         usage: This is a description for usage
@@ -1020,16 +1009,13 @@ icons:
         usage: This is a description for usage
         categories:
           - name: Building Structure
-  - name: europe
-    friendly_name: Europe
+  - name: europe-africa
+    friendly_name: Europe Africa
     usage: This is a description for usage
     categories: []
     aliases:
       - europe
-    variants:
-      - name: europe--africa
-        friendly_name: Europe africa
-        usage: This is a description for usage
+      - africa
   - name: expand
     friendly_name: Expand
     usage: This is a description for usage
@@ -2181,7 +2167,7 @@ icons:
     aliases:
       - petri
     variants:
-      - name: petri--cultures
+      - name: petri--culture
         friendly_name: Petri cultures
         usage: This is a description for usage
   - name: pill
@@ -2480,7 +2466,7 @@ icons:
         usage: This is a description for usage
         categories:
           - name: Cities
-      - name: san--franciso--fog
+      - name: san--francisco--fog
         friendly_name: San franciso fog
         usage: This is a description for usage
   - name: sao
@@ -2616,7 +2602,7 @@ icons:
     aliases:
       - single
     variants:
-      - name: single--sign--on
+      - name: single--sign-on
         friendly_name: Single sign on
         usage: This is a description for usage
   - name: slider
@@ -2931,10 +2917,13 @@ icons:
       - name: Time
     aliases:
       - time
-    variants:
-      - name: time--lapse
-        friendly_name: Time lapse
-        usage: This is a description for usage
+  - name: time-lapse
+    friendly_name: Time lapse
+    usage: This is a description for usage
+    categories:
+      - name: Time
+    aliases:
+      - time
   - name: toggle
     friendly_name: Toggle
     usage: This is a description for usage
@@ -3223,16 +3212,11 @@ icons:
         usage: This is a description for usage
         categories:
           - name: Cities
-  - name: wasington
-    friendly_name: Wasington
-    usage: This is a description for usage
-    categories: []
-    aliases:
-      - wasington
-    variants:
-      - name: wasington--dc--capitol
-        friendly_name: Wasington dc capitol
+      - name: washington--dc--capitol
+        friendly_name: Washington D.C. capitol
         usage: This is a description for usage
+        categories:
+          - name: Cities
   - name: watson
     friendly_name: Watson
     usage: This is a description for usage
