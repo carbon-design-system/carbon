@@ -463,7 +463,7 @@ categories:
   - name: Watson
     members:
     - alchemy--language--alphabet--a--expanded
-    - alchemy--data-news
+    - alchemy--data--news
     - alchemy--language
     - alchemy--vision
     - analyzes--data
