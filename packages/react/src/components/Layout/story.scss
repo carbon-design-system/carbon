@@ -1,0 +1,46 @@
+///
+/// Copyright IBM Corp. 2016, 2018
+///
+/// This source code is licensed under the Apache-2.0 license found in the
+/// LICENSE file in the root directory of this source tree.
+///
+
+.example .outside {
+  min-height: 80px;
+  height: 100%;
+}
+
+.example .inside {
+  background-color: #edf4ff;
+  min-height: 80px;
+  height: 100%;
+}
+
+.example [class*='col'] {
+  background-color: #dbeaff;
+  outline: 1px dashed #97c1ff;
+}
+
+// Condensed
+.example .bx--grid--condensed,
+.example .bx--row--condensed {
+  background-color: #171717;
+  color: white;
+}
+
+.example .bx--grid--condensed [class*='col'],
+.example .bx--row--condensed [class*='col'] {
+  background: none;
+  outline: none;
+}
+
+.bx--grid--condensed .outside,
+.bx--row--condensed .outside {
+  background-color: #3d3d3d;
+  outline: none;
+}
+
+.bx--grid--condensed .inside,
+.bx--row--condensed .inside {
+  background: none;
+}
