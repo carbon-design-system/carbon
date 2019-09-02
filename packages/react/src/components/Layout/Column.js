@@ -35,6 +35,8 @@ function unstable_Column({
   );
   const className = cx(
     {
+      // By default, we'll want to use an auto-column if no span or offset is
+      // given
       [`${prefix}--col`]:
         columnsPerBreakpoint.length === 0 && offsetsPerBreakpoint.length === 0,
       [`${prefix}--no-gutter`]: noGutter,
@@ -104,6 +106,15 @@ unstable_Column.propTypes = {
 
 const breakpoints = Object.keys(gridBreakpoints);
 
+/**
+ * Map a given object or array that represents breakpoint options to an array
+ * that will be used to specify column count classes. This should transform a
+ * given object in the shape: `{ sm: 4, md: 8, lg: 16}` into: `[4, 8, 16]`. Any
+ * gaps between breakpoints will be considered holes in the resulting array.
+ *
+ * @param {Array|object} object
+ * @returns {Array}
+ */
 function mapBreakpointsToArray(object) {
   if (Array.isArray(object)) {
     return object;
