@@ -181,6 +181,9 @@ describe('Carbon Components React', () => {
         "TooltipDefinition",
         "TooltipIcon",
         "UnorderedList",
+        "unstable_Column",
+        "unstable_Grid",
+        "unstable_Row",
       ]
     `);
   });
