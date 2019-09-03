@@ -18,5 +18,15 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build": "yarn clean && node tasks/build.js",
+    "ci-check": "node tasks/ci-check.js",
+    "clean": "rimraf es lib build-info.json metadata.json",
+    "prepublishOnly": "yarn build"
+  },
+  "devDependencies": {
+    "@carbon/icon-build-helpers": "0.1.0",
+    "rimraf": "^3.0.0"
   }
 }
