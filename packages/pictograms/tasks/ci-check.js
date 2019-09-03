@@ -10,10 +10,16 @@
 const { check } = require('@carbon/icon-build-helpers');
 const path = require('path');
 
-check({
-  categoriesPath: path.resolve(__dirname, '../categories.yml'),
-  metadataPath: path.resolve(__dirname, '../metadata.yml'),
-  iconsPath: path.resolve(__dirname, '../svg'),
-}).catch(error => {
+check(
+  {
+    categoriesPath: path.resolve(__dirname, '../categories.yml'),
+    metadataPath: path.resolve(__dirname, '../metadata.yml'),
+    iconsPath: path.resolve(__dirname, '../svg'),
+  },
+  {
+    shouldCheckSizes: false,
+  }
+).catch(error => {
   console.error(error);
+  process.exit(1);
 });
