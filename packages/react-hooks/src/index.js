@@ -6,5 +6,11 @@
  */
 
 export * from './useAnnouncer';
+export * from './useEventListener';
+export * from './useForceUpdate';
 export * from './useId';
+export * from './usePassive';
 export * from './usePortalNode';
+export * from './usePrevious';
+export * from './useScrollDirection';
+export * from './useWindow';
