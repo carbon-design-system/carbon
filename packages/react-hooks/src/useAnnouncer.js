@@ -16,11 +16,7 @@ import { usePortalNode } from './usePortalNode';
  * messages sent is important.
  */
 export function useAnnouncer() {
-  const node = usePortalNode('carbon-announcer', node => {
-    if (!node.classList.contains('bx--visually-hidden')) {
-      node.classList.add('bx--visually-hidden');
-    }
-  });
+  const node = usePortalNode('carbon-announcer');
   const [mode, updateMode] = useState('polite');
   const [announcement, updateAnnouncement] = useState('');
 
@@ -32,6 +28,10 @@ export function useAnnouncer() {
   useEffect(() => {
     if (!node) {
       return;
+    }
+
+    if (!node.classList.contains('bx--visually-hidden')) {
+      node.classList.add('bx--visually-hidden');
     }
 
     // In this effect, we'll need to setup the `#carbon-announcer` node with two

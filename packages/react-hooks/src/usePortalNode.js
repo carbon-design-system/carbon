@@ -5,27 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * @param {string?} id
- * @param {Function?} callback - run side-effects on the created node
  */
-export function usePortalNode(id, callback) {
+export function usePortalNode(id) {
   const [portalNode, setPortalNode] = useState(null);
-  const savedCallback = useRef(callback);
-
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
 
   useEffect(() => {
     const [node, cleanup] = findOrCreateRoot(id);
     setPortalNode(node);
-
-    if (savedCallback.current) {
-      savedCallback.current(node);
-    }
 
     return () => {
       cleanup();
