@@ -7,17 +7,16 @@ exports[`TooltipIcon should allow the user to specify the direction 1`] = `
   direction="top"
   tooltipText="tooltip text"
 >
-  <div
-    className="bx--tooltip--icon custom-class"
+  <button
+    className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-center className"
   >
-    <button
-      aria-describedby="definition-tooltip-2"
-      aria-label="tooltip text"
-      className="bx--tooltip__trigger bx--tooltip--top bx--tooltip--align-center"
+    <span
+      className="bx--assistive-text"
     >
-      <svg />
-    </button>
-  </div>
+      tooltip text
+    </span>
+    <svg />
+  </button>
 </TooltipIcon>
 `;
 
@@ -28,16 +27,15 @@ exports[`TooltipIcon should render 1`] = `
   direction="bottom"
   tooltipText="tooltip text"
 >
-  <div
-    className="bx--tooltip--icon custom-class"
+  <button
+    className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center className"
   >
-    <button
-      aria-describedby="definition-tooltip-1"
-      aria-label="tooltip text"
-      className="bx--tooltip__trigger bx--tooltip--bottom bx--tooltip--align-center"
+    <span
+      className="bx--assistive-text"
     >
-      <svg />
-    </button>
-  </div>
+      tooltip text
+    </span>
+    <svg />
+  </button>
 </TooltipIcon>
 `;
