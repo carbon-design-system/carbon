@@ -358,6 +358,17 @@ export default class DataTable extends React.Component {
   };
 
   /**
+   * Helper utility to get the TableContainer Props.
+   */
+  getTableContainerProps = () => {
+    const { stickyHeader } = this.props;
+
+    return {
+      stickyHeader,
+    };
+  };
+
+  /**
    * Helper utility to get all the currently selected rows
    * @returns {Array<string>} the array of rowIds that are currently selected
    */
@@ -573,6 +584,7 @@ export default class DataTable extends React.Component {
       getSelectionProps: this.getSelectionProps,
       getBatchActionProps: this.getBatchActionProps,
       getTableProps: this.getTableProps,
+      getTableContainerProps: this.getTableContainerProps,
 
       // Custom event handlers
       onInputChange: this.handleOnInputValueChange,

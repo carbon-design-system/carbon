@@ -31,8 +31,12 @@ export default props => (
       getRowProps,
       getSelectionProps,
       getTableProps,
+      getTableContainerProps,
     }) => (
-      <TableContainer title="DataTable" description="For selecting single rows">
+      <TableContainer
+        title="DataTable"
+        description="For selecting single rows"
+        {...getTableContainerProps()}>
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>

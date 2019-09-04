@@ -84,8 +84,12 @@ describe('DataTable', () => {
           getHeaderProps,
           onInputChange,
           getBatchActionProps,
+          getTableProps,
+          getTableContainerProps,
         }) => (
-          <TableContainer title="DataTable with toolbar">
+          <TableContainer
+            title="DataTable with toolbar"
+            {...getTableContainerProps()}>
             <TableToolbar>
               <TableBatchActions {...getBatchActionProps()}>
                 <TableBatchAction onClick={jest.fn()}>Ghost</TableBatchAction>
@@ -114,7 +118,7 @@ describe('DataTable', () => {
                 </Button>
               </TableToolbarContent>
             </TableToolbar>
-            <Table>
+            <Table {...getTableProps()}>
               <TableHead>
                 <TableRow>
                   {headers.map(header => (
@@ -688,6 +692,13 @@ describe('DataTable', () => {
         'Field 1:A!',
         'Field 3:A!',
       ]);
+    });
+  });
+
+  describe('sticky header', () => {
+    it('should render', () => {
+      const wrapper = mount(<DataTable stickyHeader={true} {...mockProps} />);
+      expect(wrapper).toMatchSnapshot();
     });
   });
 });
