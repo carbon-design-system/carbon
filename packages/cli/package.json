@@ -25,6 +25,7 @@
     "@octokit/rest": "^16.28.1",
     "chalk": "^2.4.2",
     "child-process-promise": "^2.2.1",
+    "clipboardy": "^2.1.0",
     "fs-extra": "^8.0.1",
     "inquirer": "^6.4.1",
     "prettier": "^1.18.2",
