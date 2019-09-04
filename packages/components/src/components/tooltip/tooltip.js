@@ -142,6 +142,7 @@ class Tooltip extends mixin(
         refNode: this.element,
         classShown: this.options.classShown,
         offset: this.options.objMenuOffset,
+        contentNode: tooltip.querySelector(this.options.selectorContent),
       });
       this._hookOn(tooltip);
       this.children.push(this.tooltip);
@@ -237,6 +238,7 @@ class Tooltip extends mixin(
     const { prefix } = settings;
     return {
       selectorInit: '[data-tooltip-trigger]',
+      selectorContent: `.${prefix}--tooltip__content`,
       classShown: `${prefix}--tooltip--shown`,
       attribTooltipTarget: 'data-tooltip-target',
       objMenuOffset: getMenuOffset,
