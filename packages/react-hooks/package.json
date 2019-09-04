@@ -1,0 +1,54 @@
+{
+  "name": "@carbon/react-hooks",
+  "private": true,
+  "version": "10.0.0",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/react-hooks",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "yarn clean && rollup -c",
+    "clean": "rimraf es lib",
+    "develop": "start-storybook -p 3000",
+    "watch": "yarn clean && rollup -c -w"
+  },
+  "peerDependencies": {
+    "react": "^16.9.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-actions": "^5.1.11",
+    "@storybook/addon-links": "^5.1.11",
+    "@storybook/addons": "^5.1.11",
+    "@storybook/react": "^5.1.11",
+    "autoprefixer": "^9.6.1",
+    "babel-loader": "^8.0.6",
+    "browserslist-config-carbon": "10.4.0",
+    "carbon-components": "10.6.0",
+    "css-loader": "^3.2.0",
+    "node-sass": "^4.12.0",
+    "postcss-loader": "^3.0.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "rimraf": "^3.0.0",
+    "rollup": "^1.20.3",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0"
+  }
+}
