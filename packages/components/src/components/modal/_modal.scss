@@ -15,7 +15,6 @@
 @import '../../globals/scss/layer';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
-@import 'mixins';
 
 @import '../button/button';
 
@@ -63,10 +62,6 @@
     .#{$prefix}--number input[type='number'] {
       background-color: $field-02;
     }
-  }
-
-  .#{$prefix}--modal--danger {
-    @include modal--color($support-01);
   }
 
   .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
