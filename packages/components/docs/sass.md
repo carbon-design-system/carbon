@@ -286,7 +286,6 @@
   - [❌loading\_\_gap [variable]](#loading__gap-variable)
   - [❌loading\_\_size [variable]](#loading__size-variable)
 - [modal](#modal)
-  - [❌modal--color [mixin]](#modal--color-mixin)
   - [❌modal [mixin]](#modal-mixin)
 - [multi-select](#multi-select)
   - [❌multiselect [mixin]](#multiselect-mixin)
@@ -1680,7 +1679,6 @@ $prefix: 'bx';
   - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [loading [mixin]](#loading-mixin)
-  - [modal--color [mixin]](#modal--color-mixin)
   - [modal [mixin]](#modal-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -4943,7 +4941,6 @@ $support-01: map-get($carbon--theme, 'support-01');
   - [form [mixin]](#form-mixin)
   - [inline-loading [mixin]](#inline-loading-mixin)
   - [listbox [mixin]](#listbox-mixin)
-  - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -13999,27 +13996,6 @@ $loading__size: 10.5rem;
 
 ## modal
 
-### ❌modal--color [mixin]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin modal--color() {
-  .#{$prefix}--modal-container {
-    border-top-color: $color;
-  }
-}
-```
-
-</details>
-
-- **Group**: [modal](#modal)
-- **Requires**:
-  - [prefix [variable]](#prefix-variable)
-- **Used by**:
-  - [modal [mixin]](#modal-mixin)
-
 ### ❌modal [mixin]
 
 Modal styles
@@ -14068,10 +14044,6 @@ Modal styles
     .#{$prefix}--number input[type='number'] {
       background-color: $field-02;
     }
-  }
-
-  .#{$prefix}--modal--danger {
-    @include modal--color($support-01);
   }
 
   .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
@@ -14205,12 +14177,10 @@ Modal styles
 
 - **Group**: [modal](#modal)
 - **Requires**:
-  - [modal--color [mixin]](#modal--color-mixin)
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [prefix [variable]](#prefix-variable)
   - [overlay-01 [variable]](#overlay-01-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [support-01 [variable]](#support-01-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-02 [variable]](#text-02-variable)
