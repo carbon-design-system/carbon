@@ -18,7 +18,10 @@ const search = require('../src/search');
 // 1) That all icons are present in metadata
 // 2) That all icons have a category
 // 3) If an icon has a size in source, make sure it exists in metadata
-async function check({ categoriesPath, metadataPath, iconsPath }) {
+async function check(
+  { categoriesPath, metadataPath, iconsPath },
+  { shouldCheckSizes = true } = {}
+) {
   const categoriesConfig = yaml.safeLoad(
     await fs.readFile(categoriesPath, 'utf8')
   );
@@ -60,7 +63,10 @@ async function check({ categoriesPath, metadataPath, iconsPath }) {
 
     // If we're dealing with an icon at the root level
     if (variants.length === 0) {
-      if (!Array.isArray(entry.sizes) || !entry.sizes.includes(icon.size)) {
+      if (
+        shouldCheckSizes &&
+        (!Array.isArray(entry.sizes) || !entry.sizes.includes(icon.size))
+      ) {
         missingSizesFromMetadata.push(icon.basename);
         continue;
       }
@@ -108,8 +114,17 @@ async function check({ categoriesPath, metadataPath, iconsPath }) {
 
   const members = [];
   for (const category of categories) {
-    for (const subcategory of category.subcategories) {
-      for (const member of subcategory.members) {
+    if (Array.isArray(category.subcategories)) {
+      for (const subcategory of category.subcategories) {
+        for (const member of subcategory.members) {
+          if (!index.has(member)) {
+            miscategorizedOrMissingIcons.push(member);
+          }
+          members.push(member);
+        }
+      }
+    } else {
+      for (const member of category.members) {
         if (!index.has(member)) {
           miscategorizedOrMissingIcons.push(member);
         }
@@ -146,7 +161,7 @@ const aliasesSchema = Joi.array().items(Joi.string());
 const categorySchema = Joi.array().items(
   Joi.object().keys({
     name: Joi.string().required(),
-    subcategory: Joi.string().required(),
+    subcategory: Joi.string(),
   })
 );
 
@@ -159,7 +174,7 @@ const baseIconSchema = Joi.object().keys({
     Joi.string().only('glyph')
   ),
   aliases: aliasesSchema,
-  categories: categorySchema.required(),
+  categories: categorySchema,
 });
 
 const iconSchema = baseIconSchema.keys({
@@ -173,12 +188,10 @@ const categoriesSchema = Joi.array().items(
   Joi.object().keys({
     name: Joi.string().required(),
     subcategories: Joi.array().items(
-      Joi.object()
-        .keys({
-          name: Joi.string().required(),
-          members: Joi.array().items(Joi.string()),
-        })
-        .required()
+      Joi.object().keys({
+        name: Joi.string().required(),
+        members: Joi.array().items(Joi.string()),
+      })
     ),
   })
 );

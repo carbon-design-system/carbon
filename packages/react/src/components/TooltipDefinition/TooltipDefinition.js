@@ -23,9 +23,14 @@ const TooltipDefinition = ({
   ...rest
 }) => {
   const tooltipId = id || `definition-tooltip-${getInstanceId()}`;
-  const tooltipClassName = cx(`${prefix}--tooltip--definition`, className);
+  const tooltipClassName = cx(
+    `${prefix}--tooltip--definition`,
+    `${prefix}--tooltip--a11y`,
+    className
+  );
   const tooltipTriggerClasses = cx(
     `${prefix}--tooltip__trigger`,
+    `${prefix}--tooltip--a11y`,
     `${prefix}--tooltip__trigger--definition`,
     {
       [`${prefix}--tooltip--${direction}`]: direction,
@@ -34,12 +39,15 @@ const TooltipDefinition = ({
   );
   return (
     <div {...rest} className={tooltipClassName}>
-      <button
-        className={tooltipTriggerClasses}
-        aria-describedby={tooltipId}
-        aria-label={tooltipText}>
+      <button className={tooltipTriggerClasses} aria-describedby={tooltipId}>
         {children}
       </button>
+      <div
+        className={`${prefix}--assistive-text`}
+        id={tooltipId}
+        role="tooltip">
+        {tooltipText}
+      </div>
     </div>
   );
 };
@@ -70,8 +78,9 @@ TooltipDefinition.propTypes = {
 
   /**
    * Provide the text that will be displayed in the tooltip when it is rendered.
+   * TODO: rename this prop (will be a breaking change)
    */
-  tooltipText: PropTypes.string.isRequired,
+  tooltipText: PropTypes.node.isRequired,
 };
 
 TooltipDefinition.defaultProps = {
