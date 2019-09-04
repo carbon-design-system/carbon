@@ -27,7 +27,7 @@ let id = 0;
  * }
  *
  * @param {string?} prefix
- * @return {string}
+ * @returns {string}
  */
 export function useId(prefix) {
   const ref = useRef(++id);

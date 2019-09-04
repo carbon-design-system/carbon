@@ -28,7 +28,11 @@ storiesOf('useAnnouncer', module)
         <>
           <div>
             <label htmlFor="mode">Mode</label>
-            <select id="mode" value={mode} onChange={onModeChange}>
+            <select
+              id="mode"
+              value={mode}
+              onChange={onModeChange}
+              onBlur={onModeChange}>
               <option>polite</option>
               <option>assertive</option>
             </select>

@@ -9,7 +9,6 @@ jest.useFakeTimers();
 
 describe('useAnnouncer', () => {
   let React;
-  let ReactDOM;
   let act;
   let render;
   let cleanup;
@@ -18,7 +17,6 @@ describe('useAnnouncer', () => {
   beforeEach(() => {
     jest.resetModules();
     React = require('react');
-    ReactDOM = require('react-dom');
     act = require('react-dom/test-utils').act;
     render = require('../test-helpers').render;
     cleanup = require('../test-helpers').cleanup;

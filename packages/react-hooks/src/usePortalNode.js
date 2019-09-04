@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useEffect, useState } from 'react';
-import { useId } from './useId';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * @param {string?} id
@@ -14,20 +13,25 @@ import { useId } from './useId';
  */
 export function usePortalNode(id, callback) {
   const [portalNode, setPortalNode] = useState(null);
+  const savedCallback = useRef(callback);
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
 
   useEffect(() => {
     const [node, cleanup] = findOrCreateRoot(id);
     setPortalNode(node);
 
-    if (callback) {
-      callback(node);
+    if (savedCallback.current) {
+      savedCallback.current(node);
     }
 
     return () => {
       cleanup();
       setPortalNode(null);
     };
-  }, []);
+  }, [id]);
 
   return portalNode;
 }
@@ -37,6 +41,7 @@ const activePortals = new Map();
 function findOrCreateRoot(id) {
   const node = findOrCreateNode(id);
   if (!id) {
+    // eslint-disable-next-line no-inner-declarations
     function cleanup() {
       document.body.removeChild(node);
     }
