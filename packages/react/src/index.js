@@ -50,6 +50,8 @@ export Dropdown from './components/Dropdown';
 export FileUploader, {
   Filename,
   FileUploaderButton,
+  FileUploaderDropContainer,
+  FileUploaderItem,
 } from './components/FileUploader';
 export Form from './components/Form';
 export FormGroup from './components/FormGroup';
