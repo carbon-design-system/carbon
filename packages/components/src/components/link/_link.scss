@@ -54,6 +54,10 @@
     &:visited {
       color: $visited-link;
     }
+
+    &:visited:hover {
+      color: $hover-primary-text;
+    }
   }
 
   .#{$prefix}--link--disabled {
@@ -74,10 +78,6 @@
 
     &:focus {
       text-decoration: none;
-    }
-
-    &:visited {
-      color: $visited-link;
     }
 
     &:visited {

@@ -31,5 +31,13 @@ describe('Link', () => {
     it('should all for custom classes to be applied', () => {
       expect(link.hasClass('some-class')).toEqual(true);
     });
+    it('should support disabled link', () => {
+      link.setProps({ disabled: true });
+      expect(link.hasClass(`${prefix}--link--disabled`)).toEqual(true);
+    });
+    it('should support inline link', () => {
+      link.setProps({ inline: true });
+      expect(link.hasClass(`${prefix}--link--inline`)).toEqual(true);
+    });
   });
 });
