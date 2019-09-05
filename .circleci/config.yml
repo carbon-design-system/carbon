@@ -1,3 +1,16 @@
+var_1: &cache_key carbon-{{ .Branch }}-{{ checksum "yarn.lock" }}-node-10.15
+
+var_2: &restore_cache
+  restore_cache:
+    key: *cache_key
+
+var_3: &save_cache
+  save_cache:
+    key: *cache_key
+    paths:
+    # - "node_modules"
+    - "~/bazel_repository_cache"
+
 version: 2
 jobs:
   system:
@@ -6,6 +19,7 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
+      - *restore_cache
       - run:
           name: Install yarn
           command: |
@@ -19,6 +33,7 @@ jobs:
       - run:
           name: Build packages
           command: yarn build
+      - *save_cache
       - run:
           name: Run Continuous Integration checks
           command: |
