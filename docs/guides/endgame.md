@@ -55,7 +55,13 @@ Release cycles tend to last between four and six weeks. During that time, the en
 
 ### Week 2: Project work
 
-### Week 3: Pre-endgame planning
+### Week 3: Project work
+
+Checklist:
+
+- Schedule mid-project playbacks
+
+### Week 4: Pre-endgame planning
 
 Checklist:
 
@@ -63,7 +69,7 @@ Checklist:
   - Document these in the endgame issue for the Monday task
 - [ ] Create endgame issue and pin it to the Carbon repo by end of week
 
-### Week 4: The endgame
+### Week 5: The endgame
 
 Checklist:
 
@@ -137,7 +143,14 @@ This is the endgame schedule for our Month 20XX iteration, which includes the fo
 ```
 </details>
 
-### Week 5: Release
+### Week 6: Release
+
+Checklist:
+
+- Release on Monday under `next` tag
+- Switch to `latest` on Tuesday alongside morning announcements
+- Schedule release retro
+- Schedule release demo
 
 ## Releases
 
