@@ -615,7 +615,6 @@ In practice, this looks like the following:
             icon={iconDownload}
             iconDescription="Download"
             onClick={action('TableToolbarAction - Download')}
-            primaryFocus
           />
           <TableToolbarAction
             icon={iconEdit}

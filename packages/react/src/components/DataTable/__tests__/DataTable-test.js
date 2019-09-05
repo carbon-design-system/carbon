@@ -99,7 +99,7 @@ describe('DataTable', () => {
                   id="custom-id"
                 />
                 <TableToolbarMenu>
-                  <TableToolbarAction onClick={jest.fn()}>
+                  <TableToolbarAction primaryFocus onClick={jest.fn()}>
                     Action 1
                   </TableToolbarAction>
                   <TableToolbarAction onClick={jest.fn()}>
