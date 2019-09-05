@@ -326,7 +326,7 @@ class FloatingMenu extends mixin(
           this.options.selectorPrimaryFocus
         );
         const focusableNode = this.element.querySelector(
-          settings.selectorTabbable
+          settings.selectorFocusable
         );
 
         if (primaryFocusNode) {

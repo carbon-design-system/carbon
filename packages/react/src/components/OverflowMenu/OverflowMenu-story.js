@@ -45,11 +45,7 @@ const props = {
 const OverflowMenuExample = ({ overflowMenuProps, overflowMenuItemProps }) => (
   <>
     <OverflowMenu {...overflowMenuProps}>
-      <OverflowMenuItem
-        {...overflowMenuItemProps}
-        itemText="Option 1"
-        primaryFocus
-      />
+      <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 1" />
       <OverflowMenuItem
         {...overflowMenuItemProps}
         itemText="Option 2 is an example of a really long string and how we recommend handling this"
@@ -82,13 +78,12 @@ storiesOf('OverflowMenu', module)
   .addDecorator(withKnobs)
   .add(
     'basic',
-    withReadme(OverflowREADME, () => <OverflowMenu />),
-    () => (
+    withReadme(OverflowREADME, () => (
       <OverflowMenuExample
         overflowMenuProps={props.menu()}
         overflowMenuItemProps={props.menuItem()}
       />
-    ),
+    )),
     {
       info: {
         text: `
@@ -100,8 +95,7 @@ storiesOf('OverflowMenu', module)
   )
   .add(
     'with links',
-    withReadme(OverflowREADME, () => <OverflowMenu />),
-    () => (
+    withReadme(OverflowREADME, () => (
       <OverflowMenuExample
         overflowMenuProps={props.menu()}
         overflowMenuItemProps={{
@@ -109,7 +103,7 @@ storiesOf('OverflowMenu', module)
           href: 'https://www.ibm.com',
         }}
       />
-    ),
+    )),
     {
       info: {
         text: `
@@ -123,8 +117,7 @@ storiesOf('OverflowMenu', module)
   )
   .add(
     'custom trigger',
-    withReadme(OverflowREADME, () => <OverflowMenu />),
-    () => (
+    withReadme(OverflowREADME, () => (
       <OverflowMenuExample
         overflowMenuProps={{
           ...props.menu(),
@@ -135,7 +128,7 @@ storiesOf('OverflowMenu', module)
         }}
         overflowMenuItemProps={props.menuItem()}
       />
-    ),
+    )),
     {
       info: {
         text: `

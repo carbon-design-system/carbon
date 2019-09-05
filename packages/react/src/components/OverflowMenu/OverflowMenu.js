@@ -20,7 +20,7 @@ import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
 import mergeRefs from '../../tools/mergeRefs';
 
-const { prefix } = settings;
+const { prefix, selectorFocusable } = settings;
 
 const on = (element, ...args) => {
   element.addEventListener(...args);
@@ -253,25 +253,6 @@ class OverflowMenu extends Component {
     });
   }
 
-  getPrimaryFocusableElement = () => {
-    if (this.menuEl) {
-      const primaryFocusPropEl = this.menuEl.querySelector(
-        '[data-floating-menu-primary-focus]'
-      );
-      if (primaryFocusPropEl) {
-        return primaryFocusPropEl;
-      }
-    }
-    const firstItem = this.overflowMenuItem0;
-    if (
-      firstItem &&
-      firstItem.overflowMenuItem &&
-      firstItem.overflowMenuItem.current
-    ) {
-      return firstItem.overflowMenuItem.current;
-    }
-  };
-
   componentDidUpdate() {
     const { onClose } = this.props;
     if (!this.state.open) {
@@ -404,7 +385,9 @@ class OverflowMenu extends Component {
     if (menuBody) {
       this._menuBody = menuBody;
       (
-        menuBody.querySelector('[data-floating-menu-primary-focus]') || menuBody
+        menuBody.querySelector('[data-floating-menu-primary-focus]') ||
+        menuBody.querySelector(selectorFocusable) ||
+        menuBody
       ).focus();
       const hasFocusin = 'onfocusin' in window;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';

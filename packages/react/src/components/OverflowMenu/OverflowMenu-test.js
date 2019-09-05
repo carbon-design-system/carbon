@@ -261,6 +261,111 @@ describe('OverflowMenu', () => {
     });
   });
 
+  describe('focusing on the right item when the menu gets open', () => {
+    it('focuses on the explicitly defined node', () => {
+      const rootWrapper = mount(
+        <OverflowMenu>
+          <div className="test-child" />
+          <div className="test-child" data-floating-menu-primary-focus />
+          <div className="test-child" />
+        </OverflowMenu>
+      );
+
+      // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
+      rootWrapper
+        .find('OverflowMenu')
+        .instance()
+        .setState({ open: true });
+
+      rootWrapper.update();
+
+      const { _handlePlace: handlePlace } = rootWrapper
+        .find('OverflowMenu')
+        .instance();
+
+      const menuItems = rootWrapper.find('.test-child');
+      jest.spyOn(menuItems.at(0).getDOMNode(), 'focus');
+      jest.spyOn(menuItems.at(1).getDOMNode(), 'focus');
+      jest.spyOn(menuItems.at(2).getDOMNode(), 'focus');
+
+      handlePlace(rootWrapper.find('.bx--overflow-menu-options').getDOMNode());
+
+      expect(menuItems.at(0).getDOMNode().focus).toHaveBeenCalledTimes(0);
+      expect(menuItems.at(1).getDOMNode().focus).toHaveBeenCalledTimes(1);
+      expect(menuItems.at(2).getDOMNode().focus).toHaveBeenCalledTimes(0);
+    });
+
+    it('focuses on the first tabbable node', () => {
+      /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+      const rootWrapper = mount(
+        <OverflowMenu>
+          <div className="test-child" />
+          <div className="test-child" tabIndex={0} />
+          <div className="test-child" tabIndex={-1} />
+        </OverflowMenu>
+      );
+      /* eslint-enable jsx-a11y/no-noninteractive-tabindex */
+
+      // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
+      rootWrapper
+        .find('OverflowMenu')
+        .instance()
+        .setState({ open: true });
+
+      rootWrapper.update();
+
+      const { _handlePlace: handlePlace } = rootWrapper
+        .find('OverflowMenu')
+        .instance();
+
+      const menuItems = rootWrapper.find('.test-child');
+      jest.spyOn(menuItems.at(0).getDOMNode(), 'focus');
+      jest.spyOn(menuItems.at(1).getDOMNode(), 'focus');
+      jest.spyOn(menuItems.at(2).getDOMNode(), 'focus');
+
+      handlePlace(rootWrapper.find('.bx--overflow-menu-options').getDOMNode());
+
+      expect(menuItems.at(0).getDOMNode().focus).toHaveBeenCalledTimes(0);
+      expect(menuItems.at(1).getDOMNode().focus).toHaveBeenCalledTimes(1);
+      expect(menuItems.at(2).getDOMNode().focus).toHaveBeenCalledTimes(0);
+    });
+
+    it('focuses on the first focusable node', () => {
+      /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+      const rootWrapper = mount(
+        <OverflowMenu>
+          <div className="test-child" />
+          <div className="test-child" tabIndex={-1} />
+          <div className="test-child" tabIndex={0} />
+        </OverflowMenu>
+      );
+      /* eslint-enable jsx-a11y/no-noninteractive-tabindex */
+
+      // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
+      rootWrapper
+        .find('OverflowMenu')
+        .instance()
+        .setState({ open: true });
+
+      rootWrapper.update();
+
+      const { _handlePlace: handlePlace } = rootWrapper
+        .find('OverflowMenu')
+        .instance();
+
+      const menuItems = rootWrapper.find('.test-child');
+      jest.spyOn(menuItems.at(0).getDOMNode(), 'focus');
+      jest.spyOn(menuItems.at(1).getDOMNode(), 'focus');
+      jest.spyOn(menuItems.at(2).getDOMNode(), 'focus');
+
+      handlePlace(rootWrapper.find('.bx--overflow-menu-options').getDOMNode());
+
+      expect(menuItems.at(0).getDOMNode().focus).toHaveBeenCalledTimes(0);
+      expect(menuItems.at(1).getDOMNode().focus).toHaveBeenCalledTimes(1);
+      expect(menuItems.at(2).getDOMNode().focus).toHaveBeenCalledTimes(0);
+    });
+  });
+
   describe('customized icon', () => {
     it('renders', () => {
       const rootWrapper = mount(
