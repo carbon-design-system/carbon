@@ -20,8 +20,8 @@ build --announce_rc
 build --verbose_failures=true
 
 # so we should saturate remote workers with TS compilations
-build --strategy=AngularTemplateCompile=local
-build --strategy=TypeScriptCompile=local
+build --strategy=AngularTemplateCompile=worker
+build --strategy=TypeScriptCompile=worker
 
 # Save downloaded repositories in a location that can be cached by CircleCI
 build --experimental_repository_cache=/home/circleci/bazel_repository_cache
