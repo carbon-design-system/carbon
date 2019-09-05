@@ -391,6 +391,7 @@
   - [✅spacing--cell--activity [variable]](#spacing--cell--activity-variable)
   - [✅spacing--cell--status [variable]](#spacing--cell--status-variable)
   - [✅spacing--cell-actions [variable]](#spacing--cell-actions-variable)
+  - [✅.#{\$prefix}--file-btn [css]](#%23prefix--file-btn-css)
 
 <!-- tocstop -->
 
@@ -2542,7 +2543,6 @@ $carbon--spacing-02: carbon--mini-units(0.5);
   - `spacing-02`
 - **Used by**:
   - [date-picker [mixin]](#date-picker-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -2610,6 +2610,7 @@ $carbon--spacing-04: carbon--mini-units(1.5);
   - `spacing-04`
 - **Used by**:
   - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -2703,6 +2704,7 @@ $carbon--spacing-07: carbon--mini-units(4);
   - `spacing-07`
 - **Used by**:
   - [snippet [mixin]](#snippet-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -4371,6 +4373,7 @@ $interactive-03: map-get($carbon--theme, 'interactive-03');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
 
 ### ✅interactive-04 [variable]
 
@@ -4389,6 +4392,7 @@ $interactive-04: map-get($carbon--theme, 'interactive-04');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [inline-loading [mixin]](#inline-loading-mixin)
   - [loading [mixin]](#loading-mixin)
 
@@ -4494,6 +4498,7 @@ $ui-03: map-get($carbon--theme, 'ui-03');
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -4526,6 +4531,7 @@ $ui-04: map-get($carbon--theme, 'ui-04');
   - [button-theme [mixin]](#button-theme-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [search [mixin]](#search-mixin)
@@ -4736,6 +4742,7 @@ $icon-02: map-get($carbon--theme, 'icon-02');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [text-input [mixin]](#text-input-mixin)
@@ -4762,6 +4769,7 @@ $icon-03: map-get($carbon--theme, 'icon-03');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [toggle [mixin]](#toggle-mixin)
 
@@ -4783,6 +4791,7 @@ $link-01: map-get($carbon--theme, 'link-01');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [link [mixin]](#link-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
@@ -4967,7 +4976,6 @@ $support-02: map-get($carbon--theme, 'support-02');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -5503,6 +5511,7 @@ $disabled-01: map-get($carbon--theme, 'disabled-01');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [slider [mixin]](#slider-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -5532,6 +5541,7 @@ $disabled-02: map-get($carbon--theme, 'disabled-02');
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [link [mixin]](#link-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -12653,7 +12663,6 @@ File uploader styles
   .#{$prefix}--file--label {
     @include reset;
     @include type-style('heading-01');
-
     color: $text-01;
     margin-bottom: $carbon--spacing-03;
   }
@@ -12662,10 +12671,58 @@ File uploader styles
     @include hidden;
   }
 
+  /// This class is of old markup with "select file" button
+  /// New code should use link-style "select file" UI (`.bx--file-browse-btn`)
+  /// @deprecated
   .#{$prefix}--file-btn {
     display: inline-flex;
     margin: 0;
     padding-right: rem(64px);
+  }
+
+  .#{$prefix}--file-browse-btn {
+    margin-bottom: $carbon--spacing-03;
+    display: inline-block;
+    width: 100%;
+    color: $link-01;
+    outline: none;
+    transition: $duration--fast-02 motion(standard, productive);
+    cursor: pointer;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+
+    &:focus,
+    &:hover {
+      outline: 2px solid $interactive-03;
+    }
+
+    &:hover,
+    &:focus,
+    &:active,
+    &:active:visited {
+      text-decoration: underline;
+    }
+
+    &:active {
+      color: $text-01;
+    }
+  }
+
+  .#{$prefix}--file-browse-btn--disabled {
+    cursor: no-drop;
+    text-decoration: none;
+    color: $disabled-02;
+
+    &:hover,
+    &:focus {
+      outline: none;
+      text-decoration: none;
+      color: $disabled-02;
+    }
+  }
+
+  .#{$prefix}--file-browse-btn--disabled .#{$prefix}--file__drop-container {
+    border: 1px dashed $disabled-01;
   }
 
   .#{$prefix}--label-description {
@@ -12676,65 +12733,104 @@ File uploader styles
     margin-bottom: $carbon--spacing-05;
   }
 
-  .#{$prefix}--file-container {
-    display: block;
-    width: 100%;
+  .#{$prefix}--file-btn ~ .#{$prefix}--file-container {
     margin-top: $carbon--spacing-06;
   }
 
   .#{$prefix}--file__selected-file {
-    display: flex;
+    display: grid;
+    grid-gap: $carbon--spacing-03 $carbon--spacing-05;
+    grid-template-columns: 1fr auto;
+    grid-auto-rows: auto;
     align-items: center;
-    justify-content: space-between;
-    height: rem(40px);
-    max-width: rem(300px);
+    min-height: $carbon--spacing-07;
+    max-width: rem(320px);
     margin-bottom: $carbon--spacing-03;
-    padding: 0 $carbon--spacing-03 0 $carbon--spacing-05;
     background-color: $field-01;
-    overflow: hidden;
+    word-break: break-word;
 
     &:last-child {
       margin-bottom: 0;
     }
 
-    .#{$prefix}--inline-loading__animation,
-    .#{$prefix}--loading {
-      right: -0.25rem; // offset for loading svg container
-      width: 1.5rem;
-      height: 1.5rem;
+    .#{$prefix}--form-requirement {
+      grid-column-start: 1;
+      grid-column-end: -1;
+      max-height: none;
+      margin: 0;
     }
+
+    .#{$prefix}--loading {
+      width: $carbon--spacing-06;
+      height: $carbon--spacing-06;
+    }
+
+    .#{$prefix}--file-filename {
+      @include type-style('body-short-01');
+      margin-left: $carbon--spacing-05;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+
+  // TODO: deprecate this block
+  .#{$prefix}--file__selected-file--invalid__wrapper {
+    @include focus-outline('invalid');
+    outline-width: 1px;
+    background-color: $field-01;
+    max-width: rem(320px);
+    margin-bottom: $carbon--spacing-03;
   }
 
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
-    margin-bottom: $carbon--spacing-02;
+    outline-width: 1px;
+    padding: $carbon--spacing-04 0;
   }
 
+  .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
+    border-top: 1px solid $ui-03;
+    padding-top: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__title,
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__supplement {
+    @include type-style('label-01');
+    padding-right: $carbon--spacing-03;
+    padding-left: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__supplement {
+    color: $text-01;
+  }
+
+  // TODO: deprecate
   .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
+    @include type-style('caption-01');
     display: block;
     max-height: rem(200px);
     color: $support-01;
     font-weight: 400;
-    margin: 0 0 $carbon--spacing-03 0;
+    padding: $carbon--spacing-03 $carbon--spacing-05;
     overflow: visible;
   }
 
-  .#{$prefix}--file-filename {
-    @include type-style('body-short-01');
-    @include text-overflow(300px);
-    display: inline-block;
-    align-items: center;
+  .#{$prefix}--file__selected-file--invalid
+    + .#{$prefix}--form-requirement
+    .#{$prefix}--form-requirement__supplement {
+    padding-bottom: $carbon--spacing-03;
     color: $text-01;
-    margin-right: $carbon--spacing-05;
-    padding: 1px 0;
-    /*rtl:ignore*/
-    direction: ltr;
-    justify-content: flex-start; /*rtl:{flex-end}*/
   }
 
   .#{$prefix}--file__state-container {
     display: flex;
-    align-items: center;
+    justify-content: center;
+    min-width: 1.5rem;
+    padding-right: $carbon--spacing-03;
 
     .#{$prefix}--loading__svg {
       stroke: $ui-05;
@@ -12742,19 +12838,60 @@ File uploader styles
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-complete {
-    fill: $support-02;
+    fill: $interactive-04;
     cursor: pointer;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+
+    // for checkmark contrast
+    [data-icon-path='inner-path'] {
+      opacity: 1;
+      fill: $icon-03;
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-invalid {
+    height: $carbon--spacing-05;
+    width: $carbon--spacing-05;
+    fill: $support-01;
+    margin-right: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-close {
+    height: $carbon--spacing-05;
+    width: $carbon--spacing-05;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    fill: $icon-02;
 
     &:focus {
       @include focus-outline('border');
     }
   }
 
-  .#{$prefix}--file__state-container .#{$prefix}--file-close {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
+  .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
+    fill: $icon-02;
+  }
+
+  .#{$prefix}--file__drop-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: rem(96px);
+    max-width: rem(320px);
+    padding: $carbon--spacing-05;
+    overflow: hidden;
+    border: 1px dashed $ui-04;
+  }
+
+  .#{$prefix}--file__drop-container--drag-over {
+    background: none;
+    outline: 2px solid $interactive-03;
+    outline-offset: -2px;
   }
 }
 ```
@@ -12763,18 +12900,26 @@ File uploader styles
 
 - **Group**: [file-uploader](#file-uploader)
 - **Requires**:
-  - [text-overflow [mixin]](#text-overflow-mixin)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [support-01 [variable]](#support-01-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [link-01 [variable]](#link-01-variable)
+  - [interactive-03 [variable]](#interactive-03-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
+  - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [field-01 [variable]](#field-01-variable)
-  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
+  - [ui-03 [variable]](#ui-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
-  - [support-02 [variable]](#support-02-variable)
+  - [interactive-04 [variable]](#interactive-04-variable)
+  - [icon-03 [variable]](#icon-03-variable)
+  - [icon-02 [variable]](#icon-02-variable)
+  - [ui-04 [variable]](#ui-04-variable)
 
 ## form
 
@@ -20102,7 +20247,6 @@ want to have display-inline: block from the text helper classes
 - **Group**: [ui-shell](#ui-shell)
 - **Used by**:
   - [data-table-core [mixin]](#data-table-core-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ❌expanded [mixin]
@@ -21528,6 +21672,24 @@ Spacing that should exist around, and in-between, elements in the action bar
 
 ```scss
 $spacing--cell-actions: 0.5rem;
+```
+
+</details>
+
+- **Group**: [general](#general)
+
+### ✅.#{\$prefix}--file-btn [css]
+
+This class is of old markup with "select file" button New code should use
+link-style "select file" UI (`.bx--file-browse-btn`) @deprecated
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$.#{$prefix}--file-btn: display: inline-flex;
+    margin: 0;
+    padding-right: rem(64px);;
 ```
 
 </details>
