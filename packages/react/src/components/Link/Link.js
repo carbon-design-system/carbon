@@ -17,10 +17,11 @@ const Link = ({ children, className, href, disabled, inline, ...other }) => {
     [`${prefix}--link--disabled`]: disabled,
     [`${prefix}--link--inline`]: inline,
   });
+  const Tag = disabled ? 'p' : 'a';
   return (
-    <a href={other.disabled ? null : href} className={classNames} {...other}>
+    <Tag href={disabled ? null : href} className={classNames} {...other}>
       {children}
-    </a>
+    </Tag>
   );
 };
 

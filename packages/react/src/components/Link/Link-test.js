@@ -20,6 +20,7 @@ describe('Link', () => {
       </Link>
     );
     it('should use the appropriate link class', () => {
+      expect(link.name()).toEqual('a');
       expect(link.hasClass(`${prefix}--link`)).toEqual(true);
     });
     it('should inherit the href property', () => {
@@ -33,6 +34,7 @@ describe('Link', () => {
     });
     it('should support disabled link', () => {
       link.setProps({ disabled: true });
+      expect(link.name()).toEqual('p');
       expect(link.hasClass(`${prefix}--link--disabled`)).toEqual(true);
     });
     it('should support inline link', () => {
