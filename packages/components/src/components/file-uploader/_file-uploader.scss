@@ -39,9 +39,9 @@
     @include hidden;
   }
 
-  /// This class is of old markup with "select file" button
-  /// New code should use link-style "select file" UI (`.bx--file-browse-btn`)
-  /// @deprecated
+  // This class is of old markup with "select file" button
+  // New code should use link-style "select file" UI (`.bx--file-browse-btn`)
+  // TODO: deprecate this block
   .#{$prefix}--file-btn {
     display: inline-flex;
     margin: 0;
