@@ -391,7 +391,6 @@
   - [✅spacing--cell--activity [variable]](#spacing--cell--activity-variable)
   - [✅spacing--cell--status [variable]](#spacing--cell--status-variable)
   - [✅spacing--cell-actions [variable]](#spacing--cell-actions-variable)
-  - [✅.#{\$prefix}--file-btn [css]](#%23prefix--file-btn-css)
 
 <!-- tocstop -->
 
@@ -12671,9 +12670,9 @@ File uploader styles
     @include hidden;
   }
 
-  /// This class is of old markup with "select file" button
-  /// New code should use link-style "select file" UI (`.bx--file-browse-btn`)
-  /// @deprecated
+  // This class is of old markup with "select file" button
+  // New code should use link-style "select file" UI (`.bx--file-browse-btn`)
+  // TODO: deprecate this block
   .#{$prefix}--file-btn {
     display: inline-flex;
     margin: 0;
@@ -21672,24 +21671,6 @@ Spacing that should exist around, and in-between, elements in the action bar
 
 ```scss
 $spacing--cell-actions: 0.5rem;
-```
-
-</details>
-
-- **Group**: [general](#general)
-
-### ✅.#{\$prefix}--file-btn [css]
-
-This class is of old markup with "select file" button New code should use
-link-style "select file" UI (`.bx--file-browse-btn`) @deprecated
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$.#{$prefix}--file-btn: display: inline-flex;
-    margin: 0;
-    padding-right: rem(64px);;
 ```
 
 </details>
