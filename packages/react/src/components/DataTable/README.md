@@ -615,6 +615,7 @@ In practice, this looks like the following:
             icon={iconDownload}
             iconDescription="Download"
             onClick={action('TableToolbarAction - Download')}
+            primaryFocus
           />
           <TableToolbarAction
             icon={iconEdit}
@@ -695,7 +696,7 @@ In practice, this looks like the following:
         {/* make sure to apply getBatchActionProps so that the bar renders */}
         <TableBatchActions {...getBatchActionProps()}>
           {/* inside of you batch actinos, you can include selectedRows */}
-          <TableBatchAction onClick={batchActionClick(selectedRows)}>
+          <TableBatchAction primaryFocus onClick={batchActionClick(selectedRows)}>
             Ghost
           </TableBatchAction>
           <TableBatchAction onClick={batchActionClick(selectedRows)}>

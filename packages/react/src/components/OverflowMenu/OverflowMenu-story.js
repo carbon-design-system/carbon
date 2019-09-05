@@ -9,8 +9,10 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import { withReadme } from 'storybook-readme';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
+import OverflowREADME from './README.md';
 
 const directions = {
   'Bottom of the trigger button (bottom)': 'bottom',
@@ -80,6 +82,7 @@ storiesOf('OverflowMenu', module)
   .addDecorator(withKnobs)
   .add(
     'basic',
+    withReadme(OverflowREADME, () => <OverflowMenu />),
     () => (
       <OverflowMenuExample
         overflowMenuProps={props.menu()}
@@ -97,6 +100,7 @@ storiesOf('OverflowMenu', module)
   )
   .add(
     'with links',
+    withReadme(OverflowREADME, () => <OverflowMenu />),
     () => (
       <OverflowMenuExample
         overflowMenuProps={props.menu()}
@@ -119,6 +123,7 @@ storiesOf('OverflowMenu', module)
   )
   .add(
     'custom trigger',
+    withReadme(OverflowREADME, () => <OverflowMenu />),
     () => (
       <OverflowMenuExample
         overflowMenuProps={{
