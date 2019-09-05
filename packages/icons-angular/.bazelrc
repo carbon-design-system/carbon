@@ -1,7 +1,3 @@
-# Make TypeScript compilation fast, by keeping a few copies of the compiler
-# running as daemons, and cache SourceFile AST's to reduce parse time.
-build --strategy=TypeScriptCompile=worker
-
 # Performance: avoid stat'ing input files
 build --watchfs
 
@@ -10,8 +6,19 @@ build --symlink_prefix=dist/
 
 build --experimental_allow_incremental_repository_updates
 
-build --local_cpu_resources=1
+build --local_cpu_resources=2
 
-build --local_ram_resources=2000
+build --local_ram_resources=3072
 
 startup --host_jvm_args=-Xmx2G
+
+# Print all the options that apply to the build.
+# This helps us diagnose which options override others
+build --announce_rc
+
+# More details on failures
+build --verbose_failures=true
+
+# so we should saturate remote workers with TS compilations
+build --strategy=AngularTemplateCompile=local
+build --strategy=TypeScriptCompile=local
