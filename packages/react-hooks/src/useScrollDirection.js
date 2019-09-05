@@ -7,7 +7,7 @@
 
 import { useState } from 'react';
 import { usePrevious } from './usePrevious';
-import { useWindowScroll } from './useWindowScroll';
+import { useWindowScroll } from './useWindow';
 
 /**
  * Provides the vertical scroll direction, can be one of DOWN or UP.
