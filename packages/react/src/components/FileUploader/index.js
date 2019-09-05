@@ -6,5 +6,7 @@
  */
 
 export * from './FileUploader.Skeleton';
+export FileUploaderItem from './FileUploaderItem';
+export FileUploaderDropContainer from './FileUploaderDropContainer';
 export * from './FileUploader';
 export default from './FileUploader';
