@@ -44,7 +44,7 @@ function toHaveNoViolations(node, options = {}) {
 
         if (result.violations.length > 0) {
           resolve({
-            message: () => format(result.violations),
+            message: () => formatOutput(result.violations),
             pass: false,
           });
           return;
