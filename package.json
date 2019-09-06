@@ -161,6 +161,9 @@
     "setupFiles": [
       "./tasks/jest/setup.js"
     ],
+    "setupFilesAfterEnv": [
+      "./tasks/jest/setupAfterEnv.js"
+    ],
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],
@@ -195,5 +198,8 @@
       "/lib/",
       "/storybook/"
     ]
+  },
+  "dependencies": {
+    "axe-core": "^3.3.2"
   }
 }

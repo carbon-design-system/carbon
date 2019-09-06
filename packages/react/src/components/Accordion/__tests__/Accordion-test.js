@@ -7,6 +7,7 @@
 
 import { mount } from 'enzyme';
 import React from 'react';
+import { render } from 'react-dom';
 import { default as Accordion, AccordionItem } from '../';
 
 describe('Accordion', () => {
@@ -17,7 +18,7 @@ describe('Accordion', () => {
           Panel A
         </AccordionItem>
         <AccordionItem className="child" title="Heading B">
-          Panel B{' '}
+          Panel B
         </AccordionItem>
         <AccordionItem className="child" title="Heading C">
           Panel C
@@ -26,5 +27,28 @@ describe('Accordion', () => {
     );
 
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should have no AVT1 violations', async () => {
+    const mountNode = document.createElement('div');
+    document.body.appendChild(mountNode);
+
+    render(
+      <Accordion className="extra-class">
+        <AccordionItem className="child" title="Heading A">
+          Panel A
+        </AccordionItem>
+        <AccordionItem className="child" title="Heading B">
+          Panel B
+        </AccordionItem>
+        <AccordionItem className="child" title="Heading C">
+          Panel C
+        </AccordionItem>
+      </Accordion>,
+      mountNode
+    );
+
+    await expect(document).toHaveNoViolations();
+    mountNode.parentNode.removeChild(mountNode);
   });
 });
