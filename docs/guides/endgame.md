@@ -93,18 +93,19 @@ Given the team:
 Release cycles tend to last between four and six weeks. During that time, the
 endgame team is responsible for the following high-level milestones:
 
-- [Week 1: Project planning](#week-1-project-planning)
+- [Week 1: Project kickoff](#week-1-project-kickoff)
 - [Week 2: Project work](#week-2-project-work)
 - [Week 3: Project work](#week-3-project-work)
 - [Week 4: Pre-endgame planning](#week-4-pre-endgame-planning)
 - [Week 5: The endgame](#week-5-the-endgame)
-- [Week 6: Release](#week-6-release)
+- [Week 6: Release and planning](#week-6-release-and-planning)
 
-### Week 1: Project planning
+### Week 1: Project kickoff
 
 Checklist:
 
-- [ ] Create monthly planning issue
+- [ ] Create monthly planning issue, reach out to core team to fill our project
+      details by end of week
 
 #### Templates
 
@@ -112,6 +113,9 @@ Checklist:
   <summary>Month planning issue</summary>
 
 ```md
+<!-- Issue title: Month Year Planning -->
+<!-- Example: August 2019 Planning -->
+
 ## Endgame
 
 - **September 2nd, 2019:** Project phases begins
@@ -155,6 +159,8 @@ No items for endgame team to complete during this time.
 Checklist:
 
 - [ ] Schedule mid-project playbacks for afternoon Thursday
+  - Those invited should be the core team and relevant project stakeholders
+    (reach out to project teams to figure out who those individuals are)
 
 ### Week 4: Pre-endgame planning
 
@@ -246,28 +252,88 @@ Checklist:
 - [ ] Follow-up and help to coordinate delivery of items
 - [ ] Make determination on ship/no-ship together with endgame team
 
-### Week 6: Release
+### Week 6: Release and planning
 
 Checklist:
 
-- Release on Monday under `next` tag
-- Switch to `latest` on Tuesday alongside morning announcements
-- Schedule release retro for Tuesday or Thursday afternoon (1 - 2 hours)
+- [ ] Release on Monday under `next` tag
+- [ ] Switch to `latest` on Tuesday alongside morning announcements
+- [ ] Schedule release retro for Tuesday or Thursday afternoon (1 - 2 hours)
   - Those invited should be direct team members
-- Schedule release demo for Tuesday or Thursday afternoon (1 hours)
+- [ ] Schedule release demo for Tuesday or Thursday afternoon (1 hours)
   - Those invited should be direct team and board members
+- [ ] Participate in release planning for next cycle
 
 ## Releases
 
-### Hotfixes
+As part of the endgame process, the endgame team will faciliate the following
+types of releases:
 
-Quickfix needed now
+| Release type                | Description                                                             | Semver bump | Frequency                                          |
+| --------------------------- | ----------------------------------------------------------------------- | ----------- | -------------------------------------------------- |
+| [Hotfix](#hotfixe-releases) | Fix severity level 1 issues with large user-facing impact               | `patch`     | On demand                                          |
+| [Patch](#patch-releases)    | Batched fixes to packages with varying degrees of severity and priority | `patch`     | Weekly                                             |
+| [Minor](#minor-releases)    | Features and fixes to packages                                          | `minor`     | Typically 6 weeks, occasionally on-demand          |
+| [Major](#major-releases)    | Large or semver-incompatible changes to the design system               | `major`     | Typically 6 months to 1 year, announced in advance |
+
+The Carbon team distributes these releases under two channels:
+
+<!--
+Inspiration for copy and terminology comes from Google Chrome:
+https://support.google.com/chrome/a/answer/9027636?hl=en
+-->
+
+- Nightly
+  - Users on the Nightly channel get a 4 to 6 week preview of what's coming to
+    the Stable version of the Carbon Design System
+  - The Nightly channel is updated daily and includes features and fixes the day
+    after they're merged into the codebase
+  - Users on the Nightly channel can discover possible issues with a release,
+    giving you time to address the issues before the release is rolled into the
+    Stable channel
+  - Users on the Nightly channel may discover issues with the release and are
+    priority support to help resolve those issues
+- Stable
+  - The Stable channel is fully tested by the Carbon Design System team and
+    should be used by most product teams
+  - This channel is updated weekly for `patch` releases (when applicable), and
+    every 4 to 6 weeks for `minor` releases
+
+### Hotfix releases
+
+A hotfix release is triggered by a bugfix that was introduced into the codebase
+that was high severity (2 or higher) and includes any of the following criteria:
+
+- Impacts a large number of product-facing users
+  - An example of this would be that a component is rendered in-operable
+- Impacts a large number of direct consumers
+  - An example of this would be that a broken package build was published
+
+Hotfixes are published under the `patch` semver range and can be published at
+any point in the endgame process.
+
+#### Publishing steps
 
 ### Patch releases
 
-During a project cycle, our goal is to group up fixes contributed to the project
-into weekly patch release cycles. If no new fixes are contributed in a given
-week, then no new patch would need to be released.
+A patch release is scheduled as a weekly update to batch bug fixes to the
+project. It can also be created on-demand outside of this weekly schedule,
+although these situations should be uncommon.
+
+A `patch` release will contain changes to the codebase that fall under the
+following categories:
+
+- A bug fix to an existing piece of code
+- Content or documentation updates
+- Refactoring of existing code while supporting the same public API and not
+  changing in behavior
+
+The release may contain other types of software changes, however the one type of
+update that is not shipped is the addition of functionality that does not
+already exist in the project. These updates are reserved for
+[minor releases](#minor-releases).
+
+#### Publishing steps
 
 All patches are based on the previous stable git tag. You can find the latest
 git tag by running the following command in your terminal:
@@ -442,11 +508,35 @@ following steps to release:
 
 ### Minor releases
 
+A minor release represents the addition of functionality and bug fixes to the
+codebase. Typically, they are released on a 4 to 6 week cadence. However, they
+can be released on-demand in specific circumstances.
+
+#### Publishing steps
+
 ### Major releases
 
-## Running the endgame
+A major release represents the addition of semver-incompatible changes to the
+project, and are only expected to occur every 6 months to a year. These releases
+will be announced in advanced, and migration strategies and support will be made
+available to assist in transitioning between versions.
 
-## Smoke tests
+#### Publishing steps
+
+## Testing
+
+Before shipping a release of the Carbon Design System, we need to run through
+the following testing scenarios:
+
+- [ ] Trigger update for release under our own projects, namely:
+  - [ ] `carbon-website`
+  - [ ] `gatsby-theme-carbon`
+- [ ] React smoke tests
+  - [ ] `create-react-app`
+
+### Procedures
+
+#### `create-react-app`
 
 ## FAQ
 
