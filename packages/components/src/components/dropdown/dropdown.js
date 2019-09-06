@@ -76,7 +76,7 @@ class Dropdown extends mixin(
     } else {
       // get selected item
       // in v10.0, the anchor elements fire click events on Enter keypress when a dropdown item is selected
-      // in v10.6 (#3586), focus is no longer placed on the dropdown items and is instead kept fixed on the ul menu
+      // in v10.5 (#3586), focus is no longer placed on the dropdown items and is instead kept fixed on the ul menu
       // so we need to manually call getCurrentNavigation and select the item
       const item = this.getCurrentNavigation();
       if (
