@@ -58,7 +58,7 @@ function toHaveNoViolations(node, options = {}) {
   });
 }
 
-function format(violations) {
+function formatOutput(violations) {
   const firstViolation = violations[0];
   const { description, id, impact, help, helpUrl } = firstViolation;
   const nodes = firstViolation.nodes.map(node => {
