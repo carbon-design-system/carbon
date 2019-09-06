@@ -142,7 +142,9 @@ export default props => {
                 <TableToolbarContent>
                   <TableToolbarSearch onChange={onInputChange} />
                   <TableToolbarMenu>
-                    <TableToolbarAction onClick={this.handleOnRowAdd}>
+                    <TableToolbarAction
+                      primaryFocus
+                      onClick={this.handleOnRowAdd}>
                       Add row
                     </TableToolbarAction>
                     <TableToolbarAction onClick={this.handleOnHeaderAdd}>
