@@ -43,6 +43,7 @@
     "@carbon/cli": "10.5.0",
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
+    "axe-core": "^3.3.2",
     "babel-jest": "^24.8.0",
     "cross-env": "^5.2.0",
     "cross-spawn": "^6.0.5",
@@ -198,8 +199,5 @@
       "/lib/",
       "/storybook/"
     ]
-  },
-  "dependencies": {
-    "axe-core": "^3.3.2"
   }
 }
