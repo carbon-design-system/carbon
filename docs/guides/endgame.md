@@ -59,7 +59,7 @@ The objectives of the release leader include the following:
 - Share through an external blog the top-level objectives of the projects we're
   working for a given cycle
 - Help coordinate across projects throughout the project cycle in order to run a
-  succesful endgame
+  successful endgame
 - Help to familiarize sidekicks with the endgame process so each of them may run
   a future endgame
 - Successfully run the endgame at the conclusion of a release cycle
@@ -108,30 +108,43 @@ endgame team is responsible for the following high-level milestones:
 
 ### Week 1: Project kickoff
 
+_Note: Week 1 and week 6 overlap. Previous release leader will only take charge
+of endgame items (release, retro), and new leader will take charge of project
+planning going forward._
+
 Checklist:
 
-- [ ] Create monthly planning issue, reach out to core team to fill our project
-      details by end of week
+- [ ] Create monthly planning issue
+  - [ ] Reach out to core team to fill our project details (set hard deadline)
+- [ ] Write blog post with last release recap + future release plans
+  - [ ] Submit post for content review (Connor)
+  - [ ] Get blog post banner from design (Jeannie)
+  - [ ] Publish and announce via Slack
+- [ ] Schedule future meetings:
+  - [ ] Week 3: Thursday mid-project demo day
+  - [ ] Week 6: Monday project planning meeting
+  - [ ] Week 6: Tuesday final demo day
+  - [ ] Week 6: Thursday release retro
 
 #### Templates
 
 <details>
-  <summary>Month planning issue</summary>
+  <summary>Month planning issue template</summary>
 
 ```md
 <!-- Issue title: Month Year Planning -->
 <!-- Example: August 2019 Planning -->
 
-## Endgame
+# Endgame
 
 - **September 2nd, 2019:** Project phases begins
 - **September 30th, 2019:** Endgame starts
 - **October 2nd, 2019:** Code freeze for endgame
 - **October 7th, 2019:** Expected release date
 
-## Projects
+# Projects
 
-### Project title
+## 1. `Project title`
 
 > Project description
 
@@ -141,15 +154,15 @@ Checklist:
 - Member
 - Member
 
-**Primary goals**
+#### Primary goals
 
 - TBD
 
-**Stretch goals**
+#### Stretch goals
 
 - TBD
 
-**Deferred goals**
+#### Deferred goals
 
 - TBD
 ```
@@ -158,13 +171,14 @@ Checklist:
 
 ### Week 2: Project work
 
-No items for endgame team to complete during this time.
+- [ ] Patch release on Monday
 
 ### Week 3: Project work
 
 Checklist:
 
-- [ ] Schedule mid-project playbacks for afternoon Thursday
+- [ ] Patch release on Monday
+- [ ] Mid-project playbacks on Thursday afternoon
   - Those invited should be the core team and relevant project stakeholders
     (reach out to project teams to figure out who those individuals are)
 
@@ -172,6 +186,8 @@ Checklist:
 
 Checklist:
 
+- [ ] Patch release on Monday
+- [ ] Announce in core channel that code freeze is at the end of the week
 - [ ] Reach out to teams and figure out critical dependencies that are
       ship/no-ship criteria
   - [ ] Document these in the endgame issue for the Monday task
@@ -253,21 +269,27 @@ following projects:
 
 Checklist:
 
+- [ ] Enforce code freeze
 - [ ] Make sure to follow along with steps outlined in endgame issue
 - [ ] Collect feedback from teams for critical dates
 - [ ] Follow-up and help to coordinate delivery of items
 - [ ] Make determination on ship/no-ship together with endgame team
+- [ ] Have teams comment project outcomes in endgame issue
 
 ### Week 6: Release and planning
+
+_Note: Week 1 and week 6 overlap. Previous release leader will only take charge
+of endgame items (release, retro), and new leader will take charge of project
+planning going forward._
 
 Checklist:
 
 - [ ] Release on Monday under `next` tag
 - [ ] Switch to `latest` on Tuesday alongside morning announcements
-- [ ] Schedule release retro for Tuesday or Thursday afternoon (1 - 2 hours)
-  - Those invited should be direct team members
-- [ ] Schedule release demo for Tuesday or Thursday afternoon (1 hours)
+- [ ] Release demo (1 hours)
   - Those invited should be direct team and board members
+- [ ] Release retro (1 - 2 hours)
+  - Those invited should be direct team members
 - [ ] Participate in release planning for next cycle
 
 ## Releases
@@ -275,12 +297,13 @@ Checklist:
 As part of the endgame process, the endgame team will faciliate the following
 types of releases:
 
-| Release type                | Description                                                             | Semver bump | Frequency                                          |
-| --------------------------- | ----------------------------------------------------------------------- | ----------- | -------------------------------------------------- |
-| [Hotfix](#hotfixe-releases) | Fix severity level 1 issues with large user-facing impact               | `patch`     | On demand                                          |
-| [Patch](#patch-releases)    | Batched fixes to packages with varying degrees of severity and priority | `patch`     | Weekly                                             |
-| [Minor](#minor-releases)    | Features and fixes to packages                                          | `minor`     | Typically 6 weeks, occasionally on-demand          |
-| [Major](#major-releases)    | Large or semver-incompatible changes to the design system               | `major`     | Typically 6 months to 1 year, announced in advance |
+| Release type                                     | Description                                                             | Semver bump | Frequency                                          |
+| ------------------------------------------------ | ----------------------------------------------------------------------- | ----------- | -------------------------------------------------- |
+| [Hotfix](#hotfix-releases)                       | Fix severity level 1 issues with large user-facing impact               | `patch`     | On demand                                          |
+| [Patch](#patch-releases)                         | Batched fixes to packages with varying degrees of severity and priority | `patch`     | Weekly                                             |
+| [Release Candidate](#release-candidate-releases) | Features and fixes that will be included in minor release               | `preminor`  | Typically 6 weeks, as needed before minor release  |
+| [Minor](#minor-releases)                         | Features and fixes to packages                                          | `minor`     | Typically 6 weeks, occasionally on-demand          |
+| [Major](#major-releases)                         | Large or semver-incompatible changes to the design system               | `major`     | Typically 6 months to 1 year, announced in advance |
 
 The Carbon team distributes these releases under two channels:
 
@@ -320,6 +343,8 @@ any point in the endgame process.
 
 #### Publishing steps
 
+Same as patch release steps.
+
 ### Patch releases
 
 A patch release is scheduled as a weekly update to batch bug fixes to the
@@ -340,6 +365,25 @@ already exist in the project. These updates are reserved for
 [minor releases](#minor-releases).
 
 #### Publishing steps
+
+1. From the root of your directory, checkout `master` and pull the latest
+   upstream.
+2. Run `./packages/cli/bin/carbon-cli.js release patch`
+
+   - You will see the terminal do a few things: get the latest tag, find the
+     next version to bump, create a branch for the release, and begin
+     cherry-picking PRs.
+   - The most important thing to note when cherry-picking PRs is that we do not
+     want to bring over `feat`, as this would be a breaking change for a
+     [`minor`](#minor-releases) release.
+
+   - If the PR commit does not follow commit syntax, the terminal will prompt
+     you with:
+
+     ```bash
+     ? SHould we include commit: 2953c461a Non-commit syntax message here (#3599)\
+
+     ```
 
 All patches are based on the previous stable git tag. You can find the latest
 git tag by running the following command in your terminal:
@@ -506,11 +550,41 @@ following steps to release:
   [your environment is consistent with `upstream`](#making-sure-your-environment-is-consistent-with-upstream)
 - Run `yarn lerna publish from-package --dist-tag next` to publish all packages
   under the `next` tag
-- You should run the smoke tests that we have listed [here](#smoke-tests) with
-  the published packages
+- You should run the smoke tests that we have listed [here](#testing) with the
+  published packages
 - If everything looks good to go, then you should go through each of the
   packages and add the `latest` tag using the command:
   `npm dist-tag add package-name@vX.Y.Z latest`
+
+### Release Candidates releases
+
+​ Before our minor releases, we cut Release Candidates a week in advance to
+sanity check our code. ​
+
+#### Publishing steps
+
+1. Checkout `master`, and pull the latest upstream
+2. Create a branch for your release candidate PR following the convention
+   `chore/release-vX.Y.Z-rc.X`. For example, if we’re cutting the first RC for
+   `v10.6` the branch would be `chore/release-v10.6.0-rc.0`, the second RC would
+   be `chore/release-v10.6.0-rc.1` and so on.
+3. Once you’ve created the branch, run `yarn lerna version preminor --exact
+   --preid rc --no-push --no-git-tag-version -m 'chore(release): update package
+   versions'``
+4. Open a PR with the changes, and merge after approval.
+5. Once the PR is merged, run the following scripts from master to publish the
+   RC under the `next` tag: ​
+
+   ```
+   yarn clean
+   yarn install --offline
+   yarn build
+   yarn lerna publish from-package --dist-tag next
+   ```
+
+6. Manually check to see that the `next` tag was updated for the packages
+   correctly by going to `npm`, searching the packages, viewing the versions and
+   making sure the `next` version matches the version you just released.
 
 ### Minor releases
 
@@ -520,11 +594,82 @@ can be released on-demand in specific circumstances.
 
 #### Publishing steps
 
+1. Checkout `master`, and pull the latest upstream
+2. From the root directory, run `./packages/cli/bin/carbon-cli.js release minor`
+
+   - This will checkout the latest tag, find the next version for you to bump,
+     create a new branch for your release, and reset your project state before
+     prompting you to create the next version.
+   - You should see a confirmation dialog similar to the following:
+
+     ```bash
+     Changes:
+      - carbon-components: 10.5.0 => 10.6.0
+      - @carbon/elements: 10.5.0 => 10.6.0
+      - @carbon/icons-angular: 10.5.0 => 10.6.0
+      - @carbon/icons-handlebars: 10.5.0 => 10.6.0
+      - @carbon/icons-react: 10.5.0 => 10.6.0
+      - @carbon/icons-vue: 10.5.0 => 10.6.0
+      - @carbon/icons: 10.5.0 => 10.6.0
+      - carbon-components-react: 7.5.0 => 7.6.0
+      - @carbon/sketch: 10.5.0 => 10.6.0 (private)
+
+     ? Are you sure you want to create these versions? (ynH)
+     ```
+
+     - If everything looks good, you can enter in `y` for `Yes` and `lerna` will
+       handle versioning the corresponding packages.
+
+3. After the package versions have been created, you'll be prompted
+   `The next step will be to manually create a Pull Request for this branch`.
+   Simply push your changes and open the PR. Be sure your commit message reads
+   `chore(release): update package versions`
+4. Once your PR is approved and merged, checkout `master`, pull the latest
+   upstream and run:
+
+   ```
+   yarn clean
+   yarn install --offline
+   yarn build
+   ```
+
+5. Then, update `next` by running
+   `./packages/cli/bin/carbon-cli.js publish vX.Y.Z`.
+
+6. At the end, the terminal will print out raw markdown for the changelog. Copy
+   the markdown, and update the
+   [release](https://github.com/carbon-design-system/carbon/releases) changelog
+   for the version. Make sure the title matches the existing tag, `vX.Y.Z`.
+7. Manually check to see that the `next` tag was updated for the packages
+   correctly by going to `npm`, searching the packages, viewing the versions and
+   making sure the `next` version matches the version you just released.
+
+8. When you're ready to update `latest`, run
+   `npm dist-tag add package-name@X.Y.Z latest` for each of the updated
+   packages. For example, when releasing `10.6`, this would look like:
+
+   ```
+   npm dist-tag add carbon-components@10.6.0 latest
+   npm dist-tag add carbon-components-react@7.6.0 latest
+   npm dist-tag add @carbon/elements@10.6.0 latest
+   npm dist-tag add @carbon/grid@10.6.0 latest
+   npm dist-tag add @carbon/icons-handlebars@10.6.0 latest
+   npm dist-tag add @carbon/icons-react@10.6.0 latest
+   npm dist-tag add @carbon/icons-vue@10.6.0 latest
+   npm dist-tag add @carbon/icons@10.6.0 latest
+   npm dist-tag add @carbon/layout@10.5.0 latest
+   npm dist-tag add @carbon/type@10.5.0 latest
+   npm dist-tag add @carbon/themes@10.6.0 latest
+   ```
+
+9. Like before, manually check that the `latest` tags were updated correctly by
+   going to `npm`.
+
 ### Major releases
 
 A major release represents the addition of semver-incompatible changes to the
 project, and are only expected to occur every 6 months to a year. These releases
-will be announced in advanced, and migration strategies and support will be made
+will be announced in advance, and migration strategies and support will be made
 available to assist in transitioning between versions.
 
 #### Publishing steps
