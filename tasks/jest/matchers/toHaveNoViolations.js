@@ -44,7 +44,7 @@ function toHaveNoViolations(node, options = {}) {
 
         if (result.violations.length > 0) {
           resolve({
-            message: () => format(result.violations),
+            message: () => formatOutput(result.violations),
             pass: false,
           });
           return;
@@ -58,7 +58,7 @@ function toHaveNoViolations(node, options = {}) {
   });
 }
 
-function format(violations) {
+function formatOutput(violations) {
   const firstViolation = violations[0];
   const { description, id, impact, help, helpUrl } = firstViolation;
   const nodes = firstViolation.nodes.map(node => {
