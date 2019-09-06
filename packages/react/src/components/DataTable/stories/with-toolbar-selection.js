@@ -24,7 +24,6 @@ import DataTable, {
   TableSelectAll,
   TableSelectRow,
 } from '..';
-import { Pagination } from '../../Pagination'
 
 import { initialRowsLarge, headers } from './shared';
 
