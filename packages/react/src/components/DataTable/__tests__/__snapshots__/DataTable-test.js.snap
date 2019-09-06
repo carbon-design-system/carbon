@@ -1764,7 +1764,6 @@ exports[`DataTable should render 1`] = `
                 translateWithId={[Function]}
               >
                 <TableBatchAction
-                  iconDescription="Add"
                   onClick={[MockFunction]}
                   renderIcon={
                     Object {
@@ -1776,7 +1775,6 @@ exports[`DataTable should render 1`] = `
                   Ghost
                 </TableBatchAction>
                 <TableBatchAction
-                  iconDescription="Add"
                   onClick={[MockFunction]}
                   renderIcon={
                     Object {
@@ -1788,7 +1786,6 @@ exports[`DataTable should render 1`] = `
                   Ghost
                 </TableBatchAction>
                 <TableBatchAction
-                  iconDescription="Add"
                   onClick={[MockFunction]}
                   renderIcon={
                     Object {
@@ -1964,7 +1961,6 @@ exports[`DataTable should render 1`] = `
                   className="bx--action-list"
                 >
                   <TableBatchAction
-                    iconDescription="Add"
                     onClick={[MockFunction]}
                     renderIcon={
                       Object {
@@ -1975,7 +1971,6 @@ exports[`DataTable should render 1`] = `
                   >
                     <ForwardRef(Button)
                       disabled={false}
-                      iconDescription="Add"
                       kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
@@ -1997,12 +1992,10 @@ exports[`DataTable should render 1`] = `
                         Ghost
                         <ForwardRef(AddFilled16)
                           aria-hidden="true"
-                          aria-label="Add"
                           className="bx--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
-                            aria-label="Add"
                             className="bx--btn__icon"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
@@ -2011,13 +2004,11 @@ exports[`DataTable should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-hidden="true"
-                              aria-label="Add"
+                              aria-hidden={true}
                               className="bx--btn__icon"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
-                              role="img"
                               style={
                                 Object {
                                   "willChange": "transform",
@@ -2037,7 +2028,6 @@ exports[`DataTable should render 1`] = `
                     </ForwardRef(Button)>
                   </TableBatchAction>
                   <TableBatchAction
-                    iconDescription="Add"
                     onClick={[MockFunction]}
                     renderIcon={
                       Object {
@@ -2048,7 +2038,6 @@ exports[`DataTable should render 1`] = `
                   >
                     <ForwardRef(Button)
                       disabled={false}
-                      iconDescription="Add"
                       kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
@@ -2070,12 +2059,10 @@ exports[`DataTable should render 1`] = `
                         Ghost
                         <ForwardRef(AddFilled16)
                           aria-hidden="true"
-                          aria-label="Add"
                           className="bx--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
-                            aria-label="Add"
                             className="bx--btn__icon"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
@@ -2084,13 +2071,11 @@ exports[`DataTable should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-hidden="true"
-                              aria-label="Add"
+                              aria-hidden={true}
                               className="bx--btn__icon"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
-                              role="img"
                               style={
                                 Object {
                                   "willChange": "transform",
@@ -2110,7 +2095,6 @@ exports[`DataTable should render 1`] = `
                     </ForwardRef(Button)>
                   </TableBatchAction>
                   <TableBatchAction
-                    iconDescription="Add"
                     onClick={[MockFunction]}
                     renderIcon={
                       Object {
@@ -2121,7 +2105,6 @@ exports[`DataTable should render 1`] = `
                   >
                     <ForwardRef(Button)
                       disabled={false}
-                      iconDescription="Add"
                       kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
@@ -2143,12 +2126,10 @@ exports[`DataTable should render 1`] = `
                         Ghost
                         <ForwardRef(AddFilled16)
                           aria-hidden="true"
-                          aria-label="Add"
                           className="bx--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
-                            aria-label="Add"
                             className="bx--btn__icon"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
@@ -2157,13 +2138,11 @@ exports[`DataTable should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-hidden="true"
-                              aria-label="Add"
+                              aria-hidden={true}
                               className="bx--btn__icon"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
-                              role="img"
                               style={
                                 Object {
                                   "willChange": "transform",
