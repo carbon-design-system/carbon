@@ -1,3 +1,9 @@
-/packages/icons/src/svg/16/ @aagonzales @chrisconnors-ibm
-/packages/icons/src/svg/glyph/ @aagonzales @chrisconnors-ibm
-/packages/icons-angular/ @cal-smith
+# Default global
+@carbon-design-system/developers
+
+# Core icons
+/packages/icons/src/svg/16/ @aagonzales @chrisconnors-ibm @carbon-design-system/developers
+/packages/icons/src/svg/glyph/ @aagonzales @chrisconnors-ibm @carbon-design-system/developers
+
+# Angular icons
+/packages/icons-angular/ @cal-smith @carbon-design-system/developers
