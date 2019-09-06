@@ -87,6 +87,7 @@ class Dropdown extends mixin(
           this.options.selectorItem
         )
       ) {
+        event.preventDefault();
         this.select(item);
       }
       this._toggle(event);
