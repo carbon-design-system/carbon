@@ -9,6 +9,12 @@ import { useEventListener } from './useEventListener';
 import { useForceUpdate } from './useForceUpdate';
 import { usePassive } from './usePassive';
 
+const canUseDOM = !!(
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement
+);
+
 /**
  * Helper hook that will force an update for any window event that occurs. We
  * force the update so that the calling hook can return values from `window`
@@ -31,10 +37,14 @@ export function useWindowScroll() {
   const options = supportsPassive ? { passive: true } : undefined;
   useWindowEvent('scroll', options);
 
-  return {
-    scrollX: window.scrollX,
-    scrollY: window.scrollY,
-  };
+  if (canUseDOM) {
+    return {
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    };
+  }
+
+  return {};
 }
 
 /**
@@ -46,10 +56,14 @@ export function useWindowResize() {
   const options = supportsPassive ? { passive: true } : undefined;
   useWindowEvent('resize', options);
 
-  return {
-    innerWidth: window.innerWidth,
-    innerHeight: window.innerHeight,
-    outerWidth: window.outerWidth,
-    outerHeight: window.outerHeight,
-  };
+  if (canUseDOM) {
+    return {
+      innerWidth: window.innerWidth,
+      innerHeight: window.innerHeight,
+      outerWidth: window.outerWidth,
+      outerHeight: window.outerHeight,
+    };
+  }
+
+  return {};
 }
