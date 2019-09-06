@@ -1,5 +1,33 @@
 # Endgame
 
+<!-- prettier-ignore-start -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [About](#about)
+  - [Meet the endgame team](#meet-the-endgame-team)
+- [Timeline](#timeline)
+  - [Week 1: Project planning](#week-1-project-planning)
+  - [Week 2: Project work](#week-2-project-work)
+  - [Week 3: Project work](#week-3-project-work)
+  - [Week 4: Pre-endgame planning](#week-4-pre-endgame-planning)
+  - [Week 5: The endgame](#week-5-the-endgame)
+    - [Templates](#templates)
+  - [Week 6: Release](#week-6-release)
+- [Releases](#releases)
+  - [Hotfixes](#hotfixes)
+  - [Patch releases](#patch-releases)
+  - [Minor releases](#minor-releases)
+  - [Major releases](#major-releases)
+- [Running the endgame](#running-the-endgame)
+- [Smoke tests](#smoke-tests)
+- [FAQ](#faq)
+    - [Making sure your environment is consistent with `upstream`](#making-sure-your-environment-is-consistent-with-upstream)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- prettier-ignore-end -->
+
 ## About
 
 Inspired by the release process of
@@ -76,9 +104,51 @@ endgame team is responsible for the following high-level milestones:
 
 Checklist:
 
-- [ ] Create month planning issue
+- [ ] Create monthly planning issue
+
+#### Templates
+
+<details>
+  <summary>Month planning issue</summary>
+
+```md
+## Endgame
+
+- **September 2nd, 2019:** Project phases begins
+- **September 30th, 2019:** Endgame starts
+- **October 2nd, 2019:** Code freeze for endgame
+- **October 7th, 2019:** Expected release date
+
+## Projects
+
+### Project title
+
+> Project description
+
+#### Squad
+
+- Member
+- Member
+- Member
+
+**Primary goals**
+
+- TBD
+
+**Stretch goals**
+
+- TBD
+
+**Deferred goals**
+
+- TBD
+```
+
+</details>
 
 ### Week 2: Project work
+
+No items for endgame team to complete during this time.
 
 ### Week 3: Project work
 
@@ -94,14 +164,6 @@ Checklist:
       ship/no-ship criteria
   - [ ] Document these in the endgame issue for the Monday task
 - [ ] Create endgame issue and pin it to the Carbon repo by end of week
-
-### Week 5: The endgame
-
-Checklist:
-
-- [ ] Collect feedback from teams for critical dates
-- [ ] Follow-up and help to coordinate delivery of items
-- [ ] Make determination on ship/no-ship together with endgame team
 
 #### Templates
 
@@ -132,6 +194,8 @@ following projects:
 - [ ] Coordinate delivery or resolution of the following items:
   - [ ]
 - [ ] Start code freeze (EOD)
+  - [ ] Announce code freeze on final day before the endgame
+  - [ ] Enable code freeze branch protection on relevant repos
 
 ### Tuesday XX/YY
 
@@ -173,14 +237,25 @@ following projects:
 
 </details>
 
+### Week 5: The endgame
+
+Checklist:
+
+- [ ] Make sure to follow along with steps outlined in endgame issue
+- [ ] Collect feedback from teams for critical dates
+- [ ] Follow-up and help to coordinate delivery of items
+- [ ] Make determination on ship/no-ship together with endgame team
+
 ### Week 6: Release
 
 Checklist:
 
 - Release on Monday under `next` tag
 - Switch to `latest` on Tuesday alongside morning announcements
-- Schedule release retro
-- Schedule release demo
+- Schedule release retro for Tuesday or Thursday afternoon (1 - 2 hours)
+  - Those invited should be direct team members
+- Schedule release demo for Tuesday or Thursday afternoon (1 hours)
+  - Those invited should be direct team and board members
 
 ## Releases
 
