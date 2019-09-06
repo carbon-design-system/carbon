@@ -1816,21 +1816,22 @@ exports[`DataTable should render 1`] = `
                     }
                   }
                 >
-                  <TableToolbarAction
+                  <ForwardRef
                     onClick={[MockFunction]}
+                    primaryFocus={true}
                   >
                     Action 1
-                  </TableToolbarAction>
-                  <TableToolbarAction
+                  </ForwardRef>
+                  <ForwardRef
                     onClick={[MockFunction]}
                   >
                     Action 2
-                  </TableToolbarAction>
-                  <TableToolbarAction
+                  </ForwardRef>
+                  <ForwardRef
                     onClick={[MockFunction]}
                   >
                     Action 3
-                  </TableToolbarAction>
+                  </ForwardRef>
                 </TableToolbarMenu>
                 <ForwardRef(Button)
                   disabled={false}
