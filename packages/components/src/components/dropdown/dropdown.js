@@ -181,9 +181,12 @@ class Dropdown extends mixin(
         }
         if (listNode) {
           listNode.removeAttribute('aria-activedescendant');
-          this.element
-            .querySelector(this.options.selectorItemFocused)
-            .classList.remove(this.options.classFocused);
+          const focusedItem = this.element.querySelector(
+            this.options.selectorItemFocused
+          );
+          if (focusedItem) {
+            focusedItem.classList.remove(this.options.classFocused);
+          }
         }
       }
 
