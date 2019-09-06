@@ -205,4 +205,22 @@ storiesOf('DataTable', module)
       `,
       },
     }
+  )
+  .add(
+    'with toolbar and selection',
+    withReadme(readme, () =>
+      require('./stories/with-toolbar-selection').default(props())
+    ),
+    {
+      info: {
+        text: `
+        DataTable with options like isSelected, pagination.
+
+        Also uses a larger dataset.
+
+        You can find more detailed information surrounding usage of this component
+        at the following url: ${readmeURL}
+      `,
+      },
+    }
   );
