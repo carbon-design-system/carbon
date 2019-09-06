@@ -74,6 +74,21 @@ class Dropdown extends mixin(
       this.navigate(direction);
       event.preventDefault(); // Prevents up/down keys from scrolling container
     } else {
+      // get selected item
+      // in v10.0, the anchor elements fire click events on Enter keypress when a dropdown item is selected
+      // in v10.6 (#3586), focus is no longer placed on the dropdown items and is instead kept fixed on the ul menu
+      // so we need to manually call getCurrentNavigation and select the item
+      const item = this.getCurrentNavigation();
+      if (
+        item &&
+        isOpen &&
+        (event.which === 13 || event.which === 32) &&
+        !this.element.ownerDocument.activeElement.matches(
+          this.options.selectorItem
+        )
+      ) {
+        this.select(item);
+      }
       this._toggle(event);
     }
   }
