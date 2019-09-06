@@ -173,7 +173,9 @@ class Dropdown extends mixin(
         }
       } else if (changedState && (isOfSelf || actions.remove)) {
         // toggled close
-        (triggerNode || this.element).focus();
+        // timer is used to call focus AFTER the click event on
+        // trigger button (which is caused by keypress e.g. during keyboard navigation)
+        setTimeout(() => (triggerNode || this.element).focus(), 0);
         if (triggerNode) {
           triggerNode.setAttribute('aria-expanded', 'false');
         }
