@@ -116,8 +116,8 @@ class Dropdown extends mixin(
       // User presses down arrow
       (event.which === 40 &&
         !event.target.matches(this.options.selectorItem)) ||
-      // User presses space or enter and the trigger is not a button
-      (!triggerNode &&
+      // User presses space or enter and the trigger is not a button OR event is not fired by trigger
+      ((!triggerNode || !triggerNode.contains(event.target)) &&
         [13, 32].indexOf(event.which) >= 0 &&
         !event.target.matches(this.options.selectorItem)) ||
       // User presses esc
