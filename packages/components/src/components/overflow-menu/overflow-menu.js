@@ -165,6 +165,7 @@ class OverflowMenu extends mixin(
         classRefShown: this.options.classShown,
         offset: this.options.objMenuOffset,
         triggerNode: this.triggerNode,
+        contentNode: this.element.querySelector(this.options.selectorContent),
       });
       this.children.push(this.optionMenu);
     }
@@ -329,8 +330,9 @@ class OverflowMenu extends mixin(
       selectorInit: '[data-overflow-menu]',
       selectorOptionMenu: `.${prefix}--overflow-menu-options`,
       selectorTrigger: 'button[aria-haspopup]',
+      selectorContent: `.${prefix}--overflow-menu-options__content`,
       selectorItem: `
-        .${prefix}--overflow-menu-options--open >
+        .${prefix}--overflow-menu-options--open
         .${prefix}--overflow-menu-options__option:not(.${prefix}--overflow-menu-options__option--disabled) >
         .${prefix}--overflow-menu-options__btn
       `,

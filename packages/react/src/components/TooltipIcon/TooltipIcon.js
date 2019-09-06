@@ -9,12 +9,9 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
-const getInstanceId = setupGetInstanceId();
 const TooltipIcon = ({
-  id,
   className,
   children,
   direction,
@@ -22,21 +19,20 @@ const TooltipIcon = ({
   tooltipText,
   ...rest
 }) => {
-  const tooltipId = id || `definition-tooltip-${getInstanceId()}`;
-  const tooltipClassName = cx(`${prefix}--tooltip--icon`, className);
-  const tooltipTriggerClasses = cx(`${prefix}--tooltip__trigger`, {
-    [`${prefix}--tooltip--${direction}`]: direction,
-    [`${prefix}--tooltip--align-${align}`]: align,
-  });
+  const tooltipTriggerClasses = cx(
+    `${prefix}--tooltip__trigger`,
+    `${prefix}--tooltip--a11y`,
+    {
+      [`${prefix}--tooltip--${direction}`]: direction,
+      [`${prefix}--tooltip--align-${align}`]: align,
+      className,
+    }
+  );
   return (
-    <div {...rest} className={tooltipClassName}>
-      <button
-        className={tooltipTriggerClasses}
-        aria-describedby={tooltipId}
-        aria-label={tooltipText}>
-        {children}
-      </button>
-    </div>
+    <button {...rest} className={tooltipTriggerClasses}>
+      <span className={`${prefix}--assistive-text`}>{tooltipText}</span>
+      {children}
+    </button>
   );
 };
 
