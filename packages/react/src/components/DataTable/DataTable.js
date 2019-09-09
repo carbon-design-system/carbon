@@ -357,7 +357,18 @@ export default class DataTable extends React.Component {
       const row = this.state.rowsById[id];
       return row.isSelected;
     });
-
+  getFilteredRowIds = () => {
+    const filteredRowIds =
+      typeof this.state.filterInputValue === 'string'
+        ? this.props.filterRows({
+            rowIds: this.state.rowIds,
+            headers: this.props.headers,
+            cellsById: this.state.cellsById,
+            inputValue: this.state.filterInputValue,
+          })
+        : this.state.rowIds;
+    return filteredRowIds;
+  };
   /**
    * Helper for getting the table prefix for elements that require an
    * `id` attribute that is unique.
@@ -399,7 +410,7 @@ export default class DataTable extends React.Component {
     this.setState(state => {
       return {
         shouldShowBatchActions: false,
-        ...this.setAllSelectedState(state, false),
+        ...this.setAllSelectedState(state, false, this.getFilteredRowIds()),
       };
     });
   };
@@ -409,15 +420,7 @@ export default class DataTable extends React.Component {
    */
   handleSelectAll = () => {
     this.setState(state => {
-      const filteredRowIds =
-        typeof this.state.filterInputValue === 'string'
-          ? this.props.filterRows({
-              rowIds: this.state.rowIds,
-              headers: this.props.headers,
-              cellsById: this.state.cellsById,
-              inputValue: this.state.filterInputValue,
-            })
-          : this.state.rowIds;
+      const filteredRowIds = this.getFilteredRowIds();
       const { rowsById } = state;
       const selectableRows = this.state.rowIds.reduce((acc, rowId) => {
         return (acc += rowsById[rowId].disabled ? 0 : 1);
