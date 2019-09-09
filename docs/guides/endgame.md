@@ -111,8 +111,8 @@ endgame team is responsible for the following high-level milestones:
 ### Week 1: Project kickoff
 
 _Note: Week 1 and week 6 overlap. Previous release leader will only take charge
-of endgame items (release, retro), and new leader will take charge of project
-planning going forward._
+of endgame items (week 6 checklist), and new leader will take charge of project
+planning going forward (week 1 checklist)._
 
 Checklist:
 
@@ -284,8 +284,8 @@ Checklist:
 ### Week 6: Release and planning
 
 _Note: Week 1 and week 6 overlap. Previous release leader will only take charge
-of endgame items (release, retro), and new leader will take charge of project
-planning going forward._
+of endgame items (week 6 checklist), and new leader will take charge of project
+planning going forward (week 1 checklist)._
 
 Checklist:
 
@@ -440,7 +440,8 @@ already exist in the project. These updates are reserved for
 5. Once everything is green and your Pull Request has been reviewed, you should
    **close** the draft Pull Request.
 
-6. On your machine, you should then follow the following steps to publish:
+6. On your machine, you should then follow the following steps to publish to
+   `next`:
 
    - Make sure
      [your environment is consistent with `upstream`](#making-sure-your-environment-is-consistent-with-upstream)
@@ -448,9 +449,11 @@ already exist in the project. These updates are reserved for
      packages under the `next` tag
    - Run the smoke tests that we have listed [here](#testing) with the published
      packages
-   - If everything looks good to go, then you should go through each of the
-     packages and add the `latest` tag using the command:
-     `npm dist-tag add package-name@vX.Y.Z latest`
+
+7. If everything looks good to go, then you should go through each of the
+   packages and add the `latest` tag using the command:
+   `npm dist-tag add package-name@vX.Y.Z latest`
+
    - Manually check to see that the `latest` tags were updated for the packages
      correctly by going to [`npm`](https://www.npmjs.com), searching the
      packages, viewing the versions and making sure the `latest` version matches
