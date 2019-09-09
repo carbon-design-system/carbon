@@ -89,7 +89,7 @@ InlineLoading.propTypes = {
   /**
    * Specify the loading status
    */
-  status: PropTypes.oneOf('inactive', 'active', 'finished', 'error'),
+  status: PropTypes.oneOf(['inactive', 'active', 'finished', 'error']),
 
   /**
    * Specify the description for the inline loading text
@@ -113,6 +113,5 @@ InlineLoading.propTypes = {
   successDelay: PropTypes.number,
 };
 InlineLoading.defaultProps = {
-  success: false,
   successDelay: 1500,
 };
