@@ -357,6 +357,12 @@ export default class DataTable extends React.Component {
       const row = this.state.rowsById[id];
       return row.isSelected;
     });
+
+  /**
+   * Helper utility to get all of the available rows after applying the filter
+   * @returns {Array<string>} the array of rowIds that are currently included through the filter
+   *  */
+
   getFilteredRowIds = () => {
     const filteredRowIds =
       typeof this.state.filterInputValue === 'string'
@@ -369,6 +375,7 @@ export default class DataTable extends React.Component {
         : this.state.rowIds;
     return filteredRowIds;
   };
+
   /**
    * Helper for getting the table prefix for elements that require an
    * `id` attribute that is unique.
