@@ -110,24 +110,22 @@ endgame team is responsible for the following high-level milestones:
 
 ### Week 1: Project kickoff
 
-_Note: Week 1 and week 6 overlap. Previous release leader will only take charge
-of endgame items (week 6 checklist), and new leader will take charge of project
-planning going forward (week 1 checklist)._
-
 Checklist:
 
 - [ ] Create monthly planning issue
   - [ ] Reach out to core team to fill our project details (set hard deadline)
-- [ ] Write blog post with last release recap + future release plans
+- [ ] Write blog post with last release recap + current release plans
   - [ ] Submit post for content review (Connor)
   - [ ] Get blog post banner from design (Jeannie)
   - [ ] Publish and announce via Slack
-- [ ] Website PR to add blog post to homepage
+- [ ] Open website PR to add blog post to homepage and update
+      [Roadmap page](https://www.carbondesignsystem.com/updates/roadmap) with
+      current release plans
 - [ ] Schedule future meetings:
-  - [ ] Week 3: Thursday mid-project demo day
-  - [ ] Week 6: Monday project planning meeting
-  - [ ] Week 6: Tuesday final demo day
-  - [ ] Week 6: Thursday release retro
+  - [ ] Week 3: Thursday mid-project demo day (1 hr)
+  - [ ] Week 6: Tuesday final demo day (1hr)
+  - [ ] Week 6: Thursday release retro (1-2 hrs)
+  - [ ] Week 6: Thursday project planning meeting (1 hr)
 
 #### Templates
 
@@ -145,9 +143,9 @@ Checklist:
 - **October 2nd, 2019:** Code freeze for endgame
 - **October 7th, 2019:** Expected release date
 
-# Projects
+## Projects
 
-## 1. `Project title`
+### 1. `Project title`
 
 > Project description
 
@@ -183,7 +181,7 @@ Checklist:
 Checklist:
 
 - [ ] Patch release on Monday
-- [ ] Mid-project playbacks on Thursday afternoon
+- [ ] Run mid-project playbacks on Thursday afternoon
   - Those invited should be the core team and relevant project stakeholders
     (reach out to project teams to figure out who those individuals are)
 
@@ -283,21 +281,19 @@ Checklist:
 
 ### Week 6: Release and planning
 
-_Note: Week 1 and week 6 overlap. Previous release leader will only take charge
-of endgame items (week 6 checklist), and new leader will take charge of project
-planning going forward (week 1 checklist)._
-
 Checklist:
 
 - [ ] Release on Monday under `next` tag
-- [ ] Switch to `latest` on Tuesday alongside morning announcements
-- [ ] Website PR to update our
-      [What's new](https://www.carbondesignsystem.com/updates/whats-new) and
-      [Roadmap](https://www.carbondesignsystem.com/updates/roadmap) page
-- [ ] Release demo (1 hour)
+- [ ] Switch to `latest` on Tuesday
+- [ ] Open website PR to update our
+      [What's new page](https://www.carbondesignsystem.com/updates/whats-new)
+      with `latest` changelog
+- [ ] Run release demo (1 hour)
   - Those invited should be direct team and board members
-- [ ] Release retro (1 - 2 hours)
+- [ ] Run release retro (1 - 2 hours)
   - Those invited should be direct team members
+  - [ ] Summarize retro discussion in our
+        [ongoing doc](https://ibm.box.com/s/hr2zvaojw77l2940c0rdefmz1fde1evg)
 - [ ] Participate in release planning for next cycle
 
 ## Releases
@@ -435,7 +431,8 @@ already exist in the project. These updates are reserved for
 4. Once that's done, you should create a Pull Request in Draft state and make
    sure **not** to merge it. Our goal with the Pull Request is to do a final
    sanity check for CI checks, verify preview links work as expected, and get
-   final reviews from the endgame team for the release.
+   final reviews from the endgame team for the release. _Note: Make sure to
+   specify which packages are being updated for your reviewers._
 
 5. Once everything is green and your Pull Request has been reviewed, you should
    **close** the draft Pull Request.
@@ -443,16 +440,18 @@ already exist in the project. These updates are reserved for
 6. On your machine, you should then follow the following steps to publish to
    `next`:
 
-   - Make sure
-     [your environment is consistent with `upstream`](#making-sure-your-environment-is-consistent-with-upstream)
-   - Run `yarn lerna publish from-package --dist-tag next` to publish all
-     packages under the `next` tag
-   - Run the smoke tests that we have listed [here](#testing) with the published
-     packages
+   - From your **PR branch**, run
+     `yarn lerna publish from-package --dist-tag next` to publish all packages
+     under the `next` tag
+   - After publishing to `next`, run the smoke tests that we have listed
+     [here](#testing) with the published packages
 
-7. If everything looks good to go, then you should go through each of the
-   packages and add the `latest` tag using the command:
-   `npm dist-tag add package-name@vX.Y.Z latest`
+7. If everything looks good to go, checkout `master` and pull the latest
+   upstream. Then you should go through each of the updated packages and add the
+   `latest` tag using the command:
+   `npm dist-tag add package-name@vX.Y.Z latest`. For example, if you just
+   released `10.6.1` under `next`, this would look like
+   `npm dist-tag add carbon-components@10.6.1 latest`.
 
    - Manually check to see that the `latest` tags were updated for the packages
      correctly by going to [`npm`](https://www.npmjs.com), searching the
@@ -471,11 +470,10 @@ sanity check our code. ​
    `chore/release-vX.Y.Z-rc.X`. For example, if we’re cutting the first RC for
    `v10.6` the branch would be `chore/release-v10.6.0-rc.0`, the second RC would
    be `chore/release-v10.6.0-rc.1` and so on.
-3. Once you’ve created the branch, run `yarn lerna version preminor --exact
-   --preid rc --no-push --no-git-tag-version -m 'chore(release): update package
-   versions'``
+3. Once you’ve created the branch, run
+   `yarn lerna version preminor --exact --preid rc --no-push --no-git-tag-version -m 'chore(release): update package versions'`
 4. Open a PR with the changes, and merge after approval.
-5. Once the PR is merged, run the following scripts from master to publish the
+5. Once the PR is merged, run the following scripts from `master` to publish the
    RC under the `next` tag: ​
 
    ```
@@ -553,7 +551,7 @@ can be released on-demand in specific circumstances.
    `npm dist-tag add package-name@X.Y.Z latest` for each of the updated
    packages. For example, when releasing `10.6`, this would look like:
 
-   ```
+   ```bash
    npm dist-tag add carbon-components@10.6.0 latest
    npm dist-tag add carbon-components-react@7.6.0 latest
    npm dist-tag add @carbon/elements@10.6.0 latest
