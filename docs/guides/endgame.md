@@ -120,6 +120,7 @@ Checklist:
   - [ ] Submit post for content review (Connor)
   - [ ] Get blog post banner from design (Jeannie)
   - [ ] Publish and announce via Slack
+- [ ] Website PR to add blog post to homepage
 - [ ] Schedule future meetings:
   - [ ] Week 3: Thursday mid-project demo day
   - [ ] Week 6: Monday project planning meeting
@@ -274,7 +275,7 @@ Checklist:
 - [ ] Collect feedback from teams for critical dates
 - [ ] Follow-up and help to coordinate delivery of items
 - [ ] Make determination on ship/no-ship together with endgame team
-- [ ] Have teams comment project outcomes in endgame issue
+- [ ] Have teams comment project outcomes in endgame issue (set hard deadline)
 
 ### Week 6: Release and planning
 
@@ -286,7 +287,10 @@ Checklist:
 
 - [ ] Release on Monday under `next` tag
 - [ ] Switch to `latest` on Tuesday alongside morning announcements
-- [ ] Release demo (1 hours)
+- [ ] Website PR to update our
+      [What's new](https://www.carbondesignsystem.com/updates/whats-new) and
+      [Roadmap](https://www.carbondesignsystem.com/updates/roadmap) page
+- [ ] Release demo (1 hour)
   - Those invited should be direct team and board members
 - [ ] Release retro (1 - 2 hours)
   - Those invited should be direct team members
