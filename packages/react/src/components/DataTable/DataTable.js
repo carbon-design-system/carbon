@@ -362,7 +362,6 @@ export default class DataTable extends React.Component {
    * Helper utility to get all of the available rows after applying the filter
    * @returns {Array<string>} the array of rowIds that are currently included through the filter
    *  */
-
   getFilteredRowIds = () => {
     const filteredRowIds =
       typeof this.state.filterInputValue === 'string'
@@ -373,6 +372,9 @@ export default class DataTable extends React.Component {
             inputValue: this.state.filterInputValue,
           })
         : this.state.rowIds;
+    if (filteredRowIds.length == 0) {
+      return this.state.rowIds;
+    }
     return filteredRowIds;
   };
 
