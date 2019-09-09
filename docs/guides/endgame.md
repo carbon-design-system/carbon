@@ -388,7 +388,7 @@ already exist in the project. These updates are reserved for
      you something similar to:
 
      ```bash
-     ? SHould we include commit: 2953c461a Non-commit syntax message here
+     ? Should we include commit: 2953c461a Non-commit syntax message here
      ```
 
      Type `y` to include it in the patch release or `n` to exclude it. If it's
