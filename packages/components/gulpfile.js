@@ -9,7 +9,7 @@ const http = require('http');
 const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
-const deduper = require('postcss-discard-duplicates');
+const customProperties = require('postcss-custom-properties');
 // load dart-sass
 const dartSass = require('sass');
 // required for dart-sass - async builds are significantly slower without this package
@@ -32,11 +32,9 @@ const gulp = require('gulp');
 const rename = require('gulp-rename');
 const sourcemaps = require('gulp-sourcemaps');
 const header = require('gulp-header');
-const concat = require('gulp-concat');
 const jsdoc = require('gulp-jsdoc3');
 const log = require('fancy-log');
 const through = require('through2');
-const merge = require('merge2');
 
 // Rollup
 const { rollup } = require('rollup');
@@ -81,10 +79,6 @@ const cloptions = commander
   .option(
     '-b, --use-breaking-changes',
     'Build with breaking changes turned on (For dev build only)'
-  )
-  .option(
-    '--use-custom-properties',
-    'Build CSS with custom properties (For dev build only)'
   )
   .option(
     '-e, --use-experimental-features',
@@ -146,7 +140,7 @@ gulp.task('clean', () =>
  * JavaScript Tasks
  */
 
-const { useBreakingChanges, useCustomProperties, useDartSass } = cloptions;
+const { useBreakingChanges, useDartSass } = cloptions;
 let { useExperimentalFeatures } = cloptions;
 
 let sassDefaultOptions = {};
@@ -402,44 +396,28 @@ gulp.task('sass:dev', () => {
     flags['components-x'] = useExperimentalFeatures;
     flags.grid = useExperimentalFeatures;
   }
-  const createStream = (theme = 'white') =>
-    gulp
-      .src('demo/scss/demo.scss')
-      .pipe(sourcemaps.init())
-      .pipe(
-        header(`
-        $demo--carbon--theme-name: ${theme};
-        $feature-flags: (${Object.keys(flags)
-          .reduce((a, flag) => [...a, `${flag}: ${!!flags[flag]}`], [])
-          .join(', ')});
-      `)
-      )
-      .pipe(
-        sass(
-          Object.assign({}, sassDefaultOptions, {
-            includePaths: ['node_modules'],
-            outputStyle: 'expanded',
-          })
-        ).on('error', sass.logError)
-      );
-  if (useCustomProperties) {
-    return merge(createStream(), createStream('custom-properties'))
-      .pipe(concat('demo.css'))
-      .pipe(
-        postcss([
-          deduper(),
-          autoprefixer({
-            browsers: ['> 1%', 'last 2 versions'],
-          }),
-        ])
-      )
-      .pipe(sourcemaps.write('.'))
-      .pipe(gulp.dest('demo'))
-      .pipe(browserSync.stream({ match: '**/*.css' }));
-  }
-  return createStream()
+  return gulp
+    .src('demo/scss/demo.scss')
+    .pipe(sourcemaps.init())
+    .pipe(
+      header(`
+      $demo--carbon--theme-name: 'custom-properties';
+      $feature-flags: (${Object.keys(flags)
+        .reduce((a, flag) => [...a, `${flag}: ${!!flags[flag]}`], [])
+        .join(', ')});
+     `)
+    )
+    .pipe(
+      sass(
+        Object.assign({}, sassDefaultOptions, {
+          includePaths: ['node_modules'],
+          outputStyle: 'expanded',
+        })
+      ).on('error', sass.logError)
+    )
     .pipe(
       postcss([
+        customProperties(),
         autoprefixer({
           browsers: ['> 1%', 'last 2 versions'],
         }),

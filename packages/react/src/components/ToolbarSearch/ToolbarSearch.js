@@ -58,6 +58,7 @@ export default class ToolbarSearch extends Component {
     labelText: '',
     placeHolderText: '',
     role: 'search',
+    labelId: 'search__label',
   };
 
   state = {
@@ -85,6 +86,7 @@ export default class ToolbarSearch extends Component {
       placeHolderText,
       labelText,
       role,
+      labelId,
       ...other
     } = this.props;
 
@@ -97,7 +99,7 @@ export default class ToolbarSearch extends Component {
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
         <div className={searchClasses} role={role}>
-          <label htmlFor={id} className={`${prefix}--label`}>
+          <label htmlFor={id} className={`${prefix}--label`} id={labelId}>
             {labelText}
           </label>
           <input
@@ -105,6 +107,7 @@ export default class ToolbarSearch extends Component {
             type={type}
             className={`${prefix}--search-input`}
             id={id}
+            aria-labelledby={labelId}
             placeholder={placeHolderText}
             ref={input => {
               this.input = input;
