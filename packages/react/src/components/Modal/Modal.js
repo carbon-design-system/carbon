@@ -346,7 +346,7 @@ export default class Modal extends Component {
           {!passiveModal && modalButton}
         </div>
         <div
-          // Needs the tabIndex so that this area is scrollable when the text is long
+          // Needs the tabIndex so that this area is focusable when the text is scrollable
           tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
           role="region"
           aria-labelledby={getAriaLabelledBy}
