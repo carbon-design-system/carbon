@@ -21,10 +21,12 @@
     - [Publishing steps](#publishing-steps)
   - [Patch releases](#patch-releases)
     - [Publishing steps](#publishing-steps-1)
-  - [Minor releases](#minor-releases)
+  - [Release candidate releases](#release-candidate-releases)
     - [Publishing steps](#publishing-steps-2)
-  - [Major releases](#major-releases)
+  - [Minor releases](#minor-releases)
     - [Publishing steps](#publishing-steps-3)
+  - [Major releases](#major-releases)
+    - [Publishing steps](#publishing-steps-4)
 - [Testing](#testing)
   - [Procedures](#procedures)
     - [`create-react-app`](#create-react-app)
@@ -171,6 +173,8 @@ Checklist:
 </details>
 
 ### Week 2: Project work
+
+Checklist:
 
 - [ ] Patch release on Monday
 
@@ -447,6 +451,10 @@ already exist in the project. These updates are reserved for
    - If everything looks good to go, then you should go through each of the
      packages and add the `latest` tag using the command:
      `npm dist-tag add package-name@vX.Y.Z latest`
+   - Manually check to see that the `latest` tags were updated for the packages
+     correctly by going to [`npm`](https://www.npmjs.com), searching the
+     packages, viewing the versions and making sure the `latest` version matches
+     the version you just released.
 
 ### Release Candidates releases
 
@@ -475,8 +483,9 @@ sanity check our code. ​
    ```
 
 6. Manually check to see that the `next` tag was updated for the packages
-   correctly by going to `npm`, searching the packages, viewing the versions and
-   making sure the `next` version matches the version you just released.
+   correctly by going to [`npm`](https://www.npmjs.com), searching the packages,
+   viewing the versions and making sure the `next` version matches the version
+   you just released.
 
 ### Minor releases
 
@@ -509,8 +518,8 @@ can be released on-demand in specific circumstances.
      ? Are you sure you want to create these versions? (ynH)
      ```
 
-     - If everything looks good, you can enter in `y` for `Yes` and `lerna` will
-       handle versioning the corresponding packages.
+   - If everything looks good, you can enter in `y` for `Yes` and `lerna` will
+     handle versioning the corresponding packages.
 
 3. After the package versions have been created, you'll be prompted
    `The next step will be to manually create a Pull Request for this branch`.
@@ -533,8 +542,9 @@ can be released on-demand in specific circumstances.
    [release](https://github.com/carbon-design-system/carbon/releases) changelog
    for the version. Make sure the title matches the existing tag, `vX.Y.Z`.
 7. Manually check to see that the `next` tag was updated for the packages
-   correctly by going to `npm`, searching the packages, viewing the versions and
-   making sure the `next` version matches the version you just released.
+   correctly by going to [`npm`](https://www.npmjs.com), searching the packages,
+   viewing the versions and making sure the `next` version matches the version
+   you just released.
 
 8. When you're ready to update `latest`, run
    `npm dist-tag add package-name@X.Y.Z latest` for each of the updated
@@ -554,8 +564,10 @@ can be released on-demand in specific circumstances.
    npm dist-tag add @carbon/themes@10.6.0 latest
    ```
 
-9. Like before, manually check that the `latest` tags were updated correctly by
-   going to `npm`.
+9. Like before, manually check to see that the `latest` tags were updated for
+   the packages correctly by going to [`npm`](https://www.npmjs.com), searching
+   the packages, viewing the versions and making sure the `latest` version
+   matches the version you just released.
 
 ### Major releases
 
