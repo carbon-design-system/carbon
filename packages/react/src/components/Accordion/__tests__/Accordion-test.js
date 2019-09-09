@@ -5,11 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, cleanup } from '@carbon/test-utils/react';
 import { mount } from 'enzyme';
 import React from 'react';
 import { default as Accordion, AccordionItem } from '../';
 
 describe('Accordion', () => {
+  afterEach(cleanup);
+
   it('should render', () => {
     const wrapper = mount(
       <Accordion className="extra-class">
@@ -17,7 +20,7 @@ describe('Accordion', () => {
           Panel A
         </AccordionItem>
         <AccordionItem className="child" title="Heading B">
-          Panel B{' '}
+          Panel B
         </AccordionItem>
         <AccordionItem className="child" title="Heading C">
           Panel C
@@ -26,5 +29,23 @@ describe('Accordion', () => {
     );
 
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should have no AVT1 violations', async () => {
+    render(
+      <Accordion className="extra-class">
+        <AccordionItem className="child" title="Heading A">
+          Panel A
+        </AccordionItem>
+        <AccordionItem className="child" title="Heading B">
+          Panel B
+        </AccordionItem>
+        <AccordionItem className="child" title="Heading C">
+          Panel C
+        </AccordionItem>
+      </Accordion>
+    );
+
+    await expect(document).toHaveNoViolations();
   });
 });
