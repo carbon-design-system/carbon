@@ -345,7 +345,14 @@ export default class Modal extends Component {
           <h3 className={`${prefix}--modal-header__heading`}>{modalHeading}</h3>
           {!passiveModal && modalButton}
         </div>
-        <div className={`${prefix}--modal-content`}>{this.props.children}</div>
+        <div
+          // Needs the tabIndex so that this area is scrollable when the text is long
+          tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+          role="region"
+          aria-labelledby={getAriaLabelledBy}
+          className={`${prefix}--modal-content`}>
+          {this.props.children}
+        </div>
         {!passiveModal && (
           <div className={`${prefix}--modal-footer`}>
             <Button kind="secondary" onClick={onSecondaryButtonClick}>
