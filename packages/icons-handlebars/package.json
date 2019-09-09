@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/icons-handlebars",
   "description": "Handlebars helpers for IBM Design Language icons in digital and software products using the Carbon Design System",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-handlebars",
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@rocketsoftware/icon-helpers": "0.0.5",
-    "@rocketsoftware/icons": "0.0.5"
+    "@rocketsoftware/icons": "^0.0.6"
   },
   "devDependencies": {
     "handlebars": "^4.0.12"

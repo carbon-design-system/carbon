@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/icons-react",
   "description": "React components for icons in digital and software products using the Carbon Design System",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -32,8 +32,8 @@
     "@rocketsoftware/icon-helpers": "0.0.5"
   },
   "devDependencies": {
-    "@carbon/icon-build-helpers": "0.2.0",
-    "@rocketsoftware/icons": "0.0.5"
+    "@carbon/icon-build-helpers": "^0.0.6",
+    "@rocketsoftware/icons": "^0.0.6"
   },
   "sideEffects": false
 }
