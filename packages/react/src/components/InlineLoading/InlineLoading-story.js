@@ -89,7 +89,7 @@ storiesOf('InlineLoading', module)
                 <InlineLoading
                   style={{ marginLeft: '1rem' }}
                   description={description}
-                  success={success}
+                  status={success ? 'finished' : 'active'}
                   aria-live={ariaLive}
                 />
               ) : (
