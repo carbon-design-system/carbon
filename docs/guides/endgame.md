@@ -456,7 +456,7 @@ already exist in the project. These updates are reserved for
      packages, viewing the versions and making sure the `latest` version matches
      the version you just released.
 
-### Release Candidates releases
+### Release Candidate releases
 
 ​ Before our minor releases, we cut Release Candidates a week in advance to
 sanity check our code. ​
