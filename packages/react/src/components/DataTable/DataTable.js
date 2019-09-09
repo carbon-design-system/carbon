@@ -304,7 +304,6 @@ export default class DataTable extends React.Component {
     const checked = rowCount > 0 && selectedRowCount === rowCount;
     const indeterminate =
       rowCount > 0 && selectedRowCount > 0 && selectedRowCount !== rowCount;
-
     const translationKey = checked
       ? translationKeys.unselectAll
       : translationKeys.selectAll;
@@ -360,6 +359,26 @@ export default class DataTable extends React.Component {
     });
 
   /**
+   * Helper utility to get all of the available rows after applying the filter
+   * @returns {Array<string>} the array of rowIds that are currently included through the filter
+   *  */
+  getFilteredRowIds = () => {
+    const filteredRowIds =
+      typeof this.state.filterInputValue === 'string'
+        ? this.props.filterRows({
+            rowIds: this.state.rowIds,
+            headers: this.props.headers,
+            cellsById: this.state.cellsById,
+            inputValue: this.state.filterInputValue,
+          })
+        : this.state.rowIds;
+    if (filteredRowIds.length == 0) {
+      return this.state.rowIds;
+    }
+    return filteredRowIds;
+  };
+
+  /**
    * Helper for getting the table prefix for elements that require an
    * `id` attribute that is unique.
    *
@@ -373,7 +392,7 @@ export default class DataTable extends React.Component {
    * @param {object} initialState
    * @returns {object} object to put into this.setState (use spread operator)
    */
-  setAllSelectedState = (initialState, isSelected) => {
+  setAllSelectedState = (initialState, isSelected, filteredRowIds) => {
     const { rowIds } = initialState;
     return {
       rowsById: rowIds.reduce(
@@ -381,7 +400,10 @@ export default class DataTable extends React.Component {
           ...acc,
           [id]: {
             ...initialState.rowsById[id],
-            isSelected: initialState.rowsById[id].disabled ? false : isSelected,
+            isSelected:
+              initialState.rowsById[id].disabled || !filteredRowIds.includes(id)
+                ? false
+                : isSelected,
           },
         }),
         {}
@@ -397,7 +419,7 @@ export default class DataTable extends React.Component {
     this.setState(state => {
       return {
         shouldShowBatchActions: false,
-        ...this.setAllSelectedState(state, false),
+        ...this.setAllSelectedState(state, false, this.getFilteredRowIds()),
       };
     });
   };
@@ -407,14 +429,18 @@ export default class DataTable extends React.Component {
    */
   handleSelectAll = () => {
     this.setState(state => {
-      const { rowIds, rowsById } = state;
-      const selectableRows = rowIds.reduce((acc, rowId) => {
+      const filteredRowIds = this.getFilteredRowIds();
+      const { rowsById } = state;
+      const selectableRows = this.state.rowIds.reduce((acc, rowId) => {
         return (acc += rowsById[rowId].disabled ? 0 : 1);
       }, 0);
-      const isSelected = this.getSelectedRows().length !== selectableRows;
+      var isSelected = this.getSelectedRows().length !== selectableRows;
+      if (typeof this.state.filterInputValue === 'string') {
+        isSelected = !rowsById[filteredRowIds[0]].isSelected;
+      }
       return {
         shouldShowBatchActions: isSelected,
-        ...this.setAllSelectedState(state, isSelected),
+        ...this.setAllSelectedState(state, isSelected, filteredRowIds),
       };
     });
   };
