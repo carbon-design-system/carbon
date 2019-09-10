@@ -369,29 +369,32 @@ export class ModalHeader extends Component {
   }
 }
 
-export class ModalBody extends Component {
-  static propTypes = {
-    /**
-     * Specify an optional className to be added to the Modal Body node
-     */
-    className: PropTypes.string,
-  };
-
-  render() {
-    const { className, children, ...other } = this.props;
-
-    const contentClass = classNames({
-      [`${prefix}--modal-content`]: true,
-      [className]: className,
-    });
-
-    return (
-      <div className={contentClass} {...other}>
-        {children}
-      </div>
-    );
-  }
+export function ModalBody(props) {
+  const { className, children, hasScrollingContent, ...other } = props;
+  const contentClass = classNames({
+    [`${prefix}--modal-content`]: true,
+    [className]: className,
+  });
+  return (
+    <div
+      className={contentClass}
+      tabIndex={hasScrollingContent ? 0 : null} // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      {...other}>
+      {children}
+    </div>
+  );
 }
+ModalBody.propTypes = {
+  /**
+   * Specify an optional className to be added to the Modal Body node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether the modal contains scrolling content
+   */
+  hasScrollingContent: PropTypes.bool,
+};
 
 export class ModalFooter extends Component {
   static propTypes = {
