@@ -1,12 +1,12 @@
 {
   "name": "@rocketsoftware/carbon-components-react",
-  "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
+  "description": "React components for Carbon.",
   "version": "0.0.6",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/react",
-  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "repository": "https://github.com/RocketSoftware/carbon/tree/master/packages/react",
+  "bugs": "https://github.com/RocketSoftware/carbon/issues",
   "files": [
     "lib/**/*",
     "es/**/*",

@@ -3,15 +3,15 @@
   "description": "Grid for digital and software products using the Carbon Design System",
   "version": "0.0.6",
   "license": "Apache-2.0",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/grid",
-  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "repository": "https://github.com/RocketSoftware/carbon/tree/master/packages/grid",
+  "bugs": "https://github.com/RocketSoftware/carbon/issues",
   "files": [
     "css",
     "scss"
   ],
   "keywords": [
     "eyeglass-module",
-    "ibm",
+    "rocketsoftware",
     "elements",
     "carbon",
     "carbon-elements",

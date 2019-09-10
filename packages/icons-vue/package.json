@@ -1,6 +1,6 @@
 {
   "name": "@rocketsoftware/icons-vue",
-  "description": "Vue components for icons in digital and software products using the Carbon Design System",
+  "description": "Vue components for icons",
   "version": "0.0.6",
   "license": "Apache-2.0",
   "main": "lib/index.js",

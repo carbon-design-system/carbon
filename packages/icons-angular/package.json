@@ -1,12 +1,12 @@
 {
   "name": "@rocketsoftware/icons-angular",
   "private": true,
-  "description": "Angular components for icons in digital and software products using the Carbon Design System",
+  "description": "Angular components for icons",
   "version": "0.0.5",
   "license": "Apache-2.0",
   "main": "lib/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-angular",
-  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "repository": "https://github.com/RocketSoftware/carbon/tree/master/packages/icons-angular",
+  "bugs": "https://github.com/RocketSoftware/carbon/issues",
   "files": [
     "lib",
     "umd"
