@@ -3,7 +3,6 @@
 exports[`DataTable.TableBatchAction should render 1`] = `
 <TableBatchAction
   className="custom-class"
-  iconDescription="Add"
   renderIcon={
     Object {
       "$$typeof": Symbol(react.forward_ref),
@@ -14,7 +13,6 @@ exports[`DataTable.TableBatchAction should render 1`] = `
   <ForwardRef(Button)
     className="custom-class"
     disabled={false}
-    iconDescription="Add"
     kind="primary"
     renderIcon={
       Object {
@@ -33,12 +31,10 @@ exports[`DataTable.TableBatchAction should render 1`] = `
     >
       <ForwardRef(AddFilled16)
         aria-hidden="true"
-        aria-label="Add"
         className="bx--btn__icon"
       >
         <Icon
           aria-hidden="true"
-          aria-label="Add"
           className="bx--btn__icon"
           height={16}
           preserveAspectRatio="xMidYMid meet"
@@ -47,13 +43,11 @@ exports[`DataTable.TableBatchAction should render 1`] = `
           xmlns="http://www.w3.org/2000/svg"
         >
           <svg
-            aria-hidden="true"
-            aria-label="Add"
+            aria-hidden={true}
             className="bx--btn__icon"
             focusable="false"
             height={16}
             preserveAspectRatio="xMidYMid meet"
-            role="img"
             style={
               Object {
                 "willChange": "transform",
