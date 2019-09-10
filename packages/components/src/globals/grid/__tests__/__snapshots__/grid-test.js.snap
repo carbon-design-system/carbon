@@ -100,6 +100,10 @@ em {
     .bx--grid {
       padding-left: 2rem;
       padding-right: 2rem; } }
+  @media (min-width: 99rem) {
+    .bx--grid {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem; } }
 
 @media (min-width: 99rem) {
   .bx--grid--full-width {

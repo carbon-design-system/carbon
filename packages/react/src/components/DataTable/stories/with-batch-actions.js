@@ -76,7 +76,7 @@ export default props => (
           <TableToolbarContent>
             <TableToolbarSearch onChange={onInputChange} />
             <TableToolbarMenu>
-              <TableToolbarAction onClick={() => alert('Alert 1')}>
+              <TableToolbarAction primaryFocus onClick={() => alert('Alert 1')}>
                 Action 1
               </TableToolbarAction>
               <TableToolbarAction onClick={() => alert('Alert 2')}>

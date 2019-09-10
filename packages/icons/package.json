@@ -1,22 +1,21 @@
 {
   "name": "@rocketsoftware/icons",
   "description": "Icons for digital and software products using the Carbon Design System",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons",
-  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "repository": "https://github.com/RocketSoftware/carbon/tree/master/packages/icons",
+  "bugs": "https://github.com/RocketSoftware/carbon/issues",
   "files": [
     "es",
     "lib",
     "scss",
     "svg",
-    "umd",
     "metadata.json"
   ],
   "keywords": [
-    "ibm",
+    "rocketsoftware",
     "elements",
     "carbon",
     "carbon-elements",
@@ -30,19 +29,10 @@
   "scripts": {
     "build": "yarn clean && node tasks/build.js && bundler sassdoc \"scss/*.scss\"",
     "ci-check": "node tasks/ci-check.js",
-    "clean": "rimraf es lib svg umd build-info.json metadata.json",
+    "clean": "rimraf es lib build-info.json metadata.json",
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "@carbon/cli-reporter": "10.3.0",
-    "change-case": "^3.0.2",
-    "joi": "^14.3.1",
-    "js-yaml": "^3.12.1",
-    "klaw-sync": "^6.0.0",
-    "memfs": "^2.14.0",
-    "prettier": "^1.17.0",
-    "rimraf": "^2.6.2",
-    "rollup": "^0.66.6",
-    "svgo": "^1.1.1"
+    "@carbon/icon-build-helpers": "^0.2.0"
   }
 }

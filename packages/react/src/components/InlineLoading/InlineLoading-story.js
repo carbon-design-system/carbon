@@ -8,12 +8,16 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
+import { withKnobs, number, select, text } from '@storybook/addon-knobs';
 import Button from '../Button';
 import InlineLoading from '../InlineLoading';
 
 const props = () => ({
-  success: boolean('Loading successful state (success)', false),
+  status: select(
+    'Loading status (status)',
+    ['inactive', 'active', 'finished', 'error'],
+    'active'
+  ),
   iconDescription: text(
     'Icon description (iconDescription)',
     'Active loading indicator'

@@ -468,7 +468,6 @@ export default class Slider extends PureComponent {
               className={inputClasses}
               value={value}
               onChange={this.handleChange}
-              labelText=""
               aria-label={ariaLabelInput}
               disabled={disabled}
             />

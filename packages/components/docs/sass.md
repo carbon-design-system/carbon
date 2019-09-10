@@ -149,6 +149,7 @@
   - [✅inverse-support-04 [variable]](#inverse-support-04-variable)
   - [✅overlay-01 [variable]](#overlay-01-variable)
   - [✅focus [variable]](#focus-variable)
+  - [✅inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [✅hover-primary [variable]](#hover-primary-variable)
   - [✅active-primary [variable]](#active-primary-variable)
   - [✅hover-primary-text [variable]](#hover-primary-text-variable)
@@ -286,7 +287,6 @@
   - [❌loading\_\_gap [variable]](#loading__gap-variable)
   - [❌loading\_\_size [variable]](#loading__size-variable)
 - [modal](#modal)
-  - [❌modal--color [mixin]](#modal--color-mixin)
   - [❌modal [mixin]](#modal-mixin)
 - [multi-select](#multi-select)
   - [❌multiselect [mixin]](#multiselect-mixin)
@@ -1739,7 +1739,7 @@ $carbon--grid-breakpoints: (
   ),
   max: (
     columns: 16,
-    margin: carbon--rem(16px),
+    margin: carbon--rem(24px),
     width: carbon--rem(1584px),
   ),
 );
@@ -2174,6 +2174,7 @@ Convert a given px unit to a rem unit
   - [carbon--base-font-size [variable]](#carbon--base-font-size-variable)
 - **Used by**:
   - [carbon--mini-units [function]](#carbon--mini-units-function)
+  - [toggle [mixin]](#toggle-mixin)
 
 ### ✅carbon--em [function]
 
@@ -2380,7 +2381,6 @@ Get the value of the corresponding number of units
   - [listbox [mixin]](#listbox-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
   - [pagination [mixin]](#pagination-mixin)
-  - [toggle [mixin]](#toggle-mixin)
   - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
 
 ### ✅carbon--spacing-01 [variable]
@@ -2423,7 +2423,6 @@ $carbon--spacing-02: carbon--mini-units(0.5);
   - `spacing-02`
 - **Used by**:
   - [date-picker [mixin]](#date-picker-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -2491,6 +2490,7 @@ $carbon--spacing-04: carbon--mini-units(1.5);
   - `spacing-04`
 - **Used by**:
   - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -2584,6 +2584,7 @@ $carbon--spacing-07: carbon--mini-units(4);
   - `spacing-07`
 - **Used by**:
   - [snippet [mixin]](#snippet-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -2613,7 +2614,6 @@ $carbon--spacing-08: carbon--mini-units(5);
   - [search [mixin]](#search-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
-  - [toggle [mixin]](#toggle-mixin)
 
 ### ✅carbon--spacing-09 [variable]
 
@@ -2773,6 +2773,7 @@ $spacing-03: $carbon--spacing-03;
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ### ✅spacing-04 [variable]
@@ -3565,6 +3566,7 @@ Define theme variables from a map of tokens
   $inverse-support-04: map-get($theme, 'inverse-support-04') !global;
   $overlay-01: map-get($theme, 'overlay-01') !global;
   $focus: map-get($theme, 'focus') !global;
+  $inverse-focus-ui: map-get($theme, 'inverse-focus-ui') !global;
   $hover-primary: map-get($theme, 'hover-primary') !global;
   $active-primary: map-get($theme, 'active-primary') !global;
   $hover-primary-text: map-get($theme, 'hover-primary-text') !global;
@@ -3627,6 +3629,7 @@ Define theme variables from a map of tokens
     --inverse-support-04: #{map-get($theme, 'inverse-support-04')};
     --overlay-01: #{map-get($theme, 'overlay-01')};
     --focus: #{map-get($theme, 'focus')};
+    --inverse-focus-ui: #{map-get($theme, 'inverse-focus-ui')};
     --hover-primary: #{map-get($theme, 'hover-primary')};
     --active-primary: #{map-get($theme, 'active-primary')};
     --hover-primary-text: #{map-get($theme, 'hover-primary-text')};
@@ -3734,6 +3737,7 @@ Define theme variables from a map of tokens
   - [inverse-support-04 [variable]](#inverse-support-04-variable)
   - [overlay-01 [variable]](#overlay-01-variable)
   - [focus [variable]](#focus-variable)
+  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [hover-primary [variable]](#hover-primary-variable)
   - [active-primary [variable]](#active-primary-variable)
   - [hover-primary-text [variable]](#hover-primary-text-variable)
@@ -3805,6 +3809,7 @@ $carbon--theme--white: (
   inverse-support-04: #408bfc,
   overlay-01: rgba(23, 23, 23, 0.5),
   focus: #0062ff,
+  inverse-focus-ui: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
   hover-primary-text: #054ada,
@@ -3884,6 +3889,7 @@ $carbon--theme--g10: (
   inverse-support-04: #408bfc,
   overlay-01: rgba(23, 23, 23, 0.5),
   focus: #0062ff,
+  inverse-focus-ui: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
   hover-primary-text: #054ada,
@@ -3961,6 +3967,7 @@ $carbon--theme--g90: (
   inverse-support-04: #0062ff,
   overlay-01: rgba(23, 23, 23, 0.7),
   focus: #ffffff,
+  inverse-focus-ui: #0062ff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
   hover-primary-text: #97c1ff,
@@ -4038,6 +4045,7 @@ $carbon--theme--g100: (
   inverse-support-04: #0062ff,
   overlay-01: rgba(23, 23, 23, 0.7),
   focus: #ffffff,
+  inverse-focus-ui: #0062ff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
   hover-primary-text: #97c1ff,
@@ -4115,6 +4123,7 @@ $carbon--theme--v9: (
   inverse-support-04: #5aaafa,
   overlay-01: rgba(223, 227, 230, 0.5),
   focus: #3d70b2,
+  inverse-focus-ui: #3d70b2,
   hover-primary: #30588c,
   active-primary: #30588c,
   hover-primary-text: #294c86,
@@ -4244,6 +4253,7 @@ $interactive-03: map-get($carbon--theme, 'interactive-03');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
 
 ### ✅interactive-04 [variable]
 
@@ -4262,6 +4272,7 @@ $interactive-04: map-get($carbon--theme, 'interactive-04');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [inline-loading [mixin]](#inline-loading-mixin)
   - [loading [mixin]](#loading-mixin)
 
@@ -4284,6 +4295,7 @@ $ui-background: map-get($carbon--theme, 'ui-background');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅ui-01 [variable]
 
@@ -4366,6 +4378,7 @@ $ui-03: map-get($carbon--theme, 'ui-03');
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -4398,6 +4411,7 @@ $ui-04: map-get($carbon--theme, 'ui-04');
   - [button-theme [mixin]](#button-theme-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [search [mixin]](#search-mixin)
@@ -4608,6 +4622,7 @@ $icon-02: map-get($carbon--theme, 'icon-02');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [text-input [mixin]](#text-input-mixin)
@@ -4634,6 +4649,7 @@ $icon-03: map-get($carbon--theme, 'icon-03');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [toggle [mixin]](#toggle-mixin)
 
@@ -4655,6 +4671,7 @@ $link-01: map-get($carbon--theme, 'link-01');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [link [mixin]](#link-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
@@ -4811,8 +4828,8 @@ $support-01: map-get($carbon--theme, 'support-01');
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
+  - [inline-loading [mixin]](#inline-loading-mixin)
   - [listbox [mixin]](#listbox-mixin)
-  - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -4839,7 +4856,6 @@ $support-02: map-get($carbon--theme, 'support-02');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -5010,6 +5026,23 @@ $focus: map-get($carbon--theme, 'focus');
   - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
   - [toggle [mixin]](#toggle-mixin)
+
+### ✅inverse-focus-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-focus-ui: map-get($carbon--theme, 'inverse-focus-ui');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅hover-primary [variable]
 
@@ -5358,6 +5391,7 @@ $disabled-01: map-get($carbon--theme, 'disabled-01');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [slider [mixin]](#slider-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -5387,6 +5421,7 @@ $disabled-02: map-get($carbon--theme, 'disabled-02');
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [link [mixin]](#link-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -6258,7 +6293,6 @@ $prefix: 'bx';
   - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [loading [mixin]](#loading-mixin)
-  - [modal--color [mixin]](#modal--color-mixin)
   - [modal [mixin]](#modal-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -8555,6 +8589,7 @@ fixed contexts.
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [carbon--default-type [mixin]](#carbon--default-type-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ## @rocketsoftware/grid
@@ -10277,6 +10312,11 @@ Data table action styles
   .#{$prefix}--toolbar-action:focus:not([disabled]),
   .#{$prefix}--toolbar-action:active:not([disabled]) {
     @include focus-outline('outline');
+
+    &.#{$prefix}--toolbar-search-container-expandable {
+      // The focus style is handled by search input in it, need to avoid duplicate animation
+      outline: none;
+    }
   }
 
   .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
@@ -12625,7 +12665,6 @@ File uploader styles
   .#{$prefix}--file--label {
     @include reset;
     @include type-style('heading-01');
-
     color: $text-01;
     margin-bottom: $carbon--spacing-03;
   }
@@ -12634,10 +12673,58 @@ File uploader styles
     @include hidden;
   }
 
+  // This class is of old markup with "select file" button
+  // New code should use link-style "select file" UI (`.bx--file-browse-btn`)
+  // TODO: deprecate this block
   .#{$prefix}--file-btn {
     display: inline-flex;
     margin: 0;
     padding-right: rem(64px);
+  }
+
+  .#{$prefix}--file-browse-btn {
+    margin-bottom: $carbon--spacing-03;
+    display: inline-block;
+    width: 100%;
+    color: $link-01;
+    outline: none;
+    transition: $duration--fast-02 motion(standard, productive);
+    cursor: pointer;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+
+    &:focus,
+    &:hover {
+      outline: 2px solid $interactive-03;
+    }
+
+    &:hover,
+    &:focus,
+    &:active,
+    &:active:visited {
+      text-decoration: underline;
+    }
+
+    &:active {
+      color: $text-01;
+    }
+  }
+
+  .#{$prefix}--file-browse-btn--disabled {
+    cursor: no-drop;
+    text-decoration: none;
+    color: $disabled-02;
+
+    &:hover,
+    &:focus {
+      outline: none;
+      text-decoration: none;
+      color: $disabled-02;
+    }
+  }
+
+  .#{$prefix}--file-browse-btn--disabled .#{$prefix}--file__drop-container {
+    border: 1px dashed $disabled-01;
   }
 
   .#{$prefix}--label-description {
@@ -12648,65 +12735,104 @@ File uploader styles
     margin-bottom: $carbon--spacing-05;
   }
 
-  .#{$prefix}--file-container {
-    display: block;
-    width: 100%;
+  .#{$prefix}--file-btn ~ .#{$prefix}--file-container {
     margin-top: $carbon--spacing-06;
   }
 
   .#{$prefix}--file__selected-file {
-    display: flex;
+    display: grid;
+    grid-gap: $carbon--spacing-03 $carbon--spacing-05;
+    grid-template-columns: 1fr auto;
+    grid-auto-rows: auto;
     align-items: center;
-    justify-content: space-between;
-    height: rem(40px);
-    max-width: rem(300px);
+    min-height: $carbon--spacing-07;
+    max-width: rem(320px);
     margin-bottom: $carbon--spacing-03;
-    padding: 0 $carbon--spacing-03 0 $carbon--spacing-05;
     background-color: $field-01;
-    overflow: hidden;
+    word-break: break-word;
 
     &:last-child {
       margin-bottom: 0;
     }
 
-    .#{$prefix}--inline-loading__animation,
-    .#{$prefix}--loading {
-      right: -0.25rem; // offset for loading svg container
-      width: 1.5rem;
-      height: 1.5rem;
+    .#{$prefix}--form-requirement {
+      grid-column-start: 1;
+      grid-column-end: -1;
+      max-height: none;
+      margin: 0;
     }
+
+    .#{$prefix}--loading {
+      width: $carbon--spacing-06;
+      height: $carbon--spacing-06;
+    }
+
+    .#{$prefix}--file-filename {
+      @include type-style('body-short-01');
+      margin-left: $carbon--spacing-05;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+
+  // TODO: deprecate this block
+  .#{$prefix}--file__selected-file--invalid__wrapper {
+    @include focus-outline('invalid');
+    outline-width: 1px;
+    background-color: $field-01;
+    max-width: rem(320px);
+    margin-bottom: $carbon--spacing-03;
   }
 
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
-    margin-bottom: $carbon--spacing-02;
+    outline-width: 1px;
+    padding: $carbon--spacing-04 0;
   }
 
+  .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
+    border-top: 1px solid $ui-03;
+    padding-top: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__title,
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__supplement {
+    @include type-style('label-01');
+    padding-right: $carbon--spacing-03;
+    padding-left: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__supplement {
+    color: $text-01;
+  }
+
+  // TODO: deprecate
   .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
+    @include type-style('caption-01');
     display: block;
     max-height: rem(200px);
     color: $support-01;
     font-weight: 400;
-    margin: 0 0 $carbon--spacing-03 0;
+    padding: $carbon--spacing-03 $carbon--spacing-05;
     overflow: visible;
   }
 
-  .#{$prefix}--file-filename {
-    @include type-style('body-short-01');
-    @include text-overflow(300px);
-    display: inline-block;
-    align-items: center;
+  .#{$prefix}--file__selected-file--invalid
+    + .#{$prefix}--form-requirement
+    .#{$prefix}--form-requirement__supplement {
+    padding-bottom: $carbon--spacing-03;
     color: $text-01;
-    margin-right: $carbon--spacing-05;
-    padding: 1px 0;
-    /*rtl:ignore*/
-    direction: ltr;
-    justify-content: flex-start; /*rtl:{flex-end}*/
   }
 
   .#{$prefix}--file__state-container {
     display: flex;
-    align-items: center;
+    justify-content: center;
+    min-width: 1.5rem;
+    padding-right: $carbon--spacing-03;
 
     .#{$prefix}--loading__svg {
       stroke: $ui-05;
@@ -12714,19 +12840,60 @@ File uploader styles
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-complete {
-    fill: $support-02;
+    fill: $interactive-04;
     cursor: pointer;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+
+    // for checkmark contrast
+    [data-icon-path='inner-path'] {
+      opacity: 1;
+      fill: $icon-03;
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-invalid {
+    height: $carbon--spacing-05;
+    width: $carbon--spacing-05;
+    fill: $support-01;
+    margin-right: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-close {
+    height: $carbon--spacing-05;
+    width: $carbon--spacing-05;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    fill: $icon-02;
 
     &:focus {
       @include focus-outline('border');
     }
   }
 
-  .#{$prefix}--file__state-container .#{$prefix}--file-close {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
+  .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
+    fill: $icon-02;
+  }
+
+  .#{$prefix}--file__drop-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: rem(96px);
+    max-width: rem(320px);
+    padding: $carbon--spacing-05;
+    overflow: hidden;
+    border: 1px dashed $ui-04;
+  }
+
+  .#{$prefix}--file__drop-container--drag-over {
+    background: none;
+    outline: 2px solid $interactive-03;
+    outline-offset: -2px;
   }
 }
 ```
@@ -12735,18 +12902,26 @@ File uploader styles
 
 - **Group**: [file-uploader](#file-uploader)
 - **Requires**:
-  - [text-overflow [mixin]](#text-overflow-mixin)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [support-01 [variable]](#support-01-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [link-01 [variable]](#link-01-variable)
+  - [interactive-03 [variable]](#interactive-03-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
+  - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [field-01 [variable]](#field-01-variable)
-  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
+  - [ui-03 [variable]](#ui-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
-  - [support-02 [variable]](#support-02-variable)
+  - [interactive-04 [variable]](#interactive-04-variable)
+  - [icon-03 [variable]](#icon-03-variable)
+  - [icon-02 [variable]](#icon-02-variable)
+  - [ui-04 [variable]](#ui-04-variable)
 
 ## form
 
@@ -12891,6 +13066,7 @@ Inline loading styles
   .#{$prefix}--inline-loading {
     display: flex;
     width: 100%;
+    min-height: 2rem;
     align-items: center;
 
     .#{$prefix}--loading__svg circle {
@@ -12917,9 +13093,14 @@ Inline loading styles
   }
 
   .#{$prefix}--inline-loading__checkmark-container {
-    width: 0.75rem;
-    position: absolute;
-    top: 0.75rem;
+    fill: $interactive-04;
+
+    // For deprecated older markup
+    &.#{$prefix}--inline-loading__svg {
+      width: 0.75rem;
+      position: absolute;
+      top: 0.75rem;
+    }
 
     &[hidden] {
       display: none;
@@ -12936,6 +13117,16 @@ Inline loading styles
     animation-name: stroke;
     animation-duration: 0.25s;
     animation-fill-mode: forwards;
+  }
+
+  .#{$prefix}--inline-loading--error {
+    fill: $support-01;
+    width: rem(16px);
+    height: rem(16px);
+
+    &[hidden] {
+      display: none;
+    }
   }
 
   .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
@@ -12965,6 +13156,7 @@ Inline loading styles
   - [prefix [variable]](#prefix-variable)
   - [text-02 [variable]](#text-02-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
+  - [support-01 [variable]](#support-01-variable)
 
 ## link
 
@@ -13951,27 +14143,6 @@ $loading__size: 10.5rem;
 
 ## modal
 
-### ❌modal--color [mixin]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin modal--color() {
-  .#{$prefix}--modal-container {
-    border-top-color: $color;
-  }
-}
-```
-
-</details>
-
-- **Group**: [modal](#modal)
-- **Requires**:
-  - [prefix [variable]](#prefix-variable)
-- **Used by**:
-  - [modal [mixin]](#modal-mixin)
-
 ### ❌modal [mixin]
 
 Modal styles
@@ -14020,10 +14191,6 @@ Modal styles
     .#{$prefix}--number input[type='number'] {
       background-color: $field-02;
     }
-  }
-
-  .#{$prefix}--modal--danger {
-    @include modal--color($support-01);
   }
 
   .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
@@ -14157,12 +14324,10 @@ Modal styles
 
 - **Group**: [modal](#modal)
 - **Requires**:
-  - [modal--color [mixin]](#modal--color-mixin)
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [prefix [variable]](#prefix-variable)
   - [overlay-01 [variable]](#overlay-01-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [support-01 [variable]](#support-01-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-02 [variable]](#text-02-variable)
@@ -15072,6 +15237,10 @@ Overflow menu styles
 
   .#{$prefix}--overflow-menu-options--open {
     display: flex;
+  }
+
+  .#{$prefix}--overflow-menu-options__content {
+    width: 100%;
   }
 
   .#{$prefix}--overflow-menu-options__option {
@@ -17958,8 +18127,8 @@ Toggle styles
 
   .#{$prefix}--toggle__appearance {
     position: relative;
-    width: rem(48px);
-    height: rem(24px);
+    width: carbon--rem(48px);
+    height: carbon--rem(24px);
 
     // Toggle background oval
     &:before {
@@ -17969,9 +18138,9 @@ Toggle styles
       background-color: $ui-04;
       cursor: pointer;
       box-sizing: border-box;
-      height: rem(24px);
-      width: rem(48px);
-      border-radius: rem(15px);
+      height: carbon--rem(24px);
+      width: carbon--rem(48px);
+      border-radius: carbon--rem(15px);
       top: 0;
       will-change: box-shadow;
       box-shadow: 0 0 0 2px transparent;
@@ -17985,10 +18154,10 @@ Toggle styles
       position: absolute;
       display: block;
       cursor: pointer;
-      left: 3px;
-      top: 3px;
-      width: rem(18px);
-      height: rem(18px);
+      left: carbon--rem(3px);
+      top: carbon--rem(3px);
+      width: carbon--rem(18px);
+      height: carbon--rem(18px);
       background-color: $ui-03;
       border-radius: 50%;
       content: '';
@@ -17999,8 +18168,10 @@ Toggle styles
   .#{$prefix}--toggle__check {
     fill: $ui-03;
     position: absolute;
-    left: 6px;
-    top: 6px;
+    left: carbon--rem(6px);
+    top: carbon--rem(6px);
+    width: carbon--rem(6px);
+    height: carbon--rem(5px);
     z-index: 1;
     transition: $duration--fast-01 motion(exit, productive);
     transform: scale(0.2);
@@ -18015,7 +18186,7 @@ Toggle styles
 
   .#{$prefix}--toggle__text--left {
     position: absolute;
-    left: rem(48px);
+    left: carbon--rem(48px);
   }
 
   .#{$prefix}--toggle:checked
@@ -18045,7 +18216,7 @@ Toggle styles
 
     &:after {
       background-color: $icon-03;
-      transform: translateX(24px);
+      transform: translateX(carbon--rem(24px));
     }
   }
 
@@ -18118,22 +18289,22 @@ Toggle styles
   .#{$prefix}--toggle--small
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__appearance {
-    width: rem(32px);
-    height: rem(16px);
+    width: carbon--rem(32px);
+    height: carbon--rem(16px);
 
     &:before {
       box-sizing: border-box;
-      height: rem(16px);
-      width: rem(32px);
+      height: carbon--rem(16px);
+      width: carbon--rem(32px);
       border-radius: 0.9375rem;
       top: 0;
     }
 
     &:after {
-      width: rem(10px);
-      height: rem(10px);
-      top: 3px;
-      left: 3px;
+      width: carbon--rem(10px);
+      height: carbon--rem(10px);
+      top: carbon--rem(3px);
+      left: carbon--rem(3px);
     }
   }
 
@@ -18141,13 +18312,13 @@ Toggle styles
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__check {
     fill: $support-02;
-    transform: scale(1) translateX(16px);
+    transform: scale(1) translateX(carbon--rem(16px));
   }
 
   .#{$prefix}--toggle--small
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__text--left {
-    left: rem(32px);
+    left: carbon--rem(32px);
   }
 
   .#{$prefix}--toggle--small:checked
@@ -18155,7 +18326,7 @@ Toggle styles
     .#{$prefix}--toggle__appearance {
     &:after {
       margin-left: 0px;
-      transform: translateX(17px);
+      transform: translateX(carbon--rem(17px));
     }
   }
 
@@ -18185,8 +18356,8 @@ Toggle styles
     position: relative;
     display: flex;
     align-items: center;
-    width: rem(48px);
-    height: rem(24px);
+    width: carbon--rem(48px);
+    height: carbon--rem(24px);
     margin: $carbon--spacing-03 0;
     cursor: pointer;
 
@@ -18196,9 +18367,9 @@ Toggle styles
       position: absolute;
       top: 0;
       display: block;
-      width: rem(48px);
-      height: rem(24px);
-      border-radius: rem(15px);
+      width: carbon--rem(48px);
+      height: carbon--rem(24px);
+      border-radius: carbon--rem(15px);
       content: '';
       background-color: $ui-04;
       will-change: box-shadow;
@@ -18211,11 +18382,11 @@ Toggle styles
     &::after {
       box-sizing: border-box;
       position: absolute;
-      top: 3px;
-      left: 3px;
+      top: carbon--rem(3px);
+      left: carbon--rem(3px);
       display: block;
-      width: rem(18px);
-      height: rem(18px);
+      width: carbon--rem(18px);
+      height: carbon--rem(18px);
       border-radius: 50%;
       background-color: $ui-03;
       content: '';
@@ -18226,7 +18397,7 @@ Toggle styles
   .#{$prefix}--toggle__text--off,
   .#{$prefix}--toggle__text--on {
     position: absolute;
-    margin-left: carbon--mini-units(7);
+    margin-left: carbon--rem(56px);
     @include type-style('body-short-01');
     user-select: none;
   }
@@ -18254,7 +18425,7 @@ Toggle styles
 
     &::after {
       background-color: $icon-03;
-      transform: translateX(24px);
+      transform: translateX(carbon--rem(24px));
     }
   }
 
@@ -18312,35 +18483,35 @@ Toggle styles
   // ---------------------------------------------
   .#{$prefix}--toggle-input--small + .#{$prefix}--toggle-input__label {
     > .#{$prefix}--toggle__switch {
-      width: rem(32px);
-      height: rem(16px);
+      width: carbon--rem(32px);
+      height: carbon--rem(16px);
 
       &::before {
-        width: rem(32px);
-        height: rem(16px);
+        width: carbon--rem(32px);
+        height: carbon--rem(16px);
         border-radius: 0.9375rem;
       }
 
       &::after {
-        width: rem(10px);
-        height: rem(10px);
+        width: carbon--rem(10px);
+        height: carbon--rem(10px);
       }
     }
 
     .#{$prefix}--toggle__text--off,
     .#{$prefix}--toggle__text--on {
-      margin-left: $carbon--spacing-08;
+      margin-left: carbon--rem(40px);
     }
   }
 
   .#{$prefix}--toggle-input--small:checked + .#{$prefix}--toggle-input__label {
     > .#{$prefix}--toggle__switch::after {
-      transform: translateX(17px);
+      transform: translateX(carbon--rem(17px));
     }
 
     .#{$prefix}--toggle__check {
       fill: $support-02;
-      transform: scale(1) translateX(16px);
+      transform: scale(1) translateX(carbon--rem(16px));
     }
   }
 
@@ -18356,7 +18527,7 @@ Toggle styles
 
 - **Group**: [toggle](#toggle)
 - **Requires**:
-  - [carbon--mini-units [function]](#carbon--mini-units-function)
+  - [carbon--rem [function]](#carbon--rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [ui-04 [variable]](#ui-04-variable)
@@ -18367,7 +18538,6 @@ Toggle styles
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [text-02 [variable]](#text-02-variable)
-  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
 
 ## toolbar
 
@@ -18869,6 +19039,9 @@ Tooltip styles
 
 ```scss
 @mixin tooltip() {
+  // Caret's original size was 13.75px square
+  $caret-size: rem(6.875px);
+
   .#{$prefix}--tooltip__label {
     @include type-style('label-01');
     display: inline-flex;
@@ -18920,6 +19093,11 @@ Tooltip styles
     word-wrap: break-word;
     color: $inverse-01;
 
+    &:focus {
+      box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px $ui-background;
+      outline: 0;
+    }
+
     p {
       @include type-style('body-short-01');
     }
@@ -18928,9 +19106,19 @@ Tooltip styles
       padding-right: $carbon--spacing-07;
     }
 
+    .#{$prefix}--btn:focus {
+      border-color: $inverse-focus-ui;
+      outline-color: $inverse-02;
+    }
+
     .#{$prefix}--link {
       color: $inverse-link;
       font-size: rem(14px);
+
+      &:focus {
+        outline: 1px solid $inverse-focus-ui;
+        outline-offset: 2px;
+      }
 
       &:active {
         color: $inverse-01;
@@ -18942,14 +19130,15 @@ Tooltip styles
     }
 
     .#{$prefix}--tooltip__caret {
+      border-left: $caret-size solid transparent;
+      border-right: $caret-size solid transparent;
+      border-bottom: $caret-size solid $inverse-02;
       position: absolute;
-      background: $inverse-02;
       left: 0;
-      top: rem(-4px);
+      top: calc(#{$caret-size * -1} + 1px);
       right: 0;
-      transform: rotate(-135deg);
-      width: 0.6rem;
-      height: 0.6rem;
+      width: 0;
+      height: 0;
       margin: 0 auto;
       content: '';
     }
@@ -18965,27 +19154,33 @@ Tooltip styles
       .#{$prefix}--tooltip__caret {
         left: auto;
         top: 50%;
-        right: rem(-4px);
-        transform: rotate(-45deg) translate(50%, -50%);
+        // left position has an additional space between caret and tooltip
+        right: calc(#{$caret-size * -1} + 1px);
+        transform: rotate(90deg) translate(50%, -50%);
       }
     }
 
     &[data-floating-menu-direction='top'] {
       .#{$prefix}--tooltip__caret {
         top: auto;
-        bottom: rem(-4px);
-        transform: rotate(45deg);
+        bottom: calc(#{$caret-size * -1} + 1px);
+        transform: rotate(180deg);
       }
     }
 
     &[data-floating-menu-direction='right'] {
       .#{$prefix}--tooltip__caret {
-        left: rem(-4px);
+        left: calc(#{$caret-size * -1} + 1px);
         top: 50%;
         right: auto;
-        transform: rotate(135deg) translate(-50%, 50%);
+        transform: rotate(270deg) translate(50%, -50%);
       }
     }
+  }
+
+  .#{$prefix}--tooltip__heading {
+    @include carbon--type-style('heading-01');
+    margin-bottom: $spacing-03;
   }
 
   .#{$prefix}--tooltip--shown {
@@ -19138,6 +19333,7 @@ Tooltip styles
 
 - **Group**: [tooltip](#tooltip)
 - **Requires**:
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
   - [prefix [variable]](#prefix-variable)
@@ -19148,8 +19344,11 @@ Tooltip styles
   - [inverse-02 [variable]](#inverse-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [ui-background [variable]](#ui-background-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [inverse-link [variable]](#inverse-link-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
 
 ## ui-shell
@@ -20050,7 +20249,6 @@ want to have display-inline: block from the text helper classes
 - **Group**: [ui-shell](#ui-shell)
 - **Used by**:
   - [data-table-core [mixin]](#data-table-core-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ❌expanded [mixin]
