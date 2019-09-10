@@ -32,7 +32,7 @@
     "storybook": "start-storybook -p 9000"
   },
   "peerDependencies": {
-    "@rocketsoftware/carbon-components": "0.0.5",
+    "@rocketsoftware/carbon-components": "0.0.6",
     "carbon-icons": "^7.0.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"

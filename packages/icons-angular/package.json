@@ -32,7 +32,7 @@
     "@angular/core": "^6.0.0 || ^7.0.0 || ^8.0.0"
   },
   "dependencies": {
-    "@rocketsoftware/icon-helpers": "0.0.4"
+    "@rocketsoftware/icon-helpers": "0.0.6"
   },
   "devDependencies": {
     "@angular/compiler": "6.1.10",

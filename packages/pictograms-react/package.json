@@ -33,8 +33,8 @@
     "@carbon/icon-helpers": "10.4.0"
   },
   "devDependencies": {
-    "@carbon/icon-build-helpers": "^0.0.6",
-    "@carbon/pictograms": "^0.0.6"
+    "@carbon/icon-build-helpers": "^0.2.0",
+    "@carbon/pictograms": "^10.2.0"
   },
   "sideEffects": false
 }

@@ -33,6 +33,6 @@
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "@carbon/icon-build-helpers": "^0.0.6"
+    "@carbon/icon-build-helpers": "^0.2.0"
   }
 }

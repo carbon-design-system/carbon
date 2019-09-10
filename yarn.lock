@@ -1261,11 +1261,6 @@
   resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-10.4.0.tgz#771ba51efcaa9d2be03800f8e0f50c7aa779febf"
   integrity sha512-52H97nT0Hv3mneNaDXBELt/shrO9AUZIpX5TuxRUcdva0xqLNnjhsLw0PTytjQRw3yNCLmDw8hOutzlReXCleQ==
 
-"@carbon/import-once@10.3.0":
-  version "10.3.0"
-  resolved "https://registry.yarnpkg.com/@carbon/import-once/-/import-once-10.3.0.tgz#58617da4efb6d7a11352d8e6b7209da1d39f364d"
-  integrity sha512-PFk3FhMe3psihYtCg3JsyPHismqglnbUqIpz1DCG5Gn/kt0HdVKhGvHdEq7E305rGoBUCKzMn/4xoY9v9mcmlg==
-
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.3.tgz#099139eaec7ebf07a27c1786a3ff64f39464d2ef"
@@ -2647,15 +2642,20 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
-"@rocketsoftware/icon-helpers@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/icon-helpers/-/icon-helpers-0.0.4.tgz#bac7d7311b9c6ae2af40548127caf7f17fdf9d4f"
-  integrity sha512-O7TGsuGIAeHyJ5bQoVwOmZ85ho09cKpKBJJhxXwqykOzXqVn+Toj1Ab7BRMkl8p37reiKccW9UwWWS/laVz4NQ==
+"@rocketsoftware/colors@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/colors/-/colors-0.0.5.tgz#2c2f49477c62ea0e0a0c78a26b14a2a3363c5eac"
+  integrity sha512-LbJx2zk4wElNjN2JhysvVprDY2iMobfAnXliAwAdFifauqM3KKeniEr8FbMGaSaJ3snMWkAIj6a5FIdbQp8R9A==
 
 "@rocketsoftware/icons@0.0.4":
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/@rocketsoftware/icons/-/icons-0.0.4.tgz#b14c81544f94b3f774e9d075c26bb4b96237cc59"
   integrity sha512-6bFhvQyfpTFRV2O2atyOMO/FxZj/n8HFkOSWjVl2Z15zjT1D1BlErkTcQwXVqHOSbSy1RTPlczK8V3dmi47nAA==
+
+"@rocketsoftware/motion@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/motion/-/motion-0.0.5.tgz#fe527ec841b5c89682ce6b7cab47589a8229c897"
+  integrity sha512-+gN13xhJujTOQd/Fc5YfY/67MORQ4O++xoCH66225y/vGnzAPGRb7r0MXDSIFLL2IIulPWRvmGGaJGsmn0/wKQ==
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"

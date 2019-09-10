@@ -8,7 +8,7 @@
 'use strict';
 
 const { builders } = require('@carbon/icon-build-helpers');
-const meta = require('@carbon/icons/build-info.json');
+const meta = require('@rocketsoftware/icons/build-info.json');
 
 async function build() {
   await builders.react.run(meta, {

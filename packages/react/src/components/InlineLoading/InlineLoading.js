@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { CheckmarkFilled16, Error20 } from '@carbon/icons-react';
+import { CheckmarkFilled16, Error20 } from '@rocketsoftware/icons-react';
 import { settings } from '@rocketsoftware/carbon-components';
 import deprecate from '../../prop-types/deprecate';
 import Loading from '../Loading';
