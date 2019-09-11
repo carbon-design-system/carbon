@@ -215,7 +215,7 @@ storiesOf('DataTable', module)
     {
       info: {
         text: `
-      DataTable with an overFlow menu.
+      DataTable with Overflow menus added.
 
       You can find more detailed information surrounding usage of this component
       at the following url: ${readmeURL}
