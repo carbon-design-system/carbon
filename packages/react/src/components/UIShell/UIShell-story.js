@@ -775,4 +775,47 @@ storiesOf('UI Shell', module)
         )}
       />
     ))
+  )
+  .add(
+    'SideNav w/ large side nav items',
+    withReadme(readme, () => (
+      <>
+        <SideNav
+          expanded={true}
+          isChildOfHeader={false}
+          aria-label="Side navigation">
+          <SideNavItems>
+            <SideNavMenu title="Large menu" large>
+              <SideNavMenuItem href="javascript:void(0)">
+                Menu 1
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                Menu 2
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                Menu 3
+              </SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavLink href="javascript:void(0)" large>
+              Large link
+            </SideNavLink>
+            <SideNavMenu renderIcon={Fade16} title="Large menu w/icon" large>
+              <SideNavMenuItem href="javascript:void(0)">
+                Menu 1
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                Menu 2
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                Menu 3
+              </SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavLink renderIcon={Fade16} href="javascript:void(0)" large>
+              Large link w/icon
+            </SideNavLink>
+          </SideNavItems>
+        </SideNav>
+        <StoryContent />
+      </>
+    ))
   );

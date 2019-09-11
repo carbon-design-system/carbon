@@ -63,6 +63,7 @@
   $inverse-support-04: map-get($theme, 'inverse-support-04') !global;
   $overlay-01: map-get($theme, 'overlay-01') !global;
   $focus: map-get($theme, 'focus') !global;
+  $inverse-focus-ui: map-get($theme, 'inverse-focus-ui') !global;
   $hover-primary: map-get($theme, 'hover-primary') !global;
   $active-primary: map-get($theme, 'active-primary') !global;
   $hover-primary-text: map-get($theme, 'hover-primary-text') !global;
@@ -125,6 +126,7 @@
     --inverse-support-04: #{map-get($theme, 'inverse-support-04')};
     --overlay-01: #{map-get($theme, 'overlay-01')};
     --focus: #{map-get($theme, 'focus')};
+    --inverse-focus-ui: #{map-get($theme, 'inverse-focus-ui')};
     --hover-primary: #{map-get($theme, 'hover-primary')};
     --active-primary: #{map-get($theme, 'active-primary')};
     --hover-primary-text: #{map-get($theme, 'hover-primary-text')};

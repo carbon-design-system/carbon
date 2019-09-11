@@ -19,6 +19,7 @@ const props = () => ({
     { compact: 'compact', short: 'short', tall: 'tall', none: null },
     null
   ),
+  stickyHeader: boolean('Sticky header (experimental)', false),
 });
 
 storiesOf('DataTable', module)
