@@ -268,6 +268,10 @@ export const colors = {
     0: white,
   },
   yellow: {
+    20: yellow20,
     30: yellow30,
   },
 };
+
+// Deprecated ☠️
+export const yellow20 = '#fdd13a';
