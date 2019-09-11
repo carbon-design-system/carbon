@@ -26,6 +26,16 @@ describe('TooltipIcon', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should add extra classes via className', () => {
+    const wrapper = mount(<TooltipIcon {...mockProps} />);
+    expect(wrapper.hasClass('custom-class')).toBe(true);
+  });
+
+  it('should have an ID on the content container by default', () => {
+    const wrapper = mount(<TooltipIcon {...mockProps} />);
+    expect(wrapper.find('.bx--assistive-text').props().id).toBeTruthy();
+  });
+
   it('should allow the user to specify the direction', () => {
     const wrapper = mount(<TooltipIcon {...mockProps} direction="top" />);
     expect(wrapper).toMatchSnapshot();
