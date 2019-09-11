@@ -327,6 +327,10 @@ export default class Modal extends Component {
       </button>
     );
 
+    const ariaLabel = modalLabel
+      ? null
+      : this.props['aria-label'] || modalAriaLabel || modalHeading;
+
     const getAriaLabelledBy = (() => {
       const ariaLabelledBy = [];
       if (modalLabel) {
@@ -338,16 +342,21 @@ export default class Modal extends Component {
       return ariaLabelledBy.length ? ariaLabelledBy.join(' ') : null;
     })();
 
+    const hasScrollingContentProps = hasScrollingContent
+      ? {
+          tabIndex: 0,
+          role: 'region',
+          'aria-label': ariaLabel,
+          'aria-labelledby': getAriaLabelledBy,
+        }
+      : {};
+
     const modalBody = (
       <div
         ref={this.innerModal}
         role="dialog"
         className={`${prefix}--modal-container`}
-        aria-label={
-          modalLabel
-            ? null
-            : this.props['aria-label'] || modalAriaLabel || modalHeading
-        }
+        aria-label={ariaLabel}
         aria-labelledby={getAriaLabelledBy}
         aria-modal="true">
         <div className={`${prefix}--modal-header`}>
@@ -360,8 +369,7 @@ export default class Modal extends Component {
         </div>
         <div
           className={`${prefix}--modal-content`}
-          tabIndex={hasScrollingContent ? 0 : null} // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-        >
+          {...hasScrollingContentProps}>
           {this.props.children}
         </div>
         {!passiveModal && (

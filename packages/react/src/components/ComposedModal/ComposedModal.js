@@ -12,6 +12,7 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
+import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
@@ -375,11 +376,14 @@ export function ModalBody(props) {
     [`${prefix}--modal-content`]: true,
     [className]: className,
   });
+  const hasScrollingContentProps = hasScrollingContent
+    ? {
+        tabIndex: 0,
+        role: 'region',
+      }
+    : {};
   return (
-    <div
-      className={contentClass}
-      tabIndex={hasScrollingContent ? 0 : null} // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-      {...other}>
+    <div className={contentClass} {...hasScrollingContentProps} {...other}>
       {children}
     </div>
   );
@@ -394,6 +398,11 @@ ModalBody.propTypes = {
    * Specify whether the modal contains scrolling content
    */
   hasScrollingContent: PropTypes.bool,
+
+  /**
+   * Required props for the accessibility label of the header
+   */
+  ...AriaLabelPropType,
 };
 
 export class ModalFooter extends Component {

@@ -43,6 +43,7 @@ const props = {
       'Modal contains scrollable content (hasScrollingContent)',
       false
     ),
+    'aria-label': text('ARIA label for content', 'Example modal content'),
   }),
   modalFooter: () => ({
     primaryButtonText: text(
