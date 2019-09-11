@@ -26,10 +26,10 @@ const TooltipIcon = ({
   const tooltipTriggerClasses = cx(
     `${prefix}--tooltip__trigger`,
     `${prefix}--tooltip--a11y`,
+    className,
     {
       [`${prefix}--tooltip--${direction}`]: direction,
       [`${prefix}--tooltip--align-${align}`]: align,
-      className,
     }
   );
   return (
