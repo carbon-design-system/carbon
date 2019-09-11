@@ -141,7 +141,6 @@ exports[`ModalWrapper should render 1`] = `
             </div>
             <div
               className="bx--modal-content"
-              tabIndex={null}
             >
               <p
                 className="bx--modal-content__text"
