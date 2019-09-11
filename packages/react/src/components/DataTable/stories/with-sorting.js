@@ -23,8 +23,18 @@ export default props => (
     headers={headers}
     isSortable={true}
     {...props}
-    render={({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
-      <TableContainer title="DataTable" description="With sorting">
+    render={({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      getTableContainerProps,
+    }) => (
+      <TableContainer
+        title="DataTable"
+        description="With sorting"
+        {...getTableContainerProps()}>
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
