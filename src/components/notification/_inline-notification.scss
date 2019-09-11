@@ -53,6 +53,7 @@
   .#{$prefix}--inline-notification__details {
     display: flex;
     align-items: center;
+    width: 100%;
   }
 
   .#{$prefix}--inline-notification__icon {
