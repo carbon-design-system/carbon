@@ -10,7 +10,8 @@ import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { WarningFilled16, EditOff16 } from '@carbon/icons-react';
-import Tooltip from '../Tooltip';
+import TooltipDefinition from '../TooltipDefinition/TooltipDefinition';
+import TooltipIcon from '../TooltipIcon/TooltipIcon';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 
 const { prefix } = settings;
@@ -52,6 +53,14 @@ const TextArea = React.forwardRef(function TextArea(
     defaultValue,
     readOnly,
     readOnlyIconLabel,
+    readOnlyIconTooltipProps = {
+      direction: 'bottom',
+      align: 'center',
+    },
+    readOnlyInputTooltipProps = {
+      direction: 'bottom',
+      align: 'center',
+    },
     renderCharCounter: CharCounter = DefaultCharCounter,
     ...other
   },
@@ -155,9 +164,9 @@ const TextArea = React.forwardRef(function TextArea(
 
   const input =
     readOnly && value ? (
-      <Tooltip showIcon={false} triggerText={inputField}>
-        {value}
-      </Tooltip>
+      <TooltipDefinition {...readOnlyInputTooltipProps} tooltipText={value}>
+        {inputField}
+      </TooltipDefinition>
     ) : (
       inputField
     );
@@ -173,11 +182,12 @@ const TextArea = React.forwardRef(function TextArea(
           <WarningFilled16 className={`${prefix}--text-area__invalid-icon`} />
         )}
         {readOnly && (
-          <div
+          <TooltipIcon
+            {...readOnlyIconTooltipProps}
             className={`${prefix}--text-area__readonly-icon`}
-            aria-label={readOnlyIconLabel}>
+            tooltipText={readOnlyIconLabel}>
             <EditOff16 />
-          </div>
+          </TooltipIcon>
         )}
         {input}
       </div>
@@ -291,6 +301,50 @@ TextArea.propTypes = {
    * The maximum allowed input value length
    */
   maxLength: PropTypes.number,
+
+  /**
+   * Optionally specify props for the tooltip on the read only icon
+   */
+  readOnlyInputIconProps: PropTypes.shape({
+    /**
+     * Specify the direction of the tooltip. Can be either top or bottom.
+     */
+    direction: PropTypes.oneOf(['top', 'bottom']),
+
+    /**
+     * Specify the alignment (to the trigger button) of the tooltip.
+     * Can be one of: start, center, or end.
+     */
+    align: PropTypes.oneOf(['start', 'center', 'end']),
+
+    /**
+     * Optionally specify a custom id for the tooltip. If one is not provided,
+     * we generate a unique id for you.
+     */
+    id: PropTypes.string,
+  }),
+
+  /**
+   * Optionally specify props for the tooltip on the read only input field
+   */
+  readOnlyInputTooltipProps: PropTypes.shape({
+    /**
+     * Specify the direction of the tooltip. Can be either top or bottom.
+     */
+    direction: PropTypes.oneOf(['top', 'bottom']),
+
+    /**
+     * Specify the alignment (to the trigger button) of the tooltip.
+     * Can be one of: start, center, or end.
+     */
+    align: PropTypes.oneOf(['start', 'center', 'end']),
+
+    /**
+     * Optionally specify a custom id for the tooltip. If one is not provided,
+     * we generate a unique id for you.
+     */
+    id: PropTypes.string,
+  }),
 };
 
 TextArea.defaultProps = {

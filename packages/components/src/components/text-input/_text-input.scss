@@ -206,7 +206,8 @@
     background-color: $field-01;
   }
 
-  .#{$prefix}--text-input__readonly-icon {
+  .#{$prefix}--text-input__field-wrapper
+    > .#{$prefix}--text-input__readonly-icon.#{$prefix}--tooltip__trigger {
     @include tooltip--trigger('icon', 'bottom');
     @include tooltip--placement('icon', 'bottom', 'end');
     z-index: z('floating') + 1;
@@ -219,13 +220,10 @@
     }
   }
 
-  .#{$prefix}--tooltip--icon.#{$prefix}--tooltip--icon__wrapper {
-    position: absolute;
-    right: $carbon--spacing-05;
-
-    .#{$prefix}--text-input__readonly-icon {
-      position: static;
-    }
+  .#{$prefix}--text-input__readonly-icon
+    + .#{$prefix}--tooltip--definition
+    > .#{$prefix}--tooltip__trigger {
+    border-bottom: none;
   }
 }
 

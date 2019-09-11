@@ -151,7 +151,8 @@
     background-color: $field-01;
   }
 
-  .#{$prefix}--text-area__readonly-icon {
+  .#{$prefix}--text-area__wrapper
+    > .#{$prefix}--text-area__readonly-icon.#{$prefix}--tooltip__trigger {
     @include tooltip--trigger('icon', 'bottom');
     @include tooltip--placement('icon', 'bottom', 'end');
     z-index: z('floating') + 1;
@@ -163,6 +164,12 @@
     &::after {
       padding: 1rem;
     }
+  }
+
+  .#{$prefix}--text-area__readonly-icon
+    + .#{$prefix}--tooltip--definition
+    > .#{$prefix}--tooltip__trigger {
+    border-bottom: none;
   }
 
   // Skeleton State
