@@ -14,4 +14,9 @@ describe('DataTable.TableContainer', () => {
     const wrapper = mount(<TableContainer className="custom-class" />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should support enable sticky header', () => {
+    const wrapper = mount(<TableContainer stickyHeader={true} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });

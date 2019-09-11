@@ -9,9 +9,12 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
+const getInstanceId = setupGetInstanceId();
 const TooltipIcon = ({
+  id,
   className,
   children,
   direction,
@@ -19,18 +22,24 @@ const TooltipIcon = ({
   tooltipText,
   ...rest
 }) => {
+  const tooltipId = id || `icon-tooltip-${getInstanceId()}`;
   const tooltipTriggerClasses = cx(
     `${prefix}--tooltip__trigger`,
     `${prefix}--tooltip--a11y`,
+    className,
     {
       [`${prefix}--tooltip--${direction}`]: direction,
       [`${prefix}--tooltip--align-${align}`]: align,
-      className,
     }
   );
   return (
-    <button {...rest} className={tooltipTriggerClasses}>
-      <span className={`${prefix}--assistive-text`}>{tooltipText}</span>
+    <button
+      {...rest}
+      className={tooltipTriggerClasses}
+      aria-describedby={tooltipId}>
+      <span className={`${prefix}--assistive-text`} id={tooltipId}>
+        {tooltipText}
+      </span>
       {children}
     </button>
   );

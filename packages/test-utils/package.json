@@ -1,5 +1,6 @@
 {
   "name": "@carbon/test-utils",
+  "private": true,
   "version": "10.3.0",
   "license": "Apache-2.0",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/test-utils",
@@ -17,9 +18,11 @@
     "access": "public"
   },
   "peerDependencies": {
-    "node-sass": "^4.11.0"
+    "node-sass": "^4.11.0",
+    "react-dom": "^16.9.0"
   },
   "devDependencies": {
-    "node-sass": "^4.11.0"
+    "node-sass": "^4.11.0",
+    "react-dom": "^16.9.0"
   }
 }

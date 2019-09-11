@@ -112,10 +112,12 @@ export default props => {
             onInputChange,
             selectedRows,
             getTableProps,
+            getTableContainerProps,
           }) => (
             <TableContainer
               title="DataTable"
-              description="Use the toolbar menu to add rows and headers">
+              description="Use the toolbar menu to add rows and headers"
+              {...getTableContainerProps()}>
               <TableToolbar>
                 <TableBatchActions {...getBatchActionProps()}>
                   <TableBatchAction
@@ -140,7 +142,9 @@ export default props => {
                 <TableToolbarContent>
                   <TableToolbarSearch onChange={onInputChange} />
                   <TableToolbarMenu>
-                    <TableToolbarAction onClick={this.handleOnRowAdd}>
+                    <TableToolbarAction
+                      primaryFocus
+                      onClick={this.handleOnRowAdd}>
                       Add row
                     </TableToolbarAction>
                     <TableToolbarAction onClick={this.handleOnHeaderAdd}>
