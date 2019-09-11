@@ -128,4 +128,3 @@ export const brand02 = interactive02;
 export const brand03 = interactive03;
 export const active01 = activeUI;
 export const hoverField = hoverUI;
-export const yellow20 = '#fdd13a';
