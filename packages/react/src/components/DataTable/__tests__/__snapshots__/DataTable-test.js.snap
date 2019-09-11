@@ -29,6 +29,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
             "getHeaderProps": [Function],
             "getRowProps": [Function],
             "getSelectionProps": [Function],
+            "getTableContainerProps": [Function],
             "getTableProps": [Function],
             "headers": Array [
               Object {
@@ -209,6 +210,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
             "getHeaderProps": [Function],
             "getRowProps": [Function],
             "getSelectionProps": [Function],
+            "getTableContainerProps": [Function],
             "getTableProps": [Function],
             "headers": Array [
               Object {
@@ -805,6 +807,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
             "getHeaderProps": [Function],
             "getRowProps": [Function],
             "getSelectionProps": [Function],
+            "getTableContainerProps": [Function],
             "getTableProps": [Function],
             "headers": Array [
               Object {
@@ -1040,6 +1043,7 @@ exports[`DataTable selection should render 1`] = `
             "getHeaderProps": [Function],
             "getRowProps": [Function],
             "getSelectionProps": [Function],
+            "getTableContainerProps": [Function],
             "getTableProps": [Function],
             "headers": Array [
               Object {
@@ -1638,6 +1642,7 @@ exports[`DataTable should render 1`] = `
             "getHeaderProps": [Function],
             "getRowProps": [Function],
             "getSelectionProps": [Function],
+            "getTableContainerProps": [Function],
             "getTableProps": [Function],
             "headers": Array [
               Object {
@@ -2578,6 +2583,990 @@ exports[`DataTable should render 1`] = `
             </tbody>
           </TableBody>
         </table>
+      </Table>
+    </div>
+  </TableContainer>
+</DataTable>
+`;
+
+exports[`DataTable sticky header should render 1`] = `
+<DataTable
+  filterRows={[Function]}
+  headers={
+    Array [
+      Object {
+        "header": "Field A",
+        "key": "fieldA",
+      },
+      Object {
+        "header": "Field B",
+        "key": "fieldB",
+      },
+    ]
+  }
+  locale="en"
+  render={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "expandAll": [Function],
+            "expandRow": [Function],
+            "getBatchActionProps": [Function],
+            "getExpandHeaderProps": [Function],
+            "getHeaderProps": [Function],
+            "getRowProps": [Function],
+            "getSelectionProps": [Function],
+            "getTableContainerProps": [Function],
+            "getTableProps": [Function],
+            "headers": Array [
+              Object {
+                "header": "Field A",
+                "key": "fieldA",
+              },
+              Object {
+                "header": "Field B",
+                "key": "fieldB",
+              },
+            ],
+            "onInputChange": [Function],
+            "radio": undefined,
+            "rows": Array [
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "b",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "a",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "c:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 3:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "c:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 3:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "c",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+            ],
+            "selectAll": [Function],
+            "selectRow": [Function],
+            "selectedRows": Array [],
+            "sortBy": [Function],
+          },
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": <TableContainer
+            stickyHeader={true}
+            title="DataTable with toolbar"
+          >
+            <TableToolbar>
+              <TableBatchActions
+                onCancel={[Function]}
+                shouldShowBatchActions={false}
+                totalSelected={0}
+                translateWithId={[Function]}
+              >
+                <TableBatchAction
+                  onClick={[MockFunction]}
+                  renderIcon={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "render": [Function],
+                    }
+                  }
+                >
+                  Ghost
+                </TableBatchAction>
+                <TableBatchAction
+                  onClick={[MockFunction]}
+                  renderIcon={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "render": [Function],
+                    }
+                  }
+                >
+                  Ghost
+                </TableBatchAction>
+                <TableBatchAction
+                  onClick={[MockFunction]}
+                  renderIcon={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "render": [Function],
+                    }
+                  }
+                >
+                  Ghost
+                </TableBatchAction>
+              </TableBatchActions>
+              <TableToolbarContent>
+                <TableToolbarSearch
+                  id="custom-id"
+                  onChange={[Function]}
+                  persistent={true}
+                  translateWithId={[Function]}
+                />
+                <TableToolbarMenu
+                  iconDescription="Settings"
+                  renderIcon={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "render": [Function],
+                    }
+                  }
+                >
+                  <ForwardRef
+                    onClick={[MockFunction]}
+                    primaryFocus={true}
+                  >
+                    Action 1
+                  </ForwardRef>
+                  <ForwardRef
+                    onClick={[MockFunction]}
+                  >
+                    Action 2
+                  </ForwardRef>
+                  <ForwardRef
+                    onClick={[MockFunction]}
+                  >
+                    Action 3
+                  </ForwardRef>
+                </TableToolbarMenu>
+                <ForwardRef(Button)
+                  disabled={false}
+                  kind="primary"
+                  onClick={[MockFunction]}
+                  small={true}
+                  tabIndex={0}
+                  type="button"
+                >
+                  Add new
+                </ForwardRef(Button)>
+              </TableToolbarContent>
+            </TableToolbar>
+            <Table
+              isSortable={false}
+              stickyHeader={true}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableHeader
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field A
+                  </TableHeader>
+                  <TableHeader
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field B
+                  </TableHeader>
+                </TableRow>
+              </TableHead>
+              <TableBody
+                aria-live="polite"
+              >
+                <TableRow>
+                  <TableCell>
+                    Field 2:A
+                  </TableCell>
+                  <TableCell>
+                    Field 2:B
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>
+                    Field 1:A
+                  </TableCell>
+                  <TableCell>
+                    Field 1:B
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>
+                    Field 3:A
+                  </TableCell>
+                  <TableCell>
+                    Field 3:B
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>,
+        },
+      ],
+    }
+  }
+  rows={
+    Array [
+      Object {
+        "fieldA": "Field 2:A",
+        "fieldB": "Field 2:B",
+        "id": "b",
+      },
+      Object {
+        "fieldA": "Field 1:A",
+        "fieldB": "Field 1:B",
+        "id": "a",
+      },
+      Object {
+        "fieldA": "Field 3:A",
+        "fieldB": "Field 3:B",
+        "id": "c",
+      },
+    ]
+  }
+  sortRow={[Function]}
+  stickyHeader={true}
+  translateWithId={[Function]}
+>
+  <TableContainer
+    stickyHeader={true}
+    title="DataTable with toolbar"
+  >
+    <div
+      className="bx--data-table-container bx--data-table--max-width"
+    >
+      <div
+        className="bx--data-table-header"
+      >
+        <h4
+          className="bx--data-table-header__title"
+        >
+          DataTable with toolbar
+        </h4>
+        <p
+          className="bx--data-table-header__description"
+        />
+      </div>
+      <TableToolbar>
+        <section
+          aria-label="data table toolbar"
+          className="bx--table-toolbar"
+        >
+          <TableBatchActions
+            onCancel={[Function]}
+            shouldShowBatchActions={false}
+            totalSelected={0}
+            translateWithId={[Function]}
+          >
+            <div
+              className="bx--batch-actions"
+            >
+              <TableActionList>
+                <div
+                  className="bx--action-list"
+                >
+                  <TableBatchAction
+                    onClick={[MockFunction]}
+                    renderIcon={
+                      Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "render": [Function],
+                      }
+                    }
+                  >
+                    <ForwardRef(Button)
+                      disabled={false}
+                      kind="primary"
+                      onClick={[MockFunction]}
+                      renderIcon={
+                        Object {
+                          "$$typeof": Symbol(react.forward_ref),
+                          "render": [Function],
+                        }
+                      }
+                      tabIndex={0}
+                      type="button"
+                    >
+                      <button
+                        className="bx--btn bx--btn--primary"
+                        disabled={false}
+                        onClick={[MockFunction]}
+                        tabIndex={0}
+                        type="button"
+                      >
+                        Ghost
+                        <ForwardRef(AddFilled16)
+                          aria-hidden="true"
+                          className="bx--btn__icon"
+                        >
+                          <Icon
+                            aria-hidden="true"
+                            className="bx--btn__icon"
+                            height={16}
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <svg
+                              aria-hidden={true}
+                              className="bx--btn__icon"
+                              focusable="false"
+                              height={16}
+                              preserveAspectRatio="xMidYMid meet"
+                              style={
+                                Object {
+                                  "willChange": "transform",
+                                }
+                              }
+                              viewBox="0 0 16 16"
+                              width={16}
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm4 8H9v3H7V9H4V7h3V4h2v3h3v2z"
+                              />
+                            </svg>
+                          </Icon>
+                        </ForwardRef(AddFilled16)>
+                      </button>
+                    </ForwardRef(Button)>
+                  </TableBatchAction>
+                  <TableBatchAction
+                    onClick={[MockFunction]}
+                    renderIcon={
+                      Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "render": [Function],
+                      }
+                    }
+                  >
+                    <ForwardRef(Button)
+                      disabled={false}
+                      kind="primary"
+                      onClick={[MockFunction]}
+                      renderIcon={
+                        Object {
+                          "$$typeof": Symbol(react.forward_ref),
+                          "render": [Function],
+                        }
+                      }
+                      tabIndex={0}
+                      type="button"
+                    >
+                      <button
+                        className="bx--btn bx--btn--primary"
+                        disabled={false}
+                        onClick={[MockFunction]}
+                        tabIndex={0}
+                        type="button"
+                      >
+                        Ghost
+                        <ForwardRef(AddFilled16)
+                          aria-hidden="true"
+                          className="bx--btn__icon"
+                        >
+                          <Icon
+                            aria-hidden="true"
+                            className="bx--btn__icon"
+                            height={16}
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <svg
+                              aria-hidden={true}
+                              className="bx--btn__icon"
+                              focusable="false"
+                              height={16}
+                              preserveAspectRatio="xMidYMid meet"
+                              style={
+                                Object {
+                                  "willChange": "transform",
+                                }
+                              }
+                              viewBox="0 0 16 16"
+                              width={16}
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm4 8H9v3H7V9H4V7h3V4h2v3h3v2z"
+                              />
+                            </svg>
+                          </Icon>
+                        </ForwardRef(AddFilled16)>
+                      </button>
+                    </ForwardRef(Button)>
+                  </TableBatchAction>
+                  <TableBatchAction
+                    onClick={[MockFunction]}
+                    renderIcon={
+                      Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "render": [Function],
+                      }
+                    }
+                  >
+                    <ForwardRef(Button)
+                      disabled={false}
+                      kind="primary"
+                      onClick={[MockFunction]}
+                      renderIcon={
+                        Object {
+                          "$$typeof": Symbol(react.forward_ref),
+                          "render": [Function],
+                        }
+                      }
+                      tabIndex={0}
+                      type="button"
+                    >
+                      <button
+                        className="bx--btn bx--btn--primary"
+                        disabled={false}
+                        onClick={[MockFunction]}
+                        tabIndex={0}
+                        type="button"
+                      >
+                        Ghost
+                        <ForwardRef(AddFilled16)
+                          aria-hidden="true"
+                          className="bx--btn__icon"
+                        >
+                          <Icon
+                            aria-hidden="true"
+                            className="bx--btn__icon"
+                            height={16}
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <svg
+                              aria-hidden={true}
+                              className="bx--btn__icon"
+                              focusable="false"
+                              height={16}
+                              preserveAspectRatio="xMidYMid meet"
+                              style={
+                                Object {
+                                  "willChange": "transform",
+                                }
+                              }
+                              viewBox="0 0 16 16"
+                              width={16}
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm4 8H9v3H7V9H4V7h3V4h2v3h3v2z"
+                              />
+                            </svg>
+                          </Icon>
+                        </ForwardRef(AddFilled16)>
+                      </button>
+                    </ForwardRef(Button)>
+                  </TableBatchAction>
+                  <ForwardRef(Button)
+                    className="bx--batch-summary__cancel"
+                    disabled={false}
+                    kind="primary"
+                    onClick={[Function]}
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <button
+                      className="bx--batch-summary__cancel bx--btn bx--btn--primary"
+                      disabled={false}
+                      onClick={[Function]}
+                      tabIndex={0}
+                      type="button"
+                    >
+                      Cancel
+                    </button>
+                  </ForwardRef(Button)>
+                </div>
+              </TableActionList>
+              <div
+                className="bx--batch-summary"
+              >
+                <p
+                  className="bx--batch-summary__para"
+                >
+                  <span>
+                    0 item selected
+                  </span>
+                </p>
+              </div>
+            </div>
+          </TableBatchActions>
+          <TableToolbarContent>
+            <div
+              className="bx--toolbar-content"
+            >
+              <TableToolbarSearch
+                id="custom-id"
+                onChange={[Function]}
+                persistent={true}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--toolbar-action bx--toolbar-search-container-persistent"
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  role="searchbox"
+                  tabIndex="0"
+                >
+                  <Search
+                    aria-hidden={true}
+                    closeButtonLabelText="Clear search input"
+                    id="custom-id"
+                    labelText="Filter table"
+                    onChange={[Function]}
+                    placeHolderText="Filter table"
+                    small={true}
+                    type="text"
+                    value=""
+                  >
+                    <div
+                      className="bx--search bx--search--sm"
+                    >
+                      <ForwardRef(Search16)
+                        className="bx--search-magnifier"
+                        role="img"
+                      >
+                        <Icon
+                          className="bx--search-magnifier"
+                          height={16}
+                          preserveAspectRatio="xMidYMid meet"
+                          role="img"
+                          viewBox="0 0 16 16"
+                          width={16}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <svg
+                            aria-hidden={true}
+                            className="bx--search-magnifier"
+                            focusable="false"
+                            height={16}
+                            preserveAspectRatio="xMidYMid meet"
+                            role="img"
+                            style={
+                              Object {
+                                "willChange": "transform",
+                              }
+                            }
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M15 14.3L10.7 10c1.9-2.3 1.6-5.8-.7-7.7S4.2.7 2.3 3 .7 8.8 3 10.7c2 1.7 5 1.7 7 0l4.3 4.3.7-.7zM2 6.5C2 4 4 2 6.5 2S11 4 11 6.5 9 11 6.5 11 2 9 2 6.5z"
+                            />
+                          </svg>
+                        </Icon>
+                      </ForwardRef(Search16)>
+                      <label
+                        className="bx--label"
+                        htmlFor="custom-id"
+                      >
+                        Filter table
+                      </label>
+                      <input
+                        aria-hidden={true}
+                        className="bx--search-input"
+                        id="custom-id"
+                        onChange={[Function]}
+                        placeholder="Filter table"
+                        type="text"
+                        value=""
+                      />
+                      <button
+                        aria-label="Clear search input"
+                        className="bx--search-close bx--search-close--hidden"
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        <ForwardRef(Close16)
+                          aria-label="Clear search input"
+                          role="img"
+                        >
+                          <Icon
+                            aria-label="Clear search input"
+                            height={16}
+                            preserveAspectRatio="xMidYMid meet"
+                            role="img"
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <svg
+                              aria-label="Clear search input"
+                              focusable="false"
+                              height={16}
+                              preserveAspectRatio="xMidYMid meet"
+                              role="img"
+                              style={
+                                Object {
+                                  "willChange": "transform",
+                                }
+                              }
+                              viewBox="0 0 16 16"
+                              width={16}
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"
+                              />
+                            </svg>
+                          </Icon>
+                        </ForwardRef(Close16)>
+                      </button>
+                    </div>
+                  </Search>
+                </div>
+              </TableToolbarSearch>
+              <TableToolbarMenu
+                iconDescription="Settings"
+                renderIcon={
+                  Object {
+                    "$$typeof": Symbol(react.forward_ref),
+                    "render": [Function],
+                  }
+                }
+              >
+                <ForwardRef(OverflowMenu)
+                  className="bx--toolbar-action bx--overflow-menu"
+                  flipped={true}
+                  renderIcon={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "render": [Function],
+                    }
+                  }
+                  title="Settings"
+                >
+                  <OverflowMenu
+                    ariaLabel="Menu"
+                    className="bx--toolbar-action bx--overflow-menu"
+                    direction="bottom"
+                    flipped={true}
+                    iconDescription="open and close list of options"
+                    innerRef={null}
+                    menuOffset={[Function]}
+                    menuOffsetFlip={[Function]}
+                    onClick={[Function]}
+                    onClose={[Function]}
+                    onKeyDown={[Function]}
+                    onOpen={[Function]}
+                    open={false}
+                    renderIcon={
+                      Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "render": [Function],
+                      }
+                    }
+                    tabIndex={0}
+                    title="Settings"
+                  >
+                    <ClickListener
+                      onClickOutside={[Function]}
+                    >
+                      <div
+                        aria-expanded={false}
+                        aria-haspopup={true}
+                        aria-label="Menu"
+                        className="bx--toolbar-action bx--overflow-menu bx--overflow-menu"
+                        onClick={[Function]}
+                        onClose={[Function]}
+                        onKeyDown={[Function]}
+                        open={false}
+                        role="button"
+                        tabIndex={0}
+                        title="Settings"
+                      >
+                        <ForwardRef(Settings16)
+                          aria-label="open and close list of options"
+                          className="bx--overflow-menu__icon"
+                          focusable="false"
+                          onClick={[Function]}
+                          onKeyDown={[Function]}
+                        >
+                          <Icon
+                            aria-label="open and close list of options"
+                            className="bx--overflow-menu__icon"
+                            focusable="false"
+                            height={16}
+                            onClick={[Function]}
+                            onKeyDown={[Function]}
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <svg
+                              aria-label="open and close list of options"
+                              className="bx--overflow-menu__icon"
+                              focusable="false"
+                              height={16}
+                              onClick={[Function]}
+                              onKeyDown={[Function]}
+                              preserveAspectRatio="xMidYMid meet"
+                              role="img"
+                              style={
+                                Object {
+                                  "willChange": "transform",
+                                }
+                              }
+                              viewBox="0 0 16 16"
+                              width={16}
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M13.5 8.4v-.8l1-.8c.4-.3.4-.9.2-1.3l-1.2-2c-.2-.3-.5-.5-.9-.5-.1 0-.2 0-.3.1l-1.2.4c-.2-.1-.4-.3-.7-.4l-.3-1.3c0-.5-.4-.8-.9-.8H6.8c-.5 0-.9.3-1 .8l-.2 1.3c-.3.1-.5.2-.7.3L3.7 3h-.3c-.4 0-.7.2-.9.5l-1.2 2c-.2.4-.1.9.3 1.3l.9.9v.8l-.9.7c-.4.3-.5.9-.2 1.3l1.2 2c.1.3.4.5.8.5.1 0 .2 0 .3-.1l1.2-.4c.2.1.4.3.7.4l.3 1.3c.1.5.5.8 1 .8h2.4c.5 0 .9-.3 1-.8l.3-1.3c.2-.1.4-.2.7-.4l1.2.4c.1 0 .2.1.3.1.4 0 .7-.2.9-.5l1.1-2c.2-.4.2-.9-.2-1.3l-1.1-.8zm-.9 3.6l-1.7-.6c-.4.3-.9.6-1.4.8L9.2 14H6.8l-.4-1.8c-.5-.2-.9-.5-1.4-.8l-1.6.6-1.2-2 1.4-1.2c-.1-.5-.1-1.1 0-1.6L2.2 6l1.2-2 1.7.6c.4-.4.9-.6 1.4-.8L6.8 2h2.4l.4 1.8c.5.2.9.5 1.4.8l1.6-.6 1.2 2-1.4 1.2c.1.5.1 1.1 0 1.6l1.4 1.2-1.2 2z"
+                              />
+                              <path
+                                d="M8 11c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3c0 1.6-1.3 3-3 3zm0-5c-1.1 0-2 .8-2 1.9V8c0 1.1.8 2 1.9 2H8c1.1 0 2-.8 2-1.9V8c0-1.1-.8-2-2-2 .1 0 0 0 0 0z"
+                              />
+                              <title>
+                                open and close list of options
+                              </title>
+                            </svg>
+                          </Icon>
+                        </ForwardRef(Settings16)>
+                      </div>
+                    </ClickListener>
+                  </OverflowMenu>
+                </ForwardRef(OverflowMenu)>
+              </TableToolbarMenu>
+              <ForwardRef(Button)
+                disabled={false}
+                kind="primary"
+                onClick={[MockFunction]}
+                small={true}
+                tabIndex={0}
+                type="button"
+              >
+                <button
+                  className="bx--btn bx--btn--sm bx--btn--primary"
+                  disabled={false}
+                  onClick={[MockFunction]}
+                  tabIndex={0}
+                  type="button"
+                >
+                  Add new
+                </button>
+              </ForwardRef(Button)>
+            </div>
+          </TableToolbarContent>
+        </section>
+      </TableToolbar>
+      <Table
+        isSortable={false}
+        stickyHeader={true}
+      >
+        <section
+          className="bx--data-table_inner-container"
+        >
+          <table
+            className="bx--data-table bx--data-table--no-border bx--data-table--sticky-header"
+          >
+            <TableHead>
+              <thead>
+                <TableRow>
+                  <tr>
+                    <TableHeader
+                      isSortHeader={false}
+                      isSortable={false}
+                      key="fieldA"
+                      onClick={[Function]}
+                      scope="col"
+                      sortDirection="NONE"
+                      translateWithId={[Function]}
+                    >
+                      <th
+                        scope="col"
+                      >
+                        <span
+                          className="bx--table-header-label"
+                        >
+                          Field A
+                        </span>
+                      </th>
+                    </TableHeader>
+                    <TableHeader
+                      isSortHeader={false}
+                      isSortable={false}
+                      key="fieldB"
+                      onClick={[Function]}
+                      scope="col"
+                      sortDirection="NONE"
+                      translateWithId={[Function]}
+                    >
+                      <th
+                        scope="col"
+                      >
+                        <span
+                          className="bx--table-header-label"
+                        >
+                          Field B
+                        </span>
+                      </th>
+                    </TableHeader>
+                  </tr>
+                </TableRow>
+              </thead>
+            </TableHead>
+            <TableBody
+              aria-live="polite"
+            >
+              <tbody
+                aria-live="polite"
+              >
+                <TableRow
+                  key="b"
+                >
+                  <tr>
+                    <TableCell
+                      key="b:fieldA"
+                    >
+                      <td>
+                        Field 2:A
+                      </td>
+                    </TableCell>
+                    <TableCell
+                      key="b:fieldB"
+                    >
+                      <td>
+                        Field 2:B
+                      </td>
+                    </TableCell>
+                  </tr>
+                </TableRow>
+                <TableRow
+                  key="a"
+                >
+                  <tr>
+                    <TableCell
+                      key="a:fieldA"
+                    >
+                      <td>
+                        Field 1:A
+                      </td>
+                    </TableCell>
+                    <TableCell
+                      key="a:fieldB"
+                    >
+                      <td>
+                        Field 1:B
+                      </td>
+                    </TableCell>
+                  </tr>
+                </TableRow>
+                <TableRow
+                  key="c"
+                >
+                  <tr>
+                    <TableCell
+                      key="c:fieldA"
+                    >
+                      <td>
+                        Field 3:A
+                      </td>
+                    </TableCell>
+                    <TableCell
+                      key="c:fieldB"
+                    >
+                      <td>
+                        Field 3:B
+                      </td>
+                    </TableCell>
+                  </tr>
+                </TableRow>
+              </tbody>
+            </TableBody>
+          </table>
+        </section>
       </Table>
     </div>
   </TableContainer>
