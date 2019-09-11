@@ -132,7 +132,7 @@ Object {
     "0": "#ffffff",
   },
   "yellow": Object {
-    "20": undefined,
+    "20": "#fdd13a",
     "30": "#f1c21b",
   },
 }
