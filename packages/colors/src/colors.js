@@ -11,8 +11,8 @@ export const black100 = black;
 export const white = '#ffffff';
 export const white0 = white;
 
-export const yellow = '#fdd13a';
-export const yellow20 = yellow;
+export const yellow = '#f1c21b';
+export const yellow30 = yellow;
 
 export const orange = '#fc7b1e';
 export const orange40 = orange;
@@ -268,6 +268,6 @@ export const colors = {
     0: white,
   },
   yellow: {
-    20: yellow20,
+    30: yellow30,
   },
 };
