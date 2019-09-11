@@ -19,7 +19,7 @@ export const orange40 = orange;
 
 export const red10 = '#fff1f1';
 export const red20 = '#ffd7d9';
-export const red30 = '#ffb2b8';
+export const red30 = '#ffb3b8';
 export const red40 = '#ff8389';
 export const red50 = '#fa4d56';
 export const red60 = '#da1e28';
@@ -68,7 +68,7 @@ export const purple20 = '#e8daff';
 export const purple30 = '#d4bbff';
 export const purple40 = '#be95ff';
 export const purple50 = '#a56eff';
-export const purple60 = '#8c3ffc';
+export const purple60 = '#8a3ffc';
 export const purple70 = '#6929c4';
 export const purple80 = '#491d8b';
 export const purple90 = '#31135e';
@@ -140,7 +140,7 @@ export const teal50 = '#009d9a';
 export const teal60 = '#007d79';
 export const teal70 = '#005d5d';
 export const teal80 = '#004144';
-export const teal90 = '#002b30';
+export const teal90 = '#022b30';
 export const teal100 = '#081a1c';
 export const teal = {
   10: teal10,
