@@ -10,3 +10,13 @@ exports[`DataTable.Table should render 1`] = `
   />
 </Table>
 `;
+
+exports[`DataTable.Table should support enable sticky header 1`] = `
+<section
+  className="bx--data-table_inner-container"
+>
+  <table
+    className="bx--data-table bx--data-table--no-border bx--data-table--sticky-header"
+  />
+</section>
+`;
