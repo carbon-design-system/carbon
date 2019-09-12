@@ -1,5 +1,5 @@
 # Default global
-@carbon-design-system/developers
+* @carbon-design-system/developers
 
 # Core icons
 /packages/icons/src/svg/16/ @aagonzales @chrisconnors-ibm @carbon-design-system/developers
