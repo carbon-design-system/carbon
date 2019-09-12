@@ -53,6 +53,8 @@ const colors = [
 
   'overlay01',
 
+  'danger',
+
   // Interactive states
   'focus',
   'inverseFocusUi',
