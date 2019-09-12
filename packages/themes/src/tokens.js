@@ -13,6 +13,7 @@ const colors = [
   'interactive02',
   'interactive03',
   'interactive04',
+  'danger',
 
   'uiBackground',
 
@@ -26,6 +27,7 @@ const colors = [
   'text02',
   'text03',
   'text04',
+  'text05',
 
   'icon01',
   'icon02',
