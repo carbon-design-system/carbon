@@ -4,8 +4,10 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+// /Users/Abagail.Hart@ibm.com/Projects/my-carbon-fork/packages/react/src/components/OverflowMenu/OverflowMenu.js
 import React from 'react';
+import OverflowMenu from '../../OverflowMenu';
+import OverflowMenuItem from '../../OverflowMenuItem';
 import DataTable, {
   Table,
   TableBody,
@@ -14,8 +16,9 @@ import DataTable, {
   TableHead,
   TableHeader,
   TableRow,
+  TableSelectAll,
   TableSelectRow,
-} from '..';
+} from '../../DataTable';
 import { initialRows, headers } from './shared';
 
 export default props => (
@@ -23,7 +26,6 @@ export default props => (
     rows={initialRows}
     headers={headers}
     {...props}
-    radio
     render={({
       rows,
       headers,
@@ -31,21 +33,18 @@ export default props => (
       getRowProps,
       getSelectionProps,
       getTableProps,
-      getTableContainerProps,
     }) => (
-      <TableContainer
-        title="DataTable"
-        description="For selecting single rows"
-        {...getTableContainerProps()}>
+      <TableContainer title="DataTable" description="With selection">
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              <th scope="col" />
+              <TableSelectAll {...getSelectionProps()} />
               {headers.map(header => (
                 <TableHeader {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
+              <TableHeader />
             </TableRow>
           </TableHead>
           <TableBody>
@@ -55,6 +54,13 @@ export default props => (
                 {row.cells.map(cell => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
+                <TableCell>
+                  <OverflowMenu flipped>
+                    <OverflowMenuItem primaryFocus>Action 1</OverflowMenuItem>
+                    <OverflowMenuItem>Action 2</OverflowMenuItem>
+                    <OverflowMenuItem>Action 3</OverflowMenuItem>
+                  </OverflowMenu>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

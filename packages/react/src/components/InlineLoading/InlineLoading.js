@@ -55,7 +55,7 @@ export default function InlineLoading({
     return undefined;
   };
   const loadingText = (
-    <p className={`${prefix}--inline-loading__text`}>{description}</p>
+    <div className={`${prefix}--inline-loading__text`}>{description}</div>
   );
   const loading = getLoading();
   const loadingAnimation = loading && (
@@ -89,12 +89,12 @@ InlineLoading.propTypes = {
   /**
    * Specify the loading status
    */
-  status: PropTypes.oneOf('inactive', 'active', 'finished', 'error'),
+  status: PropTypes.oneOf(['inactive', 'active', 'finished', 'error']),
 
   /**
    * Specify the description for the inline loading text
    */
-  description: PropTypes.string,
+  description: PropTypes.node,
 
   /**
    * Specify the description for the inline loading text
@@ -113,6 +113,5 @@ InlineLoading.propTypes = {
   successDelay: PropTypes.number,
 };
 InlineLoading.defaultProps = {
-  success: false,
   successDelay: 1500,
 };
