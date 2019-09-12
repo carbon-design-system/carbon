@@ -251,265 +251,267 @@ Define color variables
 ```scss
 @mixin ibm--colors() {
   $ibm-color__black-100: #000000 !default !global;
-  $ibm-color__blue-10: #edf4ff !default !global;
-  $ibm-color__blue-20: #c9deff !default !global;
-  $ibm-color__blue-30: #97c1ff !default !global;
-  $ibm-color__blue-40: #6ea6ff !default !global;
-  $ibm-color__blue-50: #408bfc !default !global;
-  $ibm-color__blue-60: #0062ff !default !global;
-  $ibm-color__blue-70: #054ada !default !global;
-  $ibm-color__blue-80: #0530ad !default !global;
-  $ibm-color__blue-90: #061f80 !default !global;
-  $ibm-color__blue-100: #051243 !default !global;
+  $ibm-color__blue-10: #edf5ff !default !global;
+  $ibm-color__blue-20: #d0e2ff !default !global;
+  $ibm-color__blue-30: #a6c8ff !default !global;
+  $ibm-color__blue-40: #78a9ff !default !global;
+  $ibm-color__blue-50: #4589ff !default !global;
+  $ibm-color__blue-60: #0f62fe !default !global;
+  $ibm-color__blue-70: #0043ce !default !global;
+  $ibm-color__blue-80: #002d9c !default !global;
+  $ibm-color__blue-90: #001d6c !default !global;
+  $ibm-color__blue-100: #001141 !default !global;
   $ibm-color__cool-gray-10: #f2f4f8 !default !global;
-  $ibm-color__cool-gray-20: #d5d9e0 !default !global;
-  $ibm-color__cool-gray-30: #b9bfc7 !default !global;
-  $ibm-color__cool-gray-40: #9fa5ad !default !global;
-  $ibm-color__cool-gray-50: #868d95 !default !global;
+  $ibm-color__cool-gray-20: #dde1e6 !default !global;
+  $ibm-color__cool-gray-30: #c1c7cd !default !global;
+  $ibm-color__cool-gray-40: #a2a9b0 !default !global;
+  $ibm-color__cool-gray-50: #878d96 !default !global;
   $ibm-color__cool-gray-60: #697077 !default !global;
-  $ibm-color__cool-gray-70: #50565b !default !global;
-  $ibm-color__cool-gray-80: #373d42 !default !global;
-  $ibm-color__cool-gray-90: #242a2e !default !global;
-  $ibm-color__cool-gray-100: #13171a !default !global;
-  $ibm-color__cyan-10: #e3f6ff !default !global;
-  $ibm-color__cyan-20: #b3e6ff !default !global;
-  $ibm-color__cyan-30: #6ccaff !default !global;
-  $ibm-color__cyan-40: #30b0ff !default !global;
-  $ibm-color__cyan-50: #1191e6 !default !global;
+  $ibm-color__cool-gray-70: #4d5358 !default !global;
+  $ibm-color__cool-gray-80: #343a3f !default !global;
+  $ibm-color__cool-gray-90: #21272a !default !global;
+  $ibm-color__cool-gray-100: #121619 !default !global;
+  $ibm-color__cyan-10: #e5f6ff !default !global;
+  $ibm-color__cyan-20: #bae6ff !default !global;
+  $ibm-color__cyan-30: #82cfff !default !global;
+  $ibm-color__cyan-40: #33b1ff !default !global;
+  $ibm-color__cyan-50: #1192e8 !default !global;
   $ibm-color__cyan-60: #0072c3 !default !global;
-  $ibm-color__cyan-70: #0058a1 !default !global;
-  $ibm-color__cyan-80: #003d73 !default !global;
-  $ibm-color__cyan-90: #002b50 !default !global;
-  $ibm-color__cyan-100: #07192b !default !global;
-  $ibm-color__gray-10: #f3f3f3 !default !global;
-  $ibm-color__gray-20: #dcdcdc !default !global;
-  $ibm-color__gray-30: #bebebe !default !global;
-  $ibm-color__gray-40: #a4a4a4 !default !global;
-  $ibm-color__gray-50: #8c8c8c !default !global;
+  $ibm-color__cyan-70: #00539a !default !global;
+  $ibm-color__cyan-80: #003a6d !default !global;
+  $ibm-color__cyan-90: #012749 !default !global;
+  $ibm-color__cyan-100: #061727 !default !global;
+  $ibm-color__gray-10: #f4f4f4 !default !global;
+  $ibm-color__gray-20: #e0e0e0 !default !global;
+  $ibm-color__gray-30: #c6c6c6 !default !global;
+  $ibm-color__gray-40: #a8a8a8 !default !global;
+  $ibm-color__gray-50: #8d8d8d !default !global;
   $ibm-color__gray-60: #6f6f6f !default !global;
-  $ibm-color__gray-70: #565656 !default !global;
-  $ibm-color__gray-80: #3d3d3d !default !global;
-  $ibm-color__gray-90: #282828 !default !global;
-  $ibm-color__gray-100: #171717 !default !global;
-  $ibm-color__green-10: #dafbe4 !default !global;
-  $ibm-color__green-20: #9deeb2 !default !global;
-  $ibm-color__green-30: #56d679 !default !global;
-  $ibm-color__green-40: #3dbb61 !default !global;
+  $ibm-color__gray-70: #525252 !default !global;
+  $ibm-color__gray-80: #393939 !default !global;
+  $ibm-color__gray-90: #262626 !default !global;
+  $ibm-color__gray-100: #161616 !default !global;
+  $ibm-color__green-10: #defbe6 !default !global;
+  $ibm-color__green-20: #a7f0ba !default !global;
+  $ibm-color__green-30: #6fdc8c !default !global;
+  $ibm-color__green-40: #42be65 !default !global;
   $ibm-color__green-50: #24a148 !default !global;
   $ibm-color__green-60: #198038 !default !global;
-  $ibm-color__green-70: #10642a !default !global;
-  $ibm-color__green-80: #054719 !default !global;
-  $ibm-color__green-90: #01330f !default !global;
-  $ibm-color__green-100: #081b09 !default !global;
-  $ibm-color__magenta-10: #fff0f6 !default !global;
-  $ibm-color__magenta-20: #ffcfe1 !default !global;
-  $ibm-color__magenta-30: #ffa0c2 !default !global;
-  $ibm-color__magenta-40: #fa75a6 !default !global;
-  $ibm-color__magenta-50: #ee538b !default !global;
-  $ibm-color__magenta-60: #d12765 !default !global;
-  $ibm-color__magenta-70: #a11950 !default !global;
-  $ibm-color__magenta-80: #760a3a !default !global;
-  $ibm-color__magenta-90: #57002b !default !global;
-  $ibm-color__magenta-100: #2a0a16 !default !global;
-  $ibm-color__orange-40: #fc7b1e !default !global;
-  $ibm-color__purple-10: #f7f1ff !default !global;
-  $ibm-color__purple-20: #e6d6ff !default !global;
-  $ibm-color__purple-30: #d0b0ff !default !global;
-  $ibm-color__purple-40: #bb8eff !default !global;
-  $ibm-color__purple-50: #a66efa !default !global;
+  $ibm-color__green-70: #0e6027 !default !global;
+  $ibm-color__green-80: #044317 !default !global;
+  $ibm-color__green-90: #022d0d !default !global;
+  $ibm-color__green-100: #071908 !default !global;
+  $ibm-color__magenta-10: #fff0f7 !default !global;
+  $ibm-color__magenta-20: #ffd6e8 !default !global;
+  $ibm-color__magenta-30: #ffafd2 !default !global;
+  $ibm-color__magenta-40: #ff7eb6 !default !global;
+  $ibm-color__magenta-50: #ee5396 !default !global;
+  $ibm-color__magenta-60: #d12771 !default !global;
+  $ibm-color__magenta-70: #9f1853 !default !global;
+  $ibm-color__magenta-80: #740937 !default !global;
+  $ibm-color__magenta-90: #510224 !default !global;
+  $ibm-color__magenta-100: #2a0a18 !default !global;
+  $ibm-color__orange-40: #ff832b !default !global;
+  $ibm-color__purple-10: #f6f2ff !default !global;
+  $ibm-color__purple-20: #e8daff !default !global;
+  $ibm-color__purple-30: #d4bbff !default !global;
+  $ibm-color__purple-40: #be95ff !default !global;
+  $ibm-color__purple-50: #a56eff !default !global;
   $ibm-color__purple-60: #8a3ffc !default !global;
-  $ibm-color__purple-70: #6e32c9 !default !global;
-  $ibm-color__purple-80: #4f2196 !default !global;
-  $ibm-color__purple-90: #38146b !default !global;
-  $ibm-color__purple-100: #1e1033 !default !global;
-  $ibm-color__red-10: #fff0f1 !default !global;
-  $ibm-color__red-20: #fcd0d3 !default !global;
-  $ibm-color__red-30: #ffa4a9 !default !global;
-  $ibm-color__red-40: #ff767c !default !global;
-  $ibm-color__red-50: #fb4b53 !default !global;
+  $ibm-color__purple-70: #6929c4 !default !global;
+  $ibm-color__purple-80: #491d8b !default !global;
+  $ibm-color__purple-90: #31135e !default !global;
+  $ibm-color__purple-100: #1c0f30 !default !global;
+  $ibm-color__red-10: #fff1f1 !default !global;
+  $ibm-color__red-20: #ffd7d9 !default !global;
+  $ibm-color__red-30: #ffb3b8 !default !global;
+  $ibm-color__red-40: #ff8389 !default !global;
+  $ibm-color__red-50: #fa4d56 !default !global;
   $ibm-color__red-60: #da1e28 !default !global;
-  $ibm-color__red-70: #a51920 !default !global;
+  $ibm-color__red-70: #a2191f !default !global;
   $ibm-color__red-80: #750e13 !default !global;
-  $ibm-color__red-90: #570408 !default !global;
-  $ibm-color__red-100: #2c080a !default !global;
-  $ibm-color__teal-10: #dbfbfb !default !global;
-  $ibm-color__teal-20: #92eeee !default !global;
-  $ibm-color__teal-30: #20d5d2 !default !global;
-  $ibm-color__teal-40: #00bab6 !default !global;
-  $ibm-color__teal-50: #009c98 !default !global;
+  $ibm-color__red-90: #520408 !default !global;
+  $ibm-color__red-100: #2d0709 !default !global;
+  $ibm-color__teal-10: #d9fbfb !default !global;
+  $ibm-color__teal-20: #9ef0f0 !default !global;
+  $ibm-color__teal-30: #3ddbd9 !default !global;
+  $ibm-color__teal-40: #08bdba !default !global;
+  $ibm-color__teal-50: #009d9a !default !global;
   $ibm-color__teal-60: #007d79 !default !global;
-  $ibm-color__teal-70: #006161 !default !global;
-  $ibm-color__teal-80: #004548 !default !global;
-  $ibm-color__teal-90: #003137 !default !global;
+  $ibm-color__teal-70: #005d5d !default !global;
+  $ibm-color__teal-80: #004144 !default !global;
+  $ibm-color__teal-90: #022b30 !default !global;
   $ibm-color__teal-100: #081a1c !default !global;
-  $ibm-color__warm-gray-10: #f7f3f1 !default !global;
-  $ibm-color__warm-gray-20: #e0dbda !default !global;
-  $ibm-color__warm-gray-30: #c1bcbb !default !global;
-  $ibm-color__warm-gray-40: #a7a2a2 !default !global;
+  $ibm-color__warm-gray-10: #f7f3f2 !default !global;
+  $ibm-color__warm-gray-20: #e5e0df !default !global;
+  $ibm-color__warm-gray-30: #cac5c4 !default !global;
+  $ibm-color__warm-gray-40: #ada8a8 !default !global;
   $ibm-color__warm-gray-50: #8f8b8b !default !global;
-  $ibm-color__warm-gray-60: #726e6e !default !global;
-  $ibm-color__warm-gray-70: #595555 !default !global;
-  $ibm-color__warm-gray-80: #403c3c !default !global;
-  $ibm-color__warm-gray-90: #2b2828 !default !global;
-  $ibm-color__warm-gray-100: #1a1717 !default !global;
+  $ibm-color__warm-gray-60: #736f6f !default !global;
+  $ibm-color__warm-gray-70: #565151 !default !global;
+  $ibm-color__warm-gray-80: #3c3838 !default !global;
+  $ibm-color__warm-gray-90: #272525 !default !global;
+  $ibm-color__warm-gray-100: #171414 !default !global;
   $ibm-color__white-0: #ffffff !default !global;
   $ibm-color__yellow-20: #fdd13a !default !global;
+  $ibm-color__yellow-30: #f1c21b !default !global;
   $ibm-color-map: (
     'black': (
       100: #000000,
     ),
     'blue': (
-      10: #edf4ff,
-      20: #c9deff,
-      30: #97c1ff,
-      40: #6ea6ff,
-      50: #408bfc,
-      60: #0062ff,
-      70: #054ada,
-      80: #0530ad,
-      90: #061f80,
-      100: #051243,
+      10: #edf5ff,
+      20: #d0e2ff,
+      30: #a6c8ff,
+      40: #78a9ff,
+      50: #4589ff,
+      60: #0f62fe,
+      70: #0043ce,
+      80: #002d9c,
+      90: #001d6c,
+      100: #001141,
     ),
     'cool-gray': (
       10: #f2f4f8,
-      20: #d5d9e0,
-      30: #b9bfc7,
-      40: #9fa5ad,
-      50: #868d95,
+      20: #dde1e6,
+      30: #c1c7cd,
+      40: #a2a9b0,
+      50: #878d96,
       60: #697077,
-      70: #50565b,
-      80: #373d42,
-      90: #242a2e,
-      100: #13171a,
+      70: #4d5358,
+      80: #343a3f,
+      90: #21272a,
+      100: #121619,
     ),
     'coolGray': (
       10: #f2f4f8,
-      20: #d5d9e0,
-      30: #b9bfc7,
-      40: #9fa5ad,
-      50: #868d95,
+      20: #dde1e6,
+      30: #c1c7cd,
+      40: #a2a9b0,
+      50: #878d96,
       60: #697077,
-      70: #50565b,
-      80: #373d42,
-      90: #242a2e,
-      100: #13171a,
+      70: #4d5358,
+      80: #343a3f,
+      90: #21272a,
+      100: #121619,
     ),
     'cyan': (
-      10: #e3f6ff,
-      20: #b3e6ff,
-      30: #6ccaff,
-      40: #30b0ff,
-      50: #1191e6,
+      10: #e5f6ff,
+      20: #bae6ff,
+      30: #82cfff,
+      40: #33b1ff,
+      50: #1192e8,
       60: #0072c3,
-      70: #0058a1,
-      80: #003d73,
-      90: #002b50,
-      100: #07192b,
+      70: #00539a,
+      80: #003a6d,
+      90: #012749,
+      100: #061727,
     ),
     'gray': (
-      10: #f3f3f3,
-      20: #dcdcdc,
-      30: #bebebe,
-      40: #a4a4a4,
-      50: #8c8c8c,
+      10: #f4f4f4,
+      20: #e0e0e0,
+      30: #c6c6c6,
+      40: #a8a8a8,
+      50: #8d8d8d,
       60: #6f6f6f,
-      70: #565656,
-      80: #3d3d3d,
-      90: #282828,
-      100: #171717,
+      70: #525252,
+      80: #393939,
+      90: #262626,
+      100: #161616,
     ),
     'green': (
-      10: #dafbe4,
-      20: #9deeb2,
-      30: #56d679,
-      40: #3dbb61,
+      10: #defbe6,
+      20: #a7f0ba,
+      30: #6fdc8c,
+      40: #42be65,
       50: #24a148,
       60: #198038,
-      70: #10642a,
-      80: #054719,
-      90: #01330f,
-      100: #081b09,
+      70: #0e6027,
+      80: #044317,
+      90: #022d0d,
+      100: #071908,
     ),
     'magenta': (
-      10: #fff0f6,
-      20: #ffcfe1,
-      30: #ffa0c2,
-      40: #fa75a6,
-      50: #ee538b,
-      60: #d12765,
-      70: #a11950,
-      80: #760a3a,
-      90: #57002b,
-      100: #2a0a16,
+      10: #fff0f7,
+      20: #ffd6e8,
+      30: #ffafd2,
+      40: #ff7eb6,
+      50: #ee5396,
+      60: #d12771,
+      70: #9f1853,
+      80: #740937,
+      90: #510224,
+      100: #2a0a18,
     ),
     'orange': (
-      40: #fc7b1e,
+      40: #ff832b,
     ),
     'purple': (
-      10: #f7f1ff,
-      20: #e6d6ff,
-      30: #d0b0ff,
-      40: #bb8eff,
-      50: #a66efa,
+      10: #f6f2ff,
+      20: #e8daff,
+      30: #d4bbff,
+      40: #be95ff,
+      50: #a56eff,
       60: #8a3ffc,
-      70: #6e32c9,
-      80: #4f2196,
-      90: #38146b,
-      100: #1e1033,
+      70: #6929c4,
+      80: #491d8b,
+      90: #31135e,
+      100: #1c0f30,
     ),
     'red': (
-      10: #fff0f1,
-      20: #fcd0d3,
-      30: #ffa4a9,
-      40: #ff767c,
-      50: #fb4b53,
+      10: #fff1f1,
+      20: #ffd7d9,
+      30: #ffb3b8,
+      40: #ff8389,
+      50: #fa4d56,
       60: #da1e28,
-      70: #a51920,
+      70: #a2191f,
       80: #750e13,
-      90: #570408,
-      100: #2c080a,
+      90: #520408,
+      100: #2d0709,
     ),
     'teal': (
-      10: #dbfbfb,
-      20: #92eeee,
-      30: #20d5d2,
-      40: #00bab6,
-      50: #009c98,
+      10: #d9fbfb,
+      20: #9ef0f0,
+      30: #3ddbd9,
+      40: #08bdba,
+      50: #009d9a,
       60: #007d79,
-      70: #006161,
-      80: #004548,
-      90: #003137,
+      70: #005d5d,
+      80: #004144,
+      90: #022b30,
       100: #081a1c,
     ),
     'warm-gray': (
-      10: #f7f3f1,
-      20: #e0dbda,
-      30: #c1bcbb,
-      40: #a7a2a2,
+      10: #f7f3f2,
+      20: #e5e0df,
+      30: #cac5c4,
+      40: #ada8a8,
       50: #8f8b8b,
-      60: #726e6e,
-      70: #595555,
-      80: #403c3c,
-      90: #2b2828,
-      100: #1a1717,
+      60: #736f6f,
+      70: #565151,
+      80: #3c3838,
+      90: #272525,
+      100: #171414,
     ),
     'warmGray': (
-      10: #f7f3f1,
-      20: #e0dbda,
-      30: #c1bcbb,
-      40: #a7a2a2,
+      10: #f7f3f2,
+      20: #e5e0df,
+      30: #cac5c4,
+      40: #ada8a8,
       50: #8f8b8b,
-      60: #726e6e,
-      70: #595555,
-      80: #403c3c,
-      90: #2b2828,
-      100: #1a1717,
+      60: #736f6f,
+      70: #565151,
+      80: #3c3838,
+      90: #272525,
+      100: #171414,
     ),
     'white': (
       0: #ffffff,
     ),
     'yellow': (
       20: #fdd13a,
+      30: #f1c21b,
     ),
   ) !default !global;
 }
@@ -530,369 +532,372 @@ Define color variables
 ```scss
 @mixin carbon--colors() {
   $carbon--black-100: #000000 !default !global;
-  $carbon--blue-10: #edf4ff !default !global;
-  $carbon--blue-20: #c9deff !default !global;
-  $carbon--blue-30: #97c1ff !default !global;
-  $carbon--blue-40: #6ea6ff !default !global;
-  $carbon--blue-50: #408bfc !default !global;
-  $carbon--blue-60: #0062ff !default !global;
-  $carbon--blue-70: #054ada !default !global;
-  $carbon--blue-80: #0530ad !default !global;
-  $carbon--blue-90: #061f80 !default !global;
-  $carbon--blue-100: #051243 !default !global;
+  $carbon--blue-10: #edf5ff !default !global;
+  $carbon--blue-20: #d0e2ff !default !global;
+  $carbon--blue-30: #a6c8ff !default !global;
+  $carbon--blue-40: #78a9ff !default !global;
+  $carbon--blue-50: #4589ff !default !global;
+  $carbon--blue-60: #0f62fe !default !global;
+  $carbon--blue-70: #0043ce !default !global;
+  $carbon--blue-80: #002d9c !default !global;
+  $carbon--blue-90: #001d6c !default !global;
+  $carbon--blue-100: #001141 !default !global;
   $carbon--cool-gray-10: #f2f4f8 !default !global;
-  $carbon--cool-gray-20: #d5d9e0 !default !global;
-  $carbon--cool-gray-30: #b9bfc7 !default !global;
-  $carbon--cool-gray-40: #9fa5ad !default !global;
-  $carbon--cool-gray-50: #868d95 !default !global;
+  $carbon--cool-gray-20: #dde1e6 !default !global;
+  $carbon--cool-gray-30: #c1c7cd !default !global;
+  $carbon--cool-gray-40: #a2a9b0 !default !global;
+  $carbon--cool-gray-50: #878d96 !default !global;
   $carbon--cool-gray-60: #697077 !default !global;
-  $carbon--cool-gray-70: #50565b !default !global;
-  $carbon--cool-gray-80: #373d42 !default !global;
-  $carbon--cool-gray-90: #242a2e !default !global;
-  $carbon--cool-gray-100: #13171a !default !global;
-  $carbon--cyan-10: #e3f6ff !default !global;
-  $carbon--cyan-20: #b3e6ff !default !global;
-  $carbon--cyan-30: #6ccaff !default !global;
-  $carbon--cyan-40: #30b0ff !default !global;
-  $carbon--cyan-50: #1191e6 !default !global;
+  $carbon--cool-gray-70: #4d5358 !default !global;
+  $carbon--cool-gray-80: #343a3f !default !global;
+  $carbon--cool-gray-90: #21272a !default !global;
+  $carbon--cool-gray-100: #121619 !default !global;
+  $carbon--cyan-10: #e5f6ff !default !global;
+  $carbon--cyan-20: #bae6ff !default !global;
+  $carbon--cyan-30: #82cfff !default !global;
+  $carbon--cyan-40: #33b1ff !default !global;
+  $carbon--cyan-50: #1192e8 !default !global;
   $carbon--cyan-60: #0072c3 !default !global;
-  $carbon--cyan-70: #0058a1 !default !global;
-  $carbon--cyan-80: #003d73 !default !global;
-  $carbon--cyan-90: #002b50 !default !global;
-  $carbon--cyan-100: #07192b !default !global;
-  $carbon--gray-10: #f3f3f3 !default !global;
-  $carbon--gray-20: #dcdcdc !default !global;
-  $carbon--gray-30: #bebebe !default !global;
-  $carbon--gray-40: #a4a4a4 !default !global;
-  $carbon--gray-50: #8c8c8c !default !global;
+  $carbon--cyan-70: #00539a !default !global;
+  $carbon--cyan-80: #003a6d !default !global;
+  $carbon--cyan-90: #012749 !default !global;
+  $carbon--cyan-100: #061727 !default !global;
+  $carbon--gray-10: #f4f4f4 !default !global;
+  $carbon--gray-20: #e0e0e0 !default !global;
+  $carbon--gray-30: #c6c6c6 !default !global;
+  $carbon--gray-40: #a8a8a8 !default !global;
+  $carbon--gray-50: #8d8d8d !default !global;
   $carbon--gray-60: #6f6f6f !default !global;
-  $carbon--gray-70: #565656 !default !global;
-  $carbon--gray-80: #3d3d3d !default !global;
-  $carbon--gray-90: #282828 !default !global;
-  $carbon--gray-100: #171717 !default !global;
-  $carbon--green-10: #dafbe4 !default !global;
-  $carbon--green-20: #9deeb2 !default !global;
-  $carbon--green-30: #56d679 !default !global;
-  $carbon--green-40: #3dbb61 !default !global;
+  $carbon--gray-70: #525252 !default !global;
+  $carbon--gray-80: #393939 !default !global;
+  $carbon--gray-90: #262626 !default !global;
+  $carbon--gray-100: #161616 !default !global;
+  $carbon--green-10: #defbe6 !default !global;
+  $carbon--green-20: #a7f0ba !default !global;
+  $carbon--green-30: #6fdc8c !default !global;
+  $carbon--green-40: #42be65 !default !global;
   $carbon--green-50: #24a148 !default !global;
   $carbon--green-60: #198038 !default !global;
-  $carbon--green-70: #10642a !default !global;
-  $carbon--green-80: #054719 !default !global;
-  $carbon--green-90: #01330f !default !global;
-  $carbon--green-100: #081b09 !default !global;
-  $carbon--magenta-10: #fff0f6 !default !global;
-  $carbon--magenta-20: #ffcfe1 !default !global;
-  $carbon--magenta-30: #ffa0c2 !default !global;
-  $carbon--magenta-40: #fa75a6 !default !global;
-  $carbon--magenta-50: #ee538b !default !global;
-  $carbon--magenta-60: #d12765 !default !global;
-  $carbon--magenta-70: #a11950 !default !global;
-  $carbon--magenta-80: #760a3a !default !global;
-  $carbon--magenta-90: #57002b !default !global;
-  $carbon--magenta-100: #2a0a16 !default !global;
-  $carbon--orange-40: #fc7b1e !default !global;
-  $carbon--purple-10: #f7f1ff !default !global;
-  $carbon--purple-20: #e6d6ff !default !global;
-  $carbon--purple-30: #d0b0ff !default !global;
-  $carbon--purple-40: #bb8eff !default !global;
-  $carbon--purple-50: #a66efa !default !global;
+  $carbon--green-70: #0e6027 !default !global;
+  $carbon--green-80: #044317 !default !global;
+  $carbon--green-90: #022d0d !default !global;
+  $carbon--green-100: #071908 !default !global;
+  $carbon--magenta-10: #fff0f7 !default !global;
+  $carbon--magenta-20: #ffd6e8 !default !global;
+  $carbon--magenta-30: #ffafd2 !default !global;
+  $carbon--magenta-40: #ff7eb6 !default !global;
+  $carbon--magenta-50: #ee5396 !default !global;
+  $carbon--magenta-60: #d12771 !default !global;
+  $carbon--magenta-70: #9f1853 !default !global;
+  $carbon--magenta-80: #740937 !default !global;
+  $carbon--magenta-90: #510224 !default !global;
+  $carbon--magenta-100: #2a0a18 !default !global;
+  $carbon--orange-40: #ff832b !default !global;
+  $carbon--purple-10: #f6f2ff !default !global;
+  $carbon--purple-20: #e8daff !default !global;
+  $carbon--purple-30: #d4bbff !default !global;
+  $carbon--purple-40: #be95ff !default !global;
+  $carbon--purple-50: #a56eff !default !global;
   $carbon--purple-60: #8a3ffc !default !global;
-  $carbon--purple-70: #6e32c9 !default !global;
-  $carbon--purple-80: #4f2196 !default !global;
-  $carbon--purple-90: #38146b !default !global;
-  $carbon--purple-100: #1e1033 !default !global;
-  $carbon--red-10: #fff0f1 !default !global;
-  $carbon--red-20: #fcd0d3 !default !global;
-  $carbon--red-30: #ffa4a9 !default !global;
-  $carbon--red-40: #ff767c !default !global;
-  $carbon--red-50: #fb4b53 !default !global;
+  $carbon--purple-70: #6929c4 !default !global;
+  $carbon--purple-80: #491d8b !default !global;
+  $carbon--purple-90: #31135e !default !global;
+  $carbon--purple-100: #1c0f30 !default !global;
+  $carbon--red-10: #fff1f1 !default !global;
+  $carbon--red-20: #ffd7d9 !default !global;
+  $carbon--red-30: #ffb3b8 !default !global;
+  $carbon--red-40: #ff8389 !default !global;
+  $carbon--red-50: #fa4d56 !default !global;
   $carbon--red-60: #da1e28 !default !global;
-  $carbon--red-70: #a51920 !default !global;
+  $carbon--red-70: #a2191f !default !global;
   $carbon--red-80: #750e13 !default !global;
-  $carbon--red-90: #570408 !default !global;
-  $carbon--red-100: #2c080a !default !global;
-  $carbon--teal-10: #dbfbfb !default !global;
-  $carbon--teal-20: #92eeee !default !global;
-  $carbon--teal-30: #20d5d2 !default !global;
-  $carbon--teal-40: #00bab6 !default !global;
-  $carbon--teal-50: #009c98 !default !global;
+  $carbon--red-90: #520408 !default !global;
+  $carbon--red-100: #2d0709 !default !global;
+  $carbon--teal-10: #d9fbfb !default !global;
+  $carbon--teal-20: #9ef0f0 !default !global;
+  $carbon--teal-30: #3ddbd9 !default !global;
+  $carbon--teal-40: #08bdba !default !global;
+  $carbon--teal-50: #009d9a !default !global;
   $carbon--teal-60: #007d79 !default !global;
-  $carbon--teal-70: #006161 !default !global;
-  $carbon--teal-80: #004548 !default !global;
-  $carbon--teal-90: #003137 !default !global;
+  $carbon--teal-70: #005d5d !default !global;
+  $carbon--teal-80: #004144 !default !global;
+  $carbon--teal-90: #022b30 !default !global;
   $carbon--teal-100: #081a1c !default !global;
-  $carbon--warm-gray-10: #f7f3f1 !default !global;
-  $carbon--warm-gray-20: #e0dbda !default !global;
-  $carbon--warm-gray-30: #c1bcbb !default !global;
-  $carbon--warm-gray-40: #a7a2a2 !default !global;
+  $carbon--warm-gray-10: #f7f3f2 !default !global;
+  $carbon--warm-gray-20: #e5e0df !default !global;
+  $carbon--warm-gray-30: #cac5c4 !default !global;
+  $carbon--warm-gray-40: #ada8a8 !default !global;
   $carbon--warm-gray-50: #8f8b8b !default !global;
-  $carbon--warm-gray-60: #726e6e !default !global;
-  $carbon--warm-gray-70: #595555 !default !global;
-  $carbon--warm-gray-80: #403c3c !default !global;
-  $carbon--warm-gray-90: #2b2828 !default !global;
-  $carbon--warm-gray-100: #1a1717 !default !global;
+  $carbon--warm-gray-60: #736f6f !default !global;
+  $carbon--warm-gray-70: #565151 !default !global;
+  $carbon--warm-gray-80: #3c3838 !default !global;
+  $carbon--warm-gray-90: #272525 !default !global;
+  $carbon--warm-gray-100: #171414 !default !global;
   $carbon--white-0: #ffffff !default !global;
   $carbon--yellow-20: #fdd13a !default !global;
+  $carbon--yellow-30: #f1c21b !default !global;
   $black-100: #000000 !default !global;
-  $blue-10: #edf4ff !default !global;
-  $blue-20: #c9deff !default !global;
-  $blue-30: #97c1ff !default !global;
-  $blue-40: #6ea6ff !default !global;
-  $blue-50: #408bfc !default !global;
-  $blue-60: #0062ff !default !global;
-  $blue-70: #054ada !default !global;
-  $blue-80: #0530ad !default !global;
-  $blue-90: #061f80 !default !global;
-  $blue-100: #051243 !default !global;
+  $blue-10: #edf5ff !default !global;
+  $blue-20: #d0e2ff !default !global;
+  $blue-30: #a6c8ff !default !global;
+  $blue-40: #78a9ff !default !global;
+  $blue-50: #4589ff !default !global;
+  $blue-60: #0f62fe !default !global;
+  $blue-70: #0043ce !default !global;
+  $blue-80: #002d9c !default !global;
+  $blue-90: #001d6c !default !global;
+  $blue-100: #001141 !default !global;
   $cool-gray-10: #f2f4f8 !default !global;
-  $cool-gray-20: #d5d9e0 !default !global;
-  $cool-gray-30: #b9bfc7 !default !global;
-  $cool-gray-40: #9fa5ad !default !global;
-  $cool-gray-50: #868d95 !default !global;
+  $cool-gray-20: #dde1e6 !default !global;
+  $cool-gray-30: #c1c7cd !default !global;
+  $cool-gray-40: #a2a9b0 !default !global;
+  $cool-gray-50: #878d96 !default !global;
   $cool-gray-60: #697077 !default !global;
-  $cool-gray-70: #50565b !default !global;
-  $cool-gray-80: #373d42 !default !global;
-  $cool-gray-90: #242a2e !default !global;
-  $cool-gray-100: #13171a !default !global;
-  $cyan-10: #e3f6ff !default !global;
-  $cyan-20: #b3e6ff !default !global;
-  $cyan-30: #6ccaff !default !global;
-  $cyan-40: #30b0ff !default !global;
-  $cyan-50: #1191e6 !default !global;
+  $cool-gray-70: #4d5358 !default !global;
+  $cool-gray-80: #343a3f !default !global;
+  $cool-gray-90: #21272a !default !global;
+  $cool-gray-100: #121619 !default !global;
+  $cyan-10: #e5f6ff !default !global;
+  $cyan-20: #bae6ff !default !global;
+  $cyan-30: #82cfff !default !global;
+  $cyan-40: #33b1ff !default !global;
+  $cyan-50: #1192e8 !default !global;
   $cyan-60: #0072c3 !default !global;
-  $cyan-70: #0058a1 !default !global;
-  $cyan-80: #003d73 !default !global;
-  $cyan-90: #002b50 !default !global;
-  $cyan-100: #07192b !default !global;
-  $gray-10: #f3f3f3 !default !global;
-  $gray-20: #dcdcdc !default !global;
-  $gray-30: #bebebe !default !global;
-  $gray-40: #a4a4a4 !default !global;
-  $gray-50: #8c8c8c !default !global;
+  $cyan-70: #00539a !default !global;
+  $cyan-80: #003a6d !default !global;
+  $cyan-90: #012749 !default !global;
+  $cyan-100: #061727 !default !global;
+  $gray-10: #f4f4f4 !default !global;
+  $gray-20: #e0e0e0 !default !global;
+  $gray-30: #c6c6c6 !default !global;
+  $gray-40: #a8a8a8 !default !global;
+  $gray-50: #8d8d8d !default !global;
   $gray-60: #6f6f6f !default !global;
-  $gray-70: #565656 !default !global;
-  $gray-80: #3d3d3d !default !global;
-  $gray-90: #282828 !default !global;
-  $gray-100: #171717 !default !global;
-  $green-10: #dafbe4 !default !global;
-  $green-20: #9deeb2 !default !global;
-  $green-30: #56d679 !default !global;
-  $green-40: #3dbb61 !default !global;
+  $gray-70: #525252 !default !global;
+  $gray-80: #393939 !default !global;
+  $gray-90: #262626 !default !global;
+  $gray-100: #161616 !default !global;
+  $green-10: #defbe6 !default !global;
+  $green-20: #a7f0ba !default !global;
+  $green-30: #6fdc8c !default !global;
+  $green-40: #42be65 !default !global;
   $green-50: #24a148 !default !global;
   $green-60: #198038 !default !global;
-  $green-70: #10642a !default !global;
-  $green-80: #054719 !default !global;
-  $green-90: #01330f !default !global;
-  $green-100: #081b09 !default !global;
-  $magenta-10: #fff0f6 !default !global;
-  $magenta-20: #ffcfe1 !default !global;
-  $magenta-30: #ffa0c2 !default !global;
-  $magenta-40: #fa75a6 !default !global;
-  $magenta-50: #ee538b !default !global;
-  $magenta-60: #d12765 !default !global;
-  $magenta-70: #a11950 !default !global;
-  $magenta-80: #760a3a !default !global;
-  $magenta-90: #57002b !default !global;
-  $magenta-100: #2a0a16 !default !global;
-  $orange-40: #fc7b1e !default !global;
-  $purple-10: #f7f1ff !default !global;
-  $purple-20: #e6d6ff !default !global;
-  $purple-30: #d0b0ff !default !global;
-  $purple-40: #bb8eff !default !global;
-  $purple-50: #a66efa !default !global;
+  $green-70: #0e6027 !default !global;
+  $green-80: #044317 !default !global;
+  $green-90: #022d0d !default !global;
+  $green-100: #071908 !default !global;
+  $magenta-10: #fff0f7 !default !global;
+  $magenta-20: #ffd6e8 !default !global;
+  $magenta-30: #ffafd2 !default !global;
+  $magenta-40: #ff7eb6 !default !global;
+  $magenta-50: #ee5396 !default !global;
+  $magenta-60: #d12771 !default !global;
+  $magenta-70: #9f1853 !default !global;
+  $magenta-80: #740937 !default !global;
+  $magenta-90: #510224 !default !global;
+  $magenta-100: #2a0a18 !default !global;
+  $orange-40: #ff832b !default !global;
+  $purple-10: #f6f2ff !default !global;
+  $purple-20: #e8daff !default !global;
+  $purple-30: #d4bbff !default !global;
+  $purple-40: #be95ff !default !global;
+  $purple-50: #a56eff !default !global;
   $purple-60: #8a3ffc !default !global;
-  $purple-70: #6e32c9 !default !global;
-  $purple-80: #4f2196 !default !global;
-  $purple-90: #38146b !default !global;
-  $purple-100: #1e1033 !default !global;
-  $red-10: #fff0f1 !default !global;
-  $red-20: #fcd0d3 !default !global;
-  $red-30: #ffa4a9 !default !global;
-  $red-40: #ff767c !default !global;
-  $red-50: #fb4b53 !default !global;
+  $purple-70: #6929c4 !default !global;
+  $purple-80: #491d8b !default !global;
+  $purple-90: #31135e !default !global;
+  $purple-100: #1c0f30 !default !global;
+  $red-10: #fff1f1 !default !global;
+  $red-20: #ffd7d9 !default !global;
+  $red-30: #ffb3b8 !default !global;
+  $red-40: #ff8389 !default !global;
+  $red-50: #fa4d56 !default !global;
   $red-60: #da1e28 !default !global;
-  $red-70: #a51920 !default !global;
+  $red-70: #a2191f !default !global;
   $red-80: #750e13 !default !global;
-  $red-90: #570408 !default !global;
-  $red-100: #2c080a !default !global;
-  $teal-10: #dbfbfb !default !global;
-  $teal-20: #92eeee !default !global;
-  $teal-30: #20d5d2 !default !global;
-  $teal-40: #00bab6 !default !global;
-  $teal-50: #009c98 !default !global;
+  $red-90: #520408 !default !global;
+  $red-100: #2d0709 !default !global;
+  $teal-10: #d9fbfb !default !global;
+  $teal-20: #9ef0f0 !default !global;
+  $teal-30: #3ddbd9 !default !global;
+  $teal-40: #08bdba !default !global;
+  $teal-50: #009d9a !default !global;
   $teal-60: #007d79 !default !global;
-  $teal-70: #006161 !default !global;
-  $teal-80: #004548 !default !global;
-  $teal-90: #003137 !default !global;
+  $teal-70: #005d5d !default !global;
+  $teal-80: #004144 !default !global;
+  $teal-90: #022b30 !default !global;
   $teal-100: #081a1c !default !global;
-  $warm-gray-10: #f7f3f1 !default !global;
-  $warm-gray-20: #e0dbda !default !global;
-  $warm-gray-30: #c1bcbb !default !global;
-  $warm-gray-40: #a7a2a2 !default !global;
+  $warm-gray-10: #f7f3f2 !default !global;
+  $warm-gray-20: #e5e0df !default !global;
+  $warm-gray-30: #cac5c4 !default !global;
+  $warm-gray-40: #ada8a8 !default !global;
   $warm-gray-50: #8f8b8b !default !global;
-  $warm-gray-60: #726e6e !default !global;
-  $warm-gray-70: #595555 !default !global;
-  $warm-gray-80: #403c3c !default !global;
-  $warm-gray-90: #2b2828 !default !global;
-  $warm-gray-100: #1a1717 !default !global;
+  $warm-gray-60: #736f6f !default !global;
+  $warm-gray-70: #565151 !default !global;
+  $warm-gray-80: #3c3838 !default !global;
+  $warm-gray-90: #272525 !default !global;
+  $warm-gray-100: #171414 !default !global;
   $white-0: #ffffff !default !global;
   $yellow-20: #fdd13a !default !global;
+  $yellow-30: #f1c21b !default !global;
   $carbon--colors: (
     'black': (
       100: #000000,
     ),
     'blue': (
-      10: #edf4ff,
-      20: #c9deff,
-      30: #97c1ff,
-      40: #6ea6ff,
-      50: #408bfc,
-      60: #0062ff,
-      70: #054ada,
-      80: #0530ad,
-      90: #061f80,
-      100: #051243,
+      10: #edf5ff,
+      20: #d0e2ff,
+      30: #a6c8ff,
+      40: #78a9ff,
+      50: #4589ff,
+      60: #0f62fe,
+      70: #0043ce,
+      80: #002d9c,
+      90: #001d6c,
+      100: #001141,
     ),
     'cool-gray': (
       10: #f2f4f8,
-      20: #d5d9e0,
-      30: #b9bfc7,
-      40: #9fa5ad,
-      50: #868d95,
+      20: #dde1e6,
+      30: #c1c7cd,
+      40: #a2a9b0,
+      50: #878d96,
       60: #697077,
-      70: #50565b,
-      80: #373d42,
-      90: #242a2e,
-      100: #13171a,
+      70: #4d5358,
+      80: #343a3f,
+      90: #21272a,
+      100: #121619,
     ),
     'coolGray': (
       10: #f2f4f8,
-      20: #d5d9e0,
-      30: #b9bfc7,
-      40: #9fa5ad,
-      50: #868d95,
+      20: #dde1e6,
+      30: #c1c7cd,
+      40: #a2a9b0,
+      50: #878d96,
       60: #697077,
-      70: #50565b,
-      80: #373d42,
-      90: #242a2e,
-      100: #13171a,
+      70: #4d5358,
+      80: #343a3f,
+      90: #21272a,
+      100: #121619,
     ),
     'cyan': (
-      10: #e3f6ff,
-      20: #b3e6ff,
-      30: #6ccaff,
-      40: #30b0ff,
-      50: #1191e6,
+      10: #e5f6ff,
+      20: #bae6ff,
+      30: #82cfff,
+      40: #33b1ff,
+      50: #1192e8,
       60: #0072c3,
-      70: #0058a1,
-      80: #003d73,
-      90: #002b50,
-      100: #07192b,
+      70: #00539a,
+      80: #003a6d,
+      90: #012749,
+      100: #061727,
     ),
     'gray': (
-      10: #f3f3f3,
-      20: #dcdcdc,
-      30: #bebebe,
-      40: #a4a4a4,
-      50: #8c8c8c,
+      10: #f4f4f4,
+      20: #e0e0e0,
+      30: #c6c6c6,
+      40: #a8a8a8,
+      50: #8d8d8d,
       60: #6f6f6f,
-      70: #565656,
-      80: #3d3d3d,
-      90: #282828,
-      100: #171717,
+      70: #525252,
+      80: #393939,
+      90: #262626,
+      100: #161616,
     ),
     'green': (
-      10: #dafbe4,
-      20: #9deeb2,
-      30: #56d679,
-      40: #3dbb61,
+      10: #defbe6,
+      20: #a7f0ba,
+      30: #6fdc8c,
+      40: #42be65,
       50: #24a148,
       60: #198038,
-      70: #10642a,
-      80: #054719,
-      90: #01330f,
-      100: #081b09,
+      70: #0e6027,
+      80: #044317,
+      90: #022d0d,
+      100: #071908,
     ),
     'magenta': (
-      10: #fff0f6,
-      20: #ffcfe1,
-      30: #ffa0c2,
-      40: #fa75a6,
-      50: #ee538b,
-      60: #d12765,
-      70: #a11950,
-      80: #760a3a,
-      90: #57002b,
-      100: #2a0a16,
+      10: #fff0f7,
+      20: #ffd6e8,
+      30: #ffafd2,
+      40: #ff7eb6,
+      50: #ee5396,
+      60: #d12771,
+      70: #9f1853,
+      80: #740937,
+      90: #510224,
+      100: #2a0a18,
     ),
     'orange': (
-      40: #fc7b1e,
+      40: #ff832b,
     ),
     'purple': (
-      10: #f7f1ff,
-      20: #e6d6ff,
-      30: #d0b0ff,
-      40: #bb8eff,
-      50: #a66efa,
+      10: #f6f2ff,
+      20: #e8daff,
+      30: #d4bbff,
+      40: #be95ff,
+      50: #a56eff,
       60: #8a3ffc,
-      70: #6e32c9,
-      80: #4f2196,
-      90: #38146b,
-      100: #1e1033,
+      70: #6929c4,
+      80: #491d8b,
+      90: #31135e,
+      100: #1c0f30,
     ),
     'red': (
-      10: #fff0f1,
-      20: #fcd0d3,
-      30: #ffa4a9,
-      40: #ff767c,
-      50: #fb4b53,
+      10: #fff1f1,
+      20: #ffd7d9,
+      30: #ffb3b8,
+      40: #ff8389,
+      50: #fa4d56,
       60: #da1e28,
-      70: #a51920,
+      70: #a2191f,
       80: #750e13,
-      90: #570408,
-      100: #2c080a,
+      90: #520408,
+      100: #2d0709,
     ),
     'teal': (
-      10: #dbfbfb,
-      20: #92eeee,
-      30: #20d5d2,
-      40: #00bab6,
-      50: #009c98,
+      10: #d9fbfb,
+      20: #9ef0f0,
+      30: #3ddbd9,
+      40: #08bdba,
+      50: #009d9a,
       60: #007d79,
-      70: #006161,
-      80: #004548,
-      90: #003137,
+      70: #005d5d,
+      80: #004144,
+      90: #022b30,
       100: #081a1c,
     ),
     'warm-gray': (
-      10: #f7f3f1,
-      20: #e0dbda,
-      30: #c1bcbb,
-      40: #a7a2a2,
+      10: #f7f3f2,
+      20: #e5e0df,
+      30: #cac5c4,
+      40: #ada8a8,
       50: #8f8b8b,
-      60: #726e6e,
-      70: #595555,
-      80: #403c3c,
-      90: #2b2828,
-      100: #1a1717,
+      60: #736f6f,
+      70: #565151,
+      80: #3c3838,
+      90: #272525,
+      100: #171414,
     ),
     'warmGray': (
-      10: #f7f3f1,
-      20: #e0dbda,
-      30: #c1bcbb,
-      40: #a7a2a2,
+      10: #f7f3f2,
+      20: #e5e0df,
+      30: #cac5c4,
+      40: #ada8a8,
       50: #8f8b8b,
-      60: #726e6e,
-      70: #595555,
-      80: #403c3c,
-      90: #2b2828,
-      100: #1a1717,
+      60: #736f6f,
+      70: #565151,
+      80: #3c3838,
+      90: #272525,
+      100: #171414,
     ),
     'white': (
       0: #ffffff,
     ),
     'yellow': (
       20: #fdd13a,
+      30: #f1c21b,
     ),
   ) !default !global;
 }
@@ -3540,66 +3545,66 @@ Carbon's white color theme
 
 ```scss
 $carbon--theme--white: (
-  interactive-01: #0062ff,
-  interactive-02: #3d3d3d,
-  interactive-03: #0062ff,
-  interactive-04: #0062ff,
+  interactive-01: #0f62fe,
+  interactive-02: #393939,
+  interactive-03: #0f62fe,
+  interactive-04: #0f62fe,
   ui-background: #ffffff,
-  ui-01: #f3f3f3,
+  ui-01: #f4f4f4,
   ui-02: #ffffff,
-  ui-03: #dcdcdc,
-  ui-04: #8c8c8c,
-  ui-05: #171717,
-  text-01: #171717,
-  text-02: #565656,
-  text-03: #8c8c8c,
+  ui-03: #e0e0e0,
+  ui-04: #8d8d8d,
+  ui-05: #161616,
+  text-01: #161616,
+  text-02: #525252,
+  text-03: #8d8d8d,
   text-04: #ffffff,
-  icon-01: #171717,
-  icon-02: #565656,
+  icon-01: #161616,
+  icon-02: #525252,
   icon-03: #ffffff,
-  link-01: #0062ff,
-  inverse-link: #6ea6ff,
-  field-01: #f3f3f3,
+  link-01: #0f62fe,
+  inverse-link: #78a9ff,
+  field-01: #f4f4f4,
   field-02: #ffffff,
   inverse-01: #ffffff,
-  inverse-02: #3d3d3d,
+  inverse-02: #393939,
   support-01: #da1e28,
   support-02: #24a148,
-  support-03: #fdd13a,
-  support-04: #054ada,
-  inverse-support-01: #fb4b53,
-  inverse-support-02: #3dbb61,
-  inverse-support-03: #fdd13a,
-  inverse-support-04: #408bfc,
-  overlay-01: rgba(23, 23, 23, 0.5),
-  focus: #0062ff,
+  support-03: #f1c21b,
+  support-04: #0043ce,
+  inverse-support-01: #fa4d56,
+  inverse-support-02: #42be65,
+  inverse-support-03: #f1c21b,
+  inverse-support-04: #4589ff,
+  overlay-01: rgba(22, 22, 22, 0.5),
+  focus: #0f62fe,
   inverse-focus-ui: #ffffff,
   hover-primary: #0353e9,
-  active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  active-primary: #002d9c,
+  hover-primary-text: #0043ce,
   hover-secondary: #4c4c4c,
   active-secondary: #6f6f6f,
   hover-tertiary: #0353e9,
-  active-tertiary: #0530ad,
+  active-tertiary: #002d9c,
   hover-ui: #e5e5e5,
-  active-ui: #bebebe,
-  selected-ui: #dcdcdc,
+  active-ui: #c6c6c6,
+  selected-ui: #e0e0e0,
   inverse-hover-ui: #4c4c4c,
   hover-selected-ui: #cacaca,
   hover-danger: #ba1b23,
   active-danger: #750e13,
   hover-row: #e5e5e5,
   visited-link: #8a3ffc,
-  disabled-01: #f3f3f3,
-  disabled-02: #bebebe,
-  disabled-03: #8c8c8c,
-  highlight: #c9deff,
+  disabled-01: #f4f4f4,
+  disabled-02: #c6c6c6,
+  disabled-03: #8d8d8d,
+  highlight: #d0e2ff,
   skeleton-01: #e5e5e5,
-  skeleton-02: #bebebe,
-  brand-01: #0062ff,
-  brand-02: #3d3d3d,
-  brand-03: #0062ff,
-  active-01: #bebebe,
+  skeleton-02: #c6c6c6,
+  brand-01: #0f62fe,
+  brand-02: #393939,
+  brand-03: #0f62fe,
+  active-01: #c6c6c6,
   hover-field: #e5e5e5,
 );
 ```
@@ -3620,50 +3625,50 @@ Carbon's g10 color theme
 
 ```scss
 $carbon--theme--g10: (
-  interactive-01: #0062ff,
-  interactive-02: #3d3d3d,
-  interactive-03: #0062ff,
-  interactive-04: #0062ff,
-  ui-background: #f3f3f3,
+  interactive-01: #0f62fe,
+  interactive-02: #393939,
+  interactive-03: #0f62fe,
+  interactive-04: #0f62fe,
+  ui-background: #f4f4f4,
   ui-01: #ffffff,
-  ui-02: #f3f3f3,
-  ui-03: #dcdcdc,
-  ui-04: #8c8c8c,
-  ui-05: #171717,
-  text-01: #171717,
-  text-02: #565656,
-  text-03: #8c8c8c,
+  ui-02: #f4f4f4,
+  ui-03: #e0e0e0,
+  ui-04: #8d8d8d,
+  ui-05: #161616,
+  text-01: #161616,
+  text-02: #525252,
+  text-03: #8d8d8d,
   text-04: #ffffff,
-  icon-01: #171717,
-  icon-02: #565656,
+  icon-01: #161616,
+  icon-02: #525252,
   icon-03: #ffffff,
-  link-01: #0062ff,
-  inverse-link: #6ea6ff,
+  link-01: #0f62fe,
+  inverse-link: #78a9ff,
   field-01: #ffffff,
-  field-02: #f3f3f3,
+  field-02: #f4f4f4,
   inverse-01: #ffffff,
-  inverse-02: #3d3d3d,
+  inverse-02: #393939,
   support-01: #da1e28,
   support-02: #24a148,
-  support-03: #fdd13a,
-  support-04: #054ada,
-  inverse-support-01: #fb4b53,
-  inverse-support-02: #3dbb61,
-  inverse-support-03: #fdd13a,
-  inverse-support-04: #408bfc,
-  overlay-01: rgba(23, 23, 23, 0.5),
-  focus: #0062ff,
+  support-03: #f1c21b,
+  support-04: #0043ce,
+  inverse-support-01: #fa4d56,
+  inverse-support-02: #42be65,
+  inverse-support-03: #f1c21b,
+  inverse-support-04: #4589ff,
+  overlay-01: rgba(22, 22, 22, 0.5),
+  focus: #0f62fe,
   inverse-focus-ui: #ffffff,
   hover-primary: #0353e9,
-  active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  active-primary: #002d9c,
+  hover-primary-text: #0043ce,
   hover-secondary: #4c4c4c,
   active-secondary: #6f6f6f,
   hover-tertiary: #0353e9,
-  active-tertiary: #0530ad,
+  active-tertiary: #002d9c,
   hover-ui: #e5e5e5,
-  active-ui: #bebebe,
-  selected-ui: #dcdcdc,
+  active-ui: #c6c6c6,
+  selected-ui: #e0e0e0,
   inverse-hover-ui: #4c4c4c,
   hover-selected-ui: #cacaca,
   hover-danger: #ba1b23,
@@ -3671,15 +3676,15 @@ $carbon--theme--g10: (
   hover-row: #e5e5e5,
   visited-link: #8a3ffc,
   disabled-01: #ffffff,
-  disabled-02: #bebebe,
-  disabled-03: #8c8c8c,
-  highlight: #c9deff,
+  disabled-02: #c6c6c6,
+  disabled-03: #8d8d8d,
+  highlight: #d0e2ff,
   skeleton-01: #e5e5e5,
-  skeleton-02: #bebebe,
-  brand-01: #0062ff,
-  brand-02: #3d3d3d,
-  brand-03: #0062ff,
-  active-01: #bebebe,
+  skeleton-02: #c6c6c6,
+  brand-01: #0f62fe,
+  brand-02: #393939,
+  brand-03: #0f62fe,
+  active-01: #c6c6c6,
   hover-field: #e5e5e5,
 );
 ```
@@ -3698,63 +3703,63 @@ Carbon's g90 color theme
 
 ```scss
 $carbon--theme--g90: (
-  interactive-01: #0062ff,
+  interactive-01: #0f62fe,
   interactive-02: #6f6f6f,
   interactive-03: #ffffff,
-  interactive-04: #408bfc,
-  ui-background: #282828,
-  ui-01: #3d3d3d,
-  ui-02: #565656,
-  ui-03: #565656,
-  ui-04: #8c8c8c,
-  ui-05: #f3f3f3,
-  text-01: #f3f3f3,
-  text-02: #bebebe,
-  text-03: #8c8c8c,
+  interactive-04: #4589ff,
+  ui-background: #262626,
+  ui-01: #393939,
+  ui-02: #525252,
+  ui-03: #525252,
+  ui-04: #8d8d8d,
+  ui-05: #f4f4f4,
+  text-01: #f4f4f4,
+  text-02: #c6c6c6,
+  text-03: #8d8d8d,
   text-04: #ffffff,
-  icon-01: #f3f3f3,
-  icon-02: #bebebe,
+  icon-01: #f4f4f4,
+  icon-02: #c6c6c6,
   icon-03: #ffffff,
-  link-01: #6ea6ff,
-  inverse-link: #0062ff,
-  field-01: #3d3d3d,
-  field-02: #565656,
-  inverse-01: #171717,
-  inverse-02: #f3f3f3,
-  support-01: #fb4b53,
-  support-02: #3dbb61,
-  support-03: #fdd13a,
-  support-04: #408bfc,
+  link-01: #78a9ff,
+  inverse-link: #0f62fe,
+  field-01: #393939,
+  field-02: #525252,
+  inverse-01: #161616,
+  inverse-02: #f4f4f4,
+  support-01: #fa4d56,
+  support-02: #42be65,
+  support-03: #f1c21b,
+  support-04: #4589ff,
   inverse-support-01: #da1e28,
   inverse-support-02: #24a148,
-  inverse-support-03: #fdd13a,
-  inverse-support-04: #0062ff,
-  overlay-01: rgba(23, 23, 23, 0.7),
+  inverse-support-03: #f1c21b,
+  inverse-support-04: #0f62fe,
+  overlay-01: rgba(22, 22, 22, 0.7),
   focus: #ffffff,
-  inverse-focus-ui: #0062ff,
+  inverse-focus-ui: #0f62fe,
   hover-primary: #0353e9,
-  active-primary: #0530ad,
-  hover-primary-text: #97c1ff,
+  active-primary: #002d9c,
+  hover-primary-text: #a6c8ff,
   hover-secondary: #606060,
-  active-secondary: #3d3d3d,
-  hover-tertiary: #f3f3f3,
-  active-tertiary: #bebebe,
+  active-secondary: #393939,
+  hover-tertiary: #f4f4f4,
+  active-tertiary: #c6c6c6,
   hover-ui: #4c4c4c,
   active-ui: #6f6f6f,
-  selected-ui: #565656,
+  selected-ui: #525252,
   inverse-hover-ui: #e5e5e5,
   hover-selected-ui: #656565,
   hover-danger: #ba1b23,
   active-danger: #750e13,
   hover-row: #4c4c4c,
-  visited-link: #bb8eff,
-  disabled-01: #3d3d3d,
-  disabled-02: #565656,
-  disabled-03: #8c8c8c,
-  highlight: #054ada,
+  visited-link: #be95ff,
+  disabled-01: #393939,
+  disabled-02: #525252,
+  disabled-03: #8d8d8d,
+  highlight: #0043ce,
   skeleton-01: #353535,
-  skeleton-02: #565656,
-  brand-01: #0062ff,
+  skeleton-02: #525252,
+  brand-01: #0f62fe,
   brand-02: #6f6f6f,
   brand-03: #ffffff,
   active-01: #6f6f6f,
@@ -3776,66 +3781,66 @@ Carbon's g100 color theme
 
 ```scss
 $carbon--theme--g100: (
-  interactive-01: #0062ff,
+  interactive-01: #0f62fe,
   interactive-02: #6f6f6f,
   interactive-03: #ffffff,
-  interactive-04: #408bfc,
-  ui-background: #171717,
-  ui-01: #282828,
-  ui-02: #3d3d3d,
-  ui-03: #3d3d3d,
+  interactive-04: #4589ff,
+  ui-background: #161616,
+  ui-01: #262626,
+  ui-02: #393939,
+  ui-03: #393939,
   ui-04: #6f6f6f,
-  ui-05: #f3f3f3,
-  text-01: #f3f3f3,
-  text-02: #bebebe,
+  ui-05: #f4f4f4,
+  text-01: #f4f4f4,
+  text-02: #c6c6c6,
   text-03: #6f6f6f,
   text-04: #ffffff,
-  icon-01: #f3f3f3,
-  icon-02: #bebebe,
+  icon-01: #f4f4f4,
+  icon-02: #c6c6c6,
   icon-03: #ffffff,
-  link-01: #6ea6ff,
-  inverse-link: #0062ff,
-  field-01: #282828,
-  field-02: #3d3d3d,
-  inverse-01: #171717,
-  inverse-02: #f3f3f3,
-  support-01: #fb4b53,
-  support-02: #3dbb61,
-  support-03: #fdd13a,
-  support-04: #408bfc,
+  link-01: #78a9ff,
+  inverse-link: #0f62fe,
+  field-01: #262626,
+  field-02: #393939,
+  inverse-01: #161616,
+  inverse-02: #f4f4f4,
+  support-01: #fa4d56,
+  support-02: #42be65,
+  support-03: #f1c21b,
+  support-04: #4589ff,
   inverse-support-01: #da1e28,
   inverse-support-02: #24a148,
-  inverse-support-03: #fdd13a,
-  inverse-support-04: #0062ff,
-  overlay-01: rgba(23, 23, 23, 0.7),
+  inverse-support-03: #f1c21b,
+  inverse-support-04: #0f62fe,
+  overlay-01: rgba(22, 22, 22, 0.7),
   focus: #ffffff,
-  inverse-focus-ui: #0062ff,
+  inverse-focus-ui: #0f62fe,
   hover-primary: #0353e9,
-  active-primary: #0530ad,
-  hover-primary-text: #97c1ff,
+  active-primary: #002d9c,
+  hover-primary-text: #a6c8ff,
   hover-secondary: #606060,
-  active-secondary: #3d3d3d,
-  hover-tertiary: #f3f3f3,
-  active-tertiary: #bebebe,
+  active-secondary: #393939,
+  hover-tertiary: #f4f4f4,
+  active-tertiary: #c6c6c6,
   hover-ui: #353535,
-  active-ui: #565656,
-  selected-ui: #3d3d3d,
+  active-ui: #525252,
+  selected-ui: #393939,
   inverse-hover-ui: #e5e5e5,
   hover-selected-ui: #4c4c4c,
   hover-danger: #ba1b23,
   active-danger: #750e13,
   hover-row: #353535,
-  visited-link: #bb8eff,
-  disabled-01: #282828,
-  disabled-02: #3d3d3d,
+  visited-link: #be95ff,
+  disabled-01: #262626,
+  disabled-02: #393939,
   disabled-03: #6f6f6f,
-  highlight: #0530ad,
+  highlight: #002d9c,
   skeleton-01: #353535,
-  skeleton-02: #3d3d3d,
-  brand-01: #0062ff,
+  skeleton-02: #393939,
+  brand-01: #0f62fe,
   brand-02: #6f6f6f,
   brand-03: #ffffff,
-  active-01: #565656,
+  active-01: #525252,
   hover-field: #353535,
 );
 ```
