@@ -17,7 +17,7 @@ import {
   gray10,
   gray20,
   gray30,
-  gray40
+  gray40,
   gray50,
   gray60,
   gray70,
