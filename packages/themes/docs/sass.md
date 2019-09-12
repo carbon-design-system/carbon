@@ -20,6 +20,7 @@
   - [✅interactive-02 [variable]](#interactive-02-variable)
   - [✅interactive-03 [variable]](#interactive-03-variable)
   - [✅interactive-04 [variable]](#interactive-04-variable)
+  - [✅danger [variable]](#danger-variable)
   - [✅ui-background [variable]](#ui-background-variable)
   - [✅ui-01 [variable]](#ui-01-variable)
   - [✅ui-02 [variable]](#ui-02-variable)
@@ -30,6 +31,7 @@
   - [✅text-02 [variable]](#text-02-variable)
   - [✅text-03 [variable]](#text-03-variable)
   - [✅text-04 [variable]](#text-04-variable)
+  - [✅text-05 [variable]](#text-05-variable)
   - [✅icon-01 [variable]](#icon-01-variable)
   - [✅icon-02 [variable]](#icon-02-variable)
   - [✅icon-03 [variable]](#icon-03-variable)
@@ -95,6 +97,7 @@ Define theme variables from a map of tokens
   $interactive-02: map-get($theme, 'interactive-02') !global;
   $interactive-03: map-get($theme, 'interactive-03') !global;
   $interactive-04: map-get($theme, 'interactive-04') !global;
+  $danger: map-get($theme, 'danger') !global;
   $ui-background: map-get($theme, 'ui-background') !global;
   $ui-01: map-get($theme, 'ui-01') !global;
   $ui-02: map-get($theme, 'ui-02') !global;
@@ -105,6 +108,7 @@ Define theme variables from a map of tokens
   $text-02: map-get($theme, 'text-02') !global;
   $text-03: map-get($theme, 'text-03') !global;
   $text-04: map-get($theme, 'text-04') !global;
+  $text-05: map-get($theme, 'text-05') !global;
   $icon-01: map-get($theme, 'icon-01') !global;
   $icon-02: map-get($theme, 'icon-02') !global;
   $icon-03: map-get($theme, 'icon-03') !global;
@@ -158,6 +162,7 @@ Define theme variables from a map of tokens
     --interactive-02: #{map-get($theme, 'interactive-02')};
     --interactive-03: #{map-get($theme, 'interactive-03')};
     --interactive-04: #{map-get($theme, 'interactive-04')};
+    --danger: #{map-get($theme, 'danger')};
     --ui-background: #{map-get($theme, 'ui-background')};
     --ui-01: #{map-get($theme, 'ui-01')};
     --ui-02: #{map-get($theme, 'ui-02')};
@@ -168,6 +173,7 @@ Define theme variables from a map of tokens
     --text-02: #{map-get($theme, 'text-02')};
     --text-03: #{map-get($theme, 'text-03')};
     --text-04: #{map-get($theme, 'text-04')};
+    --text-05: #{map-get($theme, 'text-05')};
     --icon-01: #{map-get($theme, 'icon-01')};
     --icon-02: #{map-get($theme, 'icon-02')};
     --icon-03: #{map-get($theme, 'icon-03')};
@@ -266,6 +272,7 @@ Define theme variables from a map of tokens
   - [interactive-02 [variable]](#interactive-02-variable)
   - [interactive-03 [variable]](#interactive-03-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
+  - [danger [variable]](#danger-variable)
   - [ui-background [variable]](#ui-background-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-02 [variable]](#ui-02-variable)
@@ -276,6 +283,7 @@ Define theme variables from a map of tokens
   - [text-02 [variable]](#text-02-variable)
   - [text-03 [variable]](#text-03-variable)
   - [text-04 [variable]](#text-04-variable)
+  - [text-05 [variable]](#text-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [icon-03 [variable]](#icon-03-variable)
@@ -338,6 +346,7 @@ $carbon--theme--white: (
   interactive-02: #393939,
   interactive-03: #0f62fe,
   interactive-04: #0f62fe,
+  danger: #da1e28,
   ui-background: #ffffff,
   ui-01: #f4f4f4,
   ui-02: #ffffff,
@@ -345,9 +354,10 @@ $carbon--theme--white: (
   ui-04: #8d8d8d,
   ui-05: #161616,
   text-01: #161616,
-  text-02: #525252,
-  text-03: #8d8d8d,
+  text-02: #393939,
+  text-03: #a8a8a8,
   text-04: #ffffff,
+  text-05: #6f6f6f,
   icon-01: #161616,
   icon-02: #525252,
   icon-03: #ffffff,
@@ -418,6 +428,7 @@ $carbon--theme--g10: (
   interactive-02: #393939,
   interactive-03: #0f62fe,
   interactive-04: #0f62fe,
+  danger: #da1e28,
   ui-background: #f4f4f4,
   ui-01: #ffffff,
   ui-02: #f4f4f4,
@@ -425,9 +436,10 @@ $carbon--theme--g10: (
   ui-04: #8d8d8d,
   ui-05: #161616,
   text-01: #161616,
-  text-02: #525252,
-  text-03: #8d8d8d,
+  text-02: #393939,
+  text-03: #a8a8a8,
   text-04: #ffffff,
+  text-05: #6f6f6f,
   icon-01: #161616,
   icon-02: #525252,
   icon-03: #ffffff,
@@ -496,6 +508,7 @@ $carbon--theme--g90: (
   interactive-02: #6f6f6f,
   interactive-03: #ffffff,
   interactive-04: #4589ff,
+  danger: #da1e28,
   ui-background: #262626,
   ui-01: #393939,
   ui-02: #525252,
@@ -504,8 +517,9 @@ $carbon--theme--g90: (
   ui-05: #f4f4f4,
   text-01: #f4f4f4,
   text-02: #c6c6c6,
-  text-03: #8d8d8d,
+  text-03: #6f6f6f,
   text-04: #ffffff,
+  text-05: #8d8d8d,
   icon-01: #f4f4f4,
   icon-02: #c6c6c6,
   icon-03: #ffffff,
@@ -574,6 +588,7 @@ $carbon--theme--g100: (
   interactive-02: #6f6f6f,
   interactive-03: #ffffff,
   interactive-04: #4589ff,
+  danger: #da1e28,
   ui-background: #161616,
   ui-01: #262626,
   ui-02: #393939,
@@ -584,6 +599,7 @@ $carbon--theme--g100: (
   text-02: #c6c6c6,
   text-03: #6f6f6f,
   text-04: #ffffff,
+  text-05: #8d8d8d,
   icon-01: #f4f4f4,
   icon-02: #c6c6c6,
   icon-03: #ffffff,
@@ -652,6 +668,7 @@ $carbon--theme--v9: (
   interactive-02: #5a6872,
   interactive-03: #5a6872,
   interactive-04: #3d70b2,
+  danger: #e0182d,
   ui-background: #f4f7fb,
   ui-01: #ffffff,
   ui-02: #f4f7fb,
@@ -662,6 +679,7 @@ $carbon--theme--v9: (
   text-02: #5a6872,
   text-03: #cdd1d4,
   text-04: #ffffff,
+  text-05: #5a6872,
   icon-01: #3d70b2,
   icon-02: #5a6872,
   icon-03: #ffffff,
@@ -805,6 +823,22 @@ $interactive-03: map-get($carbon--theme, 'interactive-03');
 
 ```scss
 $interactive-04: map-get($carbon--theme, 'interactive-04');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅danger [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$danger: map-get($carbon--theme, 'danger');
 ```
 
 </details>
@@ -985,6 +1019,22 @@ Text on interactive colors
 
 ```scss
 $text-04: map-get($carbon--theme, 'text-04');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅text-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$text-05: map-get($carbon--theme, 'text-05');
 ```
 
 </details>
