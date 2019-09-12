@@ -206,4 +206,20 @@ storiesOf('DataTable', module)
       `,
       },
     }
+  )
+  .add(
+    'with overflow menu',
+    withReadme(readme, () =>
+      require('./stories/with-overflow-menu').default(props())
+    ),
+    {
+      info: {
+        text: `
+      DataTable with Overflow menus added.
+
+      You can find more detailed information surrounding usage of this component
+      at the following url: ${readmeURL}
+    `,
+      },
+    }
   );
