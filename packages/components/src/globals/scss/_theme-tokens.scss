@@ -47,7 +47,8 @@ $inverse-focus-ui: $ibm-color__white-0 !default;
 /// @type Color
 /// @access public
 /// @group link
-$link-visited: $ibm-color__purple-60 !default;
+/// @deprecated
+$link-visited: $visited-link !default;
 
 /// @type Color
 /// @access public
