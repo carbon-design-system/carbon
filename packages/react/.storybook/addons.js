@@ -13,3 +13,4 @@ import '@storybook/addon-a11y/register';
 
 // Community addons
 import 'storybook-readme/register';
+import './addon-carbon-theme/register';

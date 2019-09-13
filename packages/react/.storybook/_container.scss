@@ -14,3 +14,21 @@ $prefix: 'bx';
 // as `src` directory is _not_ meant to be shipped in our NPM package.
 // Use e.g. `@import '~carbon-components/scss/globals/scss/styles.scss'` instead.
 @import '~carbon-components/src/globals/scss/styles.scss'; // SEE THE NOTE ABOVE
+
+@if mixin-exists(carbon--theme--custom-properties) {
+  :root {
+    @include carbon--theme--custom-properties($carbon--theme--white);
+  }
+
+  :root[storybook-carbon-theme='g10'] {
+    @include carbon--theme--custom-properties($carbon--theme--g10);
+  }
+
+  :root[storybook-carbon-theme='g90'] {
+    @include carbon--theme--custom-properties($carbon--theme--g90);
+  }
+
+  :root[storybook-carbon-theme='g100'] {
+    @include carbon--theme--custom-properties($carbon--theme--g100);
+  }
+}
