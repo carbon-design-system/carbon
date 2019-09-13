@@ -12932,6 +12932,10 @@ File uploader styles
     fill: $icon-02;
   }
 
+  .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
+    margin-right: -$carbon--spacing-03;
+  }
+
   .#{$prefix}--file__drop-container {
     display: flex;
     align-items: flex-start;
