@@ -101,8 +101,7 @@
 
   .#{$prefix}--form__helper-text {
     @include type-style('helper-text-01');
-    font-style: italic;
-    color: $text-02;
+    color: $text-05;
     z-index: 0;
     opacity: 1;
     margin-bottom: $carbon--spacing-03;
