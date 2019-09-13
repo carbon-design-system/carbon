@@ -8,7 +8,7 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import { keys, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
 
