@@ -40,4 +40,14 @@ describe('TooltipDefinition', () => {
     const wrapper = mount(<TooltipDefinition {...mockProps} direction="top" />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should allow the user to specify the alignment', () => {
+    const wrapper = mount(<TooltipDefinition {...mockProps} align="start" />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should support custom elements for the trigger button base', () => {
+    const wrapper = mount(<TooltipDefinition {...mockProps} as="span" />);
+    expect(wrapper.find('span.bx--tooltip__trigger')).toHaveLength(1);
+  });
 });

@@ -37,6 +37,15 @@ const props = () => ({
     'Tooltip content (tooltipText)',
     'Brief description of the dotted, underlined word above.'
   ),
+  as: select(
+    'Base element for trigger button',
+    {
+      button: 'button',
+      div: 'div',
+      span: 'span',
+    },
+    'button'
+  ),
 });
 
 storiesOf('TooltipDefinition', module)

@@ -21,6 +21,7 @@ const TooltipDefinition = ({
   direction,
   align,
   tooltipText,
+  as = 'button',
   ...rest
 }) => {
   const tooltipId = id || `definition-tooltip-${getInstanceId()}`;
@@ -39,11 +40,15 @@ const TooltipDefinition = ({
       [`${prefix}--tooltip--align-${align}`]: align,
     }
   );
+  const TooltipDefinitionTrigger = as;
   return (
     <div {...rest} className={tooltipClassName}>
-      <button className={tooltipTriggerClasses} aria-describedby={tooltipId}>
+      <TooltipDefinitionTrigger
+        className={tooltipTriggerClasses}
+        as={as}
+        aria-describedby={tooltipId}>
         {children}
-      </button>
+      </TooltipDefinitionTrigger>
       <div
         className={`${prefix}--assistive-text`}
         id={tooltipId}
@@ -88,6 +93,12 @@ TooltipDefinition.propTypes = {
    * TODO: rename this prop (will be a breaking change)
    */
   tooltipText: PropTypes.node.isRequired,
+
+  /**
+   * Specify how the trigger button itself should be rendered.
+   * Make sure to apply all props to the root node and render children appropriately
+   */
+  as: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
 };
 
 TooltipDefinition.defaultProps = {
