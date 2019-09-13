@@ -36,7 +36,7 @@ https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/
 
 Select VirtualBox as the platform and download the ZIP.
 
-_Note: is says the VMs expire after 90 days, but it appears that is not
+_Note: it says the VMs expire after 90 days, but it appears that is not
 enforced._
 
 You can save the ZIP wherever you'd like, but it's best to save it in an
@@ -60,7 +60,7 @@ needed.
 
 - When using the VM, you may need to `View > Virtual Screen 1` and select a
   different scale
-- By default, the left `CMD` key removes the "input trap" VM so you can interact
-  with your primary OS
+- By default, the left `CMD` key removes the "input trap" from the VM so you can
+  interact with your primary OS
 - Remember to use `CTRL` instead of `CMD` for selecting, copying, cutting,
   pasting, etc. on Windows VMs
