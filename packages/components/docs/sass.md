@@ -4123,7 +4123,7 @@ $carbon--theme--g90: (
   hover-row: #4c4c4c,
   visited-link: #be95ff,
   disabled-01: #393939,
-  disabled-02: #525252,
+  disabled-02: #6f6f6f,
   disabled-03: #8d8d8d,
   highlight: #0043ce,
   skeleton-01: #353535,
@@ -4203,7 +4203,7 @@ $carbon--theme--g100: (
   hover-row: #353535,
   visited-link: #be95ff,
   disabled-01: #262626,
-  disabled-02: #393939,
+  disabled-02: #525252,
   disabled-03: #6f6f6f,
   highlight: #002d9c,
   skeleton-01: #353535,
@@ -14380,6 +14380,10 @@ Modal styles
       outline: none;
       border-color: $interactive-01;
     }
+  }
+
+  .#{$prefix}--modal-close::-moz-focus-inner {
+    border: 0;
   }
 
   .#{$prefix}--modal-close__icon {
