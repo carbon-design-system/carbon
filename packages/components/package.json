@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/carbon-components",
   "description": "Rocket Software's open source design system based on the Carbon Design System by IBM.",
-  "version": "0.0.7-beta.0",
+  "version": "0.0.6",
   "license": "Apache-2.0",
   "main": "umd/index.js",
   "module": "es/index.js",
