@@ -12814,6 +12814,36 @@ File uploader styles
     border: none;
     cursor: pointer;
     padding: 0;
+    fill: $icon-02;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
+    fill: $icon-02;
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
+    margin-right: -$carbon--spacing-03;
+  }
+
+  .#{$prefix}--file__drop-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: rem(96px);
+    max-width: rem(320px);
+    padding: $carbon--spacing-05;
+    overflow: hidden;
+    border: 1px dashed $ui-04;
+  }
+
+  .#{$prefix}--file__drop-container--drag-over {
+    background: none;
+    outline: 2px solid $interactive-03;
+    outline-offset: -2px;
   }
 }
 ```
