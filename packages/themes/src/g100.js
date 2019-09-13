@@ -16,6 +16,7 @@ import {
   // Gray
   gray10,
   gray30,
+  gray50,
   gray60,
   gray70,
   gray80,
@@ -42,6 +43,7 @@ export const interactive01 = blue60;
 export const interactive02 = gray60;
 export const interactive03 = white;
 export const interactive04 = blue50;
+export const danger = red60;
 
 export const uiBackground = gray100;
 
@@ -55,6 +57,7 @@ export const text01 = gray10;
 export const text02 = gray30;
 export const text03 = gray60;
 export const text04 = white;
+export const text05 = gray50;
 
 export const icon01 = gray10;
 export const icon02 = gray30;
