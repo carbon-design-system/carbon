@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/carbon-components-react",
   "description": "React components for Carbon.",
-  "version": "0.0.6",
+  "version": "0.0.7-beta.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -32,7 +32,7 @@
     "storybook": "start-storybook -p 9000"
   },
   "peerDependencies": {
-    "@rocketsoftware/carbon-components": "0.0.6",
+    "@rocketsoftware/carbon-components": "0.0.7-beta.0",
     "carbon-icons": "^7.0.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
