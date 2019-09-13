@@ -4745,6 +4745,7 @@ $text-05: map-get($carbon--theme, 'text-05');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [form [mixin]](#form-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -7688,7 +7689,6 @@ $label-01: (
 ```scss
 $helper-text-01: (
   font-size: carbon--type-scale(1),
-  font-style: italic,
   line-height: carbon--rem(16px),
   letter-spacing: 0.32px,
 );
@@ -12932,8 +12932,7 @@ Form styles
 
   .#{$prefix}--form__helper-text {
     @include type-style('helper-text-01');
-    font-style: italic;
-    color: $text-02;
+    color: $text-05;
     z-index: 0;
     opacity: 1;
     margin-bottom: $carbon--spacing-03;
@@ -12962,6 +12961,7 @@ Form styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [support-01 [variable]](#support-01-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [text-05 [variable]](#text-05-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
 ## inline-loading
@@ -17534,7 +17534,6 @@ Text area styles
     & ~ .#{$prefix}--form__helper-text {
       margin-top: 0;
       order: 2;
-      font-style: italic;
     }
 
     & ~ .#{$prefix}--form-requirement {
