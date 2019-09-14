@@ -116,7 +116,7 @@ export const hoverRow = '#4c4c4c';
 export const visitedLink = purple40;
 
 export const disabled01 = gray80;
-export const disabled02 = gray70;
+export const disabled02 = gray60;
 export const disabled03 = gray50;
 
 export const highlight = blue70;
