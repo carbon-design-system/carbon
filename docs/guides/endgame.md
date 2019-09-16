@@ -173,7 +173,6 @@ Checklist:
 <details>
   <summary>Demo Day email list and template</summary>
 
-```md
 Carbon Team list as of 9/16/2019:
 Abagail Hart/US/IBM@IBM, 
 Akira Sudoh/Japan/IBM@IBMJP, 
@@ -212,7 +211,6 @@ Link to the Box note Agenda:
 https://ibm.ent.box.com/notes/342752664012?v=demo-day-agenda-design-system
 
 Please fill out a time slow with the topic and presenters before the meeting.
-```
 
 </details>
 
