@@ -11,11 +11,11 @@ exports[`TooltipDefinition should allow the user to specify the alignment 1`] = 
     className="bx--tooltip--definition bx--tooltip--a11y custom-class"
   >
     <DefaultTooltipDefinitionTrigger
-      aria-describedby="definition-tooltip-3"
+      aria-describedby="definition-tooltip-4"
       className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--bottom bx--tooltip--align-start"
     >
       <button
-        aria-describedby="definition-tooltip-3"
+        aria-describedby="definition-tooltip-4"
         className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--bottom bx--tooltip--align-start"
       >
         tooltip trigger
@@ -23,7 +23,7 @@ exports[`TooltipDefinition should allow the user to specify the alignment 1`] = 
     </DefaultTooltipDefinitionTrigger>
     <div
       className="bx--assistive-text"
-      id="definition-tooltip-3"
+      id="definition-tooltip-4"
       role="tooltip"
     >
       tooltip text
@@ -43,11 +43,11 @@ exports[`TooltipDefinition should allow the user to specify the direction 1`] = 
     className="bx--tooltip--definition bx--tooltip--a11y custom-class"
   >
     <DefaultTooltipDefinitionTrigger
-      aria-describedby="definition-tooltip-2"
+      aria-describedby="definition-tooltip-3"
       className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-start"
     >
       <button
-        aria-describedby="definition-tooltip-2"
+        aria-describedby="definition-tooltip-3"
         className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-start"
       >
         tooltip trigger
@@ -107,12 +107,17 @@ exports[`TooltipDefinition should support a custom trigger element class 1`] = `
   <div
     className="bx--tooltip--definition bx--tooltip--a11y custom-class"
   >
-    <button
+    <DefaultTooltipDefinitionTrigger
       aria-describedby="definition-tooltip-2"
       className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition custom-trigger-class bx--tooltip--bottom bx--tooltip--align-start"
     >
-      tooltip trigger
-    </button>
+      <button
+        aria-describedby="definition-tooltip-2"
+        className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition custom-trigger-class bx--tooltip--bottom bx--tooltip--align-start"
+      >
+        tooltip trigger
+      </button>
+    </DefaultTooltipDefinitionTrigger>
     <div
       className="bx--assistive-text"
       id="definition-tooltip-2"
