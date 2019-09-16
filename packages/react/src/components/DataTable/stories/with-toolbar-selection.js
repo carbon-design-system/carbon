@@ -62,7 +62,7 @@ export default props => (
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-            <TableSelectAll {...getSelectionProps()} />
+              <TableSelectAll {...getSelectionProps()} />
               {headers.map(header => (
                 <TableHeader {...getHeaderProps({ header })}>
                   {header.header}
@@ -71,7 +71,7 @@ export default props => (
             </TableRow>
           </TableHead>
           <TableBody>
-          {rows.map(row => (
+            {rows.map(row => (
               <TableRow {...getRowProps({ row })}>
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map(cell => (

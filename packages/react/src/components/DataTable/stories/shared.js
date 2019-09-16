@@ -344,7 +344,6 @@ export const initialRowsLarge = [
     attached_groups: 'Andrews VM Groups',
     status: 'Active',
   },
-
 ];
 
 export const batchActionClick = selectedRows => () =>

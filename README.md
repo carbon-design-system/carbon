@@ -28,8 +28,9 @@
 ## Getting started
 
 If you're just getting started, check out
-[`@rocketsoftware/carbon-components`](./packages/components). If you're looking for React
-components, take a look at [`@rocketsoftware/carbon-components-react`](./packages/react).
+[`@rocketsoftware/carbon-components`](./packages/components). If you're looking
+for React components, take a look at
+[`@rocketsoftware/carbon-components-react`](./packages/react).
 
 We also have community-contributed components for the following technologies:
 
@@ -39,18 +40,18 @@ We also have community-contributed components for the following technologies:
 If you're trying to find something specific, here's a full list of packages that
 we support!
 
-| Package name                                  | Description                                                                                                                                         |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Package name                                                  | Description                                                                                                                                         |
+| ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`@rocketsoftware/carbon-components`](./packages/components)  | Component styles and Vanilla JavaScript                                                                                                             |
 | [`@rocketsoftware/carbon-components-react`](./packages/react) | React components                                                                                                                                    |
-| [`@rocketsoftware/elements`](./packages/elements)     | Elements like colors, type, iconography, and more                                                                               |
-| [`@rocketsoftware/colors`](./packages/colors)         | Colors                                                                                                                |
-| [`@rocketsoftware/grid`](./packages/grid)             | Build layouts using the new 16 column grid system                                                                                                   |
-| [`@rocketsoftware/icons`](./packages/icons)           | Iconography assets. We also offer support in: [React](./packages/icons-react), [Angular](./packages/icons-angular), and [Vue](./packages/icons-vue) |
-| [`@rocketsoftware/layout`](./packages/layout)         | Layout-based units and spacing scale                                                                                                                |
-| [`@rocketsoftware/motion`](./packages/motion)         | Productive and expressive motion curves                                                                                                             |
-| [`@rocketsoftware/themes`](./packages/themes)         | SCSS Color tokens                                                                          |
-| [`@rocketsoftware/type`](./packages/type)             | New type tokens used alongside IBM Plex                                                                                                             |
+| [`@rocketsoftware/elements`](./packages/elements)             | Elements like colors, type, iconography, and more                                                                                                   |
+| [`@rocketsoftware/colors`](./packages/colors)                 | Colors                                                                                                                                              |
+| [`@rocketsoftware/grid`](./packages/grid)                     | Build layouts using the new 16 column grid system                                                                                                   |
+| [`@rocketsoftware/icons`](./packages/icons)                   | Iconography assets. We also offer support in: [React](./packages/icons-react), [Angular](./packages/icons-angular), and [Vue](./packages/icons-vue) |
+| [`@rocketsoftware/layout`](./packages/layout)                 | Layout-based units and spacing scale                                                                                                                |
+| [`@rocketsoftware/motion`](./packages/motion)                 | Productive and expressive motion curves                                                                                                             |
+| [`@rocketsoftware/themes`](./packages/themes)                 | SCSS Color tokens                                                                                                                                   |
+| [`@rocketsoftware/type`](./packages/type)                     | New type tokens used alongside IBM Plex                                                                                                             |
 
 ## :books: Documentation
 

@@ -6,7 +6,11 @@
  */
 
 import React from 'react';
-import { Close20, ErrorFilled20, CheckmarkFilled20 } from '@rocketsoftware/icons-react';
+import {
+  Close20,
+  ErrorFilled20,
+  CheckmarkFilled20,
+} from '@rocketsoftware/icons-react';
 import {
   NotificationButton,
   NotificationTextDetails,
