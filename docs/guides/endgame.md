@@ -216,7 +216,6 @@ Please fill out a time slow with the topic and presenters before the meeting.
 
 </details>
 
-
 ### Week 2: Project work
 
 Checklist:
