@@ -20,7 +20,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn build:generate && yarn build:bazel && yarn build:package",
+    "build": "echo \"Error: no build specified. Use build:full \" && exit 0",
+    "build:full": "yarn build:generate && yarn build:bazel && yarn build:package",
     "build:generate": "node tasks/build.js",
     "build:bazel": "yarn copy && yarn bazel build //ts:npm_package",
     "build:package": "node tasks/package.js",
