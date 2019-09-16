@@ -198,7 +198,10 @@ Tyler R Tate/Austin/IBM@IBMUS,
 Vincent Patrick Picone/US/IBM@IBM, 
 Xiangjun Shi Trofimov/US/IBM@IBM,  
 
+Title:
+Carbon [Month] release demo day
 
+Subject:
 This will be a review of the work completed at the end of the October release cycle.
 
 Link to Carbon October release planning:
