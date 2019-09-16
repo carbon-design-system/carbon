@@ -26,7 +26,6 @@ export const label01 = {
 
 export const helperText01 = {
   fontSize: rem(scale[0]),
-  fontStyle: 'italic',
   lineHeight: rem(16),
   letterSpacing: px(0.32),
 };
