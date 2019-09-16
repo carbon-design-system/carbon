@@ -13,6 +13,11 @@ import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
+const DefaultTooltipDefinitionTrigger = ({ id, children, ...props }) => (
+  <button aria-describedby={id} {...props}>
+    {children}
+  </button>
+);
 const TooltipDefinition = ({
   id,
   className,
@@ -21,7 +26,7 @@ const TooltipDefinition = ({
   direction,
   align,
   tooltipText,
-  as = 'button',
+  renderTrigger: TooltipDefinitionTrigger = DefaultTooltipDefinitionTrigger,
   ...rest
 }) => {
   const tooltipId = id || `definition-tooltip-${getInstanceId()}`;
@@ -40,12 +45,10 @@ const TooltipDefinition = ({
       [`${prefix}--tooltip--align-${align}`]: align,
     }
   );
-  const TooltipDefinitionTrigger = as;
   return (
     <div {...rest} className={tooltipClassName}>
       <TooltipDefinitionTrigger
         className={tooltipTriggerClasses}
-        as={as}
         aria-describedby={tooltipId}>
         {children}
       </TooltipDefinitionTrigger>
@@ -95,10 +98,10 @@ TooltipDefinition.propTypes = {
   tooltipText: PropTypes.node.isRequired,
 
   /**
-   * Specify how the trigger button itself should be rendered.
-   * Make sure to apply all props to the root node and render children appropriately
+   * Optional prop to allow overriding the base trigger element rendering.
+   * Can be a React component class
    */
-  as: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  renderTrigger: PropTypes.func,
 };
 
 TooltipDefinition.defaultProps = {

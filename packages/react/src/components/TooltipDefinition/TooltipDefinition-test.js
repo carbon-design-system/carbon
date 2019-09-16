@@ -47,7 +47,16 @@ describe('TooltipDefinition', () => {
   });
 
   it('should support custom elements for the trigger button base', () => {
-    const wrapper = mount(<TooltipDefinition {...mockProps} as="span" />);
+    const wrapper = mount(
+      <TooltipDefinition
+        {...mockProps}
+        renderTrigger={({ id, children, ...props }) => (
+          <span aria-describedby={id} {...props}>
+            {children}
+          </span>
+        )}
+      />
+    );
     expect(wrapper.find('span.bx--tooltip__trigger')).toHaveLength(1);
   });
 });

@@ -15,38 +15,56 @@ const directions = {
   'Bottom (bottom)': 'bottom',
   'Top (top)': 'top',
 };
-
 const alignments = {
   'Start (start)': 'start',
   'Center (center)': 'center',
   'End (end)': 'end',
 };
-
-const props = () => ({
-  triggerClassName: text(
-    'Trigger element CSS class name (triggerClassName)',
-    ''
+const triggerElements = {
+  button: 'button',
+  div: 'div',
+  span: 'span',
+};
+const triggerElementMap = {
+  button: undefined,
+  div: ({ id, children, ...props }) => (
+    <div aria-describedby={id} {...props}>
+      {children}
+    </div>
   ),
-  direction: select('Tooltip direction (direction)', directions, 'bottom'),
-  align: select(
-    'Tooltip alignment to trigger button (align)',
-    alignments,
-    'start'
+  span: ({ id, children, ...props }) => (
+    <span aria-describedby={id} {...props}>
+      {children}
+    </span>
   ),
-  tooltipText: text(
-    'Tooltip content (tooltipText)',
-    'Brief description of the dotted, underlined word above.'
-  ),
-  as: select(
-    'Base element for trigger button',
-    {
-      button: 'button',
-      div: 'div',
-      span: 'span',
-    },
-    'button'
-  ),
-});
+};
+const props = () => {
+  const triggerElementToUse =
+    triggerElementMap[
+      select(
+        'Base element for trigger button (renderTrigger)',
+        triggerElements,
+        'none'
+      )
+    ];
+  return {
+    triggerClassName: text(
+      'Trigger element CSS class name (triggerClassName)',
+      ''
+    ),
+    direction: select('Tooltip direction (direction)', directions, 'bottom'),
+    align: select(
+      'Tooltip alignment to trigger button (align)',
+      alignments,
+      'start'
+    ),
+    tooltipText: text(
+      'Tooltip content (tooltipText)',
+      'Brief description of the dotted, underlined word above.'
+    ),
+    renderTrigger: triggerElementToUse || undefined,
+  };
+};
 
 storiesOf('TooltipDefinition', module)
   .addDecorator(withKnobs)
