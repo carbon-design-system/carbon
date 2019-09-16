@@ -148,7 +148,6 @@ exports[`Accordion should render 1`] = `
           className="bx--accordion__content"
         >
           Panel B
-           
         </div>
       </li>
     </AccordionItem>
