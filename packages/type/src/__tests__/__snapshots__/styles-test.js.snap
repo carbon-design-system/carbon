@@ -488,7 +488,6 @@ letter-spacing: 0;"
 exports[`styles helperText01 should be printable 1`] = `
 Object {
   "fontSize": "0.75rem",
-  "fontStyle": "italic",
   "letterSpacing": "0.32px",
   "lineHeight": "1rem",
 }
@@ -496,7 +495,6 @@ Object {
 
 exports[`styles helperText01 should be printable 2`] = `
 "font-size: 0.75rem;
-font-style: italic;
 line-height: 1rem;
 letter-spacing: 0.32px;"
 `;
