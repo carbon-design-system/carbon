@@ -13,21 +13,16 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@master
-
       - name: Use Node.js 10.x
         uses: actions/setup-node@v1
         with:
           version: 10.x
-
       - name: Install dependencies
         run: yarn install --offline
-
       - name: Build project
         run: yarn build
-
       - name: Install ibmcloud CLI
         run: curl -fsSL https://clis.cloud.ibm.com/install/osx | sh
-
       - name: Login to IBM Cloud
         env:
           CLOUD_API_KEY: ${{ secrets.CLOUD_API_KEY}}
@@ -39,12 +34,10 @@ jobs:
           -o 'carbon-design-system' \
           -s 'production' \
           -r 'us-south'
-
       - name: Install IBM Cloud plugins
         run: |
           ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
           ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
-
       - name: Deploy React storybook
         run: |
           cd packages/react
