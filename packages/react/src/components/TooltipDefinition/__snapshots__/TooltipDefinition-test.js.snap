@@ -11,14 +11,14 @@ exports[`TooltipDefinition should allow the user to specify the direction 1`] = 
     className="bx--tooltip--definition bx--tooltip--a11y custom-class"
   >
     <button
-      aria-describedby="definition-tooltip-2"
+      aria-describedby="definition-tooltip-3"
       className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-start"
     >
       tooltip trigger
     </button>
     <div
       className="bx--assistive-text"
-      id="definition-tooltip-2"
+      id="definition-tooltip-3"
       role="tooltip"
     >
       tooltip text
@@ -46,6 +46,34 @@ exports[`TooltipDefinition should render 1`] = `
     <div
       className="bx--assistive-text"
       id="definition-tooltip-1"
+      role="tooltip"
+    >
+      tooltip text
+    </div>
+  </div>
+</TooltipDefinition>
+`;
+
+exports[`TooltipDefinition should support a custom trigger element class 1`] = `
+<TooltipDefinition
+  align="start"
+  className="custom-class"
+  direction="bottom"
+  tooltipText="tooltip text"
+  triggerClassName="custom-trigger-class"
+>
+  <div
+    className="bx--tooltip--definition bx--tooltip--a11y custom-class"
+  >
+    <button
+      aria-describedby="definition-tooltip-2"
+      className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition custom-trigger-class bx--tooltip--bottom bx--tooltip--align-start"
+    >
+      tooltip trigger
+    </button>
+    <div
+      className="bx--assistive-text"
+      id="definition-tooltip-2"
       role="tooltip"
     >
       tooltip text

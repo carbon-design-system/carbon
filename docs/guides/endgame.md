@@ -434,8 +434,12 @@ already exist in the project. These updates are reserved for
    final reviews from the endgame team for the release. _Note: Make sure to
    specify which packages are being updated for your reviewers._
 
-5. Once everything is green and your Pull Request has been reviewed, you should
-   **close** the draft Pull Request.
+5. Once everything is green, review the pull request. Make sure there are no
+   commits labeled `feat` as the patch release should only be for bug fixes,
+   content updates, or refactoring existing code. Double check that the
+   `package.json` versions are updated correctly by verifying the green
+   (updated) version numbers are an incremental increase to the red (deleted)
+   version numbers. If everything is correct, **close** the draft Pull Request.
 
 6. On your machine, you should then follow the following steps to publish to
    `next`:

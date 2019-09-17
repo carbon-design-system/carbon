@@ -16,6 +16,7 @@ import Link from '../Link';
 const props = () => ({
   className: 'some-class',
   href: text('The link href (href)', '#'),
+  inline: boolean('Use the in-line variant (inline)', false),
   onClick: (handler => evt => {
     evt.preventDefault(); // Prevent link from being followed for demo purpose
     handler(evt);

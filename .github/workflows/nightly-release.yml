@@ -1,0 +1,26 @@
+name: Nightly Release
+
+on:
+  schedule:
+    # Run every day at 01:00
+    - cron: '0 1 * * *'
+
+jobs:
+  release:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js 10.x
+        uses: actions/setup-node@v1
+        with:
+          version: 10.x
+      - name: Install dependencies
+        run: yarn install --offline
+      - name: Build project
+        run: yarn build
+      - name: Publish nightly release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+          yarn lerna publish --canary minor --dist-tag nightly --no-push --no-git-tag-version --yes --force-publish='*'
