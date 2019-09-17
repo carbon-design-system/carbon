@@ -9249,6 +9249,7 @@ Button base styles
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
+  vertical-align: top;
   flex-shrink: 0;
   min-height: rem($button-height);
   padding: $button-padding;
