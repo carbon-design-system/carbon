@@ -170,6 +170,35 @@ Checklist:
 
 </details>
 
+<details>
+  <summary>Demo Day email list and template</summary>
+
+Carbon Team list as of 9/16/2019: Abagail Hart/US/IBM@IBM, Akira
+Sudoh/Japan/IBM@IBMJP, Alessandra Davila1/US/IBM@IBM, Alison
+Joseph/Austin/IBM@IBMUS, Andrew Wang1/US/IBM@IBM, Anna
+Gonzales/Austin/IBM@IBMUS, Chris Connors/Pittsburgh/IBM@IBMUS, Connor
+Leech/US/IBM@IBM, DA Anguiano/US/IBM@IBM, Jan Child/US/IBM@IBM, Jean Ann
+Servaas/US/IBM@IBM, Jeoff Wilks/Arlington/IBM@IBMUS, Jillian Howarth/US/IBM@IBM,
+Josefina Noemi Mancilla/US/IBM@IBM, Joshua Black/Austin/IBM@IBMUS, Lauren
+Rice/Austin/IBM@IBMUS, Matt Rosno/US/IBM@IBM, Robin Cannon/Austin/IBM@IBMUS,
+Timothy W Egan/Austin/IBM@IBMUS, Tyler R Tate/Austin/IBM@IBMUS, Vincent Patrick
+Picone/US/IBM@IBM, Xiangjun Shi Trofimov/US/IBM@IBM,
+
+Title: Carbon [Month] release demo day
+
+Subject: This will be a review of the work completed at the end of the October
+release cycle.
+
+Link to Carbon October release planning:
+https://github.com/carbon-design-system/carbon/wiki/Carbon-October-Release-Planning
+
+Link to the Box note Agenda:
+https://ibm.ent.box.com/notes/342752664012?v=demo-day-agenda-design-system
+
+Please fill out a time slow with the topic and presenters before the meeting.
+
+</details>
+
 ### Week 2: Project work
 
 Checklist:
