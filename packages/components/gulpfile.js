@@ -10,12 +10,14 @@ const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const customProperties = require('postcss-custom-properties');
+const scss = require('postcss-scss');
 // load dart-sass
 const dartSass = require('sass');
 // required for dart-sass - async builds are significantly slower without this package
 const Fiber = require('fibers');
 // require node-sass so we can explicitly set `gulp-sass`s `.compiler` property
 const nodeSass = require('node-sass');
+const transformCustomProperties = require('./tools/postcss/transform-custom-properties');
 
 // Javascript deps
 const babel = require('gulp-babel');
@@ -460,7 +462,14 @@ gulp.task('sass:dev:server', () => {
 });
 
 gulp.task('sass:source', () =>
-  gulp.src('./src/**/*.scss').pipe(gulp.dest('scss'))
+  gulp
+    .src('./src/**/*.scss')
+    .pipe(
+      postcss([transformCustomProperties()], {
+        parser: scss,
+      })
+    )
+    .pipe(gulp.dest('scss'))
 );
 
 const buildDemoHTML = () => {
