@@ -94,6 +94,7 @@
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "4.10.0",
     "object-assign": "^4.1.1",
+    "postcss-custom-properties": "^9.0.2",
     "postcss-loader": "^3.0.0",
     "promise": "^8.0.1",
     "prop-types": "^15.7.2",
