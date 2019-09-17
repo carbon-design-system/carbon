@@ -100,6 +100,7 @@ describe('Carbon Components React', () => {
         "RadioButtonGroup",
         "RadioButtonSkeleton",
         "RadioTile",
+        "ResourceHeader",
         "Search",
         "SearchFilterButton",
         "SearchLayoutButton",

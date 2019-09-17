@@ -90,6 +90,7 @@ export {
 } from './components/ProgressIndicator';
 export RadioButton from './components/RadioButton';
 export RadioButtonGroup from './components/RadioButtonGroup';
+export ResourceHeader from './components/ResourceHeader';
 export Search from './components/Search';
 export SearchFilterButton from './components/SearchFilterButton';
 export SearchLayoutButton from './components/SearchLayoutButton';
