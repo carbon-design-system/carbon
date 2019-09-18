@@ -301,8 +301,6 @@ export default class ComboBox extends React.Component {
             className={className}
             disabled={disabled}
             invalid={invalid}
-            id={comboBoxA11yId}
-            aria-label={ariaLabel}
             invalidText={invalidText}
             isOpen={isOpen}
             light={light}
@@ -310,6 +308,8 @@ export default class ComboBox extends React.Component {
             <ListBox.Field
               id={id}
               disabled={disabled}
+              id={comboBoxA11yId}
+              aria-label={ariaLabel}
               translateWithId={translateWithId}
               {...getButtonProps({
                 disabled,
