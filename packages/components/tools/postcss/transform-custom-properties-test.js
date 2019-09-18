@@ -15,6 +15,24 @@ const plugin = require('./transform-custom-properties');
 
 const tests = [
   {
+    name: 'property with no token',
+    input: `
+@mixin my-component {
+  .#{$prefix}--component {
+    display: block;
+  }
+}
+`,
+    output: `
+@mixin my-component {
+  .#{$prefix}--component {
+    display: block;
+  }
+}
+`,
+  },
+
+  {
     name: 'sass maps',
     input: `$config: ( foo: 'bar' );`,
     output: `$config: ( foo: 'bar' );`,
@@ -26,8 +44,7 @@ const tests = [
 @mixin my-component {
   .#{$prefix}--component {
     display: block;
-    color: var(--token-01, $token-01);
-  }
+    color: var(--token-01, $token-01); }
 }
 `,
     output: `
@@ -35,8 +52,7 @@ const tests = [
   .#{$prefix}--component {
     display: block;
     color: $token-01;
-    color: var(--token-01, $token-01);
-  }
+    color: var(--token-01, $token-01); }
 }
 `,
   },
@@ -90,23 +106,42 @@ const tests = [
   },
 
   {
+    name: 'middle position',
+    input: `
+@mixin my-component {
+  .#{$prefix}--component {
+    transition: all var(--duration-fast-02, $duration--fast-02)
+      motion(standard, productive);
+  }
+}
+`,
+    output: `
+@mixin my-component {
+  .#{$prefix}--component {
+    transition: all $duration--fast-02 motion(standard, productive);
+    transition: all var(--duration-fast-02, $duration--fast-02)
+      motion(standard, productive);
+  }
+}
+`,
+  },
+
+  {
     name: 'multiline properties',
     input: `
 .#{$prefix}--component {
   transition: height motion(standard, productive)
-      var(--duration--fast-02, $duration--fast-02),
+      var(--duration--fast-01, $duration--fast-01),
     padding motion(standard, productive)
       var(--duration--fast-02, $duration--fast-02);
 }
 `,
     output: `
 .#{$prefix}--component {
+  transition: height motion(standard, productive) $duration--fast-01,
+padding motion(standard, productive) $duration--fast-02;
   transition: height motion(standard, productive)
-      $duration--fast-02,
-    padding motion(standard, productive)
-      $duration--fast-02;
-  transition: height motion(standard, productive)
-      var(--duration--fast-02, $duration--fast-02),
+      var(--duration--fast-01, $duration--fast-01),
     padding motion(standard, productive)
       var(--duration--fast-02, $duration--fast-02);
 }
@@ -114,13 +149,12 @@ const tests = [
   },
 ];
 
-for (const { name, input, output } of tests.slice(tests.length - 1)) {
+for (const { name, input, output } of tests) {
   test(`${name} should compile`, async () => {
     const result = await postcss([plugin()]).process(input, {
       from: undefined,
       parser: scss,
     });
-    console.log(result.css);
-    // expect(result.css).toBe(output);
+    expect(result.css).toBe(output);
   });
 }

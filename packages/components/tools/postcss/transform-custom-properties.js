@@ -7,36 +7,50 @@
 
 'use strict';
 
+// ^([\s\S]*)var\(--([a-z-]+),\s\$([a-z-]+)\)*([\s\S])$
+
 const postcss = require('postcss');
 const scss = require('postcss-scss');
 
-const CUSTOM_PROPERTY_REGEX = /^(.*)var\(--(.+),\s\$(.+)\)(.*)$/m;
 const plugin = postcss.plugin('transform-custom-properties', () => {
   return root => {
     root.walkDecls(declaration => {
-      const { prop, value, parent, raws } = declaration;
+      const CUSTOM_PROPERTY_REGEX = /var\(--([a-z-0-9]+),\s\$([a-z-0-9]+)\)/g;
+      const { prop, parent, raws } = declaration;
       // We're most likely in a Sass variable map
       if (prop[0] === '$') {
         return;
       }
 
-      const match = CUSTOM_PROPERTY_REGEX.exec(declaration.value);
-      if (!match) {
+      const lines = declaration.value.split('\n');
+      const values = [];
+      let index = 0;
+
+      for (const line of lines) {
+        if (!values[index]) {
+          values[index] = '';
+        }
+
+        values[index] = `${values[index]} ${line.trim()}`.trim();
+
+        if (line.match(/,$/)) {
+          index++;
+        }
+      }
+
+      const valuesWithCustomProperties = values.filter(value => {
+        return value.match(CUSTOM_PROPERTY_REGEX);
+      });
+
+      if (valuesWithCustomProperties.length === 0) {
         return;
       }
 
-      const before = match[1];
-      const customPropertyName = match[2];
-      const tokenName = match[3];
-      const after = match[4];
+      const fallback = values.map(value => {
+        return value.replace(CUSTOM_PROPERTY_REGEX, '$$$2');
+      });
 
-      if (customPropertyName !== tokenName) {
-        throw new Error('Expected token name to match property name');
-      }
-
-      declaration.before(
-        `${raws.before}${prop}: ${before}$${tokenName}${after}`
-      );
+      declaration.before(`${raws.before}${prop}: ${fallback.join('\n')}`);
     });
   };
 });
