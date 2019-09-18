@@ -13,6 +13,7 @@ import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { match, keys } from '../../internal/keyboard';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
 
@@ -50,6 +51,8 @@ const findHighlightedIndex = ({ items, itemToString }, inputValue) => {
 
   return -1;
 };
+
+const getInstanceId = setupGetInstanceId();
 
 export default class ComboBox extends React.Component {
   static propTypes = {
@@ -175,6 +178,8 @@ export default class ComboBox extends React.Component {
 
     this.textInput = React.createRef();
 
+    this.comboBoxInstanceId = getInstanceId();
+
     this.state = {
       inputValue: getInputValue(props, {}),
     };
@@ -296,7 +301,7 @@ export default class ComboBox extends React.Component {
             className={className}
             disabled={disabled}
             invalid={invalid}
-            id="combobox-id-a11y"
+            id={`combobox-a11y-${this.comboBoxInstanceId}`}
             aria-label={ariaLabel}
             invalidText={invalidText}
             isOpen={isOpen}
