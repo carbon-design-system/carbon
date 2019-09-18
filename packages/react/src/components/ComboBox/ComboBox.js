@@ -274,7 +274,7 @@ export default class ComboBox extends React.Component {
       <div className={helperClasses}>{helperText}</div>
     ) : null;
     const wrapperClasses = cx(`${prefix}--list-box__wrapper`);
-
+    const comboBoxA11yId = `combobox-a11y-${this.comboBoxInstanceId}`;
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
     const input = (
@@ -301,7 +301,7 @@ export default class ComboBox extends React.Component {
             className={className}
             disabled={disabled}
             invalid={invalid}
-            id={`combobox-a11y-${this.comboBoxInstanceId}`}
+            id={comboBoxA11yId}
             aria-label={ariaLabel}
             invalidText={invalidText}
             isOpen={isOpen}
@@ -317,7 +317,7 @@ export default class ComboBox extends React.Component {
               })}>
               <input
                 className={`${prefix}--text-input`}
-                aria-labelledby="combobox-id-a11y"
+                aria-labelledby={comboBoxA11yId}
                 tabIndex="0"
                 aria-disabled={disabled}
                 aria-controls={`${id}__menu`}
