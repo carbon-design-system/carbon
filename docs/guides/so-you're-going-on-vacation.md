@@ -29,7 +29,7 @@ To make sure reviews aren't being requested while you're on vacation, make sure
 to head on over to [Pull Panda](https://pullpanda.com) and go to the
 **Assigner** tab. From there, you can select your team. For each team there is
 an **Excluded team members** section where you can add your name while you're
-out!
+out. Don't forget to remove yourself from the Excluded team members section  when you get back!
 
 - [ ] Delegate Pull Requests or Issue conversations that you're actively engaged
       in
