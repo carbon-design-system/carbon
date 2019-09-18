@@ -47,9 +47,10 @@ const ListBoxSelection = ({
       tabIndex="0"
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}
+      aria-label="Clear Selection"
       title={description}>
       {selectionCount}
-      <Close16 role="img" />
+      <Close16 />
     </div>
   );
 };
