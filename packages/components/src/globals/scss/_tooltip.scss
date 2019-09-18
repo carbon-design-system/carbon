@@ -190,10 +190,8 @@
   // @todo Simplify CSS selectors on next major release
   &::before,
   &::after,
-  &:hover .#{$prefix}--assistive-text,
-  &:focus .#{$prefix}--assistive-text,
-  &:hover + .#{$prefix}--assistive-text,
-  &:focus + .#{$prefix}--assistive-text {
+  .#{$prefix}--assistive-text,
+  + .#{$prefix}--assistive-text {
     @if ($position == 'top') {
       top: 0;
       left: 50%;
@@ -242,10 +240,8 @@
   // alignment options available only for top and bottom tooltip position
   // @todo Simplify CSS selectors on next major release
   &::after,
-  &:hover .#{$prefix}--assistive-text,
-  &:focus .#{$prefix}--assistive-text,
-  &:hover + .#{$prefix}--assistive-text,
-  &:focus + .#{$prefix}--assistive-text {
+  .#{$prefix}--assistive-text,
+  + .#{$prefix}--assistive-text {
     @if ($position == 'top') {
       top: -$body-spacing;
       @if ($align == 'start') {
