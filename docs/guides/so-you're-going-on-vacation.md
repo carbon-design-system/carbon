@@ -6,3 +6,4 @@ So you're going on vacation, woohoo! <span aria-label="celebrate">🥳</span> He
 - Email auto-response
 - Slack status
 - Pull Panda
+- Delegate Pull Requests or Issue conversations that you're actively engaged in
