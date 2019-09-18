@@ -19,7 +19,7 @@ message you would like to have sent out when folks email you.
 
 - [ ] Set your Slack status
 
-Slack has a setting for setting your status for a pre-determined about of time,
+Slack has a setting for setting your status for a pre-determined amout of time,
 what you choose as your status is up to you! Some common ones include the
 defaults from slack, or `OOO until XX-YY-ZZZZ`.
 
