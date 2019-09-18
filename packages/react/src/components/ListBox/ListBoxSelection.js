@@ -49,7 +49,7 @@ const ListBoxSelection = ({
       onKeyDown={handleOnKeyDown}
       title={description}>
       {selectionCount}
-      <Close16 role="img" />
+      <Close16 role="img" aria-label="Clear Selection" />
     </div>
   );
 };

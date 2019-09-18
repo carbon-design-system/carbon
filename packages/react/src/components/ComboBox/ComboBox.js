@@ -296,6 +296,8 @@ export default class ComboBox extends React.Component {
             className={className}
             disabled={disabled}
             invalid={invalid}
+            id="combobox-id-a11y"
+            aria-label={ariaLabel}
             invalidText={invalidText}
             isOpen={isOpen}
             light={light}
@@ -310,9 +312,10 @@ export default class ComboBox extends React.Component {
               })}>
               <input
                 className={`${prefix}--text-input`}
-                aria-label={ariaLabel}
+                aria-labelledby="combobox-id-a11y"
                 aria-disabled={disabled}
                 aria-controls={`${id}__menu`}
+                aria-owns={`${id}__menu`}
                 aria-autocomplete="list"
                 ref={this.textInput}
                 {...rest}
