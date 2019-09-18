@@ -8,7 +8,7 @@
 @import 'layer';
 
 // Tooltip
-// Definition and Icon CSS only tooltip
+// Forces visible state for definition and icon only tooltip
 /// @access public
 /// @group tooltip
 @mixin tooltip--visible() {
@@ -24,6 +24,7 @@
   }
 }
 
+/// A mix-in that represents the trigger button of definition and icon only tooltips
 /// @param {String} $tooltip-type ['icon'] - The type, from: `icon`, `definition`
 /// @param {String} $position ['bottom'] - The position, from: `top`, `right`, `bottom`, `left`
 /// @access public
