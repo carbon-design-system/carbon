@@ -23,12 +23,13 @@
   }
 
   .#{$prefix}--accordion__item {
-    transition: all $duration--fast-02 motion(standard, productive);
+    transition: all var(--c-duration-fast-02, $duration--fast-02)
+      motion(standard, productive);
     border-top: 1px solid $ui-03;
     overflow: visible;
 
     &:last-child {
-      border-bottom: 1px solid $ui-03;
+      border-bottom: 1px solid var(--c-ui-03, $ui-03);
     }
   }
 
