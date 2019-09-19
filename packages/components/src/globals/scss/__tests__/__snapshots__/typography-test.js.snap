@@ -1,3 +1,474 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`_typography.scss $base-font-size should match export value 1`] = `"16px"`;
+
+exports[`_typography.scss $body-long-01 should match export value 1`] = `
+Object {
+  "font-size": "0.875rem",
+  "font-weight": "400",
+  "letter-spacing": "0.16px",
+  "line-height": "1.25rem",
+}
+`;
+
+exports[`_typography.scss $body-long-02 should match export value 1`] = `
+Object {
+  "font-size": "1rem",
+  "font-weight": "400",
+  "letter-spacing": "0",
+  "line-height": "1.5rem",
+}
+`;
+
+exports[`_typography.scss $body-short-01 should match export value 1`] = `
+Object {
+  "font-size": "0.875rem",
+  "font-weight": "400",
+  "letter-spacing": "0.16px",
+  "line-height": "1.125rem",
+}
+`;
+
+exports[`_typography.scss $body-short-02 should match export value 1`] = `
+Object {
+  "font-size": "1rem",
+  "font-weight": "400",
+  "letter-spacing": "0",
+  "line-height": "1.375rem",
+}
+`;
+
+exports[`_typography.scss $caption-01 should match export value 1`] = `
+Object {
+  "font-size": "0.75rem",
+  "font-weight": "400",
+  "letter-spacing": "0.32px",
+  "line-height": "1rem",
+}
+`;
+
+exports[`_typography.scss $code-01 should match export value 1`] = `
+Object {
+  "font-size": "0.75rem",
+  "font-weight": "400",
+  "letter-spacing": "0.32px",
+  "line-height": "1rem",
+}
+`;
+
+exports[`_typography.scss $code-02 should match export value 1`] = `
+Object {
+  "font-size": "0.875rem",
+  "font-weight": "400",
+  "letter-spacing": "0.32px",
+  "line-height": "1.25rem",
+}
+`;
+
+exports[`_typography.scss $display-01 should match export value 1`] = `
+Object {
+  "breakpoints": Object {
+    "lg": Object {
+      "font-size": "3.375rem",
+    },
+    "max": Object {
+      "font-size": "4.75rem",
+      "line-height": "113%",
+    },
+    "md": Object {
+      "font-size": "2.625rem",
+    },
+    "xlg": Object {
+      "font-size": "3.75rem",
+      "line-height": "117%",
+    },
+  },
+  "font-size": "2.625rem",
+  "font-weight": "300",
+  "letter-spacing": "0",
+  "line-height": "119%",
+}
+`;
+
+exports[`_typography.scss $display-02 should match export value 1`] = `
+Object {
+  "breakpoints": Object {
+    "lg": Object {
+      "font-size": "3.375rem",
+    },
+    "max": Object {
+      "font-size": "4.75rem",
+      "line-height": "113%",
+    },
+    "md": Object {
+      "font-size": "2.625rem",
+    },
+    "xlg": Object {
+      "font-size": "3.75rem",
+      "line-height": "116%",
+    },
+  },
+  "font-size": "2.625rem",
+  "font-weight": "600",
+  "letter-spacing": "0",
+  "line-height": "119%",
+}
+`;
+
+exports[`_typography.scss $display-03 should match export value 1`] = `
+Object {
+  "breakpoints": Object {
+    "lg": Object {
+      "font-size": "5.75rem",
+      "letter-spacing": "-0.64px",
+      "line-height": "111%",
+    },
+    "max": Object {
+      "font-size": "9.75rem",
+      "letter-spacing": "-0.96px",
+      "line-height": "105%",
+    },
+    "md": Object {
+      "font-size": "4.25rem",
+      "line-height": "115%",
+    },
+    "xlg": Object {
+      "font-size": "7.625rem",
+      "line-height": "107%",
+    },
+  },
+  "font-size": "2.625rem",
+  "font-weight": "300",
+  "letter-spacing": "0",
+  "line-height": "119%",
+}
+`;
+
+exports[`_typography.scss $display-04 should match export value 1`] = `
+Object {
+  "breakpoints": Object {
+    "lg": Object {
+      "font-size": "5.75rem",
+      "letter-spacing": "-0.64px",
+      "line-height": "111%",
+    },
+    "max": Object {
+      "font-size": "9.75rem",
+      "letter-spacing": "-0.96px",
+      "line-height": "105%",
+    },
+    "md": Object {
+      "font-size": "4.25rem",
+      "line-height": "115%",
+    },
+    "xlg": Object {
+      "font-size": "7.625rem",
+      "letter-spacing": "-0.64px",
+      "line-height": "107%",
+    },
+  },
+  "font-size": "2.625rem",
+  "font-weight": "600",
+  "letter-spacing": "0",
+  "line-height": "119%",
+}
+`;
+
+exports[`_typography.scss $expressive-heading-01 should match export value 1`] = `
+Object {
+  "font-size": "0.875rem",
+  "font-weight": "600",
+  "letter-spacing": "0.16px",
+  "line-height": "1.125rem",
+}
+`;
+
+exports[`_typography.scss $expressive-heading-02 should match export value 1`] = `
+Object {
+  "font-size": "1rem",
+  "font-weight": "600",
+  "letter-spacing": "0",
+  "line-height": "1.375rem",
+}
+`;
+
+exports[`_typography.scss $expressive-heading-03 should match export value 1`] = `
+Object {
+  "breakpoints": Object {
+    "max": Object {
+      "font-size": "1.5rem",
+    },
+    "xlg": Object {
+      "font-size": "1.25rem",
+      "line-height": "125%",
+    },
+  },
+  "font-size": "1.25rem",
+  "font-weight": "400",
+  "letter-spacing": "0",
+  "line-height": "130%",
+}
+`;
+
+exports[`_typography.scss $expressive-heading-04 should match export value 1`] = `
+Object {
+  "breakpoints": Object {
+    "max": Object {
+      "font-size": "2rem",
+    },
+    "xlg": Object {
+      "font-size": "1.75rem",
+      "line-height": "125%",
+    },
+  },
+  "font-size": "1.75rem",
+  "font-weight": "400",
+  "letter-spacing": "0",
+  "line-height": "129%",
+}
+`;
+
+exports[`_typography.scss $expressive-heading-05 should match export value 1`] = `
+Object {
+  "breakpoints": Object {
+    "lg": Object {
+      "font-size": "2.625rem",
+      "font-weight": "300",
+      "letter-spacing": "0",
+      "line-height": "119%",
+    },
+    "max": Object {
+      "font-size": "3.75rem",
+      "font-weight": "300",
+      "letter-spacing": "0",
+      "line-height": "4.375rem",
+    },
+    "md": Object {
+      "font-size": "2.25rem",
+      "font-weight": "300",
+      "letter-spacing": "0",
+      "line-height": "122%",
+    },
+    "xlg": Object {
+      "font-size": "3rem",
+      "font-weight": "300",
+      "letter-spacing": "0",
+      "line-height": "117%",
+    },
+  },
+  "font-size": "2rem",
+  "font-weight": "400",
+  "letter-spacing": "0",
+  "line-height": "125%",
+}
+`;
+
+exports[`_typography.scss $expressive-heading-06 should match export value 1`] = `
+Object {
+  "breakpoints": Object {
+    "lg": Object {
+      "font-size": "2.625rem",
+      "font-weight": "600",
+      "letter-spacing": "0",
+      "line-height": "119%",
+    },
+    "max": Object {
+      "font-size": "3.75rem",
+      "font-weight": "600",
+      "letter-spacing": "0",
+      "line-height": "4.375rem",
+    },
+    "md": Object {
+      "font-size": "2.25rem",
+      "font-weight": "600",
+      "letter-spacing": "0",
+      "line-height": "122%",
+    },
+    "xlg": Object {
+      "font-size": "3rem",
+      "font-weight": "600",
+      "letter-spacing": "0",
+      "line-height": "117%",
+    },
+  },
+  "font-size": "2rem",
+  "font-weight": "600",
+  "letter-spacing": "0",
+  "line-height": "125%",
+}
+`;
+
+exports[`_typography.scss $expressive-paragraph-01 should match export value 1`] = `
+Object {
+  "font-size": "1.5rem",
+  "font-weight": "300",
+  "letter-spacing": "0",
+  "lg": Object {
+    "font-size": "1.75rem",
+    "line-height": "129%",
+  },
+  "line-height": "125%",
+  "max": Object {
+    "font-size": "2rem",
+    "line-height": "125%",
+  },
+}
+`;
+
+exports[`_typography.scss $heading-01 should match export value 1`] = `
+Object {
+  "font-size": "0.875rem",
+  "font-weight": "600",
+  "letter-spacing": "0.16px",
+  "line-height": "1.125rem",
+}
+`;
+
+exports[`_typography.scss $heading-02 should match export value 1`] = `
+Object {
+  "font-size": "1rem",
+  "font-weight": "600",
+  "letter-spacing": "0",
+  "line-height": "1.375rem",
+}
+`;
+
+exports[`_typography.scss $helper-text-01 should match export value 1`] = `
+Object {
+  "font-size": "0.75rem",
+  "letter-spacing": "0.32px",
+  "line-height": "1rem",
+}
+`;
+
+exports[`_typography.scss $label-01 should match export value 1`] = `
+Object {
+  "font-size": "0.75rem",
+  "font-weight": "400",
+  "letter-spacing": "0.32px",
+  "line-height": "1rem",
+}
+`;
+
+exports[`_typography.scss $productive-heading-01 should match export value 1`] = `
+Object {
+  "font-size": "0.875rem",
+  "font-weight": "600",
+  "letter-spacing": "0.16px",
+  "line-height": "1.125rem",
+}
+`;
+
+exports[`_typography.scss $productive-heading-02 should match export value 1`] = `
+Object {
+  "font-size": "1rem",
+  "font-weight": "600",
+  "letter-spacing": "0",
+  "line-height": "1.375rem",
+}
+`;
+
+exports[`_typography.scss $productive-heading-03 should match export value 1`] = `
+Object {
+  "font-size": "1.25rem",
+  "font-weight": "400",
+  "letter-spacing": "0",
+  "line-height": "1.625rem",
+}
+`;
+
+exports[`_typography.scss $productive-heading-04 should match export value 1`] = `
+Object {
+  "font-size": "1.75rem",
+  "font-weight": "400",
+  "letter-spacing": "0",
+  "line-height": "2.25rem",
+}
+`;
+
+exports[`_typography.scss $productive-heading-05 should match export value 1`] = `
+Object {
+  "font-size": "2rem",
+  "font-weight": "400",
+  "letter-spacing": "0",
+  "line-height": "2.5rem",
+}
+`;
+
+exports[`_typography.scss $productive-heading-06 should match export value 1`] = `
+Object {
+  "font-size": "2.625rem",
+  "font-weight": "300",
+  "letter-spacing": "0",
+  "line-height": "3.125rem",
+}
+`;
+
+exports[`_typography.scss $productive-heading-07 should match export value 1`] = `
+Object {
+  "font-size": "3.375rem",
+  "font-weight": "300",
+  "letter-spacing": "0",
+  "line-height": "4rem",
+}
+`;
+
+exports[`_typography.scss $quotation-01 should match export value 1`] = `
+Object {
+  "breakpoints": Object {
+    "lg": Object {
+      "font-size": "1.5rem",
+      "font-weight": "400",
+      "letter-spacing": "0",
+      "line-height": "125%",
+    },
+    "max": Object {
+      "font-size": "2rem",
+      "font-weight": "400",
+      "letter-spacing": "0",
+      "line-height": "125%",
+    },
+    "md": Object {
+      "font-size": "1.25rem",
+      "font-weight": "400",
+      "letter-spacing": "0",
+    },
+    "xlg": Object {
+      "font-size": "1.75rem",
+      "font-weight": "400",
+      "letter-spacing": "0",
+      "line-height": "129%",
+    },
+  },
+  "font-size": "1.25rem",
+  "font-weight": "400",
+  "letter-spacing": "0",
+  "line-height": "130%",
+}
+`;
+
+exports[`_typography.scss $quotation-02 should match export value 1`] = `
+Object {
+  "breakpoints": Object {
+    "lg": Object {
+      "font-size": "2.625rem",
+      "line-height": "119%",
+    },
+    "max": Object {
+      "font-size": "3.75rem",
+    },
+    "md": Object {
+      "font-size": "2.25rem",
+      "line-height": "122%",
+    },
+    "xlg": Object {
+      "font-size": "3rem",
+      "line-height": "117%",
+    },
+  },
+  "font-size": "2rem",
+  "font-weight": "300",
+  "letter-spacing": "0",
+  "line-height": "125%",
+}
+`;

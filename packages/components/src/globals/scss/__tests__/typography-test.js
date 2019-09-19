@@ -8,8 +8,9 @@
  */
 
 const { convert, createSassRenderer } = require('@carbon/test-utils/scss');
+const { formatTokenName, tokens } = require('@carbon/elements');
 
-const variables = ['base-font-size'];
+const variables = ['base-font-size', ...tokens.type.map(formatTokenName)];
 
 const render = createSassRenderer(__dirname);
 
