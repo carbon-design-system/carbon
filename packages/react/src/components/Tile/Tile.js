@@ -487,7 +487,7 @@ export class ExpandableTile extends Component {
     const content = this.getChildren().map((child, index) => {
       return React.cloneElement(child, { ref: index });
     });
-    const buttonId = this.props.id ? `${this.props.id}__button` : this.uid;
+
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
       <div
@@ -502,16 +502,9 @@ export class ExpandableTile extends Component {
         tabIndex={tabIndex}>
         <button
           className={`${prefix}--tile__chevron`}
-          aria-labelledby={buttonId}
+          aria-label={expanded ? tileExpandedIconText : tileCollapsedIconText}
           aria-expanded={expanded}>
-          <ChevronDown16
-            id={buttonId}
-            aria-label={expanded ? tileExpandedIconText : tileCollapsedIconText}
-            alt={expanded ? tileExpandedIconText : tileCollapsedIconText}
-            description={
-              expanded ? tileExpandedIconText : tileCollapsedIconText
-            }
-          />
+          <ChevronDown16 />
         </button>
         <div
           ref={tileContent => {
