@@ -218,6 +218,7 @@
   .#{$prefix}--btn--danger {
     @include button-theme(
       $danger,
+      $danger,
       $text-04,
       $hover-danger,
       $icon-03,
