@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { white } from '@carbon/colors';
+import { white, red60 } from '@carbon/colors';
 
 export const interactive01 = '#3d70b2';
 export const interactive02 = '#5a6872';
@@ -50,6 +50,8 @@ export const inverseSupport03 = '#FDD600';
 export const inverseSupport04 = '#5aaafa';
 
 export const overlay01 = 'rgba(223, 227, 230, 0.5)';
+
+export const danger = red60;
 
 // Interaction states
 export const focus = '#3d70b2';
