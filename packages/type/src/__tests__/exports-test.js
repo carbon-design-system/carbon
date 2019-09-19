@@ -53,6 +53,7 @@ describe('type', () => {
         "display02",
         "display03",
         "display04",
+        "unstable_tokens",
       ]
     `);
   });
