@@ -282,6 +282,17 @@ const SassString = defineType('SassString', {
   },
 });
 
+const SassValue = defineType('SassValue', {
+  fields: {
+    value: {
+      validate: assertAny,
+    },
+  },
+  generate(printer, node) {
+    printer.token(node.value);
+  },
+});
+
 //-------------------------------------------------------------------------------
 // Calls
 //-------------------------------------------------------------------------------
@@ -713,6 +724,7 @@ module.exports = {
   SassList,
   SassMap,
   SassMapProperty,
+  SassValue,
   SassMixin,
   SassMixinCall,
   StyleSheet,
