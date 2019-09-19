@@ -170,6 +170,35 @@ Checklist:
 
 </details>
 
+<details>
+  <summary>Demo Day email list and template</summary>
+
+Carbon Team list as of 9/16/2019: Abagail Hart/US/IBM@IBM, Akira
+Sudoh/Japan/IBM@IBMJP, Alessandra Davila1/US/IBM@IBM, Alison
+Joseph/Austin/IBM@IBMUS, Andrew Wang1/US/IBM@IBM, Anna
+Gonzales/Austin/IBM@IBMUS, Chris Connors/Pittsburgh/IBM@IBMUS, Connor
+Leech/US/IBM@IBM, DA Anguiano/US/IBM@IBM, Jan Child/US/IBM@IBM, Jean Ann
+Servaas/US/IBM@IBM, Jeoff Wilks/Arlington/IBM@IBMUS, Jillian Howarth/US/IBM@IBM,
+Josefina Noemi Mancilla/US/IBM@IBM, Joshua Black/Austin/IBM@IBMUS, Lauren
+Rice/Austin/IBM@IBMUS, Matt Rosno/US/IBM@IBM, Robin Cannon/Austin/IBM@IBMUS,
+Timothy W Egan/Austin/IBM@IBMUS, Tyler R Tate/Austin/IBM@IBMUS, Vincent Patrick
+Picone/US/IBM@IBM, Xiangjun Shi Trofimov/US/IBM@IBM,
+
+Title: Carbon [Month] release demo day
+
+Subject: This will be a review of the work completed at the end of the October
+release cycle.
+
+Link to Carbon October release planning:
+https://github.com/carbon-design-system/carbon/wiki/Carbon-October-Release-Planning
+
+Link to the Box note Agenda:
+https://ibm.ent.box.com/notes/342752664012?v=demo-day-agenda-design-system
+
+Please fill out a time slow with the topic and presenters before the meeting.
+
+</details>
+
 ### Week 2: Project work
 
 Checklist:
@@ -434,8 +463,12 @@ already exist in the project. These updates are reserved for
    final reviews from the endgame team for the release. _Note: Make sure to
    specify which packages are being updated for your reviewers._
 
-5. Once everything is green and your Pull Request has been reviewed, you should
-   **close** the draft Pull Request.
+5. Once everything is green, review the pull request. Make sure there are no
+   commits labeled `feat` as the patch release should only be for bug fixes,
+   content updates, or refactoring existing code. Double check that the
+   `package.json` versions are updated correctly by verifying the green
+   (updated) version numbers are an incremental increase to the red (deleted)
+   version numbers. If everything is correct, **close** the draft Pull Request.
 
 6. On your machine, you should then follow the following steps to publish to
    `next`:

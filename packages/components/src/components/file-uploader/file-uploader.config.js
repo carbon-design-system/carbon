@@ -17,11 +17,15 @@ module.exports = {
     {
       name: 'default',
       label: 'File uploader',
+      context: {
+        id: 'file-uploader',
+      },
     },
     {
       name: 'example upload states',
       label: 'File uploader with example upload states',
       context: {
+        id: 'prepopulated-file-uploader',
         exampleUploadStates: true,
       },
     },

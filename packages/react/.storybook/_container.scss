@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2019
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 $css--font-face: true;
 $css--reset: true;
 
@@ -7,3 +14,21 @@ $prefix: 'bx';
 // as `src` directory is _not_ meant to be shipped in our NPM package.
 // Use e.g. `@import '~carbon-components/scss/globals/scss/styles.scss'` instead.
 @import '~carbon-components/src/globals/scss/styles.scss'; // SEE THE NOTE ABOVE
+
+@if mixin-exists(carbon--theme--custom-properties) {
+  :root {
+    @include carbon--theme--custom-properties($carbon--theme--white);
+  }
+
+  :root[storybook-carbon-theme='g10'] {
+    @include carbon--theme--custom-properties($carbon--theme--g10);
+  }
+
+  :root[storybook-carbon-theme='g90'] {
+    @include carbon--theme--custom-properties($carbon--theme--g90);
+  }
+
+  :root[storybook-carbon-theme='g100'] {
+    @include carbon--theme--custom-properties($carbon--theme--g100);
+  }
+}

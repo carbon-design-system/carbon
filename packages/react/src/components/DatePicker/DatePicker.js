@@ -106,6 +106,7 @@ const carbonFlatpickrMonthSelectPlugin = config => fp => {
 
   return {
     onMonthChange: updateCurrentMonth,
+    onValueUpdate: updateCurrentMonth,
     onOpen: updateCurrentMonth,
     onReady: [setupElements, updateCurrentMonth, register],
   };

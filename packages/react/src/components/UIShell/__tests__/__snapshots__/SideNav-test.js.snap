@@ -2,6 +2,7 @@
 
 exports[`SideNav should render 1`] = `
 <ForwardRef(SideNav)
+  addFocusListeners={true}
   addMouseListeners={true}
   aria-label="Navigation"
   defaultExpanded={false}

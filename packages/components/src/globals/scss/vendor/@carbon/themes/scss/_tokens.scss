@@ -26,6 +26,10 @@ $interactive-03: map-get($carbon--theme, 'interactive-03') !default;
 /// @access public
 /// @group @carbon/themes
 $interactive-04: map-get($carbon--theme, 'interactive-04') !default;
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$danger: map-get($carbon--theme, 'danger') !default;
 /// Default page background
 /// @type Color
 /// @access public
@@ -76,6 +80,10 @@ $text-03: map-get($carbon--theme, 'text-03') !default;
 /// @access public
 /// @group @carbon/themes
 $text-04: map-get($carbon--theme, 'text-04') !default;
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$text-05: map-get($carbon--theme, 'text-05') !default;
 /// Primary icons
 /// @type Color
 /// @access public
