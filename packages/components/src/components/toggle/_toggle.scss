@@ -55,8 +55,8 @@
       border-radius: carbon--rem(15px);
       top: 0;
       will-change: box-shadow;
-      box-shadow: 0 0 0 1px transparent, 0 0 0 1px transparent,
-        0 0 0 3px transparent;
+      // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
+      box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
       transition: box-shadow $duration--fast-01 motion(exit, productive),
         background-color $duration--fast-01 motion(exit, productive);
     }
@@ -139,6 +139,7 @@
   .#{$prefix}--toggle + .#{$prefix}--toggle__label,
   .#{$prefix}--toggle + .#{$prefix}--toggle__label {
     .#{$prefix}--toggle__appearance:before {
+      // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
       box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
     }
   }
@@ -286,8 +287,8 @@
       content: '';
       background-color: $ui-04;
       will-change: box-shadow;
-      box-shadow: 0 0 0 1px transparent, 0 0 0 1px transparent,
-        0 0 0 3px transparent;
+      // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
+      box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
       transition: box-shadow $duration--fast-01 motion(exit, productive),
         background-color $duration--fast-01 motion(exit, productive);
     }
