@@ -55,12 +55,12 @@ async function build() {
     const variable = t.Assignment({
       id: t.Identifier(`carbon--theme--${name}`),
       init: t.SassMap({
-        properties: Object.keys(theme).map(token =>
-          t.SassMapProperty(
+        properties: Object.keys(theme).map(token => {
+          return t.SassMapProperty(
             t.Identifier(formatTokenName(token)),
-            t.SassColor(theme[token])
-          )
-        ),
+            primitive(theme[token])
+          );
+        }),
       }),
       default: true,
     });
@@ -108,16 +108,17 @@ async function build() {
       ],
       body: t.BlockStatement({
         body: [
-          ...tokenColors.map(token => {
-            const name = formatTokenName(token);
-
-            return t.Assignment({
-              id: t.Identifier(name),
-              init: t.CallExpression({
-                callee: t.Identifier('map-get'),
-                arguments: [t.Identifier('theme'), t.SassString(name)],
-              }),
-              global: true,
+          ...Object.keys(tokens).flatMap(group => {
+            return tokens[group].map(token => {
+              const name = formatTokenName(token);
+              return t.Assignment({
+                id: t.Identifier(name),
+                init: t.CallExpression({
+                  callee: t.Identifier('map-get'),
+                  arguments: [t.Identifier('theme'), t.SassString(name)],
+                }),
+                global: true,
+              });
             });
           }),
           t.IfStatement({
@@ -127,11 +128,13 @@ async function build() {
               right: t.SassBoolean(true),
             }),
             consequent: t.BlockStatement(
-              tokenColors.map(token => {
-                const name = formatTokenName(token);
-                return t.Declaration({
-                  property: `--${name}`,
-                  value: `#{map-get($theme, '${name}')}`,
+              Object.keys(tokens).flatMap(group => {
+                return tokens[group].map(token => {
+                  const name = formatTokenName(token);
+                  return t.Declaration({
+                    property: `--cds-${name}`,
+                    value: `#{map-get($theme, '${name}')}`,
+                  });
                 });
               })
             ),
@@ -251,4 +254,35 @@ function transformMetadata(metadata) {
   });
 
   return metadata;
+}
+
+function primitive(value) {
+  if (typeof value === 'string') {
+    if (value[0] === '#') {
+      return t.SassColor(value);
+    }
+    return t.SassValue(value);
+  } else if (typeof value === 'number') {
+    return t.SassNumber(value);
+  } else if (Array.isArray(value)) {
+    return t.SassList({
+      elements: value.map(primitive),
+    });
+  } else if (typeof value === 'object') {
+    return t.SassMap({
+      properties: Object.keys(value).map(key => {
+        const quoted = key.includes(' ');
+        const identifier = quoted
+          ? t.Identifier(key)
+          : t.Identifier(formatTokenName(key));
+        return t.SassMapProperty({
+          key: identifier,
+          value: primitive(value[key]),
+          quoted,
+        });
+      }),
+    });
+  }
+
+  throw new Error(`Unknown primitive type for ${typeof value}`);
 }
