@@ -11,7 +11,7 @@ export const interactive01 = '#3d70b2';
 export const interactive02 = '#5a6872';
 export const interactive03 = '#5a6872';
 export const interactive04 = '#3d70b2';
-
+export const danger = '#e0182d';
 export const uiBackground = '#f4f7fb';
 
 export const ui01 = white;
@@ -24,6 +24,7 @@ export const text01 = '#152935';
 export const text02 = '#5a6872';
 export const text03 = '#cdd1d4';
 export const text04 = white;
+export const text05 = '#5a6872';
 
 export const icon01 = '#3d70b2';
 export const icon02 = '#5a6872';

@@ -114,9 +114,8 @@ const StoryContent = () => {
     <Content
       id="main-content"
       style={{
-        backgroundColor: '#f3f3f3',
         margin: '0',
-        height: '100vh',
+        height: '100%',
         width: '100%',
       }}>
       {content}

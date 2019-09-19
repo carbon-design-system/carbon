@@ -55,7 +55,7 @@ export default function InlineLoading({
     return undefined;
   };
   const loadingText = (
-    <p className={`${prefix}--inline-loading__text`}>{description}</p>
+    <div className={`${prefix}--inline-loading__text`}>{description}</div>
   );
   const loading = getLoading();
   const loadingAnimation = loading && (
@@ -94,7 +94,7 @@ InlineLoading.propTypes = {
   /**
    * Specify the description for the inline loading text
    */
-  description: PropTypes.string,
+  description: PropTypes.node,
 
   /**
    * Specify the description for the inline loading text
