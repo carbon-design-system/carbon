@@ -321,3 +321,138 @@ $active-01: map-get($carbon--theme, 'active-01') !default;
 /// @alias hover-ui
 /// @deprecated
 $hover-field: map-get($carbon--theme, 'hover-field') !default;
+/// @access public
+/// @group @carbon/themes
+$caption-01: map-get($carbon--theme, 'caption-01') !default;
+/// @access public
+/// @group @carbon/themes
+$label-01: map-get($carbon--theme, 'label-01') !default;
+/// @access public
+/// @group @carbon/themes
+$helper-text-01: map-get($carbon--theme, 'helper-text-01') !default;
+/// @access public
+/// @group @carbon/themes
+$body-short-01: map-get($carbon--theme, 'body-short-01') !default;
+/// @access public
+/// @group @carbon/themes
+$body-long-01: map-get($carbon--theme, 'body-long-01') !default;
+/// @access public
+/// @group @carbon/themes
+$body-short-02: map-get($carbon--theme, 'body-short-02') !default;
+/// @access public
+/// @group @carbon/themes
+$body-long-02: map-get($carbon--theme, 'body-long-02') !default;
+/// @access public
+/// @group @carbon/themes
+$code-01: map-get($carbon--theme, 'code-01') !default;
+/// @access public
+/// @group @carbon/themes
+$code-02: map-get($carbon--theme, 'code-02') !default;
+/// @access public
+/// @group @carbon/themes
+$heading-01: map-get($carbon--theme, 'heading-01') !default;
+/// @access public
+/// @group @carbon/themes
+$productive-heading-01: map-get(
+  $carbon--theme,
+  'productive-heading-01'
+) !default;
+/// @access public
+/// @group @carbon/themes
+$heading-02: map-get($carbon--theme, 'heading-02') !default;
+/// @access public
+/// @group @carbon/themes
+$productive-heading-02: map-get(
+  $carbon--theme,
+  'productive-heading-02'
+) !default;
+/// @access public
+/// @group @carbon/themes
+$productive-heading-03: map-get(
+  $carbon--theme,
+  'productive-heading-03'
+) !default;
+/// @access public
+/// @group @carbon/themes
+$productive-heading-04: map-get(
+  $carbon--theme,
+  'productive-heading-04'
+) !default;
+/// @access public
+/// @group @carbon/themes
+$productive-heading-05: map-get(
+  $carbon--theme,
+  'productive-heading-05'
+) !default;
+/// @access public
+/// @group @carbon/themes
+$productive-heading-06: map-get(
+  $carbon--theme,
+  'productive-heading-06'
+) !default;
+/// @access public
+/// @group @carbon/themes
+$productive-heading-07: map-get(
+  $carbon--theme,
+  'productive-heading-07'
+) !default;
+/// @access public
+/// @group @carbon/themes
+$expressive-heading-01: map-get(
+  $carbon--theme,
+  'expressive-heading-01'
+) !default;
+/// @access public
+/// @group @carbon/themes
+$expressive-heading-02: map-get(
+  $carbon--theme,
+  'expressive-heading-02'
+) !default;
+/// @access public
+/// @group @carbon/themes
+$expressive-heading-03: map-get(
+  $carbon--theme,
+  'expressive-heading-03'
+) !default;
+/// @access public
+/// @group @carbon/themes
+$expressive-heading-04: map-get(
+  $carbon--theme,
+  'expressive-heading-04'
+) !default;
+/// @access public
+/// @group @carbon/themes
+$expressive-heading-05: map-get(
+  $carbon--theme,
+  'expressive-heading-05'
+) !default;
+/// @access public
+/// @group @carbon/themes
+$expressive-heading-06: map-get(
+  $carbon--theme,
+  'expressive-heading-06'
+) !default;
+/// @access public
+/// @group @carbon/themes
+$expressive-paragraph-01: map-get(
+  $carbon--theme,
+  'expressive-paragraph-01'
+) !default;
+/// @access public
+/// @group @carbon/themes
+$quotation-01: map-get($carbon--theme, 'quotation-01') !default;
+/// @access public
+/// @group @carbon/themes
+$quotation-02: map-get($carbon--theme, 'quotation-02') !default;
+/// @access public
+/// @group @carbon/themes
+$display-01: map-get($carbon--theme, 'display-01') !default;
+/// @access public
+/// @group @carbon/themes
+$display-02: map-get($carbon--theme, 'display-02') !default;
+/// @access public
+/// @group @carbon/themes
+$display-03: map-get($carbon--theme, 'display-03') !default;
+/// @access public
+/// @group @carbon/themes
+$display-04: map-get($carbon--theme, 'display-04') !default;
