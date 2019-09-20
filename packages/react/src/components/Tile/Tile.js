@@ -15,7 +15,7 @@ import {
   ChevronDown16,
 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
-import uid from '../../tools/uniqueId';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
 
@@ -319,7 +319,14 @@ export class SelectableTile extends Component {
   }
 }
 
+const getInstanceId = setupGetInstanceId();
+
 export class ExpandableTile extends Component {
+  constructor(props) {
+    super(props);
+    this.instanceId = getInstanceId();
+  }
+
   state = {};
 
   static propTypes = {
@@ -453,9 +460,6 @@ export class ExpandableTile extends Component {
     return React.Children.map(this.props.children, child => child);
   };
 
-  // a unique ID generated for use in aria-labelledby if one isn't providedj
-  uid = uid();
-
   render() {
     const {
       tabIndex,
@@ -485,15 +489,20 @@ export class ExpandableTile extends Component {
         : this.state.tileMaxHeight + this.state.tilePadding,
     };
     const content = this.getChildren().map((child, index) => {
-      return React.cloneElement(child, { ref: index });
+      // Aria-hidden hides content from a screenreader. Here isHidden changes aria-hidden based on the state of expanded so that the above the fold content is announced when the tile is not expanded but not re-announced when the tile is expanded. It also will hide the below the fold content when the tile is not expanded.
+      const isHidden = index === 0 ? expanded : !expanded;
+      return React.cloneElement(child, { ref: index, 'aria-hidden': isHidden });
     });
-    const buttonId = this.props.id ? `${this.props.id}__button` : this.uid;
+
+    const tileContentId = `tile-content-${this.instanceId}`;
+
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-      <div
+      <aside
         ref={tile => {
           this.tile = tile;
         }}
+        aria-labelledby={tileContentId}
         style={tileStyle}
         className={classes}
         {...other}
@@ -502,16 +511,9 @@ export class ExpandableTile extends Component {
         tabIndex={tabIndex}>
         <button
           className={`${prefix}--tile__chevron`}
-          aria-labelledby={buttonId}
+          aria-label={expanded ? tileExpandedIconText : tileCollapsedIconText}
           aria-expanded={expanded}>
-          <ChevronDown16
-            id={buttonId}
-            aria-label={expanded ? tileExpandedIconText : tileCollapsedIconText}
-            alt={expanded ? tileExpandedIconText : tileCollapsedIconText}
-            description={
-              expanded ? tileExpandedIconText : tileCollapsedIconText
-            }
-          />
+          <ChevronDown16 />
         </button>
         <div
           ref={tileContent => {
@@ -520,7 +522,7 @@ export class ExpandableTile extends Component {
           className={`${prefix}--tile-content`}>
           {content}
         </div>
-      </div>
+      </aside>
     );
   }
 }
@@ -534,10 +536,10 @@ export class TileAboveTheFoldContent extends Component {
   };
 
   render() {
-    const { children } = this.props;
+    const { children, ...rest } = this.props;
 
     return (
-      <span className={`${prefix}--tile-content__above-the-fold`}>
+      <span className={`${prefix}--tile-content__above-the-fold`} {...rest}>
         {children}
       </span>
     );
@@ -553,10 +555,10 @@ export class TileBelowTheFoldContent extends Component {
   };
 
   render() {
-    const { children } = this.props;
+    const { children, ...rest } = this.props;
 
     return (
-      <span className={`${prefix}--tile-content__below-the-fold`}>
+      <span className={`${prefix}--tile-content__below-the-fold`} {...rest}>
         {children}
       </span>
     );
