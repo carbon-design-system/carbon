@@ -44,7 +44,6 @@ export const interactive01 = blue60;
 export const interactive02 = gray60;
 export const interactive03 = white;
 export const interactive04 = blue50;
-export const danger = red60;
 
 export const uiBackground = gray90;
 
