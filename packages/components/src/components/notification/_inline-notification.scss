@@ -121,7 +121,7 @@
   .#{$prefix}--inline-notification__text-wrapper {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: baseline;
     padding: $carbon--spacing-04 0;
   }
 
