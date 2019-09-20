@@ -34,6 +34,7 @@
   $interactive-02: map-get($theme, 'interactive-02') !global;
   $interactive-03: map-get($theme, 'interactive-03') !global;
   $interactive-04: map-get($theme, 'interactive-04') !global;
+  $danger: map-get($theme, 'danger') !global;
   $ui-background: map-get($theme, 'ui-background') !global;
   $ui-01: map-get($theme, 'ui-01') !global;
   $ui-02: map-get($theme, 'ui-02') !global;
@@ -44,6 +45,7 @@
   $text-02: map-get($theme, 'text-02') !global;
   $text-03: map-get($theme, 'text-03') !global;
   $text-04: map-get($theme, 'text-04') !global;
+  $text-05: map-get($theme, 'text-05') !global;
   $icon-01: map-get($theme, 'icon-01') !global;
   $icon-02: map-get($theme, 'icon-02') !global;
   $icon-03: map-get($theme, 'icon-03') !global;
@@ -97,6 +99,7 @@
     --interactive-02: #{map-get($theme, 'interactive-02')};
     --interactive-03: #{map-get($theme, 'interactive-03')};
     --interactive-04: #{map-get($theme, 'interactive-04')};
+    --danger: #{map-get($theme, 'danger')};
     --ui-background: #{map-get($theme, 'ui-background')};
     --ui-01: #{map-get($theme, 'ui-01')};
     --ui-02: #{map-get($theme, 'ui-02')};
@@ -107,6 +110,7 @@
     --text-02: #{map-get($theme, 'text-02')};
     --text-03: #{map-get($theme, 'text-03')};
     --text-04: #{map-get($theme, 'text-04')};
+    --text-05: #{map-get($theme, 'text-05')};
     --icon-01: #{map-get($theme, 'icon-01')};
     --icon-02: #{map-get($theme, 'icon-02')};
     --icon-03: #{map-get($theme, 'icon-03')};

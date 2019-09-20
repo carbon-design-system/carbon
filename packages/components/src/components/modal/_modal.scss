@@ -179,6 +179,10 @@
     }
   }
 
+  .#{$prefix}--modal-close::-moz-focus-inner {
+    border: 0;
+  }
+
   .#{$prefix}--modal-close__icon {
     fill: $icon-01;
     height: rem(20px);

@@ -55,7 +55,8 @@
       border-radius: carbon--rem(15px);
       top: 0;
       will-change: box-shadow;
-      box-shadow: 0 0 0 2px transparent;
+      // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
+      box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
       transition: box-shadow $duration--fast-01 motion(exit, productive),
         background-color $duration--fast-01 motion(exit, productive);
     }
@@ -70,7 +71,7 @@
       top: carbon--rem(3px);
       width: carbon--rem(18px);
       height: carbon--rem(18px);
-      background-color: $ui-03;
+      background-color: $icon-03;
       border-radius: 50%;
       content: '';
       transition: transform $duration--fast-01 motion(exit, productive);
@@ -78,7 +79,7 @@
   }
 
   .#{$prefix}--toggle__check {
-    fill: $ui-03;
+    fill: $icon-03;
     position: absolute;
     left: carbon--rem(6px);
     top: carbon--rem(6px);
@@ -138,13 +139,14 @@
   .#{$prefix}--toggle + .#{$prefix}--toggle__label,
   .#{$prefix}--toggle + .#{$prefix}--toggle__label {
     .#{$prefix}--toggle__appearance:before {
-      box-shadow: 0 0 0 2px transparent;
+      // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
+      box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
     }
   }
   .#{$prefix}--toggle:focus + .#{$prefix}--toggle__label,
   .#{$prefix}--toggle:active + .#{$prefix}--toggle__label {
     .#{$prefix}--toggle__appearance:before {
-      box-shadow: 0 0 0 2px $focus;
+      box-shadow: 0 0 0 1px $ui-02, 0 0 0 3px $focus;
     }
   }
 
@@ -285,7 +287,8 @@
       content: '';
       background-color: $ui-04;
       will-change: box-shadow;
-      box-shadow: 0 0 0 2px transparent;
+      // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
+      box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
       transition: box-shadow $duration--fast-01 motion(exit, productive),
         background-color $duration--fast-01 motion(exit, productive);
     }
@@ -300,7 +303,7 @@
       width: carbon--rem(18px);
       height: carbon--rem(18px);
       border-radius: 50%;
-      background-color: $ui-03;
+      background-color: $icon-03;
       content: '';
       transition: transform $duration--fast-01 motion(exit, productive);
     }
@@ -350,7 +353,7 @@
   .#{$prefix}--toggle-input:active
     + .#{$prefix}--toggle-input__label
     > .#{$prefix}--toggle__switch::before {
-    box-shadow: 0 0 0 2px $focus;
+    box-shadow: 0 0 0 1px $ui-02, 0 0 0 3px $focus;
   }
 
   //----------------------------------------------
