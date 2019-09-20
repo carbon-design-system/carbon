@@ -294,6 +294,11 @@ $skeleton-02: map-get($carbon--theme, 'skeleton-02') !default;
 /// @type Color
 /// @access public
 /// @group @carbon/themes
+/// @alias danger
+$danger: map-get($carbon--theme, 'danger') !default;
+/// @type Color
+/// @access public
+/// @group @carbon/themes
 /// @alias interactive-01
 /// @deprecated
 $brand-01: map-get($carbon--theme, 'brand-01') !default;

@@ -321,3 +321,7 @@ $active-01: map-get($carbon--theme, 'active-01') !default;
 /// @alias hover-ui
 /// @deprecated
 $hover-field: map-get($carbon--theme, 'hover-field') !default;
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$danger: map-get($carbon--theme, 'danger') !default;
