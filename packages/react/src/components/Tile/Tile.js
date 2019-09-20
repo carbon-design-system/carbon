@@ -489,6 +489,7 @@ export class ExpandableTile extends Component {
         : this.state.tileMaxHeight + this.state.tilePadding,
     };
     const content = this.getChildren().map((child, index) => {
+      // Changes aria-hidden above/below the fold content based on the state of expanded so the content doesn't get announced by screenreaders at the wrong time.
       const isHidden = index === 0 ? expanded : !expanded;
 
       return React.cloneElement(child, {
@@ -549,8 +550,6 @@ export class TileAboveTheFoldContent extends Component {
     );
   }
 }
-
-// TODO: add aria-hidden to tile below the fold content by default and then using React.CloneElement() change the prop to aria-hidden= false when expanded and then do the reverse for tile above the fold content
 
 export class TileBelowTheFoldContent extends Component {
   static propTypes = {
