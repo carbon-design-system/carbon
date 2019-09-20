@@ -489,7 +489,7 @@ export class ExpandableTile extends Component {
         : this.state.tileMaxHeight + this.state.tilePadding,
     };
     const content = this.getChildren().map((child, index) => {
-      // Aria-hidden hides content from a screenreader. Herem, isHidden changes aria-hidden based on the state of expanded so that the above the fold content is announced when the tile is not expanded but not re-announced when the tile is expanded. It also will hide the below the fold content when the tile is not expanded.
+      // Aria-hidden hides content from a screenreader. Here isHidden changes aria-hidden based on the state of expanded so that the above the fold content is announced when the tile is not expanded but not re-announced when the tile is expanded. It also will hide the below the fold content when the tile is not expanded.
       const isHidden = index === 0 ? expanded : !expanded;
 
       return React.cloneElement(child, {
