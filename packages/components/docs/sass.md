@@ -4510,6 +4510,7 @@ $ui-02: map-get($carbon--theme, 'ui-02');
   - [button-theme [mixin]](#button-theme-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
+  - [toggle [mixin]](#toggle-mixin)
   - [carbon-content [mixin]](#carbon-content-mixin)
 
 ### ✅ui-03 [variable]
@@ -4546,7 +4547,6 @@ $ui-03: map-get($carbon--theme, 'ui-03');
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tags [mixin]](#tags-mixin)
-  - [toggle [mixin]](#toggle-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
 
 ### ✅ui-04 [variable]
@@ -18225,7 +18225,8 @@ Toggle styles
       border-radius: carbon--rem(15px);
       top: 0;
       will-change: box-shadow;
-      box-shadow: 0 0 0 2px transparent;
+      // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
+      box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
       transition: box-shadow $duration--fast-01 motion(exit, productive), background-color
           $duration--fast-01 motion(exit, productive);
     }
@@ -18240,7 +18241,7 @@ Toggle styles
       top: carbon--rem(3px);
       width: carbon--rem(18px);
       height: carbon--rem(18px);
-      background-color: $ui-03;
+      background-color: $icon-03;
       border-radius: 50%;
       content: '';
       transition: transform $duration--fast-01 motion(exit, productive);
@@ -18248,7 +18249,7 @@ Toggle styles
   }
 
   .#{$prefix}--toggle__check {
-    fill: $ui-03;
+    fill: $icon-03;
     position: absolute;
     left: carbon--rem(6px);
     top: carbon--rem(6px);
@@ -18308,13 +18309,14 @@ Toggle styles
   .#{$prefix}--toggle + .#{$prefix}--toggle__label,
   .#{$prefix}--toggle + .#{$prefix}--toggle__label {
     .#{$prefix}--toggle__appearance:before {
-      box-shadow: 0 0 0 2px transparent;
+      // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
+      box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
     }
   }
   .#{$prefix}--toggle:focus + .#{$prefix}--toggle__label,
   .#{$prefix}--toggle:active + .#{$prefix}--toggle__label {
     .#{$prefix}--toggle__appearance:before {
-      box-shadow: 0 0 0 2px $focus;
+      box-shadow: 0 0 0 1px $ui-02, 0 0 0 3px $focus;
     }
   }
 
@@ -18455,7 +18457,8 @@ Toggle styles
       content: '';
       background-color: $ui-04;
       will-change: box-shadow;
-      box-shadow: 0 0 0 2px transparent;
+      // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
+      box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
       transition: box-shadow $duration--fast-01 motion(exit, productive), background-color
           $duration--fast-01 motion(exit, productive);
     }
@@ -18470,7 +18473,7 @@ Toggle styles
       width: carbon--rem(18px);
       height: carbon--rem(18px);
       border-radius: 50%;
-      background-color: $ui-03;
+      background-color: $icon-03;
       content: '';
       transition: transform $duration--fast-01 motion(exit, productive);
     }
@@ -18520,7 +18523,7 @@ Toggle styles
   .#{$prefix}--toggle-input:active
     + .#{$prefix}--toggle-input__label
     > .#{$prefix}--toggle__switch::before {
-    box-shadow: 0 0 0 2px $focus;
+    box-shadow: 0 0 0 1px $ui-02, 0 0 0 3px $focus;
   }
 
   //----------------------------------------------
@@ -18613,10 +18616,10 @@ Toggle styles
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [ui-03 [variable]](#ui-03-variable)
-  - [support-02 [variable]](#support-02-variable)
-  - [icon-03 [variable]](#icon-03-variable)
+  - [ui-02 [variable]](#ui-02-variable)
   - [focus [variable]](#focus-variable)
+  - [icon-03 [variable]](#icon-03-variable)
+  - [support-02 [variable]](#support-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [text-02 [variable]](#text-02-variable)
