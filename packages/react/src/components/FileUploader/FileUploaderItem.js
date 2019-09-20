@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import classNames from 'classnames';
 import { Filename } from './FileUploader';
 import { keys, matches } from '../../internal/keyboard';
