@@ -173,6 +173,10 @@ $inverse-support-04: map-get($carbon--theme, 'inverse-support-04') !default;
 /// @access public
 /// @group @carbon/themes
 $overlay-01: map-get($carbon--theme, 'overlay-01') !default;
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$danger: map-get($carbon--theme, 'danger') !default;
 /// Focus border; Focus underline
 /// @type Color
 /// @access public
@@ -291,11 +295,6 @@ $skeleton-01: map-get($carbon--theme, 'skeleton-01') !default;
 /// @access public
 /// @group @carbon/themes
 $skeleton-02: map-get($carbon--theme, 'skeleton-02') !default;
-/// @type Color
-/// @access public
-/// @group @carbon/themes
-/// @alias danger
-$danger: map-get($carbon--theme, 'danger') !default;
 /// @type Color
 /// @access public
 /// @group @carbon/themes
