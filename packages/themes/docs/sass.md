@@ -8,13 +8,14 @@
 
 <!-- toc -->
 
-- [@carbon/themes](#carbonthemes)
+- [@rocketsoftware/themes](#rocketsoftwarethemes)
   - [✅carbon--theme [mixin]](#carbon--theme-mixin)
   - [✅carbon--theme--white [variable]](#carbon--theme--white-variable)
   - [✅carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
   - [✅carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
   - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
   - [✅carbon--theme--v9 [variable]](#carbon--theme--v9-variable)
+  - [✅carbon--theme--rocket [variable]](#carbon--theme--rocket-variable)
   - [✅carbon--theme [variable]](#carbon--theme-variable)
   - [✅interactive-01 [variable]](#interactive-01-variable)
   - [✅interactive-02 [variable]](#interactive-02-variable)
@@ -80,7 +81,7 @@
 
 <!-- tocstop -->
 
-## @carbon/themes
+## @rocketsoftware/themes
 
 ### ✅carbon--theme [mixin]
 
@@ -258,7 +259,7 @@ Define theme variables from a map of tokens
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Content**: Pass in your custom declaration blocks to be used after the token
   maps set theming variables.
 - **Requires**:
@@ -400,7 +401,7 @@ $carbon--theme--white: (
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Map`
 - **Aliased**:
   - `carbon--theme`
@@ -480,7 +481,7 @@ $carbon--theme--g10: (
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Map`
 
 ### ✅carbon--theme--g90 [variable]
@@ -558,7 +559,7 @@ $carbon--theme--g90: (
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Map`
 
 ### ✅carbon--theme--g100 [variable]
@@ -636,7 +637,7 @@ $carbon--theme--g100: (
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Map`
 
 ### ✅carbon--theme--v9 [variable]
@@ -714,7 +715,85 @@ $carbon--theme--v9: (
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
+- **Type**: `Map`
+
+### ✅carbon--theme--rocket [variable]
+
+Carbon's rocket color theme
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--theme--rocket: (
+  interactive-01: #025c53,
+  interactive-02: #333333,
+  interactive-03: #025c53,
+  interactive-04: #025c53,
+  ui-background: #ffffff,
+  ui-01: #efefef,
+  ui-02: #ffffff,
+  ui-03: #dcdcdc,
+  ui-04: #bcbcbc,
+  ui-05: #333333,
+  text-01: #333333,
+  text-02: #595959,
+  text-03: #bcbcbc,
+  text-04: #ffffff,
+  icon-01: #333333,
+  icon-02: #595959,
+  icon-03: #ffffff,
+  link-01: #025c53,
+  inverse-link: #0062ff,
+  field-01: #efefef,
+  field-02: #ffffff,
+  inverse-01: #ffffff,
+  inverse-02: #3d3d3d,
+  support-01: #bf3438,
+  support-02: #507300,
+  support-03: #8b6010,
+  support-04: #01453e,
+  inverse-support-01: #fccacc,
+  inverse-support-02: #c6ff40,
+  inverse-support-03: #fdd13a,
+  inverse-support-04: #93c7c2,
+  overlay-01: rgba(23, 23, 23, 0.5),
+  focus: #025c53,
+  inverse-focus-ui: #0062ff,
+  hover-primary: #01453e,
+  active-primary: #012e29,
+  hover-primary-text: #012e29,
+  hover-secondary: #4c4c4c,
+  active-secondary: #6f6f6f,
+  hover-tertiary: #01453e,
+  active-tertiary: #012e29,
+  hover-ui: #e5e5e5,
+  active-ui: #bebebe,
+  selected-ui: #dcdcdc,
+  inverse-hover-ui: #e5e5e5,
+  hover-selected-ui: #cacaca,
+  hover-danger: #99292d,
+  active-danger: #99292d,
+  hover-row: #e5e5e5,
+  visited-link: #5b2e66,
+  disabled-01: #f3f3f3,
+  disabled-02: #bebebe,
+  disabled-03: #bcbcbc,
+  highlight: #c9deff,
+  skeleton-01: #e5e5e5,
+  skeleton-02: #bebebe,
+  brand-01: #025c53,
+  brand-02: #333333,
+  brand-03: #025c53,
+  active-01: #bebebe,
+  hover-field: #e5e5e5,
+);
+```
+
+</details>
+
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Map`
 
 ### ✅carbon--theme [variable]
@@ -730,7 +809,7 @@ $carbon--theme: $carbon--theme--white;
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Map`
 - **Alias**: `carbon--theme--white`
 - **Used by**:
@@ -749,7 +828,7 @@ $interactive-01: map-get($carbon--theme, 'interactive-01');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Aliased**:
   - `brand-01`
@@ -769,7 +848,7 @@ $interactive-02: map-get($carbon--theme, 'interactive-02');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Aliased**:
   - `brand-02`
@@ -789,7 +868,7 @@ $interactive-03: map-get($carbon--theme, 'interactive-03');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Aliased**:
   - `brand-03`
@@ -809,7 +888,7 @@ $interactive-04: map-get($carbon--theme, 'interactive-04');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -827,7 +906,7 @@ $ui-background: map-get($carbon--theme, 'ui-background');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -845,7 +924,7 @@ $ui-01: map-get($carbon--theme, 'ui-01');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -863,7 +942,7 @@ $ui-02: map-get($carbon--theme, 'ui-02');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -881,7 +960,7 @@ $ui-03: map-get($carbon--theme, 'ui-03');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -899,7 +978,7 @@ $ui-04: map-get($carbon--theme, 'ui-04');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -917,7 +996,7 @@ $ui-05: map-get($carbon--theme, 'ui-05');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -935,7 +1014,7 @@ $text-01: map-get($carbon--theme, 'text-01');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -953,7 +1032,7 @@ $text-02: map-get($carbon--theme, 'text-02');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -971,7 +1050,7 @@ $text-03: map-get($carbon--theme, 'text-03');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -989,7 +1068,7 @@ $text-04: map-get($carbon--theme, 'text-04');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1007,7 +1086,7 @@ $icon-01: map-get($carbon--theme, 'icon-01');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1025,7 +1104,7 @@ $icon-02: map-get($carbon--theme, 'icon-02');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1043,7 +1122,7 @@ $icon-03: map-get($carbon--theme, 'icon-03');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1061,7 +1140,7 @@ $link-01: map-get($carbon--theme, 'link-01');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1077,7 +1156,7 @@ $inverse-link: map-get($carbon--theme, 'inverse-link');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1095,7 +1174,7 @@ $field-01: map-get($carbon--theme, 'field-01');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1113,7 +1192,7 @@ $field-02: map-get($carbon--theme, 'field-02');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1131,7 +1210,7 @@ $inverse-01: map-get($carbon--theme, 'inverse-01');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1149,7 +1228,7 @@ $inverse-02: map-get($carbon--theme, 'inverse-02');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1167,7 +1246,7 @@ $support-01: map-get($carbon--theme, 'support-01');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1185,7 +1264,7 @@ $support-02: map-get($carbon--theme, 'support-02');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1203,7 +1282,7 @@ $support-03: map-get($carbon--theme, 'support-03');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1221,7 +1300,7 @@ $support-04: map-get($carbon--theme, 'support-04');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1239,7 +1318,7 @@ $inverse-support-01: map-get($carbon--theme, 'inverse-support-01');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1257,7 +1336,7 @@ $inverse-support-02: map-get($carbon--theme, 'inverse-support-02');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1275,7 +1354,7 @@ $inverse-support-03: map-get($carbon--theme, 'inverse-support-03');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1293,7 +1372,7 @@ $inverse-support-04: map-get($carbon--theme, 'inverse-support-04');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1311,7 +1390,7 @@ $overlay-01: map-get($carbon--theme, 'overlay-01');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1329,7 +1408,7 @@ $focus: map-get($carbon--theme, 'focus');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1345,7 +1424,7 @@ $inverse-focus-ui: map-get($carbon--theme, 'inverse-focus-ui');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1363,7 +1442,7 @@ $hover-primary: map-get($carbon--theme, 'hover-primary');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1381,7 +1460,7 @@ $active-primary: map-get($carbon--theme, 'active-primary');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1399,7 +1478,7 @@ $hover-primary-text: map-get($carbon--theme, 'hover-primary-text');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1417,7 +1496,7 @@ $hover-secondary: map-get($carbon--theme, 'hover-secondary');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1435,7 +1514,7 @@ $active-secondary: map-get($carbon--theme, 'active-secondary');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1453,7 +1532,7 @@ $hover-tertiary: map-get($carbon--theme, 'hover-tertiary');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1471,7 +1550,7 @@ $active-tertiary: map-get($carbon--theme, 'active-tertiary');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1489,7 +1568,7 @@ $hover-ui: map-get($carbon--theme, 'hover-ui');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Aliased**:
   - `hover-field`
@@ -1509,7 +1588,7 @@ $active-ui: map-get($carbon--theme, 'active-ui');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Aliased**:
   - `active-01`
@@ -1529,7 +1608,7 @@ $selected-ui: map-get($carbon--theme, 'selected-ui');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1547,7 +1626,7 @@ $hover-selected-ui: map-get($carbon--theme, 'hover-selected-ui');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1563,7 +1642,7 @@ $inverse-hover-ui: map-get($carbon--theme, 'inverse-hover-ui');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1581,7 +1660,7 @@ $hover-danger: map-get($carbon--theme, 'hover-danger');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1599,7 +1678,7 @@ $active-danger: map-get($carbon--theme, 'active-danger');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1617,7 +1696,7 @@ $hover-row: map-get($carbon--theme, 'hover-row');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1635,7 +1714,7 @@ $visited-link: map-get($carbon--theme, 'visited-link');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1653,7 +1732,7 @@ $disabled-01: map-get($carbon--theme, 'disabled-01');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1672,7 +1751,7 @@ $disabled-02: map-get($carbon--theme, 'disabled-02');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1690,7 +1769,7 @@ $disabled-03: map-get($carbon--theme, 'disabled-03');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1708,7 +1787,7 @@ $highlight: map-get($carbon--theme, 'highlight');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1726,7 +1805,7 @@ $skeleton-01: map-get($carbon--theme, 'skeleton-01');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1744,7 +1823,7 @@ $skeleton-02: map-get($carbon--theme, 'skeleton-02');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1760,7 +1839,7 @@ $brand-01: map-get($carbon--theme, 'brand-01');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Alias**: `interactive-01`
 - **Used by**:
@@ -1778,7 +1857,7 @@ $brand-02: map-get($carbon--theme, 'brand-02');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Alias**: `interactive-02`
 - **Used by**:
@@ -1796,7 +1875,7 @@ $brand-03: map-get($carbon--theme, 'brand-03');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Alias**: `interactive-03`
 - **Used by**:
@@ -1814,7 +1893,7 @@ $active-01: map-get($carbon--theme, 'active-01');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Alias**: `active-ui`
 - **Used by**:
@@ -1832,7 +1911,7 @@ $hover-field: map-get($carbon--theme, 'hover-field');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Alias**: `hover-ui`
 - **Used by**:

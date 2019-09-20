@@ -28,7 +28,7 @@
 ///     }
 ///   }
 ///
-/// @group @carbon/themes
+/// @group @rocketsoftware/themes
 @mixin carbon--theme($theme: $carbon--theme, $emit-custom-properties: false) {
   $interactive-01: map-get($theme, 'interactive-01') !global;
   $interactive-02: map-get($theme, 'interactive-02') !global;

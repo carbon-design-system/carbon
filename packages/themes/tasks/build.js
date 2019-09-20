@@ -51,7 +51,7 @@ async function build() {
     const comment = t.Comment(`/ Carbon's ${name} color theme
 / @type Map
 / @access public
-/ @group @carbon/themes`);
+/ @group @rocketsoftware/themes`);
     const variable = t.Assignment({
       id: t.Identifier(`carbon--theme--${name}`),
       init: t.SassMap({
@@ -93,7 +93,7 @@ async function build() {
 /     }
 /   }
 /
-/ @group @carbon/themes`),
+/ @group @rocketsoftware/themes`),
     t.SassMixin({
       id: t.Identifier('carbon--theme'),
       params: [
@@ -175,7 +175,7 @@ async function build() {
         tokenData.role && t.Comment(`/ ${tokenData.role.join('; ')}`),
         t.Comment(`/ @type Color
 / @access public
-/ @group @carbon/themes`),
+/ @group @rocketsoftware/themes`),
         tokenData.alias && t.Comment(`/ @alias ${tokenData.alias}`),
         tokenData.deprecated && t.Comment(`/ @deprecated`),
         t.Assignment({
@@ -197,7 +197,7 @@ async function build() {
 / @type Map
 / @access public
 / @alias carbon--theme--${defaultTheme}
-/ @group @carbon/themes`),
+/ @group @rocketsoftware/themes`),
     t.Assignment({
       id: t.Identifier(defaultThemeMapName),
       init: t.Identifier(`carbon--theme--${defaultTheme}`),

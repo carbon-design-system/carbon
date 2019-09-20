@@ -12,6 +12,7 @@ import * as g100 from './g100';
 import * as white from './white';
 import * as g90 from './g90';
 import * as v9 from './v9';
+import * as rocket from './rocket';
 import { tokens, formatTokenName, unstable__meta } from './tokens';
 
 export { g10, g90, g100, white, v9 };
@@ -22,4 +23,5 @@ export const themes = {
   g90,
   g100,
   v9,
+  rocket,
 };
