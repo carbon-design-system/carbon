@@ -15,7 +15,7 @@ import {
   ChevronDown16,
 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
-import uid from '../../tools/uniqueId';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
 
@@ -319,7 +319,14 @@ export class SelectableTile extends Component {
   }
 }
 
+const getInstanceId = setupGetInstanceId();
+
 export class ExpandableTile extends Component {
+  constructor(props) {
+    super(props);
+    this.instanceId = getInstanceId();
+  }
+
   state = {};
 
   static propTypes = {
@@ -453,9 +460,6 @@ export class ExpandableTile extends Component {
     return React.Children.map(this.props.children, child => child);
   };
 
-  // a unique ID generated for use in aria-labelledby if one isn't providedj
-  uid = uid();
-
   render() {
     const {
       tabIndex,
@@ -485,15 +489,23 @@ export class ExpandableTile extends Component {
         : this.state.tileMaxHeight + this.state.tilePadding,
     };
     const content = this.getChildren().map((child, index) => {
-      return React.cloneElement(child, { ref: index });
+      const isHidden = index === 0 ? expanded : !expanded;
+
+      return React.cloneElement(child, {
+        ref: index,
+        'aria-hidden': isHidden,
+      });
     });
+
+    const tileContentId = `tile-content-a11y-${this.instanceId}`;
 
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-      <div
+      <aside
         ref={tile => {
           this.tile = tile;
         }}
+        aria-labelledby={tileContentId}
         style={tileStyle}
         className={classes}
         {...other}
@@ -507,13 +519,14 @@ export class ExpandableTile extends Component {
           <ChevronDown16 />
         </button>
         <div
+          id={tileContentId}
           ref={tileContent => {
             this.tileContent = tileContent;
           }}
           className={`${prefix}--tile-content`}>
           {content}
         </div>
-      </div>
+      </aside>
     );
   }
 }
@@ -527,15 +540,17 @@ export class TileAboveTheFoldContent extends Component {
   };
 
   render() {
-    const { children } = this.props;
+    const { children, ...rest } = this.props;
 
     return (
-      <span className={`${prefix}--tile-content__above-the-fold`}>
+      <span className={`${prefix}--tile-content__above-the-fold`} {...rest}>
         {children}
       </span>
     );
   }
 }
+
+// TODO: add aria-hidden to tile below the fold content by default and then using React.CloneElement() change the prop to aria-hidden= false when expanded and then do the reverse for tile above the fold content
 
 export class TileBelowTheFoldContent extends Component {
   static propTypes = {
@@ -546,10 +561,10 @@ export class TileBelowTheFoldContent extends Component {
   };
 
   render() {
-    const { children } = this.props;
+    const { children, ...rest } = this.props;
 
     return (
-      <span className={`${prefix}--tile-content__below-the-fold`}>
+      <span className={`${prefix}--tile-content__below-the-fold`} {...rest}>
         {children}
       </span>
     );
