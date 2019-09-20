@@ -128,12 +128,22 @@ async function build() {
             }),
             consequent: t.BlockStatement(
               Object.keys(tokens).flatMap(group => {
-                return tokens[group].map(token => {
+                return tokens[group].flatMap(token => {
                   const name = formatTokenName(token);
-                  return t.Declaration({
-                    property: `--cds-${name}`,
-                    value: `#{map-get($theme, '${name}')}`,
-                  });
+
+                  if (tokens.colors.indexOf(token) !== -1) {
+                    return t.Declaration({
+                      property: `--cds-${name}`,
+                      value: `#{map-get($theme, '${name}')}`,
+                    });
+                  }
+
+                  return [
+                    t.Declaration({
+                      property: `--cds-${name}-a`,
+                      value: `a`,
+                    }),
+                  ];
                 });
               })
             ),
