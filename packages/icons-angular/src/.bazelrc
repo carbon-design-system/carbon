@@ -8,7 +8,7 @@ build --experimental_allow_incremental_repository_updates
 
 build --local_cpu_resources=2
 
-build --local_ram_resources=3072
+build --local_ram_resources=1024
 
 startup --host_jvm_args=-Xmx2G
 
