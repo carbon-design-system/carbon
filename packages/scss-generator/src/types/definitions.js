@@ -282,6 +282,19 @@ const SassString = defineType('SassString', {
   },
 });
 
+// Allow ability to shortcircuit AST builder limitations and embed raw values
+// into the Sass source code
+const SassValue = defineType('SassValue', {
+  fields: {
+    value: {
+      validate: assertAny,
+    },
+  },
+  generate(printer, node) {
+    printer.token(node.value);
+  },
+});
+
 //-------------------------------------------------------------------------------
 // Calls
 //-------------------------------------------------------------------------------
@@ -724,6 +737,7 @@ module.exports = {
   SassList,
   SassMap,
   SassMapProperty,
+  SassValue,
   SassMixin,
   SassMixinCall,
   StyleSheet,
