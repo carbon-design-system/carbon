@@ -152,6 +152,7 @@
   - [✅inverse-support-03 [variable]](#inverse-support-03-variable)
   - [✅inverse-support-04 [variable]](#inverse-support-04-variable)
   - [✅overlay-01 [variable]](#overlay-01-variable)
+  - [✅danger [variable]](#danger-variable)
   - [✅focus [variable]](#focus-variable)
   - [✅inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [✅hover-primary [variable]](#hover-primary-variable)
@@ -3693,6 +3694,7 @@ Define theme variables from a map of tokens
   $inverse-support-03: map-get($theme, 'inverse-support-03') !global;
   $inverse-support-04: map-get($theme, 'inverse-support-04') !global;
   $overlay-01: map-get($theme, 'overlay-01') !global;
+  $danger: map-get($theme, 'danger') !global;
   $focus: map-get($theme, 'focus') !global;
   $inverse-focus-ui: map-get($theme, 'inverse-focus-ui') !global;
   $hover-primary: map-get($theme, 'hover-primary') !global;
@@ -3758,6 +3760,7 @@ Define theme variables from a map of tokens
     --inverse-support-03: #{map-get($theme, 'inverse-support-03')};
     --inverse-support-04: #{map-get($theme, 'inverse-support-04')};
     --overlay-01: #{map-get($theme, 'overlay-01')};
+    --danger: #{map-get($theme, 'danger')};
     --focus: #{map-get($theme, 'focus')};
     --inverse-focus-ui: #{map-get($theme, 'inverse-focus-ui')};
     --hover-primary: #{map-get($theme, 'hover-primary')};
@@ -3912,7 +3915,6 @@ $carbon--theme--white: (
   interactive-02: #393939,
   interactive-03: #0f62fe,
   interactive-04: #0f62fe,
-  danger: #da1e28,
   ui-background: #ffffff,
   ui-01: #f4f4f4,
   ui-02: #ffffff,
@@ -3942,6 +3944,7 @@ $carbon--theme--white: (
   inverse-support-03: #f1c21b,
   inverse-support-04: #4589ff,
   overlay-01: rgba(22, 22, 22, 0.5),
+  danger: #da1e28,
   focus: #0f62fe,
   inverse-focus-ui: #ffffff,
   hover-primary: #0353e9,
@@ -3994,7 +3997,6 @@ $carbon--theme--g10: (
   interactive-02: #393939,
   interactive-03: #0f62fe,
   interactive-04: #0f62fe,
-  danger: #da1e28,
   ui-background: #f4f4f4,
   ui-01: #ffffff,
   ui-02: #f4f4f4,
@@ -4024,6 +4026,7 @@ $carbon--theme--g10: (
   inverse-support-03: #f1c21b,
   inverse-support-04: #4589ff,
   overlay-01: rgba(22, 22, 22, 0.5),
+  danger: #da1e28,
   focus: #0f62fe,
   inverse-focus-ui: #ffffff,
   hover-primary: #0353e9,
@@ -4074,7 +4077,6 @@ $carbon--theme--g90: (
   interactive-02: #6f6f6f,
   interactive-03: #ffffff,
   interactive-04: #4589ff,
-  danger: #da1e28,
   ui-background: #262626,
   ui-01: #393939,
   ui-02: #525252,
@@ -4104,6 +4106,7 @@ $carbon--theme--g90: (
   inverse-support-03: #f1c21b,
   inverse-support-04: #0f62fe,
   overlay-01: rgba(22, 22, 22, 0.7),
+  danger: #da1e28,
   focus: #ffffff,
   inverse-focus-ui: #0f62fe,
   hover-primary: #0353e9,
@@ -4154,7 +4157,6 @@ $carbon--theme--g100: (
   interactive-02: #6f6f6f,
   interactive-03: #ffffff,
   interactive-04: #4589ff,
-  danger: #da1e28,
   ui-background: #161616,
   ui-01: #262626,
   ui-02: #393939,
@@ -4184,6 +4186,7 @@ $carbon--theme--g100: (
   inverse-support-03: #f1c21b,
   inverse-support-04: #0f62fe,
   overlay-01: rgba(22, 22, 22, 0.7),
+  danger: #da1e28,
   focus: #ffffff,
   inverse-focus-ui: #0f62fe,
   hover-primary: #0353e9,
@@ -4234,7 +4237,6 @@ $carbon--theme--v9: (
   interactive-02: #5a6872,
   interactive-03: #5a6872,
   interactive-04: #3d70b2,
-  danger: #e0182d,
   ui-background: #f4f7fb,
   ui-01: #ffffff,
   ui-02: #f4f7fb,
@@ -4264,6 +4266,7 @@ $carbon--theme--v9: (
   inverse-support-03: #fdd600,
   inverse-support-04: #5aaafa,
   overlay-01: rgba(223, 227, 230, 0.5),
+  danger: #da1e28,
   focus: #3d70b2,
   inverse-focus-ui: #3d70b2,
   hover-primary: #30588c,
@@ -5174,6 +5177,20 @@ $overlay-01: map-get($carbon--theme, 'overlay-01');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [modal [mixin]](#modal-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
+
+### ✅danger [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$danger: map-get($carbon--theme, 'danger');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
 
 ### ✅focus [variable]
 
