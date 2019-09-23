@@ -414,6 +414,17 @@ describe('@carbon/scss', () => {
   $test: 1;
 };`,
       ],
+      [
+        'function in assignment',
+        t.Assignment(
+          t.Identifier('value'),
+          t.SassFunctionCall(t.Identifier('map-get'), [
+            t.Identifier('map'),
+            t.SassString('key'),
+          ])
+        ),
+        `$value: map-get($map, 'key');`,
+      ],
     ];
 
     test.each(calls)('%s', (_, ast, expected) => {

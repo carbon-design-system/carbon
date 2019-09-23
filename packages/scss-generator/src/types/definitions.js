@@ -298,6 +298,47 @@ const SassValue = defineType('SassValue', {
 //-------------------------------------------------------------------------------
 // Calls
 //-------------------------------------------------------------------------------
+const SassFunctionCall = defineType('SassFunctionCall', {
+  fields: {
+    id: {
+      validate: assertType(Identifier),
+    },
+    params: {
+      optional: true,
+      validate: () =>
+        arrayOf(
+          assertOneOf([
+            assertType(Identifier),
+            assertType(SassBoolean),
+            assertType(SassList),
+            assertType(SassMap),
+            assertType(SassNumber),
+            assertType(SassString),
+          ])
+        ),
+    },
+  },
+  generate(printer, node) {
+    printer.space();
+    printer.print(node.id);
+    printer.token('(');
+    if (Array.isArray(node.params)) {
+      for (let i = 0; i < node.params.length; i++) {
+        const param = node.params[i];
+        if (param.type === Identifier.type) {
+          printer.token('$');
+        }
+        printer.print(param, node);
+        if (i !== node.params.length - 1) {
+          printer.token(',');
+          printer.space();
+        }
+      }
+    }
+    printer.token(')');
+  },
+});
+
 const SassMixinCall = defineType('SassMixinCall', {
   fields: {
     id: {
@@ -478,6 +519,7 @@ const Assignment = defineType('Assignment', {
           assertType(SassMap),
           assertType(SassNumber),
           assertType(SassString),
+          assertType(SassFunctionCall),
         ]),
     },
     default: {
@@ -731,6 +773,7 @@ module.exports = {
   SassBoolean,
   SassColor,
   SassFunction,
+  SassFunctionCall,
   SassImport,
   SassNumber,
   SassString,
