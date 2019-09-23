@@ -663,19 +663,21 @@ const CallExpression = defineType('CallExpression', {
 const StyleSheet = defineType('StyleSheet', {
   fields: {
     children: {
-      validate: arrayOf(
-        assertOneOf([
-          assertType(Assignment),
-          assertType(AtRule),
-          assertType(Comment),
-          assertType(IfStatement),
-          assertType(Rule),
-          assertType(SassFunction),
-          assertType(SassImport),
-          assertType(SassMixin),
-          assertType(SassMixinCall),
-        ])
-      ),
+      validate: () =>
+        arrayOf(
+          assertOneOf([
+            assertType(Assignment),
+            assertType(AtRule),
+            assertType(Comment),
+            assertType(IfStatement),
+            assertType(Rule),
+            assertType(SassFunction),
+            assertType(SassImport),
+            assertType(SassMixin),
+            assertType(SassMixinCall),
+            assertType(Newline),
+          ])
+        ),
     },
   },
   generate(printer, node) {
@@ -686,6 +688,15 @@ const StyleSheet = defineType('StyleSheet', {
         printer.newline();
       }
     }
+  },
+});
+
+//-------------------------------------------------------------------------------
+// Formatting
+//-------------------------------------------------------------------------------
+const Newline = defineType('Newline', {
+  generate(printer) {
+    printer.newline();
   },
 });
 
@@ -716,4 +727,7 @@ module.exports = {
   SassMixin,
   SassMixinCall,
   StyleSheet,
+
+  // Formatting
+  Newline,
 };

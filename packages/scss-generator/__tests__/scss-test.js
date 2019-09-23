@@ -515,4 +515,16 @@ describe('@carbon/scss', () => {
       expect(code.trim()).toEqual(expected.trim());
     });
   });
+
+  describe('formatting', () => {
+    test('newline', () => {
+      const { code } = generate(
+        t.StyleSheet([t.Comment('start'), t.Newline(), t.Comment('end')])
+      );
+      expect(code).toBe(`//start
+
+//end
+`);
+    });
+  });
 });
