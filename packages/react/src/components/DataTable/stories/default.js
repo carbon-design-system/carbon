@@ -23,8 +23,18 @@ export default props => (
     rows={initialRows}
     headers={headers}
     {...props}
-    render={({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
-      <TableContainer title="DataTable" description="With default options">
+    render={({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      getTableContainerProps,
+    }) => (
+      <TableContainer
+        title="DataTable"
+        description="With default options"
+        {...getTableContainerProps()}>
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>

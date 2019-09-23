@@ -50,25 +50,26 @@ export default props => (
       onInputChange,
       selectedRows,
       getTableProps,
+      getTableContainerProps,
     }) => (
-      <TableContainer title="DataTable" description="With batch actions">
+      <TableContainer
+        title="DataTable"
+        description="With batch actions"
+        {...getTableContainerProps()}>
         <TableToolbar>
           <TableBatchActions {...getBatchActionProps()}>
             <TableBatchAction
               renderIcon={Delete}
-              iconDescription="Delete the selected rows"
               onClick={batchActionClick(selectedRows)}>
               Delete
             </TableBatchAction>
             <TableBatchAction
               renderIcon={Save}
-              iconDescription="Save the selected rows"
               onClick={batchActionClick(selectedRows)}>
               Save
             </TableBatchAction>
             <TableBatchAction
               renderIcon={Download}
-              iconDescription="Download the selected rows"
               onClick={batchActionClick(selectedRows)}>
               Download
             </TableBatchAction>

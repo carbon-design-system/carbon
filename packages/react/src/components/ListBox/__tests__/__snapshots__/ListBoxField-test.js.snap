@@ -18,6 +18,7 @@ exports[`ListBoxField should render 1`] = `
       translateWithId={[Function]}
     >
       <div
+        aria-label="Clear Selection"
         className="bx--list-box__selection"
         onClick={[Function]}
         onKeyDown={[Function]}
@@ -25,13 +26,10 @@ exports[`ListBoxField should render 1`] = `
         tabIndex="0"
         title="Clear selected item"
       >
-        <ForwardRef(Close16)
-          role="img"
-        >
+        <ForwardRef(Close16)>
           <Icon
             height={16}
             preserveAspectRatio="xMidYMid meet"
-            role="img"
             viewBox="0 0 16 16"
             width={16}
             xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +39,6 @@ exports[`ListBoxField should render 1`] = `
               focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"
-              role="img"
               style={
                 Object {
                   "willChange": "transform",
@@ -83,6 +80,7 @@ exports[`ListBoxField should set \`aria-owns\` based when expanded 1`] = `
       translateWithId={[Function]}
     >
       <div
+        aria-label="Clear Selection"
         className="bx--list-box__selection"
         onClick={[Function]}
         onKeyDown={[Function]}
@@ -90,13 +88,10 @@ exports[`ListBoxField should set \`aria-owns\` based when expanded 1`] = `
         tabIndex="0"
         title="Clear selected item"
       >
-        <ForwardRef(Close16)
-          role="img"
-        >
+        <ForwardRef(Close16)>
           <Icon
             height={16}
             preserveAspectRatio="xMidYMid meet"
-            role="img"
             viewBox="0 0 16 16"
             width={16}
             xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +101,6 @@ exports[`ListBoxField should set \`aria-owns\` based when expanded 1`] = `
               focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"
-              role="img"
               style={
                 Object {
                   "willChange": "transform",

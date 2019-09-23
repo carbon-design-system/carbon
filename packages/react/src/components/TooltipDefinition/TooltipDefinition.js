@@ -16,6 +16,7 @@ const getInstanceId = setupGetInstanceId();
 const TooltipDefinition = ({
   id,
   className,
+  triggerClassName,
   children,
   direction,
   align,
@@ -32,6 +33,7 @@ const TooltipDefinition = ({
     `${prefix}--tooltip__trigger`,
     `${prefix}--tooltip--a11y`,
     `${prefix}--tooltip__trigger--definition`,
+    triggerClassName,
     {
       [`${prefix}--tooltip--${direction}`]: direction,
       [`${prefix}--tooltip--align-${align}`]: align,
@@ -58,6 +60,11 @@ TooltipDefinition.propTypes = {
    * interact with in order to display the tooltip.
    */
   children: PropTypes.string.isRequired,
+
+  /**
+   * The CSS class name of the trigger element
+   */
+  triggerClassName: PropTypes.string,
 
   /**
    * Specify the direction of the tooltip. Can be either top or bottom.
