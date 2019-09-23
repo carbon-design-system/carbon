@@ -371,8 +371,13 @@ const SassMixinCall = defineType('SassMixinCall', {
     printer.token('(');
     if (Array.isArray(node.params)) {
       for (let i = 0; i < node.params.length; i++) {
-        printer.token('$');
-        printer.print(node.params[i], node);
+        const param = node.params[i];
+
+        if (param.type === Identifier.type) {
+          printer.token('$');
+        }
+
+        printer.print(param, node);
         if (i !== node.params.length - 1) {
           printer.token(',');
           printer.space();
