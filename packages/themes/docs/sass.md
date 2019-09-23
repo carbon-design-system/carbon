@@ -759,11 +759,12 @@ $carbon--theme--rocket: (
   text-02: #595959,
   text-03: #bcbcbc,
   text-04: #ffffff,
+  text-05: #6f6f6f,
   icon-01: #333333,
   icon-02: #595959,
   icon-03: #ffffff,
   link-01: #025c53,
-  inverse-link: #0062ff,
+  inverse-link: #0f62fe,
   field-01: #efefef,
   field-02: #ffffff,
   inverse-01: #ffffff,
@@ -777,8 +778,9 @@ $carbon--theme--rocket: (
   inverse-support-03: #fdd13a,
   inverse-support-04: #93c7c2,
   overlay-01: rgba(23, 23, 23, 0.5),
+  danger: #da1e28,
   focus: #025c53,
-  inverse-focus-ui: #0062ff,
+  inverse-focus-ui: #0f62fe,
   hover-primary: #01453e,
   active-primary: #012e29,
   hover-primary-text: #012e29,
@@ -922,7 +924,7 @@ $danger: map-get($carbon--theme, 'danger');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -1118,7 +1120,7 @@ $text-05: map-get($carbon--theme, 'text-05');
 
 </details>
 
-- **Group**: [@carbon/themes](#carbonthemes)
+- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)

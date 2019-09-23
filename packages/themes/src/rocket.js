@@ -1,5 +1,7 @@
 import {
   blue60,
+  red60,
+  gray60,
   // Tools
   rgba,
 } from '@rocketsoftware/colors';
@@ -21,6 +23,7 @@ export const text01 = '#333333';
 export const text02 = '#595959';
 export const text03 = '#bcbcbc';
 export const text04 = '#ffffff';
+export const text05 = gray60;
 
 export const icon01 = '#333333';
 export const icon02 = '#595959';
@@ -47,6 +50,8 @@ export const inverseSupport03 = '#fdd13a';
 export const inverseSupport04 = '#93c7c2';
 
 export const overlay01 = rgba('#171717', 0.5);
+
+export const danger = red60;
 
 // Interaction states
 export const focus = '#025c53';

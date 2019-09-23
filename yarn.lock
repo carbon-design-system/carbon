@@ -2700,20 +2700,10 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
-"@rocketsoftware/colors@0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/colors/-/colors-0.0.5.tgz#2c2f49477c62ea0e0a0c78a26b14a2a3363c5eac"
-  integrity sha512-LbJx2zk4wElNjN2JhysvVprDY2iMobfAnXliAwAdFifauqM3KKeniEr8FbMGaSaJ3snMWkAIj6a5FIdbQp8R9A==
-
-"@rocketsoftware/icons@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/icons/-/icons-0.0.4.tgz#b14c81544f94b3f774e9d075c26bb4b96237cc59"
-  integrity sha512-6bFhvQyfpTFRV2O2atyOMO/FxZj/n8HFkOSWjVl2Z15zjT1D1BlErkTcQwXVqHOSbSy1RTPlczK8V3dmi47nAA==
-
-"@rocketsoftware/motion@0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/motion/-/motion-0.0.5.tgz#fe527ec841b5c89682ce6b7cab47589a8229c897"
-  integrity sha512-+gN13xhJujTOQd/Fc5YfY/67MORQ4O++xoCH66225y/vGnzAPGRb7r0MXDSIFLL2IIulPWRvmGGaJGsmn0/wKQ==
+"@rocketsoftware/icon-helpers@0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/icon-helpers/-/icon-helpers-0.0.6.tgz#35d124ca6b68048eeac494f20529f292f1fd5374"
+  integrity sha512-QwbjmIBICC9ENbOUq/mzZULy4kxe0a3XFnfcFyvkDmRvMTenw+LcPeAtmtdTjqSIuRhRMvCES+UOJnXY2Z27MA==
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
