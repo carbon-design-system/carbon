@@ -1,3 +1,24 @@
+# [0.0.0](https://github.com/RocketSoftware/carbon/compare/v0.0.6...v0.0.0) (2019-09-23)
+
+
+### Bug Fixes
+
+* **button:** vertically align to top by default ([#3983](https://github.com/RocketSoftware/carbon/issues/3983)) ([06b15f3](https://github.com/RocketSoftware/carbon/commit/06b15f3))
+* **ComboBox:** resolves DAP violations ([#4028](https://github.com/RocketSoftware/carbon/issues/4028)) ([b0af775](https://github.com/RocketSoftware/carbon/commit/b0af775))
+* **date-picker:** update month UI upon manual input ([#3979](https://github.com/RocketSoftware/carbon/issues/3979)) ([cccb54c](https://github.com/RocketSoftware/carbon/commit/cccb54c)), closes [#3212](https://github.com/RocketSoftware/carbon/issues/3212)
+* **FileUploader:** fixed settings import statements ([#8](https://github.com/RocketSoftware/carbon/issues/8)) ([aab024f](https://github.com/RocketSoftware/carbon/commit/aab024f))
+* **form:** remove italic from helper text ([#3977](https://github.com/RocketSoftware/carbon/issues/3977)) ([dfbeb8d](https://github.com/RocketSoftware/carbon/commit/dfbeb8d)), closes [#3961](https://github.com/RocketSoftware/carbon/issues/3961)
+* **inline-notification:** improved list behavior ([#9](https://github.com/RocketSoftware/carbon/issues/9)) ([03a28e3](https://github.com/RocketSoftware/carbon/commit/03a28e3))
+
+
+### Features
+
+* **card:** adding in initial version of card component ([3900e64](https://github.com/RocketSoftware/carbon/commit/3900e64))
+* **themes:** added Rocket mixin ([#7](https://github.com/RocketSoftware/carbon/issues/7)) ([8087cc1](https://github.com/RocketSoftware/carbon/commit/8087cc1))
+* Resource header component ([#6](https://github.com/RocketSoftware/carbon/issues/6)) ([865260f](https://github.com/RocketSoftware/carbon/commit/865260f))
+
+
+
 # [0.0.0](https://github.com/RocketSoftware/carbon/compare/v10.6.0...v0.0.0) (2019-09-10)
 
 
