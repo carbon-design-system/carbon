@@ -4433,6 +4433,7 @@ $danger: map-get($carbon--theme, 'danger');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
 
 ### ✅ui-background [variable]
 
@@ -4998,7 +4999,6 @@ $support-01: map-get($carbon--theme, 'support-01');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button [mixin]](#button-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
@@ -9167,10 +9167,8 @@ Button styles
 
   .#{$prefix}--btn--danger {
     @include button-theme(
-      // $support-01, TODO: replace with updated token
-        #dc222b,
-      // $support-01, TODO: replace with updated token
-        #dc222b,
+      $danger,
+      $danger,
       $text-04,
       $hover-danger,
       $icon-03,
@@ -9228,7 +9226,7 @@ Button styles
   - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [focus [variable]](#focus-variable)
   - [ui-02 [variable]](#ui-02-variable)
-  - [support-01 [variable]](#support-01-variable)
+  - [danger [variable]](#danger-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [icon-03 [variable]](#icon-03-variable)
   - [active-danger [variable]](#active-danger-variable)
