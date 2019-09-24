@@ -10,14 +10,14 @@
 'use strict';
 
 const { convert, createSassRenderer } = require('@carbon/test-utils/scss');
-const { themes } = require('../../src');
+const { themes } = require('../src');
 
 const render = createSassRenderer(__dirname);
 
 describe('_mixins.scss', () => {
   it('should export a carbon--theme mixin', async () => {
     const { calls } = await render(`
-      @import '../mixins';
+      @import '../scss/mixins';
 
       $t: test(mixin-exists(carbon--theme));
     `);
@@ -41,7 +41,7 @@ describe('_mixins.scss', () => {
       .map(([_variable, _expectedColor, test]) => test)
       .join('\n');
     const { calls } = await render(`
-      @import '../themes';
+      @import '../scss/themes';
       ${tests}
     `);
 
@@ -52,7 +52,7 @@ describe('_mixins.scss', () => {
 
   it('should reset token variables after using the theme', async () => {
     const { calls } = await render(`
-      @import '../themes';
+      @import '../scss/themes';
 
       $custom-theme: map-merge($carbon--theme--white, (
         interactive-01: #ffffff,
@@ -75,7 +75,7 @@ describe('_mixins.scss', () => {
   describe('@mixin custom-property', () => {
     it('should create a custom property for a given token name and value', async () => {
       const { result } = await render(`
-        @import '../mixins';
+        @import '../scss/mixins';
         .selector {
           @include custom-property('token-01', #000000);
         }
@@ -88,7 +88,7 @@ describe('_mixins.scss', () => {
 
     it('should export multiple tokens for maps', async () => {
       const { result } = await render(`
-        @import '../mixins';
+        @import '../scss/mixins';
         .selector {
           @include custom-property('token-01', (
             property-01: #000000,
@@ -110,7 +110,7 @@ describe('_mixins.scss', () => {
   describe('@function should-emit', () => {
     it('should emit a value only if they are different', async () => {
       const { calls } = await render(`
-        @import '../mixins';
+        @import '../scss/mixins';
 
         $theme-a: (
           property-01: #000000,

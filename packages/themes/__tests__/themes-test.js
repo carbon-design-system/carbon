@@ -12,7 +12,7 @@
 require('core-js/features/array/flat-map');
 
 const { convert, createSassRenderer } = require('@carbon/test-utils/scss');
-const { formatTokenName, themes, tokens } = require('../../src');
+const { formatTokenName, themes, tokens } = require('../src');
 
 const render = createSassRenderer(__dirname);
 const { white: defaultTheme } = themes;
@@ -28,7 +28,7 @@ describe('themes.scss', () => {
       async token => {
         const name = formatTokenName(token);
         const { calls } = await render(`
-          @import '../themes';
+          @import '../scss/themes';
           $t: test(global-variable-exists(${name}));
           $t: test($${name});
         `);
@@ -41,7 +41,7 @@ describe('themes.scss', () => {
   describe('carbon--theme', () => {
     it('should export tokens that match the default theme', async () => {
       const { calls } = await render(`
-        @import '../themes';
+        @import '../scss/themes';
         $t: test($carbon--theme);
       `);
       const theme = convert(calls[0][0]);
@@ -56,7 +56,7 @@ describe('themes.scss', () => {
       const { calls } = await render(`
         $interactive-01: ${color};
 
-        @import '../themes';
+        @import '../scss/themes';
         $t: test($carbon--theme);
       `);
       const theme = convert(calls[0][0]);
