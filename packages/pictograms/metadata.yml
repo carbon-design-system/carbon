@@ -1836,14 +1836,14 @@ icons:
       - mexico city
       - mexico
     variants:
-      - name: angel--of--independence
+      - name: mexico--city--angel--of--independence
         friendly_name: Angel of Independence
         usage: This is a description for usage
         categories:
           - name: Cities
         aliases:
           - statue
-      - name: museo--soumaya
+      - name: mexico--city--museo--soumaya
         friendly_name: Museo Soumaya
         usage: This is a description for usage
         categories:
@@ -1865,14 +1865,14 @@ icons:
     aliases:
       - milan
     variants:
-      - name: duomo--di--milano
+      - name: milan--duomo--di--milano
         friendly_name: Duomo di Milano
         usage: This is a description for usage
         categories:
           - name: Cities
         aliases:
           - church
-      - name: skyscrapers
+      - name: milan--skyscrapers
         friendly_name: Skyscrapers
         usage: This is a description for usage
         categories:
