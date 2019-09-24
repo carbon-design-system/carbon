@@ -141,6 +141,13 @@ function convert(value) {
   }
 
   if (value instanceof types.Color) {
+    if (value.getA() !== 1) {
+      const r = value.getR();
+      const g = value.getG();
+      const b = value.getB();
+      const a = value.getA();
+      return `rgba(${r}, ${g}, ${b}, ${a})`;
+    }
     const hexcode = [value.getR(), value.getG(), value.getB()]
       .map(toHexString)
       .join('');
