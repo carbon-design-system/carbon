@@ -10,19 +10,19 @@
 'use strict';
 
 const { createSassRenderer } = require('@carbon/test-utils/scss');
-const { formatTokenName, tokens } = require('../../src');
+const { themes } = require('../src');
 
 const render = createSassRenderer(__dirname);
 
-describe('_tokens.scss', () => {
-  it('should export all tokens', async () => {
-    const tokenVariableTests = tokens.colors.map(token => {
-      return `$t: test(global-variable-exists(${formatTokenName(token)}));`;
+describe('_theme-maps.scss', () => {
+  it('should export all themes as sass maps', async () => {
+    const themeMapsTests = Object.keys(themes).map(theme => {
+      return `$t: test(global-variable-exists(carbon--theme--${theme}));`;
     });
     const { calls } = await render(`
-      @import '../tokens';
+      @import '../scss/theme-maps';
 
-      ${tokenVariableTests.join('\n')}
+      ${themeMapsTests.join('\n')}
     `);
 
     for (const call of calls) {
