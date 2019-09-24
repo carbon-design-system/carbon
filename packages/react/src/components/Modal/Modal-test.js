@@ -119,6 +119,10 @@ describe('Modal', () => {
       expect(
         document.body.classList.contains('bx--body--with-modal-open')
       ).toEqual(true);
+      wrapper.unmount();
+      expect(
+        document.body.classList.contains('bx--body--with-modal-open')
+      ).toEqual(false);
     });
 
     it('should set state to open when trigger button is clicked', () => {
