@@ -85,7 +85,10 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 }
 
 :root {
-  @include carbon--theme--custom-properties($carbon--theme--white);
+  @include carbon--theme(
+    $theme: $carbon--theme--white,
+    $emit-custom-properties: true
+  );
 }
 
 .demo--container,
@@ -96,7 +99,10 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 :root.demo--theme--white .bx--tooltip,
 .bx--overflow-menu-options,
 :root.demo--theme--white .bx--overflow-menu-options {
-  @include carbon--theme--custom-properties($carbon--theme--white);
+  @include carbon--theme(
+    $theme: $carbon--theme--white,
+    $emit-custom-properties: true
+  );
 }
 
 :root.demo--theme--g10 .demo--container,
@@ -104,7 +110,10 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 :root.demo--theme--g10 .bx--date-picker__calendar.open,
 :root.demo--theme--g10 .bx--tooltip,
 :root.demo--theme--g10 .bx--overflow-menu-options {
-  @include carbon--theme--custom-properties($carbon--theme--g10);
+  @include carbon--theme(
+    $theme: $carbon--theme--g10,
+    $emit-custom-properties: true
+  );
 }
 
 :root.demo--theme--g90 .demo--container,
@@ -112,7 +121,10 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 :root.demo--theme--g90 .bx--date-picker__calendar.open,
 :root.demo--theme--g90 .bx--tooltip,
 :root.demo--theme--g90 .bx--overflow-menu-options {
-  @include carbon--theme--custom-properties($carbon--theme--g90);
+  @include carbon--theme(
+    $theme: $carbon--theme--g90,
+    $emit-custom-properties: true
+  );
 }
 
 :root.demo--theme--g100 .demo--container,
@@ -120,7 +132,10 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 :root.demo--theme--g100 .bx--date-picker__calendar.open,
 :root.demo--theme--g100 .bx--tooltip,
 :root.demo--theme--g100 .bx--overflow-menu-options {
-  @include carbon--theme--custom-properties($carbon--theme--g100);
+  @include carbon--theme(
+    $theme: $carbon--theme--g100,
+    $emit-custom-properties: true
+  );
 }
 
 .demo--container.demo--container--list-box > .demo--container__panel,

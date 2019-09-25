@@ -233,6 +233,10 @@ function buildMixinsFile() {
         left: t.Identifier('emit-custom-properties'),
         right: t.SassBoolean(false),
       }),
+      t.AssignmentPattern({
+        left: t.Identifier('emit-difference'),
+        right: t.SassBoolean(false),
+      }),
     ],
     body: t.BlockStatement({
       body: [
@@ -260,10 +264,26 @@ function buildMixinsFile() {
             Object.keys(tokens).flatMap(group => {
               return tokens[group].flatMap(token => {
                 const name = formatTokenName(token);
-                return t.Declaration({
-                  property: `--${name}`,
-                  value: `#{map-get($theme, '${name}')}`,
-                });
+                return [
+                  t.Newline(),
+                  t.IfStatement({
+                    test: t.SassFunctionCall(t.Identifier('should-emit'), [
+                      t.Identifier('theme'),
+                      t.Identifier('carbon--theme'),
+                      t.SassString(name),
+                      t.Identifier('emit-difference'),
+                    ]),
+                    consequent: t.BlockStatement([
+                      t.SassMixinCall(t.Identifier('custom-property'), [
+                        t.SassString(name),
+                        t.SassFunctionCall(t.Identifier('map-get'), [
+                          t.Identifier('theme'),
+                          t.SassString(name),
+                        ]),
+                      ]),
+                    ]),
+                  }),
+                ];
               });
             })
           ),

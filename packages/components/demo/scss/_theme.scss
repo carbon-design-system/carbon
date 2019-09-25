@@ -10,20 +10,11 @@
     $theme-map--with-custom-properties: map-merge(
       $theme-map--with-custom-properties,
       (
-        $key: var(--#{$key}, $value),
+        $key: var(--cds-#{$key}, $value),
       )
     );
   }
   @return $theme-map--with-custom-properties;
-}
-
-/// Emits CSS custom properties from a Carbon theme map.
-/// @param {Map} $theme-map [$carbon--theme] The theme map to emit CSS custom properties from.
-/// @example @include carbon--theme--custom-properties($carbon--theme--white);
-@mixin carbon--theme--custom-properties($theme-map: $carbon--theme) {
-  @each $key, $value in $theme-map {
-    --#{$key}: #{$value};
-  }
 }
 
 /// The key/value map of Carbon themes, named by theme name.
