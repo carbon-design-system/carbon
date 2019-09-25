@@ -1827,7 +1827,7 @@ icons:
       - name: Time
     aliases:
       - meter
-  - name: mexico
+  - name: mexico-city
     friendly_name: Mexico City
     usage: This is a description for usage
     categories:
@@ -1836,14 +1836,14 @@ icons:
       - mexico city
       - mexico
     variants:
-      - name: mexico--city--angel--of--independence
+      - name: mexico-city--angel--of--independence
         friendly_name: Angel of Independence
         usage: This is a description for usage
         categories:
           - name: Cities
         aliases:
           - statue
-      - name: mexico--city--museo--soumaya
+      - name: mexico-city--museo--soumaya
         friendly_name: Museo Soumaya
         usage: This is a description for usage
         categories:
