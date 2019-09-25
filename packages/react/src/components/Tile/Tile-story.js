@@ -59,11 +59,11 @@ const props = {
     tileMaxHeight: number('Max height (tileMaxHeight)', 0),
     tileCollapsedIconText: text(
       'Collapsed icon text (tileCollapsedIconText)',
-      'Expand'
+      'Interact to Expand tile'
     ),
     tileExpandedIconText: text(
       'Collapsed icon text (tileExpandedIconText)',
-      'Collapse'
+      'Interact to Collapse tile'
     ),
     handleClick: action('handleClick'),
   }),
