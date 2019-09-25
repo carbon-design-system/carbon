@@ -214,8 +214,8 @@ describe('Tile', () => {
     });
 
     it('displays the default tooltip for the button depending on state', () => {
-      const defaultExpandedIconText = 'Collapse';
-      const defaultCollapsedIconText = 'Expand';
+      const defaultExpandedIconText = 'Interact to collapse Tile';
+      const defaultCollapsedIconText = 'Interact to expand Tile';
 
       // Force the expanded tile to be collapsed.
       wrapper.setState({ expanded: false });
