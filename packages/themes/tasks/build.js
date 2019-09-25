@@ -102,7 +102,24 @@ function buildTokensFile(tokens, metadata, defaultTheme) {
         tokenData.deprecated && t.Comment(`/ @deprecated`),
         t.Assignment({
           id: t.Identifier(name),
-          init: primitive(defaultTheme[token]),
+          init: t.SassFunctionCall(t.Identifier('if'), [
+            t.LogicalExpression({
+              left: t.SassFunctionCall(t.Identifier('global-variable-exists'), [
+                t.SassString('carbon--theme'),
+              ]),
+              operator: 'and',
+              right: t.SassFunctionCall(t.Identifier('map-has-key'), [
+                t.Identifier('carbon--theme'),
+                t.SassString(name),
+              ]),
+            }),
+            t.SassFunctionCall(t.Identifier('map-get'), [
+              t.Identifier('carbon--theme'),
+              t.SassString(name),
+            ]),
+            primitive(defaultTheme[token]),
+          ]),
+          // init: ,
           default: true,
         }),
       ].filter(Boolean);
@@ -160,6 +177,7 @@ function buildThemesFile(themes, tokens) {
         });
       }),
     }),
+    default: true,
   });
 
   return t.StyleSheet([
