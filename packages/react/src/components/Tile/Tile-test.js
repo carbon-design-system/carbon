@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { ChevronDown16 } from '@carbon/icons-react';
 import {
   Tile,
   ClickableTile,
@@ -230,13 +229,13 @@ describe('Tile', () => {
       expect(wrapper.state().expanded).toEqual(false);
     });
 
-    it('displays the default tooltip for the chevron depending on state', () => {
-      const defaultExpandedIconText = 'Collapse';
-      const defaultCollapsedIconText = 'Expand';
+    it('displays the default tooltip for the button depending on state', () => {
+      const defaultExpandedIconText = 'Interact to collapse Tile';
+      const defaultCollapsedIconText = 'Interact to expand Tile';
 
       // Force the expanded tile to be collapsed.
       wrapper.setState({ expanded: false });
-      const collapsedDescription = wrapper.find(ChevronDown16).getElements()[0]
+      const collapsedDescription = wrapper.find('button').getElements()[0]
         .props['aria-label'];
       expect(collapsedDescription).toEqual(defaultCollapsedIconText);
 
@@ -244,12 +243,13 @@ describe('Tile', () => {
       wrapper.simulate('click');
 
       // Validate the description change
-      const expandedDescription = wrapper.find(ChevronDown16).getElements()[0]
-        .props['aria-label'];
+      const expandedDescription = wrapper.find('button').getElements()[0].props[
+        'aria-label'
+      ];
       expect(expandedDescription).toEqual(defaultExpandedIconText);
     });
 
-    it('displays the custom tooltips for the chevron depending on state', () => {
+    it('displays the custom tooltips for the button depending on state', () => {
       const tileExpandedIconText = 'Click To Collapse';
       const tileCollapsedIconText = 'Click To Expand';
 
@@ -258,7 +258,7 @@ describe('Tile', () => {
 
       // Force the expanded tile to be collapsed.
       wrapper.setState({ expanded: false });
-      const collapsedDescription = wrapper.find(ChevronDown16).getElements()[0]
+      const collapsedDescription = wrapper.find('button').getElements()[0]
         .props['aria-label'];
       expect(collapsedDescription).toEqual(tileCollapsedIconText);
 
@@ -266,8 +266,9 @@ describe('Tile', () => {
       wrapper.simulate('click');
 
       // Validate the description change
-      const expandedDescription = wrapper.find(ChevronDown16).getElements()[0]
-        .props['aria-label'];
+      const expandedDescription = wrapper.find('button').getElements()[0].props[
+        'aria-label'
+      ];
       expect(expandedDescription).toEqual(tileExpandedIconText);
     });
 
