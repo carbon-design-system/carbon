@@ -1028,7 +1028,7 @@ icons:
     friendly_name: Europe Africa
     usage: This is a description for usage
     categories:
-    - Name: Location
+      - name: Location
     aliases:
       - europe
       - africa
