@@ -44,7 +44,7 @@ const plugins = [
           }
         }
 
-        const sizes = ['16', '20', '24', '32'];
+        const sizes = ['16', '20', '24', '32', '48'];
 
         for (const size of sizes) {
           if (
@@ -170,9 +170,6 @@ const plugins = [
   },
   {
     cleanupNumericValues: true,
-  },
-  {
-    moveElemsAttrsToGroup: true,
   },
   {
     moveGroupAttrsToElems: true,
