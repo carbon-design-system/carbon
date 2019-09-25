@@ -13,7 +13,6 @@ const colors = [
   'interactive02',
   'interactive03',
   'interactive04',
-  'danger',
 
   'uiBackground',
 
@@ -156,7 +155,6 @@ export const unstable__meta = {
         'interactive02',
         'interactive03',
         'interactive04',
-        'danger',
         'brand01',
         'brand02',
         'brand03',
