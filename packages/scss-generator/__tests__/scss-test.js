@@ -414,6 +414,17 @@ describe('@carbon/scss', () => {
   $test: 1;
 };`,
       ],
+      [
+        'function in assignment',
+        t.Assignment(
+          t.Identifier('value'),
+          t.SassFunctionCall(t.Identifier('map-get'), [
+            t.Identifier('map'),
+            t.SassString('key'),
+          ])
+        ),
+        `$value: map-get($map, 'key');`,
+      ],
     ];
 
     test.each(calls)('%s', (_, ast, expected) => {
@@ -513,6 +524,18 @@ describe('@carbon/scss', () => {
     test.each(expressions)('%s', (_, ast, expected) => {
       const { code } = generate(ast);
       expect(code.trim()).toEqual(expected.trim());
+    });
+  });
+
+  describe('formatting', () => {
+    test('newline', () => {
+      const { code } = generate(
+        t.StyleSheet([t.Comment('start'), t.Newline(), t.Comment('end')])
+      );
+      expect(code).toBe(`//start
+
+//end
+`);
     });
   });
 });
