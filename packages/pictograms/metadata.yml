@@ -61,9 +61,13 @@ icons:
       - name: alchemy--data--news
         friendly_name: Alchemy data news
         usage: This is a description for usage
+        categories:
+          - name: Watson
       - name: alchemy--language--alphabet--a--expanded
         friendly_name: Alchemy language alphabet a expanded
         usage: This is a description for usage
+        categories:
+          - name: Watson
       - name: alchemy--language
         friendly_name: Alchemy language
         usage: This is a description for usage
@@ -179,6 +183,8 @@ icons:
       - name: asia--australia
         friendly_name: Asia australia
         usage: This is a description for usage
+        categories:
+          - name: Location
   - name: augmented
     friendly_name: Augmented
     usage: This is a description for usage
@@ -208,6 +214,8 @@ icons:
       - name: automate--modular--management
         friendly_name: Automate modular management
         usage: This is a description for usage
+        categories:
+          - name: Cloud
   - name: automobile
     friendly_name: Automobile
     usage: This is a description for usage
@@ -263,6 +271,8 @@ icons:
       - name: berlin--brandenburg
         friendly_name: Berlin brandenberg
         usage: This is a description for usage
+        categories:
+          - name: Cities
       - name: berlin--cathedral
         friendly_name: Berlin cathedral
         usage: This is a description for usage
@@ -283,7 +293,8 @@ icons:
   - name: blockchain
     friendly_name: Blockchain
     usage: This is a description for usage
-    categories: []
+    categories:
+      - name: Data Analytics
     aliases:
       - block
   - name: build
@@ -629,6 +640,8 @@ icons:
       - name: console--wireless
         friendly_name: Console wireless
         usage: This is a description for usage
+        categories:
+        - name: Electronics
   - name: construct
     friendly_name: Construct
     usage: This is a description for usage
@@ -652,6 +665,8 @@ icons:
     variants:
       - name: copenhagen--planetarium
         friendly_name: Copenhagan planetarium
+        categories:
+          - name: Cities
         usage: This is a description for usage
       - name: copenhagen--snekkja
         friendly_name: Copenhagen snekkja
@@ -1012,7 +1027,8 @@ icons:
   - name: europe-africa
     friendly_name: Europe Africa
     usage: This is a description for usage
-    categories: []
+    categories:
+      - name: Location
     aliases:
       - europe
       - africa
@@ -2215,6 +2231,8 @@ icons:
       - name: petri--culture
         friendly_name: Petri cultures
         usage: This is a description for usage
+        categories:
+          - name: Life Sciences
   - name: pill
     friendly_name: Pill
     usage: This is a description for usage
@@ -2514,6 +2532,8 @@ icons:
       - name: san--francisco--fog
         friendly_name: San franciso fog
         usage: This is a description for usage
+        categories:
+          - name: Cities
   - name: sao
     friendly_name: Sao
     usage: This is a description for usage
@@ -2650,6 +2670,8 @@ icons:
       - name: single--sign-on
         friendly_name: Single sign on
         usage: This is a description for usage
+        categories:
+        - name: Cloud
   - name: slider
     friendly_name: Slider
     usage: This is a description for usage
@@ -2775,6 +2797,8 @@ icons:
       - name: steering--wheel
         friendly_name: Steering wheel
         usage: This is a description for usage
+        categories:
+        - name: Transportation
   - name: stethoscope
     friendly_name: Stethoscope
     usage: This is a description for usage
