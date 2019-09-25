@@ -740,4 +740,4 @@ $carbon--theme: (
       $hover-field,
       map-get($carbon--theme--white, 'hover-field')
     ),
-);
+) !default;
