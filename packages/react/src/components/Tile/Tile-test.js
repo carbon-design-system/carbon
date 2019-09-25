@@ -176,6 +176,9 @@ describe('Tile', () => {
         </TileAboveTheFoldContent>
         <TileBelowTheFoldContent className="child">
           <div style={{ height: '500px' }}>Test</div>
+          <a id="test-link" href="/">
+            Test Link
+          </a>
         </TileBelowTheFoldContent>
       </ExpandableTile>
     );
@@ -212,6 +215,19 @@ describe('Tile', () => {
       expect(wrapper.state().expanded).toEqual(false);
       wrapper.simulate('click');
       expect(wrapper.state().expanded).toEqual(true);
+    });
+
+    it('ignores allows click events to be ignored using onBeforeClick', () => {
+      wrapper.setProps({
+        onBeforeClick: evt => evt.target.tagName.toLowerCase() !== 'a', // ignore link clicks
+      });
+      expect(wrapper.state().expanded).toEqual(false);
+      wrapper.simulate('click');
+      expect(wrapper.state().expanded).toEqual(true);
+      wrapper.find('#test-link').simulate('click');
+      expect(wrapper.state().expanded).toEqual(true);
+      wrapper.simulate('click');
+      expect(wrapper.state().expanded).toEqual(false);
     });
 
     it('displays the default tooltip for the chevron depending on state', () => {
