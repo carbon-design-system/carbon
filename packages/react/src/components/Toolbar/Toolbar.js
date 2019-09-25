@@ -19,13 +19,12 @@ let didWarnAboutDeprecation = false;
 const Toolbar = ({ children, className, ...other }) => {
   const wrapperClasses = classNames(`${prefix}--toolbar`, className);
 
-  if (didWarnAboutDeprecation === false) {
-    didWarnAboutDeprecation = true;
-
+  if (__DEV__) {
     warning(
-      'This component has been deprecated and will be removed in the next version of Carbon',
-      true
+      didWarnAboutDeprecation,
+      'The `ComponentName` component has been deprecated and will be removed in the next major release of `carbon-components-react`'
     );
+    didWarnAboutDeprecation = true;
   }
 
   return (

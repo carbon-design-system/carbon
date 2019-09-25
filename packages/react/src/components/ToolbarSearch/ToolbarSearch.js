@@ -64,16 +64,14 @@ export default class ToolbarSearch extends Component {
     labelId: 'search__label',
   };
 
-  constructor(props) {
-    super(props);
-
-    if (didWarnAboutDeprecation === false) {
-      didWarnAboutDeprecation = true;
-
+  constructor() {
+    super();
+    if (__DEV__) {
       warning(
-        'This component has been deprecated and will be removed in the next version of Carbon',
-        true
+        didWarnAboutDeprecation,
+        'The `ComponentName` component has been deprecated and will be removed in the next major release of `carbon-components-react`'
       );
+      didWarnAboutDeprecation = true;
     }
   }
 
