@@ -28,7 +28,6 @@ const radioProps = () => ({
     labelPositions,
     'right'
   ),
-  checked: boolean('Checked (checked)', false),
   disabled: boolean('Disabled (disabled)', false),
   onChange: action('onChange'),
 });
