@@ -1827,6 +1827,29 @@ icons:
       - name: Time
     aliases:
       - meter
+  - name: mexico-city
+    friendly_name: Mexico City
+    usage: This is a description for usage
+    categories:
+      - name: Cities
+    aliases:
+      - mexico city
+      - mexico
+    variants:
+      - name: mexico-city--angel--of--independence
+        friendly_name: Angel of Independence
+        usage: This is a description for usage
+        categories:
+          - name: Cities
+        aliases:
+          - statue
+      - name: mexico-city--museo--soumaya
+        friendly_name: Museo Soumaya
+        usage: This is a description for usage
+        categories:
+          - name: Cities
+        aliases:
+          - museum
   - name: microorganisms
     friendly_name: Microorganisms
     usage: This is a description for usage
@@ -1834,6 +1857,28 @@ icons:
       - name: Life Science
     aliases:
       - microorganisms
+  - name: milan
+    friendly_name: Milan
+    usage: This is a description for usage
+    categories:
+      - name: Cities
+    aliases:
+      - milan
+    variants:
+      - name: milan--duomo--di--milano
+        friendly_name: Duomo di Milano
+        usage: This is a description for usage
+        categories:
+          - name: Cities
+        aliases:
+          - church
+      - name: milan--skyscrapers
+        friendly_name: Skyscrapers
+        usage: This is a description for usage
+        categories:
+          - name: Cities
+        aliases:
+          - skyline
   - name: microscope
     friendly_name: Microscope
     usage: This is a description for usage
