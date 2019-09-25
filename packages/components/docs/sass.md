@@ -4346,7 +4346,6 @@ $interactive-01: map-get($carbon--theme, 'interactive-01');
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
-  - [modal [mixin]](#modal-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [slider [mixin]](#slider-mixin)
@@ -5215,6 +5214,7 @@ $focus: map-get($carbon--theme, 'focus');
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [modal [mixin]](#modal-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -14398,7 +14398,7 @@ Modal styles
 
     &:focus {
       outline: none;
-      border-color: $interactive-01;
+      border-color: $focus;
     }
   }
 
@@ -14433,7 +14433,7 @@ Modal styles
   - [text-01 [variable]](#text-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [hover-ui [variable]](#hover-ui-variable)
-  - [interactive-01 [variable]](#interactive-01-variable)
+  - [focus [variable]](#focus-variable)
   - [icon-01 [variable]](#icon-01-variable)
 
 ## multi-select
