@@ -1827,7 +1827,7 @@ icons:
       - name: Time
     aliases:
       - meter
-  - name: mexico--city
+  - name: mexico
     friendly_name: Mexico City
     usage: This is a description for usage
     categories:
