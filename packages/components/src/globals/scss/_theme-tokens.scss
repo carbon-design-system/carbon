@@ -10,6 +10,10 @@
 @import 'spacing';
 @import './vendor/@carbon/elements/scss/themes/themes';
 
+// The load order of tokens versus themes matter, so we use `carbon--theme` here
+// to make sure that they're in sync if one has diverged from the other.
+@include carbon--theme();
+
 /// Theme variables
 
 /// @type Value
