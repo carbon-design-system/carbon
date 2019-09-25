@@ -337,6 +337,11 @@ export class ExpandableTile extends Component {
     expanded: PropTypes.bool,
 
     /**
+     * optional handler to decide whether to ignore a click. returns false if click should be ignored
+     */
+    onBeforeClick: PropTypes.func,
+
+    /**
      * The `tabindex` attribute.
      */
     tabIndex: PropTypes.number,
@@ -361,6 +366,7 @@ export class ExpandableTile extends Component {
     tabIndex: 0,
     expanded: false,
     tileMaxHeight: '0',
+    onBeforeClick: () => true,
     handleClick: () => {},
     tileCollapsedIconText: 'Interact to expand Tile',
     tileExpandedIconText: 'Interact to collapse Tile',
@@ -420,6 +426,7 @@ export class ExpandableTile extends Component {
     });
 
   handleClick = evt => {
+    if (!this.props.onBeforeClick(evt)) return;
     evt.persist();
     this.setState(
       {
