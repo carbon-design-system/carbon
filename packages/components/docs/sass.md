@@ -3785,6 +3785,161 @@ Define theme variables from a map of tokens
   $active-01: map-get($theme, 'active-01') !global;
   $hover-field: map-get($theme, 'hover-field') !global;
 
+  @if feature-flag-enabled('enable-css-custom-properties') {
+    $interactive-01: var(
+      --cds-interactive-01,
+      map-get($theme, 'interactive-01')
+    ) !global;
+    $interactive-02: var(
+      --cds-interactive-02,
+      map-get($theme, 'interactive-02')
+    ) !global;
+    $interactive-03: var(
+      --cds-interactive-03,
+      map-get($theme, 'interactive-03')
+    ) !global;
+    $interactive-04: var(
+      --cds-interactive-04,
+      map-get($theme, 'interactive-04')
+    ) !global;
+    $ui-background: var(
+      --cds-ui-background,
+      map-get($theme, 'ui-background')
+    ) !global;
+    $ui-01: var(--cds-ui-01, map-get($theme, 'ui-01')) !global;
+    $ui-02: var(--cds-ui-02, map-get($theme, 'ui-02')) !global;
+    $ui-03: var(--cds-ui-03, map-get($theme, 'ui-03')) !global;
+    $ui-04: var(--cds-ui-04, map-get($theme, 'ui-04')) !global;
+    $ui-05: var(--cds-ui-05, map-get($theme, 'ui-05')) !global;
+    $text-01: var(--cds-text-01, map-get($theme, 'text-01')) !global;
+    $text-02: var(--cds-text-02, map-get($theme, 'text-02')) !global;
+    $text-03: var(--cds-text-03, map-get($theme, 'text-03')) !global;
+    $text-04: var(--cds-text-04, map-get($theme, 'text-04')) !global;
+    $text-05: var(--cds-text-05, map-get($theme, 'text-05')) !global;
+    $icon-01: var(--cds-icon-01, map-get($theme, 'icon-01')) !global;
+    $icon-02: var(--cds-icon-02, map-get($theme, 'icon-02')) !global;
+    $icon-03: var(--cds-icon-03, map-get($theme, 'icon-03')) !global;
+    $link-01: var(--cds-link-01, map-get($theme, 'link-01')) !global;
+    $inverse-link: var(
+      --cds-inverse-link,
+      map-get($theme, 'inverse-link')
+    ) !global;
+    $field-01: var(--cds-field-01, map-get($theme, 'field-01')) !global;
+    $field-02: var(--cds-field-02, map-get($theme, 'field-02')) !global;
+    $inverse-01: var(--cds-inverse-01, map-get($theme, 'inverse-01')) !global;
+    $inverse-02: var(--cds-inverse-02, map-get($theme, 'inverse-02')) !global;
+    $support-01: var(--cds-support-01, map-get($theme, 'support-01')) !global;
+    $support-02: var(--cds-support-02, map-get($theme, 'support-02')) !global;
+    $support-03: var(--cds-support-03, map-get($theme, 'support-03')) !global;
+    $support-04: var(--cds-support-04, map-get($theme, 'support-04')) !global;
+    $inverse-support-01: var(
+      --cds-inverse-support-01,
+      map-get($theme, 'inverse-support-01')
+    ) !global;
+    $inverse-support-02: var(
+      --cds-inverse-support-02,
+      map-get($theme, 'inverse-support-02')
+    ) !global;
+    $inverse-support-03: var(
+      --cds-inverse-support-03,
+      map-get($theme, 'inverse-support-03')
+    ) !global;
+    $inverse-support-04: var(
+      --cds-inverse-support-04,
+      map-get($theme, 'inverse-support-04')
+    ) !global;
+    $overlay-01: var(--cds-overlay-01, map-get($theme, 'overlay-01')) !global;
+    $danger: var(--cds-danger, map-get($theme, 'danger')) !global;
+    $focus: var(--cds-focus, map-get($theme, 'focus')) !global;
+    $inverse-focus-ui: var(
+      --cds-inverse-focus-ui,
+      map-get($theme, 'inverse-focus-ui')
+    ) !global;
+    $hover-primary: var(
+      --cds-hover-primary,
+      map-get($theme, 'hover-primary')
+    ) !global;
+    $active-primary: var(
+      --cds-active-primary,
+      map-get($theme, 'active-primary')
+    ) !global;
+    $hover-primary-text: var(
+      --cds-hover-primary-text,
+      map-get($theme, 'hover-primary-text')
+    ) !global;
+    $hover-secondary: var(
+      --cds-hover-secondary,
+      map-get($theme, 'hover-secondary')
+    ) !global;
+    $active-secondary: var(
+      --cds-active-secondary,
+      map-get($theme, 'active-secondary')
+    ) !global;
+    $hover-tertiary: var(
+      --cds-hover-tertiary,
+      map-get($theme, 'hover-tertiary')
+    ) !global;
+    $active-tertiary: var(
+      --cds-active-tertiary,
+      map-get($theme, 'active-tertiary')
+    ) !global;
+    $hover-ui: var(--cds-hover-ui, map-get($theme, 'hover-ui')) !global;
+    $active-ui: var(--cds-active-ui, map-get($theme, 'active-ui')) !global;
+    $selected-ui: var(
+      --cds-selected-ui,
+      map-get($theme, 'selected-ui')
+    ) !global;
+    $hover-selected-ui: var(
+      --cds-hover-selected-ui,
+      map-get($theme, 'hover-selected-ui')
+    ) !global;
+    $inverse-hover-ui: var(
+      --cds-inverse-hover-ui,
+      map-get($theme, 'inverse-hover-ui')
+    ) !global;
+    $hover-danger: var(
+      --cds-hover-danger,
+      map-get($theme, 'hover-danger')
+    ) !global;
+    $active-danger: var(
+      --cds-active-danger,
+      map-get($theme, 'active-danger')
+    ) !global;
+    $hover-row: var(--cds-hover-row, map-get($theme, 'hover-row')) !global;
+    $visited-link: var(
+      --cds-visited-link,
+      map-get($theme, 'visited-link')
+    ) !global;
+    $disabled-01: var(
+      --cds-disabled-01,
+      map-get($theme, 'disabled-01')
+    ) !global;
+    $disabled-02: var(
+      --cds-disabled-02,
+      map-get($theme, 'disabled-02')
+    ) !global;
+    $disabled-03: var(
+      --cds-disabled-03,
+      map-get($theme, 'disabled-03')
+    ) !global;
+    $highlight: var(--cds-highlight, map-get($theme, 'highlight')) !global;
+    $skeleton-01: var(
+      --cds-skeleton-01,
+      map-get($theme, 'skeleton-01')
+    ) !global;
+    $skeleton-02: var(
+      --cds-skeleton-02,
+      map-get($theme, 'skeleton-02')
+    ) !global;
+    $brand-01: var(--cds-brand-01, map-get($theme, 'brand-01')) !global;
+    $brand-02: var(--cds-brand-02, map-get($theme, 'brand-02')) !global;
+    $brand-03: var(--cds-brand-03, map-get($theme, 'brand-03')) !global;
+    $active-01: var(--cds-active-01, map-get($theme, 'active-01')) !global;
+    $hover-field: var(
+      --cds-hover-field,
+      map-get($theme, 'hover-field')
+    ) !global;
+  }
   @if $emit-custom-properties == true {
     @if should-emit($theme, $carbon--theme, 'interactive-01', $emit-difference)
     {
