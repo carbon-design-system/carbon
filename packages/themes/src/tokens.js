@@ -13,7 +13,6 @@ const colors = [
   'interactive02',
   'interactive03',
   'interactive04',
-  'danger',
 
   'uiBackground',
 
@@ -54,6 +53,8 @@ const colors = [
   'inverseSupport04',
 
   'overlay01',
+
+  'danger',
 
   // Interactive states
   'focus',
@@ -154,10 +155,10 @@ export const unstable__meta = {
         'interactive02',
         'interactive03',
         'interactive04',
-        'danger',
         'brand01',
         'brand02',
         'brand03',
+        'danger',
         'ui01',
         'ui02',
         'ui03',

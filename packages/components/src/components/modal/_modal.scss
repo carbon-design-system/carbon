@@ -175,8 +175,12 @@
 
     &:focus {
       outline: none;
-      border-color: $interactive-01;
+      border-color: $focus;
     }
+  }
+
+  .#{$prefix}--modal-close::-moz-focus-inner {
+    border: 0;
   }
 
   .#{$prefix}--modal-close__icon {

@@ -45,7 +45,6 @@ export const interactive01 = blue60;
 export const interactive02 = gray80;
 export const interactive03 = blue60;
 export const interactive04 = blue60;
-export const danger = red60;
 
 export const uiBackground = white;
 
@@ -86,6 +85,8 @@ export const inverseSupport03 = yellow;
 export const inverseSupport04 = blue50;
 
 export const overlay01 = rgba(gray100, 0.5);
+
+export const danger = red60;
 
 // Interaction states
 export const focus = blue60;
