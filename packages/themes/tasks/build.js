@@ -255,6 +255,35 @@ function buildMixinsFile() {
           });
         }),
         t.IfStatement({
+          test: t.CallExpression({
+            callee: t.Identifier('feature-flag-enabled'),
+            arguments: [t.SassString('enable-css-custom-properties')],
+          }),
+          consequent: t.BlockStatement(
+            Object.keys(tokens).flatMap(group => {
+              return tokens[group].flatMap(token => {
+                const name = formatTokenName(token);
+                return t.Assignment({
+                  id: t.Identifier(name),
+                  init: t.CallExpression({
+                    callee: t.Identifier('var'),
+                    arguments: [
+                      t.SassValue({
+                        value: `--#{$custom-property-prefix}-${name}`,
+                      }),
+                      t.CallExpression({
+                        callee: t.Identifier('map-get'),
+                        arguments: [t.Identifier('theme'), t.SassString(name)],
+                      }),
+                    ],
+                  }),
+                  global: true,
+                });
+              });
+            })
+          ),
+        }),
+        t.IfStatement({
           test: t.LogicalExpression({
             left: t.Identifier('emit-custom-properties'),
             operator: '==',
