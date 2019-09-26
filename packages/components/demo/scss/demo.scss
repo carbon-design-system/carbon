@@ -21,15 +21,14 @@
 //   )
 // );
 
-@import './_theme.scss';
+@import '../../src/globals/scss/vendor/@carbon/themes/scss/generated/mixins';
 
 /// The theme name to use in the dev env.
 /// @type String
-$demo--carbon--theme-name: 'white' !default;
 
 /// The Carbon theme to use, chosen with `$demo--carbon--theme-name`.
 /// @type Map
-$carbon--theme: map-get($carbon--theme--list, $demo--carbon--theme-name);
+@include carbon--theme($carbon--theme--white);
 
 @import '../../src/globals/scss/styles';
 
@@ -161,7 +160,7 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
   position: absolute;
   top: rem(32px);
   right: rem(32px);
-  display: if($demo--carbon--theme-name == 'custom-properties', block, none);
+  display: block;
 }
 
 .bx--tile-container {
