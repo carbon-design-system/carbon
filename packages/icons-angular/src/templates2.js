@@ -15,7 +15,7 @@ const classCase = str => {
   }
   // append a _ if the string starts with a number
   return `_${pascalled}`;
-}
+};
 
 const componentTemplate = icon => `
 @Component({
@@ -51,11 +51,13 @@ const formatIconObject = icon => `
   },
 `;
 
-const directiveTemplate = (icons) => `
+const directiveTemplate = icons => `
 @Directive({
   selector: "[ibmIcon${pascal(icons[0].namespace)}]"
 })
-export class ${classCase(icons[0].namespace)}Directive implements AfterViewInit {
+export class ${classCase(
+  icons[0].namespace
+)}Directive implements AfterViewInit {
   static titleIdCounter = 0;
 
   @Input() ariaLabel: string;
@@ -116,9 +118,13 @@ export class ${classCase(icons[0].namespace)}Directive implements AfterViewInit 
       const title = document.createElement("title");
       title.textContent = attributes.title;
       ${classCase(icons[0].namespace)}Directive.titleIdCounter++;
-      title.setAttribute("id", \`${param(icons[0].namespace)}-$\{${classCase(icons[0].namespace)}Directive.titleIdCounter}\`);
+      title.setAttribute("id", \`${param(icons[0].namespace)}-$\{${classCase(
+  icons[0].namespace
+)}Directive.titleIdCounter}\`);
       svg.appendChild(title);
-      svg.setAttribute("aria-labelledby", \`${param(icons[0].namespace)}-$\{${classCase(icons[0].namespace)}Directive.titleIdCounter}\`);
+      svg.setAttribute("aria-labelledby", \`${param(
+        icons[0].namespace
+      )}-$\{${classCase(icons[0].namespace)}Directive.titleIdCounter}\`);
     }
 	}
 }
@@ -210,8 +216,8 @@ const formatBazelGlobals = namespaces =>
     (names, name) => `
     ${names}
     "@carbon/icons-angular/${name}": "carbon.iconsAngular.${name
-        .split('/')
-        .join('.')}",
+      .split('/')
+      .join('.')}",
   `,
     ''
   );
