@@ -6,30 +6,11 @@
  */
 
 const icons = require('@carbon/icons/build-info.json');
-// const { toString } = require('@carbon/icon-helpers');
 const { reporter } = require('@carbon/cli-reporter');
 const fs = require('fs-extra');
 const { dirname } = require('path');
-const { param } = require('change-case');
-// const ngc = require('@angular/compiler-cli/src/main');
 
-// file templates
-// const {
-//   componentTemplate,
-//   rootBuildBazel,
-//   publicApi,
-//   rootPublicApi,
-//   iconBuildBazel,
-// } = require('./templates');
-// const { storyTemplate } = require('./story-templates');
-
-const {
-  moduleTemplate,
-  rootBuildBazel,
-  publicApi,
-  rootPublicApi,
-  iconBuildBazel,
-} = require('./templates2');
+const { moduleTemplate, rootPublicApi } = require('./templates');
 
 // local utilities
 const clean = require('./clean');
@@ -75,54 +56,14 @@ const reformatIcons = () => {
 
 async function generateComponents(iconMap) {
   for (const [namespace, icons] of iconMap) {
-    // generate base icon files
-    // for (const icon of icons) {
-    //   const className = icon.moduleName;
-    //   const selectorName = param(icon.moduleName);
-    //   const rawSvg = toString(icon.descriptor);
-    //   const outputPath = icon.outputOptions.file;
-    //   // try to write out the component
-    //   try {
-    //     await fs.ensureDir(dirname(outputPath));
-    //     await fs.writeFile(
-    //       outputPath,
-    //       componentTemplate(
-    //         selectorName,
-    //         className,
-    //         rawSvg,
-    //         icon.descriptor.attrs
-    //       )
-    //     );
-    //   } catch (err) {
-    //     reporter.error(err);
-    //   }
-    // }
-
     await fs.ensureDir(`ts/${namespace}`);
 
     const moduleString = moduleTemplate(namespace, icons);
-    // await fs.writeFile(`ts/${namespace}/${param(namespace)}.ts`, moduleString);
     await fs.writeFile(`ts/${namespace}/index.ts`, moduleString);
-
-    // write out the public api for all the icons in the module
-    // await fs.writeFile(`ts/${namespace}/public-api.ts`, publicApi(icons));
-    // export everything from public-api
-    // await fs.writeFile(
-    //   `ts/${namespace}/index.ts`,
-    //   "export * from './public-api'"
-    // );
-    // write the bazel build file for the icon
-    await fs.writeFile(
-      `ts/${namespace}/BUILD.bazel`,
-      iconBuildBazel(namespace)
-    );
   }
 
   // get all the namespaces to build the import definitions
   const namespaces = Array.from(iconMap.keys());
-  await fs.writeFile('ts/BUILD.bazel', rootBuildBazel(namespaces));
-  // await fs.writeFile('ts/public-api.ts', rootPublicApi(namespaces));
-  // await fs.writeFile('ts/index.ts', "export * from './public-api'");
   await fs.writeFile('ts/index.ts', rootPublicApi(namespaces));
 }
 
