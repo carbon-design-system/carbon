@@ -3432,7 +3432,9 @@ Define theme variables from a map of tokens
   $active-01: map-get($theme, 'active-01') !global;
   $hover-field: map-get($theme, 'hover-field') !global;
 
-  @if feature-flag-enabled('enable-css-custom-properties') {
+  @if global-variable-exists('feature-flags') and
+    map-get($feature-flags, 'enable-css-custom-properties')
+  {
     $interactive-01: var(
       --#{$custom-property-prefix}-interactive-01,
       map-get($theme, 'interactive-01')
