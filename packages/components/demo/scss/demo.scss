@@ -24,7 +24,7 @@ $feature-flags: (
   enable-css-custom-properties: true,
 );
 
-@import '../../src/globals/scss/vendor/@carbon/themes/scss/generated/mixins';
+@import '../../src/globals/scss/vendor/@carbon/themes/scss/mixins';
 
 /// The theme name to use in the dev env.
 /// @type String
