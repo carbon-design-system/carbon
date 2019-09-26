@@ -28,7 +28,7 @@
   },
   "scripts": {
     "build": "exit 0;",
-    "build2": "node --max_old_space_size=4096 ./node_modules/.bin/ng-packagr -p package.json",
+    "build2": "node --max_old_space_size=3072 ./node_modules/.bin/ng-packagr -p package.json",
     "build:local": "yarn build:generate && yarn build:local:bazel && yarn build:package",
     "build:full": "yarn build:generate && yarn build:bazel && yarn build:package",
     "build:generate": "node tasks/build.js",
