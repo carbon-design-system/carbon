@@ -412,7 +412,7 @@ class Tooltip extends Component {
       onBlur: this.handleMouse,
       'aria-haspopup': 'true',
       'aria-expanded': open,
-      'aria-describedby': tooltipId,
+      'aria-describedby': open ? tooltipId : null,
       // if the user provides property `triggerText`,
       // then the button should use aria-labelledby to point to its id,
       // if the user doesn't provide property `triggerText`,
