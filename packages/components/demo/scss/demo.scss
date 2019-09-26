@@ -25,14 +25,6 @@ $feature-flags: (
 );
 
 @import '../../src/globals/scss/vendor/@carbon/themes/scss/mixins';
-
-/// The theme name to use in the dev env.
-/// @type String
-
-/// The Carbon theme to use, chosen with `$demo--carbon--theme-name`.
-/// @type Map
-@include carbon--theme($carbon--theme--white);
-
 @import '../../src/globals/scss/styles';
 
 $deprecations--entry: true;
