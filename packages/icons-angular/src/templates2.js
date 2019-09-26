@@ -17,12 +17,13 @@ const classCase = str => {
   return `_${pascalled}`;
 }
 
-const componentTemplate = (icon) => `
+const componentTemplate = icon => `
 @Component({
-	selector: "ibm-icon-${param(icon.moduleName)}",
+	selector: "ibm-icon-${param(icon.namespace)}",
   template: \`
     <svg
-      ibmIcon${pascal(icon.moduleName)}
+      ibmIcon${pascal(icon.namespace)}
+      [size]="size"
       [ariaLabel]="ariaLabel"
       [ariaLabelledby]="ariaLabelledby"
       [ariaHidden]="ariaHidden"
@@ -32,21 +33,29 @@ const componentTemplate = (icon) => `
     </svg>
   \`
 })
-export class ${classCase(icon.moduleName)}Component {
+export class ${classCase(icon.namespace)}Component {
   @Input() ariaLabel: string;
   @Input() ariaLabelledby: string;
   @Input() ariaHidden: boolean;
   @Input() title: string;
   @Input() focusable: boolean = false;
   @Input() innerClass: string;
+  @Input() size: string;
 }
 `;
 
-const directiveTemplate = (icon) => `
+const formatIconObject = icon => `
+  "${icon.size}": {
+    metadata: ${JSON.stringify(icon)},
+    svg: \`${toString(icon.descriptor)}\`
+  },
+`;
+
+const directiveTemplate = (icons) => `
 @Directive({
-  selector: "[ibmIcon${pascal(icon.moduleName)}]"
+  selector: "[ibmIcon${pascal(icons[0].namespace)}]"
 })
-export class ${classCase(icon.moduleName)}Directive implements AfterViewInit {
+export class ${classCase(icons[0].namespace)}Directive implements AfterViewInit {
   static titleIdCounter = 0;
 
   @Input() ariaLabel: string;
@@ -54,6 +63,11 @@ export class ${classCase(icon.moduleName)}Directive implements AfterViewInit {
   @Input() ariaHidden: boolean;
   @Input() title: string;
   @Input() isFocusable: boolean = false;
+  @Input() size: string;
+
+  protected icons = {
+    ${icons.reduce((str, icon) => `${str}${formatIconObject(icon)}`, '')}
+  };
 
   constructor(protected elementRef: ElementRef) {}
 
@@ -61,8 +75,10 @@ export class ${classCase(icon.moduleName)}Directive implements AfterViewInit {
     const svg = this.elementRef.nativeElement;
     svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
 
+    const icon = this.icons[this.size]
+
     const domParser = new DOMParser();
-    const rawSVG = \`${toString(icon.descriptor)}\`;
+    const rawSVG = icon.svg;
     const svgElement = domParser.parseFromString(rawSVG, "image/svg+xml").documentElement;
 
     let node = svgElement.firstChild;
@@ -74,9 +90,9 @@ export class ${classCase(icon.moduleName)}Directive implements AfterViewInit {
     }
 
     const attributes = getAttributes({
-      width: ${icon.descriptor.attrs.width},
-      height: ${icon.descriptor.attrs.height},
-      viewBox: "${icon.descriptor.attrs.viewBox}",
+      width: icon.metadata.descriptor.attrs.height,
+      height: icon.metadata.descriptor.attrs.height,
+      viewBox: icon.metadata.descriptor.attrs.viewBox,
       title: this.title,
       "aria-label": this.ariaLabel,
       "aria-labelledby": this.ariaLabelledby,
@@ -99,20 +115,29 @@ export class ${classCase(icon.moduleName)}Directive implements AfterViewInit {
     if (attributes.title) {
       const title = document.createElement("title");
       title.textContent = attributes.title;
-      ${classCase(icon.moduleName)}Directive.titleIdCounter++;
-      title.setAttribute("id", \`${param(icon.moduleName)}-$\{${classCase(icon.moduleName)}Directive.titleIdCounter}\`);
+      ${classCase(icons[0].namespace)}Directive.titleIdCounter++;
+      title.setAttribute("id", \`${param(icons[0].namespace)}-$\{${classCase(icons[0].namespace)}Directive.titleIdCounter}\`);
       svg.appendChild(title);
-      svg.setAttribute("aria-labelledby", \`${param(icon.moduleName)}-$\{${classCase(icon.moduleName)}Directive.titleIdCounter}\`);
+      svg.setAttribute("aria-labelledby", \`${param(icons[0].namespace)}-$\{${classCase(icons[0].namespace)}Directive.titleIdCounter}\`);
     }
 	}
 }
 `;
 
-const formatModuleDeclarations = (icons) => icons.reduce((str, icon) => `
-  ${str}
-  ${classCase(icon.moduleName)}Component,
-  ${classCase(icon.moduleName)}Directive,
-`, '');
+const formatModuleDeclarations = icon => `
+  ${classCase(icon.namespace)}Component,
+  ${classCase(icon.namespace)}Directive,
+`;
+
+// const formatModuleDeclarations = (icons) => icons.reduce((str, icon) => `
+//   ${str}
+//   ${classCase(icon.namespace)}Component,
+//   ${classCase(icon.namespace)}Directive,
+// `, '');
+
+// ${icons.reduce((str, icon) => `${str} ${directiveTemplate(icons)}`, '')}
+
+// ${icons.reduce((str, icon) => `${str} ${componentTemplate(icon)}`, '')}
 
 const moduleTemplate = (namespace, icons) => `
 import {
@@ -125,29 +150,30 @@ import {
 } from "@angular/core";
 import { getAttributes } from "@carbon/icon-helpers";
 
-${icons.reduce((str, icon) => `${str} ${componentTemplate(icon)}`, '')}
+${componentTemplate(icons[0])}
 
-${icons.reduce((str, icon) => `${str} ${directiveTemplate(icon)}`, '')}
+${directiveTemplate(icons)}
 
 @NgModule({
   declarations: [
-    ${formatModuleDeclarations(icons)}
+    ${formatModuleDeclarations(icons[0])}
   ],
   exports: [
-    ${formatModuleDeclarations(icons)}
+    ${formatModuleDeclarations(icons[0])}
   ]
 })
 export class ${classCase(namespace)}Module {}
 `;
 
 const publicApiExport = icon => `
-${classCase(icon.moduleName)}Component,
-${classCase(icon.moduleName)}Directive,
+${classCase(icon.namespace)}Component,
+${classCase(icon.namespace)}Directive,
 `;
 
+// ${icons.reduce((str, icon) => `${str} ${publicApiExport(icon)}`, '')}
 const publicApi = icons => `
 export {
-  ${icons.reduce((str, icon) => `${str} ${publicApiExport(icon)}`, '')}
+  ${publicApiExport(icons[0])}
   ${classCase(icons[0].namespace)}Module
 } from "./${param(icons[0].namespace)}";
 `;
@@ -156,7 +182,7 @@ const rootPublicApi = namespaces =>
   namespaces.reduce(
     (str, name) => `
   ${str}
-  export * from "@carbon/icons-angular/${name}";
+  export * from "./${name}";
 `,
     ''
   );

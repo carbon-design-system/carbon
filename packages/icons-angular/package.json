@@ -1,10 +1,17 @@
 {
+  "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "@carbon/icons-angular",
   "private": true,
   "description": "Angular components for icons in digital and software products using the Carbon Design System",
   "version": "10.5.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "ts/index.ts"
+    },
+    "whitelistedNonPeerDependencies": ["@carbon/icon-helpers"]
+  },
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-angular",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
@@ -20,7 +27,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "echo \"Error: no build specified. Use build:full \" && exit 0",
+    "build": "node --max_old_space_size=4096 ./node_modules/.bin/ng-packagr -p package.json",
     "build:local": "yarn build:generate && yarn build:local:bazel && yarn build:package",
     "build:full": "yarn build:generate && yarn build:bazel && yarn build:package",
     "build:generate": "node tasks/build.js",
@@ -41,16 +48,17 @@
   },
   "devDependencies": {
     "@angular/bazel": "8.2.2",
-    "@bazel/bazel": "0.28.1",
-    "@bazel/typescript": "0.36.0",
-    "@bazel/karma": "^0.36.0",
     "@angular/compiler": "6.1.10",
     "@angular/compiler-cli": "6.1.10",
     "@angular/core": "6.1.10",
+    "@bazel/bazel": "0.28.1",
+    "@bazel/karma": "^0.36.0",
+    "@bazel/typescript": "0.36.0",
     "@carbon/cli-reporter": "10.3.0",
     "@carbon/icons": "10.5.0",
     "change-case": "3.0.2",
     "fs-extra": "7.0.1",
+    "ng-packagr": "^5.5.1",
     "typescript": "2.9.2",
     "zone.js": "0.10.2"
   },

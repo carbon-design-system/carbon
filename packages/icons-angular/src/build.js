@@ -51,6 +51,7 @@ const reformatIcons = () => {
         'index.js',
         'glyph.ts'
       );
+      icon.size = 'glyph';
     }
 
     // set the correct output options
