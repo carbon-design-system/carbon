@@ -64,8 +64,8 @@ export default class ToolbarSearch extends Component {
     labelId: 'search__label',
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     if (__DEV__) {
       warning(
         didWarnAboutDeprecation,
