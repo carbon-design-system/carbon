@@ -255,9 +255,15 @@ function buildMixinsFile() {
           });
         }),
         t.IfStatement({
-          test: t.CallExpression({
-            callee: t.Identifier('feature-flag-enabled'),
-            arguments: [t.SassString('enable-css-custom-properties')],
+          test: t.LogicalExpression({
+            left: t.SassFunctionCall(t.Identifier('global-variable-exists'), [
+              t.SassString('feature-flags'),
+            ]),
+            operator: 'and',
+            right: t.SassFunctionCall(t.Identifier('map-get'), [
+              t.Identifier('feature-flags'),
+              t.SassString('enable-css-custom-properties'),
+            ]),
           }),
           consequent: t.BlockStatement(
             Object.keys(tokens).flatMap(group => {
