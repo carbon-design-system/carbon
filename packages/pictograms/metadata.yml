@@ -641,7 +641,7 @@ icons:
         friendly_name: Console wireless
         usage: This is a description for usage
         categories:
-        - name: Electronics
+          - name: Electronics
   - name: construct
     friendly_name: Construct
     usage: This is a description for usage
@@ -1846,8 +1846,7 @@ icons:
   - name: mexico-city
     friendly_name: Mexico City
     usage: This is a description for usage
-    categories:
-      - name: Cities
+    categories: []
     aliases:
       - mexico city
       - mexico
@@ -1876,8 +1875,7 @@ icons:
   - name: milan
     friendly_name: Milan
     usage: This is a description for usage
-    categories:
-      - name: Cities
+    categories: []
     aliases:
       - milan
     variants:
@@ -1889,7 +1887,7 @@ icons:
         aliases:
           - church
       - name: milan--skyscrapers
-        friendly_name: Skyscrapers
+        friendly_name: Milan Skyscrapers
         usage: This is a description for usage
         categories:
           - name: Cities
@@ -2671,7 +2669,7 @@ icons:
         friendly_name: Single sign on
         usage: This is a description for usage
         categories:
-        - name: Cloud
+          - name: Cloud
   - name: slider
     friendly_name: Slider
     usage: This is a description for usage
@@ -2798,7 +2796,7 @@ icons:
         friendly_name: Steering wheel
         usage: This is a description for usage
         categories:
-        - name: Transportation
+          - name: Transportation
   - name: stethoscope
     friendly_name: Stethoscope
     usage: This is a description for usage
