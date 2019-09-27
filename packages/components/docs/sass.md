@@ -3712,7 +3712,11 @@ $custom-property-prefix: 'cds';
 @mixin custom-property() {
   @if type-of($value) == map {
     @each $property, $property-value in $value {
-      @include custom-property('#{$name}-#{$property}', $property-value);
+      // Only support one-level of depth for values that are maps. This is to
+      // avoid bringing properties like `breakpoints` on type tokens
+      @if type-of($property-value) != map {
+        @include custom-property('#{$name}-#{$property}', $property-value);
+      }
     }
   } @else {
     --#{$prefix}-#{$name}: #{$value};
@@ -13189,7 +13193,7 @@ fixed contexts.
     @if global-variable-exists('feature-flags') and
       map-get($feature-flags, 'enable-css-custom-properties')
     {
-      @include custom-properties($name, map-remove($token, 'breakpoints'));
+      @include custom-properties($name, $token);
     } @else {
       // Otherwise, we just include all the property declarations directly on the
       // selector
