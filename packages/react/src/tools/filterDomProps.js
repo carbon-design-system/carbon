@@ -566,7 +566,9 @@ const filterDomProps = props => {
     .filter(key => {
       const lowerCased = key.toLowerCase();
       const standardName = possibleStandardNames[lowerCased];
-      const ariaName = 'aria-' + key.slice(4).toLowerCase();
+      const ariaName = /^aria-/.test(key)
+        ? key
+        : 'aria-' + key.slice(4).toLowerCase();
 
       return (
         (Object.hasOwnProperty.call(possibleStandardNames, lowerCased) &&
