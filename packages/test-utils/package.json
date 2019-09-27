@@ -24,5 +24,8 @@
   "devDependencies": {
     "node-sass": "^4.11.0",
     "react-dom": "^16.9.0"
+  },
+  "dependencies": {
+    "resolve": "^1.12.0"
   }
 }
