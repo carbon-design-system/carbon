@@ -10,6 +10,10 @@
 @import 'spacing';
 @import './vendor/@carbon/elements/scss/themes/themes';
 
+// The load order of tokens versus themes matter, so we use `carbon--theme` here
+// to make sure that they're in sync if one has diverged from the other.
+@include carbon--theme();
+
 /// Theme variables
 
 /// @type Value
@@ -158,7 +162,7 @@ $accordion-justify-content: flex-start !default;
 /// @type Value
 /// @access public
 /// @group accordion
-$accordion-arrow-margin: 0 $carbon--spacing-05 0 0 !default;
+$accordion-arrow-margin: 2px $carbon--spacing-05 0 0 !default;
 
 /// @type Value
 /// @access public
