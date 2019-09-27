@@ -24,7 +24,8 @@
     "build": "yarn clean && bundler bundle src/index.js --name CarbonThemes && node tasks/build.js && bundler check \"scss/*.scss\" && bundler sassdoc \"scss/**/*.scss\""
   },
   "dependencies": {
-    "@carbon/colors": "10.4.0"
+    "@carbon/colors": "10.4.0",
+    "@carbon/type": "10.5.0"
   },
   "devDependencies": {
     "@carbon/cli-reporter": "10.3.0",

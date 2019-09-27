@@ -146,7 +146,7 @@ function buildThemesFile(themes, tokens) {
         properties: Object.keys(theme).map(token =>
           t.SassMapProperty(
             t.Identifier(formatTokenName(token)),
-            t.SassColor(theme[token])
+            primitive(theme[token])
           )
         ),
       }),
@@ -267,25 +267,35 @@ function buildMixinsFile() {
           }),
           consequent: t.BlockStatement(
             Object.keys(tokens).flatMap(group => {
-              return tokens[group].flatMap(token => {
-                const name = formatTokenName(token);
-                return t.Assignment({
-                  id: t.Identifier(name),
-                  init: t.CallExpression({
-                    callee: t.Identifier('var'),
-                    arguments: [
-                      t.SassValue({
-                        value: `--#{$custom-property-prefix}-${name}`,
-                      }),
-                      t.CallExpression({
-                        callee: t.Identifier('map-get'),
-                        arguments: [t.Identifier('theme'), t.SassString(name)],
-                      }),
-                    ],
-                  }),
-                  global: true,
+              return tokens[group]
+                .filter(token => {
+                  // We don't want to inline CSS Custom Properties for tokens
+                  // that are maps, we'll need to use a corresponding mixin for
+                  // that token to embed CSS Custom Properties
+                  return typeof themes[defaultTheme][token] !== 'object';
+                })
+                .flatMap(token => {
+                  const name = formatTokenName(token);
+                  return t.Assignment({
+                    id: t.Identifier(name),
+                    init: t.CallExpression({
+                      callee: t.Identifier('var'),
+                      arguments: [
+                        t.SassValue({
+                          value: `--#{$custom-property-prefix}-${name}`,
+                        }),
+                        t.CallExpression({
+                          callee: t.Identifier('map-get'),
+                          arguments: [
+                            t.Identifier('theme'),
+                            t.SassString(name),
+                          ],
+                        }),
+                      ],
+                    }),
+                    global: true,
+                  });
                 });
-              });
             })
           ),
         }),
