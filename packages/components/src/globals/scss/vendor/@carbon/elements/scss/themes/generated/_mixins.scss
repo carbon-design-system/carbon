@@ -99,6 +99,37 @@
   $brand-03: map-get($theme, 'brand-03') !global;
   $active-01: map-get($theme, 'active-01') !global;
   $hover-field: map-get($theme, 'hover-field') !global;
+  $caption-01: map-get($theme, 'caption-01') !global;
+  $label-01: map-get($theme, 'label-01') !global;
+  $helper-text-01: map-get($theme, 'helper-text-01') !global;
+  $body-short-01: map-get($theme, 'body-short-01') !global;
+  $body-long-01: map-get($theme, 'body-long-01') !global;
+  $body-short-02: map-get($theme, 'body-short-02') !global;
+  $body-long-02: map-get($theme, 'body-long-02') !global;
+  $code-01: map-get($theme, 'code-01') !global;
+  $code-02: map-get($theme, 'code-02') !global;
+  $heading-01: map-get($theme, 'heading-01') !global;
+  $productive-heading-01: map-get($theme, 'productive-heading-01') !global;
+  $heading-02: map-get($theme, 'heading-02') !global;
+  $productive-heading-02: map-get($theme, 'productive-heading-02') !global;
+  $productive-heading-03: map-get($theme, 'productive-heading-03') !global;
+  $productive-heading-04: map-get($theme, 'productive-heading-04') !global;
+  $productive-heading-05: map-get($theme, 'productive-heading-05') !global;
+  $productive-heading-06: map-get($theme, 'productive-heading-06') !global;
+  $productive-heading-07: map-get($theme, 'productive-heading-07') !global;
+  $expressive-heading-01: map-get($theme, 'expressive-heading-01') !global;
+  $expressive-heading-02: map-get($theme, 'expressive-heading-02') !global;
+  $expressive-heading-03: map-get($theme, 'expressive-heading-03') !global;
+  $expressive-heading-04: map-get($theme, 'expressive-heading-04') !global;
+  $expressive-heading-05: map-get($theme, 'expressive-heading-05') !global;
+  $expressive-heading-06: map-get($theme, 'expressive-heading-06') !global;
+  $expressive-paragraph-01: map-get($theme, 'expressive-paragraph-01') !global;
+  $quotation-01: map-get($theme, 'quotation-01') !global;
+  $quotation-02: map-get($theme, 'quotation-02') !global;
+  $display-01: map-get($theme, 'display-01') !global;
+  $display-02: map-get($theme, 'display-02') !global;
+  $display-03: map-get($theme, 'display-03') !global;
+  $display-04: map-get($theme, 'display-04') !global;
 
   @if global-variable-exists('feature-flags') and
     map-get($feature-flags, 'enable-css-custom-properties')
@@ -729,6 +760,266 @@
 
     @if should-emit($theme, $carbon--theme, 'hover-field', $emit-difference) {
       @include custom-property('hover-field', map-get($theme, 'hover-field'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'caption-01', $emit-difference) {
+      @include custom-property('caption-01', map-get($theme, 'caption-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'label-01', $emit-difference) {
+      @include custom-property('label-01', map-get($theme, 'label-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'helper-text-01', $emit-difference)
+    {
+      @include custom-property(
+        'helper-text-01',
+        map-get($theme, 'helper-text-01')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'body-short-01', $emit-difference) {
+      @include custom-property(
+        'body-short-01',
+        map-get($theme, 'body-short-01')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'body-long-01', $emit-difference) {
+      @include custom-property('body-long-01', map-get($theme, 'body-long-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'body-short-02', $emit-difference) {
+      @include custom-property(
+        'body-short-02',
+        map-get($theme, 'body-short-02')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'body-long-02', $emit-difference) {
+      @include custom-property('body-long-02', map-get($theme, 'body-long-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'code-01', $emit-difference) {
+      @include custom-property('code-01', map-get($theme, 'code-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'code-02', $emit-difference) {
+      @include custom-property('code-02', map-get($theme, 'code-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'heading-01', $emit-difference) {
+      @include custom-property('heading-01', map-get($theme, 'heading-01'));
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-01',
+        map-get($theme, 'productive-heading-01')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'heading-02', $emit-difference) {
+      @include custom-property('heading-02', map-get($theme, 'heading-02'));
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-02',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-02',
+        map-get($theme, 'productive-heading-02')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-03',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-03',
+        map-get($theme, 'productive-heading-03')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-04',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-04',
+        map-get($theme, 'productive-heading-04')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-05',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-05',
+        map-get($theme, 'productive-heading-05')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-06',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-06',
+        map-get($theme, 'productive-heading-06')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-07',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-07',
+        map-get($theme, 'productive-heading-07')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-01',
+        map-get($theme, 'expressive-heading-01')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-02',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-02',
+        map-get($theme, 'expressive-heading-02')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-03',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-03',
+        map-get($theme, 'expressive-heading-03')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-04',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-04',
+        map-get($theme, 'expressive-heading-04')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-05',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-05',
+        map-get($theme, 'expressive-heading-05')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-06',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-06',
+        map-get($theme, 'expressive-heading-06')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-paragraph-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-paragraph-01',
+        map-get($theme, 'expressive-paragraph-01')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'quotation-01', $emit-difference) {
+      @include custom-property('quotation-01', map-get($theme, 'quotation-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'quotation-02', $emit-difference) {
+      @include custom-property('quotation-02', map-get($theme, 'quotation-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'display-01', $emit-difference) {
+      @include custom-property('display-01', map-get($theme, 'display-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'display-02', $emit-difference) {
+      @include custom-property('display-02', map-get($theme, 'display-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'display-03', $emit-difference) {
+      @include custom-property('display-03', map-get($theme, 'display-03'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'display-04', $emit-difference) {
+      @include custom-property('display-04', map-get($theme, 'display-04'));
     }
   }
 
