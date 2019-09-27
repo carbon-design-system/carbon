@@ -17000,7 +17000,9 @@ Dropdown styles
     z-index: z('dropdown');
     max-height: 0;
     transition: max-height $duration--fast-02 motion(standard, productive);
-    overflow: hidden auto;
+    // NOTE: IE, Edge, and Safari do not support two value `overflow` shorthand.
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .#{$prefix}--dropdown:not(.#{$prefix}--dropdown--open)
