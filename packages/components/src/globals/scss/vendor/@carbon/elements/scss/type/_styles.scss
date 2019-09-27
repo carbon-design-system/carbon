@@ -639,6 +639,24 @@ $tokens: (
   }
 }
 
+// TODO move following variable and `custom-property` mixin into shared file for
+// both `@carbon/type` and `@carbon/themes`
+
+/// @access private
+/// @group @carbon/type
+$custom-property-prefix: 'cds' !default;
+
+/// @access private
+/// @group @carbon/type
+@mixin custom-properties($name, $value) {
+  @each $property, $value in $value {
+    #{$property}: var(
+      --#{$custom-property-prefix}-#{$name}-#{$property},
+      #{$value}
+    );
+  }
+}
+
 /// Helper mixin to include the styles for a given token in any selector in your
 /// project. Also includes an optional fluid option that will enable fluid
 /// styles for the token if they are defined. Fluid styles will cause the
@@ -665,8 +683,14 @@ $tokens: (
   @if $fluid == true and map-has-key($token, 'breakpoints') {
     @include fluid-type($token, $breakpoints);
   } @else {
-    // Otherwise, we just include all the property declarations directly on the
-    // selector
-    @include properties(map-remove($token, 'breakpoints'));
+    @if global-variable-exists('feature-flags') and
+      map-get($feature-flags, 'enable-css-custom-properties')
+    {
+      @include custom-properties($name, $token);
+    } @else {
+      // Otherwise, we just include all the property declarations directly on the
+      // selector
+      @include properties(map-remove($token, 'breakpoints'));
+    }
   }
 }

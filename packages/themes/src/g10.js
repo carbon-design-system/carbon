@@ -126,6 +126,39 @@ export const highlight = blue20;
 export const skeleton01 = '#e5e5e5';
 export const skeleton02 = gray30;
 
+// Type
+export { caption01 } from './white';
+export { label01 } from './white';
+export { helperText01 } from './white';
+export { bodyShort01 } from './white';
+export { bodyLong01 } from './white';
+export { bodyShort02 } from './white';
+export { bodyLong02 } from './white';
+export { code01 } from './white';
+export { code02 } from './white';
+export { heading01 } from './white';
+export { productiveHeading01 } from './white';
+export { heading02 } from './white';
+export { productiveHeading02 } from './white';
+export { productiveHeading03 } from './white';
+export { productiveHeading04 } from './white';
+export { productiveHeading05 } from './white';
+export { productiveHeading06 } from './white';
+export { productiveHeading07 } from './white';
+export { expressiveHeading01 } from './white';
+export { expressiveHeading02 } from './white';
+export { expressiveHeading03 } from './white';
+export { expressiveHeading04 } from './white';
+export { expressiveHeading05 } from './white';
+export { expressiveHeading06 } from './white';
+export { expressiveParagraph01 } from './white';
+export { quotation01 } from './white';
+export { quotation02 } from './white';
+export { display01 } from './white';
+export { display02 } from './white';
+export { display03 } from './white';
+export { display04 } from './white';
+
 // Deprecated ☠️
 export const brand01 = interactive01;
 export const brand02 = interactive02;

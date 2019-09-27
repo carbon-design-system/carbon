@@ -126,6 +126,39 @@ export const highlight = blue20;
 export const skeleton01 = '#e5e5e5';
 export const skeleton02 = gray30;
 
+// Type
+export { caption01 } from '@carbon/type';
+export { label01 } from '@carbon/type';
+export { helperText01 } from '@carbon/type';
+export { bodyShort01 } from '@carbon/type';
+export { bodyLong01 } from '@carbon/type';
+export { bodyShort02 } from '@carbon/type';
+export { bodyLong02 } from '@carbon/type';
+export { code01 } from '@carbon/type';
+export { code02 } from '@carbon/type';
+export { heading01 } from '@carbon/type';
+export { productiveHeading01 } from '@carbon/type';
+export { heading02 } from '@carbon/type';
+export { productiveHeading02 } from '@carbon/type';
+export { productiveHeading03 } from '@carbon/type';
+export { productiveHeading04 } from '@carbon/type';
+export { productiveHeading05 } from '@carbon/type';
+export { productiveHeading06 } from '@carbon/type';
+export { productiveHeading07 } from '@carbon/type';
+export { expressiveHeading01 } from '@carbon/type';
+export { expressiveHeading02 } from '@carbon/type';
+export { expressiveHeading03 } from '@carbon/type';
+export { expressiveHeading04 } from '@carbon/type';
+export { expressiveHeading05 } from '@carbon/type';
+export { expressiveHeading06 } from '@carbon/type';
+export { expressiveParagraph01 } from '@carbon/type';
+export { quotation01 } from '@carbon/type';
+export { quotation02 } from '@carbon/type';
+export { display01 } from '@carbon/type';
+export { display02 } from '@carbon/type';
+export { display03 } from '@carbon/type';
+export { display04 } from '@carbon/type';
+
 // Deprecated ☠️
 export const brand01 = interactive01;
 export const brand02 = interactive02;
