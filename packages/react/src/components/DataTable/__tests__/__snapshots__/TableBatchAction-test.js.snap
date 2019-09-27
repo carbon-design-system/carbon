@@ -58,7 +58,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm4 8H9v3H7V9H4V7h3V4h2v3h3v2z"
+              d="M8,1C4.2,1,1,4.2,1,8s3.2,7,7,7s7-3.2,7-7S11.8,1,8,1z M12,9H9v3H7V9H4V7h3V4h2v3h3V9z"
             />
           </svg>
         </Icon>

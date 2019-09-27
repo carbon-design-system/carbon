@@ -11,8 +11,11 @@ import classNames from 'classnames';
 import { Search16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import ClickListener from '../../internal/ClickListener';
+import warning from 'warning';
 
 const { prefix } = settings;
+
+let didWarnAboutDeprecation = false;
 
 export default class ToolbarSearch extends Component {
   static propTypes = {
@@ -60,6 +63,17 @@ export default class ToolbarSearch extends Component {
     role: 'search',
     labelId: 'search__label',
   };
+
+  constructor(props) {
+    super(props);
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        'The `ComponentName` component has been deprecated and will be removed in the next major release of `carbon-components-react`'
+      );
+      didWarnAboutDeprecation = true;
+    }
+  }
 
   state = {
     expanded: false,
