@@ -498,6 +498,65 @@ const possibleStandardNames = {
 };
 
 /**
+ * Valid aria properties
+ * @see {@link https://github.com/facebook/react/blob/master/packages/react-dom/src/shared/validAriaProperties.js}
+ */
+const ariaProperties = {
+  'aria-current': 0,
+  'aria-details': 0,
+  'aria-disabled': 0,
+  'aria-hidden': 0,
+  'aria-invalid': 0,
+  'aria-keyshortcuts': 0,
+  'aria-label': 0,
+  'aria-roledescription': 0,
+  // Widget Attributes
+  'aria-autocomplete': 0,
+  'aria-checked': 0,
+  'aria-expanded': 0,
+  'aria-haspopup': 0,
+  'aria-level': 0,
+  'aria-modal': 0,
+  'aria-multiline': 0,
+  'aria-multiselectable': 0,
+  'aria-orientation': 0,
+  'aria-placeholder': 0,
+  'aria-pressed': 0,
+  'aria-readonly': 0,
+  'aria-required': 0,
+  'aria-selected': 0,
+  'aria-sort': 0,
+  'aria-valuemax': 0,
+  'aria-valuemin': 0,
+  'aria-valuenow': 0,
+  'aria-valuetext': 0,
+  // Live Region Attributes
+  'aria-atomic': 0,
+  'aria-busy': 0,
+  'aria-live': 0,
+  'aria-relevant': 0,
+  // Drag-and-Drop Attributes
+  'aria-dropeffect': 0,
+  'aria-grabbed': 0,
+  // Relationship Attributes
+  'aria-activedescendant': 0,
+  'aria-colcount': 0,
+  'aria-colindex': 0,
+  'aria-colspan': 0,
+  'aria-controls': 0,
+  'aria-describedby': 0,
+  'aria-errormessage': 0,
+  'aria-flowto': 0,
+  'aria-labelledby': 0,
+  'aria-owns': 0,
+  'aria-posinset': 0,
+  'aria-rowcount': 0,
+  'aria-rowindex': 0,
+  'aria-rowspan': 0,
+  'aria-setsize': 0,
+};
+
+/**
  * Filter element properties object to only contain valid DOM properties
  * @param props object that we want to be filtered
  * @returns {object} filtered props object
@@ -507,10 +566,12 @@ const filterDomProps = props => {
     .filter(key => {
       const lowerCased = key.toLowerCase();
       const standardName = possibleStandardNames[lowerCased];
+      const ariaName = 'aria-' + key.slice(4).toLowerCase();
 
       return (
-        Object.hasOwnProperty.call(possibleStandardNames, lowerCased) &&
-        standardName === key
+        (Object.hasOwnProperty.call(possibleStandardNames, lowerCased) &&
+          standardName === key) ||
+        Object.hasOwnProperty.call(ariaProperties, ariaName)
       );
     })
     .reduce((acc, key) => {
