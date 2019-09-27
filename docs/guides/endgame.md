@@ -481,9 +481,8 @@ already exist in the project. These updates are reserved for
 
 7. If everything looks good to go, checkout `master` and pull the latest
    upstream. Then you should go through each of the updated packages and add the
-   `latest` tag using the command:
-   `npm dist-tag add package-name@vX.Y.Z latest`. For example, if you just
-   released `10.6.1` under `next`, this would look like
+   `latest` tag using the command: `npm dist-tag add package-name@X.Y.Z latest`.
+   For example, if you just released `10.6.1` under `next`, this would look like
    `npm dist-tag add carbon-components@10.6.1 latest`.
 
    - Manually check to see that the `latest` tags were updated for the packages
