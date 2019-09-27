@@ -37,6 +37,8 @@
   },
   "devDependencies": {
     "@carbon/bundler": "10.4.0",
+    "@carbon/test-utils": "10.3.0",
+    "change-case": "^3.1.0",
     "rimraf": "^2.6.2"
   },
   "eyeglass": {
