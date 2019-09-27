@@ -9872,7 +9872,7 @@ Accordion styles
     @include button-reset;
     color: $text-01;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: $accordion-justify-content;
     cursor: pointer;
     padding: rem(6px) 0;
