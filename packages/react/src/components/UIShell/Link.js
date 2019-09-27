@@ -7,6 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import filterDomProps from '../../tools/filterDomProps';
 
 /**
  * Link is a custom component that allows us to supporting rendering elements
@@ -16,7 +17,14 @@ import React from 'react';
  */
 const Link = React.forwardRef(function Link(props, ref) {
   const { element, ...rest } = props;
-  return React.createElement(element, { ...rest, ref });
+
+  let elementProps = rest;
+
+  if (typeof element === 'string') {
+    elementProps = filterDomProps(elementProps);
+  }
+
+  return React.createElement(element, { ...elementProps, ref });
 });
 
 const LinkPropTypes = {
