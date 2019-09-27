@@ -50,6 +50,30 @@ describe('_mixins.scss', () => {
     });
   });
 
+  it('should set token variables for the given theme', async () => {
+    const themeTests = Object.keys(themes).map(key => {
+      const variable = `$carbon--theme--${key}`;
+      const test = `
+        $feature-flags: (enable-css-custom-properties: true);
+        @include carbon--theme(${variable}) {
+          $t: test($field-01);
+        }
+      `;
+      return [variable, themes[key].interactive01, test];
+    });
+    const tests = themeTests
+      .map(([_variable, _expectedColor, test]) => test)
+      .join('\n');
+    const { calls } = await render(`
+      @import '../scss/themes';
+      ${tests}
+    `);
+    const colors = calls.map(([call]) => convert(call));
+    themeTests.forEach((_, i) => {
+      expect(convert(calls[i][0])).toBe(`${colors[i]}`);
+    });
+  });
+
   it('should reset token variables after using the theme', async () => {
     const { calls } = await render(`
       @import '../scss/themes';
@@ -70,6 +94,30 @@ describe('_mixins.scss', () => {
     const colors = calls.map(call => convert(call[0]));
     expect(colors[0]).toEqual(colors[2]);
     expect(colors[1]).toBe('#ffffff');
+  });
+
+  it('should reset token variables after using the theme with css custom properties', async () => {
+    const { calls } = await render(`
+      $feature-flags: (enable-css-custom-properties: true);
+
+      @import '../scss/themes';
+
+      $custom-theme: map-merge($carbon--theme--white, (
+        interactive-01: #ffffff,
+      ));
+
+      $t: test($interactive-01);
+
+      @include carbon--theme($custom-theme) {
+        $t: test($interactive-01);
+      }
+
+      $t: test($interactive-01);
+    `);
+
+    const colors = calls.map(([call]) => convert(call));
+    expect(colors[1]).toBe('var(--cds-interactive-01, #ffffff)');
+    expect(colors[2]).toBe(`var(--cds-interactive-01, ${colors[0]})`);
   });
 
   describe('@mixin custom-property', () => {

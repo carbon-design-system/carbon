@@ -19,8 +19,11 @@
   - [Body](#body)
   - [Footer](#footer)
   - [Examples](#examples)
-- [Publishing](#publishing)
-  - [Publishing older library versions](#publishing-older-library-versions)
+- [Maintainers](#maintainers)
+  - [Code Patterns](#code-patterns)
+    - [Deprecating a component](#deprecating-a-component)
+  - [Publishing](#publishing)
+    - [Publishing older library versions](#publishing-older-library-versions)
 - [FAQ](#faq)
     - [How do I install a dependency?](#how-do-i-install-a-dependency)
     - [CircleCI is failing saying that it cannot find a dependency in offline mode](#circleci-is-failing-saying-that-it-cannot-find-a-dependency-in-offline-mode)
@@ -262,9 +265,69 @@ considered a chore that we are doing to keep things up-to-date.
 
 </details>
 
-## Publishing
+## Maintainers
 
-### Publishing older library versions
+### Code Patterns
+
+#### Deprecating a component
+
+Mistakes totally happen, and sometimes we'll need to figure out a strategy to
+remove a component from the system. When this happens, we need to make sure that
+users of Carbon know that:
+
+1. The component is going to continue to work, deprecating a component does not
+   break any existing code
+2. That we're going to remove this component in the next major release to give
+   them enough time to prepare
+
+In certain cases, we'll also want to support bug fixes for deprecated
+components. Most of the time we will state that deprecated components will no
+longer receive priority fixes, but we'll still accept outside contributions.
+
+In order to deprecate a component in our React codebase, we have the following
+pattern that we tend to use:
+
+```jsx
+// SomeComponent.js
+// React imports
+import warning from 'warning';
+
+let didWarnAboutDeprecation = false;
+
+function SomeComponent() {
+  if (__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      'The `SomeComponent` component has been deprecated and will be removed ' +
+        'in the next major release of `carbon-components-react`'
+    );
+    didWarnAboutDeprecation = true;
+  }
+}
+```
+
+_Note: if available, you should add a closing sentence specifying what component
+to use instead, or share a link for more information. This may look like:_
+
+```jsx
+warning(
+  didWarnAboutDeprecation,
+  'The `SomeComponent` component has been deprecated and will be removed ' +
+    'in the next major release of `carbon-components-react`. Please use the ' +
+    '`SomeOtherComponent` component instead'
+);
+
+warning(
+  didWarnAboutDeprecation,
+  'The `SomeComponent` component has been deprecated and will be removed ' +
+    'in the next major release of `carbon-components-react`. Please visit ' +
+    'ibm.biz/<some-hash> for more information'
+);
+```
+
+### Publishing
+
+#### Publishing older library versions
 
 We offer ad-hoc backwards-support for older version of the system. This work is
 primarly driven by external contributors who may still need these older versions
