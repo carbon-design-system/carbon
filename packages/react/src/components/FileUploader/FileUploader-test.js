@@ -6,23 +6,81 @@
  */
 
 import React from 'react';
-import { CloseFilled16 } from '@carbon/icons-react';
-import FileUploader, { FileUploaderButton, Filename } from '../FileUploader';
-import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
-import { mount, shallow } from 'enzyme';
 import { settings } from 'carbon-components';
+import { Close16, CheckmarkFilled16 } from '@carbon/icons-react';
+import { mount, shallow } from 'enzyme';
+import FileUploader, { FileUploaderButton, Filename } from './FileUploader';
+import FileUploaderDropContainer from './FileUploaderDropContainer';
+import FileUploaderItem from './FileUploaderItem';
+import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
+import Loading from '../Loading';
 
 const { prefix } = settings;
 
 describe('Filename', () => {
-  const mountWrapper = mount(<Filename name={'trees.jpg'} />);
+  describe('renders as expected', () => {
+    const icons = [Loading, Close16, CheckmarkFilled16];
+    const statuses = ['uploading', 'edit', 'complete'];
+    statuses.forEach((status, i) => {
+      const wrapper = mount(
+        <Filename iconDescription="Upload complete" status={status} />
+      );
+
+      it('renders upload status icon as expected', () => {
+        expect(wrapper).toMatchSnapshot();
+        expect(wrapper.find(icons[i]).length).toBe(1);
+      });
+    });
+  });
+
+  describe('Check that functions passed in as props are called', () => {
+    let wrapper;
+    let mockProps;
+
+    beforeEach(() => {
+      mockProps = {
+        onClick: jest.fn(),
+        onKeyDown: jest.fn(),
+        status: 'complete',
+      };
+      wrapper = mount(<Filename {...mockProps} />);
+    });
+
+    it('should call onClick', () => {
+      wrapper.simulate('click');
+      expect(mockProps.onClick).toBeCalled();
+    });
+
+    it('should call onKeyDown', () => {
+      wrapper.simulate('keydown');
+      expect(mockProps.onKeyDown).toBeCalled();
+    });
+  });
 
   describe('click on edit icon (close--solid)', () => {
     it('should have a click event', () => {
+      const mountWrapper = mount(
+        <Filename iconDescription="Upload complete" status="complete" />
+      );
       const onClick = jest.fn();
       mountWrapper.setProps({ onClick, status: 'edit' });
-      mountWrapper.find(CloseFilled16).simulate('click');
+      mountWrapper.find(Close16).simulate('click');
       expect(onClick).toBeCalled();
+    });
+  });
+});
+
+describe('FileUploaderItem', () => {
+  const mountWrapper = mount(
+    <FileUploaderItem file={{ name: 'jd.jpg', status: 'edit' }} />
+  );
+
+  describe('click on edit icon (close--solid)', () => {
+    it('should have a click event', () => {
+      const onDelete = jest.fn();
+      mountWrapper.setProps({ onDelete, status: 'edit' });
+      mountWrapper.find(Close16).simulate('click');
+      expect(onDelete).toBeCalled();
     });
   });
 });
@@ -192,6 +250,67 @@ describe('FileUploader', () => {
       mountWrapper.setState({ filenameStatus: 'edit' });
       mountWrapper.setProps({ filenameStatus: 'uploading' });
       expect(mountWrapper.state().filenameStatus).toEqual('edit');
+    });
+  });
+});
+
+describe('FileUploaderDropContainer', () => {
+  const dropContainer = <FileUploaderDropContainer className="extra-class" />;
+  const mountWrapper = mount(dropContainer);
+
+  describe('Renders as expected with default props', () => {
+    it('renders with given className', () => {
+      expect(mountWrapper.hasClass('extra-class')).toBe(true);
+    });
+
+    it('renders with default labelText prop', () => {
+      expect(mountWrapper.props().labelText).toEqual('Add file');
+    });
+
+    it('renders with default multiple prop', () => {
+      expect(mountWrapper.props().multiple).toEqual(false);
+    });
+
+    it('renders with default accept prop', () => {
+      expect(mountWrapper.props().accept).toEqual([]);
+    });
+
+    it('disables file upload input', () => {
+      const wrapper = shallow(dropContainer);
+      wrapper.setProps({ disabled: true });
+      expect(wrapper.find('input').prop('disabled')).toEqual(true);
+    });
+
+    it('does not have default role', () => {
+      expect(mountWrapper.props().role).not.toBeTruthy();
+    });
+
+    it('resets the input value onClick', () => {
+      const input = mountWrapper.find(`.${prefix}--file-input`);
+      input.instance().value = '';
+      const evt = { target: { value: input.instance().value } };
+      input.simulate('click', evt);
+
+      expect(evt.target.value).toEqual(null);
+    });
+  });
+
+  describe('Unique id props', () => {
+    it('each FileUploaderDropContainer should have a unique ID', () => {
+      const mountedDropContainers = mount(
+        <div>
+          <FileUploaderDropContainer className="extra-class" />
+          <FileUploaderDropContainer className="extra-class" />
+        </div>
+      );
+      const firstDropContainer = mountedDropContainers
+        .find(FileUploaderDropContainer)
+        .at(0);
+      const lastDropContainer = mountedDropContainers
+        .find(FileUploaderDropContainer)
+        .at(1);
+      const isEqual = firstDropContainer === lastDropContainer;
+      expect(isEqual).toBe(false);
     });
   });
 });

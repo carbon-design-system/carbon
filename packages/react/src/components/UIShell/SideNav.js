@@ -30,10 +30,15 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     isFixedNav,
     isRail,
     isPersistent,
+    addFocusListeners,
+    addMouseListeners,
   } = props;
 
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useState(defaultExpanded);
+  const [expandedViaHoverState, setExpandedViaHoverState] = useState(
+    defaultExpanded
+  );
   const expanded = controlled ? expandedProp : expandedState;
   const handleToggle = (event, value = !expanded) => {
     if (!controlled) {
@@ -41,6 +46,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     }
     if (onToggle) {
       onToggle(event, value);
+    }
+    if (controlled || isRail) {
+      setExpandedViaHoverState(value);
     }
   };
 
@@ -56,7 +64,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   const className = cx({
     [`${prefix}--side-nav`]: true,
-    [`${prefix}--side-nav--expanded`]: expanded,
+    [`${prefix}--side-nav--expanded`]: expanded || expandedViaHoverState,
     [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav,
     [`${prefix}--side-nav--rail`]: isRail,
     [customClassName]: !!customClassName,
@@ -69,6 +77,33 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     [`${prefix}--side-nav__overlay-active`]: expanded,
   });
 
+  let childrenToRender = children;
+
+  // if a rail, pass the expansion state as a prop, so children can update themselves to match
+  if (isRail) {
+    childrenToRender = React.Children.map(children, child => {
+      // if we are controlled, check for if we have hovered over or the expanded state, else just use the expanded state (uncontrolled)
+      let currentExpansionState = controlled
+        ? expandedViaHoverState || expanded
+        : expanded;
+      return React.cloneElement(child, {
+        isSideNavExpanded: currentExpansionState,
+      });
+    });
+  }
+
+  let eventHandlers = {};
+
+  if (addFocusListeners) {
+    eventHandlers.onFocus = event => handleToggle(event, true);
+    eventHandlers.onBlur = event => handleToggle(event, false);
+  }
+
+  if (addMouseListeners) {
+    eventHandlers.onMouseEnter = () => handleToggle(true, true);
+    eventHandlers.onMouseLeave = () => handleToggle(false, false);
+  }
+
   return (
     <>
       {isFixedNav ? null : <div className={overlayClassName} />}
@@ -76,11 +111,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         ref={ref}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}
-        onFocus={event => handleToggle(event, true)}
-        onBlur={event => handleToggle(event, false)}
-        onMouseEnter={() => handleToggle(true)}
-        onMouseLeave={() => handleToggle(false)}>
-        {children}
+        {...eventHandlers}>
+        {childrenToRender}
       </nav>
     </>
   );
@@ -98,6 +130,8 @@ SideNav.defaultProps = {
   isChildOfHeader: true,
   isFixedNav: false,
   isPersistent: true,
+  addFocusListeners: true,
+  addMouseListeners: true,
 };
 
 SideNav.propTypes = {
@@ -158,6 +192,16 @@ SideNav.propTypes = {
    * Specify if the sideNav will be persistent above the lg breakpoint
    */
   isPersistent: PropTypes.bool,
+
+  /**
+   * Specify whether focus and blur listeners are added. They are by default.
+   */
+  addFocusListeners: PropTypes.bool,
+
+  /**
+   * Specify whether mouse entry/exit listeners are added. They are by default.
+   */
+  addMouseListeners: PropTypes.bool,
 };
 
 export default SideNav;

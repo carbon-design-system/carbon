@@ -9,10 +9,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import OverflowMenuItem from '../OverflowMenuItem';
 
-const TableToolbarAction = ({ children, ...rest }) => {
-  return <OverflowMenuItem itemText={children} {...rest} />;
-};
+const TableToolbarAction = React.forwardRef(({ children, ...rest }, ref) => {
+  return <OverflowMenuItem ref={ref} itemText={children} {...rest} />;
+});
 
+TableToolbarAction.displayName = 'TableToolbarAction';
 TableToolbarAction.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,

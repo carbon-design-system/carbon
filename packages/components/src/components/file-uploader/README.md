@@ -41,12 +41,14 @@ fileUploaderInstance.setState('complete', 1);
 
 #### Options
 
-| Option                | Default Selector                      | Description                                           |
-| --------------------- | ------------------------------------- | ----------------------------------------------------- |
-| `selectorInit`        | `[data-file]`                         | Element for initializing instance                     |
-| `selectorInput`       | `[input[type="file"].bx--file-input]` | Input element                                         |
-| `selectorContainer`   | `[data-file-container]`               | Element for injecting HTML for upload and edit states |
-| `selectorCloseButton` | `.bx--file-close`                     | Close button for removing filename nodes              |
+| Option                        | Default Selector                      | Description                                                   |
+| ----------------------------- | ------------------------------------- | ------------------------------------------------------------- |
+| `selectorInit`                | `[data-file]`                         | Element for initializing instance                             |
+| `selectorInput`               | `[input[type="file"].bx--file-input]` | Input element                                                 |
+| `selectorContainer`           | `[data-file-container]`               | Element for injecting HTML for upload and edit states         |
+| `selectorDropContainer`       | `[data-file-drop-container]`          | Element for drag files onto                                   |
+| `selectorOtherDropContainers` | `[data-drop-containers]`              | Element for applications to handle their own drag/drop effect |
+| `selectorCloseButton`         | `.bx--file-close`                     | Close button for removing filename nodes                      |
 
 #### Events
 
@@ -60,9 +62,9 @@ fileUploaderInstance.setState('complete', 1);
 
 #### Using and understanding File Uploader
 
-When files are added to File Uploader, a `change` event is fired. The `change`
-event triggers a private method to inject HTML into the `selectorContainer`
-element displaying all added filenames.
+When files are added to File Uploader, a `change` event or `drop` event is
+fired. The `change`/`drop` events trigger a private method to inject HTML into
+the `selectorContainer` element displaying all added filenames.
 
 ![file](https://cloud.githubusercontent.com/assets/4185382/24562175/7fcb4502-160f-11e7-8d9c-5ef4bdd67194.gif)
 

@@ -466,7 +466,7 @@ expansion:
 
 In practice, the combination of these components looks like the following:
 
-```js
+```jsx
 <DataTable
   rows={initialRows}
   headers={headers}
@@ -676,7 +676,7 @@ Table components for selection and for batch actions, which include:
 
 In practice, this looks like the following:
 
-```js
+```jsx
 <DataTable
   rows={initialRows}
   headers={headers}
@@ -695,7 +695,7 @@ In practice, this looks like the following:
         {/* make sure to apply getBatchActionProps so that the bar renders */}
         <TableBatchActions {...getBatchActionProps()}>
           {/* inside of you batch actinos, you can include selectedRows */}
-          <TableBatchAction onClick={batchActionClick(selectedRows)}>
+          <TableBatchAction primaryFocus onClick={batchActionClick(selectedRows)}>
             Ghost
           </TableBatchAction>
           <TableBatchAction onClick={batchActionClick(selectedRows)}>

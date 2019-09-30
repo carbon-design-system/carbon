@@ -114,9 +114,8 @@ const StoryContent = () => {
     <Content
       id="main-content"
       style={{
-        backgroundColor: '#f3f3f3',
         margin: '0',
-        height: '100vh',
+        height: '100%',
         width: '100%',
       }}>
       {content}
@@ -631,6 +630,187 @@ storiesOf('UI Shell', module)
             </SideNavLink>
             <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
               Link
+            </SideNavLink>
+          </SideNavItems>
+        </SideNav>
+        <StoryContent />
+      </>
+    ))
+  )
+  .add(
+    'SideNav Rail',
+    withReadme(readme, () => (
+      <>
+        <SideNav aria-label="Side navigation" isRail>
+          <SideNavItems>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                Link
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+              Link
+            </SideNavLink>
+            <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+              Link
+            </SideNavLink>
+          </SideNavItems>
+        </SideNav>
+        <StoryContent />
+      </>
+    ))
+  )
+  .add(
+    'SideNav Rail w/Header',
+    withReadme(readme, () => (
+      <HeaderContainer
+        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+          <>
+            <Header aria-label="IBM Platform Name">
+              <SkipToContent />
+              <HeaderMenuButton
+                aria-label="Open menu"
+                isCollapsible
+                onClick={onClickSideNavExpand}
+                isActive={isSideNavExpanded}
+              />
+              <HeaderName href="#" prefix="IBM">
+                [Platform]
+              </HeaderName>
+              <HeaderNavigation aria-label="IBM [Platform]">
+                <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+                <HeaderMenu aria-label="Link 4">
+                  <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+                </HeaderMenu>
+              </HeaderNavigation>
+              <HeaderGlobalBar>
+                <HeaderGlobalAction
+                  aria-label="Search"
+                  onClick={action('search click')}>
+                  <Search20 />
+                </HeaderGlobalAction>
+                <HeaderGlobalAction
+                  aria-label="Notifications"
+                  onClick={action('notification click')}>
+                  <Notification20 />
+                </HeaderGlobalAction>
+                <HeaderGlobalAction
+                  aria-label="App Switcher"
+                  onClick={action('app-switcher click')}>
+                  <AppSwitcher20 />
+                </HeaderGlobalAction>
+              </HeaderGlobalBar>
+              <SideNav
+                aria-label="Side navigation"
+                isRail
+                expanded={isSideNavExpanded}>
+                <SideNavItems>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                    Link
+                  </SideNavLink>
+                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                    Link
+                  </SideNavLink>
+                </SideNavItems>
+              </SideNav>
+            </Header>
+            <StoryContent />
+          </>
+        )}
+      />
+    ))
+  )
+  .add(
+    'SideNav w/ large side nav items',
+    withReadme(readme, () => (
+      <>
+        <SideNav
+          expanded={true}
+          isChildOfHeader={false}
+          aria-label="Side navigation">
+          <SideNavItems>
+            <SideNavMenu title="Large menu" large>
+              <SideNavMenuItem href="javascript:void(0)">
+                Menu 1
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                Menu 2
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                Menu 3
+              </SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavLink href="javascript:void(0)" large>
+              Large link
+            </SideNavLink>
+            <SideNavMenu renderIcon={Fade16} title="Large menu w/icon" large>
+              <SideNavMenuItem href="javascript:void(0)">
+                Menu 1
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                Menu 2
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                Menu 3
+              </SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavLink renderIcon={Fade16} href="javascript:void(0)" large>
+              Large link w/icon
             </SideNavLink>
           </SideNavItems>
         </SideNav>
