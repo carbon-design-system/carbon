@@ -161,6 +161,8 @@ export default class Modal extends Component {
   outerModal = React.createRef();
   innerModal = React.createRef();
   modalInstanceId = `modal-${getInstanceId()}`;
+  modalLabelId = `${prefix}--modal-header__label--${this.modalInstanceId}`;
+  modalHeadingId = `${prefix}--modal-header__heading--${this.modalInstanceId}`;
 
   elementOrParentIsFloatingMenu = target => {
     const {
@@ -331,13 +333,11 @@ export default class Modal extends Component {
       </button>
     );
 
-    const ariaLabel = modalLabel
-      ? null
-      : this.props['aria-label'] || modalAriaLabel || modalHeading;
-
+    const ariaLabel =
+      modalLabel || this.props['aria-label'] || modalAriaLabel || modalHeading;
     const getAriaLabelledBy = modalLabel
-      ? `${prefix}--modal-header__label--${this.modalInstanceId}`
-      : `${prefix}--modal-header__heading--${this.modalInstanceId}`;
+      ? this.modalLabelId
+      : this.modalHeadingId;
 
     const hasScrollingContentProps = hasScrollingContent
       ? {
@@ -359,13 +359,13 @@ export default class Modal extends Component {
           {passiveModal && modalButton}
           {modalLabel && (
             <h2
-              id={`${prefix}--modal-header__label--${this.modalInstanceId}`}
+              id={this.modalLabelId}
               className={`${prefix}--modal-header__label`}>
               {modalLabel}
             </h2>
           )}
           <h3
-            id={`${prefix}--modal-header__heading--${this.modalInstanceId}`}
+            id={this.modalHeadingId}
             className={`${prefix}--modal-header__heading`}>
             {modalHeading}
           </h3>
