@@ -41,7 +41,7 @@ const props = {
   modalBody: () => ({
     hasScrollingContent: boolean(
       'Modal contains scrollable content (hasScrollingContent)',
-      false
+      true
     ),
     'aria-label': text('ARIA label for content', 'Example modal content'),
   }),

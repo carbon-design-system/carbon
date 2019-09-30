@@ -152,6 +152,7 @@ export default class Modal extends Component {
     modalLabel: '',
     selectorPrimaryFocus: '[data-modal-primary-focus]',
     focusTrap: true,
+    hasScrollingContent: true,
   };
 
   button = React.createRef();

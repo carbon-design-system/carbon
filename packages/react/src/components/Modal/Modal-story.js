@@ -28,7 +28,7 @@ const props = () => ({
   focusTrap: boolean('Trap focus (focusTrap)', false),
   hasScrollingContent: boolean(
     'Modal contains scrollable content (hasScrollingContent)',
-    false
+    true
   ),
   modalHeading: text('Modal heading (modalHeading)', 'Modal heading'),
   modalLabel: text('Optional label (modalLabel)', 'Label'),
