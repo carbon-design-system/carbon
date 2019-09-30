@@ -14,8 +14,10 @@ import FocusTrap from 'focus-trap-react';
 import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
+const getInstanceId = setupGetInstanceId();
 
 export default class Modal extends Component {
   static propTypes = {
@@ -158,6 +160,7 @@ export default class Modal extends Component {
   button = React.createRef();
   outerModal = React.createRef();
   innerModal = React.createRef();
+  modalInstanceId = `modal-${getInstanceId()}`;
 
   elementOrParentIsFloatingMenu = target => {
     const {
@@ -332,16 +335,9 @@ export default class Modal extends Component {
       ? null
       : this.props['aria-label'] || modalAriaLabel || modalHeading;
 
-    const getAriaLabelledBy = (() => {
-      const ariaLabelledBy = [];
-      if (modalLabel) {
-        ariaLabelledBy.push(
-          `${prefix}--modal-header__label`,
-          `${prefix}--modal-header__heading`
-        );
-      }
-      return ariaLabelledBy.length ? ariaLabelledBy.join(' ') : null;
-    })();
+    const getAriaLabelledBy = modalLabel
+      ? `${prefix}--modal-header__label--${this.modalInstanceId}`
+      : `${prefix}--modal-header__heading--${this.modalInstanceId}`;
 
     const hasScrollingContentProps = hasScrollingContent
       ? {
@@ -358,19 +354,27 @@ export default class Modal extends Component {
         role="dialog"
         className={`${prefix}--modal-container`}
         aria-label={ariaLabel}
-        aria-labelledby={getAriaLabelledBy}
         aria-modal="true">
         <div className={`${prefix}--modal-header`}>
           {passiveModal && modalButton}
           {modalLabel && (
-            <h2 className={`${prefix}--modal-header__label`}>{modalLabel}</h2>
+            <h2
+              id={`${prefix}--modal-header__label--${this.modalInstanceId}`}
+              className={`${prefix}--modal-header__label`}>
+              {modalLabel}
+            </h2>
           )}
-          <h3 className={`${prefix}--modal-header__heading`}>{modalHeading}</h3>
+          <h3
+            id={`${prefix}--modal-header__heading--${this.modalInstanceId}`}
+            className={`${prefix}--modal-header__heading`}>
+            {modalHeading}
+          </h3>
           {!passiveModal && modalButton}
         </div>
         <div
           className={`${prefix}--modal-content`}
-          {...hasScrollingContentProps}>
+          {...hasScrollingContentProps}
+          aria-labelledby={getAriaLabelledBy}>
           {this.props.children}
         </div>
         {!passiveModal && (
