@@ -207,7 +207,10 @@ $list-box-menu-width: rem(300px);
     border-width: 0;
   }
 
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--disabled:hover,
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--disabled:hover {
+    background-color: transparent;
+  }
+
   .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded:hover {
     background-color: $field-02;
   }
