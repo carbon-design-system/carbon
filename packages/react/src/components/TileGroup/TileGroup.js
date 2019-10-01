@@ -127,9 +127,7 @@ export default class TileGroup extends React.Component {
     return (
       <fieldset className={className} disabled={disabled}>
         {this.renderLegend(legend)}
-        <div>
-          {this.getRadioTiles()}
-        </div>
+        <div>{this.getRadioTiles()}</div>
       </fieldset>
     );
   }

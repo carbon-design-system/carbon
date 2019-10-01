@@ -2,8 +2,8 @@ name: Nightly Release
 
 on:
   schedule:
-    # Run every day at 01:00
-    - cron: '0 1 * * *'
+    # Run every week day at 01:00 (24hr format)
+    - cron: '0 1 * * 1-5'
 
 jobs:
   release:

@@ -10,11 +10,22 @@ import PropTypes from 'prop-types';
 import ToolbarSearch from '../ToolbarSearch';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import warning from 'warning';
 
 const { prefix } = settings;
 
+let didWarnAboutDeprecation = false;
+
 const Toolbar = ({ children, className, ...other }) => {
   const wrapperClasses = classNames(`${prefix}--toolbar`, className);
+
+  if (__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      'The `ComponentName` component has been deprecated and will be removed in the next major release of `carbon-components-react`'
+    );
+    didWarnAboutDeprecation = true;
+  }
 
   return (
     <div className={wrapperClasses} {...other}>

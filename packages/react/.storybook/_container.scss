@@ -15,20 +15,20 @@ $prefix: 'bx';
 // Use e.g. `@import '~carbon-components/scss/globals/scss/styles.scss'` instead.
 @import '~carbon-components/src/globals/scss/styles.scss'; // SEE THE NOTE ABOVE
 
-@if mixin-exists(carbon--theme--custom-properties) {
+@if mixin-exists(carbon--theme) {
   :root {
-    @include carbon--theme--custom-properties($carbon--theme--white);
+    @include carbon--theme($carbon--theme--white, true);
   }
 
   :root[storybook-carbon-theme='g10'] {
-    @include carbon--theme--custom-properties($carbon--theme--g10);
+    @include carbon--theme($carbon--theme--g10, true);
   }
 
   :root[storybook-carbon-theme='g90'] {
-    @include carbon--theme--custom-properties($carbon--theme--g90);
+    @include carbon--theme($carbon--theme--g90, true);
   }
 
   :root[storybook-carbon-theme='g100'] {
-    @include carbon--theme--custom-properties($carbon--theme--g100);
+    @include carbon--theme($carbon--theme--g100, true);
   }
 }
