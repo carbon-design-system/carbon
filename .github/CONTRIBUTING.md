@@ -4,7 +4,7 @@
 
 Before contributing to Carbon, you should make sure you have the following tools installed:
 
-- [node(v10 or higher)](https://nodejs.org/en/download/)(you can download it
+- [Node.js](https://nodejs.org/en/download/) v10 or above
   here or follow their installation through a package manager
   [here](https://nodejs.org/en/download/package-manager/))
   - We recommend using
