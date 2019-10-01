@@ -11,7 +11,7 @@ Before contributing to Carbon, you should make sure you have the following tools
     [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md) as your version
     manager for Node.
 - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-- [yarn](https://yarnpkg.com/en/docs/install#mac-stable)
+- [yarn](https://yarnpkg.com/en/docs/install)
 
 You will also need to have a GitHub account. Head over to
 [github.com](https://github.com/) to make an account.
