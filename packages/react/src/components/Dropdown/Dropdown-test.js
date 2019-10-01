@@ -66,8 +66,13 @@ describe('Dropdown', () => {
   });
 
   describe('title', () => {
-    const wrapper = mount(<Dropdown titleText="Email Input" {...mockProps} />);
-    const renderedLabel = wrapper.find('label');
+    let wrapper;
+    let renderedLabel;
+
+    beforeEach(() => {
+      wrapper = mount(<Dropdown titleText="Email Input" {...mockProps} />);
+      renderedLabel = wrapper.find('label');
+    });
 
     it('renders a title', () => {
       expect(renderedLabel.length).toBe(1);
