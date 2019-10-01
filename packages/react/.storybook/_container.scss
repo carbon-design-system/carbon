@@ -8,12 +8,15 @@
 $prefix: 'bx';
 $css--reset: true;
 
-@import '~carbon-components/scss/globals/scss/css--body';
+// We use the `data` option with source-loader to prevent these from being imported by components.
+// We import them once here instead.
 
 // IMPORTANT: This import path should _not_ be used outside our source tree
 // as `src` directory is _not_ meant to be shipped in our NPM package.
-// Use e.g. `@import '~carbon-components/scss/globals/scss/styles.scss'` instead.
-// @import '~carbon-components/src/globals/scss/styles.scss'; // SEE THE NOTE ABOVE
+// Use e.g. `@import '~carbon-components/scss/globals/css--x'` instead.
+@import '~carbon-components/src/globals/scss/css--body';
+@import '~carbon-components/src/globals/scss/css--helpers';
+@import '~carbon-components/src/globals/scss/css--font-face';
 
 @if mixin-exists(carbon--theme) {
   :root {

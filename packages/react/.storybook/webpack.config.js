@@ -51,6 +51,8 @@ const styleLoaders = [
       includePaths: [path.resolve(__dirname, '..', 'node_modules')],
       data: `
         $css--reset: false;
+        $css--helpers: false;
+        $css--font-face: false;
         $feature-flags: (
           ui-shell: true,
           enable-css-custom-properties: true,
