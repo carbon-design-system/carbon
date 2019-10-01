@@ -83,22 +83,42 @@ To create a new branch, ensure you are in your forked branch in your terminal
 and run:
 
 ```sh
-$ git pull origin master
-$ git checkout -b {your-branch-name}
+git pull origin master
+git checkout -b {your-branch-name}
 ```
 
-### 5. Start the development server
+### 5. Build and start the development server
 
-To start your development server, run:
+From the root directory of your fork, run:
+
+```sh
+# To install the project's dependies
+yarn
+
+# To build the project:
+yarn build
+```
+
+To get your development server running and to start coding, you'll need to
+navigate to the package in which you will be working. For example, if you plan
+on contributing to our React components, you can enter in your command line
+`cd packages/react` and then run:
 
 ```sh
 
-yarn dev
+yarn storybook
 ```
 
-Once it's done building, you can start editing source code or creating new
-components. The system is set up to automatically bundle your changes/additions.
-Visit http://localhost:3000 to see the changes happen on the fly.
+This will start a development server where you can see any changes you are
+making to components in our react components Storybook.
+
+The command to start the server will differ depending on which package you are
+working within. To find out which command you'll need to run, you can check the
+`scripts` in the package's `package.json`.
+
+Once it's done building, you can edit source code or create new components. The
+system is set up to automatically bundle your changes/additions. Visit
+http://localhost:9000 to see the changes happen on the fly.
 
 For information about our coding style, such as how we name our classes and our
 file structure, go to our
@@ -132,8 +152,8 @@ contributors and maintainers, **push your commits to your fork**:
 To do so, go to your terminal and run:
 
 ```sh
-$ git add -A
-$ git commit -m "YOUR  COMMIT MESSAGE HERE"
+git add -A
+git commit -m "YOUR  COMMIT MESSAGE HERE"
 ```
 
 #### Commit tip
