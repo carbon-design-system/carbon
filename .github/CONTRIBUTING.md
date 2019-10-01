@@ -1,17 +1,5 @@
 # Contributing
 
-- Setup instructions
-  - Node v10.x (recommend nvm)
-  - git
-  - Yarn
-  - Editor of choice
-- GitHub instructions
-  - How to fork
-    - Add upstream
-  - Making changes in a branch
-    - Link out to developer handbook for code practices
-  - How to make a pull request
-
 ## Prerequisites
 
 To contribute to Carbon, you'll need to install:
@@ -135,8 +123,9 @@ For more extensive testing information, see our
 [search](https://github.com/IBM/carbon-components/issues) the issues to see if a
 similar issue has already been submitted. If a similar issue has been submitted,
 assign yourself or ask to be assigned to the issue by posting a comment. If the
-issue does not exist, create a new issue. We will not accept pull requests
-without an associated issue.
+issue does not exist, please make a new issue. Issues give us context about what
+you are contributing and expedite the process to getting your contributions
+merged into Carbon. It's a win for everybody :tada:
 
 When you're at a good stopping place and you're ready for feedback from other
 contributors and maintainers, **push your commits to your fork**:
