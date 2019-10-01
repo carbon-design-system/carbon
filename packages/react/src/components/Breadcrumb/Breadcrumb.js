@@ -25,9 +25,9 @@ const Breadcrumb = ({
   });
 
   return (
-    <nav className={className} {...rest}>
+    <ol className={className} {...rest}>
       {children}
-    </nav>
+    </ol>
   );
 };
 

@@ -32,11 +32,11 @@ const BreadcrumbItem = ({
 
   if (typeof children === 'string' && href) {
     return (
-      <div className={className} {...rest}>
+      <li className={className} {...rest}>
         <Link href={href} aria-current={ariaCurrent}>
           {children}
         </Link>
-      </div>
+      </li>
     );
   }
 
