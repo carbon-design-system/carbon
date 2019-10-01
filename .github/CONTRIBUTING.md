@@ -1,6 +1,6 @@
 # Contributing
 
-## Carbon contribution model
+# Carbon contribution model
 
 Carbon Design System is an **open source** project at IBM. We pride ourselves in
 open and inclusive design and development. If you're wondering more about our
