@@ -12,8 +12,8 @@ installed:
     [`nvm`](https://github.com/nvm-sh/nvm) to help manage different versions of
     Node.js [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md) as your
     version manager for Node.
-- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-- [yarn](https://yarnpkg.com/en/docs/install)
+- Git
+- [Yarn](https://yarnpkg.com/en/docs/install)
 
 You'll also need a code editor to make changes to Carbon. There are many to
 choose from but some popular options are
