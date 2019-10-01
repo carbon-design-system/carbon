@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-$css--font-face: true;
+$prefix: 'bx';
 $css--reset: true;
 
-$prefix: 'bx';
+@import '~carbon-components/scss/globals/scss/css--body';
 
 // IMPORTANT: This import path should _not_ be used outside our source tree
 // as `src` directory is _not_ meant to be shipped in our NPM package.
