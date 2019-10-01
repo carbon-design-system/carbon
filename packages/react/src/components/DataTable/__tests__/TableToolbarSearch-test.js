@@ -20,4 +20,10 @@ describe('DataTable.TableToolbarSearch', () => {
     );
     expect(wrapper).toMatchSnapshot();
   });
+  it('should render without specifying an id', () => {
+    const wrapper = mount(
+      <TableToolbarSearch className="custom-class" onChange={jest.fn()} />
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
 });

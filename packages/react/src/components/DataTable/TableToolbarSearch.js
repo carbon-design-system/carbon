@@ -90,7 +90,7 @@ const TableToolbarSearch = ({
         small
         className={className}
         value={value}
-        id={typeof id !== 'undefined' ? id : uniqueId}
+        id={typeof id !== 'undefined' ? id : uniqueId.toString()}
         aria-hidden={!expanded}
         labelText={labelText || t('carbon.table.toolbar.search.label')}
         placeHolderText={
