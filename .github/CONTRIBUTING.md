@@ -109,7 +109,7 @@ From the root directory of your fork, run:
 
 ```sh
 # To install the project's dependies
-yarn
+yarn install --offline
 
 # To build the project:
 yarn build
