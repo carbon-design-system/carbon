@@ -2,10 +2,11 @@
 
 ## Prerequisites
 
-Before contributing to Carbon, you should make sure you have the following tools installed:
+Before contributing to Carbon, you should make sure you have the following tools
+installed:
 
-- [Node.js](https://nodejs.org/en/download/) v10 or above
-  here or follow their installation through a package manager
+- [Node.js](https://nodejs.org/en/download/) v10 or above here or follow their
+  installation through a package manager
   [here](https://nodejs.org/en/download/package-manager/))
   - We recommend using
     [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md) as your version
@@ -13,15 +14,12 @@ Before contributing to Carbon, you should make sure you have the following tools
 - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [yarn](https://yarnpkg.com/en/docs/install)
 
-You will also need to have a GitHub account. Head over to
-[github.com](https://github.com/) to make an account.
-
-Finally you'll need a code editor to make changes to Carbon. There are many to
+You'll also need a code editor to make changes to Carbon. There are many to
 choose from but some popular options are
 [VSCode](https://code.visualstudio.com/), [Atom](https://atom.io), and
 [Sublime](https://www.sublimetext.com/).
 
-With that all done, you're ready to start contributing to Carbon!
+With that all in place, you're ready to start contributing to Carbon!
 
 ## Start contributing
 
