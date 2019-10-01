@@ -8,9 +8,10 @@ installed:
 - [Node.js](https://nodejs.org/en/download/) v10 or above here or follow their
   installation through a package manager
   [here](https://nodejs.org/en/download/package-manager/))
-  - If you're on macOS, we recommend using [`nvm`](https://github.com/nvm-sh/nvm) to help manage different versions of Node.js 
-    [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md) as your version
-    manager for Node.
+  - If you're on macOS, we recommend using
+    [`nvm`](https://github.com/nvm-sh/nvm) to help manage different versions of
+    Node.js [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md) as your
+    version manager for Node.
 - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [yarn](https://yarnpkg.com/en/docs/install)
 
