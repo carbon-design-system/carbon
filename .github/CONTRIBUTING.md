@@ -9,7 +9,12 @@ interest! This project is made possible not just by the core Carbon team, but
 also by several community members who have invested their own time to give back
 to the Carbon community.
 
-For our Contribution Code of Conduct, see our [developer handbook]()
+## Code of conduct
+
+We value all of our community members, and thus want to foster a positive
+contributing environment. Please take a look at our
+[code of conduct](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md#carbon-code-of-conduct)
+before engaging in our workspaces.
 
 ## Prerequisites
 
