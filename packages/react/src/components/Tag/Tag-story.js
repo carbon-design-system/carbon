@@ -27,6 +27,7 @@ const props = {
     ),
     disabled: boolean('Disabled (disabled)', false),
     role: 'listitem',
+    titleText: 'Clear Selection',
   }),
   filter() {
     return { ...this.regular(), onClick: action('onClick') };
