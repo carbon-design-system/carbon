@@ -6,6 +6,7 @@ exports[`Breadcrumb should render 1`] = `
 >
   <nav
     aria-label="Breadcrumb"
+    className=""
   >
     <ol
       className="bx--breadcrumb parent-class"
@@ -38,6 +39,7 @@ exports[`Breadcrumb should support rendering the current page 1`] = `
 <Breadcrumb>
   <nav
     aria-label="Breadcrumb"
+    className=""
   >
     <ol
       className="bx--breadcrumb"
@@ -106,6 +108,7 @@ exports[`Breadcrumb should support rendering the current page 2`] = `
 <Breadcrumb>
   <nav
     aria-label="Breadcrumb"
+    className=""
   >
     <ol
       className="bx--breadcrumb"
@@ -178,6 +181,7 @@ exports[`Breadcrumb should support rendering without a trailing slash 1`] = `
 >
   <nav
     aria-label="Breadcrumb"
+    className=""
   >
     <ol
       className="bx--breadcrumb bx--breadcrumb--no-trailing-slash"
