@@ -69,9 +69,9 @@ storiesOf('Accordion', module)
         </AccordionItem>
         <AccordionItem
           title={
-            <h4>
+            <span>
               Section 4 title (<em>the title can be a node</em>)
-            </h4>
+            </span>
           }
           {...props}>
           <p>
