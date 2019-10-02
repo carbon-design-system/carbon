@@ -14,7 +14,7 @@
     "nohoist": []
   },
   "scripts": {
-    "build": "lerna run build --stream --prefix --npm-client yarn",
+    "build": "lerna run build --stream --prefix --npm-client yarn && cd packages/icons-angular && yarn build:full",
     "build:local": "lerna run build --stream --prefix --npm-client yarn && cd packages/icons-angular && yarn build:local",
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
