@@ -15,6 +15,7 @@ const { prefix } = settings;
 const Breadcrumb = ({
   children,
   className: customClassName,
+  classNameNav: customClassNameNav,
   noTrailingSlash,
   ...rest
 }) => {
@@ -24,8 +25,12 @@ const Breadcrumb = ({
     [customClassName]: !!customClassName,
   });
 
+  const classNameNav = cx({
+    [customClassNameNav]: !!customClassNameNav,
+  });
+
   return (
-    <nav aria-label="Breadcrumb">
+    <nav className={classNameNav} aria-label="Breadcrumb">
       <ol className={className} {...rest}>
         {children}
       </ol>
@@ -43,6 +48,11 @@ Breadcrumb.propTypes = {
    * Specify an optional className to be applied to the container node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify an optional className to be applied to the outer container node
+   */
+  classNameNav: PropTypes.string,
 
   /**
    * Optional prop to omit the trailing slash for the breadcrumbs
