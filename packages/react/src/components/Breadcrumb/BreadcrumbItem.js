@@ -32,21 +32,21 @@ const BreadcrumbItem = ({
 
   if (typeof children === 'string' && href) {
     return (
-      <div className={className} {...rest}>
+      <li className={className} {...rest}>
         <Link href={href} aria-current={ariaCurrent}>
           {children}
         </Link>
-      </div>
+      </li>
     );
   }
 
   return (
-    <div className={className} {...rest}>
+    <li className={className} {...rest}>
       {React.cloneElement(children, {
         'aria-current': ariaCurrent,
         className: `${prefix}--link`,
       })}
-    </div>
+    </li>
   );
 };
 

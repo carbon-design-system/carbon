@@ -25,8 +25,10 @@ const Breadcrumb = ({
   });
 
   return (
-    <nav className={className} {...rest}>
-      {children}
+    <nav aria-label="Breadcrumb">
+      <ol className={className} {...rest}>
+        {children}
+      </ol>
     </nav>
   );
 };
