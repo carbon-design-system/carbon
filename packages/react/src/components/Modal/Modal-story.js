@@ -80,10 +80,7 @@ storiesOf('Modal', module)
     'Trap Focus',
     () => (
       <>
-        <Modal
-          {...props()}
-          selectorPrimaryFocus="#text-input-2"
-          focusTrap={true}>
+        <Modal {...props()} selectorPrimaryFocus="#text-input-2">
           <TextInput
             id="text-input-1"
             labelText="Text Input 1"
