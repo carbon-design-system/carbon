@@ -7,9 +7,12 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import classNames from 'classnames';
+import { settings } from 'carbon-components';
 import InlineCheckbox from '../InlineCheckbox';
 import RadioButton from '../RadioButton';
 
+const { prefix } = settings;
 const TableSelectRow = ({
   ariaLabel,
   checked,
@@ -28,8 +31,11 @@ const TableSelectRow = ({
     disabled,
   };
   const InlineInputComponent = radio ? RadioButton : InlineCheckbox;
+  const tableSelectRowClasses = classNames(`${prefix}--table-column-checkbox`, {
+    [className]: className,
+  });
   return (
-    <td className={className}>
+    <td className={tableSelectRowClasses}>
       <InlineInputComponent
         {...selectionInputProps}
         {...(radio && {
