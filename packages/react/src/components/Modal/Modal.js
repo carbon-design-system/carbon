@@ -249,7 +249,7 @@ export default class Modal extends Component {
     if (!this.props.open) {
       return;
     }
-    if (!this.props.focusTrap) {
+    if (this.props.selectorPrimaryFocus || !this.props.focusTrap) {
       this.focusButton(this.innerModal.current);
     }
   }
@@ -382,7 +382,7 @@ export default class Modal extends Component {
       </div>
     );
 
-    return !focusTrap ? (
+    return this.props.selectorPrimaryFocus || !focusTrap ? (
       modal
     ) : (
       // `<FocusTrap>` has `active: true` in its `defaultProps`
