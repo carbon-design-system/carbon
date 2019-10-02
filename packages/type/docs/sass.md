@@ -64,6 +64,8 @@
   - [✅strip-unit [function]](#strip-unit-function)
   - [✅fluid-type [mixin]](#fluid-type-mixin)
   - [✅fluid-type-size [mixin]](#fluid-type-size-mixin)
+  - [❌custom-property-prefix [variable]](#custom-property-prefix-variable)
+  - [❌custom-properties [mixin]](#custom-properties-mixin)
   - [✅carbon--type-style [mixin]](#carbon--type-style-mixin)
 
 <!-- tocstop -->
@@ -2934,6 +2936,45 @@ Computes the fluid `font-size` for a given type style and breakpoint
 - **Used by**:
   - [fluid-type [mixin]](#fluid-type-mixin)
 
+### ❌custom-property-prefix [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$custom-property-prefix: 'cds';
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Used by**:
+  - [custom-properties [mixin]](#custom-properties-mixin)
+
+### ❌custom-properties [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin custom-properties() {
+  @each $property, $value in $value {
+    #{$property}: var(
+      --#{$custom-property-prefix}-#{$name}-#{$property},
+      #{$value}
+    );
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [custom-property-prefix [variable]](#custom-property-prefix-variable)
+- **Used by**:
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+
 ### ✅carbon--type-style [mixin]
 
 Helper mixin to include the styles for a given token in any selector in your
@@ -2962,9 +3003,15 @@ fixed contexts.
   @if $fluid == true and map-has-key($token, 'breakpoints') {
     @include fluid-type($token, $breakpoints);
   } @else {
-    // Otherwise, we just include all the property declarations directly on the
-    // selector
-    @include properties(map-remove($token, 'breakpoints'));
+    @if global-variable-exists('feature-flags') and
+      map-get($feature-flags, 'enable-css-custom-properties')
+    {
+      @include custom-properties($name, $token);
+    } @else {
+      // Otherwise, we just include all the property declarations directly on the
+      // selector
+      @include properties(map-remove($token, 'breakpoints'));
+    }
   }
 }
 ```
@@ -2982,6 +3029,7 @@ fixed contexts.
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [fluid-type [mixin]](#fluid-type-mixin)
+  - [custom-properties [mixin]](#custom-properties-mixin)
   - [properties [mixin]](#properties-mixin)
   - [tokens [variable]](#tokens-variable)
 - **Used by**:
