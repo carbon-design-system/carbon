@@ -220,12 +220,12 @@ export default class Modal extends Component {
   }
 
   initialFocus = focusContainerElement => {
-    const primaryFocusElement = focusContainerElement
-      ? focusContainerElement.querySelector(this.props.selectorPrimaryFocus)
-      : null;
-    if (primaryFocusElement) {
-      return primaryFocusElement;
+    if (!focusContainerElement && this.props.focusTrap) {
+      return document.querySelector(
+        `.bx--modal.is-visible ${this.props.selectorPrimaryFocus}`
+      );
     }
+
     return this.button && this.button.current;
   };
 
