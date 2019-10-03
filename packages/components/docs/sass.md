@@ -13880,9 +13880,6 @@ Checkbox styles
 
 ```scss
 @mixin checkbox() {
-  .#{$prefix}--checkbox-wrapper {
-    @include reset;
-  }
 
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
@@ -13914,6 +13911,7 @@ Checkbox styles
   // creating our own checkbox style, we'll need to position this in order to
   // accomodate the spacing needed for the checkbox.
   .#{$prefix}--checkbox-label {
+    @include reset;
     @include type-style('body-short-01');
 
     line-height: 1.5rem;
@@ -13927,6 +13925,7 @@ Checkbox styles
 
   // Spacing for presentational checkbox
   .#{$prefix}--checkbox-label::before {
+    box-sizing: border-box;
     content: '';
 
     // According to the spec, we'll want the bounding box for our checkbox to
@@ -13956,8 +13955,8 @@ Checkbox styles
     position: absolute;
     left: rem(6px);
     top: rem(8px);
-    width: rem(9px);
-    height: rem(5px);
+    width: rem(7px);
+    height: rem(3px);
     background: none;
     border-left: 2px solid $inverse-01;
     border-bottom: 2px solid $inverse-01;
