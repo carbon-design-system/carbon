@@ -46,8 +46,8 @@
   // creating our own checkbox style, we'll need to position this in order to
   // accomodate the spacing needed for the checkbox.
   .#{$prefix}--checkbox-label {
-    @include type-style('body-short-01');
     @include reset;
+    @include type-style('body-short-01');
     line-height: 1.5rem;
     position: relative;
     display: flex;
