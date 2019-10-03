@@ -32,6 +32,7 @@ describe('ComboBox', () => {
 
   beforeEach(() => {
     mockProps = {
+      id: 'test-combobox',
       items: generateItems(5, generateGenericItem),
       onChange: jest.fn(),
       placeholder: 'Filter...',
