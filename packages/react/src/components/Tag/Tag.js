@@ -31,7 +31,7 @@ const Tag = ({
   className,
   type,
   filter,
-  titleText,
+  title,
   disabled,
   ...other
 }) => {
@@ -43,11 +43,11 @@ const Tag = ({
   return filter ? (
     <span
       className={tagClasses}
-      title={titleText ? titleText : 'Clear filter'}
+      title={title ? title : 'Clear filter'}
       tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
       {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
-      <Close16 aria-label={titleText ? titleText : 'Clear filter'} />
+      <Close16 aria-label={title ? title : 'Clear filter'} />
     </span>
   ) : (
     <span className={tagClasses} {...other}>
@@ -85,7 +85,7 @@ Tag.propTypes = {
   /**
    * Text to show on clear filters
    */
-  titleText: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export const types = Object.keys(TYPES);
