@@ -13,6 +13,7 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 const Breadcrumb = ({
+  ariaLabel,
   children,
   className: customClassName,
   noTrailingSlash,
@@ -25,7 +26,7 @@ const Breadcrumb = ({
   });
 
   return (
-    <nav aria-label="Breadcrumb">
+    <nav aria-label={ariaLabel ? ariaLabel : 'Breadcrumb'}>
       <ol className={className} {...rest}>
         {children}
       </ol>
@@ -34,6 +35,11 @@ const Breadcrumb = ({
 };
 
 Breadcrumb.propTypes = {
+  /**
+   * Specify the label for the control
+   */
+  ariaLabel: PropTypes.string,
+
   /**
    * Pass in the BreadcrumbItem's for your Breadcrumb
    */
