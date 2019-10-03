@@ -1,7 +1,6 @@
 {
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "@carbon/icons-angular",
-  "private": true,
   "description": "Angular components for icons in digital and software products using the Carbon Design System",
   "version": "10.6.0",
   "license": "Apache-2.0",
@@ -24,7 +23,8 @@
     "react"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "directory": "dist"
   },
   "scripts": {
     "build": "exit 0;",
