@@ -13880,7 +13880,6 @@ Checkbox styles
 
 ```scss
 @mixin checkbox() {
-
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
     margin-bottom: rem(8px);

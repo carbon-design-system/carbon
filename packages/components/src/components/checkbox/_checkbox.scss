@@ -61,7 +61,7 @@
   .#{$prefix}--checkbox-label::before {
     content: '';
 
-    // Required `$css--reset: true` cannot currently apply to this `::before`.
+    // Required because `$css--reset: true` cannot currently apply to this `::before`.
     box-sizing: border-box;
 
     // According to the spec, we'll want the bounding box for our checkbox to
@@ -89,7 +89,7 @@
   .#{$prefix}--checkbox-label::after {
     content: '';
 
-    // Required `$css--reset: true` cannot currently apply to this `::after`.
+    // Required because `$css--reset: true` cannot currently apply to this `::after`.
     box-sizing: border-box;
 
     position: absolute;
