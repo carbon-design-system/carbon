@@ -5,14 +5,35 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
 export default class ToggleSmallSkeleton extends React.Component {
+  static propTypes = {
+    /**
+     * Provide an id that unique represents the underlying <input>
+     */
+    id: PropTypes.string,
+
+    /**
+     * Provide the text that will be read by a screen reader when visiting this
+     * control
+     * `aria-label` is always required but will be null if `labelText` is also
+     * provided
+     */
+    labelText: PropTypes.string,
+    ['aria-label']: PropTypes.string.isRequired,
+  };
+
+  static defaultProps = {
+    ['aria-label']: 'Toggle is loading',
+  };
+
   render() {
-    const { id } = this.props;
+    const { id, labelText } = this.props;
     return (
       <div className={`${prefix}--form-item`}>
         <input
@@ -24,6 +45,9 @@ export default class ToggleSmallSkeleton extends React.Component {
         <label
           className={`${prefix}--toggle__label ${prefix}--skeleton`}
           htmlFor={id}>
+          {labelText && (
+            <span className={`${prefix}--toggle__label-text`}>{labelText}</span>
+          )}
           <span className={`${prefix}--toggle__appearance`}>
             <svg
               className={`${prefix}--toggle__check`}
