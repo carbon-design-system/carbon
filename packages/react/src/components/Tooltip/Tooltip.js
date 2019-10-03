@@ -303,6 +303,7 @@ class Tooltip extends Component {
     this._hasContextMenu = evt.type === 'contextmenu';
     if (state === 'click') {
       evt.stopPropagation();
+      evt.preventDefault();
       const shouldOpen = this.isControlled
         ? !this.props.open
         : !this.state.open;
