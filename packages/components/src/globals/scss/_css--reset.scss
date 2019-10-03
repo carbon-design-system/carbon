@@ -193,11 +193,6 @@
 
     * {
       box-sizing: border-box;
-
-      &:after,
-      &:before {
-        box-sizing: border-box;
-      }
     }
 
     @include carbon--type-reset;
