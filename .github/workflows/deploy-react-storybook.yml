@@ -3,10 +3,9 @@ name: Deploy React storybook to IBM Cloud
 on:
   push:
     tags:
-      # Matches tags that have the shape `vX.Y.Z`. This will also match tags
-      # with a preid, for example `vX.Y.Z-rc.0`. Reference:
+      # Matches tags that have the shape `vX.Y.Z`. Reference:
       # https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requesttagsbranches
-      - 'v*.*.*'
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   build:
