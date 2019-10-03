@@ -54,7 +54,7 @@ const itemToElement = item => {
   return (
     <div>
       <span>{itemAsArray[0]}</span>
-      <span style={{ color: 'red' }}> {itemAsArray[1]}</span>
+      <span style={{ color: 'blue' }}> {itemAsArray[1]}</span>
     </div>
   );
 };
