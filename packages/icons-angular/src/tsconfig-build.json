@@ -7,7 +7,6 @@
     "outDir": "../dist/packages/carbon-icons"
   },
   "files": [
-    // "public-api.ts",
     "typings.d.ts"
   ],
   "angularCompilerOptions": {

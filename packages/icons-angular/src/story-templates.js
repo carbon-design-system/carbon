@@ -48,14 +48,6 @@ const iconStoryTemplate = icon => `.add("${icon.moduleName}", () => ({
   \`
 }))`;
 
-const gerateIconStories = icons => {
-  let value = '';
-  for (const icon of icons) {
-    value += iconStoryTemplate(icon);
-  }
-  return value;
-};
-
 const generateStoryImports = icons => {
   let imports = '';
   for (const icon of icons) {
@@ -75,7 +67,7 @@ storiesOf("${basename}", module)
   .addDecorator(moduleMetadata({
     imports: [ ${icons.map(i => `${i.moduleName}Module`).join(', ')} ],
   }))
-  ${gerateIconStories(icons)};
+  ${icons.reduce((string, icon) => (string += iconStoryTemplate(icon)), '')};
 `;
 
 module.exports = {
