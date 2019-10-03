@@ -4,6 +4,7 @@ categories:
       - name: Controls
         members:
           - dashboard
+          - fit-to-screen
           - forward--10
           - forward--30
           - forward--5
@@ -57,11 +58,15 @@ categories:
           - attachment
           - brightness-contrast
           - color-palette
+          - color-switch
           - contrast
           - corner
           - crop
           - cut
+          - dot-mark
           - draw
+          - drop-photo
+          - drop-photo--filled
           - edit
           - edit--off
           - erase
@@ -75,6 +80,9 @@ categories:
           - no-image
           - opacity
           - paint-brush
+          - paragraph
+          - percentage
+          - percentage--filled
           - quotes
           - rotate--clockwise
           - rotate--clockwise--alt
@@ -103,6 +111,7 @@ categories:
           - text--kerning
           - text--leading
           - text--line-spacing
+          - text--new-line
           - text--scale
           - text--selection
           - text--small-caps
@@ -155,6 +164,7 @@ categories:
           - up-to-top
           - zoom--in
           - zoom--out
+          - zoom--reset
       - name: Operations
         members:
           - add-comment
@@ -279,6 +289,8 @@ categories:
           - thumbnail--2
           - thumbs-down
           - thumbs-up
+          - trophy
+          - trophy--filled
           - unlocked
           - video
           - video--filled
@@ -304,15 +316,16 @@ categories:
           - watson--machine-learning
       - name: Social
         members:
-          - logo--delicious
           - logo--digg
           - logo--facebook
           - logo--flickr
           - logo--github
           - logo--glassdoor
           - logo--google
+          - logo--instagram
           - logo--linkedin
           - logo--livestream
+          - logo--medium
           - logo--pinterest
           - logo--quora
           - logo--skype
@@ -321,8 +334,8 @@ categories:
           - logo--tumblr
           - logo--twitter
           - logo--xing
+          - logo--yelp
           - logo--youtube
-          - logo--stumbleupon
   - name: Enterprise
     subcategories:
       - name: Commerce
@@ -365,6 +378,7 @@ categories:
           - denominate
           - dicom--6000
           - dicom--overlay
+          - dna
           - exam-mode
           - fusion-blender
           - hanging-protocol
@@ -485,11 +499,14 @@ categories:
           - number--small--7
           - number--small--8
           - number--small--9
+          - omega
+          - sigma
       - name: Data
         members:
           - activity
           - analytics
           - archive
+          - blockchain
           - chart--bar
           - chart--bubble
           - chart--line
@@ -500,6 +517,7 @@ categories:
           - chart--venn-diagram
           - classifier--language
           - concept
+          - container-software
           - data--1
           - data--2
           - data--base
@@ -519,6 +537,8 @@ categories:
           - flow
           - flow--data
           - flow--stream
+          - hybrid-networking
+          - managed-solutions
           - network--1
           - network--2
           - network--3
@@ -528,6 +548,7 @@ categories:
           - query-queue
           - report
           - report--data
+          - schematics
           - share-knowledge
           - table
           - table--split
@@ -540,6 +561,8 @@ categories:
           - tree-view--alt
           - type-pattern
           - types
+          - virtual-machine
+          - virtual-private-cloud
           - visual-recognition
       - name: File
         members:
@@ -604,6 +627,7 @@ categories:
           - playlist
           - PNG
           - popup
+          - product
           - RAW
           - scale
           - SDK
@@ -664,6 +688,9 @@ categories:
       - name: User
         members:
           - accessibility
+          - accessibility--alt
+          - accessibility--color
+          - accessibility--color--filled
           - collaborate
           - education
           - events
@@ -729,6 +756,8 @@ categories:
           - bus
           - cafe
           - car
+          - charging-station
+          - charging-station--filled
           - compass
           - delivery-truck
           - departure
@@ -759,6 +788,7 @@ categories:
           - cloud--lightning
           - cloud--rain
           - cloud--snow
+          - fog
           - humidity
           - hurricane
           - partly-cloudy
@@ -812,9 +842,12 @@ categories:
           - iot--platform
           - keyboard
           - laptop
+          - logo--openshift
+          - logo--vmware
           - mail--all
           - mobile
           - mobile--add
+          - mobile--audio
           - mobile--check
           - mobile--download
           - mobile--landscape
@@ -840,9 +873,12 @@ categories:
           - calibrate
           - cursor--1
           - cursor--2
+          - meter
+          - microscope
           - portfolio
           - ruler
           - ruler--alt
           - scalpel
+          - stamp
           - tool-box
           - tools
