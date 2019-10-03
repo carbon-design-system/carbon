@@ -339,6 +339,7 @@ class Tooltip extends Component {
 
     if (keyDownMatch(event, [keys.Enter, keys.Space])) {
       event.stopPropagation();
+      event.preventDefault();
       const shouldOpen = this.isControlled
         ? !this.props.open
         : !this.state.open;
