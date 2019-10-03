@@ -26,9 +26,10 @@
     margin-top: rem(3px);
   }
 
-  // Remove spacing above collection of checkboxes if label is present
+  // Shift collection of checkboxes up if label is present
+  // to account for the 2px top margin for the first checkbox
   .#{$prefix}--label + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
-    margin-top: 0;
+    margin-top: rem(-2px);
   }
 
   // Spacing below collection of checkboxes
