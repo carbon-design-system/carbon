@@ -50,7 +50,7 @@ TableSelectRow.propTypes = {
   /**
    * Specify whether all items are selected, or not
    */
-  checked: PropTypes.bool.isRequired,
+  checked: PropTypes.bool,
 
   /**
    * Specify whether the control is disabled
