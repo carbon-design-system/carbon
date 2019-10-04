@@ -435,6 +435,19 @@
     .#{$prefix}--toggle__check {
     fill: $disabled-02;
   }
+
+  //----------------------------------------------
+  // Skeleton
+  // ---------------------------------------------
+
+  .#{$prefix}--toggle__label.#{$prefix}--skeleton {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .#{$prefix}--toggle__label-text {
+      margin-bottom: $carbon--spacing-03;
+    }
+  }
 }
 
 @include exports('toggle') {
