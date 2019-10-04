@@ -121,11 +121,12 @@ describe('ContentSwitcher', () => {
 
   it('should call `onChange` when the selected index changes', () => {
     const children = 3;
+    const names = ['A', 'B', 'C'];
     const wrapper = mount(
       <ContentSwitcher {...mockProps}>
-        <Switch text="A" />
-        <Switch text="B" />
-        <Switch text="C" />
+        <Switch name="A" text="A" />
+        <Switch name="B" text="B" />
+        <Switch name="C" text="C" />
       </ContentSwitcher>
     );
 
@@ -136,7 +137,40 @@ describe('ContentSwitcher', () => {
         .at(i)
         .find('button')
         .simulate('click');
-      expect(mockProps.onChange).toHaveBeenLastCalledWith(i);
+      expect(mockProps.onChange).toHaveBeenLastCalledWith({
+        index: i,
+        name: names[i],
+        text: names[i],
+      });
+    }
+
+    // Reset back to position 0
+    wrapper
+      .find(Switch)
+      .at(0)
+      .find('button')
+      .simulate('click');
+
+    // Reset all calls to the mock `onChange` handler
+    mockProps.onChange.mockClear();
+
+    // Simulate arrow keys to change selected index
+    for (let i = 0; i < children; i++) {
+      wrapper
+        .find(Switch)
+        .at(i)
+        .find('button')
+        .simulate('keydown', ArrowRight);
+
+      // Legacy behavior is that this is called with the next index, but the
+      // name and text will be from the existing `Switch`. This behavior should
+      // most likely be updated in the next major release.
+      expect(mockProps.onChange).toHaveBeenLastCalledWith({
+        // Wrap when we hit the end, for example index 1 -> 2 -> 0
+        index: (i + 1) % children,
+        name: names[i],
+        text: names[i],
+      });
     }
   });
 

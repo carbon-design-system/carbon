@@ -16,6 +16,7 @@ describe('Switch', () => {
     mockProps = {
       className: 'custom-class',
       index: 0,
+      name: 'mock-name',
       onClick: jest.fn(),
       onKeyDown: jest.fn(),
       ref: jest.fn(),
@@ -37,17 +38,16 @@ describe('Switch', () => {
     expect(wrapper.children().find(`.${mockProps.className}`).length).toBe(1);
   });
 
-  it('should call `onClick` with the native event and given index', () => {
+  it('should call `onClick` with given index, name and text', () => {
     const wrapper = mount(<Switch {...mockProps} />);
     wrapper.find('button').simulate('click');
 
     expect(mockProps.onClick).toHaveBeenCalledTimes(1);
-    expect(mockProps.onClick).toHaveBeenCalledWith(
-      expect.objectContaining({
-        target: expect.any(HTMLElement),
-      }),
-      mockProps.index
-    );
+    expect(mockProps.onClick).toHaveBeenCalledWith({
+      index: mockProps.index,
+      name: mockProps.name,
+      text: mockProps.text,
+    });
   });
 
   it('should set `tabIndex` to 0 or -1 depending on if it is selected', () => {

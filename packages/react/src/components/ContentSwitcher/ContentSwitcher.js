@@ -48,15 +48,6 @@ function ContentSwitcher({
     savedOnChange.current = onChange;
   }, [onChange]);
 
-  // If our selectedIndex has changed from an event handler, meaning that
-  // `shouldFocus` is set to true, then call the saved `onChange` handler if it
-  // exists
-  useEffect(() => {
-    if (shouldFocus && savedOnChange.current) {
-      savedOnChange.current(selectedIndex);
-    }
-  }, [shouldFocus, selectedIndex]);
-
   // We have a couple of scenarios we want to keep track of when managing focus:
   // 1) Don't focus the ref at the selectedIndex if its the first render, focus
   //    should only come from a user action
@@ -80,21 +71,32 @@ function ContentSwitcher({
     };
   }
 
-  function onClick(event, index) {
+  function onClick({ index, name, text }) {
     if (selectedIndex !== index) {
       setSelectedIndex(index);
       if (shouldFocus !== true) {
         setShouldFocus(true);
       }
+      savedOnChange.current({
+        index,
+        name,
+        text,
+      });
     }
   }
 
-  function onKeyDown(event) {
-    if (matches(event, [keys.ArrowRight, keys.ArrowLeft])) {
-      setSelectedIndex(getNextIndex(event, selectedIndex, children.length));
+  function onKeyDown({ name, text, key }) {
+    if (matches(key, [keys.ArrowRight, keys.ArrowLeft])) {
+      const nextIndex = getNextIndex(key, selectedIndex, children.length);
+      setSelectedIndex(nextIndex);
       if (shouldFocus !== true) {
         setShouldFocus(true);
       }
+      savedOnChange.current({
+        index: nextIndex,
+        name,
+        text,
+      });
     }
   }
 

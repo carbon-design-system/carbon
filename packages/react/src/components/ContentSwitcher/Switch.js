@@ -9,7 +9,6 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -18,10 +17,7 @@ const Switch = React.forwardRef(function Switch(
     className: customClassName,
     index,
     onClick,
-    // We no longer need the `name` prop as we instead use the `index` of the
-    // Switch. However, since we spread `...rest` onto the `button` node we need
-    // to handle it so folks don't see an error for an unrecognized DOM prop
-    // eslint-disable-next-line no-unused-vars
+    onKeyDown,
     name,
     selected = false,
     text,
@@ -35,8 +31,17 @@ const Switch = React.forwardRef(function Switch(
     [customClassName]: !!customClassName,
   });
 
-  function handleOnClick(event) {
-    onClick(event, index);
+  function handleOnClick() {
+    onClick({ index, name, text });
+  }
+
+  function handleOnKeyDown(event) {
+    onKeyDown({
+      index,
+      name,
+      text,
+      key: event.key || event.which || event.keyCode,
+    });
   }
 
   return (
@@ -46,6 +51,7 @@ const Switch = React.forwardRef(function Switch(
       ref={ref}
       role="tab"
       onClick={handleOnClick}
+      onKeyDown={handleOnKeyDown}
       tabIndex={selected ? '0' : '-1'}
       type="button"
       {...rest}>
@@ -64,7 +70,7 @@ Switch.propTypes = {
   /**
    * Provide the name of your Switch that is used for event handlers
    */
-  name: deprecate(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+  name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
    * The index of your Switch in your ContentSwitcher that is used for event handlers.
