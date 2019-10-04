@@ -315,6 +315,8 @@
     margin-left: carbon--rem(56px);
     @include type-style('body-short-01');
     user-select: none;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   //----------------------------------------------
