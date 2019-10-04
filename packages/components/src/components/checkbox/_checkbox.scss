@@ -42,12 +42,6 @@
     @include hidden;
   }
 
-  // Required because `$css--reset: true` cannot currently apply to this `::before` and `::after`
-  .#{$prefix}--checkbox-label::before,
-  .#{$prefix}--checkbox-label::after {
-    box-sizing: border-box;
-  }
-
   // The label corresponds to the content inside of the `label` tag. Since we're
   // creating our own checkbox style, we'll need to position this in order to
   // accomodate the spacing needed for the checkbox.
@@ -61,6 +55,12 @@
     padding-left: rem(26px); //width of checkbox 16px + 10px of padding
     min-height: rem(24px);
     user-select: none;
+  }
+
+  // Required because `$css--reset: true` cannot currently apply to this `::before` and `::after`
+  .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label::after {
+    box-sizing: border-box;
   }
 
   // Spacing for presentational checkbox
