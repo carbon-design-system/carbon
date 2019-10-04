@@ -37,6 +37,7 @@ $base-font-size: 16px !default;
 }
 
 // 🔬 Experimental
+@import '../../globals/scss/vendor/@carbon/elements/scss/type/font-family';
 @import '../../globals/scss/vendor/@carbon/elements/scss/type/styles';
 
 /// Different type styles per token
