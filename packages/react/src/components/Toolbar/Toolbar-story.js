@@ -29,7 +29,7 @@ const inputProps = {
   onChange: action('onChange'),
 };
 
-storiesOf('Deprecated|Toolbar', module).add(
+storiesOf('[Deprecated] Toolbar', module).add(
   'Default',
   () => (
     <Toolbar {...toolbarProps} className="some-class">
