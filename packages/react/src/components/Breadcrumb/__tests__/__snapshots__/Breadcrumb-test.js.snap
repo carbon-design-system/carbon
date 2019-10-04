@@ -6,9 +6,10 @@ exports[`Breadcrumb should render 1`] = `
 >
   <nav
     aria-label="Breadcrumb"
+    className="parent-class"
   >
     <ol
-      className="bx--breadcrumb parent-class"
+      className="bx--breadcrumb"
     >
       <BreadcrumbItem
         className="some-class"
