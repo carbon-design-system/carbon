@@ -7,6 +7,10 @@ on:
       # https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requesttagsbranches
       - 'v[0-9]+.[0-9]+.[0-9]+'
 
+      # Ignore tags that use a preid after `vX.Y.Z`, for example: vX.Y.Z-alpha.0
+      # https://help.github.com/en/articles/workflow-syntax-for-github-actions#example-using-positive-and-negative-patterns
+      - '!v[0-9]+.[0-9]+.[0-9]+-*'
+
 jobs:
   build:
     runs-on: macOS-latest
