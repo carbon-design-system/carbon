@@ -178,6 +178,7 @@
     color: $disabled-02;
     transition: none;
     cursor: not-allowed;
+    border: none;
 
     &:active,
     &:focus,
