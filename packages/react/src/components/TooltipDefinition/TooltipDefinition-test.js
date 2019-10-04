@@ -40,4 +40,14 @@ describe('TooltipDefinition', () => {
     const wrapper = mount(<TooltipDefinition {...mockProps} direction="top" />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should allow passing a node to the children prop', () => {
+    console.error = jest.fn();
+    const childNode = <div>This is the Child</div>;
+    const props = { ...mockProps, children: childNode };
+
+    mount(<TooltipDefinition {...props} />);
+
+    expect(console.error).not.toHaveBeenCalled();
+  });
 });

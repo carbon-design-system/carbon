@@ -56,10 +56,10 @@ const TooltipDefinition = ({
 
 TooltipDefinition.propTypes = {
   /**
-   * Specify the tooltip trigger text that is rendered to the UI for the user to
+   * Specify the tooltip trigger text or node that is rendered to the UI for the user to
    * interact with in order to display the tooltip.
    */
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 
   /**
    * The CSS class name of the trigger element
