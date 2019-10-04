@@ -96,6 +96,7 @@ function ContentSwitcher({
         index: nextIndex,
         name,
         text,
+        key,
       });
     }
   }

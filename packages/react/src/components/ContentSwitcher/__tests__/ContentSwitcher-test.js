@@ -170,6 +170,7 @@ describe('ContentSwitcher', () => {
         index: (i + 1) % children,
         name: names[i],
         text: names[i],
+        key: ArrowRight.key || ArrowRight.which,
       });
     }
   });
