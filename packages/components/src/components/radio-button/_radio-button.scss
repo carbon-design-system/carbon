@@ -42,7 +42,7 @@
 
     .#{$prefix}--radio-button__label {
       margin-right: 0;
-      line-height: 20px;
+      line-height: carbon--mini-units(2.5);
     }
 
     .#{$prefix}--radio-button__label:not(:last-of-type) {
