@@ -24,6 +24,8 @@ const props = {
   onHeadingClick: action('onHeadingClick'),
 };
 
+Select.displayName = 'Select';
+
 storiesOf('Accordion', module)
   .addDecorator(withKnobs)
   .add(
