@@ -32,6 +32,6 @@ $prefix: 'bx';
     @include carbon--theme($carbon--theme--g100, true);
   }
   :root[storybook-carbon-theme='rocket'] {
-    @include carbon--theme--custom-properties($carbon--theme--rocket);
+    @include carbon--theme($carbon--theme--rocket);
   }
 }
