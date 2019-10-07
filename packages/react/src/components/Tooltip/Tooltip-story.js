@@ -202,4 +202,51 @@ storiesOf('Tooltip', module)
       },
     }
   )
-  .add('uncontrolled tooltip', () => <UncontrolledTooltipExample />);
+  .add('uncontrolled tooltip', () => <UncontrolledTooltipExample />)
+  .add(
+    'custom viewport',
+    () => (
+      <div
+        id="overflow-menu-custom-viewport-container"
+        style={{
+          border: '1px solid black',
+          width: 400,
+          height: 400,
+          overflow: 'scroll',
+          position: 'absolute',
+          top: 200,
+          left: 200,
+        }}>
+        <div data-floating-menu-container>
+          <div style={{ marginTop: '2rem' }}>
+            <Tooltip
+              {...props.withIcon()}
+              getViewport={() =>
+                document.getElementById(
+                  'overflow-menu-custom-viewport-container'
+                )
+              }>
+              <p>
+                This is some tooltip text. This box shows the maximum amount of
+                text that should appear inside. If more room is needed please
+                use a modal instead.
+              </p>
+              <div className={`${prefix}--tooltip__footer`}>
+                <a href="/" className={`${prefix}--link`}>
+                  Learn More
+                </a>
+                <Button size="small">Create</Button>
+              </div>
+            </Tooltip>
+          </div>
+        </div>
+      </div>
+    ),
+    {
+      info: {
+        text: `
+            A custom viewport can be specified to make sure that the menu is offset correctly when the floating menu container is within some absolutely positioned element with it's own scrolling behavior.
+          `,
+      },
+    }
+  );

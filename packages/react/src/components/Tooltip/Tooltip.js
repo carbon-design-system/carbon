@@ -188,6 +188,11 @@ class Tooltip extends Component {
     onChange: !useControlledStateWithValue
       ? PropTypes.func
       : requiredIfValueExists(PropTypes.func),
+
+    /**
+     * Optional callback used to obtain a custom 'viewport' that differs from the window.
+     */
+    getViewport: PropTypes.func,
   };
 
   static defaultProps = {
@@ -379,6 +384,7 @@ class Tooltip extends Component {
       menuOffset,
       tabIndex = 0,
       innerRef: ref,
+      getViewport,
       ...other
     } = this.props;
 
@@ -451,6 +457,7 @@ class Tooltip extends Component {
             menuPosition={this.state.triggerPosition}
             menuDirection={direction}
             menuOffset={menuOffset}
+            getViewport={getViewport}
             menuRef={node => {
               this._tooltipEl = node;
             }}>
