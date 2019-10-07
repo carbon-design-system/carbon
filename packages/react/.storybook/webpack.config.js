@@ -50,13 +50,9 @@ const styleLoaders = [
     options: {
       includePaths: [path.resolve(__dirname, '..', 'node_modules')],
       data: `
-        @import '${path.resolve(
-          __dirname,
-          '../src/globals/scss/carbon-theme'
-        )}';
-        $carbon--theme: map-get($carbon--theme--list, 'custom-properties');
         $feature-flags: (
           ui-shell: true,
+          enable-css-custom-properties: true,
         );
       `,
       sourceMap: useStyleSourceMap,
@@ -113,7 +109,7 @@ module.exports = ({ config, mode }) => {
     test: /-story\.jsx?$/,
     loaders: [
       {
-        loader: require.resolve('@storybook/addon-storysource/loader'),
+        loader: require.resolve('@storybook/source-loader'),
         options: {
           prettierConfig: {
             parser: 'babylon',

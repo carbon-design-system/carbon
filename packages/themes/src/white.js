@@ -45,7 +45,6 @@ export const interactive01 = blue60;
 export const interactive02 = gray80;
 export const interactive03 = blue60;
 export const interactive04 = blue60;
-export const danger = red60;
 
 export const uiBackground = white;
 
@@ -87,6 +86,8 @@ export const inverseSupport04 = blue50;
 
 export const overlay01 = rgba(gray100, 0.5);
 
+export const danger = red60;
+
 // Interaction states
 export const focus = blue60;
 export const inverseFocusUi = white;
@@ -124,6 +125,39 @@ export const highlight = blue20;
 
 export const skeleton01 = '#e5e5e5';
 export const skeleton02 = gray30;
+
+// Type
+export { caption01 } from '@rocketsoftware/type';
+export { label01 } from '@rocketsoftware/type';
+export { helperText01 } from '@rocketsoftware/type';
+export { bodyShort01 } from '@rocketsoftware/type';
+export { bodyLong01 } from '@rocketsoftware/type';
+export { bodyShort02 } from '@rocketsoftware/type';
+export { bodyLong02 } from '@rocketsoftware/type';
+export { code01 } from '@rocketsoftware/type';
+export { code02 } from '@rocketsoftware/type';
+export { heading01 } from '@rocketsoftware/type';
+export { productiveHeading01 } from '@rocketsoftware/type';
+export { heading02 } from '@rocketsoftware/type';
+export { productiveHeading02 } from '@rocketsoftware/type';
+export { productiveHeading03 } from '@rocketsoftware/type';
+export { productiveHeading04 } from '@rocketsoftware/type';
+export { productiveHeading05 } from '@rocketsoftware/type';
+export { productiveHeading06 } from '@rocketsoftware/type';
+export { productiveHeading07 } from '@rocketsoftware/type';
+export { expressiveHeading01 } from '@rocketsoftware/type';
+export { expressiveHeading02 } from '@rocketsoftware/type';
+export { expressiveHeading03 } from '@rocketsoftware/type';
+export { expressiveHeading04 } from '@rocketsoftware/type';
+export { expressiveHeading05 } from '@rocketsoftware/type';
+export { expressiveHeading06 } from '@rocketsoftware/type';
+export { expressiveParagraph01 } from '@rocketsoftware/type';
+export { quotation01 } from '@rocketsoftware/type';
+export { quotation02 } from '@rocketsoftware/type';
+export { display01 } from '@rocketsoftware/type';
+export { display02 } from '@rocketsoftware/type';
+export { display03 } from '@rocketsoftware/type';
+export { display04 } from '@rocketsoftware/type';
 
 // Deprecated ☠️
 export const brand01 = interactive01;

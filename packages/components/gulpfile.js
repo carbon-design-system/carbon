@@ -402,7 +402,6 @@ gulp.task('sass:dev', () => {
     .pipe(sourcemaps.init())
     .pipe(
       header(`
-      $demo--carbon--theme-name: 'custom-properties';
       $feature-flags: (${Object.keys(flags)
         .reduce((a, flag) => [...a, `${flag}: ${!!flags[flag]}`], [])
         .join(', ')});

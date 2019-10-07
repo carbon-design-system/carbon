@@ -3,108 +3,125 @@
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
- *
- * @jest-environment node
  */
 
 'use strict';
 
+require('core-js/features/array/flat-map');
+
 const { convert, createSassRenderer } = require('@carbon/test-utils/scss');
+const { camelCase } = require('change-case');
 const { formatTokenName, themes, tokens } = require('../src');
 
 const render = createSassRenderer(__dirname);
+const { white: defaultTheme } = themes;
+
+function flatten(tokens) {
+  return Object.keys(tokens).flatMap(group => tokens[group]);
+}
+
+function formatObjectKeys(object) {
+  if (typeof object !== 'object') {
+    if (isNaN(object)) {
+      return object;
+    }
+    return parseFloat(object, 10);
+  }
+  return Object.keys(object).reduce((acc, key) => {
+    return {
+      ...acc,
+      [camelCase(key)]: formatObjectKeys(object[key]),
+    };
+  }, {});
+}
 
 describe('themes.scss', () => {
-  describe('_theme-maps.scss', () => {
-    it('should export all themes as sass maps', async () => {
-      const themeMapsTests = Object.keys(themes).map(theme => {
-        return `$t: test(global-variable-exists(carbon--theme--${theme}));`;
-      });
-      const { calls } = await render(`
-@import '../scss/theme-maps';
-
-${themeMapsTests.join('\n')}
-`);
-
-      for (const call of calls) {
-        expect(call[0].getValue()).toBe(true);
+  describe('tokens', () => {
+    it.each(flatten(tokens))(
+      '%s should match the default theme',
+      async token => {
+        const name = formatTokenName(token);
+        const { calls } = await render(`
+          @import '../scss/themes';
+          $t: test(global-variable-exists(${name}));
+          $t: test($${name});
+        `);
+        expect(convert(calls[0][0])).toBe(true);
+        // Since some of our tokens are objects/maps (specifically type), we'll
+        // need to format the Sass value so that keys are changed from
+        // param-case to camelCase and that values are correctly mapped over for
+        // strings and numbers
+        expect(formatObjectKeys(convert(calls[1][0]))).toEqual(
+          defaultTheme[token]
+        );
       }
-    });
+    );
   });
 
-  describe('_tokens.scss', () => {
-    it('should export all tokens', async () => {
-      const tokenVariableTests = tokens.colors.map(token => {
-        return `$t: test(global-variable-exists(${formatTokenName(token)}));`;
-      });
+  describe('carbon--theme', () => {
+    it('should export tokens that match the default theme', async () => {
       const { calls } = await render(`
-  @import '../scss/tokens';
+        @import '../scss/themes';
+        $t: test($carbon--theme);
+      `);
+      const theme = convert(calls[0][0]);
 
-  ${tokenVariableTests.join('\n')}
-`);
-
-      for (const call of calls) {
-        expect(call[0].getValue()).toBe(true);
-      }
-    });
-  });
-
-  describe('_mixins.scss', () => {
-    it('should export a carbon--theme mixin', async () => {
-      const { calls } = await render(`
-@import '../scss/mixins';
-
-$t: test(mixin-exists(carbon--theme));
-`);
-
-      for (const call of calls) {
-        expect(call[0].getValue()).toBe(true);
-      }
-    });
-
-    it('should set token variables for the given theme', async () => {
-      const themeTests = Object.keys(themes).map(key => {
-        const variable = `$carbon--theme--${key}`;
-        const test = `
-@include carbon--theme(${variable}) {
-  $t: test($interactive-01);
-}
-`;
-        return [variable, themes[key].interactive01, test];
-      });
-      const tests = themeTests
-        .map(([_variable, _expectedColor, test]) => test)
-        .join('\n');
-      const { calls } = await render(`
-@import '../scss/themes';
-${tests}
-`);
-
-      themeTests.forEach(([_variable, expectedColor], i) => {
-        expect(convert(calls[i][0])).toBe(expectedColor);
+      Object.keys(defaultTheme).forEach(token => {
+        expect(defaultTheme[token]).toEqual(
+          formatObjectKeys(theme[formatTokenName(token)])
+        );
       });
     });
 
-    it('should reset token variables after using the theme', async () => {
+    it('should update based on global token definitions', async () => {
+      const color = '#000000';
       const { calls } = await render(`
-@import '../scss/themes';
+        $interactive-01: ${color};
 
-$custom-theme: map-merge($carbon--theme--white, (
-  interactive-01: #ffffff,
-));
+        @import '../scss/themes';
+        $t: test($carbon--theme);
+      `);
+      const theme = convert(calls[0][0]);
 
-$t: test($interactive-01);
+      expect(theme['interactive-01']).toEqual(color);
+    });
 
-@include carbon--theme($custom-theme) {
-  $t: test($interactive-01);
-}
+    it('should support emitting the difference between themes', async () => {
+      const { result } = await render(`
+        @import '../scss/themes';
 
-$t: test($interactive-01);
-`);
+        $carbon--theme: map-merge($carbon--theme--white, (
+          interactive-01: #000000,
+        ));
+        $theme--light: map-merge($carbon--theme--white, (
+          interactive-01: #ffffff,
+        ));
 
-      const colors = calls.map(call => convert(call[0]));
-      expect(colors[0]).toEqual(colors[2]);
-      expect(colors[1]).toBe('#ffffff');
+        .emit-all-values {
+          @include carbon--theme(
+            $emit-custom-properties: true,
+            $emit-difference: false,
+          );
+        }
+
+        .emit-changed-values {
+          @include carbon--theme(
+            $theme: $theme--light,
+            $emit-custom-properties: true,
+            $emit-difference: true,
+          );
+        }
+      `);
+
+      const style = document.createElement('style');
+      style.innerHTML = result.css.toString();
+      document.head.appendChild(style);
+
+      const allValues = document.styleSheets[0].cssRules[0].style;
+      const changedValues = document.styleSheets[0].cssRules[1].style;
+
+      expect(allValues.length).toBeGreaterThan(changedValues.length);
+      expect(changedValues.length).toBe(1);
     });
   });
 });
