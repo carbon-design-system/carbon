@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Search16, Close16, Close20 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -28,7 +29,19 @@ export default class Search extends Component {
     /**
      * Specify whether the Search should be a small variant
      */
-    small: PropTypes.bool,
+
+    /**
+     * Specify whether the load was successful
+     */
+    small: deprecate(
+      PropTypes.bool,
+      `\nThe prop \`small\` for Search has been deprecated in favor of \`size\`. Please use \`size="sm"\` instead.`
+    ),
+
+    /**
+     * Specify the search size
+     */
+    size: PropTypes.oneOf(['sm', 'lg', 'xl']),
 
     /**
      * Provide an optional placeholder text for the Search.
@@ -70,7 +83,6 @@ export default class Search extends Component {
 
   static defaultProps = {
     type: 'text',
-    small: false,
     placeHolderText: '',
     closeButtonLabelText: 'Clear search input',
     onChange: () => {},
@@ -128,6 +140,7 @@ export default class Search extends Component {
       labelText,
       closeButtonLabelText,
       small,
+      size = !small ? 'xl' : 'sm',
       light,
       ...other
     } = this.props;
@@ -136,8 +149,7 @@ export default class Search extends Component {
 
     const searchClasses = classNames({
       [`${prefix}--search`]: true,
-      [`${prefix}--search--xl`]: !small,
-      [`${prefix}--search--sm`]: small,
+      [`${prefix}--search--${size}`]: size,
       [`${prefix}--search--light`]: light,
       [className]: className,
     });
@@ -147,7 +159,7 @@ export default class Search extends Component {
       [`${prefix}--search-close--hidden`]: !hasContent,
     });
 
-    const CloseIconX = !small ? Close20 : Close16;
+    const CloseIconX = size === 'xl' ? Close20 : Close16;
 
     return (
       <div className={searchClasses}>
