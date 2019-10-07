@@ -119,7 +119,9 @@ const ResourceHeader = ({
         </div>
         <div className="bx--resource-header__container--right">
           <div className="bx--resource-header__status">
+            <div>
             {status && renderStatus(status)}
+            </div>
           </div>
           <div className="bx--resource-header__actions">
             {renderStop && renderActionButtons('Stop', renderStop)}

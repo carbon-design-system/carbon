@@ -10,9 +10,9 @@
 @include exports('cloud-resource-header') {
   .#{$prefix}--resource-header {
     width: 100%;
-    background-color: $ui-01;
-    height: rem(105px);
-    padding: rem(10px) rem(40px);
+    background-color: $ui-02;
+    // height: rem(105px);
+    // padding: rem(10px) rem(40px);
   }
 
   .#{$prefix}--resource-header__container {
@@ -20,7 +20,7 @@
     align-items: flex-end;
     justify-content: space-between;
     height: 100%;
-    border-bottom: 3px solid $ui-04;
+    // border-bottom: 3px solid $ui-04;
   }
 
   .#{$prefix}--resource-header__container--left {
@@ -28,7 +28,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-bottom: rem(10px);
+    padding-bottom: $spacing-06;
+    padding-top: $spacing-05;
+    .bx--breadcrumb {
+      padding-bottom: $spacing-05;
+    }
   }
 
   .#{$prefix}--resource-header__content-container {
@@ -54,16 +58,23 @@
     align-items: center;
   }
 
-  .#{$prefix}--resource-header__title
-    .#{$prefix}--resource-header__status-item {
-    margin-left: 0.5rem;
-  }
-
-  .#{$prefix}--resource-header__subtitle span {
-    font-size: 0.75rem;
+  .#{$prefix}--resource-header__title {
+    @include type-style('productive-heading-04');
     color: $text-02;
+    .#{$prefix}--resource-header__status-item {
+      margin-left: 0.5rem;
+    }
   }
 
+  .#{$prefix}--resource-header__subtitle {
+    @include type-style('body-short-01');
+    color: $text-01;
+    padding-top: $spacing-04;
+    span {
+      font-size: 0.75rem;
+      color: $text-01;
+    }
+  }
   .#{$prefix}--resource-header__container--right {
     height: 100%;
     display: flex;
