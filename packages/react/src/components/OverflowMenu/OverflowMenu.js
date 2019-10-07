@@ -203,6 +203,11 @@ class OverflowMenu extends Component {
      * Function called when menu is closed
      */
     onOpen: PropTypes.func,
+
+    /**
+     * Optional callback used to obtain a custom 'viewport' that differs from the window.
+     */
+    getViewport: PropTypes.func,
   };
 
   static defaultProps = {
@@ -453,6 +458,7 @@ class OverflowMenu extends Component {
       renderIcon: IconElement,
       innerRef: ref,
       menuOptionsClass,
+      getViewport,
       ...other
     } = this.props;
 
@@ -507,6 +513,7 @@ class OverflowMenu extends Component {
         menuPosition={this.state.menuPosition}
         menuDirection={direction}
         menuOffset={flipped ? menuOffsetFlip : menuOffset}
+        getViewport={getViewport}
         menuRef={this._bindMenuBody}
         menuEl={this.menuEl}
         flipped={this.props.flipped}

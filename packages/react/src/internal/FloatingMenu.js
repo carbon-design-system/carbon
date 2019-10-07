@@ -65,6 +65,7 @@ const hasChangeInOffset = (oldMenuOffset = {}, menuOffset = {}) => {
  * @param {FloatingMenu~size} params.menuSize The size of the menu.
  * @param {FloatingMenu~position} params.refPosition The position of the triggering element.
  * @param {FloatingMenu~offset} [params.offset={ left: 0, top: 0 }] The position offset of the menu.
+ * @param {FloatingMenu~offset} [params.viewportOffset={left: 0, top: 0}] The position offset of the custom viewport
  * @param {string} [params.direction=bottom] The menu direction.
  * @param {number} [params.scrollX=0] The scroll position of the viewport.
  * @param {number} [params.scrollY=0] The scroll position of the viewport.
@@ -75,6 +76,7 @@ const getFloatingPosition = ({
   menuSize,
   refPosition,
   offset = {},
+  viewportOffset = {},
   direction = DIRECTION_BOTTOM,
   scrollX = 0,
   scrollY = 0,
@@ -88,25 +90,26 @@ const getFloatingPosition = ({
 
   const { width, height } = menuSize;
   const { top = 0, left = 0 } = offset;
+  const { left: viewportLeft = 0, top: viewportTop = 0 } = viewportOffset;
   const refCenterHorizontal = (refLeft + refRight) / 2;
   const refCenterVertical = (refTop + refBottom) / 2;
 
   return {
     [DIRECTION_LEFT]: () => ({
-      left: refLeft - width + scrollX - left,
-      top: refCenterVertical - height / 2 + scrollY + top,
+      left: refLeft - width + scrollX - left - viewportLeft,
+      top: refCenterVertical - height / 2 + scrollY + top - viewportTop,
     }),
     [DIRECTION_TOP]: () => ({
-      left: refCenterHorizontal - width / 2 + scrollX + left,
-      top: refTop - height + scrollY - top,
+      left: refCenterHorizontal - width / 2 + scrollX + left - viewportLeft,
+      top: refTop - height + scrollY - top - viewportTop,
     }),
     [DIRECTION_RIGHT]: () => ({
-      left: refRight + scrollX + left,
-      top: refCenterVertical - height / 2 + scrollY + top,
+      left: refRight + scrollX + left - viewportLeft,
+      top: refCenterVertical - height / 2 + scrollY + top - viewportTop,
     }),
     [DIRECTION_BOTTOM]: () => ({
-      left: refCenterHorizontal - width / 2 + scrollX + left,
-      top: refBottom + scrollY + top,
+      left: refCenterHorizontal - width / 2 + scrollX + left - viewportLeft,
+      top: refBottom + scrollY + top - viewportTop,
     }),
   }[direction]();
 };
@@ -172,6 +175,11 @@ class FloatingMenu extends React.Component {
      * The callback called when the menu body has been mounted and positioned.
      */
     onPlace: PropTypes.func,
+
+    /**
+     * Optional callback used to obtain a custom 'viewport' that differs from the window.
+     */
+    getViewport: PropTypes.func,
   };
 
   static defaultProps = {
@@ -233,11 +241,13 @@ class FloatingMenu extends React.Component {
       menuPosition: oldRefPosition = {},
       menuOffset: oldMenuOffset = {},
       menuDirection: oldMenuDirection,
+      getViewport: oldGetViewport,
     } = prevProps;
     const {
       menuPosition: refPosition = {},
       menuOffset = {},
       menuDirection,
+      getViewport,
     } = this.props;
 
     if (
@@ -246,7 +256,8 @@ class FloatingMenu extends React.Component {
       oldRefPosition.bottom !== refPosition.bottom ||
       oldRefPosition.left !== refPosition.left ||
       hasChangeInOffset(oldMenuOffset, menuOffset) ||
-      oldMenuDirection !== menuDirection
+      oldMenuDirection !== menuDirection ||
+      (oldGetViewport && oldGetViewport()) !== (getViewport && getViewport())
     ) {
       const menuSize = menuBody.getBoundingClientRect();
       const { menuEl, flipped } = this.props;
@@ -254,9 +265,13 @@ class FloatingMenu extends React.Component {
         typeof menuOffset !== 'function'
           ? menuOffset
           : menuOffset(menuBody, menuDirection, menuEl, flipped);
+
+      const viewport = getViewport && getViewport();
+      const viewportSize = viewport && viewport.getBoundingClientRect();
       // Skips if either in the following condition:
       // a) Menu body has `display:none`
       // b) `menuOffset` as a callback returns `undefined` (The callback saw that it couldn't calculate the value)
+
       if ((menuSize.width > 0 && menuSize.height > 0) || !offset) {
         this.setState({
           floatingPosition: getFloatingPosition({
@@ -264,8 +279,14 @@ class FloatingMenu extends React.Component {
             refPosition,
             direction: menuDirection,
             offset,
-            scrollX: window.pageXOffset,
-            scrollY: window.pageYOffset,
+            viewportOffset: {
+              ...(viewportSize && {
+                left: viewportSize.left,
+                top: viewportSize.top,
+              }),
+            },
+            scrollX: viewport ? viewport.scrollLeft : window.pageXOffset,
+            scrollY: viewport ? viewport.scrollTop : window.pageYOffset,
           }),
         });
       }

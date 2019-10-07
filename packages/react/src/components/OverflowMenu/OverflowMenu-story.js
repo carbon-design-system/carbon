@@ -140,4 +140,40 @@ storiesOf('OverflowMenu', module)
           `,
       },
     }
+  )
+  .add(
+    'custom viewport',
+    withReadme(OverflowREADME, () => (
+      <div
+        id="overflow-menu-custom-viewport-container"
+        style={{
+          border: '1px solid black',
+          width: 400,
+          height: 400,
+          overflow: 'scroll',
+          position: 'absolute',
+          top: 200,
+          left: 200,
+        }}>
+        <div data-floating-menu-container>
+          <OverflowMenuExample
+            overflowMenuProps={{
+              ...props.menu(),
+              getViewport: () =>
+                document.getElementById(
+                  'overflow-menu-custom-viewport-container'
+                ),
+            }}
+            overflowMenuItemProps={props.menuItem()}
+          />
+        </div>
+      </div>
+    )),
+    {
+      info: {
+        text: `
+         A custom viewport can be specified to make sure that the menu is offset correctly when the floating menu container is within some absolutely positioned element with it's own scrolling behavior.
+          `,
+      },
+    }
   );
