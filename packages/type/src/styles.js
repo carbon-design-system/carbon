@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { px, rem } from '@carbon/layout';
+import { px, rem } from '@rocketsoftware/layout';
 import { fontWeights } from './fontWeight';
 import { scale } from './scale';
 

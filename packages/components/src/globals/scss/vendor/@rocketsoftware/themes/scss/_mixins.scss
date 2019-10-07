@@ -9,9 +9,6 @@
 /// @access private
 /// @group @carbon/themes
 $custom-property-prefix: 'cds' !default;
-
-/// @access private
-/// @group @carbon/themes
 @mixin custom-property($name, $value, $prefix: $custom-property-prefix) {
   @if type-of($value) == map {
     @each $property, $property-value in $value {

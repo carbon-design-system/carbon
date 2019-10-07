@@ -6567,10 +6567,10 @@ capture-stack-trace@^1.0.0:
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"
   integrity sha512-mYQLZnx5Qt1JgB1WEiMCf2647plpGeQ2NMR/5L0HNZzGQo4fuSPnK+wjfPnKZV0aiJDgzmWqqkV/g7JD+DW0qw==
 
-carbon-components@10.6.0:
-  version "10.6.0"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.6.0.tgz#e6ac0cbfbc01cf6dd5a667cfdc39af443ef741e7"
-  integrity sha512-nLPB512oG103CALSaq+7ZJWC/x1zvIzyDonYRqg9kE4uujMFLFBniVo8MSX227OpM7LMxVCX+aWDTmxoxVygtQ==
+carbon-components@10.7.0-rc.0:
+  version "10.7.0-rc.0"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.7.0-rc.0.tgz#06ad4c986a05d6d08b7e3b121ef10f1bbdf1aae2"
+  integrity sha512-CGN24dguxXxGv6G4rq6hCPLsatHr51gyM/MwhRt7HITlMu9MJrGfzk9RLZMXI/wso+gWO60igZZE+Y4cCk4OrA==
   dependencies:
     carbon-icons "^7.0.7"
     flatpickr "4.6.1"
@@ -18493,7 +18493,7 @@ react-inspector@^3.0.2:
     is-dom "^1.0.9"
     prop-types "^15.6.1"
 
-react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.2, react-is@^16.8.3, react-is@^16.8.4, react-is@^16.8.6, react-is@^16.9.0, react-is@~16.9.0:
+react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.3, react-is@^16.8.4, react-is@^16.8.6, react-is@^16.9.0, react-is@~16.9.0:
   version "16.9.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.9.0.tgz#21ca9561399aad0ff1a7701c01683e8ca981edcb"
   integrity sha512-tJBzzzIgnnRfEm046qRcURvwQnZVXmuCbscxUO5RWrGTXpon2d4c8mI0D8WE6ydVIm29JiLB6+RslkIvym9Rjw==
