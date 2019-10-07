@@ -470,30 +470,52 @@ storiesOf('UI Shell', module)
   .add(
     'Header Base w/ Actions and Right Panel',
     withReadme(readme, () => (
-      <Header aria-label="IBM Platform Name">
-        <HeaderName href="#" prefix="IBM">
-          [Platform]
-        </HeaderName>
-        <HeaderGlobalBar>
-          <HeaderGlobalAction
-            aria-label="Search"
-            onClick={action('search click')}>
-            <Search20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction
-            aria-label="Notifications"
-            isActive
-            onClick={action('notification click')}>
-            <Notification20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction
-            aria-label="App Switcher"
-            onClick={action('app-switcher click')}>
-            <AppSwitcher20 />
-          </HeaderGlobalAction>
-        </HeaderGlobalBar>
-        <HeaderPanel aria-label="Header Panel" expanded />
-      </Header>
+      <HeaderContainer
+        activeGlobalAction={'none'}
+        render={({ activeGlobalAction, changeGlobalActionTo }) => (
+          <Header aria-label="IBM Platform Name">
+            <HeaderName href="#" prefix="IBM">
+              [Platform]
+            </HeaderName>
+            <HeaderGlobalBar>
+              <HeaderGlobalAction
+                aria-label="Search"
+                isActive={activeGlobalAction === 'search'}
+                onClick={() => {
+                  activeGlobalAction === 'search'
+                    ? changeGlobalActionTo('none')
+                    : changeGlobalActionTo('search');
+                }}>
+                <Search20 />
+              </HeaderGlobalAction>
+              <HeaderGlobalAction
+                aria-label="Notifications"
+                isActive={activeGlobalAction === 'notifications'}
+                onClick={() => {
+                  activeGlobalAction === 'notifications'
+                    ? changeGlobalActionTo('none')
+                    : changeGlobalActionTo('notifications');
+                }}>
+                <Notification20 />
+              </HeaderGlobalAction>
+              <HeaderGlobalAction
+                aria-label="App Switcher"
+                isActive={activeGlobalAction === 'app'}
+                onClick={() => {
+                  activeGlobalAction === 'app'
+                    ? changeGlobalActionTo('none')
+                    : changeGlobalActionTo('app');
+                }}>
+                <AppSwitcher20 />
+              </HeaderGlobalAction>
+            </HeaderGlobalBar>
+            <HeaderPanel
+              aria-label="Header Panel"
+              expanded={activeGlobalAction !== 'none'}
+            />
+          </Header>
+        )}
+      />
     ))
   )
   .add(

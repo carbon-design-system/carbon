@@ -34,7 +34,7 @@ const HeaderContainer = ({
       isSideNavExpanded={isSideNavExpandedState}
       onClickSideNavExpand={handleHeaderMenuButtonClick}
       activeGlobalAction={activeGlobalActionState}
-      onChangeGlobalAction={handleChangeGlobalAction}
+      changeGlobalActionTo={handleChangeGlobalAction}
     />
   );
 };
