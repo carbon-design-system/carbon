@@ -13,14 +13,14 @@ import Link from '../../Link';
 import Card from '../../Card';
 import CardFooter from '../../CardFooter';
 import CardContent from '../../CardContent';
-import { iconAdd } from 'carbon-icons';
 
 export default props => (
   <Card {...props}>
     <CardContent
       cardTitle="Card Name"
-      cardInfo={['Secondary Information']}
-      cardIcon={iconAdd}>
+      cardInfo={[
+        'Lorem ipsum sit amet, consectetur adipisicing elit, sed do eiusmod tempor',
+      ]}>
       <OverflowMenu {...props}>
         <OverflowMenuItem {...props} itemText="Stop App" />
         <OverflowMenuItem {...props} itemText="Restart App" />
@@ -29,7 +29,7 @@ export default props => (
       </OverflowMenu>
     </CardContent>
     <CardFooter>
-      <Button size="small" kind="primary" style={{ width: 1 + 'rem' }}>
+      <Button size="small" kind="primary" style={{ width: 10 + '%' }}>
         Button
       </Button>
       <Link href="#" className="bx--card-footer__link">

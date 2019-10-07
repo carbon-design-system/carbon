@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
-import { iconAppServices } from 'carbon-icons';
 const CardContent = ({
   className,
   children,
@@ -41,13 +40,16 @@ const CardContent = ({
     <div {...other} className={cardContentClasses}>
       {children}
       <div className="bx--card-overview__about">
-        <div className="bx--about__icon">
-          <Icon
-            icon={cardIcon}
-            name={cardTitle}
-            description={iconDescription}
-          />
-        </div>
+        {cardIcon !== null ? (
+          <div className="bx--about__icon">
+            <Icon
+              icon={cardIcon}
+              name={cardTitle}
+              description={iconDescription}
+            />
+          </div>
+        ) : null}
+
         <div className="bx--about__title">
           <p id="card-app-title" className="bx--about__title--name">
             {cardTitle}
@@ -77,7 +79,7 @@ CardContent.propTypes = {
 
 CardContent.defaultProps = {
   iconDescription: 'card icon',
-  cardIcon: iconAppServices,
+  cardIcon: null,
   cardTitle: 'card title',
 };
 

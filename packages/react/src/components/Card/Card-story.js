@@ -12,7 +12,7 @@ const props = () => ({
       onClick: action('onClick'),
       onFocus: action('onFocus'),
       className: text('class name', 'some-class'),
-      iconName: text('icon name', 'Add16'),
+      // iconName: text('icon name', 'Add16'),
       description: text('description', 'description'),
     };
   },

@@ -17,9 +17,8 @@
     display: flex;
     flex-direction: column;
     width: rem(200px);
-    height: rem(240px);
+    // height: rem(240px);
     background-color: $ui-01;
-    border: 1px solid $ui-04;
 
     &:focus {
       @include focus-outline('border');
@@ -39,8 +38,8 @@
 
     .#{$prefix}--overflow-menu {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
+      top: 0.75rem;
+      right: 0.25rem;
       z-index: z('floating');
       margin: 0;
     }
@@ -50,7 +49,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: rem(48px);
     background-color: $ui-03;
     padding: 1rem;
   }
@@ -69,12 +67,13 @@
     flex: 1;
     flex-direction: column;
     align-items: center;
-    padding-top: 1rem;
+    padding-top: 0.25rem;
   }
 
   .#{$prefix}--about__title {
     font-weight: 400;
-    padding-top: 1.5rem;
+    text-align: left;
+    padding-left: 1rem;
   }
 
   .#{$prefix}--about__title--name {
@@ -83,7 +82,11 @@
     overflow-y: hidden;
     font-weight: 400;
     margin: 0;
+    margin-bottom: $spacing-06;
     line-height: 1.2;
+
+    max-height: 2.4em;
+    white-space: unset;
   }
 
   .#{$prefix}--about__title--link {
@@ -96,15 +99,14 @@
 
   .#{$prefix}--about__title--additional-info {
     font-size: 0.75rem;
-    @include text-overflow(rem(180px));
-    display: inline;
+    line-height: 1;
     font-weight: 400;
     padding: 0;
     margin: 0;
     color: $text-02;
 
     &:first-child {
-      padding-top: 0.25rem;
+      padding-top: $spacing-05;
     }
   }
 
