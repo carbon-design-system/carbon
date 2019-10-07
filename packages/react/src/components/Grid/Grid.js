@@ -1,10 +1,36 @@
+/**
+ * Copyright IBM Corp. 2019
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { settings } from 'carbon-components';
 
+import { range } from '../../tools/array';
+
 const { prefix } = settings;
+
+// getter functions needed due to error in storybook
+// addons knobs that requires a copy of this object to avoid
+const getValidColWidths = () => ({
+  sm: ['auto', ...range({ end: 4 })],
+  md: ['auto', ...range({ end: 8 })],
+  lgPlus: ['auto', ...range({ end: 12 })],
+});
+
+const getValidColOffsets = () => ({
+  sm: range({ end: 4 - 1 }),
+  md: range({ end: 8 - 1 }),
+  lgPlus: range({ end: 12 - 1 }),
+});
+
+const VALID_COL_WIDTHS = getValidColWidths();
+const VALID_COL_OFFSETS = getValidColOffsets();
 
 export const Grid = ({
   condensed = false,
@@ -34,7 +60,7 @@ Grid.propTypes = {
   fullWidth: PropTypes.bool,
 
   /** Remove horizontal padding on the Grid */
-  noGutter: PropTypes.oneOf(true, false, 'left', 'right'),
+  noGutter: PropTypes.oneOf([true, false, 'left', 'right']),
 
   /** Specify a custom className to be applied to the Grid */
   className: PropTypes.string,
@@ -66,7 +92,7 @@ GridRow.propTypes = {
   condensed: PropTypes.bool,
 
   /** Remove horizontal padding on the Grid Row */
-  noGutter: PropTypes.oneOf(true, false, 'left', 'right'),
+  noGutter: PropTypes.oneOf([true, false, 'left', 'right']),
 
   /** Specify a custom className to be applied to the Grid Row */
   className: PropTypes.string,
@@ -76,16 +102,16 @@ GridRow.propTypes = {
 };
 
 export const GridCol = ({
-  sm = '',
-  md = '',
-  lg = '',
-  xlg = '',
-  max = '',
-  smOffset = '',
-  mdOffset = '',
-  lgOffset = '',
-  xlgOffset = '',
-  maxOffset = '',
+  sm = undefined,
+  md = undefined,
+  lg = undefined,
+  xlg = undefined,
+  max = undefined,
+  smOffset = undefined,
+  mdOffset = undefined,
+  lgOffset = undefined,
+  xlgOffset = undefined,
+  maxOffset = undefined,
   noGutter = false,
   className = '',
   children = null,
@@ -93,16 +119,18 @@ export const GridCol = ({
   <div
     className={classNames(
       `${prefix}--col`,
-      sm && `${prefix}--col-sm-${sm === 'auto' ? '-' : ''}${sm}`,
-      md && `${prefix}--col-md-${md === 'auto' ? '-' : ''}${md}`,
-      lg && `${prefix}--col-lg-${lg === 'auto' ? '-' : ''}${lg}`,
-      xlg && `${prefix}--col-xlg-${xlg === 'auto' ? '-' : ''}${xlg}`,
-      max && `${prefix}--col-max-${max === 'auto' ? '-' : ''}${max}`,
-      smOffset && `${prefix}--offset-sm-${smOffset}`,
-      mdOffset && `${prefix}--offset-md-${mdOffset}`,
-      lgOffset && `${prefix}--offset-lg-${lgOffset}`,
-      xlgOffset && `${prefix}--offset-xlg-${xlgOffset}`,
-      maxOffset && `${prefix}--offset-max-${maxOffset}`,
+      sm !== undefined && `${prefix}--col-sm-${sm === 'auto' ? '-' : ''}${sm}`,
+      md !== undefined && `${prefix}--col-md-${md === 'auto' ? '-' : ''}${md}`,
+      lg !== undefined && `${prefix}--col-lg-${lg === 'auto' ? '-' : ''}${lg}`,
+      xlg !== undefined &&
+        `${prefix}--col-xlg-${xlg === 'auto' ? '-' : ''}${xlg}`,
+      max !== undefined &&
+        `${prefix}--col-max-${max === 'auto' ? '-' : ''}${max}`,
+      smOffset !== undefined && `${prefix}--offset-sm-${smOffset}`,
+      mdOffset !== undefined && `${prefix}--offset-md-${mdOffset}`,
+      lgOffset !== undefined && `${prefix}--offset-lg-${lgOffset}`,
+      xlgOffset !== undefined && `${prefix}--offset-xlg-${xlgOffset}`,
+      maxOffset !== undefined && `${prefix}--offset-max-${maxOffset}`,
       noGutter === true && `${prefix}--no-gutter`, // `true` === both
       noGutter !== true && noGutter && `${prefix}--no-gutter--${noGutter}`, // `left` || `right`
       className
@@ -121,7 +149,7 @@ GridCol.propTypes = {
    *
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  sm: PropTypes.oneOf(['auto', '0', '1', '2', '3', '4']),
+  sm: PropTypes.oneOf(VALID_COL_WIDTHS.sm),
 
   /**
    * Specify column span at this width.
@@ -132,7 +160,7 @@ GridCol.propTypes = {
    *
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  md: PropTypes.oneOf(['auto', '0', '1', '2', '3', '4', '5', '6', '7', '8']),
+  md: PropTypes.oneOf(VALID_COL_WIDTHS.md),
 
   /**
    * Specify column span at this width.
@@ -141,22 +169,7 @@ GridCol.propTypes = {
    *
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  lg: PropTypes.oneOf([
-    'auto',
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-    '12',
-  ]),
+  lg: PropTypes.oneOf(VALID_COL_WIDTHS.lgPlus),
 
   /**
    * Specify column span at this width.
@@ -165,22 +178,7 @@ GridCol.propTypes = {
    *
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  xlg: PropTypes.oneOf([
-    'auto',
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-    '12',
-  ]),
+  xlg: PropTypes.oneOf(VALID_COL_WIDTHS.lgPlus),
 
   /**
    * Specify column span at this width.
@@ -189,22 +187,7 @@ GridCol.propTypes = {
    *
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  max: PropTypes.oneOf([
-    'auto',
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-    '12',
-  ]),
+  max: PropTypes.oneOf(VALID_COL_WIDTHS.lgPlus),
 
   /**
    * Offset content by a given column span,
@@ -212,7 +195,7 @@ GridCol.propTypes = {
    *
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  smOffset: PropTypes.oneOf(['0', '1', '2', '3']),
+  smOffset: PropTypes.oneOf(VALID_COL_OFFSETS.sm),
 
   /**
    * Offset content by a given column span,
@@ -220,7 +203,7 @@ GridCol.propTypes = {
    *
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  mdOffset: PropTypes.oneOf(['0', '1', '2', '3', '4', '5', '6', '7']),
+  mdOffset: PropTypes.oneOf(VALID_COL_OFFSETS.md),
 
   /**
    * Offset content by a given column span,
@@ -228,20 +211,7 @@ GridCol.propTypes = {
    *
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  lgOffset: PropTypes.oneOf([
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-  ]),
+  lgOffset: PropTypes.oneOf(VALID_COL_OFFSETS.lgPlus),
 
   /**
    * Offset content by a given column span,
@@ -249,20 +219,7 @@ GridCol.propTypes = {
    *
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  xlgOffset: PropTypes.oneOf([
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-  ]),
+  xlgOffset: PropTypes.oneOf(VALID_COL_OFFSETS.lgPlus),
 
   /**
    * Offset content by a given column span,
@@ -270,20 +227,7 @@ GridCol.propTypes = {
    *
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  maxOffset: PropTypes.oneOf([
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-  ]),
+  maxOffset: PropTypes.oneOf(VALID_COL_OFFSETS.lgPlus),
 
   /** Remove horizontal padding on the Grid Col */
   noGutter: PropTypes.oneOf([false, true, 'left', 'right']),
@@ -295,6 +239,8 @@ GridCol.propTypes = {
   children: PropTypes.node,
 };
 
+Grid.getValidColWidths = getValidColWidths;
+Grid.getValidColOffsets = getValidColOffsets;
 Grid.Row = GridRow;
 Grid.Col = GridCol;
 
