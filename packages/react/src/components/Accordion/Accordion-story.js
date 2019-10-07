@@ -24,6 +24,8 @@ const props = {
   onHeadingClick: action('onHeadingClick'),
 };
 
+Select.displayName = 'Select';
+
 storiesOf('Accordion', module)
   .addDecorator(withKnobs)
   .add(
@@ -67,9 +69,9 @@ storiesOf('Accordion', module)
         </AccordionItem>
         <AccordionItem
           title={
-            <h4>
+            <span>
               Section 4 title (<em>the title can be a node</em>)
-            </h4>
+            </span>
           }
           {...props}>
           <p>

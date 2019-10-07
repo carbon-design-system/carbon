@@ -425,3 +425,6 @@ $carbon--theme--rocket: (
 /// @alias carbon--theme--white
 /// @group @rocketsoftware/themes
 $carbon--theme: $carbon--theme--white !default;
+
+@import './generated/tokens';
+@import './generated/themes';

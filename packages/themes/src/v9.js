@@ -5,13 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { white } from '@rocketsoftware/colors';
+import { white, red60 } from '@rocketsoftware/colors';
 
 export const interactive01 = '#3d70b2';
 export const interactive02 = '#5a6872';
 export const interactive03 = '#5a6872';
 export const interactive04 = '#3d70b2';
-export const danger = '#e0182d';
 export const uiBackground = '#f4f7fb';
 
 export const ui01 = white;
@@ -52,6 +51,8 @@ export const inverseSupport04 = '#5aaafa';
 
 export const overlay01 = 'rgba(223, 227, 230, 0.5)';
 
+export const danger = red60;
+
 // Interaction states
 export const focus = '#3d70b2';
 export const inverseFocusUi = '#3d70b2';
@@ -89,6 +90,39 @@ export const highlight = '#f4f7fb';
 
 export const skeleton01 = 'rgba(61, 112, 178, .1)';
 export const skeleton02 = 'rgba(61, 112, 178, .1)';
+
+// Type
+export { caption01 } from './white';
+export { label01 } from './white';
+export { helperText01 } from './white';
+export { bodyShort01 } from './white';
+export { bodyLong01 } from './white';
+export { bodyShort02 } from './white';
+export { bodyLong02 } from './white';
+export { code01 } from './white';
+export { code02 } from './white';
+export { heading01 } from './white';
+export { productiveHeading01 } from './white';
+export { heading02 } from './white';
+export { productiveHeading02 } from './white';
+export { productiveHeading03 } from './white';
+export { productiveHeading04 } from './white';
+export { productiveHeading05 } from './white';
+export { productiveHeading06 } from './white';
+export { productiveHeading07 } from './white';
+export { expressiveHeading01 } from './white';
+export { expressiveHeading02 } from './white';
+export { expressiveHeading03 } from './white';
+export { expressiveHeading04 } from './white';
+export { expressiveHeading05 } from './white';
+export { expressiveHeading06 } from './white';
+export { expressiveParagraph01 } from './white';
+export { quotation01 } from './white';
+export { quotation02 } from './white';
+export { display01 } from './white';
+export { display02 } from './white';
+export { display03 } from './white';
+export { display04 } from './white';
 
 // Deprecated ☠️
 export const brand01 = interactive01;
