@@ -2675,10 +2675,50 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
+"@rocketsoftware/carbon-components-react@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/carbon-components-react/-/carbon-components-react-0.0.7.tgz#972114927a34200a09ca11b47352cec2cefe51a1"
+  integrity sha512-z0dlC2lNGELUtVtSyIQzxrGXT54e5aYD+ws+M7680wMYKN1YDhf4KIojI3B8G7p05cTuJnt0nz1aMmkdbTCfzw==
+  dependencies:
+    "@rocketsoftware/icons-react" "^0.0.7"
+    classnames "2.2.6"
+    downshift "^1.31.14"
+    flatpickr "4.6.1"
+    focus-trap-react "^6.0.0"
+    invariant "^2.2.3"
+    lodash.debounce "^4.0.8"
+    lodash.isequal "^4.5.0"
+    lodash.omit "^4.5.0"
+    react-is "^16.8.6"
+    warning "^3.0.0"
+    window-or-global "^1.0.1"
+
+"@rocketsoftware/carbon-components@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/carbon-components/-/carbon-components-0.0.7.tgz#04bf47a625b08a3b7ab075af4d0c06e8552cf71f"
+  integrity sha512-+yNlOYdcLoNM3X7nkwS/vx182WmmzEAyfzr5t8TtkCMGnOm/C6aYpP89S85xBv610kRu6lFUpqI9U5UTauQpAg==
+  dependencies:
+    carbon-icons "^7.0.7"
+    flatpickr "4.6.1"
+    lodash.debounce "^4.0.8"
+    warning "^3.0.0"
+
 "@rocketsoftware/icon-helpers@0.0.6":
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/@rocketsoftware/icon-helpers/-/icon-helpers-0.0.6.tgz#35d124ca6b68048eeac494f20529f292f1fd5374"
   integrity sha512-QwbjmIBICC9ENbOUq/mzZULy4kxe0a3XFnfcFyvkDmRvMTenw+LcPeAtmtdTjqSIuRhRMvCES+UOJnXY2Z27MA==
+
+"@rocketsoftware/icon-helpers@0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/icon-helpers/-/icon-helpers-0.0.7.tgz#d2c9569d64d985df8bb88eef7dd658ecbd7cbe32"
+  integrity sha512-QQ7lkoPwMSTphy4Nk+Sq/9rIdOSjZrHGUoP2ilyPmjVOCImJ20jjpCiEMpi8mJRcPN85/KV9q0TUg5mcT/F79Q==
+
+"@rocketsoftware/icons-react@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/icons-react/-/icons-react-0.0.7.tgz#ea14206ff25558e38afeaed7c9ae85a6ada84c11"
+  integrity sha512-kWTJNtjxGqPoSaA85yavP4rAwQGnTliBKNnzV1XnMQQuEf5oTOPWuUw7NX/ezU8+n7P9JDrDjNX+/1/EpQlvMg==
+  dependencies:
+    "@rocketsoftware/icon-helpers" "0.0.7"
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
