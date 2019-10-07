@@ -44,6 +44,9 @@ const Panel = ({ api, active }) => {
             <option key="g100" value="g100">
               g100
             </option>
+            <option key="rocket" value="rocket">
+              rocket
+            </option>
           </Form.Select>
         </Form.Field>
       </Form>
