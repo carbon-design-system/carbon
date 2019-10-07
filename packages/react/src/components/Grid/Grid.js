@@ -91,7 +91,7 @@ GridRow.propTypes = {
   /** Specify a single row as condensed. Rows that are adjacent and are condensed will have 2px of margin between them to match gutter. */
   condensed: PropTypes.bool,
 
-  /** Remove horizontal padding on the Grid Row */
+  /** Remove horizontal padding on the Grid Row AND all child Grid Cols */
   noGutter: PropTypes.oneOf([true, false, 'left', 'right']),
 
   /** Specify a custom className to be applied to the Grid Row */
