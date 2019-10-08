@@ -190,6 +190,9 @@ export default class Dropdown extends React.Component {
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
+
+    const dropdownId = `dropdown-${this.dropdownInstanceId}`;
+
     const title = titleText ? (
       <label htmlFor={dropdownId} className={titleClasses}>
         {titleText}
@@ -211,8 +214,6 @@ export default class Dropdown extends React.Component {
         [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
       }
     );
-
-    const dropdownId = `dropdown-${this.dropdownInstanceId}`;
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
