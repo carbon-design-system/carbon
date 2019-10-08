@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { unstable_tokens as type } from '@carbon/type';
+
 // The color token names for a Carbon theme, value corresponds to what they're
 // exported as in JavaScript
 const colors = [
@@ -13,7 +15,6 @@ const colors = [
   'interactive02',
   'interactive03',
   'interactive04',
-  'danger',
 
   'uiBackground',
 
@@ -54,6 +55,8 @@ const colors = [
   'inverseSupport04',
 
   'overlay01',
+
+  'danger',
 
   // Interactive states
   'focus',
@@ -142,6 +145,7 @@ export function formatTokenName(token) {
 
 export const tokens = {
   colors,
+  type,
 };
 
 export const unstable__meta = {
@@ -154,10 +158,10 @@ export const unstable__meta = {
         'interactive02',
         'interactive03',
         'interactive04',
-        'danger',
         'brand01',
         'brand02',
         'brand03',
+        'danger',
         'ui01',
         'ui02',
         'ui03',

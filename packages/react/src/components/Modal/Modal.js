@@ -239,6 +239,10 @@ export default class Modal extends Component {
     }
   };
 
+  componentWillUnmount() {
+    toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+  }
+
   componentDidMount() {
     toggleClass(
       document.body,

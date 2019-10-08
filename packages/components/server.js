@@ -1,7 +1,5 @@
 'use strict';
 
-/* eslint import/no-extraneous-dependencies: [2, {"devDependencies": true}] */
-
 const path = require('path');
 const pathRegexp = require('path-to-regexp');
 const browserSync = require('browser-sync');

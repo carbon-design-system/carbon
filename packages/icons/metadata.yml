@@ -783,12 +783,8 @@ icons:
       - name: Actions
         subcategory: Operations
     aliases:
-      - settings
       - refine
       - funnel
-      - adjust
-      - modify
-      - set
     sizes:
       - 16
       - 32
