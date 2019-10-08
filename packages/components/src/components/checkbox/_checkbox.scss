@@ -48,7 +48,6 @@
   .#{$prefix}--checkbox-label {
     @include reset;
     @include type-style('body-short-01');
-
     line-height: 1.5rem;
     position: relative;
     display: flex;
@@ -58,9 +57,14 @@
     user-select: none;
   }
 
+  // Required because `$css--reset: true` cannot currently apply to this `::before` and `::after`
+  .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label::after {
+    box-sizing: border-box;
+  }
+
   // Spacing for presentational checkbox
   .#{$prefix}--checkbox-label::before {
-    box-sizing: border-box;
     content: '';
 
     // According to the spec, we'll want the bounding box for our checkbox to
@@ -87,11 +91,12 @@
   // Create the appearance of the check in the `after` pseudo-element
   .#{$prefix}--checkbox-label::after {
     content: '';
+
     position: absolute;
     left: rem(6px);
     top: rem(8px);
-    width: rem(7px);
-    height: rem(3px);
+    width: rem(9px);
+    height: rem(5px);
     background: none;
     border-left: 2px solid $inverse-01;
     border-bottom: 2px solid $inverse-01;
