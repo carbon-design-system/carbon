@@ -21,6 +21,10 @@
   cursor: pointer;
   overflow: visible;
 
+  &:focus {
+    @include focus-outline('border');
+  }
+
   @if $tooltip-type == 'icon' {
     &:focus {
       outline: 1px solid transparent;
