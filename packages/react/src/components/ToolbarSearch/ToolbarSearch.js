@@ -69,7 +69,7 @@ export default class ToolbarSearch extends Component {
     if (__DEV__) {
       warning(
         didWarnAboutDeprecation,
-        'The `ComponentName` component has been deprecated and will be removed in the next major release of `carbon-components-react`'
+        'The ToolbarSearch component has been deprecated and will be removed in the next major release of `carbon-components-react`'
       );
       didWarnAboutDeprecation = true;
     }
