@@ -5,135 +5,125 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
-import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, {
-  Children,
-  cloneElement,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React from 'react';
+import classNames from 'classnames';
+import { settings } from 'carbon-components';
 import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
-function ContentSwitcher({
-  children,
-  className: customClassName,
-  onChange,
-  selectedIndex: controlledSelectedIndex = 0,
-  ...rest
-}) {
-  const switchRefs = [];
-  const className = cx(`${prefix}--content-switcher`, customClassName);
-  const savedOnChange = useRef(null);
-  const [selectedIndex, setSelectedIndex] = useState(controlledSelectedIndex);
-  const [prevControlledIndex, setPrevControlledIndex] = useState(
-    controlledSelectedIndex
-  );
-  const [shouldFocus, setShouldFocus] = useState(false);
+export default class ContentSwitcher extends React.Component {
+  /**
+   * The DOM references of child `<Switch>`.
+   * @type {Array<Element>}
+   * @private
+   */
+  _switchRefs = [];
 
-  if (controlledSelectedIndex !== prevControlledIndex) {
-    setSelectedIndex(controlledSelectedIndex);
-    setPrevControlledIndex(controlledSelectedIndex);
-    setShouldFocus(false);
+  state = {};
+
+  static propTypes = {
+    /**
+     * Pass in Switch components to be rendered in the ContentSwitcher
+     */
+    children: PropTypes.node,
+
+    /**
+     * Specify an optional className to be added to the container node
+     */
+    className: PropTypes.string,
+
+    /**
+     * Specify an `onChange` handler that is called whenever the ContentSwitcher
+     * changes which item is selected
+     */
+    onChange: PropTypes.func.isRequired,
+
+    /**
+     * Specify a selected index for the initially selected content
+     */
+    selectedIndex: PropTypes.number,
+  };
+
+  static defaultProps = {
+    selectedIndex: 0,
+  };
+
+  static getDerivedStateFromProps({ selectedIndex }, state) {
+    const { prevSelectedIndex } = state;
+    return prevSelectedIndex === selectedIndex
+      ? null
+      : {
+          selectedIndex,
+          prevSelectedIndex: selectedIndex,
+        };
   }
 
-  // Always keep track of the latest `onChange` prop to use in our focus effect
-  // handler
-  useEffect(() => {
-    savedOnChange.current = onChange;
-  }, [onChange]);
+  handleItemRef = index => ref => {
+    this._switchRefs[index] = ref;
+  };
 
-  // If our selectedIndex has changed from an event handler, meaning that
-  // `shouldFocus` is set to true, then call the saved `onChange` handler if it
-  // exists
-  useEffect(() => {
-    if (shouldFocus && savedOnChange.current) {
-      savedOnChange.current(selectedIndex);
-    }
-  }, [shouldFocus, selectedIndex]);
+  handleChildChange = data => {
+    // the currently selected child index
+    const { selectedIndex } = this.state;
+    // the newly selected child index
+    const { index } = data;
+    const { key } = data;
 
-  // We have a couple of scenarios we want to keep track of when managing focus:
-  // 1) Don't focus the ref at the selectedIndex if its the first render, focus
-  //    should only come from a user action
-  // 2) Don't focus if selectedIndex has changed because of a change in props
-  // 3) Trigger focus if triggered by click or key down. Both of these handlers
-  //    should set `shouldFocus` to true
-  useEffect(() => {
-    if (!shouldFocus) {
-      return;
-    }
-
-    const ref = switchRefs[selectedIndex];
-    if (ref && document.activeElement !== ref) {
-      ref.focus && ref.focus();
-    }
-  }, [shouldFocus, switchRefs, selectedIndex]);
-
-  function handleItemRef(index) {
-    return ref => {
-      switchRefs[index] = ref;
-    };
-  }
-
-  function onClick(event, index) {
-    if (selectedIndex !== index) {
-      setSelectedIndex(index);
-      if (shouldFocus !== true) {
-        setShouldFocus(true);
+    if (matches(data, [keys.ArrowRight, keys.ArrowLeft])) {
+      const nextIndex = getNextIndex(
+        key,
+        selectedIndex,
+        this.props.children.length
+      );
+      this.setState(
+        {
+          selectedIndex: nextIndex,
+        },
+        () => {
+          const switchRef = this._switchRefs[nextIndex];
+          switchRef && switchRef.focus();
+          this.props.onChange(data);
+        }
+      );
+    } else {
+      if (selectedIndex !== index) {
+        this.setState({ selectedIndex: index }, () => {
+          const switchRef = this._switchRefs[index];
+          switchRef && switchRef.focus();
+          this.props.onChange(data);
+        });
       }
     }
-  }
+  };
 
-  function onKeyDown(event) {
-    if (matches(event, [keys.ArrowRight, keys.ArrowLeft])) {
-      setSelectedIndex(getNextIndex(event, selectedIndex, children.length));
-      if (shouldFocus !== true) {
-        setShouldFocus(true);
-      }
-    }
-  }
+  render() {
+    const {
+      children,
+      className,
+      selectedIndex, // eslint-disable-line no-unused-vars
+      ...other
+    } = this.props;
 
-  return (
-    <div className={className} {...rest}>
-      {Children.map(children, (child, index) =>
-        cloneElement(child, {
-          index,
-          onClick: composeEventHandlers([onClick, child.props.onClick]),
-          onKeyDown: composeEventHandlers([onKeyDown, child.props.onKeyDown]),
-          selected: index === selectedIndex,
-          ref: handleItemRef(index),
-        })
-      )}
-    </div>
-  );
+    const classes = classNames(`${prefix}--content-switcher`, className);
+
+    return (
+      <div {...other} className={classes}>
+        {React.Children.map(children, (child, index) =>
+          React.cloneElement(child, {
+            index,
+            onClick: composeEventHandlers([
+              this.handleChildChange,
+              child.props.onClick,
+            ]),
+            onKeyDown: this.handleChildChange,
+            selected: index === this.state.selectedIndex,
+            ref: this.handleItemRef(index),
+          })
+        )}
+      </div>
+    );
+  }
 }
-
-ContentSwitcher.propTypes = {
-  /**
-   * Pass in Switch components to be rendered in the ContentSwitcher
-   */
-  children: PropTypes.node,
-
-  /**
-   * Specify an optional className to be added to the container node
-   */
-  className: PropTypes.string,
-
-  /**
-   * Specify an `onChange` handler that is called whenever the ContentSwitcher
-   * changes which item is selected
-   */
-  onChange: PropTypes.func.isRequired,
-
-  /**
-   * Specify a selected index for the initially selected content
-   */
-  selectedIndex: PropTypes.number,
-};
-
-export default ContentSwitcher;
