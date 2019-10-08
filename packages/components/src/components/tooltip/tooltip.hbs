@@ -37,10 +37,9 @@
     {{ carbon-icon 'Information16' }}
   </button>
 </div>
-<div id="{{heading.idSuffix}}" aria-hidden="true" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip"
-  role="dialog" aria-describedby="{{heading.idSuffix}}-body" aria-labelledby="{{heading.idSuffix}}-heading">
+<div id="{{heading.idSuffix}}" aria-hidden="true" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip">
   <span class="{{@root.prefix}}--tooltip__caret"></span>
-  <div class="{{@root.prefix}}--tooltip__content" tabindex="0">
+  <div class="{{@root.prefix}}--tooltip__content" tabindex="0" role="dialog" aria-labelledby="{{heading.idSuffix}}-heading">
     <h4 id="{{heading.idSuffix}}-heading" class="{{@root.prefix}}--tooltip__heading">Heading within a Tooltip</h4>
     <p id="{{heading.idSuffix}}-body" >This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is
       needed please use a modal instead.</p>
