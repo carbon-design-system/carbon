@@ -57,7 +57,7 @@ export const ProgressStep = ({ ...props }) => {
     }
     if (complete) {
       return (
-        <CheckmarkOutline16 role="img">
+        <CheckmarkOutline16>
           <title>{description}</title>
         </CheckmarkOutline16>
       );
