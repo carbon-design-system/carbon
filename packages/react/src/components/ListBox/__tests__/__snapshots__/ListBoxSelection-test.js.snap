@@ -32,7 +32,7 @@ exports[`ListBoxSelection should render 1`] = `
     onClick={[Function]}
     onKeyDown={[Function]}
     role="button"
-    tabIndex="0"
+    tabIndex={0}
     title="translation"
   >
     <ForwardRef(Close16)>
@@ -100,7 +100,7 @@ exports[`ListBoxSelection should render 2`] = `
     onClick={[Function]}
     onKeyDown={[Function]}
     role="button"
-    tabIndex="0"
+    tabIndex={0}
     title="translation"
   >
     3
