@@ -2,7 +2,7 @@
 
 exports[`_css--font-face.scss experimental should output @font-face blocks from elements if components-x flag is enabled 1`] = `
 "h1 {
-  font-size: 2rem;
+  font-size: 2.625rem;
   font-weight: 300;
   line-height: 3.125rem;
   letter-spacing: 0; }
@@ -772,7 +772,7 @@ em {
 
 exports[`_css--font-face.scss should not output CSS if $css--font-face is false 1`] = `
 "h1 {
-  font-size: 2rem;
+  font-size: 2.625rem;
   font-weight: 300;
   line-height: 3.125rem;
   letter-spacing: 0; }

@@ -14,7 +14,11 @@ $custom-property-prefix: 'cds' !default;
 @mixin custom-property($name, $value, $prefix: $custom-property-prefix) {
   @if type-of($value) == map {
     @each $property, $property-value in $value {
-      @include custom-property('#{$name}-#{$property}', $property-value);
+      // Only support one-level of depth for values that are maps. This is to
+      // avoid bringing properties like `breakpoints` on type tokens
+      @if type-of($property-value) != map {
+        @include custom-property('#{$name}-#{$property}', $property-value);
+      }
     }
   } @else {
     --#{$prefix}-#{$name}: #{$value};

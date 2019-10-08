@@ -10,6 +10,7 @@
 const fs = require('fs');
 const { render, types } = require('node-sass');
 const path = require('path');
+const resolve = require('resolve');
 
 function sassAsync(options) {
   return new Promise((resolve, reject) => {
@@ -23,6 +24,10 @@ function sassAsync(options) {
   });
 }
 
+const defaultResolveOptions = {
+  extensions: ['.scss'],
+};
+
 /**
  * Create an importer for sass with the given `cwd`. This importer will try and
  * mimic the default sass resolution algorithm
@@ -32,6 +37,27 @@ function sassAsync(options) {
 function createImporter(cwd) {
   return (url, prev, done) => {
     const baseDirectory = prev !== 'stdin' ? path.dirname(prev) : cwd;
+
+    if (url.startsWith('@')) {
+      const file = resolve.sync(url, {
+        ...defaultResolveOptions,
+        basedir: cwd,
+        packageFilter(pkg) {
+          if (pkg.eyeglass !== undefined) {
+            // Replace JavaScript entrypoint with Sass module entrypoing
+            pkg.main = `${pkg.eyeglass.sassDir}/index.scss`;
+          }
+          return pkg;
+        },
+        pathFilter(pkg, path, relativePath) {
+          // Transforms `scss/filename` to `scss/_filename.scss`
+          return relativePath.replace(/^(scss\/)([a-z-]+)/, '$1_$2.scss');
+        },
+      });
+      done({ file });
+      return;
+    }
+
     const partialFilepath = path.resolve(
       baseDirectory,
       path.dirname(url),

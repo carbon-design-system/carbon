@@ -13,6 +13,7 @@ import l10n from 'flatpickr/dist/l10n/index';
 import rangePlugin from 'flatpickr/dist/plugins/rangePlugin';
 import { settings } from 'carbon-components';
 import DatePickerInput from '../DatePickerInput';
+import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
 import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
@@ -355,6 +356,10 @@ export default class DatePicker extends Component {
               selectorFlatpickrYearContainer: '.numInputWrapper',
               selectorFlatpickrCurrentMonth: '.cur-month',
               classFlatpickrCurrentMonth: 'cur-month',
+            }),
+            carbonFlatpickrFixEventsPlugin({
+              inputFrom: this.inputField,
+              inputTo: this.toInputField,
             }),
           ],
           clickOpens: true,
