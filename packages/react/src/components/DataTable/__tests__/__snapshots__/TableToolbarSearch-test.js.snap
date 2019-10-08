@@ -24,7 +24,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
       labelText="Filter table"
       onChange={[Function]}
       placeHolderText="Filter table"
-      small={true}
+      size="sm"
       type="text"
       value=""
     >
