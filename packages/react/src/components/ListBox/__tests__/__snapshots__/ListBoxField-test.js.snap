@@ -23,7 +23,7 @@ exports[`ListBoxField should render 1`] = `
         onClick={[Function]}
         onKeyDown={[Function]}
         role="button"
-        tabIndex="0"
+        tabIndex={0}
         title="Clear selected item"
       >
         <ForwardRef(Close16)>
@@ -85,7 +85,7 @@ exports[`ListBoxField should set \`aria-owns\` based when expanded 1`] = `
         onClick={[Function]}
         onKeyDown={[Function]}
         role="button"
-        tabIndex="0"
+        tabIndex={0}
         title="Clear selected item"
       >
         <ForwardRef(Close16)>
