@@ -45,6 +45,7 @@ import 'carbon-components/src/components/tile/_tile.scss';
 import 'carbon-components/src/components/skeleton/_skeleton.scss';
 import 'carbon-components/src/components/inline-loading/_inline-loading.scss';
 import 'carbon-components/src/components/pagination-nav/_pagination-nav.scss';
+import 'carbon-components/src/components/ui-shell/_ui-shell.scss';
 
 const { prefix } = settings;
 export default class Container extends Component {
