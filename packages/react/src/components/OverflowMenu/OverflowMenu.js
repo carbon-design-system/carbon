@@ -535,7 +535,6 @@ class OverflowMenu extends Component {
           aria-expanded={this.state.open}
           className={overflowMenuClasses}
           onKeyDown={this.handleKeyPress}
-          onBlur={this.handleBlur}
           onClick={this.handleClick}
           aria-label={ariaLabel}
           id={id}
