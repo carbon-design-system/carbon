@@ -18,7 +18,7 @@
 @mixin checkbox {
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
-    margin-bottom: rem(8px);
+    margin-bottom: $carbon--spacing-02;
   }
 
   // Spacing above collection of checkboxes
@@ -26,9 +26,10 @@
     margin-top: rem(3px);
   }
 
-  // Remove spacing above collection of checkboxes if label is present
+  // Shift collection of checkboxes up if label is present
+  // to account for the 2px top margin for the first checkbox
   .#{$prefix}--label + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
-    margin-top: 0;
+    margin-top: -#{$carbon--spacing-01};
   }
 
   // Spacing below collection of checkboxes

@@ -7,7 +7,8 @@ Use these modifiers with `.bx--search` class.
 | Name                 | Description                                  |
 | -------------------- | -------------------------------------------- |
 | `.bx--search--sm`    | Selector for applying small search styles    |
-| `.bx--search--lg`    | Selector for applying standard search styles |
+| `.bx--search--lg`    | Selector for applying medium search styles   |
+| `.bx--search--xl`    | Selector for applying standard search styles |
 | `.bx--search--light` | Selector for applying light search styles    |
 
 ### JavaScript

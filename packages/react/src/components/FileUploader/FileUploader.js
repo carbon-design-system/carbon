@@ -175,9 +175,8 @@ export class FileUploaderButton extends Component {
             }
           }}
           htmlFor={this.uid}
-          role={role}
           {...other}>
-          {this.state.labelText}
+          <span role={role}>{this.state.labelText}</span>
         </label>
         <input
           className={`${prefix}--visually-hidden`}
