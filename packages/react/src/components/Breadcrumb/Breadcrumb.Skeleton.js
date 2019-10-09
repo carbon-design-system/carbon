@@ -14,9 +14,7 @@ export default class BreadcrumbSkeleton extends React.Component {
   render() {
     const item = (
       <div className={`${prefix}--breadcrumb-item`}>
-        <a href="/#" className={`${prefix}--link`}>
-          &nbsp;
-        </a>
+        <span className={`${prefix}--link`}>&nbsp;</span>
       </div>
     );
     return (
