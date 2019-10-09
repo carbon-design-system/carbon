@@ -11,6 +11,7 @@ import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import Modal from '../Modal';
+import TextInput from '../TextInput';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -71,6 +72,33 @@ storiesOf('Modal', module)
         text: `
             Modals communicate information via a secondary window and allow the user to maintain the context of a particular task.
             Use the Modal Wrapper component to encapsulate your Modal within a button.
+          `,
+      },
+    }
+  )
+  .add(
+    'Trap Focus',
+    () => (
+      <>
+        <Modal {...props()} selectorPrimaryFocus="#text-input-2">
+          <TextInput
+            id="text-input-1"
+            labelText="Text Input 1"
+            placeholder="Enter text..."
+            style={{ marginBottom: '1rem' }}
+          />
+          <TextInput
+            id="text-input-2"
+            labelText="Text Input 2"
+            placeholder="Enter text..."
+          />
+        </Modal>
+      </>
+    ),
+    {
+      info: {
+        text: `
+            Specify a selector for the primary element to focus when opening a modal.
           `,
       },
     }

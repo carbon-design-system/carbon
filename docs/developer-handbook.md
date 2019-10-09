@@ -7,6 +7,7 @@
 
 - [Getting started](#getting-started)
 - [Common tasks](#common-tasks)
+  - [`carbon-components`](#carbon-components)
 - [Dependency management](#dependency-management)
   - [Continuous Integration](#continuous-integration)
 - [Package architecture and layout](#package-architecture-and-layout)
@@ -19,6 +20,18 @@
   - [Body](#body)
   - [Footer](#footer)
   - [Examples](#examples)
+- [Coding style](#coding-style)
+  - [Class names](#class-names)
+  - [Sass documentation](#sass-documentation)
+  - [Start a new `block` or `element`?](#start-a-new-block-or-element)
+  - [Red flags](#red-flags)
+  - [Files and folders](#files-and-folders)
+  - [Defining markups for components and their variants](#defining-markups-for-components-and-their-variants)
+  - [Defining markup with no conditional or data interpolations](#defining-markup-with-no-conditional-or-data-interpolations)
+  - [Defining markup with conditionals or data interpolations](#defining-markup-with-conditionals-or-data-interpolations)
+  - [Working on JavaScript-framework-specific styles](#working-on-javascript-framework-specific-styles)
+  - [Using `npm link`/`yarn link`](#using-npm-linkyarn-link)
+  - [Pointing NPM dependency of `carbon-components` right to the source code](#pointing-npm-dependency-of-carbon-components-right-to-the-source-code)
 - [Maintainers](#maintainers)
   - [Code Patterns](#code-patterns)
     - [Deprecating a component](#deprecating-a-component)
@@ -94,6 +107,36 @@ package you could do the following:
 # Access $(yarn bin)/lerna and pass `run build` to the executable
 yarn lerna run build
 ```
+
+### `carbon-components`
+
+Tests are written in [Mocha](https://mochajs.org)/[Chai](http://chaijs.com). You
+can see if your code is covered by looking at
+carbon-components/tests/coverage/\*/index.html after running test.
+
+If your change may hit some browser quirks, use `-b` option, like:
+
+```sh
+gulp test:unit -b IE -b Firefox
+```
+
+(Other browsers tests can run with are: `Safari`, `Chrome` and `ChromeHeadless`)
+
+If you are very sure that your change affects a specific set of components, you
+can use `-f` option, like:
+
+```sh
+gulp test:unit -f tests/spec/fab_spec.js
+```
+
+Other options for testing are:
+
+- `-d`/`--debug`: Stop generating code coverage report. Useful to debug your
+  code when running test.
+- `-k`/`--keepalive`: Keep running test runner even after test ends. Test will
+  restart running when you make changes to any test files or any files under
+  test.
+- `-v`/`--verbose`: Let Karma emit detailed log.
 
 ## Dependency management
 
@@ -264,6 +307,319 @@ Running things like formatting, or generally any project clean-up tasks, can be
 considered a chore that we are doing to keep things up-to-date.
 
 </details>
+
+## Coding style
+
+### Class names
+
+Prefix all class names with `#{$prefix}--` in SCSS, which is replaced with
+`bx--` by default, and design systems inheriting Carbon can override. This
+prefix prevents potential conflicts with class names from the user.
+
+**HTML**
+
+```html
+<div
+  class="bx--inline-notification bx--inline-notification--error"
+  role="alert"
+>
+  <div class="bx--inline-notification__details">...</div>
+</div>
+```
+
+**SCSS**
+
+```scss
+.#{$prefix}--inline-notification {
+  ...
+}
+
+.#{$prefix}--inline-notification__details {
+  ...
+}
+```
+
+Follow BEM naming convention for classes. Again, the only thing we do
+differently is prefix all classes with `#{$prefix}--`.
+
+```scss
+.#{$prefix}--block
+.#{$prefix}--block__element
+.#{$prefix}--block--modifier
+```
+
+Avoid nesting selectors, this will make it easier to maintain in the future.
+
+```scss
+// Don't do this
+.#{$prefix}--inline-notification {
+  .#{$prefix}--btn {
+    &:hover {
+      svg {
+        ...
+      }
+    }
+  }
+}
+
+// Do this instead
+.#{$prefix}--inline-notification .#{$prefix}--btn {
+    &:hover svg {
+      ...
+    }
+  }
+}
+```
+
+### Sass documentation
+
+[SassDoc](http://sassdoc.com) is used to document the Carbon Sass source.
+SassDoc annotations start each line with `///`; do not use `///` in non-SassDoc
+comments.
+
+For consistency, capitalize types (used in `@type`, `@param`, `@return`) and
+descriptions (used in `@param`, `@return`, `@deprecated`, `@example`, `@link`).
+
+The following annotations are used:
+
+**Required annotations**
+
+- [Description](http://sassdoc.com/annotations/#description) - can be one line
+  or multiple lines
+- [`@access`](http://sassdoc.com/annotations/#access) - `public` or `private`,
+  where public items make up our public API
+- [`@group`](http://sassdoc.com/annotations/#group) - typically a package or
+  component name
+- [`@type`](http://sassdoc.com/annotations/#type) - allowed on **variables**,
+  (e.g. `Map`, `Color`, `Number`)
+- [`@param`](http://sassdoc.com/annotations/#parameter) - allowed on
+  **functions** and **mixins**, include the type, name, and description, with a
+  default value if there is one (e.g.
+  `@param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name`)
+- [`@return`](http://sassdoc.com/annotations/#return) - allowed on
+  **functions**, include the type and description (e.g.
+  `@return {Number} In px`)
+- [`@alias`](http://sassdoc.com/annotations/#alias) - do not include the `$` if
+  aliasing a variable
+- [`@content`](http://sassdoc.com/annotations/#content) - allowed on **mixins**,
+  describe the usage of content
+- [`@deprecated`](http://sassdoc.com/annotations/#deprecated) - context around
+  possible replacements or when the item will no longer be available
+
+  **Optional annotations**
+
+- [`@example`](http://sassdoc.com/annotations/#example) - if the usage isn't
+  straight forward or there are multiple use cases
+- [`@link`](http://sassdoc.com/annotations/#link) - if there's a related link to
+  reference
+
+  **Examples**
+
+```scss
+// Variable example
+
+/// Primary interactive color; Primary buttons
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$interactive-01: map-get($carbon--theme, interactive-01) !default;
+
+// Mixin example
+
+/// Create the container for a grid. Will cause full-bleed for the grid unless
+/// max-width properties are added with `make-container-max-widths`
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--make-container($breakpoints: $carbon--grid-breakpoints) {
+}
+
+// Function example
+
+/// Compute the type size for the given type scale step
+/// @param {Number} $step - Type scale step
+/// @return {Number} In px
+/// @access public
+/// @group @carbon/type
+@function carbon--get-type-size($step) {
+}
+```
+
+### Start a new `block` or `element`?
+
+A nested element can use a new block name as long as the styles are independent
+of the parent.
+
+```html
+<div class="bx--component">
+  <button class="bx--component-button">Button</button>
+</div>
+```
+
+:point_up: The `#{$prefix}--component-button` class implies that this button has
+independent styles from its parent. Generally, it's preferred to start a new
+block.
+
+### Red flags
+
+Avoid names with multiple `__element` names:
+
+- :x: `.#{$prefix}--card__list__item`
+- :white_check_mark: `.#{$prefix}--card-item`
+- :white_check_mark: `.#{$prefix}--card__item`
+
+### Files and folders
+
+All components belong in `src/components` in their own folder.
+
+Name files and folders using **singular** form; not plural.
+
+```
+button
+  - button.hbs
+  - _button.scss
+  - button.js
+  - button.config.js
+```
+
+Also note that all variants of a component can live in a single HBS, SCSS and JS
+file respectively. For example, while there are many button variants (primary,
+secondary, etc.), they're all contained in those single source files in the
+button folder.
+
+### Defining markups for components and their variants
+
+There are two ways to define markups for components and their variants:
+
+1. Defining markup with no conditional or data interpolations
+2. Defining markup with conditionals or data interpolations
+
+### Defining markup with no conditional or data interpolations
+
+Defining markup with no conditional or data interpolation is as easy as adding a
+`.hbs` file to the component directory. No `.config.js` file in the component
+directory is required in this case. One thing to note is that If there is a
+`.hbs` file whose basename is exactly the same as the component name, other
+`.hbs` files has to be in `componentname--variantname.hbs` format.
+
+### Defining markup with conditionals or data interpolations
+
+Defining markup with conditionals or data interpolations requires creating
+`.config.js` file, which is a
+[JavaScript module format of Fractal configuration](https://fractal.build/guide/core-concepts/configuration-files.html#configuration-file-formats),
+in component directory. `.hbs` files are rendered with the data given via
+`context` property in `variants[n]` (below).
+
+Supported
+[properties in `.config.js`](https://fractal.build/guide/components/configuration-reference.html#component-properties)
+are the following:
+
+- [`default`](https://fractal.build/guide/components/configuration#default): The
+  default variant name
+- [`variants`](https://fractal.build/guide/components/configuration#variant-properties) -
+  An array of objects, supporting the following properties:
+  - `name`: The variant name
+  - `label`: The variant name shown in dev env UI
+  - `notes`: A short explainer the variant shown in dev env UI
+  - `context`: The data used for rendering `.hbs`
+  - `view`: The basename of the `.hbs` file for variant markup (Unlike
+    [default Fractal environment](https://fractal.build/guide/components/configuration#view),
+    this property should point to the basename of a `.hbs` file under `demo`
+    directory or `src` directory, _without_ its path)
+  - `preview`: The basename of the `.hbs` file for the markup that lays out the
+    variant markup, in "full render" mode (Unlike
+    [default Fractal environment](https://fractal.build/guide/components/configuration#preview),
+    this property should point to the basename of a `.hbs` file under `demo`
+    directory or `src` directory, _without_ `@` symbol)
+  - `meta`: Some metadata. Carbon vanilla development environment reads the
+    following ones specifically:
+    - `linkOnly`: Only full-page demo is allowed
+    - `useIframe`: Use of `<iframe>` for non full-page demo
+    - `xVersionOnly`: Supports "experimental" theme only
+    - `xVersionNotSupported`: "Experimental" theme is not supported
+
+What `.hbs` file is used for rendering a variant is determined by searching for
+`.hbs` files in `demo` or `src` directory and find one whose basename matches
+one of the following (the priority is the following order):
+
+1. `view` property in `variants[n]`
+2. Variant handle, which takes a format of `componentname--variantname` format
+3. Component handle, which is `componentname`
+
+### Working on JavaScript-framework-specific styles
+
+JavaScript-framework-specific is _not_ recommended as we strive to create styles
+that are framework-neutral. However, there are some rare cases where
+framework-specific cannot be avoided, and some of those make sense to be in
+maintained by core style library here.
+
+There are a couple ways to work on framework-specific style.
+
+### Using `npm link`/`yarn link`
+
+This is the most straightforward way. When in the directory of your
+`carbon-components` folder, run the following command:
+
+```bash
+yarn link
+```
+
+You should see a success message similar to:
+
+```bash
+success Registered "carbon-components".
+info You can now run `yarn link "carbon-components"` in the projects where you want to use this package and it will be used instead.
+```
+
+Now, go to the folder where `carbon-components-angular` is located and run:
+
+```bash
+yarn link carbon-components
+```
+
+You should see a success message similar to:
+
+```bash
+success Using linked package for "carbon-components".
+```
+
+The `yarn link` command will allow us to point the `carbon-components` package
+under `node_modules` to the folder on our filesystem. So, if we make a change in
+`carbon-components` and re-compile the project it will update in the Storybook
+environment for `carbon-components-angular`.
+
+In addition, if you would like to have your changes to styles automatically
+compile and update Storybook you can run the following command in the
+`carbon-components` folder on your machine:
+
+```bash
+yarn gulp watch -s
+```
+
+This will execute the `watch` command in `gulpfile.js`. As a result, whenever
+you make a change to the project styles it will automatically copy over into the
+`scss` folder which Storybook uses in `carbon-components-angular`.
+
+### Pointing NPM dependency of `carbon-components` right to the source code
+
+Though above approach is the most straightforward, it involves an overhead of
+having to run build process at `carbon-components`, in addition to one at
+framework variant repo, upon every Sass code change.
+
+To avoid such overhead, you can point NPM dependency of `carbon-components`
+right to the source code, though there is a caveat that our future change to
+directory structure, etc. may make such steps no longer work. Here are the
+steps:
+
+```sh
+> cd /path/to/carbon-components-angular/node_modules/carbon-components
+> mv scss scss.orig
+> ln -s /path/to/carbon-components/src scss
+```
+
+Then edits of `.scss` files in `/path/to/carbon-components/src` will be
+reflected to the development environment of your framework variant repository.
+You don't need to do anything in `carbon-components` side.
 
 ## Maintainers
 
