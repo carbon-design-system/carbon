@@ -8,32 +8,29 @@ exports[`BreadcrumbSkeleton should render 1`] = `
     <div
       className="bx--breadcrumb-item"
     >
-      <a
+      <span
         className="bx--link"
-        href="/#"
       >
          
-      </a>
+      </span>
     </div>
     <div
       className="bx--breadcrumb-item"
     >
-      <a
+      <span
         className="bx--link"
-        href="/#"
       >
          
-      </a>
+      </span>
     </div>
     <div
       className="bx--breadcrumb-item"
     >
-      <a
+      <span
         className="bx--link"
-        href="/#"
       >
          
-      </a>
+      </span>
     </div>
   </div>
 </BreadcrumbSkeleton>
