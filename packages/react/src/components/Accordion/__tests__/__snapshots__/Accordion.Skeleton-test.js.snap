@@ -11,9 +11,8 @@ exports[`AccordionSkeleton should render 1`] = `
     <li
       className="bx--accordion__item bx--accordion__item--active"
     >
-      <button
+      <span
         className="bx--accordion__heading"
-        type="button"
       >
         <ForwardRef(ChevronRight16)
           className="bx--accordion__arrow"
@@ -63,7 +62,7 @@ exports[`AccordionSkeleton should render 1`] = `
             }
           />
         </SkeletonText>
-      </button>
+      </span>
       <div
         className="bx--accordion__content"
       >
@@ -120,9 +119,8 @@ exports[`AccordionSkeleton should render 1`] = `
       <li
         className="bx--accordion__item"
       >
-        <button
+        <span
           className="bx--accordion__heading"
-          type="button"
         >
           <ForwardRef(ChevronRight16)
             className="bx--accordion__arrow"
@@ -172,7 +170,7 @@ exports[`AccordionSkeleton should render 1`] = `
               }
             />
           </SkeletonText>
-        </button>
+        </span>
       </li>
     </AccordionSkeletonItem>
     <AccordionSkeletonItem
@@ -181,9 +179,8 @@ exports[`AccordionSkeleton should render 1`] = `
       <li
         className="bx--accordion__item"
       >
-        <button
+        <span
           className="bx--accordion__heading"
-          type="button"
         >
           <ForwardRef(ChevronRight16)
             className="bx--accordion__arrow"
@@ -233,7 +230,7 @@ exports[`AccordionSkeleton should render 1`] = `
               }
             />
           </SkeletonText>
-        </button>
+        </span>
       </li>
     </AccordionSkeletonItem>
     <AccordionSkeletonItem
@@ -242,9 +239,8 @@ exports[`AccordionSkeleton should render 1`] = `
       <li
         className="bx--accordion__item"
       >
-        <button
+        <span
           className="bx--accordion__heading"
-          type="button"
         >
           <ForwardRef(ChevronRight16)
             className="bx--accordion__arrow"
@@ -294,7 +290,7 @@ exports[`AccordionSkeleton should render 1`] = `
               }
             />
           </SkeletonText>
-        </button>
+        </span>
       </li>
     </AccordionSkeletonItem>
   </ul>
