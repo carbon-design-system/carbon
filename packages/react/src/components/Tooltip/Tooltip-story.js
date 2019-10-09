@@ -58,6 +58,8 @@ const props = {
   }),
 };
 
+Tooltip.displayName = 'Tooltip';
+
 function UncontrolledTooltipExample() {
   const [value, setValue] = useState(true);
   return (
