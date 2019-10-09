@@ -103,6 +103,7 @@ function ExampleComponent({ propA, propB }) {
 
 ExampleComponent.propTypes = {
   propA: PropTypes.string,
+-  propB: PropTypes.string,
 +  propB: deprecate(PropTypes.string),
 };
 ```
