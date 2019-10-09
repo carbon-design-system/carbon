@@ -70,6 +70,8 @@ that you can expect for the package when it is updated.
 
 #### A new prop is added to a component
 
+semver bump: **minor**
+
 ```diff
 function ExampleComponent({
   propA,
@@ -91,6 +93,8 @@ ExampleComponent.propTypes = {
 
 #### An existing prop is deprecated
 
+semver bump: **minor**
+
 ```diff
 function ExampleComponent({ propA, propB }) {
   return (
@@ -109,6 +113,8 @@ ExampleComponent.propTypes = {
 ```
 
 #### An existing prop is removed
+
+semver bump: **major**
 
 ```diff
 function ExampleComponent({
@@ -131,6 +137,8 @@ ExampleComponent.propTypes = {
 
 #### An existing prop type is changed to be more specific
 
+semver bump: **major**
+
 ```diff
 function ExampleComponent({ propA, propB }) {
   return (
@@ -149,6 +157,8 @@ ExampleComponent.propTypes = {
 ```
 
 #### An existing prop type is changed to be more generic
+
+semver bump: **minor**
 
 ```diff
 function ExampleComponent({ propA, propB }) {
@@ -169,6 +179,8 @@ ExampleComponent.propTypes = {
 
 #### A `PropTypes.func` prop type is changed to have different arguments
 
+semver bump: **major**
+
 ```diff
 import { SomeComponent } from 'carbon-components-react';
 
@@ -185,6 +197,8 @@ function ExampleComponent() {
 
 #### A `PropTypes.func` prop type is changed to have additional arguments
 
+semver bump: **minor**
+
 ```diff
 import { SomeComponent } from 'carbon-components-react';
 
@@ -199,6 +213,8 @@ function ExampleComponent() {
 ```
 
 #### A `PropTypes.func` prop type is changed to have fewer arguments
+
+semver bump: **major**
 
 ```diff
 import { SomeComponent } from 'carbon-components-react';
