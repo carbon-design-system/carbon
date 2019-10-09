@@ -48,7 +48,7 @@ and we will resolve the issue as quickly as possible.
 
 In the following sections, you'll find specific details for our packages and the
 types of changes you can expect to occur as a consumer of that package. We'll
-try and highlight common changes in code and the corresponding `semver` bump
+try to highlight common changes in code and the corresponding `semver` bump
 that you can expect for the package when it is updated.
 
 ## `carbon-components-react`
