@@ -33,13 +33,11 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
       >
         <ForwardRef(Search16)
           className="bx--search-magnifier"
-          role="img"
         >
           <Icon
             className="bx--search-magnifier"
             height={16}
             preserveAspectRatio="xMidYMid meet"
-            role="img"
             viewBox="0 0 16 16"
             width={16}
             xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +48,6 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
               focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"
-              role="img"
               style={
                 Object {
                   "willChange": "transform",
@@ -87,25 +84,19 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
           onClick={[Function]}
           type="button"
         >
-          <ForwardRef(Close16)
-            aria-label="Clear search input"
-            role="img"
-          >
+          <ForwardRef(Close16)>
             <Icon
-              aria-label="Clear search input"
               height={16}
               preserveAspectRatio="xMidYMid meet"
-              role="img"
               viewBox="0 0 16 16"
               width={16}
               xmlns="http://www.w3.org/2000/svg"
             >
               <svg
-                aria-label="Clear search input"
+                aria-hidden={true}
                 focusable="false"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
-                role="img"
                 style={
                   Object {
                     "willChange": "transform",

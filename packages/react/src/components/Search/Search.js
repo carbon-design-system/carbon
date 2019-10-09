@@ -151,7 +151,7 @@ export default class Search extends Component {
 
     return (
       <div className={searchClasses}>
-        <Search16 className={`${prefix}--search-magnifier`} />
+        <Search16 className={`${prefix}--search-magnifier`} role="img" />
         <label htmlFor={id} className={`${prefix}--label`}>
           {labelText}
         </label>
