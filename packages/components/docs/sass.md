@@ -10361,6 +10361,7 @@ Get the font-family for an IBM Plex font
   - [carbon--font-family [mixin]](#carbon--font-family-mixin)
   - [form [mixin]](#form-mixin)
   - [number-input [mixin]](#number-input-mixin)
+  - [slider [mixin]](#slider-mixin)
 
 ### ✅carbon--font-family [mixin]
 
@@ -21393,6 +21394,7 @@ Slider styles
 
   .#{$prefix}--slider__range-label {
     @include type-style('code-02');
+    font-family: carbon--font-family('mono');
     color: $text-01;
 
     &:last-of-type {
@@ -21569,6 +21571,7 @@ Slider styles
 
 - **Group**: [slider](#slider)
 - **Requires**:
+  - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
