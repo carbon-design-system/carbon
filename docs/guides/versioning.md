@@ -39,7 +39,7 @@ that we ship. From semver.org, this means that:
 
 As a result, whenever you see a `minor` or `patch` update for a package from the
 Carbon Design System you should feel confident that you can update without
-anything breaking in project.
+anything breaking in your project.
 
 **Note:** If you ever bring in an update and it does break something in your
 project, please create an
