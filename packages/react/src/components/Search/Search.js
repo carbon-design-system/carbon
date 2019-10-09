@@ -151,7 +151,7 @@ export default class Search extends Component {
 
     return (
       <div className={searchClasses}>
-        <Search16 className={`${prefix}--search-magnifier`} role="img" />
+        <Search16 className={`${prefix}--search-magnifier`} />
         <label htmlFor={id} className={`${prefix}--label`}>
           {labelText}
         </label>
@@ -171,7 +171,7 @@ export default class Search extends Component {
           onClick={this.clearInput}
           type="button"
           aria-label={closeButtonLabelText}>
-          <CloseIconX aria-label={closeButtonLabelText} role="img" />
+          <CloseIconX />
         </button>
       </div>
     );

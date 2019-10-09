@@ -31,7 +31,7 @@ initial `v10` release.
 | Combobox           | No breaking changes                                                   |
 | Content Switcher   | [Migrate](../../src/components/content-switcher/migrate-to-10.x.md)   |
 | Copy Button        | [Migrate](../../src/components/copy-button/migrate-to-10.x.md)        |
-| Data Table V2      | [Migrate](../../src/components/data-table-v2/migrate-to-10.x.md)      |
+| Data Table V2      | [Migrate](../../src/components/data-table/migrate-to-10.x.md)      |
 | Data Table         | Removed                                                               |
 | Date Picker        | TODO                                                                  |
 | Dropdown           | [Migrate](../../src/components/dropdown/migrate-to-10.x.md)           |
