@@ -25,7 +25,7 @@ export default class SearchSkeleton extends Component {
   };
 
   render() {
-    const { small, id } = this.props;
+    const { small } = this.props;
 
     const searchClasses = classNames({
       [`${prefix}--skeleton`]: true,
@@ -34,11 +34,8 @@ export default class SearchSkeleton extends Component {
     });
 
     return (
-      <div className={searchClasses} role="search">
-        {
-          /* eslint-disable jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control */
-          <label htmlFor={id} className={`${prefix}--label`} />
-        }
+      <div className={searchClasses}>
+        <span className={`${prefix}--label`} />
         <div className={`${prefix}--search-input`} />
       </div>
     );
