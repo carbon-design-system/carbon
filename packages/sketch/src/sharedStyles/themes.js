@@ -37,7 +37,6 @@ export function syncThemeColorStyles(document) {
         return colors.includes(token) && !meta.deprecated.includes(token);
       })
       .map(token => {
-        console.log(token);
         const { type } = meta.colors.find(group => {
           return group.tokens.includes(token);
         });
