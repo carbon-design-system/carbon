@@ -87,19 +87,25 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
           onClick={[Function]}
           type="button"
         >
-          <ForwardRef(Close16)>
+          <ForwardRef(Close16)
+            aria-label="Clear search input"
+            role="img"
+          >
             <Icon
+              aria-label="Clear search input"
               height={16}
               preserveAspectRatio="xMidYMid meet"
+              role="img"
               viewBox="0 0 16 16"
               width={16}
               xmlns="http://www.w3.org/2000/svg"
             >
               <svg
-                aria-hidden={true}
+                aria-label="Clear search input"
                 focusable="false"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
+                role="img"
                 style={
                   Object {
                     "willChange": "transform",

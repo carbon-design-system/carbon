@@ -171,7 +171,7 @@ export default class Search extends Component {
           onClick={this.clearInput}
           type="button"
           aria-label={closeButtonLabelText}>
-          <CloseIconX />
+          <CloseIconX aria-label={closeButtonLabelText} role="img" />
         </button>
       </div>
     );
