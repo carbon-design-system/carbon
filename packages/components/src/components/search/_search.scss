@@ -85,6 +85,11 @@
     height: rem(32px);
   }
 
+  .#{$prefix}--search--lg .#{$prefix}--search-input {
+    @include type-style('body-short-02');
+    height: rem(40px);
+  }
+
   .#{$prefix}--search--xl .#{$prefix}--search-input {
     @include type-style('body-short-02');
     height: rem(48px);
@@ -203,6 +208,14 @@
     }
   }
 
+  .#{$prefix}--search--lg {
+    .#{$prefix}--search-close,
+    ~ .#{$prefix}--search-button {
+      height: rem(40px);
+      width: rem(40px);
+    }
+  }
+
   .#{$prefix}--search--xl {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button {
@@ -216,6 +229,7 @@
     opacity: 0;
   }
 
+  .#{$prefix}--search--xl.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--lg.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input {
     @include skeleton;

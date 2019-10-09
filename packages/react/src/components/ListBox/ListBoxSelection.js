@@ -10,6 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Close16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
+import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -22,6 +23,7 @@ const ListBoxSelection = ({
   clearSelection,
   selectionCount,
   translateWithId: t,
+  disabled,
 }) => {
   const className = cx(`${prefix}--list-box__selection`, {
     [`${prefix}--tag--filter`]: selectionCount,
@@ -29,13 +31,19 @@ const ListBoxSelection = ({
   });
   const handleOnClick = event => {
     event.stopPropagation();
+    if (disabled) {
+      return;
+    }
     clearSelection(event);
   };
   const handleOnKeyDown = event => {
     event.stopPropagation();
+    if (disabled) {
+      return;
+    }
 
     // When a user hits ENTER, we'll clear the selection
-    if (event.keyCode === 13) {
+    if (match(event, keys.Enter)) {
       clearSelection(event);
     }
   };
@@ -44,7 +52,7 @@ const ListBoxSelection = ({
     <div
       role="button"
       className={className}
-      tabIndex="0"
+      tabIndex={disabled ? -1 : 0}
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}
       aria-label="Clear Selection"
