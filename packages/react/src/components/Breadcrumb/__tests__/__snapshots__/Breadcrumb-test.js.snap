@@ -5,27 +5,32 @@ exports[`Breadcrumb should render 1`] = `
   className="parent-class"
 >
   <nav
-    className="bx--breadcrumb parent-class"
+    aria-label="Breadcrumb"
+    className="parent-class"
   >
-    <BreadcrumbItem
-      className="some-class"
-      href="www.carbondesignsystem.com"
+    <ol
+      className="bx--breadcrumb"
     >
-      <div
-        className="bx--breadcrumb-item some-class"
+      <BreadcrumbItem
+        className="some-class"
+        href="www.carbondesignsystem.com"
       >
-        <Link
-          href="www.carbondesignsystem.com"
+        <li
+          className="bx--breadcrumb-item some-class"
         >
-          <a
-            className="bx--link"
+          <Link
             href="www.carbondesignsystem.com"
           >
-            Breadcrumb 1
-          </a>
-        </Link>
-      </div>
-    </BreadcrumbItem>
+            <a
+              className="bx--link"
+              href="www.carbondesignsystem.com"
+            >
+              Breadcrumb 1
+            </a>
+          </Link>
+        </li>
+      </BreadcrumbItem>
+    </ol>
   </nav>
 </Breadcrumb>
 `;
@@ -33,63 +38,67 @@ exports[`Breadcrumb should render 1`] = `
 exports[`Breadcrumb should support rendering the current page 1`] = `
 <Breadcrumb>
   <nav
-    className="bx--breadcrumb"
+    aria-label="Breadcrumb"
   >
-    <BreadcrumbItem
-      href="#a"
+    <ol
+      className="bx--breadcrumb"
     >
-      <div
-        className="bx--breadcrumb-item"
+      <BreadcrumbItem
+        href="#a"
       >
-        <Link
-          href="#a"
+        <li
+          className="bx--breadcrumb-item"
         >
-          <a
-            className="bx--link"
+          <Link
             href="#a"
           >
-            A
-          </a>
-        </Link>
-      </div>
-    </BreadcrumbItem>
-    <BreadcrumbItem
-      href="#b"
-    >
-      <div
-        className="bx--breadcrumb-item"
+            <a
+              className="bx--link"
+              href="#a"
+            >
+              A
+            </a>
+          </Link>
+        </li>
+      </BreadcrumbItem>
+      <BreadcrumbItem
+        href="#b"
       >
-        <Link
-          href="#b"
+        <li
+          className="bx--breadcrumb-item"
         >
-          <a
-            className="bx--link"
+          <Link
             href="#b"
           >
-            B
-          </a>
-        </Link>
-      </div>
-    </BreadcrumbItem>
-    <BreadcrumbItem
-      href="#c"
-      isCurrentPage={true}
-    >
-      <div
-        className="bx--breadcrumb-item bx--breadcrumb-item--current"
+            <a
+              className="bx--link"
+              href="#b"
+            >
+              B
+            </a>
+          </Link>
+        </li>
+      </BreadcrumbItem>
+      <BreadcrumbItem
+        href="#c"
+        isCurrentPage={true}
       >
-        <Link
-          href="#c"
+        <li
+          className="bx--breadcrumb-item bx--breadcrumb-item--current"
         >
-          <a
-            className="bx--link"
+          <Link
             href="#c"
           >
-            C
-          </a>
-        </Link>
-      </div>
-    </BreadcrumbItem>
+            <a
+              className="bx--link"
+              href="#c"
+            >
+              C
+            </a>
+          </Link>
+        </li>
+      </BreadcrumbItem>
+    </ol>
   </nav>
 </Breadcrumb>
 `;
@@ -97,65 +106,69 @@ exports[`Breadcrumb should support rendering the current page 1`] = `
 exports[`Breadcrumb should support rendering the current page 2`] = `
 <Breadcrumb>
   <nav
-    className="bx--breadcrumb"
+    aria-label="Breadcrumb"
   >
-    <BreadcrumbItem
-      href="#a"
+    <ol
+      className="bx--breadcrumb"
     >
-      <div
-        className="bx--breadcrumb-item"
+      <BreadcrumbItem
+        href="#a"
       >
-        <Link
-          href="#a"
+        <li
+          className="bx--breadcrumb-item"
         >
-          <a
-            className="bx--link"
+          <Link
             href="#a"
           >
-            A
-          </a>
-        </Link>
-      </div>
-    </BreadcrumbItem>
-    <BreadcrumbItem
-      href="#b"
-    >
-      <div
-        className="bx--breadcrumb-item"
+            <a
+              className="bx--link"
+              href="#a"
+            >
+              A
+            </a>
+          </Link>
+        </li>
+      </BreadcrumbItem>
+      <BreadcrumbItem
+        href="#b"
       >
-        <Link
-          href="#b"
+        <li
+          className="bx--breadcrumb-item"
         >
-          <a
-            className="bx--link"
+          <Link
             href="#b"
           >
-            B
-          </a>
-        </Link>
-      </div>
-    </BreadcrumbItem>
-    <BreadcrumbItem
-      aria-current="page"
-      href="#c"
-    >
-      <div
-        className="bx--breadcrumb-item"
+            <a
+              className="bx--link"
+              href="#b"
+            >
+              B
+            </a>
+          </Link>
+        </li>
+      </BreadcrumbItem>
+      <BreadcrumbItem
+        aria-current="page"
+        href="#c"
       >
-        <Link
-          aria-current="page"
-          href="#c"
+        <li
+          className="bx--breadcrumb-item"
         >
-          <a
+          <Link
             aria-current="page"
-            className="bx--link"
             href="#c"
           >
-            C
-          </a>
-        </Link>
-      </div>
-    </BreadcrumbItem>
+            <a
+              aria-current="page"
+              className="bx--link"
+              href="#c"
+            >
+              C
+            </a>
+          </Link>
+        </li>
+      </BreadcrumbItem>
+    </ol>
   </nav>
 </Breadcrumb>
 `;
@@ -165,26 +178,30 @@ exports[`Breadcrumb should support rendering without a trailing slash 1`] = `
   noTrailingSlash={true}
 >
   <nav
-    className="bx--breadcrumb bx--breadcrumb--no-trailing-slash"
+    aria-label="Breadcrumb"
   >
-    <BreadcrumbItem
-      href="www.carbondesignsystem.com"
+    <ol
+      className="bx--breadcrumb bx--breadcrumb--no-trailing-slash"
     >
-      <div
-        className="bx--breadcrumb-item"
+      <BreadcrumbItem
+        href="www.carbondesignsystem.com"
       >
-        <Link
-          href="www.carbondesignsystem.com"
+        <li
+          className="bx--breadcrumb-item"
         >
-          <a
-            className="bx--link"
+          <Link
             href="www.carbondesignsystem.com"
           >
-            Breadcrumb 1
-          </a>
-        </Link>
-      </div>
-    </BreadcrumbItem>
+            <a
+              className="bx--link"
+              href="www.carbondesignsystem.com"
+            >
+              Breadcrumb 1
+            </a>
+          </Link>
+        </li>
+      </BreadcrumbItem>
+    </ol>
   </nav>
 </Breadcrumb>
 `;
