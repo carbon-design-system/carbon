@@ -28,6 +28,19 @@ module.exports = {
       },
     },
     {
+      name: 'large',
+      label: 'Medium search',
+      notes: `
+        Search enables users to specify a word or a phrase to find particular relevant pieces of content
+        without the use of navigation. Search can be used as the primary means of discovering content,
+        or as a filter to aid the user in finding content. With the medium version, the search field will be
+        slightly smaller.
+      `,
+      context: {
+        suffix: 'lg',
+      },
+    },
+    {
       name: 'small',
       label: 'Small search',
       notes: `
@@ -50,6 +63,20 @@ module.exports = {
       `,
       context: {
         suffix: 'xl',
+        light: true,
+      },
+    },
+    {
+      name: 'large-light',
+      label: 'Medium search (Light)',
+      notes: `
+        Search enables users to specify a word or a phrase to find particular relevant pieces of content
+        without the use of navigation. Search can be used as the primary means of discovering content,
+        or as a filter to aid the user in finding content. With the medium version, the search field will be
+        slightly smaller.
+      `,
+      context: {
+        suffix: 'lg',
         light: true,
       },
     },
