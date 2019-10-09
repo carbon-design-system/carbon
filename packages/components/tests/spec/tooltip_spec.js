@@ -44,6 +44,18 @@ describe('Test tooltip', function() {
       expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
     });
 
+    it('Should apply focus to a child element upon opening', function() {
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(document.activeElement.closest('.bx--tooltip')).not.toBe(null);
+    });
+
+    // @todo currently not working
+    // it('Should remain open upon click within the tooltip', function() {
+    //   floating.classList.add('bx--tooltip--shown');
+    //   element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+    //   expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
+    // });
+
     it('Should hide the tooltip upon blurring', function() {
       floating.classList.add('bx--tooltip--shown');
       element.dispatchEvent(new CustomEvent('blur', { bubbles: true }));
