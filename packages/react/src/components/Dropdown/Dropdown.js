@@ -13,6 +13,7 @@ import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { match, keys } from '../../internal/keyboard';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
 
@@ -23,6 +24,8 @@ const defaultItemToString = item => {
 
   return item ? item.label : '';
 };
+
+const getInstanceId = setupGetInstanceId();
 
 export default class Dropdown extends React.Component {
   static propTypes = {
@@ -144,6 +147,10 @@ export default class Dropdown extends React.Component {
     helperText: '',
   };
 
+  constructor(props) {
+    super(props);
+    this.dropdownInstanceId = getInstanceId();
+  }
   handleOnChange = selectedItem => {
     if (this.props.onChange) {
       this.props.onChange({ selectedItem });
@@ -183,8 +190,11 @@ export default class Dropdown extends React.Component {
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
+
+    const dropdownId = `dropdown-${this.dropdownInstanceId}`;
+
     const title = titleText ? (
-      <label htmlFor={id} className={titleClasses}>
+      <label htmlFor={dropdownId} className={titleClasses}>
         {titleText}
       </label>
     ) : null;
@@ -229,8 +239,9 @@ export default class Dropdown extends React.Component {
             toggleMenu,
           }) => (
             <ListBox
-              id={id}
               type={type}
+              id={dropdownId}
+              aria-label={ariaLabel}
               className={className({ isOpen })}
               disabled={disabled}
               isOpen={isOpen}
@@ -268,7 +279,7 @@ export default class Dropdown extends React.Component {
                 />
               </ListBox.Field>
               {isOpen && (
-                <ListBox.Menu aria-label={ariaLabel} id={id}>
+                <ListBox.Menu aria-labelledby={dropdownId} id={id}>
                   {items.map((item, index) => (
                     <ListBox.MenuItem
                       key={itemToString(item)}
