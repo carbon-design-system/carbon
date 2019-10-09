@@ -528,7 +528,9 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     onSelect={[Function]}
                     radio={true}
                   >
-                    <td>
+                    <td
+                      className="bx--table-column-checkbox"
+                    >
                       <ForwardRef(RadioButton)
                         checked={false}
                         disabled={false}
@@ -613,7 +615,9 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     onSelect={[Function]}
                     radio={true}
                   >
-                    <td>
+                    <td
+                      className="bx--table-column-checkbox"
+                    >
                       <ForwardRef(RadioButton)
                         checked={false}
                         disabled={false}
@@ -698,7 +702,9 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     onSelect={[Function]}
                     radio={true}
                   >
-                    <td>
+                    <td
+                      className="bx--table-column-checkbox"
+                    >
                       <ForwardRef(RadioButton)
                         checked={false}
                         disabled={false}
@@ -1417,7 +1423,9 @@ exports[`DataTable selection should render 1`] = `
                     onSelect={[Function]}
                     radio={null}
                   >
-                    <td>
+                    <td
+                      className="bx--table-column-checkbox"
+                    >
                       <ForwardRef(InlineCheckbox)
                         ariaLabel="Select row"
                         checked={false}
@@ -1484,7 +1492,9 @@ exports[`DataTable selection should render 1`] = `
                     onSelect={[Function]}
                     radio={null}
                   >
-                    <td>
+                    <td
+                      className="bx--table-column-checkbox"
+                    >
                       <ForwardRef(InlineCheckbox)
                         ariaLabel="Select row"
                         checked={false}
@@ -1551,7 +1561,9 @@ exports[`DataTable selection should render 1`] = `
                     onSelect={[Function]}
                     radio={null}
                   >
-                    <td>
+                    <td
+                      className="bx--table-column-checkbox"
+                    >
                       <ForwardRef(InlineCheckbox)
                         ariaLabel="Select row"
                         checked={false}

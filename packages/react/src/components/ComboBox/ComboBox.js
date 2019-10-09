@@ -320,8 +320,8 @@ export default class ComboBox extends React.Component {
                 aria-labelledby={comboBoxA11yId}
                 tabIndex="0"
                 aria-disabled={disabled}
-                aria-controls={`${id}__menu`}
-                aria-owns={`${id}__menu`}
+                aria-controls={isOpen ? `${id}__menu` : null}
+                aria-owns={isOpen ? `${id}__menu` : null}
                 aria-autocomplete="list"
                 ref={this.textInput}
                 {...rest}
@@ -347,6 +347,7 @@ export default class ComboBox extends React.Component {
                 <ListBox.Selection
                   clearSelection={clearSelection}
                   translateWithId={translateWithId}
+                  disabled={disabled}
                 />
               )}
               <ListBox.MenuIcon
