@@ -272,7 +272,7 @@ $notification-error-background-color: $ibm-color__red-10 !default;
 /// @access public
 /// @group notification
 $notification-warning-background-color: mix(
-  $ibm-color__yellow-20,
+  $ibm-color__yellow-30,
   $ibm-color__white-0,
   15%
 ) !default;
