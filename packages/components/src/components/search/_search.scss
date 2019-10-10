@@ -51,7 +51,7 @@
     }
 
     &::placeholder {
-      @include placeholder-colors;
+      color: $text-05;
       font-weight: 400;
     }
 
