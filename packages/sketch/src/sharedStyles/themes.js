@@ -11,9 +11,12 @@ import {
   g90,
   g100,
   formatTokenName,
+  tokens,
   unstable__meta as meta,
 } from '@carbon/themes';
 import { syncColorStyle } from '../tools/sharedStyles';
+
+const { colors } = tokens;
 
 /**
  * Sync theme color shared styles to the given document and return the result
@@ -31,7 +34,7 @@ export function syncThemeColorStyles(document) {
   const sharedStyles = Object.keys(themes).flatMap(theme => {
     return Object.keys(themes[theme])
       .filter(token => {
-        return !meta.deprecated.includes(token);
+        return colors.includes(token) && !meta.deprecated.includes(token);
       })
       .map(token => {
         const { type } = meta.colors.find(group => {

@@ -146,6 +146,7 @@ describe('DatePicker', () => {
         datePickerType="single"
         dateFormat="m/d/Y"
         value={'02/26/2017'}
+        appendTo={document.body.firstChild}
         onChange={() => {}}>
         <DatePickerInput
           key="label"
@@ -162,6 +163,12 @@ describe('DatePicker', () => {
       // UPDATE
       wrapper.setProps({ value: '02/17/2017' });
       expect(wrapper.props().value).toEqual('02/17/2017');
+    });
+
+    it('sends appendTo to Flatpickr', () => {
+      expect(wrapper.instance().cal.config.appendTo).toBe(
+        document.body.firstChild
+      );
     });
   });
 

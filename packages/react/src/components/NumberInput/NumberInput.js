@@ -301,17 +301,17 @@ class NumberInput extends Component {
       'aria-label': ariaLabel,
     };
 
-    const errorId = `${id}-error-id`;
-
     const buttonProps = {
       disabled,
       type: 'button',
     };
 
     const inputWrapperProps = {};
+    let errorId = null;
     let error = null;
     if (invalid || (!allowEmpty && this.state.value === '')) {
       inputWrapperProps['data-invalid'] = true;
+      errorId = `${id}-error-id`;
       error = (
         <div className={`${prefix}--form-requirement`} id={errorId}>
           {invalidText}
