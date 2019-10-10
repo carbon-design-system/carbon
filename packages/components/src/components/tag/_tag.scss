@@ -107,7 +107,7 @@
   }
 
   .#{$prefix}--tag--filter:focus > svg {
-    border: 2px solid $inverse-01;
+    box-shadow: inset 0 0 0 2px $inverse-focus-ui;
     border-radius: 50%;
   }
 
