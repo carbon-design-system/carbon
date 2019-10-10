@@ -274,9 +274,9 @@ export default class DatePicker extends Component {
     ]),
 
     /**
-     * The DOM element or selector the Flatpicker should be inserted into. `<body>` by default.
+     * The DOM element the Flatpicker should be inserted into. `<body>` by default.
      */
-    appendTo: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    appendTo: PropTypes.object,
 
     /**
      * The `change` event handler.
@@ -321,6 +321,7 @@ export default class DatePicker extends Component {
 
   componentDidMount() {
     const {
+      appendTo,
       datePickerType,
       dateFormat,
       locale,
@@ -334,13 +335,11 @@ export default class DatePicker extends Component {
         this.updateClassNames(instance);
       };
 
-      let appendToNode;
-
       // inputField ref might not be set in enzyme tests
       if (this.inputField) {
         this.cal = new flatpickr(this.inputField, {
           defaultDate: value,
-          appendTo: appendToNode,
+          appendTo,
           mode: datePickerType,
           allowInput: true,
           dateFormat: dateFormat,
