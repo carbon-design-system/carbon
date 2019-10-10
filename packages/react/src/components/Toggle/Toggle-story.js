@@ -12,10 +12,14 @@ import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import Toggle from '../Toggle';
 import ToggleSkeleton from '../Toggle/Toggle.Skeleton';
 
-const toggleProps = () => ({
-  className: 'some-class',
-  labelText: text('Label for toggle button input (labelText)', ''),
+const a11yProps = () => ({
+  labelText: text('Label toggle input control (labelText)', ''),
   ['aria-label']: text('ARIA label of the toggle (aria-label)', ''),
+});
+
+const toggleProps = () => ({
+  ...a11yProps(),
+  className: 'some-class',
   labelA: text('Label for untoggled state (labelA)', 'Off'),
   labelB: text('Label for toggled state (labelB)', 'On'),
   disabled: boolean('Disabled (disabled)', false),
@@ -60,7 +64,7 @@ storiesOf('Toggle', module)
       },
     }
   )
-  .add('skeleton', () => <ToggleSkeleton />, {
+  .add('skeleton', () => <ToggleSkeleton {...a11yProps()} />, {
     info: {
       text: `
             Placeholder skeleton state to use when content is loading.
