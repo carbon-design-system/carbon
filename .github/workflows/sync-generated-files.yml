@@ -21,7 +21,7 @@ jobs:
       - name: Push generated artifacts to GitHub
         env:
           NPM_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
-        command: |
+        run: |
           if [ -n "$(git status --porcelain)" ]; then
             echo "Our git status is not clean. Checking in the following files:";
             echo "$(git status --porcelain)";
