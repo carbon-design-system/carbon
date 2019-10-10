@@ -121,6 +121,7 @@
     @include focus-outline('reset');
     position: absolute;
     right: 0;
+    padding-left: 2px; // Should be in sync with the left border as pseudo element
 
     &::before {
       content: '';
