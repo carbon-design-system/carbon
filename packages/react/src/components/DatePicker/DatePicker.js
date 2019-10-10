@@ -10,10 +10,10 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
-import rangePlugin from 'flatpickr/dist/plugins/rangePlugin';
 import { settings } from 'carbon-components';
 import DatePickerInput from '../DatePickerInput';
 import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
+import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
 import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
@@ -348,7 +348,7 @@ export default class DatePicker extends Component {
           maxDate: maxDate,
           plugins: [
             datePickerType === 'range'
-              ? new rangePlugin({ input: this.toInputField, position: 'left' })
+              ? new carbonFlatpickrRangePlugin({ input: this.toInputField })
               : () => {},
             carbonFlatpickrMonthSelectPlugin({
               selectorFlatpickrMonthYearContainer: '.flatpickr-current-month',
