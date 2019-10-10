@@ -154,17 +154,16 @@ export default class Pagination extends Component {
       pageSize: currentPageSize,
     } = state;
     const pageSizesChanged = !equals(pageSizes, prevPageSizes);
+    if (pageSizesChanged && !pageSizes.includes(pageSize)) {
+      pageSize = pageSizes[0];
+    }
     const pageChanged = page !== prevPage;
     const pageSizeChanged = pageSize !== prevPageSize;
     return !pageSizesChanged && !pageChanged && !pageSizeChanged
       ? null
       : {
-          page: pageSizesChanged ? 1 : pageChanged ? page : currentPage,
-          pageSize: pageSizesChanged
-            ? pageSizes[0]
-            : pageSizeChanged
-            ? pageSize
-            : currentPageSize,
+          page: pageSizeChanged && 1 || pageChanged && page || currentPage,
+          pageSize: pageSizeChanged ? pageSize : currentPageSize,
           prevPageSizes: pageSizes,
           prevPage: page,
           prevPageSize: pageSize,

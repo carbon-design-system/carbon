@@ -98,7 +98,6 @@ export default function FileUploaderDropContainer(props) {
       <label
         className={labelClasses}
         htmlFor={id || uid.current}
-        role={role || 'button'}
         tabIndex={tabIndex || 0}
         onKeyDown={evt => {
           if (matches(evt, [keys.Enter, keys.Space])) {
@@ -106,7 +105,7 @@ export default function FileUploaderDropContainer(props) {
           }
         }}
         {...other}>
-        <div className={dropareaClasses}>
+        <div className={dropareaClasses} role={role || 'button'}>
           {labelText}
           <input
             type="file"

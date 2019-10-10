@@ -20,7 +20,7 @@ exports[`DataTable.TableSelectRow should render 1`] = `
               onSelect={[MockFunction]}
             >
               <td
-                className="custom-class-name"
+                className="bx--table-column-checkbox custom-class-name"
               >
                 <ForwardRef(InlineCheckbox)
                   ariaLabel="Aria label"
