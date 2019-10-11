@@ -26,6 +26,7 @@
 
     display: flex;
     justify-content: space-between;
+    position: relative;
     height: auto;
     min-height: rem(48px);
     min-width: rem(288px);
@@ -48,8 +49,17 @@
   }
 
   .#{$prefix}--inline-notification--low-contrast {
-    color: $text-01;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
+    color: map-get($carbon--theme--white, 'text-01');
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      filter: opacity(0.4);
+    }
   }
 
   .#{$prefix}--inline-notification--error {
@@ -61,6 +71,11 @@
       $support-01,
       $notification-error-background-color
     );
+
+    &:before {
+      border: solid $support-01 1px;
+      border-left-width: 0;
+    }
   }
 
   .#{$prefix}--inline-notification--success {
@@ -72,6 +87,11 @@
       $support-02,
       $notification-success-background-color
     );
+
+    &:before {
+      border: solid $support-02 1px;
+      border-left-width: 0;
+    }
   }
 
   .#{$prefix}--inline-notification--info {
@@ -83,6 +103,11 @@
       $support-04,
       $notification-info-background-color
     );
+
+    &:before {
+      border: solid $support-04 1px;
+      border-left-width: 0;
+    }
   }
 
   .#{$prefix}--inline-notification--info .bx--inline-notification__icon {
@@ -98,6 +123,11 @@
       $support-03,
       $notification-warning-background-color
     );
+
+    &:before {
+      border: solid $support-03 1px;
+      border-left-width: 0;
+    }
   }
 
   .#{$prefix}--inline-notification--warning
