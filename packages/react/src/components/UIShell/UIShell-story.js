@@ -205,6 +205,11 @@ storiesOf('UI Shell', module)
             <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
             <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
           </HeaderMenu>
+          <HeaderMenu aria-label="Link 5" menuLinkName="Link 5">
+            <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+            <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+            <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+          </HeaderMenu>
         </HeaderNavigation>
       </Header>
     ))
