@@ -14,6 +14,11 @@ describe('PasswordInput', () => {
         labelText="testlabel"
         helperText="testHelper"
         light
+        /**
+         * Simulates a condition where the translations for password visibility
+         * toggle button are not present
+         */
+        translateWithId={jest.fn(() => undefined)}
       />
     );
 
@@ -61,6 +66,18 @@ describe('PasswordInput', () => {
         expect(passwordInput().props().placeholder).not.toBeDefined();
         wrapper.setProps({ placeholder: 'Enter text' });
         expect(passwordInput().props().placeholder).toEqual('Enter text');
+      });
+
+      it('should call `translateWithId` with the id strings needed to translate', () => {
+        expect(wrapper.props().translateWithId).toHaveBeenCalledWith(
+          'show.password'
+        );
+        wrapper
+          .find('.bx--text-input--password__visibility__toggle')
+          .simulate('click');
+        expect(wrapper.props().translateWithId).toHaveBeenCalledWith(
+          'hide.password'
+        );
       });
     });
 
