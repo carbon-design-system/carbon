@@ -83,7 +83,7 @@
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    @include tag-theme($interactive-02, $inverse-01);
+    @include tag-theme($inverse-02, $inverse-01);
     cursor: pointer;
     padding-right: rem(2px); // Align with hover circle of X button
   }
@@ -98,7 +98,7 @@
 
   .#{$prefix}--tag--filter > svg:hover {
     border-radius: 50%;
-    background-color: $hover-secondary;
+    background-color: $inverse-hover-ui;
   }
 
   .#{$prefix}--tag--filter:focus,
