@@ -7766,7 +7766,6 @@ $text-03: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [search [mixin]](#search-mixin)
 
 ### ✅text-04 [variable]
 
@@ -7820,6 +7819,8 @@ $text-05: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [form [mixin]](#form-mixin)
+  - [search [mixin]](#search-mixin)
+  - [text-area [mixin]](#text-area-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -8450,6 +8451,7 @@ $inverse-focus-ui: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [tags [mixin]](#tags-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅hover-primary [variable]
@@ -20930,7 +20932,7 @@ Search styles
     }
 
     &::placeholder {
-      color: $text-03;
+      color: $text-05;
       font-weight: 400;
     }
 
@@ -21129,7 +21131,7 @@ Search styles
   - [text-01 [variable]](#text-01-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [text-03 [variable]](#text-03-variable)
+  - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
@@ -22195,7 +22197,7 @@ Tag styles
   }
 
   .#{$prefix}--tag--filter:focus > svg {
-    border: 2px solid $inverse-01;
+    box-shadow: inset 0 0 0 2px $inverse-focus-ui;
     border-radius: 50%;
   }
 
@@ -22221,6 +22223,7 @@ Tag styles
   - [interactive-02 [variable]](#interactive-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [hover-secondary [variable]](#hover-secondary-variable)
+  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
 
 ## text-area
 
@@ -22274,7 +22277,7 @@ Text area styles
   }
 
   .#{$prefix}--text-area::placeholder {
-    @include placeholder-colors;
+    color: $text-05;
     @include type-style('body-long-01');
     opacity: 1;
   }
@@ -22336,6 +22339,7 @@ Text area styles
   - [ui-04 [variable]](#ui-04-variable)
   - [support-01 [variable]](#support-01-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
