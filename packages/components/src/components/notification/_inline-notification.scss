@@ -52,7 +52,7 @@
     // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
     color: map-get($carbon--theme--white, 'text-01');
 
-    &:before {
+    &::before {
       content: '';
       position: absolute;
       width: 100%;
