@@ -16,7 +16,12 @@ const SliderSkeleton = ({ hideLabel }) => (
     {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
     <div className={`${prefix}--slider-container ${prefix}--skeleton`}>
       <span className={`${prefix}--slider__range-label`} />
-      <div className={`${prefix}--slider`}>
+      <div
+        aria-live="assertive"
+        className={`${prefix}--slider`}
+        role="status"
+        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      >
         <div className={`${prefix}--slider__track`} />
         <div className={`${prefix}--slider__filled-track`} />
         <div className={`${prefix}--slider__thumb`} />

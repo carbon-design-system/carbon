@@ -14,7 +14,12 @@ const { prefix } = settings;
 const TextAreaSkeleton = ({ hideLabel }) => (
   <div className={`${prefix}--form-item`}>
     {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
-    <div className={`${prefix}--skeleton ${prefix}--text-area`} />
+    <div
+      aria-live="assertive"
+      className={`${prefix}--skeleton ${prefix}--text-area`}
+      role="status"
+      tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+    />
   </div>
 );
 

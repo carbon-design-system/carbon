@@ -14,7 +14,12 @@ const { prefix } = settings;
 const NumberInputSkeleton = ({ hideLabel }) => (
   <div className={`${prefix}--form-item`}>
     {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
-    <div className={`${prefix}--number ${prefix}--skeleton`} />
+    <div
+      aria-live="assertive"
+      className={`${prefix}--number ${prefix}--skeleton`}
+      role="status"
+      tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+    />
   </div>
 );
 
