@@ -8,7 +8,13 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  select,
+  text,
+  object,
+} from '@storybook/addon-knobs';
 import TextInput from '../TextInput';
 import TextInputSkeleton from '../TextInput/TextInput.Skeleton';
 
@@ -70,6 +76,13 @@ const props = {
       ['start', 'center', 'end'],
       'center'
     ),
+    togglePasswordVisibilityTranslationIds: object(
+      'Password visibility toggle button translation IDs (for translateWithId callback)',
+      {
+        'hide.password': 'Hide password',
+        'show.password': 'Show password',
+      }
+    ),
   }),
 };
 
@@ -98,12 +111,19 @@ storiesOf('TextInput', module)
   )
   .add(
     'Toggle password visibility',
-    () => (
-      <TextInput.PasswordInput
-        {...props.TextInputProps()}
-        {...props.PasswordInputProps()}
-      />
-    ),
+    () => {
+      const {
+        togglePasswordVisibilityTranslationIds,
+        ...passwordInputProps
+      } = props.PasswordInputProps();
+      return (
+        <TextInput.PasswordInput
+          {...props.TextInputProps()}
+          {...passwordInputProps}
+          translateWithId={id => togglePasswordVisibilityTranslationIds[id]}
+        />
+      );
+    },
     {
       info: {
         text: `
@@ -122,10 +142,16 @@ storiesOf('TextInput', module)
         },
       };
 
+      const {
+        togglePasswordVisibilityTranslationIds,
+        ...passwordInputProps
+      } = props.PasswordInputProps();
+
       return (
         <ControlledPasswordInputApp
           {...props.TextInputProps()}
-          {...props.PasswordInputProps()}
+          {...passwordInputProps}
+          translateWithId={id => togglePasswordVisibilityTranslationIds[id]}
         />
       );
     },
