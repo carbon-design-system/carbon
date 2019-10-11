@@ -391,7 +391,6 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__selection--multi > svg:hover {
     border-radius: 50%;
     background-color: $hover-secondary;
-    fill: $icon-03;
   }
 
   .#{$prefix}--list-box__selection--multi:focus,
