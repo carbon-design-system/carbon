@@ -32,7 +32,7 @@ async function sassdoc(pattern, { ignore, cwd, json, output } = {}) {
       const jsonFile = await createJson(files);
       await fs.ensureDir(DOCS_DIR);
       await fs.writeFile(JSON_FILE, JSON.stringify(jsonFile, null, 2));
-    } catch {
+    } catch (error) {
       reporter.error(`Sassdoc error: ${error}`);
       process.exit(1);
     }

@@ -21,9 +21,6 @@ async function check(pattern, { ignore, cwd, list } = {}) {
     cwd,
     ignore,
   });
-  const defaultOptions = {
-    includePaths: ['node_modules', '../../node_modules'],
-  };
 
   reporter.info(`Compiling ${files.length} files...`);
 
@@ -34,7 +31,6 @@ async function check(pattern, { ignore, cwd, list } = {}) {
   const errors = results.reduce((acc, result) => {
     if (result.error) {
       const error = result.error;
-      error.filepath = result.filepath;
       return acc.concat(error);
     }
     return acc;
@@ -42,8 +38,8 @@ async function check(pattern, { ignore, cwd, list } = {}) {
 
   if (errors.length > 0) {
     errors.forEach(error => {
-      const { formatted, filepath } = error;
-      reporter.error(`Error compiling ${path.relative(cwd, filepath)}`);
+      const { formatted, file } = error;
+      reporter.error(`Error compiling ${path.relative(cwd, file)}`);
       console.log(chalk.gray(formatted));
     });
     process.exit(1);

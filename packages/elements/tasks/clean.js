@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/* eslint-disable no-console */
+
 'use strict';
 
 const fs = require('fs-extra');
@@ -19,7 +21,7 @@ const dependencies = Object.keys(packageJson.dependencies).map(key => {
 
 async function clean() {
   await Promise.all(
-    dependencies.map(([dependency, dependencyPath]) => {
+    dependencies.map(([_dependency, dependencyPath]) => {
       return fs.remove(path.join(BUNDLE_DIR, path.basename(dependencyPath)));
     })
   );

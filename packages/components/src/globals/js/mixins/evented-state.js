@@ -11,11 +11,11 @@ export default function(ToMix) {
    * @class EventedState
    */
   class EventedState extends ToMix {
-    // eslint-disable-next-line jsdoc/check-param-names
+    /* eslint-disable jsdoc/check-param-names */
     /**
      * The internal implementation for {@link EventedState#changeState `.changeState()`}, performing actual change in state.
      * @param {string} [state] The new state. Can be an omitted, which means toggling.
-     * @param {Object} [detail]
+     * @param {object} [detail]
      *   The object that should be put to event details that is fired before/after changing state.
      *   Can have a `group` property, which specifies what state to be changed.
      * @param {EventedState~changeStateCallback} callback The callback called once changing state is finished or is canceled.
@@ -27,11 +27,10 @@ export default function(ToMix) {
       );
     }
 
-    // eslint-disable-next-line jsdoc/check-param-names
     /**
      * Changes the state of this component.
      * @param {string} [state] The new state. Can be an omitted, which means toggling.
-     * @param {Object} [detail]
+     * @param {object} [detail]
      *   The object that should be put to event details that is fired before/after changing state.
      *   Can have a `group` property, which specifies what state to be changed.
      * @param {EventedState~changeStateCallback} [callback] The callback called once changing state is finished or is canceled.
@@ -102,6 +101,7 @@ export default function(ToMix) {
         });
       }
     }
+    /* eslint-enable jsdoc/check-param-names */
 
     /**
      * Tests if change in state should happen or not.

@@ -10,7 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
 import { settings } from 'carbon-components';
-import { keys } from '../../tools/key';
+import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -92,10 +92,10 @@ export default class OverflowMenuItem extends React.Component {
   overflowMenuItem = React.createRef();
 
   setTabFocus = evt => {
-    if (evt.which === keys.DOWN) {
+    if (match(evt, keys.ArrowDown)) {
       this.props.handleOverflowMenuItemFocus(this.props.index + 1);
     }
-    if (evt.which === keys.UP) {
+    if (match(evt, keys.ArrowUp)) {
       this.props.handleOverflowMenuItemFocus(this.props.index - 1);
     }
   };

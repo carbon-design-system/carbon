@@ -8,6 +8,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
+@import 'mixins';
 
 /// Data table core styles
 /// @access private
@@ -67,7 +68,8 @@
   }
 
   .#{$prefix}--data-table tbody tr,
-  .#{$prefix}--data-table tbody tr td {
+  .#{$prefix}--data-table tbody tr td,
+  .#{$prefix}--data-table tbody tr th {
     transition: background-color $duration--fast-01 motion(entrance, productive);
   }
 
@@ -75,7 +77,8 @@
     background: $hover-field;
   }
 
-  .#{$prefix}--data-table tbody tr:hover td {
+  .#{$prefix}--data-table tbody tr:hover td,
+  .#{$prefix}--data-table tbody tr:hover th {
     color: $text-01;
     background: $hover-field;
     border-bottom: 1px solid $hover-field;
@@ -95,7 +98,7 @@
     background-color: $ui-03;
   }
 
-  .#{$prefix}--data-table th:first-of-type {
+  .#{$prefix}--data-table th:first-of-type:not(.#{$prefix}--table-expand) {
     padding-left: $spacing-05;
   }
 
@@ -110,13 +113,18 @@
     text-align: left;
   }
 
-  .#{$prefix}--data-table td {
+  .#{$prefix}--data-table td,
+  .#{$prefix}--data-table tbody th {
     background: $ui-01;
     color: $text-02;
     border-top: 1px solid $ui-01;
     border-bottom: 1px solid $ui-03;
     padding: rem(14px) $spacing-04;
     padding-bottom: rem(13px);
+
+    & + td:first-of-type {
+      padding-left: $spacing-04;
+    }
   }
 
   @supports (-moz-appearance: none) {
@@ -133,9 +141,11 @@
     padding-right: $spacing-05;
   }
 
-  // specific padding for overflow menu columns
+  // specific padding/width for overflow menu columns
   .#{$prefix}--data-table .#{$prefix}--table-column-menu,
   .#{$prefix}--data-table .#{$prefix}--table-column-menu:last-of-type {
+    width: rem(52px);
+    min-width: rem(52px);
     padding-top: $spacing-03;
     padding-right: $spacing-03;
   }
@@ -258,8 +268,8 @@
     td,
   tr.#{$prefix}--data-table--selected td {
     color: $text-01;
-    background-color: $ui-03;
-    border-top: 1px solid $ui-03;
+    background-color: $selected-ui;
+    border-top: 1px solid $selected-ui;
     border-bottom: 1px solid $active-ui; //bottom border acts as separator from other rows
   }
 
@@ -282,8 +292,8 @@
     tr:last-of-type:nth-child(even).#{$prefix}--data-table--selected
     td,
   tr.#{$prefix}--data-table--selected:last-of-type td {
-    border-top: 1px solid $ui-03; // doesn't need separators
-    border-bottom: 1px solid $ui-03;
+    border-top: 1px solid $selected-ui; // doesn't need separators
+    border-bottom: 1px solid $selected-ui;
   }
 
   // zebra select - odd child
@@ -425,6 +435,89 @@
   .#{$prefix}--data-table--static {
     width: auto;
   }
+
+  // -------------
+  // Sticky header
+  // -------------
+  .#{$prefix}--data-table_inner-container {
+    background-color: $ui-03;
+    padding-top: rem(48px);
+    transform: translateZ(0);
+  }
+
+  .#{$prefix}--data-table--sticky-header {
+    display: block;
+    // max-height: rem(300px);
+    overflow-y: scroll;
+
+    thead,
+    tbody,
+    tr,
+    th,
+    td {
+      display: flex;
+    }
+
+    thead {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      overflow: scroll;
+      -ms-overflow-style: none; //hides ie scrollbar
+      will-change: transform;
+    }
+
+    thead tr th {
+      border-bottom: 1px solid $active-ui;
+    }
+
+    tbody {
+      flex-direction: column;
+      overflow-x: scroll;
+      -ms-overflow-style: none; //hides ie scrollbar
+      will-change: transform;
+    }
+
+    tr {
+      min-height: rem(48px);
+      height: auto;
+    }
+
+    tr.#{$prefix}--data-table--selected:first-of-type td {
+      border-top: none;
+    }
+
+    //hides webkit scrollbar
+    thead::-webkit-scrollbar,
+    tbody::-webkit-scrollbar {
+      display: none;
+    }
+
+    //hides ff scrollbar
+    @-moz-document url-prefix() {
+      thead,
+      tbody {
+        scrollbar-width: none;
+      }
+    }
+
+    tbody tr:last-of-type {
+      border-bottom: 0;
+    }
+
+    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon),
+    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon) {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .#{$prefix}--table-header-label {
+      max-width: calc(100% - 10px);
+      @include text-overflow;
+    }
+  }
+
+  @include sticky-header($max-width: rem(900px));
 }
 
 @include exports('data-table-v2-core') {

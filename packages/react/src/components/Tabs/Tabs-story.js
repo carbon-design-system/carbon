@@ -45,7 +45,7 @@ const props = {
   }),
 };
 
-const CustomLabel = ({ text }) => <span>{text}</span>;
+const CustomLabel = ({ text }) => <>{text}</>;
 
 const TabContentRenderedOnlyWhenSelected = ({ selected, children, ...other }) =>
   !selected ? null : (

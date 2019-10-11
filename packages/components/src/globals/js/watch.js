@@ -51,7 +51,7 @@ const createAndReleaseComponentsUponDOMMutation = (
 /**
  * Automatically instantiates/destroys components in the given element, by watching for DOM additions/removals.
  * @param {Node} target The DOM node to instantiate components in. Should be a document or an element.
- * @param {Object} [options] The component options.
+ * @param {object} [options] The component options.
  * @returns {Handle} The handle to stop watching.
  */
 export default function(target = document, options = {}) {

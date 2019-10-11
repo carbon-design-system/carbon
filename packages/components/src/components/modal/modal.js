@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+import warning from 'warning';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -27,8 +27,9 @@ class Modal extends mixin(
    * @extends EventedShowHideState
    * @extends Handles
    * @param {HTMLElement} element The element working as a modal dialog.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @param {string} [options.classVisible] The CSS class for the visible state.
+   * @param {string} [options.classBody] The CSS class for `<body>` with open modal.
    * @param {string} [options.eventBeforeShown]
    *   The name of the custom event fired before this modal is shown.
    *   Cancellation of this event stops showing the modal.
@@ -88,7 +89,7 @@ class Modal extends mixin(
    * Changes the shown/hidden state.
    * @private
    * @param {string} state The new state.
-   * @param {Object} detail The detail data to be included in the event that will be fired.
+   * @param {object} detail The detail data to be included in the event that will be fired.
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(state, detail, callback) {
@@ -102,10 +103,18 @@ class Modal extends mixin(
         this.element.offsetWidth > 0 &&
         this.element.offsetHeight > 0
       ) {
-        (
+        this.previouslyFocusedNode = this.element.ownerDocument.activeElement;
+        const focusableItem =
           this.element.querySelector(this.options.selectorPrimaryFocus) ||
-          this.element
-        ).focus();
+          this.element.querySelector(settings.selectorTabbable);
+        focusableItem.focus();
+        if (__DEV__) {
+          warning(
+            focusableItem,
+            `Modals need to contain a focusable element by either using ` +
+              `\`${this.options.selectorPrimaryFocus}\` or settings.selectorTabbable.`
+          );
+        }
       }
       callback();
     };
@@ -131,8 +140,23 @@ class Modal extends mixin(
 
     if (state === 'hidden') {
       this.element.classList.toggle(this.options.classVisible, false);
+      this.element.ownerDocument.body.classList.toggle(
+        this.options.classBody,
+        false
+      );
+      if (this.options.selectorFocusOnClose || this.previouslyFocusedNode) {
+        (
+          this.element.ownerDocument.querySelector(
+            this.options.selectorFocusOnClose
+          ) || this.previouslyFocusedNode
+        ).focus();
+      }
     } else if (state === 'shown') {
       this.element.classList.toggle(this.options.classVisible, true);
+      this.element.ownerDocument.body.classList.toggle(
+        this.options.classBody,
+        true
+      );
     }
     handleTransitionEnd = this.manage(
       on(this.element, 'transitionend', transitionEnd)
@@ -175,14 +199,17 @@ class Modal extends mixin(
    * @private
    */
   _handleFocusin = evt => {
+    const focusWrapNode =
+      this.element.querySelector(this.options.selectorModalContainer) ||
+      this.element;
     if (
       this.element.classList.contains(this.options.classVisible) &&
-      !this.element.contains(evt.target) &&
+      !focusWrapNode.contains(evt.target) &&
       this.options.selectorsFloatingMenus.every(
         selector => !eventMatches(evt, selector)
       )
     ) {
-      this.element.focus();
+      this.element.querySelector(settings.selectorTabbable).focus();
     }
   };
 
@@ -198,15 +225,19 @@ class Modal extends mixin(
    * If `options` is specified in the constructor, {@linkcode Modal.create .create()}, or {@linkcode Modal.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode Modal.init .init()} works.
    * @member Modal.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The CSS class to find modal dialogs.
    * @property {string} [selectorModalClose] The selector to find elements that close the modal.
    * @property {string} [selectorPrimaryFocus] The CSS selector to determine the element to put focus when modal gets open.
+   * @property {string} [selectorFocusOnClose] The CSS selector to determine the element to put focus when modal closes.
+   *   If undefined, focus returns to the previously focused element prior to the modal opening.
+   * @property {string} [selectorModalContainer] The CSS selector for the content container of the modal for focus wrap feature.
    * @property {string} attribInitTarget The attribute name in the launcher buttons to find target modal dialogs.
    * @property {string[]} [selectorsFloatingMenu]
    *   The CSS selectors of floating menus.
    *   Used for detecting if focus-wrap behavior should be disabled temporarily.
    * @property {string} [classVisible] The CSS class for the visible state.
+   * @property {string} [classBody] The CSS class for `<body>` with open modal.
    * @property {string} [classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
    * @property {string} [eventBeforeShown]
    *   The name of the custom event fired before this modal is shown.
@@ -232,7 +263,9 @@ class Modal extends mixin(
         `.${prefix}--tooltip`,
         '.flatpickr-calendar',
       ],
+      selectorModalContainer: `.${prefix}--modal-container`,
       classVisible: 'is-visible',
+      classBody: `${prefix}--body--with-modal-open`,
       attribInitTarget: 'data-modal-target',
       initEventNames: ['click'],
       eventBeforeShown: 'modal-beingshown',

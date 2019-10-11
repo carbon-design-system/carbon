@@ -75,6 +75,8 @@ const props = () => ({
     {
       'close.menu': 'Close menu',
       'open.menu': 'Open menu',
+      'clear.all': 'Clear all',
+      'clear.selection': 'Clear selection',
     }
   ),
   selectionFeedback: select(

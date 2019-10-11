@@ -18,7 +18,7 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
    * @extends CreateComponent
    * @extends InitComponentBySearch
    * @param {HTMLElement} element The element representing the ProgressIndicator.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @property {string} [options.selectorStepElement] The CSS selector to find step elements.
    * @property {string} [options.selectorCurrent] The CSS selector to find the current step element.
    * @property {string} [options.selectorIncomplete] The CSS class to find incomplete step elements.
@@ -115,10 +115,10 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
 
   /**
    * Update step with correct inline SVG and className
-   * @param {Object} args
-   * @param {Object} [args.element] target element
-   * @param {Object} [args.className] new className
-   * @param {Object} [args.html] new inline SVG to insert
+   * @param {object} args
+   * @param {object} [args.element] target element
+   * @param {object} [args.className] new className
+   * @param {object} [args.html] new inline SVG to insert
    */
   _updateStep(args) {
     const { element, className, html } = args;
@@ -194,7 +194,7 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
    * {@linkcode ProgressIndicator.create .create()}, or {@linkcode ProgressIndicator.init .init()},
    * properties in this object are overriden for the instance being created.
    * @member ProgressIndicator.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The CSS selector to find content switcher button set.
    * @property {string} [selectorStepElement] The CSS selector to find step elements.
    * @property {string} [selectorCurrent] The CSS selector to find the current step element.

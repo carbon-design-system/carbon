@@ -32,12 +32,13 @@ $default-feature-flags: (
   grid: true,
   grid-columns-16: false,
   grid--fallback: false,
+  enable-css-custom-properties: false,
 );
 
 /// @access private
 /// @type Bool
 /// @group feature-flags
-$did-warn-diverged-feature-flags: false !default !global;
+$did-warn-diverged-feature-flags: false !default;
 
 /// Look for user-defined feature flags that are different from default ones, and warn them before merging them.
 /// @access private

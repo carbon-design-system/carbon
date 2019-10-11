@@ -16,8 +16,8 @@
  * cell info.
  *
  * @param {Array<string>} rowIds array of row ids in the table
- * @param {Object} rowsById object containing lookups for rows by id
- * @param {Object} cellsById object containing lookups for cells by id
+ * @param {object} rowsById object containing lookups for rows by id
+ * @param {object} cellsById object containing lookups for cells by id
  */
 const denormalize = (rowIds, rowsById, cellsById) => {
   return rowIds.map(id => ({

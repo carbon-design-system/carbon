@@ -8,8 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import CaretRight24 from '@carbon/icons-react/lib/caret--right/24';
-import CaretLeft24 from '@carbon/icons-react/lib/caret--left/24';
+import { CaretRight24, CaretLeft24 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
@@ -155,17 +154,16 @@ export default class Pagination extends Component {
       pageSize: currentPageSize,
     } = state;
     const pageSizesChanged = !equals(pageSizes, prevPageSizes);
+    if (pageSizesChanged && !pageSizes.includes(pageSize)) {
+      pageSize = pageSizes[0];
+    }
     const pageChanged = page !== prevPage;
     const pageSizeChanged = pageSize !== prevPageSize;
     return !pageSizesChanged && !pageChanged && !pageSizeChanged
       ? null
       : {
-          page: pageSizesChanged ? 1 : pageChanged ? page : currentPage,
-          pageSize: pageSizesChanged
-            ? pageSizes[0]
-            : pageSizeChanged
-            ? pageSize
-            : currentPageSize,
+          page: pageSizeChanged && 1 || pageChanged && page || currentPage,
+          pageSize: pageSizeChanged ? pageSize : currentPageSize,
           prevPageSizes: pageSizes,
           prevPage: page,
           prevPageSize: pageSize,

@@ -10,10 +10,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import {
+  Close16,
+  WarningFilled16,
+  CheckmarkFilled16,
+} from '@carbon/icons-react';
+import Loading from '../Loading';
 import uid from '../../tools/uniqueId';
 import { ButtonTypes } from '../../prop-types/types';
-import CloseFilled16 from '@carbon/icons-react/lib/close--filled/16';
-import CheckmarkFilled16 from '@carbon/icons-react/lib/checkmark--filled/16';
 
 const { prefix } = settings;
 
@@ -41,7 +45,7 @@ export class FileUploaderButton extends Component {
      * Provide the label text to be read by screen readers when interacting with
      * this control
      */
-    labelText: PropTypes.string,
+    labelText: PropTypes.node,
 
     /**
      * Specify whether you want the component to list the files that have been
@@ -107,6 +111,7 @@ export class FileUploaderButton extends Component {
     onClick: () => {},
     accept: [],
     disabled: false,
+    role: 'button',
   };
 
   static getDerivedStateFromProps({ labelText }, state) {
@@ -152,6 +157,7 @@ export class FileUploaderButton extends Component {
       className,
       {
         [`${prefix}--btn--${buttonKind}`]: buttonKind,
+        [`${prefix}--btn--disabled`]: disabled,
       }
     );
 
@@ -160,8 +166,8 @@ export class FileUploaderButton extends Component {
     return (
       <>
         <label
-          role="button"
-          tabIndex={tabIndex || 0}
+          tabIndex={disabled ? -1 : tabIndex || 0}
+          aria-disabled={disabled}
           className={classes}
           onKeyDown={evt => {
             if (evt.which === 13 || evt.which === 32) {
@@ -169,9 +175,8 @@ export class FileUploaderButton extends Component {
             }
           }}
           htmlFor={this.uid}
-          role={role}
           {...other}>
-          {this.state.labelText}
+          <span role={role}>{this.state.labelText}</span>
         </label>
         <input
           className={`${prefix}--visually-hidden`}
@@ -193,71 +198,60 @@ export class FileUploaderButton extends Component {
   }
 }
 
-export class Filename extends Component {
-  static propTypes = {
-    /**
-     * Specify an optional object of styles to be applied inline to the root
-     * node
-     */
-    style: PropTypes.object,
-
-    /**
-     * Specify the status of the File Upload
-     */
-    status: PropTypes.oneOf(['edit', 'complete', 'uploading']),
-
-    /**
-     * Provide a description for the complete/close icon that can be read by screen readers
-     */
-    iconDescription: PropTypes.string,
-  };
-
-  static defaultProps = {
-    onKeyDown: () => {},
-    status: 'uploading',
-    style: {},
-    tabIndex: 0,
-  };
-
-  render() {
-    const { iconDescription, status, style, ...other } = this.props;
-
-    if (status === 'uploading') {
+export function Filename({ iconDescription, status, invalid, ...other }) {
+  switch (status) {
+    case 'uploading':
       return (
-        <div
-          className={`${prefix}--loading`}
-          style={{ ...style, width: '1rem', height: '1rem' }}
-          {...other}>
-          <svg className={`${prefix}--loading__svg`} viewBox="-42 -42 84 84">
-            <circle cx="0" cy="0" r="37.5" />
-          </svg>
-        </div>
+        <Loading description={iconDescription} withOverlay={false} small />
       );
-    } else if (status === 'edit') {
+    case 'edit':
       return (
-        <CloseFilled16
-          className={`${prefix}--file-close`}
-          aria-label={iconDescription}
-          style={style}
-          {...other}>
-          {iconDescription && <title>{iconDescription}</title>}
-        </CloseFilled16>
+        <>
+          {invalid && <WarningFilled16 className={`${prefix}--file-invalid`} />}
+          <Close16
+            className={`${prefix}--file-close`}
+            aria-label={iconDescription}
+            {...other}>
+            {iconDescription && <title>{iconDescription}</title>}
+          </Close16>
+        </>
       );
-    } else if (status === 'complete') {
+    case 'complete':
       return (
         <CheckmarkFilled16
           className={`${prefix}--file-complete`}
           aria-label={iconDescription}
-          style={style}
           {...other}>
           {iconDescription && <title>{iconDescription}</title>}
         </CheckmarkFilled16>
       );
-    } else {
+    default:
       return null;
-    }
   }
 }
+
+Filename.propTypes = {
+  /**
+   * Provide a description of the SVG icon to denote file upload status
+   */
+  iconDescription: PropTypes.string,
+
+  /**
+   * Status of the file upload
+   */
+  status: PropTypes.oneOf(['edit', 'complete', 'uploading']),
+
+  /**
+   * Provide a custom tabIndex value for the <Filename>
+   */
+  tabIndex: PropTypes.string,
+};
+
+Filename.defaultProps = {
+  iconDescription: 'Uploading file',
+  status: 'uploading',
+  tabIndex: '0',
+};
 
 export default class FileUploader extends Component {
   static propTypes = {

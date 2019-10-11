@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import ChevronDownGlyph from '@carbon/icons-react/lib/chevron--down';
+import { ChevronDownGlyph } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { keys, matches } from '../../tools/key';
+import { keys, matches } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
@@ -83,7 +83,7 @@ class HeaderMenu extends React.Component {
    */
   handleOnKeyDown = event => {
     // Handle enter or space key for toggling the expanded state of the menu.
-    if (matches(event, [keys.ENTER, keys.SPACE])) {
+    if (matches(event, [keys.Enter, keys.Space])) {
       event.stopPropagation();
       event.preventDefault();
 
@@ -133,7 +133,7 @@ class HeaderMenu extends React.Component {
 
   handleMenuClose = event => {
     // Handle ESC keydown for closing the expanded menu.
-    if (matches(event, [keys.ESC]) && this.state.expanded) {
+    if (matches(event, [keys.Escape]) && this.state.expanded) {
       event.stopPropagation();
       event.preventDefault();
 

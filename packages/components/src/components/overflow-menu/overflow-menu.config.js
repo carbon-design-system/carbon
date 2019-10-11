@@ -36,6 +36,18 @@ const items = [
   },
 ];
 
+const idSuffix = {
+  default: `example-${Math.random()
+    .toString(36)
+    .substr(2)}`,
+  flip: `example-${Math.random()
+    .toString(36)
+    .substr(2)}`,
+  link: `example-${Math.random()
+    .toString(36)
+    .substr(2)}`,
+};
+
 module.exports = {
   context: {
     prefix,
@@ -51,6 +63,7 @@ module.exports = {
       context: {
         direction: 'bottom',
         items,
+        idSuffix,
       },
     },
     {
@@ -59,6 +72,7 @@ module.exports = {
       context: {
         direction: 'top',
         items,
+        idSuffix,
       },
     },
   ],

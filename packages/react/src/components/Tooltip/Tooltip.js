@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { isForwardRef } from 'react-is';
 import debounce from 'lodash.debounce';
 import classNames from 'classnames';
-import Information from '@carbon/icons-react/lib/information/16';
+import { Information16 as Information } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import FloatingMenu, {
   DIRECTION_LEFT,
@@ -20,8 +20,10 @@ import FloatingMenu, {
 } from '../../internal/FloatingMenu';
 import ClickListener from '../../internal/ClickListener';
 import mergeRefs from '../../tools/mergeRefs';
-import { keys, keyCodes, matches as keyDownMatch } from '../../tools/key';
+import { keys, matches as keyDownMatch } from '../../internal/keyboard';
 import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
+import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
+import { useControlledStateWithValue } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -73,7 +75,16 @@ const getMenuOffset = (menuBody, menuDirection) => {
 };
 
 class Tooltip extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.isControlled = props.open !== undefined;
+    if (useControlledStateWithValue && this.isControlled) {
+      // Skips the logic of setting initial state if this component is controlled
+      return;
+    }
+    const open = useControlledStateWithValue ? props.defaultOpen : props.open;
+    this.state = { open };
+  }
 
   static propTypes = {
     /**
@@ -85,6 +96,11 @@ class Tooltip extends Component {
      * The ID of the tooltip content.
      */
     tooltipId: PropTypes.string,
+
+    /**
+     * Optional starting value for uncontrolled state
+     */
+    defaultOpen: PropTypes.bool,
 
     /**
      * Open/closed state.
@@ -162,10 +178,19 @@ class Tooltip extends Component {
      * Optional prop to specify the tabIndex of the Tooltip
      */
     tabIndex: PropTypes.number,
+
+    /**
+     * * the signature of the event handler will be:
+     * * `onChange(event, { open })` where:
+     *   * `event` is the (React) raw event
+     *   * `open` is the new value
+     */
+    onChange: !useControlledStateWithValue
+      ? PropTypes.func
+      : requiredIfValueExists(PropTypes.func),
   };
 
   static defaultProps = {
-    open: false,
     direction: DIRECTION_BOTTOM,
     renderIcon: Information,
     showIcon: true,
@@ -181,8 +206,8 @@ class Tooltip extends Component {
   _tooltipEl = null;
 
   componentDidMount() {
-    if (!this._debouncedHandleHover) {
-      this._debouncedHandleHover = debounce(this._handleHover, 200);
+    if (!this._debouncedHandleFocus) {
+      this._debouncedHandleFocus = debounce(this._handleFocus, 200);
     }
     requestAnimationFrame(() => {
       this.getTriggerPosition();
@@ -192,9 +217,9 @@ class Tooltip extends Component {
   }
 
   componentWillUnmount() {
-    if (this._debouncedHandleHover) {
-      this._debouncedHandleHover.cancel();
-      this._debouncedHandleHover = null;
+    if (this._debouncedHandleFocus) {
+      this._debouncedHandleFocus.cancel();
+      this._debouncedHandleFocus = null;
     }
 
     document.removeEventListener('keydown', this.handleEscKeyPress, false);
@@ -213,6 +238,14 @@ class Tooltip extends Component {
         };
   }
 
+  _handleUserInputOpenClose = (event, { open }) => {
+    this.setState({ open }, () => {
+      if (this.props.onChange) {
+        this.props.onChange(event, { open });
+      }
+    });
+  };
+
   getTriggerPosition = () => {
     if (this.triggerEl) {
       const triggerPosition = this.triggerEl.getBoundingClientRect();
@@ -221,14 +254,15 @@ class Tooltip extends Component {
   };
 
   /**
-   * Handles `mouseover`/`mouseout`/`focus`/`blur` event.
+   * Handles `focus`/`blur` event.
    * @param {string} state `over` to show the tooltip, `out` to hide the tooltip.
-   * @param {Element} [relatedTarget] For handing `mouseout` event, indicates where the mouse pointer is gone.
+   * @param {Element} [evt] For handing `mouseout` event, indicates where the mouse pointer is gone.
    */
-  _handleHover = (state, relatedTarget) => {
+  _handleFocus = (state, evt) => {
+    const { relatedTarget } = evt;
     if (state === 'over') {
       this.getTriggerPosition();
-      this.setState({ open: true });
+      this._handleUserInputOpenClose(evt, { open: true });
     } else {
       // Note: SVGElement in IE11 does not have `.contains()`
       const shouldPreventClose =
@@ -238,17 +272,17 @@ class Tooltip extends Component {
           this.triggerEl.contains(relatedTarget)) ||
           (this._tooltipEl && this._tooltipEl.contains(relatedTarget)));
       if (!shouldPreventClose) {
-        this.setState({ open: false });
+        this._handleUserInputOpenClose(evt, { open: false });
       }
     }
   };
 
   /**
-   * The debounced version of the `mouseover`/`mouseout`/`focus`/`blur` event handler.
+   * The debounced version of the `focus`/`blur` event handler.
    * @type {Function}
    * @private
    */
-  _debouncedHandleHover = null;
+  _debouncedHandleFocus = null;
 
   /**
    * @returns {Element} The DOM element where the floating menu is placed in.
@@ -259,13 +293,30 @@ class Tooltip extends Component {
     document.body;
 
   handleMouse = evt => {
-    if (evt.type === 'click') {
+    evt.persist();
+    const state = {
+      focus: 'over',
+      blur: 'out',
+      click: 'click',
+    }[evt.type];
+    const hadContextMenu = this._hasContextMenu;
+    this._hasContextMenu = evt.type === 'contextmenu';
+    if (state === 'click') {
       evt.stopPropagation();
-      const shouldOpen = !this.state.open;
+      evt.preventDefault();
+      const shouldOpen = this.isControlled
+        ? !this.props.open
+        : !this.state.open;
       if (shouldOpen) {
         this.getTriggerPosition();
       }
-      this.setState({ open: shouldOpen });
+      this._handleUserInputOpenClose(evt, { open: shouldOpen });
+    } else if (
+      state &&
+      (state !== 'out' || !hadContextMenu) &&
+      this._debouncedHandleFocus
+    ) {
+      this._debouncedHandleFocus(state, evt);
     }
   };
 
@@ -276,33 +327,33 @@ class Tooltip extends Component {
       this._tooltipEl &&
       this._tooltipEl.contains(evt.target);
     if (!shouldPreventClose) {
-      this.setState({ open: false });
+      this._handleUserInputOpenClose(evt, { open: false });
     }
   };
 
   handleKeyPress = event => {
-    if (keyDownMatch(event, [keys.ESC, keyCodes.ESC, keyCodes.IEESC])) {
+    if (keyDownMatch(event, [keys.Escape])) {
       event.stopPropagation();
-      this.setState({ open: false });
+      this._handleUserInputOpenClose(event, { open: false });
     }
 
-    if (
-      keyDownMatch(event, [
-        keys.ENTER,
-        keyCodes.ENTER,
-        keys.SPACE,
-        keyCodes.SPACE,
-      ])
-    ) {
+    if (keyDownMatch(event, [keys.Enter, keys.Space])) {
       event.stopPropagation();
-      this.setState({ open: !this.state.open });
+      event.preventDefault();
+      const shouldOpen = this.isControlled
+        ? !this.props.open
+        : !this.state.open;
+      if (shouldOpen) {
+        this.getTriggerPosition();
+      }
+      this._handleUserInputOpenClose(event, { open: shouldOpen });
     }
   };
 
   handleEscKeyPress = event => {
-    const { open } = this.state;
-    if (open && keyDownMatch(event, [keys.ESC, keyCodes.ESC, keyCodes.IEESC])) {
-      return this.setState({ open: false });
+    const { open } = this.isControlled ? this.props : this.state;
+    if (open && keyDownMatch(event, [keys.Escape])) {
+      return this._handleUserInputOpenClose(event, { open: false });
     }
   };
 
@@ -333,7 +384,7 @@ class Tooltip extends Component {
       ...other
     } = this.props;
 
-    const { open } = this.state;
+    const { open } = this.isControlled ? this.props : this.state;
 
     const tooltipClasses = classNames(
       `${prefix}--tooltip`,
@@ -363,13 +414,14 @@ class Tooltip extends Component {
       onBlur: this.handleMouse,
       'aria-haspopup': 'true',
       'aria-expanded': open,
+      'aria-describedby': open ? tooltipId : null,
       // if the user provides property `triggerText`,
-      // then the button should use aria-describedby to point to its id,
+      // then the button should use aria-labelledby to point to its id,
       // if the user doesn't provide property `triggerText`,
       // then an aria-label will be provided via the `iconDescription` property.
       ...(triggerText
         ? {
-            'aria-describedby': triggerId,
+            'aria-labelledby': triggerId,
           }
         : {
             'aria-label': iconDescription,

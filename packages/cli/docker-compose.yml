@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  verdaccio:
+    image: verdaccio/verdaccio:4
+    ports:
+      - "4873:4873"
+    volumes:
+      - verdaccio:/verdaccio
+
+volumes:
+  verdaccio:
+    driver: local

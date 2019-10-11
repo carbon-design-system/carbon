@@ -19,6 +19,7 @@
   - [✅carbon--font-face-mono [mixin]](#carbon--font-face-mono-mixin)
   - [✅prefix [variable]](#prefix-variable)
   - [✅carbon--type-reset [mixin]](#carbon--type-reset-mixin)
+  - [✅carbon--default-type [mixin]](#carbon--default-type-mixin)
   - [✅carbon--font-face-sans [mixin]](#carbon--font-face-sans-mixin)
   - [✅carbon--get-type-size [function]](#carbon--get-type-size-function)
   - [✅carbon--type-scale [variable]](#carbon--type-scale-variable)
@@ -63,6 +64,8 @@
   - [✅strip-unit [function]](#strip-unit-function)
   - [✅fluid-type [mixin]](#fluid-type-mixin)
   - [✅fluid-type-size [mixin]](#fluid-type-size-mixin)
+  - [❌custom-property-prefix [variable]](#custom-property-prefix-variable)
+  - [❌custom-properties [mixin]](#custom-properties-mixin)
   - [✅carbon--type-style [mixin]](#carbon--type-style-mixin)
 
 <!-- tocstop -->
@@ -270,6 +273,8 @@ Set the `font-weight` property with the value for a given name
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [carbon--font-weight [function]](#carbon--font-weight-function)
+- **Used by**:
+  - [carbon--type-reset [mixin]](#carbon--type-reset-mixin)
 
 ### ✅carbon--font-face-mono [mixin]
 
@@ -746,20 +751,18 @@ Include a type reset for a given body and mono font family
 
   body {
     font-family: $body-font-family;
-    font-weight: 400;
+    @include carbon--font-weight('regular');
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  // IBM Plex uses semibold instead of bold, as a result we need to map
-  // tags that use `font-weight: bold` to the semibold value
-  strong {
-    font-weight: 600;
-  }
-
   code {
     font-family: $mono-font-family;
+  }
+
+  strong {
+    @include carbon--font-weight('semibold');
   }
 }
 ```
@@ -775,6 +778,61 @@ Include a type reset for a given body and mono font family
 | `$mono-font-family` | The font family used on elements that require mono fonts, like the `<code>` element | `String` | `carbon--font-family('mono')` |
 
 - **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
+
+### ✅carbon--default-type [mixin]
+
+Include default type styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon--default-type() {
+  h1 {
+    @include carbon--type-style('productive-heading-06');
+  }
+
+  h2 {
+    @include carbon--type-style('productive-heading-05');
+  }
+
+  h3 {
+    @include carbon--type-style('productive-heading-04');
+  }
+
+  h4 {
+    @include carbon--type-style('productive-heading-03');
+  }
+
+  h5 {
+    @include carbon--type-style('productive-heading-02');
+  }
+
+  h6 {
+    @include carbon--type-style('productive-heading-01');
+  }
+
+  p {
+    @include carbon--type-style('body-long-02');
+  }
+
+  a {
+    color: #0062ff;
+  }
+
+  em {
+    font-style: italic;
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
 
 ### ✅carbon--font-face-sans [mixin]
 
@@ -1932,7 +1990,6 @@ $label-01: (
 ```scss
 $helper-text-01: (
   font-size: carbon--type-scale(1),
-  font-style: italic,
   line-height: carbon--rem(16px),
   letter-spacing: 0.32px,
 );
@@ -2879,6 +2936,45 @@ Computes the fluid `font-size` for a given type style and breakpoint
 - **Used by**:
   - [fluid-type [mixin]](#fluid-type-mixin)
 
+### ❌custom-property-prefix [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$custom-property-prefix: 'cds';
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Used by**:
+  - [custom-properties [mixin]](#custom-properties-mixin)
+
+### ❌custom-properties [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin custom-properties() {
+  @each $property, $value in $value {
+    #{$property}: var(
+      --#{$custom-property-prefix}-#{$name}-#{$property},
+      #{$value}
+    );
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [custom-property-prefix [variable]](#custom-property-prefix-variable)
+- **Used by**:
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+
 ### ✅carbon--type-style [mixin]
 
 Helper mixin to include the styles for a given token in any selector in your
@@ -2907,9 +3003,15 @@ fixed contexts.
   @if $fluid == true and map-has-key($token, 'breakpoints') {
     @include fluid-type($token, $breakpoints);
   } @else {
-    // Otherwise, we just include all the property declarations directly on the
-    // selector
-    @include properties(map-remove($token, 'breakpoints'));
+    @if global-variable-exists('feature-flags') and
+      map-get($feature-flags, 'enable-css-custom-properties')
+    {
+      @include custom-properties($name, $token);
+    } @else {
+      // Otherwise, we just include all the property declarations directly on the
+      // selector
+      @include properties(map-remove($token, 'breakpoints'));
+    }
   }
 }
 ```
@@ -2927,7 +3029,9 @@ fixed contexts.
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [fluid-type [mixin]](#fluid-type-mixin)
+  - [custom-properties [mixin]](#custom-properties-mixin)
   - [properties [mixin]](#properties-mixin)
   - [tokens [variable]](#tokens-variable)
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
+  - [carbon--default-type [mixin]](#carbon--default-type-mixin)

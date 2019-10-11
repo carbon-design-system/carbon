@@ -1,7 +1,15 @@
+/**
+ * Copyright IBM Corp. 2019
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const rtlcss = require('rtlcss');
+const customProperties = require('postcss-custom-properties');
 
 const useExternalCss =
   process.env.CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS === 'true';
@@ -9,7 +17,13 @@ const useExternalCss =
 const useStyleSourceMap =
   process.env.CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP === 'true';
 
+const useControlledStateWithEventListener =
+  process.env.CARBON_REACT_USE_CONTROLLED_STATE_WITH_EVENT_LISTENER === 'true';
 const useRtl = process.env.CARBON_REACT_STORYBOOK_USE_RTL === 'true';
+
+const replaceTable = {
+  useControlledStateWithEventListener,
+};
 
 const styleLoaders = [
   {
@@ -24,9 +38,9 @@ const styleLoaders = [
     options: {
       plugins: () => {
         const autoPrefixer = require('autoprefixer')({
-          browsers: ['last 1 version', 'ie >= 11'],
+          overrideBrowserslist: ['last 1 version', 'ie >= 11'],
         });
-        return !useRtl ? [autoPrefixer] : [autoPrefixer, rtlcss];
+        return [customProperties(), autoPrefixer, ...(useRtl ? [rtlcss] : [])];
       },
       sourceMap: useStyleSourceMap,
     },
@@ -38,6 +52,7 @@ const styleLoaders = [
       data: `
         $feature-flags: (
           ui-shell: true,
+          enable-css-custom-properties: true,
         );
       `,
       sourceMap: useStyleSourceMap,
@@ -64,10 +79,10 @@ class FeatureFlagProxyPlugin {
   }
 }
 
-module.exports = (baseConfig, env, defaultConfig) => {
-  defaultConfig.devtool = useStyleSourceMap ? 'source-map' : '';
-  defaultConfig.optimization = {
-    ...defaultConfig.optimization,
+module.exports = ({ config, mode }) => {
+  config.devtool = useStyleSourceMap ? 'source-map' : '';
+  config.optimization = {
+    ...config.optimization,
     minimizer: [
       new TerserPlugin({
         sourceMap: true,
@@ -78,11 +93,23 @@ module.exports = (baseConfig, env, defaultConfig) => {
     ],
   };
 
-  defaultConfig.module.rules.push({
+  config.module.rules.push({
+    test: /(\/|\\)FeatureFlags\.js$/,
+    loader: 'string-replace-loader',
+    options: {
+      multiple: Object.keys(replaceTable).map(key => ({
+        search: `export\\s+const\\s+${key}\\s*=\\s*false`,
+        replace: `export const ${key} = ${replaceTable[key]}`,
+        flags: 'i',
+      })),
+    },
+  });
+
+  config.module.rules.push({
     test: /-story\.jsx?$/,
     loaders: [
       {
-        loader: require.resolve('@storybook/addon-storysource/loader'),
+        loader: require.resolve('@storybook/source-loader'),
         options: {
           prettierConfig: {
             parser: 'babylon',
@@ -98,7 +125,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
     enforce: 'pre',
   });
 
-  defaultConfig.module.rules.push({
+  config.module.rules.push({
     test: /\.scss$/,
     sideEffects: true,
     use: [
@@ -108,17 +135,17 @@ module.exports = (baseConfig, env, defaultConfig) => {
   });
 
   if (useExternalCss) {
-    defaultConfig.plugins.push(
+    config.plugins.push(
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash].css',
       })
     );
   }
 
-  defaultConfig.resolve = {
+  config.resolve = {
     modules: ['node_modules'],
     plugins: [new FeatureFlagProxyPlugin()],
   };
 
-  return defaultConfig;
+  return config;
 };

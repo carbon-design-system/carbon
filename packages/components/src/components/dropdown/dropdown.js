@@ -26,7 +26,7 @@ class Dropdown extends mixin(
    * @extends InitComponentBySearch
    * @extends TrackBlur
    * @param {HTMLElement} element The element working as a selector.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @param {string} [options.selectorItem] The CSS selector to find clickable areas in dropdown items.
    * @param {string} [options.selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
    * @param {string} [options.classSelected] The CSS class for the selected dropdown item.
@@ -74,6 +74,22 @@ class Dropdown extends mixin(
       this.navigate(direction);
       event.preventDefault(); // Prevents up/down keys from scrolling container
     } else {
+      // get selected item
+      // in v10.0, the anchor elements fire click events on Enter keypress when a dropdown item is selected
+      // in v10.5 (#3586), focus is no longer placed on the dropdown items and is instead kept fixed on the ul menu
+      // so we need to manually call getCurrentNavigation and select the item
+      const item = this.getCurrentNavigation();
+      if (
+        item &&
+        isOpen &&
+        (event.which === 13 || event.which === 32) &&
+        !this.element.ownerDocument.activeElement.matches(
+          this.options.selectorItem
+        )
+      ) {
+        event.preventDefault();
+        this.select(item);
+      }
       this._toggle(event);
     }
   }
@@ -81,6 +97,8 @@ class Dropdown extends mixin(
   /**
    * Opens and closes the dropdown menu.
    * @param {Event} [event] The event triggering this method.
+   *
+   * @todo https://github.com/carbon-design-system/carbon/issues/3641
    */
   _toggle(event) {
     const isDisabled = this.element.classList.contains(
@@ -91,35 +109,98 @@ class Dropdown extends mixin(
       return;
     }
 
+    const triggerNode = this.element.querySelector(
+      this.options.selectorTrigger
+    );
+
     if (
-      ([13, 32, 40].indexOf(event.which) >= 0 &&
+      // User presses down arrow
+      (event.which === 40 &&
         !event.target.matches(this.options.selectorItem)) ||
+      // User presses space or enter and the trigger is not a button OR event is not fired by trigger
+      ((!triggerNode || !triggerNode.contains(event.target)) &&
+        [13, 32].indexOf(event.which) >= 0 &&
+        !event.target.matches(this.options.selectorItem)) ||
+      // User presses esc
       event.which === 27 ||
+      // User clicks
       event.type === 'click'
     ) {
       const isOpen = this.element.classList.contains(this.options.classOpen);
       const isOfSelf = this.element.contains(event.target);
+      // Determine if the open className should be added, removed, or toggled
       const actions = {
         add: isOfSelf && event.which === 40 && !isOpen,
         remove: (!isOfSelf || event.which === 27) && isOpen,
         toggle: isOfSelf && event.which !== 27 && event.which !== 40,
       };
+      let changedState = false;
       Object.keys(actions).forEach(action => {
         if (actions[action]) {
+          changedState = true;
           this.element.classList[action](this.options.classOpen);
-          this.element.focus();
         }
       });
+
       const listItems = toArray(
         this.element.querySelectorAll(this.options.selectorItem)
       );
-      listItems.forEach(item => {
-        if (this.element.classList.contains(this.options.classOpen)) {
-          item.tabIndex = 0;
-        } else {
-          item.tabIndex = -1;
+      // only want to grab the listNode IF it's using the latest a11y HTML structure
+      const listNode = triggerNode
+        ? this.element.querySelector(this.options.selectorMenu)
+        : null;
+
+      // @todo remove conditionals for elements existing once legacy structure is depreciated
+      if (
+        changedState &&
+        this.element.classList.contains(this.options.classOpen)
+      ) {
+        // toggled open
+        if (triggerNode) {
+          triggerNode.setAttribute('aria-expanded', 'true');
         }
-      });
+        (listNode || this.element).focus();
+        if (listNode) {
+          const selectedNode = listNode.querySelector(
+            this.options.selectorItemSelected
+          );
+          listNode.setAttribute(
+            'aria-activedescendant',
+            (selectedNode || listItems[0]).id
+          );
+          (selectedNode || listItems[0]).classList.add(
+            this.options.classFocused
+          );
+        }
+      } else if (changedState && (isOfSelf || actions.remove)) {
+        // toggled close
+        // timer is used to call focus AFTER the click event on
+        // trigger button (which is caused by keypress e.g. during keyboard navigation)
+        setTimeout(() => (triggerNode || this.element).focus(), 0);
+        if (triggerNode) {
+          triggerNode.setAttribute('aria-expanded', 'false');
+        }
+        if (listNode) {
+          listNode.removeAttribute('aria-activedescendant');
+          const focusedItem = this.element.querySelector(
+            this.options.selectorItemFocused
+          );
+          if (focusedItem) {
+            focusedItem.classList.remove(this.options.classFocused);
+          }
+        }
+      }
+
+      // @todo remove once legacy structure is depreciated
+      if (!triggerNode) {
+        listItems.forEach(item => {
+          if (this.element.classList.contains(this.options.classOpen)) {
+            item.tabIndex = 0;
+          } else {
+            item.tabIndex = -1;
+          }
+        });
+      }
     }
   }
 
@@ -127,17 +208,31 @@ class Dropdown extends mixin(
    * @returns {Element} Currently highlighted element.
    */
   getCurrentNavigation() {
-    const focused = this.element.ownerDocument.activeElement;
-    return focused.nodeType === Node.ELEMENT_NODE &&
-      focused.matches(this.options.selectorItem)
-      ? focused
-      : null;
+    let focusedNode;
+
+    // Using the latest semantic markup structure where trigger is a button
+    // @todo remove conditional once legacy structure is depreciated
+    if (this.element.querySelector(this.options.selectorTrigger)) {
+      const listNode = this.element.querySelector(this.options.selectorMenu);
+      const focusedId = listNode.getAttribute('aria-activedescendant');
+      focusedNode = focusedId ? listNode.querySelector(`#${focusedId}`) : null;
+    } else {
+      const focused = this.element.ownerDocument.activeElement;
+      focusedNode =
+        focused.nodeType === Node.ELEMENT_NODE &&
+        focused.matches(this.options.selectorItem)
+          ? focused
+          : null;
+    }
+
+    return focusedNode;
   }
 
   /**
    * Moves up/down the focus.
    * @param {number} direction The direction of navigating.
    */
+  // @todo create issue it's a better UX to move the focus when the user hovers so they stay in sync
   navigate(direction) {
     const items = toArray(
       this.element.querySelectorAll(this.options.selectorItem)
@@ -164,7 +259,21 @@ class Dropdown extends mixin(
         !current.parentNode.matches(this.options.selectorItemHidden) &&
         !current.matches(this.options.selectorItemSelected)
       ) {
-        current.focus();
+        // Using the latest semantic markup structure where trigger is a button
+        // @todo remove conditional once legacy structure is depreciated
+        if (this.element.querySelector(this.options.selectorTrigger)) {
+          const listNode = this.element.querySelector(
+            this.options.selectorMenu
+          );
+          const previouslyFocused = listNode.querySelector(
+            this.options.selectorItemFocused
+          );
+          current.classList.add(this.options.classFocused);
+          listNode.setAttribute('aria-activedescendant', current.id);
+          previouslyFocused.classList.remove(this.options.classFocused);
+        } else {
+          current.focus();
+        }
         break;
       }
     }
@@ -187,6 +296,7 @@ class Dropdown extends mixin(
     if (this.element.dispatchEvent(eventStart)) {
       if (this.element.dataset.dropdownType !== 'navigation') {
         const selectorText =
+          !this.element.querySelector(this.options.selectorTrigger) &&
           this.element.dataset.dropdownType !== 'inline'
             ? this.options.selectorText
             : this.options.selectorTextInner;
@@ -233,10 +343,12 @@ class Dropdown extends mixin(
   /**
    * The component options.
    * If `options` is specified in the constructor, {@linkcode Dropdown.create .create()}, or {@linkcode Dropdown.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode Dropdown.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode Dropdown.init .init()} works.
    * @member Dropdown.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The CSS selector to find selectors.
+   * @property {string} [selectorTrigger] The CSS selector to find trigger button when using a11y compliant markup.
+   * @property {string} [selectorMenu] The CSS selector to find menu list when using a11y compliant markup.
    * @property {string} [selectorText] The CSS selector to find the element showing the selected item.
    * @property {string} [selectorTextInner] The CSS selector to find the element showing the selected item, used for inline mode.
    * @property {string} [selectorItem] The CSS selector to find clickable areas in dropdown items.
@@ -244,7 +356,9 @@ class Dropdown extends mixin(
    *   The CSS selector to find hidden dropdown items.
    *   Used to skip dropdown items for keyboard navigation.
    * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
+   * @property {string} [selectorItemFocused] The CSS selector to find the clickable area in the focused dropdown item.
    * @property {string} [classSelected] The CSS class for the selected dropdown item.
+   * @property {string} [classFocused] The CSS class for the focused dropdown item.
    * @property {string} [classOpen] The CSS class for the open state.
    * @property {string} [classDisabled] The CSS class for the disabled state.
    * @property {string} [eventBeforeSelected]
@@ -256,12 +370,16 @@ class Dropdown extends mixin(
     const { prefix } = settings;
     return {
       selectorInit: '[data-dropdown]',
+      selectorTrigger: `button.${prefix}--dropdown-text`,
+      selectorMenu: `.${prefix}--dropdown-list`,
       selectorText: `.${prefix}--dropdown-text`,
       selectorTextInner: `.${prefix}--dropdown-text__inner`,
       selectorItem: `.${prefix}--dropdown-link`,
       selectorItemSelected: `.${prefix}--dropdown--selected`,
+      selectorItemFocused: `.${prefix}--dropdown--focused`,
       selectorItemHidden: `[hidden],[aria-hidden="true"]`,
       classSelected: `${prefix}--dropdown--selected`,
+      classFocused: `${prefix}--dropdown--focused`,
       classOpen: `${prefix}--dropdown--open`,
       classDisabled: `${prefix}--dropdown--disabled`,
       eventBeforeSelected: 'dropdown-beingselected',

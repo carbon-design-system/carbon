@@ -27,6 +27,9 @@ packages/components/css
 packages/components/scss
 packages/components/docs/js
 
+# React
+**/storybook-static/**
+
 # Sketch
 **/*.sketchplugin/**
 

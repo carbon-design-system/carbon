@@ -4,6 +4,7 @@ exports[`MultiSelect should render 1`] = `
 <MultiSelect
   compareItems={[Function]}
   disabled={false}
+  id="test-multiselect"
   initialSelectedItems={Array []}
   itemToString={[Function]}
   items={
@@ -78,6 +79,7 @@ exports[`MultiSelect should render 1`] = `
         <ListBox
           className="bx--multi-select"
           disabled={false}
+          id="test-multiselect"
           innerRef={[Function]}
           isOpen={false}
           light={false}
@@ -85,33 +87,37 @@ exports[`MultiSelect should render 1`] = `
         >
           <div
             className="bx--multi-select bx--list-box"
+            id="test-multiselect"
             onClick={[Function]}
             onKeyDown={[Function]}
             role="listbox"
             tabIndex="-1"
           >
             <ListBoxField
+              aria-disabled={false}
               aria-expanded={false}
               aria-haspopup={true}
               aria-label="open menu"
               data-toggle={true}
               disabled={false}
+              id="test-multiselect"
               onBlur={[Function]}
               onClick={[Function]}
               onKeyDown={[Function]}
               role="button"
               tabIndex="0"
+              translateWithId={[Function]}
               type="button"
             >
               <div
-                aria-controls="undefined__menu"
+                aria-controls={null}
+                aria-disabled={false}
                 aria-expanded={false}
                 aria-haspopup={true}
-                aria-label="open menu"
-                aria-owns="undefined__menu"
+                aria-label="Open menu"
+                aria-owns={null}
                 className="bx--list-box__field"
                 data-toggle={true}
-                disabled={false}
                 onBlur={[Function]}
                 onClick={[Function]}
                 onKeyDown={[Function]}
@@ -130,41 +136,45 @@ exports[`MultiSelect should render 1`] = `
                 >
                   <div
                     className="bx--list-box__menu-icon"
-                    role="button"
                   >
-                    <ChevronDown16
+                    <ForwardRef(ChevronDown16)
                       aria-label="Open menu"
-                      height={16}
                       name="chevron--down"
-                      preserveAspectRatio="xMidYMid meet"
-                      viewBox="0 0 16 16"
-                      width={16}
-                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <svg
+                      <Icon
                         aria-label="Open menu"
-                        focusable="false"
                         height={16}
                         name="chevron--down"
                         preserveAspectRatio="xMidYMid meet"
-                        role="img"
-                        style={
-                          Object {
-                            "willChange": "transform",
-                          }
-                        }
                         viewBox="0 0 16 16"
                         width={16}
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <title>
-                          Open menu
-                        </title>
-                        <path
-                          d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"
-                        />
-                      </svg>
-                    </ChevronDown16>
+                        <svg
+                          aria-label="Open menu"
+                          focusable="false"
+                          height={16}
+                          name="chevron--down"
+                          preserveAspectRatio="xMidYMid meet"
+                          role="img"
+                          style={
+                            Object {
+                              "willChange": "transform",
+                            }
+                          }
+                          viewBox="0 0 16 16"
+                          width={16}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
+                          />
+                          <title>
+                            Open menu
+                          </title>
+                        </svg>
+                      </Icon>
+                    </ForwardRef(ChevronDown16)>
                   </div>
                 </ListBoxMenuIcon>
               </div>

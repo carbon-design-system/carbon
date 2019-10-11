@@ -26,6 +26,7 @@ describe('MultiSelect', () => {
   it('should render', () => {
     const wrapper = mount(
       <MultiSelect
+        id="test-multiselect"
         label="Field"
         items={generateItems(5, generateGenericItem)}
       />
@@ -35,27 +36,35 @@ describe('MultiSelect', () => {
 
   it('should initialize with no selected items if no `initialSelectedItems` are given', () => {
     const items = generateItems(5, generateGenericItem);
-    const wrapper = mount(<MultiSelect label="Field" items={items} />);
+    const wrapper = mount(
+      <MultiSelect id="test-multiselect" label="Field" items={items} />
+    );
     expect(wrapper.find('Selection').instance().state.selectedItems).toEqual(
       []
     );
   });
   it('should initialize with the menu not open', () => {
     const items = generateItems(5, generateGenericItem);
-    const wrapper = mount(<MultiSelect label="Field" items={items} />);
+    const wrapper = mount(
+      <MultiSelect id="test-multiselect" label="Field" items={items} />
+    );
     expect(wrapper.state('isOpen')).toEqual(false);
   });
 
   it('should initialize with the menu open', () => {
     const items = generateItems(5, generateGenericItem);
-    const wrapper = mount(<MultiSelect label="Field" items={items} open />);
+    const wrapper = mount(
+      <MultiSelect id="test-multiselect" label="Field" items={items} open />
+    );
     expect(wrapper.state('isOpen')).toEqual(true);
   });
 
   describe('#handleOnToggleMenu', () => {
     it('should toggle the boolean `isOpen` field', () => {
       const items = generateItems(5, generateGenericItem);
-      const wrapper = mount(<MultiSelect label="Field" items={items} />);
+      const wrapper = mount(
+        <MultiSelect id="test-multiselect" label="Field" items={items} />
+      );
       expect(wrapper.state('isOpen')).toBe(false);
       wrapper.find(`.${prefix}--list-box__field`).simulate('click');
       expect(wrapper.state('isOpen')).toBe(true);
@@ -69,6 +78,7 @@ describe('MultiSelect', () => {
       const items = generateItems(5, generateGenericItem);
       const wrapper = mount(
         <MultiSelect
+          id="test-multiselect"
           label="Field"
           items={items}
           initialSelectedItems={[items[0], items[1]]}
@@ -96,7 +106,9 @@ describe('MultiSelect', () => {
     });
 
     it('should allow a user to de-select an item by clicking on initial selected items', () => {
-      const wrapper = mount(<MultiSelect {...mockProps} />);
+      const wrapper = mount(
+        <MultiSelect id="test-multiselect" {...mockProps} />
+      );
       expect(
         wrapper.find('Selection').instance().state.selectedItems.length
       ).toBe(3);
@@ -113,7 +125,9 @@ describe('MultiSelect', () => {
     });
 
     it('should allow a user to de-select an initial selected item by hitting enter on initial selected item', () => {
-      const wrapper = mount(<MultiSelect {...mockProps} />);
+      const wrapper = mount(
+        <MultiSelect id="test-multiselect" {...mockProps} />
+      );
       const simulateArrowDown = wrapper =>
         wrapper.find(`.${prefix}--list-box__field`).simulate('keydown', {
           key: 'ArrowDown',
@@ -138,6 +152,7 @@ describe('MultiSelect', () => {
     it('should allow a user to de-select an item after calling setState by clicking on selected item', () => {
       const wrapper = mount(
         <MultiSelect
+          id="test-multiselect"
           {...mockProps}
           items={[{ label: 'foo' }]}
           initialSelectedItems={[{ label: 'foo' }]}
@@ -159,7 +174,9 @@ describe('MultiSelect', () => {
     });
 
     it('should select an item when a user clicks on an item', () => {
-      const wrapper = mount(<MultiSelect {...mockProps} />);
+      const wrapper = mount(
+        <MultiSelect id="test-multiselect" {...mockProps} />
+      );
       expect(
         wrapper.find('Selection').instance().state.selectedItems.length
       ).toBe(3);
@@ -190,7 +207,9 @@ describe('MultiSelect', () => {
     });
 
     it('should open the menu when a user clicks on the ListBox field', () => {
-      const wrapper = mount(<MultiSelect {...mockProps} />);
+      const wrapper = mount(
+        <MultiSelect id="test-multiselect" {...mockProps} />
+      );
       wrapper.find(`.${prefix}--list-box__field`).simulate('click');
       expect(wrapper.find(`.${prefix}--list-box__menu`).length).toBe(1);
       expect(wrapper.find(`.${prefix}--list-box__menu-item`).length).toBe(
@@ -199,7 +218,9 @@ describe('MultiSelect', () => {
     });
 
     it('should open the menu when a user focuses and hits space on the ListBox field', () => {
-      const wrapper = mount(<MultiSelect {...mockProps} />);
+      const wrapper = mount(
+        <MultiSelect id="test-multiselect" {...mockProps} />
+      );
       wrapper.find(`.${prefix}--list-box__field`).simulate('keydown', {
         key: ' ',
       });
@@ -210,7 +231,9 @@ describe('MultiSelect', () => {
     });
 
     it('should select an item when a user clicks on an item', () => {
-      const wrapper = mount(<MultiSelect {...mockProps} />);
+      const wrapper = mount(
+        <MultiSelect id="test-multiselect" {...mockProps} />
+      );
       openMenu(wrapper);
       wrapper
         .find(`.${prefix}--list-box__menu-item`)
@@ -222,7 +245,9 @@ describe('MultiSelect', () => {
     });
 
     it('should allow a user to highlight items with the up and down arrow keys', () => {
-      const wrapper = mount(<MultiSelect {...mockProps} />);
+      const wrapper = mount(
+        <MultiSelect id="test-multiselect" {...mockProps} />
+      );
       wrapper.find(`.${prefix}--list-box__field`).simulate('click');
       const simulateArrowDown = () =>
         wrapper.find(`.${prefix}--list-box__field`).simulate('keydown', {
@@ -249,14 +274,18 @@ describe('MultiSelect', () => {
     });
 
     it('should close the menu when a user clicks outside of the control', () => {
-      const wrapper = mount(<MultiSelect {...mockProps} />);
+      const wrapper = mount(
+        <MultiSelect id="test-multiselect" {...mockProps} />
+      );
       wrapper.find(`.${prefix}--list-box__field`).simulate('click');
       mouseDownAndUp(document.body);
       expect(wrapper.state('isOpen')).toBe(false);
     });
 
     it('should show a badge that mirrors the number of selected items', () => {
-      const wrapper = mount(<MultiSelect {...mockProps} />);
+      const wrapper = mount(
+        <MultiSelect id="test-multiselect" {...mockProps} />
+      );
       openMenu(wrapper);
       for (let i = 0; i < mockProps.items.length; i++) {
         wrapper
@@ -273,7 +302,9 @@ describe('MultiSelect', () => {
     });
 
     it('should allow a user to de-select an item by clicking on a selected item', () => {
-      const wrapper = mount(<MultiSelect {...mockProps} />);
+      const wrapper = mount(
+        <MultiSelect id="test-multiselect" {...mockProps} />
+      );
       wrapper.find(`.${prefix}--list-box__field`).simulate('click');
       wrapper
         .find(`.${prefix}--list-box__menu-item`)
@@ -292,7 +323,9 @@ describe('MultiSelect', () => {
     });
 
     it('should allow a user to de-select an item by hitting enter on a selected item', () => {
-      const wrapper = mount(<MultiSelect {...mockProps} />);
+      const wrapper = mount(
+        <MultiSelect id="test-multiselect" {...mockProps} />
+      );
       const simulateArrowDown = wrapper =>
         wrapper.find(`.${prefix}--list-box__field`).simulate('keydown', {
           key: 'ArrowDown',
@@ -315,7 +348,9 @@ describe('MultiSelect', () => {
     });
 
     it('should allow a user to click on the clear icon to clear all selected items', () => {
-      const wrapper = mount(<MultiSelect {...mockProps} />);
+      const wrapper = mount(
+        <MultiSelect id="test-multiselect" {...mockProps} />
+      );
       openMenu(wrapper);
       wrapper
         .find(`.${prefix}--list-box__menu-item`)
@@ -328,7 +363,9 @@ describe('MultiSelect', () => {
     });
 
     it('should allow a user to focus the clear icon and hit enter to clear all selected items', () => {
-      const wrapper = mount(<MultiSelect {...mockProps} />);
+      const wrapper = mount(
+        <MultiSelect id="test-multiselect" {...mockProps} />
+      );
       openMenu(wrapper);
       wrapper
         .find(`.${prefix}--list-box__menu-item`)

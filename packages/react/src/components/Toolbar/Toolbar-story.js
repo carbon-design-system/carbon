@@ -8,7 +8,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import Filter16 from '@carbon/icons-react/lib/filter/16';
+import { Filter16 } from '@carbon/icons-react';
 import Toolbar, {
   ToolbarItem,
   ToolbarTitle,
@@ -29,7 +29,7 @@ const inputProps = {
   onChange: action('onChange'),
 };
 
-storiesOf('Toolbar', module).add(
+storiesOf('[Deprecated] Toolbar', module).add(
   'Default',
   () => (
     <Toolbar {...toolbarProps} className="some-class">

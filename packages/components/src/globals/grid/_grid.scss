@@ -8,13 +8,42 @@
 @import '../scss/feature-flags';
 @import '../scss/functions';
 @import '../scss/mixins';
-@import './classic';
-@import './experimental';
+@import '../scss/vendor/@carbon/elements/scss/grid/mixins';
+
+@mixin grid {
+  @if feature-flag-enabled('grid-columns-16') {
+    @include carbon--grid();
+  } @else {
+    $carbon--12-column-grid: map-merge(
+      $carbon--grid-breakpoints,
+      (
+        lg:
+          map-merge(
+            map-get($carbon--grid-breakpoints, lg),
+            (
+              columns: 12,
+            )
+          ),
+        xlg:
+          map-merge(
+            map-get($carbon--grid-breakpoints, xlg),
+            (
+              columns: 12,
+            )
+          ),
+        max:
+          map-merge(
+            map-get($carbon--grid-breakpoints, max),
+            (
+              columns: 12,
+            )
+          ),
+      )
+    );
+    @include carbon--grid($carbon--12-column-grid);
+  }
+}
 
 @include exports('grid') {
-  @if feature-flag-enabled('grid') {
-    @include grid--x;
-  } @else {
-    @include grid;
-  }
+  @include grid;
 }

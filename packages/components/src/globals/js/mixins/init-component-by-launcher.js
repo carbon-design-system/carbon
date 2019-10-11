@@ -26,7 +26,7 @@ export default function(ToMix) {
      * Otherwise, instantiates this component by clicking on launcher buttons
      * (buttons with attribute that `options.attribInitTarget` points to) of this component in the given node.
      * @param {Node} target The DOM node to instantiate this component in. Should be a document or an element.
-     * @param {Object} [options] The component options.
+     * @param {object} [options] The component options.
      * @param {string} [options.selectorInit] The CSS selector to find this component.
      * @param {string} [options.attribInitTarget] The attribute name in the launcher buttons to find target component.
      * @returns {Handle} The handle to remove the event listener to handle clicking.

@@ -5,12 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import warning from 'warning';
 import mixin from '../../globals/js/misc/mixin';
+import settings from '../../globals/js/settings';
 import createComponent from '../../globals/js/mixins/create-component';
 import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
+import handles from '../../globals/js/mixins/handles';
 import trackBlur from '../../globals/js/mixins/track-blur';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import optimizedResize from '../../globals/js/misc/resize';
+import on from '../../globals/js/misc/on';
 
 /**
  * The structure for the position of floating menu.
@@ -41,7 +45,7 @@ export const DIRECTION_RIGHT = 'right';
 export const DIRECTION_BOTTOM = 'bottom';
 
 /**
- * @param {Object} params The parameters.
+ * @param {object} params The parameters.
  * @param {FloatingMenu~size} params.menuSize The size of the menu.
  * @param {FloatingMenu~position} params.refPosition The position of the triggering element.
  * @param {FloatingMenu~offset} [params.offset={ left: 0, top: 0 }] The position offset of the menu.
@@ -94,14 +98,15 @@ export const getFloatingPosition = ({
 class FloatingMenu extends mixin(
   createComponent,
   eventedShowHideState,
-  trackBlur
+  trackBlur,
+  handles
 ) {
   /**
    * Floating menu.
    * @extends CreateComponent
    * @extends EventedShowHideState
    * @param {HTMLElement} element The element working as a modal dialog.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @param {string} [options.selectorContainer] The CSS selector to find the container to put this menu in.
    * @param {string} [options.attribDirection] The attribute name to specify menu placement direction (top/right/bottom/left).
    * @param {string} [options.classShown] The CSS class for shown state, for the menu.
@@ -119,7 +124,7 @@ class FloatingMenu extends mixin(
    *   The name of the custom event telling that menu is sure hidden
    *   without being canceled by the event handler named by `eventBeforeHidden` option (`floating-menu-beinghidden`).
    * @param {Element} [options.refNode] The launching element of the menu. Used for calculating the geometry of the menu.
-   * @param {Object} [options.offset] The offset to adjust the geometry of the menu. Should have `top`/`left` properties.
+   * @param {object} [options.offset] The offset to adjust the geometry of the menu. Should have `top`/`left` properties.
    */
   constructor(element, options) {
     super(element, options);
@@ -136,6 +141,35 @@ class FloatingMenu extends mixin(
         this.options.direction
       );
     }
+    this.manage(
+      on(this.element.ownerDocument, 'keydown', event => {
+        this._handleKeydown(event);
+      })
+    );
+  }
+
+  /**
+   * Handles key press on document.
+   * @param {Event} event The triggering event.
+   * @private
+   */
+  _handleKeydown(event) {
+    const key = event.which;
+    const { triggerNode, refNode } = this.options;
+    const isOfMenu = this.element.contains(event.target);
+
+    switch (key) {
+      // Esc
+      case 27:
+        this.changeState('hidden', getLaunchingDetails(event), () => {
+          if (isOfMenu) {
+            (triggerNode || refNode).focus();
+          }
+        });
+        break;
+      default:
+        break;
+    }
   }
 
   /**
@@ -144,13 +178,15 @@ class FloatingMenu extends mixin(
   handleBlur(event) {
     if (this.element.classList.contains(this.options.classShown)) {
       this.changeState('hidden', getLaunchingDetails(event));
-      const { refNode } = this.options;
+      const { refNode, triggerNode } = this.options;
+
       if (
-        this.element.contains(event.relatedTarget) &&
+        (event.relatedTarget === null ||
+          this.element.contains(event.relatedTarget)) &&
         refNode &&
         event.target !== refNode
       ) {
-        HTMLElement.prototype.focus.call(refNode); // SVGElement in IE11 does not have `.focus()` method
+        HTMLElement.prototype.focus.call(triggerNode || refNode); // SVGElement in IE11 does not have `.focus()` method
       }
     }
   }
@@ -168,7 +204,7 @@ class FloatingMenu extends mixin(
 
   /**
    * @private
-   * @returns {Object} The menu position, with `top` and `left` properties.
+   * @returns {object} The menu position, with `top` and `left` properties.
    */
   _getPos() {
     const { element } = this;
@@ -176,7 +212,7 @@ class FloatingMenu extends mixin(
 
     if (!refNode) {
       throw new Error(
-        'Cannot find the refernce node for positioning floating menu.'
+        'Cannot find the reference node for positioning floating menu.'
       );
     }
 
@@ -253,21 +289,18 @@ class FloatingMenu extends mixin(
    * Changes the shown/hidden state.
    * @private
    * @param {string} state The new state.
-   * @param {Object} detail The detail of the event trigging this action.
+   * @param {object} detail The detail of the event trigging this action.
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(state, detail, callback) {
     const shown = state === 'shown';
-    const { refNode, classShown, classRefShown } = this.options;
+    const { refNode, classShown, classRefShown, triggerNode } = this.options;
     if (!refNode) {
       throw new TypeError(
-        'Cannot find the refernce node for changing the style.'
+        'Cannot find the reference node for changing the style.'
       );
     }
-    this.element.classList.toggle(classShown, shown);
-    if (classRefShown) {
-      refNode.classList.toggle(classRefShown, shown);
-    }
+
     if (state === 'shown') {
       if (!this.hResize) {
         this.hResize = optimizedResize.add(() => {
@@ -275,13 +308,41 @@ class FloatingMenu extends mixin(
         });
       }
       this._getContainer().appendChild(this.element);
+    }
+
+    this.element.setAttribute('aria-hidden', (!shown).toString());
+    (triggerNode || refNode).setAttribute('aria-expanded', shown.toString());
+
+    this.element.classList.toggle(classShown, shown);
+    if (classRefShown) {
+      refNode.classList.toggle(classRefShown, shown);
+    }
+    if (state === 'shown') {
       this._place();
+
       // IE11 puts focus on elements with `.focus()`, even ones without `tabindex` attribute
       if (!this.element.hasAttribute(this.options.attribAvoidFocusOnOpen)) {
-        (
-          this.element.querySelector(this.options.selectorPrimaryFocus) ||
-          this.element
-        ).focus();
+        const primaryFocusNode = this.element.querySelector(
+          this.options.selectorPrimaryFocus
+        );
+        const focusableNode = this.element.querySelector(
+          settings.selectorTabbable
+        );
+
+        if (primaryFocusNode) {
+          primaryFocusNode.focus();
+        } else if (focusableNode) {
+          focusableNode.focus();
+        } else {
+          this.element.focus();
+          if (__DEV__) {
+            const elementTabindex = this.element.getAttribute('tabindex');
+            warning(
+              elementTabindex !== null && parseInt(elementTabindex, 10) > -1,
+              'Floating Menus without interactive elements must include tabindex="0" on the floating element.'
+            );
+          }
+        }
       }
     }
     if (state === 'hidden' && this.hResize) {

@@ -36,8 +36,8 @@ const slugify = title => {
  * Create a JSON file of documented Sass items
  * @see {@link http://sassdoc.com/configuration/|Sassdoc configuration}
  * @param {string} sourceDir - source directory
- * @param {Object} config - configuration object
- * @return {Object} json object
+ * @param {object} config - configuration object
+ * @returns {object} json object
  */
 async function createJson(sourceDir, config) {
   config = config || {};
@@ -56,7 +56,7 @@ async function createJson(sourceDir, config) {
  * Remove duplicate objects in `require` and `usedBy` arrays. Array objects have
  * `name` and `type` properties, sometimes nested in a `context` object.
  * @param {Array} arr - array with potential duplicates
- * @return {Array} deduped array
+ * @returns {Array} deduped array
  */
 function dedupeArray(arr) {
   return arr.reduce(
@@ -79,7 +79,7 @@ function dedupeArray(arr) {
  * Create a unique Sassdoc item name
  * @param {string} name - Sassdoc name
  * @param {string} type - Sassdoc type (e.g. `variable`, `mixin`)
- * @return {string} unique Sassdoc item name
+ * @returns {string} unique Sassdoc item name
  */
 function createUniqueName(name, type) {
   return `${name} [${type}]`;
@@ -88,7 +88,7 @@ function createUniqueName(name, type) {
 /**
  * Create a standardized group name
  * @param {Array} group - Item's group
- * @return {string} group name
+ * @returns {string} group name
  */
 function createGroupName(group) {
   return !group || !group[0] || group[0] === 'undefined' ? 'general' : group[0];
@@ -98,14 +98,15 @@ function createGroupName(group) {
  * Create GitHub-flavored markdown anchor link
  * @param {string} name - anchor value
  * @param {string} heading - anchor link destination
- * @return {string} markdown anchor
+ * @returns {string} markdown anchor
  */
 function createAnchorLink(name, heading) {
   const anchorLink = heading
     .toLowerCase()
     .replace(/ /g, '-')
-    .replace(/[`~!@#$%^&*()+=<>?,./:;"'|{}\[\]\\–—]/g, '')
+    .replace(/[`~!@#$%^&*()+=<>?,./:;"'|{}[\]\\–—]/g, '')
     .replace(
+      // eslint-disable-next-line no-irregular-whitespace
       /[　。？！，、；：“”【】（）〔〕［］﹃﹄“”‘’﹁﹂—…－～《》〈〉「」]/g,
       ''
     );
@@ -116,7 +117,7 @@ function createAnchorLink(name, heading) {
 /**
  * Create markdown for Sassdoc item (function, mixin, placeholder, variable)
  * @param {string} item - Sassdoc item
- * @return {string} item in markdown formatting
+ * @returns {string} item in markdown formatting
  */
 function createMarkdownItem(item) {
   let str = '';
@@ -342,8 +343,8 @@ ${item.example[0].code}
  * Create a markdown file of documented Sass items
  * @see {@link http://sassdoc.com/configuration/|Sassdoc configuration}
  * @param {string} sourceDir - source directory
- * @param {Object} config - configuration object
- * @return {string} markdown
+ * @param {object} config - configuration object
+ * @returns {string} markdown
  */
 async function createMarkdown(sourceDir, config) {
   config = config || {};
@@ -353,7 +354,7 @@ async function createMarkdown(sourceDir, config) {
       let markdownFile = '';
 
       const documentedItems = data.filter(
-        (item, index) => item.access === 'public' || item.access === 'private'
+        item => item.access === 'public' || item.access === 'private'
       );
 
       markdownFile += `# Sass API

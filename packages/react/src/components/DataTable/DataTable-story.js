@@ -10,7 +10,7 @@ import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import { withReadme } from 'storybook-readme';
 import readme from './README.md';
 
-const readmeURL = 'https://goo.gl/dq6CEK';
+const readmeURL = 'https://bit.ly/2Z9PGsC';
 
 const props = () => ({
   useZebraStyles: boolean('Zebra row styles (useZebraStyles)', false),
@@ -19,6 +19,7 @@ const props = () => ({
     { compact: 'compact', short: 'short', tall: 'tall', none: null },
     null
   ),
+  stickyHeader: boolean('Sticky header (experimental)', false),
 });
 
 storiesOf('DataTable', module)
@@ -203,6 +204,22 @@ storiesOf('DataTable', module)
         You can find more detailed information surrounding usage of this component
         at the following url: ${readmeURL}
       `,
+      },
+    }
+  )
+  .add(
+    'with overflow menu',
+    withReadme(readme, () =>
+      require('./stories/with-overflow-menu').default(props())
+    ),
+    {
+      info: {
+        text: `
+      DataTable with Overflow menus added.
+
+      You can find more detailed information surrounding usage of this component
+      at the following url: ${readmeURL}
+    `,
       },
     }
   );

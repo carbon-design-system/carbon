@@ -6,8 +6,7 @@
  */
 
 import React from 'react';
-import CaretRight24 from '@carbon/icons-react/lib/caret--right/24';
-import CaretLeft24 from '@carbon/icons-react/lib/caret--left/24';
+import { CaretRight24, CaretLeft24 } from '@carbon/icons-react';
 import Pagination from '../Pagination';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
@@ -151,6 +150,24 @@ describe('Pagination', () => {
           );
           pager.setState({ page: 2 });
           pager.setProps({ pageSizes: [3, 6] });
+          expect(pager.state().page).toEqual(1);
+        });
+
+        it('should not return to first page on changes to pageSizes where current pageSize is in new list', () => {
+          const pager = mount(
+            <Pagination pageSizes={[5, 10]} pageSize={10} totalItems={50} />
+          );
+          pager.setState({ page: 2 });
+          pager.setProps({ pageSizes: [5, 10, 20] });
+          expect(pager.state().page).toEqual(2);
+        });
+
+        it('should return to first page on changes to pageSizes where current pageSize is not in new list', () => {
+          const pager = mount(
+            <Pagination pageSizes={[5, 10]} pageSize={10} totalItems={50} />
+          );
+          pager.setState({ page: 2 });
+          pager.setProps({ pageSizes: [25, 50, 100] });
           expect(pager.state().page).toEqual(1);
         });
 

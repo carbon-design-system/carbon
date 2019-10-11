@@ -27,7 +27,7 @@ const expressiveTokens = new Set(['display', 'quotation', 'expressive']);
 /**
  * Sync text shared styles to the given document and return the result
  * @param {Document} document
- * @return {Array<SharedStyle>}
+ * @returns {Array<SharedStyle>}
  */
 export function syncTextStyles(document) {
   return Object.keys(styles)
@@ -50,6 +50,7 @@ export function syncTextStyles(document) {
       );
 
       sharedTextStyle.style.textColor = '#000000ff';
+      sharedTextStyle.style.borders = [];
 
       return sharedTextStyle;
     });
@@ -58,7 +59,7 @@ export function syncTextStyles(document) {
 /**
  * Format the given token to a value for a shared style name
  * @param {string} token
- * @return {string}
+ * @returns {string}
  */
 function formatSharedStyleName(token) {
   const parts = formatTokenName(token).split('-');
@@ -77,8 +78,8 @@ function formatSharedStyleName(token) {
 /**
  * Convert a given token and its style to a format used by Sketch
  * @param {string} token
- * @param {Object} style
- * @return {Object}
+ * @param {object} style
+ * @returns {object}
  */
 function convertTypeStyle(token, style) {
   const fontSize = parseFloat(style.fontSize, 10) * 16;

@@ -35,6 +35,33 @@ export const initialRows = [
     attached_groups: 'Andrews VM Groups',
     status: 'Active',
   },
+  {
+    id: 'd',
+    name: 'Load Balancer 6',
+    protocol: 'HTTP',
+    port: 3000,
+    rule: 'Round robin',
+    attached_groups: 'Marcs VM Groups',
+    status: 'Disabled',
+  },
+  {
+    id: 'e',
+    name: 'Load Balancer 4',
+    protocol: 'HTTP',
+    port: 443,
+    rule: 'Round robin',
+    attached_groups: 'Mels VM Groups',
+    status: 'Starting',
+  },
+  {
+    id: 'f',
+    name: 'Load Balancer 5',
+    protocol: 'HTTP',
+    port: 80,
+    rule: 'DNS delegation',
+    attached_groups: 'Ronjas VM Groups',
+    status: 'Active',
+  },
 ];
 
 export const headers = [

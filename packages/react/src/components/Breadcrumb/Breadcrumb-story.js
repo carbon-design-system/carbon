@@ -40,24 +40,6 @@ storiesOf('Breadcrumb', module)
       },
     }
   )
-  .add(
-    'no trailing slash',
-    () => (
-      <Breadcrumb {...props()} noTrailingSlash>
-        <BreadcrumbItem>
-          <a href="/#">Breadcrumb 1</a>
-        </BreadcrumbItem>
-        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-        <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
-      </Breadcrumb>
-    ),
-    {
-      info: {
-        text:
-          'You can choose not to render a trailing slash with the `noTrailingSlash` prop',
-      },
-    }
-  )
   .add('skeleton', () => <BreadcrumbSkeleton />, {
     info: {
       text: `
@@ -68,7 +50,7 @@ storiesOf('Breadcrumb', module)
   .add(
     'current page',
     () => (
-      <Breadcrumb {...props()}>
+      <Breadcrumb {...props()} noTrailingSlash>
         <BreadcrumbItem>
           <a href="/#">Breadcrumb 1</a>
         </BreadcrumbItem>
@@ -88,7 +70,7 @@ storiesOf('Breadcrumb', module)
   .add(
     'current page with aria-current',
     () => (
-      <Breadcrumb {...props()}>
+      <Breadcrumb {...props()} noTrailingSlash>
         <BreadcrumbItem>
           <a href="/#">Breadcrumb 1</a>
         </BreadcrumbItem>

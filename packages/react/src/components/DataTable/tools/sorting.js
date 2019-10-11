@@ -51,9 +51,9 @@ export const compareStrings = (a, b, locale = 'en') => {
  * into our local `compareStrings` method, including the locale where
  * appropriate.
  *
- * @param {Object} config
+ * @param {object} config
  * @param {Array[string]} config.rowIds array of all the row ids in the table
- * @param {Object} config.cellsById object containing a mapping of cell id to
+ * @param {object} config.cellsById object containing a mapping of cell id to
  * cell
  * @param {string} config.direction the sort direction used to determine the
  * order the comparison is called in

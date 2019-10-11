@@ -16,7 +16,7 @@ const commonjs = require('rollup-plugin-commonjs');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const findPackageFolder = require('../tools/findPackageFolder');
 
-async function bundle(entrypoint, options, info) {
+async function bundle(entrypoint, options) {
   const globals = options.globals ? formatGlobals(options.globals) : {};
   const { name } = options;
   const packageFolder = await findPackageFolder(entrypoint);
@@ -64,7 +64,6 @@ async function bundle(entrypoint, options, info) {
             },
           ],
         ],
-        plugins: ['macros'],
       }),
       nodeResolve({
         jsnext: true,

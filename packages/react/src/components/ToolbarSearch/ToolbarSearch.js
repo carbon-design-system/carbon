@@ -8,11 +8,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Search16 from '@carbon/icons-react/lib/search/16';
+import { Search16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import ClickListener from '../../internal/ClickListener';
+import warning from 'warning';
 
 const { prefix } = settings;
+
+let didWarnAboutDeprecation = false;
 
 export default class ToolbarSearch extends Component {
   static propTypes = {
@@ -58,7 +61,19 @@ export default class ToolbarSearch extends Component {
     labelText: '',
     placeHolderText: '',
     role: 'search',
+    labelId: 'search__label',
   };
+
+  constructor(props) {
+    super(props);
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        'The ToolbarSearch component has been deprecated and will be removed in the next major release of `carbon-components-react`'
+      );
+      didWarnAboutDeprecation = true;
+    }
+  }
 
   state = {
     expanded: false,
@@ -85,6 +100,7 @@ export default class ToolbarSearch extends Component {
       placeHolderText,
       labelText,
       role,
+      labelId,
       ...other
     } = this.props;
 
@@ -97,7 +113,7 @@ export default class ToolbarSearch extends Component {
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
         <div className={searchClasses} role={role}>
-          <label htmlFor={id} className={`${prefix}--label`}>
+          <label htmlFor={id} className={`${prefix}--label`} id={labelId}>
             {labelText}
           </label>
           <input
@@ -105,6 +121,7 @@ export default class ToolbarSearch extends Component {
             type={type}
             className={`${prefix}--search-input`}
             id={id}
+            aria-labelledby={labelId}
             placeholder={placeHolderText}
             ref={input => {
               this.input = input;

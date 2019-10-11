@@ -1,3 +1,4 @@
+import { delay } from 'bluebird'; // For testing on browsers not supporting Promise
 import EventManager from '../utils/event-manager';
 import Dropdown from '../../src/components/dropdown/dropdown';
 
@@ -29,6 +30,7 @@ describe('Dropdown', function() {
     });
   });
 
+  // test backwards compatibility with legacy markup
   describe('Toggle', function() {
     let dropdown;
     let element;
@@ -95,7 +97,7 @@ describe('Dropdown', function() {
       expect(element.focus, 'Focus requested').toHaveBeenCalledTimes(1);
     });
 
-    it('Should close dropdown with enter key', function() {
+    it('Should close dropdown with enter key', async function() {
       spyOn(element, 'focus');
       element.classList.add('bx--dropdown--open');
       element.dispatchEvent(
@@ -105,6 +107,7 @@ describe('Dropdown', function() {
         element.classList.contains('bx--dropdown--open'),
         'Open state'
       ).toBe(false);
+      await delay(0);
       expect(element.focus, 'Focus requested').toHaveBeenCalledTimes(1);
     });
 
@@ -120,7 +123,7 @@ describe('Dropdown', function() {
       expect(element.focus, 'Focus requested').toHaveBeenCalledTimes(1);
     });
 
-    it('Should close dropdown with space key', function() {
+    it('Should close dropdown with space key', async function() {
       spyOn(element, 'focus');
       element.classList.add('bx--dropdown--open');
       element.dispatchEvent(
@@ -130,10 +133,11 @@ describe('Dropdown', function() {
         element.classList.contains('bx--dropdown--open'),
         'Open state'
       ).toBe(false);
+      await delay(0);
       expect(element.focus, 'Focus requested').toHaveBeenCalledTimes(1);
     });
 
-    it('Shouldn not close dropdown with space key on an item', function() {
+    it('Should not close dropdown with space key on an item', function() {
       spyOn(element, 'focus');
       element.classList.add('bx--dropdown--open');
       itemNode.dispatchEvent(
@@ -148,7 +152,7 @@ describe('Dropdown', function() {
       expect(element.focus, 'Focus requested').not.toHaveBeenCalled();
     });
 
-    it('Should close dropdown with ESC key', function() {
+    it('Should close dropdown with ESC key', async function() {
       spyOn(element, 'focus');
       element.classList.add('bx--dropdown--open');
       element.dispatchEvent(
@@ -158,10 +162,11 @@ describe('Dropdown', function() {
         element.classList.contains('bx--dropdown--open'),
         'Open state'
       ).toBe(false);
+      await delay(0);
       expect(element.focus, 'Focus requested').toHaveBeenCalledTimes(1);
     });
 
-    it('Should close dropdown with ESC key on an item', function() {
+    it('Should close dropdown with ESC key on an item', async function() {
       spyOn(element, 'focus');
       element.classList.add('bx--dropdown--open');
       itemNode.dispatchEvent(
@@ -173,6 +178,7 @@ describe('Dropdown', function() {
         element.classList.contains('bx--dropdown--open'),
         'Open state'
       ).toBe(false);
+      await delay(0);
       expect(element.focus, 'Focus requested').toHaveBeenCalledTimes(1);
     });
 
@@ -195,6 +201,164 @@ describe('Dropdown', function() {
         element.classList.contains('bx--dropdown--open'),
         'Open state'
       ).toBe(false);
+    });
+
+    afterEach(function() {
+      element.classList.remove('bx--dropdown--disabled');
+      element.classList.remove('bx--dropdown--open');
+    });
+
+    afterAll(function() {
+      dropdown.release();
+      document.body.removeChild(element);
+    });
+  });
+
+  describe('Toggle with semantic markup', function() {
+    let dropdown;
+    let element;
+    let itemNode;
+    let trigger;
+    let list;
+
+    beforeAll(function() {
+      element = document.createElement('div');
+      element.classList.add('bx--dropdown');
+
+      trigger = element.appendChild(document.createElement('button'));
+      trigger.classList.add('bx--dropdown-text');
+      list = element.appendChild(document.createElement('ul'));
+      list.classList.add('bx--dropdown-list');
+
+      const itemContainerNode = document.createElement('li');
+      itemContainerNode.dataset.option = '';
+
+      itemNode = document.createElement('a');
+      itemNode.id = 'item-0';
+      itemNode.textContent = 0;
+      itemNode.classList.add('bx--dropdown-link');
+      itemNode.classList.add('bx--dropdown--selected');
+
+      itemContainerNode.appendChild(itemNode);
+      list.appendChild(itemContainerNode);
+
+      dropdown = new Dropdown(element);
+      document.body.appendChild(element);
+    });
+
+    it('Should add "open" stateful modifier class', function() {
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(element.classList.contains('bx--dropdown--open')).toBe(true);
+      expect(element.getAttribute('class')).toBe(
+        'bx--dropdown bx--dropdown--open'
+      );
+    });
+
+    it('Should setup active descendent when open', function() {
+      trigger.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(list.getAttribute('aria-activedescendant')).toBe(itemNode.id);
+      expect(itemNode.classList.contains('bx--dropdown--focused')).toBe(true);
+    });
+
+    it('Should remove "open" stateful modifier class (closed default state)', function() {
+      element.classList.add('bx--dropdown--open');
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(element.classList.contains('bx--dropdown--open')).toBe(false);
+      expect(element.getAttribute('class')).toBe('bx--dropdown');
+    });
+
+    it('Should remove active descendent setup when closed', function() {
+      // Open the dropdown
+      trigger.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      // Close the dropdown
+      trigger.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(list.hasAttribute('aria-activedescendant')).toBe(false);
+      expect(itemNode.classList.contains('bx--dropdown--focused')).toBe(false);
+    });
+
+    it('Should open dropdown with enter key', function() {
+      spyOn(list, 'focus');
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 13 })
+      );
+      expect(element.classList.contains('bx--dropdown--open')).toBe(true);
+      expect(list.focus, 'Focus requested').toHaveBeenCalledTimes(1);
+    });
+
+    it('Should close dropdown with enter key', async function() {
+      spyOn(trigger, 'focus');
+      element.classList.add('bx--dropdown--open');
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 13 })
+      );
+      expect(element.classList.contains('bx--dropdown--open')).toBe(false);
+      await delay(0);
+      expect(trigger.focus, 'Focus requested').toHaveBeenCalledTimes(1);
+    });
+
+    it('Should open dropdown with space key', function() {
+      spyOn(list, 'focus');
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 32 })
+      );
+      expect(element.classList.contains('bx--dropdown--open')).toBe(true);
+      expect(list.focus, 'Focus requested').toHaveBeenCalledTimes(1);
+    });
+
+    it('Should close dropdown with space key', async function() {
+      spyOn(trigger, 'focus');
+      element.classList.add('bx--dropdown--open');
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 32 })
+      );
+      expect(element.classList.contains('bx--dropdown--open')).toBe(false);
+      await delay(0);
+      expect(trigger.focus, 'Focus requested').toHaveBeenCalledTimes(1);
+    });
+
+    it('Should not close dropdown with space key on an item', function() {
+      spyOn(element, 'focus');
+      element.classList.add('bx--dropdown--open');
+      itemNode.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { bubbles: true }), {
+          which: 32,
+        })
+      );
+      expect(element.classList.contains('bx--dropdown--open')).toBe(true);
+      expect(element.focus, 'Focus requested').not.toHaveBeenCalled();
+    });
+
+    it('Should close dropdown with ESC key', async function() {
+      spyOn(trigger, 'focus');
+      element.classList.add('bx--dropdown--open');
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 27 })
+      );
+      expect(element.classList.contains('bx--dropdown--open')).toBe(false);
+      await delay(0);
+      expect(trigger.focus, 'Focus requested').toHaveBeenCalledTimes(1);
+    });
+
+    it('Should close dropdown with ESC key on an item', async function() {
+      spyOn(trigger, 'focus');
+      element.classList.add('bx--dropdown--open');
+      itemNode.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { bubbles: true }), {
+          which: 27,
+        })
+      );
+      expect(element.classList.contains('bx--dropdown--open')).toBe(false);
+      await delay(0);
+      expect(trigger.focus, 'Focus requested').toHaveBeenCalledTimes(1);
+    });
+
+    it('Should not open dropdown with ESC key', function() {
+      spyOn(element, 'focus');
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 27 })
+      );
+      expect(element.classList.contains('bx--dropdown--open')).toBe(false);
+      expect(element.focus, 'Focus requested').not.toHaveBeenCalled();
     });
 
     afterEach(function() {
@@ -322,6 +486,7 @@ describe('Dropdown', function() {
     });
   });
 
+  // test backwards compatibility with legacy markup
   describe('Navigating focus', function() {
     let dropdown;
     let element;
@@ -599,6 +764,174 @@ describe('Dropdown', function() {
 
     afterEach(function() {
       events.reset();
+    });
+
+    afterAll(function() {
+      dropdown.release();
+      document.body.removeChild(element);
+    });
+  });
+
+  describe('Navigating focus with semantic markup', function() {
+    let dropdown;
+    let element;
+    let itemNodes;
+    let list;
+    let trigger;
+
+    const events = new EventManager();
+
+    beforeAll(function() {
+      element = document.createElement('div');
+      element.classList.add('bx--dropdown');
+
+      trigger = element.appendChild(document.createElement('button'));
+      trigger.classList.add('bx--dropdown-text');
+      list = element.appendChild(document.createElement('ul'));
+      list.classList.add('bx--dropdown-list');
+
+      itemNodes = [...new Array(3)].map((item, i) => {
+        const itemContainerNode = document.createElement('li');
+        itemContainerNode.dataset.option = '';
+
+        const itemNode = document.createElement('a');
+        itemNode.textContent = i;
+        itemNode.classList.add('bx--dropdown-link');
+        itemNode.id = `item-${i}`;
+
+        itemContainerNode.appendChild(itemNode);
+        list.appendChild(itemContainerNode);
+        return itemNode;
+      });
+
+      dropdown = new Dropdown(element);
+      document.body.appendChild(element);
+    });
+
+    beforeEach(function() {
+      itemNodes.forEach(item => {
+        item.classList.remove('bx--dropdown--selected');
+        item.classList.remove('bx--dropdown--focused');
+        item.removeAttribute('hidden');
+        item.parentNode.removeAttribute('hidden');
+        item.removeAttribute('aria-hidden');
+        item.parentNode.removeAttribute('aria-hidden');
+      });
+    });
+
+    it('Should focus the first item with no selection', function() {
+      trigger.click();
+      expect(list.getAttribute('aria-activedescendant')).toBe(itemNodes[0].id);
+      expect(
+        itemNodes[0].classList.contains('bx--dropdown--focused'),
+        'Focus on 1st item'
+      ).toBe(true);
+      expect(
+        itemNodes[1].classList.contains('bx--dropdown--focused'),
+        'Focus on 2nd item'
+      ).toBe(false);
+      expect(
+        itemNodes[2].classList.contains('bx--dropdown--focused'),
+        'Focus on 3rd item'
+      ).toBe(false);
+    });
+
+    it('Should start with selection for forward navigation', function() {
+      itemNodes[0].classList.add('bx--dropdown--selected');
+      trigger.click();
+      const defaultPrevented = !element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { cancelable: true }), {
+          which: 40,
+        })
+      );
+      expect(defaultPrevented, 'Canceling event').toBe(true);
+      expect(list.getAttribute('aria-activedescendant')).toBe(itemNodes[1].id);
+      expect(
+        itemNodes[0].classList.contains('bx--dropdown--focused'),
+        'Focus on 1st item'
+      ).toBe(false);
+      expect(
+        itemNodes[1].classList.contains('bx--dropdown--focused'),
+        'Focus on 2nd item'
+      ).toBe(true);
+      expect(
+        itemNodes[2].classList.contains('bx--dropdown--focused'),
+        'Focus on 3rd item'
+      ).toBe(false);
+    });
+
+    it('Should start with selection for backward navigation', function() {
+      itemNodes[2].classList.add('bx--dropdown--selected');
+      trigger.click();
+      const defaultPrevented = !element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { cancelable: true }), {
+          which: 38,
+        })
+      );
+      expect(defaultPrevented, 'Canceling event').toBe(true);
+      expect(list.getAttribute('aria-activedescendant')).toBe(itemNodes[1].id);
+      expect(
+        itemNodes[0].classList.contains('bx--dropdown--focused'),
+        'Focus on 1st item'
+      ).toBe(false);
+      expect(
+        itemNodes[1].classList.contains('bx--dropdown--focused'),
+        'Focus on 2nd item'
+      ).toBe(true);
+      expect(
+        itemNodes[2].classList.contains('bx--dropdown--focused'),
+        'Focus on 3rd item'
+      ).toBe(false);
+    });
+
+    it('Should handle overflow for forward navigation', function() {
+      itemNodes[2].classList.add('bx--dropdown--selected');
+      trigger.click();
+      const defaultPrevented = !element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { cancelable: true }), {
+          which: 40,
+        })
+      );
+      expect(defaultPrevented, 'Canceling event').toBe(true);
+      expect(list.getAttribute('aria-activedescendant')).toBe(itemNodes[0].id);
+      expect(
+        itemNodes[0].classList.contains('bx--dropdown--focused'),
+        'Focus on 1st item'
+      ).toBe(true);
+      expect(
+        itemNodes[1].classList.contains('bx--dropdown--focused'),
+        'Focus on 2nd item'
+      ).toBe(false);
+      expect(
+        itemNodes[2].classList.contains('bx--dropdown--focused'),
+        'Focus on 3rd item'
+      ).toBe(false);
+    });
+
+    it('Should handle underflow for backward navigation', function() {
+      itemNodes[0].classList.add('bx--dropdown--selected');
+      trigger.click();
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 38 })
+      );
+      expect(list.getAttribute('aria-activedescendant')).toBe(itemNodes[2].id);
+      expect(
+        itemNodes[0].classList.contains('bx--dropdown--focused'),
+        'Focus on 1st item'
+      ).toBe(false);
+      expect(
+        itemNodes[1].classList.contains('bx--dropdown--focused'),
+        'Focus on 2nd item'
+      ).toBe(false);
+      expect(
+        itemNodes[2].classList.contains('bx--dropdown--focused'),
+        'Focus on 3rd item'
+      ).toBe(true);
+    });
+
+    afterEach(function() {
+      events.reset();
+      trigger.click();
     });
 
     afterAll(function() {

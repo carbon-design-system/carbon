@@ -122,6 +122,18 @@
     transform-origin: 50% 45%;
   }
 
+  button.#{$prefix}--dropdown-text {
+    // button-reset mixin contradicts with bx--dropdown-text styles
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
   .#{$prefix}--dropdown-text {
     @include type-style('body-short-01');
     display: block;
@@ -137,6 +149,7 @@
 
   .#{$prefix}--dropdown-list {
     @include reset;
+    @include focus-outline('reset');
     @include layer('overlay');
     @include type-style('body-short-01');
     background-color: $ui-01;
@@ -148,13 +161,22 @@
     z-index: z('dropdown');
     max-height: 0;
     transition: max-height $duration--fast-02 motion(standard, productive);
-    overflow: hidden auto;
+    // NOTE: IE, Edge, and Safari do not support two value `overflow` shorthand.
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .#{$prefix}--dropdown:not(.#{$prefix}--dropdown--open)
+    .#{$prefix}--dropdown-item {
+    visibility: hidden;
   }
 
   .#{$prefix}--dropdown-item {
-    transition: opacity $duration--fast-01 motion(standard, productive),
+    transition: visibility $duration--fast-01 motion(standard, productive),
+      opacity $duration--fast-01 motion(standard, productive),
       background-color $duration--fast-01 motion(standard, productive);
     opacity: 0;
+    visibility: inherit;
 
     &:hover {
       background-color: $hover-ui;
@@ -193,16 +215,17 @@
     overflow: hidden;
     white-space: nowrap;
 
-    &:focus {
-      @include focus-outline('outline');
-      margin: 0;
-      padding: rem(11px) rem(16px);
-    }
-
     &:hover {
       color: $text-01;
       border-color: transparent;
     }
+  }
+
+  .#{$prefix}--dropdown--focused,
+  .#{$prefix}--dropdown-link:focus {
+    @include focus-outline('outline');
+    margin: 0;
+    padding: rem(11px) rem(16px);
   }
 
   .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
@@ -262,7 +285,7 @@
     border-bottom-color: transparent;
     width: auto;
     height: rem(32px);
-    background-color: $field-02;
+    background-color: $ui-background;
     transition: background $duration--fast-01 motion(entrance, productive);
 
     &:hover {
@@ -270,7 +293,7 @@
     }
 
     &.#{$prefix}--dropdown--disabled {
-      background-color: $field-02;
+      background-color: $ui-background;
     }
 
     .#{$prefix}--dropdown__arrow {

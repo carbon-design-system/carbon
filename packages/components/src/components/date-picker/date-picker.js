@@ -50,7 +50,7 @@ const monthToStr = (monthNumber, shorthand, locale) =>
   locale.months[shorthand ? 'shorthand' : 'longhand'][monthNumber];
 
 /**
- * @param {Object} config Plugin configuration.
+ * @param {object} config Plugin configuration.
  * @param {boolean} [config.shorthand] `true` to use shorthand month.
  * @param {string} config.selectorFlatpickrMonthYearContainer The CSS selector for the container of month/year selection UI.
  * @param {string} config.selectorFlatpickrYearContainer The CSS selector for the container of year selection UI.
@@ -117,6 +117,7 @@ const carbonFlatpickrMonthSelectPlugin = config => fp => {
 
   return {
     onMonthChange: updateCurrentMonth,
+    onValueUpdate: updateCurrentMonth,
     onOpen: updateCurrentMonth,
     onReady: [setupElements, updateCurrentMonth, register],
   };
@@ -142,7 +143,12 @@ class DatePicker extends mixin(
       this.manage(
         on(this.element, 'keydown', e => {
           if (e.which === 40) {
-            this.calendar.calendarContainer.focus();
+            e.preventDefault();
+            (
+              this.calendar.selectedDateElem ||
+              this.calendar.todayDateElem ||
+              this.calendar.calendarContainer
+            ).focus();
           }
         })
       );

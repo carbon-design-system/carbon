@@ -11,16 +11,20 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
-import Accordion from '../Accordion';
-import AccordionItem from '../AccordionItem';
+import {
+  default as Accordion,
+  AccordionItem,
+  AccordionSkeleton,
+} from '../Accordion';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
-import AccordionSkeleton from '../Accordion/Accordion.Skeleton';
 
 const props = {
   onClick: action('onClick'),
   onHeadingClick: action('onHeadingClick'),
 };
+
+Select.displayName = 'Select';
 
 storiesOf('Accordion', module)
   .addDecorator(withKnobs)
@@ -65,9 +69,9 @@ storiesOf('Accordion', module)
         </AccordionItem>
         <AccordionItem
           title={
-            <h4>
+            <span>
               Section 4 title (<em>the title can be a node</em>)
-            </h4>
+            </span>
           }
           {...props}>
           <p>

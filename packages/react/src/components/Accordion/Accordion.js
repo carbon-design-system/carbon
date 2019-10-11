@@ -5,21 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { settings } from 'carbon-components';
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import classnames from 'classnames';
-import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const Accordion = ({ children, className, ...other }) => {
-  const classNames = classnames(`${prefix}--accordion`, className);
+function Accordion({ children, className: customClassName, ...rest }) {
+  const className = cx(`${prefix}--accordion`, customClassName);
   return (
-    <ul {...other} className={classNames}>
+    <ul className={className} {...rest}>
       {children}
     </ul>
   );
-};
+}
 
 Accordion.propTypes = {
   /**

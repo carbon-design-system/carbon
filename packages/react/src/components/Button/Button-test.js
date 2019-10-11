@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import Search16 from '@carbon/icons-react/lib/search/16';
+import { Search16 } from '@carbon/icons-react';
 import Button from '../Button';
 import Link from '../Link';
 import ButtonSkeleton from '../Button/Button.Skeleton';
@@ -279,6 +279,37 @@ describe('TertiaryButton', () => {
 
     it('should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
+    });
+  });
+});
+
+describe('Icon-only button', () => {
+  describe('Renders as expected', () => {
+    const wrapper = mount(<Button hasIconOnly />);
+
+    it('has the expected classes', () => {
+      expect(
+        wrapper.find('button').hasClass(`${prefix}--btn--icon-only`)
+      ).toEqual(true);
+      expect(
+        wrapper.find('button').hasClass(`${prefix}--tooltip__trigger`)
+      ).toEqual(true);
+      expect(
+        wrapper.find('button').hasClass(`${prefix}--tooltip--a11y`)
+      ).toEqual(true);
+    });
+
+    it('should only set tooltip position and alignment if passed via props', () => {
+      wrapper.setProps({ tooltipPosition: 'bottom' });
+      expect(wrapper.props().tooltipPosition).toEqual('bottom');
+      wrapper.setProps({ tooltipAlignment: 'center' });
+      expect(wrapper.props().tooltipAlignment).toEqual('center');
+    });
+
+    it('should contain assistive text', () => {
+      wrapper.setProps({ tooltipPosition: 'bottom' });
+      wrapper.setProps({ tooltipAlignment: 'center' });
+      expect(wrapper.find(`.${prefix}--assistive-text`).length).toEqual(1);
     });
   });
 });

@@ -83,7 +83,7 @@
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    @include tag-theme($interactive-02, $inverse-01);
+    @include tag-theme($inverse-02, $inverse-01);
     cursor: pointer;
     padding-right: rem(2px); // Align with hover circle of X button
   }
@@ -96,10 +96,9 @@
     height: rem(20px);
   }
 
-  .#{$prefix}--tag--filter:focus > svg,
   .#{$prefix}--tag--filter > svg:hover {
     border-radius: 50%;
-    background-color: $icon-02;
+    background-color: $inverse-hover-ui;
   }
 
   .#{$prefix}--tag--filter:focus,
@@ -107,16 +106,16 @@
     outline: none;
   }
 
+  .#{$prefix}--tag--filter:focus > svg {
+    box-shadow: inset 0 0 0 2px $inverse-focus-ui;
+    border-radius: 50%;
+  }
+
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
+    @include skeleton;
     width: rem(60px);
-
-    &:after {
-      @include skeleton;
-      content: '';
-      height: rem(6px);
-      width: 100%;
-    }
+    overflow: hidden;
   }
 }
 

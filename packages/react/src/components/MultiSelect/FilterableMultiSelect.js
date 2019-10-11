@@ -11,7 +11,7 @@ import React from 'react';
 import Downshift from 'downshift';
 import isEqual from 'lodash.isequal';
 import { settings } from 'carbon-components';
-import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
+import { WarningFilled16 } from '@carbon/icons-react';
 import ListBox from '../ListBox';
 import Checkbox from '../Checkbox';
 import Selection from '../../internal/Selection';
@@ -118,7 +118,7 @@ export default class FilterableMultiSelect extends React.Component {
     /**
      * Additional props passed to Downshift
      */
-    downshiftProps: Downshift.propTypes,
+    downshiftProps: PropTypes.shape(Downshift.propTypes),
   };
 
   static getDerivedStateFromProps({ open }, state) {
@@ -348,12 +348,17 @@ export default class FilterableMultiSelect extends React.Component {
                       className={`${prefix}--list-box__invalid-icon`}
                     />
                   )}
-                  <ListBox.Field id={id} {...getButtonProps({ disabled })}>
+                  <ListBox.Field
+                    id={id}
+                    disabled={disabled}
+                    translateWithId={translateWithId}
+                    {...getButtonProps({ disabled })}>
                     {selectedItem.length > 0 && (
                       <ListBox.Selection
                         clearSelection={clearSelection}
                         selectionCount={selectedItem.length}
                         translateWithId={translateWithId}
+                        disabled={disabled}
                       />
                     )}
                     <input
@@ -371,6 +376,7 @@ export default class FilterableMultiSelect extends React.Component {
                     {inputValue && isOpen && (
                       <ListBox.Selection
                         clearSelection={this.clearInputValue}
+                        disabled={disabled}
                       />
                     )}
                     <ListBox.MenuIcon

@@ -39,7 +39,6 @@ iconHelper({ handlebars: Handlebars });
 const readFile = promisify(fs.readFile);
 
 try {
-  // eslint-disable-next-line global-require, import/no-dynamic-require
   const logger = require(path.resolve(
     path.dirname(require.resolve('@frctl/fractal')),
     'core/log'
@@ -91,7 +90,7 @@ const loadContents = glob =>
 
 const cache = {
   /**
-   * @returns {Promise<Object>} The promise that is resolved with the content cache.
+   * @returns {Promise<object>} The promise that is resolved with the content cache.
    */
   get() {
     if (!this.promiseCache) {
@@ -123,10 +122,10 @@ const cache = {
 };
 
 /**
- * @param {Object} [options] The options.
+ * @param {object} [options] The options.
  * @param {string} [options.layout] The default Handlebars template name to lay out stuffs. `false` to force empty layout.
  * @param {boolean} [options.concat] Setting `true` here returns rendered contents all concatenated, instead of returning a map.
- * @param {Object} [options.layoutContext] Additional Handlebars rendering context for layout template.
+ * @param {object} [options.layoutContext] Additional Handlebars rendering context for layout template.
  * @param {string} [handle]
  *   The internal component name seen in Fractal.
  *   Can be of a component or of a variant, or left empty.

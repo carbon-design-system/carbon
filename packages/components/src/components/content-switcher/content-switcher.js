@@ -29,7 +29,7 @@ class ContentSwitcher extends mixin(
    * @extends EventedState
    * @extends Handles
    * @param {HTMLElement} element The element working as a set of content switcher buttons.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @param {string} [options.selectorButton] The CSS selector to find switcher buttons.
    * @param {string} [options.selectorButtonSelected] The CSS selector to find the selected switcher button.
    * @param {string} [options.classActive] The CSS class for switcher button's selected state.
@@ -67,7 +67,7 @@ class ContentSwitcher extends mixin(
   /**
    * Internal method of {@linkcode ContentSwitcher#setActive .setActive()}, to select a content switcher button.
    * @private
-   * @param {Object} detail The detail of the event trigging this action.
+   * @param {object} detail The detail of the event trigging this action.
    * @param {HTMLElement} detail.item The button to be selected.
    * @param {Function} callback Callback called when change in state completes.
    */
@@ -155,7 +155,7 @@ class ContentSwitcher extends mixin(
    * {@linkcode ContentSwitcher.create .create()}, or {@linkcode ContentSwitcher.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode ContentSwitcher.init .init()} works.
    * @member ContentSwitcher.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The CSS selector to find content switcher button set.
    * @property {string} [selectorButton] The CSS selector to find switcher buttons.
    * @property {string} [selectorButtonSelected] The CSS selector to find the selected switcher button.

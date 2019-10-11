@@ -13,7 +13,7 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
-const Switcher = React.forwardRef(function Switcher(props) {
+const Switcher = React.forwardRef(function Switcher(props, ref) {
   const {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
@@ -26,12 +26,12 @@ const Switcher = React.forwardRef(function Switcher(props) {
     'aria-labelledby': ariaLabelledBy,
   };
 
-  const className = cx(`${prefix}--switcher__item`, {
+  const className = cx(`${prefix}--switcher`, {
     [customClassName]: !!customClassName,
   });
 
   return (
-    <ul className={className} {...accessibilityLabel}>
+    <ul ref={ref} className={className} role="menu" {...accessibilityLabel}>
       {children}
     </ul>
   );
@@ -44,14 +44,14 @@ Switcher.propTypes = {
   ...AriaLabelPropType,
 
   /**
-   * Optionally provide a custom class to apply to the underlying <li> node
+   * Optionally provide a custom class to apply to the underlying <ul> node
    */
   className: PropTypes.string,
 
   /**
-   * Specify the text content for the link
+   * expects to receive <SwitcherItem />
    */
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Switcher;

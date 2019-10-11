@@ -7,12 +7,12 @@
 
 import {
   // Blue
+  blue30,
   blue40,
   blue50,
   blue60,
   blue70,
   blue80,
-  blue90,
 
   // Gray
   gray10,
@@ -55,14 +55,17 @@ export const ui05 = gray10;
 
 export const text01 = gray10;
 export const text02 = gray30;
-export const text03 = gray50;
+export const text03 = gray60;
 export const text04 = white;
+export const text05 = gray50;
 
 export const icon01 = gray10;
 export const icon02 = gray30;
 export const icon03 = white;
 
 export const link01 = blue40;
+
+export const inverseLink = blue60;
 
 export const field01 = gray80;
 export const field02 = gray70;
@@ -82,13 +85,16 @@ export const inverseSupport04 = blue60;
 
 export const overlay01 = rgba(gray100, 0.7);
 
+export const danger = red60;
+
 // Interaction states
 export const focus = white;
+export const inverseFocusUi = blue60;
 
 export const hoverPrimary = '#0353e9';
 export const activePrimary = blue80;
 
-export const hoverPrimaryText = blue70;
+export const hoverPrimaryText = blue30;
 
 export const hoverSecondary = '#606060';
 export const activeSecondary = gray80;
@@ -96,9 +102,10 @@ export const activeSecondary = gray80;
 export const hoverTertiary = gray10;
 export const activeTertiary = gray30;
 
-export const hoverUI = '#353535';
+export const hoverUI = '#4c4c4c';
 export const activeUI = gray60;
 export const selectedUI = gray70;
+export const inverseHoverUI = '#e5e5e5';
 
 export const hoverSelectedUI = '#656565';
 
@@ -110,13 +117,46 @@ export const hoverRow = '#4c4c4c';
 export const visitedLink = purple40;
 
 export const disabled01 = gray80;
-export const disabled02 = gray70;
+export const disabled02 = gray60;
 export const disabled03 = gray50;
 
-export const highlight = blue90;
+export const highlight = blue70;
 
 export const skeleton01 = '#353535';
 export const skeleton02 = gray70;
+
+// Type
+export { caption01 } from './white';
+export { label01 } from './white';
+export { helperText01 } from './white';
+export { bodyShort01 } from './white';
+export { bodyLong01 } from './white';
+export { bodyShort02 } from './white';
+export { bodyLong02 } from './white';
+export { code01 } from './white';
+export { code02 } from './white';
+export { heading01 } from './white';
+export { productiveHeading01 } from './white';
+export { heading02 } from './white';
+export { productiveHeading02 } from './white';
+export { productiveHeading03 } from './white';
+export { productiveHeading04 } from './white';
+export { productiveHeading05 } from './white';
+export { productiveHeading06 } from './white';
+export { productiveHeading07 } from './white';
+export { expressiveHeading01 } from './white';
+export { expressiveHeading02 } from './white';
+export { expressiveHeading03 } from './white';
+export { expressiveHeading04 } from './white';
+export { expressiveHeading05 } from './white';
+export { expressiveHeading06 } from './white';
+export { expressiveParagraph01 } from './white';
+export { quotation01 } from './white';
+export { quotation02 } from './white';
+export { display01 } from './white';
+export { display02 } from './white';
+export { display03 } from './white';
+export { display04 } from './white';
 
 // Deprecated ☠️
 export const brand01 = interactive01;

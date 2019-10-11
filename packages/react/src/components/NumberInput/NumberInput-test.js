@@ -7,8 +7,7 @@
 
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import CaretDownGlyph from '@carbon/icons-react/lib/caret--down/index';
-import CaretUpGlyph from '@carbon/icons-react/lib/caret--up/index';
+import { CaretDownGlyph, CaretUpGlyph } from '@carbon/icons-react';
 import NumberInput from '../NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
 import { settings } from 'carbon-components';

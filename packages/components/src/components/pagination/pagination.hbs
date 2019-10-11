@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Copyright IBM Corp. 2016, 2018
 
   This source code is licensed under the Apache-2.0 license found in the
@@ -17,20 +17,20 @@
         id="select-id-pagination-count{{#if disabledPaginationButton}}--disabled-example{{/if}}"
         aria-label="Items per page" tabindex="0" data-items-per-page>
         {{#each itemsPerPageChoices}}
-          <option class="{{@root.prefix}}--select-option" value="{{value}}">
-            {{label}}
-          </option>
+        <option class="{{@root.prefix}}--select-option" value="{{value}}">
+          {{label}}
+        </option>
         {{/each}}
       </select>
       {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow') }}
     </div>
     <span class="{{@root.prefix}}--pagination__text">
-      <span data-displayed-item-range>1–10</span> of
+      <span data-displayed-item-range>1 – 10</span> of
       <span data-total-items>
         {{#if disabledPaginationButton}}
-          10
+        10
         {{else}}
-          40
+        40
         {{/if}}
       </span> items
     </span>
@@ -41,9 +41,9 @@
         id="select-id-pagination-page{{#if disabledPaginationButton}}--disabled-example{{/if}}"
         aria-label="page number, of {{totalPages}} pages" tabindex="0" data-page-number-input>
         {{#each pageNumberChoices}}
-          <option class="{{@root.prefix}}--select-option" value="{{value}}">
-            {{label}}
-          </option>
+        <option class="{{@root.prefix}}--select-option" value="{{value}}">
+          {{label}}
+        </option>
         {{/each}}
       </select>
       {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow')}}

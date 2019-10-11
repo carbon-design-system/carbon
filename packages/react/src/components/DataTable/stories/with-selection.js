@@ -31,8 +31,12 @@ export default props => (
       getRowProps,
       getSelectionProps,
       getTableProps,
+      getTableContainerProps,
     }) => (
-      <TableContainer title="DataTable" description="With selection">
+      <TableContainer
+        title="DataTable"
+        description="With selection"
+        {...getTableContainerProps()}>
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>

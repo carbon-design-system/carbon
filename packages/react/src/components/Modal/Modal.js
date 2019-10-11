@@ -8,10 +8,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Button from '../Button';
 import { settings } from 'carbon-components';
-import Close20 from '@carbon/icons-react/lib/close/20';
+import { Close20 } from '@carbon/icons-react';
 import FocusTrap from 'focus-trap-react';
+import toggleClass from '../../tools/toggleClass';
+import Button from '../Button';
+import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
@@ -79,6 +81,9 @@ export default class Modal extends Component {
      */
     onRequestSubmit: PropTypes.func,
 
+    /**
+     * Specify a handler for keypresses.
+     */
     onKeyDown: PropTypes.func,
 
     /**
@@ -124,6 +129,11 @@ export default class Modal extends Component {
      * NOTE: by default this is true.
      */
     focusTrap: PropTypes.bool,
+
+    /**
+     * Required props for the accessibility label of the header
+     */
+    ...AriaLabelPropType,
   };
 
   static defaultProps = {
@@ -157,15 +167,17 @@ export default class Modal extends Component {
   };
 
   handleKeyDown = evt => {
-    if (evt.which === 27) {
-      this.props.onRequestClose(evt);
-    }
-    if (evt.which === 13 && this.props.shouldSubmitOnEnter) {
-      this.props.onRequestSubmit(evt);
+    if (this.props.open) {
+      if (evt.which === 27) {
+        this.props.onRequestClose(evt);
+      }
+      if (evt.which === 13 && this.props.shouldSubmitOnEnter) {
+        this.props.onRequestSubmit(evt);
+      }
     }
   };
 
-  handleClick = evt => {
+  handleMousedown = evt => {
     if (
       this.innerModal.current &&
       !this.innerModal.current.contains(evt.target) &&
@@ -200,15 +212,23 @@ export default class Modal extends Component {
     } else if (prevProps.open && !this.props.open) {
       this.beingOpen = false;
     }
+    toggleClass(
+      document.body,
+      `${prefix}--body--with-modal-open`,
+      this.props.open
+    );
   }
 
   initialFocus = focusContainerElement => {
-    const primaryFocusElement = focusContainerElement
-      ? focusContainerElement.querySelector(this.props.selectorPrimaryFocus)
+    const containerElement = focusContainerElement || this.innerModal.current;
+    const primaryFocusElement = containerElement
+      ? containerElement.querySelector(this.props.selectorPrimaryFocus)
       : null;
+
     if (primaryFocusElement) {
       return primaryFocusElement;
     }
+
     return this.button && this.button.current;
   };
 
@@ -219,7 +239,16 @@ export default class Modal extends Component {
     }
   };
 
+  componentWillUnmount() {
+    toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+  }
+
   componentDidMount() {
+    toggleClass(
+      document.body,
+      `${prefix}--body--with-modal-open`,
+      this.props.open
+    );
     if (!this.props.open) {
       return;
     }
@@ -292,12 +321,28 @@ export default class Modal extends Component {
       </button>
     );
 
+    const getAriaLabelledBy = (() => {
+      const ariaLabelledBy = [];
+      if (modalLabel) {
+        ariaLabelledBy.push(
+          `${prefix}--modal-header__label`,
+          `${prefix}--modal-header__heading`
+        );
+      }
+      return ariaLabelledBy.length ? ariaLabelledBy.join(' ') : null;
+    })();
+
     const modalBody = (
       <div
         ref={this.innerModal}
         role="dialog"
         className={`${prefix}--modal-container`}
-        aria-label={modalAriaLabel}
+        aria-label={
+          modalLabel
+            ? null
+            : this.props['aria-label'] || modalAriaLabel || modalHeading
+        }
+        aria-labelledby={getAriaLabelledBy}
         aria-modal="true">
         <div className={`${prefix}--modal-header`}>
           {passiveModal && modalButton}
@@ -329,7 +374,7 @@ export default class Modal extends Component {
       <div
         {...other}
         onKeyDown={this.handleKeyDown}
-        onClick={this.handleClick}
+        onMouseDown={this.handleMousedown}
         onBlur={this.handleBlur}
         className={modalClasses}
         role="presentation"

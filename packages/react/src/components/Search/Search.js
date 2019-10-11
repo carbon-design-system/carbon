@@ -8,9 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Search16 from '@carbon/icons-react/lib/search/16';
-import Close16 from '@carbon/icons-react/lib/close/16';
-import Close20 from '@carbon/icons-react/lib/close/20';
+import { Search16, Close16, Close20 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -33,7 +31,9 @@ export default class Search extends Component {
     small: PropTypes.bool,
 
     /**
-     * Provide an optional placeholder text for the Search
+     * Provide an optional placeholder text for the Search.
+     * Note: if the label and placeholder differ,
+     * VoiceOver on Mac will read both
      */
     placeHolderText: PropTypes.string,
 
@@ -41,6 +41,11 @@ export default class Search extends Component {
      * Provide an optional label text for the Search icon
      */
     labelText: PropTypes.node.isRequired,
+
+    /**
+     * Specify light version or default version of this control
+     */
+    light: PropTypes.bool,
 
     /**
      * Specify a custom `id` for the input
@@ -67,6 +72,7 @@ export default class Search extends Component {
     type: 'text',
     small: false,
     placeHolderText: '',
+    closeButtonLabelText: 'Clear search input',
     onChange: () => {},
   };
 
@@ -122,6 +128,7 @@ export default class Search extends Component {
       labelText,
       closeButtonLabelText,
       small,
+      light,
       ...other
     } = this.props;
 
@@ -131,6 +138,7 @@ export default class Search extends Component {
       [`${prefix}--search`]: true,
       [`${prefix}--search--xl`]: !small,
       [`${prefix}--search--sm`]: small,
+      [`${prefix}--search--light`]: light,
       [className]: className,
     });
 
@@ -142,16 +150,9 @@ export default class Search extends Component {
     const CloseIconX = !small ? Close20 : Close16;
 
     return (
-      <div
-        className={searchClasses}
-        role="search"
-        aria-labelledby={`${id}-label`}>
-        <Search16
-          className={`${prefix}--search-magnifier`}
-          aria-label={labelText}
-          role="img"
-        />
-        <label id={`${id}-label`} htmlFor={id} className={`${prefix}--label`}>
+      <div className={searchClasses}>
+        <Search16 className={`${prefix}--search-magnifier`} />
+        <label htmlFor={id} className={`${prefix}--label`}>
           {labelText}
         </label>
         <input
@@ -170,7 +171,7 @@ export default class Search extends Component {
           onClick={this.clearInput}
           type="button"
           aria-label={closeButtonLabelText}>
-          <CloseIconX aria-label={closeButtonLabelText} role="img" />
+          <CloseIconX />
         </button>
       </div>
     );

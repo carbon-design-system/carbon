@@ -110,7 +110,7 @@ describe('Test Overflow menu', function() {
         element.classList.add('bx--overflow-menu--open');
         optionsElement.classList.add('bx--overflow-menu-options--open');
         items = document.querySelectorAll(`
-          .bx--overflow-menu-options--open >
+          .bx--overflow-menu-options--open
           .bx--overflow-menu-options__option:not(.bx--overflow-menu-options__option--disabled)
           > .bx--overflow-menu-options__btn
         `);

@@ -7,23 +7,21 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useMemo, useRef, useState, useEffect } from 'react';
 import { settings } from 'carbon-components';
 import Search from '../Search';
 import setupGetInstanceId from './tools/instanceId';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
-
 const getInstanceId = setupGetInstanceId();
 const translationKeys = {
   'carbon.table.toolbar.search.label': 'Filter table',
-  'carbon.table.toolbar.search.placeholder': 'Search',
+  'carbon.table.toolbar.search.placeholder': 'Filter table',
 };
-
 const translateWithId = id => {
   return translationKeys[id];
 };
-
 const TableToolbarSearch = ({
   className,
   searchContainerClass,
@@ -34,38 +32,36 @@ const TableToolbarSearch = ({
   expanded: expandedProp,
   defaultExpanded,
   onExpand,
+  persistent,
   persistant,
-  id = `data-table-search-${getInstanceId()}`,
+  id,
   ...rest
 }) => {
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
-
   const searchRef = useRef(null);
   const [value, setValue] = useState('');
+  const uniqueId = useMemo(getInstanceId, []);
 
   useEffect(() => {
-    if (searchRef.current) {
+    if (!controlled && expandedState && searchRef.current) {
       searchRef.current.querySelector('input').focus();
     }
-  });
+  }, [controlled, expandedState]);
 
   const searchContainerClasses = cx({
     [searchContainerClass]: searchContainerClass,
     [`${prefix}--toolbar-action`]: true,
     [`${prefix}--toolbar-search-container-active`]: expanded,
-    [`${prefix}--toolbar-search-container-expandable`]: !persistant,
-    [`${prefix}--toolbar-search-container-persistant`]: persistant,
-  });
-
-  const searchClasses = cx({
-    className,
-    [`${prefix}--search-maginfier`]: true,
+    [`${prefix}--toolbar-search-container-expandable`]:
+      !persistent || (!persistent && !persistant),
+    [`${prefix}--toolbar-search-container-persistent`]:
+      persistent || persistant,
   });
 
   const handleExpand = (event, value = !expanded) => {
-    if (!controlled && !persistant) {
+    if (!controlled && (!persistent || (!persistent && !persistant))) {
       setExpandedState(value);
     }
     if (onExpand) {
@@ -82,7 +78,7 @@ const TableToolbarSearch = ({
 
   return (
     <div
-      tabIndex="0"
+      tabIndex={expandedState ? '-1' : '0'}
       role="searchbox"
       ref={searchRef}
       onClick={event => handleExpand(event, true)}
@@ -92,9 +88,9 @@ const TableToolbarSearch = ({
       <Search
         {...rest}
         small
-        className={searchClasses}
+        className={className}
         value={value}
-        id={id}
+        id={typeof id !== 'undefined' ? id : uniqueId.toString()}
         aria-hidden={!expanded}
         labelText={labelText || t('carbon.table.toolbar.search.label')}
         placeHolderText={
@@ -147,12 +143,16 @@ TableToolbarSearch.propTypes = {
   /**
    * Whether the search should be allowed to expand
    */
-  persistant: PropTypes.bool,
+  persistent: PropTypes.bool,
+  persistant: deprecate(
+    PropTypes.bool,
+    `\nThe prop \`persistant\` for TableToolbarSearch has been deprecated in favor of \`persistent\`. Please use \`persistent\` instead.`
+  ),
 };
 
 TableToolbarSearch.defaultProps = {
   translateWithId,
-  persistant: false,
+  persistent: false,
 };
 
 export default TableToolbarSearch;

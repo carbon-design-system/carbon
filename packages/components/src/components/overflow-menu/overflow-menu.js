@@ -104,16 +104,25 @@ class OverflowMenu extends mixin(
    * @extends InitComponentBySearch
    * @extends Handles
    * @param {HTMLElement} element The element working as a modal dialog.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @param {string} [options.selectorOptionMenu] The CSS selector to find the menu.
+   * @param {string} [options.selectorTrigger] The CSS selector to find the trigger button.
    * @param {string} [options.classShown] The CSS class for the shown state, for the trigger UI.
    * @param {string} [options.classMenuShown] The CSS class for the shown state, for the menu.
    * @param {string} [options.classMenuFlip] The CSS class for the flipped state of the menu.
-   * @param {Object} [options.objMenuOffset] The offset locating the menu for the non-flipped state.
-   * @param {Object} [options.objMenuOffsetFlip] The offset locating the menu for the flipped state.
+   * @param {object} [options.objMenuOffset] The offset locating the menu for the non-flipped state.
+   * @param {object} [options.objMenuOffsetFlip] The offset locating the menu for the flipped state.
    */
   constructor(element, options) {
     super(element, options);
+
+    if (this.element.getAttribute('role') !== 'button') {
+      // Would prefer to use the aria-controls with a specific ID but we
+      // don't have the menuOptions list at this point to pull the ID from
+      this.triggerNode = this.element.querySelector(
+        this.options.selectorTrigger
+      );
+    }
     this.manage(
       on(this.element.ownerDocument, 'click', event => {
         this._handleDocumentClick(event);
@@ -137,16 +146,10 @@ class OverflowMenu extends mixin(
   /**
    * Changes the shown/hidden state.
    * @param {string} state The new state.
-   * @param {Object} detail The detail of the event trigging this action.
+   * @param {object} detail The detail of the event trigging this action.
    * @param {Function} callback Callback called when change in state completes.
    */
   changeState(state, detail, callback) {
-    if (state === 'hidden') {
-      this.element.setAttribute('aria-expanded', 'false');
-    } else {
-      this.element.setAttribute('aria-expanded', 'true');
-    }
-
     if (!this.optionMenu) {
       const optionMenu = this.element.querySelector(
         this.options.selectorOptionMenu
@@ -161,6 +164,8 @@ class OverflowMenu extends mixin(
         classShown: this.options.classMenuShown,
         classRefShown: this.options.classShown,
         offset: this.options.objMenuOffset,
+        triggerNode: this.triggerNode,
+        contentNode: this.element.querySelector(this.options.selectorContent),
       });
       this.children.push(this.optionMenu);
     }
@@ -185,7 +190,7 @@ class OverflowMenu extends mixin(
    * @private
    */
   _handleDocumentClick(event) {
-    const { element, optionMenu, wasOpenBeforeClick } = this;
+    const { element, optionMenu, wasOpenBeforeClick, triggerNode } = this;
     const isOfSelf = element.contains(event.target);
     const isOfMenu = optionMenu && optionMenu.element.contains(event.target);
     const shouldBeOpen = isOfSelf && !wasOpenBeforeClick;
@@ -201,7 +206,8 @@ class OverflowMenu extends mixin(
     if (!isOfMenu || eventMatches(event, this.options.selectorItem)) {
       this.changeState(state, getLaunchingDetails(event), () => {
         if (state === 'hidden' && isOfMenu) {
-          element.focus();
+          // @todo Can clean up to use `this.triggerNode` once non-compliant code is deprecated
+          this[triggerNode ? 'triggerNode' : 'element'].focus();
         }
       });
     }
@@ -265,19 +271,13 @@ class OverflowMenu extends mixin(
    */
   _handleKeyPress(event) {
     const key = event.which;
-    const { element, optionMenu, options } = this;
+    const { element, optionMenu, options, triggerNode } = this;
     const isOfMenu = optionMenu && optionMenu.element.contains(event.target);
     const isExpanded = this.element.classList.contains(this.options.classShown);
+    // @todo Can clean up to use `this.triggerNode` once non-compliant code is deprecated
+    const triggerElement = triggerNode ? 'triggerNode' : 'element';
 
     switch (key) {
-      // Esc
-      case 27:
-        this.changeState('hidden', getLaunchingDetails(event), () => {
-          if (isOfMenu) {
-            element.focus();
-          }
-        });
-        break;
       // Enter || Space bar
       case 13:
       case 32: {
@@ -297,7 +297,7 @@ class OverflowMenu extends mixin(
           event.preventDefault(); // prevent scrolling
           this.changeState(state, getLaunchingDetails(event), () => {
             if (state === 'hidden' && isOfMenu) {
-              element.focus();
+              this[triggerElement].focus();
             }
           });
         }
@@ -329,8 +329,10 @@ class OverflowMenu extends mixin(
     return {
       selectorInit: '[data-overflow-menu]',
       selectorOptionMenu: `.${prefix}--overflow-menu-options`,
+      selectorTrigger: 'button[aria-haspopup]',
+      selectorContent: `.${prefix}--overflow-menu-options__content`,
       selectorItem: `
-        .${prefix}--overflow-menu-options--open >
+        .${prefix}--overflow-menu-options--open
         .${prefix}--overflow-menu-options__option:not(.${prefix}--overflow-menu-options__option--disabled) >
         .${prefix}--overflow-menu-options__btn
       `,

@@ -55,7 +55,7 @@ $css--helpers: true;
     padding: 0 2.5rem 0 $spacing-md;
     margin-right: -0.65rem;
     @include carbon--breakpoint('md') {
-      padding: 0 1.5rem 0 0.5rem;
+      padding-right: carbon--mini-units(4.5);
       margin-right: 0;
     }
   }
@@ -65,38 +65,23 @@ $css--helpers: true;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
-    position: relative;
     top: auto;
-    right: 1.1rem;
     bottom: auto;
+    @include carbon--breakpoint('md') {
+      right: $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--pagination
     .#{$prefix}--select__item-count
     .#{$prefix}--select-input {
     border-right: $spacing-4xs solid $ui-03;
-    @include carbon--breakpoint('md') {
-      padding-right: 2rem;
-      margin-right: -0.65rem;
-    }
   }
 
   .#{$prefix}--pagination
     .#{$prefix}--select__page-number
     .#{$prefix}--select-input {
     border-left: 1px solid $ui-03;
-    @include carbon--breakpoint('md') {
-      padding-left: 1rem;
-      padding-right: 2rem;
-    }
-  }
-
-  .#{$prefix}--pagination
-    .#{$prefix}--select__page-number
-    .#{$prefix}--select__arrow {
-    @include carbon--breakpoint('md') {
-      right: 1.8rem;
-    }
   }
 
   .#{$prefix}--pagination__left,
@@ -136,11 +121,7 @@ $css--helpers: true;
 
   span.#{$prefix}--pagination__text {
     margin-left: $carbon--spacing-05;
-    color: $text-01;
-  }
-
-  .#{$prefix}--pagination__right span.#{$prefix}--pagination__text {
-    margin-left: -0.5rem;
+    color: $text-02;
   }
 
   .#{$prefix}--pagination__button {

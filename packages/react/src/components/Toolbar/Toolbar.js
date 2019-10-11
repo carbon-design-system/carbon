@@ -10,11 +10,22 @@ import PropTypes from 'prop-types';
 import ToolbarSearch from '../ToolbarSearch';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import warning from 'warning';
 
 const { prefix } = settings;
 
+let didWarnAboutDeprecation = false;
+
 const Toolbar = ({ children, className, ...other }) => {
   const wrapperClasses = classNames(`${prefix}--toolbar`, className);
+
+  if (__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      'The Toolbar component has been deprecated and will be removed in the next major release of `carbon-components-react`'
+    );
+    didWarnAboutDeprecation = true;
+  }
 
   return (
     <div className={wrapperClasses} {...other}>
@@ -68,9 +79,11 @@ ToolbarItem.defaultProps = {
   placeHolderText: 'Provide placeHolderText',
 };
 
-export const ToolbarTitle = ({ title }) => (
-  <li className={`${prefix}--toolbar-menu__title`}>{title}</li>
-);
+export const ToolbarTitle = React.forwardRef(({ title }, ref) => (
+  <li ref={ref} className={`${prefix}--toolbar-menu__title`}>
+    {title}
+  </li>
+));
 
 ToolbarTitle.propTypes = {
   /**
@@ -79,9 +92,11 @@ ToolbarTitle.propTypes = {
   title: PropTypes.string,
 };
 
-export const ToolbarOption = ({ children }) => (
-  <li className={`${prefix}--toolbar-menu__option`}>{children}</li>
-);
+export const ToolbarOption = React.forwardRef(({ children }, ref) => (
+  <li ref={ref} className={`${prefix}--toolbar-menu__option`}>
+    {children}
+  </li>
+));
 
 ToolbarOption.propTypes = {
   /**
@@ -90,8 +105,8 @@ ToolbarOption.propTypes = {
   children: PropTypes.node,
 };
 
-export const ToolbarDivider = () => (
-  <hr className={`${prefix}--toolbar-menu__divider`} />
-);
+export const ToolbarDivider = React.forwardRef((props, ref) => (
+  <hr ref={ref} className={`${prefix}--toolbar-menu__divider`} />
+));
 
 export default Toolbar;

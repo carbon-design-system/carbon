@@ -11,36 +11,49 @@
     "packages": [
       "packages/*"
     ],
-    "nohoist": [
-      "**/eslint",
-      "eslint/**"
-    ]
+    "nohoist": []
   },
   "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
-    "ci-check": "node tasks/ci-check.js",
+    "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
-    "doctoc": "doctoc --title '## Table of Contents' docs",
+    "doctoc": "doctoc --title '## Table of Contents'",
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,components}/**'",
-    "format:staged": "prettier --write",
+    "lint": "eslint packages",
     "lint:styles": "stylelint '**/*.{css,scss}' --config ./packages/stylelint-config-elements",
-    "sync": "node tasks/sync.js",
+    "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
     "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
   },
+  "resolutions": {
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
+    "react-is": "~16.9.0",
+    "react-test-renderer": "~16.9.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.4.4",
+    "@carbon/cli": "10.5.0",
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
+    "axe-core": "^3.3.2",
     "babel-jest": "^24.8.0",
     "cross-env": "^5.2.0",
     "cross-spawn": "^6.0.5",
     "doctoc": "^1.4.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.3.5",
+    "eslint": "^6.0.0",
+    "eslint-config-carbon": "10.4.0",
     "fs-extra": "^7.0.1",
     "glob": "^7.1.4",
     "husky": "^2.1.0",
@@ -50,8 +63,8 @@
     "lerna": "^3.13.4",
     "lint-staged": "^8.1.5",
     "prettier": "^1.17.0",
-    "remark": "^10.0.1",
-    "remark-word-wrap": "^2.0.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "rimraf": "^2.6.3",
     "stylelint": "^10.0.1"
   },
@@ -80,31 +93,43 @@
         0,
         "always",
         "lower-case"
+      ],
+      "type-enum": [
+        2,
+        "always",
+        [
+          "build",
+          "ci",
+          "chore",
+          "docs",
+          "feat",
+          "fix",
+          "perf",
+          "refactor",
+          "revert",
+          "test"
+        ]
       ]
     }
   },
   "lint-staged": {
-    "packages/components/**/*.js": [
-      "yarn format:staged",
-      "yarn lerna run lint:staged --scope carbon-components",
+    "**/*.js": [
+      "prettier --write",
+      "eslint",
       "git add"
     ],
     "packages/components/**/*.scss": [
-      "yarn format:staged",
-      "git add"
-    ],
-    "packages/react/**/*.js": [
-      "yarn format:staged",
-      "yarn lerna run lint:staged --scope carbon-components-react",
-      "git add"
-    ],
-    "*.js,!packages/components/**/*.js,!packages/react/**/*.js": [
-      "yarn format:staged",
+      "prettier --write",
       "git add"
     ],
     "*.md": [
-      "yarn format:staged",
+      "prettier --write",
       "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint-config-carbon"
     ]
   },
   "prettier": {
@@ -121,11 +146,15 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "packages/**/*.js"
+      "packages/**/src/**/*.js",
+      "!packages/{bundler,cli,components,sketch}/**",
+      "!packages/**/{examples,stories}/**",
+      "!**/*-story.js"
     ],
     "moduleFileExtensions": [
       "js",
-      "json"
+      "json",
+      "node"
     ],
     "reporters": [
       "default",
@@ -133,6 +162,12 @@
     ],
     "setupFiles": [
       "./tasks/jest/setup.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./tasks/jest/setupAfterEnv.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
     ],
     "testMatch": [
       "<rootDir>/**/__tests__/**/*.js?(x)",
@@ -152,8 +187,7 @@
       "/lib/",
       "e2e",
       "examples",
-      "/umd/",
-      "/packages/react/"
+      "/umd/"
     ],
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"

@@ -4,8 +4,6 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-import debounce from 'lodash.debounce';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -78,6 +76,13 @@ const getMenuOffset = (menuBody, menuDirection) => {
   return undefined;
 };
 
+/**
+ * Key codes for allowed keys that will trigger opening a tooltip
+ * @type {Integer[]}
+ * @private
+ */
+const allowedOpenKeys = [32, 13];
+
 class Tooltip extends mixin(
   createComponent,
   initComponentByEvent,
@@ -102,31 +107,27 @@ class Tooltip extends mixin(
   _hasContextMenu = false;
 
   /**
-   * The debounced version of the event handler.
-   * @type {Function}
-   * @private
-   */
-  _debouncedHandleClick = debounce(this._handleClick, 200);
-
-  /**
    * A method called when this widget is created upon events.
    * @param {Event} event The event triggering the creation.
    */
   createdByEvent(event) {
-    const { relatedTarget, type } = event;
-    this._debouncedHandleClick({
-      relatedTarget,
-      type: type === 'focusin' ? 'focus' : type,
-      details: getLaunchingDetails(event),
-    });
+    const { relatedTarget, type, which } = event;
+
+    if (type === 'click' || allowedOpenKeys.includes(which)) {
+      this._handleClick({
+        relatedTarget,
+        type,
+        details: getLaunchingDetails(event),
+      });
+    }
   }
 
   /**
    * Changes the shown/hidden state.
    * @param {string} state The new state.
-   * @param {Object} detail The detail of the event trigging this action.
+   * @param {object} detail The detail of the event trigging this action.
    * @param {Function} callback Callback called when change in state completes.
-   // */
+   */
   changeState(state, detail, callback) {
     if (!this.tooltip) {
       const tooltip = this.element.ownerDocument.querySelector(
@@ -141,6 +142,7 @@ class Tooltip extends mixin(
         refNode: this.element,
         classShown: this.options.classShown,
         offset: this.options.objMenuOffset,
+        contentNode: tooltip.querySelector(this.options.selectorContent),
       });
       this._hookOn(tooltip);
       this.children.push(this.tooltip);
@@ -156,47 +158,61 @@ class Tooltip extends mixin(
   }
 
   /**
-   * Attaches event handlers to show/hide the tooltip.
+   * Attaches event handlers to show the tooltip.
    * @param {Element} element The element to attach the events to.
    * @private
    */
   _hookOn(element) {
-    const hasFocusin = 'onfocusin' in window;
-    const focusinEventName = hasFocusin ? 'focusin' : 'focus';
-    [focusinEventName, 'blur', 'touchleave', 'touchcancel'].forEach(name => {
+    /**
+     * Setup the _handleClick function for displaying a tooltip
+     * @param {Event} evt - user initiated event
+     * @param {Integer[]} [allowedKeys] - allowed key codes the user may press to open the tooltip
+     * @private
+     */
+    const handleClickContextMenu = (evt, allowedKeys) => {
+      const { relatedTarget, type, which } = evt;
+      // Allow user to use `space` or `enter` to open tooltip
+      if (typeof allowedKeys === 'undefined' || allowedKeys.includes(which)) {
+        const hadContextMenu = this._hasContextMenu;
+        this._hasContextMenu = type === 'contextmenu';
+        this._handleClick({
+          relatedTarget,
+          type,
+          hadContextMenu,
+          details: getLaunchingDetails(evt),
+        });
+      }
+    };
+
+    this.manage(on(element, 'click', handleClickContextMenu, false));
+
+    if (this.element.tagName !== 'BUTTON') {
       this.manage(
         on(
-          element,
-          name,
+          this.element,
+          'keydown',
           event => {
-            const { relatedTarget, type } = event;
-            const hadContextMenu = this._hasContextMenu;
-            this._hasContextMenu = type === 'contextmenu';
-            this._debouncedHandleClick({
-              relatedTarget,
-              type: type === 'focusin' ? 'focus' : type,
-              hadContextMenu,
-              details: getLaunchingDetails(event),
-            });
+            handleClickContextMenu(event, allowedOpenKeys);
           },
-          name === focusinEventName && !hasFocusin
+          false
         )
       );
-    });
+    }
   }
 
   /**
    * Handles click/focus events.
-   * @param {Object} params The parameters.
+   * @param {object} params The parameters.
    * @param {Element} params.relatedTarget The element that focus went to. (For `blur` event)
    * @param {string} params.type The event type triggering this method.
    * @param {boolean} params.hadContextMenu
-   * @param {Object} params.details The event details.
+   * @param {object} params.details The event details.
    * @private
    */
   _handleClick({ relatedTarget, type, hadContextMenu, details }) {
     const state = {
-      focus: 'shown',
+      click: 'shown',
+      keydown: 'shown',
       blur: 'hidden',
       touchleave: 'hidden',
       touchcancel: 'hidden',
@@ -222,10 +238,11 @@ class Tooltip extends mixin(
     const { prefix } = settings;
     return {
       selectorInit: '[data-tooltip-trigger]',
+      selectorContent: `.${prefix}--tooltip__content`,
       classShown: `${prefix}--tooltip--shown`,
       attribTooltipTarget: 'data-tooltip-target',
       objMenuOffset: getMenuOffset,
-      initEventNames: ['focus'],
+      initEventNames: ['click', 'keydown'],
     };
   }
 }

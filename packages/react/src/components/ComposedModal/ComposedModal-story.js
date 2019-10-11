@@ -98,12 +98,8 @@ storiesOf('ComposedModal', module)
           </p>
         </ModalBody>
         <ModalFooter>
-          <Button
-            kind={props.composedModal().danger ? 'tertiary' : 'secondary'}>
-            Cancel
-          </Button>
-          <Button
-            kind={props.composedModal().danger ? 'danger--primary' : 'primary'}>
+          <Button kind="secondary">Cancel</Button>
+          <Button kind={props.composedModal().danger ? 'danger' : 'primary'}>
             Save
           </Button>
         </ModalFooter>

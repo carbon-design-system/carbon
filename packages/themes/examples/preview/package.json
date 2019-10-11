@@ -8,6 +8,7 @@
     "develop": "parcel index.html --no-cache"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "parcel-bundler": "^1.12.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"

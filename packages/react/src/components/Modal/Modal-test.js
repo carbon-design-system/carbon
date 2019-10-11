@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import Close20 from '@carbon/icons-react/lib/close/20';
+import { Close20 } from '@carbon/icons-react';
 import Modal from '../Modal';
 import ModalWrapper from '../ModalWrapper';
 import { shallow, mount } from 'enzyme';
@@ -109,10 +109,20 @@ describe('Modal', () => {
       const openClass = 'is-visible';
 
       expect(modalContainer.hasClass(openClass)).not.toEqual(true);
+      expect(
+        document.body.classList.contains('bx--body--with-modal-open')
+      ).not.toEqual(true);
       wrapper.setState({ isOpen: true });
       expect(wrapper.find(`.${prefix}--modal`).hasClass(openClass)).toEqual(
         true
       );
+      expect(
+        document.body.classList.contains('bx--body--with-modal-open')
+      ).toEqual(true);
+      wrapper.unmount();
+      expect(
+        document.body.classList.contains('bx--body--with-modal-open')
+      ).toEqual(false);
     });
 
     it('should set state to open when trigger button is clicked', () => {
@@ -147,13 +157,13 @@ describe('Modal', () => {
       const modal = wrapper.find(Modal);
       const div = modal.find(`.${prefix}--modal`);
       wrapper.setState({ isOpen: true });
-      div.simulate('click');
+      div.simulate('mousedown');
       expect(wrapper.state('isOpen')).toEqual(false);
     });
 
     it('should handle close keyDown events', () => {
       const onRequestClose = jest.fn();
-      const wrapper = mount(<Modal onRequestClose={onRequestClose} />);
+      const wrapper = mount(<Modal open onRequestClose={onRequestClose} />);
       wrapper.simulate('keyDown', { which: 26 });
       expect(onRequestClose).not.toBeCalled();
       wrapper.simulate('keyDown', { which: 27 });
@@ -163,7 +173,7 @@ describe('Modal', () => {
     it('should handle submit keyDown events with shouldSubmitOnEnter enabled', () => {
       const onRequestSubmit = jest.fn();
       const wrapper = mount(
-        <Modal onRequestSubmit={onRequestSubmit} shouldSubmitOnEnter />
+        <Modal open onRequestSubmit={onRequestSubmit} shouldSubmitOnEnter />
       );
       wrapper.simulate('keyDown', { which: 14 });
       expect(onRequestSubmit).not.toBeCalled();
@@ -173,7 +183,7 @@ describe('Modal', () => {
 
     it('should not handle submit keyDown events with shouldSubmitOnEnter not enabled', () => {
       const onRequestSubmit = jest.fn();
-      const wrapper = mount(<Modal onRequestSubmit={onRequestSubmit} />);
+      const wrapper = mount(<Modal open onRequestSubmit={onRequestSubmit} />);
       wrapper.simulate('keyDown', { which: 14 });
       expect(onRequestSubmit).not.toBeCalled();
       wrapper.simulate('keyDown', { which: 13 });

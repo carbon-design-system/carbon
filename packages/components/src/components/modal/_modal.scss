@@ -15,7 +15,6 @@
 @import '../../globals/scss/layer';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
-@import 'mixins';
 
 @import '../button/button';
 
@@ -55,13 +54,14 @@
     }
 
     .#{$prefix}--text-input,
-    .#{$prefix}--select-input {
+    .#{$prefix}--text-area,
+    .#{$prefix}--search-input,
+    .#{$prefix}--select-input,
+    .#{$prefix}--dropdown,
+    .#{$prefix}--dropdown-list,
+    .#{$prefix}--number input[type='number'] {
       background-color: $field-02;
     }
-  }
-
-  .#{$prefix}--modal--danger {
-    @include modal--color($support-01);
   }
 
   .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
@@ -96,7 +96,7 @@
 
   .#{$prefix}--modal-header,
   .#{$prefix}--modal-content {
-    width: 75%;
+    padding-right: 25%;
     padding-left: 1rem;
   }
 
@@ -130,6 +130,10 @@
     margin-bottom: $carbon--spacing-09;
     color: $text-01;
     font-weight: 400;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 
   .#{$prefix}--modal-content > * {
@@ -171,14 +175,22 @@
 
     &:focus {
       outline: none;
-      border-color: $interactive-01;
+      border-color: $focus;
     }
+  }
+
+  .#{$prefix}--modal-close::-moz-focus-inner {
+    border: 0;
   }
 
   .#{$prefix}--modal-close__icon {
     fill: $icon-01;
     height: rem(20px);
     width: rem(20px);
+  }
+
+  .#{$prefix}--body--with-modal-open {
+    overflow: hidden;
   }
 }
 

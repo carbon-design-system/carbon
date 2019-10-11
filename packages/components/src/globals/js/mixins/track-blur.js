@@ -14,18 +14,33 @@ function trackBlur(ToMix) {
      * Mix-in class to add an handler for losing focus.
      * @extends Handles
      * @param {HTMLElement} element The element working as this component.
-     * @param {Object} [options] The component options.
+     * @param {object} [options] The component options.
      */
     constructor(element, options) {
       super(element, options);
       const hasFocusin = 'onfocusin' in window;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
+      const focusoutEventName = hasFocusin ? 'focusout' : 'blur';
       this.manage(
         on(
           this.element.ownerDocument,
           focusinEventName,
           event => {
-            if (!this.element.contains(event.target)) {
+            if (
+              !(this.options.contentNode || this.element).contains(event.target)
+            ) {
+              this.handleBlur(event);
+            }
+          },
+          !hasFocusin
+        )
+      );
+      this.manage(
+        on(
+          this.element.ownerDocument,
+          focusoutEventName,
+          event => {
+            if (!event.relatedTarget) {
               this.handleBlur(event);
             }
           },

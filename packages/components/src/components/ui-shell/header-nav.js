@@ -90,7 +90,7 @@ export default class HeaderNav extends mixin(
    * properties in this object are overriden for the instance being create and
    * how {@linkcode HeaderNav.init .init()} works.
    * @member HeaderNav.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The data attribute to find side navs.
    */
   static get options() {

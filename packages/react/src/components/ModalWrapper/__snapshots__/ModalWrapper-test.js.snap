@@ -27,7 +27,6 @@ exports[`ModalWrapper should render 1`] = `
       iconDescription="Provide icon description if icon is used"
       kind="primary"
       onClick={[Function]}
-      small={false}
       tabIndex={0}
       type="button"
     >
@@ -71,12 +70,14 @@ exports[`ModalWrapper should render 1`] = `
           className="bx--modal bx--modal-tall"
           id="modal"
           onBlur={[Function]}
-          onClick={[Function]}
           onKeyDown={[Function]}
+          onMouseDown={[Function]}
           role="presentation"
           tabIndex={-1}
         >
           <div
+            aria-label={null}
+            aria-labelledby="bx--modal-header__label bx--modal-header__heading"
             aria-modal="true"
             className="bx--modal-container"
             role="dialog"
@@ -101,36 +102,41 @@ exports[`ModalWrapper should render 1`] = `
                 title="close the modal"
                 type="button"
               >
-                <Close20
+                <ForwardRef(Close20)
                   aria-label="close the modal"
                   className="bx--modal-close__icon"
-                  height={20}
-                  preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 32 32"
-                  width={20}
-                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <svg
+                  <Icon
                     aria-label="close the modal"
                     className="bx--modal-close__icon"
-                    focusable="false"
                     height={20}
                     preserveAspectRatio="xMidYMid meet"
-                    role="img"
-                    style={
-                      Object {
-                        "willChange": "transform",
-                      }
-                    }
                     viewBox="0 0 32 32"
                     width={20}
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path
-                      d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"
-                    />
-                  </svg>
-                </Close20>
+                    <svg
+                      aria-label="close the modal"
+                      className="bx--modal-close__icon"
+                      focusable="false"
+                      height={20}
+                      preserveAspectRatio="xMidYMid meet"
+                      role="img"
+                      style={
+                        Object {
+                          "willChange": "transform",
+                        }
+                      }
+                      viewBox="0 0 32 32"
+                      width={20}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                      />
+                    </svg>
+                  </Icon>
+                </ForwardRef(Close20)>
               </button>
             </div>
             <div
@@ -149,7 +155,6 @@ exports[`ModalWrapper should render 1`] = `
                 disabled={false}
                 kind="secondary"
                 onClick={[Function]}
-                small={false}
                 tabIndex={0}
                 type="button"
               >
@@ -180,12 +185,13 @@ exports[`ModalWrapper should render 1`] = `
                         height="20"
                         preserveAspectRatio="xMidYMid meet"
                         role="img"
+                        style="will-change: transform;"
                         viewBox="0 0 32 32"
                         width="20"
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
-                          d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"
+                          d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
                         />
                       </svg>
                     </button>,
@@ -193,7 +199,6 @@ exports[`ModalWrapper should render 1`] = `
                 }
                 kind="primary"
                 onClick={[Function]}
-                small={false}
                 tabIndex={0}
                 type="button"
               >
@@ -215,12 +220,13 @@ exports[`ModalWrapper should render 1`] = `
                           height="20"
                           preserveAspectRatio="xMidYMid meet"
                           role="img"
+                          style="will-change: transform;"
                           viewBox="0 0 32 32"
                           width="20"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"
+                            d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
                           />
                         </svg>
                       </button>,

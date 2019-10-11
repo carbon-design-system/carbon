@@ -94,7 +94,7 @@
   .#{$prefix}--toast-notification--warning
     .#{$prefix}--toast-notification__icon
     path[opacity='0'] {
-    fill: $text-01;
+    fill: $carbon__black-100;
     opacity: 1;
   }
 

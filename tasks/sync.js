@@ -20,7 +20,7 @@ const prettierOptions = {
 
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');
 const REPO_URL_BASE =
-  'https://github.com/carbon-design-system/carbon-components/tree/master/packages';
+  'https://github.com/carbon-design-system/carbon/tree/master/packages';
 
 // This is our default set of keywords to include in each `package.json` file
 const DEFAULT_KEYWORDS = [
@@ -44,6 +44,7 @@ const packageJsonFields = [
   'description',
   'version',
   'license',
+  'bin',
   'main',
   'module',
   'repository',
@@ -60,6 +61,7 @@ const packageJsonFields = [
   'devDependencies',
   'sideEffects',
   'eyeglass',
+  'eslintConfig',
   'prettier',
   'babel',
   'jest',
@@ -93,8 +95,7 @@ async function sync() {
   const packages = await Promise.all(
     packagePaths.map(async ({ basename, filepath, file, ...rest }) => {
       file.repository = `${REPO_URL_BASE}/${basename}`;
-      file.bugs =
-        'https://github.com/carbon-design-system/carbon-components/issues';
+      file.bugs = 'https://github.com/carbon-design-system/carbon/issues';
       file.license = 'Apache-2.0';
       file.publishConfig = {
         access: 'public',

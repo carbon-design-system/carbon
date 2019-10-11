@@ -19,7 +19,7 @@ class Loading extends mixin(createComponent, initComponentBySearch, handles) {
    * @extends InitComponentBySearch
    * @extends Handles
    * @param {HTMLElement} element The element working as a spinner.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @param {boolean} [options.active] `true` if this spinner should roll.
    */
   constructor(element, options) {
@@ -117,7 +117,7 @@ class Loading extends mixin(createComponent, initComponentBySearch, handles) {
    * If `options` is specified in the constructor, {@linkcode Loading.create .create()}, or {@linkcode Loading.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode Loading.init .init()} works.
    * @member Loading.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The CSS selector to find spinners.
    */
   static get options() {

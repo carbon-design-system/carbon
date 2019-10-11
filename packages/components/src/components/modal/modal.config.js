@@ -69,5 +69,18 @@ module.exports = {
         classCloseButton: `${prefix}--btn--secondary`,
       },
     },
+    {
+      name: 'scrolling',
+      label: 'Modal with scrolling content',
+      context: {
+        idSuffix: Math.random()
+          .toString(36)
+          .substr(2),
+        hasScrollingContent: true,
+        hasFooter: true,
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
+      },
+    },
   ],
 };

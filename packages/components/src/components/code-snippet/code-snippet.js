@@ -76,7 +76,7 @@ class CodeSnippet extends mixin(
    * or {@linkcode CodeSnippet.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode CodeSnippet.init .init()} works.
    * @member CodeSnippet.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The data attribute to find code snippet UIs.
    */
   static get options() {

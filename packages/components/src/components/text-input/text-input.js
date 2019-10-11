@@ -38,31 +38,11 @@ export default class TextInput extends mixin(
         }
       })
     );
-    this.manage(
-      on(this.element, 'input', event => {
-        if (event.target.maxLength < 0) {
-          return;
-        }
-        this._handleInput({ element, length: event.target.value.length });
-      })
-    );
   }
 
   /**
-   * Updates the character counter
-   * @param {Object} obj - The elements that can change in the component
-   * @param {HTMLElement} obj.element - The element functioning as a text field
-   * @param {HTMLElement} obj.length - The length of the text field value
-   */
-  _handleInput = ({ element, length }) => {
-    element.querySelector(
-      this.options.selectorCharCounter
-    ).textContent = length;
-  };
-
-  /**
    *
-   * @param {Object} obj - Object containing selectors and visibility status
+   * @param {object} obj - Object containing selectors and visibility status
    * @param {HTMLElement} obj.iconVisibilityOn - The element functioning as
    * the SVG icon for visibility on
    * @param {HTMLElement} obj.iconVisibilityOff - The element functioning as
@@ -74,29 +54,23 @@ export default class TextInput extends mixin(
     iconVisibilityOn,
     iconVisibilityOff,
     passwordIsVisible,
-    selectorPasswordVisibilityButton,
+    selectorPasswordVisibilityTooltip,
   }) => {
     if (passwordIsVisible) {
       iconVisibilityOn.setAttribute('hidden', true);
       iconVisibilityOff.removeAttribute('hidden');
-      selectorPasswordVisibilityButton.setAttribute(
-        'aria-label',
-        'Hide password'
-      );
+      selectorPasswordVisibilityTooltip.textContent = 'Hide password';
       return;
     }
     iconVisibilityOn.removeAttribute('hidden');
     iconVisibilityOff.setAttribute('hidden', true);
-    selectorPasswordVisibilityButton.setAttribute(
-      'aria-label',
-      'Show password'
-    );
+    selectorPasswordVisibilityTooltip.textContent = 'Show password';
   };
 
   /**
    * Toggles the visibility of the password in the input field and changes the
    * SVG icon indicating password visibility
-   * @param {Object} obj - The elements that can change in the component
+   * @param {object} obj - The elements that can change in the component
    * @param {HTMLElement} obj.element - The element functioning as a text field
    * @param {HTMLElement} obj.button - The button toggling password visibility
    */
@@ -113,14 +87,14 @@ export default class TextInput extends mixin(
       this.options.svgIconVisibilityOff
     );
     const input = element.querySelector(this.options.selectorPasswordField);
-    const selectorPasswordVisibilityButton = element.querySelector(
-      this.options.selectorPasswordVisibilityButton
+    const selectorPasswordVisibilityTooltip = element.querySelector(
+      this.options.selectorPasswordVisibilityTooltip
     );
     this._setIconVisibility({
       iconVisibilityOn,
       iconVisibilityOff,
       passwordIsVisible,
-      selectorPasswordVisibilityButton,
+      selectorPasswordVisibilityTooltip,
     });
     input.type = passwordIsVisible ? 'text' : 'password';
   };
@@ -140,11 +114,11 @@ export default class TextInput extends mixin(
     return {
       selectorInit: '[data-text-input]',
       selectorPasswordField: `.${prefix}--text-input[data-toggle-password-visibility]`,
-      selectorPasswordVisibilityButton: `.${prefix}--text-input--password__visibility`,
+      selectorPasswordVisibilityButton: `.${prefix}--text-input--password__visibility__toggle`,
+      selectorPasswordVisibilityTooltip: `.${prefix}--text-input--password__visibility__toggle > .${prefix}--assistive-text`,
       passwordIsVisible: `${prefix}--text-input--password-visible`,
       svgIconVisibilityOn: `svg.${prefix}--icon--visibility-on`,
       svgIconVisibilityOff: `svg.${prefix}--icon--visibility-off`,
-      selectorCharCounter: `.${prefix}--text-input--character-counter--length`,
     };
   }
 

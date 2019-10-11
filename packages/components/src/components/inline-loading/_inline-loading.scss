@@ -9,6 +9,7 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../loading/loading';
 @import 'keyframes';
 
 /// Inline loading styles
@@ -18,6 +19,7 @@
   .#{$prefix}--inline-loading {
     display: flex;
     width: 100%;
+    min-height: 2rem;
     align-items: center;
 
     .#{$prefix}--loading__svg circle {
@@ -44,9 +46,14 @@
   }
 
   .#{$prefix}--inline-loading__checkmark-container {
-    width: 0.75rem;
-    position: absolute;
-    top: 0.75rem;
+    fill: $interactive-04;
+
+    // For deprecated older markup
+    &.#{$prefix}--inline-loading__svg {
+      width: 0.75rem;
+      position: absolute;
+      top: 0.75rem;
+    }
 
     &[hidden] {
       display: none;
@@ -55,7 +62,7 @@
 
   .#{$prefix}--inline-loading__checkmark {
     fill: none;
-    stroke: $interactive-01;
+    stroke: $interactive-04;
     transform-origin: 50% 50%;
     stroke-width: 1.8;
     stroke-dasharray: 12;
@@ -65,8 +72,18 @@
     animation-fill-mode: forwards;
   }
 
+  .#{$prefix}--inline-loading--error {
+    fill: $support-01;
+    width: rem(16px);
+    height: rem(16px);
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
   .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
-    stroke: $interactive-01;
+    stroke: $interactive-04;
   }
   /* If IE11 Don't show check animation */
   @media screen and (-ms-high-contrast: active),

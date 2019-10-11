@@ -16,7 +16,7 @@ export default function(ToMix) {
      * If the given element indicates that it's an component of this class, instantiates it.
      * Otherwise, instantiates components by searching for components in the given node.
      * @param {Node} target The DOM node to instantiate components in. Should be a document or an element.
-     * @param {Object} [options] The component options.
+     * @param {object} [options] The component options.
      * @param {boolean} [options.selectorInit] The CSS selector to find components.
      */
     static init(target = document, options = {}) {

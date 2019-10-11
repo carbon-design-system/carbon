@@ -107,3 +107,16 @@ $custom-theme: map-merge(
     @include my-custom-token-component();
   }
 }
+
+.theme--white {
+  @include carbon--theme($carbon--theme--white, true);
+}
+.theme--g10 {
+  @include carbon--theme($carbon--theme--g10, true);
+}
+.theme--g90 {
+  @include carbon--theme($carbon--theme--g90, true);
+}
+.theme--g100 {
+  @include carbon--theme($carbon--theme--g100, true);
+}

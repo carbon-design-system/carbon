@@ -10,9 +10,11 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
-import rangePlugin from 'flatpickr/dist/plugins/rangePlugin';
 import { settings } from 'carbon-components';
 import DatePickerInput from '../DatePickerInput';
+import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
+import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
+import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -38,7 +40,7 @@ const monthToStr = (monthNumber, shorthand, locale) =>
   locale.months[shorthand ? 'shorthand' : 'longhand'][monthNumber];
 
 /**
- * @param {Object} config Plugin configuration.
+ * @param {object} config Plugin configuration.
  * @param {boolean} [config.shorthand] `true` to use shorthand month.
  * @param {string} config.selectorFlatpickrMonthYearContainer The CSS selector for the container of month/year selection UI.
  * @param {string} config.selectorFlatpickrYearContainer The CSS selector for the container of year selection UI.
@@ -105,6 +107,7 @@ const carbonFlatpickrMonthSelectPlugin = config => fp => {
 
   return {
     onMonthChange: updateCurrentMonth,
+    onValueUpdate: updateCurrentMonth,
     onOpen: updateCurrentMonth,
     onReady: [setupElements, updateCurrentMonth, register],
   };
@@ -271,14 +274,19 @@ export default class DatePicker extends Component {
     ]),
 
     /**
-     * The DOM element or selector the Flatpicker should be inserted into. `<body>` by default.
+     * The DOM element the Flatpicker should be inserted into. `<body>` by default.
      */
-    appendTo: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    appendTo: PropTypes.object,
 
     /**
      * The `change` event handler.
      */
     onChange: PropTypes.func,
+
+    /**
+     * The `close` event handler.
+     */
+    onClose: PropTypes.func,
 
     /**
      * The minimum date that a user can start picking from.
@@ -313,26 +321,25 @@ export default class DatePicker extends Component {
 
   componentDidMount() {
     const {
+      appendTo,
       datePickerType,
       dateFormat,
       locale,
-      onChange,
       minDate,
       maxDate,
       value,
+      onClose,
     } = this.props;
     if (datePickerType === 'single' || datePickerType === 'range') {
       const onHook = (electedDates, dateStr, instance) => {
         this.updateClassNames(instance);
       };
 
-      let appendToNode;
-
       // inputField ref might not be set in enzyme tests
       if (this.inputField) {
         this.cal = new flatpickr(this.inputField, {
           defaultDate: value,
-          appendTo: appendToNode,
+          appendTo,
           mode: datePickerType,
           allowInput: true,
           dateFormat: dateFormat,
@@ -341,7 +348,7 @@ export default class DatePicker extends Component {
           maxDate: maxDate,
           plugins: [
             datePickerType === 'range'
-              ? new rangePlugin({ input: this.toInputField, position: 'left' })
+              ? new carbonFlatpickrRangePlugin({ input: this.toInputField })
               : () => {},
             carbonFlatpickrMonthSelectPlugin({
               selectorFlatpickrMonthYearContainer: '.flatpickr-current-month',
@@ -349,15 +356,21 @@ export default class DatePicker extends Component {
               selectorFlatpickrCurrentMonth: '.cur-month',
               classFlatpickrCurrentMonth: 'cur-month',
             }),
+            carbonFlatpickrFixEventsPlugin({
+              inputFrom: this.inputField,
+              inputTo: this.toInputField,
+            }),
           ],
           clickOpens: true,
           nextArrow: this.rightArrowHTML(),
           prevArrow: this.leftArrowHTML(),
           onChange: (...args) => {
+            const { onChange } = this.props;
             if (onChange) {
               onChange(...args);
             }
           },
+          onClose,
           onReady: onHook,
           onMonthChange: onHook,
           onYearChange: onHook,
@@ -394,8 +407,12 @@ export default class DatePicker extends Component {
   addKeyboardEvents = cal => {
     if (this.inputField) {
       this.inputField.addEventListener('keydown', e => {
-        if (e.which === 40) {
-          cal.calendarContainer.focus();
+        if (match(e, keys.ArrowDown)) {
+          (
+            cal.selectedDateElem ||
+            cal.todayDateElem ||
+            cal.calendarContainer
+          ).focus();
         }
       });
       this.inputField.addEventListener('change', this.onChange);
@@ -404,6 +421,15 @@ export default class DatePicker extends Component {
       this.toInputField.addEventListener('blur', evt => {
         if (!this.cal.calendarContainer.contains(evt.relatedTarget)) {
           this.cal.close();
+        }
+      });
+      this.toInputField.addEventListener('keydown', e => {
+        if (match(e, keys.ArrowDown)) {
+          (
+            cal.selectedDateElem ||
+            cal.todayDateElem ||
+            cal.calendarContainer
+          ).focus();
         }
       });
       this.toInputField.addEventListener('change', this.onChange);

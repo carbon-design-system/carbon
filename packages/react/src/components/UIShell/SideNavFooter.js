@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Close20 from '@carbon/icons-react/lib/close/20';
-import ChevronRight20 from '@carbon/icons-react/lib/chevron--right/20';
+import { Close20, ChevronRight20 } from '@carbon/icons-react';
+
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
@@ -59,6 +59,12 @@ SideNavFooter.propTypes = {
    * with. Useful for controlling the expansion state of the side navigation.
    */
   onToggle: PropTypes.func.isRequired,
+
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded: PropTypes.bool,
 };
 
 SideNavFooter.defaultProps = {

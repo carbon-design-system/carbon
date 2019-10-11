@@ -39,6 +39,12 @@ $css--use-layer: true !default;
 /// @group feature-flags
 $css--reset: true !default;
 
+/// If true, include default type
+/// @access public
+/// @type Bool
+/// @group feature-flags
+$css--default-type: true !default;
+
 /// Used with `css--font-face` feature flag, if true, uses Plex font families instead of Helvetica
 /// @access public
 /// @type Bool

@@ -45,7 +45,7 @@
   }
 
   .#{$prefix}--password-input {
-    padding-right: rem(40px);
+    padding-right: $carbon--spacing-08;
   }
 
   .#{$prefix}--text-input::-webkit-input-placeholder {
@@ -56,72 +56,46 @@
     background-color: $field-02;
   }
 
-  // -----------------
-  // Character counter
-  // -----------------
-  .#{$prefix}--text-input__character-counter-title {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .#{$prefix}--text-input__character-counter-title
-    + .#{$prefix}--form__helper-text {
-    margin-top: rem(-6px);
-  }
-
-  .#{$prefix}--text-input__character-counter-title .#{$prefix}--label {
-    margin-right: rem(16px);
-  }
-
-  .#{$prefix}--text-input--character-counter {
-    margin-bottom: $carbon--spacing-03;
-    @include type-style('label-01');
-    color: $text-02;
-  }
-
-  .#{$prefix}--text-input--character-counter--disabled {
-    color: $disabled-02;
-  }
-
   //-----------------------------
   // Disabled & Error icon spacing
   //-----------------------------
   .#{$prefix}--text-input__field-wrapper {
     position: relative;
     display: flex;
-    width: 100%;
     align-items: center;
+    width: 100%;
 
     .#{$prefix}--text-input__invalid-icon {
       position: absolute;
-      right: rem(16px);
+      right: $carbon--spacing-05;
       fill: $support-01;
     }
 
+    // TODO: deprecate this style block
     .#{$prefix}--text-input--password__visibility {
       @include tooltip--trigger('icon', 'bottom');
       @include tooltip--placement('icon', 'bottom', 'center');
+    }
+
+    .#{$prefix}--text-input--password__visibility,
+    // TODO: remove selector above
+    .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
       position: absolute;
       height: rem(16px);
       width: rem(16px);
-      right: rem(16px);
+      right: $carbon--spacing-05;
       padding: 0;
       border: 0;
       background: none;
       cursor: pointer;
 
       svg {
-        fill: $brand-01;
-
-        &:hover {
-          fill: $hover-primary;
-        }
+        fill: $icon-02;
       }
     }
 
     .#{$prefix}--text-input--invalid {
-      padding-right: rem(40px);
+      padding-right: $carbon--spacing-08;
     }
 
     .#{$prefix}--text-input--invalid.#{$prefix}--password-input {
@@ -129,13 +103,24 @@
     }
 
     .#{$prefix}--text-input--invalid
-      + .#{$prefix}--text-input--password__visibility {
-      right: rem(40px);
+      + .#{$prefix}--text-input--password__visibility,
+    // TODO: remove selector above
+    .#{$prefix}--text-input--invalid
+      + .#{$prefix}--text-input--password__visibility__toggle {
+      right: $carbon--spacing-05;
     }
+  }
+
+  .#{$prefix}--password-input-wrapper .#{$prefix}--text-input__invalid-icon {
+    right: $carbon--spacing-08;
   }
 
   .#{$prefix}--text-input:disabled
     + .#{$prefix}--text-input--password__visibility
+    svg,
+  // TODO: remove selector above
+  .#{$prefix}--text-input:disabled
+    + .#{$prefix}--text-input--password__visibility__toggle
     svg {
     opacity: 0.5;
     cursor: not-allowed;
@@ -168,8 +153,10 @@
     @include focus-outline('invalid');
     box-shadow: none;
 
-    .#{$prefix}--text-input--password__visibility {
-      right: rem(40px);
+    .#{$prefix}--text-input--password__visibility,
+    // TODO: remove selector above
+    .#{$prefix}--text-input--password__visibility__toggle {
+      right: $carbon--spacing-08;
     }
   }
 }

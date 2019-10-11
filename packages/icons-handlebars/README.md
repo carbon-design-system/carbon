@@ -41,7 +41,7 @@ These attributes will be applied to the top-level `<svg>` node.
 
 We're always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md) ! 👀
+check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 

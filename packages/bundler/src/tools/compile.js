@@ -7,7 +7,6 @@
 
 'use strict';
 
-const path = require('path');
 const sass = require('node-sass');
 
 const defaultOptions = {
@@ -17,7 +16,7 @@ const defaultOptions = {
 function compile(filepaths, options) {
   return filepaths.map(
     filepath =>
-      new Promise((resolve, reject) => {
+      new Promise(resolve => {
         sass.render(
           {
             file: filepath,
@@ -25,6 +24,11 @@ function compile(filepaths, options) {
             ...options,
           },
           (error, result) => {
+            if (error) {
+              resolve({ error });
+              return;
+            }
+
             resolve({
               result,
               filepath,

@@ -62,7 +62,7 @@ export const breakpoints = {
   max: {
     width: rem(1584),
     columns: 16,
-    margin: rem(16),
+    margin: rem(24),
   },
 };
 

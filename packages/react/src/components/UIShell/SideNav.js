@@ -10,7 +10,8 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-import SideNavFooter from './SideNavFooter';
+// TO-DO: comment back in when footer is added for rails
+// import SideNavFooter from './SideNavFooter';
 
 const { prefix } = settings;
 
@@ -24,12 +25,20 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     children,
     onToggle,
     className: customClassName,
-    translateById: t,
+    // TO-DO: comment back in when footer is added for rails
+    // translateById: t,
     isFixedNav,
+    isRail,
+    isPersistent,
+    addFocusListeners,
+    addMouseListeners,
   } = props;
 
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useState(defaultExpanded);
+  const [expandedViaHoverState, setExpandedViaHoverState] = useState(
+    defaultExpanded
+  );
   const expanded = controlled ? expandedProp : expandedState;
   const handleToggle = (event, value = !expanded) => {
     if (!controlled) {
@@ -38,6 +47,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     if (onToggle) {
       onToggle(event, value);
     }
+    if (controlled || isRail) {
+      setExpandedViaHoverState(value);
+    }
   };
 
   const accessibilityLabel = {
@@ -45,34 +57,64 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     'aria-labelledby': ariaLabelledBy,
   };
 
-  const assistiveText = expanded
-    ? t('carbon.sidenav.state.open')
-    : t('carbon.sidenav.state.closed');
+  // TO-DO: comment back in when footer is added for rails
+  // const assistiveText = expanded
+  //   ? t('carbon.sidenav.state.open')
+  //   : t('carbon.sidenav.state.closed');
 
   const className = cx({
     [`${prefix}--side-nav`]: true,
-    [`${prefix}--side-nav--expanded`]: expanded,
+    [`${prefix}--side-nav--expanded`]: expanded || expandedViaHoverState,
     [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav,
+    [`${prefix}--side-nav--rail`]: isRail,
     [customClassName]: !!customClassName,
     [`${prefix}--side-nav--ux`]: isChildOfHeader,
+    [`${prefix}--side-nav--hidden`]: !isPersistent,
   });
 
+  const overlayClassName = cx({
+    [`${prefix}--side-nav__overlay`]: true,
+    [`${prefix}--side-nav__overlay-active`]: expanded,
+  });
+
+  let childrenToRender = children;
+
+  // if a rail, pass the expansion state as a prop, so children can update themselves to match
+  if (isRail) {
+    childrenToRender = React.Children.map(children, child => {
+      // if we are controlled, check for if we have hovered over or the expanded state, else just use the expanded state (uncontrolled)
+      let currentExpansionState = controlled
+        ? expandedViaHoverState || expanded
+        : expanded;
+      return React.cloneElement(child, {
+        isSideNavExpanded: currentExpansionState,
+      });
+    });
+  }
+
+  let eventHandlers = {};
+
+  if (addFocusListeners) {
+    eventHandlers.onFocus = event => handleToggle(event, true);
+    eventHandlers.onBlur = event => handleToggle(event, false);
+  }
+
+  if (addMouseListeners) {
+    eventHandlers.onMouseEnter = () => handleToggle(true, true);
+    eventHandlers.onMouseLeave = () => handleToggle(false, false);
+  }
+
   return (
-    <nav
-      ref={ref}
-      className={`${prefix}--side-nav__navigation ${className}`}
-      {...accessibilityLabel}
-      onFocus={event => handleToggle(event, true)}
-      onBlur={event => handleToggle(event, false)}>
-      {children}
-      {isFixedNav ? null : (
-        <SideNavFooter
-          assistiveText={assistiveText}
-          expanded={expanded}
-          onToggle={handleToggle}
-        />
-      )}
-    </nav>
+    <>
+      {isFixedNav ? null : <div className={overlayClassName} />}
+      <nav
+        ref={ref}
+        className={`${prefix}--side-nav__navigation ${className}`}
+        {...accessibilityLabel}
+        {...eventHandlers}>
+        {childrenToRender}
+      </nav>
+    </>
   );
 });
 
@@ -86,6 +128,10 @@ SideNav.defaultProps = {
   },
   defaultExpanded: false,
   isChildOfHeader: true,
+  isFixedNav: false,
+  isPersistent: true,
+  addFocusListeners: true,
+  addMouseListeners: true,
 };
 
 SideNav.propTypes = {
@@ -131,6 +177,31 @@ SideNav.propTypes = {
    * Optionally provide a custom class to apply to the underlying <li> node
    */
   isChildOfHeader: PropTypes.bool,
+
+  /**
+   * Optional prop to display the side nav rail.
+   */
+  isRail: PropTypes.bool,
+
+  /**
+   * Specify if sideNav is standalone
+   */
+  isFixedNav: PropTypes.bool,
+
+  /**
+   * Specify if the sideNav will be persistent above the lg breakpoint
+   */
+  isPersistent: PropTypes.bool,
+
+  /**
+   * Specify whether focus and blur listeners are added. They are by default.
+   */
+  addFocusListeners: PropTypes.bool,
+
+  /**
+   * Specify whether mouse entry/exit listeners are added. They are by default.
+   */
+  addMouseListeners: PropTypes.bool,
 };
 
 export default SideNav;

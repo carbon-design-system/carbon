@@ -260,13 +260,13 @@ If you're looking for `@carbon/type` API documentation, check out:
 If you're looking for more examples on how to use `@carbon/type`, we have some
 examples that you can check out:
 
-- [Styled-components](./examples/styled-components)
+- [styled-components](./examples/styled-components)
 
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md) ! 👀
+check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 

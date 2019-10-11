@@ -19,7 +19,7 @@ let iconsList = icons;
 /**
  * Returns a single icon Object
  * @param {string} name - "name" property of icon
- * @param {Object} [iconsObj=icons] - JSON Array of Objects
+ * @param {object} [iconsObj=icons] - JSON Array of Objects
  * @example
  * // Returns a single icon Object
  * this.findIcon('copy-code', icons.json);
@@ -40,7 +40,7 @@ export function findIcon(name, iconsObj = iconsList) {
  * Sets the icons list object from `carbon-icons`.
  * Doing so instead of having this module directly import `carbon-icons`
  * avoids the icons list being included in applications' bundles if only limited set of icons is in use.
- * @param {Object} list The icons list from `carbon-icons`.
+ * @param {object} list The icons list from `carbon-icons`.
  */
 export function setIconsList(list) {
   iconsList = list;
@@ -59,7 +59,7 @@ export function getSvgData(iconName) {
 }
 
 /**
- * @param {Object} svgData - JSON Object for an SVG icon
+ * @param {object} svgData - JSON Object for an SVG icon
  * @returns {ReactElement} Elements/Nodes for SVG
  * @example
  * // Returns SVG elements

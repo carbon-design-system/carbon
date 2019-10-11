@@ -25,13 +25,14 @@ const downshiftActions = {
   setHighlightedIndex: jest.fn(),
 };
 const clearInput = wrapper =>
-  wrapper.instance().handleOnInputValueChange('', downshiftActions);
+  wrapper.instance().handleOnStateChange({ inputValue: '' }, downshiftActions);
 
 describe('ComboBox', () => {
   let mockProps;
 
   beforeEach(() => {
     mockProps = {
+      id: 'test-combobox',
       items: generateItems(5, generateGenericItem),
       onChange: jest.fn(),
       placeholder: 'Filter...',
@@ -156,10 +157,14 @@ describe('ComboBox', () => {
     it('should set `inputValue` to an empty string if a falsey-y value is given', () => {
       const wrapper = mount(<ComboBox {...mockProps} />);
 
-      wrapper.instance().handleOnInputValueChange('foo', downshiftActions);
+      wrapper
+        .instance()
+        .handleOnStateChange({ inputValue: 'foo' }, downshiftActions);
       expect(wrapper.state('inputValue')).toBe('foo');
 
-      wrapper.instance().handleOnInputValueChange(null, downshiftActions);
+      wrapper
+        .instance()
+        .handleOnStateChange({ inputValue: null }, downshiftActions);
       expect(wrapper.state('inputValue')).toBe('');
     });
   });

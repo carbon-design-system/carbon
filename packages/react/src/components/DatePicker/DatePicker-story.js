@@ -31,6 +31,7 @@ const props = {
     id: 'date-picker',
     light: boolean('Light variant (light in <DatePicker>)', false),
     onChange: datePickerOnChangeActions('onPickerChange'),
+    onClose: action('onClose'),
   }),
   datePickerInput: () => ({
     id: 'date-picker-input-id',

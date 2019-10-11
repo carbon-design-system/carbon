@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import ChevronDown16 from '@carbon/icons-react/lib/chevron--down/16';
+import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import Copy from '../Copy';
 import CopyButton from '../CopyButton';

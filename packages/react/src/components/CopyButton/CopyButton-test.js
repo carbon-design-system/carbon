@@ -7,7 +7,7 @@
 
 import React from 'react';
 import CopyButton from '../CopyButton';
-import Copy16 from '@carbon/icons-react/lib/copy/16';
+import { Copy16 } from '@carbon/icons-react';
 import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
 
@@ -87,8 +87,8 @@ describe('CopyButton', () => {
       expect(feedbackWrapper.state().showFeedback).toBe(false);
       feedbackWrapper.simulate('click');
       expect(feedbackWrapper.state().showFeedback).toBe(true);
-      expect(setTimeout.mock.calls.length).toBe(1);
-      expect(setTimeout.mock.calls[0][1]).toBe(5000);
+      expect(setTimeout.mock.calls.length).toBe(2);
+      expect(setTimeout.mock.calls[1][1]).toBe(5000);
       jest.runAllTimers();
       expect(feedbackWrapper.state().showFeedback).toBe(false);
     });

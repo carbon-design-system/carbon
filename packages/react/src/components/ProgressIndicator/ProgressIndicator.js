@@ -9,9 +9,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
-import CheckmarkOutline16 from '@carbon/icons-react/lib/checkmark--outline/16';
-import Warning16 from '@carbon/icons-react/lib/warning/16';
-import { keys, matches } from '../../tools/key';
+import { CheckmarkOutline16, Warning16 } from '@carbon/icons-react';
+import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
 const defaultRenderLabel = props => <p {...props} />;
@@ -39,32 +38,28 @@ export const ProgressStep = ({ ...props }) => {
   });
 
   const handleKeyDown = e => {
-    if (matches(e, [keys.ENTER, keys.SPACE])) {
+    if (matches(e, [keys.Enter, keys.Space])) {
       onClick();
     }
   };
 
-  const currentSvg = current && (
-    <svg>
-      <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
-      <title>{description}</title>
-    </svg>
-  );
-
-  const completeSvg = complete && (
-    <CheckmarkOutline16 aria-label={description} role="img">
-      <title>{description}</title>
-    </CheckmarkOutline16>
-  );
-  const incompleteSvg = (() => {
-    if (complete) {
-      return null;
-    }
+  const SVGIcon = ({ complete, current, description, invalid, prefix }) => {
     if (invalid) {
+      return <Warning16 className={`${prefix}--progress__warning`} />;
+    }
+    if (current) {
       return (
-        <Warning16 className={`${prefix}--progress__warning`}>
+        <svg>
+          <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
           <title>{description}</title>
-        </Warning16>
+        </svg>
+      );
+    }
+    if (complete) {
+      return (
+        <CheckmarkOutline16>
+          <title>{description}</title>
+        </CheckmarkOutline16>
       );
     }
     return (
@@ -73,10 +68,10 @@ export const ProgressStep = ({ ...props }) => {
         <path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z" />
       </svg>
     );
-  })();
+  };
 
   return (
-    <li className={classes}>
+    <li className={classes} aria-disabled={disabled}>
       <div
         className={classnames(`${prefix}--progress-step-button`, {
           [`${prefix}--progress-step-button--unclickable`]: !onClick || current,
@@ -85,7 +80,13 @@ export const ProgressStep = ({ ...props }) => {
         tabIndex={!current && onClick ? 0 : -1}
         onClick={!current ? onClick : undefined}
         onKeyDown={handleKeyDown}>
-        {currentSvg || completeSvg || incompleteSvg}
+        <SVGIcon
+          complete={complete}
+          current={current}
+          description={description}
+          invalid={invalid}
+          prefix={prefix}
+        />
         <ProgressStepLabel className={`${prefix}--progress-label`}>
           {label}
         </ProgressStepLabel>

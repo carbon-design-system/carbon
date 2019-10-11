@@ -111,11 +111,15 @@
   - [✅carbon--motion [function]](#carbon--motion-function)
   - [✅carbon--motion [mixin]](#carbon--motion-mixin)
 - [@carbon/themes](#carbonthemes)
+  - [❌custom-property-prefix [variable]](#custom-property-prefix-variable)
+  - [❌custom-property [mixin]](#custom-property-mixin)
+  - [❌should-emit [function]](#should-emit-function)
   - [✅carbon--theme [mixin]](#carbon--theme-mixin)
   - [✅carbon--theme--white [variable]](#carbon--theme--white-variable)
   - [✅carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
   - [✅carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
   - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
+  - [✅carbon--theme--v9 [variable]](#carbon--theme--v9-variable)
   - [✅carbon--theme [variable]](#carbon--theme-variable)
   - [✅interactive-01 [variable]](#interactive-01-variable)
   - [✅interactive-02 [variable]](#interactive-02-variable)
@@ -131,10 +135,12 @@
   - [✅text-02 [variable]](#text-02-variable)
   - [✅text-03 [variable]](#text-03-variable)
   - [✅text-04 [variable]](#text-04-variable)
+  - [✅text-05 [variable]](#text-05-variable)
   - [✅icon-01 [variable]](#icon-01-variable)
   - [✅icon-02 [variable]](#icon-02-variable)
   - [✅icon-03 [variable]](#icon-03-variable)
   - [✅link-01 [variable]](#link-01-variable)
+  - [✅inverse-link [variable]](#inverse-link-variable)
   - [✅field-01 [variable]](#field-01-variable)
   - [✅field-02 [variable]](#field-02-variable)
   - [✅inverse-01 [variable]](#inverse-01-variable)
@@ -148,7 +154,9 @@
   - [✅inverse-support-03 [variable]](#inverse-support-03-variable)
   - [✅inverse-support-04 [variable]](#inverse-support-04-variable)
   - [✅overlay-01 [variable]](#overlay-01-variable)
+  - [✅danger [variable]](#danger-variable)
   - [✅focus [variable]](#focus-variable)
+  - [✅inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [✅hover-primary [variable]](#hover-primary-variable)
   - [✅active-primary [variable]](#active-primary-variable)
   - [✅hover-primary-text [variable]](#hover-primary-text-variable)
@@ -160,6 +168,7 @@
   - [✅active-ui [variable]](#active-ui-variable)
   - [✅selected-ui [variable]](#selected-ui-variable)
   - [✅hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [✅inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [✅hover-danger [variable]](#hover-danger-variable)
   - [✅active-danger [variable]](#active-danger-variable)
   - [✅hover-row [variable]](#hover-row-variable)
@@ -175,6 +184,37 @@
   - [✅⚠️brand-03 [variable]](#brand-03-variable)
   - [✅⚠️active-01 [variable]](#active-01-variable)
   - [✅⚠️hover-field [variable]](#hover-field-variable)
+  - [✅caption-01 [variable]](#caption-01-variable)
+  - [✅label-01 [variable]](#label-01-variable)
+  - [✅helper-text-01 [variable]](#helper-text-01-variable)
+  - [✅body-short-01 [variable]](#body-short-01-variable)
+  - [✅body-long-01 [variable]](#body-long-01-variable)
+  - [✅body-short-02 [variable]](#body-short-02-variable)
+  - [✅body-long-02 [variable]](#body-long-02-variable)
+  - [✅code-01 [variable]](#code-01-variable)
+  - [✅code-02 [variable]](#code-02-variable)
+  - [✅heading-01 [variable]](#heading-01-variable)
+  - [✅productive-heading-01 [variable]](#productive-heading-01-variable)
+  - [✅heading-02 [variable]](#heading-02-variable)
+  - [✅productive-heading-02 [variable]](#productive-heading-02-variable)
+  - [✅productive-heading-03 [variable]](#productive-heading-03-variable)
+  - [✅productive-heading-04 [variable]](#productive-heading-04-variable)
+  - [✅productive-heading-05 [variable]](#productive-heading-05-variable)
+  - [✅productive-heading-06 [variable]](#productive-heading-06-variable)
+  - [✅productive-heading-07 [variable]](#productive-heading-07-variable)
+  - [✅expressive-heading-01 [variable]](#expressive-heading-01-variable)
+  - [✅expressive-heading-02 [variable]](#expressive-heading-02-variable)
+  - [✅expressive-heading-03 [variable]](#expressive-heading-03-variable)
+  - [✅expressive-heading-04 [variable]](#expressive-heading-04-variable)
+  - [✅expressive-heading-05 [variable]](#expressive-heading-05-variable)
+  - [✅expressive-heading-06 [variable]](#expressive-heading-06-variable)
+  - [✅expressive-paragraph-01 [variable]](#expressive-paragraph-01-variable)
+  - [✅quotation-01 [variable]](#quotation-01-variable)
+  - [✅quotation-02 [variable]](#quotation-02-variable)
+  - [✅display-01 [variable]](#display-01-variable)
+  - [✅display-02 [variable]](#display-02-variable)
+  - [✅display-03 [variable]](#display-03-variable)
+  - [✅display-04 [variable]](#display-04-variable)
 - [@carbon/type](#carbontype)
   - [✅carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [✅carbon--font-families [variable]](#carbon--font-families-variable)
@@ -186,6 +226,7 @@
   - [✅carbon--font-face-mono [mixin]](#carbon--font-face-mono-mixin)
   - [✅prefix [variable]](#prefix-variable)
   - [✅carbon--type-reset [mixin]](#carbon--type-reset-mixin)
+  - [✅carbon--default-type [mixin]](#carbon--default-type-mixin)
   - [✅carbon--font-face-sans [mixin]](#carbon--font-face-sans-mixin)
   - [✅carbon--get-type-size [function]](#carbon--get-type-size-function)
   - [✅carbon--type-scale [variable]](#carbon--type-scale-variable)
@@ -230,6 +271,8 @@
   - [✅strip-unit [function]](#strip-unit-function)
   - [✅fluid-type [mixin]](#fluid-type-mixin)
   - [✅fluid-type-size [mixin]](#fluid-type-size-mixin)
+  - [❌custom-property-prefix [variable]](#custom-property-prefix-variable)
+  - [❌custom-properties [mixin]](#custom-properties-mixin)
   - [✅carbon--type-style [mixin]](#carbon--type-style-mixin)
 
 <!-- tocstop -->
@@ -246,265 +289,267 @@ Define color variables
 ```scss
 @mixin ibm--colors() {
   $ibm-color__black-100: #000000 !default !global;
-  $ibm-color__blue-10: #edf4ff !default !global;
-  $ibm-color__blue-20: #c9deff !default !global;
-  $ibm-color__blue-30: #97c1ff !default !global;
-  $ibm-color__blue-40: #6ea6ff !default !global;
-  $ibm-color__blue-50: #408bfc !default !global;
-  $ibm-color__blue-60: #0062ff !default !global;
-  $ibm-color__blue-70: #054ada !default !global;
-  $ibm-color__blue-80: #0530ad !default !global;
-  $ibm-color__blue-90: #061f80 !default !global;
-  $ibm-color__blue-100: #051243 !default !global;
+  $ibm-color__blue-10: #edf5ff !default !global;
+  $ibm-color__blue-20: #d0e2ff !default !global;
+  $ibm-color__blue-30: #a6c8ff !default !global;
+  $ibm-color__blue-40: #78a9ff !default !global;
+  $ibm-color__blue-50: #4589ff !default !global;
+  $ibm-color__blue-60: #0f62fe !default !global;
+  $ibm-color__blue-70: #0043ce !default !global;
+  $ibm-color__blue-80: #002d9c !default !global;
+  $ibm-color__blue-90: #001d6c !default !global;
+  $ibm-color__blue-100: #001141 !default !global;
   $ibm-color__cool-gray-10: #f2f4f8 !default !global;
-  $ibm-color__cool-gray-20: #d5d9e0 !default !global;
-  $ibm-color__cool-gray-30: #b9bfc7 !default !global;
-  $ibm-color__cool-gray-40: #9fa5ad !default !global;
-  $ibm-color__cool-gray-50: #868d95 !default !global;
+  $ibm-color__cool-gray-20: #dde1e6 !default !global;
+  $ibm-color__cool-gray-30: #c1c7cd !default !global;
+  $ibm-color__cool-gray-40: #a2a9b0 !default !global;
+  $ibm-color__cool-gray-50: #878d96 !default !global;
   $ibm-color__cool-gray-60: #697077 !default !global;
-  $ibm-color__cool-gray-70: #50565b !default !global;
-  $ibm-color__cool-gray-80: #373d42 !default !global;
-  $ibm-color__cool-gray-90: #242a2e !default !global;
-  $ibm-color__cool-gray-100: #13171a !default !global;
-  $ibm-color__cyan-10: #e3f6ff !default !global;
-  $ibm-color__cyan-20: #b3e6ff !default !global;
-  $ibm-color__cyan-30: #6ccaff !default !global;
-  $ibm-color__cyan-40: #30b0ff !default !global;
-  $ibm-color__cyan-50: #1191e6 !default !global;
+  $ibm-color__cool-gray-70: #4d5358 !default !global;
+  $ibm-color__cool-gray-80: #343a3f !default !global;
+  $ibm-color__cool-gray-90: #21272a !default !global;
+  $ibm-color__cool-gray-100: #121619 !default !global;
+  $ibm-color__cyan-10: #e5f6ff !default !global;
+  $ibm-color__cyan-20: #bae6ff !default !global;
+  $ibm-color__cyan-30: #82cfff !default !global;
+  $ibm-color__cyan-40: #33b1ff !default !global;
+  $ibm-color__cyan-50: #1192e8 !default !global;
   $ibm-color__cyan-60: #0072c3 !default !global;
-  $ibm-color__cyan-70: #0058a1 !default !global;
-  $ibm-color__cyan-80: #003d73 !default !global;
-  $ibm-color__cyan-90: #002b50 !default !global;
-  $ibm-color__cyan-100: #07192b !default !global;
-  $ibm-color__gray-10: #f3f3f3 !default !global;
-  $ibm-color__gray-20: #dcdcdc !default !global;
-  $ibm-color__gray-30: #bebebe !default !global;
-  $ibm-color__gray-40: #a4a4a4 !default !global;
-  $ibm-color__gray-50: #8c8c8c !default !global;
+  $ibm-color__cyan-70: #00539a !default !global;
+  $ibm-color__cyan-80: #003a6d !default !global;
+  $ibm-color__cyan-90: #012749 !default !global;
+  $ibm-color__cyan-100: #061727 !default !global;
+  $ibm-color__gray-10: #f4f4f4 !default !global;
+  $ibm-color__gray-20: #e0e0e0 !default !global;
+  $ibm-color__gray-30: #c6c6c6 !default !global;
+  $ibm-color__gray-40: #a8a8a8 !default !global;
+  $ibm-color__gray-50: #8d8d8d !default !global;
   $ibm-color__gray-60: #6f6f6f !default !global;
-  $ibm-color__gray-70: #565656 !default !global;
-  $ibm-color__gray-80: #3d3d3d !default !global;
-  $ibm-color__gray-90: #282828 !default !global;
-  $ibm-color__gray-100: #171717 !default !global;
-  $ibm-color__green-10: #dafbe4 !default !global;
-  $ibm-color__green-20: #9deeb2 !default !global;
-  $ibm-color__green-30: #56d679 !default !global;
-  $ibm-color__green-40: #3dbb61 !default !global;
+  $ibm-color__gray-70: #525252 !default !global;
+  $ibm-color__gray-80: #393939 !default !global;
+  $ibm-color__gray-90: #262626 !default !global;
+  $ibm-color__gray-100: #161616 !default !global;
+  $ibm-color__green-10: #defbe6 !default !global;
+  $ibm-color__green-20: #a7f0ba !default !global;
+  $ibm-color__green-30: #6fdc8c !default !global;
+  $ibm-color__green-40: #42be65 !default !global;
   $ibm-color__green-50: #24a148 !default !global;
   $ibm-color__green-60: #198038 !default !global;
-  $ibm-color__green-70: #10642a !default !global;
-  $ibm-color__green-80: #054719 !default !global;
-  $ibm-color__green-90: #01330f !default !global;
-  $ibm-color__green-100: #081b09 !default !global;
-  $ibm-color__magenta-10: #fff0f6 !default !global;
-  $ibm-color__magenta-20: #ffcfe1 !default !global;
-  $ibm-color__magenta-30: #ffa0c2 !default !global;
-  $ibm-color__magenta-40: #fa75a6 !default !global;
-  $ibm-color__magenta-50: #ee538b !default !global;
-  $ibm-color__magenta-60: #d12765 !default !global;
-  $ibm-color__magenta-70: #a11950 !default !global;
-  $ibm-color__magenta-80: #760a3a !default !global;
-  $ibm-color__magenta-90: #57002b !default !global;
-  $ibm-color__magenta-100: #2a0a16 !default !global;
-  $ibm-color__orange-40: #fc7b1e !default !global;
-  $ibm-color__purple-10: #f7f1ff !default !global;
-  $ibm-color__purple-20: #e6d6ff !default !global;
-  $ibm-color__purple-30: #d0b0ff !default !global;
-  $ibm-color__purple-40: #bb8eff !default !global;
-  $ibm-color__purple-50: #a66efa !default !global;
+  $ibm-color__green-70: #0e6027 !default !global;
+  $ibm-color__green-80: #044317 !default !global;
+  $ibm-color__green-90: #022d0d !default !global;
+  $ibm-color__green-100: #071908 !default !global;
+  $ibm-color__magenta-10: #fff0f7 !default !global;
+  $ibm-color__magenta-20: #ffd6e8 !default !global;
+  $ibm-color__magenta-30: #ffafd2 !default !global;
+  $ibm-color__magenta-40: #ff7eb6 !default !global;
+  $ibm-color__magenta-50: #ee5396 !default !global;
+  $ibm-color__magenta-60: #d12771 !default !global;
+  $ibm-color__magenta-70: #9f1853 !default !global;
+  $ibm-color__magenta-80: #740937 !default !global;
+  $ibm-color__magenta-90: #510224 !default !global;
+  $ibm-color__magenta-100: #2a0a18 !default !global;
+  $ibm-color__orange-40: #ff832b !default !global;
+  $ibm-color__purple-10: #f6f2ff !default !global;
+  $ibm-color__purple-20: #e8daff !default !global;
+  $ibm-color__purple-30: #d4bbff !default !global;
+  $ibm-color__purple-40: #be95ff !default !global;
+  $ibm-color__purple-50: #a56eff !default !global;
   $ibm-color__purple-60: #8a3ffc !default !global;
-  $ibm-color__purple-70: #6e32c9 !default !global;
-  $ibm-color__purple-80: #4f2196 !default !global;
-  $ibm-color__purple-90: #38146b !default !global;
-  $ibm-color__purple-100: #1e1033 !default !global;
-  $ibm-color__red-10: #fff0f1 !default !global;
-  $ibm-color__red-20: #fcd0d3 !default !global;
-  $ibm-color__red-30: #ffa4a9 !default !global;
-  $ibm-color__red-40: #ff767c !default !global;
-  $ibm-color__red-50: #fb4b53 !default !global;
+  $ibm-color__purple-70: #6929c4 !default !global;
+  $ibm-color__purple-80: #491d8b !default !global;
+  $ibm-color__purple-90: #31135e !default !global;
+  $ibm-color__purple-100: #1c0f30 !default !global;
+  $ibm-color__red-10: #fff1f1 !default !global;
+  $ibm-color__red-20: #ffd7d9 !default !global;
+  $ibm-color__red-30: #ffb3b8 !default !global;
+  $ibm-color__red-40: #ff8389 !default !global;
+  $ibm-color__red-50: #fa4d56 !default !global;
   $ibm-color__red-60: #da1e28 !default !global;
-  $ibm-color__red-70: #a51920 !default !global;
+  $ibm-color__red-70: #a2191f !default !global;
   $ibm-color__red-80: #750e13 !default !global;
-  $ibm-color__red-90: #570408 !default !global;
-  $ibm-color__red-100: #2c080a !default !global;
-  $ibm-color__teal-10: #dbfbfb !default !global;
-  $ibm-color__teal-20: #92eeee !default !global;
-  $ibm-color__teal-30: #20d5d2 !default !global;
-  $ibm-color__teal-40: #00bab6 !default !global;
-  $ibm-color__teal-50: #009c98 !default !global;
+  $ibm-color__red-90: #520408 !default !global;
+  $ibm-color__red-100: #2d0709 !default !global;
+  $ibm-color__teal-10: #d9fbfb !default !global;
+  $ibm-color__teal-20: #9ef0f0 !default !global;
+  $ibm-color__teal-30: #3ddbd9 !default !global;
+  $ibm-color__teal-40: #08bdba !default !global;
+  $ibm-color__teal-50: #009d9a !default !global;
   $ibm-color__teal-60: #007d79 !default !global;
-  $ibm-color__teal-70: #006161 !default !global;
-  $ibm-color__teal-80: #004548 !default !global;
-  $ibm-color__teal-90: #003137 !default !global;
+  $ibm-color__teal-70: #005d5d !default !global;
+  $ibm-color__teal-80: #004144 !default !global;
+  $ibm-color__teal-90: #022b30 !default !global;
   $ibm-color__teal-100: #081a1c !default !global;
-  $ibm-color__warm-gray-10: #f7f3f1 !default !global;
-  $ibm-color__warm-gray-20: #e0dbda !default !global;
-  $ibm-color__warm-gray-30: #c1bcbb !default !global;
-  $ibm-color__warm-gray-40: #a7a2a2 !default !global;
+  $ibm-color__warm-gray-10: #f7f3f2 !default !global;
+  $ibm-color__warm-gray-20: #e5e0df !default !global;
+  $ibm-color__warm-gray-30: #cac5c4 !default !global;
+  $ibm-color__warm-gray-40: #ada8a8 !default !global;
   $ibm-color__warm-gray-50: #8f8b8b !default !global;
-  $ibm-color__warm-gray-60: #726e6e !default !global;
-  $ibm-color__warm-gray-70: #595555 !default !global;
-  $ibm-color__warm-gray-80: #403c3c !default !global;
-  $ibm-color__warm-gray-90: #2b2828 !default !global;
-  $ibm-color__warm-gray-100: #1a1717 !default !global;
+  $ibm-color__warm-gray-60: #736f6f !default !global;
+  $ibm-color__warm-gray-70: #565151 !default !global;
+  $ibm-color__warm-gray-80: #3c3838 !default !global;
+  $ibm-color__warm-gray-90: #272525 !default !global;
+  $ibm-color__warm-gray-100: #171414 !default !global;
   $ibm-color__white-0: #ffffff !default !global;
   $ibm-color__yellow-20: #fdd13a !default !global;
+  $ibm-color__yellow-30: #f1c21b !default !global;
   $ibm-color-map: (
     'black': (
       100: #000000,
     ),
     'blue': (
-      10: #edf4ff,
-      20: #c9deff,
-      30: #97c1ff,
-      40: #6ea6ff,
-      50: #408bfc,
-      60: #0062ff,
-      70: #054ada,
-      80: #0530ad,
-      90: #061f80,
-      100: #051243,
+      10: #edf5ff,
+      20: #d0e2ff,
+      30: #a6c8ff,
+      40: #78a9ff,
+      50: #4589ff,
+      60: #0f62fe,
+      70: #0043ce,
+      80: #002d9c,
+      90: #001d6c,
+      100: #001141,
     ),
     'cool-gray': (
       10: #f2f4f8,
-      20: #d5d9e0,
-      30: #b9bfc7,
-      40: #9fa5ad,
-      50: #868d95,
+      20: #dde1e6,
+      30: #c1c7cd,
+      40: #a2a9b0,
+      50: #878d96,
       60: #697077,
-      70: #50565b,
-      80: #373d42,
-      90: #242a2e,
-      100: #13171a,
+      70: #4d5358,
+      80: #343a3f,
+      90: #21272a,
+      100: #121619,
     ),
     'coolGray': (
       10: #f2f4f8,
-      20: #d5d9e0,
-      30: #b9bfc7,
-      40: #9fa5ad,
-      50: #868d95,
+      20: #dde1e6,
+      30: #c1c7cd,
+      40: #a2a9b0,
+      50: #878d96,
       60: #697077,
-      70: #50565b,
-      80: #373d42,
-      90: #242a2e,
-      100: #13171a,
+      70: #4d5358,
+      80: #343a3f,
+      90: #21272a,
+      100: #121619,
     ),
     'cyan': (
-      10: #e3f6ff,
-      20: #b3e6ff,
-      30: #6ccaff,
-      40: #30b0ff,
-      50: #1191e6,
+      10: #e5f6ff,
+      20: #bae6ff,
+      30: #82cfff,
+      40: #33b1ff,
+      50: #1192e8,
       60: #0072c3,
-      70: #0058a1,
-      80: #003d73,
-      90: #002b50,
-      100: #07192b,
+      70: #00539a,
+      80: #003a6d,
+      90: #012749,
+      100: #061727,
     ),
     'gray': (
-      10: #f3f3f3,
-      20: #dcdcdc,
-      30: #bebebe,
-      40: #a4a4a4,
-      50: #8c8c8c,
+      10: #f4f4f4,
+      20: #e0e0e0,
+      30: #c6c6c6,
+      40: #a8a8a8,
+      50: #8d8d8d,
       60: #6f6f6f,
-      70: #565656,
-      80: #3d3d3d,
-      90: #282828,
-      100: #171717,
+      70: #525252,
+      80: #393939,
+      90: #262626,
+      100: #161616,
     ),
     'green': (
-      10: #dafbe4,
-      20: #9deeb2,
-      30: #56d679,
-      40: #3dbb61,
+      10: #defbe6,
+      20: #a7f0ba,
+      30: #6fdc8c,
+      40: #42be65,
       50: #24a148,
       60: #198038,
-      70: #10642a,
-      80: #054719,
-      90: #01330f,
-      100: #081b09,
+      70: #0e6027,
+      80: #044317,
+      90: #022d0d,
+      100: #071908,
     ),
     'magenta': (
-      10: #fff0f6,
-      20: #ffcfe1,
-      30: #ffa0c2,
-      40: #fa75a6,
-      50: #ee538b,
-      60: #d12765,
-      70: #a11950,
-      80: #760a3a,
-      90: #57002b,
-      100: #2a0a16,
+      10: #fff0f7,
+      20: #ffd6e8,
+      30: #ffafd2,
+      40: #ff7eb6,
+      50: #ee5396,
+      60: #d12771,
+      70: #9f1853,
+      80: #740937,
+      90: #510224,
+      100: #2a0a18,
     ),
     'orange': (
-      40: #fc7b1e,
+      40: #ff832b,
     ),
     'purple': (
-      10: #f7f1ff,
-      20: #e6d6ff,
-      30: #d0b0ff,
-      40: #bb8eff,
-      50: #a66efa,
+      10: #f6f2ff,
+      20: #e8daff,
+      30: #d4bbff,
+      40: #be95ff,
+      50: #a56eff,
       60: #8a3ffc,
-      70: #6e32c9,
-      80: #4f2196,
-      90: #38146b,
-      100: #1e1033,
+      70: #6929c4,
+      80: #491d8b,
+      90: #31135e,
+      100: #1c0f30,
     ),
     'red': (
-      10: #fff0f1,
-      20: #fcd0d3,
-      30: #ffa4a9,
-      40: #ff767c,
-      50: #fb4b53,
+      10: #fff1f1,
+      20: #ffd7d9,
+      30: #ffb3b8,
+      40: #ff8389,
+      50: #fa4d56,
       60: #da1e28,
-      70: #a51920,
+      70: #a2191f,
       80: #750e13,
-      90: #570408,
-      100: #2c080a,
+      90: #520408,
+      100: #2d0709,
     ),
     'teal': (
-      10: #dbfbfb,
-      20: #92eeee,
-      30: #20d5d2,
-      40: #00bab6,
-      50: #009c98,
+      10: #d9fbfb,
+      20: #9ef0f0,
+      30: #3ddbd9,
+      40: #08bdba,
+      50: #009d9a,
       60: #007d79,
-      70: #006161,
-      80: #004548,
-      90: #003137,
+      70: #005d5d,
+      80: #004144,
+      90: #022b30,
       100: #081a1c,
     ),
     'warm-gray': (
-      10: #f7f3f1,
-      20: #e0dbda,
-      30: #c1bcbb,
-      40: #a7a2a2,
+      10: #f7f3f2,
+      20: #e5e0df,
+      30: #cac5c4,
+      40: #ada8a8,
       50: #8f8b8b,
-      60: #726e6e,
-      70: #595555,
-      80: #403c3c,
-      90: #2b2828,
-      100: #1a1717,
+      60: #736f6f,
+      70: #565151,
+      80: #3c3838,
+      90: #272525,
+      100: #171414,
     ),
     'warmGray': (
-      10: #f7f3f1,
-      20: #e0dbda,
-      30: #c1bcbb,
-      40: #a7a2a2,
+      10: #f7f3f2,
+      20: #e5e0df,
+      30: #cac5c4,
+      40: #ada8a8,
       50: #8f8b8b,
-      60: #726e6e,
-      70: #595555,
-      80: #403c3c,
-      90: #2b2828,
-      100: #1a1717,
+      60: #736f6f,
+      70: #565151,
+      80: #3c3838,
+      90: #272525,
+      100: #171414,
     ),
     'white': (
       0: #ffffff,
     ),
     'yellow': (
       20: #fdd13a,
+      30: #f1c21b,
     ),
   ) !default !global;
 }
@@ -525,369 +570,372 @@ Define color variables
 ```scss
 @mixin carbon--colors() {
   $carbon--black-100: #000000 !default !global;
-  $carbon--blue-10: #edf4ff !default !global;
-  $carbon--blue-20: #c9deff !default !global;
-  $carbon--blue-30: #97c1ff !default !global;
-  $carbon--blue-40: #6ea6ff !default !global;
-  $carbon--blue-50: #408bfc !default !global;
-  $carbon--blue-60: #0062ff !default !global;
-  $carbon--blue-70: #054ada !default !global;
-  $carbon--blue-80: #0530ad !default !global;
-  $carbon--blue-90: #061f80 !default !global;
-  $carbon--blue-100: #051243 !default !global;
+  $carbon--blue-10: #edf5ff !default !global;
+  $carbon--blue-20: #d0e2ff !default !global;
+  $carbon--blue-30: #a6c8ff !default !global;
+  $carbon--blue-40: #78a9ff !default !global;
+  $carbon--blue-50: #4589ff !default !global;
+  $carbon--blue-60: #0f62fe !default !global;
+  $carbon--blue-70: #0043ce !default !global;
+  $carbon--blue-80: #002d9c !default !global;
+  $carbon--blue-90: #001d6c !default !global;
+  $carbon--blue-100: #001141 !default !global;
   $carbon--cool-gray-10: #f2f4f8 !default !global;
-  $carbon--cool-gray-20: #d5d9e0 !default !global;
-  $carbon--cool-gray-30: #b9bfc7 !default !global;
-  $carbon--cool-gray-40: #9fa5ad !default !global;
-  $carbon--cool-gray-50: #868d95 !default !global;
+  $carbon--cool-gray-20: #dde1e6 !default !global;
+  $carbon--cool-gray-30: #c1c7cd !default !global;
+  $carbon--cool-gray-40: #a2a9b0 !default !global;
+  $carbon--cool-gray-50: #878d96 !default !global;
   $carbon--cool-gray-60: #697077 !default !global;
-  $carbon--cool-gray-70: #50565b !default !global;
-  $carbon--cool-gray-80: #373d42 !default !global;
-  $carbon--cool-gray-90: #242a2e !default !global;
-  $carbon--cool-gray-100: #13171a !default !global;
-  $carbon--cyan-10: #e3f6ff !default !global;
-  $carbon--cyan-20: #b3e6ff !default !global;
-  $carbon--cyan-30: #6ccaff !default !global;
-  $carbon--cyan-40: #30b0ff !default !global;
-  $carbon--cyan-50: #1191e6 !default !global;
+  $carbon--cool-gray-70: #4d5358 !default !global;
+  $carbon--cool-gray-80: #343a3f !default !global;
+  $carbon--cool-gray-90: #21272a !default !global;
+  $carbon--cool-gray-100: #121619 !default !global;
+  $carbon--cyan-10: #e5f6ff !default !global;
+  $carbon--cyan-20: #bae6ff !default !global;
+  $carbon--cyan-30: #82cfff !default !global;
+  $carbon--cyan-40: #33b1ff !default !global;
+  $carbon--cyan-50: #1192e8 !default !global;
   $carbon--cyan-60: #0072c3 !default !global;
-  $carbon--cyan-70: #0058a1 !default !global;
-  $carbon--cyan-80: #003d73 !default !global;
-  $carbon--cyan-90: #002b50 !default !global;
-  $carbon--cyan-100: #07192b !default !global;
-  $carbon--gray-10: #f3f3f3 !default !global;
-  $carbon--gray-20: #dcdcdc !default !global;
-  $carbon--gray-30: #bebebe !default !global;
-  $carbon--gray-40: #a4a4a4 !default !global;
-  $carbon--gray-50: #8c8c8c !default !global;
+  $carbon--cyan-70: #00539a !default !global;
+  $carbon--cyan-80: #003a6d !default !global;
+  $carbon--cyan-90: #012749 !default !global;
+  $carbon--cyan-100: #061727 !default !global;
+  $carbon--gray-10: #f4f4f4 !default !global;
+  $carbon--gray-20: #e0e0e0 !default !global;
+  $carbon--gray-30: #c6c6c6 !default !global;
+  $carbon--gray-40: #a8a8a8 !default !global;
+  $carbon--gray-50: #8d8d8d !default !global;
   $carbon--gray-60: #6f6f6f !default !global;
-  $carbon--gray-70: #565656 !default !global;
-  $carbon--gray-80: #3d3d3d !default !global;
-  $carbon--gray-90: #282828 !default !global;
-  $carbon--gray-100: #171717 !default !global;
-  $carbon--green-10: #dafbe4 !default !global;
-  $carbon--green-20: #9deeb2 !default !global;
-  $carbon--green-30: #56d679 !default !global;
-  $carbon--green-40: #3dbb61 !default !global;
+  $carbon--gray-70: #525252 !default !global;
+  $carbon--gray-80: #393939 !default !global;
+  $carbon--gray-90: #262626 !default !global;
+  $carbon--gray-100: #161616 !default !global;
+  $carbon--green-10: #defbe6 !default !global;
+  $carbon--green-20: #a7f0ba !default !global;
+  $carbon--green-30: #6fdc8c !default !global;
+  $carbon--green-40: #42be65 !default !global;
   $carbon--green-50: #24a148 !default !global;
   $carbon--green-60: #198038 !default !global;
-  $carbon--green-70: #10642a !default !global;
-  $carbon--green-80: #054719 !default !global;
-  $carbon--green-90: #01330f !default !global;
-  $carbon--green-100: #081b09 !default !global;
-  $carbon--magenta-10: #fff0f6 !default !global;
-  $carbon--magenta-20: #ffcfe1 !default !global;
-  $carbon--magenta-30: #ffa0c2 !default !global;
-  $carbon--magenta-40: #fa75a6 !default !global;
-  $carbon--magenta-50: #ee538b !default !global;
-  $carbon--magenta-60: #d12765 !default !global;
-  $carbon--magenta-70: #a11950 !default !global;
-  $carbon--magenta-80: #760a3a !default !global;
-  $carbon--magenta-90: #57002b !default !global;
-  $carbon--magenta-100: #2a0a16 !default !global;
-  $carbon--orange-40: #fc7b1e !default !global;
-  $carbon--purple-10: #f7f1ff !default !global;
-  $carbon--purple-20: #e6d6ff !default !global;
-  $carbon--purple-30: #d0b0ff !default !global;
-  $carbon--purple-40: #bb8eff !default !global;
-  $carbon--purple-50: #a66efa !default !global;
+  $carbon--green-70: #0e6027 !default !global;
+  $carbon--green-80: #044317 !default !global;
+  $carbon--green-90: #022d0d !default !global;
+  $carbon--green-100: #071908 !default !global;
+  $carbon--magenta-10: #fff0f7 !default !global;
+  $carbon--magenta-20: #ffd6e8 !default !global;
+  $carbon--magenta-30: #ffafd2 !default !global;
+  $carbon--magenta-40: #ff7eb6 !default !global;
+  $carbon--magenta-50: #ee5396 !default !global;
+  $carbon--magenta-60: #d12771 !default !global;
+  $carbon--magenta-70: #9f1853 !default !global;
+  $carbon--magenta-80: #740937 !default !global;
+  $carbon--magenta-90: #510224 !default !global;
+  $carbon--magenta-100: #2a0a18 !default !global;
+  $carbon--orange-40: #ff832b !default !global;
+  $carbon--purple-10: #f6f2ff !default !global;
+  $carbon--purple-20: #e8daff !default !global;
+  $carbon--purple-30: #d4bbff !default !global;
+  $carbon--purple-40: #be95ff !default !global;
+  $carbon--purple-50: #a56eff !default !global;
   $carbon--purple-60: #8a3ffc !default !global;
-  $carbon--purple-70: #6e32c9 !default !global;
-  $carbon--purple-80: #4f2196 !default !global;
-  $carbon--purple-90: #38146b !default !global;
-  $carbon--purple-100: #1e1033 !default !global;
-  $carbon--red-10: #fff0f1 !default !global;
-  $carbon--red-20: #fcd0d3 !default !global;
-  $carbon--red-30: #ffa4a9 !default !global;
-  $carbon--red-40: #ff767c !default !global;
-  $carbon--red-50: #fb4b53 !default !global;
+  $carbon--purple-70: #6929c4 !default !global;
+  $carbon--purple-80: #491d8b !default !global;
+  $carbon--purple-90: #31135e !default !global;
+  $carbon--purple-100: #1c0f30 !default !global;
+  $carbon--red-10: #fff1f1 !default !global;
+  $carbon--red-20: #ffd7d9 !default !global;
+  $carbon--red-30: #ffb3b8 !default !global;
+  $carbon--red-40: #ff8389 !default !global;
+  $carbon--red-50: #fa4d56 !default !global;
   $carbon--red-60: #da1e28 !default !global;
-  $carbon--red-70: #a51920 !default !global;
+  $carbon--red-70: #a2191f !default !global;
   $carbon--red-80: #750e13 !default !global;
-  $carbon--red-90: #570408 !default !global;
-  $carbon--red-100: #2c080a !default !global;
-  $carbon--teal-10: #dbfbfb !default !global;
-  $carbon--teal-20: #92eeee !default !global;
-  $carbon--teal-30: #20d5d2 !default !global;
-  $carbon--teal-40: #00bab6 !default !global;
-  $carbon--teal-50: #009c98 !default !global;
+  $carbon--red-90: #520408 !default !global;
+  $carbon--red-100: #2d0709 !default !global;
+  $carbon--teal-10: #d9fbfb !default !global;
+  $carbon--teal-20: #9ef0f0 !default !global;
+  $carbon--teal-30: #3ddbd9 !default !global;
+  $carbon--teal-40: #08bdba !default !global;
+  $carbon--teal-50: #009d9a !default !global;
   $carbon--teal-60: #007d79 !default !global;
-  $carbon--teal-70: #006161 !default !global;
-  $carbon--teal-80: #004548 !default !global;
-  $carbon--teal-90: #003137 !default !global;
+  $carbon--teal-70: #005d5d !default !global;
+  $carbon--teal-80: #004144 !default !global;
+  $carbon--teal-90: #022b30 !default !global;
   $carbon--teal-100: #081a1c !default !global;
-  $carbon--warm-gray-10: #f7f3f1 !default !global;
-  $carbon--warm-gray-20: #e0dbda !default !global;
-  $carbon--warm-gray-30: #c1bcbb !default !global;
-  $carbon--warm-gray-40: #a7a2a2 !default !global;
+  $carbon--warm-gray-10: #f7f3f2 !default !global;
+  $carbon--warm-gray-20: #e5e0df !default !global;
+  $carbon--warm-gray-30: #cac5c4 !default !global;
+  $carbon--warm-gray-40: #ada8a8 !default !global;
   $carbon--warm-gray-50: #8f8b8b !default !global;
-  $carbon--warm-gray-60: #726e6e !default !global;
-  $carbon--warm-gray-70: #595555 !default !global;
-  $carbon--warm-gray-80: #403c3c !default !global;
-  $carbon--warm-gray-90: #2b2828 !default !global;
-  $carbon--warm-gray-100: #1a1717 !default !global;
+  $carbon--warm-gray-60: #736f6f !default !global;
+  $carbon--warm-gray-70: #565151 !default !global;
+  $carbon--warm-gray-80: #3c3838 !default !global;
+  $carbon--warm-gray-90: #272525 !default !global;
+  $carbon--warm-gray-100: #171414 !default !global;
   $carbon--white-0: #ffffff !default !global;
   $carbon--yellow-20: #fdd13a !default !global;
+  $carbon--yellow-30: #f1c21b !default !global;
   $black-100: #000000 !default !global;
-  $blue-10: #edf4ff !default !global;
-  $blue-20: #c9deff !default !global;
-  $blue-30: #97c1ff !default !global;
-  $blue-40: #6ea6ff !default !global;
-  $blue-50: #408bfc !default !global;
-  $blue-60: #0062ff !default !global;
-  $blue-70: #054ada !default !global;
-  $blue-80: #0530ad !default !global;
-  $blue-90: #061f80 !default !global;
-  $blue-100: #051243 !default !global;
+  $blue-10: #edf5ff !default !global;
+  $blue-20: #d0e2ff !default !global;
+  $blue-30: #a6c8ff !default !global;
+  $blue-40: #78a9ff !default !global;
+  $blue-50: #4589ff !default !global;
+  $blue-60: #0f62fe !default !global;
+  $blue-70: #0043ce !default !global;
+  $blue-80: #002d9c !default !global;
+  $blue-90: #001d6c !default !global;
+  $blue-100: #001141 !default !global;
   $cool-gray-10: #f2f4f8 !default !global;
-  $cool-gray-20: #d5d9e0 !default !global;
-  $cool-gray-30: #b9bfc7 !default !global;
-  $cool-gray-40: #9fa5ad !default !global;
-  $cool-gray-50: #868d95 !default !global;
+  $cool-gray-20: #dde1e6 !default !global;
+  $cool-gray-30: #c1c7cd !default !global;
+  $cool-gray-40: #a2a9b0 !default !global;
+  $cool-gray-50: #878d96 !default !global;
   $cool-gray-60: #697077 !default !global;
-  $cool-gray-70: #50565b !default !global;
-  $cool-gray-80: #373d42 !default !global;
-  $cool-gray-90: #242a2e !default !global;
-  $cool-gray-100: #13171a !default !global;
-  $cyan-10: #e3f6ff !default !global;
-  $cyan-20: #b3e6ff !default !global;
-  $cyan-30: #6ccaff !default !global;
-  $cyan-40: #30b0ff !default !global;
-  $cyan-50: #1191e6 !default !global;
+  $cool-gray-70: #4d5358 !default !global;
+  $cool-gray-80: #343a3f !default !global;
+  $cool-gray-90: #21272a !default !global;
+  $cool-gray-100: #121619 !default !global;
+  $cyan-10: #e5f6ff !default !global;
+  $cyan-20: #bae6ff !default !global;
+  $cyan-30: #82cfff !default !global;
+  $cyan-40: #33b1ff !default !global;
+  $cyan-50: #1192e8 !default !global;
   $cyan-60: #0072c3 !default !global;
-  $cyan-70: #0058a1 !default !global;
-  $cyan-80: #003d73 !default !global;
-  $cyan-90: #002b50 !default !global;
-  $cyan-100: #07192b !default !global;
-  $gray-10: #f3f3f3 !default !global;
-  $gray-20: #dcdcdc !default !global;
-  $gray-30: #bebebe !default !global;
-  $gray-40: #a4a4a4 !default !global;
-  $gray-50: #8c8c8c !default !global;
+  $cyan-70: #00539a !default !global;
+  $cyan-80: #003a6d !default !global;
+  $cyan-90: #012749 !default !global;
+  $cyan-100: #061727 !default !global;
+  $gray-10: #f4f4f4 !default !global;
+  $gray-20: #e0e0e0 !default !global;
+  $gray-30: #c6c6c6 !default !global;
+  $gray-40: #a8a8a8 !default !global;
+  $gray-50: #8d8d8d !default !global;
   $gray-60: #6f6f6f !default !global;
-  $gray-70: #565656 !default !global;
-  $gray-80: #3d3d3d !default !global;
-  $gray-90: #282828 !default !global;
-  $gray-100: #171717 !default !global;
-  $green-10: #dafbe4 !default !global;
-  $green-20: #9deeb2 !default !global;
-  $green-30: #56d679 !default !global;
-  $green-40: #3dbb61 !default !global;
+  $gray-70: #525252 !default !global;
+  $gray-80: #393939 !default !global;
+  $gray-90: #262626 !default !global;
+  $gray-100: #161616 !default !global;
+  $green-10: #defbe6 !default !global;
+  $green-20: #a7f0ba !default !global;
+  $green-30: #6fdc8c !default !global;
+  $green-40: #42be65 !default !global;
   $green-50: #24a148 !default !global;
   $green-60: #198038 !default !global;
-  $green-70: #10642a !default !global;
-  $green-80: #054719 !default !global;
-  $green-90: #01330f !default !global;
-  $green-100: #081b09 !default !global;
-  $magenta-10: #fff0f6 !default !global;
-  $magenta-20: #ffcfe1 !default !global;
-  $magenta-30: #ffa0c2 !default !global;
-  $magenta-40: #fa75a6 !default !global;
-  $magenta-50: #ee538b !default !global;
-  $magenta-60: #d12765 !default !global;
-  $magenta-70: #a11950 !default !global;
-  $magenta-80: #760a3a !default !global;
-  $magenta-90: #57002b !default !global;
-  $magenta-100: #2a0a16 !default !global;
-  $orange-40: #fc7b1e !default !global;
-  $purple-10: #f7f1ff !default !global;
-  $purple-20: #e6d6ff !default !global;
-  $purple-30: #d0b0ff !default !global;
-  $purple-40: #bb8eff !default !global;
-  $purple-50: #a66efa !default !global;
+  $green-70: #0e6027 !default !global;
+  $green-80: #044317 !default !global;
+  $green-90: #022d0d !default !global;
+  $green-100: #071908 !default !global;
+  $magenta-10: #fff0f7 !default !global;
+  $magenta-20: #ffd6e8 !default !global;
+  $magenta-30: #ffafd2 !default !global;
+  $magenta-40: #ff7eb6 !default !global;
+  $magenta-50: #ee5396 !default !global;
+  $magenta-60: #d12771 !default !global;
+  $magenta-70: #9f1853 !default !global;
+  $magenta-80: #740937 !default !global;
+  $magenta-90: #510224 !default !global;
+  $magenta-100: #2a0a18 !default !global;
+  $orange-40: #ff832b !default !global;
+  $purple-10: #f6f2ff !default !global;
+  $purple-20: #e8daff !default !global;
+  $purple-30: #d4bbff !default !global;
+  $purple-40: #be95ff !default !global;
+  $purple-50: #a56eff !default !global;
   $purple-60: #8a3ffc !default !global;
-  $purple-70: #6e32c9 !default !global;
-  $purple-80: #4f2196 !default !global;
-  $purple-90: #38146b !default !global;
-  $purple-100: #1e1033 !default !global;
-  $red-10: #fff0f1 !default !global;
-  $red-20: #fcd0d3 !default !global;
-  $red-30: #ffa4a9 !default !global;
-  $red-40: #ff767c !default !global;
-  $red-50: #fb4b53 !default !global;
+  $purple-70: #6929c4 !default !global;
+  $purple-80: #491d8b !default !global;
+  $purple-90: #31135e !default !global;
+  $purple-100: #1c0f30 !default !global;
+  $red-10: #fff1f1 !default !global;
+  $red-20: #ffd7d9 !default !global;
+  $red-30: #ffb3b8 !default !global;
+  $red-40: #ff8389 !default !global;
+  $red-50: #fa4d56 !default !global;
   $red-60: #da1e28 !default !global;
-  $red-70: #a51920 !default !global;
+  $red-70: #a2191f !default !global;
   $red-80: #750e13 !default !global;
-  $red-90: #570408 !default !global;
-  $red-100: #2c080a !default !global;
-  $teal-10: #dbfbfb !default !global;
-  $teal-20: #92eeee !default !global;
-  $teal-30: #20d5d2 !default !global;
-  $teal-40: #00bab6 !default !global;
-  $teal-50: #009c98 !default !global;
+  $red-90: #520408 !default !global;
+  $red-100: #2d0709 !default !global;
+  $teal-10: #d9fbfb !default !global;
+  $teal-20: #9ef0f0 !default !global;
+  $teal-30: #3ddbd9 !default !global;
+  $teal-40: #08bdba !default !global;
+  $teal-50: #009d9a !default !global;
   $teal-60: #007d79 !default !global;
-  $teal-70: #006161 !default !global;
-  $teal-80: #004548 !default !global;
-  $teal-90: #003137 !default !global;
+  $teal-70: #005d5d !default !global;
+  $teal-80: #004144 !default !global;
+  $teal-90: #022b30 !default !global;
   $teal-100: #081a1c !default !global;
-  $warm-gray-10: #f7f3f1 !default !global;
-  $warm-gray-20: #e0dbda !default !global;
-  $warm-gray-30: #c1bcbb !default !global;
-  $warm-gray-40: #a7a2a2 !default !global;
+  $warm-gray-10: #f7f3f2 !default !global;
+  $warm-gray-20: #e5e0df !default !global;
+  $warm-gray-30: #cac5c4 !default !global;
+  $warm-gray-40: #ada8a8 !default !global;
   $warm-gray-50: #8f8b8b !default !global;
-  $warm-gray-60: #726e6e !default !global;
-  $warm-gray-70: #595555 !default !global;
-  $warm-gray-80: #403c3c !default !global;
-  $warm-gray-90: #2b2828 !default !global;
-  $warm-gray-100: #1a1717 !default !global;
+  $warm-gray-60: #736f6f !default !global;
+  $warm-gray-70: #565151 !default !global;
+  $warm-gray-80: #3c3838 !default !global;
+  $warm-gray-90: #272525 !default !global;
+  $warm-gray-100: #171414 !default !global;
   $white-0: #ffffff !default !global;
   $yellow-20: #fdd13a !default !global;
+  $yellow-30: #f1c21b !default !global;
   $carbon--colors: (
     'black': (
       100: #000000,
     ),
     'blue': (
-      10: #edf4ff,
-      20: #c9deff,
-      30: #97c1ff,
-      40: #6ea6ff,
-      50: #408bfc,
-      60: #0062ff,
-      70: #054ada,
-      80: #0530ad,
-      90: #061f80,
-      100: #051243,
+      10: #edf5ff,
+      20: #d0e2ff,
+      30: #a6c8ff,
+      40: #78a9ff,
+      50: #4589ff,
+      60: #0f62fe,
+      70: #0043ce,
+      80: #002d9c,
+      90: #001d6c,
+      100: #001141,
     ),
     'cool-gray': (
       10: #f2f4f8,
-      20: #d5d9e0,
-      30: #b9bfc7,
-      40: #9fa5ad,
-      50: #868d95,
+      20: #dde1e6,
+      30: #c1c7cd,
+      40: #a2a9b0,
+      50: #878d96,
       60: #697077,
-      70: #50565b,
-      80: #373d42,
-      90: #242a2e,
-      100: #13171a,
+      70: #4d5358,
+      80: #343a3f,
+      90: #21272a,
+      100: #121619,
     ),
     'coolGray': (
       10: #f2f4f8,
-      20: #d5d9e0,
-      30: #b9bfc7,
-      40: #9fa5ad,
-      50: #868d95,
+      20: #dde1e6,
+      30: #c1c7cd,
+      40: #a2a9b0,
+      50: #878d96,
       60: #697077,
-      70: #50565b,
-      80: #373d42,
-      90: #242a2e,
-      100: #13171a,
+      70: #4d5358,
+      80: #343a3f,
+      90: #21272a,
+      100: #121619,
     ),
     'cyan': (
-      10: #e3f6ff,
-      20: #b3e6ff,
-      30: #6ccaff,
-      40: #30b0ff,
-      50: #1191e6,
+      10: #e5f6ff,
+      20: #bae6ff,
+      30: #82cfff,
+      40: #33b1ff,
+      50: #1192e8,
       60: #0072c3,
-      70: #0058a1,
-      80: #003d73,
-      90: #002b50,
-      100: #07192b,
+      70: #00539a,
+      80: #003a6d,
+      90: #012749,
+      100: #061727,
     ),
     'gray': (
-      10: #f3f3f3,
-      20: #dcdcdc,
-      30: #bebebe,
-      40: #a4a4a4,
-      50: #8c8c8c,
+      10: #f4f4f4,
+      20: #e0e0e0,
+      30: #c6c6c6,
+      40: #a8a8a8,
+      50: #8d8d8d,
       60: #6f6f6f,
-      70: #565656,
-      80: #3d3d3d,
-      90: #282828,
-      100: #171717,
+      70: #525252,
+      80: #393939,
+      90: #262626,
+      100: #161616,
     ),
     'green': (
-      10: #dafbe4,
-      20: #9deeb2,
-      30: #56d679,
-      40: #3dbb61,
+      10: #defbe6,
+      20: #a7f0ba,
+      30: #6fdc8c,
+      40: #42be65,
       50: #24a148,
       60: #198038,
-      70: #10642a,
-      80: #054719,
-      90: #01330f,
-      100: #081b09,
+      70: #0e6027,
+      80: #044317,
+      90: #022d0d,
+      100: #071908,
     ),
     'magenta': (
-      10: #fff0f6,
-      20: #ffcfe1,
-      30: #ffa0c2,
-      40: #fa75a6,
-      50: #ee538b,
-      60: #d12765,
-      70: #a11950,
-      80: #760a3a,
-      90: #57002b,
-      100: #2a0a16,
+      10: #fff0f7,
+      20: #ffd6e8,
+      30: #ffafd2,
+      40: #ff7eb6,
+      50: #ee5396,
+      60: #d12771,
+      70: #9f1853,
+      80: #740937,
+      90: #510224,
+      100: #2a0a18,
     ),
     'orange': (
-      40: #fc7b1e,
+      40: #ff832b,
     ),
     'purple': (
-      10: #f7f1ff,
-      20: #e6d6ff,
-      30: #d0b0ff,
-      40: #bb8eff,
-      50: #a66efa,
+      10: #f6f2ff,
+      20: #e8daff,
+      30: #d4bbff,
+      40: #be95ff,
+      50: #a56eff,
       60: #8a3ffc,
-      70: #6e32c9,
-      80: #4f2196,
-      90: #38146b,
-      100: #1e1033,
+      70: #6929c4,
+      80: #491d8b,
+      90: #31135e,
+      100: #1c0f30,
     ),
     'red': (
-      10: #fff0f1,
-      20: #fcd0d3,
-      30: #ffa4a9,
-      40: #ff767c,
-      50: #fb4b53,
+      10: #fff1f1,
+      20: #ffd7d9,
+      30: #ffb3b8,
+      40: #ff8389,
+      50: #fa4d56,
       60: #da1e28,
-      70: #a51920,
+      70: #a2191f,
       80: #750e13,
-      90: #570408,
-      100: #2c080a,
+      90: #520408,
+      100: #2d0709,
     ),
     'teal': (
-      10: #dbfbfb,
-      20: #92eeee,
-      30: #20d5d2,
-      40: #00bab6,
-      50: #009c98,
+      10: #d9fbfb,
+      20: #9ef0f0,
+      30: #3ddbd9,
+      40: #08bdba,
+      50: #009d9a,
       60: #007d79,
-      70: #006161,
-      80: #004548,
-      90: #003137,
+      70: #005d5d,
+      80: #004144,
+      90: #022b30,
       100: #081a1c,
     ),
     'warm-gray': (
-      10: #f7f3f1,
-      20: #e0dbda,
-      30: #c1bcbb,
-      40: #a7a2a2,
+      10: #f7f3f2,
+      20: #e5e0df,
+      30: #cac5c4,
+      40: #ada8a8,
       50: #8f8b8b,
-      60: #726e6e,
-      70: #595555,
-      80: #403c3c,
-      90: #2b2828,
-      100: #1a1717,
+      60: #736f6f,
+      70: #565151,
+      80: #3c3838,
+      90: #272525,
+      100: #171414,
     ),
     'warmGray': (
-      10: #f7f3f1,
-      20: #e0dbda,
-      30: #c1bcbb,
-      40: #a7a2a2,
+      10: #f7f3f2,
+      20: #e5e0df,
+      30: #cac5c4,
+      40: #ada8a8,
       50: #8f8b8b,
-      60: #726e6e,
-      70: #595555,
-      80: #403c3c,
-      90: #2b2828,
-      100: #1a1717,
+      60: #736f6f,
+      70: #565151,
+      80: #3c3838,
+      90: #272525,
+      100: #171414,
     ),
     'white': (
       0: #ffffff,
     ),
     'yellow': (
       20: #fdd13a,
+      30: #f1c21b,
     ),
   ) !default !global;
 }
@@ -1496,6 +1544,7 @@ $prefix: 'bx';
   - [carbon--hang [mixin]](#carbon--hang-mixin)
   - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
   - [carbon--grid [mixin]](#carbon--grid-mixin)
+  - [custom-property [mixin]](#custom-property-mixin)
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
 
 ## @carbon/icons
@@ -1509,7 +1558,7 @@ Makes SVGs accessible in high contrast mode
 
 ```scss
 @mixin carbon--icons() {
-  @media screen and (-ms-high-contract: active) {
+  @media screen and (-ms-high-contrast: active) {
     svg {
       fill: ButtonText;
     }
@@ -1641,7 +1690,7 @@ $carbon--grid-breakpoints: (
   ),
   max: (
     columns: 16,
-    margin: carbon--rem(16px),
+    margin: carbon--rem(24px),
     width: carbon--rem(1584px),
   ),
 );
@@ -3283,6 +3332,71 @@ Set the transition-timing-function for a given easing and motion mode
 
 ## @carbon/themes
 
+### ❌custom-property-prefix [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$custom-property-prefix: 'cds';
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [custom-properties [mixin]](#custom-properties-mixin)
+
+### ❌custom-property [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin custom-property() {
+  @if type-of($value) == map {
+    @each $property, $property-value in $value {
+      // Only support one-level of depth for values that are maps. This is to
+      // avoid bringing properties like `breakpoints` on type tokens
+      @if type-of($property-value) != map {
+        @include custom-property('#{$name}-#{$property}', $property-value);
+      }
+    }
+  } @else {
+    --#{$prefix}-#{$name}: #{$value};
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Requires**:
+  - [prefix [variable]](#prefix-variable)
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ❌should-emit [function]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function should-emit() {
+  @if $emit-difference == false {
+    @return true;
+  }
+  @return map-get($theme-a, $token) != map-get($theme-b, $token);
+}
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
 ### ✅carbon--theme [mixin]
 
 Define theme variables from a map of tokens
@@ -3291,7 +3405,7 @@ Define theme variables from a map of tokens
 <summary>Source code</summary>
 
 ```scss
-@mixin carbon--theme($theme: $carbon--theme) {
+@mixin carbon--theme($theme: $carbon--theme, $emit-custom-properties: false) {
   $interactive-01: map-get($theme, 'interactive-01') !global;
   $interactive-02: map-get($theme, 'interactive-02') !global;
   $interactive-03: map-get($theme, 'interactive-03') !global;
@@ -3306,10 +3420,12 @@ Define theme variables from a map of tokens
   $text-02: map-get($theme, 'text-02') !global;
   $text-03: map-get($theme, 'text-03') !global;
   $text-04: map-get($theme, 'text-04') !global;
+  $text-05: map-get($theme, 'text-05') !global;
   $icon-01: map-get($theme, 'icon-01') !global;
   $icon-02: map-get($theme, 'icon-02') !global;
   $icon-03: map-get($theme, 'icon-03') !global;
   $link-01: map-get($theme, 'link-01') !global;
+  $inverse-link: map-get($theme, 'inverse-link') !global;
   $field-01: map-get($theme, 'field-01') !global;
   $field-02: map-get($theme, 'field-02') !global;
   $inverse-01: map-get($theme, 'inverse-01') !global;
@@ -3323,7 +3439,9 @@ Define theme variables from a map of tokens
   $inverse-support-03: map-get($theme, 'inverse-support-03') !global;
   $inverse-support-04: map-get($theme, 'inverse-support-04') !global;
   $overlay-01: map-get($theme, 'overlay-01') !global;
+  $danger: map-get($theme, 'danger') !global;
   $focus: map-get($theme, 'focus') !global;
+  $inverse-focus-ui: map-get($theme, 'inverse-focus-ui') !global;
   $hover-primary: map-get($theme, 'hover-primary') !global;
   $active-primary: map-get($theme, 'active-primary') !global;
   $hover-primary-text: map-get($theme, 'hover-primary-text') !global;
@@ -3335,6 +3453,7 @@ Define theme variables from a map of tokens
   $active-ui: map-get($theme, 'active-ui') !global;
   $selected-ui: map-get($theme, 'selected-ui') !global;
   $hover-selected-ui: map-get($theme, 'hover-selected-ui') !global;
+  $inverse-hover-ui: map-get($theme, 'inverse-hover-ui') !global;
   $hover-danger: map-get($theme, 'hover-danger') !global;
   $active-danger: map-get($theme, 'active-danger') !global;
   $hover-row: map-get($theme, 'hover-row') !global;
@@ -3350,6 +3469,929 @@ Define theme variables from a map of tokens
   $brand-03: map-get($theme, 'brand-03') !global;
   $active-01: map-get($theme, 'active-01') !global;
   $hover-field: map-get($theme, 'hover-field') !global;
+  $caption-01: map-get($theme, 'caption-01') !global;
+  $label-01: map-get($theme, 'label-01') !global;
+  $helper-text-01: map-get($theme, 'helper-text-01') !global;
+  $body-short-01: map-get($theme, 'body-short-01') !global;
+  $body-long-01: map-get($theme, 'body-long-01') !global;
+  $body-short-02: map-get($theme, 'body-short-02') !global;
+  $body-long-02: map-get($theme, 'body-long-02') !global;
+  $code-01: map-get($theme, 'code-01') !global;
+  $code-02: map-get($theme, 'code-02') !global;
+  $heading-01: map-get($theme, 'heading-01') !global;
+  $productive-heading-01: map-get($theme, 'productive-heading-01') !global;
+  $heading-02: map-get($theme, 'heading-02') !global;
+  $productive-heading-02: map-get($theme, 'productive-heading-02') !global;
+  $productive-heading-03: map-get($theme, 'productive-heading-03') !global;
+  $productive-heading-04: map-get($theme, 'productive-heading-04') !global;
+  $productive-heading-05: map-get($theme, 'productive-heading-05') !global;
+  $productive-heading-06: map-get($theme, 'productive-heading-06') !global;
+  $productive-heading-07: map-get($theme, 'productive-heading-07') !global;
+  $expressive-heading-01: map-get($theme, 'expressive-heading-01') !global;
+  $expressive-heading-02: map-get($theme, 'expressive-heading-02') !global;
+  $expressive-heading-03: map-get($theme, 'expressive-heading-03') !global;
+  $expressive-heading-04: map-get($theme, 'expressive-heading-04') !global;
+  $expressive-heading-05: map-get($theme, 'expressive-heading-05') !global;
+  $expressive-heading-06: map-get($theme, 'expressive-heading-06') !global;
+  $expressive-paragraph-01: map-get($theme, 'expressive-paragraph-01') !global;
+  $quotation-01: map-get($theme, 'quotation-01') !global;
+  $quotation-02: map-get($theme, 'quotation-02') !global;
+  $display-01: map-get($theme, 'display-01') !global;
+  $display-02: map-get($theme, 'display-02') !global;
+  $display-03: map-get($theme, 'display-03') !global;
+  $display-04: map-get($theme, 'display-04') !global;
+
+  @if global-variable-exists('feature-flags') and
+    map-get($feature-flags, 'enable-css-custom-properties')
+  {
+    $interactive-01: var(
+      --#{$custom-property-prefix}-interactive-01,
+      map-get($theme, 'interactive-01')
+    ) !global;
+    $interactive-02: var(
+      --#{$custom-property-prefix}-interactive-02,
+      map-get($theme, 'interactive-02')
+    ) !global;
+    $interactive-03: var(
+      --#{$custom-property-prefix}-interactive-03,
+      map-get($theme, 'interactive-03')
+    ) !global;
+    $interactive-04: var(
+      --#{$custom-property-prefix}-interactive-04,
+      map-get($theme, 'interactive-04')
+    ) !global;
+    $ui-background: var(
+      --#{$custom-property-prefix}-ui-background,
+      map-get($theme, 'ui-background')
+    ) !global;
+    $ui-01: var(
+      --#{$custom-property-prefix}-ui-01,
+      map-get($theme, 'ui-01')
+    ) !global;
+    $ui-02: var(
+      --#{$custom-property-prefix}-ui-02,
+      map-get($theme, 'ui-02')
+    ) !global;
+    $ui-03: var(
+      --#{$custom-property-prefix}-ui-03,
+      map-get($theme, 'ui-03')
+    ) !global;
+    $ui-04: var(
+      --#{$custom-property-prefix}-ui-04,
+      map-get($theme, 'ui-04')
+    ) !global;
+    $ui-05: var(
+      --#{$custom-property-prefix}-ui-05,
+      map-get($theme, 'ui-05')
+    ) !global;
+    $text-01: var(
+      --#{$custom-property-prefix}-text-01,
+      map-get($theme, 'text-01')
+    ) !global;
+    $text-02: var(
+      --#{$custom-property-prefix}-text-02,
+      map-get($theme, 'text-02')
+    ) !global;
+    $text-03: var(
+      --#{$custom-property-prefix}-text-03,
+      map-get($theme, 'text-03')
+    ) !global;
+    $text-04: var(
+      --#{$custom-property-prefix}-text-04,
+      map-get($theme, 'text-04')
+    ) !global;
+    $text-05: var(
+      --#{$custom-property-prefix}-text-05,
+      map-get($theme, 'text-05')
+    ) !global;
+    $icon-01: var(
+      --#{$custom-property-prefix}-icon-01,
+      map-get($theme, 'icon-01')
+    ) !global;
+    $icon-02: var(
+      --#{$custom-property-prefix}-icon-02,
+      map-get($theme, 'icon-02')
+    ) !global;
+    $icon-03: var(
+      --#{$custom-property-prefix}-icon-03,
+      map-get($theme, 'icon-03')
+    ) !global;
+    $link-01: var(
+      --#{$custom-property-prefix}-link-01,
+      map-get($theme, 'link-01')
+    ) !global;
+    $inverse-link: var(
+      --#{$custom-property-prefix}-inverse-link,
+      map-get($theme, 'inverse-link')
+    ) !global;
+    $field-01: var(
+      --#{$custom-property-prefix}-field-01,
+      map-get($theme, 'field-01')
+    ) !global;
+    $field-02: var(
+      --#{$custom-property-prefix}-field-02,
+      map-get($theme, 'field-02')
+    ) !global;
+    $inverse-01: var(
+      --#{$custom-property-prefix}-inverse-01,
+      map-get($theme, 'inverse-01')
+    ) !global;
+    $inverse-02: var(
+      --#{$custom-property-prefix}-inverse-02,
+      map-get($theme, 'inverse-02')
+    ) !global;
+    $support-01: var(
+      --#{$custom-property-prefix}-support-01,
+      map-get($theme, 'support-01')
+    ) !global;
+    $support-02: var(
+      --#{$custom-property-prefix}-support-02,
+      map-get($theme, 'support-02')
+    ) !global;
+    $support-03: var(
+      --#{$custom-property-prefix}-support-03,
+      map-get($theme, 'support-03')
+    ) !global;
+    $support-04: var(
+      --#{$custom-property-prefix}-support-04,
+      map-get($theme, 'support-04')
+    ) !global;
+    $inverse-support-01: var(
+      --#{$custom-property-prefix}-inverse-support-01,
+      map-get($theme, 'inverse-support-01')
+    ) !global;
+    $inverse-support-02: var(
+      --#{$custom-property-prefix}-inverse-support-02,
+      map-get($theme, 'inverse-support-02')
+    ) !global;
+    $inverse-support-03: var(
+      --#{$custom-property-prefix}-inverse-support-03,
+      map-get($theme, 'inverse-support-03')
+    ) !global;
+    $inverse-support-04: var(
+      --#{$custom-property-prefix}-inverse-support-04,
+      map-get($theme, 'inverse-support-04')
+    ) !global;
+    $overlay-01: var(
+      --#{$custom-property-prefix}-overlay-01,
+      map-get($theme, 'overlay-01')
+    ) !global;
+    $danger: var(
+      --#{$custom-property-prefix}-danger,
+      map-get($theme, 'danger')
+    ) !global;
+    $focus: var(
+      --#{$custom-property-prefix}-focus,
+      map-get($theme, 'focus')
+    ) !global;
+    $inverse-focus-ui: var(
+      --#{$custom-property-prefix}-inverse-focus-ui,
+      map-get($theme, 'inverse-focus-ui')
+    ) !global;
+    $hover-primary: var(
+      --#{$custom-property-prefix}-hover-primary,
+      map-get($theme, 'hover-primary')
+    ) !global;
+    $active-primary: var(
+      --#{$custom-property-prefix}-active-primary,
+      map-get($theme, 'active-primary')
+    ) !global;
+    $hover-primary-text: var(
+      --#{$custom-property-prefix}-hover-primary-text,
+      map-get($theme, 'hover-primary-text')
+    ) !global;
+    $hover-secondary: var(
+      --#{$custom-property-prefix}-hover-secondary,
+      map-get($theme, 'hover-secondary')
+    ) !global;
+    $active-secondary: var(
+      --#{$custom-property-prefix}-active-secondary,
+      map-get($theme, 'active-secondary')
+    ) !global;
+    $hover-tertiary: var(
+      --#{$custom-property-prefix}-hover-tertiary,
+      map-get($theme, 'hover-tertiary')
+    ) !global;
+    $active-tertiary: var(
+      --#{$custom-property-prefix}-active-tertiary,
+      map-get($theme, 'active-tertiary')
+    ) !global;
+    $hover-ui: var(
+      --#{$custom-property-prefix}-hover-ui,
+      map-get($theme, 'hover-ui')
+    ) !global;
+    $active-ui: var(
+      --#{$custom-property-prefix}-active-ui,
+      map-get($theme, 'active-ui')
+    ) !global;
+    $selected-ui: var(
+      --#{$custom-property-prefix}-selected-ui,
+      map-get($theme, 'selected-ui')
+    ) !global;
+    $hover-selected-ui: var(
+      --#{$custom-property-prefix}-hover-selected-ui,
+      map-get($theme, 'hover-selected-ui')
+    ) !global;
+    $inverse-hover-ui: var(
+      --#{$custom-property-prefix}-inverse-hover-ui,
+      map-get($theme, 'inverse-hover-ui')
+    ) !global;
+    $hover-danger: var(
+      --#{$custom-property-prefix}-hover-danger,
+      map-get($theme, 'hover-danger')
+    ) !global;
+    $active-danger: var(
+      --#{$custom-property-prefix}-active-danger,
+      map-get($theme, 'active-danger')
+    ) !global;
+    $hover-row: var(
+      --#{$custom-property-prefix}-hover-row,
+      map-get($theme, 'hover-row')
+    ) !global;
+    $visited-link: var(
+      --#{$custom-property-prefix}-visited-link,
+      map-get($theme, 'visited-link')
+    ) !global;
+    $disabled-01: var(
+      --#{$custom-property-prefix}-disabled-01,
+      map-get($theme, 'disabled-01')
+    ) !global;
+    $disabled-02: var(
+      --#{$custom-property-prefix}-disabled-02,
+      map-get($theme, 'disabled-02')
+    ) !global;
+    $disabled-03: var(
+      --#{$custom-property-prefix}-disabled-03,
+      map-get($theme, 'disabled-03')
+    ) !global;
+    $highlight: var(
+      --#{$custom-property-prefix}-highlight,
+      map-get($theme, 'highlight')
+    ) !global;
+    $skeleton-01: var(
+      --#{$custom-property-prefix}-skeleton-01,
+      map-get($theme, 'skeleton-01')
+    ) !global;
+    $skeleton-02: var(
+      --#{$custom-property-prefix}-skeleton-02,
+      map-get($theme, 'skeleton-02')
+    ) !global;
+    $brand-01: var(
+      --#{$custom-property-prefix}-brand-01,
+      map-get($theme, 'brand-01')
+    ) !global;
+    $brand-02: var(
+      --#{$custom-property-prefix}-brand-02,
+      map-get($theme, 'brand-02')
+    ) !global;
+    $brand-03: var(
+      --#{$custom-property-prefix}-brand-03,
+      map-get($theme, 'brand-03')
+    ) !global;
+    $active-01: var(
+      --#{$custom-property-prefix}-active-01,
+      map-get($theme, 'active-01')
+    ) !global;
+    $hover-field: var(
+      --#{$custom-property-prefix}-hover-field,
+      map-get($theme, 'hover-field')
+    ) !global;
+  }
+  @if $emit-custom-properties == true {
+    @if should-emit($theme, $carbon--theme, 'interactive-01', $emit-difference)
+    {
+      @include custom-property(
+        'interactive-01',
+        map-get($theme, 'interactive-01')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'interactive-02', $emit-difference)
+    {
+      @include custom-property(
+        'interactive-02',
+        map-get($theme, 'interactive-02')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'interactive-03', $emit-difference)
+    {
+      @include custom-property(
+        'interactive-03',
+        map-get($theme, 'interactive-03')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'interactive-04', $emit-difference)
+    {
+      @include custom-property(
+        'interactive-04',
+        map-get($theme, 'interactive-04')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'ui-background', $emit-difference) {
+      @include custom-property(
+        'ui-background',
+        map-get($theme, 'ui-background')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'ui-01', $emit-difference) {
+      @include custom-property('ui-01', map-get($theme, 'ui-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'ui-02', $emit-difference) {
+      @include custom-property('ui-02', map-get($theme, 'ui-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'ui-03', $emit-difference) {
+      @include custom-property('ui-03', map-get($theme, 'ui-03'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'ui-04', $emit-difference) {
+      @include custom-property('ui-04', map-get($theme, 'ui-04'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'ui-05', $emit-difference) {
+      @include custom-property('ui-05', map-get($theme, 'ui-05'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'text-01', $emit-difference) {
+      @include custom-property('text-01', map-get($theme, 'text-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'text-02', $emit-difference) {
+      @include custom-property('text-02', map-get($theme, 'text-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'text-03', $emit-difference) {
+      @include custom-property('text-03', map-get($theme, 'text-03'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'text-04', $emit-difference) {
+      @include custom-property('text-04', map-get($theme, 'text-04'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'text-05', $emit-difference) {
+      @include custom-property('text-05', map-get($theme, 'text-05'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'icon-01', $emit-difference) {
+      @include custom-property('icon-01', map-get($theme, 'icon-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'icon-02', $emit-difference) {
+      @include custom-property('icon-02', map-get($theme, 'icon-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'icon-03', $emit-difference) {
+      @include custom-property('icon-03', map-get($theme, 'icon-03'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'link-01', $emit-difference) {
+      @include custom-property('link-01', map-get($theme, 'link-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'inverse-link', $emit-difference) {
+      @include custom-property('inverse-link', map-get($theme, 'inverse-link'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'field-01', $emit-difference) {
+      @include custom-property('field-01', map-get($theme, 'field-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'field-02', $emit-difference) {
+      @include custom-property('field-02', map-get($theme, 'field-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'inverse-01', $emit-difference) {
+      @include custom-property('inverse-01', map-get($theme, 'inverse-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'inverse-02', $emit-difference) {
+      @include custom-property('inverse-02', map-get($theme, 'inverse-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'support-01', $emit-difference) {
+      @include custom-property('support-01', map-get($theme, 'support-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'support-02', $emit-difference) {
+      @include custom-property('support-02', map-get($theme, 'support-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'support-03', $emit-difference) {
+      @include custom-property('support-03', map-get($theme, 'support-03'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'support-04', $emit-difference) {
+      @include custom-property('support-04', map-get($theme, 'support-04'));
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'inverse-support-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'inverse-support-01',
+        map-get($theme, 'inverse-support-01')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'inverse-support-02',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'inverse-support-02',
+        map-get($theme, 'inverse-support-02')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'inverse-support-03',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'inverse-support-03',
+        map-get($theme, 'inverse-support-03')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'inverse-support-04',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'inverse-support-04',
+        map-get($theme, 'inverse-support-04')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'overlay-01', $emit-difference) {
+      @include custom-property('overlay-01', map-get($theme, 'overlay-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'danger', $emit-difference) {
+      @include custom-property('danger', map-get($theme, 'danger'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'focus', $emit-difference) {
+      @include custom-property('focus', map-get($theme, 'focus'));
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'inverse-focus-ui',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'inverse-focus-ui',
+        map-get($theme, 'inverse-focus-ui')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'hover-primary', $emit-difference) {
+      @include custom-property(
+        'hover-primary',
+        map-get($theme, 'hover-primary')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'active-primary', $emit-difference)
+    {
+      @include custom-property(
+        'active-primary',
+        map-get($theme, 'active-primary')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'hover-primary-text',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'hover-primary-text',
+        map-get($theme, 'hover-primary-text')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'hover-secondary', $emit-difference)
+    {
+      @include custom-property(
+        'hover-secondary',
+        map-get($theme, 'hover-secondary')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'active-secondary',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'active-secondary',
+        map-get($theme, 'active-secondary')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'hover-tertiary', $emit-difference)
+    {
+      @include custom-property(
+        'hover-tertiary',
+        map-get($theme, 'hover-tertiary')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'active-tertiary', $emit-difference)
+    {
+      @include custom-property(
+        'active-tertiary',
+        map-get($theme, 'active-tertiary')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'hover-ui', $emit-difference) {
+      @include custom-property('hover-ui', map-get($theme, 'hover-ui'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'active-ui', $emit-difference) {
+      @include custom-property('active-ui', map-get($theme, 'active-ui'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'selected-ui', $emit-difference) {
+      @include custom-property('selected-ui', map-get($theme, 'selected-ui'));
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'hover-selected-ui',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'hover-selected-ui',
+        map-get($theme, 'hover-selected-ui')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'inverse-hover-ui',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'inverse-hover-ui',
+        map-get($theme, 'inverse-hover-ui')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'hover-danger', $emit-difference) {
+      @include custom-property('hover-danger', map-get($theme, 'hover-danger'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'active-danger', $emit-difference) {
+      @include custom-property(
+        'active-danger',
+        map-get($theme, 'active-danger')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'hover-row', $emit-difference) {
+      @include custom-property('hover-row', map-get($theme, 'hover-row'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'visited-link', $emit-difference) {
+      @include custom-property('visited-link', map-get($theme, 'visited-link'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'disabled-01', $emit-difference) {
+      @include custom-property('disabled-01', map-get($theme, 'disabled-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'disabled-02', $emit-difference) {
+      @include custom-property('disabled-02', map-get($theme, 'disabled-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'disabled-03', $emit-difference) {
+      @include custom-property('disabled-03', map-get($theme, 'disabled-03'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'highlight', $emit-difference) {
+      @include custom-property('highlight', map-get($theme, 'highlight'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'skeleton-01', $emit-difference) {
+      @include custom-property('skeleton-01', map-get($theme, 'skeleton-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'skeleton-02', $emit-difference) {
+      @include custom-property('skeleton-02', map-get($theme, 'skeleton-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'brand-01', $emit-difference) {
+      @include custom-property('brand-01', map-get($theme, 'brand-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'brand-02', $emit-difference) {
+      @include custom-property('brand-02', map-get($theme, 'brand-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'brand-03', $emit-difference) {
+      @include custom-property('brand-03', map-get($theme, 'brand-03'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'active-01', $emit-difference) {
+      @include custom-property('active-01', map-get($theme, 'active-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'hover-field', $emit-difference) {
+      @include custom-property('hover-field', map-get($theme, 'hover-field'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'caption-01', $emit-difference) {
+      @include custom-property('caption-01', map-get($theme, 'caption-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'label-01', $emit-difference) {
+      @include custom-property('label-01', map-get($theme, 'label-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'helper-text-01', $emit-difference)
+    {
+      @include custom-property(
+        'helper-text-01',
+        map-get($theme, 'helper-text-01')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'body-short-01', $emit-difference) {
+      @include custom-property(
+        'body-short-01',
+        map-get($theme, 'body-short-01')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'body-long-01', $emit-difference) {
+      @include custom-property('body-long-01', map-get($theme, 'body-long-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'body-short-02', $emit-difference) {
+      @include custom-property(
+        'body-short-02',
+        map-get($theme, 'body-short-02')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'body-long-02', $emit-difference) {
+      @include custom-property('body-long-02', map-get($theme, 'body-long-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'code-01', $emit-difference) {
+      @include custom-property('code-01', map-get($theme, 'code-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'code-02', $emit-difference) {
+      @include custom-property('code-02', map-get($theme, 'code-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'heading-01', $emit-difference) {
+      @include custom-property('heading-01', map-get($theme, 'heading-01'));
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-01',
+        map-get($theme, 'productive-heading-01')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'heading-02', $emit-difference) {
+      @include custom-property('heading-02', map-get($theme, 'heading-02'));
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-02',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-02',
+        map-get($theme, 'productive-heading-02')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-03',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-03',
+        map-get($theme, 'productive-heading-03')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-04',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-04',
+        map-get($theme, 'productive-heading-04')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-05',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-05',
+        map-get($theme, 'productive-heading-05')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-06',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-06',
+        map-get($theme, 'productive-heading-06')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-07',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-07',
+        map-get($theme, 'productive-heading-07')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-01',
+        map-get($theme, 'expressive-heading-01')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-02',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-02',
+        map-get($theme, 'expressive-heading-02')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-03',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-03',
+        map-get($theme, 'expressive-heading-03')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-04',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-04',
+        map-get($theme, 'expressive-heading-04')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-05',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-05',
+        map-get($theme, 'expressive-heading-05')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-06',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-06',
+        map-get($theme, 'expressive-heading-06')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-paragraph-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-paragraph-01',
+        map-get($theme, 'expressive-paragraph-01')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'quotation-01', $emit-difference) {
+      @include custom-property('quotation-01', map-get($theme, 'quotation-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'quotation-02', $emit-difference) {
+      @include custom-property('quotation-02', map-get($theme, 'quotation-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'display-01', $emit-difference) {
+      @include custom-property('display-01', map-get($theme, 'display-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'display-02', $emit-difference) {
+      @include custom-property('display-02', map-get($theme, 'display-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'display-03', $emit-difference) {
+      @include custom-property('display-03', map-get($theme, 'display-03'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'display-04', $emit-difference) {
+      @include custom-property('display-04', map-get($theme, 'display-04'));
+    }
+  }
 
   @content;
   // Reset to default theme after apply in content
@@ -3363,9 +4405,10 @@ Define theme variables from a map of tokens
 
 - **Parameters**:
 
-| Name     | Description         | Type  | Default value    |
-| -------- | ------------------- | ----- | ---------------- |
-| `$theme` | Map of theme tokens | `Map` | `$carbon--theme` |
+| Name                      | Description                                   | Type   | Default value    |
+| ------------------------- | --------------------------------------------- | ------ | ---------------- |
+| `$theme`                  | Map of theme tokens                           | `Map`  | `$carbon--theme` |
+| `$emit-custom-properties` | Output CSS Custom Properties for theme tokens | `Bool` | `false`          |
 
 **Example**:
 
@@ -3395,6 +4438,8 @@ Define theme variables from a map of tokens
 - **Content**: Pass in your custom declaration blocks to be used after the token
   maps set theming variables.
 - **Requires**:
+  - [custom-property [mixin]](#custom-property-mixin)
+  - [should-emit [function]](#should-emit-function)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [interactive-02 [variable]](#interactive-02-variable)
   - [interactive-03 [variable]](#interactive-03-variable)
@@ -3409,10 +4454,12 @@ Define theme variables from a map of tokens
   - [text-02 [variable]](#text-02-variable)
   - [text-03 [variable]](#text-03-variable)
   - [text-04 [variable]](#text-04-variable)
+  - [text-05 [variable]](#text-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [icon-03 [variable]](#icon-03-variable)
   - [link-01 [variable]](#link-01-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [field-01 [variable]](#field-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
@@ -3426,7 +4473,9 @@ Define theme variables from a map of tokens
   - [inverse-support-03 [variable]](#inverse-support-03-variable)
   - [inverse-support-04 [variable]](#inverse-support-04-variable)
   - [overlay-01 [variable]](#overlay-01-variable)
+  - [danger [variable]](#danger-variable)
   - [focus [variable]](#focus-variable)
+  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [hover-primary [variable]](#hover-primary-variable)
   - [active-primary [variable]](#active-primary-variable)
   - [hover-primary-text [variable]](#hover-primary-text-variable)
@@ -3438,6 +4487,7 @@ Define theme variables from a map of tokens
   - [active-ui [variable]](#active-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [active-danger [variable]](#active-danger-variable)
   - [hover-row [variable]](#hover-row-variable)
@@ -3453,6 +4503,38 @@ Define theme variables from a map of tokens
   - [brand-03 [variable]](#brand-03-variable)
   - [active-01 [variable]](#active-01-variable)
   - [hover-field [variable]](#hover-field-variable)
+  - [caption-01 [variable]](#caption-01-variable)
+  - [label-01 [variable]](#label-01-variable)
+  - [helper-text-01 [variable]](#helper-text-01-variable)
+  - [body-short-01 [variable]](#body-short-01-variable)
+  - [body-long-01 [variable]](#body-long-01-variable)
+  - [body-short-02 [variable]](#body-short-02-variable)
+  - [body-long-02 [variable]](#body-long-02-variable)
+  - [code-01 [variable]](#code-01-variable)
+  - [code-02 [variable]](#code-02-variable)
+  - [heading-01 [variable]](#heading-01-variable)
+  - [productive-heading-01 [variable]](#productive-heading-01-variable)
+  - [heading-02 [variable]](#heading-02-variable)
+  - [productive-heading-02 [variable]](#productive-heading-02-variable)
+  - [productive-heading-03 [variable]](#productive-heading-03-variable)
+  - [productive-heading-04 [variable]](#productive-heading-04-variable)
+  - [productive-heading-05 [variable]](#productive-heading-05-variable)
+  - [productive-heading-06 [variable]](#productive-heading-06-variable)
+  - [productive-heading-07 [variable]](#productive-heading-07-variable)
+  - [expressive-heading-01 [variable]](#expressive-heading-01-variable)
+  - [expressive-heading-02 [variable]](#expressive-heading-02-variable)
+  - [expressive-heading-03 [variable]](#expressive-heading-03-variable)
+  - [expressive-heading-04 [variable]](#expressive-heading-04-variable)
+  - [expressive-heading-05 [variable]](#expressive-heading-05-variable)
+  - [expressive-heading-06 [variable]](#expressive-heading-06-variable)
+  - [expressive-paragraph-01 [variable]](#expressive-paragraph-01-variable)
+  - [quotation-01 [variable]](#quotation-01-variable)
+  - [quotation-02 [variable]](#quotation-02-variable)
+  - [display-01 [variable]](#display-01-variable)
+  - [display-02 [variable]](#display-02-variable)
+  - [display-03 [variable]](#display-03-variable)
+  - [display-04 [variable]](#display-04-variable)
+  - [custom-property-prefix [variable]](#custom-property-prefix-variable)
   - [carbon--theme [variable]](#carbon--theme-variable)
 
 ### ✅carbon--theme--white [variable]
@@ -3464,64 +4546,447 @@ Carbon's white color theme
 
 ```scss
 $carbon--theme--white: (
-  interactive-01: #0062ff,
-  interactive-02: #171717,
-  interactive-03: #0062ff,
-  interactive-04: #0062ff,
+  interactive-01: #0f62fe,
+  interactive-02: #393939,
+  interactive-03: #0f62fe,
+  interactive-04: #0f62fe,
   ui-background: #ffffff,
-  ui-01: #f3f3f3,
+  ui-01: #f4f4f4,
   ui-02: #ffffff,
-  ui-03: #dcdcdc,
-  ui-04: #8c8c8c,
-  ui-05: #171717,
-  text-01: #171717,
-  text-02: #565656,
-  text-03: #8c8c8c,
+  ui-03: #e0e0e0,
+  ui-04: #8d8d8d,
+  ui-05: #161616,
+  text-01: #161616,
+  text-02: #393939,
+  text-03: #a8a8a8,
   text-04: #ffffff,
-  icon-01: #171717,
-  icon-02: #565656,
+  text-05: #6f6f6f,
+  icon-01: #161616,
+  icon-02: #525252,
   icon-03: #ffffff,
-  link-01: #0062ff,
-  field-01: #f3f3f3,
+  link-01: #0f62fe,
+  inverse-link: #78a9ff,
+  field-01: #f4f4f4,
   field-02: #ffffff,
   inverse-01: #ffffff,
-  inverse-02: #3d3d3d,
+  inverse-02: #393939,
   support-01: #da1e28,
   support-02: #24a148,
-  support-03: #fdd13a,
-  support-04: #054ada,
-  inverse-support-01: #fb4b53,
-  inverse-support-02: #3dbb61,
-  inverse-support-03: #fdd13a,
-  inverse-support-04: #408bfc,
-  overlay-01: rgba(23, 23, 23, 0.5),
-  focus: #0062ff,
+  support-03: #f1c21b,
+  support-04: #0043ce,
+  inverse-support-01: #fa4d56,
+  inverse-support-02: #42be65,
+  inverse-support-03: #f1c21b,
+  inverse-support-04: #4589ff,
+  overlay-01: rgba(22, 22, 22, 0.5),
+  danger: #da1e28,
+  focus: #0f62fe,
+  inverse-focus-ui: #ffffff,
   hover-primary: #0353e9,
-  active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  active-primary: #002d9c,
+  hover-primary-text: #0043ce,
   hover-secondary: #4c4c4c,
   active-secondary: #6f6f6f,
   hover-tertiary: #0353e9,
-  active-tertiary: #0530ad,
+  active-tertiary: #002d9c,
   hover-ui: #e5e5e5,
-  active-ui: #bebebe,
-  selected-ui: #dcdcdc,
+  active-ui: #c6c6c6,
+  selected-ui: #e0e0e0,
+  inverse-hover-ui: #4c4c4c,
   hover-selected-ui: #cacaca,
   hover-danger: #ba1b23,
   active-danger: #750e13,
   hover-row: #e5e5e5,
   visited-link: #8a3ffc,
-  disabled-01: #f3f3f3,
-  disabled-02: #bebebe,
-  disabled-03: #8c8c8c,
-  highlight: #c9deff,
+  disabled-01: #f4f4f4,
+  disabled-02: #c6c6c6,
+  disabled-03: #8d8d8d,
+  highlight: #d0e2ff,
   skeleton-01: #e5e5e5,
-  skeleton-02: #bebebe,
-  brand-01: #0062ff,
-  brand-02: #171717,
-  brand-03: #0062ff,
-  active-01: #bebebe,
+  skeleton-02: #c6c6c6,
+  brand-01: #0f62fe,
+  brand-02: #393939,
+  brand-03: #0f62fe,
+  active-01: #c6c6c6,
   hover-field: #e5e5e5,
+  caption-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  label-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  helper-text-01: (
+    font-size: 0.75rem,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  body-short-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  body-long-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.16px,
+  ),
+  body-short-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  body-long-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.5rem,
+    letter-spacing: 0,
+  ),
+  code-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  code-02: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.32px,
+  ),
+  heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  productive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 1.625rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 2.25rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 2.5rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-06: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 3.125rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-07: (
+    font-size: 3.375rem,
+    font-weight: 300,
+    line-height: 4rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  expressive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.25rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 1.5rem,
+      ),
+    ),
+  ),
+  expressive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 129%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.75rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 2rem,
+      ),
+    ),
+  ),
+  expressive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 300,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 300,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 300,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 300,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-heading-06: (
+    font-size: 2rem,
+    font-weight: 600,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 600,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 600,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 600,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 600,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-paragraph-01: (
+    font-size: 1.5rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    lg: (
+      font-size: 1.75rem,
+      line-height: 129%,
+    ),
+    max: (
+      font-size: 2rem,
+      line-height: 125%,
+    ),
+  ),
+  quotation-01: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 1.25rem,
+        font-weight: 400,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 1.5rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 1.75rem,
+        font-weight: 400,
+        line-height: 129%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 2rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  quotation-02: (
+    font-size: 2rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        line-height: 122%,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        line-height: 119%,
+      ),
+      xlg: (
+        font-size: 3rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 3.75rem,
+      ),
+    ),
+  ),
+  display-01: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-02: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 116%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-03: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
+  display-04: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+        letter-spacing: -0.64px,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
 );
 ```
 
@@ -3541,64 +5006,447 @@ Carbon's g10 color theme
 
 ```scss
 $carbon--theme--g10: (
-  interactive-01: #0062ff,
-  interactive-02: #171717,
-  interactive-03: #0062ff,
-  interactive-04: #0062ff,
-  ui-background: #f3f3f3,
+  interactive-01: #0f62fe,
+  interactive-02: #393939,
+  interactive-03: #0f62fe,
+  interactive-04: #0f62fe,
+  ui-background: #f4f4f4,
   ui-01: #ffffff,
-  ui-02: #f3f3f3,
-  ui-03: #dcdcdc,
-  ui-04: #8c8c8c,
-  ui-05: #171717,
-  text-01: #171717,
-  text-02: #565656,
-  text-03: #8c8c8c,
+  ui-02: #f4f4f4,
+  ui-03: #e0e0e0,
+  ui-04: #8d8d8d,
+  ui-05: #161616,
+  text-01: #161616,
+  text-02: #393939,
+  text-03: #a8a8a8,
   text-04: #ffffff,
-  icon-01: #171717,
-  icon-02: #565656,
+  text-05: #6f6f6f,
+  icon-01: #161616,
+  icon-02: #525252,
   icon-03: #ffffff,
-  link-01: #0062ff,
+  link-01: #0f62fe,
+  inverse-link: #78a9ff,
   field-01: #ffffff,
-  field-02: #f3f3f3,
+  field-02: #f4f4f4,
   inverse-01: #ffffff,
-  inverse-02: #3d3d3d,
+  inverse-02: #393939,
   support-01: #da1e28,
   support-02: #24a148,
-  support-03: #fdd13a,
-  support-04: #054ada,
-  inverse-support-01: #fb4b53,
-  inverse-support-02: #3dbb61,
-  inverse-support-03: #fdd13a,
-  inverse-support-04: #408bfc,
-  overlay-01: rgba(23, 23, 23, 0.5),
-  focus: #0062ff,
+  support-03: #f1c21b,
+  support-04: #0043ce,
+  inverse-support-01: #fa4d56,
+  inverse-support-02: #42be65,
+  inverse-support-03: #f1c21b,
+  inverse-support-04: #4589ff,
+  overlay-01: rgba(22, 22, 22, 0.5),
+  danger: #da1e28,
+  focus: #0f62fe,
+  inverse-focus-ui: #ffffff,
   hover-primary: #0353e9,
-  active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  active-primary: #002d9c,
+  hover-primary-text: #0043ce,
   hover-secondary: #4c4c4c,
   active-secondary: #6f6f6f,
   hover-tertiary: #0353e9,
-  active-tertiary: #0530ad,
+  active-tertiary: #002d9c,
   hover-ui: #e5e5e5,
-  active-ui: #bebebe,
-  selected-ui: #dcdcdc,
+  active-ui: #c6c6c6,
+  selected-ui: #e0e0e0,
+  inverse-hover-ui: #4c4c4c,
   hover-selected-ui: #cacaca,
   hover-danger: #ba1b23,
   active-danger: #750e13,
   hover-row: #e5e5e5,
   visited-link: #8a3ffc,
   disabled-01: #ffffff,
-  disabled-02: #bebebe,
-  disabled-03: #8c8c8c,
-  highlight: #c9deff,
+  disabled-02: #c6c6c6,
+  disabled-03: #8d8d8d,
+  highlight: #d0e2ff,
   skeleton-01: #e5e5e5,
-  skeleton-02: #bebebe,
-  brand-01: #0062ff,
-  brand-02: #171717,
-  brand-03: #0062ff,
-  active-01: #bebebe,
+  skeleton-02: #c6c6c6,
+  brand-01: #0f62fe,
+  brand-02: #393939,
+  brand-03: #0f62fe,
+  active-01: #c6c6c6,
   hover-field: #e5e5e5,
+  caption-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  label-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  helper-text-01: (
+    font-size: 0.75rem,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  body-short-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  body-long-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.16px,
+  ),
+  body-short-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  body-long-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.5rem,
+    letter-spacing: 0,
+  ),
+  code-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  code-02: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.32px,
+  ),
+  heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  productive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 1.625rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 2.25rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 2.5rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-06: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 3.125rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-07: (
+    font-size: 3.375rem,
+    font-weight: 300,
+    line-height: 4rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  expressive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.25rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 1.5rem,
+      ),
+    ),
+  ),
+  expressive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 129%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.75rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 2rem,
+      ),
+    ),
+  ),
+  expressive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 300,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 300,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 300,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 300,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-heading-06: (
+    font-size: 2rem,
+    font-weight: 600,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 600,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 600,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 600,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 600,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-paragraph-01: (
+    font-size: 1.5rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    lg: (
+      font-size: 1.75rem,
+      line-height: 129%,
+    ),
+    max: (
+      font-size: 2rem,
+      line-height: 125%,
+    ),
+  ),
+  quotation-01: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 1.25rem,
+        font-weight: 400,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 1.5rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 1.75rem,
+        font-weight: 400,
+        line-height: 129%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 2rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  quotation-02: (
+    font-size: 2rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        line-height: 122%,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        line-height: 119%,
+      ),
+      xlg: (
+        font-size: 3rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 3.75rem,
+      ),
+    ),
+  ),
+  display-01: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-02: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 116%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-03: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
+  display-04: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+        letter-spacing: -0.64px,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
 );
 ```
 
@@ -3616,64 +5464,447 @@ Carbon's g90 color theme
 
 ```scss
 $carbon--theme--g90: (
-  interactive-01: #0062ff,
+  interactive-01: #0f62fe,
   interactive-02: #6f6f6f,
   interactive-03: #ffffff,
-  interactive-04: #408bfc,
-  ui-background: #282828,
-  ui-01: #3d3d3d,
-  ui-02: #565656,
-  ui-03: #565656,
-  ui-04: #8c8c8c,
-  ui-05: #f3f3f3,
-  text-01: #f3f3f3,
-  text-02: #bebebe,
-  text-03: #8c8c8c,
+  interactive-04: #4589ff,
+  ui-background: #262626,
+  ui-01: #393939,
+  ui-02: #525252,
+  ui-03: #525252,
+  ui-04: #8d8d8d,
+  ui-05: #f4f4f4,
+  text-01: #f4f4f4,
+  text-02: #c6c6c6,
+  text-03: #6f6f6f,
   text-04: #ffffff,
-  icon-01: #f3f3f3,
-  icon-02: #bebebe,
+  text-05: #8d8d8d,
+  icon-01: #f4f4f4,
+  icon-02: #c6c6c6,
   icon-03: #ffffff,
-  link-01: #6ea6ff,
-  field-01: #3d3d3d,
-  field-02: #565656,
-  inverse-01: #171717,
-  inverse-02: #f3f3f3,
-  support-01: #fb4b53,
-  support-02: #3dbb61,
-  support-03: #fdd13a,
-  support-04: #408bfc,
+  link-01: #78a9ff,
+  inverse-link: #0f62fe,
+  field-01: #393939,
+  field-02: #525252,
+  inverse-01: #161616,
+  inverse-02: #f4f4f4,
+  support-01: #fa4d56,
+  support-02: #42be65,
+  support-03: #f1c21b,
+  support-04: #4589ff,
   inverse-support-01: #da1e28,
   inverse-support-02: #24a148,
-  inverse-support-03: #fdd13a,
-  inverse-support-04: #0062ff,
-  overlay-01: rgba(23, 23, 23, 0.7),
+  inverse-support-03: #f1c21b,
+  inverse-support-04: #0f62fe,
+  overlay-01: rgba(22, 22, 22, 0.7),
+  danger: #da1e28,
   focus: #ffffff,
+  inverse-focus-ui: #0f62fe,
   hover-primary: #0353e9,
-  active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  active-primary: #002d9c,
+  hover-primary-text: #a6c8ff,
   hover-secondary: #606060,
-  active-secondary: #3d3d3d,
-  hover-tertiary: #f3f3f3,
-  active-tertiary: #bebebe,
-  hover-ui: #353535,
+  active-secondary: #393939,
+  hover-tertiary: #f4f4f4,
+  active-tertiary: #c6c6c6,
+  hover-ui: #4c4c4c,
   active-ui: #6f6f6f,
-  selected-ui: #565656,
+  selected-ui: #525252,
+  inverse-hover-ui: #e5e5e5,
   hover-selected-ui: #656565,
   hover-danger: #ba1b23,
   active-danger: #750e13,
   hover-row: #4c4c4c,
-  visited-link: #bb8eff,
-  disabled-01: #3d3d3d,
-  disabled-02: #565656,
-  disabled-03: #8c8c8c,
-  highlight: #061f80,
+  visited-link: #be95ff,
+  disabled-01: #393939,
+  disabled-02: #6f6f6f,
+  disabled-03: #8d8d8d,
+  highlight: #0043ce,
   skeleton-01: #353535,
-  skeleton-02: #565656,
-  brand-01: #0062ff,
+  skeleton-02: #525252,
+  brand-01: #0f62fe,
   brand-02: #6f6f6f,
   brand-03: #ffffff,
   active-01: #6f6f6f,
-  hover-field: #353535,
+  hover-field: #4c4c4c,
+  caption-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  label-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  helper-text-01: (
+    font-size: 0.75rem,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  body-short-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  body-long-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.16px,
+  ),
+  body-short-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  body-long-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.5rem,
+    letter-spacing: 0,
+  ),
+  code-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  code-02: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.32px,
+  ),
+  heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  productive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 1.625rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 2.25rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 2.5rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-06: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 3.125rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-07: (
+    font-size: 3.375rem,
+    font-weight: 300,
+    line-height: 4rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  expressive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.25rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 1.5rem,
+      ),
+    ),
+  ),
+  expressive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 129%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.75rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 2rem,
+      ),
+    ),
+  ),
+  expressive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 300,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 300,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 300,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 300,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-heading-06: (
+    font-size: 2rem,
+    font-weight: 600,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 600,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 600,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 600,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 600,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-paragraph-01: (
+    font-size: 1.5rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    lg: (
+      font-size: 1.75rem,
+      line-height: 129%,
+    ),
+    max: (
+      font-size: 2rem,
+      line-height: 125%,
+    ),
+  ),
+  quotation-01: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 1.25rem,
+        font-weight: 400,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 1.5rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 1.75rem,
+        font-weight: 400,
+        line-height: 129%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 2rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  quotation-02: (
+    font-size: 2rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        line-height: 122%,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        line-height: 119%,
+      ),
+      xlg: (
+        font-size: 3rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 3.75rem,
+      ),
+    ),
+  ),
+  display-01: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-02: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 116%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-03: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
+  display-04: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+        letter-spacing: -0.64px,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
 );
 ```
 
@@ -3691,64 +5922,905 @@ Carbon's g100 color theme
 
 ```scss
 $carbon--theme--g100: (
-  interactive-01: #0062ff,
+  interactive-01: #0f62fe,
   interactive-02: #6f6f6f,
   interactive-03: #ffffff,
-  interactive-04: #408bfc,
-  ui-background: #171717,
-  ui-01: #282828,
-  ui-02: #3d3d3d,
-  ui-03: #3d3d3d,
+  interactive-04: #4589ff,
+  ui-background: #161616,
+  ui-01: #262626,
+  ui-02: #393939,
+  ui-03: #393939,
   ui-04: #6f6f6f,
-  ui-05: #f3f3f3,
-  text-01: #f3f3f3,
-  text-02: #bebebe,
+  ui-05: #f4f4f4,
+  text-01: #f4f4f4,
+  text-02: #c6c6c6,
   text-03: #6f6f6f,
   text-04: #ffffff,
-  icon-01: #f3f3f3,
-  icon-02: #bebebe,
+  text-05: #8d8d8d,
+  icon-01: #f4f4f4,
+  icon-02: #c6c6c6,
   icon-03: #ffffff,
-  link-01: #6ea6ff,
-  field-01: #282828,
-  field-02: #3d3d3d,
-  inverse-01: #171717,
-  inverse-02: #f3f3f3,
-  support-01: #fb4b53,
-  support-02: #3dbb61,
-  support-03: #fdd13a,
-  support-04: #408bfc,
+  link-01: #78a9ff,
+  inverse-link: #0f62fe,
+  field-01: #262626,
+  field-02: #393939,
+  inverse-01: #161616,
+  inverse-02: #f4f4f4,
+  support-01: #fa4d56,
+  support-02: #42be65,
+  support-03: #f1c21b,
+  support-04: #4589ff,
   inverse-support-01: #da1e28,
   inverse-support-02: #24a148,
-  inverse-support-03: #fdd13a,
-  inverse-support-04: #0062ff,
-  overlay-01: rgba(23, 23, 23, 0.7),
+  inverse-support-03: #f1c21b,
+  inverse-support-04: #0f62fe,
+  overlay-01: rgba(22, 22, 22, 0.7),
+  danger: #da1e28,
   focus: #ffffff,
+  inverse-focus-ui: #0f62fe,
   hover-primary: #0353e9,
-  active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  active-primary: #002d9c,
+  hover-primary-text: #a6c8ff,
   hover-secondary: #606060,
-  active-secondary: #3d3d3d,
-  hover-tertiary: #f3f3f3,
-  active-tertiary: #bebebe,
+  active-secondary: #393939,
+  hover-tertiary: #f4f4f4,
+  active-tertiary: #c6c6c6,
   hover-ui: #353535,
-  active-ui: #565656,
-  selected-ui: #3d3d3d,
+  active-ui: #525252,
+  selected-ui: #393939,
+  inverse-hover-ui: #e5e5e5,
   hover-selected-ui: #4c4c4c,
   hover-danger: #ba1b23,
   active-danger: #750e13,
   hover-row: #353535,
-  visited-link: #bb8eff,
-  disabled-01: #282828,
-  disabled-02: #3d3d3d,
+  visited-link: #be95ff,
+  disabled-01: #262626,
+  disabled-02: #525252,
   disabled-03: #6f6f6f,
-  highlight: #061f80,
+  highlight: #002d9c,
   skeleton-01: #353535,
-  skeleton-02: #3d3d3d,
-  brand-01: #0062ff,
+  skeleton-02: #393939,
+  brand-01: #0f62fe,
   brand-02: #6f6f6f,
   brand-03: #ffffff,
-  active-01: #565656,
+  active-01: #525252,
   hover-field: #353535,
+  caption-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  label-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  helper-text-01: (
+    font-size: 0.75rem,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  body-short-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  body-long-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.16px,
+  ),
+  body-short-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  body-long-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.5rem,
+    letter-spacing: 0,
+  ),
+  code-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  code-02: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.32px,
+  ),
+  heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  productive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 1.625rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 2.25rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 2.5rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-06: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 3.125rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-07: (
+    font-size: 3.375rem,
+    font-weight: 300,
+    line-height: 4rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  expressive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.25rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 1.5rem,
+      ),
+    ),
+  ),
+  expressive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 129%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.75rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 2rem,
+      ),
+    ),
+  ),
+  expressive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 300,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 300,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 300,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 300,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-heading-06: (
+    font-size: 2rem,
+    font-weight: 600,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 600,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 600,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 600,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 600,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-paragraph-01: (
+    font-size: 1.5rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    lg: (
+      font-size: 1.75rem,
+      line-height: 129%,
+    ),
+    max: (
+      font-size: 2rem,
+      line-height: 125%,
+    ),
+  ),
+  quotation-01: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 1.25rem,
+        font-weight: 400,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 1.5rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 1.75rem,
+        font-weight: 400,
+        line-height: 129%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 2rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  quotation-02: (
+    font-size: 2rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        line-height: 122%,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        line-height: 119%,
+      ),
+      xlg: (
+        font-size: 3rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 3.75rem,
+      ),
+    ),
+  ),
+  display-01: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-02: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 116%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-03: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
+  display-04: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+        letter-spacing: -0.64px,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Map`
+
+### ✅carbon--theme--v9 [variable]
+
+Carbon's v9 color theme
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--theme--v9: (
+  interactive-01: #3d70b2,
+  interactive-02: #5a6872,
+  interactive-03: #5a6872,
+  interactive-04: #3d70b2,
+  ui-background: #f4f7fb,
+  ui-01: #ffffff,
+  ui-02: #f4f7fb,
+  ui-03: #dfe3e6,
+  ui-04: #8897a2,
+  ui-05: #5a6872,
+  text-01: #152935,
+  text-02: #5a6872,
+  text-03: #cdd1d4,
+  text-04: #ffffff,
+  text-05: #5a6872,
+  icon-01: #3d70b2,
+  icon-02: #5a6872,
+  icon-03: #ffffff,
+  link-01: #3d70b2,
+  inverse-link: #5596e6,
+  field-01: #ffffff,
+  field-02: #f4f7fb,
+  inverse-01: #ffffff,
+  inverse-02: #272d33,
+  support-01: #e0182d,
+  support-02: #5aa700,
+  support-03: #efc100,
+  support-04: #5aaafa,
+  inverse-support-01: #ff5050,
+  inverse-support-02: #8cd211,
+  inverse-support-03: #fdd600,
+  inverse-support-04: #5aaafa,
+  overlay-01: rgba(223, 227, 230, 0.5),
+  danger: #da1e28,
+  focus: #3d70b2,
+  inverse-focus-ui: #3d70b2,
+  hover-primary: #30588c,
+  active-primary: #30588c,
+  hover-primary-text: #294c86,
+  hover-secondary: #4d5b65,
+  active-secondary: #414f59,
+  hover-tertiary: #5a6872,
+  active-tertiary: #414f59,
+  hover-ui: #eef4fc,
+  active-ui: #dfeafa,
+  selected-ui: #eef4fc,
+  inverse-hover-ui: #4c4c4c,
+  hover-selected-ui: #dfeafa,
+  hover-danger: #c70014,
+  active-danger: #ad1625,
+  hover-row: #eef4fc,
+  visited-link: #294c86,
+  disabled-01: #fafbfd,
+  disabled-02: #dfe3e6,
+  disabled-03: #cdd1d4,
+  highlight: #f4f7fb,
+  skeleton-01: rgba(61, 112, 178, 0.1),
+  skeleton-02: rgba(61, 112, 178, 0.1),
+  brand-01: #3d70b2,
+  brand-02: #5a6872,
+  brand-03: #5a6872,
+  active-01: #dfeafa,
+  hover-field: #eef4fc,
+  caption-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  label-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  helper-text-01: (
+    font-size: 0.75rem,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  body-short-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  body-long-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.16px,
+  ),
+  body-short-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  body-long-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.5rem,
+    letter-spacing: 0,
+  ),
+  code-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  code-02: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.32px,
+  ),
+  heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  productive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 1.625rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 2.25rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 2.5rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-06: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 3.125rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-07: (
+    font-size: 3.375rem,
+    font-weight: 300,
+    line-height: 4rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  expressive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.25rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 1.5rem,
+      ),
+    ),
+  ),
+  expressive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 129%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.75rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 2rem,
+      ),
+    ),
+  ),
+  expressive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 300,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 300,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 300,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 300,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-heading-06: (
+    font-size: 2rem,
+    font-weight: 600,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 600,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 600,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 600,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 600,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-paragraph-01: (
+    font-size: 1.5rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    lg: (
+      font-size: 1.75rem,
+      line-height: 129%,
+    ),
+    max: (
+      font-size: 2rem,
+      line-height: 125%,
+    ),
+  ),
+  quotation-01: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 1.25rem,
+        font-weight: 400,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 1.5rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 1.75rem,
+        font-weight: 400,
+        line-height: 129%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 2rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  quotation-02: (
+    font-size: 2rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        line-height: 122%,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        line-height: 119%,
+      ),
+      xlg: (
+        font-size: 3rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 3.75rem,
+      ),
+    ),
+  ),
+  display-01: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-02: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 116%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-03: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
+  display-04: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+        letter-spacing: -0.64px,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
 );
 ```
 
@@ -3765,7 +6837,102 @@ Carbon's default theme
 <summary>Source code</summary>
 
 ```scss
-$carbon--theme: $carbon--theme--white;
+$carbon--theme: (
+  interactive-01: if(global-variable-exists('interactive-01'), $interactive-01, map-get($carbon--theme--white, 'interactive-01')),
+  interactive-02: if(global-variable-exists('interactive-02'), $interactive-02, map-get($carbon--theme--white, 'interactive-02')),
+  interactive-03: if(global-variable-exists('interactive-03'), $interactive-03, map-get($carbon--theme--white, 'interactive-03')),
+  interactive-04: if(global-variable-exists('interactive-04'), $interactive-04, map-get($carbon--theme--white, 'interactive-04')),
+  ui-background: if(global-variable-exists('ui-background'), $ui-background, map-get($carbon--theme--white, 'ui-background')),
+  ui-01: if(global-variable-exists('ui-01'), $ui-01, map-get($carbon--theme--white, 'ui-01')),
+  ui-02: if(global-variable-exists('ui-02'), $ui-02, map-get($carbon--theme--white, 'ui-02')),
+  ui-03: if(global-variable-exists('ui-03'), $ui-03, map-get($carbon--theme--white, 'ui-03')),
+  ui-04: if(global-variable-exists('ui-04'), $ui-04, map-get($carbon--theme--white, 'ui-04')),
+  ui-05: if(global-variable-exists('ui-05'), $ui-05, map-get($carbon--theme--white, 'ui-05')),
+  text-01: if(global-variable-exists('text-01'), $text-01, map-get($carbon--theme--white, 'text-01')),
+  text-02: if(global-variable-exists('text-02'), $text-02, map-get($carbon--theme--white, 'text-02')),
+  text-03: if(global-variable-exists('text-03'), $text-03, map-get($carbon--theme--white, 'text-03')),
+  text-04: if(global-variable-exists('text-04'), $text-04, map-get($carbon--theme--white, 'text-04')),
+  text-05: if(global-variable-exists('text-05'), $text-05, map-get($carbon--theme--white, 'text-05')),
+  icon-01: if(global-variable-exists('icon-01'), $icon-01, map-get($carbon--theme--white, 'icon-01')),
+  icon-02: if(global-variable-exists('icon-02'), $icon-02, map-get($carbon--theme--white, 'icon-02')),
+  icon-03: if(global-variable-exists('icon-03'), $icon-03, map-get($carbon--theme--white, 'icon-03')),
+  link-01: if(global-variable-exists('link-01'), $link-01, map-get($carbon--theme--white, 'link-01')),
+  inverse-link: if(global-variable-exists('inverse-link'), $inverse-link, map-get($carbon--theme--white, 'inverse-link')),
+  field-01: if(global-variable-exists('field-01'), $field-01, map-get($carbon--theme--white, 'field-01')),
+  field-02: if(global-variable-exists('field-02'), $field-02, map-get($carbon--theme--white, 'field-02')),
+  inverse-01: if(global-variable-exists('inverse-01'), $inverse-01, map-get($carbon--theme--white, 'inverse-01')),
+  inverse-02: if(global-variable-exists('inverse-02'), $inverse-02, map-get($carbon--theme--white, 'inverse-02')),
+  support-01: if(global-variable-exists('support-01'), $support-01, map-get($carbon--theme--white, 'support-01')),
+  support-02: if(global-variable-exists('support-02'), $support-02, map-get($carbon--theme--white, 'support-02')),
+  support-03: if(global-variable-exists('support-03'), $support-03, map-get($carbon--theme--white, 'support-03')),
+  support-04: if(global-variable-exists('support-04'), $support-04, map-get($carbon--theme--white, 'support-04')),
+  inverse-support-01: if(global-variable-exists('inverse-support-01'), $inverse-support-01, map-get($carbon--theme--white, 'inverse-support-01')),
+  inverse-support-02: if(global-variable-exists('inverse-support-02'), $inverse-support-02, map-get($carbon--theme--white, 'inverse-support-02')),
+  inverse-support-03: if(global-variable-exists('inverse-support-03'), $inverse-support-03, map-get($carbon--theme--white, 'inverse-support-03')),
+  inverse-support-04: if(global-variable-exists('inverse-support-04'), $inverse-support-04, map-get($carbon--theme--white, 'inverse-support-04')),
+  overlay-01: if(global-variable-exists('overlay-01'), $overlay-01, map-get($carbon--theme--white, 'overlay-01')),
+  danger: if(global-variable-exists('danger'), $danger, map-get($carbon--theme--white, 'danger')),
+  focus: if(global-variable-exists('focus'), $focus, map-get($carbon--theme--white, 'focus')),
+  inverse-focus-ui: if(global-variable-exists('inverse-focus-ui'), $inverse-focus-ui, map-get($carbon--theme--white, 'inverse-focus-ui')),
+  hover-primary: if(global-variable-exists('hover-primary'), $hover-primary, map-get($carbon--theme--white, 'hover-primary')),
+  active-primary: if(global-variable-exists('active-primary'), $active-primary, map-get($carbon--theme--white, 'active-primary')),
+  hover-primary-text: if(global-variable-exists('hover-primary-text'), $hover-primary-text, map-get($carbon--theme--white, 'hover-primary-text')),
+  hover-secondary: if(global-variable-exists('hover-secondary'), $hover-secondary, map-get($carbon--theme--white, 'hover-secondary')),
+  active-secondary: if(global-variable-exists('active-secondary'), $active-secondary, map-get($carbon--theme--white, 'active-secondary')),
+  hover-tertiary: if(global-variable-exists('hover-tertiary'), $hover-tertiary, map-get($carbon--theme--white, 'hover-tertiary')),
+  active-tertiary: if(global-variable-exists('active-tertiary'), $active-tertiary, map-get($carbon--theme--white, 'active-tertiary')),
+  hover-ui: if(global-variable-exists('hover-ui'), $hover-ui, map-get($carbon--theme--white, 'hover-ui')),
+  active-ui: if(global-variable-exists('active-ui'), $active-ui, map-get($carbon--theme--white, 'active-ui')),
+  selected-ui: if(global-variable-exists('selected-ui'), $selected-ui, map-get($carbon--theme--white, 'selected-ui')),
+  hover-selected-ui: if(global-variable-exists('hover-selected-ui'), $hover-selected-ui, map-get($carbon--theme--white, 'hover-selected-ui')),
+  inverse-hover-ui: if(global-variable-exists('inverse-hover-ui'), $inverse-hover-ui, map-get($carbon--theme--white, 'inverse-hover-ui')),
+  hover-danger: if(global-variable-exists('hover-danger'), $hover-danger, map-get($carbon--theme--white, 'hover-danger')),
+  active-danger: if(global-variable-exists('active-danger'), $active-danger, map-get($carbon--theme--white, 'active-danger')),
+  hover-row: if(global-variable-exists('hover-row'), $hover-row, map-get($carbon--theme--white, 'hover-row')),
+  visited-link: if(global-variable-exists('visited-link'), $visited-link, map-get($carbon--theme--white, 'visited-link')),
+  disabled-01: if(global-variable-exists('disabled-01'), $disabled-01, map-get($carbon--theme--white, 'disabled-01')),
+  disabled-02: if(global-variable-exists('disabled-02'), $disabled-02, map-get($carbon--theme--white, 'disabled-02')),
+  disabled-03: if(global-variable-exists('disabled-03'), $disabled-03, map-get($carbon--theme--white, 'disabled-03')),
+  highlight: if(global-variable-exists('highlight'), $highlight, map-get($carbon--theme--white, 'highlight')),
+  skeleton-01: if(global-variable-exists('skeleton-01'), $skeleton-01, map-get($carbon--theme--white, 'skeleton-01')),
+  skeleton-02: if(global-variable-exists('skeleton-02'), $skeleton-02, map-get($carbon--theme--white, 'skeleton-02')),
+  brand-01: if(global-variable-exists('brand-01'), $brand-01, map-get($carbon--theme--white, 'brand-01')),
+  brand-02: if(global-variable-exists('brand-02'), $brand-02, map-get($carbon--theme--white, 'brand-02')),
+  brand-03: if(global-variable-exists('brand-03'), $brand-03, map-get($carbon--theme--white, 'brand-03')),
+  active-01: if(global-variable-exists('active-01'), $active-01, map-get($carbon--theme--white, 'active-01')),
+  hover-field: if(global-variable-exists('hover-field'), $hover-field, map-get($carbon--theme--white, 'hover-field')),
+  caption-01: if(global-variable-exists('caption-01'), $caption-01, map-get($carbon--theme--white, 'caption-01')),
+  label-01: if(global-variable-exists('label-01'), $label-01, map-get($carbon--theme--white, 'label-01')),
+  helper-text-01: if(global-variable-exists('helper-text-01'), $helper-text-01, map-get($carbon--theme--white, 'helper-text-01')),
+  body-short-01: if(global-variable-exists('body-short-01'), $body-short-01, map-get($carbon--theme--white, 'body-short-01')),
+  body-long-01: if(global-variable-exists('body-long-01'), $body-long-01, map-get($carbon--theme--white, 'body-long-01')),
+  body-short-02: if(global-variable-exists('body-short-02'), $body-short-02, map-get($carbon--theme--white, 'body-short-02')),
+  body-long-02: if(global-variable-exists('body-long-02'), $body-long-02, map-get($carbon--theme--white, 'body-long-02')),
+  code-01: if(global-variable-exists('code-01'), $code-01, map-get($carbon--theme--white, 'code-01')),
+  code-02: if(global-variable-exists('code-02'), $code-02, map-get($carbon--theme--white, 'code-02')),
+  heading-01: if(global-variable-exists('heading-01'), $heading-01, map-get($carbon--theme--white, 'heading-01')),
+  productive-heading-01: if(global-variable-exists('productive-heading-01'), $productive-heading-01, map-get($carbon--theme--white, 'productive-heading-01')),
+  heading-02: if(global-variable-exists('heading-02'), $heading-02, map-get($carbon--theme--white, 'heading-02')),
+  productive-heading-02: if(global-variable-exists('productive-heading-02'), $productive-heading-02, map-get($carbon--theme--white, 'productive-heading-02')),
+  productive-heading-03: if(global-variable-exists('productive-heading-03'), $productive-heading-03, map-get($carbon--theme--white, 'productive-heading-03')),
+  productive-heading-04: if(global-variable-exists('productive-heading-04'), $productive-heading-04, map-get($carbon--theme--white, 'productive-heading-04')),
+  productive-heading-05: if(global-variable-exists('productive-heading-05'), $productive-heading-05, map-get($carbon--theme--white, 'productive-heading-05')),
+  productive-heading-06: if(global-variable-exists('productive-heading-06'), $productive-heading-06, map-get($carbon--theme--white, 'productive-heading-06')),
+  productive-heading-07: if(global-variable-exists('productive-heading-07'), $productive-heading-07, map-get($carbon--theme--white, 'productive-heading-07')),
+  expressive-heading-01: if(global-variable-exists('expressive-heading-01'), $expressive-heading-01, map-get($carbon--theme--white, 'expressive-heading-01')),
+  expressive-heading-02: if(global-variable-exists('expressive-heading-02'), $expressive-heading-02, map-get($carbon--theme--white, 'expressive-heading-02')),
+  expressive-heading-03: if(global-variable-exists('expressive-heading-03'), $expressive-heading-03, map-get($carbon--theme--white, 'expressive-heading-03')),
+  expressive-heading-04: if(global-variable-exists('expressive-heading-04'), $expressive-heading-04, map-get($carbon--theme--white, 'expressive-heading-04')),
+  expressive-heading-05: if(global-variable-exists('expressive-heading-05'), $expressive-heading-05, map-get($carbon--theme--white, 'expressive-heading-05')),
+  expressive-heading-06: if(global-variable-exists('expressive-heading-06'), $expressive-heading-06, map-get($carbon--theme--white, 'expressive-heading-06')),
+  expressive-paragraph-01: if(global-variable-exists('expressive-paragraph-01'), $expressive-paragraph-01, map-get($carbon--theme--white, 'expressive-paragraph-01')),
+  quotation-01: if(global-variable-exists('quotation-01'), $quotation-01, map-get($carbon--theme--white, 'quotation-01')),
+  quotation-02: if(global-variable-exists('quotation-02'), $quotation-02, map-get($carbon--theme--white, 'quotation-02')),
+  display-01: if(global-variable-exists('display-01'), $display-01, map-get($carbon--theme--white, 'display-01')),
+  display-02: if(global-variable-exists('display-02'), $display-02, map-get($carbon--theme--white, 'display-02')),
+  display-03: if(global-variable-exists('display-03'), $display-03, map-get($carbon--theme--white, 'display-03')),
+  display-04: if(global-variable-exists('display-04'), $display-04, map-get($carbon--theme--white, 'display-04')),
+);
 ```
 
 </details>
@@ -3784,7 +6951,14 @@ Primary interactive color; Primary buttons
 <summary>Source code</summary>
 
 ```scss
-$interactive-01: map-get($carbon--theme, 'interactive-01');
+$interactive-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'interactive-01'
+    ),
+  map-get($carbon--theme, 'interactive-01'),
+  #0f62fe
+);
 ```
 
 </details>
@@ -3804,7 +6978,14 @@ Secondary interactive color; Secondary button
 <summary>Source code</summary>
 
 ```scss
-$interactive-02: map-get($carbon--theme, 'interactive-02');
+$interactive-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'interactive-02'
+    ),
+  map-get($carbon--theme, 'interactive-02'),
+  #393939
+);
 ```
 
 </details>
@@ -3824,7 +7005,14 @@ $interactive-02: map-get($carbon--theme, 'interactive-02');
 <summary>Source code</summary>
 
 ```scss
-$interactive-03: map-get($carbon--theme, 'interactive-03');
+$interactive-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'interactive-03'
+    ),
+  map-get($carbon--theme, 'interactive-03'),
+  #0f62fe
+);
 ```
 
 </details>
@@ -3844,7 +7032,14 @@ $interactive-03: map-get($carbon--theme, 'interactive-03');
 <summary>Source code</summary>
 
 ```scss
-$interactive-04: map-get($carbon--theme, 'interactive-04');
+$interactive-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'interactive-04'
+    ),
+  map-get($carbon--theme, 'interactive-04'),
+  #0f62fe
+);
 ```
 
 </details>
@@ -3862,7 +7057,14 @@ Default page background
 <summary>Source code</summary>
 
 ```scss
-$ui-background: map-get($carbon--theme, 'ui-background');
+$ui-background: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'ui-background'
+    ),
+  map-get($carbon--theme, 'ui-background'),
+  #ffffff
+);
 ```
 
 </details>
@@ -3880,7 +7082,14 @@ Primary container background; Secondary page background
 <summary>Source code</summary>
 
 ```scss
-$ui-01: map-get($carbon--theme, 'ui-01');
+$ui-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'ui-01'
+    ),
+  map-get($carbon--theme, 'ui-01'),
+  #f4f4f4
+);
 ```
 
 </details>
@@ -3898,7 +7107,14 @@ Primary page background; Secondary container background
 <summary>Source code</summary>
 
 ```scss
-$ui-02: map-get($carbon--theme, 'ui-02');
+$ui-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'ui-02'
+    ),
+  map-get($carbon--theme, 'ui-02'),
+  #ffffff
+);
 ```
 
 </details>
@@ -3916,7 +7132,14 @@ Subtle border; Tertiary background color
 <summary>Source code</summary>
 
 ```scss
-$ui-03: map-get($carbon--theme, 'ui-03');
+$ui-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'ui-03'
+    ),
+  map-get($carbon--theme, 'ui-03'),
+  #e0e0e0
+);
 ```
 
 </details>
@@ -3934,7 +7157,14 @@ $ui-03: map-get($carbon--theme, 'ui-03');
 <summary>Source code</summary>
 
 ```scss
-$ui-04: map-get($carbon--theme, 'ui-04');
+$ui-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'ui-04'
+    ),
+  map-get($carbon--theme, 'ui-04'),
+  #8d8d8d
+);
 ```
 
 </details>
@@ -3952,7 +7182,14 @@ $ui-04: map-get($carbon--theme, 'ui-04');
 <summary>Source code</summary>
 
 ```scss
-$ui-05: map-get($carbon--theme, 'ui-05');
+$ui-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'ui-05'
+    ),
+  map-get($carbon--theme, 'ui-05'),
+  #161616
+);
 ```
 
 </details>
@@ -3970,7 +7207,14 @@ Primary text; Body copy; Headers; Hover text color for `$text-02`
 <summary>Source code</summary>
 
 ```scss
-$text-01: map-get($carbon--theme, 'text-01');
+$text-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'text-01'
+    ),
+  map-get($carbon--theme, 'text-01'),
+  #161616
+);
 ```
 
 </details>
@@ -3988,7 +7232,14 @@ Secondary text; Input labels; Help text
 <summary>Source code</summary>
 
 ```scss
-$text-02: map-get($carbon--theme, 'text-02');
+$text-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'text-02'
+    ),
+  map-get($carbon--theme, 'text-02'),
+  #393939
+);
 ```
 
 </details>
@@ -4006,7 +7257,14 @@ Placeholder text
 <summary>Source code</summary>
 
 ```scss
-$text-03: map-get($carbon--theme, 'text-03');
+$text-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'text-03'
+    ),
+  map-get($carbon--theme, 'text-03'),
+  #a8a8a8
+);
 ```
 
 </details>
@@ -4024,7 +7282,37 @@ Text on interactive colors
 <summary>Source code</summary>
 
 ```scss
-$text-04: map-get($carbon--theme, 'text-04');
+$text-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'text-04'
+    ),
+  map-get($carbon--theme, 'text-04'),
+  #ffffff
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅text-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$text-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'text-05'
+    ),
+  map-get($carbon--theme, 'text-05'),
+  #6f6f6f
+);
 ```
 
 </details>
@@ -4042,7 +7330,14 @@ Primary icons
 <summary>Source code</summary>
 
 ```scss
-$icon-01: map-get($carbon--theme, 'icon-01');
+$icon-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'icon-01'
+    ),
+  map-get($carbon--theme, 'icon-01'),
+  #161616
+);
 ```
 
 </details>
@@ -4060,7 +7355,14 @@ Secondary icons
 <summary>Source code</summary>
 
 ```scss
-$icon-02: map-get($carbon--theme, 'icon-02');
+$icon-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'icon-02'
+    ),
+  map-get($carbon--theme, 'icon-02'),
+  #525252
+);
 ```
 
 </details>
@@ -4078,7 +7380,14 @@ Tertiary icons; Icons on interactive colors; Icons on non-ui colors
 <summary>Source code</summary>
 
 ```scss
-$icon-03: map-get($carbon--theme, 'icon-03');
+$icon-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'icon-03'
+    ),
+  map-get($carbon--theme, 'icon-03'),
+  #ffffff
+);
 ```
 
 </details>
@@ -4096,7 +7405,37 @@ Primary links; Ghost button
 <summary>Source code</summary>
 
 ```scss
-$link-01: map-get($carbon--theme, 'link-01');
+$link-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'link-01'
+    ),
+  map-get($carbon--theme, 'link-01'),
+  #0f62fe
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-link [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-link: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-link'
+    ),
+  map-get($carbon--theme, 'inverse-link'),
+  #78a9ff
+);
 ```
 
 </details>
@@ -4114,7 +7453,14 @@ Default input fields; Field color on \$ui-backgrounds
 <summary>Source code</summary>
 
 ```scss
-$field-01: map-get($carbon--theme, 'field-01');
+$field-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'field-01'
+    ),
+  map-get($carbon--theme, 'field-01'),
+  #f4f4f4
+);
 ```
 
 </details>
@@ -4132,7 +7478,14 @@ Input field color on `$ui-02` backgrounds
 <summary>Source code</summary>
 
 ```scss
-$field-02: map-get($carbon--theme, 'field-02');
+$field-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'field-02'
+    ),
+  map-get($carbon--theme, 'field-02'),
+  #ffffff
+);
 ```
 
 </details>
@@ -4150,7 +7503,14 @@ Inverse text color; Inverse icon color
 <summary>Source code</summary>
 
 ```scss
-$inverse-01: map-get($carbon--theme, 'inverse-01');
+$inverse-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-01'
+    ),
+  map-get($carbon--theme, 'inverse-01'),
+  #ffffff
+);
 ```
 
 </details>
@@ -4168,7 +7528,14 @@ High contrast backgrounds; High contrast elements
 <summary>Source code</summary>
 
 ```scss
-$inverse-02: map-get($carbon--theme, 'inverse-02');
+$inverse-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-02'
+    ),
+  map-get($carbon--theme, 'inverse-02'),
+  #393939
+);
 ```
 
 </details>
@@ -4186,7 +7553,14 @@ Error
 <summary>Source code</summary>
 
 ```scss
-$support-01: map-get($carbon--theme, 'support-01');
+$support-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'support-01'
+    ),
+  map-get($carbon--theme, 'support-01'),
+  #da1e28
+);
 ```
 
 </details>
@@ -4204,7 +7578,14 @@ Success
 <summary>Source code</summary>
 
 ```scss
-$support-02: map-get($carbon--theme, 'support-02');
+$support-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'support-02'
+    ),
+  map-get($carbon--theme, 'support-02'),
+  #24a148
+);
 ```
 
 </details>
@@ -4222,7 +7603,14 @@ Warning
 <summary>Source code</summary>
 
 ```scss
-$support-03: map-get($carbon--theme, 'support-03');
+$support-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'support-03'
+    ),
+  map-get($carbon--theme, 'support-03'),
+  #f1c21b
+);
 ```
 
 </details>
@@ -4240,7 +7628,14 @@ Information
 <summary>Source code</summary>
 
 ```scss
-$support-04: map-get($carbon--theme, 'support-04');
+$support-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'support-04'
+    ),
+  map-get($carbon--theme, 'support-04'),
+  #0043ce
+);
 ```
 
 </details>
@@ -4258,7 +7653,14 @@ Error on high contrast backgrounds
 <summary>Source code</summary>
 
 ```scss
-$inverse-support-01: map-get($carbon--theme, 'inverse-support-01');
+$inverse-support-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-support-01'
+    ),
+  map-get($carbon--theme, 'inverse-support-01'),
+  #fa4d56
+);
 ```
 
 </details>
@@ -4276,7 +7678,14 @@ Success on high contrast backgrounds
 <summary>Source code</summary>
 
 ```scss
-$inverse-support-02: map-get($carbon--theme, 'inverse-support-02');
+$inverse-support-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-support-02'
+    ),
+  map-get($carbon--theme, 'inverse-support-02'),
+  #42be65
+);
 ```
 
 </details>
@@ -4294,7 +7703,14 @@ Warning on high contrast backgrounds
 <summary>Source code</summary>
 
 ```scss
-$inverse-support-03: map-get($carbon--theme, 'inverse-support-03');
+$inverse-support-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-support-03'
+    ),
+  map-get($carbon--theme, 'inverse-support-03'),
+  #f1c21b
+);
 ```
 
 </details>
@@ -4312,7 +7728,14 @@ Information on high contrast backgrounds
 <summary>Source code</summary>
 
 ```scss
-$inverse-support-04: map-get($carbon--theme, 'inverse-support-04');
+$inverse-support-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-support-04'
+    ),
+  map-get($carbon--theme, 'inverse-support-04'),
+  #4589ff
+);
 ```
 
 </details>
@@ -4330,7 +7753,37 @@ Background overlay
 <summary>Source code</summary>
 
 ```scss
-$overlay-01: map-get($carbon--theme, 'overlay-01');
+$overlay-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'overlay-01'
+    ),
+  map-get($carbon--theme, 'overlay-01'),
+  rgba(22, 22, 22, 0.5)
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅danger [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$danger: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'danger'
+    ),
+  map-get($carbon--theme, 'danger'),
+  #da1e28
+);
 ```
 
 </details>
@@ -4348,7 +7801,37 @@ Focus border; Focus underline
 <summary>Source code</summary>
 
 ```scss
-$focus: map-get($carbon--theme, 'focus');
+$focus: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'focus'
+    ),
+  map-get($carbon--theme, 'focus'),
+  #0f62fe
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-focus-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-focus-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-focus-ui'
+    ),
+  map-get($carbon--theme, 'inverse-focus-ui'),
+  #ffffff
+);
 ```
 
 </details>
@@ -4366,7 +7849,14 @@ $focus: map-get($carbon--theme, 'focus');
 <summary>Source code</summary>
 
 ```scss
-$hover-primary: map-get($carbon--theme, 'hover-primary');
+$hover-primary: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-primary'
+    ),
+  map-get($carbon--theme, 'hover-primary'),
+  #0353e9
+);
 ```
 
 </details>
@@ -4384,7 +7874,14 @@ $hover-primary: map-get($carbon--theme, 'hover-primary');
 <summary>Source code</summary>
 
 ```scss
-$active-primary: map-get($carbon--theme, 'active-primary');
+$active-primary: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'active-primary'
+    ),
+  map-get($carbon--theme, 'active-primary'),
+  #002d9c
+);
 ```
 
 </details>
@@ -4402,7 +7899,14 @@ $active-primary: map-get($carbon--theme, 'active-primary');
 <summary>Source code</summary>
 
 ```scss
-$hover-primary-text: map-get($carbon--theme, 'hover-primary-text');
+$hover-primary-text: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-primary-text'
+    ),
+  map-get($carbon--theme, 'hover-primary-text'),
+  #0043ce
+);
 ```
 
 </details>
@@ -4420,7 +7924,14 @@ $hover-primary-text: map-get($carbon--theme, 'hover-primary-text');
 <summary>Source code</summary>
 
 ```scss
-$hover-secondary: map-get($carbon--theme, 'hover-secondary');
+$hover-secondary: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-secondary'
+    ),
+  map-get($carbon--theme, 'hover-secondary'),
+  #4c4c4c
+);
 ```
 
 </details>
@@ -4438,7 +7949,14 @@ $hover-secondary: map-get($carbon--theme, 'hover-secondary');
 <summary>Source code</summary>
 
 ```scss
-$active-secondary: map-get($carbon--theme, 'active-secondary');
+$active-secondary: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'active-secondary'
+    ),
+  map-get($carbon--theme, 'active-secondary'),
+  #6f6f6f
+);
 ```
 
 </details>
@@ -4456,7 +7974,14 @@ $active-secondary: map-get($carbon--theme, 'active-secondary');
 <summary>Source code</summary>
 
 ```scss
-$hover-tertiary: map-get($carbon--theme, 'hover-tertiary');
+$hover-tertiary: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-tertiary'
+    ),
+  map-get($carbon--theme, 'hover-tertiary'),
+  #0353e9
+);
 ```
 
 </details>
@@ -4474,7 +7999,14 @@ $hover-tertiary: map-get($carbon--theme, 'hover-tertiary');
 <summary>Source code</summary>
 
 ```scss
-$active-tertiary: map-get($carbon--theme, 'active-tertiary');
+$active-tertiary: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'active-tertiary'
+    ),
+  map-get($carbon--theme, 'active-tertiary'),
+  #002d9c
+);
 ```
 
 </details>
@@ -4492,7 +8024,14 @@ $active-tertiary: map-get($carbon--theme, 'active-tertiary');
 <summary>Source code</summary>
 
 ```scss
-$hover-ui: map-get($carbon--theme, 'hover-ui');
+$hover-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-ui'
+    ),
+  map-get($carbon--theme, 'hover-ui'),
+  #e5e5e5
+);
 ```
 
 </details>
@@ -4512,7 +8051,14 @@ $hover-ui: map-get($carbon--theme, 'hover-ui');
 <summary>Source code</summary>
 
 ```scss
-$active-ui: map-get($carbon--theme, 'active-ui');
+$active-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'active-ui'
+    ),
+  map-get($carbon--theme, 'active-ui'),
+  #c6c6c6
+);
 ```
 
 </details>
@@ -4532,7 +8078,14 @@ Selected UI elements
 <summary>Source code</summary>
 
 ```scss
-$selected-ui: map-get($carbon--theme, 'selected-ui');
+$selected-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'selected-ui'
+    ),
+  map-get($carbon--theme, 'selected-ui'),
+  #e0e0e0
+);
 ```
 
 </details>
@@ -4550,7 +8103,37 @@ Data table selected row hover
 <summary>Source code</summary>
 
 ```scss
-$hover-selected-ui: map-get($carbon--theme, 'hover-selected-ui');
+$hover-selected-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-selected-ui'
+    ),
+  map-get($carbon--theme, 'hover-selected-ui'),
+  #cacaca
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-hover-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-hover-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-hover-ui'
+    ),
+  map-get($carbon--theme, 'inverse-hover-ui'),
+  #4c4c4c
+);
 ```
 
 </details>
@@ -4568,7 +8151,14 @@ Danger hover; `$support-01` hover
 <summary>Source code</summary>
 
 ```scss
-$hover-danger: map-get($carbon--theme, 'hover-danger');
+$hover-danger: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-danger'
+    ),
+  map-get($carbon--theme, 'hover-danger'),
+  #ba1b23
+);
 ```
 
 </details>
@@ -4586,7 +8176,14 @@ Danger active; `$support-01` active
 <summary>Source code</summary>
 
 ```scss
-$active-danger: map-get($carbon--theme, 'active-danger');
+$active-danger: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'active-danger'
+    ),
+  map-get($carbon--theme, 'active-danger'),
+  #750e13
+);
 ```
 
 </details>
@@ -4604,7 +8201,14 @@ Row hover
 <summary>Source code</summary>
 
 ```scss
-$hover-row: map-get($carbon--theme, 'hover-row');
+$hover-row: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-row'
+    ),
+  map-get($carbon--theme, 'hover-row'),
+  #e5e5e5
+);
 ```
 
 </details>
@@ -4622,7 +8226,14 @@ Visited links
 <summary>Source code</summary>
 
 ```scss
-$visited-link: map-get($carbon--theme, 'visited-link');
+$visited-link: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'visited-link'
+    ),
+  map-get($carbon--theme, 'visited-link'),
+  #8a3ffc
+);
 ```
 
 </details>
@@ -4640,7 +8251,14 @@ Disabled fields; Disabled backgrounds; Disabled border
 <summary>Source code</summary>
 
 ```scss
-$disabled-01: map-get($carbon--theme, 'disabled-01');
+$disabled-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'disabled-01'
+    ),
+  map-get($carbon--theme, 'disabled-01'),
+  #f4f4f4
+);
 ```
 
 </details>
@@ -4659,7 +8277,14 @@ Disabled elements on `$disabled-01`; Disabled label; Disabled text on
 <summary>Source code</summary>
 
 ```scss
-$disabled-02: map-get($carbon--theme, 'disabled-02');
+$disabled-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'disabled-02'
+    ),
+  map-get($carbon--theme, 'disabled-02'),
+  #c6c6c6
+);
 ```
 
 </details>
@@ -4677,7 +8302,14 @@ Disabled text on `$disabled-02`; Disabled icons on `$disabled-02`
 <summary>Source code</summary>
 
 ```scss
-$disabled-03: map-get($carbon--theme, 'disabled-03');
+$disabled-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'disabled-03'
+    ),
+  map-get($carbon--theme, 'disabled-03'),
+  #8d8d8d
+);
 ```
 
 </details>
@@ -4695,7 +8327,14 @@ $disabled-03: map-get($carbon--theme, 'disabled-03');
 <summary>Source code</summary>
 
 ```scss
-$highlight: map-get($carbon--theme, 'highlight');
+$highlight: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'highlight'
+    ),
+  map-get($carbon--theme, 'highlight'),
+  #d0e2ff
+);
 ```
 
 </details>
@@ -4713,7 +8352,14 @@ Skeleton state of graphics
 <summary>Source code</summary>
 
 ```scss
-$skeleton-01: map-get($carbon--theme, 'skeleton-01');
+$skeleton-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'skeleton-01'
+    ),
+  map-get($carbon--theme, 'skeleton-01'),
+  #e5e5e5
+);
 ```
 
 </details>
@@ -4731,7 +8377,14 @@ Skeleton state of text
 <summary>Source code</summary>
 
 ```scss
-$skeleton-02: map-get($carbon--theme, 'skeleton-02');
+$skeleton-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'skeleton-02'
+    ),
+  map-get($carbon--theme, 'skeleton-02'),
+  #c6c6c6
+);
 ```
 
 </details>
@@ -4747,7 +8400,14 @@ $skeleton-02: map-get($carbon--theme, 'skeleton-02');
 <summary>Source code</summary>
 
 ```scss
-$brand-01: map-get($carbon--theme, 'brand-01');
+$brand-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'brand-01'
+    ),
+  map-get($carbon--theme, 'brand-01'),
+  #0f62fe
+);
 ```
 
 </details>
@@ -4765,7 +8425,14 @@ $brand-01: map-get($carbon--theme, 'brand-01');
 <summary>Source code</summary>
 
 ```scss
-$brand-02: map-get($carbon--theme, 'brand-02');
+$brand-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'brand-02'
+    ),
+  map-get($carbon--theme, 'brand-02'),
+  #393939
+);
 ```
 
 </details>
@@ -4783,7 +8450,14 @@ $brand-02: map-get($carbon--theme, 'brand-02');
 <summary>Source code</summary>
 
 ```scss
-$brand-03: map-get($carbon--theme, 'brand-03');
+$brand-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'brand-03'
+    ),
+  map-get($carbon--theme, 'brand-03'),
+  #0f62fe
+);
 ```
 
 </details>
@@ -4801,7 +8475,14 @@ $brand-03: map-get($carbon--theme, 'brand-03');
 <summary>Source code</summary>
 
 ```scss
-$active-01: map-get($carbon--theme, 'active-01');
+$active-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'active-01'
+    ),
+  map-get($carbon--theme, 'active-01'),
+  #c6c6c6
+);
 ```
 
 </details>
@@ -4819,7 +8500,14 @@ $active-01: map-get($carbon--theme, 'active-01');
 <summary>Source code</summary>
 
 ```scss
-$hover-field: map-get($carbon--theme, 'hover-field');
+$hover-field: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-field'
+    ),
+  map-get($carbon--theme, 'hover-field'),
+  #e5e5e5
+);
 ```
 
 </details>
@@ -4830,6 +8518,1066 @@ $hover-field: map-get($carbon--theme, 'hover-field');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 - **Deprecated**: This may not be available in future releases
+
+### ✅caption-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$caption-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'caption-01'
+    ),
+  map-get($carbon--theme, 'caption-01'),
+  (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅label-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$label-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'label-01'
+    ),
+  map-get($carbon--theme, 'label-01'),
+  (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅helper-text-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$helper-text-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'helper-text-01'
+    ),
+  map-get($carbon--theme, 'helper-text-01'),
+  (
+    font-size: 0.75rem,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅body-short-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$body-short-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'body-short-01'
+    ),
+  map-get($carbon--theme, 'body-short-01'),
+  (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅body-long-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$body-long-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'body-long-01'
+    ),
+  map-get($carbon--theme, 'body-long-01'),
+  (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.16px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅body-short-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$body-short-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'body-short-02'
+    ),
+  map-get($carbon--theme, 'body-short-02'),
+  (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅body-long-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$body-long-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'body-long-02'
+    ),
+  map-get($carbon--theme, 'body-long-02'),
+  (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.5rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅code-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$code-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'code-01'
+    ),
+  map-get($carbon--theme, 'code-01'),
+  (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅code-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$code-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'code-02'
+    ),
+  map-get($carbon--theme, 'code-02'),
+  (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.32px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅heading-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$heading-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'heading-01'
+    ),
+  map-get($carbon--theme, 'heading-01'),
+  (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-01'
+    ),
+  map-get($carbon--theme, 'productive-heading-01'),
+  (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅heading-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$heading-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'heading-02'
+    ),
+  map-get($carbon--theme, 'heading-02'),
+  (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-02'
+    ),
+  map-get($carbon--theme, 'productive-heading-02'),
+  (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-03'
+    ),
+  map-get($carbon--theme, 'productive-heading-03'),
+  (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 1.625rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-04'
+    ),
+  map-get($carbon--theme, 'productive-heading-04'),
+  (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 2.25rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-05'
+    ),
+  map-get($carbon--theme, 'productive-heading-05'),
+  (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 2.5rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-06: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-06'
+    ),
+  map-get($carbon--theme, 'productive-heading-06'),
+  (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 3.125rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-07 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-07: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-07'
+    ),
+  map-get($carbon--theme, 'productive-heading-07'),
+  (
+    font-size: 3.375rem,
+    font-weight: 300,
+    line-height: 4rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-01'
+    ),
+  map-get($carbon--theme, 'expressive-heading-01'),
+  (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-02'
+    ),
+  map-get($carbon--theme, 'expressive-heading-02'),
+  (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-03'
+    ),
+  map-get($carbon--theme, 'expressive-heading-03'),
+  (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.25rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 1.5rem,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-04'
+    ),
+  map-get($carbon--theme, 'expressive-heading-04'),
+  (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 129%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.75rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 2rem,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-05'
+    ),
+  map-get($carbon--theme, 'expressive-heading-05'),
+  (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 300,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 300,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 300,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 300,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-06: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-06'
+    ),
+  map-get($carbon--theme, 'expressive-heading-06'),
+  (
+    font-size: 2rem,
+    font-weight: 600,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 600,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 600,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 600,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 600,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-paragraph-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-paragraph-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-paragraph-01'
+    ),
+  map-get($carbon--theme, 'expressive-paragraph-01'),
+  (
+    font-size: 1.5rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    lg: (
+      font-size: 1.75rem,
+      line-height: 129%,
+    ),
+    max: (
+      font-size: 2rem,
+      line-height: 125%,
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅quotation-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$quotation-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'quotation-01'
+    ),
+  map-get($carbon--theme, 'quotation-01'),
+  (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 1.25rem,
+        font-weight: 400,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 1.5rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 1.75rem,
+        font-weight: 400,
+        line-height: 129%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 2rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅quotation-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$quotation-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'quotation-02'
+    ),
+  map-get($carbon--theme, 'quotation-02'),
+  (
+    font-size: 2rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        line-height: 122%,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        line-height: 119%,
+      ),
+      xlg: (
+        font-size: 3rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 3.75rem,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅display-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'display-01'
+    ),
+  map-get($carbon--theme, 'display-01'),
+  (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅display-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'display-02'
+    ),
+  map-get($carbon--theme, 'display-02'),
+  (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 116%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅display-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'display-03'
+    ),
+  map-get($carbon--theme, 'display-03'),
+  (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅display-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'display-04'
+    ),
+  map-get($carbon--theme, 'display-04'),
+  (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+        letter-spacing: -0.64px,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ## @carbon/type
 
@@ -5034,6 +9782,8 @@ Set the `font-weight` property with the value for a given name
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [carbon--font-weight [function]](#carbon--font-weight-function)
+- **Used by**:
+  - [carbon--type-reset [mixin]](#carbon--type-reset-mixin)
 
 ### ✅carbon--font-face-mono [mixin]
 
@@ -5508,20 +10258,18 @@ Include a type reset for a given body and mono font family
 
   body {
     font-family: $body-font-family;
-    font-weight: 400;
+    @include carbon--font-weight('regular');
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  // IBM Plex uses semibold instead of bold, as a result we need to map
-  // tags that use `font-weight: bold` to the semibold value
-  strong {
-    font-weight: 600;
-  }
-
   code {
     font-family: $mono-font-family;
+  }
+
+  strong {
+    @include carbon--font-weight('semibold');
   }
 }
 ```
@@ -5537,6 +10285,61 @@ Include a type reset for a given body and mono font family
 | `$mono-font-family` | The font family used on elements that require mono fonts, like the `<code>` element | `String` | `carbon--font-family('mono')` |
 
 - **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
+
+### ✅carbon--default-type [mixin]
+
+Include default type styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon--default-type() {
+  h1 {
+    @include carbon--type-style('productive-heading-06');
+  }
+
+  h2 {
+    @include carbon--type-style('productive-heading-05');
+  }
+
+  h3 {
+    @include carbon--type-style('productive-heading-04');
+  }
+
+  h4 {
+    @include carbon--type-style('productive-heading-03');
+  }
+
+  h5 {
+    @include carbon--type-style('productive-heading-02');
+  }
+
+  h6 {
+    @include carbon--type-style('productive-heading-01');
+  }
+
+  p {
+    @include carbon--type-style('body-long-02');
+  }
+
+  a {
+    color: #0062ff;
+  }
+
+  em {
+    font-style: italic;
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
 
 ### ✅carbon--font-face-sans [mixin]
 
@@ -6694,7 +11497,6 @@ $label-01: (
 ```scss
 $helper-text-01: (
   font-size: carbon--type-scale(1),
-  font-style: italic,
   line-height: carbon--rem(16px),
   letter-spacing: 0.32px,
 );
@@ -7643,6 +12445,43 @@ Computes the fluid `font-size` for a given type style and breakpoint
 - **Used by**:
   - [fluid-type [mixin]](#fluid-type-mixin)
 
+### ❌custom-property-prefix [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$custom-property-prefix: 'cds';
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+
+### ❌custom-properties [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin custom-properties() {
+  @each $property, $value in $value {
+    #{$property}: var(
+      --#{$custom-property-prefix}-#{$name}-#{$property},
+      #{$value}
+    );
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [custom-property-prefix [variable]](#custom-property-prefix-variable)
+- **Used by**:
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+
 ### ✅carbon--type-style [mixin]
 
 Helper mixin to include the styles for a given token in any selector in your
@@ -7671,9 +12510,15 @@ fixed contexts.
   @if $fluid == true and map-has-key($token, 'breakpoints') {
     @include fluid-type($token, $breakpoints);
   } @else {
-    // Otherwise, we just include all the property declarations directly on the
-    // selector
-    @include properties(map-remove($token, 'breakpoints'));
+    @if global-variable-exists('feature-flags') and
+      map-get($feature-flags, 'enable-css-custom-properties')
+    {
+      @include custom-properties($name, $token);
+    } @else {
+      // Otherwise, we just include all the property declarations directly on the
+      // selector
+      @include properties(map-remove($token, 'breakpoints'));
+    }
   }
 }
 ```
@@ -7691,7 +12536,9 @@ fixed contexts.
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [fluid-type [mixin]](#fluid-type-mixin)
+  - [custom-properties [mixin]](#custom-properties-mixin)
   - [properties [mixin]](#properties-mixin)
   - [tokens [variable]](#tokens-variable)
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
+  - [carbon--default-type [mixin]](#carbon--default-type-mixin)

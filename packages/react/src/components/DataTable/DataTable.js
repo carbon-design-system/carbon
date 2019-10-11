@@ -109,6 +109,12 @@ export default class DataTable extends React.Component {
      * Specify whether the control should be a radio button or inline checkbox
      */
     radio: PropTypes.bool,
+
+    /**
+     * Specify whether the header should be sticky.
+     * Still experimental: may not work with every combination of table props
+     */
+    stickyHeader: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -156,10 +162,10 @@ export default class DataTable extends React.Component {
    * Get the props associated with the given header. Mostly used for adding in
    * sorting behavior.
    *
-   * @param {Object} config
+   * @param {object} config
    * @param {string} config.header the header we want the props for
    * @param {Function} config.onClick a custom click handler for the header
-   * @returns {Object}
+   * @returns {object}
    */
   getHeaderProps = ({
     header,
@@ -191,9 +197,9 @@ export default class DataTable extends React.Component {
   /**
    * Get the props associated with the given expand header.
    *
-   * @param {Object} config
+   * @param {object} config
    * @param {Function} config.onClick a custom click handler for the expand header
-   * @returns {Object}
+   * @returns {object}
    */
   getExpandHeaderProps = ({ onClick, ...rest } = {}) => {
     const { translateWithId: t } = this.props;
@@ -222,7 +228,7 @@ export default class DataTable extends React.Component {
    * Decorate consumer's `onClick` event handler with sort parameters
    *
    * @param {Function} onClick
-   * @param {Object} sortParams
+   * @param {object} sortParams
    * @returns {Function}
    */
   handleOnHeaderClick = (onClick, sortParams) => {
@@ -233,7 +239,7 @@ export default class DataTable extends React.Component {
    * Decorate consumer's `onClick` event handler with sort parameters
    *
    * @param {Function} onClick
-   * @param {Object} expandParams
+   * @param {object} expandParams
    * @returns {Function}
    */
   handleOnExpandHeaderClick = (onClick, expandParams) => {
@@ -243,10 +249,10 @@ export default class DataTable extends React.Component {
   /**
    * Get the props associated with the given row. Mostly used for expansion.
    *
-   * @param {Object} config
-   * @param {Object} config.row the row we want the props for
+   * @param {object} config
+   * @param {object} config.row the row we want the props for
    * @param {Function} config.onClick a custom click handler for the header
-   * @returns {Object}
+   * @returns {object}
    */
   getRowProps = ({ row, onClick, ...rest }) => {
     const { translateWithId: t } = this.props;
@@ -271,8 +277,8 @@ export default class DataTable extends React.Component {
    * applicable. Most often used to indicate selection status of the table or
    * for a specific row.
    *
-   * @param {Object} [row] an optional row that we want to access the props for
-   * @returns {Object}
+   * @param {object} [row] an optional row that we want to access the props for
+   * @returns {object}
    */
   getSelectionProps = ({ onClick, row, ...rest } = {}) => {
     const { translateWithId: t } = this.props;
@@ -339,6 +345,7 @@ export default class DataTable extends React.Component {
       isSortable,
       useStaticWidth,
       shouldShowBorder,
+      stickyHeader,
     } = this.props;
     return {
       useZebraStyles,
@@ -346,6 +353,18 @@ export default class DataTable extends React.Component {
       isSortable,
       useStaticWidth,
       shouldShowBorder,
+      stickyHeader,
+    };
+  };
+
+  /**
+   * Helper utility to get the TableContainer Props.
+   */
+  getTableContainerProps = () => {
+    const { stickyHeader } = this.props;
+
+    return {
+      stickyHeader,
     };
   };
 
@@ -370,8 +389,8 @@ export default class DataTable extends React.Component {
   /**
    * Helper for toggling all selected items in a state. Does not call
    * setState, so use it when setting state.
-   * @param {Object} initialState
-   * @returns {Object} object to put into this.setState (use spread operator)
+   * @param {object} initialState
+   * @returns {object} object to put into this.setState (use spread operator)
    */
   setAllSelectedState = (initialState, isSelected) => {
     const { rowIds } = initialState;
@@ -535,8 +554,8 @@ export default class DataTable extends React.Component {
    * @param {Event} event
    */
   handleOnInputValueChange = event => {
-    if (event.currentTarget) {
-      this.setState({ filterInputValue: event.currentTarget.value });
+    if (event.target) {
+      this.setState({ filterInputValue: event.target.value });
     }
   };
 
@@ -565,6 +584,7 @@ export default class DataTable extends React.Component {
       getSelectionProps: this.getSelectionProps,
       getBatchActionProps: this.getBatchActionProps,
       getTableProps: this.getTableProps,
+      getTableContainerProps: this.getTableContainerProps,
 
       // Custom event handlers
       onInputChange: this.handleOnInputValueChange,

@@ -68,6 +68,14 @@
     // Select text renders a little high on Firefox
     @-moz-document url-prefix() {
       padding-top: rem(4px);
+
+      // Removes dotted inner focus
+      &:-moz-focusring,
+      &::-moz-focus-inner {
+        color: transparent;
+        text-shadow: 0 0 0 #000;
+        background-image: none;
+      }
     }
 
     &:focus {

@@ -24,6 +24,7 @@ describe('MultiSelect.Filterable', () => {
 
   beforeEach(() => {
     mockProps = {
+      id: 'test-filterable-multiselect',
       disabled: false,
       items: generateItems(5, generateGenericItem),
       initialSelectedItems: [],

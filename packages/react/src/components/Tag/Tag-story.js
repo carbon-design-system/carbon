@@ -26,6 +26,7 @@ const props = {
       'red'
     ),
     disabled: boolean('Disabled (disabled)', false),
+    role: 'listitem',
   }),
   filter() {
     return { ...this.regular(), onClick: action('onClick') };

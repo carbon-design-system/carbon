@@ -10,8 +10,11 @@ exports[`SideNavLink should render 1`] = `
     </div>
   }
   isActive={false}
+  large={false}
 >
-  <SideNavItem>
+  <SideNavItem
+    large={false}
+  >
     <li
       className="bx--side-nav__item"
     >
@@ -56,8 +59,11 @@ exports[`SideNavLink should render 2`] = `
     </div>
   }
   isActive={true}
+  large={false}
 >
-  <SideNavItem>
+  <SideNavItem
+    large={false}
+  >
     <li
       className="bx--side-nav__item"
     >

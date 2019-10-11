@@ -22,21 +22,26 @@ const TooltipIcon = ({
   tooltipText,
   ...rest
 }) => {
-  const tooltipId = id || `definition-tooltip-${getInstanceId()}`;
-  const tooltipClassName = cx(`${prefix}--tooltip--icon`, className);
-  const tooltipTriggerClasses = cx(`${prefix}--tooltip__trigger`, {
-    [`${prefix}--tooltip--${direction}`]: direction,
-    [`${prefix}--tooltip--align-${align}`]: align,
-  });
+  const tooltipId = id || `icon-tooltip-${getInstanceId()}`;
+  const tooltipTriggerClasses = cx(
+    `${prefix}--tooltip__trigger`,
+    `${prefix}--tooltip--a11y`,
+    className,
+    {
+      [`${prefix}--tooltip--${direction}`]: direction,
+      [`${prefix}--tooltip--align-${align}`]: align,
+    }
+  );
   return (
-    <div {...rest} className={tooltipClassName}>
-      <button
-        className={tooltipTriggerClasses}
-        aria-describedby={tooltipId}
-        aria-label={tooltipText}>
-        {children}
-      </button>
-    </div>
+    <button
+      {...rest}
+      className={tooltipTriggerClasses}
+      aria-describedby={tooltipId}>
+      <span className={`${prefix}--assistive-text`} id={tooltipId}>
+        {tooltipText}
+      </span>
+      {children}
+    </button>
   );
 };
 

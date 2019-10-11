@@ -7,9 +7,15 @@
 
 'use strict';
 
-const path = require('path');
-const build = require('../src/build');
+const { builders } = require('@carbon/icon-build-helpers');
+const meta = require('@carbon/icons/build-info.json');
 
-build({ cwd: path.resolve(__dirname, '../') }).catch(error => {
+async function build() {
+  await builders.react.run(meta, {
+    cwd: process.cwd(),
+  });
+}
+
+build().catch(error => {
   console.error(error);
 });

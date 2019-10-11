@@ -8,6 +8,7 @@
 import {
   // Blue
   blue20,
+  blue40,
   blue60,
   blue70,
   blue80,
@@ -16,6 +17,7 @@ import {
   gray10,
   gray20,
   gray30,
+  gray40,
   gray50,
   gray60,
   gray70,
@@ -40,7 +42,7 @@ import {
 } from '@carbon/colors';
 
 export const interactive01 = blue60;
-export const interactive02 = gray100;
+export const interactive02 = gray80;
 export const interactive03 = blue60;
 export const interactive04 = blue60;
 
@@ -53,15 +55,18 @@ export const ui04 = gray50;
 export const ui05 = gray100;
 
 export const text01 = gray100;
-export const text02 = gray70;
-export const text03 = gray50;
+export const text02 = gray80;
+export const text03 = gray40;
 export const text04 = white;
+export const text05 = gray60;
 
 export const icon01 = gray100;
 export const icon02 = gray70;
 export const icon03 = white;
 
 export const link01 = blue60;
+
+export const inverseLink = blue40;
 
 export const field01 = gray10;
 export const field02 = white;
@@ -81,8 +86,11 @@ export const inverseSupport04 = blue50;
 
 export const overlay01 = rgba(gray100, 0.5);
 
+export const danger = red60;
+
 // Interaction states
 export const focus = blue60;
+export const inverseFocusUi = white;
 
 export const hoverPrimary = '#0353e9';
 export const activePrimary = blue80;
@@ -98,6 +106,7 @@ export const activeTertiary = blue80;
 export const hoverUI = '#e5e5e5';
 export const activeUI = gray30;
 export const selectedUI = gray20;
+export const inverseHoverUI = '#4c4c4c';
 
 export const hoverSelectedUI = '#cacaca';
 
@@ -116,6 +125,39 @@ export const highlight = blue20;
 
 export const skeleton01 = '#e5e5e5';
 export const skeleton02 = gray30;
+
+// Type
+export { caption01 } from '@carbon/type';
+export { label01 } from '@carbon/type';
+export { helperText01 } from '@carbon/type';
+export { bodyShort01 } from '@carbon/type';
+export { bodyLong01 } from '@carbon/type';
+export { bodyShort02 } from '@carbon/type';
+export { bodyLong02 } from '@carbon/type';
+export { code01 } from '@carbon/type';
+export { code02 } from '@carbon/type';
+export { heading01 } from '@carbon/type';
+export { productiveHeading01 } from '@carbon/type';
+export { heading02 } from '@carbon/type';
+export { productiveHeading02 } from '@carbon/type';
+export { productiveHeading03 } from '@carbon/type';
+export { productiveHeading04 } from '@carbon/type';
+export { productiveHeading05 } from '@carbon/type';
+export { productiveHeading06 } from '@carbon/type';
+export { productiveHeading07 } from '@carbon/type';
+export { expressiveHeading01 } from '@carbon/type';
+export { expressiveHeading02 } from '@carbon/type';
+export { expressiveHeading03 } from '@carbon/type';
+export { expressiveHeading04 } from '@carbon/type';
+export { expressiveHeading05 } from '@carbon/type';
+export { expressiveHeading06 } from '@carbon/type';
+export { expressiveParagraph01 } from '@carbon/type';
+export { quotation01 } from '@carbon/type';
+export { quotation02 } from '@carbon/type';
+export { display01 } from '@carbon/type';
+export { display02 } from '@carbon/type';
+export { display03 } from '@carbon/type';
+export { display04 } from '@carbon/type';
 
 // Deprecated ☠️
 export const brand01 = interactive01;

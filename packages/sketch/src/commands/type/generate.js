@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import sketch from 'sketch';
 import { Document, Rectangle, Text } from 'sketch/dom';
 import { command } from '../command';
 import { findOrCreatePage, selectPage } from '../../tools/page';
@@ -18,13 +17,13 @@ const TEXT_MARGIN = 16;
 export function generate() {
   command('commands/type/generate', () => {
     const document = Document.getSelectedDocument();
-    const page = selectPage(findOrCreatePage(document, 'Type'));
+    const page = selectPage(findOrCreatePage(document, 'type'));
     const sharedStyles = syncTextStyles(document);
 
     let Y_OFFSET = 0;
 
     for (const sharedStyle of sharedStyles) {
-      const layer = new Text({
+      new Text({
         name: sharedStyle.name,
         frame: new Rectangle(0, Y_OFFSET, TEXT_LAYER_WIDTH, TEXT_LAYER_HEIGHT),
         style: sharedStyle.style,

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import Download16 from '@carbon/icons-react/lib/download/16';
+import { Download16 } from '@carbon/icons-react';
 import { TableToolbarMenu } from '..';
 
 describe('DataTable.TableToolbarMenu', () => {

@@ -25,6 +25,9 @@
   <a href="https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
   </a>
+  <a href="https://gitter.im/carbondesignsystem/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge">
+    <img src="https://badges.gitter.im/carbondesignsystem/community.svg" alt="Chat with us on Gitter" />
+  </a>
 </p>
 
 ## Getting started
@@ -32,6 +35,11 @@
 If you're just getting started, check out
 [`carbon-components`](./packages/components). If you're looking for React
 components, take a look at [`carbon-components-react`](./packages/react).
+
+We also have community-contributed components for the following technologies:
+
+- [Angular](https://github.com/IBM/carbon-components-angular)
+- [Vue](https://github.com/carbon-design-system/carbon-components-vue)
 
 If you're trying to find something specific, here's a full list of packages that
 we support!
@@ -56,15 +64,16 @@ we support!
   how-to docs and guidelines
 - [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions
   to this repo.
-- [🏃‍♀️ Migration Guides](./docs/migration)
-  - [v9 to v10](./docs/migration/migrate-to-10.x.md)
+- 🏃‍♀️ Migration Guides
+  - [v9 to v10 (vanilla)](./packages/components/docs/migration/migrate-to-10.x.md)
+  - [v9 to v10 (v6 to v7 React)](./packages/react/docs/migration/migrate-to-7.x.md)
 
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
 check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
-[Developer Guide](./github/developing.md)! 👀
+[Developer Guide](./docs/developer-handbook.md)! 👀
 
 ## 📝 License
 

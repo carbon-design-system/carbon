@@ -99,10 +99,10 @@ document.addEventListener('floating-menu-hidden', function(evt) {
 ### HTML
 
 By default, the menu body (`ul.bx--overflow-menu-options`) goes right under
-`<body>`. You can change the behavior by adding `data-floating-menu-container`
-to one of the DOM ancestors of the root element (`div[data-overflow-menu]`). For
-example, if you have HTML structure like below, the menu body will go under the
-second `<div>`:
+`<body>`. To ensure the proper accessibility experience, add
+`data-floating-menu-container` to one of the DOM ancestors of the root element
+(`div[data-overflow-menu]`). For example, if you have HTML structure like below,
+the menu body will go under the second `<div>`:
 
 ```html
 <body>

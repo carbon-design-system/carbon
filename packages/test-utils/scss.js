@@ -10,6 +10,7 @@
 const fs = require('fs');
 const { render, types } = require('node-sass');
 const path = require('path');
+const resolve = require('resolve');
 
 function sassAsync(options) {
   return new Promise((resolve, reject) => {
@@ -23,15 +24,40 @@ function sassAsync(options) {
   });
 }
 
+const defaultResolveOptions = {
+  extensions: ['.scss'],
+};
+
 /**
  * Create an importer for sass with the given `cwd`. This importer will try and
  * mimic the default sass resolution algorithm
  * @param {string} cwd
- * @return {Function}
+ * @returns {Function}
  */
 function createImporter(cwd) {
   return (url, prev, done) => {
     const baseDirectory = prev !== 'stdin' ? path.dirname(prev) : cwd;
+
+    if (url.startsWith('@')) {
+      const file = resolve.sync(url, {
+        ...defaultResolveOptions,
+        basedir: cwd,
+        packageFilter(pkg) {
+          if (pkg.eyeglass !== undefined) {
+            // Replace JavaScript entrypoint with Sass module entrypoing
+            pkg.main = `${pkg.eyeglass.sassDir}/index.scss`;
+          }
+          return pkg;
+        },
+        pathFilter(pkg, path, relativePath) {
+          // Transforms `scss/filename` to `scss/_filename.scss`
+          return relativePath.replace(/^(scss\/)([a-z-]+)/, '$1_$2.scss');
+        },
+      });
+      done({ file });
+      return;
+    }
+
     const partialFilepath = path.resolve(
       baseDirectory,
       path.dirname(url),
@@ -62,7 +88,7 @@ function createImporter(cwd) {
  * is useful so that we can resolve sass files relative to the test file.
  * @param {string} cwd
  * @param {string} initialData - optional string to prefix each render call
- * @return {Function}
+ * @returns {Function}
  */
 function createSassRenderer(cwd, initialData = '') {
   const importer = createImporter(cwd);
@@ -141,6 +167,13 @@ function convert(value) {
   }
 
   if (value instanceof types.Color) {
+    if (value.getA() !== 1) {
+      const r = value.getR();
+      const g = value.getG();
+      const b = value.getB();
+      const a = value.getA();
+      return `rgba(${r}, ${g}, ${b}, ${a})`;
+    }
     const hexcode = [value.getR(), value.getG(), value.getB()]
       .map(toHexString)
       .join('');

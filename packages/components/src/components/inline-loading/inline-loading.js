@@ -23,7 +23,7 @@ class InlineLoading extends mixin(
    * @extends InitComponentBySearch
    * @extends Handles
    * @param {HTMLElement} element The element working as a spinner.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @param {string} [options.initialState] The initial state, should be `inactive`, `active` or `finished`.
    */
   constructor(element, options) {
@@ -54,24 +54,36 @@ class InlineLoading extends mixin(
     const {
       selectorSpinner,
       selectorFinished,
+      selectorError,
       selectorTextActive,
       selectorTextFinished,
+      selectorTextError,
     } = this.options;
     const spinner = elem.querySelector(selectorSpinner);
     const finished = elem.querySelector(selectorFinished);
+    const error = elem.querySelector(selectorError);
     const textActive = elem.querySelector(selectorTextActive);
     const textFinished = elem.querySelector(selectorTextFinished);
+    const textError = elem.querySelector(selectorTextError);
 
     if (spinner) {
       spinner.classList.toggle(
         this.options.classLoadingStop,
         state !== states.ACTIVE
       );
-      toggleAttribute(spinner, 'hidden', state === states.FINISHED);
+      toggleAttribute(
+        spinner,
+        'hidden',
+        state !== states.INACTIVE && state !== states.ACTIVE
+      );
     }
 
     if (finished) {
       toggleAttribute(finished, 'hidden', state !== states.FINISHED);
+    }
+
+    if (error) {
+      toggleAttribute(error, 'hidden', state !== states.ERROR);
     }
 
     if (textActive) {
@@ -80,6 +92,10 @@ class InlineLoading extends mixin(
 
     if (textFinished) {
       toggleAttribute(textFinished, 'hidden', state !== states.FINISHED);
+    }
+
+    if (textError) {
+      toggleAttribute(textError, 'hidden', state !== states.ERROR);
     }
 
     return this;
@@ -93,6 +109,7 @@ class InlineLoading extends mixin(
     INACTIVE: 'inactive',
     ACTIVE: 'active',
     FINISHED: 'finished',
+    ERROR: 'error',
   };
 
   /**
@@ -108,12 +125,14 @@ class InlineLoading extends mixin(
    * or {@linkcode InlineLoading.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode InlineLoading.init .init()} works.
    * @member InlineLoading.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The CSS selector to find inline loading components.
    * @property {string} selectorSpinner The CSS selector to find the spinner.
    * @property {string} selectorFinished The CSS selector to find the "finished" icon.
+   * @property {string} selectorError The CSS selector to find the "error" icon.
    * @property {string} selectorTextActive The CSS selector to find the text describing the active state.
    * @property {string} selectorTextFinished The CSS selector to find the text describing the finished state.
+   * @property {string} selectorTextError The CSS selector to find the text describing the error state.
    * @property {string} classLoadingStop The CSS class for spinner's stopped state.
    */
   static get options() {
@@ -122,8 +141,10 @@ class InlineLoading extends mixin(
       selectorInit: '[data-inline-loading]',
       selectorSpinner: '[data-inline-loading-spinner]',
       selectorFinished: '[data-inline-loading-finished]',
+      selectorError: '[data-inline-loading-error]',
       selectorTextActive: '[data-inline-loading-text-active]',
       selectorTextFinished: '[data-inline-loading-text-finished]',
+      selectorTextError: '[data-inline-loading-text-error]',
       classLoadingStop: `${prefix}--loading--stop`,
     };
   }

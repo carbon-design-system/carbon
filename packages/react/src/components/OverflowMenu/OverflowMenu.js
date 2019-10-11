@@ -16,8 +16,8 @@ import FloatingMenu, {
   DIRECTION_BOTTOM,
 } from '../../internal/FloatingMenu';
 import OptimizedResize from '../../internal/OptimizedResize';
-import OverflowMenuVertical16 from '@carbon/icons-react/lib/overflow-menu--vertical/16';
-import { keys, matches as keyCodeMatches } from '../../tools/key';
+import { OverflowMenuVertical16 } from '@carbon/icons-react';
+import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
 import mergeRefs from '../../tools/mergeRefs';
 
 const { prefix } = settings;
@@ -206,7 +206,7 @@ class OverflowMenu extends Component {
   };
 
   static defaultProps = {
-    ariaLabel: 'list of options',
+    ariaLabel: 'Menu',
     iconDescription: 'open and close list of options',
     open: false,
     direction: DIRECTION_BOTTOM,
@@ -312,7 +312,7 @@ class OverflowMenu extends Component {
   };
 
   handleKeyDown = evt => {
-    if (keyCodeMatches(evt, [keys.DOWN])) {
+    if (keyCodeMatches(evt, [keys.ArrowDown])) {
       this.setState({ open: !this.state.open });
       this.props.onClick(evt);
     }
@@ -321,13 +321,13 @@ class OverflowMenu extends Component {
   handleKeyPress = evt => {
     // only respond to key events when the menu is closed, so that menu items still respond to key events
     if (!this.state.open) {
-      if (keyCodeMatches(evt, [keys.ENTER, keys.SPACE])) {
+      if (keyCodeMatches(evt, [keys.Enter, keys.Space])) {
         this.setState({ open: true });
       }
     }
 
     // Close the overflow menu on escape
-    if (keyCodeMatches(evt, [keys.ESC])) {
+    if (keyCodeMatches(evt, [keys.Escape])) {
       this.closeMenu();
       // Stop the esc keypress from bubbling out and closing something it shouldn't
       evt.stopPropagation();
@@ -493,27 +493,29 @@ class OverflowMenu extends Component {
     );
 
     const menuBody = (
-      <ul className={overflowMenuOptionsClasses} tabIndex="-1" role="menu">
+      <ul
+        className={overflowMenuOptionsClasses}
+        tabIndex="-1"
+        role="menu"
+        aria-label={ariaLabel}>
         {childrenWithProps}
       </ul>
     );
 
     const wrappedMenuBody = (
-      <div role="menuitem">
-        <FloatingMenu
-          menuPosition={this.state.menuPosition}
-          menuDirection={direction}
-          menuOffset={flipped ? menuOffsetFlip : menuOffset}
-          menuRef={this._bindMenuBody}
-          menuEl={this.menuEl}
-          flipped={this.props.flipped}
-          target={this._getTarget}
-          onPlace={this._handlePlace}>
-          {React.cloneElement(menuBody, {
-            'data-floating-menu-direction': direction,
-          })}
-        </FloatingMenu>
-      </div>
+      <FloatingMenu
+        menuPosition={this.state.menuPosition}
+        menuDirection={direction}
+        menuOffset={flipped ? menuOffsetFlip : menuOffset}
+        menuRef={this._bindMenuBody}
+        menuEl={this.menuEl}
+        flipped={this.props.flipped}
+        target={this._getTarget}
+        onPlace={this._handlePlace}>
+        {React.cloneElement(menuBody, {
+          'data-floating-menu-direction': direction,
+        })}
+      </FloatingMenu>
     );
 
     const iconProps = {
@@ -528,12 +530,11 @@ class OverflowMenu extends Component {
       <ClickListener onClickOutside={this.handleClickOutside}>
         <div
           {...other}
-          role="menu"
+          role="button"
           aria-haspopup
           aria-expanded={this.state.open}
           className={overflowMenuClasses}
           onKeyDown={this.handleKeyPress}
-          onBlur={this.handleBlur}
           onClick={this.handleClick}
           aria-label={ariaLabel}
           id={id}

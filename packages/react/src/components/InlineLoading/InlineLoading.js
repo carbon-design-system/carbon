@@ -5,103 +5,113 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { CheckmarkFilled16, Error20 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
+import deprecate from '../../prop-types/deprecate';
 import Loading from '../Loading';
 
 const { prefix } = settings;
 
-export default class InlineLoading extends React.Component {
-  static propTypes = {
-    /**
-     * Specify a custom className to be applied to the container node
-     */
-    className: PropTypes.string,
-
-    /**
-     * Specify whether the load was successful
-     */
-    success: PropTypes.bool,
-
-    /**
-     * Specify the description for the inline loading text
-     */
-    description: PropTypes.string,
-
-    /**
-     * Specify the description for the inline loading text
-     */
-    iconDescription: PropTypes.string,
-
-    /**
-     * Provide an optional handler to be inovked when <InlineLoading> is
-     * successful
-     */
-    onSuccess: PropTypes.func,
-
-    /**
-     * Provide a delay for the `setTimeout` for success
-     */
-    successDelay: PropTypes.number,
-  };
-
-  static defaultProps = {
-    success: false,
-    successDelay: 1500,
-  };
-
-  render() {
-    const {
-      className,
-      success,
-      iconDescription,
-      description,
-      onSuccess,
-      successDelay,
-      ...other
-    } = this.props;
-
-    const loadingClasses = classNames(`${prefix}--inline-loading`, className);
-
-    const getLoading = () => {
-      if (success) {
-        setTimeout(() => {
-          if (onSuccess) {
-            onSuccess();
-          }
-        }, successDelay);
-
-        return (
-          <svg
-            className={`${prefix}--inline-loading__checkmark-container ${prefix}--inline-loading__svg`}
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 10 10">
-            <polyline
-              className={`${prefix}--inline-loading__checkmark`}
-              points="0.74 3.4 3.67 6.34 9.24 0.74"
-            />
-          </svg>
-        );
-      }
-
+export default function InlineLoading({
+  className,
+  success,
+  status = success ? 'finished' : 'active',
+  iconDescription,
+  description,
+  onSuccess,
+  successDelay,
+  ...other
+}) {
+  const loadingClasses = classNames(`${prefix}--inline-loading`, className);
+  const getLoading = () => {
+    if (status === 'error') {
+      return <Error20 className={`${prefix}--inline-loading--error`} />;
+    }
+    if (status === 'finished') {
+      setTimeout(() => {
+        if (onSuccess) {
+          onSuccess();
+        }
+      }, successDelay);
       return (
-        <Loading small description={iconDescription} withOverlay={false} />
+        <CheckmarkFilled16
+          className={`${prefix}--inline-loading__checkmark-container`}
+        />
       );
-    };
-
-    const loadingText = (
-      <p className={`${prefix}--inline-loading__text`}>{description}</p>
-    );
-
-    return (
-      <div className={loadingClasses} {...other}>
-        <div className={`${prefix}--inline-loading__animation`}>
-          {getLoading()}
-        </div>
-        {description && loadingText}
-      </div>
-    );
-  }
+    }
+    if (status === 'inactive' || status === 'active') {
+      return (
+        <Loading
+          small
+          description={iconDescription}
+          withOverlay={false}
+          active={status === 'active'}
+        />
+      );
+    }
+    return undefined;
+  };
+  const loadingText = (
+    <div className={`${prefix}--inline-loading__text`}>{description}</div>
+  );
+  const loading = getLoading();
+  const loadingAnimation = loading && (
+    <div className={`${prefix}--inline-loading__animation`}>{loading}</div>
+  );
+  return (
+    <div
+      className={loadingClasses}
+      {...other}
+      aria-live={'assertive' || other['aria-live']}>
+      {loadingAnimation}
+      {description && loadingText}
+    </div>
+  );
 }
+
+InlineLoading.propTypes = {
+  /**
+   * Specify a custom className to be applied to the container node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether the load was successful
+   */
+  success: deprecate(
+    PropTypes.bool,
+    `\nThe prop \`success\` for InlineLoading has been deprecated in favor of \`status\`. Please use \`status="finished"\` instead.`
+  ),
+
+  /**
+   * Specify the loading status
+   */
+  status: PropTypes.oneOf(['inactive', 'active', 'finished', 'error']),
+
+  /**
+   * Specify the description for the inline loading text
+   */
+  description: PropTypes.node,
+
+  /**
+   * Specify the description for the inline loading text
+   */
+  iconDescription: PropTypes.string,
+
+  /**
+   * Provide an optional handler to be inovked when <InlineLoading> is
+   * successful
+   */
+  onSuccess: PropTypes.func,
+
+  /**
+   * Provide a delay for the `setTimeout` for success
+   */
+  successDelay: PropTypes.number,
+};
+InlineLoading.defaultProps = {
+  successDelay: 1500,
+};

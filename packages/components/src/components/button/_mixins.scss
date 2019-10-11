@@ -18,6 +18,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
+  vertical-align: top;
   flex-shrink: 0;
   min-height: rem($button-height);
   padding: $button-padding;
@@ -33,9 +34,9 @@
   &:disabled,
   &.#{$prefix}--btn--disabled {
     cursor: not-allowed;
-    color: $ui-04;
-    background: $ibm-color__gray-30;
-    border-color: $ibm-color__gray-30;
+    color: $disabled-03;
+    background: $disabled-02;
+    border-color: $disabled-02;
   }
 
   .#{$prefix}--btn__icon {
@@ -44,7 +45,6 @@
     flex-shrink: 0;
     width: rem(16px);
     height: rem(16px);
-    transition: all $duration--fast-01 motion(entrance, productive);
   }
 }
 
@@ -80,9 +80,10 @@
   &:hover.#{$prefix}--btn--disabled,
   &:focus.#{$prefix}--btn--disabled {
     color: $ui-04;
-    background: $ibm-color__gray-30;
-    border-color: $ibm-color__gray-30;
+    background-color: $disabled-02;
+    border-color: $disabled-02;
     text-decoration: none;
+    outline-color: $disabled-02;
   }
 
   &:active {

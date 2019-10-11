@@ -26,7 +26,7 @@ const props = () => ({
   labelText: text('Label text (labelText)', 'Search'),
   closeButtonLabelText: text(
     'The label text for the close button (closeButtonLabelText)',
-    ''
+    'Clear search input'
   ),
   placeHolderText: text('Placeholder text (placeHolderText)', 'Search'),
   onChange: action('onChange'),

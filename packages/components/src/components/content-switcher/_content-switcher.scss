@@ -19,7 +19,7 @@
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    height: rem(32px);
+    height: rem(40px);
   }
 
   .#{$prefix}--content-switcher--disabled {
@@ -35,7 +35,6 @@
     display: inline-flex;
     align-items: center;
     width: 100%;
-    height: rem(40px);
     padding: $carbon--spacing-03 $carbon--spacing-05;
     margin: 0;
     white-space: nowrap;
@@ -64,7 +63,8 @@
     }
 
     &:disabled {
-      color: $ui-03;
+      color: $disabled-02;
+      background-color: $disabled-01;
       pointer-events: none;
 
       &:hover {
@@ -132,9 +132,9 @@
     color: $inverse-01;
     z-index: 3;
 
-    // TODO: replace with new disabled color token when finalized
     &:disabled {
-      background-color: $ibm-color__gray-30;
+      background-color: $disabled-03;
+      color: $disabled-02;
     }
   }
 

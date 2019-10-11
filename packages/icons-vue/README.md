@@ -84,13 +84,13 @@ labels, custom classes, event handlers, and more. For example:
 If you're looking for more examples on how to use `@carbon/icons-vue`, we have
 some examples that you can check out:
 
-- [Vue-cli](./examples/vue-cli)
+- [vue-cli](./examples/vue-cli)
 
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md) ! 👀
+check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 

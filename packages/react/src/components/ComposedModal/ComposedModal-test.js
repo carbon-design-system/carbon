@@ -146,10 +146,10 @@ describe('<ModalFooter />', () => {
       expect(buttonComponent.props().kind).toBe('danger');
     });
 
-    it('renders tertiary button if secondary text && danger', () => {
+    it('renders secondary button if secondary text && danger', () => {
       const buttonComponent = secondaryWrapper.find(Button);
       expect(buttonComponent.exists()).toBe(true);
-      expect(buttonComponent.props().kind).toBe('tertiary');
+      expect(buttonComponent.prop('kind')).toBe('secondary');
     });
   });
 });
@@ -165,6 +165,17 @@ describe('<ComposedModal />', () => {
     expect(wrapper.state().open).toEqual(true);
     wrapper.setProps({ open: false });
     expect(wrapper.state().open).toEqual(false);
+  });
+
+  it('should change class of <body> upon open state', () => {
+    mount(<ComposedModal open />);
+    expect(
+      document.body.classList.contains('bx--body--with-modal-open')
+    ).toEqual(true);
+    mount(<ComposedModal open={false} />);
+    expect(
+      document.body.classList.contains('bx--body--with-modal-open')
+    ).toEqual(false);
   });
 
   it('avoids change the open state upon setting props, unless there the value actually changes', () => {

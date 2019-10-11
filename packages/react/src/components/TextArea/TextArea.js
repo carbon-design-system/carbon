@@ -6,50 +6,29 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
+import { WarningFilled16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
 
-const DefaultCharCounter = ({ disabled, count, maxLength }) => {
-  const charCounterClasses = classNames(
-    `${prefix}--text-area--character-counter`,
-    {
-      [`${prefix}--text-area--character-counter--disabled`]: disabled,
-    }
-  );
-  return (
-    <span className={charCounterClasses}>
-      <span className={`${prefix}--text-area--character-counter--length`}>
-        {count}
-      </span>
-      /
-      <span className={`${prefix}--text-area--character-counter--maxlength`}>
-        {maxLength}
-      </span>
-    </span>
-  );
-};
-
-const TextArea = ({
-  className,
-  id,
-  labelText,
-  hideLabel,
-  onChange,
-  onClick,
-  invalid,
-  invalidText,
-  helperText,
-  light,
-  charCount,
-  maxLength,
-  renderCharCounter: CharCounter = DefaultCharCounter,
-  ...other
-}) => {
-  const [textareaVal, setInput] = useState('');
+const TextArea = React.forwardRef(function TextArea(
+  {
+    className,
+    id,
+    labelText,
+    hideLabel,
+    onChange,
+    onClick,
+    invalid,
+    invalidText,
+    helperText,
+    light,
+    ...other
+  },
+  ref
+) {
   const textareaProps = {
     id,
     onChange: evt => {
@@ -62,7 +41,7 @@ const TextArea = ({
         onClick(evt);
       }
     },
-    maxLength: maxLength || null,
+    ref,
   };
 
   const labelClasses = classNames(`${prefix}--label`, {
@@ -70,50 +49,19 @@ const TextArea = ({
     [`${prefix}--label--disabled`]: other.disabled,
   });
 
-  const label = (() => {
-    const labelContent = labelText ? (
-      <label htmlFor={id} className={labelClasses}>
-        {labelText}
-      </label>
-    ) : null;
-    if (labelContent && charCount) {
-      return (
-        <div className={`${prefix}--text-area__character-counter-title`}>
-          {labelContent}
-          <CharCounter
-            disabled={other.disabled}
-            count={textareaVal.length}
-            maxLength={maxLength}
-          />
-        </div>
-      );
-    }
-    return labelContent;
-  })();
+  const label = labelText ? (
+    <label htmlFor={id} className={labelClasses}>
+      {labelText}
+    </label>
+  ) : null;
 
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
   });
 
-  const helper = (() => {
-    const helperContent = helperText ? (
-      <div className={helperTextClasses}>{helperText}</div>
-    ) : null;
-    if (!labelText && charCount) {
-      return (
-        <div className={`${prefix}--text-area__character-counter-title`}>
-          {helperContent}
-          <CharCounter
-            disabled={other.disabled}
-            count={textareaVal.length}
-            maxLength={maxLength}
-          />
-        </div>
-      );
-    }
-
-    return helperContent;
-  })();
+  const helper = helperText ? (
+    <div className={helperTextClasses}>{helperText}</div>
+  ) : null;
 
   const errorId = id + '-error-msg';
 
@@ -136,8 +84,6 @@ const TextArea = ({
       aria-invalid={invalid || null}
       aria-describedby={invalid ? errorId : null}
       disabled={other.disabled}
-      value={textareaVal}
-      onInput={e => setInput(e.target.value)}
     />
   );
 
@@ -156,8 +102,9 @@ const TextArea = ({
       {error}
     </div>
   );
-};
+});
 
+TextArea.displayName = 'TextArea';
 TextArea.propTypes = {
   /**
    * Provide a custom className that is applied directly to the underlying
@@ -242,16 +189,6 @@ TextArea.propTypes = {
    * Specify whether you want the light version of this control
    */
   light: PropTypes.bool,
-
-  /**
-   * Specify whether the character counter is shown
-   */
-  charCount: PropTypes.bool,
-
-  /**
-   * The maximum allowed input value length
-   */
-  maxLength: PropTypes.number,
 };
 
 TextArea.defaultProps = {

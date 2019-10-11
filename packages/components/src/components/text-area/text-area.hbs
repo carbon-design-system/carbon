@@ -5,87 +5,47 @@
   LICENSE file in the root directory of this source tree.
 -->
 
-<div data-text-area class="{{prefix}}--form-item{{#if charCounter}} {{prefix}}--text-area__container{{/if}}">
-  {{#if charCounter}}
-  <div class="{{prefix}}--text-area__character-counter-title">
-    <label for="text-area-2" class="{{prefix}}--label">Text Area label</label>
-    <span class="{{prefix}}--text-area--character-counter">
-      <span class="{{prefix}}--text-area--character-counter--length">0</span>/<span
-        class="{{prefix}}--text-area--character-counter--maxlength">{{maxLength}}</span>
-    </span>
-  </div>
-  {{else}}
-  <label for="text-area-2" class="{{prefix}}--label">Text Area label</label>
-  {{/if}}
-  <div class="{{prefix}}--text-area__wrapper">
-    <textarea id="text-area-2" class="{{prefix}}--text-area {{#if light}} {{prefix}}--text-area--light{{/if}}" rows="4"
-      cols="50" placeholder="Placeholder text." {{#if charCounter}} maxlength="{{maxLength}}" {{/if}}></textarea>
+<div class="{{@root.prefix}}--form-item">
+  <label for="text-area-2" class="{{@root.prefix}}--label">Text Area label</label>
+  <div class="{{@root.prefix}}--text-area__wrapper">
+    <textarea id="text-area-2"
+      class="{{@root.prefix}}--text-area {{@root.prefix}}--text-area--v2{{#if light}} {{@root.prefix}}--text-area--light{{/if}}"
+      rows="4" cols="50" placeholder="Placeholder text."></textarea>
   </div>
 </div>
 
-<div data-text-area class="{{prefix}}--form-item{{#if charCounter}} {{prefix}}--text-area__container{{/if}}">
-  {{#if charCounter}}
-  <div class="{{prefix}}--text-area__character-counter-title">
-    <label for="text-area-3" class="{{prefix}}--label">Text Area label</label>
-    <span class="{{prefix}}--text-area--character-counter">
-      <span class="{{prefix}}--text-area--character-counter--length">0</span>/<span
-        class="{{prefix}}--text-area--character-counter--maxlength">{{maxLength}}</span>
-    </span>
-  </div>
-  {{else}}
-  <label for="text-area-3" class="{{prefix}}--label">Text Area label</label>
-  {{/if}}
-  <div class="{{prefix}}--text-area__wrapper" data-invalid>
-    {{ carbon-icon 'WarningFilled16' class=(add prefix '--text-area__invalid-icon')}}
+<div class="{{@root.prefix}}--form-item">
+  <label for="text-area-3" class="{{@root.prefix}}--label">Text Area label</label>
+  <div class="{{@root.prefix}}--text-area__wrapper" data-invalid>
+    {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--text-area__invalid-icon')}}
     <textarea id="text-area-3"
-      class="{{prefix}}--text-area {{prefix}}--text-area--invalid {{#if light}} {{prefix}}--text-area--light{{/if}}"
-      rows="4" cols="50" placeholder="Placeholder text." {{#if charCounter}} maxlength="{{maxLength}}"
-      {{/if}}></textarea>
+      class="{{@root.prefix}}--text-area {{@root.prefix}}--text-area--invalid {{@root.prefix}}--text-area--v2{{#if light}} {{@root.prefix}}--text-area--light{{/if}}"
+      rows="4" cols="50" placeholder="Placeholder text."></textarea>
   </div>
-  <div class="{{prefix}}--form-requirement">
+  <div class="{{@root.prefix}}--form-requirement">
     Validation message here
   </div>
 </div>
 
-<div data-text-area class="{{prefix}}--form-item{{#if charCounter}} {{prefix}}--text-area__container{{/if}}">
-  {{#if charCounter}}
-  <div class="{{prefix}}--text-area__character-counter-title">
-    <label for="text-area-4" class="{{prefix}}--label">Text Area label</label>
-    <span class="{{prefix}}--text-area--character-counter">
-      <span class="{{prefix}}--text-area--character-counter--length">0</span>/<span
-        class="{{prefix}}--text-area--character-counter--maxlength">{{maxLength}}</span>
-    </span>
-  </div>
-  {{else}}
-  <label for="text-area-4" class="{{prefix}}--label">Text Area label</label>
-  {{/if}}
-  <div class="{{prefix}}--form__helper-text">
+<div class="{{@root.prefix}}--form-item">
+  <label for="text-area-4" class="{{@root.prefix}}--label">Text Area label</label>
+  <div class="{{@root.prefix}}--form__helper-text">
     Optional helper text goes here
   </div>
-  <div class="{{prefix}}--text-area__wrapper">
-    <textarea id="text-area-4" class="{{prefix}}--text-area {{#if light}} {{prefix}}--text-area--light{{/if}}" rows="4"
-      cols="50" placeholder="Placeholder text." {{#if charCounter}} maxlength="{{maxLength}}" {{/if}}></textarea>
+  <div class="{{@root.prefix}}--text-area__wrapper">
+    <textarea id="text-area-4"
+      class="{{@root.prefix}}--text-area {{@root.prefix}}--text-area--v2{{#if light}} {{@root.prefix}}--text-area--light{{/if}}"
+      rows="4" cols="50" placeholder="Placeholder text."></textarea>
   </div>
 </div>
 
-<div data-text-area class="{{prefix}}--form-item{{#if charCounter}} {{prefix}}--text-area__container{{/if}}">
-  {{#if charCounter}}
-  <div class="{{prefix}}--text-area__character-counter-title">
-    <label for="text-area-5" class="{{prefix}}--label {{prefix}}--label--disabled">Text Area label</label>
-    <span class="{{prefix}}--text-area--character-counter {{prefix}}--text-area--character-counter--disabled">
-      <span class="{{prefix}}--text-area--character-counter--length">0</span>/<span
-        class="{{prefix}}--text-area--character-counter--maxlength">{{maxLength}}</span>
-    </span>
-  </div>
-  {{else}}
-  <label for="text-area-5" class="{{prefix}}--label {{prefix}}--label--disabled">Text Area label</label>
-  {{/if}}
-  <div class="{{prefix}}--form__helper-text {{prefix}}--form__helper-text--disabled">
+<div class="bx--form-item">
+  <label for="text-area-5" class="bx--label bx--label--disabled">Text Area label</label>
+  <div class="{{@root.prefix}}--form__helper-text {{@root.prefix}}--form__helper-text--disabled">
     Optional helper text goes here
   </div>
-  <div class="{{prefix}}--text-area__wrapper">
-    <textarea id="text-area-5" class="{{prefix}}--text-area {{#if light}} {{prefix}}--text-area--light{{/if}}" rows="4"
-      cols="50" placeholder="Placeholder text." disabled{{#if charCounter}} maxlength="{{maxLength}}"
-      {{/if}}></textarea>
+  <div class="{{@root.prefix}}--text-area__wrapper">
+    <textarea id="text-area-5" class="bx--text-area bx--text-area--v2{{#if light}} bx--text-area--light{{/if}}" rows="4"
+      cols="50" placeholder="Placeholder text." disabled></textarea>
   </div>
 </div>

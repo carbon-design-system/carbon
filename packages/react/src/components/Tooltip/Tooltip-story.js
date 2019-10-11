@@ -5,14 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { settings } from 'carbon-components';
-
 import { withKnobs, select, text, number } from '@storybook/addon-knobs';
 import Tooltip from '../Tooltip';
-
-import OverflowMenuVertical16 from '@carbon/icons-react/lib/overflow-menu--vertical/16';
+import Button from '../Button';
+import { OverflowMenuVertical16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
 const directions = {
@@ -21,7 +20,6 @@ const directions = {
   'Top (top)': 'top',
   'Right (right)': 'right',
 };
-
 const props = {
   withIcon: () => ({
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
@@ -60,6 +58,34 @@ const props = {
   }),
 };
 
+Tooltip.displayName = 'Tooltip';
+
+function UncontrolledTooltipExample() {
+  const [value, setValue] = useState(true);
+  return (
+    <>
+      <Button
+        style={{ padding: '15px 20px', margin: '4px 20px' }}
+        onClick={() => setValue(false)}>
+        Hide
+      </Button>
+      <Button
+        style={{ padding: '15px 20px', margin: '4px 20px' }}
+        onClick={() => setValue(true)}>
+        Show
+      </Button>
+      <div style={{ padding: '15px', margin: '4px 20px' }}>
+        <Tooltip
+          triggerText={<div>My text wrapped with tooltip</div>}
+          open={value}
+          showIcon={false}>
+          Some text
+        </Tooltip>
+      </div>
+    </>
+  );
+}
+
 storiesOf('Tooltip', module)
   .addDecorator(withKnobs)
   .add(
@@ -76,11 +102,7 @@ storiesOf('Tooltip', module)
             <a href="/" className={`${prefix}--link`}>
               Learn More
             </a>
-            <button
-              className={`${prefix}--btn ${prefix}--btn--primary`}
-              type="button">
-              Create
-            </button>
+            <Button size="small">Create</Button>
           </div>
         </Tooltip>
       </div>
@@ -109,11 +131,7 @@ storiesOf('Tooltip', module)
             <a href="/" className={`${prefix}--link`}>
               Learn More
             </a>
-            <button
-              className={`${prefix}--btn ${prefix}--btn--primary`}
-              type="button">
-              Create
-            </button>
+            <Button size="small">Create</Button>
           </div>
         </Tooltip>
       </div>
@@ -142,11 +160,7 @@ storiesOf('Tooltip', module)
             <a href="/" className={`${prefix}--link`}>
               Learn More
             </a>
-            <button
-              className={`${prefix}--btn ${prefix}--btn--primary`}
-              type="button">
-              Create
-            </button>
+            <Button size="small">Create</Button>
           </div>
         </Tooltip>
       </div>
@@ -175,11 +189,7 @@ storiesOf('Tooltip', module)
             <a href="/" className={`${prefix}--link`}>
               Learn More
             </a>
-            <button
-              className={`${prefix}--btn ${prefix}--btn--primary`}
-              type="button">
-              Create
-            </button>
+            <Button size="small">Create</Button>
           </div>
         </Tooltip>
       </div>
@@ -193,4 +203,5 @@ storiesOf('Tooltip', module)
           `,
       },
     }
-  );
+  )
+  .add('uncontrolled tooltip', () => <UncontrolledTooltipExample />);

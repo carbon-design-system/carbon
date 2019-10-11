@@ -29,6 +29,7 @@ const props = () => ({
   value: number('Value (value)', 50),
   step: number('Step of up/down arrow (step)', 10),
   disabled: boolean('Disabled (disabled)', false),
+  readOnly: boolean('Read only (readOnly)', false),
   invalid: boolean('Show form validation UI (invalid)', false),
   isMobile: boolean('Mobile variant', false),
   invalidText: text(
