@@ -207,7 +207,10 @@ $list-box-menu-width: rem(300px);
     border-width: 0;
   }
 
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--disabled:hover,
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--disabled:hover {
+    background-color: transparent;
+  }
+
   .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded:hover {
     background-color: $field-02;
   }
@@ -263,39 +266,39 @@ $list-box-menu-width: rem(300px);
   }
 
   // populated input field
-  .#{$prefix}--list-box__field .#{$prefix}--text-input[value] {
+  .#{$prefix}--list-box__field .#{$prefix}--text-input {
     padding-right: carbon--mini-units(9);
   }
 
   // invalid && populated input field
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
-    .#{$prefix}--text-input[value] {
+    .#{$prefix}--text-input {
     padding-right: rem(98px); // to account for clear input button outline
   }
 
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
-    .#{$prefix}--text-input[value]
+    .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon {
     right: rem(66px); // to account for clear input button outline
   }
 
   // empty input field
-  .#{$prefix}--list-box__field .#{$prefix}--text-input[value=''] {
+  .#{$prefix}--list-box__field .#{$prefix}--text-input--empty {
     padding-right: $carbon--spacing-09;
   }
 
   // invalid && empty input field
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
-    .#{$prefix}--text-input[value=''] {
+    .#{$prefix}--text-input--empty {
     padding-right: carbon--mini-units(9);
   }
 
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
-    .#{$prefix}--text-input[value='']
+    .#{$prefix}--text-input--empty
     + .#{$prefix}--list-box__invalid-icon {
     right: rem(40px); // to account for clear input button outline
   }
