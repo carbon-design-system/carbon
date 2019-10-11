@@ -91,12 +91,10 @@ export default class CopyButton extends Component {
         type="button"
         className={classNames}
         onClick={this.handleClick}
+        aria-label={iconDescription}
         title={iconDescription}
         {...other}>
-        <Copy16
-          className={`${prefix}--snippet__icon`}
-          aria-label={iconDescription}
-        />
+        <Copy16 className={`${prefix}--snippet__icon`} />
         <div className={feedbackClassNames} data-feedback={feedback} />
       </button>
     );

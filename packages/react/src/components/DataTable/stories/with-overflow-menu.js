@@ -4,7 +4,6 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-// /Users/Abagail.Hart@ibm.com/Projects/my-carbon-fork/packages/react/src/components/OverflowMenu/OverflowMenu.js
 import React from 'react';
 import OverflowMenu from '../../OverflowMenu';
 import OverflowMenuItem from '../../OverflowMenuItem';

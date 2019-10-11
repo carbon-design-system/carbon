@@ -125,12 +125,7 @@
     // Chrome 62 fix
     button,
     select,
-    input[type='button'],
-    input[type='submit'],
-    input[type='reset'],
-    input[type='file'],
-    input[type='text'],
-    input[type='password'],
+    input,
     textarea {
       border-radius: 0;
       font-family: inherit;
