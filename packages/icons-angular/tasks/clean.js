@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { clean } = require('../src/clean');
+const clean = require('../src/clean');
 const { reporter } = require('@carbon/cli-reporter');
 
 clean().catch(error => {
