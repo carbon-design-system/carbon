@@ -8,12 +8,23 @@
 const { remove } = require('fs-extra');
 const paths = require('./paths');
 
-module.exports = async function clean() {
-  return Promise.all([
-    remove(paths.TS),
-    remove(paths.LIB),
-    remove(paths.WASTE),
-    remove(paths.EXAMPLES_LIB),
-    remove(paths.STORIES),
+async function clean() {
+  cleanSome([
+    paths.TS,
+    paths.LIB,
+    paths.UMD,
+    paths.WASTE,
+    paths.EXAMPLES_LIB,
+    paths.STORIES,
+    paths.DIST,
   ]);
+}
+
+async function cleanSome(paths) {
+  return Promise.all(paths.map(path => remove(path)));
+}
+
+module.exports = {
+  clean,
+  cleanSome,
 };

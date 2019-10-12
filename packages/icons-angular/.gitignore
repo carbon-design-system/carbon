@@ -1,1 +1,6 @@
 ts
+umd
+dist
+bazel-*
+yarn.lock
+package
