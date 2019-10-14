@@ -30,9 +30,5 @@ jobs:
             git config --global user.name "carbon-bot"
             git add -A
             git commit -m "chore(project): sync generated files [skip ci]"
-            # Pipe to /dev/null to prevent any token leaks in CI output
-            git push -q \
-              "https://$GH_BOT_TOKEN:@github.com/carbon-design-system/carbon.git" \
-              master \
-              > /dev/null 2>&1
+            git push "https://$GH_BOT_TOKEN:@github.com/carbon-design-system/carbon.git" master
           fi
