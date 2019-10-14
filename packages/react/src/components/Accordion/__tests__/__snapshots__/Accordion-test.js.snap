@@ -13,6 +13,7 @@ exports[`Accordion should render 1`] = `
     >
       <li
         className="bx--accordion__item child"
+        onAnimationEnd={[Function]}
       >
         <defaultRenderExpando
           aria-expanded={false}
@@ -85,6 +86,7 @@ exports[`Accordion should render 1`] = `
     >
       <li
         className="bx--accordion__item child"
+        onAnimationEnd={[Function]}
       >
         <defaultRenderExpando
           aria-expanded={false}
@@ -157,6 +159,7 @@ exports[`Accordion should render 1`] = `
     >
       <li
         className="bx--accordion__item child"
+        onAnimationEnd={[Function]}
       >
         <defaultRenderExpando
           aria-expanded={false}
