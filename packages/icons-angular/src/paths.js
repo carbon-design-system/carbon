@@ -9,9 +9,10 @@ const { resolve } = require('path');
 
 module.exports = {
   TS: resolve(__dirname, '../ts'),
-  LIB: resolve(__dirname, '../lib'),
-  UMD: resolve(__dirname, '../umd'),
+  LIB: resolve(__dirname, '../dist/lib'),
+  UMD: resolve(__dirname, '../dist/umd'),
   WASTE: resolve(__dirname, '../waste'),
   EXAMPLES_LIB: resolve(__dirname, '../examples/storybook/lib'),
   STORIES: resolve(__dirname, '../examples/storybook/stories'),
+  DIST: resolve(__dirname, '../dist'),
 };
