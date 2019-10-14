@@ -26,9 +26,12 @@ const props = {
     feedback: text('Feedback text (feedback)', 'Feedback Enabled 👍'),
     copyButtonDescription: text(
       'Copy icon description (copyButtonDescription)',
-      ''
+      'copyable code snippet'
     ),
-    ariaLabel: text('ARIA label of the container (ariaLabel)', ''),
+    ariaLabel: text(
+      'ARIA label of the container (ariaLabel)',
+      'Container label'
+    ),
     onClick: action('onClick'),
   }),
   multiline: () => ({
