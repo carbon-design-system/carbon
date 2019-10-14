@@ -61,12 +61,12 @@ function AccordionItem({
     }
   }
 
-  const handleAnimationEnd = event => {
+  function handleAnimationEnd(event) {
     if (rest.handleAnimationEnd) {
       rest.handleAnimationEnd(event);
     }
     setAnimation('');
-  };
+  }
 
   return (
     <li className={className} {...rest} onAnimationEnd={handleAnimationEnd}>
