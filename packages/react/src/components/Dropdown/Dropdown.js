@@ -132,6 +132,11 @@ export default class Dropdown extends React.Component {
     helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 
     /**
+     * Provide a class to the dropdown's wrapper element
+     */
+    wrapperClassName: PropTypes.string,
+
+    /**
      * Additional props passed to Downshift
      */
     downshiftProps: PropTypes.shape(Downshift.propTypes),
@@ -160,6 +165,7 @@ export default class Dropdown extends React.Component {
   render() {
     const {
       className: containerClassName,
+      wrapperClassName,
       disabled,
       items,
       label,
@@ -208,6 +214,7 @@ export default class Dropdown extends React.Component {
       `${prefix}--dropdown__wrapper`,
       `${prefix}--list-box__wrapper`,
       {
+        [wrapperClassName]: !!wrapperClassName,
         [`${prefix}--dropdown__wrapper--inline`]: inline,
         [`${prefix}--list-box__wrapper--inline`]: inline,
         [`${prefix}--dropdown__wrapper--inline--invalid`]: inline && invalid,
