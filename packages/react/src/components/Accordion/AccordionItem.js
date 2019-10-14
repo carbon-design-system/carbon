@@ -27,9 +27,12 @@ function AccordionItem({
 }) {
   const [isOpen, setIsOpen] = useState(open);
   const [prevIsOpen, setPrevIsOpen] = useState(open);
+  const [animation, setAnimation] = useState('');
   const className = cx({
     [`${prefix}--accordion__item`]: true,
     [`${prefix}--accordion__item--active`]: isOpen,
+    [`${prefix}--accordion__item--collapsing`]: animation === 'collapsing',
+    [`${prefix}--accordion__item--expanding`]: animation === 'expanding',
     [customClassName]: !!customClassName,
   });
 
@@ -42,6 +45,7 @@ function AccordionItem({
   // panel
   function onClick(event) {
     const nextValue = !isOpen;
+    setAnimation(isOpen ? 'collapsing' : 'expanding');
     setIsOpen(nextValue);
     if (onHeadingClick) {
       // TODO: normalize signature, potentially:
@@ -57,8 +61,15 @@ function AccordionItem({
     }
   }
 
+  const handleAnimationEnd = event => {
+    if (rest.handleAnimationEnd) {
+      rest.handleAnimationEnd(event);
+    }
+    setAnimation('');
+  };
+
   return (
-    <li className={className} {...rest}>
+    <li className={className} {...rest} onAnimationEnd={handleAnimationEnd}>
       <Expando
         aria-expanded={isOpen}
         className={`${prefix}--accordion__heading`}
