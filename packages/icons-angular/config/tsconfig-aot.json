@@ -11,7 +11,7 @@
     "sourceMap": true,
     "module": "es2015",
     "moduleResolution": "node",
-    "outDir": "./../dist/lib",
+    "outDir": "./../lib",
     "rootDir": "./../ts",
     "target": "es5",
     "inlineSources": true,
@@ -19,10 +19,6 @@
   },
   "include": [
     "./../ts/**/*"
-  ],
-  "exclude": [
-    "./../ts/**/index.ts",
-    "./../ts/**/public-api.ts"
   ],
   "angularCompilerOptions": {
     "strictMetadataEmit": true,
