@@ -20,7 +20,7 @@ jobs:
         run: yarn sync
       - name: Push generated artifacts to GitHub
         env:
-          NPM_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
+          GH_BOT_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
         run: |
           if [ -n "$(git status --porcelain)" ]; then
             echo "Our git status is not clean. Checking in the following files:";
