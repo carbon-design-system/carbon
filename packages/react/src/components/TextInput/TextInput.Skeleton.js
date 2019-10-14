@@ -13,7 +13,7 @@ const { prefix } = settings;
 
 const TextInputSkeleton = ({ hideLabel }) => (
   <div className={`${prefix}--form-item`}>
-    {hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
+    {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
     <div
       aria-live="assertive"
       className={`${prefix}--skeleton ${prefix}--text-input`}
