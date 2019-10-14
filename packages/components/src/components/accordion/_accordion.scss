@@ -46,8 +46,8 @@
     margin: 0;
     transition: background-color motion(standard, productive) $duration--fast-02;
 
-    &:hover:before,
-    &:focus:before {
+    &:hover::before,
+    &:focus::before {
       content: '';
       position: absolute;
       top: -1px;
@@ -56,7 +56,7 @@
       height: calc(100% + 2px);
     }
 
-    &:hover:before {
+    &:hover::before {
       background-color: $hover-ui;
     }
 
