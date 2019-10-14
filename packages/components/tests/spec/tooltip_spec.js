@@ -49,12 +49,45 @@ describe('Test tooltip', function() {
       expect(document.activeElement.closest('.bx--tooltip')).not.toBe(null);
     });
 
-    // @todo currently not working
-    // it('Should remain open upon click within the tooltip', function() {
-    //   floating.classList.add('bx--tooltip--shown');
-    //   element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-    //   expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
-    // });
+    // This should be failing. When you perform these actions in the browser the
+    // `focusoutEventName` event is triggered causing it to behave differently.
+    // I believe it's  because the `click` event is not being watched in `track-blur.js`
+    it('Should remain open upon click within the tooltip', function() {
+      // Want to actually trigger the "show" function
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+
+      const content = floating.querySelector('.bx--tooltip__content');
+      content.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      console.log(document.activeElement);
+      expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
+    });
+
+    // This works as expected in the browser but not in the tests I believe it's
+    // because the `click` event is not actually being watched in `track-blur.js`
+    it('Should hide the tooltip upon clicking outside of tooltip', function() {
+      // Want to actually trigger the "show" function
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+
+      document.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(floating.classList.contains('bx--tooltip--shown')).toBe(false);
+    });
+
+    it('Should hide the tooltip upon focusing an external element', function() {
+      // Want to actually trigger the "show" function
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.id = 'example-input';
+      document.body.appendChild(input);
+
+      document
+        .getElementById('example-input')
+        .dispatchEvent(new CustomEvent('focus', { bubbles: true }));
+      expect(floating.classList.contains('bx--tooltip--shown')).toBe(false);
+      // Known bug: https://github.com/carbon-design-system/carbon/issues/3835
+      expect(document.activeElement).toBe(input);
+    });
 
     it('Should hide the tooltip upon blurring', function() {
       floating.classList.add('bx--tooltip--shown');
