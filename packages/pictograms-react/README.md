@@ -39,7 +39,8 @@ const { Airplane } = require('@carbon/pictograms-react');
 ```
 
 _Note: if you would like to find the import path for a pictogram, you can
-reference our [Pictogram Library](https://www.carbondesignsystem.com/guidelines/pictograms/library)_
+reference our
+[Pictogram Library](https://www.carbondesignsystem.com/guidelines/pictograms/library)_
 
 ### Icon fill
 
