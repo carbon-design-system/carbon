@@ -13,8 +13,7 @@ const { dirname } = require('path');
 const { param } = require('change-case');
 const ngc = require('@angular/compiler-cli/src/main');
 const { rollup } = require('rollup');
-const { componentTemplate, storyTemplate } = require('./templates');
-const clean = require('./clean');
+const { componentTemplate, storyTemplate } = require('./templates-compat');
 const paths = require('./paths');
 
 async function generateComponents() {
@@ -46,7 +45,7 @@ async function generateComponents() {
 
 async function buildUMD() {
   for (const icon of icons) {
-    const jsSource = icon.outputOptions.file.replace('es', 'lib');
+    const jsSource = icon.outputOptions.file.replace('es', 'dist/lib');
     const iconbundle = await rollup({
       input: jsSource,
       external: ['@angular/core', '@carbon/icon-helpers'],
@@ -92,11 +91,9 @@ async function buildExamples() {
 }
 
 async function build() {
-  reporter.log('Cleaning build dirs...');
+  reporter.log('Prepping build dirs...');
   try {
-    await clean();
-
-    await Promise.all([fs.mkdir(paths.STORIES), fs.mkdir(paths.TS)]);
+    await Promise.all([fs.ensureDir(paths.STORIES), fs.ensureDir(paths.TS)]);
   } catch (err) {
     reporter.error(err);
   }

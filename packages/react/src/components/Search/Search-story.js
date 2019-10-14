@@ -11,15 +11,21 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { withKnobs, boolean, text } from '@storybook/addon-knobs';
+import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Search from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
 import SearchFilterButton from '../SearchFilterButton';
 import SearchLayoutButton from '../SearchLayoutButton';
 
+const sizes = {
+  'Regular size (xl)': 'xl',
+  'Large size (lg)': 'lg',
+  'Small size (sm)': 'sm',
+};
+
 const props = () => ({
   className: 'some-class',
-  small: boolean('Small UI (small)', false),
+  size: select('Size (size)', sizes, 'xl'),
   light: boolean('Light variant (light)', false),
   name: text('Form item name (name)', ''),
   defaultValue: text('Default value (defaultValue)', ''),
