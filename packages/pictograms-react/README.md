@@ -26,7 +26,7 @@ pixels. These sizes refer to the width and height of the icon. You can import an
 icon component into your project by referring to its name and size:
 
 ```jsx
-import { Add24 } from '@carbon/pictograms-react';
+import { Airplane } from '@carbon/pictograms-react';
 ```
 
 We also provide CommonJS and UMD files in the `lib` and `umd` directories,
@@ -35,12 +35,12 @@ respectively.
 To import using CommonJS, you can do the following:
 
 ```js
-const { Add24 } = require('@carbon/pictograms-react');
+const { Airplane } = require('@carbon/pictograms-react');
 ```
 
-_Note: if you would like to find the import path for an icon, you can reference
-our
-[Icon Library](https://www.carbondesignsystem.com/guidelines/iconography/library)_
+_Note: if you would like to find the import path for a pictogram, you can
+reference our
+[Pictogram Library](https://www.carbondesignsystem.com/guidelines/pictograms/library)_
 
 ### Icon fill
 
