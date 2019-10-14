@@ -86,17 +86,17 @@ const TableToolbarSearch = ({
       onBlur={event => !value && handleExpand(event, false)}
       className={searchContainerClasses}>
       <Search
-        {...rest}
-        small
+        size="sm"
         className={className}
         value={value}
-        id={typeof id !== 'undefined' ? id : uniqueId}
+        id={typeof id !== 'undefined' ? id : uniqueId.toString()}
         aria-hidden={!expanded}
         labelText={labelText || t('carbon.table.toolbar.search.label')}
         placeHolderText={
           placeHolderText || t('carbon.table.toolbar.search.placeholder')
         }
         onChange={onChange}
+        {...rest}
       />
     </div>
   );

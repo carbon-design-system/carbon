@@ -13,25 +13,31 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 const Breadcrumb = ({
+  'aria-label': ariaLabel,
   children,
-  className: customClassName,
+  className: customClassNameNav,
   noTrailingSlash,
-  ...rest
 }) => {
   const className = cx({
     [`${prefix}--breadcrumb`]: true,
     [`${prefix}--breadcrumb--no-trailing-slash`]: noTrailingSlash,
-    [customClassName]: !!customClassName,
   });
 
   return (
-    <nav className={className} {...rest}>
-      {children}
+    <nav
+      className={customClassNameNav}
+      aria-label={ariaLabel ? ariaLabel : 'Breadcrumb'}>
+      <ol className={className}>{children}</ol>
     </nav>
   );
 };
 
 Breadcrumb.propTypes = {
+  /**
+   * Specify the label for the breadcrumb container
+   */
+  'aria-label': PropTypes.string,
+
   /**
    * Pass in the BreadcrumbItem's for your Breadcrumb
    */

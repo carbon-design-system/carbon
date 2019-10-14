@@ -5,25 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { param } = require('change-case');
-const { pascal } = require('change-case');
+const { param, pascal } = require('change-case');
+const { toString } = require('@carbon/icon-helpers');
 
-const componentTemplate = (iconName, className, svg, attrs) => `
-import {
-  NgModule,
-  Component,
-  Directive,
-  ElementRef,
-  Input,
-  AfterViewInit
-} from "@angular/core";
-import { getAttributes } from "@carbon/icon-helpers";
+const classCase = str => {
+  const pascalled = pascal(str);
+  if (Number.isNaN(Number(pascalled[0]))) {
+    return pascalled;
+  }
+  // append a _ if the string starts with a number
+  return `_${pascalled}`;
+};
 
+const componentTemplate = icon => `
 @Component({
-	selector: "ibm-icon-${iconName}",
+	selector: "ibm-icon-${param(icon.namespace)}",
   template: \`
     <svg
-      ibmIcon${pascal(iconName)}
+      ibmIcon${pascal(icon.namespace)}
+      [size]="size"
       [ariaLabel]="ariaLabel"
       [ariaLabelledby]="ariaLabelledby"
       [ariaHidden]="ariaHidden"
@@ -33,19 +33,31 @@ import { getAttributes } from "@carbon/icon-helpers";
     </svg>
   \`
 })
-export class ${className} {
+export class ${classCase(icon.namespace)}Component {
   @Input() ariaLabel: string;
   @Input() ariaLabelledby: string;
   @Input() ariaHidden: boolean;
   @Input() title: string;
   @Input() focusable: boolean = false;
   @Input() innerClass: string;
+  @Input() size: string;
 }
+`;
 
+const formatIconObject = icon => `
+  "${icon.size}": {
+    metadata: ${JSON.stringify(icon)},
+    svg: \`${toString(icon.descriptor)}\`
+  },
+`;
+
+const directiveTemplate = icons => `
 @Directive({
-  selector: "[ibmIcon${pascal(iconName)}]"
+  selector: "[ibmIcon${pascal(icons[0].namespace)}]"
 })
-export class ${className}Directive implements AfterViewInit {
+export class ${classCase(
+  icons[0].namespace
+)}Directive implements AfterViewInit {
   static titleIdCounter = 0;
 
   @Input() ariaLabel: string;
@@ -53,6 +65,11 @@ export class ${className}Directive implements AfterViewInit {
   @Input() ariaHidden: boolean;
   @Input() title: string;
   @Input() isFocusable: boolean = false;
+  @Input() size: string;
+
+  protected icons = {
+    ${icons.reduce((str, icon) => `${str}${formatIconObject(icon)}`, '')}
+  };
 
   constructor(protected elementRef: ElementRef) {}
 
@@ -60,8 +77,10 @@ export class ${className}Directive implements AfterViewInit {
     const svg = this.elementRef.nativeElement;
     svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
 
+    const icon = this.icons[this.size]
+
     const domParser = new DOMParser();
-    const rawSVG = \`${svg}\`;
+    const rawSVG = icon.svg;
     const svgElement = domParser.parseFromString(rawSVG, "image/svg+xml").documentElement;
 
     let node = svgElement.firstChild;
@@ -73,9 +92,9 @@ export class ${className}Directive implements AfterViewInit {
     }
 
     const attributes = getAttributes({
-      width: ${attrs.width},
-      height: ${attrs.height},
-      viewBox: "${attrs.viewBox}",
+      width: icon.metadata.descriptor.attrs.height,
+      height: icon.metadata.descriptor.attrs.height,
+      viewBox: icon.metadata.descriptor.attrs.viewBox,
       title: this.title,
       "aria-label": this.ariaLabel,
       "aria-labelledby": this.ariaLabelledby,
@@ -98,99 +117,60 @@ export class ${className}Directive implements AfterViewInit {
     if (attributes.title) {
       const title = document.createElement("title");
       title.textContent = attributes.title;
-      ${className}Directive.titleIdCounter++;
-      title.setAttribute("id", \`${iconName}-$\{${className}Directive.titleIdCounter}\`);
+      ${classCase(icons[0].namespace)}Directive.titleIdCounter++;
+      title.setAttribute("id", \`${param(icons[0].namespace)}-$\{${classCase(
+  icons[0].namespace
+)}Directive.titleIdCounter}\`);
       svg.appendChild(title);
-      svg.setAttribute("aria-labelledby", \`${iconName}-$\{${className}Directive.titleIdCounter}\`);
+      svg.setAttribute("aria-labelledby", \`${param(
+        icons[0].namespace
+      )}-$\{${classCase(icons[0].namespace)}Directive.titleIdCounter}\`);
     }
 	}
 }
+`;
+
+const formatModuleDeclarations = icon => `
+  ${classCase(icon.namespace)}Component,
+  ${classCase(icon.namespace)}Directive,
+`;
+
+const moduleTemplate = (namespace, icons) => `
+import {
+  NgModule,
+  Component,
+  Directive,
+  ElementRef,
+  Input,
+  AfterViewInit
+} from "@angular/core";
+import { getAttributes } from "@carbon/icon-helpers";
+
+${componentTemplate(icons[0])}
+
+${directiveTemplate(icons)}
 
 @NgModule({
   declarations: [
-    ${className},
-    ${className}Directive
+    ${formatModuleDeclarations(icons[0])}
   ],
   exports: [
-    ${className},
-    ${className}Directive
+    ${formatModuleDeclarations(icons[0])}
   ]
 })
-export class ${className}Module {}
+export class ${classCase(namespace)}Module {}
 `;
 
-const iconStoryTemplate = icon => `.add("${icon.moduleName}", () => ({
-  template: \`
-    <p>Component <code>&lt;ibm-icon-${param(
-      icon.moduleName
-    )}&gt;&lt;/ibm-icon-${param(icon.moduleName)}&gt;</code></p>
-    <ibm-icon-${param(icon.moduleName)}></ibm-icon-${param(icon.moduleName)}>
-    <p>Directive <code>&lt;svg ibmIcon${pascal(
-      icon.moduleName
-    )}&gt;&lt;/svg&gt;</code></p>
-    <svg ibmIcon${pascal(icon.moduleName)}></svg>
-  \`
-}))
-.add("${icon.moduleName} with label", () => ({
-  template: \`
-    <ibm-icon-${param(
-      icon.moduleName
-    )} ariaLabel="label for the icon"></ibm-icon-${param(icon.moduleName)}>
-    <svg ibmIcon${pascal(icon.moduleName)} ariaLabel="label for the icon"></svg>
-  \`
-}))
-.add("${icon.moduleName} with title", () => ({
-  template: \`
-    <ibm-icon-${param(icon.moduleName)} title="icon title"></ibm-icon-${param(
-  icon.moduleName
-)}>
-    <svg ibmIcon${pascal(icon.moduleName)} title="icon title"></svg>
-  \`
-}))
-.add("${icon.moduleName} with class on the SVG", () => ({
-  template: \`
-    <ibm-icon-${param(
-      icon.moduleName
-    )} innerClass="test-class another-class"></ibm-icon-${param(
-  icon.moduleName
-)}>
-    <svg ibmIcon${pascal(
-      icon.moduleName
-    )} class="test-class another-class"></svg>
-  \`
-}))`;
-
-const gerateIconStories = icons => {
-  let value = '';
-  for (const icon of icons) {
-    value += iconStoryTemplate(icon);
-  }
-  return value;
-};
-
-const generateStoryImports = icons => {
-  let imports = '';
-  for (const icon of icons) {
-    imports += `import { ${
-      icon.moduleName
-    }Module } from "./../${icon.outputOptions.file.replace('es', 'lib')}"\n`;
-  }
-  return imports;
-};
-
-const storyTemplate = (basename, icons) => `
-import { storiesOf, moduleMetadata } from "@storybook/angular";
-
-${generateStoryImports(icons)}
-
-storiesOf("${basename}", module)
-  .addDecorator(moduleMetadata({
-    imports: [ ${icons.map(i => `${i.moduleName}Module`).join(', ')} ],
-  }))
-  ${gerateIconStories(icons)};
-`;
+const rootPublicApi = namespaces =>
+  namespaces.reduce(
+    (str, name) => `
+  ${str}
+  export * from "./${name}";
+`,
+    ''
+  );
 
 module.exports = {
-  componentTemplate,
-  storyTemplate,
+  moduleTemplate,
+  rootPublicApi,
 };
