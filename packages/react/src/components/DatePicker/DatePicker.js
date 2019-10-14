@@ -564,6 +564,7 @@ export default class DatePicker extends Component {
         return React.cloneElement(child, {
           datePickerType,
           ref: this.assignToInputFieldRef,
+          openCalendar: this.openCalendar,
         });
       } else if (index === 0) {
         return React.cloneElement(child, {
