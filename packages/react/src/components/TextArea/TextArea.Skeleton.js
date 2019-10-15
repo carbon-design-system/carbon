@@ -15,6 +15,7 @@ const TextAreaSkeleton = ({ hideLabel }) => (
   <div className={`${prefix}--form-item`}>
     {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
     <div
+      aria-label="loading text area"
       aria-live="assertive"
       className={`${prefix}--skeleton ${prefix}--text-area`}
       role="status"

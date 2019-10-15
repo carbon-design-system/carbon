@@ -17,6 +17,7 @@ const SliderSkeleton = ({ hideLabel }) => (
     <div className={`${prefix}--slider-container ${prefix}--skeleton`}>
       <span className={`${prefix}--slider__range-label`} />
       <div
+        aria-label="loading slider"
         aria-live="assertive"
         className={`${prefix}--slider`}
         role="status"

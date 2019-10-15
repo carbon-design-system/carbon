@@ -13,6 +13,7 @@ const { prefix } = settings;
 const CheckboxSkeleton = () => (
   <div className={`${prefix}--form-item ${prefix}--checkbox-wrapper`}>
     <span
+      aria-label="loading checkbox"
       aria-live="assertive"
       className={`${prefix}--checkbox-label ${prefix}--skeleton`}
       role="status"

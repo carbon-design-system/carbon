@@ -15,6 +15,7 @@ const NumberInputSkeleton = ({ hideLabel }) => (
   <div className={`${prefix}--form-item`}>
     {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
     <div
+      aria-label="loading number input"
       aria-live="assertive"
       className={`${prefix}--number ${prefix}--skeleton`}
       role="status"

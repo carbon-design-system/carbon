@@ -16,6 +16,7 @@ const SelectSkeleton = ({ hideLabel }) => (
     {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
     <div className={`${prefix}--select ${prefix}--skeleton`}>
       <div
+        aria-label="loading select"
         aria-live="assertive"
         className={`${prefix}--select-input`}
         role="status"
