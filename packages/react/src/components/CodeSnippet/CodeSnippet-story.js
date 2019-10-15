@@ -23,6 +23,7 @@ const props = {
     ),
   }),
   single: () => ({
+    light: boolean('Light variant (light)', false),
     feedback: text('Feedback text (feedback)', 'Feedback Enabled 👍'),
     copyButtonDescription: text(
       'Copy icon description (copyButtonDescription)',
@@ -32,6 +33,7 @@ const props = {
     onClick: action('onClick'),
   }),
   multiline: () => ({
+    light: boolean('Light variant (light)', false),
     feedback: text('Feedback text (feedback)', 'Feedback Enabled 👍'),
     showMoreText: text(
       'Text for "show more" button (showMoreText)',
