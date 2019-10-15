@@ -59,14 +59,6 @@
     padding: 0 $spacing-xs;
   }
 
-  .#{$prefix}--snippet--inline.#{$prefix}--snippet--light {
-    background-color: $field-02;
-
-    &:hover {
-      background-color: rgba($interactive-02, 0.1);
-    }
-  }
-
   // Single Line Snippet
   .#{$prefix}--snippet--single {
     @include bx--snippet;
@@ -264,6 +256,26 @@
     .#{$prefix}--icon-chevron--down {
     transform: rotate(180deg);
     transition: transform $transition--expansion;
+  }
+
+  // Light version
+  .#{$prefix}--snippet.#{$prefix}--snippet--light {
+    &,
+    .#{$prefix}--snippet-button,
+    .#{$prefix}--snippet-btn--expand {
+      background-color: $ui-02;
+    }
+
+    &.#{$prefix}--snippet--inline:hover,
+    .#{$prefix}--snippet-button:hover,
+    .#{$prefix}--snippet-btn--expand:hover {
+      background-color: $ui-01;
+    }
+
+    &.#{$prefix}--snippet--single::after,
+    &.#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
+      background-image: linear-gradient(to right, transparent, $ui-02);
+    }
   }
 
   // Skeleton State
