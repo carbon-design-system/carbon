@@ -166,8 +166,9 @@
     height: rem(40px);
     width: rem(40px);
     fill: $icon-01;
-    border: 1px solid transparent;
-    border-left: 0;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 1px 0;
 
     &:hover {
       background-color: $hover-field;

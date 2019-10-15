@@ -7365,7 +7365,6 @@ $interactive-02: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [snippet [mixin]](#snippet-mixin)
-  - [tags [mixin]](#tags-mixin)
   - [tile [mixin]](#tile-mixin)
 
 ### ✅interactive-03 [variable]
@@ -7916,7 +7915,6 @@ $icon-03: if(
   - [button [mixin]](#button-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
-  - [listbox [mixin]](#listbox-mixin)
   - [toggle [mixin]](#toggle-mixin)
 
 ### ✅link-01 [variable]
@@ -8110,6 +8108,7 @@ $inverse-02: if(
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [tags [mixin]](#tags-mixin)
   - [tooltip--icon [mixin]](#tooltip--icon-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -8560,7 +8559,6 @@ $hover-secondary: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [listbox [mixin]](#listbox-mixin)
-  - [tags [mixin]](#tags-mixin)
 
 ### ✅active-secondary [variable]
 
@@ -8792,6 +8790,7 @@ $inverse-hover-ui: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [tags [mixin]](#tags-mixin)
 
 ### ✅hover-danger [variable]
 
@@ -18198,7 +18197,10 @@ List box styles
     border-width: 0;
   }
 
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--disabled:hover,
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--disabled:hover {
+    background-color: transparent;
+  }
+
   .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded:hover {
     background-color: $field-02;
   }
@@ -18254,39 +18256,39 @@ List box styles
   }
 
   // populated input field
-  .#{$prefix}--list-box__field .#{$prefix}--text-input[value] {
+  .#{$prefix}--list-box__field .#{$prefix}--text-input {
     padding-right: carbon--mini-units(9);
   }
 
   // invalid && populated input field
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
-    .#{$prefix}--text-input[value] {
+    .#{$prefix}--text-input {
     padding-right: rem(98px); // to account for clear input button outline
   }
 
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
-    .#{$prefix}--text-input[value]
+    .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon {
     right: rem(66px); // to account for clear input button outline
   }
 
   // empty input field
-  .#{$prefix}--list-box__field .#{$prefix}--text-input[value=''] {
+  .#{$prefix}--list-box__field .#{$prefix}--text-input--empty {
     padding-right: $carbon--spacing-09;
   }
 
   // invalid && empty input field
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
-    .#{$prefix}--text-input[value=''] {
+    .#{$prefix}--text-input--empty {
     padding-right: carbon--mini-units(9);
   }
 
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
-    .#{$prefix}--text-input[value='']
+    .#{$prefix}--text-input--empty
     + .#{$prefix}--list-box__invalid-icon {
     right: rem(40px); // to account for clear input button outline
   }
@@ -18379,7 +18381,6 @@ List box styles
   .#{$prefix}--list-box__selection--multi > svg:hover {
     border-radius: 50%;
     background-color: $hover-secondary;
-    fill: $icon-03;
   }
 
   .#{$prefix}--list-box__selection--multi:focus,
@@ -18582,7 +18583,6 @@ List box styles
   - [inverse-02 [variable]](#inverse-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [hover-secondary [variable]](#hover-secondary-variable)
-  - [icon-03 [variable]](#icon-03-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [text-02 [variable]](#text-02-variable)
   - [selected-ui [variable]](#selected-ui-variable)
@@ -21046,8 +21046,9 @@ Search styles
     height: rem(40px);
     width: rem(40px);
     fill: $icon-01;
-    border: 1px solid transparent;
-    border-left: 0;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 1px 0;
 
     &:hover {
       background-color: $hover-field;
@@ -22173,7 +22174,7 @@ Tag styles
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    @include tag-theme($interactive-02, $inverse-01);
+    @include tag-theme($inverse-02, $inverse-01);
     cursor: pointer;
     padding-right: rem(2px); // Align with hover circle of X button
   }
@@ -22188,7 +22189,7 @@ Tag styles
 
   .#{$prefix}--tag--filter > svg:hover {
     border-radius: 50%;
-    background-color: $hover-secondary;
+    background-color: $inverse-hover-ui;
   }
 
   .#{$prefix}--tag--filter:focus,
@@ -22220,9 +22221,9 @@ Tag styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [interactive-02 [variable]](#interactive-02-variable)
+  - [inverse-02 [variable]](#inverse-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
-  - [hover-secondary [variable]](#hover-secondary-variable)
+  - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
 
 ## text-area
