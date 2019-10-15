@@ -15,6 +15,32 @@ $prefix: 'bx';
 // Use e.g. `@import '~carbon-components/scss/globals/scss/styles.scss'` instead.
 @import '~carbon-components/src/globals/scss/styles.scss'; // SEE THE NOTE ABOVE
 
+$font-size-line-height-pairings: (
+  '12-16' 12px 16px,
+  '14-18' 14px 18px,
+  '14-20' 14px 20px,
+  '16-24' 16px 24px,
+  '16-22' 16px 22px,
+  '20-26' 20px 26px,
+  '28-36' 28px 36px
+);
+
+$type-tokens: (
+  'caption-01',
+  'label-01',
+  'helper-text-01',
+  'body-short-01',
+  'body-long-01',
+  'body-short-02',
+  'body-long-02',
+  'code-01',
+  'code-02',
+  'heading-01',
+  'productive-heading-01',
+  'heading-02',
+  'productive-heading-02'
+);
+
 @if mixin-exists(carbon--theme) {
   :root {
     @include carbon--theme($carbon--theme--white, true);
@@ -30,5 +56,14 @@ $prefix: 'bx';
 
   :root[storybook-carbon-theme='g100'] {
     @include carbon--theme($carbon--theme--g100, true);
+  }
+}
+
+@each $type-token in $type-tokens {
+  @each $pairing, $font-size, $line-height in $font-size-line-height-pairings {
+    :root[#{$type-token}='#{$pairing}'] {
+      --#{$custom-property-prefix}-#{$type-token}-font-size: #{$font-size};
+      --#{$custom-property-prefix}-#{$type-token}-line-height: #{$line-height};
+    }
   }
 }

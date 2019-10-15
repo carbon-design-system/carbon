@@ -8,18 +8,51 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from '@storybook/components';
-import { CURRENT_THEME } from '../shared';
+import { CURRENT_THEME, TYPE_TOKEN } from '../shared';
+
+const typeTokenPairings = [
+  '12-16',
+  '14-18',
+  '14-20',
+  '16-24',
+  '16-22',
+  '20-26',
+  '28-36',
+];
+
+const typeTokens = {
+  'caption-01': '12-16',
+  'label-01': '12-16',
+  'helper-text-01': '12-16',
+  'body-short-01': '14-18',
+  'body-long-01': '14-20',
+  'body-short-02': '16-22',
+  'body-long-02': '16-24',
+  'code-01': '12-16',
+  'code-02': '14-20',
+  'heading-01': '14-18',
+  'productive-heading-01': '14-18',
+  'heading-02': '16-22',
+  'productive-heading-02': '16-22',
+};
 
 /**
  * Storybook add-on panel for Carbon theme switcher.
  */
 const Panel = ({ api, active }) => {
   const [currentTheme, setCurrentTheme] = useState('white');
-  const handleChange = useCallback(
+  const handleThemeChange = useCallback(
     event => {
       const { value } = event.target;
       setCurrentTheme(value);
       api.getChannel().emit(CURRENT_THEME, value);
+    },
+    [api]
+  );
+  const handleTokenChange = useCallback(
+    event => {
+      const { name: tokenName, value: tokenValue } = event.target;
+      api.getChannel().emit(TYPE_TOKEN, { tokenName, tokenValue });
     },
     [api]
   );
@@ -30,7 +63,7 @@ const Panel = ({ api, active }) => {
           <Form.Select
             name="carbon-theme"
             value={currentTheme}
-            onChange={handleChange}
+            onChange={handleThemeChange}
             size="flex">
             <option key="white" value="white">
               white
@@ -46,6 +79,26 @@ const Panel = ({ api, active }) => {
             </option>
           </Form.Select>
         </Form.Field>
+        {Object.keys(typeTokens).map(tokenName => (
+          <Form.Field key={tokenName} label={`${tokenName}:`}>
+            <Form.Select
+              name={tokenName}
+              onChange={handleTokenChange}
+              size="flex">
+              {typeTokenPairings.map(tokenValue => {
+                const [fontSize, lineHeight] = tokenValue.split('-');
+                return (
+                  <option
+                    key={tokenValue}
+                    value={tokenValue}
+                    selected={typeTokens[tokenName] === tokenValue || null}>
+                    {`${fontSize}px font-size / ${lineHeight}px line-height`}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Form.Field>
+        ))}
       </Form>
     )
   );

@@ -11,7 +11,7 @@ import addons from '@storybook/addons';
 import { withInfo } from '@storybook/addon-info';
 import { configureActions } from '@storybook/addon-actions';
 // import { checkA11y } from 'storybook-addon-a11y';
-import { CURRENT_THEME } from './addon-carbon-theme/shared';
+import { CURRENT_THEME, TYPE_TOKEN } from './addon-carbon-theme/shared';
 import Container from './Container';
 
 addDecorator(
@@ -40,6 +40,10 @@ addDecorator(story => <Container story={story} />);
 
 addons.getChannel().on(CURRENT_THEME, theme => {
   document.documentElement.setAttribute('storybook-carbon-theme', theme);
+});
+
+addons.getChannel().on(TYPE_TOKEN, ({ tokenName, tokenValue }) => {
+  document.documentElement.setAttribute(tokenName, tokenValue);
 });
 
 function loadStories() {

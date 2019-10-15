@@ -8,3 +8,4 @@
 export const ADDON_ID = 'carbon-theme';
 export const CURRENT_THEME = `${ADDON_ID}/current`;
 export const PANEL_ID = `${ADDON_ID}/panel`;
+export const TYPE_TOKEN = `${ADDON_ID}/type`;
