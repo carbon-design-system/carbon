@@ -56,7 +56,6 @@ const props = {
       ''
     ),
     onChange: action('onChange'),
-    light: boolean('Light variant (light)', false),
   }),
   radio: () => ({
     name: text('Form item name (name in <RadioTile>)', 'tiles'),
