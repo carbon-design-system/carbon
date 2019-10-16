@@ -31,8 +31,7 @@ function AccordionItem({
   const className = cx({
     [`${prefix}--accordion__item`]: true,
     [`${prefix}--accordion__item--active`]: isOpen,
-    [`${prefix}--accordion__item--collapsing`]: animation === 'collapsing',
-    [`${prefix}--accordion__item--expanding`]: animation === 'expanding',
+    [`${prefix}--accordion__item--${animation}`]: animation,
     [customClassName]: !!customClassName,
   });
 
