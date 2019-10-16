@@ -54,5 +54,13 @@ module.exports = {
         items,
       },
     },
+    {
+      name: 'fixed',
+      label: 'Tabs (fixed)',
+      context: {
+        fixed: true,
+        items,
+      },
+    },
   ],
 };

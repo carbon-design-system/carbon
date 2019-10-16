@@ -9,10 +9,21 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  number,
+  select,
+  text,
+} from '@storybook/addon-knobs';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
+
+const types = {
+  'Default (default)': 'default',
+  'Fixed (fixed)': 'fixed',
+};
 
 const props = {
   tabs: () => ({
@@ -23,6 +34,7 @@ const props = {
       '#'
     ),
     role: text('ARIA role (role in <Tabs>)', 'navigation'),
+    type: select('Tabs type (type)', types, 'default'),
     iconDescription: text(
       'The description of the trigger icon for narrow mode (iconDescription in <Tabs>)',
       'show menu options'

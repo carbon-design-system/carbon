@@ -181,6 +181,15 @@
   }
 }
 
+.component-example__live,
+.demo--container {
+  .bx--tabs--fixed + div {
+    width: 100%;
+    height: 320px;
+    background-color: $ui-01;
+  }
+}
+
 .page-header + div > .bx--tabs {
   background-color: $field-01;
 
