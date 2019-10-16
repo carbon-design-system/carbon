@@ -16,12 +16,15 @@ import SideNavLinkText from './SideNavLinkText';
 
 const { prefix } = settings;
 
+/* eslint-disable no-unused-vars */
+
 const SideNavLink = ({
   className: customClassName,
   children,
   renderIcon: IconElement,
   isActive,
   large,
+  isSideNavExpanded,
   ...rest
 }) => {
   const className = cx({
