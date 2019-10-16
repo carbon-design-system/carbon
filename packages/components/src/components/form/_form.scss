@@ -24,6 +24,9 @@
     @include type-style('body-short-01');
     display: flex;
     flex-direction: column;
+    // We specify `auto` as the default value so that the form item does
+    // not collapse in IE11 due to a `flex-basis` of 0 only working with
+    // `flex-direction: row`
     flex: 1 1 auto;
     align-items: flex-start;
   }
