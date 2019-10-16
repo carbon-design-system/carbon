@@ -1,18 +1,16 @@
 {
-  "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "@carbon/icons-angular",
+  "private": true,
   "description": "Angular components for icons in digital and software products using the Carbon Design System",
   "version": "10.6.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
-  "ngPackage": {
-    "lib": {
-      "entryFile": "ts/index.ts"
-    },
-    "whitelistedNonPeerDependencies": ["@carbon/icon-helpers"]
-  },
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-angular",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "files": [
+    "lib",
+    "umd"
+  ],
   "keywords": [
     "ibm",
     "elements",
@@ -23,17 +21,10 @@
     "react"
   ],
   "publishConfig": {
-    "access": "public",
-    "directory": "dist"
+    "access": "public"
   },
   "scripts": {
-    "build": "exit 0;",
-    "build:full": "yarn clean && yarn build:generate && yarn build:ivy && yarn build:compat",
-    "build:local": "yarn clean && yarn build:generate && yarn build:ivy",
-    "build:ivy": "node --max_old_space_size=3072 ./node_modules/.bin/ng-packagr -p package.json",
-    "build:compat": "node --max_old_space_size=3072 tasks/build-compat.js",
-    "build:generate": "node tasks/generate.js",
-    "build:package": "node tasks/package.js",
+    "build": "node tasks/build.js",
     "clean": "node tasks/clean.js"
   },
   "peerDependencies": {
@@ -51,9 +42,8 @@
     "@carbon/icons": "10.6.0",
     "change-case": "3.0.2",
     "fs-extra": "7.0.1",
-    "ng-packagr": "^5.5.1",
-    "typescript": "2.9.2",
-    "zone.js": "0.10.2"
+    "rollup": "^0.66.6",
+    "typescript": "2.9.2"
   },
   "sideEffects": false
 }
