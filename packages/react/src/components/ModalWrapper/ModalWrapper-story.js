@@ -68,6 +68,7 @@ const props = () => {
       'Close after submit (shouldCloseAfterSubmit)',
       true
     ),
+    focusTrap: boolean('Trap focus (focusTrap)', false),
     onBlur: action('onBlur'),
     onClick: action('onClick'),
     onFocus: action('onFocus'),
