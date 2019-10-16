@@ -319,6 +319,10 @@ class OverflowMenu extends Component {
   };
 
   handleKeyPress = evt => {
+    if (!keyCodeMatches(evt, [keys.Enter, keys.Space])) {
+      evt.preventDefault();
+    }
+
     // only respond to key events when the menu is closed, so that menu items still respond to key events
     if (!this.state.open) {
       if (keyCodeMatches(evt, [keys.Enter, keys.Space])) {
@@ -331,7 +335,6 @@ class OverflowMenu extends Component {
       this.closeMenu();
       // Stop the esc keypress from bubbling out and closing something it shouldn't
       evt.stopPropagation();
-      evt.preventDefault();
     }
   };
 
