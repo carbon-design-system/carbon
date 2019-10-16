@@ -24,7 +24,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "node tasks/build.js",
+    "build": "node --max_old_space_size=2048 tasks/build.js",
     "clean": "node tasks/clean.js"
   },
   "peerDependencies": {
