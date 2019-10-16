@@ -8,13 +8,12 @@
       "es2016",
       "dom"
     ],
-    "sourceMap": true,
+    "sourceMap": false,
     "module": "es2015",
     "moduleResolution": "node",
     "outDir": "./../lib",
     "rootDir": "./../ts",
     "target": "es5",
-    "inlineSources": true,
     "typeRoots": ["./../node_modules/@types"]
   },
   "include": [
