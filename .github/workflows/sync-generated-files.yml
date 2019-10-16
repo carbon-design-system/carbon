@@ -12,6 +12,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
+      # This action is equivalent to running `git fetch` and
+      # `git checkout SHA`. We want to checkout `master`
+      - name: Checkout master
+        run: git checkout master
       - name: Install dependencies
         run: yarn install --offline
       - name: Build project
