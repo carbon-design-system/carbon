@@ -80,6 +80,10 @@ describe('OverflowMenu', () => {
         0
       );
     });
+    it('should specify light version as expected', () => {
+      rootWrapper.setProps({ light: true });
+      expect(rootWrapper.props().light).toEqual(true);
+    });
   });
 
   describe('open and closed states', () => {
