@@ -11,8 +11,13 @@ import addons from '@storybook/addons';
 import { withInfo } from '@storybook/addon-info';
 import { configureActions } from '@storybook/addon-actions';
 // import { checkA11y } from 'storybook-addon-a11y';
-import { CARBON_CURRENT_THEME } from './addon-carbon-theme/shared';
+import {
+  CARBON_CURRENT_THEME,
+  CARBON_TYPE_TOKEN,
+} from './addon-carbon-theme/shared';
 import Container from './Container';
+
+const customPropertyPrefix = 'cds';
 
 addDecorator(
   withInfo({
@@ -40,6 +45,22 @@ addDecorator(story => <Container story={story} />);
 
 addons.getChannel().on(CARBON_CURRENT_THEME, theme => {
   document.documentElement.setAttribute('storybook-carbon-theme', theme);
+});
+
+addons.getChannel().on(CARBON_TYPE_TOKEN, ({ tokenName, tokenValue }) => {
+  const root = document.documentElement;
+  const [fontSize, lineHeight] = tokenValue.split('-');
+  const rem = px =>
+    `${px /
+      parseFloat(getComputedStyle(document.documentElement).fontSize)}rem`;
+  root.style.setProperty(
+    `--${customPropertyPrefix}-${tokenName}-font-size`,
+    rem(fontSize)
+  );
+  root.style.setProperty(
+    `--${customPropertyPrefix}-${tokenName}-line-height`,
+    rem(lineHeight)
+  );
 });
 
 function loadStories() {
