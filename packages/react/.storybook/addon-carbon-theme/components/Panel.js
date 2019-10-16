@@ -8,18 +8,18 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from '@storybook/components';
-import { CURRENT_THEME } from '../shared';
+import { CARBON_CURRENT_THEME } from '../shared';
 
 /**
  * Storybook add-on panel for Carbon theme switcher.
  */
-const Panel = ({ api, active }) => {
+export const CarbonThemesPanel = ({ api, active }) => {
   const [currentTheme, setCurrentTheme] = useState('white');
   const handleChange = useCallback(
     event => {
       const { value } = event.target;
       setCurrentTheme(value);
-      api.getChannel().emit(CURRENT_THEME, value);
+      api.getChannel().emit(CARBON_CURRENT_THEME, value);
     },
     [api]
   );
@@ -51,7 +51,7 @@ const Panel = ({ api, active }) => {
   );
 };
 
-Panel.propTypes = {
+CarbonThemesPanel.propTypes = {
   /**
    * The Storybook API object.
    */
