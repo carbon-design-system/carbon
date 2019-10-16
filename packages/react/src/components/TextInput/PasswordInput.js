@@ -7,16 +7,6 @@ import { textInputProps } from './util';
 
 const { prefix } = settings;
 
-export const translationIds = {
-  'hide.password': 'hide.password',
-  'show.password': 'show.password',
-};
-
-const defaultTranslations = {
-  [translationIds['hide.password']]: 'Hide password',
-  [translationIds['show.password']]: 'Show password',
-};
-
 export default function PasswordInput({
   labelText,
   className,
@@ -31,7 +21,8 @@ export default function PasswordInput({
   light,
   tooltipPosition = 'bottom',
   tooltipAlignment = 'center',
-  translateWithId: t,
+  hidePasswordLabel = 'Hide password',
+  showPasswordLabel = 'Show password',
   ...other
 }) {
   const [inputType, setInputType] = useState('password');
@@ -108,7 +99,7 @@ export default function PasswordInput({
         className={passwordVisibilityToggleClasses}
         onClick={togglePasswordVisibility}>
         <span className={`${prefix}--assistive-text`}>
-          {passwordIsVisible ? t('hide.password') : t('show.password')}
+          {passwordIsVisible ? hidePasswordLabel : showPasswordLabel}
         </span>
         {passwordVisibilityIcon}
       </button>
@@ -222,6 +213,16 @@ PasswordInput.propTypes = {
    * Can be one of: start, center, or end.
    */
   tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * "Hide password" tooltip text on password visibility toggle
+   */
+  hidePasswordLabel: PropTypes.string,
+
+  /**
+   * "Show password" tooltip text on password visibility toggle
+   */
+  showPasswordLabel: PropTypes.string,
 };
 
 PasswordInput.defaultProps = {
@@ -233,5 +234,4 @@ PasswordInput.defaultProps = {
   invalidText: '',
   helperText: '',
   light: false,
-  translateWithId: id => defaultTranslations[id],
 };

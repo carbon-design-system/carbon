@@ -14,11 +14,8 @@ describe('PasswordInput', () => {
         labelText="testlabel"
         helperText="testHelper"
         light
-        /**
-         * Simulates a condition where the translations for password visibility
-         * toggle button are not present
-         */
-        translateWithId={jest.fn(() => undefined)}
+        showPasswordLabel="Show password"
+        hidePasswordLabel="Hide password"
       />
     );
 
@@ -48,6 +45,8 @@ describe('PasswordInput', () => {
         expect(passwordInput().props().type).toEqual('password');
         wrapper.find('button').simulate('click');
         expect(passwordInput().props().type).toEqual('text');
+        wrapper.find('button').simulate('click');
+        expect(passwordInput().props().type).toEqual('password');
       });
 
       it('should set value as expected', () => {
@@ -68,16 +67,17 @@ describe('PasswordInput', () => {
         expect(passwordInput().props().placeholder).toEqual('Enter text');
       });
 
-      it('should call `translateWithId` with the id strings needed to translate', () => {
-        expect(wrapper.props().translateWithId).toHaveBeenCalledWith(
-          'show.password'
-        );
+      it('should set password visibility toggle text as expected', () => {
+        const { hidePasswordLabel, showPasswordLabel } = wrapper.props();
+        expect(
+          wrapper.find('.bx--text-input--password__visibility__toggle').text()
+        ).toEqual(showPasswordLabel);
         wrapper
           .find('.bx--text-input--password__visibility__toggle')
           .simulate('click');
-        expect(wrapper.props().translateWithId).toHaveBeenCalledWith(
-          'hide.password'
-        );
+        expect(
+          wrapper.find('.bx--text-input--password__visibility__toggle').text()
+        ).toEqual(hidePasswordLabel);
       });
     });
 
