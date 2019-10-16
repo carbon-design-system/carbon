@@ -12,6 +12,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
+      # This action is equivalent to running `git fetch` and
+      # `git checkout SHA`. We want to checkout `master`
+      - name: Checkout master
+        run: git checkout master
       - name: Install dependencies
         run: yarn install --offline
       - name: Build project
@@ -20,7 +24,7 @@ jobs:
         run: yarn sync
       - name: Push generated artifacts to GitHub
         env:
-          NPM_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
+          GH_BOT_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
         run: |
           if [ -n "$(git status --porcelain)" ]; then
             echo "Our git status is not clean. Checking in the following files:";
@@ -30,9 +34,5 @@ jobs:
             git config --global user.name "carbon-bot"
             git add -A
             git commit -m "chore(project): sync generated files [skip ci]"
-            # Pipe to /dev/null to prevent any token leaks in CI output
-            git push -q \
-              https://${GH_BOT_TOKEN}:@github.com/carbon-design-system/carbon.git \
-              master \
-              > /dev/null 2>&1
+            git push "https://$GH_BOT_TOKEN:@github.com/carbon-design-system/carbon.git" master
           fi
