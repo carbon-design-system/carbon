@@ -43,11 +43,11 @@ const Tag = ({
   return filter ? (
     <span
       className={tagClasses}
-      title={title ? title : 'Clear filter'}
+      title={title || 'Clear filter'}
       tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
       {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
-      <Close16 aria-label={title ? title : 'Clear filter'} />
+      <Close16 aria-label={title || 'Clear filter'} />
     </span>
   ) : (
     <span className={tagClasses} {...other}>
