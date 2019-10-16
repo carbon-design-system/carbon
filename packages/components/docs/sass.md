@@ -17544,7 +17544,10 @@ Form styles
     @include type-style('body-short-01');
     display: flex;
     flex-direction: column;
-    flex: 1;
+    // We specify `auto` as the default value so that the form item does
+    // not collapse in IE11 due to a `flex-basis` of 0 only working with
+    // `flex-direction: row`
+    flex: 1 1 auto;
     align-items: flex-start;
   }
 
@@ -20065,8 +20068,8 @@ Pagination styles
   }
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
-    top: auto;
-    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
     @include carbon--breakpoint('md') {
       right: $carbon--spacing-05;
     }
