@@ -776,27 +776,6 @@ icons:
         categories:
           - name: Actions
             subcategory: Toggle
-  - name: filter
-    friendly_name: Filter
-    usage: This is a description for usage
-    categories:
-      - name: Actions
-        subcategory: Operations
-    aliases:
-      - refine
-      - funnel
-    sizes:
-      - 16
-      - 32
-    variants:
-      - name: filter--edit
-        friendly_name: Filter edit
-        usage: This is a description for usage
-        sizes:
-          - 32
-        categories:
-          - name: Actions
-            subcategory: Operations
   - name: folder
     friendly_name: Folder
     usage: This is a description for usage
@@ -1416,6 +1395,7 @@ icons:
         friendly_name: Settings adjust
         usage: This is a description for usage
         sizes:
+          - 16
           - 32
         categories:
           - name: Actions
@@ -1923,6 +1903,14 @@ icons:
         usage: This is a description for usage
         sizes:
           - 16
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Navigation
+      - name: zoom--reset
+        friendly_name: Zoom reset
+        usage: This is a description for usage
+        sizes:
           - 32
         categories:
           - name: Actions
@@ -2710,6 +2698,31 @@ icons:
       - accessible
     sizes:
       - 32
+    variants:
+      - name: accessibility--alt
+        friendly_name: Accessibility alt
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Person
+            subcategory: User
+      - name: accessibility--color--filled
+        friendly_name: Accessibility color filled
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Person
+            subcategory: User
+      - name: accessibility--color
+        friendly_name: Accessibility color
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Person
+            subcategory: User
   - name: account
     friendly_name: Account
     usage: This is a description for usage
@@ -3013,6 +3026,16 @@ icons:
       - field
       - glasses
       - zoom
+    sizes:
+      - 32
+  - name: blockchain
+    friendly_name: Blockchain
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - blockchain
     sizes:
       - 32
   - name: blog
@@ -3362,6 +3385,25 @@ icons:
         categories:
           - name: Organization
             subcategory: File
+  - name: charging-station
+    friendly_name: Charging station
+    usage: This is a description for usage
+    categories:
+      - name: Planning
+        subcategory: Travel
+    aliases:
+      - charging-station
+    sizes:
+      - 32
+    variants:
+      - name: charging-station--filled
+        friendly_name: Charging station filled
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Planning
+            subcategory: Travel
   - name: chart
     friendly_name: Chart
     usage: This is a description for usage
@@ -3689,6 +3731,16 @@ icons:
       - palette
     sizes:
       - 32
+  - name: color-switch
+    friendly_name: Color switch
+    usage: This is a description for usage
+    categories:
+      - name: Actions
+        subcategory: Formatting
+    aliases:
+      - color-switch
+    sizes:
+      - 32
   - name: column
     friendly_name: Column
     usage: This is a description for usage
@@ -3770,6 +3822,16 @@ icons:
       - connection
       - wireless
       - network
+    sizes:
+      - 32
+  - name: container-software
+    friendly_name: Container software
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - container-software
     sizes:
       - 32
   - name: contrast
@@ -4134,6 +4196,16 @@ icons:
       - data vis
     sizes:
       - 32
+  - name: dot-mark
+    friendly_name: Dot mark
+    usage: This is a description for usage
+    categories:
+      - name: Actions
+        subcategory: Formatting
+    aliases:
+      - dot-mark
+    sizes:
+      - 32
   - name: drag
     friendly_name: Drag
     usage: This is a description for usage
@@ -4176,6 +4248,25 @@ icons:
       - doodle
     sizes:
       - 32
+  - name: drop-photo
+    friendly_name: Drop photo
+    usage: This is a description for usage
+    categories:
+      - name: Actions
+        subcategory: Formatting
+    aliases:
+      - drop-photo
+    sizes:
+      - 32
+    variants:
+      - name: drop-photo--filled
+        friendly_name: Drop photo filled
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Formatting
   - name: earth
     friendly_name: Earth
     usage: This is a description for usage
@@ -4521,6 +4612,26 @@ icons:
         categories:
           - name: Person
             subcategory: User
+  - name: filter
+    friendly_name: Filter
+    usage: This is a description for usage
+    categories:
+      - name: Actions
+        subcategory: Operations
+    aliases:
+      - refine
+      - funnel
+    sizes:
+      - 32
+    variants:
+      - name: filter--edit
+        friendly_name: Filter edit
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Operations
   - name: finance
     friendly_name: Finance
     usage: This is a description for usage
@@ -4551,6 +4662,16 @@ icons:
       - touch
       - identity
       - mark
+    sizes:
+      - 32
+  - name: fit-to-screen
+    friendly_name: Fit to screen
+    usage: This is a description for usage
+    categories:
+      - name: Actions
+        subcategory: Controls
+    aliases:
+      - fit-to-screen
     sizes:
       - 32
   - name: flag
@@ -4641,6 +4762,16 @@ icons:
         categories:
           - name: Organization
             subcategory: Data
+  - name: fog
+    friendly_name: Fog
+    usage: This is a description for usage
+    categories:
+      - name: Planning
+        subcategory: Weather
+    aliases:
+      - fog
+    sizes:
+      - 32
   - name: fork
     friendly_name: Fork
     usage: This is a description for usage
@@ -4907,6 +5038,16 @@ icons:
         subcategory: Weather
     aliases:
       - hurricane
+    sizes:
+      - 32
+  - name: hybrid-networking
+    friendly_name: Hybrid networking
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - hybrid-networking
     sizes:
       - 32
   - name: ibm-cloud
@@ -5421,14 +5562,6 @@ icons:
       - tag
       - identification
     variants:
-      - name: logo--delicious
-        friendly_name: Logo delicious
-        usage: This is a description for usage
-        sizes:
-          - 32
-        categories:
-          - name: Brand
-            subcategory: Social
       - name: logo--digg
         friendly_name: Logo digg
         usage: This is a description for usage
@@ -5477,6 +5610,14 @@ icons:
         categories:
           - name: Brand
             subcategory: Social
+      - name: logo--instagram
+        friendly_name: Logo instagram
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Brand
+            subcategory: Social
       - name: logo--linkedin
         friendly_name: Logo linkedin
         usage: This is a description for usage
@@ -5493,6 +5634,22 @@ icons:
         categories:
           - name: Brand
             subcategory: Social
+      - name: logo--medium
+        friendly_name: Logo medium
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Brand
+            subcategory: Social
+      - name: logo--openshift
+        friendly_name: Logo openshift
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Tools
+            subcategory: Technology
       - name: logo--pinterest
         friendly_name: Logo pinterest
         usage: This is a description for usage
@@ -5533,14 +5690,6 @@ icons:
         categories:
           - name: Brand
             subcategory: Social
-      - name: logo--stumbleupon
-        friendly_name: Logo stumbleupon
-        usage: This is a description for usage
-        sizes:
-          - 32
-        categories:
-          - name: Brand
-            subcategory: Social
       - name: logo--tumblr
         friendly_name: Logo tumblr
         usage: This is a description for usage
@@ -5557,8 +5706,24 @@ icons:
         categories:
           - name: Brand
             subcategory: Social
+      - name: logo--vmware
+        friendly_name: Logo vmware
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Tools
+            subcategory: Technology
       - name: logo--xing
         friendly_name: Logo xing
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Brand
+            subcategory: Social
+      - name: logo--yelp
+        friendly_name: Logo yelp
         usage: This is a description for usage
         sizes:
           - 32
@@ -5660,6 +5825,16 @@ icons:
         categories:
           - name: Tools
             subcategory: Technology
+  - name: managed-solutions
+    friendly_name: Managed solutions
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - managed-solutions
+    sizes:
+      - 32
   - name: map
     friendly_name: Map
     usage: This is a description for usage
@@ -5712,6 +5887,16 @@ icons:
         categories:
           - name: Enterprise
             subcategory: Health
+  - name: meter
+    friendly_name: Meter
+    usage: This is a description for usage
+    categories:
+      - name: Tools
+        subcategory: Instruments
+    aliases:
+      - meter
+    sizes:
+      - 32
   - name: microphone
     friendly_name: Microphone
     usage: This is a description for usage
@@ -5753,6 +5938,16 @@ icons:
         categories:
           - name: Actions
             subcategory: Toggle
+  - name: microscope
+    friendly_name: Microscope
+    usage: This is a description for usage
+    categories:
+      - name: Tools
+        subcategory: Instruments
+    aliases:
+      - microscope
+    sizes:
+      - 32
   - name: migrate
     friendly_name: Migrate
     usage: This is a description for usage
@@ -5799,6 +5994,14 @@ icons:
     variants:
       - name: mobile--add
         friendly_name: Mobile add
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Tools
+            subcategory: Technology
+      - name: mobile--audio
+        friendly_name: Mobile audio
         usage: This is a description for usage
         sizes:
           - 32
@@ -6181,6 +6384,16 @@ icons:
         categories:
           - name: Organization
             subcategory: Alphanumeric
+  - name: omega
+    friendly_name: Omega
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Alphanumeric
+    aliases:
+      - omega
+    sizes:
+      - 32
   - name: opacity
     friendly_name: Opacity
     usage: This is a description for usage
@@ -6345,6 +6558,16 @@ icons:
       - open
     sizes:
       - 32
+  - name: paragraph
+    friendly_name: Paragraph
+    usage: This is a description for usage
+    categories:
+      - name: Actions
+        subcategory: Formatting
+    aliases:
+      - paragraph
+    sizes:
+      - 32
   - name: parent-child
     friendly_name: Parent child
     usage: This is a description for usage
@@ -6406,6 +6629,25 @@ icons:
       - text
     sizes:
       - 32
+  - name: percentage
+    friendly_name: Percentage
+    usage: This is a description for usage
+    categories:
+      - name: Actions
+        subcategory: Formatting
+    aliases:
+      - percentage
+    sizes:
+      - 32
+    variants:
+      - name: percentage--filled
+        friendly_name: Percentage filled
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Formatting
   - name: person
     friendly_name: Person
     usage: This is a description for usage
@@ -6581,6 +6823,16 @@ icons:
       - copy
       - file
       - paper
+    sizes:
+      - 32
+  - name: product
+    friendly_name: Product
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: File
+    aliases:
+      - product
     sizes:
       - 32
   - name: purchase
@@ -7126,6 +7378,16 @@ icons:
       - qr
     sizes:
       - 32
+  - name: schematics
+    friendly_name: Schematics
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - schematics
+    sizes:
+      - 32
   - name: screen
     friendly_name: Screen
     usage: This is a description for usage
@@ -7337,6 +7599,16 @@ icons:
       - car
     sizes:
       - 32
+  - name: sigma
+    friendly_name: Sigma
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Alphanumeric
+    aliases:
+      - sigma
+    sizes:
+      - 32
   - name: skip
     friendly_name: Skip
     usage: This is a description for usage
@@ -7449,6 +7721,16 @@ icons:
       - art
       - bottle
       - half
+    sizes:
+      - 32
+  - name: stamp
+    friendly_name: Stamp
+    usage: This is a description for usage
+    categories:
+      - name: Tools
+        subcategory: Instruments
+    aliases:
+      - stamp
     sizes:
       - 32
   - name: store
@@ -7817,6 +8099,14 @@ icons:
         categories:
           - name: Actions
             subcategory: Formatting
+      - name: text--new-line
+        friendly_name: Text new line
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Formatting
       - name: text--scale
         friendly_name: Text scale
         usage: This is a description for usage
@@ -8094,6 +8384,25 @@ icons:
         categories:
           - name: Organization
             subcategory: Data
+  - name: trophy
+    friendly_name: Trophy
+    usage: This is a description for usage
+    categories:
+      - name: Actions
+        subcategory: Toggle
+    aliases:
+      - trophy
+    sizes:
+      - 32
+    variants:
+      - name: trophy--filled
+        friendly_name: Trophy filled
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Toggle
   - name: type-pattern
     friendly_name: Type pattern
     usage: This is a description for usage
@@ -8245,6 +8554,26 @@ icons:
         categories:
           - name: Actions
             subcategory: Toggle
+  - name: virtual-machine
+    friendly_name: Virtual machine
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - virtual-machine
+    sizes:
+      - 32
+  - name: virtual-private-cloud
+    friendly_name: Virtual private cloud
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - virtual-private-cloud
+    sizes:
+      - 32
   - name: visual-recognition
     friendly_name: Visual recognition
     usage: This is a description for usage
@@ -8437,6 +8766,19 @@ icons:
         categories:
           - name: Enterprise
             subcategory: Health
+  - name: 3D-iCa
+    friendly_name: 3D iCa
+    usage: This is a description for usage
+    categories:
+      - name: Enterprise
+        subcategory: Health
+    aliases:
+      - iCA
+      - dimension
+      - cube
+      - space
+    sizes:
+      - 32
   - name: 3D-software
     friendly_name: 3D software
     usage: This is a description for usage
@@ -8608,6 +8950,16 @@ icons:
         categories:
           - name: Enterprise
             subcategory: Health
+  - name: dna
+    friendly_name: Dna
+    usage: This is a description for usage
+    categories:
+      - name: Enterprise
+        subcategory: Health
+    aliases:
+      - dna
+    sizes:
+      - 32
   - name: edit-filter
     friendly_name: Edit filter
     usage: This is a description for usage
@@ -8642,19 +8994,6 @@ icons:
       - clothes
       - suspended
       - swing
-    sizes:
-      - 32
-  - name: 3D-iCa
-    friendly_name: 3D iCa
-    usage: This is a description for usage
-    categories:
-      - name: Enterprise
-        subcategory: Health
-    aliases:
-      - iCA
-      - dimension
-      - cube
-      - space
     sizes:
       - 32
   - name: launch-study
