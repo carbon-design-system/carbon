@@ -21212,6 +21212,7 @@ Select styles
 
     &:focus {
       @include focus-outline('outline');
+      color: $text-01;
     }
 
     &:disabled,
