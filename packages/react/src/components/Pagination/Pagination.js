@@ -325,12 +325,8 @@ export default class Pagination extends Component {
               inline
               hideLabel
               onChange={this.handlePageInputChange}
-              onFocus={() => {
-                this.setState({ selectSize });
-              }}
-              onBlur={() => {
-                this.setState({ selectSize: 1 });
-              }}
+              onFocus={() => this.setState({ selectSize })}
+              onBlur={() => this.setState({ selectSize: 1 })}
               size={this.state.selectSize}
               value={statePage}>
               {selectItems}
