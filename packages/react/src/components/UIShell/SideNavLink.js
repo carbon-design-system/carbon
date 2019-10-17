@@ -16,7 +16,6 @@ import SideNavLinkText from './SideNavLinkText';
 
 const { prefix } = settings;
 
-/* eslint-disable no-unused-vars */
 
 const SideNavLink = ({
   className: customClassName,
