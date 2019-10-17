@@ -40,7 +40,7 @@ const props = () => ({
   ),
   onChange: action('onChange'),
   selectSize: number(
-    'Size set on the page number select element (selectSize)',
+    'The `size` attribute of the page number select element (selectSize)',
     1
   ),
 });
