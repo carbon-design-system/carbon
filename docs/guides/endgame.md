@@ -669,7 +669,7 @@ packages.
 
 _Note: If you don't have an npm account, you'll need to go to
 https://www.npmjs.com/signup to create one and find a team member who can give
-you permission to publish to the carbon packages. It may take a couple hours for
+you permission to publish to the Carbon packages. It may take a couple of hours for
 npm to recognize the permission change. You will also need to login into npm
 from your terminal using the command `npm adduser` where you will be prompted
 for your username and password._
