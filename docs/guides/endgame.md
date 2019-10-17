@@ -935,7 +935,7 @@ the following testing scenarios:
 <details>
   <summary>How to run React smoke test</summary>
 
-Change directories so you are wherever you create new projects and run:
+Change directories to wherever you want to add the project and run:
 
 ```bash
 npx create-react-app tmp
