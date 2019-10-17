@@ -17,7 +17,6 @@ const SelectSkeleton = ({ hideLabel }) => (
     <div className={`${prefix}--select ${prefix}--skeleton`}>
       <div
         aria-label="loading select"
-        aria-live="assertive"
         className={`${prefix}--select-input`}
         role="status"
         tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
