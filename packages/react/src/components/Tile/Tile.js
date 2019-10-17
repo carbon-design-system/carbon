@@ -30,7 +30,8 @@ export class Tile extends Component {
     className: PropTypes.string,
 
     /**
-     * `true` to use the light version.
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
      */
     light: PropTypes.bool,
   };
@@ -81,7 +82,8 @@ export class ClickableTile extends Component {
     rel: PropTypes.string,
 
     /**
-     * `true` to use the light version.
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
      */
     light: PropTypes.bool,
   };
@@ -224,7 +226,8 @@ export class SelectableTile extends Component {
     tabIndex: PropTypes.number,
 
     /**
-     * `true` to use the light version.
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
      */
     light: PropTypes.bool,
   };
@@ -393,7 +396,8 @@ export class ExpandableTile extends Component {
     id: PropTypes.string,
 
     /**
-     * `true` to use the light version.
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
      */
     light: PropTypes.bool,
   };
