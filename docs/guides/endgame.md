@@ -21,7 +21,7 @@
     - [Publishing steps](#publishing-steps)
   - [Patch releases](#patch-releases)
     - [Publishing steps](#publishing-steps-1)
-  - [Release candidate releases](#release-candidate-releases)
+  - [Release Candidate releases](#release-candidate-releases)
     - [Publishing steps](#publishing-steps-2)
   - [Minor releases](#minor-releases)
     - [Publishing steps](#publishing-steps-3)
@@ -961,10 +961,10 @@ to `.scss` and add:
 @import 'carbon-components/scss/globals/scss/styles.scss';
 ```
 
-to `index.scss`.
+to the top of `index.scss`.
 
-Update the `.css` imports to `.scss` in `App.js`. At the top of `App.js`, import
-the `Button` component by adding the following:
+Update the `.css` imports to `.scss` in `App.js` and `index.js`. At the top of
+`App.js`, import the `Button` component by adding the following:
 
 ```javascript
 import { Button } from 'carbon-components-react';
