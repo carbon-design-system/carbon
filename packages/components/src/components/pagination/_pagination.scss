@@ -84,6 +84,23 @@ $css--helpers: true;
     border-left: 1px solid $ui-03;
   }
 
+  .#{$prefix}--select__page-number {
+    position: relative;
+
+    // Note that `size="1"` is the default.
+    .#{$prefix}--select-input:not([size='1']) {
+      &:focus {
+        position: absolute;
+        right: 0;
+        height: auto;
+        background-color: $ui-01;
+      }
+      &:focus ~ svg {
+        @include hidden;
+      }
+    }
+  }
+
   .#{$prefix}--pagination__left,
   .#{$prefix}--pagination__right {
     display: flex;

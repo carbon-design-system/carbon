@@ -39,6 +39,10 @@ const props = () => ({
     'Items per page:'
   ),
   onChange: action('onChange'),
+  selectSize: number(
+    'Size set on the page number select element (selectSize)',
+    1
+  ),
 });
 
 storiesOf('Pagination', module)

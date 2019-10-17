@@ -29,6 +29,7 @@ export default class Pagination extends Component {
       prevPageSizes: pageSizes,
       prevPage: page,
       prevPageSize: pageSize,
+      selectSize: 1,
     };
     this.uniqueId = ++instanceId;
   }
@@ -127,6 +128,11 @@ export default class Pagination extends Component {
      * `true` if the select box to change the page should be disabled.
      */
     pageInputDisabled: PropTypes.bool,
+
+    /**
+     * Optional prop to set the `size` attribute on the page number select element.
+     */
+    selectSize: PropTypes.number,
   };
 
   static defaultProps = {
@@ -143,6 +149,7 @@ export default class Pagination extends Component {
     pageInputDisabled: false,
     itemText: (min, max) => `${min}–${max} items`,
     pageText: page => `page ${page}`,
+    selectSize: 1,
   };
 
   static getDerivedStateFromProps({ pageSizes, page, pageSize }, state) {
@@ -162,7 +169,7 @@ export default class Pagination extends Component {
     return !pageSizesChanged && !pageChanged && !pageSizeChanged
       ? null
       : {
-          page: pageSizeChanged && 1 || pageChanged && page || currentPage,
+          page: (pageSizeChanged && 1) || (pageChanged && page) || currentPage,
           pageSize: pageSizeChanged ? pageSize : currentPageSize,
           prevPageSizes: pageSizes,
           prevPage: page,
@@ -236,6 +243,7 @@ export default class Pagination extends Component {
       totalItems,
       onChange, // eslint-disable-line no-unused-vars
       page: pageNumber, // eslint-disable-line no-unused-vars
+      selectSize,
       ...other
     } = this.props;
 
@@ -317,6 +325,13 @@ export default class Pagination extends Component {
               inline
               hideLabel
               onChange={this.handlePageInputChange}
+              onFocus={() => {
+                this.setState({ selectSize });
+              }}
+              onBlur={() => {
+                this.setState({ selectSize: 1 });
+              }}
+              size={this.state.selectSize}
               value={statePage}>
               {selectItems}
             </Select>
