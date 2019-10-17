@@ -967,7 +967,7 @@ to the top of `index.scss`.
 Update the `.css` imports to `.scss` in `App.js` and `index.js`. At the top of
 `App.js`, import the `Button` component by adding the following:
 
-```javascript
+```js
 import { Button } from 'carbon-components-react';
 ```
 
