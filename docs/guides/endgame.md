@@ -412,7 +412,9 @@ already exist in the project. These updates are reserved for
    git checkout v10.4.0
    ```
 
-2. Run `./packages/cli/bin/carbon-cli.js release patch`
+2. Run `./packages/cli/bin/carbon-cli.js release patch` **_Note: Currently the
+   cli command isn't working, see Manual Instructions for the patch release
+   process_**
 
    - You will see the terminal do a few things: get the latest tag, find the
      next version to bump, create a branch for the release, and begin
@@ -663,7 +665,16 @@ going on. Worst-case, we can always cut a minor release from the latest `master`
 if an appropriate patch could not be generated.
 
 Once you are done cherry-picking commits, it's time to version the changed
-packages. You can use `lerna` to accomplish this by running:
+packages.
+
+_Note: If you don't have an npm account, you'll need to go to
+https://www.npmjs.com/signup to create one and find a team member who can give
+you permission to publish to the carbon packages. It may take a couple hours for
+npm to recognize the permission change. You will also need to login into npm
+from your terminal using the command `npm adduser` where you will be prompted
+for your username and password._
+
+You can use `lerna` to version the changed packages by running:
 
 ```bash
 yarn lerna version patch --no-push --no-git-tag-version --exact
@@ -920,6 +931,49 @@ the following testing scenarios:
   - [ ] `gatsby-theme-carbon`
 - [ ] React smoke tests
   - [ ] `create-react-app`
+
+<details>
+  <summary>How to run React smoke test</summary>
+
+Change directories so you are wherever you create new projects and run:
+
+```bash
+npx create-react-app tmp
+```
+
+Change directories so you're in the newly created `tmp` folder and run `yarn` in
+your terminal.
+
+After that is done, install the dependencies: carbon-components,
+carbon-components-react, carbon-icons and node-sass (two dependencies that the
+other packages require) by running:
+
+```bash
+yarn add carbon-components@next carbon-components-react@next @carbon/icons-react
+// And
+yarn add node-sass
+```
+
+Once that's done, open up `tmp` in your code editor and change any `.css` files
+to `.scss` and add:
+
+```javascript
+@import 'carbon-components/scss/globals/scss/styles.scss';
+```
+
+to `index.scss`.
+
+Update the `.css` imports to `.scss` in `App.js`. At the top of `App.js`, import
+the `Button` component by adding the following:
+
+```javascript
+import { Button } from 'carbon-components-react';
+```
+
+In the `App` component return, add the `Button` and then run `yarn start` and
+verify that the `Button` is there and looks correct.
+
+</details>
 
 ### Procedures
 
