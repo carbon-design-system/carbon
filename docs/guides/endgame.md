@@ -413,7 +413,7 @@ already exist in the project. These updates are reserved for
    ```
 
 2. Run `./packages/cli/bin/carbon-cli.js release patch` **_Note: Currently, the
-   cli command isn't working, see Manual Instructions for the patch release
+   CLI command isn't working. See the manual instructions for the patch release.
    process_**
 
    - You will see the terminal do a few things: get the latest tag, find the
