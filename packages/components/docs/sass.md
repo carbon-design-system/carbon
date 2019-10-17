@@ -13272,8 +13272,8 @@ Accordion styles
     margin: 0;
     transition: background-color motion(standard, productive) $duration--fast-02;
 
-    &:hover:before,
-    &:focus:before {
+    &:hover::before,
+    &:focus::before {
       content: '';
       position: absolute;
       top: -1px;
@@ -13282,7 +13282,7 @@ Accordion styles
       height: calc(100% + 2px);
     }
 
-    &:hover:before {
+    &:hover::before {
       background-color: $hover-ui;
     }
 
@@ -13319,15 +13319,11 @@ Accordion styles
   }
 
   .#{$prefix}--accordion__content {
+    display: none;
     // Transition property for when the accordion closes
-    transition: height motion(standard, productive) $duration--fast-02, padding
-        motion(standard, productive) $duration--fast-02;
+    transition: padding motion(standard, productive) $duration--fast-02;
     padding-left: $carbon--spacing-05;
-
     padding-right: 25%;
-    height: 0;
-    visibility: hidden;
-    opacity: 0;
 
     @include carbon--breakpoint-down('md') {
       padding-right: $carbon--spacing-09;
@@ -13338,19 +13334,29 @@ Accordion styles
     }
   }
 
+  .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content,
+  .#{$prefix}--accordion__item--expanding .#{$prefix}--accordion__content {
+    display: block;
+  }
+
+  .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content {
+    animation: $duration--fast-02 motion(standard, productive) collapse-accordion;
+  }
+
+  .#{$prefix}--accordion__item--expanding .#{$prefix}--accordion__content {
+    animation: $duration--fast-02 motion(standard, productive) expand-accordion;
+  }
+
   .#{$prefix}--accordion__item--active {
     overflow: visible;
 
     .#{$prefix}--accordion__content {
+      display: block;
       padding-bottom: $carbon--spacing-06;
       padding-top: $spacing-xs;
-      height: auto;
-      visibility: visible;
-      opacity: 1;
       // Transition property for when the accordion opens
-      transition: height motion(entrance, productive) $duration--fast-02, padding-top
-          motion(entrance, productive) $duration--fast-02,
-        padding-bottom motion(entrance, productive) $duration--fast-02;
+      transition: padding-top motion(entrance, productive) $duration--fast-02, padding-bottom
+          motion(entrance, productive) $duration--fast-02;
     }
 
     .#{$prefix}--accordion__arrow {
