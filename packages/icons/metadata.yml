@@ -3506,7 +3506,7 @@ icons:
           - name: Actions
             subcategory: Toggle
       - name: checkbox--undeterminate--filled
-        friendly_name: Checkbox undeterminate filled
+        friendly_name: Checkbox indeterminate filled
         usage: This is a description for usage
         sizes:
           - 32
@@ -3514,7 +3514,23 @@ icons:
           - name: Actions
             subcategory: Toggle
       - name: checkbox--undeterminate
-        friendly_name: Checkbox undeterminate
+        friendly_name: Checkbox indeterminate
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Toggle
+      - name: checkbox--indeterminate--filled
+        friendly_name: Checkbox indeterminate filled
+        usage: This is a description for usage
+        sizes:
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Toggle
+      - name: checkbox--indeterminate
+        friendly_name: Checkbox indeterminate
         usage: This is a description for usage
         sizes:
           - 32
