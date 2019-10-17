@@ -52,11 +52,21 @@ const props = {
 
 const lightPropMessage = (
   <small style={{ display: 'block', paddingBottom: '1rem' }}>
-    {'Make sure to use a different background color for the '}
+    The snippet container should never be the same color as the page background.
+    <br />
+    {'Do not use the'}
     <CodeSnippet type="inline" light>
       light
     </CodeSnippet>
-    {' code snippet.'}
+    {' variant on '}
+    <CodeSnippet type="inline" light>
+      $ui-background
+    </CodeSnippet>
+    {' or '}
+    <CodeSnippet type="inline" light>
+      $ui-02
+    </CodeSnippet>
+    .
   </small>
 );
 
