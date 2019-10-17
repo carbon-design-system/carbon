@@ -356,6 +356,21 @@ describe('DatePicker', () => {
   });
 });
 
+describe('DatePickerInput', () => {
+  it('should call `openCalendar` on calendar icon click', () => {
+    const mockOpenCalendar = jest.fn();
+    const wrapper = mount(
+      <DatePickerInput
+        labelText="Date Picker label"
+        id="input-from"
+        openCalendar={mockOpenCalendar}
+      />
+    );
+    wrapper.find('svg').simulate('click');
+    expect(mockOpenCalendar).toHaveBeenCalled();
+  });
+});
+
 describe('DatePickerSkeleton', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(<DatePickerSkeleton range />);
