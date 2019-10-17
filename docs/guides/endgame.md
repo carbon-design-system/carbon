@@ -959,7 +959,7 @@ Once that's done, open up `tmp` in your code editor and change any `.css` files
 to `.scss` and add:
 
 ```javascript
-@import 'carbon-components/scss/globals/scss/styles.scss';
+@import '~carbon-components/scss/globals/scss/styles.scss';
 ```
 
 to the top of `index.scss`.
