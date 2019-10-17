@@ -412,7 +412,7 @@ already exist in the project. These updates are reserved for
    git checkout v10.4.0
    ```
 
-2. Run `./packages/cli/bin/carbon-cli.js release patch` **_Note: Currently the
+2. Run `./packages/cli/bin/carbon-cli.js release patch` **_Note: Currently, the
    cli command isn't working, see Manual Instructions for the patch release
    process_**
 
