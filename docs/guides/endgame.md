@@ -21,7 +21,7 @@
     - [Publishing steps](#publishing-steps)
   - [Patch releases](#patch-releases)
     - [Publishing steps](#publishing-steps-1)
-  - [Release Candidate releases](#release-candidate-releases)
+  - [Release candidate releases](#release-candidate-releases)
     - [Publishing steps](#publishing-steps-2)
   - [Minor releases](#minor-releases)
     - [Publishing steps](#publishing-steps-3)
@@ -259,7 +259,7 @@ following projects:
 
 ### Tuesday XX/YY
 
-- [ ] First Release Candidate cut
+- [ ] First Release candidate cut
 - [ ] Complete first round of smoke tests
 - [ ] Share with Carbon Insiders for first round of testing
 
@@ -270,7 +270,7 @@ following projects:
   - [ ] Stop release
   - [ ] Ship with known issues
 - [ ] Coordinate merging of bug fixes related to release
-- [ ] Cut next Release Candidate, if applicable
+- [ ] Cut next Release candidate, if applicable
   - [ ] Share newest release with Carbon Insiders for additional rounds of
         testing
 
@@ -278,7 +278,7 @@ following projects:
 
 - [ ] Collect second round of feedback from Carbon Insiders (if available)
 - [ ] Coordinate merging of bug fixes related to release
-- [ ] Cut next Release Candidate, if applicable
+- [ ] Cut next Release candidate, if applicable
   - [ ] Share newest release with Carbon Insiders for additional rounds of
         testing
 
@@ -334,7 +334,7 @@ types of releases:
 | ------------------------------------------------ | ----------------------------------------------------------------------- | ----------- | -------------------------------------------------- |
 | [Hotfix](#hotfix-releases)                       | Fix severity level 1 issues with large user-facing impact               | `patch`     | On demand                                          |
 | [Patch](#patch-releases)                         | Batched fixes to packages with varying degrees of severity and priority | `patch`     | Weekly                                             |
-| [Release Candidate](#release-candidate-releases) | Features and fixes that will be included in minor release               | `preminor`  | Typically 6 weeks, as needed before minor release  |
+| [Release candidate](#release-candidate-releases) | Features and fixes that will be included in minor release               | `preminor`  | Typically 6 weeks, as needed before minor release  |
 | [Minor](#minor-releases)                         | Features and fixes to packages                                          | `minor`     | Typically 6 weeks, occasionally on-demand          |
 | [Major](#major-releases)                         | Large or semver-incompatible changes to the design system               | `major`     | Typically 6 months to 1 year, announced in advance |
 
@@ -668,11 +668,12 @@ Once you are done cherry-picking commits, it's time to version the changed
 packages.
 
 _Note: If you don't have an npm account, you'll need to go to
-https://www.npmjs.com/signup to create one. Once you've created the account, find a team member who can give
-you permission to publish to the Carbon packages. It may take a couple of hours for
-npm to recognize the permission change. You will also need to login into npm
-from your terminal using the command `npm adduser`, where you will be prompted
-for your username and password._
+https://www.npmjs.com/signup to create one. Once you've created the account,
+find a team member who can give you permission to publish to the Carbon
+packages. It may take a couple of hours for npm to recognize the permission
+change. You will also need to login into npm from your terminal using the
+command `npm adduser`, where you will be prompted for your username and
+password._
 
 You can use `lerna` to version the changed packages by running:
 
@@ -765,9 +766,9 @@ following steps to release:
 
   </details>
 
-### Release Candidate releases
+### Release candidate releases
 
-​ Before our minor releases, we cut Release Candidates a week in advance to
+​ Before our minor releases, we cut Release candidates a week in advance to
 sanity check our code. ​
 
 #### Publishing steps
