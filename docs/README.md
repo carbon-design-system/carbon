@@ -11,7 +11,7 @@ If you think something is missing, we encourage [contributions](#how-to-contribu
 - [Versioning](/project-management/versioning.md)
 - [Support](/project-management/support.md)
 
-## Contributing
+## How to contribute
 
 - [Developer handbook](/contributing/developer-handbook.md)
 - [Setup](/contributing/setup)
