@@ -1,8 +1,8 @@
 # Carbon documentation
 
-Welcome to the Carbon documentation. Here you'll find information for project
-management, contribution, migration, and lessons learned from the Carbon core
-team along the way.
+Welcome to the Carbon documentation. Here you'll find information on project
+management, contribution, migration, lessons learned from the Carbon core team
+along the way, etc.
 
 ## Project management
 
