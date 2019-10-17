@@ -73,6 +73,8 @@
     "@storybook/addons": "^5.2.1",
     "@storybook/react": "^5.2.1",
     "@storybook/source-loader": "^5.2.1",
+    "@testing-library/jest-dom": "^4.1.2",
+    "@testing-library/react": "^9.3.0",
     "all-contributors-cli": "^5.2.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
