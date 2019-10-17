@@ -52,13 +52,11 @@ const props = {
 
 const lightPropMessage = (
   <small>
-    Make sure to use a different background color
-    <br />
-    for the{' '}
+    {'Make sure to use a different background color for the '}
     <CodeSnippet type="inline" light>
       light
-    </CodeSnippet>{' '}
-    code snippet.
+    </CodeSnippet>
+    {' code snippet.'}
     <br />
     <br />
   </small>
