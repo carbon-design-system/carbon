@@ -5,6 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// jest-dom provides helpful matchers that are designed to pair well with react-testing-library
+// https://github.com/testing-library/jest-dom#table-of-contents
+require('@testing-library/jest-dom/extend-expect');
+
 const toHaveNoViolations = require('./matchers/toHaveNoViolations');
 
 // We can extend `expect` using custom matchers as defined by:
