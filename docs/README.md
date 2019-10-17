@@ -1,7 +1,9 @@
 # Carbon documentation
 
 This is the home for all process, contribution, and version-related documentation. These docs include information on project
-management, contribution, migration, lessons learned along the way, etc.
+management, contribution, migration, reflections, and process insights.
+
+If you think something is missing, we encourage [contributions](#how-to-contribute).
 
 ## Project management
 
