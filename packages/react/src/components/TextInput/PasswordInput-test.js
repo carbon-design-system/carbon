@@ -14,6 +14,8 @@ describe('PasswordInput', () => {
         labelText="testlabel"
         helperText="testHelper"
         light
+        showPasswordLabel="Show password"
+        hidePasswordLabel="Hide password"
       />
     );
 
@@ -43,6 +45,8 @@ describe('PasswordInput', () => {
         expect(passwordInput().props().type).toEqual('password');
         wrapper.find('button').simulate('click');
         expect(passwordInput().props().type).toEqual('text');
+        wrapper.find('button').simulate('click');
+        expect(passwordInput().props().type).toEqual('password');
       });
 
       it('should set value as expected', () => {
@@ -61,6 +65,19 @@ describe('PasswordInput', () => {
         expect(passwordInput().props().placeholder).not.toBeDefined();
         wrapper.setProps({ placeholder: 'Enter text' });
         expect(passwordInput().props().placeholder).toEqual('Enter text');
+      });
+
+      it('should set password visibility toggle text as expected', () => {
+        const { hidePasswordLabel, showPasswordLabel } = wrapper.props();
+        expect(
+          wrapper.find('.bx--text-input--password__visibility__toggle').text()
+        ).toEqual(showPasswordLabel);
+        wrapper
+          .find('.bx--text-input--password__visibility__toggle')
+          .simulate('click');
+        expect(
+          wrapper.find('.bx--text-input--password__visibility__toggle').text()
+        ).toEqual(hidePasswordLabel);
       });
     });
 
