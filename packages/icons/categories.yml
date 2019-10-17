@@ -252,6 +252,8 @@ categories:
           - checkbox--checked--filled
           - checkbox--undeterminate
           - checkbox--undeterminate--filled
+          - checkbox--indeterminate
+          - checkbox--indeterminate--filled
           - column
           - favorite
           - favorite--filled
