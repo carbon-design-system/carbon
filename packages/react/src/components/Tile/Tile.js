@@ -303,8 +303,6 @@ export class SelectableTile extends Component {
       ...other
     } = this.props;
 
-    console.log(light);
-
     const classes = classNames(
       `${prefix}--tile`,
       `${prefix}--tile--selectable`,
