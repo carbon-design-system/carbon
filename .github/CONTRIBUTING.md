@@ -13,7 +13,7 @@ to the Carbon community.
 
 We value all of our community members, and thus want to foster a positive
 contributing environment. Please take a look at our
-[code of conduct](https://github.com/carbon-design-system/carbon/blob/master/docs/guides/developer-handbook.md#carbon-code-of-conduct)
+[code of conduct](https://github.com/carbon-design-system/carbon/blob/master/docs/contributing/developer-handbook.md#carbon-code-of-conduct)
 before engaging in our workspaces.
 
 ## Prerequisites
@@ -138,7 +138,7 @@ http://localhost:9000 to see the changes happen on the fly.
 
 For information about our coding style, such as how we name our classes and our
 file structure, go to our
-[developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/guides/developer-handbook.md#coding-style)
+[developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/contributing/developer-handbook.md#coding-style)
 
 ### 6. Test your JavaScript code
 
@@ -150,7 +150,7 @@ yarn test
 ```
 
 For more extensive testing information, see our
-[developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/guides/developer-handbook.md#common-tasks)
+[developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/contributing/developer-handbook.md#common-tasks)
 
 ### 7. Make a pull request
 
@@ -185,7 +185,7 @@ git commit -m "YOUR  COMMIT MESSAGE HERE"
 
 For more information about how to write your commit message, view our commit
 conventions detailed in a our
-[developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/guides/developer-handbook.md#commit-conventions).
+[developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/contributing/developer-handbook.md#commit-conventions).
 
 After your changes are commited, run:
 
@@ -223,7 +223,7 @@ GitHub.
 
 - **Development:** If coding is your thing, you can help us by contributing bug
   fixes or community components. Checkout our
-  [Developer Handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/guides/developer-handbook.md)
+  [Developer Handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/contributing/developer-handbook.md)
   to get your dev environment set up, read up on our best practices and more.
 - **Design:** Design contributions can vary from visual assets, UX interactions,
   motion design, Sketch kit bug fixes and more.
@@ -252,7 +252,7 @@ GitHub.
 3. **Development environment:** If you haven't already, fork and clone whichever
    repo you want to contribute to. Then, create a new branch and add your
    contribution in it. Checkout our
-   [Developer Handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/guides/developer-handbook.md)
+   [Developer Handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/contributing/developer-handbook.md)
    to read up on our best coding practices and proper commit messages.
 4. **Pull request:** Submit a PR. Be sure to fill out the template properly.
 5. **Approval:** Get PR approved by design and developers, or make any necessary

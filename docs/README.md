@@ -1,35 +1,30 @@
 # Carbon documentation
 
 Welcome to the Carbon documentation. Here you'll find information on project
-management, contribution, migration, lessons learned from the Carbon core team
-along the way, etc.
+management, contribution, migration, lessons learned along the way, etc.
 
 ## Project management
 
 - [Endgame](/project-management/endgame.md)
 - [Versioning](/project-management/versioning.md)
+- [Support](/project-management/support.md)
 
 ## Contributing
 
-- [Developer handbook](/guides/developer-handbook.md)
-- [Setup](/guides/setup)
-  - [Design](/guides/setup/design.md)
-  - [Windows](/guides/setup/windows.md)
-  - [Virtual machines](/guides/setup/virtual-machines.md)
-- [Accessibility](/guides/accessibility.md)
-- [Windows high contrast mode](/guides/on-windows-hcm-support.md)
-- [Building an icon library](/guides/building-an-icon-library.md)
-- [Colors](/guides/colors.md)
-- [IBM Plex](/guides/ibm-plex.md)
-- [Icons](/guides/icons.md)
-- [Sass](/guides/sass.md)
+- [Developer handbook](/contributing/developer-handbook.md)
+- [Setup](/contributing/setup)
+  - [Design](/contributing/setup/design.md)
+  - [Windows](/contributing/setup/windows.md)
+  - [Virtual machines](/contributing/setup/virtual-machines.md)
+- [Accessibility](/contributing/accessibility.md)
+- [Windows high contrast mode](/contributing/on-windows-hcm-support.md)
+- [Building an icon library](/contributing/building-an-icon-library.md)
+- [Colors](/contributing/colors.md)
+- [IBM Plex](/contributing/ibm-plex.md)
+- [Icons](/contributing/icons.md)
+- [Sass](/contributing/sass.md)
 
 ## Documentation
 
 - [Migration](/migration)
 - [Postmortems](/postmortems)
-
-## Core team
-
-- [Support](/team/support.md)
-- [Going on vacation](/team/so-you're-going-on-vacation.md)

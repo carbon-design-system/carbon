@@ -83,7 +83,7 @@ assets.
 The `@carbon/icons` package exposes a `meta.json` file that is helpful for
 library authors to use when generating component icon libraries. For a full
 guide for building icon libraries, check out
-[this guide](/docs/guides/building-an-icon-library.md).
+[this guide](/docs/contributing/building-an-icon-library.md).
 
 The `meta.json` file contains an array of all of the icons built from the source
 files available in `@carbon/icons`. Each entry contains the following metadata
