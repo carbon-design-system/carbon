@@ -1,6 +1,6 @@
 # Carbon documentation
 
-Welcome to the Carbon documentation. Here you'll find information on project
+This is the home for all process, contribution, and version-related documentation. These docs include information on project
 management, contribution, migration, lessons learned along the way, etc.
 
 ## Project management
