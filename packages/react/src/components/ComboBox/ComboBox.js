@@ -275,6 +275,10 @@ export default class ComboBox extends React.Component {
     ) : null;
     const wrapperClasses = cx(`${prefix}--list-box__wrapper`);
     const comboBoxA11yId = `combobox-a11y-${this.comboBoxInstanceId}`;
+    const inputClasses = cx(`${prefix}--text-input`, {
+      [`${prefix}--text-input--empty`]: !this.state.inputValue,
+    });
+
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
     const input = (
@@ -316,12 +320,12 @@ export default class ComboBox extends React.Component {
                 onClick: this.onToggleClick(isOpen),
               })}>
               <input
-                className={`${prefix}--text-input`}
+                className={inputClasses}
                 aria-labelledby={comboBoxA11yId}
                 tabIndex="0"
                 aria-disabled={disabled}
-                aria-controls={`${id}__menu`}
-                aria-owns={`${id}__menu`}
+                aria-controls={isOpen ? `${id}__menu` : null}
+                aria-owns={isOpen ? `${id}__menu` : null}
                 aria-autocomplete="list"
                 ref={this.textInput}
                 {...rest}
