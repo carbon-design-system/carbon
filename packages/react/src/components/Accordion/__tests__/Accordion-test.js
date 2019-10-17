@@ -5,30 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
-import { mount } from 'enzyme';
+// import { render, cleanup } from '@carbon/test-utils/react';
 import React from 'react';
+import { render } from '@testing-library/react';
 import { default as Accordion, AccordionItem } from '../';
 
 describe('Accordion', () => {
-  afterEach(cleanup);
+  it('should accept a custom className', () => {
+    const { container } = render(<Accordion className="class-test" />);
+    expect(container.firstChild).toHaveClass('class-test');
+  });
 
-  it('should render', () => {
-    const wrapper = mount(
-      <Accordion className="extra-class">
-        <AccordionItem className="child" title="Heading A">
-          Panel A
-        </AccordionItem>
-        <AccordionItem className="child" title="Heading B">
-          Panel B
-        </AccordionItem>
-        <AccordionItem className="child" title="Heading C">
-          Panel C
-        </AccordionItem>
-      </Accordion>
-    );
-
-    expect(wrapper).toMatchSnapshot();
+  it('should accept custom attributes', () => {
+    const { container } = render(<Accordion data-prop="accordion" />);
+    expect(container.firstChild).toHaveAttribute('data-prop');
   });
 
   it('should have no AVT1 violations', async () => {
