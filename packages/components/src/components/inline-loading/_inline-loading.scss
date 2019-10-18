@@ -32,7 +32,8 @@
 
     .#{$prefix}--loading__background,
     .#{$prefix}--loading__stroke {
-      r: 26.25;
+      // Ensures (r * 2 + (stroke width)) / (viewbox unit size) * (viewbox pixel size) === 14
+      r: 26.8125;
     }
   }
 
