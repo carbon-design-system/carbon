@@ -8767,6 +8767,7 @@ $hover-selected-ui: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
 
 ### ✅inverse-hover-ui [variable]
 
@@ -15490,6 +15491,13 @@ Data table core styles
     ); //used to center svg without setting display flex //display block needed for overflow text truncation
   }
 
+  .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu,
+  .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu__trigger {
+    &:hover {
+      background-color: $hover-field;
+    }
+  }
+
   //----------------------------------------------------------------------------
   //ZEBRA
   //----------------------------------------------------------------------------
@@ -19782,7 +19790,7 @@ Overflow menu styles
     }
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $hover-selected-ui;
     }
   }
 
@@ -20007,7 +20015,7 @@ Overflow menu styles
 - **Group**: [overflow-menu](#overflow-menu)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [hover-ui [variable]](#hover-ui-variable)
+  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
@@ -20015,6 +20023,7 @@ Overflow menu styles
   - [text-02 [variable]](#text-02-variable)
   - [text-01 [variable]](#text-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
   - [text-04 [variable]](#text-04-variable)
   - [support-01 [variable]](#support-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
