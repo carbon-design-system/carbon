@@ -29,6 +29,11 @@
     .#{$prefix}--loading__stroke {
       stroke-dashoffset: 99;
     }
+
+    .#{$prefix}--loading__background,
+    .#{$prefix}--loading__stroke {
+      r: 26.25;
+    }
   }
 
   .#{$prefix}--inline-loading__text {
