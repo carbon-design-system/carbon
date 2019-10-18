@@ -205,7 +205,8 @@ class OverflowMenu extends Component {
     onOpen: PropTypes.func,
 
     /**
-     * `true` to use the light version.
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
      */
     light: PropTypes.bool,
   };
