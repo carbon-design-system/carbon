@@ -7,6 +7,7 @@ exports[`AccordionItem should render 1`] = `
 >
   <li
     className="bx--accordion__item extra-class"
+    onAnimationEnd={[Function]}
   >
     <defaultRenderExpando
       aria-expanded={false}
