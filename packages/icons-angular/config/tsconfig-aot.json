@@ -21,7 +21,6 @@
     "./../ts/**/*"
   ],
   "exclude": [
-    "./../ts/**/index.ts",
     "./../ts/**/public-api.ts"
   ],
   "angularCompilerOptions": {
