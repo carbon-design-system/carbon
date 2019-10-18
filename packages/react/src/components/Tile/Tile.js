@@ -28,11 +28,27 @@ export class Tile extends Component {
      * The CSS class names.
      */
     className: PropTypes.string,
+
+    /**
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
+     */
+    light: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    light: false,
   };
 
   render() {
-    const { children, className, ...other } = this.props;
-    const tileClasses = classNames(`${prefix}--tile`, className);
+    const { children, className, light, ...other } = this.props;
+    const tileClasses = classNames(
+      `${prefix}--tile`,
+      {
+        [`${prefix}--tile--light`]: light,
+      },
+      className
+    );
     return (
       <div className={tileClasses} {...other}>
         {children}
@@ -64,12 +80,19 @@ export class ClickableTile extends Component {
      * The rel property for the link.
      */
     rel: PropTypes.string,
+
+    /**
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
     clicked: false,
     handleClick: () => {},
     handleKeyDown: () => {},
+    light: false,
   };
 
   handleClick = evt => {
@@ -118,6 +141,7 @@ export class ClickableTile extends Component {
       handleClick, // eslint-disable-line
       handleKeyDown, // eslint-disable-line
       clicked, // eslint-disable-line
+      light,
       ...other
     } = this.props;
 
@@ -127,6 +151,7 @@ export class ClickableTile extends Component {
       `${prefix}--tile--clickable`,
       {
         [`${prefix}--tile--is-clicked`]: this.state.clicked,
+        [`${prefix}--tile--light`]: light,
       },
       className
     );
@@ -199,6 +224,12 @@ export class SelectableTile extends Component {
      * Specify the tab index of the wrapper element
      */
     tabIndex: PropTypes.number,
+
+    /**
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -210,6 +241,7 @@ export class SelectableTile extends Component {
     handleKeyDown: () => {},
     onChange: () => {},
     tabIndex: 0,
+    light: false,
   };
 
   handleClick = evt => {
@@ -270,6 +302,7 @@ export class SelectableTile extends Component {
       handleClick, // eslint-disable-line
       handleKeyDown, // eslint-disable-line
       onChange,
+      light,
       ...other
     } = this.props;
 
@@ -278,6 +311,7 @@ export class SelectableTile extends Component {
       `${prefix}--tile--selectable`,
       {
         [`${prefix}--tile--is-selected`]: this.state.selected,
+        [`${prefix}--tile--light`]: light,
       },
       className
     );
@@ -360,6 +394,12 @@ export class ExpandableTile extends Component {
      * An ID that can be provided to aria-labelledby
      */
     id: PropTypes.string,
+
+    /**
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -370,6 +410,7 @@ export class ExpandableTile extends Component {
     handleClick: () => {},
     tileCollapsedIconText: 'Interact to expand Tile',
     tileExpandedIconText: 'Interact to collapse Tile',
+    light: false,
   };
 
   static getDerivedStateFromProps(
@@ -467,6 +508,7 @@ export class ExpandableTile extends Component {
       handleClick, // eslint-disable-line
       tileCollapsedIconText, // eslint-disable-line
       tileExpandedIconText, // eslint-disable-line
+      light,
       ...other
     } = this.props;
 
@@ -477,6 +519,7 @@ export class ExpandableTile extends Component {
       `${prefix}--tile--expandable`,
       {
         [`${prefix}--tile--is-expanded`]: expanded,
+        [`${prefix}--tile--light`]: light,
       },
       className
     );

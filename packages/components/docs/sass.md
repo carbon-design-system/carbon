@@ -7522,6 +7522,7 @@ $ui-02: if(
   - [button-theme [mixin]](#button-theme-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
+  - [tile [mixin]](#tile-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [carbon-content [mixin]](#carbon-content-mixin)
 
@@ -8766,6 +8767,7 @@ $hover-selected-ui: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
 
 ### ✅inverse-hover-ui [variable]
 
@@ -13272,8 +13274,8 @@ Accordion styles
     margin: 0;
     transition: background-color motion(standard, productive) $duration--fast-02;
 
-    &:hover:before,
-    &:focus:before {
+    &:hover::before,
+    &:focus::before {
       content: '';
       position: absolute;
       top: -1px;
@@ -13282,7 +13284,7 @@ Accordion styles
       height: calc(100% + 2px);
     }
 
-    &:hover:before {
+    &:hover::before {
       background-color: $hover-ui;
     }
 
@@ -13319,15 +13321,11 @@ Accordion styles
   }
 
   .#{$prefix}--accordion__content {
+    display: none;
     // Transition property for when the accordion closes
-    transition: height motion(standard, productive) $duration--fast-02, padding
-        motion(standard, productive) $duration--fast-02;
+    transition: padding motion(standard, productive) $duration--fast-02;
     padding-left: $carbon--spacing-05;
-
     padding-right: 25%;
-    height: 0;
-    visibility: hidden;
-    opacity: 0;
 
     @include carbon--breakpoint-down('md') {
       padding-right: $carbon--spacing-09;
@@ -13338,19 +13336,29 @@ Accordion styles
     }
   }
 
+  .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content,
+  .#{$prefix}--accordion__item--expanding .#{$prefix}--accordion__content {
+    display: block;
+  }
+
+  .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content {
+    animation: $duration--fast-02 motion(standard, productive) collapse-accordion;
+  }
+
+  .#{$prefix}--accordion__item--expanding .#{$prefix}--accordion__content {
+    animation: $duration--fast-02 motion(standard, productive) expand-accordion;
+  }
+
   .#{$prefix}--accordion__item--active {
     overflow: visible;
 
     .#{$prefix}--accordion__content {
+      display: block;
       padding-bottom: $carbon--spacing-06;
       padding-top: $spacing-xs;
-      height: auto;
-      visibility: visible;
-      opacity: 1;
       // Transition property for when the accordion opens
-      transition: height motion(entrance, productive) $duration--fast-02, padding-top
-          motion(entrance, productive) $duration--fast-02,
-        padding-bottom motion(entrance, productive) $duration--fast-02;
+      transition: padding-top motion(entrance, productive) $duration--fast-02, padding-bottom
+          motion(entrance, productive) $duration--fast-02;
     }
 
     .#{$prefix}--accordion__arrow {
@@ -14204,7 +14212,7 @@ Code snippet styles
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
     .#{$prefix}--snippet-container
     pre {
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
@@ -15481,6 +15489,13 @@ Data table core styles
     top: rem(
       3px
     ); //used to center svg without setting display flex //display block needed for overflow text truncation
+  }
+
+  .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu,
+  .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu__trigger {
+    &:hover {
+      background-color: $hover-field;
+    }
   }
 
   //----------------------------------------------------------------------------
@@ -17544,7 +17559,10 @@ Form styles
     @include type-style('body-short-01');
     display: flex;
     flex-direction: column;
-    flex: 1;
+    // We specify `auto` as the default value so that the form item does
+    // not collapse in IE11 due to a `flex-basis` of 0 only working with
+    // `flex-direction: row`
+    flex: 1 1 auto;
     align-items: flex-start;
   }
 
@@ -19772,7 +19790,7 @@ Overflow menu styles
     }
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $hover-selected-ui;
     }
   }
 
@@ -19997,7 +20015,7 @@ Overflow menu styles
 - **Group**: [overflow-menu](#overflow-menu)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [hover-ui [variable]](#hover-ui-variable)
+  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
@@ -20005,6 +20023,7 @@ Overflow menu styles
   - [text-02 [variable]](#text-02-variable)
   - [text-01 [variable]](#text-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
   - [text-04 [variable]](#text-04-variable)
   - [support-01 [variable]](#support-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
@@ -20065,8 +20084,8 @@ Pagination styles
   }
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
-    top: auto;
-    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
     @include carbon--breakpoint('md') {
       right: $carbon--spacing-05;
     }
@@ -21212,6 +21231,7 @@ Select styles
 
     &:focus {
       @include focus-outline('outline');
+      color: $text-01;
     }
 
     &:disabled,
@@ -22541,6 +22561,10 @@ Tile styles
     }
   }
 
+  .#{$prefix}--tile--light {
+    background-color: $ui-02;
+  }
+
   .#{$prefix}--tile--clickable,
   .#{$prefix}--tile--selectable,
   .#{$prefix}--tile--expandable {
@@ -22682,6 +22706,7 @@ Tile styles
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [ui-02 [variable]](#ui-02-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [icon-02 [variable]](#icon-02-variable)

@@ -35,10 +35,18 @@ const radioValues = {
 };
 
 const props = {
+  regular: () => ({
+    light: boolean('Light variant (light)', false),
+  }),
+  clickable: () => ({
+    href: text('Href for clickable UI (href)', 'javascript:void(0)'),
+    light: boolean('Light variant (light)', false),
+  }),
   selectable: () => ({
     selected: boolean('Selected (selected)', false),
     handleClick: action('handleClick'),
     handleKeyDown: action('handleKeyDown'),
+    light: boolean('Light variant (light)', false),
   }),
   group: () => ({
     name: text('Form item (name in <TileGroup>)', 'tile-group'),
@@ -52,6 +60,7 @@ const props = {
   radio: () => ({
     name: text('Form item name (name in <RadioTile>)', 'tiles'),
     onChange: action('onChange'),
+    light: boolean('Light variant (light)', false),
   }),
   expandable: () => ({
     tabIndex: number('Tab index (tabIndex)', 0),
@@ -66,26 +75,32 @@ const props = {
       'Interact to Collapse tile'
     ),
     handleClick: action('handleClick'),
+    light: boolean('Light variant (light)', false),
   }),
 };
 
 storiesOf('Tile', module)
   .addDecorator(withKnobs)
-  .add('Default', () => <Tile>Default tile</Tile>, {
-    info: {
-      text: `
+  .add(
+    'Default',
+    () => {
+      const regularProps = props.regular();
+      return <Tile {...regularProps}>Default tile</Tile>;
+    },
+    {
+      info: {
+        text: `
             Default tile without any interactions
           `,
-    },
-  })
+      },
+    }
+  )
   .add(
     'Clickable',
-    () => (
-      <ClickableTile
-        href={text('Href for clickable UI (href)', 'javascript:void(0)')}>
-        Clickable Tile
-      </ClickableTile>
-    ),
+    () => {
+      const clickableProps = props.clickable();
+      return <ClickableTile {...clickableProps}>Clickable Tile</ClickableTile>;
+    },
     {
       info: {
         text: `
