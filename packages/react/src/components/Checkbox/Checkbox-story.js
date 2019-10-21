@@ -75,7 +75,7 @@ storiesOf('Checkbox', module)
   .add(
     'skeleton',
     () => (
-      <div>
+      <div aria-label="loading checkbox" aria-live="assertive">
         <CheckboxSkeleton />
       </div>
     ),

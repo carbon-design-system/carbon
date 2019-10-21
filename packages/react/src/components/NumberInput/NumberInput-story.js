@@ -72,10 +72,18 @@ storiesOf('NumberInput', module)
       },
     }
   )
-  .add('skeleton', () => <NumberInputSkeleton />, {
-    info: {
-      text: `
+  .add(
+    'skeleton',
+    () => (
+      <div aria-label="loading number input" aria-live="assertive">
+        <NumberInputSkeleton />
+      </div>
+    ),
+    {
+      info: {
+        text: `
             Placeholder skeleton state to use when content is loading.
           `,
-    },
-  });
+      },
+    }
+  );

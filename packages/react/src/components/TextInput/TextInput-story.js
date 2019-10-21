@@ -150,7 +150,7 @@ storiesOf('TextInput', module)
   .add(
     'skeleton',
     () => (
-      <div>
+      <div aria-label="loading text input" aria-live="assertive">
         <TextInputSkeleton />
         <br />
         <TextInputSkeleton hideLabel />

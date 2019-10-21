@@ -80,7 +80,10 @@ storiesOf('Select', module)
   .add(
     'skeleton',
     () => (
-      <div style={{ width: '300px' }}>
+      <div
+        style={{ width: '300px' }}
+        aria-label="loading select"
+        aria-live="assertive">
         <SelectSkeleton />
       </div>
     ),

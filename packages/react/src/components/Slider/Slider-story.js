@@ -51,7 +51,10 @@ storiesOf('Slider', module)
   .add(
     'skeleton',
     () => (
-      <div style={{ marginTop: '2rem' }}>
+      <div
+        style={{ marginTop: '2rem' }}
+        aria-label="loading slider"
+        aria-live="assertive">
         <SliderSkeleton />
       </div>
     ),

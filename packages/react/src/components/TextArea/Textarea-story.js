@@ -43,10 +43,18 @@ storiesOf('TextArea', module)
           `,
     },
   })
-  .add('skeleton', () => <TextAreaSkeleton />, {
-    info: {
-      text: `
+  .add(
+    'skeleton',
+    () => (
+      <div aria-label="loading text area" aria-live="assertive">
+        <TextAreaSkeleton />
+      </div>
+    ),
+    {
+      info: {
+        text: `
             Placeholder skeleton state to use when content is loading.
           `,
-    },
-  });
+      },
+    }
+  );
