@@ -162,7 +162,7 @@ class Dropdown extends mixin(
         (listNode || this.element).focus();
         if (listNode) {
           const selectedNode = listNode.querySelector(
-            this.options.selectorItemSelected
+            `${this.options.selectorItemSelected} ${this.options.selectorItem}`
           );
           listNode.setAttribute(
             'aria-activedescendant',
@@ -239,7 +239,9 @@ class Dropdown extends mixin(
     );
     const start =
       this.getCurrentNavigation() ||
-      this.element.querySelector(this.options.selectorItemSelected);
+      this.element.querySelector(
+        `${this.options.selectorItemSelected} ${this.options.selectorItem}`
+      );
     const getNextItem = old => {
       const handleUnderflow = (i, l) => i + (i >= 0 ? 0 : l);
       const handleOverflow = (i, l) => i - (i < l ? 0 : l);
@@ -257,7 +259,7 @@ class Dropdown extends mixin(
       if (
         !current.matches(this.options.selectorItemHidden) &&
         !current.parentNode.matches(this.options.selectorItemHidden) &&
-        !current.matches(this.options.selectorItemSelected)
+        !current.parentElement.matches(this.options.selectorItemSelected)
       ) {
         // Using the latest semantic markup structure where trigger is a button
         // @todo remove conditional once legacy structure is depreciated
@@ -304,14 +306,14 @@ class Dropdown extends mixin(
         if (text) {
           text.innerHTML = itemToSelect.innerHTML;
         }
-        itemToSelect.classList.add(this.options.classSelected);
+        itemToSelect.parentElement.classList.add(this.options.classSelected);
       }
       this.element.dataset.value = itemToSelect.parentElement.dataset.value;
 
       toArray(
         this.element.querySelectorAll(this.options.selectorItemSelected)
       ).forEach(item => {
-        if (itemToSelect !== item) {
+        if (itemToSelect !== item.querySelector(this.options.selectorItem)) {
           item.classList.remove(this.options.classSelected);
         }
       });
