@@ -27,13 +27,7 @@
     }
 
     .#{$prefix}--loading__stroke {
-      stroke-dashoffset: 99;
-    }
-
-    .#{$prefix}--loading__background,
-    .#{$prefix}--loading__stroke {
-      // Ensures (r * 2 + (stroke width)) / (viewbox unit size) * (viewbox pixel size) === 14
-      r: 26.8125;
+      stroke-dashoffset: $loading--small__gap;
     }
   }
 

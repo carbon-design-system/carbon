@@ -66,6 +66,8 @@ export default class Loading extends React.Component {
       [`${prefix}--loading-overlay--stop`]: !active,
     });
 
+    const spinnerRadius = small ? '26.8125' : '37.5';
+
     const loading = (
       <div
         {...other}
@@ -79,14 +81,14 @@ export default class Loading extends React.Component {
               className={`${prefix}--loading__background`}
               cx="0"
               cy="0"
-              r="37.5"
+              r={spinnerRadius}
             />
           ) : null}
           <circle
             className={`${prefix}--loading__stroke`}
             cx="0"
             cy="0"
-            r="37.5"
+            r={spinnerRadius}
           />
         </svg>
       </div>
