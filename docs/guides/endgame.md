@@ -755,7 +755,7 @@ following steps to release:
 
   </details>
 
-### Release Candidate releases
+### Release candidate releases
 
 ​ Before our minor releases, we cut Release Candidates a week in advance to
 check our code. ​
