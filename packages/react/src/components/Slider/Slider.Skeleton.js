@@ -17,7 +17,6 @@ const SliderSkeleton = ({ hideLabel }) => (
     <div className={`${prefix}--slider-container ${prefix}--skeleton`}>
       <span className={`${prefix}--slider__range-label`} />
       <div
-        aria-label="loading slider"
         className={`${prefix}--slider`}
         role="status"
         tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex

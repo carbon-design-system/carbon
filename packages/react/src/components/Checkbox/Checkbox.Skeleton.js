@@ -13,7 +13,6 @@ const { prefix } = settings;
 const CheckboxSkeleton = () => (
   <div className={`${prefix}--form-item ${prefix}--checkbox-wrapper`}>
     <span
-      aria-label="loading checkbox"
       className={`${prefix}--checkbox-label ${prefix}--skeleton`}
       role="status"
       tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex

@@ -15,7 +15,6 @@ const TextInputSkeleton = ({ hideLabel }) => (
   <div className={`${prefix}--form-item`}>
     {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
     <div
-      aria-label="loading text input"
       className={`${prefix}--skeleton ${prefix}--text-input`}
       role="status"
       tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
