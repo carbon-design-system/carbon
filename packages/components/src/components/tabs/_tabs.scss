@@ -203,7 +203,7 @@
       display: flex;
       .#{$prefix}--tabs__nav-link {
         color: $text-01;
-        @include type-style('heading-01');
+        @include type-style('productive-heading-01');
         border-bottom: 3px solid $interactive-01;
       }
 
