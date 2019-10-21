@@ -942,6 +942,155 @@ describe('Dropdown', function() {
     });
   });
 
+  describe('Navigating focus with show selected modifier', function() {
+    let dropdown;
+    let element;
+    let itemNodes;
+    let list;
+    let trigger;
+
+    const events = new EventManager();
+
+    beforeAll(function() {
+      element = document.createElement('div');
+      element.classList.add('bx--dropdown', 'bx--dropdown--show-selected');
+
+      trigger = element.appendChild(document.createElement('button'));
+      trigger.classList.add('bx--dropdown-text');
+      list = element.appendChild(document.createElement('ul'));
+      list.classList.add('bx--dropdown-list');
+
+      itemNodes = [...new Array(3)].map((item, i) => {
+        const itemContainerNode = document.createElement('li');
+        itemContainerNode.dataset.option = '';
+        itemContainerNode.classList.add('bx--dropdown-item');
+
+        const itemNode = document.createElement('a');
+        itemNode.textContent = i;
+        itemNode.classList.add('bx--dropdown-link');
+        itemNode.id = `item-${i}`;
+
+        itemContainerNode.appendChild(itemNode);
+        list.appendChild(itemContainerNode);
+        return itemNode;
+      });
+
+      dropdown = new Dropdown(element);
+      document.body.appendChild(element);
+    });
+
+    beforeEach(function() {
+      itemNodes.forEach(item => {
+        item.parentElement.classList.remove('bx--dropdown--selected');
+        item.classList.remove('bx--dropdown--focused');
+        item.removeAttribute('hidden');
+        item.parentNode.removeAttribute('hidden');
+        item.removeAttribute('aria-hidden');
+        item.parentNode.removeAttribute('aria-hidden');
+      });
+    });
+
+    it('Should focus selected item with forward navigation', function() {
+      itemNodes[1].parentElement.classList.add('bx--dropdown--selected');
+      trigger.click();
+
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { cancelable: true }), {
+          // user presses up
+          which: 38,
+        })
+      );
+      // Verify the navigation worked
+      expect(
+        itemNodes[0].classList.contains('bx--dropdown--focused'),
+        'Focus on 1st item'
+      ).toBe(true);
+      expect(
+        itemNodes[1].classList.contains('bx--dropdown--focused'),
+        'Focus on 2nd item'
+      ).toBe(false);
+      expect(
+        itemNodes[2].classList.contains('bx--dropdown--focused'),
+        'Focus on 3rd item'
+      ).toBe(false);
+
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { cancelable: true }), {
+          // user presses down
+          which: 40,
+        })
+      );
+      // Verify that the selected item can be focused
+      expect(
+        itemNodes[0].classList.contains('bx--dropdown--focused'),
+        'Focus on 1st item'
+      ).toBe(false);
+      expect(
+        itemNodes[1].classList.contains('bx--dropdown--focused'),
+        'Focus on 2nd item'
+      ).toBe(true);
+      expect(
+        itemNodes[2].classList.contains('bx--dropdown--focused'),
+        'Focus on 3rd item'
+      ).toBe(false);
+    });
+
+    it('Should focus selected item with backward navigation', function() {
+      itemNodes[1].parentElement.classList.add('bx--dropdown--selected');
+      trigger.click();
+
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { cancelable: true }), {
+          // user presses down
+          which: 40,
+        })
+      );
+      // Verify the navigation worked
+      expect(
+        itemNodes[0].classList.contains('bx--dropdown--focused'),
+        'Focus on 1st item'
+      ).toBe(false);
+      expect(
+        itemNodes[1].classList.contains('bx--dropdown--focused'),
+        'Focus on 2nd item'
+      ).toBe(false);
+      expect(
+        itemNodes[2].classList.contains('bx--dropdown--focused'),
+        'Focus on 3rd item'
+      ).toBe(true);
+
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { cancelable: true }), {
+          // user presses up
+          which: 38,
+        })
+      );
+      // Verify that the selected item can be focused
+      expect(
+        itemNodes[0].classList.contains('bx--dropdown--focused'),
+        'Focus on 1st item'
+      ).toBe(false);
+      expect(
+        itemNodes[1].classList.contains('bx--dropdown--focused'),
+        'Focus on 2nd item'
+      ).toBe(true);
+      expect(
+        itemNodes[2].classList.contains('bx--dropdown--focused'),
+        'Focus on 3rd item'
+      ).toBe(false);
+    });
+
+    afterEach(function() {
+      events.reset();
+      trigger.click();
+    });
+
+    afterAll(function() {
+      dropdown.release();
+      document.body.removeChild(element);
+    });
+  });
+
   describe('Close on blur', function() {
     let dropdown;
     let element;
