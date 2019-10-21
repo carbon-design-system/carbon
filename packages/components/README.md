@@ -37,8 +37,9 @@ subject to breaking changes. Please use `es`/`umd`/`scss` directories instead)
 
 # :books: Documentation
 
-- See our [documentation site](https://www.carbondesignsystem.com/get-started/develop/vanilla) for full
-  how-to docs and guidelines
+- See our
+  [documentation site](https://www.carbondesignsystem.com/get-started/develop/vanilla)
+  for full how-to docs and guidelines
 - [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions
   to this repo.
 - [🏃‍♀️ Migration Guides](./docs/migration)
