@@ -23790,6 +23790,7 @@ Tooltip styles
     word-wrap: break-word;
     color: $inverse-01;
 
+    // @todo this can be deprecated in v11 since focus should always be on the content container not the tooltip
     &:focus {
       box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px $ui-background;
       outline: 0;
@@ -23823,6 +23824,28 @@ Tooltip styles
 
       &:visited {
         color: $inverse-link;
+      }
+    }
+
+    // Tooltips without interactive elements, need to be sequentially and click focusable so screen reader users
+    // get the tooltip's content and we focus the content container instead of the tooltip root so that
+    // focus-wrap doesn't get triggered
+    .#{$prefix}--tooltip__content[tabindex='0'] {
+      // 1 rem === .#{$prefix}--tooltip padding
+      margin: calc(-1rem + 2px);
+      padding: calc(1rem - 2px);
+
+      &:focus {
+        outline: 1px solid $ui-background;
+      }
+    }
+
+    // Tooltips with interactive elements, need to be click focusable but not sequentially focusable so the user
+    // can click within the tooltip and not have it close. Because the element is not actionable it does not need
+    // to have a visible focus indicator (OK'd by IBMa)
+    .#{$prefix}--tooltip__content[tabindex='-1'] {
+      &:focus {
+        outline: none;
       }
     }
 
