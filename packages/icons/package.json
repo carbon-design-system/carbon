@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/icons",
   "description": "Icons for digital and software products using the Carbon Design System",
-  "version": "0.0.8",
+  "version": "0.1.8",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
