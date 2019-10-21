@@ -72,5 +72,5 @@ can see usage information in several ways:
 
 ## Contributing
 
-Please check out our [Contribution Guidelines](./.github/CONTRIBUTING.md) for
+Please check out our [Contribution Guidelines](/.github/CONTRIBUTING.md) for
 detailed information on how you can lend a hand.
