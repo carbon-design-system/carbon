@@ -95,6 +95,56 @@ describe('Test tooltip', function() {
     });
   });
 
+  describe('Tooltip tabindex', function() {
+    const container = document.createElement('div');
+    container.innerHTML = HTML;
+
+    const element = container.querySelector('[data-tooltip-trigger]');
+    const floating = container.querySelector('.bx--tooltip');
+
+    let tooltip;
+
+    beforeEach(function() {
+      document.body.appendChild(container);
+      return Tooltip.__with__({
+        debounce: fn => fn,
+      })(() => {
+        tooltip = new Tooltip(element);
+      });
+    });
+
+    it('Should be -1 when there are interactive elements', function() {
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      const content = floating.querySelector('.bx--tooltip__content');
+
+      expect(content.getAttribute('tabindex')).toBe('-1');
+    });
+
+    it('Should be 0 when there are not interactive elements', function() {
+      const content = floating.querySelector('.bx--tooltip__content');
+      const footer = floating.querySelector('.bx--tooltip__footer');
+      content.removeChild(footer);
+
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(content.getAttribute('tabindex')).toBe('0');
+    });
+
+    afterEach(function() {
+      if (tooltip) {
+        tooltip.release();
+        tooltip = null;
+      }
+    });
+
+    afterAll(function() {
+      if (document.body.contains(floating)) {
+        floating.parentNode.removeChild(floating);
+      }
+
+      document.body.removeChild(container);
+    });
+  });
+
   describe('Automatic creation', function() {
     const container = document.createElement('div');
     container.innerHTML = HTML;
