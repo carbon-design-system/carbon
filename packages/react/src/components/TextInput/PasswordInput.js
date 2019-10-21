@@ -21,6 +21,8 @@ export default function PasswordInput({
   light,
   tooltipPosition = 'bottom',
   tooltipAlignment = 'center',
+  hidePasswordLabel = 'Hide password',
+  showPasswordLabel = 'Show password',
   ...other
 }) {
   const [inputType, setInputType] = useState('password');
@@ -97,7 +99,7 @@ export default function PasswordInput({
         className={passwordVisibilityToggleClasses}
         onClick={togglePasswordVisibility}>
         <span className={`${prefix}--assistive-text`}>
-          {`${passwordIsVisible ? 'Hide' : 'Show'} password`}
+          {passwordIsVisible ? hidePasswordLabel : showPasswordLabel}
         </span>
         {passwordVisibilityIcon}
       </button>
@@ -211,6 +213,16 @@ PasswordInput.propTypes = {
    * Can be one of: start, center, or end.
    */
   tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * "Hide password" tooltip text on password visibility toggle
+   */
+  hidePasswordLabel: PropTypes.string,
+
+  /**
+   * "Show password" tooltip text on password visibility toggle
+   */
+  showPasswordLabel: PropTypes.string,
 };
 
 PasswordInput.defaultProps = {
