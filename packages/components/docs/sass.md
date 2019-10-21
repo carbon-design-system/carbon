@@ -4892,7 +4892,6 @@ $interactive-01: if(
   - [date-picker [mixin]](#date-picker-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
-  - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -4925,7 +4924,6 @@ $interactive-02: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [snippet [mixin]](#snippet-mixin)
-  - [tags [mixin]](#tags-mixin)
   - [tile [mixin]](#tile-mixin)
 
 ### ✅interactive-03 [variable]
@@ -4984,6 +4982,7 @@ $interactive-04: if(
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [inline-loading [mixin]](#inline-loading-mixin)
   - [loading [mixin]](#loading-mixin)
+  - [slider [mixin]](#slider-mixin)
 
 ### ✅ui-background [variable]
 
@@ -5082,6 +5081,7 @@ $ui-02: if(
   - [button-theme [mixin]](#button-theme-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
+  - [tile [mixin]](#tile-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [carbon-content [mixin]](#carbon-content-mixin)
 
@@ -5287,8 +5287,15 @@ $text-02: if(
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
-  - [pseudo-underline [mixin]](#pseudo-underline-mixin)
-  - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [form [mixin]](#form-mixin)
+  - [inline-loading [mixin]](#inline-loading-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [search [mixin]](#search-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
@@ -5318,9 +5325,6 @@ $text-03: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button [mixin]](#button-mixin)
-  - [snippet [mixin]](#snippet-mixin)
-  - [tile [mixin]](#tile-mixin)
 
 ### ✅text-04 [variable]
 
@@ -5373,10 +5377,9 @@ $text-05: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
-  - [inline-loading [mixin]](#inline-loading-mixin)
-  - [loading [mixin]](#loading-mixin)
-  - [slider [mixin]](#slider-mixin)
+  - [form [mixin]](#form-mixin)
+  - [search [mixin]](#search-mixin)
+  - [text-area [mixin]](#text-area-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -5470,10 +5473,8 @@ $icon-03: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
-  - [button-theme [mixin]](#button-theme-mixin)
-  - [loading [mixin]](#loading-mixin)
-  - [number-input [mixin]](#number-input-mixin)
-  - [tile [mixin]](#tile-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [toggle [mixin]](#toggle-mixin)
 
 ### ✅link-01 [variable]
@@ -5664,6 +5665,13 @@ $inverse-02: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [tags [mixin]](#tags-mixin)
+  - [tooltip--icon [mixin]](#tooltip--icon-mixin)
+  - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅support-01 [variable]
 
@@ -5728,9 +5736,9 @@ $support-02: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [form [mixin]](#form-mixin)
-  - [search [mixin]](#search-mixin)
-  - [text-area [mixin]](#text-area-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [toggle [mixin]](#toggle-mixin)
 
 ### ✅support-03 [variable]
 
@@ -5810,10 +5818,8 @@ $inverse-support-01: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button [mixin]](#button-mixin)
-  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
-  - [toggle [mixin]](#toggle-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
 
 ### ✅inverse-support-02 [variable]
 
@@ -5971,15 +5977,16 @@ $focus: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [listbox [mixin]](#listbox-mixin)
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [toast-notifications [mixin]](#toast-notifications-mixin)
-  - [tags [mixin]](#tags-mixin)
-  - [tooltip--icon [mixin]](#tooltip--icon-mixin)
-  - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
-  - [tooltip [mixin]](#tooltip-mixin)
-
-### ✅support-01 [variable]
+  - [button [mixin]](#button-mixin)
+  - [button-theme [mixin]](#button-theme-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [search [mixin]](#search-mixin)
+  - [toggle [mixin]](#toggle-mixin)
 
 ### ✅inverse-focus-ui [variable]
 
@@ -6003,6 +6010,7 @@ $inverse-focus-ui: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [tags [mixin]](#tags-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅hover-primary [variable]
@@ -6111,7 +6119,6 @@ $hover-secondary: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [listbox [mixin]](#listbox-mixin)
-  - [tags [mixin]](#tags-mixin)
 
 ### ✅active-secondary [variable]
 
@@ -6318,10 +6325,8 @@ $hover-selected-ui: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [tags [mixin]](#tags-mixin)
-  - [tooltip [mixin]](#tooltip-mixin)
-
-### ✅hover-primary [variable]
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
 
 ### ✅inverse-hover-ui [variable]
 
@@ -6346,6 +6351,7 @@ $inverse-hover-ui: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [tags [mixin]](#tags-mixin)
 
 ### ✅hover-danger [variable]
 
@@ -6423,8 +6429,6 @@ $hover-row: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button [mixin]](#button-mixin)
-  - [listbox [mixin]](#listbox-mixin)
 
 ### ✅visited-link [variable]
 
@@ -6628,8 +6632,6 @@ $skeleton-02: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [overflow-menu [mixin]](#overflow-menu-mixin)
 
 ### ✅⚠️brand-01 [variable]
 
@@ -6654,10 +6656,8 @@ $brand-01: if(
 - **Alias**: `interactive-01`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [tags [mixin]](#tags-mixin)
-
-### ✅hover-danger [variable]
+  - [toolbar [mixin]](#toolbar-mixin)
+- **Deprecated**: This may not be available in future releases
 
 ### ✅⚠️brand-02 [variable]
 
@@ -7850,264 +7850,6 @@ Create type classes for font families, weights, styles
   // Font styles
   .#{$prefix}--type-italic {
     font-style: italic;
-  }
-
-  // Type styles
-  @each $name, $value in $tokens {
-    .#{$prefix}--type-#{$name} {
-      @include carbon--type-style($name, map-has-key($value, breakpoints));
-    }
-  }
-}
-```
-
-</details>
-
-- **Group**: [@carbon/type](#carbontype)
-- **Requires**:
-  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
-  - [carbon--font-families [variable]](#carbon--font-families-variable)
-  - [prefix [variable]](#prefix-variable)
-  - [carbon--font-weights [variable]](#carbon--font-weights-variable)
-  - [tokens [variable]](#tokens-variable)
-
-### ✅carbon--font-families [variable]
-
-Font family fallbacks for: IBM Plex Mono, IBM Plex Sans, IBM Plex Sans
-Condensed, IBM Plex Sans Hebrew, and IBM Plex Serif
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--font-families: (
-  'mono': unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
-  'sans': unquote("'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif"),
-  'sans-condensed': unquote("'IBM Plex Sans Condensed', 'Helvetica Neue', Arial, sans-serif"),
-  'sans-hebrew': unquote("'IBM Plex Sans Hebrew', 'Helvetica Hebrew', 'Arial Hebrew', sans-serif"),
-  'serif': unquote("'IBM Plex Serif', 'Georgia', Times, serif"),
-);
-```
-
-</details>
-
-- **Group**: [@carbon/type](#carbontype)
-- **Type**: `Map`
-- **Used by**:
-  - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
-  - [carbon--font-family [function]](#carbon--font-family-function)
-
-### ✅carbon--font-family [function]
-
-Get the font-family for an IBM Plex font
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@function carbon--font-family($name) {
-  @return map-get($carbon--font-families, $name);
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name    | Description | Type     | Default value |
-| ------- | ----------- | -------- | ------------- |
-| `$name` | —           | `String` | —             |
-
-- **Group**: [@carbon/type](#carbontype)
-- **Returns**: `String`
-- **Requires**:
-  - [carbon--font-families [variable]](#carbon--font-families-variable)
-- **Used by**:
-  - [carbon--font-family [mixin]](#carbon--font-family-mixin)
-  - [form [mixin]](#form-mixin)
-  - [number-input [mixin]](#number-input-mixin)
-
-### ✅carbon--font-family [mixin]
-
-Include the `font-family` definition for the given name in your selector
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin carbon--font-family($name) {
-  font-family: carbon--font-family($name);
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name    | Description | Type     | Default value |
-| ------- | ----------- | -------- | ------------- |
-| `$name` | —           | `String` | —             |
-
-- **Group**: [@carbon/type](#carbontype)
-- **Requires**:
-  - [carbon--font-family [function]](#carbon--font-family-function)
-
-### ✅carbon--font-weights [variable]
-
-Suggested font weights to be used in product
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--font-weights: (
-  'light': 300,
-  'regular': 400,
-  'semibold': 600,
-);
-```
-
-</details>
-
-- **Group**: [@carbon/type](#carbontype)
-- **Type**: `Map`
-- **Used by**:
-  - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
-  - [carbon--font-weight [function]](#carbon--font-weight-function)
-
-### ✅carbon--font-weight [function]
-
-Retrieve the font-weight value for a given name
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@function carbon--font-weight($weight) {
-  @return map-get($carbon--font-weights, $weight);
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name      | Description | Type     | Default value |
-| --------- | ----------- | -------- | ------------- |
-| `$weight` | —           | `String` | —             |
-
-- **Group**: [@carbon/type](#carbontype)
-- **Returns**: `Number`
-- **Requires**:
-  - [carbon--font-weights [variable]](#carbon--font-weights-variable)
-- **Used by**:
-  - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
-
-### ✅carbon--font-weight [mixin]
-
-Set the `font-weight` property with the value for a given name
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin carbon--font-weight($weight) {
-  font-weight: carbon--font-weight($weight);
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name      | Description | Type     | Default value |
-| --------- | ----------- | -------- | ------------- |
-| `$weight` | —           | `String` | —             |
-
-- **Group**: [@carbon/type](#carbontype)
-- **Requires**:
-  - [carbon--font-weight [function]](#carbon--font-weight-function)
-- **Used by**:
-  - [carbon--type-reset [mixin]](#carbon--type-reset-mixin)
-
-### ✅carbon--font-face-mono [mixin]
-
-Mono `@font-face`'s
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin carbon--font-face-mono() {
-  // .woff support for IE11
-  @font-face {
-    font-family: 'IBM Plex Mono';
-    font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
-    src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
-      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1gMoW.woff)
-        format('woff');
-  }
-  @font-face {
-    font-family: 'IBM Plex Mono';
-    font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
-    src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
-      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa1Xdm.woff)
-        format('woff');
-  }
-  @font-face {
-    font-family: 'IBM Plex Mono';
-    font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
-    src: local('IBM Plex Mono SemiBold Italic'), local(
-        'IBMPlexMono-SemiBoldItalic'
-      ),
-      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1gMoW.woff)
-        format('woff');
-  }
-  @font-face {
-    font-family: 'IBM Plex Mono';
-    font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
-    src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
-      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwlBFhA.woff)
-        format('woff');
-  }
-  @font-face {
-    font-family: 'IBM Plex Mono';
-    font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
-    src: local('IBM Plex Mono'), local('IBMPlexMono'),
-      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1i8q0Q.woff)
-        format('woff');
-  }
-  @font-face {
-    font-family: 'IBM Plex Mono';
-    font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
-    src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
-      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlBFhA.woff)
-        format('woff');
-  }
-
-  /* cyrillic-ext */
-  @font-face {
-    font-family: 'IBM Plex Mono';
-    font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
-    src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
-      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1jcoQPttoz6Pz.woff2)
-        format('woff2');
-    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
-      U+FE2E-FE2F;
   }
 
   // Type styles
@@ -16198,6 +15940,7 @@ Data table expandable styles
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
     padding-bottom: rem(23px);
     transition: padding $duration--moderate-01 motion(standard, productive);
+    border-bottom: 1px $hover-ui solid;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
