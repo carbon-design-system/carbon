@@ -411,11 +411,11 @@ describe('Dropdown', function() {
     it('Should add/remove "selected" modifier class', function() {
       itemNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(
-        itemNodes[0].classList.contains('bx--dropdown--selected'),
+        itemNodes[0].parentElement.classList.contains('bx--dropdown--selected'),
         'Unselected item'
       ).toBe(false);
       expect(
-        itemNodes[1].classList.contains('bx--dropdown--selected'),
+        itemNodes[1].parentElement.classList.contains('bx--dropdown--selected'),
         'Selected item'
       ).toBe(true);
     });
@@ -502,6 +502,7 @@ describe('Dropdown', function() {
       itemNodes = [...new Array(3)].map((item, i) => {
         const itemContainerNode = document.createElement('li');
         itemContainerNode.dataset.option = '';
+        itemContainerNode.classList.add('bx--dropdown-item');
 
         const itemNode = document.createElement('a');
         itemNode.textContent = i;
@@ -518,7 +519,7 @@ describe('Dropdown', function() {
 
     beforeEach(function() {
       itemNodes.forEach(item => {
-        item.classList.remove('bx--dropdown--selected');
+        item.parentElement.classList.remove('bx--dropdown--selected');
         item.removeAttribute('hidden');
         item.parentNode.removeAttribute('hidden');
         item.removeAttribute('aria-hidden');
@@ -556,7 +557,7 @@ describe('Dropdown', function() {
     });
 
     it('Should start with selection for forward navigation', function() {
-      itemNodes[0].classList.add('bx--dropdown--selected');
+      itemNodes[0].parentElement.classList.add('bx--dropdown--selected');
       itemNodes.forEach(item => {
         spyOn(item, 'focus');
       });
@@ -572,7 +573,7 @@ describe('Dropdown', function() {
     });
 
     it('Should start with selection for backward navigation', function() {
-      itemNodes[2].classList.add('bx--dropdown--selected');
+      itemNodes[2].parentElement.classList.add('bx--dropdown--selected');
       itemNodes.forEach(item => {
         spyOn(item, 'focus');
       });
@@ -655,7 +656,7 @@ describe('Dropdown', function() {
       spyOn(dropdown, 'getCurrentNavigation').and.callFake(function() {
         return itemNodes[0];
       });
-      itemNodes[1].classList.add('bx--dropdown--selected');
+      itemNodes[1].parentElement.classList.add('bx--dropdown--selected');
       itemNodes.forEach(item => {
         spyOn(item, 'focus');
       });
@@ -793,6 +794,7 @@ describe('Dropdown', function() {
       itemNodes = [...new Array(3)].map((item, i) => {
         const itemContainerNode = document.createElement('li');
         itemContainerNode.dataset.option = '';
+        itemContainerNode.classList.add('bx--dropdown-item');
 
         const itemNode = document.createElement('a');
         itemNode.textContent = i;
@@ -810,7 +812,7 @@ describe('Dropdown', function() {
 
     beforeEach(function() {
       itemNodes.forEach(item => {
-        item.classList.remove('bx--dropdown--selected');
+        item.parentElement.classList.remove('bx--dropdown--selected');
         item.classList.remove('bx--dropdown--focused');
         item.removeAttribute('hidden');
         item.parentNode.removeAttribute('hidden');
@@ -861,7 +863,7 @@ describe('Dropdown', function() {
     });
 
     it('Should start with selection for backward navigation', function() {
-      itemNodes[2].classList.add('bx--dropdown--selected');
+      itemNodes[2].parentElement.classList.add('bx--dropdown--selected');
       trigger.click();
       const defaultPrevented = !element.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { cancelable: true }), {
@@ -885,7 +887,7 @@ describe('Dropdown', function() {
     });
 
     it('Should handle overflow for forward navigation', function() {
-      itemNodes[2].classList.add('bx--dropdown--selected');
+      itemNodes[2].parentElement.classList.add('bx--dropdown--selected');
       trigger.click();
       const defaultPrevented = !element.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { cancelable: true }), {
