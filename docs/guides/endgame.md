@@ -585,7 +585,7 @@ than the last stable git tag. For example:
 If the last stable git tag was `v10.4.0`, then the branch would be named:
 
 ```bash
-git checkout chore/release-v10.4.1
+git checkout -b chore/release-v10.4.1
 ```
 
 After creating this branch, your goal will be use the
