@@ -259,7 +259,7 @@ following projects:
 
 ### Tuesday XX/YY
 
-- [ ] First Release candidate cut
+- [ ] First release candidate cut
 - [ ] Complete first round of smoke tests
 - [ ] Share with Carbon Insiders for first round of testing
 
@@ -270,7 +270,7 @@ following projects:
   - [ ] Stop release
   - [ ] Ship with known issues
 - [ ] Coordinate merging of bug fixes related to release
-- [ ] Cut next Release candidate, if applicable
+- [ ] Cut next release candidate, if applicable
   - [ ] Share newest release with Carbon Insiders for additional rounds of
         testing
 
@@ -278,7 +278,7 @@ following projects:
 
 - [ ] Collect second round of feedback from Carbon Insiders (if available)
 - [ ] Coordinate merging of bug fixes related to release
-- [ ] Cut next Release candidate, if applicable
+- [ ] Cut next release candidate, if applicable
   - [ ] Share newest release with Carbon Insiders for additional rounds of
         testing
 
@@ -955,8 +955,8 @@ yarn add carbon-components@next carbon-components-react@next @carbon/icons-react
 yarn add node-sass
 ```
 
-Once that's done, open up `tmp` in your code editor and change any `.css` files
-to `.scss` and add:
+Once that's done, open up `tmp` in your code editor and rename `index.css` to
+`index.scss` and add:
 
 ```javascript
 @import '~carbon-components/scss/globals/scss/styles.scss';
@@ -964,7 +964,7 @@ to `.scss` and add:
 
 to the top of `index.scss`.
 
-Update the `.css` imports to `.scss` in `App.js` and `index.js`. At the top of
+Update the `index.css` import to `index.scss` in `index.js`. At the top of
 `App.js`, import the `Button` component by adding the following:
 
 ```js
@@ -972,7 +972,7 @@ import { Button } from 'carbon-components-react';
 ```
 
 In the `App` component return, add the `Button` and then run `yarn start` and
-verify that the `Button` is there and looks correct.
+verify that the `Button` looks correct and no erros are logged to the console.
 
 </details>
 
