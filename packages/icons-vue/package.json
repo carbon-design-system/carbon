@@ -24,7 +24,7 @@
     "clean": "rimraf es lib"
   },
   "dependencies": {
-    "@rocketsoftware/icon-helpers": "^0.0.8"
+    "@rocketsoftware/icon-helpers": "^0.1.8"
   },
   "devDependencies": {
     "@carbon/cli-reporter": "10.3.0",

@@ -22,7 +22,7 @@
     "handlebars": "^4.0.12"
   },
   "dependencies": {
-    "@rocketsoftware/icon-helpers": "^0.0.8",
+    "@rocketsoftware/icon-helpers": "^0.1.8",
     "@rocketsoftware/icons": "^0.1.8"
   },
   "devDependencies": {

@@ -33,10 +33,10 @@
   "dependencies": {
     "@carbon/import-once": "10.3.0",
     "@rocketsoftware/colors": "^0.1.8",
-    "@rocketsoftware/grid": "^0.0.8",
+    "@rocketsoftware/grid": "^0.1.8",
     "@rocketsoftware/icons": "^0.1.8",
-    "@rocketsoftware/layout": "^0.0.8",
-    "@rocketsoftware/motion": "^0.0.8",
+    "@rocketsoftware/layout": "^0.1.8",
+    "@rocketsoftware/motion": "^0.1.8",
     "@rocketsoftware/themes": "^0.1.8",
     "@rocketsoftware/type": "^0.1.8"
   },

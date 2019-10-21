@@ -29,7 +29,7 @@
     "clean": "rimraf es lib umd"
   },
   "dependencies": {
-    "@rocketsoftware/icon-helpers": "^0.0.8"
+    "@rocketsoftware/icon-helpers": "^0.1.8"
   },
   "devDependencies": {
     "@carbon/icon-build-helpers": "^0.2.0",
