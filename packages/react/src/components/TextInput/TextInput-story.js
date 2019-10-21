@@ -70,6 +70,14 @@ const props = {
       ['start', 'center', 'end'],
       'center'
     ),
+    hidePasswordLabel: text(
+      '"Hide password" tooltip label for password visibility toggle (hidePasswordLabel)',
+      'Hide password'
+    ),
+    showPasswordLabel: text(
+      '"Show password" tooltip label for password visibility toggle (showPasswordLabel)',
+      'Show password'
+    ),
   }),
 };
 
@@ -98,12 +106,14 @@ storiesOf('TextInput', module)
   )
   .add(
     'Toggle password visibility',
-    () => (
-      <TextInput.PasswordInput
-        {...props.TextInputProps()}
-        {...props.PasswordInputProps()}
-      />
-    ),
+    () => {
+      return (
+        <TextInput.PasswordInput
+          {...props.TextInputProps()}
+          {...props.PasswordInputProps()}
+        />
+      );
+    },
     {
       info: {
         text: `
