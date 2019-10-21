@@ -65,8 +65,8 @@ $css--helpers: true;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
-    top: auto;
-    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
     @include carbon--breakpoint('md') {
       right: $carbon--spacing-05;
     }

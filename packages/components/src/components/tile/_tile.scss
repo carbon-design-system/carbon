@@ -34,6 +34,10 @@
     }
   }
 
+  .#{$prefix}--tile--light {
+    background-color: $ui-02;
+  }
+
   .#{$prefix}--tile--clickable,
   .#{$prefix}--tile--selectable,
   .#{$prefix}--tile--expandable {

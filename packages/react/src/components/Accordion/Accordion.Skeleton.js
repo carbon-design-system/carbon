@@ -21,10 +21,10 @@ function AccordionSkeleton(props) {
       {props.open && (
         <li
           className={`${prefix}--accordion__item ${prefix}--accordion__item--active`}>
-          <button type="button" className={`${prefix}--accordion__heading`}>
+          <span className={`${prefix}--accordion__heading`}>
             <ChevronRight16 className={`${prefix}--accordion__arrow`} />
             <SkeletonText className={`${prefix}--accordion__title`} />
-          </button>
+          </span>
           <div className={`${prefix}--accordion__content`}>
             <SkeletonText width="90%" />
             <SkeletonText width="80%" />
@@ -64,10 +64,10 @@ AccordionSkeleton.defaultProps = {
 function AccordionSkeletonItem() {
   return (
     <li className={`${prefix}--accordion__item`}>
-      <button type="button" className={`${prefix}--accordion__heading`}>
+      <span className={`${prefix}--accordion__heading`}>
         <ChevronRight16 className={`${prefix}--accordion__arrow`} />
         <SkeletonText className={`${prefix}--accordion__title`} />
-      </button>
+      </span>
     </li>
   );
 }

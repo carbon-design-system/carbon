@@ -75,11 +75,18 @@ const props = {
     accept: array('Accepted file extensions (accept)', ['.jpg', '.png'], ','),
     name: text('Form item name: (name)', ''),
     multiple: boolean('Supports multiple files (multiple)', true),
+    iconDescription: text(
+      'Close button icon description (iconDescription)',
+      'Clear file'
+    ),
   }),
   fileUploaderItem: () => ({
     name: text('Filename (name)', 'README.md'),
     status: select('Status for file name (status)', filenameStatuses, 'edit'),
-    iconDescription: text('(iconDescription)', 'Icon description'),
+    iconDescription: text(
+      'Close button icon description (iconDescription)',
+      'Clear file'
+    ),
     onDelete: action('onDelete'),
     invalid: boolean('Invalid (invalid)', false),
     errorSubject: text(

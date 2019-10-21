@@ -57,7 +57,7 @@ export const ProgressStep = ({ ...props }) => {
     }
     if (complete) {
       return (
-        <CheckmarkOutline16 role="img">
+        <CheckmarkOutline16>
           <title>{description}</title>
         </CheckmarkOutline16>
       );
@@ -71,7 +71,7 @@ export const ProgressStep = ({ ...props }) => {
   };
 
   return (
-    <li className={classes}>
+    <li className={classes} aria-disabled={disabled}>
       <div
         className={classnames(`${prefix}--progress-step-button`, {
           [`${prefix}--progress-step-button--unclickable`]: !onClick || current,

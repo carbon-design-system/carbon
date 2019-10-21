@@ -358,6 +358,7 @@ export default class FilterableMultiSelect extends React.Component {
                         clearSelection={clearSelection}
                         selectionCount={selectedItem.length}
                         translateWithId={translateWithId}
+                        disabled={disabled}
                       />
                     )}
                     <input
@@ -375,6 +376,7 @@ export default class FilterableMultiSelect extends React.Component {
                     {inputValue && isOpen && (
                       <ListBox.Selection
                         clearSelection={this.clearInputValue}
+                        disabled={disabled}
                       />
                     )}
                     <ListBox.MenuIcon
