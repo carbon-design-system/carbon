@@ -2713,12 +2713,22 @@
   resolved "https://registry.yarnpkg.com/@rocketsoftware/icon-helpers/-/icon-helpers-0.0.7.tgz#d2c9569d64d985df8bb88eef7dd658ecbd7cbe32"
   integrity sha512-QQ7lkoPwMSTphy4Nk+Sq/9rIdOSjZrHGUoP2ilyPmjVOCImJ20jjpCiEMpi8mJRcPN85/KV9q0TUg5mcT/F79Q==
 
+"@rocketsoftware/icon-helpers@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/icon-helpers/-/icon-helpers-0.0.8.tgz#bee305666e74749161bef420c1396e95bf3cd25d"
+  integrity sha512-l02PtSQwdV6wQWjWKSCQ19d4+5nhDPGCSwA+JiaUae3J3iP1YndJbkakJmBSUVKPvLx4UaqV3YAHsMHhA1MRgQ==
+
 "@rocketsoftware/icons-react@^0.0.7":
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/@rocketsoftware/icons-react/-/icons-react-0.0.7.tgz#ea14206ff25558e38afeaed7c9ae85a6ada84c11"
   integrity sha512-kWTJNtjxGqPoSaA85yavP4rAwQGnTliBKNnzV1XnMQQuEf5oTOPWuUw7NX/ezU8+n7P9JDrDjNX+/1/EpQlvMg==
   dependencies:
     "@rocketsoftware/icon-helpers" "0.0.7"
+
+"@rocketsoftware/icons@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/icons/-/icons-0.0.8.tgz#5364137dd5fc61ba4a740c7b2fee28e6b6a0a289"
+  integrity sha512-1MIiBb4vMgMoeyoXojZOBNJFSZlsYQSmr1IbNqk3AUUvwVcOtpw/envstLj4qiWD1vfu38Ys/tDXfKpU3c1N4A==
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
