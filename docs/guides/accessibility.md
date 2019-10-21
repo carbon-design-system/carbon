@@ -150,7 +150,7 @@ using only your keyboard in the manner described. Integrating this test
 throughout each stage of development will save you the pain of retro-fitting a
 component with the necessary keyboard functionality.
 
-### Screen Magnifier testing🔎
+### Screen magnifier testing🔎
 
 <!-- alex disable his -->
 
