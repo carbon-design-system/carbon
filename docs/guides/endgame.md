@@ -950,7 +950,7 @@ carbon-components-react, carbon-icons and node-sass (two dependencies that the
 other packages require) by running:
 
 ```bash
-yarn add carbon-components@next carbon-components-react@next @carbon/icons-react
+yarn add carbon-components@next carbon-components-react@next @carbon/icons-react node-sass
 // And
 yarn add node-sass
 ```
