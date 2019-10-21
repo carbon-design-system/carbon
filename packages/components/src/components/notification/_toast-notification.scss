@@ -139,7 +139,7 @@
   }
 
   .#{$prefix}--toast-notification__title {
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
 
     font-weight: 600;
     margin-top: 1rem;
