@@ -7522,6 +7522,7 @@ $ui-02: if(
   - [button-theme [mixin]](#button-theme-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [tile [mixin]](#tile-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [carbon-content [mixin]](#carbon-content-mixin)
@@ -19811,6 +19812,12 @@ Overflow menu styles
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
   }
 
+  .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open,
+  .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open
+    .#{$prefix}--overflow-menu__trigger {
+    background-color: $ui-02;
+  }
+
   .#{$prefix}--overflow-menu__icon {
     height: rem(16px);
     width: rem(16px);
@@ -19837,6 +19844,13 @@ Overflow menu styles
       display: block;
       background-color: $ui-01;
       transition: background-color $duration--fast-02 motion(entrance, productive);
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options--light {
+    background-color: $ui-02;
+    &::after {
+      background-color: $ui-02;
     }
   }
 
@@ -20017,6 +20031,7 @@ Overflow menu styles
   - [prefix [variable]](#prefix-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [ui-01 [variable]](#ui-01-variable)
+  - [ui-02 [variable]](#ui-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
