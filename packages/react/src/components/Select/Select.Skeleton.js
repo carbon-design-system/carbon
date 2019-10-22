@@ -15,11 +15,7 @@ const SelectSkeleton = ({ hideLabel }) => (
   <div className={`${prefix}--form-item`}>
     {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
     <div className={`${prefix}--select ${prefix}--skeleton`}>
-      <div
-        className={`${prefix}--select-input`}
-        role="status"
-        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-      />
+      <div className={`${prefix}--select-input`} />
     </div>
   </div>
 );

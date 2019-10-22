@@ -14,11 +14,7 @@ const { prefix } = settings;
 const TextInputSkeleton = ({ hideLabel }) => (
   <div className={`${prefix}--form-item`}>
     {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
-    <div
-      className={`${prefix}--skeleton ${prefix}--text-input`}
-      role="status"
-      tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-    />
+    <div className={`${prefix}--skeleton ${prefix}--text-input`} />
   </div>
 );
 

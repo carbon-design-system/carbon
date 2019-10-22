@@ -83,7 +83,10 @@ storiesOf('Select', module)
       <div
         style={{ width: '300px' }}
         aria-label="loading select"
-        aria-live="assertive">
+        aria-live="assertive"
+        role="status"
+        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      >
         <SelectSkeleton />
       </div>
     ),

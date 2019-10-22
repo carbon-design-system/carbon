@@ -46,7 +46,12 @@ storiesOf('TextArea', module)
   .add(
     'skeleton',
     () => (
-      <div aria-label="loading text area" aria-live="assertive">
+      <div
+        aria-label="loading text area"
+        aria-live="assertive"
+        role="status"
+        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      >
         <TextAreaSkeleton />
       </div>
     ),

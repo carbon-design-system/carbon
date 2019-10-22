@@ -54,7 +54,10 @@ storiesOf('Slider', module)
       <div
         style={{ marginTop: '2rem' }}
         aria-label="loading slider"
-        aria-live="assertive">
+        aria-live="assertive"
+        role="status"
+        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      >
         <SliderSkeleton />
       </div>
     ),

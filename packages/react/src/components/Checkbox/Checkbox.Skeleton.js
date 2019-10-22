@@ -12,11 +12,7 @@ const { prefix } = settings;
 
 const CheckboxSkeleton = () => (
   <div className={`${prefix}--form-item ${prefix}--checkbox-wrapper`}>
-    <span
-      className={`${prefix}--checkbox-label ${prefix}--skeleton`}
-      role="status"
-      tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-    />
+    <span className={`${prefix}--checkbox-label ${prefix}--skeleton`} />
   </div>
 );
 
