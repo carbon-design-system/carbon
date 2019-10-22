@@ -13,7 +13,7 @@ import { Close20 } from '@carbon/icons-react';
 import FocusTrap from 'focus-trap-react';
 import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
-import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
@@ -140,7 +140,10 @@ export default class Modal extends Component {
     /**
      * Required props for the accessibility label of the header
      */
-    ...AriaLabelPropType,
+    ['aria-label']: requiredIfGivenPropExists(
+      'hasScrollingContent',
+      PropTypes.string
+    ),
   };
 
   static defaultProps = {

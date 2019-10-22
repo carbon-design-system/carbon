@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
-import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
 
 const { prefix } = settings;
 
@@ -402,7 +402,10 @@ ModalBody.propTypes = {
   /**
    * Required props for the accessibility label of the header
    */
-  ...AriaLabelPropType,
+  ['aria-label']: requiredIfGivenPropExists(
+    'hasScrollingContent',
+    PropTypes.string
+  ),
 };
 
 export class ModalFooter extends Component {
