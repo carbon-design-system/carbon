@@ -21,5 +21,5 @@ Abstracts out the `addEventListener` handler to automatically get released when
 
 # `resize.js`
 
-Creates an resize handler tied to requestAnimationFrame for a more optimized
+Creates a resize handler tied to requestAnimationFrame for a more optimized
 result. Has an `add` method to add callbacks to the resize handler.
