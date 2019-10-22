@@ -80,6 +80,28 @@ describe('OverflowMenu', () => {
         0
       );
     });
+    it('should specify light version as expected', () => {
+      rootWrapper.setProps({ light: true });
+      expect(rootWrapper.props().light).toEqual(true);
+    });
+    it('should add light modifier to overflow menu', () => {
+      // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
+      rootWrapper
+        .setProps({ light: true })
+        .find('OverflowMenu')
+        .instance()
+        .setState({ open: true });
+      rootWrapper.update();
+
+      const oMenu = rootWrapper.find(`.${prefix}--overflow-menu`);
+      const oMenuOptions = rootWrapper.find(
+        `.${prefix}--overflow-menu-options`
+      );
+      expect(oMenu.hasClass(`${prefix}--overflow-menu--light`)).toEqual(true);
+      expect(
+        oMenuOptions.hasClass(`${prefix}--overflow-menu-options--light`)
+      ).toEqual(true);
+    });
   });
 
   describe('open and closed states', () => {
