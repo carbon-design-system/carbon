@@ -44,7 +44,8 @@
   }
 
   .#{$prefix}--toast-notification--low-contrast {
-    color: $text-01;
+    // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
+    color: map-get($carbon--theme--white, 'text-01');
   }
 
   .#{$prefix}--toast-notification--error {
@@ -135,7 +136,7 @@
   .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__close-button
     .#{$prefix}--toast-notification__close-icon {
-    fill: $ui-05;
+    fill: map-get($carbon--theme--white, 'text-01');
   }
 
   .#{$prefix}--toast-notification__title {
@@ -157,7 +158,8 @@
 
   .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__subtitle {
-    color: $text-01;
+    // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
+    color: map-get($carbon--theme--white, 'text-01');
   }
 
   .#{$prefix}--toast-notification__caption {
@@ -169,7 +171,8 @@
 
   .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__caption {
-    color: $text-01;
+    // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
+    color: map-get($carbon--theme--white, 'text-01');
   }
 }
 
