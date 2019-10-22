@@ -150,7 +150,12 @@ storiesOf('TextInput', module)
   .add(
     'skeleton',
     () => (
-      <div>
+      <div
+        aria-label="loading text input"
+        aria-live="assertive"
+        role="status"
+        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      >
         <TextInputSkeleton />
         <br />
         <TextInputSkeleton hideLabel />
