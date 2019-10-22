@@ -2,7 +2,7 @@
 
 # `event-matches.js`
 
-Event delgation - returns the closest ancestor of the event target (or the event
+Event delegation - returns the closest ancestor of the event target (or the event
 target itself) which matches the selectors given in parameter.
 
 # `get-launching-details.js`
