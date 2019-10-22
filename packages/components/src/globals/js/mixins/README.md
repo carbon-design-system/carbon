@@ -324,7 +324,7 @@ that caused instantiating the component.
 
 ## `evented-state.js`
 
-In our components, often time clicking a UI element implies a certain state
+In our components, oftentimes clicking a UI element implies a certain state
 change. Examples are things like closing menus, opening modals, or changing a
 page. In our vanilla library, we try to emit CustomEvents for these actions to
 let the consuming developer respond to them with a callback function.
