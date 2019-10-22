@@ -35,7 +35,7 @@ export function syncColorStyles(document) {
     ['black', black['100']],
     ['white', white['0']],
     ['orange', orange['40']],
-    ['yellow', yellow['20']],
+    ['yellow', yellow['30']],
   ].map(([name, value]) => {
     return syncColorStyle(document, formatSharedStyleName(name), value);
   });

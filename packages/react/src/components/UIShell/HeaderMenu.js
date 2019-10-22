@@ -72,7 +72,9 @@ class HeaderMenu extends React.Component {
   /**
    * Toggle the expanded state of the menu on click.
    */
-  handleOnClick = () => {
+  handleOnClick = e => {
+    e.preventDefault();
+
     this.setState(prevState => ({
       expanded: !prevState.expanded,
     }));
@@ -180,7 +182,7 @@ class HeaderMenu extends React.Component {
           aria-haspopup="menu" // eslint-disable-line jsx-a11y/aria-proptypes
           aria-expanded={this.state.expanded}
           className={`${prefix}--header__menu-item ${prefix}--header__menu-title`}
-          href="javascript:void(0)"
+          href="#"
           onKeyDown={this.handleOnKeyDown}
           ref={this.handleMenuButtonRef}
           role="menuitem"

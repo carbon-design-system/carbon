@@ -10,10 +10,10 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
-import rangePlugin from 'flatpickr/dist/plugins/rangePlugin';
 import { settings } from '@rocketsoftware/carbon-components';
 import DatePickerInput from '../DatePickerInput';
 import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
+import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
 import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
@@ -274,9 +274,9 @@ export default class DatePicker extends Component {
     ]),
 
     /**
-     * The DOM element or selector the Flatpicker should be inserted into. `<body>` by default.
+     * The DOM element the Flatpicker should be inserted into. `<body>` by default.
      */
-    appendTo: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    appendTo: PropTypes.object,
 
     /**
      * The `change` event handler.
@@ -321,6 +321,7 @@ export default class DatePicker extends Component {
 
   componentDidMount() {
     const {
+      appendTo,
       datePickerType,
       dateFormat,
       locale,
@@ -334,13 +335,11 @@ export default class DatePicker extends Component {
         this.updateClassNames(instance);
       };
 
-      let appendToNode;
-
       // inputField ref might not be set in enzyme tests
       if (this.inputField) {
         this.cal = new flatpickr(this.inputField, {
           defaultDate: value,
-          appendTo: appendToNode,
+          appendTo,
           mode: datePickerType,
           allowInput: true,
           dateFormat: dateFormat,
@@ -349,7 +348,7 @@ export default class DatePicker extends Component {
           maxDate: maxDate,
           plugins: [
             datePickerType === 'range'
-              ? new rangePlugin({ input: this.toInputField, position: 'left' })
+              ? new carbonFlatpickrRangePlugin({ input: this.toInputField })
               : () => {},
             carbonFlatpickrMonthSelectPlugin({
               selectorFlatpickrMonthYearContainer: '.flatpickr-current-month',
@@ -561,16 +560,20 @@ export default class DatePicker extends Component {
           ref: this.assignInputFieldRef,
           openCalendar: this.openCalendar,
         });
-      } else if (index === 1 && child.type === DatePickerInput) {
+      }
+      if (index === 1 && child.type === DatePickerInput) {
         return React.cloneElement(child, {
           datePickerType,
           ref: this.assignToInputFieldRef,
+          openCalendar: this.openCalendar,
         });
-      } else if (index === 0) {
+      }
+      if (index === 0) {
         return React.cloneElement(child, {
           ref: this.assignInputFieldRef,
         });
-      } else if (index === 1) {
+      }
+      if (index === 1) {
         return React.cloneElement(child, {
           ref: this.assignToInputFieldRef,
         });

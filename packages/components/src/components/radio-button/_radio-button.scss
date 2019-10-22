@@ -26,6 +26,11 @@
     margin-top: rem(6px);
   }
 
+  // Remove spacing above collection of radio buttons if label is present
+  .#{$prefix}--label + .#{$prefix}--form-item .#{$prefix}--radio-button-group {
+    margin-top: 0;
+  }
+
   // vertical radio button
   .#{$prefix}--radio-button-group--vertical {
     flex-direction: column;
@@ -37,6 +42,7 @@
 
     .#{$prefix}--radio-button__label {
       margin-right: 0;
+      line-height: carbon--mini-units(2.5);
     }
 
     .#{$prefix}--radio-button__label:not(:last-of-type) {

@@ -61,12 +61,18 @@ export default class RadioTile extends React.Component {
      * Specify the tab index of the wrapper element
      */
     tabIndex: PropTypes.number,
+
+    /**
+     * `true` to use the light version.
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
     iconDescription: 'Tile checkmark',
     onChange: () => {},
     tabIndex: 0,
+    light: false,
   };
 
   uid = this.props.id || uid();
@@ -83,13 +89,20 @@ export default class RadioTile extends React.Component {
   };
 
   render() {
-    const { children, className, iconDescription, ...other } = this.props;
+    const {
+      children,
+      className,
+      iconDescription,
+      light,
+      ...other
+    } = this.props;
     const classes = classNames(
       className,
       `${prefix}--tile`,
       `${prefix}--tile--selectable`,
       {
         [`${prefix}--tile--is-selected`]: this.props.checked,
+        [`${prefix}--tile--light`]: light,
       }
     );
 

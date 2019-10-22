@@ -2425,6 +2425,7 @@ Get the value of the corresponding number of units
   - [listbox [mixin]](#listbox-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
   - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
 
 ### ✅carbon--spacing-01 [variable]
@@ -2445,6 +2446,7 @@ $carbon--spacing-01: carbon--mini-units(0.25);
 - **Aliased**:
   - `spacing-01`
 - **Used by**:
+  - [checkbox [mixin]](#checkbox-mixin)
   - [search [mixin]](#search-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
 
@@ -2466,6 +2468,7 @@ $carbon--spacing-02: carbon--mini-units(0.5);
 - **Aliased**:
   - `spacing-02`
 - **Used by**:
+  - [checkbox [mixin]](#checkbox-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [form [mixin]](#form-mixin)
   - [modal [mixin]](#modal-mixin)
@@ -4889,7 +4892,6 @@ $interactive-01: if(
   - [date-picker [mixin]](#date-picker-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
-  - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -4922,7 +4924,6 @@ $interactive-02: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [snippet [mixin]](#snippet-mixin)
-  - [tags [mixin]](#tags-mixin)
   - [tile [mixin]](#tile-mixin)
 
 ### ✅interactive-03 [variable]
@@ -4981,6 +4982,7 @@ $interactive-04: if(
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [inline-loading [mixin]](#inline-loading-mixin)
   - [loading [mixin]](#loading-mixin)
+  - [slider [mixin]](#slider-mixin)
 
 ### ✅ui-background [variable]
 
@@ -5079,6 +5081,7 @@ $ui-02: if(
   - [button-theme [mixin]](#button-theme-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
+  - [tile [mixin]](#tile-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [carbon-content [mixin]](#carbon-content-mixin)
 
@@ -5322,7 +5325,6 @@ $text-03: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [search [mixin]](#search-mixin)
 
 ### ✅text-04 [variable]
 
@@ -5376,6 +5378,8 @@ $text-05: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [form [mixin]](#form-mixin)
+  - [search [mixin]](#search-mixin)
+  - [text-area [mixin]](#text-area-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -5471,7 +5475,6 @@ $icon-03: if(
   - [button [mixin]](#button-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
-  - [listbox [mixin]](#listbox-mixin)
   - [toggle [mixin]](#toggle-mixin)
 
 ### ✅link-01 [variable]
@@ -5665,6 +5668,7 @@ $inverse-02: if(
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [tags [mixin]](#tags-mixin)
   - [tooltip--icon [mixin]](#tooltip--icon-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -6006,6 +6010,7 @@ $inverse-focus-ui: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [tags [mixin]](#tags-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅hover-primary [variable]
@@ -6114,7 +6119,6 @@ $hover-secondary: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [listbox [mixin]](#listbox-mixin)
-  - [tags [mixin]](#tags-mixin)
 
 ### ✅active-secondary [variable]
 
@@ -6322,6 +6326,7 @@ $hover-selected-ui: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
 
 ### ✅inverse-hover-ui [variable]
 
@@ -6346,6 +6351,7 @@ $inverse-hover-ui: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [tags [mixin]](#tags-mixin)
 
 ### ✅hover-danger [variable]
 
@@ -7920,6 +7926,7 @@ Get the font-family for an IBM Plex font
   - [carbon--font-family [mixin]](#carbon--font-family-mixin)
   - [form [mixin]](#form-mixin)
   - [number-input [mixin]](#number-input-mixin)
+  - [slider [mixin]](#slider-mixin)
 
 ### ✅carbon--font-family [mixin]
 
@@ -13322,8 +13329,8 @@ Accordion styles
     margin: 0;
     transition: background-color motion(standard, productive) $duration--fast-02;
 
-    &:hover:before,
-    &:focus:before {
+    &:hover::before,
+    &:focus::before {
       content: '';
       position: absolute;
       top: -1px;
@@ -13332,7 +13339,7 @@ Accordion styles
       height: calc(100% + 2px);
     }
 
-    &:hover:before {
+    &:hover::before {
       background-color: $hover-ui;
     }
 
@@ -13369,15 +13376,11 @@ Accordion styles
   }
 
   .#{$prefix}--accordion__content {
+    display: none;
     // Transition property for when the accordion closes
-    transition: height motion(standard, productive) $duration--fast-02, padding
-        motion(standard, productive) $duration--fast-02;
+    transition: padding motion(standard, productive) $duration--fast-02;
     padding-left: $carbon--spacing-05;
-
     padding-right: 25%;
-    height: 0;
-    visibility: hidden;
-    opacity: 0;
 
     @include carbon--breakpoint-down('md') {
       padding-right: $carbon--spacing-09;
@@ -13388,19 +13391,29 @@ Accordion styles
     }
   }
 
+  .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content,
+  .#{$prefix}--accordion__item--expanding .#{$prefix}--accordion__content {
+    display: block;
+  }
+
+  .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content {
+    animation: $duration--fast-02 motion(standard, productive) collapse-accordion;
+  }
+
+  .#{$prefix}--accordion__item--expanding .#{$prefix}--accordion__content {
+    animation: $duration--fast-02 motion(standard, productive) expand-accordion;
+  }
+
   .#{$prefix}--accordion__item--active {
     overflow: visible;
 
     .#{$prefix}--accordion__content {
+      display: block;
       padding-bottom: $carbon--spacing-06;
       padding-top: $spacing-xs;
-      height: auto;
-      visibility: visible;
-      opacity: 1;
       // Transition property for when the accordion opens
-      transition: height motion(entrance, productive) $duration--fast-02, padding-top
-          motion(entrance, productive) $duration--fast-02,
-        padding-bottom motion(entrance, productive) $duration--fast-02;
+      transition: padding-top motion(entrance, productive) $duration--fast-02, padding-bottom
+          motion(entrance, productive) $duration--fast-02;
     }
 
     .#{$prefix}--accordion__arrow {
@@ -13624,12 +13637,12 @@ Button styles
     }
 
     &:focus {
-      color: $text-04;
+      color: $inverse-01;
       background-color: $interactive-03;
     }
 
     &:active {
-      background-color: $active-primary;
+      color: $inverse-01;
     }
 
     &:disabled,
@@ -13640,6 +13653,7 @@ Button styles
     &.#{$prefix}--btn--disabled:focus {
       background: transparent;
       color: $disabled;
+      outline: none;
 
       & > .#{$prefix}--btn__icon path {
         fill: $disabled;
@@ -13689,6 +13703,7 @@ Button styles
       color: $disabled;
       background: transparent;
       border-color: transparent;
+      outline: none;
 
       .#{$prefix}--btn__icon path {
         fill: $disabled;
@@ -13937,7 +13952,7 @@ Checkbox styles
 @mixin checkbox() {
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
-    margin-bottom: rem(8px);
+    margin-bottom: $carbon--spacing-02;
   }
 
   // Spacing above collection of checkboxes
@@ -13945,9 +13960,10 @@ Checkbox styles
     margin-top: rem(3px);
   }
 
-  // Remove spacing above collection of checkboxes if label is present
+  // Shift collection of checkboxes up if label is present
+  // to account for the 2px top margin for the first checkbox
   .#{$prefix}--label + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
-    margin-top: 0;
+    margin-top: -#{$carbon--spacing-01};
   }
 
   // Spacing below collection of checkboxes
@@ -13967,7 +13983,6 @@ Checkbox styles
   .#{$prefix}--checkbox-label {
     @include reset;
     @include type-style('body-short-01');
-
     line-height: 1.5rem;
     position: relative;
     display: flex;
@@ -13977,9 +13992,14 @@ Checkbox styles
     user-select: none;
   }
 
+  // Required because `$css--reset: true` cannot currently apply to this `::before` and `::after`
+  .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label::after {
+    box-sizing: border-box;
+  }
+
   // Spacing for presentational checkbox
   .#{$prefix}--checkbox-label::before {
-    box-sizing: border-box;
     content: '';
 
     // According to the spec, we'll want the bounding box for our checkbox to
@@ -14006,11 +14026,12 @@ Checkbox styles
   // Create the appearance of the check in the `after` pseudo-element
   .#{$prefix}--checkbox-label::after {
     content: '';
+
     position: absolute;
     left: rem(6px);
     top: rem(8px);
-    width: rem(7px);
-    height: rem(3px);
+    width: rem(9px);
+    height: rem(5px);
     background: none;
     border-left: 2px solid $inverse-01;
     border-bottom: 2px solid $inverse-01;
@@ -14106,6 +14127,8 @@ Checkbox styles
 - **Group**: [checkbox](#checkbox)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
@@ -14244,7 +14267,7 @@ Code snippet styles
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
     .#{$prefix}--snippet-container
     pre {
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
@@ -14729,11 +14752,12 @@ Data table action styles
   //TOOLBAR
   //-------------------------------------------------
   .#{$prefix}--table-toolbar {
-    display: flex;
-    width: 100%;
     background: $ui-01;
+    display: flex;
     height: $layout-04;
+    overflow: hidden;
     position: relative; //need for batch actions
+    width: 100%;
   }
 
   .#{$prefix}--toolbar-content {
@@ -15522,6 +15546,13 @@ Data table core styles
     ); //used to center svg without setting display flex //display block needed for overflow text truncation
   }
 
+  .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu,
+  .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu__trigger {
+    &:hover {
+      background-color: $hover-field;
+    }
+  }
+
   //----------------------------------------------------------------------------
   //ZEBRA
   //----------------------------------------------------------------------------
@@ -15909,6 +15940,7 @@ Data table expandable styles
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
     padding-bottom: rem(23px);
     transition: padding $duration--moderate-01 motion(standard, productive);
+    border-bottom: 1px $hover-ui solid;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
@@ -16434,6 +16466,7 @@ Date picker styles
   .#{$prefix}--date-picker-input__wrapper {
     display: flex;
     align-items: center;
+    position: relative;
 
     ~ .#{$prefix}--form-requirement {
       max-height: rem(200px);
@@ -16524,6 +16557,9 @@ Date picker styles
     fill: $icon-01;
     cursor: pointer;
     z-index: 1;
+    // vertically center icon within parent container on IE11
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
@@ -17579,7 +17615,10 @@ Form styles
     @include type-style('body-short-01');
     display: flex;
     flex-direction: column;
-    flex: 1;
+    // We specify `auto` as the default value so that the form item does
+    // not collapse in IE11 due to a `flex-basis` of 0 only working with
+    // `flex-direction: row`
+    flex: 1 1 auto;
     align-items: flex-start;
   }
 
@@ -18232,7 +18271,10 @@ List box styles
     border-width: 0;
   }
 
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--disabled:hover,
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--disabled:hover {
+    background-color: transparent;
+  }
+
   .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded:hover {
     background-color: $field-02;
   }
@@ -18288,39 +18330,39 @@ List box styles
   }
 
   // populated input field
-  .#{$prefix}--list-box__field .#{$prefix}--text-input[value] {
+  .#{$prefix}--list-box__field .#{$prefix}--text-input {
     padding-right: carbon--mini-units(9);
   }
 
   // invalid && populated input field
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
-    .#{$prefix}--text-input[value] {
+    .#{$prefix}--text-input {
     padding-right: rem(98px); // to account for clear input button outline
   }
 
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
-    .#{$prefix}--text-input[value]
+    .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon {
     right: rem(66px); // to account for clear input button outline
   }
 
   // empty input field
-  .#{$prefix}--list-box__field .#{$prefix}--text-input[value=''] {
+  .#{$prefix}--list-box__field .#{$prefix}--text-input--empty {
     padding-right: $carbon--spacing-09;
   }
 
   // invalid && empty input field
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
-    .#{$prefix}--text-input[value=''] {
+    .#{$prefix}--text-input--empty {
     padding-right: carbon--mini-units(9);
   }
 
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
-    .#{$prefix}--text-input[value='']
+    .#{$prefix}--text-input--empty
     + .#{$prefix}--list-box__invalid-icon {
     right: rem(40px); // to account for clear input button outline
   }
@@ -18413,7 +18455,6 @@ List box styles
   .#{$prefix}--list-box__selection--multi > svg:hover {
     border-radius: 50%;
     background-color: $hover-secondary;
-    fill: $icon-03;
   }
 
   .#{$prefix}--list-box__selection--multi:focus,
@@ -18616,7 +18657,6 @@ List box styles
   - [inverse-02 [variable]](#inverse-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [hover-secondary [variable]](#hover-secondary-variable)
-  - [icon-03 [variable]](#icon-03-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [text-02 [variable]](#text-02-variable)
   - [selected-ui [variable]](#selected-ui-variable)
@@ -19806,7 +19846,7 @@ Overflow menu styles
     }
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $hover-selected-ui;
     }
   }
 
@@ -20031,7 +20071,7 @@ Overflow menu styles
 - **Group**: [overflow-menu](#overflow-menu)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [hover-ui [variable]](#hover-ui-variable)
+  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
@@ -20039,6 +20079,7 @@ Overflow menu styles
   - [text-02 [variable]](#text-02-variable)
   - [text-01 [variable]](#text-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
   - [text-04 [variable]](#text-04-variable)
   - [support-01 [variable]](#support-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
@@ -20099,8 +20140,8 @@ Pagination styles
   }
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
-    top: auto;
-    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
     @include carbon--breakpoint('md') {
       right: $carbon--spacing-05;
     }
@@ -20756,6 +20797,11 @@ Radio button styles
     margin-top: rem(6px);
   }
 
+  // Remove spacing above collection of radio buttons if label is present
+  .#{$prefix}--label + .#{$prefix}--form-item .#{$prefix}--radio-button-group {
+    margin-top: 0;
+  }
+
   // vertical radio button
   .#{$prefix}--radio-button-group--vertical {
     flex-direction: column;
@@ -20767,6 +20813,7 @@ Radio button styles
 
     .#{$prefix}--radio-button__label {
       margin-right: 0;
+      line-height: carbon--mini-units(2.5);
     }
 
     .#{$prefix}--radio-button__label:not(:last-of-type) {
@@ -20910,6 +20957,7 @@ Radio button styles
 
 - **Group**: [radio-button](#radio-button)
 - **Requires**:
+  - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -20959,7 +21007,7 @@ Search styles
     }
 
     &::placeholder {
-      color: $text-03;
+      color: $text-05;
       font-weight: 400;
     }
 
@@ -20991,6 +21039,11 @@ Search styles
   .#{$prefix}--search--sm .#{$prefix}--search-input {
     @include type-style('body-short-01');
     height: rem(32px);
+  }
+
+  .#{$prefix}--search--lg .#{$prefix}--search-input {
+    @include type-style('body-short-02');
+    height: rem(40px);
   }
 
   .#{$prefix}--search--xl .#{$prefix}--search-input {
@@ -21068,8 +21121,9 @@ Search styles
     height: rem(40px);
     width: rem(40px);
     fill: $icon-01;
-    border: 1px solid transparent;
-    border-left: 0;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 1px 0;
 
     &:hover {
       background-color: $hover-field;
@@ -21110,6 +21164,14 @@ Search styles
     }
   }
 
+  .#{$prefix}--search--lg {
+    .#{$prefix}--search-close,
+    ~ .#{$prefix}--search-button {
+      height: rem(40px);
+      width: rem(40px);
+    }
+  }
+
   .#{$prefix}--search--xl {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button {
@@ -21123,6 +21185,7 @@ Search styles
     opacity: 0;
   }
 
+  .#{$prefix}--search--xl.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--lg.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input {
     @include skeleton;
@@ -21144,7 +21207,7 @@ Search styles
   - [text-01 [variable]](#text-01-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [text-03 [variable]](#text-03-variable)
+  - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
@@ -21224,6 +21287,7 @@ Select styles
 
     &:focus {
       @include focus-outline('outline');
+      color: $text-01;
     }
 
     &:disabled,
@@ -21448,6 +21512,7 @@ Slider styles
 
   .#{$prefix}--slider__range-label {
     @include type-style('code-02');
+    font-family: carbon--font-family('mono');
     color: $text-01;
 
     &:last-of-type {
@@ -21511,13 +21576,13 @@ Slider styles
     &:focus {
       // 20px / 14px = 1.4285714286
       transform: translate(-50%, -50%) scale(1.4285714286);
-      box-shadow: inset 0 0 0 2px $interactive-01, inset 0 0 0 3px $ui-01;
-      background-color: $interactive-01;
+      box-shadow: inset 0 0 0 2px $interactive-04, inset 0 0 0 3px $ui-01;
+      background-color: $interactive-04;
     }
 
     &:active {
       transform: translate(-50%, -50%) scale(1.4285714286);
-      box-shadow: inset 0 0 0 2px $interactive-01;
+      box-shadow: inset 0 0 0 2px $interactive-04;
     }
   }
 
@@ -21540,7 +21605,7 @@ Slider styles
   }
 
   .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
-    background-color: $interactive-01;
+    background-color: $interactive-04;
   }
 
   // Disabled state
@@ -21588,6 +21653,7 @@ Slider styles
     color: $disabled-02;
     transition: none;
     cursor: not-allowed;
+    border: none;
 
     &:active,
     &:focus,
@@ -21624,12 +21690,13 @@ Slider styles
 
 - **Group**: [slider](#slider)
 - **Requires**:
+  - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
-  - [interactive-01 [variable]](#interactive-01-variable)
+  - [interactive-04 [variable]](#interactive-04-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
@@ -22183,7 +22250,7 @@ Tag styles
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    @include tag-theme($interactive-02, $inverse-01);
+    @include tag-theme($inverse-02, $inverse-01);
     cursor: pointer;
     padding-right: rem(2px); // Align with hover circle of X button
   }
@@ -22198,7 +22265,7 @@ Tag styles
 
   .#{$prefix}--tag--filter > svg:hover {
     border-radius: 50%;
-    background-color: $hover-secondary;
+    background-color: $inverse-hover-ui;
   }
 
   .#{$prefix}--tag--filter:focus,
@@ -22207,7 +22274,7 @@ Tag styles
   }
 
   .#{$prefix}--tag--filter:focus > svg {
-    border: 2px solid $inverse-01;
+    box-shadow: inset 0 0 0 2px $inverse-focus-ui;
     border-radius: 50%;
   }
 
@@ -22230,9 +22297,10 @@ Tag styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [interactive-02 [variable]](#interactive-02-variable)
+  - [inverse-02 [variable]](#inverse-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
-  - [hover-secondary [variable]](#hover-secondary-variable)
+  - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
+  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
 
 ## text-area
 
@@ -22286,7 +22354,7 @@ Text area styles
   }
 
   .#{$prefix}--text-area::placeholder {
-    @include placeholder-colors;
+    color: $text-05;
     @include type-style('body-long-01');
     opacity: 1;
   }
@@ -22348,6 +22416,7 @@ Text area styles
   - [ui-04 [variable]](#ui-04-variable)
   - [support-01 [variable]](#support-01-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
@@ -22548,6 +22617,10 @@ Tile styles
     }
   }
 
+  .#{$prefix}--tile--light {
+    background-color: $ui-02;
+  }
+
   .#{$prefix}--tile--clickable,
   .#{$prefix}--tile--selectable,
   .#{$prefix}--tile--expandable {
@@ -22689,6 +22762,7 @@ Tile styles
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [ui-02 [variable]](#ui-02-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [icon-02 [variable]](#icon-02-variable)
@@ -23063,6 +23137,9 @@ Toggle styles
     margin-left: carbon--rem(56px);
     @include type-style('body-short-01');
     user-select: none;
+    // top offset needed to vertically center absolutely positioned flex child in IE11
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   //----------------------------------------------
@@ -23182,6 +23259,19 @@ Toggle styles
     + .#{$prefix}--toggle-input__label
     .#{$prefix}--toggle__check {
     fill: $disabled-02;
+  }
+
+  //----------------------------------------------
+  // Skeleton
+  // ---------------------------------------------
+
+  .#{$prefix}--toggle__label.#{$prefix}--skeleton {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .#{$prefix}--toggle__label-text {
+      margin-bottom: $carbon--spacing-03;
+    }
   }
 }
 ```

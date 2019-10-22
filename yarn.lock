@@ -2713,12 +2713,22 @@
   resolved "https://registry.yarnpkg.com/@rocketsoftware/icon-helpers/-/icon-helpers-0.0.7.tgz#d2c9569d64d985df8bb88eef7dd658ecbd7cbe32"
   integrity sha512-QQ7lkoPwMSTphy4Nk+Sq/9rIdOSjZrHGUoP2ilyPmjVOCImJ20jjpCiEMpi8mJRcPN85/KV9q0TUg5mcT/F79Q==
 
+"@rocketsoftware/icon-helpers@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/icon-helpers/-/icon-helpers-0.0.8.tgz#bee305666e74749161bef420c1396e95bf3cd25d"
+  integrity sha512-l02PtSQwdV6wQWjWKSCQ19d4+5nhDPGCSwA+JiaUae3J3iP1YndJbkakJmBSUVKPvLx4UaqV3YAHsMHhA1MRgQ==
+
 "@rocketsoftware/icons-react@^0.0.7":
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/@rocketsoftware/icons-react/-/icons-react-0.0.7.tgz#ea14206ff25558e38afeaed7c9ae85a6ada84c11"
   integrity sha512-kWTJNtjxGqPoSaA85yavP4rAwQGnTliBKNnzV1XnMQQuEf5oTOPWuUw7NX/ezU8+n7P9JDrDjNX+/1/EpQlvMg==
   dependencies:
     "@rocketsoftware/icon-helpers" "0.0.7"
+
+"@rocketsoftware/icons@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/icons/-/icons-0.0.8.tgz#5364137dd5fc61ba4a740c7b2fee28e6b6a0a289"
+  integrity sha512-1MIiBb4vMgMoeyoXojZOBNJFSZlsYQSmr1IbNqk3AUUvwVcOtpw/envstLj4qiWD1vfu38Ys/tDXfKpU3c1N4A==
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
@@ -6607,10 +6617,10 @@ capture-stack-trace@^1.0.0:
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"
   integrity sha512-mYQLZnx5Qt1JgB1WEiMCf2647plpGeQ2NMR/5L0HNZzGQo4fuSPnK+wjfPnKZV0aiJDgzmWqqkV/g7JD+DW0qw==
 
-carbon-components@10.7.0-rc.0:
-  version "10.7.0-rc.0"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.7.0-rc.0.tgz#06ad4c986a05d6d08b7e3b121ef10f1bbdf1aae2"
-  integrity sha512-CGN24dguxXxGv6G4rq6hCPLsatHr51gyM/MwhRt7HITlMu9MJrGfzk9RLZMXI/wso+gWO60igZZE+Y4cCk4OrA==
+carbon-components@10.7.0:
+  version "10.7.0"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.7.0.tgz#66a7c8fdf24bc935a0e7b12c90871251a9d7ce35"
+  integrity sha512-6bwf+epbTcZQOIOLhYrm6aGKMSy/G/m3wN4W8ZHuI/H+taNqW6/sQEOqc2PI1+Lp0GOElMlmS7nGO5q9YD8FPA==
   dependencies:
     carbon-icons "^7.0.7"
     flatpickr "4.6.1"
