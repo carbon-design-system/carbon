@@ -357,7 +357,7 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__submenu[aria-haspopup='true'] {
     @include button-reset($width: true);
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
     @include focus-outline('reset');
     padding: 0 mini-units(2);
     display: flex;
@@ -483,7 +483,7 @@
     .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
     + .#{$prefix}--header__menu {
     @include focus-outline('reset');
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
     position: relative;
     display: flex;
     align-items: center;

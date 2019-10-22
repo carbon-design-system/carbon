@@ -162,7 +162,7 @@ export default class Pagination extends Component {
     return !pageSizesChanged && !pageChanged && !pageSizeChanged
       ? null
       : {
-          page: pageSizeChanged && 1 || pageChanged && page || currentPage,
+          page: (pageSizeChanged && 1) || (pageChanged && page) || currentPage,
           pageSize: pageSizeChanged ? pageSize : currentPageSize,
           prevPageSizes: pageSizes,
           prevPage: page,
