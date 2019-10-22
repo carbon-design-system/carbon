@@ -11,21 +11,14 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const SelectSkeleton = ({ hideLabel, id }) => {
-  const label = hideLabel ? null : (
-    // eslint-disable-next-line jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control
-    <label className={`${prefix}--label ${prefix}--skeleton`} htmlFor={id} />
-  );
-
-  return (
-    <div className={`${prefix}--form-item`}>
-      {label}
-      <div className={`${prefix}--select ${prefix}--skeleton`}>
-        <select className={`${prefix}--select-input`} />
-      </div>
+const SelectSkeleton = ({ hideLabel }) => (
+  <div className={`${prefix}--form-item`}>
+    {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
+    <div className={`${prefix}--select ${prefix}--skeleton`}>
+      <div className={`${prefix}--select-input`} />
     </div>
-  );
-};
+  </div>
+);
 
 SelectSkeleton.propTypes = {
   /**
