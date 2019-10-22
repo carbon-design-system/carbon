@@ -84,21 +84,33 @@ $css--helpers: true;
     border-left: 1px solid $ui-03;
   }
 
+  .#{$prefix}--select__item-count,
   .#{$prefix}--select__page-number {
     position: relative;
+  }
 
-    // Note that `size="1"` is the default.
-    .#{$prefix}--select-input:not([size='1']) {
-      &:focus {
-        position: absolute;
-        right: 0;
-        height: auto;
-        background-color: $ui-01;
-      }
-      &:focus ~ svg {
-        @include hidden;
-      }
+  // Note that `size="1"` is the default.
+  .#{$prefix}--select__item-count
+    .#{$prefix}--select-input:not([size='1']):focus,
+  .#{$prefix}--select__page-number
+    .#{$prefix}--select-input:not([size='1']):focus {
+    position: absolute;
+    height: auto;
+    background-color: $ui-01;
+
+    ~ svg {
+      @include hidden;
     }
+  }
+
+  .#{$prefix}--select__item-count
+    .#{$prefix}--select-input:not([size='1']):focus {
+    left: 0;
+  }
+
+  .#{$prefix}--select__page-number
+    .#{$prefix}--select-input:not([size='1']):focus {
+    right: 0;
   }
 
   .#{$prefix}--pagination__left,

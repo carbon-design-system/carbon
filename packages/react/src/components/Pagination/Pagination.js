@@ -29,8 +29,8 @@ export default class Pagination extends Component {
       prevPageSizes: pageSizes,
       prevPage: page,
       prevPageSize: pageSize,
-      pageSelectorSize: 1,
-      itemsPerPageSelectorSize: 1,
+      pageNumberSelectorSize: 1,
+      itemCountSelectorSize: 1,
     };
     this.uniqueId = ++instanceId;
   }
@@ -131,14 +131,14 @@ export default class Pagination extends Component {
     pageInputDisabled: PropTypes.bool,
 
     /**
-     * Optional prop to set the `size` attribute on the page number select element.
-     */
-    pageSelectorSize: PropTypes.number,
-
-    /**
      * Optional prop to set the `size` attribute on the "items per page" select element.
      */
-    itemsPerPageSelectorSize: PropTypes.number,
+    itemCountSelectorSize: PropTypes.number,
+
+    /**
+     * Optional prop to set the `size` attribute on the page number select element.
+     */
+    pageNumberSelectorSize: PropTypes.number,
   };
 
   static defaultProps = {
@@ -155,8 +155,8 @@ export default class Pagination extends Component {
     pageInputDisabled: false,
     itemText: (min, max) => `${min}–${max} items`,
     pageText: page => `page ${page}`,
-    pageSelectorSize: 1,
-    itemsPerPageSelectorSize: 1,
+    itemCountSelectorSize: 1,
+    pageNumberSelectorSize: 1,
   };
 
   static getDerivedStateFromProps({ pageSizes, page, pageSize }, state) {
@@ -250,8 +250,8 @@ export default class Pagination extends Component {
       totalItems,
       onChange, // eslint-disable-line no-unused-vars
       page: pageNumber, // eslint-disable-line no-unused-vars
-      pageSelectorSize,
-      itemsPerPageSelectorSize,
+      itemCountSelectorSize,
+      pageNumberSelectorSize,
       ...other
     } = this.props;
 
@@ -306,9 +306,9 @@ export default class Pagination extends Component {
             noLabel
             inline
             onChange={this.handleSizeChange}
-            onFocus={() => this.setState({ itemsPerPageSelectorSize })}
-            onBlur={() => this.setState({ itemsPerPageSelectorSize: 1 })}
-            size={this.state.itemsPerPageSelectorSize}
+            onFocus={() => this.setState({ itemCountSelectorSize })}
+            onBlur={() => this.setState({ itemCountSelectorSize: 1 })}
+            size={this.state.itemCountSelectorSize}
             value={statePageSize}>
             {pageSizes.map(size => (
               <SelectItem key={size} value={size} text={String(size)} />
@@ -336,9 +336,9 @@ export default class Pagination extends Component {
               inline
               hideLabel
               onChange={this.handlePageInputChange}
-              onFocus={() => this.setState({ pageSelectorSize })}
-              onBlur={() => this.setState({ pageSelectorSize: 1 })}
-              size={this.state.pageSelectorSize}
+              onFocus={() => this.setState({ pageNumberSelectorSize })}
+              onBlur={() => this.setState({ pageNumberSelectorSize: 1 })}
+              size={this.state.pageNumberSelectorSize}
               value={statePage}>
               {selectItems}
             </Select>
