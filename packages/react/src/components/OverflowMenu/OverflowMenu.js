@@ -203,6 +203,12 @@ class OverflowMenu extends Component {
      * Function called when menu is closed
      */
     onOpen: PropTypes.func,
+
+    /**
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make OverflowMenu background color same as container background color.
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -219,6 +225,7 @@ class OverflowMenu extends Component {
     tabIndex: 0,
     menuOffset: getMenuOffset,
     menuOffsetFlip: getMenuOffset,
+    light: false,
   };
 
   /**
@@ -456,6 +463,7 @@ class OverflowMenu extends Component {
       renderIcon: IconElement,
       innerRef: ref,
       menuOptionsClass,
+      light,
       ...other
     } = this.props;
 
@@ -466,6 +474,7 @@ class OverflowMenu extends Component {
       `${prefix}--overflow-menu`,
       {
         [`${prefix}--overflow-menu--open`]: open,
+        [`${prefix}--overflow-menu--light`]: light,
       }
     );
 
@@ -475,6 +484,7 @@ class OverflowMenu extends Component {
       {
         [`${prefix}--overflow-menu--flip`]: this.props.flipped,
         [`${prefix}--overflow-menu-options--open`]: open,
+        [`${prefix}--overflow-menu-options--light`]: light,
       }
     );
 
