@@ -3,7 +3,7 @@
 
 # Core icons
 /packages/icons/src/svg/16/ @laurenmrice @carbon-design-system/developers
-/packages/icons/src/svg/glyph/ @laurenmrice @chrisconnors-ibm @carbon-design-system/developers
+/packages/icons/src/svg/glyph/ @laurenmrice @carbon-design-system/developers
 
 # Angular icons
 /packages/icons-angular/ @cal-smith @carbon-design-system/developers
