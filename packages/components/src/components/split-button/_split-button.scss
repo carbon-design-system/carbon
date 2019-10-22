@@ -1,0 +1,91 @@
+@import '../../globals/scss/vars';
+@import '../../globals/scss/colors';
+@import '../../globals/scss/theme';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/vendor/@rocketsoftware/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--font-face';
+@import 'mixins';
+
+.#{$prefix}--btn--split--container {
+  display: flex;
+  .#{$prefix}--btn--split--overflow {
+    width: 3rem;
+    height: 3rem;
+    background-color: $interactive-01;
+    margin-left: 1px;
+    border-radius: $button-border-radius;
+    border-color: transparent;
+    outline: $button-outline-width solid transparent;
+    outline-offset: -4px;
+    box-shadow: unset;
+    transition: background $duration--fast-01 motion(standard, productive);
+
+    &:disabled,
+    &.#{$prefix}--btn--split--overflow--disabled {
+      cursor: not-allowed;
+      pointer-events: none;
+      color: $disabled-03;
+      fill: $disabled-03;
+      background: $disabled-02;
+      border-color: $disabled-02;
+    }
+
+    &:disabled:hover,
+    &:disabled:focus,
+    &:hover.#{$prefix}--btn--split--overflow--disabled,
+    &:focus.#{$prefix}--btn--split--overflow--disabled {
+      color: $ui-04;
+      background-color: $disabled-02;
+      border-color: $disabled-02;
+      text-decoration: none;
+      pointer-events: none;
+      outline-color: $disabled-02;
+
+      svg {
+        fill: $ui-04;
+      }
+  }
+
+    &:hover {
+      background-color: $hover-primary;
+      fill: $text-04;
+    }
+
+    &:active {
+      border: 3px solid $focus;
+      background-color: $active-primary;
+      outline-color: $ui-02;
+    }
+
+    &:focus {
+      border: 3px solid $focus;
+      outline-color: $ui-02;
+    }
+
+    svg {
+      fill: $icon-03;
+    }
+  }
+  .#{$prefix}--btn--split--overflow--icon {
+    transition: transform $duration--fast-01 motion(standard, productive);
+  }
+  .#{$prefix}--btn--split--overflow__open {
+    transform: rotate(180deg);
+  }
+
+}
+
+.#{$prefix}--overflow-menu-options--container {
+  width: 100%;
+  &::after {
+    display: none;
+  }
+
+  .#{$prefix}--overflow-menu-options__btn {
+    max-width: unset;
+  }
+}
