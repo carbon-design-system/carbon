@@ -32,8 +32,8 @@ const typeTokenDefaults = {
   'code-02': '14-20',
   'productive-heading-01': '14-18',
   'productive-heading-02': '16-22',
-  'expressive-heading-01': '14-18',
-  'expressive-heading-02': '16-22',
+  'productive-heading-03': '20-26',
+  'productive-heading-04': '28-36',
 };
 
 /**

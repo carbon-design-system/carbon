@@ -43,6 +43,9 @@
         <p class="{{@root.prefix}}--{{../variant}}-notification__caption">{{timestamp}}</p>
       {{/is}}
     </div>
+    {{#is ../variant "inline"}}
+      <button tabindex="0" class="{{@root.prefix}}--inline-notification__action-button {{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--ghost" type="button">Action</button>
+    {{/is}}
     <button data-notification-btn class="{{@root.prefix}}--{{../variant}}-notification__close-button" type="button" aria-label="close">
       {{ carbon-icon 'Close16' class=(add @root.prefix (add '--' (add ../variant '-notification__close-icon'))) }}
     </button>
