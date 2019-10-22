@@ -7,7 +7,7 @@
 
 // import { render, cleanup } from '@carbon/test-utils/react';
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { default as Accordion, AccordionItem } from '../';
 
 describe('Accordion', () => {
@@ -23,19 +23,59 @@ describe('Accordion', () => {
 
   it('should have no AVT1 violations', async () => {
     render(
-      <Accordion className="extra-class">
-        <AccordionItem className="child" title="Heading A">
-          Panel A
-        </AccordionItem>
-        <AccordionItem className="child" title="Heading B">
-          Panel B
-        </AccordionItem>
-        <AccordionItem className="child" title="Heading C">
-          Panel C
-        </AccordionItem>
+      <Accordion>
+        <AccordionItem title="Heading A">Panel A</AccordionItem>
+        <AccordionItem open>Panel B</AccordionItem>
+        <AccordionItem />
       </Accordion>
     );
 
     await expect(document).toHaveNoViolations();
+  });
+});
+
+describe('Accordion Item', () => {
+  it('should render a title', () => {
+    const { getByText } = render(
+      <Accordion>
+        <AccordionItem title="Heading A" />
+      </Accordion>
+    );
+
+    expect(getByText('Heading A')).not.toBeNull();
+  });
+
+  it('should show content when open is passed', () => {
+    const { getByText } = render(
+      <Accordion>
+        <AccordionItem open>content</AccordionItem>
+      </Accordion>
+    );
+
+    expect(getByText('content')).toBeVisible();
+  });
+
+  it('should hides content when open is not passed', () => {
+    const { getByText } = render(
+      <Accordion>
+        <AccordionItem>content</AccordionItem>
+      </Accordion>
+    );
+
+    expect(getByText('content')).not.toBeVisible();
+  });
+
+  it('should open and close when clicked', () => {
+    const { getByText, getByRole } = render(
+      <Accordion>
+        <AccordionItem>content</AccordionItem>
+      </Accordion>
+    );
+
+    fireEvent.click(getByRole('button'));
+    expect(getByText('content')).toBeVisible();
+
+    fireEvent.click(getByRole('button'));
+    expect(getByText('content')).not.toBeVisible();
   });
 });

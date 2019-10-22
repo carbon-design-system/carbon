@@ -82,7 +82,9 @@ function AccordionItem({
         />
         <div className={`${prefix}--accordion__title`}>{title}</div>
       </Expando>
-      <div className={`${prefix}--accordion__content`}>{children}</div>
+      <div hidden={!isOpen} className={`${prefix}--accordion__content`}>
+        {children}
+      </div>
     </li>
   );
 }

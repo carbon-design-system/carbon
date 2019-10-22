@@ -69,6 +69,7 @@ exports[`AccordionItem should render 1`] = `
     </defaultRenderExpando>
     <div
       className="bx--accordion__content"
+      hidden={true}
     >
       Lorem ipsum.
     </div>
