@@ -134,6 +134,11 @@
       margin-right: -$carbon--spacing-03;
     }
 
+    .#{$prefix}--inline-loading__animation .#{$prefix}--loading {
+      // Vanilla markup has `.bx--inline-loading__animation` which is used for `margin-right` adjustment
+      margin-right: 0;
+    }
+
     .#{$prefix}--file-filename {
       @include type-style('body-short-01');
       margin-left: $carbon--spacing-05;
