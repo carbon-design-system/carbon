@@ -29,6 +29,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
       flipped={true}
       iconDescription="open and close list of options"
       innerRef={null}
+      light={false}
       menuOffset={[Function]}
       menuOffsetFlip={[Function]}
       onClick={[Function]}
