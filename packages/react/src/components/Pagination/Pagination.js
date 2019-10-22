@@ -29,7 +29,8 @@ export default class Pagination extends Component {
       prevPageSizes: pageSizes,
       prevPage: page,
       prevPageSize: pageSize,
-      selectSize: 1,
+      pageSelectorSize: 1,
+      itemsPerPageSelectorSize: 1,
     };
     this.uniqueId = ++instanceId;
   }
@@ -132,7 +133,12 @@ export default class Pagination extends Component {
     /**
      * Optional prop to set the `size` attribute on the page number select element.
      */
-    selectSize: PropTypes.number,
+    pageSelectorSize: PropTypes.number,
+
+    /**
+     * Optional prop to set the `size` attribute on the "items per page" select element.
+     */
+    itemsPerPageSelectorSize: PropTypes.number,
   };
 
   static defaultProps = {
@@ -149,7 +155,8 @@ export default class Pagination extends Component {
     pageInputDisabled: false,
     itemText: (min, max) => `${min}–${max} items`,
     pageText: page => `page ${page}`,
-    selectSize: 1,
+    pageSelectorSize: 1,
+    itemsPerPageSelectorSize: 1,
   };
 
   static getDerivedStateFromProps({ pageSizes, page, pageSize }, state) {
@@ -243,7 +250,8 @@ export default class Pagination extends Component {
       totalItems,
       onChange, // eslint-disable-line no-unused-vars
       page: pageNumber, // eslint-disable-line no-unused-vars
-      selectSize,
+      pageSelectorSize,
+      itemsPerPageSelectorSize,
       ...other
     } = this.props;
 
@@ -298,6 +306,9 @@ export default class Pagination extends Component {
             noLabel
             inline
             onChange={this.handleSizeChange}
+            onFocus={() => this.setState({ itemsPerPageSelectorSize })}
+            onBlur={() => this.setState({ itemsPerPageSelectorSize: 1 })}
+            size={this.state.itemsPerPageSelectorSize}
             value={statePageSize}>
             {pageSizes.map(size => (
               <SelectItem key={size} value={size} text={String(size)} />
@@ -325,9 +336,9 @@ export default class Pagination extends Component {
               inline
               hideLabel
               onChange={this.handlePageInputChange}
-              onFocus={() => this.setState({ selectSize })}
-              onBlur={() => this.setState({ selectSize: 1 })}
-              size={this.state.selectSize}
+              onFocus={() => this.setState({ pageSelectorSize })}
+              onBlur={() => this.setState({ pageSelectorSize: 1 })}
+              size={this.state.pageSelectorSize}
               value={statePage}>
               {selectItems}
             </Select>
