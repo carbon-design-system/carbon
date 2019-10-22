@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// import { render, cleanup } from '@carbon/test-utils/react';
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { default as Accordion, AccordionItem } from '../';
