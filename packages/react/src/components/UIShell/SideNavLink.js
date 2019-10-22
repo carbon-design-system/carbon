@@ -16,7 +16,6 @@ import SideNavLinkText from './SideNavLinkText';
 
 const { prefix } = settings;
 
-
 const SideNavLink = ({
   className: customClassName,
   children,
