@@ -450,13 +450,9 @@ export default class DataTable extends React.Component {
     this.setState(state => {
       const filteredRowIds = this.getFilteredRowIds();
       const { rowsById } = state;
-      const selectableRows = this.state.rowIds.reduce((acc, rowId) => {
-        return (acc += rowsById[rowId].disabled ? 0 : 1);
-      }, 0);
-      var isSelected = this.getSelectedRows().length !== selectableRows;
-      if (typeof this.state.filterInputValue === 'string') {
-        isSelected = !rowsById[filteredRowIds[0]].isSelected;
-      }
+      var isSelected = !(
+        Object.values(rowsById).filter(row => row.isSelected == true).length > 0
+      );
       return {
         shouldShowBatchActions: isSelected,
         ...this.setAllSelectedState(state, isSelected, filteredRowIds),
