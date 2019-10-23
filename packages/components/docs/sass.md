@@ -2706,6 +2706,7 @@ $carbon--spacing-05: carbon--mini-units(2);
   - [text-input [mixin]](#text-input-mixin)
   - [tile [mixin]](#tile-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅carbon--spacing-06 [variable]
 
@@ -23827,7 +23828,7 @@ Tooltip styles
     max-width: rem(288px);
     background: $inverse-02;
     margin-top: $carbon--spacing-02;
-    padding: 1rem;
+    padding: $carbon--spacing-05;
     border-radius: rem(2px);
     z-index: z('floating');
     word-wrap: break-word;
@@ -23875,8 +23876,8 @@ Tooltip styles
     // focus-wrap doesn't get triggered
     .#{$prefix}--tooltip__content[tabindex='0'] {
       // 1 rem === .#{$prefix}--tooltip padding
-      margin: calc(-1rem + 2px);
-      padding: calc(1rem - 2px);
+      margin: calc(($carbon--spacing-05 * -1) + 2px);
+      padding: calc($carbon--spacing-05 - 2px);
 
       &:focus {
         outline: 1px solid $ui-background;
@@ -23886,10 +23887,8 @@ Tooltip styles
     // Tooltips with interactive elements, need to be click focusable but not sequentially focusable so the user
     // can click within the tooltip and not have it close. Because the element is not actionable it does not need
     // to have a visible focus indicator (OK'd by IBMa)
-    .#{$prefix}--tooltip__content[tabindex='-1'] {
-      &:focus {
-        outline: none;
-      }
+    .#{$prefix}--tooltip__content[tabindex='-1']:focus {
+      outline: none;
     }
 
     .#{$prefix}--tooltip__caret {
@@ -24106,6 +24105,7 @@ Tooltip styles
   - [hover-primary [variable]](#hover-primary-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [ui-background [variable]](#ui-background-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
