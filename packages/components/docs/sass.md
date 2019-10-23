@@ -12276,6 +12276,7 @@ $body-long-02: (
 
 ```scss
 $code-01: (
+  font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(16px),
@@ -12295,6 +12296,7 @@ $code-01: (
 
 ```scss
 $code-02: (
+  font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(20px),
@@ -21560,7 +21562,7 @@ Slider styles
 
   .#{$prefix}--slider__range-label {
     @include type-style('code-02');
-    font-family: carbon--font-family('mono');
+    // font-family: carbon--font-family('mono');
     color: $text-01;
 
     &:last-of-type {
