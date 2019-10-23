@@ -54,7 +54,7 @@ const lightPropMessage = (
   <small style={{ display: 'block', paddingBottom: '1rem' }}>
     The snippet container should never be the same color as the page background.
     <br />
-    {'Do not use the'}
+    {'Do not use the '}
     <CodeSnippet type="inline" light>
       light
     </CodeSnippet>

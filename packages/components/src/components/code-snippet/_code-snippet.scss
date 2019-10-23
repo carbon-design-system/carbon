@@ -10,6 +10,7 @@
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
+@import '../../globals/scss/theme-tokens';
 @import 'mixins';
 
 /// Code snippet styles
@@ -269,7 +270,7 @@
     &.#{$prefix}--snippet--inline:hover,
     .#{$prefix}--snippet-button:hover,
     .#{$prefix}--snippet-btn--expand:hover {
-      background-color: $ui-01;
+      background-color: $hover-ui-light;
     }
 
     &.#{$prefix}--snippet--single::after,
