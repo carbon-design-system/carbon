@@ -306,8 +306,9 @@ export default class Pagination extends Component {
             noLabel
             inline
             onChange={this.handleSizeChange}
-            onFocus={() => this.setState({ itemCountSelectorSize })}
             onBlur={() => this.setState({ itemCountSelectorSize: 1 })}
+            onFocus={() => this.setState({ itemCountSelectorSize })}
+            onMouseDown={() => this.setState({ itemCountSelectorSize })}
             size={this.state.itemCountSelectorSize}
             value={statePageSize}>
             {pageSizes.map(size => (
@@ -336,8 +337,9 @@ export default class Pagination extends Component {
               inline
               hideLabel
               onChange={this.handlePageInputChange}
-              onFocus={() => this.setState({ pageNumberSelectorSize })}
               onBlur={() => this.setState({ pageNumberSelectorSize: 1 })}
+              onFocus={() => this.setState({ pageNumberSelectorSize })}
+              onMouseDown={() => this.setState({ pageNumberSelectorSize })}
               size={this.state.pageNumberSelectorSize}
               value={statePage}>
               {selectItems}
