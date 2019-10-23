@@ -21,6 +21,7 @@ const items = [
   {
     id: 'option-2',
     text: 'Option 2',
+    isCategory: true,
   },
   {
     id: 'option-3',
