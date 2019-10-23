@@ -768,7 +768,7 @@ following steps to release:
 
 ### Release candidate releases
 
-​ Before our minor releases, we cut Release candidates a week in advance to
+​ Before our minor releases, we cut release candidates a week in advance to
 sanity check our code. ​
 
 #### Publishing steps
