@@ -71,6 +71,7 @@ const styleLoaders = [
           $css--font-face: false;
           $css--body: false;
           $css--reset: false;
+          $did-warn-diverged-feature-flags: true;
         `;
       },
       sassOptions: {
