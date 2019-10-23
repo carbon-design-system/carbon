@@ -23875,7 +23875,12 @@ Tooltip styles
     // get the tooltip's content and we focus the content container instead of the tooltip root so that
     // focus-wrap doesn't get triggered
     .#{$prefix}--tooltip__content[tabindex='0'] {
-      // 1 rem === .#{$prefix}--tooltip padding
+      // $carbon--spacing-05 === .#{$prefix}--tooltip padding
+      // The margin and padding need to stay in sync with the default tooltip padding
+      // so that the content does not shift visually when compared to other tooltips.
+      // This approach allows the desired focus indicator that goes around the edge of the tooltip
+      // and not just the content area. When the __content element is required (v11) this could be
+      // cleaned up so that the padding is always on content and not the tooltip.
       margin: calc(($carbon--spacing-05 * -1) + 2px);
       padding: calc($carbon--spacing-05 - 2px);
 
