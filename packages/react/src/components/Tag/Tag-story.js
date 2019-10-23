@@ -39,9 +39,11 @@ storiesOf('Tag', module)
   .add(
     'Default',
     () => (
-      <Tag className="some-class" {...props.regular()}>
-        {text('Content (children)', 'This is not a tag')}
-      </Tag>
+      <div role="list">
+        <Tag className="some-class" {...props.regular()}>
+          {text('Content (children)', 'This is not a tag')}
+        </Tag>
+      </div>
     ),
     {
       info: {
@@ -56,9 +58,11 @@ storiesOf('Tag', module)
   .add(
     'Filter',
     () => (
-      <Tag className="some-class" {...props.filter()} filter>
-        {text('Content (children)', 'This is not a tag')}
-      </Tag>
+      <div role="list">
+        <Tag className="some-class" {...props.filter()} filter>
+          {text('Content (children)', 'This is not a tag')}
+        </Tag>
+      </div>
     ),
     {
       info: {
