@@ -239,7 +239,9 @@
   .#{$prefix}--tabs--fixed
     .#{$prefix}--tabs__nav-item--disabled
     .#{$prefix}--tabs__nav-link {
-    color: $disabled-03;
+    @include carbon--breakpoint(md) {
+      color: $disabled-03;
+    }
   }
 
   //-----------------------------
