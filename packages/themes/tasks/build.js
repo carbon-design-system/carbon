@@ -400,7 +400,7 @@ function primitive(value) {
     if (value[0] === '#') {
       return t.SassColor(value);
     }
-    return t.SassValue(value);
+    return t.SassValue(value.indexOf(',') !== -1 ? `(${value})` : value);
   } else if (typeof value === 'number') {
     return t.SassNumber(value);
   } else if (Array.isArray(value)) {
