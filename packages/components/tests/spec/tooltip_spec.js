@@ -58,20 +58,6 @@ describe('Test tooltip', function() {
     });
 
     // Known bug: https://github.com/carbon-design-system/carbon/issues/3835
-    // it('Should hide the tooltip upon focusing an external element and focus moves to external element', function() {
-    //   element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-
-    //   const input = document.createElement('input');
-    //   input.type = 'text';
-    //   input.id = 'example-input';
-    //   document.body.appendChild(input);
-
-    //   document
-    //     .getElementById('example-input')
-    //     .dispatchEvent(new CustomEvent('focus', { bubbles: true }));
-    //   expect(floating.classList.contains('bx--tooltip--shown')).toBe(false);
-    //   expect(document.activeElement).toEqual(input);
-    // });
 
     it('Should hide the tooltip upon blurring', function() {
       floating.classList.add('bx--tooltip--shown');
