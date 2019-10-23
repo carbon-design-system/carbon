@@ -4937,7 +4937,9 @@ $carbon--theme--white: (
   inverse-support-02: #42be65,
   inverse-support-03: #f1c21b,
   inverse-support-04: #4589ff,
-  overlay-01: rgba(22, 22, 22, 0.5),
+  overlay-01: (
+    rgba(22, 22, 22, 0.5),
+  ),
   danger: #da1e28,
   focus: #0f62fe,
   inverse-focus-ui: #ffffff,
@@ -5010,12 +5012,28 @@ $carbon--theme--white: (
     letter-spacing: 0,
   ),
   code-01: (
+    font-family: (
+      'IBM Plex Mono',
+      'Menlo',
+      'DejaVu Sans Mono',
+      'Bitstream Vera Sans Mono',
+      Courier,
+      monospace,
+    ),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
     letter-spacing: 0.32px,
   ),
   code-02: (
+    font-family: (
+      'IBM Plex Mono',
+      'Menlo',
+      'DejaVu Sans Mono',
+      'Bitstream Vera Sans Mono',
+      Courier,
+      monospace,
+    ),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -5400,7 +5418,9 @@ $carbon--theme--g10: (
   inverse-support-02: #42be65,
   inverse-support-03: #f1c21b,
   inverse-support-04: #4589ff,
-  overlay-01: rgba(22, 22, 22, 0.5),
+  overlay-01: (
+    rgba(22, 22, 22, 0.5),
+  ),
   danger: #da1e28,
   focus: #0f62fe,
   inverse-focus-ui: #ffffff,
@@ -5473,12 +5493,28 @@ $carbon--theme--g10: (
     letter-spacing: 0,
   ),
   code-01: (
+    font-family: (
+      'IBM Plex Mono',
+      'Menlo',
+      'DejaVu Sans Mono',
+      'Bitstream Vera Sans Mono',
+      Courier,
+      monospace,
+    ),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
     letter-spacing: 0.32px,
   ),
   code-02: (
+    font-family: (
+      'IBM Plex Mono',
+      'Menlo',
+      'DejaVu Sans Mono',
+      'Bitstream Vera Sans Mono',
+      Courier,
+      monospace,
+    ),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -5858,7 +5894,9 @@ $carbon--theme--g90: (
   inverse-support-02: #24a148,
   inverse-support-03: #f1c21b,
   inverse-support-04: #0f62fe,
-  overlay-01: rgba(22, 22, 22, 0.7),
+  overlay-01: (
+    rgba(22, 22, 22, 0.7),
+  ),
   danger: #da1e28,
   focus: #ffffff,
   inverse-focus-ui: #0f62fe,
@@ -5931,12 +5969,28 @@ $carbon--theme--g90: (
     letter-spacing: 0,
   ),
   code-01: (
+    font-family: (
+      'IBM Plex Mono',
+      'Menlo',
+      'DejaVu Sans Mono',
+      'Bitstream Vera Sans Mono',
+      Courier,
+      monospace,
+    ),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
     letter-spacing: 0.32px,
   ),
   code-02: (
+    font-family: (
+      'IBM Plex Mono',
+      'Menlo',
+      'DejaVu Sans Mono',
+      'Bitstream Vera Sans Mono',
+      Courier,
+      monospace,
+    ),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -6316,7 +6370,9 @@ $carbon--theme--g100: (
   inverse-support-02: #24a148,
   inverse-support-03: #f1c21b,
   inverse-support-04: #0f62fe,
-  overlay-01: rgba(22, 22, 22, 0.7),
+  overlay-01: (
+    rgba(22, 22, 22, 0.7),
+  ),
   danger: #da1e28,
   focus: #ffffff,
   inverse-focus-ui: #0f62fe,
@@ -6389,12 +6445,28 @@ $carbon--theme--g100: (
     letter-spacing: 0,
   ),
   code-01: (
+    font-family: (
+      'IBM Plex Mono',
+      'Menlo',
+      'DejaVu Sans Mono',
+      'Bitstream Vera Sans Mono',
+      Courier,
+      monospace,
+    ),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
     letter-spacing: 0.32px,
   ),
   code-02: (
+    font-family: (
+      'IBM Plex Mono',
+      'Menlo',
+      'DejaVu Sans Mono',
+      'Bitstream Vera Sans Mono',
+      Courier,
+      monospace,
+    ),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -6774,7 +6846,9 @@ $carbon--theme--v9: (
   inverse-support-02: #8cd211,
   inverse-support-03: #fdd600,
   inverse-support-04: #5aaafa,
-  overlay-01: rgba(223, 227, 230, 0.5),
+  overlay-01: (
+    rgba(223, 227, 230, 0.5),
+  ),
   danger: #da1e28,
   focus: #3d70b2,
   inverse-focus-ui: #3d70b2,
@@ -6798,8 +6872,12 @@ $carbon--theme--v9: (
   disabled-02: #dfe3e6,
   disabled-03: #cdd1d4,
   highlight: #f4f7fb,
-  skeleton-01: rgba(61, 112, 178, 0.1),
-  skeleton-02: rgba(61, 112, 178, 0.1),
+  skeleton-01: (
+    rgba(61, 112, 178, 0.1),
+  ),
+  skeleton-02: (
+    rgba(61, 112, 178, 0.1),
+  ),
   brand-01: #3d70b2,
   brand-02: #5a6872,
   brand-03: #5a6872,
@@ -6847,12 +6925,28 @@ $carbon--theme--v9: (
     letter-spacing: 0,
   ),
   code-01: (
+    font-family: (
+      'IBM Plex Mono',
+      'Menlo',
+      'DejaVu Sans Mono',
+      'Bitstream Vera Sans Mono',
+      Courier,
+      monospace,
+    ),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
     letter-spacing: 0.32px,
   ),
   code-02: (
+    font-family: (
+      'IBM Plex Mono',
+      'Menlo',
+      'DejaVu Sans Mono',
+      'Bitstream Vera Sans Mono',
+      Courier,
+      monospace,
+    ),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -8356,7 +8450,7 @@ $overlay-01: if(
       'overlay-01'
     ),
   map-get($carbon--theme, 'overlay-01'),
-  rgba(22, 22, 22, 0.5)
+  (rgba(22, 22, 22, 0.5))
 );
 ```
 
@@ -9410,6 +9504,14 @@ $code-01: if(
     ),
   map-get($carbon--theme, 'code-01'),
   (
+    font-family: (
+      'IBM Plex Mono',
+      'Menlo',
+      'DejaVu Sans Mono',
+      'Bitstream Vera Sans Mono',
+      Courier,
+      monospace,
+    ),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
@@ -9438,6 +9540,14 @@ $code-02: if(
     ),
   map-get($carbon--theme, 'code-02'),
   (
+    font-family: (
+      'IBM Plex Mono',
+      'Menlo',
+      'DejaVu Sans Mono',
+      'Bitstream Vera Sans Mono',
+      Courier,
+      monospace,
+    ),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -10366,7 +10476,6 @@ Get the font-family for an IBM Plex font
   - [carbon--font-family [mixin]](#carbon--font-family-mixin)
   - [form [mixin]](#form-mixin)
   - [number-input [mixin]](#number-input-mixin)
-  - [slider [mixin]](#slider-mixin)
 
 ### ✅carbon--font-family [mixin]
 
@@ -21562,7 +21671,6 @@ Slider styles
 
   .#{$prefix}--slider__range-label {
     @include type-style('code-02');
-    // font-family: carbon--font-family('mono');
     color: $text-01;
 
     &:last-of-type {
@@ -21740,7 +21848,6 @@ Slider styles
 
 - **Group**: [slider](#slider)
 - **Requires**:
-  - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
