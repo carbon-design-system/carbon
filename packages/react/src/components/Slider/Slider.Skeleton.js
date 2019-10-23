@@ -11,27 +11,20 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const SliderSkeleton = ({ hideLabel, id }) => {
-  const label = hideLabel ? null : (
-    // eslint-disable-next-line jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control
-    <label className={`${prefix}--label ${prefix}--skeleton`} htmlFor={id} />
-  );
-
-  return (
-    <div className={`${prefix}--form-item`}>
-      {label}
-      <div className={`${prefix}--slider-container ${prefix}--skeleton`}>
-        <span className={`${prefix}--slider__range-label`} />
-        <div className={`${prefix}--slider`}>
-          <div className={`${prefix}--slider__track`} />
-          <div className={`${prefix}--slider__filled-track`} />
-          <div className={`${prefix}--slider__thumb`} />
-        </div>
-        <span className={`${prefix}--slider__range-label`} />
+const SliderSkeleton = ({ hideLabel }) => (
+  <div className={`${prefix}--form-item`}>
+    {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
+    <div className={`${prefix}--slider-container ${prefix}--skeleton`}>
+      <span className={`${prefix}--slider__range-label`} />
+      <div className={`${prefix}--slider`}>
+        <div className={`${prefix}--slider__track`} />
+        <div className={`${prefix}--slider__filled-track`} />
+        <div className={`${prefix}--slider__thumb`} />
       </div>
+      <span className={`${prefix}--slider__range-label`} />
     </div>
-  );
-};
+  </div>
+);
 
 SliderSkeleton.propTypes = {
   /**

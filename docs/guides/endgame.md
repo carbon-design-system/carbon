@@ -259,7 +259,7 @@ following projects:
 
 ### Tuesday XX/YY
 
-- [ ] First Release Candidate cut
+- [ ] First release candidate cut
 - [ ] Complete first round of smoke tests
 - [ ] Share with Carbon Insiders for first round of testing
 
@@ -270,7 +270,7 @@ following projects:
   - [ ] Stop release
   - [ ] Ship with known issues
 - [ ] Coordinate merging of bug fixes related to release
-- [ ] Cut next Release Candidate, if applicable
+- [ ] Cut next release candidate, if applicable
   - [ ] Share newest release with Carbon Insiders for additional rounds of
         testing
 
@@ -278,7 +278,7 @@ following projects:
 
 - [ ] Collect second round of feedback from Carbon Insiders (if available)
 - [ ] Coordinate merging of bug fixes related to release
-- [ ] Cut next Release Candidate, if applicable
+- [ ] Cut next release candidate, if applicable
   - [ ] Share newest release with Carbon Insiders for additional rounds of
         testing
 
@@ -334,7 +334,7 @@ types of releases:
 | ------------------------------------------------ | ----------------------------------------------------------------------- | ----------- | -------------------------------------------------- |
 | [Hotfix](#hotfix-releases)                       | Fix severity level 1 issues with large user-facing impact               | `patch`     | On demand                                          |
 | [Patch](#patch-releases)                         | Batched fixes to packages with varying degrees of severity and priority | `patch`     | Weekly                                             |
-| [Release Candidate](#release-candidate-releases) | Features and fixes that will be included in minor release               | `preminor`  | Typically 6 weeks, as needed before minor release  |
+| [Release candidate](#release-candidate-releases) | Features and fixes that will be included in minor release               | `preminor`  | Typically 6 weeks, as needed before minor release  |
 | [Minor](#minor-releases)                         | Features and fixes to packages                                          | `minor`     | Typically 6 weeks, occasionally on-demand          |
 | [Major](#major-releases)                         | Large or semver-incompatible changes to the design system               | `major`     | Typically 6 months to 1 year, announced in advance |
 
@@ -412,7 +412,9 @@ already exist in the project. These updates are reserved for
    git checkout v10.4.0
    ```
 
-2. Run `./packages/cli/bin/carbon-cli.js release patch`
+2. Run `./packages/cli/bin/carbon-cli.js release patch` **_Note: Currently, the
+   CLI command isn't working. See the manual instructions for the patch release.
+   process_**
 
    - You will see the terminal do a few things: get the latest tag, find the
      next version to bump, create a branch for the release, and begin
@@ -583,7 +585,7 @@ than the last stable git tag. For example:
 If the last stable git tag was `v10.4.0`, then the branch would be named:
 
 ```bash
-git checkout chore/release-v10.4.1
+git checkout -b chore/release-v10.4.1
 ```
 
 After creating this branch, your goal will be use the
@@ -663,7 +665,17 @@ going on. Worst-case, we can always cut a minor release from the latest `master`
 if an appropriate patch could not be generated.
 
 Once you are done cherry-picking commits, it's time to version the changed
-packages. You can use `lerna` to accomplish this by running:
+packages.
+
+_Note: If you don't have an npm account, you'll need to go to
+https://www.npmjs.com/signup to create one. Once you've created the account,
+find a team member who can give you permission to publish to the Carbon
+packages. It may take a couple of hours for npm to recognize the permission
+change. You will also need to login into npm from your terminal using the
+command `npm adduser`, where you will be prompted for your username and
+password._
+
+You can use `lerna` to version the changed packages by running:
 
 ```bash
 yarn lerna version patch --no-push --no-git-tag-version --exact
@@ -754,9 +766,9 @@ following steps to release:
 
   </details>
 
-### Release Candidate releases
+### Release candidate releases
 
-​ Before our minor releases, we cut Release Candidates a week in advance to
+​ Before our minor releases, we cut release candidates a week in advance to
 sanity check our code. ​
 
 #### Publishing steps
@@ -920,6 +932,49 @@ the following testing scenarios:
   - [ ] `gatsby-theme-carbon`
 - [ ] React smoke tests
   - [ ] `create-react-app`
+
+<details>
+  <summary>How to run React smoke test</summary>
+
+Change directories to wherever you want to add the project and run:
+
+```bash
+npx create-react-app tmp
+```
+
+Change directories so you're in the newly created `tmp` folder and run `yarn` in
+your terminal.
+
+After that is done, install the dependencies: carbon-components,
+carbon-components-react, carbon-icons and node-sass (two dependencies that the
+other packages require) by running:
+
+```bash
+yarn add carbon-components@next carbon-components-react@next @carbon/icons-react node-sass
+// And
+yarn add node-sass
+```
+
+Once that's done, open up `tmp` in your code editor and rename `index.css` to
+`index.scss` and add:
+
+```javascript
+@import '~carbon-components/scss/globals/scss/styles.scss';
+```
+
+to the top of `index.scss`.
+
+Update the `index.css` import to `index.scss` in `index.js`. At the top of
+`App.js`, import the `Button` component by adding the following:
+
+```js
+import { Button } from 'carbon-components-react';
+```
+
+In the `App` component return, add the `Button` and then run `yarn start` and
+verify that the `Button` looks correct and no erros are logged to the console.
+
+</details>
 
 ### Procedures
 
