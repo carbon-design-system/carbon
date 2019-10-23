@@ -112,7 +112,7 @@
     "rollup-plugin-sizes": "^0.5.0",
     "rollup-plugin-terser": "^4.0.0",
     "rtlcss": "^2.4.0",
-    "sass-loader": "^7.1.0",
+    "sass-loader": "^8.0.0",
     "storybook-readme": "^5.0.8",
     "string-replace-loader": "^2.1.0",
     "terser-webpack-plugin": "^1.1.0",
