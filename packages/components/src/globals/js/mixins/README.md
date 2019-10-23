@@ -319,3 +319,40 @@ types to instantiate components upon.
 
 `.createdByLauncher()` method allows you to run an event handler of the event
 that caused instantiating the component.
+
+# Other mixins
+
+## `evented-state.js`
+
+In our components, oftentimes clicking a UI element implies a certain state
+change. Examples are things like closing menus, opening modals, or changing a
+page. In our vanilla library, we try to emit CustomEvents for these actions to
+let the consuming developer respond to them with a callback function.
+
+_Public Methods added_
+
+- `changeState`
+
+**\*Required** Private Methods\*
+
+- `_changeState`
+
+## `evented-show-hide-state.js`
+
+This one adds hide/show methods to your component and kicks off the change
+state - you're expected to add in the element that triggers the action, as well
+as a callback to do something with the state change.
+
+_Public Methods Added_
+
+- `show`
+- `hide`
+
+## `track-blur.js`
+
+Adds a blur handler to your component - expects a handleBlur method to be added
+into the consuming component
+
+**Required Public Methods added**
+
+- `handleBlur`
