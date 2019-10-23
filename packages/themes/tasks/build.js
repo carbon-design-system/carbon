@@ -401,13 +401,16 @@ function primitive(value) {
       return t.SassColor(value);
     }
     return t.SassValue(value.indexOf(',') !== -1 ? `(${value})` : value);
-  } else if (typeof value === 'number') {
+  }
+  if (typeof value === 'number') {
     return t.SassNumber(value);
-  } else if (Array.isArray(value)) {
+  }
+  if (Array.isArray(value)) {
     return t.SassList({
       elements: value.map(primitive),
     });
-  } else if (typeof value === 'object') {
+  }
+  if (typeof value === 'object') {
     return t.SassMap({
       properties: Object.keys(value).map(key => {
         const quoted = key.includes(' ');
