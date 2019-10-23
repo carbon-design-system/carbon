@@ -162,8 +162,9 @@ class Dropdown extends mixin(
         (listNode || this.element).focus();
         if (listNode) {
           const selectedNode = listNode.querySelector(
-            `${this.options.selectorItemSelected} ${this.options.selectorItem}`
+            this.options.selectorLinkSelected
           );
+
           listNode.setAttribute(
             'aria-activedescendant',
             (selectedNode || listItems[0]).id
@@ -239,9 +240,7 @@ class Dropdown extends mixin(
     );
     const start =
       this.getCurrentNavigation() ||
-      this.element.querySelector(
-        `${this.options.selectorItemSelected} ${this.options.selectorItem}`
-      );
+      this.element.querySelector(this.options.selectorLinkSelected);
     const getNextItem = old => {
       const handleUnderflow = (i, l) => i + (i >= 0 ? 0 : l);
       const handleOverflow = (i, l) => i - (i < l ? 0 : l);
@@ -364,6 +363,7 @@ class Dropdown extends mixin(
    *   Used to skip dropdown items for keyboard navigation.
    * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
    * @property {string} [selectorItemFocused] The CSS selector to find the clickable area in the focused dropdown item.
+   * @property {string} [selectorLinkSelected] The CSS selector to target the link node of the selected dropdown item.
    * @property {string} [classShowSelected] The CSS class for the show selected modifier of the dropdown.
    * @property {string} [classSelected] The CSS class for the selected dropdown item.
    * @property {string} [classFocused] The CSS class for the focused dropdown item.
@@ -386,6 +386,7 @@ class Dropdown extends mixin(
       selectorItemSelected: `.${prefix}--dropdown--selected`,
       selectorItemFocused: `.${prefix}--dropdown--focused`,
       selectorItemHidden: `[hidden],[aria-hidden="true"]`,
+      selectorLinkSelected: `.${prefix}--dropdown--selected .${prefix}--dropdown-link`,
       classShowSelected: `${prefix}--dropdown--show-selected`,
       classSelected: `${prefix}--dropdown--selected`,
       classFocused: `${prefix}--dropdown--focused`,
