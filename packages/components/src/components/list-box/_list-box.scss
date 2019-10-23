@@ -430,6 +430,34 @@ $list-box-menu-width: rem(300px);
     }
   }
 
+  .#{$prefix}--list-box__menu-category {
+    @include type-style('body-short-01');
+    height: rem(40px);
+    color: $text-02;
+    user-select: none;
+    position: relative;
+    transition: background $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--list-box__menu-category__option {
+    display: block;
+    height: rem(40px);
+    color: $text-02;
+    text-decoration: none;
+    font-weight: normal;
+    line-height: rem(16px);
+    padding: rem(11px) 0;
+    margin: 0 $carbon--spacing-05;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-top-color: $ui-03;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: border-color $duration--fast-01 motion(standard, productive),
+      color $duration--fast-01 motion(standard, productive);
+  }
+
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover {
     background-color: transparent;
   }
