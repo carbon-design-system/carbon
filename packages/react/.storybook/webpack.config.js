@@ -11,15 +11,19 @@ const TerserPlugin = require('terser-webpack-plugin');
 const rtlcss = require('rtlcss');
 const customProperties = require('postcss-custom-properties');
 
-const useExternalCss =
-  process.env.CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS === 'true';
+const {
+  CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
+  CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS,
+  CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP,
+  CARBON_REACT_USE_CONTROLLED_STATE_WITH_EVENT_LISTENER,
+  CARBON_REACT_STORYBOOK_USE_RTL,
+} = process.env;
 
-const useStyleSourceMap =
-  process.env.CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP === 'true';
-
+const useExternalCss = CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS === 'true';
+const useStyleSourceMap = CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP === 'true';
 const useControlledStateWithEventListener =
-  process.env.CARBON_REACT_USE_CONTROLLED_STATE_WITH_EVENT_LISTENER === 'true';
-const useRtl = process.env.CARBON_REACT_STORYBOOK_USE_RTL === 'true';
+  CARBON_REACT_USE_CONTROLLED_STATE_WITH_EVENT_LISTENER === 'true';
+const useRtl = CARBON_REACT_STORYBOOK_USE_RTL === 'true';
 
 const replaceTable = {
   useControlledStateWithEventListener,
@@ -48,13 +52,30 @@ const styleLoaders = [
   {
     loader: 'sass-loader',
     options: {
-      includePaths: [path.resolve(__dirname, '..', 'node_modules')],
-      data: `
-        $feature-flags: (
-          ui-shell: true,
-          enable-css-custom-properties: true,
-        );
-      `,
+      prependData(loaderContext) {
+        const entrypoint = path.resolve(__dirname, './_container.scss');
+        const flags = `
+          $feature-flags: (
+            ui-shell: true,
+            enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+          );
+        `;
+
+        if (loaderContext.resourcePath === entrypoint) {
+          return flags;
+        }
+
+        return `
+          ${flags}
+
+          $css--font-face: false;
+          $css--body: false;
+          $css--reset: false;
+        `;
+      },
+      sassOptions: {
+        includePaths: [path.resolve(__dirname, '..', 'node_modules')],
+      },
       sourceMap: useStyleSourceMap,
     },
   },
