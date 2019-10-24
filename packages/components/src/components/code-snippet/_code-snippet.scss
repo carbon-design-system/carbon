@@ -260,23 +260,26 @@
   }
 
   // Light version
-  .#{$prefix}--snippet.#{$prefix}--snippet--light {
-    &,
-    .#{$prefix}--snippet-button,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--snippet-button,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light
     .#{$prefix}--snippet-btn--expand {
-      background-color: $ui-02;
-    }
+    background-color: $ui-02;
+  }
 
-    &.#{$prefix}--snippet--inline:hover,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light
     .#{$prefix}--snippet-button:hover,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light
     .#{$prefix}--snippet-btn--expand:hover {
-      background-color: $hover-ui-light;
-    }
+    background-color: $hover-ui-light;
+  }
 
-    &.#{$prefix}--snippet--single::after,
-    &.#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
-      background-image: linear-gradient(to right, transparent, $ui-02);
-    }
+  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--multi
+    .#{$prefix}--snippet-container
+    pre::after {
+    background-image: linear-gradient(to right, transparent, $ui-02);
   }
 
   // Skeleton State
