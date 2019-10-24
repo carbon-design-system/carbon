@@ -386,7 +386,7 @@ $skeleton: $skeleton-01 !default; // TODO: Remove this in next major release
     $value: lighten($value, 8%);
   }
 
-  @if map-get($feature-flags, enable-css-custom-properties) == true {
+  @if feature-flags-enabled('enable-css-custom-properties') {
     @return var(--cds-#{$token}-light, $value);
   }
 
