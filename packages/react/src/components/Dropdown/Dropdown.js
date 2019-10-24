@@ -135,6 +135,11 @@ export default class Dropdown extends React.Component {
      * Additional props passed to Downshift
      */
     downshiftProps: PropTypes.shape(Downshift.propTypes),
+
+    /**
+     * Optional function to extract the category from a given item
+     */
+    itemToCategory: PropTypes.func,
   };
 
   static defaultProps = {
@@ -145,17 +150,81 @@ export default class Dropdown extends React.Component {
     light: false,
     titleText: '',
     helperText: '',
+    itemToCategory: null,
   };
 
   constructor(props) {
     super(props);
     this.dropdownInstanceId = getInstanceId();
   }
+
   handleOnChange = selectedItem => {
     if (this.props.onChange) {
       this.props.onChange({ selectedItem });
     }
   };
+
+  renderItems(
+    items,
+    itemToString,
+    selectedItem,
+    highlightedIndex,
+    getItemProps,
+    itemToElement,
+    itemToCategory
+  ) {
+    // needs to be Capitalized for react to render it correctly
+    const ItemToElement = itemToElement;
+
+    if (itemToCategory) {
+      const result = [];
+      const categoryMap = {};
+      items.forEach((item, index) => {
+        const category = itemToCategory(item);
+        if (!categoryMap[category]) {
+          categoryMap[category] = [
+            <ListBox.MenuCategory key={category}>
+              {category}
+            </ListBox.MenuCategory>,
+          ];
+        }
+
+        categoryMap[category].push(
+          <ListBox.MenuItem
+            key={itemToString(item)}
+            isActive={selectedItem === item}
+            isCategoryItem
+            isHighlighted={highlightedIndex === index || selectedItem === item}
+            {...getItemProps({ item, index })}>
+            {itemToElement ? (
+              <ItemToElement key={itemToString(item)} {...item} />
+            ) : (
+              itemToString(item)
+            )}
+          </ListBox.MenuItem>
+        );
+      });
+
+      for (let category in categoryMap) {
+        result.push(...categoryMap[category]);
+      }
+      return result;
+    } else {
+      return items.map((item, index) => (
+        <ListBox.MenuItem
+          key={itemToString(item)}
+          isActive={selectedItem === item}
+          isHighlighted={highlightedIndex === index || selectedItem === item}
+          {...getItemProps({ item, index })}>
+          {itemToElement ? (
+            <ItemToElement key={itemToString(item)} {...item} />
+          ) : (
+            itemToString(item)
+          )}
+        </ListBox.MenuItem>
+      ));
+    }
+  }
 
   render() {
     const {
@@ -177,6 +246,7 @@ export default class Dropdown extends React.Component {
       invalid,
       invalidText,
       downshiftProps,
+      itemToCategory,
     } = this.props;
     const inline = type === 'inline';
     const className = ({ isOpen }) =>
@@ -215,8 +285,6 @@ export default class Dropdown extends React.Component {
       }
     );
 
-    // needs to be Capitalized for react to render it correctly
-    const ItemToElement = itemToElement;
     return (
       <div className={wrapperClasses}>
         {title}
@@ -280,35 +348,15 @@ export default class Dropdown extends React.Component {
               </ListBox.Field>
               {isOpen && (
                 <ListBox.Menu aria-labelledby={dropdownId} id={id}>
-                  {items.map((item, index) => (
-                    <>
-                      {!item.isCategory && (
-                        <ListBox.MenuItem
-                          key={itemToString(item)}
-                          className="test"
-                          isActive={selectedItem === item}
-                          isHighlighted={
-                            highlightedIndex === index || selectedItem === item
-                          }
-                          {...getItemProps({ item, index })}>
-                          {itemToElement ? (
-                            <ItemToElement key={itemToString(item)} {...item} />
-                          ) : (
-                            itemToString(item)
-                          )}
-                        </ListBox.MenuItem>
-                      )}
-                      {item.isCategory && (
-                        <ListBox.MenuCategory key={itemToString(item)}>
-                          {itemToElement ? (
-                            <ItemToElement key={itemToString(item)} {...item} />
-                          ) : (
-                            itemToString(item)
-                          )}
-                        </ListBox.MenuCategory>
-                      )}
-                    </>
-                  ))}
+                  {this.renderItems(
+                    items,
+                    itemToString,
+                    selectedItem,
+                    highlightedIndex,
+                    getItemProps,
+                    itemToElement,
+                    itemToCategory
+                  )}
                 </ListBox.Menu>
               )}
             </ListBox>

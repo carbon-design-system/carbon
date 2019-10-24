@@ -17,15 +17,25 @@ const { prefix } = settings;
  * name, alongside any classes for any corresponding states, for a generic list
  * box menu item.
  */
-const ListBoxMenuItem = ({ children, isActive, isHighlighted, ...rest }) => {
+const ListBoxMenuItem = ({
+  children,
+  isActive,
+  isHighlighted,
+  isCategoryItem,
+  ...rest
+}) => {
   const className = cx({
     [`${prefix}--list-box__menu-item`]: true,
     [`${prefix}--list-box__menu-item--active`]: isActive,
     [`${prefix}--list-box__menu-item--highlighted`]: isHighlighted,
   });
+  const optionClassName = cx({
+    [`${prefix}--list-box__menu-item__option`]: true,
+    [`${prefix}--list-box__menu-item__option--category`]: isCategoryItem,
+  });
   return (
     <div className={className} {...rest}>
-      <div className={`${prefix}--list-box__menu-item__option`}>{children}</div>
+      <div className={optionClassName}>{children}</div>
     </div>
   );
 };
@@ -46,11 +56,17 @@ ListBoxMenuItem.propTypes = {
    * Specify whether the current menu item is "highlighed".
    */
   isHighlighted: PropTypes.bool.isRequired,
+
+  /**
+   * Specify whether the current menu item is contained within a category.
+   */
+  isCategoryItem: PropTypes.bool,
 };
 
 ListBoxMenuItem.defaultProps = {
   isActive: false,
   isHighlighted: false,
+  isCategoryItem: false,
 };
 
 export default ListBoxMenuItem;

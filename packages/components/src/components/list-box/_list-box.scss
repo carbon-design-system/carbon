@@ -432,21 +432,22 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-category {
     @include type-style('body-short-01');
-    height: rem(40px);
-    color: $text-02;
+    height: rem(30px);
+    color: $text-03;
     user-select: none;
     position: relative;
     transition: background $duration--fast-01 motion(standard, productive);
+    cursor: default;
   }
 
   .#{$prefix}--list-box__menu-category__option {
+    @include type-style('label-01');
     display: block;
-    height: rem(40px);
-    color: $text-02;
+    height: rem(30px);
+    color: $text-05;
     text-decoration: none;
     font-weight: normal;
-    line-height: rem(16px);
-    padding: rem(11px) 0;
+    padding: rem(8px) 0 rem(4px);
     margin: 0 $carbon--spacing-05;
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
@@ -508,6 +509,10 @@ $list-box-menu-width: rem(300px);
     white-space: nowrap;
     transition: border-color $duration--fast-01 motion(standard, productive),
       color $duration--fast-01 motion(standard, productive);
+
+    &.#{$prefix}--list-box__menu-item__option--category {
+      border-top-color: transparent;
+    }
 
     &:focus {
       @include focus-outline('outline');

@@ -17,19 +17,22 @@ const items = [
   {
     id: 'option-1',
     text: 'Option 1',
+    category: 'Europe',
   },
   {
     id: 'option-2',
     text: 'Option 2',
-    isCategory: true,
+    category: 'Europe',
   },
   {
     id: 'option-3',
     text: 'Option 3',
+    category: 'Asia',
   },
   {
     id: 'option-4',
     text: 'Option 4',
+    category: 'Asia',
   },
 ];
 
@@ -146,6 +149,25 @@ storiesOf('Dropdown', module)
         text: `
             Sometimes you want to control everything.
           `,
+      },
+    }
+  )
+  .add(
+    'with categories',
+    () => (
+      <div style={{ width: 300 }}>
+        <Dropdown
+          {...props()}
+          items={items}
+          itemToString={item => (item ? item.text : '')}
+          onChange={action('onChange')}
+          itemToCategory={item => item.category}
+        />
+      </div>
+    ),
+    {
+      info: {
+        text: 'Dropdown',
       },
     }
   )
