@@ -69,9 +69,13 @@ export default class Loading extends React.Component {
     const loading = (
       <div
         {...other}
-        aria-label={description}
+        aria-atomic="true"
+        aria-labelledby="loading-id"
         aria-live={active ? 'assertive' : 'off'}
         className={loadingClasses}>
+        <label id="loading-id" className={`${prefix}--visually-hidden`}>
+          {description}
+        </label>
         <svg className={`${prefix}--loading__svg`} viewBox="-75 -75 150 150">
           <title>{description}</title>
           {small ? (
