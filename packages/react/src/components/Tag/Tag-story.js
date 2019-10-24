@@ -26,7 +26,6 @@ const props = {
       'red'
     ),
     disabled: boolean('Disabled (disabled)', false),
-    role: 'listitem',
     title: 'Clear Selection',
   }),
   filter() {
@@ -39,11 +38,9 @@ storiesOf('Tag', module)
   .add(
     'Default',
     () => (
-      <div role="list">
-        <Tag className="some-class" {...props.regular()}>
-          {text('Content (children)', 'This is not a tag')}
-        </Tag>
-      </div>
+      <Tag className="some-class" {...props.regular()}>
+        {text('Content (children)', 'This is not a tag')}
+      </Tag>
     ),
     {
       info: {
@@ -58,11 +55,9 @@ storiesOf('Tag', module)
   .add(
     'Filter',
     () => (
-      <div role="list">
-        <Tag className="some-class" {...props.filter()} filter>
-          {text('Content (children)', 'This is not a tag')}
-        </Tag>
-      </div>
+      <Tag className="some-class" {...props.filter()} filter>
+        {text('Content (children)', 'This is not a tag')}
+      </Tag>
     ),
     {
       info: {
