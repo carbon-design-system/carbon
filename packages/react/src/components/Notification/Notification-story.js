@@ -37,6 +37,16 @@ const notificationProps = () => ({
 
 storiesOf('Notifications', module)
   .addDecorator(withKnobs)
+  .addParameters({
+    info: {
+      // Adjust width of wrapper so component isn't stretched:
+      styles: {
+        children: {
+          width: 'auto',
+        },
+      },
+    },
+  })
   .add('Toast', () => (
     <ToastNotification
       {...notificationProps()}
