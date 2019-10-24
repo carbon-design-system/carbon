@@ -16,8 +16,7 @@ import {
   AccordionItem,
   AccordionSkeleton,
 } from '../Accordion';
-import OrderedList from '../OrderedList';
-import ListItem from '../ListItem';
+import Button from '../Button';
 
 const props = {
   onClick: action('onClick'),
@@ -50,19 +49,7 @@ storiesOf('Accordion', module)
           </p>
         </AccordionItem>
         <AccordionItem title="Section 3 title" {...props}>
-          <OrderedList>
-            <ListItem>Unordered List level 1</ListItem>
-            <OrderedList nested>
-              <ListItem>Unordered List level 2</ListItem>
-              <ListItem>Unordered List level 2</ListItem>
-              <OrderedList nested>
-                <ListItem>Unordered List level 2</ListItem>
-                <ListItem>Unordered List level 2</ListItem>
-              </OrderedList>
-            </OrderedList>
-            <ListItem>Unordered List level 1</ListItem>
-            <ListItem>Unordered List level 1</ListItem>
-          </OrderedList>
+          <Button>This is a button.</Button>
         </AccordionItem>
         <AccordionItem
           title={
