@@ -387,7 +387,7 @@ $skeleton: $skeleton-01 !default; // TODO: Remove this in next major release
   }
 
   @if feature-flags-enabled('enable-css-custom-properties') {
-    @return var(--cds-#{$token}-light, $value);
+    @return var(--#{$custom-property-prefix}-#{$token}-light, $value);
   }
 
   @return $value;
