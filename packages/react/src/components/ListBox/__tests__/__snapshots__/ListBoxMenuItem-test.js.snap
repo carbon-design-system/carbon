@@ -3,6 +3,7 @@
 exports[`ListBoxMenuItem should render 1`] = `
 <ListBoxMenuItem
   isActive={false}
+  isCategoryItem={false}
   isHighlighted={false}
 >
   <div
@@ -22,6 +23,7 @@ exports[`ListBoxMenuItem should render 1`] = `
 exports[`ListBoxMenuItem should render 2`] = `
 <ListBoxMenuItem
   isActive={true}
+  isCategoryItem={false}
   isHighlighted={false}
 >
   <div
@@ -41,10 +43,33 @@ exports[`ListBoxMenuItem should render 2`] = `
 exports[`ListBoxMenuItem should render 3`] = `
 <ListBoxMenuItem
   isActive={false}
+  isCategoryItem={false}
   isHighlighted={true}
 >
   <div
     className="bx--list-box__menu-item bx--list-box__menu-item--highlighted"
+  >
+    <div
+      className="bx--list-box__menu-item__option"
+    >
+      <span>
+        ListBox.MenuItem
+      </span>
+    </div>
+  </div>
+</ListBoxMenuItem>
+`;
+
+exports[`ListBoxMenuItem should render 4`] = `
+<ListBoxMenuItem
+  isActive={false}
+  isCategory={true}
+  isCategoryItem={false}
+  isHighlighted={false}
+>
+  <div
+    className="bx--list-box__menu-item"
+    isCategory={true}
   >
     <div
       className="bx--list-box__menu-item__option"

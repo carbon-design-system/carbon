@@ -28,8 +28,12 @@ describe('ListBoxMenuItem', () => {
     const highlightedWrapper = mount(
       <ListBox.MenuItem {...mockProps} isHighlighted={true} />
     );
+    const categoryWrapper = mount(
+      <ListBox.MenuItem {...mockProps} isCategory />
+    );
     expect(wrapper).toMatchSnapshot();
     expect(activeWrapper).toMatchSnapshot();
     expect(highlightedWrapper).toMatchSnapshot();
+    expect(categoryWrapper).toMatchSnapshot();
   });
 });

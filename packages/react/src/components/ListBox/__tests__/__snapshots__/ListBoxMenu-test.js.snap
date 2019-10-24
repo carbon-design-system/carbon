@@ -11,6 +11,7 @@ exports[`ListBoxMenu should render 1`] = `
   >
     <ListBoxMenuItem
       isActive={false}
+      isCategoryItem={false}
       isHighlighted={false}
     >
       <div

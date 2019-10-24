@@ -65,6 +65,13 @@ describe('Dropdown', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render with categories', () => {
+    const wrapper = mount(
+      <Dropdown {...mockProps} itemToCategory={() => 'myOnlyCategory'} />
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
   describe('title', () => {
     let wrapper;
     let renderedLabel;
