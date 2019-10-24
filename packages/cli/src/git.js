@@ -30,8 +30,7 @@ async function fetchLatestFromUpstream() {
       'git@github.com:carbon-design-system/carbon.git',
     ]);
   }
-  await execa('git', ['checkout', 'master']);
-  await execa('git', ['pull', 'upstream', 'master', '--tags']);
+  await execa('git', ['fetch', 'upstream', 'master', '--tags']);
 }
 
 module.exports = {
