@@ -315,10 +315,10 @@ class Dropdown extends mixin(
       this.element.dataset.value = itemToSelect.parentElement.dataset.value;
 
       toArray(
-        this.element.querySelectorAll(this.options.selectorItemSelected)
+        this.element.querySelectorAll(this.options.selectorLinkSelected)
       ).forEach(item => {
-        if (itemToSelect !== item.querySelector(this.options.selectorItem)) {
-          item.classList.remove(this.options.classSelected);
+        if (itemToSelect !== item) {
+          item.parentElement.classList.remove(this.options.classSelected);
         }
       });
 
