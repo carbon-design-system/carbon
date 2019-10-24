@@ -9,10 +9,18 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
 
+const getInstanceId = setupGetInstanceId();
+
 export default class Loading extends React.Component {
+  constructor(props) {
+    super(props);
+    this.loadingInstanceId = getInstanceId();
+  }
+
   static propTypes = {
     /**
      * Specify whether you want the loading indicator to be spinning or not
@@ -66,14 +74,20 @@ export default class Loading extends React.Component {
       [`${prefix}--loading-overlay--stop`]: !active,
     });
 
+    const loadingInstanceLabelId = `loading-id-${this.loadingInstanceId}`;
+
     const loading = (
       <div
         {...other}
+        // aria-atomic set to true allows live regions to be announced in JAWS
         aria-atomic="true"
-        aria-labelledby="loading-id"
+        aria-labelledby={loadingInstanceLabelId}
         aria-live={active ? 'assertive' : 'off'}
         className={loadingClasses}>
-        <label id="loading-id" className={`${prefix}--visually-hidden`}>
+        {/* label allows the description to be read to VoiceOver in iOS */}
+        <label
+          id={loadingInstanceLabelId}
+          className={`${prefix}--visually-hidden`}>
           {description}
         </label>
         <svg className={`${prefix}--loading__svg`} viewBox="-75 -75 150 150">
