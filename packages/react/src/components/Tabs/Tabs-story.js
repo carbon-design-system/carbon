@@ -8,22 +8,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import './Tabs-story.scss';
 
-import {
-  withKnobs,
-  boolean,
-  number,
-  select,
-  text,
-} from '@storybook/addon-knobs';
+import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
-
-const types = {
-  'Default (default)': 'default',
-  'Fixed (fixed)': 'fixed',
-};
 
 const props = {
   tabs: () => ({
@@ -34,7 +24,6 @@ const props = {
       '#'
     ),
     role: text('ARIA role (role in <Tabs>)', 'navigation'),
-    type: select('Tabs type (type)', types, 'default'),
     iconDescription: text(
       'The description of the trigger icon for narrow mode (iconDescription in <Tabs>)',
       'show menu options'
@@ -72,6 +61,44 @@ storiesOf('Tabs', module)
     'Default',
     () => (
       <Tabs {...props.tabs()}>
+        <Tab {...props.tab()} label="Tab label 1">
+          <div className="some-content" style={{ paddingLeft: 16 }}>
+            Content for first tab goes here.
+          </div>
+        </Tab>
+        <Tab {...props.tab()} label="Tab label 2">
+          <div className="some-content" style={{ paddingLeft: 16 }}>
+            Content for second tab goes here.
+          </div>
+        </Tab>
+        <Tab
+          {...props.tab()}
+          label="Tab label 3"
+          renderContent={TabContentRenderedOnlyWhenSelected}>
+          <div className="some-content" style={{ paddingLeft: 16 }}>
+            Content for third tab goes here.
+          </div>
+        </Tab>
+        <Tab {...props.tab()} label={<CustomLabel text="Custom Label" />}>
+          <div className="some-content" style={{ paddingLeft: 16 }}>
+            Content for fourth tab goes here.
+          </div>
+        </Tab>
+      </Tabs>
+    ),
+    {
+      info: {
+        text: `
+            Tabs are used to quickly navigate between views within the same context. Create individual
+            Tab components for each item in the Tabs list.
+          `,
+      },
+    }
+  )
+  .add(
+    'Fixed',
+    () => (
+      <Tabs type="fixed" {...props.tabs()}>
         <Tab {...props.tab()} label="Tab label 1">
           <div className="some-content" style={{ paddingLeft: 16 }}>
             Content for first tab goes here.

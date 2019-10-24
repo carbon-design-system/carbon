@@ -156,13 +156,17 @@
       min-width: 100%;
 
       @include breakpoint('42rem') {
-        min-width: 570px;
+        min-width: 720px;
       }
     }
 
     .bx--tabs + div {
       padding: 0 !important;
       margin-top: 2rem;
+    }
+
+    .bx--tabs.bx--tabs--fixed + div {
+      margin-top: 0;
     }
 
     #tab-panel-1,

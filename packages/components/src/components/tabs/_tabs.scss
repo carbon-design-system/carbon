@@ -94,13 +94,6 @@
     outline: none;
   }
 
-  .#{$prefix}--tabs--fixed {
-    @include carbon--breakpoint(md) {
-      // Draws the border without affecting the inner-content
-      box-shadow: inset 0 -1px 0 0 $ui-04;
-    }
-  }
-
   .#{$prefix}--tabs__nav {
     @include layer('overlay');
     margin: 0;
@@ -166,19 +159,14 @@
 
       & + .#{$prefix}--tabs__nav-item {
         margin-left: 0;
-        border-left: solid $ui-04 1px;
+        // Draws the border without affecting the inner-content
+        box-shadow: -1px 0 0 0 $ui-04;
       }
-    }
-  }
 
-  .#{$prefix}--tabs--fixed .#{$prefix}--tabs__nav-item,
-  .#{$prefix}--tabs--fixed
-    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected) {
-    @include carbon--breakpoint(md) {
-      // Reveals the border of `<div class="bx--tabs bx--tabs--fixed">` with transparent border
-      border-bottom: solid transparent 1px;
-      // Prevents background color from affecting the transparent border
-      background-clip: content-box;
+      & + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
+      &.#{$prefix}--tabs__nav-item--selected + .#{$prefix}--tabs__nav-item {
+        box-shadow: none;
+      }
     }
   }
 
@@ -210,7 +198,7 @@
   .#{$prefix}--tabs--fixed
     .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
     @include carbon--breakpoint(md) {
-      background-color: $hover-ui;
+      background-color: $hover-selected-ui;
     }
   }
 
@@ -277,7 +265,7 @@
 
       .#{$prefix}--tabs__nav-link {
         // Draws the border without affecting the inner-content
-        box-shadow: inset 0 3px 0 0 $interactive-04;
+        box-shadow: inset 0 2px 0 0 $interactive-04;
         border-bottom: none;
       }
 
@@ -337,8 +325,7 @@
     @include carbon--breakpoint(md) {
       display: flex;
       align-items: center;
-      // Prevents this elements from interfering the bottom border of `<div class="bx--tabs bx--tabs--fixed">`
-      margin-bottom: -1px;
+      height: rem(40px);
       border-bottom: none;
     }
   }
