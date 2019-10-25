@@ -1,3 +1,5 @@
+<!-- alex disable black -->
+
 # Endgame
 
 <!-- prettier-ignore-start -->
@@ -472,9 +474,9 @@ already exist in the project. These updates are reserved for
 
 4. Once that's done, you should create a Pull Request in Draft state and make
    sure **not** to merge it. Our goal with the Pull Request is to do a final
-   sanity check for CI checks, verify preview links work as expected, and get
-   final reviews from the endgame team for the release. _Note: Make sure to
-   specify which packages are being updated for your reviewers._
+   check for CI checks, verify preview links work as expected, and get final
+   reviews from the endgame team for the release. _Note: Make sure to specify
+   which packages are being updated for your reviewers._
 
 5. Once everything is green, review the pull request. Make sure there are no
    commits labeled `feat` as the patch release should only be for bug fixes,
@@ -499,8 +501,7 @@ already exist in the project. These updates are reserved for
    npm dist-tag add package-name@X.Y.Z latest
    ```
 
-   For example, if you just released `10.6.1` under `next`, this would look
-   like:
+   For example, if you released `10.6.1` under `next`, this would look like:
 
    ```bash
    npm dist-tag add carbon-components@10.6.1 latest
@@ -509,10 +510,10 @@ already exist in the project. These updates are reserved for
 8. Manually check to see that the `latest` tags were updated for the packages
    correctly by going to [`npm`](https://www.npmjs.com), searching the packages,
    viewing the versions and making sure the `latest` version matches the version
-   you just released.
+   you released.
 
-9. After publishing to latest, create a tag for the version you just released
-   and push it to upstream by running:
+9. After publishing to latest, create a tag for the version you released and
+   push it to upstream by running:
 
    ```bash
    git tag -a vX.Y.Z -m "vX.Y.Z"
@@ -712,9 +713,9 @@ git commit -m 'chore(release): update package versions'
 ```
 
 Once that's done, you should create a Pull Request in Draft state and make sure
-**not** to merge it. Our goal with the Pull Request is to do a final sanity
-check for CI checks, verify preview links work as expected, and get final
-reviews from the endgame team for the release.
+**not** to merge it. Our goal with the Pull Request is to do a check for CI
+checks, verify preview links work as expected, and get final reviews from the
+endgame team for the release.
 
 Once everything is green and your Pull Request has been reviewed, you should
 **close** the draft Pull Request. On your machine, you should then follow the
@@ -729,8 +730,8 @@ following steps to release:
 - If everything looks good to go, then you should go through each of the
   packages and add the `latest` tag using the command:
   `npm dist-tag add package-name@X.Y.Z latest`
-- After publishing to latest, create a tag for the version you just released and
-  push it to upstream by running:
+- After publishing to latest, create a tag for the version you released and push
+  it to upstream by running:
 
   ```bash
   git tag -a vX.Y.Z -m "vX.Y.Z"
@@ -769,7 +770,7 @@ following steps to release:
 ### Release candidate releases
 
 ​ Before our minor releases, we cut release candidates a week in advance to
-sanity check our code. ​
+check our code. ​
 
 #### Publishing steps
 
@@ -794,7 +795,7 @@ sanity check our code. ​
 6. Manually check to see that the `next` tag was updated for the packages
    correctly by going to [`npm`](https://www.npmjs.com), searching the packages,
    viewing the versions and making sure the `next` version matches the version
-   you just released.
+   you released.
 
 ### Minor releases
 
@@ -832,7 +833,7 @@ can be released on-demand in specific circumstances.
 
 3. After the package versions have been created, you'll be prompted
    `The next step will be to manually create a Pull Request for this branch`.
-   Simply push your changes and open the PR. Be sure your commit message reads
+   Push your changes and open the PR. Be sure your commit message reads
    `chore(release): update package versions`
 4. Once your PR is approved and merged, checkout `master`, pull the latest
    upstream and run:
@@ -853,7 +854,7 @@ can be released on-demand in specific circumstances.
 7. Manually check to see that the `next` tag was updated for the packages
    correctly by going to [`npm`](https://www.npmjs.com), searching the packages,
    viewing the versions and making sure the `next` version matches the version
-   you just released.
+   you released.
 
 8. When you're ready to update `latest`, run
    `npm dist-tag add package-name@X.Y.Z latest` for each of the updated
@@ -876,10 +877,10 @@ can be released on-demand in specific circumstances.
 9. Like before, manually check to see that the `latest` tags were updated for
    the packages correctly by going to [`npm`](https://www.npmjs.com), searching
    the packages, viewing the versions and making sure the `latest` version
-   matches the version you just released.
+   matches the version you released.
 
-10. After publishing to latest, create a tag for the version you just released
-    and push it to upstream by running:
+10. After publishing to latest, create a tag for the version you released and
+    push it to upstream by running:
 
     ```bash
     git tag -a vX.Y.Z -m "vX.Y.Z"
