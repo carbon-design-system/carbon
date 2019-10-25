@@ -322,6 +322,7 @@
   - [❌animation\_\_loading--spin [mixin]](#animation__loading--spin-mixin)
   - [❌animation\_\_loading--stop [mixin]](#animation__loading--stop-mixin)
   - [❌loading\_\_gap [variable]](#loading__gap-variable)
+  - [❌loading--small\_\_gap [variable]](#loading--small__gap-variable)
   - [❌loading\_\_size [variable]](#loading__size-variable)
 - [modal](#modal)
   - [❌modal [mixin]](#modal-mixin)
@@ -17375,8 +17376,14 @@ File uploader styles
     }
 
     .#{$prefix}--loading {
-      width: $carbon--spacing-06;
-      height: $carbon--spacing-06;
+      width: rem(32px);
+      height: rem(32px);
+      margin-right: -$carbon--spacing-03;
+    }
+
+    .#{$prefix}--inline-loading__animation .#{$prefix}--loading {
+      // Vanilla markup has `.bx--inline-loading__animation` which is used for `margin-right` adjustment
+      margin-right: 0;
     }
 
     .#{$prefix}--file-filename {
@@ -17693,7 +17700,7 @@ Inline loading styles
     }
 
     .#{$prefix}--loading__stroke {
-      stroke-dashoffset: 99;
+      stroke-dashoffset: $loading--small__gap;
     }
   }
 
@@ -17773,6 +17780,7 @@ Inline loading styles
 - **Group**: [inline-loading](#inline-loading)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
+  - [loading--small\_\_gap [variable]](#loading--small__gap-variable)
   - [text-02 [variable]](#text-02-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -18639,6 +18647,10 @@ Loading styles
     stroke-dashoffset: $loading__gap;
   }
 
+  .#{$prefix}--loading--small .#{$prefix}--loading__stroke {
+    stroke-dashoffset: $loading--small__gap;
+  }
+
   .#{$prefix}--loading--stop {
     @include animation__loading--stop;
   }
@@ -18690,6 +18702,7 @@ Loading styles
   - [loading\_\_size [variable]](#loading__size-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
   - [loading\_\_gap [variable]](#loading__gap-variable)
+  - [loading--small\_\_gap [variable]](#loading--small__gap-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [ui-02 [variable]](#ui-02-variable)
 
@@ -18764,6 +18777,23 @@ $loading__gap: 40;
 - **Group**: [loading](#loading)
 - **Type**: `Number`
 - **Used by**:
+  - [loading [mixin]](#loading-mixin)
+
+### ❌loading--small\_\_gap [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$loading--small__gap: 99;
+```
+
+</details>
+
+- **Group**: [loading](#loading)
+- **Type**: `Number`
+- **Used by**:
+  - [inline-loading [mixin]](#inline-loading-mixin)
   - [loading [mixin]](#loading-mixin)
 
 ### ❌loading\_\_size [variable]
