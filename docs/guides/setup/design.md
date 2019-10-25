@@ -1,3 +1,5 @@
+<!-- alex disable color -->
+
 # Design
 
 <!-- prettier-ignore-start -->
@@ -27,7 +29,7 @@
 ## Intro
 
 If you’re a designer looking to contribute, thanks so much for taking the time
-to learn. We really appreciate it! We also want to make it as easy as possible
+to learn. We really appreciate it! We also want to make it as simple as possible
 for you, so if you have any suggestions for improving this guide please let us
 know!
 
