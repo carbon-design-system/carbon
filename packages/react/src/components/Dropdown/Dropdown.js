@@ -177,7 +177,6 @@ export default class Dropdown extends React.Component {
     const ItemToElement = itemToElement;
 
     if (itemToCategory) {
-      const result = [];
       const categoryMap = {};
       items.forEach((item, index) => {
         const category = itemToCategory(item);
@@ -205,25 +204,21 @@ export default class Dropdown extends React.Component {
         );
       });
 
-      for (let category in categoryMap) {
-        result.push(...categoryMap[category]);
-      }
-      return result;
-    } else {
-      return items.map((item, index) => (
-        <ListBox.MenuItem
-          key={itemToString(item)}
-          isActive={selectedItem === item}
-          isHighlighted={highlightedIndex === index || selectedItem === item}
-          {...getItemProps({ item, index })}>
-          {itemToElement ? (
-            <ItemToElement key={itemToString(item)} {...item} />
-          ) : (
-            itemToString(item)
-          )}
-        </ListBox.MenuItem>
-      ));
+      return Object.values(categoryMap).flat();
     }
+    return items.map((item, index) => (
+      <ListBox.MenuItem
+        key={itemToString(item)}
+        isActive={selectedItem === item}
+        isHighlighted={highlightedIndex === index || selectedItem === item}
+        {...getItemProps({ item, index })}>
+        {itemToElement ? (
+          <ItemToElement key={itemToString(item)} {...item} />
+        ) : (
+          itemToString(item)
+        )}
+      </ListBox.MenuItem>
+    ));
   }
 
   render() {
