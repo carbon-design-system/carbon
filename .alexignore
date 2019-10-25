@@ -1,0 +1,2 @@
+# Ignore generated SassDoc files
+**/docs/sass.md
