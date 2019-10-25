@@ -159,7 +159,28 @@ function toHexString(number) {
 
 function convert(value) {
   if (value instanceof types.Boolean || value instanceof types.String) {
-    return value.getValue();
+    const val = value.getValue();
+    /**
+     * strings in node-sass custom functions are automatically unquoted
+     * https://github.com/sass/node-sass/issues/2228
+     *
+     * this issue stems from libsass and may be resolved in libsass 3.7
+     * https://github.com/sass/libsass/pull/2556
+     *
+     * to bypass this we add the quotes to the strings that should have quotes
+     * so that the values match our token values and our tests do not fail
+     */
+    if (
+      {
+        'IBM Plex Mono': true,
+        Menlo: true,
+        'DejaVu Sans Mono': true,
+        'Bitstream Vera Sans Mono': true,
+      }[val]
+    ) {
+      return `'${val}'`;
+    }
+    return val;
   }
 
   if (value instanceof types.Number) {
