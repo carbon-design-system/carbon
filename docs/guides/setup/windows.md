@@ -32,7 +32,7 @@ but can be unexpected.
     - `sudo umount /mnt/c`
     - `sudo mount -t drvfs C: /mnt/c -o metadata`
 12. Change directories into your projects folder
-    `cd /mnt/c/Users/{username}/projects` (Just an example, use whatever you'd
+    `cd /mnt/c/Users/{username}/projects` (Only an example, use whatever you'd
     like)
 13. Clone our repo
     `git clone https://github.com/carbon-design-system/carbon.git`

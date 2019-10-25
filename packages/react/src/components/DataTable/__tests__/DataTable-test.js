@@ -340,6 +340,181 @@ describe('DataTable', () => {
     });
   });
 
+  describe('selection with filtering', () => {
+    let mockProps;
+
+    beforeEach(() => {
+      mockProps = {
+        rows: [
+          {
+            id: 'b',
+            fieldA: 'Field 2:A',
+            fieldB: 'Field 2:B',
+          },
+          {
+            id: 'a',
+            fieldA: 'Field 1:A',
+            fieldB: 'Field 1:B',
+          },
+          {
+            id: 'c',
+            fieldA: 'Field 3:A',
+            fieldB: 'Field 3:B',
+          },
+        ],
+        headers: [
+          {
+            key: 'fieldA',
+            header: 'Field A',
+          },
+          {
+            key: 'fieldB',
+            header: 'Field B',
+          },
+        ],
+        locale: 'en',
+        render: jest.fn(
+          ({
+            rows,
+            headers,
+            getHeaderProps,
+            getSelectionProps,
+            onInputChange,
+          }) => (
+            <TableContainer title="DataTable with selection">
+              <TableToolbar>
+                <TableToolbarContent>
+                  <TableToolbarSearch
+                    persistent
+                    onChange={onInputChange}
+                    id="custom-id"
+                  />
+                  <TableToolbarMenu>
+                    <TableToolbarAction primaryFocus onClick={jest.fn()}>
+                      Action 1
+                    </TableToolbarAction>
+                    <TableToolbarAction onClick={jest.fn()}>
+                      Action 2
+                    </TableToolbarAction>
+                    <TableToolbarAction onClick={jest.fn()}>
+                      Action 3
+                    </TableToolbarAction>
+                  </TableToolbarMenu>
+                  <Button onClick={jest.fn()} small kind="primary">
+                    Add new
+                  </Button>
+                </TableToolbarContent>
+              </TableToolbar>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableSelectAll {...getSelectionProps()} />
+                    {headers.map(header => (
+                      <TableHeader {...getHeaderProps({ header })}>
+                        {header.header}
+                      </TableHeader>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map(row => (
+                    <TableRow key={row.id}>
+                      <TableSelectRow {...getSelectionProps({ row })} />
+                      {row.cells.map(cell => (
+                        <TableCell key={cell.id}>{cell.value}</TableCell>
+                      ))}
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )
+        ),
+      };
+    });
+
+    it('should only select all from filtered items', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+
+      expect(getSelectAll(wrapper).prop('checked')).toBe(false);
+
+      const filterInput = getFilterInput(wrapper);
+
+      filterInput.getDOMNode().value = 'Field 1';
+      filterInput.simulate('change');
+
+      getInputAtIndex({ wrapper, index: 0, inputType: 'checkbox' }).simulate(
+        'click'
+      );
+
+      filterInput.getDOMNode().value = '';
+      filterInput.simulate('change');
+
+      expect(wrapper.find('TableSelectAll').prop('indeterminate')).toBe(true);
+
+      let { selectedRows } = getLastCallFor(mockProps.render)[0];
+      expect(selectedRows.length).toBe(1);
+
+      getSelectAll(wrapper).simulate('click');
+
+      selectedRows = getLastCallFor(mockProps.render)[0].selectedRows;
+      expect(selectedRows.length).toBe(0);
+    });
+
+    it('should only select rows that are not disabled even when filtered', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+
+      const nextRows = [
+        ...mockProps.rows.map(row => ({ ...row })),
+        {
+          id: 'd',
+          fieldA: 'Field 3:A',
+          fieldB: 'Field 3:B',
+          disabled: true,
+        },
+      ];
+
+      wrapper.setProps({ rows: nextRows });
+
+      const filterInput = getFilterInput(wrapper);
+
+      filterInput.getDOMNode().value = 'Field 3';
+      filterInput.simulate('change');
+
+      getSelectAll(wrapper).simulate('click');
+
+      const { selectedRows } = getLastCallFor(mockProps.render)[0];
+      expect(selectedRows.length).toBe(1);
+
+      expect(wrapper.find('TableSelectAll').prop('indeterminate')).toBe(true);
+    });
+
+    it('does not select a row if they are all disabled', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+
+      const nextRows = [
+        ...mockProps.rows.map(row => ({ ...row, disabled: true })),
+      ];
+
+      wrapper.setProps({ rows: nextRows });
+
+      getSelectAll(wrapper).simulate('click');
+
+      expect(wrapper.find('TableSelectAll').prop('indeterminate')).toBe(false);
+      expect(wrapper.find('TableSelectAll').prop('checked')).toBe(false);
+
+      const filterInput = getFilterInput(wrapper);
+
+      filterInput.getDOMNode().value = 'Field 3';
+      filterInput.simulate('change');
+
+      getSelectAll(wrapper).simulate('click');
+
+      const { selectedRows } = getLastCallFor(mockProps.render)[0];
+      expect(selectedRows.length).toBe(0);
+    });
+  });
+
   describe('selection -- radio buttons', () => {
     let mockProps;
 
