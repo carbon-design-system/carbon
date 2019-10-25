@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import './styles';
 import './polyfills';
-import './_container.scss';
+import React, { Component } from 'react';
+
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
