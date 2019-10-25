@@ -7,15 +7,46 @@
 
 'use strict';
 
-// This is a custom Jest transformer turning style imports into empty objects.
-// http://facebook.github.io/jest/docs/tutorial-webpack.html
+const { createHash } = require('crypto');
+const fs = require('fs');
+const sass = require('node-sass');
+const path = require('path');
+
+const THIS_FILE = fs.readFileSync(__filename);
 
 module.exports = {
-  process() {
-    return 'module.exports = {};';
+  process(file, filepath) {
+    const result = sass.renderSync({
+      file: filepath,
+      outputStyle: 'compressed',
+    });
+    return `
+      const css = \`${result.css.toString()}\`;
+      let style;
+
+      beforeAll(() => {
+        style = document.createElement('style');
+        style.textContent = css;
+        document.head.appendChild(style);
+      });
+
+      afterAll(() => {
+        document.head.removeChild(style);
+      });
+    `;
   },
-  getCacheKey() {
-    // The output is always the same.
-    return 'cssTransform';
+  getCacheKey(file, filename, configString, { rootDir }) {
+    // Inspired by babel-jest:
+    // https://github.com/facebook/jest/blob/164e2095642420c393236e21dcaeddfdfb507c76/packages/babel-jest/src/index.ts#L80
+    return createHash('md5')
+      .update(THIS_FILE)
+      .update('\0', 'utf8')
+      .update(file)
+      .update('\0', 'utf8')
+      .update(path.relative(rootDir, filename))
+      .update('\0', 'utf8')
+      .update(configString)
+      .update('\0', 'utf8')
+      .digest('hex');
   },
 };

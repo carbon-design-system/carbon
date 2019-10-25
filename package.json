@@ -179,7 +179,7 @@
     ],
     "transform": {
       "^.+\\.(js|jsx)$": "./tasks/jest/jsTransform.js",
-      "^.+\\.css$": "./tasks/jest/cssTransform.js",
+      "^.+\\.s?css$": "./tasks/jest/cssTransform.js",
       "^(?!.*\\.(js|jsx|css|json)$)": "./tasks/jest/fileTransform.js"
     },
     "testRunner": "jest-circus/runner",
