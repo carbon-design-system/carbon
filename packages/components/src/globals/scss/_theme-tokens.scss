@@ -7,6 +7,7 @@
 
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 @import 'colors';
+@import 'feature-flags';
 @import 'spacing';
 @import './vendor/@carbon/elements/scss/themes/themes';
 
@@ -358,3 +359,41 @@ $tab-underline-disabled: 3px solid $disabled-01 !default;
 /// @access public
 /// @group skeleton
 $skeleton: $skeleton-01 !default; // TODO: Remove this in next major release
+
+// Light UI
+
+// Determine the "light" color for a given token.
+/// @param {String} $token The theme token.
+/// @return {String} The new color value as a hex code or a custom property.
+/// @access public
+/// @group light-ui
+@function get-light-value($token) {
+  $value: map-get($carbon--theme, $token);
+
+  @if $carbon--theme ==
+    $carbon--theme--white or
+    $carbon--theme ==
+    $carbon--theme--g10
+  {
+    $value: darken($value, 8%);
+  }
+
+  @if $carbon--theme ==
+    $carbon--theme--g90 or
+    $carbon--theme ==
+    $carbon--theme--g100
+  {
+    $value: lighten($value, 8%);
+  }
+
+  @if feature-flags-enabled('enable-css-custom-properties') {
+    @return var(--#{$custom-property-prefix}-#{$token}-light, $value);
+  }
+
+  @return $value;
+}
+
+/// @type Color
+/// @access public
+/// @group light-ui
+$hover-ui-light: get-light-value('ui-01');
