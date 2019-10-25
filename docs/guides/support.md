@@ -1,3 +1,5 @@
+<!-- alex disable failures -->
+
 # Carbon core support and maintenance
 
 <!-- prettier-ignore-start -->
@@ -58,7 +60,7 @@ ask them to do so. Typically you'll need at least a good description of the
 problem, a walkthrough of how to recreate the problem and a minimal test case to
 observe the problem happening. That last one can be a real sticking point, but
 there's lots of work to do and many many issues to triage — the onus is on them
-to clearly define the issue their having._
+to define the issue their having._
 
 ### Types of issues
 
@@ -140,7 +142,7 @@ future no label is needed because the issue should be closed)_.
 
 ### Other labels
 
-There are a whole host of labels that can help communicate the nature of an
+There is a large collection of labels that can help communicate the nature of an
 issue at a glance to developers and designers. Here's a few that you might add
 that can be particularly helpful:
 
@@ -165,8 +167,8 @@ can alert specific sub-teams on Carbon:
 
 Using any of these @'s in a comment will send notifications to members of those
 sub-teams. Typically a subject matter expert from that team will then take over.
-You can also just @username anyone Carbon's team if you specifically know
-someone who has experience with a particular component or issue.
+You can also @username anyone Carbon's team if you specifically know someone who
+has experience with a particular component or issue.
 
 ## Pull requests
 
