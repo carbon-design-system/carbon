@@ -14,9 +14,10 @@
     {{#each items}}
     <li
       class="{{@root.prefix}}--tabs__nav-item{{#if selected}} {{@root.prefix}}--tabs__nav-item--selected{{/if}} {{#if disabled}} {{@root.prefix}}--tabs__nav-item--disabled {{/if}}"
-      data-target=".{{panelClass}}" role="presentation">
+      data-target=".{{panelClass}}" role="tab" {{#if selected}} aria-selected="true" {{/if}} {{#if disabled}}
+      aria-disabled="true" {{/if}}>
       <a tabindex="0" id="{{linkId}}" class="{{@root.prefix}}--tabs__nav-link" href="javascript:void(0)" role="tab"
-        aria-controls="{{panelId}}" {{#if selected}} aria-selected="true" {{/if}}>{{label}}</a>
+        aria-controls="{{panelId}}">{{label}}</a>
     </li>
     {{/each}}
   </ul>
