@@ -28,7 +28,8 @@ const props = {
       'The description of the trigger icon for narrow mode (iconDescription in <Tabs>)',
       'show menu options'
     ),
-    onClick: action('onClick'),
+    // Disabling action logger for `<Tabs onClick>` for now given it seems to be significantly slowing down Storybook
+    // onClick: action('onClick'),
     onKeyDown: action('onKeyDown'),
     onSelectionChange: action('onSelectionChange'),
     tabContentClassName: text(
