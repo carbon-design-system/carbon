@@ -364,7 +364,7 @@ $overlay-01: if(
   global-variable-exists('carbon--theme') and
     map-has-key($carbon--theme, 'overlay-01'),
   map-get($carbon--theme, 'overlay-01'),
-  (rgba(22, 22, 22, 0.5))
+  rgba(22, 22, 22, 0.5)
 ) !default;
 
 /// @type Color
