@@ -1,3 +1,5 @@
+<!-- alex disable colors -->
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -46,8 +48,8 @@ affordance enabled.
 
 ### Edge/Internet Explorer
 
-Microsoft's browsers Edge and Internet Explorer obviously have ideal support for
-WHCM applying a users chosen theme wholesale to the web content and allowing
+Microsoft's browsers Edge and Internet Explorer have ideal support for WHCM
+applying a users chosen theme wholesale to the web content and allowing
 developers to target problematic CSS generated graphics or SVGs via their
 extension and set safe fallbacks using CSS system colors.
 
