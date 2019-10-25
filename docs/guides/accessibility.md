@@ -1,3 +1,5 @@
+<!-- alex disable failure -->
+
 # Accessibility
 
 <!-- prettier-ignore-start -->
@@ -73,8 +75,8 @@ positives when testing exclusively on a component. Typically we're not auditing
 a webpage or a website as a whole, but a single component in isolation -- sadly
 this was not DAP's intended purpose and so it throws a lot of false positive
 violations that you'll first need to sift through and ignore if we're going to
-be keeping and recording this audit. If you're just testing while you develop or
-before you push a PR, feel free to just disregard them.
+be keeping and recording this audit. If you're only testing while you develop or
+before you push a PR, feel free to disregard them.
 
 If the component fails or has a violation an issue should be made so that
 someone can fix the problem. Feel free to include in the issue any relevant
@@ -148,12 +150,16 @@ using only your keyboard in the manner described. Integrating this test
 throughout each stage of development will save you the pain of retro-fitting a
 component with the necessary keyboard functionality.
 
-### Screen Magnifier testing🔎
+### Screen magnifier testing🔎
+
+<!-- alex disable his -->
 
 (Credit to Frederick Creemers
 [excellent article](https://dev.to/_bigblind/how-to-make-your-website-accessible-to-people-who-use-a-screen-magnifier)
 talking about his experience as a visually impaired screen magnification user on
 the web.)
+
+<!-- alex enable his -->
 
 A user with a screen magnifier views web content on a component by component
 basis through a 2x, 4x, or 8x (etc) zoomed in box. Two things become very
@@ -205,10 +211,10 @@ consistency's sake we'll use DAP on the
 Head over to the page and hit `cmd-option-c` to open up your dev tools. DAP is
 tucked away inside a drop down menu inside a panel. From the default Elements
 panel hit the >> icon below the X on the far right. You should see `DAP`. Click
-that to fire up DAP for this page.
+that to open up DAP for this page.
 
 _Be Warned: You can only run DAP with internal IBM rulesets if you're connected
-to W3. On an IBM campus this isn't a problem, but if you're abroad fire up the
+to W3. On an IBM campus this isn't a problem, but if you're abroad open the
 Cisco AnyConnect Secure Mobility Client._
 
 Hit the play button and wait for the scan to finish. **We've got violations!**.

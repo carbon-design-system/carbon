@@ -35,6 +35,6 @@ you get back!
 - [ ] Delegate Pull Requests or Issue conversations that you're actively engaged
       in
 
-If you're on the hook for a review, or are actively engaging in an issue, make
+If you're responsible for a review, or are actively engaging in an issue, make
 sure to find an appropriate delegate while you're out so work isn't being
 blocked.
