@@ -21,6 +21,7 @@
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
     "lint": "eslint packages",
+    "lint:docs": "alex 'docs/**/*.md' -q",
     "lint:styles": "stylelint '**/*.{css,scss}' --config ./packages/stylelint-config-elements",
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
@@ -44,6 +45,7 @@
     "@carbon/cli": "10.5.0",
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
+    "alex": "^8.0.0",
     "axe-core": "^3.3.2",
     "babel-jest": "^24.8.0",
     "cross-env": "^5.2.0",
@@ -123,6 +125,7 @@
       "git add"
     ],
     "*.md": [
+      "alex",
       "prettier --write",
       "git add"
     ]
