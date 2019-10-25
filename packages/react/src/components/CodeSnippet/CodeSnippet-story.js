@@ -23,6 +23,7 @@ const props = {
     ),
   }),
   single: () => ({
+    light: boolean('Light variant (light)', false),
     feedback: text('Feedback text (feedback)', 'Feedback Enabled 👍'),
     copyButtonDescription: text(
       'Copy icon description (copyButtonDescription)',
@@ -35,6 +36,7 @@ const props = {
     onClick: action('onClick'),
   }),
   multiline: () => ({
+    light: boolean('Light variant (light)', false),
     feedback: text('Feedback text (feedback)', 'Feedback Enabled 👍'),
     showMoreText: text(
       'Text for "show more" button (showMoreText)',
@@ -48,12 +50,33 @@ const props = {
   }),
 };
 
+const lightPropMessage = (
+  <small style={{ display: 'block', paddingBottom: '1rem' }}>
+    The snippet container should never be the same color as the page background.
+    <br />
+    {'Do not use the '}
+    <CodeSnippet type="inline" light>
+      light
+    </CodeSnippet>
+    {' variant on '}
+    <CodeSnippet type="inline" light>
+      $ui-background
+    </CodeSnippet>
+    {' or '}
+    <CodeSnippet type="inline" light>
+      $ui-02
+    </CodeSnippet>
+    .
+  </small>
+);
+
 storiesOf('CodeSnippet', module)
   .addDecorator(withKnobs)
   .add(
     'inline',
     () => (
-      <div>
+      <div className={props.inline().light ? 'bx--tile' : ''}>
+        {props.inline().light && lightPropMessage}
         <CodeSnippet type="inline" {...props.inline()}>
           {'node -v'}
         </CodeSnippet>
@@ -72,11 +95,14 @@ storiesOf('CodeSnippet', module)
   .add(
     'single line',
     () => (
-      <CodeSnippet type="single" {...props.single()}>
-        {
-          'node -v Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, veritatis voluptate id incidunt molestiae officia possimus, quasi itaque alias, architecto hic, dicta fugit? Debitis delectus quidem explicabo vitae fuga laboriosam!'
-        }
-      </CodeSnippet>
+      <div className={props.single().light ? 'bx--tile' : ''}>
+        {props.single().light && lightPropMessage}
+        <CodeSnippet type="single" {...props.single()}>
+          {
+            'node -v Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, veritatis voluptate id incidunt molestiae officia possimus, quasi itaque alias, architecto hic, dicta fugit? Debitis delectus quidem explicabo vitae fuga laboriosam!'
+          }
+        </CodeSnippet>
+      </div>
     ),
     {
       info: {
@@ -93,7 +119,10 @@ storiesOf('CodeSnippet', module)
     () => {
       const multilineProps = props.multiline();
       return (
-        <div style={{ width: '800px' }}>
+        <div
+          className={multilineProps.light ? 'bx--tile' : ''}
+          style={{ width: '800px' }}>
+          {multilineProps.light && lightPropMessage}
           <CodeSnippet type="multi" {...multilineProps}>
             {`@mixin grid-container {
   width: 100%;
