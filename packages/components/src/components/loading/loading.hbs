@@ -9,8 +9,12 @@
 <div data-loading class="{{@root.prefix}}--loading{{#if small}} {{@root.prefix}}--loading--small{{/if}}">
   <svg class="{{@root.prefix}}--loading__svg" viewBox="-75 -75 150 150">
     <title>Loading</title>
-    {{#if small}}<circle class="{{@root.prefix}}--loading__background" cx="0" cy="0" r="37.5" />{{/if}}
+    {{#if small}}
+    <circle class="{{@root.prefix}}--loading__background" cx="0" cy="0" r="26.8125" />
+    <circle class="{{@root.prefix}}--loading__stroke" cx="0" cy="0" r="26.8125" />
+    {{else}}
     <circle class="{{@root.prefix}}--loading__stroke" cx="0" cy="0" r="37.5" />
+    {{/if}}
   </svg>
 </div>
 {{#if overlay}}</div>{{/if}}
