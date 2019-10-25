@@ -34,7 +34,7 @@ there was no prompt in the GitHub UI for a final review from the
 
 Since `v10.5.0` was recently released, we decided to use the `unpublish` feature
 of `npm` that is valid within 72hours of a release. Running this command
-subsequently unpublished the invalid build of `@carbon/icons-angular` and
+subsequently unpublished the broken build of `@carbon/icons-angular` and
 restored `v10.4.0` as the `latest` package for teams to consume.
 
 **Detection**
@@ -59,6 +59,8 @@ This issue was first reported by @cal-smith
   setting the package to `private` to prevent accidental publishing
 
 **Where we got lucky**
+
+<!-- alex disable period -->
 
 - We were still within the 72 hour time period required by `npm` for their
   `unpublish` feature to work
