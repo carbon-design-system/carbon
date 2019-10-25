@@ -32,6 +32,12 @@
     }
   }
 
+  .#{$prefix}--tabs--fixed {
+    @include carbon--breakpoint(md) {
+      min-height: rem(48px);
+    }
+  }
+
   .#{$prefix}--tabs-trigger {
     display: flex;
     align-items: center;
@@ -191,7 +197,11 @@
 
     @include carbon--breakpoint(md) {
       background-color: transparent;
-      box-shadow: none;
+
+      &,
+      & + .#{$prefix}--tabs__nav-item {
+        box-shadow: none;
+      }
     }
   }
 
@@ -325,7 +335,7 @@
     @include carbon--breakpoint(md) {
       display: flex;
       align-items: center;
-      height: rem(40px);
+      height: rem(48px);
       border-bottom: none;
     }
   }
