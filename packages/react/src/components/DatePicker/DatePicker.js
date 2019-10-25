@@ -338,6 +338,7 @@ export default class DatePicker extends Component {
       // inputField ref might not be set in enzyme tests
       if (this.inputField) {
         this.cal = new flatpickr(this.inputField, {
+          disableMobile: true,
           defaultDate: value,
           appendTo,
           mode: datePickerType,
