@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import 'carbon-components/src/components/accordion/_accordion.scss';
 import { render, cleanup } from '@carbon/test-utils/react';
 import { mount } from 'enzyme';
 import React from 'react';
