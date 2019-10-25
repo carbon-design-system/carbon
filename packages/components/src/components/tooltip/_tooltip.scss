@@ -409,8 +409,8 @@
       // This approach allows the desired focus indicator that goes around the edge of the tooltip
       // and not just the content area. When the __content element is required (v11) this could be
       // cleaned up so that the padding is always on content and not the tooltip.
-      margin: calc(($carbon--spacing-05 * -1) + 2px);
-      padding: calc($carbon--spacing-05 - 2px);
+      margin: calc((#{$carbon--spacing-05} * -1) + 2px);
+      padding: calc(#{$carbon--spacing-05} - 2px);
 
       &:focus {
         outline: 1px solid $ui-background;
