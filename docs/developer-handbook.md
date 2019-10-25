@@ -212,7 +212,7 @@ _Parts of this section are duplicated from
 [Angular's commit conventions](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines)_.
 
 Each commit message consists of a **header**, a **body** and a **footer**. The
-header has a special format that includes a type, a scope and a subject:
+header has a specific format that includes a type, a scope and a subject:
 
 ```git
 <type>(<scope>): <subject>
@@ -259,9 +259,13 @@ The subject contains a succinct description of the change:
 
 ### Body
 
+<!-- alex disable just -->
+
 Just as in the subject, use the imperative, present tense: "change" not
 "changed" nor "changes". The body should include the motivation for the change
 and contrast this with previous behavior.
+
+<!-- alex enable just -->
 
 ### Footer
 
@@ -496,8 +500,8 @@ There are two ways to define markups for components and their variants:
 
 ### Defining markup with no conditional or data interpolations
 
-Defining markup with no conditional or data interpolation is as easy as adding a
-`.hbs` file to the component directory. No `.config.js` file in the component
+To define markup with no conditional or data interpolation you will need to add
+a `.hbs` file to the component directory. No `.config.js` file in the component
 directory is required in this case. One thing to note is that If there is a
 `.hbs` file whose basename is exactly the same as the component name, other
 `.hbs` files has to be in `componentname--variantname.hbs` format.
@@ -596,8 +600,8 @@ compile and update Storybook you can run the following command in the
 yarn gulp watch -s
 ```
 
-This will execute the `watch` command in `gulpfile.js`. As a result, whenever
-you make a change to the project styles it will automatically copy over into the
+This will run the `watch` command in `gulpfile.js`. As a result, whenever you
+make a change to the project styles it will automatically copy over into the
 `scss` folder which Storybook uses in `carbon-components-angular`.
 
 ### Pointing NPM dependency of `carbon-components` right to the source code
@@ -749,7 +753,7 @@ code at that point in time.
 
 #### How do I install a dependency?
 
-When installing a dependency, you can just do `yarn add <dependency-name>` as
+When installing a dependency, you can run `yarn add <dependency-name>` as
 normal. The only difference now is that you also will check in the corresponding
 tarball entry in `.yarn/offline-mirror` as well so that we don't have to fetch
 this dependency from the live registry during Continuous Integration builds.
