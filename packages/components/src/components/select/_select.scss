@@ -234,10 +234,6 @@
     color: $disabled;
     cursor: not-allowed;
 
-    &:hover {
-      background-color: transparent;
-    }
-
     ~ * {
       cursor: not-allowed;
     }
