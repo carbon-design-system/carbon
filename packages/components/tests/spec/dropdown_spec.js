@@ -396,7 +396,7 @@ describe('Dropdown', function() {
         itemNode.textContent = i;
         itemNode.classList.add('bx--dropdown-link');
         if (i === 0) {
-          itemNode.classList.add('bx--dropdown--selected');
+          itemContainerNode.classList.add('bx--dropdown--selected');
         }
 
         itemContainerNode.appendChild(itemNode);
@@ -435,11 +435,11 @@ describe('Dropdown', function() {
       element.setAttribute('data-dropdown-type', 'navigation');
       itemNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(
-        itemNodes[0].classList.contains('bx--dropdown--selected'),
+        itemNodes[0].parentElement.classList.contains('bx--dropdown--selected'),
         'Unselected item'
       ).toBe(false);
       expect(
-        itemNodes[1].classList.contains('bx--dropdown--selected'),
+        itemNodes[1].parentElement.classList.contains('bx--dropdown--selected'),
         'Selected item'
       ).toBe(false);
     });
@@ -459,19 +459,19 @@ describe('Dropdown', function() {
       });
       itemNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(
-        itemNodes[0].classList.contains('bx--dropdown--selected'),
+        itemNodes[0].parentElement.classList.contains('bx--dropdown--selected'),
         'Other item'
       ).toBe(true);
       expect(
-        itemNodes[1].classList.contains('bx--dropdown--selected'),
+        itemNodes[1].parentElement.classList.contains('bx--dropdown--selected'),
         'Clicked item'
       ).toBe(false);
       expect(textNode.textContent).toBe('0');
     });
 
     afterEach(function() {
-      itemNodes[0].classList.add('bx--dropdown--selected');
-      itemNodes[1].classList.remove('bx--dropdown--selected');
+      itemNodes[0].parentElement.classList.add('bx--dropdown--selected');
+      itemNodes[1].parentElement.classList.remove('bx--dropdown--selected');
       textNode.textContent = '0';
       if (!textNode.parentNode) {
         element.appendChild(textNode);
