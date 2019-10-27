@@ -15,6 +15,7 @@ import DatePickerInput from '../DatePickerInput';
 import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
 import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
 import { match, keys } from '../../internal/keyboard';
+import isEqual from 'lodash.isequal';
 
 const { prefix } = settings;
 
@@ -307,7 +308,7 @@ export default class DatePicker extends Component {
   };
 
   UNSAFE_componentWillUpdate(nextProps) {
-    if (nextProps.value !== this.props.value) {
+    if (!isEqual(nextProps.value, this.props.value)) {
       if (this.cal) {
         this.cal.setDate(nextProps.value);
         this.updateClassNames(this.cal);
