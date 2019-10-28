@@ -68,8 +68,6 @@
 
     // Select text renders a little high on Firefox
     @-moz-document url-prefix() {
-      padding-top: rem(4px);
-
       // Removes dotted inner focus
       &:-moz-focusring,
       &::-moz-focus-inner {
@@ -205,10 +203,6 @@
     border-bottom: none;
     padding-left: $carbon--spacing-03;
     padding-right: rem(26px);
-
-    @-moz-document url-prefix() {
-      padding-top: 0;
-    }
 
     &:hover {
       background-color: $hover-ui;
