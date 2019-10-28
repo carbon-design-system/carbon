@@ -52,7 +52,6 @@ $css--helpers: true;
     width: auto;
     min-width: auto;
     height: 100%;
-    background-color: $ui-01;
     padding: 0 2.5rem 0 $spacing-md;
     margin-right: -0.65rem;
     @include carbon--breakpoint('md') {

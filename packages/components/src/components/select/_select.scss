@@ -199,7 +199,7 @@
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input {
-    background-color: transparent;
+    background-color: $field-01;
     color: $text-01;
     border-bottom: none;
     padding-left: $carbon--spacing-03;
