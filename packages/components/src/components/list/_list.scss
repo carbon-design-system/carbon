@@ -59,7 +59,7 @@
   }
 
   .#{$prefix}--list--nested {
-    margin: 0 0 0 $carbon--spacing-07;
+    margin-left: $carbon--spacing-07;
   }
 
   .#{$prefix}--list--unordered > .#{$prefix}--list__item:before,
