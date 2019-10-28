@@ -165,12 +165,12 @@
     height: 3rem;
     vertical-align: top;
     padding: 0;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid $ui-03;
   }
 
   .#{$prefix}--data-table
-    td.#{$prefix}--table-expand[data-previous-value='expanded'] {
-    border-bottom: 1px solid $ui-03;
+    td.#{$prefix}--table-expand[data-previous-value='collapsed'] {
+    border-bottom: 1px solid transparent;
   }
 
   .#{$prefix}--table-expand[data-previous-value='collapsed']
