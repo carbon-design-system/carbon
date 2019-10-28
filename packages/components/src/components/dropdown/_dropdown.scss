@@ -123,6 +123,7 @@
   }
 
   button.#{$prefix}--dropdown-text {
+    color: $text-01;
     // button-reset mixin contradicts with bx--dropdown-text styles
     background: none;
     border: none;
