@@ -29,6 +29,8 @@ the Carbon Design System, notably `10.6.x` and `7.6.x` ranges.
 <!-- Looking back, what ended up being the main reasons why this event occurred?
 -->
 
+<!-- alex disable hooks -->
+
 We targeted `ContentSwitcher` as a good candidate for a React hooks migration.
 Unfortunately, the migration updated parts of the public API in a
 semver-incompatible way causing a breaking change.

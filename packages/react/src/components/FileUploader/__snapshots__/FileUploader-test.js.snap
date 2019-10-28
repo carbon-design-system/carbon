@@ -28,13 +28,13 @@ exports[`Filename renders as expected renders upload status icon as expected 1`]
           className="bx--loading__background"
           cx="0"
           cy="0"
-          r="37.5"
+          r="26.8125"
         />
         <circle
           className="bx--loading__stroke"
           cx="0"
           cy="0"
-          r="37.5"
+          r="26.8125"
         />
       </svg>
     </div>

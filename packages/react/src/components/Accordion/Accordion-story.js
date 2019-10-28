@@ -16,15 +16,12 @@ import {
   AccordionItem,
   AccordionSkeleton,
 } from '../Accordion';
-import Select from '../Select';
-import SelectItem from '../SelectItem';
+import Button from '../Button';
 
 const props = {
   onClick: action('onClick'),
   onHeadingClick: action('onHeadingClick'),
 };
-
-Select.displayName = 'Select';
 
 storiesOf('Accordion', module)
   .addDecorator(withKnobs)
@@ -52,20 +49,7 @@ storiesOf('Accordion', module)
           </p>
         </AccordionItem>
         <AccordionItem title="Section 3 title" {...props}>
-          <Select
-            onChange={action('onChange')}
-            id="select-1"
-            defaultValue="placeholder-item">
-            <SelectItem
-              disabled
-              hidden
-              value="placeholder-item"
-              text="Choose an option"
-            />
-            <SelectItem value="option-1" text="Option 1" />
-            <SelectItem value="option-2" text="Option 2" />
-            <SelectItem value="option-3" text="Option 3" />
-          </Select>
+          <Button>This is a button.</Button>
         </AccordionItem>
         <AccordionItem
           title={
