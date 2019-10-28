@@ -28,21 +28,23 @@
   }
 
   .#{$prefix}--list__item {
+    position: relative;
     font-weight: 400;
     color: $text-01;
     list-style-type: none;
     counter-increment: listitem;
     margin-left: $carbon--spacing-03;
-    padding-left: $carbon--spacing-03;
-    position: relative;
+    padding: $carbon--spacing-01 0 $carbon--spacing-01 $carbon--spacing-03;
+  }
 
-    &:not(:first-of-type) {
-      padding-top: $carbon--spacing-01;
-    }
+  .#{$prefix}--list__item:first-of-type,
+  .#{$prefix}--list--nested > .#{$prefix}--list__item {
+    padding-top: 0;
+  }
 
-    &:not(:last-of-type) {
-      padding-bottom: $carbon--spacing-01;
-    }
+  .#{$prefix}--list__item:last-of-type,
+  .#{$prefix}--list--nested > .#{$prefix}--list__item {
+    padding-bottom: 0;
   }
 
   .#{$prefix}--list__item:before {
@@ -51,8 +53,7 @@
   }
 
   .#{$prefix}--list--nested {
-    margin-bottom: rem(4px);
-    margin-left: $carbon--spacing-07;
+    margin: $carbon--spacing-01 0 $carbon--spacing-01 $carbon--spacing-07;
   }
 
   .#{$prefix}--list--unordered > .#{$prefix}--list__item:before,
