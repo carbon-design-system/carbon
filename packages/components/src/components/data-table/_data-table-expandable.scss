@@ -109,7 +109,7 @@
   // hovering on collapsed parent
   tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row):first-of-type:hover
     td {
-    border-top: 1px solid $ui-03;
+    border-top: 1px solid transparent;
     border-bottom: 1px solid $ui-03;
   }
 
@@ -122,7 +122,7 @@
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
-    border-bottom: 1px solid $ui-03; // first td
+    border-bottom: 1px solid transparent; // first td doesn't have a visible border
   }
 
   // child row when hovering on expanded parent
@@ -153,7 +153,7 @@
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td:first-of-type {
-    border-bottom: 1px solid $ui-03; // first parent td
+    border-bottom: 1px solid transparent; // first parent td doesnt have visible bottom border
   }
 
   //----------------------------------------------------------------------------
@@ -165,7 +165,7 @@
     height: 3rem;
     vertical-align: top;
     padding: 0;
-    border-bottom: 1px solid $ui-03;
+    border-bottom: 1px solid transparent;
   }
 
   .#{$prefix}--table-expand[data-previous-value='collapsed']
