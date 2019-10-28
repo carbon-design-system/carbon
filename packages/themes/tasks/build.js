@@ -400,7 +400,15 @@ function primitive(value) {
     if (value[0] === '#') {
       return t.SassColor(value);
     }
-    return t.SassValue(value);
+    if (
+      value.endsWith('px') ||
+      value.endsWith('em') ||
+      value.endsWith('%') ||
+      value.startsWith('rgb')
+    ) {
+      return t.SassValue(value);
+    }
+    return t.SassValue(`unquote("${value}")`);
   }
   if (typeof value === 'number') {
     return t.SassNumber(value);

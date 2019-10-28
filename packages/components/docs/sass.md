@@ -4937,9 +4937,7 @@ $carbon--theme--white: (
   inverse-support-02: #42be65,
   inverse-support-03: #f1c21b,
   inverse-support-04: #4589ff,
-  overlay-01: (
-    rgba(22, 22, 22, 0.5),
-  ),
+  overlay-01: rgba(22, 22, 22, 0.5),
   danger: #da1e28,
   focus: #0f62fe,
   inverse-focus-ui: #ffffff,
@@ -5012,28 +5010,12 @@ $carbon--theme--white: (
     letter-spacing: 0,
   ),
   code-01: (
-    font-family: (
-      'IBM Plex Mono',
-      'Menlo',
-      'DejaVu Sans Mono',
-      'Bitstream Vera Sans Mono',
-      Courier,
-      monospace,
-    ),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
     letter-spacing: 0.32px,
   ),
   code-02: (
-    font-family: (
-      'IBM Plex Mono',
-      'Menlo',
-      'DejaVu Sans Mono',
-      'Bitstream Vera Sans Mono',
-      Courier,
-      monospace,
-    ),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -5418,9 +5400,7 @@ $carbon--theme--g10: (
   inverse-support-02: #42be65,
   inverse-support-03: #f1c21b,
   inverse-support-04: #4589ff,
-  overlay-01: (
-    rgba(22, 22, 22, 0.5),
-  ),
+  overlay-01: rgba(22, 22, 22, 0.5),
   danger: #da1e28,
   focus: #0f62fe,
   inverse-focus-ui: #ffffff,
@@ -5493,28 +5473,12 @@ $carbon--theme--g10: (
     letter-spacing: 0,
   ),
   code-01: (
-    font-family: (
-      'IBM Plex Mono',
-      'Menlo',
-      'DejaVu Sans Mono',
-      'Bitstream Vera Sans Mono',
-      Courier,
-      monospace,
-    ),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
     letter-spacing: 0.32px,
   ),
   code-02: (
-    font-family: (
-      'IBM Plex Mono',
-      'Menlo',
-      'DejaVu Sans Mono',
-      'Bitstream Vera Sans Mono',
-      Courier,
-      monospace,
-    ),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -5894,9 +5858,7 @@ $carbon--theme--g90: (
   inverse-support-02: #24a148,
   inverse-support-03: #f1c21b,
   inverse-support-04: #0f62fe,
-  overlay-01: (
-    rgba(22, 22, 22, 0.7),
-  ),
+  overlay-01: rgba(22, 22, 22, 0.7),
   danger: #da1e28,
   focus: #ffffff,
   inverse-focus-ui: #0f62fe,
@@ -5969,28 +5931,12 @@ $carbon--theme--g90: (
     letter-spacing: 0,
   ),
   code-01: (
-    font-family: (
-      'IBM Plex Mono',
-      'Menlo',
-      'DejaVu Sans Mono',
-      'Bitstream Vera Sans Mono',
-      Courier,
-      monospace,
-    ),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
     letter-spacing: 0.32px,
   ),
   code-02: (
-    font-family: (
-      'IBM Plex Mono',
-      'Menlo',
-      'DejaVu Sans Mono',
-      'Bitstream Vera Sans Mono',
-      Courier,
-      monospace,
-    ),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -6370,9 +6316,7 @@ $carbon--theme--g100: (
   inverse-support-02: #24a148,
   inverse-support-03: #f1c21b,
   inverse-support-04: #0f62fe,
-  overlay-01: (
-    rgba(22, 22, 22, 0.7),
-  ),
+  overlay-01: rgba(22, 22, 22, 0.7),
   danger: #da1e28,
   focus: #ffffff,
   inverse-focus-ui: #0f62fe,
@@ -6445,28 +6389,12 @@ $carbon--theme--g100: (
     letter-spacing: 0,
   ),
   code-01: (
-    font-family: (
-      'IBM Plex Mono',
-      'Menlo',
-      'DejaVu Sans Mono',
-      'Bitstream Vera Sans Mono',
-      Courier,
-      monospace,
-    ),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
     letter-spacing: 0.32px,
   ),
   code-02: (
-    font-family: (
-      'IBM Plex Mono',
-      'Menlo',
-      'DejaVu Sans Mono',
-      'Bitstream Vera Sans Mono',
-      Courier,
-      monospace,
-    ),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -6846,9 +6774,7 @@ $carbon--theme--v9: (
   inverse-support-02: #8cd211,
   inverse-support-03: #fdd600,
   inverse-support-04: #5aaafa,
-  overlay-01: (
-    rgba(223, 227, 230, 0.5),
-  ),
+  overlay-01: rgba(223, 227, 230, 0.5),
   danger: #da1e28,
   focus: #3d70b2,
   inverse-focus-ui: #3d70b2,
@@ -6872,12 +6798,8 @@ $carbon--theme--v9: (
   disabled-02: #dfe3e6,
   disabled-03: #cdd1d4,
   highlight: #f4f7fb,
-  skeleton-01: (
-    rgba(61, 112, 178, 0.1),
-  ),
-  skeleton-02: (
-    rgba(61, 112, 178, 0.1),
-  ),
+  skeleton-01: rgba(61, 112, 178, 0.1),
+  skeleton-02: rgba(61, 112, 178, 0.1),
   brand-01: #3d70b2,
   brand-02: #5a6872,
   brand-03: #5a6872,
@@ -6925,28 +6847,12 @@ $carbon--theme--v9: (
     letter-spacing: 0,
   ),
   code-01: (
-    font-family: (
-      'IBM Plex Mono',
-      'Menlo',
-      'DejaVu Sans Mono',
-      'Bitstream Vera Sans Mono',
-      Courier,
-      monospace,
-    ),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
     letter-spacing: 0.32px,
   ),
   code-02: (
-    font-family: (
-      'IBM Plex Mono',
-      'Menlo',
-      'DejaVu Sans Mono',
-      'Bitstream Vera Sans Mono',
-      Courier,
-      monospace,
-    ),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -7521,6 +7427,7 @@ $interactive-04: if(
   - [inline-loading [mixin]](#inline-loading-mixin)
   - [loading [mixin]](#loading-mixin)
   - [slider [mixin]](#slider-mixin)
+  - [tabs [mixin]](#tabs-mixin)
 
 ### ✅ui-background [variable]
 
@@ -8450,7 +8357,7 @@ $overlay-01: if(
       'overlay-01'
     ),
   map-get($carbon--theme, 'overlay-01'),
-  (rgba(22, 22, 22, 0.5))
+  rgba(22, 22, 22, 0.5)
 );
 ```
 
@@ -8861,6 +8768,7 @@ $hover-selected-ui: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [tabs [mixin]](#tabs-mixin)
 
 ### ✅inverse-hover-ui [variable]
 
@@ -9060,6 +8968,7 @@ $disabled-02: if(
   - [pagination [mixin]](#pagination-mixin)
   - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -9091,6 +9000,7 @@ $disabled-03: if(
   - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [tabs [mixin]](#tabs-mixin)
 
 ### ✅highlight [variable]
 
@@ -9504,14 +9414,6 @@ $code-01: if(
     ),
   map-get($carbon--theme, 'code-01'),
   (
-    font-family: (
-      'IBM Plex Mono',
-      'Menlo',
-      'DejaVu Sans Mono',
-      'Bitstream Vera Sans Mono',
-      Courier,
-      monospace,
-    ),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
@@ -9540,14 +9442,6 @@ $code-02: if(
     ),
   map-get($carbon--theme, 'code-02'),
   (
-    font-family: (
-      'IBM Plex Mono',
-      'Menlo',
-      'DejaVu Sans Mono',
-      'Bitstream Vera Sans Mono',
-      Courier,
-      monospace,
-    ),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -12385,7 +12279,6 @@ $body-long-02: (
 
 ```scss
 $code-01: (
-  font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(16px),
@@ -12405,7 +12298,6 @@ $code-01: (
 
 ```scss
 $code-02: (
-  font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(20px),
@@ -21996,6 +21888,12 @@ Tabs styles
     }
   }
 
+  .#{$prefix}--tabs--fixed {
+    @include carbon--breakpoint(md) {
+      min-height: rem(48px);
+    }
+  }
+
   .#{$prefix}--tabs-trigger {
     display: flex;
     align-items: center;
@@ -22117,6 +22015,23 @@ Tabs styles
     }
   }
 
+  .#{$prefix}--tabs--fixed .#{$prefix}--tabs__nav-item {
+    @include carbon--breakpoint(md) {
+      background-color: $ui-03;
+
+      & + .#{$prefix}--tabs__nav-item {
+        margin-left: 0;
+        // Draws the border without affecting the inner-content
+        box-shadow: -1px 0 0 0 $ui-04;
+      }
+
+      & + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
+      &.#{$prefix}--tabs__nav-item--selected + .#{$prefix}--tabs__nav-item {
+        box-shadow: none;
+      }
+    }
+  }
+
   .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
     transition: color $duration--fast-01 motion(standard, productive), border-bottom-color
         $duration--fast-01 motion(standard, productive),
@@ -22138,7 +22053,18 @@ Tabs styles
 
     @include carbon--breakpoint(md) {
       background-color: transparent;
-      box-shadow: none;
+
+      &,
+      & + .#{$prefix}--tabs__nav-item {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    @include carbon--breakpoint(md) {
+      background-color: $hover-selected-ui;
     }
   }
 
@@ -22153,6 +22079,23 @@ Tabs styles
 
   .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
     pointer-events: none;
+  }
+
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
+    @include carbon--breakpoint(md) {
+      background-color: $disabled-02;
+    }
+  }
+
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link {
+    @include carbon--breakpoint(md) {
+      color: $disabled-03;
+    }
   }
 
   //-----------------------------
@@ -22175,6 +22118,26 @@ Tabs styles
       .#{$prefix}--tabs__nav-link:active {
         color: $text-01;
         border-bottom: 2px solid $interactive-01;
+      }
+    }
+  }
+
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled),
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item--selected:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    @include carbon--breakpoint(md) {
+      background-color: $ui-01;
+
+      .#{$prefix}--tabs__nav-link {
+        // Draws the border without affecting the inner-content
+        box-shadow: inset 0 2px 0 0 $interactive-04;
+        border-bottom: none;
+      }
+
+      .#{$prefix}--tabs__nav-link:focus,
+      .#{$prefix}--tabs__nav-link:active {
+        box-shadow: none;
       }
     }
   }
@@ -22224,6 +22187,15 @@ Tabs styles
     }
   }
 
+  .#{$prefix}--tabs--fixed a.#{$prefix}--tabs__nav-link {
+    @include carbon--breakpoint(md) {
+      display: flex;
+      align-items: center;
+      height: rem(48px);
+      border-bottom: none;
+    }
+  }
+
   //-----------------------------
   //  Link Hover
   //-----------------------------
@@ -22233,6 +22205,14 @@ Tabs styles
     @include carbon--breakpoint(md) {
       color: $text-01;
       border-bottom: $tab-underline-color-hover;
+    }
+  }
+
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
+    .#{$prefix}--tabs__nav-link {
+    @include carbon--breakpoint(md) {
+      border-bottom: none;
     }
   }
 
@@ -22253,6 +22233,14 @@ Tabs styles
   .#{$prefix}--tabs__nav-item--disabled a.#{$prefix}--tabs__nav-link:active {
     outline: none;
     border-bottom: $tab-underline-disabled;
+  }
+
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link {
+    @include carbon--breakpoint(md) {
+      border-bottom: none;
+    }
   }
 
   //-----------------------------
@@ -22305,7 +22293,11 @@ Tabs styles
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
+  - [interactive-04 [variable]](#interactive-04-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)

@@ -59,7 +59,7 @@ export const bodyLong02 = {
 };
 
 export const code01 = {
-  fontFamily: fontFamilies.mono.split(', '),
+  fontFamily: fontFamilies.mono,
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
   lineHeight: rem(16),
@@ -67,7 +67,7 @@ export const code01 = {
 };
 
 export const code02 = {
-  fontFamily: fontFamilies.mono.split(', '),
+  fontFamily: fontFamilies.mono,
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
   lineHeight: rem(20),
