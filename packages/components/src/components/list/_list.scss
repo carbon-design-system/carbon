@@ -35,6 +35,14 @@
     margin-left: $carbon--spacing-03;
     padding-left: $carbon--spacing-03;
     position: relative;
+
+    &:not(:first-of-type) {
+      padding-top: $carbon--spacing-01;
+    }
+
+    &:not(:last-of-type) {
+      padding-bottom: $carbon--spacing-01;
+    }
   }
 
   .#{$prefix}--list__item:before {
