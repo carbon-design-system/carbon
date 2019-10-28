@@ -122,7 +122,7 @@
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
-    border-bottom: 1px solid $ui-03; // first td doesn't have a visible border
+    border-bottom: 1px solid $hover-ui; // first td doesn't have a visible border
   }
 
   // child row when hovering on expanded parent
