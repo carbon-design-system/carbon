@@ -209,15 +209,12 @@ export default class Dropdown extends React.Component {
     const ItemToElement = itemToElement;
 
     if (itemToCategory) {
+      const result = [];
       const categoryMap = {};
       items.forEach((item, index) => {
         const category = itemToCategory(item);
         if (!categoryMap[category]) {
-          categoryMap[category] = [
-            <ListBox.MenuCategory key={category}>
-              {category}
-            </ListBox.MenuCategory>,
-          ];
+          categoryMap[category] = [];
         }
 
         categoryMap[category].push(
@@ -236,8 +233,16 @@ export default class Dropdown extends React.Component {
         );
       });
 
-      return Object.values(categoryMap).flat();
+      for (let category in categoryMap) {
+        result.push(
+          <ListBox.MenuCategory categoryLabel={category} key={category}>
+            {categoryMap[category]}
+          </ListBox.MenuCategory>
+        );
+      }
+      return result;
     }
+
     return items.map((item, index) => (
       <ListBox.MenuItem
         key={itemToString(item)}

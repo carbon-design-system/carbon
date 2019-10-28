@@ -17,15 +17,16 @@ const { prefix } = settings;
  * name, alongside any classes for any corresponding states, for a generic list
  * box menu category item.
  */
-const ListBoxMenuCategory = ({ children, ...rest }) => {
+const ListBoxMenuCategory = ({ children, categoryLabel, ...rest }) => {
   const className = cx({
     [`${prefix}--list-box__menu-category`]: true,
   });
   return (
     <div className={className} {...rest}>
       <div className={`${prefix}--list-box__menu-category__option`}>
-        {children}
+        {categoryLabel}
       </div>
+      {children}
     </div>
   );
 };
@@ -36,6 +37,10 @@ ListBoxMenuCategory.propTypes = {
    * Menu Item
    */
   children: PropTypes.node,
+  /**
+   * The label for the category
+   */
+  categoryLabel: PropTypes.string,
 };
 
 ListBoxMenuCategory.defaultProps = {};

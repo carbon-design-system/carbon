@@ -432,15 +432,15 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-category {
     @include type-style('body-short-01');
-    height: rem(30px);
+    height: auto;
     color: $text-05;
     user-select: none;
     position: relative;
     transition: background $duration--fast-01 motion(standard, productive);
     cursor: default;
 
-    &:not(:first-child) {
-      margin-top: $carbon--spacing-04;
+    .#{$prefix}--list-box__menu-item:last-child {
+      margin-bottom: $carbon--spacing-04;
     }
   }
 
