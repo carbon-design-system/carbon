@@ -45,11 +45,11 @@
     padding-bottom: 0;
   }
 
-  .bx--list--nested > .#{$prefix}--list__item:first-of-type {
+  .#{$prefix}--list--nested > .#{$prefix}--list__item:first-of-type {
     padding-top: $carbon--spacing-01;
   }
 
-  .bx--list--nested > .#{$prefix}--list__item:last-of-type {
+  .#{$prefix}--list--nested > .#{$prefix}--list__item:last-of-type {
     padding-bottom: $carbon--spacing-01;
   }
 
