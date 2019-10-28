@@ -11,15 +11,19 @@ const TerserPlugin = require('terser-webpack-plugin');
 const rtlcss = require('rtlcss');
 const customProperties = require('postcss-custom-properties');
 
-const useExternalCss =
-  process.env.CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS === 'true';
+const {
+  CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
+  CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS,
+  CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP,
+  CARBON_REACT_USE_CONTROLLED_STATE_WITH_EVENT_LISTENER,
+  CARBON_REACT_STORYBOOK_USE_RTL,
+} = process.env;
 
-const useStyleSourceMap =
-  process.env.CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP === 'true';
-
+const useExternalCss = CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS === 'true';
+const useStyleSourceMap = CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP === 'true';
 const useControlledStateWithEventListener =
-  process.env.CARBON_REACT_USE_CONTROLLED_STATE_WITH_EVENT_LISTENER === 'true';
-const useRtl = process.env.CARBON_REACT_STORYBOOK_USE_RTL === 'true';
+  CARBON_REACT_USE_CONTROLLED_STATE_WITH_EVENT_LISTENER === 'true';
+const useRtl = CARBON_REACT_STORYBOOK_USE_RTL === 'true';
 
 const replaceTable = {
   useControlledStateWithEventListener,
@@ -48,13 +52,40 @@ const styleLoaders = [
   {
     loader: 'sass-loader',
     options: {
-      includePaths: [path.resolve(__dirname, '..', 'node_modules')],
-      data: `
-        $feature-flags: (
-          ui-shell: true,
-          enable-css-custom-properties: true,
-        );
-      `,
+      prependData(loaderContext) {
+        const entrypoint = path.resolve(__dirname, './_container.scss');
+        const flags = `
+          $feature-flags: (
+            ui-shell: true,
+            enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+          );
+        `;
+
+        // If we're attempting to process our entrypoint, we'll just pass in the
+        // feature flags that we want enabled. This entrypoint will bring in
+        // things like the CSS Reset and @font-face declarations that we want to
+        // load only once whereas we don't need these loaded per-component
+        if (loaderContext.resourcePath === entrypoint) {
+          return flags;
+        }
+
+        // For other scss files that we bring in from carbon, we can selectively
+        // turn off flags that we have that emit CSS that has already been
+        // loaded by the entrypoint. We can also disable warnings around feature
+        // flag deviations so that this isn't displayed each time an scss file is
+        // loaded
+        return `
+          ${flags}
+
+          $css--font-face: false;
+          $css--body: false;
+          $css--reset: false;
+          $did-warn-diverged-feature-flags: true;
+        `;
+      },
+      sassOptions: {
+        includePaths: [path.resolve(__dirname, '..', 'node_modules')],
+      },
       sourceMap: useStyleSourceMap,
     },
   },
