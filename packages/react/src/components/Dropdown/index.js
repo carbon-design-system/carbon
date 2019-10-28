@@ -6,4 +6,4 @@
  */
 
 export * from './Dropdown.Skeleton';
-export default from './Dropdown';
+export { default, getA11yStatusMessageFunction } from './Dropdown';

@@ -27,6 +27,38 @@ const defaultItemToString = item => {
 
 const getInstanceId = setupGetInstanceId();
 
+export const getA11yStatusMessageFunction = itemToCategory => {
+  // Copied directly from https://github.com/downshift-js/downshift/blob/v1.31.16/src/utils.js#L190
+  // to allow overwriting of aria-labels when categories are present
+  return ({
+    isOpen,
+    highlightedItem,
+    selectedItem,
+    resultCount,
+    previousResultCount,
+    itemToString,
+  }) => {
+    if (!isOpen) {
+      if (selectedItem) {
+        return itemToString(selectedItem);
+      } else {
+        return '';
+      }
+    }
+    const resultCountChanged = resultCount !== previousResultCount;
+    if (!resultCount) {
+      return 'No results.';
+    } else if (!highlightedItem || resultCountChanged) {
+      return `${resultCount} ${
+        resultCount === 1 ? 'result is' : 'results are'
+      } available, use up and down arrow keys to navigate.`;
+    }
+    return itemToCategory
+      ? `${itemToString(highlightedItem)} (${itemToCategory(highlightedItem)})`
+      : itemToString(highlightedItem);
+  };
+};
+
 export default class Dropdown extends React.Component {
   static propTypes = {
     /**
@@ -288,6 +320,7 @@ export default class Dropdown extends React.Component {
           {...downshiftProps}
           onChange={this.handleOnChange}
           itemToString={itemToString}
+          getA11yStatusMessage={getA11yStatusMessageFunction(itemToCategory)}
           defaultSelectedItem={initialSelectedItem}
           selectedItem={selectedItem}>
           {({

@@ -433,11 +433,15 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__menu-category {
     @include type-style('body-short-01');
     height: rem(30px);
-    color: $text-03;
+    color: $text-05;
     user-select: none;
     position: relative;
     transition: background $duration--fast-01 motion(standard, productive);
     cursor: default;
+
+    &:not(:first-child) {
+      margin-top: $carbon--spacing-04;
+    }
   }
 
   .#{$prefix}--list-box__menu-category__option {
@@ -447,8 +451,7 @@ $list-box-menu-width: rem(300px);
     color: $text-05;
     text-decoration: none;
     font-weight: normal;
-    padding: rem(8px) 0 rem(4px);
-    margin: 0 $carbon--spacing-05;
+    padding: $carbon--spacing-04 $carbon--spacing-05 $carbon--spacing-02;
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
     border-top-color: $ui-03;
