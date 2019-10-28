@@ -156,13 +156,17 @@
       min-width: 100%;
 
       @include breakpoint('42rem') {
-        min-width: 570px;
+        min-width: 720px;
       }
     }
 
     .bx--tabs + div {
       padding: 0 !important;
       margin-top: 2rem;
+    }
+
+    .bx--tabs.bx--tabs--fixed + div {
+      margin-top: 0;
     }
 
     #tab-panel-1,
@@ -178,6 +182,15 @@
 
   .combo-box .bx--form-item:nth-last-of-type(-n + 3) {
     margin-bottom: 10rem;
+  }
+}
+
+.component-example__live,
+.demo--container {
+  .bx--tabs--fixed + div {
+    width: 100%;
+    height: 320px;
+    background-color: $ui-01;
   }
 }
 
