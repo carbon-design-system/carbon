@@ -68,7 +68,6 @@ const Select = React.forwardRef(function Select(
           id={id}
           className={`${prefix}--select-input`}
           disabled={disabled || undefined}
-          data-invalid={invalid || undefined}
           aria-invalid={invalid || undefined}
           ref={ref}>
           {children}
