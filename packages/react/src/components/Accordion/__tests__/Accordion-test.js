@@ -34,6 +34,16 @@ describe('Accordion', () => {
 });
 
 describe('Accordion Item', () => {
+  it('should accept a custom className', () => {
+    const { container } = render(<AccordionItem className="class-test" />);
+    expect(container.firstChild).toHaveClass('class-test');
+  });
+
+  it('should accept custom attributes', () => {
+    const { container } = render(<AccordionItem data-prop="accordion" />);
+    expect(container.firstChild).toHaveAttribute('data-prop');
+  });
+
   it('should render a title', () => {
     const { getByText } = render(
       <Accordion>
