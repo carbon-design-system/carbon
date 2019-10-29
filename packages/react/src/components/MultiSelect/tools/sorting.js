@@ -3,7 +3,42 @@
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
+/*
+ * A utility to find the parent of the given item.
+ *
+ * @param {object} item
+ * @param {Array} items
+ * @returns {object}
  */
+export const findParent = (item, items = []) => {
+  let parent;
+  if (item.parentId) {
+    items.some(theItem => {
+      if (theItem.id === item.parentId) {
+        parent = theItem;
+        return true;
+      }
+      return false;
+    });
+  }
+  return parent;
+};
+
+/**
+ * A utility to build the hierarchy of the given item starting from root.
+ */
+export const buildHierarchy = (item, items = []) => {
+  const hierarchy = [];
+  if (item.parentId) {
+    const parent = findParent(item, items);
+    if (parent) {
+      const parentHierarchy = buildHierarchy(parent, items);
+      hierarchy.push(...parentHierarchy);
+    }
+  }
+  hierarchy.push(item);
+  return hierarchy;
+};
 
 /**
  * Use the local `localCompare` with the `numeric` option to sort two,
@@ -25,22 +60,46 @@ export const defaultCompareItems = (itemA, itemB, { locale }) =>
  */
 export const defaultSortItems = (
   items,
-  { selectedItems = [], itemToString, compareItems, locale = 'en' }
-) =>
-  items.sort((itemA, itemB) => {
-    const hasItemA = selectedItems.includes(itemA);
-    const hasItemB = selectedItems.includes(itemB);
+  { itemToString, compareItems, locale = 'en' }
+) => {
+  const itemArr = [...items];
+  return items.sort((itemA, itemB) => {
+    const hierarchyA = buildHierarchy(itemA, itemArr);
+    const hierarchyB = buildHierarchy(itemB, itemArr);
+    const depth =
+      hierarchyA.length > hierarchyB.length
+        ? hierarchyA.length
+        : hierarchyB.length;
 
-    // Prefer whichever item is in the `selectedItems` array first
-    if (hasItemA && !hasItemB) {
-      return -1;
+    let compareResult = 0;
+
+    for (let i = 0; i < depth; i += 1) {
+      const currentA = hierarchyA[i];
+      const currentB = hierarchyB[i];
+
+      if (currentA && !currentB) {
+        // `currentA` is a child of `currentB`
+        // always place the child after the parent
+        return 1;
+      } else if (!currentA && currentB) {
+        // `currentB` is a child of `currentA`
+        // always place the child after the parent
+        return -1;
+      }
+
+      compareResult = compareItems(
+        itemToString(currentA),
+        itemToString(currentB),
+        {
+          locale,
+        }
+      );
+
+      if (compareResult !== 0) {
+        return compareResult;
+      }
     }
 
-    if (hasItemB && !hasItemA) {
-      return 1;
-    }
-
-    return compareItems(itemToString(itemA), itemToString(itemB), {
-      locale,
-    });
+    return compareResult;
   });
+};

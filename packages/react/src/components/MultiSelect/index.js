@@ -7,7 +7,9 @@
 
 import MultiSelect from './MultiSelect';
 import FilterableMultiSelect from './FilterableMultiSelect';
+import NestedFilterableMultiselect from './NestedFilterableMultiselect';
 
 MultiSelect.Filterable = FilterableMultiSelect;
+MultiSelect.NestedFilterable = NestedFilterableMultiselect;
 
 export default MultiSelect;

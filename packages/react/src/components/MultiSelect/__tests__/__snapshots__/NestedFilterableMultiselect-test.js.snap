@@ -1,0 +1,3478 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NestedFilterableMultiselect Simple multiselect should render 1`] = `
+<NestedFilterableMultiselect
+  compareItems={[Function]}
+  disabled={false}
+  filterItems={[Function]}
+  initialSelectedItems={Array []}
+  itemToString={[Function]}
+  items={
+    Array [
+      Object {
+        "id": "id-0",
+        "label": "Item 0",
+        "value": 0,
+      },
+      Object {
+        "id": "id-1",
+        "label": "Item 1",
+        "value": 1,
+      },
+      Object {
+        "id": "id-2",
+        "label": "Item 2",
+        "value": 2,
+      },
+      Object {
+        "id": "id-3",
+        "label": "Item 3",
+        "value": 3,
+      },
+      Object {
+        "id": "id-4",
+        "label": "Item 4",
+        "value": 4,
+      },
+    ]
+  }
+  light={false}
+  locale="en"
+  onChange={[MockFunction]}
+  placeholder="Placeholder..."
+  showTooltip={true}
+  sortItems={[Function]}
+>
+  <Selection
+    initialSelectedItems={Array []}
+    onChange={[Function]}
+    render={[Function]}
+  >
+    <Downshift
+      breakingChanges={Object {}}
+      defaultHighlightedIndex={null}
+      defaultInputValue=""
+      defaultIsOpen={false}
+      defaultSelectedItem={null}
+      environment={[Window]}
+      getA11yStatusMessage={[Function]}
+      highlightedIndex={null}
+      inputValue=""
+      isOpen={false}
+      itemToString={[Function]}
+      onChange={[Function]}
+      onInputValueChange={[Function]}
+      onOuterClick={[Function]}
+      onSelect={[Function]}
+      onStateChange={[Function]}
+      onUserAction={[Function]}
+      render={[Function]}
+      selectedItem={Array []}
+      selectedItemChanged={[Function]}
+      stateReducer={[Function]}
+    >
+      <ListBox
+        ariaLabel="Choose an item"
+        className="bx--multi-select bx--combo-box"
+        disabled={false}
+        innerRef={[Function]}
+        type="default"
+      >
+        <div
+          aria-label="Choose an item"
+          className="bx--multi-select bx--combo-box bx--list-box"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="listbox"
+        >
+          <ListBoxField
+            aria-expanded={false}
+            aria-haspopup={true}
+            aria-label="open menu"
+            data-toggle={true}
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex="-1"
+            type="button"
+          >
+            <div
+              aria-expanded={false}
+              aria-haspopup={true}
+              aria-label="open menu"
+              className="bx--list-box__field"
+              data-toggle={true}
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+              tabIndex="-1"
+              type="button"
+            >
+              <input
+                aria-activedescendant={null}
+                aria-autocomplete="list"
+                aria-expanded={false}
+                aria-label="Placeholder..."
+                autoComplete="off"
+                className="bx--text-input"
+                disabled={false}
+                id="downshift-0-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                placeholder="Placeholder..."
+                role="combobox"
+                value=""
+              />
+              <ListBoxMenuIcon
+                isOpen={false}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__menu-icon"
+                >
+                  <Icon
+                    alt="Open menu"
+                    description="Open menu"
+                    fillRule="evenodd"
+                    icon={
+                      Object {
+                        "height": "5",
+                        "id": "icon--caret--down",
+                        "name": "icon--caret--down",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M0 0l5 4.998L10 0z",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--caret--down",
+                        "viewBox": "0 0 10 5",
+                        "width": "10",
+                      }
+                    }
+                    name="icon--caret--down"
+                    role="img"
+                  >
+                    <svg
+                      alt="Open menu"
+                      aria-label="Open menu"
+                      fillRule="evenodd"
+                      height="5"
+                      name="icon--caret--down"
+                      role="img"
+                      viewBox="0 0 10 5"
+                      width="10"
+                    >
+                      <title>
+                        Open menu
+                      </title>
+                      <path
+                        d="M0 0l5 4.998L10 0z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxMenuIcon>
+            </div>
+          </ListBoxField>
+        </div>
+      </ListBox>
+    </Downshift>
+  </Selection>
+</NestedFilterableMultiselect>
+`;
+
+exports[`NestedFilterableMultiselect Simple multiselect should render without showing tooltip 1`] = `
+<NestedFilterableMultiselect
+  compareItems={[Function]}
+  disabled={false}
+  filterItems={[Function]}
+  initialSelectedItems={Array []}
+  itemToString={[Function]}
+  items={
+    Array [
+      Object {
+        "id": "id-0",
+        "label": "Item 0",
+        "value": 0,
+      },
+      Object {
+        "id": "id-1",
+        "label": "Item 1",
+        "value": 1,
+      },
+      Object {
+        "id": "id-2",
+        "label": "Item 2",
+        "value": 2,
+      },
+      Object {
+        "id": "id-3",
+        "label": "Item 3",
+        "value": 3,
+      },
+      Object {
+        "id": "id-4",
+        "label": "Item 4",
+        "value": 4,
+      },
+    ]
+  }
+  light={false}
+  locale="en"
+  onChange={[MockFunction]}
+  placeholder="Placeholder..."
+  showTooltip={false}
+  sortItems={[Function]}
+>
+  <Selection
+    initialSelectedItems={Array []}
+    onChange={[Function]}
+    render={[Function]}
+  >
+    <Downshift
+      breakingChanges={Object {}}
+      defaultHighlightedIndex={null}
+      defaultInputValue=""
+      defaultIsOpen={false}
+      defaultSelectedItem={null}
+      environment={[Window]}
+      getA11yStatusMessage={[Function]}
+      highlightedIndex={null}
+      inputValue=""
+      isOpen={false}
+      itemToString={[Function]}
+      onChange={[Function]}
+      onInputValueChange={[Function]}
+      onOuterClick={[Function]}
+      onSelect={[Function]}
+      onStateChange={[Function]}
+      onUserAction={[Function]}
+      render={[Function]}
+      selectedItem={Array []}
+      selectedItemChanged={[Function]}
+      stateReducer={[Function]}
+    >
+      <ListBox
+        ariaLabel="Choose an item"
+        className="bx--multi-select bx--combo-box"
+        disabled={false}
+        innerRef={[Function]}
+        type="default"
+      >
+        <div
+          aria-label="Choose an item"
+          className="bx--multi-select bx--combo-box bx--list-box"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="listbox"
+        >
+          <ListBoxField
+            aria-expanded={false}
+            aria-haspopup={true}
+            aria-label="open menu"
+            data-toggle={true}
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex="-1"
+            type="button"
+          >
+            <div
+              aria-expanded={false}
+              aria-haspopup={true}
+              aria-label="open menu"
+              className="bx--list-box__field"
+              data-toggle={true}
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+              tabIndex="-1"
+              type="button"
+            >
+              <input
+                aria-activedescendant={null}
+                aria-autocomplete="list"
+                aria-expanded={false}
+                aria-label="Placeholder..."
+                autoComplete="off"
+                className="bx--text-input"
+                disabled={false}
+                id="downshift-1-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                placeholder="Placeholder..."
+                role="combobox"
+                value=""
+              />
+              <ListBoxMenuIcon
+                isOpen={false}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__menu-icon"
+                >
+                  <Icon
+                    alt="Open menu"
+                    description="Open menu"
+                    fillRule="evenodd"
+                    icon={
+                      Object {
+                        "height": "5",
+                        "id": "icon--caret--down",
+                        "name": "icon--caret--down",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M0 0l5 4.998L10 0z",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--caret--down",
+                        "viewBox": "0 0 10 5",
+                        "width": "10",
+                      }
+                    }
+                    name="icon--caret--down"
+                    role="img"
+                  >
+                    <svg
+                      alt="Open menu"
+                      aria-label="Open menu"
+                      fillRule="evenodd"
+                      height="5"
+                      name="icon--caret--down"
+                      role="img"
+                      viewBox="0 0 10 5"
+                      width="10"
+                    >
+                      <title>
+                        Open menu
+                      </title>
+                      <path
+                        d="M0 0l5 4.998L10 0z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxMenuIcon>
+            </div>
+          </ListBoxField>
+        </div>
+      </ListBox>
+    </Downshift>
+  </Selection>
+</NestedFilterableMultiselect>
+`;
+
+exports[`NestedFilterableMultiselect multiselect with categories should render 1`] = `
+<NestedFilterableMultiselect
+  compareItems={[Function]}
+  customCategorySorting={[MockFunction]}
+  disabled={false}
+  filterItems={[Function]}
+  initialSelectedItems={Array []}
+  itemToString={[Function]}
+  items={
+    Array [
+      Object {
+        "category": "category-1",
+        "id": "id-0",
+        "label": "Item 0",
+        "value": 0,
+      },
+      Object {
+        "category": "category-2",
+        "id": "id-1",
+        "label": "Item 1",
+        "value": 1,
+      },
+      Object {
+        "category": "category-1",
+        "id": "id-2",
+        "label": "Item 2",
+        "value": 2,
+      },
+      Object {
+        "category": "category-2",
+        "id": "id-3",
+        "label": "Item 3",
+        "value": 3,
+      },
+      Object {
+        "category": "category-1",
+        "id": "id-4",
+        "label": "Item 4",
+        "value": 4,
+      },
+    ]
+  }
+  light={false}
+  locale="en"
+  onChange={[MockFunction]}
+  placeholder="Placeholder..."
+  showTooltip={true}
+  sortItems={[Function]}
+>
+  <Selection
+    initialSelectedItems={Array []}
+    onChange={[Function]}
+    render={[Function]}
+  >
+    <Downshift
+      breakingChanges={Object {}}
+      defaultHighlightedIndex={null}
+      defaultInputValue=""
+      defaultIsOpen={false}
+      defaultSelectedItem={null}
+      environment={[Window]}
+      getA11yStatusMessage={[Function]}
+      highlightedIndex={null}
+      inputValue=""
+      isOpen={false}
+      itemToString={[Function]}
+      onChange={[Function]}
+      onInputValueChange={[Function]}
+      onOuterClick={[Function]}
+      onSelect={[Function]}
+      onStateChange={[Function]}
+      onUserAction={[Function]}
+      render={[Function]}
+      selectedItem={Array []}
+      selectedItemChanged={[Function]}
+      stateReducer={[Function]}
+    >
+      <ListBox
+        ariaLabel="Choose an item"
+        className="bx--multi-select bx--combo-box"
+        disabled={false}
+        innerRef={[Function]}
+        type="default"
+      >
+        <div
+          aria-label="Choose an item"
+          className="bx--multi-select bx--combo-box bx--list-box"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="listbox"
+        >
+          <ListBoxField
+            aria-expanded={false}
+            aria-haspopup={true}
+            aria-label="open menu"
+            data-toggle={true}
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex="-1"
+            type="button"
+          >
+            <div
+              aria-expanded={false}
+              aria-haspopup={true}
+              aria-label="open menu"
+              className="bx--list-box__field"
+              data-toggle={true}
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+              tabIndex="-1"
+              type="button"
+            >
+              <input
+                aria-activedescendant={null}
+                aria-autocomplete="list"
+                aria-expanded={false}
+                aria-label="Placeholder..."
+                autoComplete="off"
+                className="bx--text-input"
+                disabled={false}
+                id="downshift-9-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                placeholder="Placeholder..."
+                role="combobox"
+                value=""
+              />
+              <ListBoxMenuIcon
+                isOpen={false}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__menu-icon"
+                >
+                  <Icon
+                    alt="Open menu"
+                    description="Open menu"
+                    fillRule="evenodd"
+                    icon={
+                      Object {
+                        "height": "5",
+                        "id": "icon--caret--down",
+                        "name": "icon--caret--down",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M0 0l5 4.998L10 0z",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--caret--down",
+                        "viewBox": "0 0 10 5",
+                        "width": "10",
+                      }
+                    }
+                    name="icon--caret--down"
+                    role="img"
+                  >
+                    <svg
+                      alt="Open menu"
+                      aria-label="Open menu"
+                      fillRule="evenodd"
+                      height="5"
+                      name="icon--caret--down"
+                      role="img"
+                      viewBox="0 0 10 5"
+                      width="10"
+                    >
+                      <title>
+                        Open menu
+                      </title>
+                      <path
+                        d="M0 0l5 4.998L10 0z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxMenuIcon>
+            </div>
+          </ListBoxField>
+        </div>
+      </ListBox>
+    </Downshift>
+  </Selection>
+</NestedFilterableMultiselect>
+`;
+
+exports[`NestedFilterableMultiselect multiselect with flat list preselect item at level 0 1`] = `
+<NestedFilterableMultiselect
+  compareItems={[Function]}
+  disabled={false}
+  filterItems={[Function]}
+  initialSelectedItems={
+    Array [
+      Object {
+        "category": "category-0",
+        "hasChildren": true,
+        "id": "id-0",
+        "label": "Flat item 1",
+        "level": 0,
+        "value": 0,
+      },
+      Object {
+        "category": "category-1",
+        "hasChildren": true,
+        "id": "id-6",
+        "label": "Flat item 6",
+        "level": 0,
+        "value": 6,
+      },
+    ]
+  }
+  itemToString={[Function]}
+  items={
+    Array [
+      Object {
+        "category": "category-0",
+        "hasChildren": true,
+        "id": "id-0",
+        "label": "Flat item 1",
+        "level": 0,
+        "value": 0,
+      },
+      Object {
+        "category": "category-0",
+        "hasChildren": true,
+        "id": "id-1",
+        "label": "Child item 1",
+        "level": 1,
+        "parentId": "id-0",
+        "value": 1,
+      },
+      Object {
+        "category": "category-0",
+        "id": "id-2",
+        "label": "Subchild item 2",
+        "level": 2,
+        "parentId": "id-1",
+        "value": 2,
+      },
+      Object {
+        "category": "category-0",
+        "id": "id-3",
+        "label": "Subchild item 3",
+        "level": 2,
+        "parentId": "id-1",
+        "value": 3,
+      },
+      Object {
+        "category": "category-0",
+        "id": "id-4",
+        "label": "Child item 4",
+        "level": 1,
+        "parentId": "id-0",
+        "value": 4,
+      },
+      Object {
+        "category": "category-0",
+        "id": "id-5",
+        "label": "Flat item 5",
+        "level": 0,
+        "value": 5,
+      },
+      Object {
+        "category": "category-1",
+        "hasChildren": true,
+        "id": "id-6",
+        "label": "Flat item 6",
+        "level": 0,
+        "value": 6,
+      },
+      Object {
+        "category": "category-1",
+        "id": "id-7",
+        "label": "Child item 7",
+        "level": 1,
+        "parentId": "id-6",
+        "value": 7,
+      },
+      Object {
+        "category": "category-1",
+        "id": "id-8",
+        "label": "Child item 8",
+        "level": 1,
+        "parentId": "id-6",
+        "value": 8,
+      },
+    ]
+  }
+  light={false}
+  locale="en"
+  placeholder="Placeholder..."
+  showTooltip={true}
+  sortItems={[Function]}
+>
+  <Selection
+    initialSelectedItems={
+      Array [
+        Object {
+          "category": "category-0",
+          "hasChildren": true,
+          "id": "id-0",
+          "label": "Flat item 1",
+          "level": 0,
+          "value": 0,
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": true,
+          "id": "id-6",
+          "label": "Flat item 6",
+          "level": 0,
+          "value": 6,
+        },
+        Object {
+          "category": "category-0",
+          "hasChildren": true,
+          "id": "id-1",
+          "label": "Child item 1",
+          "level": 1,
+          "parentId": "id-0",
+          "value": 1,
+        },
+        Object {
+          "category": "category-0",
+          "id": "id-4",
+          "label": "Child item 4",
+          "level": 1,
+          "parentId": "id-0",
+          "value": 4,
+        },
+        Object {
+          "category": "category-0",
+          "id": "id-2",
+          "label": "Subchild item 2",
+          "level": 2,
+          "parentId": "id-1",
+          "value": 2,
+        },
+        Object {
+          "category": "category-0",
+          "id": "id-3",
+          "label": "Subchild item 3",
+          "level": 2,
+          "parentId": "id-1",
+          "value": 3,
+        },
+        Object {
+          "category": "category-1",
+          "id": "id-7",
+          "label": "Child item 7",
+          "level": 1,
+          "parentId": "id-6",
+          "value": 7,
+        },
+        Object {
+          "category": "category-1",
+          "id": "id-8",
+          "label": "Child item 8",
+          "level": 1,
+          "parentId": "id-6",
+          "value": 8,
+        },
+      ]
+    }
+    onChange={[Function]}
+    render={[Function]}
+  >
+    <Downshift
+      breakingChanges={Object {}}
+      defaultHighlightedIndex={null}
+      defaultInputValue=""
+      defaultIsOpen={false}
+      defaultSelectedItem={null}
+      environment={[Window]}
+      getA11yStatusMessage={[Function]}
+      highlightedIndex={null}
+      inputValue=""
+      isOpen={false}
+      itemToString={[Function]}
+      onChange={[Function]}
+      onInputValueChange={[Function]}
+      onOuterClick={[Function]}
+      onSelect={[Function]}
+      onStateChange={[Function]}
+      onUserAction={[Function]}
+      render={[Function]}
+      selectedItem={
+        Array [
+          Object {
+            "category": "category-0",
+            "hasChildren": true,
+            "id": "id-0",
+            "label": "Flat item 1",
+            "level": 0,
+            "value": 0,
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": true,
+            "id": "id-6",
+            "label": "Flat item 6",
+            "level": 0,
+            "value": 6,
+          },
+          Object {
+            "category": "category-0",
+            "hasChildren": true,
+            "id": "id-1",
+            "label": "Child item 1",
+            "level": 1,
+            "parentId": "id-0",
+            "value": 1,
+          },
+          Object {
+            "category": "category-0",
+            "id": "id-4",
+            "label": "Child item 4",
+            "level": 1,
+            "parentId": "id-0",
+            "value": 4,
+          },
+          Object {
+            "category": "category-0",
+            "id": "id-2",
+            "label": "Subchild item 2",
+            "level": 2,
+            "parentId": "id-1",
+            "value": 2,
+          },
+          Object {
+            "category": "category-0",
+            "id": "id-3",
+            "label": "Subchild item 3",
+            "level": 2,
+            "parentId": "id-1",
+            "value": 3,
+          },
+          Object {
+            "category": "category-1",
+            "id": "id-7",
+            "label": "Child item 7",
+            "level": 1,
+            "parentId": "id-6",
+            "value": 7,
+          },
+          Object {
+            "category": "category-1",
+            "id": "id-8",
+            "label": "Child item 8",
+            "level": 1,
+            "parentId": "id-6",
+            "value": 8,
+          },
+        ]
+      }
+      selectedItemChanged={[Function]}
+      stateReducer={[Function]}
+    >
+      <ListBox
+        ariaLabel="Choose an item"
+        className="bx--multi-select bx--combo-box"
+        disabled={false}
+        innerRef={[Function]}
+        type="default"
+      >
+        <div
+          aria-label="Choose an item"
+          className="bx--multi-select bx--combo-box bx--list-box"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="listbox"
+        >
+          <ListBoxField
+            aria-expanded={false}
+            aria-haspopup={true}
+            aria-label="open menu"
+            data-toggle={true}
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex="-1"
+            type="button"
+          >
+            <div
+              aria-expanded={false}
+              aria-haspopup={true}
+              aria-label="open menu"
+              className="bx--list-box__field"
+              data-toggle={true}
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+              tabIndex="-1"
+              type="button"
+            >
+              <ListBoxSelection
+                clearSelection={[Function]}
+                selectionCount={5}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__selection bx--list-box__selection--multi"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="button"
+                  tabIndex="0"
+                  title="Clear all selected items"
+                >
+                  5
+                  <Icon
+                    description="Clear all selected items"
+                    fillRule="evenodd"
+                    focusable="false"
+                    icon={
+                      Object {
+                        "height": "10",
+                        "id": "icon--close",
+                        "name": "icon--close",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z",
+                              "fill-rule": "nonzero",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--close",
+                        "viewBox": "0 0 10 10",
+                        "width": "10",
+                      }
+                    }
+                    name="icon--close"
+                    role="img"
+                  >
+                    <svg
+                      alt="Clear all selected items"
+                      aria-label="Clear all selected items"
+                      fillRule="evenodd"
+                      focusable="false"
+                      height="10"
+                      name="icon--close"
+                      role="img"
+                      viewBox="0 0 10 10"
+                      width="10"
+                    >
+                      <title>
+                        Clear all selected items
+                      </title>
+                      <path
+                        d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxSelection>
+              <input
+                aria-activedescendant={null}
+                aria-autocomplete="list"
+                aria-expanded={false}
+                aria-label="Placeholder..."
+                autoComplete="off"
+                className="bx--text-input"
+                disabled={false}
+                id="downshift-31-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                placeholder="Placeholder..."
+                role="combobox"
+                value=""
+              />
+              <ListBoxMenuIcon
+                isOpen={false}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__menu-icon"
+                >
+                  <Icon
+                    alt="Open menu"
+                    description="Open menu"
+                    fillRule="evenodd"
+                    icon={
+                      Object {
+                        "height": "5",
+                        "id": "icon--caret--down",
+                        "name": "icon--caret--down",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M0 0l5 4.998L10 0z",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--caret--down",
+                        "viewBox": "0 0 10 5",
+                        "width": "10",
+                      }
+                    }
+                    name="icon--caret--down"
+                    role="img"
+                  >
+                    <svg
+                      alt="Open menu"
+                      aria-label="Open menu"
+                      fillRule="evenodd"
+                      height="5"
+                      name="icon--caret--down"
+                      role="img"
+                      viewBox="0 0 10 5"
+                      width="10"
+                    >
+                      <title>
+                        Open menu
+                      </title>
+                      <path
+                        d="M0 0l5 4.998L10 0z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxMenuIcon>
+            </div>
+          </ListBoxField>
+        </div>
+      </ListBox>
+    </Downshift>
+  </Selection>
+</NestedFilterableMultiselect>
+`;
+
+exports[`NestedFilterableMultiselect multiselect with flat list preselect item at level 1 1`] = `
+<NestedFilterableMultiselect
+  compareItems={[Function]}
+  disabled={false}
+  filterItems={[Function]}
+  initialSelectedItems={
+    Array [
+      Object {
+        "category": "category-0",
+        "hasChildren": true,
+        "id": "id-1",
+        "label": "Child item 1",
+        "level": 1,
+        "parentId": "id-0",
+        "value": 1,
+      },
+      Object {
+        "category": "category-0",
+        "id": "id-5",
+        "label": "Flat item 5",
+        "level": 0,
+        "value": 5,
+      },
+      Object {
+        "category": "category-1",
+        "id": "id-7",
+        "label": "Child item 7",
+        "level": 1,
+        "parentId": "id-6",
+        "value": 7,
+      },
+    ]
+  }
+  itemToString={[Function]}
+  items={
+    Array [
+      Object {
+        "category": "category-0",
+        "hasChildren": true,
+        "id": "id-0",
+        "label": "Flat item 1",
+        "level": 0,
+        "value": 0,
+      },
+      Object {
+        "category": "category-0",
+        "hasChildren": true,
+        "id": "id-1",
+        "label": "Child item 1",
+        "level": 1,
+        "parentId": "id-0",
+        "value": 1,
+      },
+      Object {
+        "category": "category-0",
+        "id": "id-2",
+        "label": "Subchild item 2",
+        "level": 2,
+        "parentId": "id-1",
+        "value": 2,
+      },
+      Object {
+        "category": "category-0",
+        "id": "id-3",
+        "label": "Subchild item 3",
+        "level": 2,
+        "parentId": "id-1",
+        "value": 3,
+      },
+      Object {
+        "category": "category-0",
+        "id": "id-4",
+        "label": "Child item 4",
+        "level": 1,
+        "parentId": "id-0",
+        "value": 4,
+      },
+      Object {
+        "category": "category-0",
+        "id": "id-5",
+        "label": "Flat item 5",
+        "level": 0,
+        "value": 5,
+      },
+      Object {
+        "category": "category-1",
+        "hasChildren": true,
+        "id": "id-6",
+        "label": "Flat item 6",
+        "level": 0,
+        "value": 6,
+      },
+      Object {
+        "category": "category-1",
+        "id": "id-7",
+        "label": "Child item 7",
+        "level": 1,
+        "parentId": "id-6",
+        "value": 7,
+      },
+      Object {
+        "category": "category-1",
+        "id": "id-8",
+        "label": "Child item 8",
+        "level": 1,
+        "parentId": "id-6",
+        "value": 8,
+      },
+    ]
+  }
+  light={false}
+  locale="en"
+  placeholder="Placeholder..."
+  showTooltip={true}
+  sortItems={[Function]}
+>
+  <Selection
+    initialSelectedItems={
+      Array [
+        Object {
+          "category": "category-0",
+          "hasChildren": true,
+          "id": "id-1",
+          "label": "Child item 1",
+          "level": 1,
+          "parentId": "id-0",
+          "value": 1,
+        },
+        Object {
+          "category": "category-0",
+          "id": "id-5",
+          "label": "Flat item 5",
+          "level": 0,
+          "value": 5,
+        },
+        Object {
+          "category": "category-1",
+          "id": "id-7",
+          "label": "Child item 7",
+          "level": 1,
+          "parentId": "id-6",
+          "value": 7,
+        },
+        Object {
+          "category": "category-0",
+          "hasChildren": true,
+          "id": "id-0",
+          "label": "Flat item 1",
+          "level": 0,
+          "value": 0,
+        },
+        Object {
+          "category": "category-0",
+          "id": "id-2",
+          "label": "Subchild item 2",
+          "level": 2,
+          "parentId": "id-1",
+          "value": 2,
+        },
+        Object {
+          "category": "category-0",
+          "id": "id-3",
+          "label": "Subchild item 3",
+          "level": 2,
+          "parentId": "id-1",
+          "value": 3,
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": true,
+          "id": "id-6",
+          "label": "Flat item 6",
+          "level": 0,
+          "value": 6,
+        },
+      ]
+    }
+    onChange={[Function]}
+    render={[Function]}
+  >
+    <Downshift
+      breakingChanges={Object {}}
+      defaultHighlightedIndex={null}
+      defaultInputValue=""
+      defaultIsOpen={false}
+      defaultSelectedItem={null}
+      environment={[Window]}
+      getA11yStatusMessage={[Function]}
+      highlightedIndex={null}
+      inputValue=""
+      isOpen={false}
+      itemToString={[Function]}
+      onChange={[Function]}
+      onInputValueChange={[Function]}
+      onOuterClick={[Function]}
+      onSelect={[Function]}
+      onStateChange={[Function]}
+      onUserAction={[Function]}
+      render={[Function]}
+      selectedItem={
+        Array [
+          Object {
+            "category": "category-0",
+            "hasChildren": true,
+            "id": "id-1",
+            "label": "Child item 1",
+            "level": 1,
+            "parentId": "id-0",
+            "value": 1,
+          },
+          Object {
+            "category": "category-0",
+            "id": "id-5",
+            "label": "Flat item 5",
+            "level": 0,
+            "value": 5,
+          },
+          Object {
+            "category": "category-1",
+            "id": "id-7",
+            "label": "Child item 7",
+            "level": 1,
+            "parentId": "id-6",
+            "value": 7,
+          },
+          Object {
+            "category": "category-0",
+            "hasChildren": true,
+            "id": "id-0",
+            "label": "Flat item 1",
+            "level": 0,
+            "value": 0,
+          },
+          Object {
+            "category": "category-0",
+            "id": "id-2",
+            "label": "Subchild item 2",
+            "level": 2,
+            "parentId": "id-1",
+            "value": 2,
+          },
+          Object {
+            "category": "category-0",
+            "id": "id-3",
+            "label": "Subchild item 3",
+            "level": 2,
+            "parentId": "id-1",
+            "value": 3,
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": true,
+            "id": "id-6",
+            "label": "Flat item 6",
+            "level": 0,
+            "value": 6,
+          },
+        ]
+      }
+      selectedItemChanged={[Function]}
+      stateReducer={[Function]}
+    >
+      <ListBox
+        ariaLabel="Choose an item"
+        className="bx--multi-select bx--combo-box"
+        disabled={false}
+        innerRef={[Function]}
+        type="default"
+      >
+        <div
+          aria-label="Choose an item"
+          className="bx--multi-select bx--combo-box bx--list-box"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="listbox"
+        >
+          <ListBoxField
+            aria-expanded={false}
+            aria-haspopup={true}
+            aria-label="open menu"
+            data-toggle={true}
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex="-1"
+            type="button"
+          >
+            <div
+              aria-expanded={false}
+              aria-haspopup={true}
+              aria-label="open menu"
+              className="bx--list-box__field"
+              data-toggle={true}
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+              tabIndex="-1"
+              type="button"
+            >
+              <ListBoxSelection
+                clearSelection={[Function]}
+                selectionCount={4}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__selection bx--list-box__selection--multi"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="button"
+                  tabIndex="0"
+                  title="Clear all selected items"
+                >
+                  4
+                  <Icon
+                    description="Clear all selected items"
+                    fillRule="evenodd"
+                    focusable="false"
+                    icon={
+                      Object {
+                        "height": "10",
+                        "id": "icon--close",
+                        "name": "icon--close",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z",
+                              "fill-rule": "nonzero",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--close",
+                        "viewBox": "0 0 10 10",
+                        "width": "10",
+                      }
+                    }
+                    name="icon--close"
+                    role="img"
+                  >
+                    <svg
+                      alt="Clear all selected items"
+                      aria-label="Clear all selected items"
+                      fillRule="evenodd"
+                      focusable="false"
+                      height="10"
+                      name="icon--close"
+                      role="img"
+                      viewBox="0 0 10 10"
+                      width="10"
+                    >
+                      <title>
+                        Clear all selected items
+                      </title>
+                      <path
+                        d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxSelection>
+              <input
+                aria-activedescendant={null}
+                aria-autocomplete="list"
+                aria-expanded={false}
+                aria-label="Placeholder..."
+                autoComplete="off"
+                className="bx--text-input"
+                disabled={false}
+                id="downshift-32-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                placeholder="Placeholder..."
+                role="combobox"
+                value=""
+              />
+              <ListBoxMenuIcon
+                isOpen={false}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__menu-icon"
+                >
+                  <Icon
+                    alt="Open menu"
+                    description="Open menu"
+                    fillRule="evenodd"
+                    icon={
+                      Object {
+                        "height": "5",
+                        "id": "icon--caret--down",
+                        "name": "icon--caret--down",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M0 0l5 4.998L10 0z",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--caret--down",
+                        "viewBox": "0 0 10 5",
+                        "width": "10",
+                      }
+                    }
+                    name="icon--caret--down"
+                    role="img"
+                  >
+                    <svg
+                      alt="Open menu"
+                      aria-label="Open menu"
+                      fillRule="evenodd"
+                      height="5"
+                      name="icon--caret--down"
+                      role="img"
+                      viewBox="0 0 10 5"
+                      width="10"
+                    >
+                      <title>
+                        Open menu
+                      </title>
+                      <path
+                        d="M0 0l5 4.998L10 0z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxMenuIcon>
+            </div>
+          </ListBoxField>
+        </div>
+      </ListBox>
+    </Downshift>
+  </Selection>
+</NestedFilterableMultiselect>
+`;
+
+exports[`NestedFilterableMultiselect multiselect with flat list preselect item at level 2 1`] = `
+<NestedFilterableMultiselect
+  compareItems={[Function]}
+  disabled={false}
+  filterItems={[Function]}
+  initialSelectedItems={
+    Array [
+      Object {
+        "category": "category-0",
+        "id": "id-2",
+        "label": "Subchild item 2",
+        "level": 2,
+        "parentId": "id-1",
+        "value": 2,
+      },
+    ]
+  }
+  itemToString={[Function]}
+  items={
+    Array [
+      Object {
+        "category": "category-0",
+        "hasChildren": true,
+        "id": "id-0",
+        "label": "Flat item 1",
+        "level": 0,
+        "value": 0,
+      },
+      Object {
+        "category": "category-0",
+        "hasChildren": true,
+        "id": "id-1",
+        "label": "Child item 1",
+        "level": 1,
+        "parentId": "id-0",
+        "value": 1,
+      },
+      Object {
+        "category": "category-0",
+        "id": "id-2",
+        "label": "Subchild item 2",
+        "level": 2,
+        "parentId": "id-1",
+        "value": 2,
+      },
+      Object {
+        "category": "category-0",
+        "id": "id-3",
+        "label": "Subchild item 3",
+        "level": 2,
+        "parentId": "id-1",
+        "value": 3,
+      },
+      Object {
+        "category": "category-0",
+        "id": "id-4",
+        "label": "Child item 4",
+        "level": 1,
+        "parentId": "id-0",
+        "value": 4,
+      },
+      Object {
+        "category": "category-0",
+        "id": "id-5",
+        "label": "Flat item 5",
+        "level": 0,
+        "value": 5,
+      },
+      Object {
+        "category": "category-1",
+        "hasChildren": true,
+        "id": "id-6",
+        "label": "Flat item 6",
+        "level": 0,
+        "value": 6,
+      },
+      Object {
+        "category": "category-1",
+        "id": "id-7",
+        "label": "Child item 7",
+        "level": 1,
+        "parentId": "id-6",
+        "value": 7,
+      },
+      Object {
+        "category": "category-1",
+        "id": "id-8",
+        "label": "Child item 8",
+        "level": 1,
+        "parentId": "id-6",
+        "value": 8,
+      },
+    ]
+  }
+  light={false}
+  locale="en"
+  placeholder="Placeholder..."
+  showTooltip={true}
+  sortItems={[Function]}
+>
+  <Selection
+    initialSelectedItems={
+      Array [
+        Object {
+          "category": "category-0",
+          "id": "id-2",
+          "label": "Subchild item 2",
+          "level": 2,
+          "parentId": "id-1",
+          "value": 2,
+        },
+        Object {
+          "category": "category-0",
+          "hasChildren": true,
+          "id": "id-0",
+          "label": "Flat item 1",
+          "level": 0,
+          "value": 0,
+        },
+        Object {
+          "category": "category-0",
+          "hasChildren": true,
+          "id": "id-1",
+          "label": "Child item 1",
+          "level": 1,
+          "parentId": "id-0",
+          "value": 1,
+        },
+      ]
+    }
+    onChange={[Function]}
+    render={[Function]}
+  >
+    <Downshift
+      breakingChanges={Object {}}
+      defaultHighlightedIndex={null}
+      defaultInputValue=""
+      defaultIsOpen={false}
+      defaultSelectedItem={null}
+      environment={[Window]}
+      getA11yStatusMessage={[Function]}
+      highlightedIndex={null}
+      inputValue=""
+      isOpen={false}
+      itemToString={[Function]}
+      onChange={[Function]}
+      onInputValueChange={[Function]}
+      onOuterClick={[Function]}
+      onSelect={[Function]}
+      onStateChange={[Function]}
+      onUserAction={[Function]}
+      render={[Function]}
+      selectedItem={
+        Array [
+          Object {
+            "category": "category-0",
+            "id": "id-2",
+            "label": "Subchild item 2",
+            "level": 2,
+            "parentId": "id-1",
+            "value": 2,
+          },
+          Object {
+            "category": "category-0",
+            "hasChildren": true,
+            "id": "id-0",
+            "label": "Flat item 1",
+            "level": 0,
+            "value": 0,
+          },
+          Object {
+            "category": "category-0",
+            "hasChildren": true,
+            "id": "id-1",
+            "label": "Child item 1",
+            "level": 1,
+            "parentId": "id-0",
+            "value": 1,
+          },
+        ]
+      }
+      selectedItemChanged={[Function]}
+      stateReducer={[Function]}
+    >
+      <ListBox
+        ariaLabel="Choose an item"
+        className="bx--multi-select bx--combo-box"
+        disabled={false}
+        innerRef={[Function]}
+        type="default"
+      >
+        <div
+          aria-label="Choose an item"
+          className="bx--multi-select bx--combo-box bx--list-box"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="listbox"
+        >
+          <ListBoxField
+            aria-expanded={false}
+            aria-haspopup={true}
+            aria-label="open menu"
+            data-toggle={true}
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex="-1"
+            type="button"
+          >
+            <div
+              aria-expanded={false}
+              aria-haspopup={true}
+              aria-label="open menu"
+              className="bx--list-box__field"
+              data-toggle={true}
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+              tabIndex="-1"
+              type="button"
+            >
+              <ListBoxSelection
+                clearSelection={[Function]}
+                selectionCount={1}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__selection bx--list-box__selection--multi"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="button"
+                  tabIndex="0"
+                  title="Clear all selected items"
+                >
+                  1
+                  <Icon
+                    description="Clear all selected items"
+                    fillRule="evenodd"
+                    focusable="false"
+                    icon={
+                      Object {
+                        "height": "10",
+                        "id": "icon--close",
+                        "name": "icon--close",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z",
+                              "fill-rule": "nonzero",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--close",
+                        "viewBox": "0 0 10 10",
+                        "width": "10",
+                      }
+                    }
+                    name="icon--close"
+                    role="img"
+                  >
+                    <svg
+                      alt="Clear all selected items"
+                      aria-label="Clear all selected items"
+                      fillRule="evenodd"
+                      focusable="false"
+                      height="10"
+                      name="icon--close"
+                      role="img"
+                      viewBox="0 0 10 10"
+                      width="10"
+                    >
+                      <title>
+                        Clear all selected items
+                      </title>
+                      <path
+                        d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxSelection>
+              <input
+                aria-activedescendant={null}
+                aria-autocomplete="list"
+                aria-expanded={false}
+                aria-label="Placeholder..."
+                autoComplete="off"
+                className="bx--text-input"
+                disabled={false}
+                id="downshift-33-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                placeholder="Placeholder..."
+                role="combobox"
+                value=""
+              />
+              <ListBoxMenuIcon
+                isOpen={false}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__menu-icon"
+                >
+                  <Icon
+                    alt="Open menu"
+                    description="Open menu"
+                    fillRule="evenodd"
+                    icon={
+                      Object {
+                        "height": "5",
+                        "id": "icon--caret--down",
+                        "name": "icon--caret--down",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M0 0l5 4.998L10 0z",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--caret--down",
+                        "viewBox": "0 0 10 5",
+                        "width": "10",
+                      }
+                    }
+                    name="icon--caret--down"
+                    role="img"
+                  >
+                    <svg
+                      alt="Open menu"
+                      aria-label="Open menu"
+                      fillRule="evenodd"
+                      height="5"
+                      name="icon--caret--down"
+                      role="img"
+                      viewBox="0 0 10 5"
+                      width="10"
+                    >
+                      <title>
+                        Open menu
+                      </title>
+                      <path
+                        d="M0 0l5 4.998L10 0z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxMenuIcon>
+            </div>
+          </ListBoxField>
+        </div>
+      </ListBox>
+    </Downshift>
+  </Selection>
+</NestedFilterableMultiselect>
+`;
+
+exports[`NestedFilterableMultiselect multiselect with initial selections preselect item at level 0 1`] = `
+<NestedFilterableMultiselect
+  compareItems={[Function]}
+  disabled={false}
+  filterItems={[Function]}
+  initialSelectedItems={
+    Array [
+      Object {
+        "category": "category-1",
+        "id": "id-0",
+        "label": "Nested item 0",
+        "options": Array [
+          Object {
+            "id": "option-id-1",
+            "label": "Sub item 1",
+            "options": Array [
+              Object {
+                "id": "suboption-id-11",
+                "label": "Sub-child item 11",
+              },
+              Object {
+                "id": "suboption-id-12",
+                "label": "Sub-child item 12",
+              },
+            ],
+          },
+          Object {
+            "id": "option-id-2",
+            "label": "Sub item 2",
+            "options": Array [
+              Object {
+                "id": "suboption-id-21",
+                "label": "Sub-child item 21",
+              },
+              Object {
+                "id": "suboption-id-22",
+                "label": "Sub-child item 22",
+              },
+            ],
+          },
+        ],
+        "value": 0,
+      },
+      Object {
+        "category": "category-1",
+        "id": "id-2",
+        "label": "Nested item 2",
+        "options": undefined,
+        "value": 2,
+      },
+    ]
+  }
+  itemToString={[Function]}
+  items={
+    Array [
+      Object {
+        "category": "category-1",
+        "id": "id-0",
+        "label": "Nested item 0",
+        "options": Array [
+          Object {
+            "id": "option-id-1",
+            "label": "Sub item 1",
+            "options": Array [
+              Object {
+                "id": "suboption-id-11",
+                "label": "Sub-child item 11",
+              },
+              Object {
+                "id": "suboption-id-12",
+                "label": "Sub-child item 12",
+              },
+            ],
+          },
+          Object {
+            "id": "option-id-2",
+            "label": "Sub item 2",
+            "options": Array [
+              Object {
+                "id": "suboption-id-21",
+                "label": "Sub-child item 21",
+              },
+              Object {
+                "id": "suboption-id-22",
+                "label": "Sub-child item 22",
+              },
+            ],
+          },
+        ],
+        "value": 0,
+      },
+      Object {
+        "category": "category-2",
+        "id": "id-1",
+        "label": "Nested item 1",
+        "options": undefined,
+        "value": 1,
+      },
+      Object {
+        "category": "category-1",
+        "id": "id-2",
+        "label": "Nested item 2",
+        "options": undefined,
+        "value": 2,
+      },
+    ]
+  }
+  light={false}
+  locale="en"
+  placeholder="Placeholder..."
+  showTooltip={true}
+  sortItems={[Function]}
+>
+  <Selection
+    initialSelectedItems={
+      Array [
+        Object {
+          "category": "category-1",
+          "hasChildren": true,
+          "id": "id-0",
+          "label": "Nested item 0",
+          "level": 0,
+          "parentId": undefined,
+          "value": 0,
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": true,
+          "id": "id-0-option-id-1",
+          "label": "Sub item 1",
+          "level": 1,
+          "parentId": "id-0",
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": false,
+          "id": "id-0-option-id-1-suboption-id-11",
+          "label": "Sub-child item 11",
+          "level": 2,
+          "parentId": "id-0-option-id-1",
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": false,
+          "id": "id-0-option-id-1-suboption-id-12",
+          "label": "Sub-child item 12",
+          "level": 2,
+          "parentId": "id-0-option-id-1",
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": true,
+          "id": "id-0-option-id-2",
+          "label": "Sub item 2",
+          "level": 1,
+          "parentId": "id-0",
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": false,
+          "id": "id-0-option-id-2-suboption-id-21",
+          "label": "Sub-child item 21",
+          "level": 2,
+          "parentId": "id-0-option-id-2",
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": false,
+          "id": "id-0-option-id-2-suboption-id-22",
+          "label": "Sub-child item 22",
+          "level": 2,
+          "parentId": "id-0-option-id-2",
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": false,
+          "id": "id-2",
+          "label": "Nested item 2",
+          "level": 0,
+          "parentId": undefined,
+          "value": 2,
+        },
+      ]
+    }
+    onChange={[Function]}
+    render={[Function]}
+  >
+    <Downshift
+      breakingChanges={Object {}}
+      defaultHighlightedIndex={null}
+      defaultInputValue=""
+      defaultIsOpen={false}
+      defaultSelectedItem={null}
+      environment={[Window]}
+      getA11yStatusMessage={[Function]}
+      highlightedIndex={null}
+      inputValue=""
+      isOpen={false}
+      itemToString={[Function]}
+      onChange={[Function]}
+      onInputValueChange={[Function]}
+      onOuterClick={[Function]}
+      onSelect={[Function]}
+      onStateChange={[Function]}
+      onUserAction={[Function]}
+      render={[Function]}
+      selectedItem={
+        Array [
+          Object {
+            "category": "category-1",
+            "hasChildren": true,
+            "id": "id-0",
+            "label": "Nested item 0",
+            "level": 0,
+            "parentId": undefined,
+            "value": 0,
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": true,
+            "id": "id-0-option-id-1",
+            "label": "Sub item 1",
+            "level": 1,
+            "parentId": "id-0",
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": false,
+            "id": "id-0-option-id-1-suboption-id-11",
+            "label": "Sub-child item 11",
+            "level": 2,
+            "parentId": "id-0-option-id-1",
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": false,
+            "id": "id-0-option-id-1-suboption-id-12",
+            "label": "Sub-child item 12",
+            "level": 2,
+            "parentId": "id-0-option-id-1",
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": true,
+            "id": "id-0-option-id-2",
+            "label": "Sub item 2",
+            "level": 1,
+            "parentId": "id-0",
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": false,
+            "id": "id-0-option-id-2-suboption-id-21",
+            "label": "Sub-child item 21",
+            "level": 2,
+            "parentId": "id-0-option-id-2",
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": false,
+            "id": "id-0-option-id-2-suboption-id-22",
+            "label": "Sub-child item 22",
+            "level": 2,
+            "parentId": "id-0-option-id-2",
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": false,
+            "id": "id-2",
+            "label": "Nested item 2",
+            "level": 0,
+            "parentId": undefined,
+            "value": 2,
+          },
+        ]
+      }
+      selectedItemChanged={[Function]}
+      stateReducer={[Function]}
+    >
+      <ListBox
+        ariaLabel="Choose an item"
+        className="bx--multi-select bx--combo-box"
+        disabled={false}
+        innerRef={[Function]}
+        type="default"
+      >
+        <div
+          aria-label="Choose an item"
+          className="bx--multi-select bx--combo-box bx--list-box"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="listbox"
+        >
+          <ListBoxField
+            aria-expanded={false}
+            aria-haspopup={true}
+            aria-label="open menu"
+            data-toggle={true}
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex="-1"
+            type="button"
+          >
+            <div
+              aria-expanded={false}
+              aria-haspopup={true}
+              aria-label="open menu"
+              className="bx--list-box__field"
+              data-toggle={true}
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+              tabIndex="-1"
+              type="button"
+            >
+              <ListBoxSelection
+                clearSelection={[Function]}
+                selectionCount={5}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__selection bx--list-box__selection--multi"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="button"
+                  tabIndex="0"
+                  title="Clear all selected items"
+                >
+                  5
+                  <Icon
+                    description="Clear all selected items"
+                    fillRule="evenodd"
+                    focusable="false"
+                    icon={
+                      Object {
+                        "height": "10",
+                        "id": "icon--close",
+                        "name": "icon--close",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z",
+                              "fill-rule": "nonzero",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--close",
+                        "viewBox": "0 0 10 10",
+                        "width": "10",
+                      }
+                    }
+                    name="icon--close"
+                    role="img"
+                  >
+                    <svg
+                      alt="Clear all selected items"
+                      aria-label="Clear all selected items"
+                      fillRule="evenodd"
+                      focusable="false"
+                      height="10"
+                      name="icon--close"
+                      role="img"
+                      viewBox="0 0 10 10"
+                      width="10"
+                    >
+                      <title>
+                        Clear all selected items
+                      </title>
+                      <path
+                        d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxSelection>
+              <input
+                aria-activedescendant={null}
+                aria-autocomplete="list"
+                aria-expanded={false}
+                aria-label="Placeholder..."
+                autoComplete="off"
+                className="bx--text-input"
+                disabled={false}
+                id="downshift-28-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                placeholder="Placeholder..."
+                role="combobox"
+                value=""
+              />
+              <ListBoxMenuIcon
+                isOpen={false}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__menu-icon"
+                >
+                  <Icon
+                    alt="Open menu"
+                    description="Open menu"
+                    fillRule="evenodd"
+                    icon={
+                      Object {
+                        "height": "5",
+                        "id": "icon--caret--down",
+                        "name": "icon--caret--down",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M0 0l5 4.998L10 0z",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--caret--down",
+                        "viewBox": "0 0 10 5",
+                        "width": "10",
+                      }
+                    }
+                    name="icon--caret--down"
+                    role="img"
+                  >
+                    <svg
+                      alt="Open menu"
+                      aria-label="Open menu"
+                      fillRule="evenodd"
+                      height="5"
+                      name="icon--caret--down"
+                      role="img"
+                      viewBox="0 0 10 5"
+                      width="10"
+                    >
+                      <title>
+                        Open menu
+                      </title>
+                      <path
+                        d="M0 0l5 4.998L10 0z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxMenuIcon>
+            </div>
+          </ListBoxField>
+        </div>
+      </ListBox>
+    </Downshift>
+  </Selection>
+</NestedFilterableMultiselect>
+`;
+
+exports[`NestedFilterableMultiselect multiselect with initial selections preselect item at level 1 1`] = `
+<NestedFilterableMultiselect
+  compareItems={[Function]}
+  disabled={false}
+  filterItems={[Function]}
+  initialSelectedItems={
+    Array [
+      Object {
+        "category": "category-1",
+        "id": "id-0",
+        "label": "Nested item 0",
+        "options": Array [
+          Object {
+            "checked": true,
+            "id": "option-id-1",
+            "label": "Sub item 1",
+            "options": Array [
+              Object {
+                "id": "suboption-id-11",
+                "label": "Sub-child item 11",
+              },
+              Object {
+                "id": "suboption-id-12",
+                "label": "Sub-child item 12",
+              },
+            ],
+          },
+          Object {
+            "checked": true,
+            "id": "option-id-2",
+            "label": "Sub item 2",
+            "options": Array [
+              Object {
+                "id": "suboption-id-21",
+                "label": "Sub-child item 21",
+              },
+              Object {
+                "id": "suboption-id-22",
+                "label": "Sub-child item 22",
+              },
+            ],
+          },
+        ],
+        "value": 0,
+      },
+    ]
+  }
+  itemToString={[Function]}
+  items={
+    Array [
+      Object {
+        "category": "category-1",
+        "id": "id-0",
+        "label": "Nested item 0",
+        "options": Array [
+          Object {
+            "id": "option-id-1",
+            "label": "Sub item 1",
+            "options": Array [
+              Object {
+                "id": "suboption-id-11",
+                "label": "Sub-child item 11",
+              },
+              Object {
+                "id": "suboption-id-12",
+                "label": "Sub-child item 12",
+              },
+            ],
+          },
+          Object {
+            "id": "option-id-2",
+            "label": "Sub item 2",
+            "options": Array [
+              Object {
+                "id": "suboption-id-21",
+                "label": "Sub-child item 21",
+              },
+              Object {
+                "id": "suboption-id-22",
+                "label": "Sub-child item 22",
+              },
+            ],
+          },
+        ],
+        "value": 0,
+      },
+      Object {
+        "category": "category-2",
+        "id": "id-1",
+        "label": "Nested item 1",
+        "options": undefined,
+        "value": 1,
+      },
+      Object {
+        "category": "category-1",
+        "id": "id-2",
+        "label": "Nested item 2",
+        "options": undefined,
+        "value": 2,
+      },
+    ]
+  }
+  light={false}
+  locale="en"
+  placeholder="Placeholder..."
+  showTooltip={true}
+  sortItems={[Function]}
+>
+  <Selection
+    initialSelectedItems={
+      Array [
+        Object {
+          "category": "category-1",
+          "hasChildren": true,
+          "id": "id-0",
+          "label": "Nested item 0",
+          "level": 0,
+          "parentId": undefined,
+          "value": 0,
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": true,
+          "id": "id-0-option-id-1",
+          "label": "Sub item 1",
+          "level": 1,
+          "parentId": "id-0",
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": false,
+          "id": "id-0-option-id-1-suboption-id-11",
+          "label": "Sub-child item 11",
+          "level": 2,
+          "parentId": "id-0-option-id-1",
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": false,
+          "id": "id-0-option-id-1-suboption-id-12",
+          "label": "Sub-child item 12",
+          "level": 2,
+          "parentId": "id-0-option-id-1",
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": true,
+          "id": "id-0-option-id-2",
+          "label": "Sub item 2",
+          "level": 1,
+          "parentId": "id-0",
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": false,
+          "id": "id-0-option-id-2-suboption-id-21",
+          "label": "Sub-child item 21",
+          "level": 2,
+          "parentId": "id-0-option-id-2",
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": false,
+          "id": "id-0-option-id-2-suboption-id-22",
+          "label": "Sub-child item 22",
+          "level": 2,
+          "parentId": "id-0-option-id-2",
+        },
+      ]
+    }
+    onChange={[Function]}
+    render={[Function]}
+  >
+    <Downshift
+      breakingChanges={Object {}}
+      defaultHighlightedIndex={null}
+      defaultInputValue=""
+      defaultIsOpen={false}
+      defaultSelectedItem={null}
+      environment={[Window]}
+      getA11yStatusMessage={[Function]}
+      highlightedIndex={null}
+      inputValue=""
+      isOpen={false}
+      itemToString={[Function]}
+      onChange={[Function]}
+      onInputValueChange={[Function]}
+      onOuterClick={[Function]}
+      onSelect={[Function]}
+      onStateChange={[Function]}
+      onUserAction={[Function]}
+      render={[Function]}
+      selectedItem={
+        Array [
+          Object {
+            "category": "category-1",
+            "hasChildren": true,
+            "id": "id-0",
+            "label": "Nested item 0",
+            "level": 0,
+            "parentId": undefined,
+            "value": 0,
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": true,
+            "id": "id-0-option-id-1",
+            "label": "Sub item 1",
+            "level": 1,
+            "parentId": "id-0",
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": false,
+            "id": "id-0-option-id-1-suboption-id-11",
+            "label": "Sub-child item 11",
+            "level": 2,
+            "parentId": "id-0-option-id-1",
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": false,
+            "id": "id-0-option-id-1-suboption-id-12",
+            "label": "Sub-child item 12",
+            "level": 2,
+            "parentId": "id-0-option-id-1",
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": true,
+            "id": "id-0-option-id-2",
+            "label": "Sub item 2",
+            "level": 1,
+            "parentId": "id-0",
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": false,
+            "id": "id-0-option-id-2-suboption-id-21",
+            "label": "Sub-child item 21",
+            "level": 2,
+            "parentId": "id-0-option-id-2",
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": false,
+            "id": "id-0-option-id-2-suboption-id-22",
+            "label": "Sub-child item 22",
+            "level": 2,
+            "parentId": "id-0-option-id-2",
+          },
+        ]
+      }
+      selectedItemChanged={[Function]}
+      stateReducer={[Function]}
+    >
+      <ListBox
+        ariaLabel="Choose an item"
+        className="bx--multi-select bx--combo-box"
+        disabled={false}
+        innerRef={[Function]}
+        type="default"
+      >
+        <div
+          aria-label="Choose an item"
+          className="bx--multi-select bx--combo-box bx--list-box"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="listbox"
+        >
+          <ListBoxField
+            aria-expanded={false}
+            aria-haspopup={true}
+            aria-label="open menu"
+            data-toggle={true}
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex="-1"
+            type="button"
+          >
+            <div
+              aria-expanded={false}
+              aria-haspopup={true}
+              aria-label="open menu"
+              className="bx--list-box__field"
+              data-toggle={true}
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+              tabIndex="-1"
+              type="button"
+            >
+              <ListBoxSelection
+                clearSelection={[Function]}
+                selectionCount={4}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__selection bx--list-box__selection--multi"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="button"
+                  tabIndex="0"
+                  title="Clear all selected items"
+                >
+                  4
+                  <Icon
+                    description="Clear all selected items"
+                    fillRule="evenodd"
+                    focusable="false"
+                    icon={
+                      Object {
+                        "height": "10",
+                        "id": "icon--close",
+                        "name": "icon--close",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z",
+                              "fill-rule": "nonzero",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--close",
+                        "viewBox": "0 0 10 10",
+                        "width": "10",
+                      }
+                    }
+                    name="icon--close"
+                    role="img"
+                  >
+                    <svg
+                      alt="Clear all selected items"
+                      aria-label="Clear all selected items"
+                      fillRule="evenodd"
+                      focusable="false"
+                      height="10"
+                      name="icon--close"
+                      role="img"
+                      viewBox="0 0 10 10"
+                      width="10"
+                    >
+                      <title>
+                        Clear all selected items
+                      </title>
+                      <path
+                        d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxSelection>
+              <input
+                aria-activedescendant={null}
+                aria-autocomplete="list"
+                aria-expanded={false}
+                aria-label="Placeholder..."
+                autoComplete="off"
+                className="bx--text-input"
+                disabled={false}
+                id="downshift-29-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                placeholder="Placeholder..."
+                role="combobox"
+                value=""
+              />
+              <ListBoxMenuIcon
+                isOpen={false}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__menu-icon"
+                >
+                  <Icon
+                    alt="Open menu"
+                    description="Open menu"
+                    fillRule="evenodd"
+                    icon={
+                      Object {
+                        "height": "5",
+                        "id": "icon--caret--down",
+                        "name": "icon--caret--down",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M0 0l5 4.998L10 0z",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--caret--down",
+                        "viewBox": "0 0 10 5",
+                        "width": "10",
+                      }
+                    }
+                    name="icon--caret--down"
+                    role="img"
+                  >
+                    <svg
+                      alt="Open menu"
+                      aria-label="Open menu"
+                      fillRule="evenodd"
+                      height="5"
+                      name="icon--caret--down"
+                      role="img"
+                      viewBox="0 0 10 5"
+                      width="10"
+                    >
+                      <title>
+                        Open menu
+                      </title>
+                      <path
+                        d="M0 0l5 4.998L10 0z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxMenuIcon>
+            </div>
+          </ListBoxField>
+        </div>
+      </ListBox>
+    </Downshift>
+  </Selection>
+</NestedFilterableMultiselect>
+`;
+
+exports[`NestedFilterableMultiselect multiselect with initial selections preselect item at level 2 1`] = `
+<NestedFilterableMultiselect
+  compareItems={[Function]}
+  disabled={false}
+  filterItems={[Function]}
+  initialSelectedItems={
+    Array [
+      Object {
+        "category": "category-1",
+        "id": "id-0",
+        "label": "Nested item 0",
+        "options": Array [
+          Object {
+            "id": "option-id-1",
+            "label": "Sub item 1",
+            "options": Array [
+              Object {
+                "checked": true,
+                "id": "suboption-id-11",
+                "label": "Sub-child item 11",
+              },
+              Object {
+                "checked": false,
+                "id": "suboption-id-12",
+                "label": "Sub-child item 12",
+              },
+            ],
+          },
+          Object {
+            "id": "option-id-2",
+            "label": "Sub item 2",
+            "options": Array [
+              Object {
+                "checked": true,
+                "id": "suboption-id-21",
+                "label": "Sub-child item 21",
+              },
+              Object {
+                "checked": false,
+                "id": "suboption-id-22",
+                "label": "Sub-child item 22",
+              },
+            ],
+          },
+        ],
+        "value": 0,
+      },
+    ]
+  }
+  itemToString={[Function]}
+  items={
+    Array [
+      Object {
+        "category": "category-1",
+        "id": "id-0",
+        "label": "Nested item 0",
+        "options": Array [
+          Object {
+            "id": "option-id-1",
+            "label": "Sub item 1",
+            "options": Array [
+              Object {
+                "id": "suboption-id-11",
+                "label": "Sub-child item 11",
+              },
+              Object {
+                "id": "suboption-id-12",
+                "label": "Sub-child item 12",
+              },
+            ],
+          },
+          Object {
+            "id": "option-id-2",
+            "label": "Sub item 2",
+            "options": Array [
+              Object {
+                "id": "suboption-id-21",
+                "label": "Sub-child item 21",
+              },
+              Object {
+                "id": "suboption-id-22",
+                "label": "Sub-child item 22",
+              },
+            ],
+          },
+        ],
+        "value": 0,
+      },
+      Object {
+        "category": "category-2",
+        "id": "id-1",
+        "label": "Nested item 1",
+        "options": undefined,
+        "value": 1,
+      },
+      Object {
+        "category": "category-1",
+        "id": "id-2",
+        "label": "Nested item 2",
+        "options": undefined,
+        "value": 2,
+      },
+    ]
+  }
+  light={false}
+  locale="en"
+  placeholder="Placeholder..."
+  showTooltip={true}
+  sortItems={[Function]}
+>
+  <Selection
+    initialSelectedItems={
+      Array [
+        Object {
+          "category": "category-1",
+          "hasChildren": true,
+          "id": "id-0",
+          "label": "Nested item 0",
+          "level": 0,
+          "parentId": undefined,
+          "value": 0,
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": true,
+          "id": "id-0-option-id-1",
+          "label": "Sub item 1",
+          "level": 1,
+          "parentId": "id-0",
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": false,
+          "id": "id-0-option-id-1-suboption-id-11",
+          "label": "Sub-child item 11",
+          "level": 2,
+          "parentId": "id-0-option-id-1",
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": true,
+          "id": "id-0-option-id-2",
+          "label": "Sub item 2",
+          "level": 1,
+          "parentId": "id-0",
+        },
+        Object {
+          "category": "category-1",
+          "hasChildren": false,
+          "id": "id-0-option-id-2-suboption-id-21",
+          "label": "Sub-child item 21",
+          "level": 2,
+          "parentId": "id-0-option-id-2",
+        },
+      ]
+    }
+    onChange={[Function]}
+    render={[Function]}
+  >
+    <Downshift
+      breakingChanges={Object {}}
+      defaultHighlightedIndex={null}
+      defaultInputValue=""
+      defaultIsOpen={false}
+      defaultSelectedItem={null}
+      environment={[Window]}
+      getA11yStatusMessage={[Function]}
+      highlightedIndex={null}
+      inputValue=""
+      isOpen={false}
+      itemToString={[Function]}
+      onChange={[Function]}
+      onInputValueChange={[Function]}
+      onOuterClick={[Function]}
+      onSelect={[Function]}
+      onStateChange={[Function]}
+      onUserAction={[Function]}
+      render={[Function]}
+      selectedItem={
+        Array [
+          Object {
+            "category": "category-1",
+            "hasChildren": true,
+            "id": "id-0",
+            "label": "Nested item 0",
+            "level": 0,
+            "parentId": undefined,
+            "value": 0,
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": true,
+            "id": "id-0-option-id-1",
+            "label": "Sub item 1",
+            "level": 1,
+            "parentId": "id-0",
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": false,
+            "id": "id-0-option-id-1-suboption-id-11",
+            "label": "Sub-child item 11",
+            "level": 2,
+            "parentId": "id-0-option-id-1",
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": true,
+            "id": "id-0-option-id-2",
+            "label": "Sub item 2",
+            "level": 1,
+            "parentId": "id-0",
+          },
+          Object {
+            "category": "category-1",
+            "hasChildren": false,
+            "id": "id-0-option-id-2-suboption-id-21",
+            "label": "Sub-child item 21",
+            "level": 2,
+            "parentId": "id-0-option-id-2",
+          },
+        ]
+      }
+      selectedItemChanged={[Function]}
+      stateReducer={[Function]}
+    >
+      <ListBox
+        ariaLabel="Choose an item"
+        className="bx--multi-select bx--combo-box"
+        disabled={false}
+        innerRef={[Function]}
+        type="default"
+      >
+        <div
+          aria-label="Choose an item"
+          className="bx--multi-select bx--combo-box bx--list-box"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="listbox"
+        >
+          <ListBoxField
+            aria-expanded={false}
+            aria-haspopup={true}
+            aria-label="open menu"
+            data-toggle={true}
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex="-1"
+            type="button"
+          >
+            <div
+              aria-expanded={false}
+              aria-haspopup={true}
+              aria-label="open menu"
+              className="bx--list-box__field"
+              data-toggle={true}
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+              tabIndex="-1"
+              type="button"
+            >
+              <ListBoxSelection
+                clearSelection={[Function]}
+                selectionCount={2}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__selection bx--list-box__selection--multi"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="button"
+                  tabIndex="0"
+                  title="Clear all selected items"
+                >
+                  2
+                  <Icon
+                    description="Clear all selected items"
+                    fillRule="evenodd"
+                    focusable="false"
+                    icon={
+                      Object {
+                        "height": "10",
+                        "id": "icon--close",
+                        "name": "icon--close",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z",
+                              "fill-rule": "nonzero",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--close",
+                        "viewBox": "0 0 10 10",
+                        "width": "10",
+                      }
+                    }
+                    name="icon--close"
+                    role="img"
+                  >
+                    <svg
+                      alt="Clear all selected items"
+                      aria-label="Clear all selected items"
+                      fillRule="evenodd"
+                      focusable="false"
+                      height="10"
+                      name="icon--close"
+                      role="img"
+                      viewBox="0 0 10 10"
+                      width="10"
+                    >
+                      <title>
+                        Clear all selected items
+                      </title>
+                      <path
+                        d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxSelection>
+              <input
+                aria-activedescendant={null}
+                aria-autocomplete="list"
+                aria-expanded={false}
+                aria-label="Placeholder..."
+                autoComplete="off"
+                className="bx--text-input"
+                disabled={false}
+                id="downshift-30-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                placeholder="Placeholder..."
+                role="combobox"
+                value=""
+              />
+              <ListBoxMenuIcon
+                isOpen={false}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__menu-icon"
+                >
+                  <Icon
+                    alt="Open menu"
+                    description="Open menu"
+                    fillRule="evenodd"
+                    icon={
+                      Object {
+                        "height": "5",
+                        "id": "icon--caret--down",
+                        "name": "icon--caret--down",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M0 0l5 4.998L10 0z",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--caret--down",
+                        "viewBox": "0 0 10 5",
+                        "width": "10",
+                      }
+                    }
+                    name="icon--caret--down"
+                    role="img"
+                  >
+                    <svg
+                      alt="Open menu"
+                      aria-label="Open menu"
+                      fillRule="evenodd"
+                      height="5"
+                      name="icon--caret--down"
+                      role="img"
+                      viewBox="0 0 10 5"
+                      width="10"
+                    >
+                      <title>
+                        Open menu
+                      </title>
+                      <path
+                        d="M0 0l5 4.998L10 0z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxMenuIcon>
+            </div>
+          </ListBoxField>
+        </div>
+      </ListBox>
+    </Downshift>
+  </Selection>
+</NestedFilterableMultiselect>
+`;
+
+exports[`NestedFilterableMultiselect multiselect with suboptions should render 1`] = `
+<NestedFilterableMultiselect
+  compareItems={[Function]}
+  disabled={false}
+  filterItems={[Function]}
+  initialSelectedItems={Array []}
+  itemToString={[Function]}
+  items={
+    Array [
+      Object {
+        "category": "category-1",
+        "id": "id-0",
+        "label": "Nested item 0",
+        "options": Array [
+          Object {
+            "id": "option-id-1",
+            "label": "Sub item 1",
+            "options": undefined,
+          },
+          Object {
+            "id": "option-id-2",
+            "label": "Sub item 2",
+            "options": undefined,
+          },
+        ],
+        "value": 0,
+      },
+      Object {
+        "category": "category-2",
+        "id": "id-1",
+        "label": "Nested item 1",
+        "options": Array [
+          Object {
+            "id": "option-id-1",
+            "label": "Sub item 1",
+            "options": Array [
+              Object {
+                "id": "suboption-id-11",
+                "label": "Sub-child item 11",
+              },
+              Object {
+                "id": "suboption-id-12",
+                "label": "Sub-child item 12",
+              },
+            ],
+          },
+          Object {
+            "id": "option-id-2",
+            "label": "Sub item 2",
+            "options": Array [
+              Object {
+                "id": "suboption-id-21",
+                "label": "Sub-child item 21",
+              },
+              Object {
+                "id": "suboption-id-22",
+                "label": "Sub-child item 22",
+              },
+            ],
+          },
+        ],
+        "value": 1,
+      },
+      Object {
+        "category": "category-1",
+        "id": "id-2",
+        "label": "Nested item 2",
+        "options": Array [
+          Object {
+            "id": "option-id-1",
+            "label": "Sub item 1",
+            "options": Array [
+              Object {
+                "id": "suboption-id-11",
+                "label": "Sub-child item 11",
+              },
+              Object {
+                "id": "suboption-id-12",
+                "label": "Sub-child item 12",
+              },
+            ],
+          },
+          Object {
+            "id": "option-id-2",
+            "label": "Sub item 2",
+            "options": undefined,
+          },
+        ],
+        "value": 2,
+      },
+    ]
+  }
+  light={false}
+  locale="en"
+  onChange={[MockFunction]}
+  placeholder="Placeholder..."
+  showTooltip={true}
+  sortItems={[Function]}
+>
+  <Selection
+    initialSelectedItems={Array []}
+    onChange={[Function]}
+    render={[Function]}
+  >
+    <Downshift
+      breakingChanges={Object {}}
+      defaultHighlightedIndex={null}
+      defaultInputValue=""
+      defaultIsOpen={false}
+      defaultSelectedItem={null}
+      environment={[Window]}
+      getA11yStatusMessage={[Function]}
+      highlightedIndex={null}
+      inputValue=""
+      isOpen={false}
+      itemToString={[Function]}
+      onChange={[Function]}
+      onInputValueChange={[Function]}
+      onOuterClick={[Function]}
+      onSelect={[Function]}
+      onStateChange={[Function]}
+      onUserAction={[Function]}
+      render={[Function]}
+      selectedItem={Array []}
+      selectedItemChanged={[Function]}
+      stateReducer={[Function]}
+    >
+      <ListBox
+        ariaLabel="Choose an item"
+        className="bx--multi-select bx--combo-box"
+        disabled={false}
+        innerRef={[Function]}
+        type="default"
+      >
+        <div
+          aria-label="Choose an item"
+          className="bx--multi-select bx--combo-box bx--list-box"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="listbox"
+        >
+          <ListBoxField
+            aria-expanded={false}
+            aria-haspopup={true}
+            aria-label="open menu"
+            data-toggle={true}
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex="-1"
+            type="button"
+          >
+            <div
+              aria-expanded={false}
+              aria-haspopup={true}
+              aria-label="open menu"
+              className="bx--list-box__field"
+              data-toggle={true}
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+              tabIndex="-1"
+              type="button"
+            >
+              <input
+                aria-activedescendant={null}
+                aria-autocomplete="list"
+                aria-expanded={false}
+                aria-label="Placeholder..."
+                autoComplete="off"
+                className="bx--text-input"
+                disabled={false}
+                id="downshift-11-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                placeholder="Placeholder..."
+                role="combobox"
+                value=""
+              />
+              <ListBoxMenuIcon
+                isOpen={false}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__menu-icon"
+                >
+                  <Icon
+                    alt="Open menu"
+                    description="Open menu"
+                    fillRule="evenodd"
+                    icon={
+                      Object {
+                        "height": "5",
+                        "id": "icon--caret--down",
+                        "name": "icon--caret--down",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M0 0l5 4.998L10 0z",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--caret--down",
+                        "viewBox": "0 0 10 5",
+                        "width": "10",
+                      }
+                    }
+                    name="icon--caret--down"
+                    role="img"
+                  >
+                    <svg
+                      alt="Open menu"
+                      aria-label="Open menu"
+                      fillRule="evenodd"
+                      height="5"
+                      name="icon--caret--down"
+                      role="img"
+                      viewBox="0 0 10 5"
+                      width="10"
+                    >
+                      <title>
+                        Open menu
+                      </title>
+                      <path
+                        d="M0 0l5 4.998L10 0z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxMenuIcon>
+            </div>
+          </ListBoxField>
+        </div>
+      </ListBox>
+    </Downshift>
+  </Selection>
+</NestedFilterableMultiselect>
+`;

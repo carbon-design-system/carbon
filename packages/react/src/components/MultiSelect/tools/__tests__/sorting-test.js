@@ -22,39 +22,51 @@ describe('defaultSortItems', () => {
   });
 
   it('should sort un-selected options alphabetically', () => {
-    const mockItems = ['d', 'c', 'b', 'a'].map(label => ({ label }));
+    const mockItems = ['d', 'c', 'b', 'a'].map(label => ({ id: label, label }));
     expect(defaultSortItems(mockItems, mockOptions)).toEqual([
       {
+        id: 'a',
         label: 'a',
       },
       {
+        id: 'b',
         label: 'b',
       },
       {
+        id: 'c',
         label: 'c',
       },
       {
+        id: 'd',
         label: 'd',
       },
     ]);
   });
 
   it('should sort un-selected numbers in increasing order', () => {
-    const mockItems = ['1', '10', '11', '2', '3'].map(label => ({ label }));
+    const mockItems = ['1', '10', '11', '2', '3'].map(label => ({
+      id: label,
+      label,
+    }));
     expect(defaultSortItems(mockItems, mockOptions)).toEqual([
       {
+        id: '1',
         label: '1',
       },
       {
+        id: '2',
         label: '2',
       },
       {
+        id: '3',
         label: '3',
       },
       {
+        id: '10',
         label: '10',
       },
       {
+        id: '11',
         label: '11',
       },
     ]);
@@ -62,68 +74,163 @@ describe('defaultSortItems', () => {
 
   it('should sort un-selected alpha-numeric sequences with increasing order', () => {
     const mockItems = ['Option 1', 'Option 10', 'Option 11', 'Option 2'].map(
-      label => ({ label })
+      label => ({ id: label, label })
     );
     expect(defaultSortItems(mockItems, mockOptions)).toEqual([
       {
+        id: 'Option 1',
         label: 'Option 1',
       },
       {
+        id: 'Option 2',
         label: 'Option 2',
       },
       {
+        id: 'Option 10',
         label: 'Option 10',
       },
       {
+        id: 'Option 11',
         label: 'Option 11',
       },
     ]);
   });
 
-  it('should order a selected item before all other options', () => {
-    const mockItems = ['Option 1', 'Option 10', 'Option 11', 'Option 2'].map(
-      label => ({ label })
-    );
-
-    // Set `selectedItems` to ['Option 11']
-    mockOptions.selectedItems = [mockItems[2]];
-
+  it('should sort parent and child', () => {
+    const mockItems = [
+      {
+        id: 'x-a',
+        label: 'a',
+        parentId: 'x',
+      },
+      {
+        id: 'x',
+        label: 'x',
+      },
+      {
+        id: 'z-d-m',
+        label: 'm',
+        parentId: 'z-d',
+      },
+      {
+        id: 'z-1',
+        label: 'z',
+      },
+      {
+        id: 'x-b',
+        label: 'b',
+        parentId: 'x',
+      },
+      {
+        id: 'y',
+        label: 'y',
+      },
+      {
+        id: 'z-c',
+        label: 'c',
+        parentId: 'z',
+      },
+      {
+        id: 'z-d',
+        label: 'd',
+        parentId: 'z',
+      },
+      {
+        id: 'z',
+        label: 'z',
+      },
+      {
+        id: 'z-c-k',
+        label: 'k',
+        parentId: 'z-c',
+      },
+      {
+        id: 'z-e',
+        label: 'e',
+        parentId: 'z',
+      },
+      {
+        id: 'z-a',
+        label: 'a',
+        parentId: 'z',
+      },
+      {
+        id: 'z-c-l',
+        label: 'l',
+        parentId: 'z-c',
+      },
+      {
+        id: 'z-d-n',
+        label: 'n',
+        parentId: 'z-d',
+      },
+    ];
     expect(defaultSortItems(mockItems, mockOptions)).toEqual([
       {
-        label: 'Option 11',
+        id: 'x',
+        label: 'x',
       },
       {
-        label: 'Option 1',
+        id: 'x-a',
+        label: 'a',
+        parentId: 'x',
       },
       {
-        label: 'Option 2',
+        id: 'x-b',
+        label: 'b',
+        parentId: 'x',
       },
       {
-        label: 'Option 10',
-      },
-    ]);
-  });
-
-  it('should sort selected items and order them before all other options', () => {
-    const mockItems = ['Option 1', 'Option 10', 'Option 11', 'Option 2'].map(
-      label => ({ label })
-    );
-
-    // Set `selectedItems` to ['Option 11', 'Option 2']
-    mockOptions.selectedItems = [mockItems[2], mockItems[3]];
-
-    expect(defaultSortItems(mockItems, mockOptions)).toEqual([
-      {
-        label: 'Option 2',
+        id: 'y',
+        label: 'y',
       },
       {
-        label: 'Option 11',
+        id: 'z-1',
+        label: 'z',
       },
       {
-        label: 'Option 1',
+        id: 'z',
+        label: 'z',
       },
       {
-        label: 'Option 10',
+        id: 'z-a',
+        label: 'a',
+        parentId: 'z',
+      },
+      {
+        id: 'z-c',
+        label: 'c',
+        parentId: 'z',
+      },
+      {
+        id: 'z-c-k',
+        label: 'k',
+        parentId: 'z-c',
+      },
+      {
+        id: 'z-c-l',
+        label: 'l',
+        parentId: 'z-c',
+      },
+      {
+        id: 'z-d',
+        label: 'd',
+        parentId: 'z',
+      },
+      {
+        id: 'z-d-m',
+        label: 'm',
+        parentId: 'z-d',
+      },
+      {
+        id: 'z-d-n',
+        label: 'n',
+        parentId: 'z-d',
+      },
+      {
+        id: 'z-e',
+        label: 'e',
+        parentId: 'z',
       },
     ]);
   });
