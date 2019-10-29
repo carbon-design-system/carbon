@@ -39,12 +39,12 @@ const props = () => ({
     'Items per page:'
   ),
   onChange: action('onChange'),
-  itemCountSelectorSize: number(
-    'The `size` attribute of the "items per page" select element (itemCountSelectorSize)',
+  itemCountSelectSize: number(
+    'The `size` attribute of the "items per page" select element (itemCountSelectSize)',
     1
   ),
-  pageNumberSelectorSize: number(
-    'The `size` attribute of the page number select element (pageNumberSelectorSize)',
+  pageNumberSelectSize: number(
+    'The `size` attribute of the page number select element (pageNumberSelectSize)',
     1
   ),
 });
