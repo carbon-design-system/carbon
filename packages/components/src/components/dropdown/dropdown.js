@@ -162,8 +162,9 @@ class Dropdown extends mixin(
         (listNode || this.element).focus();
         if (listNode) {
           const selectedNode = listNode.querySelector(
-            this.options.selectorItemSelected
+            this.options.selectorLinkSelected
           );
+
           listNode.setAttribute(
             'aria-activedescendant',
             (selectedNode || listItems[0]).id
@@ -239,7 +240,7 @@ class Dropdown extends mixin(
     );
     const start =
       this.getCurrentNavigation() ||
-      this.element.querySelector(this.options.selectorItemSelected);
+      this.element.querySelector(this.options.selectorLinkSelected);
     const getNextItem = old => {
       const handleUnderflow = (i, l) => i + (i >= 0 ? 0 : l);
       const handleOverflow = (i, l) => i - (i < l ? 0 : l);
@@ -249,6 +250,9 @@ class Dropdown extends mixin(
         handleUnderflow(handleOverflow(index, items.length), items.length)
       ];
     };
+    const isShowSelected = this.element.classList.contains(
+      this.options.classShowSelected
+    );
     for (
       let current = getNextItem(start);
       current && current !== start;
@@ -257,7 +261,9 @@ class Dropdown extends mixin(
       if (
         !current.matches(this.options.selectorItemHidden) &&
         !current.parentNode.matches(this.options.selectorItemHidden) &&
-        !current.matches(this.options.selectorItemSelected)
+        (isShowSelected ||
+          (!isShowSelected &&
+            !current.parentElement.matches(this.options.selectorItemSelected)))
       ) {
         // Using the latest semantic markup structure where trigger is a button
         // @todo remove conditional once legacy structure is depreciated
@@ -304,15 +310,15 @@ class Dropdown extends mixin(
         if (text) {
           text.innerHTML = itemToSelect.innerHTML;
         }
-        itemToSelect.classList.add(this.options.classSelected);
+        itemToSelect.parentElement.classList.add(this.options.classSelected);
       }
       this.element.dataset.value = itemToSelect.parentElement.dataset.value;
 
       toArray(
-        this.element.querySelectorAll(this.options.selectorItemSelected)
+        this.element.querySelectorAll(this.options.selectorLinkSelected)
       ).forEach(item => {
         if (itemToSelect !== item) {
-          item.classList.remove(this.options.classSelected);
+          item.parentElement.classList.remove(this.options.classSelected);
         }
       });
 
@@ -357,6 +363,8 @@ class Dropdown extends mixin(
    *   Used to skip dropdown items for keyboard navigation.
    * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
    * @property {string} [selectorItemFocused] The CSS selector to find the clickable area in the focused dropdown item.
+   * @property {string} [selectorLinkSelected] The CSS selector to target the link node of the selected dropdown item.
+   * @property {string} [classShowSelected] The CSS class for the show selected modifier of the dropdown.
    * @property {string} [classSelected] The CSS class for the selected dropdown item.
    * @property {string} [classFocused] The CSS class for the focused dropdown item.
    * @property {string} [classOpen] The CSS class for the open state.
@@ -378,6 +386,8 @@ class Dropdown extends mixin(
       selectorItemSelected: `.${prefix}--dropdown--selected`,
       selectorItemFocused: `.${prefix}--dropdown--focused`,
       selectorItemHidden: `[hidden],[aria-hidden="true"]`,
+      selectorLinkSelected: `.${prefix}--dropdown--selected .${prefix}--dropdown-link`,
+      classShowSelected: `${prefix}--dropdown--show-selected`,
       classSelected: `${prefix}--dropdown--selected`,
       classFocused: `${prefix}--dropdown--focused`,
       classOpen: `${prefix}--dropdown--open`,
