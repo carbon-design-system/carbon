@@ -8,29 +8,41 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from 'carbon-components';
+import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
-const TableToolbar = ({ ariaLabel, children }) => (
-  <section aria-label={ariaLabel} className={`${prefix}--table-toolbar`}>
-    {children}
-  </section>
-);
+const TableToolbar = ({
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+  children,
+  ...rest
+}) => {
+  const accessibilityLabel = {
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
+  };
+
+  return (
+    <section
+      {...rest}
+      {...accessibilityLabel}
+      className={`${prefix}--table-toolbar`}>
+      {children}
+    </section>
+  );
+};
 
 TableToolbar.propTypes = {
-  /**
-   * The `aria-label` attribute for the TableToolbar
-   */
-  ariaLabel: PropTypes.string,
-
   /**
    * Pass in the children that will be rendered inside the TableToolbar
    */
   children: PropTypes.node,
-};
 
-TableToolbar.defaultProps = {
-  ariaLabel: 'data table toolbar',
+  /**
+   * Required props for the accessibility label of the TableToolbar
+   */
+  ...AriaLabelPropType,
 };
 
 export default TableToolbar;
