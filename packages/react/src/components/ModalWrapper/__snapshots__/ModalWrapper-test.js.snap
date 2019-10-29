@@ -55,12 +55,14 @@ exports[`ModalWrapper should render 1`] = `
       primaryButtonText="Save"
       secondaryButtonText="Cancel"
       selectorPrimaryFocus="[data-modal-primary-focus]"
+      trapMouse={false}
     >
       <FocusTrap
         _createFocusTrap={[Function]}
         active={false}
         focusTrapOptions={
           Object {
+            "allowOutsideClick": [Function],
             "initialFocus": [Function],
           }
         }

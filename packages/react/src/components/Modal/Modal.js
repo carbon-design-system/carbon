@@ -131,6 +131,11 @@ export default class Modal extends Component {
     focusTrap: PropTypes.bool,
 
     /**
+     * Specify whether the focus trap should also trap mouse events. By default this is false.
+     */
+    trapMouse: PropTypes.bool,
+
+    /**
      * Required props for the accessibility label of the header
      */
     ...AriaLabelPropType,
@@ -147,6 +152,7 @@ export default class Modal extends Component {
     modalLabel: '',
     selectorPrimaryFocus: '[data-modal-primary-focus]',
     focusTrap: true,
+    trapMouse: false,
   };
 
   button = React.createRef();
@@ -291,6 +297,7 @@ export default class Modal extends Component {
       selectorsFloatingMenus, // eslint-disable-line
       shouldSubmitOnEnter, // eslint-disable-line
       focusTrap,
+      trapMouse,
       ...other
     } = this.props;
 
@@ -391,7 +398,10 @@ export default class Modal extends Component {
       // `<FocusTrap>` has `active: true` in its `defaultProps`
       <FocusTrap
         active={!!open}
-        focusTrapOptions={{ initialFocus: this.initialFocus }}>
+        focusTrapOptions={{
+          initialFocus: this.initialFocus,
+          allowOutsideClick: () => !trapMouse,
+        }}>
         {modal}
       </FocusTrap>
     );
