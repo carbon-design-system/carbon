@@ -1962,7 +1962,6 @@ exports[`DataTable should render 1`] = `
       </div>
       <TableToolbar>
         <section
-          aria-label="data table toolbar"
           className="bx--table-toolbar"
         >
           <TableBatchActions
@@ -2933,7 +2932,6 @@ exports[`DataTable sticky header should render 1`] = `
       </div>
       <TableToolbar>
         <section
-          aria-label="data table toolbar"
           className="bx--table-toolbar"
         >
           <TableBatchActions

@@ -5,7 +5,6 @@ exports[`DataTable.TableToolbar should render 1`] = `
   className="custom-class"
 >
   <section
-    aria-label="data table toolbar"
     className="bx--table-toolbar"
   />
 </TableToolbar>
