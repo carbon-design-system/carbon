@@ -347,6 +347,7 @@ export default class Pagination extends Component {
           )}
           {pageRange}
           <button
+            type="button"
             className={backButtonClasses}
             onClick={this.decrementPage}
             aria-label={backwardText}
@@ -354,6 +355,7 @@ export default class Pagination extends Component {
             <CaretLeft24 />
           </button>
           <button
+            type="button"
             className={forwardButtonClasses}
             aria-label={forwardText}
             onClick={this.incrementPage}
