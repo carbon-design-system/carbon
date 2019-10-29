@@ -100,7 +100,6 @@
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row {
     transition: height $duration--moderate-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
-    // border-bottom $duration--fast-02 motion(standard, productive)
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
