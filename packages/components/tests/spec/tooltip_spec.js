@@ -81,7 +81,7 @@ describe('Test tooltip', function() {
     });
   });
 
-  describe('Tooltip tabindex', function() {
+  describe('Tooltip focus management', function() {
     const container = document.createElement('div');
     container.innerHTML = HTML;
 
@@ -99,20 +99,26 @@ describe('Test tooltip', function() {
       });
     });
 
-    it('Should be -1 when there are interactive elements', function() {
+    it('Should only receive clickable focus when there are interactive elements', function() {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       const content = floating.querySelector('.bx--tooltip__content');
 
       expect(content.getAttribute('tabindex')).toBe('-1');
+      expect(content.hasAttribute('data-floating-menu-primary-focus')).toBe(
+        false
+      );
     });
 
-    it('Should be 0 when there are not interactive elements', function() {
+    it('Content container should receive programmable focus with there are not interactive elements', function() {
       const content = floating.querySelector('.bx--tooltip__content');
       const footer = floating.querySelector('.bx--tooltip__footer');
       content.removeChild(footer);
 
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(content.getAttribute('tabindex')).toBe('0');
+      expect(content.getAttribute('tabindex')).toBe('-1');
+      expect(content.hasAttribute('data-floating-menu-primary-focus')).toBe(
+        true
+      );
     });
 
     afterEach(function() {
