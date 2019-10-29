@@ -10,7 +10,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from '@rocketsoftware/carbon-components';
 import { Close20 } from '@rocketsoftware/icons-react';
-import FocusTrap from 'focus-trap-react';
+import FocusTrap from 'ft-react';
 import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
@@ -125,7 +125,7 @@ export default class Modal extends Component {
     selectorPrimaryFocus: PropTypes.string,
 
     /**
-     * Specify whether the modal should use 3rd party `focus-trap-react` for the focus-wrap feature.
+     * Specify whether the modal should use 3rd party `ft-react` for the focus-wrap feature.
      * NOTE: by default this is true.
      */
     focusTrap: PropTypes.bool,

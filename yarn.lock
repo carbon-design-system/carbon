@@ -10401,6 +10401,14 @@ focus-trap@^4.0.2:
     tabbable "^3.1.2"
     xtend "^4.0.1"
 
+focus-trap@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-5.1.0.tgz#64a0bfabd95c382103397dbc96bfef3a3cf8e5ad"
+  integrity sha512-CkB/nrO55069QAUjWFBpX6oc+9V90Qhgpe6fBWApzruMq5gnlh90Oo7iSSDK7pKiV5ugG6OY2AXM5mxcmL3lwQ==
+  dependencies:
+    tabbable "^4.0.0"
+    xtend "^4.0.1"
+
 follow-redirects@1.5.10:
   version "1.5.10"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.5.10.tgz#7b7a9f9aea2fdff36786a94ff643ed07f4ff5e2a"
@@ -10644,6 +10652,13 @@ fstream@^1.0.0, fstream@^1.0.12:
     inherits "~2.0.0"
     mkdirp ">=0.5 0"
     rimraf "2"
+
+ft-react@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ft-react/-/ft-react-1.0.0.tgz#f1123eb56d7dd4f04cb91a115db78d09e349e074"
+  integrity sha512-0RtK3MDW0zUSy6r1umSeadjiDOMs4nxTlcAqVap6r+tOsM1Gymx7AZvyVoxBpEobwiebQGZ+AO891rJHSiYE1g==
+  dependencies:
+    focus-trap "^5.1.0"
 
 function-bind@^1.0.2, function-bind@^1.1.1:
   version "1.1.1"
@@ -21536,6 +21551,11 @@ tabbable@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-3.1.2.tgz#f2d16cccd01f400e38635c7181adfe0ad965a4a2"
   integrity sha512-wjB6puVXTYO0BSFtCmWQubA/KIn7Xvajw0x0l6eJUudMG/EAiJvIUnyNX6xO4NpGrJ16lbD0eUseB9WxW0vlpQ==
+
+tabbable@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-4.0.0.tgz#5bff1d1135df1482cf0f0206434f15eadbeb9261"
+  integrity sha512-H1XoH1URcBOa/rZZWxLxHCtOdVUEev+9vo5YdYhC9tCY4wnybX+VQrCYuy9ubkg69fCBxCONJOSLGfw0DWMffQ==
 
 table@^3.7.8:
   version "3.8.3"

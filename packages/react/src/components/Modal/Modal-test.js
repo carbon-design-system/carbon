@@ -14,7 +14,7 @@ import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 
-// The modal is the 0th child inside the wrapper on account of focus-trap-react
+// The modal is the 0th child inside the wrapper on account of ft-react
 const getModal = wrapper => wrapper.childAt(0);
 
 describe('Modal', () => {
