@@ -27,12 +27,12 @@
 
   .#{$prefix}--list__item {
     color: $text-01;
-    margin-bottom: #{$carbon--spacing-02};
+    margin-bottom: $carbon--spacing-02;
   }
 
   .#{$prefix}--list--nested {
-    margin-top: #{$carbon--spacing-02};
-    margin-left: #{$carbon--spacing-06};
+    margin-top: $carbon--spacing-02;
+    margin-left: $carbon--spacing-06;
   }
 
   .#{$prefix}--list--nested > .#{$prefix}--list__item {
@@ -57,14 +57,14 @@
 
     &::before {
       position: absolute;
-      left: -#{$carbon--spacing-05};
+      left: -$carbon--spacing-05;
       content: '\002013'; // – en dash
     }
   }
 
   .#{$prefix}--list--unordered.#{$prefix}--list--nested
     > .#{$prefix}--list__item::before {
-    left: -#{$carbon--spacing-04}; // offset to account for smaller ▪ vs –
+    left: -$carbon--spacing-04; // offset to account for smaller ▪ vs –
     content: '\0025AA'; // ▪ square
   }
 }
