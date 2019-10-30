@@ -39,6 +39,13 @@ describe('Test tooltip', function() {
       });
     });
 
+    it('Content should be programmatically focusable', function() {
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      const content = floating.querySelector('.bx--tooltip__content');
+
+      expect(content.getAttribute('tabindex')).toBe('-1');
+    });
+
     it('Should show the tooltip upon clicking', function() {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
@@ -77,62 +84,6 @@ describe('Test tooltip', function() {
         tooltip.release();
         tooltip = null;
       }
-      document.body.removeChild(container);
-    });
-  });
-
-  describe('Tooltip focus management', function() {
-    const container = document.createElement('div');
-    container.innerHTML = HTML;
-
-    const element = container.querySelector('[data-tooltip-trigger]');
-    const floating = container.querySelector('.bx--tooltip');
-
-    let tooltip;
-
-    beforeEach(function() {
-      document.body.appendChild(container);
-      return Tooltip.__with__({
-        debounce: fn => fn,
-      })(() => {
-        tooltip = new Tooltip(element);
-      });
-    });
-
-    it('Should only receive clickable focus when there are interactive elements', function() {
-      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      const content = floating.querySelector('.bx--tooltip__content');
-
-      expect(content.getAttribute('tabindex')).toBe('-1');
-      expect(content.hasAttribute('data-floating-menu-primary-focus')).toBe(
-        false
-      );
-    });
-
-    it('Content container should receive programmable focus with there are not interactive elements', function() {
-      const content = floating.querySelector('.bx--tooltip__content');
-      const footer = floating.querySelector('.bx--tooltip__footer');
-      content.removeChild(footer);
-
-      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(content.getAttribute('tabindex')).toBe('-1');
-      expect(content.hasAttribute('data-floating-menu-primary-focus')).toBe(
-        true
-      );
-    });
-
-    afterEach(function() {
-      if (tooltip) {
-        tooltip.release();
-        tooltip = null;
-      }
-    });
-
-    afterAll(function() {
-      if (document.body.contains(floating)) {
-        floating.parentNode.removeChild(floating);
-      }
-
       document.body.removeChild(container);
     });
   });
