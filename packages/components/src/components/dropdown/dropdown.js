@@ -58,6 +58,15 @@ class Dropdown extends mixin(
         }
       })
     );
+
+    this.manage(
+      on(this.element, 'mouseover', event => {
+        const item = eventMatches(event, this.options.selectorItem);
+        if (item) {
+          this._updateFocus(item);
+        }
+      })
+    );
   }
 
   /**
@@ -95,12 +104,11 @@ class Dropdown extends mixin(
   }
 
   /**
-   * When using aria-activedescendent we want to make sure attributes and classes
+   * When using aria-activedescendant we want to make sure attributes and classes
    * are properly cleaned up when the dropdown is closed
    * @private
    */
   _focusCleanup() {
-    console.log('in focusClean up');
     const triggerNode = this.element.querySelector(
       this.options.selectorTrigger
     );
@@ -118,6 +126,30 @@ class Dropdown extends mixin(
       if (focusedItem) {
         focusedItem.classList.remove(this.options.classFocused);
       }
+    }
+  }
+
+  /**
+   * Update focus using aria-activedescendant HTML structure
+   * @param {HTMLElement} itemToFocus The element to be focused.
+   */
+  _updateFocus(itemToFocus) {
+    const triggerNode = this.element.querySelector(
+      this.options.selectorTrigger
+    );
+
+    // only want to grab the listNode IF it's using the latest a11y HTML structure
+    const listNode = triggerNode
+      ? this.element.querySelector(this.options.selectorMenu)
+      : null;
+
+    const previouslyFocused = listNode.querySelector(
+      this.options.selectorItemFocused
+    );
+    itemToFocus.classList.add(this.options.classFocused);
+    listNode.setAttribute('aria-activedescendant', itemToFocus.id);
+    if (previouslyFocused) {
+      previouslyFocused.classList.remove(this.options.classFocused);
     }
   }
 
@@ -287,15 +319,7 @@ class Dropdown extends mixin(
         // Using the latest semantic markup structure where trigger is a button
         // @todo remove conditional once legacy structure is depreciated
         if (this.element.querySelector(this.options.selectorTrigger)) {
-          const listNode = this.element.querySelector(
-            this.options.selectorMenu
-          );
-          const previouslyFocused = listNode.querySelector(
-            this.options.selectorItemFocused
-          );
-          current.classList.add(this.options.classFocused);
-          listNode.setAttribute('aria-activedescendant', current.id);
-          previouslyFocused.classList.remove(this.options.classFocused);
+          this._updateFocus(current);
         } else {
           current.focus();
         }
