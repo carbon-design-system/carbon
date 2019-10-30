@@ -10,25 +10,21 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const ProgressIndicatorSkeleton = () => {
-  const currentSvg = (
-    <svg>
-      <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
-    </svg>
-  );
+const step = (
+  <li
+    className={`${prefix}--progress-step ${prefix}--progress-step--incomplete`}>
+    <div
+      className={`${prefix}--progress-step-button ${prefix}--progress-step-button--unclickable`}>
+      <svg>
+        <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
+      </svg>
+      <p className={`${prefix}--progress-label`} />
+      <span className={`${prefix}--progress-line`} />
+    </div>
+  </li>
+);
 
-  const step = (
-    <li
-      className={`${prefix}--progress-step ${prefix}--progress-step--incomplete`}>
-      <div
-        className={`${prefix}--progress-step-button ${prefix}--progress-step-button--unclickable`}>
-        {currentSvg}
-        <p className={`${prefix}--progress-label`} />
-        <span className={`${prefix}--progress-line`} />
-      </div>
-    </li>
-  );
-
+function ProgressIndicatorSkeleton() {
   return (
     <ul className={`${prefix}--progress ${prefix}--skeleton`}>
       {step}
@@ -37,6 +33,6 @@ const ProgressIndicatorSkeleton = () => {
       {step}
     </ul>
   );
-};
+}
 
 export default ProgressIndicatorSkeleton;
