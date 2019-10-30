@@ -10,13 +10,13 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const TabsSkeleton = () => {
-  const tab = (
-    <li className={`${prefix}--tabs__nav-item`}>
-      <div className={`${prefix}--tabs__nav-link`}>&nbsp;</div>
-    </li>
-  );
+const tab = (
+  <li className={`${prefix}--tabs__nav-item`}>
+    <div className={`${prefix}--tabs__nav-link`}>&nbsp;</div>
+  </li>
+);
 
+function TabsSkeleton() {
   return (
     <div className={`${prefix}--tabs ${prefix}--skeleton`}>
       <div className={`${prefix}--tabs-trigger`}>
@@ -33,6 +33,6 @@ const TabsSkeleton = () => {
       </ul>
     </div>
   );
-};
+}
 
 export default TabsSkeleton;
