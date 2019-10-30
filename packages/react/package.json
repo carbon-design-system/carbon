@@ -29,7 +29,7 @@
     "clean": "rimraf es lib umd storybook-static",
     "prepublish": "yarn build",
     "start": "yarn storybook",
-    "storybook": "start-storybook -p 9000"
+    "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000"
   },
   "peerDependencies": {
     "carbon-components": "^10.6.0",
@@ -103,7 +103,7 @@
     "react-dom": "^16.8.6",
     "react-test-renderer": "^16.8.6",
     "requestanimationframe": "^0.0.23",
-    "rimraf": "^2.6.3",
+    "rimraf": "^3.0.0",
     "rollup": "^1.10.0",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.3.4",
@@ -112,7 +112,7 @@
     "rollup-plugin-sizes": "^0.5.0",
     "rollup-plugin-terser": "^4.0.0",
     "rtlcss": "^2.4.0",
-    "sass-loader": "^7.1.0",
+    "sass-loader": "^8.0.0",
     "storybook-readme": "^5.0.8",
     "string-replace-loader": "^2.1.0",
     "terser-webpack-plugin": "^1.1.0",
