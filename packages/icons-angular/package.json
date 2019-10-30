@@ -30,7 +30,7 @@
     "build": "yarn build:full",
     "build:full": "yarn clean && yarn build:generate && yarn build:ivy && yarn build:compat",
     "build:local": "yarn clean && yarn build:generate && yarn build:ivy",
-    "build:ivy": "node --max_old_space_size=2048 ./node_modules/.bin/ng-packagr -p package.json",
+    "build:ivy": "node --max_old_space_size=3512 ./node_modules/.bin/ng-packagr -p package.json",
     "build:compat": "node --max_old_space_size=2512 tasks/build-compat.js",
     "build:generate": "node tasks/generate.js",
     "clean": "node tasks/clean.js"
