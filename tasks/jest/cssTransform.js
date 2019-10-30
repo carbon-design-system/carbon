@@ -38,6 +38,12 @@ module.exports = {
   getCacheKey(file, filename, configString, { rootDir }) {
     // Inspired by babel-jest:
     // https://github.com/facebook/jest/blob/164e2095642420c393236e21dcaeddfdfb507c76/packages/babel-jest/src/index.ts#L80
+    //
+    // This creates a unique hash that will change when any of the values passed
+    // to .update() changes. At a high level, this will control whether or not
+    // this transform will be reloaded, or not, and depends on things like the
+    // current transform file (this file), the given file, file location and
+    // configuration for the runner itself
     return createHash('md5')
       .update(THIS_FILE)
       .update('\0', 'utf8')
