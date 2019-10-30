@@ -115,7 +115,7 @@ export default class DataTable extends React.Component {
      * Still experimental: may not work with every combination of table props
      */
     stickyHeader: PropTypes.bool,
-    
+
     /**
      * Specify whether the table should be able to be sorted by its headers
      */
