@@ -156,8 +156,12 @@ storiesOf('ComboBox', module)
       },
     }
   )
-  .add('fully controlled', () => <ControlledComboBoxApp {...props()} />, {
-    info: {
-      text: `Fully controlled ComboBox example application`,
-    },
-  });
+  .add(
+    'application-level control for selection',
+    () => <ControlledComboBoxApp {...props()} />,
+    {
+      info: {
+        text: `Controlled ComboBox example application`,
+      },
+    }
+  );
