@@ -10,11 +10,13 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const RadioButtonSkeleton = () => (
-  <div className={`${prefix}--radio-button-wrapper`}>
-    <div className={`${prefix}--radio-button ${prefix}--skeleton`} />
-    <span className={`${prefix}--radio-button__label ${prefix}--skeleton`} />
-  </div>
-);
+function RadioButtonSkeleton() {
+  return (
+    <div className={`${prefix}--radio-button-wrapper`}>
+      <div className={`${prefix}--radio-button ${prefix}--skeleton`} />
+      <span className={`${prefix}--radio-button__label ${prefix}--skeleton`} />
+    </div>
+  );
+}
 
 export default RadioButtonSkeleton;
