@@ -137,12 +137,6 @@ class Tooltip extends mixin(
         throw new Error('Cannot find the target tooltip.');
       }
 
-      // Set up focus to be moved to the content on tooltips with no interactive elements
-      const content = tooltip.querySelector(this.options.selectorContent);
-      if (content.querySelector(settings.selectorTabbable) === null) {
-        content.setAttribute('data-floating-menu-primary-focus', '');
-      }
-
       // Lazily create a component instance for tooltip
       this.tooltip = FloatingMenu.create(tooltip, {
         refNode: this.element,
