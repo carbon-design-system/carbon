@@ -25,7 +25,6 @@
     @include reset;
 
     display: flex;
-    justify-content: space-between;
     position: relative;
     height: auto;
     min-height: rem(48px);
@@ -139,6 +138,7 @@
 
   .#{$prefix}--inline-notification__details {
     display: flex;
+    flex-grow: 1;
     margin: 0 $carbon--spacing-05;
   }
 
@@ -200,8 +200,6 @@
       background-color $duration--fast-02 motion(standard, productive);
 
     .#{$prefix}--inline-notification__close-icon {
-      height: 1rem;
-      width: 1rem;
       fill: $inverse-01;
     }
   }

@@ -44,6 +44,11 @@ export default class Tabs extends React.Component {
     role: PropTypes.string.isRequired,
 
     /**
+     * Provide the type of Tab
+     */
+    type: PropTypes.oneOf(['default', 'fixed']),
+
+    /**
      * Optionally provide an `onClick` handler that is invoked when a <Tab> is
      * clicked
      */
@@ -87,6 +92,7 @@ export default class Tabs extends React.Component {
   static defaultProps = {
     iconDescription: 'show menu options',
     role: 'navigation',
+    type: 'default',
     triggerHref: '#',
     selected: 0,
     ariaLabel: 'listbox',
@@ -191,6 +197,7 @@ export default class Tabs extends React.Component {
       className,
       triggerHref,
       role,
+      type,
       onSelectionChange,
       tabContentClassName,
       ...other
@@ -241,7 +248,9 @@ export default class Tabs extends React.Component {
     });
 
     const classes = {
-      tabs: classNames(`${prefix}--tabs`, className),
+      tabs: classNames(`${prefix}--tabs`, className, {
+        [`${prefix}--tabs--fixed`]: type === 'fixed',
+      }),
       tablist: classNames(`${prefix}--tabs__nav`, {
         [`${prefix}--tabs__nav--hidden`]: this.state.dropdownHidden,
       }),
