@@ -95,6 +95,33 @@ class Dropdown extends mixin(
   }
 
   /**
+   * When using aria-activedescendent we want to make sure attributes and classes
+   * are properly cleaned up when the dropdown is closed
+   * @private
+   */
+  _focusCleanup() {
+    console.log('in focusClean up');
+    const triggerNode = this.element.querySelector(
+      this.options.selectorTrigger
+    );
+
+    // only want to grab the listNode IF it's using the latest a11y HTML structure
+    const listNode = triggerNode
+      ? this.element.querySelector(this.options.selectorMenu)
+      : null;
+
+    if (listNode) {
+      listNode.removeAttribute('aria-activedescendant');
+      const focusedItem = this.element.querySelector(
+        this.options.selectorItemFocused
+      );
+      if (focusedItem) {
+        focusedItem.classList.remove(this.options.classFocused);
+      }
+    }
+  }
+
+  /**
    * Opens and closes the dropdown menu.
    * @param {Event} [event] The event triggering this method.
    *
@@ -181,15 +208,7 @@ class Dropdown extends mixin(
         if (triggerNode) {
           triggerNode.setAttribute('aria-expanded', 'false');
         }
-        if (listNode) {
-          listNode.removeAttribute('aria-activedescendant');
-          const focusedItem = this.element.querySelector(
-            this.options.selectorItemFocused
-          );
-          if (focusedItem) {
-            focusedItem.classList.remove(this.options.classFocused);
-          }
-        }
+        this._focusCleanup();
       }
 
       // @todo remove once legacy structure is depreciated
@@ -337,6 +356,7 @@ class Dropdown extends mixin(
    */
   handleBlur() {
     this.element.classList.remove(this.options.classOpen);
+    this._focusCleanup();
   }
 
   /**
