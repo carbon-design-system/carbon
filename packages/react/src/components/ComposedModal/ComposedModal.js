@@ -148,6 +148,10 @@ export default class ComposedModal extends Component {
     }
   };
 
+  componentWillUnmount() {
+    toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+  }
+
   componentDidMount() {
     toggleClass(
       document.body,
