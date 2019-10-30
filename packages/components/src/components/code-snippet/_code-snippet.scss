@@ -201,6 +201,7 @@
 
   .#{$prefix}--btn--copy__feedback::before,
   .#{$prefix}--btn--copy__feedback::after {
+    @include type-style('code-01');
     background: $copy-btn-feedback;
   }
 
@@ -309,7 +310,7 @@
   }
 
   .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
-    top: calc(100% - #{rem(4px)});
+    top: calc(100% - #{rem(4px)}); // offset
     right: auto;
     left: 50%;
   }
