@@ -10,13 +10,13 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const BreadcrumbSkeleton = () => {
-  const item = (
-    <div className={`${prefix}--breadcrumb-item`}>
-      <span className={`${prefix}--link`}>&nbsp;</span>
-    </div>
-  );
+const item = (
+  <div className={`${prefix}--breadcrumb-item`}>
+    <span className={`${prefix}--link`}>&nbsp;</span>
+  </div>
+);
 
+function BreadcrumbSkeleton() {
   return (
     <div className={`${prefix}--breadcrumb ${prefix}--skeleton`}>
       {item}
@@ -24,6 +24,6 @@ const BreadcrumbSkeleton = () => {
       {item}
     </div>
   );
-};
+}
 
 export default BreadcrumbSkeleton;
