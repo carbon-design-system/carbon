@@ -4651,12 +4651,14 @@ $carbon--theme--white: (
     letter-spacing: 0,
   ),
   code-01: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
     letter-spacing: 0.32px,
   ),
   code-02: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -5111,12 +5113,14 @@ $carbon--theme--g10: (
     letter-spacing: 0,
   ),
   code-01: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
     letter-spacing: 0.32px,
   ),
   code-02: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -5569,12 +5573,14 @@ $carbon--theme--g90: (
     letter-spacing: 0,
   ),
   code-01: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
     letter-spacing: 0.32px,
   ),
   code-02: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -6027,12 +6033,14 @@ $carbon--theme--g100: (
     letter-spacing: 0,
   ),
   code-01: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
     letter-spacing: 0.32px,
   ),
   code-02: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -6485,12 +6493,14 @@ $carbon--theme--v9: (
     letter-spacing: 0,
   ),
   code-01: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
     letter-spacing: 0.32px,
   ),
   code-02: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -8727,6 +8737,7 @@ $code-01: if(
     ),
   map-get($carbon--theme, 'code-01'),
   (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
@@ -8755,6 +8766,7 @@ $code-02: if(
     ),
   map-get($carbon--theme, 'code-02'),
   (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -11590,6 +11602,7 @@ $body-long-02: (
 
 ```scss
 $code-01: (
+  font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(16px),
@@ -11609,6 +11622,7 @@ $code-01: (
 
 ```scss
 $code-02: (
+  font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(20px),

@@ -124,7 +124,7 @@
       "prettier --write",
       "git add"
     ],
-    "*.md": [
+    "!(**/docs/sass)*.md": [
       "alex",
       "prettier --write",
       "git add"
