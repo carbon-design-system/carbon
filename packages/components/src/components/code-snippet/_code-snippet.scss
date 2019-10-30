@@ -309,7 +309,7 @@
   }
 
   .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
-    top: 80%;
+    top: calc(100% - #{rem(4px)});
     right: auto;
     left: 50%;
   }
