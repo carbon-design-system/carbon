@@ -56,7 +56,7 @@ export default props => (
         title="DataTable"
         description="With batch actions"
         {...getTableContainerProps()}>
-        <TableToolbar aria-label="data table toolbar">
+        <TableToolbar>
           <TableBatchActions {...getBatchActionProps()}>
             <TableBatchAction
               renderIcon={Delete}

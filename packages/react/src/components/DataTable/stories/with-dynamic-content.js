@@ -118,7 +118,7 @@ export default props => {
               title="DataTable"
               description="Use the toolbar menu to add rows and headers"
               {...getTableContainerProps()}>
-              <TableToolbar aria-label="data table toolbar">
+              <TableToolbar>
                 <TableBatchActions {...getBatchActionProps()}>
                   <TableBatchAction
                     renderIcon={Delete}
