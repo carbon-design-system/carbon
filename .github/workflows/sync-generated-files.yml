@@ -34,5 +34,5 @@ jobs:
             git config --global user.name "carbon-bot"
             git add -A
             git commit -m "chore(project): sync generated files [skip ci]"
-            git push "https://$GH_BOT_TOKEN:@github.com/carbon-design-system/carbon.git" master
+            git push "https://x-access-token:$GH_BOT_TOKEN@github.com/carbon-design-system/carbon.git" master
           fi
