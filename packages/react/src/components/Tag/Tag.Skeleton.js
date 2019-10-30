@@ -10,8 +10,8 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const TagSkeleton = () => (
-  <span className={`${prefix}--tag ${prefix}--skeleton`} />
-);
+function TagSkeleton() {
+  return <span className={`${prefix}--tag ${prefix}--skeleton`} />;
+}
 
 export default TagSkeleton;
