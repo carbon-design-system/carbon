@@ -400,14 +400,25 @@ function primitive(value) {
     if (value[0] === '#') {
       return t.SassColor(value);
     }
-    return t.SassValue(value);
-  } else if (typeof value === 'number') {
+    if (
+      value.endsWith('px') ||
+      value.endsWith('em') ||
+      value.endsWith('%') ||
+      value.startsWith('rgb')
+    ) {
+      return t.SassValue(value);
+    }
+    return t.SassValue(`unquote("${value}")`);
+  }
+  if (typeof value === 'number') {
     return t.SassNumber(value);
-  } else if (Array.isArray(value)) {
+  }
+  if (Array.isArray(value)) {
     return t.SassList({
       elements: value.map(primitive),
     });
-  } else if (typeof value === 'object') {
+  }
+  if (typeof value === 'object') {
     return t.SassMap({
       properties: Object.keys(value).map(key => {
         const quoted = key.includes(' ');
