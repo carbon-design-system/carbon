@@ -350,7 +350,8 @@ class FloatingMenu extends mixin(
           if (__DEV__) {
             warning(
               focusableNode === null,
-              'Floating Menus must at least a programmatic focusable child by adding tabindex="-1" to the content element.'
+              'Floating Menus must have at least a programmatically focusable child. ' +
+                'This can be accomplished by adding tabindex="-1" to the content element.'
             );
           }
         }
