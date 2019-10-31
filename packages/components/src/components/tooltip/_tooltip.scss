@@ -356,12 +356,13 @@
     max-width: rem(288px);
     background: $inverse-02;
     margin-top: $carbon--spacing-02;
-    padding: 1rem;
+    padding: $carbon--spacing-05;
     border-radius: rem(2px);
     z-index: z('floating');
     word-wrap: break-word;
     color: $inverse-01;
 
+    // @todo this can be deprecated in v11 since focus should always be on the content container not the tooltip
     &:focus {
       box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px $ui-background;
       outline: 0;
@@ -396,6 +397,13 @@
       &:visited {
         color: $inverse-link;
       }
+    }
+
+    // Tooltips need to be click focusable but not sequentially focusable so the user can click within
+    // the tooltip and not have it close. Because the element is not actionable it does not need
+    // to have a visible focus indicator (OK'd by IBMa)
+    .#{$prefix}--tooltip__content[tabindex='-1']:focus {
+      outline: none;
     }
 
     .#{$prefix}--tooltip__caret {
