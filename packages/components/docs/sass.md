@@ -17237,6 +17237,24 @@ Dropdown styles
     }
   }
 
+  .#{$prefix}--dropdown--show-selected .#{$prefix}--dropdown--selected {
+    background-color: $hover-ui;
+    color: $text-01;
+    display: block;
+
+    &:hover {
+      background-color: $selected-ui;
+    }
+
+    .#{$prefix}--dropdown-link {
+      border-top-color: transparent;
+    }
+
+    + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
+      border-top-color: transparent;
+    }
+  }
+
   // Skeleton State
   .#{$prefix}--dropdown-v2.#{$prefix}--skeleton,
   .#{$prefix}--dropdown.#{$prefix}--skeleton {
