@@ -12,26 +12,11 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
-const TableToolbar = ({
-  'aria-label': ariaLabel,
-  'aria-labelledby': ariaLabelledBy,
-  children,
-  ...rest
-}) => {
-  const accessibilityLabel = {
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledBy,
-  };
-
-  return (
-    <section
-      {...rest}
-      {...accessibilityLabel}
-      className={`${prefix}--table-toolbar`}>
-      {children}
-    </section>
-  );
-};
+const TableToolbar = ({ children, ...rest }) => (
+  <section {...rest} className={`${prefix}--table-toolbar`}>
+    {children}
+  </section>
+);
 
 TableToolbar.propTypes = {
   /**
