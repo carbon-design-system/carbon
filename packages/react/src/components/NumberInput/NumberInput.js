@@ -15,6 +15,7 @@ import {
   CaretUpGlyph,
 } from '@carbon/icons-react';
 import mergeRefs from '../../tools/mergeRefs';
+import deprecate from '../../prop-types/deprecate';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 import { useControlledStateWithValue } from '../../internal/FeatureFlags';
 
@@ -137,7 +138,10 @@ class NumberInput extends Component {
     /**
      * Provide a description that would be used to best describe the use case of the NumberInput component
      */
-    ariaLabel: PropTypes.string,
+    ariaLabel: deprecate(
+      PropTypes.string,
+      `\nThe prop \`ariaLabel\` for NumberInput has been deprecated in favor of \`label\`.`
+    ),
     /**
      * `true` to use the light version.
      */
@@ -164,7 +168,6 @@ class NumberInput extends Component {
     step: 1,
     invalid: false,
     invalidText: 'Provide invalidText',
-    ariaLabel: 'Numeric input field with increment and decrement buttons',
     helperText: '',
     light: false,
     allowEmpty: false,
@@ -266,7 +269,6 @@ class NumberInput extends Component {
       invalid,
       invalidText,
       helperText,
-      ariaLabel,
       light,
       allowEmpty,
       innerRef: ref,
@@ -298,7 +300,7 @@ class NumberInput extends Component {
           ? value
           : this.state.value,
       readOnly,
-      'aria-label': ariaLabel,
+      'aria-label': label,
     };
 
     const buttonProps = {
