@@ -26,7 +26,6 @@ const props = {
       'red'
     ),
     disabled: boolean('Disabled (disabled)', false),
-    role: 'listitem',
     title: 'Clear Selection',
   }),
   filter() {
