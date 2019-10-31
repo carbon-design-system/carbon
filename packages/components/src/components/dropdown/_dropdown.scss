@@ -247,6 +247,14 @@
     padding: rem(11px) rem(16px);
   }
 
+  // Don't want to allow multiple elements have a "selected" style. Not sure why active
+  // had unique styles initially but creating an overwrite for the latest HTML markup for
+  // backwards compatibility
+  .#{$prefix}--dropdown-list[aria-activedescendant]
+    .#{$prefix}--dropdown-item:active {
+    background-color: inherit;
+  }
+
   .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
     border-bottom-color: $hover-ui;
   }
