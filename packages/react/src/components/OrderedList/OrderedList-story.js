@@ -8,9 +8,9 @@ storiesOf('OrderedList', module)
     'default',
     () => (
       <OrderedList>
-        <ListItem>Unordered List level 1</ListItem>
-        <ListItem>Unordered List level 1</ListItem>
-        <ListItem>Unordered List level 1</ListItem>
+        <ListItem>Ordered List level 1</ListItem>
+        <ListItem>Ordered List level 1</ListItem>
+        <ListItem>Ordered List level 1</ListItem>
       </OrderedList>
     ),
     {
@@ -23,17 +23,21 @@ storiesOf('OrderedList', module)
     'nested',
     () => (
       <OrderedList>
-        <ListItem>Unordered List level 1</ListItem>
-        <OrderedList nested>
-          <ListItem>Unordered List level 2</ListItem>
-          <ListItem>Unordered List level 2</ListItem>
+        <ListItem>
+          Ordered List level 1
           <OrderedList nested>
-            <ListItem>Unordered List level 2</ListItem>
-            <ListItem>Unordered List level 2</ListItem>
+            <ListItem>Ordered List level 2</ListItem>
+            <ListItem>
+              Ordered List level 2
+              <OrderedList nested>
+                <ListItem>Ordered List level 2</ListItem>
+                <ListItem>Ordered List level 2</ListItem>
+              </OrderedList>
+            </ListItem>
           </OrderedList>
-        </OrderedList>
-        <ListItem>Unordered List level 1</ListItem>
-        <ListItem>Unordered List level 1</ListItem>
+        </ListItem>
+        <ListItem>Ordered List level 1</ListItem>
+        <ListItem>Ordered List level 1</ListItem>
       </OrderedList>
     ),
     {

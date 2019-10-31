@@ -37,7 +37,6 @@
 
   .#{$prefix}--slider__range-label {
     @include type-style('code-02');
-    font-family: carbon--font-family('mono');
     color: $text-01;
 
     &:last-of-type {
