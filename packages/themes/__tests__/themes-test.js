@@ -27,6 +27,9 @@ function formatObjectKeys(object) {
     }
     return parseFloat(object, 10);
   }
+  if (Array.isArray(object)) {
+    return object;
+  }
   return Object.keys(object).reduce((acc, key) => {
     return {
       ...acc,
