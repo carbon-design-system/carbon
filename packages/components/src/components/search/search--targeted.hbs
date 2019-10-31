@@ -1,0 +1,32 @@
+<!-- 
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+{{#is suffix "sm"}}<div class="{{@root.prefix}}--form-item">{{/is}}
+  <div class="{{@root.prefix}}--search--targeted__container {{@root.prefix}}--search--targeted--{{suffix}}__container">
+    <div data-dropdown class="{{@root.prefix}}--dropdown">
+      <button class="{{@root.prefix}}--dropdown-text" aria-haspopup="true" aria-expanded="false" aria-controls="{{default.idSuffix}}-menu" aria-labelledby="{{default.idSuffix}}-label {{default.idSuffix}}-value" type="button">
+        <span class="{{@root.prefix}}--dropdown-text__inner" id="{{default.idSuffix}}-value">Search options</span>
+        <span class="{{@root.prefix}}--dropdown__arrow-container">
+          {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--dropdown__arrow') }}
+        </span>
+      </button>
+      <ul class="{{@root.prefix}}--dropdown-list" id="{{default.idSuffix}}-menu" role="menu" tabindex="0" id="{{default.idSuffix}}-menu" aria-hidden="true" wh-menu-anchor="left" aria-labelledby="{{default.idSuffix}}-label">
+        <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
+          <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1" role="menuitemradio" aria-checked="false" id="{{../default.idSuffix}}-item-0">Search option 1</a>
+        </li>
+        <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
+          <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1" role="menuitemradio" aria-checked="false" id="{{../default.idSuffix}}-item-1">Search option 2</a>
+        </li>
+      </ul>
+    </div>
+    <div data-search role="search" class="{{@root.prefix}}--search {{@root.prefix}}--search--{{suffix}}{{#if light}} {{@root.prefix}}--search--light{{/if}}">
+      <label id="search-input-label-1" class="{{@root.prefix}}--label" for="search__input-1">Search</label>
+      <input class="{{@root.prefix}}--search-input" type="text" id="search__input-1" placeholder="Search">
+      {{ carbon-icon 'Search16' class=(add @root.prefix '--search-magnifier') }}
+    </div>
+  </div>
+{{#is suffix "sm"}}</div>{{/is}}

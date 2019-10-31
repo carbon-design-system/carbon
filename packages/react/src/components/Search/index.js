@@ -6,4 +6,5 @@
  */
 
 export * from './Search.Skeleton';
+export TargetedSearchContainer from './TargetedSearchContainer';
 export default from './Search';

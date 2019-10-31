@@ -28,6 +28,14 @@ module.exports = {
       },
     },
     {
+      name: 'targeted',
+      label: 'Normal search (Targeted)',
+      context: {
+        suffix: 'xl',
+        targeted: true,
+      },
+    },
+    {
       name: 'large',
       label: 'Medium search',
       notes: `
@@ -41,6 +49,15 @@ module.exports = {
       },
     },
     {
+      name: 'large--targeted',
+      label: 'Medium search (Targeted)',
+      view: 'search--targeted',
+      context: {
+        suffix: 'lg',
+        targeted: true,
+      },
+    },
+    {
       name: 'small',
       label: 'Small search',
       notes: `
@@ -51,6 +68,15 @@ module.exports = {
       `,
       context: {
         suffix: 'sm',
+      },
+    },
+    {
+      name: 'small--targeted',
+      label: 'Small search (Targeted)',
+      view: 'search--targeted',
+      context: {
+        suffix: 'sm',
+        targeted: true,
       },
     },
     {

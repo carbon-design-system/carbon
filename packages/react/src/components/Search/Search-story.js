@@ -12,7 +12,8 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
-import Search from '../Search';
+import Dropdown from '../Dropdown';
+import Search, { TargetedSearchContainer } from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
 import SearchFilterButton from '../SearchFilterButton';
 import SearchLayoutButton from '../SearchLayoutButton';
@@ -27,6 +28,20 @@ const props = () => ({
   className: 'some-class',
   size: select('Size (size)', sizes, 'xl'),
   light: boolean('Light variant (light)', false),
+  name: text('Form item name (name)', ''),
+  defaultValue: text('Default value (defaultValue)', ''),
+  labelText: text('Label text (labelText)', 'Search'),
+  closeButtonLabelText: text(
+    'The label text for the close button (closeButtonLabelText)',
+    'Clear search input'
+  ),
+  placeHolderText: text('Placeholder text (placeHolderText)', 'Search'),
+  onChange: action('onChange'),
+});
+
+const targetedProps = () => ({
+  className: 'some-class',
+  size: select('Size (size)', sizes, 'xl'),
   name: text('Form item name (name)', ''),
   defaultValue: text('Default value (defaultValue)', ''),
   labelText: text('Label text (labelText)', 'Search'),
@@ -66,6 +81,21 @@ storiesOf('Search', module)
       },
     }
   )
+  .add('targeted', () => {
+    const searchProps = targetedProps();
+    const { size } = searchProps;
+    return (
+      <TargetedSearchContainer size={size}>
+        <Dropdown
+          id="dropdown-1"
+          label="Dropdown menu options"
+          initialSelectedItem="Option 1"
+          items={['Option 1', 'Option 2', 'Option 3']}
+        />
+        <Search {...searchProps} />
+      </TargetedSearchContainer>
+    );
+  })
   .add(
     'skeleton',
     () => (
