@@ -22,8 +22,14 @@ const ListBoxMenuCategory = ({ children, categoryLabel, ...rest }) => {
     [`${prefix}--list-box__menu-category`]: true,
   });
   return (
-    <div className={className} {...rest}>
-      <div className={`${prefix}--list-box__menu-category__option`}>
+    <div
+      className={className}
+      aria-labelledby={categoryLabel}
+      role="group"
+      {...rest}>
+      <div
+        id={categoryLabel}
+        className={`${prefix}--list-box__menu-category__option`}>
         {categoryLabel}
       </div>
       {children}

@@ -34,7 +34,7 @@ const ListBoxMenuItem = ({
     [`${prefix}--list-box__menu-item__option--category`]: isCategoryItem,
   });
   return (
-    <div className={className} {...rest}>
+    <div className={className} role="option" aria-selected={isActive} {...rest}>
       <div className={optionClassName}>{children}</div>
     </div>
   );
