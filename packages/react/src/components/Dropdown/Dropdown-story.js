@@ -17,7 +17,7 @@ const items = [
   {
     id: 'option-1',
     text: 'Option 1',
-    category: 'Europe',
+    category: 'Asia',
   },
   {
     id: 'option-2',
@@ -32,7 +32,7 @@ const items = [
   {
     id: 'option-4',
     text: 'Option 4',
-    category: 'Asia',
+    category: 'Europe',
   },
 ];
 

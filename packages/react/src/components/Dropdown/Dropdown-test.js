@@ -15,7 +15,7 @@ import {
   generateItems,
   generateGenericItem,
 } from '../ListBox/test-helpers';
-import { default as Dropdown, getA11yStatusMessageFunction } from '../Dropdown';
+import Dropdown from '../Dropdown';
 import DropdownSkeleton from '../Dropdown/Dropdown.Skeleton';
 import { settings } from 'carbon-components';
 
@@ -268,13 +268,17 @@ describe('Dropdown', () => {
           highlightedItem: 'Raspberries',
         },
         output: 'Raspberries',
-        outputWithCategories: 'Raspberries (Fruit)',
+        outputWithCategories:
+          'Fruit category entered with 5 items. Raspberries',
       },
     ];
 
     describe('without categories', () => {
       beforeEach(() => {
-        getA11yStatusMessage = getA11yStatusMessageFunction();
+        const wrapper = shallow(<Dropdown {...mockProps} />);
+        getA11yStatusMessage = wrapper
+          .instance()
+          .getA11yStatusMessageFunction();
       });
 
       tests.forEach(({ input, output }) => {
@@ -288,7 +292,12 @@ describe('Dropdown', () => {
 
     describe('with categories', () => {
       beforeEach(() => {
-        getA11yStatusMessage = getA11yStatusMessageFunction(() => 'Fruit');
+        const wrapper = shallow(
+          <Dropdown {...mockProps} itemToCategory={() => 'Fruit'} />
+        );
+        getA11yStatusMessage = wrapper
+          .instance()
+          .getA11yStatusMessageFunction();
       });
 
       tests.forEach(({ input, outputWithCategories }) => {

@@ -438,10 +438,7 @@ $list-box-menu-width: rem(300px);
     position: relative;
     transition: background $duration--fast-01 motion(standard, productive);
     cursor: default;
-
-    .#{$prefix}--list-box__menu-item:last-child {
-      margin-bottom: $carbon--spacing-04;
-    }
+    padding-bottom: $carbon--spacing-04;
   }
 
   .#{$prefix}--list-box__menu-category__option {

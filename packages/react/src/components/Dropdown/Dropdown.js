@@ -27,38 +27,6 @@ const defaultItemToString = item => {
 
 const getInstanceId = setupGetInstanceId();
 
-export const getA11yStatusMessageFunction = itemToCategory => {
-  // Copied directly from https://github.com/downshift-js/downshift/blob/v1.31.16/src/utils.js#L190
-  // to allow overwriting of aria-labels when categories are present
-  return ({
-    isOpen,
-    highlightedItem,
-    selectedItem,
-    resultCount,
-    previousResultCount,
-    itemToString,
-  }) => {
-    if (!isOpen) {
-      if (selectedItem) {
-        return itemToString(selectedItem);
-      } else {
-        return '';
-      }
-    }
-    const resultCountChanged = resultCount !== previousResultCount;
-    if (!resultCount) {
-      return 'No results.';
-    } else if (!highlightedItem || resultCountChanged) {
-      return `${resultCount} ${
-        resultCount === 1 ? 'result is' : 'results are'
-      } available, use up and down arrow keys to navigate.`;
-    }
-    return itemToCategory
-      ? `${itemToString(highlightedItem)} (${itemToCategory(highlightedItem)})`
-      : itemToString(highlightedItem);
-  };
-};
-
 export default class Dropdown extends React.Component {
   static propTypes = {
     /**
@@ -187,7 +155,25 @@ export default class Dropdown extends React.Component {
 
   constructor(props) {
     super(props);
+    this.getA11yStatusMessageFunction = this.getA11yStatusMessageFunction.bind(
+      this
+    );
     this.dropdownInstanceId = getInstanceId();
+    this.state = {
+      highlightedItem: null,
+    };
+
+    if (props.itemToCategory) {
+      const categoryMap = {};
+      props.items.forEach(item => {
+        const category = props.itemToCategory(item);
+        if (!categoryMap[category]) {
+          categoryMap[category] = [];
+        }
+        categoryMap[category].push(item);
+      });
+      this.state.categoryMap = categoryMap;
+    }
   }
 
   handleOnChange = selectedItem => {
@@ -195,6 +181,58 @@ export default class Dropdown extends React.Component {
       this.props.onChange({ selectedItem });
     }
   };
+
+  getA11yStatusMessageFunction() {
+    // Copied directly from https://github.com/downshift-js/downshift/blob/v1.31.16/src/utils.js#L190
+    // to allow overwriting of aria-labels when categories are present
+    return ({
+      isOpen,
+      highlightedItem,
+      selectedItem,
+      resultCount,
+      previousResultCount,
+      itemToString,
+    }) => {
+      if (!isOpen) {
+        if (selectedItem) {
+          return itemToString(selectedItem);
+        } else {
+          return '';
+        }
+      }
+      let newCategoryEnteredMessage;
+      if (this.props.itemToCategory) {
+        if (highlightedItem === this.state.highlightedItem) {
+          return;
+        }
+        if (
+          highlightedItem &&
+          (!this.state.highlightedItem ||
+            this.props.itemToCategory(this.state.highlightedItem) !==
+              this.props.itemToCategory(highlightedItem))
+        ) {
+          const categoryLength = this.state.categoryMap[
+            this.props.itemToCategory(highlightedItem)
+          ].length;
+          newCategoryEnteredMessage = `${this.props.itemToCategory(
+            highlightedItem
+          )} category entered with ${categoryLength} items.`;
+        }
+        this.setState({ highlightedItem: highlightedItem });
+      }
+      const resultCountChanged = resultCount !== previousResultCount;
+      if (!resultCount) {
+        return 'No results.';
+      } else if (!highlightedItem || resultCountChanged) {
+        return `${resultCount} ${
+          resultCount === 1 ? 'result is' : 'results are'
+        } available, use up and down arrow keys to navigate.`;
+      }
+      return newCategoryEnteredMessage
+        ? `${newCategoryEnteredMessage} ${itemToString(highlightedItem)}`
+        : itemToString(highlightedItem);
+    };
+  }
 
   renderItems(
     items,
@@ -210,36 +248,35 @@ export default class Dropdown extends React.Component {
 
     if (itemToCategory) {
       const result = [];
-      const categoryMap = {};
-      items.forEach((item, index) => {
-        const category = itemToCategory(item);
-        if (!categoryMap[category]) {
-          categoryMap[category] = [];
-        }
 
-        categoryMap[category].push(
-          <ListBox.MenuItem
-            key={itemToString(item)}
-            isActive={selectedItem === item}
-            isCategoryItem
-            isHighlighted={highlightedIndex === index || selectedItem === item}
-            {...getItemProps({ item, index })}>
-            {itemToElement ? (
-              <ItemToElement key={itemToString(item)} {...item} />
-            ) : (
-              itemToString(item)
-            )}
-          </ListBox.MenuItem>
-        );
-      });
-
-      for (let category in categoryMap) {
-        result.push(
-          <ListBox.MenuCategory categoryLabel={category} key={category}>
-            {categoryMap[category]}
-          </ListBox.MenuCategory>
-        );
-      }
+      let index = -1;
+      Object.keys(this.state.categoryMap)
+        .sort()
+        .forEach(category => {
+          result.push(
+            <ListBox.MenuCategory categoryLabel={category} key={category}>
+              {this.state.categoryMap[category].map(item => {
+                index++;
+                return (
+                  <ListBox.MenuItem
+                    key={itemToString(item)}
+                    isActive={selectedItem === item}
+                    isCategoryItem
+                    isHighlighted={
+                      highlightedIndex === index || selectedItem === item
+                    }
+                    {...getItemProps({ item, index })}>
+                    {itemToElement ? (
+                      <ItemToElement key={itemToString(item)} {...item} />
+                    ) : (
+                      itemToString(item)
+                    )}
+                  </ListBox.MenuItem>
+                );
+              })}
+            </ListBox.MenuCategory>
+          );
+        });
       return result;
     }
 
@@ -325,7 +362,7 @@ export default class Dropdown extends React.Component {
           {...downshiftProps}
           onChange={this.handleOnChange}
           itemToString={itemToString}
-          getA11yStatusMessage={getA11yStatusMessageFunction(itemToCategory)}
+          getA11yStatusMessage={this.getA11yStatusMessageFunction()}
           defaultSelectedItem={initialSelectedItem}
           selectedItem={selectedItem}>
           {({
