@@ -310,7 +310,9 @@
   }
 
   .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
-    top: calc(100% - #{rem(4px)}); // offset
+    // TODO: use updated global tooltip mixins under the hood
+    // since all of the positioning values for the copy button tooltip are arbitrary hard coded rem values, we need this arbitrary 4px offset to keep the proper tooltip spacing according to the spec
+    top: calc(100% - #{rem(4px)});
     right: auto;
     left: 50%;
   }
