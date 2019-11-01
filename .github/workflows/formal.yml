@@ -1,0 +1,27 @@
+# Workflow reference:
+# https://peterevans.dev/posts/github-actions-how-to-automate-code-formatting-in-pull-requests/
+name: format
+on: pull_request
+jobs:
+  format:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js 10.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Install dependencies
+        run: yarn install --offline
+      - name: Format source files
+        run: yarn format
+      - name: Check for modified files
+        id: git-check
+        run: echo ::set-output name=modified::$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)
+      - name: Push changes
+        if: steps.git-check.outputs.modified == 'true'
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git checkout $GITHUB_HEAD_REF
+          git commit -am "chore(format): run prettier"
+          git push
