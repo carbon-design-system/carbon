@@ -17,6 +17,9 @@
 /// @access private
 /// @group button
 @mixin button {
+  $container-01: var(--cds-container-01, 2rem);
+  $container-02: var(--cds-container-02, 2.5rem);
+
   // button set styles
   .#{$prefix}--btn-set {
     display: flex;
@@ -234,13 +237,12 @@
   }
 
   .#{$prefix}--btn--sm {
-    min-height: rem(32px);
+    min-height: $container-01;
     padding: $button-padding-sm;
   }
 
   .#{$prefix}--btn--field {
-    height: 40px;
-    min-height: 40px;
+    min-height: $container-02;
     padding: $button-padding-field;
   }
 

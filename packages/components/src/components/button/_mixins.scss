@@ -13,6 +13,8 @@
 @mixin button-base {
   @include reset;
   @include type-style('body-short-01');
+  $container-03: var(--cds-container-03, 3rem);
+  $icon-size-01: var(--cds-icon-size-01, 1rem);
 
   cursor: pointer;
   display: inline-flex;
@@ -20,7 +22,7 @@
   justify-content: space-between;
   vertical-align: top;
   flex-shrink: 0;
-  min-height: rem($button-height);
+  min-height: $container-03;
   padding: $button-padding;
   border-radius: $button-border-radius;
   text-align: left;
@@ -43,8 +45,8 @@
     position: absolute;
     right: rem(16px);
     flex-shrink: 0;
-    width: rem(16px);
-    height: rem(16px);
+    width: $icon-size-01;
+    height: $icon-size-01;
   }
 }
 
