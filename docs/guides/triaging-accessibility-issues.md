@@ -31,8 +31,8 @@ functionality:
   Whatever has gone wrong has made it impossible for the user to successfully
   complete their task or action.
 
-_Examples of major functionality failing are menu's not opening, lack of
-keyboard accessibility, poor contrast, or broken builds_
+_Examples of major functionality failing are menus not opening, lack of keyboard
+accessibility, poor contrast, or broken builds_
 
 - Minor - minor functionality isn't critical to the user completing the task but
   might make task completion frustrating or difficult.
@@ -57,14 +57,15 @@ Priority is based on the accessibility compliance of Carbon Components to WCAG
 Note:
 
 - Each High Priority issue (fails WCAG 2.1 A & AA) would be labeled
-  appropriately and included in the milestone for May 2020. (i.e. A11y, React,
-  Priority, Severity, etc.)
+  appropriately and included in the
+  [milestone](https://github.com/carbon-design-system/carbon/milestones) for
+  May 2020. (i.e. A11y, React, Priority, Severity, etc.)
 
 - All issues for a component should be referenced/linked and fixed at the same
   time.
 
 - Metrics would be based on the percentage of components (revised to 33) that do
-  not have any WCAG 2.1 A & AA issues. (approx. 30% compliant as of last week.)
+  not have any WCAG 2.1 A & AA issues.
 
 - \*Supported platforms included specific OS, browser and AT combinations as per
   IBM requirements: - Windows 10 w/ JAWS on Firefox & Chrome - iOS w/Voiceover
