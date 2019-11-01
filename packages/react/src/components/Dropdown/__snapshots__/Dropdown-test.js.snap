@@ -366,11 +366,13 @@ exports[`Dropdown should render custom item components 1`] = `
                 onMouseMove={[Function]}
               >
                 <div
+                  aria-selected={false}
                   className="bx--list-box__menu-item"
                   id="downshift-4-item-0"
                   onClick={[Function]}
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
+                  role="option"
                 >
                   <div
                     className="bx--list-box__menu-item__option"
@@ -401,11 +403,13 @@ exports[`Dropdown should render custom item components 1`] = `
                 onMouseMove={[Function]}
               >
                 <div
+                  aria-selected={false}
                   className="bx--list-box__menu-item"
                   id="downshift-4-item-1"
                   onClick={[Function]}
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
+                  role="option"
                 >
                   <div
                     className="bx--list-box__menu-item__option"
@@ -436,11 +440,13 @@ exports[`Dropdown should render custom item components 1`] = `
                 onMouseMove={[Function]}
               >
                 <div
+                  aria-selected={false}
                   className="bx--list-box__menu-item"
                   id="downshift-4-item-2"
                   onClick={[Function]}
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
+                  role="option"
                 >
                   <div
                     className="bx--list-box__menu-item__option"
@@ -471,11 +477,13 @@ exports[`Dropdown should render custom item components 1`] = `
                 onMouseMove={[Function]}
               >
                 <div
+                  aria-selected={false}
                   className="bx--list-box__menu-item"
                   id="downshift-4-item-3"
                   onClick={[Function]}
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
+                  role="option"
                 >
                   <div
                     className="bx--list-box__menu-item__option"
@@ -506,11 +514,13 @@ exports[`Dropdown should render custom item components 1`] = `
                 onMouseMove={[Function]}
               >
                 <div
+                  aria-selected={false}
                   className="bx--list-box__menu-item"
                   id="downshift-4-item-4"
                   onClick={[Function]}
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
+                  role="option"
                 >
                   <div
                     className="bx--list-box__menu-item__option"
@@ -882,11 +892,13 @@ exports[`Dropdown should render with strings as items 1`] = `
                 onMouseMove={[Function]}
               >
                 <div
+                  aria-selected={false}
                   className="bx--list-box__menu-item"
                   id="downshift-3-item-0"
                   onClick={[Function]}
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
+                  role="option"
                 >
                   <div
                     className="bx--list-box__menu-item__option"
@@ -906,11 +918,13 @@ exports[`Dropdown should render with strings as items 1`] = `
                 onMouseMove={[Function]}
               >
                 <div
+                  aria-selected={false}
                   className="bx--list-box__menu-item"
                   id="downshift-3-item-1"
                   onClick={[Function]}
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
+                  role="option"
                 >
                   <div
                     className="bx--list-box__menu-item__option"

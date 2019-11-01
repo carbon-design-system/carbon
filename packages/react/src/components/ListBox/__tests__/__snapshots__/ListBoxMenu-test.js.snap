@@ -15,7 +15,9 @@ exports[`ListBoxMenu should render 1`] = `
       isHighlighted={false}
     >
       <div
+        aria-selected={false}
         className="bx--list-box__menu-item"
+        role="option"
       >
         <div
           className="bx--list-box__menu-item__option"

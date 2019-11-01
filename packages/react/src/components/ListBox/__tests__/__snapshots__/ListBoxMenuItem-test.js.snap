@@ -7,7 +7,9 @@ exports[`ListBoxMenuItem should render 1`] = `
   isHighlighted={false}
 >
   <div
+    aria-selected={false}
     className="bx--list-box__menu-item"
+    role="option"
   >
     <div
       className="bx--list-box__menu-item__option"
@@ -27,7 +29,9 @@ exports[`ListBoxMenuItem should render 2`] = `
   isHighlighted={false}
 >
   <div
+    aria-selected={true}
     className="bx--list-box__menu-item bx--list-box__menu-item--active"
+    role="option"
   >
     <div
       className="bx--list-box__menu-item__option"
@@ -47,7 +51,9 @@ exports[`ListBoxMenuItem should render 3`] = `
   isHighlighted={true}
 >
   <div
+    aria-selected={false}
     className="bx--list-box__menu-item bx--list-box__menu-item--highlighted"
+    role="option"
   >
     <div
       className="bx--list-box__menu-item__option"
@@ -68,8 +74,10 @@ exports[`ListBoxMenuItem should render 4`] = `
   isHighlighted={false}
 >
   <div
+    aria-selected={false}
     className="bx--list-box__menu-item"
     isCategory={true}
+    role="option"
   >
     <div
       className="bx--list-box__menu-item__option"
