@@ -20,7 +20,7 @@ jobs:
         run: yarn sync
       - name: Push generated artifacts to GitHub
         env:
-          GH_BOT_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
         run: |
           if [ -n "$(git status --porcelain)" ]; then
             echo "Our git status is not clean. Checking in the following files:";
@@ -30,9 +30,9 @@ jobs:
             git config --global user.email "carbon@us.ibm.com"
             git config --global user.name "carbon-bot"
 
-            git remote set-url origin "https://x-access-token:$GH_BOT_TOKEN@github.com/carbon-design-system/carbon.git"
+            git remote set-url origin "https://x-access-token:$GH_TOKEN@github.com/carbon-design-system/carbon.git"
             git checkout master
             git add -A
-            git commit -m "chore(project): sync generated files [skip ci]"
+            git commit -m "chore(project): sync generated files"
             git push
           fi
