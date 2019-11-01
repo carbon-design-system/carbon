@@ -1,3 +1,5 @@
+<!-- alex disable failure -->
+
 # Triaging a new Accessibility Issue
 
 ## Severity
