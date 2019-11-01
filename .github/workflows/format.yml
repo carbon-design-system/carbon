@@ -3,7 +3,7 @@
 name: format
 on: pull_request
 jobs:
-  format:
+  prettier:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@master
