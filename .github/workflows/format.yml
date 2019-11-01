@@ -1,5 +1,3 @@
-# Workflow reference:
-# https://peterevans.dev/posts/github-actions-how-to-automate-code-formatting-in-pull-requests/
 name: format
 on: pull_request
 jobs:
