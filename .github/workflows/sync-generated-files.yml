@@ -12,10 +12,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      # This action is equivalent to running `git fetch` and
-      # `git checkout SHA`. We want to checkout `master`
-      - name: Checkout master
-        run: git checkout master
       - name: Install dependencies
         run: yarn install --offline
       - name: Build project
@@ -29,10 +25,14 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             echo "Our git status is not clean. Checking in the following files:";
             echo "$(git status --porcelain)";
+
             git config --global credential.helper 'cache --timeout=120'
             git config --global user.email "carbon@us.ibm.com"
             git config --global user.name "carbon-bot"
+
+            git remote set-url origin "https://x-access-token:$GH_BOT_TOKEN@github.com/carbon-design-system/carbon.git"
+            git checkout master
             git add -A
             git commit -m "chore(project): sync generated files [skip ci]"
-            git push "https://x-access-token:$GH_BOT_TOKEN@github.com/carbon-design-system/carbon.git" master
+            git push
           fi
