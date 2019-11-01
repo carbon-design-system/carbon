@@ -63,35 +63,19 @@ storiesOf('Tabs', module)
     () => (
       <Tabs {...props.tabs()}>
         <Tab {...props.tab()} label="Tab label 1">
-          <div
-            className="some-content"
-            style={{ paddingTop: 16, paddingLeft: 16 }}>
-            Content for first tab goes here.
-          </div>
+          <div className="some-content">Content for first tab goes here.</div>
         </Tab>
         <Tab {...props.tab()} label="Tab label 2">
-          <div
-            className="some-content"
-            style={{ paddingTop: 16, paddingLeft: 16 }}>
-            Content for second tab goes here.
-          </div>
+          <div className="some-content">Content for second tab goes here.</div>
         </Tab>
         <Tab
           {...props.tab()}
           label="Tab label 3"
           renderContent={TabContentRenderedOnlyWhenSelected}>
-          <div
-            className="some-content"
-            style={{ paddingTop: 16, paddingLeft: 16 }}>
-            Content for third tab goes here.
-          </div>
+          <div className="some-content">Content for third tab goes here.</div>
         </Tab>
         <Tab {...props.tab()} label={<CustomLabel text="Custom Label" />}>
-          <div
-            className="some-content"
-            style={{ paddingTop: 16, paddingLeft: 16 }}>
-            Content for fourth tab goes here.
-          </div>
+          <div className="some-content">Content for fourth tab goes here.</div>
         </Tab>
       </Tabs>
     ),
