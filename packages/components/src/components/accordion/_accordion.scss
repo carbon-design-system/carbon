@@ -82,6 +82,9 @@
     width: $icon-size-01;
     height: $icon-size-01;
     margin: $accordion-arrow-margin;
+    margin-top: calc(
+      (var(--cds-body-long-01-line-height) - #{$icon-size-01}) / 2
+    );
     fill: $ui-05;
     // TODO: RTL rotate(180deg);
     transform: rotate(90deg);
