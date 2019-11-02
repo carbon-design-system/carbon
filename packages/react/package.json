@@ -10,7 +10,8 @@
   "files": [
     "lib/**/*",
     "es/**/*",
-    "umd/**/*"
+    "umd/**/*",
+    "docs/*.json"
   ],
   "keywords": [
     "react",
@@ -24,12 +25,13 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && node scripts/build.js",
+    "build": "yarn clean && node scripts/build.js && node scripts/docgen.js",
     "build-storybook": "build-storybook",
     "clean": "rimraf es lib umd storybook-static",
     "prepublish": "yarn build",
     "start": "yarn storybook",
-    "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000"
+    "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000",
+    "docgen": "node scripts/docgen.js"
   },
   "peerDependencies": {
     "carbon-components": "^10.6.0",
@@ -78,7 +80,6 @@
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-dev-expression": "^0.2.1",
-    "babel-plugin-react-docgen": "^2.0.0",
     "babel-plugin-transform-inline-environment-variables": "^0.4.0",
     "browserslist-config-carbon": "10.4.0",
     "carbon-components": "10.7.0",
@@ -100,6 +101,7 @@
     "promise": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
+    "react-docgen": "^4.1.1",
     "react-dom": "^16.8.6",
     "react-test-renderer": "^16.8.6",
     "requestanimationframe": "^0.0.23",
