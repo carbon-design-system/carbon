@@ -1,0 +1,98 @@
+@import '../../globals/scss/vars';
+@import '../../globals/scss/colors';
+@import '../../globals/scss/theme';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/vendor/@rocketsoftware/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--font-face';
+@import '../../globals/scss/layer';
+@import 'mixins';
+
+.#{$prefix}--tour-tooltip {
+  @include layer('overlay');
+  @include reset;
+  display: none;
+  min-width: rem(288px);
+  max-width: rem(400px);
+  font-size: rem(14px);
+  background: $inverse-02;
+  padding: 1rem;
+  border-radius: rem(2px);
+  z-index: z('floating');
+  word-wrap: break-word;
+  color: $inverse-01;
+  display: block;
+
+  p {
+    @include type-style('body-short-01');
+  }
+
+  button {
+    padding-right: $carbon--spacing-07;
+  }
+
+  .#{$prefix}--btn:focus {
+    border-color: $inverse-focus-ui;
+    outline-color: $inverse-02;
+  }
+
+  .#{$prefix}--link {
+    color: $inverse-link;
+    margin-right: auto;
+
+    &:focus {
+      outline: 1px solid $inverse-focus-ui;
+      outline-offset: 2px;
+    }
+
+    &:active {
+      color: $inverse-01;
+    }
+
+    &:visited {
+      color: $inverse-link;
+    }
+  }
+
+  .#{$prefix}--btn--ghost {
+    color: $inverse-link;
+    margin-right: auto;
+
+    &:hover {
+      background: $inverse-hover-ui;
+    }
+  }
+
+  .#{$prefix}--tour-tooltip__heading {
+    font-size: rem(16px);
+    margin-bottom: 1rem;
+  }
+
+  .#{$prefix}--tour-tooltip__footer {
+    margin-top: 1rem;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+  }
+
+  .#{$prefix}--tour-tooltip__action-group {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .#{$prefix}--tour-tooltip--checkbox {
+    font-size: rem(12px);
+  }
+
+  .#{$prefix}--btn {
+    max-width: rem(128px);
+  }
+
+  .#{$prefix}--btn--primary,
+  .#{$prefix}--btn--secondary {
+    margin-left: $spacing-04;
+  }
+}

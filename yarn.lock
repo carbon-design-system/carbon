@@ -23045,6 +23045,11 @@ walker@^1.0.7, walker@~1.0.5:
   dependencies:
     makeerror "1.0.x"
 
+walktour@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/walktour/-/walktour-4.0.1.tgz#506718e04b386673aab0a688ee4ccf9c21b8b2ff"
+  integrity sha512-mJaGGRhKItN8TFYou5Y4oFfnD9Ht2/vsBM1+Y26NaIBTNQWA8ZUmvHpNVlHEEd0yLJzgYLncciiEjQsRDwE5kQ==
+
 warning-symbol@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/warning-symbol/-/warning-symbol-0.1.0.tgz#bb31dd11b7a0f9d67ab2ed95f457b65825bbad21"

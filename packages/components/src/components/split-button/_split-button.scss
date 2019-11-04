@@ -48,7 +48,7 @@
       svg {
         fill: $ui-04;
       }
-  }
+    }
 
     &:hover {
       background-color: $hover-primary;
@@ -76,7 +76,6 @@
   .#{$prefix}--btn--split--overflow__open {
     transform: rotate(180deg);
   }
-
 }
 
 .#{$prefix}--overflow-menu-options--container {
