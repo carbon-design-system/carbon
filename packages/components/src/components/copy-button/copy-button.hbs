@@ -5,8 +5,7 @@
   LICENSE file in the root directory of this source tree.
 -->
 
-<button data-copy-btn class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary {{@root.prefix}}--btn--copy {{@root.prefix}}--btn--sm">
-  Copy button
-  {{ carbon-icon 'AddFilled16' class=(add @root.prefix '--btn__icon') }}
-  <div class="{{@root.prefix}}--btn--copy__feedback" data-feedback="Copied!"></div>
+<button data-copy-btn class="{{@root.prefix}}--snippet-button" type="button" aria-label="Copy" tabindex="0">
+  {{ carbon-icon 'Copy16' class=(add @root.prefix '--snippet__icon')}}
+  <div class="{{@root.prefix}}--btn--copy__feedback" role="alert" data-feedback="Copied!"></div>
 </button>
