@@ -1,10 +1,16 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
+import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import SplitButton from '../SplitButton';
 import OverflowMenuItem from '../OverflowMenuItem';
+
+const sizes = {
+  Default: 'default',
+  Field: 'field',
+  Small: 'small',
+};
 
 const props = {
   regular: () => {
@@ -12,6 +18,7 @@ const props = {
       classNameContainer: 'some-class',
       classNameButton: 'some-class',
       classNameOverflow: 'some-class',
+      size: select('Button size (size)', sizes, 'default'),
       disabled: boolean('Disabled (disabled)', false),
     };
   },

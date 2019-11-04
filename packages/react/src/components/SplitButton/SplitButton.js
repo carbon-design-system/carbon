@@ -12,6 +12,7 @@ const SplitButton = ({
   classNameButton,
   classNameOverflow,
   disabled,
+  size,
   tabIndex,
   type,
   role,
@@ -47,20 +48,20 @@ const SplitButton = ({
     setIsOpen(false);
   };
 
-  const containerClasses = cx({
-    [classNameContainer]: true,
-    [`${prefix}--btn--split--container`]: true,
-  });
+  const containerClasses = cx(
+    classNameContainer,
+    `${prefix}--btn--split--container`
+  );
 
-  const overflowClasses = cx({
-    [classNameOverflow]: true,
+  const overflowClasses = cx(classNameOverflow, {
+    [`${prefix}--btn--split--overflow--field`]: size === 'field',
+    [`${prefix}--btn--split--overflow--sm`]: size === 'small',
     [`${prefix}--btn--split--overflow`]: true,
     [`${prefix}--btn--split--overflow--disabled`]: disabled,
   });
 
-  const overflowIconClasses = cx({
+  const overflowIconClasses = cx(`${prefix}--btn--split--overflow--icon`, {
     [`${prefix}--btn--split--overflow__open`]: isOpen,
-    [`${prefix}--btn--split--overflow--icon`]: true,
   });
 
   return (
@@ -75,6 +76,7 @@ const SplitButton = ({
         role={role}
         disabled={disabled}
         className={classNameButton}
+        size={size}
         {...primaryButtonProps}>
         {primaryButtonProps.text}
       </Button>
@@ -88,9 +90,7 @@ const SplitButton = ({
         renderIcon={ChevronDown16}
         menuOffset={getOffset}
         getViewport={getViewport}>
-        {childrenArray.map(child => {
-          return child;
-        })}
+        {childrenArray}
       </OverflowMenu>
     </div>
   );
@@ -121,6 +121,12 @@ SplitButton.propTypes = {
    * For specifying whether the button is disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * For specifying size of split button
+   */
+
+  size: PropTypes.oneOf(['default', 'field', 'small']),
 
   /**
    * Optional prop to specify the tabIndex of the SplitButton
