@@ -335,7 +335,6 @@ export default class Modal extends Component {
     const modalBody = (
       <div
         ref={this.innerModal}
-        role="dialog"
         className={`${prefix}--modal-container`}
         aria-label={
           modalLabel
