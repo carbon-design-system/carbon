@@ -18,6 +18,7 @@ const TableContainer = ({
   title,
   description,
   stickyHeader,
+  light,
   ...rest
 }) => {
   const tableContainerClasses = cx(
@@ -28,10 +29,14 @@ const TableContainer = ({
     }
   );
 
+  const tableHeaderClasses = cx(`${prefix}--data-table-header`, {
+    [`${prefix}--data-table-header--light`]: light,
+  });
+
   return (
     <div {...rest} className={tableContainerClasses}>
       {title && (
-        <div className={`${prefix}--data-table-header`}>
+        <div className={tableHeaderClasses}>
           <h4 className={`${prefix}--data-table-header__title`}>{title}</h4>
           <p className={`${prefix}--data-table-header__description`}>
             {description}
@@ -55,6 +60,12 @@ TableContainer.propTypes = {
    * Optional description text for the Table
    */
   description: PropTypes.node,
+
+  /**
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make DataTable background color same as container background color.
+   */
+  light: PropTypes.bool,
 };
 
 export default TableContainer;

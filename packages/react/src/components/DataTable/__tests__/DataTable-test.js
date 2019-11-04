@@ -30,6 +30,9 @@ import DataTable, {
 } from '../';
 import { sortStates } from '../state/sorting';
 import { mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 // Test helpers
 const getHeaderAt = (wrapper, index) =>
@@ -147,6 +150,33 @@ describe('DataTable', () => {
   it('should render', () => {
     const wrapper = mount(<DataTable {...mockProps} />);
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('supports light version', () => {
+    const wrapper = mount(<DataTable {...mockProps} />);
+    expect(wrapper.props().light).toEqual(false);
+    expect(
+      wrapper
+        .find(`table.${prefix}--data-table`)
+        .hasClass(`${prefix}--data-table--light`)
+    ).toEqual(false);
+    expect(
+      wrapper
+        .find(`div.${prefix}--data-table-header`)
+        .hasClass(`${prefix}--data-table-header--light`)
+    ).toEqual(false);
+    wrapper.setProps({ light: true });
+    expect(wrapper.props().light).toEqual(true);
+    expect(
+      wrapper
+        .find(`table.${prefix}--data-table`)
+        .hasClass(`${prefix}--data-table--light`)
+    ).toEqual(true);
+    expect(
+      wrapper
+        .find(`div.${prefix}--data-table-header`)
+        .hasClass(`${prefix}--data-table-header--light`)
+    ).toEqual(true);
   });
 
   describe('sorting', () => {

@@ -120,6 +120,12 @@ export default class DataTable extends React.Component {
      * Specify whether the table should be able to be sorted by its headers
      */
     isSortable: PropTypes.bool,
+
+    /**
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make DataTable background color same as container background color.
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -127,6 +133,7 @@ export default class DataTable extends React.Component {
     filterRows: defaultFilterRows,
     locale: 'en',
     translateWithId,
+    light: false,
   };
 
   static translationKeys = Object.values(translationKeys);
@@ -350,6 +357,7 @@ export default class DataTable extends React.Component {
       useStaticWidth,
       shouldShowBorder,
       stickyHeader,
+      light,
     } = this.props;
     return {
       useZebraStyles,
@@ -358,6 +366,7 @@ export default class DataTable extends React.Component {
       useStaticWidth,
       shouldShowBorder,
       stickyHeader,
+      light,
     };
   };
 
@@ -365,10 +374,11 @@ export default class DataTable extends React.Component {
    * Helper utility to get the TableContainer Props.
    */
   getTableContainerProps = () => {
-    const { stickyHeader } = this.props;
+    const { stickyHeader, light } = this.props;
 
     return {
       stickyHeader,
+      light,
     };
   };
 

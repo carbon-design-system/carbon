@@ -21,6 +21,7 @@ export const Table = ({
   useStaticWidth,
   shouldShowBorder,
   stickyHeader,
+  light,
   ...other
 }) => {
   const componentClass = cx(`${prefix}--data-table`, className, {
@@ -32,6 +33,7 @@ export const Table = ({
     [`${prefix}--data-table--static`]: useStaticWidth,
     [`${prefix}--data-table--no-border`]: !shouldShowBorder,
     [`${prefix}--data-table--sticky-header`]: stickyHeader,
+    [`${prefix}--data-table--light`]: light,
   });
   const table = (
     <table {...other} className={componentClass}>
@@ -79,6 +81,12 @@ Table.propTypes = {
    * `false` If true, will keep the header sticky (only data rows will scroll)
    */
   stickyHeader: PropTypes.bool,
+
+  /**
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make DataTable background color same as container background color.
+   */
+  light: PropTypes.bool,
 };
 
 Table.defaultProps = {

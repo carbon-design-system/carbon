@@ -31,6 +31,10 @@
     padding: $spacing-05 0 $spacing-06 $spacing-05;
   }
 
+  .#{$prefix}--data-table-header--light {
+    background: $ui-02;
+  }
+
   .#{$prefix}--data-table-header__title {
     @include type-style('productive-heading-03');
     color: $text-01;
@@ -59,6 +63,10 @@
     @include type-style('body-short-01');
     background-color: $ui-01;
     width: 100%;
+  }
+
+  .#{$prefix}--data-table--light tbody {
+    background-color: $ui-02;
   }
 
   .#{$prefix}--data-table tr {
@@ -125,6 +133,11 @@
     & + td:first-of-type {
       padding-left: $spacing-04;
     }
+  }
+
+  .#{$prefix}--data-table--light td,
+  .#{$prefix}--data-table--light tbody th {
+    background: $ui-02;
   }
 
   @supports (-moz-appearance: none) {
@@ -234,6 +247,15 @@
     background-color: $data-table-zebra-color;
     border-bottom: 1px solid $data-table-zebra-color;
     border-top: 1px solid $data-table-zebra-color;
+  }
+
+  // .#{$prefix}--data-table--light.#{$prefix}--data-table--zebra tbody tr:nth-child(odd) td {
+  //   background-color: $data-table-zebra-color;
+  // }
+
+  .#{$prefix}--data-table--light.#{$prefix}--data-table--zebra td,
+  .#{$prefix}--data-table--light.#{$prefix}--data-table--zebra tbody th {
+    background: $ui-01;
   }
 
   .#{$prefix}--data-table--zebra tbody tr:hover td {

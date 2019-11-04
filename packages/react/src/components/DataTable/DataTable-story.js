@@ -20,6 +20,7 @@ const props = () => ({
     null
   ),
   stickyHeader: boolean('Sticky header (experimental)', false),
+  light: boolean('Light variant (light)', false),
 });
 
 storiesOf('DataTable', module)

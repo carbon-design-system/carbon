@@ -15,6 +15,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
       },
     ]
   }
+  light={false}
   locale="en"
   radio={true}
   render={
@@ -196,6 +197,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
       },
     ]
   }
+  light={false}
   locale="en"
   radio={true}
   render={
@@ -364,7 +366,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-14__select-row-b"
+                    id="data-table-15__select-row-b"
                     name="select-row-b"
                     onSelect={[Function]}
                     radio={true}
@@ -381,7 +383,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-14__select-row-a"
+                    id="data-table-15__select-row-a"
                     name="select-row-a"
                     onSelect={[Function]}
                     radio={true}
@@ -398,7 +400,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-14__select-row-c"
+                    id="data-table-15__select-row-c"
                     name="select-row-c"
                     onSelect={[Function]}
                     radio={true}
@@ -523,7 +525,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-14__select-row-b"
+                    id="data-table-15__select-row-b"
                     name="select-row-b"
                     onSelect={[Function]}
                     radio={true}
@@ -535,7 +537,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         checked={false}
                         disabled={false}
                         hideLabel={true}
-                        id="data-table-14__select-row-b"
+                        id="data-table-15__select-row-b"
                         labelText="Select row"
                         name="select-row-b"
                         onClick={[Function]}
@@ -544,7 +546,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                           checked={false}
                           disabled={false}
                           hideLabel={true}
-                          id="data-table-14__select-row-b"
+                          id="data-table-15__select-row-b"
                           innerRef={null}
                           labelPosition="right"
                           labelText="Select row"
@@ -560,7 +562,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               checked={false}
                               className="bx--radio-button"
                               disabled={false}
-                              id="data-table-14__select-row-b"
+                              id="data-table-15__select-row-b"
                               name="select-row-b"
                               onChange={[Function]}
                               onClick={[Function]}
@@ -570,7 +572,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             <label
                               aria-label="Select row"
                               className="bx--radio-button__label"
-                              htmlFor="data-table-14__select-row-b"
+                              htmlFor="data-table-15__select-row-b"
                             >
                               <span
                                 className="bx--radio-button__appearance"
@@ -610,7 +612,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-14__select-row-a"
+                    id="data-table-15__select-row-a"
                     name="select-row-a"
                     onSelect={[Function]}
                     radio={true}
@@ -622,7 +624,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         checked={false}
                         disabled={false}
                         hideLabel={true}
-                        id="data-table-14__select-row-a"
+                        id="data-table-15__select-row-a"
                         labelText="Select row"
                         name="select-row-a"
                         onClick={[Function]}
@@ -631,7 +633,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                           checked={false}
                           disabled={false}
                           hideLabel={true}
-                          id="data-table-14__select-row-a"
+                          id="data-table-15__select-row-a"
                           innerRef={null}
                           labelPosition="right"
                           labelText="Select row"
@@ -647,7 +649,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               checked={false}
                               className="bx--radio-button"
                               disabled={false}
-                              id="data-table-14__select-row-a"
+                              id="data-table-15__select-row-a"
                               name="select-row-a"
                               onChange={[Function]}
                               onClick={[Function]}
@@ -657,7 +659,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             <label
                               aria-label="Select row"
                               className="bx--radio-button__label"
-                              htmlFor="data-table-14__select-row-a"
+                              htmlFor="data-table-15__select-row-a"
                             >
                               <span
                                 className="bx--radio-button__appearance"
@@ -697,7 +699,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-14__select-row-c"
+                    id="data-table-15__select-row-c"
                     name="select-row-c"
                     onSelect={[Function]}
                     radio={true}
@@ -709,7 +711,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         checked={false}
                         disabled={false}
                         hideLabel={true}
-                        id="data-table-14__select-row-c"
+                        id="data-table-15__select-row-c"
                         labelText="Select row"
                         name="select-row-c"
                         onClick={[Function]}
@@ -718,7 +720,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                           checked={false}
                           disabled={false}
                           hideLabel={true}
-                          id="data-table-14__select-row-c"
+                          id="data-table-15__select-row-c"
                           innerRef={null}
                           labelPosition="right"
                           labelText="Select row"
@@ -734,7 +736,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               checked={false}
                               className="bx--radio-button"
                               disabled={false}
-                              id="data-table-14__select-row-c"
+                              id="data-table-15__select-row-c"
                               name="select-row-c"
                               onChange={[Function]}
                               onClick={[Function]}
@@ -744,7 +746,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             <label
                               aria-label="Select row"
                               className="bx--radio-button__label"
-                              htmlFor="data-table-14__select-row-c"
+                              htmlFor="data-table-15__select-row-c"
                             >
                               <span
                                 className="bx--radio-button__appearance"
@@ -800,6 +802,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
       },
     ]
   }
+  light={false}
   locale="en"
   render={
     [MockFunction] {
@@ -828,6 +831,334 @@ exports[`DataTable selection should have select-all default to un-checked if no 
             "onInputChange": [Function],
             "radio": undefined,
             "rows": Array [],
+            "selectAll": [Function],
+            "selectRow": [Function],
+            "selectedRows": Array [],
+            "sortBy": [Function],
+          },
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": <TableContainer
+            title="DataTable with selection"
+          >
+            <Table
+              isSortable={false}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableSelectAll
+                    ariaLabel="Select all rows"
+                    checked={false}
+                    id="data-table-8__select-all"
+                    indeterminate={false}
+                    name="select-all"
+                    onSelect={[Function]}
+                  />
+                  <TableHeader
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field A
+                  </TableHeader>
+                  <TableHeader
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field B
+                  </TableHeader>
+                </TableRow>
+              </TableHead>
+              <TableBody
+                aria-live="polite"
+              />
+            </Table>
+          </TableContainer>,
+        },
+      ],
+    }
+  }
+  rows={Array []}
+  sortRow={[Function]}
+  translateWithId={[Function]}
+>
+  <TableContainer
+    title="DataTable with selection"
+  >
+    <div
+      className="bx--data-table-container"
+    >
+      <div
+        className="bx--data-table-header"
+      >
+        <h4
+          className="bx--data-table-header__title"
+        >
+          DataTable with selection
+        </h4>
+        <p
+          className="bx--data-table-header__description"
+        />
+      </div>
+      <Table
+        isSortable={false}
+      >
+        <table
+          className="bx--data-table bx--data-table--no-border"
+        >
+          <TableHead>
+            <thead>
+              <TableRow>
+                <tr>
+                  <TableSelectAll
+                    ariaLabel="Select all rows"
+                    checked={false}
+                    id="data-table-8__select-all"
+                    indeterminate={false}
+                    name="select-all"
+                    onSelect={[Function]}
+                  >
+                    <th
+                      className="bx--table-column-checkbox"
+                      scope="col"
+                    >
+                      <ForwardRef(InlineCheckbox)
+                        ariaLabel="Select all rows"
+                        checked={false}
+                        id="data-table-8__select-all"
+                        indeterminate={false}
+                        name="select-all"
+                        onClick={[Function]}
+                      >
+                        <InlineCheckbox
+                          ariaLabel="Select all rows"
+                          checked={false}
+                          id="data-table-8__select-all"
+                          indeterminate={false}
+                          innerRef={null}
+                          name="select-all"
+                          onChange={[Function]}
+                          onClick={[Function]}
+                        >
+                          <input
+                            checked={false}
+                            className="bx--checkbox"
+                            id="data-table-8__select-all"
+                            name="select-all"
+                            onChange={[Function]}
+                            onClick={[Function]}
+                            type="checkbox"
+                          />
+                          <label
+                            aria-label="Select all rows"
+                            className="bx--checkbox-label"
+                            htmlFor="data-table-8__select-all"
+                          />
+                        </InlineCheckbox>
+                      </ForwardRef(InlineCheckbox)>
+                    </th>
+                  </TableSelectAll>
+                  <TableHeader
+                    isSortHeader={false}
+                    isSortable={false}
+                    key="fieldA"
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    <th
+                      scope="col"
+                    >
+                      <span
+                        className="bx--table-header-label"
+                      >
+                        Field A
+                      </span>
+                    </th>
+                  </TableHeader>
+                  <TableHeader
+                    isSortHeader={false}
+                    isSortable={false}
+                    key="fieldB"
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    <th
+                      scope="col"
+                    >
+                      <span
+                        className="bx--table-header-label"
+                      >
+                        Field B
+                      </span>
+                    </th>
+                  </TableHeader>
+                </tr>
+              </TableRow>
+            </thead>
+          </TableHead>
+          <TableBody
+            aria-live="polite"
+          >
+            <tbody
+              aria-live="polite"
+            />
+          </TableBody>
+        </table>
+      </Table>
+    </div>
+  </TableContainer>
+</DataTable>
+`;
+
+exports[`DataTable selection should render 1`] = `
+<DataTable
+  filterRows={[Function]}
+  headers={
+    Array [
+      Object {
+        "header": "Field A",
+        "key": "fieldA",
+      },
+      Object {
+        "header": "Field B",
+        "key": "fieldB",
+      },
+    ]
+  }
+  light={false}
+  locale="en"
+  render={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "expandAll": [Function],
+            "expandRow": [Function],
+            "getBatchActionProps": [Function],
+            "getExpandHeaderProps": [Function],
+            "getHeaderProps": [Function],
+            "getRowProps": [Function],
+            "getSelectionProps": [Function],
+            "getTableContainerProps": [Function],
+            "getTableProps": [Function],
+            "headers": Array [
+              Object {
+                "header": "Field A",
+                "key": "fieldA",
+              },
+              Object {
+                "header": "Field B",
+                "key": "fieldB",
+              },
+            ],
+            "onInputChange": [Function],
+            "radio": undefined,
+            "rows": Array [
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "b",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "a",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "c:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 3:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "c:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 3:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "c",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+            ],
             "selectAll": [Function],
             "selectRow": [Function],
             "selectedRows": Array [],
@@ -878,14 +1209,84 @@ exports[`DataTable selection should have select-all default to un-checked if no 
               </TableHead>
               <TableBody
                 aria-live="polite"
-              />
+              >
+                <TableRow>
+                  <TableSelectRow
+                    ariaLabel="Select row"
+                    checked={false}
+                    disabled={false}
+                    id="data-table-7__select-row-b"
+                    name="select-row-b"
+                    onSelect={[Function]}
+                    radio={null}
+                  />
+                  <TableCell>
+                    Field 2:A
+                  </TableCell>
+                  <TableCell>
+                    Field 2:B
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableSelectRow
+                    ariaLabel="Select row"
+                    checked={false}
+                    disabled={false}
+                    id="data-table-7__select-row-a"
+                    name="select-row-a"
+                    onSelect={[Function]}
+                    radio={null}
+                  />
+                  <TableCell>
+                    Field 1:A
+                  </TableCell>
+                  <TableCell>
+                    Field 1:B
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableSelectRow
+                    ariaLabel="Select row"
+                    checked={false}
+                    disabled={false}
+                    id="data-table-7__select-row-c"
+                    name="select-row-c"
+                    onSelect={[Function]}
+                    radio={null}
+                  />
+                  <TableCell>
+                    Field 3:A
+                  </TableCell>
+                  <TableCell>
+                    Field 3:B
+                  </TableCell>
+                </TableRow>
+              </TableBody>
             </Table>
           </TableContainer>,
         },
       ],
     }
   }
-  rows={Array []}
+  rows={
+    Array [
+      Object {
+        "fieldA": "Field 2:A",
+        "fieldB": "Field 2:B",
+        "id": "b",
+      },
+      Object {
+        "fieldA": "Field 1:A",
+        "fieldB": "Field 1:B",
+        "id": "a",
+      },
+      Object {
+        "fieldA": "Field 3:A",
+        "fieldB": "Field 3:B",
+        "id": "c",
+      },
+    ]
+  }
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -1012,403 +1413,6 @@ exports[`DataTable selection should have select-all default to un-checked if no 
           >
             <tbody
               aria-live="polite"
-            />
-          </TableBody>
-        </table>
-      </Table>
-    </div>
-  </TableContainer>
-</DataTable>
-`;
-
-exports[`DataTable selection should render 1`] = `
-<DataTable
-  filterRows={[Function]}
-  headers={
-    Array [
-      Object {
-        "header": "Field A",
-        "key": "fieldA",
-      },
-      Object {
-        "header": "Field B",
-        "key": "fieldB",
-      },
-    ]
-  }
-  locale="en"
-  render={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          Object {
-            "expandAll": [Function],
-            "expandRow": [Function],
-            "getBatchActionProps": [Function],
-            "getExpandHeaderProps": [Function],
-            "getHeaderProps": [Function],
-            "getRowProps": [Function],
-            "getSelectionProps": [Function],
-            "getTableContainerProps": [Function],
-            "getTableProps": [Function],
-            "headers": Array [
-              Object {
-                "header": "Field A",
-                "key": "fieldA",
-              },
-              Object {
-                "header": "Field B",
-                "key": "fieldB",
-              },
-            ],
-            "onInputChange": [Function],
-            "radio": undefined,
-            "rows": Array [
-              Object {
-                "cells": Array [
-                  Object {
-                    "errors": null,
-                    "id": "b:fieldA",
-                    "info": Object {
-                      "header": "fieldA",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 2:A",
-                  },
-                  Object {
-                    "errors": null,
-                    "id": "b:fieldB",
-                    "info": Object {
-                      "header": "fieldB",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 2:B",
-                  },
-                ],
-                "disabled": false,
-                "id": "b",
-                "isExpanded": false,
-                "isSelected": false,
-              },
-              Object {
-                "cells": Array [
-                  Object {
-                    "errors": null,
-                    "id": "a:fieldA",
-                    "info": Object {
-                      "header": "fieldA",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 1:A",
-                  },
-                  Object {
-                    "errors": null,
-                    "id": "a:fieldB",
-                    "info": Object {
-                      "header": "fieldB",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 1:B",
-                  },
-                ],
-                "disabled": false,
-                "id": "a",
-                "isExpanded": false,
-                "isSelected": false,
-              },
-              Object {
-                "cells": Array [
-                  Object {
-                    "errors": null,
-                    "id": "c:fieldA",
-                    "info": Object {
-                      "header": "fieldA",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 3:A",
-                  },
-                  Object {
-                    "errors": null,
-                    "id": "c:fieldB",
-                    "info": Object {
-                      "header": "fieldB",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 3:B",
-                  },
-                ],
-                "disabled": false,
-                "id": "c",
-                "isExpanded": false,
-                "isSelected": false,
-              },
-            ],
-            "selectAll": [Function],
-            "selectRow": [Function],
-            "selectedRows": Array [],
-            "sortBy": [Function],
-          },
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": <TableContainer
-            title="DataTable with selection"
-          >
-            <Table
-              isSortable={false}
-            >
-              <TableHead>
-                <TableRow>
-                  <TableSelectAll
-                    ariaLabel="Select all rows"
-                    checked={false}
-                    id="data-table-6__select-all"
-                    indeterminate={false}
-                    name="select-all"
-                    onSelect={[Function]}
-                  />
-                  <TableHeader
-                    isSortHeader={false}
-                    isSortable={false}
-                    onClick={[Function]}
-                    scope="col"
-                    sortDirection="NONE"
-                    translateWithId={[Function]}
-                  >
-                    Field A
-                  </TableHeader>
-                  <TableHeader
-                    isSortHeader={false}
-                    isSortable={false}
-                    onClick={[Function]}
-                    scope="col"
-                    sortDirection="NONE"
-                    translateWithId={[Function]}
-                  >
-                    Field B
-                  </TableHeader>
-                </TableRow>
-              </TableHead>
-              <TableBody
-                aria-live="polite"
-              >
-                <TableRow>
-                  <TableSelectRow
-                    ariaLabel="Select row"
-                    checked={false}
-                    disabled={false}
-                    id="data-table-6__select-row-b"
-                    name="select-row-b"
-                    onSelect={[Function]}
-                    radio={null}
-                  />
-                  <TableCell>
-                    Field 2:A
-                  </TableCell>
-                  <TableCell>
-                    Field 2:B
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableSelectRow
-                    ariaLabel="Select row"
-                    checked={false}
-                    disabled={false}
-                    id="data-table-6__select-row-a"
-                    name="select-row-a"
-                    onSelect={[Function]}
-                    radio={null}
-                  />
-                  <TableCell>
-                    Field 1:A
-                  </TableCell>
-                  <TableCell>
-                    Field 1:B
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableSelectRow
-                    ariaLabel="Select row"
-                    checked={false}
-                    disabled={false}
-                    id="data-table-6__select-row-c"
-                    name="select-row-c"
-                    onSelect={[Function]}
-                    radio={null}
-                  />
-                  <TableCell>
-                    Field 3:A
-                  </TableCell>
-                  <TableCell>
-                    Field 3:B
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>,
-        },
-      ],
-    }
-  }
-  rows={
-    Array [
-      Object {
-        "fieldA": "Field 2:A",
-        "fieldB": "Field 2:B",
-        "id": "b",
-      },
-      Object {
-        "fieldA": "Field 1:A",
-        "fieldB": "Field 1:B",
-        "id": "a",
-      },
-      Object {
-        "fieldA": "Field 3:A",
-        "fieldB": "Field 3:B",
-        "id": "c",
-      },
-    ]
-  }
-  sortRow={[Function]}
-  translateWithId={[Function]}
->
-  <TableContainer
-    title="DataTable with selection"
-  >
-    <div
-      className="bx--data-table-container"
-    >
-      <div
-        className="bx--data-table-header"
-      >
-        <h4
-          className="bx--data-table-header__title"
-        >
-          DataTable with selection
-        </h4>
-        <p
-          className="bx--data-table-header__description"
-        />
-      </div>
-      <Table
-        isSortable={false}
-      >
-        <table
-          className="bx--data-table bx--data-table--no-border"
-        >
-          <TableHead>
-            <thead>
-              <TableRow>
-                <tr>
-                  <TableSelectAll
-                    ariaLabel="Select all rows"
-                    checked={false}
-                    id="data-table-6__select-all"
-                    indeterminate={false}
-                    name="select-all"
-                    onSelect={[Function]}
-                  >
-                    <th
-                      className="bx--table-column-checkbox"
-                      scope="col"
-                    >
-                      <ForwardRef(InlineCheckbox)
-                        ariaLabel="Select all rows"
-                        checked={false}
-                        id="data-table-6__select-all"
-                        indeterminate={false}
-                        name="select-all"
-                        onClick={[Function]}
-                      >
-                        <InlineCheckbox
-                          ariaLabel="Select all rows"
-                          checked={false}
-                          id="data-table-6__select-all"
-                          indeterminate={false}
-                          innerRef={null}
-                          name="select-all"
-                          onChange={[Function]}
-                          onClick={[Function]}
-                        >
-                          <input
-                            checked={false}
-                            className="bx--checkbox"
-                            id="data-table-6__select-all"
-                            name="select-all"
-                            onChange={[Function]}
-                            onClick={[Function]}
-                            type="checkbox"
-                          />
-                          <label
-                            aria-label="Select all rows"
-                            className="bx--checkbox-label"
-                            htmlFor="data-table-6__select-all"
-                          />
-                        </InlineCheckbox>
-                      </ForwardRef(InlineCheckbox)>
-                    </th>
-                  </TableSelectAll>
-                  <TableHeader
-                    isSortHeader={false}
-                    isSortable={false}
-                    key="fieldA"
-                    onClick={[Function]}
-                    scope="col"
-                    sortDirection="NONE"
-                    translateWithId={[Function]}
-                  >
-                    <th
-                      scope="col"
-                    >
-                      <span
-                        className="bx--table-header-label"
-                      >
-                        Field A
-                      </span>
-                    </th>
-                  </TableHeader>
-                  <TableHeader
-                    isSortHeader={false}
-                    isSortable={false}
-                    key="fieldB"
-                    onClick={[Function]}
-                    scope="col"
-                    sortDirection="NONE"
-                    translateWithId={[Function]}
-                  >
-                    <th
-                      scope="col"
-                    >
-                      <span
-                        className="bx--table-header-label"
-                      >
-                        Field B
-                      </span>
-                    </th>
-                  </TableHeader>
-                </tr>
-              </TableRow>
-            </thead>
-          </TableHead>
-          <TableBody
-            aria-live="polite"
-          >
-            <tbody
-              aria-live="polite"
             >
               <TableRow
                 key="b"
@@ -1418,7 +1422,7 @@ exports[`DataTable selection should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-6__select-row-b"
+                    id="data-table-7__select-row-b"
                     name="select-row-b"
                     onSelect={[Function]}
                     radio={null}
@@ -1430,7 +1434,7 @@ exports[`DataTable selection should render 1`] = `
                         ariaLabel="Select row"
                         checked={false}
                         disabled={false}
-                        id="data-table-6__select-row-b"
+                        id="data-table-7__select-row-b"
                         name="select-row-b"
                         onClick={[Function]}
                       >
@@ -1438,7 +1442,7 @@ exports[`DataTable selection should render 1`] = `
                           ariaLabel="Select row"
                           checked={false}
                           disabled={false}
-                          id="data-table-6__select-row-b"
+                          id="data-table-7__select-row-b"
                           innerRef={null}
                           name="select-row-b"
                           onChange={[Function]}
@@ -1448,7 +1452,7 @@ exports[`DataTable selection should render 1`] = `
                             checked={false}
                             className="bx--checkbox"
                             disabled={false}
-                            id="data-table-6__select-row-b"
+                            id="data-table-7__select-row-b"
                             name="select-row-b"
                             onChange={[Function]}
                             onClick={[Function]}
@@ -1457,7 +1461,7 @@ exports[`DataTable selection should render 1`] = `
                           <label
                             aria-label="Select row"
                             className="bx--checkbox-label"
-                            htmlFor="data-table-6__select-row-b"
+                            htmlFor="data-table-7__select-row-b"
                           />
                         </InlineCheckbox>
                       </ForwardRef(InlineCheckbox)>
@@ -1487,7 +1491,7 @@ exports[`DataTable selection should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-6__select-row-a"
+                    id="data-table-7__select-row-a"
                     name="select-row-a"
                     onSelect={[Function]}
                     radio={null}
@@ -1499,7 +1503,7 @@ exports[`DataTable selection should render 1`] = `
                         ariaLabel="Select row"
                         checked={false}
                         disabled={false}
-                        id="data-table-6__select-row-a"
+                        id="data-table-7__select-row-a"
                         name="select-row-a"
                         onClick={[Function]}
                       >
@@ -1507,7 +1511,7 @@ exports[`DataTable selection should render 1`] = `
                           ariaLabel="Select row"
                           checked={false}
                           disabled={false}
-                          id="data-table-6__select-row-a"
+                          id="data-table-7__select-row-a"
                           innerRef={null}
                           name="select-row-a"
                           onChange={[Function]}
@@ -1517,7 +1521,7 @@ exports[`DataTable selection should render 1`] = `
                             checked={false}
                             className="bx--checkbox"
                             disabled={false}
-                            id="data-table-6__select-row-a"
+                            id="data-table-7__select-row-a"
                             name="select-row-a"
                             onChange={[Function]}
                             onClick={[Function]}
@@ -1526,7 +1530,7 @@ exports[`DataTable selection should render 1`] = `
                           <label
                             aria-label="Select row"
                             className="bx--checkbox-label"
-                            htmlFor="data-table-6__select-row-a"
+                            htmlFor="data-table-7__select-row-a"
                           />
                         </InlineCheckbox>
                       </ForwardRef(InlineCheckbox)>
@@ -1556,7 +1560,7 @@ exports[`DataTable selection should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-6__select-row-c"
+                    id="data-table-7__select-row-c"
                     name="select-row-c"
                     onSelect={[Function]}
                     radio={null}
@@ -1568,7 +1572,7 @@ exports[`DataTable selection should render 1`] = `
                         ariaLabel="Select row"
                         checked={false}
                         disabled={false}
-                        id="data-table-6__select-row-c"
+                        id="data-table-7__select-row-c"
                         name="select-row-c"
                         onClick={[Function]}
                       >
@@ -1576,7 +1580,7 @@ exports[`DataTable selection should render 1`] = `
                           ariaLabel="Select row"
                           checked={false}
                           disabled={false}
-                          id="data-table-6__select-row-c"
+                          id="data-table-7__select-row-c"
                           innerRef={null}
                           name="select-row-c"
                           onChange={[Function]}
@@ -1586,7 +1590,7 @@ exports[`DataTable selection should render 1`] = `
                             checked={false}
                             className="bx--checkbox"
                             disabled={false}
-                            id="data-table-6__select-row-c"
+                            id="data-table-7__select-row-c"
                             name="select-row-c"
                             onChange={[Function]}
                             onClick={[Function]}
@@ -1595,7 +1599,7 @@ exports[`DataTable selection should render 1`] = `
                           <label
                             aria-label="Select row"
                             className="bx--checkbox-label"
-                            htmlFor="data-table-6__select-row-c"
+                            htmlFor="data-table-7__select-row-c"
                           />
                         </InlineCheckbox>
                       </ForwardRef(InlineCheckbox)>
@@ -1641,6 +1645,7 @@ exports[`DataTable should render 1`] = `
       },
     ]
   }
+  light={false}
   locale="en"
   render={
     [MockFunction] {
@@ -1771,6 +1776,7 @@ exports[`DataTable should render 1`] = `
         Object {
           "type": "return",
           "value": <TableContainer
+            light={false}
             title="DataTable with toolbar"
           >
             <TableToolbar
@@ -1863,6 +1869,7 @@ exports[`DataTable should render 1`] = `
             </TableToolbar>
             <Table
               isSortable={false}
+              light={false}
             >
               <TableHead>
                 <TableRow>
@@ -1945,6 +1952,7 @@ exports[`DataTable should render 1`] = `
   translateWithId={[Function]}
 >
   <TableContainer
+    light={false}
     title="DataTable with toolbar"
   >
     <div
@@ -2472,6 +2480,7 @@ exports[`DataTable should render 1`] = `
       </TableToolbar>
       <Table
         isSortable={false}
+        light={false}
       >
         <table
           className="bx--data-table bx--data-table--no-border"
@@ -2612,6 +2621,7 @@ exports[`DataTable sticky header should render 1`] = `
       },
     ]
   }
+  light={false}
   locale="en"
   render={
     [MockFunction] {
@@ -2742,6 +2752,7 @@ exports[`DataTable sticky header should render 1`] = `
         Object {
           "type": "return",
           "value": <TableContainer
+            light={false}
             stickyHeader={true}
             title="DataTable with toolbar"
           >
@@ -2835,6 +2846,7 @@ exports[`DataTable sticky header should render 1`] = `
             </TableToolbar>
             <Table
               isSortable={false}
+              light={false}
               stickyHeader={true}
             >
               <TableHead>
@@ -2919,6 +2931,7 @@ exports[`DataTable sticky header should render 1`] = `
   translateWithId={[Function]}
 >
   <TableContainer
+    light={false}
     stickyHeader={true}
     title="DataTable with toolbar"
   >
@@ -3447,6 +3460,7 @@ exports[`DataTable sticky header should render 1`] = `
       </TableToolbar>
       <Table
         isSortable={false}
+        light={false}
         stickyHeader={true}
       >
         <section
