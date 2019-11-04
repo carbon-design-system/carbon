@@ -59,14 +59,25 @@ class Dropdown extends mixin(
       })
     );
 
-    this.manage(
-      on(this.element, 'mouseover', event => {
-        const item = eventMatches(event, this.options.selectorItem);
-        if (item) {
-          this._updateFocus(item);
-        }
-      })
-    );
+    // When using the active descendant approach we use a class to give focus styles during keyboard (up/down arrows)
+    // navigation instead of relying on the :focus selector. This leaves the potential to have multiple items when
+    // switching interactions between keyboard and mouse users. To more closely align with Carbon React implementation,
+    // we want the focus class to move as the user hovers over items. This also updates the location of focus based on
+    // the last hovered item if the user switches back to using the keyboard.
+    if (
+      this.element.querySelector(this.options.selectorTrigger) &&
+      this.element.querySelector(this.options.selectorMenu)
+    ) {
+      // Using the latest HTML structure that supports the aria-activedescendant attribute
+      this.manage(
+        on(this.element, 'mouseover', event => {
+          const item = eventMatches(event, this.options.selectorItem);
+          if (item) {
+            this._updateFocus(item);
+          }
+        })
+      );
+    }
   }
 
   /**

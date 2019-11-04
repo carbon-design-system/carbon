@@ -249,7 +249,10 @@
 
   // Don't want to allow multiple elements have a "selected" style. Not sure why active
   // had unique styles initially but creating an overwrite for the latest HTML markup for
-  // backwards compatibility
+  // backwards compatibility. For the next major release it would be possible to clean up
+  // the HTML structure to prevent the user of :active and :focus styles which is creating
+  // these duplicated styles in the list. The Carbon 10 version of dropdown is already
+  // supporting 2 very different HTML structures.
   .#{$prefix}--dropdown-list[aria-activedescendant]
     .#{$prefix}--dropdown-item:active {
     background-color: inherit;
