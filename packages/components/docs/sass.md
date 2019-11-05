@@ -2591,6 +2591,7 @@ $carbon--spacing-02: carbon--mini-units(0.5);
   - [checkbox [mixin]](#checkbox-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [form [mixin]](#form-mixin)
+  - [lists [mixin]](#lists-mixin)
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -2623,7 +2624,6 @@ $carbon--spacing-03: carbon--mini-units(1);
   - [date-picker [mixin]](#date-picker-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
-  - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -2658,8 +2658,10 @@ $carbon--spacing-04: carbon--mini-units(1.5);
 - **Used by**:
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
+  - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
@@ -2688,6 +2690,7 @@ $carbon--spacing-05: carbon--mini-units(2);
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
+  - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -2729,6 +2732,7 @@ $carbon--spacing-06: carbon--mini-units(3);
 - **Used by**:
   - [accordion [mixin]](#accordion-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
+  - [lists [mixin]](#lists-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
@@ -2754,7 +2758,6 @@ $carbon--spacing-07: carbon--mini-units(4);
   - [snippet [mixin]](#snippet-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
-  - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -17891,88 +17894,49 @@ List styles
   .#{$prefix}--list--ordered {
     @include reset;
     @include type-style('body-short-01');
-
-    counter-reset: listitem;
   }
 
   .#{$prefix}--list__item {
-    font-weight: 400;
     color: $text-01;
-    list-style-type: none;
-    counter-increment: listitem;
-    margin-left: $carbon--spacing-03;
-    padding-left: $carbon--spacing-03;
-    position: relative;
-  }
-
-  .#{$prefix}--list__item:before {
-    position: absolute;
-    left: -#{$carbon--spacing-03};
+    margin-bottom: $carbon--spacing-02;
   }
 
   .#{$prefix}--list--nested {
-    margin-bottom: rem(4px);
-    margin-left: $carbon--spacing-07;
+    margin-top: $carbon--spacing-02;
+    margin-left: $carbon--spacing-06;
   }
 
-  .#{$prefix}--list--unordered > .#{$prefix}--list__item:before,
-  .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
-    display: inline-block;
-    margin-right: $carbon--spacing-03;
-    margin-bottom: rem(4px);
+  .#{$prefix}--list--nested > .#{$prefix}--list__item {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
-  .#{$prefix}--list--unordered
-    .#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before,
-  .#{$prefix}--list--ordered
-    .#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before {
-    margin-right: $carbon--spacing-03;
-    display: inline-block;
+  .#{$prefix}--list--nested .#{$prefix}--list--nested {
+    margin-top: 0;
   }
 
-  .#{$prefix}--list--unordered > .#{$prefix}--list__item:before {
-    content: '\002013';
+  .#{$prefix}--list--ordered {
+    list-style-type: decimal;
   }
 
-  .#{$prefix}--list--unordered
-    ul.#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before {
-    content: '\0025AA';
+  .#{$prefix}--list--ordered.#{$prefix}--list--nested {
+    list-style-type: lower-latin;
   }
 
-  .#{$prefix}--list--unordered
-    ol.#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before {
-    content: counter(listitem, lower-alpha) '.';
+  .#{$prefix}--list--unordered > .#{$prefix}--list__item {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      left: -$carbon--spacing-05;
+      content: '\002013'; // – en dash
+    }
   }
 
-  .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
-    content: counter(listitem) '.';
-  }
-
-  .#{$prefix}--list--ordered ol.#{$prefix}--list--nested {
-    counter-reset: ol-counter;
-  }
-
-  .#{$prefix}--list--ordered
-    ol.#{$prefix}--list--nested
-    > .#{$prefix}--list__item {
-    counter-increment: ol-counter;
-  }
-
-  .#{$prefix}--list--ordered
-    ol.#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before {
-    content: counter(ol-counter, lower-alpha) '.';
-    width: 0.6rem;
-  }
-
-  .#{$prefix}--list--ordered
-    ul.#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before {
-    content: '\0025AA';
+  .#{$prefix}--list--unordered.#{$prefix}--list--nested
+    > .#{$prefix}--list__item::before {
+    left: -$carbon--spacing-04; // offset to account for smaller ▪ vs –
+    content: '\0025AA'; // ▪ square
   }
 }
 ```
@@ -17983,8 +17947,10 @@ List styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
 
 ## list-box
 
@@ -19092,7 +19058,6 @@ Inline notification styles
     @include reset;
 
     display: flex;
-    justify-content: space-between;
     position: relative;
     height: auto;
     min-height: rem(48px);
@@ -19206,6 +19171,7 @@ Inline notification styles
 
   .#{$prefix}--inline-notification__details {
     display: flex;
+    flex-grow: 1;
     margin: 0 $carbon--spacing-05;
   }
 
@@ -19267,8 +19233,6 @@ Inline notification styles
         $duration--fast-02 motion(standard, productive);
 
     .#{$prefix}--inline-notification__close-icon {
-      height: 1rem;
-      width: 1rem;
       fill: $inverse-01;
     }
   }
@@ -19473,7 +19437,7 @@ Toast notification styles
   .#{$prefix}--toast-notification__icon {
     flex-shrink: 0;
     margin-right: $carbon--spacing-05;
-    margin-top: $carbon--spacing-05;
+    margin-top: $carbon--spacing-04;
   }
 
   .#{$prefix}--toast-notification__details {
@@ -19498,8 +19462,6 @@ Toast notification styles
     }
 
     .#{$prefix}--toast-notification__close-icon {
-      height: 1rem;
-      width: 1rem;
       fill: $inverse-01;
     }
   }
@@ -19512,9 +19474,8 @@ Toast notification styles
 
   .#{$prefix}--toast-notification__title {
     @include type-style('productive-heading-01');
-
     font-weight: 600;
-    margin-top: 1rem;
+    margin-top: $carbon--spacing-04;
     word-break: break-word;
   }
 
@@ -19568,6 +19529,7 @@ Toast notification styles
   - [support-04 [variable]](#support-04-variable)
   - [inverse-support-03 [variable]](#inverse-support-03-variable)
   - [support-03 [variable]](#support-03-variable)
+  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
 
 ## number-input
@@ -21247,8 +21209,9 @@ Select styles
     border-bottom: 1px solid $ui-04;
     border-radius: 0;
     cursor: pointer;
-    transition: background-color $duration--fast-01 motion(standard, productive),
-      outline $duration--fast-01 motion(standard, productive);
+
+    // Do not transition on background-color (see: https://github.com/carbon-design-system/carbon/issues/4464)
+    transition: outline $duration--fast-01 motion(standard, productive);
 
     &:hover {
       background-color: $hover-ui;
@@ -23852,26 +23815,8 @@ Tooltip styles
       }
     }
 
-    // Tooltips without interactive elements, need to be sequentially and click focusable so screen reader users
-    // get the tooltip's content and we focus the content container instead of the tooltip root so that
-    // focus-wrap doesn't get triggered
-    .#{$prefix}--tooltip__content[tabindex='0'] {
-      // $carbon--spacing-05 === .#{$prefix}--tooltip padding
-      // The margin and padding need to stay in sync with the default tooltip padding
-      // so that the content does not shift visually when compared to other tooltips.
-      // This approach allows the desired focus indicator that goes around the edge of the tooltip
-      // and not just the content area. When the __content element is required (v11) this could be
-      // cleaned up so that the padding is always on content and not the tooltip.
-      margin: calc(($carbon--spacing-05 * -1) + 2px);
-      padding: calc($carbon--spacing-05 - 2px);
-
-      &:focus {
-        outline: 1px solid $ui-background;
-      }
-    }
-
-    // Tooltips with interactive elements, need to be click focusable but not sequentially focusable so the user
-    // can click within the tooltip and not have it close. Because the element is not actionable it does not need
+    // Tooltips need to be click focusable but not sequentially focusable so the user can click within
+    // the tooltip and not have it close. Because the element is not actionable it does not need
     // to have a visible focus indicator (OK'd by IBMa)
     .#{$prefix}--tooltip__content[tabindex='-1']:focus {
       outline: none;
