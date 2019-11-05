@@ -177,6 +177,12 @@
       color: $inverse-link;
     }
 
+    &:focus {
+      border-color: transparent;
+      outline: 2px solid $inverse-focus-ui;
+      outline-offset: -2px;
+    }
+
     &:hover {
       background-color: $inverse-hover-ui;
     }
@@ -200,7 +206,8 @@
       background-color $duration--fast-02 motion(standard, productive);
 
     &:focus {
-      @include focus-outline('outline');
+      outline: 2px solid $inverse-focus-ui;
+      outline-offset: -2px;
     }
 
     .#{$prefix}--inline-notification__close-icon {
