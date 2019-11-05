@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/type",
   "description": "Typography for digital and software products using the Carbon Design System",
-  "version": "0.1.8",
+  "version": "0.2.8",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@carbon/import-once": "10.3.0",
-    "@rocketsoftware/layout": "0.1.8"
+    "@rocketsoftware/layout": "0.2.8"
   },
   "devDependencies": {
     "@carbon/bundler": "10.4.0",

@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/icons-vue",
   "description": "Vue components for icons",
-  "version": "0.1.8",
+  "version": "0.2.8",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -24,7 +24,7 @@
     "clean": "rimraf es lib"
   },
   "dependencies": {
-    "@rocketsoftware/icon-helpers": "^0.1.8"
+    "@rocketsoftware/icon-helpers": "^0.2.8"
   },
   "devDependencies": {
     "@carbon/cli-reporter": "10.3.0",
