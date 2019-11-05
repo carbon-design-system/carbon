@@ -1,0 +1,26 @@
+@import '../../globals/scss/vars';
+@import '../../globals/scss/colors';
+@import '../../globals/scss/theme';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/vendor/@rocketsoftware/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--font-face';
+@import 'mixins';
+
+.#{$prefix}--btn-group {
+  display: flex;
+  .#{$prefix}--overflow-menu {
+    height: unset;
+    width: unset;
+  }
+
+  .#{$prefix}--btn__icon {
+    transition: transform $duration--fast-01 motion(standard, productive);
+  }
+  .#{$prefix}--btn-group-icon__open svg {
+    transform: rotate(180deg);
+  }
+}
