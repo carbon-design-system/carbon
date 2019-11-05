@@ -75,7 +75,7 @@ export default class CodeSnippet extends Component {
 
     /**
      * Specify whether you are using the light variant of the Code Snippet,
-     * typically used for inline snippest to display an alternate color
+     * typically used for inline snippet to display an alternate color
      */
     light: PropTypes.bool,
   };

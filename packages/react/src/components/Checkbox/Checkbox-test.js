@@ -155,7 +155,7 @@ describe('refs', () => {
 describe('CheckboxSkeleton', () => {
   describe('Renders as expected', () => {
     const wrapper = mount(<CheckboxSkeleton />);
-    const label = wrapper.find('label');
+    const label = wrapper.find('span');
 
     describe('label', () => {
       it('renders a label', () => {

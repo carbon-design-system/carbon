@@ -151,7 +151,7 @@ describe('RadioButtonSkeleton', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(<RadioButtonSkeleton />);
 
-    const label = wrapper.find('label');
+    const label = wrapper.find('span');
 
     it('Has the expected classes', () => {
       expect(label.hasClass(`${prefix}--skeleton`)).toEqual(true);

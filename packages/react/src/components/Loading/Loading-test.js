@@ -67,5 +67,27 @@ describe('Loading', () => {
       const overlay = wrapper.find(`.${prefix}--loading-overlay`);
       expect(overlay.length).toEqual(0);
     });
+
+    it('should be an assertive live region when active', () => {
+      const wrapper = mount(<Loading active={false} />);
+      const getLiveRegion = () => wrapper.find('[aria-live]');
+
+      expect(getLiveRegion().prop('aria-atomic')).toBe('true');
+      expect(getLiveRegion().prop('aria-live')).toBe('off');
+      expect(getLiveRegion().prop('aria-labelledby')).toBeDefined();
+
+      wrapper.setProps({ active: true });
+      expect(getLiveRegion().prop('aria-live')).toBe('assertive');
+
+      wrapper.setProps({ active: false });
+      expect(getLiveRegion().prop('aria-live')).toBe('off');
+    });
+
+    it('should have an associated label for the live region', () => {
+      const wrapper = mount(<Loading />);
+      const node = wrapper.find('[aria-live][aria-labelledby]');
+      const id = node.prop('aria-labelledby');
+      expect(wrapper.find(`#${id}`)).toBeDefined();
+    });
   });
 });

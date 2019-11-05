@@ -324,6 +324,7 @@
   - [❌animation\_\_loading--spin [mixin]](#animation__loading--spin-mixin)
   - [❌animation\_\_loading--stop [mixin]](#animation__loading--stop-mixin)
   - [❌loading\_\_gap [variable]](#loading__gap-variable)
+  - [❌loading--small\_\_gap [variable]](#loading--small__gap-variable)
   - [❌loading\_\_size [variable]](#loading__size-variable)
 - [modal](#modal)
   - [❌modal [mixin]](#modal-mixin)
@@ -2587,6 +2588,7 @@ $carbon--spacing-05: carbon--mini-units(2);
   - [text-input [mixin]](#text-input-mixin)
   - [tile [mixin]](#tile-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅carbon--spacing-06 [variable]
 
@@ -4919,12 +4921,19 @@ $interactive-02: if(
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Color`
 - **Aliased**:
+<<<<<<< HEAD
   - `brand-02`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [tile [mixin]](#tile-mixin)
+=======
+  - `carbon--theme`
+- **Used by**:
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+>>>>>>> upstream/master
 
 ### ✅interactive-03 [variable]
 
@@ -5325,6 +5334,11 @@ $text-03: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+<<<<<<< HEAD
+=======
+  - [button [mixin]](#button-mixin)
+  - [tile [mixin]](#tile-mixin)
+>>>>>>> upstream/master
 
 ### ✅text-04 [variable]
 
@@ -5377,9 +5391,17 @@ $text-05: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+<<<<<<< HEAD
   - [form [mixin]](#form-mixin)
   - [search [mixin]](#search-mixin)
   - [text-area [mixin]](#text-area-mixin)
+=======
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [inline-loading [mixin]](#inline-loading-mixin)
+  - [loading [mixin]](#loading-mixin)
+  - [slider [mixin]](#slider-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+>>>>>>> upstream/master
 
 ### ✅icon-01 [variable]
 
@@ -5473,8 +5495,17 @@ $icon-03: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
+<<<<<<< HEAD
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
+=======
+  - [button-theme [mixin]](#button-theme-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [loading [mixin]](#loading-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [tile [mixin]](#tile-mixin)
+>>>>>>> upstream/master
   - [toggle [mixin]](#toggle-mixin)
 
 ### ✅link-01 [variable]
@@ -5560,9 +5591,14 @@ $field-01: if(
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
+<<<<<<< HEAD
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [search [mixin]](#search-mixin)
+=======
+  - [pagination [mixin]](#pagination-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+>>>>>>> upstream/master
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
@@ -5597,6 +5633,10 @@ $field-02: if(
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
+<<<<<<< HEAD
+=======
+  - [multiselect [mixin]](#multiselect-mixin)
+>>>>>>> upstream/master
   - [number-input [mixin]](#number-input-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
@@ -5845,8 +5885,15 @@ $inverse-support-02: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+<<<<<<< HEAD
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+=======
+  - [button [mixin]](#button-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [link [mixin]](#link-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+>>>>>>> upstream/master
 
 ### ✅inverse-support-03 [variable]
 
@@ -5926,6 +5973,12 @@ $overlay-01: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+<<<<<<< HEAD
+=======
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+>>>>>>> upstream/master
   - [modal [mixin]](#modal-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
@@ -6632,6 +6685,12 @@ $skeleton-02: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+<<<<<<< HEAD
+=======
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+>>>>>>> upstream/master
 
 ### ✅⚠️brand-01 [variable]
 
@@ -6817,6 +6876,28 @@ $label-01: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+<<<<<<< HEAD
+=======
+  - [button-base [mixin]](#button-base-mixin)
+  - [button-theme [mixin]](#button-theme-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [combo-box [mixin]](#combo-box-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [form [mixin]](#form-mixin)
+  - [link [mixin]](#link-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [select [mixin]](#select-mixin)
+  - [slider [mixin]](#slider-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [toggle [mixin]](#toggle-mixin)
+>>>>>>> upstream/master
 
 ### ✅helper-text-01 [variable]
 
@@ -6844,6 +6925,15 @@ $helper-text-01: if(
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+<<<<<<< HEAD
+=======
+  - [button [mixin]](#button-mixin)
+  - [button-base [mixin]](#button-base-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+
+### ✅highlight [variable]
+>>>>>>> upstream/master
 
 ### ✅body-short-01 [variable]
 
@@ -8004,6 +8094,239 @@ Retrieve the font-weight value for a given name
 - **Used by**:
   - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
 
+<<<<<<< HEAD
+=======
+### ✅display-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'display-04'
+    ),
+  map-get($carbon--theme, 'display-04'),
+  (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+        letter-spacing: -0.64px,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+## @carbon/type
+
+### ✅carbon--type-classes [mixin]
+
+Create type classes for font families, weights, styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon--type-classes() {
+  // Font families
+  @each $name, $value in $carbon--font-families {
+    .#{$prefix}--type-#{$name} {
+      font-family: $value;
+    }
+  }
+
+  // Font weights
+  @each $name, $value in $carbon--font-weights {
+    .#{$prefix}--type-#{$name} {
+      font-weight: $value;
+    }
+  }
+
+  // Font styles
+  .#{$prefix}--type-italic {
+    font-style: italic;
+  }
+
+  // Type styles
+  @each $name, $value in $tokens {
+    .#{$prefix}--type-#{$name} {
+      @include carbon--type-style($name, map-has-key($value, breakpoints));
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+  - [carbon--font-families [variable]](#carbon--font-families-variable)
+  - [prefix [variable]](#prefix-variable)
+  - [carbon--font-weights [variable]](#carbon--font-weights-variable)
+  - [tokens [variable]](#tokens-variable)
+
+### ✅carbon--font-families [variable]
+
+Font family fallbacks for: IBM Plex Mono, IBM Plex Sans, IBM Plex Sans
+Condensed, IBM Plex Sans Hebrew, and IBM Plex Serif
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--font-families: (
+  'mono': unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+  'sans': unquote("'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif"),
+  'sans-condensed': unquote("'IBM Plex Sans Condensed', 'Helvetica Neue', Arial, sans-serif"),
+  'sans-hebrew': unquote("'IBM Plex Sans Hebrew', 'Helvetica Hebrew', 'Arial Hebrew', sans-serif"),
+  'serif': unquote("'IBM Plex Serif', 'Georgia', Times, serif"),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+- **Used by**:
+  - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
+  - [carbon--font-family [function]](#carbon--font-family-function)
+
+### ✅carbon--font-family [function]
+
+Get the font-family for an IBM Plex font
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function carbon--font-family($name) {
+  @return map-get($carbon--font-families, $name);
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name    | Description | Type     | Default value |
+| ------- | ----------- | -------- | ------------- |
+| `$name` | —           | `String` | —             |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Returns**: `String`
+- **Requires**:
+  - [carbon--font-families [variable]](#carbon--font-families-variable)
+- **Used by**:
+  - [carbon--font-family [mixin]](#carbon--font-family-mixin)
+  - [form [mixin]](#form-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+
+### ✅carbon--font-family [mixin]
+
+Include the `font-family` definition for the given name in your selector
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon--font-family($name) {
+  font-family: carbon--font-family($name);
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name    | Description | Type     | Default value |
+| ------- | ----------- | -------- | ------------- |
+| `$name` | —           | `String` | —             |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [carbon--font-family [function]](#carbon--font-family-function)
+
+### ✅carbon--font-weights [variable]
+
+Suggested font weights to be used in product
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--font-weights: (
+  'light': 300,
+  'regular': 400,
+  'semibold': 600,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+- **Used by**:
+  - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
+  - [carbon--font-weight [function]](#carbon--font-weight-function)
+
+### ✅carbon--font-weight [function]
+
+Retrieve the font-weight value for a given name
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function carbon--font-weight($weight) {
+  @return map-get($carbon--font-weights, $weight);
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name      | Description | Type     | Default value |
+| --------- | ----------- | -------- | ------------- |
+| `$weight` | —           | `String` | —             |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Returns**: `Number`
+- **Requires**:
+  - [carbon--font-weights [variable]](#carbon--font-weights-variable)
+- **Used by**:
+  - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
+
+>>>>>>> upstream/master
 ### ✅carbon--font-weight [mixin]
 
 Set the `font-weight` property with the value for a given name
@@ -14567,14 +14890,6 @@ Code snippet styles
     padding: 0 $spacing-xs;
   }
 
-  .#{$prefix}--snippet--inline.#{$prefix}--snippet--light {
-    background-color: $field-02;
-
-    &:hover {
-      background-color: rgba($interactive-02, 0.1);
-    }
-  }
-
   // Single Line Snippet
   .#{$prefix}--snippet--single {
     @include bx--snippet;
@@ -14774,6 +15089,29 @@ Code snippet styles
     transition: transform $transition--expansion;
   }
 
+  // Light version
+  .#{$prefix}--snippet.#{$prefix}--snippet--light,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--snippet-button,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light
+    .#{$prefix}--snippet-btn--expand {
+    background-color: $ui-02;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light
+    .#{$prefix}--snippet-button:hover,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light
+    .#{$prefix}--snippet-btn--expand:hover {
+    background-color: $hover-ui-light;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--multi
+    .#{$prefix}--snippet-container
+    pre::after {
+    background-image: linear-gradient(to right, transparent, $ui-02);
+  }
+
   // Skeleton State
   .#{$prefix}--snippet--code.#{$prefix}--skeleton {
     height: rem(98px);
@@ -14878,8 +15216,6 @@ Code snippet styles
   - [text-01 [variable]](#text-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
-  - [field-02 [variable]](#field-02-variable)
-  - [interactive-02 [variable]](#interactive-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
@@ -14887,6 +15223,7 @@ Code snippet styles
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [field-01 [variable]](#field-01-variable)
+  - [ui-02 [variable]](#ui-02-variable)
 
 ### ❌bx--snippet [mixin]
 
@@ -15760,7 +16097,7 @@ Data table core styles
   }
 
   .#{$prefix}--data-table thead {
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
     background-color: $ui-03;
   }
 
@@ -17019,7 +17356,7 @@ Date picker styles
 
   .#{$prefix}--date-picker__month .flatpickr-current-month,
   .flatpickr-month .flatpickr-current-month {
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
     padding: 0;
   }
 
@@ -17658,6 +17995,24 @@ Dropdown styles
     }
   }
 
+  .#{$prefix}--dropdown--show-selected .#{$prefix}--dropdown--selected {
+    background-color: $hover-ui;
+    color: $text-01;
+    display: block;
+
+    &:hover {
+      background-color: $selected-ui;
+    }
+
+    .#{$prefix}--dropdown-link {
+      border-top-color: transparent;
+    }
+
+    + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
+      border-top-color: transparent;
+    }
+  }
+
   // Skeleton State
   .#{$prefix}--dropdown-v2.#{$prefix}--skeleton,
   .#{$prefix}--dropdown.#{$prefix}--skeleton {
@@ -17710,7 +18065,7 @@ File uploader styles
   // TODO: sync with type
   .#{$prefix}--file--label {
     @include reset;
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
     color: $text-01;
     margin-bottom: $carbon--spacing-03;
   }
@@ -17809,8 +18164,14 @@ File uploader styles
     }
 
     .#{$prefix}--loading {
-      width: $carbon--spacing-06;
-      height: $carbon--spacing-06;
+      width: rem(32px);
+      height: rem(32px);
+      margin-right: -$carbon--spacing-03;
+    }
+
+    .#{$prefix}--inline-loading__animation .#{$prefix}--loading {
+      // Vanilla markup has `.bx--inline-loading__animation` which is used for `margin-right` adjustment
+      margin-right: 0;
     }
 
     .#{$prefix}--file-filename {
@@ -18127,7 +18488,7 @@ Inline loading styles
     }
 
     .#{$prefix}--loading__stroke {
-      stroke-dashoffset: 99;
+      stroke-dashoffset: $loading--small__gap;
     }
   }
 
@@ -18207,6 +18568,7 @@ Inline loading styles
 - **Group**: [inline-loading](#inline-loading)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
+  - [loading--small\_\_gap [variable]](#loading--small__gap-variable)
   - [text-02 [variable]](#text-02-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -18224,7 +18586,7 @@ Link styles
 @mixin link() {
   .#{$prefix}--link {
     @include reset;
-    @include type-style('body-long-01');
+    @include type-style('body-short-01');
     color: $link-01;
     text-decoration: none;
     outline: none;
@@ -18263,7 +18625,7 @@ Link styles
 
   .#{$prefix}--link--disabled {
     @include reset;
-    @include type-style('body-long-01');
+    @include type-style('body-short-01');
     display: inline;
     color: $disabled-02;
     font-weight: 400;
@@ -19073,6 +19435,10 @@ Loading styles
     stroke-dashoffset: $loading__gap;
   }
 
+  .#{$prefix}--loading--small .#{$prefix}--loading__stroke {
+    stroke-dashoffset: $loading--small__gap;
+  }
+
   .#{$prefix}--loading--stop {
     @include animation__loading--stop;
   }
@@ -19124,6 +19490,7 @@ Loading styles
   - [loading\_\_size [variable]](#loading__size-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
   - [loading\_\_gap [variable]](#loading__gap-variable)
+  - [loading--small\_\_gap [variable]](#loading--small__gap-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [ui-02 [variable]](#ui-02-variable)
 
@@ -19198,6 +19565,23 @@ $loading__gap: 40;
 - **Group**: [loading](#loading)
 - **Type**: `Number`
 - **Used by**:
+  - [loading [mixin]](#loading-mixin)
+
+### ❌loading--small\_\_gap [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$loading--small__gap: 99;
+```
+
+</details>
+
+- **Group**: [loading](#loading)
+- **Type**: `Number`
+- **Used by**:
+  - [inline-loading [mixin]](#inline-loading-mixin)
   - [loading [mixin]](#loading-mixin)
 
 ### ❌loading\_\_size [variable]
@@ -19499,6 +19883,7 @@ Inline notification styles
 
     display: flex;
     justify-content: space-between;
+    position: relative;
     height: auto;
     min-height: rem(48px);
     min-width: rem(288px);
@@ -19521,8 +19906,21 @@ Inline notification styles
   }
 
   .#{$prefix}--inline-notification--low-contrast {
-    color: $text-01;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
+    color: map-get($carbon--theme--white, 'text-01');
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      filter: opacity(0.4);
+      border-style: solid;
+      border-width: 1px 1px 1px 0;
+    }
   }
 
   .#{$prefix}--inline-notification--error {
@@ -19534,6 +19932,10 @@ Inline notification styles
       $support-01,
       $notification-error-background-color
     );
+
+    &:before {
+      border-color: $support-01;
+    }
   }
 
   .#{$prefix}--inline-notification--success {
@@ -19545,6 +19947,10 @@ Inline notification styles
       $support-02,
       $notification-success-background-color
     );
+
+    &:before {
+      border-color: $support-02;
+    }
   }
 
   .#{$prefix}--inline-notification--info {
@@ -19556,6 +19962,10 @@ Inline notification styles
       $support-04,
       $notification-info-background-color
     );
+
+    &:before {
+      border-color: $support-04;
+    }
   }
 
   .#{$prefix}--inline-notification--info .bx--inline-notification__icon {
@@ -19571,6 +19981,10 @@ Inline notification styles
       $support-03,
       $notification-warning-background-color
     );
+
+    &:before {
+      border-color: $support-03;
+    }
   }
 
   .#{$prefix}--inline-notification--warning
@@ -19599,7 +20013,7 @@ Inline notification styles
   }
 
   .#{$prefix}--inline-notification__title {
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
     margin: 0 $carbon--spacing-02 0 0;
     line-height: rem(24px);
   }
@@ -19652,11 +20066,11 @@ Inline notification styles
   .#{$prefix}--inline-notification--low-contrast {
     .#{$prefix}--inline-notification__close-button
       .#{$prefix}--inline-notification__close-icon {
-      fill: $ui-05;
+      fill: map-get($carbon--theme--white, 'text-01');
     }
 
     .#{$prefix}--inline-notification__action-button {
-      color: $link-01;
+      color: $carbon--blue-60;
 
       &:active {
         color: $carbon--blue-80;
@@ -19680,7 +20094,7 @@ Inline notification styles
   - [prefix [variable]](#prefix-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
-  - [text-01 [variable]](#text-01-variable)
+  - [carbon--theme--white [variable]](#carbon--theme--white-variable)
   - [inverse-support-01 [variable]](#inverse-support-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -19695,8 +20109,6 @@ Inline notification styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [inverse-link [variable]](#inverse-link-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
-  - [ui-05 [variable]](#ui-05-variable)
-  - [link-01 [variable]](#link-01-variable)
 
 ### ❌inline-notification--color [mixin]
 
@@ -19793,7 +20205,8 @@ Toast notification styles
   }
 
   .#{$prefix}--toast-notification--low-contrast {
-    color: $text-01;
+    // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
+    color: map-get($carbon--theme--white, 'text-01');
   }
 
   .#{$prefix}--toast-notification--error {
@@ -19884,11 +20297,11 @@ Toast notification styles
   .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__close-button
     .#{$prefix}--toast-notification__close-icon {
-    fill: $ui-05;
+    fill: map-get($carbon--theme--white, 'text-01');
   }
 
   .#{$prefix}--toast-notification__title {
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
 
     font-weight: 600;
     margin-top: 1rem;
@@ -19906,7 +20319,8 @@ Toast notification styles
 
   .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__subtitle {
-    color: $text-01;
+    // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
+    color: map-get($carbon--theme--white, 'text-01');
   }
 
   .#{$prefix}--toast-notification__caption {
@@ -19918,7 +20332,8 @@ Toast notification styles
 
   .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__caption {
-    color: $text-01;
+    // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
+    color: map-get($carbon--theme--white, 'text-01');
   }
 }
 ```
@@ -19933,7 +20348,7 @@ Toast notification styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [text-01 [variable]](#text-01-variable)
+  - [carbon--theme--white [variable]](#carbon--theme--white-variable)
   - [inverse-support-01 [variable]](#inverse-support-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -19943,7 +20358,6 @@ Toast notification styles
   - [support-04 [variable]](#support-04-variable)
   - [inverse-support-03 [variable]](#inverse-support-03-variable)
   - [support-03 [variable]](#support-03-variable)
-  - [ui-05 [variable]](#ui-05-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
 
 ## number-input
@@ -20245,6 +20659,12 @@ Overflow menu styles
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
   }
 
+  .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open,
+  .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open
+    .#{$prefix}--overflow-menu__trigger {
+    background-color: $ui-02;
+  }
+
   .#{$prefix}--overflow-menu__icon {
     height: rem(16px);
     width: rem(16px);
@@ -20271,6 +20691,13 @@ Overflow menu styles
       display: block;
       background-color: $ui-01;
       transition: background-color $duration--fast-02 motion(entrance, productive);
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options--light {
+    background-color: $ui-02;
+    &::after {
+      background-color: $ui-02;
     }
   }
 
@@ -20451,6 +20878,7 @@ Overflow menu styles
   - [prefix [variable]](#prefix-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [ui-01 [variable]](#ui-01-variable)
+  - [ui-02 [variable]](#ui-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -21890,7 +22318,6 @@ Slider styles
 
   .#{$prefix}--slider__range-label {
     @include type-style('code-02');
-    font-family: carbon--font-family('mono');
     color: $text-01;
 
     &:last-of-type {
@@ -22068,7 +22495,6 @@ Slider styles
 
 - **Group**: [slider](#slider)
 - **Requires**:
-  - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -22217,6 +22643,12 @@ Tabs styles
     }
   }
 
+  .#{$prefix}--tabs--fixed {
+    @include carbon--breakpoint(md) {
+      min-height: rem(48px);
+    }
+  }
+
   .#{$prefix}--tabs-trigger {
     display: flex;
     align-items: center;
@@ -22338,6 +22770,23 @@ Tabs styles
     }
   }
 
+  .#{$prefix}--tabs--fixed .#{$prefix}--tabs__nav-item {
+    @include carbon--breakpoint(md) {
+      background-color: $ui-03;
+
+      & + .#{$prefix}--tabs__nav-item {
+        margin-left: 0;
+        // Draws the border without affecting the inner-content
+        box-shadow: -1px 0 0 0 $ui-04;
+      }
+
+      & + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
+      &.#{$prefix}--tabs__nav-item--selected + .#{$prefix}--tabs__nav-item {
+        box-shadow: none;
+      }
+    }
+  }
+
   .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
     transition: color $duration--fast-01 motion(standard, productive), border-bottom-color
         $duration--fast-01 motion(standard, productive),
@@ -22359,7 +22808,18 @@ Tabs styles
 
     @include carbon--breakpoint(md) {
       background-color: transparent;
-      box-shadow: none;
+
+      &,
+      & + .#{$prefix}--tabs__nav-item {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    @include carbon--breakpoint(md) {
+      background-color: $hover-selected-ui;
     }
   }
 
@@ -22376,6 +22836,23 @@ Tabs styles
     pointer-events: none;
   }
 
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
+    @include carbon--breakpoint(md) {
+      background-color: $disabled-02;
+    }
+  }
+
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link {
+    @include carbon--breakpoint(md) {
+      color: $disabled-03;
+    }
+  }
+
   //-----------------------------
   // Item Selected
   //-----------------------------
@@ -22388,7 +22865,7 @@ Tabs styles
       display: flex;
       .#{$prefix}--tabs__nav-link {
         color: $text-01;
-        @include type-style('heading-01');
+        @include type-style('productive-heading-01');
         border-bottom: 3px solid $interactive-01;
       }
 
@@ -22396,6 +22873,26 @@ Tabs styles
       .#{$prefix}--tabs__nav-link:active {
         color: $text-01;
         border-bottom: 2px solid $interactive-01;
+      }
+    }
+  }
+
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled),
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item--selected:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    @include carbon--breakpoint(md) {
+      background-color: $ui-01;
+
+      .#{$prefix}--tabs__nav-link {
+        // Draws the border without affecting the inner-content
+        box-shadow: inset 0 2px 0 0 $interactive-04;
+        border-bottom: none;
+      }
+
+      .#{$prefix}--tabs__nav-link:focus,
+      .#{$prefix}--tabs__nav-link:active {
+        box-shadow: none;
       }
     }
   }
@@ -22445,6 +22942,15 @@ Tabs styles
     }
   }
 
+  .#{$prefix}--tabs--fixed a.#{$prefix}--tabs__nav-link {
+    @include carbon--breakpoint(md) {
+      display: flex;
+      align-items: center;
+      height: rem(48px);
+      border-bottom: none;
+    }
+  }
+
   //-----------------------------
   //  Link Hover
   //-----------------------------
@@ -22454,6 +22960,14 @@ Tabs styles
     @include carbon--breakpoint(md) {
       color: $text-01;
       border-bottom: $tab-underline-color-hover;
+    }
+  }
+
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
+    .#{$prefix}--tabs__nav-link {
+    @include carbon--breakpoint(md) {
+      border-bottom: none;
     }
   }
 
@@ -22474,6 +22988,14 @@ Tabs styles
   .#{$prefix}--tabs__nav-item--disabled a.#{$prefix}--tabs__nav-link:active {
     outline: none;
     border-bottom: $tab-underline-disabled;
+  }
+
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link {
+    @include carbon--breakpoint(md) {
+      border-bottom: none;
+    }
   }
 
   //-----------------------------
@@ -22526,7 +23048,11 @@ Tabs styles
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
+  - [interactive-04 [variable]](#interactive-04-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
@@ -24218,12 +24744,13 @@ Tooltip styles
     max-width: rem(288px);
     background: $inverse-02;
     margin-top: $carbon--spacing-02;
-    padding: 1rem;
+    padding: $carbon--spacing-05;
     border-radius: rem(2px);
     z-index: z('floating');
     word-wrap: break-word;
     color: $inverse-01;
 
+    // @todo this can be deprecated in v11 since focus should always be on the content container not the tooltip
     &:focus {
       box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px $ui-background;
       outline: 0;
@@ -24258,6 +24785,31 @@ Tooltip styles
       &:visited {
         color: $inverse-link;
       }
+    }
+
+    // Tooltips without interactive elements, need to be sequentially and click focusable so screen reader users
+    // get the tooltip's content and we focus the content container instead of the tooltip root so that
+    // focus-wrap doesn't get triggered
+    .#{$prefix}--tooltip__content[tabindex='0'] {
+      // $carbon--spacing-05 === .#{$prefix}--tooltip padding
+      // The margin and padding need to stay in sync with the default tooltip padding
+      // so that the content does not shift visually when compared to other tooltips.
+      // This approach allows the desired focus indicator that goes around the edge of the tooltip
+      // and not just the content area. When the __content element is required (v11) this could be
+      // cleaned up so that the padding is always on content and not the tooltip.
+      margin: calc(($carbon--spacing-05 * -1) + 2px);
+      padding: calc($carbon--spacing-05 - 2px);
+
+      &:focus {
+        outline: 1px solid $ui-background;
+      }
+    }
+
+    // Tooltips with interactive elements, need to be click focusable but not sequentially focusable so the user
+    // can click within the tooltip and not have it close. Because the element is not actionable it does not need
+    // to have a visible focus indicator (OK'd by IBMa)
+    .#{$prefix}--tooltip__content[tabindex='-1']:focus {
+      outline: none;
     }
 
     .#{$prefix}--tooltip__caret {
@@ -24310,7 +24862,7 @@ Tooltip styles
   }
 
   .#{$prefix}--tooltip__heading {
-    @include carbon--type-style('heading-01');
+    @include carbon--type-style('productive-heading-01');
     margin-bottom: $spacing-03;
   }
 
@@ -24474,6 +25026,7 @@ Tooltip styles
   - [hover-primary [variable]](#hover-primary-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [ui-background [variable]](#ui-background-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
@@ -25734,7 +26287,7 @@ UI shell side nav
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__submenu[aria-haspopup='true'] {
     @include button-reset($width: true);
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
     @include focus-outline('reset');
     padding: 0 mini-units(2);
     display: flex;
@@ -25860,7 +26413,7 @@ UI shell side nav
     .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
     + .#{$prefix}--header__menu {
     @include focus-outline('reset');
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
     position: relative;
     display: flex;
     align-items: center;
@@ -26105,7 +26658,7 @@ UI shell side nav
   }
 
   .#{$prefix}--switcher__item-link {
-    @include carbon--type-style('heading-01');
+    @include carbon--type-style('productive-heading-01');
     display: block;
     height: $spacing-07;
     text-decoration: none;

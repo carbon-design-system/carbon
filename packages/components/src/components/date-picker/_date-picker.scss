@@ -215,7 +215,7 @@
 
   .#{$prefix}--date-picker__month .flatpickr-current-month,
   .flatpickr-month .flatpickr-current-month {
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
     padding: 0;
   }
 
