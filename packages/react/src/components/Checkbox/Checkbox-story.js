@@ -75,7 +75,12 @@ storiesOf('Checkbox', module)
   .add(
     'skeleton',
     () => (
-      <div>
+      <div
+        aria-label="loading checkbox"
+        aria-live="assertive"
+        role="status"
+        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      >
         <CheckboxSkeleton />
       </div>
     ),

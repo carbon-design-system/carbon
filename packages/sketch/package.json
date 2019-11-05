@@ -24,11 +24,11 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
-    "@rocketsoftware/colors": "^0.1.8",
-    "@rocketsoftware/icon-helpers": "^0.0.8",
-    "@rocketsoftware/icons": "^0.1.8",
-    "@rocketsoftware/themes": "^0.1.8",
-    "@rocketsoftware/type": "^0.1.8",
+    "@rocketsoftware/colors": "^0.2.8",
+    "@rocketsoftware/icon-helpers": "^0.2.8",
+    "@rocketsoftware/icons": "^0.2.8",
+    "@rocketsoftware/themes": "^0.2.8",
+    "@rocketsoftware/type": "^0.2.8",
     "@skpm/builder": "^0.7.0",
     "color-string": "^1.5.3",
     "skpm": "^1.2.0"

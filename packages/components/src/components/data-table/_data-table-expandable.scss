@@ -109,7 +109,7 @@
   // hovering on collapsed parent
   tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row):first-of-type:hover
     td {
-    border-top: 1px solid transparent;
+    border-top: 1px solid $ui-03;
     border-bottom: 1px solid $ui-03;
   }
 
@@ -165,6 +165,11 @@
     height: 3rem;
     vertical-align: top;
     padding: 0;
+    border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-expand[data-previous-value='collapsed'] {
     border-bottom: 1px solid transparent;
   }
 
@@ -220,7 +225,7 @@
     bottom: rem(-1px);
     height: rem(1px);
     width: rem(8px);
-    background: $ui-01;
+    background: $ui-03;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
@@ -245,7 +250,7 @@
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:first-of-type td {
     background: $selected-ui;
     border-top: 1px solid $active-ui;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid $ui-03;
     box-shadow: 0 1px $active-ui;
   }
 
@@ -267,7 +272,7 @@
     td {
     background: $hover-selected-ui;
     border-top: 1px solid $hover-selected-ui;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid $ui-03;
     box-shadow: 0 1px $hover-selected-ui;
   }
 
@@ -301,7 +306,7 @@
     td {
     color: $text-01;
     background-color: $hover-ui;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid $ui-03;
     box-shadow: 0 1px $active-ui;
     border-top: 1px solid $active-ui;
   }

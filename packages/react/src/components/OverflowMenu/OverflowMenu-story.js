@@ -25,6 +25,7 @@ const props = {
     ariaLabel: text('ARIA label (ariaLabel)', 'Menu'),
     iconDescription: text('Icon description (iconDescription)', ''),
     flipped: boolean('Flipped (flipped)', false),
+    light: boolean('Light (light)', false),
     onClick: action('onClick'),
     onFocus: action('onFocus'),
     onKeyDown: action('onKeyDown'),

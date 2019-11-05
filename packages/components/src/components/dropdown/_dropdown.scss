@@ -123,6 +123,7 @@
   }
 
   button.#{$prefix}--dropdown-text {
+    color: $text-01;
     // button-reset mixin contradicts with bx--dropdown-text styles
     background: none;
     border: none;
@@ -347,6 +348,24 @@
     &:focus {
       margin: 0;
       padding-left: rem(10px);
+    }
+  }
+
+  .#{$prefix}--dropdown--show-selected .#{$prefix}--dropdown--selected {
+    background-color: $hover-ui;
+    color: $text-01;
+    display: block;
+
+    &:hover {
+      background-color: $selected-ui;
+    }
+
+    .#{$prefix}--dropdown-link {
+      border-top-color: transparent;
+    }
+
+    + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
+      border-top-color: transparent;
     }
   }
 

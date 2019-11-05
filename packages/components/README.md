@@ -21,8 +21,14 @@ yarn add @rocketsoftware/carbon-components
 
 ## 📖 API Documentation
 
-If you're looking for `@rocketsoftware/carbon-components` API documentation,
-check out:
+- See our
+  [documentation site](https://www.carbondesignsystem.com/get-started/develop/vanilla)
+  for full how-to docs and guidelines
+- [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions
+  to this repo.
+- [🏃‍♀️ Migration Guides](./docs/migration)
+
+  - [v9 to v10](./docs/migration/migrate-to-10.x.md)
 
 - [Accessibility](./docs/accessibility.md)
 - [Deploying-changes](./docs/deploying-changes.md)

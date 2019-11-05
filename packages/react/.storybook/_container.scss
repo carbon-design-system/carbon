@@ -13,9 +13,24 @@ $prefix: 'bx';
 // IMPORTANT: This import path should _not_ be used outside our source tree
 // as `src` directory is _not_ meant to be shipped in our NPM package.
 // Use e.g. `@import '~carbon-components/scss/globals/scss/styles.scss'` instead.
-@import '~@rocketsoftware/carbon-components/src/globals/scss/styles.scss'; // SEE THE NOTE ABOVE
+@import '~@rocketsoftware/carbon-components/scss/globals/scss/feature-flags';
+@import '~@rocketsoftware/carbon-components/scss/globals/scss/vars';
+@import '~@rocketsoftware/carbon-components/scss/globals/scss/colors';
+@import '~@rocketsoftware/carbon-components/scss/globals/scss/theme';
+@import '~@rocketsoftware/carbon-components/scss/globals/scss/mixins';
+@import '~@rocketsoftware/carbon-components/scss/globals/scss/layout';
+@import '~@rocketsoftware/carbon-components/scss/globals/scss/layer';
+@import '~@rocketsoftware/carbon-components/scss/globals/scss/spacing';
+@import '~@rocketsoftware/carbon-components/scss/globals/scss/typography';
+@import '~@rocketsoftware/carbon-components/scss/globals/scss/vendor/@rocketsoftware/elements/scss/import-once/import-once';
+@import '~@rocketsoftware/carbon-components/scss/globals/scss/css--reset';
+@import '~@rocketsoftware/carbon-components/scss/globals/scss/css--font-face';
+@import '~@rocketsoftware/carbon-components/scss/globals/scss/css--helpers';
+@import '~@rocketsoftware/carbon-components/scss/globals/scss/css--body';
+@import '~@rocketsoftware/carbon-components/scss/globals/grid/grid';
+@import '~@rocketsoftware/carbon-components/src/globals/scss/functions';
 
-@if mixin-exists(carbon--theme) {
+@if feature-flag-enabled('enable-css-custom-properties') {
   :root {
     @include carbon--theme($carbon--theme--white, true);
   }

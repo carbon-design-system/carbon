@@ -51,7 +51,7 @@
   }
 
   .#{$prefix}--data-table thead {
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
     background-color: $ui-03;
   }
 

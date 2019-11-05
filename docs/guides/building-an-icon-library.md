@@ -34,7 +34,7 @@ After you've received the green light, then you're ready to get started!
 ## Getting Started
 
 The main package that exports all icon information is
-[`@carbon/icons`](/packages/icons). This package hosts all of the source SVG
+[`@carbon/icons`](/packages/icons). This package contains all of the source SVG
 assets, in addition to exporting the following assets:
 
 - Optimized SVG assets from source files
@@ -58,7 +58,7 @@ determining how to best architect their implementation:
     `<Icon name="icon-name">` component given that we could not tree-shake
     `@carbon/icons` descriptors
   - A system could support `<Icon icon={descriptor} />`, however this would
-    require a user to install two dependencies versus just your icon library
+    require a user to install two dependencies versus only your icon library
 - Minimize the amount of runtime logic that has to be run. As a result, prefer
   generating markup statically from SVG data versus using the data at runtime to
   build up the SVG markup

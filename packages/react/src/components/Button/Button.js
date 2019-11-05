@@ -85,7 +85,7 @@ const Button = React.forwardRef(function Button(
       ...otherProps,
       ...anchorProps,
     };
-  } else if (href) {
+  } else if (href && !disabled) {
     component = 'a';
     otherProps = anchorProps;
   }

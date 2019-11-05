@@ -23,88 +23,49 @@
   .#{$prefix}--list--ordered {
     @include reset;
     @include type-style('body-short-01');
-
-    counter-reset: listitem;
   }
 
   .#{$prefix}--list__item {
-    font-weight: 400;
     color: $text-01;
-    list-style-type: none;
-    counter-increment: listitem;
-    margin-left: $carbon--spacing-03;
-    padding-left: $carbon--spacing-03;
-    position: relative;
-  }
-
-  .#{$prefix}--list__item:before {
-    position: absolute;
-    left: -#{$carbon--spacing-03};
+    margin-bottom: $carbon--spacing-02;
   }
 
   .#{$prefix}--list--nested {
-    margin-bottom: rem(4px);
-    margin-left: $carbon--spacing-07;
+    margin-top: $carbon--spacing-02;
+    margin-left: $carbon--spacing-06;
   }
 
-  .#{$prefix}--list--unordered > .#{$prefix}--list__item:before,
-  .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
-    display: inline-block;
-    margin-right: $carbon--spacing-03;
-    margin-bottom: rem(4px);
+  .#{$prefix}--list--nested > .#{$prefix}--list__item {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
-  .#{$prefix}--list--unordered
-    .#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before,
-  .#{$prefix}--list--ordered
-    .#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before {
-    margin-right: $carbon--spacing-03;
-    display: inline-block;
+  .#{$prefix}--list--nested .#{$prefix}--list--nested {
+    margin-top: 0;
   }
 
-  .#{$prefix}--list--unordered > .#{$prefix}--list__item:before {
-    content: '\002013';
+  .#{$prefix}--list--ordered {
+    list-style-type: decimal;
   }
 
-  .#{$prefix}--list--unordered
-    ul.#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before {
-    content: '\0025AA';
+  .#{$prefix}--list--ordered.#{$prefix}--list--nested {
+    list-style-type: lower-latin;
   }
 
-  .#{$prefix}--list--unordered
-    ol.#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before {
-    content: counter(listitem, lower-alpha) '.';
+  .#{$prefix}--list--unordered > .#{$prefix}--list__item {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      left: -$carbon--spacing-05;
+      content: '\002013'; // – en dash
+    }
   }
 
-  .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
-    content: counter(listitem) '.';
-  }
-
-  .#{$prefix}--list--ordered ol.#{$prefix}--list--nested {
-    counter-reset: ol-counter;
-  }
-
-  .#{$prefix}--list--ordered
-    ol.#{$prefix}--list--nested
-    > .#{$prefix}--list__item {
-    counter-increment: ol-counter;
-  }
-
-  .#{$prefix}--list--ordered
-    ol.#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before {
-    content: counter(ol-counter, lower-alpha) '.';
-    width: 0.6rem;
-  }
-
-  .#{$prefix}--list--ordered
-    ul.#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before {
-    content: '\0025AA';
+  .#{$prefix}--list--unordered.#{$prefix}--list--nested
+    > .#{$prefix}--list__item::before {
+    left: -$carbon--spacing-04; // offset to account for smaller ▪ vs –
+    content: '\0025AA'; // ▪ square
   }
 }
 
