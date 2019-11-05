@@ -166,7 +166,7 @@
     word-break: break-word;
   }
 
-  .#{$prefix}--inline-notification__action-button {
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
     height: rem(32px);
     margin: $carbon--spacing-03 0;
 
@@ -198,6 +198,10 @@
     max-width: rem(48px);
     transition: outline $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
+
+    &:focus {
+      @include focus-outline('outline');
+    }
 
     .#{$prefix}--inline-notification__close-icon {
       fill: $inverse-01;
