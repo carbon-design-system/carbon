@@ -17,7 +17,7 @@
 @mixin form {
   .#{$prefix}--fieldset {
     @include reset;
-    margin-bottom: $carbon--spacing-07;
+    margin-bottom: $carbon--spacing-06;
   }
 
   .#{$prefix}--form-item {
@@ -29,6 +29,7 @@
     // `flex-direction: row`
     flex: 1 1 auto;
     align-items: flex-start;
+    margin-bottom: $carbon--spacing-06;
   }
 
   .#{$prefix}--label {
