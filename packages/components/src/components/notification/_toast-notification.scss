@@ -145,7 +145,7 @@
   .#{$prefix}--toast-notification__title {
     @include type-style('productive-heading-01');
     font-weight: 600;
-    margin-top: $carbon--spacing-04;
+    margin-top: $carbon--spacing-05;
     word-break: break-word;
   }
 
