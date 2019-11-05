@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@carbon/cli-reporter": "10.3.0",
-    "@rocketsoftware/icons": "^0.1.8",
+    "@rocketsoftware/icons": "^0.2.8",
     "fs-extra": "^7.0.1",
     "prettier": "^1.17.0",
     "rimraf": "^2.6.2",

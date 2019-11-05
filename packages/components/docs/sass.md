@@ -13340,12 +13340,14 @@ $carbon--theme--rocket: (
     letter-spacing: 0,
   ),
   code-01: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
     letter-spacing: 0.32px,
   ),
   code-02: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
