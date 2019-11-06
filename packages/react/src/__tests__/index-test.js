@@ -158,6 +158,7 @@ describe('Carbon Components React', () => {
         "TabsSkeleton",
         "Tag",
         "TagSkeleton",
+        "TargetedSearchContainer",
         "TextArea",
         "TextAreaSkeleton",
         "TextInput",
