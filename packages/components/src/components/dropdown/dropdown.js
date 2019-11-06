@@ -65,6 +65,7 @@ class Dropdown extends mixin(
     // we want the focus class to move as the user hovers over items. This also updates the location of focus based on
     // the last hovered item if the user switches back to using the keyboard.
     if (
+      // NOTE: `selectorTrigger` does NOT match the trigger button in older markup
       this.element.querySelector(this.options.selectorTrigger) &&
       this.element.querySelector(this.options.selectorMenu)
     ) {
@@ -120,6 +121,7 @@ class Dropdown extends mixin(
    * @private
    */
   _focusCleanup() {
+    // NOTE: `selectorTrigger` does NOT match the trigger button in older markup
     const triggerNode = this.element.querySelector(
       this.options.selectorTrigger
     );
@@ -145,6 +147,7 @@ class Dropdown extends mixin(
    * @param {HTMLElement} itemToFocus The element to be focused.
    */
   _updateFocus(itemToFocus) {
+    // NOTE: `selectorTrigger` does NOT match the trigger button in older markup
     const triggerNode = this.element.querySelector(
       this.options.selectorTrigger
     );
@@ -179,6 +182,7 @@ class Dropdown extends mixin(
       return;
     }
 
+    // NOTE: `selectorTrigger` does NOT match the trigger button in older markup
     const triggerNode = this.element.querySelector(
       this.options.selectorTrigger
     );
@@ -275,6 +279,7 @@ class Dropdown extends mixin(
 
     // Using the latest semantic markup structure where trigger is a button
     // @todo remove conditional once legacy structure is depreciated
+    // NOTE: `selectorTrigger` does NOT match the trigger button in older markup
     if (this.element.querySelector(this.options.selectorTrigger)) {
       const listNode = this.element.querySelector(this.options.selectorMenu);
       const focusedId = listNode.getAttribute('aria-activedescendant');
@@ -329,6 +334,7 @@ class Dropdown extends mixin(
       ) {
         // Using the latest semantic markup structure where trigger is a button
         // @todo remove conditional once legacy structure is depreciated
+        // NOTE: `selectorTrigger` does NOT match the trigger button in older markup
         if (this.element.querySelector(this.options.selectorTrigger)) {
           this._updateFocus(current);
         } else {
@@ -355,6 +361,7 @@ class Dropdown extends mixin(
 
     if (this.element.dispatchEvent(eventStart)) {
       if (this.element.dataset.dropdownType !== 'navigation') {
+        // NOTE: `selectorTrigger` does NOT match the trigger button in older markup
         const selectorText =
           !this.element.querySelector(this.options.selectorTrigger) &&
           this.element.dataset.dropdownType !== 'inline'
@@ -408,7 +415,9 @@ class Dropdown extends mixin(
    * @member Dropdown.options
    * @type {object}
    * @property {string} selectorInit The CSS selector to find selectors.
-   * @property {string} [selectorTrigger] The CSS selector to find trigger button when using a11y compliant markup.
+   * @property {string} [selectorTrigger]
+   *   The CSS selector to find the trigger button when using a11y compliant markup.
+   *   NOTE: Does NOT match the trigger button in older markup.
    * @property {string} [selectorMenu] The CSS selector to find menu list when using a11y compliant markup.
    * @property {string} [selectorText] The CSS selector to find the element showing the selected item.
    * @property {string} [selectorTextInner] The CSS selector to find the element showing the selected item, used for inline mode.
@@ -433,7 +442,7 @@ class Dropdown extends mixin(
     const { prefix } = settings;
     return {
       selectorInit: '[data-dropdown]',
-      selectorTrigger: `button.${prefix}--dropdown-text`,
+      selectorTrigger: `button.${prefix}--dropdown-text`, // NOTE: Does NOT match the trigger button in older markup.
       selectorMenu: `.${prefix}--dropdown-list`,
       selectorText: `.${prefix}--dropdown-text`,
       selectorTextInner: `.${prefix}--dropdown-text__inner`,
