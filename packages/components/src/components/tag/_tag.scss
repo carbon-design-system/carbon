@@ -96,7 +96,9 @@
     @include tag-theme($inverse-02, $inverse-01);
 
     cursor: pointer;
-    padding-right: rem(26px); // Space for hover circle and X button
+    padding-right: calc(
+      #{$carbon--spacing-06} + #{rem(2px)}
+    ); // icon width + 2px space from right edge
   }
 
   .#{$prefix}--tag--filter > svg {
