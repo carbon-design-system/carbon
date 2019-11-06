@@ -14,7 +14,7 @@ import tabbable from 'tabbable';
  * nodes, then we wrap back to the beginning
  *
  * @example
- * import { pressTab } from '@carbon/test-utils/dom';
+ * import { pressTab } from '@carbon/test-utils/keyboard';
  * test('some assertion', () => {
  *   pressTab();
  * });
@@ -45,7 +45,7 @@ export function pressTab(node = document.body) {
  * focusable nodes, then we wrap back to the end
  *
  * @example
- * import { pressShiftTab } from '@carbon/test-utils/dom';
+ * import { pressShiftTab } from '@carbon/test-utils/keyboard';
  * test('some assertion', () => {
  *   pressShiftTab();
  * });
@@ -76,7 +76,7 @@ export function pressShiftTab(node = document.body) {
  * is a button, then it will also dispatch a MouseClick event.
  *
  * @example
- * import { pressEnter } from '@carbon/test-utils/dom';
+ * import { pressEnter } from '@carbon/test-utils/keyboard';
  * test('some assertion', () => {
  *   pressEnter();
  * });
