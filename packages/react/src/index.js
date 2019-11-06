@@ -84,7 +84,7 @@ export {
 } from './components/ProgressIndicator';
 export RadioButton from './components/RadioButton';
 export RadioButtonGroup from './components/RadioButtonGroup';
-export Search from './components/Search';
+export Search, { TargetedSearchContainer } from './components/Search';
 export SearchFilterButton from './components/SearchFilterButton';
 export SearchLayoutButton from './components/SearchLayoutButton';
 export SecondaryButton from './components/SecondaryButton';
