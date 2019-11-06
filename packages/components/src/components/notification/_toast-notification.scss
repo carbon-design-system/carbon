@@ -111,6 +111,10 @@
 
   .#{$prefix}--toast-notification__close-button {
     @include focus-outline('reset');
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -123,7 +127,8 @@
     transition: outline $transition--base, background-color $transition--base;
 
     &:focus {
-      @include focus-outline('outline');
+      outline: 2px solid $inverse-focus-ui;
+      outline-offset: -2px;
     }
 
     .#{$prefix}--toast-notification__close-icon {
@@ -140,7 +145,7 @@
   .#{$prefix}--toast-notification__title {
     @include type-style('productive-heading-01');
     font-weight: 600;
-    margin-top: $carbon--spacing-04;
+    margin-top: $carbon--spacing-05;
     word-break: break-word;
   }
 
