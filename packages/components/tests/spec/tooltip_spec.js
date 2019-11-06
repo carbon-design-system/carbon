@@ -39,10 +39,32 @@ describe('Test tooltip', function() {
       });
     });
 
+    it('Content should be programmatically focusable', function() {
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      const content = floating.querySelector('.bx--tooltip__content');
+
+      expect(content.getAttribute('tabindex')).toBe('-1');
+    });
+
     it('Should show the tooltip upon clicking', function() {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
     });
+
+    it('Should apply focus to a child element upon opening', function() {
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(document.activeElement.closest('.bx--tooltip')).not.toBe(null);
+    });
+
+    it('Should remain open upon focusing the content within the tooltip', function() {
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+
+      const content = floating.querySelector('.bx--tooltip__content');
+      content.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
+      expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
+    });
+
+    // Known bug: https://github.com/carbon-design-system/carbon/issues/3835
 
     it('Should hide the tooltip upon blurring', function() {
       floating.classList.add('bx--tooltip--shown');

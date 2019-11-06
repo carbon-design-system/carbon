@@ -50,6 +50,8 @@ const props = () => ({
   ),
 });
 
+NumberInput.displayName = 'NumberInput';
+
 storiesOf('NumberInput', module)
   .addDecorator(withKnobs)
   .add(
