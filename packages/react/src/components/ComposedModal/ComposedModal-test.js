@@ -168,10 +168,14 @@ describe('<ComposedModal />', () => {
   });
 
   it('should change class of <body> upon open state', () => {
-    mount(<ComposedModal open />);
+    const wrapper = mount(<ComposedModal open />);
     expect(
       document.body.classList.contains('bx--body--with-modal-open')
     ).toEqual(true);
+    wrapper.unmount();
+    expect(
+      document.body.classList.contains('bx--body--with-modal-open')
+    ).toEqual(false);
     mount(<ComposedModal open={false} />);
     expect(
       document.body.classList.contains('bx--body--with-modal-open')
