@@ -315,9 +315,10 @@ export default class DataTable extends React.Component {
     const checked = rowCount > 0 && selectedRowCount === rowCount;
     const indeterminate =
       rowCount > 0 && selectedRowCount > 0 && selectedRowCount !== rowCount;
-    const translationKey = checked
-      ? translationKeys.unselectAll
-      : translationKeys.selectAll;
+    const translationKey =
+      checked || indeterminate
+        ? translationKeys.unselectAll
+        : translationKeys.selectAll;
     return {
       ...rest,
       ariaLabel: t(translationKey),
