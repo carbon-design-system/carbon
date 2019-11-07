@@ -12,14 +12,15 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const DropdownSkeleton = ({ inline, className: customClassName, ...rest }) => {
-  const wrapperClasses = cx(customClassName, {
+const DropdownSkeleton = ({ inline, className, ...rest }) => {
+  const wrapperClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--dropdown-v2`]: true,
     [`${prefix}--list-box`]: true,
     [`${prefix}--form-item`]: true,
     [`${prefix}--list-box--inline`]: inline,
   });
+
   return (
     <div className={wrapperClasses} {...rest}>
       <div role="button" className={`${prefix}--list-box__field`}>

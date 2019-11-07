@@ -12,12 +12,12 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const CheckboxSkeleton = ({ className: customClassName, ...rest }) => (
+const CheckboxSkeleton = ({ className, ...rest }) => (
   <div
     className={cx(
       `${prefix}--form-item`,
       `${prefix}--checkbox-wrapper`,
-      customClassName
+      className
     )}
     {...rest}>
     <span className={`${prefix}--checkbox-label ${prefix}--skeleton`} />

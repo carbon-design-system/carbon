@@ -39,10 +39,10 @@ export default class ToggleSkeleton extends React.Component {
   };
 
   render() {
-    const { id, labelText, className: customClassName, ...rest } = this.props;
+    const { id, labelText, className, ...rest } = this.props;
 
     return (
-      <div className={cx(`${prefix}--form-item`, customClassName)} {...rest}>
+      <div className={cx(`${prefix}--form-item`, className)} {...rest}>
         <input
           type="checkbox"
           id={id}

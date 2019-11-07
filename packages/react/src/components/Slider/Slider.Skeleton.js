@@ -12,8 +12,8 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const SliderSkeleton = ({ hideLabel, className: customClassName, ...rest }) => (
-  <div className={cx(`${prefix}--form-item`, customClassName)} {...rest}>
+const SliderSkeleton = ({ hideLabel, className, ...rest }) => (
+  <div className={cx(`${prefix}--form-item`, className)} {...rest}>
     {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
     <div className={`${prefix}--slider-container ${prefix}--skeleton`}>
       <span className={`${prefix}--slider__range-label`} />

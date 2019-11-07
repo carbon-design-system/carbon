@@ -12,12 +12,8 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const NumberInputSkeleton = ({
-  hideLabel,
-  className: customClassName,
-  ...rest
-}) => (
-  <div className={cx(`${prefix}--form-item`, customClassName)} {...rest}>
+const NumberInputSkeleton = ({ hideLabel, className, ...rest }) => (
+  <div className={cx(`${prefix}--form-item`, className)} {...rest}>
     {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
     <div className={`${prefix}--number ${prefix}--skeleton`} />
   </div>

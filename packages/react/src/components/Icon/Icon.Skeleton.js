@@ -12,17 +12,14 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const IconSkeleton = ({ style, className: customClassName, ...rest }) => {
+const IconSkeleton = ({ style, className, ...rest }) => {
   const props = {
     style,
     ...rest,
   };
 
   return (
-    <div
-      className={cx(`${prefix}--icon--skeleton`, customClassName)}
-      {...props}
-    />
+    <div className={cx(`${prefix}--icon--skeleton`, className)} {...props} />
   );
 };
 

@@ -12,12 +12,7 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const DatePickerSkeleton = ({
-  range,
-  id,
-  className: customClassName,
-  ...rest
-}) => {
+const DatePickerSkeleton = ({ range, id, className, ...rest }) => {
   const dateInput = (
     <div className={`${prefix}--date-picker-container`}>
       {
@@ -36,7 +31,7 @@ const DatePickerSkeleton = ({
             `${prefix}--date-picker`,
             `${prefix}--date-picker--range`,
             `${prefix}--skeleton`,
-            customClassName
+            className
           )}
           {...rest}>
           {dateInput}
@@ -54,7 +49,7 @@ const DatePickerSkeleton = ({
           `${prefix}--date-picker--short`,
           `${prefix}--date-picker--simple`,
           `${prefix}--skeleton`,
-          customClassName
+          className
         )}
         {...rest}>
         {dateInput}

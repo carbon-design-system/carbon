@@ -18,15 +18,11 @@ const item = (
   </div>
 );
 
-function BreadcrumbSkeleton({ className: customClassName, ...rest }) {
-  const className = cx(
-    `${prefix}--breadcrumb`,
-    `${prefix}--skeleton`,
-    customClassName
-  );
+function BreadcrumbSkeleton({ className, ...rest }) {
+  const classes = cx(`${prefix}--breadcrumb`, `${prefix}--skeleton`, className);
 
   return (
-    <div className={className} {...rest}>
+    <div className={classes} {...rest}>
       {item}
       {item}
       {item}

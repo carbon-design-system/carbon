@@ -18,10 +18,10 @@ const DataTableSkeleton = ({
   zebra,
   compact,
   headers,
-  className: customClassName,
+  className,
   ...rest
 }) => {
-  const dataTableSkeletonClasses = cx(customClassName, {
+  const dataTableSkeletonClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--data-table`]: true,
     [`${prefix}--data-table--zebra`]: zebra,

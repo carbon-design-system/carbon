@@ -15,20 +15,11 @@ import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
-function AccordionSkeleton({
-  open,
-  count,
-  className: customClassName,
-  ...rest
-}) {
-  const className = cx(
-    `${prefix}--accordion`,
-    `${prefix}--skeleton`,
-    customClassName
-  );
+function AccordionSkeleton({ open, count, className, ...rest }) {
+  const classes = cx(`${prefix}--accordion`, `${prefix}--skeleton`, className);
   const numSkeletonItems = open ? count - 1 : count;
   return (
-    <ul className={className} {...rest}>
+    <ul className={classes} {...rest}>
       {open && (
         <li
           className={`${prefix}--accordion__item ${prefix}--accordion__item--active`}>

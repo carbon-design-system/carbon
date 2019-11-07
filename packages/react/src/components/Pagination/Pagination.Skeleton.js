@@ -13,14 +13,10 @@ import SkeletonText from '../SkeletonText';
 
 const { prefix } = settings;
 
-function PaginationSkeleton({ className: customClassName, ...rest }) {
+function PaginationSkeleton({ className, ...rest }) {
   return (
     <div
-      className={cx(
-        `${prefix}--pagination`,
-        `${prefix}--skeleton`,
-        customClassName
-      )}
+      className={cx(`${prefix}--pagination`, `${prefix}--skeleton`, className)}
       {...rest}>
       <div className={`${prefix}--pagination__left`}>
         <SkeletonText width="70px" />

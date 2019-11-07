@@ -26,14 +26,10 @@ const step = (
   </li>
 );
 
-function ProgressIndicatorSkeleton({ className: customClassName, ...rest }) {
+function ProgressIndicatorSkeleton({ className, ...rest }) {
   return (
     <ul
-      className={cx(
-        `${prefix}--progress`,
-        `${prefix}--skeleton`,
-        customClassName
-      )}
+      className={cx(`${prefix}--progress`, `${prefix}--skeleton`, className)}
       {...rest}>
       {step}
       {step}

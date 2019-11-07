@@ -12,10 +12,10 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-function TagSkeleton({ className: customClassName, ...rest }) {
+function TagSkeleton({ className, ...rest }) {
   return (
     <span
-      className={cx(`${prefix}--tag`, `${prefix}--skeleton`, customClassName)}
+      className={cx(`${prefix}--tag`, `${prefix}--skeleton`, className)}
       {...rest}
     />
   );

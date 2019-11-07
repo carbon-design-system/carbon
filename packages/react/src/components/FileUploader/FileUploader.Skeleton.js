@@ -14,9 +14,9 @@ import ButtonSkeleton from '../Button/Button.Skeleton';
 
 const { prefix } = settings;
 
-function FileUploaderSkeleton({ className: customClassName, ...rest }) {
+function FileUploaderSkeleton({ className, ...rest }) {
   return (
-    <div className={cx(`${prefix}--form-item`, customClassName)} {...rest}>
+    <div className={cx(`${prefix}--form-item`, className)} {...rest}>
       <SkeletonText heading width="100px" />
       <SkeletonText width="225px" className={`${prefix}--label-description`} />
       <ButtonSkeleton />

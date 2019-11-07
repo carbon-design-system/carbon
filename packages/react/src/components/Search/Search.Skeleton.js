@@ -12,8 +12,8 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const SearchSkeleton = ({ small, className: customClassName, ...rest }) => {
-  const searchClasses = cx(customClassName, {
+const SearchSkeleton = ({ small, className, ...rest }) => {
+  const searchClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--search--xl`]: !small,
     [`${prefix}--search--sm`]: small,

@@ -18,10 +18,10 @@ const tab = (
   </li>
 );
 
-function TabsSkeleton({ className: customClassName, ...rest }) {
+function TabsSkeleton({ className, ...rest }) {
   return (
     <div
-      className={cx(`${prefix}--tabs`, `${prefix}--skeleton`, customClassName)}
+      className={cx(`${prefix}--tabs`, `${prefix}--skeleton`, className)}
       {...rest}>
       <div className={`${prefix}--tabs-trigger`}>
         <div className={`${prefix}--tabs-trigger-text`}>&nbsp;</div>

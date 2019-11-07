@@ -12,13 +12,8 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const StructuredListSkeleton = ({
-  rowCount,
-  border,
-  className: customClassName,
-  ...rest
-}) => {
-  const StructuredListSkeletonClasses = cx(customClassName, {
+const StructuredListSkeleton = ({ rowCount, border, className, ...rest }) => {
+  const StructuredListSkeletonClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--structured-list`]: true,
     [`${prefix}--structured-list--border`]: border,
