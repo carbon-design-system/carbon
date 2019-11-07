@@ -7,12 +7,17 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const TextInputSkeleton = ({ hideLabel }) => (
-  <div className={`${prefix}--form-item`}>
+const TextInputSkeleton = ({
+  hideLabel,
+  className: customClassName,
+  ...rest
+}) => (
+  <div className={cx(`${prefix}--form-item`, customClassName)} {...rest}>
     {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
     <div className={`${prefix}--skeleton ${prefix}--text-input`} />
   </div>
@@ -23,6 +28,11 @@ TextInputSkeleton.propTypes = {
    * Specify whether the label should be hidden, or not
    */
   hideLabel: PropTypes.bool,
+
+  /**
+   * Specify an optional className to add to the form item wrapper.
+   */
+  className: PropTypes.string,
 };
 
 export default TextInputSkeleton;
