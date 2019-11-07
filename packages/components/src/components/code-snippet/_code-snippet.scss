@@ -168,15 +168,13 @@
     height: $carbon--spacing-08;
     width: $carbon--spacing-08;
     overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:focus {
       @include focus-outline('outline');
       outline-color: $focus;
-    }
-
-    .#{$prefix}--snippet__icon {
-      margin-top: 12px;
-      margin-bottom: 12px;
     }
   }
 
