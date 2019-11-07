@@ -12,6 +12,17 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
+// https://github.com/carbon-design-system/carbon/blob/master/packages/react/src/components/Loading/Loading-test.js#L71-L91
+describe('Loading - accessibility', () => {
+  it('should have a programatically determinable label', () => {
+    const wrapper = mount(<Loading />);
+    const getLoader = () => wrapper.find('[aria-labelledby]');
+
+    expect(getLoader().prop('aria-atomic')).toBe('true');
+    expect(getLoader().prop('aria-labelledby')).toBeDefined();
+  });
+});
+
 describe('Loading', () => {
   describe('Renders as expected', () => {
     const wrapper = mount(<Loading className="extra-class" />);
