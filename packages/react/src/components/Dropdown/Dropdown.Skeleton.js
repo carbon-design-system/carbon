@@ -7,13 +7,13 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import classNames from 'classnames';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const DropdownSkeleton = ({ inline }) => {
-  const wrapperClasses = classNames({
+const DropdownSkeleton = ({ inline, className: customClassName, ...rest }) => {
+  const wrapperClasses = cx(customClassName, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--dropdown-v2`]: true,
     [`${prefix}--list-box`]: true,
@@ -21,7 +21,7 @@ const DropdownSkeleton = ({ inline }) => {
     [`${prefix}--list-box--inline`]: inline,
   });
   return (
-    <div className={wrapperClasses}>
+    <div className={wrapperClasses} {...rest}>
       <div role="button" className={`${prefix}--list-box__field`}>
         <span className={`${prefix}--list-box__label`} />
       </div>
@@ -34,6 +34,11 @@ DropdownSkeleton.propTypes = {
    * Specify whether you want the inline version of this control
    */
   inline: PropTypes.bool,
+
+  /**
+   * Specify an optional className to add.
+   */
+  className: PropTypes.string,
 };
 
 DropdownSkeleton.defaultProps = {
