@@ -223,7 +223,7 @@ GitHub.
 
 - **Development:** If coding is your thing, you can help us by contributing bug
   fixes or community components. Checkout our
-  [Developer Handbook](../developer-handbook.md) to get your dev environment set
+  [Developer Handbook](../docs/developer-handbook.md) to get your dev environment set
   up, read up on our best practices and more.
 - **Design:** Design contributions can vary from visual assets, UX interactions,
   motion design, Sketch kit bug fixes and more.
