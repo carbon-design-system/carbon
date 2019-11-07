@@ -7,6 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import cx from 'classnames';
 import { ChevronRight16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import SkeletonText from '../SkeletonText';
@@ -14,11 +15,21 @@ import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
-function AccordionSkeleton(props) {
-  const numSkeletonItems = props.open ? props.count - 1 : props.count;
+function AccordionSkeleton({
+  open,
+  count,
+  className: customClassName,
+  ...rest
+}) {
+  const className = cx(
+    `${prefix}--accordion`,
+    `${prefix}--skeleton`,
+    customClassName
+  );
+  const numSkeletonItems = open ? count - 1 : count;
   return (
-    <ul className={`${prefix}--accordion ${prefix}--skeleton`}>
-      {props.open && (
+    <ul className={className} {...rest}>
+      {open && (
         <li
           className={`${prefix}--accordion__item ${prefix}--accordion__item--active`}>
           <span className={`${prefix}--accordion__heading`}>
@@ -54,6 +65,11 @@ AccordionSkeleton.propTypes = {
    * Set unique identifier to generate unique item keys
    */
   uid: deprecate(PropTypes.any),
+
+  /**
+   * Specify an optional className to add.
+   */
+  className: PropTypes.string,
 };
 
 AccordionSkeleton.defaultProps = {
