@@ -7,7 +7,7 @@
 
 {{#is suffix "sm"}}<div class="{{@root.prefix}}--form-item">{{/is}}
   <div class="{{@root.prefix}}--search--targeted__container {{@root.prefix}}--search--targeted--{{suffix}}__container">
-    <div data-dropdown class="{{@root.prefix}}--dropdown">
+    <div data-dropdown class="{{@root.prefix}}--dropdown {{@root.prefix}}--dropdown--show-selected">
       <button class="{{@root.prefix}}--dropdown-text" aria-haspopup="true" aria-expanded="false" aria-controls="{{default.idSuffix}}-menu" aria-labelledby="{{default.idSuffix}}-label {{default.idSuffix}}-value" type="button">
         <span class="{{@root.prefix}}--dropdown-text__inner" id="{{default.idSuffix}}-value">Search options</span>
         <span class="{{@root.prefix}}--dropdown__arrow-container">
