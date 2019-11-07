@@ -160,7 +160,7 @@ function buildTokenFile(tokenScale, group) {
  * @returns {string}
  */
 function formatStep(name, index) {
-  let step = '' + index;
+  let step = index;
   if (step < 10) {
     step = '0' + step;
   }
