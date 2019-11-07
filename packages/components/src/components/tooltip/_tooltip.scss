@@ -320,10 +320,6 @@
     &:focus {
       @include focus-outline('border');
     }
-
-    .#{$prefix}--tooltip__trigger {
-      margin-left: $carbon--spacing-03;
-    }
   }
 
   .#{$prefix}--tooltip__trigger svg {
@@ -336,6 +332,9 @@
     align-items: center;
     cursor: pointer;
     font-size: 1rem;
+
+    // Override `margin: 0` from button-reset mixin:
+    margin-left: $carbon--spacing-03;
 
     &:focus {
       @include focus-outline('border');
