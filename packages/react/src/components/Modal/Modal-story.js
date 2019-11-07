@@ -25,7 +25,7 @@ const props = () => ({
     'Enter key to submit (shouldSubmitOnEnter)',
     false
   ),
-  focusTrap: boolean('Trap focus (focusTrap', false),
+  focusTrap: boolean('Trap focus (focusTrap)', false),
   modalHeading: text('Modal heading (modalHeading)', 'Modal heading'),
   modalLabel: text('Optional label (modalLabel)', 'Label'),
   modalAriaLabel: text(

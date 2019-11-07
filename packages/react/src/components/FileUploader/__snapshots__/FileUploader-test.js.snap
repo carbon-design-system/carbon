@@ -13,10 +13,17 @@ exports[`Filename renders as expected renders upload status icon as expected 1`]
     withOverlay={false}
   >
     <div
-      aria-label="Upload complete"
+      aria-atomic="true"
+      aria-labelledby="loading-id-1"
       aria-live="assertive"
       className="bx--loading bx--loading--small"
     >
+      <label
+        className="bx--visually-hidden"
+        id="loading-id-1"
+      >
+        Upload complete
+      </label>
       <svg
         className="bx--loading__svg"
         viewBox="-75 -75 150 150"
@@ -28,13 +35,13 @@ exports[`Filename renders as expected renders upload status icon as expected 1`]
           className="bx--loading__background"
           cx="0"
           cy="0"
-          r="37.5"
+          r="26.8125"
         />
         <circle
           className="bx--loading__stroke"
           cx="0"
           cy="0"
-          r="37.5"
+          r="26.8125"
         />
       </svg>
     </div>

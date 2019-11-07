@@ -11,19 +11,12 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const NumberInputSkeleton = ({ hideLabel, id }) => {
-  const label = hideLabel ? null : (
-    // eslint-disable-next-line jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control
-    <label className={`${prefix}--label ${prefix}--skeleton`} htmlFor={id} />
-  );
-
-  return (
-    <div className={`${prefix}--form-item`}>
-      {label}
-      <div className={`${prefix}--number ${prefix}--skeleton`} />
-    </div>
-  );
-};
+const NumberInputSkeleton = ({ hideLabel }) => (
+  <div className={`${prefix}--form-item`}>
+    {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
+    <div className={`${prefix}--number ${prefix}--skeleton`} />
+  </div>
+);
 
 NumberInputSkeleton.propTypes = {
   /**
