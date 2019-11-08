@@ -9,9 +9,9 @@
 
 const { types: t } = require('@carbon/scss-generator');
 const { formatTokenName } = require('../../lib');
-const { FILE_BANNER, defaultTheme, defaultThemeMapName } = require('./shared');
+const { FILE_BANNER } = require('./shared');
 
-function buildMixinsFile(themes, tokens) {
+function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
   const comment = t.Comment(`/ Define theme variables from a map of tokens
 / @access public
 / @param {Map} $theme [$${defaultThemeMapName}] - Map of theme tokens

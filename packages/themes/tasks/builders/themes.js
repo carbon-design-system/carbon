@@ -9,38 +9,59 @@
 
 const { types: t } = require('@carbon/scss-generator');
 const { formatTokenName } = require('../../lib');
-const {
-  FILE_BANNER,
-  primitive,
-  defaultTheme,
-  defaultThemeMapName,
-} = require('./shared');
+const { FILE_BANNER, primitive } = require('./shared');
 
-function buildThemesFile(themes, tokens) {
-  // Create maps for each theme:
-  // $carbon--theme--name: (
-  //   token-name: token-value
-  // ) !default;
-  const themeMaps = Object.keys(themes).flatMap(name => {
-    const theme = themes[name];
-    const comment = t.Comment(`/ Carbon's ${name} color theme
+function buildThemesFile(
+  themes,
+  tokens,
+  defaultThemeName,
+  defaultThemeMapName
+) {
+  const defaultTheme = themes[defaultThemeName];
+  const defaultThemeMap = t.Assignment({
+    id: t.Identifier(`carbon--theme--${defaultThemeName}`),
+    init: t.SassMap({
+      properties: Object.keys(defaultTheme).map(token => {
+        return t.SassMapProperty(
+          t.Identifier(formatTokenName(token)),
+          primitive(defaultTheme[token])
+        );
+      }),
+    }),
+    default: true,
+  });
+  const themeMaps = Object.keys(themes)
+    .filter(name => name !== defaultThemeName)
+    .flatMap(name => {
+      const theme = themes[name];
+      const comment = t.Comment(`/ Carbon's ${name} color theme
 / @type Map
 / @access public
 / @group @carbon/themes`);
-    const variable = t.Assignment({
-      id: t.Identifier(`carbon--theme--${name}`),
-      init: t.SassMap({
-        properties: Object.keys(theme).map(token =>
-          t.SassMapProperty(
-            t.Identifier(formatTokenName(token)),
-            primitive(theme[token])
-          )
-        ),
-      }),
-      default: true,
+      return [
+        t.Newline(),
+        comment,
+        t.Assignment({
+          id: t.Identifier(`carbon--theme--${name}`),
+          init: t.SassFunctionCall(t.Identifier('map-merge'), [
+            t.Identifier(`carbon--theme--${defaultThemeName}`),
+            t.SassMap({
+              properties: Object.keys(theme)
+                .filter(token => {
+                  return theme[token] !== defaultTheme[token];
+                })
+                .map(token => {
+                  return t.SassMapProperty(
+                    t.Identifier(formatTokenName(token)),
+                    primitive(theme[token])
+                  );
+                }),
+            }),
+          ]),
+          default: true,
+        }),
+      ];
     });
-    return [t.Newline(), comment, variable];
-  });
 
   const carbonTheme = t.Assignment({
     id: t.Identifier(defaultThemeMapName),
@@ -70,12 +91,13 @@ function buildThemesFile(themes, tokens) {
   return t.StyleSheet([
     FILE_BANNER,
     t.Newline(),
+    defaultThemeMap,
     ...themeMaps,
     t.Newline(),
     t.Comment(`/ Carbon's default theme
 / @type Map
 / @access public
-/ @alias carbon--theme--${defaultTheme}
+/ @alias carbon--theme--${defaultThemeName}
 / @group @carbon/themes`),
     carbonTheme,
   ]);

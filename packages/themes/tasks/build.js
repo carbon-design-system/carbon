@@ -20,7 +20,9 @@ const { formatTokenName, themes, tokens } = require('../lib');
 const buildTokensFile = require('./builders/tokens');
 const buildThemesFile = require('./builders/themes');
 const buildMixinsFile = require('./builders/mixins');
-const { defaultTheme } = require('./builders/shared');
+
+const defaultTheme = 'white';
+const defaultThemeMapName = 'carbon--theme';
 
 async function build() {
   reporter.info('Building scss files for themes...');
@@ -41,13 +43,23 @@ async function build() {
     {
       filepath: path.join(SCSS_DIR, '_themes.scss'),
       builder() {
-        return buildThemesFile(themes, tokens);
+        return buildThemesFile(
+          themes,
+          tokens,
+          defaultTheme,
+          defaultThemeMapName
+        );
       },
     },
     {
       filepath: path.join(SCSS_DIR, '_mixins.scss'),
       builder() {
-        return buildMixinsFile(themes, tokens);
+        return buildMixinsFile(
+          themes,
+          tokens,
+          defaultTheme,
+          defaultThemeMapName
+        );
       },
     },
   ];

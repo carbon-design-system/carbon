@@ -25,7 +25,10 @@ function primitive(value) {
       value.endsWith('px') ||
       value.endsWith('em') ||
       value.endsWith('%') ||
-      value.startsWith('rgb')
+      value.endsWith('vw') ||
+      value.endsWith('vh') ||
+      value.startsWith('rgb') ||
+      value === '0'
     ) {
       return t.SassValue(value);
     }
@@ -58,12 +61,7 @@ function primitive(value) {
   throw new Error(`Unknown primitive type for ${typeof value}`);
 }
 
-const defaultTheme = 'white';
-const defaultThemeMapName = 'carbon--theme';
-
 module.exports = {
   FILE_BANNER,
   primitive,
-  defaultTheme,
-  defaultThemeMapName,
 };
