@@ -8,13 +8,15 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import './Tabs-story.scss';
-
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
+import { settings } from 'carbon-components';
+import classNames from 'classnames';
+import './Tabs-story.scss';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
 
+const { prefix } = settings;
 const props = {
   tabs: () => ({
     className: 'some-class',
@@ -49,9 +51,17 @@ const props = {
 
 const CustomLabel = ({ text }) => <>{text}</>;
 
-const TabContentRenderedOnlyWhenSelected = ({ selected, children, ...other }) =>
+const TabContentRenderedOnlyWhenSelected = ({
+  selected,
+  children,
+  className,
+  ...other
+}) =>
   !selected ? null : (
-    <div {...other} selected={selected}>
+    <div
+      {...other}
+      className={classNames(className, `${prefix}--tab-content`)}
+      selected={selected}>
       {children}
     </div>
   );
