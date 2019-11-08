@@ -189,6 +189,8 @@ describe('Carbon Components React', () => {
         "Tooltip",
         "TooltipDefinition",
         "TooltipIcon",
+        "Tour",
+        "TourTooltip",
         "UnorderedList",
       ]
     `);
