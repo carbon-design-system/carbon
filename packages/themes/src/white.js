@@ -159,6 +159,47 @@ export { display02 } from '@carbon/type';
 export { display03 } from '@carbon/type';
 export { display04 } from '@carbon/type';
 
+// Layout
+// Spacing
+export { spacing01 } from '@carbon/layout';
+export { spacing02 } from '@carbon/layout';
+export { spacing03 } from '@carbon/layout';
+export { spacing04 } from '@carbon/layout';
+export { spacing05 } from '@carbon/layout';
+export { spacing06 } from '@carbon/layout';
+export { spacing07 } from '@carbon/layout';
+export { spacing08 } from '@carbon/layout';
+export { spacing09 } from '@carbon/layout';
+export { spacing10 } from '@carbon/layout';
+export { spacing11 } from '@carbon/layout';
+export { spacing12 } from '@carbon/layout';
+
+// Fluid spacing
+export { fluidSpacing01 } from '@carbon/layout';
+export { fluidSpacing02 } from '@carbon/layout';
+export { fluidSpacing03 } from '@carbon/layout';
+export { fluidSpacing04 } from '@carbon/layout';
+
+// Layout
+export { layout01 } from '@carbon/layout';
+export { layout02 } from '@carbon/layout';
+export { layout03 } from '@carbon/layout';
+export { layout04 } from '@carbon/layout';
+export { layout05 } from '@carbon/layout';
+export { layout06 } from '@carbon/layout';
+export { layout07 } from '@carbon/layout';
+
+// Containers
+export { container01 } from '@carbon/layout';
+export { container02 } from '@carbon/layout';
+export { container03 } from '@carbon/layout';
+export { container04 } from '@carbon/layout';
+export { container05 } from '@carbon/layout';
+
+// Icon sizes
+export { iconSize01 } from '@carbon/layout';
+export { iconSize02 } from '@carbon/layout';
+
 // Deprecated ☠️
 export const brand01 = interactive01;
 export const brand02 = interactive02;

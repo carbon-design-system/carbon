@@ -157,6 +157,47 @@ export { display02 } from './white';
 export { display03 } from './white';
 export { display04 } from './white';
 
+// Layout
+// Spacing
+export { spacing01 } from './white';
+export { spacing02 } from './white';
+export { spacing03 } from './white';
+export { spacing04 } from './white';
+export { spacing05 } from './white';
+export { spacing06 } from './white';
+export { spacing07 } from './white';
+export { spacing08 } from './white';
+export { spacing09 } from './white';
+export { spacing10 } from './white';
+export { spacing11 } from './white';
+export { spacing12 } from './white';
+
+// Fluid spacing
+export { fluidSpacing01 } from './white';
+export { fluidSpacing02 } from './white';
+export { fluidSpacing03 } from './white';
+export { fluidSpacing04 } from './white';
+
+// Layout
+export { layout01 } from './white';
+export { layout02 } from './white';
+export { layout03 } from './white';
+export { layout04 } from './white';
+export { layout05 } from './white';
+export { layout06 } from './white';
+export { layout07 } from './white';
+
+// Containers
+export { container01 } from './white';
+export { container02 } from './white';
+export { container03 } from './white';
+export { container04 } from './white';
+export { container05 } from './white';
+
+// Icon sizes
+export { iconSize01 } from './white';
+export { iconSize02 } from './white';
+
 // Deprecated ☠️
 export const brand01 = interactive01;
 export const brand02 = interactive02;
