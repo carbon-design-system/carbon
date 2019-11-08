@@ -42,7 +42,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 $carbon--spacing-05;
+    padding: 0 $spacing-05;
     height: rem(40px);
     cursor: pointer;
     color: $text-01;
@@ -295,12 +295,12 @@
     color: $text-02;
     text-decoration: none;
     font-weight: 400;
-    padding: $carbon--spacing-04 0;
+    padding: $spacing-04 0;
     width: calc(100% - 32px);
     height: rem(40px);
     white-space: nowrap;
     text-overflow: ellipsis;
-    margin: 0 $carbon--spacing-05;
+    margin: 0 $spacing-05;
     line-height: rem(16px);
     border-bottom: 1px solid $ui-03;
     overflow: hidden;
@@ -317,7 +317,7 @@
 
     @include carbon--breakpoint(md) {
       border-bottom: $tab-underline-color;
-      padding: $carbon--spacing-03 $carbon--spacing-05;
+      padding: $spacing-03 $spacing-05;
       width: rem(160px);
       margin: 0;
       line-height: inherit;
@@ -325,7 +325,7 @@
       &:focus,
       &:active {
         width: rem(160px);
-        padding: $carbon--spacing-03 $carbon--spacing-05;
+        padding: $spacing-03 $spacing-05;
         border-bottom: 2px;
       }
     }
