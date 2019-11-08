@@ -9,6 +9,7 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import SideNavLink from './SideNavLink';
 
 const { prefix } = settings;
 
@@ -19,6 +20,9 @@ const SideNavItems = ({
 }) => {
   const className = cx([`${prefix}--side-nav__items`], customClassName);
   const childrenWithExpandedState = React.Children.map(children, child => {
+    if (child.type === SideNavLink && child.props.element === 'a') {
+      return React.cloneElement(child);
+    }
     return React.cloneElement(child, { isSideNavExpanded });
   });
   return <ul className={className}>{childrenWithExpandedState}</ul>;
