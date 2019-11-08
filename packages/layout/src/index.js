@@ -118,7 +118,7 @@ export const spacing = [
 ];
 
 // Fluid spacing
-export const fluidSpacing01 = '0';
+export const fluidSpacing01 = 0;
 export const fluidSpacing02 = '2vw';
 export const fluidSpacing03 = '5vw';
 export const fluidSpacing04 = '10vw';
