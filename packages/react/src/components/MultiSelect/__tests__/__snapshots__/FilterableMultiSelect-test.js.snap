@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MultiSelect.Filterable should render 1`] = `
-<FilterableMultiSelect
+<MultiSelect.Filterable
   ariaLabel="Choose an item"
   compareItems={[Function]}
   disabled={false}
@@ -192,5 +192,5 @@ exports[`MultiSelect.Filterable should render 1`] = `
       </Downshift>
     </Selection>
   </div>
-</FilterableMultiSelect>
+</MultiSelect.Filterable>
 `;
