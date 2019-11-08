@@ -13,11 +13,10 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 const ButtonSkeleton = ({ className, small, href, ...rest }) => {
-  const buttonClasses = cx({
+  const buttonClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--sm`]: small,
-    className,
   });
 
   const commonProps = {
