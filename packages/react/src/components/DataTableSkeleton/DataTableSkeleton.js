@@ -7,7 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import classNames from 'classnames';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -18,9 +18,10 @@ const DataTableSkeleton = ({
   zebra,
   compact,
   headers,
-  ...other
+  className,
+  ...rest
 }) => {
-  const dataTableSkeletonClasses = classNames({
+  const dataTableSkeletonClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--data-table`]: true,
     [`${prefix}--data-table--zebra`]: zebra,
@@ -49,7 +50,7 @@ const DataTableSkeleton = ({
   }
 
   return (
-    <table className={dataTableSkeletonClasses} {...other}>
+    <table className={dataTableSkeletonClasses} {...rest}>
       <thead>
         <tr>
           {columnsArray.map(i => (
@@ -103,6 +104,11 @@ DataTableSkeleton.propTypes = {
       header: PropTypes.node,
     }),
   ]),
+
+  /**
+   * Specify an optional className to add.
+   */
+  className: PropTypes.string,
 };
 
 DataTableSkeleton.defaultProps = {
