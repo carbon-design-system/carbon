@@ -405,7 +405,8 @@ export class ExpandableTile extends Component {
   static defaultProps = {
     tabIndex: 0,
     expanded: false,
-    tileMaxHeight: '0',
+    tileMaxHeight: 0,
+    tilePadding: 0,
     onBeforeClick: () => true,
     handleClick: () => {},
     tileCollapsedIconText: 'Interact to expand Tile',
@@ -503,29 +504,29 @@ export class ExpandableTile extends Component {
     const {
       tabIndex,
       className,
+      expanded, // eslint-disable-line
       tileMaxHeight, // eslint-disable-line
       tilePadding, // eslint-disable-line
       handleClick, // eslint-disable-line
       tileCollapsedIconText, // eslint-disable-line
       tileExpandedIconText, // eslint-disable-line
+      onBeforeClick, // eslint-disable-line
       light,
       ...other
     } = this.props;
-
-    const { expanded } = this.state;
 
     const classes = classNames(
       `${prefix}--tile`,
       `${prefix}--tile--expandable`,
       {
-        [`${prefix}--tile--is-expanded`]: expanded,
+        [`${prefix}--tile--is-expanded`]: this.state.expanded,
         [`${prefix}--tile--light`]: light,
       },
       className
     );
 
     const tileStyle = {
-      maxHeight: expanded
+      maxHeight: this.state.expanded
         ? null
         : this.state.tileMaxHeight + this.state.tilePadding,
     };
@@ -556,8 +557,10 @@ export class ExpandableTile extends Component {
             {childrenAsArray[0]}
           </div>
           <button
-            aria-expanded={expanded}
-            aria-label={expanded ? tileExpandedIconText : tileCollapsedIconText}
+            aria-expanded={this.state.expanded}
+            aria-label={
+              this.state.expanded ? tileExpandedIconText : tileCollapsedIconText
+            }
             className={`${prefix}--tile__chevron`}>
             <ChevronDown16 />
           </button>
