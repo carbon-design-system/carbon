@@ -12,7 +12,11 @@ import getDerivedStateFromProps from './state/getDerivedStateFromProps';
 import { getNextSortState } from './state/sorting';
 import denormalize from './tools/denormalize';
 import { composeEventHandlers } from '../../tools/events';
-import { defaultFilterRows } from './tools/filter';
+import {
+  defaultFilterRows,
+  defaultFilterHeaders,
+  defaultFilterRowColumns,
+} from './tools/filter';
 import { defaultSortRow } from './tools/sorting';
 import setupGetInstanceId from './tools/instanceId';
 
@@ -125,6 +129,8 @@ export default class DataTable extends React.Component {
   static defaultProps = {
     sortRow: defaultSortRow,
     filterRows: defaultFilterRows,
+    filterHeaders: defaultFilterHeaders,
+    filterRowColumns: defaultFilterRowColumns,
     locale: 'en',
     translateWithId,
   };
@@ -136,6 +142,7 @@ export default class DataTable extends React.Component {
     this.state = {
       ...getDerivedStateFromProps(props, {}),
       isExpandedAll: false, // Start with collapsed state, treat `undefined` as neutral state
+      selectedColumns: props.headers.map(header => header.key),
     };
     this.instanceId = getInstanceId();
   }
@@ -586,9 +593,31 @@ export default class DataTable extends React.Component {
     }
   };
 
+  /**
+   * Event handler for table hide/show columns.
+   *
+   * @param {Array} selectedColumns array of selected columns
+   */
+  handleOnColumnsChange = selectedColumns => {
+    this.setState({ selectedColumns });
+  };
+
   render() {
-    const { children, filterRows, headers, render } = this.props;
-    const { filterInputValue, rowIds, rowsById, cellsById } = this.state;
+    const {
+      children,
+      filterRows,
+      filterHeaders,
+      filterRowColumns,
+      headers,
+      render,
+    } = this.props;
+    const {
+      filterInputValue,
+      selectedColumns,
+      rowIds,
+      rowsById,
+      cellsById,
+    } = this.state;
     const filteredRowIds =
       typeof filterInputValue === 'string'
         ? filterRows({
@@ -598,11 +627,19 @@ export default class DataTable extends React.Component {
             inputValue: filterInputValue,
           })
         : rowIds;
+
+    const filteredHeaders = filterHeaders({ headers, selectedColumns });
     const renderProps = {
       // Data derived from state
-      rows: denormalize(filteredRowIds, rowsById, cellsById),
-      headers: this.props.headers,
-      selectedRows: denormalize(this.getSelectedRows(), rowsById, cellsById),
+      rows: filterRowColumns({
+        rows: denormalize(filteredRowIds, rowsById, cellsById),
+        selectedColumns,
+      }),
+      headers: filteredHeaders,
+      selectedRows: filterRowColumns({
+        rows: denormalize(this.getSelectedRows(), rowsById, cellsById),
+        selectedColumns,
+      }),
 
       // Prop accessors/getters
       getHeaderProps: this.getHeaderProps,
@@ -615,6 +652,7 @@ export default class DataTable extends React.Component {
 
       // Custom event handlers
       onInputChange: this.handleOnInputValueChange,
+      onColumnsChange: this.handleOnColumnsChange,
 
       // Expose internal state change actions
       sortBy: headerKey => this.handleSortBy(headerKey)(),

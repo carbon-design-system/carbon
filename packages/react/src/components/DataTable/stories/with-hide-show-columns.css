@@ -1,0 +1,7 @@
+.bx--table-toolbar {
+  overflow: visible;
+}
+
+.bx--data-table th:last-of-type {
+  position: static;
+}

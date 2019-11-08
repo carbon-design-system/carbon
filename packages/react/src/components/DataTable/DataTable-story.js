@@ -59,6 +59,22 @@ storiesOf('DataTable', module)
     }
   )
   .add(
+    'with hide/show columns',
+    withReadme(readme, () =>
+      require('./stories/with-hide-show-columns').default(props())
+    ),
+    {
+      info: {
+        text: `
+        DataTable with ability to hide/show columns.
+
+        You can find more detailed information surrounding usage of this component
+        at the following url: ${readmeURL}
+      `,
+      },
+    }
+  )
+  .add(
     'with sorting',
     withReadme(readme, () =>
       require('./stories/with-sorting').default(props())

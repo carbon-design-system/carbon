@@ -30,3 +30,15 @@ export const defaultFilterRows = ({ rowIds, headers, cellsById, inputValue }) =>
         .includes(inputValue.toLowerCase());
     })
   );
+
+export const defaultFilterHeaders = ({ headers, selectedColumns }) =>
+  headers.filter(header => selectedColumns.includes(header.key));
+
+export const defaultFilterRowColumns = ({ rows, selectedColumns }) => {
+  return rows.map(row => ({
+    ...row,
+    cells: row.cells.filter(cell =>
+      selectedColumns.includes(cell.info && cell.info.header)
+    ),
+  }));
+};
