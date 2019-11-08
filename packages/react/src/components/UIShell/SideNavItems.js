@@ -20,7 +20,6 @@ const SideNavItems = ({
 }) => {
   const className = cx([`${prefix}--side-nav__items`], customClassName);
   const childrenWithExpandedState = React.Children.map(children, child => {
-    console.log(`CHILD TYPE: ${child.type}`);
     if (
       typeof child.type === 'string' ||
       (child.type === SideNavLink && child.props.element === 'a')
