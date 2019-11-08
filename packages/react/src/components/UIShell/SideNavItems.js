@@ -20,7 +20,11 @@ const SideNavItems = ({
 }) => {
   const className = cx([`${prefix}--side-nav__items`], customClassName);
   const childrenWithExpandedState = React.Children.map(children, child => {
-    if (child.type === SideNavLink && child.props.element === 'a') {
+    if (
+      child.type &&
+      child.type === SideNavLink &&
+      child.props.element === 'a'
+    ) {
       return React.cloneElement(child);
     }
     return React.cloneElement(child, { isSideNavExpanded });
