@@ -5,13 +5,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import PropTypes from 'prop-types';
 import React from 'react';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-export default class TagSkeleton extends React.Component {
-  render() {
-    return <span className={`${prefix}--tag ${prefix}--skeleton`} />;
-  }
+function TagSkeleton({ className, ...rest }) {
+  return (
+    <span
+      className={cx(`${prefix}--tag`, `${prefix}--skeleton`, className)}
+      {...rest}
+    />
+  );
 }
+
+TagSkeleton.propTypes = {
+  /**
+   * Specify an optional className to add.
+   */
+  className: PropTypes.string,
+};
+
+export default TagSkeleton;

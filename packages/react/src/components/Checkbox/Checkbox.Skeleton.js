@@ -5,24 +5,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import PropTypes from 'prop-types';
 import React from 'react';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-export default class CheckboxSkeleton extends React.Component {
-  render() {
-    const { id } = this.props;
-    return (
-      <div className={`${prefix}--form-item ${prefix}--checkbox-wrapper`}>
-        {
-          // eslint-disable-next-line jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control
-          <label
-            className={`${prefix}--checkbox-label ${prefix}--skeleton`}
-            htmlFor={id}
-          />
-        }
-      </div>
-    );
-  }
-}
+const CheckboxSkeleton = ({ className, ...rest }) => (
+  <div
+    className={cx(
+      `${prefix}--form-item`,
+      `${prefix}--checkbox-wrapper`,
+      className
+    )}
+    {...rest}>
+    <span className={`${prefix}--checkbox-label ${prefix}--skeleton`} />
+  </div>
+);
+
+CheckboxSkeleton.propTypes = {
+  /**
+   * Specify an optional className to add.
+   */
+  className: PropTypes.string,
+};
+
+export default CheckboxSkeleton;

@@ -14,12 +14,15 @@
 /// @access public
 /// @group tooltip
 @mixin tooltip--trigger($tooltip-type: 'icon', $position: 'bottom') {
-  @include reset;
   position: relative;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
   overflow: visible;
+
+  &:focus {
+    @include focus-outline('border');
+  }
 
   @if $tooltip-type == 'icon' {
     &:focus {

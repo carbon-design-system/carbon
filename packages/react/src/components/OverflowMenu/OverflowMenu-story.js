@@ -25,6 +25,7 @@ const props = {
     ariaLabel: text('ARIA label (ariaLabel)', 'Menu'),
     iconDescription: text('Icon description (iconDescription)', ''),
     flipped: boolean('Flipped (flipped)', false),
+    light: boolean('Light (light)', false),
     onClick: action('onClick'),
     onFocus: action('onFocus'),
     onKeyDown: action('onKeyDown'),
@@ -62,17 +63,6 @@ const OverflowMenuExample = ({ overflowMenuProps, overflowMenuItemProps }) => (
         itemText="Danger option"
         hasDivider
         isDelete
-      />
-    </OverflowMenu>
-    <OverflowMenu {...overflowMenuProps}>
-      <OverflowMenuItem
-        {...overflowMenuItemProps}
-        itemText="Option 1"
-        primaryFocus
-      />
-      <OverflowMenuItem
-        {...overflowMenuItemProps}
-        itemText="Option 2 is an example of a really long string and how we recommend handling this"
       />
     </OverflowMenu>
   </>
@@ -125,10 +115,9 @@ storiesOf('OverflowMenu', module)
       <OverflowMenuExample
         overflowMenuProps={{
           ...props.menu(),
+          ariaLabel: null,
           style: { width: 'auto' },
-          renderIcon: () => (
-            <div style={{ padding: '0 1rem' }}>Custom trigger</div>
-          ),
+          renderIcon: () => <div style={{ padding: '0 1rem' }}>Menu</div>,
         }}
         overflowMenuItemProps={props.menuItem()}
       />

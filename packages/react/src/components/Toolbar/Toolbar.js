@@ -22,7 +22,7 @@ const Toolbar = ({ children, className, ...other }) => {
   if (__DEV__) {
     warning(
       didWarnAboutDeprecation,
-      'The `ComponentName` component has been deprecated and will be removed in the next major release of `carbon-components-react`'
+      'The Toolbar component has been deprecated and will be removed in the next major release of `carbon-components-react`'
     );
     didWarnAboutDeprecation = true;
   }

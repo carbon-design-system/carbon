@@ -22,6 +22,8 @@ const SideNavLink = ({
   renderIcon: IconElement,
   isActive,
   large,
+  // eslint-disable-next-line no-unused-vars
+  isSideNavExpanded,
   ...rest
 }) => {
   const className = cx({
