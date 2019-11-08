@@ -137,7 +137,7 @@
 
   .#{$prefix}--data-table--light td,
   .#{$prefix}--data-table--light tbody th {
-    background: $ui-02;
+    background: $ui-background;
   }
 
   @supports (-moz-appearance: none) {
