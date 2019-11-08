@@ -21,8 +21,13 @@ describe('Loading - accessibility', () => {
   });
 
   describe('Screenreader Accessibility', () => {
-    const wrapper = shallow(<Loading id="test-id" />);
-    const getLoader = () => wrapper.find('#test-id');
+    let wrapper;
+    let getLoader;
+
+    beforeEach(() => {
+      wrapper = shallow(<Loading id="test-id" />);
+      getLoader = () => wrapper.find('#test-id');
+    });
 
     it('has a programatically determinable label', () => {
       expect(getLoader().prop('aria-labelledby')).toBeDefined();
