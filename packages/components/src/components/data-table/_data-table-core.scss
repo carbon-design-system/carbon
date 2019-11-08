@@ -249,9 +249,20 @@
     border-top: 1px solid $data-table-zebra-color;
   }
 
-  .#{$prefix}--data-table--light.#{$prefix}--data-table--zebra td,
-  .#{$prefix}--data-table--light.#{$prefix}--data-table--zebra tbody th {
+  .#{$prefix}--data-table--light.#{$prefix}--data-table--zebra
+    tbody
+    tr:nth-child(even)
+    td {
     background: $ui-01;
+  }
+
+  .#{$prefix}--data-table--light.#{$prefix}--data-table--zebra
+    tbody
+    tr:nth-child(odd)
+    td {
+    background: $ui-background;
+    border-bottom-color: $ui-background;
+    border-top-color: $ui-background;
   }
 
   .#{$prefix}--data-table--zebra tbody tr:hover td {
