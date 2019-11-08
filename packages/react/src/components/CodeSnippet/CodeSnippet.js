@@ -132,9 +132,7 @@ export default class CodeSnippet extends Component {
 
     const codeSnippetClasses = classNames(className, {
       [`${prefix}--snippet`]: true,
-      [`${prefix}--snippet--single`]: type === 'single',
-      [`${prefix}--snippet--multi`]: type === 'multi',
-      [`${prefix}--snippet--inline`]: type === 'inline',
+      [`${prefix}--snippet--${type}`]: type,
       [`${prefix}--snippet--expand`]: this.state.expandedCode,
       [`${prefix}--snippet--light`]: light,
     });
