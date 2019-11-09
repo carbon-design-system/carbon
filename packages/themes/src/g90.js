@@ -125,79 +125,76 @@ export const highlight = blue70;
 export const skeleton01 = '#353535';
 export const skeleton02 = gray70;
 
-// Type
-export { caption01 } from './white';
-export { label01 } from './white';
-export { helperText01 } from './white';
-export { bodyShort01 } from './white';
-export { bodyLong01 } from './white';
-export { bodyShort02 } from './white';
-export { bodyLong02 } from './white';
-export { code01 } from './white';
-export { code02 } from './white';
-export { heading01 } from './white';
-export { productiveHeading01 } from './white';
-export { heading02 } from './white';
-export { productiveHeading02 } from './white';
-export { productiveHeading03 } from './white';
-export { productiveHeading04 } from './white';
-export { productiveHeading05 } from './white';
-export { productiveHeading06 } from './white';
-export { productiveHeading07 } from './white';
-export { expressiveHeading01 } from './white';
-export { expressiveHeading02 } from './white';
-export { expressiveHeading03 } from './white';
-export { expressiveHeading04 } from './white';
-export { expressiveHeading05 } from './white';
-export { expressiveHeading06 } from './white';
-export { expressiveParagraph01 } from './white';
-export { quotation01 } from './white';
-export { quotation02 } from './white';
-export { display01 } from './white';
-export { display02 } from './white';
-export { display03 } from './white';
-export { display04 } from './white';
-
-// Layout
-// Spacing
-export { spacing01 } from './white';
-export { spacing02 } from './white';
-export { spacing03 } from './white';
-export { spacing04 } from './white';
-export { spacing05 } from './white';
-export { spacing06 } from './white';
-export { spacing07 } from './white';
-export { spacing08 } from './white';
-export { spacing09 } from './white';
-export { spacing10 } from './white';
-export { spacing11 } from './white';
-export { spacing12 } from './white';
-
-// Fluid spacing
-export { fluidSpacing01 } from './white';
-export { fluidSpacing02 } from './white';
-export { fluidSpacing03 } from './white';
-export { fluidSpacing04 } from './white';
-
-// Layout
-export { layout01 } from './white';
-export { layout02 } from './white';
-export { layout03 } from './white';
-export { layout04 } from './white';
-export { layout05 } from './white';
-export { layout06 } from './white';
-export { layout07 } from './white';
-
-// Containers
-export { container01 } from './white';
-export { container02 } from './white';
-export { container03 } from './white';
-export { container04 } from './white';
-export { container05 } from './white';
-
-// Icon sizes
-export { iconSize01 } from './white';
-export { iconSize02 } from './white';
+export {
+  // Type
+  caption01,
+  label01,
+  helperText01,
+  bodyShort01,
+  bodyLong01,
+  bodyShort02,
+  bodyLong02,
+  code01,
+  code02,
+  heading01,
+  productiveHeading01,
+  heading02,
+  productiveHeading02,
+  productiveHeading03,
+  productiveHeading04,
+  productiveHeading05,
+  productiveHeading06,
+  productiveHeading07,
+  expressiveHeading01,
+  expressiveHeading02,
+  expressiveHeading03,
+  expressiveHeading04,
+  expressiveHeading05,
+  expressiveHeading06,
+  expressiveParagraph01,
+  quotation01,
+  quotation02,
+  display01,
+  display02,
+  display03,
+  display04,
+  // Layout
+  // Spacing
+  spacing01,
+  spacing02,
+  spacing03,
+  spacing04,
+  spacing05,
+  spacing06,
+  spacing07,
+  spacing08,
+  spacing09,
+  spacing10,
+  spacing11,
+  spacing12,
+  // Fluid spacing
+  fluidSpacing01,
+  fluidSpacing02,
+  fluidSpacing03,
+  fluidSpacing04,
+  // Layout
+  layout01,
+  layout02,
+  layout03,
+  layout04,
+  layout05,
+  layout06,
+  layout07,
+  // Containers
+  container01,
+  container02,
+  container03,
+  container04,
+  container05,
+  // Icon sizes
+  iconSize01,
+  iconSize02,
+} from './white';
 
 // Deprecated ☠️
 export const brand01 = interactive01;
