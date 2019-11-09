@@ -22,3 +22,6 @@ tests/axe/allHtml
 
 # a11y testing
 .aat.yml
+
+# Generated Sass files
+src/globals/scss/vendor
