@@ -10,6 +10,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SideNavLink from './SideNavLink';
+import Link from '../UIShell/Link';
 
 const { prefix } = settings;
 
@@ -22,7 +23,8 @@ const SideNavItems = ({
   const childrenWithExpandedState = React.Children.map(children, child => {
     if (
       typeof child.type === 'string' ||
-      (child.type === SideNavLink && child.props.element === 'a')
+      ((child.type === SideNavLink || child.type === Link) &&
+        child.props.element === 'a')
     ) {
       return React.cloneElement(child);
     }
