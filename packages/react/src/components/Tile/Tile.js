@@ -515,7 +515,7 @@ export class ExpandableTile extends Component {
       ...other
     } = this.props;
 
-    const { expanded: expandedState } = this.state;
+    const { expanded: isExpanded } = this.state;
 
     const classes = classNames(
       `${prefix}--tile`,
