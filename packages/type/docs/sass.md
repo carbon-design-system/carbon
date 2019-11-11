@@ -2283,7 +2283,12 @@ $productive-heading-07: (
 <summary>Source code</summary>
 
 ```scss
-$expressive-heading-01: $heading-01;
+$expressive-heading-01: map-merge(
+  $heading-01,
+  (
+    line-height: carbon--rem(20),
+  )
+);
 ```
 
 </details>
@@ -2297,7 +2302,12 @@ $expressive-heading-01: $heading-01;
 <summary>Source code</summary>
 
 ```scss
-$expressive-heading-02: $heading-02;
+$expressive-heading-02: map-merge(
+  $heading-02,
+  (
+    line-height: carbon--rem(24),
+  )
+);
 ```
 
 </details>
