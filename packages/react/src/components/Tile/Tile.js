@@ -521,14 +521,14 @@ export class ExpandableTile extends Component {
       `${prefix}--tile`,
       `${prefix}--tile--expandable`,
       {
-        [`${prefix}--tile--is-expanded`]: expandedState,
+        [`${prefix}--tile--is-expanded`]: isExpanded,
         [`${prefix}--tile--light`]: light,
       },
       className
     );
 
     const tileStyle = {
-      maxHeight: expandedState
+      maxHeight: isExpanded
         ? null
         : this.state.tileMaxHeight + this.state.tilePadding,
     };
@@ -559,9 +559,9 @@ export class ExpandableTile extends Component {
             {childrenAsArray[0]}
           </div>
           <button
-            aria-expanded={expandedState}
+            aria-expanded={isExpanded}
             aria-label={
-              expandedState ? tileExpandedIconText : tileCollapsedIconText
+              isExpanded ? tileExpandedIconText : tileCollapsedIconText
             }
             className={`${prefix}--tile__chevron`}>
             <ChevronDown16 />
