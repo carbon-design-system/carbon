@@ -35,8 +35,7 @@ const CodeSnippet = ({
   const [height, setHeight] = useState(0);
   const { current: uid } = useRef(getUniqueId());
   const previousChildren = useRef(null);
-
-  const ref = useCallback(
+  const codeContentRef = useCallback(
     node => {
       if (node !== null && previousChildren.current !== children) {
         setHeight(node.getBoundingClientRect().height);
@@ -53,6 +52,9 @@ const CodeSnippet = ({
     [`${prefix}--snippet--light`]: light,
   });
 
+  const shouldShowMoreLessBtn = type === 'multi' && height > 255;
+  const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
+
   if (type === 'inline') {
     return (
       <Copy
@@ -67,9 +69,6 @@ const CodeSnippet = ({
     );
   }
 
-  const shouldShowMoreLessBtn = type === 'multi' && height > 255;
-  const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
-
   return (
     <div {...other} className={codeSnippetClasses}>
       <div
@@ -78,7 +77,7 @@ const CodeSnippet = ({
         className={`${prefix}--snippet-container`}
         aria-label={ariaLabel || copyLabel || 'code-snippet'}>
         <code>
-          <pre ref={ref}>{children}</pre>
+          <pre ref={codeContentRef}>{children}</pre>
         </code>
       </div>
       <CopyButton
