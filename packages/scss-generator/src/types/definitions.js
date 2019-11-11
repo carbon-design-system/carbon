@@ -54,6 +54,7 @@ const Identifier = defineType('Identifier', {
         parent.type === CallExpression.type ||
         parent.type === LogicalExpression.type ||
         parent.type === SassMixin.type ||
+        parent.type === SassList.type ||
         parent.type === RestPattern.type ||
         parent.type === SassFunction.type)
     ) {
@@ -158,6 +159,7 @@ const SassList = defineType('SassList', {
             assertType(SassMap),
             assertType(SassNumber),
             assertType(SassString),
+            assertType(Identifier),
           ])
         ),
     },
