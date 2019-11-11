@@ -7,13 +7,13 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import classNames from 'classnames';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const ButtonSkeleton = ({ small, href }) => {
-  const buttonClasses = classNames({
+const ButtonSkeleton = ({ className, small, href, ...rest }) => {
+  const buttonClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--sm`]: small,
@@ -21,6 +21,7 @@ const ButtonSkeleton = ({ small, href }) => {
 
   const commonProps = {
     className: buttonClasses,
+    ...rest,
   };
 
   const button = <div {...commonProps} />;
@@ -40,6 +41,11 @@ ButtonSkeleton.propTypes = {
    * Optionally specify an href for your Button to become an <a> element
    */
   href: PropTypes.string,
+
+  /**
+   * Specify an optional className to add.
+   */
+  className: PropTypes.string,
 };
 
 ButtonSkeleton.defaultProps = {
