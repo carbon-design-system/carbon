@@ -2230,7 +2230,7 @@ icons:
         friendly_name: Petri cultures
         usage: This is a description for usage
         categories:
-          - name: Life Sciences
+          - name: Life Science
   - name: pill
     friendly_name: Pill
     usage: This is a description for usage

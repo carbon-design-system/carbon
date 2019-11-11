@@ -119,6 +119,8 @@ const Select = React.forwardRef(function Select(
   );
 });
 
+Select.displayName = 'Select';
+
 Select.propTypes = {
   /**
    * Provide the contents of your Select

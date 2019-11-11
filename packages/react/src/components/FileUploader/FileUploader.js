@@ -17,7 +17,7 @@ import {
 } from '@carbon/icons-react';
 import Loading from '../Loading';
 import uid from '../../tools/uniqueId';
-import { ButtonTypes } from '../../prop-types/types';
+import { ButtonKinds } from '../../prop-types/types';
 
 const { prefix } = settings;
 
@@ -88,7 +88,7 @@ export class FileUploaderButton extends Component {
     /**
      * Specify the type of underlying button
      */
-    buttonKind: ButtonTypes.buttonKind,
+    buttonKind: PropTypes.oneOf(ButtonKinds),
 
     /**
      * Specify the types of files that this input should be able to receive
@@ -175,9 +175,8 @@ export class FileUploaderButton extends Component {
             }
           }}
           htmlFor={this.uid}
-          role={role}
           {...other}>
-          {this.state.labelText}
+          <span role={role}>{this.state.labelText}</span>
         </label>
         <input
           className={`${prefix}--visually-hidden`}
@@ -270,7 +269,7 @@ export default class FileUploader extends Component {
     /**
      * Specify the type of the <FileUploaderButton>
      */
-    buttonKind: ButtonTypes.buttonKind,
+    buttonKind: PropTypes.oneOf(ButtonKinds),
 
     /**
      * Specify the status of the File Upload

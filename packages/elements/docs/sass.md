@@ -46,12 +46,52 @@
   - [✅carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
   - [✅carbon--largest-breakpoint [mixin]](#carbon--largest-breakpoint-mixin)
   - [✅carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [✅carbon--container-01 [variable]](#carbon--container-01-variable)
+  - [✅carbon--container-02 [variable]](#carbon--container-02-variable)
+  - [✅carbon--container-03 [variable]](#carbon--container-03-variable)
+  - [✅carbon--container-04 [variable]](#carbon--container-04-variable)
+  - [✅carbon--container-05 [variable]](#carbon--container-05-variable)
+  - [✅carbon--container [variable]](#carbon--container-variable)
+  - [✅container-01 [variable]](#container-01-variable)
+  - [✅container-02 [variable]](#container-02-variable)
+  - [✅container-03 [variable]](#container-03-variable)
+  - [✅container-04 [variable]](#container-04-variable)
+  - [✅container-05 [variable]](#container-05-variable)
   - [✅carbon--base-font-size [variable]](#carbon--base-font-size-variable)
   - [✅carbon--rem [function]](#carbon--rem-function)
   - [✅carbon--em [function]](#carbon--em-function)
+  - [✅carbon--fluid-spacing-01 [variable]](#carbon--fluid-spacing-01-variable)
+  - [✅carbon--fluid-spacing-02 [variable]](#carbon--fluid-spacing-02-variable)
+  - [✅carbon--fluid-spacing-03 [variable]](#carbon--fluid-spacing-03-variable)
+  - [✅carbon--fluid-spacing-04 [variable]](#carbon--fluid-spacing-04-variable)
+  - [✅carbon--fluid-spacing [variable]](#carbon--fluid-spacing-variable)
+  - [✅fluid-spacing-01 [variable]](#fluid-spacing-01-variable)
+  - [✅fluid-spacing-02 [variable]](#fluid-spacing-02-variable)
+  - [✅fluid-spacing-03 [variable]](#fluid-spacing-03-variable)
+  - [✅fluid-spacing-04 [variable]](#fluid-spacing-04-variable)
+  - [✅carbon--icon-size-01 [variable]](#carbon--icon-size-01-variable)
+  - [✅carbon--icon-size-02 [variable]](#carbon--icon-size-02-variable)
+  - [✅carbon--icon-size [variable]](#carbon--icon-size-variable)
+  - [✅icon-size-01 [variable]](#icon-size-01-variable)
+  - [✅icon-size-02 [variable]](#icon-size-02-variable)
   - [✅carbon--get-column-width [function]](#carbon--get-column-width-function)
   - [✅carbon--key-height-scales [variable]](#carbon--key-height-scales-variable)
   - [✅carbon--key-height [function]](#carbon--key-height-function)
+  - [✅carbon--layout-01 [variable]](#carbon--layout-01-variable)
+  - [✅carbon--layout-02 [variable]](#carbon--layout-02-variable)
+  - [✅carbon--layout-03 [variable]](#carbon--layout-03-variable)
+  - [✅carbon--layout-04 [variable]](#carbon--layout-04-variable)
+  - [✅carbon--layout-05 [variable]](#carbon--layout-05-variable)
+  - [✅carbon--layout-06 [variable]](#carbon--layout-06-variable)
+  - [✅carbon--layout-07 [variable]](#carbon--layout-07-variable)
+  - [✅carbon--layout [variable]](#carbon--layout-variable)
+  - [✅layout-01 [variable]](#layout-01-variable)
+  - [✅layout-02 [variable]](#layout-02-variable)
+  - [✅layout-03 [variable]](#layout-03-variable)
+  - [✅layout-04 [variable]](#layout-04-variable)
+  - [✅layout-05 [variable]](#layout-05-variable)
+  - [✅layout-06 [variable]](#layout-06-variable)
+  - [✅layout-07 [variable]](#layout-07-variable)
   - [✅carbon--mini-unit-size [variable]](#carbon--mini-unit-size-variable)
   - [✅carbon--mini-units [function]](#carbon--mini-units-function)
   - [✅carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
@@ -79,30 +119,6 @@
   - [✅spacing-10 [variable]](#spacing-10-variable)
   - [✅spacing-11 [variable]](#spacing-11-variable)
   - [✅spacing-12 [variable]](#spacing-12-variable)
-  - [✅carbon--layout-01 [variable]](#carbon--layout-01-variable)
-  - [✅carbon--layout-02 [variable]](#carbon--layout-02-variable)
-  - [✅carbon--layout-03 [variable]](#carbon--layout-03-variable)
-  - [✅carbon--layout-04 [variable]](#carbon--layout-04-variable)
-  - [✅carbon--layout-05 [variable]](#carbon--layout-05-variable)
-  - [✅carbon--layout-06 [variable]](#carbon--layout-06-variable)
-  - [✅carbon--layout-07 [variable]](#carbon--layout-07-variable)
-  - [✅carbon--layout [variable]](#carbon--layout-variable)
-  - [✅layout-01 [variable]](#layout-01-variable)
-  - [✅layout-02 [variable]](#layout-02-variable)
-  - [✅layout-03 [variable]](#layout-03-variable)
-  - [✅layout-04 [variable]](#layout-04-variable)
-  - [✅layout-05 [variable]](#layout-05-variable)
-  - [✅layout-06 [variable]](#layout-06-variable)
-  - [✅layout-07 [variable]](#layout-07-variable)
-  - [✅carbon--fluid-spacing-01 [variable]](#carbon--fluid-spacing-01-variable)
-  - [✅carbon--fluid-spacing-02 [variable]](#carbon--fluid-spacing-02-variable)
-  - [✅carbon--fluid-spacing-03 [variable]](#carbon--fluid-spacing-03-variable)
-  - [✅carbon--fluid-spacing-04 [variable]](#carbon--fluid-spacing-04-variable)
-  - [✅carbon--fluid-spacing [variable]](#carbon--fluid-spacing-variable)
-  - [✅fluid-spacing-01 [variable]](#fluid-spacing-01-variable)
-  - [✅fluid-spacing-02 [variable]](#fluid-spacing-02-variable)
-  - [✅fluid-spacing-03 [variable]](#fluid-spacing-03-variable)
-  - [✅fluid-spacing-04 [variable]](#fluid-spacing-04-variable)
   - [✅map-deep-get [function]](#map-deep-get-function)
   - [✅carbon--key-by-index [function]](#carbon--key-by-index-function)
   - [✅last-map-item [function]](#last-map-item-function)
@@ -184,6 +200,37 @@
   - [✅⚠️brand-03 [variable]](#brand-03-variable)
   - [✅⚠️active-01 [variable]](#active-01-variable)
   - [✅⚠️hover-field [variable]](#hover-field-variable)
+  - [✅caption-01 [variable]](#caption-01-variable)
+  - [✅label-01 [variable]](#label-01-variable)
+  - [✅helper-text-01 [variable]](#helper-text-01-variable)
+  - [✅body-short-01 [variable]](#body-short-01-variable)
+  - [✅body-long-01 [variable]](#body-long-01-variable)
+  - [✅body-short-02 [variable]](#body-short-02-variable)
+  - [✅body-long-02 [variable]](#body-long-02-variable)
+  - [✅code-01 [variable]](#code-01-variable)
+  - [✅code-02 [variable]](#code-02-variable)
+  - [✅heading-01 [variable]](#heading-01-variable)
+  - [✅productive-heading-01 [variable]](#productive-heading-01-variable)
+  - [✅heading-02 [variable]](#heading-02-variable)
+  - [✅productive-heading-02 [variable]](#productive-heading-02-variable)
+  - [✅productive-heading-03 [variable]](#productive-heading-03-variable)
+  - [✅productive-heading-04 [variable]](#productive-heading-04-variable)
+  - [✅productive-heading-05 [variable]](#productive-heading-05-variable)
+  - [✅productive-heading-06 [variable]](#productive-heading-06-variable)
+  - [✅productive-heading-07 [variable]](#productive-heading-07-variable)
+  - [✅expressive-heading-01 [variable]](#expressive-heading-01-variable)
+  - [✅expressive-heading-02 [variable]](#expressive-heading-02-variable)
+  - [✅expressive-heading-03 [variable]](#expressive-heading-03-variable)
+  - [✅expressive-heading-04 [variable]](#expressive-heading-04-variable)
+  - [✅expressive-heading-05 [variable]](#expressive-heading-05-variable)
+  - [✅expressive-heading-06 [variable]](#expressive-heading-06-variable)
+  - [✅expressive-paragraph-01 [variable]](#expressive-paragraph-01-variable)
+  - [✅quotation-01 [variable]](#quotation-01-variable)
+  - [✅quotation-02 [variable]](#quotation-02-variable)
+  - [✅display-01 [variable]](#display-01-variable)
+  - [✅display-02 [variable]](#display-02-variable)
+  - [✅display-03 [variable]](#display-03-variable)
+  - [✅display-04 [variable]](#display-04-variable)
 - [@carbon/type](#carbontype)
   - [✅carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [✅carbon--font-families [variable]](#carbon--font-families-variable)
@@ -240,6 +287,8 @@
   - [✅strip-unit [function]](#strip-unit-function)
   - [✅fluid-type [mixin]](#fluid-type-mixin)
   - [✅fluid-type-size [mixin]](#fluid-type-size-mixin)
+  - [❌custom-property-prefix [variable]](#custom-property-prefix-variable)
+  - [❌custom-properties [mixin]](#custom-properties-mixin)
   - [✅carbon--type-style [mixin]](#carbon--type-style-mixin)
 
 <!-- tocstop -->
@@ -2035,6 +2084,181 @@ Generate a media query for a given breakpoint
   - [carbon--largest-breakpoint [mixin]](#carbon--largest-breakpoint-mixin)
   - [fluid-type [mixin]](#fluid-type-mixin)
 
+### ✅carbon--container-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--container-01: 1.5rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `container-01`
+
+### ✅carbon--container-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--container-02: 2rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `container-02`
+
+### ✅carbon--container-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--container-03: 2.5rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `container-03`
+
+### ✅carbon--container-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--container-04: 3rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `container-04`
+
+### ✅carbon--container-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--container-05: 4rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `container-05`
+
+### ✅carbon--container [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--container: (
+  $carbon--container-01,
+  $carbon--container-02,
+  $carbon--container-03,
+  $carbon--container-04,
+  $carbon--container-05
+);
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `List`
+
+### ✅container-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-01: $carbon--container-01;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--container-01`
+
+### ✅container-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-02: $carbon--container-02;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--container-02`
+
+### ✅container-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-03: $carbon--container-03;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--container-03`
+
+### ✅container-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-04: $carbon--container-04;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--container-04`
+
+### ✅container-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-05: $carbon--container-05;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--container-05`
+
 ### ✅carbon--base-font-size [variable]
 
 Default font size
@@ -2107,6 +2331,225 @@ Convert a given px unit to a em unit
 - **Returns**: `Number` Number with em unit
 - **Requires**:
   - [carbon--base-font-size [variable]](#carbon--base-font-size-variable)
+
+### ✅carbon--fluid-spacing-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--fluid-spacing-01: 0;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `fluid-spacing-01`
+
+### ✅carbon--fluid-spacing-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--fluid-spacing-02: 2vw;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `fluid-spacing-02`
+
+### ✅carbon--fluid-spacing-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--fluid-spacing-03: 5vw;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `fluid-spacing-03`
+
+### ✅carbon--fluid-spacing-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--fluid-spacing-04: 10vw;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `fluid-spacing-04`
+
+### ✅carbon--fluid-spacing [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--fluid-spacing: (
+  $carbon--fluid-spacing-01,
+  $carbon--fluid-spacing-02,
+  $carbon--fluid-spacing-03,
+  $carbon--fluid-spacing-04
+);
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `List`
+
+### ✅fluid-spacing-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-01: $carbon--fluid-spacing-01;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--fluid-spacing-01`
+
+### ✅fluid-spacing-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-02: $carbon--fluid-spacing-02;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--fluid-spacing-02`
+
+### ✅fluid-spacing-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-03: $carbon--fluid-spacing-03;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--fluid-spacing-03`
+
+### ✅fluid-spacing-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-04: $carbon--fluid-spacing-04;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--fluid-spacing-04`
+
+### ✅carbon--icon-size-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--icon-size-01: 1rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `icon-size-01`
+
+### ✅carbon--icon-size-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--icon-size-02: 1.25rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `icon-size-02`
+
+### ✅carbon--icon-size [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--icon-size: ($carbon--icon-size-01, $carbon--icon-size-02);
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `List`
+
+### ✅icon-size-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$icon-size-01: $carbon--icon-size-01;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--icon-size-01`
+
+### ✅icon-size-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$icon-size-02: $carbon--icon-size-02;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--icon-size-02`
 
 ### ✅carbon--get-column-width [function]
 
@@ -2239,6 +2682,245 @@ Get the value of a key height step at a given breakpoint
 - **Requires**:
   - [carbon--key-height-scales [variable]](#carbon--key-height-scales-variable)
 
+### ✅carbon--layout-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--layout-01: 1rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `layout-01`
+
+### ✅carbon--layout-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--layout-02: 1.5rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `layout-02`
+
+### ✅carbon--layout-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--layout-03: 2rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `layout-03`
+
+### ✅carbon--layout-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--layout-04: 3rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `layout-04`
+
+### ✅carbon--layout-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--layout-05: 4rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `layout-05`
+
+### ✅carbon--layout-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--layout-06: 6rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `layout-06`
+
+### ✅carbon--layout-07 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--layout-07: 10rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `layout-07`
+
+### ✅carbon--layout [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--layout: (
+  $carbon--layout-01,
+  $carbon--layout-02,
+  $carbon--layout-03,
+  $carbon--layout-04,
+  $carbon--layout-05,
+  $carbon--layout-06,
+  $carbon--layout-07
+);
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `List`
+
+### ✅layout-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-01: $carbon--layout-01;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--layout-01`
+
+### ✅layout-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-02: $carbon--layout-02;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--layout-02`
+
+### ✅layout-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-03: $carbon--layout-03;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--layout-03`
+
+### ✅layout-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-04: $carbon--layout-04;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--layout-04`
+
+### ✅layout-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-05: $carbon--layout-05;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--layout-05`
+
+### ✅layout-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-06: $carbon--layout-06;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--layout-06`
+
+### ✅layout-07 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-07: $carbon--layout-07;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--layout-07`
+
 ### ✅carbon--mini-unit-size [variable]
 
 Default mini-unit value
@@ -2286,13 +2968,11 @@ Get the value of the corresponding number of units
 
 ### ✅carbon--spacing-01 [variable]
 
-0.125rem (2px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-01: carbon--mini-units(0.25);
+$carbon--spacing-01: 0.125rem;
 ```
 
 </details>
@@ -2304,13 +2984,11 @@ $carbon--spacing-01: carbon--mini-units(0.25);
 
 ### ✅carbon--spacing-02 [variable]
 
-0.25rem (4px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-02: carbon--mini-units(0.5);
+$carbon--spacing-02: 0.25rem;
 ```
 
 </details>
@@ -2322,13 +3000,11 @@ $carbon--spacing-02: carbon--mini-units(0.5);
 
 ### ✅carbon--spacing-03 [variable]
 
-0.5rem (8px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-03: carbon--mini-units(1);
+$carbon--spacing-03: 0.5rem;
 ```
 
 </details>
@@ -2340,13 +3016,11 @@ $carbon--spacing-03: carbon--mini-units(1);
 
 ### ✅carbon--spacing-04 [variable]
 
-0.75rem (12px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-04: carbon--mini-units(1.5);
+$carbon--spacing-04: 0.75rem;
 ```
 
 </details>
@@ -2358,13 +3032,11 @@ $carbon--spacing-04: carbon--mini-units(1.5);
 
 ### ✅carbon--spacing-05 [variable]
 
-1rem (16px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-05: carbon--mini-units(2);
+$carbon--spacing-05: 1rem;
 ```
 
 </details>
@@ -2376,13 +3048,11 @@ $carbon--spacing-05: carbon--mini-units(2);
 
 ### ✅carbon--spacing-06 [variable]
 
-1.5rem (24px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-06: carbon--mini-units(3);
+$carbon--spacing-06: 1.5rem;
 ```
 
 </details>
@@ -2394,13 +3064,11 @@ $carbon--spacing-06: carbon--mini-units(3);
 
 ### ✅carbon--spacing-07 [variable]
 
-2rem (32px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-07: carbon--mini-units(4);
+$carbon--spacing-07: 2rem;
 ```
 
 </details>
@@ -2412,13 +3080,11 @@ $carbon--spacing-07: carbon--mini-units(4);
 
 ### ✅carbon--spacing-08 [variable]
 
-2.5rem (40px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-08: carbon--mini-units(5);
+$carbon--spacing-08: 2.5rem;
 ```
 
 </details>
@@ -2430,13 +3096,11 @@ $carbon--spacing-08: carbon--mini-units(5);
 
 ### ✅carbon--spacing-09 [variable]
 
-3rem (48px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-09: carbon--mini-units(6);
+$carbon--spacing-09: 3rem;
 ```
 
 </details>
@@ -2448,13 +3112,11 @@ $carbon--spacing-09: carbon--mini-units(6);
 
 ### ✅carbon--spacing-10 [variable]
 
-4rem (64px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-10: carbon--mini-units(8);
+$carbon--spacing-10: 4rem;
 ```
 
 </details>
@@ -2466,13 +3128,11 @@ $carbon--spacing-10: carbon--mini-units(8);
 
 ### ✅carbon--spacing-11 [variable]
 
-5rem (80px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-11: carbon--mini-units(10);
+$carbon--spacing-11: 5rem;
 ```
 
 </details>
@@ -2484,13 +3144,11 @@ $carbon--spacing-11: carbon--mini-units(10);
 
 ### ✅carbon--spacing-12 [variable]
 
-6rem (96px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-12: carbon--mini-units(12);
+$carbon--spacing-12: 6rem;
 ```
 
 </details>
@@ -2501,8 +3159,6 @@ $carbon--spacing-12: carbon--mini-units(12);
   - `spacing-12`
 
 ### ✅carbon--spacing [variable]
-
-All spacing increments in a map
 
 <details>
 <summary>Source code</summary>
@@ -2527,7 +3183,7 @@ $carbon--spacing: (
 </details>
 
 - **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Map`
+- **Type**: `List`
 
 ### ✅spacing-01 [variable]
 
@@ -2708,414 +3364,6 @@ $spacing-12: $carbon--spacing-12;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-12`
-
-### ✅carbon--layout-01 [variable]
-
-1rem (16px) layout with default mini unit
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--layout-01: carbon--mini-units(2);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `layout-01`
-
-### ✅carbon--layout-02 [variable]
-
-1.5rem (24px) layout with default mini unit
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--layout-02: carbon--mini-units(3);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `layout-02`
-
-### ✅carbon--layout-03 [variable]
-
-2rem (32px) layout with default mini unit
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--layout-03: carbon--mini-units(4);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `layout-03`
-
-### ✅carbon--layout-04 [variable]
-
-3rem (48px) layout with default mini unit
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--layout-04: carbon--mini-units(6);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `layout-04`
-
-### ✅carbon--layout-05 [variable]
-
-4rem (64px) layout with default mini unit
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--layout-05: carbon--mini-units(8);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `layout-05`
-
-### ✅carbon--layout-06 [variable]
-
-4rem (96px) layout with default mini unit
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--layout-06: carbon--mini-units(12);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `layout-06`
-
-### ✅carbon--layout-07 [variable]
-
-10rem (160px) layout with default mini unit
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--layout-07: carbon--mini-units(20);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `layout-07`
-
-### ✅carbon--layout [variable]
-
-All layout increments in a map
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--layout: (
-  $carbon--layout-01,
-  $carbon--layout-02,
-  $carbon--layout-03,
-  $carbon--layout-04,
-  $carbon--layout-05,
-  $carbon--layout-06,
-  $carbon--layout-07
-);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Map`
-
-### ✅layout-01 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$layout-01: $carbon--layout-01;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--layout-01`
-
-### ✅layout-02 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$layout-02: $carbon--layout-02;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--layout-02`
-
-### ✅layout-03 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$layout-03: $carbon--layout-03;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--layout-03`
-
-### ✅layout-04 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$layout-04: $carbon--layout-04;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--layout-04`
-
-### ✅layout-05 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$layout-05: $carbon--layout-05;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--layout-05`
-
-### ✅layout-06 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$layout-06: $carbon--layout-06;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--layout-06`
-
-### ✅layout-07 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$layout-07: $carbon--layout-07;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--layout-07`
-
-### ✅carbon--fluid-spacing-01 [variable]
-
-0vw fluid spacing
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--fluid-spacing-01: 0;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `fluid-spacing-01`
-
-### ✅carbon--fluid-spacing-02 [variable]
-
-2vw fluid spacing
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--fluid-spacing-02: 2vw;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `fluid-spacing-02`
-
-### ✅carbon--fluid-spacing-03 [variable]
-
-5vw fluid spacing
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--fluid-spacing-03: 5vw;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `fluid-spacing-03`
-
-### ✅carbon--fluid-spacing-04 [variable]
-
-10vw fluid spacing
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--fluid-spacing-04: 10vw;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `fluid-spacing-04`
-
-### ✅carbon--fluid-spacing [variable]
-
-All fluid spacing increments in a map
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--fluid-spacing: (
-  $carbon--fluid-spacing-01,
-  $carbon--fluid-spacing-02,
-  $carbon--fluid-spacing-03,
-  $carbon--fluid-spacing-04
-);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Map`
-
-### ✅fluid-spacing-01 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$fluid-spacing-01: $carbon--fluid-spacing-01;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--fluid-spacing-01`
-
-### ✅fluid-spacing-02 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$fluid-spacing-02: $carbon--fluid-spacing-02;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--fluid-spacing-02`
-
-### ✅fluid-spacing-03 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$fluid-spacing-03: $carbon--fluid-spacing-03;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--fluid-spacing-03`
-
-### ✅fluid-spacing-04 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$fluid-spacing-04: $carbon--fluid-spacing-04;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--fluid-spacing-04`
 
 ### ✅map-deep-get [function]
 
@@ -3313,6 +3561,7 @@ $custom-property-prefix: 'cds';
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [custom-properties [mixin]](#custom-properties-mixin)
 
 ### ❌custom-property [mixin]
 
@@ -3323,7 +3572,11 @@ $custom-property-prefix: 'cds';
 @mixin custom-property() {
   @if type-of($value) == map {
     @each $property, $property-value in $value {
-      @include custom-property('#{$name}-#{$property}', $property-value);
+      // Only support one-level of depth for values that are maps. This is to
+      // avoid bringing properties like `breakpoints` on type tokens
+      @if type-of($property-value) != map {
+        @include custom-property('#{$name}-#{$property}', $property-value);
+      }
     }
   } @else {
     --#{$prefix}-#{$name}: #{$value};
@@ -3431,6 +3684,37 @@ Define theme variables from a map of tokens
   $brand-03: map-get($theme, 'brand-03') !global;
   $active-01: map-get($theme, 'active-01') !global;
   $hover-field: map-get($theme, 'hover-field') !global;
+  $caption-01: map-get($theme, 'caption-01') !global;
+  $label-01: map-get($theme, 'label-01') !global;
+  $helper-text-01: map-get($theme, 'helper-text-01') !global;
+  $body-short-01: map-get($theme, 'body-short-01') !global;
+  $body-long-01: map-get($theme, 'body-long-01') !global;
+  $body-short-02: map-get($theme, 'body-short-02') !global;
+  $body-long-02: map-get($theme, 'body-long-02') !global;
+  $code-01: map-get($theme, 'code-01') !global;
+  $code-02: map-get($theme, 'code-02') !global;
+  $heading-01: map-get($theme, 'heading-01') !global;
+  $productive-heading-01: map-get($theme, 'productive-heading-01') !global;
+  $heading-02: map-get($theme, 'heading-02') !global;
+  $productive-heading-02: map-get($theme, 'productive-heading-02') !global;
+  $productive-heading-03: map-get($theme, 'productive-heading-03') !global;
+  $productive-heading-04: map-get($theme, 'productive-heading-04') !global;
+  $productive-heading-05: map-get($theme, 'productive-heading-05') !global;
+  $productive-heading-06: map-get($theme, 'productive-heading-06') !global;
+  $productive-heading-07: map-get($theme, 'productive-heading-07') !global;
+  $expressive-heading-01: map-get($theme, 'expressive-heading-01') !global;
+  $expressive-heading-02: map-get($theme, 'expressive-heading-02') !global;
+  $expressive-heading-03: map-get($theme, 'expressive-heading-03') !global;
+  $expressive-heading-04: map-get($theme, 'expressive-heading-04') !global;
+  $expressive-heading-05: map-get($theme, 'expressive-heading-05') !global;
+  $expressive-heading-06: map-get($theme, 'expressive-heading-06') !global;
+  $expressive-paragraph-01: map-get($theme, 'expressive-paragraph-01') !global;
+  $quotation-01: map-get($theme, 'quotation-01') !global;
+  $quotation-02: map-get($theme, 'quotation-02') !global;
+  $display-01: map-get($theme, 'display-01') !global;
+  $display-02: map-get($theme, 'display-02') !global;
+  $display-03: map-get($theme, 'display-03') !global;
+  $display-04: map-get($theme, 'display-04') !global;
 
   @if global-variable-exists('feature-flags') and
     map-get($feature-flags, 'enable-css-custom-properties')
@@ -4062,6 +4346,266 @@ Define theme variables from a map of tokens
     @if should-emit($theme, $carbon--theme, 'hover-field', $emit-difference) {
       @include custom-property('hover-field', map-get($theme, 'hover-field'));
     }
+
+    @if should-emit($theme, $carbon--theme, 'caption-01', $emit-difference) {
+      @include custom-property('caption-01', map-get($theme, 'caption-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'label-01', $emit-difference) {
+      @include custom-property('label-01', map-get($theme, 'label-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'helper-text-01', $emit-difference)
+    {
+      @include custom-property(
+        'helper-text-01',
+        map-get($theme, 'helper-text-01')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'body-short-01', $emit-difference) {
+      @include custom-property(
+        'body-short-01',
+        map-get($theme, 'body-short-01')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'body-long-01', $emit-difference) {
+      @include custom-property('body-long-01', map-get($theme, 'body-long-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'body-short-02', $emit-difference) {
+      @include custom-property(
+        'body-short-02',
+        map-get($theme, 'body-short-02')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'body-long-02', $emit-difference) {
+      @include custom-property('body-long-02', map-get($theme, 'body-long-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'code-01', $emit-difference) {
+      @include custom-property('code-01', map-get($theme, 'code-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'code-02', $emit-difference) {
+      @include custom-property('code-02', map-get($theme, 'code-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'heading-01', $emit-difference) {
+      @include custom-property('heading-01', map-get($theme, 'heading-01'));
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-01',
+        map-get($theme, 'productive-heading-01')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'heading-02', $emit-difference) {
+      @include custom-property('heading-02', map-get($theme, 'heading-02'));
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-02',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-02',
+        map-get($theme, 'productive-heading-02')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-03',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-03',
+        map-get($theme, 'productive-heading-03')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-04',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-04',
+        map-get($theme, 'productive-heading-04')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-05',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-05',
+        map-get($theme, 'productive-heading-05')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-06',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-06',
+        map-get($theme, 'productive-heading-06')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'productive-heading-07',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'productive-heading-07',
+        map-get($theme, 'productive-heading-07')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-01',
+        map-get($theme, 'expressive-heading-01')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-02',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-02',
+        map-get($theme, 'expressive-heading-02')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-03',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-03',
+        map-get($theme, 'expressive-heading-03')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-04',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-04',
+        map-get($theme, 'expressive-heading-04')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-05',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-05',
+        map-get($theme, 'expressive-heading-05')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-heading-06',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-heading-06',
+        map-get($theme, 'expressive-heading-06')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'expressive-paragraph-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'expressive-paragraph-01',
+        map-get($theme, 'expressive-paragraph-01')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'quotation-01', $emit-difference) {
+      @include custom-property('quotation-01', map-get($theme, 'quotation-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'quotation-02', $emit-difference) {
+      @include custom-property('quotation-02', map-get($theme, 'quotation-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'display-01', $emit-difference) {
+      @include custom-property('display-01', map-get($theme, 'display-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'display-02', $emit-difference) {
+      @include custom-property('display-02', map-get($theme, 'display-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'display-03', $emit-difference) {
+      @include custom-property('display-03', map-get($theme, 'display-03'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'display-04', $emit-difference) {
+      @include custom-property('display-04', map-get($theme, 'display-04'));
+    }
   }
 
   @content;
@@ -4174,6 +4718,37 @@ Define theme variables from a map of tokens
   - [brand-03 [variable]](#brand-03-variable)
   - [active-01 [variable]](#active-01-variable)
   - [hover-field [variable]](#hover-field-variable)
+  - [caption-01 [variable]](#caption-01-variable)
+  - [label-01 [variable]](#label-01-variable)
+  - [helper-text-01 [variable]](#helper-text-01-variable)
+  - [body-short-01 [variable]](#body-short-01-variable)
+  - [body-long-01 [variable]](#body-long-01-variable)
+  - [body-short-02 [variable]](#body-short-02-variable)
+  - [body-long-02 [variable]](#body-long-02-variable)
+  - [code-01 [variable]](#code-01-variable)
+  - [code-02 [variable]](#code-02-variable)
+  - [heading-01 [variable]](#heading-01-variable)
+  - [productive-heading-01 [variable]](#productive-heading-01-variable)
+  - [heading-02 [variable]](#heading-02-variable)
+  - [productive-heading-02 [variable]](#productive-heading-02-variable)
+  - [productive-heading-03 [variable]](#productive-heading-03-variable)
+  - [productive-heading-04 [variable]](#productive-heading-04-variable)
+  - [productive-heading-05 [variable]](#productive-heading-05-variable)
+  - [productive-heading-06 [variable]](#productive-heading-06-variable)
+  - [productive-heading-07 [variable]](#productive-heading-07-variable)
+  - [expressive-heading-01 [variable]](#expressive-heading-01-variable)
+  - [expressive-heading-02 [variable]](#expressive-heading-02-variable)
+  - [expressive-heading-03 [variable]](#expressive-heading-03-variable)
+  - [expressive-heading-04 [variable]](#expressive-heading-04-variable)
+  - [expressive-heading-05 [variable]](#expressive-heading-05-variable)
+  - [expressive-heading-06 [variable]](#expressive-heading-06-variable)
+  - [expressive-paragraph-01 [variable]](#expressive-paragraph-01-variable)
+  - [quotation-01 [variable]](#quotation-01-variable)
+  - [quotation-02 [variable]](#quotation-02-variable)
+  - [display-01 [variable]](#display-01-variable)
+  - [display-02 [variable]](#display-02-variable)
+  - [display-03 [variable]](#display-03-variable)
+  - [display-04 [variable]](#display-04-variable)
   - [custom-property-prefix [variable]](#custom-property-prefix-variable)
   - [carbon--theme [variable]](#carbon--theme-variable)
 
@@ -4249,6 +4824,386 @@ $carbon--theme--white: (
   brand-03: #0f62fe,
   active-01: #c6c6c6,
   hover-field: #e5e5e5,
+  caption-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  label-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  helper-text-01: (
+    font-size: 0.75rem,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  body-short-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  body-long-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.16px,
+  ),
+  body-short-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  body-long-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.5rem,
+    letter-spacing: 0,
+  ),
+  code-01: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  code-02: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.32px,
+  ),
+  heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  productive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 1.625rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 2.25rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 2.5rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-06: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 3.125rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-07: (
+    font-size: 3.375rem,
+    font-weight: 300,
+    line-height: 4rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  expressive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.25rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 1.5rem,
+      ),
+    ),
+  ),
+  expressive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 129%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.75rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 2rem,
+      ),
+    ),
+  ),
+  expressive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 300,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 300,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 300,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 300,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-heading-06: (
+    font-size: 2rem,
+    font-weight: 600,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 600,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 600,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 600,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 600,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-paragraph-01: (
+    font-size: 1.5rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    lg: (
+      font-size: 1.75rem,
+      line-height: 129%,
+    ),
+    max: (
+      font-size: 2rem,
+      line-height: 125%,
+    ),
+  ),
+  quotation-01: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 1.25rem,
+        font-weight: 400,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 1.5rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 1.75rem,
+        font-weight: 400,
+        line-height: 129%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 2rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  quotation-02: (
+    font-size: 2rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        line-height: 122%,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        line-height: 119%,
+      ),
+      xlg: (
+        font-size: 3rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 3.75rem,
+      ),
+    ),
+  ),
+  display-01: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-02: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 116%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-03: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
+  display-04: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+        letter-spacing: -0.64px,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
 );
 ```
 
@@ -4331,6 +5286,386 @@ $carbon--theme--g10: (
   brand-03: #0f62fe,
   active-01: #c6c6c6,
   hover-field: #e5e5e5,
+  caption-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  label-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  helper-text-01: (
+    font-size: 0.75rem,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  body-short-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  body-long-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.16px,
+  ),
+  body-short-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  body-long-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.5rem,
+    letter-spacing: 0,
+  ),
+  code-01: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  code-02: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.32px,
+  ),
+  heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  productive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 1.625rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 2.25rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 2.5rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-06: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 3.125rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-07: (
+    font-size: 3.375rem,
+    font-weight: 300,
+    line-height: 4rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  expressive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.25rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 1.5rem,
+      ),
+    ),
+  ),
+  expressive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 129%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.75rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 2rem,
+      ),
+    ),
+  ),
+  expressive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 300,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 300,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 300,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 300,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-heading-06: (
+    font-size: 2rem,
+    font-weight: 600,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 600,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 600,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 600,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 600,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-paragraph-01: (
+    font-size: 1.5rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    lg: (
+      font-size: 1.75rem,
+      line-height: 129%,
+    ),
+    max: (
+      font-size: 2rem,
+      line-height: 125%,
+    ),
+  ),
+  quotation-01: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 1.25rem,
+        font-weight: 400,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 1.5rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 1.75rem,
+        font-weight: 400,
+        line-height: 129%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 2rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  quotation-02: (
+    font-size: 2rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        line-height: 122%,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        line-height: 119%,
+      ),
+      xlg: (
+        font-size: 3rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 3.75rem,
+      ),
+    ),
+  ),
+  display-01: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-02: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 116%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-03: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
+  display-04: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+        letter-spacing: -0.64px,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
 );
 ```
 
@@ -4411,6 +5746,386 @@ $carbon--theme--g90: (
   brand-03: #ffffff,
   active-01: #6f6f6f,
   hover-field: #4c4c4c,
+  caption-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  label-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  helper-text-01: (
+    font-size: 0.75rem,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  body-short-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  body-long-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.16px,
+  ),
+  body-short-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  body-long-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.5rem,
+    letter-spacing: 0,
+  ),
+  code-01: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  code-02: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.32px,
+  ),
+  heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  productive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 1.625rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 2.25rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 2.5rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-06: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 3.125rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-07: (
+    font-size: 3.375rem,
+    font-weight: 300,
+    line-height: 4rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  expressive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.25rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 1.5rem,
+      ),
+    ),
+  ),
+  expressive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 129%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.75rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 2rem,
+      ),
+    ),
+  ),
+  expressive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 300,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 300,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 300,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 300,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-heading-06: (
+    font-size: 2rem,
+    font-weight: 600,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 600,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 600,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 600,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 600,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-paragraph-01: (
+    font-size: 1.5rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    lg: (
+      font-size: 1.75rem,
+      line-height: 129%,
+    ),
+    max: (
+      font-size: 2rem,
+      line-height: 125%,
+    ),
+  ),
+  quotation-01: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 1.25rem,
+        font-weight: 400,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 1.5rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 1.75rem,
+        font-weight: 400,
+        line-height: 129%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 2rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  quotation-02: (
+    font-size: 2rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        line-height: 122%,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        line-height: 119%,
+      ),
+      xlg: (
+        font-size: 3rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 3.75rem,
+      ),
+    ),
+  ),
+  display-01: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-02: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 116%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-03: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
+  display-04: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+        letter-spacing: -0.64px,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
 );
 ```
 
@@ -4491,6 +6206,386 @@ $carbon--theme--g100: (
   brand-03: #ffffff,
   active-01: #525252,
   hover-field: #353535,
+  caption-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  label-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  helper-text-01: (
+    font-size: 0.75rem,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  body-short-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  body-long-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.16px,
+  ),
+  body-short-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  body-long-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.5rem,
+    letter-spacing: 0,
+  ),
+  code-01: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  code-02: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.32px,
+  ),
+  heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  productive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 1.625rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 2.25rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 2.5rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-06: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 3.125rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-07: (
+    font-size: 3.375rem,
+    font-weight: 300,
+    line-height: 4rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  expressive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.25rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 1.5rem,
+      ),
+    ),
+  ),
+  expressive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 129%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.75rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 2rem,
+      ),
+    ),
+  ),
+  expressive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 300,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 300,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 300,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 300,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-heading-06: (
+    font-size: 2rem,
+    font-weight: 600,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 600,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 600,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 600,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 600,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-paragraph-01: (
+    font-size: 1.5rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    lg: (
+      font-size: 1.75rem,
+      line-height: 129%,
+    ),
+    max: (
+      font-size: 2rem,
+      line-height: 125%,
+    ),
+  ),
+  quotation-01: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 1.25rem,
+        font-weight: 400,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 1.5rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 1.75rem,
+        font-weight: 400,
+        line-height: 129%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 2rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  quotation-02: (
+    font-size: 2rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        line-height: 122%,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        line-height: 119%,
+      ),
+      xlg: (
+        font-size: 3rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 3.75rem,
+      ),
+    ),
+  ),
+  display-01: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-02: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 116%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-03: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
+  display-04: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+        letter-spacing: -0.64px,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
 );
 ```
 
@@ -4571,6 +6666,386 @@ $carbon--theme--v9: (
   brand-03: #5a6872,
   active-01: #dfeafa,
   hover-field: #eef4fc,
+  caption-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  label-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  helper-text-01: (
+    font-size: 0.75rem,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  body-short-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  body-long-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.16px,
+  ),
+  body-short-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  body-long-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.5rem,
+    letter-spacing: 0,
+  ),
+  code-01: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ),
+  code-02: (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.32px,
+  ),
+  heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  productive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 1.625rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 2.25rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 2.5rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-06: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 3.125rem,
+    letter-spacing: 0,
+  ),
+  productive-heading-07: (
+    font-size: 3.375rem,
+    font-weight: 300,
+    line-height: 4rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  ),
+  expressive-heading-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  ),
+  expressive-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.25rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 1.5rem,
+      ),
+    ),
+  ),
+  expressive-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 129%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.75rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 2rem,
+      ),
+    ),
+  ),
+  expressive-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 300,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 300,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 300,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 300,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-heading-06: (
+    font-size: 2rem,
+    font-weight: 600,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 600,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 600,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 600,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 600,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  expressive-paragraph-01: (
+    font-size: 1.5rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    lg: (
+      font-size: 1.75rem,
+      line-height: 129%,
+    ),
+    max: (
+      font-size: 2rem,
+      line-height: 125%,
+    ),
+  ),
+  quotation-01: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 1.25rem,
+        font-weight: 400,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 1.5rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 1.75rem,
+        font-weight: 400,
+        line-height: 129%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 2rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  quotation-02: (
+    font-size: 2rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        line-height: 122%,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        line-height: 119%,
+      ),
+      xlg: (
+        font-size: 3rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 3.75rem,
+      ),
+    ),
+  ),
+  display-01: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-02: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 116%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  ),
+  display-03: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
+  display-04: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+        letter-spacing: -0.64px,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
 );
 ```
 
@@ -4651,6 +7126,37 @@ $carbon--theme: (
   brand-03: if(global-variable-exists('brand-03'), $brand-03, map-get($carbon--theme--white, 'brand-03')),
   active-01: if(global-variable-exists('active-01'), $active-01, map-get($carbon--theme--white, 'active-01')),
   hover-field: if(global-variable-exists('hover-field'), $hover-field, map-get($carbon--theme--white, 'hover-field')),
+  caption-01: if(global-variable-exists('caption-01'), $caption-01, map-get($carbon--theme--white, 'caption-01')),
+  label-01: if(global-variable-exists('label-01'), $label-01, map-get($carbon--theme--white, 'label-01')),
+  helper-text-01: if(global-variable-exists('helper-text-01'), $helper-text-01, map-get($carbon--theme--white, 'helper-text-01')),
+  body-short-01: if(global-variable-exists('body-short-01'), $body-short-01, map-get($carbon--theme--white, 'body-short-01')),
+  body-long-01: if(global-variable-exists('body-long-01'), $body-long-01, map-get($carbon--theme--white, 'body-long-01')),
+  body-short-02: if(global-variable-exists('body-short-02'), $body-short-02, map-get($carbon--theme--white, 'body-short-02')),
+  body-long-02: if(global-variable-exists('body-long-02'), $body-long-02, map-get($carbon--theme--white, 'body-long-02')),
+  code-01: if(global-variable-exists('code-01'), $code-01, map-get($carbon--theme--white, 'code-01')),
+  code-02: if(global-variable-exists('code-02'), $code-02, map-get($carbon--theme--white, 'code-02')),
+  heading-01: if(global-variable-exists('heading-01'), $heading-01, map-get($carbon--theme--white, 'heading-01')),
+  productive-heading-01: if(global-variable-exists('productive-heading-01'), $productive-heading-01, map-get($carbon--theme--white, 'productive-heading-01')),
+  heading-02: if(global-variable-exists('heading-02'), $heading-02, map-get($carbon--theme--white, 'heading-02')),
+  productive-heading-02: if(global-variable-exists('productive-heading-02'), $productive-heading-02, map-get($carbon--theme--white, 'productive-heading-02')),
+  productive-heading-03: if(global-variable-exists('productive-heading-03'), $productive-heading-03, map-get($carbon--theme--white, 'productive-heading-03')),
+  productive-heading-04: if(global-variable-exists('productive-heading-04'), $productive-heading-04, map-get($carbon--theme--white, 'productive-heading-04')),
+  productive-heading-05: if(global-variable-exists('productive-heading-05'), $productive-heading-05, map-get($carbon--theme--white, 'productive-heading-05')),
+  productive-heading-06: if(global-variable-exists('productive-heading-06'), $productive-heading-06, map-get($carbon--theme--white, 'productive-heading-06')),
+  productive-heading-07: if(global-variable-exists('productive-heading-07'), $productive-heading-07, map-get($carbon--theme--white, 'productive-heading-07')),
+  expressive-heading-01: if(global-variable-exists('expressive-heading-01'), $expressive-heading-01, map-get($carbon--theme--white, 'expressive-heading-01')),
+  expressive-heading-02: if(global-variable-exists('expressive-heading-02'), $expressive-heading-02, map-get($carbon--theme--white, 'expressive-heading-02')),
+  expressive-heading-03: if(global-variable-exists('expressive-heading-03'), $expressive-heading-03, map-get($carbon--theme--white, 'expressive-heading-03')),
+  expressive-heading-04: if(global-variable-exists('expressive-heading-04'), $expressive-heading-04, map-get($carbon--theme--white, 'expressive-heading-04')),
+  expressive-heading-05: if(global-variable-exists('expressive-heading-05'), $expressive-heading-05, map-get($carbon--theme--white, 'expressive-heading-05')),
+  expressive-heading-06: if(global-variable-exists('expressive-heading-06'), $expressive-heading-06, map-get($carbon--theme--white, 'expressive-heading-06')),
+  expressive-paragraph-01: if(global-variable-exists('expressive-paragraph-01'), $expressive-paragraph-01, map-get($carbon--theme--white, 'expressive-paragraph-01')),
+  quotation-01: if(global-variable-exists('quotation-01'), $quotation-01, map-get($carbon--theme--white, 'quotation-01')),
+  quotation-02: if(global-variable-exists('quotation-02'), $quotation-02, map-get($carbon--theme--white, 'quotation-02')),
+  display-01: if(global-variable-exists('display-01'), $display-01, map-get($carbon--theme--white, 'display-01')),
+  display-02: if(global-variable-exists('display-02'), $display-02, map-get($carbon--theme--white, 'display-02')),
+  display-03: if(global-variable-exists('display-03'), $display-03, map-get($carbon--theme--white, 'display-03')),
+  display-04: if(global-variable-exists('display-04'), $display-04, map-get($carbon--theme--white, 'display-04')),
 );
 ```
 
@@ -6237,6 +8743,1068 @@ $hover-field: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 - **Deprecated**: This may not be available in future releases
+
+### ✅caption-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$caption-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'caption-01'
+    ),
+  map-get($carbon--theme, 'caption-01'),
+  (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅label-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$label-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'label-01'
+    ),
+  map-get($carbon--theme, 'label-01'),
+  (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅helper-text-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$helper-text-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'helper-text-01'
+    ),
+  map-get($carbon--theme, 'helper-text-01'),
+  (
+    font-size: 0.75rem,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅body-short-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$body-short-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'body-short-01'
+    ),
+  map-get($carbon--theme, 'body-short-01'),
+  (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅body-long-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$body-long-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'body-long-01'
+    ),
+  map-get($carbon--theme, 'body-long-01'),
+  (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.16px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅body-short-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$body-short-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'body-short-02'
+    ),
+  map-get($carbon--theme, 'body-short-02'),
+  (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅body-long-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$body-long-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'body-long-02'
+    ),
+  map-get($carbon--theme, 'body-long-02'),
+  (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.5rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅code-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$code-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'code-01'
+    ),
+  map-get($carbon--theme, 'code-01'),
+  (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅code-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$code-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'code-02'
+    ),
+  map-get($carbon--theme, 'code-02'),
+  (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.32px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅heading-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$heading-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'heading-01'
+    ),
+  map-get($carbon--theme, 'heading-01'),
+  (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-01'
+    ),
+  map-get($carbon--theme, 'productive-heading-01'),
+  (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅heading-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$heading-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'heading-02'
+    ),
+  map-get($carbon--theme, 'heading-02'),
+  (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-02'
+    ),
+  map-get($carbon--theme, 'productive-heading-02'),
+  (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-03'
+    ),
+  map-get($carbon--theme, 'productive-heading-03'),
+  (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 1.625rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-04'
+    ),
+  map-get($carbon--theme, 'productive-heading-04'),
+  (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 2.25rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-05'
+    ),
+  map-get($carbon--theme, 'productive-heading-05'),
+  (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 2.5rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-06: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-06'
+    ),
+  map-get($carbon--theme, 'productive-heading-06'),
+  (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 3.125rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-07 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-07: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-07'
+    ),
+  map-get($carbon--theme, 'productive-heading-07'),
+  (
+    font-size: 3.375rem,
+    font-weight: 300,
+    line-height: 4rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-01'
+    ),
+  map-get($carbon--theme, 'expressive-heading-01'),
+  (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-02'
+    ),
+  map-get($carbon--theme, 'expressive-heading-02'),
+  (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-03'
+    ),
+  map-get($carbon--theme, 'expressive-heading-03'),
+  (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.25rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 1.5rem,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-04'
+    ),
+  map-get($carbon--theme, 'expressive-heading-04'),
+  (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 129%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.75rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 2rem,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-05'
+    ),
+  map-get($carbon--theme, 'expressive-heading-05'),
+  (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 300,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 300,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 300,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 300,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-06: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-06'
+    ),
+  map-get($carbon--theme, 'expressive-heading-06'),
+  (
+    font-size: 2rem,
+    font-weight: 600,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 600,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 600,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 600,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 600,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-paragraph-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-paragraph-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-paragraph-01'
+    ),
+  map-get($carbon--theme, 'expressive-paragraph-01'),
+  (
+    font-size: 1.5rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    lg: (
+      font-size: 1.75rem,
+      line-height: 129%,
+    ),
+    max: (
+      font-size: 2rem,
+      line-height: 125%,
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅quotation-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$quotation-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'quotation-01'
+    ),
+  map-get($carbon--theme, 'quotation-01'),
+  (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 1.25rem,
+        font-weight: 400,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 1.5rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 1.75rem,
+        font-weight: 400,
+        line-height: 129%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 2rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅quotation-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$quotation-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'quotation-02'
+    ),
+  map-get($carbon--theme, 'quotation-02'),
+  (
+    font-size: 2rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        line-height: 122%,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        line-height: 119%,
+      ),
+      xlg: (
+        font-size: 3rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 3.75rem,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅display-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'display-01'
+    ),
+  map-get($carbon--theme, 'display-01'),
+  (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅display-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'display-02'
+    ),
+  map-get($carbon--theme, 'display-02'),
+  (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 116%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅display-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'display-03'
+    ),
+  map-get($carbon--theme, 'display-03'),
+  (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅display-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'display-04'
+    ),
+  map-get($carbon--theme, 'display-04'),
+  (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+        letter-spacing: -0.64px,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ## @carbon/type
 
@@ -8249,6 +11817,7 @@ $body-long-02: (
 
 ```scss
 $code-01: (
+  font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(16px),
@@ -8268,6 +11837,7 @@ $code-01: (
 
 ```scss
 $code-02: (
+  font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(20px),
@@ -9104,6 +12674,43 @@ Computes the fluid `font-size` for a given type style and breakpoint
 - **Used by**:
   - [fluid-type [mixin]](#fluid-type-mixin)
 
+### ❌custom-property-prefix [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$custom-property-prefix: 'cds';
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+
+### ❌custom-properties [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin custom-properties() {
+  @each $property, $value in $value {
+    #{$property}: var(
+      --#{$custom-property-prefix}-#{$name}-#{$property},
+      #{$value}
+    );
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [custom-property-prefix [variable]](#custom-property-prefix-variable)
+- **Used by**:
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+
 ### ✅carbon--type-style [mixin]
 
 Helper mixin to include the styles for a given token in any selector in your
@@ -9132,9 +12739,15 @@ fixed contexts.
   @if $fluid == true and map-has-key($token, 'breakpoints') {
     @include fluid-type($token, $breakpoints);
   } @else {
-    // Otherwise, we just include all the property declarations directly on the
-    // selector
-    @include properties(map-remove($token, 'breakpoints'));
+    @if global-variable-exists('feature-flags') and
+      map-get($feature-flags, 'enable-css-custom-properties')
+    {
+      @include custom-properties($name, $token);
+    } @else {
+      // Otherwise, we just include all the property declarations directly on the
+      // selector
+      @include properties(map-remove($token, 'breakpoints'));
+    }
   }
 }
 ```
@@ -9152,6 +12765,7 @@ fixed contexts.
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [fluid-type [mixin]](#fluid-type-mixin)
+  - [custom-properties [mixin]](#custom-properties-mixin)
   - [properties [mixin]](#properties-mixin)
   - [tokens [variable]](#tokens-variable)
 - **Used by**:

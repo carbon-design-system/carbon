@@ -75,7 +75,7 @@ export default class CodeSnippet extends Component {
 
     /**
      * Specify whether you are using the light variant of the Code Snippet,
-     * typically used for inline snippest to display an alternate color
+     * typically used for inline snippet to display an alternate color
      */
     light: PropTypes.bool,
   };
@@ -132,9 +132,7 @@ export default class CodeSnippet extends Component {
 
     const codeSnippetClasses = classNames(className, {
       [`${prefix}--snippet`]: true,
-      [`${prefix}--snippet--single`]: type === 'single',
-      [`${prefix}--snippet--multi`]: type === 'multi',
-      [`${prefix}--snippet--inline`]: type === 'inline',
+      [`${prefix}--snippet--${type}`]: type,
       [`${prefix}--snippet--expand`]: this.state.expandedCode,
       [`${prefix}--snippet--light`]: light,
     });

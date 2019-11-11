@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2019
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,6 +31,7 @@ const TableToolbarSearch = ({
   labelText,
   expanded: expandedProp,
   defaultExpanded,
+  defaultValue,
   onExpand,
   persistent,
   persistant,
@@ -86,17 +87,18 @@ const TableToolbarSearch = ({
       onBlur={event => !value && handleExpand(event, false)}
       className={searchContainerClasses}>
       <Search
-        {...rest}
-        small
+        size="sm"
         className={className}
+        defaultValue={defaultValue}
         value={value}
-        id={typeof id !== 'undefined' ? id : uniqueId}
+        id={typeof id !== 'undefined' ? id : uniqueId.toString()}
         aria-hidden={!expanded}
         labelText={labelText || t('carbon.table.toolbar.search.label')}
         placeHolderText={
           placeHolderText || t('carbon.table.toolbar.search.placeholder')
         }
         onChange={onChange}
+        {...rest}
       />
     </div>
   );
@@ -134,6 +136,11 @@ TableToolbarSearch.propTypes = {
    * Provide an optional label text for the Search component icon
    */
   labelText: PropTypes.string,
+
+  /**
+   * Provide an optional default value for the Search component
+   */
+  defaultValue: PropTypes.string,
 
   /**
    * Provide custom text for the component for each translation id

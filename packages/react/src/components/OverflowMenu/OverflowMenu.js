@@ -203,6 +203,12 @@ class OverflowMenu extends Component {
      * Function called when menu is closed
      */
     onOpen: PropTypes.func,
+
+    /**
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make OverflowMenu background color same as container background color.
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -219,6 +225,7 @@ class OverflowMenu extends Component {
     tabIndex: 0,
     menuOffset: getMenuOffset,
     menuOffsetFlip: getMenuOffset,
+    light: false,
   };
 
   /**
@@ -319,6 +326,10 @@ class OverflowMenu extends Component {
   };
 
   handleKeyPress = evt => {
+    if (!keyCodeMatches(evt, [keys.Enter, keys.Space])) {
+      evt.preventDefault();
+    }
+
     // only respond to key events when the menu is closed, so that menu items still respond to key events
     if (!this.state.open) {
       if (keyCodeMatches(evt, [keys.Enter, keys.Space])) {
@@ -331,7 +342,6 @@ class OverflowMenu extends Component {
       this.closeMenu();
       // Stop the esc keypress from bubbling out and closing something it shouldn't
       evt.stopPropagation();
-      evt.preventDefault();
     }
   };
 
@@ -453,6 +463,7 @@ class OverflowMenu extends Component {
       renderIcon: IconElement,
       innerRef: ref,
       menuOptionsClass,
+      light,
       ...other
     } = this.props;
 
@@ -463,6 +474,7 @@ class OverflowMenu extends Component {
       `${prefix}--overflow-menu`,
       {
         [`${prefix}--overflow-menu--open`]: open,
+        [`${prefix}--overflow-menu--light`]: light,
       }
     );
 
@@ -472,6 +484,7 @@ class OverflowMenu extends Component {
       {
         [`${prefix}--overflow-menu--flip`]: this.props.flipped,
         [`${prefix}--overflow-menu-options--open`]: open,
+        [`${prefix}--overflow-menu-options--light`]: light,
       }
     );
 
@@ -535,7 +548,6 @@ class OverflowMenu extends Component {
           aria-expanded={this.state.open}
           className={overflowMenuClasses}
           onKeyDown={this.handleKeyPress}
-          onBlur={this.handleBlur}
           onClick={this.handleClick}
           aria-label={ariaLabel}
           id={id}

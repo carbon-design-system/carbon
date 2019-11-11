@@ -295,6 +295,9 @@ export default class FilterableMultiSelect extends React.Component {
     const helper = helperText ? (
       <div className={helperClasses}>{helperText}</div>
     ) : null;
+    const inputClasses = cx(`${prefix}--text-input`, {
+      [`${prefix}--text-input--empty`]: !this.state.inputValue,
+    });
     const input = (
       <Selection
         disabled={disabled}
@@ -343,11 +346,6 @@ export default class FilterableMultiSelect extends React.Component {
                   invalidText={invalidText}
                   isOpen={isOpen}
                   {...getRootProps({ refKey: 'innerRef' })}>
-                  {invalid && (
-                    <WarningFilled16
-                      className={`${prefix}--list-box__invalid-icon`}
-                    />
-                  )}
                   <ListBox.Field
                     id={id}
                     disabled={disabled}
@@ -358,10 +356,11 @@ export default class FilterableMultiSelect extends React.Component {
                         clearSelection={clearSelection}
                         selectionCount={selectedItem.length}
                         translateWithId={translateWithId}
+                        disabled={disabled}
                       />
                     )}
                     <input
-                      className={`${prefix}--text-input`}
+                      className={inputClasses}
                       aria-controls={`${id}__menu`}
                       aria-autocomplete="list"
                       ref={el => (this.inputNode = el)}
@@ -372,9 +371,15 @@ export default class FilterableMultiSelect extends React.Component {
                         onKeyDown: this.handleOnInputKeyDown,
                       })}
                     />
+                    {invalid && (
+                      <WarningFilled16
+                        className={`${prefix}--list-box__invalid-icon`}
+                      />
+                    )}
                     {inputValue && isOpen && (
                       <ListBox.Selection
                         clearSelection={this.clearInputValue}
+                        disabled={disabled}
                       />
                     )}
                     <ListBox.MenuIcon

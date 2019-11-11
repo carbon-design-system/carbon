@@ -2,7 +2,7 @@
 
 exports[`_grid.scss should generate grid code when the grid feature flag is on 1`] = `
 "h1 {
-  font-size: 2rem;
+  font-size: 2.625rem;
   font-weight: 300;
   line-height: 3.125rem;
   letter-spacing: 0; }
