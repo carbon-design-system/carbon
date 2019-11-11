@@ -11,9 +11,9 @@ import {
   withKnobs,
   boolean,
   radios as radiosWithoutBooleans,
+  select as selectWithoutUndefined,
 } from '@storybook/addon-knobs';
 import Grid from './Grid';
-import { select as selectWithoutUndefined } from '@storybook/addon-knobs';
 
 import './_Grid-story.scss';
 
@@ -23,12 +23,17 @@ const handleBoolStr = str => {
   return str;
 };
 
+const handleUndefStr = str => {
+  if (str === 'undefined') return undefined;
+  return str;
+};
+
 // allow booleans in multi-choice knobs via 'false' or 'true' strings
 /** @type {radiosWithoutBooleans} */
 const radios = (...params) => handleBoolStr(radiosWithoutBooleans(...params));
 // convert empty str from `undefined` return val to undefined
 /** @type {selectWithoutUndefined} */
-const select = (...params) => selectWithoutUndefined(...params) || undefined;
+const select = (...params) => handleUndefStr(selectWithoutUndefined(...params));
 
 // add blank (empty space) option to object with an undefined val
 const withBlank = arr =>
@@ -37,13 +42,18 @@ const withBlank = arr =>
       prev[cur] = cur;
       return prev;
     },
-    { [' ']: undefined }
+    { [' ']: 'undefined' }
   );
 
 export default {
   component: Grid,
   title: 'Grid',
   decorators: [withKnobs],
+  parameters: {
+    info: {
+      source: false, // FIXME: really messy
+    },
+  },
 };
 
 const VALID_NO_GUTTER_VALS = {
@@ -70,61 +80,61 @@ const propsGridCol = () => ({
   sm: select(
     'sm',
     withBlank(Grid.getValidColWidths().sm),
-    undefined,
+    'undefined',
     'Grid.Col'
   ),
   md: select(
     'md',
     withBlank(Grid.getValidColWidths().md),
-    undefined,
+    'undefined',
     'Grid.Col'
   ),
   lg: select(
     'lg',
     withBlank(Grid.getValidColWidths().lgPlus),
-    undefined,
+    'undefined',
     'Grid.Col'
   ),
   xlg: select(
     'xlg',
     withBlank(Grid.getValidColWidths().lgPlus),
-    undefined,
+    'undefined',
     'Grid.Col'
   ),
   max: select(
     'max',
     withBlank(Grid.getValidColWidths().lgPlus),
-    undefined,
+    'undefined',
     'Grid.Col'
   ),
-  smOffset: select(
+  smOffset: selectWithoutUndefined(
     'smOffset',
-    withBlank(Grid.getValidColOffsets().sm),
-    undefined,
+    Grid.getValidColOffsets().sm,
+    0,
     'Grid.Col'
   ),
-  mdOffset: select(
+  mdOffset: selectWithoutUndefined(
     'mdOffset',
-    withBlank(Grid.getValidColOffsets().md),
-    undefined,
+    Grid.getValidColOffsets().md,
+    0,
     'Grid.Col'
   ),
-  lgOffset: select(
+  lgOffset: selectWithoutUndefined(
     'lgOffset',
-    withBlank(Grid.getValidColOffsets().lgPlus),
-    undefined,
+    Grid.getValidColOffsets().lgPlus,
+    0,
     'Grid.Col'
   ),
-  xlgOffset: select(
+  xlgOffset: selectWithoutUndefined(
     'xlgOffset',
-    withBlank(Grid.getValidColOffsets().lgPlus),
-    undefined,
+    Grid.getValidColOffsets().lgPlus,
+    0,
     'Grid.Col'
   ),
-  maxOffset: select(
+  maxOffset: selectWithoutUndefined(
     'maxOffset',
-    withBlank(Grid.getValidColOffsets().lgPlus),
-    undefined,
+    Grid.getValidColOffsets().lgPlus,
+    0,
     'Grid.Col'
   ),
 });
@@ -132,11 +142,6 @@ const propsGridCol = () => ({
 export const Default = () => (
   <div className="bleed">
     <Grid {...propsGrid()} className="default">
-      {/* TODO: implement "legend" to show meaning of colors */}
-      {/* <div className='legend'>
-      <div className='legend__body' />
-      <div className='legend__gutter' />
-    </div> */}
       {Array.from({ length: 4 }).map((_, i) => (
         <Grid.Row key={i} {...propsGridRow()}>
           {Array.from({ length: 12 }).map((_, j) => (

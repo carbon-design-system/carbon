@@ -56,7 +56,7 @@ Grid.propTypes = {
   /** Collapse the gutter to 2px. Useful for fluid layouts. Rows have 2px of margin between them to match gutter. */
   condensed: PropTypes.bool,
 
-  /** By default, the grid has a max width set. You can remove this by using a grid modifier class. */
+  /** Remove the default max width that the grid has set */
   fullWidth: PropTypes.bool,
 
   /** Remove horizontal padding on the Grid */
@@ -102,16 +102,16 @@ GridRow.propTypes = {
 };
 
 export const GridCol = ({
-  sm = undefined,
-  md = undefined,
-  lg = undefined,
-  xlg = undefined,
-  max = undefined,
-  smOffset = undefined,
-  mdOffset = undefined,
-  lgOffset = undefined,
-  xlgOffset = undefined,
-  maxOffset = undefined,
+  sm,
+  md,
+  lg,
+  xlg,
+  max,
+  smOffset,
+  mdOffset,
+  lgOffset,
+  xlgOffset,
+  maxOffset,
   noGutter = false,
   className = '',
   children = null,
@@ -126,11 +126,11 @@ export const GridCol = ({
         `${prefix}--col-xlg-${xlg === 'auto' ? '-' : ''}${xlg}`,
       max !== undefined &&
         `${prefix}--col-max-${max === 'auto' ? '-' : ''}${max}`,
-      smOffset !== undefined && `${prefix}--offset-sm-${smOffset}`,
-      mdOffset !== undefined && `${prefix}--offset-md-${mdOffset}`,
-      lgOffset !== undefined && `${prefix}--offset-lg-${lgOffset}`,
-      xlgOffset !== undefined && `${prefix}--offset-xlg-${xlgOffset}`,
-      maxOffset !== undefined && `${prefix}--offset-max-${maxOffset}`,
+      smOffset && `${prefix}--offset-sm-${smOffset}`,
+      mdOffset && `${prefix}--offset-md-${mdOffset}`,
+      lgOffset && `${prefix}--offset-lg-${lgOffset}`,
+      xlgOffset && `${prefix}--offset-xlg-${xlgOffset}`,
+      maxOffset && `${prefix}--offset-max-${maxOffset}`,
       noGutter === true && `${prefix}--no-gutter`, // `true` === both
       noGutter !== true && noGutter && `${prefix}--no-gutter--${noGutter}`, // `left` || `right`
       className

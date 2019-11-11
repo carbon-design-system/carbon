@@ -5,28 +5,30 @@
   width: 100%;
 }
 
-// global styles
+// grid styles
 #root .outside {
   min-height: 80px;
   height: 100%;
 }
 
 #root .inside {
-  background-color: #edf4ff;
+  background-color: $ibm-color__blue-10;
   min-height: 80px;
   height: 100%;
 }
 
 #root [class*='col'] {
-  background-color: #dbeaff;
-  outline: 1px dashed #97c1ff;
+  background-color: $ibm-color__blue-20;
+  outline: 1px dashed $ibm-color__blue-40;
 }
 
-// Example specific
+.bleed {
+  background-color: $ibm-color__gray-100;
+}
 
-// default
+// default grid example
 .default {
-  background-color: $ibm-color__blue-30;
+  background-color: $ibm-color__blue-40;
 }
 
 // hack to enable zoom feature to trigger
@@ -37,43 +39,4 @@
 .default .bx--col code {
   display: flex;
   justify-content: center;
-}
-
-// Condensed
-#root .bx--grid--condensed,
-#root .bx--row--condensed {
-  background-color: #171717;
-  color: #ffffff;
-}
-
-#root .bx--grid--condensed [class*='col'],
-#root .bx--row--condensed [class*='col'] {
-  background: none;
-  outline: none;
-}
-
-.bx--grid--condensed .outside,
-.bx--row--condensed .outside {
-  background-color: #3d3d3d;
-  outline: none;
-}
-
-.bx--grid--condensed .inside,
-.bx--row--condensed .inside {
-  background: none;
-}
-
-// Bleed
-.bleed {
-  background-color: #171717;
-}
-
-// Hang
-.image-example {
-  background-color: #171717;
-  color: #ffffff;
-}
-
-.bx--aspect-ratio + .outside {
-  height: initial;
 }
