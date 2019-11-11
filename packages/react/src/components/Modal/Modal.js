@@ -35,6 +35,12 @@ export default class Modal extends Component {
     passiveModal: PropTypes.bool,
 
     /**
+     * Provide whether the modal content has a form element.
+     * If `true` is used here, non-form child content should have `bx--modal-content__regular-content` class.
+     */
+    hasForm: PropTypes.bool,
+
+    /**
      * Specify a handler for closing modal.
      * The handler should care of closing modal, e.g. changing `open` prop.
      */
@@ -123,6 +129,11 @@ export default class Modal extends Component {
      * be focused when the Modal opens
      */
     selectorPrimaryFocus: PropTypes.string,
+
+    /**
+     * Specify the size variant.
+     */
+    size: PropTypes.oneOf('xs', 'sm', 'lg'),
 
     /**
      * Specify whether the modal should use 3rd party `focus-trap-react` for the focus-wrap feature.
@@ -278,6 +289,7 @@ export default class Modal extends Component {
       modalLabel,
       modalAriaLabel,
       passiveModal,
+      hasForm,
       secondaryButtonText,
       primaryButtonText,
       open,
@@ -290,6 +302,7 @@ export default class Modal extends Component {
       selectorPrimaryFocus, // eslint-disable-line
       selectorsFloatingMenus, // eslint-disable-line
       shouldSubmitOnEnter, // eslint-disable-line
+      size,
       focusTrap,
       ...other
     } = this.props;
@@ -304,6 +317,14 @@ export default class Modal extends Component {
       'is-visible': open,
       [`${prefix}--modal--danger`]: this.props.danger,
       [this.props.className]: this.props.className,
+    });
+
+    const contaienrClasses = classNames(`${prefix}--modal-container`, {
+      [`${prefix}--modal-container--${size}`]: size,
+    });
+
+    const contentClasses = classNames(`${prefix}--modal-content`, {
+      [`${prefix}--modal-content--with-form`]: hasForm,
     });
 
     const modalButton = (
@@ -336,7 +357,7 @@ export default class Modal extends Component {
       <div
         ref={this.innerModal}
         role="dialog"
-        className={`${prefix}--modal-container`}
+        className={contaienrClasses}
         aria-label={
           modalLabel
             ? null
@@ -352,7 +373,8 @@ export default class Modal extends Component {
           <h3 className={`${prefix}--modal-header__heading`}>{modalHeading}</h3>
           {!passiveModal && modalButton}
         </div>
-        <div className={`${prefix}--modal-content`}>{this.props.children}</div>
+        <div className={contentClasses}>{this.props.children}</div>
+        <div className={`${prefix}--modal-content--overflow-indicator`} />
         {!passiveModal && (
           <div className={`${prefix}--modal-footer`}>
             <Button kind="secondary" onClick={onSecondaryButtonClick}>

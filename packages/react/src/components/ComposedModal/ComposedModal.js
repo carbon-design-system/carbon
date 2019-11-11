@@ -60,6 +60,11 @@ export default class ComposedModal extends Component {
      * focused when the Modal opens
      */
     selectorPrimaryFocus: PropTypes.string,
+
+    /**
+     * Specify the size variant.
+     */
+    size: PropTypes.oneOf('xs', 'sm', 'lg'),
   };
 
   static getDerivedStateFromProps({ open }, state) {
@@ -192,6 +197,7 @@ export default class ComposedModal extends Component {
       children,
       danger,
       selectorPrimaryFocus, // eslint-disable-line
+      size,
       ...other
     } = this.props;
 
@@ -204,6 +210,7 @@ export default class ComposedModal extends Component {
 
     const containerClass = classNames({
       [`${prefix}--modal-container`]: true,
+      [`${prefix}--modal-container--${size}`]: size,
       [containerClassName]: containerClassName,
     });
 
@@ -379,20 +386,30 @@ export class ModalBody extends Component {
      * Specify an optional className to be added to the Modal Body node
      */
     className: PropTypes.string,
+
+    /**
+     * Provide whether the modal content has a form element.
+     * If `true` is used here, non-form child content should have `bx--modal-content__regular-content` class.
+     */
+    hasForm: PropTypes.bool,
   };
 
   render() {
-    const { className, children, ...other } = this.props;
+    const { className, children, hasForm, ...other } = this.props;
 
     const contentClass = classNames({
       [`${prefix}--modal-content`]: true,
+      [`${prefix}--modal-content--with-form`]: hasForm,
       [className]: className,
     });
 
     return (
-      <div className={contentClass} {...other}>
-        {children}
-      </div>
+      <>
+        <div className={contentClass} {...other}>
+          {children}
+        </div>
+        <div className={`${prefix}--modal-content--overflow-indicator`} />
+      </>
     );
   }
 }

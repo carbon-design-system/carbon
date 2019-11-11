@@ -8,7 +8,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, text } from '@storybook/addon-knobs';
+import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import ComposedModal, {
   ModalHeader,
   ModalBody,
@@ -19,6 +19,13 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
+const sizes = {
+  Default: '',
+  'Extra small (xs)': 'xs',
+  'Small (sm)': 'sm',
+  'Large (lg)': 'lg',
+};
+
 const props = {
   composedModal: (includeOpen = true) => ({
     open: includeOpen ? boolean('Open (open in <ComposedModal>)', true) : null,
@@ -28,6 +35,7 @@ const props = {
       'Primary focus element selector (selectorPrimaryFocus)',
       '[data-modal-primary-focus]'
     ),
+    size: select('Size (size)', sizes),
   }),
   modalHeader: () => ({
     label: text('Optional Label (label in <ModalHeader>)', 'Optional Label'),
@@ -60,18 +68,21 @@ storiesOf('ComposedModal', module)
   .addDecorator(withKnobs)
   .add(
     'Using Header / Footer Props',
-    () => (
-      <ComposedModal {...props.composedModal()}>
-        <ModalHeader {...props.modalHeader()} />
-        <ModalBody>
-          <p className={`${prefix}--modal-content__text}`}>
-            Please see ModalWrapper for more examples and demo of the
-            functionality.
-          </p>
-        </ModalBody>
-        <ModalFooter {...props.modalFooter()} />
-      </ComposedModal>
-    ),
+    () => {
+      const { size, ...rest } = props.composedModal();
+      return (
+        <ComposedModal {...rest} size={size || undefined}>
+          <ModalHeader {...props.modalHeader()} />
+          <ModalBody>
+            <p className={`${prefix}--modal-content__text}`}>
+              Please see ModalWrapper for more examples and demo of the
+              functionality.
+            </p>
+          </ModalBody>
+          <ModalFooter {...props.modalFooter()} />
+        </ComposedModal>
+      );
+    },
     {
       info: {
         text: `
@@ -86,25 +97,28 @@ storiesOf('ComposedModal', module)
   )
   .add(
     'Using child nodes',
-    () => (
-      <ComposedModal {...props.composedModal()}>
-        <ModalHeader {...props.modalHeader()}>
-          <h1>Testing</h1>
-        </ModalHeader>
-        <ModalBody>
-          <p>
-            Please see ModalWrapper for more examples and demo of the
-            functionality.
-          </p>
-        </ModalBody>
-        <ModalFooter>
-          <Button kind="secondary">Cancel</Button>
-          <Button kind={props.composedModal().danger ? 'danger' : 'primary'}>
-            Save
-          </Button>
-        </ModalFooter>
-      </ComposedModal>
-    ),
+    () => {
+      const { size, ...rest } = props.composedModal();
+      return (
+        <ComposedModal {...rest} size={size || undefined}>
+          <ModalHeader {...props.modalHeader()}>
+            <h1>Testing</h1>
+          </ModalHeader>
+          <ModalBody>
+            <p>
+              Please see ModalWrapper for more examples and demo of the
+              functionality.
+            </p>
+          </ModalBody>
+          <ModalFooter>
+            <Button kind="secondary">Cancel</Button>
+            <Button kind={props.composedModal().danger ? 'danger' : 'primary'}>
+              Save
+            </Button>
+          </ModalFooter>
+        </ComposedModal>
+      );
+    },
     {
       info: {
         text: `
@@ -121,14 +135,16 @@ storiesOf('ComposedModal', module)
         toggleModal = open => this.setState({ open });
         render() {
           const { open } = this.state;
+          const { size, ...rest } = props.composedModal();
           return (
             <>
               <Button onClick={() => this.toggleModal(true)}>
                 Launch composed modal
               </Button>
               <ComposedModal
-                {...props.composedModal()}
+                {...rest}
                 open={open}
+                size={size || undefined}
                 onClose={() => this.toggleModal(false)}>
                 <ModalHeader {...props.modalHeader()} />
                 <ModalBody>
