@@ -34,7 +34,7 @@ const CodeSnippet = ({
   const [shouldShowMoreLessBtn, setShouldShowMoreLessBtn] = useState(false);
   const [expandedCode, setExpandedCode] = useState(false);
   const { current: codeContentRef } = useRef(null);
-  const { currenet: uid } = useRef(getUniqueId());
+  const { current: uid } = useRef(getUniqueId());
   const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
 
   useLayoutEffect(() => {
