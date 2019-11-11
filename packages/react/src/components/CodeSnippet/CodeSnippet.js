@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import classNames from 'classnames';
 import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
@@ -31,21 +31,20 @@ const CodeSnippet = ({
   showLessText,
   ...other
 }) => {
-  const [shouldShowMoreLessBtn, setShouldShowMoreLessBtn] = useState(false);
   const [expandedCode, setExpandedCode] = useState(false);
-  const { current: codeContentRef } = useRef(null);
-  const { currenet: uid } = useRef(getUniqueId());
-  const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
+  const [height, setHeight] = useState(0);
+  const { current: uid } = useRef(getUniqueId());
+  const previousChildren = useRef(null);
 
-  useLayoutEffect(() => {
-    if (
-      type === 'multi' &&
-      codeContentRef &&
-      codeContentRef.getBoundingClientRect().height > 255
-    ) {
-      setShouldShowMoreLessBtn(true);
-    }
-  }, [children, codeContentRef, type]);
+  const ref = useCallback(
+    node => {
+      if (node !== null && previousChildren.current !== children) {
+        setHeight(node.getBoundingClientRect().height);
+        previousChildren.current = children;
+      }
+    },
+    [children]
+  );
 
   const codeSnippetClasses = classNames(className, {
     [`${prefix}--snippet`]: true,
@@ -68,6 +67,9 @@ const CodeSnippet = ({
     );
   }
 
+  const shouldShowMoreLessBtn = type === 'multi' && height > 255;
+  const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
+
   return (
     <div {...other} className={codeSnippetClasses}>
       <div
@@ -76,7 +78,7 @@ const CodeSnippet = ({
         className={`${prefix}--snippet-container`}
         aria-label={ariaLabel || copyLabel || 'code-snippet'}>
         <code>
-          <pre ref={codeContentRef}>{children}</pre>
+          <pre ref={ref}>{children}</pre>
         </code>
       </div>
       <CopyButton
