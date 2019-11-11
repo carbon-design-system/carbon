@@ -17,7 +17,7 @@ import getUniqueId from '../../tools/uniqueId';
 
 const { prefix } = settings;
 
-const CodeSnippet = ({
+function CodeSnippet({
   className,
   type,
   children,
@@ -30,7 +30,7 @@ const CodeSnippet = ({
   showMoreText,
   showLessText,
   ...other
-}) => {
+}) {
   const [expandedCode, setExpandedCode] = useState(false);
   const [height, setHeight] = useState(0);
   const { current: uid } = useRef(getUniqueId());
@@ -104,7 +104,7 @@ const CodeSnippet = ({
       )}
     </div>
   );
-};
+}
 
 CodeSnippet.propTypes = {
   /**
