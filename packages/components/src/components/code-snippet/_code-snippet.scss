@@ -164,6 +164,9 @@
     height: $carbon--spacing-08;
     width: $carbon--spacing-08;
     overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:focus {
       @include focus-outline('outline');
@@ -300,7 +303,7 @@
 
   .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
     top: rem(25px);
-    left: 1rem;
+    left: 50%;
     right: auto;
   }
 
