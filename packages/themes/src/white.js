@@ -127,78 +127,78 @@ export const skeleton01 = '#e5e5e5';
 export const skeleton02 = gray30;
 
 // Type
-export { caption01 } from '@carbon/type';
-export { label01 } from '@carbon/type';
-export { helperText01 } from '@carbon/type';
-export { bodyShort01 } from '@carbon/type';
-export { bodyLong01 } from '@carbon/type';
-export { bodyShort02 } from '@carbon/type';
-export { bodyLong02 } from '@carbon/type';
-export { code01 } from '@carbon/type';
-export { code02 } from '@carbon/type';
-export { heading01 } from '@carbon/type';
-export { productiveHeading01 } from '@carbon/type';
-export { heading02 } from '@carbon/type';
-export { productiveHeading02 } from '@carbon/type';
-export { productiveHeading03 } from '@carbon/type';
-export { productiveHeading04 } from '@carbon/type';
-export { productiveHeading05 } from '@carbon/type';
-export { productiveHeading06 } from '@carbon/type';
-export { productiveHeading07 } from '@carbon/type';
-export { expressiveHeading01 } from '@carbon/type';
-export { expressiveHeading02 } from '@carbon/type';
-export { expressiveHeading03 } from '@carbon/type';
-export { expressiveHeading04 } from '@carbon/type';
-export { expressiveHeading05 } from '@carbon/type';
-export { expressiveHeading06 } from '@carbon/type';
-export { expressiveParagraph01 } from '@carbon/type';
-export { quotation01 } from '@carbon/type';
-export { quotation02 } from '@carbon/type';
-export { display01 } from '@carbon/type';
-export { display02 } from '@carbon/type';
-export { display03 } from '@carbon/type';
-export { display04 } from '@carbon/type';
+export {
+  caption01,
+  label01,
+  helperText01,
+  bodyShort01,
+  bodyLong01,
+  bodyShort02,
+  bodyLong02,
+  code01,
+  code02,
+  heading01,
+  productiveHeading01,
+  heading02,
+  productiveHeading02,
+  productiveHeading03,
+  productiveHeading04,
+  productiveHeading05,
+  productiveHeading06,
+  productiveHeading07,
+  expressiveHeading01,
+  expressiveHeading02,
+  expressiveHeading03,
+  expressiveHeading04,
+  expressiveHeading05,
+  expressiveHeading06,
+  expressiveParagraph01,
+  quotation01,
+  quotation02,
+  display01,
+  display02,
+  display03,
+  display04,
+} from '@carbon/type';
 
 // Layout
 // Spacing
-export { spacing01 } from '@carbon/layout';
-export { spacing02 } from '@carbon/layout';
-export { spacing03 } from '@carbon/layout';
-export { spacing04 } from '@carbon/layout';
-export { spacing05 } from '@carbon/layout';
-export { spacing06 } from '@carbon/layout';
-export { spacing07 } from '@carbon/layout';
-export { spacing08 } from '@carbon/layout';
-export { spacing09 } from '@carbon/layout';
-export { spacing10 } from '@carbon/layout';
-export { spacing11 } from '@carbon/layout';
-export { spacing12 } from '@carbon/layout';
-
-// Fluid spacing
-export { fluidSpacing01 } from '@carbon/layout';
-export { fluidSpacing02 } from '@carbon/layout';
-export { fluidSpacing03 } from '@carbon/layout';
-export { fluidSpacing04 } from '@carbon/layout';
-
-// Layout
-export { layout01 } from '@carbon/layout';
-export { layout02 } from '@carbon/layout';
-export { layout03 } from '@carbon/layout';
-export { layout04 } from '@carbon/layout';
-export { layout05 } from '@carbon/layout';
-export { layout06 } from '@carbon/layout';
-export { layout07 } from '@carbon/layout';
-
-// Containers
-export { container01 } from '@carbon/layout';
-export { container02 } from '@carbon/layout';
-export { container03 } from '@carbon/layout';
-export { container04 } from '@carbon/layout';
-export { container05 } from '@carbon/layout';
-
-// Icon sizes
-export { iconSize01 } from '@carbon/layout';
-export { iconSize02 } from '@carbon/layout';
+export {
+  spacing01,
+  spacing02,
+  spacing03,
+  spacing04,
+  spacing05,
+  spacing06,
+  spacing07,
+  spacing08,
+  spacing09,
+  spacing10,
+  spacing11,
+  spacing12,
+  // Fluid spacing
+  fluidSpacing01,
+  fluidSpacing02,
+  fluidSpacing03,
+  fluidSpacing04,
+  // Layout
+  layout01,
+  layout02,
+  layout03,
+  layout04,
+  layout05,
+  layout06,
+  layout07,
+  // Containers
+  container01,
+  container02,
+  container03,
+  container04,
+  container05,
+  // Icon sizes
+  iconSize01,
+  iconSize02,
+} from '@carbon/layout';
 
 // Deprecated ☠️
 export const brand01 = interactive01;
