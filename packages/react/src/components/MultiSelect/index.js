@@ -8,6 +8,7 @@
 import MultiSelect from './MultiSelect';
 import FilterableMultiSelect from './FilterableMultiSelect';
 
+FilterableMultiSelect.displayName = 'MultiSelect.Filterable';
 MultiSelect.Filterable = FilterableMultiSelect;
 
 export default MultiSelect;

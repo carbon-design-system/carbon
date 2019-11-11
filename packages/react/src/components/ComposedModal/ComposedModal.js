@@ -88,7 +88,7 @@ export default class ComposedModal extends Component {
   handleKeyDown = evt => {
     // Esc key
     if (evt.which === 27) {
-      this.closeModal();
+      this.closeModal(evt);
     }
 
     this.props.onKeyDown(evt);
@@ -99,7 +99,7 @@ export default class ComposedModal extends Component {
       this.innerModal.current &&
       !this.innerModal.current.contains(evt.target)
     ) {
-      this.closeModal();
+      this.closeModal(evt);
     }
   };
 
@@ -122,16 +122,16 @@ export default class ComposedModal extends Component {
     }
   };
 
-  componentDidUpdate(prevProps) {
-    if (!prevProps.open && this.props.open) {
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevState.open && this.state.open) {
       this.beingOpen = true;
-    } else if (prevProps.open && !this.props.open) {
+    } else if (prevState.open && !this.state.open) {
       this.beingOpen = false;
     }
     toggleClass(
       document.body,
       `${prefix}--body--with-modal-open`,
-      this.props.open
+      this.state.open
     );
   }
 
@@ -147,6 +147,10 @@ export default class ComposedModal extends Component {
       this.button.current.focus();
     }
   };
+
+  componentWillUnmount() {
+    toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+  }
 
   componentDidMount() {
     toggleClass(
@@ -171,9 +175,9 @@ export default class ComposedModal extends Component {
     }
   };
 
-  closeModal = () => {
+  closeModal = evt => {
     const { onClose } = this.props;
-    if (!onClose || onClose() !== false) {
+    if (!onClose || onClose(evt) !== false) {
       this.setState({
         open: false,
       });
@@ -303,8 +307,8 @@ export class ModalHeader extends Component {
     buttonOnClick: () => {},
   };
 
-  handleCloseButtonClick = () => {
-    this.props.closeModal();
+  handleCloseButtonClick = evt => {
+    this.props.closeModal(evt);
     this.props.buttonOnClick();
   };
 
@@ -454,7 +458,7 @@ export class ModalFooter extends Component {
   };
 
   handleRequestClose = evt => {
-    this.props.closeModal();
+    this.props.closeModal(evt);
     this.props.onRequestClose(evt);
   };
 

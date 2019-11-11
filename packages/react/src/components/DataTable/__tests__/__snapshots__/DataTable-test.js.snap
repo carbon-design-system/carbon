@@ -1773,7 +1773,9 @@ exports[`DataTable should render 1`] = `
           "value": <TableContainer
             title="DataTable with toolbar"
           >
-            <TableToolbar>
+            <TableToolbar
+              aria-label="data table toolbar"
+            >
               <TableBatchActions
                 onCancel={[Function]}
                 shouldShowBatchActions={false}
@@ -1960,7 +1962,9 @@ exports[`DataTable should render 1`] = `
           className="bx--data-table-header__description"
         />
       </div>
-      <TableToolbar>
+      <TableToolbar
+        aria-label="data table toolbar"
+      >
         <section
           aria-label="data table toolbar"
           className="bx--table-toolbar"
@@ -2741,7 +2745,9 @@ exports[`DataTable sticky header should render 1`] = `
             stickyHeader={true}
             title="DataTable with toolbar"
           >
-            <TableToolbar>
+            <TableToolbar
+              aria-label="data table toolbar"
+            >
               <TableBatchActions
                 onCancel={[Function]}
                 shouldShowBatchActions={false}
@@ -2931,7 +2937,9 @@ exports[`DataTable sticky header should render 1`] = `
           className="bx--data-table-header__description"
         />
       </div>
-      <TableToolbar>
+      <TableToolbar
+        aria-label="data table toolbar"
+      >
         <section
           aria-label="data table toolbar"
           className="bx--table-toolbar"

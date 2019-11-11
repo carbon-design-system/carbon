@@ -46,12 +46,52 @@
   - [✅carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
   - [✅carbon--largest-breakpoint [mixin]](#carbon--largest-breakpoint-mixin)
   - [✅carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [✅carbon--container-01 [variable]](#carbon--container-01-variable)
+  - [✅carbon--container-02 [variable]](#carbon--container-02-variable)
+  - [✅carbon--container-03 [variable]](#carbon--container-03-variable)
+  - [✅carbon--container-04 [variable]](#carbon--container-04-variable)
+  - [✅carbon--container-05 [variable]](#carbon--container-05-variable)
+  - [✅carbon--container [variable]](#carbon--container-variable)
+  - [✅container-01 [variable]](#container-01-variable)
+  - [✅container-02 [variable]](#container-02-variable)
+  - [✅container-03 [variable]](#container-03-variable)
+  - [✅container-04 [variable]](#container-04-variable)
+  - [✅container-05 [variable]](#container-05-variable)
   - [✅carbon--base-font-size [variable]](#carbon--base-font-size-variable)
   - [✅carbon--rem [function]](#carbon--rem-function)
   - [✅carbon--em [function]](#carbon--em-function)
+  - [✅carbon--fluid-spacing-01 [variable]](#carbon--fluid-spacing-01-variable)
+  - [✅carbon--fluid-spacing-02 [variable]](#carbon--fluid-spacing-02-variable)
+  - [✅carbon--fluid-spacing-03 [variable]](#carbon--fluid-spacing-03-variable)
+  - [✅carbon--fluid-spacing-04 [variable]](#carbon--fluid-spacing-04-variable)
+  - [✅carbon--fluid-spacing [variable]](#carbon--fluid-spacing-variable)
+  - [✅fluid-spacing-01 [variable]](#fluid-spacing-01-variable)
+  - [✅fluid-spacing-02 [variable]](#fluid-spacing-02-variable)
+  - [✅fluid-spacing-03 [variable]](#fluid-spacing-03-variable)
+  - [✅fluid-spacing-04 [variable]](#fluid-spacing-04-variable)
+  - [✅carbon--icon-size-01 [variable]](#carbon--icon-size-01-variable)
+  - [✅carbon--icon-size-02 [variable]](#carbon--icon-size-02-variable)
+  - [✅carbon--icon-size [variable]](#carbon--icon-size-variable)
+  - [✅icon-size-01 [variable]](#icon-size-01-variable)
+  - [✅icon-size-02 [variable]](#icon-size-02-variable)
   - [✅carbon--get-column-width [function]](#carbon--get-column-width-function)
   - [✅carbon--key-height-scales [variable]](#carbon--key-height-scales-variable)
   - [✅carbon--key-height [function]](#carbon--key-height-function)
+  - [✅carbon--layout-01 [variable]](#carbon--layout-01-variable)
+  - [✅carbon--layout-02 [variable]](#carbon--layout-02-variable)
+  - [✅carbon--layout-03 [variable]](#carbon--layout-03-variable)
+  - [✅carbon--layout-04 [variable]](#carbon--layout-04-variable)
+  - [✅carbon--layout-05 [variable]](#carbon--layout-05-variable)
+  - [✅carbon--layout-06 [variable]](#carbon--layout-06-variable)
+  - [✅carbon--layout-07 [variable]](#carbon--layout-07-variable)
+  - [✅carbon--layout [variable]](#carbon--layout-variable)
+  - [✅layout-01 [variable]](#layout-01-variable)
+  - [✅layout-02 [variable]](#layout-02-variable)
+  - [✅layout-03 [variable]](#layout-03-variable)
+  - [✅layout-04 [variable]](#layout-04-variable)
+  - [✅layout-05 [variable]](#layout-05-variable)
+  - [✅layout-06 [variable]](#layout-06-variable)
+  - [✅layout-07 [variable]](#layout-07-variable)
   - [✅carbon--mini-unit-size [variable]](#carbon--mini-unit-size-variable)
   - [✅carbon--mini-units [function]](#carbon--mini-units-function)
   - [✅carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
@@ -79,30 +119,6 @@
   - [✅spacing-10 [variable]](#spacing-10-variable)
   - [✅spacing-11 [variable]](#spacing-11-variable)
   - [✅spacing-12 [variable]](#spacing-12-variable)
-  - [✅carbon--layout-01 [variable]](#carbon--layout-01-variable)
-  - [✅carbon--layout-02 [variable]](#carbon--layout-02-variable)
-  - [✅carbon--layout-03 [variable]](#carbon--layout-03-variable)
-  - [✅carbon--layout-04 [variable]](#carbon--layout-04-variable)
-  - [✅carbon--layout-05 [variable]](#carbon--layout-05-variable)
-  - [✅carbon--layout-06 [variable]](#carbon--layout-06-variable)
-  - [✅carbon--layout-07 [variable]](#carbon--layout-07-variable)
-  - [✅carbon--layout [variable]](#carbon--layout-variable)
-  - [✅layout-01 [variable]](#layout-01-variable)
-  - [✅layout-02 [variable]](#layout-02-variable)
-  - [✅layout-03 [variable]](#layout-03-variable)
-  - [✅layout-04 [variable]](#layout-04-variable)
-  - [✅layout-05 [variable]](#layout-05-variable)
-  - [✅layout-06 [variable]](#layout-06-variable)
-  - [✅layout-07 [variable]](#layout-07-variable)
-  - [✅carbon--fluid-spacing-01 [variable]](#carbon--fluid-spacing-01-variable)
-  - [✅carbon--fluid-spacing-02 [variable]](#carbon--fluid-spacing-02-variable)
-  - [✅carbon--fluid-spacing-03 [variable]](#carbon--fluid-spacing-03-variable)
-  - [✅carbon--fluid-spacing-04 [variable]](#carbon--fluid-spacing-04-variable)
-  - [✅carbon--fluid-spacing [variable]](#carbon--fluid-spacing-variable)
-  - [✅fluid-spacing-01 [variable]](#fluid-spacing-01-variable)
-  - [✅fluid-spacing-02 [variable]](#fluid-spacing-02-variable)
-  - [✅fluid-spacing-03 [variable]](#fluid-spacing-03-variable)
-  - [✅fluid-spacing-04 [variable]](#fluid-spacing-04-variable)
   - [✅map-deep-get [function]](#map-deep-get-function)
   - [✅carbon--key-by-index [function]](#carbon--key-by-index-function)
   - [✅last-map-item [function]](#last-map-item-function)
@@ -115,7 +131,6 @@
   - [❌custom-property [mixin]](#custom-property-mixin)
   - [❌should-emit [function]](#should-emit-function)
   - [✅carbon--theme [mixin]](#carbon--theme-mixin)
-  - [✅carbon--theme--white [variable]](#carbon--theme--white-variable)
   - [✅carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
   - [✅carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
   - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
@@ -215,6 +230,36 @@
   - [✅display-02 [variable]](#display-02-variable)
   - [✅display-03 [variable]](#display-03-variable)
   - [✅display-04 [variable]](#display-04-variable)
+  - [✅spacing-01 [variable]](#spacing-01-variable)
+  - [✅spacing-02 [variable]](#spacing-02-variable)
+  - [✅spacing-03 [variable]](#spacing-03-variable)
+  - [✅spacing-04 [variable]](#spacing-04-variable)
+  - [✅spacing-05 [variable]](#spacing-05-variable)
+  - [✅spacing-06 [variable]](#spacing-06-variable)
+  - [✅spacing-07 [variable]](#spacing-07-variable)
+  - [✅spacing-08 [variable]](#spacing-08-variable)
+  - [✅spacing-09 [variable]](#spacing-09-variable)
+  - [✅spacing-10 [variable]](#spacing-10-variable)
+  - [✅spacing-11 [variable]](#spacing-11-variable)
+  - [✅spacing-12 [variable]](#spacing-12-variable)
+  - [✅fluid-spacing-01 [variable]](#fluid-spacing-01-variable)
+  - [✅fluid-spacing-02 [variable]](#fluid-spacing-02-variable)
+  - [✅fluid-spacing-03 [variable]](#fluid-spacing-03-variable)
+  - [✅fluid-spacing-04 [variable]](#fluid-spacing-04-variable)
+  - [✅layout-01 [variable]](#layout-01-variable)
+  - [✅layout-02 [variable]](#layout-02-variable)
+  - [✅layout-03 [variable]](#layout-03-variable)
+  - [✅layout-04 [variable]](#layout-04-variable)
+  - [✅layout-05 [variable]](#layout-05-variable)
+  - [✅layout-06 [variable]](#layout-06-variable)
+  - [✅layout-07 [variable]](#layout-07-variable)
+  - [✅container-01 [variable]](#container-01-variable)
+  - [✅container-02 [variable]](#container-02-variable)
+  - [✅container-03 [variable]](#container-03-variable)
+  - [✅container-04 [variable]](#container-04-variable)
+  - [✅container-05 [variable]](#container-05-variable)
+  - [✅icon-size-01 [variable]](#icon-size-01-variable)
+  - [✅icon-size-02 [variable]](#icon-size-02-variable)
 - [@carbon/type](#carbontype)
   - [✅carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [✅carbon--font-families [variable]](#carbon--font-families-variable)
@@ -2292,6 +2337,191 @@ Generate a media query for a given breakpoint
   - [tabs [mixin]](#tabs-mixin)
   - [carbon-header [mixin]](#carbon-header-mixin)
 
+### ✅carbon--container-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--container-01: 1.5rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `container-01`
+
+### ✅carbon--container-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--container-02: 2rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `container-02`
+
+### ✅carbon--container-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--container-03: 2.5rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `container-03`
+
+### ✅carbon--container-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--container-04: 3rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `container-04`
+
+### ✅carbon--container-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--container-05: 4rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `container-05`
+
+### ✅carbon--container [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--container: (
+  $carbon--container-01,
+  $carbon--container-02,
+  $carbon--container-03,
+  $carbon--container-04,
+  $carbon--container-05
+);
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `List`
+
+### ✅container-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-01: $carbon--container-01;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--container-01`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅container-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-02: $carbon--container-02;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--container-02`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅container-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-03: $carbon--container-03;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--container-03`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅container-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-04: $carbon--container-04;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--container-04`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅container-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-05: $carbon--container-05;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--container-05`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
 ### ✅carbon--base-font-size [variable]
 
 Default font size
@@ -2365,6 +2595,237 @@ Convert a given px unit to a em unit
 - **Returns**: `Number` Number with em unit
 - **Requires**:
   - [carbon--base-font-size [variable]](#carbon--base-font-size-variable)
+
+### ✅carbon--fluid-spacing-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--fluid-spacing-01: 0;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `fluid-spacing-01`
+
+### ✅carbon--fluid-spacing-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--fluid-spacing-02: 2vw;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `fluid-spacing-02`
+
+### ✅carbon--fluid-spacing-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--fluid-spacing-03: 5vw;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `fluid-spacing-03`
+
+### ✅carbon--fluid-spacing-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--fluid-spacing-04: 10vw;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `fluid-spacing-04`
+
+### ✅carbon--fluid-spacing [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--fluid-spacing: (
+  $carbon--fluid-spacing-01,
+  $carbon--fluid-spacing-02,
+  $carbon--fluid-spacing-03,
+  $carbon--fluid-spacing-04
+);
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `List`
+
+### ✅fluid-spacing-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-01: $carbon--fluid-spacing-01;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--fluid-spacing-01`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅fluid-spacing-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-02: $carbon--fluid-spacing-02;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--fluid-spacing-02`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅fluid-spacing-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-03: $carbon--fluid-spacing-03;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--fluid-spacing-03`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅fluid-spacing-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-04: $carbon--fluid-spacing-04;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--fluid-spacing-04`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅carbon--icon-size-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--icon-size-01: 1rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `icon-size-01`
+
+### ✅carbon--icon-size-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--icon-size-02: 1.25rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `icon-size-02`
+
+### ✅carbon--icon-size [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--icon-size: ($carbon--icon-size-01, $carbon--icon-size-02);
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `List`
+
+### ✅icon-size-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$icon-size-01: $carbon--icon-size-01;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--icon-size-01`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅icon-size-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$icon-size-02: $carbon--icon-size-02;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--icon-size-02`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--get-column-width [function]
 
@@ -2497,6 +2958,264 @@ Get the value of a key height step at a given breakpoint
 - **Requires**:
   - [carbon--key-height-scales [variable]](#carbon--key-height-scales-variable)
 
+### ✅carbon--layout-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--layout-01: 1rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `layout-01`
+
+### ✅carbon--layout-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--layout-02: 1.5rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `layout-02`
+
+### ✅carbon--layout-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--layout-03: 2rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `layout-03`
+
+### ✅carbon--layout-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--layout-04: 3rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `layout-04`
+
+### ✅carbon--layout-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--layout-05: 4rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `layout-05`
+
+### ✅carbon--layout-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--layout-06: 6rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `layout-06`
+
+### ✅carbon--layout-07 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--layout-07: 10rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Aliased**:
+  - `layout-07`
+
+### ✅carbon--layout [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--layout: (
+  $carbon--layout-01,
+  $carbon--layout-02,
+  $carbon--layout-03,
+  $carbon--layout-04,
+  $carbon--layout-05,
+  $carbon--layout-06,
+  $carbon--layout-07
+);
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `List`
+
+### ✅layout-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-01: $carbon--layout-01;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--layout-01`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-sort [mixin]](#data-table-sort-mixin)
+
+### ✅layout-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-02: $carbon--layout-02;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--layout-02`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅layout-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-03: $carbon--layout-03;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--layout-03`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅layout-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-04: $carbon--layout-04;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--layout-04`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
+  - [data-table-sort [mixin]](#data-table-sort-mixin)
+
+### ✅layout-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-05: $carbon--layout-05;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--layout-05`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅layout-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-06: $carbon--layout-06;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--layout-06`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅layout-07 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-07: $carbon--layout-07;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Alias**: `carbon--layout-07`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
 ### ✅carbon--mini-unit-size [variable]
 
 Default mini-unit value
@@ -2550,13 +3269,11 @@ Get the value of the corresponding number of units
 
 ### ✅carbon--spacing-01 [variable]
 
-0.125rem (2px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-01: carbon--mini-units(0.25);
+$carbon--spacing-01: 0.125rem;
 ```
 
 </details>
@@ -2572,13 +3289,11 @@ $carbon--spacing-01: carbon--mini-units(0.25);
 
 ### ✅carbon--spacing-02 [variable]
 
-0.25rem (4px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-02: carbon--mini-units(0.5);
+$carbon--spacing-02: 0.25rem;
 ```
 
 </details>
@@ -2591,6 +3306,7 @@ $carbon--spacing-02: carbon--mini-units(0.5);
   - [checkbox [mixin]](#checkbox-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [form [mixin]](#form-mixin)
+  - [lists [mixin]](#lists-mixin)
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -2601,13 +3317,11 @@ $carbon--spacing-02: carbon--mini-units(0.5);
 
 ### ✅carbon--spacing-03 [variable]
 
-0.5rem (8px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-03: carbon--mini-units(1);
+$carbon--spacing-03: 0.5rem;
 ```
 
 </details>
@@ -2623,7 +3337,6 @@ $carbon--spacing-03: carbon--mini-units(1);
   - [date-picker [mixin]](#date-picker-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
-  - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -2632,7 +3345,6 @@ $carbon--spacing-03: carbon--mini-units(1);
   - [radio-button [mixin]](#radio-button-mixin)
   - [select [mixin]](#select-mixin)
   - [padding-th [mixin]](#padding-th-mixin)
-  - [tabs [mixin]](#tabs-mixin)
   - [tags [mixin]](#tags-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
@@ -2640,13 +3352,11 @@ $carbon--spacing-03: carbon--mini-units(1);
 
 ### ✅carbon--spacing-04 [variable]
 
-0.75rem (12px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-04: carbon--mini-units(1.5);
+$carbon--spacing-04: 0.75rem;
 ```
 
 </details>
@@ -2658,21 +3368,20 @@ $carbon--spacing-04: carbon--mini-units(1.5);
 - **Used by**:
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
+  - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [tabs [mixin]](#tabs-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
 
 ### ✅carbon--spacing-05 [variable]
 
-1rem (16px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-05: carbon--mini-units(2);
+$carbon--spacing-05: 1rem;
 ```
 
 </details>
@@ -2688,6 +3397,7 @@ $carbon--spacing-05: carbon--mini-units(2);
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
+  - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -2702,21 +3412,19 @@ $carbon--spacing-05: carbon--mini-units(2);
   - [slider [mixin]](#slider-mixin)
   - [padding-th [mixin]](#padding-th-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
-  - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [tile [mixin]](#tile-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅carbon--spacing-06 [variable]
-
-1.5rem (24px) spacing with default mini unit
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-06: carbon--mini-units(3);
+$carbon--spacing-06: 1.5rem;
 ```
 
 </details>
@@ -2728,19 +3436,18 @@ $carbon--spacing-06: carbon--mini-units(3);
 - **Used by**:
   - [accordion [mixin]](#accordion-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
+  - [lists [mixin]](#lists-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
 
 ### ✅carbon--spacing-07 [variable]
 
-2rem (32px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-07: carbon--mini-units(4);
+$carbon--spacing-07: 2rem;
 ```
 
 </details>
@@ -2753,20 +3460,17 @@ $carbon--spacing-07: carbon--mini-units(4);
   - [snippet [mixin]](#snippet-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
-  - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅carbon--spacing-08 [variable]
 
-2.5rem (40px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-08: carbon--mini-units(5);
+$carbon--spacing-08: 2.5rem;
 ```
 
 </details>
@@ -2784,13 +3488,11 @@ $carbon--spacing-08: carbon--mini-units(5);
 
 ### ✅carbon--spacing-09 [variable]
 
-3rem (48px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-09: carbon--mini-units(6);
+$carbon--spacing-09: 3rem;
 ```
 
 </details>
@@ -2808,13 +3510,11 @@ $carbon--spacing-09: carbon--mini-units(6);
 
 ### ✅carbon--spacing-10 [variable]
 
-4rem (64px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-10: carbon--mini-units(8);
+$carbon--spacing-10: 4rem;
 ```
 
 </details>
@@ -2826,13 +3526,11 @@ $carbon--spacing-10: carbon--mini-units(8);
 
 ### ✅carbon--spacing-11 [variable]
 
-5rem (80px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-11: carbon--mini-units(10);
+$carbon--spacing-11: 5rem;
 ```
 
 </details>
@@ -2844,13 +3542,11 @@ $carbon--spacing-11: carbon--mini-units(10);
 
 ### ✅carbon--spacing-12 [variable]
 
-6rem (96px) spacing with default mini unit
-
 <details>
 <summary>Source code</summary>
 
 ```scss
-$carbon--spacing-12: carbon--mini-units(12);
+$carbon--spacing-12: 6rem;
 ```
 
 </details>
@@ -2861,8 +3557,6 @@ $carbon--spacing-12: carbon--mini-units(12);
   - `spacing-12`
 
 ### ✅carbon--spacing [variable]
-
-All spacing increments in a map
 
 <details>
 <summary>Source code</summary>
@@ -2887,7 +3581,7 @@ $carbon--spacing: (
 </details>
 
 - **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Map`
+- **Type**: `List`
 
 ### ✅spacing-01 [variable]
 
@@ -2904,6 +3598,7 @@ $spacing-01: $carbon--spacing-01;
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-01`
 - **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
 
 ### ✅spacing-02 [variable]
@@ -2920,6 +3615,8 @@ $spacing-02: $carbon--spacing-02;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-02`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-03 [variable]
 
@@ -2936,10 +3633,12 @@ $spacing-03: $carbon--spacing-03;
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-03`
 - **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
@@ -2958,8 +3657,10 @@ $spacing-04: $carbon--spacing-04;
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-04`
 - **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
+  - [tabs [mixin]](#tabs-mixin)
 
 ### ✅spacing-05 [variable]
 
@@ -2976,9 +3677,11 @@ $spacing-05: $carbon--spacing-05;
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-05`
 - **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ### ✅spacing-06 [variable]
@@ -2996,6 +3699,7 @@ $spacing-06: $carbon--spacing-06;
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-06`
 - **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
 
 ### ✅spacing-07 [variable]
@@ -3013,6 +3717,7 @@ $spacing-07: $carbon--spacing-07;
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-07`
 - **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ### ✅spacing-08 [variable]
@@ -3029,6 +3734,8 @@ $spacing-08: $carbon--spacing-08;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-08`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-09 [variable]
 
@@ -3045,6 +3752,7 @@ $spacing-09: $carbon--spacing-09;
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-09`
 - **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅spacing-10 [variable]
@@ -3061,6 +3769,8 @@ $spacing-10: $carbon--spacing-10;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-10`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-11 [variable]
 
@@ -3076,6 +3786,8 @@ $spacing-11: $carbon--spacing-11;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-11`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-12 [variable]
 
@@ -3091,421 +3803,8 @@ $spacing-12: $carbon--spacing-12;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-12`
-
-### ✅carbon--layout-01 [variable]
-
-1rem (16px) layout with default mini unit
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--layout-01: carbon--mini-units(2);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `layout-01`
-
-### ✅carbon--layout-02 [variable]
-
-1.5rem (24px) layout with default mini unit
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--layout-02: carbon--mini-units(3);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `layout-02`
-
-### ✅carbon--layout-03 [variable]
-
-2rem (32px) layout with default mini unit
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--layout-03: carbon--mini-units(4);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `layout-03`
-
-### ✅carbon--layout-04 [variable]
-
-3rem (48px) layout with default mini unit
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--layout-04: carbon--mini-units(6);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `layout-04`
-
-### ✅carbon--layout-05 [variable]
-
-4rem (64px) layout with default mini unit
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--layout-05: carbon--mini-units(8);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `layout-05`
-
-### ✅carbon--layout-06 [variable]
-
-4rem (96px) layout with default mini unit
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--layout-06: carbon--mini-units(12);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `layout-06`
-
-### ✅carbon--layout-07 [variable]
-
-10rem (160px) layout with default mini unit
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--layout-07: carbon--mini-units(20);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `layout-07`
-
-### ✅carbon--layout [variable]
-
-All layout increments in a map
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--layout: (
-  $carbon--layout-01,
-  $carbon--layout-02,
-  $carbon--layout-03,
-  $carbon--layout-04,
-  $carbon--layout-05,
-  $carbon--layout-06,
-  $carbon--layout-07
-);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Map`
-
-### ✅layout-01 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$layout-01: $carbon--layout-01;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--layout-01`
 - **Used by**:
-  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
-  - [data-table-sort [mixin]](#data-table-sort-mixin)
-
-### ✅layout-02 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$layout-02: $carbon--layout-02;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--layout-02`
-
-### ✅layout-03 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$layout-03: $carbon--layout-03;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--layout-03`
-
-### ✅layout-04 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$layout-04: $carbon--layout-04;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--layout-04`
-- **Used by**:
-  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
-  - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-sort [mixin]](#data-table-sort-mixin)
-
-### ✅layout-05 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$layout-05: $carbon--layout-05;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--layout-05`
-
-### ✅layout-06 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$layout-06: $carbon--layout-06;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--layout-06`
-
-### ✅layout-07 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$layout-07: $carbon--layout-07;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--layout-07`
-
-### ✅carbon--fluid-spacing-01 [variable]
-
-0vw fluid spacing
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--fluid-spacing-01: 0;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `fluid-spacing-01`
-
-### ✅carbon--fluid-spacing-02 [variable]
-
-2vw fluid spacing
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--fluid-spacing-02: 2vw;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `fluid-spacing-02`
-
-### ✅carbon--fluid-spacing-03 [variable]
-
-5vw fluid spacing
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--fluid-spacing-03: 5vw;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `fluid-spacing-03`
-
-### ✅carbon--fluid-spacing-04 [variable]
-
-10vw fluid spacing
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--fluid-spacing-04: 10vw;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Aliased**:
-  - `fluid-spacing-04`
-
-### ✅carbon--fluid-spacing [variable]
-
-All fluid spacing increments in a map
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--fluid-spacing: (
-  $carbon--fluid-spacing-01,
-  $carbon--fluid-spacing-02,
-  $carbon--fluid-spacing-03,
-  $carbon--fluid-spacing-04
-);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Map`
-
-### ✅fluid-spacing-01 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$fluid-spacing-01: $carbon--fluid-spacing-01;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--fluid-spacing-01`
-
-### ✅fluid-spacing-02 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$fluid-spacing-02: $carbon--fluid-spacing-02;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--fluid-spacing-02`
-
-### ✅fluid-spacing-03 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$fluid-spacing-03: $carbon--fluid-spacing-03;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--fluid-spacing-03`
-
-### ✅fluid-spacing-04 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$fluid-spacing-04: $carbon--fluid-spacing-04;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Alias**: `carbon--fluid-spacing-04`
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅map-deep-get [function]
 
@@ -3859,6 +4158,36 @@ Define theme variables from a map of tokens
   $display-02: map-get($theme, 'display-02') !global;
   $display-03: map-get($theme, 'display-03') !global;
   $display-04: map-get($theme, 'display-04') !global;
+  $spacing-01: map-get($theme, 'spacing-01') !global;
+  $spacing-02: map-get($theme, 'spacing-02') !global;
+  $spacing-03: map-get($theme, 'spacing-03') !global;
+  $spacing-04: map-get($theme, 'spacing-04') !global;
+  $spacing-05: map-get($theme, 'spacing-05') !global;
+  $spacing-06: map-get($theme, 'spacing-06') !global;
+  $spacing-07: map-get($theme, 'spacing-07') !global;
+  $spacing-08: map-get($theme, 'spacing-08') !global;
+  $spacing-09: map-get($theme, 'spacing-09') !global;
+  $spacing-10: map-get($theme, 'spacing-10') !global;
+  $spacing-11: map-get($theme, 'spacing-11') !global;
+  $spacing-12: map-get($theme, 'spacing-12') !global;
+  $fluid-spacing-01: map-get($theme, 'fluid-spacing-01') !global;
+  $fluid-spacing-02: map-get($theme, 'fluid-spacing-02') !global;
+  $fluid-spacing-03: map-get($theme, 'fluid-spacing-03') !global;
+  $fluid-spacing-04: map-get($theme, 'fluid-spacing-04') !global;
+  $layout-01: map-get($theme, 'layout-01') !global;
+  $layout-02: map-get($theme, 'layout-02') !global;
+  $layout-03: map-get($theme, 'layout-03') !global;
+  $layout-04: map-get($theme, 'layout-04') !global;
+  $layout-05: map-get($theme, 'layout-05') !global;
+  $layout-06: map-get($theme, 'layout-06') !global;
+  $layout-07: map-get($theme, 'layout-07') !global;
+  $container-01: map-get($theme, 'container-01') !global;
+  $container-02: map-get($theme, 'container-02') !global;
+  $container-03: map-get($theme, 'container-03') !global;
+  $container-04: map-get($theme, 'container-04') !global;
+  $container-05: map-get($theme, 'container-05') !global;
+  $icon-size-01: map-get($theme, 'icon-size-01') !global;
+  $icon-size-02: map-get($theme, 'icon-size-02') !global;
 
   @if global-variable-exists('feature-flags') and
     map-get($feature-flags, 'enable-css-custom-properties')
@@ -4114,6 +4443,126 @@ Define theme variables from a map of tokens
     $hover-field: var(
       --#{$custom-property-prefix}-hover-field,
       map-get($theme, 'hover-field')
+    ) !global;
+    $spacing-01: var(
+      --#{$custom-property-prefix}-spacing-01,
+      map-get($theme, 'spacing-01')
+    ) !global;
+    $spacing-02: var(
+      --#{$custom-property-prefix}-spacing-02,
+      map-get($theme, 'spacing-02')
+    ) !global;
+    $spacing-03: var(
+      --#{$custom-property-prefix}-spacing-03,
+      map-get($theme, 'spacing-03')
+    ) !global;
+    $spacing-04: var(
+      --#{$custom-property-prefix}-spacing-04,
+      map-get($theme, 'spacing-04')
+    ) !global;
+    $spacing-05: var(
+      --#{$custom-property-prefix}-spacing-05,
+      map-get($theme, 'spacing-05')
+    ) !global;
+    $spacing-06: var(
+      --#{$custom-property-prefix}-spacing-06,
+      map-get($theme, 'spacing-06')
+    ) !global;
+    $spacing-07: var(
+      --#{$custom-property-prefix}-spacing-07,
+      map-get($theme, 'spacing-07')
+    ) !global;
+    $spacing-08: var(
+      --#{$custom-property-prefix}-spacing-08,
+      map-get($theme, 'spacing-08')
+    ) !global;
+    $spacing-09: var(
+      --#{$custom-property-prefix}-spacing-09,
+      map-get($theme, 'spacing-09')
+    ) !global;
+    $spacing-10: var(
+      --#{$custom-property-prefix}-spacing-10,
+      map-get($theme, 'spacing-10')
+    ) !global;
+    $spacing-11: var(
+      --#{$custom-property-prefix}-spacing-11,
+      map-get($theme, 'spacing-11')
+    ) !global;
+    $spacing-12: var(
+      --#{$custom-property-prefix}-spacing-12,
+      map-get($theme, 'spacing-12')
+    ) !global;
+    $fluid-spacing-01: var(
+      --#{$custom-property-prefix}-fluid-spacing-01,
+      map-get($theme, 'fluid-spacing-01')
+    ) !global;
+    $fluid-spacing-02: var(
+      --#{$custom-property-prefix}-fluid-spacing-02,
+      map-get($theme, 'fluid-spacing-02')
+    ) !global;
+    $fluid-spacing-03: var(
+      --#{$custom-property-prefix}-fluid-spacing-03,
+      map-get($theme, 'fluid-spacing-03')
+    ) !global;
+    $fluid-spacing-04: var(
+      --#{$custom-property-prefix}-fluid-spacing-04,
+      map-get($theme, 'fluid-spacing-04')
+    ) !global;
+    $layout-01: var(
+      --#{$custom-property-prefix}-layout-01,
+      map-get($theme, 'layout-01')
+    ) !global;
+    $layout-02: var(
+      --#{$custom-property-prefix}-layout-02,
+      map-get($theme, 'layout-02')
+    ) !global;
+    $layout-03: var(
+      --#{$custom-property-prefix}-layout-03,
+      map-get($theme, 'layout-03')
+    ) !global;
+    $layout-04: var(
+      --#{$custom-property-prefix}-layout-04,
+      map-get($theme, 'layout-04')
+    ) !global;
+    $layout-05: var(
+      --#{$custom-property-prefix}-layout-05,
+      map-get($theme, 'layout-05')
+    ) !global;
+    $layout-06: var(
+      --#{$custom-property-prefix}-layout-06,
+      map-get($theme, 'layout-06')
+    ) !global;
+    $layout-07: var(
+      --#{$custom-property-prefix}-layout-07,
+      map-get($theme, 'layout-07')
+    ) !global;
+    $container-01: var(
+      --#{$custom-property-prefix}-container-01,
+      map-get($theme, 'container-01')
+    ) !global;
+    $container-02: var(
+      --#{$custom-property-prefix}-container-02,
+      map-get($theme, 'container-02')
+    ) !global;
+    $container-03: var(
+      --#{$custom-property-prefix}-container-03,
+      map-get($theme, 'container-03')
+    ) !global;
+    $container-04: var(
+      --#{$custom-property-prefix}-container-04,
+      map-get($theme, 'container-04')
+    ) !global;
+    $container-05: var(
+      --#{$custom-property-prefix}-container-05,
+      map-get($theme, 'container-05')
+    ) !global;
+    $icon-size-01: var(
+      --#{$custom-property-prefix}-icon-size-01,
+      map-get($theme, 'icon-size-01')
+    ) !global;
+    $icon-size-02: var(
+      --#{$custom-property-prefix}-icon-size-02,
+      map-get($theme, 'icon-size-02')
     ) !global;
   }
   @if $emit-custom-properties == true {
@@ -4750,6 +5199,162 @@ Define theme variables from a map of tokens
     @if should-emit($theme, $carbon--theme, 'display-04', $emit-difference) {
       @include custom-property('display-04', map-get($theme, 'display-04'));
     }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-01', $emit-difference) {
+      @include custom-property('spacing-01', map-get($theme, 'spacing-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-02', $emit-difference) {
+      @include custom-property('spacing-02', map-get($theme, 'spacing-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-03', $emit-difference) {
+      @include custom-property('spacing-03', map-get($theme, 'spacing-03'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-04', $emit-difference) {
+      @include custom-property('spacing-04', map-get($theme, 'spacing-04'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-05', $emit-difference) {
+      @include custom-property('spacing-05', map-get($theme, 'spacing-05'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-06', $emit-difference) {
+      @include custom-property('spacing-06', map-get($theme, 'spacing-06'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-07', $emit-difference) {
+      @include custom-property('spacing-07', map-get($theme, 'spacing-07'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-08', $emit-difference) {
+      @include custom-property('spacing-08', map-get($theme, 'spacing-08'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-09', $emit-difference) {
+      @include custom-property('spacing-09', map-get($theme, 'spacing-09'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-10', $emit-difference) {
+      @include custom-property('spacing-10', map-get($theme, 'spacing-10'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-11', $emit-difference) {
+      @include custom-property('spacing-11', map-get($theme, 'spacing-11'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-12', $emit-difference) {
+      @include custom-property('spacing-12', map-get($theme, 'spacing-12'));
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'fluid-spacing-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-spacing-01',
+        map-get($theme, 'fluid-spacing-01')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'fluid-spacing-02',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-spacing-02',
+        map-get($theme, 'fluid-spacing-02')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'fluid-spacing-03',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-spacing-03',
+        map-get($theme, 'fluid-spacing-03')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'fluid-spacing-04',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-spacing-04',
+        map-get($theme, 'fluid-spacing-04')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'layout-01', $emit-difference) {
+      @include custom-property('layout-01', map-get($theme, 'layout-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'layout-02', $emit-difference) {
+      @include custom-property('layout-02', map-get($theme, 'layout-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'layout-03', $emit-difference) {
+      @include custom-property('layout-03', map-get($theme, 'layout-03'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'layout-04', $emit-difference) {
+      @include custom-property('layout-04', map-get($theme, 'layout-04'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'layout-05', $emit-difference) {
+      @include custom-property('layout-05', map-get($theme, 'layout-05'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'layout-06', $emit-difference) {
+      @include custom-property('layout-06', map-get($theme, 'layout-06'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'layout-07', $emit-difference) {
+      @include custom-property('layout-07', map-get($theme, 'layout-07'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'container-01', $emit-difference) {
+      @include custom-property('container-01', map-get($theme, 'container-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'container-02', $emit-difference) {
+      @include custom-property('container-02', map-get($theme, 'container-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'container-03', $emit-difference) {
+      @include custom-property('container-03', map-get($theme, 'container-03'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'container-04', $emit-difference) {
+      @include custom-property('container-04', map-get($theme, 'container-04'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'container-05', $emit-difference) {
+      @include custom-property('container-05', map-get($theme, 'container-05'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'icon-size-01', $emit-difference) {
+      @include custom-property('icon-size-01', map-get($theme, 'icon-size-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'icon-size-02', $emit-difference) {
+      @include custom-property('icon-size-02', map-get($theme, 'icon-size-02'));
+    }
   }
 
   @content;
@@ -4893,471 +5498,38 @@ Define theme variables from a map of tokens
   - [display-02 [variable]](#display-02-variable)
   - [display-03 [variable]](#display-03-variable)
   - [display-04 [variable]](#display-04-variable)
+  - [spacing-01 [variable]](#spacing-01-variable)
+  - [spacing-02 [variable]](#spacing-02-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
+  - [spacing-04 [variable]](#spacing-04-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
+  - [spacing-06 [variable]](#spacing-06-variable)
+  - [spacing-07 [variable]](#spacing-07-variable)
+  - [spacing-08 [variable]](#spacing-08-variable)
+  - [spacing-09 [variable]](#spacing-09-variable)
+  - [spacing-10 [variable]](#spacing-10-variable)
+  - [spacing-11 [variable]](#spacing-11-variable)
+  - [spacing-12 [variable]](#spacing-12-variable)
+  - [fluid-spacing-01 [variable]](#fluid-spacing-01-variable)
+  - [fluid-spacing-02 [variable]](#fluid-spacing-02-variable)
+  - [fluid-spacing-03 [variable]](#fluid-spacing-03-variable)
+  - [fluid-spacing-04 [variable]](#fluid-spacing-04-variable)
+  - [layout-01 [variable]](#layout-01-variable)
+  - [layout-02 [variable]](#layout-02-variable)
+  - [layout-03 [variable]](#layout-03-variable)
+  - [layout-04 [variable]](#layout-04-variable)
+  - [layout-05 [variable]](#layout-05-variable)
+  - [layout-06 [variable]](#layout-06-variable)
+  - [layout-07 [variable]](#layout-07-variable)
+  - [container-01 [variable]](#container-01-variable)
+  - [container-02 [variable]](#container-02-variable)
+  - [container-03 [variable]](#container-03-variable)
+  - [container-04 [variable]](#container-04-variable)
+  - [container-05 [variable]](#container-05-variable)
+  - [icon-size-01 [variable]](#icon-size-01-variable)
+  - [icon-size-02 [variable]](#icon-size-02-variable)
   - [custom-property-prefix [variable]](#custom-property-prefix-variable)
   - [carbon--theme [variable]](#carbon--theme-variable)
-
-### ✅carbon--theme--white [variable]
-
-Carbon's white color theme
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--theme--white: (
-  interactive-01: #0f62fe,
-  interactive-02: #393939,
-  interactive-03: #0f62fe,
-  interactive-04: #0f62fe,
-  ui-background: #ffffff,
-  ui-01: #f4f4f4,
-  ui-02: #ffffff,
-  ui-03: #e0e0e0,
-  ui-04: #8d8d8d,
-  ui-05: #161616,
-  text-01: #161616,
-  text-02: #393939,
-  text-03: #a8a8a8,
-  text-04: #ffffff,
-  text-05: #6f6f6f,
-  icon-01: #161616,
-  icon-02: #525252,
-  icon-03: #ffffff,
-  link-01: #0f62fe,
-  inverse-link: #78a9ff,
-  field-01: #f4f4f4,
-  field-02: #ffffff,
-  inverse-01: #ffffff,
-  inverse-02: #393939,
-  support-01: #da1e28,
-  support-02: #24a148,
-  support-03: #f1c21b,
-  support-04: #0043ce,
-  inverse-support-01: #fa4d56,
-  inverse-support-02: #42be65,
-  inverse-support-03: #f1c21b,
-  inverse-support-04: #4589ff,
-  overlay-01: rgba(22, 22, 22, 0.5),
-  danger: #da1e28,
-  focus: #0f62fe,
-  inverse-focus-ui: #ffffff,
-  hover-primary: #0353e9,
-  active-primary: #002d9c,
-  hover-primary-text: #0043ce,
-  hover-secondary: #4c4c4c,
-  active-secondary: #6f6f6f,
-  hover-tertiary: #0353e9,
-  active-tertiary: #002d9c,
-  hover-ui: #e5e5e5,
-  active-ui: #c6c6c6,
-  selected-ui: #e0e0e0,
-  inverse-hover-ui: #4c4c4c,
-  hover-selected-ui: #cacaca,
-  hover-danger: #ba1b23,
-  active-danger: #750e13,
-  hover-row: #e5e5e5,
-  visited-link: #8a3ffc,
-  disabled-01: #f4f4f4,
-  disabled-02: #c6c6c6,
-  disabled-03: #8d8d8d,
-  highlight: #d0e2ff,
-  skeleton-01: #e5e5e5,
-  skeleton-02: #c6c6c6,
-  brand-01: #0f62fe,
-  brand-02: #393939,
-  brand-03: #0f62fe,
-  active-01: #c6c6c6,
-  hover-field: #e5e5e5,
-  caption-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  label-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  helper-text-01: (
-    font-size: 0.75rem,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  body-short-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  body-long-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.16px,
-  ),
-  body-short-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  body-long-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.5rem,
-    letter-spacing: 0,
-  ),
-  code-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  code-02: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.32px,
-  ),
-  heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  productive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 1.625rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 2.25rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 2.5rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-06: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 3.125rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-07: (
-    font-size: 3.375rem,
-    font-weight: 300,
-    line-height: 4rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  expressive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.25rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 1.5rem,
-      ),
-    ),
-  ),
-  expressive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 129%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.75rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 2rem,
-      ),
-    ),
-  ),
-  expressive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 300,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 300,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 300,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 300,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-heading-06: (
-    font-size: 2rem,
-    font-weight: 600,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 600,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 600,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 600,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 600,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-paragraph-01: (
-    font-size: 1.5rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    lg: (
-      font-size: 1.75rem,
-      line-height: 129%,
-    ),
-    max: (
-      font-size: 2rem,
-      line-height: 125%,
-    ),
-  ),
-  quotation-01: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 1.25rem,
-        font-weight: 400,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 1.5rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 1.75rem,
-        font-weight: 400,
-        line-height: 129%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 2rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  quotation-02: (
-    font-size: 2rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        line-height: 122%,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        line-height: 119%,
-      ),
-      xlg: (
-        font-size: 3rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 3.75rem,
-      ),
-    ),
-  ),
-  display-01: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-02: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 116%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-03: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-  display-04: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-        letter-spacing: -0.64px,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Map`
-- **Aliased**:
-  - `carbon--theme`
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [toast-notifications [mixin]](#toast-notifications-mixin)
 
 ### ✅carbon--theme--g10 [variable]
 
@@ -5367,448 +5539,16 @@ Carbon's g10 color theme
 <summary>Source code</summary>
 
 ```scss
-$carbon--theme--g10: (
-  interactive-01: #0f62fe,
-  interactive-02: #393939,
-  interactive-03: #0f62fe,
-  interactive-04: #0f62fe,
-  ui-background: #f4f4f4,
-  ui-01: #ffffff,
-  ui-02: #f4f4f4,
-  ui-03: #e0e0e0,
-  ui-04: #8d8d8d,
-  ui-05: #161616,
-  text-01: #161616,
-  text-02: #393939,
-  text-03: #a8a8a8,
-  text-04: #ffffff,
-  text-05: #6f6f6f,
-  icon-01: #161616,
-  icon-02: #525252,
-  icon-03: #ffffff,
-  link-01: #0f62fe,
-  inverse-link: #78a9ff,
-  field-01: #ffffff,
-  field-02: #f4f4f4,
-  inverse-01: #ffffff,
-  inverse-02: #393939,
-  support-01: #da1e28,
-  support-02: #24a148,
-  support-03: #f1c21b,
-  support-04: #0043ce,
-  inverse-support-01: #fa4d56,
-  inverse-support-02: #42be65,
-  inverse-support-03: #f1c21b,
-  inverse-support-04: #4589ff,
-  overlay-01: rgba(22, 22, 22, 0.5),
-  danger: #da1e28,
-  focus: #0f62fe,
-  inverse-focus-ui: #ffffff,
-  hover-primary: #0353e9,
-  active-primary: #002d9c,
-  hover-primary-text: #0043ce,
-  hover-secondary: #4c4c4c,
-  active-secondary: #6f6f6f,
-  hover-tertiary: #0353e9,
-  active-tertiary: #002d9c,
-  hover-ui: #e5e5e5,
-  active-ui: #c6c6c6,
-  selected-ui: #e0e0e0,
-  inverse-hover-ui: #4c4c4c,
-  hover-selected-ui: #cacaca,
-  hover-danger: #ba1b23,
-  active-danger: #750e13,
-  hover-row: #e5e5e5,
-  visited-link: #8a3ffc,
-  disabled-01: #ffffff,
-  disabled-02: #c6c6c6,
-  disabled-03: #8d8d8d,
-  highlight: #d0e2ff,
-  skeleton-01: #e5e5e5,
-  skeleton-02: #c6c6c6,
-  brand-01: #0f62fe,
-  brand-02: #393939,
-  brand-03: #0f62fe,
-  active-01: #c6c6c6,
-  hover-field: #e5e5e5,
-  caption-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  label-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  helper-text-01: (
-    font-size: 0.75rem,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  body-short-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  body-long-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.16px,
-  ),
-  body-short-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  body-long-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.5rem,
-    letter-spacing: 0,
-  ),
-  code-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  code-02: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.32px,
-  ),
-  heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  productive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 1.625rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 2.25rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 2.5rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-06: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 3.125rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-07: (
-    font-size: 3.375rem,
-    font-weight: 300,
-    line-height: 4rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  expressive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.25rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 1.5rem,
-      ),
-    ),
-  ),
-  expressive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 129%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.75rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 2rem,
-      ),
-    ),
-  ),
-  expressive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 300,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 300,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 300,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 300,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-heading-06: (
-    font-size: 2rem,
-    font-weight: 600,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 600,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 600,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 600,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 600,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-paragraph-01: (
-    font-size: 1.5rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    lg: (
-      font-size: 1.75rem,
-      line-height: 129%,
-    ),
-    max: (
-      font-size: 2rem,
-      line-height: 125%,
-    ),
-  ),
-  quotation-01: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 1.25rem,
-        font-weight: 400,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 1.5rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 1.75rem,
-        font-weight: 400,
-        line-height: 129%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 2rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  quotation-02: (
-    font-size: 2rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        line-height: 122%,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        line-height: 119%,
-      ),
-      xlg: (
-        font-size: 3rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 3.75rem,
-      ),
-    ),
-  ),
-  display-01: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-02: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 116%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-03: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-  display-04: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-        letter-spacing: -0.64px,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
+$carbon--theme--g10: map-merge(
+  $carbon--theme--white,
+  (
+    ui-background: #f4f4f4,
+    ui-01: #ffffff,
+    ui-02: #f4f4f4,
+    field-01: #ffffff,
+    field-02: #f4f4f4,
+    disabled-01: #ffffff,
+  )
 );
 ```
 
@@ -5825,448 +5565,60 @@ Carbon's g90 color theme
 <summary>Source code</summary>
 
 ```scss
-$carbon--theme--g90: (
-  interactive-01: #0f62fe,
-  interactive-02: #6f6f6f,
-  interactive-03: #ffffff,
-  interactive-04: #4589ff,
-  ui-background: #262626,
-  ui-01: #393939,
-  ui-02: #525252,
-  ui-03: #525252,
-  ui-04: #8d8d8d,
-  ui-05: #f4f4f4,
-  text-01: #f4f4f4,
-  text-02: #c6c6c6,
-  text-03: #6f6f6f,
-  text-04: #ffffff,
-  text-05: #8d8d8d,
-  icon-01: #f4f4f4,
-  icon-02: #c6c6c6,
-  icon-03: #ffffff,
-  link-01: #78a9ff,
-  inverse-link: #0f62fe,
-  field-01: #393939,
-  field-02: #525252,
-  inverse-01: #161616,
-  inverse-02: #f4f4f4,
-  support-01: #fa4d56,
-  support-02: #42be65,
-  support-03: #f1c21b,
-  support-04: #4589ff,
-  inverse-support-01: #da1e28,
-  inverse-support-02: #24a148,
-  inverse-support-03: #f1c21b,
-  inverse-support-04: #0f62fe,
-  overlay-01: rgba(22, 22, 22, 0.7),
-  danger: #da1e28,
-  focus: #ffffff,
-  inverse-focus-ui: #0f62fe,
-  hover-primary: #0353e9,
-  active-primary: #002d9c,
-  hover-primary-text: #a6c8ff,
-  hover-secondary: #606060,
-  active-secondary: #393939,
-  hover-tertiary: #f4f4f4,
-  active-tertiary: #c6c6c6,
-  hover-ui: #4c4c4c,
-  active-ui: #6f6f6f,
-  selected-ui: #525252,
-  inverse-hover-ui: #e5e5e5,
-  hover-selected-ui: #656565,
-  hover-danger: #ba1b23,
-  active-danger: #750e13,
-  hover-row: #4c4c4c,
-  visited-link: #be95ff,
-  disabled-01: #393939,
-  disabled-02: #6f6f6f,
-  disabled-03: #8d8d8d,
-  highlight: #0043ce,
-  skeleton-01: #353535,
-  skeleton-02: #525252,
-  brand-01: #0f62fe,
-  brand-02: #6f6f6f,
-  brand-03: #ffffff,
-  active-01: #6f6f6f,
-  hover-field: #4c4c4c,
-  caption-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  label-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  helper-text-01: (
-    font-size: 0.75rem,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  body-short-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  body-long-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.16px,
-  ),
-  body-short-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  body-long-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.5rem,
-    letter-spacing: 0,
-  ),
-  code-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  code-02: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.32px,
-  ),
-  heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  productive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 1.625rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 2.25rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 2.5rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-06: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 3.125rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-07: (
-    font-size: 3.375rem,
-    font-weight: 300,
-    line-height: 4rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  expressive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.25rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 1.5rem,
-      ),
-    ),
-  ),
-  expressive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 129%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.75rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 2rem,
-      ),
-    ),
-  ),
-  expressive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 300,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 300,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 300,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 300,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-heading-06: (
-    font-size: 2rem,
-    font-weight: 600,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 600,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 600,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 600,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 600,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-paragraph-01: (
-    font-size: 1.5rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    lg: (
-      font-size: 1.75rem,
-      line-height: 129%,
-    ),
-    max: (
-      font-size: 2rem,
-      line-height: 125%,
-    ),
-  ),
-  quotation-01: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 1.25rem,
-        font-weight: 400,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 1.5rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 1.75rem,
-        font-weight: 400,
-        line-height: 129%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 2rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  quotation-02: (
-    font-size: 2rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        line-height: 122%,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        line-height: 119%,
-      ),
-      xlg: (
-        font-size: 3rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 3.75rem,
-      ),
-    ),
-  ),
-  display-01: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-02: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 116%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-03: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-  display-04: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-        letter-spacing: -0.64px,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
+$carbon--theme--g90: map-merge(
+  $carbon--theme--white,
+  (
+    interactive-02: #6f6f6f,
+    interactive-03: #ffffff,
+    interactive-04: #4589ff,
+    ui-background: #262626,
+    ui-01: #393939,
+    ui-02: #525252,
+    ui-03: #525252,
+    ui-05: #f4f4f4,
+    text-01: #f4f4f4,
+    text-02: #c6c6c6,
+    text-03: #6f6f6f,
+    text-05: #8d8d8d,
+    icon-01: #f4f4f4,
+    icon-02: #c6c6c6,
+    link-01: #78a9ff,
+    inverse-link: #0f62fe,
+    field-01: #393939,
+    field-02: #525252,
+    inverse-01: #161616,
+    inverse-02: #f4f4f4,
+    support-01: #fa4d56,
+    support-02: #42be65,
+    support-04: #4589ff,
+    inverse-support-01: #da1e28,
+    inverse-support-02: #24a148,
+    inverse-support-04: #0f62fe,
+    overlay-01: rgba(22, 22, 22, 0.7),
+    focus: #ffffff,
+    inverse-focus-ui: #0f62fe,
+    hover-primary-text: #a6c8ff,
+    hover-secondary: #606060,
+    active-secondary: #393939,
+    hover-tertiary: #f4f4f4,
+    active-tertiary: #c6c6c6,
+    hover-ui: #4c4c4c,
+    active-ui: #6f6f6f,
+    selected-ui: #525252,
+    inverse-hover-ui: #e5e5e5,
+    hover-selected-ui: #656565,
+    hover-row: #4c4c4c,
+    visited-link: #be95ff,
+    disabled-01: #393939,
+    disabled-02: #6f6f6f,
+    highlight: #0043ce,
+    skeleton-01: #353535,
+    skeleton-02: #525252,
+    brand-02: #6f6f6f,
+    brand-03: #ffffff,
+    active-01: #6f6f6f,
+    hover-field: #4c4c4c,
+  )
 );
 ```
 
@@ -6283,448 +5635,62 @@ Carbon's g100 color theme
 <summary>Source code</summary>
 
 ```scss
-$carbon--theme--g100: (
-  interactive-01: #0f62fe,
-  interactive-02: #6f6f6f,
-  interactive-03: #ffffff,
-  interactive-04: #4589ff,
-  ui-background: #161616,
-  ui-01: #262626,
-  ui-02: #393939,
-  ui-03: #393939,
-  ui-04: #6f6f6f,
-  ui-05: #f4f4f4,
-  text-01: #f4f4f4,
-  text-02: #c6c6c6,
-  text-03: #6f6f6f,
-  text-04: #ffffff,
-  text-05: #8d8d8d,
-  icon-01: #f4f4f4,
-  icon-02: #c6c6c6,
-  icon-03: #ffffff,
-  link-01: #78a9ff,
-  inverse-link: #0f62fe,
-  field-01: #262626,
-  field-02: #393939,
-  inverse-01: #161616,
-  inverse-02: #f4f4f4,
-  support-01: #fa4d56,
-  support-02: #42be65,
-  support-03: #f1c21b,
-  support-04: #4589ff,
-  inverse-support-01: #da1e28,
-  inverse-support-02: #24a148,
-  inverse-support-03: #f1c21b,
-  inverse-support-04: #0f62fe,
-  overlay-01: rgba(22, 22, 22, 0.7),
-  danger: #da1e28,
-  focus: #ffffff,
-  inverse-focus-ui: #0f62fe,
-  hover-primary: #0353e9,
-  active-primary: #002d9c,
-  hover-primary-text: #a6c8ff,
-  hover-secondary: #606060,
-  active-secondary: #393939,
-  hover-tertiary: #f4f4f4,
-  active-tertiary: #c6c6c6,
-  hover-ui: #353535,
-  active-ui: #525252,
-  selected-ui: #393939,
-  inverse-hover-ui: #e5e5e5,
-  hover-selected-ui: #4c4c4c,
-  hover-danger: #ba1b23,
-  active-danger: #750e13,
-  hover-row: #353535,
-  visited-link: #be95ff,
-  disabled-01: #262626,
-  disabled-02: #525252,
-  disabled-03: #6f6f6f,
-  highlight: #002d9c,
-  skeleton-01: #353535,
-  skeleton-02: #393939,
-  brand-01: #0f62fe,
-  brand-02: #6f6f6f,
-  brand-03: #ffffff,
-  active-01: #525252,
-  hover-field: #353535,
-  caption-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  label-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  helper-text-01: (
-    font-size: 0.75rem,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  body-short-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  body-long-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.16px,
-  ),
-  body-short-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  body-long-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.5rem,
-    letter-spacing: 0,
-  ),
-  code-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  code-02: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.32px,
-  ),
-  heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  productive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 1.625rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 2.25rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 2.5rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-06: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 3.125rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-07: (
-    font-size: 3.375rem,
-    font-weight: 300,
-    line-height: 4rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  expressive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.25rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 1.5rem,
-      ),
-    ),
-  ),
-  expressive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 129%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.75rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 2rem,
-      ),
-    ),
-  ),
-  expressive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 300,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 300,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 300,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 300,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-heading-06: (
-    font-size: 2rem,
-    font-weight: 600,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 600,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 600,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 600,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 600,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-paragraph-01: (
-    font-size: 1.5rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    lg: (
-      font-size: 1.75rem,
-      line-height: 129%,
-    ),
-    max: (
-      font-size: 2rem,
-      line-height: 125%,
-    ),
-  ),
-  quotation-01: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 1.25rem,
-        font-weight: 400,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 1.5rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 1.75rem,
-        font-weight: 400,
-        line-height: 129%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 2rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  quotation-02: (
-    font-size: 2rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        line-height: 122%,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        line-height: 119%,
-      ),
-      xlg: (
-        font-size: 3rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 3.75rem,
-      ),
-    ),
-  ),
-  display-01: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-02: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 116%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-03: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-  display-04: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-        letter-spacing: -0.64px,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
+$carbon--theme--g100: map-merge(
+  $carbon--theme--white,
+  (
+    interactive-02: #6f6f6f,
+    interactive-03: #ffffff,
+    interactive-04: #4589ff,
+    ui-background: #161616,
+    ui-01: #262626,
+    ui-02: #393939,
+    ui-03: #393939,
+    ui-04: #6f6f6f,
+    ui-05: #f4f4f4,
+    text-01: #f4f4f4,
+    text-02: #c6c6c6,
+    text-03: #6f6f6f,
+    text-05: #8d8d8d,
+    icon-01: #f4f4f4,
+    icon-02: #c6c6c6,
+    link-01: #78a9ff,
+    inverse-link: #0f62fe,
+    field-01: #262626,
+    field-02: #393939,
+    inverse-01: #161616,
+    inverse-02: #f4f4f4,
+    support-01: #fa4d56,
+    support-02: #42be65,
+    support-04: #4589ff,
+    inverse-support-01: #da1e28,
+    inverse-support-02: #24a148,
+    inverse-support-04: #0f62fe,
+    overlay-01: rgba(22, 22, 22, 0.7),
+    focus: #ffffff,
+    inverse-focus-ui: #0f62fe,
+    hover-primary-text: #a6c8ff,
+    hover-secondary: #606060,
+    active-secondary: #393939,
+    hover-tertiary: #f4f4f4,
+    active-tertiary: #c6c6c6,
+    hover-ui: #353535,
+    active-ui: #525252,
+    selected-ui: #393939,
+    inverse-hover-ui: #e5e5e5,
+    hover-selected-ui: #4c4c4c,
+    hover-row: #353535,
+    visited-link: #be95ff,
+    disabled-01: #262626,
+    disabled-02: #525252,
+    disabled-03: #6f6f6f,
+    highlight: #002d9c,
+    skeleton-01: #353535,
+    skeleton-02: #393939,
+    brand-02: #6f6f6f,
+    brand-03: #ffffff,
+    active-01: #525252,
+    hover-field: #353535,
+  )
 );
 ```
 
@@ -6741,448 +5707,68 @@ Carbon's v9 color theme
 <summary>Source code</summary>
 
 ```scss
-$carbon--theme--v9: (
-  interactive-01: #3d70b2,
-  interactive-02: #5a6872,
-  interactive-03: #5a6872,
-  interactive-04: #3d70b2,
-  ui-background: #f4f7fb,
-  ui-01: #ffffff,
-  ui-02: #f4f7fb,
-  ui-03: #dfe3e6,
-  ui-04: #8897a2,
-  ui-05: #5a6872,
-  text-01: #152935,
-  text-02: #5a6872,
-  text-03: #cdd1d4,
-  text-04: #ffffff,
-  text-05: #5a6872,
-  icon-01: #3d70b2,
-  icon-02: #5a6872,
-  icon-03: #ffffff,
-  link-01: #3d70b2,
-  inverse-link: #5596e6,
-  field-01: #ffffff,
-  field-02: #f4f7fb,
-  inverse-01: #ffffff,
-  inverse-02: #272d33,
-  support-01: #e0182d,
-  support-02: #5aa700,
-  support-03: #efc100,
-  support-04: #5aaafa,
-  inverse-support-01: #ff5050,
-  inverse-support-02: #8cd211,
-  inverse-support-03: #fdd600,
-  inverse-support-04: #5aaafa,
-  overlay-01: rgba(223, 227, 230, 0.5),
-  danger: #da1e28,
-  focus: #3d70b2,
-  inverse-focus-ui: #3d70b2,
-  hover-primary: #30588c,
-  active-primary: #30588c,
-  hover-primary-text: #294c86,
-  hover-secondary: #4d5b65,
-  active-secondary: #414f59,
-  hover-tertiary: #5a6872,
-  active-tertiary: #414f59,
-  hover-ui: #eef4fc,
-  active-ui: #dfeafa,
-  selected-ui: #eef4fc,
-  inverse-hover-ui: #4c4c4c,
-  hover-selected-ui: #dfeafa,
-  hover-danger: #c70014,
-  active-danger: #ad1625,
-  hover-row: #eef4fc,
-  visited-link: #294c86,
-  disabled-01: #fafbfd,
-  disabled-02: #dfe3e6,
-  disabled-03: #cdd1d4,
-  highlight: #f4f7fb,
-  skeleton-01: rgba(61, 112, 178, 0.1),
-  skeleton-02: rgba(61, 112, 178, 0.1),
-  brand-01: #3d70b2,
-  brand-02: #5a6872,
-  brand-03: #5a6872,
-  active-01: #dfeafa,
-  hover-field: #eef4fc,
-  caption-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  label-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  helper-text-01: (
-    font-size: 0.75rem,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  body-short-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  body-long-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.16px,
-  ),
-  body-short-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  body-long-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.5rem,
-    letter-spacing: 0,
-  ),
-  code-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  code-02: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.32px,
-  ),
-  heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  productive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 1.625rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 2.25rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 2.5rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-06: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 3.125rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-07: (
-    font-size: 3.375rem,
-    font-weight: 300,
-    line-height: 4rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  expressive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.25rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 1.5rem,
-      ),
-    ),
-  ),
-  expressive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 129%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.75rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 2rem,
-      ),
-    ),
-  ),
-  expressive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 300,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 300,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 300,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 300,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-heading-06: (
-    font-size: 2rem,
-    font-weight: 600,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 600,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 600,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 600,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 600,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-paragraph-01: (
-    font-size: 1.5rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    lg: (
-      font-size: 1.75rem,
-      line-height: 129%,
-    ),
-    max: (
-      font-size: 2rem,
-      line-height: 125%,
-    ),
-  ),
-  quotation-01: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 1.25rem,
-        font-weight: 400,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 1.5rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 1.75rem,
-        font-weight: 400,
-        line-height: 129%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 2rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  quotation-02: (
-    font-size: 2rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        line-height: 122%,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        line-height: 119%,
-      ),
-      xlg: (
-        font-size: 3rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 3.75rem,
-      ),
-    ),
-  ),
-  display-01: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-02: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 116%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-03: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-  display-04: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-        letter-spacing: -0.64px,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
+$carbon--theme--v9: map-merge(
+  $carbon--theme--white,
+  (
+    interactive-01: #3d70b2,
+    interactive-02: #5a6872,
+    interactive-03: #5a6872,
+    interactive-04: #3d70b2,
+    ui-background: #f4f7fb,
+    ui-01: #ffffff,
+    ui-02: #f4f7fb,
+    ui-03: #dfe3e6,
+    ui-04: #8897a2,
+    ui-05: #5a6872,
+    text-01: #152935,
+    text-02: #5a6872,
+    text-03: #cdd1d4,
+    text-05: #5a6872,
+    icon-01: #3d70b2,
+    icon-02: #5a6872,
+    link-01: #3d70b2,
+    inverse-link: #5596e6,
+    field-01: #ffffff,
+    field-02: #f4f7fb,
+    inverse-02: #272d33,
+    support-01: #e0182d,
+    support-02: #5aa700,
+    support-03: #efc100,
+    support-04: #5aaafa,
+    inverse-support-01: #ff5050,
+    inverse-support-02: #8cd211,
+    inverse-support-03: #fdd600,
+    inverse-support-04: #5aaafa,
+    overlay-01: rgba(223, 227, 230, 0.5),
+    focus: #3d70b2,
+    inverse-focus-ui: #3d70b2,
+    hover-primary: #30588c,
+    active-primary: #30588c,
+    hover-primary-text: #294c86,
+    hover-secondary: #4d5b65,
+    active-secondary: #414f59,
+    hover-tertiary: #5a6872,
+    active-tertiary: #414f59,
+    hover-ui: #eef4fc,
+    active-ui: #dfeafa,
+    selected-ui: #eef4fc,
+    hover-selected-ui: #dfeafa,
+    hover-danger: #c70014,
+    active-danger: #ad1625,
+    hover-row: #eef4fc,
+    visited-link: #294c86,
+    disabled-01: #fafbfd,
+    disabled-02: #dfe3e6,
+    disabled-03: #cdd1d4,
+    highlight: #f4f7fb,
+    skeleton-01: rgba(61, 112, 178, 0.1),
+    skeleton-02: rgba(61, 112, 178, 0.1),
+    brand-01: #3d70b2,
+    brand-02: #5a6872,
+    brand-03: #5a6872,
+    active-01: #dfeafa,
+    hover-field: #eef4fc,
+  )
 );
 ```
 
@@ -7294,6 +5880,36 @@ $carbon--theme: (
   display-02: if(global-variable-exists('display-02'), $display-02, map-get($carbon--theme--white, 'display-02')),
   display-03: if(global-variable-exists('display-03'), $display-03, map-get($carbon--theme--white, 'display-03')),
   display-04: if(global-variable-exists('display-04'), $display-04, map-get($carbon--theme--white, 'display-04')),
+  spacing-01: if(global-variable-exists('spacing-01'), $spacing-01, map-get($carbon--theme--white, 'spacing-01')),
+  spacing-02: if(global-variable-exists('spacing-02'), $spacing-02, map-get($carbon--theme--white, 'spacing-02')),
+  spacing-03: if(global-variable-exists('spacing-03'), $spacing-03, map-get($carbon--theme--white, 'spacing-03')),
+  spacing-04: if(global-variable-exists('spacing-04'), $spacing-04, map-get($carbon--theme--white, 'spacing-04')),
+  spacing-05: if(global-variable-exists('spacing-05'), $spacing-05, map-get($carbon--theme--white, 'spacing-05')),
+  spacing-06: if(global-variable-exists('spacing-06'), $spacing-06, map-get($carbon--theme--white, 'spacing-06')),
+  spacing-07: if(global-variable-exists('spacing-07'), $spacing-07, map-get($carbon--theme--white, 'spacing-07')),
+  spacing-08: if(global-variable-exists('spacing-08'), $spacing-08, map-get($carbon--theme--white, 'spacing-08')),
+  spacing-09: if(global-variable-exists('spacing-09'), $spacing-09, map-get($carbon--theme--white, 'spacing-09')),
+  spacing-10: if(global-variable-exists('spacing-10'), $spacing-10, map-get($carbon--theme--white, 'spacing-10')),
+  spacing-11: if(global-variable-exists('spacing-11'), $spacing-11, map-get($carbon--theme--white, 'spacing-11')),
+  spacing-12: if(global-variable-exists('spacing-12'), $spacing-12, map-get($carbon--theme--white, 'spacing-12')),
+  fluid-spacing-01: if(global-variable-exists('fluid-spacing-01'), $fluid-spacing-01, map-get($carbon--theme--white, 'fluid-spacing-01')),
+  fluid-spacing-02: if(global-variable-exists('fluid-spacing-02'), $fluid-spacing-02, map-get($carbon--theme--white, 'fluid-spacing-02')),
+  fluid-spacing-03: if(global-variable-exists('fluid-spacing-03'), $fluid-spacing-03, map-get($carbon--theme--white, 'fluid-spacing-03')),
+  fluid-spacing-04: if(global-variable-exists('fluid-spacing-04'), $fluid-spacing-04, map-get($carbon--theme--white, 'fluid-spacing-04')),
+  layout-01: if(global-variable-exists('layout-01'), $layout-01, map-get($carbon--theme--white, 'layout-01')),
+  layout-02: if(global-variable-exists('layout-02'), $layout-02, map-get($carbon--theme--white, 'layout-02')),
+  layout-03: if(global-variable-exists('layout-03'), $layout-03, map-get($carbon--theme--white, 'layout-03')),
+  layout-04: if(global-variable-exists('layout-04'), $layout-04, map-get($carbon--theme--white, 'layout-04')),
+  layout-05: if(global-variable-exists('layout-05'), $layout-05, map-get($carbon--theme--white, 'layout-05')),
+  layout-06: if(global-variable-exists('layout-06'), $layout-06, map-get($carbon--theme--white, 'layout-06')),
+  layout-07: if(global-variable-exists('layout-07'), $layout-07, map-get($carbon--theme--white, 'layout-07')),
+  container-01: if(global-variable-exists('container-01'), $container-01, map-get($carbon--theme--white, 'container-01')),
+  container-02: if(global-variable-exists('container-02'), $container-02, map-get($carbon--theme--white, 'container-02')),
+  container-03: if(global-variable-exists('container-03'), $container-03, map-get($carbon--theme--white, 'container-03')),
+  container-04: if(global-variable-exists('container-04'), $container-04, map-get($carbon--theme--white, 'container-04')),
+  container-05: if(global-variable-exists('container-05'), $container-05, map-get($carbon--theme--white, 'container-05')),
+  icon-size-01: if(global-variable-exists('icon-size-01'), $icon-size-01, map-get($carbon--theme--white, 'icon-size-01')),
+  icon-size-02: if(global-variable-exists('icon-size-02'), $icon-size-02, map-get($carbon--theme--white, 'icon-size-02')),
 );
 ```
 
@@ -7301,7 +5917,6 @@ $carbon--theme: (
 
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
-- **Alias**: `carbon--theme--white`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -7326,13 +5941,12 @@ $interactive-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Aliased**:
   - `brand-01`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
-  - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
@@ -7362,7 +5976,7 @@ $interactive-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Aliased**:
   - `brand-02`
 - **Used by**:
@@ -7391,7 +6005,7 @@ $interactive-03: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Aliased**:
   - `brand-03`
 - **Used by**:
@@ -7420,13 +6034,14 @@ $interactive-04: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [inline-loading [mixin]](#inline-loading-mixin)
   - [loading [mixin]](#loading-mixin)
   - [slider [mixin]](#slider-mixin)
+  - [tabs [mixin]](#tabs-mixin)
 
 ### ✅ui-background [variable]
 
@@ -7449,7 +6064,7 @@ $ui-background: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
@@ -7477,14 +6092,13 @@ $ui-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -7518,7 +6132,7 @@ $ui-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
@@ -7552,7 +6166,7 @@ $ui-03: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [accordion [mixin]](#accordion-mixin)
@@ -7595,7 +6209,7 @@ $ui-04: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
@@ -7632,7 +6246,7 @@ $ui-05: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [accordion [mixin]](#accordion-mixin)
@@ -7671,7 +6285,7 @@ $text-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [accordion [mixin]](#accordion-mixin)
@@ -7722,7 +6336,7 @@ $text-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
@@ -7764,7 +6378,7 @@ $text-03: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -7789,7 +6403,7 @@ $text-04: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
@@ -7816,7 +6430,7 @@ $text-05: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [form [mixin]](#form-mixin)
@@ -7844,7 +6458,7 @@ $icon-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
@@ -7879,7 +6493,7 @@ $icon-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
@@ -7911,7 +6525,7 @@ $icon-03: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
@@ -7940,7 +6554,7 @@ $link-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
@@ -7967,7 +6581,7 @@ $inverse-link: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -7994,7 +6608,7 @@ $field-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
@@ -8030,7 +6644,7 @@ $field-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
@@ -8066,7 +6680,7 @@ $inverse-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
@@ -8102,7 +6716,7 @@ $inverse-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -8134,7 +6748,7 @@ $support-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
@@ -8173,7 +6787,7 @@ $support-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -8201,7 +6815,7 @@ $support-03: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -8228,7 +6842,7 @@ $support-04: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -8255,7 +6869,7 @@ $inverse-support-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -8282,7 +6896,7 @@ $inverse-support-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -8309,7 +6923,7 @@ $inverse-support-03: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -8336,7 +6950,7 @@ $inverse-support-04: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -8363,7 +6977,7 @@ $overlay-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [modal [mixin]](#modal-mixin)
@@ -8388,7 +7002,7 @@ $danger: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
@@ -8414,7 +7028,7 @@ $focus: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
@@ -8447,9 +7061,11 @@ $inverse-focus-ui: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [tags [mixin]](#tags-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
@@ -8474,7 +7090,7 @@ $hover-primary: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
@@ -8501,7 +7117,7 @@ $active-primary: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
@@ -8527,7 +7143,7 @@ $hover-primary-text: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
@@ -8554,7 +7170,7 @@ $hover-secondary: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
@@ -8581,7 +7197,7 @@ $active-secondary: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
@@ -8607,7 +7223,7 @@ $hover-tertiary: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
@@ -8633,7 +7249,7 @@ $active-tertiary: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
@@ -8659,7 +7275,7 @@ $hover-ui: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Aliased**:
   - `hover-field`
 - **Used by**:
@@ -8702,7 +7318,7 @@ $active-ui: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Aliased**:
   - `active-01`
 - **Used by**:
@@ -8732,7 +7348,7 @@ $selected-ui: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
@@ -8762,11 +7378,12 @@ $hover-selected-ui: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [tabs [mixin]](#tabs-mixin)
 
 ### ✅inverse-hover-ui [variable]
 
@@ -8787,7 +7404,7 @@ $inverse-hover-ui: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -8814,7 +7431,7 @@ $hover-danger: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
@@ -8840,7 +7457,7 @@ $active-danger: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
@@ -8866,7 +7483,7 @@ $hover-row: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -8891,7 +7508,7 @@ $visited-link: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [link [mixin]](#link-mixin)
@@ -8917,7 +7534,7 @@ $disabled-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
@@ -8948,7 +7565,7 @@ $disabled-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button-base [mixin]](#button-base-mixin)
@@ -8966,6 +7583,7 @@ $disabled-02: if(
   - [pagination [mixin]](#pagination-mixin)
   - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -8991,12 +7609,13 @@ $disabled-03: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [tabs [mixin]](#tabs-mixin)
 
 ### ✅highlight [variable]
 
@@ -9019,7 +7638,7 @@ $highlight: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9044,7 +7663,7 @@ $skeleton-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9069,7 +7688,7 @@ $skeleton-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9092,7 +7711,7 @@ $brand-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Alias**: `interactive-01`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -9118,7 +7737,7 @@ $brand-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Alias**: `interactive-02`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -9143,7 +7762,7 @@ $brand-03: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Alias**: `interactive-03`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -9168,7 +7787,7 @@ $active-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Alias**: `active-ui`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -9193,7 +7812,7 @@ $hover-field: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Alias**: `hover-ui`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -9226,7 +7845,7 @@ $caption-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9254,7 +7873,7 @@ $label-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9281,7 +7900,7 @@ $helper-text-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9309,7 +7928,7 @@ $body-short-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9337,7 +7956,7 @@ $body-long-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9365,7 +7984,7 @@ $body-short-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9393,7 +8012,7 @@ $body-long-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9410,6 +8029,7 @@ $code-01: if(
     ),
   map-get($carbon--theme, 'code-01'),
   (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.75rem,
     font-weight: 400,
     line-height: 1rem,
@@ -9421,7 +8041,7 @@ $code-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9438,6 +8058,7 @@ $code-02: if(
     ),
   map-get($carbon--theme, 'code-02'),
   (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.875rem,
     font-weight: 400,
     line-height: 1.25rem,
@@ -9449,7 +8070,7 @@ $code-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9477,7 +8098,7 @@ $heading-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9505,7 +8126,7 @@ $productive-heading-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9533,7 +8154,7 @@ $heading-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9561,7 +8182,7 @@ $productive-heading-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9589,7 +8210,7 @@ $productive-heading-03: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9617,7 +8238,7 @@ $productive-heading-04: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9645,7 +8266,7 @@ $productive-heading-05: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9673,7 +8294,7 @@ $productive-heading-06: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9701,7 +8322,7 @@ $productive-heading-07: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9720,7 +8341,7 @@ $expressive-heading-01: if(
   (
     font-size: 0.875rem,
     font-weight: 600,
-    line-height: 1.125rem,
+    line-height: 1.25rem,
     letter-spacing: 0.16px,
   )
 );
@@ -9729,7 +8350,7 @@ $expressive-heading-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9748,7 +8369,7 @@ $expressive-heading-02: if(
   (
     font-size: 1rem,
     font-weight: 600,
-    line-height: 1.375rem,
+    line-height: 1.5rem,
     letter-spacing: 0,
   )
 );
@@ -9757,7 +8378,7 @@ $expressive-heading-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9794,7 +8415,7 @@ $expressive-heading-03: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9831,7 +8452,7 @@ $expressive-heading-04: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9885,7 +8506,7 @@ $expressive-heading-05: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9939,7 +8560,7 @@ $expressive-heading-06: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -9975,7 +8596,7 @@ $expressive-paragraph-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -10028,7 +8649,7 @@ $quotation-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -10073,7 +8694,7 @@ $quotation-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -10117,7 +8738,7 @@ $display-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -10161,7 +8782,7 @@ $display-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -10209,7 +8830,7 @@ $display-03: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -10258,9 +8879,639 @@ $display-04: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅spacing-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-01'
+    ),
+  map-get($carbon--theme, 'spacing-01'),
+  0.125rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅spacing-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-02'
+    ),
+  map-get($carbon--theme, 'spacing-02'),
+  0.25rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅spacing-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-03'
+    ),
+  map-get($carbon--theme, 'spacing-03'),
+  0.5rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅spacing-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-04'
+    ),
+  map-get($carbon--theme, 'spacing-04'),
+  0.75rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅spacing-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-05'
+    ),
+  map-get($carbon--theme, 'spacing-05'),
+  1rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅spacing-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-06: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-06'
+    ),
+  map-get($carbon--theme, 'spacing-06'),
+  1.5rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅spacing-07 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-07: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-07'
+    ),
+  map-get($carbon--theme, 'spacing-07'),
+  2rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅spacing-08 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-08: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-08'
+    ),
+  map-get($carbon--theme, 'spacing-08'),
+  2.5rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅spacing-09 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-09: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-09'
+    ),
+  map-get($carbon--theme, 'spacing-09'),
+  3rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅spacing-10 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-10: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-10'
+    ),
+  map-get($carbon--theme, 'spacing-10'),
+  4rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅spacing-11 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-11: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-11'
+    ),
+  map-get($carbon--theme, 'spacing-11'),
+  5rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅spacing-12 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-12: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-12'
+    ),
+  map-get($carbon--theme, 'spacing-12'),
+  6rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅fluid-spacing-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'fluid-spacing-01'
+    ),
+  map-get($carbon--theme, 'fluid-spacing-01'),
+  0
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅fluid-spacing-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'fluid-spacing-02'
+    ),
+  map-get($carbon--theme, 'fluid-spacing-02'),
+  2vw
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅fluid-spacing-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'fluid-spacing-03'
+    ),
+  map-get($carbon--theme, 'fluid-spacing-03'),
+  5vw
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅fluid-spacing-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'fluid-spacing-04'
+    ),
+  map-get($carbon--theme, 'fluid-spacing-04'),
+  10vw
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅layout-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'layout-01'
+    ),
+  map-get($carbon--theme, 'layout-01'),
+  1rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅layout-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'layout-02'
+    ),
+  map-get($carbon--theme, 'layout-02'),
+  1.5rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅layout-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'layout-03'
+    ),
+  map-get($carbon--theme, 'layout-03'),
+  2rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅layout-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'layout-04'
+    ),
+  map-get($carbon--theme, 'layout-04'),
+  3rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅layout-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'layout-05'
+    ),
+  map-get($carbon--theme, 'layout-05'),
+  4rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅layout-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-06: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'layout-06'
+    ),
+  map-get($carbon--theme, 'layout-06'),
+  6rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅layout-07 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-07: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'layout-07'
+    ),
+  map-get($carbon--theme, 'layout-07'),
+  10rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅container-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'container-01'
+    ),
+  map-get($carbon--theme, 'container-01'),
+  1.5rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅container-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'container-02'
+    ),
+  map-get($carbon--theme, 'container-02'),
+  2rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅container-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'container-03'
+    ),
+  map-get($carbon--theme, 'container-03'),
+  2.5rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅container-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'container-04'
+    ),
+  map-get($carbon--theme, 'container-04'),
+  3rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅container-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'container-05'
+    ),
+  map-get($carbon--theme, 'container-05'),
+  4rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅icon-size-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$icon-size-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'icon-size-01'
+    ),
+  map-get($carbon--theme, 'icon-size-01'),
+  1rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+
+### ✅icon-size-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$icon-size-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'icon-size-02'
+    ),
+  map-get($carbon--theme, 'icon-size-02'),
+  1.25rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
 
 ## @carbon/type
 
@@ -10366,7 +9617,6 @@ Get the font-family for an IBM Plex font
   - [carbon--font-family [mixin]](#carbon--font-family-mixin)
   - [form [mixin]](#form-mixin)
   - [number-input [mixin]](#number-input-mixin)
-  - [slider [mixin]](#slider-mixin)
 
 ### ✅carbon--font-family [mixin]
 
@@ -12276,6 +11526,7 @@ $body-long-02: (
 
 ```scss
 $code-01: (
+  font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(16px),
@@ -12295,6 +11546,7 @@ $code-01: (
 
 ```scss
 $code-02: (
+  font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(20px),
@@ -12474,7 +11726,12 @@ $productive-heading-07: (
 <summary>Source code</summary>
 
 ```scss
-$expressive-heading-01: $heading-01;
+$expressive-heading-01: map-merge(
+  $heading-01,
+  (
+    line-height: carbon--rem(20),
+  )
+);
 ```
 
 </details>
@@ -12488,7 +11745,12 @@ $expressive-heading-01: $heading-01;
 <summary>Source code</summary>
 
 ```scss
-$expressive-heading-02: $heading-02;
+$expressive-heading-02: map-merge(
+  $heading-02,
+  (
+    line-height: carbon--rem(24),
+  )
+);
 ```
 
 </details>
@@ -14101,10 +13363,6 @@ Code snippet styles
   // Inline Code Snippet
   .#{$prefix}--snippet--inline {
     @include reset;
-    // Note: originally this inline snippet inherited font-size, we might need
-    // a more flexible strategy than explicitly setting font-size with this
-    // type style
-    @include type-style('code-01');
 
     position: relative;
     display: inline;
@@ -14125,7 +13383,7 @@ Code snippet styles
 
     &:focus {
       outline: none;
-      border: 2px solid $interactive-01;
+      border: 2px solid $focus;
     }
   }
 
@@ -14241,6 +13499,9 @@ Code snippet styles
     height: $carbon--spacing-08;
     width: $carbon--spacing-08;
     overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:focus {
       @include focus-outline('outline');
@@ -14272,12 +13533,12 @@ Code snippet styles
     right: 1.25rem;
   }
 
-  .#{$prefix}--btn--copy__feedback:before,
-  .#{$prefix}--btn--copy__feedback:after {
+  .#{$prefix}--btn--copy__feedback::before,
+  .#{$prefix}--btn--copy__feedback::after {
     background: $copy-btn-feedback;
   }
 
-  .#{$prefix}--btn--copy__feedback:after {
+  .#{$prefix}--btn--copy__feedback::after {
     border: none;
   }
 
@@ -14377,11 +13638,14 @@ Code snippet styles
 
   .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
     top: rem(25px);
-    left: 1rem;
+    left: 50%;
     right: auto;
   }
 
   .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
+    // TODO: use updated global tooltip mixins under the hood
+    // since all of the positioning values for the copy button tooltip are arbitrary hard coded rem values, we need this arbitrary 4px offset to keep the proper tooltip spacing according to the spec
+    top: calc(100% - #{rem(4px)});
     right: auto;
     left: 50%;
   }
@@ -14458,11 +13722,10 @@ Code snippet styles
   - [ui-01 [variable]](#ui-01-variable)
   - [text-01 [variable]](#text-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
-  - [interactive-01 [variable]](#interactive-01-variable)
+  - [focus [variable]](#focus-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
-  - [focus [variable]](#focus-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [field-01 [variable]](#field-01-variable)
@@ -15898,6 +15161,7 @@ Data table expandable styles
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
     padding-bottom: rem(23px);
     transition: padding $duration--moderate-01 motion(standard, productive);
+    border-bottom: 1px solid $ui-03;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
@@ -15910,7 +15174,7 @@ Data table expandable styles
   // bottom border overrides
   .#{$prefix}--parent-row.#{$prefix}--expandable-row > td,
   .#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] > td {
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid $ui-03;
     box-shadow: 0 1px $ui-03;
   }
 
@@ -15941,20 +15205,20 @@ Data table expandable styles
   // hovering on collapsed parent
   tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row):first-of-type:hover
     td {
-    border-top: 1px solid $hover-ui;
-    border-bottom: 1px solid $hover-ui;
+    border-top: 1px solid $ui-03;
+    border-bottom: 1px solid $ui-03;
   }
 
   // hovering on expanded parent
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td {
     background-color: $hover-ui;
-    border-top: 1px solid $hover-ui;
+    border-top: 1px solid $ui-03;
     border-bottom: 1px solid $ui-03;
     color: $text-01;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
-    border-bottom: 1px solid $hover-ui; // first td doesn't have a visible border
+    border-bottom: 1px solid transparent; // first td doesn't have a visible border
   }
 
   // child row when hovering on expanded parent
@@ -15979,13 +15243,13 @@ Data table expandable styles
   tr.#{$prefix}--expandable-row--hover td {
     background-color: $hover-ui;
     border-bottom: 1px solid $ui-03;
-    border-top: 1px solid $hover-ui;
+    border-top: 1px solid $ui-03;
     color: $text-01;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td:first-of-type {
-    border-bottom: 1px solid $hover-ui; // first parent td doesnt have visible bottom border
+    border-bottom: 1px solid transparent; // first parent td doesnt have visible bottom border
   }
 
   //----------------------------------------------------------------------------
@@ -15997,6 +15261,12 @@ Data table expandable styles
     height: 3rem;
     vertical-align: top;
     padding: 0;
+    border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-expand[data-previous-value='collapsed'] {
+    border-bottom: 1px solid transparent;
   }
 
   .#{$prefix}--table-expand[data-previous-value='collapsed']
@@ -16051,7 +15321,7 @@ Data table expandable styles
     bottom: rem(-1px);
     height: rem(1px);
     width: rem(8px);
-    background: $ui-01;
+    background: $ui-03;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
@@ -16076,7 +15346,7 @@ Data table expandable styles
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:first-of-type td {
     background: $selected-ui;
     border-top: 1px solid $active-ui;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid $ui-03;
     box-shadow: 0 1px $active-ui;
   }
 
@@ -16098,7 +15368,7 @@ Data table expandable styles
     td {
     background: $hover-selected-ui;
     border-top: 1px solid $hover-selected-ui;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid $ui-03;
     box-shadow: 0 1px $hover-selected-ui;
   }
 
@@ -16132,7 +15402,7 @@ Data table expandable styles
     td {
     color: $text-01;
     background-color: $hover-ui;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid $ui-03;
     box-shadow: 0 1px $active-ui;
     border-top: 1px solid $active-ui;
   }
@@ -16168,7 +15438,6 @@ Data table expandable styles
   - [focus [variable]](#focus-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
-  - [ui-01 [variable]](#ui-01-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
@@ -17010,6 +16279,7 @@ Dropdown styles
   }
 
   button.#{$prefix}--dropdown-text {
+    color: $text-01;
     // button-reset mixin contradicts with bx--dropdown-text styles
     background: none;
     border: none;
@@ -17113,6 +16383,35 @@ Dropdown styles
     @include focus-outline('outline');
     margin: 0;
     padding: rem(11px) rem(16px);
+  }
+
+  // We don't want to apply focus styles via focus selector when using the aria-activedescendant structure
+  .#{$prefix}--dropdown-list[aria-activedescendant]
+    .#{$prefix}--dropdown-link:focus {
+    outline: none;
+    // Copied from .bx--dropdown-link styles
+    margin: 0 $carbon--spacing-05;
+    padding: rem(11px) 0;
+  }
+
+  // Need added weight for item that is :focused and .bx--dropdown--focused
+  .#{$prefix}--dropdown-list[aria-activedescendant]
+    .#{$prefix}--dropdown--focused:focus {
+    // copied from default focus styles
+    @include focus-outline('outline');
+    margin: 0;
+    padding: rem(11px) rem(16px);
+  }
+
+  // Don't want to allow multiple elements have a "selected" style. Not sure why active
+  // had unique styles initially but creating an overwrite for the latest HTML markup for
+  // backwards compatibility. For the next major release it would be possible to clean up
+  // the HTML structure to prevent the user of :active and :focus styles which is creating
+  // these duplicated styles in the list. The Carbon 10 version of dropdown is already
+  // supporting 2 very different HTML structures.
+  .#{$prefix}--dropdown-list[aria-activedescendant]
+    .#{$prefix}--dropdown-item:active {
+    background-color: inherit;
   }
 
   .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
@@ -17840,7 +17139,8 @@ Link styles
     }
 
     &:active,
-    &:active:visited {
+    &:active:visited,
+    &:active:visited:hover {
       color: $text-01;
       text-decoration: underline;
     }
@@ -17923,88 +17223,49 @@ List styles
   .#{$prefix}--list--ordered {
     @include reset;
     @include type-style('body-short-01');
-
-    counter-reset: listitem;
   }
 
   .#{$prefix}--list__item {
-    font-weight: 400;
     color: $text-01;
-    list-style-type: none;
-    counter-increment: listitem;
-    margin-left: $carbon--spacing-03;
-    padding-left: $carbon--spacing-03;
-    position: relative;
-  }
-
-  .#{$prefix}--list__item:before {
-    position: absolute;
-    left: -#{$carbon--spacing-03};
+    margin-bottom: $carbon--spacing-02;
   }
 
   .#{$prefix}--list--nested {
-    margin-bottom: rem(4px);
-    margin-left: $carbon--spacing-07;
+    margin-top: $carbon--spacing-02;
+    margin-left: $carbon--spacing-06;
   }
 
-  .#{$prefix}--list--unordered > .#{$prefix}--list__item:before,
-  .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
-    display: inline-block;
-    margin-right: $carbon--spacing-03;
-    margin-bottom: rem(4px);
+  .#{$prefix}--list--nested > .#{$prefix}--list__item {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
-  .#{$prefix}--list--unordered
-    .#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before,
-  .#{$prefix}--list--ordered
-    .#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before {
-    margin-right: $carbon--spacing-03;
-    display: inline-block;
+  .#{$prefix}--list--nested .#{$prefix}--list--nested {
+    margin-top: 0;
   }
 
-  .#{$prefix}--list--unordered > .#{$prefix}--list__item:before {
-    content: '\002013';
+  .#{$prefix}--list--ordered {
+    list-style-type: decimal;
   }
 
-  .#{$prefix}--list--unordered
-    ul.#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before {
-    content: '\0025AA';
+  .#{$prefix}--list--ordered.#{$prefix}--list--nested {
+    list-style-type: lower-latin;
   }
 
-  .#{$prefix}--list--unordered
-    ol.#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before {
-    content: counter(listitem, lower-alpha) '.';
+  .#{$prefix}--list--unordered > .#{$prefix}--list__item {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      left: -$carbon--spacing-05;
+      content: '\002013'; // – en dash
+    }
   }
 
-  .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
-    content: counter(listitem) '.';
-  }
-
-  .#{$prefix}--list--ordered ol.#{$prefix}--list--nested {
-    counter-reset: ol-counter;
-  }
-
-  .#{$prefix}--list--ordered
-    ol.#{$prefix}--list--nested
-    > .#{$prefix}--list__item {
-    counter-increment: ol-counter;
-  }
-
-  .#{$prefix}--list--ordered
-    ol.#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before {
-    content: counter(ol-counter, lower-alpha) '.';
-    width: 0.6rem;
-  }
-
-  .#{$prefix}--list--ordered
-    ul.#{$prefix}--list--nested
-    > .#{$prefix}--list__item:before {
-    content: '\0025AA';
+  .#{$prefix}--list--unordered.#{$prefix}--list--nested
+    > .#{$prefix}--list__item::before {
+    left: -$carbon--spacing-04; // offset to account for smaller ▪ vs –
+    content: '\0025AA'; // ▪ square
   }
 }
 ```
@@ -18015,8 +17276,10 @@ List styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
 
 ## list-box
 
@@ -19124,7 +18387,6 @@ Inline notification styles
     @include reset;
 
     display: flex;
-    justify-content: space-between;
     position: relative;
     height: auto;
     min-height: rem(48px);
@@ -19238,6 +18500,7 @@ Inline notification styles
 
   .#{$prefix}--inline-notification__details {
     display: flex;
+    flex-grow: 1;
     margin: 0 $carbon--spacing-05;
   }
 
@@ -19265,7 +18528,7 @@ Inline notification styles
     word-break: break-word;
   }
 
-  .#{$prefix}--inline-notification__action-button {
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
     height: rem(32px);
     margin: $carbon--spacing-03 0;
 
@@ -19274,6 +18537,12 @@ Inline notification styles
     &:focus,
     &:active {
       color: $inverse-link;
+    }
+
+    &:focus {
+      border-color: transparent;
+      outline: 2px solid $inverse-focus-ui;
+      outline-offset: -2px;
     }
 
     &:hover {
@@ -19298,9 +18567,12 @@ Inline notification styles
     transition: outline $duration--fast-02 motion(standard, productive), background-color
         $duration--fast-02 motion(standard, productive);
 
+    &:focus {
+      outline: 2px solid $inverse-focus-ui;
+      outline-offset: -2px;
+    }
+
     .#{$prefix}--inline-notification__close-icon {
-      height: 1rem;
-      width: 1rem;
       fill: $inverse-01;
     }
   }
@@ -19336,7 +18608,6 @@ Inline notification styles
   - [prefix [variable]](#prefix-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
-  - [carbon--theme--white [variable]](#carbon--theme--white-variable)
   - [inverse-support-01 [variable]](#inverse-support-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -19350,6 +18621,7 @@ Inline notification styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [inverse-link [variable]](#inverse-link-variable)
+  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
 
 ### ❌inline-notification--color [mixin]
@@ -19505,7 +18777,7 @@ Toast notification styles
   .#{$prefix}--toast-notification__icon {
     flex-shrink: 0;
     margin-right: $carbon--spacing-05;
-    margin-top: $carbon--spacing-05;
+    margin-top: $carbon--spacing-04;
   }
 
   .#{$prefix}--toast-notification__details {
@@ -19514,6 +18786,10 @@ Toast notification styles
 
   .#{$prefix}--toast-notification__close-button {
     @include focus-outline('reset');
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -19526,12 +18802,11 @@ Toast notification styles
     transition: outline $transition--base, background-color $transition--base;
 
     &:focus {
-      @include focus-outline('outline');
+      outline: 2px solid $inverse-focus-ui;
+      outline-offset: -2px;
     }
 
     .#{$prefix}--toast-notification__close-icon {
-      height: 1rem;
-      width: 1rem;
       fill: $inverse-01;
     }
   }
@@ -19544,9 +18819,8 @@ Toast notification styles
 
   .#{$prefix}--toast-notification__title {
     @include type-style('productive-heading-01');
-
     font-weight: 600;
-    margin-top: 1rem;
+    margin-top: $carbon--spacing-05;
     word-break: break-word;
   }
 
@@ -19590,7 +18864,6 @@ Toast notification styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [carbon--theme--white [variable]](#carbon--theme--white-variable)
   - [inverse-support-01 [variable]](#inverse-support-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -19600,6 +18873,8 @@ Toast notification styles
   - [support-04 [variable]](#support-04-variable)
   - [inverse-support-03 [variable]](#inverse-support-03-variable)
   - [support-03 [variable]](#support-03-variable)
+  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
+  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
 
 ## number-input
@@ -19674,6 +18949,7 @@ Number input styles
   .#{$prefix}--number__input-wrapper {
     display: flex;
     align-items: center;
+    position: relative;
 
     ~ .#{$prefix}--form-requirement {
       color: $support-01;
@@ -19695,6 +18971,9 @@ Number input styles
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    // vertically center controls within parent container on IE11
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .#{$prefix}--number__control-btn {
@@ -21308,8 +20587,9 @@ Select styles
     border-bottom: 1px solid $ui-04;
     border-radius: 0;
     cursor: pointer;
-    transition: background-color $duration--fast-01 motion(standard, productive),
-      outline $duration--fast-01 motion(standard, productive);
+
+    // Do not transition on background-color (see: https://github.com/carbon-design-system/carbon/issues/4464)
+    transition: outline $duration--fast-01 motion(standard, productive);
 
     &:hover {
       background-color: $hover-ui;
@@ -21560,7 +20840,6 @@ Slider styles
 
   .#{$prefix}--slider__range-label {
     @include type-style('code-02');
-    font-family: carbon--font-family('mono');
     color: $text-01;
 
     &:last-of-type {
@@ -21738,7 +21017,6 @@ Slider styles
 
 - **Group**: [slider](#slider)
 - **Requires**:
-  - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -21887,11 +21165,17 @@ Tabs styles
     }
   }
 
+  .#{$prefix}--tabs--fixed {
+    @include carbon--breakpoint(md) {
+      min-height: rem(48px);
+    }
+  }
+
   .#{$prefix}--tabs-trigger {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 $carbon--spacing-05;
+    padding: 0 $spacing-05;
     height: rem(40px);
     cursor: pointer;
     color: $text-01;
@@ -22008,6 +21292,23 @@ Tabs styles
     }
   }
 
+  .#{$prefix}--tabs--fixed .#{$prefix}--tabs__nav-item {
+    @include carbon--breakpoint(md) {
+      background-color: $ui-03;
+
+      & + .#{$prefix}--tabs__nav-item {
+        margin-left: 0;
+        // Draws the border without affecting the inner-content
+        box-shadow: -1px 0 0 0 $ui-04;
+      }
+
+      & + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
+      &.#{$prefix}--tabs__nav-item--selected + .#{$prefix}--tabs__nav-item {
+        box-shadow: none;
+      }
+    }
+  }
+
   .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
     transition: color $duration--fast-01 motion(standard, productive), border-bottom-color
         $duration--fast-01 motion(standard, productive),
@@ -22029,7 +21330,18 @@ Tabs styles
 
     @include carbon--breakpoint(md) {
       background-color: transparent;
-      box-shadow: none;
+
+      &,
+      & + .#{$prefix}--tabs__nav-item {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    @include carbon--breakpoint(md) {
+      background-color: $hover-selected-ui;
     }
   }
 
@@ -22044,6 +21356,23 @@ Tabs styles
 
   .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
     pointer-events: none;
+  }
+
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
+    @include carbon--breakpoint(md) {
+      background-color: $disabled-02;
+    }
+  }
+
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link {
+    @include carbon--breakpoint(md) {
+      color: $disabled-03;
+    }
   }
 
   //-----------------------------
@@ -22070,6 +21399,26 @@ Tabs styles
     }
   }
 
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled),
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item--selected:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    @include carbon--breakpoint(md) {
+      background-color: $ui-01;
+
+      .#{$prefix}--tabs__nav-link {
+        // Draws the border without affecting the inner-content
+        box-shadow: inset 0 2px 0 0 $interactive-04;
+        border-bottom: none;
+      }
+
+      .#{$prefix}--tabs__nav-link:focus,
+      .#{$prefix}--tabs__nav-link:active {
+        box-shadow: none;
+      }
+    }
+  }
+
   //-----------------------------
   // Link
   //-----------------------------
@@ -22079,12 +21428,12 @@ Tabs styles
     color: $text-02;
     text-decoration: none;
     font-weight: 400;
-    padding: $carbon--spacing-04 0;
+    padding: $spacing-04 0;
     width: calc(100% - 32px);
     height: rem(40px);
     white-space: nowrap;
     text-overflow: ellipsis;
-    margin: 0 $carbon--spacing-05;
+    margin: 0 $spacing-05;
     line-height: rem(16px);
     border-bottom: 1px solid $ui-03;
     overflow: hidden;
@@ -22101,7 +21450,7 @@ Tabs styles
 
     @include carbon--breakpoint(md) {
       border-bottom: $tab-underline-color;
-      padding: $carbon--spacing-03 $carbon--spacing-05;
+      padding: $spacing-03 $spacing-05;
       width: rem(160px);
       margin: 0;
       line-height: inherit;
@@ -22109,9 +21458,18 @@ Tabs styles
       &:focus,
       &:active {
         width: rem(160px);
-        padding: $carbon--spacing-03 $carbon--spacing-05;
+        padding: $spacing-03 $spacing-05;
         border-bottom: 2px;
       }
+    }
+  }
+
+  .#{$prefix}--tabs--fixed a.#{$prefix}--tabs__nav-link {
+    @include carbon--breakpoint(md) {
+      display: flex;
+      align-items: center;
+      height: rem(48px);
+      border-bottom: none;
     }
   }
 
@@ -22124,6 +21482,14 @@ Tabs styles
     @include carbon--breakpoint(md) {
       color: $text-01;
       border-bottom: $tab-underline-color-hover;
+    }
+  }
+
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
+    .#{$prefix}--tabs__nav-link {
+    @include carbon--breakpoint(md) {
+      border-bottom: none;
     }
   }
 
@@ -22144,6 +21510,14 @@ Tabs styles
   .#{$prefix}--tabs__nav-item--disabled a.#{$prefix}--tabs__nav-link:active {
     outline: none;
     border-bottom: $tab-underline-disabled;
+  }
+
+  .#{$prefix}--tabs--fixed
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link {
+    @include carbon--breakpoint(md) {
+      border-bottom: none;
+    }
   }
 
   //-----------------------------
@@ -22188,7 +21562,7 @@ Tabs styles
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [ui-04 [variable]](#ui-04-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-05 [variable]](#ui-05-variable)
@@ -22196,10 +21570,14 @@ Tabs styles
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
+  - [interactive-04 [variable]](#interactive-04-variable)
   - [text-02 [variable]](#text-02-variable)
-  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
-  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [spacing-04 [variable]](#spacing-04-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
 
 ## tag
 
@@ -23852,10 +23230,6 @@ Tooltip styles
     &:focus {
       @include focus-outline('border');
     }
-
-    .#{$prefix}--tooltip__trigger {
-      margin-left: $carbon--spacing-03;
-    }
   }
 
   .#{$prefix}--tooltip__trigger svg {
@@ -23868,6 +23242,9 @@ Tooltip styles
     align-items: center;
     cursor: pointer;
     font-size: 1rem;
+
+    // Override `margin: 0` from button-reset mixin:
+    margin-left: $carbon--spacing-03;
 
     &:focus {
       @include focus-outline('border');
@@ -23888,12 +23265,13 @@ Tooltip styles
     max-width: rem(288px);
     background: $inverse-02;
     margin-top: $carbon--spacing-02;
-    padding: 1rem;
+    padding: $carbon--spacing-05;
     border-radius: rem(2px);
     z-index: z('floating');
     word-wrap: break-word;
     color: $inverse-01;
 
+    // @todo this can be deprecated in v11 since focus should always be on the content container not the tooltip
     &:focus {
       box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px $ui-background;
       outline: 0;
@@ -23928,6 +23306,13 @@ Tooltip styles
       &:visited {
         color: $inverse-link;
       }
+    }
+
+    // Tooltips need to be click focusable but not sequentially focusable so the user can click within
+    // the tooltip and not have it close. Because the element is not actionable it does not need
+    // to have a visible focus indicator (OK'd by IBMa)
+    .#{$prefix}--tooltip__content[tabindex='-1']:focus {
+      outline: none;
     }
 
     .#{$prefix}--tooltip__caret {
@@ -24139,11 +23524,12 @@ Tooltip styles
   - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
   - [prefix [variable]](#prefix-variable)
   - [text-02 [variable]](#text-02-variable)
-  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [icon-02 [variable]](#icon-02-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [hover-primary [variable]](#hover-primary-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [ui-background [variable]](#ui-background-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
