@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import classNames from 'classnames';
 import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
@@ -32,18 +32,16 @@ function CodeSnippet({
   ...other
 }) {
   const [expandedCode, setExpandedCode] = useState(false);
-  const [height, setHeight] = useState(0);
+  const [shouldShowMoreLessBtn, setShouldShowMoreLessBtn] = useState(false);
   const { current: uid } = useRef(getUniqueId());
-  const previousChildren = useRef(null);
-  const codeContentRef = useCallback(
-    node => {
-      if (node !== null && previousChildren.current !== children) {
-        setHeight(node.getBoundingClientRect().height);
-        previousChildren.current = children;
-      }
-    },
-    [children]
-  );
+  const codeContentRef = useRef();
+
+  useLayoutEffect(() => {
+    if (codeContentRef.current) {
+      const { height } = codeContentRef.current.getBoundingClientRect();
+      setShouldShowMoreLessBtn(type === 'multi' && height > 255);
+    }
+  }, [children, type]);
 
   const codeSnippetClasses = classNames(className, {
     [`${prefix}--snippet`]: true,
@@ -52,7 +50,6 @@ function CodeSnippet({
     [`${prefix}--snippet--light`]: light,
   });
 
-  const shouldShowMoreLessBtn = type === 'multi' && height > 255;
   const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
 
   if (type === 'inline') {
