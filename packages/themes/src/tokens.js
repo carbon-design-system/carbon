@@ -6,6 +6,7 @@
  */
 
 import { unstable_tokens as type } from '@carbon/type';
+import { unstable_tokens as layout } from '@carbon/layout';
 
 // The color token names for a Carbon theme, value corresponds to what they're
 // exported as in JavaScript
@@ -146,6 +147,7 @@ export function formatTokenName(token) {
 export const tokens = {
   colors,
   type,
+  layout,
 };
 
 export const unstable__meta = {

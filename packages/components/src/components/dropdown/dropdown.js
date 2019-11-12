@@ -58,6 +58,27 @@ class Dropdown extends mixin(
         }
       })
     );
+
+    // When using the active descendant approach we use a class to give focus styles during keyboard (up/down arrows)
+    // navigation instead of relying on the :focus selector. This leaves the potential to have multiple items when
+    // switching interactions between keyboard and mouse users. To more closely align with Carbon React implementation,
+    // we want the focus class to move as the user hovers over items. This also updates the location of focus based on
+    // the last hovered item if the user switches back to using the keyboard.
+    if (
+      // NOTE: `selectorTrigger` does NOT match the trigger button in older markup
+      this.element.querySelector(this.options.selectorTrigger) &&
+      this.element.querySelector(this.options.selectorMenu)
+    ) {
+      // Using the latest HTML structure that supports the aria-activedescendant attribute
+      this.manage(
+        on(this.element, 'mouseover', event => {
+          const item = eventMatches(event, this.options.selectorItem);
+          if (item) {
+            this._updateFocus(item);
+          }
+        })
+      );
+    }
   }
 
   /**
@@ -95,6 +116,58 @@ class Dropdown extends mixin(
   }
 
   /**
+   * When using aria-activedescendant we want to make sure attributes and classes
+   * are properly cleaned up when the dropdown is closed
+   * @private
+   */
+  _focusCleanup() {
+    // NOTE: `selectorTrigger` does NOT match the trigger button in older markup
+    const triggerNode = this.element.querySelector(
+      this.options.selectorTrigger
+    );
+
+    // only want to grab the listNode IF it's using the latest a11y HTML structure
+    const listNode = triggerNode
+      ? this.element.querySelector(this.options.selectorMenu)
+      : null;
+
+    if (listNode) {
+      listNode.removeAttribute('aria-activedescendant');
+      const focusedItem = this.element.querySelector(
+        this.options.selectorItemFocused
+      );
+      if (focusedItem) {
+        focusedItem.classList.remove(this.options.classFocused);
+      }
+    }
+  }
+
+  /**
+   * Update focus using aria-activedescendant HTML structure
+   * @param {HTMLElement} itemToFocus The element to be focused.
+   */
+  _updateFocus(itemToFocus) {
+    // NOTE: `selectorTrigger` does NOT match the trigger button in older markup
+    const triggerNode = this.element.querySelector(
+      this.options.selectorTrigger
+    );
+
+    // only want to grab the listNode IF it's using the latest a11y HTML structure
+    const listNode = triggerNode
+      ? this.element.querySelector(this.options.selectorMenu)
+      : null;
+
+    const previouslyFocused = listNode.querySelector(
+      this.options.selectorItemFocused
+    );
+    itemToFocus.classList.add(this.options.classFocused);
+    listNode.setAttribute('aria-activedescendant', itemToFocus.id);
+    if (previouslyFocused) {
+      previouslyFocused.classList.remove(this.options.classFocused);
+    }
+  }
+
+  /**
    * Opens and closes the dropdown menu.
    * @param {Event} [event] The event triggering this method.
    *
@@ -109,6 +182,7 @@ class Dropdown extends mixin(
       return;
     }
 
+    // NOTE: `selectorTrigger` does NOT match the trigger button in older markup
     const triggerNode = this.element.querySelector(
       this.options.selectorTrigger
     );
@@ -162,8 +236,9 @@ class Dropdown extends mixin(
         (listNode || this.element).focus();
         if (listNode) {
           const selectedNode = listNode.querySelector(
-            this.options.selectorItemSelected
+            this.options.selectorLinkSelected
           );
+
           listNode.setAttribute(
             'aria-activedescendant',
             (selectedNode || listItems[0]).id
@@ -180,15 +255,7 @@ class Dropdown extends mixin(
         if (triggerNode) {
           triggerNode.setAttribute('aria-expanded', 'false');
         }
-        if (listNode) {
-          listNode.removeAttribute('aria-activedescendant');
-          const focusedItem = this.element.querySelector(
-            this.options.selectorItemFocused
-          );
-          if (focusedItem) {
-            focusedItem.classList.remove(this.options.classFocused);
-          }
-        }
+        this._focusCleanup();
       }
 
       // @todo remove once legacy structure is depreciated
@@ -212,6 +279,7 @@ class Dropdown extends mixin(
 
     // Using the latest semantic markup structure where trigger is a button
     // @todo remove conditional once legacy structure is depreciated
+    // NOTE: `selectorTrigger` does NOT match the trigger button in older markup
     if (this.element.querySelector(this.options.selectorTrigger)) {
       const listNode = this.element.querySelector(this.options.selectorMenu);
       const focusedId = listNode.getAttribute('aria-activedescendant');
@@ -239,7 +307,7 @@ class Dropdown extends mixin(
     );
     const start =
       this.getCurrentNavigation() ||
-      this.element.querySelector(this.options.selectorItemSelected);
+      this.element.querySelector(this.options.selectorLinkSelected);
     const getNextItem = old => {
       const handleUnderflow = (i, l) => i + (i >= 0 ? 0 : l);
       const handleOverflow = (i, l) => i - (i < l ? 0 : l);
@@ -249,6 +317,9 @@ class Dropdown extends mixin(
         handleUnderflow(handleOverflow(index, items.length), items.length)
       ];
     };
+    const isShowSelected = this.element.classList.contains(
+      this.options.classShowSelected
+    );
     for (
       let current = getNextItem(start);
       current && current !== start;
@@ -257,20 +328,15 @@ class Dropdown extends mixin(
       if (
         !current.matches(this.options.selectorItemHidden) &&
         !current.parentNode.matches(this.options.selectorItemHidden) &&
-        !current.matches(this.options.selectorItemSelected)
+        (isShowSelected ||
+          (!isShowSelected &&
+            !current.parentElement.matches(this.options.selectorItemSelected)))
       ) {
         // Using the latest semantic markup structure where trigger is a button
         // @todo remove conditional once legacy structure is depreciated
+        // NOTE: `selectorTrigger` does NOT match the trigger button in older markup
         if (this.element.querySelector(this.options.selectorTrigger)) {
-          const listNode = this.element.querySelector(
-            this.options.selectorMenu
-          );
-          const previouslyFocused = listNode.querySelector(
-            this.options.selectorItemFocused
-          );
-          current.classList.add(this.options.classFocused);
-          listNode.setAttribute('aria-activedescendant', current.id);
-          previouslyFocused.classList.remove(this.options.classFocused);
+          this._updateFocus(current);
         } else {
           current.focus();
         }
@@ -295,6 +361,7 @@ class Dropdown extends mixin(
 
     if (this.element.dispatchEvent(eventStart)) {
       if (this.element.dataset.dropdownType !== 'navigation') {
+        // NOTE: `selectorTrigger` does NOT match the trigger button in older markup
         const selectorText =
           !this.element.querySelector(this.options.selectorTrigger) &&
           this.element.dataset.dropdownType !== 'inline'
@@ -304,15 +371,15 @@ class Dropdown extends mixin(
         if (text) {
           text.innerHTML = itemToSelect.innerHTML;
         }
-        itemToSelect.classList.add(this.options.classSelected);
+        itemToSelect.parentElement.classList.add(this.options.classSelected);
       }
       this.element.dataset.value = itemToSelect.parentElement.dataset.value;
 
       toArray(
-        this.element.querySelectorAll(this.options.selectorItemSelected)
+        this.element.querySelectorAll(this.options.selectorLinkSelected)
       ).forEach(item => {
         if (itemToSelect !== item) {
-          item.classList.remove(this.options.classSelected);
+          item.parentElement.classList.remove(this.options.classSelected);
         }
       });
 
@@ -331,6 +398,7 @@ class Dropdown extends mixin(
    */
   handleBlur() {
     this.element.classList.remove(this.options.classOpen);
+    this._focusCleanup();
   }
 
   /**
@@ -347,7 +415,9 @@ class Dropdown extends mixin(
    * @member Dropdown.options
    * @type {object}
    * @property {string} selectorInit The CSS selector to find selectors.
-   * @property {string} [selectorTrigger] The CSS selector to find trigger button when using a11y compliant markup.
+   * @property {string} [selectorTrigger]
+   *   The CSS selector to find the trigger button when using a11y compliant markup.
+   *   NOTE: Does NOT match the trigger button in older markup.
    * @property {string} [selectorMenu] The CSS selector to find menu list when using a11y compliant markup.
    * @property {string} [selectorText] The CSS selector to find the element showing the selected item.
    * @property {string} [selectorTextInner] The CSS selector to find the element showing the selected item, used for inline mode.
@@ -357,6 +427,8 @@ class Dropdown extends mixin(
    *   Used to skip dropdown items for keyboard navigation.
    * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
    * @property {string} [selectorItemFocused] The CSS selector to find the clickable area in the focused dropdown item.
+   * @property {string} [selectorLinkSelected] The CSS selector to target the link node of the selected dropdown item.
+   * @property {string} [classShowSelected] The CSS class for the show selected modifier of the dropdown.
    * @property {string} [classSelected] The CSS class for the selected dropdown item.
    * @property {string} [classFocused] The CSS class for the focused dropdown item.
    * @property {string} [classOpen] The CSS class for the open state.
@@ -370,7 +442,7 @@ class Dropdown extends mixin(
     const { prefix } = settings;
     return {
       selectorInit: '[data-dropdown]',
-      selectorTrigger: `button.${prefix}--dropdown-text`,
+      selectorTrigger: `button.${prefix}--dropdown-text`, // NOTE: Does NOT match the trigger button in older markup.
       selectorMenu: `.${prefix}--dropdown-list`,
       selectorText: `.${prefix}--dropdown-text`,
       selectorTextInner: `.${prefix}--dropdown-text__inner`,
@@ -378,6 +450,8 @@ class Dropdown extends mixin(
       selectorItemSelected: `.${prefix}--dropdown--selected`,
       selectorItemFocused: `.${prefix}--dropdown--focused`,
       selectorItemHidden: `[hidden],[aria-hidden="true"]`,
+      selectorLinkSelected: `.${prefix}--dropdown--selected .${prefix}--dropdown-link`,
+      classShowSelected: `${prefix}--dropdown--show-selected`,
       classSelected: `${prefix}--dropdown--selected`,
       classFocused: `${prefix}--dropdown--focused`,
       classOpen: `${prefix}--dropdown--open`,
