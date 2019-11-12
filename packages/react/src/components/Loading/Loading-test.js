@@ -14,8 +14,11 @@ const { prefix } = settings;
 
 describe('Loading - accessibility', () => {
   describe('Automated Accessibility Testing', () => {
+    let wrapper;
+
     beforeEach(() => {
-      mount(<Loading id="test-id" />);
+      wrapper = mount(<Loading id="test-id" />);
+      document.body.appendChild(wrapper.getDOMNode());
     });
 
     it('should have no Axe violations', async () => {
@@ -23,7 +26,9 @@ describe('Loading - accessibility', () => {
     });
 
     it('should have no DAP violations', async () => {
-      await expect(document).toHaveNoDAPViolations('Loading');
+      await expect(document.getElementById('test-id')).toHaveNoDAPViolations(
+        'Loading'
+      );
     });
   });
 

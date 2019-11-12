@@ -10,7 +10,7 @@
                 "dom": "/html[1]",
                 "aria": ""
             },
-            "ruleTime": 1,
+            "ruleTime": 0,
             "reasonId": "Fail_3",
             "message": "Page detected as HTML, but does not have a lang attribute.",
             "messageArgs": [],
@@ -36,7 +36,7 @@
                 "dom": "/html[1]",
                 "aria": ""
             },
-            "ruleTime": 1,
+            "ruleTime": 0,
             "reasonId": "Fail_2",
             "message": "Missing title element in head element.",
             "messageArgs": [],
@@ -112,7 +112,7 @@
             "potentialviolation": 1,
             "ignored": 0
         },
-        "scanTime": 46,
+        "scanTime": 22,
         "ruleArchive": "September 2019 Deployment (2019SeptDeploy)",
         "policies": [
             "IBM_Accessibility"
@@ -121,10 +121,10 @@
             "violation",
             "potentialviolation"
         ],
-        "startScan": 1573515681243,
+        "startScan": 1573586753940,
         "URL": "http://localhost/"
     },
-    "scanID": "76da9da3-734c-45d0-8cba-67ee67a02cc8",
+    "scanID": "210dba94-31b8-41fb-ae06-c847b212708b",
     "toolID": "@ibma/aat-v2.0.0-alpha",
     "label": "Loading"
 }
