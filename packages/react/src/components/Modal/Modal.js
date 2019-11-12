@@ -319,7 +319,7 @@ export default class Modal extends Component {
       [this.props.className]: this.props.className,
     });
 
-    const contaienrClasses = classNames(`${prefix}--modal-container`, {
+    const containerClasses = classNames(`${prefix}--modal-container`, {
       [`${prefix}--modal-container--${size}`]: size,
     });
 
