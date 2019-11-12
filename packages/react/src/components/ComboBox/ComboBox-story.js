@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
+import Button from '../Button';
 import WithState from '../../tools/withState';
 
 const items = [
@@ -57,6 +58,40 @@ const itemToElement = item => {
       <span style={{ color: 'blue' }}> {itemAsArray[1]}</span>
     </div>
   );
+};
+
+const ControlledComboBoxApp = props => {
+  const [selectedItem, setSelectedItem] = useState(items[0]);
+  let uid = items.length;
+  return (
+    <>
+      <ComboBox
+        {...props}
+        items={items}
+        itemToString={item => (item ? item.text : '')}
+        onChange={({ selectedItem }) => setSelectedItem(selectedItem)}
+        initialSelectedItem={items[0]}
+        selectedItem={selectedItem}
+      />
+      <Button
+        style={{ marginTop: '1rem' }}
+        onClick={() => {
+          items.push({
+            id: `id-${uid++}`,
+            text: `Option ${uid}`,
+          });
+          setSelectedItem(items[items.length - 1]);
+        }}>
+        Add new item
+      </Button>
+    </>
+  );
+};
+ControlledComboBoxApp.__docgenInfo = {
+  ...ComboBox.__docgenInfo,
+  props: {
+    ...ComboBox.__docgenInfo.props,
+  },
 };
 
 storiesOf('ComboBox', module)
@@ -118,6 +153,15 @@ storiesOf('ComboBox', module)
     {
       info: {
         text: `Sometimes you want to perform an async action to trigger a backend call on input change.`,
+      },
+    }
+  )
+  .add(
+    'application-level control for selection',
+    () => <ControlledComboBoxApp {...props()} />,
+    {
+      info: {
+        text: `Controlled ComboBox example application`,
       },
     }
   );
