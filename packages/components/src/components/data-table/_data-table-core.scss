@@ -32,7 +32,7 @@
   }
 
   .#{$prefix}--data-table-header--light {
-    background: $ui-background;
+    background: $ui-02;
   }
 
   .#{$prefix}--data-table-header__title {
@@ -66,7 +66,7 @@
   }
 
   .#{$prefix}--data-table--light tbody {
-    background-color: $ui-background;
+    background-color: $ui-02;
   }
 
   .#{$prefix}--data-table tr {
@@ -137,7 +137,7 @@
 
   .#{$prefix}--data-table--light td,
   .#{$prefix}--data-table--light tbody th {
-    background: $ui-background;
+    background: $ui-02;
   }
 
   @supports (-moz-appearance: none) {
@@ -260,9 +260,9 @@
     tbody
     tr:nth-child(odd)
     td {
-    background: $ui-background;
-    border-bottom-color: $ui-background;
-    border-top-color: $ui-background;
+    background: $ui-02;
+    border-bottom-color: $ui-02;
+    border-top-color: $ui-02;
   }
 
   .#{$prefix}--data-table--zebra tbody tr:hover td {
