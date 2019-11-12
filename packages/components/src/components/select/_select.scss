@@ -31,10 +31,6 @@
     position: relative;
     display: flex;
     align-items: center;
-
-    &:hover .#{$prefix}--select-input {
-      background-color: $hover-ui;
-    }
   }
 
   .#{$prefix}--select-input {
@@ -203,10 +199,11 @@
     border-bottom: none;
     padding-left: $carbon--spacing-03;
     padding-right: $spacing-07;
+  }
 
-    &:hover {
-      background-color: $hover-ui;
-    }
+  .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
+  .#{$prefix}--select--inline .#{$prefix}--select-input[disabled]:hover {
+    background-color: $disabled-background-color;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
