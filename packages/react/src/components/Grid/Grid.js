@@ -38,8 +38,10 @@ export const Grid = ({
   noGutter = false,
   className = '',
   children = null,
+  ...rest
 }) => (
   <div
+    {...rest}
     className={classNames(
       `${prefix}--grid`,
       condensed && `${prefix}--grid--condensed`,
@@ -67,6 +69,9 @@ Grid.propTypes = {
 
   /** Pass in content that will be rendered within the Grid */
   children: PropTypes.node,
+
+  /** Pass through any other undefined props to DOM */
+  rest: PropTypes.node,
 };
 
 export const GridRow = ({
@@ -74,8 +79,10 @@ export const GridRow = ({
   noGutter = false,
   className = '',
   children = null,
+  ...rest
 }) => (
   <div
+    {...rest}
     className={classNames(
       `${prefix}--row`,
       condensed && `${prefix}--row--condensed`,
@@ -99,6 +106,9 @@ GridRow.propTypes = {
 
   /** Pass in content that will be rendered within the Grid Row */
   children: PropTypes.node,
+
+  /** Pass through any other undefined props to DOM */
+  rest: PropTypes.node,
 };
 
 export const GridCol = ({
@@ -115,8 +125,10 @@ export const GridCol = ({
   noGutter = false,
   className = '',
   children = null,
+  ...rest
 }) => (
   <div
+    {...rest}
     className={classNames(
       `${prefix}--col`,
       sm !== undefined && `${prefix}--col-sm-${sm === 'auto' ? '-' : ''}${sm}`,
@@ -237,6 +249,9 @@ GridCol.propTypes = {
 
   /** Pass in content that will be rendered within the Grid Col */
   children: PropTypes.node,
+
+  /** Pass through any other undefined props to DOM */
+  rest: PropTypes.node,
 };
 
 Grid.getValidColWidths = getValidColWidths;
