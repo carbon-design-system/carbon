@@ -14,9 +14,16 @@ const { prefix } = settings;
 
 describe('Loading - accessibility', () => {
   describe('Automated Accessibility Testing', () => {
+    beforeEach(() => {
+      mount(<Loading id="test-id" />);
+    });
+
     it('should have no Axe violations', async () => {
-      mount(<Loading />);
-      await expect(document).toHaveNoViolations();
+      await expect(document).toHaveNoAxeViolations();
+    });
+
+    it('should have no DAP violations', async () => {
+      await expect(document).toHaveNoDAPViolations('Loading');
     });
   });
 

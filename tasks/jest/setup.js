@@ -9,6 +9,8 @@
 
 global.__DEV__ = true;
 
+jest.setTimeout(100000);
+
 global.requestAnimationFrame = function requestAnimationFrame(callback) {
   // TODO: replace with async version
   // setTimeout(callback);
