@@ -14,4 +14,5 @@ module.exports = () => ({
       },
     ],
   ],
+  plugins: BABEL_ENV === 'docgen' ? ['react-docgen'] : [],
 });
