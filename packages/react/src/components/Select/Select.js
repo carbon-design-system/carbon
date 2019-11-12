@@ -37,6 +37,7 @@ const Select = React.forwardRef(function Select(
     [`${prefix}--select--inline`]: inline,
     [`${prefix}--select--light`]: light,
     [`${prefix}--select--invalid`]: invalid,
+    [`${prefix}--select--disabled`]: disabled,
     [className]: className,
   });
   const labelClasses = classNames(`${prefix}--label`, {
