@@ -1,118 +1,13 @@
 {
-    "results": [
-        {
-            "ruleId": "WCAG20_Html_HasLang",
-            "value": [
-                "VIOLATION",
-                "FAIL"
-            ],
-            "path": {
-                "dom": "/html[1]",
-                "aria": ""
-            },
-            "ruleTime": 0,
-            "reasonId": "Fail_3",
-            "message": "Page detected as HTML, but does not have a lang attribute.",
-            "messageArgs": [],
-            "apiArgs": [],
-            "bounds": {
-                "left": 0,
-                "top": 0,
-                "height": 0,
-                "width": 0
-            },
-            "snippet": "<html data-namewalk=\"1\">",
-            "category": "Accessibility",
-            "ignored": false,
-            "level": "violation"
-        },
-        {
-            "ruleId": "WCAG20_Doc_HasTitle",
-            "value": [
-                "VIOLATION",
-                "FAIL"
-            ],
-            "path": {
-                "dom": "/html[1]",
-                "aria": ""
-            },
-            "ruleTime": 0,
-            "reasonId": "Fail_2",
-            "message": "Missing title element in head element.",
-            "messageArgs": [],
-            "apiArgs": [],
-            "bounds": {
-                "left": 0,
-                "top": 0,
-                "height": 0,
-                "width": 0
-            },
-            "snippet": "<html data-namewalk=\"1\">",
-            "category": "Accessibility",
-            "ignored": false,
-            "level": "violation"
-        },
-        {
-            "ruleId": "WCAG20_Body_FirstASkips_Native_Host_Sematics",
-            "value": [
-                "VIOLATION",
-                "FAIL"
-            ],
-            "path": {
-                "dom": "/html[1]/body[1]",
-                "aria": "/document[1]"
-            },
-            "ruleTime": 0,
-            "reasonId": "Fail_1",
-            "message": "The page is missing a the WAI-ARIA MAIN landmark or a link to skip directly to the main page content as the first link on each page.",
-            "messageArgs": [],
-            "apiArgs": [],
-            "bounds": {
-                "left": 0,
-                "top": 0,
-                "height": 0,
-                "width": 0
-            },
-            "snippet": "<body data-namewalk=\"3\">",
-            "category": "Accessibility",
-            "ignored": false,
-            "level": "violation"
-        },
-        {
-            "ruleId": "RPT_Html_SkipNav",
-            "value": [
-                "VIOLATION",
-                "POTENTIAL"
-            ],
-            "path": {
-                "dom": "/html[1]",
-                "aria": ""
-            },
-            "ruleTime": 0,
-            "reasonId": "Potential_1",
-            "message": "Possibly a mechanism to bypass blocks of content that are repeated on multiple Web pages is not provided.",
-            "messageArgs": [],
-            "apiArgs": [],
-            "bounds": {
-                "left": 0,
-                "top": 0,
-                "height": 0,
-                "width": 0
-            },
-            "snippet": "<html data-namewalk=\"1\">",
-            "category": "Accessibility",
-            "ignored": false,
-            "level": "potentialviolation"
-        }
-    ],
-    "numExecuted": 30,
+    "results": [],
+    "numExecuted": 41,
     "summary": {
         "counts": {
-            "violation": 3,
-            "potentialviolation": 1,
+            "violation": 0,
+            "potentialviolation": 0,
             "ignored": 0
         },
-        "scanTime": 22,
+        "scanTime": 71,
         "ruleArchive": "September 2019 Deployment (2019SeptDeploy)",
         "policies": [
             "IBM_Accessibility"
@@ -121,10 +16,9 @@
             "violation",
             "potentialviolation"
         ],
-        "startScan": 1573586753940,
-        "URL": "http://localhost/"
+        "startScan": 1573601165647
     },
-    "scanID": "210dba94-31b8-41fb-ae06-c847b212708b",
-    "toolID": "@ibma/aat-v2.0.0-alpha",
+    "scanID": "9a1d5e5b-9cbb-43f7-bcdc-3e222c884f37",
+    "toolID": "@ibma/aat-v2.0.1-alpha",
     "label": "Loading"
 }
