@@ -68,7 +68,6 @@ const VALID_NO_GUTTER_VALS = {
 };
 
 const propsGrid = () => ({
-  className: 'some-class',
   condensed: boolean('condensed', false, 'Grid'),
   fullWidth: boolean('fullWidth', false, 'Grid'),
   noGutter: radios('noGutter', VALID_NO_GUTTER_VALS, 'false', 'Grid'),
