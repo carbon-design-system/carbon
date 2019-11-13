@@ -9,26 +9,34 @@ import React from 'react';
 import Loading from '../Loading';
 import { mount, shallow } from 'enzyme';
 import { settings } from 'carbon-components';
+import { afterEach } from 'jest-circus';
 
 const { prefix } = settings;
 
-describe('Loading - accessibility', () => {
+describe('Loading', () => {
   describe('Automated Accessibility Testing', () => {
+    let rootNode;
     let wrapper;
 
     beforeEach(() => {
-      wrapper = mount(<Loading id="test-id" />);
-      document.body.appendChild(wrapper.getDOMNode());
+      rootNode = document.createElement('div');
+      document.body.appendChild(rootNode);
+
+      wrapper = mount(<Loading />, {
+        attachTo: rootNode,
+      });
+    });
+
+    afterEach(() => {
+      document.body.removeChild(rootNode);
     });
 
     it('should have no Axe violations', async () => {
-      await expect(document).toHaveNoAxeViolations();
+      await expect(rootNode).toHaveNoAxeViolations();
     });
 
     it('should have no DAP violations', async () => {
-      await expect(document.getElementById('test-id')).toHaveNoDAPViolations(
-        'Loading'
-      );
+      await expect(rootNode).toHaveNoDAPViolations('Loading');
     });
   });
 
@@ -50,9 +58,6 @@ describe('Loading - accessibility', () => {
       expect(getLoader().prop('aria-live')).toEqual('assertive');
     });
   });
-});
-
-describe('Loading', () => {
   describe('Renders as expected', () => {
     const wrapper = mount(<Loading className="extra-class" />);
     const overlay = wrapper.find(`.${prefix}--loading-overlay`);
