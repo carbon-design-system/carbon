@@ -12,6 +12,7 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
+import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
 
 const { prefix } = settings;
 
@@ -380,39 +381,53 @@ export class ModalHeader extends Component {
   }
 }
 
-export class ModalBody extends Component {
-  static propTypes = {
-    /**
-     * Specify an optional className to be added to the Modal Body node
-     */
-    className: PropTypes.string,
-
-    /**
-     * Provide whether the modal content has a form element.
-     * If `true` is used here, non-form child content should have `bx--modal-content__regular-content` class.
-     */
-    hasForm: PropTypes.bool,
-  };
-
-  render() {
-    const { className, children, hasForm, ...other } = this.props;
-
-    const contentClass = classNames({
-      [`${prefix}--modal-content`]: true,
-      [`${prefix}--modal-content--with-form`]: hasForm,
-      [className]: className,
-    });
-
-    return (
-      <>
-        <div className={contentClass} {...other}>
-          {children}
-        </div>
-        <div className={`${prefix}--modal-content--overflow-indicator`} />
-      </>
-    );
-  }
+export function ModalBody(props) {
+  const { className, children, hasForm, hasScrollingContent, ...other } = props;
+  const contentClass = classNames({
+    [`${prefix}--modal-content`]: true,
+    [`${prefix}--modal-content--with-form`]: hasForm,
+    [className]: className,
+  });
+  const hasScrollingContentProps = hasScrollingContent
+    ? {
+        tabIndex: 0,
+        role: 'region',
+      }
+    : {};
+  return (
+    <>
+      <div className={contentClass} {...hasScrollingContentProps} {...other}>
+        {children}
+      </div>
+      <div className={`${prefix}--modal-content--overflow-indicator`} />
+    </>
+  );
 }
+ModalBody.propTypes = {
+  /**
+   * Specify an optional className to be added to the Modal Body node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Provide whether the modal content has a form element.
+   * If `true` is used here, non-form child content should have `bx--modal-content__regular-content` class.
+   */
+  hasForm: PropTypes.bool,
+
+  /**
+   * Specify whether the modal contains scrolling content
+   */
+  hasScrollingContent: PropTypes.bool,
+
+  /**
+   * Required props for the accessibility label of the header
+   */
+  ['aria-label']: requiredIfGivenPropExists(
+    'hasScrollingContent',
+    PropTypes.string
+  ),
+};
 
 export class ModalFooter extends Component {
   static propTypes = {

@@ -13,9 +13,11 @@ import { Close20 } from '@carbon/icons-react';
 import FocusTrap from 'focus-trap-react';
 import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
-import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
+const getInstanceId = setupGetInstanceId();
 
 export default class Modal extends Component {
   static propTypes = {
@@ -142,9 +144,17 @@ export default class Modal extends Component {
     focusTrap: PropTypes.bool,
 
     /**
+     * Specify whether the modal contains scrolling content
+     */
+    hasScrollingContent: PropTypes.bool,
+
+    /**
      * Required props for the accessibility label of the header
      */
-    ...AriaLabelPropType,
+    ['aria-label']: requiredIfGivenPropExists(
+      'hasScrollingContent',
+      PropTypes.string
+    ),
   };
 
   static defaultProps = {
@@ -158,11 +168,15 @@ export default class Modal extends Component {
     modalLabel: '',
     selectorPrimaryFocus: '[data-modal-primary-focus]',
     focusTrap: true,
+    hasScrollingContent: true,
   };
 
   button = React.createRef();
   outerModal = React.createRef();
   innerModal = React.createRef();
+  modalInstanceId = `modal-${getInstanceId()}`;
+  modalLabelId = `${prefix}--modal-header__label--${this.modalInstanceId}`;
+  modalHeadingId = `${prefix}--modal-header__heading--${this.modalInstanceId}`;
 
   elementOrParentIsFloatingMenu = target => {
     const {
@@ -304,6 +318,7 @@ export default class Modal extends Component {
       shouldSubmitOnEnter, // eslint-disable-line
       size,
       focusTrap,
+      hasScrollingContent,
       ...other
     } = this.props;
 
@@ -342,38 +357,50 @@ export default class Modal extends Component {
       </button>
     );
 
-    const getAriaLabelledBy = (() => {
-      const ariaLabelledBy = [];
-      if (modalLabel) {
-        ariaLabelledBy.push(
-          `${prefix}--modal-header__label`,
-          `${prefix}--modal-header__heading`
-        );
-      }
-      return ariaLabelledBy.length ? ariaLabelledBy.join(' ') : null;
-    })();
+    const ariaLabel =
+      modalLabel || this.props['aria-label'] || modalAriaLabel || modalHeading;
+    const getAriaLabelledBy = modalLabel
+      ? this.modalLabelId
+      : this.modalHeadingId;
+
+    const hasScrollingContentProps = hasScrollingContent
+      ? {
+          tabIndex: 0,
+          role: 'region',
+          'aria-label': ariaLabel,
+          'aria-labelledby': getAriaLabelledBy,
+        }
+      : {};
 
     const modalBody = (
       <div
         ref={this.innerModal}
         role="dialog"
         className={containerClasses}
-        aria-label={
-          modalLabel
-            ? null
-            : this.props['aria-label'] || modalAriaLabel || modalHeading
-        }
-        aria-labelledby={getAriaLabelledBy}
+        aria-label={ariaLabel}
         aria-modal="true">
         <div className={`${prefix}--modal-header`}>
           {passiveModal && modalButton}
           {modalLabel && (
-            <h2 className={`${prefix}--modal-header__label`}>{modalLabel}</h2>
+            <h2
+              id={this.modalLabelId}
+              className={`${prefix}--modal-header__label`}>
+              {modalLabel}
+            </h2>
           )}
-          <h3 className={`${prefix}--modal-header__heading`}>{modalHeading}</h3>
+          <h3
+            id={this.modalHeadingId}
+            className={`${prefix}--modal-header__heading`}>
+            {modalHeading}
+          </h3>
           {!passiveModal && modalButton}
         </div>
-        <div className={contentClasses}>{this.props.children}</div>
+        <div
+          className={contentClasses}
+          {...hasScrollingContentProps}
+          aria-labelledby={getAriaLabelledBy}>
+          {this.props.children}
+        </div>
         <div className={`${prefix}--modal-content--overflow-indicator`} />
         {!passiveModal && (
           <div className={`${prefix}--modal-footer`}>
