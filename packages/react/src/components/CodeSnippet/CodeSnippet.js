@@ -29,7 +29,7 @@ function CodeSnippet({
   light,
   showMoreText,
   showLessText,
-  ...other
+  ...rest
 }) {
   const [expandedCode, setExpandedCode] = useState(false);
   const [shouldShowMoreLessBtn, setShouldShowMoreLessBtn] = useState(false);
