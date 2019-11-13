@@ -38,6 +38,13 @@ const props = {
     ),
     buttonOnClick: action('buttonOnClick'),
   }),
+  modalBody: () => ({
+    hasScrollingContent: boolean(
+      'Modal contains scrollable content (hasScrollingContent)',
+      true
+    ),
+    'aria-label': text('ARIA label for content', 'Example modal content'),
+  }),
   modalFooter: () => ({
     primaryButtonText: text(
       'Primary button text (primaryButtonText in <ModalFooter>)',
@@ -56,6 +63,61 @@ const props = {
   }),
 };
 
+const scrollingContent = (
+  <>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+      accumsan augue. Phasellus consequat augue vitae tellus tincidunt posuere.
+      Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum
+      risus. Nulla facilisi. Etiam venenatis molestie tellus. Quisque
+      consectetur non risus eu rutrum.{' '}
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+      accumsan augue. Phasellus consequat augue vitae tellus tincidunt posuere.
+      Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum
+      risus. Nulla facilisi. Etiam venenatis molestie tellus. Quisque
+      consectetur non risus eu rutrum.{' '}
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+      accumsan augue. Phasellus consequat augue vitae tellus tincidunt posuere.
+      Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum
+      risus. Nulla facilisi. Etiam venenatis molestie tellus. Quisque
+      consectetur non risus eu rutrum.{' '}
+    </p>
+    <h3>Lorem ipsum</h3>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+      accumsan augue. Phasellus consequat augue vitae tellus tincidunt posuere.
+      Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum
+      risus. Nulla facilisi. Etiam venenatis molestie tellus. Quisque
+      consectetur non risus eu rutrum.{' '}
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+      accumsan augue. Phasellus consequat augue vitae tellus tincidunt posuere.
+      Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum
+      risus. Nulla facilisi. Etiam venenatis molestie tellus. Quisque
+      consectetur non risus eu rutrum.{' '}
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+      accumsan augue. Phasellus consequat augue vitae tellus tincidunt posuere.
+      Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum
+      risus. Nulla facilisi. Etiam venenatis molestie tellus. Quisque
+      consectetur non risus eu rutrum.{' '}
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+      accumsan augue. Phasellus consequat augue vitae tellus tincidunt posuere.
+      Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum
+      risus. Nulla facilisi. Etiam venenatis molestie tellus. Quisque
+      consectetur non risus eu rutrum.{' '}
+    </p>
+  </>
+);
+
 storiesOf('ComposedModal', module)
   .addDecorator(withKnobs)
   .add(
@@ -63,11 +125,12 @@ storiesOf('ComposedModal', module)
     () => (
       <ComposedModal {...props.composedModal()}>
         <ModalHeader {...props.modalHeader()} />
-        <ModalBody>
+        <ModalBody {...props.modalBody()}>
           <p className={`${prefix}--modal-content__text}`}>
             Please see ModalWrapper for more examples and demo of the
             functionality.
           </p>
+          {props.modalBody().hasScrollingContent && scrollingContent}
         </ModalBody>
         <ModalFooter {...props.modalFooter()} />
       </ComposedModal>
@@ -91,11 +154,12 @@ storiesOf('ComposedModal', module)
         <ModalHeader {...props.modalHeader()}>
           <h1>Testing</h1>
         </ModalHeader>
-        <ModalBody>
+        <ModalBody {...props.modalBody()}>
           <p>
             Please see ModalWrapper for more examples and demo of the
             functionality.
           </p>
+          {props.modalBody().hasScrollingContent && scrollingContent}
         </ModalBody>
         <ModalFooter>
           <Button kind="secondary">Cancel</Button>
@@ -131,11 +195,12 @@ storiesOf('ComposedModal', module)
                 open={open}
                 onClose={() => this.toggleModal(false)}>
                 <ModalHeader {...props.modalHeader()} />
-                <ModalBody>
+                <ModalBody {...props.modalBody()}>
                   <p className={`${prefix}--modal-content__text`}>
                     Please see ModalWrapper for more examples and demo of the
                     functionality.
                   </p>
+                  {props.modalBody().hasScrollingContent && scrollingContent}
                 </ModalBody>
                 <ModalFooter {...props.modalFooter()} />
               </ComposedModal>
