@@ -55,7 +55,7 @@ function CodeSnippet({
   if (type === 'inline') {
     return (
       <Copy
-        {...other}
+        {...rest}
         onClick={onClick}
         aria-label={copyLabel || ariaLabel}
         aria-describedby={uid}
@@ -67,7 +67,7 @@ function CodeSnippet({
   }
 
   return (
-    <div {...other} className={codeSnippetClasses}>
+    <div {...rest} className={codeSnippetClasses}>
       <div
         role="textbox"
         tabIndex={0}
