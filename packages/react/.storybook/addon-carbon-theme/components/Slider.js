@@ -1,6 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const SliderLabel = ({ children }) => (
+  <span
+    style={{
+      paddingLeft: 5,
+      paddingRight: 5,
+      whiteSpace: 'nowrap',
+    }}>
+    {children}
+  </span>
+);
+
 export default function Slider({
   name,
   min,
@@ -15,19 +26,13 @@ export default function Slider({
       style={{
         display: 'flex',
         alignItems: 'center',
-        width: '100%',
       }}>
-      <span
-        style={{
-          paddingLeft: 5,
-          paddingRight: 5,
-          whiteSpace: 'nowrap',
-        }}>
-        {values[min] || min}
-      </span>
+      <SliderLabel>{values[min] || min}</SliderLabel>
       <input
         style={{
           flexGrow: 1,
+          width: '100%',
+          maxWidth: '25rem',
           padding: '5px',
         }}
         type="range"
@@ -38,7 +43,9 @@ export default function Slider({
         value={value}
         onChange={onChange}
       />
-      <span>{`${values[value] || value} / ${values[max] || max}`}</span>
+      <SliderLabel>
+        {`${values[value] || value} / ${values[max] || max}`}
+      </SliderLabel>
     </div>
   );
 }
