@@ -25,7 +25,7 @@
   },
   "scripts": {
     "build": "yarn clean && node scripts/build.js",
-    "build-storybook": "build-storybook",
+    "build-storybook": "cross-env NODE_ENV=production build-storybook",
     "clean": "rimraf es lib umd storybook-static",
     "prepublish": "yarn build",
     "start": "yarn storybook",
