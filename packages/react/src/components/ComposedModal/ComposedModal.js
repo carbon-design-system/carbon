@@ -399,7 +399,9 @@ export function ModalBody(props) {
       <div className={contentClass} {...hasScrollingContentProps} {...other}>
         {children}
       </div>
-      <div className={`${prefix}--modal-content--overflow-indicator`} />
+      {hasScrollingContent && (
+        <div className={`${prefix}--modal-content--overflow-indicator`} />
+      )}
     </>
   );
 }

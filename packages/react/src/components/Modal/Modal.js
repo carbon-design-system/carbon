@@ -401,7 +401,9 @@ export default class Modal extends Component {
           aria-labelledby={getAriaLabelledBy}>
           {this.props.children}
         </div>
-        <div className={`${prefix}--modal-content--overflow-indicator`} />
+        {hasScrollingContent && (
+          <div className={`${prefix}--modal-content--overflow-indicator`} />
+        )}
         {!passiveModal && (
           <div className={`${prefix}--modal-footer`}>
             <Button kind="secondary" onClick={onSecondaryButtonClick}>

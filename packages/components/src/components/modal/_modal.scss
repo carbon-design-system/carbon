@@ -85,9 +85,14 @@
 
     @include carbon--breakpoint(md) {
       width: 84%;
-      max-width: 768px;
       max-height: 90%;
       height: auto;
+
+      .#{$prefix}--modal-header,
+      .#{$prefix}--modal-content,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
     }
 
     @include carbon--breakpoint(lg) {
@@ -100,7 +105,33 @@
     }
   }
 
+  .#{$prefix}--modal-header,
+  .#{$prefix}--modal-content {
+    padding-left: 1rem;
+  }
+
+  .#{$prefix}--modal-header,
+  .#{$prefix}--modal-content,
+  .#{$prefix}--modal-content__regular-content {
+    padding-right: 1rem;
+  }
+
+  .#{$prefix}--modal-content--with-form {
+    padding-right: 1rem;
+
+    @include carbon--breakpoint(md) {
+      padding-right: 1rem; // Override for `.#{$prefix}--modal-content`
+    }
+  }
+
   .#{$prefix}--modal-container--xs {
+    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-content,
+    .#{$prefix}--modal-content__regular-content,
+    .#{$prefix}--modal-content--with-form {
+      padding-right: 1rem;
+    }
+
     @include carbon--breakpoint(md) {
       width: 48%;
     }
@@ -112,16 +143,17 @@
 
     @include carbon--breakpoint(xlg) {
       width: 24%;
-
-      .#{$prefix}--modal-header,
-      .#{$prefix}--modal-content,
-      .#{$prefix}--modal-content__regular-content {
-        padding-right: 1rem;
-      }
     }
   }
 
   .#{$prefix}--modal-container--sm {
+    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-content,
+    .#{$prefix}--modal-content__regular-content,
+    .#{$prefix}--modal-content--with-form {
+      padding-right: 1rem;
+    }
+
     @include carbon--breakpoint(md) {
       width: 60%;
     }
@@ -133,12 +165,39 @@
 
     @include carbon--breakpoint(xlg) {
       width: 36%;
+
+      .#{$prefix}--modal-header,
+      .#{$prefix}--modal-content,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
+
+      .#{$prefix}--modal-content--with-form {
+        padding-right: 1rem; // Override for `.#{$prefix}--modal-content`
+      }
     }
   }
 
   .#{$prefix}--modal-container--lg {
+    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-content,
+    .#{$prefix}--modal-content__regular-content,
+    .#{$prefix}--modal-content--with-form {
+      padding-right: 1rem;
+    }
+
     @include carbon--breakpoint(md) {
       width: 96%;
+
+      .#{$prefix}--modal-header,
+      .#{$prefix}--modal-content,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
+
+      .#{$prefix}--modal-content--with-form {
+        padding-right: 1rem; // Override for `.#{$prefix}--modal-content`
+      }
     }
 
     @include carbon--breakpoint(lg) {
@@ -148,25 +207,6 @@
 
     @include carbon--breakpoint(xlg) {
       width: 72%;
-    }
-  }
-
-  .#{$prefix}--modal-header,
-  .#{$prefix}--modal-content {
-    padding-left: 1rem;
-  }
-
-  .#{$prefix}--modal-header,
-  .#{$prefix}--modal-content,
-  .#{$prefix}--modal-content__regular-content {
-    padding-right: 20%;
-  }
-
-  .#{$prefix}--modal-content--with-form {
-    padding-right: 1rem;
-
-    @include carbon--breakpoint(xlg) {
-      padding-right: 1rem; // Override for `.#{$prefix}--modal-content`
     }
   }
 
@@ -221,7 +261,7 @@
     grid-row: 2/-2;
     grid-column: 1/-1;
     width: 100%;
-    height: rem(16px);
+    height: rem(32px);
     content: '';
     position: absolute;
     left: 0;
