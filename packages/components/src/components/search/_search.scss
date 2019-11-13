@@ -251,25 +251,11 @@
 
     .#{$prefix}--dropdown {
       flex: 0;
-      border-bottom: none;
-    }
-
-    .#{$prefix}--dropdown-text,
-    .#{$prefix}--list-box__field {
-      border: solid $ui-04 1px;
-      border-right: none;
-    }
-
-    .#{$prefix}--dropdown--open .#{$prefix}--dropdown-text {
-      border-color: transparent;
+      margin-right: rem(1px);
     }
 
     .#{$prefix}--search {
       flex: 1;
-    }
-
-    .#{$prefix}--search-input {
-      border: solid $ui-04 1px;
     }
 
     .#{$prefix}--search--xl .#{$prefix}--search-magnifier {
