@@ -10,7 +10,7 @@
 const AAT = require('@ibma/aat');
 
 async function toHaveNoDAPViolations(node, label) {
-  let results = await AAT.getCompliance(node, label);
+  const results = await AAT.getCompliance(node, label);
   if (AAT.assertCompliance(results.report) === 0) {
     return {
       pass: true,

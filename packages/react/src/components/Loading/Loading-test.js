@@ -16,7 +16,7 @@ const { prefix } = settings;
 describe('Loading', () => {
   describe('Automated Accessibility Testing', () => {
     let rootNode;
-    let wrapper;
+    let wrapper; // eslint-disable-line no-unused-vars
 
     beforeEach(() => {
       rootNode = document.createElement('div');
@@ -49,10 +49,12 @@ describe('Loading', () => {
       getLoader = () => wrapper.find('#test-id');
     });
 
+    // https://www.w3.org/TR/WCAG21/#headings-and-labels
     it('has a programatically determinable label', () => {
       expect(getLoader().prop('aria-labelledby')).toBeDefined();
     });
 
+    // https://www.w3.org/TR/WCAG21/#status-messages
     it('should announce a loading status', () => {
       expect(getLoader().prop('aria-atomic')).toBe('true');
       expect(getLoader().prop('aria-live')).toEqual('assertive');
