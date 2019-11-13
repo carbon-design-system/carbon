@@ -8,6 +8,7 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from '@storybook/components';
+import Slider from './Slider';
 import {
   CARBON_CURRENT_THEME,
   CARBON_TYPE_TOKEN,
@@ -199,8 +200,9 @@ export const CarbonLayoutPanel = ({ api, active }) => {
     layoutTokenDefaults
   );
   const handleLayoutTokenChange = useCallback(
-    (event, { tokenType }) => {
-      const { name: tokenName, value: tokenValue } = event.target;
+    (event, { tokenType, tokenValuesArray }) => {
+      const { name: tokenName, value: tokenValueIndex } = event.target;
+      const tokenValue = tokenValuesArray[tokenValueIndex];
       setCurrentLayoutTokens({
         ...currentLayoutTokens,
         [tokenType]: {
@@ -210,28 +212,32 @@ export const CarbonLayoutPanel = ({ api, active }) => {
       });
       api.getChannel().emit(CARBON_LAYOUT_TOKEN, { tokenName, tokenValue });
     },
-    [api]
+    [currentLayoutTokens, api]
   );
   return (
     active && (
       <Form>
         {Object.keys(layoutTokenDefaults).map(tokenType => {
-          const tokenCategoryObj = layoutTokenDefaults[tokenType];
-          return Object.keys(tokenCategoryObj).map(tokenName => (
+          const tokenTypeObj = layoutTokenDefaults[tokenType];
+          const tokenValuesArray = Object.values(tokenTypeObj);
+          return Object.keys(tokenTypeObj).map(tokenName => (
             <Form.Field key={tokenName} label={`${tokenName}:`}>
-              <Form.Select
+              <Slider
+                values={tokenValuesArray}
                 name={tokenName}
+                value={tokenValuesArray.indexOf(
+                  currentLayoutTokens[tokenType][tokenName]
+                )}
+                min={0}
+                max={tokenValuesArray.length - 1}
+                step={1}
+                range
                 onChange={event =>
-                  handleLayoutTokenChange(event, { tokenType })
-                }
-                size="flex"
-                value={currentLayoutTokens[tokenType][tokenName]}>
-                {Object.values(tokenCategoryObj).map(tokenValue => (
-                  <option key={tokenValue} value={tokenValue}>
-                    {tokenValue}
-                  </option>
-                ))}
-              </Form.Select>
+                  handleLayoutTokenChange(event, {
+                    tokenType,
+                    tokenValuesArray,
+                  })
+                }></Slider>
             </Form.Field>
           ));
         })}
