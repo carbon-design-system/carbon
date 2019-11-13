@@ -2,6 +2,17 @@
 
 const BABEL_ENV = process.env.BABEL_ENV;
 
+const docgenConfig = {
+  plugins: [
+    [
+      'babel-plugin-react-docgen',
+      {
+        removeMethods: true,
+      },
+    ],
+  ],
+};
+
 module.exports = () => ({
   presets: [
     [
@@ -14,5 +25,5 @@ module.exports = () => ({
       },
     ],
   ],
-  plugins: BABEL_ENV === 'docgen' ? ['react-docgen'] : [],
+  ...(BABEL_ENV === 'docgen' && docgenConfig),
 });
