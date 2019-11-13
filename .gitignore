@@ -49,4 +49,4 @@ node_modules
 package-lock.json
 
 # AAT test results from DAP/Axe
-# results/
+results/
