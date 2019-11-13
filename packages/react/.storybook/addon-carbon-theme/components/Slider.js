@@ -14,6 +14,7 @@ const SliderLabel = ({ children }) => (
 
 export default function Slider({
   name,
+  hashMarks,
   min,
   max,
   step,
@@ -37,12 +38,20 @@ export default function Slider({
         }}
         type="range"
         name={name}
+        list={name}
         min={min}
         max={max}
         step={step}
         value={value}
         onChange={onChange}
       />
+      {hashMarks && (
+        <datalist id={name}>
+          {values.map((value, i) => (
+            <option key={`${value}${i}`} value={i}></option>
+          ))}
+        </datalist>
+      )}
       <SliderLabel>
         {`${values[value] || value} / ${values[max] || max}`}
       </SliderLabel>
@@ -53,7 +62,12 @@ Slider.propTypes = {
   /**
    * String specifying the name for the slider
    */
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
+
+  /**
+   * Boolean value for displaying hash marks along the slider
+   */
+  hashMarks: PropTypes.bool,
 
   /**
    * Minimum possible value in the range
@@ -93,6 +107,7 @@ Slider.propTypes = {
 };
 
 Slider.defaultProps = {
+  name: 'Slider',
   min: 0,
   max: 10,
   step: 1,

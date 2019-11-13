@@ -232,6 +232,7 @@ export const CarbonLayoutPanel = ({ api, active }) => {
                 max={tokenValuesArray.length - 1}
                 step={1}
                 range
+                hashMarks
                 onChange={event =>
                   handleLayoutTokenChange(event, {
                     tokenType,
