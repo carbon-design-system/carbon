@@ -14473,6 +14473,9 @@ Code snippet styles
     height: $carbon--spacing-08;
     width: $carbon--spacing-08;
     overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:focus {
       @include focus-outline('outline');
@@ -14609,7 +14612,7 @@ Code snippet styles
 
   .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
     top: rem(25px);
-    left: 1rem;
+    left: 50%;
     right: auto;
   }
 
@@ -18110,7 +18113,8 @@ Link styles
     }
 
     &:active,
-    &:active:visited {
+    &:active:visited,
+    &:active:visited:hover {
       color: $text-01;
       text-decoration: underline;
     }
