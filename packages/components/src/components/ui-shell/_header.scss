@@ -242,6 +242,9 @@
 
   .#{$prefix}--header__menu[role='menu'] {
     display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
   .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
