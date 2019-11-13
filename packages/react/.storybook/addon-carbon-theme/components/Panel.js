@@ -8,7 +8,11 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from '@storybook/components';
-import { CARBON_CURRENT_THEME, CARBON_TYPE_TOKEN } from '../shared';
+import {
+  CARBON_CURRENT_THEME,
+  CARBON_TYPE_TOKEN,
+  CARBON_LAYOUT_TOKEN,
+} from '../shared';
 
 const typeTokenPairings = [
   '12-16',
@@ -131,6 +135,112 @@ export const CarbonTypePanel = ({ api, active }) => {
 };
 
 CarbonTypePanel.propTypes = {
+  /**
+   * The Storybook API object.
+   */
+  api: PropTypes.shape({
+    getChannel: PropTypes.func,
+  }).isRequired,
+
+  /**
+   * `true` if this Storybook add-on panel is active.
+   */
+  active: PropTypes.bool.isRequired,
+};
+
+const layoutTokenDefaults = {
+  container: {
+    'container-01': '1.5rem',
+    'container-02': '2rem',
+    'container-03': '2.5rem',
+    'container-04': '3rem',
+    'container-05': '4rem',
+  },
+  'fluid-spacing': {
+    'fluid-spacing-01': '0',
+    'fluid-spacing-02': '2vw',
+    'fluid-spacing-03': '5vw',
+    'fluid-spacing-04': '10vw',
+  },
+  'icon-size': {
+    'icon-size-01': '1rem',
+    'icon-size-02': '1.25rem',
+  },
+  layout: {
+    'layout-01': '1rem',
+    'layout-02': '1.5rem',
+    'layout-03': '2rem',
+    'layout-04': '3rem',
+    'layout-05': '4rem',
+    'layout-06': '6rem',
+    'layout-07': '10rem',
+  },
+  spacing: {
+    'spacing-01': '0.125rem',
+    'spacing-02': '0.25rem',
+    'spacing-03': '0.5rem',
+    'spacing-04': '0.75rem',
+    'spacing-05': '1rem',
+    'spacing-06': '1.5rem',
+    'spacing-07': '2rem',
+    'spacing-08': '2.5rem',
+    'spacing-09': '3rem',
+    'spacing-10': '4rem',
+    'spacing-11': '5rem',
+    'spacing-12': '6rem',
+  },
+};
+
+/**
+ * Storybook add-on panel for Carbon layout token switcher.
+ */
+export const CarbonLayoutPanel = ({ api, active }) => {
+  const [currentLayoutTokens, setCurrentLayoutTokens] = useState(
+    layoutTokenDefaults
+  );
+  const handleLayoutTokenChange = useCallback(
+    (event, { tokenType }) => {
+      const { name: tokenName, value: tokenValue } = event.target;
+      setCurrentLayoutTokens({
+        ...currentLayoutTokens,
+        [tokenType]: {
+          ...currentLayoutTokens[tokenType],
+          [tokenName]: tokenValue,
+        },
+      });
+      api.getChannel().emit(CARBON_LAYOUT_TOKEN, { tokenName, tokenValue });
+    },
+    [api]
+  );
+  return (
+    active && (
+      <Form>
+        {Object.keys(layoutTokenDefaults).map(tokenType => {
+          const tokenCategoryObj = layoutTokenDefaults[tokenType];
+          return Object.keys(tokenCategoryObj).map(tokenName => (
+            <Form.Field key={tokenName} label={`${tokenName}:`}>
+              <Form.Select
+                name={tokenName}
+                onChange={event =>
+                  handleLayoutTokenChange(event, { tokenType })
+                }
+                size="flex"
+                value={currentLayoutTokens[tokenType][tokenName]}>
+                {Object.values(tokenCategoryObj).map(tokenValue => (
+                  <option key={tokenValue} value={tokenValue}>
+                    {tokenValue}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Field>
+          ));
+        })}
+      </Form>
+    )
+  );
+};
+
+CarbonLayoutPanel.propTypes = {
   /**
    * The Storybook API object.
    */

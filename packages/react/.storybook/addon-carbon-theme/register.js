@@ -7,12 +7,18 @@
 
 import React from 'react';
 import addons from '@storybook/addons';
-import { CarbonThemesPanel, CarbonTypePanel } from './components/Panel';
+import {
+  CarbonThemesPanel,
+  CarbonTypePanel,
+  CarbonLayoutPanel,
+} from './components/Panel';
 import {
   CARBON_THEMES_ADDON_ID,
   CARBON_THEME_PANEL_ID,
   CARBON_TYPE_ADDON_ID,
   CARBON_TYPE_PANEL_ID,
+  CARBON_LAYOUT_ADDON_ID,
+  CARBON_LAYOUT_PANEL_ID,
 } from './shared';
 
 addons.register(CARBON_THEMES_ADDON_ID, api => {
@@ -29,6 +35,15 @@ addons.register(CARBON_TYPE_ADDON_ID, api => {
     title: 'Carbon type',
     render: ({ active, key }) => (
       <CarbonTypePanel api={api} key={key} active={active} />
+    ),
+  });
+});
+
+addons.register(CARBON_LAYOUT_ADDON_ID, api => {
+  addons.addPanel(CARBON_LAYOUT_PANEL_ID, {
+    title: 'Carbon layout',
+    render: ({ active, key }) => (
+      <CarbonLayoutPanel api={api} key={key} active={active} />
     ),
   });
 });

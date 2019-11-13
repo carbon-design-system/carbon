@@ -11,3 +11,6 @@ export const CARBON_THEME_PANEL_ID = `${CARBON_THEMES_ADDON_ID}/panel`;
 export const CARBON_TYPE_ADDON_ID = 'carbon-type';
 export const CARBON_TYPE_TOKEN = `${CARBON_TYPE_ADDON_ID}/type`;
 export const CARBON_TYPE_PANEL_ID = `${CARBON_TYPE_ADDON_ID}/panel`;
+export const CARBON_LAYOUT_ADDON_ID = 'carbon-layout';
+export const CARBON_LAYOUT_TOKEN = `${CARBON_LAYOUT_ADDON_ID}/layout`;
+export const CARBON_LAYOUT_PANEL_ID = `${CARBON_LAYOUT_ADDON_ID}/panel`;

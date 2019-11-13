@@ -14,6 +14,7 @@ import { configureActions } from '@storybook/addon-actions';
 import {
   CARBON_CURRENT_THEME,
   CARBON_TYPE_TOKEN,
+  CARBON_LAYOUT_TOKEN,
 } from './addon-carbon-theme/shared';
 import Container from './Container';
 
@@ -66,6 +67,11 @@ addons.getChannel().on(CARBON_TYPE_TOKEN, ({ tokenName, tokenValue }) => {
     `--${customPropertyPrefix}-${tokenName}-line-height`,
     rem(lineHeight)
   );
+});
+
+addons.getChannel().on(CARBON_LAYOUT_TOKEN, ({ tokenName, tokenValue }) => {
+  const root = document.documentElement;
+  root.style.setProperty(`--${customPropertyPrefix}-${tokenName}`, tokenValue);
 });
 
 function loadStories() {
