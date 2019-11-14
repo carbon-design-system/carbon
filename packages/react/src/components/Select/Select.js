@@ -37,6 +37,7 @@ const Select = React.forwardRef(function Select(
     [`${prefix}--select--inline`]: inline,
     [`${prefix}--select--light`]: light,
     [`${prefix}--select--invalid`]: invalid,
+    [`${prefix}--select--disabled`]: disabled,
     [className]: className,
   });
   const labelClasses = classNames(`${prefix}--label`, {
@@ -68,7 +69,6 @@ const Select = React.forwardRef(function Select(
           id={id}
           className={`${prefix}--select-input`}
           disabled={disabled || undefined}
-          data-invalid={invalid || undefined}
           aria-invalid={invalid || undefined}
           ref={ref}>
           {children}

@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import PropTypes from 'prop-types';
 import React from 'react';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -16,9 +18,11 @@ const tab = (
   </li>
 );
 
-function TabsSkeleton() {
+function TabsSkeleton({ className, ...rest }) {
   return (
-    <div className={`${prefix}--tabs ${prefix}--skeleton`}>
+    <div
+      className={cx(`${prefix}--tabs`, `${prefix}--skeleton`, className)}
+      {...rest}>
       <div className={`${prefix}--tabs-trigger`}>
         <div className={`${prefix}--tabs-trigger-text`}>&nbsp;</div>
         <svg width="10" height="5" viewBox="0 0 10 5" fillRule="evenodd">
@@ -34,5 +38,12 @@ function TabsSkeleton() {
     </div>
   );
 }
+
+TabsSkeleton.propTypes = {
+  /**
+   * Specify an optional className to add.
+   */
+  className: PropTypes.string,
+};
 
 export default TabsSkeleton;
