@@ -141,4 +141,7 @@ function ExampleDropContainerApp(props) {
   );
 }
 
-render(<ExampleDropContainerApp />, document.getElementById('root'));
+render(
+  <ExampleDropContainerApp accept={['image/jpeg', 'image/png']} />,
+  document.getElementById('root')
+);
