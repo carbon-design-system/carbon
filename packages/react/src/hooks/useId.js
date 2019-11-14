@@ -27,7 +27,7 @@ let id = 0;
  * }
  *
  * @param {object} [configuration]
- * @param {string} [configuration.prefix=id] - prefix to prepend the unique id
+ * @param {string} [configuration.prefix=id] - prefix added to the unique id
  * @returns {string}
  */
 export function useId({ prefix = 'id' }) {
