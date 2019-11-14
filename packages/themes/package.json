@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "@carbon/colors": "10.5.0",
-    "@carbon/type": "10.6.0"
+    "@carbon/type": "10.6.0",
+    "@carbon/layout": "10.5.0"
   },
   "devDependencies": {
     "@carbon/cli-reporter": "10.3.0",
