@@ -3265,6 +3265,7 @@ Get the value of the corresponding number of units
   - [multiselect [mixin]](#multiselect-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
+  - [select [mixin]](#select-mixin)
   - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
 
 ### ✅carbon--spacing-01 [variable]
@@ -3408,7 +3409,6 @@ $carbon--spacing-05: 1rem;
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
-  - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
   - [padding-th [mixin]](#padding-th-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
@@ -3638,6 +3638,7 @@ $spacing-03: $carbon--spacing-03;
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
+  - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
@@ -3681,6 +3682,7 @@ $spacing-05: $carbon--spacing-05;
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
@@ -3718,6 +3720,7 @@ $spacing-07: $carbon--spacing-07;
 - **Alias**: `carbon--spacing-07`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [select [mixin]](#select-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ### ✅spacing-08 [variable]
@@ -3753,6 +3756,7 @@ $spacing-09: $carbon--spacing-09;
 - **Alias**: `carbon--spacing-09`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [select [mixin]](#select-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅spacing-10 [variable]
@@ -19234,10 +19238,10 @@ Overflow menu styles
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after {
-    bottom: rem(-6px);
+    bottom: rem(-8px);
     left: 0;
     width: rem(32px);
-    height: rem(6px);
+    height: rem(8px);
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after {
@@ -19448,8 +19452,7 @@ Pagination styles
     grid-template-columns: auto 0;
   }
 
-  .#{$prefix}--select-input__wrapper,
-  .#{$prefix}--select-input--inline__wrapper {
+  .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
     height: 100%;
   }
 
@@ -20569,10 +20572,6 @@ Select styles
     position: relative;
     display: flex;
     align-items: center;
-
-    &:hover .#{$prefix}--select-input {
-      background-color: $hover-ui;
-    }
   }
 
   .#{$prefix}--select-input {
@@ -20584,7 +20583,7 @@ Select styles
     width: rem(224px);
     min-width: rem(128px);
     max-width: rem(448px);
-    padding: 0 rem(42px) 0 $carbon--spacing-05; // 1.5rem + chevron width
+    padding: 0 $spacing-09 0 $spacing-05;
     color: $text-01;
     background-color: $field-01;
     border: none;
@@ -20606,8 +20605,6 @@ Select styles
 
     // Select text renders a little high on Firefox
     @-moz-document url-prefix() {
-      padding-top: rem(4px);
-
       // Removes dotted inner focus
       &:-moz-focusring,
       &::-moz-focus-inner {
@@ -20637,7 +20634,7 @@ Select styles
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input {
-    padding-right: rem(64px); // 1rem + chevron width + invalid icon width
+    padding-right: carbon--mini-units(10);
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
@@ -20675,7 +20672,7 @@ Select styles
   .#{$prefix}--select__arrow {
     fill: $ui-05;
     position: absolute;
-    right: 1rem;
+    right: $spacing-05;
     pointer-events: none;
   }
 
@@ -20683,7 +20680,7 @@ Select styles
     .#{$prefix}--select-input
     ~ .#{$prefix}--select__invalid-icon {
     position: absolute;
-    right: rem(34px); // 1.5rem + chevron width
+    right: $spacing-09;
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid]
@@ -20723,13 +20720,13 @@ Select styles
   .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--label,
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--form__helper-text {
-    margin-top: rem(13px);
+    margin-top: rem(13px); // offset label text margin
     align-self: flex-start;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
     margin-bottom: 0;
-    margin-left: rem(8px);
+    margin-left: $spacing-03;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--label {
@@ -20742,41 +20739,32 @@ Select styles
     color: $text-01;
     border-bottom: none;
     padding-left: $carbon--spacing-03;
-    padding-right: rem(26px);
+    padding-right: $spacing-07;
+  }
 
-    @-moz-document url-prefix() {
-      padding-top: 0;
-    }
-
-    &:hover {
-      background-color: $hover-ui;
-    }
+  .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
+  .#{$prefix}--select--inline .#{$prefix}--select-input[disabled]:hover {
+    background-color: $disabled-background-color;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
-    bottom: auto;
-    top: 1.125rem;
     right: $carbon--spacing-03;
   }
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--select-input {
-    padding-right: rem(50px);
+    padding-right: $spacing-09 + $spacing-03; // 3.5rem
   }
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--select-input
     ~ .#{$prefix}--select__invalid-icon {
-    right: rem(24px);
+    right: $spacing-07;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
     color: $disabled;
     cursor: not-allowed;
-
-    &:hover {
-      background-color: transparent;
-    }
 
     ~ * {
       cursor: not-allowed;
@@ -20804,18 +20792,22 @@ Select styles
 
 - **Group**: [select](#select)
 - **Requires**:
+  - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
-  - [hover-ui [variable]](#hover-ui-variable)
-  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [spacing-09 [variable]](#spacing-09-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [support-01 [variable]](#support-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-05 [variable]](#ui-05-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [spacing-07 [variable]](#spacing-07-variable)
 
 ## slider
 
