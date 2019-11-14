@@ -35,7 +35,8 @@
     }
 
     &:active,
-    &:active:visited {
+    &:active:visited,
+    &:active:visited:hover {
       color: $text-01;
       text-decoration: underline;
     }
