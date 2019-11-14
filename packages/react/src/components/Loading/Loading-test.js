@@ -9,34 +9,22 @@ import React from 'react';
 import Loading from '../Loading';
 import { mount, shallow } from 'enzyme';
 import { settings } from 'carbon-components';
-import { afterEach } from 'jest-circus';
+import { render, cleanup } from '@carbon/test-utils/react';
 
 const { prefix } = settings;
 
 describe('Loading', () => {
+  afterEach(cleanup);
+
   describe('Automated Accessibility Testing', () => {
-    let rootNode;
-    let wrapper; // eslint-disable-line no-unused-vars
-
-    beforeEach(() => {
-      rootNode = document.createElement('div');
-      document.body.appendChild(rootNode);
-
-      wrapper = mount(<Loading />, {
-        attachTo: rootNode,
-      });
-    });
-
-    afterEach(() => {
-      document.body.removeChild(rootNode);
-    });
-
     it('should have no Axe violations', async () => {
-      await expect(rootNode).toHaveNoAxeViolations();
+      const { container } = render(<Loading />);
+      await expect(container).toHaveNoAxeViolations();
     });
 
     it('should have no DAP violations', async () => {
-      await expect(rootNode).toHaveNoDAPViolations('Loading');
+      const { container } = render(<Loading />);
+      await expect(container).toHaveNoDAPViolations('Loading');
     });
   });
 
