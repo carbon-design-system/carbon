@@ -219,6 +219,8 @@ class HeaderMenu extends React.Component {
   };
 }
 
-export default React.forwardRef((props, ref) => {
-  return <HeaderMenu {...props} focusRef={ref} />;
-});
+export default (() => {
+  const forwardRef = (props, ref) => <HeaderMenu {...props} focusRef={ref} />;
+  forwardRef.displayName = 'HeaderMenu';
+  return React.forwardRef(forwardRef);
+})();
