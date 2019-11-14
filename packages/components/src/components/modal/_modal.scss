@@ -107,20 +107,20 @@
 
   .#{$prefix}--modal-header,
   .#{$prefix}--modal-content {
-    padding-left: 1rem;
+    padding-left: $carbon--spacing-05;
   }
 
   .#{$prefix}--modal-header,
   .#{$prefix}--modal-content,
   .#{$prefix}--modal-content__regular-content {
-    padding-right: 1rem;
+    padding-right: $carbon--spacing-05;
   }
 
   .#{$prefix}--modal-content--with-form {
-    padding-right: 1rem;
+    padding-right: $carbon--spacing-05;
 
     @include carbon--breakpoint(md) {
-      padding-right: 1rem; // Override for `.#{$prefix}--modal-content`
+      padding-right: $carbon--spacing-05; // Override for `.#{$prefix}--modal-content`
     }
   }
 
@@ -129,7 +129,7 @@
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
-      padding-right: 1rem;
+      padding-right: $carbon--spacing-05;
     }
 
     @include carbon--breakpoint(md) {
@@ -151,7 +151,7 @@
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
-      padding-right: 1rem;
+      padding-right: $carbon--spacing-05;
     }
 
     @include carbon--breakpoint(md) {
@@ -173,7 +173,7 @@
       }
 
       .#{$prefix}--modal-content--with-form {
-        padding-right: 1rem; // Override for `.#{$prefix}--modal-content`
+        padding-right: $carbon--spacing-05; // Override for `.#{$prefix}--modal-content`
       }
     }
   }
@@ -183,7 +183,7 @@
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
-      padding-right: 1rem;
+      padding-right: $carbon--spacing-05;
     }
 
     @include carbon--breakpoint(md) {
@@ -196,7 +196,7 @@
       }
 
       .#{$prefix}--modal-content--with-form {
-        padding-right: 1rem; // Override for `.#{$prefix}--modal-content`
+        padding-right: $carbon--spacing-05; // Override for `.#{$prefix}--modal-content`
       }
     }
 
@@ -211,7 +211,7 @@
   }
 
   .#{$prefix}--modal-header {
-    padding-top: 1rem;
+    padding-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-03;
 
     grid-row: 1/1;
@@ -289,8 +289,8 @@
       flex: 1;
       height: 4rem;
       margin: 0;
-      padding-top: 1rem;
-      padding-bottom: 2rem;
+      padding-top: $carbon--spacing-05;
+      padding-bottom: $carbon--spacing-07;
     }
   }
 
