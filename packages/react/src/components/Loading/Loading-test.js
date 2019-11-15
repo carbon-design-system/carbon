@@ -28,7 +28,7 @@ describe('Loading', () => {
     });
   });
 
-  describe('Screenreader Accessibility', () => {
+  describe('with a screenreader', () => {
     let wrapper;
     let getLoader;
 
