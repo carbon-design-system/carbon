@@ -63,8 +63,10 @@ describe('Tab', () => {
       );
     });
 
-    it('has aria-disabled that matches disabled', () => {
+    fit('has aria-disabled that matches disabled', () => {
       const getDisabledRegion = () => wrapper.find('[aria-disabled]');
+
+      expect(getDisabledRegion().length).toEqual(0);
 
       wrapper.setProps({ disabled: false });
       expect(getDisabledRegion().prop('aria-disabled')).toEqual(false);
