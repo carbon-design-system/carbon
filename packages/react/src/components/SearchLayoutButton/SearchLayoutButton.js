@@ -7,10 +7,13 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import warning from 'warning';
 import { settings } from 'carbon-components';
 import { ListBulleted16, Grid16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
+
+let didWarnAboutDeprecation = false;
 
 /**
  * The layout button for `<Search>`.
@@ -60,6 +63,17 @@ class SearchLayoutButton extends Component {
           format: format || 'list',
           prevFormat: format,
         };
+  }
+
+  constructor(props) {
+    super(props);
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        'The SearchLayoutButton component has been deprecated and will be removed in the next major release of `carbon-components-react`'
+      );
+      didWarnAboutDeprecation = true;
+    }
   }
 
   /**

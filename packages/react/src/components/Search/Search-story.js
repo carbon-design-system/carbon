@@ -65,7 +65,7 @@ storiesOf('Search', module)
     },
   })
   .add(
-    'custom buttons',
+    '[Deprecated] custom buttons',
     () => (
       <div style={{ display: 'flex' }}>
         <Search {...props()} id="search-1" />

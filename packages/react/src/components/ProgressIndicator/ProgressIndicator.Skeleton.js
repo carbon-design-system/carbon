@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import PropTypes from 'prop-types';
 import React from 'react';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -24,9 +26,11 @@ const step = (
   </li>
 );
 
-function ProgressIndicatorSkeleton() {
+function ProgressIndicatorSkeleton({ className, ...rest }) {
   return (
-    <ul className={`${prefix}--progress ${prefix}--skeleton`}>
+    <ul
+      className={cx(`${prefix}--progress`, `${prefix}--skeleton`, className)}
+      {...rest}>
       {step}
       {step}
       {step}
@@ -34,5 +38,12 @@ function ProgressIndicatorSkeleton() {
     </ul>
   );
 }
+
+ProgressIndicatorSkeleton.propTypes = {
+  /**
+   * Specify an optional className to add.
+   */
+  className: PropTypes.string,
+};
 
 export default ProgressIndicatorSkeleton;
