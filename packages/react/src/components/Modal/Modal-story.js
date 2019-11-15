@@ -26,6 +26,10 @@ const props = () => ({
     false
   ),
   focusTrap: boolean('Trap focus (focusTrap)', false),
+  hasScrollingContent: boolean(
+    'Modal contains scrollable content (hasScrollingContent)',
+    true
+  ),
   modalHeading: text('Modal heading (modalHeading)', 'Modal heading'),
   modalLabel: text('Optional label (modalLabel)', 'Label'),
   modalAriaLabel: text(
@@ -66,6 +70,60 @@ storiesOf('Modal', module)
           Please see ModalWrapper for more examples and demo of the
           functionality.
         </p>
+        {props().hasScrollingContent && (
+          <>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <h3>Lorem ipsum</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+          </>
+        )}
       </Modal>
     ),
     {

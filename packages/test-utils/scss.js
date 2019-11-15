@@ -163,6 +163,9 @@ function convert(value) {
   }
 
   if (value instanceof types.Number) {
+    if (value.getValue() === 0) {
+      return value.getValue();
+    }
     return `${value.getValue()}${value.getUnit()}`;
   }
 

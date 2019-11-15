@@ -107,7 +107,7 @@
 
   .#{$prefix}--modal-header {
     padding-top: 1rem;
-    margin-bottom: $carbon--spacing-05;
+    margin-bottom: $carbon--spacing-03;
   }
 
   .#{$prefix}--modal-header__label {
@@ -127,9 +127,13 @@
     @include type-style('body-long-01');
 
     overflow-y: auto;
-    margin-bottom: $carbon--spacing-09;
+    margin-bottom: $carbon--spacing-08;
     color: $text-01;
     font-weight: 400;
+
+    // Required to accommodate focus outline's negative offset:
+    padding-top: $carbon--spacing-03;
+    padding-bottom: $carbon--spacing-03;
 
     &:focus {
       @include focus-outline('outline');

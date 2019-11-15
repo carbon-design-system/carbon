@@ -12,6 +12,7 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
+import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
 
 const { prefix } = settings;
 
@@ -88,7 +89,7 @@ export default class ComposedModal extends Component {
   handleKeyDown = evt => {
     // Esc key
     if (evt.which === 27) {
-      this.closeModal();
+      this.closeModal(evt);
     }
 
     this.props.onKeyDown(evt);
@@ -99,7 +100,7 @@ export default class ComposedModal extends Component {
       this.innerModal.current &&
       !this.innerModal.current.contains(evt.target)
     ) {
-      this.closeModal();
+      this.closeModal(evt);
     }
   };
 
@@ -175,9 +176,9 @@ export default class ComposedModal extends Component {
     }
   };
 
-  closeModal = () => {
+  closeModal = evt => {
     const { onClose } = this.props;
-    if (!onClose || onClose() !== false) {
+    if (!onClose || onClose(evt) !== false) {
       this.setState({
         open: false,
       });
@@ -307,8 +308,8 @@ export class ModalHeader extends Component {
     buttonOnClick: () => {},
   };
 
-  handleCloseButtonClick = () => {
-    this.props.closeModal();
+  handleCloseButtonClick = evt => {
+    this.props.closeModal(evt);
     this.props.buttonOnClick();
   };
 
@@ -373,29 +374,43 @@ export class ModalHeader extends Component {
   }
 }
 
-export class ModalBody extends Component {
-  static propTypes = {
-    /**
-     * Specify an optional className to be added to the Modal Body node
-     */
-    className: PropTypes.string,
-  };
-
-  render() {
-    const { className, children, ...other } = this.props;
-
-    const contentClass = classNames({
-      [`${prefix}--modal-content`]: true,
-      [className]: className,
-    });
-
-    return (
-      <div className={contentClass} {...other}>
-        {children}
-      </div>
-    );
-  }
+export function ModalBody(props) {
+  const { className, children, hasScrollingContent, ...other } = props;
+  const contentClass = classNames({
+    [`${prefix}--modal-content`]: true,
+    [className]: className,
+  });
+  const hasScrollingContentProps = hasScrollingContent
+    ? {
+        tabIndex: 0,
+        role: 'region',
+      }
+    : {};
+  return (
+    <div className={contentClass} {...hasScrollingContentProps} {...other}>
+      {children}
+    </div>
+  );
 }
+ModalBody.propTypes = {
+  /**
+   * Specify an optional className to be added to the Modal Body node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether the modal contains scrolling content
+   */
+  hasScrollingContent: PropTypes.bool,
+
+  /**
+   * Required props for the accessibility label of the header
+   */
+  ['aria-label']: requiredIfGivenPropExists(
+    'hasScrollingContent',
+    PropTypes.string
+  ),
+};
 
 export class ModalFooter extends Component {
   static propTypes = {
@@ -458,7 +473,7 @@ export class ModalFooter extends Component {
   };
 
   handleRequestClose = evt => {
-    this.props.closeModal();
+    this.props.closeModal(evt);
     this.props.onRequestClose(evt);
   };
 

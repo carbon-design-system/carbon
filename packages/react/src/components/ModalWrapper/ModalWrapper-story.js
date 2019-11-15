@@ -48,6 +48,10 @@ const props = () => {
       'The text in the trigger button (buttonTriggerText)',
       'Launch Modal'
     ),
+    hasScrollingContent: boolean(
+      'Modal contains scrollable content (hasScrollingContent)',
+      true
+    ),
     renderTriggerButtonIcon: typeof iconToUse === 'function' && iconToUse,
     triggerButtonIcon: typeof iconToUse !== 'function' && iconToUse,
     modalLabel: text('The modal label (optional) (modalLabel)', 'Label'),
@@ -119,6 +123,60 @@ storiesOf('ModalWrapper', module)
           amet, consectetur adipiscing elit. Mauris a lobortis ex. Nulla mollis
           tincidunt sodales.
         </p>
+        {props().hasScrollingContent && (
+          <>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <h3>Lorem ipsum</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+          </>
+        )}
       </ModalWrapper>
     ),
     {
