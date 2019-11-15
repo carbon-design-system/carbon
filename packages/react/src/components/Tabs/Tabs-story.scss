@@ -3,7 +3,7 @@
 // Use e.g. `@import '~carbon-components/scss/globals/scss/styles.scss'` instead.
 @import '~carbon-components/src/globals/scss/css--helpers'; // SEE THE NOTE ABOVE
 
-.bx--tabs--fixed ~ div {
+.bx--tabs--container ~ div {
   height: 320px;
   background-color: $ui-01;
 }
