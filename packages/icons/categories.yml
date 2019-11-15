@@ -189,6 +189,7 @@ categories:
           - drag--horizontal
           - drag--vertical
           - edit-filter
+          - exit
           - fade
           - filter
           - filter--edit
