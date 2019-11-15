@@ -342,6 +342,9 @@ icons:
     categories:
       - name: Organization
         subcategory: Data
+    aliases:
+      - letters
+      - swap
     sizes:
       - 32
   - name: chat
