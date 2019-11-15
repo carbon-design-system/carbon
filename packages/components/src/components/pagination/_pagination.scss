@@ -42,8 +42,7 @@ $css--helpers: true;
     grid-template-columns: auto 0;
   }
 
-  .#{$prefix}--select-input__wrapper,
-  .#{$prefix}--select-input--inline__wrapper {
+  .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
     height: 100%;
   }
 

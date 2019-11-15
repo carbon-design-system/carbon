@@ -3,6 +3,8 @@
 const { execSync } = require('child_process');
 const { inInstall } = require('in-publish');
 const path = require('path');
+const fs = require('fs');
+const mapValues = require('lodash/mapValues');
 
 if (inInstall()) {
   process.exit(0);
@@ -32,6 +34,16 @@ try {
   exec(`${babelPath} src -q -d lib --ignore "${ignoreGlobs}"`, {
     BABEL_ENV: 'cjs',
   });
+
+  // Create docgen metadata
+  exec(`${babelPath} src -q -d build/docgen --ignore "${ignoreGlobs}"`, {
+    BABEL_ENV: 'docgen',
+  });
+  fs.writeFileSync(
+    'react-docgen.json',
+    JSON.stringify(mapValues(require(`../build/docgen`), '__docgenInfo'))
+  );
+
   exec(
     `${rollupPath} -c scripts/rollup.config.js -o umd/carbon-components-react.js`,
     {
