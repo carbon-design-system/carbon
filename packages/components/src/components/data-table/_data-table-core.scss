@@ -32,7 +32,7 @@
   }
 
   .#{$prefix}--data-table-header--light {
-    background: $ui-02;
+    background-color: $ui-02;
   }
 
   .#{$prefix}--data-table-header__title {
@@ -137,7 +137,7 @@
 
   .#{$prefix}--data-table--light td,
   .#{$prefix}--data-table--light tbody th {
-    background: $ui-02;
+    background-color: $ui-02;
   }
 
   @supports (-moz-appearance: none) {
@@ -253,14 +253,14 @@
     tbody
     tr:nth-child(even)
     td {
-    background: $ui-01;
+    background-color: $ui-01;
   }
 
   .#{$prefix}--data-table--light.#{$prefix}--data-table--zebra
     tbody
     tr:nth-child(odd)
     td {
-    background: $ui-02;
+    background-color: $ui-02;
     border-bottom-color: $ui-02;
     border-top-color: $ui-02;
   }
