@@ -55,11 +55,11 @@ module.exports = {
       },
     },
     {
-      name: 'fixed',
-      label: 'Tabs (fixed)',
+      name: 'container',
+      label: 'Tabs (container)',
       context: {
-        fixed: true,
-        items: items('fixed'),
+        container: true,
+        items: items('container'),
       },
     },
   ],
