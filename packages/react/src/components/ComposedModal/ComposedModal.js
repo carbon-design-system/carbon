@@ -61,6 +61,11 @@ export default class ComposedModal extends Component {
      * focused when the Modal opens
      */
     selectorPrimaryFocus: PropTypes.string,
+
+    /**
+     * Specify the size variant.
+     */
+    size: PropTypes.oneOf('xs', 'sm', 'lg'),
   };
 
   static getDerivedStateFromProps({ open }, state) {
@@ -193,6 +198,7 @@ export default class ComposedModal extends Component {
       children,
       danger,
       selectorPrimaryFocus, // eslint-disable-line
+      size,
       ...other
     } = this.props;
 
@@ -205,6 +211,7 @@ export default class ComposedModal extends Component {
 
     const containerClass = classNames({
       [`${prefix}--modal-container`]: true,
+      [`${prefix}--modal-container--${size}`]: size,
       [containerClassName]: containerClassName,
     });
 
@@ -375,9 +382,10 @@ export class ModalHeader extends Component {
 }
 
 export function ModalBody(props) {
-  const { className, children, hasScrollingContent, ...other } = props;
+  const { className, children, hasForm, hasScrollingContent, ...other } = props;
   const contentClass = classNames({
     [`${prefix}--modal-content`]: true,
+    [`${prefix}--modal-content--with-form`]: hasForm,
     [className]: className,
   });
   const hasScrollingContentProps = hasScrollingContent
@@ -387,9 +395,14 @@ export function ModalBody(props) {
       }
     : {};
   return (
-    <div className={contentClass} {...hasScrollingContentProps} {...other}>
-      {children}
-    </div>
+    <>
+      <div className={contentClass} {...hasScrollingContentProps} {...other}>
+        {children}
+      </div>
+      {hasScrollingContent && (
+        <div className={`${prefix}--modal-content--overflow-indicator`} />
+      )}
+    </>
   );
 }
 ModalBody.propTypes = {
@@ -397,6 +410,12 @@ ModalBody.propTypes = {
    * Specify an optional className to be added to the Modal Body node
    */
   className: PropTypes.string,
+
+  /**
+   * Provide whether the modal content has a form element.
+   * If `true` is used here, non-form child content should have `bx--modal-content__regular-content` class.
+   */
+  hasForm: PropTypes.bool,
 
   /**
    * Specify whether the modal contains scrolling content

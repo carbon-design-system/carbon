@@ -10,7 +10,7 @@
 
 <div data-modal id="modal-{{idSuffix}}" class="{{@root.prefix}}--modal {{classModalSupplemental}}" role="dialog"
   aria-modal="true" aria-labelledby="modal-{{idSuffix}}-label" aria-describedby="modal-{{idSuffix}}-heading" tabindex="-1">
-  <div class="{{@root.prefix}}--modal-container">
+  <div class="{{@root.prefix}}--modal-container{{#if size}} {{@root.prefix}}--modal-container--{{size}}{{/if}}">
     <div class="{{@root.prefix}}--modal-header">
       <p class="{{@root.prefix}}--modal-header__label {{@root.prefix}}--type-delta" id="modal-{{idSuffix}}-label">Optional label</p>
       <p class="{{@root.prefix}}--modal-header__heading {{@root.prefix}}--type-beta" id="modal-{{idSuffix}}-heading">Modal heading</p>
@@ -20,7 +20,8 @@
     </div>
 
     <!-- Note: Modals with content that scrolls, at any viewport, requires `tabindex="0"` on the `bx--modal-content` element -->
-    <div class="{{@root.prefix}}--modal-content" {{#if hasScrollingContent}}tabindex="0"{{/if}}>
+
+    <div class="{{@root.prefix}}--modal-content{{#if hasInput}} {{@root.prefix}}--modal-content--with-form{{/if}}" {{#if hasScrollingContent}}tabindex="0"{{/if}}>
       {{#if hasInput}}
       <div class="{{@root.prefix}}--form-item">
         <label for="text-input-{{idSuffix}}" class="{{@root.prefix}}--label">Text Input label</label>
@@ -71,9 +72,10 @@
         tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
         facilisi.
         Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
-        {{/if}}
+      {{/if}}
       {{/if}}
     </div>
+    <div class="{{@root.prefix}}--modal-content--overflow-indicator"></div>
 
     {{#if hasFooter}}
     <div class="{{@root.prefix}}--modal-footer">
