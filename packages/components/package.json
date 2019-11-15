@@ -45,7 +45,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "gulp build && ./tools/copy-vendor-styles.sh && bundler check \"scss/**/*.scss\" && yarn docs",
+    "build": "./tools/copy-vendor-styles.sh && gulp build && bundler check \"scss/**/*.scss\" && yarn docs",
     "build-dev": "gulp build:dev",
     "build-dev-rollup": "gulp build:dev:deploy --rollup --use-custom-properties",
     "clean": "gulp clean",

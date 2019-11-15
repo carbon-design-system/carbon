@@ -182,12 +182,22 @@ $productive-heading-07: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
-$expressive-heading-01: $heading-01 !default;
+$expressive-heading-01: map-merge(
+  $heading-01,
+  (
+    line-height: carbon--rem(20),
+  )
+) !default;
 
 /// @type Map
 /// @access public
 /// @group @carbon/type
-$expressive-heading-02: $heading-02 !default;
+$expressive-heading-02: map-merge(
+  $heading-02,
+  (
+    line-height: carbon--rem(24),
+  )
+) !default;
 
 /// @type Map
 /// @access public
