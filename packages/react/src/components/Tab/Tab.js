@@ -150,6 +150,7 @@ export default class Tab extends React.Component {
       role: 'tab',
       tabIndex: !disabled ? tabIndex : -1,
       ['aria-selected']: selected,
+      ['aria-disabled']: disabled,
       ref: e => {
         this.tabAnchor = e;
       },
@@ -160,7 +161,6 @@ export default class Tab extends React.Component {
         {...other}
         tabIndex={-1}
         className={classes}
-        aria-disabled={disabled}
         onClick={evt => {
           if (disabled) {
             return;

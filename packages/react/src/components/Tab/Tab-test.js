@@ -63,6 +63,16 @@ describe('Tab', () => {
       );
     });
 
+    it('has aria-disabled that matches disabled', () => {
+      const getDisabledRegion = () => wrapper.find('[aria-disabled]');
+
+      wrapper.setProps({ disabled: false });
+      expect(getDisabledRegion().prop('aria-disabled')).toEqual(false);
+
+      wrapper.setProps({ disabled: true });
+      expect(getDisabledRegion().prop('aria-disabled')).toEqual(true);
+    });
+
     it(`adds [className="${prefix}--tabs__nav-item--selected"] when selected prop is true`, () => {
       wrapper.setProps({ selected: true });
       expect(wrapper.hasClass(`${prefix}--tabs__nav-item--selected`)).toBe(
@@ -108,19 +118,6 @@ describe('Tab', () => {
         expect(onKeyDown).toBeCalled();
         expect(handleTabAnchorFocus).toBeCalled();
       });
-    });
-  });
-
-  describe(' disabled toggles aria-disabled', () => {
-    it('has aria-disabled that matches disabled', () => {
-      const wrapper = mount(<Tab disabled={false}>Content</Tab>);
-      const getDisabledRegion = () => wrapper.find('[aria-disabled]');
-
-      expect(getDisabledRegion().prop('aria-disabled')).toEqual(false);
-
-      wrapper.setProps({ disabled: true });
-
-      expect(getDisabledRegion().prop('aria-disabled')).toEqual(true);
     });
   });
 
