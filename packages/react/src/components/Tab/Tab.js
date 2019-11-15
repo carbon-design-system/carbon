@@ -160,6 +160,7 @@ export default class Tab extends React.Component {
         {...other}
         tabIndex={-1}
         className={classes}
+        aria-disabled={disabled}
         onClick={evt => {
           if (disabled) {
             return;

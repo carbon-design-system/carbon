@@ -110,6 +110,20 @@ describe('Tab', () => {
       });
     });
   });
+
+  describe(' disabled toggles aria-disabled', () => {
+    it('has aria-disabled that matches disabled', () => {
+      const wrapper = mount(<Tab disabled={false}>Content</Tab>);
+      const getDisabledRegion = () => wrapper.find('[aria-disabled]');
+
+      expect(getDisabledRegion().prop('aria-disabled')).toEqual(false);
+
+      wrapper.setProps({ disabled: true });
+
+      expect(getDisabledRegion().prop('aria-disabled')).toEqual(true);
+    });
+  });
+
   describe('custom render label', () => {
     const wrapper = mount(
       <Tab

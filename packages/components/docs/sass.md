@@ -3338,6 +3338,7 @@ $carbon--spacing-03: 0.5rem;
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [modal [mixin]](#modal-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
@@ -3399,7 +3400,6 @@ $carbon--spacing-05: 1rem;
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
-  - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -3482,6 +3482,7 @@ $carbon--spacing-08: 2.5rem;
 - **Used by**:
   - [snippet [mixin]](#snippet-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [modal [mixin]](#modal-mixin)
   - [search [mixin]](#search-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
@@ -3505,7 +3506,6 @@ $carbon--spacing-09: 3rem;
   - [accordion [mixin]](#accordion-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [listbox [mixin]](#listbox-mixin)
-  - [modal [mixin]](#modal-mixin)
   - [tile [mixin]](#tile-mixin)
 
 ### ✅carbon--spacing-10 [variable]
@@ -18200,7 +18200,7 @@ Modal styles
 
   .#{$prefix}--modal-header {
     padding-top: 1rem;
-    margin-bottom: $carbon--spacing-05;
+    margin-bottom: $carbon--spacing-03;
   }
 
   .#{$prefix}--modal-header__label {
@@ -18220,9 +18220,13 @@ Modal styles
     @include type-style('body-long-01');
 
     overflow-y: auto;
-    margin-bottom: $carbon--spacing-09;
+    margin-bottom: $carbon--spacing-08;
     color: $text-01;
     font-weight: 400;
+
+    // Required to accommodate focus outline's negative offset:
+    padding-top: $carbon--spacing-03;
+    padding-bottom: $carbon--spacing-03;
 
     &:focus {
       @include focus-outline('outline');
@@ -18297,11 +18301,11 @@ Modal styles
   - [overlay-01 [variable]](#overlay-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
-  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [focus [variable]](#focus-variable)
   - [icon-01 [variable]](#icon-01-variable)
