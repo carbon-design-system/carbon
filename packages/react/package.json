@@ -26,7 +26,7 @@
   "scripts": {
     "build": "yarn clean && node scripts/build.js",
     "build-storybook": "build-storybook",
-    "clean": "rimraf es lib umd storybook-static",
+    "clean": "rimraf es lib umd storybook-static build react-docgen.json",
     "prepublish": "yarn build",
     "start": "yarn storybook",
     "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000"
