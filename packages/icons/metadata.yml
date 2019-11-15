@@ -342,7 +342,6 @@ icons:
     categories:
       - name: Organization
         subcategory: Data
-    aliases:
     sizes:
       - 32
   - name: chat
