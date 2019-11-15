@@ -30,6 +30,45 @@ module.exports = {
       },
     },
     {
+      name: 'xs',
+      label: 'Transactional Modal (XS)',
+      context: {
+        idSuffix: Math.random()
+          .toString(36)
+          .substr(2),
+        hasFooter: true,
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
+        size: 'xs',
+      },
+    },
+    {
+      name: 'sm',
+      label: 'Transactional Modal (Small)',
+      context: {
+        idSuffix: Math.random()
+          .toString(36)
+          .substr(2),
+        hasFooter: true,
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
+        size: 'sm',
+      },
+    },
+    {
+      name: 'lg',
+      label: 'Transactional Modal (Large)',
+      context: {
+        idSuffix: Math.random()
+          .toString(36)
+          .substr(2),
+        hasFooter: true,
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
+        size: 'lg',
+      },
+    },
+    {
       name: 'nofooter',
       label: 'Passive Modal',
       notes: 'Passive Modals are modals without footers.',
@@ -40,6 +79,45 @@ module.exports = {
         hasFooter: false,
         classPrimaryButton: `${prefix}--btn--primary`,
         classCloseButton: `${prefix}--btn--secondary`,
+      },
+    },
+    {
+      name: 'nofooter-xs',
+      label: 'Passive Modal (XS)',
+      context: {
+        idSuffix: Math.random()
+          .toString(36)
+          .substr(2),
+        hasFooter: false,
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
+        size: 'xs',
+      },
+    },
+    {
+      name: 'nofooter-sm',
+      label: 'Passive Modal (Small)',
+      context: {
+        idSuffix: Math.random()
+          .toString(36)
+          .substr(2),
+        hasFooter: false,
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
+        size: 'sm',
+      },
+    },
+    {
+      name: 'nofooter-lg',
+      label: 'Passive Modal (Large)',
+      context: {
+        idSuffix: Math.random()
+          .toString(36)
+          .substr(2),
+        hasFooter: false,
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
+        size: 'lg',
       },
     },
     {
