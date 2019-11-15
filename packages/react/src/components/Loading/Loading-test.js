@@ -33,7 +33,7 @@ describe('Loading', () => {
     let getLoader;
 
     beforeEach(() => {
-      wrapper = shallow(<Loading id="test-id" />);
+      render(<Loading />);
       getLoader = () => wrapper.find('#test-id');
     });
 
