@@ -164,8 +164,9 @@ export class SideNavMenu extends React.Component {
   }
 }
 
-export default (() => {
-  const forwardRef = (props, ref) => <SideNavMenu {...props} buttonRef={ref} />;
-  forwardRef.displayName = 'SideNavMenu';
-  return React.forwardRef(forwardRef);
-})();
+const Component = React.forwardRef((props, ref) => {
+  return <SideNavMenu {...props} buttonRef={ref} />;
+});
+
+Component.displayName = 'SideNavMenu';
+export default Component;
