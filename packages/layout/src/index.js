@@ -5,6 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { unstable_tokens } from './tokens';
+
+export { unstable_tokens };
+
 // Convert
 // Default, Use with em() and rem() functions
 export const baseFontSize = 16;
@@ -114,7 +118,7 @@ export const spacing = [
 ];
 
 // Fluid spacing
-export const fluidSpacing01 = '0';
+export const fluidSpacing01 = 0;
 export const fluidSpacing02 = '2vw';
 export const fluidSpacing03 = '5vw';
 export const fluidSpacing04 = '10vw';

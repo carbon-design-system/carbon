@@ -31,10 +31,6 @@
     position: relative;
     display: flex;
     align-items: center;
-
-    &:hover .#{$prefix}--select-input {
-      background-color: $hover-ui;
-    }
   }
 
   .#{$prefix}--select-input {
@@ -46,7 +42,7 @@
     width: rem(224px);
     min-width: rem(128px);
     max-width: rem(448px);
-    padding: 0 rem(42px) 0 $carbon--spacing-05; // 1.5rem + chevron width
+    padding: 0 $spacing-09 0 $spacing-05;
     color: $text-01;
     background-color: $field-01;
     border: none;
@@ -68,8 +64,6 @@
 
     // Select text renders a little high on Firefox
     @-moz-document url-prefix() {
-      padding-top: rem(4px);
-
       // Removes dotted inner focus
       &:-moz-focusring,
       &::-moz-focus-inner {
@@ -99,7 +93,7 @@
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input {
-    padding-right: rem(64px); // 1rem + chevron width + invalid icon width
+    padding-right: carbon--mini-units(10);
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
@@ -137,7 +131,7 @@
   .#{$prefix}--select__arrow {
     fill: $ui-05;
     position: absolute;
-    right: 1rem;
+    right: $spacing-05;
     pointer-events: none;
   }
 
@@ -145,7 +139,7 @@
     .#{$prefix}--select-input
     ~ .#{$prefix}--select__invalid-icon {
     position: absolute;
-    right: rem(34px); // 1.5rem + chevron width
+    right: $spacing-09;
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid]
@@ -185,13 +179,13 @@
   .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--label,
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--form__helper-text {
-    margin-top: rem(13px);
+    margin-top: rem(13px); // offset label text margin
     align-self: flex-start;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
     margin-bottom: 0;
-    margin-left: rem(8px);
+    margin-left: $spacing-03;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--label {
@@ -204,41 +198,32 @@
     color: $text-01;
     border-bottom: none;
     padding-left: $carbon--spacing-03;
-    padding-right: rem(26px);
+    padding-right: $spacing-07;
+  }
 
-    @-moz-document url-prefix() {
-      padding-top: 0;
-    }
-
-    &:hover {
-      background-color: $hover-ui;
-    }
+  .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
+  .#{$prefix}--select--inline .#{$prefix}--select-input[disabled]:hover {
+    background-color: $disabled-background-color;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
-    bottom: auto;
-    top: 1.125rem;
     right: $carbon--spacing-03;
   }
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--select-input {
-    padding-right: rem(50px);
+    padding-right: $spacing-09 + $spacing-03; // 3.5rem
   }
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--select-input
     ~ .#{$prefix}--select__invalid-icon {
-    right: rem(24px);
+    right: $spacing-07;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
     color: $disabled;
     cursor: not-allowed;
-
-    &:hover {
-      background-color: transparent;
-    }
 
     ~ * {
       cursor: not-allowed;
