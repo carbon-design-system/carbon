@@ -12,7 +12,8 @@
     "lib",
     "scss",
     "svg",
-    "metadata.json"
+    "metadata.json",
+    "build-info.json"
   ],
   "keywords": [
     "ibm",
