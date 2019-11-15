@@ -158,6 +158,9 @@ exports[`ModalWrapper should render 1`] = `
               </p>
             </div>
             <div
+              className="bx--modal-content--overflow-indicator"
+            />
+            <div
               className="bx--modal-footer"
             >
               <ForwardRef(Button)
