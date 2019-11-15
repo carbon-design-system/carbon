@@ -9,12 +9,19 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { withKnobs, boolean, text } from '@storybook/addon-knobs';
+import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Modal from '../Modal';
 import TextInput from '../TextInput';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
+
+const sizes = {
+  Default: '',
+  'Extra small (xs)': 'xs',
+  'Small (sm)': 'sm',
+  'Large (lg)': 'lg',
+};
 
 const props = () => ({
   className: 'some-class',
@@ -48,6 +55,7 @@ const props = () => ({
     'Primary focus element selector (selectorPrimaryFocus)',
     '[data-modal-primary-focus]'
   ),
+  size: select('Size (size)', sizes),
   iconDescription: text(
     'Close icon description (iconDescription)',
     'Close the modal'
@@ -64,68 +72,78 @@ storiesOf('Modal', module)
   .addDecorator(withKnobs)
   .add(
     'Default',
-    () => (
-      <Modal {...props()}>
-        <p className={`${prefix}--modal-content__text`}>
-          Please see ModalWrapper for more examples and demo of the
-          functionality.
-        </p>
-        {props().hasScrollingContent && (
-          <>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <h3>Lorem ipsum</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-          </>
-        )}
-      </Modal>
-    ),
+    () => {
+      const { size, ...rest } = props();
+      return (
+        <Modal {...rest} size={size || undefined}>
+          <p className={`${prefix}--modal-content__text`}>
+            Please see ModalWrapper for more examples and demo of the
+            functionality.
+          </p>
+          {rest.hasScrollingContent && (
+            <>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.{' '}
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.{' '}
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.{' '}
+              </p>
+              <h3>Lorem ipsum</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.{' '}
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.{' '}
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.{' '}
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.{' '}
+              </p>
+            </>
+          )}
+        </Modal>
+      );
+    },
     {
       info: {
         text: `
@@ -137,23 +155,30 @@ storiesOf('Modal', module)
   )
   .add(
     'Trap Focus',
-    () => (
-      <>
-        <Modal {...props()} selectorPrimaryFocus="#text-input-2">
-          <TextInput
-            id="text-input-1"
-            labelText="Text Input 1"
-            placeholder="Enter text..."
-            style={{ marginBottom: '1rem' }}
-          />
-          <TextInput
-            id="text-input-2"
-            labelText="Text Input 2"
-            placeholder="Enter text..."
-          />
-        </Modal>
-      </>
-    ),
+    () => {
+      const { size, ...rest } = props();
+      return (
+        <>
+          <Modal
+            {...rest}
+            hasForm
+            size={size || undefined}
+            selectorPrimaryFocus="#text-input-2">
+            <TextInput
+              id="text-input-1"
+              labelText="Text Input 1"
+              placeholder="Enter text..."
+              style={{ marginBottom: '1rem' }}
+            />
+            <TextInput
+              id="text-input-2"
+              labelText="Text Input 2"
+              placeholder="Enter text..."
+            />
+          </Modal>
+        </>
+      );
+    },
     {
       info: {
         text: `
