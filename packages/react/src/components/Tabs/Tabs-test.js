@@ -50,17 +50,17 @@ describe('Tabs', () => {
         ).toBe(true);
       });
 
-      it('supports fixed variant', () => {
+      it('supports container variant', () => {
         expect(
           shallow(
-            <Tabs className="extra-class" type="fixed">
+            <Tabs className="extra-class" type="container">
               <Tab label="firstTab">content1</Tab>
               <Tab label="lastTab">content2</Tab>
             </Tabs>
           )
             .find('div')
             .first()
-            .hasClass(`${prefix}--tabs--fixed`)
+            .hasClass(`${prefix}--tabs--container`)
         ).toBe(true);
       });
     });
