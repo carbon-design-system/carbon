@@ -112,7 +112,7 @@ describe('Tab', () => {
   });
 
   describe(' disabled toggles aria-disabled', () => {
-    it('has aria-disabled that matches disabled', () => {
+    it('should set aria-disabled to the value of the disabled prop', () => {
       const wrapper = mount(<Tab disabled={false}>Content</Tab>);
       const getDisabledRegion = () => wrapper.find('[aria-disabled]');
 
