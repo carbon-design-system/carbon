@@ -7,16 +7,17 @@
 
 import React from 'react';
 import Loading from '../Loading';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
 import { render, cleanup } from '@carbon/test-utils/react';
+import { afterEach } from 'jest-circus';
 
 const { prefix } = settings;
 
 describe('Loading', () => {
   afterEach(cleanup);
 
-  describe('Automated Accessibility Testing', () => {
+  describe('automated accessibility testing', () => {
     it('should have no Axe violations', async () => {
       const { container } = render(<Loading />);
       await expect(container).toHaveNoAxeViolations();
@@ -29,26 +30,35 @@ describe('Loading', () => {
   });
 
   describe('with a screenreader', () => {
-    let wrapper;
-    let getLoader;
-
-    beforeEach(() => {
-      render(<Loading />);
-      getLoader = () => wrapper.find('#test-id');
+    afterEach(() => {
+      cleanup();
     });
 
     // https://www.w3.org/TR/WCAG21/#headings-and-labels
     it('has a programatically determinable label', () => {
-      expect(getLoader().prop('aria-labelledby')).toBeDefined();
+      const { container } = render(<Loading data-id="test" />);
+      expect(
+        container
+          .querySelector('[data-id="test"]')
+          .getAttribute('aria-labelledby')
+      ).toBeDefined();
     });
 
     // https://www.w3.org/TR/WCAG21/#status-messages
     it('should announce a loading status', () => {
-      expect(getLoader().prop('aria-atomic')).toBe('true');
-      expect(getLoader().prop('aria-live')).toEqual('assertive');
+      const { container } = render(<Loading data-id="test" />);
+      console.log(
+        container.querySelector('[data-id="test"]').getAttribute('aria-atomic')
+      );
+      expect(
+        container.querySelector('[data-id="test"]').getAttribute('aria-atomic')
+      ).toBe('true');
+      expect(
+        container.querySelector('[data-id="test"]').getAttribute('aria-live')
+      ).toEqual('assertive');
     });
   });
-  describe('Renders as expected', () => {
+  describe('renders as expected', () => {
     const wrapper = mount(<Loading className="extra-class" />);
     const overlay = wrapper.find(`.${prefix}--loading-overlay`);
     const loader = wrapper.find(`.${prefix}--loading`);
@@ -83,7 +93,7 @@ describe('Loading', () => {
     });
   });
 
-  describe('Sets props and state as expected', () => {
+  describe('sets props and state as expected', () => {
     const wrapper = mount(<Loading className="extra-class" />);
 
     it(`should remove and add ${prefix}--loading--stop class`, () => {
