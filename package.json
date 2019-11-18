@@ -188,6 +188,7 @@
       "/dist/",
       "/es/",
       "/lib/",
+      "/build/",
       "e2e",
       "examples",
       "/umd/"
