@@ -3265,6 +3265,7 @@ Get the value of the corresponding number of units
   - [multiselect [mixin]](#multiselect-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
+  - [select [mixin]](#select-mixin)
   - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
 
 ### ✅carbon--spacing-01 [variable]
@@ -3338,6 +3339,7 @@ $carbon--spacing-03: 0.5rem;
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [modal [mixin]](#modal-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
@@ -3408,7 +3410,6 @@ $carbon--spacing-05: 1rem;
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
-  - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
   - [padding-th [mixin]](#padding-th-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
@@ -3461,6 +3462,7 @@ $carbon--spacing-07: 2rem;
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [modal [mixin]](#modal-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
@@ -3482,6 +3484,7 @@ $carbon--spacing-08: 2.5rem;
 - **Used by**:
   - [snippet [mixin]](#snippet-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [modal [mixin]](#modal-mixin)
   - [search [mixin]](#search-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
@@ -3505,7 +3508,6 @@ $carbon--spacing-09: 3rem;
   - [accordion [mixin]](#accordion-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [listbox [mixin]](#listbox-mixin)
-  - [modal [mixin]](#modal-mixin)
   - [tile [mixin]](#tile-mixin)
 
 ### ✅carbon--spacing-10 [variable]
@@ -3638,6 +3640,7 @@ $spacing-03: $carbon--spacing-03;
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
+  - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
@@ -3681,6 +3684,7 @@ $spacing-05: $carbon--spacing-05;
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
@@ -3718,6 +3722,7 @@ $spacing-07: $carbon--spacing-07;
 - **Alias**: `carbon--spacing-07`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [select [mixin]](#select-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ### ✅spacing-08 [variable]
@@ -3753,6 +3758,7 @@ $spacing-09: $carbon--spacing-09;
 - **Alias**: `carbon--spacing-09`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [select [mixin]](#select-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅spacing-10 [variable]
@@ -18164,8 +18170,9 @@ Modal styles
 
   .#{$prefix}--modal-container {
     position: relative;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: auto;
     background-color: $ui-01;
     width: 100%;
     height: 100%;
@@ -18176,31 +18183,138 @@ Modal styles
     transition: transform $duration--moderate-02 motion(exit, expressive);
 
     @include carbon--breakpoint(md) {
-      width: 50%;
-      max-width: 768px;
+      width: 84%;
       max-height: 90%;
       height: auto;
+
+      .#{$prefix}--modal-header,
+      .#{$prefix}--modal-content,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
     }
 
     @include carbon--breakpoint(lg) {
-      max-height: 80%;
+      width: 60%;
+      max-height: 84%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 48%;
     }
   }
 
   .#{$prefix}--modal-header,
   .#{$prefix}--modal-content {
-    padding-right: 25%;
-    padding-left: 1rem;
+    padding-left: $carbon--spacing-05;
   }
 
   .#{$prefix}--modal-header,
-  .#{$prefix}--modal-footer {
-    flex-shrink: 0;
+  .#{$prefix}--modal-content,
+  .#{$prefix}--modal-content__regular-content {
+    padding-right: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--modal-content--with-form {
+    padding-right: $carbon--spacing-05;
+
+    @include carbon--breakpoint(md) {
+      padding-right: $carbon--spacing-05; // Override for `.#{$prefix}--modal-content`
+    }
+  }
+
+  .#{$prefix}--modal-container--xs {
+    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-content,
+    .#{$prefix}--modal-content__regular-content,
+    .#{$prefix}--modal-content--with-form {
+      padding-right: $carbon--spacing-05;
+    }
+
+    @include carbon--breakpoint(md) {
+      width: 48%;
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: 32%;
+      max-height: 48%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 24%;
+    }
+  }
+
+  .#{$prefix}--modal-container--sm {
+    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-content,
+    .#{$prefix}--modal-content__regular-content,
+    .#{$prefix}--modal-content--with-form {
+      padding-right: $carbon--spacing-05;
+    }
+
+    @include carbon--breakpoint(md) {
+      width: 60%;
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: 42%;
+      max-height: 72%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 36%;
+
+      .#{$prefix}--modal-header,
+      .#{$prefix}--modal-content,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
+
+      .#{$prefix}--modal-content--with-form {
+        padding-right: $carbon--spacing-05; // Override for `.#{$prefix}--modal-content`
+      }
+    }
+  }
+
+  .#{$prefix}--modal-container--lg {
+    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-content,
+    .#{$prefix}--modal-content__regular-content,
+    .#{$prefix}--modal-content--with-form {
+      padding-right: $carbon--spacing-05;
+    }
+
+    @include carbon--breakpoint(md) {
+      width: 96%;
+
+      .#{$prefix}--modal-header,
+      .#{$prefix}--modal-content,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
+
+      .#{$prefix}--modal-content--with-form {
+        padding-right: $carbon--spacing-05; // Override for `.#{$prefix}--modal-content`
+      }
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: 84%;
+      max-height: 96%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 72%;
+    }
   }
 
   .#{$prefix}--modal-header {
-    padding-top: 1rem;
-    margin-bottom: $carbon--spacing-05;
+    padding-top: $carbon--spacing-05;
+    margin-bottom: $carbon--spacing-03;
+
+    grid-row: 1/1;
+    grid-column: 1/-1;
   }
 
   .#{$prefix}--modal-header__label {
@@ -18219,18 +18333,45 @@ Modal styles
   .#{$prefix}--modal-content {
     @include type-style('body-long-01');
 
+    grid-row: 2/-2;
+    grid-column: 1/-1;
+
     overflow-y: auto;
-    margin-bottom: $carbon--spacing-09;
+    margin-bottom: $carbon--spacing-08;
     color: $text-01;
     font-weight: 400;
+
+    // Required to accommodate focus outline's negative offset:
+    padding-top: $carbon--spacing-03;
+    padding-bottom: $carbon--spacing-03;
 
     &:focus {
       @include focus-outline('outline');
     }
   }
 
-  .#{$prefix}--modal-content > * {
-    @include type-style('body-long-01');
+  .#{$prefix}--modal-content {
+    > * {
+      @include type-style('body-long-01');
+    }
+  }
+
+  .#{$prefix}--modal-content--overflow-indicator {
+    grid-row: 2/-2;
+    grid-column: 1/-1;
+    width: 100%;
+    height: rem(32px);
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: $carbon--spacing-08;
+    background-image: linear-gradient(to bottom, transparent, $ui-01);
+  }
+
+  .#{$prefix}--modal-content:focus
+    ~ .#{$prefix}--modal-content--overflow-indicator {
+    width: calc(100% - 4px);
+    margin: 0 2px 2px 2px;
   }
 
   .#{$prefix}--modal-footer {
@@ -18239,13 +18380,16 @@ Modal styles
     height: 4rem;
     background-color: $modal-footer-background-color;
 
+    grid-row: -1/-1;
+    grid-column: 1/-1;
+
     button.#{$prefix}--btn {
       max-width: none;
       flex: 1;
       height: 4rem;
       margin: 0;
-      padding-top: 1rem;
-      padding-bottom: 2rem;
+      padding-top: $carbon--spacing-05;
+      padding-bottom: $carbon--spacing-07;
     }
   }
 
@@ -18298,10 +18442,12 @@ Modal styles
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
+  - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [focus [variable]](#focus-variable)
   - [icon-01 [variable]](#icon-01-variable)
@@ -19230,10 +19376,10 @@ Overflow menu styles
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after {
-    bottom: rem(-6px);
+    bottom: rem(-8px);
     left: 0;
     width: rem(32px);
-    height: rem(6px);
+    height: rem(8px);
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after {
@@ -19444,8 +19590,7 @@ Pagination styles
     grid-template-columns: auto 0;
   }
 
-  .#{$prefix}--select-input__wrapper,
-  .#{$prefix}--select-input--inline__wrapper {
+  .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
     height: 100%;
   }
 
@@ -20565,10 +20710,6 @@ Select styles
     position: relative;
     display: flex;
     align-items: center;
-
-    &:hover .#{$prefix}--select-input {
-      background-color: $hover-ui;
-    }
   }
 
   .#{$prefix}--select-input {
@@ -20580,7 +20721,7 @@ Select styles
     width: rem(224px);
     min-width: rem(128px);
     max-width: rem(448px);
-    padding: 0 rem(42px) 0 $carbon--spacing-05; // 1.5rem + chevron width
+    padding: 0 $spacing-09 0 $spacing-05;
     color: $text-01;
     background-color: $field-01;
     border: none;
@@ -20602,8 +20743,6 @@ Select styles
 
     // Select text renders a little high on Firefox
     @-moz-document url-prefix() {
-      padding-top: rem(4px);
-
       // Removes dotted inner focus
       &:-moz-focusring,
       &::-moz-focus-inner {
@@ -20633,7 +20772,7 @@ Select styles
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input {
-    padding-right: rem(64px); // 1rem + chevron width + invalid icon width
+    padding-right: carbon--mini-units(10);
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
@@ -20671,7 +20810,7 @@ Select styles
   .#{$prefix}--select__arrow {
     fill: $ui-05;
     position: absolute;
-    right: 1rem;
+    right: $spacing-05;
     pointer-events: none;
   }
 
@@ -20679,7 +20818,7 @@ Select styles
     .#{$prefix}--select-input
     ~ .#{$prefix}--select__invalid-icon {
     position: absolute;
-    right: rem(34px); // 1.5rem + chevron width
+    right: $spacing-09;
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid]
@@ -20719,13 +20858,13 @@ Select styles
   .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--label,
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--form__helper-text {
-    margin-top: rem(13px);
+    margin-top: rem(13px); // offset label text margin
     align-self: flex-start;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
     margin-bottom: 0;
-    margin-left: rem(8px);
+    margin-left: $spacing-03;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--label {
@@ -20738,41 +20877,32 @@ Select styles
     color: $text-01;
     border-bottom: none;
     padding-left: $carbon--spacing-03;
-    padding-right: rem(26px);
+    padding-right: $spacing-07;
+  }
 
-    @-moz-document url-prefix() {
-      padding-top: 0;
-    }
-
-    &:hover {
-      background-color: $hover-ui;
-    }
+  .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
+  .#{$prefix}--select--inline .#{$prefix}--select-input[disabled]:hover {
+    background-color: $disabled-background-color;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
-    bottom: auto;
-    top: 1.125rem;
     right: $carbon--spacing-03;
   }
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--select-input {
-    padding-right: rem(50px);
+    padding-right: $spacing-09 + $spacing-03; // 3.5rem
   }
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--select-input
     ~ .#{$prefix}--select__invalid-icon {
-    right: rem(24px);
+    right: $spacing-07;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
     color: $disabled;
     cursor: not-allowed;
-
-    &:hover {
-      background-color: transparent;
-    }
 
     ~ * {
       cursor: not-allowed;
@@ -20800,18 +20930,22 @@ Select styles
 
 - **Group**: [select](#select)
 - **Requires**:
+  - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
-  - [hover-ui [variable]](#hover-ui-variable)
-  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [spacing-09 [variable]](#spacing-09-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [support-01 [variable]](#support-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-05 [variable]](#ui-05-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [spacing-07 [variable]](#spacing-07-variable)
 
 ## slider
 
@@ -21165,7 +21299,7 @@ Tabs styles
     }
   }
 
-  .#{$prefix}--tabs--fixed {
+  .#{$prefix}--tabs--container {
     @include carbon--breakpoint(md) {
       min-height: rem(48px);
     }
@@ -21292,7 +21426,7 @@ Tabs styles
     }
   }
 
-  .#{$prefix}--tabs--fixed .#{$prefix}--tabs__nav-item {
+  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item {
     @include carbon--breakpoint(md) {
       background-color: $ui-03;
 
@@ -21338,7 +21472,7 @@ Tabs styles
     }
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
     @include carbon--breakpoint(md) {
       background-color: $hover-selected-ui;
@@ -21358,16 +21492,16 @@ Tabs styles
     pointer-events: none;
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
     @include carbon--breakpoint(md) {
       background-color: $disabled-02;
     }
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--disabled
     .#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
@@ -21399,9 +21533,9 @@ Tabs styles
     }
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled),
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--selected:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
     @include carbon--breakpoint(md) {
       background-color: $ui-01;
@@ -21464,7 +21598,7 @@ Tabs styles
     }
   }
 
-  .#{$prefix}--tabs--fixed a.#{$prefix}--tabs__nav-link {
+  .#{$prefix}--tabs--container a.#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
       display: flex;
       align-items: center;
@@ -21485,7 +21619,7 @@ Tabs styles
     }
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
     .#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
@@ -21512,7 +21646,7 @@ Tabs styles
     border-bottom: $tab-underline-disabled;
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--disabled
     .#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
@@ -23243,13 +23377,15 @@ Tooltip styles
     cursor: pointer;
     font-size: 1rem;
 
-    // Override `margin: 0` from button-reset mixin:
-    margin-left: $carbon--spacing-03;
-
     &:focus {
       @include focus-outline('border');
       fill: $hover-primary;
     }
+  }
+
+  .#{$prefix}--tooltip__label .#{$prefix}--tooltip__trigger {
+    // Override `margin: 0` from button-reset mixin
+    margin-left: $carbon--spacing-03;
   }
 
   .#{$prefix}--tooltip__label--bold {
@@ -23525,8 +23661,8 @@ Tooltip styles
   - [prefix [variable]](#prefix-variable)
   - [text-02 [variable]](#text-02-variable)
   - [icon-02 [variable]](#icon-02-variable)
-  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [hover-primary [variable]](#hover-primary-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -23818,6 +23954,9 @@ UI shell header
   .#{$prefix}--header__menu-bar[role='menubar'] {
     display: flex;
     height: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
   a.#{$prefix}--header__menu-item[role='menuitem'] {
@@ -23887,6 +24026,9 @@ UI shell header
 
   .#{$prefix}--header__menu[role='menu'] {
     display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
   .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
