@@ -99,9 +99,9 @@ storiesOf('Tabs', module)
     }
   )
   .add(
-    'Fixed',
+    'Container',
     () => (
-      <Tabs type="fixed" {...props.tabs()}>
+      <Tabs type="container" {...props.tabs()}>
         <Tab {...props.tab()} label="Tab label 1">
           <div className="some-content">Content for first tab goes here.</div>
         </Tab>

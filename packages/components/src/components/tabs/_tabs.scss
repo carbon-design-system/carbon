@@ -32,7 +32,7 @@
     }
   }
 
-  .#{$prefix}--tabs--fixed {
+  .#{$prefix}--tabs--container {
     @include carbon--breakpoint(md) {
       min-height: rem(48px);
     }
@@ -159,7 +159,7 @@
     }
   }
 
-  .#{$prefix}--tabs--fixed .#{$prefix}--tabs__nav-item {
+  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item {
     @include carbon--breakpoint(md) {
       background-color: $ui-03;
 
@@ -205,7 +205,7 @@
     }
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
     @include carbon--breakpoint(md) {
       background-color: $hover-selected-ui;
@@ -225,16 +225,16 @@
     pointer-events: none;
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
     @include carbon--breakpoint(md) {
       background-color: $disabled-02;
     }
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--disabled
     .#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
@@ -266,9 +266,9 @@
     }
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled),
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--selected:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
     @include carbon--breakpoint(md) {
       background-color: $ui-01;
@@ -331,7 +331,7 @@
     }
   }
 
-  .#{$prefix}--tabs--fixed a.#{$prefix}--tabs__nav-link {
+  .#{$prefix}--tabs--container a.#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
       display: flex;
       align-items: center;
@@ -352,7 +352,7 @@
     }
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
     .#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
@@ -379,7 +379,7 @@
     border-bottom: $tab-underline-disabled;
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--disabled
     .#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
