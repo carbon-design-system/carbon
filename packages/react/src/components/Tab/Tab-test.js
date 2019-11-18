@@ -68,9 +68,6 @@ describe('Tab', () => {
 
       expect(getDisabledRegion().length).toEqual(0);
 
-      wrapper.setProps({ disabled: false });
-      expect(getDisabledRegion().prop('aria-disabled')).toEqual(false);
-
       wrapper.setProps({ disabled: true });
       expect(getDisabledRegion().prop('aria-disabled')).toEqual(true);
     });
