@@ -1270,6 +1270,25 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@carbon/cli@10.6.0-rc.0":
+  version "10.6.0-rc.0"
+  resolved "https://registry.yarnpkg.com/@carbon/cli/-/cli-10.6.0-rc.0.tgz#6e97ce695495a5d43e5c461d723e23d269dca1a8"
+  integrity sha512-ZEe0b7PybDeDXveEbCAnYAPcRlm5AE14uLRO568Iua+SyyC/LjcBD6jXLUsz9lRA37fa4HUU1sUmSIbu+QhCIw==
+  dependencies:
+    "@carbon/cli-reporter" "10.3.0"
+    "@octokit/plugin-retry" "^2.2.0"
+    "@octokit/plugin-throttling" "^2.6.0"
+    "@octokit/rest" "^16.28.1"
+    chalk "^2.4.2"
+    child-process-promise "^2.2.1"
+    clipboardy "^2.1.0"
+    fs-extra "^8.0.1"
+    inquirer "^6.4.1"
+    prettier "^1.18.2"
+    progress-estimator "^0.2.2"
+    remark "^10.0.1"
+    yargs "^13.2.4"
+
 "@carbon/icon-helpers@0.0.1-beta.5":
   version "0.0.1-beta.5"
   resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-0.0.1-beta.5.tgz#829e8593dbcee76e5d6300839d2b5d734f90c98d"

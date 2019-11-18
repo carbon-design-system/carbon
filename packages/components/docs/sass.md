@@ -21161,7 +21161,7 @@ Tabs styles
     }
   }
 
-  .#{$prefix}--tabs--fixed {
+  .#{$prefix}--tabs--container {
     @include carbon--breakpoint(md) {
       min-height: rem(48px);
     }
@@ -21288,7 +21288,7 @@ Tabs styles
     }
   }
 
-  .#{$prefix}--tabs--fixed .#{$prefix}--tabs__nav-item {
+  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item {
     @include carbon--breakpoint(md) {
       background-color: $ui-03;
 
@@ -21334,7 +21334,7 @@ Tabs styles
     }
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
     @include carbon--breakpoint(md) {
       background-color: $hover-selected-ui;
@@ -21354,16 +21354,16 @@ Tabs styles
     pointer-events: none;
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
     @include carbon--breakpoint(md) {
       background-color: $disabled-02;
     }
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--disabled
     .#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
@@ -21395,9 +21395,9 @@ Tabs styles
     }
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled),
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--selected:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
     @include carbon--breakpoint(md) {
       background-color: $ui-01;
@@ -21460,7 +21460,7 @@ Tabs styles
     }
   }
 
-  .#{$prefix}--tabs--fixed a.#{$prefix}--tabs__nav-link {
+  .#{$prefix}--tabs--container a.#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
       display: flex;
       align-items: center;
@@ -21481,7 +21481,7 @@ Tabs styles
     }
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
     .#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
@@ -21508,7 +21508,7 @@ Tabs styles
     border-bottom: $tab-underline-disabled;
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--disabled
     .#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
