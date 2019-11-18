@@ -212,10 +212,12 @@ class HeaderMenu extends React.Component {
    * sequence when they might not want to go through all the items.
    */
   _renderMenuItem = (item, index) => {
-    return React.cloneElement(item, {
-      ref: this.handleItemRef(index),
-      role: 'none',
-    });
+    if (React.isValidElement(item)) {
+      return React.cloneElement(item, {
+        ref: this.handleItemRef(index),
+        role: 'none',
+      });
+    }
   };
 }
 
