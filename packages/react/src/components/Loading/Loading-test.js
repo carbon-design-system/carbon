@@ -30,32 +30,33 @@ describe('Loading', () => {
   });
 
   describe('with a screenreader', () => {
-    afterEach(() => {
-      cleanup();
-    });
+    afterEach(cleanup);
 
     // https://www.w3.org/TR/WCAG21/#headings-and-labels
-    it('has a programatically determinable label', () => {
-      const { container } = render(<Loading data-id="test" />);
-      expect(
-        container
-          .querySelector('[data-id="test"]')
-          .getAttribute('aria-labelledby')
-      ).toBeDefined();
+    it('should have a label on the live region', () => {
+      const { container } = render(<Loading />);
+      const liveRegion = container.querySelector('[aria-live]');
+      expect(liveRegion).toBeInstanceOf(HTMLElement);
+
+      const id = liveRegion.getAttribute('aria-labelledby');
+      expect(id).toBeDefined();
+
+      const label = document.getElementById(id);
+      expect(label).toBeDefined();
+      expect(typeof label.textContent).toBe('string');
     });
 
     // https://www.w3.org/TR/WCAG21/#status-messages
     it('should announce a loading status', () => {
-      const { container } = render(<Loading data-id="test" />);
-      console.log(
-        container.querySelector('[data-id="test"]').getAttribute('aria-atomic')
-      );
-      expect(
-        container.querySelector('[data-id="test"]').getAttribute('aria-atomic')
-      ).toBe('true');
-      expect(
-        container.querySelector('[data-id="test"]').getAttribute('aria-live')
-      ).toEqual('assertive');
+      const { container } = render(<Loading />);
+      const liveRegion = container.querySelector('[aria-live]');
+      expect(liveRegion).toBeInstanceOf(HTMLElement);
+
+      const atomicBoolean = liveRegion.getAttribute('aria-atomic');
+      expect(atomicBoolean).toBe('true');
+
+      const ariaLiveValue = liveRegion.getAttribute('aria-live');
+      expect(ariaLiveValue).toEqual('assertive');
     });
   });
   describe('renders as expected', () => {
