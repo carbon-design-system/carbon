@@ -21,15 +21,31 @@ export default function CopyButton({
   onClick,
   ...other
 }) {
-  const [showFeedback, setShowFeedback] = useState(false);
+  const [animation, setAnimation] = useState('');
   const timeoutId = useRef(undefined);
-  const handleClick = evt => {
-    setShowFeedback(true);
+  const classNames = classnames(`${prefix}--copy-btn`, className, {
+    [`${prefix}--copy-btn--animating`]: animation,
+    [`${prefix}--copy-btn--${animation}`]: animation,
+  });
+  const feedbackClassNames = classnames(
+    `${prefix}--assistive-text`,
+    `${prefix}--copy-btn__feedback`
+  );
+  const handleClick = event => {
+    setAnimation('fade-in');
     timeoutId.current = setTimeout(() => {
-      setShowFeedback(false);
+      setAnimation('fade-out');
     }, feedbackTimeout);
 
-    onClick(evt);
+    onClick(event);
+  };
+  const handleAnimationEnd = event => {
+    if (event.animationName === 'hide-feedback') {
+      setAnimation('');
+    }
+    if (other.handleAnimationEnd) {
+      other.handleAnimationEnd(event);
+    }
   };
 
   useEffect(() => {
@@ -41,11 +57,6 @@ export default function CopyButton({
     };
   }, []);
 
-  const classNames = classnames(`${prefix}--snippet-button`, className);
-  const feedbackClassNames = classnames(`${prefix}--btn--copy__feedback`, {
-    [`${prefix}--btn--copy__feedback--displayed`]: showFeedback,
-  });
-
   return (
     <button
       type="button"
@@ -53,9 +64,10 @@ export default function CopyButton({
       onClick={handleClick}
       aria-label={iconDescription}
       title={iconDescription}
+      onAnimationEnd={handleAnimationEnd}
       {...other}>
+      <span className={feedbackClassNames}>{feedback}</span>
       <Copy16 className={`${prefix}--snippet__icon`} />
-      <div className={feedbackClassNames} data-feedback={feedback} />
     </button>
   );
 }
