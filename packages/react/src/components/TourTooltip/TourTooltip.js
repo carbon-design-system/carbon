@@ -187,7 +187,7 @@ TourTooltip.propTypes = {
 TourTooltip.defaultProps = {
   nextLabel: 'Next',
   prevLabel: 'Previous',
-  closeLabel: 'Skip',
+  closeLabel: 'Skip Tour',
   checkboxLabel: "Don't show tour again.",
   hideNext: false,
   hidePrev: false,
