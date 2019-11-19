@@ -125,4 +125,71 @@ $css--plex: true;
 @import 'carbon-components/scss/components/file-uploader/file-uploader';
 ```
 
+## Prefixes
+
+Style selectors that are a part of the sass files for Carbon are built using a
+global `$prefix` variable that allows us to dynamically change the prefix of
+selectors that we ship. By default, `$prefix` is set to `bx`. `bx` comes from
+Carbon's origins in Bluemix. If you look at our source files, you'll see that we
+use `$prefix` in our selectors in the following way:
+
+```scss
+// Input
+.#{$prefix}--my-component {
+  // ...
+}
+
+// Output
+.bx--my-component {
+  // ...
+}
+```
+
+When writing styles that depend on, or target, selectors from Carbon it is
+recommended that you use the global `$prefix` variable to prevent regressions in
+the future if this value changes or if the prefix is overridden.
+
+### Overriding `$prefix`
+
+In order to override `$prefix` to your own custom prefix, you will need to set
+`$prefix` before importing any styles from Carbon. For example:
+
+```scss
+// Custom prefix
+$prefix: 'cds';
+
+// Import Carbon
+@import 'path-to-carbon';
+```
+
+In addition, if you're using any of the JavaScript packages that Carbon ships,
+you'll want to update the `prefix` setting available in `carbon-components`.
+This setting is used in JavaScript files to make sure that components use the
+correct prefix for class names. For example:
+
+```jsx
+import { settings } from 'carbon-components';
+import React from 'react';
+
+const { prefix } = settings;
+
+function Accordion(props) {
+  return <ul className={`${prefix}--accordion`}>{props.children}</ul>;
+}
+```
+
+Settings from Carbon are available from the `settings` named export. You can
+mutate this value before including any references to other packages (like
+`carbon-components-react`) in order to change `prefix` across
+
+```js
+import { settings } from 'carbon-components';
+// Set custom prefix, should match what is set in Sass
+settings.prefix = 'cds';
+```
+
+**Note:** it's important that this is included as one of the first modules
+initialized in your project. We recommend having this be one of the first
+imports in your entrypoint as a result.
+
 ## FAQ
