@@ -71,7 +71,7 @@ const props = () => ({
 const titleOnlyProps = () => ({
   className: 'some-class',
   open: boolean('Open (open)', true),
-  passiveModal: true,
+  passiveModal: boolean('Without footer (passiveModal)', false),
   danger: boolean('Danger mode (danger)', false),
   modalHeading: text(
     'Modal heading (modalHeading)',
@@ -82,6 +82,14 @@ const titleOnlyProps = () => ({
   modalAriaLabel: text(
     'ARIA label, used only if modalLabel not provided (modalAriaLabel)',
     'A label to be read by screen readers on the modal root node'
+  ),
+  primaryButtonText: text(
+    'Primary button text (primaryButtonText)',
+    'Primary Button'
+  ),
+  secondaryButtonText: text(
+    'Secondary button text (secondaryButtonText)',
+    'Secondary Button'
   ),
   size: select('Size (size)', sizes, 'sm'),
   iconDescription: text(

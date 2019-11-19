@@ -206,6 +206,7 @@ storiesOf('ComposedModal', module)
         <ComposedModal {...rest} size={size || undefined}>
           <ModalHeader {...props.modalHeader({ titleOnly: true })} />
           <ModalBody />
+          <ModalFooter {...props.modalFooter()} />
         </ComposedModal>
       );
     },
