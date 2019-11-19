@@ -7,18 +7,33 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import classNames from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const TabContent = props => {
-  const { selected, children, ...other } = props;
-
+  const { className, selected, children, ...other } = props;
+  const tabContentClasses = classNames(`${prefix}--tab-content`, {
+    [className]: className,
+  });
   return (
-    <div {...other} selected={selected} hidden={!selected}>
+    <div
+      {...other}
+      className={tabContentClasses}
+      selected={selected}
+      hidden={!selected}>
       {children}
     </div>
   );
 };
 
 TabContent.propTypes = {
+  /**
+   * Provide a className for the tab content container
+   */
+  className: PropTypes.string,
+
   /**
    * Specify whether the TabContent is selected
    */
