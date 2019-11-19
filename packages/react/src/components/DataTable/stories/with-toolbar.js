@@ -17,18 +17,20 @@ import DataTable, {
   TableHeader,
   TableRow,
   TableToolbar,
-  TableToolbarAction,
+  TableToolbarColumns,
   TableToolbarContent,
   TableToolbarSearch,
   TableToolbarMenu,
 } from '..';
 
-import { initialRows, headers } from './shared';
+import { initialRows, headers as allHeaders } from './shared';
+
+import './with-toolbar.css';
 
 export default props => (
   <DataTable
     rows={initialRows}
-    headers={headers}
+    headers={allHeaders}
     {...props}
     render={({
       rows,
@@ -37,6 +39,7 @@ export default props => (
       getRowProps,
       getTableProps,
       onInputChange,
+      onColumnsChange,
       getTableContainerProps,
     }) => (
       <TableContainer
@@ -47,17 +50,11 @@ export default props => (
           <TableToolbarContent>
             <TableToolbarSearch onChange={onInputChange} />
             <TableToolbarMenu>
-              <TableToolbarAction
-                onClick={action('Action 1 Click')}
-                primaryFocus>
-                Action 1
-              </TableToolbarAction>
-              <TableToolbarAction onClick={action('Action 2 Click')}>
-                Action 2
-              </TableToolbarAction>
-              <TableToolbarAction onClick={action('Action 3 Click')}>
-                Action 3
-              </TableToolbarAction>
+              <TableToolbarColumns
+                columns={allHeaders}
+                initialSelected={allHeaders.map(header => header.key)}
+                onChange={onColumnsChange}
+              />
             </TableToolbarMenu>
             <Button onClick={action('ButtonCLick')}>Primary Button</Button>
           </TableToolbarContent>
