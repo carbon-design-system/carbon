@@ -242,6 +242,7 @@
   }
 
   .#{$prefix}--search--targeted__container {
+    width: 100%;
     display: flex;
     align-items: stretch;
 
@@ -256,21 +257,6 @@
 
     .#{$prefix}--search {
       flex: 1;
-    }
-
-    .#{$prefix}--search-magnifier {
-      left: auto;
-      right: rem(24px);
-      transform: translate(50%, -50%);
-    }
-
-    .#{$prefix}--search-input {
-      padding-left: $carbon--spacing-05;
-      padding-right: rem(48px);
-    }
-
-    .#{$prefix}--search-close {
-      display: none;
     }
   }
 
