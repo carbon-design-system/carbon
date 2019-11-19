@@ -1,12 +1,12 @@
 # Default global
-* @carbon-design-system/developers
+* @carbon-design-system/developers-system
 
 # Core icons
-/packages/icons/src/svg/16/ @laurenmrice @carbon-design-system/developers
-/packages/icons/src/svg/glyph/ @laurenmrice @carbon-design-system/developers
+/packages/icons/src/svg/16/ @laurenmrice @carbon-design-system/developers-system
+/packages/icons/src/svg/glyph/ @laurenmrice @carbon-design-system/developers-system
 
 # Angular icons
-/packages/icons-angular/ @cal-smith @carbon-design-system/developers
+/packages/icons-angular/ @cal-smith @carbon-design-system/developers-system
 
 # Brand
 /packages/colors/artifacts/ @lisalind-ibm
