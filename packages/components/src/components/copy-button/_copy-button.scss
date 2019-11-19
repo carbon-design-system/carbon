@@ -7,10 +7,12 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 @import '../button/button';
+@import 'keyframes';
 
 @include exports('copy-button') {
   .#{$prefix}--btn--copy {
@@ -68,6 +70,56 @@
 
     &--displayed {
       display: inline-flex;
+    }
+  }
+
+  // TODO: deprecate above styles
+  .#{$prefix}--copy-btn {
+    @include reset;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border: none;
+    height: $carbon--spacing-08;
+    width: $carbon--spacing-08;
+    background-color: $ui-01;
+
+    &::before {
+      @include tooltip--caret;
+      display: none;
+    }
+
+    .#{$prefix}--copy-btn__feedback {
+      @include tooltip--content('icon');
+      clip: auto;
+      margin: auto;
+      overflow: visible;
+      display: none;
+    }
+    @include tooltip--placement('icon', 'bottom', 'center');
+
+    &:focus {
+      @include focus-outline('outline');
+      outline-color: $focus;
+    }
+
+    &.#{$prefix}--copy-btn--animating::before,
+    &.#{$prefix}--copy-btn--animating .#{$prefix}--copy-btn__feedback {
+      display: block;
+    }
+
+    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out::before,
+    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out
+      .#{$prefix}--copy-btn__feedback {
+      animation: $duration--fast-02 motion(standard, productive) hide-feedback;
+    }
+
+    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in::before,
+    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in
+      .#{$prefix}--copy-btn__feedback {
+      animation: $duration--fast-02 motion(standard, productive) show-feedback;
     }
   }
 }
