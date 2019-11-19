@@ -135,7 +135,7 @@ export default class Modal extends Component {
     /**
      * Specify the size variant.
      */
-    size: PropTypes.oneOf('xs', 'sm', 'lg'),
+    size: PropTypes.oneOf(['xs', 'sm', 'lg']),
 
     /**
      * Specify whether the modal should use 3rd party `focus-trap-react` for the focus-wrap feature.
