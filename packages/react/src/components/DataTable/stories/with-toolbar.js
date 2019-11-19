@@ -17,9 +17,10 @@ import DataTable, {
   TableHeader,
   TableRow,
   TableToolbar,
-  TableToolbarColumns,
   TableToolbarContent,
   TableToolbarSearch,
+  TableToolbarColumns,
+  TableToolbarRowHeight,
   TableToolbarMenu,
 } from '..';
 
@@ -39,6 +40,7 @@ export default props => (
       getRowProps,
       getTableProps,
       onInputChange,
+      onRowHeightChange,
       onColumnsChange,
       getTableContainerProps,
     }) => (
@@ -50,6 +52,10 @@ export default props => (
           <TableToolbarContent>
             <TableToolbarSearch onChange={onInputChange} />
             <TableToolbarMenu>
+              <TableToolbarRowHeight
+                initialSelected='default'
+                onChange={onRowHeightChange}
+              />
               <TableToolbarColumns
                 columns={allHeaders}
                 initialSelected={allHeaders.map(header => header.key)}

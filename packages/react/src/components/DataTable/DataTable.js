@@ -360,7 +360,7 @@ export default class DataTable extends React.Component {
     } = this.props;
     return {
       useZebraStyles,
-      size,
+      size: this.state.rowHeight || size,
       isSortable,
       useStaticWidth,
       shouldShowBorder,
@@ -594,7 +594,16 @@ export default class DataTable extends React.Component {
   };
 
   /**
-   * Event handler for table hide/show columns.
+   * Event handler for row height changes.
+   *
+   * @param {Array} rowHeight row height
+   */
+  handleOnRowHeightChange = rowHeight => {
+    this.setState({ rowHeight });
+  };
+
+  /**
+   * Event handler for edit columns.
    *
    * @param {Array} selectedColumns array of selected columns
    */
@@ -614,6 +623,7 @@ export default class DataTable extends React.Component {
     const {
       filterInputValue,
       selectedColumns,
+      rowHeight,
       rowIds,
       rowsById,
       cellsById,
@@ -640,6 +650,7 @@ export default class DataTable extends React.Component {
         rows: denormalize(this.getSelectedRows(), rowsById, cellsById),
         selectedColumns,
       }),
+      size: rowHeight === 'short' ? 'short' : null,
 
       // Prop accessors/getters
       getHeaderProps: this.getHeaderProps,
@@ -652,6 +663,7 @@ export default class DataTable extends React.Component {
 
       // Custom event handlers
       onInputChange: this.handleOnInputValueChange,
+      onRowHeightChange: this.handleOnRowHeightChange,
       onColumnsChange: this.handleOnColumnsChange,
 
       // Expose internal state change actions

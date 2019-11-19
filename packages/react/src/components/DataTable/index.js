@@ -27,6 +27,7 @@ import TableToolbarContent from './TableToolbarContent';
 import TableToolbarSearch from './TableToolbarSearch';
 import TableToolbarMenu from './TableToolbarMenu';
 import TableToolbarColumns from './TableToolbarColumns';
+import TableToolbarRowHeight from './TableToolbarRowHeight';
 
 DataTable.Table = Table;
 DataTable.TableActionList = TableActionList;
@@ -49,6 +50,7 @@ DataTable.TableToolbarContent = TableToolbarContent;
 DataTable.TableToolbarSearch = TableToolbarSearch;
 DataTable.TableToolbarMenu = TableToolbarMenu;
 DataTable.TableToolbarColumn = TableToolbarColumns;
+DataTable.TableToolbarRowHeight = TableToolbarRowHeight;
 
 export {
   Table,
@@ -71,7 +73,8 @@ export {
   TableToolbarContent,
   TableToolbarSearch,
   TableToolbarMenu,
-  TableToolbarColumns
+  TableToolbarColumns,
+  TableToolbarRowHeight,
 };
 
 export default DataTable;

@@ -5,3 +5,7 @@
 .bx--toolbar-menu__option {
   padding: 0 1.25rem;
 }
+
+.bx--toolbar-menu__title:not(:first-child) {
+  margin-top: 1rem;
+}
