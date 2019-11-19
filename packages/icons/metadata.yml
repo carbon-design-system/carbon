@@ -474,6 +474,32 @@ icons:
         categories:
           - name: Actions
             subcategory: Navigation
+      - name: chevron--double--up
+        friendly_name: Chevron double
+        usage: This is a description for usage
+        categories:
+          - name: Actions
+            subcategory: Navigation
+        aliases:
+          - close
+          - collapse
+        sizes:
+          - 16
+          - 32
+          - glyph
+      - name: chevron--double--down
+        friendly_name: Chevron double down
+        usage: This is a description for usage
+        categories:
+          - name: Actions
+            subcategory: Navigation
+        aliases:
+          - open
+          - expand
+        sizes:
+          - 16
+          - 32
+          - glyph
   - name: close
     friendly_name: Close
     usage: This is a description for usage
@@ -1082,6 +1108,15 @@ icons:
         categories:
           - name: Organization
             subcategory: Status
+      - name: misuse--no-circle
+        friendly_name: Misuse no circle
+        usage: This is a description for usage
+        sizes:
+          - 16
+          - 32
+        categories:
+          - name: Organization
+            subcategory: Status
       - name: misuse--alt
         friendly_name: Misuse alt
         usage: This is a description for usage
@@ -1435,6 +1470,17 @@ icons:
         categories:
           - name: Actions
             subcategory: Toggle
+  - name: start-here
+    friendly_name: Start here
+    usage: This is a description for usage
+    categories:
+      - name: Actions
+        subcategory: Navigation
+    aliases:
+      - start-here
+    sizes:
+      - 16
+      - 32
   - name: stop
     friendly_name: Stop
     usage: This is a description for usage
@@ -4644,6 +4690,15 @@ icons:
         friendly_name: Filter edit
         usage: This is a description for usage
         sizes:
+          - 32
+        categories:
+          - name: Actions
+            subcategory: Operations
+      - name: filter--filled
+        friendly_name: Filter filled
+        usage: This is a description for usage
+        sizes:
+          - 16
           - 32
         categories:
           - name: Actions

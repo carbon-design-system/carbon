@@ -147,6 +147,8 @@ categories:
           - chevron--left
           - chevron--right
           - chevron--up
+          - chevron--double--up
+          - chevron--double--down
           - close
           - close--filled
           - close--outline
@@ -158,6 +160,7 @@ categories:
           - overflow-menu--vertical
           - page--first
           - page--last
+          - start-here
           - subtract
           - subtract--alt
           - switcher
@@ -192,6 +195,7 @@ categories:
           - fade
           - filter
           - filter--edit
+          - filter--filled
           - flag
           - fork
           - insert
@@ -662,6 +666,7 @@ categories:
           - information--filled
           - misuse
           - misuse--alt
+          - misuse--no-circle
           - misuse--outline
           - undefined
           - undefined--filled
