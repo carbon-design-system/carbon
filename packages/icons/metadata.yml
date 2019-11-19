@@ -336,6 +336,17 @@ icons:
         categories:
           - name: Actions
             subcategory: Navigation
+  - name: character-patterns
+    friendly_name: Character patterns
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - letters
+      - swap
+    sizes:
+      - 32
   - name: chat
     friendly_name: Chat
     usage: This is a description for usage
@@ -615,6 +626,18 @@ icons:
         categories:
           - name: Organization
             subcategory: File
+  - name: document-sentiment
+    friendly_name: Document sentiment
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - emotion
+      - meaning
+      - understanding
+    sizes:
+      - 32
   - name: down-to-bottom
     friendly_name: Down to bottom
     usage: This is a description for usage
@@ -723,6 +746,18 @@ icons:
         categories:
           - name: Organization
             subcategory: Status
+  - name: exit
+    friendly_name: Exit
+    usage: This is a description for usage
+    categories:
+      - name: Actions
+        subcategory: Operations
+    aliases:
+      - leave
+      - quit
+      - escape
+    sizes:
+      - 32
   - name: export
     friendly_name: Export
     usage: This is a description for usage
@@ -824,6 +859,17 @@ icons:
         categories:
           - name: Organization
             subcategory: File
+  - name: folders
+    friendly_name: Folders
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: File
+    aliases:
+      - files
+      - collection
+    sizes:
+      - 32
   - name: forum
     friendly_name: Forum
     usage: This is a description for usage
@@ -877,6 +923,17 @@ icons:
         categories:
           - name: Organization
             subcategory: Status
+  - name: improve-relevance
+    friendly_name: Improve relevance
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - target
+      - bullseye
+    sizes:
+      - 32
   - name: information
     friendly_name: Information
     usage: This is a description for usage
@@ -1224,6 +1281,18 @@ icons:
         categories:
           - name: Actions
             subcategory: Controls
+  - name: phrase-sentiment
+    friendly_name: Phrase sentiment
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - emotion
+      - meaning
+      - understanding
+    sizes:
+      - 32
   - name: play
     friendly_name: Play
     usage: This is a description for usage
