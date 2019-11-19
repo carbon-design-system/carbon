@@ -228,3 +228,24 @@ function ExampleComponent() {
   return <SomeComponent onChange={onChange} />;
 }
 ```
+
+#### The DOM node that an `id` corresponds to is changed
+
+semver bump: **minor**
+
+We have components that require specifying an `id` that typically corresponds to
+an underlying `<input>` node. However, changes to the exact node that the `id`
+references may change over time. As a result, you should not rely on an `id`
+pointing to a specific element but instead treat it as a unique identifier that
+the component uses for something that it renders.
+
+#### The DOM node that an `aria-label` corresponds to is changed
+
+semver bump: **minor**
+
+Certain components require the product developer to pass in an `aria-label` or
+`aria-labelledby` prop for supporting screen reader users. Ultimately, these
+values are passed along to a given element in the DOM. While the label should
+stay consistent over time, you should not rely on either prop pointing to the
+same element over time. In other words, the node that `aria-label` or
+`aria-labelledby` is supplied to may change over time.
