@@ -189,6 +189,7 @@ categories:
           - drag--horizontal
           - drag--vertical
           - edit-filter
+          - exit
           - fade
           - filter
           - filter--edit
@@ -509,6 +510,7 @@ categories:
           - analytics
           - archive
           - blockchain
+          - character-patterns
           - chart--bar
           - chart--bubble
           - chart--line
@@ -536,16 +538,19 @@ categories:
           - data-vis--3
           - data-vis--4
           - diagram
+          - document-sentiment
           - flow
           - flow--data
           - flow--stream
           - hybrid-networking
+          - improve-relevance
           - managed-solutions
           - network--1
           - network--2
           - network--3
           - network--4
           - parent-child
+          - phrase-sentiment
           - presentation-file
           - query-queue
           - report
@@ -603,6 +608,7 @@ categories:
           - folder--details
           - folder--off
           - folder--shared
+          - folders
           - GIF
           - HD
           - HD--filled
