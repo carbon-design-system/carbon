@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { ButtonTypes } from '../../prop-types/types';
+import { ButtonKinds } from '../../prop-types/types';
 import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
@@ -142,7 +142,7 @@ Button.propTypes = {
   /**
    * Specify the kind of Button you want to create
    */
-  kind: ButtonTypes.buttonKind.isRequired,
+  kind: PropTypes.oneOf(ButtonKinds).isRequired,
 
   /**
    * Optionally specify an href for your Button to become an <a> element

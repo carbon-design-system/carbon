@@ -12,6 +12,7 @@ import {
   findMenuItemNode,
   openMenu,
   assertMenuOpen,
+  assertMenuClosed,
   generateItems,
   generateGenericItem,
 } from '../ListBox/test-helpers';
@@ -93,6 +94,26 @@ describe('ComboBox', () => {
     expect(wrapper.find(`.mock-item`).length).toBe(mockProps.items.length);
   });
 
+  it('should let the user select an option by clicking on the option node', () => {
+    const wrapper = mount(<ComboBox {...mockProps} />);
+    openMenu(wrapper);
+    findMenuItemNode(wrapper, 0).simulate('click');
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItem: mockProps.items[0],
+    });
+    assertMenuClosed(wrapper);
+
+    mockProps.onChange.mockClear();
+
+    openMenu(wrapper);
+    findMenuItemNode(wrapper, 1).simulate('click');
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItem: mockProps.items[1],
+    });
+  });
+
   describe('should display initially selected item found in `initialSelectedItem`', () => {
     it('using an object type for the `initialSelectedItem` prop', () => {
       const wrapper = mount(
@@ -112,6 +133,31 @@ describe('ComboBox', () => {
 
       const wrapper = mount(
         <ComboBox {...mockProps} initialSelectedItem={mockProps.items[1]} />
+      );
+
+      expect(findInputNode(wrapper).prop('value')).toEqual(mockProps.items[1]);
+    });
+  });
+
+  describe('should display selected item found in `selectedItem`', () => {
+    it('using an object type for the `selectedItem` prop', () => {
+      const wrapper = mount(
+        <ComboBox {...mockProps} selectedItem={mockProps.items[0]} />
+      );
+      expect(findInputNode(wrapper).prop('value')).toEqual(
+        mockProps.items[0].label
+      );
+    });
+
+    it('using a string type for the `selectedItem` prop', () => {
+      // Replace the 'items' property in mockProps with a list of strings
+      mockProps = {
+        ...mockProps,
+        items: ['1', '2', '3'],
+      };
+
+      const wrapper = mount(
+        <ComboBox {...mockProps} selectedItem={mockProps.items[1]} />
       );
 
       expect(findInputNode(wrapper).prop('value')).toEqual(mockProps.items[1]);

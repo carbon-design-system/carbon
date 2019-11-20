@@ -8,6 +8,56 @@
 @import 'layer';
 
 // Tooltip
+// Tooltip caret visual styles
+/// @access public
+/// @group tooltip
+@mixin tooltip--caret {
+  position: absolute;
+  z-index: z('floating');
+  width: 0;
+  height: 0;
+  border-style: solid;
+  content: '';
+}
+
+// Tooltip
+// Tooltip content box visual styles
+/// @param {String} $tooltip-type ['icon'] - The type, from: `icon`, `definition`
+/// @access public
+/// @group tooltip
+@mixin tooltip--content($tooltip-type: 'icon') {
+  @include layer('overlay');
+  width: max-content;
+  max-width: rem(208px);
+  height: auto;
+  padding: if(
+    $tooltip-type == 'definition',
+    rem(8px) rem(16px),
+    rem(3px) rem(16px)
+  );
+  border-radius: rem(2px);
+  color: $inverse-01;
+  font-weight: 400;
+  text-align: left;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background-color: $inverse-02;
+  @include type-style('body-short-01');
+
+  // IE media query
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    width: rem(208px);
+  }
+  // Edge 12-15 and Edge 16 feature queries
+  @supports (-ms-accelerator: true) {
+    width: rem(208px);
+  }
+  @supports (-ms-ime-align: auto) {
+    width: rem(208px);
+  }
+}
+
+// Tooltip
 // Definition and Icon CSS only tooltip
 /// @param {String} $tooltip-type ['icon'] - The type, from: `icon`, `definition`
 /// @param {String} $position ['bottom'] - The position, from: `top`, `right`, `bottom`, `left`
@@ -42,7 +92,6 @@
   &::after,
   .#{$prefix}--assistive-text,
   + .#{$prefix}--assistive-text {
-    @include type-style('body-short-01');
     position: absolute;
     z-index: z('floating');
     display: flex;
@@ -88,38 +137,9 @@
   // content box
   // @todo Simplify CSS selectors on next major release
   &::after,
-  &:hover .#{$prefix}--assistive-text,
-  &:focus .#{$prefix}--assistive-text,
-  &:hover + .#{$prefix}--assistive-text,
-  &:focus + .#{$prefix}--assistive-text {
-    @include layer('overlay');
-    width: max-content;
-    max-width: rem(208px);
-    height: auto;
-    padding: if(
-      $tooltip-type == 'definition',
-      rem(8px) rem(16px),
-      rem(3px) rem(16px)
-    );
-    border-radius: rem(2px);
-    color: $inverse-01;
-    font-weight: 400;
-    text-align: left;
-    transform: translateX(-50%);
-    pointer-events: none;
-    background-color: $inverse-02;
-
-    // IE media query
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      width: rem(208px);
-    }
-    // Edge 12-15 and Edge 16 feature queries
-    @supports (-ms-accelerator: true) {
-      width: rem(208px);
-    }
-    @supports (-ms-ime-align: auto) {
-      width: rem(208px);
-    }
+  .#{$prefix}--assistive-text,
+  + .#{$prefix}--assistive-text {
+    @include tooltip--content($tooltip-type);
   }
 
   &::after {
@@ -186,10 +206,8 @@
   // @todo Simplify CSS selectors on next major release
   &::before,
   &::after,
-  &:hover .#{$prefix}--assistive-text,
-  &:focus .#{$prefix}--assistive-text,
-  &:hover + .#{$prefix}--assistive-text,
-  &:focus + .#{$prefix}--assistive-text {
+  .#{$prefix}--assistive-text,
+  + .#{$prefix}--assistive-text {
     @if ($position == 'top') {
       top: 0;
       left: 50%;
@@ -238,10 +256,10 @@
   // alignment options available only for top and bottom tooltip position
   // @todo Simplify CSS selectors on next major release
   &::after,
-  &:hover .#{$prefix}--assistive-text,
-  &:focus .#{$prefix}--assistive-text,
-  &:hover + .#{$prefix}--assistive-text,
-  &:focus + .#{$prefix}--assistive-text {
+  .#{$prefix}--assistive-text,
+  .#{$prefix}--assistive-text,
+  + .#{$prefix}--assistive-text,
+  + .#{$prefix}--assistive-text {
     @if ($position == 'top') {
       top: -$body-spacing;
       @if ($align == 'start') {
