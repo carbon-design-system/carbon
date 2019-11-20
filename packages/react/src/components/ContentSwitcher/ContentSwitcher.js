@@ -110,7 +110,7 @@ export default class ContentSwitcher extends React.Component {
     const classes = classNames(`${prefix}--content-switcher`, className);
 
     return (
-      <div {...other} className={classes}>
+      <div {...other} className={classes} role="tablist">
         {React.Children.map(children, (child, index) =>
           React.cloneElement(child, {
             index,

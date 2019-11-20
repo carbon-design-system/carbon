@@ -311,7 +311,7 @@ export class ModalHeader extends Component {
   };
 
   static defaultProps = {
-    iconDescription: 'Close the modal',
+    iconDescription: 'Close',
     buttonOnClick: () => {},
   };
 
@@ -373,8 +373,9 @@ export class ModalHeader extends Component {
           onClick={this.handleCloseButtonClick}
           className={closeClass}
           title={iconDescription}
+          aria-label={iconDescription}
           type="button">
-          <Close20 aria-label={iconDescription} className={closeIconClass} />
+          <Close20 className={closeIconClass} />
         </button>
       </div>
     );
