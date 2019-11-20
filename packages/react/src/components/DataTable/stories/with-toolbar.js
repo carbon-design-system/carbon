@@ -26,8 +26,6 @@ import DataTable, {
 
 import { initialRows, headers as allHeaders } from './shared';
 
-import './with-toolbar.css';
-
 export default props => (
   <DataTable
     rows={initialRows}
