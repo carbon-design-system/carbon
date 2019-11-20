@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react';
 import cx from 'classnames';
 import Button from '../Button';
 import OverflowMenu from '../OverflowMenu';
-import { ButtonTypes } from '../../prop-types/types';
+import { ButtonKinds } from '../../prop-types/types';
 import { ChevronDown16 } from '@rocketsoftware/icons-react';
 
 import { settings } from '@rocketsoftware/carbon-components';
@@ -76,7 +76,7 @@ ButtonGroup.propTypes = {
   /**
    * Specify button type
    */
-  kind: ButtonTypes.buttonKind.isRequired,
+  kind: PropTypes.oneOf(ButtonKinds).isRequired,
 };
 
 ButtonGroup.defaultProps = {
