@@ -46,7 +46,7 @@ export default class Tabs extends React.Component {
     /**
      * Provide the type of Tab
      */
-    type: PropTypes.oneOf(['default', 'fixed']),
+    type: PropTypes.oneOf(['default', 'container']),
 
     /**
      * Optionally provide an `onClick` handler that is invoked when a <Tab> is
@@ -249,7 +249,7 @@ export default class Tabs extends React.Component {
 
     const classes = {
       tabs: classNames(`${prefix}--tabs`, className, {
-        [`${prefix}--tabs--fixed`]: type === 'fixed',
+        [`${prefix}--tabs--container`]: type === 'container',
       }),
       tablist: classNames(`${prefix}--tabs__nav`, {
         [`${prefix}--tabs__nav--hidden`]: this.state.dropdownHidden,

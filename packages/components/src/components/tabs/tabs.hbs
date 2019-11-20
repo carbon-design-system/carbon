@@ -5,7 +5,7 @@
   LICENSE file in the root directory of this source tree.
 -->
 
-<div data-tabs class="{{@root.prefix}}--tabs{{#if fixed}} {{@root.prefix}}--tabs--fixed{{/if}}">
+<div data-tabs class="{{@root.prefix}}--tabs{{#if container}} {{@root.prefix}}--tabs--container{{/if}}">
   <div class="{{@root.prefix}}--tabs-trigger" tabindex="0">
     <a href="javascript:void(0)" class="{{@root.prefix}}--tabs-trigger-text" tabindex="-1"></a>
     {{ carbon-icon 'ChevronDownGlyph' }}
@@ -23,11 +23,11 @@
   </ul>
 </div>
 <!-- The markup below is for demonstration purposes only -->
-<div>
+<div class="{{@root.prefix}}--tab-content">
   {{#each items}}
   <div id="{{panelId}}" class="{{panelClass}}" role="tabpanel" aria-labelledby="{{linkId}}"
     aria-hidden="{{not selected}}" {{#if (not selected)}} hidden{{/if}}>
-    <p style="padding: 0 1rem; font-size: 14px; font-weight: 600;">{{panelContent}}</p>
+    <div>{{panelContent}}</div>
   </div>
   {{/each}}
 </div>

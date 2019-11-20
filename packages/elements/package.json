@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/elements",
   "description": "A collection of design elements in code for the IBM Design Language",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -32,13 +32,13 @@
   },
   "dependencies": {
     "@carbon/import-once": "10.3.0",
-    "@rocketsoftware/colors": "^0.2.8",
-    "@rocketsoftware/grid": "^0.2.8",
-    "@rocketsoftware/icons": "^0.2.8",
-    "@rocketsoftware/layout": "^0.2.8",
-    "@rocketsoftware/motion": "^0.2.8",
-    "@rocketsoftware/themes": "^0.2.8",
-    "@rocketsoftware/type": "^0.2.8"
+    "@rocketsoftware/colors": "^0.2.9",
+    "@rocketsoftware/grid": "^0.2.9",
+    "@rocketsoftware/icons": "^0.2.9",
+    "@rocketsoftware/layout": "^0.2.9",
+    "@rocketsoftware/motion": "^0.2.9",
+    "@rocketsoftware/themes": "^0.2.9",
+    "@rocketsoftware/type": "^0.2.9"
   },
   "devDependencies": {
     "@carbon/bundler": "10.4.0",

@@ -130,10 +130,7 @@ class RadioButton extends React.Component {
           id={this.uid}
           ref={ref}
         />
-        <label
-          htmlFor={this.uid}
-          className={`${prefix}--radio-button__label`}
-          aria-label={labelText}>
+        <label htmlFor={this.uid} className={`${prefix}--radio-button__label`}>
           <span className={`${prefix}--radio-button__appearance`} />
           <span className={innerLabelClasses}>{labelText}</span>
         </label>

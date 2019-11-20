@@ -116,10 +116,10 @@
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after {
-    bottom: rem(-6px);
+    bottom: rem(-8px);
     left: 0;
     width: rem(32px);
-    height: rem(6px);
+    height: rem(8px);
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after {

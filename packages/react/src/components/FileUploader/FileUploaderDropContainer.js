@@ -43,21 +43,21 @@ export default function FileUploaderDropContainer(props) {
    * @param {Event} evt - Event object, used to get the list of files added
    */
   const validateFiles = evt => {
+    const transferredFiles = [...evt.dataTransfer.files];
     if (evt.type === 'drop') {
+      if (!accept.length) {
+        return transferredFiles;
+      }
       const acceptedTypes = new Set(accept);
-      return [...evt.dataTransfer.files].filter(
-        ({ name, type: mimeType = '' }) => {
-          const fileExtensionRegExp = new RegExp(/\.[0-9a-z]+$/, 'i');
-          const hasFileExtension = fileExtensionRegExp.test(name);
-          if (!hasFileExtension) {
-            return false;
-          }
-          const [fileExtension] = name.match(fileExtensionRegExp);
-          return (
-            acceptedTypes.has(mimeType) || acceptedTypes.has(fileExtension)
-          );
+      return transferredFiles.filter(({ name, type: mimeType = '' }) => {
+        const fileExtensionRegExp = new RegExp(/\.[0-9a-z]+$/, 'i');
+        const hasFileExtension = fileExtensionRegExp.test(name);
+        if (!hasFileExtension) {
+          return false;
         }
-      );
+        const [fileExtension] = name.match(fileExtensionRegExp);
+        return acceptedTypes.has(mimeType) || acceptedTypes.has(fileExtension);
+      });
     }
     return [...evt.target.files];
   };

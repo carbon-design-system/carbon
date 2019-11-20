@@ -127,37 +127,78 @@ export const skeleton01 = '#e5e5e5';
 export const skeleton02 = gray30;
 
 // Type
-export { caption01 } from '@rocketsoftware/type';
-export { label01 } from '@rocketsoftware/type';
-export { helperText01 } from '@rocketsoftware/type';
-export { bodyShort01 } from '@rocketsoftware/type';
-export { bodyLong01 } from '@rocketsoftware/type';
-export { bodyShort02 } from '@rocketsoftware/type';
-export { bodyLong02 } from '@rocketsoftware/type';
-export { code01 } from '@rocketsoftware/type';
-export { code02 } from '@rocketsoftware/type';
-export { heading01 } from '@rocketsoftware/type';
-export { productiveHeading01 } from '@rocketsoftware/type';
-export { heading02 } from '@rocketsoftware/type';
-export { productiveHeading02 } from '@rocketsoftware/type';
-export { productiveHeading03 } from '@rocketsoftware/type';
-export { productiveHeading04 } from '@rocketsoftware/type';
-export { productiveHeading05 } from '@rocketsoftware/type';
-export { productiveHeading06 } from '@rocketsoftware/type';
-export { productiveHeading07 } from '@rocketsoftware/type';
-export { expressiveHeading01 } from '@rocketsoftware/type';
-export { expressiveHeading02 } from '@rocketsoftware/type';
-export { expressiveHeading03 } from '@rocketsoftware/type';
-export { expressiveHeading04 } from '@rocketsoftware/type';
-export { expressiveHeading05 } from '@rocketsoftware/type';
-export { expressiveHeading06 } from '@rocketsoftware/type';
-export { expressiveParagraph01 } from '@rocketsoftware/type';
-export { quotation01 } from '@rocketsoftware/type';
-export { quotation02 } from '@rocketsoftware/type';
-export { display01 } from '@rocketsoftware/type';
-export { display02 } from '@rocketsoftware/type';
-export { display03 } from '@rocketsoftware/type';
-export { display04 } from '@rocketsoftware/type';
+export {
+  caption01,
+  label01,
+  helperText01,
+  bodyShort01,
+  bodyLong01,
+  bodyShort02,
+  bodyLong02,
+  code01,
+  code02,
+  heading01,
+  productiveHeading01,
+  heading02,
+  productiveHeading02,
+  productiveHeading03,
+  productiveHeading04,
+  productiveHeading05,
+  productiveHeading06,
+  productiveHeading07,
+  expressiveHeading01,
+  expressiveHeading02,
+  expressiveHeading03,
+  expressiveHeading04,
+  expressiveHeading05,
+  expressiveHeading06,
+  expressiveParagraph01,
+  quotation01,
+  quotation02,
+  display01,
+  display02,
+  display03,
+  display04,
+} from '@rocketsoftware/type';
+
+// Layout
+// Spacing
+export {
+  spacing01,
+  spacing02,
+  spacing03,
+  spacing04,
+  spacing05,
+  spacing06,
+  spacing07,
+  spacing08,
+  spacing09,
+  spacing10,
+  spacing11,
+  spacing12,
+  // Fluid spacing
+  fluidSpacing01,
+  fluidSpacing02,
+  fluidSpacing03,
+  fluidSpacing04,
+  // Layout
+  layout01,
+  layout02,
+  layout03,
+  layout04,
+  layout05,
+  layout06,
+  layout07,
+  // Containers
+  container01,
+  container02,
+  container03,
+  container04,
+  container05,
+  // Icon sizes
+  iconSize01,
+  iconSize02,
+} from '@rocketsoftware/layout';
 
 // Deprecated ☠️
 export const brand01 = interactive01;
