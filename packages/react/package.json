@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/carbon-components-react",
   "description": "React components for Carbon.",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -38,7 +38,7 @@
     "react-dom": "^16.8.6"
   },
   "dependencies": {
-    "@rocketsoftware/icons-react": "^0.2.8",
+    "@rocketsoftware/icons-react": "^0.2.9",
     "classnames": "2.2.6",
     "downshift": "^1.31.14",
     "flatpickr": "4.6.1",
@@ -65,7 +65,7 @@
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
     "@carbon/test-utils": "^10.4.0",
-    "@rocketsoftware/carbon-components": "^0.2.8",
+    "@rocketsoftware/carbon-components": "^0.2.9",
     "@storybook/addon-a11y": "^5.2.1",
     "@storybook/addon-actions": "^5.2.1",
     "@storybook/addon-info": "^5.2.1",
