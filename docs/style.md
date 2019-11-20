@@ -111,10 +111,10 @@ function MyComponent({
   // Prefer default argument values to `defaultProps`
   initialValue = 0,
 }) {
-  // Constants and other variables
-  const value = 1;
   // State-related behavior
   const [state, setState] = useState(initialValue);
+  // Constants and other variables
+  const value = 1;
 
   // Handlers
   function onClick() {
@@ -131,6 +131,9 @@ function MyComponent({
 }
 
 MyComponent.propTypes = {
+  /**
+   * Description of what this prop is for
+   */
   initialValue: PropTypes.number,
 };
 ```
