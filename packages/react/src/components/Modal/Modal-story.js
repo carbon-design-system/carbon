@@ -68,39 +68,42 @@ const props = () => ({
   onSecondarySubmit: action('onSecondarySubmit'),
 });
 
-const titleOnlyProps = () => ({
-  className: 'some-class',
-  open: boolean('Open (open)', true),
-  passiveModal: boolean('Without footer (passiveModal)', false),
-  danger: boolean('Danger mode (danger)', false),
-  modalHeading: text(
-    'Modal heading (modalHeading)',
-    `
-    Passive modal title as the message. Should be direct and 3 lines or less.
-  `.trim()
-  ),
-  modalAriaLabel: text(
-    'ARIA label, used only if modalLabel not provided (modalAriaLabel)',
-    'A label to be read by screen readers on the modal root node'
-  ),
-  primaryButtonText: text(
-    'Primary button text (primaryButtonText)',
-    'Primary Button'
-  ),
-  secondaryButtonText: text(
-    'Secondary button text (secondaryButtonText)',
-    'Secondary Button'
-  ),
-  size: select('Size (size)', sizes, 'sm'),
-  iconDescription: text(
-    'Close icon description (iconDescription)',
-    'Close the modal'
-  ),
-  onBlur: action('onBlur'),
-  onClick: action('onClick'),
-  onFocus: action('onFocus'),
-  onRequestClose: action('onRequestClose'),
-});
+const titleOnlyProps = () => {
+  const passiveModal = boolean('Without footer (passiveModal)', false);
+  return {
+    className: 'some-class',
+    open: boolean('Open (open)', true),
+    passiveModal,
+    danger: !passiveModal && boolean('Danger mode (danger)', false),
+    modalHeading: text(
+      'Modal heading (modalHeading)',
+      `
+      Passive modal title as the message. Should be direct and 3 lines or less.
+    `.trim()
+    ),
+    modalAriaLabel: text(
+      'ARIA label, used only if modalLabel not provided (modalAriaLabel)',
+      'A label to be read by screen readers on the modal root node'
+    ),
+    primaryButtonText: text(
+      'Primary button text (primaryButtonText)',
+      'Primary Button'
+    ),
+    secondaryButtonText: text(
+      'Secondary button text (secondaryButtonText)',
+      'Secondary Button'
+    ),
+    size: select('Size (size)', sizes, 'sm'),
+    iconDescription: text(
+      'Close icon description (iconDescription)',
+      'Close the modal'
+    ),
+    onBlur: action('onBlur'),
+    onClick: action('onClick'),
+    onFocus: action('onFocus'),
+    onRequestClose: action('onRequestClose'),
+  };
+};
 
 storiesOf('Modal', module)
   .addDecorator(withKnobs)
