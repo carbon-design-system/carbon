@@ -24754,6 +24754,10 @@ UI shell side nav
     width: mini-units(6);
   }
 
+  .#{$prefix}--side-nav__navigation.#{$prefix}--side-nav--rail {
+    height: calc(100% - 3rem);
+  }
+
   .#{$prefix}--side-nav--hidden {
     width: 0;
   }
