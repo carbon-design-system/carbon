@@ -69,6 +69,8 @@ HeaderMenuButton.propTypes = {
   onClick: PropTypes.func,
 
   isActive: PropTypes.bool,
+
+  isCollapsible: PropTypes.bool,
 };
 
 export default HeaderMenuButton;

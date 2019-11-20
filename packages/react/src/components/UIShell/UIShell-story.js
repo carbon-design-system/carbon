@@ -109,6 +109,11 @@ const StoryContent = () => {
             configuration should be used per product section. If tabs are needed
             on a page when using a side-nav, then the tabs are secondary in
             hierarchy to the side-nav.
+            <br />
+            <br />
+            If you are using side-nav alongside the header and header-container
+            as well as specifying the defaultExpanded prop, globalExpand is then
+            required.
           </p>
         </div>
       </div>
@@ -149,9 +154,9 @@ storiesOf('UI Shell', module)
         render={({ isSideNavExpanded, onClickSideNavExpand }) => (
           <>
             <Header aria-label="IBM Platform Name">
-              <SkipToContent />
               <HeaderMenuButton
                 aria-label="Open menu"
+                isCollapsible
                 onClick={onClickSideNavExpand}
                 isActive={isSideNavExpanded}
               />
@@ -170,8 +175,7 @@ storiesOf('UI Shell', module)
               </HeaderNavigation>
               <SideNav
                 aria-label="Side navigation"
-                expanded={isSideNavExpanded}
-                isPersistent={false}>
+                expanded={isSideNavExpanded}>
                 <SideNavItems>
                   <HeaderSideNavItems>
                     <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -229,6 +233,7 @@ storiesOf('UI Shell', module)
               <HeaderMenuButton
                 aria-label="Open menu"
                 onClick={onClickSideNavExpand}
+                isCollapsible
                 isActive={isSideNavExpanded}
               />
               <HeaderName href="#" prefix="IBM">
@@ -263,8 +268,7 @@ storiesOf('UI Shell', module)
               </HeaderGlobalBar>
               <SideNav
                 aria-label="Side navigation"
-                expanded={isSideNavExpanded}
-                isPersistent={false}>
+                expanded={isSideNavExpanded}>
                 <SideNavItems>
                   <HeaderSideNavItems>
                     <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -294,6 +298,7 @@ storiesOf('UI Shell', module)
               <SkipToContent />
               <HeaderMenuButton
                 aria-label="Open menu"
+                isCollapsible
                 onClick={onClickSideNavExpand}
                 isActive={isSideNavExpanded}
               />
@@ -404,6 +409,7 @@ storiesOf('UI Shell', module)
               <SkipToContent />
               <HeaderMenuButton
                 aria-label="Open menu"
+                isCollapsible
                 onClick={onClickSideNavExpand}
                 isActive={isSideNavExpanded}
               />
@@ -699,6 +705,41 @@ storiesOf('UI Shell', module)
     ))
   )
   .add(
+    'SideNav Rail w/ defaultExpanded',
+    withReadme(readme, () => (
+      <>
+        <SideNav aria-label="Side navigation" defaultExpanded={true} isRail>
+          <SideNavItems>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                Link
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+              Link
+            </SideNavLink>
+            <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+              Link
+            </SideNavLink>
+          </SideNavItems>
+        </SideNav>
+        <StoryContent />
+      </>
+    ))
+  )
+  .add(
     'SideNav Rail w/Header',
     withReadme(readme, () => (
       <HeaderContainer
@@ -746,6 +787,111 @@ storiesOf('UI Shell', module)
                 aria-label="Side navigation"
                 isRail
                 expanded={isSideNavExpanded}>
+                <SideNavItems>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                    Link
+                  </SideNavLink>
+                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                    Link
+                  </SideNavLink>
+                </SideNavItems>
+              </SideNav>
+            </Header>
+            <StoryContent />
+          </>
+        )}
+      />
+    ))
+  )
+  .add(
+    'SideNav Rail w/Header and defaultExpanded',
+    withReadme(readme, () => (
+      <HeaderContainer
+        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+          <>
+            <Header aria-label="IBM Platform Name">
+              <SkipToContent />
+              <HeaderMenuButton
+                aria-label="Open menu"
+                isCollapsible
+                onClick={onClickSideNavExpand}
+                isActive={isSideNavExpanded}
+              />
+              <HeaderName href="#" prefix="IBM">
+                [Platform]
+              </HeaderName>
+              <HeaderNavigation aria-label="IBM [Platform]">
+                <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+                <HeaderMenu aria-label="Link 4">
+                  <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+                </HeaderMenu>
+              </HeaderNavigation>
+              <HeaderGlobalBar>
+                <HeaderGlobalAction
+                  aria-label="Search"
+                  onClick={action('search click')}>
+                  <Search20 />
+                </HeaderGlobalAction>
+                <HeaderGlobalAction
+                  aria-label="Notifications"
+                  onClick={action('notification click')}>
+                  <Notification20 />
+                </HeaderGlobalAction>
+                <HeaderGlobalAction
+                  aria-label="App Switcher"
+                  onClick={action('app-switcher click')}>
+                  <AppSwitcher20 />
+                </HeaderGlobalAction>
+              </HeaderGlobalBar>
+              <SideNav
+                aria-label="Side navigation"
+                isRail
+                expanded={isSideNavExpanded}
+                globalExpand={onClickSideNavExpand}
+                defaultExpanded={true}>
                 <SideNavItems>
                   <SideNavMenu renderIcon={Fade16} title="Category title">
                     <SideNavMenuItem href="javascript:void(0)">
