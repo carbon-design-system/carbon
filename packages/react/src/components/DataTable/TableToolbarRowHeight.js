@@ -8,9 +8,9 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import {
-  ToolbarTitle,
-  ToolbarOption,
-} from '../Toolbar';
+  TableToolbarTitle,
+  TableToolbarOption,
+} from './TableToolbar';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
 
@@ -37,8 +37,8 @@ const TableToolbarRowHeight = ({
 
   return (
     <>
-      <ToolbarTitle title={t('carbon.table.toolbar.row.height.label')} />
-      <ToolbarOption>
+      <TableToolbarTitle title={t('carbon.table.toolbar.row.height.label')} />
+      <TableToolbarOption>
         <RadioButtonGroup
            defaultSelected="default"
            labelPosition="right"
@@ -59,7 +59,7 @@ const TableToolbarRowHeight = ({
              value="short"
            />
          </RadioButtonGroup>
-      </ToolbarOption>          
+      </TableToolbarOption>          
     </>
   );
 };

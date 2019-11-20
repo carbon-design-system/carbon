@@ -34,4 +34,30 @@ TableToolbar.defaultProps = {
   'aria-label': 'data table toolbar',
 };
 
+export const TableToolbarTitle = React.forwardRef(({ title }, ref) => (
+  <li ref={ref} className={`${prefix}--toolbar-menu__title`}>
+    {title}
+  </li>
+));
+
+TableToolbarTitle.propTypes = {
+  /**
+   * Specify the title of the Toolbar
+   */
+  title: PropTypes.string,
+};
+
+export const TableToolbarOption = React.forwardRef(({ children }, ref) => (
+  <li ref={ref} className={`${prefix}--toolbar-menu__option`}>
+    {children}
+  </li>
+));
+
+TableToolbarOption.propTypes = {
+  /**
+   * Specify the contents of the ToolbarOption
+   */
+  children: PropTypes.node,
+};
+
 export default TableToolbar;

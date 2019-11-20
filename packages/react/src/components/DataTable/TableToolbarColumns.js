@@ -8,9 +8,9 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import {
-  ToolbarTitle,
-  ToolbarOption,
-} from '../Toolbar';
+  TableToolbarTitle,
+  TableToolbarOption,
+} from './TableToolbar';
 import Checkbox from '../Checkbox';
 
 const translationKeys = {
@@ -41,17 +41,17 @@ const TableToolbarColumns = ({
 
   return (
     <>
-      <ToolbarTitle title={t('carbon.table.toolbar.columns.label')} />
+      <TableToolbarTitle title={t('carbon.table.toolbar.columns.label')} />
       {
         columns.map(column => (
-          <ToolbarOption>
+          <TableToolbarOption>
             <Checkbox
               id={column.key}
               labelText={column.header}
               defaultChecked={selected.includes(column.key)}
               onChange={onChange}
             />
-          </ToolbarOption>          
+          </TableToolbarOption>          
         ))
       }
     </>

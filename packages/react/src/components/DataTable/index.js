@@ -21,7 +21,7 @@ import TableHeader from './TableHeader';
 import TableRow from './TableRow';
 import TableSelectAll from './TableSelectAll';
 import TableSelectRow from './TableSelectRow';
-import TableToolbar from './TableToolbar';
+import TableToolbar, { TableToolbarTitle, TableToolbarOption } from './TableToolbar';
 import TableToolbarAction from './TableToolbarAction';
 import TableToolbarContent from './TableToolbarContent';
 import TableToolbarSearch from './TableToolbarSearch';
@@ -45,6 +45,8 @@ DataTable.TableRow = TableRow;
 DataTable.TableSelectAll = TableSelectAll;
 DataTable.TableSelectRow = TableSelectRow;
 DataTable.TableToolbar = TableToolbar;
+DataTable.TableToolbarTitle = TableToolbarTitle;
+DataTable.TableToolbarOption = TableToolbarOption;
 DataTable.TableToolbarAction = TableToolbarAction;
 DataTable.TableToolbarContent = TableToolbarContent;
 DataTable.TableToolbarSearch = TableToolbarSearch;
@@ -69,6 +71,8 @@ export {
   TableSelectAll,
   TableSelectRow,
   TableToolbar,
+  TableToolbarTitle,
+  TableToolbarOption,
   TableToolbarAction,
   TableToolbarContent,
   TableToolbarSearch,
