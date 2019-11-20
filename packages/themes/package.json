@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "@rocketsoftware/colors": "^0.2.8",
-    "@rocketsoftware/type": "^0.2.8"
+    "@rocketsoftware/type": "^0.2.8",
+    "@rocketsoftware/layout": "^0.2.8"
   },
   "devDependencies": {
     "@carbon/cli-reporter": "10.3.0",

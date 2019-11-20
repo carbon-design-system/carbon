@@ -77,6 +77,7 @@
   .#{$prefix}--number__input-wrapper {
     display: flex;
     align-items: center;
+    position: relative;
 
     ~ .#{$prefix}--form-requirement {
       color: $support-01;
@@ -98,6 +99,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    // vertically center controls within parent container on IE11
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .#{$prefix}--number__control-btn {

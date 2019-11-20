@@ -166,7 +166,7 @@
     word-break: break-word;
   }
 
-  .#{$prefix}--inline-notification__action-button {
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
     height: rem(32px);
     margin: $carbon--spacing-03 0;
 
@@ -175,6 +175,12 @@
     &:focus,
     &:active {
       color: $inverse-link;
+    }
+
+    &:focus {
+      border-color: transparent;
+      outline: 2px solid $inverse-focus-ui;
+      outline-offset: -2px;
     }
 
     &:hover {
@@ -198,6 +204,11 @@
     max-width: rem(48px);
     transition: outline $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
+
+    &:focus {
+      outline: 2px solid $inverse-focus-ui;
+      outline-offset: -2px;
+    }
 
     .#{$prefix}--inline-notification__close-icon {
       fill: $inverse-01;

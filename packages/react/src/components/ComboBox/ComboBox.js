@@ -28,6 +28,10 @@ const defaultItemToString = item => {
 const defaultShouldFilterItem = () => true;
 
 const getInputValue = (props, state) => {
+  if (props.selectedItem) {
+    return props.itemToString(props.selectedItem);
+  }
+  // TODO: consistent `initialSelectedItem` behavior with other listbox components in v11
   if (props.initialSelectedItem) {
     return props.itemToString(props.initialSelectedItem);
   }
@@ -133,6 +137,11 @@ export default class ComboBox extends React.Component {
      * Message which is displayed if the value is invalid.
      */
     invalidText: PropTypes.string,
+
+    /**
+     * For full control of the selection
+     */
+    selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 
     /**
      * Specify a custom translation function that takes in a message identifier
@@ -246,6 +255,7 @@ export default class ComboBox extends React.Component {
       helperText,
       placeholder,
       initialSelectedItem,
+      selectedItem,
       ariaLabel,
       translateWithId,
       invalid,
@@ -288,7 +298,8 @@ export default class ComboBox extends React.Component {
         onStateChange={this.handleOnStateChange}
         inputValue={this.state.inputValue || ''}
         itemToString={itemToString}
-        defaultSelectedItem={initialSelectedItem}>
+        defaultSelectedItem={initialSelectedItem}
+        selectedItem={selectedItem}>
         {({
           getButtonProps,
           getInputProps,

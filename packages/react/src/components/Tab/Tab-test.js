@@ -63,6 +63,15 @@ describe('Tab', () => {
       );
     });
 
+    it('has aria-disabled that matches disabled', () => {
+      const getDisabledRegion = () => wrapper.find('[aria-disabled]');
+
+      expect(getDisabledRegion().length).toEqual(0);
+
+      wrapper.setProps({ disabled: true });
+      expect(getDisabledRegion().prop('aria-disabled')).toEqual(true);
+    });
+
     it(`adds [className="${prefix}--tabs__nav-item--selected"] when selected prop is true`, () => {
       wrapper.setProps({ selected: true });
       expect(wrapper.hasClass(`${prefix}--tabs__nav-item--selected`)).toBe(
@@ -110,6 +119,7 @@ describe('Tab', () => {
       });
     });
   });
+
   describe('custom render label', () => {
     const wrapper = mount(
       <Tab

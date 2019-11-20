@@ -12,6 +12,10 @@
   - [❌custom-property-prefix [variable]](#custom-property-prefix-variable)
   - [❌should-emit [function]](#should-emit-function)
   - [✅carbon--theme [mixin]](#carbon--theme-mixin)
+  - [✅carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
+  - [✅carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
+  - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
+  - [✅carbon--theme--v9 [variable]](#carbon--theme--v9-variable)
   - [✅carbon--theme [variable]](#carbon--theme-variable)
   - [✅interactive-01 [variable]](#interactive-01-variable)
   - [✅interactive-02 [variable]](#interactive-02-variable)
@@ -107,13 +111,36 @@
   - [✅display-02 [variable]](#display-02-variable)
   - [✅display-03 [variable]](#display-03-variable)
   - [✅display-04 [variable]](#display-04-variable)
-- [@rocketsoftware/themes](#rocketsoftwarethemes)
-  - [✅carbon--theme--white [variable]](#carbon--theme--white-variable)
-  - [✅carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
-  - [✅carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
-  - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
-  - [✅carbon--theme--v9 [variable]](#carbon--theme--v9-variable)
-  - [✅carbon--theme--rocket [variable]](#carbon--theme--rocket-variable)
+  - [✅spacing-01 [variable]](#spacing-01-variable)
+  - [✅spacing-02 [variable]](#spacing-02-variable)
+  - [✅spacing-03 [variable]](#spacing-03-variable)
+  - [✅spacing-04 [variable]](#spacing-04-variable)
+  - [✅spacing-05 [variable]](#spacing-05-variable)
+  - [✅spacing-06 [variable]](#spacing-06-variable)
+  - [✅spacing-07 [variable]](#spacing-07-variable)
+  - [✅spacing-08 [variable]](#spacing-08-variable)
+  - [✅spacing-09 [variable]](#spacing-09-variable)
+  - [✅spacing-10 [variable]](#spacing-10-variable)
+  - [✅spacing-11 [variable]](#spacing-11-variable)
+  - [✅spacing-12 [variable]](#spacing-12-variable)
+  - [✅fluid-spacing-01 [variable]](#fluid-spacing-01-variable)
+  - [✅fluid-spacing-02 [variable]](#fluid-spacing-02-variable)
+  - [✅fluid-spacing-03 [variable]](#fluid-spacing-03-variable)
+  - [✅fluid-spacing-04 [variable]](#fluid-spacing-04-variable)
+  - [✅layout-01 [variable]](#layout-01-variable)
+  - [✅layout-02 [variable]](#layout-02-variable)
+  - [✅layout-03 [variable]](#layout-03-variable)
+  - [✅layout-04 [variable]](#layout-04-variable)
+  - [✅layout-05 [variable]](#layout-05-variable)
+  - [✅layout-06 [variable]](#layout-06-variable)
+  - [✅layout-07 [variable]](#layout-07-variable)
+  - [✅container-01 [variable]](#container-01-variable)
+  - [✅container-02 [variable]](#container-02-variable)
+  - [✅container-03 [variable]](#container-03-variable)
+  - [✅container-04 [variable]](#container-04-variable)
+  - [✅container-05 [variable]](#container-05-variable)
+  - [✅icon-size-01 [variable]](#icon-size-01-variable)
+  - [✅icon-size-02 [variable]](#icon-size-02-variable)
 
 <!-- tocstop -->
 
@@ -257,6 +284,36 @@ Define theme variables from a map of tokens
   $display-02: map-get($theme, 'display-02') !global;
   $display-03: map-get($theme, 'display-03') !global;
   $display-04: map-get($theme, 'display-04') !global;
+  $spacing-01: map-get($theme, 'spacing-01') !global;
+  $spacing-02: map-get($theme, 'spacing-02') !global;
+  $spacing-03: map-get($theme, 'spacing-03') !global;
+  $spacing-04: map-get($theme, 'spacing-04') !global;
+  $spacing-05: map-get($theme, 'spacing-05') !global;
+  $spacing-06: map-get($theme, 'spacing-06') !global;
+  $spacing-07: map-get($theme, 'spacing-07') !global;
+  $spacing-08: map-get($theme, 'spacing-08') !global;
+  $spacing-09: map-get($theme, 'spacing-09') !global;
+  $spacing-10: map-get($theme, 'spacing-10') !global;
+  $spacing-11: map-get($theme, 'spacing-11') !global;
+  $spacing-12: map-get($theme, 'spacing-12') !global;
+  $fluid-spacing-01: map-get($theme, 'fluid-spacing-01') !global;
+  $fluid-spacing-02: map-get($theme, 'fluid-spacing-02') !global;
+  $fluid-spacing-03: map-get($theme, 'fluid-spacing-03') !global;
+  $fluid-spacing-04: map-get($theme, 'fluid-spacing-04') !global;
+  $layout-01: map-get($theme, 'layout-01') !global;
+  $layout-02: map-get($theme, 'layout-02') !global;
+  $layout-03: map-get($theme, 'layout-03') !global;
+  $layout-04: map-get($theme, 'layout-04') !global;
+  $layout-05: map-get($theme, 'layout-05') !global;
+  $layout-06: map-get($theme, 'layout-06') !global;
+  $layout-07: map-get($theme, 'layout-07') !global;
+  $container-01: map-get($theme, 'container-01') !global;
+  $container-02: map-get($theme, 'container-02') !global;
+  $container-03: map-get($theme, 'container-03') !global;
+  $container-04: map-get($theme, 'container-04') !global;
+  $container-05: map-get($theme, 'container-05') !global;
+  $icon-size-01: map-get($theme, 'icon-size-01') !global;
+  $icon-size-02: map-get($theme, 'icon-size-02') !global;
 
   @if global-variable-exists('feature-flags') and
     map-get($feature-flags, 'enable-css-custom-properties')
@@ -512,6 +569,126 @@ Define theme variables from a map of tokens
     $hover-field: var(
       --#{$custom-property-prefix}-hover-field,
       map-get($theme, 'hover-field')
+    ) !global;
+    $spacing-01: var(
+      --#{$custom-property-prefix}-spacing-01,
+      map-get($theme, 'spacing-01')
+    ) !global;
+    $spacing-02: var(
+      --#{$custom-property-prefix}-spacing-02,
+      map-get($theme, 'spacing-02')
+    ) !global;
+    $spacing-03: var(
+      --#{$custom-property-prefix}-spacing-03,
+      map-get($theme, 'spacing-03')
+    ) !global;
+    $spacing-04: var(
+      --#{$custom-property-prefix}-spacing-04,
+      map-get($theme, 'spacing-04')
+    ) !global;
+    $spacing-05: var(
+      --#{$custom-property-prefix}-spacing-05,
+      map-get($theme, 'spacing-05')
+    ) !global;
+    $spacing-06: var(
+      --#{$custom-property-prefix}-spacing-06,
+      map-get($theme, 'spacing-06')
+    ) !global;
+    $spacing-07: var(
+      --#{$custom-property-prefix}-spacing-07,
+      map-get($theme, 'spacing-07')
+    ) !global;
+    $spacing-08: var(
+      --#{$custom-property-prefix}-spacing-08,
+      map-get($theme, 'spacing-08')
+    ) !global;
+    $spacing-09: var(
+      --#{$custom-property-prefix}-spacing-09,
+      map-get($theme, 'spacing-09')
+    ) !global;
+    $spacing-10: var(
+      --#{$custom-property-prefix}-spacing-10,
+      map-get($theme, 'spacing-10')
+    ) !global;
+    $spacing-11: var(
+      --#{$custom-property-prefix}-spacing-11,
+      map-get($theme, 'spacing-11')
+    ) !global;
+    $spacing-12: var(
+      --#{$custom-property-prefix}-spacing-12,
+      map-get($theme, 'spacing-12')
+    ) !global;
+    $fluid-spacing-01: var(
+      --#{$custom-property-prefix}-fluid-spacing-01,
+      map-get($theme, 'fluid-spacing-01')
+    ) !global;
+    $fluid-spacing-02: var(
+      --#{$custom-property-prefix}-fluid-spacing-02,
+      map-get($theme, 'fluid-spacing-02')
+    ) !global;
+    $fluid-spacing-03: var(
+      --#{$custom-property-prefix}-fluid-spacing-03,
+      map-get($theme, 'fluid-spacing-03')
+    ) !global;
+    $fluid-spacing-04: var(
+      --#{$custom-property-prefix}-fluid-spacing-04,
+      map-get($theme, 'fluid-spacing-04')
+    ) !global;
+    $layout-01: var(
+      --#{$custom-property-prefix}-layout-01,
+      map-get($theme, 'layout-01')
+    ) !global;
+    $layout-02: var(
+      --#{$custom-property-prefix}-layout-02,
+      map-get($theme, 'layout-02')
+    ) !global;
+    $layout-03: var(
+      --#{$custom-property-prefix}-layout-03,
+      map-get($theme, 'layout-03')
+    ) !global;
+    $layout-04: var(
+      --#{$custom-property-prefix}-layout-04,
+      map-get($theme, 'layout-04')
+    ) !global;
+    $layout-05: var(
+      --#{$custom-property-prefix}-layout-05,
+      map-get($theme, 'layout-05')
+    ) !global;
+    $layout-06: var(
+      --#{$custom-property-prefix}-layout-06,
+      map-get($theme, 'layout-06')
+    ) !global;
+    $layout-07: var(
+      --#{$custom-property-prefix}-layout-07,
+      map-get($theme, 'layout-07')
+    ) !global;
+    $container-01: var(
+      --#{$custom-property-prefix}-container-01,
+      map-get($theme, 'container-01')
+    ) !global;
+    $container-02: var(
+      --#{$custom-property-prefix}-container-02,
+      map-get($theme, 'container-02')
+    ) !global;
+    $container-03: var(
+      --#{$custom-property-prefix}-container-03,
+      map-get($theme, 'container-03')
+    ) !global;
+    $container-04: var(
+      --#{$custom-property-prefix}-container-04,
+      map-get($theme, 'container-04')
+    ) !global;
+    $container-05: var(
+      --#{$custom-property-prefix}-container-05,
+      map-get($theme, 'container-05')
+    ) !global;
+    $icon-size-01: var(
+      --#{$custom-property-prefix}-icon-size-01,
+      map-get($theme, 'icon-size-01')
+    ) !global;
+    $icon-size-02: var(
+      --#{$custom-property-prefix}-icon-size-02,
+      map-get($theme, 'icon-size-02')
     ) !global;
   }
   @if $emit-custom-properties == true {
@@ -1148,6 +1325,162 @@ Define theme variables from a map of tokens
     @if should-emit($theme, $carbon--theme, 'display-04', $emit-difference) {
       @include custom-property('display-04', map-get($theme, 'display-04'));
     }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-01', $emit-difference) {
+      @include custom-property('spacing-01', map-get($theme, 'spacing-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-02', $emit-difference) {
+      @include custom-property('spacing-02', map-get($theme, 'spacing-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-03', $emit-difference) {
+      @include custom-property('spacing-03', map-get($theme, 'spacing-03'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-04', $emit-difference) {
+      @include custom-property('spacing-04', map-get($theme, 'spacing-04'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-05', $emit-difference) {
+      @include custom-property('spacing-05', map-get($theme, 'spacing-05'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-06', $emit-difference) {
+      @include custom-property('spacing-06', map-get($theme, 'spacing-06'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-07', $emit-difference) {
+      @include custom-property('spacing-07', map-get($theme, 'spacing-07'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-08', $emit-difference) {
+      @include custom-property('spacing-08', map-get($theme, 'spacing-08'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-09', $emit-difference) {
+      @include custom-property('spacing-09', map-get($theme, 'spacing-09'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-10', $emit-difference) {
+      @include custom-property('spacing-10', map-get($theme, 'spacing-10'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-11', $emit-difference) {
+      @include custom-property('spacing-11', map-get($theme, 'spacing-11'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'spacing-12', $emit-difference) {
+      @include custom-property('spacing-12', map-get($theme, 'spacing-12'));
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'fluid-spacing-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-spacing-01',
+        map-get($theme, 'fluid-spacing-01')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'fluid-spacing-02',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-spacing-02',
+        map-get($theme, 'fluid-spacing-02')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'fluid-spacing-03',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-spacing-03',
+        map-get($theme, 'fluid-spacing-03')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'fluid-spacing-04',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-spacing-04',
+        map-get($theme, 'fluid-spacing-04')
+      );
+    }
+
+    @if should-emit($theme, $carbon--theme, 'layout-01', $emit-difference) {
+      @include custom-property('layout-01', map-get($theme, 'layout-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'layout-02', $emit-difference) {
+      @include custom-property('layout-02', map-get($theme, 'layout-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'layout-03', $emit-difference) {
+      @include custom-property('layout-03', map-get($theme, 'layout-03'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'layout-04', $emit-difference) {
+      @include custom-property('layout-04', map-get($theme, 'layout-04'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'layout-05', $emit-difference) {
+      @include custom-property('layout-05', map-get($theme, 'layout-05'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'layout-06', $emit-difference) {
+      @include custom-property('layout-06', map-get($theme, 'layout-06'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'layout-07', $emit-difference) {
+      @include custom-property('layout-07', map-get($theme, 'layout-07'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'container-01', $emit-difference) {
+      @include custom-property('container-01', map-get($theme, 'container-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'container-02', $emit-difference) {
+      @include custom-property('container-02', map-get($theme, 'container-02'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'container-03', $emit-difference) {
+      @include custom-property('container-03', map-get($theme, 'container-03'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'container-04', $emit-difference) {
+      @include custom-property('container-04', map-get($theme, 'container-04'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'container-05', $emit-difference) {
+      @include custom-property('container-05', map-get($theme, 'container-05'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'icon-size-01', $emit-difference) {
+      @include custom-property('icon-size-01', map-get($theme, 'icon-size-01'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'icon-size-02', $emit-difference) {
+      @include custom-property('icon-size-02', map-get($theme, 'icon-size-02'));
+    }
   }
 
   @content;
@@ -1290,8 +1623,284 @@ Define theme variables from a map of tokens
   - [display-02 [variable]](#display-02-variable)
   - [display-03 [variable]](#display-03-variable)
   - [display-04 [variable]](#display-04-variable)
+  - [spacing-01 [variable]](#spacing-01-variable)
+  - [spacing-02 [variable]](#spacing-02-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
+  - [spacing-04 [variable]](#spacing-04-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
+  - [spacing-06 [variable]](#spacing-06-variable)
+  - [spacing-07 [variable]](#spacing-07-variable)
+  - [spacing-08 [variable]](#spacing-08-variable)
+  - [spacing-09 [variable]](#spacing-09-variable)
+  - [spacing-10 [variable]](#spacing-10-variable)
+  - [spacing-11 [variable]](#spacing-11-variable)
+  - [spacing-12 [variable]](#spacing-12-variable)
+  - [fluid-spacing-01 [variable]](#fluid-spacing-01-variable)
+  - [fluid-spacing-02 [variable]](#fluid-spacing-02-variable)
+  - [fluid-spacing-03 [variable]](#fluid-spacing-03-variable)
+  - [fluid-spacing-04 [variable]](#fluid-spacing-04-variable)
+  - [layout-01 [variable]](#layout-01-variable)
+  - [layout-02 [variable]](#layout-02-variable)
+  - [layout-03 [variable]](#layout-03-variable)
+  - [layout-04 [variable]](#layout-04-variable)
+  - [layout-05 [variable]](#layout-05-variable)
+  - [layout-06 [variable]](#layout-06-variable)
+  - [layout-07 [variable]](#layout-07-variable)
+  - [container-01 [variable]](#container-01-variable)
+  - [container-02 [variable]](#container-02-variable)
+  - [container-03 [variable]](#container-03-variable)
+  - [container-04 [variable]](#container-04-variable)
+  - [container-05 [variable]](#container-05-variable)
+  - [icon-size-01 [variable]](#icon-size-01-variable)
+  - [icon-size-02 [variable]](#icon-size-02-variable)
   - [custom-property-prefix [variable]](#custom-property-prefix-variable)
   - [carbon--theme [variable]](#carbon--theme-variable)
+
+### ✅carbon--theme--g10 [variable]
+
+Carbon's g10 color theme
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--theme--g10: map-merge(
+  $carbon--theme--white,
+  (
+    ui-background: #f4f4f4,
+    ui-01: #ffffff,
+    ui-02: #f4f4f4,
+    field-01: #ffffff,
+    field-02: #f4f4f4,
+    disabled-01: #ffffff,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Map`
+
+### ✅carbon--theme--g90 [variable]
+
+Carbon's g90 color theme
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--theme--g90: map-merge(
+  $carbon--theme--white,
+  (
+    interactive-02: #6f6f6f,
+    interactive-03: #ffffff,
+    interactive-04: #4589ff,
+    ui-background: #262626,
+    ui-01: #393939,
+    ui-02: #525252,
+    ui-03: #525252,
+    ui-05: #f4f4f4,
+    text-01: #f4f4f4,
+    text-02: #c6c6c6,
+    text-03: #6f6f6f,
+    text-05: #8d8d8d,
+    icon-01: #f4f4f4,
+    icon-02: #c6c6c6,
+    link-01: #78a9ff,
+    inverse-link: #0f62fe,
+    field-01: #393939,
+    field-02: #525252,
+    inverse-01: #161616,
+    inverse-02: #f4f4f4,
+    support-01: #fa4d56,
+    support-02: #42be65,
+    support-04: #4589ff,
+    inverse-support-01: #da1e28,
+    inverse-support-02: #24a148,
+    inverse-support-04: #0f62fe,
+    overlay-01: rgba(22, 22, 22, 0.7),
+    focus: #ffffff,
+    inverse-focus-ui: #0f62fe,
+    hover-primary-text: #a6c8ff,
+    hover-secondary: #606060,
+    active-secondary: #393939,
+    hover-tertiary: #f4f4f4,
+    active-tertiary: #c6c6c6,
+    hover-ui: #4c4c4c,
+    active-ui: #6f6f6f,
+    selected-ui: #525252,
+    inverse-hover-ui: #e5e5e5,
+    hover-selected-ui: #656565,
+    hover-row: #4c4c4c,
+    visited-link: #be95ff,
+    disabled-01: #393939,
+    disabled-02: #6f6f6f,
+    highlight: #0043ce,
+    skeleton-01: #353535,
+    skeleton-02: #525252,
+    brand-02: #6f6f6f,
+    brand-03: #ffffff,
+    active-01: #6f6f6f,
+    hover-field: #4c4c4c,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Map`
+
+### ✅carbon--theme--g100 [variable]
+
+Carbon's g100 color theme
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--theme--g100: map-merge(
+  $carbon--theme--white,
+  (
+    interactive-02: #6f6f6f,
+    interactive-03: #ffffff,
+    interactive-04: #4589ff,
+    ui-background: #161616,
+    ui-01: #262626,
+    ui-02: #393939,
+    ui-03: #393939,
+    ui-04: #6f6f6f,
+    ui-05: #f4f4f4,
+    text-01: #f4f4f4,
+    text-02: #c6c6c6,
+    text-03: #6f6f6f,
+    text-05: #8d8d8d,
+    icon-01: #f4f4f4,
+    icon-02: #c6c6c6,
+    link-01: #78a9ff,
+    inverse-link: #0f62fe,
+    field-01: #262626,
+    field-02: #393939,
+    inverse-01: #161616,
+    inverse-02: #f4f4f4,
+    support-01: #fa4d56,
+    support-02: #42be65,
+    support-04: #4589ff,
+    inverse-support-01: #da1e28,
+    inverse-support-02: #24a148,
+    inverse-support-04: #0f62fe,
+    overlay-01: rgba(22, 22, 22, 0.7),
+    focus: #ffffff,
+    inverse-focus-ui: #0f62fe,
+    hover-primary-text: #a6c8ff,
+    hover-secondary: #606060,
+    active-secondary: #393939,
+    hover-tertiary: #f4f4f4,
+    active-tertiary: #c6c6c6,
+    hover-ui: #353535,
+    active-ui: #525252,
+    selected-ui: #393939,
+    inverse-hover-ui: #e5e5e5,
+    hover-selected-ui: #4c4c4c,
+    hover-row: #353535,
+    visited-link: #be95ff,
+    disabled-01: #262626,
+    disabled-02: #525252,
+    disabled-03: #6f6f6f,
+    highlight: #002d9c,
+    skeleton-01: #353535,
+    skeleton-02: #393939,
+    brand-02: #6f6f6f,
+    brand-03: #ffffff,
+    active-01: #525252,
+    hover-field: #353535,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Map`
+
+### ✅carbon--theme--v9 [variable]
+
+Carbon's v9 color theme
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--theme--v9: map-merge(
+  $carbon--theme--white,
+  (
+    interactive-01: #3d70b2,
+    interactive-02: #5a6872,
+    interactive-03: #5a6872,
+    interactive-04: #3d70b2,
+    ui-background: #f4f7fb,
+    ui-01: #ffffff,
+    ui-02: #f4f7fb,
+    ui-03: #dfe3e6,
+    ui-04: #8897a2,
+    ui-05: #5a6872,
+    text-01: #152935,
+    text-02: #5a6872,
+    text-03: #cdd1d4,
+    text-05: #5a6872,
+    icon-01: #3d70b2,
+    icon-02: #5a6872,
+    link-01: #3d70b2,
+    inverse-link: #5596e6,
+    field-01: #ffffff,
+    field-02: #f4f7fb,
+    inverse-02: #272d33,
+    support-01: #e0182d,
+    support-02: #5aa700,
+    support-03: #efc100,
+    support-04: #5aaafa,
+    inverse-support-01: #ff5050,
+    inverse-support-02: #8cd211,
+    inverse-support-03: #fdd600,
+    inverse-support-04: #5aaafa,
+    overlay-01: rgba(223, 227, 230, 0.5),
+    focus: #3d70b2,
+    inverse-focus-ui: #3d70b2,
+    hover-primary: #30588c,
+    active-primary: #30588c,
+    hover-primary-text: #294c86,
+    hover-secondary: #4d5b65,
+    active-secondary: #414f59,
+    hover-tertiary: #5a6872,
+    active-tertiary: #414f59,
+    hover-ui: #eef4fc,
+    active-ui: #dfeafa,
+    selected-ui: #eef4fc,
+    hover-selected-ui: #dfeafa,
+    hover-danger: #c70014,
+    active-danger: #ad1625,
+    hover-row: #eef4fc,
+    visited-link: #294c86,
+    disabled-01: #fafbfd,
+    disabled-02: #dfe3e6,
+    disabled-03: #cdd1d4,
+    highlight: #f4f7fb,
+    skeleton-01: rgba(61, 112, 178, 0.1),
+    skeleton-02: rgba(61, 112, 178, 0.1),
+    brand-01: #3d70b2,
+    brand-02: #5a6872,
+    brand-03: #5a6872,
+    active-01: #dfeafa,
+    hover-field: #eef4fc,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Map`
 
 ### ✅carbon--theme [variable]
 
@@ -1396,6 +2005,36 @@ $carbon--theme: (
   display-02: if(global-variable-exists('display-02'), $display-02, map-get($carbon--theme--white, 'display-02')),
   display-03: if(global-variable-exists('display-03'), $display-03, map-get($carbon--theme--white, 'display-03')),
   display-04: if(global-variable-exists('display-04'), $display-04, map-get($carbon--theme--white, 'display-04')),
+  spacing-01: if(global-variable-exists('spacing-01'), $spacing-01, map-get($carbon--theme--white, 'spacing-01')),
+  spacing-02: if(global-variable-exists('spacing-02'), $spacing-02, map-get($carbon--theme--white, 'spacing-02')),
+  spacing-03: if(global-variable-exists('spacing-03'), $spacing-03, map-get($carbon--theme--white, 'spacing-03')),
+  spacing-04: if(global-variable-exists('spacing-04'), $spacing-04, map-get($carbon--theme--white, 'spacing-04')),
+  spacing-05: if(global-variable-exists('spacing-05'), $spacing-05, map-get($carbon--theme--white, 'spacing-05')),
+  spacing-06: if(global-variable-exists('spacing-06'), $spacing-06, map-get($carbon--theme--white, 'spacing-06')),
+  spacing-07: if(global-variable-exists('spacing-07'), $spacing-07, map-get($carbon--theme--white, 'spacing-07')),
+  spacing-08: if(global-variable-exists('spacing-08'), $spacing-08, map-get($carbon--theme--white, 'spacing-08')),
+  spacing-09: if(global-variable-exists('spacing-09'), $spacing-09, map-get($carbon--theme--white, 'spacing-09')),
+  spacing-10: if(global-variable-exists('spacing-10'), $spacing-10, map-get($carbon--theme--white, 'spacing-10')),
+  spacing-11: if(global-variable-exists('spacing-11'), $spacing-11, map-get($carbon--theme--white, 'spacing-11')),
+  spacing-12: if(global-variable-exists('spacing-12'), $spacing-12, map-get($carbon--theme--white, 'spacing-12')),
+  fluid-spacing-01: if(global-variable-exists('fluid-spacing-01'), $fluid-spacing-01, map-get($carbon--theme--white, 'fluid-spacing-01')),
+  fluid-spacing-02: if(global-variable-exists('fluid-spacing-02'), $fluid-spacing-02, map-get($carbon--theme--white, 'fluid-spacing-02')),
+  fluid-spacing-03: if(global-variable-exists('fluid-spacing-03'), $fluid-spacing-03, map-get($carbon--theme--white, 'fluid-spacing-03')),
+  fluid-spacing-04: if(global-variable-exists('fluid-spacing-04'), $fluid-spacing-04, map-get($carbon--theme--white, 'fluid-spacing-04')),
+  layout-01: if(global-variable-exists('layout-01'), $layout-01, map-get($carbon--theme--white, 'layout-01')),
+  layout-02: if(global-variable-exists('layout-02'), $layout-02, map-get($carbon--theme--white, 'layout-02')),
+  layout-03: if(global-variable-exists('layout-03'), $layout-03, map-get($carbon--theme--white, 'layout-03')),
+  layout-04: if(global-variable-exists('layout-04'), $layout-04, map-get($carbon--theme--white, 'layout-04')),
+  layout-05: if(global-variable-exists('layout-05'), $layout-05, map-get($carbon--theme--white, 'layout-05')),
+  layout-06: if(global-variable-exists('layout-06'), $layout-06, map-get($carbon--theme--white, 'layout-06')),
+  layout-07: if(global-variable-exists('layout-07'), $layout-07, map-get($carbon--theme--white, 'layout-07')),
+  container-01: if(global-variable-exists('container-01'), $container-01, map-get($carbon--theme--white, 'container-01')),
+  container-02: if(global-variable-exists('container-02'), $container-02, map-get($carbon--theme--white, 'container-02')),
+  container-03: if(global-variable-exists('container-03'), $container-03, map-get($carbon--theme--white, 'container-03')),
+  container-04: if(global-variable-exists('container-04'), $container-04, map-get($carbon--theme--white, 'container-04')),
+  container-05: if(global-variable-exists('container-05'), $container-05, map-get($carbon--theme--white, 'container-05')),
+  icon-size-01: if(global-variable-exists('icon-size-01'), $icon-size-01, map-get($carbon--theme--white, 'icon-size-01')),
+  icon-size-02: if(global-variable-exists('icon-size-02'), $icon-size-02, map-get($carbon--theme--white, 'icon-size-02')),
 );
 ```
 
@@ -1403,7 +2042,6 @@ $carbon--theme: (
 
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
-- **Alias**: `carbon--theme--white`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
@@ -1428,7 +2066,7 @@ $interactive-01: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Aliased**:
   - `brand-01`
 - **Used by**:
@@ -1455,7 +2093,7 @@ $interactive-02: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Aliased**:
   - `brand-02`
 - **Used by**:
@@ -1482,20 +2120,29 @@ $interactive-03: if(
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
-- **Aliased**:
-  - `brand-03`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
-### ✅interactive-04 [variable]
-
-3:1 AA contrast; Selected elements; Active elements; Accent icons
+### ✅inverse-hover-ui [variable]
+=======
+- **Type**: `{undefined}`
+- **Aliased**:
+  - `brand-03`
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
+$inverse-hover-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+    ),
+  map-get($carbon--theme, 'inverse-hover-ui'),
+  #4c4c4c
+=======
 $interactive-04: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -1503,1106 +2150,14 @@ $interactive-04: if(
     ),
   map-get($carbon--theme, 'interactive-04'),
   #0f62fe
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅ui-background [variable]
-
-Default page background
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$ui-background: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'ui-background'
-    ),
-  map-get($carbon--theme, 'ui-background'),
-  #ffffff
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅ui-01 [variable]
-
-Primary container background; Secondary page background
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$ui-01: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'ui-01'
-    ),
-  map-get($carbon--theme, 'ui-01'),
-  #f4f4f4
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅ui-02 [variable]
-
-Primary page background; Secondary container background
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$ui-02: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'ui-02'
-    ),
-  map-get($carbon--theme, 'ui-02'),
-  #ffffff
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅ui-03 [variable]
-
-Subtle border; Tertiary background color
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$ui-03: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'ui-03'
-    ),
-  map-get($carbon--theme, 'ui-03'),
-  #e0e0e0
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅ui-04 [variable]
-
-3:1 AA element contrast; Medium contrast border
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$ui-04: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'ui-04'
-    ),
-  map-get($carbon--theme, 'ui-04'),
-  #8d8d8d
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅ui-05 [variable]
-
-4.5:1 AA element contrast; High contrast border; Emphasis elements
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$ui-05: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'ui-05'
-    ),
-  map-get($carbon--theme, 'ui-05'),
-  #161616
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅text-01 [variable]
-
-Primary text; Body copy; Headers; Hover text color for `$text-02`
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$text-01: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'text-01'
-    ),
-  map-get($carbon--theme, 'text-01'),
-  #161616
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅text-02 [variable]
-
-Secondary text; Input labels; Help text
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$text-02: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'text-02'
-    ),
-  map-get($carbon--theme, 'text-02'),
-  #393939
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅text-03 [variable]
-
-Placeholder text
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$text-03: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'text-03'
-    ),
-  map-get($carbon--theme, 'text-03'),
-  #a8a8a8
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅text-04 [variable]
-
-Text on interactive colors
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$text-04: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'text-04'
-    ),
-  map-get($carbon--theme, 'text-04'),
-  #ffffff
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅text-05 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$text-05: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'text-05'
-    ),
-  map-get($carbon--theme, 'text-05'),
-  #6f6f6f
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅icon-01 [variable]
-
-Primary icons
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$icon-01: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'icon-01'
-    ),
-  map-get($carbon--theme, 'icon-01'),
-  #161616
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅icon-02 [variable]
-
-Secondary icons
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$icon-02: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'icon-02'
-    ),
-  map-get($carbon--theme, 'icon-02'),
-  #525252
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅icon-03 [variable]
-
-Tertiary icons; Icons on interactive colors; Icons on non-ui colors
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$icon-03: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'icon-03'
-    ),
-  map-get($carbon--theme, 'icon-03'),
-  #ffffff
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅link-01 [variable]
-
-Primary links; Ghost button
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$link-01: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'link-01'
-    ),
-  map-get($carbon--theme, 'link-01'),
-  #0f62fe
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅inverse-link [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$inverse-link: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'inverse-link'
-    ),
-  map-get($carbon--theme, 'inverse-link'),
-  #78a9ff
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅field-01 [variable]
-
-Default input fields; Field color on \$ui-backgrounds
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$field-01: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'field-01'
-    ),
-  map-get($carbon--theme, 'field-01'),
-  #f4f4f4
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅field-02 [variable]
-
-Input field color on `$ui-02` backgrounds
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$field-02: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'field-02'
-    ),
-  map-get($carbon--theme, 'field-02'),
-  #ffffff
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅inverse-01 [variable]
-
-Inverse text color; Inverse icon color
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$inverse-01: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'inverse-01'
-    ),
-  map-get($carbon--theme, 'inverse-01'),
-  #ffffff
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅inverse-02 [variable]
-
-High contrast backgrounds; High contrast elements
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$inverse-02: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'inverse-02'
-    ),
-  map-get($carbon--theme, 'inverse-02'),
-  #393939
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅support-01 [variable]
-
-Error
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$support-01: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'support-01'
-    ),
-  map-get($carbon--theme, 'support-01'),
-  #da1e28
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅support-02 [variable]
-
-Success
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$support-02: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'support-02'
-    ),
-  map-get($carbon--theme, 'support-02'),
-  #24a148
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅support-03 [variable]
-
-Warning
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$support-03: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'support-03'
-    ),
-  map-get($carbon--theme, 'support-03'),
-  #f1c21b
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅support-04 [variable]
-
-Information
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$support-04: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'support-04'
-    ),
-  map-get($carbon--theme, 'support-04'),
-  #0043ce
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅inverse-support-01 [variable]
-
-Error on high contrast backgrounds
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$inverse-support-01: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'inverse-support-01'
-    ),
-  map-get($carbon--theme, 'inverse-support-01'),
-  #fa4d56
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅inverse-support-02 [variable]
-
-Success on high contrast backgrounds
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$inverse-support-02: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'inverse-support-02'
-    ),
-  map-get($carbon--theme, 'inverse-support-02'),
-  #42be65
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅inverse-support-03 [variable]
-
-Warning on high contrast backgrounds
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$inverse-support-03: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'inverse-support-03'
-    ),
-  map-get($carbon--theme, 'inverse-support-03'),
-  #f1c21b
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅inverse-support-04 [variable]
-
-Information on high contrast backgrounds
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$inverse-support-04: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'inverse-support-04'
-    ),
-  map-get($carbon--theme, 'inverse-support-04'),
-  #4589ff
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅overlay-01 [variable]
-
-Background overlay
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$overlay-01: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'overlay-01'
-    ),
-  map-get($carbon--theme, 'overlay-01'),
-  rgba(22, 22, 22, 0.5)
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅danger [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$danger: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'danger'
-    ),
-  map-get($carbon--theme, 'danger'),
-  #da1e28
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅focus [variable]
-
-Focus border; Focus underline
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$focus: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'focus'
-    ),
-  map-get($carbon--theme, 'focus'),
-  #0f62fe
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅inverse-focus-ui [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$inverse-focus-ui: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'inverse-focus-ui'
-    ),
-  map-get($carbon--theme, 'inverse-focus-ui'),
-  #ffffff
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅hover-primary [variable]
-
-`$interactive-01` hover
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$hover-primary: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'hover-primary'
-    ),
-  map-get($carbon--theme, 'hover-primary'),
-  #0353e9
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅active-primary [variable]
-
-`$interactive-01` active
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$active-primary: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'active-primary'
-    ),
-  map-get($carbon--theme, 'active-primary'),
-  #002d9c
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅hover-primary-text [variable]
-
-`$interactive-01` text hover
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$hover-primary-text: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'hover-primary-text'
-    ),
-  map-get($carbon--theme, 'hover-primary-text'),
-  #0043ce
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅hover-secondary [variable]
-
-`$interactive-02` hover
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$hover-secondary: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'hover-secondary'
-    ),
-  map-get($carbon--theme, 'hover-secondary'),
-  #4c4c4c
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅active-secondary [variable]
-
-`$interactive-02` active; `$inverse-01` active
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$active-secondary: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'active-secondary'
-    ),
-  map-get($carbon--theme, 'active-secondary'),
-  #6f6f6f
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅hover-tertiary [variable]
-
-`$interactive-03` hover; `$inverse-01` hover
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$hover-tertiary: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'hover-tertiary'
-    ),
-  map-get($carbon--theme, 'hover-tertiary'),
-  #0353e9
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅active-tertiary [variable]
-
-`$interactive-03` active
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$active-tertiary: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'active-tertiary'
-    ),
-  map-get($carbon--theme, 'active-tertiary'),
-  #002d9c
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅hover-ui [variable]
-
-`$ui-01` hover; `$ui-02` hover; Transparent background hover
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$hover-ui: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'hover-ui'
-    ),
-  map-get($carbon--theme, 'hover-ui'),
-  #e5e5e5
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Aliased**:
-  - `hover-field`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅active-ui [variable]
-
-`$ui-01` active; `$ui-02` active
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$active-ui: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'active-ui'
-    ),
-  map-get($carbon--theme, 'active-ui'),
-  #c6c6c6
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Aliased**:
-  - `active-01`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅selected-ui [variable]
-
-Selected UI elements
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$selected-ui: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'selected-ui'
-    ),
-  map-get($carbon--theme, 'selected-ui'),
-  #e0e0e0
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅hover-selected-ui [variable]
-
-Data table selected row hover
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$hover-selected-ui: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'hover-selected-ui'
-    ),
-  map-get($carbon--theme, 'hover-selected-ui'),
-  #cacaca
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅inverse-hover-ui [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$inverse-hover-ui: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'inverse-hover-ui'
-    ),
-  map-get($carbon--theme, 'inverse-hover-ui'),
-  #4c4c4c
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -2610,11 +2165,21 @@ $inverse-hover-ui: if(
 ### ✅hover-danger [variable]
 
 Danger hover; `$support-01` hover
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅ui-background [variable]
+
+Default page background
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $hover-danger: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -2622,12 +2187,22 @@ $hover-danger: if(
     ),
   map-get($carbon--theme, 'hover-danger'),
   #ba1b23
+=======
+$ui-background: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'ui-background'
+    ),
+  map-get($carbon--theme, 'ui-background'),
+  #ffffff
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -2635,11 +2210,21 @@ $hover-danger: if(
 ### ✅active-danger [variable]
 
 Danger active; `$support-01` active
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅ui-01 [variable]
+
+Primary container background; Secondary page background
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $active-danger: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -2647,12 +2232,22 @@ $active-danger: if(
     ),
   map-get($carbon--theme, 'active-danger'),
   #750e13
+=======
+$ui-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'ui-01'
+    ),
+  map-get($carbon--theme, 'ui-01'),
+  #f4f4f4
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -2660,11 +2255,21 @@ $active-danger: if(
 ### ✅hover-row [variable]
 
 Row hover
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅ui-02 [variable]
+
+Primary page background; Secondary container background
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $hover-row: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -2672,12 +2277,22 @@ $hover-row: if(
     ),
   map-get($carbon--theme, 'hover-row'),
   #e5e5e5
+=======
+$ui-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'ui-02'
+    ),
+  map-get($carbon--theme, 'ui-02'),
+  #ffffff
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -2685,11 +2300,21 @@ $hover-row: if(
 ### ✅visited-link [variable]
 
 Visited links
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅ui-03 [variable]
+
+Subtle border; Tertiary background color
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $visited-link: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -2697,12 +2322,22 @@ $visited-link: if(
     ),
   map-get($carbon--theme, 'visited-link'),
   #8a3ffc
+=======
+$ui-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'ui-03'
+    ),
+  map-get($carbon--theme, 'ui-03'),
+  #e0e0e0
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -2710,11 +2345,21 @@ $visited-link: if(
 ### ✅disabled-01 [variable]
 
 Disabled fields; Disabled backgrounds; Disabled border
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅ui-04 [variable]
+
+3:1 AA element contrast; Medium contrast border
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $disabled-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -2871,12 +2516,22 @@ $brand-01: if(
     ),
   map-get($carbon--theme, 'brand-01'),
   #0f62fe
+=======
+$ui-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'ui-04'
+    ),
+  map-get($carbon--theme, 'ui-04'),
+  #8d8d8d
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Alias**: `interactive-01`
 - **Used by**:
@@ -2884,11 +2539,21 @@ $brand-01: if(
 - **Deprecated**: This may not be available in future releases
 
 ### ✅⚠️brand-02 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅ui-05 [variable]
+
+4.5:1 AA element contrast; High contrast border; Emphasis elements
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $brand-02: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -2896,12 +2561,22 @@ $brand-02: if(
     ),
   map-get($carbon--theme, 'brand-02'),
   #393939
+=======
+$ui-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'ui-05'
+    ),
+  map-get($carbon--theme, 'ui-05'),
+  #161616
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Alias**: `interactive-02`
 - **Used by**:
@@ -2909,11 +2584,21 @@ $brand-02: if(
 - **Deprecated**: This may not be available in future releases
 
 ### ✅⚠️brand-03 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅text-01 [variable]
+
+Primary text; Body copy; Headers; Hover text color for `$text-02`
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $brand-03: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -2921,12 +2606,22 @@ $brand-03: if(
     ),
   map-get($carbon--theme, 'brand-03'),
   #0f62fe
+=======
+$text-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'text-01'
+    ),
+  map-get($carbon--theme, 'text-01'),
+  #161616
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Alias**: `interactive-03`
 - **Used by**:
@@ -2934,11 +2629,21 @@ $brand-03: if(
 - **Deprecated**: This may not be available in future releases
 
 ### ✅⚠️active-01 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅text-02 [variable]
+
+Secondary text; Input labels; Help text
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $active-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -2946,12 +2651,22 @@ $active-01: if(
     ),
   map-get($carbon--theme, 'active-01'),
   #c6c6c6
+=======
+$text-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'text-02'
+    ),
+  map-get($carbon--theme, 'text-02'),
+  #393939
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Alias**: `active-ui`
 - **Used by**:
@@ -2959,11 +2674,21 @@ $active-01: if(
 - **Deprecated**: This may not be available in future releases
 
 ### ✅⚠️hover-field [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅text-03 [variable]
+
+Placeholder text
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $hover-field: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -2971,12 +2696,22 @@ $hover-field: if(
     ),
   map-get($carbon--theme, 'hover-field'),
   #e5e5e5
+=======
+$text-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'text-03'
+    ),
+  map-get($carbon--theme, 'text-03'),
+  #a8a8a8
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Alias**: `hover-ui`
 - **Used by**:
@@ -2984,11 +2719,21 @@ $hover-field: if(
 - **Deprecated**: This may not be available in future releases
 
 ### ✅caption-01 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅text-04 [variable]
+
+Text on interactive colors
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $caption-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3001,22 +2746,40 @@ $caption-01: if(
     line-height: 1rem,
     letter-spacing: 0.32px,
   )
+=======
+$text-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'text-04'
+    ),
+  map-get($carbon--theme, 'text-04'),
+  #ffffff
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅label-01 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅text-05 [variable]
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $label-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3029,22 +2792,67 @@ $label-01: if(
     line-height: 1rem,
     letter-spacing: 0.32px,
   )
+=======
+$text-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'text-05'
+    ),
+  map-get($carbon--theme, 'text-05'),
+  #6f6f6f
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅helper-text-01 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅icon-01 [variable]
+
+Primary icons
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+$icon-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'icon-01'
+    ),
+  map-get($carbon--theme, 'icon-01'),
+  #161616
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅icon-02 [variable]
+
+Secondary icons
+>>>>>>> upstream/master
+
+<details>
+<summary>Source code</summary>
+
+```scss
+<<<<<<< HEAD
 $helper-text-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3056,22 +2864,42 @@ $helper-text-01: if(
     line-height: 1rem,
     letter-spacing: 0.32px,
   )
+=======
+$icon-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'icon-02'
+    ),
+  map-get($carbon--theme, 'icon-02'),
+  #525252
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅body-short-01 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅icon-03 [variable]
+
+Tertiary icons; Icons on interactive colors; Icons on non-ui colors
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $body-short-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3084,12 +2912,22 @@ $body-short-01: if(
     line-height: 1.125rem,
     letter-spacing: 0.16px,
   )
+=======
+$icon-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'icon-03'
+    ),
+  map-get($carbon--theme, 'icon-03'),
+  #ffffff
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -3123,11 +2961,21 @@ $body-long-01: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅body-short-02 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅link-01 [variable]
+
+Primary links; Ghost button
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $body-short-02: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3140,22 +2988,40 @@ $body-short-02: if(
     line-height: 1.375rem,
     letter-spacing: 0,
   )
+=======
+$link-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'link-01'
+    ),
+  map-get($carbon--theme, 'link-01'),
+  #0f62fe
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅body-long-02 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-link [variable]
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $body-long-02: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3168,22 +3034,42 @@ $body-long-02: if(
     line-height: 1.5rem,
     letter-spacing: 0,
   )
+=======
+$inverse-link: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-link'
+    ),
+  map-get($carbon--theme, 'inverse-link'),
+  #78a9ff
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅code-01 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅field-01 [variable]
+
+Default input fields; Field color on \$ui-backgrounds
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $code-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3197,22 +3083,67 @@ $code-01: if(
     line-height: 1rem,
     letter-spacing: 0.32px,
   )
+=======
+$field-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'field-01'
+    ),
+  map-get($carbon--theme, 'field-01'),
+  #f4f4f4
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅code-02 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅field-02 [variable]
+
+Input field color on `$ui-02` backgrounds
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+$field-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'field-02'
+    ),
+  map-get($carbon--theme, 'field-02'),
+  #ffffff
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-01 [variable]
+
+Inverse text color; Inverse icon color
+>>>>>>> upstream/master
+
+<details>
+<summary>Source code</summary>
+
+```scss
+<<<<<<< HEAD
 $code-02: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3226,22 +3157,42 @@ $code-02: if(
     line-height: 1.25rem,
     letter-spacing: 0.32px,
   )
+=======
+$inverse-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-01'
+    ),
+  map-get($carbon--theme, 'inverse-01'),
+  #ffffff
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅heading-01 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-02 [variable]
+
+High contrast backgrounds; High contrast elements
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $heading-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3254,22 +3205,42 @@ $heading-01: if(
     line-height: 1.125rem,
     letter-spacing: 0.16px,
   )
+=======
+$inverse-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-02'
+    ),
+  map-get($carbon--theme, 'inverse-02'),
+  #393939
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅productive-heading-01 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅support-01 [variable]
+
+Error
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $productive-heading-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3282,22 +3253,42 @@ $productive-heading-01: if(
     line-height: 1.125rem,
     letter-spacing: 0.16px,
   )
+=======
+$support-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'support-01'
+    ),
+  map-get($carbon--theme, 'support-01'),
+  #da1e28
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅heading-02 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅support-02 [variable]
+
+Success
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $heading-02: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3310,22 +3301,67 @@ $heading-02: if(
     line-height: 1.375rem,
     letter-spacing: 0,
   )
+=======
+$support-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'support-02'
+    ),
+  map-get($carbon--theme, 'support-02'),
+  #24a148
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
-### ✅productive-heading-02 [variable]
+### ✅support-03 [variable]
+
+Warning
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+$support-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'support-03'
+    ),
+  map-get($carbon--theme, 'support-03'),
+  #f1c21b
+>>>>>>> upstream/master
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-02 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅support-04 [variable]
+
+Information
+>>>>>>> upstream/master
+
+<details>
+<summary>Source code</summary>
+
+```scss
+<<<<<<< HEAD
 $productive-heading-02: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3338,22 +3374,42 @@ $productive-heading-02: if(
     line-height: 1.375rem,
     letter-spacing: 0,
   )
+=======
+$support-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'support-04'
+    ),
+  map-get($carbon--theme, 'support-04'),
+  #0043ce
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅productive-heading-03 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-support-01 [variable]
+
+Error on high contrast backgrounds
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $productive-heading-03: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3366,22 +3422,42 @@ $productive-heading-03: if(
     line-height: 1.625rem,
     letter-spacing: 0,
   )
+=======
+$inverse-support-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-support-01'
+    ),
+  map-get($carbon--theme, 'inverse-support-01'),
+  #fa4d56
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅productive-heading-04 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-support-02 [variable]
+
+Success on high contrast backgrounds
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $productive-heading-04: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3394,22 +3470,42 @@ $productive-heading-04: if(
     line-height: 2.25rem,
     letter-spacing: 0,
   )
+=======
+$inverse-support-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-support-02'
+    ),
+  map-get($carbon--theme, 'inverse-support-02'),
+  #42be65
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅productive-heading-05 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-support-03 [variable]
+
+Warning on high contrast backgrounds
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $productive-heading-05: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3422,22 +3518,42 @@ $productive-heading-05: if(
     line-height: 2.5rem,
     letter-spacing: 0,
   )
+=======
+$inverse-support-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-support-03'
+    ),
+  map-get($carbon--theme, 'inverse-support-03'),
+  #f1c21b
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
+<<<<<<< HEAD
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅productive-heading-06 [variable]
+=======
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-support-04 [variable]
+
+Information on high contrast backgrounds
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $productive-heading-06: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3450,22 +3566,38 @@ $productive-heading-06: if(
     line-height: 3.125rem,
     letter-spacing: 0,
   )
+=======
+$inverse-support-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-support-04'
+    ),
+  map-get($carbon--theme, 'inverse-support-04'),
+  #4589ff
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+<<<<<<< HEAD
 ### ✅productive-heading-07 [variable]
+=======
+### ✅overlay-01 [variable]
+
+Background overlay
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $productive-heading-07: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3478,22 +3610,36 @@ $productive-heading-07: if(
     line-height: 4rem,
     letter-spacing: 0,
   )
+=======
+$overlay-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'overlay-01'
+    ),
+  map-get($carbon--theme, 'overlay-01'),
+  rgba(22, 22, 22, 0.5)
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+<<<<<<< HEAD
 ### ✅expressive-heading-01 [variable]
+=======
+### ✅danger [variable]
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $expressive-heading-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3506,22 +3652,38 @@ $expressive-heading-01: if(
     line-height: 1.125rem,
     letter-spacing: 0.16px,
   )
+=======
+$danger: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'danger'
+    ),
+  map-get($carbon--theme, 'danger'),
+  #da1e28
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+<<<<<<< HEAD
 ### ✅expressive-heading-02 [variable]
+=======
+### ✅focus [variable]
+
+Focus border; Focus underline
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $expressive-heading-02: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3534,22 +3696,36 @@ $expressive-heading-02: if(
     line-height: 1.375rem,
     letter-spacing: 0,
   )
+=======
+$focus: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'focus'
+    ),
+  map-get($carbon--theme, 'focus'),
+  #0f62fe
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+<<<<<<< HEAD
 ### ✅expressive-heading-03 [variable]
+=======
+### ✅inverse-focus-ui [variable]
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $expressive-heading-03: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3571,22 +3747,38 @@ $expressive-heading-03: if(
       ),
     ),
   )
+=======
+$inverse-focus-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-focus-ui'
+    ),
+  map-get($carbon--theme, 'inverse-focus-ui'),
+  #ffffff
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+<<<<<<< HEAD
 ### ✅expressive-heading-04 [variable]
+=======
+### ✅hover-primary [variable]
+
+`$interactive-01` hover
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $expressive-heading-04: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3608,22 +3800,38 @@ $expressive-heading-04: if(
       ),
     ),
   )
+=======
+$hover-primary: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-primary'
+    ),
+  map-get($carbon--theme, 'hover-primary'),
+  #0353e9
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+<<<<<<< HEAD
 ### ✅expressive-heading-05 [variable]
+=======
+### ✅active-primary [variable]
+
+`$interactive-01` active
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $expressive-heading-05: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3662,22 +3870,38 @@ $expressive-heading-05: if(
       ),
     ),
   )
+=======
+$active-primary: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'active-primary'
+    ),
+  map-get($carbon--theme, 'active-primary'),
+  #002d9c
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+<<<<<<< HEAD
 ### ✅expressive-heading-06 [variable]
+=======
+### ✅hover-primary-text [variable]
+
+`$interactive-01` text hover
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $expressive-heading-06: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3716,22 +3940,38 @@ $expressive-heading-06: if(
       ),
     ),
   )
+=======
+$hover-primary-text: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-primary-text'
+    ),
+  map-get($carbon--theme, 'hover-primary-text'),
+  #0043ce
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+<<<<<<< HEAD
 ### ✅expressive-paragraph-01 [variable]
+=======
+### ✅hover-secondary [variable]
+
+`$interactive-02` hover
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $expressive-paragraph-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3752,22 +3992,38 @@ $expressive-paragraph-01: if(
       line-height: 125%,
     ),
   )
+=======
+$hover-secondary: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-secondary'
+    ),
+  map-get($carbon--theme, 'hover-secondary'),
+  #4c4c4c
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+<<<<<<< HEAD
 ### ✅quotation-01 [variable]
+=======
+### ✅active-secondary [variable]
+
+`$interactive-02` active; `$inverse-01` active
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $quotation-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3805,22 +4061,38 @@ $quotation-01: if(
       ),
     ),
   )
+=======
+$active-secondary: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'active-secondary'
+    ),
+  map-get($carbon--theme, 'active-secondary'),
+  #6f6f6f
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+<<<<<<< HEAD
 ### ✅quotation-02 [variable]
+=======
+### ✅hover-tertiary [variable]
+
+`$interactive-03` hover; `$inverse-01` hover
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $quotation-02: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3850,22 +4122,38 @@ $quotation-02: if(
       ),
     ),
   )
+=======
+$hover-tertiary: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-tertiary'
+    ),
+  map-get($carbon--theme, 'hover-tertiary'),
+  #0353e9
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+<<<<<<< HEAD
 ### ✅display-01 [variable]
+=======
+### ✅active-tertiary [variable]
+
+`$interactive-03` active
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $display-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3894,22 +4182,38 @@ $display-01: if(
       ),
     ),
   )
+=======
+$active-tertiary: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'active-tertiary'
+    ),
+  map-get($carbon--theme, 'active-tertiary'),
+  #002d9c
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+<<<<<<< HEAD
 ### ✅display-02 [variable]
+=======
+### ✅hover-ui [variable]
+
+`$ui-01` hover; `$ui-02` hover; Transparent background hover
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $display-02: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3938,22 +4242,40 @@ $display-02: if(
       ),
     ),
   )
+=======
+$hover-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-ui'
+    ),
+  map-get($carbon--theme, 'hover-ui'),
+  #e5e5e5
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
+- **Aliased**:
+  - `hover-field`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+<<<<<<< HEAD
 ### ✅display-03 [variable]
+=======
+### ✅active-ui [variable]
+
+`$ui-01` active; `$ui-02` active
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $display-03: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -3986,22 +4308,40 @@ $display-03: if(
       ),
     ),
   )
+=======
+$active-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'active-ui'
+    ),
+  map-get($carbon--theme, 'active-ui'),
+  #c6c6c6
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
+- **Aliased**:
+  - `active-01`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+<<<<<<< HEAD
 ### ✅display-04 [variable]
+=======
+### ✅selected-ui [variable]
+
+Selected UI elements
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $display-04: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -4035,26 +4375,65 @@ $display-04: if(
       ),
     ),
   )
+=======
+$selected-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'selected-ui'
+    ),
+  map-get($carbon--theme, 'selected-ui'),
+  #e0e0e0
+>>>>>>> upstream/master
 );
 ```
 
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `Color`
+- **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+<<<<<<< HEAD
 ## @rocketsoftware/themes
 
 ### ✅carbon--theme--white [variable]
 
 Carbon's white color theme
+=======
+### ✅hover-selected-ui [variable]
+
+Data table selected row hover
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+$hover-selected-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-selected-ui'
+    ),
+  map-get($carbon--theme, 'hover-selected-ui'),
+  #cacaca
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-hover-ui [variable]
+>>>>>>> upstream/master
+
+<details>
+<summary>Source code</summary>
+
+```scss
+<<<<<<< HEAD
 $carbon--theme--white: (
   interactive-01: #0f62fe,
   interactive-02: #393939,
@@ -4499,11 +4878,197 @@ $carbon--theme--white: (
       ),
     ),
   ),
+=======
+$inverse-hover-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'inverse-hover-ui'
+    ),
+  map-get($carbon--theme, 'inverse-hover-ui'),
+  #4c4c4c
 );
 ```
 
 </details>
 
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅hover-danger [variable]
+
+Danger hover; `$support-01` hover
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$hover-danger: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-danger'
+    ),
+  map-get($carbon--theme, 'hover-danger'),
+  #ba1b23
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅active-danger [variable]
+
+Danger active; `$support-01` active
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$active-danger: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'active-danger'
+    ),
+  map-get($carbon--theme, 'active-danger'),
+  #750e13
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅hover-row [variable]
+
+Row hover
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$hover-row: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-row'
+    ),
+  map-get($carbon--theme, 'hover-row'),
+  #e5e5e5
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅visited-link [variable]
+
+Visited links
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$visited-link: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'visited-link'
+    ),
+  map-get($carbon--theme, 'visited-link'),
+  #8a3ffc
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅disabled-01 [variable]
+
+Disabled fields; Disabled backgrounds; Disabled border
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$disabled-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'disabled-01'
+    ),
+  map-get($carbon--theme, 'disabled-01'),
+  #f4f4f4
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅disabled-02 [variable]
+
+Disabled elements on `$disabled-01`; Disabled label; Disabled text on
+`$disabled-01`; Disabled icons; Disabled border
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$disabled-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'disabled-02'
+    ),
+  map-get($carbon--theme, 'disabled-02'),
+  #c6c6c6
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅disabled-03 [variable]
+
+Disabled text on `$disabled-02`; Disabled icons on `$disabled-02`
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$disabled-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'disabled-03'
+    ),
+  map-get($carbon--theme, 'disabled-03'),
+  #8d8d8d
+>>>>>>> upstream/master
+);
+```
+
+</details>
+
+<<<<<<< HEAD
 - **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Map`
 - **Aliased**:
@@ -4512,11 +5077,22 @@ $carbon--theme--white: (
 ### ✅carbon--theme--g10 [variable]
 
 Carbon's g10 color theme
+=======
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅highlight [variable]
+
+`$interactive-01` high light
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $carbon--theme--g10: (
   interactive-01: #0f62fe,
   interactive-02: #393939,
@@ -4961,22 +5537,272 @@ $carbon--theme--g10: (
       ),
     ),
   ),
+=======
+$highlight: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'highlight'
+    ),
+  map-get($carbon--theme, 'highlight'),
+  #d0e2ff
 );
 ```
 
 </details>
 
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅skeleton-01 [variable]
+
+Skeleton state of graphics
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$skeleton-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'skeleton-01'
+    ),
+  map-get($carbon--theme, 'skeleton-01'),
+  #e5e5e5
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅skeleton-02 [variable]
+
+Skeleton state of text
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$skeleton-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'skeleton-02'
+    ),
+  map-get($carbon--theme, 'skeleton-02'),
+  #c6c6c6
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅⚠️brand-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$brand-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'brand-01'
+    ),
+  map-get($carbon--theme, 'brand-01'),
+  #0f62fe
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Alias**: `interactive-01`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+- **Deprecated**: This may not be available in future releases
+
+### ✅⚠️brand-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$brand-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'brand-02'
+    ),
+  map-get($carbon--theme, 'brand-02'),
+  #393939
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Alias**: `interactive-02`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+- **Deprecated**: This may not be available in future releases
+
+### ✅⚠️brand-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$brand-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'brand-03'
+    ),
+  map-get($carbon--theme, 'brand-03'),
+  #0f62fe
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Alias**: `interactive-03`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+- **Deprecated**: This may not be available in future releases
+
+### ✅⚠️active-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$active-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'active-01'
+    ),
+  map-get($carbon--theme, 'active-01'),
+  #c6c6c6
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Alias**: `active-ui`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+- **Deprecated**: This may not be available in future releases
+
+### ✅⚠️hover-field [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$hover-field: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-field'
+    ),
+  map-get($carbon--theme, 'hover-field'),
+  #e5e5e5
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Alias**: `hover-ui`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+- **Deprecated**: This may not be available in future releases
+
+### ✅caption-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$caption-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'caption-01'
+    ),
+  map-get($carbon--theme, 'caption-01'),
+  (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅label-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$label-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'label-01'
+    ),
+  map-get($carbon--theme, 'label-01'),
+  (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  )
+>>>>>>> upstream/master
+);
+```
+
+</details>
+
+<<<<<<< HEAD
 - **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Map`
 
 ### ✅carbon--theme--g90 [variable]
 
 Carbon's g90 color theme
+=======
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅helper-text-01 [variable]
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $carbon--theme--g90: (
   interactive-01: #0f62fe,
   interactive-02: #6f6f6f,
@@ -5421,22 +6247,299 @@ $carbon--theme--g90: (
       ),
     ),
   ),
+=======
+$helper-text-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'helper-text-01'
+    ),
+  map-get($carbon--theme, 'helper-text-01'),
+  (
+    font-size: 0.75rem,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  )
 );
 ```
 
 </details>
 
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅body-short-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$body-short-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'body-short-01'
+    ),
+  map-get($carbon--theme, 'body-short-01'),
+  (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅body-long-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$body-long-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'body-long-01'
+    ),
+  map-get($carbon--theme, 'body-long-01'),
+  (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.16px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅body-short-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$body-short-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'body-short-02'
+    ),
+  map-get($carbon--theme, 'body-short-02'),
+  (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅body-long-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$body-long-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'body-long-02'
+    ),
+  map-get($carbon--theme, 'body-long-02'),
+  (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.5rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅code-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$code-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'code-01'
+    ),
+  map-get($carbon--theme, 'code-01'),
+  (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅code-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$code-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'code-02'
+    ),
+  map-get($carbon--theme, 'code-02'),
+  (
+    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.25rem,
+    letter-spacing: 0.32px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅heading-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$heading-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'heading-01'
+    ),
+  map-get($carbon--theme, 'heading-01'),
+  (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-01'
+    ),
+  map-get($carbon--theme, 'productive-heading-01'),
+  (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.125rem,
+    letter-spacing: 0.16px,
+  )
+>>>>>>> upstream/master
+);
+```
+
+</details>
+
+<<<<<<< HEAD
 - **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Map`
 
 ### ✅carbon--theme--g100 [variable]
 
 Carbon's g100 color theme
+=======
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅heading-02 [variable]
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+$heading-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'heading-02'
+    ),
+  map-get($carbon--theme, 'heading-02'),
+  (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-02 [variable]
+>>>>>>> upstream/master
+
+<details>
+<summary>Source code</summary>
+
+```scss
+<<<<<<< HEAD
 $carbon--theme--g100: (
   interactive-01: #0f62fe,
   interactive-02: #6f6f6f,
@@ -5881,22 +6984,424 @@ $carbon--theme--g100: (
       ),
     ),
   ),
+=======
+$productive-heading-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-02'
+    ),
+  map-get($carbon--theme, 'productive-heading-02'),
+  (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375rem,
+    letter-spacing: 0,
+  )
 );
 ```
 
 </details>
 
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-03'
+    ),
+  map-get($carbon--theme, 'productive-heading-03'),
+  (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 1.625rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-04'
+    ),
+  map-get($carbon--theme, 'productive-heading-04'),
+  (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 2.25rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-05'
+    ),
+  map-get($carbon--theme, 'productive-heading-05'),
+  (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 2.5rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-06: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-06'
+    ),
+  map-get($carbon--theme, 'productive-heading-06'),
+  (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 3.125rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅productive-heading-07 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-07: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'productive-heading-07'
+    ),
+  map-get($carbon--theme, 'productive-heading-07'),
+  (
+    font-size: 3.375rem,
+    font-weight: 300,
+    line-height: 4rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-01'
+    ),
+  map-get($carbon--theme, 'expressive-heading-01'),
+  (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.25rem,
+    letter-spacing: 0.16px,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-02'
+    ),
+  map-get($carbon--theme, 'expressive-heading-02'),
+  (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.5rem,
+    letter-spacing: 0,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-03'
+    ),
+  map-get($carbon--theme, 'expressive-heading-03'),
+  (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.25rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 1.5rem,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-04'
+    ),
+  map-get($carbon--theme, 'expressive-heading-04'),
+  (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 129%,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.75rem,
+        line-height: 125%,
+      ),
+      max: (
+        font-size: 2rem,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-05'
+    ),
+  map-get($carbon--theme, 'expressive-heading-05'),
+  (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 300,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 300,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 300,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 300,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-heading-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-06: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-heading-06'
+    ),
+  map-get($carbon--theme, 'expressive-heading-06'),
+  (
+    font-size: 2rem,
+    font-weight: 600,
+    line-height: 125%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 600,
+        line-height: 122%,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 600,
+        line-height: 119%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 600,
+        line-height: 117%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 600,
+        line-height: 4.375rem,
+        letter-spacing: 0,
+      ),
+    ),
+  )
+>>>>>>> upstream/master
+);
+```
+
+</details>
+
+<<<<<<< HEAD
 - **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Map`
 
 ### ✅carbon--theme--v9 [variable]
 
 Carbon's v9 color theme
+=======
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅expressive-paragraph-01 [variable]
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $carbon--theme--v9: (
   interactive-01: #3d70b2,
   interactive-02: #5a6872,
@@ -6147,11 +7652,112 @@ $carbon--theme--v9: (
   expressive-heading-06: (
     font-size: 2rem,
     font-weight: 600,
+=======
+$expressive-paragraph-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'expressive-paragraph-01'
+    ),
+  map-get($carbon--theme, 'expressive-paragraph-01'),
+  (
+    font-size: 1.5rem,
+    font-weight: 300,
+    line-height: 125%,
+    letter-spacing: 0,
+    lg: (
+      font-size: 1.75rem,
+      line-height: 129%,
+    ),
+    max: (
+      font-size: 2rem,
+      line-height: 125%,
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅quotation-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$quotation-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'quotation-01'
+    ),
+  map-get($carbon--theme, 'quotation-01'),
+  (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 130%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 1.25rem,
+        font-weight: 400,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 1.5rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 1.75rem,
+        font-weight: 400,
+        line-height: 129%,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 2rem,
+        font-weight: 400,
+        line-height: 125%,
+        letter-spacing: 0,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅quotation-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$quotation-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'quotation-02'
+    ),
+  map-get($carbon--theme, 'quotation-02'),
+  (
+    font-size: 2rem,
+    font-weight: 300,
+>>>>>>> upstream/master
     line-height: 125%,
     letter-spacing: 0,
     breakpoints: (
       md: (
         font-size: 2.25rem,
+<<<<<<< HEAD
         font-weight: 600,
         line-height: 122%,
         letter-spacing: 0,
@@ -6341,22 +7947,280 @@ $carbon--theme--v9: (
       ),
     ),
   ),
+=======
+        line-height: 122%,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        line-height: 119%,
+      ),
+      xlg: (
+        font-size: 3rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 3.75rem,
+      ),
+    ),
+  )
 );
 ```
 
 </details>
 
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅display-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'display-01'
+    ),
+  map-get($carbon--theme, 'display-01'),
+  (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 117%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅display-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'display-02'
+    ),
+  map-get($carbon--theme, 'display-02'),
+  (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 116%,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 113%,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅display-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'display-03'
+    ),
+  map-get($carbon--theme, 'display-03'),
+  (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅display-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'display-04'
+    ),
+  map-get($carbon--theme, 'display-04'),
+  (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 119%,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 115%,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 111%,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 107%,
+        letter-spacing: -0.64px,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 105%,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅spacing-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-01'
+    ),
+  map-get($carbon--theme, 'spacing-01'),
+  0.125rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅spacing-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-02'
+    ),
+  map-get($carbon--theme, 'spacing-02'),
+  0.25rem
+>>>>>>> upstream/master
+);
+```
+
+</details>
+
+<<<<<<< HEAD
 - **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Map`
 
 ### ✅carbon--theme--rocket [variable]
 
 Carbon's rocket color theme
+=======
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅spacing-03 [variable]
+>>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
 ```scss
+<<<<<<< HEAD
 $carbon--theme--rocket: (
   interactive-01: #025c53,
   interactive-02: #333333,
@@ -6801,10 +8665,647 @@ $carbon--theme--rocket: (
       ),
     ),
   ),
+=======
+$spacing-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-03'
+    ),
+  map-get($carbon--theme, 'spacing-03'),
+  0.5rem
 );
 ```
 
 </details>
 
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅spacing-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-04'
+    ),
+  map-get($carbon--theme, 'spacing-04'),
+  0.75rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅spacing-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-05'
+    ),
+  map-get($carbon--theme, 'spacing-05'),
+  1rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅spacing-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-06: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-06'
+    ),
+  map-get($carbon--theme, 'spacing-06'),
+  1.5rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅spacing-07 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-07: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-07'
+    ),
+  map-get($carbon--theme, 'spacing-07'),
+  2rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅spacing-08 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-08: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-08'
+    ),
+  map-get($carbon--theme, 'spacing-08'),
+  2.5rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅spacing-09 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-09: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-09'
+    ),
+  map-get($carbon--theme, 'spacing-09'),
+  3rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅spacing-10 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-10: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-10'
+    ),
+  map-get($carbon--theme, 'spacing-10'),
+  4rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅spacing-11 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-11: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-11'
+    ),
+  map-get($carbon--theme, 'spacing-11'),
+  5rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅spacing-12 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-12: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'spacing-12'
+    ),
+  map-get($carbon--theme, 'spacing-12'),
+  6rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅fluid-spacing-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'fluid-spacing-01'
+    ),
+  map-get($carbon--theme, 'fluid-spacing-01'),
+  0
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅fluid-spacing-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'fluid-spacing-02'
+    ),
+  map-get($carbon--theme, 'fluid-spacing-02'),
+  2vw
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅fluid-spacing-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'fluid-spacing-03'
+    ),
+  map-get($carbon--theme, 'fluid-spacing-03'),
+  5vw
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅fluid-spacing-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'fluid-spacing-04'
+    ),
+  map-get($carbon--theme, 'fluid-spacing-04'),
+  10vw
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅layout-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'layout-01'
+    ),
+  map-get($carbon--theme, 'layout-01'),
+  1rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅layout-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'layout-02'
+    ),
+  map-get($carbon--theme, 'layout-02'),
+  1.5rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅layout-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'layout-03'
+    ),
+  map-get($carbon--theme, 'layout-03'),
+  2rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅layout-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'layout-04'
+    ),
+  map-get($carbon--theme, 'layout-04'),
+  3rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅layout-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'layout-05'
+    ),
+  map-get($carbon--theme, 'layout-05'),
+  4rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅layout-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-06: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'layout-06'
+    ),
+  map-get($carbon--theme, 'layout-06'),
+  6rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅layout-07 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$layout-07: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'layout-07'
+    ),
+  map-get($carbon--theme, 'layout-07'),
+  10rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅container-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'container-01'
+    ),
+  map-get($carbon--theme, 'container-01'),
+  1.5rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅container-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'container-02'
+    ),
+  map-get($carbon--theme, 'container-02'),
+  2rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅container-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-03: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'container-03'
+    ),
+  map-get($carbon--theme, 'container-03'),
+  2.5rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅container-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-04: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'container-04'
+    ),
+  map-get($carbon--theme, 'container-04'),
+  3rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅container-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$container-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'container-05'
+    ),
+  map-get($carbon--theme, 'container-05'),
+  4rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅icon-size-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$icon-size-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'icon-size-01'
+    ),
+  map-get($carbon--theme, 'icon-size-01'),
+  1rem
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅icon-size-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$icon-size-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'icon-size-02'
+    ),
+  map-get($carbon--theme, 'icon-size-02'),
+  1.25rem
+>>>>>>> upstream/master
+);
+```
+
+</details>
+
+<<<<<<< HEAD
 - **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
 - **Type**: `Map`
+=======
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{Number}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+>>>>>>> upstream/master

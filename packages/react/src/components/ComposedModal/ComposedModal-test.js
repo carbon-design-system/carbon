@@ -61,15 +61,13 @@ describe('<ModalBody />', () => {
     });
 
     it('renders wrapper as expected', () => {
-      expect(wrapper.length).toBe(1);
-    });
-
-    it('has the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--modal-content`)).toEqual(true);
+      expect(wrapper.find(`.${prefix}--modal-content`).length).toBe(1);
     });
 
     it('renders extra classes passed in via className', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
+      expect(
+        wrapper.find(`.${prefix}--modal-content`).hasClass('extra-class')
+      ).toEqual(true);
     });
   });
 });
@@ -168,10 +166,14 @@ describe('<ComposedModal />', () => {
   });
 
   it('should change class of <body> upon open state', () => {
-    mount(<ComposedModal open />);
+    const wrapper = mount(<ComposedModal open />);
     expect(
       document.body.classList.contains('bx--body--with-modal-open')
     ).toEqual(true);
+    wrapper.unmount();
+    expect(
+      document.body.classList.contains('bx--body--with-modal-open')
+    ).toEqual(false);
     mount(<ComposedModal open={false} />);
     expect(
       document.body.classList.contains('bx--body--with-modal-open')
