@@ -191,6 +191,7 @@
 
   .#{$prefix}--btn--copy__feedback {
     @include type-style('body-short-01');
+    @include carbon--font-family('sans'); // Override one in code snippet
     z-index: z('overlay');
     font-weight: 400;
     left: inherit;
@@ -302,9 +303,27 @@
   }
 
   .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
-    top: rem(25px);
+    top: rem(
+      50.8px
+    ); // (The height of button) + (The height of the tooltip's triangle) + 4px
     left: 50%;
     right: auto;
+
+    &::before {
+      top: 0;
+    }
+
+    &:after {
+      top: rem(-4px);
+    }
+  }
+
+  .#{$prefix}--snippet--multi
+    .#{$prefix}--snippet-button
+    .#{$prefix}--btn--copy__feedback {
+    top: rem(
+      42.8px
+    ); // (The height of button) + (The height of the tooltip's triangle) + 4px
   }
 
   .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {

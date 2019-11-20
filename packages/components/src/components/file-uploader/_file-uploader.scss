@@ -52,6 +52,7 @@
     margin-bottom: $carbon--spacing-03;
     display: inline-block;
     width: 100%;
+    max-width: rem(320px);
     color: $link-01;
     outline: none;
     transition: $duration--fast-02 motion(standard, productive);
@@ -260,7 +261,6 @@
     align-items: flex-start;
     justify-content: space-between;
     height: rem(96px);
-    max-width: rem(320px);
     padding: $carbon--spacing-05;
     overflow: hidden;
     border: 1px dashed $ui-04;

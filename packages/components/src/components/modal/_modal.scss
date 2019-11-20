@@ -71,8 +71,9 @@
 
   .#{$prefix}--modal-container {
     position: relative;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: auto;
     background-color: $ui-01;
     width: 100%;
     height: 100%;
@@ -83,31 +84,138 @@
     transition: transform $duration--moderate-02 motion(exit, expressive);
 
     @include carbon--breakpoint(md) {
-      width: 50%;
-      max-width: 768px;
+      width: 84%;
       max-height: 90%;
       height: auto;
+
+      .#{$prefix}--modal-header,
+      .#{$prefix}--modal-content,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
     }
 
     @include carbon--breakpoint(lg) {
-      max-height: 80%;
+      width: 60%;
+      max-height: 84%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 48%;
     }
   }
 
   .#{$prefix}--modal-header,
   .#{$prefix}--modal-content {
-    padding-right: 25%;
-    padding-left: 1rem;
+    padding-left: $carbon--spacing-05;
   }
 
   .#{$prefix}--modal-header,
-  .#{$prefix}--modal-footer {
-    flex-shrink: 0;
+  .#{$prefix}--modal-content,
+  .#{$prefix}--modal-content__regular-content {
+    padding-right: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--modal-content--with-form {
+    padding-right: $carbon--spacing-05;
+
+    @include carbon--breakpoint(md) {
+      padding-right: $carbon--spacing-05; // Override for `.#{$prefix}--modal-content`
+    }
+  }
+
+  .#{$prefix}--modal-container--xs {
+    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-content,
+    .#{$prefix}--modal-content__regular-content,
+    .#{$prefix}--modal-content--with-form {
+      padding-right: $carbon--spacing-05;
+    }
+
+    @include carbon--breakpoint(md) {
+      width: 48%;
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: 32%;
+      max-height: 48%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 24%;
+    }
+  }
+
+  .#{$prefix}--modal-container--sm {
+    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-content,
+    .#{$prefix}--modal-content__regular-content,
+    .#{$prefix}--modal-content--with-form {
+      padding-right: $carbon--spacing-05;
+    }
+
+    @include carbon--breakpoint(md) {
+      width: 60%;
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: 42%;
+      max-height: 72%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 36%;
+
+      .#{$prefix}--modal-header,
+      .#{$prefix}--modal-content,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
+
+      .#{$prefix}--modal-content--with-form {
+        padding-right: $carbon--spacing-05; // Override for `.#{$prefix}--modal-content`
+      }
+    }
+  }
+
+  .#{$prefix}--modal-container--lg {
+    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-content,
+    .#{$prefix}--modal-content__regular-content,
+    .#{$prefix}--modal-content--with-form {
+      padding-right: $carbon--spacing-05;
+    }
+
+    @include carbon--breakpoint(md) {
+      width: 96%;
+
+      .#{$prefix}--modal-header,
+      .#{$prefix}--modal-content,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
+
+      .#{$prefix}--modal-content--with-form {
+        padding-right: $carbon--spacing-05; // Override for `.#{$prefix}--modal-content`
+      }
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: 84%;
+      max-height: 96%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 72%;
+    }
   }
 
   .#{$prefix}--modal-header {
-    padding-top: 1rem;
+    padding-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-03;
+
+    grid-row: 1/1;
+    grid-column: 1/-1;
   }
 
   .#{$prefix}--modal-header__label {
@@ -126,6 +234,9 @@
   .#{$prefix}--modal-content {
     @include type-style('body-long-01');
 
+    grid-row: 2/-2;
+    grid-column: 1/-1;
+
     overflow-y: auto;
     margin-bottom: $carbon--spacing-08;
     color: $text-01;
@@ -140,8 +251,28 @@
     }
   }
 
-  .#{$prefix}--modal-content > * {
-    @include type-style('body-long-01');
+  .#{$prefix}--modal-content {
+    > * {
+      @include type-style('body-long-01');
+    }
+  }
+
+  .#{$prefix}--modal-content--overflow-indicator {
+    grid-row: 2/-2;
+    grid-column: 1/-1;
+    width: 100%;
+    height: rem(32px);
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: $carbon--spacing-08;
+    background-image: linear-gradient(to bottom, transparent, $ui-01);
+  }
+
+  .#{$prefix}--modal-content:focus
+    ~ .#{$prefix}--modal-content--overflow-indicator {
+    width: calc(100% - 4px);
+    margin: 0 2px 2px 2px;
   }
 
   .#{$prefix}--modal-footer {
@@ -150,13 +281,16 @@
     height: 4rem;
     background-color: $modal-footer-background-color;
 
+    grid-row: -1/-1;
+    grid-column: 1/-1;
+
     button.#{$prefix}--btn {
       max-width: none;
       flex: 1;
       height: 4rem;
       margin: 0;
-      padding-top: 1rem;
-      padding-bottom: 2rem;
+      padding-top: $carbon--spacing-05;
+      padding-bottom: $carbon--spacing-07;
     }
   }
 

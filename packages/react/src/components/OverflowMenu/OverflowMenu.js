@@ -326,13 +326,22 @@ class OverflowMenu extends Component {
   };
 
   handleKeyPress = evt => {
-    if (!keyCodeMatches(evt, [keys.Enter, keys.Space])) {
+    if (
+      this.state.open &&
+      keyCodeMatches(evt, [
+        keys.ArrowUp,
+        keys.ArrowRight,
+        keys.ArrowDown,
+        keys.ArrowLeft,
+      ])
+    ) {
       evt.preventDefault();
     }
 
     // only respond to key events when the menu is closed, so that menu items still respond to key events
     if (!this.state.open) {
       if (keyCodeMatches(evt, [keys.Enter, keys.Space])) {
+        evt.preventDefault();
         this.setState({ open: true });
       }
     }
