@@ -105,7 +105,7 @@ At a high-level, the structure of a component will mirror the following:
 
 ```jsx
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 function MyComponent({
   // Prefer default argument values to `defaultProps`
