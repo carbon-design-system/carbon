@@ -221,7 +221,7 @@ const rows = [
     secondaryText: 'Secondary Text',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups Testing a really long text here",
+    attachedGroups: 'Maureen’s VM Groups Testing a really long text here',
     status: 'Active',
     menu: {
       label: 'Overflow menu description',
@@ -242,7 +242,7 @@ const rows = [
     secondaryText: 'Secondary Text',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: 'Maureen’s VM Groups',
     status: 'Active',
     menu: {
       label: 'Overflow menu description',
@@ -262,7 +262,7 @@ const rows = [
     protocol: 'HTTP',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: 'Maureen’s VM Groups',
     status: 'Active',
     menu: {
       label: 'Overflow menu description',
@@ -282,7 +282,7 @@ const rows = [
     protocol: 'HTTP',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: 'Maureen’s VM Groups',
     status: 'Active',
     menu: {
       label: 'Overflow menu description',
@@ -302,7 +302,7 @@ const rows = [
     protocol: 'HTTP',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: 'Maureen’s VM Groups',
     status: 'Active',
     menu: {
       label: 'Overflow menu description',
@@ -329,7 +329,7 @@ const rowsExpandable = [
     protocol: 'HTTP',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: 'Maureen’s VM Groups',
     status: 'Active',
   },
   {
@@ -348,7 +348,7 @@ const rowsExpandable = [
     protocol: 'HTTP',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: 'Maureen’s VM Groups',
     status: 'Active',
   },
 ];
