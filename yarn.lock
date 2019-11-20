@@ -2703,11 +2703,6 @@
     lodash.debounce "^4.0.8"
     warning "^3.0.0"
 
-"@rocketsoftware/colors@^0.1.8":
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/colors/-/colors-0.1.8.tgz#56d84dcd27a02e1525a0d33e990f038fde00cb93"
-  integrity sha512-ps/z3MDolTcdYfcenBh3e19VyZusggTyfuFkSyXj8DUkJq+mbYTse0cDQKN6D1Eef87owu2k863ve+4aSALzMA==
-
 "@rocketsoftware/icon-helpers@0.0.6":
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/@rocketsoftware/icon-helpers/-/icon-helpers-0.0.6.tgz#35d124ca6b68048eeac494f20529f292f1fd5374"
@@ -2718,48 +2713,12 @@
   resolved "https://registry.yarnpkg.com/@rocketsoftware/icon-helpers/-/icon-helpers-0.0.7.tgz#d2c9569d64d985df8bb88eef7dd658ecbd7cbe32"
   integrity sha512-QQ7lkoPwMSTphy4Nk+Sq/9rIdOSjZrHGUoP2ilyPmjVOCImJ20jjpCiEMpi8mJRcPN85/KV9q0TUg5mcT/F79Q==
 
-"@rocketsoftware/icon-helpers@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/icon-helpers/-/icon-helpers-0.0.8.tgz#bee305666e74749161bef420c1396e95bf3cd25d"
-  integrity sha512-l02PtSQwdV6wQWjWKSCQ19d4+5nhDPGCSwA+JiaUae3J3iP1YndJbkakJmBSUVKPvLx4UaqV3YAHsMHhA1MRgQ==
-
 "@rocketsoftware/icons-react@^0.0.7":
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/@rocketsoftware/icons-react/-/icons-react-0.0.7.tgz#ea14206ff25558e38afeaed7c9ae85a6ada84c11"
   integrity sha512-kWTJNtjxGqPoSaA85yavP4rAwQGnTliBKNnzV1XnMQQuEf5oTOPWuUw7NX/ezU8+n7P9JDrDjNX+/1/EpQlvMg==
   dependencies:
     "@rocketsoftware/icon-helpers" "0.0.7"
-
-"@rocketsoftware/icons@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/icons/-/icons-0.0.8.tgz#5364137dd5fc61ba4a740c7b2fee28e6b6a0a289"
-  integrity sha512-1MIiBb4vMgMoeyoXojZOBNJFSZlsYQSmr1IbNqk3AUUvwVcOtpw/envstLj4qiWD1vfu38Ys/tDXfKpU3c1N4A==
-
-"@rocketsoftware/icons@^0.1.8":
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/icons/-/icons-0.1.8.tgz#b2bfd9657d83aa814e49bf487f0f8dbe45208b67"
-  integrity sha512-pwDY+JfdLgKmK/0NLZ9FWhRk03GbKG8oeAku7kp8hvtYPtLtQZk/sJXVhSGqbDqQXysxgOwkgZgLshakUylWDQ==
-
-"@rocketsoftware/layout@0.1.8":
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/layout/-/layout-0.1.8.tgz#6e9030e4ae8129391a30eb3ccd5d261c1978ba77"
-  integrity sha512-SBzN7iUpSFg4KcVul+TeQWnzwsMtkKDRd4AqUHwkZslfU50bzF0Wsf5WoKhf319TYotZNirv3scdi7/MvHB4Cw==
-
-"@rocketsoftware/themes@^0.1.8":
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/themes/-/themes-0.1.8.tgz#724d6122c2ab0c9f1316edee71fff9e14cca689d"
-  integrity sha512-x0oQ0ipMjugK22qMEZsKeljTmnfVk+cnMrgAEAT8g/aSY15jme9XwLGK3kPWZSnCLqRjmUJuNrQArSMjFQsycQ==
-  dependencies:
-    "@rocketsoftware/colors" "^0.1.8"
-    "@rocketsoftware/type" "^0.1.8"
-
-"@rocketsoftware/type@^0.1.8":
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/type/-/type-0.1.8.tgz#6c777be650bc076ae24cc15c1832459e4895ec47"
-  integrity sha512-E2LQ1PMdYFeSTU3CNqT2RbDadiQxwBxiABYZfz6przoPVEBPFR418HsJ6pke3BSBJgfMM2HFPFVIxBQOWCHFnw==
-  dependencies:
-    "@carbon/import-once" "10.3.0"
-    "@rocketsoftware/layout" "0.1.8"
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"

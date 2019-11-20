@@ -132,6 +132,7 @@
   - [✅carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
   - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
   - [✅carbon--theme--v9 [variable]](#carbon--theme--v9-variable)
+  - [✅carbon--theme--rocket [variable]](#carbon--theme--rocket-variable)
   - [✅carbon--theme [variable]](#carbon--theme-variable)
   - [✅interactive-01 [variable]](#interactive-01-variable)
   - [✅interactive-02 [variable]](#interactive-02-variable)
@@ -319,13 +320,6 @@
 - [@rocketsoftware/grid](#rocketsoftwaregrid)
   - [✅carbon--12-column-grid [variable]](#carbon--12-column-grid-variable)
   - [✅prefix [variable]](#prefix-variable)
-- [@rocketsoftware/themes](#rocketsoftwarethemes)
-  - [✅carbon--theme--white [variable]](#carbon--theme--white-variable)
-  - [✅carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
-  - [✅carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
-  - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
-  - [✅carbon--theme--v9 [variable]](#carbon--theme--v9-variable)
-  - [✅carbon--theme--rocket [variable]](#carbon--theme--rocket-variable)
 
 <!-- tocstop -->
 
@@ -3595,35 +3589,6 @@ $custom-property-prefix: 'cds';
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [custom-properties [mixin]](#custom-properties-mixin)
 
-### ❌custom-property [mixin]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin custom-property() {
-  @if type-of($value) == map {
-    @each $property, $property-value in $value {
-      // Only support one-level of depth for values that are maps. This is to
-      // avoid bringing properties like `breakpoints` on type tokens
-      @if type-of($property-value) != map {
-        @include custom-property('#{$name}-#{$property}', $property-value);
-      }
-    }
-  } @else {
-    --#{$prefix}-#{$name}: #{$value};
-  }
-}
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Requires**:
-  - [prefix [variable]](#prefix-variable)
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
 ### ❌should-emit [function]
 
 <details>
@@ -4991,7 +4956,6 @@ Define theme variables from a map of tokens
 - **Content**: Pass in your custom declaration blocks to be used after the token
   maps set theming variables.
 - **Requires**:
-  - [custom-property [mixin]](#custom-property-mixin)
   - [should-emit [function]](#should-emit-function)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [interactive-02 [variable]](#interactive-02-variable)
@@ -5366,6 +5330,74 @@ $carbon--theme--v9: map-merge(
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
 
+### ✅carbon--theme--rocket [variable]
+
+Carbon's rocket color theme
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--theme--rocket: map-merge(
+  $carbon--theme--white,
+  (
+    interactive-01: #025c53,
+    interactive-02: #333333,
+    interactive-03: #025c53,
+    interactive-04: #025c53,
+    ui-01: #efefef,
+    ui-03: #dcdcdc,
+    ui-04: #bcbcbc,
+    ui-05: #333333,
+    text-01: #333333,
+    text-02: #595959,
+    text-03: #bcbcbc,
+    icon-01: #333333,
+    icon-02: #595959,
+    link-01: #025c53,
+    inverse-link: #0f62fe,
+    field-01: #efefef,
+    inverse-02: #3d3d3d,
+    support-01: #bf3438,
+    support-02: #507300,
+    support-03: #8b6010,
+    support-04: #01453e,
+    inverse-support-01: #fccacc,
+    inverse-support-02: #c6ff40,
+    inverse-support-03: #fdd13a,
+    inverse-support-04: #93c7c2,
+    overlay-01: rgba(23, 23, 23, 0.5),
+    focus: #025c53,
+    inverse-focus-ui: #0f62fe,
+    hover-primary: #01453e,
+    active-primary: #012e29,
+    hover-primary-text: #012e29,
+    hover-tertiary: #01453e,
+    active-tertiary: #012e29,
+    active-ui: #bebebe,
+    selected-ui: #dcdcdc,
+    inverse-hover-ui: #e5e5e5,
+    hover-danger: #99292d,
+    active-danger: #99292d,
+    visited-link: #5b2e66,
+    disabled-01: #f3f3f3,
+    disabled-02: #bebebe,
+    disabled-03: #bcbcbc,
+    highlight: #c9deff,
+    skeleton-02: #bebebe,
+    brand-01: #025c53,
+    brand-02: #333333,
+    brand-03: #025c53,
+    active-01: #bebebe,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Map`
+
 ### ✅carbon--theme [variable]
 
 Carbon's default theme
@@ -5674,6 +5706,15 @@ Primary page background; Secondary container background
 
 ```scss
 $ui-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'ui-02'
+    ),
+  map-get($carbon--theme, 'ui-02'),
+  #ffffff
+);
+```
+
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
@@ -5724,6 +5765,15 @@ $ui-04: if(
 );
 ```
 
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅ui-05 [variable]
+
 4.5:1 AA element contrast; High contrast border; Emphasis elements
 
 <details>
@@ -5731,6 +5781,7 @@ $ui-04: if(
 
 ```scss
 $ui-05: if(
+  global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
       'ui-05'
     ),
@@ -6322,6 +6373,11 @@ $overlay-01: if(
 <details>
 <summary>Source code</summary>
 
+```scss
+$danger: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'danger'
     ),
   map-get($carbon--theme, 'danger'),
   #da1e28
@@ -6338,11 +6394,11 @@ $overlay-01: if(
 ### ✅focus [variable]
 
 Focus border; Focus underline
->>>>>>> upstream/master
 
 <details>
 <summary>Source code</summary>
 
+```scss
 $focus: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -6441,17 +6497,19 @@ $active-primary: if(
 <summary>Source code</summary>
 
 ```scss
-$inverse-support-01: if(
+$hover-primary-text: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
-      'inverse-support-01'
+      'hover-primary-text'
     ),
+  map-get($carbon--theme, 'hover-primary-text'),
   #0043ce
 );
 ```
 
 </details>
 
+- **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -6791,17 +6849,19 @@ Disabled fields; Disabled backgrounds; Disabled border
 <summary>Source code</summary>
 
 ```scss
-$hover-tertiary: if(
+$disabled-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
-      'hover-tertiary'
+      'disabled-01'
     ),
+  map-get($carbon--theme, 'disabled-01'),
   #f4f4f4
 );
 ```
 
 </details>
 
+- **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -6986,11 +7046,8 @@ $brand-02: if(
 
 <details>
 <summary>Source code</summary>
-      $carbon--theme,
-    ),
-  map-get($carbon--theme, 'active-danger'),
-  #750e13
-=======
+
+```scss
 $brand-03: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
@@ -6998,7 +7055,6 @@ $brand-03: if(
     ),
   map-get($carbon--theme, 'brand-03'),
   #0f62fe
->>>>>>> upstream/master
 );
 ```
 
@@ -7067,11 +7123,12 @@ $hover-field: if(
 <summary>Source code</summary>
 
 ```scss
-$disabled-01: if(
+$caption-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
-      'disabled-01'
+      'caption-01'
     ),
+  map-get($carbon--theme, 'caption-01'),
   (
     font-size: 0.75rem,
     font-weight: 400,
@@ -7083,6 +7140,7 @@ $disabled-01: if(
 
 </details>
 
+- **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
@@ -7253,7 +7311,6 @@ $body-long-02: if(
 - **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-- **Deprecated**: This may not be available in future releases
 
 ### ✅code-01 [variable]
 
@@ -7283,7 +7340,6 @@ $code-01: if(
 - **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-- **Deprecated**: This may not be available in future releases
 
 ### ✅code-02 [variable]
 
@@ -7313,7 +7369,6 @@ $code-02: if(
 - **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-- **Deprecated**: This may not be available in future releases
 
 ### ✅heading-01 [variable]
 
@@ -7342,7 +7397,6 @@ $heading-01: if(
 - **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-- **Deprecated**: This may not be available in future releases
 
 ### ✅productive-heading-01 [variable]
 
@@ -7371,7 +7425,6 @@ $productive-heading-01: if(
 - **Type**: `{Number}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-- **Deprecated**: This may not be available in future releases
 
 ### ✅heading-02 [variable]
 
@@ -7519,10 +7572,10 @@ $productive-heading-05: if(
 <summary>Source code</summary>
 
 ```scss
-
-$body-short-02: if(
+$productive-heading-06: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
+      'productive-heading-06'
     ),
   map-get($carbon--theme, 'productive-heading-06'),
   (
@@ -7532,6 +7585,7 @@ $body-short-02: if(
     letter-spacing: 0,
   )
 );
+```
 
 </details>
 
@@ -8498,9 +8552,7 @@ $layout-02: if(
 );
 ```
 
-- **Group**: [@carbon/type](#carbontype)
-- **Requires**:
-  - [carbon--font-family [function]](#carbon--font-family-function)
+</details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `{Number}`
@@ -8563,9 +8615,7 @@ $layout-05: if(
 );
 ```
 
-| Name      | Description | Type     | Default value |
-| --------- | ----------- | -------- | ------------- |
-| `$weight` | —           | `String` | —             |
+</details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `{Number}`
@@ -8607,9 +8657,7 @@ $layout-07: if(
 );
 ```
 
-| Name      | Description | Type     | Default value |
-| --------- | ----------- | -------- | ------------- |
-| `$weight` | —           | `String` | —             |
+</details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `{Number}`
@@ -8679,9 +8727,8 @@ $container-03: if(
 
 ### ✅container-04 [variable]
 
-  code {
-    font-family: $mono-font-family;
-  }
+<details>
+<summary>Source code</summary>
 
 ```scss
 $container-04: if(
@@ -8715,18 +8762,15 @@ $container-05: if(
 );
 ```
 
-  h2 {
-    @include carbon--type-style('productive-heading-05');
-  }
+</details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `{Number}`
 
 ### ✅icon-size-01 [variable]
 
-  h5 {
-    @include carbon--type-style('productive-heading-02');
-  }
+<details>
+<summary>Source code</summary>
 
 ```scss
 $icon-size-01: if(
@@ -8980,6 +9024,570 @@ Mono `@font-face`'s
 
 ```scss
 @mixin carbon--font-face-mono() {
+  // .woff support for IE11
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 300;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1gMoW.woff)
+        format('woff');
+  }
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 400;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa1Xdm.woff)
+        format('woff');
+  }
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 600;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono SemiBold Italic'), local(
+        'IBMPlexMono-SemiBoldItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1gMoW.woff)
+        format('woff');
+  }
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 300;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwlBFhA.woff)
+        format('woff');
+  }
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono'), local('IBMPlexMono'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1i8q0Q.woff)
+        format('woff');
+  }
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 600;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlBFhA.woff)
+        format('woff');
+  }
+
+  /* cyrillic-ext */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 300;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1jcoQPttoz6Pz.woff2)
+        format('woff2');
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+      U+FE2E-FE2F;
+  }
+  /* cyrillic */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 300;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1hMoQPttoz6Pz.woff2)
+        format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 300;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1j8oQPttoz6Pz.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 300;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1jsoQPttoz6Pz.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 300;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1gMoQPttozw.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* cyrillic-ext */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 400;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa2HdgregdFOFh.woff2)
+        format('woff2');
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+      U+FE2E-FE2F;
+  }
+  /* cyrillic */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 400;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa0XdgregdFOFh.woff2)
+        format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 400;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa2ndgregdFOFh.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 400;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa23dgregdFOFh.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 400;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa1XdgregdFA.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* cyrillic-ext */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 600;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono SemiBold Italic'), local(
+        'IBMPlexMono-SemiBoldItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1jcoQPttoz6Pz.woff2)
+        format('woff2');
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+      U+FE2E-FE2F;
+  }
+  /* cyrillic */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 600;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono SemiBold Italic'), local(
+        'IBMPlexMono-SemiBoldItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1hMoQPttoz6Pz.woff2)
+        format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 600;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono SemiBold Italic'), local(
+        'IBMPlexMono-SemiBoldItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1j8oQPttoz6Pz.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 600;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono SemiBold Italic'), local(
+        'IBMPlexMono-SemiBoldItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1jsoQPttoz6Pz.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 600;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono SemiBold Italic'), local(
+        'IBMPlexMono-SemiBoldItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1gMoQPttozw.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* cyrillic-ext */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 300;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwl1FgsAXHNlYzg.woff2)
+        format('woff2');
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+      U+FE2E-FE2F;
+  }
+  /* cyrillic */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 300;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwlRFgsAXHNlYzg.woff2)
+        format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 300;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwl9FgsAXHNlYzg.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 300;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwl5FgsAXHNlYzg.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 300;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwlBFgsAXHNk.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* cyrillic-ext */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono'), local('IBMPlexMono'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1iIq131nj-otFQ.woff2)
+        format('woff2');
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+      U+FE2E-FE2F;
+  }
+  /* cyrillic */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono'), local('IBMPlexMono'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1isq131nj-otFQ.woff2)
+        format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono'), local('IBMPlexMono'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1iAq131nj-otFQ.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono'), local('IBMPlexMono'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1iEq131nj-otFQ.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono'), local('IBMPlexMono'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1i8q131nj-o.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* cyrillic-ext */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 600;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwl1FgsAXHNlYzg.woff2)
+        format('woff2');
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+      U+FE2E-FE2F;
+  }
+  /* cyrillic */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 600;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlRFgsAXHNlYzg.woff2)
+        format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 600;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwl9FgsAXHNlYzg.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 600;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwl5FgsAXHNlYzg.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 600;
+    font-display: $carbon--font-display;
+    src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
+      url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlBFgsAXHNk.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [carbon--font-display [variable]](#carbon--font-display-variable)
+
+### ✅prefix [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$prefix: 'bx';
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `String`
+- **Used by**:
+  - [carbon--make-col-ready [mixin]](#carbon--make-col-ready-mixin)
+  - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
+  - [carbon--no-gutter [mixin]](#carbon--no-gutter-mixin)
+  - [carbon--hang [mixin]](#carbon--hang-mixin)
+  - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
+  - [carbon--grid [mixin]](#carbon--grid-mixin)
+  - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
+
+### ✅carbon--type-reset [mixin]
+
+Include a type reset for a given body and mono font family
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon--type-reset(
+  $base-font-size: $carbon--base-font-size,
+  $body-font-family: carbon--font-family('sans'),
+  $mono-font-family: carbon--font-family('mono')
+) {
+  html {
+    font-size: $base-font-size;
+  }
+
+  body {
+    font-family: $body-font-family;
+    @include carbon--font-weight('regular');
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code {
+    font-family: $mono-font-family;
+  }
+
+  strong {
+    @include carbon--font-weight('semibold');
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name                | Description                                                                         | Type     | Default value                 |
+| ------------------- | ----------------------------------------------------------------------------------- | -------- | ----------------------------- |
+| `$base-font-size`   | The base font size for your document                                                | `Number` | `$carbon--base-font-size`     |
+| `$body-font-family` | The font family used on the `<body>` element                                        | `String` | `carbon--font-family('sans')` |
+| `$mono-font-family` | The font family used on elements that require mono fonts, like the `<code>` element | `String` | `carbon--font-family('mono')` |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
+
+### ✅carbon--default-type [mixin]
+
+Include default type styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon--default-type() {
+  h1 {
+    @include carbon--type-style('productive-heading-06');
+  }
+
+  h2 {
+    @include carbon--type-style('productive-heading-05');
+  }
+
+  h3 {
+    @include carbon--type-style('productive-heading-04');
+  }
+
+  h4 {
+    @include carbon--type-style('productive-heading-03');
+  }
+
+  h5 {
+    @include carbon--type-style('productive-heading-02');
+  }
+
+  h6 {
+    @include carbon--type-style('productive-heading-01');
+  }
+
+  p {
+    @include carbon--type-style('body-long-02');
+  }
+
+  a {
+    color: #0062ff;
+  }
+
+  em {
+    font-style: italic;
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+
+### ✅carbon--font-face-sans [mixin]
+
+Sans `@font-face`'s
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon--font-face-sans() {
   // .woff support for IE11
   @font-face {
     font-family: 'IBM Plex Sans';
@@ -10420,7 +11028,12 @@ $productive-heading-07: (
 <summary>Source code</summary>
 
 ```scss
-$expressive-heading-01: $heading-01;
+$expressive-heading-01: map-merge(
+  $heading-01,
+  (
+    line-height: carbon--rem(20),
+  )
+);
 ```
 
 </details>
@@ -10434,7 +11047,12 @@ $expressive-heading-01: $heading-01;
 <summary>Source code</summary>
 
 ```scss
-$expressive-heading-02: $heading-02;
+$expressive-heading-02: map-merge(
+  $heading-02,
+  (
+    line-height: carbon--rem(24),
+  )
+);
 ```
 
 </details>
@@ -11224,2793 +11842,10 @@ Namespace prefix
 <summary>Source code</summary>
 
 ```scss
-$expressive-heading-01: map-merge(
-  $heading-01,
-  (
-    line-height: carbon--rem(20),
-  )
-);
+$prefix: 'bx';
 ```
 
 </details>
 
-- **Group**: [@carbon/type](#carbontype)
-- **Type**: `Map`
-
-### ✅expressive-heading-02 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$expressive-heading-02: map-merge(
-  $heading-02,
-  (
-    line-height: carbon--rem(24),
-  )
-);
-```
-
-## @rocketsoftware/themes
-
-### ✅carbon--theme--white [variable]
-
-Carbon's white color theme
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--theme--white: (
-  interactive-01: #0f62fe,
-  interactive-02: #393939,
-  interactive-03: #0f62fe,
-  interactive-04: #0f62fe,
-  ui-background: #ffffff,
-  ui-01: #f4f4f4,
-  ui-02: #ffffff,
-  ui-03: #e0e0e0,
-  ui-04: #8d8d8d,
-  ui-05: #161616,
-  text-01: #161616,
-  text-02: #393939,
-  text-03: #a8a8a8,
-  text-04: #ffffff,
-  text-05: #6f6f6f,
-  icon-01: #161616,
-  icon-02: #525252,
-  icon-03: #ffffff,
-  link-01: #0f62fe,
-  inverse-link: #78a9ff,
-  field-01: #f4f4f4,
-  field-02: #ffffff,
-  inverse-01: #ffffff,
-  inverse-02: #393939,
-  support-01: #da1e28,
-  support-02: #24a148,
-  support-03: #f1c21b,
-  support-04: #0043ce,
-  inverse-support-01: #fa4d56,
-  inverse-support-02: #42be65,
-  inverse-support-03: #f1c21b,
-  inverse-support-04: #4589ff,
-  overlay-01: rgba(22, 22, 22, 0.5),
-  danger: #da1e28,
-  focus: #0f62fe,
-  inverse-focus-ui: #ffffff,
-  hover-primary: #0353e9,
-  active-primary: #002d9c,
-  hover-primary-text: #0043ce,
-  hover-secondary: #4c4c4c,
-  active-secondary: #6f6f6f,
-  hover-tertiary: #0353e9,
-  active-tertiary: #002d9c,
-  hover-ui: #e5e5e5,
-  active-ui: #c6c6c6,
-  selected-ui: #e0e0e0,
-  inverse-hover-ui: #4c4c4c,
-  hover-selected-ui: #cacaca,
-  hover-danger: #ba1b23,
-  active-danger: #750e13,
-  hover-row: #e5e5e5,
-  visited-link: #8a3ffc,
-  disabled-01: #f4f4f4,
-  disabled-02: #c6c6c6,
-  disabled-03: #8d8d8d,
-  highlight: #d0e2ff,
-  skeleton-01: #e5e5e5,
-  skeleton-02: #c6c6c6,
-  brand-01: #0f62fe,
-  brand-02: #393939,
-  brand-03: #0f62fe,
-  active-01: #c6c6c6,
-  hover-field: #e5e5e5,
-  caption-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  label-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  helper-text-01: (
-    font-size: 0.75rem,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  body-short-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  body-long-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.16px,
-  ),
-  body-short-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  body-long-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.5rem,
-    letter-spacing: 0,
-  ),
-  code-01: (
-    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  code-02: (
-    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.32px,
-  ),
-  heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  productive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 1.625rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 2.25rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 2.5rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-06: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 3.125rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-07: (
-    font-size: 3.375rem,
-    font-weight: 300,
-    line-height: 4rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  expressive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.25rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 1.5rem,
-      ),
-    ),
-  ),
-  expressive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 129%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.75rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 2rem,
-      ),
-    ),
-  ),
-  expressive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 300,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 300,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 300,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 300,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-heading-06: (
-    font-size: 2rem,
-    font-weight: 600,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 600,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 600,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 600,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 600,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-paragraph-01: (
-    font-size: 1.5rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    lg: (
-      font-size: 1.75rem,
-      line-height: 129%,
-    ),
-    max: (
-      font-size: 2rem,
-      line-height: 125%,
-    ),
-  ),
-  quotation-01: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 1.25rem,
-        font-weight: 400,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 1.5rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 1.75rem,
-        font-weight: 400,
-        line-height: 129%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 2rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  quotation-02: (
-    font-size: 2rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        line-height: 122%,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        line-height: 119%,
-      ),
-      xlg: (
-        font-size: 3rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 3.75rem,
-      ),
-    ),
-  ),
-  display-01: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-02: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 116%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-03: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-  display-04: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-        letter-spacing: -0.64px,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-);
-```
-
-</details>
-
-- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
-- **Type**: `Map`
-- **Aliased**:
-  - `carbon--theme`
-
-### ✅carbon--theme--g10 [variable]
-
-Carbon's g10 color theme
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--theme--g10: (
-  interactive-01: #0f62fe,
-  interactive-02: #393939,
-  interactive-03: #0f62fe,
-  interactive-04: #0f62fe,
-  ui-background: #f4f4f4,
-  ui-01: #ffffff,
-  ui-02: #f4f4f4,
-  ui-03: #e0e0e0,
-  ui-04: #8d8d8d,
-  ui-05: #161616,
-  text-01: #161616,
-  text-02: #393939,
-  text-03: #a8a8a8,
-  text-04: #ffffff,
-  text-05: #6f6f6f,
-  icon-01: #161616,
-  icon-02: #525252,
-  icon-03: #ffffff,
-  link-01: #0f62fe,
-  inverse-link: #78a9ff,
-  field-01: #ffffff,
-  field-02: #f4f4f4,
-  inverse-01: #ffffff,
-  inverse-02: #393939,
-  support-01: #da1e28,
-  support-02: #24a148,
-  support-03: #f1c21b,
-  support-04: #0043ce,
-  inverse-support-01: #fa4d56,
-  inverse-support-02: #42be65,
-  inverse-support-03: #f1c21b,
-  inverse-support-04: #4589ff,
-  overlay-01: rgba(22, 22, 22, 0.5),
-  danger: #da1e28,
-  focus: #0f62fe,
-  inverse-focus-ui: #ffffff,
-  hover-primary: #0353e9,
-  active-primary: #002d9c,
-  hover-primary-text: #0043ce,
-  hover-secondary: #4c4c4c,
-  active-secondary: #6f6f6f,
-  hover-tertiary: #0353e9,
-  active-tertiary: #002d9c,
-  hover-ui: #e5e5e5,
-  active-ui: #c6c6c6,
-  selected-ui: #e0e0e0,
-  inverse-hover-ui: #4c4c4c,
-  hover-selected-ui: #cacaca,
-  hover-danger: #ba1b23,
-  active-danger: #750e13,
-  hover-row: #e5e5e5,
-  visited-link: #8a3ffc,
-  disabled-01: #ffffff,
-  disabled-02: #c6c6c6,
-  disabled-03: #8d8d8d,
-  highlight: #d0e2ff,
-  skeleton-01: #e5e5e5,
-  skeleton-02: #c6c6c6,
-  brand-01: #0f62fe,
-  brand-02: #393939,
-  brand-03: #0f62fe,
-  active-01: #c6c6c6,
-  hover-field: #e5e5e5,
-  caption-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  label-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  helper-text-01: (
-    font-size: 0.75rem,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  body-short-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  body-long-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.16px,
-  ),
-  body-short-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  body-long-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.5rem,
-    letter-spacing: 0,
-  ),
-  code-01: (
-    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  code-02: (
-    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.32px,
-  ),
-  heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  productive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 1.625rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 2.25rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 2.5rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-06: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 3.125rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-07: (
-    font-size: 3.375rem,
-    font-weight: 300,
-    line-height: 4rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  expressive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.25rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 1.5rem,
-      ),
-    ),
-  ),
-  expressive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 129%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.75rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 2rem,
-      ),
-    ),
-  ),
-  expressive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 300,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 300,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 300,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 300,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-heading-06: (
-    font-size: 2rem,
-    font-weight: 600,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 600,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 600,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 600,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 600,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-paragraph-01: (
-    font-size: 1.5rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    lg: (
-      font-size: 1.75rem,
-      line-height: 129%,
-    ),
-    max: (
-      font-size: 2rem,
-      line-height: 125%,
-    ),
-  ),
-  quotation-01: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 1.25rem,
-        font-weight: 400,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 1.5rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 1.75rem,
-        font-weight: 400,
-        line-height: 129%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 2rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  quotation-02: (
-    font-size: 2rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        line-height: 122%,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        line-height: 119%,
-      ),
-      xlg: (
-        font-size: 3rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 3.75rem,
-      ),
-    ),
-  ),
-  display-01: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-02: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 116%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-03: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-  display-04: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-        letter-spacing: -0.64px,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-);
-```
-
-</details>
-
-- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
-- **Type**: `Map`
-
-### ✅carbon--theme--g90 [variable]
-
-Carbon's g90 color theme
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--theme--g90: (
-  interactive-01: #0f62fe,
-  interactive-02: #6f6f6f,
-  interactive-03: #ffffff,
-  interactive-04: #4589ff,
-  ui-background: #262626,
-  ui-01: #393939,
-  ui-02: #525252,
-  ui-03: #525252,
-  ui-04: #8d8d8d,
-  ui-05: #f4f4f4,
-  text-01: #f4f4f4,
-  text-02: #c6c6c6,
-  text-03: #6f6f6f,
-  text-04: #ffffff,
-  text-05: #8d8d8d,
-  icon-01: #f4f4f4,
-  icon-02: #c6c6c6,
-  icon-03: #ffffff,
-  link-01: #78a9ff,
-  inverse-link: #0f62fe,
-  field-01: #393939,
-  field-02: #525252,
-  inverse-01: #161616,
-  inverse-02: #f4f4f4,
-  support-01: #fa4d56,
-  support-02: #42be65,
-  support-03: #f1c21b,
-  support-04: #4589ff,
-  inverse-support-01: #da1e28,
-  inverse-support-02: #24a148,
-  inverse-support-03: #f1c21b,
-  inverse-support-04: #0f62fe,
-  overlay-01: rgba(22, 22, 22, 0.7),
-  danger: #da1e28,
-  focus: #ffffff,
-  inverse-focus-ui: #0f62fe,
-  hover-primary: #0353e9,
-  active-primary: #002d9c,
-  hover-primary-text: #a6c8ff,
-  hover-secondary: #606060,
-  active-secondary: #393939,
-  hover-tertiary: #f4f4f4,
-  active-tertiary: #c6c6c6,
-  hover-ui: #4c4c4c,
-  active-ui: #6f6f6f,
-  selected-ui: #525252,
-  inverse-hover-ui: #e5e5e5,
-  hover-selected-ui: #656565,
-  hover-danger: #ba1b23,
-  active-danger: #750e13,
-  hover-row: #4c4c4c,
-  visited-link: #be95ff,
-  disabled-01: #393939,
-  disabled-02: #6f6f6f,
-  disabled-03: #8d8d8d,
-  highlight: #0043ce,
-  skeleton-01: #353535,
-  skeleton-02: #525252,
-  brand-01: #0f62fe,
-  brand-02: #6f6f6f,
-  brand-03: #ffffff,
-  active-01: #6f6f6f,
-  hover-field: #4c4c4c,
-  caption-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  label-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  helper-text-01: (
-    font-size: 0.75rem,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  body-short-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  body-long-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.16px,
-  ),
-  body-short-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  body-long-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.5rem,
-    letter-spacing: 0,
-  ),
-  code-01: (
-    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  code-02: (
-    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.32px,
-  ),
-  heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  productive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 1.625rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 2.25rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 2.5rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-06: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 3.125rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-07: (
-    font-size: 3.375rem,
-    font-weight: 300,
-    line-height: 4rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  expressive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.25rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 1.5rem,
-      ),
-    ),
-  ),
-  expressive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 129%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.75rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 2rem,
-      ),
-    ),
-  ),
-  expressive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 300,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 300,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 300,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 300,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-heading-06: (
-    font-size: 2rem,
-    font-weight: 600,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 600,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 600,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 600,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 600,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-paragraph-01: (
-    font-size: 1.5rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    lg: (
-      font-size: 1.75rem,
-      line-height: 129%,
-    ),
-    max: (
-      font-size: 2rem,
-      line-height: 125%,
-    ),
-  ),
-  quotation-01: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 1.25rem,
-        font-weight: 400,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 1.5rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 1.75rem,
-        font-weight: 400,
-        line-height: 129%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 2rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  quotation-02: (
-    font-size: 2rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        line-height: 122%,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        line-height: 119%,
-      ),
-      xlg: (
-        font-size: 3rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 3.75rem,
-      ),
-    ),
-  ),
-  display-01: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-02: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 116%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-03: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-  display-04: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-        letter-spacing: -0.64px,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-);
-```
-
-</details>
-
-- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
-- **Type**: `Map`
-
-### ✅carbon--theme--g100 [variable]
-
-Carbon's g100 color theme
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--theme--g100: (
-  interactive-01: #0f62fe,
-  interactive-02: #6f6f6f,
-  interactive-03: #ffffff,
-  interactive-04: #4589ff,
-  ui-background: #161616,
-  ui-01: #262626,
-  ui-02: #393939,
-  ui-03: #393939,
-  ui-04: #6f6f6f,
-  ui-05: #f4f4f4,
-  text-01: #f4f4f4,
-  text-02: #c6c6c6,
-  text-03: #6f6f6f,
-  text-04: #ffffff,
-  text-05: #8d8d8d,
-  icon-01: #f4f4f4,
-  icon-02: #c6c6c6,
-  icon-03: #ffffff,
-  link-01: #78a9ff,
-  inverse-link: #0f62fe,
-  field-01: #262626,
-  field-02: #393939,
-  inverse-01: #161616,
-  inverse-02: #f4f4f4,
-  support-01: #fa4d56,
-  support-02: #42be65,
-  support-03: #f1c21b,
-  support-04: #4589ff,
-  inverse-support-01: #da1e28,
-  inverse-support-02: #24a148,
-  inverse-support-03: #f1c21b,
-  inverse-support-04: #0f62fe,
-  overlay-01: rgba(22, 22, 22, 0.7),
-  danger: #da1e28,
-  focus: #ffffff,
-  inverse-focus-ui: #0f62fe,
-  hover-primary: #0353e9,
-  active-primary: #002d9c,
-  hover-primary-text: #a6c8ff,
-  hover-secondary: #606060,
-  active-secondary: #393939,
-  hover-tertiary: #f4f4f4,
-  active-tertiary: #c6c6c6,
-  hover-ui: #353535,
-  active-ui: #525252,
-  selected-ui: #393939,
-  inverse-hover-ui: #e5e5e5,
-  hover-selected-ui: #4c4c4c,
-  hover-danger: #ba1b23,
-  active-danger: #750e13,
-  hover-row: #353535,
-  visited-link: #be95ff,
-  disabled-01: #262626,
-  disabled-02: #525252,
-  disabled-03: #6f6f6f,
-  highlight: #002d9c,
-  skeleton-01: #353535,
-  skeleton-02: #393939,
-  brand-01: #0f62fe,
-  brand-02: #6f6f6f,
-  brand-03: #ffffff,
-  active-01: #525252,
-  hover-field: #353535,
-  caption-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  label-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  helper-text-01: (
-    font-size: 0.75rem,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  body-short-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  body-long-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.16px,
-  ),
-  body-short-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  body-long-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.5rem,
-    letter-spacing: 0,
-  ),
-  code-01: (
-    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  code-02: (
-    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.32px,
-  ),
-  heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  productive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 1.625rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 2.25rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 2.5rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-06: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 3.125rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-07: (
-    font-size: 3.375rem,
-    font-weight: 300,
-    line-height: 4rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  expressive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.25rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 1.5rem,
-      ),
-    ),
-  ),
-  expressive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 129%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.75rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 2rem,
-      ),
-    ),
-  ),
-  expressive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 300,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 300,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 300,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 300,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-heading-06: (
-    font-size: 2rem,
-    font-weight: 600,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 600,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 600,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 600,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 600,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-paragraph-01: (
-    font-size: 1.5rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    lg: (
-      font-size: 1.75rem,
-      line-height: 129%,
-    ),
-    max: (
-      font-size: 2rem,
-      line-height: 125%,
-    ),
-  ),
-  quotation-01: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 1.25rem,
-        font-weight: 400,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 1.5rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 1.75rem,
-        font-weight: 400,
-        line-height: 129%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 2rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  quotation-02: (
-    font-size: 2rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        line-height: 122%,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        line-height: 119%,
-      ),
-      xlg: (
-        font-size: 3rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 3.75rem,
-      ),
-    ),
-  ),
-  display-01: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-02: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 116%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-03: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-  display-04: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-        letter-spacing: -0.64px,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-);
-```
-
-</details>
-
-- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
-- **Type**: `Map`
-
-### ✅carbon--theme--v9 [variable]
-
-Carbon's v9 color theme
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--theme--v9: (
-  interactive-01: #3d70b2,
-  interactive-02: #5a6872,
-  interactive-03: #5a6872,
-  interactive-04: #3d70b2,
-  ui-background: #f4f7fb,
-  ui-01: #ffffff,
-  ui-02: #f4f7fb,
-  ui-03: #dfe3e6,
-  ui-04: #8897a2,
-  ui-05: #5a6872,
-  text-01: #152935,
-  text-02: #5a6872,
-  text-03: #cdd1d4,
-  text-04: #ffffff,
-  text-05: #5a6872,
-  icon-01: #3d70b2,
-  icon-02: #5a6872,
-  icon-03: #ffffff,
-  link-01: #3d70b2,
-  inverse-link: #5596e6,
-  field-01: #ffffff,
-  field-02: #f4f7fb,
-  inverse-01: #ffffff,
-  inverse-02: #272d33,
-  support-01: #e0182d,
-  support-02: #5aa700,
-  support-03: #efc100,
-  support-04: #5aaafa,
-  inverse-support-01: #ff5050,
-  inverse-support-02: #8cd211,
-  inverse-support-03: #fdd600,
-  inverse-support-04: #5aaafa,
-  overlay-01: rgba(223, 227, 230, 0.5),
-  danger: #da1e28,
-  focus: #3d70b2,
-  inverse-focus-ui: #3d70b2,
-  hover-primary: #30588c,
-  active-primary: #30588c,
-  hover-primary-text: #294c86,
-  hover-secondary: #4d5b65,
-  active-secondary: #414f59,
-  hover-tertiary: #5a6872,
-  active-tertiary: #414f59,
-  hover-ui: #eef4fc,
-  active-ui: #dfeafa,
-  selected-ui: #eef4fc,
-  inverse-hover-ui: #4c4c4c,
-  hover-selected-ui: #dfeafa,
-  hover-danger: #c70014,
-  active-danger: #ad1625,
-  hover-row: #eef4fc,
-  visited-link: #294c86,
-  disabled-01: #fafbfd,
-  disabled-02: #dfe3e6,
-  disabled-03: #cdd1d4,
-  highlight: #f4f7fb,
-  skeleton-01: rgba(61, 112, 178, 0.1),
-  skeleton-02: rgba(61, 112, 178, 0.1),
-  brand-01: #3d70b2,
-  brand-02: #5a6872,
-  brand-03: #5a6872,
-  active-01: #dfeafa,
-  hover-field: #eef4fc,
-  caption-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  label-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  helper-text-01: (
-    font-size: 0.75rem,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  body-short-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  body-long-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.16px,
-  ),
-  body-short-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  body-long-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.5rem,
-    letter-spacing: 0,
-  ),
-  code-01: (
-    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  code-02: (
-    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.32px,
-  ),
-  heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  productive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 1.625rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 2.25rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 2.5rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-06: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 3.125rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-07: (
-    font-size: 3.375rem,
-    font-weight: 300,
-    line-height: 4rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  expressive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.25rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 1.5rem,
-      ),
-    ),
-  ),
-  expressive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 129%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.75rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 2rem,
-      ),
-    ),
-  ),
-  expressive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 300,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 300,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 300,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 300,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-heading-06: (
-    font-size: 2rem,
-    font-weight: 600,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 600,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 600,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 600,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 600,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-paragraph-01: (
-    font-size: 1.5rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    lg: (
-      font-size: 1.75rem,
-      line-height: 129%,
-    ),
-    max: (
-      font-size: 2rem,
-      line-height: 125%,
-    ),
-  ),
-  quotation-01: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 1.25rem,
-        font-weight: 400,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 1.5rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 1.75rem,
-        font-weight: 400,
-        line-height: 129%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 2rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  quotation-02: (
-    font-size: 2rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        line-height: 122%,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        line-height: 119%,
-      ),
-      xlg: (
-        font-size: 3rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 3.75rem,
-      ),
-    ),
-  ),
-  display-01: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-02: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 116%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-03: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-  display-04: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-        letter-spacing: -0.64px,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-);
-```
-
-</details>
-
-- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
-- **Type**: `Map`
-
-### ✅carbon--theme--rocket [variable]
-
-Carbon's rocket color theme
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--theme--rocket: (
-  interactive-01: #025c53,
-  interactive-02: #333333,
-  interactive-03: #025c53,
-  interactive-04: #025c53,
-  ui-background: #ffffff,
-  ui-01: #efefef,
-  ui-02: #ffffff,
-  ui-03: #dcdcdc,
-  ui-04: #bcbcbc,
-  ui-05: #333333,
-  text-01: #333333,
-  text-02: #595959,
-  text-03: #bcbcbc,
-  text-04: #ffffff,
-  text-05: #6f6f6f,
-  icon-01: #333333,
-  icon-02: #595959,
-  icon-03: #ffffff,
-  link-01: #025c53,
-  inverse-link: #0f62fe,
-  field-01: #efefef,
-  field-02: #ffffff,
-  inverse-01: #ffffff,
-  inverse-02: #3d3d3d,
-  support-01: #bf3438,
-  support-02: #507300,
-  support-03: #8b6010,
-  support-04: #01453e,
-  inverse-support-01: #fccacc,
-  inverse-support-02: #c6ff40,
-  inverse-support-03: #fdd13a,
-  inverse-support-04: #93c7c2,
-  overlay-01: rgba(23, 23, 23, 0.5),
-  danger: #da1e28,
-  focus: #025c53,
-  inverse-focus-ui: #0f62fe,
-  hover-primary: #01453e,
-  active-primary: #012e29,
-  hover-primary-text: #012e29,
-  hover-secondary: #4c4c4c,
-  active-secondary: #6f6f6f,
-  hover-tertiary: #01453e,
-  active-tertiary: #012e29,
-  hover-ui: #e5e5e5,
-  active-ui: #bebebe,
-  selected-ui: #dcdcdc,
-  inverse-hover-ui: #e5e5e5,
-  hover-selected-ui: #cacaca,
-  hover-danger: #99292d,
-  active-danger: #99292d,
-  hover-row: #e5e5e5,
-  visited-link: #5b2e66,
-  disabled-01: #f3f3f3,
-  disabled-02: #bebebe,
-  disabled-03: #bcbcbc,
-  highlight: #c9deff,
-  skeleton-01: #e5e5e5,
-  skeleton-02: #bebebe,
-  brand-01: #025c53,
-  brand-02: #333333,
-  brand-03: #025c53,
-  active-01: #bebebe,
-  hover-field: #e5e5e5,
-  caption-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  label-01: (
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  helper-text-01: (
-    font-size: 0.75rem,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  body-short-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  body-long-01: (
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.16px,
-  ),
-  body-short-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  body-long-02: (
-    font-size: 1rem,
-    font-weight: 400,
-    line-height: 1.5rem,
-    letter-spacing: 0,
-  ),
-  code-01: (
-    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
-    font-size: 0.75rem,
-    font-weight: 400,
-    line-height: 1rem,
-    letter-spacing: 0.32px,
-  ),
-  code-02: (
-    font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
-    font-size: 0.875rem,
-    font-weight: 400,
-    line-height: 1.25rem,
-    letter-spacing: 0.32px,
-  ),
-  heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  productive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 1.625rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 2.25rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 2.5rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-06: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 3.125rem,
-    letter-spacing: 0,
-  ),
-  productive-heading-07: (
-    font-size: 3.375rem,
-    font-weight: 300,
-    line-height: 4rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-01: (
-    font-size: 0.875rem,
-    font-weight: 600,
-    line-height: 1.125rem,
-    letter-spacing: 0.16px,
-  ),
-  expressive-heading-02: (
-    font-size: 1rem,
-    font-weight: 600,
-    line-height: 1.375rem,
-    letter-spacing: 0,
-  ),
-  expressive-heading-03: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.25rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 1.5rem,
-      ),
-    ),
-  ),
-  expressive-heading-04: (
-    font-size: 1.75rem,
-    font-weight: 400,
-    line-height: 129%,
-    letter-spacing: 0,
-    breakpoints: (
-      xlg: (
-        font-size: 1.75rem,
-        line-height: 125%,
-      ),
-      max: (
-        font-size: 2rem,
-      ),
-    ),
-  ),
-  expressive-heading-05: (
-    font-size: 2rem,
-    font-weight: 400,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 300,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 300,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 300,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 300,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-heading-06: (
-    font-size: 2rem,
-    font-weight: 600,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        font-weight: 600,
-        line-height: 122%,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        font-weight: 600,
-        line-height: 119%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 3rem,
-        font-weight: 600,
-        line-height: 117%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 3.75rem,
-        font-weight: 600,
-        line-height: 4.375rem,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  expressive-paragraph-01: (
-    font-size: 1.5rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    lg: (
-      font-size: 1.75rem,
-      line-height: 129%,
-    ),
-    max: (
-      font-size: 2rem,
-      line-height: 125%,
-    ),
-  ),
-  quotation-01: (
-    font-size: 1.25rem,
-    font-weight: 400,
-    line-height: 130%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 1.25rem,
-        font-weight: 400,
-        letter-spacing: 0,
-      ),
-      lg: (
-        font-size: 1.5rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-      xlg: (
-        font-size: 1.75rem,
-        font-weight: 400,
-        line-height: 129%,
-        letter-spacing: 0,
-      ),
-      max: (
-        font-size: 2rem,
-        font-weight: 400,
-        line-height: 125%,
-        letter-spacing: 0,
-      ),
-    ),
-  ),
-  quotation-02: (
-    font-size: 2rem,
-    font-weight: 300,
-    line-height: 125%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.25rem,
-        line-height: 122%,
-      ),
-      lg: (
-        font-size: 2.625rem,
-        line-height: 119%,
-      ),
-      xlg: (
-        font-size: 3rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 3.75rem,
-      ),
-    ),
-  ),
-  display-01: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 117%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-02: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 2.625rem,
-      ),
-      lg: (
-        font-size: 3.375rem,
-      ),
-      xlg: (
-        font-size: 3.75rem,
-        line-height: 116%,
-      ),
-      max: (
-        font-size: 4.75rem,
-        line-height: 113%,
-      ),
-    ),
-  ),
-  display-03: (
-    font-size: 2.625rem,
-    font-weight: 300,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-  display-04: (
-    font-size: 2.625rem,
-    font-weight: 600,
-    line-height: 119%,
-    letter-spacing: 0,
-    breakpoints: (
-      md: (
-        font-size: 4.25rem,
-        line-height: 115%,
-      ),
-      lg: (
-        font-size: 5.75rem,
-        line-height: 111%,
-        letter-spacing: -0.64px,
-      ),
-      xlg: (
-        font-size: 7.625rem,
-        line-height: 107%,
-        letter-spacing: -0.64px,
-      ),
-      max: (
-        font-size: 9.75rem,
-        line-height: 105%,
-        letter-spacing: -0.96px,
-      ),
-    ),
-  ),
-);
-```
-
-</details>
-
-- **Group**: [@rocketsoftware/themes](#rocketsoftwarethemes)
-- **Type**: `Map`
+- **Group**: [@rocketsoftware/grid](#rocketsoftwaregrid)
+- **Type**: `String`
