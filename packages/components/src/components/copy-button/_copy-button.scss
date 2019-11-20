@@ -36,7 +36,7 @@
 
     &:before {
       @include layer('overlay');
-      @include type-style('label-01');
+      @include type-style('body-short-01');
       top: 1.1rem;
       padding: $spacing-2xs;
       color: $inverse-01;
