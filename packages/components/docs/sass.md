@@ -19614,6 +19614,7 @@ Pagination styles
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
+    display: flex;
     height: 100%;
   }
 
