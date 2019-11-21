@@ -13,7 +13,7 @@
   <div class="{{@root.prefix}}--modal-container{{#if size}} {{@root.prefix}}--modal-container--{{size}}{{/if}}">
     <div class="{{@root.prefix}}--modal-header">
       <p class="{{@root.prefix}}--modal-header__label {{@root.prefix}}--type-delta" id="modal-{{idSuffix}}-label">Optional label</p>
-      <p class="{{@root.prefix}}--modal-header__heading {{@root.prefix}}--type-beta" id="modal-{{idSuffix}}-heading">Modal heading</p>
+      <p class="{{@root.prefix}}--modal-header__heading {{@root.prefix}}--type-beta" id="modal-{{idSuffix}}-heading">{{#if hasBody}}Modal heading{{else}}Passive modal title as the message. Should be direct and 3 lines or less.{{/if}}</p>
       <button class="{{@root.prefix}}--modal-close" type="button" data-modal-close aria-label="close modal" {{#unless hasFooter}} data-modal-primary-focus{{/unless}}>
         {{ carbon-icon 'Close16' class=(add @root.prefix '--modal-close__icon') }}
       </button>
@@ -28,7 +28,7 @@
         <input id="text-input-{{idSuffix}}" type="text" class="{{@root.prefix}}--text-input" placeholder="Optional placeholder text"
           data-modal-primary-focus>
       </div>
-      {{else}}
+      {{else if hasBody}}
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue
         vitae
         tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla

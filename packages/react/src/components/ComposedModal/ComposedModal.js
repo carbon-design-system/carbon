@@ -65,7 +65,7 @@ export default class ComposedModal extends Component {
     /**
      * Specify the size variant.
      */
-    size: PropTypes.oneOf('xs', 'sm', 'lg'),
+    size: PropTypes.oneOf(['xs', 'sm', 'lg']),
   };
 
   static getDerivedStateFromProps({ open }, state) {
