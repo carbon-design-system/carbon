@@ -19,7 +19,7 @@ const {
   NODE_ENV = 'development',
 } = process.env;
 
-const useExternalCss = CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS === 'true';
+const useExternalCss = NODE_ENV === 'production';
 const useControlledStateWithEventListener =
   CARBON_REACT_USE_CONTROLLED_STATE_WITH_EVENT_LISTENER === 'true';
 const useRtl = CARBON_REACT_STORYBOOK_USE_RTL === 'true';
@@ -94,6 +94,36 @@ module.exports = ({ config, mode }) => {
     enforce: 'pre',
   });
 
+  const sassLoader = {
+    loader: 'sass-loader',
+    options: {
+      prependData() {
+        return `
+          $feature-flags: (
+            ui-shell: true,
+            enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+          );
+        `;
+      },
+      sassOptions: {
+        includePaths: [path.resolve(__dirname, '..', 'node_modules')],
+      },
+      sourceMap: true,
+    },
+  };
+
+  const fastSassLoader = {
+    loader: 'fast-sass-loader',
+    options: {
+      data: `
+        $feature-flags: (
+          ui-shell: true,
+          enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+        );
+      `,
+    },
+  };
+
   config.module.rules.push({
     test: /\.scss$/,
     sideEffects: true,
@@ -124,23 +154,7 @@ module.exports = ({ config, mode }) => {
           sourceMap: true,
         },
       },
-      {
-        loader: 'sass-loader',
-        options: {
-          prependData(loaderContext) {
-            return `
-              $feature-flags: (
-                ui-shell: true,
-                enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
-              );
-            `;
-          },
-          sassOptions: {
-            includePaths: [path.resolve(__dirname, '..', 'node_modules')],
-          },
-          sourceMap: true,
-        },
-      },
+      NODE_ENV === 'production' ? sassLoader : fastSassLoader,
     ],
   });
 
