@@ -3413,6 +3413,7 @@ $carbon--spacing-05: 1rem;
   - [slider [mixin]](#slider-mixin)
   - [padding-th [mixin]](#padding-th-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [tile [mixin]](#tile-mixin)
@@ -9648,6 +9649,8 @@ Include the `font-family` definition for the given name in your selector
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [carbon--font-family [function]](#carbon--font-family-function)
+- **Used by**:
+  - [snippet [mixin]](#snippet-mixin)
 
 ### ✅carbon--font-weights [variable]
 
@@ -13532,6 +13535,7 @@ Code snippet styles
 
   .#{$prefix}--btn--copy__feedback {
     @include type-style('body-short-01');
+    @include carbon--font-family('sans'); // Override one in code snippet
     z-index: z('overlay');
     font-weight: 400;
     left: inherit;
@@ -13643,9 +13647,27 @@ Code snippet styles
   }
 
   .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
-    top: rem(25px);
+    top: rem(
+      50.8px
+    ); // (The height of button) + (The height of the tooltip's triangle) + 4px
     left: 50%;
     right: auto;
+
+    &::before {
+      top: 0;
+    }
+
+    &:after {
+      top: rem(-4px);
+    }
+  }
+
+  .#{$prefix}--snippet--multi
+    .#{$prefix}--snippet-button
+    .#{$prefix}--btn--copy__feedback {
+    top: rem(
+      42.8px
+    ); // (The height of button) + (The height of the tooltip's triangle) + 4px
   }
 
   .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
@@ -13724,6 +13746,7 @@ Code snippet styles
 - **Group**: [code-snippet](#code-snippet)
 - **Requires**:
   - [bx--snippet [mixin]](#bx--snippet-mixin)
+  - [carbon--font-family [mixin]](#carbon--font-family-mixin)
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -16634,6 +16657,7 @@ File uploader styles
     margin-bottom: $carbon--spacing-03;
     display: inline-block;
     width: 100%;
+    max-width: rem(320px);
     color: $link-01;
     outline: none;
     transition: $duration--fast-02 motion(standard, productive);
@@ -16842,7 +16866,6 @@ File uploader styles
     align-items: flex-start;
     justify-content: space-between;
     height: rem(96px);
-    max-width: rem(320px);
     padding: $carbon--spacing-05;
     overflow: hidden;
     border: 1px dashed $ui-04;
@@ -21665,6 +21688,13 @@ Tabs styles
   }
 
   //-----------------------------
+  //  Tab Content Container
+  //-----------------------------
+  .#{$prefix}--tab-content {
+    padding: $carbon--spacing-05;
+  }
+
+  //-----------------------------
   // Skeleton state
   //-----------------------------
   .#{$prefix}--tabs.#{$prefix}--skeleton {
@@ -21712,6 +21742,7 @@ Tabs styles
   - [text-02 [variable]](#text-02-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
 
 ## tag
 
