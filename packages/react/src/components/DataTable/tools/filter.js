@@ -31,10 +31,10 @@ export const defaultFilterRows = ({ rowIds, headers, cellsById, inputValue }) =>
     })
   );
 
-export const defaultFilterHeaders = ({ headers, selectedColumns }) =>
+export const filterHeaders = ({ headers, selectedColumns }) =>
   headers.filter(header => selectedColumns.includes(header.key));
 
-export const defaultFilterRowColumns = ({ rows, selectedColumns }) => {
+export const filterColumns = ({ rows, selectedColumns }) => {
   return rows.map(row => ({
     ...row,
     cells: row.cells.filter(cell =>

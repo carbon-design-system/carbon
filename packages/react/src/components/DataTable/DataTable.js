@@ -14,8 +14,8 @@ import denormalize from './tools/denormalize';
 import { composeEventHandlers } from '../../tools/events';
 import {
   defaultFilterRows,
-  defaultFilterHeaders,
-  defaultFilterRowColumns,
+  filterHeaders,
+  filterColumns,
 } from './tools/filter';
 import { defaultSortRow } from './tools/sorting';
 import setupGetInstanceId from './tools/instanceId';
@@ -129,8 +129,8 @@ export default class DataTable extends React.Component {
   static defaultProps = {
     sortRow: defaultSortRow,
     filterRows: defaultFilterRows,
-    filterHeaders: defaultFilterHeaders,
-    filterRowColumns: defaultFilterRowColumns,
+    filterHeaders,
+    filterColumns,
     locale: 'en',
     translateWithId,
   };
@@ -616,7 +616,7 @@ export default class DataTable extends React.Component {
       children,
       filterRows,
       filterHeaders,
-      filterRowColumns,
+      filterColumns,
       headers,
       render,
     } = this.props;
@@ -641,16 +641,16 @@ export default class DataTable extends React.Component {
     const filteredHeaders = filterHeaders({ headers, selectedColumns });
     const renderProps = {
       // Data derived from state
-      rows: filterRowColumns({
+      rows: filterColumns({
         rows: denormalize(filteredRowIds, rowsById, cellsById),
         selectedColumns,
       }),
       headers: filteredHeaders,
-      selectedRows: filterRowColumns({
+      selectedRows: filterColumns({
         rows: denormalize(this.getSelectedRows(), rowsById, cellsById),
         selectedColumns,
       }),
-      size: rowHeight === 'short' ? 'short' : null,
+      size: rowHeight === 'short' ? 'short' : 'normal',
 
       // Prop accessors/getters
       getHeaderProps: this.getHeaderProps,
