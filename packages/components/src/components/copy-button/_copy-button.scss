@@ -12,7 +12,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 @import '../button/button';
-@import 'keyframes';
+@import '../../globals/scss/keyframes';
 
 @include exports('copy-button') {
   .#{$prefix}--btn--copy {
