@@ -51,7 +51,7 @@ export default props => (
             <TableToolbarSearch onChange={onInputChange} />
             <TableToolbarMenu>
               <TableToolbarRowHeight
-                initialSelected='default'
+                initialSelected='normal'
                 onChange={onRowHeightChange}
               />
               <TableToolbarColumns

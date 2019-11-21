@@ -20,13 +20,13 @@ const translateWithId = id => {
   return translationKeys[id];
 };
 
-const TableToolbarColumns = ({
+const TableToolbarColumns = React.forwardRef(({
   columns,
   initialSelected,
   translateWithId: t,
   onChange: onChangeProp,
   handleMenuItemFocus,
-}) => {
+}, ref) => {
   const [selected, setSelected] = useState(initialSelected);
 
   const onChange = (checked, id) => {
@@ -42,10 +42,10 @@ const TableToolbarColumns = ({
 
   return (
     <>
-      <TableToolbarTitle title={t('carbon.table.toolbar.columns.label')} />
+      <TableToolbarTitle ref={ref} title={t('carbon.table.toolbar.columns.label')} />
       {
         columns.map(column => (
-          <TableToolbarOption>
+          <TableToolbarOption key={column.key}>
             <Checkbox
               id={column.key}
               labelText={column.header}
@@ -59,7 +59,7 @@ const TableToolbarColumns = ({
       }
     </>
   );
-};
+});
 
 TableToolbarColumns.propTypes = {
   /**

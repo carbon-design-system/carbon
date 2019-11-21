@@ -16,19 +16,19 @@ import RadioButton from '../RadioButton';
 
 const translationKeys = {
   'carbon.table.toolbar.row.height.label': 'Row height',
-  'carbon.table.toolbar.row.height.default': 'Default (48px)',
+  'carbon.table.toolbar.row.height.normal': 'Default (48px)',
   'carbon.table.toolbar.row.height.short': 'Short (32px)',
 };
 const translateWithId = id => {
   return translationKeys[id];
 };
 
-const TableToolbarRowHeight = ({
+const TableToolbarRowHeight = React.forwardRef(({
   initialSelected,
   translateWithId: t,
   onChange: onChangeProp,
   handleMenuItemFocus,
-}) => {
+}, ref) => {
   const [selected, setSelected] = useState(initialSelected);
 
   const onChange = (id) => {
@@ -38,10 +38,10 @@ const TableToolbarRowHeight = ({
 
   return (
     <>
-      <TableToolbarTitle title={t('carbon.table.toolbar.row.height.label')} />
+      <TableToolbarTitle ref={ref} title={t('carbon.table.toolbar.row.height.label')} />
       <TableToolbarOption>
         <RadioButtonGroup
-           defaultSelected="default"
+           defaultSelected="normal"
            labelPosition="right"
            legend="Group Legend"
            name="radio-button-group"
@@ -50,9 +50,9 @@ const TableToolbarRowHeight = ({
            valueSelected={selected}
          >
            <RadioButton
-             id='default'
-             labelText={t('carbon.table.toolbar.row.height.default')}
-             value="default"
+             id='normal'
+             labelText={t('carbon.table.toolbar.row.height.normal')}
+             value="normal"
              onKeyDown={handleMenuItemFocus}
              data-table-toolbar-focusable
            />
@@ -67,7 +67,7 @@ const TableToolbarRowHeight = ({
       </TableToolbarOption>          
     </>
   );
-};
+});
 
 TableToolbarRowHeight.propTypes = {
   /**
