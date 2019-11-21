@@ -7,11 +7,11 @@
 
 {{#is variant "inline"}}
 <p>Here is an example of a text that a user would be reading. In this paragraph would be
-  <button data-copy-btn="" type="button"
-    class="{{@root.prefix}}--snippet {{@root.prefix}}--snippet--inline {{@root.prefix}}--btn--copy{{#if light}} {{@root.prefix}}--snippet--light{{/if}}"
+  <button data-copy-btn type="button"
+    class="{{@root.prefix}}--snippet {{@root.prefix}}--snippet--inline {{#if light}} {{@root.prefix}}--snippet--light{{/if}}"
     aria-label="Copy code" tabindex="0">
     <code>inline code</code>
-    <div class="{{@root.prefix}}--btn--copy__feedback" role="alert" data-feedback="Copied!"></div>
+    <span class="{{@root.prefix}}--assistive-text {{@root.prefix}}--copy-btn__feedback">Copied!</span>
   </button>
   that the user could look at and copy in to their code editor.</p>
 {{else}}
@@ -43,9 +43,9 @@
   );</code>
     </pre>
   </div>
-  <button data-copy-btn class="{{@root.prefix}}--snippet-button" type="button" aria-label="Copy" tabindex="0">
-    {{ carbon-icon 'Copy16' class=(add @root.prefix '--snippet__icon')}}
-    <div class="{{@root.prefix}}--btn--copy__feedback" role="alert" data-feedback="Copied!"></div>
+  <button data-copy-btn class="{{@root.prefix}}--copy-btn" type="button" tabindex="0">
+    <span class="{{@root.prefix}}--assistive-text {{@root.prefix}}--copy-btn__feedback">Copied!</span>
+    {{ carbon-icon 'Copy16' class=(add @root.prefix '--snippet__icon' hidden="true")}}
   </button>
   {{#is variant "multi"}}
   <button
