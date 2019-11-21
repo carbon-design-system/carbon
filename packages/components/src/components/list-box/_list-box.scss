@@ -89,19 +89,11 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--xl {
     height: rem(48px);
     max-height: rem(48px);
-
-    .#{$prefix}--list-box__field {
-      height: rem(48px);
-    }
   }
 
   .#{$prefix}--list-box--sm {
     height: rem(32px);
     max-height: rem(32px);
-
-    .#{$prefix}--list-box__field {
-      height: rem(32px);
-    }
   }
 
   .#{$prefix}--list-box--expanded {
@@ -265,7 +257,7 @@ $list-box-menu-width: rem(300px);
     display: inline-flex;
     align-items: center;
     vertical-align: top;
-    height: rem(40px);
+    height: calc(100% + 1px); // Account for the border in `.bx--list-box`
     padding: 0 $carbon--spacing-09 0 $carbon--spacing-05;
     cursor: pointer;
     outline: none;
