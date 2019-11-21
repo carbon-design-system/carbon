@@ -43,14 +43,30 @@ storiesOf('DataTable', module)
     }
   )
   .add(
-    'with toolbar',
+    'with toolbar (actions)',
     withReadme(readme, () =>
-      require('./stories/with-toolbar').default(props())
+      require('./stories/with-toolbar-actions').default(props())
     ),
     {
       info: {
         text: `
         DataTable with action menu and filtering.
+
+        You can find more detailed information surrounding usage of this component
+        at the following url: ${readmeURL}
+      `,
+      },
+    }
+  )
+  .add(
+    'with toolbar (settings)',
+    withReadme(readme, () =>
+      require('./stories/with-toolbar-settings').default(props())
+    ),
+    {
+      info: {
+        text: `
+        DataTable with settings menu and filtering.
 
         You can find more detailed information surrounding usage of this component
         at the following url: ${readmeURL}

@@ -44,7 +44,7 @@ export default props => (
     }) => (
       <TableContainer
         title="DataTable"
-        description="With toolbar"
+        description="With toolbar settings"
         {...getTableContainerProps()}>
         <TableToolbar>
           <TableToolbarContent>
