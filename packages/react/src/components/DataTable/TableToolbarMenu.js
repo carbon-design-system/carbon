@@ -7,10 +7,11 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { settings } from 'carbon-components';
-import OverflowMenu from '../OverflowMenu';
 import { Settings16 } from '@carbon/icons-react';
+import OverflowMenu from '../OverflowMenu';
+import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -21,6 +22,36 @@ const TableToolbarMenu = ({
   children,
   ...rest
 }) => {
+  const [focused, setFocus] = useState(0);
+
+  useEffect(() => {
+    updateMenuFocus();
+  });
+
+  const updateMenuFocus = () => {
+    const nodes = [...document.querySelectorAll('[data-table-toolbar-focusable]')];
+    if (nodes && focused >= 0 && nodes[focused]) {
+      nodes[focused].focus();
+    }
+  };
+
+  const handleMenuItemFocus = evt => {
+    const nodes = [...document.querySelectorAll('[data-table-toolbar-focusable]')];
+    const len = nodes.length;
+    if (match(evt, keys.ArrowDown)) {
+      setFocus((focused + 1) % len);
+    } else if (match(evt, keys.ArrowUp)) {
+      setFocus((focused - 1 + len) % len);
+    }
+  };
+
+  const childrenWithProps = React.Children.toArray(React.Children.toArray(children)).map(
+    (child) =>
+      React.cloneElement(child, {
+        handleMenuItemFocus,
+      })
+  );
+
   const toolbarActionClasses = cx(
     className,
     `${prefix}--toolbar-action ${prefix}--overflow-menu`
@@ -31,8 +62,9 @@ const TableToolbarMenu = ({
       className={toolbarActionClasses}
       title={iconDescription}
       flipped
+      onOpen={updateMenuFocus}
       {...rest}>
-      {children}
+      {childrenWithProps}
     </OverflowMenu>
   );
 };

@@ -27,6 +27,7 @@ const TableToolbarRowHeight = ({
   initialSelected,
   translateWithId: t,
   onChange: onChangeProp,
+  handleMenuItemFocus,
 }) => {
   const [selected, setSelected] = useState(initialSelected);
 
@@ -52,11 +53,15 @@ const TableToolbarRowHeight = ({
              id='default'
              labelText={t('carbon.table.toolbar.row.height.default')}
              value="default"
+             onKeyDown={handleMenuItemFocus}
+             data-table-toolbar-focusable
            />
            <RadioButton
              id='short'
              labelText={t('carbon.table.toolbar.row.height.short')}
              value="short"
+             onKeyDown={handleMenuItemFocus}
+             data-table-toolbar-focusable
            />
          </RadioButtonGroup>
       </TableToolbarOption>          

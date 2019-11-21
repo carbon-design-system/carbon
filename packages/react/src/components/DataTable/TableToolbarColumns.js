@@ -25,6 +25,7 @@ const TableToolbarColumns = ({
   initialSelected,
   translateWithId: t,
   onChange: onChangeProp,
+  handleMenuItemFocus,
 }) => {
   const [selected, setSelected] = useState(initialSelected);
 
@@ -50,6 +51,8 @@ const TableToolbarColumns = ({
               labelText={column.header}
               defaultChecked={selected.includes(column.key)}
               onChange={onChange}
+              onKeyDown={handleMenuItemFocus}
+              data-table-toolbar-focusable
             />
           </TableToolbarOption>          
         ))
