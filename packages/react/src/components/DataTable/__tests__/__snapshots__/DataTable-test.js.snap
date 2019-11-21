@@ -41,12 +41,15 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                 "key": "fieldB",
               },
             ],
+            "onColumnsChange": [Function],
             "onInputChange": [Function],
+            "onRowHeightChange": [Function],
             "radio": true,
             "rows": Array [],
             "selectAll": [Function],
             "selectRow": [Function],
             "selectedRows": Array [],
+            "size": "normal",
             "sortBy": [Function],
           },
         ],
@@ -222,7 +225,9 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                 "key": "fieldB",
               },
             ],
+            "onColumnsChange": [Function],
             "onInputChange": [Function],
+            "onRowHeightChange": [Function],
             "radio": true,
             "rows": Array [
               Object {
@@ -319,6 +324,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
             "selectAll": [Function],
             "selectRow": [Function],
             "selectedRows": Array [],
+            "size": "normal",
             "sortBy": [Function],
           },
         ],
@@ -825,12 +831,15 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                 "key": "fieldB",
               },
             ],
+            "onColumnsChange": [Function],
             "onInputChange": [Function],
+            "onRowHeightChange": [Function],
             "radio": undefined,
             "rows": Array [],
             "selectAll": [Function],
             "selectRow": [Function],
             "selectedRows": Array [],
+            "size": "normal",
             "sortBy": [Function],
           },
         ],
@@ -1061,7 +1070,9 @@ exports[`DataTable selection should render 1`] = `
                 "key": "fieldB",
               },
             ],
+            "onColumnsChange": [Function],
             "onInputChange": [Function],
+            "onRowHeightChange": [Function],
             "radio": undefined,
             "rows": Array [
               Object {
@@ -1158,6 +1169,7 @@ exports[`DataTable selection should render 1`] = `
             "selectAll": [Function],
             "selectRow": [Function],
             "selectedRows": Array [],
+            "size": "normal",
             "sortBy": [Function],
           },
         ],
@@ -1666,7 +1678,9 @@ exports[`DataTable should render 1`] = `
                 "key": "fieldB",
               },
             ],
+            "onColumnsChange": [Function],
             "onInputChange": [Function],
+            "onRowHeightChange": [Function],
             "radio": undefined,
             "rows": Array [
               Object {
@@ -1763,6 +1777,7 @@ exports[`DataTable should render 1`] = `
             "selectAll": [Function],
             "selectRow": [Function],
             "selectedRows": Array [],
+            "size": "normal",
             "sortBy": [Function],
           },
         ],
@@ -2346,6 +2361,7 @@ exports[`DataTable should render 1`] = `
                 <ForwardRef(OverflowMenu)
                   className="bx--toolbar-action bx--overflow-menu"
                   flipped={true}
+                  onOpen={[Function]}
                   renderIcon={
                     Object {
                       "$$typeof": Symbol(react.forward_ref),
@@ -2637,7 +2653,9 @@ exports[`DataTable sticky header should render 1`] = `
                 "key": "fieldB",
               },
             ],
+            "onColumnsChange": [Function],
             "onInputChange": [Function],
+            "onRowHeightChange": [Function],
             "radio": undefined,
             "rows": Array [
               Object {
@@ -2734,6 +2752,7 @@ exports[`DataTable sticky header should render 1`] = `
             "selectAll": [Function],
             "selectRow": [Function],
             "selectedRows": Array [],
+            "size": "normal",
             "sortBy": [Function],
           },
         ],
@@ -3321,6 +3340,7 @@ exports[`DataTable sticky header should render 1`] = `
                 <ForwardRef(OverflowMenu)
                   className="bx--toolbar-action bx--overflow-menu"
                   flipped={true}
+                  onOpen={[Function]}
                   renderIcon={
                     Object {
                       "$$typeof": Symbol(react.forward_ref),

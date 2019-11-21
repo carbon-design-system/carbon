@@ -51,7 +51,7 @@ DataTable.TableToolbarAction = TableToolbarAction;
 DataTable.TableToolbarContent = TableToolbarContent;
 DataTable.TableToolbarSearch = TableToolbarSearch;
 DataTable.TableToolbarMenu = TableToolbarMenu;
-DataTable.TableToolbarColumn = TableToolbarColumns;
+DataTable.TableToolbarColumns = TableToolbarColumns;
 DataTable.TableToolbarRowHeight = TableToolbarRowHeight;
 
 export {

@@ -129,8 +129,6 @@ export default class DataTable extends React.Component {
   static defaultProps = {
     sortRow: defaultSortRow,
     filterRows: defaultFilterRows,
-    filterHeaders,
-    filterColumns,
     locale: 'en',
     translateWithId,
   };
@@ -142,7 +140,6 @@ export default class DataTable extends React.Component {
     this.state = {
       ...getDerivedStateFromProps(props, {}),
       isExpandedAll: false, // Start with collapsed state, treat `undefined` as neutral state
-      selectedColumns: props.headers.map(header => header.key),
     };
     this.instanceId = getInstanceId();
   }
@@ -156,10 +153,17 @@ export default class DataTable extends React.Component {
       return;
     }
 
+    // headers
     const headers = this.props.headers.map(header => header.key);
     const nextHeaders = nextProps.headers.map(header => header.key);
 
     if (!isEqual(headers, nextHeaders)) {
+      this.setState(state => getDerivedStateFromProps(nextProps, state));
+      return;
+    }
+
+    // selected columns
+    if (!isEqual(this.props.selectedColumns, nextProps.selectedColumns)) {
       this.setState(state => getDerivedStateFromProps(nextProps, state));
       return;
     }
@@ -612,22 +616,8 @@ export default class DataTable extends React.Component {
   };
 
   render() {
-    const {
-      children,
-      filterRows,
-      filterHeaders,
-      filterColumns,
-      headers,
-      render,
-    } = this.props;
-    const {
-      filterInputValue,
-      selectedColumns,
-      rowHeight,
-      rowIds,
-      rowsById,
-      cellsById,
-    } = this.state;
+    const { children, filterRows, headers, render } = this.props;
+    const { filterInputValue, selectedColumns, rowHeight, rowIds, rowsById, cellsById } = this.state;
     const filteredRowIds =
       typeof filterInputValue === 'string'
         ? filterRows({

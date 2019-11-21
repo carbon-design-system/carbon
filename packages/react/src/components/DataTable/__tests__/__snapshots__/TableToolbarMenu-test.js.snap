@@ -14,6 +14,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
   <ForwardRef(OverflowMenu)
     className="custom-class bx--toolbar-action bx--overflow-menu"
     flipped={true}
+    onOpen={[Function]}
     renderIcon={
       Object {
         "$$typeof": Symbol(react.forward_ref),

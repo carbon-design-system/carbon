@@ -778,6 +778,13 @@ describe('DataTable', () => {
             header: 'Field C',
           },
         ],
+        selectedColumns: [
+          ...mockProps.headers,
+          {
+            key: 'fieldC',
+            header: 'Field C',
+          },
+        ],
       };
 
       wrapper.setProps(nextProps);
