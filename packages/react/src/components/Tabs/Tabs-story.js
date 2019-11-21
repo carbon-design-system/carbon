@@ -9,7 +9,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import classNames from 'classnames';
 import './Tabs-story.scss';
 import Tabs from '../Tabs';
