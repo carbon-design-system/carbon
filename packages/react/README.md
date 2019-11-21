@@ -1,6 +1,6 @@
 # carbon-components-react
 
-> A collection of [Carbon Components](https://github.com/carbon-design-system/carbon)
+> A collection of [Carbon Components](https://github.com/carbon-design-system/carbon/tree/master/packages/components)
 > implemented using [React](https://reactjs.org/).
 
 ### Getting Started
