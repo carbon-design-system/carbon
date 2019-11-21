@@ -1,6 +1,6 @@
 # carbon-components-react
 
-> A collection of [Carbon Components](https://github.com/IBM/carbon-components)
+> A collection of [Carbon Components](https://github.com/carbon-design-system/carbon)
 > implemented using [React](https://reactjs.org/).
 
 ### Getting Started
@@ -62,8 +62,7 @@ can see usage information in several ways:
 
 # :books: Documentation
 
-- See our documentation site
-  [here](http://carbondesignsystem.com/getting-started/developers) for full
+- See our [documentation site](https://www.carbondesignsystem.com/get-started/develop/react) for full
   how-to docs and guidelines
 - [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions
   to this repo
