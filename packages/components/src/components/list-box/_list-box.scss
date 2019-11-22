@@ -548,8 +548,9 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__menu-item__selected-icon {
     display: none;
     position: absolute;
-    top: rem(12px);
+    top: 50%;
     right: rem(16px);
+    transform: translateY(-50%);
   }
 
   .#{$prefix}--list-box__menu-item--active
