@@ -44,7 +44,7 @@ const TableToolbarColumns = React.forwardRef(({
     <>
       <TableToolbarTitle ref={ref} title={t('carbon.table.toolbar.columns.label')} />
       {
-        columns.map(column => (
+        (columns || []).map(column => (
           <TableToolbarOption key={column.key}>
             <Checkbox
               id={column.key}

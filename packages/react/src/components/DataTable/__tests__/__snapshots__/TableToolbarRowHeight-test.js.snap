@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.TableToolbarRowHeight should render 1`] = `
+<ForwardRef
+  handleMenuItemFocus={[MockFunction]}
+  initialSelected="short"
+  onChange={[MockFunction]}
+  translateWithId={[Function]}
+>
+  <ForwardRef
+    title="Row height"
+  >
+    <li
+      className="bx--table-toolbar-menu__title"
+      role="menuitem"
+    >
+      Row height
+    </li>
+  </ForwardRef>
+  <ForwardRef>
+    <li
+      className="bx--table-toolbar-menu__option"
+      role="menuitem"
+    >
+      <RadioButtonGroup
+        defaultSelected="normal"
+        labelPosition="right"
+        legend="Row Height"
+        name="row-height-radio-button-group"
+        onChange={[Function]}
+        orientation="vertical"
+        valueSelected="short"
+      >
+        <div
+          className="bx--form-item"
+        >
+          <div
+            className="bx--radio-button-group bx--radio-button-group--vertical bx--radio-button-group--label-right"
+          >
+            <ForwardRef(RadioButton)
+              checked={false}
+              data-table-toolbar-focusable={true}
+              id="normal"
+              key="normal/.0"
+              labelText="Default (48px)"
+              name="row-height-radio-button-group"
+              onChange={[Function]}
+              onKeyDown={[MockFunction]}
+              value="normal"
+            >
+              <RadioButton
+                checked={false}
+                data-table-toolbar-focusable={true}
+                id="normal"
+                innerRef={null}
+                labelPosition="right"
+                labelText="Default (48px)"
+                name="row-height-radio-button-group"
+                onChange={[Function]}
+                onKeyDown={[MockFunction]}
+                value="normal"
+              >
+                <div
+                  className="bx--radio-button-wrapper"
+                >
+                  <input
+                    checked={false}
+                    className="bx--radio-button"
+                    data-table-toolbar-focusable={true}
+                    id="normal"
+                    name="row-height-radio-button-group"
+                    onChange={[Function]}
+                    onKeyDown={[MockFunction]}
+                    type="radio"
+                    value="normal"
+                  />
+                  <label
+                    aria-label="Default (48px)"
+                    className="bx--radio-button__label"
+                    htmlFor="normal"
+                  >
+                    <span
+                      className="bx--radio-button__appearance"
+                    />
+                    <span
+                      className=""
+                    >
+                      Default (48px)
+                    </span>
+                  </label>
+                </div>
+              </RadioButton>
+            </ForwardRef(RadioButton)>
+            <ForwardRef(RadioButton)
+              checked={true}
+              data-table-toolbar-focusable={true}
+              id="short"
+              key="short/.1"
+              labelText="Short (32px)"
+              name="row-height-radio-button-group"
+              onChange={[Function]}
+              onKeyDown={[MockFunction]}
+              value="short"
+            >
+              <RadioButton
+                checked={true}
+                data-table-toolbar-focusable={true}
+                id="short"
+                innerRef={null}
+                labelPosition="right"
+                labelText="Short (32px)"
+                name="row-height-radio-button-group"
+                onChange={[Function]}
+                onKeyDown={[MockFunction]}
+                value="short"
+              >
+                <div
+                  className="bx--radio-button-wrapper"
+                >
+                  <input
+                    checked={true}
+                    className="bx--radio-button"
+                    data-table-toolbar-focusable={true}
+                    id="short"
+                    name="row-height-radio-button-group"
+                    onChange={[Function]}
+                    onKeyDown={[MockFunction]}
+                    type="radio"
+                    value="short"
+                  />
+                  <label
+                    aria-label="Short (32px)"
+                    className="bx--radio-button__label"
+                    htmlFor="short"
+                  >
+                    <span
+                      className="bx--radio-button__appearance"
+                    />
+                    <span
+                      className=""
+                    >
+                      Short (32px)
+                    </span>
+                  </label>
+                </div>
+              </RadioButton>
+            </ForwardRef(RadioButton)>
+          </div>
+        </div>
+      </RadioButtonGroup>
+    </li>
+  </ForwardRef>
+</ForwardRef>
+`;

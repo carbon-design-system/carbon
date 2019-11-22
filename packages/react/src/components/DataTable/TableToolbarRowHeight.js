@@ -43,8 +43,8 @@ const TableToolbarRowHeight = React.forwardRef(({
         <RadioButtonGroup
            defaultSelected="normal"
            labelPosition="right"
-           legend="Group Legend"
-           name="radio-button-group"
+           legend="Row Height"
+           name="row-height-radio-button-group"
            onChange={onChange}
            orientation="vertical"
            valueSelected={selected}

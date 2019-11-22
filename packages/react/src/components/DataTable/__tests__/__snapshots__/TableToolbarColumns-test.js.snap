@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.TableToolbarColumns should render - no columns defined 1`] = `
+<ForwardRef
+  translateWithId={[Function]}
+>
+  <ForwardRef
+    title="Edit column"
+  >
+    <li
+      className="bx--table-toolbar-menu__title"
+      role="menuitem"
+    >
+      Edit column
+    </li>
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`DataTable.TableToolbarColumns should render - some columns selected 1`] = `
+<ForwardRef
+  columns={
+    Array [
+      Object {
+        "header": "Column 1",
+        "key": "column1",
+      },
+      Object {
+        "header": "Column 2",
+        "key": "column2",
+      },
+    ]
+  }
+  handleMenuItemFocus={[MockFunction]}
+  initialSelected={
+    Array [
+      "column2",
+    ]
+  }
+  onChange={[MockFunction]}
+  translateWithId={[Function]}
+>
+  <ForwardRef
+    title="Edit column"
+  >
+    <li
+      className="bx--table-toolbar-menu__title"
+      role="menuitem"
+    >
+      Edit column
+    </li>
+  </ForwardRef>
+  <ForwardRef
+    key="column1"
+  >
+    <li
+      className="bx--table-toolbar-menu__option"
+      role="menuitem"
+    >
+      <ForwardRef(Checkbox)
+        data-table-toolbar-focusable={true}
+        defaultChecked={false}
+        id="column1"
+        indeterminate={false}
+        labelText="Column 1"
+        onChange={[Function]}
+        onKeyDown={[MockFunction]}
+      >
+        <div
+          className="bx--form-item bx--checkbox-wrapper"
+        >
+          <input
+            className="bx--checkbox"
+            data-table-toolbar-focusable={true}
+            defaultChecked={false}
+            id="column1"
+            onChange={[Function]}
+            onKeyDown={[MockFunction]}
+            type="checkbox"
+          />
+          <label
+            className="bx--checkbox-label"
+            htmlFor="column1"
+            title={null}
+          >
+            <span
+              className="bx--checkbox-label-text"
+            >
+              Column 1
+            </span>
+          </label>
+        </div>
+      </ForwardRef(Checkbox)>
+    </li>
+  </ForwardRef>
+  <ForwardRef
+    key="column2"
+  >
+    <li
+      className="bx--table-toolbar-menu__option"
+      role="menuitem"
+    >
+      <ForwardRef(Checkbox)
+        data-table-toolbar-focusable={true}
+        defaultChecked={true}
+        id="column2"
+        indeterminate={false}
+        labelText="Column 2"
+        onChange={[Function]}
+        onKeyDown={[MockFunction]}
+      >
+        <div
+          className="bx--form-item bx--checkbox-wrapper"
+        >
+          <input
+            className="bx--checkbox"
+            data-table-toolbar-focusable={true}
+            defaultChecked={true}
+            id="column2"
+            onChange={[Function]}
+            onKeyDown={[MockFunction]}
+            type="checkbox"
+          />
+          <label
+            className="bx--checkbox-label"
+            htmlFor="column2"
+            title={null}
+          >
+            <span
+              className="bx--checkbox-label-text"
+            >
+              Column 2
+            </span>
+          </label>
+        </div>
+      </ForwardRef(Checkbox)>
+    </li>
+  </ForwardRef>
+</ForwardRef>
+`;
