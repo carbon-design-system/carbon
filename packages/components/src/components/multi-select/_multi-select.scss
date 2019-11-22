@@ -45,12 +45,9 @@
     color: $text-01;
   }
 
-  .#{$prefix}--multi-select--filterable {
-    .#{$prefix}--list-box__selection--multi {
-      position: absolute;
-      left: $carbon--spacing-03;
-      right: auto;
-    }
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select
+    .#{$prefix}--text-input {
+    padding-left: $carbon--spacing-03;
   }
 
   .#{$prefix}--multi-select--selected .#{$prefix}--text-input {
