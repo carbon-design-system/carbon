@@ -35,7 +35,7 @@ yarn add carbon-components-react carbon-components carbon-icons
    [`carbon-components-react/.storybook/polyfills.js` file](./.storybook/polyfills.js)
    is required.
 
-If you want to try out `carbon-components-react`, you can also use
+If you only want to try out `carbon-components-react`, you can also use
 [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/master/packages/react/examples/codesandbox).
 
 [![Edit carbon-components-react](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/master/packages/react/examples/codesandbox)
