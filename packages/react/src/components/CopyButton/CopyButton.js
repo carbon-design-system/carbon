@@ -6,8 +6,9 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import classnames from 'classnames';
+import debounce from 'lodash/debounce';
 import { settings } from 'carbon-components';
 import { Copy16 } from '@carbon/icons-react';
 
@@ -22,21 +23,24 @@ export default function CopyButton({
   ...other
 }) {
   const [animation, setAnimation] = useState('');
-  const timeoutId = useRef(undefined);
   const classNames = classnames(`${prefix}--copy-btn`, className, {
     [`${prefix}--copy-btn--animating`]: animation,
     [`${prefix}--copy-btn--${animation}`]: animation,
   });
-  const handleClick = event => {
-    setAnimation('fade-in');
-    timeoutId.current && clearTimeout(timeoutId.current);
-    timeoutId.current = setTimeout(() => {
-      timeoutId.current = undefined;
+  const handleFadeOut = useCallback(
+    debounce(() => {
       setAnimation('fade-out');
-    }, feedbackTimeout);
-
-    onClick(event);
-  };
+    }, feedbackTimeout),
+    [feedbackTimeout]
+  );
+  const handleClick = useCallback(
+    event => {
+      setAnimation('fade-in');
+      onClick(event);
+      handleFadeOut();
+    },
+    [onClick, handleFadeOut]
+  );
   const handleAnimationEnd = event => {
     if (event.animationName === 'hide-feedback') {
       setAnimation('');
@@ -46,14 +50,12 @@ export default function CopyButton({
     }
   };
 
-  useEffect(() => {
-    return () => {
-      if (typeof timeoutId && timeoutId.current !== undefined) {
-        clearTimeout(timeoutId.current);
-        timeoutId.current = undefined;
-      }
-    };
-  }, []);
+  useEffect(
+    () => () => {
+      handleFadeOut.cancel();
+    },
+    [handleFadeOut]
+  );
 
   return (
     <button
