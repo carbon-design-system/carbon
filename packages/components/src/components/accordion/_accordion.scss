@@ -23,6 +23,26 @@
     width: 100%;
   }
 
+  .#{$prefix}--accordion--start {
+    .#{$prefix}--accordion__heading {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .#{$prefix}--accordion__arrow {
+      margin: 0 0 0 $carbon--spacing-03;
+      transform: rotate(0deg);
+    }
+
+    .#{$prefix}--accordion__item--active .#{$prefix}--accordion__arrow {
+      transform: rotate(90deg);
+    }
+
+    .#{$prefix}--accordion__content {
+      margin-left: $carbon--spacing-06;
+    }
+  }
+
   .#{$prefix}--accordion__item {
     transition: all $duration--fast-02 motion(standard, productive);
     border-top: 1px solid $ui-03;
