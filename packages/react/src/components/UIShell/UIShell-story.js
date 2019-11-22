@@ -41,6 +41,10 @@ import {
   SwitcherDivider,
 } from '../UIShell';
 
+SideNav.displayName = 'SideNav';
+SideNavMenu.displayName = 'SideNavMenu';
+SideNavMenuItem.displayName = 'SideNavMenuItem';
+
 const Fade16 = () => (
   <svg
     width="16"
