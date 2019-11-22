@@ -23,22 +23,6 @@
     width: 100%;
   }
 
-  .#{$prefix}--accordion--start {
-    .#{$prefix}--accordion__heading {
-      // Reverse `$accordion-flex-direction` token:
-      flex-direction: row;
-    }
-
-    .#{$prefix}--accordion__arrow {
-      // Alters `$accordion-arrow-margin` token:
-      margin: 2px 0 0 $carbon--spacing-03;
-    }
-
-    .#{$prefix}--accordion__content {
-      margin-left: $carbon--spacing-06;
-    }
-  }
-
   .#{$prefix}--accordion__item {
     transition: all $duration--fast-02 motion(standard, productive);
     border-top: 1px solid $ui-03;
@@ -123,6 +107,20 @@
     p {
       @include type-style('body-long-01');
     }
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__heading {
+    // Reverse `$accordion-flex-direction` token:
+    flex-direction: row;
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__arrow {
+    // Alters `$accordion-arrow-margin` token:
+    margin: 2px 0 0 $carbon--spacing-03;
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__content {
+    margin-left: $carbon--spacing-06;
   }
 
   .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content,
