@@ -28,7 +28,7 @@ export default function Copy({
   });
   const handleClick = event => {
     setAnimation('fade-in');
-    clearTimeout(timeoutId.current);
+    timeoutId.current && clearTimeout(timeoutId.current);
     timeoutId.current = setTimeout(() => {
       setAnimation('fade-out');
     }, feedbackTimeout);
