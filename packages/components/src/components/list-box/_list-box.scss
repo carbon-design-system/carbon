@@ -115,8 +115,10 @@ $list-box-menu-width: rem(300px);
   // invalid states
   .#{$prefix}--list-box__invalid-icon {
     position: absolute;
+    top: 50%;
     right: $carbon--spacing-08;
     fill: $support-01;
+    transform: translateY(-50%);
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__invalid-icon {
