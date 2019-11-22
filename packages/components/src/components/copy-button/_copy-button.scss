@@ -86,6 +86,11 @@
     height: $carbon--spacing-08;
     width: $carbon--spacing-08;
     background-color: $ui-01;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $hover-ui;
+    }
 
     &::before {
       @include tooltip--caret;
