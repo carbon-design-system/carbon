@@ -1,6 +1,7 @@
 # carbon-components-react
 
-> A collection of [Carbon Components](https://github.com/IBM/carbon-components)
+> A collection of
+> [Carbon Components](https://github.com/carbon-design-system/carbon/tree/master/packages/components)
 > implemented using [React](https://reactjs.org/).
 
 ### Getting Started
@@ -34,7 +35,7 @@ yarn add carbon-components-react carbon-components carbon-icons
    [`carbon-components-react/.storybook/polyfills.js` file](./.storybook/polyfills.js)
    is required.
 
-If you just want to try out `carbon-components-react`, you can also use
+If you only want to try out `carbon-components-react`, you can also use
 [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/master/packages/react/examples/codesandbox).
 
 [![Edit carbon-components-react](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/master/packages/react/examples/codesandbox)
@@ -62,9 +63,9 @@ can see usage information in several ways:
 
 # :books: Documentation
 
-- See our documentation site
-  [here](http://carbondesignsystem.com/getting-started/developers) for full
-  how-to docs and guidelines
+- See our
+  [documentation site](https://www.carbondesignsystem.com/get-started/develop/react)
+  for full how-to docs and guidelines
 - [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions
   to this repo
 - [🏃‍♀️ Migration Guides](./docs/migration)
