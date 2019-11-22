@@ -31,6 +31,7 @@ export default function CopyButton({
     setAnimation('fade-in');
     timeoutId.current && clearTimeout(timeoutId.current);
     timeoutId.current = setTimeout(() => {
+      timeoutId.current = undefined;
       setAnimation('fade-out');
     }, feedbackTimeout);
 

@@ -30,6 +30,7 @@ export default function Copy({
     setAnimation('fade-in');
     timeoutId.current && clearTimeout(timeoutId.current);
     timeoutId.current = setTimeout(() => {
+      timeoutId.current = undefined;
       setAnimation('fade-out');
     }, feedbackTimeout);
 
