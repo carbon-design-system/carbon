@@ -168,7 +168,7 @@ export default class Modal extends Component {
     modalLabel: '',
     selectorPrimaryFocus: '[data-modal-primary-focus]',
     focusTrap: true,
-    hasScrollingContent: true,
+    hasScrollingContent: false,
   };
 
   button = React.createRef();
@@ -340,6 +340,7 @@ export default class Modal extends Component {
 
     const contentClasses = classNames(`${prefix}--modal-content`, {
       [`${prefix}--modal-content--with-form`]: hasForm,
+      [`${prefix}--modal-scroll-content`]: hasScrollingContent,
     });
 
     const modalButton = (
@@ -371,6 +372,8 @@ export default class Modal extends Component {
           'aria-labelledby': getAriaLabelledBy,
         }
       : {};
+
+    console.log(hasScrollingContent);
 
     const modalBody = (
       <div
