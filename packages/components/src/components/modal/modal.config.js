@@ -12,6 +12,7 @@ const { prefix } = require('../../globals/js/settings');
 module.exports = {
   context: {
     prefix,
+    hasBody: true,
   },
   variants: [
     {
@@ -118,6 +119,62 @@ module.exports = {
         classPrimaryButton: `${prefix}--btn--primary`,
         classCloseButton: `${prefix}--btn--secondary`,
         size: 'lg',
+      },
+    },
+    {
+      name: 'titleonly-xs',
+      label: 'Title Only Modal (XS)',
+      context: {
+        idSuffix: Math.random()
+          .toString(36)
+          .substr(2),
+        hasBody: false,
+        hasFooter: true,
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
+        size: 'xs',
+      },
+    },
+    {
+      name: 'titleonly-sm',
+      label: 'Title Only Modal (Small)',
+      context: {
+        idSuffix: Math.random()
+          .toString(36)
+          .substr(2),
+        hasBody: false,
+        hasFooter: true,
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
+        size: 'sm',
+      },
+    },
+    {
+      name: 'titleonly-nofooter-xs',
+      label: 'Title Only Passive Modal (XS)',
+      context: {
+        idSuffix: Math.random()
+          .toString(36)
+          .substr(2),
+        hasBody: false,
+        hasFooter: false,
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
+        size: 'xs',
+      },
+    },
+    {
+      name: 'titleonly-nofooter-sm',
+      label: 'Title Only Passive Modal (Small)',
+      context: {
+        idSuffix: Math.random()
+          .toString(36)
+          .substr(2),
+        hasBody: false,
+        hasFooter: false,
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
+        size: 'sm',
       },
     },
     {

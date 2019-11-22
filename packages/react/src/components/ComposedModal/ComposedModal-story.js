@@ -27,19 +27,26 @@ const sizes = {
 };
 
 const props = {
-  composedModal: (includeOpen = true) => ({
-    open: includeOpen ? boolean('Open (open in <ComposedModal>)', true) : null,
+  composedModal: ({ titleOnly } = {}) => ({
+    open: boolean('Open (open in <ComposedModal>)', true),
     onKeyDown: action('onKeyDown'),
     danger: boolean('Danger mode (danger)', false),
     selectorPrimaryFocus: text(
       'Primary focus element selector (selectorPrimaryFocus)',
       '[data-modal-primary-focus]'
     ),
-    size: select('Size (size)', sizes),
+    size: select('Size (size)', sizes, titleOnly ? 'sm' : ''),
   }),
-  modalHeader: () => ({
+  modalHeader: ({ titleOnly } = {}) => ({
     label: text('Optional Label (label in <ModalHeader>)', 'Optional Label'),
-    title: text('Optional title (title in <ModalHeader>)', 'Example'),
+    title: text(
+      'Optional title (title in <ModalHeader>)',
+      titleOnly
+        ? `
+      Passive modal title as the message. Should be direct and 3 lines or less.
+    `.trim()
+        : 'Example'
+    ),
     iconDescription: text(
       'Close icon description (iconDescription in <ModalHeader>)',
       'Close'
@@ -188,6 +195,27 @@ storiesOf('ComposedModal', module)
         text: `
             Alternatively, you can just use the Modal components as wrapper elements and figure the children out yourself. We do suggest for the header you utilize the built in props for label and title though, for the footer it's mostly a composed element so creating the two buttons yourself (using the Button component) is probably the most straight-forward pattern.
           `,
+      },
+    }
+  )
+  .add(
+    'Title only',
+    () => {
+      const { size, ...rest } = props.composedModal({ titleOnly: true });
+      return (
+        <ComposedModal {...rest} size={size || undefined}>
+          <ModalHeader {...props.modalHeader({ titleOnly: true })} />
+          <ModalBody />
+          <ModalFooter {...props.modalFooter()} />
+        </ComposedModal>
+      );
+    },
+    {
+      info: {
+        text: `
+          In "small" and "xs" modals size, the title is allowed to span multiple lines and be used for the main message.
+          It should be less than 3 lines of text. If more room is required then use the standard body copy format.
+        `,
       },
     }
   )
