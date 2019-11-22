@@ -545,6 +545,18 @@ $list-box-menu-width: rem(300px);
     color: $text-01;
   }
 
+  .#{$prefix}--list-box__menu-item__selected-icon {
+    display: none;
+    position: absolute;
+    top: rem(12px);
+    right: rem(16px);
+  }
+
+  .#{$prefix}--list-box__menu-item--active
+    .#{$prefix}--list-box__menu-item__selected-icon {
+    display: block;
+  }
+
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {
     width: 100%;
   }
