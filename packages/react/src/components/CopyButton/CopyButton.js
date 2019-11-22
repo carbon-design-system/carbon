@@ -27,10 +27,6 @@ export default function CopyButton({
     [`${prefix}--copy-btn--animating`]: animation,
     [`${prefix}--copy-btn--${animation}`]: animation,
   });
-  const feedbackClassNames = classnames(
-    `${prefix}--assistive-text`,
-    `${prefix}--copy-btn__feedback`
-  );
   const handleClick = event => {
     setAnimation('fade-in');
     timeoutId.current = setTimeout(() => {
@@ -66,7 +62,10 @@ export default function CopyButton({
       title={iconDescription}
       onAnimationEnd={handleAnimationEnd}
       {...other}>
-      <span className={feedbackClassNames}>{feedback}</span>
+      <span
+        className={`${prefix}--assistive-text ${prefix}--copy-btn__feedback`}>
+        {feedback}
+      </span>
       <Copy16 className={`${prefix}--snippet__icon`} />
     </button>
   );
