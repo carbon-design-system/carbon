@@ -25,12 +25,13 @@
 
   .#{$prefix}--accordion--start {
     .#{$prefix}--accordion__heading {
+      // Reverse `$accordion-flex-direction` token:
       flex-direction: row;
-      align-items: center;
     }
 
     .#{$prefix}--accordion__arrow {
-      margin: 0 0 0 $carbon--spacing-03;
+      // Alters `$accordion-arrow-margin` token:
+      margin: 2px 0 0 $carbon--spacing-03;
     }
 
     .#{$prefix}--accordion__content {
