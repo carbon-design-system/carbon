@@ -28,6 +28,7 @@ export default function Copy({
   });
   const handleClick = event => {
     setAnimation('fade-in');
+    clearTimeout(timeoutId.current);
     timeoutId.current = setTimeout(() => {
       setAnimation('fade-out');
     }, feedbackTimeout);
@@ -46,7 +47,7 @@ export default function Copy({
   useEffect(() => {
     return () => {
       if (typeof timeoutId && timeoutId.current !== undefined) {
-        clearTimeout(timeoutId);
+        clearTimeout(timeoutId.current);
         timeoutId.current = undefined;
       }
     };
