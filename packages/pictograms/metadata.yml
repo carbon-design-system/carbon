@@ -268,7 +268,12 @@ icons:
     aliases:
       - berlin
     variants:
-      - name: berlin--brandenburg
+      - name: berlin--brandenburg--gate
+        friendly_name: Berlin brandenberg gate
+        usage: This is a description for usage
+        categories:
+          - name: Cities
+      - name: berlin--brandenburg # DEPRECATED: use berlin--brandenberg--gate instead
         friendly_name: Berlin brandenberg
         usage: This is a description for usage
         categories:
