@@ -50,6 +50,12 @@
     padding-left: $carbon--spacing-03;
   }
 
+  .#{$prefix}--multi-select--filterable
+    .#{$prefix}--list-box__selection--multi {
+    margin-left: $carbon--spacing-03;
+    margin-right: $carbon--spacing-01;
+  }
+
   .#{$prefix}--multi-select--selected .#{$prefix}--text-input {
     // this value will need to change based on the number of digits in
     // the number of items selected
