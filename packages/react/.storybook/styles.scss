@@ -1,0 +1,92 @@
+/**
+ * Copyright IBM Corp. 2019
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--font-face: true;
+$css--reset: true;
+$prefix: 'bx';
+
+// IMPORTANT: This import path should _not_ be used outside our source tree
+// as `src` directory is _not_ meant to be shipped in our NPM package.
+// Use e.g. `@import '~carbon-components/scss/globals/scss/styles.scss'` instead.
+@import '~carbon-components/scss/globals/scss/feature-flags';
+@import '~carbon-components/scss/globals/scss/vars';
+@import '~carbon-components/scss/globals/scss/colors';
+@import '~carbon-components/scss/globals/scss/theme';
+@import '~carbon-components/scss/globals/scss/mixins';
+@import '~carbon-components/scss/globals/scss/layout';
+@import '~carbon-components/scss/globals/scss/layer';
+@import '~carbon-components/scss/globals/scss/spacing';
+@import '~carbon-components/scss/globals/scss/typography';
+@import '~carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '~carbon-components/scss/globals/scss/css--reset';
+@import '~carbon-components/scss/globals/scss/css--font-face';
+@import '~carbon-components/scss/globals/scss/css--helpers';
+@import '~carbon-components/scss/globals/scss/css--body';
+@import '~carbon-components/scss/globals/grid/grid';
+@import '~carbon-components/src/globals/scss/functions';
+
+@import '~carbon-components/src/components/button/button';
+@import '~carbon-components/src/components/copy-button/copy-button';
+@import '~carbon-components/src/components/file-uploader/file-uploader';
+@import '~carbon-components/src/components/checkbox/checkbox';
+@import '~carbon-components/src/components/combo-box/combo-box';
+@import '~carbon-components/src/components/radio-button/radio-button';
+@import '~carbon-components/src/components/toggle/toggle';
+@import '~carbon-components/src/components/search/search';
+@import '~carbon-components/src/components/select/select';
+@import '~carbon-components/src/components/text-input/text-input';
+@import '~carbon-components/src/components/text-area/text-area';
+@import '~carbon-components/src/components/number-input/number-input';
+@import '~carbon-components/src/components/form/form';
+@import '~carbon-components/src/components/link/link';
+@import '~carbon-components/src/components/list-box/list-box';
+@import '~carbon-components/src/components/list/list';
+@import '~carbon-components/src/components/data-table/data-table';
+@import '~carbon-components/src/components/structured-list/structured-list';
+@import '~carbon-components/src/components/code-snippet/code-snippet';
+@import '~carbon-components/src/components/overflow-menu/overflow-menu';
+@import '~carbon-components/src/components/content-switcher/content-switcher';
+@import '~carbon-components/src/components/date-picker/date-picker';
+@import '~carbon-components/src/components/dropdown/dropdown';
+@import '~carbon-components/src/components/loading/loading';
+@import '~carbon-components/src/components/modal/modal';
+@import '~carbon-components/src/components/multi-select/multi-select';
+@import '~carbon-components/src/components/notification/inline-notification';
+@import '~carbon-components/src/components/notification/toast-notification';
+@import '~carbon-components/src/components/tooltip/tooltip';
+@import '~carbon-components/src/components/tabs/tabs';
+@import '~carbon-components/src/components/tag/tag';
+@import '~carbon-components/src/components/pagination/pagination';
+@import '~carbon-components/src/components/accordion/accordion';
+@import '~carbon-components/src/components/progress-indicator/progress-indicator';
+@import '~carbon-components/src/components/breadcrumb/breadcrumb';
+@import '~carbon-components/src/components/toolbar/toolbar';
+@import '~carbon-components/src/components/time-picker/time-picker';
+@import '~carbon-components/src/components/slider/slider';
+@import '~carbon-components/src/components/tile/tile';
+@import '~carbon-components/src/components/skeleton/skeleton';
+@import '~carbon-components/src/components/inline-loading/inline-loading';
+@import '~carbon-components/src/components/pagination-nav/pagination-nav';
+@import '~carbon-components/src/components/ui-shell/ui-shell';
+
+@if feature-flag-enabled('enable-css-custom-properties') {
+  :root {
+    @include carbon--theme($carbon--theme--white, true);
+  }
+
+  :root[storybook-carbon-theme='g10'] {
+    @include carbon--theme($carbon--theme--g10, true);
+  }
+
+  :root[storybook-carbon-theme='g90'] {
+    @include carbon--theme($carbon--theme--g90, true);
+  }
+
+  :root[storybook-carbon-theme='g100'] {
+    @include carbon--theme($carbon--theme--g100, true);
+  }
+}
