@@ -7,9 +7,9 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import { TableToolbarRowHeight } from '..';
+import { TableToolbarSettingSize } from '..';
 
-describe('DataTable.TableToolbarRowHeight', () => {
+describe('DataTable.TableToolbarSettingSize', () => {
   const mockOnChange = jest.fn();
   const mockHandleMenuItemFocus = jest.fn();
 
@@ -20,7 +20,7 @@ describe('DataTable.TableToolbarRowHeight', () => {
   it('should render', () => {
     const initialSelected = 'short';
     const wrapper = mount(
-      <TableToolbarRowHeight
+      <TableToolbarSettingSize
         initialSelected={initialSelected}
         onChange={mockOnChange}
         handleMenuItemFocus={mockHandleMenuItemFocus}
@@ -32,7 +32,7 @@ describe('DataTable.TableToolbarRowHeight', () => {
   it('should handle onChange', () => {
     const initialSelected = ['column1'];
     const wrapper = mount(
-      <TableToolbarRowHeight
+      <TableToolbarSettingSize
         initialSelected={initialSelected}
         onChange={mockOnChange}
         handleMenuItemFocus={mockHandleMenuItemFocus}

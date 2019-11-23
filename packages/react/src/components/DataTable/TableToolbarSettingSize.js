@@ -23,14 +23,13 @@ const translateWithId = id => {
   return translationKeys[id];
 };
 
-const TableToolbarRowHeight = React.forwardRef(({
-  initialSelected,
+const TableToolbarSettingSize = React.forwardRef(({
+  size,
   translateWithId: t,
   onChange: onChangeProp,
   handleMenuItemFocus,
 }, ref) => {
-  const [selected, setSelected] = useState(initialSelected);
-
+  const [selected, setSelected] = useState(size);
   const onChange = (id) => {
     setSelected(id);
     onChangeProp(id);
@@ -69,7 +68,7 @@ const TableToolbarRowHeight = React.forwardRef(({
   );
 });
 
-TableToolbarRowHeight.propTypes = {
+TableToolbarSettingSize.propTypes = {
   /**
    * Optional array of initially selected row height
    */
@@ -84,8 +83,8 @@ TableToolbarRowHeight.propTypes = {
   translateWithId: PropTypes.func.isRequired,
 };
 
-TableToolbarRowHeight.defaultProps = {
+TableToolbarSettingSize.defaultProps = {
   translateWithId,
 };
 
-export default TableToolbarRowHeight;
+export default TableToolbarSettingSize;

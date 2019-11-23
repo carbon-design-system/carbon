@@ -162,6 +162,12 @@ export default class DataTable extends React.Component {
       return;
     }
 
+    // selected size
+    if (!isEqual(this.props.size, nextProps.size)) {
+      this.setState(state => getDerivedStateFromProps(nextProps, state));
+      return;
+    }
+
     // selected columns
     if (!isEqual(this.props.selectedColumns, nextProps.selectedColumns)) {
       this.setState(state => getDerivedStateFromProps(nextProps, state));
@@ -364,7 +370,7 @@ export default class DataTable extends React.Component {
     } = this.props;
     return {
       useZebraStyles,
-      size: this.state.rowHeight || size,
+      size: this.state.size || size,
       isSortable,
       useStaticWidth,
       shouldShowBorder,
@@ -380,6 +386,18 @@ export default class DataTable extends React.Component {
 
     return {
       stickyHeader,
+    };
+  };
+
+  /**
+   * Helper utility to get the settings props.
+   */
+  getTableSettingsProps = () => {
+    const { headers, selectedColumns, size } = this.props;
+    return {
+      columns: headers,
+      selectedColumns: this.state.selectedColumns || selectedColumns,
+      size: this.state.size || size,
     };
   };
 
@@ -598,12 +616,12 @@ export default class DataTable extends React.Component {
   };
 
   /**
-   * Event handler for row height changes.
+   * Event handler for size (row height) changes.
    *
-   * @param {Array} rowHeight row height
+   * @param {Array} size row height
    */
-  handleOnRowHeightChange = rowHeight => {
-    this.setState({ rowHeight });
+  handleOnSizeChange = size => {
+    this.setState({ size });
   };
 
   /**
@@ -617,7 +635,7 @@ export default class DataTable extends React.Component {
 
   render() {
     const { children, filterRows, headers, render } = this.props;
-    const { filterInputValue, selectedColumns, rowHeight, rowIds, rowsById, cellsById } = this.state;
+    const { filterInputValue, selectedColumns, rowIds, rowsById, cellsById } = this.state;
     const filteredRowIds =
       typeof filterInputValue === 'string'
         ? filterRows({
@@ -640,7 +658,6 @@ export default class DataTable extends React.Component {
         rows: denormalize(this.getSelectedRows(), rowsById, cellsById),
         selectedColumns,
       }),
-      size: rowHeight === 'short' ? 'short' : 'normal',
 
       // Prop accessors/getters
       getHeaderProps: this.getHeaderProps,
@@ -650,10 +667,11 @@ export default class DataTable extends React.Component {
       getBatchActionProps: this.getBatchActionProps,
       getTableProps: this.getTableProps,
       getTableContainerProps: this.getTableContainerProps,
+      getTableSettingsProps: this.getTableSettingsProps,
 
       // Custom event handlers
       onInputChange: this.handleOnInputValueChange,
-      onRowHeightChange: this.handleOnRowHeightChange,
+      onSizeChange: this.handleOnSizeChange,
       onColumnsChange: this.handleOnColumnsChange,
 
       // Expose internal state change actions

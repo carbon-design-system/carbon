@@ -31,14 +31,21 @@ export const defaultFilterRows = ({ rowIds, headers, cellsById, inputValue }) =>
     })
   );
 
-export const filterHeaders = ({ headers, selectedColumns }) =>
-  headers.filter(header => selectedColumns.includes(header.key));
+export const filterHeaders = ({ headers, selectedColumns }) => {
+  if (Array.isArray(selectedColumns)) {
+    return headers.filter(header => selectedColumns.includes(header.key));
+  }
+  return headers;
+}
 
 export const filterColumns = ({ rows, selectedColumns }) => {
-  return rows.map(row => ({
-    ...row,
-    cells: row.cells.filter(cell =>
-      selectedColumns.includes(cell.info && cell.info.header)
-    ),
-  }));
+  if (Array.isArray(selectedColumns)) {
+    return rows.map(row => ({
+      ...row,
+      cells: row.cells.filter(cell =>
+        selectedColumns.includes(cell.info && cell.info.header)
+      ),
+    }));
+  }
+  return rows;
 };

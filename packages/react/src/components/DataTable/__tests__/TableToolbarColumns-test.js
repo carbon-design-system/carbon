@@ -7,9 +7,9 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import { TableToolbarColumns } from '..';
+import { TableToolbarSettingColumns } from '..';
 
-describe('DataTable.TableToolbarColumns', () => {
+describe('DataTable.TableToolbarSettingColumns', () => {
   const mockOnChange = jest.fn();
   const mockHandleMenuItemFocus = jest.fn();
 
@@ -24,7 +24,7 @@ describe('DataTable.TableToolbarColumns', () => {
 
   it('should render - no columns defined', () => {
     const wrapper = mount(
-      <TableToolbarColumns />
+      <TableToolbarSettingColumns />
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -32,7 +32,7 @@ describe('DataTable.TableToolbarColumns', () => {
   it('should render - some columns selected', () => {
     const initialSelected = ['column2'];
     const wrapper = mount(
-      <TableToolbarColumns
+      <TableToolbarSettingColumns
         columns={columns}
         initialSelected={initialSelected}
         onChange={mockOnChange}
@@ -45,7 +45,7 @@ describe('DataTable.TableToolbarColumns', () => {
   it('should handle onChange', () => {
     const initialSelected = ['column1'];
     const wrapper = mount(
-      <TableToolbarColumns
+      <TableToolbarSettingColumns
         columns={columns}
         initialSelected={initialSelected}
         onChange={mockOnChange}

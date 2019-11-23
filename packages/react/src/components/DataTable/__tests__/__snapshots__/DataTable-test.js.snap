@@ -31,6 +31,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getTableSettingsProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -43,13 +44,12 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
             ],
             "onColumnsChange": [Function],
             "onInputChange": [Function],
-            "onRowHeightChange": [Function],
+            "onSizeChange": [Function],
             "radio": true,
             "rows": Array [],
             "selectAll": [Function],
             "selectRow": [Function],
             "selectedRows": Array [],
-            "size": "normal",
             "sortBy": [Function],
           },
         ],
@@ -215,6 +215,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getTableSettingsProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -227,7 +228,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
             ],
             "onColumnsChange": [Function],
             "onInputChange": [Function],
-            "onRowHeightChange": [Function],
+            "onSizeChange": [Function],
             "radio": true,
             "rows": Array [
               Object {
@@ -324,7 +325,6 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
             "selectAll": [Function],
             "selectRow": [Function],
             "selectedRows": Array [],
-            "size": "normal",
             "sortBy": [Function],
           },
         ],
@@ -821,6 +821,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getTableSettingsProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -833,13 +834,12 @@ exports[`DataTable selection should have select-all default to un-checked if no 
             ],
             "onColumnsChange": [Function],
             "onInputChange": [Function],
-            "onRowHeightChange": [Function],
+            "onSizeChange": [Function],
             "radio": undefined,
             "rows": Array [],
             "selectAll": [Function],
             "selectRow": [Function],
             "selectedRows": Array [],
-            "size": "normal",
             "sortBy": [Function],
           },
         ],
@@ -1060,6 +1060,7 @@ exports[`DataTable selection should render 1`] = `
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getTableSettingsProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -1072,7 +1073,7 @@ exports[`DataTable selection should render 1`] = `
             ],
             "onColumnsChange": [Function],
             "onInputChange": [Function],
-            "onRowHeightChange": [Function],
+            "onSizeChange": [Function],
             "radio": undefined,
             "rows": Array [
               Object {
@@ -1169,7 +1170,6 @@ exports[`DataTable selection should render 1`] = `
             "selectAll": [Function],
             "selectRow": [Function],
             "selectedRows": Array [],
-            "size": "normal",
             "sortBy": [Function],
           },
         ],
@@ -1668,6 +1668,7 @@ exports[`DataTable should render 1`] = `
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getTableSettingsProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -1680,7 +1681,7 @@ exports[`DataTable should render 1`] = `
             ],
             "onColumnsChange": [Function],
             "onInputChange": [Function],
-            "onRowHeightChange": [Function],
+            "onSizeChange": [Function],
             "radio": undefined,
             "rows": Array [
               Object {
@@ -1777,7 +1778,6 @@ exports[`DataTable should render 1`] = `
             "selectAll": [Function],
             "selectRow": [Function],
             "selectedRows": Array [],
-            "size": "normal",
             "sortBy": [Function],
           },
         ],
@@ -2643,6 +2643,7 @@ exports[`DataTable sticky header should render 1`] = `
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getTableSettingsProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -2655,7 +2656,7 @@ exports[`DataTable sticky header should render 1`] = `
             ],
             "onColumnsChange": [Function],
             "onInputChange": [Function],
-            "onRowHeightChange": [Function],
+            "onSizeChange": [Function],
             "radio": undefined,
             "rows": Array [
               Object {
@@ -2752,7 +2753,6 @@ exports[`DataTable sticky header should render 1`] = `
             "selectAll": [Function],
             "selectRow": [Function],
             "selectedRows": Array [],
-            "size": "normal",
             "sortBy": [Function],
           },
         ],

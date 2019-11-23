@@ -20,14 +20,14 @@ const translateWithId = id => {
   return translationKeys[id];
 };
 
-const TableToolbarColumns = React.forwardRef(({
+const TableToolbarSettingColumns = React.forwardRef(({
   columns,
-  initialSelected,
+  selectedColumns,
   translateWithId: t,
   onChange: onChangeProp,
   handleMenuItemFocus,
 }, ref) => {
-  const [selected, setSelected] = useState(initialSelected);
+  const [selected, setSelected] = useState(selectedColumns);
 
   const onChange = (checked, id) => {
     const selectedSet = new Set(selected);
@@ -61,7 +61,7 @@ const TableToolbarColumns = React.forwardRef(({
   );
 });
 
-TableToolbarColumns.propTypes = {
+TableToolbarSettingColumns.propTypes = {
   /**
    * Provide an array of columns
    */
@@ -80,8 +80,8 @@ TableToolbarColumns.propTypes = {
   translateWithId: PropTypes.func.isRequired,
 };
 
-TableToolbarColumns.defaultProps = {
+TableToolbarSettingColumns.defaultProps = {
   translateWithId,
 };
 
-export default TableToolbarColumns;
+export default TableToolbarSettingColumns;

@@ -19,8 +19,8 @@ import DataTable, {
   TableToolbar,
   TableToolbarContent,
   TableToolbarSearch,
-  TableToolbarColumns,
-  TableToolbarRowHeight,
+  TableToolbarSettingColumns,
+  TableToolbarSettingSize,
   TableToolbarMenu,
 } from '..';
 
@@ -28,17 +28,20 @@ import { initialRows, headers as allHeaders } from './shared';
 
 export default props => (
   <DataTable
+    {...props}
     rows={initialRows}
     headers={allHeaders}
-    {...props}
+    size='short'
+    selectedColumns={allHeaders.map(header => header.key).filter(item => item !== 'protocol')}
     render={({
       rows,
       headers,
       getHeaderProps,
       getRowProps,
       getTableProps,
+      getTableSettingsProps,
       onInputChange,
-      onRowHeightChange,
+      onSizeChange,
       onColumnsChange,
       getTableContainerProps,
     }) => (
@@ -50,14 +53,13 @@ export default props => (
           <TableToolbarContent>
             <TableToolbarSearch onChange={onInputChange} />
             <TableToolbarMenu>
-              <TableToolbarRowHeight
-                initialSelected='normal'
-                onChange={onRowHeightChange}
+              <TableToolbarSettingSize
+                onChange={onSizeChange}
+                {...getTableSettingsProps()}
               />
-              <TableToolbarColumns
-                columns={allHeaders}
-                initialSelected={allHeaders.map(header => header.key)}
+              <TableToolbarSettingColumns
                 onChange={onColumnsChange}
+                {...getTableSettingsProps()}
               />
             </TableToolbarMenu>
             <Button onClick={action('ButtonCLick')}>Primary Button</Button>
