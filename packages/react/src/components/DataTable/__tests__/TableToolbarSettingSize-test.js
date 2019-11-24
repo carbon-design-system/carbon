@@ -18,10 +18,10 @@ describe('DataTable.TableToolbarSettingSize', () => {
   });
 
   it('should render', () => {
-    const initialSelected = 'short';
     const wrapper = mount(
       <TableToolbarSettingSize
-        initialSelected={initialSelected}
+        size='short'
+        sizeOptions={['normal', 'short']}
         onChange={mockOnChange}
         handleMenuItemFocus={mockHandleMenuItemFocus}
       />
@@ -30,10 +30,10 @@ describe('DataTable.TableToolbarSettingSize', () => {
   });
 
   it('should handle onChange', () => {
-    const initialSelected = ['column1'];
     const wrapper = mount(
       <TableToolbarSettingSize
-        initialSelected={initialSelected}
+        size='short'
+        sizeOptions={['normal', 'short']}
         onChange={mockOnChange}
         handleMenuItemFocus={mockHandleMenuItemFocus}
       />

@@ -16,8 +16,10 @@ import RadioButton from '../RadioButton';
 
 const translationKeys = {
   'carbon.table.toolbar.row.height.label': 'Row height',
-  'carbon.table.toolbar.row.height.normal': 'Default (48px)',
+  'carbon.table.toolbar.row.height.tall': 'Tall (64px)',
+  'carbon.table.toolbar.row.height.normal': 'Normal (48px)',
   'carbon.table.toolbar.row.height.short': 'Short (32px)',
+  'carbon.table.toolbar.row.height.compact': 'Compact (24px)',
 };
 const translateWithId = id => {
   return translationKeys[id];
@@ -25,6 +27,7 @@ const translateWithId = id => {
 
 const TableToolbarSettingSize = React.forwardRef(({
   size,
+  sizeOptions,
   translateWithId: t,
   onChange: onChangeProp,
   handleMenuItemFocus,
@@ -36,7 +39,7 @@ const TableToolbarSettingSize = React.forwardRef(({
   };
 
   return (
-    <>
+    <React.Fragment>
       <TableToolbarTitle ref={ref} title={t('carbon.table.toolbar.row.height.label')} />
       <TableToolbarOption>
         <RadioButtonGroup
@@ -48,23 +51,21 @@ const TableToolbarSettingSize = React.forwardRef(({
            orientation="vertical"
            valueSelected={selected}
          >
-           <RadioButton
-             id='normal'
-             labelText={t('carbon.table.toolbar.row.height.normal')}
-             value="normal"
-             onKeyDown={handleMenuItemFocus}
-             data-table-toolbar-focusable
-           />
-           <RadioButton
-             id='short'
-             labelText={t('carbon.table.toolbar.row.height.short')}
-             value="short"
-             onKeyDown={handleMenuItemFocus}
-             data-table-toolbar-focusable
-           />
+         {
+            sizeOptions.map(option => (
+              <RadioButton
+                key={option}
+                id={option}
+                labelText={t(`carbon.table.toolbar.row.height.${option}`)}
+                value={option}
+                onKeyDown={handleMenuItemFocus}
+                data-table-toolbar-focusable
+              />
+            ))
+         }
          </RadioButtonGroup>
       </TableToolbarOption>          
-    </>
+    </React.Fragment>
   );
 });
 
@@ -72,7 +73,7 @@ TableToolbarSettingSize.propTypes = {
   /**
    * Optional array of initially selected row height
    */
-  initialSelected: PropTypes.string,
+  size: PropTypes.string,
   /**
    * Provide an optional hook that is called each time the selection is updated
    */
@@ -81,10 +82,14 @@ TableToolbarSettingSize.propTypes = {
    * Provide custom text for the component for each translation id
    */
   translateWithId: PropTypes.func.isRequired,
+  sizeOptions: PropTypes.arrayOf(
+    PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
+  ),
 };
 
 TableToolbarSettingSize.defaultProps = {
   translateWithId,
+  sizeOptions: ['compact', 'short', 'normal', 'tall'],
 };
 
 export default TableToolbarSettingSize;

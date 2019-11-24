@@ -393,11 +393,12 @@ export default class DataTable extends React.Component {
    * Helper utility to get the settings props.
    */
   getTableSettingsProps = () => {
-    const { headers, selectedColumns, size } = this.props;
+    const { headers, selectedColumns, size, sizeOptions } = this.props;
     return {
       columns: headers,
       selectedColumns: this.state.selectedColumns || selectedColumns,
       size: this.state.size || size,
+      sizeOptions,
     };
   };
 

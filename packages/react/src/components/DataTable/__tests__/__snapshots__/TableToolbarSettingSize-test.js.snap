@@ -3,8 +3,14 @@
 exports[`DataTable.TableToolbarSettingSize should render 1`] = `
 <ForwardRef
   handleMenuItemFocus={[MockFunction]}
-  initialSelected="short"
   onChange={[MockFunction]}
+  size="short"
+  sizeOptions={
+    Array [
+      "normal",
+      "short",
+    ]
+  }
   translateWithId={[Function]}
 >
   <ForwardRef
@@ -29,6 +35,7 @@ exports[`DataTable.TableToolbarSettingSize should render 1`] = `
         name="row-height-radio-button-group"
         onChange={[Function]}
         orientation="vertical"
+        valueSelected="short"
       >
         <div
           className="bx--form-item"
@@ -37,23 +44,23 @@ exports[`DataTable.TableToolbarSettingSize should render 1`] = `
             className="bx--radio-button-group bx--radio-button-group--vertical bx--radio-button-group--label-right"
           >
             <ForwardRef(RadioButton)
-              checked={true}
+              checked={false}
               data-table-toolbar-focusable={true}
               id="normal"
-              key="normal/.0"
-              labelText="Default (48px)"
+              key=".$normal"
+              labelText="Normal (48px)"
               name="row-height-radio-button-group"
               onChange={[Function]}
               onKeyDown={[MockFunction]}
               value="normal"
             >
               <RadioButton
-                checked={true}
+                checked={false}
                 data-table-toolbar-focusable={true}
                 id="normal"
                 innerRef={null}
                 labelPosition="right"
-                labelText="Default (48px)"
+                labelText="Normal (48px)"
                 name="row-height-radio-button-group"
                 onChange={[Function]}
                 onKeyDown={[MockFunction]}
@@ -63,7 +70,7 @@ exports[`DataTable.TableToolbarSettingSize should render 1`] = `
                   className="bx--radio-button-wrapper"
                 >
                   <input
-                    checked={true}
+                    checked={false}
                     className="bx--radio-button"
                     data-table-toolbar-focusable={true}
                     id="normal"
@@ -74,7 +81,7 @@ exports[`DataTable.TableToolbarSettingSize should render 1`] = `
                     value="normal"
                   />
                   <label
-                    aria-label="Default (48px)"
+                    aria-label="Normal (48px)"
                     className="bx--radio-button__label"
                     htmlFor="normal"
                   >
@@ -84,17 +91,17 @@ exports[`DataTable.TableToolbarSettingSize should render 1`] = `
                     <span
                       className=""
                     >
-                      Default (48px)
+                      Normal (48px)
                     </span>
                   </label>
                 </div>
               </RadioButton>
             </ForwardRef(RadioButton)>
             <ForwardRef(RadioButton)
-              checked={false}
+              checked={true}
               data-table-toolbar-focusable={true}
               id="short"
-              key="short/.1"
+              key=".$short"
               labelText="Short (32px)"
               name="row-height-radio-button-group"
               onChange={[Function]}
@@ -102,7 +109,7 @@ exports[`DataTable.TableToolbarSettingSize should render 1`] = `
               value="short"
             >
               <RadioButton
-                checked={false}
+                checked={true}
                 data-table-toolbar-focusable={true}
                 id="short"
                 innerRef={null}
@@ -117,7 +124,7 @@ exports[`DataTable.TableToolbarSettingSize should render 1`] = `
                   className="bx--radio-button-wrapper"
                 >
                   <input
-                    checked={false}
+                    checked={true}
                     className="bx--radio-button"
                     data-table-toolbar-focusable={true}
                     id="short"

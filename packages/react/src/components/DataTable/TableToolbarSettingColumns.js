@@ -27,7 +27,7 @@ const TableToolbarSettingColumns = React.forwardRef(({
   onChange: onChangeProp,
   handleMenuItemFocus,
 }, ref) => {
-  const [selected, setSelected] = useState(selectedColumns);
+  const [selected, setSelected] = useState(selectedColumns || columns.map(item => item.key));
 
   const onChange = (checked, id) => {
     const selectedSet = new Set(selected);
@@ -44,7 +44,7 @@ const TableToolbarSettingColumns = React.forwardRef(({
     <>
       <TableToolbarTitle ref={ref} title={t('carbon.table.toolbar.columns.label')} />
       {
-        (columns || []).map(column => (
+        columns.map(column => (
           <TableToolbarOption key={column.key}>
             <Checkbox
               id={column.key}
@@ -81,6 +81,8 @@ TableToolbarSettingColumns.propTypes = {
 };
 
 TableToolbarSettingColumns.defaultProps = {
+  columns: [],
+  selectedColumns: [],
   translateWithId,
 };
 

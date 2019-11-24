@@ -35,8 +35,8 @@ const getDerivedStateFromProps = (props, prevState) => {
     // Optional state field to indicate whether a consumer should show a
     // batch actions menu
     shouldShowBatchActions: prevState.shouldShowBatchActions || false,
-    size: prevState.size || props.size,
-    selectedColumns: prevState.selectedColumns || props.selectedColumns || props.headers.map(header => header.key),
+    size: props.size,
+    selectedColumns: props.selectedColumns || props.headers.map(header => header.key),
   };
 
   if (prevState.sortDirection && prevState.sortHeaderKey) {

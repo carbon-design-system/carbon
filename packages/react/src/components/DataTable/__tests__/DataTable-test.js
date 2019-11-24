@@ -784,7 +784,7 @@ describe('DataTable', () => {
             key: 'fieldC',
             header: 'Field C',
           },
-        ],
+        ].map(item => item.key),
       };
 
       wrapper.setProps(nextProps);
