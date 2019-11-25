@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect, useCallback } from 'react';
 import classnames from 'classnames';
-import debounce from 'lodash/debounce';
+import debounce from 'lodash.debounce';
 import { settings } from 'carbon-components';
 import { Copy16 } from '@carbon/icons-react';
 

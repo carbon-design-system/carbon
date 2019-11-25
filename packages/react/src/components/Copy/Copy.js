@@ -7,7 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React, { useState, useEffect, useCallback } from 'react';
-import debounce from 'lodash/debounce';
+import debounce from 'lodash.debounce';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
 
