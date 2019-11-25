@@ -574,7 +574,6 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               value=""
                             />
                             <label
-                              aria-label="Select row"
                               className="bx--radio-button__label"
                               htmlFor="data-table-14__select-row-b"
                             >
@@ -661,7 +660,6 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               value=""
                             />
                             <label
-                              aria-label="Select row"
                               className="bx--radio-button__label"
                               htmlFor="data-table-14__select-row-a"
                             >
@@ -748,7 +746,6 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               value=""
                             />
                             <label
-                              aria-label="Select row"
                               className="bx--radio-button__label"
                               htmlFor="data-table-14__select-row-c"
                             >

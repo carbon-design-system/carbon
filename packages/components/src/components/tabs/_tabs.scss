@@ -32,7 +32,7 @@
     }
   }
 
-  .#{$prefix}--tabs--fixed {
+  .#{$prefix}--tabs--container {
     @include carbon--breakpoint(md) {
       min-height: rem(48px);
     }
@@ -42,7 +42,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 $carbon--spacing-05;
+    padding: 0 $spacing-05;
     height: rem(40px);
     cursor: pointer;
     color: $text-01;
@@ -159,7 +159,7 @@
     }
   }
 
-  .#{$prefix}--tabs--fixed .#{$prefix}--tabs__nav-item {
+  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item {
     @include carbon--breakpoint(md) {
       background-color: $ui-03;
 
@@ -205,7 +205,7 @@
     }
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
     @include carbon--breakpoint(md) {
       background-color: $hover-selected-ui;
@@ -225,16 +225,16 @@
     pointer-events: none;
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
     @include carbon--breakpoint(md) {
       background-color: $disabled-02;
     }
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--disabled
     .#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
@@ -266,9 +266,9 @@
     }
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled),
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--selected:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
     @include carbon--breakpoint(md) {
       background-color: $ui-01;
@@ -295,12 +295,12 @@
     color: $text-02;
     text-decoration: none;
     font-weight: 400;
-    padding: $carbon--spacing-04 0;
+    padding: $spacing-04 0;
     width: calc(100% - 32px);
     height: rem(40px);
     white-space: nowrap;
     text-overflow: ellipsis;
-    margin: 0 $carbon--spacing-05;
+    margin: 0 $spacing-05;
     line-height: rem(16px);
     border-bottom: 1px solid $ui-03;
     overflow: hidden;
@@ -317,7 +317,7 @@
 
     @include carbon--breakpoint(md) {
       border-bottom: $tab-underline-color;
-      padding: $carbon--spacing-03 $carbon--spacing-05;
+      padding: $spacing-03 $spacing-05;
       width: rem(160px);
       margin: 0;
       line-height: inherit;
@@ -325,13 +325,13 @@
       &:focus,
       &:active {
         width: rem(160px);
-        padding: $carbon--spacing-03 $carbon--spacing-05;
+        padding: $spacing-03 $spacing-05;
         border-bottom: 2px;
       }
     }
   }
 
-  .#{$prefix}--tabs--fixed a.#{$prefix}--tabs__nav-link {
+  .#{$prefix}--tabs--container a.#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
       display: flex;
       align-items: center;
@@ -352,7 +352,7 @@
     }
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
     .#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
@@ -379,7 +379,7 @@
     border-bottom: $tab-underline-disabled;
   }
 
-  .#{$prefix}--tabs--fixed
+  .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--disabled
     .#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
@@ -395,6 +395,13 @@
   .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
     a.#{$prefix}--tabs__nav-link:active {
     color: $text-02;
+  }
+
+  //-----------------------------
+  //  Tab Content Container
+  //-----------------------------
+  .#{$prefix}--tab-content {
+    padding: $carbon--spacing-05;
   }
 
   //-----------------------------

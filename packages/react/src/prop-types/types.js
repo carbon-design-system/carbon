@@ -5,15 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { oneOf } from 'prop-types';
-
-export const ButtonTypes = {
-  buttonKind: oneOf([
-    'primary',
-    'secondary',
-    'danger',
-    'ghost',
-    'danger--primary',
-    'tertiary',
-  ]),
-};
+export const ButtonKinds = [
+  'primary',
+  'secondary',
+  'danger',
+  'ghost',
+  'danger--primary',
+  'tertiary',
+];

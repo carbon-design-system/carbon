@@ -12,6 +12,7 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
+import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
 
 const { prefix } = settings;
 
@@ -60,6 +61,11 @@ export default class ComposedModal extends Component {
      * focused when the Modal opens
      */
     selectorPrimaryFocus: PropTypes.string,
+
+    /**
+     * Specify the size variant.
+     */
+    size: PropTypes.oneOf(['xs', 'sm', 'lg']),
   };
 
   static getDerivedStateFromProps({ open }, state) {
@@ -88,7 +94,7 @@ export default class ComposedModal extends Component {
   handleKeyDown = evt => {
     // Esc key
     if (evt.which === 27) {
-      this.closeModal();
+      this.closeModal(evt);
     }
 
     this.props.onKeyDown(evt);
@@ -99,7 +105,7 @@ export default class ComposedModal extends Component {
       this.innerModal.current &&
       !this.innerModal.current.contains(evt.target)
     ) {
-      this.closeModal();
+      this.closeModal(evt);
     }
   };
 
@@ -122,16 +128,16 @@ export default class ComposedModal extends Component {
     }
   };
 
-  componentDidUpdate(prevProps) {
-    if (!prevProps.open && this.props.open) {
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevState.open && this.state.open) {
       this.beingOpen = true;
-    } else if (prevProps.open && !this.props.open) {
+    } else if (prevState.open && !this.state.open) {
       this.beingOpen = false;
     }
     toggleClass(
       document.body,
       `${prefix}--body--with-modal-open`,
-      this.props.open
+      this.state.open
     );
   }
 
@@ -147,6 +153,10 @@ export default class ComposedModal extends Component {
       this.button.current.focus();
     }
   };
+
+  componentWillUnmount() {
+    toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+  }
 
   componentDidMount() {
     toggleClass(
@@ -171,9 +181,9 @@ export default class ComposedModal extends Component {
     }
   };
 
-  closeModal = () => {
+  closeModal = evt => {
     const { onClose } = this.props;
-    if (!onClose || onClose() !== false) {
+    if (!onClose || onClose(evt) !== false) {
       this.setState({
         open: false,
       });
@@ -188,6 +198,7 @@ export default class ComposedModal extends Component {
       children,
       danger,
       selectorPrimaryFocus, // eslint-disable-line
+      size,
       ...other
     } = this.props;
 
@@ -200,6 +211,7 @@ export default class ComposedModal extends Component {
 
     const containerClass = classNames({
       [`${prefix}--modal-container`]: true,
+      [`${prefix}--modal-container--${size}`]: size,
       [containerClassName]: containerClassName,
     });
 
@@ -299,12 +311,12 @@ export class ModalHeader extends Component {
   };
 
   static defaultProps = {
-    iconDescription: 'Close the modal',
+    iconDescription: 'Close',
     buttonOnClick: () => {},
   };
 
-  handleCloseButtonClick = () => {
-    this.props.closeModal();
+  handleCloseButtonClick = evt => {
+    this.props.closeModal(evt);
     this.props.buttonOnClick();
   };
 
@@ -361,37 +373,64 @@ export class ModalHeader extends Component {
           onClick={this.handleCloseButtonClick}
           className={closeClass}
           title={iconDescription}
+          aria-label={iconDescription}
           type="button">
-          <Close20 aria-label={iconDescription} className={closeIconClass} />
+          <Close20 className={closeIconClass} />
         </button>
       </div>
     );
   }
 }
 
-export class ModalBody extends Component {
-  static propTypes = {
-    /**
-     * Specify an optional className to be added to the Modal Body node
-     */
-    className: PropTypes.string,
-  };
-
-  render() {
-    const { className, children, ...other } = this.props;
-
-    const contentClass = classNames({
-      [`${prefix}--modal-content`]: true,
-      [className]: className,
-    });
-
-    return (
-      <div className={contentClass} {...other}>
+export function ModalBody(props) {
+  const { className, children, hasForm, hasScrollingContent, ...other } = props;
+  const contentClass = classNames({
+    [`${prefix}--modal-content`]: true,
+    [`${prefix}--modal-content--with-form`]: hasForm,
+    [className]: className,
+  });
+  const hasScrollingContentProps = hasScrollingContent
+    ? {
+        tabIndex: 0,
+        role: 'region',
+      }
+    : {};
+  return (
+    <>
+      <div className={contentClass} {...hasScrollingContentProps} {...other}>
         {children}
       </div>
-    );
-  }
+      {hasScrollingContent && (
+        <div className={`${prefix}--modal-content--overflow-indicator`} />
+      )}
+    </>
+  );
 }
+ModalBody.propTypes = {
+  /**
+   * Specify an optional className to be added to the Modal Body node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Provide whether the modal content has a form element.
+   * If `true` is used here, non-form child content should have `bx--modal-content__regular-content` class.
+   */
+  hasForm: PropTypes.bool,
+
+  /**
+   * Specify whether the modal contains scrolling content
+   */
+  hasScrollingContent: PropTypes.bool,
+
+  /**
+   * Required props for the accessibility label of the header
+   */
+  ['aria-label']: requiredIfGivenPropExists(
+    'hasScrollingContent',
+    PropTypes.string
+  ),
+};
 
 export class ModalFooter extends Component {
   static propTypes = {
@@ -454,7 +493,7 @@ export class ModalFooter extends Component {
   };
 
   handleRequestClose = evt => {
-    this.props.closeModal();
+    this.props.closeModal(evt);
     this.props.onRequestClose(evt);
   };
 
