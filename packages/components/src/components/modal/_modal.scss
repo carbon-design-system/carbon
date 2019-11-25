@@ -266,11 +266,7 @@
     position: absolute;
     left: 0;
     bottom: $spacing-08;
-    background-image: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0),
-      $ui-01
-    );
+    background-image: linear-gradient(to bottom, transparent, $ui-01);
   }
 
   .#{$prefix}--modal-content:focus
