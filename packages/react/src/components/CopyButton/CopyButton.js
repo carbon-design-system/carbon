@@ -74,6 +74,7 @@ export default function CopyButton({
     </button>
   );
 }
+
 CopyButton.propTypes = {
   /**
    * Specify an optional className to be applied to the underlying <button>
@@ -103,6 +104,7 @@ CopyButton.propTypes = {
    */
   onClick: PropTypes.func,
 };
+
 CopyButton.defaultProps = {
   iconDescription: 'Copy to clipboard',
   feedback: 'Copied!',

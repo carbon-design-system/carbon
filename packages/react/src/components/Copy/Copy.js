@@ -71,6 +71,7 @@ export default function Copy({
     </button>
   );
 }
+
 Copy.propTypes = {
   /**
    * Pass in content to be rendred in the underlying <button>
@@ -99,6 +100,7 @@ Copy.propTypes = {
    */
   onClick: PropTypes.func,
 };
+
 Copy.defaultProps = {
   feedback: 'Copied!',
   feedbackTimeout: 2000,
