@@ -23,11 +23,11 @@ const translateWithId = id => {
 const TableToolbarSettingColumns = React.forwardRef(({
   columns,
   selectedColumns,
-  translateWithId: t,
   onChange: onChangeProp,
   handleMenuItemFocus,
+  translateWithId: t,
 }, ref) => {
-  const [selected, setSelected] = useState(selectedColumns || columns.map(item => item.key));
+  const [selected, setSelected] = useState(selectedColumns);
 
   const onChange = (checked, id) => {
     const selectedSet = new Set(selected);
@@ -41,7 +41,7 @@ const TableToolbarSettingColumns = React.forwardRef(({
   };
 
   return (
-    <>
+    <React.Fragment>
       <TableToolbarTitle ref={ref} title={t('carbon.table.toolbar.columns.label')} />
       {
         columns.map(column => (
@@ -57,7 +57,7 @@ const TableToolbarSettingColumns = React.forwardRef(({
           </TableToolbarOption>          
         ))
       }
-    </>
+    </React.Fragment>
   );
 });
 
@@ -67,13 +67,17 @@ TableToolbarSettingColumns.propTypes = {
    */
   columns: PropTypes.array.isRequired,
   /**
-   * Optional array of initially selected columns
+   * Provide an optional array of initially selected columns
    */
-  initialSelected: PropTypes.array,
+  selectedColumns: PropTypes.array,
   /**
    * Provide an optional hook that is called each time the selection is updated
    */
   onChange: PropTypes.func,
+  /**
+   * Provide an optional hook that is called each time a key is pressed
+   */
+  handleMenuItemFocus: PropTypes.func,
   /**
    * Provide custom text for the component for each translation id
    */

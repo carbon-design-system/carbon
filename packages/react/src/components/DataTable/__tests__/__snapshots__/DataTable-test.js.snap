@@ -3596,3 +3596,1218 @@ exports[`DataTable sticky header should render 1`] = `
   </TableContainer>
 </DataTable>
 `;
+
+exports[`DataTable table settings should render 1`] = `
+<DataTable
+  filterRows={[Function]}
+  headers={
+    Array [
+      Object {
+        "header": "Field A",
+        "key": "fieldA",
+      },
+      Object {
+        "header": "Field B",
+        "key": "fieldB",
+      },
+    ]
+  }
+  locale="en"
+  render={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "expandAll": [Function],
+            "expandRow": [Function],
+            "getBatchActionProps": [Function],
+            "getExpandHeaderProps": [Function],
+            "getHeaderProps": [Function],
+            "getRowProps": [Function],
+            "getSelectionProps": [Function],
+            "getTableContainerProps": [Function],
+            "getTableProps": [Function],
+            "getTableSettingsProps": [Function],
+            "headers": Array [
+              Object {
+                "header": "Field A",
+                "key": "fieldA",
+              },
+            ],
+            "onColumnsChange": [Function],
+            "onInputChange": [Function],
+            "onSizeChange": [Function],
+            "radio": undefined,
+            "rows": Array [
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:A",
+                  },
+                ],
+                "disabled": false,
+                "id": "b",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:A",
+                  },
+                ],
+                "disabled": false,
+                "id": "a",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+            ],
+            "selectAll": [Function],
+            "selectRow": [Function],
+            "selectedRows": Array [],
+            "sortBy": [Function],
+          },
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": <TableContainer
+            description="With toolbar settings"
+            title="DataTable"
+          >
+            <TableToolbar
+              aria-label="data table toolbar"
+            >
+              <TableToolbarContent>
+                <TableToolbarSearch
+                  onChange={[Function]}
+                  persistent={false}
+                  translateWithId={[Function]}
+                />
+                <TableToolbarMenu
+                  iconDescription="Settings"
+                  open={true}
+                  renderIcon={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "render": [Function],
+                    }
+                  }
+                >
+                  <ForwardRef
+                    columns={
+                      Array [
+                        Object {
+                          "header": "Field A",
+                          "key": "fieldA",
+                        },
+                        Object {
+                          "header": "Field B",
+                          "key": "fieldB",
+                        },
+                      ]
+                    }
+                    onChange={[Function]}
+                    selectedColumns={
+                      Array [
+                        "fieldA",
+                      ]
+                    }
+                    size="short"
+                    sizeOptions={
+                      Array [
+                        "tall",
+                        "normal",
+                        "short",
+                      ]
+                    }
+                    translateWithId={[Function]}
+                  />
+                  <ForwardRef
+                    columns={
+                      Array [
+                        Object {
+                          "header": "Field A",
+                          "key": "fieldA",
+                        },
+                        Object {
+                          "header": "Field B",
+                          "key": "fieldB",
+                        },
+                      ]
+                    }
+                    onChange={[Function]}
+                    selectedColumns={
+                      Array [
+                        "fieldA",
+                      ]
+                    }
+                    size="short"
+                    sizeOptions={
+                      Array [
+                        "tall",
+                        "normal",
+                        "short",
+                      ]
+                    }
+                    translateWithId={[Function]}
+                  />
+                </TableToolbarMenu>
+              </TableToolbarContent>
+            </TableToolbar>
+            <Table
+              isSortable={false}
+              size="short"
+            >
+              <TableHead>
+                <TableRow>
+                  <TableHeader
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field A
+                  </TableHeader>
+                </TableRow>
+              </TableHead>
+              <TableBody
+                aria-live="polite"
+              >
+                <TableRow
+                  ariaLabel="Expand current row"
+                  disabled={false}
+                  isExpanded={false}
+                  isSelected={false}
+                  onExpand={[Function]}
+                >
+                  <TableCell>
+                    Field 2:A
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  ariaLabel="Expand current row"
+                  disabled={false}
+                  isExpanded={false}
+                  isSelected={false}
+                  onExpand={[Function]}
+                >
+                  <TableCell>
+                    Field 1:A
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>,
+        },
+      ],
+    }
+  }
+  rows={
+    Array [
+      Object {
+        "fieldA": "Field 2:A",
+        "fieldB": "Field 2:B",
+        "id": "b",
+      },
+      Object {
+        "fieldA": "Field 1:A",
+        "fieldB": "Field 1:B",
+        "id": "a",
+      },
+    ]
+  }
+  selectedColumns={
+    Array [
+      "fieldA",
+    ]
+  }
+  size="short"
+  sizeOptions={
+    Array [
+      "tall",
+      "normal",
+      "short",
+    ]
+  }
+  sortRow={[Function]}
+  translateWithId={[Function]}
+>
+  <TableContainer
+    description="With toolbar settings"
+    title="DataTable"
+  >
+    <div
+      className="bx--data-table-container"
+    >
+      <div
+        className="bx--data-table-header"
+      >
+        <h4
+          className="bx--data-table-header__title"
+        >
+          DataTable
+        </h4>
+        <p
+          className="bx--data-table-header__description"
+        >
+          With toolbar settings
+        </p>
+      </div>
+      <TableToolbar
+        aria-label="data table toolbar"
+      >
+        <section
+          aria-label="data table toolbar"
+          className="bx--table-toolbar"
+        >
+          <TableToolbarContent>
+            <div
+              className="bx--toolbar-content"
+            >
+              <TableToolbarSearch
+                onChange={[Function]}
+                persistent={false}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--toolbar-action bx--toolbar-search-container-expandable"
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  role="searchbox"
+                  tabIndex="0"
+                >
+                  <Search
+                    aria-hidden={true}
+                    closeButtonLabelText="Clear search input"
+                    id="18"
+                    labelText="Filter table"
+                    onChange={[Function]}
+                    placeHolderText="Filter table"
+                    size="sm"
+                    type="text"
+                    value=""
+                  >
+                    <div
+                      className="bx--search bx--search--sm"
+                    >
+                      <ForwardRef(Search16)
+                        className="bx--search-magnifier"
+                      >
+                        <Icon
+                          className="bx--search-magnifier"
+                          height={16}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 16 16"
+                          width={16}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <svg
+                            aria-hidden={true}
+                            className="bx--search-magnifier"
+                            focusable="false"
+                            height={16}
+                            preserveAspectRatio="xMidYMid meet"
+                            style={
+                              Object {
+                                "willChange": "transform",
+                              }
+                            }
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
+                            />
+                          </svg>
+                        </Icon>
+                      </ForwardRef(Search16)>
+                      <label
+                        className="bx--label"
+                        htmlFor="18"
+                      >
+                        Filter table
+                      </label>
+                      <input
+                        aria-hidden={true}
+                        className="bx--search-input"
+                        id="18"
+                        onChange={[Function]}
+                        placeholder="Filter table"
+                        type="text"
+                        value=""
+                      />
+                      <button
+                        aria-label="Clear search input"
+                        className="bx--search-close bx--search-close--hidden"
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        <ForwardRef(Close16)>
+                          <Icon
+                            height={16}
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <svg
+                              aria-hidden={true}
+                              focusable="false"
+                              height={16}
+                              preserveAspectRatio="xMidYMid meet"
+                              style={
+                                Object {
+                                  "willChange": "transform",
+                                }
+                              }
+                              viewBox="0 0 16 16"
+                              width={16}
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M12 4.7L11.3 4 8 7.3 4.7 4 4 4.7 7.3 8 4 11.3 4.7 12 8 8.7 11.3 12 12 11.3 8.7 8z"
+                              />
+                            </svg>
+                          </Icon>
+                        </ForwardRef(Close16)>
+                      </button>
+                    </div>
+                  </Search>
+                </div>
+              </TableToolbarSearch>
+              <TableToolbarMenu
+                iconDescription="Settings"
+                open={true}
+                renderIcon={
+                  Object {
+                    "$$typeof": Symbol(react.forward_ref),
+                    "render": [Function],
+                  }
+                }
+              >
+                <ForwardRef(OverflowMenu)
+                  className="bx--toolbar-action bx--overflow-menu"
+                  flipped={true}
+                  onOpen={[Function]}
+                  open={true}
+                  renderIcon={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "render": [Function],
+                    }
+                  }
+                  title="Settings"
+                >
+                  <OverflowMenu
+                    ariaLabel="Menu"
+                    className="bx--toolbar-action bx--overflow-menu"
+                    direction="bottom"
+                    flipped={true}
+                    iconDescription="open and close list of options"
+                    innerRef={null}
+                    light={false}
+                    menuOffset={[Function]}
+                    menuOffsetFlip={[Function]}
+                    onClick={[Function]}
+                    onClose={[Function]}
+                    onKeyDown={[Function]}
+                    onOpen={[Function]}
+                    open={true}
+                    renderIcon={
+                      Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "render": [Function],
+                      }
+                    }
+                    tabIndex={0}
+                    title="Settings"
+                  >
+                    <ClickListener
+                      onClickOutside={[Function]}
+                    >
+                      <div
+                        aria-expanded={true}
+                        aria-haspopup={true}
+                        aria-label="Menu"
+                        className="bx--toolbar-action bx--overflow-menu bx--overflow-menu bx--overflow-menu--open"
+                        onClick={[Function]}
+                        onClose={[Function]}
+                        onKeyDown={[Function]}
+                        open={true}
+                        role="button"
+                        tabIndex={0}
+                        title="Settings"
+                      >
+                        <ForwardRef(Settings16)
+                          aria-label="open and close list of options"
+                          className="bx--overflow-menu__icon"
+                          focusable="false"
+                          onClick={[Function]}
+                          onKeyDown={[Function]}
+                        >
+                          <Icon
+                            aria-label="open and close list of options"
+                            className="bx--overflow-menu__icon"
+                            focusable="false"
+                            height={16}
+                            onClick={[Function]}
+                            onKeyDown={[Function]}
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <svg
+                              aria-label="open and close list of options"
+                              className="bx--overflow-menu__icon"
+                              focusable="false"
+                              height={16}
+                              onClick={[Function]}
+                              onKeyDown={[Function]}
+                              preserveAspectRatio="xMidYMid meet"
+                              role="img"
+                              style={
+                                Object {
+                                  "willChange": "transform",
+                                }
+                              }
+                              viewBox="0 0 16 16"
+                              width={16}
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M13.5,8.4c0-0.1,0-0.3,0-0.4c0-0.1,0-0.3,0-0.4l1-0.8c0.4-0.3,0.4-0.9,0.2-1.3l-1.2-2C13.3,3.2,13,3,12.6,3	c-0.1,0-0.2,0-0.3,0.1l-1.2,0.4c-0.2-0.1-0.4-0.3-0.7-0.4l-0.3-1.3C10.1,1.3,9.7,1,9.2,1H6.8c-0.5,0-0.9,0.3-1,0.8L5.6,3.1	C5.3,3.2,5.1,3.3,4.9,3.4L3.7,3C3.6,3,3.5,3,3.4,3C3,3,2.7,3.2,2.5,3.5l-1.2,2C1.1,5.9,1.2,6.4,1.6,6.8l0.9,0.9c0,0.1,0,0.3,0,0.4	c0,0.1,0,0.3,0,0.4L1.6,9.2c-0.4,0.3-0.5,0.9-0.2,1.3l1.2,2C2.7,12.8,3,13,3.4,13c0.1,0,0.2,0,0.3-0.1l1.2-0.4	c0.2,0.1,0.4,0.3,0.7,0.4l0.3,1.3c0.1,0.5,0.5,0.8,1,0.8h2.4c0.5,0,0.9-0.3,1-0.8l0.3-1.3c0.2-0.1,0.4-0.2,0.7-0.4l1.2,0.4	c0.1,0,0.2,0.1,0.3,0.1c0.4,0,0.7-0.2,0.9-0.5l1.1-2c0.2-0.4,0.2-0.9-0.2-1.3L13.5,8.4z M12.6,12l-1.7-0.6c-0.4,0.3-0.9,0.6-1.4,0.8	L9.2,14H6.8l-0.4-1.8c-0.5-0.2-0.9-0.5-1.4-0.8L3.4,12l-1.2-2l1.4-1.2c-0.1-0.5-0.1-1.1,0-1.6L2.2,6l1.2-2l1.7,0.6	C5.5,4.2,6,4,6.5,3.8L6.8,2h2.4l0.4,1.8c0.5,0.2,0.9,0.5,1.4,0.8L12.6,4l1.2,2l-1.4,1.2c0.1,0.5,0.1,1.1,0,1.6l1.4,1.2L12.6,12z"
+                              />
+                              <path
+                                d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8	c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"
+                              />
+                              <title>
+                                open and close list of options
+                              </title>
+                            </svg>
+                          </Icon>
+                        </ForwardRef(Settings16)>
+                        <FloatingMenu
+                          flipped={true}
+                          menuDirection="bottom"
+                          menuEl={
+                            <div
+                              aria-expanded="true"
+                              aria-haspopup="true"
+                              aria-label="Menu"
+                              class="bx--toolbar-action bx--overflow-menu bx--overflow-menu bx--overflow-menu--open"
+                              open=""
+                              role="button"
+                              tabindex="0"
+                              title="Settings"
+                            >
+                              <svg
+                                aria-label="open and close list of options"
+                                class="bx--overflow-menu__icon"
+                                focusable="false"
+                                height="16"
+                                preserveAspectRatio="xMidYMid meet"
+                                role="img"
+                                style="will-change: transform;"
+                                viewBox="0 0 16 16"
+                                width="16"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M13.5,8.4c0-0.1,0-0.3,0-0.4c0-0.1,0-0.3,0-0.4l1-0.8c0.4-0.3,0.4-0.9,0.2-1.3l-1.2-2C13.3,3.2,13,3,12.6,3	c-0.1,0-0.2,0-0.3,0.1l-1.2,0.4c-0.2-0.1-0.4-0.3-0.7-0.4l-0.3-1.3C10.1,1.3,9.7,1,9.2,1H6.8c-0.5,0-0.9,0.3-1,0.8L5.6,3.1	C5.3,3.2,5.1,3.3,4.9,3.4L3.7,3C3.6,3,3.5,3,3.4,3C3,3,2.7,3.2,2.5,3.5l-1.2,2C1.1,5.9,1.2,6.4,1.6,6.8l0.9,0.9c0,0.1,0,0.3,0,0.4	c0,0.1,0,0.3,0,0.4L1.6,9.2c-0.4,0.3-0.5,0.9-0.2,1.3l1.2,2C2.7,12.8,3,13,3.4,13c0.1,0,0.2,0,0.3-0.1l1.2-0.4	c0.2,0.1,0.4,0.3,0.7,0.4l0.3,1.3c0.1,0.5,0.5,0.8,1,0.8h2.4c0.5,0,0.9-0.3,1-0.8l0.3-1.3c0.2-0.1,0.4-0.2,0.7-0.4l1.2,0.4	c0.1,0,0.2,0.1,0.3,0.1c0.4,0,0.7-0.2,0.9-0.5l1.1-2c0.2-0.4,0.2-0.9-0.2-1.3L13.5,8.4z M12.6,12l-1.7-0.6c-0.4,0.3-0.9,0.6-1.4,0.8	L9.2,14H6.8l-0.4-1.8c-0.5-0.2-0.9-0.5-1.4-0.8L3.4,12l-1.2-2l1.4-1.2c-0.1-0.5-0.1-1.1,0-1.6L2.2,6l1.2-2l1.7,0.6	C5.5,4.2,6,4,6.5,3.8L6.8,2h2.4l0.4,1.8c0.5,0.2,0.9,0.5,1.4,0.8L12.6,4l1.2,2l-1.4,1.2c0.1,0.5,0.1,1.1,0,1.6l1.4,1.2L12.6,12z"
+                                />
+                                <path
+                                  d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8	c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"
+                                />
+                                <title>
+                                  open and close list of options
+                                </title>
+                              </svg>
+                            </div>
+                          }
+                          menuOffset={[Function]}
+                          menuPosition={
+                            Object {
+                              "bottom": 0,
+                              "height": 0,
+                              "left": 0,
+                              "right": 0,
+                              "top": 0,
+                              "width": 0,
+                            }
+                          }
+                          menuRef={[Function]}
+                          onPlace={[Function]}
+                          target={[Function]}
+                        >
+                          <Portal
+                            containerInfo={
+                              <body>
+                                <ul
+                                  aria-label="Menu"
+                                  class="bx--overflow-menu-options bx--overflow-menu--flip bx--overflow-menu-options--open"
+                                  data-floating-menu-direction="bottom"
+                                  role="menu"
+                                  style="visibility: hidden; top: 0px; position: absolute; margin: 0px; opacity: 1;"
+                                  tabindex="-1"
+                                >
+                                  <li
+                                    class="bx--table-toolbar-menu__title"
+                                    role="menuitem"
+                                  >
+                                    Row height
+                                  </li>
+                                  <li
+                                    class="bx--table-toolbar-menu__option"
+                                    role="menuitem"
+                                  >
+                                    <div
+                                      class="bx--form-item"
+                                    >
+                                      <div
+                                        class="bx--radio-button-group bx--radio-button-group--vertical bx--radio-button-group--label-right"
+                                      >
+                                        <div
+                                          class="bx--radio-button-wrapper"
+                                        >
+                                          <input
+                                            class="bx--radio-button"
+                                            data-table-toolbar-focusable="true"
+                                            id="tall"
+                                            name="row-height-radio-button-group"
+                                            type="radio"
+                                            value="tall"
+                                          />
+                                          <label
+                                            aria-label="Tall (64px)"
+                                            class="bx--radio-button__label"
+                                            for="tall"
+                                          >
+                                            <span
+                                              class="bx--radio-button__appearance"
+                                            />
+                                            <span
+                                              class=""
+                                            >
+                                              Tall (64px)
+                                            </span>
+                                          </label>
+                                        </div>
+                                        <div
+                                          class="bx--radio-button-wrapper"
+                                        >
+                                          <input
+                                            class="bx--radio-button"
+                                            data-table-toolbar-focusable="true"
+                                            id="normal"
+                                            name="row-height-radio-button-group"
+                                            type="radio"
+                                            value="normal"
+                                          />
+                                          <label
+                                            aria-label="Normal (48px)"
+                                            class="bx--radio-button__label"
+                                            for="normal"
+                                          >
+                                            <span
+                                              class="bx--radio-button__appearance"
+                                            />
+                                            <span
+                                              class=""
+                                            >
+                                              Normal (48px)
+                                            </span>
+                                          </label>
+                                        </div>
+                                        <div
+                                          class="bx--radio-button-wrapper"
+                                        >
+                                          <input
+                                            checked=""
+                                            class="bx--radio-button"
+                                            data-table-toolbar-focusable="true"
+                                            id="short"
+                                            name="row-height-radio-button-group"
+                                            type="radio"
+                                            value="short"
+                                          />
+                                          <label
+                                            aria-label="Short (32px)"
+                                            class="bx--radio-button__label"
+                                            for="short"
+                                          >
+                                            <span
+                                              class="bx--radio-button__appearance"
+                                            />
+                                            <span
+                                              class=""
+                                            >
+                                              Short (32px)
+                                            </span>
+                                          </label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </li>
+                                  <li
+                                    class="bx--table-toolbar-menu__title"
+                                    role="menuitem"
+                                  >
+                                    Edit column
+                                  </li>
+                                  <li
+                                    class="bx--table-toolbar-menu__option"
+                                    role="menuitem"
+                                  >
+                                    <div
+                                      class="bx--form-item bx--checkbox-wrapper"
+                                    >
+                                      <input
+                                        checked=""
+                                        class="bx--checkbox"
+                                        data-table-toolbar-focusable="true"
+                                        id="fieldA"
+                                        type="checkbox"
+                                      />
+                                      <label
+                                        class="bx--checkbox-label"
+                                        for="fieldA"
+                                      >
+                                        <span
+                                          class="bx--checkbox-label-text"
+                                        >
+                                          Field A
+                                        </span>
+                                      </label>
+                                    </div>
+                                  </li>
+                                  <li
+                                    class="bx--table-toolbar-menu__option"
+                                    role="menuitem"
+                                  >
+                                    <div
+                                      class="bx--form-item bx--checkbox-wrapper"
+                                    >
+                                      <input
+                                        class="bx--checkbox"
+                                        data-table-toolbar-focusable="true"
+                                        id="fieldB"
+                                        type="checkbox"
+                                      />
+                                      <label
+                                        class="bx--checkbox-label"
+                                        for="fieldB"
+                                      >
+                                        <span
+                                          class="bx--checkbox-label-text"
+                                        >
+                                          Field B
+                                        </span>
+                                      </label>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </body>
+                            }
+                          >
+                            <ul
+                              aria-label="Menu"
+                              className="bx--overflow-menu-options bx--overflow-menu--flip bx--overflow-menu-options--open"
+                              data-floating-menu-direction="bottom"
+                              role="menu"
+                              style={
+                                Object {
+                                  "margin": 0,
+                                  "opacity": 1,
+                                  "position": "absolute",
+                                  "top": "0px",
+                                  "visibility": "hidden",
+                                }
+                              }
+                              tabIndex="-1"
+                            >
+                              <ForwardRef
+                                closeMenu={[Function]}
+                                columns={
+                                  Array [
+                                    Object {
+                                      "header": "Field A",
+                                      "key": "fieldA",
+                                    },
+                                    Object {
+                                      "header": "Field B",
+                                      "key": "fieldB",
+                                    },
+                                  ]
+                                }
+                                handleMenuItemFocus={[Function]}
+                                handleOverflowMenuItemFocus={[Function]}
+                                index={0}
+                                key=".$.$.0"
+                                onChange={[Function]}
+                                selectedColumns={
+                                  Array [
+                                    "fieldA",
+                                  ]
+                                }
+                                size="short"
+                                sizeOptions={
+                                  Array [
+                                    "tall",
+                                    "normal",
+                                    "short",
+                                  ]
+                                }
+                                translateWithId={[Function]}
+                              >
+                                <ForwardRef
+                                  title="Row height"
+                                >
+                                  <li
+                                    className="bx--table-toolbar-menu__title"
+                                    role="menuitem"
+                                  >
+                                    Row height
+                                  </li>
+                                </ForwardRef>
+                                <ForwardRef>
+                                  <li
+                                    className="bx--table-toolbar-menu__option"
+                                    role="menuitem"
+                                  >
+                                    <RadioButtonGroup
+                                      defaultSelected="normal"
+                                      labelPosition="right"
+                                      legend="Row Height"
+                                      name="row-height-radio-button-group"
+                                      onChange={[Function]}
+                                      orientation="vertical"
+                                      valueSelected="short"
+                                    >
+                                      <div
+                                        className="bx--form-item"
+                                      >
+                                        <div
+                                          className="bx--radio-button-group bx--radio-button-group--vertical bx--radio-button-group--label-right"
+                                        >
+                                          <ForwardRef(RadioButton)
+                                            checked={false}
+                                            data-table-toolbar-focusable={true}
+                                            id="tall"
+                                            key=".$tall"
+                                            labelText="Tall (64px)"
+                                            name="row-height-radio-button-group"
+                                            onChange={[Function]}
+                                            onKeyDown={[Function]}
+                                            value="tall"
+                                          >
+                                            <RadioButton
+                                              checked={false}
+                                              data-table-toolbar-focusable={true}
+                                              id="tall"
+                                              innerRef={null}
+                                              labelPosition="right"
+                                              labelText="Tall (64px)"
+                                              name="row-height-radio-button-group"
+                                              onChange={[Function]}
+                                              onKeyDown={[Function]}
+                                              value="tall"
+                                            >
+                                              <div
+                                                className="bx--radio-button-wrapper"
+                                              >
+                                                <input
+                                                  checked={false}
+                                                  className="bx--radio-button"
+                                                  data-table-toolbar-focusable={true}
+                                                  id="tall"
+                                                  name="row-height-radio-button-group"
+                                                  onChange={[Function]}
+                                                  onKeyDown={[Function]}
+                                                  type="radio"
+                                                  value="tall"
+                                                />
+                                                <label
+                                                  aria-label="Tall (64px)"
+                                                  className="bx--radio-button__label"
+                                                  htmlFor="tall"
+                                                >
+                                                  <span
+                                                    className="bx--radio-button__appearance"
+                                                  />
+                                                  <span
+                                                    className=""
+                                                  >
+                                                    Tall (64px)
+                                                  </span>
+                                                </label>
+                                              </div>
+                                            </RadioButton>
+                                          </ForwardRef(RadioButton)>
+                                          <ForwardRef(RadioButton)
+                                            checked={false}
+                                            data-table-toolbar-focusable={true}
+                                            id="normal"
+                                            key=".$normal"
+                                            labelText="Normal (48px)"
+                                            name="row-height-radio-button-group"
+                                            onChange={[Function]}
+                                            onKeyDown={[Function]}
+                                            value="normal"
+                                          >
+                                            <RadioButton
+                                              checked={false}
+                                              data-table-toolbar-focusable={true}
+                                              id="normal"
+                                              innerRef={null}
+                                              labelPosition="right"
+                                              labelText="Normal (48px)"
+                                              name="row-height-radio-button-group"
+                                              onChange={[Function]}
+                                              onKeyDown={[Function]}
+                                              value="normal"
+                                            >
+                                              <div
+                                                className="bx--radio-button-wrapper"
+                                              >
+                                                <input
+                                                  checked={false}
+                                                  className="bx--radio-button"
+                                                  data-table-toolbar-focusable={true}
+                                                  id="normal"
+                                                  name="row-height-radio-button-group"
+                                                  onChange={[Function]}
+                                                  onKeyDown={[Function]}
+                                                  type="radio"
+                                                  value="normal"
+                                                />
+                                                <label
+                                                  aria-label="Normal (48px)"
+                                                  className="bx--radio-button__label"
+                                                  htmlFor="normal"
+                                                >
+                                                  <span
+                                                    className="bx--radio-button__appearance"
+                                                  />
+                                                  <span
+                                                    className=""
+                                                  >
+                                                    Normal (48px)
+                                                  </span>
+                                                </label>
+                                              </div>
+                                            </RadioButton>
+                                          </ForwardRef(RadioButton)>
+                                          <ForwardRef(RadioButton)
+                                            checked={true}
+                                            data-table-toolbar-focusable={true}
+                                            id="short"
+                                            key=".$short"
+                                            labelText="Short (32px)"
+                                            name="row-height-radio-button-group"
+                                            onChange={[Function]}
+                                            onKeyDown={[Function]}
+                                            value="short"
+                                          >
+                                            <RadioButton
+                                              checked={true}
+                                              data-table-toolbar-focusable={true}
+                                              id="short"
+                                              innerRef={null}
+                                              labelPosition="right"
+                                              labelText="Short (32px)"
+                                              name="row-height-radio-button-group"
+                                              onChange={[Function]}
+                                              onKeyDown={[Function]}
+                                              value="short"
+                                            >
+                                              <div
+                                                className="bx--radio-button-wrapper"
+                                              >
+                                                <input
+                                                  checked={true}
+                                                  className="bx--radio-button"
+                                                  data-table-toolbar-focusable={true}
+                                                  id="short"
+                                                  name="row-height-radio-button-group"
+                                                  onChange={[Function]}
+                                                  onKeyDown={[Function]}
+                                                  type="radio"
+                                                  value="short"
+                                                />
+                                                <label
+                                                  aria-label="Short (32px)"
+                                                  className="bx--radio-button__label"
+                                                  htmlFor="short"
+                                                >
+                                                  <span
+                                                    className="bx--radio-button__appearance"
+                                                  />
+                                                  <span
+                                                    className=""
+                                                  >
+                                                    Short (32px)
+                                                  </span>
+                                                </label>
+                                              </div>
+                                            </RadioButton>
+                                          </ForwardRef(RadioButton)>
+                                        </div>
+                                      </div>
+                                    </RadioButtonGroup>
+                                  </li>
+                                </ForwardRef>
+                              </ForwardRef>
+                              <ForwardRef
+                                closeMenu={[Function]}
+                                columns={
+                                  Array [
+                                    Object {
+                                      "header": "Field A",
+                                      "key": "fieldA",
+                                    },
+                                    Object {
+                                      "header": "Field B",
+                                      "key": "fieldB",
+                                    },
+                                  ]
+                                }
+                                handleMenuItemFocus={[Function]}
+                                handleOverflowMenuItemFocus={[Function]}
+                                index={1}
+                                key=".$.$.1"
+                                onChange={[Function]}
+                                selectedColumns={
+                                  Array [
+                                    "fieldA",
+                                  ]
+                                }
+                                size="short"
+                                sizeOptions={
+                                  Array [
+                                    "tall",
+                                    "normal",
+                                    "short",
+                                  ]
+                                }
+                                translateWithId={[Function]}
+                              >
+                                <ForwardRef
+                                  title="Edit column"
+                                >
+                                  <li
+                                    className="bx--table-toolbar-menu__title"
+                                    role="menuitem"
+                                  >
+                                    Edit column
+                                  </li>
+                                </ForwardRef>
+                                <ForwardRef
+                                  key="fieldA"
+                                >
+                                  <li
+                                    className="bx--table-toolbar-menu__option"
+                                    role="menuitem"
+                                  >
+                                    <ForwardRef(Checkbox)
+                                      data-table-toolbar-focusable={true}
+                                      defaultChecked={true}
+                                      id="fieldA"
+                                      indeterminate={false}
+                                      labelText="Field A"
+                                      onChange={[Function]}
+                                      onKeyDown={[Function]}
+                                    >
+                                      <div
+                                        className="bx--form-item bx--checkbox-wrapper"
+                                      >
+                                        <input
+                                          className="bx--checkbox"
+                                          data-table-toolbar-focusable={true}
+                                          defaultChecked={true}
+                                          id="fieldA"
+                                          onChange={[Function]}
+                                          onKeyDown={[Function]}
+                                          type="checkbox"
+                                        />
+                                        <label
+                                          className="bx--checkbox-label"
+                                          htmlFor="fieldA"
+                                          title={null}
+                                        >
+                                          <span
+                                            className="bx--checkbox-label-text"
+                                          >
+                                            Field A
+                                          </span>
+                                        </label>
+                                      </div>
+                                    </ForwardRef(Checkbox)>
+                                  </li>
+                                </ForwardRef>
+                                <ForwardRef
+                                  key="fieldB"
+                                >
+                                  <li
+                                    className="bx--table-toolbar-menu__option"
+                                    role="menuitem"
+                                  >
+                                    <ForwardRef(Checkbox)
+                                      data-table-toolbar-focusable={true}
+                                      defaultChecked={false}
+                                      id="fieldB"
+                                      indeterminate={false}
+                                      labelText="Field B"
+                                      onChange={[Function]}
+                                      onKeyDown={[Function]}
+                                    >
+                                      <div
+                                        className="bx--form-item bx--checkbox-wrapper"
+                                      >
+                                        <input
+                                          className="bx--checkbox"
+                                          data-table-toolbar-focusable={true}
+                                          defaultChecked={false}
+                                          id="fieldB"
+                                          onChange={[Function]}
+                                          onKeyDown={[Function]}
+                                          type="checkbox"
+                                        />
+                                        <label
+                                          className="bx--checkbox-label"
+                                          htmlFor="fieldB"
+                                          title={null}
+                                        >
+                                          <span
+                                            className="bx--checkbox-label-text"
+                                          >
+                                            Field B
+                                          </span>
+                                        </label>
+                                      </div>
+                                    </ForwardRef(Checkbox)>
+                                  </li>
+                                </ForwardRef>
+                              </ForwardRef>
+                            </ul>
+                          </Portal>
+                        </FloatingMenu>
+                      </div>
+                    </ClickListener>
+                  </OverflowMenu>
+                </ForwardRef(OverflowMenu)>
+              </TableToolbarMenu>
+            </div>
+          </TableToolbarContent>
+        </section>
+      </TableToolbar>
+      <Table
+        isSortable={false}
+        size="short"
+      >
+        <table
+          className="bx--data-table bx--data-table--short bx--data-table--no-border"
+        >
+          <TableHead>
+            <thead>
+              <TableRow>
+                <tr>
+                  <TableHeader
+                    isSortHeader={false}
+                    isSortable={false}
+                    key="fieldA"
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    <th
+                      scope="col"
+                    >
+                      <span
+                        className="bx--table-header-label"
+                      >
+                        Field A
+                      </span>
+                    </th>
+                  </TableHeader>
+                </tr>
+              </TableRow>
+            </thead>
+          </TableHead>
+          <TableBody
+            aria-live="polite"
+          >
+            <tbody
+              aria-live="polite"
+            >
+              <TableRow
+                ariaLabel="Expand current row"
+                disabled={false}
+                isExpanded={false}
+                isSelected={false}
+                key="b"
+                onExpand={[Function]}
+              >
+                <tr
+                  disabled={false}
+                >
+                  <TableCell
+                    key="b:fieldA"
+                  >
+                    <td>
+                      Field 2:A
+                    </td>
+                  </TableCell>
+                </tr>
+              </TableRow>
+              <TableRow
+                ariaLabel="Expand current row"
+                disabled={false}
+                isExpanded={false}
+                isSelected={false}
+                key="a"
+                onExpand={[Function]}
+              >
+                <tr
+                  disabled={false}
+                >
+                  <TableCell
+                    key="a:fieldA"
+                  >
+                    <td>
+                      Field 1:A
+                    </td>
+                  </TableCell>
+                </tr>
+              </TableRow>
+            </tbody>
+          </TableBody>
+        </table>
+      </Table>
+    </div>
+  </TableContainer>
+</DataTable>
+`;

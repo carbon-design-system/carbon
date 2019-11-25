@@ -28,9 +28,9 @@ const translateWithId = id => {
 const TableToolbarSettingSize = React.forwardRef(({
   size,
   sizeOptions,
-  translateWithId: t,
   onChange: onChangeProp,
   handleMenuItemFocus,
+  translateWithId: t,
 }, ref) => {
   const [selected, setSelected] = useState(size);
   const onChange = (id) => {
@@ -71,25 +71,32 @@ const TableToolbarSettingSize = React.forwardRef(({
 
 TableToolbarSettingSize.propTypes = {
   /**
-   * Optional array of initially selected row height
+   * Provide initially selected size
    */
-  size: PropTypes.string,
+  size: PropTypes.string.isRequired,
+  /**
+   * Provide an array of size options
+   */
+  sizeOptions: PropTypes.arrayOf(
+    PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
+  ).isRequired,
   /**
    * Provide an optional hook that is called each time the selection is updated
    */
   onChange: PropTypes.func,
   /**
+   * Provide an optional hook that is called each time a key is pressed
+   */
+  handleMenuItemFocus: PropTypes.func,
+  /**
    * Provide custom text for the component for each translation id
    */
   translateWithId: PropTypes.func.isRequired,
-  sizeOptions: PropTypes.arrayOf(
-    PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
-  ),
 };
 
 TableToolbarSettingSize.defaultProps = {
-  translateWithId,
   sizeOptions: ['compact', 'short', 'normal', 'tall'],
+  translateWithId,
 };
 
 export default TableToolbarSettingSize;

@@ -24,6 +24,8 @@ import DataTable, {
   TableSelectRow,
   TableToolbar,
   TableToolbarAction,
+  TableToolbarSettingSize,
+  TableToolbarSettingColumns,
   TableToolbarContent,
   TableToolbarSearch,
   TableToolbarMenu,
@@ -684,6 +686,8 @@ describe('DataTable', () => {
           },
         ],
         locale: 'en',
+        size: 'normal',
+        selectedColumns: ['fieldA', 'fieldB'],
         render: jest.fn(
           ({
             rows,
@@ -779,12 +783,9 @@ describe('DataTable', () => {
           },
         ],
         selectedColumns: [
-          ...mockProps.headers,
-          {
-            key: 'fieldC',
-            header: 'Field C',
-          },
-        ].map(item => item.key),
+          ...mockProps.selectedColumns,
+          'fieldC',
+        ],
       };
 
       wrapper.setProps(nextProps);
@@ -875,12 +876,226 @@ describe('DataTable', () => {
         'Field 3:A!',
       ]);
     });
+
+    it('should update size when receiving new props', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      expect(wrapper.instance().getTableProps().size).toEqual('normal');
+      
+      const nextProps = {
+        ...mockProps,
+        size: 'tall',
+      };
+      wrapper.setProps(nextProps);
+      expect(wrapper.instance().getTableProps().size).toEqual('tall');
+    });
+
+    it('should update selectedColumns when receiving new props', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      expect(wrapper.instance().getTableSettingsProps().selectedColumns).toEqual(['fieldA', 'fieldB']);
+      
+      const nextProps = {
+        ...mockProps,
+        selectedColumns: ['fieldA', 'fieldB', 'fieldC'],
+      };
+      wrapper.setProps(nextProps);
+      expect(wrapper.instance().getTableSettingsProps().selectedColumns).toEqual(['fieldA', 'fieldB', 'fieldC']);
+    });
   });
 
   describe('sticky header', () => {
     it('should render', () => {
       const wrapper = mount(<DataTable stickyHeader={true} {...mockProps} />);
       expect(wrapper).toMatchSnapshot();
+    });
+  });
+
+  describe('table settings', () => {
+    let mockProps;
+
+    beforeEach(() => {
+      mockProps = {
+        rows: [
+          {
+            id: 'b',
+            fieldA: 'Field 2:A',
+            fieldB: 'Field 2:B',
+          },
+          {
+            id: 'a',
+            fieldA: 'Field 1:A',
+            fieldB: 'Field 1:B',
+          },
+        ],
+        headers: [
+          {
+            key: 'fieldA',
+            header: 'Field A',
+          },
+          {
+            key: 'fieldB',
+            header: 'Field B',
+          },
+        ],
+        locale: 'en',
+        size: 'short',
+        sizeOptions: ['tall', 'normal', 'short'],
+        selectedColumns: ['fieldA'],
+        render: jest.fn(
+          ({
+            rows,
+            headers,
+            getHeaderProps,
+            getRowProps,
+            getTableProps,
+            getTableSettingsProps,
+            onInputChange,
+            onSizeChange,
+            onColumnsChange,
+            getTableContainerProps,
+          }) => (
+            <TableContainer
+              title="DataTable"
+              description="With toolbar settings"
+              {...getTableContainerProps()}>
+              <TableToolbar>
+                <TableToolbarContent>
+                  <TableToolbarSearch onChange={onInputChange} />
+                  <TableToolbarMenu open={true}>
+                    <TableToolbarSettingSize
+                      onChange={onSizeChange}
+                      {...getTableSettingsProps()}
+                    />
+                    <TableToolbarSettingColumns
+                      onChange={onColumnsChange}
+                      {...getTableSettingsProps()}
+                    />
+                  </TableToolbarMenu>
+                </TableToolbarContent>
+              </TableToolbar>
+              <Table {...getTableProps()}>
+                <TableHead>
+                  <TableRow>
+                    {headers.map(header => (
+                      <TableHeader {...getHeaderProps({ header })}>
+                        {header.header}
+                      </TableHeader>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map(row => (
+                    <TableRow {...getRowProps({ row })}>
+                      {row.cells.map(cell => (
+                        <TableCell key={cell.id}>{cell.value}</TableCell>
+                      ))}
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )
+        ),
+      };
+    });
+
+    it('should render', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should initialize table and settings with prop values', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      
+      // table size
+      expect(wrapper.find('Table').prop('size')).toEqual('short');
+
+      // table columns
+      expect(wrapper.find('TableHead').containsMatchingElement(
+        <th scope="col">
+          <span className="bx--table-header-label">
+            Field A
+          </span>
+        </th>
+      )).toBe(true);
+
+      expect(wrapper.find('TableHead').containsMatchingElement(
+        <th scope="col">
+          <span className="bx--table-header-label">
+            Field B
+          </span>
+        </th>
+      )).toBe(false);
+
+      // internal state
+      expect(wrapper.state('size')).toEqual('short');
+      expect(wrapper.state('selectedColumns')).toEqual(['fieldA']);
+
+      // getTableSettingsProps
+      const { columns, selectedColumns, size, sizeOptions } = wrapper.instance().getTableSettingsProps();
+      expect(columns).toEqual(mockProps.headers);
+      expect(selectedColumns).toEqual(mockProps.selectedColumns);
+      expect(size).toEqual(mockProps.size);
+      expect(sizeOptions).toEqual(mockProps.sizeOptions);
+
+      // table size settings menu
+      expect(wrapper.find('.bx--table-toolbar-menu__option input#tall').prop('checked')).toBe(false);
+      expect(wrapper.find('.bx--table-toolbar-menu__option input#normal').prop('checked')).toBe(false);
+      expect(wrapper.find('.bx--table-toolbar-menu__option input#short').prop('checked')).toBe(true);
+
+      // table columns settings menu
+      expect(wrapper.find('.bx--table-toolbar-menu__option input#fieldA').prop('defaultChecked')).toBe(true);
+      expect(wrapper.find('.bx--table-toolbar-menu__option input#fieldB').prop('defaultChecked')).toBe(false);
+    });
+
+    it('should update table size upon settings change', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      wrapper.find('.bx--table-toolbar-menu__option input#tall').simulate('change', { target: { checked: true } });
+
+      // table size
+      expect(wrapper.find('Table').prop('size')).toEqual('tall');
+
+      // internal state
+      expect(wrapper.state('size')).toEqual('tall');
+
+      // getTableSettingsProps
+      expect(wrapper.instance().getTableSettingsProps()['size']).toEqual('tall');
+
+      // table size settings menu
+      expect(wrapper.find('.bx--table-toolbar-menu__option input#tall').prop('checked')).toBe(true);
+      expect(wrapper.find('.bx--table-toolbar-menu__option input#normal').prop('checked')).toBe(false);
+      expect(wrapper.find('.bx--table-toolbar-menu__option input#short').prop('checked')).toBe(false);
+    });
+
+    it('should update table columns upon settings change', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      wrapper.find('.bx--table-toolbar-menu__option input#fieldB').simulate('change', { target: { checked: true } });
+
+      // table columns
+      expect(wrapper.find('TableHead').containsMatchingElement(
+        <th scope="col">
+          <span className="bx--table-header-label">
+            Field A
+          </span>
+        </th>
+      )).toBe(true);
+
+      expect(wrapper.find('TableHead').containsMatchingElement(
+        <th scope="col">
+          <span className="bx--table-header-label">
+            Field B
+          </span>
+        </th>
+      )).toBe(true);
+
+      // internal state
+      expect(wrapper.state('selectedColumns')).toEqual(['fieldA', 'fieldB']);
+
+      // getTableSettingsProps
+      expect(wrapper.instance().getTableSettingsProps()['selectedColumns']).toEqual(['fieldA', 'fieldB']);
+
+      // table columns settings menu
+      expect(wrapper.find('.bx--table-toolbar-menu__option input#fieldA').prop('defaultChecked')).toBe(true);
+      expect(wrapper.find('.bx--table-toolbar-menu__option input#fieldB').prop('defaultChecked')).toBe(true);
     });
   });
 });

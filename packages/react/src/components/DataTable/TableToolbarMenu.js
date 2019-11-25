@@ -38,9 +38,9 @@ const TableToolbarMenu = ({
   const handleMenuItemFocus = evt => {
     const nodes = [...document.querySelectorAll('[data-table-toolbar-focusable]')];
     const len = nodes.length;
-    if (match(evt, keys.ArrowDown)) {
+    if (len > 0 && match(evt, keys.ArrowDown)) {
       setFocus((focused + 1) % len);
-    } else if (match(evt, keys.ArrowUp)) {
+    } else if (len > 0 && match(evt, keys.ArrowUp)) {
       setFocus((focused - 1 + len) % len);
     }
   };

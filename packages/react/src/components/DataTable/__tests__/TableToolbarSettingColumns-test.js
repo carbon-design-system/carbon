@@ -54,14 +54,14 @@ describe('DataTable.TableToolbarSettingColumns', () => {
     );
 
     // uncheck column1
-    wrapper.find('input[id="column1"]').simulate('change', { target: { checked: false } })
+    wrapper.find('input[id="column1"]').simulate('change', { target: { checked: false } });
     expect(mockOnChange.mock.calls.length).toEqual(1);
     expect(mockOnChange.mock.calls[0]).toEqual([[]]);
 
     jest.clearAllMocks();
 
     // check column2
-    wrapper.find('input[id="column2"]').simulate('change', { target: { checked: true } })
+    wrapper.find('input[id="column2"]').simulate('change', { target: { checked: true } });
     expect(mockOnChange.mock.calls.length).toEqual(1);
     expect(mockOnChange.mock.calls[0]).toEqual([['column2']]);
   });

@@ -98,6 +98,23 @@ export default class DataTable extends React.Component {
     filterRows: PropTypes.func,
 
     /**
+     * Provide an optional table size. Must be a valid size supported by Table.
+     */
+    size: PropTypes.string,
+
+    /**
+     * Provide an optional array of size options used by TableToolbarSettingSize
+     */
+    sizeOptions: PropTypes.arrayOf(
+      PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
+    ),
+
+    /**
+     * Provide an optional array of selected columns. Default to all columns if not specified.
+     */
+    selectedColumns: PropTypes.array,
+
+    /**
      * Provide a string for the current locale
      */
     locale: PropTypes.string,
