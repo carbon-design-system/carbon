@@ -18,6 +18,7 @@ export default function Copy({
   className,
   feedback,
   feedbackTimeout,
+  onAnimationEnd,
   onClick,
   ...other
 }) {
@@ -44,8 +45,8 @@ export default function Copy({
     if (event.animationName === 'hide-feedback') {
       setAnimation('');
     }
-    if (other.handleAnimationEnd) {
-      other.handleAnimationEnd(event);
+    if (onAnimationEnd) {
+      onAnimationEnd(event);
     }
   };
 

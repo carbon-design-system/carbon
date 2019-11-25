@@ -19,6 +19,7 @@ export default function CopyButton({
   className,
   feedback,
   feedbackTimeout,
+  onAnimationEnd,
   onClick,
   ...other
 }) {
@@ -45,8 +46,8 @@ export default function CopyButton({
     if (event.animationName === 'hide-feedback') {
       setAnimation('');
     }
-    if (other.handleAnimationEnd) {
-      other.handleAnimationEnd(event);
+    if (onAnimationEnd) {
+      onAnimationEnd(event);
     }
   };
 
