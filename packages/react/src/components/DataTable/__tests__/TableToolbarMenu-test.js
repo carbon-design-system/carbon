@@ -38,19 +38,17 @@ describe('Custom icon in DataTable.TableToolbarMenu', () => {
 });
 
 describe('Handle menu item focus on arrow keys', () => {
-  const stub = () => (
-    <div>stub</div>
-  );
+  const stub = () => <div>stub</div>;
   const mockNode1Focus = jest.fn();
   const mockNode2Focus = jest.fn();
   const mockNode3Focus = jest.fn();
 
   beforeEach(() => {
-    document.querySelectorAll = jest.fn(() => ([
+    document.querySelectorAll = jest.fn(() => [
       { focus: mockNode1Focus },
       { focus: mockNode2Focus },
       { focus: mockNode3Focus },
-    ]));    
+    ]);
   });
 
   it('should change focus when down arrow key pressed', async () => {
@@ -105,7 +103,7 @@ describe('Handle menu item focus on arrow keys', () => {
   });
 
   it('should ignore when no focusable items found', async () => {
-    document.querySelectorAll = jest.fn(() => ([]));    
+    document.querySelectorAll = jest.fn(() => []);
     const wrapper = mount(
       <TableToolbarMenu open={true}>
         <stub />

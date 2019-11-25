@@ -40,14 +40,17 @@ describe('filterColumns', () => {
     const filterProps = {
       rows: [
         {
-          cells: [ { info: { header: 'header1' } }, { info: { header: 'header2' } } ],
+          cells: [
+            { info: { header: 'header1' } },
+            { info: { header: 'header2' } },
+          ],
         },
       ],
       selectedColumns: ['header2'],
     };
     expect(filterColumns(filterProps)).toEqual([
       {
-        cells: [ { info: { header: 'header2' } } ],
+        cells: [{ info: { header: 'header2' } }],
       },
     ]);
   });
@@ -56,13 +59,19 @@ describe('filterColumns', () => {
     const filterProps = {
       rows: [
         {
-          cells: [ { info: { header: 'header1' } }, { info: { header: 'header2' } } ],
+          cells: [
+            { info: { header: 'header1' } },
+            { info: { header: 'header2' } },
+          ],
         },
       ],
     };
     expect(filterColumns(filterProps)).toEqual([
       {
-        cells: [ { info: { header: 'header1' } }, { info: { header: 'header2' } } ],
+        cells: [
+          { info: { header: 'header1' } },
+          { info: { header: 'header2' } },
+        ],
       },
     ]);
   });

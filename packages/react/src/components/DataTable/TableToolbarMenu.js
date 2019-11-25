@@ -29,14 +29,18 @@ const TableToolbarMenu = ({
   });
 
   const updateMenuFocus = () => {
-    const nodes = [...document.querySelectorAll('[data-table-toolbar-focusable]')];
+    const nodes = [
+      ...document.querySelectorAll('[data-table-toolbar-focusable]'),
+    ];
     if (nodes && focused >= 0 && nodes[focused]) {
       nodes[focused].focus();
     }
   };
 
   const handleMenuItemFocus = evt => {
-    const nodes = [...document.querySelectorAll('[data-table-toolbar-focusable]')];
+    const nodes = [
+      ...document.querySelectorAll('[data-table-toolbar-focusable]'),
+    ];
     const len = nodes.length;
     if (len > 0 && match(evt, keys.ArrowDown)) {
       setFocus((focused + 1) % len);
@@ -45,11 +49,12 @@ const TableToolbarMenu = ({
     }
   };
 
-  const childrenWithProps = React.Children.toArray(React.Children.toArray(children)).map(
-    (child) =>
-      React.cloneElement(child, {
-        handleMenuItemFocus,
-      })
+  const childrenWithProps = React.Children.toArray(
+    React.Children.toArray(children)
+  ).map(child =>
+    React.cloneElement(child, {
+      handleMenuItemFocus,
+    })
   );
 
   const toolbarActionClasses = cx(

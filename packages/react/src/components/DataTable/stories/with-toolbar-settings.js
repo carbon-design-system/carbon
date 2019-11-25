@@ -31,9 +31,11 @@ export default props => (
     {...props}
     rows={initialRows}
     headers={allHeaders}
-    size='short'
+    size="short"
     sizeOptions={['normal', 'short']}
-    selectedColumns={allHeaders.map(header => header.key).filter(item => item !== 'protocol')}
+    selectedColumns={allHeaders
+      .map(header => header.key)
+      .filter(item => item !== 'protocol')}
     render={({
       rows,
       headers,

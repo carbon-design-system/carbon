@@ -21,7 +21,10 @@ import TableHeader from './TableHeader';
 import TableRow from './TableRow';
 import TableSelectAll from './TableSelectAll';
 import TableSelectRow from './TableSelectRow';
-import TableToolbar, { TableToolbarTitle, TableToolbarOption } from './TableToolbar';
+import TableToolbar, {
+  TableToolbarTitle,
+  TableToolbarOption,
+} from './TableToolbar';
 import TableToolbarAction from './TableToolbarAction';
 import TableToolbarContent from './TableToolbarContent';
 import TableToolbarSearch from './TableToolbarSearch';

@@ -36,7 +36,8 @@ const getDerivedStateFromProps = (props, prevState) => {
     // batch actions menu
     shouldShowBatchActions: prevState.shouldShowBatchActions || false,
     size: props.size,
-    selectedColumns: props.selectedColumns || props.headers.map(header => header.key),
+    selectedColumns:
+      props.selectedColumns || props.headers.map(header => header.key),
   };
 
   if (prevState.sortDirection && prevState.sortHeaderKey) {

@@ -36,7 +36,7 @@ export const filterHeaders = ({ headers, selectedColumns }) => {
     return headers.filter(header => selectedColumns.includes(header.key));
   }
   return headers;
-}
+};
 
 export const filterColumns = ({ rows, selectedColumns }) => {
   if (Array.isArray(selectedColumns)) {

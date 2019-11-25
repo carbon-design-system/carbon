@@ -20,7 +20,7 @@ describe('DataTable.TableToolbarSettingSize', () => {
   it('should render', () => {
     const wrapper = mount(
       <TableToolbarSettingSize
-        size='short'
+        size="short"
         sizeOptions={['normal', 'short']}
         onChange={mockOnChange}
         handleMenuItemFocus={mockHandleMenuItemFocus}
@@ -32,7 +32,7 @@ describe('DataTable.TableToolbarSettingSize', () => {
   it('should handle onChange', () => {
     const wrapper = mount(
       <TableToolbarSettingSize
-        size='short'
+        size="short"
         sizeOptions={['normal', 'short']}
         onChange={mockOnChange}
         handleMenuItemFocus={mockHandleMenuItemFocus}
@@ -40,7 +40,9 @@ describe('DataTable.TableToolbarSettingSize', () => {
     );
 
     // select 'normal'
-    wrapper.find('input[id="normal"]').simulate('change', { target: { checked: true } })
+    wrapper
+      .find('input[id="normal"]')
+      .simulate('change', { target: { checked: true } });
     expect(mockOnChange.mock.calls.length).toEqual(1);
     expect(mockOnChange.mock.calls[0]).toEqual(['normal']);
   });

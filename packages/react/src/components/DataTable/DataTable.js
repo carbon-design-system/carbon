@@ -106,7 +106,7 @@ export default class DataTable extends React.Component {
      * Provide an optional array of size options used by TableToolbarSettingSize
      */
     sizeOptions: PropTypes.arrayOf(
-      PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
+      PropTypes.oneOf(['compact', 'short', 'normal', 'tall'])
     ),
 
     /**
@@ -654,7 +654,13 @@ export default class DataTable extends React.Component {
 
   render() {
     const { children, filterRows, headers, render } = this.props;
-    const { filterInputValue, selectedColumns, rowIds, rowsById, cellsById } = this.state;
+    const {
+      filterInputValue,
+      selectedColumns,
+      rowIds,
+      rowsById,
+      cellsById,
+    } = this.state;
     const filteredRowIds =
       typeof filterInputValue === 'string'
         ? filterRows({

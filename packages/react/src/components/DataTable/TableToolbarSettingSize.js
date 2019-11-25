@@ -7,10 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import {
-  TableToolbarTitle,
-  TableToolbarOption,
-} from './TableToolbar';
+import { TableToolbarTitle, TableToolbarOption } from './TableToolbar';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
 
@@ -25,34 +22,39 @@ const translateWithId = id => {
   return translationKeys[id];
 };
 
-const TableToolbarSettingSize = React.forwardRef(({
-  size,
-  sizeOptions,
-  onChange: onChangeProp,
-  handleMenuItemFocus,
-  translateWithId: t,
-}, ref) => {
-  const [selected, setSelected] = useState(size);
-  const onChange = (id) => {
-    setSelected(id);
-    onChangeProp(id);
-  };
+const TableToolbarSettingSize = React.forwardRef(
+  (
+    {
+      size,
+      sizeOptions,
+      onChange: onChangeProp,
+      handleMenuItemFocus,
+      translateWithId: t,
+    },
+    ref
+  ) => {
+    const [selected, setSelected] = useState(size);
+    const onChange = id => {
+      setSelected(id);
+      onChangeProp(id);
+    };
 
-  return (
-    <React.Fragment>
-      <TableToolbarTitle ref={ref} title={t('carbon.table.toolbar.row.height.label')} />
-      <TableToolbarOption>
-        <RadioButtonGroup
-           defaultSelected="normal"
-           labelPosition="right"
-           legend="Row Height"
-           name="row-height-radio-button-group"
-           onChange={onChange}
-           orientation="vertical"
-           valueSelected={selected}
-         >
-         {
-            sizeOptions.map(option => (
+    return (
+      <React.Fragment>
+        <TableToolbarTitle
+          ref={ref}
+          title={t('carbon.table.toolbar.row.height.label')}
+        />
+        <TableToolbarOption>
+          <RadioButtonGroup
+            defaultSelected="normal"
+            labelPosition="right"
+            legend="Row Height"
+            name="row-height-radio-button-group"
+            onChange={onChange}
+            orientation="vertical"
+            valueSelected={selected}>
+            {sizeOptions.map(option => (
               <RadioButton
                 key={option}
                 id={option}
@@ -61,13 +63,13 @@ const TableToolbarSettingSize = React.forwardRef(({
                 onKeyDown={handleMenuItemFocus}
                 data-table-toolbar-focusable
               />
-            ))
-         }
-         </RadioButtonGroup>
-      </TableToolbarOption>          
-    </React.Fragment>
-  );
-});
+            ))}
+          </RadioButtonGroup>
+        </TableToolbarOption>
+      </React.Fragment>
+    );
+  }
+);
 
 TableToolbarSettingSize.propTypes = {
   /**
@@ -78,7 +80,7 @@ TableToolbarSettingSize.propTypes = {
    * Provide an array of size options
    */
   sizeOptions: PropTypes.arrayOf(
-    PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
+    PropTypes.oneOf(['compact', 'short', 'normal', 'tall'])
   ).isRequired,
   /**
    * Provide an optional hook that is called each time the selection is updated

@@ -9,10 +9,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import OverflowMenuItem from '../OverflowMenuItem';
 
-const TableToolbarAction = React.forwardRef(({ children, handleMenuItemFocus, ...rest }, ref) => {
-  // exclude handleMenuItemFocus
-  return <OverflowMenuItem ref={ref} itemText={children} {...rest} />;
-});
+const TableToolbarAction = React.forwardRef(
+  ({ children, handleMenuItemFocus, ...rest }, ref) => {
+    // exclude handleMenuItemFocus
+    return <OverflowMenuItem ref={ref} itemText={children} {...rest} />;
+  }
+);
 
 TableToolbarAction.displayName = 'TableToolbarAction';
 TableToolbarAction.propTypes = {

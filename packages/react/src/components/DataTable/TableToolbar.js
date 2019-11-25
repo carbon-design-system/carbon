@@ -35,7 +35,10 @@ TableToolbar.defaultProps = {
 };
 
 export const TableToolbarTitle = React.forwardRef(({ title }, ref) => (
-  <li ref={ref} className={`${prefix}--table-toolbar-menu__title`} role="menuitem">
+  <li
+    ref={ref}
+    className={`${prefix}--table-toolbar-menu__title`}
+    role="menuitem">
     {title}
   </li>
 ));
@@ -48,7 +51,10 @@ TableToolbarTitle.propTypes = {
 };
 
 export const TableToolbarOption = React.forwardRef(({ children }, ref) => (
-  <li ref={ref} className={`${prefix}--table-toolbar-menu__option`} role="menuitem">
+  <li
+    ref={ref}
+    className={`${prefix}--table-toolbar-menu__option`}
+    role="menuitem">
     {children}
   </li>
 ));

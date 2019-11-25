@@ -7,10 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import {
-  TableToolbarTitle,
-  TableToolbarOption,
-} from './TableToolbar';
+import { TableToolbarTitle, TableToolbarOption } from './TableToolbar';
 import Checkbox from '../Checkbox';
 
 const translationKeys = {
@@ -20,31 +17,37 @@ const translateWithId = id => {
   return translationKeys[id];
 };
 
-const TableToolbarSettingColumns = React.forwardRef(({
-  columns,
-  selectedColumns,
-  onChange: onChangeProp,
-  handleMenuItemFocus,
-  translateWithId: t,
-}, ref) => {
-  const [selected, setSelected] = useState(selectedColumns);
+const TableToolbarSettingColumns = React.forwardRef(
+  (
+    {
+      columns,
+      selectedColumns,
+      onChange: onChangeProp,
+      handleMenuItemFocus,
+      translateWithId: t,
+    },
+    ref
+  ) => {
+    const [selected, setSelected] = useState(selectedColumns);
 
-  const onChange = (checked, id) => {
-    const selectedSet = new Set(selected);
-    if (checked) {
-      selectedSet.add(id);
-    } else {
-      selectedSet.delete(id);
-    }
-    setSelected([...selectedSet]);
-    onChangeProp([...selectedSet]);
-  };
+    const onChange = (checked, id) => {
+      const selectedSet = new Set(selected);
+      if (checked) {
+        selectedSet.add(id);
+      } else {
+        selectedSet.delete(id);
+      }
+      setSelected([...selectedSet]);
+      onChangeProp([...selectedSet]);
+    };
 
-  return (
-    <React.Fragment>
-      <TableToolbarTitle ref={ref} title={t('carbon.table.toolbar.columns.label')} />
-      {
-        columns.map(column => (
+    return (
+      <React.Fragment>
+        <TableToolbarTitle
+          ref={ref}
+          title={t('carbon.table.toolbar.columns.label')}
+        />
+        {columns.map(column => (
           <TableToolbarOption key={column.key}>
             <Checkbox
               id={column.key}
@@ -54,12 +57,12 @@ const TableToolbarSettingColumns = React.forwardRef(({
               onKeyDown={handleMenuItemFocus}
               data-table-toolbar-focusable
             />
-          </TableToolbarOption>          
-        ))
-      }
-    </React.Fragment>
-  );
-});
+          </TableToolbarOption>
+        ))}
+      </React.Fragment>
+    );
+  }
+);
 
 TableToolbarSettingColumns.propTypes = {
   /**
