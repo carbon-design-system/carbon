@@ -125,7 +125,10 @@
   }
 
   .#{$prefix}--modal-container--xs {
-    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-header {
+      padding-right: rem(48px);
+    }
+
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
@@ -147,7 +150,10 @@
   }
 
   .#{$prefix}--modal-container--sm {
-    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-header {
+      padding-right: rem(48px);
+    }
+
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
@@ -179,7 +185,10 @@
   }
 
   .#{$prefix}--modal-container--lg {
-    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-header {
+      padding-right: rem(48px);
+    }
+
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
@@ -212,6 +221,7 @@
 
   .#{$prefix}--modal-header {
     padding-top: $carbon--spacing-05;
+    padding-right: rem(48px);
     margin-bottom: $carbon--spacing-03;
 
     grid-row: 1/1;
