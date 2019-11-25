@@ -4198,7 +4198,6 @@ exports[`DataTable table settings should render 1`] = `
                                             value="tall"
                                           />
                                           <label
-                                            aria-label="Tall (64px)"
                                             class="bx--radio-button__label"
                                             for="tall"
                                           >
@@ -4224,7 +4223,6 @@ exports[`DataTable table settings should render 1`] = `
                                             value="normal"
                                           />
                                           <label
-                                            aria-label="Normal (48px)"
                                             class="bx--radio-button__label"
                                             for="normal"
                                           >
@@ -4251,7 +4249,6 @@ exports[`DataTable table settings should render 1`] = `
                                             value="short"
                                           />
                                           <label
-                                            aria-label="Short (32px)"
                                             class="bx--radio-button__label"
                                             for="short"
                                           >
@@ -4447,7 +4444,6 @@ exports[`DataTable table settings should render 1`] = `
                                                   value="tall"
                                                 />
                                                 <label
-                                                  aria-label="Tall (64px)"
                                                   className="bx--radio-button__label"
                                                   htmlFor="tall"
                                                 >
@@ -4501,7 +4497,6 @@ exports[`DataTable table settings should render 1`] = `
                                                   value="normal"
                                                 />
                                                 <label
-                                                  aria-label="Normal (48px)"
                                                   className="bx--radio-button__label"
                                                   htmlFor="normal"
                                                 >
@@ -4555,7 +4550,6 @@ exports[`DataTable table settings should render 1`] = `
                                                   value="short"
                                                 />
                                                 <label
-                                                  aria-label="Short (32px)"
                                                   className="bx--radio-button__label"
                                                   htmlFor="short"
                                                 >
@@ -4628,7 +4622,7 @@ exports[`DataTable table settings should render 1`] = `
                                     className="bx--table-toolbar-menu__option"
                                     role="menuitem"
                                   >
-                                    <ForwardRef(Checkbox)
+                                    <Checkbox
                                       data-table-toolbar-focusable={true}
                                       defaultChecked={true}
                                       id="fieldA"
@@ -4661,7 +4655,7 @@ exports[`DataTable table settings should render 1`] = `
                                           </span>
                                         </label>
                                       </div>
-                                    </ForwardRef(Checkbox)>
+                                    </Checkbox>
                                   </li>
                                 </ForwardRef>
                                 <ForwardRef
@@ -4671,7 +4665,7 @@ exports[`DataTable table settings should render 1`] = `
                                     className="bx--table-toolbar-menu__option"
                                     role="menuitem"
                                   >
-                                    <ForwardRef(Checkbox)
+                                    <Checkbox
                                       data-table-toolbar-focusable={true}
                                       defaultChecked={false}
                                       id="fieldB"
@@ -4704,7 +4698,7 @@ exports[`DataTable table settings should render 1`] = `
                                           </span>
                                         </label>
                                       </div>
-                                    </ForwardRef(Checkbox)>
+                                    </Checkbox>
                                   </li>
                                 </ForwardRef>
                               </ForwardRef>

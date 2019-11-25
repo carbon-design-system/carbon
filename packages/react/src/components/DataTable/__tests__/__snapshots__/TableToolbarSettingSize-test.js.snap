@@ -81,7 +81,6 @@ exports[`DataTable.TableToolbarSettingSize should render 1`] = `
                     value="normal"
                   />
                   <label
-                    aria-label="Normal (48px)"
                     className="bx--radio-button__label"
                     htmlFor="normal"
                   >
@@ -135,7 +134,6 @@ exports[`DataTable.TableToolbarSettingSize should render 1`] = `
                     value="short"
                   />
                   <label
-                    aria-label="Short (32px)"
                     className="bx--radio-button__label"
                     htmlFor="short"
                   >

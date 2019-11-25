@@ -14232,6 +14232,17 @@ Data table action styles
     height: $layout-04;
   }
 
+  .#{$prefix}--table-toolbar-menu__title {
+    padding: 1rem 1.25rem 0.5rem 1.25rem;
+  }
+
+  .#{$prefix}--table-toolbar-menu__option {
+    padding: 0 1.25rem;
+    &:last-child {
+      padding-bottom: 0.5rem;
+    }
+  }
+
   //-------------------------------------------------
   //TOOLBAR BUTTON ICONS
   //-------------------------------------------------

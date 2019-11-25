@@ -60,7 +60,7 @@ exports[`DataTable.TableToolbarSettingColumns should render - some columns selec
       className="bx--table-toolbar-menu__option"
       role="menuitem"
     >
-      <ForwardRef(Checkbox)
+      <Checkbox
         data-table-toolbar-focusable={true}
         defaultChecked={false}
         id="column1"
@@ -93,7 +93,7 @@ exports[`DataTable.TableToolbarSettingColumns should render - some columns selec
             </span>
           </label>
         </div>
-      </ForwardRef(Checkbox)>
+      </Checkbox>
     </li>
   </ForwardRef>
   <ForwardRef
@@ -103,7 +103,7 @@ exports[`DataTable.TableToolbarSettingColumns should render - some columns selec
       className="bx--table-toolbar-menu__option"
       role="menuitem"
     >
-      <ForwardRef(Checkbox)
+      <Checkbox
         data-table-toolbar-focusable={true}
         defaultChecked={false}
         id="column2"
@@ -136,7 +136,7 @@ exports[`DataTable.TableToolbarSettingColumns should render - some columns selec
             </span>
           </label>
         </div>
-      </ForwardRef(Checkbox)>
+      </Checkbox>
     </li>
   </ForwardRef>
 </ForwardRef>
