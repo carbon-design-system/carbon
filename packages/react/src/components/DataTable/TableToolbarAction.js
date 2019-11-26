@@ -9,12 +9,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import OverflowMenuItem from '../OverflowMenuItem';
 
+/* eslint-disable no-unused-vars */
 const TableToolbarAction = React.forwardRef(
   ({ children, handleMenuItemFocus, ...rest }, ref) => {
     // exclude handleMenuItemFocus
     return <OverflowMenuItem ref={ref} itemText={children} {...rest} />;
   }
 );
+/* eslint-enable no-unused-vars */
 
 TableToolbarAction.displayName = 'TableToolbarAction';
 TableToolbarAction.propTypes = {
