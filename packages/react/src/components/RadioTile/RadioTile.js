@@ -120,12 +120,12 @@ export default class RadioTile extends React.Component {
           className={classes}
           tabIndex={this.props.tabIndex}
           onKeyDown={this.handleKeyDown}>
-          <div className={`${prefix}--tile__checkmark`}>
+          <span className={`${prefix}--tile__checkmark`}>
             <CheckmarkFilled aria-label={iconDescription}>
               {iconDescription && <title>{iconDescription}</title>}
             </CheckmarkFilled>
-          </div>
-          <div className={`${prefix}--tile-content`}>{children}</div>
+          </span>
+          <span className={`${prefix}--tile-content`}>{children}</span>
         </label>
       </>
     );
