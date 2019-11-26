@@ -266,7 +266,11 @@
     position: absolute;
     left: 0;
     bottom: $carbon--spacing-08;
-    background-image: linear-gradient(to bottom, transparent, $ui-01);
+    background-color: $ui-01;
+    mask-image: linear-gradient(to bottom, transparent 0%, $ui-01 100%);
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      background-image: linear-gradient(to bottom, transparent, $ui-01);
+    }
   }
 
   .#{$prefix}--modal-content:focus

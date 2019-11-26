@@ -88,7 +88,12 @@
     position: absolute;
     top: 0;
     right: rem(56px);
-    background-image: linear-gradient(to right, transparent, $ui-01);
+    background-color: $ui-01;
+    mask-image: linear-gradient(to right, transparent 0%, $ui-01 100%);
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      background-color: transparent;
+      background-image: linear-gradient(to right, transparent, $ui-01);
+    }
   }
 
   // Multi Line Snippet
@@ -136,7 +141,12 @@
     position: absolute;
     top: 0;
     right: 0;
-    background-image: linear-gradient(to right, transparent, $ui-01);
+    background-color: $ui-01;
+    mask-image: linear-gradient(to right, transparent 0%, $ui-01 100%);
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      background-color: transparent;
+      background-image: linear-gradient(to right, transparent, $ui-01);
+    }
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre code {
@@ -279,7 +289,12 @@
   .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--multi
     .#{$prefix}--snippet-container
     pre::after {
-    background-image: linear-gradient(to right, transparent, $ui-02);
+    background-color: $ui-02;
+    mask-image: linear-gradient(to right, transparent 0%, $ui-02 100%);
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      background-color: transparent;
+      background-image: linear-gradient(to right, transparent, $ui-02);
+    }
   }
 
   // Skeleton State
