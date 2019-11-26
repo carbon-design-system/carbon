@@ -373,7 +373,6 @@ export default class Modal extends Component {
         }
       : {};
 
-    console.log(hasScrollingContent);
 
     const modalBody = (
       <div
