@@ -49,6 +49,7 @@ export default {
       attrs,
       on: listeners,
     };
+
     if (data.staticClass) {
       svgData.class = {
         [data.staticClass]: true,
@@ -57,6 +58,23 @@ export default {
     if (data.class) {
       svgData.class[data.class] = true;
     }
+
+    // combine incoming staticStyle, style and internal style attribute.
+    const style = svgData.attrs.style;
+    delete svgData.attrs.style;
+
+    // convert incoming style attr to object form.
+    const styleArray = style.split(';').filter(item => item.trim().length > 0);
+    const styleObj = styleArray.reduce((acc, styleString) => {
+      const parts = styleString.split(':');
+      // camel case name to match Vue expected object format. e.g. will-change: transform
+      const name = parts[0].trim().replace(/-(\\w)/g, (m, letter) => letter.toUpperCase());
+      const value = parts[1].trim();
+      return acc[name] = value ,acc;
+    }, {});
+
+    svgData.style = { ...styleObj, ...data.staticStyle, ...data.style };
+
     return createElement('svg', svgData, [
       props.title && createElement('title', null, props.title),
       ${content.map(convertToVue).join(', ')},
