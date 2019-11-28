@@ -33,6 +33,7 @@ const Tag = ({
   filter,
   title,
   disabled,
+  onClick,
   ...other
 }) => {
   const tagClass = `${prefix}--tag--${type}`;
@@ -50,7 +51,12 @@ const Tag = ({
       }
       {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
-      <Close16 />
+      <button
+        className={`${prefix}--tag--filter__close-button`}
+        disabled={disabled}
+        onClick={!disabled ? onClick : undefined}>
+        <Close16 />
+      </button>
     </button>
   ) : (
     <button className={tagClasses} {...other}>

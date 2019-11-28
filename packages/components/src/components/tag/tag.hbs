@@ -15,9 +15,11 @@
 
 <div role="list">
   {{#if filter}}
-  <span class="{{@root.prefix}}--tag {{@root.prefix}}--tag--filter" title="Clear filter" tabindex="0" role="listitem">
-    <span class="{{@root.prefix}}--tag__label">filter</span>
-    {{ carbon-icon 'Close16' aria-label='Clear filter' }}
+  <span class="{{@root.prefix}}--tag {{@root.prefix}}--tag--filter" title="Clear filter" role="listitem">
+    filter
+    <button class="{{@root.prefix}}--tag--filter__close-button">
+      {{ carbon-icon 'Close16' aria-label='Clear filter' }}
+    </button>
   </span>
   {{/if}}
 </div>

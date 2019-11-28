@@ -76,7 +76,8 @@
     @include tag-theme($ibm-color__warm-gray-20, $ibm-color__warm-gray-100);
   }
 
-  .#{$prefix}--tag--disabled {
+  .#{$prefix}--tag--disabled,
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled {
     @include tag-theme($ibm-color__gray-10, $ibm-color__gray-30);
 
     &:hover {
@@ -99,27 +100,46 @@
     padding-right: rem(2px);
   }
 
-  .#{$prefix}--tag--filter > svg {
-    fill: $inverse-01;
-    margin-left: rem(4px);
-    padding: rem(2px);
+  .#{$prefix}--tag--filter__close-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: rem(20px);
     height: rem(20px);
-  }
-
-  .#{$prefix}--tag--filter > svg:hover {
+    margin: 0 0 0 rem(4px);
+    padding: 0;
+    border: 0;
+    background-color: transparent;
     border-radius: 50%;
-    background-color: $inverse-hover-ui;
+
+    &:hover {
+      background-color: $inverse-hover-ui;
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: inset 0 0 0 2px $inverse-focus-ui;
+    }
   }
 
-  .#{$prefix}--tag--filter:focus,
-  .#{$prefix}--tag--filter:hover {
-    outline: none;
+  .#{$prefix}--tag--filter svg {
+    fill: $inverse-01;
   }
 
-  .#{$prefix}--tag--filter:focus > svg {
-    box-shadow: inset 0 0 0 2px $inverse-focus-ui;
-    border-radius: 50%;
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
+    .#{$prefix}--tag--filter__close-button:hover {
+    background-color: transparent;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
+    .#{$prefix}--tag--filter__close-button:focus {
+    box-shadow: none;
+  }
+
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg {
+    fill: $ibm-color__gray-30;
   }
 
   // Skeleton state
