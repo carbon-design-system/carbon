@@ -18151,7 +18151,7 @@ Modal styles
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: z('hidden');
+    z-index: z('modal');
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18161,18 +18161,15 @@ Modal styles
     visibility: hidden;
     transition: background-color $duration--slow-02 motion(exit, expressive), opacity
         $duration--moderate-02 motion(exit, expressive),
-      z-index $duration--slow-02 motion(exit, expressive), visibility
-        $duration--moderate-02 motion(exit, expressive);
+      visibility 0ms linear $duration--moderate-02;
 
     &.is-visible {
-      z-index: z('modal');
       visibility: visible;
       opacity: 1;
       background-color: $overlay-01;
       transition: background-color $duration--slow-02 motion(entrance, expressive),
         opacity $duration--moderate-02 motion(entrance, expressive),
-        z-index $duration--slow-02 motion(entrance, expressive), visibility
-          $duration--moderate-02 motion(entrance, expressive);
+        visibility 0ms linear;
     }
 
     .#{$prefix}--text-input,
