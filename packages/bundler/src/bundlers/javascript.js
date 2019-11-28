@@ -23,14 +23,17 @@ async function bundle(entrypoint, options) {
 
   const outputFolders = [
     {
+      dir: 'es',
       format: 'esm',
       directory: path.join(packageFolder, 'es'),
     },
     {
+      dir: 'lib',
       format: 'cjs',
       directory: path.join(packageFolder, 'lib'),
     },
     {
+      dir: 'umd',
       format: 'umd',
       directory: path.join(packageFolder, 'umd'),
     },
@@ -39,7 +42,7 @@ async function bundle(entrypoint, options) {
   await Promise.all(outputFolders.map(({ directory }) => fs.remove(directory)));
 
   const jsEntrypoint = path.join(
-    outputFolders.find(folder => folder.format === 'esm').directory,
+    outputFolders.find(folder => folder.format === (globals.format || 'esm')).directory,
     'index.js'
   );
   const packageJsonPath = path.join(packageFolder, 'package.json');
@@ -77,17 +80,17 @@ async function bundle(entrypoint, options) {
     ],
   });
   await bundle.write({
-    format: 'esm',
+    format: globals.format || 'esm',
     file: jsEntrypoint,
   });
 
   await Promise.all(
     outputFolders
-      .filter(folder => folder.type !== 'esm')
-      .map(({ format, directory }) => {
+      .filter(folder => folder.format !== 'esm')
+      .map(({ format, dir, directory }) => {
         const outputOptions = {
           format,
-          file: jsEntrypoint.replace(/\/es\//, `/${path.basename(directory)}/`),
+          file: jsEntrypoint.replace(`/${dir}/`, `/${path.basename(directory)}/`),
         };
 
         if (format === 'umd') {
