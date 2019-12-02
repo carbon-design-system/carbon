@@ -12,6 +12,7 @@ const { rollup } = require('rollup');
 const babel = require('rollup-plugin-babel');
 const virtual = require('./plugins/virtual');
 const { createIconComponent } = require('./createIconComponent');
+const isWin = process.platform === 'win32';
 
 const BUNDLE_FORMATS = [
   {
@@ -50,7 +51,9 @@ async function build() {
     const { source } = createIconComponent(icon.moduleName, icon.descriptor);
     return {
       moduleName: icon.moduleName,
-      filepath: icon.outputOptions.file.replace(/^es\//g, '').slice(0, -3),
+      filepath: icon.outputOptions.file
+        .replace(isWin ? /^es\\/g : /^es\//g, '')
+        .slice(0, -3),
       source,
     };
   });

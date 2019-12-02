@@ -42,7 +42,8 @@ async function bundle(entrypoint, options) {
   await Promise.all(outputFolders.map(({ directory }) => fs.remove(directory)));
 
   const jsEntrypoint = path.join(
-    outputFolders.find(folder => folder.format === (globals.format || 'esm')).directory,
+    outputFolders.find(folder => folder.format === (globals.format || 'esm'))
+      .directory,
     'index.js'
   );
   const packageJsonPath = path.join(packageFolder, 'package.json');
@@ -90,7 +91,10 @@ async function bundle(entrypoint, options) {
       .map(({ format, dir, directory }) => {
         const outputOptions = {
           format,
-          file: jsEntrypoint.replace(`/${dir}/`, `/${path.basename(directory)}/`),
+          file: jsEntrypoint.replace(
+            `/${dir}/`,
+            `/${path.basename(directory)}/`
+          ),
         };
 
         if (format === 'umd') {
