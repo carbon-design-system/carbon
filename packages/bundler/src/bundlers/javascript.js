@@ -23,17 +23,14 @@ async function bundle(entrypoint, options) {
 
   const outputFolders = [
     {
-      dir: 'es',
       format: 'esm',
       directory: path.join(packageFolder, 'es'),
     },
     {
-      dir: 'lib',
       format: 'cjs',
       directory: path.join(packageFolder, 'lib'),
     },
     {
-      dir: 'umd',
       format: 'umd',
       directory: path.join(packageFolder, 'umd'),
     },
@@ -41,11 +38,11 @@ async function bundle(entrypoint, options) {
 
   await Promise.all(outputFolders.map(({ directory }) => fs.remove(directory)));
 
-  const jsEntrypoint = path.join(
-    outputFolders.find(folder => folder.format === (globals.format || 'esm'))
-      .directory,
-    'index.js'
-  );
+  const jsEntryPoints = outputFolders.map(({ directory, format }) => ({
+    file: path.join(directory, 'index.js'),
+    format,
+  }));
+
   const packageJsonPath = path.join(packageFolder, 'package.json');
   const packageJson = await fs.readJson(packageJsonPath);
   const { dependencies = {} } = packageJson;
@@ -80,33 +77,21 @@ async function bundle(entrypoint, options) {
       }),
     ],
   });
-  await bundle.write({
-    format: globals.format || 'esm',
-    file: jsEntrypoint,
-  });
 
   await Promise.all(
-    outputFolders
-      .filter(folder => folder.format !== 'esm')
-      .map(({ format, dir, directory }) => {
-        const outputOptions = {
-          format,
-          file: jsEntrypoint.replace(
-            `/${dir}/`,
-            `/${path.basename(directory)}/`
-          ),
+    jsEntryPoints.map(({ format, file }) => {
+      const outputOptions = { format, file };
+
+      if (format === 'umd') {
+        outputOptions.name = name;
+        outputOptions.globals = {
+          ...formatDependenciesIntoGlobals(dependencies),
+          ...globals,
         };
+      }
 
-        if (format === 'umd') {
-          outputOptions.name = name;
-          outputOptions.globals = {
-            ...formatDependenciesIntoGlobals(dependencies),
-            ...globals,
-          };
-        }
-
-        return bundle.write(outputOptions);
-      })
+      return bundle.write(outputOptions);
+    })
   );
 }
 

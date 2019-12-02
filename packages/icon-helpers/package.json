@@ -25,7 +25,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && bundler bundle src/index.js --name CarbonIconHelpers -g format=cjs",
+    "build": "yarn clean && bundler bundle src/index.js --name CarbonIconHelpers",
     "clean": "rimraf es lib umd"
   },
   "devDependencies": {
