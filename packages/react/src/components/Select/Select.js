@@ -10,6 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { ChevronDown16, WarningFilled16 } from '@carbon/icons-react';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -21,7 +22,9 @@ const Select = React.forwardRef(function Select(
     labelText,
     disabled,
     children,
-    noLabel, // reserved for use with <Pagination> component
+    // reserved for use with <Pagination> component
+    noLabel,
+    // eslint-disable-next-line no-unused-vars
     iconDescription,
     hideLabel,
     invalid,
@@ -73,11 +76,7 @@ const Select = React.forwardRef(function Select(
           ref={ref}>
           {children}
         </select>
-        <ChevronDown16
-          className={`${prefix}--select__arrow`}
-          aria-label={iconDescription}>
-          <title>{iconDescription}</title>
-        </ChevronDown16>
+        <ChevronDown16 className={`${prefix}--select__arrow`} />
         {invalid && (
           <WarningFilled16 className={`${prefix}--select__invalid-icon`} />
         )}
@@ -167,7 +166,11 @@ Select.propTypes = {
   /**
    * Provide a description for the twistie icon that can be read by screen readers
    */
-  iconDescription: PropTypes.string.isRequired,
+  iconDescription: deprecate(
+    PropTypes.string,
+    'The `iconDescription` prop for `Select` is no longer needed and has ' +
+      'been deprecated. It will be moved in the next major release.'
+  ),
 
   /**
    * Specify whether the label should be hidden, or not
@@ -205,7 +208,6 @@ Select.defaultProps = {
   disabled: false,
   labelText: 'Select',
   inline: false,
-  iconDescription: 'open list of options',
   invalid: false,
   invalidText: '',
   helperText: '',
