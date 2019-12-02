@@ -47,12 +47,17 @@
     }
   }
 
+  .#{$prefix}--inline-notification a {
+    color: $inverse-link;
+  }
+
   .#{$prefix}--inline-notification--low-contrast {
     // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
     color: map-get($carbon--theme--white, 'text-01');
 
     &::before {
       content: '';
+      pointer-events: none;
       position: absolute;
       top: 0;
       left: 0;
