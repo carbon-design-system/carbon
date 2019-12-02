@@ -43,6 +43,10 @@
     }
   }
 
+  .#{$prefix}--toast-notification a {
+    color: $inverse-link;
+  }
+
   .#{$prefix}--toast-notification--low-contrast {
     // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
     color: map-get($carbon--theme--white, 'text-01');
