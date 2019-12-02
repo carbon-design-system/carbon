@@ -55,6 +55,7 @@ export default {
       };
     }
     if (data.class) {
+      svgData.class = svgData.class || {}; // may be no static class
       svgData.class[data.class] = true;
     }
     return createElement('svg', svgData, [
