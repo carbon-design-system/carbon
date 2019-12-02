@@ -14081,6 +14081,12 @@ Data table action styles
 
   .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search
+    .#{$prefix}--label {
+    visibility: hidden;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
     .#{$prefix}--search-input {
     border: none;
     height: 100%;
@@ -14116,9 +14122,12 @@ Data table action styles
 
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
+    .#{$prefix}--label,
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
     .#{$prefix}--search-input {
     padding-left: $spacing-3xl;
-    visibility: visible;
+    visibility: inherit;
   }
 
   .#{$prefix}--toolbar-search-container-active
