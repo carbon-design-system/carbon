@@ -8,7 +8,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { CheckmarkFilled16, Error20 } from '@carbon/icons-react';
+import {
+  CheckmarkFilled16,
+  ErrorFilled16,
+  WarningFilled16,
+} from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate';
 import Loading from '../Loading';
@@ -28,9 +32,12 @@ export default function InlineLoading({
   const loadingClasses = classNames(`${prefix}--inline-loading`, className);
   const getLoading = () => {
     if (status === 'error') {
-      return <Error20 className={`${prefix}--inline-loading--error`} />;
-    }
-    if (status === 'finished') {
+      return <ErrorFilled16 className={`${prefix}--inline-loading--error`} />;
+    } else if (status === 'warning') {
+      return (
+        <WarningFilled16 className={`${prefix}--inline-loading--warning`} />
+      );
+    } else if (status === 'finished') {
       setTimeout(() => {
         if (onSuccess) {
           onSuccess();
@@ -41,8 +48,7 @@ export default function InlineLoading({
           className={`${prefix}--inline-loading__checkmark-container`}
         />
       );
-    }
-    if (status === 'inactive' || status === 'active') {
+    } else if (status === 'inactive' || status === 'active') {
       return (
         <Loading
           small
@@ -89,7 +95,13 @@ InlineLoading.propTypes = {
   /**
    * Specify the loading status
    */
-  status: PropTypes.oneOf(['inactive', 'active', 'finished', 'error']),
+  status: PropTypes.oneOf([
+    'inactive',
+    'active',
+    'finished',
+    'error',
+    'warning',
+  ]),
 
   /**
    * Specify the description for the inline loading text

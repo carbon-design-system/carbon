@@ -72,14 +72,27 @@
     animation-fill-mode: forwards;
   }
 
-  .#{$prefix}--inline-loading--error {
-    fill: $support-01;
+  .#{$prefix}--inline-loading--error,
+  .#{$prefix}--inline-loading--warning {
     width: rem(16px);
     height: rem(16px);
 
     &[hidden] {
       display: none;
     }
+  }
+
+  .#{$prefix}--inline-loading--error {
+    fill: $support-01;
+  }
+
+  .#{$prefix}--inline-loading--warning {
+    fill: $support-03;
+  }
+
+  .#{$prefix}--inline-loading--warning path[opacity='0'] {
+    fill: $carbon__black-100;
+    opacity: 1;
   }
 
   .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {

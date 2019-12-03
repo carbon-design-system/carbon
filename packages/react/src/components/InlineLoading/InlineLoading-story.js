@@ -15,7 +15,7 @@ import InlineLoading from '../InlineLoading';
 const props = () => ({
   status: select(
     'Loading status (status)',
-    ['inactive', 'active', 'finished', 'error'],
+    ['inactive', 'active', 'finished', 'error', 'warning'],
     'active'
   ),
   iconDescription: text(
