@@ -98,7 +98,7 @@
     // Transition property for when the accordion closes
     transition: padding motion(standard, productive) $duration--fast-02;
     padding-left: $carbon--spacing-05;
-    padding-right: 25%;
+    padding-right: $carbon--spacing-05;
 
     @include carbon--breakpoint-down('md') {
       padding-right: $carbon--spacing-09;
