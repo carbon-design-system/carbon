@@ -195,6 +195,23 @@ describe('createIconComponent', () => {
     expect(node.classList.contains(dynamicClass)).toBe(true);
   });
 
+  it('should support dynamic classes only', async () => {
+    const dynamicClass = 'bar';
+    const node = render({
+      components: {
+        [MockIconComponent.name]: MockIconComponent,
+      },
+      data() {
+        return {
+          myDynamicClass: dynamicClass,
+        };
+      },
+      template: `<MockIcon v-bind:class="myDynamicClass" />`,
+    });
+
+    expect(node.classList.contains(dynamicClass)).toBe(true);
+  });
+
   it('should support custom styles', async () => {
     const customStyle = 'z-index: 99; overflow: hidden;';
     const dynamicStyle = { opacity: '0.99' };
@@ -210,7 +227,6 @@ describe('createIconComponent', () => {
       template: `<MockIcon style="${customStyle}" v-bind:style="myDynamicStyle" />`,
     });
 
-    // console.dir(expect(node.getAttribute('style')));
     const nodeStyle = node.getAttribute('style');
 
     expect(nodeStyle).toEqual(
@@ -218,7 +234,6 @@ describe('createIconComponent', () => {
     );
     expect(nodeStyle).toEqual(expect.stringContaining(customStyle));
     expect(nodeStyle).toEqual(expect.stringContaining('opacity: 0.99'));
-    // expect(node.classList.contains(dynamicClass)).toBe(true);
   });
 
   it('should support dynamic styles only', async () => {
