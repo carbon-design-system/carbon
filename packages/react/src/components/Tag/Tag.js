@@ -52,6 +52,7 @@ const Tag = ({
       {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
       <button
+        aria-label={title || 'Clear filter'}
         className={`${prefix}--tag--filter__close-button`}
         disabled={disabled}
         onClick={!disabled ? onClick : undefined}>
