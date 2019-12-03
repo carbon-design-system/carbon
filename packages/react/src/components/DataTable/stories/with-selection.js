@@ -35,9 +35,10 @@ export default props => (
     }) => (
       <TableContainer
         title="DataTable"
+        titleId="table-container-title"
         description="With selection"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-describedby="table-container-title">
           <TableHead>
             <TableRow>
               <TableSelectAll {...getSelectionProps()} />

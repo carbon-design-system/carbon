@@ -36,9 +36,10 @@ export default props => (
     }) => (
       <TableContainer
         title="DataTable"
+        titleId="table-container-title"
         description="With expansion"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-describedby="table-container-title">
           <TableHead>
             <TableRow>
               <TableExpandHeader

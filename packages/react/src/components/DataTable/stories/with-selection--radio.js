@@ -35,9 +35,10 @@ export default props => (
     }) => (
       <TableContainer
         title="DataTable"
+        titleId="table-container-title"
         description="For selecting single rows"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-describedby="table-container-title">
           <TableHead>
             <TableRow>
               <th scope="col" />

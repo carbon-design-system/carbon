@@ -16,6 +16,7 @@ const TableContainer = ({
   className,
   children,
   title,
+  titleId,
   description,
   stickyHeader,
   ...rest
@@ -32,7 +33,9 @@ const TableContainer = ({
     <div {...rest} className={tableContainerClasses}>
       {title && (
         <div className={`${prefix}--data-table-header`}>
-          <h4 className={`${prefix}--data-table-header__title`}>{title}</h4>
+          <h4 id={titleId} className={`${prefix}--data-table-header__title`}>
+            {title}
+          </h4>
           <p className={`${prefix}--data-table-header__description`}>
             {description}
           </p>
@@ -50,6 +53,11 @@ TableContainer.propTypes = {
    * Provide a title for the Table
    */
   title: PropTypes.node,
+
+  /**
+   * Provide an element ID of the title for the Table
+   */
+  titleId: PropTypes.string,
 
   /**
    * Optional description text for the Table
