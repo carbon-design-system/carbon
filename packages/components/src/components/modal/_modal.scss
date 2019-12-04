@@ -126,7 +126,7 @@
 
   .#{$prefix}--modal-container--xs {
     .#{$prefix}--modal-header {
-      padding-right: rem(48px);
+      padding-right: $spacing-3xl;
     }
 
     .#{$prefix}--modal-content,
@@ -151,7 +151,7 @@
 
   .#{$prefix}--modal-container--sm {
     .#{$prefix}--modal-header {
-      padding-right: rem(48px);
+      padding-right: $spacing-3xl;
     }
 
     .#{$prefix}--modal-content,
@@ -186,7 +186,7 @@
 
   .#{$prefix}--modal-container--lg {
     .#{$prefix}--modal-header {
-      padding-right: rem(48px);
+      padding-right: $spacing-3xl;
     }
 
     .#{$prefix}--modal-content,
@@ -221,7 +221,7 @@
 
   .#{$prefix}--modal-header {
     padding-top: $carbon--spacing-05;
-    padding-right: rem(48px);
+    padding-right: $spacing-3xl;
     margin-bottom: $carbon--spacing-03;
 
     grid-row: 1/1;
