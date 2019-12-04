@@ -1754,9 +1754,9 @@
     normalize-path "^2.0.1"
     through2 "^2.0.3"
 
-"@ibma/aat@https://able.ibm.com/tools/dist/ibma-aat-2.0.1-alpha.tgz":
-  version "2.0.1-alpha"
-  resolved "https://able.ibm.com/tools/dist/ibma-aat-2.0.1-alpha.tgz#0b7ac1805baef211907c01a11cd9da62abe032ac"
+"@ibma/aat@https://able.ibm.com/tools/dist/ibma-aat-2.0.3-alpha.tgz":
+  version "2.0.3-alpha"
+  resolved "https://able.ibm.com/tools/dist/ibma-aat-2.0.3-alpha.tgz#f2540678db5c8457b3d4d86c73f2343e67fa5bc7"
   dependencies:
     chromedriver "^77.0.0"
     deep-diff "^0.3.4"
