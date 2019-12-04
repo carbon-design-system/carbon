@@ -212,13 +212,18 @@ class HeaderMenu extends React.Component {
    * sequence when they might not want to go through all the items.
    */
   _renderMenuItem = (item, index) => {
-    return React.cloneElement(item, {
-      ref: this.handleItemRef(index),
-      role: 'none',
-    });
+    if (React.isValidElement(item)) {
+      return React.cloneElement(item, {
+        ref: this.handleItemRef(index),
+        role: 'none',
+      });
+    }
   };
 }
 
-export default React.forwardRef((props, ref) => {
+const HeaderMenuForwardRef = React.forwardRef((props, ref) => {
   return <HeaderMenu {...props} focusRef={ref} />;
 });
+
+HeaderMenuForwardRef.displayName = 'HeaderMenu';
+export default HeaderMenuForwardRef;

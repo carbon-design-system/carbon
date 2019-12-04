@@ -82,14 +82,14 @@ letter-spacing: 0;"
 exports[`styles expressiveHeading01 should be printable 1`] = `
 "font-size: 0.875rem;
 font-weight: 600;
-line-height: 1.125rem;
+line-height: 1.25rem;
 letter-spacing: 0.16px;"
 `;
 
 exports[`styles expressiveHeading02 should be printable 1`] = `
 "font-size: 1rem;
 font-weight: 600;
-line-height: 1.375rem;
+line-height: 1.5rem;
 letter-spacing: 0;"
 `;
 

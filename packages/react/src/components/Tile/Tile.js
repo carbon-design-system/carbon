@@ -339,12 +339,12 @@ export class SelectableTile extends Component {
           {...other}
           onClick={this.handleClick}
           onKeyDown={this.handleKeyDown}>
-          <div className={`${prefix}--tile__checkmark`}>
+          <span className={`${prefix}--tile__checkmark`}>
             <CheckmarkFilled aria-label={iconDescription}>
               {iconDescription && <title>{iconDescription}</title>}
             </CheckmarkFilled>
-          </div>
-          <div className={`${prefix}--tile-content`}>{children}</div>
+          </span>
+          <span className={`${prefix}--tile-content`}>{children}</span>
         </label>
       </>
     );
@@ -405,7 +405,8 @@ export class ExpandableTile extends Component {
   static defaultProps = {
     tabIndex: 0,
     expanded: false,
-    tileMaxHeight: '0',
+    tileMaxHeight: 0,
+    tilePadding: 0,
     onBeforeClick: () => true,
     handleClick: () => {},
     tileCollapsedIconText: 'Interact to expand Tile',
@@ -503,29 +504,31 @@ export class ExpandableTile extends Component {
     const {
       tabIndex,
       className,
+      expanded, // eslint-disable-line
       tileMaxHeight, // eslint-disable-line
       tilePadding, // eslint-disable-line
       handleClick, // eslint-disable-line
       tileCollapsedIconText, // eslint-disable-line
       tileExpandedIconText, // eslint-disable-line
+      onBeforeClick, // eslint-disable-line
       light,
       ...other
     } = this.props;
 
-    const { expanded } = this.state;
+    const { expanded: isExpanded } = this.state;
 
     const classes = classNames(
       `${prefix}--tile`,
       `${prefix}--tile--expandable`,
       {
-        [`${prefix}--tile--is-expanded`]: expanded,
+        [`${prefix}--tile--is-expanded`]: isExpanded,
         [`${prefix}--tile--light`]: light,
       },
       className
     );
 
     const tileStyle = {
-      maxHeight: expanded
+      maxHeight: isExpanded
         ? null
         : this.state.tileMaxHeight + this.state.tilePadding,
     };
@@ -556,8 +559,10 @@ export class ExpandableTile extends Component {
             {childrenAsArray[0]}
           </div>
           <button
-            aria-expanded={expanded}
-            aria-label={expanded ? tileExpandedIconText : tileCollapsedIconText}
+            aria-expanded={isExpanded}
+            aria-label={
+              isExpanded ? tileExpandedIconText : tileCollapsedIconText
+            }
             className={`${prefix}--tile__chevron`}>
             <ChevronDown16 />
           </button>
