@@ -33,11 +33,13 @@ export default function InlineLoading({
   const getLoading = () => {
     if (status === 'error') {
       return <ErrorFilled16 className={`${prefix}--inline-loading--error`} />;
-    } else if (status === 'warning') {
+    }
+    if (status === 'warning') {
       return (
         <WarningFilled16 className={`${prefix}--inline-loading--warning`} />
       );
-    } else if (status === 'finished') {
+    }
+    if (status === 'finished') {
       setTimeout(() => {
         if (onSuccess) {
           onSuccess();
@@ -48,7 +50,8 @@ export default function InlineLoading({
           className={`${prefix}--inline-loading__checkmark-container`}
         />
       );
-    } else if (status === 'inactive' || status === 'active') {
+    }
+    if (status === 'inactive' || status === 'active') {
       return (
         <Loading
           small
