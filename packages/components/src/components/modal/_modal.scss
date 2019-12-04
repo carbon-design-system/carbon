@@ -244,11 +244,15 @@
 
     // Required to accommodate focus outline's negative offset:
     padding-top: $spacing-03;
-    padding-bottom: $spacing-07;
 
     &:focus {
       @include focus-outline('outline');
     }
+  }
+
+  // Required so overflow-indicator disappears at end of content
+  .#{$prefix}--modal-content > *:last-child {
+    padding-bottom: $spacing-07;
   }
 
   .#{$prefix}--modal-content {

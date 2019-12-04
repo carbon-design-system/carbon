@@ -373,7 +373,6 @@ export default class Modal extends Component {
         }
       : {};
 
-
     const modalBody = (
       <div
         ref={this.innerModal}
