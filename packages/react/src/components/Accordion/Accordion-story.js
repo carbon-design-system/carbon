@@ -10,7 +10,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  number,
+  select,
+  text,
+} from '@storybook/addon-knobs';
 import {
   default as Accordion,
   AccordionItem,
@@ -28,7 +34,12 @@ storiesOf('Accordion', module)
   .add(
     'Default',
     () => (
-      <Accordion>
+      <Accordion
+        align={select(
+          'Accordion heading alignment (align)',
+          ['start', 'end'],
+          'end'
+        )}>
         <AccordionItem
           title={text('The title (title)', 'Section 1 title')}
           open={boolean('Open the section (open)', false)}
@@ -80,6 +91,11 @@ storiesOf('Accordion', module)
     () => (
       <div style={{ width: '500px' }}>
         <AccordionSkeleton
+          align={select(
+            'Accordion heading alignment (align)',
+            ['start', 'end'],
+            'end'
+          )}
           open={boolean('Show first item opened (open)', true)}
           count={number('Set number of items (count)', 4)}
         />
