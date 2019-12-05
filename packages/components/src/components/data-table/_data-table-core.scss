@@ -103,7 +103,7 @@
   }
 
   .#{$prefix}--data-table th:last-of-type {
-    position: relative;
+    position: static; // Required to preserve border.
     width: auto;
   }
 
@@ -250,7 +250,7 @@
   }
 
   .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
-    position: relative;
+    position: static; // Required to preserve border.
     background: $ui-03;
     padding: rem(12px) $spacing-03 0 $spacing-05;
     width: rem(
