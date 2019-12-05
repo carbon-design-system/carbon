@@ -7,7 +7,7 @@ jobs:
   release:
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v1
       - name: Use Node.js 10.x
         uses: actions/setup-node@v1
         with:
