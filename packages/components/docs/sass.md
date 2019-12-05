@@ -14081,6 +14081,12 @@ Data table action styles
 
   .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search
+    .#{$prefix}--label {
+    visibility: hidden;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
     .#{$prefix}--search-input {
     border: none;
     height: 100%;
@@ -14116,9 +14122,12 @@ Data table action styles
 
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
+    .#{$prefix}--label,
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
     .#{$prefix}--search-input {
     padding-left: $spacing-3xl;
-    visibility: visible;
+    visibility: inherit;
   }
 
   .#{$prefix}--toolbar-search-container-active
@@ -18151,7 +18160,7 @@ Modal styles
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: z('hidden');
+    z-index: z('modal');
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18161,18 +18170,15 @@ Modal styles
     visibility: hidden;
     transition: background-color $duration--slow-02 motion(exit, expressive), opacity
         $duration--moderate-02 motion(exit, expressive),
-      z-index $duration--slow-02 motion(exit, expressive), visibility
-        $duration--moderate-02 motion(exit, expressive);
+      visibility 0ms linear $duration--moderate-02;
 
     &.is-visible {
-      z-index: z('modal');
       visibility: visible;
       opacity: 1;
       background-color: $overlay-01;
       transition: background-color $duration--slow-02 motion(entrance, expressive),
         opacity $duration--moderate-02 motion(entrance, expressive),
-        z-index $duration--slow-02 motion(entrance, expressive), visibility
-          $duration--moderate-02 motion(entrance, expressive);
+        visibility 0ms linear;
     }
 
     .#{$prefix}--text-input,
@@ -19677,14 +19683,10 @@ Pagination styles
   }
 
   .#{$prefix}--pagination__left {
-    @include carbon--breakpoint('md') {
-      padding: 0 $carbon--spacing-05;
-    }
+    padding: 0 $carbon--spacing-05;
   }
 
   .#{$prefix}--pagination__text {
-    display: none;
-
     @include carbon--breakpoint('md') {
       display: inline-block;
     }
@@ -20728,6 +20730,7 @@ Select styles
     position: relative;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
   }
 
   .#{$prefix}--select-input__wrapper {
