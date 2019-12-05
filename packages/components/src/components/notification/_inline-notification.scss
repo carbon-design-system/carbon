@@ -52,6 +52,23 @@
     color: $inverse-link;
   }
 
+  .#{$prefix}--inline-notification a {
+    text-decoration: none;
+  }
+
+  .#{$prefix}--inline-notification a:hover {
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--inline-notification a:focus {
+    outline: 1px solid $inverse-link;
+  }
+
+  .#{$prefix}--inline-notification.#{$prefix}--inline-notification--low-contrast
+    a:focus {
+    @include focus-outline;
+  }
+
   .#{$prefix}--inline-notification--low-contrast {
     // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
     color: map-get($carbon--theme--white, 'text-01');
