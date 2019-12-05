@@ -310,7 +310,12 @@ class NumberInput extends Component {
     const inputWrapperProps = {};
     let errorId = null;
     let error = null;
-    if (invalid || (!allowEmpty && this.state.value === '')) {
+    if (
+      invalid ||
+      (!allowEmpty && this.state.value === '') ||
+      this.state.value > max ||
+      this.state.value < min
+    ) {
       inputWrapperProps['data-invalid'] = true;
       errorId = `${id}-error-id`;
       error = (
