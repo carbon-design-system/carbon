@@ -195,6 +195,23 @@ describe('createIconComponent', () => {
     expect(node.classList.contains(dynamicClass)).toBe(true);
   });
 
+  it('should support dynamic classes only', async () => {
+    const dynamicClass = 'bar';
+    const node = render({
+      components: {
+        [MockIconComponent.name]: MockIconComponent,
+      },
+      data() {
+        return {
+          myDynamicClass: dynamicClass,
+        };
+      },
+      template: `<MockIcon v-bind:class="myDynamicClass" />`,
+    });
+
+    expect(node.classList.contains(dynamicClass)).toBe(true);
+  });
+
   it('should be focusable if aria-label and tabindex is used', async () => {
     const label = 'custom-label';
     const node = render({
