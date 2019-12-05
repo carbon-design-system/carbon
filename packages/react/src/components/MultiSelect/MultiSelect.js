@@ -18,9 +18,11 @@ import Selection from '../../internal/Selection';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
 const noop = () => undefined;
+const getInstanceId = setupGetInstanceId();
 
 export default class MultiSelect extends React.Component {
   static propTypes = {
@@ -151,6 +153,7 @@ export default class MultiSelect extends React.Component {
 
   constructor(props) {
     super(props);
+    this.multiSelectInstanceId = getInstanceId();
     this.state = {
       highlightedIndex: null,
       isOpen: props.open,
@@ -248,10 +251,11 @@ export default class MultiSelect extends React.Component {
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
+    const labelId = `multiselect-${this.multiSelectInstanceId}`;
     const title = titleText ? (
-      <label htmlFor={id} className={titleClasses}>
+      <span id={labelId} className={titleClasses}>
         {titleText}
-      </label>
+      </span>
     ) : null;
     const helperClasses = cx(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: disabled,
@@ -294,9 +298,14 @@ export default class MultiSelect extends React.Component {
                     selectedItem.length > 0,
                 }
               );
+              const buttonProps = {
+                ...getButtonProps({ disabled }),
+                'aria-label': undefined,
+              };
               return (
                 <ListBox
                   id={id}
+                  aria-label={ariaLabel}
                   type={type}
                   className={className}
                   disabled={disabled}
@@ -315,8 +324,8 @@ export default class MultiSelect extends React.Component {
                     tabIndex="0"
                     disabled={disabled}
                     aria-disabled={disabled}
-                    translateWithId={translateWithId}
-                    {...getButtonProps({ disabled })}>
+                    aria-labelledby={labelId}
+                    {...buttonProps}>
                     {selectedItem.length > 0 && (
                       <ListBox.Selection
                         clearSelection={!disabled ? clearSelection : noop}

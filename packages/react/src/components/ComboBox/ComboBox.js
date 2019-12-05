@@ -272,8 +272,9 @@ export default class ComboBox extends React.Component {
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
+    const comboBoxLabelId = `combobox-label-${this.comboBoxInstanceId}`;
     const title = titleText ? (
-      <label htmlFor={id} className={titleClasses}>
+      <label id={comboBoxLabelId} htmlFor={id} className={titleClasses}>
         {titleText}
       </label>
     ) : null;
@@ -325,7 +326,7 @@ export default class ComboBox extends React.Component {
             <ListBox.Field
               id={id}
               disabled={disabled}
-              translateWithId={translateWithId}
+              aria-labelledby={comboBoxLabelId}
               {...getButtonProps({
                 disabled,
                 onClick: this.onToggleClick(isOpen),
