@@ -223,6 +223,7 @@ class NumberInput extends Component {
 
     if (!disabled && conditional) {
       value = direction === 'down' ? value - step : value + step;
+      value = capMax(max, capMin(min, value));
       evt.persist();
       evt.imaginaryTarget = this._inputRef;
       this.setState(
