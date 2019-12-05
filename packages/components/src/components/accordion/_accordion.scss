@@ -109,6 +109,20 @@
     }
   }
 
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__heading {
+    // Reverse `$accordion-flex-direction` token:
+    flex-direction: row;
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__arrow {
+    // Alters `$accordion-arrow-margin` token:
+    margin: 2px 0 0 $carbon--spacing-03;
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__content {
+    margin-left: $carbon--spacing-06;
+  }
+
   .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content,
   .#{$prefix}--accordion__item--expanding .#{$prefix}--accordion__content {
     display: block;
