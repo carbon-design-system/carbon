@@ -17187,7 +17187,7 @@ Link styles
       @include focus-outline;
     }
 
-    &:not([href]) {
+    &:not([href]):not(button) {
       color: $disabled-02;
       cursor: not-allowed;
       pointer-events: none;
