@@ -299,7 +299,7 @@ class NumberInput extends Component {
           ? value
           : this.state.value,
       readOnly,
-      'aria-label': ariaLabel,
+      'aria-label': label ? null : ariaLabel,
     };
 
     const buttonProps = {
@@ -396,10 +396,7 @@ class NumberInput extends Component {
                     ref={mergeRefs(ref, this._handleInputRef)}
                   />
                   {invalid && (
-                    <WarningFilled16
-                      className={`${prefix}--number__invalid`}
-                      role="img"
-                    />
+                    <WarningFilled16 className={`${prefix}--number__invalid`} />
                   )}
                   <div className={`${prefix}--number__controls`}>
                     <button
