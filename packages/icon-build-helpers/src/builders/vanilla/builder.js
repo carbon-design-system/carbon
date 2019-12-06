@@ -17,6 +17,7 @@ const { flatMapAsync } = require('../../tools');
 const { parse } = require('./svgo');
 const optimize = require('./optimize');
 const virtual = require('../plugins/virtual');
+const isWin = process.platform === 'win32';
 
 const prettierOptions = {
   parser: 'babel',
@@ -150,7 +151,11 @@ async function builder(source, { cwd } = {}) {
   for (const file of files) {
     const { moduleName, descriptor } = file;
     const value = JSON.stringify(descriptor);
-    entrypoint += `\nexport const ${moduleName} = ${value}`;
+    let name = moduleName;
+    if (isWin && moduleName.match(/^\d/)) {
+      name = '_' + moduleName;
+    }
+    entrypoint += `\nexport const ${name} = ${value}`;
   }
 
   const entrypointBundle = await rollup({

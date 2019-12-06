@@ -8,11 +8,13 @@
 'use strict';
 
 const { camel } = require('change-case');
+const { reporter } = require('@carbon/cli-reporter');
 const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');
 const babel = require('rollup-plugin-babel');
 const virtual = require('../plugins/virtual');
+const isWin = process.platform === 'win32';
 
 const external = ['@carbon/icon-helpers', 'react', 'prop-types'];
 const babelConfig = {
@@ -52,9 +54,13 @@ async function builder(meta, { cwd }) {
     },
   ];
 
-  const modules = meta.map(icon =>
-    createIconComponent(icon.moduleName, icon.descriptor)
-  );
+  const modules = meta.map(icon => {
+    let name = icon.moduleName;
+    if (isWin && name.match(/^\d/)) {
+      name = '_' + icon.moduleName;
+    }
+    return createIconComponent(name, icon.descriptor);
+  });
 
   const entrypoint = `/**
  * Copyright IBM Corp. 2019, 2019
@@ -71,6 +77,7 @@ ${modules.map(({ source }) => `export ${source}`).join('\n')}
 export { Icon };
 `;
 
+  reporter.info('Building components');
   const bundle = await rollup({
     input: '__entrypoint__.js',
     external,
@@ -106,6 +113,7 @@ export { Icon };
     })
   );
 
+  reporter.info('Creating aliases');
   // Create aliases for `@carbon/icons-react/es/<icon-name>/<size>`
   await Promise.all(
     meta.map(async icon => {
@@ -114,16 +122,20 @@ export { Icon };
         // The length of this is determined by the number of directories from
         // our `outputOptions` minus 1 for the bundle type (`es` for example)
         // and minus 1 for the filename as it does not count as a directory jump
-        length: outputOptions.file.split('/').length - 2,
+        length: outputOptions.file.split(isWin ? '\\' : '/').length - 2,
       })
         .fill('..')
         .join('/');
 
+      let name = moduleName;
+      if (isWin && name.match(/^\d/)) {
+        name = '_' + moduleName;
+      }
       await fs.ensureFile(outputOptions.file);
       await fs.writeFile(
         outputOptions.file,
-        `import { ${moduleName} } from '${pathToEntrypoint}';
-export default ${moduleName};
+        `import { ${name} } from '${pathToEntrypoint}';
+export default ${name};
 `
       );
     })
@@ -140,11 +152,15 @@ export default ${moduleName};
     const { descriptor, moduleName, outputOptions } = icon;
     // Drop the first part of `outputOptions.file` as it contains the `es/`
     // directory
+    let name = moduleName;
+    if (isWin && name.match(/^\d/)) {
+      name = '_' + moduleName;
+    }
     const commonjsFilepath = outputOptions.file
-      .split('/')
+      .split(isWin ? '\\' : '/')
       .slice(1)
       .join('/');
-    const { source: component } = createIconComponent(moduleName, descriptor);
+    const { source: component } = createIconComponent(name, descriptor);
     const source = `/**
  * Copyright IBM Corp. 2019, 2019
  *
@@ -157,7 +173,7 @@ import Icon from './Icon.js';
 
 ${component}
 
-export default ${moduleName};`;
+export default ${name};`;
 
     return {
       ...acc,
@@ -165,6 +181,7 @@ export default ${moduleName};`;
     };
   }, {});
 
+  reporter.info('Bundling Javascript modules');
   // Using the mapping of file path to file source, we can specify our input to
   // rollup by formatting the filepath so that rollup outputs the file to the
   // correct place. The location is going to match the key that we use in the
@@ -200,6 +217,7 @@ export default ${moduleName};`;
     ],
   });
 
+  reporter.info('Writing to destination');
   await commonjsBundles.write({
     dir: 'lib',
     format: 'cjs',
