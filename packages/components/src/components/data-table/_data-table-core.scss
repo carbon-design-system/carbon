@@ -251,7 +251,8 @@
   }
 
   .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
-    position: static; // Required to preserve border.
+    // Required to preserve border
+    position: static;
     background: $ui-03;
     padding: rem(12px) $spacing-03 0 $spacing-05;
     width: rem(
