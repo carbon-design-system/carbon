@@ -46,6 +46,6 @@ describe('Accordion', () => {
       </Accordion>
     );
 
-    await expect(document).toHaveNoViolations();
+    await expect(document).toHaveNoAxeViolations();
   });
 });
