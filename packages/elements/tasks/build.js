@@ -14,6 +14,7 @@ const klaw = require('klaw-sync');
 const path = require('path');
 const replace = require('replace-in-file');
 const packageJson = require('../package.json');
+const isWin = process.platform === 'win32';
 
 const WORKSPACE_NODE_MODULES = path.resolve(__dirname, '../../../node_modules');
 const BUNDLE_DIR = path.resolve(__dirname, '../scss');
@@ -40,7 +41,7 @@ async function build() {
   const paths = klaw(BUNDLE_DIR, {
     nodir: true,
     filter(item) {
-      const paths = item.path.split('/');
+      const paths = item.path.split(isWin ? '\\' : '/');
       const filename = paths[paths.length - 1];
       const folder = paths[paths.length - 3];
 
