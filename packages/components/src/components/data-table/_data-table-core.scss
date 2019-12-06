@@ -103,7 +103,8 @@
   }
 
   .#{$prefix}--data-table th:last-of-type {
-    position: static; // Required to preserve border.
+    // Required to preserve border
+    position: static;
     width: auto;
   }
 
