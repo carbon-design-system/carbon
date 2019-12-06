@@ -14711,7 +14711,8 @@ Data table core styles
   }
 
   .#{$prefix}--data-table th:last-of-type {
-    position: relative;
+    // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
+    position: static;
     width: auto;
   }
 
@@ -14858,7 +14859,8 @@ Data table core styles
   }
 
   .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
-    position: relative;
+    // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
+    position: static;
     background: $ui-03;
     padding: rem(12px) $spacing-03 0 $spacing-05;
     width: rem(
