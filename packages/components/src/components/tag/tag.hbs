@@ -7,14 +7,16 @@
 
 <div role="list">
   {{#each tags}}
-  <span class="{{@root.prefix}}--tag {{@root.prefix}}--tag--{{type}}" role="listitem">{{label}}</span>
+  <span class="{{@root.prefix}}--tag {{@root.prefix}}--tag--{{type}}" role="listitem">
+    <span class="{{@root.prefix}}--tag__label">{{label}}</span>
+  </span>
   {{/each}}
 </div>
 
 <div role="list">
   {{#if filter}}
   <span class="{{@root.prefix}}--tag {{@root.prefix}}--tag--filter" title="Clear filter" tabindex="0" role="listitem">
-    filter
+    <span class="{{@root.prefix}}--tag__label">filter</span>
     {{ carbon-icon 'Close16' aria-label='Clear filter' }}
   </span>
   {{/if}}

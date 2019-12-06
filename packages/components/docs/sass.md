@@ -3332,6 +3332,7 @@ $carbon--spacing-03: 0.5rem;
 - **Aliased**:
   - `spacing-03`
 - **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
@@ -3442,6 +3443,7 @@ $carbon--spacing-06: 1.5rem;
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
+  - [tags [mixin]](#tags-mixin)
 
 ### ✅carbon--spacing-07 [variable]
 
@@ -12606,6 +12608,20 @@ Accordion styles
     }
   }
 
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__heading {
+    // Reverse `$accordion-flex-direction` token:
+    flex-direction: row;
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__arrow {
+    // Alters `$accordion-arrow-margin` token:
+    margin: 2px 0 0 $carbon--spacing-03;
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__content {
+    margin-left: $carbon--spacing-06;
+  }
+
   .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content,
   .#{$prefix}--accordion__item--expanding .#{$prefix}--accordion__content {
     display: block;
@@ -12684,6 +12700,7 @@ Accordion styles
   - [ui-05 [variable]](#ui-05-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
 
 ## breadcrumb
@@ -14081,6 +14098,12 @@ Data table action styles
 
   .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search
+    .#{$prefix}--label {
+    visibility: hidden;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
     .#{$prefix}--search-input {
     border: none;
     height: 100%;
@@ -14116,9 +14139,12 @@ Data table action styles
 
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
+    .#{$prefix}--label,
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
     .#{$prefix}--search-input {
     padding-left: $spacing-3xl;
-    visibility: visible;
+    visibility: inherit;
   }
 
   .#{$prefix}--toolbar-search-container-active
@@ -17178,7 +17204,7 @@ Link styles
       @include focus-outline;
     }
 
-    &:not([href]) {
+    &:not([href]):not(button) {
       color: $disabled-02;
       cursor: not-allowed;
       pointer-events: none;
@@ -18151,7 +18177,7 @@ Modal styles
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: z('hidden');
+    z-index: z('modal');
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18161,18 +18187,15 @@ Modal styles
     visibility: hidden;
     transition: background-color $duration--slow-02 motion(exit, expressive), opacity
         $duration--moderate-02 motion(exit, expressive),
-      z-index $duration--slow-02 motion(exit, expressive), visibility
-        $duration--moderate-02 motion(exit, expressive);
+      visibility 0ms linear $duration--moderate-02;
 
     &.is-visible {
-      z-index: z('modal');
       visibility: visible;
       opacity: 1;
       background-color: $overlay-01;
       transition: background-color $duration--slow-02 motion(entrance, expressive),
         opacity $duration--moderate-02 motion(entrance, expressive),
-        z-index $duration--slow-02 motion(entrance, expressive), visibility
-          $duration--moderate-02 motion(entrance, expressive);
+        visibility 0ms linear;
     }
 
     .#{$prefix}--text-input,
@@ -19677,14 +19700,10 @@ Pagination styles
   }
 
   .#{$prefix}--pagination__left {
-    @include carbon--breakpoint('md') {
-      padding: 0 $carbon--spacing-05;
-    }
+    padding: 0 $carbon--spacing-05;
   }
 
   .#{$prefix}--pagination__text {
-    display: none;
-
     @include carbon--breakpoint('md') {
       display: inline-block;
     }
@@ -20728,6 +20747,7 @@ Select styles
     position: relative;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
   }
 
   .#{$prefix}--select-input__wrapper {
@@ -21776,10 +21796,13 @@ Tag styles
 @mixin tags() {
   .#{$prefix}--tag {
     @include type-style('label-01');
+
     display: inline-flex;
+    position: relative;
     align-items: center;
     padding: 0 $carbon--spacing-03;
     height: 1.5rem;
+    max-width: 100%; // restricts size of contained elements
     margin: $carbon--spacing-02;
     border-radius: rem(15px);
 
@@ -21840,14 +21863,28 @@ Tag styles
     }
   }
 
+  .#{$prefix}--tag__label {
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
   // tags used for filtering
   .#{$prefix}--tag--filter {
     @include tag-theme($inverse-02, $inverse-01);
+
     cursor: pointer;
-    padding-right: rem(2px); // Align with hover circle of X button
+    padding-right: calc(
+      #{$carbon--spacing-06} + #{rem(2px)}
+    ); // icon width + 2px space from right edge
   }
 
   .#{$prefix}--tag--filter > svg {
+    position: absolute;
+    right: rem(2px);
+    top: 50%;
+    transform: translateY(-50%);
     fill: $inverse-01;
     margin-left: rem(4px);
     padding: rem(2px);
@@ -21873,6 +21910,7 @@ Tag styles
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
     @include skeleton;
+
     width: rem(60px);
     overflow: hidden;
   }
@@ -21891,6 +21929,7 @@ Tag styles
   - [text-01 [variable]](#text-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
 
