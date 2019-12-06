@@ -3332,6 +3332,7 @@ $carbon--spacing-03: 0.5rem;
 - **Aliased**:
   - `spacing-03`
 - **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
@@ -12607,6 +12608,20 @@ Accordion styles
     }
   }
 
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__heading {
+    // Reverse `$accordion-flex-direction` token:
+    flex-direction: row;
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__arrow {
+    // Alters `$accordion-arrow-margin` token:
+    margin: 2px 0 0 $carbon--spacing-03;
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__content {
+    margin-left: $carbon--spacing-06;
+  }
+
   .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content,
   .#{$prefix}--accordion__item--expanding .#{$prefix}--accordion__content {
     display: block;
@@ -12685,6 +12700,7 @@ Accordion styles
   - [ui-05 [variable]](#ui-05-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
 
 ## breadcrumb
