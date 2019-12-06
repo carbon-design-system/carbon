@@ -9,11 +9,57 @@ import React from 'react';
 import Loading from '../Loading';
 import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
+import { render, cleanup } from '@carbon/test-utils/react';
+import { afterEach } from 'jest-circus';
 
 const { prefix } = settings;
 
 describe('Loading', () => {
-  describe('Renders as expected', () => {
+  afterEach(cleanup);
+
+  describe('automated accessibility testing', () => {
+    it('should have no Axe violations', async () => {
+      const { container } = render(<Loading />);
+      await expect(container).toHaveNoAxeViolations();
+    });
+
+    it('should have no DAP violations', async () => {
+      const { container } = render(<Loading />);
+      await expect(container).toHaveNoDAPViolations('Loading');
+    });
+  });
+
+  describe('with a screenreader', () => {
+    afterEach(cleanup);
+
+    // https://www.w3.org/TR/WCAG21/#headings-and-labels
+    it('should have a label on the live region', () => {
+      const { container } = render(<Loading />);
+      const liveRegion = container.querySelector('[aria-live]');
+      expect(liveRegion).toBeInstanceOf(HTMLElement);
+
+      const id = liveRegion.getAttribute('aria-labelledby');
+      expect(id).toBeDefined();
+
+      const label = document.getElementById(id);
+      expect(label).toBeDefined();
+      expect(typeof label.textContent).toBe('string');
+    });
+
+    // https://www.w3.org/TR/WCAG21/#status-messages
+    it('should announce a loading status', () => {
+      const { container } = render(<Loading />);
+      const liveRegion = container.querySelector('[aria-live]');
+      expect(liveRegion).toBeInstanceOf(HTMLElement);
+
+      const atomicBoolean = liveRegion.getAttribute('aria-atomic');
+      expect(atomicBoolean).toBe('true');
+
+      const ariaLiveValue = liveRegion.getAttribute('aria-live');
+      expect(ariaLiveValue).toEqual('assertive');
+    });
+  });
+  describe('renders as expected', () => {
     const wrapper = mount(<Loading className="extra-class" />);
     const overlay = wrapper.find(`.${prefix}--loading-overlay`);
     const loader = wrapper.find(`.${prefix}--loading`);
@@ -48,7 +94,7 @@ describe('Loading', () => {
     });
   });
 
-  describe('Sets props and state as expected', () => {
+  describe('sets props and state as expected', () => {
     const wrapper = mount(<Loading className="extra-class" />);
 
     it(`should remove and add ${prefix}--loading--stop class`, () => {
@@ -66,28 +112,6 @@ describe('Loading', () => {
       wrapper.setProps({ withOverlay: false });
       const overlay = wrapper.find(`.${prefix}--loading-overlay`);
       expect(overlay.length).toEqual(0);
-    });
-
-    it('should be an assertive live region when active', () => {
-      const wrapper = mount(<Loading active={false} />);
-      const getLiveRegion = () => wrapper.find('[aria-live]');
-
-      expect(getLiveRegion().prop('aria-atomic')).toBe('true');
-      expect(getLiveRegion().prop('aria-live')).toBe('off');
-      expect(getLiveRegion().prop('aria-labelledby')).toBeDefined();
-
-      wrapper.setProps({ active: true });
-      expect(getLiveRegion().prop('aria-live')).toBe('assertive');
-
-      wrapper.setProps({ active: false });
-      expect(getLiveRegion().prop('aria-live')).toBe('off');
-    });
-
-    it('should have an associated label for the live region', () => {
-      const wrapper = mount(<Loading />);
-      const node = wrapper.find('[aria-live][aria-labelledby]');
-      const id = node.prop('aria-labelledby');
-      expect(wrapper.find(`#${id}`)).toBeDefined();
     });
   });
 });
