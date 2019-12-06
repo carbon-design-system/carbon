@@ -3511,6 +3511,7 @@ $carbon--spacing-09: 3rem;
   - [accordion [mixin]](#accordion-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [modal [mixin]](#modal-mixin)
   - [tile [mixin]](#tile-mixin)
 
 ### ✅carbon--spacing-10 [variable]
@@ -18270,7 +18271,10 @@ Modal styles
   }
 
   .#{$prefix}--modal-container--xs {
-    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
@@ -18292,7 +18296,10 @@ Modal styles
   }
 
   .#{$prefix}--modal-container--sm {
-    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
@@ -18324,7 +18331,10 @@ Modal styles
   }
 
   .#{$prefix}--modal-container--lg {
-    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
@@ -18357,6 +18367,7 @@ Modal styles
 
   .#{$prefix}--modal-header {
     padding-top: $carbon--spacing-05;
+    padding-right: $carbon--spacing-09;
     margin-bottom: $carbon--spacing-03;
 
     grid-row: 1/1;
@@ -18488,6 +18499,7 @@ Modal styles
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
