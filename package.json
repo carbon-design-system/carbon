@@ -45,6 +45,7 @@
     "@carbon/cli": "10.5.0",
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
+    "@ibma/aat": "https://able.ibm.com/tools/dist/ibma-aat-2.0.3-alpha.tgz",
     "alex": "^8.0.0",
     "axe-core": "^3.3.2",
     "babel-jest": "^24.8.0",
