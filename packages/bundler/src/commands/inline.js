@@ -62,7 +62,7 @@ async function inlineSassDependencies(
         await fs.copy(scssFolder, dependencyOutputFolder);
 
         return [dependency, dependencyOutputFolder];
-      } else return false;
+      }
     })
   )).filter(Boolean);
 
@@ -126,18 +126,22 @@ async function inlineSassDependencies(
 function findSassModule(packageName, cwd) {
   let currentDirectory = cwd;
 
-  if (
-    currentDirectory !== '/' ||
-    /^[a-zA-Z]:(\/\/|\\)/.test(currentDirectory)
-  ) {
-    const nodeModulesFolder = path.join(currentDirectory, '../../node_modules');
+  const isNotRoot = () =>
+    isWin
+      ? !/^[a-zA-Z]:(\/\/|\\)$/.test(currentDirectory)
+      : currentDirectory !== '/';
+
+  while (isNotRoot()) {
+    const nodeModulesFolder = path.join(currentDirectory, 'node_modules');
     const packageFolder = path.join(nodeModulesFolder, packageName);
     const scssFolder = path.join(packageFolder, 'scss');
     const packageJsonPath = path.join(packageFolder, 'package.json');
 
     if (fs.existsSync(scssFolder)) {
       return [scssFolder, packageFolder, packageJsonPath];
-    } else return false;
+    }
+
+    currentDirectory = path.dirname(currentDirectory);
   }
 
   return false;
