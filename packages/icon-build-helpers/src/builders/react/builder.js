@@ -122,7 +122,7 @@ export { Icon };
         // The length of this is determined by the number of directories from
         // our `outputOptions` minus 1 for the bundle type (`es` for example)
         // and minus 1 for the filename as it does not count as a directory jump
-        length: outputOptions.file.split(isWin ? '\\' : '/').length - 2,
+        length: outputOptions.file.split(path.sep).length - 2,
       })
         .fill('..')
         .join('/');
@@ -157,7 +157,7 @@ export default ${name};
       name = '_' + moduleName;
     }
     const commonjsFilepath = outputOptions.file
-      .split(isWin ? '\\' : '/')
+      .split(path.sep)
       .slice(1)
       .join('/');
     const { source: component } = createIconComponent(name, descriptor);
