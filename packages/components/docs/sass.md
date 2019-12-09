@@ -3331,6 +3331,7 @@ $carbon--spacing-03: 0.5rem;
 - **Aliased**:
   - `spacing-03`
 - **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
@@ -3369,7 +3370,6 @@ $carbon--spacing-04: 0.75rem;
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [lists [mixin]](#lists-mixin)
-  - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [text-area [mixin]](#text-area-mixin)
@@ -3439,6 +3439,7 @@ $carbon--spacing-06: 1.5rem;
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
+  - [tags [mixin]](#tags-mixin)
 
 ### ✅carbon--spacing-07 [variable]
 
@@ -3504,6 +3505,7 @@ $carbon--spacing-09: 3rem;
   - [accordion [mixin]](#accordion-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [modal [mixin]](#modal-mixin)
   - [tile [mixin]](#tile-mixin)
 
 ### ✅carbon--spacing-10 [variable]
@@ -3759,6 +3761,7 @@ $spacing-09: $carbon--spacing-09;
 - **Alias**: `carbon--spacing-09`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [modal [mixin]](#modal-mixin)
   - [select [mixin]](#select-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
@@ -12606,6 +12609,20 @@ Accordion styles
     }
   }
 
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__heading {
+    // Reverse `$accordion-flex-direction` token:
+    flex-direction: row;
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__arrow {
+    // Alters `$accordion-arrow-margin` token:
+    margin: 2px 0 0 $carbon--spacing-03;
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__content {
+    margin-left: $carbon--spacing-06;
+  }
+
   .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content,
   .#{$prefix}--accordion__item--expanding .#{$prefix}--accordion__content {
     display: block;
@@ -12684,6 +12701,7 @@ Accordion styles
   - [ui-05 [variable]](#ui-05-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
 
 ## breadcrumb
@@ -14693,7 +14711,8 @@ Data table core styles
   }
 
   .#{$prefix}--data-table th:last-of-type {
-    position: relative;
+    // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
+    position: static;
     width: auto;
   }
 
@@ -14840,7 +14859,8 @@ Data table core styles
   }
 
   .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
-    position: relative;
+    // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
+    position: static;
     background: $ui-03;
     padding: rem(12px) $spacing-03 0 $spacing-05;
     width: rem(
@@ -16260,6 +16280,22 @@ Dropdown styles
     }
   }
 
+  .#{$prefix}--dropdown--xl {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--dropdown--xl .#{$prefix}--dropdown__arrow {
+    top: rem(16px);
+  }
+
+  .#{$prefix}--dropdown--sm {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--dropdown--sm .#{$prefix}--dropdown__arrow {
+    top: rem(8px);
+  }
+
   .#{$prefix}--dropdown--open {
     border-bottom-color: $ui-03;
   }
@@ -16332,9 +16368,7 @@ Dropdown styles
   .#{$prefix}--dropdown-text {
     @include type-style('body-short-01');
     display: block;
-    height: rem(40px);
-    padding-top: $carbon--spacing-04;
-    padding-bottom: $carbon--spacing-04;
+    height: calc(100% + 1px); // Account for the border in `.bx--dropdown`
     padding-left: $carbon--spacing-05;
     padding-right: rem(42px); // 2rem + SVG width
     white-space: nowrap;
@@ -16613,13 +16647,13 @@ Dropdown styles
   - [support-01 [variable]](#support-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
-  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [text-02 [variable]](#text-02-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [ui-background [variable]](#ui-background-variable)
+  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
 
 ## file-uploader
 
@@ -17187,7 +17221,7 @@ Link styles
       @include focus-outline;
     }
 
-    &:not([href]) {
+    &:not([href]):not(button) {
       color: $disabled-02;
       cursor: not-allowed;
       pointer-events: none;
@@ -17433,6 +17467,16 @@ List box styles
     }
   }
 
+  .#{$prefix}--list-box--xl {
+    height: rem(48px);
+    max-height: rem(48px);
+  }
+
+  .#{$prefix}--list-box--sm {
+    height: rem(32px);
+    max-height: rem(32px);
+  }
+
   .#{$prefix}--list-box--expanded {
     border-bottom-color: $ui-03;
   }
@@ -17452,9 +17496,10 @@ List box styles
   // invalid states
   .#{$prefix}--list-box__invalid-icon {
     position: absolute;
-    top: $carbon--spacing-04;
+    top: 50%;
     right: $carbon--spacing-08;
     fill: $support-01;
+    transform: translateY(-50%);
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__invalid-icon {
@@ -17594,7 +17639,7 @@ List box styles
     display: inline-flex;
     align-items: center;
     vertical-align: top;
-    height: rem(40px);
+    height: calc(100% + 1px); // Account for the border in `.bx--list-box`
     padding: 0 $carbon--spacing-09 0 $carbon--spacing-05;
     cursor: pointer;
     outline: none;
@@ -17926,7 +17971,6 @@ List box styles
   - [hover-ui [variable]](#hover-ui-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
@@ -18253,7 +18297,10 @@ Modal styles
   }
 
   .#{$prefix}--modal-container--xs {
-    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
@@ -18275,7 +18322,10 @@ Modal styles
   }
 
   .#{$prefix}--modal-container--sm {
-    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
@@ -18307,7 +18357,10 @@ Modal styles
   }
 
   .#{$prefix}--modal-container--lg {
-    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
@@ -18340,6 +18393,7 @@ Modal styles
 
   .#{$prefix}--modal-header {
     padding-top: $spacing-05;
+    padding-right: $spacing-09;
     margin-bottom: $spacing-03;
 
     grid-row: 1/1;
@@ -18475,6 +18529,8 @@ Modal styles
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [spacing-09 [variable]](#spacing-09-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [text-02 [variable]](#text-02-variable)
   - [spacing-02 [variable]](#spacing-02-variable)
@@ -21783,10 +21839,13 @@ Tag styles
 @mixin tags() {
   .#{$prefix}--tag {
     @include type-style('label-01');
+
     display: inline-flex;
+    position: relative;
     align-items: center;
     padding: 0 $carbon--spacing-03;
     height: 1.5rem;
+    max-width: 100%; // restricts size of contained elements
     margin: $carbon--spacing-02;
     border-radius: rem(15px);
 
@@ -21847,14 +21906,28 @@ Tag styles
     }
   }
 
+  .#{$prefix}--tag__label {
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
   // tags used for filtering
   .#{$prefix}--tag--filter {
     @include tag-theme($inverse-02, $inverse-01);
+
     cursor: pointer;
-    padding-right: rem(2px); // Align with hover circle of X button
+    padding-right: calc(
+      #{$carbon--spacing-06} + #{rem(2px)}
+    ); // icon width + 2px space from right edge
   }
 
   .#{$prefix}--tag--filter > svg {
+    position: absolute;
+    right: rem(2px);
+    top: 50%;
+    transform: translateY(-50%);
     fill: $inverse-01;
     margin-left: rem(4px);
     padding: rem(2px);
@@ -21880,6 +21953,7 @@ Tag styles
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
     @include skeleton;
+
     width: rem(60px);
     overflow: hidden;
   }
@@ -21898,6 +21972,7 @@ Tag styles
   - [text-01 [variable]](#text-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
 

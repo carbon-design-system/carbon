@@ -2,11 +2,12 @@
 
 exports[`AccordionSkeleton should render 1`] = `
 <AccordionSkeleton
+  align="end"
   count={4}
   open={true}
 >
   <ul
-    className="bx--accordion bx--skeleton"
+    className="bx--accordion bx--skeleton bx--accordion--end"
   >
     <li
       className="bx--accordion__item bx--accordion__item--active"
