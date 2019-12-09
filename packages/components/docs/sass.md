@@ -3332,6 +3332,7 @@ $carbon--spacing-03: 0.5rem;
 - **Aliased**:
   - `spacing-03`
 - **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
@@ -3413,6 +3414,7 @@ $carbon--spacing-05: 1rem;
   - [slider [mixin]](#slider-mixin)
   - [padding-th [mixin]](#padding-th-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [tile [mixin]](#tile-mixin)
@@ -3441,6 +3443,7 @@ $carbon--spacing-06: 1.5rem;
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
+  - [tags [mixin]](#tags-mixin)
 
 ### ✅carbon--spacing-07 [variable]
 
@@ -3508,6 +3511,7 @@ $carbon--spacing-09: 3rem;
   - [accordion [mixin]](#accordion-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [modal [mixin]](#modal-mixin)
   - [tile [mixin]](#tile-mixin)
 
 ### ✅carbon--spacing-10 [variable]
@@ -9648,6 +9652,8 @@ Include the `font-family` definition for the given name in your selector
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [carbon--font-family [function]](#carbon--font-family-function)
+- **Used by**:
+  - [snippet [mixin]](#snippet-mixin)
 
 ### ✅carbon--font-weights [variable]
 
@@ -12603,6 +12609,20 @@ Accordion styles
     }
   }
 
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__heading {
+    // Reverse `$accordion-flex-direction` token:
+    flex-direction: row;
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__arrow {
+    // Alters `$accordion-arrow-margin` token:
+    margin: 2px 0 0 $carbon--spacing-03;
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__content {
+    margin-left: $carbon--spacing-06;
+  }
+
   .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content,
   .#{$prefix}--accordion__item--expanding .#{$prefix}--accordion__content {
     display: block;
@@ -12681,6 +12701,7 @@ Accordion styles
   - [ui-05 [variable]](#ui-05-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
 
 ## breadcrumb
@@ -13532,6 +13553,7 @@ Code snippet styles
 
   .#{$prefix}--btn--copy__feedback {
     @include type-style('body-short-01');
+    @include carbon--font-family('sans'); // Override one in code snippet
     z-index: z('overlay');
     font-weight: 400;
     left: inherit;
@@ -13643,9 +13665,27 @@ Code snippet styles
   }
 
   .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
-    top: rem(25px);
+    top: rem(
+      50.8px
+    ); // (The height of button) + (The height of the tooltip's triangle) + 4px
     left: 50%;
     right: auto;
+
+    &::before {
+      top: 0;
+    }
+
+    &:after {
+      top: rem(-4px);
+    }
+  }
+
+  .#{$prefix}--snippet--multi
+    .#{$prefix}--snippet-button
+    .#{$prefix}--btn--copy__feedback {
+    top: rem(
+      42.8px
+    ); // (The height of button) + (The height of the tooltip's triangle) + 4px
   }
 
   .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
@@ -13724,6 +13764,7 @@ Code snippet styles
 - **Group**: [code-snippet](#code-snippet)
 - **Requires**:
   - [bx--snippet [mixin]](#bx--snippet-mixin)
+  - [carbon--font-family [mixin]](#carbon--font-family-mixin)
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -14058,6 +14099,12 @@ Data table action styles
 
   .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search
+    .#{$prefix}--label {
+    visibility: hidden;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
     .#{$prefix}--search-input {
     border: none;
     height: 100%;
@@ -14093,9 +14140,12 @@ Data table action styles
 
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
+    .#{$prefix}--label,
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
     .#{$prefix}--search-input {
     padding-left: $spacing-3xl;
-    visibility: visible;
+    visibility: inherit;
   }
 
   .#{$prefix}--toolbar-search-container-active
@@ -14661,7 +14711,8 @@ Data table core styles
   }
 
   .#{$prefix}--data-table th:last-of-type {
-    position: relative;
+    // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
+    position: static;
     width: auto;
   }
 
@@ -14808,7 +14859,8 @@ Data table core styles
   }
 
   .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
-    position: relative;
+    // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
+    position: static;
     background: $ui-03;
     padding: rem(12px) $spacing-03 0 $spacing-05;
     width: rem(
@@ -16634,6 +16686,7 @@ File uploader styles
     margin-bottom: $carbon--spacing-03;
     display: inline-block;
     width: 100%;
+    max-width: rem(320px);
     color: $link-01;
     outline: none;
     transition: $duration--fast-02 motion(standard, productive);
@@ -16842,7 +16895,6 @@ File uploader styles
     align-items: flex-start;
     justify-content: space-between;
     height: rem(96px);
-    max-width: rem(320px);
     padding: $carbon--spacing-05;
     overflow: hidden;
     border: 1px dashed $ui-04;
@@ -17155,7 +17207,7 @@ Link styles
       @include focus-outline;
     }
 
-    &:not([href]) {
+    &:not([href]):not(button) {
       color: $disabled-02;
       cursor: not-allowed;
       pointer-events: none;
@@ -18128,7 +18180,7 @@ Modal styles
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: z('hidden');
+    z-index: z('modal');
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18138,18 +18190,15 @@ Modal styles
     visibility: hidden;
     transition: background-color $duration--slow-02 motion(exit, expressive), opacity
         $duration--moderate-02 motion(exit, expressive),
-      z-index $duration--slow-02 motion(exit, expressive), visibility
-        $duration--moderate-02 motion(exit, expressive);
+      visibility 0ms linear $duration--moderate-02;
 
     &.is-visible {
-      z-index: z('modal');
       visibility: visible;
       opacity: 1;
       background-color: $overlay-01;
       transition: background-color $duration--slow-02 motion(entrance, expressive),
         opacity $duration--moderate-02 motion(entrance, expressive),
-        z-index $duration--slow-02 motion(entrance, expressive), visibility
-          $duration--moderate-02 motion(entrance, expressive);
+        visibility 0ms linear;
     }
 
     .#{$prefix}--text-input,
@@ -18224,7 +18273,10 @@ Modal styles
   }
 
   .#{$prefix}--modal-container--xs {
-    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
@@ -18246,7 +18298,10 @@ Modal styles
   }
 
   .#{$prefix}--modal-container--sm {
-    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
@@ -18278,7 +18333,10 @@ Modal styles
   }
 
   .#{$prefix}--modal-container--lg {
-    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
@@ -18311,6 +18369,7 @@ Modal styles
 
   .#{$prefix}--modal-header {
     padding-top: $carbon--spacing-05;
+    padding-right: $carbon--spacing-09;
     margin-bottom: $carbon--spacing-03;
 
     grid-row: 1/1;
@@ -18442,6 +18501,7 @@ Modal styles
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
@@ -19591,6 +19651,7 @@ Pagination styles
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
+    display: flex;
     height: 100%;
   }
 
@@ -19653,14 +19714,10 @@ Pagination styles
   }
 
   .#{$prefix}--pagination__left {
-    @include carbon--breakpoint('md') {
-      padding: 0 $carbon--spacing-05;
-    }
+    padding: 0 $carbon--spacing-05;
   }
 
   .#{$prefix}--pagination__text {
-    display: none;
-
     @include carbon--breakpoint('md') {
       display: inline-block;
     }
@@ -20704,6 +20761,7 @@ Select styles
     position: relative;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
   }
 
   .#{$prefix}--select-input__wrapper {
@@ -21665,6 +21723,13 @@ Tabs styles
   }
 
   //-----------------------------
+  //  Tab Content Container
+  //-----------------------------
+  .#{$prefix}--tab-content {
+    padding: $carbon--spacing-05;
+  }
+
+  //-----------------------------
   // Skeleton state
   //-----------------------------
   .#{$prefix}--tabs.#{$prefix}--skeleton {
@@ -21712,6 +21777,7 @@ Tabs styles
   - [text-02 [variable]](#text-02-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
 
 ## tag
 
@@ -21744,10 +21810,13 @@ Tag styles
 @mixin tags() {
   .#{$prefix}--tag {
     @include type-style('label-01');
+
     display: inline-flex;
+    position: relative;
     align-items: center;
     padding: 0 $carbon--spacing-03;
     height: 1.5rem;
+    max-width: 100%; // restricts size of contained elements
     margin: $carbon--spacing-02;
     border-radius: rem(15px);
 
@@ -21808,14 +21877,28 @@ Tag styles
     }
   }
 
+  .#{$prefix}--tag__label {
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
   // tags used for filtering
   .#{$prefix}--tag--filter {
     @include tag-theme($inverse-02, $inverse-01);
+
     cursor: pointer;
-    padding-right: rem(2px); // Align with hover circle of X button
+    padding-right: calc(
+      #{$carbon--spacing-06} + #{rem(2px)}
+    ); // icon width + 2px space from right edge
   }
 
   .#{$prefix}--tag--filter > svg {
+    position: absolute;
+    right: rem(2px);
+    top: 50%;
+    transform: translateY(-50%);
     fill: $inverse-01;
     margin-left: rem(4px);
     padding: rem(2px);
@@ -21841,6 +21924,7 @@ Tag styles
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
     @include skeleton;
+
     width: rem(60px);
     overflow: hidden;
   }
@@ -21859,6 +21943,7 @@ Tag styles
   - [text-01 [variable]](#text-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
 
