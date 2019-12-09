@@ -43,6 +43,7 @@ const Tag = ({
   return filter ? (
     <span
       className={tagClasses}
+      role="button"
       title={title || 'Clear filter'}
       tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
       {...other}>
