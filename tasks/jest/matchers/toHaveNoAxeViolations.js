@@ -29,7 +29,7 @@ const defaultOptions = {
   },
 };
 
-function toHaveNoViolations(node, options = {}) {
+function toHaveNoAxeViolations(node, options = {}) {
   return new Promise(resolve => {
     axe.run(
       node,
@@ -79,4 +79,4 @@ ${divider}
 ${nodes.join('\n')}`;
 }
 
-module.exports = toHaveNoViolations;
+module.exports = toHaveNoAxeViolations;

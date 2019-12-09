@@ -52,8 +52,8 @@ const props = () => {
       'Modal contains scrollable content (hasScrollingContent)',
       true
     ),
-    renderTriggerButtonIcon: typeof iconToUse === 'function' && iconToUse,
-    triggerButtonIcon: typeof iconToUse !== 'function' && iconToUse,
+    renderTriggerButtonIcon:
+      typeof iconToUse === 'function' ? iconToUse : undefined,
     modalLabel: text('The modal label (optional) (modalLabel)', 'Label'),
     modalHeading: text('The modal heading (modalHeading)', 'Modal'),
     selectorPrimaryFocus: text(
