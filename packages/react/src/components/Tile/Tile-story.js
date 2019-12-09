@@ -146,25 +146,13 @@ storiesOf('Tile', module)
           defaultSelected="default-selected"
           legend="Selectable Tile Group"
           {...props.group()}>
-          <RadioTile
-            value="standard"
-            id="tile-1"
-            labelText="Selectable Tile"
-            {...radioProps}>
+          <RadioTile value="standard" id="tile-1" {...radioProps}>
             Selectable Tile
           </RadioTile>
-          <RadioTile
-            value="default-selected"
-            labelText="Default selected tile"
-            id="tile-2"
-            {...radioProps}>
+          <RadioTile value="default-selected" id="tile-2" {...radioProps}>
             Selectable Tile
           </RadioTile>
-          <RadioTile
-            value="selected"
-            labelText="Selectable Tile"
-            id="tile-3"
-            {...radioProps}>
+          <RadioTile value="selected" id="tile-3" {...radioProps}>
             Selectable Tile
           </RadioTile>
         </TileGroup>
