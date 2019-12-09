@@ -2243,7 +2243,7 @@ exports[`DataTable should render 1`] = `
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
-                  role="searchbox"
+                  role="search"
                   tabIndex="0"
                 >
                   <Search
@@ -2304,6 +2304,7 @@ exports[`DataTable should render 1`] = `
                         id="custom-id"
                         onChange={[Function]}
                         placeholder="Filter table"
+                        role="searchbox"
                         type="text"
                         value=""
                       />
@@ -3222,7 +3223,7 @@ exports[`DataTable sticky header should render 1`] = `
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
-                  role="searchbox"
+                  role="search"
                   tabIndex="0"
                 >
                   <Search
@@ -3283,6 +3284,7 @@ exports[`DataTable sticky header should render 1`] = `
                         id="custom-id"
                         onChange={[Function]}
                         placeholder="Filter table"
+                        role="searchbox"
                         type="text"
                         value=""
                       />
