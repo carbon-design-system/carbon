@@ -594,12 +594,15 @@ categories:
           - flow--stream
           - hybrid-networking
           - improve-relevance
+          - interactions
           - increase-level
           - managed-solutions
           - network--1
           - network--2
           - network--3
           - network--4
+          - nominal
+          - ordinal
           - parent-child
           - phrase-sentiment
           - presentation-file
