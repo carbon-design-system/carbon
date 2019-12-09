@@ -3372,7 +3372,6 @@ $carbon--spacing-04: 0.75rem;
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [lists [mixin]](#lists-mixin)
-  - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [text-area [mixin]](#text-area-mixin)
@@ -16280,6 +16279,22 @@ Dropdown styles
     }
   }
 
+  .#{$prefix}--dropdown--xl {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--dropdown--xl .#{$prefix}--dropdown__arrow {
+    top: rem(16px);
+  }
+
+  .#{$prefix}--dropdown--sm {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--dropdown--sm .#{$prefix}--dropdown__arrow {
+    top: rem(8px);
+  }
+
   .#{$prefix}--dropdown--open {
     border-bottom-color: $ui-03;
   }
@@ -16352,9 +16367,7 @@ Dropdown styles
   .#{$prefix}--dropdown-text {
     @include type-style('body-short-01');
     display: block;
-    height: rem(40px);
-    padding-top: $carbon--spacing-04;
-    padding-bottom: $carbon--spacing-04;
+    height: calc(100% + 1px); // Account for the border in `.bx--dropdown`
     padding-left: $carbon--spacing-05;
     padding-right: rem(42px); // 2rem + SVG width
     white-space: nowrap;
@@ -16633,13 +16646,13 @@ Dropdown styles
   - [support-01 [variable]](#support-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
-  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [text-02 [variable]](#text-02-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [ui-background [variable]](#ui-background-variable)
+  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
 
 ## file-uploader
 
@@ -17453,6 +17466,16 @@ List box styles
     }
   }
 
+  .#{$prefix}--list-box--xl {
+    height: rem(48px);
+    max-height: rem(48px);
+  }
+
+  .#{$prefix}--list-box--sm {
+    height: rem(32px);
+    max-height: rem(32px);
+  }
+
   .#{$prefix}--list-box--expanded {
     border-bottom-color: $ui-03;
   }
@@ -17472,9 +17495,10 @@ List box styles
   // invalid states
   .#{$prefix}--list-box__invalid-icon {
     position: absolute;
-    top: $carbon--spacing-04;
+    top: 50%;
     right: $carbon--spacing-08;
     fill: $support-01;
+    transform: translateY(-50%);
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__invalid-icon {
@@ -17614,7 +17638,7 @@ List box styles
     display: inline-flex;
     align-items: center;
     vertical-align: top;
-    height: rem(40px);
+    height: calc(100% + 1px); // Account for the border in `.bx--list-box`
     padding: 0 $carbon--spacing-09 0 $carbon--spacing-05;
     cursor: pointer;
     outline: none;
@@ -17946,7 +17970,6 @@ List box styles
   - [hover-ui [variable]](#hover-ui-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
