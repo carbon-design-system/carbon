@@ -38,6 +38,12 @@ class HeaderMenu extends React.Component {
     focusRef: PropTypes.func,
 
     /**
+     * Optionally supply a role for the underlying <a> node. Useful for resetting
+     * <a> semantics.
+     */
+    linkRole: PropTypes.string,
+
+    /**
      * Optionally provide a tabIndex for the underlying menu button
      */
     tabIndex: PropTypes.number,
@@ -54,6 +60,7 @@ class HeaderMenu extends React.Component {
   };
 
   static defaultProps = {
+    linkRole: 'menuitem',
     renderMenuContent: defaultRenderMenuContent,
   };
 
@@ -157,6 +164,7 @@ class HeaderMenu extends React.Component {
       'aria-labelledby': ariaLabelledBy,
       className: customClassName,
       children,
+      linkRole,
       renderMenuContent: MenuContent,
       menuLinkName,
     } = this.props;
@@ -185,7 +193,7 @@ class HeaderMenu extends React.Component {
           href="#"
           onKeyDown={this.handleOnKeyDown}
           ref={this.handleMenuButtonRef}
-          role="menuitem"
+          role={linkRole}
           tabIndex={0}
           {...accessibilityLabel}>
           {menuLinkName}
