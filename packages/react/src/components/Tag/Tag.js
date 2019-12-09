@@ -41,19 +41,18 @@ const Tag = ({
     [`${prefix}--tag--filter`]: filter,
   });
   return filter ? (
-    <span
+    <button
       className={tagClasses}
-      role="button"
       title={title || 'Clear filter'}
       tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
       {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
       <Close16 aria-label={title || 'Clear filter'} />
-    </span>
+    </button>
   ) : (
-    <span className={tagClasses} {...other}>
+    <button className={tagClasses} {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
-    </span>
+    </button>
   );
 };
 
