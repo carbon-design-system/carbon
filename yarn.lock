@@ -1283,6 +1283,13 @@
     "@carbon/icon-helpers" "0.0.1-beta.5"
     prop-types "^15.6.2"
 
+"@carbon/icons-react@^10.6.1":
+  version "10.6.1"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-10.6.1.tgz#2fdc14947c874875b96a0c58fd438a1ed38d599e"
+  integrity sha512-VeCMLGekMIpLoutyCMk4U1zXUkmzIWZFZbDAGpFbT+OgZuCI1ba5YfiwUV16ldXaSZH7zWmwUQs72t6Kx4fofg==
+  dependencies:
+    "@carbon/icon-helpers" "10.4.0"
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.3.tgz#099139eaec7ebf07a27c1786a3ff64f39464d2ef"
