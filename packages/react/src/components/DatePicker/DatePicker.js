@@ -12,6 +12,7 @@ import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
 import { settings } from 'carbon-components';
 import DatePickerInput from '../DatePickerInput';
+import carbonFlatpickrAppendToPlugin from './plugins/appendToPlugin';
 import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
 import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
 import { match, keys } from '../../internal/keyboard';
@@ -340,7 +341,6 @@ export default class DatePicker extends Component {
         this.cal = new flatpickr(this.inputField, {
           disableMobile: true,
           defaultDate: value,
-          appendTo,
           mode: datePickerType,
           allowInput: true,
           dateFormat: dateFormat,
@@ -350,6 +350,11 @@ export default class DatePicker extends Component {
           plugins: [
             datePickerType === 'range'
               ? new carbonFlatpickrRangePlugin({ input: this.toInputField })
+              : () => {},
+            appendTo
+              ? carbonFlatpickrAppendToPlugin({
+                  appendTo,
+                })
               : () => {},
             carbonFlatpickrMonthSelectPlugin({
               selectorFlatpickrMonthYearContainer: '.flatpickr-current-month',
