@@ -10,10 +10,21 @@ import Tag from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
 import { shallow } from 'enzyme';
 import { settings } from 'carbon-components';
+import { render, cleanup } from '@carbon/test-utils/react';
+import { afterEach } from 'jest-circus';
 
 const { prefix } = settings;
 
 describe('Tag', () => {
+  afterEach(cleanup);
+
+  describe('automated accessibility testing', () => {
+    it('should have no Axe violations', async () => {
+      const { container } = render(<Tag />);
+      await expect(container).toHaveNoAxeViolations();
+    });
+  });
+
   describe('Renders as expected', () => {
     it('should render with the appropriate type', () => {
       const tag = shallow(<Tag type="beta" />);
