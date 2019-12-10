@@ -23,6 +23,15 @@ describe('Tag', () => {
       const { container } = render(<Tag>This is not a tag</Tag>);
       await expect(container).toHaveNoAxeViolations();
     });
+
+    it('should have no DAP violations', async () => {
+      const { container } = render(<Tag>This is not a tag</Tag>);
+      await expect(container).toHaveNoDAPViolations('Tag');
+    });
+  });
+
+  describe('with a screenreader', () => {
+    afterEach(cleanup);
   });
 
   describe('Renders as expected', () => {

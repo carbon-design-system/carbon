@@ -43,11 +43,10 @@ const Tag = ({
   return filter ? (
     <button
       className={tagClasses}
-      title={title || 'Clear filter'}
-      tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      aria-label={`${title} ${children}` || `Clear filter ${children}`}
       {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
-      <Close16 aria-label={title || 'Clear filter'} />
+      <Close16 />
     </button>
   ) : (
     <button className={tagClasses} {...other}>
