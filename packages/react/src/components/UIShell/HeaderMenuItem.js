@@ -13,7 +13,7 @@ import Link, { LinkPropTypes } from './Link';
 const { prefix } = settings;
 
 const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
-  { className, children, role, linkRole, ...rest },
+  { className, children, role, ...rest },
   ref
 ) {
   return (
@@ -22,7 +22,6 @@ const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
         {...rest}
         className={`${prefix}--header__menu-item`}
         ref={ref}
-        role={linkRole}
         tabIndex={0}>
         <span className={`${prefix}--text-truncate--end`}>{children}</span>
       </Link>
@@ -53,16 +52,6 @@ HeaderMenuItem.propTypes = {
    * <ul> semantics for menus.
    */
   role: PropTypes.string,
-
-  /**
-   * Optionally supply a role for the underlying <a> node. Useful for resetting
-   * <a> semantics.
-   */
-  linkRole: PropTypes.string,
-};
-
-HeaderMenuItem.defaultProps = {
-  linkRole: 'menuitem',
 };
 
 export default HeaderMenuItem;
