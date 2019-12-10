@@ -6595,6 +6595,7 @@ $inverse-link: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅field-01 [variable]
@@ -18644,12 +18645,35 @@ Inline notification styles
     }
   }
 
+  .#{$prefix}--inline-notification:not(.#{$prefix}--inline-notification--low-contrast)
+    a {
+    color: $inverse-link;
+  }
+
+  .#{$prefix}--inline-notification a {
+    text-decoration: none;
+  }
+
+  .#{$prefix}--inline-notification a:hover {
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--inline-notification a:focus {
+    outline: 1px solid $inverse-link;
+  }
+
+  .#{$prefix}--inline-notification.#{$prefix}--inline-notification--low-contrast
+    a:focus {
+    @include focus-outline;
+  }
+
   .#{$prefix}--inline-notification--low-contrast {
     // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
     color: map-get($carbon--theme--white, 'text-01');
 
     &::before {
       content: '';
+      pointer-events: none;
       position: absolute;
       top: 0;
       left: 0;
@@ -18843,6 +18867,7 @@ Inline notification styles
   - [prefix [variable]](#prefix-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [inverse-support-01 [variable]](#inverse-support-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -18855,7 +18880,6 @@ Inline notification styles
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [inverse-link [variable]](#inverse-link-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
 
@@ -18951,6 +18975,28 @@ Toast notification styles
     @include carbon--breakpoint(max) {
       width: rem(352px);
     }
+  }
+
+  .#{$prefix}--toast-notification:not(.#{$prefix}--toast-notification--low-contrast)
+    a {
+    color: $inverse-link;
+  }
+
+  .#{$prefix}--toast-notification a {
+    text-decoration: none;
+  }
+
+  .#{$prefix}--toast-notification a:hover {
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--toast-notification a:focus {
+    outline: 1px solid $inverse-link;
+  }
+
+  .#{$prefix}--toast-notification.#{$prefix}--toast-notification--low-contrast
+    a:focus {
+    @include focus-outline;
   }
 
   .#{$prefix}--toast-notification--low-contrast {
@@ -19099,6 +19145,7 @@ Toast notification styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [inverse-support-01 [variable]](#inverse-support-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [support-01 [variable]](#support-01-variable)
