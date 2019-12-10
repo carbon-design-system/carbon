@@ -19375,6 +19375,10 @@ Overflow menu styles
     @include button-reset;
   }
 
+  .#{$prefix}--overflow-menu {
+    @include button-reset();
+  }
+
   .#{$prefix}--overflow-menu,
   .#{$prefix}--overflow-menu__trigger {
     @include reset;
