@@ -167,7 +167,7 @@ exports[`MultiSelect should render 1`] = `
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
+                            d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"
                           />
                           <title>
                             Open menu
