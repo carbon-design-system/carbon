@@ -910,6 +910,16 @@ icons:
         categories:
           - name: Organization
             subcategory: Status
+  - name: interactions
+    friendly_name: Interactions
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - statistics interaction
+    sizes:
+      - 16
   - name: launch
     friendly_name: Launch
     usage: This is a description for usage
@@ -6754,6 +6764,26 @@ icons:
         categories:
           - name: Organization
             subcategory: Data
+  - name: nominal
+    friendly_name: Nominal
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - nominal data
+    sizes:
+      - 16
+  - name: ordinal
+    friendly_name: Ordinal
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - ordinal data
+    sizes:
+      - 16
   - name: no-image
     friendly_name: No image
     usage: This is a description for usage
