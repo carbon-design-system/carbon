@@ -12,16 +12,32 @@ const fs = require('fs-extra');
 const path = require('path');
 const packageJson = require('../../../package.json');
 
+const denylist = new Set(['.DS_Store']);
 const PACKAGES_DIR = path.resolve(__dirname, '../..');
-const packagePaths = fs.readdirSync(PACKAGES_DIR).map(pkg => {
-  const packageJsonPath = path.join(PACKAGES_DIR, pkg, 'package.json');
-  return {
-    basename: pkg,
-    packageJsonPath,
-    packageJson: fs.readJsonSync(packageJsonPath),
-    packagePath: path.join(PACKAGES_DIR, pkg),
-  };
-});
+const packagePaths = fs
+  .readdirSync(PACKAGES_DIR)
+  .filter(basename => {
+    const filename = path.join(PACKAGES_DIR, basename);
+    if (!denylist.has(filename)) {
+      return false;
+    }
+
+    const stats = fs.lstatSync(filename);
+    if (!stats.isDirectory()) {
+      return false;
+    }
+
+    return true;
+  })
+  .map(pkg => {
+    const packageJsonPath = path.join(PACKAGES_DIR, pkg, 'package.json');
+    return {
+      basename: pkg,
+      packageJsonPath,
+      packageJson: fs.readJsonSync(packageJsonPath),
+      packagePath: path.join(PACKAGES_DIR, pkg),
+    };
+  });
 
 const env = {
   root: {
