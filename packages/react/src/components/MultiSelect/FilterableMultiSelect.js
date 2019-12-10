@@ -12,7 +12,7 @@ import Downshift from 'downshift';
 import isEqual from 'lodash.isequal';
 import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
-import ListBox from '../ListBox';
+import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import Checkbox from '../Checkbox';
 import Selection from '../../internal/Selection';
 import { sortingPropTypes } from './MultiSelectPropTypes';
@@ -64,6 +64,11 @@ export default class FilterableMultiSelect extends React.Component {
      * used for sorting the list of items in the control.
      */
     locale: PropTypes.string,
+
+    /**
+     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+     */
+    size: ListBoxPropTypes.ListBoxSize,
 
     /**
      * `onChange` is a utility for this controlled component to communicate to a
@@ -259,6 +264,7 @@ export default class FilterableMultiSelect extends React.Component {
       initialSelectedItems,
       id,
       locale,
+      size,
       placeholder,
       sortItems,
       compareItems,
@@ -345,6 +351,7 @@ export default class FilterableMultiSelect extends React.Component {
                   invalid={invalid}
                   invalidText={invalidText}
                   isOpen={isOpen}
+                  size={size}
                   {...getRootProps({ refKey: 'innerRef' })}>
                   <ListBox.Field
                     id={id}
