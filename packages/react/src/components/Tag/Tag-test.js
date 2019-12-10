@@ -20,7 +20,7 @@ describe('Tag', () => {
 
   describe('automated accessibility testing', () => {
     it('should have no Axe violations', async () => {
-      const { container } = render(<Tag />);
+      const { container } = render(<Tag>This is not a tag</Tag>);
       await expect(container).toHaveNoAxeViolations();
     });
   });
