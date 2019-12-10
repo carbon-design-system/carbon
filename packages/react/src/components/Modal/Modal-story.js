@@ -35,7 +35,7 @@ const props = () => ({
   focusTrap: boolean('Trap focus (focusTrap)', false),
   hasScrollingContent: boolean(
     'Modal contains scrollable content (hasScrollingContent)',
-    true
+    false
   ),
   modalHeading: text('Modal heading (modalHeading)', 'Modal heading'),
   modalLabel: text('Optional label (modalLabel)', 'Label'),
@@ -67,6 +67,43 @@ const props = () => ({
   onRequestSubmit: action('onRequestSubmit'),
   onSecondarySubmit: action('onSecondarySubmit'),
 });
+
+const titleOnlyProps = () => {
+  const passiveModal = boolean('Without footer (passiveModal)', false);
+  return {
+    className: 'some-class',
+    open: boolean('Open (open)', true),
+    passiveModal,
+    danger: !passiveModal && boolean('Danger mode (danger)', false),
+    modalHeading: text(
+      'Modal heading (modalHeading)',
+      `
+      Passive modal title as the message. Should be direct and 3 lines or less.
+    `.trim()
+    ),
+    modalAriaLabel: text(
+      'ARIA label, used only if modalLabel not provided (modalAriaLabel)',
+      'A label to be read by screen readers on the modal root node'
+    ),
+    primaryButtonText: text(
+      'Primary button text (primaryButtonText)',
+      'Primary Button'
+    ),
+    secondaryButtonText: text(
+      'Secondary button text (secondaryButtonText)',
+      'Secondary Button'
+    ),
+    size: select('Size (size)', sizes, 'sm'),
+    iconDescription: text(
+      'Close icon description (iconDescription)',
+      'Close the modal'
+    ),
+    onBlur: action('onBlur'),
+    onClick: action('onClick'),
+    onFocus: action('onFocus'),
+    onRequestClose: action('onRequestClose'),
+  };
+};
 
 storiesOf('Modal', module)
   .addDecorator(withKnobs)
@@ -150,6 +187,25 @@ storiesOf('Modal', module)
             Modals communicate information via a secondary window and allow the user to maintain the context of a particular task.
             Use the Modal Wrapper component to encapsulate your Modal within a button.
           `,
+      },
+    }
+  )
+  .add(
+    'Title only',
+    () => {
+      const { size, ...rest } = titleOnlyProps();
+      return (
+        <>
+          <Modal {...rest} size={size || undefined}></Modal>
+        </>
+      );
+    },
+    {
+      info: {
+        text: `
+          In "small" and "xs" modals size, the title is allowed to span multiple lines and be used for the main message.
+          It should be less than 3 lines of text. If more room is required then use the standard body copy format.
+        `,
       },
     }
   )
