@@ -38,7 +38,7 @@
     "react-dom": "^16.8.6"
   },
   "dependencies": {
-    "@carbon/icons-react": "10.6.0",
+    "@carbon/icons-react": "^10.6.1",
     "classnames": "2.2.6",
     "downshift": "^1.31.14",
     "flatpickr": "4.6.1",
