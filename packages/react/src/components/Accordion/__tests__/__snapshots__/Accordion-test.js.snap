@@ -2,10 +2,11 @@
 
 exports[`Accordion should render 1`] = `
 <Accordion
+  align="end"
   className="extra-class"
 >
   <ul
-    className="bx--accordion extra-class"
+    className="bx--accordion extra-class bx--accordion--end"
   >
     <AccordionItem
       className="child"
