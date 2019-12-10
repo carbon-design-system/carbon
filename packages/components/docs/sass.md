@@ -19418,16 +19418,9 @@ Overflow menu styles
 
 ```scss
 @mixin overflow-menu() {
-  .#{$prefix}--overflow-menu__trigger {
-    @include button-reset;
-  }
-
-  .#{$prefix}--overflow-menu {
-    @include button-reset();
-  }
-
   .#{$prefix}--overflow-menu,
   .#{$prefix}--overflow-menu__trigger {
+    @include button-reset;
     @include reset;
     @include focus-outline('reset');
     position: relative;
