@@ -13451,7 +13451,9 @@ Code snippet styles
     position: absolute;
     top: 0;
     right: rem(56px);
-    background-image: linear-gradient(to right, transparent, $ui-01);
+
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
   }
 
   // Multi Line Snippet
@@ -13499,7 +13501,9 @@ Code snippet styles
     position: absolute;
     top: 0;
     right: 0;
-    background-image: linear-gradient(to right, transparent, $ui-01);
+
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre code {
@@ -13642,7 +13646,8 @@ Code snippet styles
   .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--multi
     .#{$prefix}--snippet-container
     pre::after {
-    background-image: linear-gradient(to right, transparent, $ui-02);
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to right, rgba($ui-02, 0), $ui-02);
   }
 
   // Skeleton State
@@ -18453,7 +18458,8 @@ Modal styles
     position: absolute;
     left: 0;
     bottom: $spacing-08;
-    background-image: linear-gradient(to bottom, transparent, $ui-01);
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to bottom, rgba($ui-01, 0), $ui-01);
   }
 
   .#{$prefix}--modal-content:focus
