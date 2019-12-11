@@ -33,17 +33,16 @@ describe('Tag', () => {
   describe('with a screenreader', () => {
     afterEach(cleanup);
 
-    it('should have an aria-label', () => {
-      const { container } = render(
-        <Tag data-id="aliens">This is not a tag</Tag>
-      );
+    it('filtered variant should have appropriate aria-label', () => {
+      const { container } = render(<Tag filter>This is not a tag</Tag>);
+
       const button = container.querySelector('[aria-label]');
       expect(button).toBeInstanceOf(HTMLElement);
 
       const ariaLabel = button.getAttribute('aria-label');
       expect(ariaLabel).toBeDefined();
 
-      expect(ariaLabel).toEqual('Clear Filter This is not a tag');
+      expect(ariaLabel).toEqual('Clear filter This is not a tag');
     });
   });
 

@@ -43,7 +43,11 @@ const Tag = ({
   return filter ? (
     <button
       className={tagClasses}
-      aria-label={`${title} ${children}` || `Clear filter ${children}`}
+      aria-label={
+        title !== undefined
+          ? `${title} ${children}`
+          : `Clear filter ${children}`
+      }
       {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
       <Close16 />
