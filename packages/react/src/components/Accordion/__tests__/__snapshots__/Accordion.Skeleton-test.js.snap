@@ -2,11 +2,12 @@
 
 exports[`AccordionSkeleton should render 1`] = `
 <AccordionSkeleton
+  align="end"
   count={4}
   open={true}
 >
   <ul
-    className="bx--accordion bx--skeleton"
+    className="bx--accordion bx--skeleton bx--accordion--end"
   >
     <li
       className="bx--accordion__item bx--accordion__item--active"
@@ -41,7 +42,7 @@ exports[`AccordionSkeleton should render 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
               />
             </svg>
           </Icon>
@@ -149,7 +150,7 @@ exports[`AccordionSkeleton should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                  d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
                 />
               </svg>
             </Icon>
@@ -209,7 +210,7 @@ exports[`AccordionSkeleton should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                  d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
                 />
               </svg>
             </Icon>
@@ -269,7 +270,7 @@ exports[`AccordionSkeleton should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                  d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
                 />
               </svg>
             </Icon>

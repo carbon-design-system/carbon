@@ -2,10 +2,11 @@
 
 exports[`Accordion should render 1`] = `
 <Accordion
+  align="end"
   className="extra-class"
 >
   <ul
-    className="bx--accordion extra-class"
+    className="bx--accordion extra-class bx--accordion--end"
   >
     <AccordionItem
       className="child"
@@ -61,7 +62,7 @@ exports[`Accordion should render 1`] = `
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                    d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
                   />
                 </svg>
               </Icon>
@@ -134,7 +135,7 @@ exports[`Accordion should render 1`] = `
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                    d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
                   />
                 </svg>
               </Icon>
@@ -207,7 +208,7 @@ exports[`Accordion should render 1`] = `
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                    d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
                   />
                 </svg>
               </Icon>

@@ -142,7 +142,7 @@ storiesOf('FileUploader', module)
           />
           <Button
             kind="secondary"
-            small
+            size="small"
             style={{ marginTop: '1rem' }}
             onClick={() => {
               fileUploader.clearFiles();

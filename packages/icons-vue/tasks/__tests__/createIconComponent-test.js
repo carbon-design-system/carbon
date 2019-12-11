@@ -195,6 +195,100 @@ describe('createIconComponent', () => {
     expect(node.classList.contains(dynamicClass)).toBe(true);
   });
 
+  it('should support dynamic classes only', async () => {
+    const dynamicClass = 'bar';
+    const node = render({
+      components: {
+        [MockIconComponent.name]: MockIconComponent,
+      },
+      data() {
+        return {
+          myDynamicClass: dynamicClass,
+        };
+      },
+      template: `<MockIcon v-bind:class="myDynamicClass" />`,
+    });
+
+    expect(node.classList.contains(dynamicClass)).toBe(true);
+  });
+
+  it('should support custom styles', async () => {
+    const customStyle = 'z-index: 99; overflow: hidden;';
+    const dynamicStyle = { opacity: '0.99' };
+    const node = render({
+      components: {
+        [MockIconComponent.name]: MockIconComponent,
+      },
+      data() {
+        return {
+          myDynamicStyle: dynamicStyle,
+        };
+      },
+      template: `<MockIcon style="${customStyle}" v-bind:style="myDynamicStyle" />`,
+    });
+
+    const nodeStyle = node.getAttribute('style');
+
+    expect(nodeStyle).toEqual(
+      expect.stringContaining('will-change: transform')
+    );
+    expect(nodeStyle).toEqual(expect.stringContaining(customStyle));
+    expect(nodeStyle).toEqual(expect.stringContaining('opacity: 0.99'));
+  });
+
+  it('should support dynamic styles only', async () => {
+    const dynamicStyle = { opacity: '0.99' };
+    const node = render({
+      components: {
+        [MockIconComponent.name]: MockIconComponent,
+      },
+      data() {
+        return {
+          myDynamicStyle: dynamicStyle,
+        };
+      },
+      template: `<MockIcon v-bind:style="myDynamicStyle" />`,
+    });
+
+    const nodeStyle = node.getAttribute('style');
+    expect(nodeStyle).toEqual(
+      expect.stringContaining('will-change: transform')
+    );
+    expect(nodeStyle).toEqual(expect.stringContaining('opacity: 0.99'));
+  });
+
+  it('should have will-change', async () => {
+    const node = render({
+      components: {
+        [MockIconComponent.name]: MockIconComponent,
+      },
+      template: `<MockIcon />`,
+    });
+
+    const nodeStyle = node.getAttribute('style');
+    expect(nodeStyle).toEqual(
+      expect.stringContaining('will-change: transform')
+    );
+  });
+
+  it('should be able to override helper style will-change', async () => {
+    const dynamicStyle = { willChange: 'height', opacity: '0.99' };
+    const node = render({
+      components: {
+        [MockIconComponent.name]: MockIconComponent,
+      },
+      data() {
+        return {
+          myDynamicStyle: dynamicStyle,
+        };
+      },
+      template: `<MockIcon  style="visibility: hidden" v-bind:style="myDynamicStyle" />`,
+    });
+
+    const nodeStyle = node.getAttribute('style');
+    expect(nodeStyle).toEqual(expect.stringContaining('will-change: height'));
+  });
+
   it('should be focusable if aria-label and tabindex is used', async () => {
     const label = 'custom-label';
     const node = render({

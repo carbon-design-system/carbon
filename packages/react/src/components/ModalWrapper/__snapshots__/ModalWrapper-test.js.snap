@@ -44,7 +44,7 @@ exports[`ModalWrapper should render 1`] = `
     <Modal
       aria-label="test modal"
       focusTrap={true}
-      hasScrollingContent={true}
+      hasScrollingContent={false}
       iconDescription="close the modal"
       id="modal"
       modalHeading="Transactional Modal"
@@ -137,7 +137,7 @@ exports[`ModalWrapper should render 1`] = `
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                        d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"
                       />
                     </svg>
                   </Icon>
@@ -145,11 +145,8 @@ exports[`ModalWrapper should render 1`] = `
               </button>
             </div>
             <div
-              aria-label="Test Modal Label"
               aria-labelledby="bx--modal-header__label--modal-1"
               className="bx--modal-content"
-              role="region"
-              tabIndex={0}
             >
               <p
                 className="bx--modal-content__text"
@@ -157,9 +154,6 @@ exports[`ModalWrapper should render 1`] = `
                 Text
               </p>
             </div>
-            <div
-              className="bx--modal-content--overflow-indicator"
-            />
             <div
               className="bx--modal-footer"
             >
@@ -203,7 +197,7 @@ exports[`ModalWrapper should render 1`] = `
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
-                          d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                          d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"
                         />
                       </svg>
                     </button>,
@@ -238,7 +232,7 @@ exports[`ModalWrapper should render 1`] = `
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                            d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"
                           />
                         </svg>
                       </button>,
