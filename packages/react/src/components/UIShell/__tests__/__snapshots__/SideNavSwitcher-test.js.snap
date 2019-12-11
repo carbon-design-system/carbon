@@ -85,7 +85,7 @@ exports[`SideNavSwitcher should render 1`] = `
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M16 22L6 12 7.4 10.6 16 19.2 24.6 10.6 26 12z"
+              d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"
             />
           </svg>
         </Icon>
