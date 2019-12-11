@@ -49,7 +49,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
       <ClickListener
         onClickOutside={[Function]}
       >
-        <div
+        <button
           aria-expanded={false}
           aria-haspopup={true}
           aria-label="Menu"
@@ -58,7 +58,6 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
           onClose={[Function]}
           onKeyDown={[Function]}
           open={false}
-          role="button"
           tabIndex={0}
           title="Add"
         >
@@ -108,7 +107,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
               </svg>
             </Icon>
           </ForwardRef(Download16)>
-        </div>
+        </button>
       </ClickListener>
     </OverflowMenu>
   </ForwardRef(OverflowMenu)>

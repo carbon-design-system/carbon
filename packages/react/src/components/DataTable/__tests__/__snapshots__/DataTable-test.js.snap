@@ -2379,7 +2379,7 @@ exports[`DataTable should render 1`] = `
                     <ClickListener
                       onClickOutside={[Function]}
                     >
-                      <div
+                      <button
                         aria-expanded={false}
                         aria-haspopup={true}
                         aria-label="Menu"
@@ -2388,7 +2388,6 @@ exports[`DataTable should render 1`] = `
                         onClose={[Function]}
                         onKeyDown={[Function]}
                         open={false}
-                        role="button"
                         tabIndex={0}
                         title="Settings"
                       >
@@ -2441,7 +2440,7 @@ exports[`DataTable should render 1`] = `
                             </svg>
                           </Icon>
                         </ForwardRef(Settings16)>
-                      </div>
+                      </button>
                     </ClickListener>
                   </OverflowMenu>
                 </ForwardRef(OverflowMenu)>
@@ -3355,7 +3354,7 @@ exports[`DataTable sticky header should render 1`] = `
                     <ClickListener
                       onClickOutside={[Function]}
                     >
-                      <div
+                      <button
                         aria-expanded={false}
                         aria-haspopup={true}
                         aria-label="Menu"
@@ -3364,7 +3363,6 @@ exports[`DataTable sticky header should render 1`] = `
                         onClose={[Function]}
                         onKeyDown={[Function]}
                         open={false}
-                        role="button"
                         tabIndex={0}
                         title="Settings"
                       >
@@ -3417,7 +3415,7 @@ exports[`DataTable sticky header should render 1`] = `
                             </svg>
                           </Icon>
                         </ForwardRef(Settings16)>
-                      </div>
+                      </button>
                     </ClickListener>
                   </OverflowMenu>
                 </ForwardRef(OverflowMenu)>

@@ -6595,6 +6595,7 @@ $inverse-link: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅field-01 [variable]
@@ -13450,7 +13451,9 @@ Code snippet styles
     position: absolute;
     top: 0;
     right: rem(56px);
-    background-image: linear-gradient(to right, transparent, $ui-01);
+
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
   }
 
   // Multi Line Snippet
@@ -13498,7 +13501,9 @@ Code snippet styles
     position: absolute;
     top: 0;
     right: 0;
-    background-image: linear-gradient(to right, transparent, $ui-01);
+
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre code {
@@ -13641,7 +13646,8 @@ Code snippet styles
   .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--multi
     .#{$prefix}--snippet-container
     pre::after {
-    background-image: linear-gradient(to right, transparent, $ui-02);
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to right, rgba($ui-02, 0), $ui-02);
   }
 
   // Skeleton State
@@ -18452,7 +18458,8 @@ Modal styles
     position: absolute;
     left: 0;
     bottom: $spacing-08;
-    background-image: linear-gradient(to bottom, transparent, $ui-01);
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to bottom, rgba($ui-01, 0), $ui-01);
   }
 
   .#{$prefix}--modal-content:focus
@@ -18644,12 +18651,35 @@ Inline notification styles
     }
   }
 
+  .#{$prefix}--inline-notification:not(.#{$prefix}--inline-notification--low-contrast)
+    a {
+    color: $inverse-link;
+  }
+
+  .#{$prefix}--inline-notification a {
+    text-decoration: none;
+  }
+
+  .#{$prefix}--inline-notification a:hover {
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--inline-notification a:focus {
+    outline: 1px solid $inverse-link;
+  }
+
+  .#{$prefix}--inline-notification.#{$prefix}--inline-notification--low-contrast
+    a:focus {
+    @include focus-outline;
+  }
+
   .#{$prefix}--inline-notification--low-contrast {
     // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
     color: map-get($carbon--theme--white, 'text-01');
 
     &::before {
       content: '';
+      pointer-events: none;
       position: absolute;
       top: 0;
       left: 0;
@@ -18843,6 +18873,7 @@ Inline notification styles
   - [prefix [variable]](#prefix-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [inverse-support-01 [variable]](#inverse-support-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -18855,7 +18886,6 @@ Inline notification styles
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [inverse-link [variable]](#inverse-link-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
 
@@ -18951,6 +18981,28 @@ Toast notification styles
     @include carbon--breakpoint(max) {
       width: rem(352px);
     }
+  }
+
+  .#{$prefix}--toast-notification:not(.#{$prefix}--toast-notification--low-contrast)
+    a {
+    color: $inverse-link;
+  }
+
+  .#{$prefix}--toast-notification a {
+    text-decoration: none;
+  }
+
+  .#{$prefix}--toast-notification a:hover {
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--toast-notification a:focus {
+    outline: 1px solid $inverse-link;
+  }
+
+  .#{$prefix}--toast-notification.#{$prefix}--toast-notification--low-contrast
+    a:focus {
+    @include focus-outline;
   }
 
   .#{$prefix}--toast-notification--low-contrast {
@@ -19099,6 +19151,7 @@ Toast notification styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [inverse-support-01 [variable]](#inverse-support-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -19371,12 +19424,9 @@ Overflow menu styles
 
 ```scss
 @mixin overflow-menu() {
-  .#{$prefix}--overflow-menu__trigger {
-    @include button-reset;
-  }
-
   .#{$prefix}--overflow-menu,
   .#{$prefix}--overflow-menu__trigger {
+    @include button-reset;
     @include reset;
     @include focus-outline('reset');
     position: relative;
