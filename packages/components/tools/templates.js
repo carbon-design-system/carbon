@@ -83,6 +83,18 @@ const loadContents = glob =>
   getContents(glob).then(contents => {
     contents.forEach((content, templateName) => {
       Handlebars.registerPartial(templateName, content);
+      Handlebars.registerHelper('isFirstDataTd', function(columns, index) {
+        return (
+          index ===
+          columns.findIndex(
+            column =>
+              !column.section &&
+              !column.checkbox &&
+              !column.additionalIcons &&
+              !column.menu
+          )
+        );
+      });
       contents.set(templateName, Handlebars.compile(content));
     });
     return contents;

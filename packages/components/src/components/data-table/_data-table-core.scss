@@ -439,6 +439,32 @@
   }
 
   //----------------------------------------------------------------------------
+  // Narrow
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--narrow th:not([class]) {
+    display: none;
+  }
+
+  .#{$prefix}--data-table--narrow th.#{$prefix}--narrow-header {
+    width: auto;
+  }
+
+  .#{$prefix}--data-table--narrow th.#{$prefix}--narrow-td {
+    width: auto;
+  }
+  .key-value-pair {
+    display: block;
+    padding-bottom: $spacing-06;
+
+    p {
+      @include type-style('body-short-01');
+    }
+  }
+  .#{$prefix}--data-table--narrow .key-value-pair:last-of-type {
+    padding-bottom: initial;
+  }
+
+  //----------------------------------------------------------------------------
   // Static
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table--static {

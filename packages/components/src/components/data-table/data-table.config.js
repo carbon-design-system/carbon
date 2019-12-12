@@ -622,6 +622,33 @@ module.exports = {
       },
     },
     {
+      name: 'narrow-expandable-with-expand-all',
+      label: 'Narrow expandable with expand all',
+      context: {
+        narrow: true,
+        state: 'persistent-search',
+        title: 'Table title',
+        columns: columnsExpandable,
+        rows: rowsExpandable,
+        searchInputId: 'search__input-2',
+        searchLabelId: 'search-input-label-1',
+        searchLabel: 'Search',
+        clearSearchLabel: 'Clear search input',
+        hasToolbar: true,
+        hasExpandAll: true,
+        sort: true,
+        batchActions,
+        toolbarActions,
+        toolbarActionsX,
+        selectedItemsCounterLabel: `
+          <span data-items-selected>3</span> items selected
+        `,
+        addNewLabel: 'Add new',
+        cancelLabel: 'Cancel',
+        sortLabel: 'Sort rows by this header in descending order',
+      },
+    },
+    {
       name: 'with-pager',
       label: 'Pagination',
       context: {

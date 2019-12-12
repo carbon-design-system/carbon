@@ -341,6 +341,7 @@
   - [❌data-table-core [mixin]](#data-table-core-mixin)
   - [❌data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [❌assistive-text [mixin]](#assistive-text-mixin)
+  - [❌data-table-narrow [mixin]](#data-table-narrow-mixin)
   - [❌data-table-sort [mixin]](#data-table-sort-mixin)
 - [date-picker](#date-picker)
   - [❌date-picker [mixin]](#date-picker-mixin)
@@ -1759,6 +1760,7 @@ $prefix: 'bx';
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [data-table-narrow [mixin]](#data-table-narrow-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
@@ -3638,6 +3640,7 @@ $spacing-03: $carbon--spacing-03;
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [data-table-narrow [mixin]](#data-table-narrow-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [modal [mixin]](#modal-mixin)
   - [select [mixin]](#select-mixin)
@@ -3684,6 +3687,7 @@ $spacing-05: $carbon--spacing-05;
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [data-table-narrow [mixin]](#data-table-narrow-mixin)
   - [modal [mixin]](#modal-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -6184,6 +6188,7 @@ $ui-03: if(
   - [combo-box [mixin]](#combo-box-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [data-table-narrow [mixin]](#data-table-narrow-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
@@ -6263,6 +6268,7 @@ $ui-05: if(
   - [checkbox [mixin]](#checkbox-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [data-table-narrow [mixin]](#data-table-narrow-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
@@ -6304,6 +6310,7 @@ $text-01: if(
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [data-table-narrow [mixin]](#data-table-narrow-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
@@ -7048,6 +7055,7 @@ $focus: if(
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [data-table-narrow [mixin]](#data-table-narrow-mixin)
   - [modal [mixin]](#modal-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
@@ -7297,6 +7305,7 @@ $hover-ui: if(
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [data-table-narrow [mixin]](#data-table-narrow-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -7337,6 +7346,7 @@ $active-ui: if(
   - [button [mixin]](#button-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [data-table-narrow [mixin]](#data-table-narrow-mixin)
 
 ### ✅selected-ui [variable]
 
@@ -7364,6 +7374,7 @@ $selected-ui: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [data-table-narrow [mixin]](#data-table-narrow-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [search [mixin]](#search-mixin)
@@ -7393,6 +7404,7 @@ $hover-selected-ui: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [data-table-narrow [mixin]](#data-table-narrow-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [tabs [mixin]](#tabs-mixin)
 
@@ -15529,6 +15541,413 @@ Data table expandable styles
 </details>
 
 - **Group**: [data-table](#data-table)
+
+### ❌data-table-narrow [mixin]
+
+Data table small style
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin data-table-narrow() {
+  //----------------------------------------------------------------------------
+  // Parent row
+  //----------------------------------------------------------------------------
+  //first row top border
+  .#{$prefix}--data-table tr.#{$prefix}--parent-row:first-of-type td {
+    border-top: 1px solid $ui-03;
+  }
+
+  //----------------------------------------------------------------------------
+  // Child row
+  //----------------------------------------------------------------------------
+  // default styles
+  .#{$prefix}--expandable-row--hidden td {
+    border-top: 0;
+    width: auto;
+    padding: $spacing-05;
+  }
+
+  //child row hidden
+  tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row)
+    + tr[data-child-row] {
+    height: 0;
+    transition: height $duration--moderate-01 motion(standard, productive);
+  }
+
+  tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row)
+    + tr[data-child-row]
+    td {
+    padding-top: 0;
+    padding-bottom: 0;
+    border: 0;
+    background-color: $hover-ui;
+    transition: padding $duration--moderate-01 motion(standard, productive), background-color
+        $duration--moderate-01 motion(standard, productive);
+  }
+
+  tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row)
+    + tr[data-child-row]
+    td
+    .#{$prefix}--child-row-inner-container {
+    overflow: hidden;
+    max-height: 0;
+  }
+
+  //child row visible
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] {
+    transition: height $duration--moderate-01 motion(standard, productive);
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
+    padding-bottom: rem(23px);
+    transition: padding $duration--moderate-01 motion(standard, productive);
+    border-bottom: 1px solid $ui-03;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
+    + tr[data-child-row]
+    td
+    .#{$prefix}--child-row-inner-container {
+    max-height: 100%;
+  }
+
+  // bottom border overrides
+  .#{$prefix}--parent-row.#{$prefix}--expandable-row > td,
+  .#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] > td {
+    border-bottom: 1px solid $ui-03;
+    box-shadow: 0 1px $ui-03;
+  }
+
+  .#{$prefix}--parent-row:not(.#{$prefix}--expandable-row)
+    + tr[data-child-row]
+    > td {
+    box-shadow: none;
+  }
+
+  .#{$prefix}--parent-row.#{$prefix}--expandable-row > td:first-of-type {
+    box-shadow: none; // first td doesn't have a visible border
+  }
+
+  //----------------------------------------------------------------------------
+  // Hover styles
+  //----------------------------------------------------------------------------
+  tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row) td,
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row td,
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row {
+    transition: height $duration--moderate-02 motion(standard, productive), background-color
+        $duration--fast-02 motion(standard, productive);
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
+    transition: all $duration--fast-02 motion(standard, productive);
+  }
+
+  // hovering on collapsed parent
+  tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row):first-of-type:hover
+    td {
+    border-top: 1px solid $ui-03;
+    border-bottom: 1px solid $ui-03;
+  }
+
+  // hovering on expanded parent
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td {
+    background-color: $hover-ui;
+    border-top: 1px solid $ui-03;
+    border-bottom: 1px solid $ui-03;
+    color: $text-01;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
+    border-bottom: 1px solid transparent; // first td doesn't have a visible border
+  }
+
+  // child row when hovering on expanded parent
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
+    + tr[data-child-row]
+    td {
+    background-color: $hover-ui;
+    color: $text-01;
+    border-bottom: 1px solid $ui-03;
+  }
+
+  //hovering on expanded child row
+  tr.#{$prefix}--expandable-row--hover + tr[data-child-row] td {
+    border-bottom: 1px solid $ui-03;
+  }
+
+  //hovering on expanded child row (class added to parent)
+  tr.#{$prefix}--expandable-row--hover {
+    background-color: $hover-ui;
+  }
+
+  tr.#{$prefix}--expandable-row--hover td {
+    background-color: $hover-ui;
+    border-bottom: 1px solid $ui-03;
+    border-top: 1px solid $ui-03;
+    color: $text-01;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
+    td:first-of-type {
+    border-bottom: 1px solid transparent; // first parent td doesnt have visible bottom border
+  }
+
+  //----------------------------------------------------------------------------
+  // Expand icon column
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table td.#{$prefix}--table-expand {
+    width: 2.5rem;
+    min-width: 2.5rem;
+    height: 3rem;
+    vertical-align: top;
+    padding: 0;
+    border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-expand[data-previous-value='collapsed'] {
+    border-bottom: 1px solid transparent;
+  }
+
+  .#{$prefix}--table-expand[data-previous-value='collapsed']
+    .#{$prefix}--table-expand__svg {
+    transform: rotate(270deg);
+    transition: transform $duration--moderate-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--table-expand__button {
+    @include button-reset('false');
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .#{$prefix}--data-table--short .#{$prefix}--table-expand__button {
+    height: auto;
+  }
+
+  .#{$prefix}--table-expand__button:focus {
+    outline: 1px solid transparent;
+  }
+
+  .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
+    box-shadow: inset 0px 0px 0px 1px $focus;
+  }
+
+  .#{$prefix}--table-expand__svg {
+    fill: $ui-05;
+    transform: rotate(90deg);
+    transition: transform $duration--moderate-01 motion(standard, productive);
+  }
+
+  th.#{$prefix}--table-expand {
+    position: relative;
+    vertical-align: middle;
+  }
+
+  th.#{$prefix}--table-expand + th.#{$prefix}--table-column-checkbox {
+    padding-left: $spacing-03;
+  }
+
+  // fix expanded parent separating border length
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
+    td.#{$prefix}--table-expand
+    + td::after {
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: rem(-1px);
+    height: rem(1px);
+    width: rem(8px);
+    background: $ui-03;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
+    td.#{$prefix}--table-expand
+    + td::after,
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
+    td.#{$prefix}--table-expand
+    + td::after {
+    background: $hover-ui;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected
+    td.#{$prefix}--table-expand
+    + td::after {
+    display: none;
+  }
+
+  //----------------------------------------------------------------------------
+  // Selected
+  //----------------------------------------------------------------------------
+  // parent collapsed
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:first-of-type td {
+    background: $selected-ui;
+    border-top: 1px solid $active-ui;
+    border-bottom: 1px solid $ui-03;
+    box-shadow: 0 1px $active-ui;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected td {
+    background: $selected-ui;
+    color: $text-01;
+    border-bottom: 1px solid transparent;
+    box-shadow: 0 1px $active-ui;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:last-of-type td {
+    background: $selected-ui;
+    border-bottom: 1px solid transparent;
+    box-shadow: 0 1px $ui-03;
+  }
+
+  // parent collapsed hover
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(.#{$prefix}--expandable-row):hover
+    td {
+    background: $hover-selected-ui;
+    border-top: 1px solid $hover-selected-ui;
+    border-bottom: 1px solid $ui-03;
+    box-shadow: 0 1px $hover-selected-ui;
+  }
+
+  // parent expanded
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
+    td,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
+    td:first-of-type {
+    border-bottom: 1px solid transparent;
+    box-shadow: 0 1px $selected-ui; //no visible border when expanded
+  }
+
+  // parent expanded hover
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    td,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    td:first-of-type,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+    td,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+    td:first-of-type {
+    background: $hover-selected-ui;
+    border-top: 1px solid $hover-selected-ui;
+    border-bottom: 1px solid transparent;
+    box-shadow: 0 1px $hover-selected-ui;
+  }
+
+  // child row expanded
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
+    + tr[data-child-row]
+    td {
+    color: $text-01;
+    background-color: $hover-ui;
+    border-bottom: 1px solid $ui-03;
+    box-shadow: 0 1px $active-ui;
+    border-top: 1px solid $active-ui;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
+    + tr[data-child-row]:last-of-type
+    td {
+    box-shadow: inset 0 -1px $active-ui;
+    padding-bottom: rem(24px);
+  }
+
+  // child row expanded hover
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    + tr[data-child-row]
+    td,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+    + tr[data-child-row]
+    td {
+    background: $selected-ui;
+  }
+
+  //----------------------------------------------------------------------------
+  // Narrow
+  //----------------------------------------------------------------------------
+
+  .#{$prefix}--data-table--narrow th:not(.#{$prefix}--table-expand),
+  .#{$prefix}--data-table--narrow th:not(.#{$prefix}--column-checkbox),
+  .#{$prefix}--data-table--narrow th:not(.#{$prefix}--narrow-header) {
+    display: none;
+  }
+
+  // .#{$prefix}--data-table--small--min-width {
+  //   min-width: auto; //IE doesn't support `initial`
+  //   min-width: initial;
+  // }
+  // .#{$prefix}--data-table--small {
+  //   tbody tr.#{$prefix}--parent-row {
+  //     border-top: 1px solid $ui-03;
+  //     border-bottom: none;
+  //   }
+  //   tbody tr.#{$prefix}--parent-row td.td-small {
+  //     display: block;
+  //   }
+  //   tbody tr:hover > td,
+  //   tbody tr.#{$prefix}--parent-row td.td-small,
+  //   tbody tr.#{$prefix}--parent-row:hover td,
+  //   tbody tr.#{$prefix}--expandable-row:hover td,
+  //   tbody tr.#{$prefix}--expandable-row--hover td,
+  //   tbody tr.#{$prefix}--parent-row.#{$prefix}--expandable-row > td,
+  //   tbody
+  //     tr.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hidden:hover
+  //     > td,
+  //   tbody
+  //     tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row):first-of-type:hover
+  //     td,
+  //   tbody
+  //     tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row)
+  //     + tr[data-child-row]
+  //     td,
+  //   tbody tr.#{$prefix}--parent-row:first-of-type td,
+  //   tbody tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected td,
+  //   tbody
+  //     tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(.#{$prefix}--expandable-row):hover
+  //     td,
+  //   tbody
+  //     tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+  //     td,
+  //   tbody
+  //     tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+  //     td:first-of-type,
+  //   tbody
+  //     tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+  //     td,
+  //   tbody
+  //     tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+  //     td:first-of-type,
+  //   tbody
+  //     tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
+  //     + tr[data-child-row]
+  //     td {
+  //     border: none;
+  //     -webkit-box-shadow: none;
+  //     box-shadow: none;
+  //   }
+  // }
+}
+```
+
+</details>
+
+- **Group**: [data-table](#data-table)
+- **Requires**:
+  - [prefix [variable]](#prefix-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [focus [variable]](#focus-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
+  - [selected-ui [variable]](#selected-ui-variable)
+  - [active-ui [variable]](#active-ui-variable)
+  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
 
 ### ❌data-table-sort [mixin]
 
