@@ -385,7 +385,7 @@ export default class DatePicker extends Component {
 
   componentDidUpdate({ dateFormat: prevDateFormat }) {
     const { dateFormat } = this.props;
-    if (prevDateFormat !== dateFormat) {
+    if (this.cal && prevDateFormat !== dateFormat) {
       this.cal.set({ dateFormat });
     }
   }
