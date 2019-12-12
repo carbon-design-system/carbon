@@ -50,7 +50,7 @@ const props = () => {
     ),
     hasScrollingContent: boolean(
       'Modal contains scrollable content (hasScrollingContent)',
-      true
+      false
     ),
     renderTriggerButtonIcon: typeof iconToUse === 'function' && iconToUse,
     triggerButtonIcon: typeof iconToUse !== 'function' && iconToUse,
