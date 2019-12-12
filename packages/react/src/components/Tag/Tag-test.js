@@ -11,7 +11,6 @@ import TagSkeleton from '../Tag/Tag.Skeleton';
 import { shallow } from 'enzyme';
 import { settings } from 'carbon-components';
 import { render, cleanup } from '@carbon/test-utils/react';
-import { afterEach } from 'jest-circus';
 
 const { prefix } = settings;
 
