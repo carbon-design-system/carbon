@@ -30,7 +30,6 @@ describe('Tag', () => {
   });
 
   describe('with a screenreader', () => {
-    afterEach(cleanup);
 
     it('filtered variant should have appropriate aria-label', () => {
       const { container } = render(<Tag filter>This is not a tag</Tag>);
