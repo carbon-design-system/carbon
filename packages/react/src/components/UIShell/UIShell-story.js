@@ -392,7 +392,8 @@ storiesOf('UI Shell', module)
           </>
         )}
       />
-    ))
+    )),
+    { hasMainContent: true }
   )
   .add(
     'Header Base w/ SideNav',

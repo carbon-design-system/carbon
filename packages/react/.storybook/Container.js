@@ -13,7 +13,7 @@ import React, { useEffect } from 'react';
 
 const { prefix } = settings;
 
-function Container({ story }) {
+function Container({ story, hasMainContent }) {
   useEffect(() => {
     const originalDirection = document.documentElement.dir;
     if (process.env.CARBON_REACT_STORYBOOK_USE_RTL === 'true') {
@@ -28,7 +28,9 @@ function Container({ story }) {
     <React.StrictMode>
       <div
         data-floating-menu-container
-        role="main"
+        id={!hasMainContent ? 'main-content' : undefined}
+        role={!hasMainContent ? 'main' : 'region'}
+        aria-label={!hasMainContent ? undefined : 'UI Shell container'}
         style={{
           padding: '3em',
           display: 'flex',
@@ -37,9 +39,10 @@ function Container({ story }) {
         }}>
         {story()}
       </div>
-      <input
+      <a
         aria-label="input-text-offleft"
         type="text"
+        href="main-content"
         className={`${prefix}--visually-hidden`}
       />
     </React.StrictMode>

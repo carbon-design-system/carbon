@@ -45,7 +45,9 @@ configureActions({
   limit: 10,
 });
 
-addDecorator(story => <Container story={story} />);
+addDecorator((story, { parameters = {} }) => (
+  <Container story={story} hasMainContent={parameters.hasMainContent} />
+));
 // addDecorator(checkA11y);
 
 addons.getChannel().on(CARBON_CURRENT_THEME, theme => {

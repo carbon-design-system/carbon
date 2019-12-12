@@ -303,6 +303,7 @@
   // Header - Skip to content
   //--------------------------------------------------------------------------
   .#{$prefix}--skip-to-content {
+    color: $shell-header-text-01;
     position: absolute;
     width: 1px;
     height: 1px;
@@ -326,7 +327,6 @@
     border: 4px solid $ibm-color__blue-60;
     z-index: 9999;
     background-color: $shell-header-bg-01;
-    color: $shell-header-text-01;
     outline: none;
     padding: 0 1rem;
   }
