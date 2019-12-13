@@ -6,11 +6,11 @@ daysUntilClose: 3
 exemptLabels:
   - 'type: a11y ♿'
   - 'type: bug 🐛'
-  - 'Severity 1 🚨'
-  - 'priority: high'
-  - 'v11'
+  - 'severity: 1 🚨'
+  - 'impact: 1'
+  - 'version: 11'
 # Label to use when marking an issue as stale
-staleLabel: inactive
+staleLabel: 'status: inactive'
 # Comment to post when marking an issue as stale. Set to `false` to disable
 markComment: >
   We've marked this issue as stale because there hasn't been any activity for a couple of weeks.
