@@ -191,7 +191,7 @@
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
     height: rem(32px);
-    margin: $carbon--spacing-03 0;
+    margin: $carbon--spacing-03 1px $carbon--spacing-03 0;
 
     &,
     &:hover,
