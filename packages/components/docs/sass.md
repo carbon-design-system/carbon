@@ -13082,8 +13082,7 @@ Button base styles
   text-align: left;
   text-decoration: none;
   transition: all $duration--fast-01 motion(entrance, productive);
-  outline: $button-outline-width solid transparent;
-  outline-offset: -4px;
+  outline: none;
   position: relative;
   max-width: rem(320px);
 
@@ -13136,7 +13135,7 @@ Button variant styles
 
   &:focus {
     border-color: $focus;
-    outline-color: $ui-02;
+    box-shadow: inset 0 0 0 $button-outline-width $ui-02;
   }
 
   &:disabled:hover,
@@ -13147,7 +13146,7 @@ Button variant styles
     background-color: $disabled-02;
     border-color: $disabled-02;
     text-decoration: none;
-    outline-color: $disabled-02;
+    box-shadow: none;
   }
 
   &:active {
