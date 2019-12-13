@@ -10,28 +10,36 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  number,
+  select,
+  text,
+} from '@storybook/addon-knobs';
 import {
   default as Accordion,
   AccordionItem,
   AccordionSkeleton,
 } from '../Accordion';
-import Select from '../Select';
-import SelectItem from '../SelectItem';
+import Button from '../Button';
 
 const props = {
   onClick: action('onClick'),
   onHeadingClick: action('onHeadingClick'),
 };
 
-Select.displayName = 'Select';
-
 storiesOf('Accordion', module)
   .addDecorator(withKnobs)
   .add(
     'Default',
     () => (
-      <Accordion>
+      <Accordion
+        align={select(
+          'Accordion heading alignment (align)',
+          ['start', 'end'],
+          'end'
+        )}>
         <AccordionItem
           title={text('The title (title)', 'Section 1 title')}
           open={boolean('Open the section (open)', false)}
@@ -52,20 +60,7 @@ storiesOf('Accordion', module)
           </p>
         </AccordionItem>
         <AccordionItem title="Section 3 title" {...props}>
-          <Select
-            onChange={action('onChange')}
-            id="select-1"
-            defaultValue="placeholder-item">
-            <SelectItem
-              disabled
-              hidden
-              value="placeholder-item"
-              text="Choose an option"
-            />
-            <SelectItem value="option-1" text="Option 1" />
-            <SelectItem value="option-2" text="Option 2" />
-            <SelectItem value="option-3" text="Option 3" />
-          </Select>
+          <Button>This is a button.</Button>
         </AccordionItem>
         <AccordionItem
           title={
@@ -96,6 +91,11 @@ storiesOf('Accordion', module)
     () => (
       <div style={{ width: '500px' }}>
         <AccordionSkeleton
+          align={select(
+            'Accordion heading alignment (align)',
+            ['start', 'end'],
+            'end'
+          )}
           open={boolean('Show first item opened (open)', true)}
           count={number('Set number of items (count)', 4)}
         />

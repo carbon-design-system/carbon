@@ -7,6 +7,7 @@
 
 import { px, rem } from '@carbon/layout';
 import { fontWeights } from './fontWeight';
+import { fontFamilies } from './fontFamily';
 import { scale } from './scale';
 
 export const caption01 = {
@@ -58,6 +59,7 @@ export const bodyLong02 = {
 };
 
 export const code01 = {
+  fontFamily: fontFamilies.mono,
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
   lineHeight: rem(16),
@@ -65,6 +67,7 @@ export const code01 = {
 };
 
 export const code02 = {
+  fontFamily: fontFamilies.mono,
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
   lineHeight: rem(20),
@@ -124,9 +127,15 @@ export const productiveHeading07 = {
   letterSpacing: 0,
 };
 
-export const expressiveHeading01 = heading01;
+export const expressiveHeading01 = {
+  ...heading01,
+  lineHeight: rem(20),
+};
 
-export const expressiveHeading02 = heading02;
+export const expressiveHeading02 = {
+  ...heading02,
+  lineHeight: rem(24),
+};
 
 export const expressiveHeading03 = {
   fontSize: rem(scale[4]),

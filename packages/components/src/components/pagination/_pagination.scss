@@ -42,8 +42,8 @@ $css--helpers: true;
     grid-template-columns: auto 0;
   }
 
-  .#{$prefix}--select-input__wrapper,
-  .#{$prefix}--select-input--inline__wrapper {
+  .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
+    display: flex;
     height: 100%;
   }
 
@@ -65,8 +65,8 @@ $css--helpers: true;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
-    top: auto;
-    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
     @include carbon--breakpoint('md') {
       right: $carbon--spacing-05;
     }
@@ -106,14 +106,10 @@ $css--helpers: true;
   }
 
   .#{$prefix}--pagination__left {
-    @include carbon--breakpoint('md') {
-      padding: 0 $carbon--spacing-05;
-    }
+    padding: 0 $carbon--spacing-05;
   }
 
   .#{$prefix}--pagination__text {
-    display: none;
-
     @include carbon--breakpoint('md') {
       display: inline-block;
     }

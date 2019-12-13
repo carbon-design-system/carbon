@@ -28,6 +28,10 @@ const defaultItemToString = item => {
 const defaultShouldFilterItem = () => true;
 
 const getInputValue = (props, state) => {
+  if (props.selectedItem) {
+    return props.itemToString(props.selectedItem);
+  }
+  // TODO: consistent `initialSelectedItem` behavior with other listbox components in v11
   if (props.initialSelectedItem) {
     return props.itemToString(props.initialSelectedItem);
   }
@@ -135,6 +139,11 @@ export default class ComboBox extends React.Component {
     invalidText: PropTypes.string,
 
     /**
+     * For full control of the selection
+     */
+    selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+
+    /**
      * Specify a custom translation function that takes in a message identifier
      * and returns the localized string for the message
      */
@@ -144,6 +153,11 @@ export default class ComboBox extends React.Component {
      * Currently supports either the default type, or an inline variant
      */
     type: ListBoxPropTypes.ListBoxType,
+
+    /**
+     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+     */
+    size: ListBoxPropTypes.ListBoxSize,
 
     /**
      * Callback function to notify consumer when the text input changes.
@@ -246,12 +260,14 @@ export default class ComboBox extends React.Component {
       helperText,
       placeholder,
       initialSelectedItem,
+      selectedItem,
       ariaLabel,
       translateWithId,
       invalid,
       invalidText,
       light,
       type, // eslint-disable-line no-unused-vars
+      size,
       shouldFilterItem, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onInputChange, // eslint-disable-line no-unused-vars
@@ -288,7 +304,8 @@ export default class ComboBox extends React.Component {
         onStateChange={this.handleOnStateChange}
         inputValue={this.state.inputValue || ''}
         itemToString={itemToString}
-        defaultSelectedItem={initialSelectedItem}>
+        defaultSelectedItem={initialSelectedItem}
+        selectedItem={selectedItem}>
         {({
           getButtonProps,
           getInputProps,
@@ -310,6 +327,7 @@ export default class ComboBox extends React.Component {
             invalidText={invalidText}
             isOpen={isOpen}
             light={light}
+            size={size}
             {...getRootProps({ refKey: 'innerRef' })}>
             <ListBox.Field
               id={id}

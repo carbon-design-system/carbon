@@ -19,8 +19,9 @@
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents'",
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
-    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,components}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
     "lint": "eslint packages",
+    "lint:docs": "alex 'docs/**/*.md' -q",
     "lint:styles": "stylelint '**/*.{css,scss}' --config ./packages/stylelint-config-elements",
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
@@ -41,9 +42,11 @@
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.4.4",
-    "@carbon/cli": "10.5.0",
+    "@carbon/cli": "10.7.0-rc.0",
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
+    "@ibma/aat": "https://able.ibm.com/tools/dist/ibma-aat-2.0.3-alpha.tgz",
+    "alex": "^8.0.0",
     "axe-core": "^3.3.2",
     "babel-jest": "^24.8.0",
     "cross-env": "^5.2.0",
@@ -122,7 +125,8 @@
       "prettier --write",
       "git add"
     ],
-    "*.md": [
+    "!(**/docs/sass)*.md": [
+      "alex",
       "prettier --write",
       "git add"
     ]
@@ -185,6 +189,7 @@
       "/dist/",
       "/es/",
       "/lib/",
+      "/build/",
       "e2e",
       "examples",
       "/umd/"

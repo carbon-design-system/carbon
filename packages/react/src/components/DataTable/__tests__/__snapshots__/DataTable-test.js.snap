@@ -364,7 +364,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-11__select-row-b"
+                    id="data-table-14__select-row-b"
                     name="select-row-b"
                     onSelect={[Function]}
                     radio={true}
@@ -381,7 +381,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-11__select-row-a"
+                    id="data-table-14__select-row-a"
                     name="select-row-a"
                     onSelect={[Function]}
                     radio={true}
@@ -398,7 +398,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-11__select-row-c"
+                    id="data-table-14__select-row-c"
                     name="select-row-c"
                     onSelect={[Function]}
                     radio={true}
@@ -523,7 +523,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-11__select-row-b"
+                    id="data-table-14__select-row-b"
                     name="select-row-b"
                     onSelect={[Function]}
                     radio={true}
@@ -535,7 +535,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         checked={false}
                         disabled={false}
                         hideLabel={true}
-                        id="data-table-11__select-row-b"
+                        id="data-table-14__select-row-b"
                         labelText="Select row"
                         name="select-row-b"
                         onClick={[Function]}
@@ -544,7 +544,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                           checked={false}
                           disabled={false}
                           hideLabel={true}
-                          id="data-table-11__select-row-b"
+                          id="data-table-14__select-row-b"
                           innerRef={null}
                           labelPosition="right"
                           labelText="Select row"
@@ -560,7 +560,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               checked={false}
                               className="bx--radio-button"
                               disabled={false}
-                              id="data-table-11__select-row-b"
+                              id="data-table-14__select-row-b"
                               name="select-row-b"
                               onChange={[Function]}
                               onClick={[Function]}
@@ -568,9 +568,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               value=""
                             />
                             <label
-                              aria-label="Select row"
                               className="bx--radio-button__label"
-                              htmlFor="data-table-11__select-row-b"
+                              htmlFor="data-table-14__select-row-b"
                             >
                               <span
                                 className="bx--radio-button__appearance"
@@ -610,7 +609,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-11__select-row-a"
+                    id="data-table-14__select-row-a"
                     name="select-row-a"
                     onSelect={[Function]}
                     radio={true}
@@ -622,7 +621,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         checked={false}
                         disabled={false}
                         hideLabel={true}
-                        id="data-table-11__select-row-a"
+                        id="data-table-14__select-row-a"
                         labelText="Select row"
                         name="select-row-a"
                         onClick={[Function]}
@@ -631,7 +630,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                           checked={false}
                           disabled={false}
                           hideLabel={true}
-                          id="data-table-11__select-row-a"
+                          id="data-table-14__select-row-a"
                           innerRef={null}
                           labelPosition="right"
                           labelText="Select row"
@@ -647,7 +646,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               checked={false}
                               className="bx--radio-button"
                               disabled={false}
-                              id="data-table-11__select-row-a"
+                              id="data-table-14__select-row-a"
                               name="select-row-a"
                               onChange={[Function]}
                               onClick={[Function]}
@@ -655,9 +654,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               value=""
                             />
                             <label
-                              aria-label="Select row"
                               className="bx--radio-button__label"
-                              htmlFor="data-table-11__select-row-a"
+                              htmlFor="data-table-14__select-row-a"
                             >
                               <span
                                 className="bx--radio-button__appearance"
@@ -697,7 +695,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-11__select-row-c"
+                    id="data-table-14__select-row-c"
                     name="select-row-c"
                     onSelect={[Function]}
                     radio={true}
@@ -709,7 +707,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         checked={false}
                         disabled={false}
                         hideLabel={true}
-                        id="data-table-11__select-row-c"
+                        id="data-table-14__select-row-c"
                         labelText="Select row"
                         name="select-row-c"
                         onClick={[Function]}
@@ -718,7 +716,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                           checked={false}
                           disabled={false}
                           hideLabel={true}
-                          id="data-table-11__select-row-c"
+                          id="data-table-14__select-row-c"
                           innerRef={null}
                           labelPosition="right"
                           labelText="Select row"
@@ -734,7 +732,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               checked={false}
                               className="bx--radio-button"
                               disabled={false}
-                              id="data-table-11__select-row-c"
+                              id="data-table-14__select-row-c"
                               name="select-row-c"
                               onChange={[Function]}
                               onClick={[Function]}
@@ -742,9 +740,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               value=""
                             />
                             <label
-                              aria-label="Select row"
                               className="bx--radio-button__label"
-                              htmlFor="data-table-11__select-row-c"
+                              htmlFor="data-table-14__select-row-c"
                             >
                               <span
                                 className="bx--radio-button__appearance"
@@ -1773,7 +1770,9 @@ exports[`DataTable should render 1`] = `
           "value": <TableContainer
             title="DataTable with toolbar"
           >
-            <TableToolbar>
+            <TableToolbar
+              aria-label="data table toolbar"
+            >
               <TableBatchActions
                 onCancel={[Function]}
                 shouldShowBatchActions={false}
@@ -1960,7 +1959,9 @@ exports[`DataTable should render 1`] = `
           className="bx--data-table-header__description"
         />
       </div>
-      <TableToolbar>
+      <TableToolbar
+        aria-label="data table toolbar"
+      >
         <section
           aria-label="data table toolbar"
           className="bx--table-toolbar"
@@ -2227,7 +2228,7 @@ exports[`DataTable should render 1`] = `
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
-                  role="searchbox"
+                  role="search"
                   tabIndex="0"
                 >
                   <Search
@@ -2237,7 +2238,7 @@ exports[`DataTable should render 1`] = `
                     labelText="Filter table"
                     onChange={[Function]}
                     placeHolderText="Filter table"
-                    small={true}
+                    size="sm"
                     type="text"
                     value=""
                   >
@@ -2288,6 +2289,7 @@ exports[`DataTable should render 1`] = `
                         id="custom-id"
                         onChange={[Function]}
                         placeholder="Filter table"
+                        role="searchbox"
                         type="text"
                         value=""
                       />
@@ -2340,8 +2342,10 @@ exports[`DataTable should render 1`] = `
                 }
               >
                 <ForwardRef(OverflowMenu)
+                  ariaLabel="Settings"
                   className="bx--toolbar-action bx--overflow-menu"
                   flipped={true}
+                  iconDescription="Settings"
                   renderIcon={
                     Object {
                       "$$typeof": Symbol(react.forward_ref),
@@ -2351,12 +2355,13 @@ exports[`DataTable should render 1`] = `
                   title="Settings"
                 >
                   <OverflowMenu
-                    ariaLabel="Menu"
+                    ariaLabel="Settings"
                     className="bx--toolbar-action bx--overflow-menu"
                     direction="bottom"
                     flipped={true}
-                    iconDescription="open and close list of options"
+                    iconDescription="Settings"
                     innerRef={null}
+                    light={false}
                     menuOffset={[Function]}
                     menuOffsetFlip={[Function]}
                     onClick={[Function]}
@@ -2376,28 +2381,27 @@ exports[`DataTable should render 1`] = `
                     <ClickListener
                       onClickOutside={[Function]}
                     >
-                      <div
+                      <button
                         aria-expanded={false}
                         aria-haspopup={true}
-                        aria-label="Menu"
+                        aria-label="Settings"
                         className="bx--toolbar-action bx--overflow-menu bx--overflow-menu"
                         onClick={[Function]}
                         onClose={[Function]}
                         onKeyDown={[Function]}
                         open={false}
-                        role="button"
                         tabIndex={0}
                         title="Settings"
                       >
                         <ForwardRef(Settings16)
-                          aria-label="open and close list of options"
+                          aria-label="Settings"
                           className="bx--overflow-menu__icon"
                           focusable="false"
                           onClick={[Function]}
                           onKeyDown={[Function]}
                         >
                           <Icon
-                            aria-label="open and close list of options"
+                            aria-label="Settings"
                             className="bx--overflow-menu__icon"
                             focusable="false"
                             height={16}
@@ -2409,7 +2413,7 @@ exports[`DataTable should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-label="open and close list of options"
+                              aria-label="Settings"
                               className="bx--overflow-menu__icon"
                               focusable="false"
                               height={16}
@@ -2433,12 +2437,12 @@ exports[`DataTable should render 1`] = `
                                 d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8	c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"
                               />
                               <title>
-                                open and close list of options
+                                Settings
                               </title>
                             </svg>
                           </Icon>
                         </ForwardRef(Settings16)>
-                      </div>
+                      </button>
                     </ClickListener>
                   </OverflowMenu>
                 </ForwardRef(OverflowMenu)>
@@ -2740,7 +2744,9 @@ exports[`DataTable sticky header should render 1`] = `
             stickyHeader={true}
             title="DataTable with toolbar"
           >
-            <TableToolbar>
+            <TableToolbar
+              aria-label="data table toolbar"
+            >
               <TableBatchActions
                 onCancel={[Function]}
                 shouldShowBatchActions={false}
@@ -2930,7 +2936,9 @@ exports[`DataTable sticky header should render 1`] = `
           className="bx--data-table-header__description"
         />
       </div>
-      <TableToolbar>
+      <TableToolbar
+        aria-label="data table toolbar"
+      >
         <section
           aria-label="data table toolbar"
           className="bx--table-toolbar"
@@ -3197,7 +3205,7 @@ exports[`DataTable sticky header should render 1`] = `
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
-                  role="searchbox"
+                  role="search"
                   tabIndex="0"
                 >
                   <Search
@@ -3207,7 +3215,7 @@ exports[`DataTable sticky header should render 1`] = `
                     labelText="Filter table"
                     onChange={[Function]}
                     placeHolderText="Filter table"
-                    small={true}
+                    size="sm"
                     type="text"
                     value=""
                   >
@@ -3258,6 +3266,7 @@ exports[`DataTable sticky header should render 1`] = `
                         id="custom-id"
                         onChange={[Function]}
                         placeholder="Filter table"
+                        role="searchbox"
                         type="text"
                         value=""
                       />
@@ -3310,8 +3319,10 @@ exports[`DataTable sticky header should render 1`] = `
                 }
               >
                 <ForwardRef(OverflowMenu)
+                  ariaLabel="Settings"
                   className="bx--toolbar-action bx--overflow-menu"
                   flipped={true}
+                  iconDescription="Settings"
                   renderIcon={
                     Object {
                       "$$typeof": Symbol(react.forward_ref),
@@ -3321,12 +3332,13 @@ exports[`DataTable sticky header should render 1`] = `
                   title="Settings"
                 >
                   <OverflowMenu
-                    ariaLabel="Menu"
+                    ariaLabel="Settings"
                     className="bx--toolbar-action bx--overflow-menu"
                     direction="bottom"
                     flipped={true}
-                    iconDescription="open and close list of options"
+                    iconDescription="Settings"
                     innerRef={null}
+                    light={false}
                     menuOffset={[Function]}
                     menuOffsetFlip={[Function]}
                     onClick={[Function]}
@@ -3346,28 +3358,27 @@ exports[`DataTable sticky header should render 1`] = `
                     <ClickListener
                       onClickOutside={[Function]}
                     >
-                      <div
+                      <button
                         aria-expanded={false}
                         aria-haspopup={true}
-                        aria-label="Menu"
+                        aria-label="Settings"
                         className="bx--toolbar-action bx--overflow-menu bx--overflow-menu"
                         onClick={[Function]}
                         onClose={[Function]}
                         onKeyDown={[Function]}
                         open={false}
-                        role="button"
                         tabIndex={0}
                         title="Settings"
                       >
                         <ForwardRef(Settings16)
-                          aria-label="open and close list of options"
+                          aria-label="Settings"
                           className="bx--overflow-menu__icon"
                           focusable="false"
                           onClick={[Function]}
                           onKeyDown={[Function]}
                         >
                           <Icon
-                            aria-label="open and close list of options"
+                            aria-label="Settings"
                             className="bx--overflow-menu__icon"
                             focusable="false"
                             height={16}
@@ -3379,7 +3390,7 @@ exports[`DataTable sticky header should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-label="open and close list of options"
+                              aria-label="Settings"
                               className="bx--overflow-menu__icon"
                               focusable="false"
                               height={16}
@@ -3403,12 +3414,12 @@ exports[`DataTable sticky header should render 1`] = `
                                 d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8	c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"
                               />
                               <title>
-                                open and close list of options
+                                Settings
                               </title>
                             </svg>
                           </Icon>
                         </ForwardRef(Settings16)>
-                      </div>
+                      </button>
                     </ClickListener>
                   </OverflowMenu>
                 </ForwardRef(OverflowMenu)>

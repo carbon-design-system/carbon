@@ -1,3 +1,5 @@
+<!-- alex disable black -->
+
 # Endgame
 
 <!-- prettier-ignore-start -->
@@ -20,13 +22,13 @@
   - [Hotfix releases](#hotfix-releases)
     - [Publishing steps](#publishing-steps)
   - [Patch releases](#patch-releases)
-    - [Publishing steps](#publishing-steps-1)
+    - [Publishing steps - Manual Instructions](#publishing-steps---manual-instructions)
   - [Release candidate releases](#release-candidate-releases)
-    - [Publishing steps](#publishing-steps-2)
+    - [Publishing steps](#publishing-steps-1)
   - [Minor releases](#minor-releases)
-    - [Publishing steps](#publishing-steps-3)
+    - [Publishing steps](#publishing-steps-2)
   - [Major releases](#major-releases)
-    - [Publishing steps](#publishing-steps-4)
+    - [Publishing steps](#publishing-steps-3)
 - [Testing](#testing)
   - [Procedures](#procedures)
     - [`create-react-app`](#create-react-app)
@@ -259,7 +261,7 @@ following projects:
 
 ### Tuesday XX/YY
 
-- [ ] First Release Candidate cut
+- [ ] First release candidate cut
 - [ ] Complete first round of smoke tests
 - [ ] Share with Carbon Insiders for first round of testing
 
@@ -270,7 +272,7 @@ following projects:
   - [ ] Stop release
   - [ ] Ship with known issues
 - [ ] Coordinate merging of bug fixes related to release
-- [ ] Cut next Release Candidate, if applicable
+- [ ] Cut next release candidate, if applicable
   - [ ] Share newest release with Carbon Insiders for additional rounds of
         testing
 
@@ -278,7 +280,7 @@ following projects:
 
 - [ ] Collect second round of feedback from Carbon Insiders (if available)
 - [ ] Coordinate merging of bug fixes related to release
-- [ ] Cut next Release Candidate, if applicable
+- [ ] Cut next release candidate, if applicable
   - [ ] Share newest release with Carbon Insiders for additional rounds of
         testing
 
@@ -334,7 +336,7 @@ types of releases:
 | ------------------------------------------------ | ----------------------------------------------------------------------- | ----------- | -------------------------------------------------- |
 | [Hotfix](#hotfix-releases)                       | Fix severity level 1 issues with large user-facing impact               | `patch`     | On demand                                          |
 | [Patch](#patch-releases)                         | Batched fixes to packages with varying degrees of severity and priority | `patch`     | Weekly                                             |
-| [Release Candidate](#release-candidate-releases) | Features and fixes that will be included in minor release               | `preminor`  | Typically 6 weeks, as needed before minor release  |
+| [Release candidate](#release-candidate-releases) | Features and fixes that will be included in minor release               | `preminor`  | Typically 6 weeks, as needed before minor release  |
 | [Minor](#minor-releases)                         | Features and fixes to packages                                          | `minor`     | Typically 6 weeks, occasionally on-demand          |
 | [Major](#major-releases)                         | Large or semver-incompatible changes to the design system               | `major`     | Typically 6 months to 1 year, announced in advance |
 
@@ -397,155 +399,7 @@ update that is not shipped is the addition of functionality that does not
 already exist in the project. These updates are reserved for
 [minor releases](#minor-releases).
 
-#### Publishing steps
-
-1. From the root of your directory, checkout the latest tag. You can checkout
-   git tags using `git` by running the following command:
-
-   ```bash
-   git checkout <name-of-tag>
-   ```
-
-   For example:
-
-   ```bash
-   git checkout v10.4.0
-   ```
-
-2. Run `./packages/cli/bin/carbon-cli.js release patch`
-
-   - You will see the terminal do a few things: get the latest tag, find the
-     next version to bump, create a branch for the release, and begin
-     cherry-picking PRs. The most important thing to note when cherry-picking
-     PRs is that we do not want to bring over `feat`, as this would be a
-     breaking change for a [`minor`](#minor-releases) release.
-
-   - If the PR commit does not follow commit syntax, the terminal will prompt
-     you something similar to:
-
-     ```bash
-     ? Should we include commit: 2953c461a Non-commit syntax message here
-     ```
-
-     Type `y` to include it in the patch release or `n` to exclude it. If it's
-     not clear right off the bat, you can find the merged PR by its number and
-     look through it to see if it includes new features or not.
-
-   - If you get a prompt that says:
-     ```bash
-     ? Applying the commit XXXXXX lead to a conflict. Please fix the conflict and then confirm to proceed. (y/N)
-     ```
-     Open a new tab in your terminal. You can view the changes by running
-     `git status`. Run `git add -A`. Then run `git cherry-pick --continue`. Once
-     you see that the changes have been committed, go back to your original
-     terminal tab, where we are releasing. Type `y` in response to the prompt
-     and continue.
-   - If you get an error because a commit message is too long, run
-     `git commit --no-verify`
-
-3. Once the commits have been cherry-picked, you'll be prompted with something
-   like:
-
-   ```bash
-   Changes:
-    - carbon-components: 10.4.1 => 10.4.2
-    - @carbon/elements: 10.4.0 => 10.4.1
-    - @carbon/icons-angular: 10.4.0 => 10.4.1
-    - @carbon/icons-handlebars: 10.4.0 => 10.4.1
-    - @carbon/icons-react: 10.4.1 => 10.4.2
-    - @carbon/icons-vue: 10.4.0 => 10.4.1
-    - @carbon/icons: 10.4.0 => 10.4.1
-    - carbon-components-react: 7.4.1 => 7.4.2
-    - @carbon/sketch: 10.4.0 => 10.4.1 (private)
-
-   ? Are you sure you want to create these versions? (ynH)
-   ```
-
-   You should inspect the list of changed packages to make sure they align with
-   the commits you cherry-picked over. If something looks off, feel free to stop
-   this command and figure out what is going on before starting again.
-
-   If everything looks good, you can enter in `y` for `Yes` and `lerna` will
-   handle versioning the corresponding packages.
-
-4. Once that's done, you should create a Pull Request in Draft state and make
-   sure **not** to merge it. Our goal with the Pull Request is to do a final
-   sanity check for CI checks, verify preview links work as expected, and get
-   final reviews from the endgame team for the release. _Note: Make sure to
-   specify which packages are being updated for your reviewers._
-
-5. Once everything is green, review the pull request. Make sure there are no
-   commits labeled `feat` as the patch release should only be for bug fixes,
-   content updates, or refactoring existing code. Double check that the
-   `package.json` versions are updated correctly by verifying the green
-   (updated) version numbers are an incremental increase to the red (deleted)
-   version numbers. If everything is correct, **close** the draft Pull Request.
-
-6. On your machine, you should then follow the following steps to publish to
-   `next`:
-
-   - From your **PR branch**, run
-     `yarn lerna publish from-package --dist-tag next` to publish all packages
-     under the `next` tag
-   - After publishing to `next`, run the smoke tests that we have listed
-     [here](#testing) with the published packages
-
-7. If everything looks good to go add each of the updated packages to the
-   `latest` tag by running the following command for each:
-
-   ```bash
-   npm dist-tag add package-name@X.Y.Z latest
-   ```
-
-   For example, if you just released `10.6.1` under `next`, this would look
-   like:
-
-   ```bash
-   npm dist-tag add carbon-components@10.6.1 latest
-   ```
-
-8. Manually check to see that the `latest` tags were updated for the packages
-   correctly by going to [`npm`](https://www.npmjs.com), searching the packages,
-   viewing the versions and making sure the `latest` version matches the version
-   you just released.
-
-9. After publishing to latest, create a tag for the version you just released
-   and push it to upstream by running:
-
-   ```bash
-   git tag -a vX.Y.Z -m "vX.Y.Z"
-   git push upstream vX.Y.Z
-   ```
-
-   For example, if you released `v10.6.4`:
-
-   ```bash
-   git tag -a v10.6.4 -m "v10.6.4"
-   git push upstream v10.6.4
-   ```
-
-10. When the tag has been added to upstream, find it under the
-    [Releases](https://github.com/carbon-design-system/carbon/releases) tab.
-    Then, click on the tag link and select `Edit tag` on the top right corner.
-    In your terminal, generate the changelog for the tag by running the
-    following command from your PR branch:
-
-    ```bash
-    ./packages/cli/bin/carbon-cli.js changelog <previous-tag>..<latest-tag>
-    ```
-
-    For example, to get the changelog for `v10.6.4` run:
-
-    ```bash
-    ./packages/cli/bin/carbon-cli.js changelog v10.6.3..v10.6.4
-    ```
-
-    Once the changelog has been copied to your clipboard, paste it in the tag
-    description in your browser. Set the title to the release version, and
-    publish the release.
-
-<details>
-   <summary>`Manual instructions`</summary>
+#### Publishing steps - Manual Instructions
 
 All patches are based on the previous stable git tag. You can find the latest
 git tag by running the following command in your terminal:
@@ -583,7 +437,7 @@ than the last stable git tag. For example:
 If the last stable git tag was `v10.4.0`, then the branch would be named:
 
 ```bash
-git checkout chore/release-v10.4.1
+git checkout -b chore/release-v10.4.1
 ```
 
 After creating this branch, your goal will be use the
@@ -663,7 +517,17 @@ going on. Worst-case, we can always cut a minor release from the latest `master`
 if an appropriate patch could not be generated.
 
 Once you are done cherry-picking commits, it's time to version the changed
-packages. You can use `lerna` to accomplish this by running:
+packages.
+
+_Note: If you don't have an npm account, you'll need to go to
+https://www.npmjs.com/signup to create one. Once you've created the account,
+find a team member who can give you permission to publish to the Carbon
+packages. It may take a couple of hours for npm to recognize the permission
+change. You will also need to login into npm from your terminal using the
+command `npm adduser`, where you will be prompted for your username and
+password._
+
+You can use `lerna` to version the changed packages by running:
 
 ```bash
 yarn lerna version patch --no-push --no-git-tag-version --exact
@@ -700,9 +564,42 @@ git commit -m 'chore(release): update package versions'
 ```
 
 Once that's done, you should create a Pull Request in Draft state and make sure
-**not** to merge it. Our goal with the Pull Request is to do a final sanity
-check for CI checks, verify preview links work as expected, and get final
-reviews from the endgame team for the release.
+**not** to merge it. Our goal with the Pull Request is to do a check for CI
+checks, verify preview links work as expected, and get final reviews from the
+endgame team for the release. For this Pull Request, you'll want to generate a
+changelog for the reviewers. To do this, create a tag for the version you'll
+release and push it to upstream by running:
+
+```bash
+git tag -a vX.Y.Z -m "vX.Y.Z"
+git push upstream vX.Y.Z
+```
+
+For example, if you released `v10.6.4`:
+
+```bash
+git tag -a v10.6.4 -m "v10.6.4"
+git push upstream v10.6.4
+```
+
+In your terminal, generate the changelog for the tag by running the following
+command in your PR branch:
+
+```bash
+./packages/cli/bin/carbon-cli.js changelog <previous-tag>..<latest-tag>
+```
+
+For example, to get the changelog for `v10.6.4` run:
+
+```bash
+./packages/cli/bin/carbon-cli.js changelog v10.6.3..v10.6.4
+```
+
+Say yes to the prompt to copy the changelog to your clipboard and paste it into
+the Pull Request description. Reviewers should make sure that the changes in the
+changelog match the changes listed at
+https://github.com/carbon-design-system/carbon/compare/vX.Y.Z...vA.B.C, updated
+with the appropriate version numbers for the version you are creating.
 
 Once everything is green and your Pull Request has been reviewed, you should
 **close** the draft Pull Request. On your machine, you should then follow the
@@ -717,47 +614,167 @@ following steps to release:
 - If everything looks good to go, then you should go through each of the
   packages and add the `latest` tag using the command:
   `npm dist-tag add package-name@X.Y.Z latest`
-- After publishing to latest, create a tag for the version you just released and
-  push it to upstream by running:
+- Find the tag you created earlier under the
+  [Releases](https://github.com/carbon-design-system/carbon/releases) tab. Then
+  ,click on the tag link and select `Edit tag` on the top right corner. Add in
+  the changelog you created earlier to the description and update the title with
+  the tag name and publish the release!
 
-  ```bash
-  git tag -a vX.Y.Z -m "vX.Y.Z"
-  git push upstream vX.Y.Z
-  ```
+<details>
+   <summary>`Automatated process instructions`</summary>
 
-  For example, if you released `v10.6.4`:
+1. From the root of your directory, checkout the latest tag. You can checkout
+   git tags using `git` by running the following command:
 
-  ```bash
-  git tag -a v10.6.4 -m "v10.6.4"
-  git push upstream v10.6.4
-  ```
+   ```bash
+   git checkout <name-of-tag>
+   ```
 
-- When the tag has been added to upstream, find it under the
-  [Releases](https://github.com/carbon-design-system/carbon/releases) tab. Then,
-  click on the tag link and select `Edit tag` on the top right corner. In your
-  terminal, generate the changelog for the tag by running the following command
-  in your PR branch:
+   For example:
 
-  ```bash
-  ./packages/cli/bin/carbon-cli.js changelog <previous-tag>..<latest-tag>
-  ```
+   ```bash
+   git checkout v10.4.0
+   ```
 
-  For example, to get the changelog for `v10.6.4` run:
+2. Run `./packages/cli/bin/carbon-cli.js release patch` **_Note: Currently, the
+   CLI command isn't working. See the manual instructions for the patch release.
+   process_**
 
-  ```bash
-  ./packages/cli/bin/carbon-cli.js changelog v10.6.3..v10.6.4
-  ```
+   - You will see the terminal do a few things: get the latest tag, find the
+     next version to bump, create a branch for the release, and begin
+     cherry-picking PRs. The most important thing to note when cherry-picking
+     PRs is that we do not want to bring over `feat`, as this would be a
+     breaking change for a [`minor`](#minor-releases) release.
 
-  Once the changelog has been copied to your clipboard, paste it in the tag
-  description in your browser. Set the title to the release version, and publish
-  the release.
+   - If the PR commit does not follow commit syntax, the terminal will prompt
+     you something similar to:
 
-  </details>
+     ```bash
+     ? Should we include commit: 2953c461a Non-commit syntax message here
+     ```
 
-### Release Candidate releases
+     Type `y` to include it in the patch release or `n` to exclude it. If it's
+     not clear right off the bat, you can find the merged PR by its number and
+     look through it to see if it includes new features or not.
 
-​ Before our minor releases, we cut Release Candidates a week in advance to
-sanity check our code. ​
+   - If you get a prompt that says:
+     ```bash
+     ? Applying the commit XXXXXX lead to a conflict. Please fix the conflict and then confirm to proceed. (y/N)
+     ```
+     Open a new tab in your terminal. You can view the changes by running
+     `git status`. Run `git add -A`. Then run `git cherry-pick --continue`. Once
+     you see that the changes have been committed, go back to your original
+     terminal tab, where we are releasing. Type `y` in response to the prompt
+     and continue.
+   - If you get an error because a commit message is too long, run
+     `git commit --no-verify`
+
+3. Once the commits have been cherry-picked, you'll be prompted with something
+   like:
+
+   ```bash
+   Changes:
+    - carbon-components: 10.4.1 => 10.4.2
+    - @carbon/elements: 10.4.0 => 10.4.1
+    - @carbon/icons-angular: 10.4.0 => 10.4.1
+    - @carbon/icons-handlebars: 10.4.0 => 10.4.1
+    - @carbon/icons-react: 10.4.1 => 10.4.2
+    - @carbon/icons-vue: 10.4.0 => 10.4.1
+    - @carbon/icons: 10.4.0 => 10.4.1
+    - carbon-components-react: 7.4.1 => 7.4.2
+    - @carbon/sketch: 10.4.0 => 10.4.1 (private)
+
+   ? Are you sure you want to create these versions? (ynH)
+   ```
+
+   You should inspect the list of changed packages to make sure they align with
+   the commits you cherry-picked over. If something looks off, feel free to stop
+   this command and figure out what is going on before starting again.
+
+   If everything looks good, you can enter in `y` for `Yes` and `lerna` will
+   handle versioning the corresponding packages.
+
+4. Once that's done, you should create a Pull Request in Draft state and make
+   sure **not** to merge it. Our goal with the Pull Request is to do a final
+   check for CI checks, verify preview links work as expected, and get final
+   reviews from the endgame team for the release. _Note: Make sure to specify
+   which packages are being updated for your reviewers._
+
+5. Once everything is green, review the pull request. Make sure there are no
+   commits labeled `feat` as the patch release should only be for bug fixes,
+   content updates, or refactoring existing code. Double check that the
+   `package.json` versions are updated correctly by verifying the green
+   (updated) version numbers are an incremental increase to the red (deleted)
+   version numbers. If everything is correct, **close** the draft Pull Request.
+
+6. On your machine, you should then follow the following steps to publish to
+   `next`:
+
+   - From your **PR branch**, run
+     `yarn lerna publish from-package --dist-tag next` to publish all packages
+     under the `next` tag
+   - After publishing to `next`, run the smoke tests that we have listed
+     [here](#testing) with the published packages
+
+7. If everything looks good to go add each of the updated packages to the
+   `latest` tag by running the following command for each:
+
+   ```bash
+   npm dist-tag add package-name@X.Y.Z latest
+   ```
+
+   For example, if you released `10.6.1` under `next`, this would look like:
+
+   ```bash
+   npm dist-tag add carbon-components@10.6.1 latest
+   ```
+
+8. Manually check to see that the `latest` tags were updated for the packages
+   correctly by going to [`npm`](https://www.npmjs.com), searching the packages,
+   viewing the versions and making sure the `latest` version matches the version
+   you released.
+
+9. After publishing to latest, create a tag for the version you released and
+   push it to upstream by running:
+
+   ```bash
+   git tag -a vX.Y.Z -m "vX.Y.Z"
+   git push upstream vX.Y.Z
+   ```
+
+   For example, if you released `v10.6.4`:
+
+   ```bash
+   git tag -a v10.6.4 -m "v10.6.4"
+   git push upstream v10.6.4
+   ```
+
+10. When the tag has been added to upstream, find it under the
+    [Releases](https://github.com/carbon-design-system/carbon/releases) tab.
+    Then, click on the tag link and select `Edit tag` on the top right corner.
+    In your terminal, generate the changelog for the tag by running the
+    following command from your PR branch:
+
+    ```bash
+    ./packages/cli/bin/carbon-cli.js changelog <previous-tag>..<latest-tag>
+    ```
+
+    For example, to get the changelog for `v10.6.4` run:
+
+    ```bash
+    ./packages/cli/bin/carbon-cli.js changelog v10.6.3..v10.6.4
+    ```
+
+    Once the changelog has been copied to your clipboard, paste it in the tag
+    description in your browser. Set the title to the release version, and
+    publish the release.
+
+</details>
+
+### Release candidate releases
+
+​ Before our minor releases, we cut release candidates a week in advance to
+check our code. ​
 
 #### Publishing steps
 
@@ -782,7 +799,7 @@ sanity check our code. ​
 6. Manually check to see that the `next` tag was updated for the packages
    correctly by going to [`npm`](https://www.npmjs.com), searching the packages,
    viewing the versions and making sure the `next` version matches the version
-   you just released.
+   you released.
 
 ### Minor releases
 
@@ -820,7 +837,7 @@ can be released on-demand in specific circumstances.
 
 3. After the package versions have been created, you'll be prompted
    `The next step will be to manually create a Pull Request for this branch`.
-   Simply push your changes and open the PR. Be sure your commit message reads
+   Push your changes and open the PR. Be sure your commit message reads
    `chore(release): update package versions`
 4. Once your PR is approved and merged, checkout `master`, pull the latest
    upstream and run:
@@ -841,7 +858,7 @@ can be released on-demand in specific circumstances.
 7. Manually check to see that the `next` tag was updated for the packages
    correctly by going to [`npm`](https://www.npmjs.com), searching the packages,
    viewing the versions and making sure the `next` version matches the version
-   you just released.
+   you released.
 
 8. When you're ready to update `latest`, run
    `npm dist-tag add package-name@X.Y.Z latest` for each of the updated
@@ -864,10 +881,10 @@ can be released on-demand in specific circumstances.
 9. Like before, manually check to see that the `latest` tags were updated for
    the packages correctly by going to [`npm`](https://www.npmjs.com), searching
    the packages, viewing the versions and making sure the `latest` version
-   matches the version you just released.
+   matches the version you released.
 
-10. After publishing to latest, create a tag for the version you just released
-    and push it to upstream by running:
+10. After publishing to latest, create a tag for the version you released and
+    push it to upstream by running:
 
     ```bash
     git tag -a vX.Y.Z -m "vX.Y.Z"
@@ -920,6 +937,49 @@ the following testing scenarios:
   - [ ] `gatsby-theme-carbon`
 - [ ] React smoke tests
   - [ ] `create-react-app`
+
+<details>
+  <summary>How to run React smoke test</summary>
+
+Change directories to wherever you want to add the project and run:
+
+```bash
+npx create-react-app tmp
+```
+
+Change directories so you're in the newly created `tmp` folder and run `yarn` in
+your terminal.
+
+After that is done, install the dependencies: carbon-components,
+carbon-components-react, carbon-icons and node-sass (two dependencies that the
+other packages require) by running:
+
+```bash
+yarn add carbon-components@next carbon-components-react@next @carbon/icons-react node-sass
+// And
+yarn add node-sass
+```
+
+Once that's done, open up `tmp` in your code editor and rename `index.css` to
+`index.scss` and add:
+
+```javascript
+@import '~carbon-components/scss/globals/scss/styles.scss';
+```
+
+to the top of `index.scss`.
+
+Update the `index.css` import to `index.scss` in `index.js`. At the top of
+`App.js`, import the `Button` component by adding the following:
+
+```js
+import { Button } from 'carbon-components-react';
+```
+
+In the `App` component return, add the `Button` and then run `yarn start` and
+verify that the `Button` looks correct and no erros are logged to the console.
+
+</details>
 
 ### Procedures
 

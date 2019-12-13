@@ -66,6 +66,22 @@
     }
   }
 
+  .#{$prefix}--dropdown--xl {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--dropdown--xl .#{$prefix}--dropdown__arrow {
+    top: rem(16px);
+  }
+
+  .#{$prefix}--dropdown--sm {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--dropdown--sm .#{$prefix}--dropdown__arrow {
+    top: rem(8px);
+  }
+
   .#{$prefix}--dropdown--open {
     border-bottom-color: $ui-03;
   }
@@ -123,6 +139,7 @@
   }
 
   button.#{$prefix}--dropdown-text {
+    color: $text-01;
     // button-reset mixin contradicts with bx--dropdown-text styles
     background: none;
     border: none;
@@ -137,9 +154,7 @@
   .#{$prefix}--dropdown-text {
     @include type-style('body-short-01');
     display: block;
-    height: rem(40px);
-    padding-top: $carbon--spacing-04;
-    padding-bottom: $carbon--spacing-04;
+    height: calc(100% + 1px); // Account for the border in `.bx--dropdown`
     padding-left: $carbon--spacing-05;
     padding-right: rem(42px); // 2rem + SVG width
     white-space: nowrap;
@@ -226,6 +241,35 @@
     @include focus-outline('outline');
     margin: 0;
     padding: rem(11px) rem(16px);
+  }
+
+  // We don't want to apply focus styles via focus selector when using the aria-activedescendant structure
+  .#{$prefix}--dropdown-list[aria-activedescendant]
+    .#{$prefix}--dropdown-link:focus {
+    outline: none;
+    // Copied from .bx--dropdown-link styles
+    margin: 0 $carbon--spacing-05;
+    padding: rem(11px) 0;
+  }
+
+  // Need added weight for item that is :focused and .bx--dropdown--focused
+  .#{$prefix}--dropdown-list[aria-activedescendant]
+    .#{$prefix}--dropdown--focused:focus {
+    // copied from default focus styles
+    @include focus-outline('outline');
+    margin: 0;
+    padding: rem(11px) rem(16px);
+  }
+
+  // Don't want to allow multiple elements have a "selected" style. Not sure why active
+  // had unique styles initially but creating an overwrite for the latest HTML markup for
+  // backwards compatibility. For the next major release it would be possible to clean up
+  // the HTML structure to prevent the user of :active and :focus styles which is creating
+  // these duplicated styles in the list. The Carbon 10 version of dropdown is already
+  // supporting 2 very different HTML structures.
+  .#{$prefix}--dropdown-list[aria-activedescendant]
+    .#{$prefix}--dropdown-item:active {
+    background-color: inherit;
   }
 
   .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
@@ -347,6 +391,24 @@
     &:focus {
       margin: 0;
       padding-left: rem(10px);
+    }
+  }
+
+  .#{$prefix}--dropdown--show-selected .#{$prefix}--dropdown--selected {
+    background-color: $hover-ui;
+    color: $text-01;
+    display: block;
+
+    &:hover {
+      background-color: $selected-ui;
+    }
+
+    .#{$prefix}--dropdown-link {
+      border-top-color: transparent;
+    }
+
+    + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
+      border-top-color: transparent;
     }
   }
 

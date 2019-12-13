@@ -162,7 +162,7 @@ export default class Pagination extends Component {
     return !pageSizesChanged && !pageChanged && !pageSizeChanged
       ? null
       : {
-          page: pageSizeChanged && 1 || pageChanged && page || currentPage,
+          page: (pageSizeChanged && 1) || (pageChanged && page) || currentPage,
           pageSize: pageSizeChanged ? pageSize : currentPageSize,
           prevPageSizes: pageSizes,
           prevPage: page,
@@ -323,6 +323,7 @@ export default class Pagination extends Component {
           )}
           {pageRange}
           <button
+            type="button"
             className={backButtonClasses}
             onClick={this.decrementPage}
             aria-label={backwardText}
@@ -330,6 +331,7 @@ export default class Pagination extends Component {
             <CaretLeft24 />
           </button>
           <button
+            type="button"
             className={forwardButtonClasses}
             aria-label={forwardText}
             onClick={this.incrementPage}

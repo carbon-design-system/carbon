@@ -49,6 +49,20 @@ describe('Tabs', () => {
             .hasClass(`${prefix}--tabs`)
         ).toBe(true);
       });
+
+      it('supports container variant', () => {
+        expect(
+          shallow(
+            <Tabs className="extra-class" type="container">
+              <Tab label="firstTab">content1</Tab>
+              <Tab label="lastTab">content2</Tab>
+            </Tabs>
+          )
+            .find('div')
+            .first()
+            .hasClass(`${prefix}--tabs--container`)
+        ).toBe(true);
+      });
     });
 
     describe('Trigger (<div>)', () => {

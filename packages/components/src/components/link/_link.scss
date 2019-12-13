@@ -23,7 +23,7 @@
 @mixin link {
   .#{$prefix}--link {
     @include reset;
-    @include type-style('body-long-01');
+    @include type-style('body-short-01');
     color: $link-01;
     text-decoration: none;
     outline: none;
@@ -35,7 +35,8 @@
     }
 
     &:active,
-    &:active:visited {
+    &:active:visited,
+    &:active:visited:hover {
       color: $text-01;
       text-decoration: underline;
     }
@@ -44,7 +45,7 @@
       @include focus-outline;
     }
 
-    &:not([href]) {
+    &:not([href]):not(button) {
       color: $disabled-02;
       cursor: not-allowed;
       pointer-events: none;
@@ -62,7 +63,7 @@
 
   .#{$prefix}--link--disabled {
     @include reset;
-    @include type-style('body-long-01');
+    @include type-style('body-short-01');
     display: inline;
     color: $disabled-02;
     font-weight: 400;

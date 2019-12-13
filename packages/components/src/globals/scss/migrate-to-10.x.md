@@ -40,7 +40,7 @@ _removed_ soon after the initial `v10` release.
 ## `_colors.scss`
 
 `$color__` variables are deprecated. Migration table available
-[here](https://github.com/IBM/carbon/blob/master/docs/migration/10.x-color.md).
+[here](https://github.com/carbon-design-system/carbon/blob/master/docs/migration/10.x-color.md).
 
 ## `_css--body.scss`
 
@@ -106,7 +106,7 @@ if you would still like to use the classes.
 | Paragraph  | 16px | `body-long-02`          |
 
 For full details, please check our
-[our v10 migration guide for type.](https://github.com/IBM/carbon/blob/master/docs/migration/10.x-type.md)
+[our v10 migration guide for type.](https://github.com/carbon-design-system/carbon/blob/master/docs/migration/10.x-type.md)
 
 ## `_feature-flags.scss`
 
@@ -168,7 +168,7 @@ No change
 ## `_motion.scss`
 
 New in v10. For full details, please check out our
-[migration guide](https://github.com/IBM/carbon/blob/master/docs/migration/10.x-motion.md).
+[migration guide](https://github.com/carbon-design-system/carbon/blob/master/docs/migration/10.x-motion.md).
 
 ## `_spacing.scss`
 
@@ -198,7 +198,7 @@ https://github.com/IBM/carbon/blob/v0.0.1-beta.1/docs/migration/10.x-layout.md#m
 ## `_theme-tokens.scss`
 
 Migration table available
-[here](https://github.com/IBM/carbon/blob/master/docs/migration/10.x-color.md).
+[here](https://github.com/carbon-design-system/carbon/blob/master/docs/migration/10.x-color.md).
 
 ## `_theme.scss`
 
@@ -223,7 +223,7 @@ No change
 | `font-size` mixin      | ☠️ Deprecated                                               |
 
 For full details, please check our
-[our v10 migration guide for type.](https://github.com/IBM/carbon/blob/master/docs/migration/10.x-type.md)
+[our v10 migration guide for type.](https://github.com/carbon-design-system/carbon/blob/master/docs/migration/10.x-type.md)
 
 ## `_vars.scss`
 

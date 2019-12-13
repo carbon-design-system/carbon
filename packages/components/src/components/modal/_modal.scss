@@ -28,7 +28,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: z('hidden');
+    z-index: z('modal');
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,19 +38,16 @@
     visibility: hidden;
     transition: background-color $duration--slow-02 motion(exit, expressive),
       opacity $duration--moderate-02 motion(exit, expressive),
-      z-index $duration--slow-02 motion(exit, expressive),
-      visibility $duration--moderate-02 motion(exit, expressive);
+      visibility 0ms linear $duration--moderate-02;
 
     &.is-visible {
-      z-index: z('modal');
       visibility: visible;
       opacity: 1;
       background-color: $overlay-01;
       transition: background-color $duration--slow-02
           motion(entrance, expressive),
         opacity $duration--moderate-02 motion(entrance, expressive),
-        z-index $duration--slow-02 motion(entrance, expressive),
-        visibility $duration--moderate-02 motion(entrance, expressive);
+        visibility 0ms linear;
     }
 
     .#{$prefix}--text-input,
@@ -71,8 +68,9 @@
 
   .#{$prefix}--modal-container {
     position: relative;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: auto;
     background-color: $ui-01;
     width: 100%;
     height: 100%;
@@ -83,38 +81,155 @@
     transition: transform $duration--moderate-02 motion(exit, expressive);
 
     @include carbon--breakpoint(md) {
-      width: 50%;
-      max-width: 768px;
+      width: 84%;
       max-height: 90%;
       height: auto;
+
+      .#{$prefix}--modal-header,
+      .#{$prefix}--modal-content,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
     }
 
     @include carbon--breakpoint(lg) {
-      max-height: 80%;
+      width: 60%;
+      max-height: 84%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 48%;
     }
   }
 
   .#{$prefix}--modal-header,
   .#{$prefix}--modal-content {
-    padding-right: 25%;
-    padding-left: 1rem;
+    padding-left: $spacing-05;
   }
 
   .#{$prefix}--modal-header,
-  .#{$prefix}--modal-footer {
-    flex-shrink: 0;
+  .#{$prefix}--modal-content,
+  .#{$prefix}--modal-content__regular-content {
+    padding-right: $spacing-05;
+  }
+
+  .#{$prefix}--modal-content--with-form {
+    padding-right: $spacing-05;
+
+    @include carbon--breakpoint(md) {
+      padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
+    }
+  }
+
+  .#{$prefix}--modal-container--xs {
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
+    .#{$prefix}--modal-content,
+    .#{$prefix}--modal-content__regular-content,
+    .#{$prefix}--modal-content--with-form {
+      padding-right: $spacing-05;
+    }
+
+    @include carbon--breakpoint(md) {
+      width: 48%;
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: 32%;
+      max-height: 48%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 24%;
+    }
+  }
+
+  .#{$prefix}--modal-container--sm {
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
+    .#{$prefix}--modal-content,
+    .#{$prefix}--modal-content__regular-content,
+    .#{$prefix}--modal-content--with-form {
+      padding-right: $spacing-05;
+    }
+
+    @include carbon--breakpoint(md) {
+      width: 60%;
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: 42%;
+      max-height: 72%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 36%;
+
+      .#{$prefix}--modal-header,
+      .#{$prefix}--modal-content,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
+
+      .#{$prefix}--modal-content--with-form {
+        padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
+      }
+    }
+  }
+
+  .#{$prefix}--modal-container--lg {
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
+    .#{$prefix}--modal-content,
+    .#{$prefix}--modal-content__regular-content,
+    .#{$prefix}--modal-content--with-form {
+      padding-right: $spacing-05;
+    }
+
+    @include carbon--breakpoint(md) {
+      width: 96%;
+
+      .#{$prefix}--modal-header,
+      .#{$prefix}--modal-content,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
+
+      .#{$prefix}--modal-content--with-form {
+        padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
+      }
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: 84%;
+      max-height: 96%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 72%;
+    }
   }
 
   .#{$prefix}--modal-header {
-    padding-top: 1rem;
-    margin-bottom: $carbon--spacing-05;
+    padding-top: $spacing-05;
+    padding-right: $spacing-09;
+    margin-bottom: $spacing-03;
+
+    grid-row: 1/1;
+    grid-column: 1/-1;
   }
 
   .#{$prefix}--modal-header__label {
     @include type-style('label-01');
 
     color: $text-02;
-    margin-bottom: $carbon--spacing-02;
+    margin-bottom: $spacing-02;
   }
 
   .#{$prefix}--modal-header__heading {
@@ -126,18 +241,50 @@
   .#{$prefix}--modal-content {
     @include type-style('body-long-01');
 
+    grid-row: 2/-2;
+    grid-column: 1/-1;
+
     overflow-y: auto;
-    margin-bottom: $carbon--spacing-09;
+    margin-bottom: $spacing-08;
     color: $text-01;
     font-weight: 400;
+
+    // Required to accommodate focus outline's negative offset:
+    padding-top: $spacing-03;
 
     &:focus {
       @include focus-outline('outline');
     }
   }
 
-  .#{$prefix}--modal-content > * {
-    @include type-style('body-long-01');
+  // Required so overflow-indicator disappears at end of content
+  .#{$prefix}--modal-content > *:last-child {
+    padding-bottom: $spacing-07;
+  }
+
+  .#{$prefix}--modal-content {
+    > * {
+      @include type-style('body-long-01');
+    }
+  }
+
+  .#{$prefix}--modal-content--overflow-indicator {
+    grid-row: 2/-2;
+    grid-column: 1/-1;
+    width: 100%;
+    height: rem(32px);
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: $spacing-08;
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to bottom, rgba($ui-01, 0), $ui-01);
+  }
+
+  .#{$prefix}--modal-content:focus
+    ~ .#{$prefix}--modal-content--overflow-indicator {
+    width: calc(100% - 4px);
+    margin: 0 2px 2px 2px;
   }
 
   .#{$prefix}--modal-footer {
@@ -146,13 +293,16 @@
     height: 4rem;
     background-color: $modal-footer-background-color;
 
+    grid-row: -1/-1;
+    grid-column: 1/-1;
+
     button.#{$prefix}--btn {
       max-width: none;
       flex: 1;
       height: 4rem;
       margin: 0;
-      padding-top: 1rem;
-      padding-bottom: 2rem;
+      padding-top: $spacing-05;
+      padding-bottom: $spacing-07;
     }
   }
 

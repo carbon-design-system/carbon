@@ -5,24 +5,36 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import PropTypes from 'prop-types';
 import React from 'react';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-export default class BreadcrumbSkeleton extends React.Component {
-  render() {
-    const item = (
-      <div className={`${prefix}--breadcrumb-item`}>
-        <span className={`${prefix}--link`}>&nbsp;</span>
-      </div>
-    );
-    return (
-      <div className={`${prefix}--breadcrumb ${prefix}--skeleton`}>
-        {item}
-        {item}
-        {item}
-      </div>
-    );
-  }
+const item = (
+  <div className={`${prefix}--breadcrumb-item`}>
+    <span className={`${prefix}--link`}>&nbsp;</span>
+  </div>
+);
+
+function BreadcrumbSkeleton({ className, ...rest }) {
+  const classes = cx(`${prefix}--breadcrumb`, `${prefix}--skeleton`, className);
+
+  return (
+    <div className={classes} {...rest}>
+      {item}
+      {item}
+      {item}
+    </div>
+  );
 }
+
+BreadcrumbSkeleton.propTypes = {
+  /**
+   * Specify an optional className to add.
+   */
+  className: PropTypes.string,
+};
+
+export default BreadcrumbSkeleton;

@@ -2,6 +2,7 @@
 
 exports[`ModalWrapper should render 1`] = `
 <ModalWrapper
+  aria-label="test modal"
   buttonTriggerClassName="btn-trigger"
   buttonTriggerText="Test Modal"
   disabled={false}
@@ -41,7 +42,9 @@ exports[`ModalWrapper should render 1`] = `
       </button>
     </ForwardRef(Button)>
     <Modal
+      aria-label="test modal"
       focusTrap={true}
+      hasScrollingContent={false}
       iconDescription="close the modal"
       id="modal"
       modalHeading="Transactional Modal"
@@ -67,6 +70,7 @@ exports[`ModalWrapper should render 1`] = `
         paused={false}
       >
         <div
+          aria-label="test modal"
           className="bx--modal bx--modal-tall"
           id="modal"
           onBlur={[Function]}
@@ -76,8 +80,7 @@ exports[`ModalWrapper should render 1`] = `
           tabIndex={-1}
         >
           <div
-            aria-label={null}
-            aria-labelledby="bx--modal-header__label bx--modal-header__heading"
+            aria-label="Test Modal Label"
             aria-modal="true"
             className="bx--modal-container"
             role="dialog"
@@ -87,11 +90,13 @@ exports[`ModalWrapper should render 1`] = `
             >
               <h2
                 className="bx--modal-header__label"
+                id="bx--modal-header__label--modal-1"
               >
                 Test Modal Label
               </h2>
               <h3
                 className="bx--modal-header__heading"
+                id="bx--modal-header__heading--modal-1"
               >
                 Transactional Modal
               </h3>
@@ -140,6 +145,7 @@ exports[`ModalWrapper should render 1`] = `
               </button>
             </div>
             <div
+              aria-labelledby="bx--modal-header__label--modal-1"
               className="bx--modal-content"
             >
               <p

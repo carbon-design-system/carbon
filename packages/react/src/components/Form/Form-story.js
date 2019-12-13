@@ -132,6 +132,8 @@ const buttonEvents = {
   className: 'some-class',
 };
 
+RadioButton.displayName = 'RadioButton';
+
 storiesOf('Form', module)
   .addDecorator(withKnobs)
   .add(
