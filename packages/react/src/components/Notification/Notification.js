@@ -15,6 +15,7 @@ import {
   CheckmarkFilled20,
   WarningFilled20,
 } from '@carbon/icons-react';
+import { spacing03 } from '@carbon/layout';
 
 import Button from '../Button';
 
@@ -504,7 +505,12 @@ export class InlineNotification extends Component {
     );
 
     return (
-      <div {...other} role={role} kind={kind} className={classes}>
+      <div
+        {...other}
+        role={role}
+        kind={kind}
+        className={classes}
+        style={{ paddingRight: hideCloseButton ? spacing03 : '0' }}>
         <div className={`${prefix}--inline-notification__details`}>
           <NotificationIcon
             notificationType={notificationType}
