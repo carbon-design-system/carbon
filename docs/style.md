@@ -136,6 +136,26 @@ have saved three out of the four steps above. As a result, we tend to favor
 being explicit in how JavaScript is written instead of relying on implicit
 behavior.
 
+<table>
+<thead><tr><th>Unpreferred</th><th>Preferred</th></tr></thead>
+<tbody>
+<tr><td>
+
+```jsx
+const add = (a, b) => a + b;
+```
+
+</td><td>
+
+```jsx
+const add = (a, b) => {
+  return a + b;
+};
+```
+
+</td></tr>
+</tbody></table>
+
 ## React
 
 ### Guidelines
