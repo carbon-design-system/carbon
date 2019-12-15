@@ -108,10 +108,9 @@ const add = (a, b) => a + b;
 ```
 
 We've found that, while this style is terse and compact, it can be at odds with
-how the fact that code is revisited often and that developers need to peak
-inside sometimes to see what is going on. For example, if we needed to debug a
-specific value in the function above then we would go through the following
-steps:
+the fact that code is revisited often and that developers need to peak inside
+sometimes to see what is going on. For example, if we needed to debug a specific
+value in the function above then we would go through the following steps:
 
 ```js
 // Step 1. The code as originally authored
