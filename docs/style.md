@@ -99,6 +99,26 @@ _Inspired by
 
 #### Be explicit
 
+<table>
+<thead><tr><th>Unpreferred</th><th>Preferred</th></tr></thead>
+<tbody>
+<tr><td>
+
+```jsx
+const add = (a, b) => a + b;
+```
+
+</td><td>
+
+```jsx
+const add = (a, b) => {
+  return a + b;
+};
+```
+
+</td></tr>
+</tbody></table>
+
 Certain features in JavaScript have implicit behavior. One of these that we see
 most often is the implicit return behavior of arrow function expressions, for
 example:
@@ -135,26 +155,6 @@ If instead we had written this code without the implicit return then we would
 have saved three out of the four steps above. As a result, we tend to favor
 being explicit in how JavaScript is written instead of relying on implicit
 behavior.
-
-<table>
-<thead><tr><th>Unpreferred</th><th>Preferred</th></tr></thead>
-<tbody>
-<tr><td>
-
-```jsx
-const add = (a, b) => a + b;
-```
-
-</td><td>
-
-```jsx
-const add = (a, b) => {
-  return a + b;
-};
-```
-
-</td></tr>
-</tbody></table>
 
 ## React
 
