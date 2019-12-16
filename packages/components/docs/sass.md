@@ -3635,6 +3635,8 @@ $spacing-03: $carbon--spacing-03;
 - **Alias**: `carbon--spacing-03`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [accordion [mixin]](#accordion-mixin)
+  - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
@@ -3685,6 +3687,7 @@ $spacing-05: $carbon--spacing-05;
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [pagination [mixin]](#pagination-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
@@ -3705,6 +3708,7 @@ $spacing-06: $carbon--spacing-06;
 - **Alias**: `carbon--spacing-06`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
 
 ### ✅spacing-07 [variable]
@@ -3761,6 +3765,7 @@ $spacing-09: $carbon--spacing-09;
 - **Alias**: `carbon--spacing-09`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [modal [mixin]](#modal-mixin)
   - [select [mixin]](#select-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
@@ -12643,7 +12648,7 @@ Accordion styles
     .#{$prefix}--accordion__content {
       display: block;
       padding-bottom: $carbon--spacing-06;
-      padding-top: $spacing-xs;
+      padding-top: $spacing-03;
       // Transition property for when the accordion opens
       transition: padding-top motion(entrance, productive) $duration--fast-02, padding-bottom
           motion(entrance, productive) $duration--fast-02;
@@ -12704,6 +12709,7 @@ Accordion styles
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
 
 ## breadcrumb
 
@@ -13415,7 +13421,7 @@ Code snippet styles
   }
 
   .#{$prefix}--snippet--inline code {
-    padding: 0 $spacing-xs;
+    padding: 0 $spacing-03;
   }
 
   // Single Line Snippet
@@ -13440,7 +13446,7 @@ Code snippet styles
   .#{$prefix}--snippet--single pre {
     white-space: nowrap;
     @include type-style('code-01');
-    padding-right: $spacing-xs;
+    padding-right: $spacing-03;
   }
 
   .#{$prefix}--snippet--single::after {
@@ -13543,8 +13549,8 @@ Code snippet styles
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-button {
     height: $carbon--spacing-07;
     width: $carbon--spacing-07;
-    top: $spacing-xs;
-    right: $spacing-xs;
+    top: $spacing-03;
+    right: $spacing-03;
   }
 
   .#{$prefix}--snippet-button:hover {
@@ -13579,9 +13585,9 @@ Code snippet styles
     display: inline-flex;
     align-items: center;
     position: absolute;
-    right: $spacing-xs;
-    bottom: $spacing-xs;
-    padding: $spacing-xs;
+    right: $spacing-03;
+    bottom: $spacing-03;
+    padding: $spacing-03;
     padding-left: $carbon--spacing-05;
     color: $text-01;
     background-color: $field-01;
@@ -13599,7 +13605,7 @@ Code snippet styles
 
   .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
     fill: $text-01;
-    margin-left: $spacing-xs;
+    margin-left: $spacing-03;
     margin-bottom: rem(1px);
     transform: rotate(0deg);
     transition: $duration--moderate-01 motion(standard, productive);
@@ -13775,6 +13781,7 @@ Code snippet styles
   - [text-01 [variable]](#text-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [focus [variable]](#focus-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
@@ -14083,7 +14090,7 @@ Data table action styles
     .#{$prefix}--search-magnifier {
     height: $layout-04;
     width: $layout-04;
-    padding: $spacing-md;
+    padding: $spacing-05;
     left: 0;
     cursor: pointer;
     pointer-events: all;
@@ -14149,7 +14156,7 @@ Data table action styles
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
     .#{$prefix}--search-input {
-    padding-left: $spacing-3xl;
+    padding-left: $spacing-09;
     visibility: inherit;
   }
 
@@ -14214,7 +14221,7 @@ Data table action styles
     cursor: pointer;
     height: $layout-04;
     width: $layout-04;
-    padding: $spacing-md;
+    padding: $spacing-05;
     transition: background $duration--fast-02 motion(entrance, productive);
   }
 
@@ -14297,14 +14304,14 @@ Data table action styles
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search
     .#{$prefix}--search-magnifier {
-    left: $spacing-md;
+    left: $spacing-05;
   }
 
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search
     .#{$prefix}--search-input {
     height: $layout-04;
-    padding-left: $spacing-3xl;
+    padding-left: $spacing-09;
     border: none;
   }
 
@@ -14353,8 +14360,8 @@ Data table action styles
     top: 0;
     left: 0;
     align-items: center;
-    padding-left: $spacing-lg;
-    padding-right: $spacing-lg;
+    padding-left: $spacing-06;
+    padding-right: $spacing-06;
     width: 100%;
     height: 100%;
     pointer-events: none;
@@ -14510,7 +14517,7 @@ Data table action styles
       .#{$prefix}--search-magnifier {
       height: rem(32px);
       width: rem(32px);
-      padding: $spacing-xs;
+      padding: $spacing-03;
     }
 
     //hidden
@@ -14578,7 +14585,7 @@ Data table action styles
   .#{$prefix}--table-toolbar--small .#{$prefix}--toolbar-action {
     height: rem(32px);
     width: rem(32px);
-    padding: $spacing-xs;
+    padding: $spacing-03;
   }
 
   .#{$prefix}--table-toolbar--small .#{$prefix}--btn--primary {
@@ -14608,15 +14615,17 @@ Data table action styles
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [layout-04 [variable]](#layout-04-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [spacing-09 [variable]](#spacing-09-variable)
   - [layout-01 [variable]](#layout-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
+  - [spacing-06 [variable]](#spacing-06-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [text-04 [variable]](#text-04-variable)
   - [icon-03 [variable]](#icon-03-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
-  - [spacing-05 [variable]](#spacing-05-variable)
 
 ### ❌data-table-core [mixin]
 
@@ -19738,7 +19747,7 @@ Pagination styles
     width: auto;
     min-width: auto;
     height: 100%;
-    padding: 0 2.5rem 0 $spacing-md;
+    padding: 0 2.5rem 0 $spacing-05;
     margin-right: -0.65rem;
     @include carbon--breakpoint('md') {
       padding-right: carbon--mini-units(4.5);
@@ -19885,6 +19894,7 @@ Pagination styles
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-02 [variable]](#text-02-variable)
