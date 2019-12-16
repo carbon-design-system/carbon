@@ -9,7 +9,11 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { settings } from '@rocketsoftware/carbon-components';
-import { CheckmarkOutline16, Warning16 } from '@rocketsoftware/icons-react';
+import {
+  CheckmarkOutline16,
+  Warning16,
+  CircleDash32,
+} from '@rocketsoftware/icons-react';
 import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
@@ -24,6 +28,7 @@ export const ProgressStep = ({ ...props }) => {
     invalid,
     secondaryLabel,
     disabled,
+    skip,
     onClick,
     renderLabel: ProgressStepLabel,
   } = props;
@@ -43,9 +48,23 @@ export const ProgressStep = ({ ...props }) => {
     }
   };
 
-  const SVGIcon = ({ complete, current, description, invalid, prefix }) => {
+  const SVGIcon = ({
+    complete,
+    current,
+    description,
+    invalid,
+    skip,
+    prefix,
+  }) => {
     if (invalid) {
       return <Warning16 className={`${prefix}--progress__warning`} />;
+    }
+    if (skip) {
+      return (
+        <CircleDash32>
+          <title>{description}</title>
+        </CircleDash32>
+      );
     }
     if (current) {
       return (
@@ -85,6 +104,7 @@ export const ProgressStep = ({ ...props }) => {
           current={current}
           description={description}
           invalid={invalid}
+          skip={skip}
           prefix={prefix}
         />
         <ProgressStepLabel className={`${prefix}--progress-label`}>
@@ -155,6 +175,11 @@ ProgressStep.propTypes = {
    * Specify whether the step is disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Specify whether the step is skipped
+   */
+  skip: PropTypes.bool,
 
   /**
    * The ID of the tooltip content.

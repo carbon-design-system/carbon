@@ -27,6 +27,7 @@ storiesOf('ProgressIndicator', module)
           label="First step"
           description="Step 1: Getting started with Carbon Design System"
           secondaryLabel="Optional label"
+          skip
         />
         <ProgressStep
           label="Second step with tooltip"
