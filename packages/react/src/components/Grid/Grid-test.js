@@ -6,9 +6,7 @@
  */
 
 import React from 'react';
-import Grid from // GridRow,
-// GridCol,
-'../Grid';
+import Grid from '../Grid';
 import { shallow } from 'enzyme';
 import { settings } from 'carbon-components';
 
@@ -16,8 +14,11 @@ const { prefix } = settings;
 
 describe('<Grid />', () => {
   describe('Renders as expected', () => {
+    const Child = () => <span>An Item</span>;
     const wrapper = shallow(
-      <Grid className="extra-class" style={{ border: '5px' }} />
+      <Grid className="extra-class" style={{ border: '5px' }}>
+        <Child />
+      </Grid>
     );
     const wrapperCondensed = shallow(<Grid condensed />);
     const wrapperFullWidth = shallow(<Grid fullWidth />);
@@ -25,10 +26,6 @@ describe('<Grid />', () => {
 
     it('has the expected base class', () => {
       expect(wrapper.hasClass(`${prefix}--grid`)).toEqual(true);
-    });
-
-    it('renders as div', () => {
-      expect(wrapper.is('div')).toEqual(true);
     });
 
     it('renders extra classes passed in via className & passes thru unknown props', () => {
@@ -60,10 +57,8 @@ describe('<Grid />', () => {
       );
     });
 
-    it('does not render classes when passed falsey prop', () => {
-      wrapper.setProps({ noGutter: false });
-      wrapper.setProps({ fullWidth: false });
-      wrapper.setProps({ condensed: false });
+    it('does not render classes when passed falsey noGutter, fullWidth, or condensed props', () => {
+      wrapper.setProps({ noGutter: false, fullWidth: false, condensed: false });
       expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter`)).toEqual(false);
       expect(wrapperNoGutter.hasClass(`${prefix}--grid--full-width`)).toEqual(
         false
@@ -71,6 +66,104 @@ describe('<Grid />', () => {
       expect(wrapperNoGutter.hasClass(`${prefix}--grid--condensed`)).toEqual(
         false
       );
+    });
+
+    it('should render child content', () => {
+      expect(wrapper.find(Child).length).toEqual(1);
+    });
+  });
+});
+
+describe('<Grid.Row />', () => {
+  describe('Renders as expected', () => {
+    const Child = () => <span>An Item</span>;
+    const wrapper = shallow(
+      <Grid.Row className="extra-class" style={{ border: '5px' }}>
+        <Child />
+      </Grid.Row>
+    );
+    const wrapperCondensed = shallow(<Grid condensed />);
+    const wrapperNoGutter = shallow(<Grid noGutter />);
+
+    it('has the expected base class', () => {
+      expect(wrapper.hasClass(`${prefix}--row`)).toEqual(true);
+    });
+
+    it('renders extra classes passed in via className & passes thru unknown props', () => {
+      expect(wrapper.hasClass('extra-class')).toEqual(true);
+      expect(wrapper.prop('style')).toBeTruthy();
+    });
+
+    it('has condensed class if condensed', () => {
+      expect(wrapperCondensed.hasClass(`${prefix}--grid--condensed`)).toEqual(
+        true
+      );
+    });
+
+    it('has correct gutter classes when passed true, left, or right', () => {
+      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter`)).toEqual(true);
+      wrapperNoGutter.setProps({ noGutter: 'left' });
+      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter--left`)).toEqual(
+        true
+      );
+      wrapperNoGutter.setProps({ noGutter: 'right' });
+      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter--right`)).toEqual(
+        true
+      );
+    });
+
+    it('does not render classes when passed falsey noGutter or condensed', () => {
+      wrapper.setProps({ noGutter: false, condensed: false });
+      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter`)).toEqual(false);
+      expect(wrapperNoGutter.hasClass(`${prefix}--grid--condensed`)).toEqual(
+        false
+      );
+    });
+
+    it('should render child content', () => {
+      expect(wrapper.find(Child).length).toEqual(1);
+    });
+  });
+});
+
+describe('<Grid.Col />', () => {
+  describe('Renders as expected', () => {
+    const Child = () => <span>An Item</span>;
+    const wrapper = shallow(
+      <Grid.Col className="extra-class" style={{ border: '5px' }}>
+        <Child />
+      </Grid.Col>
+    );
+    const wrapperNoGutter = shallow(<Grid noGutter />);
+
+    it('has the expected base class', () => {
+      expect(wrapper.hasClass(`${prefix}--col`)).toEqual(true);
+    });
+
+    it('renders extra classes passed in via className & passes thru unknown props', () => {
+      expect(wrapper.hasClass('extra-class')).toEqual(true);
+      expect(wrapper.prop('style')).toBeTruthy();
+    });
+
+    it('has correct gutter classes when passed true, left, or right', () => {
+      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter`)).toEqual(true);
+      wrapperNoGutter.setProps({ noGutter: 'left' });
+      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter--left`)).toEqual(
+        true
+      );
+      wrapperNoGutter.setProps({ noGutter: 'right' });
+      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter--right`)).toEqual(
+        true
+      );
+    });
+
+    it('does not render class when passed falsey noGutter', () => {
+      wrapper.setProps({ noGutter: false });
+      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter`)).toEqual(false);
+    });
+
+    it('should render child content', () => {
+      expect(wrapper.find(Child).length).toEqual(1);
     });
   });
 });
