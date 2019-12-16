@@ -82,8 +82,8 @@ describe('<Grid.Row />', () => {
         <Child />
       </Grid.Row>
     );
-    const wrapperCondensed = shallow(<Grid condensed />);
-    const wrapperNoGutter = shallow(<Grid noGutter />);
+    const wrapperCondensed = shallow(<Grid.Row condensed />);
+    const wrapperNoGutter = shallow(<Grid.Row noGutter />);
 
     it('has the expected base class', () => {
       expect(wrapper.hasClass(`${prefix}--row`)).toEqual(true);
@@ -95,7 +95,7 @@ describe('<Grid.Row />', () => {
     });
 
     it('has condensed class if condensed', () => {
-      expect(wrapperCondensed.hasClass(`${prefix}--grid--condensed`)).toEqual(
+      expect(wrapperCondensed.hasClass(`${prefix}--row--condensed`)).toEqual(
         true
       );
     });
@@ -115,7 +115,7 @@ describe('<Grid.Row />', () => {
     it('does not render classes when passed falsey noGutter or condensed', () => {
       wrapper.setProps({ noGutter: false, condensed: false });
       expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter`)).toEqual(false);
-      expect(wrapperNoGutter.hasClass(`${prefix}--grid--condensed`)).toEqual(
+      expect(wrapperNoGutter.hasClass(`${prefix}--row--condensed`)).toEqual(
         false
       );
     });
@@ -134,7 +134,7 @@ describe('<Grid.Col />', () => {
         <Child />
       </Grid.Col>
     );
-    const wrapperNoGutter = shallow(<Grid noGutter />);
+    const wrapperNoGutter = shallow(<Grid.Col noGutter />);
 
     it('has the expected base class', () => {
       expect(wrapper.hasClass(`${prefix}--col`)).toEqual(true);
@@ -164,6 +164,18 @@ describe('<Grid.Col />', () => {
 
     it('should render child content', () => {
       expect(wrapper.find(Child).length).toEqual(1);
+    });
+
+    it('should NOT render offset class when falsey', () => {
+      const offset = 0;
+      wrapper.setProps({ smOffset: offset });
+      expect(wrapper.hasClass(`${prefix}--offset-sm-${offset}`)).toEqual(false);
+    });
+
+    it('should render offset class when truthy', () => {
+      const offset = 1;
+      wrapper.setProps({ smOffset: offset });
+      expect(wrapper.hasClass(`${prefix}--offset-sm-${offset}`)).toEqual(true);
     });
   });
 });
