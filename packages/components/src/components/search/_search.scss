@@ -72,6 +72,18 @@
     }
   }
 
+  .#{$prefix}--search-input:-webkit-autofill ~ .#{$prefix}--search-close {
+    fill: currentColor;
+  }
+
+  .#{$prefix}--search-input:-webkit-autofill ~ .#{$prefix}--search-close:hover {
+    background-color: #e5e5e5;
+  }
+
+  .#{$prefix}--search-input:-webkit-autofill ~ .#{$prefix}--search-magnifier {
+    fill: black;
+  }
+
   .#{$prefix}--search-input[disabled] ~ .#{$prefix}--search-magnifier {
     fill: $disabled;
   }
@@ -123,7 +135,6 @@
     right: 0;
 
     &::before {
-      content: '';
       display: block;
       position: absolute;
       left: 0;
