@@ -3199,6 +3199,7 @@ icons:
       - flag
       - marker
     sizes:
+      - 16
       - 32
   - name: box
     friendly_name: Box
@@ -4177,6 +4178,39 @@ icons:
       - transfer
       - exchange
     sizes:
+      - 32
+  - name: atomic
+    friendly_name: Atomic
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - atomic
+    sizes:
+      - 16
+      - 32
+  - name: physical-hierarchy
+    friendly_name: Physical hierarchy
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - hierarchy
+    sizes:
+      - 16
+      - 32
+  - name: relationship
+    friendly_name: Relationship
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - relationship
+    sizes:
+      - 16
       - 32
   - name: data-vis
     friendly_name: Data vis

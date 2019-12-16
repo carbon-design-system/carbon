@@ -513,6 +513,7 @@ categories:
           - activity
           - analytics
           - archive
+          - atomic
           - blockchain
           - character-patterns
           - chart--bar
@@ -555,8 +556,10 @@ categories:
           - network--4
           - parent-child
           - phrase-sentiment
+          - physical-hierarchy
           - presentation-file
           - query-queue
+          - relationship
           - report
           - report--data
           - schematics

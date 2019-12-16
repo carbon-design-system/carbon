@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Relationship</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Relationship" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#FFFFFF" opacity="0" x="0" y="0" width="32" height="32"></rect>
+        <g id="Group" transform="translate(1.000000, 1.000000)" stroke="#231F20">
+            <ellipse id="Oval" fill-opacity="0" fill="#D8D8D8" cx="14.3055556" cy="5.38922156" rx="5.55555556" ry="5.38922156"></ellipse>
+            <ellipse id="Oval-Copy-2" fill-opacity="0" fill="#D8D8D8" cx="5.55555556" cy="24.1392216" rx="5.55555556" ry="5.38922156"></ellipse>
+            <ellipse id="Oval-Copy-3" fill-opacity="0" fill="#D8D8D8" cx="24.3055556" cy="24.1392216" rx="5.55555556" ry="5.38922156"></ellipse>
+            <path d="M4.49074074,10 L9.39814815,18.4505988" id="Line-Copy" stroke-linecap="square" transform="translate(7.245370, 14.375000) scale(-1, 1) translate(-7.245370, -14.375000) "></path>
+            <path d="M17.5,10 L22.7777778,18.4505988" id="Line" stroke-linecap="square"></path>
+        </g>
+    </g>
+</svg>

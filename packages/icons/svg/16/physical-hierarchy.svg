@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Physical Hierarchy</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Physical-Hierarchy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#FFFFFF" opacity="0" x="0" y="0" width="16" height="16"></rect>
+        <g id="Group" transform="translate(1.000000, 1.000000)" stroke="#3D70B2">
+            <rect id="Rectangle" x="0.5" y="0.5" width="4.96296296" height="2.37037037"></rect>
+            <rect id="Rectangle-Copy" x="8.14814815" y="5.55555556" width="4.96296296" height="2.37037037"></rect>
+            <rect id="Rectangle-Copy-2" x="8.14814815" y="11.1296296" width="4.96296296" height="2.37037037"></rect>
+            <polyline id="Line" stroke-linecap="square" points="2.98148148 4.34259259 2.98148148 6.83365885 2.98148148 12.3148148 6.71481481 12.3148148"></polyline>
+            <path d="M2.98148148,6.74074074 L6.71481481,6.74074074" id="Line-2" stroke-linecap="square" stroke-linejoin="round"></path>
+        </g>
+    </g>
+</svg>

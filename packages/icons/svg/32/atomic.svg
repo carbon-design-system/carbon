@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>atomic</title>
+    <g id="Atomic-Catalog-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#868686" opacity="0" x="0" y="0" width="32" height="32"></rect>
+        <g id="Group" transform="translate(1.000000, 1.000000)">
+            <circle id="Oval" fill="#000000" cx="15" cy="15" r="5"></circle>
+            <circle id="Oval-Copy-2" fill="#000000" cx="25.15625" cy="4.01041667" r="4.01041667"></circle>
+            <circle id="Oval-Copy-3" fill="#000000" cx="4.94791667" cy="25.46875" r="4.01041667"></circle>
+            <circle id="Oval-Copy" stroke="#000000" stroke-width="2" cx="15" cy="15" r="15"></circle>
+        </g>
+    </g>
+</svg>
