@@ -1,8 +1,8 @@
 ---
-name: "Bug Report \U0001F41B"
+name: "Bug Report 🐛"
 about: Something isn't working as expected? Here is the right place to report.
 title: ''
-labels: "type: bug \U0001F41B"
+labels: "type: bug 🐛", "squad: system"
 assignees: ''
 ---
 
