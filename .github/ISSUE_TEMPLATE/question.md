@@ -1,8 +1,8 @@
 ---
 name: Question ❓
-about: Usage question or discussion about Carbon Components.
+about: Usage question or discussion about Carbon components
 title: ''
-labels: 'type: question :question:'
+labels: 'type: question ❓', 'squad: system'
 assignees: ''
 ---
 
