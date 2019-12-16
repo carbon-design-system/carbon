@@ -70,9 +70,4 @@ addons.getChannel().on(CARBON_TYPE_TOKEN, ({ tokenName, tokenValue }) => {
   );
 });
 
-function loadStories() {
-  const req = require.context('../src/components', true, /\-story\.js$/);
-  req.keys().forEach(filename => req(filename));
-}
-
-configure(loadStories, module);
+configure(require.context('../src/components', true, /\-story\.js$/), module);

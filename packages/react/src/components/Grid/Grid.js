@@ -10,6 +10,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { settings } from 'carbon-components';
+import { breakpoints } from '@carbon/layout';
 
 import { range } from '../../tools/array';
 
@@ -18,15 +19,15 @@ const { prefix } = settings;
 // getter functions needed due to error in storybook
 // addons knobs that requires a copy of this object to avoid
 const getValidColWidths = () => ({
-  sm: ['auto', ...range({ end: 4 })],
-  md: ['auto', ...range({ end: 8 })],
-  lgPlus: ['auto', ...range({ end: 12 })],
+  sm: ['auto', ...range({ end: breakpoints.sm.columns })],
+  md: ['auto', ...range({ end: breakpoints.md.columns })],
+  lgPlus: ['auto', ...range({ end: breakpoints.lg.columns })],
 });
 
 const getValidColOffsets = () => ({
-  sm: range({ end: 4 - 1 }),
-  md: range({ end: 8 - 1 }),
-  lgPlus: range({ end: 12 - 1 }),
+  sm: range({ end: breakpoints.sm.columns - 1 }),
+  md: range({ end: breakpoints.md.columns - 1 }),
+  lgPlus: range({ end: breakpoints.lg.columns - 1 }),
 });
 
 const VALID_COL_WIDTHS = getValidColWidths();
