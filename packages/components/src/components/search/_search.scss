@@ -130,18 +130,6 @@
     position: absolute;
     right: 0;
 
-    &::before {
-      display: block;
-      position: absolute;
-      left: 0;
-      top: rem(1px);
-      height: calc(100% - 2px);
-      width: 2px;
-      background-color: $field-01;
-      transition: background-color $duration--fast-02
-        motion(standard, productive);
-    }
-
     &:hover {
       border-bottom: 1px solid $ui-04;
     }
