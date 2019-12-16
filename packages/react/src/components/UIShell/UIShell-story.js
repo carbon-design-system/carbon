@@ -66,11 +66,12 @@ const StoryContent = () => {
           </h2>
           <p style={{ lineHeight: '20px' }}>
             The shell is perhaps the most crucial piece of any UI built with
-            Carbon. It contains the shared navigation framework for the entire
-            design system and ties the products in IBM’s portfolio together in a
-            cohesive and elegant way. The shell is the home of the topmost
-            navigation, where users can quickly and dependably gain their
-            bearings and move between pages.
+            <a href="www.carbondesignsystem.com"> Carbon</a>. It contains the
+            shared navigation framework for the entire design system and ties
+            the products in IBM’s portfolio together in a cohesive and elegant
+            way. The shell is the home of the topmost navigation, where users
+            can quickly and dependably gain their bearings and move between
+            pages.
             <br />
             <br />
             The shell was designed with maximum flexibility built in, to serve
@@ -216,6 +217,37 @@ storiesOf('UI Shell', module)
           </HeaderGlobalAction>
         </HeaderGlobalBar>
       </Header>
+    ))
+  )
+  .add(
+    'Header Base w/ SkipToContent',
+    withReadme(readme, () => (
+      <>
+        <Header aria-label="IBM Platform Name">
+          <SkipToContent />
+          <HeaderName href="#" prefix="IBM">
+            [Platform]
+          </HeaderName>
+          <HeaderGlobalBar>
+            <HeaderGlobalAction
+              aria-label="Search"
+              onClick={action('search click')}>
+              <Search20 />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction
+              aria-label="Notifications"
+              onClick={action('notification click')}>
+              <Notification20 />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction
+              aria-label="App Switcher"
+              onClick={action('app-switcher click')}>
+              <AppSwitcher20 />
+            </HeaderGlobalAction>
+          </HeaderGlobalBar>
+        </Header>
+        <StoryContent />
+      </>
     ))
   )
   .add(
