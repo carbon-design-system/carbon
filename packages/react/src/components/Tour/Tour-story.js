@@ -46,6 +46,7 @@ const steps = {
     {
       selector: '#two',
       movingTarget: true,
+      title: 'Interaction',
       description: 'You can interact with the elements being highlighted.',
     },
   ],
@@ -89,6 +90,19 @@ storiesOf('Tour', module)
   .add('hide buttons', () => (
     <>
       {targets}
-      <Tour steps={steps.default()} hideClose hidePrev hideNext />
+      <Tour steps={steps.default()} hidePrev hideNext />
+    </>
+  ))
+  .add('with flip', () => (
+    <>
+      {targets}
+      <Tour
+        enableFlip
+        steps={steps.default()}
+        flippedTitle={'Flipped Title'}
+        flippedDescription={
+          'Secondary description on the back side of the card. Currently, this is the same for all steps'
+        }
+      />
     </>
   ));

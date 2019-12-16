@@ -37,4 +37,18 @@ storiesOf('TourTooltip', module)
       hideCheckbox={boolean('Hide checkbox', true)}
       checkboxLabel={text('Checkbox label', undefined)}
     />
+  ))
+  .add('with flip', () => (
+    <TourTooltip
+      {...props.default()}
+      enableFlip
+      flippedTitle={'Secondary Title'}
+      flippedDescription={`It is an ancient Mariner,
+          And he stoppeth one of three.
+          'By thy long grey beard and glittering eye,
+          Now wherefore stopp'st thou me? `}
+      nextLabel={'Next Page'}
+      closeLabel={'End Tour'}
+      prevLabel={'Back'}
+    />
   ));

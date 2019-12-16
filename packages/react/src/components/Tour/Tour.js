@@ -7,49 +7,49 @@ export default class Tour extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: false,
+      flipped: false,
     };
   }
 
   render() {
+    const { flippedTitle, flippedDescription, enableFlip } = this.props;
     return (
       <Walktour
         {...this.props}
+        customCloseFunc={logic => {
+          if (this.props.onClose) {
+            this.props.onClose(logic.stepIndex);
+          }
+          logic.close();
+        }}
         customTooltipRenderer={logic => {
           const {
             title,
             description,
-            disableClose,
             disableNext,
             disablePrev,
             nextLabel,
             prevLabel,
-            closeLabel,
           } = logic.stepContent;
-
-          const onClose = this.props.onClose
-            ? () => {
-                this.props.onClose(this.state.checked);
-                logic.close();
-              }
-            : logic.close;
-
           return (
             <TourTooltip
-              onChangeChecked={val => this.setState({ checked: val })}
-              checked={this.state.checked}
+              {...(enableFlip && {
+                enableFlip: true,
+                flipped: this.state.flipped,
+                onFlip: () => this.setState({ flipped: !this.state.flipped }),
+              })}
+              flippedTitle={flippedTitle}
+              flippedDescription={flippedDescription}
               {...this.props}
               onNext={logic.next}
               onPrev={logic.prev}
-              onClose={onClose}
+              onClose={logic.close}
               description={description}
               title={title}
-              disableClose={disableClose}
               disableNext={disableNext}
               disablePrev={disablePrev}
               nextLabel={nextLabel}
               prevLabel={prevLabel}
-              closeLabel={closeLabel}
             />
           );
         }}
@@ -69,23 +69,59 @@ Tour.propTypes = {
       title: PropTypes.string,
       nextLabel: PropTypes.string,
       prevLabel: PropTypes.string,
-      closeLabel: PropTypes.string,
       disableNext: PropTypes.bool,
       disablePrev: PropTypes.bool,
-      disableClose: PropTypes.bool,
       customNextFunc: PropTypes.func,
       customPrevFunc: PropTypes.func,
-      customCloseFunc: PropTypes.func,
+      disableAutoScroll: PropTypes.bool,
+      disableSmoothScroll: PropTypes.bool,
+      movingTarget: PropTypes.bool,
+      maskPadding: PropTypes.number,
+      tooltipSeparation: PropTypes.number,
+      /**
+       * Optionally cause the tour to advance to the next step upon clicking the targeted element.
+       * Only buttons are supported.
+       */
+      nextOnTargetClick: PropTypes.bool,
+      /**
+       * Validate before advancing the tour after clicking a button. Expects a promise resolving to a boolean.
+       */
+      validateNextOnTargetClick: PropTypes.func,
+      orientationPreferences: PropTypes.oneOf([
+        'east',
+        'east-north',
+        'east-south',
+        'south',
+        'south-east',
+        'south-west',
+        'west',
+        'west-north',
+        'west-south',
+        'north',
+        'north-east',
+        'north-west',
+      ]),
+      /**
+       * If specified, the tour will try to target and position with respect to an element that is outside
+       * of its parent container. The tour is still bound to its container, so this should only be used
+       * sparingly in situations where it cannot be avoided.
+       */
+      allowForeignTarget: PropTypes.bool,
     })
   ).isRequired,
 
-  /** Optionally specify a custom close function for the entire tour. The checkbox state is passed as an argument to the callback
-   *
+  /** Optionally specify a custom close function for the entire tour. Passed the current step index as a param.
    */
   onClose: PropTypes.func,
 
   /**
-   * Optionally specify whether the tour should watch for changes to the target's size or position.
+   * Optionally specify the starting step. If conditionally rendering ({showTour && <Tour... />})
+   * this can be used to resume from a particular step, even after unmounting.
+   */
+  initialStepIndex: PropTypes.number,
+
+  /**
+   * Optionally specify whether the tour should update upon changes to the target's size or position.
    */
   movingTarget: PropTypes.bool,
 
@@ -103,6 +139,16 @@ Tour.propTypes = {
    * Optionally disable automatic scrolling
    */
   disableAutoScroll: PropTypes.bool,
+
+  /**
+   * Optionally disable smooth scrolling
+   */
+  disableSmoothScroll: PropTypes.bool,
+
+  /**
+   * Optionally disables closing the tour on mask click
+   */
+  disableCloseOnClick: PropTypes.bool,
 
   /**
    * Optionally provide a callback that handles receiving an update function. Can be used to listen
@@ -134,7 +180,33 @@ Tour.propTypes = {
   hidePrev: PropTypes.bool,
 
   /**
-   * Optionally specify whether the "close" button should be hidden
+   * Optionally allow the tooltip to be flipped over, exposing secondary content on the back side.
    */
-  hideClose: PropTypes.bool,
+  enableFlip: PropTypes.bool,
+
+  /**
+   * Secondary Title, visible when the tooltip is flipped. Access flip functionality with "enableFlip"
+   */
+  flippedTitle: PropTypes.string,
+
+  /**
+   * Secondary body content, visible when the tooltip is flipped. Access flip functionality with "enableFlip"
+   */
+  flippedDescription: PropTypes.string,
+
+  /**
+   * Accessibility label text for the "close" button
+   */
+  closeButtonAriaLabel: PropTypes.string,
+
+  /**
+   * Accessibility label text for the "flip" button
+   */
+  flipButtonAriaLabel: PropTypes.string,
+
+  /**
+   * Optional selector to explicitly define where the tour components should be rendered in the DOM.
+   * This impacts scrolling/scoping, and should only be used if absolutely necessary.
+   */
+  rootSelector: PropTypes.string,
 };

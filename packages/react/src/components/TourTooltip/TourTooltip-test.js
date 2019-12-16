@@ -1,7 +1,6 @@
 import React from 'react';
 import TourTooltip from '../TourTooltip';
 import { shallow } from 'enzyme';
-import Checkbox from '../Checkbox';
 
 describe('TourTooltip', () => {
   describe('default configuration', () => {
@@ -19,17 +18,8 @@ describe('TourTooltip', () => {
       expect(wrapper.children.length).toEqual(1);
     });
 
-    it('contains a checkbox by default', () => {
-      expect(wrapper.find(Checkbox).length).toEqual(1);
-    });
-
-    it('contains three buttons by default', () => {
-      expect(wrapper.find('button').length).toEqual(3);
-    });
-
-    it('contains the description text', () => {
-      const descRegExp = new RegExp(description);
-      expect(descRegExp.test(wrapper.text())).toEqual(true);
+    it('contains two buttons by default', () => {
+      expect(wrapper.find('button').length).toEqual(2);
     });
   });
 
@@ -41,8 +31,6 @@ describe('TourTooltip', () => {
         onClose={() => alert('close')}
         onPrev={() => alert('prev')}
         hidePrev
-        hideClose
-        hideCheckbox
         description={description}
       />
     );
@@ -53,10 +41,6 @@ describe('TourTooltip', () => {
 
     it('only has a single button', () => {
       expect(wrapper.find('button').length).toEqual(1);
-    });
-
-    it('does not have a checkbox', () => {
-      expect(wrapper.find(Checkbox).length).toEqual(0);
     });
   });
 });

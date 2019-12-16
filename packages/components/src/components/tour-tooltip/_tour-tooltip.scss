@@ -12,17 +12,18 @@
 .#{$prefix}--tour-tooltip {
   @include layer('overlay');
   @include reset;
-  display: none;
   min-width: rem(288px);
   max-width: rem(400px);
   font-size: rem(14px);
   background: $inverse-02;
-  padding: 1rem;
   border-radius: rem(2px);
   z-index: z('floating');
   word-wrap: break-word;
   color: $inverse-01;
-  display: block;
+  display: grid; // for flipping
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
 
   p {
     @include type-style('body-short-01');
@@ -55,44 +56,110 @@
     }
   }
 
-  .#{$prefix}--btn--ghost {
-    color: $inverse-link;
-    margin-right: auto;
-
+  .#{$prefix}--tour-tooltip__flip-button {
+    height: 3rem;
+    width: 3rem;
+    padding: rem(12px);
+    border: 2px solid transparent;
+    overflow: hidden;
+    cursor: pointer;
+    fill: $inverse-01;
+    background-color: transparent;
+    transition: background-color $duration--fast-02 motion(standard, productive);
     &:hover {
-      background: $inverse-hover-ui;
+      background-color: $inverse-hover-ui;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $inverse-focus-ui;
     }
   }
 
-  .#{$prefix}--tour-tooltip__heading {
+  .#{$prefix}--tour-tooltip__close-button {
+    height: 3rem;
+    width: 3rem;
+    padding: rem(12px);
+    border: 2px solid transparent;
+    overflow: hidden;
+    cursor: pointer;
+    fill: $inverse-01;
+    background-color: transparent;
+    transition: background-color $duration--fast-02 motion(standard, productive);
+
+    &:hover {
+      background-color: $inverse-hover-ui;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $inverse-focus-ui;
+    }
+  }
+
+  .#{$prefix}--tour-tooltip__header {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: -1rem; // push buttons all the way to side without disrupting padding for rest of card
+  }
+
+  .#{$prefix}--tour-tooltip__title {
     font-size: rem(16px);
+    margin: 1rem 0;
+    margin-right: auto;
+  }
+
+  .#{$prefix}--tour-tooltip__body {
     margin-bottom: 1rem;
   }
 
-  .#{$prefix}--tour-tooltip__footer {
-    margin-top: 1rem;
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-  }
-
   .#{$prefix}--tour-tooltip__action-group {
-    margin-top: 1rem;
+    margin-top: auto;
     display: flex;
     align-items: center;
     justify-content: flex-end;
   }
 
-  .#{$prefix}--tour-tooltip--checkbox {
-    font-size: rem(12px);
-  }
-
-  .#{$prefix}--btn {
-    max-width: rem(128px);
-  }
-
-  .#{$prefix}--btn--primary,
-  .#{$prefix}--btn--secondary {
+  .#{$prefix}--btn--primary {
     margin-left: $spacing-04;
   }
+
+  // start flipping logic
+
+  // put both card faces in the same grid slot, so that they take up the same space
+  // position: absolute not sufficient because the faces are the only elements being
+  // rendered in the parent, so removing them both from the flow gives the parent a height of zero
+  .#{$prefix}--tour-tooltip__face {
+    backface-visibility: hidden;
+    grid-column: 1;
+    grid-row: 1;
+    position: relative;
+    padding: 1rem;
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--tour-tooltip--back {
+    transform: rotateX(180deg);
+  }
+
+  .#{$prefix}--tour-tooltip--front {
+    //firefox wants to know what side is the front else backface-visibility doesn't work
+    transform: rotateX(0deg);
+    z-index: 2;
+  }
+}
+
+.#{$prefix}--tour-tooltip.flipped {
+  transform: rotateX(180deg);
+}
+
+// end flipping logic
+
+// ---------------------------------
+// tooltip wrapper for 3d effect
+// ---------------------------------
+.#{$prefix}--tour-tooltip--container {
+  perspective: 1000px;
 }

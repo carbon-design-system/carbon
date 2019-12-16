@@ -23773,10 +23773,10 @@ walker@^1.0.7, walker@~1.0.5:
   dependencies:
     makeerror "1.0.x"
 
-walktour@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/walktour/-/walktour-4.0.1.tgz#506718e04b386673aab0a688ee4ccf9c21b8b2ff"
-  integrity sha512-mJaGGRhKItN8TFYou5Y4oFfnD9Ht2/vsBM1+Y26NaIBTNQWA8ZUmvHpNVlHEEd0yLJzgYLncciiEjQsRDwE5kQ==
+walktour@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/walktour/-/walktour-4.3.1.tgz#18d765e087687b15fccaf5b98e15256b2fccc018"
+  integrity sha512-ip/O8RPQWLZaimCv+b2YPyDYhewNS8ck3h24QW8g68urpjc0bmf+scrWMflK3WFIVlLKMqhSrlkYRuGrcsMzGw==
 
 warning-symbol@^0.1.0:
   version "0.1.0"
