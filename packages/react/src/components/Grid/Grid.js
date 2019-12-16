@@ -34,28 +34,36 @@ const VALID_COL_WIDTHS = getValidColWidths();
 const VALID_COL_OFFSETS = getValidColOffsets();
 
 export const Grid = ({
+  as = 'div',
   condensed = false,
   fullWidth = false,
   noGutter = false,
   className = '',
   children = null,
   ...rest
-}) => (
-  <div
-    {...rest}
-    className={classNames(
-      `${prefix}--grid`,
-      condensed && `${prefix}--grid--condensed`,
-      fullWidth && `${prefix}--grid--full-width`,
-      noGutter === true && `${prefix}--no-gutter`, // `true` === both
-      noGutter !== true && noGutter && `${prefix}--no-gutter--${noGutter}`, // `left` || `right`
-      className
-    )}>
-    {children}
-  </div>
-);
+}) =>
+  React.createElement(
+    as,
+    {
+      ...rest,
+      className: classNames(
+        `${prefix}--grid`,
+        condensed && `${prefix}--grid--condensed`,
+        fullWidth && `${prefix}--grid--full-width`,
+        noGutter === true && `${prefix}--no-gutter`, // `true` === both
+        noGutter !== true && noGutter && `${prefix}--no-gutter--${noGutter}`, // `left` || `right`
+        className
+      ),
+    },
+    children
+  );
 
 Grid.propTypes = {
+  /**
+   * Provide a custom element to render instead of the default <div>
+   */
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+
   /** Collapse the gutter to 2px. Useful for fluid layouts. Rows have 2px of margin between them to match gutter. */
   condensed: PropTypes.bool,
 
@@ -76,26 +84,34 @@ Grid.propTypes = {
 };
 
 export const GridRow = ({
+  as = 'div',
   condensed = false,
   noGutter = false,
   className = '',
   children = null,
   ...rest
-}) => (
-  <div
-    {...rest}
-    className={classNames(
-      `${prefix}--row`,
-      condensed && `${prefix}--row--condensed`,
-      noGutter === true && `${prefix}--no-gutter`, // `true` === both
-      noGutter !== true && noGutter && `${prefix}--no-gutter--${noGutter}`, // `left` || `right`
-      className
-    )}>
-    {children}
-  </div>
-);
+}) =>
+  React.createElement(
+    as,
+    {
+      ...rest,
+      className: classNames(
+        `${prefix}--row`,
+        condensed && `${prefix}--row--condensed`,
+        noGutter === true && `${prefix}--no-gutter`, // `true` === both
+        noGutter !== true && noGutter && `${prefix}--no-gutter--${noGutter}`, // `left` || `right`
+        className
+      ),
+    },
+    children
+  );
 
 GridRow.propTypes = {
+  /**
+   * Provide a custom element to render instead of the default <div>
+   */
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+
   /** Specify a single row as condensed. Rows that are adjacent and are condensed will have 2px of margin between them to match gutter. */
   condensed: PropTypes.bool,
 
@@ -113,6 +129,7 @@ GridRow.propTypes = {
 };
 
 export const GridCol = ({
+  as = 'div',
   sm,
   md,
   lg,
@@ -127,32 +144,42 @@ export const GridCol = ({
   className = '',
   children = null,
   ...rest
-}) => (
-  <div
-    {...rest}
-    className={classNames(
-      `${prefix}--col`,
-      sm !== undefined && `${prefix}--col-sm-${sm === 'auto' ? '-' : ''}${sm}`,
-      md !== undefined && `${prefix}--col-md-${md === 'auto' ? '-' : ''}${md}`,
-      lg !== undefined && `${prefix}--col-lg-${lg === 'auto' ? '-' : ''}${lg}`,
-      xlg !== undefined &&
-        `${prefix}--col-xlg-${xlg === 'auto' ? '-' : ''}${xlg}`,
-      max !== undefined &&
-        `${prefix}--col-max-${max === 'auto' ? '-' : ''}${max}`,
-      smOffset && `${prefix}--offset-sm-${smOffset}`,
-      mdOffset && `${prefix}--offset-md-${mdOffset}`,
-      lgOffset && `${prefix}--offset-lg-${lgOffset}`,
-      xlgOffset && `${prefix}--offset-xlg-${xlgOffset}`,
-      maxOffset && `${prefix}--offset-max-${maxOffset}`,
-      noGutter === true && `${prefix}--no-gutter`, // `true` === both
-      noGutter !== true && noGutter && `${prefix}--no-gutter--${noGutter}`, // `left` || `right`
-      className
-    )}>
-    {children}
-  </div>
-);
+}) =>
+  React.createElement(
+    as,
+    {
+      ...rest,
+      className: classNames(
+        `${prefix}--col`,
+        sm !== undefined &&
+          `${prefix}--col-sm-${sm === 'auto' ? '-' : ''}${sm}`,
+        md !== undefined &&
+          `${prefix}--col-md-${md === 'auto' ? '-' : ''}${md}`,
+        lg !== undefined &&
+          `${prefix}--col-lg-${lg === 'auto' ? '-' : ''}${lg}`,
+        xlg !== undefined &&
+          `${prefix}--col-xlg-${xlg === 'auto' ? '-' : ''}${xlg}`,
+        max !== undefined &&
+          `${prefix}--col-max-${max === 'auto' ? '-' : ''}${max}`,
+        smOffset && `${prefix}--offset-sm-${smOffset}`,
+        mdOffset && `${prefix}--offset-md-${mdOffset}`,
+        lgOffset && `${prefix}--offset-lg-${lgOffset}`,
+        xlgOffset && `${prefix}--offset-xlg-${xlgOffset}`,
+        maxOffset && `${prefix}--offset-max-${maxOffset}`,
+        noGutter === true && `${prefix}--no-gutter`, // `true` === both
+        noGutter !== true && noGutter && `${prefix}--no-gutter--${noGutter}`, // `left` || `right`
+        className
+      ),
+    },
+    children
+  );
 
 GridCol.propTypes = {
+  /**
+   * Provide a custom element to render instead of the default <div>
+   */
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+
   /**
    * Specify column span at this width.
    *

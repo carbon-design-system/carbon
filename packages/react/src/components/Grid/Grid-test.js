@@ -23,6 +23,11 @@ describe('<Grid />', () => {
     const wrapperCondensed = shallow(<Grid condensed />);
     const wrapperFullWidth = shallow(<Grid fullWidth />);
     const wrapperNoGutter = shallow(<Grid noGutter />);
+    const wrapperAsSection = shallow(<Grid as="section" />);
+
+    it('should support a custom element as the root node', () => {
+      expect(wrapperAsSection.is('section')).toEqual(true);
+    });
 
     it('has the expected base class', () => {
       expect(wrapper.hasClass(`${prefix}--grid`)).toEqual(true);
@@ -84,6 +89,11 @@ describe('<Grid.Row />', () => {
     );
     const wrapperCondensed = shallow(<Grid.Row condensed />);
     const wrapperNoGutter = shallow(<Grid.Row noGutter />);
+    const wrapperAsSection = shallow(<Grid.Row as="section" />);
+
+    it('should support a custom element as the root node', () => {
+      expect(wrapperAsSection.is('section')).toEqual(true);
+    });
 
     it('has the expected base class', () => {
       expect(wrapper.hasClass(`${prefix}--row`)).toEqual(true);
@@ -135,7 +145,23 @@ describe('<Grid.Col />', () => {
       </Grid.Col>
     );
     const wrapperNoGutter = shallow(<Grid.Col noGutter />);
+    const wrapperAsSection = shallow(<Grid.Col as="section" />);
+    const wrapperSpan = shallow(
+      <Grid.Col sm={4} md={8} lg={10} xlg={12} max={16} />
+    );
+    const wrapperOffset = shallow(
+      <Grid.Col
+        smOffset={4}
+        mdOffset={8}
+        lgOffset={10}
+        xlgOffset={12}
+        maxOffset={16}
+      />
+    );
 
+    it('should support a custom element as the root node', () => {
+      expect(wrapperAsSection.is('section')).toEqual(true);
+    });
     it('has the expected base class', () => {
       expect(wrapper.hasClass(`${prefix}--col`)).toEqual(true);
     });
@@ -166,16 +192,26 @@ describe('<Grid.Col />', () => {
       expect(wrapper.find(Child).length).toEqual(1);
     });
 
+    it('should support specifying column span', () => {
+      expect(wrapperSpan.hasClass(`${prefix}--col-sm-4`)).toEqual(true);
+      expect(wrapperSpan.hasClass(`${prefix}--col-md-8`)).toEqual(true);
+      expect(wrapperSpan.hasClass(`${prefix}--col-lg-10`)).toEqual(true);
+      expect(wrapperSpan.hasClass(`${prefix}--col-xlg-12`)).toEqual(true);
+      expect(wrapperSpan.hasClass(`${prefix}--col-max-16`)).toEqual(true);
+    });
+
+    it('should support specifying offset', () => {
+      expect(wrapperOffset.hasClass(`${prefix}--offset-sm-4`)).toEqual(true);
+      expect(wrapperOffset.hasClass(`${prefix}--offset-md-8`)).toEqual(true);
+      expect(wrapperOffset.hasClass(`${prefix}--offset-lg-10`)).toEqual(true);
+      expect(wrapperOffset.hasClass(`${prefix}--offset-xlg-12`)).toEqual(true);
+      expect(wrapperOffset.hasClass(`${prefix}--offset-max-16`)).toEqual(true);
+    });
+
     it('should NOT render offset class when falsey', () => {
       const offset = 0;
       wrapper.setProps({ smOffset: offset });
       expect(wrapper.hasClass(`${prefix}--offset-sm-${offset}`)).toEqual(false);
-    });
-
-    it('should render offset class when truthy', () => {
-      const offset = 1;
-      wrapper.setProps({ smOffset: offset });
-      expect(wrapper.hasClass(`${prefix}--offset-sm-${offset}`)).toEqual(true);
     });
   });
 });
