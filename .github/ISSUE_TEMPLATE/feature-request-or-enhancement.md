@@ -1,8 +1,8 @@
 ---
-name: "Feature request or enhancement \U0001F4A1"
+name: "Feature request or enhancement 💡"
 about: Suggest an idea for this project
 title: ''
-labels: "type: enhancement \U0001F4A1"
+labels: "type: enhancement 💡", "squad: system"
 assignees: ''
 ---
 
@@ -15,8 +15,8 @@ If you are reporting a bug or problem, please use the bug template instead.
 
 Please describe your request in one or two sentences.
 
-Clarify if you are asking for both design and development, or just design, or
-just development.
+Clarify if you are asking for design, development, or both design and
+development.
 
 ### Justification
 
@@ -24,8 +24,12 @@ Provide the business reasons for this request.
 
 ### Desired UX and success metrics
 
+<!--alex disable failure-->
+
 Describe the full user experience for this feature. Also define the metrics by
 which we can measure success/failure for the user.
+
+<!--alex enable failure-->
 
 ### "Must have" functionality
 
@@ -36,8 +40,12 @@ you to define functionality based on the desired UX.
 
 ### Specific timeline issues / requests
 
+<!--alex disable period-->
+
 Do you want this work within a specific time period? Is it related to an
 upcoming release?
+
+<!--alex enable period-->
 
 _NB: The Carbon team will try to work with your timeline, but it's not
 guaranteed. The earlier you make a request in advance of a desired delivery
