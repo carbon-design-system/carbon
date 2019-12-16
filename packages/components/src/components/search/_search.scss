@@ -80,10 +80,6 @@
     background-color: #e5e5e5;
   }
 
-  .#{$prefix}--search-input:-webkit-autofill ~ .#{$prefix}--search-magnifier {
-    fill: black;
-  }
-
   .#{$prefix}--search-input[disabled] ~ .#{$prefix}--search-magnifier {
     fill: $disabled;
   }
