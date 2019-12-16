@@ -2,7 +2,7 @@
 name: Accessibility Issue ♿
 about: Report an accessibility or usability issue
 title: ''
-labels: 'type: a11y ♿'
+labels: 'type: a11y ♿', 'squad: system'
 assignees: ''
 ---
 
