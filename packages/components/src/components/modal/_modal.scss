@@ -184,7 +184,7 @@
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
-      padding-right: $carbon--spacing-05;
+      padding-right: $spacing-09;
     }
 
     @include carbon--breakpoint(md) {
@@ -193,11 +193,11 @@
       .#{$prefix}--modal-header,
       .#{$prefix}--modal-content,
       .#{$prefix}--modal-content__regular-content {
-        padding-right: 20%;
+        padding-right: $spacing-09;
       }
 
       .#{$prefix}--modal-content--with-form {
-        padding-right: $carbon--spacing-05; // Override for `.#{$prefix}--modal-content`
+        padding-right: $spacing-09; // Override for `.#{$prefix}--modal-content`
       }
     }
 
