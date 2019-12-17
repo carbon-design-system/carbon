@@ -17721,7 +17721,9 @@ List box styles
   // Menu status inside of a `list-box__field`
   .#{$prefix}--list-box__menu-icon {
     position: absolute;
+    top: 0;
     right: $carbon--spacing-05;
+    bottom: 0;
     height: 100%;
     transition: transform $duration--fast-01 motion(standard, productive);
     cursor: pointer;
