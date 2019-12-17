@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import cx from 'classnames';
+
 import { Search20, Notification20, AppSwitcher20 } from '@carbon/icons-react';
 
 import { storiesOf } from '@storybook/react';
@@ -56,11 +58,15 @@ const Fade16 = () => (
   </svg>
 );
 
-const StoryContent = () => {
+const StoryContent = ({ useResponsiveOffset = true }) => {
+  const classNameFirstColumn = cx({
+    'bx--col-lg-13': true,
+    'bx--offset-lg-3': useResponsiveOffset,
+  });
   const content = (
     <div className="bx--grid">
       <div className="bx--row">
-        <div className="bx--offset-lg-3 bx--col-lg-13">
+        <div className={classNameFirstColumn}>
           <h2 style={{ fontWeight: '800', margin: '30px 0', fontSize: '20px' }}>
             Purpose and function
           </h2>
@@ -115,14 +121,15 @@ const StoryContent = () => {
       </div>
     </div>
   );
+  const style = {
+    height: '100%',
+  };
+  if (useResponsiveOffset) {
+    style.margin = '0';
+    style.width = '100%';
+  }
   return (
-    <Content
-      id="main-content"
-      style={{
-        margin: '0',
-        height: '100%',
-        width: '100%',
-      }}>
+    <Content id="main-content" style={style}>
       {content}
     </Content>
   );
@@ -627,7 +634,7 @@ storiesOf('UI Shell', module)
             <SideNavLink href="javascript:void(0)">L0 link</SideNavLink>
           </SideNavItems>
         </SideNav>
-        <StoryContent />
+        <StoryContent useResponsiveOffset={false} />
       </>
     ))
   )
@@ -669,7 +676,7 @@ storiesOf('UI Shell', module)
             </SideNavLink>
           </SideNavItems>
         </SideNav>
-        <StoryContent />
+        <StoryContent useResponsiveOffset={false} />
       </>
     ))
   )
