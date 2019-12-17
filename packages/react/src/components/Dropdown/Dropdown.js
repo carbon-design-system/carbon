@@ -192,7 +192,11 @@ export default class Dropdown extends React.Component {
     });
 
     const dropdownId = `dropdown-${this.dropdownInstanceId}`;
+    const helperId = !helperText
+      ? undefined
+      : `dropdown-helper-text-${this.dropdownInstanceId}`;
     const labelId = `dropdown-label-${this.dropdownInstanceId}`;
+    const fieldLabelId = `dropdown-field-label-${this.dropdownInstanceId}`;
 
     const title = titleText ? (
       <span id={labelId} className={titleClasses}>
@@ -203,7 +207,9 @@ export default class Dropdown extends React.Component {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
     const helper = helperText ? (
-      <div className={helperClasses}>{helperText}</div>
+      <div id={helperId} className={helperClasses}>
+        {helperText}
+      </div>
     ) : null;
     const wrapperClasses = cx(
       `${prefix}--dropdown__wrapper`,
@@ -272,9 +278,11 @@ export default class Dropdown extends React.Component {
                   tabIndex="0"
                   disabled={disabled}
                   aria-disabled={disabled}
-                  aria-labelledby={labelId}
+                  aria-labelledby={`${labelId} ${fieldLabelId}`}
+                  aria-describedby={helperId}
                   {...buttonProps}>
                   <span
+                    id={fieldLabelId}
                     className={`${prefix}--list-box__label`}
                     {...getLabelProps()}>
                     {selectedItem ? itemToString(selectedItem) : label}

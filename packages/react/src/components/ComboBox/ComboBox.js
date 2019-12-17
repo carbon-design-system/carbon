@@ -272,6 +272,9 @@ export default class ComboBox extends React.Component {
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
+    const comboBoxHelperId = !helperText
+      ? undefined
+      : `combobox-helper-text-${this.comboBoxInstanceId}`;
     const comboBoxLabelId = `combobox-label-${this.comboBoxInstanceId}`;
     const title = titleText ? (
       <label id={comboBoxLabelId} htmlFor={id} className={titleClasses}>
@@ -282,7 +285,9 @@ export default class ComboBox extends React.Component {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
     const helper = helperText ? (
-      <div className={helperClasses}>{helperText}</div>
+      <div id={comboBoxHelperId} className={helperClasses}>
+        {helperText}
+      </div>
     ) : null;
     const wrapperClasses = cx(`${prefix}--list-box__wrapper`);
     const comboBoxA11yId = `combobox-a11y-${this.comboBoxInstanceId}`;
@@ -327,6 +332,7 @@ export default class ComboBox extends React.Component {
               id={id}
               disabled={disabled}
               aria-labelledby={comboBoxLabelId}
+              aria-describedby={comboBoxHelperId}
               {...getButtonProps({
                 disabled,
                 onClick: this.onToggleClick(isOpen),

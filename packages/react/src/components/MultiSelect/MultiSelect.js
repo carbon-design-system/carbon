@@ -251,7 +251,11 @@ export default class MultiSelect extends React.Component {
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
-    const labelId = `multiselect-${this.multiSelectInstanceId}`;
+    const helperId = !helperText
+      ? undefined
+      : `multiselect-helper-text-${this.multiSelectInstanceId}`;
+    const labelId = `multiselect-label-${this.multiSelectInstanceId}`;
+    const fieldLabelId = `multiselect-field-label-${this.multiSelectInstanceId}`;
     const title = titleText ? (
       <span id={labelId} className={titleClasses}>
         {titleText}
@@ -261,7 +265,9 @@ export default class MultiSelect extends React.Component {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
     const helper = helperText ? (
-      <div className={helperClasses}>{helperText}</div>
+      <div id={helperId} className={helperClasses}>
+        {helperText}
+      </div>
     ) : null;
 
     const input = (
@@ -324,7 +330,8 @@ export default class MultiSelect extends React.Component {
                     tabIndex="0"
                     disabled={disabled}
                     aria-disabled={disabled}
-                    aria-labelledby={labelId}
+                    aria-labelledby={`${labelId} ${fieldLabelId}`}
+                    aria-describedby={helperId}
                     {...buttonProps}>
                     {selectedItem.length > 0 && (
                       <ListBox.Selection
@@ -334,7 +341,9 @@ export default class MultiSelect extends React.Component {
                         disabled={disabled}
                       />
                     )}
-                    <span className={`${prefix}--list-box__label`}>
+                    <span
+                      id={fieldLabelId}
+                      className={`${prefix}--list-box__label`}>
                       {label}
                     </span>
                     <ListBox.MenuIcon

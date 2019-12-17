@@ -285,7 +285,10 @@ export default class FilterableMultiSelect extends React.Component {
         [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
       }
     );
-    const labelId = `filterablemultiselect-${this.filterableMultiSelectInstanceId}`;
+    const helperId = !helperText
+      ? undefined
+      : `filterablemultiselect-helper-text-${this.filterableMultiSelectInstanceId}`;
+    const labelId = `filterablemultiselect-label-${this.filterableMultiSelectInstanceId}`;
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
@@ -298,7 +301,9 @@ export default class FilterableMultiSelect extends React.Component {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
     const helper = helperText ? (
-      <div className={helperClasses}>{helperText}</div>
+      <div id={helperId} className={helperClasses}>
+        {helperText}
+      </div>
     ) : null;
     const inputClasses = cx(`${prefix}--text-input`, {
       [`${prefix}--text-input--empty`]: !this.state.inputValue,
@@ -359,6 +364,7 @@ export default class FilterableMultiSelect extends React.Component {
                     id={id}
                     disabled={disabled}
                     aria-labelledby={labelId}
+                    aria-describedby={helperId}
                     {...buttonProps}>
                     {selectedItem.length > 0 && (
                       <ListBox.Selection
