@@ -18823,6 +18823,11 @@ Inline notification styles
     }
   }
 
+  .#{$prefix}--inline-notification--hide-close-button
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    margin-right: $carbon--spacing-03;
+  }
+
   .#{$prefix}--inline-notification__close-button {
     @include focus-outline('reset');
     display: flex;
