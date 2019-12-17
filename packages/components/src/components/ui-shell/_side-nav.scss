@@ -692,6 +692,17 @@
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
     fill: $shell-side-nav-text-01;
   }
+
+  //----------------------------------------------------------------------------
+  // Side-nav ~ Content interaction
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav.#{$prefix}--side-nav--expanded ~ .#{$prefix}--content {
+    margin-left: 16rem;
+  }
+
+  .#{$prefix}--side-nav--expanded ~ .#{$prefix}--content {
+    width: calc(100% - 16rem);
+  }
 }
 
 @include exports('carbon-side-nav') {

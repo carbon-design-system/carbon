@@ -60,7 +60,7 @@ const StoryContent = () => {
   const content = (
     <div className="bx--grid">
       <div className="bx--row">
-        <div className="bx--offset-lg-3 bx--col-lg-13">
+        <div className="bx--col-lg-13">
           <h2 style={{ fontWeight: '800', margin: '30px 0', fontSize: '20px' }}>
             Purpose and function
           </h2>
@@ -119,17 +119,7 @@ const StoryContent = () => {
       </div>
     </div>
   );
-  return (
-    <Content
-      id="main-content"
-      style={{
-        margin: '0',
-        height: '100%',
-        width: '100%',
-      }}>
-      {content}
-    </Content>
-  );
+  return <Content id="main-content">{content}</Content>;
 };
 
 // Ideally, we'd have a <UIShell> component that could help make using these
@@ -789,62 +779,62 @@ storiesOf('UI Shell', module)
                   <AppSwitcher20 />
                 </HeaderGlobalAction>
               </HeaderGlobalBar>
-              <SideNav
-                aria-label="Side navigation"
-                isRail
-                expanded={isSideNavExpanded}>
-                <SideNavItems>
-                  <SideNavMenu renderIcon={Fade16} title="Category title">
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem
-                      isActive
-                      aria-current="page"
-                      href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                  </SideNavMenu>
-                  <SideNavMenu renderIcon={Fade16} title="Category title">
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem
-                      aria-current="page"
-                      isActive
-                      href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                  </SideNavMenu>
-                  <SideNavMenu renderIcon={Fade16} title="Category title">
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem
-                      isActive
-                      aria-current="page"
-                      href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                  </SideNavMenu>
-                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                    Link
-                  </SideNavLink>
-                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                    Link
-                  </SideNavLink>
-                </SideNavItems>
-              </SideNav>
             </Header>
+            <SideNav
+              aria-label="Side navigation"
+              isRail
+              expanded={isSideNavExpanded}>
+              <SideNavItems>
+                <SideNavMenu renderIcon={Fade16} title="Category title">
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem
+                    isActive
+                    aria-current="page"
+                    href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                </SideNavMenu>
+                <SideNavMenu renderIcon={Fade16} title="Category title">
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem
+                    aria-current="page"
+                    isActive
+                    href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                </SideNavMenu>
+                <SideNavMenu renderIcon={Fade16} title="Category title">
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem
+                    isActive
+                    aria-current="page"
+                    href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                </SideNavMenu>
+                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                  Link
+                </SideNavLink>
+                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                  Link
+                </SideNavLink>
+              </SideNavItems>
+            </SideNav>
             <StoryContent />
           </>
         )}
