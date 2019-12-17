@@ -29,7 +29,7 @@ const props = () => ({
     'Previous page'
   ),
   forwardText: text(
-    'The description for the backward icon (forwardText)',
+    'The description for the forward icon (forwardText)',
     'Next page'
   ),
   pageSize: number('Number of items per page (pageSize)', 10),
