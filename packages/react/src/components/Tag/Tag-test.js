@@ -31,15 +31,16 @@ describe('Tag', () => {
 
   describe('with a screenreader', () => {
     it('filtered variant should have appropriate aria-label', () => {
-      const { container } = render(<Tag filter>This is not a tag</Tag>);
+      const children = 'tag content';
+      const { container } = render(<Tag filter>{children}</Tag>);
+      const button = container.querySelector('[aria-label], [aria-labelledby]');
+      const accessibilityLabel =
+        button.getAttribute('aria-label') ||
+        button.getAttribute('aria-labelledby');
 
-      const button = container.querySelector('[aria-label]');
-      expect(button).toBeInstanceOf(HTMLElement);
-
-      const ariaLabel = button.getAttribute('aria-label');
-      expect(ariaLabel).toBeDefined();
-
-      expect(ariaLabel).toEqual('Clear filter This is not a tag');
+      // This check would mirror our "Accessibility label must contain at least all of visible label"
+      // requirement
+      expect(accessibilityLabel).toEqual(expect.stringContaining(children));
     });
   });
 
