@@ -30,7 +30,7 @@ describe('Tag', () => {
   });
 
   describe('with a screenreader', () => {
-    it('filtered variant should have appropriate aria-label', () => {
+    it('should have an accessible label when used as a filter', () => {
       const { container } = render(<Tag filter>This is not a tag</Tag>);
 
       const button = container.querySelector('[aria-label]');
