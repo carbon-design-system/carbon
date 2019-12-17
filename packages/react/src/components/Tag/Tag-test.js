@@ -37,7 +37,6 @@ describe('Tag', () => {
       const accessibilityLabel =
         button.getAttribute('aria-label') ||
         button.getAttribute('aria-labelledby');
-
       // This check would mirror our "Accessibility label must contain at least all of visible label"
       // requirement
       expect(accessibilityLabel).toEqual(expect.stringContaining(children));
