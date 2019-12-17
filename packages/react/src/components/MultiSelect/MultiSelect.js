@@ -12,7 +12,7 @@ import Downshift from 'downshift';
 import isEqual from 'lodash.isequal';
 import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
-import ListBox from '../ListBox';
+import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import Checkbox from '../Checkbox';
 import Selection from '../../internal/Selection';
 import { sortingPropTypes } from './MultiSelectPropTypes';
@@ -79,6 +79,11 @@ export default class MultiSelect extends React.Component {
      * Specify 'inline' to create an inline multi-select.
      */
     type: PropTypes.oneOf(['default', 'inline']),
+
+    /**
+     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+     */
+    size: ListBoxPropTypes.ListBoxSize,
 
     /**
      * Specify title to show title on hover
@@ -225,6 +230,7 @@ export default class MultiSelect extends React.Component {
       helperText,
       label,
       type,
+      size,
       disabled,
       initialSelectedItems,
       sortItems,
@@ -313,6 +319,7 @@ export default class MultiSelect extends React.Component {
                   id={id}
                   aria-label={ariaLabel}
                   type={type}
+                  size={size}
                   className={className}
                   disabled={disabled}
                   light={light}

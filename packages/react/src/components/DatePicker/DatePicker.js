@@ -412,6 +412,7 @@ export default class DatePicker extends Component {
           (
             cal.selectedDateElem ||
             cal.todayDateElem ||
+            cal.calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
             cal.calendarContainer
           ).focus();
         }
@@ -429,6 +430,7 @@ export default class DatePicker extends Component {
           (
             cal.selectedDateElem ||
             cal.todayDateElem ||
+            cal.calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
             cal.calendarContainer
           ).focus();
         }

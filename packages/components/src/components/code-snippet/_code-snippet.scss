@@ -53,7 +53,7 @@
   }
 
   .#{$prefix}--snippet--inline code {
-    padding: 0 $spacing-xs;
+    padding: 0 $spacing-03;
   }
 
   // Single Line Snippet
@@ -78,7 +78,7 @@
   .#{$prefix}--snippet--single pre {
     white-space: nowrap;
     @include type-style('code-01');
-    padding-right: $spacing-xs;
+    padding-right: $spacing-03;
   }
 
   .#{$prefix}--snippet--single::after {
@@ -88,7 +88,9 @@
     position: absolute;
     top: 0;
     right: rem(56px);
-    background-image: linear-gradient(to right, transparent, $ui-01);
+
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
   }
 
   // Multi Line Snippet
@@ -136,7 +138,9 @@
     position: absolute;
     top: 0;
     right: 0;
-    background-image: linear-gradient(to right, transparent, $ui-01);
+
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre code {
@@ -177,8 +181,8 @@
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-button {
     height: $carbon--spacing-07;
     width: $carbon--spacing-07;
-    top: $spacing-xs;
-    right: $spacing-xs;
+    top: $spacing-03;
+    right: $spacing-03;
   }
 
   .#{$prefix}--snippet-button:hover {
@@ -213,9 +217,9 @@
     display: inline-flex;
     align-items: center;
     position: absolute;
-    right: $spacing-xs;
-    bottom: $spacing-xs;
-    padding: $spacing-xs;
+    right: $spacing-03;
+    bottom: $spacing-03;
+    padding: $spacing-03;
     padding-left: $carbon--spacing-05;
     color: $text-01;
     background-color: $field-01;
@@ -233,7 +237,7 @@
 
   .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
     fill: $text-01;
-    margin-left: $spacing-xs;
+    margin-left: $spacing-03;
     margin-bottom: rem(1px);
     transform: rotate(0deg);
     transition: $duration--moderate-01 motion(standard, productive);
@@ -279,7 +283,8 @@
   .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--multi
     .#{$prefix}--snippet-container
     pre::after {
-    background-image: linear-gradient(to right, transparent, $ui-02);
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to right, rgba($ui-02, 0), $ui-02);
   }
 
   // Skeleton State
