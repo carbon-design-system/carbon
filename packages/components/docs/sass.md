@@ -3439,7 +3439,6 @@ $carbon--spacing-06: 1.5rem;
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
-  - [tags [mixin]](#tags-mixin)
 
 ### ✅carbon--spacing-07 [variable]
 
@@ -21905,7 +21904,6 @@ Tag styles
     @include type-style('label-01');
 
     display: inline-flex;
-    position: relative;
     align-items: center;
     padding: 0 $carbon--spacing-03;
     height: 1.5rem;
@@ -21982,16 +21980,10 @@ Tag styles
     @include tag-theme($inverse-02, $inverse-01);
 
     cursor: pointer;
-    padding-right: calc(
-      #{$carbon--spacing-06} + #{rem(2px)}
-    ); // icon width + 2px space from right edge
+    padding-right: rem(2px);
   }
 
   .#{$prefix}--tag--filter > svg {
-    position: absolute;
-    right: rem(2px);
-    top: 50%;
-    transform: translateY(-50%);
     fill: $inverse-01;
     margin-left: rem(4px);
     padding: rem(2px);
@@ -22036,7 +22028,6 @@ Tag styles
   - [text-01 [variable]](#text-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
-  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
 
