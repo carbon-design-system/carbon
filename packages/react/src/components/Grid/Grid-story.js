@@ -170,7 +170,7 @@ export const Default = () => (
 const breakpoint = () =>
   select('breakpoint', ['sm', 'md', 'lg', 'xlg', 'max'], 'lg');
 
-export const offset = () => (
+export const offsets = () => (
   <div style={{ backgroundColor: colors().bleed }}>
     <Grid style={{ backgroundColor: colors().padding }}>
       {Array.from({ length: 12 }).map((_, i) => {
