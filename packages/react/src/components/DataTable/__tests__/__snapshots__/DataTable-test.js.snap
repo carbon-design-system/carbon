@@ -62,7 +62,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
             >
               <TableHead>
                 <TableRow>
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -71,8 +71,8 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -81,7 +81,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -334,7 +334,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
             >
               <TableHead>
                 <TableRow>
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -343,8 +343,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -353,7 +353,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -851,7 +851,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     name="select-all"
                     onSelect={[Function]}
                   />
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -860,8 +860,8 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -870,7 +870,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -1178,7 +1178,7 @@ exports[`DataTable selection should render 1`] = `
                     name="select-all"
                     onSelect={[Function]}
                   />
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -1187,8 +1187,8 @@ exports[`DataTable selection should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -1197,7 +1197,7 @@ exports[`DataTable selection should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -1863,7 +1863,7 @@ exports[`DataTable should render 1`] = `
             >
               <TableHead>
                 <TableRow>
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -1872,8 +1872,8 @@ exports[`DataTable should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -1882,7 +1882,7 @@ exports[`DataTable should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -2838,7 +2838,7 @@ exports[`DataTable sticky header should render 1`] = `
             >
               <TableHead>
                 <TableRow>
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -2847,8 +2847,8 @@ exports[`DataTable sticky header should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -2857,7 +2857,7 @@ exports[`DataTable sticky header should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
