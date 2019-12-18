@@ -80,9 +80,7 @@ function AccordionItem({
           aria-label={iconDescription}
           className={`${prefix}--accordion__arrow`}
         />
-        <div className={`${prefix}--accordion__title`} styleName="acc">
-          {title}
-        </div>
+        <div className={`${prefix}--accordion__title`}>{title}</div>
       </Expando>
       <div className={`${prefix}--accordion__content`}>{children}</div>
     </li>
