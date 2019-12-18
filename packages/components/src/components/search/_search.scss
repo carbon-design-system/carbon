@@ -72,14 +72,6 @@
     }
   }
 
-  .#{$prefix}--search-input:-webkit-autofill ~ .#{$prefix}--search-close {
-    fill: currentColor;
-  }
-
-  .#{$prefix}--search-input:-webkit-autofill ~ .#{$prefix}--search-close:hover {
-    background-color: #e5e5e5;
-  }
-
   .#{$prefix}--search-input[disabled] ~ .#{$prefix}--search-magnifier {
     fill: $disabled;
   }
@@ -129,6 +121,19 @@
     @include focus-outline('reset');
     position: absolute;
     right: 0;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      top: rem(1px);
+      height: calc(100% - 2px);
+      width: 2px;
+      background-color: $field-01;
+      transition: background-color $duration--fast-02
+        motion(standard, productive);
+    }
 
     &:hover {
       border-bottom: 1px solid $ui-04;
