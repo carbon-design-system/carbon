@@ -307,6 +307,17 @@ export default class DatePicker extends Component {
   };
 
   UNSAFE_componentWillUpdate(nextProps) {
+    //Explicitly update minDate and maxDate
+    const extraProps = ['minDate', 'maxDate'];
+    extraProps.forEach(prop => {
+      if (nextProps[prop] !== this.props[prop]) {
+        if (this.cal) {
+          this.cal.set(prop, nextProps[prop]);
+        } else if (this.inputField) {
+          this.inputField[prop] = nextProps[prop];
+        }
+      }
+    });
     if (nextProps.value !== this.props.value) {
       if (this.cal) {
         this.cal.setDate(nextProps.value);
