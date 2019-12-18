@@ -114,8 +114,9 @@
   // expanded snippet container
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
     .#{$prefix}--snippet-container {
-    max-height: rem(1500px);
+    max-height: 100%;
     transition: max-height $duration--moderate-01 motion(standard, productive);
+    padding-bottom: $spacing-05;
   }
 
   // closed pre
