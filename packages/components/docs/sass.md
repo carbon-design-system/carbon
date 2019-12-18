@@ -16293,6 +16293,11 @@ Dropdown styles
     }
   }
 
+  // when implemented as a listbox (react), rely on the list-box height
+  .#{$prefix}--dropdown[role='listbox'] {
+    height: 100%;
+  }
+
   .#{$prefix}--dropdown--xl {
     height: rem(48px);
   }
