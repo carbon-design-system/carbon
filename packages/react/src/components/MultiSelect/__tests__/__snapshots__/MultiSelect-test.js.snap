@@ -77,6 +77,7 @@ exports[`MultiSelect should render 1`] = `
         stateReducer={[Function]}
       >
         <ListBox
+          aria-labelledby="multiselect-label-1"
           className="bx--multi-select"
           disabled={false}
           id="test-multiselect"
@@ -86,6 +87,7 @@ exports[`MultiSelect should render 1`] = `
           type="default"
         >
           <div
+            aria-labelledby="multiselect-label-1"
             className="bx--multi-select bx--list-box"
             id="test-multiselect"
             onClick={[Function]}
