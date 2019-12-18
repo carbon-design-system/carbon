@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const toHaveNoViolations = require('./matchers/toHaveNoViolations');
+const toHaveNoAxeViolations = require('./matchers/toHaveNoAxeViolations');
+const toHaveNoDAPViolations = require('./matchers/toHaveNoDAPViolations');
 
 // We can extend `expect` using custom matchers as defined by:
 // https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
@@ -18,4 +19,4 @@ const toHaveNoViolations = require('./matchers/toHaveNoViolations');
 //
 // For more information, check out the docs here:
 // https://jestjs.io/docs/en/configuration.html#setupfilesafterenv-array
-expect.extend({ toHaveNoViolations });
+expect.extend({ toHaveNoAxeViolations, toHaveNoDAPViolations });

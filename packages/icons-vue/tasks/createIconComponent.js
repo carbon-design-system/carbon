@@ -43,12 +43,13 @@ export default {
       // Special case here, we need to coordinate that we are using title,
       // potentially, to get the right focus attributes
       title: props.title,
-      ...data.attrs,
+      ...data.attrs
     });
     const svgData = {
       attrs,
       on: listeners,
     };
+
     if (data.staticClass) {
       svgData.class = {
         [data.staticClass]: true,
@@ -58,6 +59,13 @@ export default {
       svgData.class = svgData.class || {}; // may be no static class
       svgData.class[data.class] = true;
     }
+
+    // remove style set by getAttributes
+    delete svgData.attrs.style;
+
+    // combine incoming staticStyle, style with default willChange
+    svgData.style = { willChange: 'transform', ...data.staticStyle, ...data.style };
+
     return createElement('svg', svgData, [
       props.title && createElement('title', null, props.title),
       ${content.map(convertToVue).join(', ')},
