@@ -19,7 +19,7 @@
 @mixin combo-box {
   .#{$prefix}--combo-box .#{$prefix}--text-input {
     &::placeholder {
-      @include placeholder-colors;
+      color: $text-05;
     }
 
     &[disabled]::placeholder {
