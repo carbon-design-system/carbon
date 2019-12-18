@@ -9,7 +9,7 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
-import { ListBoxType } from './ListBoxPropTypes';
+import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
 
 const { prefix } = settings;
 
@@ -34,6 +34,7 @@ const ListBox = ({
   disabled,
   innerRef,
   type,
+  size,
   invalid,
   invalidText,
   light,
@@ -43,6 +44,7 @@ const ListBox = ({
   const className = cx({
     [containerClassName]: !!containerClassName,
     [`${prefix}--list-box`]: true,
+    [`${prefix}--list-box--${size}`]: size,
     [`${prefix}--list-box--inline`]: type === 'inline',
     [`${prefix}--list-box--disabled`]: disabled,
     [`${prefix}--list-box--light`]: light,
@@ -95,6 +97,11 @@ ListBox.propTypes = {
    * `inline` as an option.
    */
   type: ListBoxType.isRequired,
+
+  /**
+   * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+   */
+  size: ListBoxSize,
 };
 
 ListBox.defaultProps = {

@@ -44,7 +44,7 @@ exports[`ModalWrapper should render 1`] = `
     <Modal
       aria-label="test modal"
       focusTrap={true}
-      hasScrollingContent={true}
+      hasScrollingContent={false}
       iconDescription="close the modal"
       id="modal"
       modalHeading="Transactional Modal"
@@ -145,11 +145,8 @@ exports[`ModalWrapper should render 1`] = `
               </button>
             </div>
             <div
-              aria-label="Test Modal Label"
               aria-labelledby="bx--modal-header__label--modal-1"
               className="bx--modal-content"
-              role="region"
-              tabIndex={0}
             >
               <p
                 className="bx--modal-content__text"
@@ -157,9 +154,6 @@ exports[`ModalWrapper should render 1`] = `
                 Text
               </p>
             </div>
-            <div
-              className="bx--modal-content--overflow-indicator"
-            />
             <div
               className="bx--modal-footer"
             >
