@@ -326,6 +326,8 @@ export default class MultiSelect extends React.Component {
                   invalid={invalid}
                   invalidText={invalidText}
                   isOpen={isOpen}
+                  aria-labelledby={labelId}
+                  aria-describedby={helperId}
                   {...getRootProps({ refKey: 'innerRef' })}>
                   {invalid && (
                     <WarningFilled16
