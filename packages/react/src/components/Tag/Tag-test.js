@@ -24,7 +24,11 @@ describe('Tag', () => {
     });
 
     it('should have no DAP violations', async () => {
-      const { container } = render(<Tag>This is not a tag</Tag>);
+      const { container } = render(
+        <main>
+          <Tag>This is not a tag</Tag>
+        </main>
+      );
       await expect(container).toHaveNoDAPViolations('Tag');
     });
   });
