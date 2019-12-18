@@ -9,6 +9,7 @@
 
 const path = require('path');
 const packageJson = require('../package.json');
+const { generateScopedName } = require('../scripts/styles.config');
 
 const root = path.resolve(__dirname, '../');
 const babelConfig = Object.keys(packageJson.babel).reduce((acc, key) => {
@@ -32,7 +33,7 @@ babelConfig.plugins.push('transform-inline-environment-variables');
 babelConfig.plugins.push([
   'react-css-modules',
   {
-    generateScopedName: '[name]_[local]__[hash:base64:5]',
+    generateScopedName,
     webpackHotModuleReloading: true,
     filetypes: {
       '.scss': {

@@ -12,6 +12,8 @@ const { terser } = require('rollup-plugin-terser');
 const sizes = require('rollup-plugin-sizes');
 const postcss = require('rollup-plugin-postcss');
 
+const { generateScopedName } = require('./styles.config');
+
 const packageJson = require('../package.json');
 const peerDependencies = Object.keys(packageJson.peerDependencies || {}).concat(
   ['classnames', 'prop-types']
@@ -67,7 +69,7 @@ module.exports = {
     }),
     postcss({
       modules: {
-        generateScopedName: '[name]_[local]__[hash:base64:5]',
+        generateScopedName,
       },
       extract: `./styles/carbon-styles${
         process.env.NODE_ENV === 'production' ? '.min' : ''

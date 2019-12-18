@@ -1,13 +1,14 @@
 'use strict';
 
 const BABEL_ENV = process.env.BABEL_ENV;
+const { generateScopedName } = require('./styles.config');
 
 const getPlugins = () => {
   const cssModules = [
     'react-css-modules',
     {
       removeImport: process.env.BABEL_ENV !== 'rollup',
-      generateScopedName: '[name]_[local]__[hash:base64:5]',
+      generateScopedName,
       filetypes: {
         '.scss': {
           syntax: 'postcss-scss',

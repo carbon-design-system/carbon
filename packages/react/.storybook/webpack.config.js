@@ -10,6 +10,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const rtlcss = require('rtlcss');
 const customProperties = require('postcss-custom-properties');
+const { generateScopedName } = require('../scripts/styles.config');
 
 const {
   CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
@@ -171,7 +172,7 @@ module.exports = ({ config, mode }) => {
         options: {
           importLoaders: 2,
           modules: {
-            localIdentName: '[name]_[local]__[hash:base64:5]',
+            localIdentName: generateScopedName,
           },
         },
       },
