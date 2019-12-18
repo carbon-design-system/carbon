@@ -125,7 +125,8 @@ module.exports = ({ config, mode }) => {
   };
 
   config.module.rules.push({
-    test: /\.scss$/,
+    test: /\.scss$/i,
+    exclude: /\.module\.scss$/i,
     sideEffects: true,
     use: [
       {
@@ -152,6 +153,26 @@ module.exports = ({ config, mode }) => {
             ];
           },
           sourceMap: true,
+        },
+      },
+      NODE_ENV === 'production' ? sassLoader : fastSassLoader,
+    ],
+  });
+
+  config.module.rules.push({
+    test: /\.module\.scss$/i,
+    sideEffects: true,
+    use: [
+      {
+        loader: 'style-loader',
+      },
+      {
+        loader: 'css-loader',
+        options: {
+          importLoaders: 2,
+          modules: {
+            localIdentName: '[name]_[local]__[hash:base64:5]',
+          },
         },
       },
       NODE_ENV === 'production' ? sassLoader : fastSassLoader,

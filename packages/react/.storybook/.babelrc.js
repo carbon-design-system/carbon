@@ -29,4 +29,17 @@ const babelConfig = Object.keys(packageJson.babel).reduce((acc, key) => {
 
 babelConfig.plugins.push('transform-inline-environment-variables');
 
+babelConfig.plugins.push([
+  'react-css-modules',
+  {
+    generateScopedName: '[name]_[local]__[hash:base64:5]',
+    webpackHotModuleReloading: true,
+    filetypes: {
+      '.scss': {
+        syntax: 'postcss-scss',
+      },
+    },
+  },
+]);
+
 module.exports = babelConfig;
