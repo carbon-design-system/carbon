@@ -207,3 +207,65 @@ MyComponent.propTypes = {
 _Note: not every component will mirror the structure above. Some will need to
 incorporate `useEffect`, some will not. You can think of the outline above as
 slots that you can fill if you need this functionality in a component._
+
+### Style
+
+#### Naming event handlers
+
+<table>
+<thead><tr><th>Unpreferred</th><th>Preferred</th></tr></thead>
+<tbody>
+<tr><td>
+
+```jsx
+function MyComponent() {
+  function click() {
+    // ...
+  }
+  return <button onClick={click} />;
+}
+```
+
+</td><td>
+
+```jsx
+function MyComponent() {
+  function onClick() {
+    // ...
+  }
+  return <button onClick={onClick} />;
+}
+```
+
+</td></tr>
+<tr><td>
+
+```jsx
+function MyComponent({ onClick }) {
+  function handleClick(event) {
+    // ...
+    onClick(event);
+  }
+  return <button onClick={handleClick} />;
+}
+```
+
+</td><td>
+
+```jsx
+function MyComponent({ onClick }) {
+  function handleOnClick(event) {
+    // ...
+    onClick(event);
+  }
+  return <button onClick={handleOnClick} />;
+}
+```
+
+</td></tr>
+</tbody></table>
+
+When writing event handlers, we prefer using the exact name, `onClick` to a
+shorthand. If that name is already being used in a given scope, which often
+happens if the component supports a prop `onClick`, then we prefer to specify
+the function as `handleOnClick`.
