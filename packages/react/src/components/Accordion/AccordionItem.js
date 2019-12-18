@@ -11,7 +11,6 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { match, keys } from '../../internal/keyboard';
-import './Accordion.module.scss';
 
 const { prefix } = settings;
 const defaultRenderExpando = props => <button {...props} />;
