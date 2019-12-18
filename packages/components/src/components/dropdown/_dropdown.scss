@@ -68,7 +68,7 @@
   // Dropdown isn't implemented as a listbox in vanilla but _is_ in React.
   // In React we rely on the list box height for things like size.
   // Vanilla can't rely on listbox height so we define it here.
-  .#{$prefix}--dropdown:not([role='listbox']) {
+  .#{$prefix}--dropdown:not(.#{$prefix}--list-box) {
     height: rem(40px);
   }
 
