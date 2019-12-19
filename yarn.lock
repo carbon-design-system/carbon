@@ -1270,10 +1270,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@carbon/icon-helpers@10.4.0":
-  version "10.4.0"
-  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-10.4.0.tgz#771ba51efcaa9d2be03800f8e0f50c7aa779febf"
-  integrity sha512-52H97nT0Hv3mneNaDXBELt/shrO9AUZIpX5TuxRUcdva0xqLNnjhsLw0PTytjQRw3yNCLmDw8hOutzlReXCleQ==
+"@carbon/icon-helpers@^10.5.0-rc.0":
+  version "10.5.0-rc.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-10.5.0-rc.0.tgz#0f20aeeab8d18ed1c84bd1ba255af0a674e748a1"
+  integrity sha512-8APqq8tCqmEx5G1cx+tLJFkMnbK9HdsVrBEgqDyRX3D2aIorltVN16lUjXMm8ikgcdvn7LOoeygdLc86+DByZQ==
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
@@ -2712,11 +2712,6 @@
     flatpickr "4.6.1"
     lodash.debounce "^4.0.8"
     warning "^3.0.0"
-
-"@rocketsoftware/icon-helpers@0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/icon-helpers/-/icon-helpers-0.0.6.tgz#35d124ca6b68048eeac494f20529f292f1fd5374"
-  integrity sha512-QwbjmIBICC9ENbOUq/mzZULy4kxe0a3XFnfcFyvkDmRvMTenw+LcPeAtmtdTjqSIuRhRMvCES+UOJnXY2Z27MA==
 
 "@rocketsoftware/icon-helpers@0.0.7":
   version "0.0.7"
@@ -6690,10 +6685,10 @@ capture-stack-trace@^1.0.0:
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"
   integrity sha512-mYQLZnx5Qt1JgB1WEiMCf2647plpGeQ2NMR/5L0HNZzGQo4fuSPnK+wjfPnKZV0aiJDgzmWqqkV/g7JD+DW0qw==
 
-carbon-components@10.7.0:
-  version "10.7.0"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.7.0.tgz#66a7c8fdf24bc935a0e7b12c90871251a9d7ce35"
-  integrity sha512-6bwf+epbTcZQOIOLhYrm6aGKMSy/G/m3wN4W8ZHuI/H+taNqW6/sQEOqc2PI1+Lp0GOElMlmS7nGO5q9YD8FPA==
+carbon-components@^10.9.0-rc.0:
+  version "10.9.0-rc.1"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.9.0-rc.1.tgz#d801a12ae1053c078d4f3e33169a71c914ae8408"
+  integrity sha512-JCJqKaEfttHW0Wr12JRdhRMtAg8f8Pn/ryxVQp/FAY1Z4iNNEFFS6ShVavOJMrEE28ojT7QPEhl8ruZ3THHoJg==
   dependencies:
     carbon-icons "^7.0.7"
     flatpickr "4.6.1"
