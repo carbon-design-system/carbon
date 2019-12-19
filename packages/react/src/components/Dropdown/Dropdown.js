@@ -110,6 +110,11 @@ export default class Dropdown extends React.Component {
     type: ListBoxPropTypes.ListBoxType,
 
     /**
+     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+     */
+    size: ListBoxPropTypes.ListBoxSize,
+
+    /**
      * In the case you want to control the dropdown selection entirely.
      */
     selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -167,6 +172,7 @@ export default class Dropdown extends React.Component {
       itemToString,
       itemToElement,
       type,
+      size,
       initialSelectedItem,
       selectedItem,
       id,
@@ -240,6 +246,7 @@ export default class Dropdown extends React.Component {
           }) => (
             <ListBox
               type={type}
+              size={size}
               id={dropdownId}
               aria-label={ariaLabel}
               className={className({ isOpen })}

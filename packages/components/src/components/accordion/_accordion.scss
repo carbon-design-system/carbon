@@ -109,6 +109,20 @@
     }
   }
 
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__heading {
+    // Reverse `$accordion-flex-direction` token:
+    flex-direction: row;
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__arrow {
+    // Alters `$accordion-arrow-margin` token:
+    margin: 2px 0 0 $carbon--spacing-03;
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__content {
+    margin-left: $carbon--spacing-06;
+  }
+
   .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content,
   .#{$prefix}--accordion__item--expanding .#{$prefix}--accordion__content {
     display: block;
@@ -129,7 +143,7 @@
     .#{$prefix}--accordion__content {
       display: block;
       padding-bottom: $carbon--spacing-06;
-      padding-top: $spacing-xs;
+      padding-top: $spacing-03;
       // Transition property for when the accordion opens
       transition: padding-top motion(entrance, productive) $duration--fast-02,
         padding-bottom motion(entrance, productive) $duration--fast-02;

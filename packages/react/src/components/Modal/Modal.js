@@ -347,6 +347,7 @@ export default class Modal extends Component {
 
     const contentClasses = classNames(`${prefix}--modal-content`, {
       [`${prefix}--modal-content--with-form`]: hasForm,
+      [`${prefix}--modal-scroll-content`]: hasScrollingContent,
     });
 
     const modalButton = (

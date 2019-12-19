@@ -86,6 +86,16 @@ $list-box-menu-width: rem(300px);
     }
   }
 
+  .#{$prefix}--list-box--xl {
+    height: rem(48px);
+    max-height: rem(48px);
+  }
+
+  .#{$prefix}--list-box--sm {
+    height: rem(32px);
+    max-height: rem(32px);
+  }
+
   .#{$prefix}--list-box--expanded {
     border-bottom-color: $ui-03;
   }
@@ -105,9 +115,10 @@ $list-box-menu-width: rem(300px);
   // invalid states
   .#{$prefix}--list-box__invalid-icon {
     position: absolute;
-    top: $carbon--spacing-04;
+    top: 50%;
     right: $carbon--spacing-08;
     fill: $support-01;
+    transform: translateY(-50%);
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__invalid-icon {
@@ -247,7 +258,7 @@ $list-box-menu-width: rem(300px);
     display: inline-flex;
     align-items: center;
     vertical-align: top;
-    height: rem(40px);
+    height: calc(100% + 1px); // Account for the border in `.bx--list-box`
     padding: 0 $carbon--spacing-09 0 $carbon--spacing-05;
     cursor: pointer;
     outline: none;
@@ -316,7 +327,9 @@ $list-box-menu-width: rem(300px);
   // Menu status inside of a `list-box__field`
   .#{$prefix}--list-box__menu-icon {
     position: absolute;
+    top: 0;
     right: $carbon--spacing-05;
+    bottom: 0;
     height: 100%;
     transition: transform $duration--fast-01 motion(standard, productive);
     cursor: pointer;

@@ -78,6 +78,7 @@ function CodeSnippet({
         </code>
       </div>
       <CopyButton
+        className={`${prefix}--snippet-button`}
         onClick={onClick}
         feedback={feedback}
         iconDescription={copyButtonDescription}

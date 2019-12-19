@@ -2,7 +2,7 @@
   "name": "@carbon/bundler",
   "private": true,
   "description": "Bundler used for libraries in the Carbon Design System",
-  "version": "10.4.0",
+  "version": "10.5.0-rc.0",
   "license": "Apache-2.0",
   "bin": {
     "bundler": "./bin/bundler.js"

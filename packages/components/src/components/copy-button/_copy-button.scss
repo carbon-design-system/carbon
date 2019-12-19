@@ -38,7 +38,7 @@
       @include layer('overlay');
       @include type-style('body-short-01');
       top: 1.1rem;
-      padding: $spacing-2xs;
+      padding: $spacing-02;
       color: $inverse-01;
       content: attr(data-feedback);
       transform: translateX(-50%);

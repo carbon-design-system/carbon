@@ -27,9 +27,11 @@ const TableToolbarMenu = ({
   );
   return (
     <OverflowMenu
+      ariaLabel={iconDescription}
       renderIcon={renderIcon}
       className={toolbarActionClasses}
       title={iconDescription}
+      iconDescription={iconDescription}
       flipped
       {...rest}>
       {children}

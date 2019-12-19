@@ -21,12 +21,9 @@
 /// @access private
 /// @group overflow-menu
 @mixin overflow-menu {
-  .#{$prefix}--overflow-menu__trigger {
-    @include button-reset;
-  }
-
   .#{$prefix}--overflow-menu,
   .#{$prefix}--overflow-menu__trigger {
+    @include button-reset;
     @include reset;
     @include focus-outline('reset');
     position: relative;

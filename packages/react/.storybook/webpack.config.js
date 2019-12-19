@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019
+ * Copyright IBM Corp. 2016, 2018
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,13 +14,12 @@ const customProperties = require('postcss-custom-properties');
 const {
   CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
   CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS,
-  CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP,
   CARBON_REACT_USE_CONTROLLED_STATE_WITH_EVENT_LISTENER,
   CARBON_REACT_STORYBOOK_USE_RTL,
+  NODE_ENV = 'development',
 } = process.env;
 
-const useExternalCss = CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS === 'true';
-const useStyleSourceMap = CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP === 'true';
+const useExternalCss = NODE_ENV === 'production';
 const useControlledStateWithEventListener =
   CARBON_REACT_USE_CONTROLLED_STATE_WITH_EVENT_LISTENER === 'true';
 const useRtl = CARBON_REACT_STORYBOOK_USE_RTL === 'true';
@@ -28,68 +27,6 @@ const useRtl = CARBON_REACT_STORYBOOK_USE_RTL === 'true';
 const replaceTable = {
   useControlledStateWithEventListener,
 };
-
-const styleLoaders = [
-  {
-    loader: 'css-loader',
-    options: {
-      importLoaders: 2,
-      sourceMap: useStyleSourceMap,
-    },
-  },
-  {
-    loader: 'postcss-loader',
-    options: {
-      plugins: () => {
-        const autoPrefixer = require('autoprefixer')({
-          overrideBrowserslist: ['last 1 version', 'ie >= 11'],
-        });
-        return [customProperties(), autoPrefixer, ...(useRtl ? [rtlcss] : [])];
-      },
-      sourceMap: useStyleSourceMap,
-    },
-  },
-  {
-    loader: 'sass-loader',
-    options: {
-      prependData(loaderContext) {
-        const entrypoint = path.resolve(__dirname, './_container.scss');
-        const flags = `
-          $feature-flags: (
-            ui-shell: true,
-            enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
-          );
-        `;
-
-        // If we're attempting to process our entrypoint, we'll just pass in the
-        // feature flags that we want enabled. This entrypoint will bring in
-        // things like the CSS Reset and @font-face declarations that we want to
-        // load only once whereas we don't need these loaded per-component
-        if (loaderContext.resourcePath === entrypoint) {
-          return flags;
-        }
-
-        // For other scss files that we bring in from carbon, we can selectively
-        // turn off flags that we have that emit CSS that has already been
-        // loaded by the entrypoint. We can also disable warnings around feature
-        // flag deviations so that this isn't displayed each time an scss file is
-        // loaded
-        return `
-          ${flags}
-
-          $css--font-face: false;
-          $css--body: false;
-          $css--reset: false;
-          $did-warn-diverged-feature-flags: true;
-        `;
-      },
-      sassOptions: {
-        includePaths: [path.resolve(__dirname, '..', 'node_modules')],
-      },
-      sourceMap: useStyleSourceMap,
-    },
-  },
-];
 
 class FeatureFlagProxyPlugin {
   /**
@@ -111,7 +48,8 @@ class FeatureFlagProxyPlugin {
 }
 
 module.exports = ({ config, mode }) => {
-  config.devtool = useStyleSourceMap ? 'source-map' : '';
+  config.devtool =
+    NODE_ENV === 'production' ? 'source-map' : 'cheap-module-eval-source-map';
   config.optimization = {
     ...config.optimization,
     minimizer: [
@@ -156,12 +94,67 @@ module.exports = ({ config, mode }) => {
     enforce: 'pre',
   });
 
+  const sassLoader = {
+    loader: 'sass-loader',
+    options: {
+      prependData() {
+        return `
+          $feature-flags: (
+            ui-shell: true,
+            enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+          );
+        `;
+      },
+      sassOptions: {
+        includePaths: [path.resolve(__dirname, '..', 'node_modules')],
+      },
+      sourceMap: true,
+    },
+  };
+
+  const fastSassLoader = {
+    loader: 'fast-sass-loader',
+    options: {
+      data: `
+        $feature-flags: (
+          ui-shell: true,
+          enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+        );
+      `,
+    },
+  };
+
   config.module.rules.push({
     test: /\.scss$/,
     sideEffects: true,
     use: [
-      { loader: useExternalCss ? MiniCssExtractPlugin.loader : 'style-loader' },
-      ...styleLoaders,
+      {
+        loader: useExternalCss ? MiniCssExtractPlugin.loader : 'style-loader',
+      },
+      {
+        loader: 'css-loader',
+        options: {
+          importLoaders: 2,
+          sourceMap: true,
+        },
+      },
+      {
+        loader: 'postcss-loader',
+        options: {
+          plugins: () => {
+            const autoPrefixer = require('autoprefixer')({
+              overrideBrowserslist: ['last 1 version', 'ie >= 11'],
+            });
+            return [
+              customProperties(),
+              autoPrefixer,
+              ...(useRtl ? [rtlcss] : []),
+            ];
+          },
+          sourceMap: true,
+        },
+      },
+      NODE_ENV === 'production' ? sassLoader : fastSassLoader,
     ],
   });
 

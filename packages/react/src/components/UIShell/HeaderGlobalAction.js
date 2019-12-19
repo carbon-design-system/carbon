@@ -21,15 +21,18 @@ const { prefix } = settings;
  *
  * Note: children passed to this component should be an Icon.
  */
-const HeaderGlobalAction = ({
-  'aria-label': ariaLabel,
-  'aria-labelledby': ariaLabelledBy,
-  children,
-  className: customClassName,
-  onClick,
-  isActive,
-  ...rest
-}) => {
+const HeaderGlobalAction = React.forwardRef(function HeaderGlobalAction(
+  {
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
+    children,
+    className: customClassName,
+    onClick,
+    isActive,
+    ...rest
+  },
+  ref
+) {
   const className = cx({
     [customClassName]: !!customClassName,
     [`${prefix}--header__action`]: true,
@@ -45,11 +48,12 @@ const HeaderGlobalAction = ({
       {...accessibilityLabel}
       className={className}
       onClick={onClick}
-      type="button">
+      type="button"
+      ref={ref}>
       {children}
     </button>
   );
-};
+});
 
 HeaderGlobalAction.propTypes = {
   /**
@@ -79,5 +83,7 @@ HeaderGlobalAction.propTypes = {
    */
   isActive: PropTypes.bool,
 };
+
+HeaderGlobalAction.displayName = 'HeaderGlobalAction';
 
 export default HeaderGlobalAction;

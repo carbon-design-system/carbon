@@ -31,7 +31,7 @@
     "@rocketsoftware/layout": "^0.2.9"
   },
   "devDependencies": {
-    "@carbon/bundler": "10.4.0",
+    "@carbon/bundler": "^10.5.0-rc.0",
     "rimraf": "^2.6.3"
   },
   "eyeglass": {

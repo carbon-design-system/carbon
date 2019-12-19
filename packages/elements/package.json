@@ -41,7 +41,7 @@
     "@rocketsoftware/type": "^0.2.9"
   },
   "devDependencies": {
-    "@carbon/bundler": "10.4.0",
+    "@carbon/bundler": "^10.5.0-rc.0",
     "fs-extra": "^7.0.1",
     "klaw-sync": "^6.0.0",
     "replace-in-file": "^3.4.2",

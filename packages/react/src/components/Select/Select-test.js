@@ -50,23 +50,6 @@ describe('Select', () => {
         expect(selectContainer.hasClass('extra-class')).toEqual(true);
       });
 
-      it('has the expected default iconDescription', () => {
-        expect(selectWrapper().props().iconDescription).toEqual(
-          'open list of options'
-        );
-      });
-
-      it('adds new iconDescription when passed via props', () => {
-        wrapper.setProps({ iconDescription: 'new description' });
-        expect(wrapper.props().iconDescription).toEqual('new description');
-      });
-
-      it('should have iconDescription match Icon component description prop', () => {
-        const description = wrapper.find(ChevronDown16).props()['aria-label'];
-        const matches = wrapper.props().iconDescription === description;
-        expect(matches).toEqual(true);
-      });
-
       it('should specify light select as expected', () => {
         expect(selectWrapper().props().light).toEqual(false);
         wrapper.setProps({ light: true });

@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, text } from '@storybook/addon-knobs';
+import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
 import Button from '../Button';
 import WithState from '../../tools/withState';
@@ -38,6 +38,12 @@ const items = [
   },
 ];
 
+const sizes = {
+  'Extra large size (xl)': 'xl',
+  'Regular size (lg)': '',
+  'Small size (sm)': 'sm',
+};
+
 const props = () => ({
   id: text('Combobox ID (id)', 'carbon-combobox-example'),
   placeholder: text('Placeholder text (placeholder)', 'Filter...'),
@@ -47,6 +53,7 @@ const props = () => ({
   disabled: boolean('Disabled (disabled)', false),
   invalid: boolean('Invalid (invalid)', false),
   invalidText: text('Invalid text (invalidText)', 'A valid value is required'),
+  size: select('Field size (size)', sizes, '') || undefined,
   onChange: action('onChange'),
 });
 

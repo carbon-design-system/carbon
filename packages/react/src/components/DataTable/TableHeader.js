@@ -47,17 +47,20 @@ const sortDirections = {
   [sortStates.DESC]: 'descending',
 };
 
-const TableHeader = ({
-  className: headerClassName,
-  children,
-  isSortable,
-  isSortHeader,
-  onClick,
-  scope,
-  sortDirection,
-  translateWithId: t,
-  ...rest
-}) => {
+const TableHeader = React.forwardRef(function TableHeader(
+  {
+    className: headerClassName,
+    children,
+    isSortable,
+    isSortHeader,
+    onClick,
+    scope,
+    sortDirection,
+    translateWithId: t,
+    ...rest
+  },
+  ref
+) {
   if (!isSortable) {
     return (
       <th {...rest} className={headerClassName} scope={scope}>
@@ -76,7 +79,11 @@ const TableHeader = ({
   const ariaSort = !isSortHeader ? 'none' : sortDirections[sortDirection];
 
   return (
-    <th scope={scope} className={headerClassName} aria-sort={ariaSort}>
+    <th
+      scope={scope}
+      className={headerClassName}
+      aria-sort={ariaSort}
+      ref={ref}>
       <button className={className} onClick={onClick} {...rest}>
         <span className={`${prefix}--table-header-label`}>{children}</span>
         <Arrow
@@ -100,7 +107,7 @@ const TableHeader = ({
       </button>
     </th>
   );
-};
+});
 
 TableHeader.propTypes = {
   /**
@@ -157,5 +164,7 @@ TableHeader.defaultProps = {
 };
 
 TableHeader.translationKeys = Object.values(translationKeys);
+
+TableHeader.displayName = 'TableHeader';
 
 export default TableHeader;

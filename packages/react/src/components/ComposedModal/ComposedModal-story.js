@@ -27,19 +27,26 @@ const sizes = {
 };
 
 const props = {
-  composedModal: (includeOpen = true) => ({
-    open: includeOpen ? boolean('Open (open in <ComposedModal>)', true) : null,
+  composedModal: ({ titleOnly } = {}) => ({
+    open: boolean('Open (open in <ComposedModal>)', true),
     onKeyDown: action('onKeyDown'),
     danger: boolean('Danger mode (danger)', false),
     selectorPrimaryFocus: text(
       'Primary focus element selector (selectorPrimaryFocus)',
       '[data-modal-primary-focus]'
     ),
-    size: select('Size (size)', sizes),
+    size: select('Size (size)', sizes, titleOnly ? 'sm' : ''),
   }),
-  modalHeader: () => ({
+  modalHeader: ({ titleOnly } = {}) => ({
     label: text('Optional Label (label in <ModalHeader>)', 'Optional Label'),
-    title: text('Optional title (title in <ModalHeader>)', 'Example'),
+    title: text(
+      'Optional title (title in <ModalHeader>)',
+      titleOnly
+        ? `
+      Passive modal title as the message. Should be direct and 3 lines or less.
+    `.trim()
+        : 'Example'
+    ),
     iconDescription: text(
       'Close icon description (iconDescription in <ModalHeader>)',
       'Close'
@@ -132,15 +139,18 @@ storiesOf('ComposedModal', module)
     'Using Header / Footer Props',
     () => {
       const { size, ...rest } = props.composedModal();
+      const { hasScrollingContent, ...bodyProps } = props.modalBody();
       return (
         <ComposedModal {...rest} size={size || undefined}>
           <ModalHeader {...props.modalHeader()} />
-          <ModalBody {...props.modalBody()}>
-            <p className={`${prefix}--modal-content__text}`}>
+          <ModalBody
+            {...bodyProps}
+            aria-label={hasScrollingContent ? 'Modal content' : undefined}>
+            <p className={`${prefix}--modal-content__text`}>
               Please see ModalWrapper for more examples and demo of the
               functionality.
             </p>
-            {props.modalBody().hasScrollingContent && scrollingContent}
+            {hasScrollingContent && scrollingContent}
           </ModalBody>
           <ModalFooter {...props.modalFooter()} />
         </ComposedModal>
@@ -162,17 +172,20 @@ storiesOf('ComposedModal', module)
     'Using child nodes',
     () => {
       const { size, ...rest } = props.composedModal();
+      const { hasScrollingContent, ...bodyProps } = props.modalBody();
       return (
         <ComposedModal {...rest} size={size || undefined}>
           <ModalHeader {...props.modalHeader()}>
             <h1>Testing</h1>
           </ModalHeader>
-          <ModalBody {...props.modalBody()}>
+          <ModalBody
+            {...bodyProps}
+            aria-label={hasScrollingContent ? 'Modal content' : undefined}>
             <p>
               Please see ModalWrapper for more examples and demo of the
               functionality.
             </p>
-            {props.modalBody().hasScrollingContent && scrollingContent}
+            {hasScrollingContent && scrollingContent}
           </ModalBody>
           <ModalFooter>
             <Button kind="secondary">Cancel</Button>
@@ -192,6 +205,27 @@ storiesOf('ComposedModal', module)
     }
   )
   .add(
+    'Title only',
+    () => {
+      const { size, ...rest } = props.composedModal({ titleOnly: true });
+      return (
+        <ComposedModal {...rest} size={size || undefined}>
+          <ModalHeader {...props.modalHeader({ titleOnly: true })} />
+          <ModalBody />
+          <ModalFooter {...props.modalFooter()} />
+        </ComposedModal>
+      );
+    },
+    {
+      info: {
+        text: `
+          In "small" and "xs" modals size, the title is allowed to span multiple lines and be used for the main message.
+          It should be less than 3 lines of text. If more room is required then use the standard body copy format.
+        `,
+      },
+    }
+  )
+  .add(
     'Example usage with trigger button',
     () => {
       class ComposedModalExample extends React.Component {
@@ -200,6 +234,7 @@ storiesOf('ComposedModal', module)
         render() {
           const { open } = this.state;
           const { size, ...rest } = props.composedModal();
+          const { hasScrollingContent, ...bodyProps } = props.modalBody();
           return (
             <>
               <Button onClick={() => this.toggleModal(true)}>
@@ -211,12 +246,16 @@ storiesOf('ComposedModal', module)
                 size={size || undefined}
                 onClose={() => this.toggleModal(false)}>
                 <ModalHeader {...props.modalHeader()} />
-                <ModalBody {...props.modalBody()}>
+                <ModalBody
+                  {...bodyProps}
+                  aria-label={
+                    hasScrollingContent ? 'Modal content' : undefined
+                  }>
                   <p className={`${prefix}--modal-content__text`}>
                     Please see ModalWrapper for more examples and demo of the
                     functionality.
                   </p>
-                  {props.modalBody().hasScrollingContent && scrollingContent}
+                  {hasScrollingContent && scrollingContent}
                 </ModalBody>
                 <ModalFooter {...props.modalFooter()} />
               </ComposedModal>

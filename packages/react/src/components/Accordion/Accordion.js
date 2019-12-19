@@ -12,14 +12,20 @@ import React from 'react';
 
 const { prefix } = settings;
 
-function Accordion({ children, className: customClassName, ...rest }) {
-  const className = cx(`${prefix}--accordion`, customClassName);
+function Accordion({ align, children, className: customClassName, ...rest }) {
+  const className = cx(`${prefix}--accordion`, customClassName, {
+    [`${prefix}--accordion--${align}`]: align,
+  });
   return (
     <ul className={className} {...rest}>
       {children}
     </ul>
   );
 }
+
+Accordion.defaultProps = {
+  align: 'end',
+};
 
 Accordion.propTypes = {
   /**
@@ -31,6 +37,11 @@ Accordion.propTypes = {
    * Specify an optional className to be applied to the container node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify the alignment of the accordion heading title and chevron.
+   */
+  align: PropTypes.oneOf(['start', 'end']),
 };
 
 export default Accordion;

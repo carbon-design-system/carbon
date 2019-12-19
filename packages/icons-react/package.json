@@ -32,7 +32,7 @@
     "@rocketsoftware/icon-helpers": "^0.2.9"
   },
   "devDependencies": {
-    "@carbon/icon-build-helpers": "^0.2.0",
+    "@carbon/icon-build-helpers": "^0.3.0-rc.0",
     "@rocketsoftware/icons": "^0.2.9"
   },
   "sideEffects": false

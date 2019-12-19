@@ -29,7 +29,7 @@ const SkipToContent = ({
 
 SkipToContent.propTypes = {
   /**
-   * Provide an optional class to be applied to the containing node
+   * Provide text to display in the SkipToContent `a` tag
    */
   children: PropTypes.string.isRequired,
 
@@ -42,7 +42,7 @@ SkipToContent.propTypes = {
   /**
    * Optionally override the default tabindex of 0
    */
-  tabIndex: PropTypes.string.isRequired,
+  tabIndex: PropTypes.string,
 };
 
 SkipToContent.defaultProps = {

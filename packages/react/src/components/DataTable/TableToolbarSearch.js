@@ -80,7 +80,7 @@ const TableToolbarSearch = ({
   return (
     <div
       tabIndex={expandedState ? '-1' : '0'}
-      role="searchbox"
+      role="search"
       ref={searchRef}
       onClick={event => handleExpand(event, true)}
       onFocus={event => handleExpand(event, true)}

@@ -499,6 +499,7 @@ export class InlineNotification extends Component {
       {
         [`${prefix}--inline-notification--low-contrast`]: lowContrast,
         [`${prefix}--inline-notification--${kind}`]: kind,
+        [`${prefix}--inline-notification--hide-close-button`]: hideCloseButton,
       },
       className
     );

@@ -1,7 +1,8 @@
 # @rocketsoftware/carbon-components-react
 
-> The Carbon Design System is IBM’s open-source design system for products and
-> experiences.
+> A collection of
+> [Carbon Components](https://github.com/rocketsoftware/carbon/tree/master/packages/components)
+> implemented using [React](https://reactjs.org/).
 
 ## Getting started
 
@@ -42,9 +43,9 @@ can see usage information in several ways:
 
 # :books: Documentation
 
-- See our documentation site
-  [here](http://carbondesignsystem.com/getting-started/developers) for full
-  how-to docs and guidelines
+- See our
+  [documentation site](https://www.carbondesignsystem.com/get-started/develop/react)
+  for full how-to docs and guidelines
 - [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions
   to this repo
 - [🏃‍♀️ Migration Guides](./docs/migration)

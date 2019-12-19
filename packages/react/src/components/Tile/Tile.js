@@ -339,12 +339,12 @@ export class SelectableTile extends Component {
           {...other}
           onClick={this.handleClick}
           onKeyDown={this.handleKeyDown}>
-          <div className={`${prefix}--tile__checkmark`}>
+          <span className={`${prefix}--tile__checkmark`}>
             <CheckmarkFilled aria-label={iconDescription}>
               {iconDescription && <title>{iconDescription}</title>}
             </CheckmarkFilled>
-          </div>
-          <div className={`${prefix}--tile-content`}>{children}</div>
+          </span>
+          <span className={`${prefix}--tile-content`}>{children}</span>
         </label>
       </>
     );
