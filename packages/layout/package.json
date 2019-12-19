@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/layout",
   "description": "Layout helpers",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",

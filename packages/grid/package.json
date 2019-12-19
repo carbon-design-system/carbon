@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/grid",
   "description": "Grid for digital and software products using the Carbon Design System",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "license": "Apache-2.0",
   "repository": "https://github.com/RocketSoftware/carbon/tree/master/packages/grid",
   "bugs": "https://github.com/RocketSoftware/carbon/issues",
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@carbon/import-once": "10.3.0",
-    "@rocketsoftware/layout": "^0.2.9"
+    "@rocketsoftware/layout": "^0.3.0"
   },
   "devDependencies": {
     "@carbon/bundler": "^10.5.0-rc.0",

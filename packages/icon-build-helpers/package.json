@@ -21,7 +21,7 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "@carbon/cli-reporter": "10.3.0",
-    "@rocketsoftware/icon-helpers": "0.2.9",
+    "@rocketsoftware/icon-helpers": "^0.3.0",
     "browserslist-config-carbon": "10.4.0",
     "change-case": "^3.0.2",
     "core-js": "^3.1.3",

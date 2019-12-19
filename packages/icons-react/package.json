@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/icons-react",
   "description": "React components for icons",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -29,11 +29,11 @@
     "clean": "rimraf es lib umd"
   },
   "dependencies": {
-    "@rocketsoftware/icon-helpers": "^0.2.9"
+    "@rocketsoftware/icon-helpers": "^0.3.0"
   },
   "devDependencies": {
     "@carbon/icon-build-helpers": "^0.3.0-rc.0",
-    "@rocketsoftware/icons": "^0.2.9"
+    "@rocketsoftware/icons": "^0.3.0"
   },
   "sideEffects": false
 }
