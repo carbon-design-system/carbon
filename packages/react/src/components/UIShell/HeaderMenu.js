@@ -95,6 +95,16 @@ class HeaderMenu extends React.Component {
 
       return;
     }
+    if (matches(event, [keys.Escape])) {
+      event.stopPropagation();
+      event.preventDefault();
+
+      this.setState({
+        expanded: false,
+      });
+
+      return;
+    }
   };
 
   /**
