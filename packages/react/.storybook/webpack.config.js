@@ -11,6 +11,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const rtlcss = require('rtlcss');
 const customProperties = require('postcss-custom-properties');
 
+const { generateScopedName } = require('../scripts/styles.config');
+
 const {
   CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
   CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS,
@@ -126,6 +128,7 @@ module.exports = ({ config, mode }) => {
 
   config.module.rules.push({
     test: /\.scss$/,
+    exclude: /\.module\.scss$/,
     sideEffects: true,
     use: [
       {
@@ -134,7 +137,6 @@ module.exports = ({ config, mode }) => {
       {
         loader: 'css-loader',
         options: {
-          importLoaders: 2,
           sourceMap: true,
         },
       },
@@ -152,6 +154,23 @@ module.exports = ({ config, mode }) => {
             ];
           },
           sourceMap: true,
+        },
+      },
+      NODE_ENV === 'production' ? sassLoader : fastSassLoader,
+    ],
+  });
+
+  config.module.rules.push({
+    test: /\.module\.scss$/,
+    sideEffects: true,
+    use: [
+      'style-loader',
+      {
+        loader: 'css-loader',
+        options: {
+          modules: {
+            localIdentName: generateScopedName,
+          },
         },
       },
       NODE_ENV === 'production' ? sassLoader : fastSassLoader,

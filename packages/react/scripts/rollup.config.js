@@ -10,11 +10,14 @@ const babel = require('rollup-plugin-babel');
 const replace = require('rollup-plugin-replace');
 const { terser } = require('rollup-plugin-terser');
 const sizes = require('rollup-plugin-sizes');
+const postcss = require('rollup-plugin-postcss');
 
 const packageJson = require('../package.json');
 const peerDependencies = Object.keys(packageJson.peerDependencies || {}).concat(
   ['classnames', 'prop-types']
 );
+
+const { generateScopedName } = require('./styles.config');
 
 const env = process.env.NODE_ENV || 'development';
 const prodSettings =
@@ -56,13 +59,22 @@ const prodSettings =
         },
       ];
 
-process.env.BABEL_ENV = 'es';
+process.env.BABEL_ENV = 'rollup';
 
 module.exports = {
   input: 'src/index.js',
   plugins: [
     resolve({
       mainFields: ['jsnext', 'module', 'main'],
+    }),
+    postcss({
+      modules: {
+        generateScopedName,
+      },
+      extract: `./styles/carbon-styles${
+        process.env.NODE_ENV === 'production' ? '.min' : ''
+      }.css`,
+      minimize: process.env.NODE_ENV === 'production',
     }),
     commonjs({
       include: [/node_modules/, /icons-react\/lib/],

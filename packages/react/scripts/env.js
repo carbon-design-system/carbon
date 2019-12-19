@@ -1,29 +1,41 @@
 'use strict';
-
+const { generateScopedName } = require('./styles.config');
 const BABEL_ENV = process.env.BABEL_ENV;
-
-const docgenConfig = {
-  plugins: [
-    [
-      'babel-plugin-react-docgen',
-      {
-        removeMethods: true,
-      },
-    ],
+const docgenConfig = [
+  [
+    'babel-plugin-react-docgen',
+    {
+      removeMethods: true,
+    },
   ],
-};
+];
 
 module.exports = () => ({
   presets: [
     [
       require.resolve('@babel/preset-env'),
       {
-        modules: BABEL_ENV === 'es' ? false : 'commonjs',
+        modules:
+          BABEL_ENV === 'es' || BABEL_ENV === 'rollup' ? false : 'commonjs',
         targets: {
           browsers: ['extends browserslist-config-carbon'],
         },
       },
     ],
   ],
-  ...(BABEL_ENV === 'docgen' && docgenConfig),
+  plugins: [
+    [
+      'react-css-modules',
+      {
+        generateScopedName,
+        webpackHotModuleReloading: true,
+        filetypes: {
+          '.scss': {
+            syntax: 'postcss-scss',
+          },
+        },
+      },
+    ],
+    ...(BABEL_ENV === 'docgen' ? docgenConfig : []),
+  ],
 });

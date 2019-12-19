@@ -11,6 +11,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { match, keys } from '../../internal/keyboard';
+import './Accordion.module.scss';
 
 const { prefix } = settings;
 const defaultRenderExpando = props => <button {...props} />;
@@ -80,7 +81,9 @@ function AccordionItem({
           aria-label={iconDescription}
           className={`${prefix}--accordion__arrow`}
         />
-        <div className={`${prefix}--accordion__title`}>{title}</div>
+        <div className={`${prefix}--accordion__title`} styleName="test">
+          {title}
+        </div>
       </Expando>
       <div className={`${prefix}--accordion__content`}>{children}</div>
     </li>

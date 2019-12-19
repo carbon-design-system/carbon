@@ -1,5 +1,7 @@
 # Storybook
-storybook-static
+storybook-static/
 
 # Generated metadata
 react-docgen.json
+
+styles/
