@@ -3682,6 +3682,7 @@ $spacing-05: $carbon--spacing-05;
 - **Alias**: `carbon--spacing-05`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
@@ -13481,8 +13482,9 @@ Code snippet styles
   // expanded snippet container
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
     .#{$prefix}--snippet-container {
-    max-height: rem(1500px);
+    max-height: 100%;
     transition: max-height $duration--moderate-01 motion(standard, productive);
+    padding-bottom: $spacing-05;
   }
 
   // closed pre
@@ -13783,6 +13785,7 @@ Code snippet styles
   - [spacing-03 [variable]](#spacing-03-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [hover-ui [variable]](#hover-ui-variable)
