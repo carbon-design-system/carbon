@@ -61,7 +61,7 @@
   }
 
   .#{$prefix}--text-area::placeholder {
-    color: $text-05;
+    @include placeholder-colors;
     @include type-style('body-long-01');
     opacity: 1;
   }
