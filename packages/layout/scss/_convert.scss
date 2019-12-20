@@ -18,7 +18,7 @@ $carbon--base-font-size: 16px !default;
 /// @group @carbon/layout
 @function carbon--rem($px) {
   @if unit($px) != 'px' {
-    @error "Argument `#{$px}` must be a value in pixels.";
+    @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
   }
 
   @return ($px / $carbon--base-font-size) * 1rem;
@@ -31,7 +31,7 @@ $carbon--base-font-size: 16px !default;
 /// @group @carbon/layout
 @function carbon--em($px) {
   @if unit($px) != 'px' {
-    @error "Argument `#{$px}` must be a value in pixels.";
+    @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
   }
 
   @return ($px / $carbon--base-font-size) * 1em;
