@@ -6342,6 +6342,7 @@ $text-04: if(
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅text-05 [variable]
 
@@ -6466,6 +6467,7 @@ $icon-03: if(
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [toggle [mixin]](#toggle-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅link-01 [variable]
 
@@ -7003,6 +7005,7 @@ $inverse-focus-ui: if(
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [tags [mixin]](#tags-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅hover-primary [variable]
 
@@ -12645,7 +12648,7 @@ Accordion styles
     // Transition property for when the accordion closes
     transition: padding motion(standard, productive) $duration--fast-02;
     padding-left: $carbon--spacing-05;
-    padding-right: 25%;
+    padding-right: $carbon--spacing-05;
 
     @include carbon--breakpoint-down('md') {
       padding-right: $carbon--spacing-09;
@@ -18323,7 +18326,7 @@ Modal styles
       .#{$prefix}--modal-header,
       .#{$prefix}--modal-content,
       .#{$prefix}--modal-content__regular-content {
-        padding-right: 20%;
+        padding-right: $spacing-09;
       }
     }
 
@@ -18340,20 +18343,20 @@ Modal styles
   .#{$prefix}--modal-header,
   .#{$prefix}--modal-content {
     padding-left: 1rem;
-    padding-right: 3rem;
+    padding-right: $spacing-09;
   }
 
   .#{$prefix}--modal-header,
   .#{$prefix}--modal-content,
   .#{$prefix}--modal-content__regular-content {
-    padding-right: $spacing-05;
+    padding-right: $spacing-09;
   }
 
   .#{$prefix}--modal-content--with-form {
-    padding-right: $spacing-05;
+    padding-right: $spacing-09;
 
     @include carbon--breakpoint(md) {
-      padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
+      padding-right: $spacing-09; // Override for `.#{$prefix}--modal-content`
     }
   }
 
@@ -18365,7 +18368,7 @@ Modal styles
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
-      padding-right: $spacing-05;
+      padding-right: $spacing-09;
     }
 
     @include carbon--breakpoint(md) {
@@ -18390,7 +18393,7 @@ Modal styles
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
-      padding-right: $spacing-05;
+      padding-right: $spacing-09;
     }
 
     @include carbon--breakpoint(md) {
@@ -18408,11 +18411,11 @@ Modal styles
       .#{$prefix}--modal-header,
       .#{$prefix}--modal-content,
       .#{$prefix}--modal-content__regular-content {
-        padding-right: 20%;
+        padding-right: $spacing-09;
       }
 
       .#{$prefix}--modal-content--with-form {
-        padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
+        padding-right: $spacing-09; // Override for `.#{$prefix}--modal-content`
       }
     }
   }
@@ -18425,7 +18428,7 @@ Modal styles
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
-      padding-right: $spacing-05;
+      padding-right: $spacing-09;
     }
 
     @include carbon--breakpoint(md) {
@@ -18434,11 +18437,11 @@ Modal styles
       .#{$prefix}--modal-header,
       .#{$prefix}--modal-content,
       .#{$prefix}--modal-content__regular-content {
-        padding-right: 20%;
+        padding-right: $spacing-09;
       }
 
       .#{$prefix}--modal-content--with-form {
-        padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
+        padding-right: $spacing-09; // Override for `.#{$prefix}--modal-content`
       }
     }
 
@@ -18590,9 +18593,9 @@ Modal styles
   - [overlay-01 [variable]](#overlay-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
-  - [spacing-05 [variable]](#spacing-05-variable)
-  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [spacing-09 [variable]](#spacing-09-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [text-02 [variable]](#text-02-variable)
   - [spacing-02 [variable]](#spacing-02-variable)
@@ -24871,8 +24874,8 @@ UI shell side nav
     left: 0;
     width: mini-units(6);
     max-width: mini-units(32);
-    color: $shell-side-nav-text-01;
-    background-color: $shell-side-nav-bg-01;
+    color: $text-04;
+    background-color: $gray-100;
     will-change: width;
     // TODO: sync with motion work
     transition: width 0.11s cubic-bezier(0.2, 0, 1, 0.9);
@@ -25069,7 +25072,7 @@ UI shell side nav
   .#{$prefix}--side-nav__footer {
     flex: 0 0 rem(48px);
     width: 100%;
-    background-color: $shell-side-nav-bg-01;
+    background-color: $gray-100;
   }
 
   .#{$prefix}--side-nav__toggle {
@@ -25081,7 +25084,8 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__toggle:focus {
-    @include focus-outline('outline');
+    outline: 2px solid $inverse-focus-ui;
+    outline-offset: -2px;
   }
 
   .#{$prefix}--side-nav__toggle {
@@ -25134,8 +25138,12 @@ UI shell side nav
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']:hover {
     // TODO: sync color
-    background-color: $shell-side-nav-bg-04;
-    color: $ibm-color__gray-100;
+    background-color: $gray-90;
+  }
+
+  .#{$prefix}--side-nav__item--active
+    > .#{$prefix}--side-nav__link--current:hover {
+    background-color: $gray-90;
   }
 
   .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
@@ -25145,7 +25153,7 @@ UI shell side nav
     .#{$prefix}--side-nav__menu-item
     > .#{$prefix}--side-nav__link:hover
     > span {
-    color: $ibm-color__gray-100;
+    color: $text-04;
   }
 
   .#{$prefix}--side-nav__item--large {
@@ -25162,7 +25170,7 @@ UI shell side nav
     padding: 0 mini-units(2);
     display: flex;
     align-items: center;
-    color: $shell-side-nav-text-01;
+    color: $text-04;
     height: mini-units(4);
     user-select: none;
     transition: color $duration--fast-02, background-color $duration--fast-02,
@@ -25170,12 +25178,13 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__submenu:hover {
-    background-color: $shell-side-nav-bg-04;
-    color: $ibm-color__gray-100;
+    background-color: $gray-90;
+    color: $text-04;
   }
 
   .#{$prefix}--side-nav__submenu:focus {
-    @include focus-outline('outline');
+    outline: 2px solid $inverse-focus-ui;
+    outline-offset: -2px;
   }
 
   .#{$prefix}--side-nav__submenu-title {
@@ -25208,14 +25217,14 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
-    background-color: $shell-side-nav-bg-04;
-    color: $ibm-color__gray-100;
+    background-color: $gray-90;
+    color: $text-04;
   }
 
   .#{$prefix}--side-nav__item--active
     .#{$prefix}--side-nav__submenu[aria-expanded='false'] {
-    background-color: $shell-side-nav-bg-04;
-    color: $ibm-color__gray-100;
+    background-color: $gray-70;
+    color: $text-04;
     position: relative;
     &::before {
       content: '';
@@ -25228,9 +25237,19 @@ UI shell side nav
     }
   }
 
+  .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
+    background-color: $gray-90;
+  }
+
+  .#{$prefix}--side-nav__menu[role='menu']
+    a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover {
+    background-color: $gray-90;
+    color: $text-04;
+  }
+
   .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu-title {
     font-weight: 600;
-    color: $ibm-color__gray-100;
+    color: $text-04;
   }
 
   .#{$prefix}--side-nav__menu[role='menu'] {
@@ -25262,16 +25281,16 @@ UI shell side nav
   .#{$prefix}--side-nav__menu[role='menu']
     a.#{$prefix}--side-nav__link[aria-current='page'],
   a.#{$prefix}--side-nav__link--current {
-    background-color: $ibm-color__gray-20;
+    background-color: $gray-70;
 
     > span {
-      color: $ibm-color__gray-100;
+      color: $text-04;
       font-weight: 600;
     }
   }
 
   a.#{$prefix}--side-nav__link--current > span.#{$prefix}--side-nav__link-text {
-    color: $ibm-color__gray-100;
+    color: $text-04;
     font-weight: 600;
   }
   //----------------------------------------------------------------------------
@@ -25305,7 +25324,7 @@ UI shell side nav
     a.#{$prefix}--header__menu-item[role='menuitem']
     .#{$prefix}--text-truncate-end {
     @include text-overflow();
-    color: $shell-side-nav-text-01;
+    color: $text-04;
     font-size: rem(14px);
     letter-spacing: 0.1px;
     line-height: rem(20px);
@@ -25314,7 +25333,8 @@ UI shell side nav
 
   a.#{$prefix}--side-nav__link:focus,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem']:focus {
-    @include focus-outline('outline');
+    outline: 2px solid $inverse-focus-ui;
+    outline-offset: -2px;
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page'],
@@ -25331,6 +25351,11 @@ UI shell side nav
     left: 0;
     width: 4px;
     background-color: $shell-side-nav-accent-01;
+  }
+
+  .#{$prefix}--side-nav__menu[role='menu']
+    a.#{$prefix}--side-nav__link--current:hover {
+    background-color: $gray-80;
   }
 
   //----------------------------------------------------------------------------
@@ -25350,7 +25375,7 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__icon > svg {
-    fill: $shell-side-nav-icon-01;
+    fill: $icon-03;
     width: mini-units(2);
     height: mini-units(2);
   }
@@ -25417,7 +25442,7 @@ UI shell side nav
 
   //header menu items overrides
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem'] {
-    color: $shell-side-nav-text-01;
+    color: $text-04;
     white-space: nowrap;
     justify-content: space-between;
 
@@ -25446,8 +25471,8 @@ UI shell side nav
     }
 
     & a.#{$prefix}--header__menu-item[role='menuitem']:hover {
-      background-color: $shell-side-nav-bg-04;
-      color: $ibm-color__gray-100;
+      background-color: $gray-90;
+      color: $text-04;
     }
   }
 
@@ -25466,6 +25491,17 @@ UI shell side nav
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
     fill: $shell-side-nav-text-01;
   }
+
+  //----------------------------------------------------------------------------
+  // Side-nav ~ Content interaction
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav.#{$prefix}--side-nav--expanded ~ .#{$prefix}--content {
+    margin-left: 16rem;
+  }
+
+  .#{$prefix}--side-nav--expanded ~ .#{$prefix}--content {
+    width: calc(100% - 16rem);
+  }
 }
 ```
 
@@ -25478,16 +25514,17 @@ UI shell side nav
   - [text-overflow [mixin]](#text-overflow-mixin)
   - [mini-units [function]](#mini-units-function)
   - [prefix [variable]](#prefix-variable)
-  - [shell-side-nav-text-01 [variable]](#shell-side-nav-text-01-variable)
-  - [shell-side-nav-bg-01 [variable]](#shell-side-nav-bg-01-variable)
+  - [text-04 [variable]](#text-04-variable)
   - [spacing-09 [variable]](#spacing-09-variable)
   - [overlay-01 [variable]](#overlay-01-variable)
   - [shell-side-nav-bg-02 [variable]](#shell-side-nav-bg-02-variable)
   - [shell-side-nav-icon-01 [variable]](#shell-side-nav-icon-01-variable)
   - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
   - [shell-header-text-01 [variable]](#shell-header-text-01-variable)
-  - [shell-side-nav-bg-04 [variable]](#shell-side-nav-bg-04-variable)
+  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [shell-side-nav-accent-01 [variable]](#shell-side-nav-accent-01-variable)
+  - [icon-03 [variable]](#icon-03-variable)
+  - [shell-side-nav-text-01 [variable]](#shell-side-nav-text-01-variable)
 
 ### ❌carbon-switcher [mixin]
 
@@ -25992,8 +26029,6 @@ $shell-side-nav-bg-01: $carbon--white-0;
 
 - **Group**: [ui-shell](#ui-shell)
 - **Type**: `Color`
-- **Used by**:
-  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ❌shell-side-nav-bg-02 [variable]
 
@@ -26045,8 +26080,6 @@ $shell-side-nav-bg-04: #e5e5e5;
 
 - **Group**: [ui-shell](#ui-shell)
 - **Type**: `Color`
-- **Used by**:
-  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ❌shell-side-nav-bg-05 [variable]
 

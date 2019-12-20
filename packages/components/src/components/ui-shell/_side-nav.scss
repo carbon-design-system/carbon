@@ -21,7 +21,7 @@
 ///   .my-custom-selector {
 ///     @include text-overflow();
 ///   }
-@mixin text-overflow {
+@mixin shell-text-overflow {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -206,7 +206,7 @@
   }
 
   .#{$prefix}--side-nav__title {
-    @include text-overflow();
+    @include shell-text-overflow();
 
     // TODO: sync with type styles
     font-size: rem(14px);
@@ -389,7 +389,7 @@
   }
 
   .#{$prefix}--side-nav__submenu-title {
-    @include text-overflow();
+    @include shell-text-overflow();
     text-align: left;
   }
 
@@ -524,7 +524,7 @@
   .#{$prefix}--side-nav
     a.#{$prefix}--header__menu-item[role='menuitem']
     .#{$prefix}--text-truncate-end {
-    @include text-overflow();
+    @include shell-text-overflow();
     color: $text-04;
     font-size: rem(14px);
     letter-spacing: 0.1px;
