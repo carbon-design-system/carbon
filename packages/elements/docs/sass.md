@@ -11048,7 +11048,7 @@ $productive-heading-07: (
 $expressive-heading-01: map-merge(
   $heading-01,
   (
-    line-height: carbon--rem(20),
+    line-height: carbon--rem(20px),
   )
 );
 ```
@@ -11067,7 +11067,7 @@ $expressive-heading-01: map-merge(
 $expressive-heading-02: map-merge(
   $heading-02,
   (
-    line-height: carbon--rem(24),
+    line-height: carbon--rem(24px),
   )
 );
 ```
