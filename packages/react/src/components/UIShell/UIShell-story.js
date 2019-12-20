@@ -62,7 +62,7 @@ const Fade16 = () => (
   </svg>
 );
 
-const StoryContent = ({ useResponsiveOffset = true }) => {
+const StoryContent = ({ useResponsiveOffset = false }) => {
   const classNameFirstColumn = cx({
     'bx--col-lg-13': true,
     'bx--offset-lg-3': useResponsiveOffset,
