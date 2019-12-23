@@ -255,7 +255,13 @@ describe('FileUploader', () => {
 });
 
 describe('FileUploaderDropContainer', () => {
-  const dropContainer = <FileUploaderDropContainer className="extra-class" />;
+  const onAddFiles = jest.fn();
+  const dropContainer = (
+    <FileUploaderDropContainer
+      className="extra-class"
+      onAddFiles={onAddFiles}
+    />
+  );
   const mountWrapper = mount(dropContainer);
 
   describe('Renders as expected with default props', () => {
@@ -292,6 +298,20 @@ describe('FileUploaderDropContainer', () => {
       input.simulate('click', evt);
 
       expect(evt.target.value).toEqual(null);
+    });
+
+    it('does the right thing', () => {
+      const fileFoo = new File(['foo'], 'foo.txt', { type: 'text/plain' });
+      const fileBar = new File(['bar'], 'bar.txt', { type: 'text/plain' });
+      const mockFiles = [fileFoo, fileBar];
+      const input = mountWrapper.find(`.${prefix}--file-input`);
+      const evt = { target: { files: mockFiles } };
+      input.simulate('change', evt);
+      expect(onAddFiles).toHaveBeenCalledTimes(1);
+      expect(onAddFiles.mock.calls[0][0].target.files).toEqual([
+        fileFoo,
+        fileBar,
+      ]);
     });
   });
 
