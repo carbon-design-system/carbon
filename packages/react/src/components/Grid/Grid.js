@@ -19,9 +19,9 @@ const { prefix } = settings;
 // getter functions needed due to error in storybook
 // addons knobs that requires a copy of this object to avoid
 const getValidColWidths = () => ({
-  sm: ['auto', ...range({ end: breakpoints.sm.columns })],
-  md: ['auto', ...range({ end: breakpoints.md.columns })],
-  lgPlus: ['auto', ...range({ end: breakpoints.lg.columns })],
+  sm: [false, true, 'auto', ...range({ end: breakpoints.sm.columns })],
+  md: [false, true, 'auto', ...range({ end: breakpoints.md.columns })],
+  lgPlus: [false, true, 'auto', ...range({ end: breakpoints.lg.columns })],
 });
 
 const getValidColOffsets = () => ({
@@ -128,51 +128,74 @@ GridRow.propTypes = {
   rest: PropTypes.node,
 };
 
+/**
+ * // helper typedefs to make raw jsdoc easier to read
+ * @typedef {number | boolean | "auto"} span non-object version of breakpoint def
+ * @typedef {span | { span: span, offset: number }} breakPtRaw complete (wide) def according to prop
+ * @typedef {{ span: number | "-auto", offset: number }} breakPt processed to common obj format
+ */
+
+/**
+ * process wide variety of accepted values of Grid.Col breakpoint props (sm, lg, etc.)
+ * into standard obj format to greatly simplify syntax of Grid.Col component definition
+ *
+ * @param {breakPtRaw} breakpoint - raw def as allowed by Grid.Col breakpoint props
+ * @returns {breakPt} processed to common obj format
+ */
+const standardize = breakpoint => {
+  const obj =
+    typeof breakpoint !== 'object' ? { span: breakpoint } : breakpoint;
+
+  // vastly improves component readability by converting to format of CSS classNames
+  if (obj.span === 'auto' || obj.span === true) obj.span = '-auto';
+
+  return obj;
+};
+
 export const GridCol = ({
   as = 'div',
-  sm,
-  md,
-  lg,
-  xlg,
-  max,
-  smOffset,
-  mdOffset,
-  lgOffset,
-  xlgOffset,
-  maxOffset,
+  sm: smRaw,
+  md: mdRaw,
+  lg: lgRaw,
+  xlg: xlgRaw,
+  max: maxRaw,
   noGutter = false,
   className = '',
   children = null,
   ...rest
-}) =>
-  React.createElement(
+}) => {
+  // map list of raw breakpoints into obj format to simplify below className definition
+  // extra arr created and destructured since same transformation's applied to each bp
+  const [sm, md, lg, xlg, max] = [smRaw, mdRaw, lgRaw, xlgRaw, maxRaw].map(
+    breakPt => standardize(breakPt)
+  );
+
+  return React.createElement(
     as,
     {
       ...rest,
       className: classNames(
         `${prefix}--col`,
-        sm !== undefined &&
-          `${prefix}--col-sm-${sm === 'auto' ? '-' : ''}${sm}`,
-        md !== undefined &&
-          `${prefix}--col-md-${md === 'auto' ? '-' : ''}${md}`,
-        lg !== undefined &&
-          `${prefix}--col-lg-${lg === 'auto' ? '-' : ''}${lg}`,
-        xlg !== undefined &&
-          `${prefix}--col-xlg-${xlg === 'auto' ? '-' : ''}${xlg}`,
-        max !== undefined &&
-          `${prefix}--col-max-${max === 'auto' ? '-' : ''}${max}`,
-        smOffset && `${prefix}--offset-sm-${smOffset}`,
-        mdOffset && `${prefix}--offset-md-${mdOffset}`,
-        lgOffset && `${prefix}--offset-lg-${lgOffset}`,
-        xlgOffset && `${prefix}--offset-xlg-${xlgOffset}`,
-        maxOffset && `${prefix}--offset-max-${maxOffset}`,
-        noGutter === true && `${prefix}--no-gutter`, // `true` === both
-        noGutter !== true && noGutter && `${prefix}--no-gutter--${noGutter}`, // `left` || `right`
+        sm.span && `${prefix}--col-sm-${sm.span}`,
+        md.span && `${prefix}--col-md-${md.span}`,
+        lg.span && `${prefix}--col-lg-${lg.span}`,
+        xlg.span && `${prefix}--col-xlg-${xlg.span}`,
+        max.span && `${prefix}--col-max-${max.span}`,
+
+        sm.offset && `${prefix}--offset-sm-${sm.offset}`,
+        md.offset && `${prefix}--offset-md-${md.offset}`,
+        lg.offset && `${prefix}--offset-lg-${lg.offset}`,
+        xlg.offset && `${prefix}--offset-xlg-${xlg.offset}`,
+        max.offset && `${prefix}--offset-max-${max.offset}`,
+
+        noGutter === true && `${prefix}--no-gutter`, // true => both
+        noGutter && noGutter !== true && `${prefix}--no-gutter--${noGutter}`, // "left" || "right"
         className
       ),
     },
     children
   );
+};
 
 GridCol.propTypes = {
   /**
@@ -189,7 +212,13 @@ GridCol.propTypes = {
    *
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  sm: PropTypes.oneOf(VALID_COL_WIDTHS.sm),
+  sm: PropTypes.oneOfType([
+    PropTypes.oneOf(VALID_COL_WIDTHS.sm),
+    PropTypes.shape({
+      span: PropTypes.oneOf(VALID_COL_WIDTHS.sm),
+      offset: PropTypes.oneOf(VALID_COL_OFFSETS.sm),
+    }),
+  ]),
 
   /**
    * Specify column span at this width.
@@ -200,7 +229,13 @@ GridCol.propTypes = {
    *
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  md: PropTypes.oneOf(VALID_COL_WIDTHS.md),
+  md: PropTypes.oneOfType([
+    PropTypes.oneOf(VALID_COL_WIDTHS.md),
+    PropTypes.shape({
+      span: PropTypes.oneOf(VALID_COL_WIDTHS.md),
+      offset: PropTypes.oneOf(VALID_COL_OFFSETS.md),
+    }),
+  ]),
 
   /**
    * Specify column span at this width.
@@ -209,7 +244,13 @@ GridCol.propTypes = {
    *
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  lg: PropTypes.oneOf(VALID_COL_WIDTHS.lgPlus),
+  lg: PropTypes.oneOfType([
+    PropTypes.oneOf(VALID_COL_WIDTHS.lgPlus),
+    PropTypes.shape({
+      span: PropTypes.oneOf(VALID_COL_WIDTHS.lgPlus),
+      offset: PropTypes.oneOf(VALID_COL_OFFSETS.lgPlus),
+    }),
+  ]),
 
   /**
    * Specify column span at this width.
@@ -218,7 +259,13 @@ GridCol.propTypes = {
    *
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  xlg: PropTypes.oneOf(VALID_COL_WIDTHS.lgPlus),
+  xlg: PropTypes.oneOfType([
+    PropTypes.oneOf(VALID_COL_WIDTHS.lgPlus),
+    PropTypes.shape({
+      span: PropTypes.oneOf(VALID_COL_WIDTHS.lgPlus),
+      offset: PropTypes.oneOf(VALID_COL_OFFSETS.lgPlus),
+    }),
+  ]),
 
   /**
    * Specify column span at this width.
@@ -227,7 +274,13 @@ GridCol.propTypes = {
    *
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  max: PropTypes.oneOf(VALID_COL_WIDTHS.lgPlus),
+  max: PropTypes.oneOfType([
+    PropTypes.oneOf(VALID_COL_WIDTHS.lgPlus),
+    PropTypes.shape({
+      span: PropTypes.oneOf(VALID_COL_WIDTHS.lgPlus),
+      offset: PropTypes.oneOf(VALID_COL_OFFSETS.lgPlus),
+    }),
+  ]),
 
   /**
    * Offset content by a given column span,
@@ -236,38 +289,6 @@ GridCol.propTypes = {
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
   smOffset: PropTypes.oneOf(VALID_COL_OFFSETS.sm),
-
-  /**
-   * Offset content by a given column span,
-   * largest offset is 1 less than number of columns.
-   *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
-   */
-  mdOffset: PropTypes.oneOf(VALID_COL_OFFSETS.md),
-
-  /**
-   * Offset content by a given column span,
-   * largest offset is 1 less than number of columns.
-   *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
-   */
-  lgOffset: PropTypes.oneOf(VALID_COL_OFFSETS.lgPlus),
-
-  /**
-   * Offset content by a given column span,
-   * largest offset is 1 less than number of columns.
-   *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
-   */
-  xlgOffset: PropTypes.oneOf(VALID_COL_OFFSETS.lgPlus),
-
-  /**
-   * Offset content by a given column span,
-   * largest offset is 1 less than number of columns.
-   *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
-   */
-  maxOffset: PropTypes.oneOf(VALID_COL_OFFSETS.lgPlus),
 
   /** Remove horizontal padding on the Grid Col */
   noGutter: PropTypes.oneOf([false, true, 'left', 'right']),

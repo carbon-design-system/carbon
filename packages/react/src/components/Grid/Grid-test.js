@@ -146,18 +146,7 @@ describe('<Grid.Col />', () => {
     );
     const wrapperNoGutter = shallow(<Grid.Col noGutter />);
     const wrapperAsSection = shallow(<Grid.Col as="section" />);
-    const wrapperSpan = shallow(
-      <Grid.Col sm={4} md={8} lg={10} xlg={12} max={16} />
-    );
-    const wrapperOffset = shallow(
-      <Grid.Col
-        smOffset={4}
-        mdOffset={8}
-        lgOffset={10}
-        xlgOffset={12}
-        maxOffset={16}
-      />
-    );
+    const wrapperBreakpoints = shallow(<Grid.Col />);
 
     it('should support a custom element as the root node', () => {
       expect(wrapperAsSection.is('section')).toEqual(true);
@@ -192,26 +181,127 @@ describe('<Grid.Col />', () => {
       expect(wrapper.find(Child).length).toEqual(1);
     });
 
-    it('should support specifying column span', () => {
-      expect(wrapperSpan.hasClass(`${prefix}--col-sm-4`)).toEqual(true);
-      expect(wrapperSpan.hasClass(`${prefix}--col-md-8`)).toEqual(true);
-      expect(wrapperSpan.hasClass(`${prefix}--col-lg-10`)).toEqual(true);
-      expect(wrapperSpan.hasClass(`${prefix}--col-xlg-12`)).toEqual(true);
-      expect(wrapperSpan.hasClass(`${prefix}--col-max-16`)).toEqual(true);
+    it('should support specifying column span as number', () => {
+      wrapperBreakpoints.setProps({ sm: 4, md: 8, lg: 12, xlg: 12, max: 12 });
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-sm-4`)).toEqual(true);
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-md-8`)).toEqual(true);
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-lg-12`)).toEqual(true);
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-xlg-12`)).toEqual(
+        true
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-max-12`)).toEqual(
+        true
+      );
     });
 
-    it('should support specifying offset', () => {
-      expect(wrapperOffset.hasClass(`${prefix}--offset-sm-4`)).toEqual(true);
-      expect(wrapperOffset.hasClass(`${prefix}--offset-md-8`)).toEqual(true);
-      expect(wrapperOffset.hasClass(`${prefix}--offset-lg-10`)).toEqual(true);
-      expect(wrapperOffset.hasClass(`${prefix}--offset-xlg-12`)).toEqual(true);
-      expect(wrapperOffset.hasClass(`${prefix}--offset-max-16`)).toEqual(true);
+    it('should support specifying column span and offset as object', () => {
+      wrapperBreakpoints.setProps({
+        sm: { span: 4, offset: 3 },
+        md: { span: 8, offset: 7 },
+        lg: { span: 12, offset: 11 },
+        xlg: { span: 12, offset: 11 },
+        max: { span: 12, offset: 11 },
+      });
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-sm-4`)).toEqual(true);
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-md-8`)).toEqual(true);
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-lg-12`)).toEqual(true);
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-xlg-12`)).toEqual(
+        true
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-max-12`)).toEqual(
+        true
+      );
+
+      expect(wrapperBreakpoints.hasClass(`${prefix}--offset-sm-3`)).toEqual(
+        true
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--offset-md-7`)).toEqual(
+        true
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--offset-lg-11`)).toEqual(
+        true
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--offset-xlg-11`)).toEqual(
+        true
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--offset-max-11`)).toEqual(
+        true
+      );
     });
 
-    it('should NOT render offset class when falsey', () => {
-      const offset = 0;
-      wrapper.setProps({ smOffset: offset });
-      expect(wrapper.hasClass(`${prefix}--offset-sm-${offset}`)).toEqual(false);
+    it('should support specifying "auto" span with `"auto"`', () => {
+      wrapperBreakpoints.setProps({
+        sm: 'auto',
+        md: 'auto',
+        lg: 'auto',
+        xlg: 'auto',
+        max: 'auto',
+      });
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-sm--auto`)).toEqual(
+        true
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-md--auto`)).toEqual(
+        true
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-lg--auto`)).toEqual(
+        true
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-xlg--auto`)).toEqual(
+        true
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-max--auto`)).toEqual(
+        true
+      );
+    });
+
+    it('should support specifying "auto" span with `true`', () => {
+      wrapperBreakpoints.setProps({
+        sm: true,
+        md: true,
+        lg: true,
+        xlg: true,
+        max: true,
+      });
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-sm--auto`)).toEqual(
+        true
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-md--auto`)).toEqual(
+        true
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-lg--auto`)).toEqual(
+        true
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-xlg--auto`)).toEqual(
+        true
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-max--auto`)).toEqual(
+        true
+      );
+    });
+
+    it('should NOT render "auto" class when falsey', () => {
+      wrapperBreakpoints.setProps({
+        sm: false,
+        md: false,
+        lg: false,
+        xlg: false,
+        max: false,
+      });
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-sm--auto`)).toEqual(
+        false
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-md--auto`)).toEqual(
+        false
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-lg--auto`)).toEqual(
+        false
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-xlg--auto`)).toEqual(
+        false
+      );
+      expect(wrapperBreakpoints.hasClass(`${prefix}--col-max--auto`)).toEqual(
+        false
+      );
     });
   });
 });
