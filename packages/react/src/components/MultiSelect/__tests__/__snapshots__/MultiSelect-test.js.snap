@@ -55,11 +55,8 @@ exports[`MultiSelect should render 1`] = `
       render={[Function]}
     >
       <Downshift
-        breakingChanges={Object {}}
         defaultHighlightedIndex={null}
-        defaultInputValue=""
         defaultIsOpen={false}
-        defaultSelectedItem={null}
         environment={[Window]}
         getA11yStatusMessage={[Function]}
         highlightedIndex={null}
@@ -71,21 +68,31 @@ exports[`MultiSelect should render 1`] = `
         onSelect={[Function]}
         onStateChange={[Function]}
         onUserAction={[Function]}
-        render={[Function]}
+        scrollIntoView={[Function]}
         selectedItem={Array []}
         selectedItemChanged={[Function]}
         stateReducer={[Function]}
+        suppressRefError={false}
       >
         <ListBox
+          aria-expanded={false}
+          aria-haspopup="listbox"
+          aria-labelledby="downshift-0-label"
+          aria-owns={null}
           className="bx--multi-select"
           disabled={false}
           id="test-multiselect"
           innerRef={[Function]}
           isOpen={false}
           light={false}
+          role="combobox"
           type="default"
         >
           <div
+            aria-expanded={false}
+            aria-haspopup="listbox"
+            aria-labelledby="downshift-0-label"
+            aria-owns={null}
             className="bx--multi-select bx--list-box"
             id="test-multiselect"
             onClick={[Function]}
@@ -95,7 +102,6 @@ exports[`MultiSelect should render 1`] = `
           >
             <ListBoxField
               aria-disabled={false}
-              aria-expanded={false}
               aria-haspopup={true}
               aria-label="open menu"
               data-toggle={true}
@@ -104,6 +110,7 @@ exports[`MultiSelect should render 1`] = `
               onBlur={[Function]}
               onClick={[Function]}
               onKeyDown={[Function]}
+              onKeyUp={[Function]}
               role="button"
               tabIndex="0"
               translateWithId={[Function]}
@@ -112,7 +119,6 @@ exports[`MultiSelect should render 1`] = `
               <div
                 aria-controls={null}
                 aria-disabled={false}
-                aria-expanded={false}
                 aria-haspopup={true}
                 aria-label="Open menu"
                 aria-owns={null}
@@ -121,6 +127,7 @@ exports[`MultiSelect should render 1`] = `
                 onBlur={[Function]}
                 onClick={[Function]}
                 onKeyDown={[Function]}
+                onKeyUp={[Function]}
                 role="button"
                 tabIndex="0"
                 type="button"
