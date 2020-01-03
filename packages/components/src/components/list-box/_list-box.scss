@@ -475,6 +475,30 @@ $list-box-menu-width: rem(300px);
     border-top-color: $ui-03;
   }
 
+  // single disabled option
+  .#{$prefix}--list-box__menu-item[disabled] {
+    background-color: transparent;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: #e0e0e0;
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]:first-child
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: transparent;
+  }
+
+  // When hovering a disabled option, the next option should keep it's border top
+  .#{$prefix}--list-box__menu-item[disabled]:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: #e0e0e0;
+  }
+
   .#{$prefix}--list-box__menu-item__option {
     @include focus-outline('reset');
     display: block;

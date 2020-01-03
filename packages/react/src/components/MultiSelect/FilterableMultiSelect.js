@@ -320,9 +320,9 @@ export default class FilterableMultiSelect extends React.Component {
             itemToString={itemToString}
             onStateChange={this.handleOnStateChange}
             onOuterClick={this.handleOnOuterClick}
-            selectedItem={selectedItems}
-            render={({
-              getButtonProps,
+            selectedItem={selectedItems}>
+            {({
+              getToggleButtonProps,
               getInputProps,
               getItemProps,
               getRootProps,
@@ -357,7 +357,7 @@ export default class FilterableMultiSelect extends React.Component {
                     id={id}
                     disabled={disabled}
                     translateWithId={translateWithId}
-                    {...getButtonProps({ disabled })}>
+                    {...getToggleButtonProps({ disabled })}>
                     {selectedItem.length > 0 && (
                       <ListBox.Selection
                         clearSelection={clearSelection}
@@ -439,7 +439,7 @@ export default class FilterableMultiSelect extends React.Component {
                 </ListBox>
               );
             }}
-          />
+          </Downshift>
         )}
       />
     );

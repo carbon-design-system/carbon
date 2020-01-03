@@ -280,15 +280,15 @@ export default class MultiSelect extends React.Component {
             onChange={onItemChange}
             onStateChange={this.handleOnStateChange}
             onOuterClick={this.handleOnOuterClick}
-            selectedItem={selectedItems}
-            render={({
+            selectedItem={selectedItems}>
+            {({
               getRootProps,
               selectedItem,
               isOpen,
               itemToString,
               highlightedIndex,
               getItemProps,
-              getButtonProps,
+              getToggleButtonProps,
             }) => {
               const className = cx(
                 `${prefix}--multi-select`,
@@ -323,7 +323,7 @@ export default class MultiSelect extends React.Component {
                     disabled={disabled}
                     aria-disabled={disabled}
                     translateWithId={translateWithId}
-                    {...getButtonProps({ disabled })}>
+                    {...getToggleButtonProps({ disabled })}>
                     {selectedItem.length > 0 && (
                       <ListBox.Selection
                         clearSelection={!disabled ? clearSelection : noop}
@@ -382,7 +382,7 @@ export default class MultiSelect extends React.Component {
                 </ListBox>
               );
             }}
-          />
+          </Downshift>
         )}
       />
     );

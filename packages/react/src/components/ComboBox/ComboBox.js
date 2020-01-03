@@ -304,10 +304,10 @@ export default class ComboBox extends React.Component {
         onStateChange={this.handleOnStateChange}
         inputValue={this.state.inputValue || ''}
         itemToString={itemToString}
-        defaultSelectedItem={initialSelectedItem}
+        initialSelectedItem={initialSelectedItem}
         selectedItem={selectedItem}>
         {({
-          getButtonProps,
+          getToggleButtonProps,
           getInputProps,
           getItemProps,
           getRootProps,
@@ -333,7 +333,7 @@ export default class ComboBox extends React.Component {
               id={id}
               disabled={disabled}
               translateWithId={translateWithId}
-              {...getButtonProps({
+              {...getToggleButtonProps({
                 disabled,
                 onClick: this.onToggleClick(isOpen),
               })}>

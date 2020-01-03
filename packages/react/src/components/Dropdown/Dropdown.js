@@ -231,7 +231,7 @@ export default class Dropdown extends React.Component {
           {...downshiftProps}
           onChange={this.handleOnChange}
           itemToString={itemToString}
-          defaultSelectedItem={initialSelectedItem}
+          initialSelectedItem={initialSelectedItem}
           selectedItem={selectedItem}>
           {({
             isOpen,
@@ -239,7 +239,7 @@ export default class Dropdown extends React.Component {
             selectedItem,
             highlightedIndex,
             getRootProps,
-            getButtonProps,
+            getToggleButtonProps,
             getItemProps,
             getLabelProps,
             toggleMenu,
@@ -267,7 +267,7 @@ export default class Dropdown extends React.Component {
                 disabled={disabled}
                 aria-disabled={disabled}
                 translateWithId={translateWithId}
-                {...getButtonProps({
+                {...getToggleButtonProps({
                   onKeyDown: event => {
                     if (match(event, keys.Enter)) {
                       toggleMenu();
@@ -294,7 +294,11 @@ export default class Dropdown extends React.Component {
                       isHighlighted={
                         highlightedIndex === index || selectedItem === item
                       }
-                      {...getItemProps({ item, index })}>
+                      {...getItemProps({
+                        item,
+                        index,
+                        disabled: item.disabled,
+                      })}>
                       {itemToElement ? (
                         <ItemToElement key={itemToString(item)} {...item} />
                       ) : (

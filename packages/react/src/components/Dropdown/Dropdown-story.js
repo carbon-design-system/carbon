@@ -29,6 +29,7 @@ const items = [
   {
     id: 'option-4',
     text: 'Option 4',
+    disabled: true,
   },
 ];
 
