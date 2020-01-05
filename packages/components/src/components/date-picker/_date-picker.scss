@@ -120,7 +120,7 @@
     }
 
     &::placeholder {
-      @include placeholder-colors;
+      color: $text-05;
       opacity: 1;
     }
   }
