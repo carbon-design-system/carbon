@@ -67,7 +67,7 @@ exports[`Dropdown should render 1`] = `
       <ListBox
         className="bx--dropdown"
         disabled={false}
-        id="dropdown-1"
+        id="test-dropdown"
         innerRef={[Function]}
         isOpen={false}
         light={false}
@@ -75,7 +75,7 @@ exports[`Dropdown should render 1`] = `
       >
         <div
           className="bx--dropdown bx--list-box"
-          id="dropdown-1"
+          id="test-dropdown"
           onClick={[Function]}
           onKeyDown={[Function]}
           role="listbox"
@@ -242,7 +242,7 @@ exports[`Dropdown should render custom item components 1`] = `
       <ListBox
         className="bx--dropdown bx--dropdown--open"
         disabled={false}
-        id="dropdown-5"
+        id="test-dropdown"
         innerRef={[Function]}
         isOpen={true}
         light={false}
@@ -250,7 +250,7 @@ exports[`Dropdown should render custom item components 1`] = `
       >
         <div
           className="bx--dropdown bx--dropdown--open bx--list-box bx--list-box--expanded"
-          id="dropdown-5"
+          id="test-dropdown"
           onClick={[Function]}
           onKeyDown={[Function]}
           role="listbox"
@@ -344,11 +344,11 @@ exports[`Dropdown should render custom item components 1`] = `
             </div>
           </ListBoxField>
           <ListBoxMenu
-            aria-labelledby="dropdown-5"
+            aria-labelledby="test-dropdown"
             id="test-dropdown"
           >
             <div
-              aria-labelledby="dropdown-5"
+              aria-labelledby="test-dropdown"
               className="bx--list-box__menu"
               id="test-dropdown__menu"
               role="listbox"
@@ -576,7 +576,7 @@ exports[`Dropdown should render with strings as items 1`] = `
       <ListBox
         className="bx--dropdown bx--dropdown--open"
         disabled={false}
-        id="dropdown-4"
+        id="test-dropdown"
         innerRef={[Function]}
         isOpen={true}
         light={false}
@@ -584,7 +584,7 @@ exports[`Dropdown should render with strings as items 1`] = `
       >
         <div
           className="bx--dropdown bx--dropdown--open bx--list-box bx--list-box--expanded"
-          id="dropdown-4"
+          id="test-dropdown"
           onClick={[Function]}
           onKeyDown={[Function]}
           role="listbox"
@@ -678,11 +678,11 @@ exports[`Dropdown should render with strings as items 1`] = `
             </div>
           </ListBoxField>
           <ListBoxMenu
-            aria-labelledby="dropdown-4"
+            aria-labelledby="test-dropdown"
             id="test-dropdown"
           >
             <div
-              aria-labelledby="dropdown-4"
+              aria-labelledby="test-dropdown"
               className="bx--list-box__menu"
               id="test-dropdown__menu"
               role="listbox"
