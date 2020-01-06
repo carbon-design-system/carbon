@@ -1,2 +1,94 @@
 'squad: system':
-  - ./**/*
+  - '**'
+  - '.*'
+  - '.*/**'
+
+'package: browserslist-config-carbon':
+  - packages/browserslist-config-carbon/**/*
+
+'package: bundler':
+  - packages/bundler/**/*
+
+'package: cli':
+  - packages/cli/**/*
+
+'package: cli-reporter':
+  - packages/cli-reporter/**/*
+
+'package: colors':
+  - packages/colors/**/*
+
+'package: components':
+  - packages/components/**/*
+
+'package: elements':
+  - packages/elements/**/*
+
+'package: eslint-config-carbon':
+  - packages/eslint-config-carbon/**/*
+
+'package: grid':
+  - packages/grid/**/*
+
+'package: icon-build-helpers':
+  - packages/icon-build-helpers/**/*
+
+'package: icon-helpers':
+  - packages/icon-helpers/**/*
+
+'package: icons':
+  - packages/icons/**/*
+
+'package: icons-angular':
+  - packages/icons-angular/**/*
+
+'package: icons-handlebars':
+  - packages/icons-handlebars/**/*
+
+'package: icons-react':
+  - packages/icons-react/**/*
+
+'package: icons-vue':
+  - packages/icons-vue/**/*
+
+'package: import-once':
+  - packages/import-once/**/*
+
+'package: layout':
+  - packages/layout/**/*
+
+'package: motion':
+  - packages/motion/**/*
+
+'package: pictograms':
+  - packages/pictograms/**/*
+
+'package: pictograms-react':
+  - packages/pictograms-react/**/*
+
+'package: react':
+  - packages/react/**/*
+
+'package: react-hooks':
+  - packages/react-hooks/**/*
+
+'package: scss-generator':
+  - packages/scss-generator/**/*
+
+'package: sketch':
+  - packages/sketch/**/*
+
+'package: stylelint-config-elements':
+  - packages/stylelint-config-elements/**/*
+
+'package: text-utils':
+  - packages/text-utils/**/*
+
+'package: themes':
+  - packages/themes/**/*
+
+'package: type':
+  - packages/type/**/*
+
+'package: upgrade':
+  - packages/upgrade/**/*
