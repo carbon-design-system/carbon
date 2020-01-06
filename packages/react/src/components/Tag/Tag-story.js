@@ -26,7 +26,7 @@ const props = {
       'red'
     ),
     disabled: boolean('Disabled (disabled)', false),
-    title: 'Clear Selection',
+    title: 'Clear Filter',
   }),
   filter() {
     return { ...this.regular(), onClick: action('onClick') };
