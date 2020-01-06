@@ -169,6 +169,7 @@ export default class Search extends Component {
         </label>
         <input
           role="searchbox"
+          autoComplete="off"
           {...other}
           type={type}
           className={`${prefix}--search-input`}

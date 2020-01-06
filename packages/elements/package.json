@@ -1,7 +1,7 @@
 {
   "name": "@carbon/elements",
   "description": "A collection of design elements in code for the IBM Design Language",
-  "version": "10.7.0",
+  "version": "10.9.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -31,17 +31,17 @@
     "clean": "rimraf es lib umd && node tasks/clean.js"
   },
   "dependencies": {
-    "@carbon/colors": "10.5.0",
-    "@carbon/grid": "10.6.0",
-    "@carbon/icons": "10.6.0",
+    "@carbon/colors": "^10.7.0",
+    "@carbon/grid": "^10.8.0",
+    "@carbon/icons": "^10.8.0",
     "@carbon/import-once": "10.3.0",
-    "@carbon/layout": "10.5.0",
-    "@carbon/motion": "10.4.0",
-    "@carbon/themes": "10.7.0",
-    "@carbon/type": "10.6.0"
+    "@carbon/layout": "^10.7.0",
+    "@carbon/motion": "^10.5.0",
+    "@carbon/themes": "^10.9.0",
+    "@carbon/type": "^10.8.0"
   },
   "devDependencies": {
-    "@carbon/bundler": "10.4.0",
+    "@carbon/bundler": "^10.5.0",
     "fs-extra": "^7.0.1",
     "klaw-sync": "^6.0.0",
     "replace-in-file": "^3.4.2",
