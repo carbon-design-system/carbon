@@ -66,6 +66,7 @@ module.exports = {
     }),
     commonjs({
       include: [/node_modules/, /icons-react\/lib/],
+      extensions: ['.js', '.tsx'],
       sourceMap: true,
       namedExports: {
         'react/index.js': [
@@ -81,6 +82,7 @@ module.exports = {
       },
     }),
     babel({
+      extensions: ['.js', '.tsx'],
       exclude: ['node_modules/**'], // only transpile our source code
     }),
     replace({

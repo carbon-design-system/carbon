@@ -12,7 +12,18 @@ import React from 'react';
 
 const { prefix } = settings;
 
-function Accordion({ align, children, className: customClassName, ...rest }) {
+type Props = {
+  align: 'start' | 'end';
+  className?: string;
+  children: React.ReactNode;
+};
+
+const Accordion: React.FC<Props> = ({
+  align,
+  children,
+  className: customClassName,
+  ...rest
+}) => {
   const className = cx(`${prefix}--accordion`, customClassName, {
     [`${prefix}--accordion--${align}`]: align,
   });
@@ -21,7 +32,7 @@ function Accordion({ align, children, className: customClassName, ...rest }) {
       {children}
     </ul>
   );
-}
+};
 
 Accordion.defaultProps = {
   align: 'end',

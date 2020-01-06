@@ -27,18 +27,29 @@ const ignoreGlobs = ['**/__tests__/*', '**/*-test.js', '**/*-story.js'].join(
   ','
 );
 
+const extensions = ['.js', '.tsx'].join(',');
+
 try {
-  exec(`${babelPath} src -q -d es --ignore "${ignoreGlobs}"`, {
-    BABEL_ENV: 'es',
-  });
-  exec(`${babelPath} src -q -d lib --ignore "${ignoreGlobs}"`, {
-    BABEL_ENV: 'cjs',
-  });
+  exec(
+    `${babelPath} src -q -d es --ignore "${ignoreGlobs}" --extensions "${extensions}"`,
+    {
+      BABEL_ENV: 'es',
+    }
+  );
+  exec(
+    `${babelPath} src -q -d lib --ignore "${ignoreGlobs}" --extensions "${extensions}"`,
+    {
+      BABEL_ENV: 'cjs',
+    }
+  );
 
   // Create docgen metadata
-  exec(`${babelPath} src -q -d build/docgen --ignore "${ignoreGlobs}"`, {
-    BABEL_ENV: 'docgen',
-  });
+  exec(
+    `${babelPath} src -q -d build/docgen --ignore "${ignoreGlobs}" --extensions "${extensions}"`,
+    {
+      BABEL_ENV: 'docgen',
+    }
+  );
   fs.writeFileSync(
     'react-docgen.json',
     JSON.stringify(mapValues(require(`../build/docgen`), '__docgenInfo'))

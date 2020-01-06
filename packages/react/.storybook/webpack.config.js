@@ -63,6 +63,11 @@ module.exports = ({ config, mode }) => {
   };
 
   config.module.rules.push({
+    test: /\.(ts|tsx)$/,
+    loader: require.resolve('babel-loader'),
+  });
+
+  config.module.rules.push({
     test: /(\/|\\)FeatureFlags\.js$/,
     loader: 'string-replace-loader',
     options: {
@@ -168,6 +173,7 @@ module.exports = ({ config, mode }) => {
 
   config.resolve = {
     modules: ['node_modules'],
+    extensions: ['.js', '.tsx'],
     plugins: [new FeatureFlagProxyPlugin()],
   };
 
