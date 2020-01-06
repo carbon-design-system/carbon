@@ -17,7 +17,6 @@ const { flatMapAsync } = require('../../tools');
 const { parse } = require('./svgo');
 const optimize = require('./optimize');
 const virtual = require('../plugins/virtual');
-const isWin = process.platform === 'win32';
 
 const prettierOptions = {
   parser: 'babel',
@@ -151,11 +150,7 @@ async function builder(source, { cwd } = {}) {
   for (const file of files) {
     const { moduleName, descriptor } = file;
     const value = JSON.stringify(descriptor);
-    let name = moduleName;
-    if (isWin && moduleName.match(/^\d/)) {
-      name = '_' + moduleName;
-    }
-    entrypoint += `\nexport const ${name} = ${value}`;
+    entrypoint += `\nexport const ${moduleName} = ${value}`;
   }
 
   const entrypointBundle = await rollup({
@@ -214,13 +209,16 @@ async function builder(source, { cwd } = {}) {
 function getModuleName(name, size, prefixParts, descriptor) {
   const width = parseInt(descriptor.attrs.width, 10);
   const height = parseInt(descriptor.attrs.height, 10);
-  const prefix = prefixParts
+  let prefix = prefixParts
     .filter(size => isNaN(size))
     .map(pascal)
     .join('');
   const isGlyph = width < 16 || height < 16;
 
   if (prefix !== '') {
+    if (prefix.match(/^\d/)) {
+      prefix = '_' + prefix;
+    }
     if (!size) {
       if (isGlyph) {
         return prefix + pascal(name) + 'Glyph';

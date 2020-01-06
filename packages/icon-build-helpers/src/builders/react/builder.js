@@ -14,7 +14,6 @@ const path = require('path');
 const { rollup } = require('rollup');
 const babel = require('rollup-plugin-babel');
 const virtual = require('../plugins/virtual');
-const isWin = process.platform === 'win32';
 
 const external = ['@carbon/icon-helpers', 'react', 'prop-types'];
 const babelConfig = {
@@ -54,13 +53,9 @@ async function builder(meta, { cwd }) {
     },
   ];
 
-  const modules = meta.map(icon => {
-    let name = icon.moduleName;
-    if (isWin && name.match(/^\d/)) {
-      name = '_' + icon.moduleName;
-    }
-    return createIconComponent(name, icon.descriptor);
-  });
+  const modules = meta.map(icon =>
+    createIconComponent(icon.moduleName, icon.descriptor)
+  );
 
   const entrypoint = `/**
  * Copyright IBM Corp. 2019, 2019
@@ -127,15 +122,11 @@ export { Icon };
         .fill('..')
         .join('/');
 
-      let name = moduleName;
-      if (isWin && name.match(/^\d/)) {
-        name = '_' + moduleName;
-      }
       await fs.ensureFile(outputOptions.file);
       await fs.writeFile(
         outputOptions.file,
-        `import { ${name} } from '${pathToEntrypoint}';
-export default ${name};
+        `import { ${moduleName} } from '${pathToEntrypoint}';
+export default ${moduleName};
 `
       );
     })
@@ -152,15 +143,11 @@ export default ${name};
     const { descriptor, moduleName, outputOptions } = icon;
     // Drop the first part of `outputOptions.file` as it contains the `es/`
     // directory
-    let name = moduleName;
-    if (isWin && name.match(/^\d/)) {
-      name = '_' + moduleName;
-    }
     const commonjsFilepath = outputOptions.file
       .split(path.sep)
       .slice(1)
       .join('/');
-    const { source: component } = createIconComponent(name, descriptor);
+    const { source: component } = createIconComponent(moduleName, descriptor);
     const source = `/**
  * Copyright IBM Corp. 2019, 2019
  *
@@ -173,7 +160,7 @@ import Icon from './Icon.js';
 
 ${component}
 
-export default ${name};`;
+export default ${moduleName};`;
 
     return {
       ...acc,
