@@ -21918,6 +21918,7 @@ Tag styles
 @mixin tags() {
   .#{$prefix}--tag {
     @include type-style('label-01');
+    @include button-reset($width: false);
 
     display: inline-flex;
     align-items: center;
