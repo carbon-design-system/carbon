@@ -49,15 +49,13 @@ const Tag = ({
           ? `${title} ${children}`
           : `Clear filter ${children}`
       }
+      disabled={disabled}
+      onClick={!disabled ? onClick : undefined}
       {...other}>
-      {children !== null && children !== undefined ? children : TYPES[type]}
-      <button
-        aria-label={title || 'Clear filter'}
-        className={`${prefix}--tag--filter__close-button`}
-        disabled={disabled}
-        onClick={!disabled ? onClick : undefined}>
-        <Close16 />
-      </button>
+      <span className={`${prefix}--tag__label`}>
+        {children !== null && children !== undefined ? children : TYPES[type]}
+      </span>
+      <Close16 />
     </button>
   ) : (
     <button className={tagClasses} {...other}>
