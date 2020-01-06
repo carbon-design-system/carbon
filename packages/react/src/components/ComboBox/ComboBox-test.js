@@ -203,14 +203,10 @@ describe('ComboBox', () => {
     it('should set `inputValue` to an empty string if a falsey-y value is given', () => {
       const wrapper = mount(<ComboBox {...mockProps} />);
 
-      wrapper
-        .instance()
-        .handleOnStateChange({ inputValue: 'foo' }, downshiftActions);
+      wrapper.instance().handleOnInputValueChange('foo', downshiftActions);
       expect(wrapper.state('inputValue')).toBe('foo');
 
-      wrapper
-        .instance()
-        .handleOnStateChange({ inputValue: null }, downshiftActions);
+      wrapper.instance().handleOnInputValueChange(null, downshiftActions);
       expect(wrapper.state('inputValue')).toBe('');
     });
   });
