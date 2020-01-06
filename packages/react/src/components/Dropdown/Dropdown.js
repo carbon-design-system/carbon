@@ -13,7 +13,6 @@ import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { match, keys } from '../../internal/keyboard';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
 
@@ -24,8 +23,6 @@ const defaultItemToString = item => {
 
   return item ? item.label : '';
 };
-
-const getInstanceId = setupGetInstanceId();
 
 export default class Dropdown extends React.Component {
   static propTypes = {
@@ -152,10 +149,6 @@ export default class Dropdown extends React.Component {
     helperText: '',
   };
 
-  constructor(props) {
-    super(props);
-    this.dropdownInstanceId = getInstanceId();
-  }
   handleOnChange = selectedItem => {
     if (this.props.onChange) {
       this.props.onChange({ selectedItem });
@@ -197,7 +190,6 @@ export default class Dropdown extends React.Component {
       [`${prefix}--label--disabled`]: disabled,
     });
 
-    const dropdownId = `dropdown-${this.dropdownInstanceId}`;
     const helperId = !helperText
       ? undefined
       : `dropdown-helper-text-${this.dropdownInstanceId}`;
@@ -205,7 +197,7 @@ export default class Dropdown extends React.Component {
     const fieldLabelId = `dropdown-field-label-${this.dropdownInstanceId}`;
 
     const title = titleText ? (
-      <span id={labelId} className={titleClasses}>
+      <span id={id} className={titleClasses}>
         {titleText}
       </span>
     ) : null;
@@ -266,7 +258,7 @@ export default class Dropdown extends React.Component {
               <ListBox
                 type={type}
                 size={size}
-                id={dropdownId}
+                id={id}
                 aria-label={ariaLabel}
                 className={className({ isOpen })}
                 disabled={disabled}
@@ -300,7 +292,7 @@ export default class Dropdown extends React.Component {
                   />
                 </ListBox.Field>
                 {isOpen && (
-                  <ListBox.Menu aria-labelledby={dropdownId} id={id}>
+                  <ListBox.Menu aria-labelledby={id} id={id}>
                     {items.map((item, index) => (
                       <ListBox.MenuItem
                         key={itemToString(item)}

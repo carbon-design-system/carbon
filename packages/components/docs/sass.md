@@ -2550,6 +2550,11 @@ Convert a given px unit to a rem unit
 
 ```scss
 @function carbon--rem($px) {
+  @if unit($px) != 'px' {
+    // TODO: update to @error in v11
+    @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
+  }
+
   @return ($px / $carbon--base-font-size) * 1rem;
 }
 ```
@@ -2579,6 +2584,11 @@ Convert a given px unit to a em unit
 
 ```scss
 @function carbon--em($px) {
+  @if unit($px) != 'px' {
+    // TODO: update to @error in v11
+    @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
+  }
+
   @return ($px / $carbon--base-font-size) * 1em;
 }
 ```
@@ -11748,7 +11758,7 @@ $productive-heading-07: (
 $expressive-heading-01: map-merge(
   $heading-01,
   (
-    line-height: carbon--rem(20),
+    line-height: carbon--rem(20px),
   )
 );
 ```
@@ -11767,7 +11777,7 @@ $expressive-heading-01: map-merge(
 $expressive-heading-02: map-merge(
   $heading-02,
   (
-    line-height: carbon--rem(24),
+    line-height: carbon--rem(24px),
   )
 );
 ```
@@ -21908,6 +21918,7 @@ Tag styles
 @mixin tags() {
   .#{$prefix}--tag {
     @include type-style('label-01');
+    @include button-reset($width: false);
 
     display: inline-flex;
     align-items: center;
