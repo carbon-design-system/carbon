@@ -10,10 +10,43 @@ import Tag from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
 import { shallow } from 'enzyme';
 import { settings } from 'carbon-components';
+import { render, cleanup } from '@carbon/test-utils/react';
 
 const { prefix } = settings;
 
 describe('Tag', () => {
+  afterEach(cleanup);
+
+  describe('automated accessibility testing', () => {
+    it('should have no Axe violations', async () => {
+      const { container } = render(<Tag>This is not a tag</Tag>);
+      await expect(container).toHaveNoAxeViolations();
+    });
+
+    it('should have no DAP violations', async () => {
+      const { container } = render(
+        <main>
+          <Tag>This is not a tag</Tag>
+        </main>
+      );
+      await expect(container).toHaveNoDAPViolations('Tag');
+    });
+  });
+
+  describe('with a screenreader', () => {
+    it('filtered variant should have appropriate aria-label', () => {
+      const children = 'tag content';
+      const { container } = render(<Tag filter>{children}</Tag>);
+      const button = container.querySelector('[aria-label], [aria-labelledby]');
+      const accessibilityLabel =
+        button.getAttribute('aria-label') ||
+        button.getAttribute('aria-labelledby');
+      // This check would mirror our "Accessibility label must contain at least all of visible label"
+      // requirement
+      expect(accessibilityLabel).toEqual(expect.stringContaining(children));
+    });
+  });
+
   describe('Renders as expected', () => {
     it('should render with the appropriate type', () => {
       const tag = shallow(<Tag type="beta" />);
