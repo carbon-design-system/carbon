@@ -28,6 +28,7 @@ module.exports = () => ({
       'react-css-modules',
       {
         generateScopedName,
+        removeImport: BABEL_ENV === 'docgen',
         webpackHotModuleReloading: true,
         filetypes: {
           '.scss': {
