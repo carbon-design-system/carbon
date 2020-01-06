@@ -35,6 +35,10 @@
     }
   }
 
+  .#{$prefix}--tag--short {
+    height: 1.125rem;
+  }
+
   .#{$prefix}--tag--red {
     @include tag-theme($ibm-color__red-20, $ibm-color__red-70);
   }

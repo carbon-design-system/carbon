@@ -70,6 +70,23 @@ storiesOf('Tag', module)
     }
   )
   .add(
+    'Short',
+    () => (
+      <Tag className="some-class" {...props.filter()} filter short>
+        {text('Content (children)', 'This is not a tag')}
+      </Tag>
+    ),
+    {
+      info: {
+        text: `
+            Tags are used for items that need to be labeled, categorized, or organized using keywords that describe them.
+            The example below shows how the Tag component can be used. Each type has a default message describing the type,
+            but a custom message can also be applied.
+          `,
+      },
+    }
+  )
+  .add(
     'skeleton',
     () => (
       <div>

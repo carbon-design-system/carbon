@@ -31,6 +31,7 @@ const Tag = ({
   className,
   type,
   filter,
+  short,
   title,
   disabled,
   ...other
@@ -39,6 +40,7 @@ const Tag = ({
   const tagClasses = classNames(`${prefix}--tag`, tagClass, className, {
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
+    [`${prefix}--tag--short`]: short,
   });
   return filter ? (
     <span
@@ -82,6 +84,11 @@ Tag.propTypes = {
    * Determine if <Tag> is a filter/chip
    */
   filter: PropTypes.bool,
+
+  /**
+   * Determine if <Tag> is a 18px high
+   */
+  short: PropTypes.bool,
 
   /**
    * Text to show on clear filters
