@@ -300,7 +300,7 @@ describe('FileUploaderDropContainer', () => {
       expect(evt.target.value).toEqual(null);
     });
 
-    it('should call `onAddFiles` when a file is selected', () => {
+    it.only('should call `onAddFiles` when a file is selected', () => {
       const fileFoo = new File(['foo'], 'foo.txt', { type: 'text/plain' });
       const fileBar = new File(['bar'], 'bar.txt', { type: 'text/plain' });
       const mockFiles = [fileFoo, fileBar];
@@ -308,10 +308,14 @@ describe('FileUploaderDropContainer', () => {
       const evt = { target: { files: mockFiles } };
       input.simulate('change', evt);
       expect(onAddFiles).toHaveBeenCalledTimes(1);
-      expect(onAddFiles.mock.calls[0][0].target.files).toEqual([
-        fileFoo,
-        fileBar,
-      ]);
+      expect(onAddFiles).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: {
+            files: [fileFoo, fileBar],
+          },
+        }),
+        { addedFiles: [fileFoo, fileBar] }
+      );
     });
   });
 
