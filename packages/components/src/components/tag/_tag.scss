@@ -135,12 +135,8 @@
   }
 
   .#{$prefix}--tag--short > svg {
-    height: 1.125rem;
-    width: 1.125rem;
-
-    &:hover {
-      height: 1.125rem;
-    }
+    height: 0.875rem;
+    width: 0.875rem;
   }
 }
 
