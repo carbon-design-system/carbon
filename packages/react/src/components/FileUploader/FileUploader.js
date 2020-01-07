@@ -298,6 +298,12 @@ export default class FileUploader extends Component {
     name: PropTypes.string,
 
     /**
+     * Provide an optional `onChange` hook that is called each time the input is
+     * changed
+     */
+    onChange: PropTypes.func,
+
+    /**
      * Provide an optional `onClick` hook that is called each time the button is
      * clicked
      */
@@ -347,7 +353,9 @@ export default class FileUploader extends Component {
         Array.prototype.map.call(evt.target.files, file => file.name)
       ),
     });
-    this.props.onChange(evt);
+    if (this.props.onChange) {
+      this.props.onChange(evt);
+    }
   };
 
   handleClick = (evt, index) => {
