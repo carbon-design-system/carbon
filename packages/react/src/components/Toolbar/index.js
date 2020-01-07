@@ -6,4 +6,5 @@
  */
 
 export * from './Toolbar';
-export default from './Toolbar';
+import Toolbar from './Toolbar';
+export default Toolbar;

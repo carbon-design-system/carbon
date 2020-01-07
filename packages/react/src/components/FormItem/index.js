@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './FormItem';
+import FormItem from './FormItem';
+export default FormItem;

@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './SearchFilterButton';
+import SearchFilterButton from './SearchFilterButton';
+export default SearchFilterButton;

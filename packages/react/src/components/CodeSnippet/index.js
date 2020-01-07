@@ -6,4 +6,5 @@
  */
 
 export * from './CodeSnippet.Skeleton';
-export default from './CodeSnippet';
+import CodeSnippet from './CodeSnippet';
+export default CodeSnippet;

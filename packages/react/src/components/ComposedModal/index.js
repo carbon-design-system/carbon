@@ -6,4 +6,5 @@
  */
 
 export * from './ComposedModal';
-export default from './ComposedModal';
+import ComposedModal from './ComposedModal';
+export default ComposedModal;

@@ -5,5 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './Pagination';
+import Pagination from './Pagination';
+export default Pagination;
 export * from './Pagination.Skeleton';

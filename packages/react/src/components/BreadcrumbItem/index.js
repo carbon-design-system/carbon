@@ -7,4 +7,5 @@
 
 // Alias for `BreadcrumbItem` that has been moved to `Breadcrumb` folder. In
 // older versions of carbon, we had `BreadcrumbItem` in its own folder.
-export default from '../Breadcrumb/BreadcrumbItem';
+import BreadcrumbItem from '../Breadcrumb/BreadcrumbItem';
+export default BreadcrumbItem;

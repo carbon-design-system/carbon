@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './TooltipDefinition';
+import TooltipDefinition from './TooltipDefinition';
+export default TooltipDefinition;

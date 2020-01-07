@@ -6,4 +6,5 @@
  */
 
 export * from './ToggleSmall.Skeleton';
-export default from './ToggleSmall';
+import ToggleSmall from './ToggleSmall';
+export default ToggleSmall;

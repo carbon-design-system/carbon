@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './SearchLayoutButton';
+import SearchLayoutButton from './SearchLayoutButton';
+export default SearchLayoutButton;

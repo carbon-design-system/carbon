@@ -6,4 +6,5 @@
  */
 
 export * from './NumberInput.Skeleton';
-export default from './NumberInput';
+import NumberInput from './NumberInput';
+export default NumberInput;

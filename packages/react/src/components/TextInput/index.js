@@ -8,4 +8,5 @@
 export * from './TextInput.Skeleton';
 export ControlledPasswordInput from './ControlledPasswordInput';
 export PasswordInput from './PasswordInput';
-export default from './TextInput';
+import TextInput from './TextInput';
+export default TextInput;

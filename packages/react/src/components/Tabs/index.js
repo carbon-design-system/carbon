@@ -6,4 +6,5 @@
  */
 
 export * from './Tabs.Skeleton';
-export default from './Tabs';
+import Tabs from './Tabs';
+export default Tabs;

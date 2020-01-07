@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './Tab';
+import Tab from './Tab';
+export default Tab;
