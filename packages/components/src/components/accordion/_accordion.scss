@@ -176,6 +176,12 @@
     }
   }
 
+  .#{$prefix}--accordion--end.#{$prefix}--skeleton
+    .#{$prefix}--accordion__arrow {
+    // Alters `$accordion-arrow-margin` token:
+    margin: 2px $carbon--spacing-03 0 $carbon--spacing-03;
+  }
+
   .#{$prefix}--skeleton
     .#{$prefix}--accordion__heading:focus
     .#{$prefix}--accordion__arrow {
