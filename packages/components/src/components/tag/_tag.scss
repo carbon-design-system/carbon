@@ -132,11 +132,12 @@
 
   .#{$prefix}--tag--short {
     height: 1rem;
+    padding-right: 0.0625rem;
   }
 
   .#{$prefix}--tag--short > svg {
-    height: 1rem;
-    width: 1rem;
+    height: 0.875rem;
+    width: 0.875rem;
     padding: 0;
   }
 
