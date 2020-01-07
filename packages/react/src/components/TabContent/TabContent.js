@@ -22,7 +22,9 @@ const TabContent = props => {
       {...other}
       className={tabContentClasses}
       selected={selected}
-      hidden={!selected}>
+      hidden={!selected}
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+      tabindex="0">
       {children}
     </div>
   );
