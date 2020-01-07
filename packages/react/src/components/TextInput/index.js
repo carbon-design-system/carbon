@@ -6,7 +6,7 @@
  */
 
 export * from './TextInput.Skeleton';
-export ControlledPasswordInput from './ControlledPasswordInput';
-export PasswordInput from './PasswordInput';
+export { default as ControlledPasswordInput } from './ControlledPasswordInput';
+export { default as PasswordInput } from './PasswordInput';
 import TextInput from './TextInput';
 export default TextInput;
