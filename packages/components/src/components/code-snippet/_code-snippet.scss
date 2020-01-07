@@ -247,7 +247,7 @@
   }
 
   // TODO: remove copy button styles above
-  .#{$prefix}--copy-btn {
+  .#{$prefix}--snippet .#{$prefix}--copy-btn {
     position: absolute;
     top: 0;
     right: 0;
