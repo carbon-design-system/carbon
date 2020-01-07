@@ -6,7 +6,7 @@
     "moduleResolution": "node" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,
     // "lib": [],                             /* Specify library files to be included in the compilation. */
     "allowJs": true /* Allow javascript files to be compiled. */,
-    "checkJs": true /* Report errors in .js files. */,
+    // "checkJs": true /* Report errors in .js files. */,
     "jsx": "preserve" /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */,
     // "declaration": true,                   /* Generates corresponding '.d.ts' file. */
     // "declarationMap": true,                /* Generates a sourcemap for each corresponding '.d.ts' file. */
@@ -18,6 +18,7 @@
     // "tsBuildInfoFile": "./",               /* Specify file to store incremental compilation information */
     // "removeComments": true,                /* Do not emit comments to output. */
     "noEmit": true /* Do not emit outputs. */,
+    "skipLibCheck": true,
     // "importHelpers": true,                 /* Import emit helpers from 'tslib'. */
     // "downlevelIteration": true,            /* Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */
     "isolatedModules": true /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */,
