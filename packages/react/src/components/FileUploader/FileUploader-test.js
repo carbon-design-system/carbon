@@ -300,7 +300,7 @@ describe('FileUploaderDropContainer', () => {
       expect(evt.target.value).toEqual(null);
     });
 
-    it.only('should call `onAddFiles` when a file is selected', () => {
+    it('should call `onAddFiles` when a file is selected', () => {
       const fileFoo = new File(['foo'], 'foo.txt', { type: 'text/plain' });
       const fileBar = new File(['bar'], 'bar.txt', { type: 'text/plain' });
       const mockFiles = [fileFoo, fileBar];
