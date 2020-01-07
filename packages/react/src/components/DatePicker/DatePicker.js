@@ -383,6 +383,13 @@ export default class DatePicker extends Component {
     }
   }
 
+  componentDidUpdate({ dateFormat: prevDateFormat }) {
+    const { dateFormat } = this.props;
+    if (this.cal && prevDateFormat !== dateFormat) {
+      this.cal.set({ dateFormat });
+    }
+  }
+
   componentWillUnmount() {
     if (this.cal) {
       this.cal.destroy();
