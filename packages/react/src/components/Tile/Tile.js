@@ -240,7 +240,6 @@ export class SelectableTile extends Component {
   static defaultProps = {
     value: 'value',
     title: 'title',
-    iconDescription: 'Tile checkmark',
     selected: false,
     handleClick: () => {},
     handleKeyDown: () => {},

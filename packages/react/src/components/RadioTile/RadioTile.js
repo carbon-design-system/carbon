@@ -135,7 +135,6 @@ RadioTile.propTypes = {
 };
 
 RadioTile.defaultProps = {
-  iconDescription: 'Tile checkmark',
   onChange: () => {},
   tabIndex: 0,
   light: false,
