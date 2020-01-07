@@ -383,17 +383,23 @@ export default class DatePicker extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const extraProps = ['dateFormat', 'minDate', 'maxDate'];
-    extraProps.forEach(prop => {
-      if (prevProps[prop] !== this.props[prop]) {
-        if (this.cal) {
-          this.cal.set(prop, this.props[prop]);
-        } else if (this.inputField) {
-          this.inputField[prop] = this.props[prop];
-        }
+  componentDidUpdate({
+    dateFormat: prevDateFormat,
+    minDate: prevMinDate,
+    maxDate: prevMaxDate,
+  }) {
+    const { dateFormat, minDate, maxDate } = this.props;
+    if (this.cal) {
+      if (prevDateFormat !== dateFormat) {
+        this.cal.set({ dateFormat });
       }
-    });
+      if (prevMinDate !== minDate) {
+        this.cal.set('minDate', minDate);
+      }
+      if (prevMaxDate !== maxDate) {
+        this.cal.set('maxDate', maxDate);
+      }
+    }
   }
 
   componentWillUnmount() {
