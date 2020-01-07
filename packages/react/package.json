@@ -7,10 +7,12 @@
   "module": "es/index.js",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/react",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "types": "types/index.d.ts",
   "files": [
     "lib/**/*",
     "es/**/*",
-    "umd/**/*"
+    "umd/**/*",
+    "types"
   ],
   "keywords": [
     "react",
@@ -24,9 +26,9 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && node scripts/build.js",
+    "build": "yarn clean && node scripts/build.js && yarn run tsc",
     "build-storybook": "cross-env NODE_ENV=production build-storybook",
-    "clean": "rimraf es lib umd storybook-static build react-docgen.json",
+    "clean": "rimraf es lib umd storybook-static build react-docgen.json types",
     "prepublish": "yarn build",
     "start": "yarn storybook",
     "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000",
