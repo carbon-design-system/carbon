@@ -1,10 +1,10 @@
 {
-  "include": ["src/**/*", "config/typescript/**/*"],
+  "include": ["src/**/*", "types/**/*"],
   "exclude": ["__tests__", "tools"],
   "compilerOptions": {
     "allowJs": true,
     "jsx": "react",
-    "outDir": "types",
+    "outDir": "ts",
     "declaration": true,
     "emitDeclarationOnly": true,
     "esModuleInterop": true,
