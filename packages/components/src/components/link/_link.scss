@@ -32,6 +32,7 @@
     &:hover {
       color: $link-01;
       text-decoration: underline;
+      text-decoration-thickness: 1px;
     }
 
     &:active,
@@ -39,6 +40,7 @@
     &:active:visited:hover {
       color: $text-01;
       text-decoration: underline;
+      text-decoration-thickness: 1px;
     }
 
     &:focus {
@@ -72,6 +74,7 @@
 
   .#{$prefix}--link.#{$prefix}--link--inline {
     text-decoration: underline;
+    text-decoration-thickness: 1px;
 
     &:hover {
       color: $hover-primary-text;
@@ -88,6 +91,7 @@
 
   .#{$prefix}--link--disabled.#{$prefix}--link--inline {
     text-decoration: underline;
+    text-decoration-thickness: 1px;
   }
 }
 
