@@ -2550,6 +2550,11 @@ Convert a given px unit to a rem unit
 
 ```scss
 @function carbon--rem($px) {
+  @if unit($px) != 'px' {
+    // TODO: update to @error in v11
+    @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
+  }
+
   @return ($px / $carbon--base-font-size) * 1rem;
 }
 ```
@@ -2579,6 +2584,11 @@ Convert a given px unit to a em unit
 
 ```scss
 @function carbon--em($px) {
+  @if unit($px) != 'px' {
+    // TODO: update to @error in v11
+    @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
+  }
+
   @return ($px / $carbon--base-font-size) * 1em;
 }
 ```
@@ -3682,6 +3692,7 @@ $spacing-05: $carbon--spacing-05;
 - **Alias**: `carbon--spacing-05`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
@@ -6353,7 +6364,6 @@ $text-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [combo-box [mixin]](#combo-box-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
@@ -6447,9 +6457,11 @@ $text-05: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [combo-box [mixin]](#combo-box-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [form [mixin]](#form-mixin)
   - [search [mixin]](#search-mixin)
-  - [text-area [mixin]](#text-area-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -11746,7 +11758,7 @@ $productive-heading-07: (
 $expressive-heading-01: map-merge(
   $heading-01,
   (
-    line-height: carbon--rem(20),
+    line-height: carbon--rem(20px),
   )
 );
 ```
@@ -11765,7 +11777,7 @@ $expressive-heading-01: map-merge(
 $expressive-heading-02: map-merge(
   $heading-02,
   (
-    line-height: carbon--rem(24),
+    line-height: carbon--rem(24px),
   )
 );
 ```
@@ -13481,8 +13493,9 @@ Code snippet styles
   // expanded snippet container
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
     .#{$prefix}--snippet-container {
-    max-height: rem(1500px);
+    max-height: 100%;
     transition: max-height $duration--moderate-01 motion(standard, productive);
+    padding-bottom: $spacing-05;
   }
 
   // closed pre
@@ -13783,6 +13796,7 @@ Code snippet styles
   - [spacing-03 [variable]](#spacing-03-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [hover-ui [variable]](#hover-ui-variable)
@@ -13826,8 +13840,7 @@ Combo box styles
 @mixin combo-box() {
   .#{$prefix}--combo-box .#{$prefix}--text-input {
     &::placeholder {
-      color: $text-02;
-      opacity: 1;
+      color: $text-05;
     }
 
     &[disabled]::placeholder {
@@ -13853,7 +13866,7 @@ Combo box styles
 - **Group**: [combo-box](#combo-box)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [text-02 [variable]](#text-02-variable)
+  - [text-05 [variable]](#text-05-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
 
@@ -15843,7 +15856,7 @@ Date picker styles
     }
 
     &::placeholder {
-      @include placeholder-colors;
+      color: $text-05;
       opacity: 1;
     }
   }
@@ -16226,6 +16239,7 @@ Date picker styles
   - [text-01 [variable]](#text-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [text-05 [variable]](#text-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [ui-01 [variable]](#ui-01-variable)
@@ -21904,6 +21918,7 @@ Tag styles
 @mixin tags() {
   .#{$prefix}--tag {
     @include type-style('label-01');
+    @include button-reset($width: false);
 
     display: inline-flex;
     align-items: center;
@@ -22085,7 +22100,7 @@ Text area styles
   }
 
   .#{$prefix}--text-area::placeholder {
-    color: $text-05;
+    @include placeholder-colors;
     @include type-style('body-long-01');
     opacity: 1;
   }
@@ -22147,7 +22162,6 @@ Text area styles
   - [ui-04 [variable]](#ui-04-variable)
   - [support-01 [variable]](#support-01-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
-  - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
@@ -22550,6 +22564,10 @@ Time picker styles
     height: rem(40px);
     transition: outline $duration--fast-01 motion(standard, productive), background-color
         $duration--fast-01 motion(standard, productive);
+
+    &::placeholder {
+      color: $text-05;
+    }
   }
 }
 ```
@@ -22560,6 +22578,7 @@ Time picker styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
+  - [text-05 [variable]](#text-05-variable)
 
 ## toggle
 
