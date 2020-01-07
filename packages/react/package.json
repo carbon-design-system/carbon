@@ -29,7 +29,8 @@
     "clean": "rimraf es lib umd storybook-static build react-docgen.json",
     "prepublish": "yarn build",
     "start": "yarn storybook",
-    "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000"
+    "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000",
+    "tsc": "tsc"
   },
   "peerDependencies": {
     "carbon-components": "^10.9.0",
@@ -119,6 +120,7 @@
     "storybook-readme": "^5.0.8",
     "string-replace-loader": "^2.1.0",
     "terser-webpack-plugin": "^1.1.0",
+    "typescript": "^3.7.4",
     "webpack": "^4.25.1",
     "whatwg-fetch": "^2.0.3"
   },
