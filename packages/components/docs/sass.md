@@ -3692,6 +3692,7 @@ $spacing-05: $carbon--spacing-05;
 - **Alias**: `carbon--spacing-05`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
@@ -13369,6 +13370,17 @@ Checkbox styles
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'][data-contained-checkbox-disabled='true']::before {
     background-color: $disabled-02;
   }
+
+  //-----------------------------------------------
+  // Skeleton
+  //-----------------------------------------------
+
+  .#{$prefix}--checkbox-label-text.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(100px);
+    height: $spacing-05;
+    margin: auto 0;
+  }
 }
 ```
 
@@ -13384,6 +13396,7 @@ Checkbox styles
   - [icon-01 [variable]](#icon-01-variable)
   - [focus [variable]](#focus-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
 
 ## code-snippet
 
