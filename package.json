@@ -150,15 +150,10 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "packages/**/src/**/*.js",
+      "packages/**/src/**/*.{js,tsx}",
       "!packages/{bundler,cli,components,sketch}/**",
       "!packages/**/{examples,stories}/**",
       "!**/*-story.js"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "node"
     ],
     "reporters": [
       "default",
@@ -174,9 +169,9 @@
       "enzyme-to-json/serializer"
     ],
     "testMatch": [
-      "<rootDir>/**/__tests__/**/*.js?(x)",
-      "<rootDir>/**/?(*.)(spec|test).js?(x)",
-      "<rootDir>/**/?(*-)(spec|test).js?(x)"
+      "<rootDir>/**/__tests__/**/*.[jt]s?(x)",
+      "<rootDir>/**/?(*.)(spec|test).[jt]s?(x)",
+      "<rootDir>/**/?(*-)(spec|test).[jt]s?(x)"
     ],
     "transform": {
       "^.+\\.(js|jsx)$": "./tasks/jest/jsTransform.js",
@@ -186,6 +181,7 @@
     "testRunner": "jest-circus/runner",
     "testPathIgnorePatterns": [
       "/cjs/",
+      "/ts/",
       "/dist/",
       "/es/",
       "/lib/",
@@ -199,6 +195,7 @@
     ],
     "watchPathIgnorePatterns": [
       "/cjs/",
+      "/ts/",
       "/dist/",
       "/es/",
       "/examples/",
