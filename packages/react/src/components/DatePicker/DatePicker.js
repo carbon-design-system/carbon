@@ -383,6 +383,13 @@ export default class DatePicker extends Component {
     }
   }
 
+  componentDidUpdate({ dateFormat: prevDateFormat }) {
+    const { dateFormat } = this.props;
+    if (this.cal && prevDateFormat !== dateFormat) {
+      this.cal.set({ dateFormat });
+    }
+  }
+
   componentWillUnmount() {
     if (this.cal) {
       this.cal.destroy();
@@ -412,6 +419,7 @@ export default class DatePicker extends Component {
           (
             cal.selectedDateElem ||
             cal.todayDateElem ||
+            cal.calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
             cal.calendarContainer
           ).focus();
         }
@@ -429,6 +437,7 @@ export default class DatePicker extends Component {
           (
             cal.selectedDateElem ||
             cal.todayDateElem ||
+            cal.calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
             cal.calendarContainer
           ).focus();
         }

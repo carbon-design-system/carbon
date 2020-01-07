@@ -66,6 +66,22 @@
     }
   }
 
+  .#{$prefix}--dropdown--xl {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--dropdown--xl .#{$prefix}--dropdown__arrow {
+    top: rem(16px);
+  }
+
+  .#{$prefix}--dropdown--sm {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--dropdown--sm .#{$prefix}--dropdown__arrow {
+    top: rem(8px);
+  }
+
   .#{$prefix}--dropdown--open {
     border-bottom-color: $ui-03;
   }
@@ -138,9 +154,7 @@
   .#{$prefix}--dropdown-text {
     @include type-style('body-short-01');
     display: block;
-    height: rem(40px);
-    padding-top: $carbon--spacing-04;
-    padding-bottom: $carbon--spacing-04;
+    height: calc(100% + 1px); // Account for the border in `.bx--dropdown`
     padding-left: $carbon--spacing-05;
     padding-right: rem(42px); // 2rem + SVG width
     white-space: nowrap;

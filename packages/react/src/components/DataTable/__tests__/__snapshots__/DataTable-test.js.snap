@@ -62,7 +62,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
             >
               <TableHead>
                 <TableRow>
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -71,8 +71,8 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -81,7 +81,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -334,7 +334,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
             >
               <TableHead>
                 <TableRow>
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -343,8 +343,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -353,7 +353,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -851,7 +851,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     name="select-all"
                     onSelect={[Function]}
                   />
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -860,8 +860,8 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -870,7 +870,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -1178,7 +1178,7 @@ exports[`DataTable selection should render 1`] = `
                     name="select-all"
                     onSelect={[Function]}
                   />
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -1187,8 +1187,8 @@ exports[`DataTable selection should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -1197,7 +1197,7 @@ exports[`DataTable selection should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -1863,7 +1863,7 @@ exports[`DataTable should render 1`] = `
             >
               <TableHead>
                 <TableRow>
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -1872,8 +1872,8 @@ exports[`DataTable should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -1882,7 +1882,7 @@ exports[`DataTable should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -2285,6 +2285,7 @@ exports[`DataTable should render 1`] = `
                       </label>
                       <input
                         aria-hidden={true}
+                        autoComplete="off"
                         className="bx--search-input"
                         id="custom-id"
                         onChange={[Function]}
@@ -2342,8 +2343,10 @@ exports[`DataTable should render 1`] = `
                 }
               >
                 <ForwardRef(OverflowMenu)
+                  ariaLabel="Settings"
                   className="bx--toolbar-action bx--overflow-menu"
                   flipped={true}
+                  iconDescription="Settings"
                   renderIcon={
                     Object {
                       "$$typeof": Symbol(react.forward_ref),
@@ -2353,11 +2356,11 @@ exports[`DataTable should render 1`] = `
                   title="Settings"
                 >
                   <OverflowMenu
-                    ariaLabel="Menu"
+                    ariaLabel="Settings"
                     className="bx--toolbar-action bx--overflow-menu"
                     direction="bottom"
                     flipped={true}
-                    iconDescription="open and close list of options"
+                    iconDescription="Settings"
                     innerRef={null}
                     light={false}
                     menuOffset={[Function]}
@@ -2379,28 +2382,27 @@ exports[`DataTable should render 1`] = `
                     <ClickListener
                       onClickOutside={[Function]}
                     >
-                      <div
+                      <button
                         aria-expanded={false}
                         aria-haspopup={true}
-                        aria-label="Menu"
+                        aria-label="Settings"
                         className="bx--toolbar-action bx--overflow-menu bx--overflow-menu"
                         onClick={[Function]}
                         onClose={[Function]}
                         onKeyDown={[Function]}
                         open={false}
-                        role="button"
                         tabIndex={0}
                         title="Settings"
                       >
                         <ForwardRef(Settings16)
-                          aria-label="open and close list of options"
+                          aria-label="Settings"
                           className="bx--overflow-menu__icon"
                           focusable="false"
                           onClick={[Function]}
                           onKeyDown={[Function]}
                         >
                           <Icon
-                            aria-label="open and close list of options"
+                            aria-label="Settings"
                             className="bx--overflow-menu__icon"
                             focusable="false"
                             height={16}
@@ -2412,7 +2414,7 @@ exports[`DataTable should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-label="open and close list of options"
+                              aria-label="Settings"
                               className="bx--overflow-menu__icon"
                               focusable="false"
                               height={16}
@@ -2436,12 +2438,12 @@ exports[`DataTable should render 1`] = `
                                 d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8	c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"
                               />
                               <title>
-                                open and close list of options
+                                Settings
                               </title>
                             </svg>
                           </Icon>
                         </ForwardRef(Settings16)>
-                      </div>
+                      </button>
                     </ClickListener>
                   </OverflowMenu>
                 </ForwardRef(OverflowMenu)>
@@ -2837,7 +2839,7 @@ exports[`DataTable sticky header should render 1`] = `
             >
               <TableHead>
                 <TableRow>
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -2846,8 +2848,8 @@ exports[`DataTable sticky header should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -2856,7 +2858,7 @@ exports[`DataTable sticky header should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -3261,6 +3263,7 @@ exports[`DataTable sticky header should render 1`] = `
                       </label>
                       <input
                         aria-hidden={true}
+                        autoComplete="off"
                         className="bx--search-input"
                         id="custom-id"
                         onChange={[Function]}
@@ -3318,8 +3321,10 @@ exports[`DataTable sticky header should render 1`] = `
                 }
               >
                 <ForwardRef(OverflowMenu)
+                  ariaLabel="Settings"
                   className="bx--toolbar-action bx--overflow-menu"
                   flipped={true}
+                  iconDescription="Settings"
                   renderIcon={
                     Object {
                       "$$typeof": Symbol(react.forward_ref),
@@ -3329,11 +3334,11 @@ exports[`DataTable sticky header should render 1`] = `
                   title="Settings"
                 >
                   <OverflowMenu
-                    ariaLabel="Menu"
+                    ariaLabel="Settings"
                     className="bx--toolbar-action bx--overflow-menu"
                     direction="bottom"
                     flipped={true}
-                    iconDescription="open and close list of options"
+                    iconDescription="Settings"
                     innerRef={null}
                     light={false}
                     menuOffset={[Function]}
@@ -3355,28 +3360,27 @@ exports[`DataTable sticky header should render 1`] = `
                     <ClickListener
                       onClickOutside={[Function]}
                     >
-                      <div
+                      <button
                         aria-expanded={false}
                         aria-haspopup={true}
-                        aria-label="Menu"
+                        aria-label="Settings"
                         className="bx--toolbar-action bx--overflow-menu bx--overflow-menu"
                         onClick={[Function]}
                         onClose={[Function]}
                         onKeyDown={[Function]}
                         open={false}
-                        role="button"
                         tabIndex={0}
                         title="Settings"
                       >
                         <ForwardRef(Settings16)
-                          aria-label="open and close list of options"
+                          aria-label="Settings"
                           className="bx--overflow-menu__icon"
                           focusable="false"
                           onClick={[Function]}
                           onKeyDown={[Function]}
                         >
                           <Icon
-                            aria-label="open and close list of options"
+                            aria-label="Settings"
                             className="bx--overflow-menu__icon"
                             focusable="false"
                             height={16}
@@ -3388,7 +3392,7 @@ exports[`DataTable sticky header should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-label="open and close list of options"
+                              aria-label="Settings"
                               className="bx--overflow-menu__icon"
                               focusable="false"
                               height={16}
@@ -3412,12 +3416,12 @@ exports[`DataTable sticky header should render 1`] = `
                                 d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8	c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"
                               />
                               <title>
-                                open and close list of options
+                                Settings
                               </title>
                             </svg>
                           </Icon>
                         </ForwardRef(Settings16)>
-                      </div>
+                      </button>
                     </ClickListener>
                   </OverflowMenu>
                 </ForwardRef(OverflowMenu)>

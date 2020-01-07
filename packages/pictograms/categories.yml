@@ -46,7 +46,7 @@ categories:
       - beijing--municipal
       - beijing--tower
       - berlin--brandenburg--gate
-      - berlin--brandenburg #DEPRECATED: use berlin--brandenberg--gate instead
+      - berlin--brandenburg #DEPRECATED: use berlin--brandenburg--gate instead
       - berlin--cathedral
       - berlin--tower
       - copenhagen--planetarium
