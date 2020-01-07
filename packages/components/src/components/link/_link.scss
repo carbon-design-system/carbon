@@ -73,11 +73,12 @@
   }
 
   .#{$prefix}--link.#{$prefix}--link--inline {
+    color: currentColor;
     text-decoration: underline;
     text-decoration-thickness: 1px;
 
     &:hover {
-      color: $hover-primary-text;
+      color: currentColor;
     }
 
     &:focus {
