@@ -197,7 +197,7 @@ export default class Dropdown extends React.Component {
     const fieldLabelId = `dropdown-field-label-${this.dropdownInstanceId}`;
 
     const title = titleText ? (
-      <span id={id} className={titleClasses}>
+      <span className={titleClasses}>
         {titleText}
       </span>
     ) : null;
