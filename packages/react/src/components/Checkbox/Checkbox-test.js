@@ -163,7 +163,7 @@ describe('CheckboxSkeleton', () => {
       });
 
       it('has the expected classes', () => {
-        expect(label.hasClass(`${prefix}--checkbox-label`)).toEqual(true);
+        expect(label.hasClass(`${prefix}--checkbox-label-text`)).toEqual(true);
         expect(label.hasClass(`${prefix}--skeleton`)).toEqual(true);
       });
     });
