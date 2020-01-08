@@ -10,6 +10,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash.debounce';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
+import { composeEventHandlers } from '../../tools/events';
 
 const { prefix } = settings;
 
@@ -33,20 +34,13 @@ export default function Copy({
     }, feedbackTimeout),
     [feedbackTimeout]
   );
-  const handleClick = useCallback(
-    event => {
-      setAnimation('fade-in');
-      onClick(event);
-      handleFadeOut();
-    },
-    [onClick, handleFadeOut]
-  );
+  const handleClick = useCallback(() => {
+    setAnimation('fade-in');
+    handleFadeOut();
+  }, [handleFadeOut]);
   const handleAnimationEnd = event => {
     if (event.animationName === 'hide-feedback') {
       setAnimation('');
-    }
-    if (onAnimationEnd) {
-      onAnimationEnd(event);
     }
   };
 
@@ -61,8 +55,11 @@ export default function Copy({
     <button
       type="button"
       className={classNames}
-      onClick={handleClick}
-      onAnimationEnd={handleAnimationEnd}
+      onClick={composeEventHandlers([onClick, handleClick])}
+      onAnimationEnd={composeEventHandlers([
+        onAnimationEnd,
+        handleAnimationEnd,
+      ])}
       {...other}>
       {children}
       <span
