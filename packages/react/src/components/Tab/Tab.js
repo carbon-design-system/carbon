@@ -16,6 +16,11 @@ const { prefix } = settings;
 export default class Tab extends React.Component {
   static propTypes = {
     /**
+     * The element ID for the top-level element.
+     */
+    id: PropTypes.string,
+
+    /**
      * Specify an optional className to be added to your Tab
      */
     className: PropTypes.string,
@@ -122,6 +127,7 @@ export default class Tab extends React.Component {
 
   render() {
     const {
+      id,
       className,
       handleTabClick,
       handleTabAnchorFocus, // eslint-disable-line
@@ -158,6 +164,7 @@ export default class Tab extends React.Component {
 
     return (
       <li
+        id={id}
         {...other}
         tabIndex={-1}
         className={classes}
@@ -177,7 +184,8 @@ export default class Tab extends React.Component {
           onKeyDown(evt);
         }}
         role="presentation"
-        selected={selected}>
+        selected={selected}
+        aria-controls={`${id}__panel`}>
         {renderAnchor ? (
           renderAnchor(anchorProps)
         ) : (

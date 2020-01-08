@@ -19,6 +19,7 @@ const TabContent = props => {
   });
   return (
     <div
+      role="tabpanel"
       {...other}
       className={tabContentClasses}
       selected={selected}

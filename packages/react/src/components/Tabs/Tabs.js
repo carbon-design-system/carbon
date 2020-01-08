@@ -234,14 +234,21 @@ export default class Tabs extends React.Component {
     });
 
     const tabContentWithProps = React.Children.map(tabsWithProps, tab => {
-      const { children, selected, renderContent: TabContent } = tab.props;
+      const {
+        id: tabId,
+        children,
+        selected,
+        renderContent: TabContent,
+      } = tab.props;
 
       return (
         <TabContent
+          id={!tabId ? undefined : `${tabId}__panel`}
           className={tabContentClassName}
           aria-hidden={!selected}
           hidden={!selected}
-          selected={selected}>
+          selected={selected}
+          aria-labelledby={tabId}>
           {children}
         </TabContent>
       );
