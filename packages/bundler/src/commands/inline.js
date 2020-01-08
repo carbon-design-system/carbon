@@ -126,12 +126,7 @@ async function inlineSassDependencies(
 function findSassModule(packageName, cwd) {
   let currentDirectory = cwd;
 
-  const isNotRoot = () =>
-    isWin
-      ? !/^[a-zA-Z]:(\/\/|\\)$/.test(currentDirectory)
-      : currentDirectory !== '/';
-
-  while (isNotRoot()) {
+  while (currentDirectory !== path.dirname(currentDirectory)) {
     const nodeModulesFolder = path.join(currentDirectory, 'node_modules');
     const packageFolder = path.join(nodeModulesFolder, packageName);
     const scssFolder = path.join(packageFolder, 'scss');
