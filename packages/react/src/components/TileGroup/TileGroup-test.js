@@ -31,6 +31,11 @@ describe('TileGroup', () => {
         expect(div.hasClass('extra-class'));
       });
 
+      it('sets classes that are passed via wrapperClassName prop', () => {
+        wrapper.setProps({ wrapperClassName: 'extra-class' });
+        expect(div.first('div').hasClass('extra-class'));
+      });
+
       it('sets disabled attribute if disabled prop is set', () => {
         wrapper.setProps({ disabled: true });
         expect(wrapper.first().props().disabled).toEqual(true);

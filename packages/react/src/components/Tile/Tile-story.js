@@ -56,6 +56,7 @@ const props = {
       ''
     ),
     onChange: action('onChange'),
+    wrapperClassName: text('wrapperClassName', ''),
   }),
   radio: () => ({
     name: text('Form item name (name in <RadioTile>)', 'tiles'),

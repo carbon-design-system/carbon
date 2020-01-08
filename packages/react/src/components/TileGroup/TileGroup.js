@@ -31,6 +31,11 @@ export default class TileGroup extends React.Component {
     className: PropTypes.string,
 
     /**
+     * Provide an optional className to be applied to the node wrapping around the RadioTiles
+     */
+    wrapperClassName: PropTypes.string,
+
+    /**
      * Specify the the value of <RadioTile> to be selected by default
      */
     defaultSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -122,12 +127,13 @@ export default class TileGroup extends React.Component {
       disabled,
       className = `${prefix}--tile-group`,
       legend,
+      wrapperClassName,
     } = this.props;
 
     return (
       <fieldset className={className} disabled={disabled}>
         {this.renderLegend(legend)}
-        <div>{this.getRadioTiles()}</div>
+        <div className={wrapperClassName}>{this.getRadioTiles()}</div>
       </fieldset>
     );
   }
