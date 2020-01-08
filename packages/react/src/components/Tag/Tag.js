@@ -33,7 +33,6 @@ const Tag = ({
   filter,
   title,
   disabled,
-  onClick,
   ...other
 }) => {
   const tagClass = `${prefix}--tag--${type}`;
@@ -50,7 +49,6 @@ const Tag = ({
           : `Clear filter ${children}`
       }
       disabled={disabled}
-      onClick={!disabled ? onClick : undefined}
       {...other}>
       <span className={`${prefix}--tag__label`}>
         {children !== null && children !== undefined ? children : TYPES[type]}
