@@ -2,7 +2,7 @@
 name: "Feature request or enhancement 💡"
 about: Suggest an idea for this project
 title: ''
-labels: "type: enhancement 💡", "squad: system"
+labels: "type: enhancement 💡, squad: system"
 assignees: ''
 ---
 
