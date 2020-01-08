@@ -254,21 +254,26 @@ describe('Tabs', () => {
       });
 
       describe('ignore disabled child tab', () => {
-        const wrapper = mount(
-          <Tabs>
-            <Tab label="firstTab" className="firstTab">
-              content1
-            </Tab>
-            <Tab label="middleTab" className="middleTab" disabled>
-              content2
-            </Tab>
-            <Tab label="lastTab" className="lastTab">
-              content3
-            </Tab>
-          </Tabs>
-        );
-        const firstTab = wrapper.find('.firstTab').last();
-        const lastTab = wrapper.find('.lastTab').last();
+        let wrapper;
+        let firstTab;
+        let lastTab;
+        beforeEach(() => {
+          wrapper = mount(
+            <Tabs>
+              <Tab label="firstTab" className="firstTab">
+                content1
+              </Tab>
+              <Tab label="middleTab" className="middleTab" disabled>
+                content2
+              </Tab>
+              <Tab label="lastTab" className="lastTab">
+                content3
+              </Tab>
+            </Tabs>
+          );
+          firstTab = wrapper.find('.firstTab').last();
+          lastTab = wrapper.find('.lastTab').last();
+        });
         it('updates selected state when pressing arrow keys', () => {
           firstTab.simulate('keydown', { which: rightKey });
           expect(wrapper.state().selected).toEqual(2);
