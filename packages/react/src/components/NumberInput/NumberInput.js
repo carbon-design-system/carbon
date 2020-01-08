@@ -223,6 +223,7 @@ class NumberInput extends Component {
 
     if (!disabled && conditional) {
       value = direction === 'down' ? value - step : value + step;
+      value = capMax(max, capMin(min, value));
       evt.persist();
       evt.imaginaryTarget = this._inputRef;
       this.setState(
@@ -298,7 +299,7 @@ class NumberInput extends Component {
           ? value
           : this.state.value,
       readOnly,
-      'aria-label': ariaLabel,
+      'aria-label': label ? null : ariaLabel,
     };
 
     const buttonProps = {
@@ -309,7 +310,12 @@ class NumberInput extends Component {
     const inputWrapperProps = {};
     let errorId = null;
     let error = null;
-    if (invalid || (!allowEmpty && this.state.value === '')) {
+    if (
+      invalid ||
+      (!allowEmpty && this.state.value === '') ||
+      this.state.value > max ||
+      this.state.value < min
+    ) {
       inputWrapperProps['data-invalid'] = true;
       errorId = `${id}-error-id`;
       error = (
@@ -395,10 +401,7 @@ class NumberInput extends Component {
                     ref={mergeRefs(ref, this._handleInputRef)}
                   />
                   {invalid && (
-                    <WarningFilled16
-                      className={`${prefix}--number__invalid`}
-                      role="img"
-                    />
+                    <WarningFilled16 className={`${prefix}--number__invalid`} />
                   )}
                   <div className={`${prefix}--number__controls`}>
                     <button

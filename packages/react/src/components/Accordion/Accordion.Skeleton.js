@@ -15,8 +15,10 @@ import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
-function AccordionSkeleton({ open, count, className, ...rest }) {
-  const classes = cx(`${prefix}--accordion`, `${prefix}--skeleton`, className);
+function AccordionSkeleton({ align, open, count, className, ...rest }) {
+  const classes = cx(`${prefix}--accordion`, `${prefix}--skeleton`, className, {
+    [`${prefix}--accordion--${align}`]: align,
+  });
   const numSkeletonItems = open ? count - 1 : count;
   return (
     <ul className={classes} {...rest}>
@@ -61,11 +63,17 @@ AccordionSkeleton.propTypes = {
    * Specify an optional className to add.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify the alignment of the accordion heading title and chevron.
+   */
+  align: PropTypes.oneOf(['start', 'end']),
 };
 
 AccordionSkeleton.defaultProps = {
   open: true,
   count: 4,
+  align: 'end',
 };
 
 function AccordionSkeletonItem() {

@@ -112,7 +112,11 @@ Button.propTypes = {
    * Specify how the button itself should be rendered.
    * Make sure to apply all props to the root node and render children appropriately
    */
-  as: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  as: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.string,
+    PropTypes.elementType,
+  ]),
 
   /**
    * Specify an optional className to be added to your Button

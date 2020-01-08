@@ -155,6 +155,11 @@ export default class ComboBox extends React.Component {
     type: ListBoxPropTypes.ListBoxType,
 
     /**
+     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+     */
+    size: ListBoxPropTypes.ListBoxSize,
+
+    /**
      * Callback function to notify consumer when the text input changes.
      * This provides support to change available items based on the text.
      * @param {string} inputText
@@ -215,24 +220,26 @@ export default class ComboBox extends React.Component {
     }
   };
 
+  handleOnInputValueChange = inputValue => {
+    const { onInputChange } = this.props;
+
+    this.setState(
+      () => ({
+        // Default to empty string if we have a false-y `inputValue`
+        inputValue: inputValue || '',
+      }),
+      () => {
+        if (onInputChange) {
+          onInputChange(inputValue);
+        }
+      }
+    );
+  };
+
   handleOnStateChange = (newState, { setHighlightedIndex }) => {
     if (Object.prototype.hasOwnProperty.call(newState, 'inputValue')) {
       const { inputValue } = newState;
-      const { onInputChange } = this.props;
-
       setHighlightedIndex(findHighlightedIndex(this.props, inputValue));
-
-      this.setState(
-        () => ({
-          // Default to empty string if we have a false-y `inputValue`
-          inputValue: inputValue || '',
-        }),
-        () => {
-          if (onInputChange) {
-            onInputChange(inputValue);
-          }
-        }
-      );
     }
   };
 
@@ -262,6 +269,7 @@ export default class ComboBox extends React.Component {
       invalidText,
       light,
       type, // eslint-disable-line no-unused-vars
+      size,
       shouldFilterItem, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onInputChange, // eslint-disable-line no-unused-vars
@@ -295,6 +303,7 @@ export default class ComboBox extends React.Component {
       <Downshift
         {...downshiftProps}
         onChange={this.handleOnChange}
+        onInputValueChange={this.handleOnInputValueChange}
         onStateChange={this.handleOnStateChange}
         inputValue={this.state.inputValue || ''}
         itemToString={itemToString}
@@ -321,6 +330,7 @@ export default class ComboBox extends React.Component {
             invalidText={invalidText}
             isOpen={isOpen}
             light={light}
+            size={size}
             {...getRootProps({ refKey: 'innerRef' })}>
             <ListBox.Field
               id={id}
