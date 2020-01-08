@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 import meta from '../../build-info.json';
 
 const GITHUB_ICON_URL =
-  'https://github.com/IBM/carbon-elements/tree/master/packages/icons/src/svg';
+  'https://github.com/carbon-design-system/carbon/tree/master/packages/icons/svg';
 
 function App({ meta }) {
   const headers = ['Name', 'Size', 'Preview', 'GitHub', 'Issues', 'Path'];
@@ -232,7 +232,7 @@ function format(attrs) {
 }
 
 function getBugTemplate(info, source) {
-  const url = new URL('https://github.com/IBM/carbon-elements/issues/new');
+  const url = new URL('https://github.com/carbon-design-system/carbon/issues/new');
   const params = new URLSearchParams();
   params.append('title', `🔍 Visual bug for the \`${info.filename}\` icon`);
   params.append(
@@ -241,7 +241,7 @@ function getBugTemplate(info, source) {
 
 There is an issue for the \`${
       info.basename
-    }\` icon when viewing [the elements demo](https://ibm.github.io/carbon-elements/icons/examples/esm/index.html).
+    }\` icon when viewing [the elements demo](https://carbon-elements.netlify.com/icons/examples/preview/).
 
 The source for this icon is available [here](${source}).
 

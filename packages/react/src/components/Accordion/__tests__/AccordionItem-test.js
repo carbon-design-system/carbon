@@ -5,7 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { getByText } from '@carbon/test-utils/dom';
+import { render, cleanup } from '@carbon/test-utils/react';
 import React from 'react';
+import { Simulate } from 'react-dom/test-utils';
 import AccordionItem from '../AccordionItem';
 import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
@@ -13,6 +16,8 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 describe('AccordionItem', () => {
+  afterEach(cleanup);
+
   it('should render', () => {
     const wrapper = mount(
       <AccordionItem title="A heading" className="extra-class">
@@ -46,14 +51,15 @@ describe('AccordionItem', () => {
   });
 
   it('should call `onClick` when the accordion list item is clicked', () => {
+    const title = 'test title';
     const onClick = jest.fn();
-    const wrapper = mount(
-      <AccordionItem title="A heading" open onClick={onClick}>
+    const { container } = render(
+      <AccordionItem title={title} open onClick={onClick}>
         Lorem ipsum.
       </AccordionItem>
     );
-    // Event bubbles up from the interactive <button> element
-    wrapper.find('button').simulate('click');
+
+    Simulate.click(getByText(container, title));
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
