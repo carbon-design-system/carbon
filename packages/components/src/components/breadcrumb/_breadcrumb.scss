@@ -31,6 +31,10 @@
     margin-right: $carbon--spacing-03;
   }
 
+  .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited {
+    color: $link-01;
+  }
+
   .#{$prefix}--breadcrumb-item::after {
     content: '/';
     color: $text-01;
