@@ -5,21 +5,19 @@
   LICENSE file in the root directory of this source tree.
 -->
 
-<div role="list">
+<div>
   {{#each tags}}
-  <span class="{{@root.prefix}}--tag {{@root.prefix}}--tag--{{type}}" role="listitem">
+  <button class="{{@root.prefix}}--tag {{@root.prefix}}--tag--{{type}}">
     <span class="{{@root.prefix}}--tag__label">{{label}}</span>
-  </span>
+  </button>
   {{/each}}
 </div>
 
-<div role="list">
+<div>
   {{#if filter}}
-  <span class="{{@root.prefix}}--tag {{@root.prefix}}--tag--filter" title="Clear filter" role="listitem">
+  <button class="{{@root.prefix}}--tag {{@root.prefix}}--tag--filter" title="Clear filter">
     <span class="{{@root.prefix}}--tag__label">filter</span>
-    <button aria-label='Clear filter' class="{{@root.prefix}}--tag--filter__close-button">
-      {{ carbon-icon 'Close16' }}
-    </button>
-  </span>
+    {{ carbon-icon 'Close16' }}
+  </button>
   {{/if}}
 </div>
