@@ -220,24 +220,26 @@ export default class ComboBox extends React.Component {
     }
   };
 
+  handleOnInputValueChange = inputValue => {
+    const { onInputChange } = this.props;
+
+    this.setState(
+      () => ({
+        // Default to empty string if we have a false-y `inputValue`
+        inputValue: inputValue || '',
+      }),
+      () => {
+        if (onInputChange) {
+          onInputChange(inputValue);
+        }
+      }
+    );
+  };
+
   handleOnStateChange = (newState, { setHighlightedIndex }) => {
     if (Object.prototype.hasOwnProperty.call(newState, 'inputValue')) {
       const { inputValue } = newState;
-      const { onInputChange } = this.props;
-
       setHighlightedIndex(findHighlightedIndex(this.props, inputValue));
-
-      this.setState(
-        () => ({
-          // Default to empty string if we have a false-y `inputValue`
-          inputValue: inputValue || '',
-        }),
-        () => {
-          if (onInputChange) {
-            onInputChange(inputValue);
-          }
-        }
-      );
     }
   };
 
@@ -301,6 +303,7 @@ export default class ComboBox extends React.Component {
       <Downshift
         {...downshiftProps}
         onChange={this.handleOnChange}
+        onInputValueChange={this.handleOnInputValueChange}
         onStateChange={this.handleOnStateChange}
         inputValue={this.state.inputValue || ''}
         itemToString={itemToString}
