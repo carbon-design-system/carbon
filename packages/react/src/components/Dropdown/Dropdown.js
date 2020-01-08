@@ -269,7 +269,11 @@ export default class Dropdown extends React.Component {
                 <span
                   className={`${prefix}--list-box__label`}
                   {...getLabelProps()}>
-                  {selectedItem ? itemToString(selectedItem) : label}
+                  {selectedItem
+                    ? itemToElement
+                      ? itemToElement(selectedItem)
+                      : itemToString(selectedItem)
+                    : label}
                 </span>
                 <ListBox.MenuIcon
                   isOpen={isOpen}
