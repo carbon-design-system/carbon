@@ -6584,6 +6584,7 @@ $link-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [link [mixin]](#link-mixin)
@@ -12750,6 +12751,10 @@ Breadcrumb styles
     margin-right: $carbon--spacing-03;
   }
 
+  .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited {
+    color: $link-01;
+  }
+
   .#{$prefix}--breadcrumb-item::after {
     content: '/';
     color: $text-01;
@@ -12797,6 +12802,7 @@ Breadcrumb styles
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [link-01 [variable]](#link-01-variable)
   - [text-01 [variable]](#text-01-variable)
 
 ## button
