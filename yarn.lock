@@ -10601,10 +10601,10 @@ fast-diff@^1.1.2:
   resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.2.0.tgz#73ee11982d86caaf7959828d519cfe927fac5f03"
   integrity sha512-xJuoT5+L99XlZ8twedaRf6Ax2TgQVxvgZOYoPKqZufmJib0tL2tegPBOZb1pVNgIhlqDlA0eO0c3wBvQcmzx4w==
 
-fast-extend@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/fast-extend/-/fast-extend-0.0.2.tgz#f5ec42cf40b9460f521a6387dfb52deeed671dbd"
-  integrity sha1-9exCz0C5Rg9SGmOH37Ut7u1nHb0=
+fast-extend@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/fast-extend/-/fast-extend-1.0.2.tgz#3b8a5b09cbc8ff3d6d47eaf397398c0a643e441b"
+  integrity sha512-XXA9RmlPatkFKUzqVZAFth18R4Wo+Xug/S+C7YlYA3xrXwfPlW3dqNwOb4hvQo7wZJ2cNDYhrYuPzVOfHy5/uQ==
 
 fast-glob@^2.0.2, fast-glob@^2.2.6:
   version "2.2.7"
@@ -11266,7 +11266,7 @@ fs-mkdirp-stream@^1.0.0:
     graceful-fs "^4.1.11"
     through2 "^2.0.3"
 
-fs-monkey@^0.3.3:
+fs-monkey@0.3.3:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/fs-monkey/-/fs-monkey-0.3.3.tgz#7960bb2b1fa2653731b9d0e2e84812a7e8b3664a"
   integrity sha512-FNUvuTAJ3CqCQb5ELn+qCbGR/Zllhf2HtwsdAtBi59s1WeCjKMT81fHcSu7dwIskqGVK+MmOrb7VOBlq3/SItw==
@@ -16275,13 +16275,13 @@ mem@^4.0.0:
     mimic-fn "^2.0.0"
     p-is-promise "^2.0.0"
 
-memfs@^2.14.0:
-  version "2.15.4"
-  resolved "https://registry.yarnpkg.com/memfs/-/memfs-2.15.4.tgz#707e3c9a999f89d7d9299b04877c1c2f87caa561"
-  integrity sha512-u9CNlBHByQ04cNA1jRdyIuvgcZoLA984kC2O/MRBeoJkuSRWO62575WH3H7nrUY9f0MvyxDyLLUwRqC6u1wCiw==
+memfs@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/memfs/-/memfs-3.0.3.tgz#31601d6d053db0b54ca0ab793b796794db6bcb52"
+  integrity sha512-uElu3oR/dM4GeKu86Fqi73eKdafJmmAaxEHx3iSayN+/zvCA0PTcsa6r1QhpN75SqxqdC7rfHqKZzzq3pgKQ5g==
   dependencies:
-    fast-extend "0.0.2"
-    fs-monkey "^0.3.3"
+    fast-extend "1.0.2"
+    fs-monkey "0.3.3"
 
 memoize-decorator@^1.0.2:
   version "1.0.2"
