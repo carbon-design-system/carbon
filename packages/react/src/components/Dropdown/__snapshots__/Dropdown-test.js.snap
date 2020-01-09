@@ -85,7 +85,7 @@ exports[`Dropdown should render 1`] = `
             aria-disabled={false}
             aria-expanded={false}
             aria-haspopup={true}
-            aria-label="open menu"
+            aria-labelledby="dropdown-label-test-dropdown dropdown-field-label-test-dropdown"
             data-toggle={true}
             disabled={false}
             id="test-dropdown"
@@ -94,7 +94,6 @@ exports[`Dropdown should render 1`] = `
             onKeyDown={[Function]}
             role="button"
             tabIndex="0"
-            translateWithId={[Function]}
             type="button"
           >
             <div
@@ -102,7 +101,7 @@ exports[`Dropdown should render 1`] = `
               aria-disabled={false}
               aria-expanded={false}
               aria-haspopup={true}
-              aria-label="Open menu"
+              aria-labelledby="dropdown-label-test-dropdown dropdown-field-label-test-dropdown"
               aria-owns={null}
               className="bx--list-box__field"
               data-toggle={true}
@@ -116,6 +115,7 @@ exports[`Dropdown should render 1`] = `
               <span
                 className="bx--list-box__label"
                 htmlFor="downshift-0-input"
+                id="dropdown-field-label-test-dropdown"
               >
                 input
               </span>
@@ -260,7 +260,7 @@ exports[`Dropdown should render custom item components 1`] = `
             aria-disabled={false}
             aria-expanded={true}
             aria-haspopup={true}
-            aria-label="close menu"
+            aria-labelledby="dropdown-label-test-dropdown dropdown-field-label-test-dropdown"
             data-toggle={true}
             disabled={false}
             id="test-dropdown"
@@ -269,7 +269,6 @@ exports[`Dropdown should render custom item components 1`] = `
             onKeyDown={[Function]}
             role="button"
             tabIndex="0"
-            translateWithId={[Function]}
             type="button"
           >
             <div
@@ -277,7 +276,7 @@ exports[`Dropdown should render custom item components 1`] = `
               aria-disabled={false}
               aria-expanded={true}
               aria-haspopup={true}
-              aria-label="Close menu"
+              aria-labelledby="dropdown-label-test-dropdown dropdown-field-label-test-dropdown"
               aria-owns="test-dropdown__menu"
               className="bx--list-box__field"
               data-toggle={true}
@@ -291,6 +290,7 @@ exports[`Dropdown should render custom item components 1`] = `
               <span
                 className="bx--list-box__label"
                 htmlFor="downshift-4-input"
+                id="dropdown-field-label-test-dropdown"
               >
                 input
               </span>
@@ -594,7 +594,7 @@ exports[`Dropdown should render with strings as items 1`] = `
             aria-disabled={false}
             aria-expanded={true}
             aria-haspopup={true}
-            aria-label="close menu"
+            aria-labelledby="dropdown-label-test-dropdown dropdown-field-label-test-dropdown"
             data-toggle={true}
             disabled={false}
             id="test-dropdown"
@@ -603,7 +603,6 @@ exports[`Dropdown should render with strings as items 1`] = `
             onKeyDown={[Function]}
             role="button"
             tabIndex="0"
-            translateWithId={[Function]}
             type="button"
           >
             <div
@@ -611,7 +610,7 @@ exports[`Dropdown should render with strings as items 1`] = `
               aria-disabled={false}
               aria-expanded={true}
               aria-haspopup={true}
-              aria-label="Close menu"
+              aria-labelledby="dropdown-label-test-dropdown dropdown-field-label-test-dropdown"
               aria-owns="test-dropdown__menu"
               className="bx--list-box__field"
               data-toggle={true}
@@ -625,6 +624,7 @@ exports[`Dropdown should render with strings as items 1`] = `
               <span
                 className="bx--list-box__label"
                 htmlFor="downshift-3-input"
+                id="dropdown-field-label-test-dropdown"
               >
                 input
               </span>

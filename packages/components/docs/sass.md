@@ -3692,6 +3692,8 @@ $spacing-05: $carbon--spacing-05;
 - **Alias**: `carbon--spacing-05`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [accordion [mixin]](#accordion-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
@@ -5736,8 +5738,8 @@ $carbon--theme--v9: map-merge(
   $carbon--theme--white,
   (
     interactive-01: #3d70b2,
-    interactive-02: #5a6872,
-    interactive-03: #5a6872,
+    interactive-02: #4d5358,
+    interactive-03: #3d70b2,
     interactive-04: #3d70b2,
     ui-background: #f4f7fb,
     ui-01: #ffffff,
@@ -5789,8 +5791,8 @@ $carbon--theme--v9: map-merge(
     skeleton-01: rgba(61, 112, 178, 0.1),
     skeleton-02: rgba(61, 112, 178, 0.1),
     brand-01: #3d70b2,
-    brand-02: #5a6872,
-    brand-03: #5a6872,
+    brand-02: #4d5358,
+    brand-03: #3d70b2,
     active-01: #dfeafa,
     hover-field: #eef4fc,
   )
@@ -6583,6 +6585,7 @@ $link-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [link [mixin]](#link-mixin)
@@ -12692,6 +12695,11 @@ Accordion styles
     }
   }
 
+  .#{$prefix}--accordion--end.#{$prefix}--skeleton
+    .#{$prefix}--accordion__arrow {
+    margin-left: $spacing-05;
+  }
+
   .#{$prefix}--skeleton
     .#{$prefix}--accordion__heading:focus
     .#{$prefix}--accordion__arrow {
@@ -12721,6 +12729,7 @@ Accordion styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
 
 ## breadcrumb
 
@@ -12747,6 +12756,10 @@ Breadcrumb styles
     display: flex;
     align-items: center;
     margin-right: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited {
+    color: $link-01;
   }
 
   .#{$prefix}--breadcrumb-item::after {
@@ -12796,6 +12809,7 @@ Breadcrumb styles
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [link-01 [variable]](#link-01-variable)
   - [text-01 [variable]](#text-01-variable)
 
 ## button
@@ -13369,6 +13383,17 @@ Checkbox styles
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'][data-contained-checkbox-disabled='true']::before {
     background-color: $disabled-02;
   }
+
+  //-----------------------------------------------
+  // Skeleton
+  //-----------------------------------------------
+
+  .#{$prefix}--checkbox-label-text.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(100px);
+    height: $spacing-05;
+    margin: auto 0;
+  }
 }
 ```
 
@@ -13384,6 +13409,7 @@ Checkbox styles
   - [icon-01 [variable]](#icon-01-variable)
   - [focus [variable]](#focus-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
 
 ## code-snippet
 
@@ -22139,6 +22165,10 @@ Text area styles
     color: $disabled-02;
   }
 
+  .#{$prefix}--text-area.#{$prefix}--text-area--light:disabled {
+    background-color: $field-02;
+  }
+
   // Skeleton State
   #{$prefix}--text-area.#{$prefix}--skeleton {
     @include skeleton;
@@ -25235,10 +25265,6 @@ UI shell side nav
     }
   }
 
-  a.#{$prefix}--side-nav__link--current > span.#{$prefix}--side-nav__link-text {
-    color: $ibm-color__gray-100;
-    font-weight: 600;
-  }
   //----------------------------------------------------------------------------
   // Side-nav > Link
   //----------------------------------------------------------------------------
@@ -25284,7 +25310,14 @@ UI shell side nav
 
   a.#{$prefix}--side-nav__link[aria-current='page'],
   a.#{$prefix}--side-nav__link--current {
+    background-color: $shell-side-nav-bg-04;
     font-weight: 600;
+  }
+
+  a.#{$prefix}--side-nav__link[aria-current='page']
+    .#{$prefix}--side-nav__link-text,
+  a.#{$prefix}--side-nav__link--current .#{$prefix}--side-nav__link-text {
+    color: $ibm-color__gray-100;
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page']::before,
