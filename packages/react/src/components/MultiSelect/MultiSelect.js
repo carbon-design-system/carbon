@@ -18,9 +18,11 @@ import Selection from '../../internal/Selection';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
 const noop = () => undefined;
+const getInstanceId = setupGetInstanceId();
 
 export default class MultiSelect extends React.Component {
   static propTypes = {
@@ -156,6 +158,7 @@ export default class MultiSelect extends React.Component {
 
   constructor(props) {
     super(props);
+    this.multiSelectInstanceId = getInstanceId();
     this.state = {
       highlightedIndex: null,
       isOpen: props.open,
@@ -254,16 +257,23 @@ export default class MultiSelect extends React.Component {
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
+    const helperId = !helperText
+      ? undefined
+      : `multiselect-helper-text-${this.multiSelectInstanceId}`;
+    const labelId = `multiselect-label-${this.multiSelectInstanceId}`;
+    const fieldLabelId = `multiselect-field-label-${this.multiSelectInstanceId}`;
     const title = titleText ? (
-      <label htmlFor={id} className={titleClasses}>
+      <span id={labelId} className={titleClasses}>
         {titleText}
-      </label>
+      </span>
     ) : null;
     const helperClasses = cx(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
     const helper = helperText ? (
-      <div className={helperClasses}>{helperText}</div>
+      <div id={helperId} className={helperClasses}>
+        {helperText}
+      </div>
     ) : null;
 
     const input = (
@@ -300,9 +310,14 @@ export default class MultiSelect extends React.Component {
                     selectedItem.length > 0,
                 }
               );
+              const buttonProps = {
+                ...getButtonProps({ disabled }),
+                'aria-label': undefined,
+              };
               return (
                 <ListBox
                   id={id}
+                  aria-label={ariaLabel}
                   type={type}
                   size={size}
                   className={className}
@@ -311,6 +326,8 @@ export default class MultiSelect extends React.Component {
                   invalid={invalid}
                   invalidText={invalidText}
                   isOpen={isOpen}
+                  aria-labelledby={labelId}
+                  aria-describedby={helperId}
                   {...getRootProps({ refKey: 'innerRef' })}>
                   {invalid && (
                     <WarningFilled16
@@ -322,8 +339,9 @@ export default class MultiSelect extends React.Component {
                     tabIndex="0"
                     disabled={disabled}
                     aria-disabled={disabled}
-                    translateWithId={translateWithId}
-                    {...getButtonProps({ disabled })}>
+                    aria-labelledby={`${labelId} ${fieldLabelId}`}
+                    aria-describedby={helperId}
+                    {...buttonProps}>
                     {selectedItem.length > 0 && (
                       <ListBox.Selection
                         clearSelection={!disabled ? clearSelection : noop}
@@ -332,7 +350,9 @@ export default class MultiSelect extends React.Component {
                         disabled={disabled}
                       />
                     )}
-                    <span className={`${prefix}--list-box__label`}>
+                    <span
+                      id={fieldLabelId}
+                      className={`${prefix}--list-box__label`}>
                       {label}
                     </span>
                     <ListBox.MenuIcon
