@@ -21,8 +21,8 @@
   "dependencies": {
     "@carbon/cli-reporter": "10.3.0",
     "@octokit/plugin-retry": "^2.2.0",
-    "@octokit/plugin-throttling": "^2.6.0",
-    "@octokit/rest": "^16.28.1",
+    "@octokit/plugin-throttling": "^2.7.1",
+    "@octokit/rest": "^16.36.0",
     "chalk": "^3.0.0",
     "child-process-promise": "^2.2.1",
     "clipboardy": "^2.1.0",
