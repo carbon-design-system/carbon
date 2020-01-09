@@ -23,7 +23,7 @@
     "@octokit/plugin-retry": "^2.2.0",
     "@octokit/plugin-throttling": "^2.6.0",
     "@octokit/rest": "^16.28.1",
-    "chalk": "^2.4.2",
+    "chalk": "^3.0.0",
     "child-process-promise": "^2.2.1",
     "clipboardy": "^2.1.0",
     "fs-extra": "^8.0.1",
