@@ -22165,6 +22165,10 @@ Text area styles
     color: $disabled-02;
   }
 
+  .#{$prefix}--text-area.#{$prefix}--text-area--light:disabled {
+    background-color: $field-02;
+  }
+
   // Skeleton State
   #{$prefix}--text-area.#{$prefix}--skeleton {
     @include skeleton;
