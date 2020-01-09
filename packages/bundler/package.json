@@ -44,10 +44,10 @@
     "postcss": "^7.0.26",
     "postcss-discard-comments": "^4.0.1",
     "replace-in-file": "^3.4.4",
-    "rollup": "^0.67.1",
+    "rollup": "^1.29.0",
     "rollup-plugin-babel": "^4.0.3",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "sassdoc": "^2.5.1",
     "semver": "^6.3.0"
   }
