@@ -33,7 +33,7 @@
     "prettier": "^1.19.1",
     "rimraf": "^3.0.0",
     "rollup": "^1.29.0",
-    "vue": "^2.6.8"
+    "vue": "^2.6.11"
   },
   "sideEffects": false
 }
