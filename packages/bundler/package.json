@@ -49,6 +49,6 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "sassdoc": "^2.5.1",
-    "semver": "^6.3.0"
+    "semver": "^7.1.1"
   }
 }
