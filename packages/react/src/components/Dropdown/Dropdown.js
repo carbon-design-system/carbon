@@ -190,11 +190,10 @@ export default class Dropdown extends React.Component {
       [`${prefix}--label--disabled`]: disabled,
     });
 
-    const helperId = !helperText
-      ? undefined
-      : `dropdown-helper-text-${this.dropdownInstanceId}`;
-    const labelId = `dropdown-label-${this.dropdownInstanceId}`;
-    const fieldLabelId = `dropdown-field-label-${this.dropdownInstanceId}`;
+    const helperId =
+      !id || !helperText ? undefined : `dropdown-helper-text-${id}`;
+    const labelId = `dropdown-label-${id}`;
+    const fieldLabelId = `dropdown-field-label-${id}`;
 
     const title = titleText ? (
       <span className={titleClasses}>{titleText}</span>
