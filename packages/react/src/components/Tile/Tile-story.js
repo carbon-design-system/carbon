@@ -138,22 +138,22 @@ storiesOf('Tile', module)
     }
   )
   .add(
-    'Selectable',
+    'Radio',
     () => {
       const radioProps = props.radio();
       return (
         <TileGroup
           defaultSelected="default-selected"
-          legend="Selectable Tile Group"
+          legend="Radio Tile Group"
           {...props.group()}>
-          <RadioTile value="standard" id="tile-1" {...radioProps}>
-            Selectable Tile
+          <RadioTile value="standard" {...radioProps}>
+            Radio Tile
           </RadioTile>
           <RadioTile value="default-selected" id="tile-2" {...radioProps}>
-            Selectable Tile
+            Radio Tile
           </RadioTile>
           <RadioTile value="selected" id="tile-3" {...radioProps}>
-            Selectable Tile
+            Radio Tile
           </RadioTile>
         </TileGroup>
       );
