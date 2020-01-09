@@ -57,7 +57,7 @@
     "enzyme-to-json": "^3.3.5",
     "eslint": "^6.0.0",
     "eslint-config-carbon": "10.4.0",
-    "fs-extra": "^7.0.1",
+    "fs-extra": "^8.1.0",
     "glob": "^7.1.4",
     "husky": "^2.1.0",
     "jest": "^24.8.0",
