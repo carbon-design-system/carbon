@@ -2,7 +2,7 @@
 name: Question ❓
 about: Usage question or discussion about Carbon components
 title: ''
-labels: 'type: question ❓, squad: system'
+labels: 'type: question ❓'
 assignees: ''
 ---
 
