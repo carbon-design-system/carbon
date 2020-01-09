@@ -31,7 +31,7 @@
     "cross-spawn": "^6.0.5",
     "fast-glob": "^2.2.6",
     "fs-extra": "^8.1.0",
-    "inquirer": "^6.3.1",
+    "inquirer": "^7.0.3",
     "jest-diff": "^23.6.0",
     "jscodeshift": "^0.6.4",
     "lodash.clonedeep": "^4.5.0",

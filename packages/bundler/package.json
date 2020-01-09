@@ -37,7 +37,7 @@
     "fs-extra": "^8.1.0",
     "glob": "^7.1.3",
     "gzip-size": "^5.0.0",
-    "inquirer": "^6.5.0",
+    "inquirer": "^7.0.3",
     "klaw-sync": "^6.0.0",
     "markdown-toc": "^1.2.0",
     "node-sass": "^4.9.4",

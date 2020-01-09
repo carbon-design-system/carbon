@@ -27,7 +27,7 @@
     "child-process-promise": "^2.2.1",
     "clipboardy": "^2.1.0",
     "fs-extra": "^8.0.1",
-    "inquirer": "^6.4.1",
+    "inquirer": "^7.0.3",
     "prettier": "^1.19.1",
     "progress-estimator": "^0.2.2",
     "remark": "^10.0.1",
