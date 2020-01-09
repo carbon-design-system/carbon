@@ -3692,6 +3692,7 @@ $spacing-05: $carbon--spacing-05;
 - **Alias**: `carbon--spacing-05`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [accordion [mixin]](#accordion-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
@@ -5737,8 +5738,8 @@ $carbon--theme--v9: map-merge(
   $carbon--theme--white,
   (
     interactive-01: #3d70b2,
-    interactive-02: #5a6872,
-    interactive-03: #5a6872,
+    interactive-02: #4d5358,
+    interactive-03: #3d70b2,
     interactive-04: #3d70b2,
     ui-background: #f4f7fb,
     ui-01: #ffffff,
@@ -5790,8 +5791,8 @@ $carbon--theme--v9: map-merge(
     skeleton-01: rgba(61, 112, 178, 0.1),
     skeleton-02: rgba(61, 112, 178, 0.1),
     brand-01: #3d70b2,
-    brand-02: #5a6872,
-    brand-03: #5a6872,
+    brand-02: #4d5358,
+    brand-03: #3d70b2,
     active-01: #dfeafa,
     hover-field: #eef4fc,
   )
@@ -12694,6 +12695,11 @@ Accordion styles
     }
   }
 
+  .#{$prefix}--accordion--end.#{$prefix}--skeleton
+    .#{$prefix}--accordion__arrow {
+    margin-left: $spacing-05;
+  }
+
   .#{$prefix}--skeleton
     .#{$prefix}--accordion__heading:focus
     .#{$prefix}--accordion__arrow {
@@ -12723,6 +12729,7 @@ Accordion styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
 
 ## breadcrumb
 
@@ -22156,6 +22163,10 @@ Text area styles
 
   .#{$prefix}--text-area:disabled::placeholder {
     color: $disabled-02;
+  }
+
+  .#{$prefix}--text-area.#{$prefix}--text-area--light:disabled {
+    background-color: $field-02;
   }
 
   // Skeleton State
