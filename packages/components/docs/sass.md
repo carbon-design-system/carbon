@@ -25265,10 +25265,6 @@ UI shell side nav
     }
   }
 
-  a.#{$prefix}--side-nav__link--current > span.#{$prefix}--side-nav__link-text {
-    color: $ibm-color__gray-100;
-    font-weight: 600;
-  }
   //----------------------------------------------------------------------------
   // Side-nav > Link
   //----------------------------------------------------------------------------
@@ -25314,7 +25310,14 @@ UI shell side nav
 
   a.#{$prefix}--side-nav__link[aria-current='page'],
   a.#{$prefix}--side-nav__link--current {
+    background-color: $shell-side-nav-bg-04;
     font-weight: 600;
+  }
+
+  a.#{$prefix}--side-nav__link[aria-current='page']
+    .#{$prefix}--side-nav__link-text,
+  a.#{$prefix}--side-nav__link--current .#{$prefix}--side-nav__link-text {
+    color: $ibm-color__gray-100;
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page']::before,
