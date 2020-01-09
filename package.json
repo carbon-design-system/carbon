@@ -63,7 +63,7 @@
     "jest": "^24.9.0",
     "jest-circus": "^24.9.0",
     "jest-junit": "^10.0.0",
-    "lerna": "^3.13.4",
+    "lerna": "^3.20.2",
     "lint-staged": "^8.1.5",
     "prettier": "^1.19.1",
     "react": "^16.8.6",
