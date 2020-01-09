@@ -18,15 +18,18 @@ const { prefix } = settings;
  * class into a single component. It is also being used to validate given
  * `children` components.
  */
-const ListBoxMenu = ({ children, id, ...rest }) => (
-  <div
-    id={`${id}__menu`}
-    className={`${prefix}--list-box__menu`}
-    role="listbox"
-    {...rest}>
-    {children}
-  </div>
-);
+const ListBoxMenu = ({ children, id, ...rest }) => {
+  console.log(rest);
+  return (
+    <div
+      id={`${id}__menu`}
+      className={`${prefix}--list-box__menu`}
+      role="listbox"
+      {...rest}>
+      {children}
+    </div>
+  );
+};
 
 ListBoxMenu.propTypes = {
   /**
