@@ -60,6 +60,9 @@ row before the </tbody></table> line.
 ## Table of Contents
 
 - [Introduction](#introduction)
+- [JavaScript](#javascript)
+  - [Style](#style)
+    - [Be explicit](#be-explicit)
 - [React](#react)
   - [Guidelines](#guidelines)
     - [Writing a component](#writing-a-component)
@@ -89,6 +92,69 @@ code:
 
 _Inspired by
 [Minimal API Surface Area](https://www.youtube.com/watch?v=4anAwXYqLG8)_
+
+## JavaScript
+
+### Style
+
+#### Be explicit
+
+<table>
+<thead><tr><th>Unpreferred</th><th>Preferred</th></tr></thead>
+<tbody>
+<tr><td>
+
+```jsx
+const add = (a, b) => a + b;
+```
+
+</td><td>
+
+```jsx
+const add = (a, b) => {
+  return a + b;
+};
+```
+
+</td></tr>
+</tbody></table>
+
+Certain features in JavaScript have implicit behavior. One of these that we see
+most often is the implicit return behavior of arrow function expressions, for
+example:
+
+```js
+const add = (a, b) => a + b;
+```
+
+We've found that, while this style is terse and compact, it can be at odds with
+the fact that code is revisited often and that developers need to peak inside
+sometimes to see what is going on. For example, if we needed to debug a specific
+value in the function above then we would go through the following steps:
+
+```js
+// Step 1. The code as originally authored
+const add = (a, b) => a + b;
+
+// Step 2. Update the code to no longer use the implicit return
+const add = (a, b) => {
+  return a + b;
+};
+
+// Step 3. Add any debugging code or ways to introspect its values
+const add = (a, b) => {
+  console.log(a);
+  return a + b;
+};
+
+// Step 4. Undo these changes and bring back to original format
+const add = (a, b) => a + b;
+```
+
+If instead we had written this code without the implicit return then we would
+have saved three out of the four steps above. As a result, we tend to favor
+being explicit in how JavaScript is written instead of relying on implicit
+behavior.
 
 ## React
 
@@ -141,3 +207,65 @@ MyComponent.propTypes = {
 _Note: not every component will mirror the structure above. Some will need to
 incorporate `useEffect`, some will not. You can think of the outline above as
 slots that you can fill if you need this functionality in a component._
+
+### Style
+
+#### Naming event handlers
+
+<table>
+<thead><tr><th>Unpreferred</th><th>Preferred</th></tr></thead>
+<tbody>
+<tr><td>
+
+```jsx
+function MyComponent() {
+  function click() {
+    // ...
+  }
+  return <button onClick={click} />;
+}
+```
+
+</td><td>
+
+```jsx
+function MyComponent() {
+  function onClick() {
+    // ...
+  }
+  return <button onClick={onClick} />;
+}
+```
+
+</td></tr>
+<tr><td>
+
+```jsx
+function MyComponent({ onClick }) {
+  function handleClick(event) {
+    // ...
+    onClick(event);
+  }
+  return <button onClick={handleClick} />;
+}
+```
+
+</td><td>
+
+```jsx
+function MyComponent({ onClick }) {
+  function handleOnClick(event) {
+    // ...
+    onClick(event);
+  }
+  return <button onClick={handleOnClick} />;
+}
+```
+
+</td></tr>
+</tbody></table>
+
+When writing event handlers, we prefer using the exact name, `onClick` to a
+shorthand. If that name is already being used in a given scope, which often
+happens if the component supports a prop `onClick`, then we prefer to specify
+the function as `handleOnClick`.

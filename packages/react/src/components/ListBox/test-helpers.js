@@ -32,7 +32,6 @@ export const assertMenuOpen = (wrapper, mockProps) => {
     expect.objectContaining({
       'aria-expanded': true,
       'aria-haspopup': true,
-      'aria-label': 'Close menu',
     })
   );
 };
@@ -47,7 +46,6 @@ export const assertMenuClosed = wrapper => {
     expect.objectContaining({
       'aria-expanded': false,
       'aria-haspopup': true,
-      'aria-label': 'Open menu',
     })
   );
 };

@@ -16,7 +16,7 @@ exports[`ListBox should render 1`] = `
             tabindex="-1"
           >
             <div
-              aria-label="Open menu"
+              aria-haspopup="listbox"
               class="bx--list-box__field"
               role="combobox"
               tabindex="-1"
@@ -44,11 +44,10 @@ exports[`ListBox should render 1`] = `
   >
     <ListBoxField
       id="test-listbox"
-      translateWithId={[Function]}
     >
       <div
         aria-controls={null}
-        aria-label="Open menu"
+        aria-haspopup="listbox"
         aria-owns={null}
         className="bx--list-box__field"
         role="combobox"
