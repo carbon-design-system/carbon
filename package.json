@@ -47,7 +47,7 @@
     "@commitlint/config-conventional": "^8.3.4",
     "@ibma/aat": "https://able.ibm.com/tools/dist/ibma-aat-2.0.3-alpha.tgz",
     "alex": "^8.1.0",
-    "axe-core": "^3.3.2",
+    "axe-core": "^3.4.1",
     "babel-jest": "^24.9.0",
     "cross-env": "^6.0.3",
     "cross-spawn": "^6.0.5",
