@@ -123,7 +123,7 @@
     "gulp-sass-lint": "^1.4.0",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-terser": "^1.0.0",
-    "handlebars": "^4.0.12",
+    "handlebars": "^4.6.0",
     "handlebars-helpers": "^0.10.0",
     "html-loader": "^0.5.0",
     "jasmine-core": "^3.0.0",

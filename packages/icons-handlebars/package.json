@@ -19,13 +19,13 @@
     "access": "public"
   },
   "peerDependencies": {
-    "handlebars": "^4.0.12"
+    "handlebars": "^4.6.0"
   },
   "dependencies": {
     "@carbon/icon-helpers": "^10.5.0",
     "@carbon/icons": "^10.8.0"
   },
   "devDependencies": {
-    "handlebars": "^4.0.12"
+    "handlebars": "^4.6.0"
   }
 }
