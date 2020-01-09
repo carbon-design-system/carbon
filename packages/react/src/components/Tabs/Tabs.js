@@ -10,6 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { ChevronDownGlyph } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
+import { keys, match, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -116,6 +117,12 @@ export default class Tabs extends React.Component {
     return React.Children.map(this.props.children, tab => tab);
   }
 
+  getEnabledTabs = () =>
+    React.Children.toArray(this.props.children).reduce(
+      (acc, tab, index) => (!tab.props.disabled ? acc.concat(index) : acc),
+      []
+    );
+
   getTabAt = (index, useFresh) => {
     return (
       (!useFresh && this[`tab${index}`]) ||
@@ -139,35 +146,47 @@ export default class Tabs extends React.Component {
     };
   };
 
+  getDirection = evt => {
+    if (match(evt, keys.ArrowLeft)) {
+      return -1;
+    }
+    if (match(evt, keys.ArrowRight)) {
+      return 1;
+    }
+    return 0;
+  };
+
+  getNextIndex = (index, direction) => {
+    const enabledTabs = this.getEnabledTabs();
+    const nextIndex = Math.max(
+      enabledTabs.indexOf(index) + direction,
+      -1 /* For `tab` not found in `enabledTabs` */
+    );
+    const nextIndexLooped =
+      nextIndex >= 0 && nextIndex < enabledTabs.length
+        ? nextIndex
+        : nextIndex - Math.sign(nextIndex) * enabledTabs.length;
+    return enabledTabs[nextIndexLooped];
+  };
+
   handleTabKeyDown = onSelectionChange => {
     return (index, evt) => {
-      const key = evt.key || evt.which;
-
-      if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
+      if (matches(evt, [keys.Enter, keys.Space])) {
         this.selectTabAt(index, onSelectionChange);
         this.setState({
           dropdownHidden: true,
         });
       }
-    };
-  };
 
-  handleTabAnchorFocus = onSelectionChange => {
-    return index => {
-      const tabCount = React.Children.count(this.props.children) - 1;
-      let tabIndex = index;
-      if (index < 0) {
-        tabIndex = tabCount;
-      } else if (index > tabCount) {
-        tabIndex = 0;
-      }
-
-      const tab = this.getTabAt(tabIndex);
-
-      if (tab) {
-        this.selectTabAt(tabIndex, onSelectionChange);
-        if (tab.tabAnchor) {
-          tab.tabAnchor.focus();
+      if (window.matchMedia('(min-width: 42rem)').matches) {
+        evt.preventDefault();
+        const nextIndex = this.getNextIndex(index, this.getDirection(evt));
+        const tab = this.getTabAt(nextIndex);
+        if (tab) {
+          this.selectTabAt(nextIndex, onSelectionChange);
+          if (tab.tabAnchor) {
+            tab.tabAnchor.focus();
+          }
         }
       }
     };
@@ -222,7 +241,6 @@ export default class Tabs extends React.Component {
         index,
         selected: index === this.state.selected,
         handleTabClick: this.handleTabClick(onSelectionChange),
-        handleTabAnchorFocus: this.handleTabAnchorFocus(onSelectionChange),
         tabIndex,
         ref: e => {
           this.setTabAt(index, e);

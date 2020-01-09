@@ -7,13 +7,24 @@
 
 import React from 'react';
 import { ChevronDownGlyph } from '@carbon/icons-react';
+import { settings } from 'carbon-components';
+import { shallow, mount } from 'enzyme';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
-import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
 const { prefix } = settings;
+
+window.matchMedia = jest.fn().mockImplementation(query => ({
+  matches: true,
+  media: query,
+  onchange: null,
+  addListener: jest.fn(), // deprecated
+  removeListener: jest.fn(), // deprecated
+  addEventListener: jest.fn(),
+  removeEventListener: jest.fn(),
+  dispatchEvent: jest.fn(),
+}));
 
 describe('Tabs', () => {
   describe('renders as expected', () => {
@@ -239,6 +250,53 @@ describe('Tabs', () => {
           expect(wrapper.state().selected).toEqual(0);
           lastTab.simulate('keydown', { which: enterKey });
           expect(wrapper.state().selected).toEqual(1);
+        });
+      });
+
+      describe('ignore disabled child tab', () => {
+        let wrapper;
+        let firstTab;
+        let lastTab;
+        beforeEach(() => {
+          wrapper = mount(
+            <Tabs>
+              <Tab label="firstTab" className="firstTab">
+                content1
+              </Tab>
+              <Tab label="middleTab" className="middleTab" disabled>
+                content2
+              </Tab>
+              <Tab label="lastTab" className="lastTab">
+                content3
+              </Tab>
+            </Tabs>
+          );
+          firstTab = wrapper.find('.firstTab').last();
+          lastTab = wrapper.find('.lastTab').last();
+        });
+        it('updates selected state when pressing arrow keys', () => {
+          firstTab.simulate('keydown', { which: rightKey });
+          expect(wrapper.state().selected).toEqual(2);
+          lastTab.simulate('keydown', { which: leftKey });
+          expect(wrapper.state().selected).toEqual(0);
+        });
+
+        it('loops focus and selected state from lastTab to firstTab', () => {
+          wrapper.setState({ selected: 2 });
+          lastTab.simulate('keydown', { which: rightKey });
+          expect(wrapper.state().selected).toEqual(0);
+        });
+
+        it('loops focus and selected state from firstTab to lastTab', () => {
+          firstTab.simulate('keydown', { which: leftKey });
+          expect(wrapper.state().selected).toEqual(2);
+        });
+
+        it('updates selected state when pressing space or enter key', () => {
+          firstTab.simulate('keydown', { which: spaceKey });
+          expect(wrapper.state().selected).toEqual(0);
+          lastTab.simulate('keydown', { which: enterKey });
+          expect(wrapper.state().selected).toEqual(2);
         });
       });
     });
