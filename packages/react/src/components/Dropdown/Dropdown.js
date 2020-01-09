@@ -190,16 +190,21 @@ export default class Dropdown extends React.Component {
       [`${prefix}--label--disabled`]: disabled,
     });
 
+    const helperId =
+      !id || !helperText ? undefined : `dropdown-helper-text-${id}`;
+    const labelId = `dropdown-label-${id}`;
+    const fieldLabelId = `dropdown-field-label-${id}`;
+
     const title = titleText ? (
-      <label htmlFor={id} className={titleClasses}>
-        {titleText}
-      </label>
+      <span className={titleClasses}>{titleText}</span>
     ) : null;
     const helperClasses = cx(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
     const helper = helperText ? (
-      <div className={helperClasses}>{helperText}</div>
+      <div id={helperId} className={helperClasses}>
+        {helperText}
+      </div>
     ) : null;
     const wrapperClasses = cx(
       `${prefix}--dropdown__wrapper`,
@@ -234,69 +239,77 @@ export default class Dropdown extends React.Component {
             getItemProps,
             getLabelProps,
             toggleMenu,
-          }) => (
-            <ListBox
-              type={type}
-              size={size}
-              id={id}
-              aria-label={ariaLabel}
-              className={className({ isOpen })}
-              disabled={disabled}
-              isOpen={isOpen}
-              invalid={invalid}
-              invalidText={invalidText}
-              light={light}
-              {...getRootProps({ refKey: 'innerRef' })}>
-              {invalid && (
-                <WarningFilled16
-                  className={`${prefix}--list-box__invalid-icon`}
-                />
-              )}
-              <ListBox.Field
+          }) => {
+            const buttonProps = {
+              ...getButtonProps({
+                onKeyDown: event => {
+                  if (match(event, keys.Enter)) {
+                    toggleMenu();
+                  }
+                },
+                disabled,
+              }),
+              'aria-label': undefined,
+            };
+            return (
+              <ListBox
+                type={type}
+                size={size}
                 id={id}
-                tabIndex="0"
+                aria-label={ariaLabel}
+                className={className({ isOpen })}
                 disabled={disabled}
-                aria-disabled={disabled}
-                translateWithId={translateWithId}
-                {...getButtonProps({
-                  onKeyDown: event => {
-                    if (match(event, keys.Enter)) {
-                      toggleMenu();
-                    }
-                  },
-                  disabled,
-                })}>
-                <span
-                  className={`${prefix}--list-box__label`}
-                  {...getLabelProps()}>
-                  {selectedItem ? itemToString(selectedItem) : label}
-                </span>
-                <ListBox.MenuIcon
-                  isOpen={isOpen}
-                  translateWithId={translateWithId}
-                />
-              </ListBox.Field>
-              {isOpen && (
-                <ListBox.Menu aria-labelledby={id} id={id}>
-                  {items.map((item, index) => (
-                    <ListBox.MenuItem
-                      key={itemToString(item)}
-                      isActive={selectedItem === item}
-                      isHighlighted={
-                        highlightedIndex === index || selectedItem === item
-                      }
-                      {...getItemProps({ item, index })}>
-                      {itemToElement ? (
-                        <ItemToElement key={itemToString(item)} {...item} />
-                      ) : (
-                        itemToString(item)
-                      )}
-                    </ListBox.MenuItem>
-                  ))}
-                </ListBox.Menu>
-              )}
-            </ListBox>
-          )}
+                isOpen={isOpen}
+                invalid={invalid}
+                invalidText={invalidText}
+                light={light}
+                {...getRootProps({ refKey: 'innerRef' })}>
+                {invalid && (
+                  <WarningFilled16
+                    className={`${prefix}--list-box__invalid-icon`}
+                  />
+                )}
+                <ListBox.Field
+                  id={id}
+                  tabIndex="0"
+                  disabled={disabled}
+                  aria-disabled={disabled}
+                  aria-labelledby={`${labelId} ${fieldLabelId}`}
+                  aria-describedby={helperId}
+                  {...buttonProps}>
+                  <span
+                    id={fieldLabelId}
+                    className={`${prefix}--list-box__label`}
+                    {...getLabelProps()}>
+                    {selectedItem ? itemToString(selectedItem) : label}
+                  </span>
+                  <ListBox.MenuIcon
+                    isOpen={isOpen}
+                    translateWithId={translateWithId}
+                  />
+                </ListBox.Field>
+                {isOpen && (
+                  <ListBox.Menu aria-labelledby={id} id={id}>
+                    {items.map((item, index) => (
+                      <ListBox.MenuItem
+                        key={itemToString(item)}
+                        isActive={selectedItem === item}
+                        isHighlighted={
+                          highlightedIndex === index || selectedItem === item
+                        }
+                        {...getItemProps({ item, index })}>
+                        {itemToElement ? (
+                          <ItemToElement key={itemToString(item)} {...item} />
+                        ) : (
+                          itemToString(item)
+                        )}
+                      </ListBox.MenuItem>
+                    ))}
+                  </ListBox.Menu>
+                )}
+              </ListBox>
+            );
+          }}
         </Downshift>
       </div>
     );
