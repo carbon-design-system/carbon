@@ -96,7 +96,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
             <ListBoxField
               aria-expanded={false}
               aria-haspopup={true}
-              aria-label="open menu"
+              aria-labelledby="filterablemultiselect-label-1"
               data-toggle={true}
               disabled={false}
               id="test-filterable-multiselect"
@@ -104,14 +104,13 @@ exports[`MultiSelect.Filterable should render 1`] = `
               onClick={[Function]}
               onKeyDown={[Function]}
               role="button"
-              translateWithId={[Function]}
               type="button"
             >
               <div
                 aria-controls={null}
                 aria-expanded={false}
                 aria-haspopup={true}
-                aria-label="Open menu"
+                aria-labelledby="filterablemultiselect-label-1"
                 aria-owns={null}
                 className="bx--list-box__field"
                 data-toggle={true}
