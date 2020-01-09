@@ -86,7 +86,7 @@
     "@carbon/test-utils": "^10.6.0",
     "@frctl/fractal": "^1.1.0",
     "adaro": "1.0.4",
-    "autoprefixer": "^8.2.0",
+    "autoprefixer": "^9.7.3",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-dev-expression": "^0.2.1",

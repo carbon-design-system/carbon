@@ -36,7 +36,7 @@
     "@storybook/addon-storysource": "^5.2.8",
     "@storybook/addons": "^5.2.8",
     "@storybook/react": "^5.2.8",
-    "autoprefixer": "^9.6.1",
+    "autoprefixer": "^9.7.3",
     "babel-loader": "^8.0.6",
     "browserslist-config-carbon": "10.4.0",
     "carbon-components": "^10.9.0",
