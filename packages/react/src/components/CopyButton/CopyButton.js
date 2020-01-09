@@ -6,8 +6,9 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import classnames from 'classnames';
+import debounce from 'lodash.debounce';
 import { settings } from 'carbon-components';
 import { Copy16 } from '@carbon/icons-react';
 
@@ -18,44 +19,44 @@ export default function CopyButton({
   className,
   feedback,
   feedbackTimeout,
+  onAnimationEnd,
   onClick,
   ...other
 }) {
   const [animation, setAnimation] = useState('');
-  const timeoutId = useRef(undefined);
   const classNames = classnames(`${prefix}--copy-btn`, className, {
     [`${prefix}--copy-btn--animating`]: animation,
     [`${prefix}--copy-btn--${animation}`]: animation,
   });
-  const feedbackClassNames = classnames(
-    `${prefix}--assistive-text`,
-    `${prefix}--copy-btn__feedback`
-  );
-  const handleClick = event => {
-    setAnimation('fade-in');
-    timeoutId.current = setTimeout(() => {
+  const handleFadeOut = useCallback(
+    debounce(() => {
       setAnimation('fade-out');
-    }, feedbackTimeout);
-
-    onClick(event);
-  };
+    }, feedbackTimeout),
+    [feedbackTimeout]
+  );
+  const handleClick = useCallback(
+    event => {
+      setAnimation('fade-in');
+      onClick(event);
+      handleFadeOut();
+    },
+    [onClick, handleFadeOut]
+  );
   const handleAnimationEnd = event => {
     if (event.animationName === 'hide-feedback') {
       setAnimation('');
     }
-    if (other.handleAnimationEnd) {
-      other.handleAnimationEnd(event);
+    if (onAnimationEnd) {
+      onAnimationEnd(event);
     }
   };
 
-  useEffect(() => {
-    return () => {
-      if (typeof timeoutId && timeoutId.current !== undefined) {
-        clearTimeout(timeoutId);
-        timeoutId.current = undefined;
-      }
-    };
-  }, []);
+  useEffect(
+    () => () => {
+      handleFadeOut.cancel();
+    },
+    [handleFadeOut]
+  );
 
   return (
     <button
@@ -66,11 +67,15 @@ export default function CopyButton({
       title={iconDescription}
       onAnimationEnd={handleAnimationEnd}
       {...other}>
-      <span className={feedbackClassNames}>{feedback}</span>
+      <span
+        className={`${prefix}--assistive-text ${prefix}--copy-btn__feedback`}>
+        {feedback}
+      </span>
       <Copy16 className={`${prefix}--snippet__icon`} />
     </button>
   );
 }
+
 CopyButton.propTypes = {
   /**
    * Specify an optional className to be applied to the underlying <button>
@@ -100,6 +105,7 @@ CopyButton.propTypes = {
    */
   onClick: PropTypes.func,
 };
+
 CopyButton.defaultProps = {
   iconDescription: 'Copy to clipboard',
   feedback: 'Copied!',
