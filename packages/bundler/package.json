@@ -43,7 +43,7 @@
     "node-sass": "^4.9.4",
     "postcss": "^7.0.26",
     "postcss-discard-comments": "^4.0.1",
-    "replace-in-file": "^3.4.4",
+    "replace-in-file": "^5.0.2",
     "rollup": "^1.29.0",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-commonjs": "^10.1.0",

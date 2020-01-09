@@ -44,7 +44,7 @@
     "@carbon/bundler": "^10.5.0",
     "fs-extra": "^8.1.0",
     "klaw-sync": "^6.0.0",
-    "replace-in-file": "^3.4.2",
+    "replace-in-file": "^5.0.2",
     "rimraf": "^3.0.0"
   }
 }
