@@ -50,7 +50,7 @@
     "axe-core": "^3.4.1",
     "babel-jest": "^24.9.0",
     "cross-env": "^6.0.3",
-    "cross-spawn": "^6.0.5",
+    "cross-spawn": "^7.0.1",
     "doctoc": "^1.4.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",

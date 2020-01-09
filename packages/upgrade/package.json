@@ -28,7 +28,7 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "change-case": "^4.1.1",
-    "cross-spawn": "^6.0.5",
+    "cross-spawn": "^7.0.1",
     "fast-glob": "^2.2.6",
     "fs-extra": "^8.1.0",
     "inquirer": "^7.0.3",
