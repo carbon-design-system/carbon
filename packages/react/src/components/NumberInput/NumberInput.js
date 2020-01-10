@@ -113,11 +113,11 @@ class NumberInput extends Component {
     /**
      * Optional starting value for uncontrolled state
      */
-    defaultValue: PropTypes.number,
+    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
      * Specify the value of the input
      */
-    value: PropTypes.number,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
      * Specify if the component should be read-only
      */
