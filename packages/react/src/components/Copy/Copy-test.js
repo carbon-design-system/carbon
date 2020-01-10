@@ -52,9 +52,7 @@ describe('Copy', () => {
     it('Should be able to specify the feedback message', () => {
       const feedbackWrapper = mount(<Copy feedback="Copied!" />);
       expect(
-        feedbackWrapper.find(`.${prefix}--btn--copy__feedback`).props()[
-          'data-feedback'
-        ]
+        feedbackWrapper.find(`.${prefix}--copy-btn__feedback`).text()
       ).toBe('Copied!');
     });
   });
@@ -62,28 +60,24 @@ describe('Copy', () => {
   describe('Renders feedback as expected', () => {
     it('Should make the feedback visible', () => {
       const feedbackWrapper = mount(<Copy feedback="Copied!" />);
-      const feedback = () =>
-        feedbackWrapper.find(`.${prefix}--btn--copy__feedback`);
-      expect(
-        feedback().hasClass(`${prefix}--btn--copy__feedback--displayed`)
-      ).toBe(false);
-      feedbackWrapper.setState({ showFeedback: true });
-      expect(
-        feedback().hasClass(`${prefix}--btn--copy__feedback--displayed`)
-      ).toBe(true);
+      const feedback = feedbackWrapper.find(`.${prefix}--copy-btn__feedback`);
+      expect(feedback).toBeFalsy;
+      feedbackWrapper.simulate('click');
+      expect(feedback).toBeTruthy;
     });
 
     it('Should show feedback for a limited amount of time', () => {
       const feedbackWrapper = mount(
         <Copy feedback="Copied!" feedbackTimeout={5000} />
       );
-      expect(feedbackWrapper.state().showFeedback).toBe(false);
       feedbackWrapper.simulate('click');
-      expect(feedbackWrapper.state().showFeedback).toBe(true);
-      expect(setTimeout.mock.calls.length).toBe(2);
-      expect(setTimeout.mock.calls[1][1]).toBe(5000);
-      jest.runAllTimers();
-      expect(feedbackWrapper.state().showFeedback).toBe(false);
+      const copyButton = feedbackWrapper.find('button');
+      expect(copyButton.hasClass(`${prefix}--copy-btn--animating`)).toBe(true);
+      setTimeout(() => {
+        expect(copyButton.hasClass(`${prefix}--copy-btn--animating`)).toBe(
+          false
+        );
+      }, 5220); // 5000 + 2 * 110 (transition duration)
     });
   });
 
