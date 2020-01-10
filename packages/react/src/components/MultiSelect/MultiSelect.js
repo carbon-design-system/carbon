@@ -218,7 +218,6 @@ export default class MultiSelect extends React.Component {
   render() {
     const { highlightedIndex, isOpen } = this.state;
     const {
-      ariaLabel,
       className: containerClassName,
       id,
       items,
@@ -341,7 +340,7 @@ export default class MultiSelect extends React.Component {
                     />
                   </ListBox.Field>
                   {isOpen && (
-                    <ListBox.Menu aria-label={ariaLabel} id={id}>
+                    <ListBox.Menu aria-labelledby={`${labelId}`} id={id}>
                       {sortItems(items, {
                         selectedItems: {
                           top: selectedItems,
