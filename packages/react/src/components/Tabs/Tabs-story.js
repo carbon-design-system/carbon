@@ -59,6 +59,8 @@ const TabContentRenderedOnlyWhenSelected = ({
 }) =>
   !selected ? null : (
     <div
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+      tabindex="0"
       {...other}
       className={classNames(className, `${prefix}--tab-content`)}
       selected={selected}>
