@@ -472,7 +472,7 @@ categories:
           - study--previous
           - study--skip
           - thumbnail-preview
-          - toggle-text-annotation
+          - text-annotation-toggle
           - window--auto
           - window--base
           - window--overlay
