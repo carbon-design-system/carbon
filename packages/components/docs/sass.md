@@ -13455,6 +13455,37 @@ Code snippet styles
       outline: none;
       border: 2px solid $focus;
     }
+
+    &::before {
+      @include tooltip--caret;
+      display: none;
+    }
+
+    .#{$prefix}--copy-btn__feedback {
+      @include tooltip--content('icon');
+      clip: auto;
+      margin: auto;
+      overflow: visible;
+      display: none;
+    }
+    @include tooltip--placement('icon', 'bottom', 'center');
+
+    &.#{$prefix}--copy-btn--animating::before,
+    &.#{$prefix}--copy-btn--animating .#{$prefix}--copy-btn__feedback {
+      display: block;
+    }
+
+    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out::before,
+    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out
+      .#{$prefix}--copy-btn__feedback {
+      animation: $duration--fast-02 motion(standard, productive) hide-feedback;
+    }
+
+    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in::before,
+    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in
+      .#{$prefix}--copy-btn__feedback {
+      animation: $duration--fast-02 motion(standard, productive) show-feedback;
+    }
   }
 
   .#{$prefix}--snippet--inline code {
@@ -13616,6 +13647,16 @@ Code snippet styles
 
   .#{$prefix}--btn--copy__feedback::after {
     border: none;
+  }
+
+  // TODO: remove copy button styles above
+  .#{$prefix}--snippet .#{$prefix}--copy-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    @include carbon--font-family(
+      'sans'
+    ); // Override inherited rule in code snippet
   }
 
   // Show more / less button
@@ -25265,10 +25306,6 @@ UI shell side nav
     }
   }
 
-  a.#{$prefix}--side-nav__link--current > span.#{$prefix}--side-nav__link-text {
-    color: $ibm-color__gray-100;
-    font-weight: 600;
-  }
   //----------------------------------------------------------------------------
   // Side-nav > Link
   //----------------------------------------------------------------------------
@@ -25314,7 +25351,14 @@ UI shell side nav
 
   a.#{$prefix}--side-nav__link[aria-current='page'],
   a.#{$prefix}--side-nav__link--current {
+    background-color: $shell-side-nav-bg-04;
     font-weight: 600;
+  }
+
+  a.#{$prefix}--side-nav__link[aria-current='page']
+    .#{$prefix}--side-nav__link-text,
+  a.#{$prefix}--side-nav__link--current .#{$prefix}--side-nav__link-text {
+    color: $ibm-color__gray-100;
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page']::before,

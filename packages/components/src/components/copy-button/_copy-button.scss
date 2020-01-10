@@ -12,7 +12,8 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 @import '../button/button';
-@import 'keyframes';
+@import '../../globals/scss/tooltip';
+@import '../../globals/scss/keyframes';
 
 @include exports('copy-button') {
   .#{$prefix}--btn--copy {
@@ -85,6 +86,11 @@
     height: $carbon--spacing-08;
     width: $carbon--spacing-08;
     background-color: $ui-01;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $hover-ui;
+    }
 
     &::before {
       @include tooltip--caret;
