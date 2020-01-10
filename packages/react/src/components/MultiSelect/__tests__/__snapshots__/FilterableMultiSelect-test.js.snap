@@ -90,8 +90,6 @@ exports[`MultiSelect.Filterable should render 1`] = `
             className="bx--multi-select bx--combo-box bx--multi-select--filterable bx--list-box"
             onClick={[Function]}
             onKeyDown={[Function]}
-            role="listbox"
-            tabIndex="-1"
           >
             <ListBoxField
               aria-expanded={false}
