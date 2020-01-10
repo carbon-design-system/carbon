@@ -11,7 +11,9 @@ const fs = require('fs-extra');
 const klaw = require('klaw-sync');
 const os = require('os');
 const path = require('path');
+const isWin = process.platform === 'win32';
 const replace = require('replace-in-file');
+const { reporter } = require('@carbon/cli-reporter');
 
 const tmpDir = os.tmpdir();
 
@@ -24,12 +26,14 @@ async function inline(options, info) {
 
   await Promise.all([fs.remove(inlineFolder), fs.remove(vendorFolder)]);
 
+  reporter.info('Inlining sass dependencies');
   await inlineSassDependencies(
     packageJsonPath,
     sourceFolder,
     vendorFolder,
     cwd
   );
+  reporter.success('Done');
 }
 
 async function inlineSassDependencies(
@@ -50,8 +54,9 @@ async function inlineSassDependencies(
   ];
   const inlinedDependencies = (await Promise.all(
     allPossibleDependencies.map(async dependency => {
-      const [packageFolder, scssFolder] = await findSassModule(dependency, cwd);
-      if (packageFolder) {
+      const modules = await findSassModule(dependency, cwd);
+      if (modules) {
+        const [scssFolder] = modules;
         const dependencyOutputFolder = path.join(vendorFolder, dependency);
 
         await fs.copy(scssFolder, dependencyOutputFolder);
@@ -84,11 +89,7 @@ async function inlineSassDependencies(
         return false;
       }
 
-      if (path.basename(src) === 'index.scss') {
-        return false;
-      }
-
-      return true;
+      return path.basename(src) !== 'index.scss';
     },
   });
   await fs.copy(tmpFolder, inlineFolder);
@@ -113,7 +114,9 @@ async function inlineSassDependencies(
         files: file.path,
         from: REPLACE_REGEX,
         to(_, match) {
-          return `@import '${relativeImportPath}/${match}`;
+          return `@import '${
+            isWin ? relativeImportPath.replace('\\', '/') : relativeImportPath
+          }/${match}`;
         },
       });
     })
@@ -123,20 +126,20 @@ async function inlineSassDependencies(
 function findSassModule(packageName, cwd) {
   let currentDirectory = cwd;
 
-  while (currentDirectory !== '/') {
+  while (currentDirectory !== path.dirname(currentDirectory)) {
     const nodeModulesFolder = path.join(currentDirectory, 'node_modules');
     const packageFolder = path.join(nodeModulesFolder, packageName);
     const scssFolder = path.join(packageFolder, 'scss');
     const packageJsonPath = path.join(packageFolder, 'package.json');
 
     if (fs.existsSync(scssFolder)) {
-      return [packageFolder, scssFolder, packageJsonPath];
+      return [scssFolder, packageFolder, packageJsonPath];
     }
 
     currentDirectory = path.dirname(currentDirectory);
   }
 
-  return [false];
+  return false;
 }
 
 module.exports = inline;
