@@ -6,91 +6,101 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import debounce from 'lodash.debounce';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
+import { composeEventHandlers } from '../../tools/events';
 
 const { prefix } = settings;
 
-export default class Copy extends Component {
-  static propTypes = {
-    /**
-     * Pass in content to be rendred in the underlying <button>
-     */
-    children: PropTypes.node,
-
-    /**
-     * Specify an optional className to be applied to the underlying <button>
-     */
-    className: PropTypes.string,
-
-    /**
-     * Specify the string that is displayed when the button is clicked and the
-     * content is copied
-     */
-    feedback: PropTypes.string,
-
-    /**
-     * Specify the time it takes for the feedback message to timeout
-     */
-    feedbackTimeout: PropTypes.number,
-
-    /**
-     * Specify an optional `onClick` handler that is called when the underlying
-     * <button> is clicked
-     */
-    onClick: PropTypes.func,
-  };
-
-  static defaultProps = {
-    feedback: 'Copied!',
-    feedbackTimeout: 2000,
-    onClick: () => {},
-  };
-
-  state = {
-    showFeedback: false,
-  };
-
-  /* istanbul ignore next */
-  componentWillUnmount() {
-    if (typeof this.timeoutId !== 'undefined') {
-      clearTimeout(this.timeoutId);
-      delete this.timeoutId;
+export default function Copy({
+  children,
+  className,
+  feedback,
+  feedbackTimeout,
+  onAnimationEnd,
+  onClick,
+  ...other
+}) {
+  const [animation, setAnimation] = useState('');
+  const classNames = classnames(className, {
+    [`${prefix}--copy-btn--animating`]: animation,
+    [`${prefix}--copy-btn--${animation}`]: animation,
+  });
+  const handleFadeOut = useCallback(
+    debounce(() => {
+      setAnimation('fade-out');
+    }, feedbackTimeout),
+    [feedbackTimeout]
+  );
+  const handleClick = useCallback(() => {
+    setAnimation('fade-in');
+    handleFadeOut();
+  }, [handleFadeOut]);
+  const handleAnimationEnd = event => {
+    if (event.animationName === 'hide-feedback') {
+      setAnimation('');
     }
-  }
+  };
 
-  handleClick = evt => {
-    this.setState({ showFeedback: true });
-    this.timeoutId = setTimeout(() => {
-      this.setState({ showFeedback: false });
-    }, this.props.feedbackTimeout);
+  useEffect(
+    () => () => {
+      handleFadeOut.cancel();
+    },
+    [handleFadeOut]
+  );
 
-    this.props.onClick(evt);
-  }; // eslint-disable-line no-unused-vars
-
-  render() {
-    const {
-      className,
-      feedback,
-      children,
-      feedbackTimeout, // eslint-disable-line no-unused-vars
-      onClick, // eslint-disable-line no-unused-vars
-      ...other
-    } = this.props;
-    const feedbackClassNames = classnames(`${prefix}--btn--copy__feedback`, {
-      [`${prefix}--btn--copy__feedback--displayed`]: this.state.showFeedback,
-    });
-
-    return (
-      <button
-        type="button"
-        className={className}
-        onClick={this.handleClick}
-        {...other}>
-        {children}
-        <div className={feedbackClassNames} data-feedback={feedback} />
-      </button>
-    );
-  }
+  return (
+    <button
+      type="button"
+      className={classNames}
+      onClick={composeEventHandlers([onClick, handleClick])}
+      onAnimationEnd={composeEventHandlers([
+        onAnimationEnd,
+        handleAnimationEnd,
+      ])}
+      {...other}>
+      {children}
+      <span
+        className={`${prefix}--assistive-text ${prefix}--copy-btn__feedback`}>
+        {feedback}
+      </span>
+    </button>
+  );
 }
+
+Copy.propTypes = {
+  /**
+   * Pass in content to be rendred in the underlying <button>
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the underlying <button>
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify the string that is displayed when the button is clicked and the
+   * content is copied
+   */
+  feedback: PropTypes.string,
+
+  /**
+   * Specify the time it takes for the feedback message to timeout
+   */
+  feedbackTimeout: PropTypes.number,
+
+  /**
+   * Specify an optional `onClick` handler that is called when the underlying
+   * <button> is clicked
+   */
+  onClick: PropTypes.func,
+};
+
+Copy.defaultProps = {
+  feedback: 'Copied!',
+  feedbackTimeout: 2000,
+  onClick: () => {},
+};
