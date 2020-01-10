@@ -54,8 +54,6 @@ const ListBox = ({
     <>
       <div
         {...rest}
-        role="listbox"
-        tabIndex="-1"
         className={className}
         ref={innerRef}
         onKeyDown={handleOnKeyDown}
