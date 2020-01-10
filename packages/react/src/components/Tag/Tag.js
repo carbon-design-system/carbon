@@ -48,8 +48,11 @@ const Tag = ({
           ? `${title} ${children}`
           : `Clear filter ${children}`
       }
+      disabled={disabled}
       {...other}>
-      {children !== null && children !== undefined ? children : TYPES[type]}
+      <span className={`${prefix}--tag__label`}>
+        {children !== null && children !== undefined ? children : TYPES[type]}
+      </span>
       <Close16 />
     </button>
   ) : (
