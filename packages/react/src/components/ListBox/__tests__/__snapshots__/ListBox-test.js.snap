@@ -12,8 +12,6 @@ exports[`ListBox should render 1`] = `
           <div
             class="bx--list-box__container bx--list-box"
             id="test-listbox"
-            role="listbox"
-            tabindex="-1"
           >
             <div
               aria-haspopup="listbox"
@@ -39,8 +37,6 @@ exports[`ListBox should render 1`] = `
     id="test-listbox"
     onClick={[Function]}
     onKeyDown={[Function]}
-    role="listbox"
-    tabIndex="-1"
   >
     <ListBoxField
       id="test-listbox"
