@@ -31,6 +31,6 @@
     "prettier": "^1.19.1",
     "progress-estimator": "^0.2.2",
     "remark": "^10.0.1",
-    "yargs": "^13.2.4"
+    "yargs": "^15.1.0"
   }
 }
