@@ -8,10 +8,12 @@
 'use strict';
 
 const meta = require('@carbon/icons/build-info.json');
+const { reporter } = require('@carbon/cli-reporter');
 const { rollup } = require('rollup');
 const babel = require('rollup-plugin-babel');
 const virtual = require('./plugins/virtual');
 const { createIconComponent } = require('./createIconComponent');
+const isWin = process.platform === 'win32';
 
 const BUNDLE_FORMATS = [
   {
@@ -46,11 +48,14 @@ const babelConfig = {
  * building icon components built on top of the `<Icon>` primitive in `src`.
  */
 async function build() {
+  reporter.info('Creating components');
   const modules = meta.map(icon => {
     const { source } = createIconComponent(icon.moduleName, icon.descriptor);
     return {
       moduleName: icon.moduleName,
-      filepath: icon.outputOptions.file.replace(/^es\//g, '').slice(0, -3),
+      filepath: icon.outputOptions.file
+        .replace(isWin ? /^es\\/g : /^es\//g, '')
+        .slice(0, -3),
       source,
     };
   });
@@ -64,6 +69,7 @@ async function build() {
   },
 }`;
 
+  reporter.info('Bundling may take a while...');
   const bundle = await rollup({
     input: {
       index: '__entrypoint__.js',
@@ -91,6 +97,7 @@ async function build() {
     ],
   });
 
+  reporter.info('Writing out to files');
   await Promise.all(
     BUNDLE_FORMATS.map(({ format, dir }) => {
       return bundle.write({
@@ -101,7 +108,11 @@ async function build() {
   );
 }
 
-build().catch(error => {
-  // eslint-disable-next-line no-console
-  console.error(error);
-});
+build()
+  .then(() => {
+    reporter.success('Done!');
+  })
+  .catch(error => {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  });
