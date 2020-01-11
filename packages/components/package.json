@@ -100,7 +100,7 @@
     "chokidar": "^2.0.0",
     "classnames": "^2.2.0",
     "commander": "^2.13.0",
-    "core-js": "^2.4.0",
+    "core-js": "^3.6.2",
     "cross-env": "^5.2.0",
     "css-loader": "^0.28.0",
     "custom-event": "^1.0.0",
