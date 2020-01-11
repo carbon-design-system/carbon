@@ -52,19 +52,21 @@ async function inlineSassDependencies(
     ...Object.keys(dependencies),
     ...Object.keys(devDependencies),
   ];
-  const inlinedDependencies = (await Promise.all(
-    allPossibleDependencies.map(async dependency => {
-      const modules = await findSassModule(dependency, cwd);
-      if (modules) {
-        const [scssFolder] = modules;
-        const dependencyOutputFolder = path.join(vendorFolder, dependency);
+  const inlinedDependencies = (
+    await Promise.all(
+      allPossibleDependencies.map(async dependency => {
+        const modules = await findSassModule(dependency, cwd);
+        if (modules) {
+          const [scssFolder] = modules;
+          const dependencyOutputFolder = path.join(vendorFolder, dependency);
 
-        await fs.copy(scssFolder, dependencyOutputFolder);
+          await fs.copy(scssFolder, dependencyOutputFolder);
 
-        return [dependency, dependencyOutputFolder];
-      }
-    })
-  )).filter(Boolean);
+          return [dependency, dependencyOutputFolder];
+        }
+      })
+    )
+  ).filter(Boolean);
 
   if (inlinedDependencies.length === 0) {
     return;
