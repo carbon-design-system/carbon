@@ -84,9 +84,9 @@ class StructuredList extends mixin(
 
   _handleClick(evt) {
     const selectedRow = eventMatches(evt, this.options.selectorRow);
-    toArray(this.element.querySelectorAll(this.options.selectorRow)).forEach(
-      row => row.classList.remove(this.options.classActive)
-    );
+    toArray(
+      this.element.querySelectorAll(this.options.selectorRow)
+    ).forEach(row => row.classList.remove(this.options.classActive));
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
     }
@@ -96,9 +96,9 @@ class StructuredList extends mixin(
   _handleKeydownChecked(evt) {
     evt.preventDefault(); // prevent spacebar from scrolling page
     const selectedRow = eventMatches(evt, this.options.selectorRow);
-    toArray(this.element.querySelectorAll(this.options.selectorRow)).forEach(
-      row => row.classList.remove(this.options.classActive)
-    );
+    toArray(
+      this.element.querySelectorAll(this.options.selectorRow)
+    ).forEach(row => row.classList.remove(this.options.classActive));
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
       const input =

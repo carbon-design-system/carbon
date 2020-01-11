@@ -28,7 +28,7 @@
     "clipboardy": "^2.1.0",
     "fs-extra": "^8.0.1",
     "inquirer": "^6.4.1",
-    "prettier": "^1.18.2",
+    "prettier": "^1.19.1",
     "progress-estimator": "^0.2.2",
     "remark": "^10.0.1",
     "yargs": "^13.2.4"
