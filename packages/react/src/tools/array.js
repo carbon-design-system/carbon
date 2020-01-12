@@ -29,14 +29,3 @@ export function equals(arr1, arr2) {
   }
   return true;
 }
-
-/**
- * helper to define valid column widths for prop checking
- *
- * @param {object} params - inclusive edge markers
- * @param {number} params.start
- * @param {number} params.end
- * @returns {number[]} arr with each item having val of its index
- */
-export const range = ({ start = 0, end }) =>
-  [...Array(end - start + 1)].map((_, i) => i);

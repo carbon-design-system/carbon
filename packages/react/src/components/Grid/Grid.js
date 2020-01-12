@@ -12,9 +12,18 @@ import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
 import { breakpoints } from '@carbon/layout';
 
-import { range } from '../../tools/array';
-
 const { prefix } = settings;
+
+/**
+ * helper to define valid column widths for prop checking
+ *
+ * @param {object} params - inclusive edge markers
+ * @param {number} params.start
+ * @param {number} params.end
+ * @returns {number[]} arr with each item having val of its index
+ */
+export const range = ({ start = 0, end }) =>
+  [...Array(end - start + 1)].map((_, i) => i);
 
 // getter functions needed due to error in storybook
 // addons knobs that requires a copy of this object to avoid
