@@ -12,6 +12,7 @@ import Grid from './Grid';
 import { blue, gray } from '@carbon/colors';
 import './_Grid-story.scss';
 
+// FIXME: should be unnecessary past Storybook 5.2.2
 const handleUndefStr = str => {
   if (str === 'undefined') return undefined;
   return str;

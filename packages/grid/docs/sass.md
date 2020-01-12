@@ -2,8 +2,8 @@
 
 | Mark | Description                                                |
 | ---- | ---------------------------------------------------------- |
-| ✅    | Public functions, mixins, placeholders, and variables      |
-| ❌    | Private items - not supported outside package's build      |
+| ✅   | Public functions, mixins, placeholders, and variables      |
+| ❌   | Private items - not supported outside package's build      |
 | ⚠️   | Deprecated items - may not be available in future releases |
 
 <!-- toc -->
@@ -127,7 +127,7 @@ will hide the column entirely.
   @if $span == 0 {
     display: none;
   } @else {
-    // Explicitly include `display: block` to override
+    // Explicitly write `display: block` to override
     display: block;
     flex: 0 0 percentage($span / $columns);
     // Add a `max-width` to ensure content within each column does not blow out
