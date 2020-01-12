@@ -37,7 +37,6 @@ export const Grid = ({
   as = 'div',
   condensed = false,
   fullWidth = false,
-  noGutter = false,
   className = '',
   children = null,
   ...rest
@@ -50,8 +49,6 @@ export const Grid = ({
         `${prefix}--grid`,
         condensed && `${prefix}--grid--condensed`,
         fullWidth && `${prefix}--grid--full-width`,
-        noGutter === true && `${prefix}--no-gutter`, // `true` === both
-        noGutter !== true && noGutter && `${prefix}--no-gutter--${noGutter}`, // `left` || `right`
         className
       ),
     },
@@ -70,9 +67,6 @@ Grid.propTypes = {
   /** Remove the default max width that the grid has set */
   fullWidth: PropTypes.bool,
 
-  /** Remove horizontal padding on the Grid */
-  noGutter: PropTypes.oneOf([true, false, 'left', 'right']),
-
   /** Specify a custom className to be applied to the Grid */
   className: PropTypes.string,
 
@@ -86,7 +80,6 @@ Grid.propTypes = {
 export const GridRow = ({
   as = 'div',
   condensed = false,
-  noGutter = false,
   className = '',
   children = null,
   ...rest
@@ -98,8 +91,6 @@ export const GridRow = ({
       className: classNames(
         `${prefix}--row`,
         condensed && `${prefix}--row--condensed`,
-        noGutter === true && `${prefix}--no-gutter`, // `true` === both
-        noGutter !== true && noGutter && `${prefix}--no-gutter--${noGutter}`, // `left` || `right`
         className
       ),
     },
@@ -114,9 +105,6 @@ GridRow.propTypes = {
 
   /** Specify a single row as condensed. Rows that are adjacent and are condensed will have 2px of margin between them to match gutter. */
   condensed: PropTypes.bool,
-
-  /** Remove horizontal padding on the Grid Row AND all child Grid Cols */
-  noGutter: PropTypes.oneOf([true, false, 'left', 'right']),
 
   /** Specify a custom className to be applied to the Grid Row */
   className: PropTypes.string,
@@ -159,7 +147,6 @@ export const GridCol = ({
   lg: lgRaw,
   xlg: xlgRaw,
   max: maxRaw,
-  noGutter = false,
   className = '',
   children = null,
   ...rest
@@ -187,9 +174,6 @@ export const GridCol = ({
         lg.offset && `${prefix}--offset-lg-${lg.offset}`,
         xlg.offset && `${prefix}--offset-xlg-${xlg.offset}`,
         max.offset && `${prefix}--offset-max-${max.offset}`,
-
-        noGutter === true && `${prefix}--no-gutter`, // true => both
-        noGutter && noGutter !== true && `${prefix}--no-gutter--${noGutter}`, // "left" || "right"
         className
       ),
     },
@@ -289,9 +273,6 @@ GridCol.propTypes = {
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
   smOffset: PropTypes.oneOf(VALID_COL_OFFSETS.sm),
-
-  /** Remove horizontal padding on the Grid Col */
-  noGutter: PropTypes.oneOf([false, true, 'left', 'right']),
 
   /** Specify a custom className to be applied to the Grid Col */
   className: PropTypes.string,

@@ -6,35 +6,19 @@
  */
 
 import React from 'react';
-// import { action } from '@storybook/addon-actions';
-import {
-  withKnobs,
-  boolean,
-  radios as radiosWithoutBooleans,
-  select,
-  color,
-} from '@storybook/addon-knobs';
+import { withKnobs, boolean, select, color } from '@storybook/addon-knobs';
 import Grid from './Grid';
 
 import { blue, gray } from '@carbon/colors';
 import './_Grid-story.scss';
-
-const handleBoolStr = str => {
-  if (str === 'true') return true;
-  if (str === 'false') return false;
-  return str;
-};
 
 const handleUndefStr = str => {
   if (str === 'undefined') return undefined;
   return str;
 };
 
-// allow booleans in multi-choice knobs via 'false' or 'true' strings
-/** @type {radiosWithoutBooleans} */
-const radios = (...params) => handleBoolStr(radiosWithoutBooleans(...params));
 // convert empty str from `undefined` return val to undefined
-/** @type {selectWithoutUndefined} */
+/** @type {select} */
 const selectWithUndef = (...params) => handleUndefStr(select(...params));
 
 // add blank (empty space) option to object with an undefined val
@@ -60,26 +44,16 @@ export default {
   },
 };
 
-const VALID_NO_GUTTER_VALS = {
-  true: 'true',
-  false: 'false',
-  left: 'left',
-  right: 'right',
-};
-
 const propsGrid = () => ({
   condensed: boolean('condensed', false, 'Grid'),
   fullWidth: boolean('fullWidth', false, 'Grid'),
-  noGutter: radios('noGutter', VALID_NO_GUTTER_VALS, 'false', 'Grid'),
 });
 
 const propsGridRow = () => ({
   condensed: boolean('condensed', false, 'Grid.Row'),
-  noGutter: radios('noGutter', VALID_NO_GUTTER_VALS, 'false', 'Grid.Row'),
 });
 
 const propsGridCol = () => ({
-  noGutter: radios('noGutter', VALID_NO_GUTTER_VALS, 'false', 'Grid.Col'),
   sm: selectWithUndef(
     'sm',
     withBlank(Grid.getValidColWidths().sm),

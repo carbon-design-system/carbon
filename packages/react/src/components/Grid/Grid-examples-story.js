@@ -147,63 +147,6 @@ export const condensedColumns = () => (
   </Grid>
 );
 
-export const noGutterColumns = () => (
-  <Grid>
-    <Grid.Row>
-      <Grid.Col noGutter>
-        <DemoContent>1/4</DemoContent>
-      </Grid.Col>
-      <Grid.Col noGutter>
-        <DemoContent>1/4</DemoContent>
-      </Grid.Col>
-      <Grid.Col noGutter>
-        <DemoContent>1/4</DemoContent>
-      </Grid.Col>
-      <Grid.Col noGutter>
-        <DemoContent>1/4</DemoContent>
-      </Grid.Col>
-    </Grid.Row>
-  </Grid>
-);
-
-export const noGutterRows = () => (
-  <Grid>
-    <Grid.Row noGutter>
-      <Grid.Col>
-        <DemoContent>1/4</DemoContent>
-      </Grid.Col>
-      <Grid.Col>
-        <DemoContent>1/4</DemoContent>
-      </Grid.Col>
-      <Grid.Col>
-        <DemoContent>1/4</DemoContent>
-      </Grid.Col>
-      <Grid.Col>
-        <DemoContent>1/4</DemoContent>
-      </Grid.Col>
-    </Grid.Row>
-  </Grid>
-);
-
-export const noGutterDirectional = () => (
-  <Grid>
-    <Grid.Row>
-      <Grid.Col noGutter="left">
-        <DemoContent>No Gutter on the left-hand side</DemoContent>
-      </Grid.Col>
-      <Grid.Col noGutter="left">
-        <DemoContent>No Gutter on the left-hand side</DemoContent>
-      </Grid.Col>
-      <Grid.Col noGutter="right">
-        <DemoContent>No Gutter on the right-hand side</DemoContent>
-      </Grid.Col>
-      <Grid.Col noGutter="right">
-        <DemoContent>No Gutter on the right-hand side</DemoContent>
-      </Grid.Col>
-    </Grid.Row>
-  </Grid>
-);
-
 export const fullWidth = () => (
   <Grid fullWidth>
     <Grid.Row>

@@ -5,6 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/**
+ * NOTE: if adding tests for `noGutter` prop, please re-use previously written ones before
+ * removed from an older PR #4894 (https://github.com/carbon-design-system/carbon/pull/4894)
+ * they can be found in commit 35d876976c595b916de8cb64b027f4cefda1688d
+ */
+
 import React from 'react';
 import Grid from '../Grid';
 import { shallow } from 'enzyme';
@@ -22,7 +28,6 @@ describe('<Grid />', () => {
     );
     const wrapperCondensed = shallow(<Grid condensed />);
     const wrapperFullWidth = shallow(<Grid fullWidth />);
-    const wrapperNoGutter = shallow(<Grid noGutter />);
     const wrapperAsSection = shallow(<Grid as="section" />);
 
     it('should support a custom element as the root node', () => {
@@ -50,29 +55,6 @@ describe('<Grid />', () => {
       );
     });
 
-    it('has correct gutter classes when passed true, left, or right', () => {
-      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter`)).toEqual(true);
-      wrapperNoGutter.setProps({ noGutter: 'left' });
-      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter--left`)).toEqual(
-        true
-      );
-      wrapperNoGutter.setProps({ noGutter: 'right' });
-      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter--right`)).toEqual(
-        true
-      );
-    });
-
-    it('does not render classes when passed falsey noGutter, fullWidth, or condensed props', () => {
-      wrapper.setProps({ noGutter: false, fullWidth: false, condensed: false });
-      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter`)).toEqual(false);
-      expect(wrapperNoGutter.hasClass(`${prefix}--grid--full-width`)).toEqual(
-        false
-      );
-      expect(wrapperNoGutter.hasClass(`${prefix}--grid--condensed`)).toEqual(
-        false
-      );
-    });
-
     it('should render child content', () => {
       expect(wrapper.find(Child).length).toEqual(1);
     });
@@ -88,7 +70,6 @@ describe('<Grid.Row />', () => {
       </Grid.Row>
     );
     const wrapperCondensed = shallow(<Grid.Row condensed />);
-    const wrapperNoGutter = shallow(<Grid.Row noGutter />);
     const wrapperAsSection = shallow(<Grid.Row as="section" />);
 
     it('should support a custom element as the root node', () => {
@@ -110,24 +91,9 @@ describe('<Grid.Row />', () => {
       );
     });
 
-    it('has correct gutter classes when passed true, left, or right', () => {
-      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter`)).toEqual(true);
-      wrapperNoGutter.setProps({ noGutter: 'left' });
-      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter--left`)).toEqual(
-        true
-      );
-      wrapperNoGutter.setProps({ noGutter: 'right' });
-      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter--right`)).toEqual(
-        true
-      );
-    });
-
-    it('does not render classes when passed falsey noGutter or condensed', () => {
-      wrapper.setProps({ noGutter: false, condensed: false });
-      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter`)).toEqual(false);
-      expect(wrapperNoGutter.hasClass(`${prefix}--row--condensed`)).toEqual(
-        false
-      );
+    it('does not render classes when passed falsey `condensed`', () => {
+      wrapper.setProps({ condensed: false });
+      expect(wrapper.hasClass(`${prefix}--row--condensed`)).toEqual(false);
     });
 
     it('should render child content', () => {
@@ -144,7 +110,6 @@ describe('<Grid.Col />', () => {
         <Child />
       </Grid.Col>
     );
-    const wrapperNoGutter = shallow(<Grid.Col noGutter />);
     const wrapperAsSection = shallow(<Grid.Col as="section" />);
     const wrapperBreakpoints = shallow(<Grid.Col />);
 
@@ -158,23 +123,6 @@ describe('<Grid.Col />', () => {
     it('renders extra classes passed in via className & passes thru unknown props', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
       expect(wrapper.prop('style')).toBeTruthy();
-    });
-
-    it('has correct gutter classes when passed true, left, or right', () => {
-      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter`)).toEqual(true);
-      wrapperNoGutter.setProps({ noGutter: 'left' });
-      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter--left`)).toEqual(
-        true
-      );
-      wrapperNoGutter.setProps({ noGutter: 'right' });
-      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter--right`)).toEqual(
-        true
-      );
-    });
-
-    it('does not render class when passed falsey noGutter', () => {
-      wrapper.setProps({ noGutter: false });
-      expect(wrapperNoGutter.hasClass(`${prefix}--no-gutter`)).toEqual(false);
     });
 
     it('should render child content', () => {
