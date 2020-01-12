@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import classNames from 'classnames';
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 
 import { settings } from 'carbon-components';
@@ -34,26 +34,25 @@ const VALID_COL_WIDTHS = getValidColWidths();
 const VALID_COL_OFFSETS = getValidColOffsets();
 
 export const Grid = ({
-  as = 'div',
+  as: BaseComponent = 'div',
   condensed = false,
   fullWidth = false,
-  className = '',
-  children = null,
+  className: containerClassName,
+  children,
   ...rest
-}) =>
-  React.createElement(
-    as,
-    {
-      ...rest,
-      className: classNames(
-        `${prefix}--grid`,
-        condensed && `${prefix}--grid--condensed`,
-        fullWidth && `${prefix}--grid--full-width`,
-        className
-      ),
-    },
-    children
+}) => {
+  const className = cx(containerClassName, {
+    [`${prefix}--grid`]: true,
+    [`${prefix}--grid--condensed`]: condensed,
+    [`${prefix}--grid--full-width`]: fullWidth,
+  });
+
+  return (
+    <BaseComponent className={className} {...rest}>
+      {children}
+    </BaseComponent>
   );
+};
 
 Grid.propTypes = {
   /**
@@ -61,59 +60,68 @@ Grid.propTypes = {
    */
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 
-  /** Collapse the gutter to 2px. Useful for fluid layouts. Rows have 2px of margin between them to match gutter. */
+  /**
+   * Collapse the gutter to 2px. Useful for fluid layouts.
+   * Rows have 2px of margin between them to match gutter.
+   */
   condensed: PropTypes.bool,
 
-  /** Remove the default max width that the grid has set */
+  /**
+   * Remove the default max width that the grid has set
+   */
   fullWidth: PropTypes.bool,
 
-  /** Specify a custom className to be applied to the Grid */
+  /**
+   * Specify a custom className to be applied to the Grid
+   */
   className: PropTypes.string,
 
-  /** Pass in content that will be rendered within the Grid */
+  /**
+   * Pass in content that will be rendered within the Grid Row
+   */
   children: PropTypes.node,
-
-  /** Pass through any other undefined props to DOM */
-  rest: PropTypes.node,
 };
 
-export const GridRow = ({
-  as = 'div',
+export const Row = ({
+  as: BaseComponent = 'div',
   condensed = false,
-  className = '',
-  children = null,
+  className: containerClassName,
+  children,
   ...rest
-}) =>
-  React.createElement(
-    as,
-    {
-      ...rest,
-      className: classNames(
-        `${prefix}--row`,
-        condensed && `${prefix}--row--condensed`,
-        className
-      ),
-    },
-    children
-  );
+}) => {
+  const className = cx(containerClassName, {
+    [`${prefix}--row`]: true,
+    [`${prefix}--row--condensed`]: condensed,
+  });
 
-GridRow.propTypes = {
+  return (
+    <BaseComponent className={className} {...rest}>
+      {children}
+    </BaseComponent>
+  );
+};
+
+Row.propTypes = {
   /**
    * Provide a custom element to render instead of the default <div>
    */
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 
-  /** Specify a single row as condensed. Rows that are adjacent and are condensed will have 2px of margin between them to match gutter. */
+  /**
+   * Specify a single row as condensed.Rows that are adjacent
+   * and are condensed will have 2px of margin between them to match gutter.
+   */
   condensed: PropTypes.bool,
 
-  /** Specify a custom className to be applied to the Grid Row */
+  /**
+   * Specify a custom className to be applied to the Grid Row
+   */
   className: PropTypes.string,
 
-  /** Pass in content that will be rendered within the Grid Row */
+  /**
+   * Pass in content that will be rendered within the Grid Row
+   */
   children: PropTypes.node,
-
-  /** Pass through any other undefined props to DOM */
-  rest: PropTypes.node,
 };
 
 /**
@@ -140,15 +148,15 @@ const standardize = breakpoint => {
   return obj;
 };
 
-export const GridCol = ({
-  as = 'div',
+export const Col = ({
+  as: BaseComponent = 'div',
   sm: smRaw,
   md: mdRaw,
   lg: lgRaw,
   xlg: xlgRaw,
   max: maxRaw,
-  className = '',
-  children = null,
+  className: containerClassName,
+  children,
   ...rest
 }) => {
   // map list of raw breakpoints into obj format to simplify below className definition
@@ -157,31 +165,29 @@ export const GridCol = ({
     breakPt => standardize(breakPt)
   );
 
-  return React.createElement(
-    as,
-    {
-      ...rest,
-      className: classNames(
-        `${prefix}--col`,
-        sm.span && `${prefix}--col-sm-${sm.span}`,
-        md.span && `${prefix}--col-md-${md.span}`,
-        lg.span && `${prefix}--col-lg-${lg.span}`,
-        xlg.span && `${prefix}--col-xlg-${xlg.span}`,
-        max.span && `${prefix}--col-max-${max.span}`,
+  const className = cx(containerClassName, {
+    [`${prefix}--col`]: true,
+    [`${prefix}--col-sm-${sm.span}`]: sm.span,
+    [`${prefix}--col-md-${md.span}`]: md.span,
+    [`${prefix}--col-lg-${lg.span}`]: lg.span,
+    [`${prefix}--col-xlg-${xlg.span}`]: xlg.span,
+    [`${prefix}--col-max-${max.span}`]: max.span,
 
-        sm.offset && `${prefix}--offset-sm-${sm.offset}`,
-        md.offset && `${prefix}--offset-md-${md.offset}`,
-        lg.offset && `${prefix}--offset-lg-${lg.offset}`,
-        xlg.offset && `${prefix}--offset-xlg-${xlg.offset}`,
-        max.offset && `${prefix}--offset-max-${max.offset}`,
-        className
-      ),
-    },
-    children
+    [`${prefix}--offset-sm-${sm.offset}`]: sm.offset,
+    [`${prefix}--offset-md-${md.offset}`]: md.offset,
+    [`${prefix}--offset-lg-${lg.offset}`]: lg.offset,
+    [`${prefix}--offset-xlg-${xlg.offset}`]: xlg.offset,
+    [`${prefix}--offset-max-${max.offset}`]: max.offset,
+  });
+
+  return (
+    <BaseComponent className={className} {...rest}>
+      {children}
+    </BaseComponent>
   );
 };
 
-GridCol.propTypes = {
+Col.propTypes = {
   /**
    * Provide a custom element to render instead of the default <div>
    */
@@ -274,19 +280,20 @@ GridCol.propTypes = {
    */
   smOffset: PropTypes.oneOf(VALID_COL_OFFSETS.sm),
 
-  /** Specify a custom className to be applied to the Grid Col */
+  /**
+   * Specify a custom className to be applied to the Grid Col
+   */
   className: PropTypes.string,
 
-  /** Pass in content that will be rendered within the Grid Col */
+  /**
+   * Pass in content that will be rendered within the Grid Col
+   */
   children: PropTypes.node,
-
-  /** Pass through any other undefined props to DOM */
-  rest: PropTypes.node,
 };
 
 Grid.getValidColWidths = getValidColWidths;
 Grid.getValidColOffsets = getValidColOffsets;
-Grid.Row = GridRow;
-Grid.Col = GridCol;
+Grid.Row = Row;
+Grid.Col = Col;
 
 export default Grid;
