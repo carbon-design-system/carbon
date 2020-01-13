@@ -87,7 +87,7 @@ export default props => (
                 Action 3
               </TableToolbarAction>
             </TableToolbarMenu>
-            <Button onClick={action('Add new row')} small kind="primary">
+            <Button onClick={action('Add new row')} size="small" kind="primary">
               Add new
             </Button>
           </TableToolbarContent>

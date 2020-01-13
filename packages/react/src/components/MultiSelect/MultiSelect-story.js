@@ -51,6 +51,12 @@ const types = {
   'Inline (inline)': 'inline',
 };
 
+const sizes = {
+  'Extra large size (xl)': 'xl',
+  'Regular size (lg)': '',
+  'Small size (sm)': 'sm',
+};
+
 const props = () => ({
   id: text('MultiSelect ID (id)', 'carbon-multiselect-example'),
   titleText: text('Title (titleText)', 'Multiselect title'),
@@ -63,6 +69,7 @@ const props = () => ({
   light: boolean('Light variant (light)', false),
   useTitleInItem: boolean('Show tooltip on hover', false),
   type: select('UI type (Only for `<MultiSelect>`) (type)', types, 'default'),
+  size: select('Field size (size)', sizes, '') || undefined,
   label: text('Label (label)', defaultLabel),
   invalid: boolean('Show form validation UI (invalid)', false),
   invalidText: text(

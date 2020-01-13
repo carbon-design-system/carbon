@@ -42,6 +42,8 @@ describe('Carbon Components React', () => {
         "DatePickerSkeleton",
         "Dropdown",
         "DropdownSkeleton",
+        "ErrorBoundary",
+        "ErrorBoundaryContext",
         "ExpandableTile",
         "FileUploader",
         "FileUploaderButton",

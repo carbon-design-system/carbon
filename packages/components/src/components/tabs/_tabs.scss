@@ -398,6 +398,13 @@
   }
 
   //-----------------------------
+  //  Tab Content Container
+  //-----------------------------
+  .#{$prefix}--tab-content {
+    padding: $carbon--spacing-05;
+  }
+
+  //-----------------------------
   // Skeleton state
   //-----------------------------
   .#{$prefix}--tabs.#{$prefix}--skeleton {

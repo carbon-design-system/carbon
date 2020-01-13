@@ -326,15 +326,16 @@ class OverflowMenu extends Component {
   };
 
   handleKeyPress = evt => {
-    if (!keyCodeMatches(evt, [keys.Enter, keys.Space])) {
+    if (
+      this.state.open &&
+      keyCodeMatches(evt, [
+        keys.ArrowUp,
+        keys.ArrowRight,
+        keys.ArrowDown,
+        keys.ArrowLeft,
+      ])
+    ) {
       evt.preventDefault();
-    }
-
-    // only respond to key events when the menu is closed, so that menu items still respond to key events
-    if (!this.state.open) {
-      if (keyCodeMatches(evt, [keys.Enter, keys.Space])) {
-        this.setState({ open: true });
-      }
     }
 
     // Close the overflow menu on escape
@@ -413,9 +414,10 @@ class OverflowMenu extends Component {
   _handlePlace = menuBody => {
     if (menuBody) {
       this._menuBody = menuBody;
-      (
-        menuBody.querySelector('[data-floating-menu-primary-focus]') || menuBody
-      ).focus();
+      const primaryFocus =
+        menuBody.querySelector('[data-floating-menu-primary-focus]') ||
+        menuBody;
+      primaryFocus.focus();
       const hasFocusin = 'onfocusin' in window;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
       this._hFocusIn = on(
@@ -442,9 +444,12 @@ class OverflowMenu extends Component {
   /**
    * @returns {Element} The DOM element where the floating menu is placed in.
    */
-  _getTarget = () =>
-    (this.menuEl && this.menuEl.closest('[data-floating-menu-container]')) ||
-    document.body;
+  _getTarget = () => {
+    return (
+      (this.menuEl && this.menuEl.closest('[data-floating-menu-container]')) ||
+      document.body
+    );
+  };
 
   render() {
     const {
@@ -541,9 +546,8 @@ class OverflowMenu extends Component {
 
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
-        <div
+        <button
           {...other}
-          role="button"
           aria-haspopup
           aria-expanded={this.state.open}
           className={overflowMenuClasses}
@@ -557,7 +561,7 @@ class OverflowMenu extends Component {
             {iconDescription && <title>{iconDescription}</title>}
           </IconElement>
           {open && wrappedMenuBody}
-        </div>
+        </button>
       </ClickListener>
     );
   }
