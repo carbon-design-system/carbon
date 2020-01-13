@@ -31,8 +31,8 @@
     "@carbon/layout": "^10.7.2"
   },
   "devDependencies": {
-    "@carbon/bundler": "^10.5.1",
-    "rimraf": "^2.6.3"
+    "@carbon/bundler": "^10.5.0",
+    "rimraf": "^3.0.0"
   },
   "eyeglass": {
     "exports": false,

@@ -25,8 +25,8 @@
     "clean": "rimraf es lib umd"
   },
   "devDependencies": {
-    "@carbon/bundler": "^10.5.1",
-    "rimraf": "^2.6.2"
+    "@carbon/bundler": "^10.5.0",
+    "rimraf": "^3.0.0"
   },
   "eyeglass": {
     "exports": false,
