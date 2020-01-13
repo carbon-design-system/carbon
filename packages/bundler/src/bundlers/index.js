@@ -10,6 +10,9 @@
 const javascript = require('./javascript');
 const scss = require('./scss');
 
-const bundlers = new Map([['.js', javascript], ['.scss', scss]]);
+const bundlers = new Map([
+  ['.js', javascript],
+  ['.scss', scss],
+]);
 
 module.exports = bundlers;

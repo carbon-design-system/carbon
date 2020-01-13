@@ -1,8 +1,8 @@
 ---
-name: Accessibility Issue ♿
+name: Accessibility Issue
 about: Report an accessibility or usability issue
 title: ''
-labels: 'type: a11y ♿', 'squad: system'
+labels: 'type: a11y ♿'
 assignees: ''
 ---
 
