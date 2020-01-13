@@ -6,73 +6,23 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import classnames from 'classnames';
-import debounce from 'lodash.debounce';
 import { settings } from 'carbon-components';
 import { Copy16 } from '@carbon/icons-react';
+import Copy from '../Copy';
 
 const { prefix } = settings;
 
-export default function CopyButton({
-  iconDescription,
-  className,
-  feedback,
-  feedbackTimeout,
-  onAnimationEnd,
-  onClick,
-  ...other
-}) {
-  const [animation, setAnimation] = useState('');
-  const classNames = classnames(`${prefix}--copy-btn`, className, {
-    [`${prefix}--copy-btn--animating`]: animation,
-    [`${prefix}--copy-btn--${animation}`]: animation,
-  });
-  const handleFadeOut = useCallback(
-    debounce(() => {
-      setAnimation('fade-out');
-    }, feedbackTimeout),
-    [feedbackTimeout]
-  );
-  const handleClick = useCallback(
-    event => {
-      setAnimation('fade-in');
-      onClick(event);
-      handleFadeOut();
-    },
-    [onClick, handleFadeOut]
-  );
-  const handleAnimationEnd = event => {
-    if (event.animationName === 'hide-feedback') {
-      setAnimation('');
-    }
-    if (onAnimationEnd) {
-      onAnimationEnd(event);
-    }
-  };
-
-  useEffect(
-    () => () => {
-      handleFadeOut.cancel();
-    },
-    [handleFadeOut]
-  );
-
+export default function CopyButton({ iconDescription, className, ...other }) {
   return (
-    <button
-      type="button"
-      className={classNames}
-      onClick={handleClick}
+    <Copy
+      className={classnames(className, `${prefix}--copy-btn`)}
       aria-label={iconDescription}
       title={iconDescription}
-      onAnimationEnd={handleAnimationEnd}
       {...other}>
-      <span
-        className={`${prefix}--assistive-text ${prefix}--copy-btn__feedback`}>
-        {feedback}
-      </span>
       <Copy16 className={`${prefix}--snippet__icon`} />
-    </button>
+    </Copy>
   );
 }
 
