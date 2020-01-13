@@ -13467,23 +13467,24 @@ Code snippet styles
       display: none;
     }
     @include tooltip--placement('icon', 'bottom', 'center');
+  }
 
-    &.#{$prefix}--copy-btn--animating::before,
-    &.#{$prefix}--copy-btn--animating .#{$prefix}--copy-btn__feedback {
-      display: block;
-    }
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating::before,
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating
+    .#{$prefix}--copy-btn__feedback {
+    display: block;
+  }
 
-    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out::before,
-    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out
-      .#{$prefix}--copy-btn__feedback {
-      animation: $duration--fast-02 motion(standard, productive) hide-feedback;
-    }
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out::before,
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out
+    .#{$prefix}--copy-btn__feedback {
+    animation: $duration--fast-02 motion(standard, productive) hide-feedback;
+  }
 
-    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in::before,
-    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in
-      .#{$prefix}--copy-btn__feedback {
-      animation: $duration--fast-02 motion(standard, productive) show-feedback;
-    }
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in::before,
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in
+    .#{$prefix}--copy-btn__feedback {
+    animation: $duration--fast-02 motion(standard, productive) show-feedback;
   }
 
   .#{$prefix}--snippet--inline code {
@@ -17387,6 +17388,8 @@ List styles
   .#{$prefix}--list--ordered {
     @include reset;
     @include type-style('body-short-01');
+
+    list-style: none;
   }
 
   .#{$prefix}--list__item {
@@ -22194,6 +22197,7 @@ Text area styles
   .#{$prefix}--text-area__wrapper {
     position: relative;
     display: flex;
+    width: 100%;
   }
 
   .#{$prefix}--text-area__invalid-icon {
