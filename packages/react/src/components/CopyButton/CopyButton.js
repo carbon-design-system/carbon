@@ -6,71 +6,26 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
 import { Copy16 } from '@carbon/icons-react';
+import Copy from '../Copy';
 
 const { prefix } = settings;
 
-export default function CopyButton({
-  iconDescription,
-  className,
-  feedback,
-  feedbackTimeout,
-  onClick,
-  ...other
-}) {
-  const [animation, setAnimation] = useState('');
-  const timeoutId = useRef(undefined);
-  const classNames = classnames(`${prefix}--copy-btn`, className, {
-    [`${prefix}--copy-btn--animating`]: animation,
-    [`${prefix}--copy-btn--${animation}`]: animation,
-  });
-  const feedbackClassNames = classnames(
-    `${prefix}--assistive-text`,
-    `${prefix}--copy-btn__feedback`
-  );
-  const handleClick = event => {
-    setAnimation('fade-in');
-    timeoutId.current = setTimeout(() => {
-      setAnimation('fade-out');
-    }, feedbackTimeout);
-
-    onClick(event);
-  };
-  const handleAnimationEnd = event => {
-    if (event.animationName === 'hide-feedback') {
-      setAnimation('');
-    }
-    if (other.handleAnimationEnd) {
-      other.handleAnimationEnd(event);
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      if (typeof timeoutId && timeoutId.current !== undefined) {
-        clearTimeout(timeoutId);
-        timeoutId.current = undefined;
-      }
-    };
-  }, []);
-
+export default function CopyButton({ iconDescription, className, ...other }) {
   return (
-    <button
-      type="button"
-      className={classNames}
-      onClick={handleClick}
+    <Copy
+      className={classnames(className, `${prefix}--copy-btn`)}
       aria-label={iconDescription}
       title={iconDescription}
-      onAnimationEnd={handleAnimationEnd}
       {...other}>
-      <span className={feedbackClassNames}>{feedback}</span>
       <Copy16 className={`${prefix}--snippet__icon`} />
-    </button>
+    </Copy>
   );
 }
+
 CopyButton.propTypes = {
   /**
    * Specify an optional className to be applied to the underlying <button>
@@ -100,6 +55,7 @@ CopyButton.propTypes = {
    */
   onClick: PropTypes.func,
 };
+
 CopyButton.defaultProps = {
   iconDescription: 'Copy to clipboard',
   feedback: 'Copied!',

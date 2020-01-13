@@ -43,7 +43,10 @@ You can then create the `MultiSelect` by the following:
   invalid={false}
   invalidText="Invalid Selection"
   onChange={onChange}
-  items={[{ id: 'item-1', text: 'Item 1' }, { id: 'item-2', text: 'Item 2' }]}
+  items={[
+    { id: 'item-1', text: 'Item 1' },
+    { id: 'item-2', text: 'Item 2' },
+  ]}
   itemToString={itemToString}
   initialSelectedItems={[
     { id: 'item-1', text: 'Item 1' },
@@ -94,7 +97,10 @@ the list. For instance you can use:
   invalid={false}
   invalidText="Invalid Selection"
   onChange={onChange}
-  items={[{ id: 'item-1', text: 'Item 1' }, { id: 'item-2', text: 'Item 2' }]}
+  items={[
+    { id: 'item-1', text: 'Item 1' },
+    { id: 'item-2', text: 'Item 2' },
+  ]}
   initialSelectedItems={[
     { id: 'item-1', text: 'Item 1' },
     { id: 'item-2', text: 'Item 2' },

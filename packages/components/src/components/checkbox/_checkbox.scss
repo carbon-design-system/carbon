@@ -185,6 +185,17 @@
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'][data-contained-checkbox-disabled='true']::before {
     background-color: $disabled-02;
   }
+
+  //-----------------------------------------------
+  // Skeleton
+  //-----------------------------------------------
+
+  .#{$prefix}--checkbox-label-text.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(100px);
+    height: $spacing-05;
+    margin: auto 0;
+  }
 }
 
 @include exports('checkbox') {
