@@ -27,10 +27,12 @@ describe('styles', () => {
     const filepath = path.join(cwd, relativeFilePath);
     try {
       expect(
-        (await render({
-          file: filepath,
-          ...defaultOptions,
-        })).css
+        (
+          await render({
+            file: filepath,
+            ...defaultOptions,
+          })
+        ).css
       ).toBeDefined();
     } catch (error) {
       const { column, line, message } = error;

@@ -185,6 +185,7 @@ export default class Dropdown extends React.Component {
         [`${prefix}--dropdown--inline`]: inline,
         [`${prefix}--dropdown--disabled`]: disabled,
         [`${prefix}--dropdown--light`]: light,
+        [`${prefix}--dropdown--${size}`]: size,
       });
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
@@ -294,21 +295,24 @@ export default class Dropdown extends React.Component {
                 </ListBox.Field>
                 {isOpen && (
                   <ListBox.Menu aria-labelledby={id} id={id}>
-                    {items.map((item, index) => (
-                      <ListBox.MenuItem
-                        key={itemToString(item)}
-                        isActive={selectedItem === item}
-                        isHighlighted={
-                          highlightedIndex === index || selectedItem === item
-                        }
-                        {...getItemProps({ item, index })}>
-                        {itemToElement ? (
-                          <ItemToElement key={itemToString(item)} {...item} />
-                        ) : (
-                          itemToString(item)
-                        )}
-                      </ListBox.MenuItem>
-                    ))}
+                    {items.map((item, index) => {
+                      const itemProps = getItemProps({ item, index });
+                      return (
+                        <ListBox.MenuItem
+                          key={itemProps.id}
+                          isActive={selectedItem === item}
+                          isHighlighted={
+                            highlightedIndex === index || selectedItem === item
+                          }
+                          {...itemProps}>
+                          {itemToElement ? (
+                            <ItemToElement key={itemProps.id} {...item} />
+                          ) : (
+                            itemToString(item)
+                          )}
+                        </ListBox.MenuItem>
+                      );
+                    })}
                   </ListBox.Menu>
                 )}
               </ListBox>
