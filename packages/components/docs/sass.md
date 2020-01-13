@@ -1687,12 +1687,9 @@ Generate the CSS for a grid for the given breakpoints and gutters
     @include carbon--make-row();
   }
 
-  .#{$prefix}--grid--condensed .#{$prefix}--row:not(:last-of-type) {
-    margin-bottom: $condensed-gutter;
-  }
-
-  .#{$prefix}--row--condensed + .#{$prefix}--row--condensed {
-    margin-top: $condensed-gutter;
+  .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
+    padding-top: $condensed-gutter / 2;
+    padding-bottom: $condensed-gutter / 2;
   }
 
   @include carbon--make-grid-columns($breakpoints, $grid-gutter);
@@ -7614,6 +7611,7 @@ $disabled-02: if(
   - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [tags [mixin]](#tags-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -13469,23 +13467,24 @@ Code snippet styles
       display: none;
     }
     @include tooltip--placement('icon', 'bottom', 'center');
+  }
 
-    &.#{$prefix}--copy-btn--animating::before,
-    &.#{$prefix}--copy-btn--animating .#{$prefix}--copy-btn__feedback {
-      display: block;
-    }
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating::before,
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating
+    .#{$prefix}--copy-btn__feedback {
+    display: block;
+  }
 
-    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out::before,
-    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out
-      .#{$prefix}--copy-btn__feedback {
-      animation: $duration--fast-02 motion(standard, productive) hide-feedback;
-    }
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out::before,
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out
+    .#{$prefix}--copy-btn__feedback {
+    animation: $duration--fast-02 motion(standard, productive) hide-feedback;
+  }
 
-    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in::before,
-    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in
-      .#{$prefix}--copy-btn__feedback {
-      animation: $duration--fast-02 motion(standard, productive) show-feedback;
-    }
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in::before,
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in
+    .#{$prefix}--copy-btn__feedback {
+    animation: $duration--fast-02 motion(standard, productive) show-feedback;
   }
 
   .#{$prefix}--snippet--inline code {
@@ -17389,6 +17388,8 @@ List styles
   .#{$prefix}--list--ordered {
     @include reset;
     @include type-style('body-short-01');
+
+    list-style: none;
   }
 
   .#{$prefix}--list__item {
@@ -22044,7 +22045,8 @@ Tag styles
     @include tag-theme($ibm-color__warm-gray-20, $ibm-color__warm-gray-100);
   }
 
-  .#{$prefix}--tag--disabled {
+  .#{$prefix}--tag--disabled,
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled {
     @include tag-theme($ibm-color__gray-10, $ibm-color__gray-30);
 
     &:hover {
@@ -22065,29 +22067,40 @@ Tag styles
 
     cursor: pointer;
     padding-right: rem(2px);
+
+    &:focus,
+    &:hover {
+      outline: none;
+    }
   }
 
   .#{$prefix}--tag--filter > svg {
-    fill: $inverse-01;
-    margin-left: rem(4px);
-    padding: rem(2px);
+    flex-shrink: 0;
     width: rem(20px);
     height: rem(20px);
-  }
-
-  .#{$prefix}--tag--filter > svg:hover {
+    margin: 0 0 0 rem(4px);
+    padding: rem(2px);
+    border: 0;
+    fill: $inverse-01;
+    background-color: transparent;
     border-radius: 50%;
-    background-color: $inverse-hover-ui;
-  }
 
-  .#{$prefix}--tag--filter:focus,
-  .#{$prefix}--tag--filter:hover {
-    outline: none;
+    &:hover {
+      background-color: $inverse-hover-ui;
+    }
   }
 
   .#{$prefix}--tag--filter:focus > svg {
     box-shadow: inset 0 0 0 2px $inverse-focus-ui;
     border-radius: 50%;
+  }
+
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg:hover {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg {
+    fill: $disabled-02;
   }
 
   // Skeleton state
@@ -22114,6 +22127,7 @@ Tag styles
   - [inverse-01 [variable]](#inverse-01-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
 
 ## text-area
 

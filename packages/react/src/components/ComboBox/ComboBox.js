@@ -390,23 +390,26 @@ export default class ComboBox extends React.Component {
             {isOpen && (
               <ListBox.Menu aria-label={ariaLabel} id={id}>
                 {this.filterItems(items, itemToString, inputValue).map(
-                  (item, index) => (
-                    <ListBox.MenuItem
-                      key={itemToString(item)}
-                      isActive={selectedItem === item}
-                      isHighlighted={
-                        highlightedIndex === index ||
-                        (selectedItem && selectedItem.id === item.id) ||
-                        false
-                      }
-                      {...getItemProps({ item, index })}>
-                      {itemToElement ? (
-                        <ItemToElement key={itemToString(item)} {...item} />
-                      ) : (
-                        itemToString(item)
-                      )}
-                    </ListBox.MenuItem>
-                  )
+                  (item, index) => {
+                    const itemProps = getItemProps({ item, index });
+                    return (
+                      <ListBox.MenuItem
+                        key={itemProps.id}
+                        isActive={selectedItem === item}
+                        isHighlighted={
+                          highlightedIndex === index ||
+                          (selectedItem && selectedItem.id === item.id) ||
+                          false
+                        }
+                        {...itemProps}>
+                        {itemToElement ? (
+                          <ItemToElement key={itemProps.id} {...item} />
+                        ) : (
+                          itemToString(item)
+                        )}
+                      </ListBox.MenuItem>
+                    );
+                  }
                 )}
               </ListBox.Menu>
             )}
