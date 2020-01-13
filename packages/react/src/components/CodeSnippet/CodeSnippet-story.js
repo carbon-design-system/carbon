@@ -15,7 +15,7 @@ import CodeSnippetSkeleton from './CodeSnippet.Skeleton';
 const props = {
   inline: () => ({
     light: boolean('Light variant (light)', false),
-    feedback: text('Feedback text (feedback)', 'Feedback Enabled 👍'),
+    feedback: text('Feedback text (feedback)', 'Copied to clipboard'),
     onClick: action('onClick'),
     copyLabel: text(
       'ARIA label for the snippet/copy button (copyLabel)',
@@ -24,7 +24,7 @@ const props = {
   }),
   single: () => ({
     light: boolean('Light variant (light)', false),
-    feedback: text('Feedback text (feedback)', 'Feedback Enabled 👍'),
+    feedback: text('Feedback text (feedback)', 'Copied to clipboard'),
     copyButtonDescription: text(
       'Copy icon description (copyButtonDescription)',
       'copyable code snippet'
@@ -37,7 +37,7 @@ const props = {
   }),
   multiline: () => ({
     light: boolean('Light variant (light)', false),
-    feedback: text('Feedback text (feedback)', 'Feedback Enabled 👍'),
+    feedback: text('Feedback text (feedback)', 'Copied to clipboard'),
     showMoreText: text(
       'Text for "show more" button (showMoreText)',
       'Show more'
@@ -86,7 +86,7 @@ storiesOf('CodeSnippet', module)
       info: {
         text: `
         Code snippets are small blocks of reusable code that can be inserted in a code file.
-  
+
         The Inline style is for code used within a block of text.
       `,
       },
@@ -108,7 +108,7 @@ storiesOf('CodeSnippet', module)
       info: {
         text: `
           Code snippets are small blocks of reusable code that can be inserted in a code file.
-  
+
           The Code style is for larger, multi-line code snippets.
         `,
       },
@@ -165,7 +165,7 @@ $z-indexes: (
       info: {
         text: `
           Code snippets are small blocks of reusable code that can be inserted in a code file.
-  
+
           The Terminal style is for single-line .
         `,
       },

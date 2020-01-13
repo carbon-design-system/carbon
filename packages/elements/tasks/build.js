@@ -40,7 +40,7 @@ async function build() {
   const paths = klaw(BUNDLE_DIR, {
     nodir: true,
     filter(item) {
-      const paths = item.path.split('/');
+      const paths = item.path.split(path.sep);
       const filename = paths[paths.length - 1];
       const folder = paths[paths.length - 3];
 

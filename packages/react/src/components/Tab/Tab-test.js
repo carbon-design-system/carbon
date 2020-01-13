@@ -101,21 +101,18 @@ describe('Tab', () => {
 
     describe('keydown', () => {
       const onKeyDown = jest.fn();
-      const handleTabAnchorFocus = jest.fn();
       const handleTabKeyDown = jest.fn();
       const wrapper = shallow(<Tab label="firstTab" />);
-      wrapper.setProps({ onKeyDown, handleTabAnchorFocus, handleTabKeyDown });
+      wrapper.setProps({ onKeyDown, handleTabKeyDown });
 
       it('invokes onKeyDown when a function is passed to onKeyDown prop', () => {
         wrapper.simulate('keyDown', { which: 38 });
         expect(onKeyDown).toBeCalled();
-        expect(handleTabAnchorFocus).not.toBeCalled();
       });
 
       it('invokes handleTabAnchorFocus when onKeyDown occurs for appropriate events', () => {
         wrapper.simulate('keyDown', { which: 37 });
         expect(onKeyDown).toBeCalled();
-        expect(handleTabAnchorFocus).toBeCalled();
       });
     });
   });
