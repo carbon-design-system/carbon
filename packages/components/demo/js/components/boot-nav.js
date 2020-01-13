@@ -1,4 +1,4 @@
-import 'core-js/modules/es6.array.find';
+import 'core-js/modules/es.array.find';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
