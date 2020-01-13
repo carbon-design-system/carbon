@@ -255,14 +255,20 @@ describe('FileUploader', () => {
 });
 
 describe('FileUploaderDropContainer', () => {
-  const onAddFiles = jest.fn();
-  const dropContainer = (
-    <FileUploaderDropContainer
-      className="extra-class"
-      onAddFiles={onAddFiles}
-    />
-  );
-  const mountWrapper = mount(dropContainer);
+  let onAddFiles;
+  let dropContainer;
+  let mountWrapper;
+
+  beforeEach(() => {
+    onAddFiles = jest.fn();
+    dropContainer = (
+      <FileUploaderDropContainer
+        className="extra-class"
+        onAddFiles={onAddFiles}
+      />
+    );
+    mountWrapper = mount(dropContainer);
+  });
 
   describe('Renders as expected with default props', () => {
     it('renders with given className', () => {
