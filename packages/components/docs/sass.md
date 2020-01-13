@@ -1687,12 +1687,9 @@ Generate the CSS for a grid for the given breakpoints and gutters
     @include carbon--make-row();
   }
 
-  .#{$prefix}--grid--condensed .#{$prefix}--row:not(:last-of-type) {
-    margin-bottom: $condensed-gutter;
-  }
-
-  .#{$prefix}--row--condensed + .#{$prefix}--row--condensed {
-    margin-top: $condensed-gutter;
+  .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
+    padding-top: $condensed-gutter / 2;
+    padding-bottom: $condensed-gutter / 2;
   }
 
   @include carbon--make-grid-columns($breakpoints, $grid-gutter);
@@ -13470,23 +13467,24 @@ Code snippet styles
       display: none;
     }
     @include tooltip--placement('icon', 'bottom', 'center');
+  }
 
-    &.#{$prefix}--copy-btn--animating::before,
-    &.#{$prefix}--copy-btn--animating .#{$prefix}--copy-btn__feedback {
-      display: block;
-    }
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating::before,
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating
+    .#{$prefix}--copy-btn__feedback {
+    display: block;
+  }
 
-    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out::before,
-    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out
-      .#{$prefix}--copy-btn__feedback {
-      animation: $duration--fast-02 motion(standard, productive) hide-feedback;
-    }
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out::before,
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out
+    .#{$prefix}--copy-btn__feedback {
+    animation: $duration--fast-02 motion(standard, productive) hide-feedback;
+  }
 
-    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in::before,
-    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in
-      .#{$prefix}--copy-btn__feedback {
-      animation: $duration--fast-02 motion(standard, productive) show-feedback;
-    }
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in::before,
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in
+    .#{$prefix}--copy-btn__feedback {
+    animation: $duration--fast-02 motion(standard, productive) show-feedback;
   }
 
   .#{$prefix}--snippet--inline code {
@@ -17390,6 +17388,8 @@ List styles
   .#{$prefix}--list--ordered {
     @include reset;
     @include type-style('body-short-01');
+
+    list-style: none;
   }
 
   .#{$prefix}--list__item {
