@@ -17388,6 +17388,8 @@ List styles
   .#{$prefix}--list--ordered {
     @include reset;
     @include type-style('body-short-01');
+
+    list-style: none;
   }
 
   .#{$prefix}--list__item {
