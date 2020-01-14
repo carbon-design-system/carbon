@@ -45,6 +45,6 @@
     "fs-extra": "^7.0.1",
     "klaw-sync": "^6.0.0",
     "replace-in-file": "^3.4.2",
-    "rimraf": "^2.6.2"
+    "rimraf": "^3.0.0"
   }
 }
