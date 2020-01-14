@@ -72,9 +72,7 @@
     padding-bottom: rem(24px);
     transition: padding $duration--moderate-01 motion(standard, productive);
     border-bottom: 1px solid $ui-03;
-    padding-left: rem(
-      56px
-    ); // add padding to equal arrow down and align content
+    padding-left: 2.5rem + 1rem; // 2.5rem from --table-expand
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
