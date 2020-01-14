@@ -90,6 +90,9 @@
     padding-top: 2px;
     color: $text-01;
     font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .#{$prefix}--tabs-trigger-text:hover {
