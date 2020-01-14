@@ -14,6 +14,7 @@ import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import Checkbox from '../Checkbox';
+import { match, keys } from '../../internal/keyboard';
 import Selection from '../../internal/Selection';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import { defaultItemToString } from './tools/itemToString';
@@ -323,7 +324,18 @@ export default class MultiSelect extends React.Component {
                     disabled={disabled}
                     aria-disabled={disabled}
                     translateWithId={translateWithId}
-                    {...getButtonProps({ disabled })}>
+                    {...getButtonProps({
+                      disabled,
+                      onKeyDown: event => {
+                        if (match(event, keys.Enter)) {
+                          // Downshift does not update its open state upon its `toggleMenu()` API if if's controlled.
+                          // `<MultiSelect>` controls that state via `isOpen` prop
+                          this.setState(({ isOpen: oldIsOpen }) => ({
+                            isOpen: !oldIsOpen,
+                          }));
+                        }
+                      },
+                    })}>
                     {selectedItem.length > 0 && (
                       <ListBox.Selection
                         clearSelection={!disabled ? clearSelection : noop}
