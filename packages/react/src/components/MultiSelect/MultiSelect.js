@@ -380,6 +380,8 @@ export default class MultiSelect extends React.Component {
                             isActive={isChecked}
                             isHighlighted={highlightedIndex === index}
                             title={itemText}
+                            role="group"
+                            aria-label={itemProps.id}
                             {...itemProps}>
                             <Checkbox
                               id={`${itemProps.id}__checkbox`}
