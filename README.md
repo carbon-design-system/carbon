@@ -60,7 +60,7 @@ we support!
 ## :books: Documentation
 
 - See our documentation site
-  [here](http://carbondesignsystem.com/getting-started/developers) for full
+  [here](https://www.carbondesignsystem.com/get-started/develop/react) for full
   how-to docs and guidelines
 - [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions
   to this repo.

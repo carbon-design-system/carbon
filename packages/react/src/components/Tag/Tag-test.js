@@ -49,19 +49,19 @@ describe('Tag', () => {
 
   describe('Renders as expected', () => {
     it('should render with the appropriate type', () => {
-      const tag = shallow(<Tag type="beta" />);
+      const tag = shallow(<Tag type="red" />);
       expect(tag.hasClass(`${prefix}--tag`)).toEqual(true);
-      expect(tag.hasClass(`${prefix}--tag--beta`)).toEqual(true);
+      expect(tag.hasClass(`${prefix}--tag--red`)).toEqual(true);
     });
   });
 
   it('should allow for a custom label', () => {
-    const tag = shallow(<Tag type="beta">New Version!</Tag>);
+    const tag = shallow(<Tag type="red">New Version!</Tag>);
     expect(tag.text()).toEqual('New Version!');
   });
 
   it('should support extra class names', () => {
-    const tag = shallow(<Tag type="beta" className="extra-class" />);
+    const tag = shallow(<Tag type="red" className="extra-class" />);
     expect(tag.hasClass('extra-class')).toEqual(true);
   });
 });

@@ -1687,12 +1687,9 @@ Generate the CSS for a grid for the given breakpoints and gutters
     @include carbon--make-row();
   }
 
-  .#{$prefix}--grid--condensed .#{$prefix}--row:not(:last-of-type) {
-    margin-bottom: $condensed-gutter;
-  }
-
-  .#{$prefix}--row--condensed + .#{$prefix}--row--condensed {
-    margin-top: $condensed-gutter;
+  .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
+    padding-top: $condensed-gutter / 2;
+    padding-bottom: $condensed-gutter / 2;
   }
 
   @include carbon--make-grid-columns($breakpoints, $grid-gutter);
@@ -3692,6 +3689,7 @@ $spacing-05: $carbon--spacing-05;
 - **Alias**: `carbon--spacing-05`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [accordion [mixin]](#accordion-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
@@ -5737,8 +5735,8 @@ $carbon--theme--v9: map-merge(
   $carbon--theme--white,
   (
     interactive-01: #3d70b2,
-    interactive-02: #5a6872,
-    interactive-03: #5a6872,
+    interactive-02: #4d5358,
+    interactive-03: #3d70b2,
     interactive-04: #3d70b2,
     ui-background: #f4f7fb,
     ui-01: #ffffff,
@@ -5790,8 +5788,8 @@ $carbon--theme--v9: map-merge(
     skeleton-01: rgba(61, 112, 178, 0.1),
     skeleton-02: rgba(61, 112, 178, 0.1),
     brand-01: #3d70b2,
-    brand-02: #5a6872,
-    brand-03: #5a6872,
+    brand-02: #4d5358,
+    brand-03: #3d70b2,
     active-01: #dfeafa,
     hover-field: #eef4fc,
   )
@@ -6584,6 +6582,7 @@ $link-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [link [mixin]](#link-mixin)
@@ -7612,6 +7611,7 @@ $disabled-02: if(
   - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [tags [mixin]](#tags-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -12693,6 +12693,11 @@ Accordion styles
     }
   }
 
+  .#{$prefix}--accordion--end.#{$prefix}--skeleton
+    .#{$prefix}--accordion__arrow {
+    margin-left: $spacing-05;
+  }
+
   .#{$prefix}--skeleton
     .#{$prefix}--accordion__heading:focus
     .#{$prefix}--accordion__arrow {
@@ -12722,6 +12727,7 @@ Accordion styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
 
 ## breadcrumb
 
@@ -12748,6 +12754,10 @@ Breadcrumb styles
     display: flex;
     align-items: center;
     margin-right: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited {
+    color: $link-01;
   }
 
   .#{$prefix}--breadcrumb-item::after {
@@ -12797,6 +12807,7 @@ Breadcrumb styles
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [link-01 [variable]](#link-01-variable)
   - [text-01 [variable]](#text-01-variable)
 
 ## button
@@ -13442,6 +13453,38 @@ Code snippet styles
       outline: none;
       border: 2px solid $focus;
     }
+
+    &::before {
+      @include tooltip--caret;
+      display: none;
+    }
+
+    .#{$prefix}--copy-btn__feedback {
+      @include tooltip--content('icon');
+      clip: auto;
+      margin: auto;
+      overflow: visible;
+      display: none;
+    }
+    @include tooltip--placement('icon', 'bottom', 'center');
+  }
+
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating::before,
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating
+    .#{$prefix}--copy-btn__feedback {
+    display: block;
+  }
+
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out::before,
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out
+    .#{$prefix}--copy-btn__feedback {
+    animation: $duration--fast-02 motion(standard, productive) hide-feedback;
+  }
+
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in::before,
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in
+    .#{$prefix}--copy-btn__feedback {
+    animation: $duration--fast-02 motion(standard, productive) show-feedback;
   }
 
   .#{$prefix}--snippet--inline code {
@@ -13603,6 +13646,16 @@ Code snippet styles
 
   .#{$prefix}--btn--copy__feedback::after {
     border: none;
+  }
+
+  // TODO: remove copy button styles above
+  .#{$prefix}--snippet .#{$prefix}--copy-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    @include carbon--font-family(
+      'sans'
+    ); // Override inherited rule in code snippet
   }
 
   // Show more / less button
@@ -17335,6 +17388,8 @@ List styles
   .#{$prefix}--list--ordered {
     @include reset;
     @include type-style('body-short-01');
+
+    list-style: none;
   }
 
   .#{$prefix}--list__item {
@@ -21990,7 +22045,8 @@ Tag styles
     @include tag-theme($ibm-color__warm-gray-20, $ibm-color__warm-gray-100);
   }
 
-  .#{$prefix}--tag--disabled {
+  .#{$prefix}--tag--disabled,
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled {
     @include tag-theme($ibm-color__gray-10, $ibm-color__gray-30);
 
     &:hover {
@@ -22011,29 +22067,40 @@ Tag styles
 
     cursor: pointer;
     padding-right: rem(2px);
+
+    &:focus,
+    &:hover {
+      outline: none;
+    }
   }
 
   .#{$prefix}--tag--filter > svg {
-    fill: $inverse-01;
-    margin-left: rem(4px);
-    padding: rem(2px);
+    flex-shrink: 0;
     width: rem(20px);
     height: rem(20px);
-  }
-
-  .#{$prefix}--tag--filter > svg:hover {
+    margin: 0 0 0 rem(4px);
+    padding: rem(2px);
+    border: 0;
+    fill: $inverse-01;
+    background-color: transparent;
     border-radius: 50%;
-    background-color: $inverse-hover-ui;
-  }
 
-  .#{$prefix}--tag--filter:focus,
-  .#{$prefix}--tag--filter:hover {
-    outline: none;
+    &:hover {
+      background-color: $inverse-hover-ui;
+    }
   }
 
   .#{$prefix}--tag--filter:focus > svg {
     box-shadow: inset 0 0 0 2px $inverse-focus-ui;
     border-radius: 50%;
+  }
+
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg:hover {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg {
+    fill: $disabled-02;
   }
 
   // Skeleton state
@@ -22060,6 +22127,7 @@ Tag styles
   - [inverse-01 [variable]](#inverse-01-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
 
 ## text-area
 
@@ -22129,6 +22197,7 @@ Text area styles
   .#{$prefix}--text-area__wrapper {
     position: relative;
     display: flex;
+    width: 100%;
   }
 
   .#{$prefix}--text-area__invalid-icon {
@@ -22150,6 +22219,10 @@ Text area styles
 
   .#{$prefix}--text-area:disabled::placeholder {
     color: $disabled-02;
+  }
+
+  .#{$prefix}--text-area.#{$prefix}--text-area--light:disabled {
+    background-color: $field-02;
   }
 
   // Skeleton State
@@ -25248,10 +25321,6 @@ UI shell side nav
     }
   }
 
-  a.#{$prefix}--side-nav__link--current > span.#{$prefix}--side-nav__link-text {
-    color: $ibm-color__gray-100;
-    font-weight: 600;
-  }
   //----------------------------------------------------------------------------
   // Side-nav > Link
   //----------------------------------------------------------------------------
@@ -25297,7 +25366,14 @@ UI shell side nav
 
   a.#{$prefix}--side-nav__link[aria-current='page'],
   a.#{$prefix}--side-nav__link--current {
+    background-color: $shell-side-nav-bg-04;
     font-weight: 600;
+  }
+
+  a.#{$prefix}--side-nav__link[aria-current='page']
+    .#{$prefix}--side-nav__link-text,
+  a.#{$prefix}--side-nav__link--current .#{$prefix}--side-nav__link-text {
+    color: $ibm-color__gray-100;
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page']::before,

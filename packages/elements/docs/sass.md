@@ -1531,12 +1531,9 @@ Generate the CSS for a grid for the given breakpoints and gutters
     @include carbon--make-row();
   }
 
-  .#{$prefix}--grid--condensed .#{$prefix}--row:not(:last-of-type) {
-    margin-bottom: $condensed-gutter;
-  }
-
-  .#{$prefix}--row--condensed + .#{$prefix}--row--condensed {
-    margin-top: $condensed-gutter;
+  .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
+    padding-top: $condensed-gutter / 2;
+    padding-bottom: $condensed-gutter / 2;
   }
 
   @include carbon--make-grid-columns($breakpoints, $grid-gutter);
@@ -5367,8 +5364,8 @@ $carbon--theme--v9: map-merge(
   $carbon--theme--white,
   (
     interactive-01: #3d70b2,
-    interactive-02: #5a6872,
-    interactive-03: #5a6872,
+    interactive-02: #4d5358,
+    interactive-03: #3d70b2,
     interactive-04: #3d70b2,
     ui-background: #f4f7fb,
     ui-01: #ffffff,
@@ -5420,8 +5417,8 @@ $carbon--theme--v9: map-merge(
     skeleton-01: rgba(61, 112, 178, 0.1),
     skeleton-02: rgba(61, 112, 178, 0.1),
     brand-01: #3d70b2,
-    brand-02: #5a6872,
-    brand-03: #5a6872,
+    brand-02: #4d5358,
+    brand-03: #3d70b2,
     active-01: #dfeafa,
     hover-field: #eef4fc,
   )

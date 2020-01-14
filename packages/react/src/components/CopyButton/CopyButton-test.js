@@ -31,11 +31,14 @@ describe('CopyButton', () => {
   });
 
   describe('Renders button props as expected', () => {
-    const wrapper = shallow(<CopyButton />);
+    let wrapper;
+
+    beforeEach(() => {
+      wrapper = mount(<CopyButton />);
+    });
 
     it('Renders children as expected', () => {
-      expect(wrapper.is('button')).toBe(true);
-      expect(wrapper.hasClass(`${prefix}--copy-btn`)).toBe(true);
+      expect(wrapper.find('button').hasClass(`${prefix}--copy-btn`)).toBe(true);
       expect(wrapper.find(`.${prefix}--copy-btn__feedback`).length).toBe(1);
       expect(wrapper.find(Copy16).length).toBe(1);
     });

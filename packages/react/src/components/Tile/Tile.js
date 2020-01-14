@@ -14,6 +14,7 @@ import {
   ChevronDown16,
 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -218,7 +219,11 @@ export class SelectableTile extends Component {
     /**
      * The description of the checkmark icon.
      */
-    iconDescription: PropTypes.string,
+    iconDescription: deprecate(
+      PropTypes.string,
+      'The `iconDescription` prop for `RadioTile` is no longer needed and has ' +
+        'been deprecated. It will be moved in the next major release.'
+    ),
 
     /**
      * Specify the tab index of the wrapper element
@@ -235,7 +240,6 @@ export class SelectableTile extends Component {
   static defaultProps = {
     value: 'value',
     title: 'title',
-    iconDescription: 'Tile checkmark',
     selected: false,
     handleClick: () => {},
     handleKeyDown: () => {},
@@ -243,6 +247,16 @@ export class SelectableTile extends Component {
     tabIndex: 0,
     light: false,
   };
+
+  static getDerivedStateFromProps({ selected }, state) {
+    const { prevSelected } = state;
+    return prevSelected === selected
+      ? null
+      : {
+          selected,
+          prevSelected: selected,
+        };
+  }
 
   handleClick = evt => {
     evt.preventDefault();
@@ -279,15 +293,10 @@ export class SelectableTile extends Component {
     }
   };
 
-  static getDerivedStateFromProps({ selected }, state) {
-    const { prevSelected } = state;
-    return prevSelected === selected
-      ? null
-      : {
-          selected,
-          prevSelected: selected,
-        };
-  }
+  handleOnChange = event => {
+    this.setState({ selected: event.target.checked });
+    this.props.onChange(event);
+  };
 
   render() {
     const {
@@ -297,10 +306,12 @@ export class SelectableTile extends Component {
       value,
       name,
       title,
+      // eslint-disable-next-line no-unused-vars
       iconDescription,
       className,
       handleClick, // eslint-disable-line
       handleKeyDown, // eslint-disable-line
+      // eslint-disable-next-line no-unused-vars
       onChange,
       light,
       ...other
@@ -326,7 +337,7 @@ export class SelectableTile extends Component {
           id={id}
           className={`${prefix}--tile-input`}
           value={value}
-          onChange={onChange}
+          onChange={this.handleOnChange}
           type="checkbox"
           name={name}
           title={title}
@@ -340,9 +351,7 @@ export class SelectableTile extends Component {
           onClick={this.handleClick}
           onKeyDown={this.handleKeyDown}>
           <span className={`${prefix}--tile__checkmark`}>
-            <CheckmarkFilled aria-label={iconDescription}>
-              {iconDescription && <title>{iconDescription}</title>}
-            </CheckmarkFilled>
+            <CheckmarkFilled />
           </span>
           <span className={`${prefix}--tile-content`}>{children}</span>
         </label>
