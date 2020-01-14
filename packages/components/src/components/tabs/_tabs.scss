@@ -42,7 +42,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 $spacing-05;
+    padding: 0 $spacing-09 0 $spacing-05;
     height: rem(40px);
     cursor: pointer;
     color: $text-01;
@@ -60,6 +60,8 @@
   }
 
   .#{$prefix}--tabs-trigger svg {
+    position: absolute;
+    right: $spacing-05;
     width: rem(12px);
     height: rem(7px);
     fill: $ui-05;
