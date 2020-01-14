@@ -21,9 +21,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@babel/core": "^7.1.6",
-    "@babel/preset-env": "^7.1.6",
-    "@carbon/cli-reporter": "^10.3.0",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@carbon/cli-reporter": "10.3.0",
     "@commitlint/parse": "^8.1.0",
     "autoprefixer": "^9.4.3",
     "babel-plugin-macros": "^2.4.2",
