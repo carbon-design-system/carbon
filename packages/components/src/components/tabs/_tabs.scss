@@ -62,8 +62,6 @@
   .#{$prefix}--tabs-trigger svg {
     position: absolute;
     right: $spacing-05;
-    width: rem(12px);
-    height: rem(7px);
     fill: $ui-05;
     transition: transform $duration--fast-01 motion(standard, productive);
   }
