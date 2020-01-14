@@ -57,22 +57,17 @@
     max-height: 0;
   }
 
-  .#{$prefix}--child-row-inner-container h1 {
-    @include type-style('productive-heading-01');
-    color: $text-01;
-    padding-bottom: $spacing-03;
-  }
-
   //child row visible
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] {
     transition: height $duration--moderate-01 motion(standard, productive);
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
-    padding-bottom: rem(24px);
     transition: padding $duration--moderate-01 motion(standard, productive);
     border-bottom: 1px solid $ui-03;
-    padding-left: 2.5rem + 1rem; // 2.5rem from --table-expand
+    padding-left: 2.5rem + rem(12px); // 2.5rem from --table-expand
+    padding-bottom: 1.5rem;
+    padding-top: 1rem;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
@@ -97,6 +92,15 @@
 
   .#{$prefix}--parent-row.#{$prefix}--expandable-row > td:first-of-type {
     box-shadow: none; // first td doesn't have a visible border
+  }
+
+  .#{$prefix}--child-row-inner-container h1 {
+    @include type-style('productive-heading-01');
+    color: $text-01;
+  }
+
+  .#{$prefix}--child-row-inner-container p {
+    @include type-style('body-long-01');
   }
 
   //----------------------------------------------------------------------------
