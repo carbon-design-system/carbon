@@ -471,7 +471,8 @@ $list-box-menu-width: rem(300px);
     font-weight: normal;
     line-height: rem(16px);
     padding: rem(11px) 0;
-    margin: 0 rem(48px) 0 $carbon--spacing-05;
+    margin: 0 $carbon--spacing-05;
+    padding-right: rem(32px); // 40px - `$carbon--spacing-05`
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
     border-top-color: $ui-03;
