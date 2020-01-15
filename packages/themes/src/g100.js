@@ -27,6 +27,7 @@ import {
   green40,
   green50,
   yellow,
+  red40,
   red50,
   red60,
   red80,
