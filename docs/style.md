@@ -362,12 +362,12 @@ becomes increasingly obvious.
 
 #### Use only as much specificity as needed
 
-It's important that we write selectors that use as much specificity as needed.
-Ideally, we would only need one selector per component but this is rarely the
-case. As a result, adding specificity should be done sparingly or when including
-it is helpful when building a component. For example, if you would like to
-enforce a specific element or ARIA attribute then using this attribute in a
-selector would be appropriate:
+It's important that we write selectors that use only as much specificity as
+needed. Ideally, we would only need one selector per component but this is
+rarely the case. As a result, adding specificity should be done sparingly or
+when including it is helpful when building a component. For example, if you
+would like to enforce a specific element or ARIA attribute then using this
+attribute in a selector would be appropriate:
 
 ```scss
 button[aria-expanded='false'] {
@@ -409,7 +409,7 @@ is used to namespace all of the selectors that we ship in the design system.
 
 #### Annotate relevant Sass values with SassDoc
 
-When authoring functions, mixins, or values that are intended to be shared you
+When authoring functions, mixins, or values that are intended to be shared, you
 should leverage SassDoc. The typical format we use includes the following
 information:
 
