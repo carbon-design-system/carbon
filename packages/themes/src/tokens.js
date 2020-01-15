@@ -175,6 +175,7 @@ export const unstable__meta = {
         'text03',
         'text04',
         'text05',
+        'textError',
         'link01',
         'icon01',
         'icon02',
