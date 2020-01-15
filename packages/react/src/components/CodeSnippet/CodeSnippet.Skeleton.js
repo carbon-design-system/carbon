@@ -5,61 +5,58 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import cx from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const { prefix } = settings;
 
-export default class CodeSnippetSkeleton extends Component {
-  static propTypes = {
-    /**
-     * The type of code snippet
-     * can be single or multi
-     */
-    type: PropTypes.oneOf(['single', 'multi']),
+function CodeSnippetSkeleton({
+  className: containerClassName,
+  type = 'single',
+  ...rest
+}) {
+  const className = cx(containerClassName, {
+    [`${prefix}--snippet`]: true,
+    [`${prefix}--skeleton`]: true,
+    [`${prefix}--snippet--single`]: type === 'single',
+    [`${prefix}--snippet--multi`]: type === 'multi',
+  });
 
-    /**
-     * Specify an optional className to be applied to the container node
-     */
-    className: PropTypes.string,
-  };
-
-  static defaultProps = {
-    type: 'single',
-  };
-
-  render() {
-    const { className, type, ...other } = this.props;
-
-    const codeSnippetClasses = classNames(className, {
-      [`${prefix}--snippet`]: true,
-      [`${prefix}--skeleton`]: true,
-      [`${prefix}--snippet--single`]: type === 'single',
-      [`${prefix}--snippet--multi`]: type === 'multi',
-    });
-
-    if (type === 'single') {
-      return (
-        <div className={codeSnippetClasses} {...other}>
-          <div className={`${prefix}--snippet-container`}>
-            <span />
-          </div>
+  if (type === 'single') {
+    return (
+      <div className={className} {...rest}>
+        <div className={`${prefix}--snippet-container`}>
+          <span />
         </div>
-      );
-    }
+      </div>
+    );
+  }
 
-    if (type === 'multi') {
-      return (
-        <div className={codeSnippetClasses} {...other}>
-          <div className={`${prefix}--snippet-container`}>
-            <span />
-            <span />
-            <span />
-          </div>
+  if (type === 'multi') {
+    return (
+      <div className={className} {...rest}>
+        <div className={`${prefix}--snippet-container`}>
+          <span />
+          <span />
+          <span />
         </div>
-      );
-    }
+      </div>
+    );
   }
 }
+
+CodeSnippetSkeleton.propTypes = {
+  /**
+   * The type of the code snippet, including single or multi
+   */
+  type: PropTypes.oneOf(['single', 'multi']),
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className: PropTypes.string,
+};
+
+export default CodeSnippetSkeleton;

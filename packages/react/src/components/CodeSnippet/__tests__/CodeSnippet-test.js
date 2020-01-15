@@ -6,10 +6,9 @@
  */
 
 import React from 'react';
-import CodeSnippet from '../CodeSnippet';
-import CodeSnippetSkeleton from '../CodeSnippet/CodeSnippet.Skeleton';
-import Copy from '../Copy';
-import CopyButton from '../CopyButton';
+import CodeSnippet from '../';
+import Copy from '../../Copy';
+import CopyButton from '../../CopyButton';
 import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
 
@@ -52,18 +51,6 @@ describe('Code Snippet', () => {
       );
       clickWrapper.find(Copy).simulate('click');
       expect(onClick).toBeCalled();
-    });
-  });
-});
-
-describe('CodeSnippetSkeleton', () => {
-  describe('Renders as expected', () => {
-    const wrapper = shallow(<CodeSnippetSkeleton type="single" />);
-
-    it('Has the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--snippet`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--snippet--single`)).toEqual(true);
     });
   });
 });
