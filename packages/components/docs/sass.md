@@ -3777,6 +3777,7 @@ $spacing-09: $carbon--spacing-09;
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [modal [mixin]](#modal-mixin)
   - [select [mixin]](#select-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅spacing-10 [variable]
@@ -16358,7 +16359,6 @@ Dropdown styles
     border: none;
     border-bottom: 1px solid $ui-04;
     width: 100%;
-    height: rem(40px);
     cursor: pointer;
     color: $text-01;
     outline: 2px solid transparent;
@@ -21543,7 +21543,7 @@ Tabs styles
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 $spacing-05;
+    padding: 0 $spacing-09 0 $spacing-05;
     height: rem(40px);
     cursor: pointer;
     color: $text-01;
@@ -21561,8 +21561,8 @@ Tabs styles
   }
 
   .#{$prefix}--tabs-trigger svg {
-    width: rem(12px);
-    height: rem(7px);
+    position: absolute;
+    right: $spacing-05;
     fill: $ui-05;
     transition: transform $duration--fast-01 motion(standard, productive);
   }
@@ -21591,6 +21591,9 @@ Tabs styles
     padding-top: 2px;
     color: $text-01;
     font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .#{$prefix}--tabs-trigger-text:hover {
@@ -21775,6 +21778,9 @@ Tabs styles
       background-color: $ui-01;
 
       .#{$prefix}--tabs__nav-link {
+        line-height: calc(
+          #{rem(48px)} - (#{$spacing-03} * 2)
+        ); // height - vertical padding
         // Draws the border without affecting the inner-content
         box-shadow: inset 0 2px 0 0 $interactive-04;
         border-bottom: none;
@@ -21834,9 +21840,10 @@ Tabs styles
 
   .#{$prefix}--tabs--container a.#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
-      display: flex;
-      align-items: center;
       height: rem(48px);
+      line-height: calc(
+        #{rem(48px)} - (#{$spacing-03} * 2)
+      ); // height - vertical padding
       border-bottom: none;
     }
   }
@@ -21937,6 +21944,7 @@ Tabs styles
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [spacing-09 [variable]](#spacing-09-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
   - [ui-04 [variable]](#ui-04-variable)
   - [field-01 [variable]](#field-01-variable)
@@ -21949,10 +21957,10 @@ Tabs styles
   - [disabled-02 [variable]](#disabled-02-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
   - [text-02 [variable]](#text-02-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
-  - [spacing-03 [variable]](#spacing-03-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
 
 ## tag
