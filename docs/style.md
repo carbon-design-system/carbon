@@ -308,7 +308,8 @@ example:
 
 Authoring component styles under a mixin allows the design system to:
 
-- Control when the CSS for accordion gets emitted
+- Control when the CSS for accordion gets emitted, or not emitted, from the
+  library
 - Allows us to author experimental or future styles in a separate mixin and
   toggle its inclusion through feature flags
 - Could allow developers consuming the design system to control when styles get
@@ -365,8 +366,8 @@ It's important that we write selectors that use as much specificity as needed.
 Ideally, we would only need one selector per component but this is rarely the
 case. As a result, adding specificity should be done sparingly or when including
 it is helpful when building a component. For example, if you would like to
-enforce a specific element or ARIA attribute using this attribute in a selector
-would be appropriate:
+enforce a specific element or ARIA attribute then using this attribute in a
+selector would be appropriate:
 
 ```scss
 button[aria-expanded='false'] {
@@ -374,8 +375,10 @@ button[aria-expanded='false'] {
 }
 ```
 
-While this example may contain more specificity than needed, it's more important
-that the component itself implements this contract for accessibility.
+If we compared this to a class selector, for example `.my-component__button`,
+then we may consider this as adding more specificity than needed. However, for
+the design system it is more important that the component itself implements this
+contract for accessibility.
 
 #### Use the global `$prefix` variable
 
