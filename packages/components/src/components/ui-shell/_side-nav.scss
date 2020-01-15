@@ -648,7 +648,7 @@
       font-weight: 400;
     }
 
-    & a.#{$prefix}--header__menu-item:hover {
+    a.#{$prefix}--header__menu-item:hover {
       background-color: $shell-side-nav-bg-04;
       color: $ibm-color__gray-100;
     }
