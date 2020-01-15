@@ -1,7 +1,7 @@
 {
   "name": "@carbon/icons-handlebars",
   "description": "Handlebars helpers for IBM Design Language icons in digital and software products using the Carbon Design System",
-  "version": "10.6.0",
+  "version": "10.8.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-handlebars",
@@ -22,8 +22,8 @@
     "handlebars": "^4.0.12"
   },
   "dependencies": {
-    "@carbon/icon-helpers": "10.4.0",
-    "@carbon/icons": "10.6.0"
+    "@carbon/icon-helpers": "^10.5.0",
+    "@carbon/icons": "^10.8.0"
   },
   "devDependencies": {
     "handlebars": "^4.0.12"

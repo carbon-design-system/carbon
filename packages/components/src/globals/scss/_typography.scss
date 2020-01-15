@@ -22,6 +22,11 @@ $base-font-size: 16px !default;
 /// @group global-typography
 /// @deprecated (For v10) Use `carbon--rem()`
 @function rem($px) {
+  @if unit($px) != 'px' {
+    // TODO: update to @error in v11
+    @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
+  }
+
   @return ($px / $base-font-size) * 1rem;
 }
 
@@ -33,6 +38,11 @@ $base-font-size: 16px !default;
 /// @group global-typography
 /// @deprecated (For v10) Use `carbon--em()`
 @function em($px) {
+  @if unit($px) != 'px' {
+    // TODO: update to @error in v11
+    @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
+  }
+
   @return ($px / $base-font-size) * 1em;
 }
 

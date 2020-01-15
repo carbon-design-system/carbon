@@ -28,7 +28,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: z('hidden');
+    z-index: z('modal');
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,19 +38,16 @@
     visibility: hidden;
     transition: background-color $duration--slow-02 motion(exit, expressive),
       opacity $duration--moderate-02 motion(exit, expressive),
-      z-index $duration--slow-02 motion(exit, expressive),
-      visibility $duration--moderate-02 motion(exit, expressive);
+      visibility 0ms linear $duration--moderate-02;
 
     &.is-visible {
-      z-index: z('modal');
       visibility: visible;
       opacity: 1;
       background-color: $overlay-01;
       transition: background-color $duration--slow-02
           motion(entrance, expressive),
         opacity $duration--moderate-02 motion(entrance, expressive),
-        z-index $duration--slow-02 motion(entrance, expressive),
-        visibility $duration--moderate-02 motion(entrance, expressive);
+        visibility 0ms linear;
     }
 
     .#{$prefix}--text-input,
@@ -107,29 +104,32 @@
 
   .#{$prefix}--modal-header,
   .#{$prefix}--modal-content {
-    padding-left: $carbon--spacing-05;
+    padding-left: $spacing-05;
   }
 
   .#{$prefix}--modal-header,
   .#{$prefix}--modal-content,
   .#{$prefix}--modal-content__regular-content {
-    padding-right: $carbon--spacing-05;
+    padding-right: $spacing-05;
   }
 
   .#{$prefix}--modal-content--with-form {
-    padding-right: $carbon--spacing-05;
+    padding-right: $spacing-05;
 
     @include carbon--breakpoint(md) {
-      padding-right: $carbon--spacing-05; // Override for `.#{$prefix}--modal-content`
+      padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
     }
   }
 
   .#{$prefix}--modal-container--xs {
-    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
-      padding-right: $carbon--spacing-05;
+      padding-right: $spacing-05;
     }
 
     @include carbon--breakpoint(md) {
@@ -147,11 +147,14 @@
   }
 
   .#{$prefix}--modal-container--sm {
-    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
-      padding-right: $carbon--spacing-05;
+      padding-right: $spacing-05;
     }
 
     @include carbon--breakpoint(md) {
@@ -173,17 +176,20 @@
       }
 
       .#{$prefix}--modal-content--with-form {
-        padding-right: $carbon--spacing-05; // Override for `.#{$prefix}--modal-content`
+        padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
       }
     }
   }
 
   .#{$prefix}--modal-container--lg {
-    .#{$prefix}--modal-header,
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
     .#{$prefix}--modal-content,
     .#{$prefix}--modal-content__regular-content,
     .#{$prefix}--modal-content--with-form {
-      padding-right: $carbon--spacing-05;
+      padding-right: $spacing-05;
     }
 
     @include carbon--breakpoint(md) {
@@ -196,7 +202,7 @@
       }
 
       .#{$prefix}--modal-content--with-form {
-        padding-right: $carbon--spacing-05; // Override for `.#{$prefix}--modal-content`
+        padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
       }
     }
 
@@ -211,8 +217,9 @@
   }
 
   .#{$prefix}--modal-header {
-    padding-top: $carbon--spacing-05;
-    margin-bottom: $carbon--spacing-03;
+    padding-top: $spacing-05;
+    padding-right: $spacing-09;
+    margin-bottom: $spacing-03;
 
     grid-row: 1/1;
     grid-column: 1/-1;
@@ -222,7 +229,7 @@
     @include type-style('label-01');
 
     color: $text-02;
-    margin-bottom: $carbon--spacing-02;
+    margin-bottom: $spacing-02;
   }
 
   .#{$prefix}--modal-header__heading {
@@ -238,17 +245,21 @@
     grid-column: 1/-1;
 
     overflow-y: auto;
-    margin-bottom: $carbon--spacing-08;
+    margin-bottom: $spacing-08;
     color: $text-01;
     font-weight: 400;
 
     // Required to accommodate focus outline's negative offset:
-    padding-top: $carbon--spacing-03;
-    padding-bottom: $carbon--spacing-03;
+    padding-top: $spacing-03;
 
     &:focus {
       @include focus-outline('outline');
     }
+  }
+
+  // Required so overflow-indicator disappears at end of content
+  .#{$prefix}--modal-content > *:last-child {
+    padding-bottom: $spacing-07;
   }
 
   .#{$prefix}--modal-content {
@@ -265,8 +276,9 @@
     content: '';
     position: absolute;
     left: 0;
-    bottom: $carbon--spacing-08;
-    background-image: linear-gradient(to bottom, transparent, $ui-01);
+    bottom: $spacing-08;
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to bottom, rgba($ui-01, 0), $ui-01);
   }
 
   .#{$prefix}--modal-content:focus
@@ -289,8 +301,8 @@
       flex: 1;
       height: 4rem;
       margin: 0;
-      padding-top: $carbon--spacing-05;
-      padding-bottom: $carbon--spacing-07;
+      padding-top: $spacing-05;
+      padding-bottom: $spacing-07;
     }
   }
 

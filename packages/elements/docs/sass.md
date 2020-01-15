@@ -1531,12 +1531,9 @@ Generate the CSS for a grid for the given breakpoints and gutters
     @include carbon--make-row();
   }
 
-  .#{$prefix}--grid--condensed .#{$prefix}--row:not(:last-of-type) {
-    margin-bottom: $condensed-gutter;
-  }
-
-  .#{$prefix}--row--condensed + .#{$prefix}--row--condensed {
-    margin-top: $condensed-gutter;
+  .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
+    padding-top: $condensed-gutter / 2;
+    padding-bottom: $condensed-gutter / 2;
   }
 
   @include carbon--make-grid-columns($breakpoints, $grid-gutter);
@@ -2326,6 +2323,11 @@ Convert a given px unit to a rem unit
 
 ```scss
 @function carbon--rem($px) {
+  @if unit($px) != 'px' {
+    // TODO: update to @error in v11
+    @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
+  }
+
   @return ($px / $carbon--base-font-size) * 1rem;
 }
 ```
@@ -2354,6 +2356,11 @@ Convert a given px unit to a em unit
 
 ```scss
 @function carbon--em($px) {
+  @if unit($px) != 'px' {
+    // TODO: update to @error in v11
+    @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
+  }
+
   @return ($px / $carbon--base-font-size) * 1em;
 }
 ```
@@ -5357,8 +5364,8 @@ $carbon--theme--v9: map-merge(
   $carbon--theme--white,
   (
     interactive-01: #3d70b2,
-    interactive-02: #5a6872,
-    interactive-03: #5a6872,
+    interactive-02: #4d5358,
+    interactive-03: #3d70b2,
     interactive-04: #3d70b2,
     ui-background: #f4f7fb,
     ui-01: #ffffff,
@@ -5410,8 +5417,8 @@ $carbon--theme--v9: map-merge(
     skeleton-01: rgba(61, 112, 178, 0.1),
     skeleton-02: rgba(61, 112, 178, 0.1),
     brand-01: #3d70b2,
-    brand-02: #5a6872,
-    brand-03: #5a6872,
+    brand-02: #4d5358,
+    brand-03: #3d70b2,
     active-01: #dfeafa,
     hover-field: #eef4fc,
   )
@@ -11048,7 +11055,7 @@ $productive-heading-07: (
 $expressive-heading-01: map-merge(
   $heading-01,
   (
-    line-height: carbon--rem(20),
+    line-height: carbon--rem(20px),
   )
 );
 ```
@@ -11067,7 +11074,7 @@ $expressive-heading-01: map-merge(
 $expressive-heading-02: map-merge(
   $heading-02,
   (
-    line-height: carbon--rem(24),
+    line-height: carbon--rem(24px),
   )
 );
 ```

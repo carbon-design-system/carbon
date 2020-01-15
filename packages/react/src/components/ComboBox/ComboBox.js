@@ -155,6 +155,11 @@ export default class ComboBox extends React.Component {
     type: ListBoxPropTypes.ListBoxType,
 
     /**
+     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+     */
+    size: ListBoxPropTypes.ListBoxSize,
+
+    /**
      * Callback function to notify consumer when the text input changes.
      * This provides support to change available items based on the text.
      * @param {string} inputText
@@ -215,24 +220,26 @@ export default class ComboBox extends React.Component {
     }
   };
 
+  handleOnInputValueChange = inputValue => {
+    const { onInputChange } = this.props;
+
+    this.setState(
+      () => ({
+        // Default to empty string if we have a false-y `inputValue`
+        inputValue: inputValue || '',
+      }),
+      () => {
+        if (onInputChange) {
+          onInputChange(inputValue);
+        }
+      }
+    );
+  };
+
   handleOnStateChange = (newState, { setHighlightedIndex }) => {
     if (Object.prototype.hasOwnProperty.call(newState, 'inputValue')) {
       const { inputValue } = newState;
-      const { onInputChange } = this.props;
-
       setHighlightedIndex(findHighlightedIndex(this.props, inputValue));
-
-      this.setState(
-        () => ({
-          // Default to empty string if we have a false-y `inputValue`
-          inputValue: inputValue || '',
-        }),
-        () => {
-          if (onInputChange) {
-            onInputChange(inputValue);
-          }
-        }
-      );
     }
   };
 
@@ -262,6 +269,7 @@ export default class ComboBox extends React.Component {
       invalidText,
       light,
       type, // eslint-disable-line no-unused-vars
+      size,
       shouldFilterItem, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onInputChange, // eslint-disable-line no-unused-vars
@@ -272,8 +280,12 @@ export default class ComboBox extends React.Component {
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
+    const comboBoxHelperId = !helperText
+      ? undefined
+      : `combobox-helper-text-${this.comboBoxInstanceId}`;
+    const comboBoxLabelId = `combobox-label-${this.comboBoxInstanceId}`;
     const title = titleText ? (
-      <label htmlFor={id} className={titleClasses}>
+      <label id={comboBoxLabelId} htmlFor={id} className={titleClasses}>
         {titleText}
       </label>
     ) : null;
@@ -281,7 +293,9 @@ export default class ComboBox extends React.Component {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
     const helper = helperText ? (
-      <div className={helperClasses}>{helperText}</div>
+      <div id={comboBoxHelperId} className={helperClasses}>
+        {helperText}
+      </div>
     ) : null;
     const wrapperClasses = cx(`${prefix}--list-box__wrapper`);
     const comboBoxA11yId = `combobox-a11y-${this.comboBoxInstanceId}`;
@@ -295,6 +309,7 @@ export default class ComboBox extends React.Component {
       <Downshift
         {...downshiftProps}
         onChange={this.handleOnChange}
+        onInputValueChange={this.handleOnInputValueChange}
         onStateChange={this.handleOnStateChange}
         inputValue={this.state.inputValue || ''}
         itemToString={itemToString}
@@ -321,11 +336,13 @@ export default class ComboBox extends React.Component {
             invalidText={invalidText}
             isOpen={isOpen}
             light={light}
+            size={size}
             {...getRootProps({ refKey: 'innerRef' })}>
             <ListBox.Field
               id={id}
               disabled={disabled}
-              translateWithId={translateWithId}
+              aria-labelledby={comboBoxLabelId}
+              aria-describedby={comboBoxHelperId}
               {...getButtonProps({
                 disabled,
                 onClick: this.onToggleClick(isOpen),
@@ -373,28 +390,31 @@ export default class ComboBox extends React.Component {
             {isOpen && (
               <ListBox.Menu aria-label={ariaLabel} id={id}>
                 {this.filterItems(items, itemToString, inputValue).map(
-                  (item, index) => (
-                    <ListBox.MenuItem
-                      key={itemToString(item)}
-                      isActive={selectedItem === item}
-                      isHighlighted={
-                        highlightedIndex === index ||
-                        (selectedItem && selectedItem.id === item.id) ||
-                        false
-                      }
-                      {...getItemProps({ item, index })}>
-                      {itemToElement ? (
-                        <ItemToElement key={itemToString(item)} {...item} />
-                      ) : (
-                        itemToString(item)
-                      )}
-                      {selectedItem === item && (
-                        <Checkmark16
-                          className={`${prefix}--list-box__menu-item__selected-icon`}
-                        />
-                      )}
-                    </ListBox.MenuItem>
-                  )
+                  (item, index) => {
+                    const itemProps = getItemProps({ item, index });
+                    return (
+                      <ListBox.MenuItem
+                        key={itemProps.id}
+                        isActive={selectedItem === item}
+                        isHighlighted={
+                          highlightedIndex === index ||
+                          (selectedItem && selectedItem.id === item.id) ||
+                          false
+                        }
+                        {...itemProps}>
+                        {itemToElement ? (
+                          <ItemToElement key={itemProps.id} {...item} />
+                        ) : (
+                          itemToString(item)
+                        )}
+                        {selectedItem === item && (
+                          <Checkmark16
+                            className={`${prefix}--list-box__menu-item__selected-icon`}
+                          />
+                        )}
+                      </ListBox.MenuItem>
+                    );
+                  }
                 )}
               </ListBox.Menu>
             )}

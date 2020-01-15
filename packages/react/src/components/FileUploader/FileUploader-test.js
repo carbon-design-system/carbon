@@ -255,8 +255,20 @@ describe('FileUploader', () => {
 });
 
 describe('FileUploaderDropContainer', () => {
-  const dropContainer = <FileUploaderDropContainer className="extra-class" />;
-  const mountWrapper = mount(dropContainer);
+  let onAddFiles;
+  let dropContainer;
+  let mountWrapper;
+
+  beforeEach(() => {
+    onAddFiles = jest.fn();
+    dropContainer = (
+      <FileUploaderDropContainer
+        className="extra-class"
+        onAddFiles={onAddFiles}
+      />
+    );
+    mountWrapper = mount(dropContainer);
+  });
 
   describe('Renders as expected with default props', () => {
     it('renders with given className', () => {
@@ -292,6 +304,24 @@ describe('FileUploaderDropContainer', () => {
       input.simulate('click', evt);
 
       expect(evt.target.value).toEqual(null);
+    });
+
+    it('should call `onAddFiles` when a file is selected', () => {
+      const fileFoo = new File(['foo'], 'foo.txt', { type: 'text/plain' });
+      const fileBar = new File(['bar'], 'bar.txt', { type: 'text/plain' });
+      const mockFiles = [fileFoo, fileBar];
+      const input = mountWrapper.find(`.${prefix}--file-input`);
+      const evt = { target: { files: mockFiles } };
+      input.simulate('change', evt);
+      expect(onAddFiles).toHaveBeenCalledTimes(1);
+      expect(onAddFiles).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: {
+            files: [fileFoo, fileBar],
+          },
+        }),
+        { addedFiles: [fileFoo, fileBar] }
+      );
     });
   });
 
