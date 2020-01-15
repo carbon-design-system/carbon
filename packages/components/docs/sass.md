@@ -13922,6 +13922,8 @@ Combo box styles
 
   .#{$prefix}--combo-box .#{$prefix}--list-box__field,
   .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field {
     padding: 0;
   }
@@ -16501,6 +16503,7 @@ Dropdown styles
       background-color $duration--fast-01 motion(standard, productive);
     opacity: 0;
     visibility: inherit;
+    position: relative;
 
     &:hover {
       background-color: $hover-ui;
@@ -16718,6 +16721,10 @@ Dropdown styles
 
     + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
       border-top-color: transparent;
+    }
+
+    .#{$prefix}--list-box__menu-item__selected-icon {
+      display: block;
     }
   }
 
@@ -17963,6 +17970,7 @@ List box styles
     line-height: rem(16px);
     padding: rem(11px) 0;
     margin: 0 $carbon--spacing-05;
+    padding-right: rem(32px); // 40px - `$carbon--spacing-05`
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
     border-top-color: $ui-03;
@@ -17994,7 +18002,7 @@ List box styles
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__menu-item__option {
-    margin: 0 $carbon--spacing-03;
+    margin: 0 rem(32px) 0 $carbon--spacing-03;
 
     &:focus {
       margin: 0;
@@ -18024,16 +18032,32 @@ List box styles
 
   .#{$prefix}--list-box__menu-item--active {
     color: $text-01;
+    background-color: $selected-ui;
     border-bottom-color: $selected-ui;
-
-    &:hover {
-      background-color: $selected-ui;
-    }
   }
 
   .#{$prefix}--list-box__menu-item--active
     .#{$prefix}--list-box__menu-item__option {
     color: $text-01;
+  }
+
+  .#{$prefix}--list-box__menu-item__selected-icon {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: rem(16px);
+    transform: translateY(-50%);
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__menu-item__selected-icon {
+    right: rem(8px);
+  }
+
+  .#{$prefix}--list-box__menu-item--active
+    .#{$prefix}--list-box__menu-item__selected-icon {
+    display: block;
   }
 
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {
