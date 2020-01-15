@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import Grid from '../Grid';
+import { Grid } from '../Grid';
 import { shallow } from 'enzyme';
 import { settings } from 'carbon-components';
 

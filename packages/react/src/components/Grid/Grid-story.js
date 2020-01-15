@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { withKnobs, boolean, select, color } from '@storybook/addon-knobs';
-import Grid from './Grid';
+import { Grid } from './Grid';
 
 import { blue, gray } from '@carbon/colors';
 import './_Grid-story.scss';
