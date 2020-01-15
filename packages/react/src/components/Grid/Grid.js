@@ -67,7 +67,7 @@ Grid.propTypes = {
   /**
    * Provide a custom element to render instead of the default <div>
    */
-  as: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
    * Collapse the gutter to 2px. Useful for fluid layouts.
@@ -114,7 +114,7 @@ Row.propTypes = {
   /**
    * Provide a custom element to render instead of the default <div>
    */
-  as: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
    * Specify a single row as condensed.Rows that are adjacent
@@ -200,7 +200,7 @@ Col.propTypes = {
   /**
    * Provide a custom element to render instead of the default <div>
    */
-  as: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
    * Specify column span at this width.
@@ -280,14 +280,6 @@ Col.propTypes = {
       offset: PropTypes.oneOf(VALID_COL_OFFSETS.lgPlus),
     }),
   ]),
-
-  /**
-   * Offset content by a given column span,
-   * largest offset is 1 less than number of columns.
-   *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
-   */
-  smOffset: PropTypes.oneOf(VALID_COL_OFFSETS.sm),
 
   /**
    * Specify a custom className to be applied to the Grid Col
