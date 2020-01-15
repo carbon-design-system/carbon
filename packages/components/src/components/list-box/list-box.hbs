@@ -114,10 +114,11 @@
       <ul class="{{@root.prefix}}--list-box__menu" role="combobox">
         {{#each items}}
         <li
-          class="{{@root.prefix}}--list-box__menu-item{{#if selected}} {{@root.prefix}}--list-box__menu-item--highlighted{{/if}}"
+          class="{{@root.prefix}}--list-box__menu-item{{#if selected}} {{@root.prefix}}--list-box__menu-item--active {{@root.prefix}}--list-box__menu-item--highlighted{{/if}}"
           id="{{id}}">
           <div class="{{@root.prefix}}--list-box__menu-item__option" tabindex="0">
             {{label}}
+            {{ carbon-icon 'Checkmark16' class=(add @root.prefix '--list-box__menu-item__selected-icon') aria-hidden="true" }}
           </div>
         </li>
         {{/each}}
