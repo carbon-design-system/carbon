@@ -364,7 +364,7 @@ becomes increasingly obvious.
 It's important that we write selectors that use as much specificity as needed.
 Ideally, we would only need one selector per component but this is rarely the
 case. As a result, adding specificity should be done sparingly or when including
-it is helpful when building a component. For example, if you would like to
+it is helpful for building a component. For example, if you would like to
 enforce a specific element or ARIA attribute using this attribute in a selector
 would be appropriate:
 
