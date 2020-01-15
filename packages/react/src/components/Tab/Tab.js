@@ -151,12 +151,14 @@ export default class Tab extends React.Component {
     });
 
     const anchorProps = {
+      id,
       className: `${prefix}--tabs__nav-link`,
       href,
       role: 'tab',
       tabIndex: !disabled ? tabIndex : -1,
       ['aria-selected']: selected,
       ['aria-disabled']: disabled,
+      ['aria-controls']: `${id}__panel`,
       ref: e => {
         this.tabAnchor = e;
       },
@@ -164,7 +166,6 @@ export default class Tab extends React.Component {
 
     return (
       <li
-        id={id}
         {...other}
         tabIndex={-1}
         className={classes}
@@ -184,8 +185,7 @@ export default class Tab extends React.Component {
           onKeyDown(evt);
         }}
         role="presentation"
-        selected={selected}
-        aria-controls={`${id}__panel`}>
+        selected={selected}>
         {renderAnchor ? (
           renderAnchor(anchorProps)
         ) : (
