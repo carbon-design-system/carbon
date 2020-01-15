@@ -16375,6 +16375,7 @@ Dropdown styles
 
   .#{$prefix}--dropdown--xl {
     height: rem(48px);
+    max-height: rem(48px);
   }
 
   .#{$prefix}--dropdown--xl .#{$prefix}--dropdown__arrow {
@@ -16383,6 +16384,7 @@ Dropdown styles
 
   .#{$prefix}--dropdown--sm {
     height: rem(32px);
+    max-height: rem(32px);
   }
 
   .#{$prefix}--dropdown--sm .#{$prefix}--dropdown__arrow {
