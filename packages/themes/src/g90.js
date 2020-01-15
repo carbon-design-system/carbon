@@ -30,7 +30,6 @@ import {
   yellow,
   red30,
   red40,
-  red50,
   red60,
   red80,
   purple40,
