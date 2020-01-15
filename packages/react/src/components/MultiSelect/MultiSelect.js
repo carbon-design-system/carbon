@@ -13,7 +13,6 @@ import isEqual from 'lodash.isequal';
 import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
-import Checkbox from '../Checkbox';
 import Selection from '../../internal/Selection';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import { defaultItemToString } from './tools/itemToString';
@@ -383,16 +382,18 @@ export default class MultiSelect extends React.Component {
                             role="group"
                             aria-label={itemProps.id}
                             {...itemProps}>
-                            <Checkbox
-                              id={`${itemProps.id}__checkbox`}
-                              title={useTitleInItem ? itemText : null}
-                              name={itemText}
-                              checked={isChecked}
-                              disabled={disabled}
-                              readOnly={true}
-                              tabIndex="-1"
-                              labelText={itemText}
-                            />
+                            <div
+                              role="group"
+                              aria-label={`${itemProps.id}__checkbox`}
+                              className={`${prefix}--checkbox-wrapper`}>
+                              <span
+                                title={useTitleInItem ? itemText : null}
+                                className={`${prefix}--checkbox-label`}
+                                data-contained-checkbox-state={isChecked}
+                                id={`${itemProps.id}__checkbox`}>
+                                {itemText}
+                              </span>
+                            </div>
                           </ListBox.MenuItem>
                         );
                       })}
