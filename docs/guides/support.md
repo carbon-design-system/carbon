@@ -13,8 +13,12 @@
 - [Issues](#issues)
   - [Types of issues](#types-of-issues)
   - [Triaging a new issue](#triaging-a-new-issue)
+  - [Triage Process](#triage-process)
+    - [type: bug 🐛 & type: a11y ♿](#type-bug---type-a11y-)
+    - [type: question ❓](#type-question-)
+    - [type: enhancement 💡](#type-enhancement-)
   - [Severity](#severity)
-  - [Priority](#priority)
+  - [Impact](#impact)
   - [Other labels](#other-labels)
   - [Alerting a team or subject matter expert](#alerting-a-team-or-subject-matter-expert)
 - [Pull requests](#pull-requests)
@@ -72,12 +76,155 @@ team are concerned with:
 - type: a11y ♿
 - type: question ❓
 - type: bug 🐛
+- type: enhancement 💡
 
 ### Triaging a new issue
 
 Triage is the process of determing the severity and priority of issues _as they
 come in_. We need to make sure we know how serious a problem is and how quickly
 it should be addressed.
+
+### Triage Process
+
+For the different types of issues, we have created the process to triaging each
+one so that they can be moved into our Backlog. For all types of issues, assign
+yourself to the issue until it's moved to the Backlog pipeline so that others
+know the issue is being addressed.
+
+#### type: bug 🐛 & type: a11y ♿
+
+_Process to triaged_
+
+<details>
+
+<summary>Is there a duplicate issue?</summary>
+
+We recieve enough duplicate issues that it is always a good idea to check before
+moving on in the triage process. We have issues related to accessibilty that
+catalogue multiple problems so be sure to check especially with incoming
+accessibilty problems.
+
+If you find a duplicate, comment to the author, label it as a duplicate, and
+close the issue.
+
+</details>
+
+<details>
+
+<summary>Is it actually a bug report?</summary>
+
+Sometimes people mark their issues as a bug when in reality, they are an
+enhancement request or a question.
+
+If you find this to be the case, remove the bug label, add the
+`type: question ❓` or `type: enhancement 💡` label, and then follow the
+directions in that section.
+
+</details>
+
+<details>
+<summary>Did they fill out the issue template?</summary>
+
+The most important part of the issue template is the "steps to reproduce"
+section, if the author didn't provide that (and reproduction isn't obvious)
+comment asking for reproduction and other relevant details not filled out in the
+templete.
+
+</details>
+
+<details>
+<summary>Can you reproduce the problem?</summary>
+
+If you can reproduce the problem, proceed to label what component it affects,
+what role it applies to (design, dev, both), assess the impact and severity
+based on the guides below, and label any additional relevant metadata such as
+browser or version info.
+
+</details>
+
+After all that, move the issue to the backlog pipeline in zenhub and then you're
+done! 🎉
+
+#### type: question ❓
+
+_Process to triaged_
+
+<details>
+<summary> Is it actually a feature request or bug?</summary>
+
+This happens from time to time so it's always a good idea to make sure they are
+asking a question and not really asking for a new feature or addressing a bug.
+If they are, remove the question label, label as a `type: enhancement 💡` or
+`type: bug 🐛` , and follow the instructions for feature enhancement issues.
+
+</details>
+
+<details>
+<summary>Is there a duplicate question?</summary>
+
+We tend to recieve more questions through Slack than through Github so with any
+incoming question issues, search in both places to see if it has already been
+answered. If you can find an answer, point the author to where they can find it
+and close the issue.
+
+</details>
+
+<details>
+<summary>Can you answer the question?</summary>
+
+If you can answer the question immediately then great! Answer it and wait for
+the author to communicate that it did in fact answer what they were asking. If
+they don't respond within a week, feel free to close this issue.
+
+</details>
+<details>
+<summary>Can't answer the question?</summary>
+
+If you can't immediately answer the question, that's fine! The main thing here
+is to get the ball rolling so the question can be answered. To do this, You can
+post the question in the `carbon-support` Slack channel or `@` someone who you
+think has relevant information, in the issue itself or on Slack. Also make sure
+to tag the question with any appropriate labels.
+
+</details>
+
+As soon as you've started the process of getting the question answered, you can
+move the issue to the backlog! 🎉
+
+#### type: enhancement 💡
+
+_Process to triaged_
+
+<details>
+<summary>Does the feature already exist or can be accomplished with existing code?</summary>
+
+Certain components are more configurable than others so it's worth checking if
+they can add the functionality they want without it being added to carbon core.
+It's also possible that the feature already exists and they just don't know
+about it yet. If that is the case, comment with the solution and close the
+issue.
+
+</details>
+<details>
+<summary>Is this a duplicate suggestion?</summary>
+
+Like with the other types of issues, make sure that there isn't already a
+proposal for the feature the author is suggesting. If there is, comment with the
+link to the duplicate proposal, label as a duplicate, and close the issue.
+
+</details>
+<details>
+<summary>Did they fill out the issue template?</summary>
+
+After this step, the request will become a proposal so it's necessary that they
+filled out all of the issue template. If they haven't, comment asking for the
+missing info.
+
+</details>
+
+If they have filled out the template or they have responded with the missing
+info, label the issue as an open proposal, label any relevant metadata, and move
+the issue to the backlog pipeline! 🎉
 
 ### Severity
 
@@ -125,20 +272,20 @@ a handy flow chart to guide you through assigning issue severity:
  +-------------+  +-------------+    +-------------+  +-------------+
 ```
 
-### Priority
+### Impact
 
-An issue's priority talks about the _scope_ of the issue. How many people does
-the problem effect? There are three tiers:
+An issue's impact talks about the _scope_ of the issue. How many people does the
+problem effect? There are three tiers:
 
-- Priority: high - _"Defect affects all users"_
-- Priority: medium - _"Defect affects many users"_
-- Priority: low - _"Defect affects one or a few users"_
+- Impact: high - _"Defect affects all users"_
+- Impact: medium - _"Defect affects many users"_
+- Impact: low - _"Defect affects one or a few users"_
 
 These three issues help us prioritize _when_ we resolve these issues. High
-priority issues should happen as soon as possible, medium priority within the
-next few chunks of work, and low priority issues happening someday _(but still
-definitely happening — if the issue doesn't merit working on in the foreseeable
-future no label is needed because the issue should be closed)_.
+impact issues should happen as soon as possible, medium impact within the next
+few chunks of work, and low impact issues happening someday _(but still
+definitely happening)_. If the issue doesn't merit fixing in the foreseeable
+future no label is needed because the issue should be closed.
 
 ### Other labels
 
