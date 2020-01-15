@@ -32,12 +32,6 @@ export default class Tab extends React.Component {
     handleTabClick: PropTypes.func,
 
     /**
-     * A handler that is invoked when a user presses left/right key.
-     * Reserved for usage in Tabs
-     */
-    handleTabAnchorFocus: PropTypes.func,
-
-    /**
      * A handler that is invoked on the key down event for the control.
      * Reserved for usage in Tabs
      */
@@ -113,24 +107,11 @@ export default class Tab extends React.Component {
     onKeyDown: () => {},
   };
 
-  setTabFocus(evt) {
-    const leftKey = 37;
-    const rightKey = 39;
-    if (evt.which === leftKey) {
-      this.props.handleTabAnchorFocus(this.props.index - 1);
-    } else if (evt.which === rightKey) {
-      this.props.handleTabAnchorFocus(this.props.index + 1);
-    } else {
-      return;
-    }
-  }
-
   render() {
     const {
       id,
       className,
       handleTabClick,
-      handleTabAnchorFocus, // eslint-disable-line
       handleTabKeyDown,
       disabled,
       href,
@@ -180,7 +161,6 @@ export default class Tab extends React.Component {
           if (disabled) {
             return;
           }
-          this.setTabFocus(evt);
           handleTabKeyDown(index, evt);
           onKeyDown(evt);
         }}
