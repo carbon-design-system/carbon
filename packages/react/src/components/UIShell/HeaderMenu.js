@@ -194,7 +194,6 @@ class HeaderMenu extends React.Component {
           href="#"
           onKeyDown={this.handleOnKeyDown}
           ref={this.handleMenuButtonRef}
-          role="menuitem"
           tabIndex={0}
           {...accessibilityLabel}>
           {menuLinkName}
