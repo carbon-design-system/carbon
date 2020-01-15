@@ -24245,7 +24245,7 @@ UI shell header
     margin: 0;
   }
 
-  a.#{$prefix}--header__menu-item[role='menuitem'] {
+  a.#{$prefix}--header__menu-item {
     display: flex;
     align-items: center;
     color: $shell-header-text-02;
@@ -24266,26 +24266,26 @@ UI shell header
         $duration--fast-02, color $duration--fast-02;
   }
 
-  a.#{$prefix}--header__menu-item[role='menuitem']:hover {
+  a.#{$prefix}--header__menu-item:hover {
     background-color: $shell-header-bg-02;
     color: $shell-header-text-01;
   }
 
   .#{$prefix}--header__action:active,
-  a.#{$prefix}--header__menu-item[role='menuitem']:active {
+  a.#{$prefix}--header__menu-item:active {
     background-color: $shell-header-bg-03;
     color: $shell-header-text-01;
   }
 
-  a.#{$prefix}--header__menu-item[role='menuitem']:focus {
+  a.#{$prefix}--header__menu-item:focus {
     border-color: $shell-header-focus;
     color: $shell-header-text-01;
     outline: none;
   }
 
-  a.#{$prefix}--header__menu-item[role='menuitem']:hover > svg,
-  a.#{$prefix}--header__menu-item[role='menuitem']:active > svg,
-  a.#{$prefix}--header__menu-item[role='menuitem']:focus > svg {
+  a.#{$prefix}--header__menu-item:hover > svg,
+  a.#{$prefix}--header__menu-item:active > svg,
+  a.#{$prefix}--header__menu-item:focus > svg {
     fill: $shell-header-icon-01;
   }
 
@@ -24293,11 +24293,11 @@ UI shell header
     position: relative;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-haspopup='true'] {
+  .#{$prefix}--header__menu-title[aria-haspopup='true'] {
     position: relative;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true'] {
+  .#{$prefix}--header__menu-title[aria-expanded='true'] {
     background-color: $shell-header-bg-06;
     color: $shell-header-focus;
     // Note: needs to be higher than menu. Adding 1 here instead of moving to
@@ -24305,7 +24305,7 @@ UI shell header
     z-index: #{z('header') + 1};
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+  .#{$prefix}--header__menu-title[aria-expanded='true']
     > .#{$prefix}--header__menu-arrow {
     transform: rotate(180deg);
   }
@@ -24317,7 +24317,7 @@ UI shell header
     margin: 0;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+  .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     position: absolute;
     bottom: 0;
@@ -24331,24 +24331,23 @@ UI shell header
     z-index: z('header');
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+  .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu
     .#{$prefix}--header__menu-item:hover {
     background-color: $shell-header-bg-04;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+  .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu
     .#{$prefix}--header__menu-item:active {
     background-color: $shell-header-bg-03;
   }
 
-  .#{$prefix}--header__menu .#{$prefix}--header__menu-item[role='menuitem'] {
+  .#{$prefix}--header__menu .#{$prefix}--header__menu-item {
     height: mini-units(6);
   }
 
-  .#{$prefix}--header__menu
-    .#{$prefix}--header__menu-item[role='menuitem']:hover {
+  .#{$prefix}--header__menu .#{$prefix}--header__menu-item:hover {
     background-color: $shell-header-bg-06;
     color: $shell-header-text-01;
   }
@@ -25191,9 +25190,9 @@ UI shell side nav
     > .#{$prefix}--side-nav__link:hover,
   .#{$prefix}--side-nav__menu[role='menu']
     a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem']:hover,
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
   .#{$prefix}--side-nav
-    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']:hover {
+    .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
     // TODO: sync color
     background-color: $shell-side-nav-bg-04;
     color: $ibm-color__gray-100;
@@ -25335,9 +25334,9 @@ UI shell side nav
   // Side-nav > Link
   //----------------------------------------------------------------------------
   a.#{$prefix}--side-nav__link,
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem'],
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item,
   .#{$prefix}--side-nav
-    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     @include focus-outline('reset');
     @include type-style('productive-heading-01');
@@ -25359,7 +25358,7 @@ UI shell side nav
 
   a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text,
   .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item[role='menuitem']
+    a.#{$prefix}--header__menu-item
     .#{$prefix}--text-truncate-end {
     @include text-overflow();
     color: $shell-side-nav-text-01;
@@ -25370,7 +25369,7 @@ UI shell side nav
   }
 
   a.#{$prefix}--side-nav__link:focus,
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem']:focus {
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:focus {
     @include focus-outline('outline');
   }
 
@@ -25480,7 +25479,7 @@ UI shell side nav
   }
 
   //header menu items overrides
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem'] {
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item {
     color: $shell-side-nav-text-01;
     white-space: nowrap;
     justify-content: space-between;
@@ -25491,7 +25490,7 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav
-    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     bottom: inherit;
     width: 100%;
@@ -25504,12 +25503,12 @@ UI shell side nav
       width: 100%;
     }
 
-    & a.#{$prefix}--header__menu-item[role='menuitem'] {
+    a.#{$prefix}--header__menu-item {
       padding-left: 4.25rem;
       font-weight: 400;
     }
 
-    & a.#{$prefix}--header__menu-item[role='menuitem']:hover {
+    a.#{$prefix}--header__menu-item:hover {
       background-color: $shell-side-nav-bg-04;
       color: $ibm-color__gray-100;
     }
@@ -25517,15 +25516,15 @@ UI shell side nav
 
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu
-    a.#{$prefix}--header__menu-item[role='menuitem'] {
+    a.#{$prefix}--header__menu-item {
     height: inherit;
   }
 
   .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item[role='menuitem']:hover
+    a.#{$prefix}--header__menu-item:hover
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item[role='menuitem']:focus
+    a.#{$prefix}--header__menu-item:focus
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
     fill: $shell-side-nav-text-01;
