@@ -57,6 +57,7 @@ export const text02 = gray30;
 export const text03 = gray60;
 export const text04 = white;
 export const text05 = gray50;
+export const textError = red40;
 
 export const icon01 = gray10;
 export const icon02 = gray30;

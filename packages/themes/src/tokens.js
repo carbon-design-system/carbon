@@ -30,6 +30,7 @@ const colors = [
   'text03',
   'text04',
   'text05',
+  'textError',
 
   'icon01',
   'icon02',
