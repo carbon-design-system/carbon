@@ -330,9 +330,9 @@
     > .#{$prefix}--side-nav__link:hover,
   .#{$prefix}--side-nav__menu[role='menu']
     a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem']:hover,
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
   .#{$prefix}--side-nav
-    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']:hover {
+    .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
     // TODO: sync color
     background-color: $shell-side-nav-bg-04;
     color: $ibm-color__gray-100;
@@ -474,9 +474,9 @@
   // Side-nav > Link
   //----------------------------------------------------------------------------
   a.#{$prefix}--side-nav__link,
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem'],
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item,
   .#{$prefix}--side-nav
-    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     @include focus-outline('reset');
     @include type-style('productive-heading-01');
@@ -498,7 +498,7 @@
 
   a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text,
   .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item[role='menuitem']
+    a.#{$prefix}--header__menu-item
     .#{$prefix}--text-truncate-end {
     @include text-overflow();
     color: $shell-side-nav-text-01;
@@ -509,7 +509,7 @@
   }
 
   a.#{$prefix}--side-nav__link:focus,
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem']:focus {
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:focus {
     @include focus-outline('outline');
   }
 
@@ -619,7 +619,7 @@
   }
 
   //header menu items overrides
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem'] {
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item {
     color: $shell-side-nav-text-01;
     white-space: nowrap;
     justify-content: space-between;
@@ -630,7 +630,7 @@
   }
 
   .#{$prefix}--side-nav
-    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     bottom: inherit;
     width: 100%;
@@ -643,12 +643,12 @@
       width: 100%;
     }
 
-    & a.#{$prefix}--header__menu-item[role='menuitem'] {
+    a.#{$prefix}--header__menu-item {
       padding-left: 4.25rem;
       font-weight: 400;
     }
 
-    & a.#{$prefix}--header__menu-item[role='menuitem']:hover {
+    a.#{$prefix}--header__menu-item:hover {
       background-color: $shell-side-nav-bg-04;
       color: $ibm-color__gray-100;
     }
@@ -656,15 +656,15 @@
 
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu
-    a.#{$prefix}--header__menu-item[role='menuitem'] {
+    a.#{$prefix}--header__menu-item {
     height: inherit;
   }
 
   .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item[role='menuitem']:hover
+    a.#{$prefix}--header__menu-item:hover
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item[role='menuitem']:focus
+    a.#{$prefix}--header__menu-item:focus
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
     fill: $shell-side-nav-text-01;
