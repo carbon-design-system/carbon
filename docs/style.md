@@ -406,7 +406,7 @@ is used to namespace all of the selectors that we ship in the design system.
 
 #### Annotate relevant Sass values with SassDoc
 
-When authoring functions, mixins, or values that are intended to be shared you
+When authoring functions, mixins, or values that are intended to be shared, you
 should leverage SassDoc. The typical format we use includes the following
 information:
 
