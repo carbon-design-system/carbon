@@ -30,8 +30,8 @@
     "@carbon/cli-reporter": "10.3.0",
     "@carbon/icons": "^10.8.0",
     "fs-extra": "^7.0.1",
-    "prettier": "^1.17.0",
-    "rimraf": "^2.6.2",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.0",
     "rollup": "^1.15.1",
     "vue": "^2.6.8"
   },
