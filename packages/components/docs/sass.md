@@ -16358,7 +16358,6 @@ Dropdown styles
     border: none;
     border-bottom: 1px solid $ui-04;
     width: 100%;
-    height: rem(40px);
     cursor: pointer;
     color: $text-01;
     outline: 2px solid transparent;
