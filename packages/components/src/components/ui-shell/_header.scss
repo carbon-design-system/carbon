@@ -223,11 +223,11 @@
     position: relative;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-haspopup='true'] {
+  .#{$prefix}--header__menu-title[aria-haspopup='true'] {
     position: relative;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true'] {
+  .#{$prefix}--header__menu-title[aria-expanded='true'] {
     background-color: $shell-header-bg-06;
     color: $shell-header-focus;
     // Note: needs to be higher than menu. Adding 1 here instead of moving to
@@ -235,7 +235,7 @@
     z-index: #{z('header') + 1};
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+  .#{$prefix}--header__menu-title[aria-expanded='true']
     > .#{$prefix}--header__menu-arrow {
     transform: rotate(180deg);
   }
@@ -247,7 +247,7 @@
     margin: 0;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+  .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     position: absolute;
     bottom: 0;
@@ -261,13 +261,13 @@
     z-index: z('header');
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+  .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu
     .#{$prefix}--header__menu-item:hover {
     background-color: $shell-header-bg-04;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+  .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu
     .#{$prefix}--header__menu-item:active {
     background-color: $shell-header-bg-03;

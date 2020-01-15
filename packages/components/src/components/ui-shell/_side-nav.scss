@@ -332,7 +332,7 @@
     a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
   .#{$prefix}--side-nav
-    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']:hover {
+    .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
     // TODO: sync color
     background-color: $shell-side-nav-bg-04;
     color: $ibm-color__gray-100;
@@ -476,7 +476,7 @@
   a.#{$prefix}--side-nav__link,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item,
   .#{$prefix}--side-nav
-    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     @include focus-outline('reset');
     @include type-style('productive-heading-01');
@@ -630,7 +630,7 @@
   }
 
   .#{$prefix}--side-nav
-    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     bottom: inherit;
     width: 100%;
