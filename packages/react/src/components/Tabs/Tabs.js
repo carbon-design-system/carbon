@@ -261,7 +261,7 @@ export default class Tabs extends React.Component {
 
       return (
         <TabContent
-          id={!tabId ? undefined : `${tabId}__panel`}
+          id={tabId && `${tabId}__panel`}
           className={tabContentClassName}
           aria-hidden={!selected}
           hidden={!selected}
