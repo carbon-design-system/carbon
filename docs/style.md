@@ -361,7 +361,7 @@ becomes increasingly obvious.
 
 #### Use only as much specificity as needed
 
-It's important that we write selectors that use as much specificity as needed.
+It's important that we write selectors that use only as much specificity as needed.
 Ideally, we would only need one selector per component but this is rarely the
 case. As a result, adding specificity should be done sparingly or when including
 it is helpful for building a component. For example, if you would like to
