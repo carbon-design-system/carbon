@@ -18,7 +18,6 @@ exports[`HeaderMenu should render 1`] = `
         className="bx--header__menu-item bx--header__menu-title"
         href="#"
         onKeyDown={[Function]}
-        role="menuitem"
         tabIndex={0}
       >
         <defaultRenderMenuContent>
@@ -72,13 +71,11 @@ exports[`HeaderMenu should render 1`] = `
               className="bx--header__menu-item"
               element="a"
               href="/a"
-              role="menuitem"
               tabIndex={0}
             >
               <a
                 className="bx--header__menu-item"
                 href="/a"
-                role="menuitem"
                 tabIndex={0}
               >
                 <span
@@ -102,13 +99,11 @@ exports[`HeaderMenu should render 1`] = `
               className="bx--header__menu-item"
               element="a"
               href="/b"
-              role="menuitem"
               tabIndex={0}
             >
               <a
                 className="bx--header__menu-item"
                 href="/b"
-                role="menuitem"
                 tabIndex={0}
               >
                 <span
@@ -132,13 +127,11 @@ exports[`HeaderMenu should render 1`] = `
               className="bx--header__menu-item"
               element="a"
               href="/c"
-              role="menuitem"
               tabIndex={0}
             >
               <a
                 className="bx--header__menu-item"
                 href="/c"
-                role="menuitem"
                 tabIndex={0}
               >
                 <span
