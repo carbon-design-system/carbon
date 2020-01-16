@@ -16,6 +16,11 @@ const { prefix } = settings;
 export default class Tab extends React.Component {
   static propTypes = {
     /**
+     * The element ID for the top-level element.
+     */
+    id: PropTypes.string,
+
+    /**
      * Specify an optional className to be added to your Tab
      */
     className: PropTypes.string,
@@ -104,6 +109,7 @@ export default class Tab extends React.Component {
 
   render() {
     const {
+      id,
       className,
       handleTabClick,
       handleTabKeyDown,
@@ -126,12 +132,14 @@ export default class Tab extends React.Component {
     });
 
     const anchorProps = {
+      id,
       className: `${prefix}--tabs__nav-link`,
       href,
       role: 'tab',
       tabIndex: !disabled ? tabIndex : -1,
       ['aria-selected']: selected,
       ['aria-disabled']: disabled,
+      ['aria-controls']: id && `${id}__panel`,
       ref: e => {
         this.tabAnchor = e;
       },
