@@ -18391,6 +18391,10 @@ Modal styles
       .#{$prefix}--modal-content__regular-content {
         padding-right: 20%;
       }
+
+      .#{$prefix}--modal-content--with-form {
+        padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
+      }
     }
 
     @include carbon--breakpoint(lg) {
@@ -18416,10 +18420,6 @@ Modal styles
 
   .#{$prefix}--modal-content--with-form {
     padding-right: $spacing-05;
-
-    @include carbon--breakpoint(md) {
-      padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
-    }
   }
 
   .#{$prefix}--modal-container--xs {
