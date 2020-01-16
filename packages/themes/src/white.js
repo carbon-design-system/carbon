@@ -61,7 +61,6 @@ export const text04 = white;
 export const text05 = gray60;
 export const textError = red60;
 
-
 export const icon01 = gray100;
 export const icon02 = gray70;
 export const icon03 = white;
