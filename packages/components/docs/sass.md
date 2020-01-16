@@ -13922,6 +13922,8 @@ Combo box styles
 
   .#{$prefix}--combo-box .#{$prefix}--list-box__field,
   .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field {
     padding: 0;
   }
@@ -16501,6 +16503,7 @@ Dropdown styles
       background-color $duration--fast-01 motion(standard, productive);
     opacity: 0;
     visibility: inherit;
+    position: relative;
 
     &:hover {
       background-color: $hover-ui;
@@ -16718,6 +16721,10 @@ Dropdown styles
 
     + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
       border-top-color: transparent;
+    }
+
+    .#{$prefix}--list-box__menu-item__selected-icon {
+      display: block;
     }
   }
 
@@ -17963,6 +17970,7 @@ List box styles
     line-height: rem(16px);
     padding: rem(11px) 0;
     margin: 0 $carbon--spacing-05;
+    padding-right: rem(32px); // 40px - `$carbon--spacing-05`
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
     border-top-color: $ui-03;
@@ -17994,7 +18002,7 @@ List box styles
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__menu-item__option {
-    margin: 0 $carbon--spacing-03;
+    margin: 0 rem(32px) 0 $carbon--spacing-03;
 
     &:focus {
       margin: 0;
@@ -18024,16 +18032,32 @@ List box styles
 
   .#{$prefix}--list-box__menu-item--active {
     color: $text-01;
+    background-color: $selected-ui;
     border-bottom-color: $selected-ui;
-
-    &:hover {
-      background-color: $selected-ui;
-    }
   }
 
   .#{$prefix}--list-box__menu-item--active
     .#{$prefix}--list-box__menu-item__option {
     color: $text-01;
+  }
+
+  .#{$prefix}--list-box__menu-item__selected-icon {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: rem(16px);
+    transform: translateY(-50%);
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__menu-item__selected-icon {
+    right: rem(8px);
+  }
+
+  .#{$prefix}--list-box__menu-item--active
+    .#{$prefix}--list-box__menu-item__selected-icon {
+    display: block;
   }
 
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {
@@ -18349,6 +18373,9 @@ Modal styles
     width: 100%;
     height: 100%;
     max-height: 100%;
+    // make modal edge visible on high contrast themes (#3880)
+    outline: 3px solid transparent;
+    outline-offset: -3px;
     overflow: hidden;
     transform-origin: top center;
     transform: translate3d(0, -24px, 0);
@@ -18363,6 +18390,10 @@ Modal styles
       .#{$prefix}--modal-content,
       .#{$prefix}--modal-content__regular-content {
         padding-right: 20%;
+      }
+
+      .#{$prefix}--modal-content--with-form {
+        padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
       }
     }
 
@@ -18389,10 +18420,6 @@ Modal styles
 
   .#{$prefix}--modal-content--with-form {
     padding-right: $spacing-05;
-
-    @include carbon--breakpoint(md) {
-      padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
-    }
   }
 
   .#{$prefix}--modal-container--xs {
@@ -22000,9 +22027,11 @@ Tag styles
 
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     padding: 0 $carbon--spacing-03;
     height: 1.5rem;
     max-width: 100%; // restricts size of contained elements
+    min-width: rem(32px); // ensures tag stays pill shaped;
     margin: $carbon--spacing-02;
     border-radius: rem(15px);
 
@@ -24245,7 +24274,7 @@ UI shell header
     margin: 0;
   }
 
-  a.#{$prefix}--header__menu-item[role='menuitem'] {
+  a.#{$prefix}--header__menu-item {
     display: flex;
     align-items: center;
     color: $shell-header-text-02;
@@ -24266,26 +24295,26 @@ UI shell header
         $duration--fast-02, color $duration--fast-02;
   }
 
-  a.#{$prefix}--header__menu-item[role='menuitem']:hover {
+  a.#{$prefix}--header__menu-item:hover {
     background-color: $shell-header-bg-02;
     color: $shell-header-text-01;
   }
 
   .#{$prefix}--header__action:active,
-  a.#{$prefix}--header__menu-item[role='menuitem']:active {
+  a.#{$prefix}--header__menu-item:active {
     background-color: $shell-header-bg-03;
     color: $shell-header-text-01;
   }
 
-  a.#{$prefix}--header__menu-item[role='menuitem']:focus {
+  a.#{$prefix}--header__menu-item:focus {
     border-color: $shell-header-focus;
     color: $shell-header-text-01;
     outline: none;
   }
 
-  a.#{$prefix}--header__menu-item[role='menuitem']:hover > svg,
-  a.#{$prefix}--header__menu-item[role='menuitem']:active > svg,
-  a.#{$prefix}--header__menu-item[role='menuitem']:focus > svg {
+  a.#{$prefix}--header__menu-item:hover > svg,
+  a.#{$prefix}--header__menu-item:active > svg,
+  a.#{$prefix}--header__menu-item:focus > svg {
     fill: $shell-header-icon-01;
   }
 
@@ -24293,11 +24322,11 @@ UI shell header
     position: relative;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-haspopup='true'] {
+  .#{$prefix}--header__menu-title[aria-haspopup='true'] {
     position: relative;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true'] {
+  .#{$prefix}--header__menu-title[aria-expanded='true'] {
     background-color: $shell-header-bg-06;
     color: $shell-header-focus;
     // Note: needs to be higher than menu. Adding 1 here instead of moving to
@@ -24305,7 +24334,7 @@ UI shell header
     z-index: #{z('header') + 1};
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+  .#{$prefix}--header__menu-title[aria-expanded='true']
     > .#{$prefix}--header__menu-arrow {
     transform: rotate(180deg);
   }
@@ -24317,7 +24346,7 @@ UI shell header
     margin: 0;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+  .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     position: absolute;
     bottom: 0;
@@ -24331,24 +24360,23 @@ UI shell header
     z-index: z('header');
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+  .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu
     .#{$prefix}--header__menu-item:hover {
     background-color: $shell-header-bg-04;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+  .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu
     .#{$prefix}--header__menu-item:active {
     background-color: $shell-header-bg-03;
   }
 
-  .#{$prefix}--header__menu .#{$prefix}--header__menu-item[role='menuitem'] {
+  .#{$prefix}--header__menu .#{$prefix}--header__menu-item {
     height: mini-units(6);
   }
 
-  .#{$prefix}--header__menu
-    .#{$prefix}--header__menu-item[role='menuitem']:hover {
+  .#{$prefix}--header__menu .#{$prefix}--header__menu-item:hover {
     background-color: $shell-header-bg-06;
     color: $shell-header-text-01;
   }
@@ -25191,9 +25219,9 @@ UI shell side nav
     > .#{$prefix}--side-nav__link:hover,
   .#{$prefix}--side-nav__menu[role='menu']
     a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem']:hover,
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
   .#{$prefix}--side-nav
-    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']:hover {
+    .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
     // TODO: sync color
     background-color: $shell-side-nav-bg-04;
     color: $ibm-color__gray-100;
@@ -25335,9 +25363,9 @@ UI shell side nav
   // Side-nav > Link
   //----------------------------------------------------------------------------
   a.#{$prefix}--side-nav__link,
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem'],
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item,
   .#{$prefix}--side-nav
-    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     @include focus-outline('reset');
     @include type-style('productive-heading-01');
@@ -25359,7 +25387,7 @@ UI shell side nav
 
   a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text,
   .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item[role='menuitem']
+    a.#{$prefix}--header__menu-item
     .#{$prefix}--text-truncate-end {
     @include text-overflow();
     color: $shell-side-nav-text-01;
@@ -25370,7 +25398,7 @@ UI shell side nav
   }
 
   a.#{$prefix}--side-nav__link:focus,
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem']:focus {
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:focus {
     @include focus-outline('outline');
   }
 
@@ -25480,7 +25508,7 @@ UI shell side nav
   }
 
   //header menu items overrides
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem'] {
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item {
     color: $shell-side-nav-text-01;
     white-space: nowrap;
     justify-content: space-between;
@@ -25491,7 +25519,7 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav
-    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     bottom: inherit;
     width: 100%;
@@ -25504,12 +25532,12 @@ UI shell side nav
       width: 100%;
     }
 
-    & a.#{$prefix}--header__menu-item[role='menuitem'] {
+    a.#{$prefix}--header__menu-item {
       padding-left: 4.25rem;
       font-weight: 400;
     }
 
-    & a.#{$prefix}--header__menu-item[role='menuitem']:hover {
+    a.#{$prefix}--header__menu-item:hover {
       background-color: $shell-side-nav-bg-04;
       color: $ibm-color__gray-100;
     }
@@ -25517,15 +25545,15 @@ UI shell side nav
 
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu
-    a.#{$prefix}--header__menu-item[role='menuitem'] {
+    a.#{$prefix}--header__menu-item {
     height: inherit;
   }
 
   .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item[role='menuitem']:hover
+    a.#{$prefix}--header__menu-item:hover
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item[role='menuitem']:focus
+    a.#{$prefix}--header__menu-item:focus
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
     fill: $shell-side-nav-text-01;
