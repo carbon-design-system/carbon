@@ -139,7 +139,7 @@ export default class Tab extends React.Component {
       tabIndex: !disabled ? tabIndex : -1,
       ['aria-selected']: selected,
       ['aria-disabled']: disabled,
-      ['aria-controls']: `${id}__panel`,
+      ['aria-controls']: id && `${id}__panel`,
       ref: e => {
         this.tabAnchor = e;
       },
