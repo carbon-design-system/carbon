@@ -2162,6 +2162,7 @@ Generate a media query up to the width of the given breakpoint name
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [accordion [mixin]](#accordion-mixin)
 
 ### ✅carbon--breakpoint-down [mixin]
 
@@ -2206,7 +2207,6 @@ Generate a media query for the maximum width of the given styles
   - [carbon--is-smallest-breakpoint [function]](#carbon--is-smallest-breakpoint-function)
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
-  - [accordion [mixin]](#accordion-mixin)
   - [carbon-header [mixin]](#carbon-header-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
@@ -12655,10 +12655,15 @@ Accordion styles
     // Transition property for when the accordion closes
     transition: padding motion(standard, productive) $duration--fast-02;
     padding-left: $carbon--spacing-05;
-    padding-right: 25%;
+    padding-right: $carbon--spacing-05;
 
-    @include carbon--breakpoint-down('md') {
+    // Custom breakpoints based on issue #4993
+    @include carbon--breakpoint-up(480px) {
       padding-right: $carbon--spacing-09;
+    }
+
+    @include carbon--breakpoint-up(640px) {
+      padding-right: 25%;
     }
 
     p {
@@ -12755,7 +12760,7 @@ Accordion styles
 
 - **Group**: [accordion](#accordion)
 - **Requires**:
-  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
+  - [carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
   - [prefix [variable]](#prefix-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
