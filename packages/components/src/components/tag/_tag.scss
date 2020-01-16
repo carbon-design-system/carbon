@@ -17,13 +17,15 @@
 @mixin tags {
   .#{$prefix}--tag {
     @include type-style('label-01');
+    @include button-reset($width: false);
 
     display: inline-flex;
-    position: relative;
     align-items: center;
+    justify-content: center;
     padding: 0 $carbon--spacing-03;
     height: 1.5rem;
     max-width: 100%; // restricts size of contained elements
+    min-width: rem(32px); // ensures tag stays pill shaped;
     margin: $carbon--spacing-02;
     border-radius: rem(15px);
 
@@ -76,7 +78,8 @@
     @include tag-theme($ibm-color__warm-gray-20, $ibm-color__warm-gray-100);
   }
 
-  .#{$prefix}--tag--disabled {
+  .#{$prefix}--tag--disabled,
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled {
     @include tag-theme($ibm-color__gray-10, $ibm-color__gray-30);
 
     &:hover {
@@ -96,36 +99,41 @@
     @include tag-theme($inverse-02, $inverse-01);
 
     cursor: pointer;
-    padding-right: calc(
-      #{$carbon--spacing-06} + #{rem(2px)}
-    ); // icon width + 2px space from right edge
+    padding-right: rem(2px);
+
+    &:focus,
+    &:hover {
+      outline: none;
+    }
   }
 
   .#{$prefix}--tag--filter > svg {
-    position: absolute;
-    right: rem(2px);
-    top: 50%;
-    transform: translateY(-50%);
-    fill: $inverse-01;
-    margin-left: rem(4px);
-    padding: rem(2px);
+    flex-shrink: 0;
     width: rem(20px);
     height: rem(20px);
-  }
-
-  .#{$prefix}--tag--filter > svg:hover {
+    margin: 0 0 0 rem(4px);
+    padding: rem(2px);
+    border: 0;
+    fill: $inverse-01;
+    background-color: transparent;
     border-radius: 50%;
-    background-color: $inverse-hover-ui;
-  }
 
-  .#{$prefix}--tag--filter:focus,
-  .#{$prefix}--tag--filter:hover {
-    outline: none;
+    &:hover {
+      background-color: $inverse-hover-ui;
+    }
   }
 
   .#{$prefix}--tag--filter:focus > svg {
     box-shadow: inset 0 0 0 2px $inverse-focus-ui;
     border-radius: 50%;
+  }
+
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg:hover {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg {
+    fill: $disabled-02;
   }
 
   // Skeleton state

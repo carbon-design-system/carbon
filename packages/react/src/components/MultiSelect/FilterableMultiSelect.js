@@ -19,8 +19,11 @@ import { sortingPropTypes } from './MultiSelectPropTypes';
 import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
+
+const getInstanceId = setupGetInstanceId();
 
 export default class FilterableMultiSelect extends React.Component {
   static propTypes = {
@@ -155,6 +158,7 @@ export default class FilterableMultiSelect extends React.Component {
 
   constructor(props) {
     super(props);
+    this.filterableMultiSelectInstanceId = getInstanceId();
     this.state = {
       highlightedIndex: null,
       isOpen: props.open,
@@ -287,11 +291,15 @@ export default class FilterableMultiSelect extends React.Component {
         [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
       }
     );
+    const helperId = !helperText
+      ? undefined
+      : `filterablemultiselect-helper-text-${this.filterableMultiSelectInstanceId}`;
+    const labelId = `filterablemultiselect-label-${this.filterableMultiSelectInstanceId}`;
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
     const title = titleText ? (
-      <label htmlFor={id} className={titleClasses}>
+      <label id={labelId} htmlFor={id} className={titleClasses}>
         {titleText}
       </label>
     ) : null;
@@ -299,7 +307,9 @@ export default class FilterableMultiSelect extends React.Component {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
     const helper = helperText ? (
-      <div className={helperClasses}>{helperText}</div>
+      <div id={helperId} className={helperClasses}>
+        {helperText}
+      </div>
     ) : null;
     const inputClasses = cx(`${prefix}--text-input`, {
       [`${prefix}--text-input--empty`]: !this.state.inputValue,
@@ -343,6 +353,10 @@ export default class FilterableMultiSelect extends React.Component {
                     selectedItem.length > 0,
                 }
               );
+              const buttonProps = {
+                ...getButtonProps({ disabled }),
+                'aria-label': undefined,
+              };
               return (
                 <ListBox
                   className={className}
@@ -356,8 +370,9 @@ export default class FilterableMultiSelect extends React.Component {
                   <ListBox.Field
                     id={id}
                     disabled={disabled}
-                    translateWithId={translateWithId}
-                    {...getButtonProps({ disabled })}>
+                    aria-labelledby={labelId}
+                    aria-describedby={helperId}
+                    {...buttonProps}>
                     {selectedItem.length > 0 && (
                       <ListBox.Selection
                         clearSelection={clearSelection}

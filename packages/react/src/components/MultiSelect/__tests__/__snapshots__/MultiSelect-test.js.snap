@@ -90,14 +90,12 @@ exports[`MultiSelect should render 1`] = `
             id="test-multiselect"
             onClick={[Function]}
             onKeyDown={[Function]}
-            role="listbox"
-            tabIndex="-1"
           >
             <ListBoxField
               aria-disabled={false}
               aria-expanded={false}
               aria-haspopup={true}
-              aria-label="open menu"
+              aria-labelledby="multiselect-label-1 multiselect-field-label-1"
               data-toggle={true}
               disabled={false}
               id="test-multiselect"
@@ -106,7 +104,6 @@ exports[`MultiSelect should render 1`] = `
               onKeyDown={[Function]}
               role="button"
               tabIndex="0"
-              translateWithId={[Function]}
               type="button"
             >
               <div
@@ -114,7 +111,7 @@ exports[`MultiSelect should render 1`] = `
                 aria-disabled={false}
                 aria-expanded={false}
                 aria-haspopup={true}
-                aria-label="Open menu"
+                aria-labelledby="multiselect-label-1 multiselect-field-label-1"
                 aria-owns={null}
                 className="bx--list-box__field"
                 data-toggle={true}
@@ -127,6 +124,7 @@ exports[`MultiSelect should render 1`] = `
               >
                 <span
                   className="bx--list-box__label"
+                  id="multiselect-field-label-1"
                 >
                   Field
                 </span>
@@ -167,7 +165,7 @@ exports[`MultiSelect should render 1`] = `
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"
+                            d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
                           />
                           <title>
                             Open menu

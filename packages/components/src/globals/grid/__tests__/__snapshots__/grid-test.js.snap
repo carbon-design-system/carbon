@@ -115,11 +115,9 @@ em {
   margin-right: -1rem;
   margin-left: -1rem; }
 
-.bx--grid--condensed .bx--row:not(:last-of-type) {
-  margin-bottom: 0.125rem; }
-
-.bx--row--condensed + .bx--row--condensed {
-  margin-top: 0.125rem; }
+.bx--grid--condensed [class*='bx--col'] {
+  padding-top: 0.0625rem;
+  padding-bottom: 0.0625rem; }
 
 .bx--col {
   width: 100%;
