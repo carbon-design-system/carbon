@@ -19,6 +19,7 @@ const TableExpandHeader = ({
   isExpanded,
   onExpand,
   expandIconDescription,
+  children,
   ...rest
 }) => {
   const className = cx(`${prefix}--table-expand`, headerClassName);
@@ -42,6 +43,7 @@ const TableExpandHeader = ({
           />
         </button>
       )}
+      {children}
     </th>
   );
 };
