@@ -245,10 +245,8 @@ export function ToastNotification({
   kind,
   lowContrast,
   hideCloseButton,
-
   children,
   timeout,
-
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(true);
@@ -400,9 +398,7 @@ export function InlineNotification({
   kind,
   lowContrast,
   hideCloseButton,
-
   children,
-
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(true);
