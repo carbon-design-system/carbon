@@ -101,11 +101,11 @@
     padding-right: $carbon--spacing-05;
 
     // Custom breakpoints based on issue #4993
-    @media (min-width: 480px) {
+    @include carbon--breakpoint-up(480px) {
       padding-right: $carbon--spacing-09;
     }
 
-    @media (min-width: 640px) {
+    @include carbon--breakpoint-up(640px) {
       padding-right: 25%;
     }
 
