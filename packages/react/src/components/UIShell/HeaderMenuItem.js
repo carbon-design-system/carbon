@@ -22,7 +22,6 @@ const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
         {...rest}
         className={`${prefix}--header__menu-item`}
         ref={ref}
-        role="menuitem"
         tabIndex={0}>
         <span className={`${prefix}--text-truncate--end`}>{children}</span>
       </Link>

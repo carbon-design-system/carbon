@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { ChevronDownGlyph } from '@carbon/icons-react';
+import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import { shallow, mount } from 'enzyme';
 import Tabs from '../Tabs';
@@ -102,7 +102,7 @@ describe('Tabs', () => {
       });
 
       it('renders <Icon>', () => {
-        expect(trigger.find(ChevronDownGlyph).length).toBe(1);
+        expect(trigger.find(ChevronDown16).length).toBe(1);
       });
     });
 
