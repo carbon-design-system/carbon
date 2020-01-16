@@ -140,6 +140,7 @@
         {{#each items as |item index|}}
         <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
           <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1" role="menuitemradio" aria-checked="{{#if index}}false{{else}}true{{/if}}" id="{{../default.idSuffix}}-item{{@index}}">{{label}}</a>
+          {{ carbon-icon 'Checkmark16' class=(add @root.prefix '--list-box__menu-item__selected-icon') aria-hidden="true" }}
         </li>
         {{/each}}
       </ul>
