@@ -165,8 +165,8 @@ const columnsExpandable = [
     name: 'select',
     title: 'Label name',
     checkbox: true,
-    checkboxId: `${prefix}--checkbox-20`,
-    checkboxName: 'checkbox-20',
+    checkboxId: `${prefix}--checkbox-21`,
+    checkboxName: 'checkbox-21',
     checkboxValue: 'green',
   },
   {
@@ -211,8 +211,8 @@ const rows = [
   {
     id: 'row-id-13',
     select: {
-      id: `${prefix}--checkbox-13`,
-      name: 'checkbox-13',
+      id: `${prefix}--checkbox-16`,
+      name: 'checkbox-16',
       value: 'green',
       label: 'Label name',
     },
