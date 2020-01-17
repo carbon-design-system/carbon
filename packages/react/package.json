@@ -117,7 +117,7 @@
     "storybook-readme": "^5.0.8",
     "string-replace-loader": "^2.1.0",
     "terser-webpack-plugin": "^1.1.0",
-    "webpack": "^4.25.1",
+    "webpack": "^4.41.5",
     "whatwg-fetch": "^2.0.3"
   },
   "sideEffects": false,
