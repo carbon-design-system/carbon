@@ -98,10 +98,15 @@
     // Transition property for when the accordion closes
     transition: padding motion(standard, productive) $duration--fast-02;
     padding-left: $carbon--spacing-05;
-    padding-right: 25%;
+    padding-right: $carbon--spacing-05;
 
-    @include carbon--breakpoint-down('md') {
+    // Custom breakpoints based on issue #4993
+    @include carbon--breakpoint-up(480px) {
       padding-right: $carbon--spacing-09;
+    }
+
+    @include carbon--breakpoint-up(640px) {
+      padding-right: 25%;
     }
 
     p {

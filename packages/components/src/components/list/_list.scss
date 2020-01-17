@@ -23,7 +23,7 @@
   .#{$prefix}--list--ordered {
     @include reset;
     @include type-style('body-short-01');
-    
+
     list-style: none;
   }
 
