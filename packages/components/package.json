@@ -102,7 +102,7 @@
     "commander": "^2.13.0",
     "core-js": "^3.6.2",
     "cross-env": "^5.2.0",
-    "css-loader": "^0.28.0",
+    "css-loader": "^3.4.2",
     "custom-event": "^1.0.0",
     "del": "~2.0.2",
     "diff": "^3.4.0",
