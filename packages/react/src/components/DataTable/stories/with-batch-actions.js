@@ -59,16 +59,19 @@ export default props => (
         <TableToolbar>
           <TableBatchActions {...getBatchActionProps()}>
             <TableBatchAction
+              tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
               renderIcon={Delete}
               onClick={batchActionClick(selectedRows)}>
               Delete
             </TableBatchAction>
             <TableBatchAction
+              tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
               renderIcon={Save}
               onClick={batchActionClick(selectedRows)}>
               Save
             </TableBatchAction>
             <TableBatchAction
+              tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
               renderIcon={Download}
               onClick={batchActionClick(selectedRows)}>
               Download
