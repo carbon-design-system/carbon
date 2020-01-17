@@ -50,7 +50,7 @@
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "sass-loader": "^8.0.0",
+    "sass-loader": "^8.0.2",
     "style-loader": "^1.0.0"
   }
 }
