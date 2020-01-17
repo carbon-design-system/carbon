@@ -54,8 +54,9 @@ const TableToolbarSearch = ({
   useEffect(() => {
     if (defaultValue) {
       setExpandedState(true);
+      onChangeProp('', defaultValue);
     }
-  }, [defaultValue]);
+  }, [defaultValue, onChangeProp]);
 
   const searchContainerClasses = cx({
     [searchContainerClass]: searchContainerClass,
