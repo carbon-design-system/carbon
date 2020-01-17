@@ -222,9 +222,7 @@ export class StructuredListRow extends Component {
         {...other}
         tabIndex={tabIndex}
         className={classes}
-        onKeyDown={onKeyDown}
-        role="presentation" // eslint-disable-line jsx-a11y/no-interactive-element-to-noninteractive-role
-      >
+        onKeyDown={onKeyDown}>
         {children}
       </label>
     ) : (
