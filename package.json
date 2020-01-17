@@ -35,17 +35,17 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
-    "@babel/plugin-proposal-export-default-from": "^7.2.0",
-    "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
-    "@babel/plugin-transform-runtime": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/runtime": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-export-default-from": "^7.7.4",
+    "@babel/plugin-proposal-export-namespace-from": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "@babel/runtime": "^7.7.7",
     "@carbon/cli": "10.7.0",
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
-    "@ibma/aat": "https://able.ibm.com/tools/dist/ibma-aat-2.0.3-alpha.tgz",
+    "@ibma/aat": "https://able.ibm.com/tools/dist/ibma-aat-2.0.6.tgz",
     "alex": "^8.0.0",
     "axe-core": "^3.3.2",
     "babel-jest": "^24.8.0",
@@ -65,10 +65,10 @@
     "jest-junit": "^6.4.0",
     "lerna": "^3.13.4",
     "lint-staged": "^8.1.5",
-    "prettier": "^1.17.0",
+    "prettier": "^1.19.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "rimraf": "^2.6.3",
+    "rimraf": "^3.0.0",
     "stylelint": "^10.0.1"
   },
   "husky": {
@@ -203,7 +203,8 @@
       "/es/",
       "/examples/",
       "/lib/",
-      "/storybook/"
+      "/storybook/",
+      "/results/"
     ]
   }
 }

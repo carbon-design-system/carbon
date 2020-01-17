@@ -28,7 +28,8 @@ import {
   green40,
   green50,
   yellow,
-  red50,
+  red30,
+  red40,
   red60,
   red80,
   purple40,
@@ -58,6 +59,7 @@ export const text02 = gray30;
 export const text03 = gray60;
 export const text04 = white;
 export const text05 = gray50;
+export const textError = red30;
 
 export const icon01 = gray10;
 export const icon02 = gray30;
@@ -73,7 +75,7 @@ export const field02 = gray70;
 export const inverse01 = gray100;
 export const inverse02 = gray10;
 
-export const support01 = red50;
+export const support01 = red40;
 export const support02 = green40;
 export const support03 = yellow;
 export const support04 = blue50;

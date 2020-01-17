@@ -105,9 +105,18 @@ class HeaderMenu extends React.Component {
   handleOnBlur = event => {
     // Rough guess for a blur event that is triggered outside of our menu or
     // menubar context
-    if (!event.relatedTarget) {
-      this.setState({ expanded: false, selectedIndex: null });
+    const itemTriggeredBlur = this.items.find(
+      element => element === event.relatedTarget
+    );
+
+    if (
+      event.relatedTarget &&
+      (event.relatedTarget.getAttribute('href') !== '#' || itemTriggeredBlur)
+    ) {
+      return;
     }
+
+    this.setState({ expanded: false, selectedIndex: null });
   };
 
   /**
@@ -185,7 +194,6 @@ class HeaderMenu extends React.Component {
           href="#"
           onKeyDown={this.handleOnKeyDown}
           ref={this.handleMenuButtonRef}
-          role="menuitem"
           tabIndex={0}
           {...accessibilityLabel}>
           {menuLinkName}
