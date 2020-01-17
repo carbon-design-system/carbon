@@ -42,7 +42,7 @@ const TableToolbarSearch = ({
   const [expandedState, setExpandedState] = useState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
   const searchRef = useRef(null);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(defaultValue || '');
   const uniqueId = useMemo(getInstanceId, []);
 
   useEffect(() => {
@@ -50,6 +50,12 @@ const TableToolbarSearch = ({
       searchRef.current.querySelector('input').focus();
     }
   }, [controlled, expandedState]);
+
+  useEffect(() => {
+    if (defaultValue) {
+      setExpandedState(true);
+    }
+  }, [defaultValue]);
 
   const searchContainerClasses = cx({
     [searchContainerClass]: searchContainerClass,
@@ -89,7 +95,6 @@ const TableToolbarSearch = ({
       <Search
         size="sm"
         className={className}
-        defaultValue={defaultValue}
         value={value}
         id={typeof id !== 'undefined' ? id : uniqueId.toString()}
         aria-hidden={!expanded}
