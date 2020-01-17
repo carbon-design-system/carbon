@@ -20,9 +20,9 @@ const types = {
 };
 
 const sizes = {
-  'Extra large size (xl)': 'xl',
-  'Regular size (lg)': '',
-  'Small size (sm)': 'sm',
+  Large: 'large',
+  Default: '',
+  Small: 'small',
 };
 
 function ControlledPasswordInputApp(props) {
