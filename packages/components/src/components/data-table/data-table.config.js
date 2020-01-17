@@ -209,7 +209,7 @@ const columnsSmall = columns.slice(1, -1).map(column => ({
 
 const rows = [
   {
-    id: 'row-id-13',
+    id: 'row-id-16',
     select: {
       id: `${prefix}--checkbox-16`,
       name: 'checkbox-16',
@@ -338,8 +338,8 @@ const rowsExpandable = [
       ` <p>A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</p>
     `,
     select: {
-      id: `${prefix}--checkbox-12`,
-      name: 'checkbox-12',
+      id: `${prefix}--checkbox-10`,
+      name: 'checkbox-10',
       value: 'green',
       label: 'Label name',
     },
