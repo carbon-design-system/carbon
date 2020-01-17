@@ -28,7 +28,7 @@
     "autoprefixer": "^9.4.3",
     "babel-plugin-macros": "^2.4.2",
     "chalk": "^2.4.1",
-    "change-case": "^3.0.2",
+    "change-case": "^4.1.1",
     "cli-table": "^0.3.1",
     "commander": "^2.19.0",
     "cssnano": "^4.1.7",
