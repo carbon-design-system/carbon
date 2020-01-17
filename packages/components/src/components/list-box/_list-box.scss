@@ -121,10 +121,6 @@ $list-box-menu-width: rem(300px);
     transform: translateY(-50%);
   }
 
-  .#{$prefix}--list-box--inline .#{$prefix}--list-box__invalid-icon {
-    top: $carbon--spacing-03;
-  }
-
   .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
     border-bottom: 0;
     padding-right: carbon--mini-units(8);
