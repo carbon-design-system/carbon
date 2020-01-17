@@ -63,7 +63,7 @@ const TableHeader = React.forwardRef(function TableHeader(
 ) {
   if (!isSortable) {
     return (
-      <th {...rest} className={headerClassName} scope={scope}>
+      <th {...rest} className={headerClassName} scope={scope} ref={ref}>
         <span className={`${prefix}--table-header-label`}>{children}</span>
       </th>
     );
@@ -83,8 +83,9 @@ const TableHeader = React.forwardRef(function TableHeader(
       scope={scope}
       className={headerClassName}
       aria-sort={ariaSort}
-      ref={ref}>
-      <button className={className} onClick={onClick} {...rest}>
+      ref={ref}
+      {...rest}>
+      <button className={className} onClick={onClick}>
         <span className={`${prefix}--table-header-label`}>{children}</span>
         <Arrow
           className={`${prefix}--table-sort__icon`}
