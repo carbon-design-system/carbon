@@ -17649,10 +17649,6 @@ List box styles
     transform: translateY(-50%);
   }
 
-  .#{$prefix}--list-box--inline .#{$prefix}--list-box__invalid-icon {
-    top: $carbon--spacing-03;
-  }
-
   .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
     border-bottom: 0;
     padding-right: carbon--mini-units(8);
@@ -18139,10 +18135,10 @@ List box styles
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
-  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [ui-background [variable]](#ui-background-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
