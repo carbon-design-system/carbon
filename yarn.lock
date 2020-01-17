@@ -18275,16 +18275,6 @@ postcss-load-config@^2.0.0:
     cosmiconfig "^5.0.0"
     import-cwd "^2.0.0"
 
-postcss-loader@^2.1.0:
-  version "2.1.6"
-  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-2.1.6.tgz#1d7dd7b17c6ba234b9bed5af13e0bea40a42d740"
-  integrity sha512-hgiWSc13xVQAq25cVw80CH0l49ZKlAnU1hKPOdRrNj89bokRr/bZF2nT+hebPPF9c9xs8c3gw3Fr2nxtmXYnNg==
-  dependencies:
-    loader-utils "^1.1.0"
-    postcss "^6.0.0"
-    postcss-load-config "^2.0.0"
-    schema-utils "^0.4.0"
-
 postcss-loader@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-3.0.0.tgz#6b97943e47c72d845fa9e03f273773d4e8dd6c2d"
@@ -18652,7 +18642,7 @@ postcss-values-parser@^3.0.5:
     postcss "^7.0.5"
     url-regex "^5.0.0"
 
-postcss@^6.0.0, postcss@^6.0.14:
+postcss@^6.0.14:
   version "6.0.23"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.23.tgz#61c82cc328ac60e677645f979054eb98bc0e3324"
   integrity sha512-soOk1h6J3VMTZtVeVpv15/Hpdl2cBLX3CAw4TAbkpTJiNPk9YP/zWcD1ND+xEtvyuuvKzbxliTOIyvkSeSJ6ag==
@@ -20970,7 +20960,7 @@ scheduler@^0.15.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
-schema-utils@^0.4.0, schema-utils@^0.4.5:
+schema-utils@^0.4.5:
   version "0.4.7"
   resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-0.4.7.tgz#ba74f597d2be2ea880131746ee17d0a093c68187"
   integrity sha512-v/iwU6wvwGK8HbU9yi3/nhGzP0yGSuhQMzL6ySiec1FSrZZDkhm4noOSWzrNFo/jEc+SJY6jRTwuwbSXJPDUnQ==
