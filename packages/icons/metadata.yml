@@ -3938,6 +3938,24 @@ icons:
         categories:
           - name: Tools
             subcategory: Technology
+      - name: cloud--lightning
+        friendly_name: Cloud lightning
+        usage: This is a description for usage
+        deprecated: true
+        sizes:
+          - 32
+      - name: cloud--rain
+        friendly_name: Cloud rain
+        usage: This is a description for usage
+        deprecated: true
+        sizes:
+          - 32
+      - name: cloud--snow
+        friendly_name: Cloud snow
+        usage: This is a description for usage
+        deprecated: true
+        sizes:
+          - 32
       - name: cloud--upload
         friendly_name: Cloud upload
         usage: This is a description for usage
@@ -8851,6 +8869,15 @@ icons:
         subcategory: Weather
     aliases:
       - sun
+    sizes:
+      - 32
+  - name: sunny
+    friendly_name: Sunny
+    usage: This is a description for usage
+    categories: []
+    deprecated: true
+    aliases:
+      - sunny
     sizes:
       - 32
   - name: sunrise

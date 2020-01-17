@@ -890,6 +890,9 @@ categories:
       - name: Weather
         members:
           - cloud
+          - cloud--lightning
+          - cloud--rain
+          - cloud--snow
           - cloudy
           - fog
           - hail
@@ -920,6 +923,7 @@ categories:
           - snow--scattered--night
           - snowflake
           - sun
+          - sunny
           - sunrise
           - sunset
           - temperature
