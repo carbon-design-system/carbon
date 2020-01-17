@@ -25,6 +25,7 @@ const ControlledPasswordInput = React.forwardRef(
       togglePasswordVisibility,
       tooltipPosition = 'bottom',
       tooltipAlignment = 'center',
+      size,
       ...other
     },
     ref
@@ -37,6 +38,7 @@ const ControlledPasswordInput = React.forwardRef(
       {
         [`${prefix}--text-input--light`]: light,
         [`${prefix}--text-input--invalid`]: invalid,
+        [`${prefix}--text-input--${size}`]: size,
       }
     );
     const sharedTextInputProps = {
@@ -218,6 +220,11 @@ ControlledPasswordInput.propTypes = {
    * Can be one of: start, center, or end.
    */
   tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * Specify the size of the Text Input. Currently supports either `sm`, `lg` or `xl` as an option.
+   */
+  size: PropTypes.string,
 };
 
 ControlledPasswordInput.defaultProps = {
@@ -229,6 +236,7 @@ ControlledPasswordInput.defaultProps = {
   invalidText: '',
   helperText: '',
   light: false,
+  size: 'lg',
 };
 
 export default ControlledPasswordInput;
