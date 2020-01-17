@@ -203,7 +203,8 @@
       "/es/",
       "/examples/",
       "/lib/",
-      "/storybook/"
+      "/storybook/",
+      "/results/"
     ]
   }
 }

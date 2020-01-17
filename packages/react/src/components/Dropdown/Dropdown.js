@@ -10,7 +10,7 @@ import Downshift from 'downshift';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from 'carbon-components';
-import { WarningFilled16 } from '@carbon/icons-react';
+import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { match, keys } from '../../internal/keyboard';
 
@@ -305,6 +305,11 @@ export default class Dropdown extends React.Component {
                             <ItemToElement key={itemProps.id} {...item} />
                           ) : (
                             itemToString(item)
+                          )}
+                          {selectedItem === item && (
+                            <Checkmark16
+                              className={`${prefix}--list-box__menu-item__selected-icon`}
+                            />
                           )}
                         </ListBox.MenuItem>
                       );
