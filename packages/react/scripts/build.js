@@ -28,15 +28,15 @@ const ignoreGlobs = ['**/__tests__/*', '**/*-test.js', '**/*-story.js'].join(
 );
 
 try {
-  exec(`${babelPath} src -q -d es --ignore "${ignoreGlobs}"`, {
+  exec(`${babelPath} src --quiet -d es --ignore "${ignoreGlobs}"`, {
     BABEL_ENV: 'es',
   });
-  exec(`${babelPath} src -q -d lib --ignore "${ignoreGlobs}"`, {
+  exec(`${babelPath} src --quiet -d lib --ignore "${ignoreGlobs}"`, {
     BABEL_ENV: 'cjs',
   });
 
   // Create docgen metadata
-  exec(`${babelPath} src -q -d build/docgen --ignore "${ignoreGlobs}"`, {
+  exec(`${babelPath} src --quiet -d build/docgen --ignore "${ignoreGlobs}"`, {
     BABEL_ENV: 'docgen',
   });
   fs.writeFileSync(

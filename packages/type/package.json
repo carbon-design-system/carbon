@@ -39,7 +39,7 @@
     "@carbon/bundler": "^10.5.0",
     "@carbon/test-utils": "^10.6.0",
     "change-case": "^3.1.0",
-    "rimraf": "^2.6.2"
+    "rimraf": "^3.0.0"
   },
   "eyeglass": {
     "exports": false,
