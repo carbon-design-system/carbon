@@ -377,15 +377,15 @@ export default class MultiSelect extends React.Component {
                           <ListBox.MenuItem
                             key={itemProps.id}
                             isActive={isChecked}
+                            role="option"
+                            aria-selected={isChecked}
+                            tabIndex={-1}
+                            name={itemText}
                             isHighlighted={highlightedIndex === index}
                             title={itemText}
-                            role="group"
-                            aria-label={itemProps.id}
+                            aria-label={itemText}
                             {...itemProps}>
-                            <div
-                              role="group"
-                              aria-label={`${itemProps.id}__checkbox`}
-                              className={`${prefix}--checkbox-wrapper`}>
+                            <div className={`${prefix}--checkbox-wrapper`}>
                               <span
                                 title={useTitleInItem ? itemText : null}
                                 className={`${prefix}--checkbox-label`}
