@@ -51,12 +51,17 @@ const TableToolbarSearch = ({
     }
   }, [controlled, expandedState]);
 
-  useEffect(() => {
-    if (defaultValue) {
-      setExpandedState(true);
-      onChangeProp('', defaultValue);
-    }
-  }, [defaultValue, onChangeProp]);
+  //eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(
+    () => {
+      if (defaultValue) {
+        setExpandedState(true);
+        onChangeProp('', defaultValue);
+      }
+    },
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   const searchContainerClasses = cx({
     [searchContainerClass]: searchContainerClass,
