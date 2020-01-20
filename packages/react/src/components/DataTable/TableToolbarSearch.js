@@ -39,7 +39,9 @@ const TableToolbarSearch = ({
   ...rest
 }) => {
   const { current: controlled } = useRef(expandedProp !== undefined);
-  const [expandedState, setExpandedState] = useState(defaultExpanded);
+  const [expandedState, setExpandedState] = useState(
+    defaultExpanded || defaultValue
+  );
   const expanded = controlled ? expandedProp : expandedState;
   const searchRef = useRef(null);
   const [value, setValue] = useState(defaultValue || '');
@@ -51,11 +53,9 @@ const TableToolbarSearch = ({
     }
   }, [controlled, expandedState]);
 
-  //eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(
     () => {
       if (defaultValue) {
-        setExpandedState(true);
         onChangeProp('', defaultValue);
       }
     },
