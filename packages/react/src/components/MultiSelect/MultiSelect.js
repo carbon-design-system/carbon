@@ -380,7 +380,6 @@ export default class MultiSelect extends React.Component {
                             role="option"
                             aria-selected={isChecked}
                             tabIndex={-1}
-                            name={itemText}
                             isHighlighted={highlightedIndex === index}
                             title={itemText}
                             aria-label={itemText}
