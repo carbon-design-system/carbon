@@ -6381,7 +6381,6 @@ $text-02: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
@@ -16164,9 +16163,9 @@ Date picker styles
     }
   }
 
-  .#{$prefix}--date-picker__days .nextMonthDay,
-  .#{$prefix}--date-picker__days .prevMonthDay {
-    color: $text-02;
+  .#{$prefix}--date-picker__day.nextMonthDay,
+  .#{$prefix}--date-picker__day.prevMonthDay {
+    color: $text-05;
   }
 
   .#{$prefix}--date-picker__day.today,
@@ -16200,11 +16199,10 @@ Date picker styles
     }
   }
 
-  .#{$prefix}--date-picker__day.disabled,
-  .flatpickr-day.disabled {
+  .#{$prefix}--date-picker__day.flatpickr-day.flatpickr-disabled {
     cursor: not-allowed;
     opacity: 0.5;
-    color: $ui-05;
+    color: $disabled-02;
 
     &:hover {
       background: transparent;
@@ -16358,9 +16356,8 @@ Date picker styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
-  - [text-02 [variable]](#text-02-variable)
-  - [ui-05 [variable]](#ui-05-variable)
   - [text-04 [variable]](#text-04-variable)
+  - [ui-05 [variable]](#ui-05-variable)
 
 ## dropdown
 
