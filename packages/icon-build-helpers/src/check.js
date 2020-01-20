@@ -175,6 +175,7 @@ const baseIconSchema = Joi.object().keys({
   ),
   aliases: aliasesSchema,
   categories: categorySchema,
+  deprecated: Joi.boolean(),
 });
 
 const iconSchema = baseIconSchema.keys({

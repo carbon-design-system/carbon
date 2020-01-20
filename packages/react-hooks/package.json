@@ -41,7 +41,7 @@
     "browserslist-config-carbon": "10.4.0",
     "carbon-components": "^10.9.0",
     "css-loader": "^3.2.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "postcss-loader": "^3.0.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
