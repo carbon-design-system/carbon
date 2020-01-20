@@ -7,7 +7,7 @@
 
 'use strict';
 
-const { camel } = require('change-case');
+const { camelCase } = require('change-case');
 const { reporter } = require('@carbon/cli-reporter');
 const fs = require('fs-extra');
 const path = require('path');
@@ -269,7 +269,7 @@ function shouldTransformAttribute(attribute) {
 function formatAttributes(attrs) {
   return Object.keys(attrs).reduce((acc, key, index) => {
     const attribute = shouldTransformAttribute(key)
-      ? `${camel(key)}="${attrs[key]}"`
+      ? `${camelCase(key)}="${attrs[key]}"`
       : `${key}="${attrs[key]}"`;
 
     if (index === 0) {
