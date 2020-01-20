@@ -5,7 +5,9 @@
 $css--font-face: false;
 $css--body: false;
 $css--reset: false;
-@import '~carbon-components/src/globals/scss/css--helpers'; // SEE THE NOTE ABOVE
+
+// SEE THE NOTE ABOVE
+@import '~carbon-components/src/globals/scss/css--helpers';
 
 .bx--tabs--container ~ div {
   height: 320px;
