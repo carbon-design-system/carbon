@@ -74,7 +74,6 @@
     "@storybook/react": "^5.2.1",
     "@storybook/source-loader": "^5.2.1",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-dev-expression": "^0.2.2",
     "babel-plugin-react-docgen": "^4.0.0",
@@ -89,8 +88,6 @@
     "css-loader": "^3.4.2",
     "fast-sass-loader": "^1.5.0",
     "gzip-size": "^5.0.0",
-    "jest": "^24.0.0",
-    "jest-circus": "^24.0.0",
     "lcov2badge": "^0.1.0",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
@@ -132,49 +129,6 @@
       "@babel/plugin-proposal-class-properties",
       "@babel/plugin-proposal-export-namespace-from",
       "@babel/plugin-proposal-export-default-from"
-    ]
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/components/**/*.js",
-      "!src/components/**/*-story.js"
-    ],
-    "coverageDirectory": "coverage",
-    "coverageReporters": [
-      "text",
-      "html"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/jest/setup.js"
-    ],
-    "testMatch": [
-      "<rootDir>/**/__tests__/**/*.js?(x)",
-      "<rootDir>/**/?(*-)(spec|test).js?(x)"
-    ],
-    "testRunner": "jest-circus/runner",
-    "testURL": "http://localhost",
-    "transform": {
-      "^.+\\.(js|jsx)$": "<rootDir>/config/jest/jsTransform.js",
-      "^.+\\.s?css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/examples/",
-      "/config/",
-      "/lib/",
-      "/es/",
-      "/cjs/"
-    ],
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\](?!(carbon-icons)).+\\.(js|jsx)$"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "json"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
     ]
   },
   "contributors": [
