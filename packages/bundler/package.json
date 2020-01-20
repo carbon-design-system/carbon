@@ -24,7 +24,7 @@
     "@babel/core": "^7.7.7",
     "@babel/preset-env": "^7.7.7",
     "@carbon/cli-reporter": "10.3.0",
-    "@commitlint/parse": "^8.1.0",
+    "@commitlint/parse": "^8.3.4",
     "autoprefixer": "^9.4.3",
     "babel-plugin-macros": "^2.4.2",
     "chalk": "^2.4.1",
