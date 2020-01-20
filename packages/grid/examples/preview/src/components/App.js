@@ -63,7 +63,7 @@ export default function App() {
                                 )
                               ),
                               Prism.languages.javascript,
-                              'javscript'
+                              'javascript'
                             ),
                           }}
                         />
@@ -150,6 +150,37 @@ const sections = [
               <div className="bx--col-sm-1 bx--col-md-2 bx--col-lg-2">
                 <div className="outside">
                   <div className="inside">Content</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ),
+      },
+      {
+        name: 'Hide column per breakpoint',
+        description:
+          'Use the column helpers to specify a column span of 0 at different widths',
+        content: () => (
+          <div className="bx--grid">
+            <div className="bx--row">
+              <div className="bx--col-sm-1 bx--col-md-2 bx--col-lg-6">
+                <div className="outside">
+                  <div className="inside">Never Hidden</div>
+                </div>
+              </div>
+              <div className="bx--col-sm-2 bx--col-md-0 bx--col-lg-6">
+                <div className="outside">
+                  <div className="inside">Hidden on Medium Screens</div>
+                </div>
+              </div>
+              <div className="bx--col-sm-0 bx--col-md-3 bx--col-lg-4">
+                <div className="outside">
+                  <div className="inside">Hidden on Small Screens</div>
+                </div>
+              </div>
+              <div className="bx--col-sm-1 bx--col-md-3 bx--col-lg-0">
+                <div className="outside">
+                  <div className="inside">Hidden on Large Screens</div>
                 </div>
               </div>
             </div>
@@ -322,7 +353,7 @@ const sections = [
   {
     id: 'no-gutters',
     name: 'No gutters',
-    desription:
+    description:
       'Sometimes it is useful to have no gutters in a layout, particularly for fluid layouts. You can specify no gutters on a column-by-column basis or for all columns in a row.',
     examples: [
       {
@@ -488,7 +519,7 @@ const sections = [
     id: 'hang',
     name: 'Hanging content',
     description:
-      'When working with no gutters, it is helpful to keep content inside of the columns aligned with other rows in the same grid. In order to do this, we use a combinated of no-gutter and hang classes.',
+      'When working with no gutters, it is helpful to keep content inside of the columns aligned with other rows in the same grid. In order to do this, we use a combination of no-gutter and hang classes.',
     examples: [
       {
         name: 'Hanging text',
@@ -757,35 +788,33 @@ const sections = [
     id: 'full-bleed',
     name: 'Full bleed',
     description:
-      'When wanting background colors to go edge-to-edge, you will need to create a wrapping node around your grid with the color that you are looking to apply.',
+      'When wanting background colors to go edge-to-edge, you can apply your desired color directly to the grid',
     examples: [
       {
         name: 'Usage',
         description:
-          'In this example, we create an outer div and give it the class name bleed which we then style with a background color.',
+          'In this example, we give the grid element the class name "bleed" which we then style with a background color.',
         content: () => (
-          <div className="bleed">
-            <div className="bx--grid">
-              <div className="bx--row">
-                <div className="bx--col">
-                  <div className="outside">
-                    <div className="inside">1</div>
-                  </div>
+          <div className="bx--grid bleed">
+            <div className="bx--row">
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1</div>
                 </div>
-                <div className="bx--col">
-                  <div className="outside">
-                    <div className="inside">1</div>
-                  </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1</div>
                 </div>
-                <div className="bx--col">
-                  <div className="outside">
-                    <div className="inside">1</div>
-                  </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1</div>
                 </div>
-                <div className="bx--col">
-                  <div className="outside">
-                    <div className="inside">1</div>
-                  </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1</div>
                 </div>
               </div>
             </div>
