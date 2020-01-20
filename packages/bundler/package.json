@@ -40,7 +40,7 @@
     "inquirer": "^6.5.0",
     "klaw-sync": "^6.0.0",
     "markdown-toc": "^1.2.0",
-    "node-sass": "^4.9.4",
+    "node-sass": "^4.13.1",
     "postcss": "^7.0.7",
     "postcss-discard-comments": "^4.0.1",
     "replace-in-file": "^3.4.4",
