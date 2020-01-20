@@ -297,7 +297,7 @@ export default class HeaderSubmenu extends mixin(
    * Enum for navigating backward/forward.
    * @readonly
    * @member HeaderSubmenu.NAVIGATE
-   * @type {Object}
+   * @type {object}
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
    */
