@@ -29,7 +29,12 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
     'jsdoc/check-param-names': 2,
-    'jsdoc/check-tag-names': 2,
+    'jsdoc/check-tag-names': [
+      'error',
+      {
+        definedTags: ['jest-environment'],
+      },
+    ],
     'jsdoc/check-types': 2,
     'jsx-a11y/no-static-element-interactions': 1,
     'jsx-a11y/no-noninteractive-element-interactions': 1,

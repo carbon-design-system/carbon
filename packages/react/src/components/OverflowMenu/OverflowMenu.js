@@ -34,7 +34,7 @@ const on = (element, ...args) => {
 
 /**
  * The CSS property names of the arrow keyed by the floating menu direction.
- * @type {Object<string, string>}
+ * @type {object<string, string>}
  */
 const triggerButtonPositionProps = {
   [DIRECTION_TOP]: 'bottom',
@@ -43,7 +43,7 @@ const triggerButtonPositionProps = {
 
 /**
  * Determines how the position of arrow should affect the floating menu position.
- * @type {Object<string, number>}
+ * @type {object<string, number>}
  */
 const triggerButtonPositionFactors = {
   [DIRECTION_TOP]: -2,

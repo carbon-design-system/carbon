@@ -103,7 +103,7 @@ class InlineLoading extends mixin(
 
   /**
    * The list of states.
-   * @type {Object<string, string>}
+   * @type {object<string, string>}
    */
   static states /* #__PURE_CLASS_PROPERTY__ */ = {
     INACTIVE: 'inactive',
