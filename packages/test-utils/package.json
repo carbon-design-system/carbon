@@ -18,7 +18,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "react-dom": "^16.9.0"
   },
   "dependencies": {
@@ -27,7 +27,7 @@
     "tabbable": "^4.0.0"
   },
   "devDependencies": {
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "react-dom": "^16.9.0"
   }
 }
