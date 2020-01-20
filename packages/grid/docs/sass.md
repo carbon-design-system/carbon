@@ -116,18 +116,25 @@ yet.
 
 ### ❌carbon--make-col [mixin]
 
-Define the width of the column for a given span and column count.
+Define the width of the column for a given span and column count. A width of 0
+will hide the column entirely.
 
 <details>
 <summary>Source code</summary>
 
 ```scss
 @mixin carbon--make-col($span, $columns) {
-  flex: 0 0 percentage($span / $columns);
-  // Add a `max-width` to ensure content within each column does not blow out
-  // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
-  // do not appear to require this.
-  max-width: percentage($span / $columns);
+  @if $span == 0 {
+    display: none;
+  } @else {
+    // Explicitly write `display: block` to override
+    display: block;
+    flex: 0 0 percentage($span / $columns);
+    // Add a `max-width` to ensure content within each column does not blow out
+    // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
+    // do not appear to require this.
+    max-width: percentage($span / $columns);
+  }
 }
 ```
 
@@ -196,7 +203,7 @@ Output the CSS required for all the columns in a given grid system.
     $columns: map-get(map-get($breakpoints, $breakpoint), columns);
 
     // Allow columns to stretch full width below their breakpoints
-    @for $i from 1 through $columns {
+    @for $i from 0 through $columns {
       .#{$prefix}--col#{$infix}-#{$i} {
         @include carbon--make-col-ready();
       }
@@ -224,7 +231,7 @@ Output the CSS required for all the columns in a given grid system.
         max-width: 100%;
       }
 
-      @for $i from 1 through $columns {
+      @for $i from 0 through $columns {
         .#{$prefix}--col#{$infix}-#{$i} {
           @include carbon--make-col($i, $columns);
         }
@@ -559,9 +566,12 @@ Generate the CSS for a grid for the given breakpoints and gutters
     @include carbon--make-row();
   }
 
-  .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
-    padding-top: $condensed-gutter / 2;
-    padding-bottom: $condensed-gutter / 2;
+  .#{$prefix}--grid--condensed .#{$prefix}--row:not(:last-of-type) {
+    margin-bottom: $condensed-gutter;
+  }
+
+  .#{$prefix}--row--condensed + .#{$prefix}--row--condensed {
+    margin-top: $condensed-gutter;
   }
 
   @include carbon--make-grid-columns($breakpoints, $grid-gutter);
