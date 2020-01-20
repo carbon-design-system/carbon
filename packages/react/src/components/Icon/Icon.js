@@ -12,7 +12,7 @@ import icons from 'carbon-icons';
 
 /**
  * The icons list object from `carbon-icons`.
- * @type {Object}
+ * @type {object}
  */
 let iconsList = icons;
 
