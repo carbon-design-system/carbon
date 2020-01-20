@@ -435,6 +435,7 @@ export default class FilterableMultiSelect extends React.Component {
                             key={itemProps.id}
                             isActive={isChecked}
                             isHighlighted={highlightedIndex === index}
+                            title={itemText}
                             {...itemProps}>
                             <Checkbox
                               id={itemProps.id}
