@@ -7,7 +7,7 @@
 
 'use strict';
 
-const { pascal } = require('change-case');
+const { pascalCase } = require('change-case');
 
 /**
  * This transform upgrades the import path that teams may be using for icons
@@ -164,23 +164,23 @@ module.exports = (file, api) => {
 function getModuleName(name, size, prefixParts) {
   const prefix = prefixParts
     .filter(size => isNaN(size))
-    .map(pascal)
+    .map(pascalCase)
     .join('');
 
   if (prefix !== '') {
     if (!size) {
-      return prefix + pascal(name) + 'Glyph';
+      return prefix + pascalCase(name) + 'Glyph';
     }
-    return prefix + pascal(name) + size;
+    return prefix + pascalCase(name) + size;
   }
 
   if (!size) {
-    return pascal(name) + 'Glyph';
+    return pascalCase(name) + 'Glyph';
   }
 
   if (isNaN(name[0])) {
-    return pascal(name) + size;
+    return pascalCase(name) + size;
   }
 
-  return '_' + pascal(name) + size;
+  return '_' + pascalCase(name) + size;
 }
