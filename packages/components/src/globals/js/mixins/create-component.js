@@ -39,7 +39,7 @@ export default function(ToMix) {
 
       /**
        * The component options.
-       * @type {Object}
+       * @type {object}
        */
       this.options = Object.assign(
         Object.create(this.constructor.options),

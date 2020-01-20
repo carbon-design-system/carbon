@@ -36,7 +36,7 @@ export default class SideNav extends mixin(
    * Enum for toggling side nav visibility
    * @readonly
    * @member SideNav.state
-   * @type {Object}
+   * @type {object}
    * @property {string} EXPANDED Opening/visible
    * @property {string} COLLAPSED Closing/hidden
    */
@@ -116,7 +116,7 @@ export default class SideNav extends mixin(
    * If `options` is specified in the constructor, {@linkcode SideNav.create .create()}, or {@linkcode SideNav.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode SideNav.init .init()} works.
    * @member SideNav.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The data attribute to find side navs.
    */
   static options /* #__PURE_CLASS_PROPERTY__ */ = {
