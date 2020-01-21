@@ -13,21 +13,21 @@ import { CheckmarkOutline16, Warning16 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
-const defaultRenderLabel = props => <p {...props} />;
-export const ProgressStep = ({ ...props }) => {
-  const {
-    label,
-    description,
-    className,
-    current,
-    complete,
-    invalid,
-    secondaryLabel,
-    disabled,
-    onClick,
-    renderLabel: ProgressStepLabel,
-  } = props;
 
+const defaultRenderLabel = props => <p {...props} />;
+
+export function ProgressStep({
+  label,
+  description,
+  className,
+  current,
+  complete,
+  invalid,
+  secondaryLabel,
+  disabled,
+  onClick,
+  renderLabel: ProgressStepLabel,
+}) {
   const classes = classnames({
     [`${prefix}--progress-step`]: true,
     [`${prefix}--progress-step--current`]: current,
@@ -70,16 +70,31 @@ export const ProgressStep = ({ ...props }) => {
     );
   };
 
+  let message = 'Incomplete';
+
+  if (current) {
+    message = 'Current';
+  }
+
+  if (complete) {
+    message = 'Complete';
+  }
+
+  if (invalid) {
+    message = 'Invalid';
+  }
+
   return (
-    <li className={classes} aria-disabled={disabled}>
-      <div
+    <li className={classes}>
+      <button
         className={classnames(`${prefix}--progress-step-button`, {
           [`${prefix}--progress-step-button--unclickable`]: !onClick || current,
         })}
-        role="button"
+        aria-disabled={disabled}
         tabIndex={!current && onClick ? 0 : -1}
         onClick={!current ? onClick : undefined}
         onKeyDown={handleKeyDown}>
+        <span className={`${prefix}--assistive-text`}>{message}</span>
         <SVGIcon
           complete={complete}
           current={current}
@@ -94,10 +109,10 @@ export const ProgressStep = ({ ...props }) => {
           <p className={`${prefix}--progress-optional`}>{secondaryLabel}</p>
         ) : null}
         <span className={`${prefix}--progress-line`} />
-      </div>
+      </button>
     </li>
   );
-};
+}
 
 ProgressStep.propTypes = {
   /**
