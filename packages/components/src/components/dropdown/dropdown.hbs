@@ -20,7 +20,7 @@
       </button>
       <ul class="{{@root.prefix}}--dropdown-list" id="{{default.idSuffix}}-menu" role="menu" tabindex="0" id="{{default.idSuffix}}-menu" aria-hidden="true" wh-menu-anchor="left" aria-labelledby="{{default.idSuffix}}-label">
         {{#each items as |item index|}}
-        <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
+        <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item" title="{{label}}">
           <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1" role="menuitemradio" aria-checked="{{#if index}}false{{else}}true{{/if}}" id="{{../default.idSuffix}}-item{{@index}}">{{label}}</a>
         </li>
         {{/each}}
@@ -45,7 +45,7 @@
       </button>
       <ul class="{{@root.prefix}}--dropdown-list"  role="menu" tabindex="0" id="{{helper.idSuffix}}-menu" aria-hidden="true" wh-menu-anchor="left" aria-labelledby="{{helper.idSuffix}}-label">
         {{#each items as |item index|}}
-        <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
+        <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item" title="{{label}}">
           <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1" role="menuitemradio" aria-checked="{{#if index}}false{{else}}true{{/if}}" id="{{../helper.idSuffix}}-item{{@index}}">{{label}}</a>
         </li>
         {{/each}}
@@ -74,7 +74,7 @@
       <!-- Note: remove `tabindex` from disabled dropdown lists -->
       <ul class="{{@root.prefix}}--dropdown-list" id="{{disabled.idSuffix}}-menu" role="menu" id="{{disabled.idSuffix}}-menu" aria-hidden="true" wh-menu-anchor="left" aria-labelledby="{{disabled.idSuffix}}-label">
         {{#each items as |item index|}}
-        <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
+        <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item" title="{{label}}">
           <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1" role="menuitemradio" aria-checked="{{#if index}}false{{else}}true{{/if}}" id="{{../disabled.idSuffix}}-item{{@index}}">{{label}}</a>
         </li>
         {{/each}}
@@ -103,7 +103,7 @@
       </button>
       <ul class="{{@root.prefix}}--dropdown-list" id="{{invalid.idSuffix}}-menu" role="menu" tabindex="0" id="{{invalid.idSuffix}}-menu" aria-hidden="true" wh-menu-anchor="left" aria-labelledby="{{invalid.idSuffix}}-label">
         {{#each items as |item index|}}
-        <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
+        <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item" title="{{label}}">
           <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1" role="menuitemradio" aria-checked="{{#if index}}false{{else}}true{{/if}}" id="{{../invalid.idSuffix}}-item{{@index}}">{{label}}</a>
         </li>
         {{/each}}
@@ -138,7 +138,7 @@
       </button>
       <ul class="{{@root.prefix}}--dropdown-list" id="{{default.idSuffix}}-menu" role="menu" tabindex="0" id="{{default.idSuffix}}-menu" aria-hidden="true" wh-menu-anchor="left" aria-labelledby="{{default.idSuffix}}-label">
         {{#each items as |item index|}}
-        <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
+        <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item" title="{{label}}">
           <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1" role="menuitemradio" aria-checked="{{#if index}}false{{else}}true{{/if}}" id="{{../default.idSuffix}}-item{{@index}}">{{label}}</a>
           {{ carbon-icon 'Checkmark16' class=(add @root.prefix '--list-box__menu-item__selected-icon') aria-hidden="true" }}
         </li>
