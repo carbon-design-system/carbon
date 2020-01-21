@@ -70,7 +70,7 @@ export function NotificationButton({
   notificationType,
   ...rest
 }) {
-  const buttonClasName = cx(className, {
+  const buttonClassName = cx(className, {
     [`${prefix}--toast-notification__close-button`]:
       notificationType === 'toast',
     [`${prefix}--inline-notification__close-button`]:
@@ -88,7 +88,7 @@ export function NotificationButton({
       type={type}
       aria-label={iconDescription}
       title={iconDescription}
-      className={buttonClasName}>
+      className={buttonClassName}>
       {IconTag && (
         <IconTag aria-label={ariaLabel} className={iconClassName} name={name} />
       )}
