@@ -401,6 +401,7 @@ export default class ComboBox extends React.Component {
                           (selectedItem && selectedItem.id === item.id) ||
                           false
                         }
+                        title={itemToElement ? item.text : itemToString(item)}
                         {...itemProps}>
                         {itemToElement ? (
                           <ItemToElement key={itemProps.id} {...item} />

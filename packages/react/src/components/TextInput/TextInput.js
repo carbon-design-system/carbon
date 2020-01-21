@@ -29,6 +29,7 @@ const TextInput = React.forwardRef(function TextInput(
     invalidText,
     helperText,
     light,
+    size,
     ...other
   },
   ref
@@ -37,6 +38,7 @@ const TextInput = React.forwardRef(function TextInput(
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,
     [`${prefix}--text-input--invalid`]: invalid,
+    [`${prefix}--text-input--${size}`]: size,
   });
   const sharedTextInputProps = {
     id,
@@ -144,6 +146,11 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
 
   /**
+   * Specify the size of the Text Input. Currently supports either `small` or `large` as an option. If omitted, defaults to standard size
+   */
+  size: PropTypes.string,
+
+  /**
    * Specify the type of the <input>
    */
   type: PropTypes.string,
@@ -188,6 +195,7 @@ TextInput.defaultProps = {
   invalidText: '',
   helperText: '',
   light: false,
+  size: '',
 };
 
 export default TextInput;
