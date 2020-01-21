@@ -6,6 +6,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
   id="custom-id"
   onChange={[MockFunction]}
   persistent={false}
+  tabIndex="0"
   translateWithId={[Function]}
 >
   <div
@@ -25,6 +26,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
       onChange={[Function]}
       placeHolderText="Filter table"
       size="sm"
+      tabIndex="-1"
       type="text"
       value=""
     >
@@ -77,6 +79,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
           onChange={[Function]}
           placeholder="Filter table"
           role="searchbox"
+          tabIndex="-1"
           type="text"
           value=""
         />
