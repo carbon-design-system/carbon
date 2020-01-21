@@ -311,7 +311,7 @@ export default class Pagination extends Component {
         <div className={`${prefix}--pagination__right`}>
           {pageInputDisabled ? null : (
             <Select
-              id={`${prefix}-pagination-select-${inputId + 2}`}
+              id={`${prefix}-pagination-select-${inputId}-right`}
               className={`${prefix}--select__page-number`}
               labelText={`Page number, of ${totalPages} pages`}
               inline
