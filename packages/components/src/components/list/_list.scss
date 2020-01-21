@@ -46,8 +46,21 @@
     margin-top: 0;
   }
 
-  .#{$prefix}--list--ordered {
-    list-style-type: decimal;
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested) {
+    counter-reset: item;
+  }
+
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
+    > .#{$prefix}--list__item {
+    position: relative;
+  }
+
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
+    > .#{$prefix}--list__item::before {
+    content: counter(item) '.';
+    counter-increment: item;
+    position: absolute;
+    left: rem(-24px);
   }
 
   .#{$prefix}--list--ordered.#{$prefix}--list--nested {
