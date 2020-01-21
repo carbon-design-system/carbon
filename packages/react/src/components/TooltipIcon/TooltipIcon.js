@@ -55,7 +55,7 @@ TooltipIcon.propTypes = {
   /**
    * Specify the direction of the tooltip. Can be either top or bottom.
    */
-  direction: PropTypes.oneOf(['top', 'bottom']),
+  direction: PropTypes.oneOf(['top', 'right', 'left', 'bottom']),
 
   /**
    * Specify the alignment (to the trigger button) of the tooltip.
