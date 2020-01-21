@@ -12,18 +12,16 @@ import React from 'react';
 
 const { prefix } = settings;
 
-function Grid({
+function Row({
   as: BaseComponent = 'div',
   condensed = false,
-  fullWidth = false,
   className: containerClassName,
   children,
   ...rest
 }) {
   const className = cx(containerClassName, {
-    [`${prefix}--grid`]: true,
-    [`${prefix}--grid--condensed`]: condensed,
-    [`${prefix}--grid--full-width`]: fullWidth,
+    [`${prefix}--row`]: true,
+    [`${prefix}--row--condensed`]: condensed,
   });
 
   return (
@@ -33,32 +31,27 @@ function Grid({
   );
 }
 
-Grid.propTypes = {
+Row.propTypes = {
   /**
    * Provide a custom element to render instead of the default <div>
    */
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
-   * Collapse the gutter to 2px. Useful for fluid layouts.
-   * Rows have 2px of margin between them to match gutter.
+   * Specify a single row as condensed.Rows that are adjacent
+   * and are condensed will have 2px of margin between them to match gutter.
    */
   condensed: PropTypes.bool,
 
   /**
-   * Remove the default max width that the grid has set
-   */
-  fullWidth: PropTypes.bool,
-
-  /**
-   * Specify a custom className to be applied to the `Grid`
+   * Specify a custom className to be applied to the `Row`
    */
   className: PropTypes.string,
 
   /**
-   * Pass in content that will be rendered within the `Grid`
+   * Pass in content that will be rendered within the `Row`
    */
   children: PropTypes.node,
 };
 
-export default Grid;
+export default Row;
