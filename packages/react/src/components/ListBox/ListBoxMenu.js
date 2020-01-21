@@ -23,6 +23,7 @@ const ListBoxMenu = ({ children, id, ...rest }) => (
     id={`${id}__menu`}
     className={`${prefix}--list-box__menu`}
     role="listbox"
+    aria-multiselectable="true"
     {...rest}>
     {children}
   </div>
