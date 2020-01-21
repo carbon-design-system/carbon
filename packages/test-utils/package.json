@@ -18,16 +18,16 @@
     "access": "public"
   },
   "peerDependencies": {
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "react-dom": "^16.9.0"
   },
   "dependencies": {
-    "prettier": "^1.17.0",
+    "prettier": "^1.19.1",
     "resolve": "^1.12.0",
     "tabbable": "^4.0.0"
   },
   "devDependencies": {
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "react-dom": "^16.9.0"
   }
 }

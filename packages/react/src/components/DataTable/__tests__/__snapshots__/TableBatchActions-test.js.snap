@@ -20,14 +20,14 @@ exports[`DataTable.TableBatchActions should render 1`] = `
           disabled={false}
           kind="primary"
           onClick={[MockFunction]}
-          tabIndex={0}
+          tabIndex={-1}
           type="button"
         >
           <button
             className="bx--batch-summary__cancel bx--btn bx--btn--primary"
             disabled={false}
             onClick={[MockFunction]}
-            tabIndex={0}
+            tabIndex={-1}
             type="button"
           >
             Cancel

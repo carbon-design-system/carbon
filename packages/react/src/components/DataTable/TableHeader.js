@@ -51,6 +51,7 @@ const TableHeader = React.forwardRef(function TableHeader(
   {
     className: headerClassName,
     children,
+    colSpan,
     isSortable,
     isSortHeader,
     onClick,
@@ -63,7 +64,7 @@ const TableHeader = React.forwardRef(function TableHeader(
 ) {
   if (!isSortable) {
     return (
-      <th {...rest} className={headerClassName} scope={scope}>
+      <th {...rest} className={headerClassName} scope={scope} colSpan={colSpan}>
         <span className={`${prefix}--table-header-label`}>{children}</span>
       </th>
     );
@@ -80,10 +81,11 @@ const TableHeader = React.forwardRef(function TableHeader(
 
   return (
     <th
-      scope={scope}
-      className={headerClassName}
       aria-sort={ariaSort}
-      ref={ref}>
+      className={headerClassName}
+      colSpan={colSpan}
+      ref={ref}
+      scope={scope}>
       <button className={className} onClick={onClick} {...rest}>
         <span className={`${prefix}--table-header-label`}>{children}</span>
         <Arrow
@@ -119,6 +121,12 @@ TableHeader.propTypes = {
    * Pass in children that will be embedded in the table header label
    */
   children: PropTypes.node,
+
+  /**
+   * Specify `colSpan` as a non-negative integer value to indicate how
+   * many columns the TableHeader cell extends in a table
+   */
+  colSpan: PropTypes.number,
 
   /**
    * Specify whether this header is one through which a user can sort the table
