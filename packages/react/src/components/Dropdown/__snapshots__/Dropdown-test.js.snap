@@ -689,6 +689,7 @@ exports[`Dropdown should render with strings as items 1`] = `
                 onClick={[Function]}
                 onMouseDown={[Function]}
                 onMouseMove={[Function]}
+                title="zar"
               >
                 <div
                   className="bx--list-box__menu-item"
@@ -696,6 +697,7 @@ exports[`Dropdown should render with strings as items 1`] = `
                   onClick={[Function]}
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
+                  title="zar"
                 >
                   <div
                     className="bx--list-box__menu-item__option"
@@ -712,6 +714,7 @@ exports[`Dropdown should render with strings as items 1`] = `
                 onClick={[Function]}
                 onMouseDown={[Function]}
                 onMouseMove={[Function]}
+                title="doz"
               >
                 <div
                   className="bx--list-box__menu-item"
@@ -719,6 +722,7 @@ exports[`Dropdown should render with strings as items 1`] = `
                   onClick={[Function]}
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
+                  title="doz"
                 >
                   <div
                     className="bx--list-box__menu-item__option"
