@@ -356,7 +356,10 @@ export default class MultiSelect extends React.Component {
                     />
                   </ListBox.Field>
                   {isOpen && (
-                    <ListBox.Menu aria-labelledby={`${labelId}`} id={id}>
+                    <ListBox.Menu
+                      aria-multiselectable="true"
+                      aria-labelledby={`${labelId}`}
+                      id={id}>
                       {sortItems(items, {
                         selectedItems: {
                           top: selectedItems,
@@ -382,7 +385,6 @@ export default class MultiSelect extends React.Component {
                             tabIndex={-1}
                             isHighlighted={highlightedIndex === index}
                             title={itemText}
-                            aria-label={itemText}
                             {...itemProps}>
                             <div className={`${prefix}--checkbox-wrapper`}>
                               <span
