@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { ChevronDownGlyph } from '@carbon/icons-react';
+import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -108,11 +108,11 @@ export default class TimePickerSelect extends Component {
           disabled={disabled}>
           {children}
         </select>
-        <ChevronDownGlyph
+        <ChevronDown16
           className={`${prefix}--select__arrow`}
           aria-label={iconDescription}>
           {iconDescription && <title>{iconDescription}</title>}
-        </ChevronDownGlyph>
+        </ChevronDown16>
       </div>
     );
   }
