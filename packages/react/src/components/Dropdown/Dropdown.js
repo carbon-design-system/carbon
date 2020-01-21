@@ -300,6 +300,7 @@ export default class Dropdown extends React.Component {
                           isHighlighted={
                             highlightedIndex === index || selectedItem === item
                           }
+                          title={itemToElement ? item.text : itemToString(item)}
                           {...itemProps}>
                           {itemToElement ? (
                             <ItemToElement key={itemProps.id} {...item} />

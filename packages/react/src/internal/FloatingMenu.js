@@ -13,7 +13,7 @@ import window from 'window-or-global';
 
 /**
  * The structure for the position of floating menu.
- * @typedef {Object} FloatingMenu~position
+ * @typedef {object} FloatingMenu~position
  * @property {number} left The left position.
  * @property {number} top The top position.
  * @property {number} right The right position.
@@ -22,14 +22,14 @@ import window from 'window-or-global';
 
 /**
  * The structure for the size of floating menu.
- * @typedef {Object} FloatingMenu~size
+ * @typedef {object} FloatingMenu~size
  * @property {number} width The width.
  * @property {number} height The height.
  */
 
 /**
  * The structure for the position offset of floating menu.
- * @typedef {Object} FloatingMenu~offset
+ * @typedef {object} FloatingMenu~offset
  * @property {number} top The top position.
  * @property {number} left The left position.
  */
