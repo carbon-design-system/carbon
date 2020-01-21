@@ -43,8 +43,8 @@ export default function FileUploaderDropContainer(props) {
    * @param {Event} evt - Event object, used to get the list of files added
    */
   const validateFiles = evt => {
-    const transferredFiles = [...evt.dataTransfer.files];
     if (evt.type === 'drop') {
+      const transferredFiles = [...evt.dataTransfer.files];
       if (!accept.length) {
         return transferredFiles;
       }
