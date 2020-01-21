@@ -56,7 +56,8 @@
     .#{$prefix}--select-input,
     .#{$prefix}--dropdown,
     .#{$prefix}--dropdown-list,
-    .#{$prefix}--number input[type='number'] {
+    .#{$prefix}--number input[type='number'],
+    .#{$prefix}--date-picker__input {
       background-color: $field-02;
     }
   }
