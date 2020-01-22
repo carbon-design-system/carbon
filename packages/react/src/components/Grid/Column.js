@@ -36,6 +36,7 @@ function Column({
 }
 
 const spanPropType = PropTypes.oneOfType([
+  PropTypes.bool,
   PropTypes.number,
   PropTypes.shape({
     span: PropTypes.number,
@@ -123,6 +124,13 @@ function getClassNameForBreakpoints(breakpoints) {
     }
 
     const name = breakpointNames[i];
+
+    // If our breakpoint is a boolean, the user has specified that the column
+    // should be "auto" at this size
+    if (typeof breakpoint === 'boolean') {
+      classNames.push(`${prefix}--col-${name}`);
+      continue;
+    }
 
     // If our breakpoint is a number, the user has specified the number of
     // columns they'd like this column to span
