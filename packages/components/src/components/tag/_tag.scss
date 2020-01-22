@@ -26,6 +26,7 @@
     max-width: 100%; // restricts size of contained elements
     margin: $carbon--spacing-02;
     border-radius: rem(15px);
+    cursor: default;
 
     &:not(:first-child) {
       margin-left: 0;
