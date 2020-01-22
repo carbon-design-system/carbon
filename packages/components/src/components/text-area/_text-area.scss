@@ -61,7 +61,7 @@
   }
 
   .#{$prefix}--text-area::placeholder {
-    color: $text-05;
+    @include placeholder-colors;
     @include type-style('body-long-01');
     opacity: 1;
   }
@@ -77,6 +77,7 @@
   .#{$prefix}--text-area__wrapper {
     position: relative;
     display: flex;
+    width: 100%;
   }
 
   .#{$prefix}--text-area__invalid-icon {
@@ -98,6 +99,10 @@
 
   .#{$prefix}--text-area:disabled::placeholder {
     color: $disabled-02;
+  }
+
+  .#{$prefix}--text-area.#{$prefix}--text-area--light:disabled {
+    background-color: $field-02;
   }
 
   // Skeleton State

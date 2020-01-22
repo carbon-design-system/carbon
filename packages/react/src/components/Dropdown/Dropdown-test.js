@@ -71,7 +71,7 @@ describe('Dropdown', () => {
 
     beforeEach(() => {
       wrapper = mount(<Dropdown titleText="Email Input" {...mockProps} />);
-      renderedLabel = wrapper.find('label');
+      renderedLabel = wrapper.find('span[className="bx--label"]');
     });
 
     it('renders a title', () => {

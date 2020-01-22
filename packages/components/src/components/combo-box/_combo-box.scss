@@ -19,8 +19,7 @@
 @mixin combo-box {
   .#{$prefix}--combo-box .#{$prefix}--text-input {
     &::placeholder {
-      color: $text-02;
-      opacity: 1;
+      color: $text-05;
     }
 
     &[disabled]::placeholder {
@@ -35,6 +34,8 @@
 
   .#{$prefix}--combo-box .#{$prefix}--list-box__field,
   .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field {
     padding: 0;
   }

@@ -36,6 +36,7 @@ const TableToolbarSearch = ({
   persistent,
   persistant,
   id,
+  tabIndex,
   ...rest
 }) => {
   const { current: controlled } = useRef(expandedProp !== undefined);
@@ -79,7 +80,7 @@ const TableToolbarSearch = ({
 
   return (
     <div
-      tabIndex={expandedState ? '-1' : '0'}
+      tabIndex={expandedState ? '-1' : tabIndex}
       role="search"
       ref={searchRef}
       onClick={event => handleExpand(event, true)}
@@ -88,6 +89,7 @@ const TableToolbarSearch = ({
       className={searchContainerClasses}>
       <Search
         size="sm"
+        tabIndex={expandedState ? tabIndex : '-1'}
         className={className}
         defaultValue={defaultValue}
         value={value}
@@ -148,6 +150,11 @@ TableToolbarSearch.propTypes = {
   translateWithId: PropTypes.func.isRequired,
 
   /**
+   * Optional prop to specify the tabIndex of the <Search> (in expanded state) or the container (in collapsed state)
+   */
+  tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+  /**
    * Whether the search should be allowed to expand
    */
   persistent: PropTypes.bool,
@@ -158,6 +165,7 @@ TableToolbarSearch.propTypes = {
 };
 
 TableToolbarSearch.defaultProps = {
+  tabIndex: '0',
   translateWithId,
   persistent: false,
 };

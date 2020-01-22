@@ -16,6 +16,11 @@ const { prefix } = settings;
 export default class Tab extends React.Component {
   static propTypes = {
     /**
+     * The element ID for the top-level element.
+     */
+    id: PropTypes.string,
+
+    /**
      * Specify an optional className to be added to your Tab
      */
     className: PropTypes.string,
@@ -25,12 +30,6 @@ export default class Tab extends React.Component {
      * Reserved for usage in Tabs
      */
     handleTabClick: PropTypes.func,
-
-    /**
-     * A handler that is invoked when a user presses left/right key.
-     * Reserved for usage in Tabs
-     */
-    handleTabAnchorFocus: PropTypes.func,
 
     /**
      * A handler that is invoked on the key down event for the control.
@@ -108,23 +107,11 @@ export default class Tab extends React.Component {
     onKeyDown: () => {},
   };
 
-  setTabFocus(evt) {
-    const leftKey = 37;
-    const rightKey = 39;
-    if (evt.which === leftKey) {
-      this.props.handleTabAnchorFocus(this.props.index - 1);
-    } else if (evt.which === rightKey) {
-      this.props.handleTabAnchorFocus(this.props.index + 1);
-    } else {
-      return;
-    }
-  }
-
   render() {
     const {
+      id,
       className,
       handleTabClick,
-      handleTabAnchorFocus, // eslint-disable-line
       handleTabKeyDown,
       disabled,
       href,
@@ -145,12 +132,14 @@ export default class Tab extends React.Component {
     });
 
     const anchorProps = {
+      id,
       className: `${prefix}--tabs__nav-link`,
       href,
       role: 'tab',
       tabIndex: !disabled ? tabIndex : -1,
       ['aria-selected']: selected,
       ['aria-disabled']: disabled,
+      ['aria-controls']: id && `${id}__panel`,
       ref: e => {
         this.tabAnchor = e;
       },
@@ -172,7 +161,6 @@ export default class Tab extends React.Component {
           if (disabled) {
             return;
           }
-          this.setTabFocus(evt);
           handleTabKeyDown(index, evt);
           onKeyDown(evt);
         }}
