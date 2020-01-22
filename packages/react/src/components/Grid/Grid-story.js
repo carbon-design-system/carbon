@@ -1,175 +1,158 @@
-/**
- * Copyright IBM Corp. 2019
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
+import './Grid-story.scss';
 import React from 'react';
-import { withKnobs, boolean, select, color } from '@storybook/addon-knobs';
-import { Grid } from './Grid';
-
-import { blue, gray } from '@carbon/colors';
-import './_Grid-story.scss';
-
-// FIXME: should be unnecessary past Storybook 5.2.2
-const handleUndefStr = str => {
-  if (str === 'undefined') return undefined;
-  return str;
-};
-
-// convert empty str from `undefined` return val to undefined
-/** @type {select} */
-const selectWithUndef = (...params) => handleUndefStr(select(...params));
-
-// add blank (empty space) option to object with an undefined val
-const withBlank = arr =>
-  arr.reduce(
-    (prev, cur) => {
-      prev[cur] = cur;
-      return prev;
-    },
-    { [' ']: 'undefined' }
-  );
+import { Grid, Row, Column } from './';
 
 export default {
-  component: Grid,
+  decorators: [storyFn => <div id="templates">{storyFn()}</div>],
   title: 'Grid',
-  decorators: [withKnobs],
-  parameters: {
-    info: {
-      // text: ``, // TODO: add detail, particularly a legend
-      header: false, // rm silly look when no source
-      source: false, // really messy with many `undefined`s and too many divs
-    },
-  },
 };
 
-const propsGrid = () => ({
-  condensed: boolean('condensed', false, 'Grid'),
-  fullWidth: boolean('fullWidth', false, 'Grid'),
-});
+function DemoContent({ children }) {
+  return (
+    <div className="outside">
+      <div className="inside">{children}</div>
+    </div>
+  );
+}
 
-const propsGridRow = () => ({
-  condensed: boolean('condensed', false, 'Grid.Row'),
-});
-
-const propsGridCol = () => ({
-  sm: selectWithUndef(
-    'sm',
-    withBlank(Grid.getValidColWidths().sm),
-    'undefined',
-    'Grid.Col'
-  ),
-  md: selectWithUndef(
-    'md',
-    withBlank(Grid.getValidColWidths().md),
-    'undefined',
-    'Grid.Col'
-  ),
-  lg: selectWithUndef(
-    'lg',
-    withBlank(Grid.getValidColWidths().lgPlus),
-    'undefined',
-    'Grid.Col'
-  ),
-  xlg: selectWithUndef(
-    'xlg',
-    withBlank(Grid.getValidColWidths().lgPlus),
-    'undefined',
-    'Grid.Col'
-  ),
-  max: selectWithUndef(
-    'max',
-    withBlank(Grid.getValidColWidths().lgPlus),
-    'undefined',
-    'Grid.Col'
-  ),
-  smOffset: select('smOffset', Grid.getValidColOffsets().sm, 0, 'Grid.Col'),
-  mdOffset: select('mdOffset', Grid.getValidColOffsets().md, 0, 'Grid.Col'),
-  lgOffset: select('lgOffset', Grid.getValidColOffsets().lgPlus, 0, 'Grid.Col'),
-  xlgOffset: select(
-    'xlgOffset',
-    Grid.getValidColOffsets().lgPlus,
-    0,
-    'Grid.Col'
-  ),
-  maxOffset: select(
-    'maxOffset',
-    Grid.getValidColOffsets().lgPlus,
-    0,
-    'Grid.Col'
-  ),
-});
-
-const colors = () => ({
-  cell: color('cell (blue 10)', blue[10], 'colors'),
-  margin: color('margin (blue 20)', blue[20], 'colors'),
-  dividers: color('dividers (blue 40)', blue[40], 'colors'),
-  padding: color('padding (blue 40)', blue[40], 'colors'),
-  bleed: color('bleed (gray 100)', gray[100], 'colors'),
-});
-
-export const Default = () => (
-  <div style={{ backgroundColor: colors().bleed }}>
-    <Grid {...propsGrid()} style={{ backgroundColor: colors().padding }}>
-      {Array.from({ length: 4 }).map((_, i) => (
-        <Grid.Row key={i} {...propsGridRow()}>
-          {Array.from({ length: 12 }).map((_, j) => (
-            <Grid.Col
-              key={j}
-              {...propsGridCol()}
-              style={{
-                outline: '1px dashed ' + colors().dividers,
-                backgroundColor: colors().margin,
-              }}>
-              <div className="outside">
-                <div
-                  className="inside"
-                  style={{ backgroundColor: colors().cell }}>
-                  <code>
-                    Row {i + 1}
-                    <br />
-                    Col {j + 1}
-                  </code>
-                </div>
-              </div>
-            </Grid.Col>
-          ))}
-        </Grid.Row>
-      ))}
-    </Grid>
-  </div>
+export const autoColumns = () => (
+  <Grid>
+    <Row>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+    </Row>
+  </Grid>
 );
 
-const breakpoint = () =>
-  select('breakpoint', ['sm', 'md', 'lg', 'xlg', 'max'], 'lg');
+export const responsiveGrid = () => (
+  <Grid>
+    <Row>
+      <Column sm={1} md={4} lg={8}>
+        <DemoContent>sm: 1/4, md: 1/2, lg: 2/3</DemoContent>
+      </Column>
+      <Column sm={1} md={2} lg={2}>
+        <DemoContent>sm: 1/4, md: 1/4, lg: 1/6</DemoContent>
+      </Column>
+      <Column sm={1} md={1} lg={1}>
+        <DemoContent>sm: 1/4, md: 1/8, lg: 1/12</DemoContent>
+      </Column>
+      <Column sm={1} md={1} lg={1}>
+        <DemoContent>sm: 1/4, md: 1/8, lg: 1/12</DemoContent>
+      </Column>
+    </Row>
+  </Grid>
+);
 
-export const offsets = () => (
-  <div style={{ backgroundColor: colors().bleed }}>
-    <Grid style={{ backgroundColor: colors().padding }}>
-      {Array.from({ length: 12 }).map((_, i) => {
-        const offset = 11 - i;
-        const span = 12 - offset;
-        return (
-          <Grid.Row key={i}>
-            <Grid.Col
-              className={`bx--offset-${breakpoint()}-${offset} bx--col-${breakpoint()}-${span}`}
-              style={{
-                outline: '1px dashed ' + colors().dividers,
-                backgroundColor: colors().margin,
-              }}>
-              <div className="outside">
-                <div
-                  className="inside"
-                  style={{ backgroundColor: colors().cell }}>
-                  {span}
-                </div>
-              </div>
-            </Grid.Col>
-          </Grid.Row>
-        );
-      })}
-    </Grid>
-  </div>
+export const offset = () => (
+  <Grid>
+    <Row>
+      <Column smOffset={3} sm={1}>
+        <DemoContent>Offset 3</DemoContent>
+      </Column>
+      <Column smOffset={2} sm={2}>
+        <DemoContent>Offset 2</DemoContent>
+      </Column>
+      <Column smOffset={1} sm={3}>
+        <DemoContent>Offset 1</DemoContent>
+      </Column>
+      <Column smOffset={0} sm={4}>
+        <DemoContent>Offset 0</DemoContent>
+      </Column>
+    </Row>
+  </Grid>
+);
+
+export const condensed = () => (
+  <Grid condensed>
+    <Row>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+    </Row>
+  </Grid>
+);
+
+export const condensedColumns = () => (
+  <Grid>
+    <Row>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+    </Row>
+    <Row condensed>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+    </Row>
+    <Row>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+    </Row>
+  </Grid>
+);
+
+export const fullWidth = () => (
+  <Grid fullWidth>
+    <Row>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+    </Row>
+  </Grid>
 );
