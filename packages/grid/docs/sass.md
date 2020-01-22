@@ -123,11 +123,17 @@ Define the width of the column for a given span and column count.
 
 ```scss
 @mixin carbon--make-col($span, $columns) {
-  flex: 0 0 percentage($span / $columns);
-  // Add a `max-width` to ensure content within each column does not blow out
-  // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
-  // do not appear to require this.
-  max-width: percentage($span / $columns);
+  @if $span == 0 {
+    display: none;
+  } @else {
+    // Explicitly include `display: block` to override
+    display: block;
+    flex: 0 0 percentage($span / $columns);
+    // Add a `max-width` to ensure content within each column does not blow out
+    // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
+    // do not appear to require this.
+    max-width: percentage($span / $columns);
+  }
 }
 ```
 
