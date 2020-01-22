@@ -439,6 +439,14 @@ $list-box-menu-width: rem(300px);
     }
   }
 
+  .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item {
+    height: rem(48px);
+  }
+
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover {
     background-color: transparent;
   }
@@ -502,6 +510,18 @@ $list-box-menu-width: rem(300px);
       color: $text-01;
       border-color: transparent;
     }
+  }
+
+  .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(15px);
+    padding-bottom: rem(15px);
+    height: rem(48px);
   }
 
   .#{$prefix}--list-box--disabled

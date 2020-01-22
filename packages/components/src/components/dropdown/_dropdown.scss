@@ -239,6 +239,18 @@
     }
   }
 
+  .#{$prefix}--dropdown--sm .#{$prefix}--dropdown-link {
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--dropdown--xl .#{$prefix}--dropdown-link {
+    padding-top: rem(15px);
+    padding-bottom: rem(15px);
+    height: rem(48px);
+  }
+
   .#{$prefix}--dropdown--focused,
   .#{$prefix}--dropdown-link:focus {
     @include focus-outline('outline');
