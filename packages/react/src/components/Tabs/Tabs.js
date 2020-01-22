@@ -180,10 +180,10 @@ export default class Tabs extends React.Component {
       }
 
       if (window.matchMedia('(min-width: 42rem)').matches) {
-        evt.preventDefault();
         const nextIndex = this.getNextIndex(index, this.getDirection(evt));
         const tab = this.getTabAt(nextIndex);
-        if (tab) {
+        if (tab && matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
+          evt.preventDefault();
           this.selectTabAt(nextIndex, onSelectionChange);
           if (tab.tabAnchor) {
             tab.tabAnchor.focus();
