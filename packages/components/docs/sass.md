@@ -151,6 +151,7 @@
   - [✅text-03 [variable]](#text-03-variable)
   - [✅text-04 [variable]](#text-04-variable)
   - [✅text-05 [variable]](#text-05-variable)
+  - [✅text-error [variable]](#text-error-variable)
   - [✅icon-01 [variable]](#icon-01-variable)
   - [✅icon-02 [variable]](#icon-02-variable)
   - [✅icon-03 [variable]](#icon-03-variable)
@@ -2161,6 +2162,7 @@ Generate a media query up to the width of the given breakpoint name
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [accordion [mixin]](#accordion-mixin)
 
 ### ✅carbon--breakpoint-down [mixin]
 
@@ -2205,7 +2207,6 @@ Generate a media query for the maximum width of the given styles
   - [carbon--is-smallest-breakpoint [function]](#carbon--is-smallest-breakpoint-function)
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
-  - [accordion [mixin]](#accordion-mixin)
   - [carbon-header [mixin]](#carbon-header-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
@@ -4104,6 +4105,7 @@ Define theme variables from a map of tokens
   $text-03: map-get($theme, 'text-03') !global;
   $text-04: map-get($theme, 'text-04') !global;
   $text-05: map-get($theme, 'text-05') !global;
+  $text-error: map-get($theme, 'text-error') !global;
   $icon-01: map-get($theme, 'icon-01') !global;
   $icon-02: map-get($theme, 'icon-02') !global;
   $icon-03: map-get($theme, 'icon-03') !global;
@@ -4276,6 +4278,10 @@ Define theme variables from a map of tokens
     $text-05: var(
       --#{$custom-property-prefix}-text-05,
       map-get($theme, 'text-05')
+    ) !global;
+    $text-error: var(
+      --#{$custom-property-prefix}-text-error,
+      map-get($theme, 'text-error')
     ) !global;
     $icon-01: var(
       --#{$custom-property-prefix}-icon-01,
@@ -4668,6 +4674,10 @@ Define theme variables from a map of tokens
 
     @if should-emit($theme, $carbon--theme, 'text-05', $emit-difference) {
       @include custom-property('text-05', map-get($theme, 'text-05'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'text-error', $emit-difference) {
+      @include custom-property('text-error', map-get($theme, 'text-error'));
     }
 
     @if should-emit($theme, $carbon--theme, 'icon-01', $emit-difference) {
@@ -5444,6 +5454,7 @@ Define theme variables from a map of tokens
   - [text-03 [variable]](#text-03-variable)
   - [text-04 [variable]](#text-04-variable)
   - [text-05 [variable]](#text-05-variable)
+  - [text-error [variable]](#text-error-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [icon-03 [variable]](#icon-03-variable)
@@ -5605,6 +5616,7 @@ $carbon--theme--g90: map-merge(
     text-02: #c6c6c6,
     text-03: #6f6f6f,
     text-05: #8d8d8d,
+    text-error: #ffb3b8,
     icon-01: #f4f4f4,
     icon-02: #c6c6c6,
     link-01: #78a9ff,
@@ -5613,7 +5625,7 @@ $carbon--theme--g90: map-merge(
     field-02: #525252,
     inverse-01: #161616,
     inverse-02: #f4f4f4,
-    support-01: #fa4d56,
+    support-01: #ff8389,
     support-02: #42be65,
     support-04: #4589ff,
     inverse-support-01: #da1e28,
@@ -5676,6 +5688,7 @@ $carbon--theme--g100: map-merge(
     text-02: #c6c6c6,
     text-03: #6f6f6f,
     text-05: #8d8d8d,
+    text-error: #ff8389,
     icon-01: #f4f4f4,
     icon-02: #c6c6c6,
     link-01: #78a9ff,
@@ -5749,6 +5762,7 @@ $carbon--theme--v9: map-merge(
     text-02: #5a6872,
     text-03: #cdd1d4,
     text-05: #5a6872,
+    text-error: #e0182d,
     icon-01: #3d70b2,
     icon-02: #5a6872,
     link-01: #3d70b2,
@@ -5826,6 +5840,7 @@ $carbon--theme: (
   text-03: if(global-variable-exists('text-03'), $text-03, map-get($carbon--theme--white, 'text-03')),
   text-04: if(global-variable-exists('text-04'), $text-04, map-get($carbon--theme--white, 'text-04')),
   text-05: if(global-variable-exists('text-05'), $text-05, map-get($carbon--theme--white, 'text-05')),
+  text-error: if(global-variable-exists('text-error'), $text-error, map-get($carbon--theme--white, 'text-error')),
   icon-01: if(global-variable-exists('icon-01'), $icon-01, map-get($carbon--theme--white, 'icon-01')),
   icon-02: if(global-variable-exists('icon-02'), $icon-02, map-get($carbon--theme--white, 'icon-02')),
   icon-03: if(global-variable-exists('icon-03'), $icon-03, map-get($carbon--theme--white, 'icon-03')),
@@ -6366,7 +6381,6 @@ $text-02: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
@@ -6462,6 +6476,29 @@ $text-05: if(
   - [form [mixin]](#form-mixin)
   - [search [mixin]](#search-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
+
+### ✅text-error [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$text-error: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'text-error'
+    ),
+  map-get($carbon--theme, 'text-error'),
+  #da1e28
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -12617,10 +12654,15 @@ Accordion styles
     // Transition property for when the accordion closes
     transition: padding motion(standard, productive) $duration--fast-02;
     padding-left: $carbon--spacing-05;
-    padding-right: 25%;
+    padding-right: $carbon--spacing-05;
 
-    @include carbon--breakpoint-down('md') {
+    // Custom breakpoints based on issue #4993
+    @include carbon--breakpoint-up(480px) {
       padding-right: $carbon--spacing-09;
+    }
+
+    @include carbon--breakpoint-up(640px) {
+      padding-right: 25%;
     }
 
     p {
@@ -12717,7 +12759,7 @@ Accordion styles
 
 - **Group**: [accordion](#accordion)
 - **Requires**:
-  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
+  - [carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
   - [prefix [variable]](#prefix-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -13922,6 +13964,8 @@ Combo box styles
 
   .#{$prefix}--combo-box .#{$prefix}--list-box__field,
   .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field {
     padding: 0;
   }
@@ -16119,9 +16163,9 @@ Date picker styles
     }
   }
 
-  .#{$prefix}--date-picker__days .nextMonthDay,
-  .#{$prefix}--date-picker__days .prevMonthDay {
-    color: $text-02;
+  .#{$prefix}--date-picker__day.nextMonthDay,
+  .#{$prefix}--date-picker__day.prevMonthDay {
+    color: $text-05;
   }
 
   .#{$prefix}--date-picker__day.today,
@@ -16155,11 +16199,10 @@ Date picker styles
     }
   }
 
-  .#{$prefix}--date-picker__day.disabled,
-  .flatpickr-day.disabled {
+  .#{$prefix}--date-picker__day.flatpickr-day.flatpickr-disabled {
     cursor: not-allowed;
     opacity: 0.5;
-    color: $ui-05;
+    color: $disabled-02;
 
     &:hover {
       background: transparent;
@@ -16313,9 +16356,8 @@ Date picker styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
-  - [text-02 [variable]](#text-02-variable)
-  - [ui-05 [variable]](#ui-05-variable)
   - [text-04 [variable]](#text-04-variable)
+  - [ui-05 [variable]](#ui-05-variable)
 
 ## dropdown
 
@@ -16501,6 +16543,7 @@ Dropdown styles
       background-color $duration--fast-01 motion(standard, productive);
     opacity: 0;
     visibility: inherit;
+    position: relative;
 
     &:hover {
       background-color: $hover-ui;
@@ -16718,6 +16761,10 @@ Dropdown styles
 
     + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
       border-top-color: transparent;
+    }
+
+    .#{$prefix}--list-box__menu-item__selected-icon {
+      display: block;
     }
   }
 
@@ -17599,10 +17646,6 @@ List box styles
     transform: translateY(-50%);
   }
 
-  .#{$prefix}--list-box--inline .#{$prefix}--list-box__invalid-icon {
-    top: $carbon--spacing-03;
-  }
-
   .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
     border-bottom: 0;
     padding-right: carbon--mini-units(8);
@@ -17963,6 +18006,7 @@ List box styles
     line-height: rem(16px);
     padding: rem(11px) 0;
     margin: 0 $carbon--spacing-05;
+    padding-right: rem(32px); // 40px - `$carbon--spacing-05`
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
     border-top-color: $ui-03;
@@ -17994,7 +18038,7 @@ List box styles
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__menu-item__option {
-    margin: 0 $carbon--spacing-03;
+    margin: 0 rem(32px) 0 $carbon--spacing-03;
 
     &:focus {
       margin: 0;
@@ -18024,16 +18068,32 @@ List box styles
 
   .#{$prefix}--list-box__menu-item--active {
     color: $text-01;
+    background-color: $selected-ui;
     border-bottom-color: $selected-ui;
-
-    &:hover {
-      background-color: $selected-ui;
-    }
   }
 
   .#{$prefix}--list-box__menu-item--active
     .#{$prefix}--list-box__menu-item__option {
     color: $text-01;
+  }
+
+  .#{$prefix}--list-box__menu-item__selected-icon {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: rem(16px);
+    transform: translateY(-50%);
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__menu-item__selected-icon {
+    right: rem(8px);
+  }
+
+  .#{$prefix}--list-box__menu-item--active
+    .#{$prefix}--list-box__menu-item__selected-icon {
+    display: block;
   }
 
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {
@@ -18072,10 +18132,10 @@ List box styles
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
-  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [ui-background [variable]](#ui-background-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
@@ -18349,6 +18409,9 @@ Modal styles
     width: 100%;
     height: 100%;
     max-height: 100%;
+    // make modal edge visible on high contrast themes (#3880)
+    outline: 3px solid transparent;
+    outline-offset: -3px;
     overflow: hidden;
     transform-origin: top center;
     transform: translate3d(0, -24px, 0);
@@ -18363,6 +18426,10 @@ Modal styles
       .#{$prefix}--modal-content,
       .#{$prefix}--modal-content__regular-content {
         padding-right: 20%;
+      }
+
+      .#{$prefix}--modal-content--with-form {
+        padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
       }
     }
 
@@ -18389,10 +18456,6 @@ Modal styles
 
   .#{$prefix}--modal-content--with-form {
     padding-right: $spacing-05;
-
-    @include carbon--breakpoint(md) {
-      padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
-    }
   }
 
   .#{$prefix}--modal-container--xs {
@@ -22000,9 +22063,11 @@ Tag styles
 
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     padding: 0 $carbon--spacing-03;
     height: 1.5rem;
     max-width: 100%; // restricts size of contained elements
+    min-width: rem(32px); // ensures tag stays pill shaped;
     margin: $carbon--spacing-02;
     border-radius: rem(15px);
 
@@ -24245,7 +24310,7 @@ UI shell header
     margin: 0;
   }
 
-  a.#{$prefix}--header__menu-item[role='menuitem'] {
+  a.#{$prefix}--header__menu-item {
     display: flex;
     align-items: center;
     color: $shell-header-text-02;
@@ -24266,26 +24331,26 @@ UI shell header
         $duration--fast-02, color $duration--fast-02;
   }
 
-  a.#{$prefix}--header__menu-item[role='menuitem']:hover {
+  a.#{$prefix}--header__menu-item:hover {
     background-color: $shell-header-bg-02;
     color: $shell-header-text-01;
   }
 
   .#{$prefix}--header__action:active,
-  a.#{$prefix}--header__menu-item[role='menuitem']:active {
+  a.#{$prefix}--header__menu-item:active {
     background-color: $shell-header-bg-03;
     color: $shell-header-text-01;
   }
 
-  a.#{$prefix}--header__menu-item[role='menuitem']:focus {
+  a.#{$prefix}--header__menu-item:focus {
     border-color: $shell-header-focus;
     color: $shell-header-text-01;
     outline: none;
   }
 
-  a.#{$prefix}--header__menu-item[role='menuitem']:hover > svg,
-  a.#{$prefix}--header__menu-item[role='menuitem']:active > svg,
-  a.#{$prefix}--header__menu-item[role='menuitem']:focus > svg {
+  a.#{$prefix}--header__menu-item:hover > svg,
+  a.#{$prefix}--header__menu-item:active > svg,
+  a.#{$prefix}--header__menu-item:focus > svg {
     fill: $shell-header-icon-01;
   }
 
@@ -24293,11 +24358,11 @@ UI shell header
     position: relative;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-haspopup='true'] {
+  .#{$prefix}--header__menu-title[aria-haspopup='true'] {
     position: relative;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true'] {
+  .#{$prefix}--header__menu-title[aria-expanded='true'] {
     background-color: $shell-header-bg-06;
     color: $shell-header-focus;
     // Note: needs to be higher than menu. Adding 1 here instead of moving to
@@ -24305,7 +24370,7 @@ UI shell header
     z-index: #{z('header') + 1};
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+  .#{$prefix}--header__menu-title[aria-expanded='true']
     > .#{$prefix}--header__menu-arrow {
     transform: rotate(180deg);
   }
@@ -24317,7 +24382,7 @@ UI shell header
     margin: 0;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+  .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     position: absolute;
     bottom: 0;
@@ -24331,24 +24396,23 @@ UI shell header
     z-index: z('header');
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+  .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu
     .#{$prefix}--header__menu-item:hover {
     background-color: $shell-header-bg-04;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+  .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu
     .#{$prefix}--header__menu-item:active {
     background-color: $shell-header-bg-03;
   }
 
-  .#{$prefix}--header__menu .#{$prefix}--header__menu-item[role='menuitem'] {
+  .#{$prefix}--header__menu .#{$prefix}--header__menu-item {
     height: mini-units(6);
   }
 
-  .#{$prefix}--header__menu
-    .#{$prefix}--header__menu-item[role='menuitem']:hover {
+  .#{$prefix}--header__menu .#{$prefix}--header__menu-item:hover {
     background-color: $shell-header-bg-06;
     color: $shell-header-text-01;
   }
@@ -25191,9 +25255,9 @@ UI shell side nav
     > .#{$prefix}--side-nav__link:hover,
   .#{$prefix}--side-nav__menu[role='menu']
     a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem']:hover,
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
   .#{$prefix}--side-nav
-    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']:hover {
+    .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
     // TODO: sync color
     background-color: $shell-side-nav-bg-04;
     color: $ibm-color__gray-100;
@@ -25335,9 +25399,9 @@ UI shell side nav
   // Side-nav > Link
   //----------------------------------------------------------------------------
   a.#{$prefix}--side-nav__link,
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem'],
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item,
   .#{$prefix}--side-nav
-    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     @include focus-outline('reset');
     @include type-style('productive-heading-01');
@@ -25359,7 +25423,7 @@ UI shell side nav
 
   a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text,
   .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item[role='menuitem']
+    a.#{$prefix}--header__menu-item
     .#{$prefix}--text-truncate-end {
     @include text-overflow();
     color: $shell-side-nav-text-01;
@@ -25370,7 +25434,7 @@ UI shell side nav
   }
 
   a.#{$prefix}--side-nav__link:focus,
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem']:focus {
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:focus {
     @include focus-outline('outline');
   }
 
@@ -25480,7 +25544,7 @@ UI shell side nav
   }
 
   //header menu items overrides
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem'] {
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item {
     color: $shell-side-nav-text-01;
     white-space: nowrap;
     justify-content: space-between;
@@ -25491,7 +25555,7 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav
-    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     bottom: inherit;
     width: 100%;
@@ -25504,12 +25568,12 @@ UI shell side nav
       width: 100%;
     }
 
-    & a.#{$prefix}--header__menu-item[role='menuitem'] {
+    a.#{$prefix}--header__menu-item {
       padding-left: 4.25rem;
       font-weight: 400;
     }
 
-    & a.#{$prefix}--header__menu-item[role='menuitem']:hover {
+    a.#{$prefix}--header__menu-item:hover {
       background-color: $shell-side-nav-bg-04;
       color: $ibm-color__gray-100;
     }
@@ -25517,15 +25581,15 @@ UI shell side nav
 
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu
-    a.#{$prefix}--header__menu-item[role='menuitem'] {
+    a.#{$prefix}--header__menu-item {
     height: inherit;
   }
 
   .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item[role='menuitem']:hover
+    a.#{$prefix}--header__menu-item:hover
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item[role='menuitem']:focus
+    a.#{$prefix}--header__menu-item:focus
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
     fill: $shell-side-nav-text-01;
