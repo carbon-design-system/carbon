@@ -25,13 +25,13 @@
   .#{$prefix}--modal {
     position: fixed;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
     z-index: z('modal');
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100vw;
+    height: 100vh;
     content: '';
     background-color: transparent;
     opacity: 0;
@@ -56,7 +56,8 @@
     .#{$prefix}--select-input,
     .#{$prefix}--dropdown,
     .#{$prefix}--dropdown-list,
-    .#{$prefix}--number input[type='number'] {
+    .#{$prefix}--number input[type='number'],
+    .#{$prefix}--date-picker__input {
       background-color: $field-02;
     }
   }

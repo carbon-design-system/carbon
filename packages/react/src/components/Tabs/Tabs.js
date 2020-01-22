@@ -36,6 +36,7 @@ export default class Tabs extends React.Component {
 
     /**
      * Specify whether the Tab content is hidden
+     */
     hidden: PropTypes.bool,
 
     /**
