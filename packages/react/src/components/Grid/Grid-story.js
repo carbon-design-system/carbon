@@ -56,17 +56,17 @@ export const responsiveGrid = () => (
 export const offset = () => (
   <Grid>
     <Row>
-      <Column smOffset={3} sm={1}>
-        <DemoContent>Offset 3</DemoContent>
+      <Column sm={{ span: 1, offset: 3 }}>
+        <DemoContent>Small Screen Offset 3</DemoContent>
       </Column>
-      <Column smOffset={2} sm={2}>
-        <DemoContent>Offset 2</DemoContent>
+      <Column sm={{ span: 2, offset: 2 }}>
+        <DemoContent>Small Screen Offset 2</DemoContent>
       </Column>
-      <Column smOffset={1} sm={3}>
-        <DemoContent>Offset 1</DemoContent>
+      <Column sm={{ span: 3, offset: 1 }}>
+        <DemoContent>Small Screen Offset 1</DemoContent>
       </Column>
-      <Column smOffset={0} sm={4}>
-        <DemoContent>Offset 0</DemoContent>
+      <Column sm={{ span: 4, offset: 0 }}>
+        <DemoContent>Small Screen Offset 0</DemoContent>
       </Column>
     </Row>
   </Grid>
