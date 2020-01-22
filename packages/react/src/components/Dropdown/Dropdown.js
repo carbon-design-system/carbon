@@ -10,7 +10,7 @@ import Downshift from 'downshift';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from 'carbon-components';
-import { WarningFilled16 } from '@carbon/icons-react';
+import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { match, keys } from '../../internal/keyboard';
 
@@ -282,11 +282,7 @@ export default class Dropdown extends React.Component {
                     id={fieldLabelId}
                     className={`${prefix}--list-box__label`}
                     {...getLabelProps()}>
-                    {selectedItem
-                      ? itemToElement
-                        ? itemToElement(selectedItem)
-                        : itemToString(selectedItem)
-                      : label}
+                    {selectedItem ? itemToString(selectedItem) : label}
                   </span>
                   <ListBox.MenuIcon
                     isOpen={isOpen}
@@ -304,11 +300,17 @@ export default class Dropdown extends React.Component {
                           isHighlighted={
                             highlightedIndex === index || selectedItem === item
                           }
+                          title={itemToElement ? item.text : itemToString(item)}
                           {...itemProps}>
                           {itemToElement ? (
                             <ItemToElement key={itemProps.id} {...item} />
                           ) : (
                             itemToString(item)
+                          )}
+                          {selectedItem === item && (
+                            <Checkmark16
+                              className={`${prefix}--list-box__menu-item__selected-icon`}
+                            />
                           )}
                         </ListBox.MenuItem>
                       );

@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@carbon/bundler": "^10.5.0",
-    "rimraf": "^2.6.3"
+    "rimraf": "^3.0.0"
   },
   "eyeglass": {
     "exports": false,

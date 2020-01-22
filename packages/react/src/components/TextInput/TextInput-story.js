@@ -19,6 +19,12 @@ const types = {
   'For password (password)': 'password',
 };
 
+const sizes = {
+  Large: 'large',
+  Default: '',
+  Small: 'small',
+};
+
 function ControlledPasswordInputApp(props) {
   const [type, setType] = useState('password');
   const togglePasswordVisibility = () => {
@@ -45,6 +51,7 @@ const props = {
       'Default value (defaultValue)',
       'This is not a default value'
     ),
+    size: select('Field size (size)', sizes, '') || undefined,
     labelText: text('Label text (labelText)', 'Text Input label'),
     placeholder: text('Placeholder text (placeholder)', 'Placeholder text'),
     light: boolean('Light variant (light)', false),

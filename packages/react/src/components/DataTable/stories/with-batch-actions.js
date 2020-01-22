@@ -59,24 +59,31 @@ export default props => (
         <TableToolbar>
           <TableBatchActions {...getBatchActionProps()}>
             <TableBatchAction
+              tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
               renderIcon={Delete}
               onClick={batchActionClick(selectedRows)}>
               Delete
             </TableBatchAction>
             <TableBatchAction
+              tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
               renderIcon={Save}
               onClick={batchActionClick(selectedRows)}>
               Save
             </TableBatchAction>
             <TableBatchAction
+              tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
               renderIcon={Download}
               onClick={batchActionClick(selectedRows)}>
               Download
             </TableBatchAction>
           </TableBatchActions>
           <TableToolbarContent>
-            <TableToolbarSearch onChange={onInputChange} />
-            <TableToolbarMenu>
+            <TableToolbarSearch
+              tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}
+              onChange={onInputChange}
+            />
+            <TableToolbarMenu
+              tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}>
               <TableToolbarAction primaryFocus onClick={() => alert('Alert 1')}>
                 Action 1
               </TableToolbarAction>
@@ -87,7 +94,11 @@ export default props => (
                 Action 3
               </TableToolbarAction>
             </TableToolbarMenu>
-            <Button onClick={action('Add new row')} size="small" kind="primary">
+            <Button
+              tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}
+              onClick={action('Add new row')}
+              size="small"
+              kind="primary">
               Add new
             </Button>
           </TableToolbarContent>

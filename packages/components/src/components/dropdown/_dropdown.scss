@@ -68,6 +68,7 @@
 
   .#{$prefix}--dropdown--xl {
     height: rem(48px);
+    max-height: rem(48px);
   }
 
   .#{$prefix}--dropdown--xl .#{$prefix}--dropdown__arrow {
@@ -76,6 +77,7 @@
 
   .#{$prefix}--dropdown--sm {
     height: rem(32px);
+    max-height: rem(32px);
   }
 
   .#{$prefix}--dropdown--sm .#{$prefix}--dropdown__arrow {
@@ -192,6 +194,7 @@
       background-color $duration--fast-01 motion(standard, productive);
     opacity: 0;
     visibility: inherit;
+    position: relative;
 
     &:hover {
       background-color: $hover-ui;
@@ -409,6 +412,10 @@
 
     + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
       border-top-color: transparent;
+    }
+
+    .#{$prefix}--list-box__menu-item__selected-icon {
+      display: block;
     }
   }
 

@@ -32,7 +32,9 @@ export default function InlineLoading({
   const loadingClasses = classNames(`${prefix}--inline-loading`, className);
   const getLoading = () => {
     if (status === 'error') {
-      return <ErrorFilled16 className={`${prefix}--inline-loading--error`} />;
+      return (
+        <ErrorFilled16 className={`${prefix}--inline-loading--error`} />
+      );
     }
     if (status === 'warning') {
       return (

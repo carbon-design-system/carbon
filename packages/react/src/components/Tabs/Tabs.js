@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { ChevronDownGlyph } from '@carbon/icons-react';
+import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import { keys, match, matches } from '../../internal/keyboard';
 
@@ -36,6 +36,7 @@ export default class Tabs extends React.Component {
 
     /**
      * Specify whether the Tab content is hidden
+     */
     hidden: PropTypes.bool,
 
     /**
@@ -179,10 +180,10 @@ export default class Tabs extends React.Component {
       }
 
       if (window.matchMedia('(min-width: 42rem)').matches) {
-        evt.preventDefault();
         const nextIndex = this.getNextIndex(index, this.getDirection(evt));
         const tab = this.getTabAt(nextIndex);
-        if (tab) {
+        if (tab && matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
+          evt.preventDefault();
           this.selectTabAt(nextIndex, onSelectionChange);
           if (tab.tabAnchor) {
             tab.tabAnchor.focus();
@@ -252,14 +253,21 @@ export default class Tabs extends React.Component {
     });
 
     const tabContentWithProps = React.Children.map(tabsWithProps, tab => {
-      const { children, selected, renderContent: TabContent } = tab.props;
+      const {
+        id: tabId,
+        children,
+        selected,
+        renderContent: TabContent,
+      } = tab.props;
 
       return (
         <TabContent
+          id={tabId && `${tabId}__panel`}
           className={tabContentClassName}
           aria-hidden={!selected}
           hidden={!selected}
-          selected={selected}>
+          selected={selected}
+          aria-labelledby={tabId}>
           {children}
         </TabContent>
       );
@@ -294,9 +302,9 @@ export default class Tabs extends React.Component {
               onClick={this.handleDropdownClick}>
               {selectedLabel}
             </a>
-            <ChevronDownGlyph aria-hidden="true">
+            <ChevronDown16 aria-hidden="true">
               {iconDescription && <title>{iconDescription}</title>}
-            </ChevronDownGlyph>
+            </ChevronDown16>
           </div>
           <ul role="tablist" className={classes.tablist}>
             {tabsWithProps}
