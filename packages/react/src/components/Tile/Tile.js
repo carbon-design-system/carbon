@@ -334,9 +334,9 @@ export class SelectableTile extends Component {
           id={id}
           className={`${prefix}--tile-input`}
           value={value}
+          onChange={this.handleOnChange}
           type="checkbox"
           name={name}
-          onChange={this.handleOnChange}
           title={title}
           checked={this.state.selected}
         />
