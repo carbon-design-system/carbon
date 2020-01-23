@@ -290,6 +290,11 @@ export class SelectableTile extends Component {
     }
   };
 
+  handleOnChange = event => {
+    this.setState({ selected: event.target.checked });
+    this.props.onChange(event);
+  };
+
   render() {
     const {
       children,
@@ -331,6 +336,7 @@ export class SelectableTile extends Component {
           value={value}
           type="checkbox"
           name={name}
+          onChange={this.handleOnChange}
           title={title}
           checked={this.state.selected}
           readOnly
