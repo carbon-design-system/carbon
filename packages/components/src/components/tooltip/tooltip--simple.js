@@ -13,13 +13,13 @@ import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-export default class TooltipDefinition extends mixin(
+export default class TooltipSimple extends mixin(
   createComponent,
   initComponentBySearch,
   handles
 ) {
   /**
-   * Definition Tooltip.
+   * Simple Tooltip.
    * @extends CreateComponent
    * @extends InitComponentBySearch
    * @extends Handles
@@ -71,23 +71,23 @@ export default class TooltipDefinition extends mixin(
    * The component options.
    *
    * If `options` is specified in the constructor,
-   * {@linkcode TooltipDefinition.create .create()},
-   * or {@linkcode TooltipDefinition.init .init()},
+   * {@linkcode TooltipSimple.create .create()},
+   * or {@linkcode TooltipSimple.init .init()},
    * properties in this object are overriden for the instance being
-   * created and how {@linkcode TooltipDefinition.init .init()} works.
-   * @property {string} selectorInit The CSS selector to find definition tooltip UIs.
+   * created and how {@linkcode TooltipSimple.init .init()} works.
+   * @property {string} selectorInit The CSS selector to find simple tooltip UIs.
    */
   static get options() {
     const { prefix } = settings;
     return {
-      selectorInit: '[data-tooltip-definition]',
+      selectorInit: '[data-tooltip-definition],[data-tooltip-icon]',
       selectorTriggerButton: `.${prefix}--tooltip__trigger.${prefix}--tooltip--a11y`,
       classTooltipHidden: `${prefix}--tooltip--hidden`,
     };
   }
 
   /**
-   * The map associating DOM element and definition tooltip UI instance.
+   * The map associating DOM element and simple tooltip UI instance.
    * @type {WeakMap}
    */
   static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
