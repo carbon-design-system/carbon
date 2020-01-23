@@ -12,7 +12,6 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layout';
-@import '../../globals/scss/layer';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 
@@ -25,13 +24,13 @@
   .#{$prefix}--modal {
     position: fixed;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
     z-index: z('modal');
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100vw;
+    height: 100vh;
     content: '';
     background-color: transparent;
     opacity: 0;
@@ -56,7 +55,8 @@
     .#{$prefix}--select-input,
     .#{$prefix}--dropdown,
     .#{$prefix}--dropdown-list,
-    .#{$prefix}--number input[type='number'] {
+    .#{$prefix}--number input[type='number'],
+    .#{$prefix}--date-picker__input {
       background-color: $field-02;
     }
   }
@@ -75,6 +75,9 @@
     width: 100%;
     height: 100%;
     max-height: 100%;
+    // make modal edge visible on high contrast themes (#3880)
+    outline: 3px solid transparent;
+    outline-offset: -3px;
     overflow: hidden;
     transform-origin: top center;
     transform: translate3d(0, -24px, 0);
@@ -89,6 +92,10 @@
       .#{$prefix}--modal-content,
       .#{$prefix}--modal-content__regular-content {
         padding-right: 20%;
+      }
+
+      .#{$prefix}--modal-content--with-form {
+        padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
       }
     }
 
@@ -115,10 +122,6 @@
 
   .#{$prefix}--modal-content--with-form {
     padding-right: $spacing-05;
-
-    @include carbon--breakpoint(md) {
-      padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
-    }
   }
 
   .#{$prefix}--modal-container--xs {

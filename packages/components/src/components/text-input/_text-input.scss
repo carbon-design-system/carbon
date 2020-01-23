@@ -44,6 +44,14 @@
     }
   }
 
+  .#{$prefix}--text-input--large {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--text-input--small {
+    height: rem(32px);
+  }
+
   .#{$prefix}--password-input {
     padding-right: $carbon--spacing-08;
   }

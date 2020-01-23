@@ -43,27 +43,18 @@
 
 /// Adds placeholder text color
 /// @access public
-/// @param {String} $size ['small'] - Size of box shadow
 /// @example @include placeholder-colors;
 /// @group global-helpers
 @mixin placeholder-colors {
   color: $text-03;
 }
 
-/// Adds small or large box shadow
+/// Adds box shadow
 /// @access public
-/// @param {String} $size ['small'] - size of box shadow
-/// @example @include box-shadow(); @include box-shadow('large');
+/// @example @include box-shadow;
 /// @group global-helpers
-@mixin box-shadow($size: 'small') {
-  // Large - For dropdowns
-  @if ($size == 'large') {
-    box-shadow: 6px 6px 6px 0 $box-shadow;
-  }
-
-  @if ($size == 'small') {
-    box-shadow: 0px 3px 3px 0 $box-shadow;
-  }
+@mixin box-shadow {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 /// Adds outline styles depending on specific type

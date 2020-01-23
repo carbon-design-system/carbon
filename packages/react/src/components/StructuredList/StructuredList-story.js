@@ -70,7 +70,7 @@ storiesOf('StructuredList', module)
     () => {
       const structuredListBodyRowGenerator = numRows => {
         return Array.apply(null, Array(numRows)).map((n, i) => (
-          <StructuredListRow label key={`row-${i}`} htmlFor={`row-${i}`}>
+          <StructuredListRow label key={`row-${i}`}>
             <StructuredListCell>Row {i}</StructuredListCell>
             <StructuredListCell>Row {i}</StructuredListCell>
             <StructuredListCell>
