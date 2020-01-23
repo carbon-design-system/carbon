@@ -39,13 +39,13 @@ const TooltipIcon = ({
     }
   );
   const handleFocus = () => setAllowTooltipVisibility(true);
-  const handleEscKeyDown = event => {
-    if (matches(event, [keys.Escape])) {
-      setAllowTooltipVisibility(false);
-    }
-  };
   const handleMouseEnter = () => setAllowTooltipVisibility(true);
   useEffect(() => {
+    const handleEscKeyDown = event => {
+      if (matches(event, [keys.Escape])) {
+        setAllowTooltipVisibility(false);
+      }
+    };
     document.addEventListener('keydown', handleEscKeyDown);
     return () => document.removeEventListener('keydown', handleEscKeyDown);
   }, []);
