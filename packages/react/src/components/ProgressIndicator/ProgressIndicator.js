@@ -16,6 +16,17 @@ const { prefix } = settings;
 
 const defaultRenderLabel = props => <p {...props} />;
 
+const defaultTranslations = {
+  'carbon.progress-step.complete': 'Complete',
+  'carbon.progress-step.incomplete': 'Incomplete',
+  'carbon.progress-step.current': 'Current',
+  'carbon.progress-step.invalid': 'Invalid',
+};
+
+function translateWithId(messageId) {
+  return defaultTranslations[messageId];
+}
+
 export function ProgressStep({
   label,
   description,
@@ -27,6 +38,7 @@ export function ProgressStep({
   disabled,
   onClick,
   renderLabel: ProgressStepLabel,
+  translateWithId: t,
 }) {
   const classes = classnames({
     [`${prefix}--progress-step`]: true,
@@ -70,18 +82,18 @@ export function ProgressStep({
     );
   };
 
-  let message = 'Incomplete';
+  let message = t('carbon.progress-step.incomplete');
 
   if (current) {
-    message = 'Current';
+    message = t('carbon.progress-step.current');
   }
 
   if (complete) {
-    message = 'Complete';
+    message = t('carbon.progress-step.complete');
   }
 
   if (invalid) {
-    message = 'Invalid';
+    message = t('carbon.progress-step.invalid');
   }
 
   return (
@@ -180,10 +192,17 @@ ProgressStep.propTypes = {
    * A callback called if the step is clicked or the enter key is pressed
    */
   onClick: PropTypes.func,
+
+  /**
+   * Optional method that takes in a message id and returns an
+   * internationalized string.
+   */
+  translateWithId: PropTypes.func,
 };
 
 ProgressStep.defaultProps = {
   renderLabel: defaultRenderLabel,
+  translateWithId,
 };
 
 export class ProgressIndicator extends Component {
