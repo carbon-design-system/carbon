@@ -58,7 +58,7 @@ const TabContentRenderedOnlyWhenSelected = ({
   ...other
 }) =>
   !selected ? (
-    <div {...other} ciassName="bx--visually-hidden" />
+    <div {...other} className={`${prefix}--visually-hidden`} />
   ) : (
     <div
       {...other}

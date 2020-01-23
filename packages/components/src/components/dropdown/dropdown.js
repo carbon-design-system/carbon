@@ -465,7 +465,7 @@ class Dropdown extends mixin(
    * Enum for navigating backward/forward.
    * @readonly
    * @member Dropdown.NAVIGATE
-   * @type {Object}
+   * @type {object}
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
    */
