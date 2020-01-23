@@ -151,7 +151,6 @@
   - [✅text-03 [variable]](#text-03-variable)
   - [✅text-04 [variable]](#text-04-variable)
   - [✅text-05 [variable]](#text-05-variable)
-  - [✅text-error [variable]](#text-error-variable)
   - [✅icon-01 [variable]](#icon-01-variable)
   - [✅icon-02 [variable]](#icon-02-variable)
   - [✅icon-03 [variable]](#icon-03-variable)
@@ -1080,25 +1079,18 @@ yet.
 
 ### ❌carbon--make-col [mixin]
 
-Define the width of the column for a given span and column count. A width of 0
-will hide the column entirely.
+Define the width of the column for a given span and column count.
 
 <details>
 <summary>Source code</summary>
 
 ```scss
 @mixin carbon--make-col($span, $columns) {
-  @if $span == 0 {
-    display: none;
-  } @else {
-    // Explicitly include `display: block` to override
-    display: block;
-    flex: 0 0 percentage($span / $columns);
-    // Add a `max-width` to ensure content within each column does not blow out
-    // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
-    // do not appear to require this.
-    max-width: percentage($span / $columns);
-  }
+  flex: 0 0 percentage($span / $columns);
+  // Add a `max-width` to ensure content within each column does not blow out
+  // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
+  // do not appear to require this.
+  max-width: percentage($span / $columns);
 }
 ```
 
@@ -1167,7 +1159,7 @@ Output the CSS required for all the columns in a given grid system.
     $columns: map-get(map-get($breakpoints, $breakpoint), columns);
 
     // Allow columns to stretch full width below their breakpoints
-    @for $i from 0 through $columns {
+    @for $i from 1 through $columns {
       .#{$prefix}--col#{$infix}-#{$i} {
         @include carbon--make-col-ready();
       }
@@ -1195,7 +1187,7 @@ Output the CSS required for all the columns in a given grid system.
         max-width: 100%;
       }
 
-      @for $i from 0 through $columns {
+      @for $i from 1 through $columns {
         .#{$prefix}--col#{$infix}-#{$i} {
           @include carbon--make-col($i, $columns);
         }
@@ -3740,7 +3732,6 @@ Define theme variables from a map of tokens
   $text-03: map-get($theme, 'text-03') !global;
   $text-04: map-get($theme, 'text-04') !global;
   $text-05: map-get($theme, 'text-05') !global;
-  $text-error: map-get($theme, 'text-error') !global;
   $icon-01: map-get($theme, 'icon-01') !global;
   $icon-02: map-get($theme, 'icon-02') !global;
   $icon-03: map-get($theme, 'icon-03') !global;
@@ -3913,10 +3904,6 @@ Define theme variables from a map of tokens
     $text-05: var(
       --#{$custom-property-prefix}-text-05,
       map-get($theme, 'text-05')
-    ) !global;
-    $text-error: var(
-      --#{$custom-property-prefix}-text-error,
-      map-get($theme, 'text-error')
     ) !global;
     $icon-01: var(
       --#{$custom-property-prefix}-icon-01,
@@ -4309,10 +4296,6 @@ Define theme variables from a map of tokens
 
     @if should-emit($theme, $carbon--theme, 'text-05', $emit-difference) {
       @include custom-property('text-05', map-get($theme, 'text-05'));
-    }
-
-    @if should-emit($theme, $carbon--theme, 'text-error', $emit-difference) {
-      @include custom-property('text-error', map-get($theme, 'text-error'));
     }
 
     @if should-emit($theme, $carbon--theme, 'icon-01', $emit-difference) {
@@ -5089,7 +5072,6 @@ Define theme variables from a map of tokens
   - [text-03 [variable]](#text-03-variable)
   - [text-04 [variable]](#text-04-variable)
   - [text-05 [variable]](#text-05-variable)
-  - [text-error [variable]](#text-error-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [icon-03 [variable]](#icon-03-variable)
@@ -5251,7 +5233,6 @@ $carbon--theme--g90: map-merge(
     text-02: #c6c6c6,
     text-03: #6f6f6f,
     text-05: #8d8d8d,
-    text-error: #ffb3b8,
     icon-01: #f4f4f4,
     icon-02: #c6c6c6,
     link-01: #78a9ff,
@@ -5260,7 +5241,7 @@ $carbon--theme--g90: map-merge(
     field-02: #525252,
     inverse-01: #161616,
     inverse-02: #f4f4f4,
-    support-01: #ff8389,
+    support-01: #fa4d56,
     support-02: #42be65,
     support-04: #4589ff,
     inverse-support-01: #da1e28,
@@ -5323,7 +5304,6 @@ $carbon--theme--g100: map-merge(
     text-02: #c6c6c6,
     text-03: #6f6f6f,
     text-05: #8d8d8d,
-    text-error: #ff8389,
     icon-01: #f4f4f4,
     icon-02: #c6c6c6,
     link-01: #78a9ff,
@@ -5397,7 +5377,6 @@ $carbon--theme--v9: map-merge(
     text-02: #5a6872,
     text-03: #cdd1d4,
     text-05: #5a6872,
-    text-error: #e0182d,
     icon-01: #3d70b2,
     icon-02: #5a6872,
     link-01: #3d70b2,
@@ -5475,7 +5454,6 @@ $carbon--theme: (
   text-03: if(global-variable-exists('text-03'), $text-03, map-get($carbon--theme--white, 'text-03')),
   text-04: if(global-variable-exists('text-04'), $text-04, map-get($carbon--theme--white, 'text-04')),
   text-05: if(global-variable-exists('text-05'), $text-05, map-get($carbon--theme--white, 'text-05')),
-  text-error: if(global-variable-exists('text-error'), $text-error, map-get($carbon--theme--white, 'text-error')),
   icon-01: if(global-variable-exists('icon-01'), $icon-01, map-get($carbon--theme--white, 'icon-01')),
   icon-02: if(global-variable-exists('icon-02'), $icon-02, map-get($carbon--theme--white, 'icon-02')),
   icon-03: if(global-variable-exists('icon-03'), $icon-03, map-get($carbon--theme--white, 'icon-03')),
@@ -5964,29 +5942,6 @@ $text-05: if(
     ),
   map-get($carbon--theme, 'text-05'),
   #6f6f6f
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `{undefined}`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅text-error [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$text-error: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'text-error'
-    ),
-  map-get($carbon--theme, 'text-error'),
-  #da1e28
 );
 ```
 

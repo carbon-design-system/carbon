@@ -151,7 +151,6 @@
   - [✅text-03 [variable]](#text-03-variable)
   - [✅text-04 [variable]](#text-04-variable)
   - [✅text-05 [variable]](#text-05-variable)
-  - [✅text-error [variable]](#text-error-variable)
   - [✅icon-01 [variable]](#icon-01-variable)
   - [✅icon-02 [variable]](#icon-02-variable)
   - [✅icon-03 [variable]](#icon-03-variable)
@@ -1236,25 +1235,18 @@ yet.
 
 ### ❌carbon--make-col [mixin]
 
-Define the width of the column for a given span and column count. A width of 0
-will hide the column entirely.
+Define the width of the column for a given span and column count.
 
 <details>
 <summary>Source code</summary>
 
 ```scss
 @mixin carbon--make-col($span, $columns) {
-  @if $span == 0 {
-    display: none;
-  } @else {
-    // Explicitly include `display: block` to override
-    display: block;
-    flex: 0 0 percentage($span / $columns);
-    // Add a `max-width` to ensure content within each column does not blow out
-    // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
-    // do not appear to require this.
-    max-width: percentage($span / $columns);
-  }
+  flex: 0 0 percentage($span / $columns);
+  // Add a `max-width` to ensure content within each column does not blow out
+  // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
+  // do not appear to require this.
+  max-width: percentage($span / $columns);
 }
 ```
 
@@ -1323,7 +1315,7 @@ Output the CSS required for all the columns in a given grid system.
     $columns: map-get(map-get($breakpoints, $breakpoint), columns);
 
     // Allow columns to stretch full width below their breakpoints
-    @for $i from 0 through $columns {
+    @for $i from 1 through $columns {
       .#{$prefix}--col#{$infix}-#{$i} {
         @include carbon--make-col-ready();
       }
@@ -1351,7 +1343,7 @@ Output the CSS required for all the columns in a given grid system.
         max-width: 100%;
       }
 
-      @for $i from 0 through $columns {
+      @for $i from 1 through $columns {
         .#{$prefix}--col#{$infix}-#{$i} {
           @include carbon--make-col($i, $columns);
         }
@@ -4112,7 +4104,6 @@ Define theme variables from a map of tokens
   $text-03: map-get($theme, 'text-03') !global;
   $text-04: map-get($theme, 'text-04') !global;
   $text-05: map-get($theme, 'text-05') !global;
-  $text-error: map-get($theme, 'text-error') !global;
   $icon-01: map-get($theme, 'icon-01') !global;
   $icon-02: map-get($theme, 'icon-02') !global;
   $icon-03: map-get($theme, 'icon-03') !global;
@@ -4285,10 +4276,6 @@ Define theme variables from a map of tokens
     $text-05: var(
       --#{$custom-property-prefix}-text-05,
       map-get($theme, 'text-05')
-    ) !global;
-    $text-error: var(
-      --#{$custom-property-prefix}-text-error,
-      map-get($theme, 'text-error')
     ) !global;
     $icon-01: var(
       --#{$custom-property-prefix}-icon-01,
@@ -4681,10 +4668,6 @@ Define theme variables from a map of tokens
 
     @if should-emit($theme, $carbon--theme, 'text-05', $emit-difference) {
       @include custom-property('text-05', map-get($theme, 'text-05'));
-    }
-
-    @if should-emit($theme, $carbon--theme, 'text-error', $emit-difference) {
-      @include custom-property('text-error', map-get($theme, 'text-error'));
     }
 
     @if should-emit($theme, $carbon--theme, 'icon-01', $emit-difference) {
@@ -5461,7 +5444,6 @@ Define theme variables from a map of tokens
   - [text-03 [variable]](#text-03-variable)
   - [text-04 [variable]](#text-04-variable)
   - [text-05 [variable]](#text-05-variable)
-  - [text-error [variable]](#text-error-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [icon-03 [variable]](#icon-03-variable)
@@ -5623,7 +5605,6 @@ $carbon--theme--g90: map-merge(
     text-02: #c6c6c6,
     text-03: #6f6f6f,
     text-05: #8d8d8d,
-    text-error: #ffb3b8,
     icon-01: #f4f4f4,
     icon-02: #c6c6c6,
     link-01: #78a9ff,
@@ -5632,7 +5613,7 @@ $carbon--theme--g90: map-merge(
     field-02: #525252,
     inverse-01: #161616,
     inverse-02: #f4f4f4,
-    support-01: #ff8389,
+    support-01: #fa4d56,
     support-02: #42be65,
     support-04: #4589ff,
     inverse-support-01: #da1e28,
@@ -5695,7 +5676,6 @@ $carbon--theme--g100: map-merge(
     text-02: #c6c6c6,
     text-03: #6f6f6f,
     text-05: #8d8d8d,
-    text-error: #ff8389,
     icon-01: #f4f4f4,
     icon-02: #c6c6c6,
     link-01: #78a9ff,
@@ -5769,7 +5749,6 @@ $carbon--theme--v9: map-merge(
     text-02: #5a6872,
     text-03: #cdd1d4,
     text-05: #5a6872,
-    text-error: #e0182d,
     icon-01: #3d70b2,
     icon-02: #5a6872,
     link-01: #3d70b2,
@@ -5847,7 +5826,6 @@ $carbon--theme: (
   text-03: if(global-variable-exists('text-03'), $text-03, map-get($carbon--theme--white, 'text-03')),
   text-04: if(global-variable-exists('text-04'), $text-04, map-get($carbon--theme--white, 'text-04')),
   text-05: if(global-variable-exists('text-05'), $text-05, map-get($carbon--theme--white, 'text-05')),
-  text-error: if(global-variable-exists('text-error'), $text-error, map-get($carbon--theme--white, 'text-error')),
   icon-01: if(global-variable-exists('icon-01'), $icon-01, map-get($carbon--theme--white, 'icon-01')),
   icon-02: if(global-variable-exists('icon-02'), $icon-02, map-get($carbon--theme--white, 'icon-02')),
   icon-03: if(global-variable-exists('icon-03'), $icon-03, map-get($carbon--theme--white, 'icon-03')),
@@ -6483,29 +6461,6 @@ $text-05: if(
   - [form [mixin]](#form-mixin)
   - [search [mixin]](#search-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
-
-### ✅text-error [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$text-error: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'text-error'
-    ),
-  map-get($carbon--theme, 'text-error'),
-  #da1e28
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `{undefined}`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -13972,8 +13927,6 @@ Combo box styles
 
   .#{$prefix}--combo-box .#{$prefix}--list-box__field,
   .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid]
-    .#{$prefix}--list-box__field,
-  .#{$prefix}--combo-box.#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field {
     padding: 0;
   }
@@ -16012,7 +15965,7 @@ Date picker styles
 
   .#{$prefix}--date-picker__calendar,
   .flatpickr-calendar.open {
-    @include box-shadow;
+    @include layer('pop-out');
     background-color: $ui-01;
     display: flex;
     flex-direction: column;
@@ -16409,7 +16362,6 @@ Dropdown styles
     border: none;
     border-bottom: 1px solid $ui-04;
     width: 100%;
-    height: rem(40px);
     cursor: pointer;
     color: $text-01;
     outline: 2px solid transparent;
@@ -16426,7 +16378,6 @@ Dropdown styles
 
   .#{$prefix}--dropdown--xl {
     height: rem(48px);
-    max-height: rem(48px);
   }
 
   .#{$prefix}--dropdown--xl .#{$prefix}--dropdown__arrow {
@@ -16435,7 +16386,6 @@ Dropdown styles
 
   .#{$prefix}--dropdown--sm {
     height: rem(32px);
-    max-height: rem(32px);
   }
 
   .#{$prefix}--dropdown--sm .#{$prefix}--dropdown__arrow {
@@ -16477,7 +16427,7 @@ Dropdown styles
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
-    @include box-shadow;
+    @include layer('overlay');
   }
 
   .#{$prefix}--dropdown--light {
@@ -16525,7 +16475,7 @@ Dropdown styles
   .#{$prefix}--dropdown-list {
     @include reset;
     @include focus-outline('reset');
-    @include box-shadow;
+    @include layer('overlay');
     @include type-style('body-short-01');
     background-color: $ui-01;
     display: flex;
@@ -16552,7 +16502,6 @@ Dropdown styles
       background-color $duration--fast-01 motion(standard, productive);
     opacity: 0;
     visibility: inherit;
-    position: relative;
 
     &:hover {
       background-color: $hover-ui;
@@ -16595,18 +16544,6 @@ Dropdown styles
       color: $text-01;
       border-color: transparent;
     }
-  }
-
-  .#{$prefix}--dropdown--sm .#{$prefix}--dropdown-link {
-    padding-top: rem(7px);
-    padding-bottom: rem(7px);
-    height: rem(32px);
-  }
-
-  .#{$prefix}--dropdown--xl .#{$prefix}--dropdown-link {
-    padding-top: rem(15px);
-    padding-bottom: rem(15px);
-    height: rem(48px);
   }
 
   .#{$prefix}--dropdown--focused,
@@ -16753,7 +16690,7 @@ Dropdown styles
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus
     .#{$prefix}--dropdown-list {
-    @include box-shadow;
+    @include layer('overlay');
   }
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
@@ -16782,10 +16719,6 @@ Dropdown styles
 
     + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
       border-top-color: transparent;
-    }
-
-    .#{$prefix}--list-box__menu-item__selected-icon {
-      display: block;
     }
   }
 
@@ -17998,14 +17931,6 @@ List box styles
     }
   }
 
-  .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
-    height: rem(32px);
-  }
-
-  .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item {
-    height: rem(48px);
-  }
-
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover {
     background-color: transparent;
   }
@@ -18048,7 +17973,6 @@ List box styles
     line-height: rem(16px);
     padding: rem(11px) 0;
     margin: 0 $carbon--spacing-05;
-    padding-right: rem(32px); // 40px - `$carbon--spacing-05`
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
     border-top-color: $ui-03;
@@ -18071,18 +17995,6 @@ List box styles
     }
   }
 
-  .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item__option {
-    padding-top: rem(7px);
-    padding-bottom: rem(7px);
-    height: rem(32px);
-  }
-
-  .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item__option {
-    padding-top: rem(15px);
-    padding-bottom: rem(15px);
-    height: rem(48px);
-  }
-
   .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item:hover
     .#{$prefix}--list-box__menu-item__option,
@@ -18092,7 +18004,7 @@ List box styles
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__menu-item__option {
-    margin: 0 rem(32px) 0 $carbon--spacing-03;
+    margin: 0 $carbon--spacing-03;
 
     &:focus {
       margin: 0;
@@ -18122,32 +18034,16 @@ List box styles
 
   .#{$prefix}--list-box__menu-item--active {
     color: $text-01;
-    background-color: $selected-ui;
     border-bottom-color: $selected-ui;
+
+    &:hover {
+      background-color: $selected-ui;
+    }
   }
 
   .#{$prefix}--list-box__menu-item--active
     .#{$prefix}--list-box__menu-item__option {
     color: $text-01;
-  }
-
-  .#{$prefix}--list-box__menu-item__selected-icon {
-    display: none;
-    position: absolute;
-    top: 50%;
-    right: rem(16px);
-    transform: translateY(-50%);
-    fill: $icon-01;
-  }
-
-  .#{$prefix}--list-box--inline
-    .#{$prefix}--list-box__menu-item__selected-icon {
-    right: rem(8px);
-  }
-
-  .#{$prefix}--list-box__menu-item--active
-    .#{$prefix}--list-box__menu-item__selected-icon {
-    display: block;
   }
 
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {
@@ -21725,7 +21621,7 @@ Tabs styles
   }
 
   .#{$prefix}--tabs__nav {
-    @include box-shadow;
+    @include layer('overlay');
     margin: 0;
     padding: 0;
     position: absolute;
@@ -22417,14 +22313,6 @@ Text input styles
     &-wrapper svg[hidden] {
       display: none;
     }
-  }
-
-  .#{$prefix}--text-input--large {
-    height: rem(48px);
-  }
-
-  .#{$prefix}--text-input--small {
-    height: rem(32px);
   }
 
   .#{$prefix}--password-input {
@@ -23447,7 +23335,7 @@ Toolbar styles
   }
 
   &::after {
-    @include box-shadow;
+    @include layer('overlay');
     min-width: rem(24px);
     max-width: rem(208px);
     height: rem(24px);
@@ -23586,7 +23474,7 @@ Toolbar styles
 
   .#{$prefix}--tooltip--definition__bottom,
   .#{$prefix}--tooltip--definition__top {
-    @include box-shadow;
+    @include layer('overlay');
     position: absolute;
     z-index: 1;
     display: none;
@@ -23808,7 +23696,7 @@ Tooltip styles
   }
 
   .#{$prefix}--tooltip {
-    @include box-shadow;
+    @include layer('overlay');
     @include reset;
     position: absolute;
     display: none;
