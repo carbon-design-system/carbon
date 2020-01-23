@@ -19,7 +19,7 @@ export default class TooltipDefinition extends mixin(
   handles
 ) {
   /**
-   * Text Input.
+   * Definition Tooltip.
    * @extends CreateComponent
    * @extends InitComponentBySearch
    * @extends Handles
@@ -75,7 +75,7 @@ export default class TooltipDefinition extends mixin(
    * or {@linkcode TooltipDefinition.init .init()},
    * properties in this object are overriden for the instance being
    * created and how {@linkcode TooltipDefinition.init .init()} works.
-   * @property {string} selectorInit The CSS selector to find text input UIs.
+   * @property {string} selectorInit The CSS selector to find definition tooltip UIs.
    */
   static get options() {
     const { prefix } = settings;
@@ -87,7 +87,7 @@ export default class TooltipDefinition extends mixin(
   }
 
   /**
-   * The map associating DOM element and text input UI instance.
+   * The map associating DOM element and definition tooltip UI instance.
    * @type {WeakMap}
    */
   static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
