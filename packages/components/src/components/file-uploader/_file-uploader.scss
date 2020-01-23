@@ -102,7 +102,7 @@
     margin-bottom: $carbon--spacing-05;
   }
 
-  .#{$prefix}--file-btn ~ .#{$prefix}--file-container {
+  .#{$prefix}--btn ~ .#{$prefix}--file-container {
     margin-top: $carbon--spacing-06;
   }
 
@@ -112,7 +112,7 @@
     grid-template-columns: 1fr auto;
     grid-auto-rows: auto;
     align-items: center;
-    min-height: $carbon--spacing-07;
+    min-height: $carbon--spacing-08;
     max-width: rem(320px);
     margin-bottom: $carbon--spacing-03;
     background-color: $field-01;
