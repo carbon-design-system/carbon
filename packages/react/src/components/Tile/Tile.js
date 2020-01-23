@@ -339,7 +339,6 @@ export class SelectableTile extends Component {
           onChange={this.handleOnChange}
           title={title}
           checked={this.state.selected}
-          readOnly
         />
         <label
           htmlFor={id}
