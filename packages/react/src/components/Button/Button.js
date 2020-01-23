@@ -74,6 +74,7 @@ const Button = React.forwardRef(function Button(
   };
   const anchorProps = {
     role: 'button',
+    ['aria-label']: children,
     href,
   };
   const assistiveText = hasIconOnly ? (
