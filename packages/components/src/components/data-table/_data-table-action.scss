@@ -123,6 +123,12 @@
     }
   }
 
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--search-close:focus::before {
+    background-color: $focus;
+  }
+
   //-------------------------------------------------
   //ACTIVE SEARCH - DEFAULT TOOLBAR
   //-------------------------------------------------
