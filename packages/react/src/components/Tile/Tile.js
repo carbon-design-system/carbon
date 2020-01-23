@@ -261,19 +261,15 @@ export class SelectableTile extends Component {
   handleClick = evt => {
     evt.preventDefault();
     evt.persist();
-    const isInput = evt.target === this.input;
-    if (!isInput) {
-      this.setState(
-        {
-          selected: !this.state.selected,
-        },
-        () => {
-          this.props.handleClick(evt);
-        }
-      );
-    } else {
-      this.props.handleClick(evt);
-    }
+    this.setState(
+      {
+        selected: !this.state.selected,
+      },
+      () => {
+        this.props.handleClick(evt);
+        this.props.onChange(evt);
+      }
+    );
   };
 
   handleKeyDown = evt => {
@@ -286,16 +282,12 @@ export class SelectableTile extends Component {
         },
         () => {
           this.props.handleKeyDown(evt);
+          this.props.onChange(evt);
         }
       );
     } else {
       this.props.handleKeyDown(evt);
     }
-  };
-
-  handleOnChange = event => {
-    this.setState({ selected: event.target.checked });
-    this.props.onChange(event);
   };
 
   render() {
@@ -337,11 +329,11 @@ export class SelectableTile extends Component {
           id={id}
           className={`${prefix}--tile-input`}
           value={value}
-          onChange={this.handleOnChange}
           type="checkbox"
           name={name}
           title={title}
           checked={this.state.selected}
+          readOnly
         />
         <label
           htmlFor={id}
