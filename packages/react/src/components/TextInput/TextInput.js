@@ -146,7 +146,7 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
 
   /**
-   * Specify the size of the Text Input. Currently supports either `small` or `large` as an option. If omitted, defaults to standard size
+   * Specify the size of the Text Input. Currently supports either `sm` or `xl` as an option.
    */
   size: PropTypes.string,
 
