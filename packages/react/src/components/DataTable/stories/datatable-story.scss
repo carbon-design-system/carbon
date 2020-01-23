@@ -14,5 +14,6 @@
 
 .demo-inner-container-content {
   @include carbon--type-style('body-long-01');
+  color: $text-02
 }
 
