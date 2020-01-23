@@ -11,7 +11,6 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/layer';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/layout';
@@ -119,7 +118,7 @@
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
-    @include layer('overlay');
+    @include box-shadow;
   }
 
   .#{$prefix}--dropdown--light {
@@ -167,7 +166,7 @@
   .#{$prefix}--dropdown-list {
     @include reset;
     @include focus-outline('reset');
-    @include layer('overlay');
+    @include box-shadow;
     @include type-style('body-short-01');
     background-color: $ui-01;
     display: flex;
@@ -395,7 +394,7 @@
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus
     .#{$prefix}--dropdown-list {
-    @include layer('overlay');
+    @include box-shadow;
   }
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
