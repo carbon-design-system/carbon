@@ -10,7 +10,6 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
-@import '../../globals/scss/layer';
 @import '../form/form';
 @import 'flatpickr.scss';
 
@@ -157,7 +156,7 @@
 
   .#{$prefix}--date-picker__calendar,
   .flatpickr-calendar.open {
-    @include layer('pop-out');
+    @include box-shadow;
     background-color: $ui-01;
     display: flex;
     flex-direction: column;
