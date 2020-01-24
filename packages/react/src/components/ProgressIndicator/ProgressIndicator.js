@@ -13,21 +13,33 @@ import { CheckmarkOutline16, Warning16 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
-const defaultRenderLabel = props => <p {...props} />;
-export const ProgressStep = ({ ...props }) => {
-  const {
-    label,
-    description,
-    className,
-    current,
-    complete,
-    invalid,
-    secondaryLabel,
-    disabled,
-    onClick,
-    renderLabel: ProgressStepLabel,
-  } = props;
 
+const defaultRenderLabel = props => <p {...props} />;
+
+const defaultTranslations = {
+  'carbon.progress-step.complete': 'Complete',
+  'carbon.progress-step.incomplete': 'Incomplete',
+  'carbon.progress-step.current': 'Current',
+  'carbon.progress-step.invalid': 'Invalid',
+};
+
+function translateWithId(messageId) {
+  return defaultTranslations[messageId];
+}
+
+export function ProgressStep({
+  label,
+  description,
+  className,
+  current,
+  complete,
+  invalid,
+  secondaryLabel,
+  disabled,
+  onClick,
+  renderLabel: ProgressStepLabel,
+  translateWithId: t,
+}) {
   const classes = classnames({
     [`${prefix}--progress-step`]: true,
     [`${prefix}--progress-step--current`]: current,
@@ -70,16 +82,31 @@ export const ProgressStep = ({ ...props }) => {
     );
   };
 
+  let message = t('carbon.progress-step.incomplete');
+
+  if (current) {
+    message = t('carbon.progress-step.current');
+  }
+
+  if (complete) {
+    message = t('carbon.progress-step.complete');
+  }
+
+  if (invalid) {
+    message = t('carbon.progress-step.invalid');
+  }
+
   return (
-    <li className={classes} aria-disabled={disabled}>
-      <div
+    <li className={classes}>
+      <button
         className={classnames(`${prefix}--progress-step-button`, {
           [`${prefix}--progress-step-button--unclickable`]: !onClick || current,
         })}
-        role="button"
+        aria-disabled={disabled}
         tabIndex={!current && onClick ? 0 : -1}
         onClick={!current ? onClick : undefined}
         onKeyDown={handleKeyDown}>
+        <span className={`${prefix}--assistive-text`}>{message}</span>
         <SVGIcon
           complete={complete}
           current={current}
@@ -94,10 +121,10 @@ export const ProgressStep = ({ ...props }) => {
           <p className={`${prefix}--progress-optional`}>{secondaryLabel}</p>
         ) : null}
         <span className={`${prefix}--progress-line`} />
-      </div>
+      </button>
     </li>
   );
-};
+}
 
 ProgressStep.propTypes = {
   /**
@@ -165,10 +192,17 @@ ProgressStep.propTypes = {
    * A callback called if the step is clicked or the enter key is pressed
    */
   onClick: PropTypes.func,
+
+  /**
+   * Optional method that takes in a message id and returns an
+   * internationalized string.
+   */
+  translateWithId: PropTypes.func,
 };
 
 ProgressStep.defaultProps = {
   renderLabel: defaultRenderLabel,
+  translateWithId,
 };
 
 export class ProgressIndicator extends Component {

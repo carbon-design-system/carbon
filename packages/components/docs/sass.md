@@ -20453,6 +20453,7 @@ Progress indicator styles
     margin-left: $carbon--spacing-06;
     margin-top: rem(28px);
     color: $text-01;
+    text-align: start;
   }
 
   //CURRENT STYLING
@@ -20489,6 +20490,7 @@ Progress indicator styles
 
   //interactive button
   .#{$prefix}--progress-step-button {
+    @include button-reset();
     display: flex;
   }
 
