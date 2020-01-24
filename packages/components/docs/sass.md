@@ -20547,15 +20547,25 @@ Progress indicator styles
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
+    padding-bottom: rem(24px);
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button {
     display: list-item;
-    min-height: 6rem;
+    min-height: 3.625rem;
     width: initial;
     min-width: initial;
+  }
 
-    svg {
-      display: inline-block;
-      margin: 0.1rem 0.5rem;
-    }
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step svg,
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
+    display: inline-block;
+    margin: 0.1rem 0.5rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
+    margin-right: 0.7rem;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step--current svg {
@@ -20565,9 +20575,10 @@ Progress indicator styles
   .#{$prefix}--progress--vertical .#{$prefix}--progress-label {
     display: inline-block;
     width: initial;
-    max-width: none;
+    max-width: rem(160px);
     vertical-align: top;
     margin: 0;
+    white-space: initial;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step .bx--tooltip {

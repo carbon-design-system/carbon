@@ -198,6 +198,11 @@ export class ProgressIndicator extends Component {
      * Optional callback called if a ProgressStep is clicked on.  Returns the index of the step.
      */
     onChange: PropTypes.func,
+
+    /**
+     * Determines whether or not the ProgressIndicator should be rendered vertically.
+     */
+    vertical: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -246,9 +251,10 @@ export class ProgressIndicator extends Component {
   };
 
   render() {
-    const { className, currentIndex, ...other } = this.props; // eslint-disable-line no-unused-vars
+    const { className, currentIndex, vertical, ...other } = this.props; // eslint-disable-line no-unused-vars
     const classes = classnames({
       [`${prefix}--progress`]: true,
+      [`${prefix}--progress--vertical`]: vertical,
       [className]: className,
     });
     return (
