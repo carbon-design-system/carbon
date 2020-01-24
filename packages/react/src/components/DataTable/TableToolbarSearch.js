@@ -47,11 +47,14 @@ const TableToolbarSearch = ({
   const [value, setValue] = useState(defaultValue || '');
   const uniqueId = useMemo(getInstanceId, []);
 
+  const [focusTarget, setFocusTarget] = useState(null);
+
   useEffect(() => {
-    if (!controlled && expandedState && searchRef.current) {
-      searchRef.current.querySelector('input').focus();
+    if (focusTarget) {
+      focusTarget.current.querySelector('input').focus();
+      setFocusTarget(null);
     }
-  }, [controlled, expandedState]);
+  }, [focusTarget]);
 
   useEffect(
     () => {
@@ -82,6 +85,11 @@ const TableToolbarSearch = ({
     }
   };
 
+  const onClick = e => {
+    setFocusTarget(searchRef);
+    handleExpand(e, true);
+  };
+
   const onChange = e => {
     setValue(e.target.value);
     if (onChangeProp) {
@@ -94,7 +102,7 @@ const TableToolbarSearch = ({
       tabIndex={expandedState ? '-1' : '0'}
       role="search"
       ref={searchRef}
-      onClick={event => handleExpand(event, true)}
+      onClick={event => onClick(event)}
       onFocus={event => handleExpand(event, true)}
       onBlur={event => !value && handleExpand(event, false)}
       className={searchContainerClasses}>
