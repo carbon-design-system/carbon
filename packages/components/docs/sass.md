@@ -22430,11 +22430,11 @@ Text input styles
     }
   }
 
-  .#{$prefix}--text-input--large {
+  .#{$prefix}--text-input--xl {
     height: rem(48px);
   }
 
-  .#{$prefix}--text-input--small {
+  .#{$prefix}--text-input--sm {
     height: rem(32px);
   }
 
