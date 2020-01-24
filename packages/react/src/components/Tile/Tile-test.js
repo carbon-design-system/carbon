@@ -202,7 +202,7 @@ describe('Tile', () => {
       expect(wrapper.childAt(1).hasClass('bx--tile--light')).toEqual(true);
     });
 
-    it.only('should call onChange when the checkbox value changes', () => {
+    it('should call onChange when the checkbox value changes', () => {
       const onChange = jest.fn();
       const wrapper = mount(
         <SelectableTile onChange={onChange}>
