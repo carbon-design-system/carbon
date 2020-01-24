@@ -57,7 +57,7 @@ const TableHeader = React.forwardRef(function TableHeader(
     scope,
     sortDirection,
     translateWithId: t,
-    thWidth,
+    thStyle,
     ...rest
   },
   ref
@@ -69,7 +69,7 @@ const TableHeader = React.forwardRef(function TableHeader(
         className={headerClassName}
         scope={scope}
         ref={ref}
-        style={{ width: thWidth }}>
+        style={thStyle}>
         <span className={`${prefix}--table-header-label`}>{children}</span>
       </th>
     );
@@ -90,7 +90,7 @@ const TableHeader = React.forwardRef(function TableHeader(
       className={headerClassName}
       aria-sort={ariaSort}
       ref={ref}
-      style={{ width: thWidth }}>
+      style={thStyle}>
       <button className={className} onClick={onClick} {...rest}>
         <span className={`${prefix}--table-header-label`}>{children}</span>
         <Arrow
@@ -166,14 +166,14 @@ TableHeader.propTypes = {
   /**
    * Pass in width that will be applied in the table header column for resize the column width
    */
-  thWidth: PropTypes.number,
+  thStyle: PropTypes.object,
 };
 
 TableHeader.defaultProps = {
   isSortable: false,
   scope: 'col',
   translateWithId,
-  thWidth: undefined,
+  thStyle: {},
 };
 
 TableHeader.translationKeys = Object.values(translationKeys);
