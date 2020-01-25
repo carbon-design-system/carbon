@@ -8,7 +8,6 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/layer';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 @import '../button/button';
@@ -36,7 +35,7 @@
     }
 
     &:before {
-      @include layer('overlay');
+      @include box-shadow;
       @include type-style('body-short-01');
       top: 1.1rem;
       padding: $spacing-02;
