@@ -16,8 +16,8 @@
 /// @group tag
 @mixin tags {
   .#{$prefix}--tag {
-    @include type-style('label-01');
     @include button-reset($width: false);
+    @include type-style('label-01');
 
     display: inline-flex;
     align-items: center;
