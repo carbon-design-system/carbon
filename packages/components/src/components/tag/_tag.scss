@@ -28,6 +28,7 @@
     min-width: rem(32px); // ensures tag stays pill shaped;
     margin: $carbon--spacing-02;
     border-radius: rem(15px);
+    cursor: default;
 
     &:not(:first-child) {
       margin-left: 0;

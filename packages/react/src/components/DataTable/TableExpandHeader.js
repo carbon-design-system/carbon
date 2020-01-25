@@ -6,6 +6,7 @@
  */
 
 import cx from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { ChevronRight16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
@@ -19,6 +20,7 @@ const TableExpandHeader = ({
   isExpanded,
   onExpand,
   expandIconDescription,
+  children,
   ...rest
 }) => {
   const className = cx(`${prefix}--table-expand`, headerClassName);
@@ -42,8 +44,36 @@ const TableExpandHeader = ({
           />
         </button>
       )}
+      {children}
     </th>
   );
+};
+
+TableExpandHeader.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node,
+
+  /**
+   * Specify the string read by a voice reader when the expand trigger is
+   * focused
+   */
+  ariaLabel: PropTypes.string.isRequired,
+
+  /**
+   * Specify whether this row is expanded or not. This helps coordinate data
+   * attributes so that `TableExpandRow` and `TableExapndedRow` work together
+   */
+  isExpanded: PropTypes.bool.isRequired,
+
+  /**
+   * Hook for when a listener initiates a request to expand the given row
+   */
+  onExpand: PropTypes.func.isRequired,
+
+  /**
+   * The description of the chevron right icon, to be put in its SVG `<title>` element.
+   */
+  expandIconDescription: PropTypes.string,
 };
 
 export default TableExpandHeader;

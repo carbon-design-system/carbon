@@ -17,6 +17,7 @@ const Breadcrumb = ({
   children,
   className: customClassNameNav,
   noTrailingSlash,
+  ...rest
 }) => {
   const className = cx({
     [`${prefix}--breadcrumb`]: true,
@@ -26,7 +27,8 @@ const Breadcrumb = ({
   return (
     <nav
       className={customClassNameNav}
-      aria-label={ariaLabel ? ariaLabel : 'Breadcrumb'}>
+      aria-label={ariaLabel ? ariaLabel : 'Breadcrumb'}
+      {...rest}>
       <ol className={className}>{children}</ol>
     </nav>
   );

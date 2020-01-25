@@ -1236,18 +1236,25 @@ yet.
 
 ### ❌carbon--make-col [mixin]
 
-Define the width of the column for a given span and column count.
+Define the width of the column for a given span and column count. A width of 0
+will hide the column entirely.
 
 <details>
 <summary>Source code</summary>
 
 ```scss
 @mixin carbon--make-col($span, $columns) {
-  flex: 0 0 percentage($span / $columns);
-  // Add a `max-width` to ensure content within each column does not blow out
-  // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
-  // do not appear to require this.
-  max-width: percentage($span / $columns);
+  @if $span == 0 {
+    display: none;
+  } @else {
+    // Explicitly include `display: block` to override
+    display: block;
+    flex: 0 0 percentage($span / $columns);
+    // Add a `max-width` to ensure content within each column does not blow out
+    // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
+    // do not appear to require this.
+    max-width: percentage($span / $columns);
+  }
 }
 ```
 
@@ -1316,7 +1323,7 @@ Output the CSS required for all the columns in a given grid system.
     $columns: map-get(map-get($breakpoints, $breakpoint), columns);
 
     // Allow columns to stretch full width below their breakpoints
-    @for $i from 1 through $columns {
+    @for $i from 0 through $columns {
       .#{$prefix}--col#{$infix}-#{$i} {
         @include carbon--make-col-ready();
       }
@@ -1344,7 +1351,7 @@ Output the CSS required for all the columns in a given grid system.
         max-width: 100%;
       }
 
-      @for $i from 1 through $columns {
+      @for $i from 0 through $columns {
         .#{$prefix}--col#{$infix}-#{$i} {
           @include carbon--make-col($i, $columns);
         }
@@ -6381,7 +6388,6 @@ $text-02: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
@@ -10262,8 +10268,9 @@ Include a type reset for a given body and mono font family
   }
 
   body {
-    font-family: $body-font-family;
     @include carbon--font-weight('regular');
+
+    font-family: $body-font-family;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -16005,7 +16012,7 @@ Date picker styles
 
   .#{$prefix}--date-picker__calendar,
   .flatpickr-calendar.open {
-    @include layer('pop-out');
+    @include box-shadow;
     background-color: $ui-01;
     display: flex;
     flex-direction: column;
@@ -16164,9 +16171,9 @@ Date picker styles
     }
   }
 
-  .#{$prefix}--date-picker__days .nextMonthDay,
-  .#{$prefix}--date-picker__days .prevMonthDay {
-    color: $text-02;
+  .#{$prefix}--date-picker__day.nextMonthDay,
+  .#{$prefix}--date-picker__day.prevMonthDay {
+    color: $text-05;
   }
 
   .#{$prefix}--date-picker__day.today,
@@ -16200,11 +16207,10 @@ Date picker styles
     }
   }
 
-  .#{$prefix}--date-picker__day.disabled,
-  .flatpickr-day.disabled {
+  .#{$prefix}--date-picker__day.flatpickr-day.flatpickr-disabled {
     cursor: not-allowed;
     opacity: 0.5;
-    color: $ui-05;
+    color: $disabled-02;
 
     &:hover {
       background: transparent;
@@ -16358,9 +16364,8 @@ Date picker styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
-  - [text-02 [variable]](#text-02-variable)
-  - [ui-05 [variable]](#ui-05-variable)
   - [text-04 [variable]](#text-04-variable)
+  - [ui-05 [variable]](#ui-05-variable)
 
 ## dropdown
 
@@ -16404,6 +16409,7 @@ Dropdown styles
     border: none;
     border-bottom: 1px solid $ui-04;
     width: 100%;
+    height: rem(40px);
     cursor: pointer;
     color: $text-01;
     outline: 2px solid transparent;
@@ -16471,7 +16477,7 @@ Dropdown styles
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
-    @include layer('overlay');
+    @include box-shadow;
   }
 
   .#{$prefix}--dropdown--light {
@@ -16519,7 +16525,7 @@ Dropdown styles
   .#{$prefix}--dropdown-list {
     @include reset;
     @include focus-outline('reset');
-    @include layer('overlay');
+    @include box-shadow;
     @include type-style('body-short-01');
     background-color: $ui-01;
     display: flex;
@@ -16589,6 +16595,18 @@ Dropdown styles
       color: $text-01;
       border-color: transparent;
     }
+  }
+
+  .#{$prefix}--dropdown--sm .#{$prefix}--dropdown-link {
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--dropdown--xl .#{$prefix}--dropdown-link {
+    padding-top: rem(15px);
+    padding-bottom: rem(15px);
+    height: rem(48px);
   }
 
   .#{$prefix}--dropdown--focused,
@@ -16735,7 +16753,7 @@ Dropdown styles
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus
     .#{$prefix}--dropdown-list {
-    @include layer('overlay');
+    @include box-shadow;
   }
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
@@ -17463,8 +17481,21 @@ List styles
     margin-top: 0;
   }
 
-  .#{$prefix}--list--ordered {
-    list-style-type: decimal;
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested) {
+    counter-reset: item;
+  }
+
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
+    > .#{$prefix}--list__item {
+    position: relative;
+  }
+
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
+    > .#{$prefix}--list__item::before {
+    content: counter(item) '.';
+    counter-increment: item;
+    position: absolute;
+    left: rem(-24px);
   }
 
   .#{$prefix}--list--ordered.#{$prefix}--list--nested {
@@ -17967,6 +17998,14 @@ List box styles
     }
   }
 
+  .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item {
+    height: rem(48px);
+  }
+
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover {
     background-color: transparent;
   }
@@ -18030,6 +18069,18 @@ List box styles
       color: $text-01;
       border-color: transparent;
     }
+  }
+
+  .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(15px);
+    padding-bottom: rem(15px);
+    height: rem(48px);
   }
 
   .#{$prefix}--list-box--disabled
@@ -18363,13 +18414,13 @@ Modal styles
   .#{$prefix}--modal {
     position: fixed;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
     z-index: z('modal');
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100vw;
+    height: 100vh;
     content: '';
     background-color: transparent;
     opacity: 0;
@@ -18393,7 +18444,8 @@ Modal styles
     .#{$prefix}--select-input,
     .#{$prefix}--dropdown,
     .#{$prefix}--dropdown-list,
-    .#{$prefix}--number input[type='number'] {
+    .#{$prefix}--number input[type='number'],
+    .#{$prefix}--date-picker__input {
       background-color: $field-02;
     }
   }
@@ -20401,6 +20453,7 @@ Progress indicator styles
     margin-left: $carbon--spacing-06;
     margin-top: rem(28px);
     color: $text-01;
+    text-align: start;
   }
 
   //CURRENT STYLING
@@ -20437,6 +20490,7 @@ Progress indicator styles
 
   //interactive button
   .#{$prefix}--progress-step-button {
+    @include button-reset();
     display: flex;
   }
 
@@ -20495,15 +20549,25 @@ Progress indicator styles
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
+    padding-bottom: rem(24px);
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button {
     display: list-item;
-    min-height: 6rem;
+    min-height: 3.625rem;
     width: initial;
     min-width: initial;
+  }
 
-    svg {
-      display: inline-block;
-      margin: 0.1rem 0.5rem;
-    }
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step svg,
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
+    display: inline-block;
+    margin: 0.1rem 0.5rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
+    margin-right: 0.7rem;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step--current svg {
@@ -20513,9 +20577,10 @@ Progress indicator styles
   .#{$prefix}--progress--vertical .#{$prefix}--progress-label {
     display: inline-block;
     width: initial;
-    max-width: none;
+    max-width: rem(160px);
     vertical-align: top;
     margin: 0;
+    white-space: initial;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step .bx--tooltip {
@@ -21673,7 +21738,7 @@ Tabs styles
   }
 
   .#{$prefix}--tabs__nav {
-    @include layer('overlay');
+    @include box-shadow;
     margin: 0;
     padding: 0;
     position: absolute;
@@ -22073,6 +22138,7 @@ Tag styles
     min-width: rem(32px); // ensures tag stays pill shaped;
     margin: $carbon--spacing-02;
     border-radius: rem(15px);
+    cursor: default;
 
     &:not(:first-child) {
       margin-left: 0;
@@ -22364,6 +22430,14 @@ Text input styles
     &-wrapper svg[hidden] {
       display: none;
     }
+  }
+
+  .#{$prefix}--text-input--xl {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--text-input--sm {
+    height: rem(32px);
   }
 
   .#{$prefix}--password-input {
@@ -23386,7 +23460,7 @@ Toolbar styles
   }
 
   &::after {
-    @include layer('overlay');
+    @include box-shadow;
     min-width: rem(24px);
     max-width: rem(208px);
     height: rem(24px);
@@ -23525,7 +23599,7 @@ Toolbar styles
 
   .#{$prefix}--tooltip--definition__bottom,
   .#{$prefix}--tooltip--definition__top {
-    @include layer('overlay');
+    @include box-shadow;
     position: absolute;
     z-index: 1;
     display: none;
@@ -23747,7 +23821,7 @@ Tooltip styles
   }
 
   .#{$prefix}--tooltip {
-    @include layer('overlay');
+    @include box-shadow;
     @include reset;
     position: absolute;
     display: none;

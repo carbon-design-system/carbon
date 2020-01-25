@@ -6,7 +6,6 @@
 //
 
 @import '../../globals/scss/vars';
-@import '../../globals/scss/layer';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/tooltip';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
@@ -53,7 +52,7 @@
   }
 
   &::after {
-    @include layer('overlay');
+    @include box-shadow;
     min-width: rem(24px);
     max-width: rem(208px);
     height: rem(24px);
@@ -164,7 +163,7 @@
 
   .#{$prefix}--tooltip--definition__bottom,
   .#{$prefix}--tooltip--definition__top {
-    @include layer('overlay');
+    @include box-shadow;
     position: absolute;
     z-index: 1;
     display: none;
@@ -349,7 +348,7 @@
   }
 
   .#{$prefix}--tooltip {
-    @include layer('overlay');
+    @include box-shadow;
     @include reset;
     position: absolute;
     display: none;
