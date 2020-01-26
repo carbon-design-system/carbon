@@ -12,7 +12,10 @@ exports[`DataTable.TableExpandHeader should render 1`] = `
         <TableRow>
           <tr>
             <TableExpandHeader
+              ariaLabel="test-label"
               className="custom-class"
+              isExpanded={false}
+              onExpand={[MockFunction]}
             >
               <th
                 className="bx--table-expand custom-class"
