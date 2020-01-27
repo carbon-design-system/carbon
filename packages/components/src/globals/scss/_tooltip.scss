@@ -179,6 +179,18 @@
       animation: tooltip-fade $duration--fast-01 motion(standard, productive);
     }
   }
+
+  &.#{$prefix}--tooltip--hidden .#{$prefix}--assistive-text,
+  &.#{$prefix}--tooltip--hidden + .#{$prefix}--assistive-text {
+    clip: rect(0, 0, 0, 0);
+    margin: -1px;
+    overflow: hidden;
+  }
+
+  &.#{$prefix}--tooltip--hidden.#{$prefix}--tooltip--a11y::before {
+    animation: none;
+    opacity: 0;
+  }
 }
 
 // Tooltip
