@@ -102,6 +102,10 @@
     margin-bottom: $carbon--spacing-05;
   }
 
+  .#{$prefix}--file-btn ~ .#{$prefix}--file-container {
+    margin-top: $carbon--spacing-06;
+  }
+
   .#{$prefix}--btn ~ .#{$prefix}--file-container {
     margin-top: $carbon--spacing-06;
   }
