@@ -140,7 +140,7 @@ No change
 
 ## `_layer.scss`
 
-No change
+- Removed, replaced with `box-shadow` mixin
 
 ### Internal
 
