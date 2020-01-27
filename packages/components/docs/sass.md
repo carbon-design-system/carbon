@@ -1247,7 +1247,7 @@ will hide the column entirely.
   @if $span == 0 {
     display: none;
   } @else {
-    // Explicitly write `display: block` to override
+    // Explicitly include `display: block` to override
     display: block;
     flex: 0 0 percentage($span / $columns);
     // Add a `max-width` to ensure content within each column does not blow out
@@ -1351,7 +1351,7 @@ Output the CSS required for all the columns in a given grid system.
         max-width: 100%;
       }
 
-      @for $i from -1 through $columns {
+      @for $i from 0 through $columns {
         .#{$prefix}--col#{$infix}-#{$i} {
           @include carbon--make-col($i, $columns);
         }
@@ -10268,8 +10268,9 @@ Include a type reset for a given body and mono font family
   }
 
   body {
-    font-family: $body-font-family;
     @include carbon--font-weight('regular');
+
+    font-family: $body-font-family;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -13093,8 +13094,7 @@ Button styles
   }
 
   .#{$prefix}--btn--field {
-    height: 40px;
-    min-height: 40px;
+    min-height: rem(40px);
     padding: $button-padding-field;
   }
 
@@ -16011,7 +16011,7 @@ Date picker styles
 
   .#{$prefix}--date-picker__calendar,
   .flatpickr-calendar.open {
-    @include layer('pop-out');
+    @include box-shadow;
     background-color: $ui-01;
     display: flex;
     flex-direction: column;
@@ -16408,6 +16408,7 @@ Dropdown styles
     border: none;
     border-bottom: 1px solid $ui-04;
     width: 100%;
+    height: rem(40px);
     cursor: pointer;
     color: $text-01;
     outline: 2px solid transparent;
@@ -16475,7 +16476,7 @@ Dropdown styles
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
-    @include layer('overlay');
+    @include box-shadow;
   }
 
   .#{$prefix}--dropdown--light {
@@ -16523,7 +16524,7 @@ Dropdown styles
   .#{$prefix}--dropdown-list {
     @include reset;
     @include focus-outline('reset');
-    @include layer('overlay');
+    @include box-shadow;
     @include type-style('body-short-01');
     background-color: $ui-01;
     display: flex;
@@ -16593,6 +16594,18 @@ Dropdown styles
       color: $text-01;
       border-color: transparent;
     }
+  }
+
+  .#{$prefix}--dropdown--sm .#{$prefix}--dropdown-link {
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--dropdown--xl .#{$prefix}--dropdown-link {
+    padding-top: rem(15px);
+    padding-bottom: rem(15px);
+    height: rem(48px);
   }
 
   .#{$prefix}--dropdown--focused,
@@ -16739,7 +16752,7 @@ Dropdown styles
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus
     .#{$prefix}--dropdown-list {
-    @include layer('overlay');
+    @include box-shadow;
   }
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
@@ -17255,7 +17268,7 @@ Inline loading styles
   }
 
   .#{$prefix}--inline-loading__text {
-    @include type-style('body-short-01');
+    @include type-style('label-01');
     color: $text-02;
   }
 
@@ -17467,8 +17480,21 @@ List styles
     margin-top: 0;
   }
 
-  .#{$prefix}--list--ordered {
-    list-style-type: decimal;
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested) {
+    counter-reset: item;
+  }
+
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
+    > .#{$prefix}--list__item {
+    position: relative;
+  }
+
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
+    > .#{$prefix}--list__item::before {
+    content: counter(item) '.';
+    counter-increment: item;
+    position: absolute;
+    left: rem(-24px);
   }
 
   .#{$prefix}--list--ordered.#{$prefix}--list--nested {
@@ -17971,6 +17997,14 @@ List box styles
     }
   }
 
+  .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item {
+    height: rem(48px);
+  }
+
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover {
     background-color: transparent;
   }
@@ -18034,6 +18068,18 @@ List box styles
       color: $text-01;
       border-color: transparent;
     }
+  }
+
+  .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(15px);
+    padding-bottom: rem(15px);
+    height: rem(48px);
   }
 
   .#{$prefix}--list-box--disabled
@@ -18367,13 +18413,13 @@ Modal styles
   .#{$prefix}--modal {
     position: fixed;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
     z-index: z('modal');
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100vw;
+    height: 100vh;
     content: '';
     background-color: transparent;
     opacity: 0;
@@ -18397,7 +18443,8 @@ Modal styles
     .#{$prefix}--select-input,
     .#{$prefix}--dropdown,
     .#{$prefix}--dropdown-list,
-    .#{$prefix}--number input[type='number'] {
+    .#{$prefix}--number input[type='number'],
+    .#{$prefix}--date-picker__input {
       background-color: $field-02;
     }
   }
@@ -20405,6 +20452,7 @@ Progress indicator styles
     margin-left: $carbon--spacing-06;
     margin-top: rem(28px);
     color: $text-01;
+    text-align: start;
   }
 
   //CURRENT STYLING
@@ -20441,6 +20489,7 @@ Progress indicator styles
 
   //interactive button
   .#{$prefix}--progress-step-button {
+    @include button-reset();
     display: flex;
   }
 
@@ -20499,15 +20548,25 @@ Progress indicator styles
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
+    padding-bottom: rem(24px);
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button {
     display: list-item;
-    min-height: 6rem;
+    min-height: 3.625rem;
     width: initial;
     min-width: initial;
+  }
 
-    svg {
-      display: inline-block;
-      margin: 0.1rem 0.5rem;
-    }
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step svg,
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
+    display: inline-block;
+    margin: 0.1rem 0.5rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
+    margin-right: 0.7rem;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step--current svg {
@@ -20517,9 +20576,10 @@ Progress indicator styles
   .#{$prefix}--progress--vertical .#{$prefix}--progress-label {
     display: inline-block;
     width: initial;
-    max-width: none;
+    max-width: rem(160px);
     vertical-align: top;
     margin: 0;
+    white-space: initial;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step .bx--tooltip {
@@ -21677,7 +21737,7 @@ Tabs styles
   }
 
   .#{$prefix}--tabs__nav {
-    @include layer('overlay');
+    @include box-shadow;
     margin: 0;
     padding: 0;
     position: absolute;
@@ -22077,6 +22137,7 @@ Tag styles
     min-width: rem(32px); // ensures tag stays pill shaped;
     margin: $carbon--spacing-02;
     border-radius: rem(15px);
+    cursor: default;
 
     &:not(:first-child) {
       margin-left: 0;
@@ -22368,6 +22429,14 @@ Text input styles
     &-wrapper svg[hidden] {
       display: none;
     }
+  }
+
+  .#{$prefix}--text-input--xl {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--text-input--sm {
+    height: rem(32px);
   }
 
   .#{$prefix}--password-input {
@@ -23390,7 +23459,7 @@ Toolbar styles
   }
 
   &::after {
-    @include layer('overlay');
+    @include box-shadow;
     min-width: rem(24px);
     max-width: rem(208px);
     height: rem(24px);
@@ -23529,7 +23598,7 @@ Toolbar styles
 
   .#{$prefix}--tooltip--definition__bottom,
   .#{$prefix}--tooltip--definition__top {
-    @include layer('overlay');
+    @include box-shadow;
     position: absolute;
     z-index: 1;
     display: none;
@@ -23751,7 +23820,7 @@ Tooltip styles
   }
 
   .#{$prefix}--tooltip {
-    @include layer('overlay');
+    @include box-shadow;
     @include reset;
     position: absolute;
     display: none;

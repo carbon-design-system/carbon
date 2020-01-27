@@ -32,7 +32,7 @@
   }
 
   .#{$prefix}--inline-loading__text {
-    @include type-style('body-short-01');
+    @include type-style('label-01');
     color: $text-02;
   }
 

@@ -19,7 +19,7 @@ const { prefix } = settings;
 
 const icons = {
   None: 'None',
-  'Add with filled circle (Add16 from `@carbon/icons-react`)': 'Add16',
+  'Add (Add16 from `@carbon/icons-react`)': 'Add16',
   'Search (Search16 from `@carbon/icons-react`)': 'Search16',
 };
 

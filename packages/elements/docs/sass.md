@@ -1091,7 +1091,7 @@ will hide the column entirely.
   @if $span == 0 {
     display: none;
   } @else {
-    // Explicitly write `display: block` to override
+    // Explicitly include `display: block` to override
     display: block;
     flex: 0 0 percentage($span / $columns);
     // Add a `max-width` to ensure content within each column does not blow out
@@ -1195,7 +1195,7 @@ Output the CSS required for all the columns in a given grid system.
         max-width: 100%;
       }
 
-      @for $i from -1 through $columns {
+      @for $i from 0 through $columns {
         .#{$prefix}--col#{$infix}-#{$i} {
           @include carbon--make-col($i, $columns);
         }
@@ -9564,8 +9564,9 @@ Include a type reset for a given body and mono font family
   }
 
   body {
-    font-family: $body-font-family;
     @include carbon--font-weight('regular');
+
+    font-family: $body-font-family;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
