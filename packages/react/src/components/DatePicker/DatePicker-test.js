@@ -281,12 +281,17 @@ describe('DatePicker', () => {
   });
 
   describe('Date picker can be used with enzyme shallow', () => {
+    let spy;
     beforeEach(done => {
-      const spy = {};
+      spy = {};
       spy.console = jest.spyOn(console, 'error').mockImplementation(e => {
         done(e);
       });
       done();
+    });
+
+    afterEach(() => {
+      spy.console.mockRestore();
     });
 
     it('date picker should not throw exception when mounted or unmounted', () => {
@@ -318,7 +323,15 @@ describe('DatePicker', () => {
   });
 
   describe('Date picker with minDate and maxDate', () => {
-    console.error = jest.fn(); // eslint-disable-line no-console
+    let mockConsoleError;
+
+    beforeEach(() => {
+      mockConsoleError = jest.spyOn(console, 'error');
+    });
+
+    afterEach(() => {
+      mockConsoleError.mockRestore();
+    });
 
     const wrapper = mount(
       <DatePicker
@@ -351,7 +364,7 @@ describe('DatePicker', () => {
     });
 
     it('should not have "console.error" being created', () => {
-      expect(console.error).not.toBeCalled(); // eslint-disable-line no-console
+      expect(mockConsoleError).not.toBeCalled();
     });
   });
 });

@@ -13094,8 +13094,7 @@ Button styles
   }
 
   .#{$prefix}--btn--field {
-    height: 40px;
-    min-height: 40px;
+    min-height: rem(40px);
     padding: $button-padding-field;
   }
 
@@ -17269,7 +17268,7 @@ Inline loading styles
   }
 
   .#{$prefix}--inline-loading__text {
-    @include type-style('body-short-01');
+    @include type-style('label-01');
     color: $text-02;
   }
 
