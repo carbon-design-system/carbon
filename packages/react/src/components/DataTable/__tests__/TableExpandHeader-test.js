@@ -15,7 +15,12 @@ describe('DataTable.TableExpandHeader', () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableExpandHeader className="custom-class" />
+            <TableExpandHeader
+              ariaLabel="test-label"
+              isExpanded={false}
+              onExpand={jest.fn()}
+              className="custom-class"
+            />
           </TableRow>
         </TableHead>
       </Table>

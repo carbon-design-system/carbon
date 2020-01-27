@@ -16,8 +16,9 @@ describe('DataTable.TableToolbarMenu', () => {
       <TableToolbarMenu
         className="custom-class"
         renderIcon={Download16}
-        iconDescription="Add"
-      />
+        iconDescription="Add">
+        <span>test</span>
+      </TableToolbarMenu>
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -26,7 +27,9 @@ describe('DataTable.TableToolbarMenu', () => {
 describe('Custom icon in DataTable.TableToolbarMenu', () => {
   it('should render', () => {
     const iconAction = mount(
-      <TableToolbarMenu renderIcon={Download16} iconDescription="Download" />
+      <TableToolbarMenu renderIcon={Download16} iconDescription="Download">
+        <span>test</span>
+      </TableToolbarMenu>
     );
     const originalIcon = mount(<Download16 />).find('svg');
     const icon = iconAction.find('svg');
