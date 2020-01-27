@@ -261,19 +261,15 @@ export class SelectableTile extends Component {
   handleClick = evt => {
     evt.preventDefault();
     evt.persist();
-    const isInput = evt.target === this.input;
-    if (!isInput) {
-      this.setState(
-        {
-          selected: !this.state.selected,
-        },
-        () => {
-          this.props.handleClick(evt);
-        }
-      );
-    } else {
-      this.props.handleClick(evt);
-    }
+    this.setState(
+      {
+        selected: !this.state.selected,
+      },
+      () => {
+        this.props.handleClick(evt);
+        this.props.onChange(evt);
+      }
+    );
   };
 
   handleKeyDown = evt => {
@@ -286,6 +282,7 @@ export class SelectableTile extends Component {
         },
         () => {
           this.props.handleKeyDown(evt);
+          this.props.onChange(evt);
         }
       );
     } else {
