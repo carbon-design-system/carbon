@@ -22,7 +22,7 @@ const files = glob.sync('**/*.scss', {
 const render = promisify(sass.render);
 
 describe('styles', () => {
-  jest.setTimeout(8000);
+  jest.setTimeout(20000);
   it.each(files)('%s should compile', async relativeFilePath => {
     const filepath = path.join(cwd, relativeFilePath);
     try {

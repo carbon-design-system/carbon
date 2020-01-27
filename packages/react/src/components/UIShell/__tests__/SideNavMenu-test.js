@@ -8,6 +8,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { SideNavMenu } from '../SideNavMenu';
+import { SideNavMenuItem } from '../';
 import { settings } from 'carbon-components';
 const { prefix } = settings;
 
@@ -71,16 +72,27 @@ describe('SideNavMenu', () => {
     ).toBe(false);
     // add a (single) child which is active
     wrapper.setProps({
-      children: <p isActive={true}>Test</p>,
+      children: <SideNavMenuItem isActive={true}>Test</SideNavMenuItem>,
     });
     expect(
-      wrapper.find('li').hasClass(`${prefix}--side-nav__item--active`)
+      wrapper
+        .find('li')
+        .at(0)
+        .hasClass(`${prefix}--side-nav__item--active`)
     ).toBe(true);
     wrapper.setProps({
-      children: ['entry one', <p aria-current={'page'}>entry two</p>],
+      children: [
+        <SideNavMenuItem key="first">entry one</SideNavMenuItem>,
+        <SideNavMenuItem key="second" aria-current="page">
+          entry two
+        </SideNavMenuItem>,
+      ],
     });
     expect(
-      wrapper.find('li').hasClass(`${prefix}--side-nav__item--active`)
+      wrapper
+        .find('li')
+        .at(0)
+        .hasClass(`${prefix}--side-nav__item--active`)
     ).toBe(true);
   });
 
