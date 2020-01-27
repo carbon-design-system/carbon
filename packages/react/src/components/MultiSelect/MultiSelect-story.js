@@ -84,6 +84,12 @@ const props = () => ({
       'open.menu': 'Open menu',
       'clear.all': 'Clear all',
       'clear.selection': 'Clear selection',
+      'carbon.listbox.item.position': '{{highlightedIndex}} of {{resultCount}}',
+      'carbon.listbox.item.none': 'No results are available.',
+      'carbon.listbox.item.count':
+        '{{count}} result is available, use up and down arrow keys to navigate. Press Enter key to select.',
+      'carbon.listbox.item.count.carbon.listbox.item.count.carbon.listbox.item.count.count_plural':
+        '{{count}} results are available, use up and down arrow keys to navigate. Press Enter key to select.',
     }
   ),
   selectionFeedback: select(
@@ -113,7 +119,12 @@ storiesOf('MultiSelect', module)
             items={items}
             itemToString={item => (item ? item.text : '')}
             placeholder={placeholder}
-            translateWithId={id => listBoxMenuIconTranslationIds[id]}
+            translateWithId={(id, state) =>
+              listBoxMenuIconTranslationIds[id].replace(
+                /{{(\w+?)}}/g,
+                (_, token) => state[token]
+              )
+            }
             selectionFeedback={selectionFeedback}
           />
         </div>

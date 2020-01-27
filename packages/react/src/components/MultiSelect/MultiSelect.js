@@ -13,6 +13,7 @@ import isEqual from 'lodash.isequal';
 import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import getA11yStatusMessageProp from '../ListBox/getA11yStatusMessage';
 import Selection from '../../internal/Selection';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import { defaultItemToString } from './tools/itemToString';
@@ -289,6 +290,7 @@ export default class MultiSelect extends React.Component {
             onStateChange={this.handleOnStateChange}
             onOuterClick={this.handleOnOuterClick}
             selectedItem={selectedItems}
+            getA11yStatusMessage={getA11yStatusMessageProp({ translateWithId })}
             render={({
               getRootProps,
               selectedItem,

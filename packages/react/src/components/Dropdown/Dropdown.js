@@ -12,6 +12,7 @@ import React from 'react';
 import { settings } from 'carbon-components';
 import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import getA11yStatusMessageProp from '../ListBox/getA11yStatusMessage';
 import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
@@ -229,7 +230,8 @@ export default class Dropdown extends React.Component {
           onChange={this.handleOnChange}
           itemToString={itemToString}
           defaultSelectedItem={initialSelectedItem}
-          selectedItem={selectedItem}>
+          selectedItem={selectedItem}
+          getA11yStatusMessage={getA11yStatusMessageProp({ translateWithId })}>
           {({
             isOpen,
             itemToString,

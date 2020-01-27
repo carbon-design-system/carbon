@@ -12,6 +12,7 @@ import React from 'react';
 import { settings } from 'carbon-components';
 import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import getA11yStatusMessageProp from '../ListBox/getA11yStatusMessage';
 import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
@@ -314,7 +315,8 @@ export default class ComboBox extends React.Component {
         inputValue={this.state.inputValue || ''}
         itemToString={itemToString}
         defaultSelectedItem={initialSelectedItem}
-        selectedItem={selectedItem}>
+        selectedItem={selectedItem}
+        getA11yStatusMessage={getA11yStatusMessageProp({ translateWithId })}>
         {({
           getButtonProps,
           getInputProps,

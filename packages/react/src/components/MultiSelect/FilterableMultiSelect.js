@@ -13,6 +13,7 @@ import isEqual from 'lodash.isequal';
 import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import getA11yStatusMessageProp from '../ListBox/getA11yStatusMessage';
 import Checkbox from '../Checkbox';
 import Selection from '../../internal/Selection';
 import { sortingPropTypes } from './MultiSelectPropTypes';
@@ -331,6 +332,7 @@ export default class FilterableMultiSelect extends React.Component {
             onStateChange={this.handleOnStateChange}
             onOuterClick={this.handleOnOuterClick}
             selectedItem={selectedItems}
+            getA11yStatusMessage={getA11yStatusMessageProp({ translateWithId })}
             render={({
               getButtonProps,
               getInputProps,
