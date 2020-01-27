@@ -19,14 +19,14 @@ describe('Tag', () => {
 
   describe('automated accessibility testing', () => {
     it('should have no Axe violations', async () => {
-      const { container } = render(<Tag>This is not a tag</Tag>);
+      const { container } = render(<Tag type="red">This is not a tag</Tag>);
       await expect(container).toHaveNoAxeViolations();
     });
 
     it('should have no DAP violations', async () => {
       const { container } = render(
         <main>
-          <Tag>This is not a tag</Tag>
+          <Tag type="red">This is not a tag</Tag>
         </main>
       );
       await expect(container).toHaveNoDAPViolations('Tag');
@@ -36,7 +36,11 @@ describe('Tag', () => {
   describe('with a screenreader', () => {
     it('filtered variant should have appropriate aria-label', () => {
       const children = 'tag content';
-      const { container } = render(<Tag filter>{children}</Tag>);
+      const { container } = render(
+        <Tag type="red" filter>
+          {children}
+        </Tag>
+      );
       const button = container.querySelector('[aria-label], [aria-labelledby]');
       const accessibilityLabel =
         button.getAttribute('aria-label') ||
