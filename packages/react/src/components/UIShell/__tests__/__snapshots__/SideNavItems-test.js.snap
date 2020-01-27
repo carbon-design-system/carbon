@@ -7,11 +7,15 @@ exports[`SideNavItems should render 1`] = `
   <ul
     className="bx--side-nav__items custom-classname"
   >
-    <span
+    <SideNavItem
       key=".0"
     >
-      foo
-    </span>
+      <li
+        className="bx--side-nav__item"
+      >
+        test
+      </li>
+    </SideNavItem>
   </ul>
 </SideNavItems>
 `;
