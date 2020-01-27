@@ -68,7 +68,7 @@ describe('Column', () => {
     }
   });
 
-  it('should set the column span to auto if a boolean is provided for a breakpoint', () => {
+  it('should set the column span to auto if a boolean is set to true for a breakpoint', () => {
     const breakpoints = ['sm', 'md', 'lg', 'xlg', 'max'];
     const props = {};
 

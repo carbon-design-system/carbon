@@ -105,13 +105,13 @@ const breakpointNames = ['sm', 'md', 'lg', 'xlg', 'max'];
 
 /**
  * @typedef {object} Breakpoint
- * @property {number} [span]
+ * @property {boolean|number} [span]
  * @property {number} [offset]
  */
 
 /**
  * Build the appropriate className for the given set of breakpoints.
- * @param {Array<number|Breakpoint>} breakpoints
+ * @param {Array<boolean|number|Breakpoint>} breakpoints
  * @returns {string}
  */
 function getClassNameForBreakpoints(breakpoints) {
@@ -127,7 +127,7 @@ function getClassNameForBreakpoints(breakpoints) {
 
     // If our breakpoint is a boolean, the user has specified that the column
     // should be "auto" at this size
-    if (typeof breakpoint === 'boolean') {
+    if (breakpoint === true) {
       classNames.push(`${prefix}--col-${name}`);
       continue;
     }
@@ -142,6 +142,10 @@ function getClassNameForBreakpoints(breakpoints) {
     const { span, offset } = breakpoint;
     if (typeof span === 'number') {
       classNames.push(`${prefix}--col-${name}-${span}`);
+    }
+
+    if (span === true) {
+      classNames.push(`${prefix}--col-${name}`);
     }
 
     if (typeof offset === 'number') {
