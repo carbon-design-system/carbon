@@ -20,6 +20,7 @@ const baseConfig = {
   external: [
     ...Object.keys(packageJson.peerDependencies),
     ...Object.keys(packageJson.dependencies),
+    'prop-types',
   ],
   plugins: [
     resolve(),
@@ -66,11 +67,13 @@ const baseConfig = {
   ],
 };
 
+const umdExternalDependencies = Object.keys(
+  packageJson.peerDependencies
+).filter(dependency => dependency !== 'carbon-components');
+
 const umdBundleConfig = {
   input: baseConfig.input,
-  external: Object.keys(packageJson.peerDependencies).filter(
-    dependency => dependency !== 'carbon-components'
-  ),
+  external: [...umdExternalDependencies, 'prop-types'],
   output: {
     name: 'CarbonComponentsReact',
     format: 'umd',
