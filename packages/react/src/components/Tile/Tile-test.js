@@ -129,14 +129,15 @@ describe('Tile', () => {
   });
 
   describe('Renders selectable tile as expected', () => {
-    const wrapper = mount(
-      <SelectableTile className="extra-class">
-        <div className="child">Test</div>
-      </SelectableTile>
-    );
+    let wrapper;
     let label;
 
     beforeEach(() => {
+      wrapper = mount(
+        <SelectableTile className="extra-class">
+          <div className="child">Test</div>
+        </SelectableTile>
+      );
       wrapper.state().selected = false;
       label = wrapper.find('label');
     });
@@ -199,6 +200,25 @@ describe('Tile', () => {
       wrapper.setProps({ light: true });
       expect(wrapper.props().light).toEqual(true);
       expect(wrapper.childAt(1).hasClass('bx--tile--light')).toEqual(true);
+    });
+
+    it('should call onChange when the checkbox value changes', () => {
+      const onChange = jest.fn();
+      const wrapper = mount(
+        <SelectableTile onChange={onChange}>
+          <span id="test-id">test</span>
+        </SelectableTile>
+      );
+
+      const content = wrapper.find('#test-id');
+
+      // Tile becomes selected
+      content.simulate('click');
+      expect(onChange).toHaveBeenCalledTimes(1);
+
+      // Tile becomes un-selected
+      content.simulate('click');
+      expect(onChange).toHaveBeenCalledTimes(2);
     });
   });
 
