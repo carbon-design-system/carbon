@@ -127,7 +127,7 @@ will hide the column entirely.
   @if $span == 0 {
     display: none;
   } @else {
-    // Explicitly write `display: block` to override
+    // Explicitly include `display: block` to override
     display: block;
     flex: 0 0 percentage($span / $columns);
     // Add a `max-width` to ensure content within each column does not blow out
@@ -566,12 +566,9 @@ Generate the CSS for a grid for the given breakpoints and gutters
     @include carbon--make-row();
   }
 
-  .#{$prefix}--grid--condensed .#{$prefix}--row:not(:last-of-type) {
-    margin-bottom: $condensed-gutter;
-  }
-
-  .#{$prefix}--row--condensed + .#{$prefix}--row--condensed {
-    margin-top: $condensed-gutter;
+  .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
+    padding-top: $condensed-gutter / 2;
+    padding-bottom: $condensed-gutter / 2;
   }
 
   @include carbon--make-grid-columns($breakpoints, $grid-gutter);

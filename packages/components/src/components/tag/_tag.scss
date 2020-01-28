@@ -16,8 +16,8 @@
 /// @group tag
 @mixin tags {
   .#{$prefix}--tag {
-    @include type-style('label-01');
     @include button-reset($width: false);
+    @include type-style('label-01');
 
     display: inline-flex;
     align-items: center;
@@ -28,6 +28,7 @@
     min-width: rem(32px); // ensures tag stays pill shaped;
     margin: $carbon--spacing-02;
     border-radius: rem(15px);
+    cursor: default;
 
     &:not(:first-child) {
       margin-left: 0;
