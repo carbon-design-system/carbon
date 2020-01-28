@@ -20478,7 +20478,6 @@ Progress indicator styles
   .#{$prefix}--progress-step--current svg {
     stroke: $interactive-01;
     fill: $interactive-01;
-    margin-top: rem(9.5px);
 
     path:last-of-type {
       stroke-width: 40%;
