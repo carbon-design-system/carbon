@@ -43,15 +43,6 @@
     }
   }
 
-  // Safari only fix to remove added margins on buttons (see #5155)
-  @media not all and (min-resolution: 0.001dpcm) {
-    @supports (-webkit-appearance: none) {
-      .#{$prefix}--btn {
-        margin: 0;
-      }
-    }
-  }
-
   // Reset intrisic padding in Firefox (see #731)
   .#{$prefix}--btn::-moz-focus-inner {
     padding: 0;

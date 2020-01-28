@@ -190,13 +190,9 @@
       box-sizing: border-box;
     }
 
-    // Safari only fix to remove added margins on buttons (see #5155)
-    @media not all and (min-resolution: 0.001dpcm) {
-      @supports (-webkit-appearance: none) {
-        button {
-          margin: 0;
-        }
-      }
+    // Fix to remove added margins on buttons in safari (see #5155)
+    button {
+      margin: 0;
     }
 
     @include carbon--type-reset;
