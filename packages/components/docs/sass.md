@@ -21175,7 +21175,7 @@ Select styles
     background-color: $field-02;
 
     &:hover {
-      background-color: $ui-01;
+      background-color: $hover-ui;
     }
 
     &:disabled,
@@ -21320,8 +21320,8 @@ Select styles
   - [disabled-02 [variable]](#disabled-02-variable)
   - [support-01 [variable]](#support-01-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [ui-01 [variable]](#ui-01-variable)
   - [ui-05 [variable]](#ui-05-variable)
+  - [ui-01 [variable]](#ui-01-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [spacing-07 [variable]](#spacing-07-variable)
@@ -22138,8 +22138,8 @@ Tag styles
 ```scss
 @mixin tags() {
   .#{$prefix}--tag {
-    @include type-style('label-01');
     @include button-reset($width: false);
+    @include type-style('label-01');
 
     display: inline-flex;
     align-items: center;
