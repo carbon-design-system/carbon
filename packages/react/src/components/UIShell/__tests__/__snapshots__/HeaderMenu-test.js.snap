@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HeaderMenu should render 1`] = `
-<ForwardRef>
+<HeaderMenu>
   <HeaderMenu
     focusRef={null}
     renderMenuContent={[Function]}
@@ -16,9 +16,8 @@ exports[`HeaderMenu should render 1`] = `
         aria-expanded={false}
         aria-haspopup="menu"
         className="bx--header__menu-item bx--header__menu-title"
-        href="javascript:void(0)"
+        href="#"
         onKeyDown={[Function]}
-        role="menuitem"
         tabIndex={0}
       >
         <defaultRenderMenuContent>
@@ -49,7 +48,7 @@ exports[`HeaderMenu should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M5 6L0 1 .7.3 5 4.6 9.3.3l.7.7z"
+                  d="M5 6L0 1 0.7 0.3 5 4.6 9.3 0.3 10 1z"
                 />
               </svg>
             </Icon>
@@ -72,13 +71,11 @@ exports[`HeaderMenu should render 1`] = `
               className="bx--header__menu-item"
               element="a"
               href="/a"
-              role="menuitem"
               tabIndex={0}
             >
               <a
                 className="bx--header__menu-item"
                 href="/a"
-                role="menuitem"
                 tabIndex={0}
               >
                 <span
@@ -102,13 +99,11 @@ exports[`HeaderMenu should render 1`] = `
               className="bx--header__menu-item"
               element="a"
               href="/b"
-              role="menuitem"
               tabIndex={0}
             >
               <a
                 className="bx--header__menu-item"
                 href="/b"
-                role="menuitem"
                 tabIndex={0}
               >
                 <span
@@ -132,13 +127,11 @@ exports[`HeaderMenu should render 1`] = `
               className="bx--header__menu-item"
               element="a"
               href="/c"
-              role="menuitem"
               tabIndex={0}
             >
               <a
                 className="bx--header__menu-item"
                 href="/c"
-                role="menuitem"
                 tabIndex={0}
               >
                 <span
@@ -153,5 +146,5 @@ exports[`HeaderMenu should render 1`] = `
       </ul>
     </li>
   </HeaderMenu>
-</ForwardRef>
+</HeaderMenu>
 `;

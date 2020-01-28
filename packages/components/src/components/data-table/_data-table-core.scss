@@ -51,7 +51,7 @@
   }
 
   .#{$prefix}--data-table thead {
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
     background-color: $ui-03;
   }
 
@@ -103,7 +103,8 @@
   }
 
   .#{$prefix}--data-table th:last-of-type {
-    position: relative;
+    // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
+    position: static;
     width: auto;
   }
 
@@ -215,6 +216,13 @@
     ); //used to center svg without setting display flex //display block needed for overflow text truncation
   }
 
+  .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu,
+  .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu__trigger {
+    &:hover {
+      background-color: $hover-field;
+    }
+  }
+
   //----------------------------------------------------------------------------
   //ZEBRA
   //----------------------------------------------------------------------------
@@ -243,7 +251,8 @@
   }
 
   .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
-    position: relative;
+    // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
+    position: static;
     background: $ui-03;
     padding: rem(12px) $spacing-03 0 $spacing-05;
     width: rem(

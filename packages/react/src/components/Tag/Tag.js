@@ -26,21 +26,35 @@ const TYPES = {
   'warm-gray': 'Warm-Gray',
 };
 
-const Tag = ({ children, className, type, filter, disabled, ...other }) => {
+const Tag = ({
+  children,
+  className,
+  type,
+  filter,
+  title,
+  disabled,
+  ...other
+}) => {
   const tagClass = `${prefix}--tag--${type}`;
   const tagClasses = classNames(`${prefix}--tag`, tagClass, className, {
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
   });
   return filter ? (
-    <span
+    <button
       className={tagClasses}
-      title="Clear filter"
-      tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      aria-label={
+        title !== undefined
+          ? `${title} ${children}`
+          : `Clear filter ${children}`
+      }
+      disabled={disabled}
       {...other}>
-      {children !== null && children !== undefined ? children : TYPES[type]}
-      <Close16 aria-label="Clear filter" />
-    </span>
+      <span className={`${prefix}--tag__label`}>
+        {children !== null && children !== undefined ? children : TYPES[type]}
+      </span>
+      <Close16 />
+    </button>
   ) : (
     <span className={tagClasses} {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
@@ -73,6 +87,11 @@ Tag.propTypes = {
    * Determine if <Tag> is a filter/chip
    */
   filter: PropTypes.bool,
+
+  /**
+   * Text to show on clear filters
+   */
+  title: PropTypes.string,
 };
 
 export const types = Object.keys(TYPES);

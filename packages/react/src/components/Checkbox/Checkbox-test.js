@@ -144,7 +144,14 @@ describe('refs', () => {
         this.myRef = React.createRef();
       }
       render() {
-        return <Checkbox indeterminate ref={this.myRef} />;
+        return (
+          <Checkbox
+            id="test-id"
+            labelText="test"
+            indeterminate
+            ref={this.myRef}
+          />
+        );
       }
     }
     const wrapper = mount(<MyComponent />);
@@ -155,7 +162,7 @@ describe('refs', () => {
 describe('CheckboxSkeleton', () => {
   describe('Renders as expected', () => {
     const wrapper = mount(<CheckboxSkeleton />);
-    const label = wrapper.find('label');
+    const label = wrapper.find('span');
 
     describe('label', () => {
       it('renders a label', () => {
@@ -163,7 +170,7 @@ describe('CheckboxSkeleton', () => {
       });
 
       it('has the expected classes', () => {
-        expect(label.hasClass(`${prefix}--checkbox-label`)).toEqual(true);
+        expect(label.hasClass(`${prefix}--checkbox-label-text`)).toEqual(true);
         expect(label.hasClass(`${prefix}--skeleton`)).toEqual(true);
       });
     });

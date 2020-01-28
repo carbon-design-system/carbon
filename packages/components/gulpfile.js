@@ -129,6 +129,7 @@ gulp.task('clean', () =>
     '!demo/js/theme-switcher.js',
     '!demo/js/inline-loading-demo-button.js',
     '!demo/js/data-table-demo-expand-all-manager.js',
+    '!demo/js/file-uploader-demo-state-manager.js',
     '!demo/js/prism.js',
     '!demo/components.js',
     '!demo/index.js',
@@ -401,7 +402,6 @@ gulp.task('sass:dev', () => {
     .pipe(sourcemaps.init())
     .pipe(
       header(`
-      $demo--carbon--theme-name: 'custom-properties';
       $feature-flags: (${Object.keys(flags)
         .reduce((a, flag) => [...a, `${flag}: ${!!flags[flag]}`], [])
         .join(', ')});

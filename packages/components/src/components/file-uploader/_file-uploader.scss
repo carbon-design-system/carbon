@@ -30,7 +30,7 @@
   // TODO: sync with type
   .#{$prefix}--file--label {
     @include reset;
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
     color: $text-01;
     margin-bottom: $carbon--spacing-03;
   }
@@ -52,6 +52,7 @@
     margin-bottom: $carbon--spacing-03;
     display: inline-block;
     width: 100%;
+    max-width: rem(320px);
     color: $link-01;
     outline: none;
     transition: $duration--fast-02 motion(standard, productive);
@@ -129,8 +130,14 @@
     }
 
     .#{$prefix}--loading {
-      width: $carbon--spacing-06;
-      height: $carbon--spacing-06;
+      width: rem(32px);
+      height: rem(32px);
+      margin-right: -$carbon--spacing-03;
+    }
+
+    .#{$prefix}--inline-loading__animation .#{$prefix}--loading {
+      // Vanilla markup has `.bx--inline-loading__animation` which is used for `margin-right` adjustment
+      margin-right: 0;
     }
 
     .#{$prefix}--file-filename {
@@ -245,12 +252,15 @@
     fill: $icon-02;
   }
 
+  .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
+    margin-right: -$carbon--spacing-03;
+  }
+
   .#{$prefix}--file__drop-container {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     height: rem(96px);
-    max-width: rem(320px);
     padding: $carbon--spacing-05;
     overflow: hidden;
     border: 1px dashed $ui-04;

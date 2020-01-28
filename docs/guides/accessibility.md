@@ -1,3 +1,5 @@
+<!-- alex disable failure -->
+
 # Accessibility
 
 <!-- prettier-ignore-start -->
@@ -43,24 +45,18 @@ tools <span aria-label="hammer and wrench">🛠</span>.
 
 ### Installing DAP🔧
 
-1. Grab the plugin while connected to IBM's W3
-   [from here](https://ibm.biz/BdYkWF).
-
-   _Be Warned: Make sure you only download the latest plugin from the specific
-   link above which should be version >1.7. The IBM DAP plugin available to the
-   public in the Chrome extension marketplace is unmaintained and will not
-   support the latest rulesets._
-
-2. At the top left of [this page](https://ibm.biz/BdYkML) is a button that will
-   copy to your clipboard the Authentication Token you'll need to access IBM's
-   rulesets. Click it.
-3. With the plugin installed and your token copied head into DAP's options found
-   inside the plugin dropdown menu and paste the token into the Authentication
-   form and hit apply.
-4. Now that DAP's authenticated the Supported Rulesets section in the options
-   menu of the plugin should be populated. Typically you're going to want the
-   latest ruleset unless someone has told you otherwise.
-5. Hit the apply button at the bottom of the page.
+1. Grab the plugin from
+   [the Chrome Webstore](https://chrome.google.com/webstore/detail/dynamic-assessment-plugin/fnapgcgphlfhecijolobjodbbnjjpdga).
+2. Click the newly added DAP icon in your Chrome toolbar and select 'Options'.
+3. In the 'Options' screen under 'Supported Rulesets' click the link for
+   'Accessibility Tools Dashboard'.
+4. After authenticating with IBM click your IBM email on the left which will
+   take you to an AAT tools page.
+5. Click the button labeled 'Copy Authentication Token' under the header on the
+   upper left.
+6. Navigate back to the 'Options' menu for the DAP plugin and paste that copied
+   token into the input and hit 'Apply'.
+7. Select the latest ruleset (it should have a month and a date in it's title).
 
 ## AVT1
 
@@ -79,8 +75,8 @@ positives when testing exclusively on a component. Typically we're not auditing
 a webpage or a website as a whole, but a single component in isolation -- sadly
 this was not DAP's intended purpose and so it throws a lot of false positive
 violations that you'll first need to sift through and ignore if we're going to
-be keeping and recording this audit. If you're just testing while you develop or
-before you push a PR, feel free to just disregard them.
+be keeping and recording this audit. If you're only testing while you develop or
+before you push a PR, feel free to disregard them.
 
 If the component fails or has a violation an issue should be made so that
 someone can fix the problem. Feel free to include in the issue any relevant
@@ -154,12 +150,16 @@ using only your keyboard in the manner described. Integrating this test
 throughout each stage of development will save you the pain of retro-fitting a
 component with the necessary keyboard functionality.
 
-### Screen Magnifier testing🔎
+### Screen magnifier testing🔎
+
+<!-- alex disable his -->
 
 (Credit to Frederick Creemers
 [excellent article](https://dev.to/_bigblind/how-to-make-your-website-accessible-to-people-who-use-a-screen-magnifier)
 talking about his experience as a visually impaired screen magnification user on
 the web.)
+
+<!-- alex enable his -->
 
 A user with a screen magnifier views web content on a component by component
 basis through a 2x, 4x, or 8x (etc) zoomed in box. Two things become very
@@ -211,10 +211,10 @@ consistency's sake we'll use DAP on the
 Head over to the page and hit `cmd-option-c` to open up your dev tools. DAP is
 tucked away inside a drop down menu inside a panel. From the default Elements
 panel hit the >> icon below the X on the far right. You should see `DAP`. Click
-that to fire up DAP for this page.
+that to open up DAP for this page.
 
 _Be Warned: You can only run DAP with internal IBM rulesets if you're connected
-to W3. On an IBM campus this isn't a problem, but if you're abroad fire up the
+to W3. On an IBM campus this isn't a problem, but if you're abroad open the
 Cisco AnyConnect Secure Mobility Client._
 
 Hit the play button and wait for the scan to finish. **We've got violations!**.

@@ -63,6 +63,15 @@ describe('Tab', () => {
       );
     });
 
+    it('has aria-disabled that matches disabled', () => {
+      const getDisabledRegion = () => wrapper.find('[aria-disabled]');
+
+      expect(getDisabledRegion().length).toEqual(0);
+
+      wrapper.setProps({ disabled: true });
+      expect(getDisabledRegion().prop('aria-disabled')).toEqual(true);
+    });
+
     it(`adds [className="${prefix}--tabs__nav-item--selected"] when selected prop is true`, () => {
       wrapper.setProps({ selected: true });
       expect(wrapper.hasClass(`${prefix}--tabs__nav-item--selected`)).toBe(
@@ -92,24 +101,22 @@ describe('Tab', () => {
 
     describe('keydown', () => {
       const onKeyDown = jest.fn();
-      const handleTabAnchorFocus = jest.fn();
       const handleTabKeyDown = jest.fn();
       const wrapper = shallow(<Tab label="firstTab" />);
-      wrapper.setProps({ onKeyDown, handleTabAnchorFocus, handleTabKeyDown });
+      wrapper.setProps({ onKeyDown, handleTabKeyDown });
 
       it('invokes onKeyDown when a function is passed to onKeyDown prop', () => {
         wrapper.simulate('keyDown', { which: 38 });
         expect(onKeyDown).toBeCalled();
-        expect(handleTabAnchorFocus).not.toBeCalled();
       });
 
       it('invokes handleTabAnchorFocus when onKeyDown occurs for appropriate events', () => {
         wrapper.simulate('keyDown', { which: 37 });
         expect(onKeyDown).toBeCalled();
-        expect(handleTabAnchorFocus).toBeCalled();
       });
     });
   });
+
   describe('custom render label', () => {
     const wrapper = mount(
       <Tab

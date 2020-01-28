@@ -2,18 +2,18 @@
 
 exports[`AccordionSkeleton should render 1`] = `
 <AccordionSkeleton
+  align="end"
   count={4}
   open={true}
 >
   <ul
-    className="bx--accordion bx--skeleton"
+    className="bx--accordion bx--skeleton bx--accordion--end"
   >
     <li
       className="bx--accordion__item bx--accordion__item--active"
     >
-      <button
+      <span
         className="bx--accordion__heading"
-        type="button"
       >
         <ForwardRef(ChevronRight16)
           className="bx--accordion__arrow"
@@ -42,7 +42,7 @@ exports[`AccordionSkeleton should render 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
+                d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
               />
             </svg>
           </Icon>
@@ -63,7 +63,7 @@ exports[`AccordionSkeleton should render 1`] = `
             }
           />
         </SkeletonText>
-      </button>
+      </span>
       <div
         className="bx--accordion__content"
       >
@@ -120,9 +120,8 @@ exports[`AccordionSkeleton should render 1`] = `
       <li
         className="bx--accordion__item"
       >
-        <button
+        <span
           className="bx--accordion__heading"
-          type="button"
         >
           <ForwardRef(ChevronRight16)
             className="bx--accordion__arrow"
@@ -151,7 +150,7 @@ exports[`AccordionSkeleton should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
+                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
                 />
               </svg>
             </Icon>
@@ -172,7 +171,7 @@ exports[`AccordionSkeleton should render 1`] = `
               }
             />
           </SkeletonText>
-        </button>
+        </span>
       </li>
     </AccordionSkeletonItem>
     <AccordionSkeletonItem
@@ -181,9 +180,8 @@ exports[`AccordionSkeleton should render 1`] = `
       <li
         className="bx--accordion__item"
       >
-        <button
+        <span
           className="bx--accordion__heading"
-          type="button"
         >
           <ForwardRef(ChevronRight16)
             className="bx--accordion__arrow"
@@ -212,7 +210,7 @@ exports[`AccordionSkeleton should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
+                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
                 />
               </svg>
             </Icon>
@@ -233,7 +231,7 @@ exports[`AccordionSkeleton should render 1`] = `
               }
             />
           </SkeletonText>
-        </button>
+        </span>
       </li>
     </AccordionSkeletonItem>
     <AccordionSkeletonItem
@@ -242,9 +240,8 @@ exports[`AccordionSkeleton should render 1`] = `
       <li
         className="bx--accordion__item"
       >
-        <button
+        <span
           className="bx--accordion__heading"
-          type="button"
         >
           <ForwardRef(ChevronRight16)
             className="bx--accordion__arrow"
@@ -273,7 +270,7 @@ exports[`AccordionSkeleton should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
+                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
                 />
               </svg>
             </Icon>
@@ -294,7 +291,7 @@ exports[`AccordionSkeleton should render 1`] = `
               }
             />
           </SkeletonText>
-        </button>
+        </span>
       </li>
     </AccordionSkeletonItem>
   </ul>

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2019
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,24 +31,41 @@ const TableToolbarSearch = ({
   labelText,
   expanded: expandedProp,
   defaultExpanded,
+  defaultValue,
   onExpand,
   persistent,
   persistant,
   id,
+  tabIndex,
   ...rest
 }) => {
   const { current: controlled } = useRef(expandedProp !== undefined);
-  const [expandedState, setExpandedState] = useState(defaultExpanded);
+  const [expandedState, setExpandedState] = useState(
+    defaultExpanded || defaultValue
+  );
   const expanded = controlled ? expandedProp : expandedState;
   const searchRef = useRef(null);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(defaultValue || '');
   const uniqueId = useMemo(getInstanceId, []);
 
+  const [focusTarget, setFocusTarget] = useState(null);
+
   useEffect(() => {
-    if (!controlled && expandedState && searchRef.current) {
-      searchRef.current.querySelector('input').focus();
+    if (focusTarget) {
+      focusTarget.current.querySelector('input').focus();
+      setFocusTarget(null);
     }
-  }, [controlled, expandedState]);
+  }, [focusTarget]);
+
+  useEffect(
+    () => {
+      if (defaultValue) {
+        onChangeProp('', defaultValue);
+      }
+    },
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   const searchContainerClasses = cx({
     [searchContainerClass]: searchContainerClass,
@@ -69,6 +86,11 @@ const TableToolbarSearch = ({
     }
   };
 
+  const onClick = e => {
+    setFocusTarget(searchRef);
+    handleExpand(e, true);
+  };
+
   const onChange = e => {
     setValue(e.target.value);
     if (onChangeProp) {
@@ -78,25 +100,26 @@ const TableToolbarSearch = ({
 
   return (
     <div
-      tabIndex={expandedState ? '-1' : '0'}
-      role="searchbox"
+      tabIndex={expandedState ? '-1' : tabIndex}
+      role="search"
       ref={searchRef}
-      onClick={event => handleExpand(event, true)}
+      onClick={event => onClick(event)}
       onFocus={event => handleExpand(event, true)}
       onBlur={event => !value && handleExpand(event, false)}
       className={searchContainerClasses}>
       <Search
-        {...rest}
-        small
+        size="sm"
+        tabIndex={expandedState ? tabIndex : '-1'}
         className={className}
         value={value}
-        id={typeof id !== 'undefined' ? id : uniqueId}
+        id={typeof id !== 'undefined' ? id : uniqueId.toString()}
         aria-hidden={!expanded}
         labelText={labelText || t('carbon.table.toolbar.search.label')}
         placeHolderText={
           placeHolderText || t('carbon.table.toolbar.search.placeholder')
         }
         onChange={onChange}
+        {...rest}
       />
     </div>
   );
@@ -136,9 +159,19 @@ TableToolbarSearch.propTypes = {
   labelText: PropTypes.string,
 
   /**
+   * Provide an optional default value for the Search component
+   */
+  defaultValue: PropTypes.string,
+
+  /**
    * Provide custom text for the component for each translation id
    */
   translateWithId: PropTypes.func.isRequired,
+
+  /**
+   * Optional prop to specify the tabIndex of the <Search> (in expanded state) or the container (in collapsed state)
+   */
+  tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
   /**
    * Whether the search should be allowed to expand
@@ -151,6 +184,7 @@ TableToolbarSearch.propTypes = {
 };
 
 TableToolbarSearch.defaultProps = {
+  tabIndex: '0',
   translateWithId,
   persistent: false,
 };

@@ -6,31 +6,60 @@
  */
 
 import cx from 'classnames';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { composeEventHandlers } from '../../tools/events';
+import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
+const getInstanceId = setupGetInstanceId();
 const TooltipIcon = ({
+  id,
   className,
   children,
   direction,
   align,
+  onFocus,
+  onMouseEnter,
   tooltipText,
   ...rest
 }) => {
+  const [allowTooltipVisibility, setAllowTooltipVisibility] = useState(true);
+  const tooltipId = id || `icon-tooltip-${getInstanceId()}`;
   const tooltipTriggerClasses = cx(
     `${prefix}--tooltip__trigger`,
     `${prefix}--tooltip--a11y`,
+    className,
     {
       [`${prefix}--tooltip--${direction}`]: direction,
       [`${prefix}--tooltip--align-${align}`]: align,
-      className,
+      [`${prefix}--tooltip--hidden`]: !allowTooltipVisibility,
     }
   );
+  const handleFocus = () => setAllowTooltipVisibility(true);
+  const handleMouseEnter = () => setAllowTooltipVisibility(true);
+  useEffect(() => {
+    const handleEscKeyDown = event => {
+      if (matches(event, [keys.Escape])) {
+        setAllowTooltipVisibility(false);
+      }
+    };
+    document.addEventListener('keydown', handleEscKeyDown);
+    return () => document.removeEventListener('keydown', handleEscKeyDown);
+  }, []);
+
   return (
-    <button {...rest} className={tooltipTriggerClasses}>
-      <span className={`${prefix}--assistive-text`}>{tooltipText}</span>
+    <button
+      {...rest}
+      className={tooltipTriggerClasses}
+      aria-describedby={tooltipId}
+      onMouseEnter={composeEventHandlers([onMouseEnter, handleMouseEnter])}
+      onFocus={composeEventHandlers([onFocus, handleFocus])}>
+      <span className={`${prefix}--assistive-text`} id={tooltipId}>
+        {tooltipText}
+      </span>
       {children}
     </button>
   );
@@ -46,7 +75,7 @@ TooltipIcon.propTypes = {
   /**
    * Specify the direction of the tooltip. Can be either top or bottom.
    */
-  direction: PropTypes.oneOf(['top', 'bottom']),
+  direction: PropTypes.oneOf(['top', 'right', 'left', 'bottom']),
 
   /**
    * Specify the alignment (to the trigger button) of the tooltip.

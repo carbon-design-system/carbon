@@ -30,6 +30,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     isFixedNav,
     isRail,
     isPersistent,
+    addFocusListeners,
     addMouseListeners,
   } = props;
 
@@ -91,14 +92,16 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     });
   }
 
-  const eventHanders = {
-    onFocus: event => handleToggle(event, true),
-    onBlur: event => handleToggle(event, false),
-  };
+  let eventHandlers = {};
+
+  if (addFocusListeners) {
+    eventHandlers.onFocus = event => handleToggle(event, true);
+    eventHandlers.onBlur = event => handleToggle(event, false);
+  }
 
   if (addMouseListeners) {
-    eventHanders.onMouseEnter = () => handleToggle(true, true);
-    eventHanders.onMouseLeave = () => handleToggle(false, false);
+    eventHandlers.onMouseEnter = () => handleToggle(true, true);
+    eventHandlers.onMouseLeave = () => handleToggle(false, false);
   }
 
   return (
@@ -108,7 +111,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         ref={ref}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}
-        {...eventHanders}>
+        {...eventHandlers}>
         {childrenToRender}
       </nav>
     </>
@@ -127,6 +130,7 @@ SideNav.defaultProps = {
   isChildOfHeader: true,
   isFixedNav: false,
   isPersistent: true,
+  addFocusListeners: true,
   addMouseListeners: true,
 };
 
@@ -188,6 +192,11 @@ SideNav.propTypes = {
    * Specify if the sideNav will be persistent above the lg breakpoint
    */
   isPersistent: PropTypes.bool,
+
+  /**
+   * Specify whether focus and blur listeners are added. They are by default.
+   */
+  addFocusListeners: PropTypes.bool,
 
   /**
    * Specify whether mouse entry/exit listeners are added. They are by default.

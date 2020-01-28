@@ -13,4 +13,23 @@ module.exports = {
   context: {
     prefix,
   },
+  variants: [
+    {
+      name: 'default',
+      label: 'Default',
+    },
+    {
+      name: 'inline',
+      label: 'Inline',
+      notes: `
+        Inline by default has underline.
+        Its intended use is in paragraphs and sentences,
+        where underline makes it more accessible,
+        so that color blue is not the only visual differentiator.
+      `,
+      context: {
+        inline: true,
+      },
+    },
+  ],
 };

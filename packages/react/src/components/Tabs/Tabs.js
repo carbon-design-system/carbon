@@ -8,8 +8,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { ChevronDownGlyph } from '@carbon/icons-react';
+import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
+import { keys, match, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -35,6 +36,7 @@ export default class Tabs extends React.Component {
 
     /**
      * Specify whether the Tab content is hidden
+     */
     hidden: PropTypes.bool,
 
     /**
@@ -42,6 +44,11 @@ export default class Tabs extends React.Component {
      * role if it makes sense from the accessibility-side
      */
     role: PropTypes.string.isRequired,
+
+    /**
+     * Provide the type of Tab
+     */
+    type: PropTypes.oneOf(['default', 'container']),
 
     /**
      * Optionally provide an `onClick` handler that is invoked when a <Tab> is
@@ -87,6 +94,7 @@ export default class Tabs extends React.Component {
   static defaultProps = {
     iconDescription: 'show menu options',
     role: 'navigation',
+    type: 'default',
     triggerHref: '#',
     selected: 0,
     ariaLabel: 'listbox',
@@ -109,6 +117,12 @@ export default class Tabs extends React.Component {
   getTabs() {
     return React.Children.map(this.props.children, tab => tab);
   }
+
+  getEnabledTabs = () =>
+    React.Children.toArray(this.props.children).reduce(
+      (acc, tab, index) => (!tab.props.disabled ? acc.concat(index) : acc),
+      []
+    );
 
   getTabAt = (index, useFresh) => {
     return (
@@ -133,35 +147,47 @@ export default class Tabs extends React.Component {
     };
   };
 
+  getDirection = evt => {
+    if (match(evt, keys.ArrowLeft)) {
+      return -1;
+    }
+    if (match(evt, keys.ArrowRight)) {
+      return 1;
+    }
+    return 0;
+  };
+
+  getNextIndex = (index, direction) => {
+    const enabledTabs = this.getEnabledTabs();
+    const nextIndex = Math.max(
+      enabledTabs.indexOf(index) + direction,
+      -1 /* For `tab` not found in `enabledTabs` */
+    );
+    const nextIndexLooped =
+      nextIndex >= 0 && nextIndex < enabledTabs.length
+        ? nextIndex
+        : nextIndex - Math.sign(nextIndex) * enabledTabs.length;
+    return enabledTabs[nextIndexLooped];
+  };
+
   handleTabKeyDown = onSelectionChange => {
     return (index, evt) => {
-      const key = evt.key || evt.which;
-
-      if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
+      if (matches(evt, [keys.Enter, keys.Space])) {
         this.selectTabAt(index, onSelectionChange);
         this.setState({
           dropdownHidden: true,
         });
       }
-    };
-  };
 
-  handleTabAnchorFocus = onSelectionChange => {
-    return index => {
-      const tabCount = React.Children.count(this.props.children) - 1;
-      let tabIndex = index;
-      if (index < 0) {
-        tabIndex = tabCount;
-      } else if (index > tabCount) {
-        tabIndex = 0;
-      }
-
-      const tab = this.getTabAt(tabIndex);
-
-      if (tab) {
-        this.selectTabAt(tabIndex, onSelectionChange);
-        if (tab.tabAnchor) {
-          tab.tabAnchor.focus();
+      if (window.matchMedia('(min-width: 42rem)').matches) {
+        const nextIndex = this.getNextIndex(index, this.getDirection(evt));
+        const tab = this.getTabAt(nextIndex);
+        if (tab && matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
+          evt.preventDefault();
+          this.selectTabAt(nextIndex, onSelectionChange);
+          if (tab.tabAnchor) {
+            tab.tabAnchor.focus();
+          }
         }
       }
     };
@@ -191,6 +217,7 @@ export default class Tabs extends React.Component {
       className,
       triggerHref,
       role,
+      type,
       onSelectionChange,
       tabContentClassName,
       ...other
@@ -215,7 +242,6 @@ export default class Tabs extends React.Component {
         index,
         selected: index === this.state.selected,
         handleTabClick: this.handleTabClick(onSelectionChange),
-        handleTabAnchorFocus: this.handleTabAnchorFocus(onSelectionChange),
         tabIndex,
         ref: e => {
           this.setTabAt(index, e);
@@ -227,21 +253,30 @@ export default class Tabs extends React.Component {
     });
 
     const tabContentWithProps = React.Children.map(tabsWithProps, tab => {
-      const { children, selected, renderContent: TabContent } = tab.props;
+      const {
+        id: tabId,
+        children,
+        selected,
+        renderContent: TabContent,
+      } = tab.props;
 
       return (
         <TabContent
+          id={tabId && `${tabId}__panel`}
           className={tabContentClassName}
           aria-hidden={!selected}
           hidden={!selected}
-          selected={selected}>
+          selected={selected}
+          aria-labelledby={tabId}>
           {children}
         </TabContent>
       );
     });
 
     const classes = {
-      tabs: classNames(`${prefix}--tabs`, className),
+      tabs: classNames(`${prefix}--tabs`, className, {
+        [`${prefix}--tabs--container`]: type === 'container',
+      }),
       tablist: classNames(`${prefix}--tabs__nav`, {
         [`${prefix}--tabs__nav--hidden`]: this.state.dropdownHidden,
       }),
@@ -267,9 +302,9 @@ export default class Tabs extends React.Component {
               onClick={this.handleDropdownClick}>
               {selectedLabel}
             </a>
-            <ChevronDownGlyph aria-hidden="true">
+            <ChevronDown16 aria-hidden="true">
               {iconDescription && <title>{iconDescription}</title>}
-            </ChevronDownGlyph>
+            </ChevronDown16>
           </div>
           <ul role="tablist" className={classes.tablist}>
             {tabsWithProps}

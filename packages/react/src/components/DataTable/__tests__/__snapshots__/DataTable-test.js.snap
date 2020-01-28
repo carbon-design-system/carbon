@@ -62,7 +62,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
             >
               <TableHead>
                 <TableRow>
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -71,8 +71,8 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -81,7 +81,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -334,7 +334,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
             >
               <TableHead>
                 <TableRow>
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -343,8 +343,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -353,7 +353,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -364,7 +364,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-11__select-row-b"
+                    id="data-table-14__select-row-b"
                     name="select-row-b"
                     onSelect={[Function]}
                     radio={true}
@@ -381,7 +381,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-11__select-row-a"
+                    id="data-table-14__select-row-a"
                     name="select-row-a"
                     onSelect={[Function]}
                     radio={true}
@@ -398,7 +398,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-11__select-row-c"
+                    id="data-table-14__select-row-c"
                     name="select-row-c"
                     onSelect={[Function]}
                     radio={true}
@@ -523,17 +523,19 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-11__select-row-b"
+                    id="data-table-14__select-row-b"
                     name="select-row-b"
                     onSelect={[Function]}
                     radio={true}
                   >
-                    <td>
+                    <td
+                      className="bx--table-column-checkbox"
+                    >
                       <ForwardRef(RadioButton)
                         checked={false}
                         disabled={false}
                         hideLabel={true}
-                        id="data-table-11__select-row-b"
+                        id="data-table-14__select-row-b"
                         labelText="Select row"
                         name="select-row-b"
                         onClick={[Function]}
@@ -542,7 +544,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                           checked={false}
                           disabled={false}
                           hideLabel={true}
-                          id="data-table-11__select-row-b"
+                          id="data-table-14__select-row-b"
                           innerRef={null}
                           labelPosition="right"
                           labelText="Select row"
@@ -558,7 +560,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               checked={false}
                               className="bx--radio-button"
                               disabled={false}
-                              id="data-table-11__select-row-b"
+                              id="data-table-14__select-row-b"
                               name="select-row-b"
                               onChange={[Function]}
                               onClick={[Function]}
@@ -566,9 +568,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               value=""
                             />
                             <label
-                              aria-label="Select row"
                               className="bx--radio-button__label"
-                              htmlFor="data-table-11__select-row-b"
+                              htmlFor="data-table-14__select-row-b"
                             >
                               <span
                                 className="bx--radio-button__appearance"
@@ -608,17 +609,19 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-11__select-row-a"
+                    id="data-table-14__select-row-a"
                     name="select-row-a"
                     onSelect={[Function]}
                     radio={true}
                   >
-                    <td>
+                    <td
+                      className="bx--table-column-checkbox"
+                    >
                       <ForwardRef(RadioButton)
                         checked={false}
                         disabled={false}
                         hideLabel={true}
-                        id="data-table-11__select-row-a"
+                        id="data-table-14__select-row-a"
                         labelText="Select row"
                         name="select-row-a"
                         onClick={[Function]}
@@ -627,7 +630,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                           checked={false}
                           disabled={false}
                           hideLabel={true}
-                          id="data-table-11__select-row-a"
+                          id="data-table-14__select-row-a"
                           innerRef={null}
                           labelPosition="right"
                           labelText="Select row"
@@ -643,7 +646,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               checked={false}
                               className="bx--radio-button"
                               disabled={false}
-                              id="data-table-11__select-row-a"
+                              id="data-table-14__select-row-a"
                               name="select-row-a"
                               onChange={[Function]}
                               onClick={[Function]}
@@ -651,9 +654,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               value=""
                             />
                             <label
-                              aria-label="Select row"
                               className="bx--radio-button__label"
-                              htmlFor="data-table-11__select-row-a"
+                              htmlFor="data-table-14__select-row-a"
                             >
                               <span
                                 className="bx--radio-button__appearance"
@@ -693,17 +695,19 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-11__select-row-c"
+                    id="data-table-14__select-row-c"
                     name="select-row-c"
                     onSelect={[Function]}
                     radio={true}
                   >
-                    <td>
+                    <td
+                      className="bx--table-column-checkbox"
+                    >
                       <ForwardRef(RadioButton)
                         checked={false}
                         disabled={false}
                         hideLabel={true}
-                        id="data-table-11__select-row-c"
+                        id="data-table-14__select-row-c"
                         labelText="Select row"
                         name="select-row-c"
                         onClick={[Function]}
@@ -712,7 +716,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                           checked={false}
                           disabled={false}
                           hideLabel={true}
-                          id="data-table-11__select-row-c"
+                          id="data-table-14__select-row-c"
                           innerRef={null}
                           labelPosition="right"
                           labelText="Select row"
@@ -728,7 +732,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               checked={false}
                               className="bx--radio-button"
                               disabled={false}
-                              id="data-table-11__select-row-c"
+                              id="data-table-14__select-row-c"
                               name="select-row-c"
                               onChange={[Function]}
                               onClick={[Function]}
@@ -736,9 +740,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               value=""
                             />
                             <label
-                              aria-label="Select row"
                               className="bx--radio-button__label"
-                              htmlFor="data-table-11__select-row-c"
+                              htmlFor="data-table-14__select-row-c"
                             >
                               <span
                                 className="bx--radio-button__appearance"
@@ -848,7 +851,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     name="select-all"
                     onSelect={[Function]}
                   />
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -857,8 +860,8 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -867,7 +870,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -1175,7 +1178,7 @@ exports[`DataTable selection should render 1`] = `
                     name="select-all"
                     onSelect={[Function]}
                   />
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -1184,8 +1187,8 @@ exports[`DataTable selection should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -1194,7 +1197,7 @@ exports[`DataTable selection should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -1417,7 +1420,9 @@ exports[`DataTable selection should render 1`] = `
                     onSelect={[Function]}
                     radio={null}
                   >
-                    <td>
+                    <td
+                      className="bx--table-column-checkbox"
+                    >
                       <ForwardRef(InlineCheckbox)
                         ariaLabel="Select row"
                         checked={false}
@@ -1484,7 +1489,9 @@ exports[`DataTable selection should render 1`] = `
                     onSelect={[Function]}
                     radio={null}
                   >
-                    <td>
+                    <td
+                      className="bx--table-column-checkbox"
+                    >
                       <ForwardRef(InlineCheckbox)
                         ariaLabel="Select row"
                         checked={false}
@@ -1551,7 +1558,9 @@ exports[`DataTable selection should render 1`] = `
                     onSelect={[Function]}
                     radio={null}
                   >
-                    <td>
+                    <td
+                      className="bx--table-column-checkbox"
+                    >
                       <ForwardRef(InlineCheckbox)
                         ariaLabel="Select row"
                         checked={false}
@@ -1761,7 +1770,9 @@ exports[`DataTable should render 1`] = `
           "value": <TableContainer
             title="DataTable with toolbar"
           >
-            <TableToolbar>
+            <TableToolbar
+              aria-label="data table toolbar"
+            >
               <TableBatchActions
                 onCancel={[Function]}
                 shouldShowBatchActions={false}
@@ -1807,6 +1818,7 @@ exports[`DataTable should render 1`] = `
                   id="custom-id"
                   onChange={[Function]}
                   persistent={true}
+                  tabIndex="0"
                   translateWithId={[Function]}
                 />
                 <TableToolbarMenu
@@ -1839,7 +1851,7 @@ exports[`DataTable should render 1`] = `
                   disabled={false}
                   kind="primary"
                   onClick={[MockFunction]}
-                  small={true}
+                  size="small"
                   tabIndex={0}
                   type="button"
                 >
@@ -1852,7 +1864,7 @@ exports[`DataTable should render 1`] = `
             >
               <TableHead>
                 <TableRow>
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -1861,8 +1873,8 @@ exports[`DataTable should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -1871,7 +1883,7 @@ exports[`DataTable should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -1948,7 +1960,9 @@ exports[`DataTable should render 1`] = `
           className="bx--data-table-header__description"
         />
       </div>
-      <TableToolbar>
+      <TableToolbar
+        aria-label="data table toolbar"
+      >
         <section
           aria-label="data table toolbar"
           className="bx--table-toolbar"
@@ -2025,7 +2039,7 @@ exports[`DataTable should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm4 8H9v3H7V9H4V7h3V4h2v3h3v2z"
+                                d="M8,1C4.2,1,1,4.2,1,8s3.2,7,7,7s7-3.2,7-7S11.8,1,8,1z M12,9H9v3H7V9H4V7h3V4h2v3h3V9z"
                               />
                             </svg>
                           </Icon>
@@ -2092,7 +2106,7 @@ exports[`DataTable should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm4 8H9v3H7V9H4V7h3V4h2v3h3v2z"
+                                d="M8,1C4.2,1,1,4.2,1,8s3.2,7,7,7s7-3.2,7-7S11.8,1,8,1z M12,9H9v3H7V9H4V7h3V4h2v3h3V9z"
                               />
                             </svg>
                           </Icon>
@@ -2159,7 +2173,7 @@ exports[`DataTable should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm4 8H9v3H7V9H4V7h3V4h2v3h3v2z"
+                                d="M8,1C4.2,1,1,4.2,1,8s3.2,7,7,7s7-3.2,7-7S11.8,1,8,1z M12,9H9v3H7V9H4V7h3V4h2v3h3V9z"
                               />
                             </svg>
                           </Icon>
@@ -2172,14 +2186,14 @@ exports[`DataTable should render 1`] = `
                     disabled={false}
                     kind="primary"
                     onClick={[Function]}
-                    tabIndex={0}
+                    tabIndex={-1}
                     type="button"
                   >
                     <button
                       className="bx--batch-summary__cancel bx--btn bx--btn--primary"
                       disabled={false}
                       onClick={[Function]}
-                      tabIndex={0}
+                      tabIndex={-1}
                       type="button"
                     >
                       Cancel
@@ -2208,6 +2222,7 @@ exports[`DataTable should render 1`] = `
                 id="custom-id"
                 onChange={[Function]}
                 persistent={true}
+                tabIndex="0"
                 translateWithId={[Function]}
               >
                 <div
@@ -2215,7 +2230,7 @@ exports[`DataTable should render 1`] = `
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
-                  role="searchbox"
+                  role="search"
                   tabIndex="0"
                 >
                   <Search
@@ -2225,7 +2240,8 @@ exports[`DataTable should render 1`] = `
                     labelText="Filter table"
                     onChange={[Function]}
                     placeHolderText="Filter table"
-                    small={true}
+                    size="sm"
+                    tabIndex="-1"
                     type="text"
                     value=""
                   >
@@ -2234,13 +2250,11 @@ exports[`DataTable should render 1`] = `
                     >
                       <ForwardRef(Search16)
                         className="bx--search-magnifier"
-                        role="img"
                       >
                         <Icon
                           className="bx--search-magnifier"
                           height={16}
                           preserveAspectRatio="xMidYMid meet"
-                          role="img"
                           viewBox="0 0 16 16"
                           width={16}
                           xmlns="http://www.w3.org/2000/svg"
@@ -2251,7 +2265,6 @@ exports[`DataTable should render 1`] = `
                             focusable="false"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
-                            role="img"
                             style={
                               Object {
                                 "willChange": "transform",
@@ -2262,7 +2275,7 @@ exports[`DataTable should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <path
-                              d="M15 14.3L10.7 10c1.9-2.3 1.6-5.8-.7-7.7S4.2.7 2.3 3 .7 8.8 3 10.7c2 1.7 5 1.7 7 0l4.3 4.3.7-.7zM2 6.5C2 4 4 2 6.5 2S11 4 11 6.5 9 11 6.5 11 2 9 2 6.5z"
+                              d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
                             />
                           </svg>
                         </Icon>
@@ -2275,10 +2288,13 @@ exports[`DataTable should render 1`] = `
                       </label>
                       <input
                         aria-hidden={true}
+                        autoComplete="off"
                         className="bx--search-input"
                         id="custom-id"
                         onChange={[Function]}
                         placeholder="Filter table"
+                        role="searchbox"
+                        tabIndex="-1"
                         type="text"
                         value=""
                       />
@@ -2288,25 +2304,19 @@ exports[`DataTable should render 1`] = `
                         onClick={[Function]}
                         type="button"
                       >
-                        <ForwardRef(Close16)
-                          aria-label="Clear search input"
-                          role="img"
-                        >
+                        <ForwardRef(Close16)>
                           <Icon
-                            aria-label="Clear search input"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
-                            role="img"
                             viewBox="0 0 16 16"
                             width={16}
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-label="Clear search input"
+                              aria-hidden={true}
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
-                              role="img"
                               style={
                                 Object {
                                   "willChange": "transform",
@@ -2317,7 +2327,7 @@ exports[`DataTable should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"
+                                d="M12 4.7L11.3 4 8 7.3 4.7 4 4 4.7 7.3 8 4 11.3 4.7 12 8 8.7 11.3 12 12 11.3 8.7 8z"
                               />
                             </svg>
                           </Icon>
@@ -2337,8 +2347,10 @@ exports[`DataTable should render 1`] = `
                 }
               >
                 <ForwardRef(OverflowMenu)
+                  ariaLabel="Settings"
                   className="bx--toolbar-action bx--overflow-menu"
                   flipped={true}
+                  iconDescription="Settings"
                   renderIcon={
                     Object {
                       "$$typeof": Symbol(react.forward_ref),
@@ -2348,12 +2360,13 @@ exports[`DataTable should render 1`] = `
                   title="Settings"
                 >
                   <OverflowMenu
-                    ariaLabel="Menu"
+                    ariaLabel="Settings"
                     className="bx--toolbar-action bx--overflow-menu"
                     direction="bottom"
                     flipped={true}
-                    iconDescription="open and close list of options"
+                    iconDescription="Settings"
                     innerRef={null}
+                    light={false}
                     menuOffset={[Function]}
                     menuOffsetFlip={[Function]}
                     onClick={[Function]}
@@ -2373,28 +2386,27 @@ exports[`DataTable should render 1`] = `
                     <ClickListener
                       onClickOutside={[Function]}
                     >
-                      <div
+                      <button
                         aria-expanded={false}
                         aria-haspopup={true}
-                        aria-label="Menu"
+                        aria-label="Settings"
                         className="bx--toolbar-action bx--overflow-menu bx--overflow-menu"
                         onClick={[Function]}
                         onClose={[Function]}
                         onKeyDown={[Function]}
                         open={false}
-                        role="button"
                         tabIndex={0}
                         title="Settings"
                       >
                         <ForwardRef(Settings16)
-                          aria-label="open and close list of options"
+                          aria-label="Settings"
                           className="bx--overflow-menu__icon"
                           focusable="false"
                           onClick={[Function]}
                           onKeyDown={[Function]}
                         >
                           <Icon
-                            aria-label="open and close list of options"
+                            aria-label="Settings"
                             className="bx--overflow-menu__icon"
                             focusable="false"
                             height={16}
@@ -2406,7 +2418,7 @@ exports[`DataTable should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-label="open and close list of options"
+                              aria-label="Settings"
                               className="bx--overflow-menu__icon"
                               focusable="false"
                               height={16}
@@ -2424,18 +2436,18 @@ exports[`DataTable should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M13.5 8.4v-.8l1-.8c.4-.3.4-.9.2-1.3l-1.2-2c-.2-.3-.5-.5-.9-.5-.1 0-.2 0-.3.1l-1.2.4c-.2-.1-.4-.3-.7-.4l-.3-1.3c0-.5-.4-.8-.9-.8H6.8c-.5 0-.9.3-1 .8l-.2 1.3c-.3.1-.5.2-.7.3L3.7 3h-.3c-.4 0-.7.2-.9.5l-1.2 2c-.2.4-.1.9.3 1.3l.9.9v.8l-.9.7c-.4.3-.5.9-.2 1.3l1.2 2c.1.3.4.5.8.5.1 0 .2 0 .3-.1l1.2-.4c.2.1.4.3.7.4l.3 1.3c.1.5.5.8 1 .8h2.4c.5 0 .9-.3 1-.8l.3-1.3c.2-.1.4-.2.7-.4l1.2.4c.1 0 .2.1.3.1.4 0 .7-.2.9-.5l1.1-2c.2-.4.2-.9-.2-1.3l-1.1-.8zm-.9 3.6l-1.7-.6c-.4.3-.9.6-1.4.8L9.2 14H6.8l-.4-1.8c-.5-.2-.9-.5-1.4-.8l-1.6.6-1.2-2 1.4-1.2c-.1-.5-.1-1.1 0-1.6L2.2 6l1.2-2 1.7.6c.4-.4.9-.6 1.4-.8L6.8 2h2.4l.4 1.8c.5.2.9.5 1.4.8l1.6-.6 1.2 2-1.4 1.2c.1.5.1 1.1 0 1.6l1.4 1.2-1.2 2z"
+                                d="M13.5,8.4c0-0.1,0-0.3,0-0.4c0-0.1,0-0.3,0-0.4l1-0.8c0.4-0.3,0.4-0.9,0.2-1.3l-1.2-2C13.3,3.2,13,3,12.6,3	c-0.1,0-0.2,0-0.3,0.1l-1.2,0.4c-0.2-0.1-0.4-0.3-0.7-0.4l-0.3-1.3C10.1,1.3,9.7,1,9.2,1H6.8c-0.5,0-0.9,0.3-1,0.8L5.6,3.1	C5.3,3.2,5.1,3.3,4.9,3.4L3.7,3C3.6,3,3.5,3,3.4,3C3,3,2.7,3.2,2.5,3.5l-1.2,2C1.1,5.9,1.2,6.4,1.6,6.8l0.9,0.9c0,0.1,0,0.3,0,0.4	c0,0.1,0,0.3,0,0.4L1.6,9.2c-0.4,0.3-0.5,0.9-0.2,1.3l1.2,2C2.7,12.8,3,13,3.4,13c0.1,0,0.2,0,0.3-0.1l1.2-0.4	c0.2,0.1,0.4,0.3,0.7,0.4l0.3,1.3c0.1,0.5,0.5,0.8,1,0.8h2.4c0.5,0,0.9-0.3,1-0.8l0.3-1.3c0.2-0.1,0.4-0.2,0.7-0.4l1.2,0.4	c0.1,0,0.2,0.1,0.3,0.1c0.4,0,0.7-0.2,0.9-0.5l1.1-2c0.2-0.4,0.2-0.9-0.2-1.3L13.5,8.4z M12.6,12l-1.7-0.6c-0.4,0.3-0.9,0.6-1.4,0.8	L9.2,14H6.8l-0.4-1.8c-0.5-0.2-0.9-0.5-1.4-0.8L3.4,12l-1.2-2l1.4-1.2c-0.1-0.5-0.1-1.1,0-1.6L2.2,6l1.2-2l1.7,0.6	C5.5,4.2,6,4,6.5,3.8L6.8,2h2.4l0.4,1.8c0.5,0.2,0.9,0.5,1.4,0.8L12.6,4l1.2,2l-1.4,1.2c0.1,0.5,0.1,1.1,0,1.6l1.4,1.2L12.6,12z"
                               />
                               <path
-                                d="M8 11c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3c0 1.6-1.3 3-3 3zm0-5c-1.1 0-2 .8-2 1.9V8c0 1.1.8 2 1.9 2H8c1.1 0 2-.8 2-1.9V8c0-1.1-.8-2-2-2 .1 0 0 0 0 0z"
+                                d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8	c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"
                               />
                               <title>
-                                open and close list of options
+                                Settings
                               </title>
                             </svg>
                           </Icon>
                         </ForwardRef(Settings16)>
-                      </div>
+                      </button>
                     </ClickListener>
                   </OverflowMenu>
                 </ForwardRef(OverflowMenu)>
@@ -2444,7 +2456,7 @@ exports[`DataTable should render 1`] = `
                 disabled={false}
                 kind="primary"
                 onClick={[MockFunction]}
-                small={true}
+                size="small"
                 tabIndex={0}
                 type="button"
               >
@@ -2737,7 +2749,9 @@ exports[`DataTable sticky header should render 1`] = `
             stickyHeader={true}
             title="DataTable with toolbar"
           >
-            <TableToolbar>
+            <TableToolbar
+              aria-label="data table toolbar"
+            >
               <TableBatchActions
                 onCancel={[Function]}
                 shouldShowBatchActions={false}
@@ -2783,6 +2797,7 @@ exports[`DataTable sticky header should render 1`] = `
                   id="custom-id"
                   onChange={[Function]}
                   persistent={true}
+                  tabIndex="0"
                   translateWithId={[Function]}
                 />
                 <TableToolbarMenu
@@ -2815,7 +2830,7 @@ exports[`DataTable sticky header should render 1`] = `
                   disabled={false}
                   kind="primary"
                   onClick={[MockFunction]}
-                  small={true}
+                  size="small"
                   tabIndex={0}
                   type="button"
                 >
@@ -2829,7 +2844,7 @@ exports[`DataTable sticky header should render 1`] = `
             >
               <TableHead>
                 <TableRow>
-                  <TableHeader
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -2838,8 +2853,8 @@ exports[`DataTable sticky header should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field A
-                  </TableHeader>
-                  <TableHeader
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -2848,7 +2863,7 @@ exports[`DataTable sticky header should render 1`] = `
                     translateWithId={[Function]}
                   >
                     Field B
-                  </TableHeader>
+                  </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -2927,7 +2942,9 @@ exports[`DataTable sticky header should render 1`] = `
           className="bx--data-table-header__description"
         />
       </div>
-      <TableToolbar>
+      <TableToolbar
+        aria-label="data table toolbar"
+      >
         <section
           aria-label="data table toolbar"
           className="bx--table-toolbar"
@@ -3004,7 +3021,7 @@ exports[`DataTable sticky header should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm4 8H9v3H7V9H4V7h3V4h2v3h3v2z"
+                                d="M8,1C4.2,1,1,4.2,1,8s3.2,7,7,7s7-3.2,7-7S11.8,1,8,1z M12,9H9v3H7V9H4V7h3V4h2v3h3V9z"
                               />
                             </svg>
                           </Icon>
@@ -3071,7 +3088,7 @@ exports[`DataTable sticky header should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm4 8H9v3H7V9H4V7h3V4h2v3h3v2z"
+                                d="M8,1C4.2,1,1,4.2,1,8s3.2,7,7,7s7-3.2,7-7S11.8,1,8,1z M12,9H9v3H7V9H4V7h3V4h2v3h3V9z"
                               />
                             </svg>
                           </Icon>
@@ -3138,7 +3155,7 @@ exports[`DataTable sticky header should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm4 8H9v3H7V9H4V7h3V4h2v3h3v2z"
+                                d="M8,1C4.2,1,1,4.2,1,8s3.2,7,7,7s7-3.2,7-7S11.8,1,8,1z M12,9H9v3H7V9H4V7h3V4h2v3h3V9z"
                               />
                             </svg>
                           </Icon>
@@ -3151,14 +3168,14 @@ exports[`DataTable sticky header should render 1`] = `
                     disabled={false}
                     kind="primary"
                     onClick={[Function]}
-                    tabIndex={0}
+                    tabIndex={-1}
                     type="button"
                   >
                     <button
                       className="bx--batch-summary__cancel bx--btn bx--btn--primary"
                       disabled={false}
                       onClick={[Function]}
-                      tabIndex={0}
+                      tabIndex={-1}
                       type="button"
                     >
                       Cancel
@@ -3187,6 +3204,7 @@ exports[`DataTable sticky header should render 1`] = `
                 id="custom-id"
                 onChange={[Function]}
                 persistent={true}
+                tabIndex="0"
                 translateWithId={[Function]}
               >
                 <div
@@ -3194,7 +3212,7 @@ exports[`DataTable sticky header should render 1`] = `
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
-                  role="searchbox"
+                  role="search"
                   tabIndex="0"
                 >
                   <Search
@@ -3204,7 +3222,8 @@ exports[`DataTable sticky header should render 1`] = `
                     labelText="Filter table"
                     onChange={[Function]}
                     placeHolderText="Filter table"
-                    small={true}
+                    size="sm"
+                    tabIndex="-1"
                     type="text"
                     value=""
                   >
@@ -3213,13 +3232,11 @@ exports[`DataTable sticky header should render 1`] = `
                     >
                       <ForwardRef(Search16)
                         className="bx--search-magnifier"
-                        role="img"
                       >
                         <Icon
                           className="bx--search-magnifier"
                           height={16}
                           preserveAspectRatio="xMidYMid meet"
-                          role="img"
                           viewBox="0 0 16 16"
                           width={16}
                           xmlns="http://www.w3.org/2000/svg"
@@ -3230,7 +3247,6 @@ exports[`DataTable sticky header should render 1`] = `
                             focusable="false"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
-                            role="img"
                             style={
                               Object {
                                 "willChange": "transform",
@@ -3241,7 +3257,7 @@ exports[`DataTable sticky header should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <path
-                              d="M15 14.3L10.7 10c1.9-2.3 1.6-5.8-.7-7.7S4.2.7 2.3 3 .7 8.8 3 10.7c2 1.7 5 1.7 7 0l4.3 4.3.7-.7zM2 6.5C2 4 4 2 6.5 2S11 4 11 6.5 9 11 6.5 11 2 9 2 6.5z"
+                              d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
                             />
                           </svg>
                         </Icon>
@@ -3254,10 +3270,13 @@ exports[`DataTable sticky header should render 1`] = `
                       </label>
                       <input
                         aria-hidden={true}
+                        autoComplete="off"
                         className="bx--search-input"
                         id="custom-id"
                         onChange={[Function]}
                         placeholder="Filter table"
+                        role="searchbox"
+                        tabIndex="-1"
                         type="text"
                         value=""
                       />
@@ -3267,25 +3286,19 @@ exports[`DataTable sticky header should render 1`] = `
                         onClick={[Function]}
                         type="button"
                       >
-                        <ForwardRef(Close16)
-                          aria-label="Clear search input"
-                          role="img"
-                        >
+                        <ForwardRef(Close16)>
                           <Icon
-                            aria-label="Clear search input"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
-                            role="img"
                             viewBox="0 0 16 16"
                             width={16}
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-label="Clear search input"
+                              aria-hidden={true}
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
-                              role="img"
                               style={
                                 Object {
                                   "willChange": "transform",
@@ -3296,7 +3309,7 @@ exports[`DataTable sticky header should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"
+                                d="M12 4.7L11.3 4 8 7.3 4.7 4 4 4.7 7.3 8 4 11.3 4.7 12 8 8.7 11.3 12 12 11.3 8.7 8z"
                               />
                             </svg>
                           </Icon>
@@ -3316,8 +3329,10 @@ exports[`DataTable sticky header should render 1`] = `
                 }
               >
                 <ForwardRef(OverflowMenu)
+                  ariaLabel="Settings"
                   className="bx--toolbar-action bx--overflow-menu"
                   flipped={true}
+                  iconDescription="Settings"
                   renderIcon={
                     Object {
                       "$$typeof": Symbol(react.forward_ref),
@@ -3327,12 +3342,13 @@ exports[`DataTable sticky header should render 1`] = `
                   title="Settings"
                 >
                   <OverflowMenu
-                    ariaLabel="Menu"
+                    ariaLabel="Settings"
                     className="bx--toolbar-action bx--overflow-menu"
                     direction="bottom"
                     flipped={true}
-                    iconDescription="open and close list of options"
+                    iconDescription="Settings"
                     innerRef={null}
+                    light={false}
                     menuOffset={[Function]}
                     menuOffsetFlip={[Function]}
                     onClick={[Function]}
@@ -3352,28 +3368,27 @@ exports[`DataTable sticky header should render 1`] = `
                     <ClickListener
                       onClickOutside={[Function]}
                     >
-                      <div
+                      <button
                         aria-expanded={false}
                         aria-haspopup={true}
-                        aria-label="Menu"
+                        aria-label="Settings"
                         className="bx--toolbar-action bx--overflow-menu bx--overflow-menu"
                         onClick={[Function]}
                         onClose={[Function]}
                         onKeyDown={[Function]}
                         open={false}
-                        role="button"
                         tabIndex={0}
                         title="Settings"
                       >
                         <ForwardRef(Settings16)
-                          aria-label="open and close list of options"
+                          aria-label="Settings"
                           className="bx--overflow-menu__icon"
                           focusable="false"
                           onClick={[Function]}
                           onKeyDown={[Function]}
                         >
                           <Icon
-                            aria-label="open and close list of options"
+                            aria-label="Settings"
                             className="bx--overflow-menu__icon"
                             focusable="false"
                             height={16}
@@ -3385,7 +3400,7 @@ exports[`DataTable sticky header should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-label="open and close list of options"
+                              aria-label="Settings"
                               className="bx--overflow-menu__icon"
                               focusable="false"
                               height={16}
@@ -3403,18 +3418,18 @@ exports[`DataTable sticky header should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M13.5 8.4v-.8l1-.8c.4-.3.4-.9.2-1.3l-1.2-2c-.2-.3-.5-.5-.9-.5-.1 0-.2 0-.3.1l-1.2.4c-.2-.1-.4-.3-.7-.4l-.3-1.3c0-.5-.4-.8-.9-.8H6.8c-.5 0-.9.3-1 .8l-.2 1.3c-.3.1-.5.2-.7.3L3.7 3h-.3c-.4 0-.7.2-.9.5l-1.2 2c-.2.4-.1.9.3 1.3l.9.9v.8l-.9.7c-.4.3-.5.9-.2 1.3l1.2 2c.1.3.4.5.8.5.1 0 .2 0 .3-.1l1.2-.4c.2.1.4.3.7.4l.3 1.3c.1.5.5.8 1 .8h2.4c.5 0 .9-.3 1-.8l.3-1.3c.2-.1.4-.2.7-.4l1.2.4c.1 0 .2.1.3.1.4 0 .7-.2.9-.5l1.1-2c.2-.4.2-.9-.2-1.3l-1.1-.8zm-.9 3.6l-1.7-.6c-.4.3-.9.6-1.4.8L9.2 14H6.8l-.4-1.8c-.5-.2-.9-.5-1.4-.8l-1.6.6-1.2-2 1.4-1.2c-.1-.5-.1-1.1 0-1.6L2.2 6l1.2-2 1.7.6c.4-.4.9-.6 1.4-.8L6.8 2h2.4l.4 1.8c.5.2.9.5 1.4.8l1.6-.6 1.2 2-1.4 1.2c.1.5.1 1.1 0 1.6l1.4 1.2-1.2 2z"
+                                d="M13.5,8.4c0-0.1,0-0.3,0-0.4c0-0.1,0-0.3,0-0.4l1-0.8c0.4-0.3,0.4-0.9,0.2-1.3l-1.2-2C13.3,3.2,13,3,12.6,3	c-0.1,0-0.2,0-0.3,0.1l-1.2,0.4c-0.2-0.1-0.4-0.3-0.7-0.4l-0.3-1.3C10.1,1.3,9.7,1,9.2,1H6.8c-0.5,0-0.9,0.3-1,0.8L5.6,3.1	C5.3,3.2,5.1,3.3,4.9,3.4L3.7,3C3.6,3,3.5,3,3.4,3C3,3,2.7,3.2,2.5,3.5l-1.2,2C1.1,5.9,1.2,6.4,1.6,6.8l0.9,0.9c0,0.1,0,0.3,0,0.4	c0,0.1,0,0.3,0,0.4L1.6,9.2c-0.4,0.3-0.5,0.9-0.2,1.3l1.2,2C2.7,12.8,3,13,3.4,13c0.1,0,0.2,0,0.3-0.1l1.2-0.4	c0.2,0.1,0.4,0.3,0.7,0.4l0.3,1.3c0.1,0.5,0.5,0.8,1,0.8h2.4c0.5,0,0.9-0.3,1-0.8l0.3-1.3c0.2-0.1,0.4-0.2,0.7-0.4l1.2,0.4	c0.1,0,0.2,0.1,0.3,0.1c0.4,0,0.7-0.2,0.9-0.5l1.1-2c0.2-0.4,0.2-0.9-0.2-1.3L13.5,8.4z M12.6,12l-1.7-0.6c-0.4,0.3-0.9,0.6-1.4,0.8	L9.2,14H6.8l-0.4-1.8c-0.5-0.2-0.9-0.5-1.4-0.8L3.4,12l-1.2-2l1.4-1.2c-0.1-0.5-0.1-1.1,0-1.6L2.2,6l1.2-2l1.7,0.6	C5.5,4.2,6,4,6.5,3.8L6.8,2h2.4l0.4,1.8c0.5,0.2,0.9,0.5,1.4,0.8L12.6,4l1.2,2l-1.4,1.2c0.1,0.5,0.1,1.1,0,1.6l1.4,1.2L12.6,12z"
                               />
                               <path
-                                d="M8 11c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3c0 1.6-1.3 3-3 3zm0-5c-1.1 0-2 .8-2 1.9V8c0 1.1.8 2 1.9 2H8c1.1 0 2-.8 2-1.9V8c0-1.1-.8-2-2-2 .1 0 0 0 0 0z"
+                                d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8	c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"
                               />
                               <title>
-                                open and close list of options
+                                Settings
                               </title>
                             </svg>
                           </Icon>
                         </ForwardRef(Settings16)>
-                      </div>
+                      </button>
                     </ClickListener>
                   </OverflowMenu>
                 </ForwardRef(OverflowMenu)>
@@ -3423,7 +3438,7 @@ exports[`DataTable sticky header should render 1`] = `
                 disabled={false}
                 kind="primary"
                 onClick={[MockFunction]}
-                small={true}
+                size="small"
                 tabIndex={0}
                 type="button"
               >

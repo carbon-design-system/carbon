@@ -303,6 +303,7 @@ class Tooltip extends Component {
     this._hasContextMenu = evt.type === 'contextmenu';
     if (state === 'click') {
       evt.stopPropagation();
+      evt.preventDefault();
       const shouldOpen = this.isControlled
         ? !this.props.open
         : !this.state.open;
@@ -338,6 +339,7 @@ class Tooltip extends Component {
 
     if (keyDownMatch(event, [keys.Enter, keys.Space])) {
       event.stopPropagation();
+      event.preventDefault();
       const shouldOpen = this.isControlled
         ? !this.props.open
         : !this.state.open;
@@ -412,13 +414,14 @@ class Tooltip extends Component {
       onBlur: this.handleMouse,
       'aria-haspopup': 'true',
       'aria-expanded': open,
+      'aria-describedby': open ? tooltipId : null,
       // if the user provides property `triggerText`,
-      // then the button should use aria-describedby to point to its id,
+      // then the button should use aria-labelledby to point to its id,
       // if the user doesn't provide property `triggerText`,
       // then an aria-label will be provided via the `iconDescription` property.
       ...(triggerText
         ? {
-            'aria-describedby': triggerId,
+            'aria-labelledby': triggerId,
           }
         : {
             'aria-label': iconDescription,

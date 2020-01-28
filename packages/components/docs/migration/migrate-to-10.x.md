@@ -31,7 +31,7 @@ initial `v10` release.
 | Combobox           | No breaking changes                                                   |
 | Content Switcher   | [Migrate](../../src/components/content-switcher/migrate-to-10.x.md)   |
 | Copy Button        | [Migrate](../../src/components/copy-button/migrate-to-10.x.md)        |
-| Data Table V2      | [Migrate](../../src/components/data-table-v2/migrate-to-10.x.md)      |
+| Data Table V2      | [Migrate](../../src/components/data-table/migrate-to-10.x.md)         |
 | Data Table         | Removed                                                               |
 | Date Picker        | TODO                                                                  |
 | Dropdown           | [Migrate](../../src/components/dropdown/migrate-to-10.x.md)           |
@@ -74,11 +74,12 @@ initial `v10` release.
 **IMPORTANT NOTE**: Most of deprecated variables, mixins and functions will be
 _removed_ soon after the initial `v10` release.
 
-| `scss` path         | v10                                                                           |
-| ------------------- | ----------------------------------------------------------------------------- |
-| `src`               | Deprecated in v10, use `scss` instead [Migrate](../../src/migrate-to-10.x.md) |
-| `scss/globals`      | [Migrate](../../src/globals/scss/migrate-to-10.x.md)                          |
-| `scss/globals/grid` | [Migrate](../../src/globals/scss/grid/migrate-to-10.x.md)                     |
+| `scss` path          | v10                                                                           |
+| -------------------- | ----------------------------------------------------------------------------- |
+| `src`                | Deprecated in v10, use `scss` instead [Migrate](../../src/migrate-to-10.x.md) |
+| `scss/globals`       | [Migrate](../../src/globals/scss/migrate-to-10.x.md)                          |
+| `scss/globals/grid`  | [Migrate](../../src/globals/scss/grid/migrate-to-10.x.md)                     |
+| `scss/globals/layer` | Deprecated in v10 [Migrate](../../src/globals/scss/migrate-to-10.x.md)        |
 
 ### Features
 
@@ -86,3 +87,4 @@ _removed_ soon after the initial `v10` release.
 | ------------------- | ------- |
 | `font-size` mixin   | Removed |
 | `line-height` mixin | Removed |
+| `layer` mixin       | Removed |

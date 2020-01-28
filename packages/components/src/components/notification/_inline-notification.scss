@@ -11,7 +11,6 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/layer';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
@@ -25,7 +24,7 @@
     @include reset;
 
     display: flex;
-    justify-content: space-between;
+    position: relative;
     height: auto;
     min-height: rem(48px);
     min-width: rem(288px);
@@ -47,9 +46,45 @@
     }
   }
 
+  .#{$prefix}--inline-notification:not(.#{$prefix}--inline-notification--low-contrast)
+    a {
+    color: $inverse-link;
+  }
+
+  .#{$prefix}--inline-notification a {
+    text-decoration: none;
+  }
+
+  .#{$prefix}--inline-notification a:hover {
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--inline-notification a:focus {
+    outline: 1px solid $inverse-link;
+  }
+
+  .#{$prefix}--inline-notification.#{$prefix}--inline-notification--low-contrast
+    a:focus {
+    @include focus-outline;
+  }
+
   .#{$prefix}--inline-notification--low-contrast {
-    color: $text-01;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
+    color: map-get($carbon--theme--white, 'text-01');
+
+    &::before {
+      content: '';
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      filter: opacity(0.4);
+      border-style: solid;
+      border-width: 1px 1px 1px 0;
+    }
   }
 
   .#{$prefix}--inline-notification--error {
@@ -61,6 +96,10 @@
       $support-01,
       $notification-error-background-color
     );
+
+    &:before {
+      border-color: $support-01;
+    }
   }
 
   .#{$prefix}--inline-notification--success {
@@ -72,6 +111,10 @@
       $support-02,
       $notification-success-background-color
     );
+
+    &:before {
+      border-color: $support-02;
+    }
   }
 
   .#{$prefix}--inline-notification--info {
@@ -83,6 +126,10 @@
       $support-04,
       $notification-info-background-color
     );
+
+    &:before {
+      border-color: $support-04;
+    }
   }
 
   .#{$prefix}--inline-notification--info .bx--inline-notification__icon {
@@ -98,6 +145,10 @@
       $support-03,
       $notification-warning-background-color
     );
+
+    &:before {
+      border-color: $support-03;
+    }
   }
 
   .#{$prefix}--inline-notification--warning
@@ -109,6 +160,7 @@
 
   .#{$prefix}--inline-notification__details {
     display: flex;
+    flex-grow: 1;
     margin: 0 $carbon--spacing-05;
   }
 
@@ -126,7 +178,7 @@
   }
 
   .#{$prefix}--inline-notification__title {
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
     margin: 0 $carbon--spacing-02 0 0;
     line-height: rem(24px);
   }
@@ -136,7 +188,7 @@
     word-break: break-word;
   }
 
-  .#{$prefix}--inline-notification__action-button {
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
     height: rem(32px);
     margin: $carbon--spacing-03 0;
 
@@ -147,9 +199,20 @@
       color: $inverse-link;
     }
 
+    &:focus {
+      border-color: transparent;
+      outline: 2px solid $inverse-focus-ui;
+      outline-offset: -2px;
+    }
+
     &:hover {
       background-color: $inverse-hover-ui;
     }
+  }
+
+  .#{$prefix}--inline-notification--hide-close-button
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    margin-right: $carbon--spacing-03;
   }
 
   .#{$prefix}--inline-notification__close-button {
@@ -169,9 +232,12 @@
     transition: outline $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
 
+    &:focus {
+      outline: 2px solid $inverse-focus-ui;
+      outline-offset: -2px;
+    }
+
     .#{$prefix}--inline-notification__close-icon {
-      height: 1rem;
-      width: 1rem;
       fill: $inverse-01;
     }
   }
@@ -179,11 +245,11 @@
   .#{$prefix}--inline-notification--low-contrast {
     .#{$prefix}--inline-notification__close-button
       .#{$prefix}--inline-notification__close-icon {
-      fill: $ui-05;
+      fill: map-get($carbon--theme--white, 'text-01');
     }
 
     .#{$prefix}--inline-notification__action-button {
-      color: $link-01;
+      color: $carbon--blue-60;
 
       &:active {
         color: $carbon--blue-80;

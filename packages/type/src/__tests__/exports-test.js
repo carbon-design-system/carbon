@@ -21,6 +21,7 @@ describe('type', () => {
         "reset",
         "getTypeSize",
         "scale",
+        "fluid",
         "styles",
         "caption01",
         "label01",
@@ -53,6 +54,7 @@ describe('type', () => {
         "display02",
         "display03",
         "display04",
+        "unstable_tokens",
       ]
     `);
   });

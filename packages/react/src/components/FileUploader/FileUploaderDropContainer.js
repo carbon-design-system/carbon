@@ -44,20 +44,20 @@ export default function FileUploaderDropContainer(props) {
    */
   const validateFiles = evt => {
     if (evt.type === 'drop') {
+      const transferredFiles = [...evt.dataTransfer.files];
+      if (!accept.length) {
+        return transferredFiles;
+      }
       const acceptedTypes = new Set(accept);
-      return [...evt.dataTransfer.files].filter(
-        ({ name, type: mimeType = '' }) => {
-          const fileExtensionRegExp = new RegExp(/\.[0-9a-z]+$/, 'i');
-          const hasFileExtension = fileExtensionRegExp.test(name);
-          if (!hasFileExtension) {
-            return false;
-          }
-          const [fileExtension] = name.match(fileExtensionRegExp);
-          return (
-            acceptedTypes.has(mimeType) || acceptedTypes.has(fileExtension)
-          );
+      return transferredFiles.filter(({ name, type: mimeType = '' }) => {
+        const fileExtensionRegExp = new RegExp(/\.[0-9a-z]+$/, 'i');
+        const hasFileExtension = fileExtensionRegExp.test(name);
+        if (!hasFileExtension) {
+          return false;
         }
-      );
+        const [fileExtension] = name.match(fileExtensionRegExp);
+        return acceptedTypes.has(mimeType) || acceptedTypes.has(fileExtension);
+      });
     }
     return [...evt.target.files];
   };
@@ -98,7 +98,6 @@ export default function FileUploaderDropContainer(props) {
       <label
         className={labelClasses}
         htmlFor={id || uid.current}
-        role={role || 'button'}
         tabIndex={tabIndex || 0}
         onKeyDown={evt => {
           if (matches(evt, [keys.Enter, keys.Space])) {
@@ -106,7 +105,7 @@ export default function FileUploaderDropContainer(props) {
           }
         }}
         {...other}>
-        <div className={dropareaClasses}>
+        <div className={dropareaClasses} role={role || 'button'}>
           {labelText}
           <input
             type="file"

@@ -34,7 +34,7 @@ const on = (element, ...args) => {
 
 /**
  * The CSS property names of the arrow keyed by the floating menu direction.
- * @type {Object<string, string>}
+ * @type {object<string, string>}
  */
 const triggerButtonPositionProps = {
   [DIRECTION_TOP]: 'bottom',
@@ -43,7 +43,7 @@ const triggerButtonPositionProps = {
 
 /**
  * Determines how the position of arrow should affect the floating menu position.
- * @type {Object<string, number>}
+ * @type {object<string, number>}
  */
 const triggerButtonPositionFactors = {
   [DIRECTION_TOP]: -2,
@@ -203,6 +203,12 @@ class OverflowMenu extends Component {
      * Function called when menu is closed
      */
     onOpen: PropTypes.func,
+
+    /**
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make OverflowMenu background color same as container background color.
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -219,6 +225,7 @@ class OverflowMenu extends Component {
     tabIndex: 0,
     menuOffset: getMenuOffset,
     menuOffsetFlip: getMenuOffset,
+    light: false,
   };
 
   /**
@@ -319,11 +326,16 @@ class OverflowMenu extends Component {
   };
 
   handleKeyPress = evt => {
-    // only respond to key events when the menu is closed, so that menu items still respond to key events
-    if (!this.state.open) {
-      if (keyCodeMatches(evt, [keys.Enter, keys.Space])) {
-        this.setState({ open: true });
-      }
+    if (
+      this.state.open &&
+      keyCodeMatches(evt, [
+        keys.ArrowUp,
+        keys.ArrowRight,
+        keys.ArrowDown,
+        keys.ArrowLeft,
+      ])
+    ) {
+      evt.preventDefault();
     }
 
     // Close the overflow menu on escape
@@ -331,7 +343,6 @@ class OverflowMenu extends Component {
       this.closeMenu();
       // Stop the esc keypress from bubbling out and closing something it shouldn't
       evt.stopPropagation();
-      evt.preventDefault();
     }
   };
 
@@ -403,9 +414,10 @@ class OverflowMenu extends Component {
   _handlePlace = menuBody => {
     if (menuBody) {
       this._menuBody = menuBody;
-      (
-        menuBody.querySelector('[data-floating-menu-primary-focus]') || menuBody
-      ).focus();
+      const primaryFocus =
+        menuBody.querySelector('[data-floating-menu-primary-focus]') ||
+        menuBody;
+      primaryFocus.focus();
       const hasFocusin = 'onfocusin' in window;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
       this._hFocusIn = on(
@@ -432,9 +444,12 @@ class OverflowMenu extends Component {
   /**
    * @returns {Element} The DOM element where the floating menu is placed in.
    */
-  _getTarget = () =>
-    (this.menuEl && this.menuEl.closest('[data-floating-menu-container]')) ||
-    document.body;
+  _getTarget = () => {
+    return (
+      (this.menuEl && this.menuEl.closest('[data-floating-menu-container]')) ||
+      document.body
+    );
+  };
 
   render() {
     const {
@@ -453,6 +468,7 @@ class OverflowMenu extends Component {
       renderIcon: IconElement,
       innerRef: ref,
       menuOptionsClass,
+      light,
       ...other
     } = this.props;
 
@@ -463,6 +479,7 @@ class OverflowMenu extends Component {
       `${prefix}--overflow-menu`,
       {
         [`${prefix}--overflow-menu--open`]: open,
+        [`${prefix}--overflow-menu--light`]: light,
       }
     );
 
@@ -472,6 +489,7 @@ class OverflowMenu extends Component {
       {
         [`${prefix}--overflow-menu--flip`]: this.props.flipped,
         [`${prefix}--overflow-menu-options--open`]: open,
+        [`${prefix}--overflow-menu-options--light`]: light,
       }
     );
 
@@ -528,14 +546,12 @@ class OverflowMenu extends Component {
 
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
-        <div
+        <button
           {...other}
-          role="button"
           aria-haspopup
           aria-expanded={this.state.open}
           className={overflowMenuClasses}
           onKeyDown={this.handleKeyPress}
-          onBlur={this.handleBlur}
           onClick={this.handleClick}
           aria-label={ariaLabel}
           id={id}
@@ -545,7 +561,7 @@ class OverflowMenu extends Component {
             {iconDescription && <title>{iconDescription}</title>}
           </IconElement>
           {open && wrappedMenuBody}
-        </div>
+        </button>
       </ClickListener>
     );
   }

@@ -37,7 +37,7 @@
           {{/if}}
           {{/each}}
         </select>
-        {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
+        {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow') }}
         {{#if invalid}}
         {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--select__invalid-icon')}}
         {{/if}}
@@ -79,7 +79,7 @@
             selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/each}} </optgroup> {{else}}
           <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
             selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/if}} {{/each}} </select>
-        {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
+        {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow') }}
       </div>
       {{#if invalid}}
       <div class="{{@root.prefix}}--form-requirement">

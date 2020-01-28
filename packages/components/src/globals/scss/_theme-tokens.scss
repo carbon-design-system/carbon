@@ -7,8 +7,13 @@
 
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 @import 'colors';
+@import 'feature-flags';
 @import 'spacing';
 @import './vendor/@carbon/elements/scss/themes/themes';
+
+// The load order of tokens versus themes matter, so we use `carbon--theme` here
+// to make sure that they're in sync if one has diverged from the other.
+@include carbon--theme();
 
 /// Theme variables
 
@@ -47,7 +52,8 @@ $inverse-focus-ui: $ibm-color__white-0 !default;
 /// @type Color
 /// @access public
 /// @group link
-$link-visited: $ibm-color__purple-60 !default;
+/// @deprecated
+$link-visited: $visited-link !default;
 
 /// @type Color
 /// @access public
@@ -157,7 +163,7 @@ $accordion-justify-content: flex-start !default;
 /// @type Value
 /// @access public
 /// @group accordion
-$accordion-arrow-margin: 0 $carbon--spacing-05 0 0 !default;
+$accordion-arrow-margin: 2px $carbon--spacing-05 0 0 !default;
 
 /// @type Value
 /// @access public
@@ -267,7 +273,7 @@ $notification-error-background-color: $ibm-color__red-10 !default;
 /// @access public
 /// @group notification
 $notification-warning-background-color: mix(
-  $ibm-color__yellow-20,
+  $ibm-color__yellow-30,
   $ibm-color__white-0,
   15%
 ) !default;
@@ -353,3 +359,41 @@ $tab-underline-disabled: 3px solid $disabled-01 !default;
 /// @access public
 /// @group skeleton
 $skeleton: $skeleton-01 !default; // TODO: Remove this in next major release
+
+// Light UI
+
+// Determine the "light" color for a given token.
+/// @param {String} $token The theme token.
+/// @return {String} The new color value as a hex code or a custom property.
+/// @access public
+/// @group light-ui
+@function get-light-value($token) {
+  $value: map-get($carbon--theme, $token);
+
+  @if $carbon--theme ==
+    $carbon--theme--white or
+    $carbon--theme ==
+    $carbon--theme--g10
+  {
+    $value: darken($value, 8%);
+  }
+
+  @if $carbon--theme ==
+    $carbon--theme--g90 or
+    $carbon--theme ==
+    $carbon--theme--g100
+  {
+    $value: lighten($value, 8%);
+  }
+
+  @if feature-flags-enabled('enable-css-custom-properties') {
+    @return var(--#{$custom-property-prefix}-#{$token}-light, $value);
+  }
+
+  @return $value;
+}
+
+/// @type Color
+/// @access public
+/// @group light-ui
+$hover-ui-light: get-light-value('ui-01');

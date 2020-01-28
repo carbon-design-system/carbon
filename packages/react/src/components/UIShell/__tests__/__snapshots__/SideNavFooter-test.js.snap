@@ -3,7 +3,7 @@
 exports[`SideNavFooter should render 1`] = `
 <SideNavFooter
   assistiveText="open"
-  isExpanded={false}
+  expanded={false}
   onToggle={[MockFunction]}
 >
   <footer
@@ -41,7 +41,7 @@ exports[`SideNavFooter should render 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M22 16L12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"
+                d="M22 16L12 26 10.6 24.6 19.2 16 10.6 7.4 12 6z"
               />
             </svg>
           </Icon>
@@ -60,6 +60,7 @@ exports[`SideNavFooter should render 1`] = `
 exports[`SideNavFooter should render 2`] = `
 <SideNavFooter
   assistiveText="close"
+  expanded={false}
   isExpanded={true}
   onToggle={[MockFunction]}
 >
@@ -98,7 +99,7 @@ exports[`SideNavFooter should render 2`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M22 16L12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"
+                d="M22 16L12 26 10.6 24.6 19.2 16 10.6 7.4 12 6z"
               />
             </svg>
           </Icon>

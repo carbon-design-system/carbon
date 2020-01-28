@@ -72,7 +72,9 @@ class HeaderMenu extends React.Component {
   /**
    * Toggle the expanded state of the menu on click.
    */
-  handleOnClick = () => {
+  handleOnClick = e => {
+    e.preventDefault();
+
     this.setState(prevState => ({
       expanded: !prevState.expanded,
     }));
@@ -103,9 +105,18 @@ class HeaderMenu extends React.Component {
   handleOnBlur = event => {
     // Rough guess for a blur event that is triggered outside of our menu or
     // menubar context
-    if (!event.relatedTarget) {
-      this.setState({ expanded: false, selectedIndex: null });
+    const itemTriggeredBlur = this.items.find(
+      element => element === event.relatedTarget
+    );
+
+    if (
+      event.relatedTarget &&
+      (event.relatedTarget.getAttribute('href') !== '#' || itemTriggeredBlur)
+    ) {
+      return;
     }
+
+    this.setState({ expanded: false, selectedIndex: null });
   };
 
   /**
@@ -180,10 +191,9 @@ class HeaderMenu extends React.Component {
           aria-haspopup="menu" // eslint-disable-line jsx-a11y/aria-proptypes
           aria-expanded={this.state.expanded}
           className={`${prefix}--header__menu-item ${prefix}--header__menu-title`}
-          href="javascript:void(0)"
+          href="#"
           onKeyDown={this.handleOnKeyDown}
           ref={this.handleMenuButtonRef}
-          role="menuitem"
           tabIndex={0}
           {...accessibilityLabel}>
           {menuLinkName}
@@ -210,13 +220,18 @@ class HeaderMenu extends React.Component {
    * sequence when they might not want to go through all the items.
    */
   _renderMenuItem = (item, index) => {
-    return React.cloneElement(item, {
-      ref: this.handleItemRef(index),
-      role: 'none',
-    });
+    if (React.isValidElement(item)) {
+      return React.cloneElement(item, {
+        ref: this.handleItemRef(index),
+        role: 'none',
+      });
+    }
   };
 }
 
-export default React.forwardRef((props, ref) => {
+const HeaderMenuForwardRef = React.forwardRef((props, ref) => {
   return <HeaderMenu {...props} focusRef={ref} />;
 });
+
+HeaderMenuForwardRef.displayName = 'HeaderMenu';
+export default HeaderMenuForwardRef;

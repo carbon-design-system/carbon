@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import cx from 'classnames';
+
 import { Search20, Notification20, AppSwitcher20 } from '@carbon/icons-react';
 
 import { storiesOf } from '@storybook/react';
@@ -41,6 +43,10 @@ import {
   SwitcherDivider,
 } from '../UIShell';
 
+SideNav.displayName = 'SideNav';
+SideNavMenu.displayName = 'SideNavMenu';
+SideNavMenuItem.displayName = 'SideNavMenuItem';
+
 const Fade16 = () => (
   <svg
     width="16"
@@ -52,21 +58,26 @@ const Fade16 = () => (
   </svg>
 );
 
-const StoryContent = () => {
+const StoryContent = ({ useResponsiveOffset = true }) => {
+  const classNameFirstColumn = cx({
+    'bx--col-lg-13': true,
+    'bx--offset-lg-3': useResponsiveOffset,
+  });
   const content = (
     <div className="bx--grid">
       <div className="bx--row">
-        <div className="bx--offset-lg-3 bx--col-lg-13">
+        <div className={classNameFirstColumn}>
           <h2 style={{ fontWeight: '800', margin: '30px 0', fontSize: '20px' }}>
             Purpose and function
           </h2>
           <p style={{ lineHeight: '20px' }}>
             The shell is perhaps the most crucial piece of any UI built with
-            Carbon. It contains the shared navigation framework for the entire
-            design system and ties the products in IBM’s portfolio together in a
-            cohesive and elegant way. The shell is the home of the topmost
-            navigation, where users can quickly and dependably gain their
-            bearings and move between pages.
+            <a href="www.carbondesignsystem.com"> Carbon</a>. It contains the
+            shared navigation framework for the entire design system and ties
+            the products in IBM’s portfolio together in a cohesive and elegant
+            way. The shell is the home of the topmost navigation, where users
+            can quickly and dependably gain their bearings and move between
+            pages.
             <br />
             <br />
             The shell was designed with maximum flexibility built in, to serve
@@ -110,15 +121,15 @@ const StoryContent = () => {
       </div>
     </div>
   );
+  const style = {
+    height: '100%',
+  };
+  if (useResponsiveOffset) {
+    style.margin = '0';
+    style.width = '100%';
+  }
   return (
-    <Content
-      id="main-content"
-      style={{
-        backgroundColor: '#f3f3f3',
-        margin: '0',
-        height: '100vh',
-        width: '100%',
-      }}>
+    <Content id="main-content" style={style}>
       {content}
     </Content>
   );
@@ -171,10 +182,19 @@ storiesOf('UI Shell', module)
                 isPersistent={false}>
                 <SideNavItems>
                   <HeaderSideNavItems>
-                    <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-                    <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-                    <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-                    <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+                    <HeaderMenuItem linkRole="link" href="#">
+                      Link 1
+                    </HeaderMenuItem>
+                    <HeaderMenuItem linkRole="link" href="#">
+                      Link 2
+                    </HeaderMenuItem>
+                    <HeaderMenuItem linkRole="link" href="#">
+                      Link 3
+                    </HeaderMenuItem>
+                    <HeaderMenu
+                      linkRole="link"
+                      aria-label="Link 4"
+                      menuLinkName="Link 4">
                       <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
                       <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
                       <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
@@ -213,6 +233,37 @@ storiesOf('UI Shell', module)
           </HeaderGlobalAction>
         </HeaderGlobalBar>
       </Header>
+    ))
+  )
+  .add(
+    'Header Base w/ SkipToContent',
+    withReadme(readme, () => (
+      <>
+        <Header aria-label="IBM Platform Name">
+          <SkipToContent />
+          <HeaderName href="#" prefix="IBM">
+            [Platform]
+          </HeaderName>
+          <HeaderGlobalBar>
+            <HeaderGlobalAction
+              aria-label="Search"
+              onClick={action('search click')}>
+              <Search20 />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction
+              aria-label="Notifications"
+              onClick={action('notification click')}>
+              <Notification20 />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction
+              aria-label="App Switcher"
+              onClick={action('app-switcher click')}>
+              <AppSwitcher20 />
+            </HeaderGlobalAction>
+          </HeaderGlobalBar>
+        </Header>
+        <StoryContent />
+      </>
     ))
   )
   .add(
@@ -264,10 +315,19 @@ storiesOf('UI Shell', module)
                 isPersistent={false}>
                 <SideNavItems>
                   <HeaderSideNavItems>
-                    <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-                    <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-                    <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-                    <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+                    <HeaderMenuItem linkRole="link" href="#">
+                      Link 1
+                    </HeaderMenuItem>
+                    <HeaderMenuItem linkRole="link" href="#">
+                      Link 2
+                    </HeaderMenuItem>
+                    <HeaderMenuItem linkRole="link" href="#">
+                      Link 3
+                    </HeaderMenuItem>
+                    <HeaderMenu
+                      linkRole="link"
+                      aria-label="Link 4"
+                      menuLinkName="Link 4">
                       <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
                       <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
                       <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
@@ -329,10 +389,19 @@ storiesOf('UI Shell', module)
                 expanded={isSideNavExpanded}>
                 <SideNavItems>
                   <HeaderSideNavItems hasDivider={true}>
-                    <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-                    <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-                    <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-                    <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+                    <HeaderMenuItem linkRole="link" href="#">
+                      Link 1
+                    </HeaderMenuItem>
+                    <HeaderMenuItem linkRole="link" href="#">
+                      Link 2
+                    </HeaderMenuItem>
+                    <HeaderMenuItem linkRole="link" href="#">
+                      Link 3
+                    </HeaderMenuItem>
+                    <HeaderMenu
+                      linkRole="link"
+                      aria-label="Link 4"
+                      menuLinkName="Link 4">
                       <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
                       <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
                       <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
@@ -592,7 +661,7 @@ storiesOf('UI Shell', module)
             <SideNavLink href="javascript:void(0)">L0 link</SideNavLink>
           </SideNavItems>
         </SideNav>
-        <StoryContent />
+        <StoryContent useResponsiveOffset={false} />
       </>
     ))
   )
@@ -634,7 +703,7 @@ storiesOf('UI Shell', module)
             </SideNavLink>
           </SideNavItems>
         </SideNav>
-        <StoryContent />
+        <StoryContent useResponsiveOffset={false} />
       </>
     ))
   )

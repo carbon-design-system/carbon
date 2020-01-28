@@ -12,7 +12,6 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
-@import '../../globals/scss/layer';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
@@ -21,12 +20,9 @@
 /// @access private
 /// @group overflow-menu
 @mixin overflow-menu {
-  .#{$prefix}--overflow-menu__trigger {
-    @include button-reset;
-  }
-
   .#{$prefix}--overflow-menu,
   .#{$prefix}--overflow-menu__trigger {
+    @include button-reset;
     @include reset;
     @include focus-outline('reset');
     position: relative;
@@ -44,7 +40,7 @@
     }
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $hover-selected-ui;
     }
   }
 
@@ -63,6 +59,12 @@
     background-color: $ui-01;
     transition: none;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open,
+  .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open
+    .#{$prefix}--overflow-menu__trigger {
+    background-color: $ui-02;
   }
 
   .#{$prefix}--overflow-menu__icon {
@@ -95,6 +97,13 @@
     }
   }
 
+  .#{$prefix}--overflow-menu-options--light {
+    background-color: $ui-02;
+    &::after {
+      background-color: $ui-02;
+    }
+  }
+
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
     top: rem(-3px);
     left: 0;
@@ -103,10 +112,10 @@
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after {
-    bottom: rem(-6px);
+    bottom: rem(-8px);
     left: 0;
     width: rem(32px);
-    height: rem(6px);
+    height: rem(8px);
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after {

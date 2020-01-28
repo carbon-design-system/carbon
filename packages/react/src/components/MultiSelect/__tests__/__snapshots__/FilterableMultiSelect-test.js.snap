@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MultiSelect.Filterable should render 1`] = `
-<FilterableMultiSelect
+<MultiSelect.Filterable
   ariaLabel="Choose an item"
   compareItems={[Function]}
   disabled={false}
@@ -90,13 +90,11 @@ exports[`MultiSelect.Filterable should render 1`] = `
             className="bx--multi-select bx--combo-box bx--multi-select--filterable bx--list-box"
             onClick={[Function]}
             onKeyDown={[Function]}
-            role="listbox"
-            tabIndex="-1"
           >
             <ListBoxField
               aria-expanded={false}
               aria-haspopup={true}
-              aria-label="open menu"
+              aria-labelledby="filterablemultiselect-label-1"
               data-toggle={true}
               disabled={false}
               id="test-filterable-multiselect"
@@ -104,14 +102,13 @@ exports[`MultiSelect.Filterable should render 1`] = `
               onClick={[Function]}
               onKeyDown={[Function]}
               role="button"
-              translateWithId={[Function]}
               type="button"
             >
               <div
                 aria-controls={null}
                 aria-expanded={false}
                 aria-haspopup={true}
-                aria-label="Open menu"
+                aria-labelledby="filterablemultiselect-label-1"
                 aria-owns={null}
                 className="bx--list-box__field"
                 data-toggle={true}
@@ -128,7 +125,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
                   aria-controls="test-filterable-multiselect__menu"
                   aria-expanded={false}
                   autoComplete="off"
-                  className="bx--text-input"
+                  className="bx--text-input bx--text-input--empty"
                   disabled={false}
                   id="test-filterable-multiselect"
                   onBlur={[Function]}
@@ -175,7 +172,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"
+                            d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
                           />
                           <title>
                             Open menu
@@ -192,5 +189,5 @@ exports[`MultiSelect.Filterable should render 1`] = `
       </Downshift>
     </Selection>
   </div>
-</FilterableMultiSelect>
+</MultiSelect.Filterable>
 `;

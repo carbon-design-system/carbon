@@ -105,12 +105,10 @@ describe('_theme.scss', () => {
   it('should allow custom overrides of tokens', async () => {
     const testColor = '#000000';
     const { calls } = await render(`
-$brand-01: ${testColor} !global;
-
-@import '../theme';
-
-$c: test($brand-01);
-`);
+      $brand-01: ${testColor} !global;
+      @import '../theme';
+      $c: test($brand-01);
+    `);
 
     expect(convert(calls[0][0])).toEqual(testColor);
   });
@@ -118,12 +116,10 @@ $c: test($brand-01);
   it('should allow custom overrides of tokens in v10', async () => {
     const testColor = '#000000';
     const { calls } = await render(`
-$interactive-01: ${testColor} !global;
-
-@import '../theme';
-
-$c: test($interactive-01);
-`);
+      $interactive-01: ${testColor};
+      @import '../theme';
+      $c: test($interactive-01);
+    `);
 
     expect(convert(calls[0][0])).toEqual(testColor);
   });
@@ -131,14 +127,14 @@ $c: test($interactive-01);
   it('should allow custom theme overrides', async () => {
     const testColor = '#000000';
     const { calls } = await render(`
-$carbon--theme: (
-  interactive-01: ${testColor},
-) !global;
+      $carbon--theme: (
+        interactive-01: ${testColor},
+      ) !global;
 
-@import '../theme';
+      @import '../theme';
 
-$c: test(map-get($carbon--theme, interactive-01));
-`);
+      $c: test(map-get($carbon--theme, interactive-01));
+    `);
 
     expect(convert(calls[0][0])).toBe(testColor);
   });
@@ -147,32 +143,32 @@ $c: test(map-get($carbon--theme, interactive-01));
     const testColor = '#000000';
     const inlineColor = '#ffffff';
     const { calls } = await render(`
-$carbon--theme: (
-  interactive-01: ${testColor},
-) !global;
-$carbon--inline--theme: (
-  interactive-01: ${inlineColor},
-);
+      $carbon--theme: (
+        interactive-01: ${testColor},
+      ) !global;
+      $carbon--inline--theme: (
+        interactive-01: ${inlineColor},
+      );
 
-@import '../theme';
+      @import '../theme';
 
-$c: test(map-get($carbon--theme, interactive-01));
+      $c: test(map-get($carbon--theme, interactive-01));
 
-@mixin my-selector {
-  $c: test($interactive-01);
-  .my-selector {
-    color: $interactive-01;
-  }
-}
+      @mixin my-selector {
+        $c: test($interactive-01);
+        .my-selector {
+          color: $interactive-01;
+        }
+      }
 
-@include my-selector();
+      @include my-selector();
 
-@include carbon--theme($carbon--inline--theme) {
-  @include my-selector();
-}
+      @include carbon--theme($carbon--inline--theme) {
+        @include my-selector();
+      }
 
-@include my-selector();
-`);
+      @include my-selector();
+    `);
 
     expect(convert(calls[0][0])).toBe(testColor);
     expect(convert(calls[1][0])).toBe(testColor);
@@ -182,10 +178,9 @@ $c: test(map-get($carbon--theme, interactive-01));
 
   it.each(classic)('$%s should be exported', async name => {
     const { calls } = await render(`
-@import '../theme';
-
-$c: test(global-variable-exists(${name}));
-`);
+      @import '../theme';
+      $c: test(global-variable-exists(${name}));
+    `);
     // Check that global-variable-exists returned true
     expect(convert(calls[0][0])).toBe(true);
   });

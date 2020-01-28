@@ -396,7 +396,7 @@ describe('Dropdown', function() {
         itemNode.textContent = i;
         itemNode.classList.add('bx--dropdown-link');
         if (i === 0) {
-          itemNode.classList.add('bx--dropdown--selected');
+          itemContainerNode.classList.add('bx--dropdown--selected');
         }
 
         itemContainerNode.appendChild(itemNode);
@@ -411,11 +411,11 @@ describe('Dropdown', function() {
     it('Should add/remove "selected" modifier class', function() {
       itemNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(
-        itemNodes[0].classList.contains('bx--dropdown--selected'),
+        itemNodes[0].parentElement.classList.contains('bx--dropdown--selected'),
         'Unselected item'
       ).toBe(false);
       expect(
-        itemNodes[1].classList.contains('bx--dropdown--selected'),
+        itemNodes[1].parentElement.classList.contains('bx--dropdown--selected'),
         'Selected item'
       ).toBe(true);
     });
@@ -435,11 +435,11 @@ describe('Dropdown', function() {
       element.setAttribute('data-dropdown-type', 'navigation');
       itemNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(
-        itemNodes[0].classList.contains('bx--dropdown--selected'),
+        itemNodes[0].parentElement.classList.contains('bx--dropdown--selected'),
         'Unselected item'
       ).toBe(false);
       expect(
-        itemNodes[1].classList.contains('bx--dropdown--selected'),
+        itemNodes[1].parentElement.classList.contains('bx--dropdown--selected'),
         'Selected item'
       ).toBe(false);
     });
@@ -459,19 +459,19 @@ describe('Dropdown', function() {
       });
       itemNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(
-        itemNodes[0].classList.contains('bx--dropdown--selected'),
+        itemNodes[0].parentElement.classList.contains('bx--dropdown--selected'),
         'Other item'
       ).toBe(true);
       expect(
-        itemNodes[1].classList.contains('bx--dropdown--selected'),
+        itemNodes[1].parentElement.classList.contains('bx--dropdown--selected'),
         'Clicked item'
       ).toBe(false);
       expect(textNode.textContent).toBe('0');
     });
 
     afterEach(function() {
-      itemNodes[0].classList.add('bx--dropdown--selected');
-      itemNodes[1].classList.remove('bx--dropdown--selected');
+      itemNodes[0].parentElement.classList.add('bx--dropdown--selected');
+      itemNodes[1].parentElement.classList.remove('bx--dropdown--selected');
       textNode.textContent = '0';
       if (!textNode.parentNode) {
         element.appendChild(textNode);
@@ -502,6 +502,7 @@ describe('Dropdown', function() {
       itemNodes = [...new Array(3)].map((item, i) => {
         const itemContainerNode = document.createElement('li');
         itemContainerNode.dataset.option = '';
+        itemContainerNode.classList.add('bx--dropdown-item');
 
         const itemNode = document.createElement('a');
         itemNode.textContent = i;
@@ -518,7 +519,7 @@ describe('Dropdown', function() {
 
     beforeEach(function() {
       itemNodes.forEach(item => {
-        item.classList.remove('bx--dropdown--selected');
+        item.parentElement.classList.remove('bx--dropdown--selected');
         item.removeAttribute('hidden');
         item.parentNode.removeAttribute('hidden');
         item.removeAttribute('aria-hidden');
@@ -556,7 +557,7 @@ describe('Dropdown', function() {
     });
 
     it('Should start with selection for forward navigation', function() {
-      itemNodes[0].classList.add('bx--dropdown--selected');
+      itemNodes[0].parentElement.classList.add('bx--dropdown--selected');
       itemNodes.forEach(item => {
         spyOn(item, 'focus');
       });
@@ -572,7 +573,7 @@ describe('Dropdown', function() {
     });
 
     it('Should start with selection for backward navigation', function() {
-      itemNodes[2].classList.add('bx--dropdown--selected');
+      itemNodes[2].parentElement.classList.add('bx--dropdown--selected');
       itemNodes.forEach(item => {
         spyOn(item, 'focus');
       });
@@ -655,7 +656,7 @@ describe('Dropdown', function() {
       spyOn(dropdown, 'getCurrentNavigation').and.callFake(function() {
         return itemNodes[0];
       });
-      itemNodes[1].classList.add('bx--dropdown--selected');
+      itemNodes[1].parentElement.classList.add('bx--dropdown--selected');
       itemNodes.forEach(item => {
         spyOn(item, 'focus');
       });
@@ -793,6 +794,7 @@ describe('Dropdown', function() {
       itemNodes = [...new Array(3)].map((item, i) => {
         const itemContainerNode = document.createElement('li');
         itemContainerNode.dataset.option = '';
+        itemContainerNode.classList.add('bx--dropdown-item');
 
         const itemNode = document.createElement('a');
         itemNode.textContent = i;
@@ -810,7 +812,7 @@ describe('Dropdown', function() {
 
     beforeEach(function() {
       itemNodes.forEach(item => {
-        item.classList.remove('bx--dropdown--selected');
+        item.parentElement.classList.remove('bx--dropdown--selected');
         item.classList.remove('bx--dropdown--focused');
         item.removeAttribute('hidden');
         item.parentNode.removeAttribute('hidden');
@@ -861,7 +863,7 @@ describe('Dropdown', function() {
     });
 
     it('Should start with selection for backward navigation', function() {
-      itemNodes[2].classList.add('bx--dropdown--selected');
+      itemNodes[2].parentElement.classList.add('bx--dropdown--selected');
       trigger.click();
       const defaultPrevented = !element.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { cancelable: true }), {
@@ -885,7 +887,7 @@ describe('Dropdown', function() {
     });
 
     it('Should handle overflow for forward navigation', function() {
-      itemNodes[2].classList.add('bx--dropdown--selected');
+      itemNodes[2].parentElement.classList.add('bx--dropdown--selected');
       trigger.click();
       const defaultPrevented = !element.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { cancelable: true }), {
@@ -927,6 +929,155 @@ describe('Dropdown', function() {
         itemNodes[2].classList.contains('bx--dropdown--focused'),
         'Focus on 3rd item'
       ).toBe(true);
+    });
+
+    afterEach(function() {
+      events.reset();
+      trigger.click();
+    });
+
+    afterAll(function() {
+      dropdown.release();
+      document.body.removeChild(element);
+    });
+  });
+
+  describe('Navigating focus with show selected modifier', function() {
+    let dropdown;
+    let element;
+    let itemNodes;
+    let list;
+    let trigger;
+
+    const events = new EventManager();
+
+    beforeAll(function() {
+      element = document.createElement('div');
+      element.classList.add('bx--dropdown', 'bx--dropdown--show-selected');
+
+      trigger = element.appendChild(document.createElement('button'));
+      trigger.classList.add('bx--dropdown-text');
+      list = element.appendChild(document.createElement('ul'));
+      list.classList.add('bx--dropdown-list');
+
+      itemNodes = [...new Array(3)].map((item, i) => {
+        const itemContainerNode = document.createElement('li');
+        itemContainerNode.dataset.option = '';
+        itemContainerNode.classList.add('bx--dropdown-item');
+
+        const itemNode = document.createElement('a');
+        itemNode.textContent = i;
+        itemNode.classList.add('bx--dropdown-link');
+        itemNode.id = `item-${i}`;
+
+        itemContainerNode.appendChild(itemNode);
+        list.appendChild(itemContainerNode);
+        return itemNode;
+      });
+
+      dropdown = new Dropdown(element);
+      document.body.appendChild(element);
+    });
+
+    beforeEach(function() {
+      itemNodes.forEach(item => {
+        item.parentElement.classList.remove('bx--dropdown--selected');
+        item.classList.remove('bx--dropdown--focused');
+        item.removeAttribute('hidden');
+        item.parentNode.removeAttribute('hidden');
+        item.removeAttribute('aria-hidden');
+        item.parentNode.removeAttribute('aria-hidden');
+      });
+    });
+
+    it('Should focus selected item with forward navigation', function() {
+      itemNodes[1].parentElement.classList.add('bx--dropdown--selected');
+      trigger.click();
+
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { cancelable: true }), {
+          // user presses up
+          which: 38,
+        })
+      );
+      // Verify the navigation worked
+      expect(
+        itemNodes[0].classList.contains('bx--dropdown--focused'),
+        'Focus on 1st item'
+      ).toBe(true);
+      expect(
+        itemNodes[1].classList.contains('bx--dropdown--focused'),
+        'Focus on 2nd item'
+      ).toBe(false);
+      expect(
+        itemNodes[2].classList.contains('bx--dropdown--focused'),
+        'Focus on 3rd item'
+      ).toBe(false);
+
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { cancelable: true }), {
+          // user presses down
+          which: 40,
+        })
+      );
+      // Verify that the selected item can be focused
+      expect(
+        itemNodes[0].classList.contains('bx--dropdown--focused'),
+        'Focus on 1st item'
+      ).toBe(false);
+      expect(
+        itemNodes[1].classList.contains('bx--dropdown--focused'),
+        'Focus on 2nd item'
+      ).toBe(true);
+      expect(
+        itemNodes[2].classList.contains('bx--dropdown--focused'),
+        'Focus on 3rd item'
+      ).toBe(false);
+    });
+
+    it('Should focus selected item with backward navigation', function() {
+      itemNodes[1].parentElement.classList.add('bx--dropdown--selected');
+      trigger.click();
+
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { cancelable: true }), {
+          // user presses down
+          which: 40,
+        })
+      );
+      // Verify the navigation worked
+      expect(
+        itemNodes[0].classList.contains('bx--dropdown--focused'),
+        'Focus on 1st item'
+      ).toBe(false);
+      expect(
+        itemNodes[1].classList.contains('bx--dropdown--focused'),
+        'Focus on 2nd item'
+      ).toBe(false);
+      expect(
+        itemNodes[2].classList.contains('bx--dropdown--focused'),
+        'Focus on 3rd item'
+      ).toBe(true);
+
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { cancelable: true }), {
+          // user presses up
+          which: 38,
+        })
+      );
+      // Verify that the selected item can be focused
+      expect(
+        itemNodes[0].classList.contains('bx--dropdown--focused'),
+        'Focus on 1st item'
+      ).toBe(false);
+      expect(
+        itemNodes[1].classList.contains('bx--dropdown--focused'),
+        'Focus on 2nd item'
+      ).toBe(true);
+      expect(
+        itemNodes[2].classList.contains('bx--dropdown--focused'),
+        'Focus on 3rd item'
+      ).toBe(false);
     });
 
     afterEach(function() {

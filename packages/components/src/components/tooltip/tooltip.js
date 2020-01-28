@@ -223,7 +223,8 @@ class Tooltip extends mixin(
       // Note: SVGElement in IE11 does not have `.contains()`
       const wentToSelf =
         (relatedTarget &&
-          (this.element.contains && this.element.contains(relatedTarget))) ||
+          this.element.contains &&
+          this.element.contains(relatedTarget)) ||
         (this.tooltip && this.tooltip.element.contains(relatedTarget));
       shouldPreventClose = hadContextMenu || wentToSelf;
     }

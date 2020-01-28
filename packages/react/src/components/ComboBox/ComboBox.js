@@ -10,9 +10,10 @@ import Downshift from 'downshift';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from 'carbon-components';
-import { WarningFilled16 } from '@carbon/icons-react';
+import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { match, keys } from '../../internal/keyboard';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
 
@@ -27,6 +28,10 @@ const defaultItemToString = item => {
 const defaultShouldFilterItem = () => true;
 
 const getInputValue = (props, state) => {
+  if (props.selectedItem) {
+    return props.itemToString(props.selectedItem);
+  }
+  // TODO: consistent `initialSelectedItem` behavior with other listbox components in v11
   if (props.initialSelectedItem) {
     return props.itemToString(props.initialSelectedItem);
   }
@@ -50,6 +55,8 @@ const findHighlightedIndex = ({ items, itemToString }, inputValue) => {
 
   return -1;
 };
+
+const getInstanceId = setupGetInstanceId();
 
 export default class ComboBox extends React.Component {
   static propTypes = {
@@ -132,6 +139,11 @@ export default class ComboBox extends React.Component {
     invalidText: PropTypes.string,
 
     /**
+     * For full control of the selection
+     */
+    selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+
+    /**
      * Specify a custom translation function that takes in a message identifier
      * and returns the localized string for the message
      */
@@ -141,6 +153,11 @@ export default class ComboBox extends React.Component {
      * Currently supports either the default type, or an inline variant
      */
     type: ListBoxPropTypes.ListBoxType,
+
+    /**
+     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+     */
+    size: ListBoxPropTypes.ListBoxSize,
 
     /**
      * Callback function to notify consumer when the text input changes.
@@ -175,6 +192,8 @@ export default class ComboBox extends React.Component {
 
     this.textInput = React.createRef();
 
+    this.comboBoxInstanceId = getInstanceId();
+
     this.state = {
       inputValue: getInputValue(props, {}),
     };
@@ -201,24 +220,26 @@ export default class ComboBox extends React.Component {
     }
   };
 
+  handleOnInputValueChange = inputValue => {
+    const { onInputChange } = this.props;
+
+    this.setState(
+      () => ({
+        // Default to empty string if we have a false-y `inputValue`
+        inputValue: inputValue || '',
+      }),
+      () => {
+        if (onInputChange) {
+          onInputChange(inputValue);
+        }
+      }
+    );
+  };
+
   handleOnStateChange = (newState, { setHighlightedIndex }) => {
     if (Object.prototype.hasOwnProperty.call(newState, 'inputValue')) {
       const { inputValue } = newState;
-      const { onInputChange } = this.props;
-
       setHighlightedIndex(findHighlightedIndex(this.props, inputValue));
-
-      this.setState(
-        () => ({
-          // Default to empty string if we have a false-y `inputValue`
-          inputValue: inputValue || '',
-        }),
-        () => {
-          if (onInputChange) {
-            onInputChange(inputValue);
-          }
-        }
-      );
     }
   };
 
@@ -241,12 +262,14 @@ export default class ComboBox extends React.Component {
       helperText,
       placeholder,
       initialSelectedItem,
+      selectedItem,
       ariaLabel,
       translateWithId,
       invalid,
       invalidText,
       light,
       type, // eslint-disable-line no-unused-vars
+      size,
       shouldFilterItem, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onInputChange, // eslint-disable-line no-unused-vars
@@ -257,8 +280,12 @@ export default class ComboBox extends React.Component {
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
+    const comboBoxHelperId = !helperText
+      ? undefined
+      : `combobox-helper-text-${this.comboBoxInstanceId}`;
+    const comboBoxLabelId = `combobox-label-${this.comboBoxInstanceId}`;
     const title = titleText ? (
-      <label htmlFor={id} className={titleClasses}>
+      <label id={comboBoxLabelId} htmlFor={id} className={titleClasses}>
         {titleText}
       </label>
     ) : null;
@@ -266,9 +293,15 @@ export default class ComboBox extends React.Component {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
     const helper = helperText ? (
-      <div className={helperClasses}>{helperText}</div>
+      <div id={comboBoxHelperId} className={helperClasses}>
+        {helperText}
+      </div>
     ) : null;
     const wrapperClasses = cx(`${prefix}--list-box__wrapper`);
+    const comboBoxA11yId = `combobox-a11y-${this.comboBoxInstanceId}`;
+    const inputClasses = cx(`${prefix}--text-input`, {
+      [`${prefix}--text-input--empty`]: !this.state.inputValue,
+    });
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
@@ -276,10 +309,12 @@ export default class ComboBox extends React.Component {
       <Downshift
         {...downshiftProps}
         onChange={this.handleOnChange}
+        onInputValueChange={this.handleOnInputValueChange}
         onStateChange={this.handleOnStateChange}
         inputValue={this.state.inputValue || ''}
         itemToString={itemToString}
-        defaultSelectedItem={initialSelectedItem}>
+        defaultSelectedItem={initialSelectedItem}
+        selectedItem={selectedItem}>
         {({
           getButtonProps,
           getInputProps,
@@ -296,23 +331,29 @@ export default class ComboBox extends React.Component {
             className={className}
             disabled={disabled}
             invalid={invalid}
+            id={comboBoxA11yId}
+            aria-label={ariaLabel}
             invalidText={invalidText}
             isOpen={isOpen}
             light={light}
+            size={size}
             {...getRootProps({ refKey: 'innerRef' })}>
             <ListBox.Field
               id={id}
               disabled={disabled}
-              translateWithId={translateWithId}
+              aria-labelledby={comboBoxLabelId}
+              aria-describedby={comboBoxHelperId}
               {...getButtonProps({
                 disabled,
                 onClick: this.onToggleClick(isOpen),
               })}>
               <input
-                className={`${prefix}--text-input`}
-                aria-label={ariaLabel}
+                className={inputClasses}
+                aria-labelledby={comboBoxA11yId}
+                tabIndex="0"
                 aria-disabled={disabled}
-                aria-controls={`${id}__menu`}
+                aria-controls={isOpen ? `${id}__menu` : null}
+                aria-owns={isOpen ? `${id}__menu` : null}
                 aria-autocomplete="list"
                 ref={this.textInput}
                 {...rest}
@@ -338,6 +379,7 @@ export default class ComboBox extends React.Component {
                 <ListBox.Selection
                   clearSelection={clearSelection}
                   translateWithId={translateWithId}
+                  disabled={disabled}
                 />
               )}
               <ListBox.MenuIcon
@@ -348,23 +390,32 @@ export default class ComboBox extends React.Component {
             {isOpen && (
               <ListBox.Menu aria-label={ariaLabel} id={id}>
                 {this.filterItems(items, itemToString, inputValue).map(
-                  (item, index) => (
-                    <ListBox.MenuItem
-                      key={itemToString(item)}
-                      isActive={selectedItem === item}
-                      isHighlighted={
-                        highlightedIndex === index ||
-                        (selectedItem && selectedItem.id === item.id) ||
-                        false
-                      }
-                      {...getItemProps({ item, index })}>
-                      {itemToElement ? (
-                        <ItemToElement key={itemToString(item)} {...item} />
-                      ) : (
-                        itemToString(item)
-                      )}
-                    </ListBox.MenuItem>
-                  )
+                  (item, index) => {
+                    const itemProps = getItemProps({ item, index });
+                    return (
+                      <ListBox.MenuItem
+                        key={itemProps.id}
+                        isActive={selectedItem === item}
+                        isHighlighted={
+                          highlightedIndex === index ||
+                          (selectedItem && selectedItem.id === item.id) ||
+                          false
+                        }
+                        title={itemToElement ? item.text : itemToString(item)}
+                        {...itemProps}>
+                        {itemToElement ? (
+                          <ItemToElement key={itemProps.id} {...item} />
+                        ) : (
+                          itemToString(item)
+                        )}
+                        {selectedItem === item && (
+                          <Checkmark16
+                            className={`${prefix}--list-box__menu-item__selected-icon`}
+                          />
+                        )}
+                      </ListBox.MenuItem>
+                    );
+                  }
                 )}
               </ListBox.Menu>
             )}

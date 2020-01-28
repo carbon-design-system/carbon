@@ -10,6 +10,9 @@
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
+@import '../../globals/scss/theme-tokens';
+@import '../../globals/scss/tooltip';
+@import '../../globals/scss/keyframes';
 @import 'mixins';
 
 /// Code snippet styles
@@ -27,10 +30,6 @@
   // Inline Code Snippet
   .#{$prefix}--snippet--inline {
     @include reset;
-    // Note: originally this inline snippet inherited font-size, we might need
-    // a more flexible strategy than explicitly setting font-size with this
-    // type style
-    @include type-style('code-01');
 
     position: relative;
     display: inline;
@@ -51,20 +50,44 @@
 
     &:focus {
       outline: none;
-      border: 2px solid $interactive-01;
+      border: 2px solid $focus;
     }
+
+    &::before {
+      @include tooltip--caret;
+      display: none;
+    }
+
+    .#{$prefix}--copy-btn__feedback {
+      @include tooltip--content('icon');
+      clip: auto;
+      margin: auto;
+      overflow: visible;
+      display: none;
+    }
+    @include tooltip--placement('icon', 'bottom', 'center');
+  }
+
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating::before,
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating
+    .#{$prefix}--copy-btn__feedback {
+    display: block;
+  }
+
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out::before,
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out
+    .#{$prefix}--copy-btn__feedback {
+    animation: $duration--fast-02 motion(standard, productive) hide-feedback;
+  }
+
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in::before,
+  .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in
+    .#{$prefix}--copy-btn__feedback {
+    animation: $duration--fast-02 motion(standard, productive) show-feedback;
   }
 
   .#{$prefix}--snippet--inline code {
-    padding: 0 $spacing-xs;
-  }
-
-  .#{$prefix}--snippet--inline.#{$prefix}--snippet--light {
-    background-color: $field-02;
-
-    &:hover {
-      background-color: rgba($interactive-02, 0.1);
-    }
+    padding: 0 $spacing-03;
   }
 
   // Single Line Snippet
@@ -89,7 +112,7 @@
   .#{$prefix}--snippet--single pre {
     white-space: nowrap;
     @include type-style('code-01');
-    padding-right: $spacing-xs;
+    padding-right: $spacing-03;
   }
 
   .#{$prefix}--snippet--single::after {
@@ -99,7 +122,9 @@
     position: absolute;
     top: 0;
     right: rem(56px);
-    background-image: linear-gradient(to right, transparent, $ui-01);
+
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
   }
 
   // Multi Line Snippet
@@ -123,8 +148,9 @@
   // expanded snippet container
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
     .#{$prefix}--snippet-container {
-    max-height: rem(1500px);
+    max-height: 100%;
     transition: max-height $duration--moderate-01 motion(standard, productive);
+    padding-bottom: $spacing-05;
   }
 
   // closed pre
@@ -137,7 +163,7 @@
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
     .#{$prefix}--snippet-container
     pre {
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
@@ -147,7 +173,9 @@
     position: absolute;
     top: 0;
     right: 0;
-    background-image: linear-gradient(to right, transparent, $ui-01);
+
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre code {
@@ -175,6 +203,9 @@
     height: $carbon--spacing-08;
     width: $carbon--spacing-08;
     overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:focus {
       @include focus-outline('outline');
@@ -185,8 +216,8 @@
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-button {
     height: $carbon--spacing-07;
     width: $carbon--spacing-07;
-    top: $spacing-xs;
-    right: $spacing-xs;
+    top: $spacing-03;
+    right: $spacing-03;
   }
 
   .#{$prefix}--snippet-button:hover {
@@ -199,6 +230,7 @@
 
   .#{$prefix}--btn--copy__feedback {
     @include type-style('body-short-01');
+    @include carbon--font-family('sans'); // Override one in code snippet
     z-index: z('overlay');
     font-weight: 400;
     left: inherit;
@@ -206,13 +238,23 @@
     right: 1.25rem;
   }
 
-  .#{$prefix}--btn--copy__feedback:before,
-  .#{$prefix}--btn--copy__feedback:after {
+  .#{$prefix}--btn--copy__feedback::before,
+  .#{$prefix}--btn--copy__feedback::after {
     background: $copy-btn-feedback;
   }
 
-  .#{$prefix}--btn--copy__feedback:after {
+  .#{$prefix}--btn--copy__feedback::after {
     border: none;
+  }
+
+  // TODO: remove copy button styles above
+  .#{$prefix}--snippet .#{$prefix}--copy-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    @include carbon--font-family(
+      'sans'
+    ); // Override inherited rule in code snippet
   }
 
   // Show more / less button
@@ -220,9 +262,9 @@
     display: inline-flex;
     align-items: center;
     position: absolute;
-    right: $spacing-xs;
-    bottom: $spacing-xs;
-    padding: $spacing-xs;
+    right: $spacing-03;
+    bottom: $spacing-03;
+    padding: $spacing-03;
     padding-left: $carbon--spacing-05;
     color: $text-01;
     background-color: $field-01;
@@ -240,7 +282,7 @@
 
   .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
     fill: $text-01;
-    margin-left: $spacing-xs;
+    margin-left: $spacing-03;
     margin-bottom: rem(1px);
     transform: rotate(0deg);
     transition: $duration--moderate-01 motion(standard, productive);
@@ -266,6 +308,30 @@
     transition: transform $transition--expansion;
   }
 
+  // Light version
+  .#{$prefix}--snippet.#{$prefix}--snippet--light,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--snippet-button,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light
+    .#{$prefix}--snippet-btn--expand {
+    background-color: $ui-02;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light
+    .#{$prefix}--snippet-button:hover,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light
+    .#{$prefix}--snippet-btn--expand:hover {
+    background-color: $hover-ui-light;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--multi
+    .#{$prefix}--snippet-container
+    pre::after {
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to right, rgba($ui-02, 0), $ui-02);
+  }
+
   // Skeleton State
   .#{$prefix}--snippet--code.#{$prefix}--skeleton {
     height: rem(98px);
@@ -287,12 +353,33 @@
   }
 
   .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
-    top: rem(25px);
-    left: 1rem;
+    top: rem(
+      50.8px
+    ); // (The height of button) + (The height of the tooltip's triangle) + 4px
+    left: 50%;
     right: auto;
+
+    &::before {
+      top: 0;
+    }
+
+    &:after {
+      top: rem(-4px);
+    }
+  }
+
+  .#{$prefix}--snippet--multi
+    .#{$prefix}--snippet-button
+    .#{$prefix}--btn--copy__feedback {
+    top: rem(
+      42.8px
+    ); // (The height of button) + (The height of the tooltip's triangle) + 4px
   }
 
   .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
+    // TODO: use updated global tooltip mixins under the hood
+    // since all of the positioning values for the copy button tooltip are arbitrary hard coded rem values, we need this arbitrary 4px offset to keep the proper tooltip spacing according to the spec
+    top: calc(100% - #{rem(4px)});
     right: auto;
     left: 50%;
   }

@@ -6,6 +6,7 @@
 //
 
 @import '@carbon/layout/scss/breakpoint';
+@import 'font-family';
 @import 'scale';
 
 /// @type Map
@@ -33,7 +34,6 @@ $label-01: (
 /// @group @carbon/type
 $helper-text-01: (
   font-size: carbon--type-scale(1),
-  font-style: italic,
   line-height: carbon--rem(16px),
   letter-spacing: 0.32px,
 ) !default;
@@ -82,6 +82,7 @@ $body-long-02: (
 /// @access public
 /// @group @carbon/type
 $code-01: (
+  font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(16px),
@@ -92,6 +93,7 @@ $code-01: (
 /// @access public
 /// @group @carbon/type
 $code-02: (
+  font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(20px),
@@ -181,12 +183,22 @@ $productive-heading-07: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
-$expressive-heading-01: $heading-01 !default;
+$expressive-heading-01: map-merge(
+  $heading-01,
+  (
+    line-height: carbon--rem(20px),
+  )
+) !default;
 
 /// @type Map
 /// @access public
 /// @group @carbon/type
-$expressive-heading-02: $heading-02 !default;
+$expressive-heading-02: map-merge(
+  $heading-02,
+  (
+    line-height: carbon--rem(24px),
+  )
+) !default;
 
 /// @type Map
 /// @access public
@@ -640,6 +652,24 @@ $tokens: (
   }
 }
 
+// TODO move following variable and `custom-property` mixin into shared file for
+// both `@carbon/type` and `@carbon/themes`
+
+/// @access private
+/// @group @carbon/type
+$custom-property-prefix: 'cds' !default;
+
+/// @access private
+/// @group @carbon/type
+@mixin custom-properties($name, $value) {
+  @each $property, $value in $value {
+    #{$property}: var(
+      --#{$custom-property-prefix}-#{$name}-#{$property},
+      #{$value}
+    );
+  }
+}
+
 /// Helper mixin to include the styles for a given token in any selector in your
 /// project. Also includes an optional fluid option that will enable fluid
 /// styles for the token if they are defined. Fluid styles will cause the
@@ -666,8 +696,14 @@ $tokens: (
   @if $fluid == true and map-has-key($token, 'breakpoints') {
     @include fluid-type($token, $breakpoints);
   } @else {
-    // Otherwise, we just include all the property declarations directly on the
-    // selector
-    @include properties(map-remove($token, 'breakpoints'));
+    @if global-variable-exists('feature-flags') and
+      map-get($feature-flags, 'enable-css-custom-properties')
+    {
+      @include custom-properties($name, $token);
+    } @else {
+      // Otherwise, we just include all the property declarations directly on the
+      // selector
+      @include properties(map-remove($token, 'breakpoints'));
+    }
   }
 }

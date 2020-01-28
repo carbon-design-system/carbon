@@ -18,7 +18,7 @@ import on from '../../globals/js/misc/on';
 
 /**
  * The structure for the position of floating menu.
- * @typedef {Object} FloatingMenu~position
+ * @typedef {object} FloatingMenu~position
  * @property {number} left The left position.
  * @property {number} top The top position.
  * @property {number} right The right position.
@@ -27,14 +27,14 @@ import on from '../../globals/js/misc/on';
 
 /**
  * The structure for the size of floating menu.
- * @typedef {Object} FloatingMenu~size
+ * @typedef {object} FloatingMenu~size
  * @property {number} width The width.
  * @property {number} height The height.
  */
 
 /**
  * The structure for the position offset of floating menu.
- * @typedef {Object} FloatingMenu~offset
+ * @typedef {object} FloatingMenu~offset
  * @property {number} top The top position.
  * @property {number} left The left position.
  */
@@ -325,21 +325,33 @@ class FloatingMenu extends mixin(
         const primaryFocusNode = this.element.querySelector(
           this.options.selectorPrimaryFocus
         );
-        const focusableNode = this.element.querySelector(
+
+        const contentNode = this.options.contentNode || this.element;
+        const tabbableNode = contentNode.querySelector(
           settings.selectorTabbable
         );
 
+        // The programmatically focusable element may be (and typically will be) the content node itself;
+        const focusableNode = contentNode.matches(settings.selectorFocusable)
+          ? contentNode
+          : contentNode.querySelector(settings.selectorFocusable);
+
         if (primaryFocusNode) {
+          // User defined focusable node
           primaryFocusNode.focus();
+        } else if (tabbableNode) {
+          // First sequentially focusable node
+          tabbableNode.focus();
         } else if (focusableNode) {
+          // First programmatic focusable node
           focusableNode.focus();
         } else {
           this.element.focus();
           if (__DEV__) {
-            const elementTabindex = this.element.getAttribute('tabindex');
             warning(
-              elementTabindex !== null && parseInt(elementTabindex, 10) > -1,
-              'Floating Menus without interactive elements must include tabindex="0" on the floating element.'
+              focusableNode === null,
+              'Floating Menus must have at least a programmatically focusable child. ' +
+                'This can be accomplished by adding tabindex="-1" to the content element.'
             );
           }
         }

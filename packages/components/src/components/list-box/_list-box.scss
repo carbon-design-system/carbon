@@ -13,7 +13,6 @@
 @import '../../globals/scss/css--helpers';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layout';
-@import '../../globals/scss/layer';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 
@@ -86,6 +85,16 @@ $list-box-menu-width: rem(300px);
     }
   }
 
+  .#{$prefix}--list-box--xl {
+    height: rem(48px);
+    max-height: rem(48px);
+  }
+
+  .#{$prefix}--list-box--sm {
+    height: rem(32px);
+    max-height: rem(32px);
+  }
+
   .#{$prefix}--list-box--expanded {
     border-bottom-color: $ui-03;
   }
@@ -105,13 +114,10 @@ $list-box-menu-width: rem(300px);
   // invalid states
   .#{$prefix}--list-box__invalid-icon {
     position: absolute;
-    top: $carbon--spacing-04;
+    top: 50%;
     right: $carbon--spacing-08;
     fill: $support-01;
-  }
-
-  .#{$prefix}--list-box--inline .#{$prefix}--list-box__invalid-icon {
-    top: $carbon--spacing-03;
+    transform: translateY(-50%);
   }
 
   .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
@@ -207,7 +213,10 @@ $list-box-menu-width: rem(300px);
     border-width: 0;
   }
 
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--disabled:hover,
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--disabled:hover {
+    background-color: transparent;
+  }
+
   .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded:hover {
     background-color: $field-02;
   }
@@ -244,7 +253,7 @@ $list-box-menu-width: rem(300px);
     display: inline-flex;
     align-items: center;
     vertical-align: top;
-    height: rem(40px);
+    height: calc(100% + 1px); // Account for the border in `.bx--list-box`
     padding: 0 $carbon--spacing-09 0 $carbon--spacing-05;
     cursor: pointer;
     outline: none;
@@ -263,39 +272,39 @@ $list-box-menu-width: rem(300px);
   }
 
   // populated input field
-  .#{$prefix}--list-box__field .#{$prefix}--text-input[value] {
+  .#{$prefix}--list-box__field .#{$prefix}--text-input {
     padding-right: carbon--mini-units(9);
   }
 
   // invalid && populated input field
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
-    .#{$prefix}--text-input[value] {
+    .#{$prefix}--text-input {
     padding-right: rem(98px); // to account for clear input button outline
   }
 
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
-    .#{$prefix}--text-input[value]
+    .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon {
     right: rem(66px); // to account for clear input button outline
   }
 
   // empty input field
-  .#{$prefix}--list-box__field .#{$prefix}--text-input[value=''] {
+  .#{$prefix}--list-box__field .#{$prefix}--text-input--empty {
     padding-right: $carbon--spacing-09;
   }
 
   // invalid && empty input field
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
-    .#{$prefix}--text-input[value=''] {
+    .#{$prefix}--text-input--empty {
     padding-right: carbon--mini-units(9);
   }
 
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
-    .#{$prefix}--text-input[value='']
+    .#{$prefix}--text-input--empty
     + .#{$prefix}--list-box__invalid-icon {
     right: rem(40px); // to account for clear input button outline
   }
@@ -313,7 +322,9 @@ $list-box-menu-width: rem(300px);
   // Menu status inside of a `list-box__field`
   .#{$prefix}--list-box__menu-icon {
     position: absolute;
+    top: 0;
     right: $carbon--spacing-05;
+    bottom: 0;
     height: 100%;
     transition: transform $duration--fast-01 motion(standard, productive);
     cursor: pointer;
@@ -388,7 +399,6 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__selection--multi > svg:hover {
     border-radius: 50%;
     background-color: $hover-secondary;
-    fill: $icon-03;
   }
 
   .#{$prefix}--list-box__selection--multi:focus,
@@ -426,6 +436,14 @@ $list-box-menu-width: rem(300px);
     &:active {
       background-color: $selected-ui;
     }
+  }
+
+  .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item {
+    height: rem(48px);
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover {
@@ -470,6 +488,7 @@ $list-box-menu-width: rem(300px);
     line-height: rem(16px);
     padding: rem(11px) 0;
     margin: 0 $carbon--spacing-05;
+    padding-right: rem(32px); // 40px - `$carbon--spacing-05`
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
     border-top-color: $ui-03;
@@ -492,6 +511,18 @@ $list-box-menu-width: rem(300px);
     }
   }
 
+  .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(15px);
+    padding-bottom: rem(15px);
+    height: rem(48px);
+  }
+
   .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item:hover
     .#{$prefix}--list-box__menu-item__option,
@@ -501,7 +532,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__menu-item__option {
-    margin: 0 $carbon--spacing-03;
+    margin: 0 rem(32px) 0 $carbon--spacing-03;
 
     &:focus {
       margin: 0;
@@ -531,16 +562,32 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item--active {
     color: $text-01;
+    background-color: $selected-ui;
     border-bottom-color: $selected-ui;
-
-    &:hover {
-      background-color: $selected-ui;
-    }
   }
 
   .#{$prefix}--list-box__menu-item--active
     .#{$prefix}--list-box__menu-item__option {
     color: $text-01;
+  }
+
+  .#{$prefix}--list-box__menu-item__selected-icon {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: rem(16px);
+    transform: translateY(-50%);
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__menu-item__selected-icon {
+    right: rem(8px);
+  }
+
+  .#{$prefix}--list-box__menu-item--active
+    .#{$prefix}--list-box__menu-item__selected-icon {
+    display: block;
   }
 
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {

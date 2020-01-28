@@ -64,6 +64,8 @@
   - [✅strip-unit [function]](#strip-unit-function)
   - [✅fluid-type [mixin]](#fluid-type-mixin)
   - [✅fluid-type-size [mixin]](#fluid-type-size-mixin)
+  - [❌custom-property-prefix [variable]](#custom-property-prefix-variable)
+  - [❌custom-properties [mixin]](#custom-properties-mixin)
   - [✅carbon--type-style [mixin]](#carbon--type-style-mixin)
 
 <!-- tocstop -->
@@ -748,8 +750,9 @@ Include a type reset for a given body and mono font family
   }
 
   body {
-    font-family: $body-font-family;
     @include carbon--font-weight('regular');
+
+    font-family: $body-font-family;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -1988,7 +1991,6 @@ $label-01: (
 ```scss
 $helper-text-01: (
   font-size: carbon--type-scale(1),
-  font-style: italic,
   line-height: carbon--rem(16px),
   letter-spacing: 0.32px,
 );
@@ -2082,6 +2084,7 @@ $body-long-02: (
 
 ```scss
 $code-01: (
+  font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(16px),
@@ -2101,6 +2104,7 @@ $code-01: (
 
 ```scss
 $code-02: (
+  font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(20px),
@@ -2280,7 +2284,12 @@ $productive-heading-07: (
 <summary>Source code</summary>
 
 ```scss
-$expressive-heading-01: $heading-01;
+$expressive-heading-01: map-merge(
+  $heading-01,
+  (
+    line-height: carbon--rem(20px),
+  )
+);
 ```
 
 </details>
@@ -2294,7 +2303,12 @@ $expressive-heading-01: $heading-01;
 <summary>Source code</summary>
 
 ```scss
-$expressive-heading-02: $heading-02;
+$expressive-heading-02: map-merge(
+  $heading-02,
+  (
+    line-height: carbon--rem(24px),
+  )
+);
 ```
 
 </details>
@@ -2935,6 +2949,45 @@ Computes the fluid `font-size` for a given type style and breakpoint
 - **Used by**:
   - [fluid-type [mixin]](#fluid-type-mixin)
 
+### ❌custom-property-prefix [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$custom-property-prefix: 'cds';
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Used by**:
+  - [custom-properties [mixin]](#custom-properties-mixin)
+
+### ❌custom-properties [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin custom-properties() {
+  @each $property, $value in $value {
+    #{$property}: var(
+      --#{$custom-property-prefix}-#{$name}-#{$property},
+      #{$value}
+    );
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [custom-property-prefix [variable]](#custom-property-prefix-variable)
+- **Used by**:
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+
 ### ✅carbon--type-style [mixin]
 
 Helper mixin to include the styles for a given token in any selector in your
@@ -2963,9 +3016,15 @@ fixed contexts.
   @if $fluid == true and map-has-key($token, 'breakpoints') {
     @include fluid-type($token, $breakpoints);
   } @else {
-    // Otherwise, we just include all the property declarations directly on the
-    // selector
-    @include properties(map-remove($token, 'breakpoints'));
+    @if global-variable-exists('feature-flags') and
+      map-get($feature-flags, 'enable-css-custom-properties')
+    {
+      @include custom-properties($name, $token);
+    } @else {
+      // Otherwise, we just include all the property declarations directly on the
+      // selector
+      @include properties(map-remove($token, 'breakpoints'));
+    }
   }
 }
 ```
@@ -2983,6 +3042,7 @@ fixed contexts.
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [fluid-type [mixin]](#fluid-type-mixin)
+  - [custom-properties [mixin]](#custom-properties-mixin)
   - [properties [mixin]](#properties-mixin)
   - [tokens [variable]](#tokens-variable)
 - **Used by**:

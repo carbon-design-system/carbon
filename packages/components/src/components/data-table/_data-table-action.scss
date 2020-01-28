@@ -17,11 +17,12 @@
   //TOOLBAR
   //-------------------------------------------------
   .#{$prefix}--table-toolbar {
-    display: flex;
-    width: 100%;
     background: $ui-01;
+    display: flex;
     height: $layout-04;
+    overflow: hidden;
     position: relative; //need for batch actions
+    width: 100%;
   }
 
   .#{$prefix}--toolbar-content {
@@ -74,7 +75,7 @@
     .#{$prefix}--search-magnifier {
     height: $layout-04;
     width: $layout-04;
-    padding: $spacing-md;
+    padding: $spacing-05;
     left: 0;
     cursor: pointer;
     pointer-events: all;
@@ -91,6 +92,12 @@
     .#{$prefix}--search
     .#{$prefix}--search-magnifier:hover {
     background: $hover-field;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--label {
+    visibility: hidden;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
@@ -116,6 +123,12 @@
     }
   }
 
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--search-close:focus::before {
+    background-color: $focus;
+  }
+
   //-------------------------------------------------
   //ACTIVE SEARCH - DEFAULT TOOLBAR
   //-------------------------------------------------
@@ -130,9 +143,12 @@
 
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
+    .#{$prefix}--label,
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
     .#{$prefix}--search-input {
-    padding-left: $spacing-3xl;
-    visibility: visible;
+    padding: 0 $spacing-09;
+    visibility: inherit;
   }
 
   .#{$prefix}--toolbar-search-container-active
@@ -187,6 +203,11 @@
     background-color: transparent;
   }
 
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search-close::before {
+    display: none;
+  }
+
   //-------------------------------------------------
   //TOOLBAR BUTTONS
   //-------------------------------------------------
@@ -196,7 +217,7 @@
     cursor: pointer;
     height: $layout-04;
     width: $layout-04;
-    padding: $spacing-md;
+    padding: $spacing-05;
     transition: background $duration--fast-02 motion(entrance, productive);
   }
 
@@ -279,14 +300,14 @@
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search
     .#{$prefix}--search-magnifier {
-    left: $spacing-md;
+    left: $spacing-05;
   }
 
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search
     .#{$prefix}--search-input {
     height: $layout-04;
-    padding-left: $spacing-3xl;
+    padding: 0 $spacing-09;
     border: none;
   }
 
@@ -335,8 +356,8 @@
     top: 0;
     left: 0;
     align-items: center;
-    padding-left: $spacing-lg;
-    padding-right: $spacing-lg;
+    padding-left: $spacing-06;
+    padding-right: $spacing-06;
     width: 100%;
     height: 100%;
     pointer-events: none;
@@ -492,7 +513,7 @@
       .#{$prefix}--search-magnifier {
       height: rem(32px);
       width: rem(32px);
-      padding: $spacing-xs;
+      padding: $spacing-03;
     }
 
     //hidden
@@ -503,7 +524,7 @@
     .#{$prefix}--toolbar-search-container-expandable
       .#{$prefix}--search
       .#{$prefix}--search-input {
-      padding-left: $spacing-xl;
+      padding: 0 $spacing-09;
     }
 
     //active
@@ -560,7 +581,7 @@
   .#{$prefix}--table-toolbar--small .#{$prefix}--toolbar-action {
     height: rem(32px);
     width: rem(32px);
-    padding: $spacing-xs;
+    padding: $spacing-03;
   }
 
   .#{$prefix}--table-toolbar--small .#{$prefix}--btn--primary {

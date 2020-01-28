@@ -17,7 +17,7 @@ export ComposedModal, {
   ModalBody,
   ModalFooter,
 } from './components/ComposedModal';
-export ContentSwitcher, { Switch } from './components/ContentSwitcher';
+export ContentSwitcher from './components/ContentSwitcher';
 export Copy from './components/Copy';
 export CopyButton from './components/CopyButton';
 export DangerButton from './components/DangerButton';
@@ -47,6 +47,10 @@ export {
 export DatePicker from './components/DatePicker';
 export DatePickerInput from './components/DatePickerInput';
 export Dropdown from './components/Dropdown';
+export {
+  ErrorBoundary,
+  ErrorBoundaryContext,
+} from './components/ErrorBoundary';
 export FileUploader, {
   Filename,
   FileUploaderButton,
@@ -91,6 +95,7 @@ export SecondaryButton from './components/SecondaryButton';
 export Select from './components/Select';
 export SelectItem from './components/SelectItem';
 export SelectItemGroup from './components/SelectItemGroup';
+export Switch from './components/Switch';
 export Slider from './components/Slider';
 export {
   StructuredListWrapper,

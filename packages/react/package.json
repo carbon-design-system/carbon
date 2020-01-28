@@ -1,7 +1,7 @@
 {
   "name": "carbon-components-react",
   "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
-  "version": "7.6.0",
+  "version": "7.9.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -25,20 +25,20 @@
   },
   "scripts": {
     "build": "yarn clean && node scripts/build.js",
-    "build-storybook": "build-storybook",
-    "clean": "rimraf es lib umd storybook-static",
+    "build-storybook": "cross-env NODE_ENV=production build-storybook",
+    "clean": "rimraf es lib umd storybook-static build react-docgen.json",
     "prepublish": "yarn build",
     "start": "yarn storybook",
-    "storybook": "start-storybook -p 9000"
+    "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000"
   },
   "peerDependencies": {
-    "carbon-components": "^10.6.0",
+    "carbon-components": "^10.9.0",
     "carbon-icons": "^7.0.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
   "dependencies": {
-    "@carbon/icons-react": "10.6.0",
+    "@carbon/icons-react": "^10.8.0",
     "classnames": "2.2.6",
     "downshift": "^1.31.14",
     "flatpickr": "4.6.1",
@@ -52,48 +52,47 @@
     "window-or-global": "^1.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.3",
+    "@babel/cli": "^7.7.7",
     "@babel/core": "^7.4.3",
-    "@babel/plugin-external-helpers": "^7.2.0",
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@babel/plugin-proposal-export-default-from": "^7.2.0",
-    "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/plugin-syntax-import-meta": "^7.2.0",
-    "@babel/plugin-transform-object-assign": "^7.2.0",
-    "@babel/preset-env": "^7.4.3",
-    "@babel/preset-react": "^7.0.0",
-    "@carbon/test-utils": "10.3.0",
-    "@storybook/addon-a11y": "^5.1.11",
-    "@storybook/addon-actions": "^5.1.11",
-    "@storybook/addon-info": "^5.1.11",
-    "@storybook/addon-knobs": "^5.1.11",
-    "@storybook/addon-links": "^5.1.11",
-    "@storybook/addon-storysource": "^5.1.11",
-    "@storybook/addons": "^5.1.11",
-    "@storybook/react": "^5.1.11",
-    "all-contributors-cli": "^5.2.1",
+    "@babel/plugin-external-helpers": "^7.7.4",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-export-default-from": "^7.7.4",
+    "@babel/plugin-proposal-export-namespace-from": "^7.7.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.7.4",
+    "@babel/plugin-syntax-import-meta": "^7.7.4",
+    "@babel/plugin-transform-object-assign": "^7.7.4",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "@carbon/test-utils": "^10.6.0",
+    "@storybook/addon-a11y": "^5.2.1",
+    "@storybook/addon-actions": "^5.2.1",
+    "@storybook/addon-info": "^5.2.1",
+    "@storybook/addon-knobs": "^5.2.1",
+    "@storybook/addon-links": "^5.2.1",
+    "@storybook/addon-storysource": "^5.2.1",
+    "@storybook/addons": "^5.2.1",
+    "@storybook/react": "^5.2.1",
+    "@storybook/source-loader": "^5.2.1",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
-    "babel-plugin-dev-expression": "^0.2.1",
-    "babel-plugin-react-docgen": "^2.0.0",
+    "babel-plugin-dev-expression": "^0.2.2",
+    "babel-plugin-react-docgen": "^4.0.0",
     "babel-plugin-transform-inline-environment-variables": "^0.4.0",
     "browserslist-config-carbon": "10.4.0",
-    "carbon-components": "10.6.0",
+    "carbon-components": "^10.9.0",
     "carbon-icons": "^7.0.5",
     "chalk": "^2.3.0",
     "cli-table": "^0.3.0",
     "core-js": "^3.1.3",
     "cross-env": "^5.2.0",
-    "css-loader": "^1.0.1",
+    "css-loader": "^3.4.2",
+    "fast-sass-loader": "^1.5.0",
     "gzip-size": "^5.0.0",
-    "jest": "^24.0.0",
-    "jest-circus": "^24.0.0",
     "lcov2badge": "^0.1.0",
-    "mini-css-extract-plugin": "^0.4.4",
-    "node-sass": "4.10.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.1",
     "object-assign": "^4.1.1",
+    "postcss-custom-properties": "^9.0.2",
     "postcss-loader": "^3.0.0",
     "promise": "^8.0.1",
     "prop-types": "^15.7.2",
@@ -101,7 +100,7 @@
     "react-dom": "^16.8.6",
     "react-test-renderer": "^16.8.6",
     "requestanimationframe": "^0.0.23",
-    "rimraf": "^2.6.3",
+    "rimraf": "^3.0.0",
     "rollup": "^1.10.0",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.3.4",
@@ -110,11 +109,11 @@
     "rollup-plugin-sizes": "^0.5.0",
     "rollup-plugin-terser": "^4.0.0",
     "rtlcss": "^2.4.0",
-    "sass-loader": "^7.1.0",
+    "sass-loader": "^8.0.2",
     "storybook-readme": "^5.0.8",
     "string-replace-loader": "^2.1.0",
-    "terser-webpack-plugin": "^1.1.0",
-    "webpack": "^4.25.1",
+    "terser-webpack-plugin": "^2.3.2",
+    "webpack": "^4.41.5",
     "whatwg-fetch": "^2.0.3"
   },
   "sideEffects": false,
@@ -130,49 +129,6 @@
       "@babel/plugin-proposal-class-properties",
       "@babel/plugin-proposal-export-namespace-from",
       "@babel/plugin-proposal-export-default-from"
-    ]
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/components/**/*.js",
-      "!src/components/**/*-story.js"
-    ],
-    "coverageDirectory": "coverage",
-    "coverageReporters": [
-      "text",
-      "html"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/jest/setup.js"
-    ],
-    "testMatch": [
-      "<rootDir>/**/__tests__/**/*.js?(x)",
-      "<rootDir>/**/?(*-)(spec|test).js?(x)"
-    ],
-    "testRunner": "jest-circus/runner",
-    "testURL": "http://localhost",
-    "transform": {
-      "^.+\\.(js|jsx)$": "<rootDir>/config/jest/jsTransform.js",
-      "^.+\\.s?css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/examples/",
-      "/config/",
-      "/lib/",
-      "/es/",
-      "/cjs/"
-    ],
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\](?!(carbon-icons)).+\\.(js|jsx)$"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "json"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
     ]
   },
   "contributors": [

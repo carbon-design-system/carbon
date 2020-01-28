@@ -8,7 +8,7 @@
 'use strict';
 
 const { reporter } = require('@carbon/cli-reporter');
-const { pascal } = require('change-case');
+const { pascalCase } = require('change-case');
 const fs = require('fs-extra');
 const path = require('path');
 const prettier = require('prettier');
@@ -209,34 +209,37 @@ async function builder(source, { cwd } = {}) {
 function getModuleName(name, size, prefixParts, descriptor) {
   const width = parseInt(descriptor.attrs.width, 10);
   const height = parseInt(descriptor.attrs.height, 10);
-  const prefix = prefixParts
+  let prefix = prefixParts
     .filter(size => isNaN(size))
-    .map(pascal)
+    .map(pascalCase)
     .join('');
   const isGlyph = width < 16 || height < 16;
 
   if (prefix !== '') {
+    if (prefix.match(/^\d/)) {
+      prefix = '_' + prefix;
+    }
     if (!size) {
       if (isGlyph) {
-        return prefix + pascal(name) + 'Glyph';
+        return prefix + pascalCase(name) + 'Glyph';
       }
-      return prefix + pascal(name);
+      return prefix + pascalCase(name);
     }
-    return prefix + pascal(name) + size;
+    return prefix + pascalCase(name) + size;
   }
 
   if (!size) {
     if (isGlyph) {
-      return pascal(name) + 'Glyph';
+      return pascalCase(name) + 'Glyph';
     }
-    return pascal(name);
+    return pascalCase(name);
   }
 
   if (isNaN(name[0])) {
-    return pascal(name) + size;
+    return pascalCase(name) + size;
   }
 
-  return '_' + pascal(name) + size;
+  return '_' + pascalCase(name) + size;
 }
 
 function createIconSource(file, descriptor) {

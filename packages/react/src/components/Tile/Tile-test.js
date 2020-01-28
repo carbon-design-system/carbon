@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { ChevronDown16 } from '@carbon/icons-react';
 import {
   Tile,
   ClickableTile,
@@ -38,6 +37,19 @@ describe('Tile', () => {
 
     it('renders extra classes passed in via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
+    });
+
+    it('supports light version', () => {
+      const wrapper = mount(<Tile>Test</Tile>);
+      expect(wrapper.props().light).toEqual(false);
+      expect(wrapper.childAt(0).hasClass(`${prefix}--tile--light`)).toEqual(
+        false
+      );
+      wrapper.setProps({ light: true });
+      expect(wrapper.props().light).toEqual(true);
+      expect(wrapper.childAt(0).hasClass(`${prefix}--tile--light`)).toEqual(
+        true
+      );
     });
   });
 
@@ -101,17 +113,31 @@ describe('Tile', () => {
       wrapper.setProps({ clicked: true });
       expect(wrapper.state().clicked).toEqual(false);
     });
+
+    it('supports light version', () => {
+      const wrapper = mount(<ClickableTile>Test</ClickableTile>);
+      expect(wrapper.props().light).toEqual(false);
+      expect(wrapper.childAt(0).hasClass(`${prefix}--tile--light`)).toEqual(
+        false
+      );
+      wrapper.setProps({ light: true });
+      expect(wrapper.props().light).toEqual(true);
+      expect(wrapper.childAt(0).hasClass(`${prefix}--tile--light`)).toEqual(
+        true
+      );
+    });
   });
 
   describe('Renders selectable tile as expected', () => {
-    const wrapper = mount(
-      <SelectableTile className="extra-class">
-        <div className="child">Test</div>
-      </SelectableTile>
-    );
+    let wrapper;
     let label;
 
     beforeEach(() => {
+      wrapper = mount(
+        <SelectableTile className="extra-class">
+          <div className="child">Test</div>
+        </SelectableTile>
+      );
       wrapper.state().selected = false;
       label = wrapper.find('label');
     });
@@ -166,6 +192,34 @@ describe('Tile', () => {
       wrapper.setProps({ selected: true });
       expect(wrapper.state().selected).toEqual(false);
     });
+
+    it('supports light version', () => {
+      const wrapper = mount(<SelectableTile>Test</SelectableTile>);
+      expect(wrapper.props().light).toEqual(false);
+      expect(wrapper.childAt(1).hasClass('bx--tile--light')).toEqual(false);
+      wrapper.setProps({ light: true });
+      expect(wrapper.props().light).toEqual(true);
+      expect(wrapper.childAt(1).hasClass('bx--tile--light')).toEqual(true);
+    });
+
+    it('should call onChange when the checkbox value changes', () => {
+      const onChange = jest.fn();
+      const wrapper = mount(
+        <SelectableTile onChange={onChange}>
+          <span id="test-id">test</span>
+        </SelectableTile>
+      );
+
+      const content = wrapper.find('#test-id');
+
+      // Tile becomes selected
+      content.simulate('click');
+      expect(onChange).toHaveBeenCalledTimes(1);
+
+      // Tile becomes un-selected
+      content.simulate('click');
+      expect(onChange).toHaveBeenCalledTimes(2);
+    });
   });
 
   describe('Renders expandable tile as expected', () => {
@@ -176,6 +230,9 @@ describe('Tile', () => {
         </TileAboveTheFoldContent>
         <TileBelowTheFoldContent className="child">
           <div style={{ height: '500px' }}>Test</div>
+          <a id="test-link" href="/">
+            Test Link
+          </a>
         </TileBelowTheFoldContent>
       </ExpandableTile>
     );
@@ -214,13 +271,26 @@ describe('Tile', () => {
       expect(wrapper.state().expanded).toEqual(true);
     });
 
-    it('displays the default tooltip for the chevron depending on state', () => {
-      const defaultExpandedIconText = 'Collapse';
-      const defaultCollapsedIconText = 'Expand';
+    it('ignores allows click events to be ignored using onBeforeClick', () => {
+      wrapper.setProps({
+        onBeforeClick: evt => evt.target.tagName.toLowerCase() !== 'a', // ignore link clicks
+      });
+      expect(wrapper.state().expanded).toEqual(false);
+      wrapper.simulate('click');
+      expect(wrapper.state().expanded).toEqual(true);
+      wrapper.find('#test-link').simulate('click');
+      expect(wrapper.state().expanded).toEqual(true);
+      wrapper.simulate('click');
+      expect(wrapper.state().expanded).toEqual(false);
+    });
+
+    it('displays the default tooltip for the button depending on state', () => {
+      const defaultExpandedIconText = 'Interact to collapse Tile';
+      const defaultCollapsedIconText = 'Interact to expand Tile';
 
       // Force the expanded tile to be collapsed.
       wrapper.setState({ expanded: false });
-      const collapsedDescription = wrapper.find(ChevronDown16).getElements()[0]
+      const collapsedDescription = wrapper.find('button').getElements()[0]
         .props['aria-label'];
       expect(collapsedDescription).toEqual(defaultCollapsedIconText);
 
@@ -228,12 +298,13 @@ describe('Tile', () => {
       wrapper.simulate('click');
 
       // Validate the description change
-      const expandedDescription = wrapper.find(ChevronDown16).getElements()[0]
-        .props['aria-label'];
+      const expandedDescription = wrapper.find('button').getElements()[0].props[
+        'aria-label'
+      ];
       expect(expandedDescription).toEqual(defaultExpandedIconText);
     });
 
-    it('displays the custom tooltips for the chevron depending on state', () => {
+    it('displays the custom tooltips for the button depending on state', () => {
       const tileExpandedIconText = 'Click To Collapse';
       const tileCollapsedIconText = 'Click To Expand';
 
@@ -242,7 +313,7 @@ describe('Tile', () => {
 
       // Force the expanded tile to be collapsed.
       wrapper.setState({ expanded: false });
-      const collapsedDescription = wrapper.find(ChevronDown16).getElements()[0]
+      const collapsedDescription = wrapper.find('button').getElements()[0]
         .props['aria-label'];
       expect(collapsedDescription).toEqual(tileCollapsedIconText);
 
@@ -250,8 +321,9 @@ describe('Tile', () => {
       wrapper.simulate('click');
 
       // Validate the description change
-      const expandedDescription = wrapper.find(ChevronDown16).getElements()[0]
-        .props['aria-label'];
+      const expandedDescription = wrapper.find('button').getElements()[0].props[
+        'aria-label'
+      ];
       expect(expandedDescription).toEqual(tileExpandedIconText);
     });
 
@@ -309,6 +381,19 @@ describe('Tile', () => {
       wrapper.setState({ tilePadding: 1 });
       wrapper.setProps({ tilePadding: 2 });
       expect(wrapper.state().tilePadding).toEqual(1);
+    });
+
+    it('supports light version', () => {
+      const wrapper = mount(<ExpandableTile>Test</ExpandableTile>);
+      expect(wrapper.props().light).toEqual(false);
+      expect(wrapper.childAt(0).hasClass(`${prefix}--tile--light`)).toEqual(
+        false
+      );
+      wrapper.setProps({ light: true });
+      expect(wrapper.props().light).toEqual(true);
+      expect(wrapper.childAt(0).hasClass(`${prefix}--tile--light`)).toEqual(
+        true
+      );
     });
   });
 });

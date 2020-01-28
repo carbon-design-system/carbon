@@ -19,6 +19,12 @@ const types = {
   'For password (password)': 'password',
 };
 
+const sizes = {
+  'Extra large size (xl)': 'xl',
+  'Regular size (lg)': '',
+  'Small size (sm)': 'sm',
+};
+
 function ControlledPasswordInputApp(props) {
   const [type, setType] = useState('password');
   const togglePasswordVisibility = () => {
@@ -45,6 +51,7 @@ const props = {
       'Default value (defaultValue)',
       'This is not a default value'
     ),
+    size: select('Field size (size)', sizes, '') || undefined,
     labelText: text('Label text (labelText)', 'Text Input label'),
     placeholder: text('Placeholder text (placeholder)', 'Placeholder text'),
     light: boolean('Light variant (light)', false),
@@ -70,8 +77,18 @@ const props = {
       ['start', 'center', 'end'],
       'center'
     ),
+    hidePasswordLabel: text(
+      '"Hide password" tooltip label for password visibility toggle (hidePasswordLabel)',
+      'Hide password'
+    ),
+    showPasswordLabel: text(
+      '"Show password" tooltip label for password visibility toggle (showPasswordLabel)',
+      'Show password'
+    ),
   }),
 };
+
+TextInput.displayName = 'TextInput';
 
 storiesOf('TextInput', module)
   .addDecorator(withKnobs)
@@ -96,12 +113,14 @@ storiesOf('TextInput', module)
   )
   .add(
     'Toggle password visibility',
-    () => (
-      <TextInput.PasswordInput
-        {...props.TextInputProps()}
-        {...props.PasswordInputProps()}
-      />
-    ),
+    () => {
+      return (
+        <TextInput.PasswordInput
+          {...props.TextInputProps()}
+          {...props.PasswordInputProps()}
+        />
+      );
+    },
     {
       info: {
         text: `
@@ -112,12 +131,21 @@ storiesOf('TextInput', module)
   )
   .add(
     'Fully controlled toggle password visibility',
-    () => (
-      <ControlledPasswordInputApp
-        {...props.TextInputProps()}
-        {...props.PasswordInputProps()}
-      />
-    ),
+    () => {
+      ControlledPasswordInputApp.__docgenInfo = {
+        ...TextInput.PasswordInput.__docgenInfo,
+        props: {
+          ...TextInput.PasswordInput.__docgenInfo.props,
+        },
+      };
+
+      return (
+        <ControlledPasswordInputApp
+          {...props.TextInputProps()}
+          {...props.PasswordInputProps()}
+        />
+      );
+    },
     {
       info: {
         text: `
@@ -129,7 +157,12 @@ storiesOf('TextInput', module)
   .add(
     'skeleton',
     () => (
-      <div>
+      <div
+        aria-label="loading text input"
+        aria-live="assertive"
+        role="status"
+        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      >
         <TextInputSkeleton />
         <br />
         <TextInputSkeleton hideLabel />

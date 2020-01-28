@@ -1,7 +1,7 @@
 {
   "name": "@carbon/icons",
   "description": "Icons for digital and software products using the Carbon Design System",
-  "version": "10.6.0",
+  "version": "10.8.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -12,7 +12,8 @@
     "lib",
     "scss",
     "svg",
-    "metadata.json"
+    "metadata.json",
+    "build-info.json"
   ],
   "keywords": [
     "ibm",
@@ -33,6 +34,6 @@
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "@carbon/icon-build-helpers": "0.2.0"
+    "@carbon/icon-build-helpers": "^0.3.0"
   }
 }
