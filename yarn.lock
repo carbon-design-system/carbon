@@ -14665,6 +14665,13 @@ magic-string@0.19.1:
   dependencies:
     vlq "^0.2.1"
 
+magic-string@0.25.4:
+  version "0.25.4"
+  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.4.tgz#325b8a0a79fc423db109b77fd5a19183b7ba5143"
+  integrity sha512-oycWO9nEVAP2RVPbIoDoA4Y7LFIJ3xRYov93gAyJhZkET1tNuB0u7uWkZS2LpBWTJUWnmau/To8ECWRC+jKNfw==
+  dependencies:
+    sourcemap-codec "^1.4.4"
+
 magic-string@^0.25.2:
   version "0.25.6"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.6.tgz#5586387d1242f919c6d223579cc938bf1420795e"
@@ -19504,6 +19511,15 @@ rollup-plugin-strip-banner@^0.2.0:
     magic-string "0.19.1"
     rollup-pluginutils "2.0.1"
 
+rollup-plugin-strip-banner@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-strip-banner/-/rollup-plugin-strip-banner-1.0.0.tgz#28ddfb74e7b9c1fe3e612124fa83e571b914e893"
+  integrity sha512-hatiuCbYCM7db/JmogCn5a4/Un5dLnAIT4ixXmH9qNCbzXJqd0/jnVd/8ZDA3fF7WmmVh7D18GAzha0MMmRpSQ==
+  dependencies:
+    extract-banner "0.1.2"
+    magic-string "0.25.4"
+    rollup-pluginutils "2.8.2"
+
 rollup-plugin-terser@^4.0.0:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/rollup-plugin-terser/-/rollup-plugin-terser-4.0.4.tgz#6f661ef284fa7c27963d242601691dc3d23f994e"
@@ -19526,6 +19542,13 @@ rollup-pluginutils@2.0.1:
   dependencies:
     estree-walker "^0.3.0"
     micromatch "^2.3.11"
+
+rollup-pluginutils@2.8.2:
+  version "2.8.2"
+  resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.8.2.tgz#72f2af0748b592364dbd3389e600e5a9444a351e"
+  integrity sha512-EEp9NhnUkwY8aif6bxgovPHMoMoNr2FulJziTndpt5H9RdwC47GSGuII9XxpSdzVGM0GWrNPHV6ie1LTNJPaLQ==
+  dependencies:
+    estree-walker "^0.6.1"
 
 rollup-pluginutils@^2.6.0, rollup-pluginutils@^2.8.1:
   version "2.8.2"
