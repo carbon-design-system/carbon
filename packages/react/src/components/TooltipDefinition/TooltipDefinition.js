@@ -6,10 +6,12 @@
  */
 
 import cx from 'classnames';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { composeEventHandlers } from '../../tools/events';
+import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
@@ -20,9 +22,12 @@ const TooltipDefinition = ({
   children,
   direction,
   align,
+  onFocus,
+  onMouseEnter,
   tooltipText,
   ...rest
 }) => {
+  const [allowTooltipVisibility, setAllowTooltipVisibility] = useState(true);
   const tooltipId = id || `definition-tooltip-${getInstanceId()}`;
   const tooltipClassName = cx(
     `${prefix}--tooltip--definition`,
@@ -37,11 +42,30 @@ const TooltipDefinition = ({
     {
       [`${prefix}--tooltip--${direction}`]: direction,
       [`${prefix}--tooltip--align-${align}`]: align,
+      [`${prefix}--tooltip--hidden`]: !allowTooltipVisibility,
     }
   );
+  const handleFocus = () => setAllowTooltipVisibility(true);
+  const handleMouseEnter = () => setAllowTooltipVisibility(true);
+  useEffect(() => {
+    const handleEscKeyDown = event => {
+      if (matches(event, [keys.Escape])) {
+        setAllowTooltipVisibility(false);
+      }
+    };
+    document.addEventListener('keydown', handleEscKeyDown);
+    return () => document.removeEventListener('keydown', handleEscKeyDown);
+  }, []);
+
   return (
-    <div {...rest} className={tooltipClassName}>
-      <button className={tooltipTriggerClasses} aria-describedby={tooltipId}>
+    <div
+      {...rest}
+      className={tooltipClassName}
+      onMouseEnter={composeEventHandlers([onMouseEnter, handleMouseEnter])}>
+      <button
+        className={tooltipTriggerClasses}
+        aria-describedby={tooltipId}
+        onFocus={composeEventHandlers([onFocus, handleFocus])}>
         {children}
       </button>
       <div
