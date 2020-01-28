@@ -20476,10 +20476,13 @@ Progress indicator styles
   }
 
   .#{$prefix}--progress-step--current svg {
-    width: 14px;
-    height: 14px;
+    stroke: $interactive-01;
     fill: $interactive-01;
     margin-top: rem(9.5px);
+
+    path:last-of-type {
+      stroke-width: 40%;
+    }
   }
 
   //INCOMPLETE STYLING
