@@ -74,15 +74,21 @@ exports[`DataTable.TableExpandRow should render 1`] = `
             </TableCell>
           </tr>
         </TableExpandRow>
-        <TableExpandedRow>
+        <TableExpandedRow
+          colSpan={1}
+        >
           <tr
             className="bx--expandable-row"
             data-child-row={true}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
-            <TableCell>
-              <td>
+            <TableCell
+              colSpan={1}
+            >
+              <td
+                colSpan={1}
+              >
                 <div
                   className="bx--child-row-inner-container"
                 />
