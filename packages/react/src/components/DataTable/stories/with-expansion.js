@@ -64,7 +64,9 @@ export default props => (
                   <h1 className="demo-inner-container-header">
                     Expandable row content
                   </h1>
-                  <p>Description here</p>
+                  <p className="demo-inner-container-content">
+                    Description here
+                  </p>
                 </TableExpandedRow>
               </React.Fragment>
             ))}
