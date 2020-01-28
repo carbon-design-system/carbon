@@ -9,10 +9,12 @@ exports[`TooltipDefinition should allow the user to specify the direction 1`] = 
 >
   <div
     className="bx--tooltip--definition bx--tooltip--a11y custom-class"
+    onMouseEnter={[Function]}
   >
     <button
       aria-describedby="definition-tooltip-3"
       className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-start"
+      onFocus={[Function]}
     >
       tooltip trigger
     </button>
@@ -36,10 +38,12 @@ exports[`TooltipDefinition should render 1`] = `
 >
   <div
     className="bx--tooltip--definition bx--tooltip--a11y custom-class"
+    onMouseEnter={[Function]}
   >
     <button
       aria-describedby="definition-tooltip-1"
       className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--bottom bx--tooltip--align-start"
+      onFocus={[Function]}
     >
       tooltip trigger
     </button>
@@ -64,10 +68,12 @@ exports[`TooltipDefinition should support a custom trigger element class 1`] = `
 >
   <div
     className="bx--tooltip--definition bx--tooltip--a11y custom-class"
+    onMouseEnter={[Function]}
   >
     <button
       aria-describedby="definition-tooltip-2"
       className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition custom-trigger-class bx--tooltip--bottom bx--tooltip--align-start"
+      onFocus={[Function]}
     >
       tooltip trigger
     </button>
