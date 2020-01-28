@@ -7108,6 +7108,7 @@ $focus: if(
   - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [modal [mixin]](#modal-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
@@ -13094,8 +13095,7 @@ Button styles
   }
 
   .#{$prefix}--btn--field {
-    height: 40px;
-    min-height: 40px;
+    min-height: rem(40px);
     padding: $button-padding-field;
   }
 
@@ -14269,6 +14269,12 @@ Data table action styles
     }
   }
 
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--search-close:focus::before {
+    background-color: $focus;
+  }
+
   //-------------------------------------------------
   //ACTIVE SEARCH - DEFAULT TOOLBAR
   //-------------------------------------------------
@@ -14287,7 +14293,7 @@ Data table action styles
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
     .#{$prefix}--search-input {
-    padding-left: $spacing-09;
+    padding: 0 $spacing-09;
     visibility: inherit;
   }
 
@@ -14341,6 +14347,11 @@ Data table action styles
     .#{$prefix}--search-close:hover {
     border: none; //to-do: is there a spec for close button on hover?
     background-color: transparent;
+  }
+
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search-close::before {
+    display: none;
   }
 
   //-------------------------------------------------
@@ -14442,7 +14453,7 @@ Data table action styles
     .#{$prefix}--search
     .#{$prefix}--search-input {
     height: $layout-04;
-    padding-left: $spacing-09;
+    padding: 0 $spacing-09;
     border: none;
   }
 
@@ -14659,7 +14670,7 @@ Data table action styles
     .#{$prefix}--toolbar-search-container-expandable
       .#{$prefix}--search
       .#{$prefix}--search-input {
-      padding-left: $spacing-xl;
+      padding: 0 $spacing-09;
     }
 
     //active
@@ -14749,6 +14760,7 @@ Data table action styles
   - [spacing-05 [variable]](#spacing-05-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [focus [variable]](#focus-variable)
   - [spacing-09 [variable]](#spacing-09-variable)
   - [layout-01 [variable]](#layout-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
@@ -17269,7 +17281,7 @@ Inline loading styles
   }
 
   .#{$prefix}--inline-loading__text {
-    @include type-style('body-short-01');
+    @include type-style('label-01');
     color: $text-02;
   }
 
@@ -20453,6 +20465,7 @@ Progress indicator styles
     margin-left: $carbon--spacing-06;
     margin-top: rem(28px);
     color: $text-01;
+    text-align: start;
   }
 
   //CURRENT STYLING
@@ -20489,6 +20502,7 @@ Progress indicator styles
 
   //interactive button
   .#{$prefix}--progress-step-button {
+    @include button-reset();
     display: flex;
   }
 
@@ -20547,15 +20561,25 @@ Progress indicator styles
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
+    padding-bottom: rem(24px);
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button {
     display: list-item;
-    min-height: 6rem;
+    min-height: 3.625rem;
     width: initial;
     min-width: initial;
+  }
 
-    svg {
-      display: inline-block;
-      margin: 0.1rem 0.5rem;
-    }
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step svg,
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
+    display: inline-block;
+    margin: 0.1rem 0.5rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
+    margin-right: 0.7rem;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step--current svg {
@@ -20565,9 +20589,10 @@ Progress indicator styles
   .#{$prefix}--progress--vertical .#{$prefix}--progress-label {
     display: inline-block;
     width: initial;
-    max-width: none;
+    max-width: rem(160px);
     vertical-align: top;
     margin: 0;
+    white-space: initial;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step .bx--tooltip {
@@ -21150,7 +21175,7 @@ Select styles
     background-color: $field-02;
 
     &:hover {
-      background-color: $ui-01;
+      background-color: $hover-ui;
     }
 
     &:disabled,
@@ -21295,8 +21320,8 @@ Select styles
   - [disabled-02 [variable]](#disabled-02-variable)
   - [support-01 [variable]](#support-01-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [ui-01 [variable]](#ui-01-variable)
   - [ui-05 [variable]](#ui-05-variable)
+  - [ui-01 [variable]](#ui-01-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [spacing-07 [variable]](#spacing-07-variable)
@@ -22113,8 +22138,8 @@ Tag styles
 ```scss
 @mixin tags() {
   .#{$prefix}--tag {
-    @include type-style('label-01');
     @include button-reset($width: false);
+    @include type-style('label-01');
 
     display: inline-flex;
     align-items: center;
@@ -22419,11 +22444,11 @@ Text input styles
     }
   }
 
-  .#{$prefix}--text-input--large {
+  .#{$prefix}--text-input--xl {
     height: rem(48px);
   }
 
-  .#{$prefix}--text-input--small {
+  .#{$prefix}--text-input--sm {
     height: rem(32px);
   }
 

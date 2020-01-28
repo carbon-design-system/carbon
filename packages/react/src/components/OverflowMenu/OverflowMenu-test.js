@@ -7,6 +7,7 @@
 
 import React from 'react';
 import OverflowMenu from '../OverflowMenu';
+import OverflowMenuItem from '../OverflowMenuItem';
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
@@ -17,8 +18,8 @@ describe('OverflowMenu', () => {
   describe('Renders as expected', () => {
     const rootWrapper = mount(
       <OverflowMenu className="extra-class">
-        <div className="test-child" />
-        <div className="test-child" />
+        <OverflowMenuItem className="test-child">one</OverflowMenuItem>
+        <OverflowMenuItem className="test-child">two</OverflowMenuItem>
       </OverflowMenu>
     );
     const menu = rootWrapper.find(`button.${prefix}--overflow-menu`);
@@ -122,8 +123,8 @@ describe('OverflowMenu', () => {
     it('should render a ul with the appropriate class', () => {
       const rootWrapper = mount(
         <OverflowMenu menuOptionsClass="extra-menu-class">
-          <div className="test-child" />
-          <div className="test-child" />
+          <OverflowMenuItem className="test-child">one</OverflowMenuItem>
+          <OverflowMenuItem className="test-child">two</OverflowMenuItem>
         </OverflowMenu>
       );
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
@@ -141,8 +142,8 @@ describe('OverflowMenu', () => {
     it('should render children as expected', () => {
       const rootWrapper = mount(
         <OverflowMenu>
-          <div className="test-child" />
-          <div className="test-child" />
+          <OverflowMenuItem className="test-child">one</OverflowMenuItem>
+          <OverflowMenuItem className="test-child">two</OverflowMenuItem>
         </OverflowMenu>
       );
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
@@ -151,7 +152,7 @@ describe('OverflowMenu', () => {
         .instance()
         .setState({ open: true });
       rootWrapper.update();
-      expect(rootWrapper.find('.test-child').length).toEqual(2);
+      expect(rootWrapper.find('button.test-child').length).toEqual(2);
     });
 
     it('should set expected class when state is open', () => {
@@ -267,8 +268,8 @@ describe('OverflowMenu', () => {
         <OverflowMenu
           className="extra-class"
           renderIcon={() => <div className="other">Other</div>}>
-          <div className="test-child" />
-          <div className="test-child" />
+          <OverflowMenuItem className="test-child">one</OverflowMenuItem>
+          <OverflowMenuItem className="test-child">two</OverflowMenuItem>
         </OverflowMenu>
       );
       // renderIcon should be the only component where `${prefix}--overflow-menu__icon` class is applied,
