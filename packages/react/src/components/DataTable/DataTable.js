@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {createRef} from 'react';
 import isEqual from 'lodash.isequal';
 import getDerivedStateFromProps from './state/getDerivedStateFromProps';
 import { getNextSortState } from './state/sorting';
@@ -117,6 +117,11 @@ export default class DataTable extends React.Component {
     stickyHeader: PropTypes.bool,
 
     /**
+     * Specify whether the table columns should be resizable
+     */
+    isResizable: PropTypes.bool,
+
+    /**
      * Specify whether the table should be able to be sorted by its headers
      */
     isSortable: PropTypes.bool,
@@ -136,8 +141,54 @@ export default class DataTable extends React.Component {
     this.state = {
       ...getDerivedStateFromProps(props, {}),
       isExpandedAll: false, // Start with collapsed state, treat `undefined` as neutral state
+      colWidth: {},
     };
+    // create refs for the columns and set initial column width
+    this.colRefs = props.headers.map(e => e.key).reduce((r, e) => { r[e] = createRef(); return r }, {});
     this.instanceId = getInstanceId();
+    this.updateColumnWidthState = this.updateColumnWidthState.bind(this);
+    this.modifyColumnWidth = this.modifyColumnWidth.bind(this);
+  }
+
+  componentDidMount() {
+    const colWidth = this.props.headers.map(e => e.key).reduce((r, e) => { r[e] = null; return r }, {});
+    this.setState({
+      ...this.state,
+      colWidth,
+    })
+    this.updateColumnWidthState();
+    window.addEventListener("resize", this.updateColumnWidthState());
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateColumnWidthState());
+  }
+
+  updateColumnWidthState() {
+    // update column width state based on actual state
+    if (Object.keys(this.colRefs).length > 0) {
+      const nextWidth = {};
+      Object.entries(this.colRefs).forEach((entry) => {
+        const [key, ref] = entry;
+        nextWidth[key] = ref.current && ref.current.getBoundingClientRect().width;
+        });
+      this.setState({
+        ...this.state,
+        colWidth: nextWidth,
+      })
+    }
+  }
+
+  modifyColumnWidth(colId, increment) {
+    const nextWidth = {
+      ...this.state.colWidth,
+      [colId]: this.state.colWidth[colId] + increment
+    };
+    const newState = {
+      ...this.state,
+      colWidth: nextWidth,
+    };
+    this.setState(newState);
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -176,15 +227,21 @@ export default class DataTable extends React.Component {
     header,
     onClick,
     isSortable = this.props.isSortable,
+    isResizable = this.props.isResizable,
     ...rest
   }) => {
     const { sortDirection, sortHeaderKey } = this.state;
     return {
       ...rest,
       key: header.key,
+      colKey: header.key,
       sortDirection,
       isSortable,
       isSortHeader: sortHeaderKey === header.key,
+      isResizable,
+      colWidth: this.state.colWidth[header.key],
+      modifyColumnWidth: this.modifyColumnWidth,
+      ref: this.colRefs[header.key],
       // Compose the event handlers so we don't overwrite a consumer's `onClick`
       // handler
       onClick: composeEventHandlers([
@@ -348,6 +405,7 @@ export default class DataTable extends React.Component {
       useZebraStyles,
       size,
       isSortable,
+      isResizable,
       useStaticWidth,
       shouldShowBorder,
       stickyHeader,
@@ -356,6 +414,7 @@ export default class DataTable extends React.Component {
       useZebraStyles,
       size,
       isSortable,
+      isResizable,
       useStaticWidth,
       shouldShowBorder,
       stickyHeader,

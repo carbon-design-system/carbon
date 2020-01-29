@@ -445,6 +445,29 @@
     width: auto;
   }
 
+  //----------------------------------------------------------------------------
+  // Column resize
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--resizable th{
+    padding-right: 0;
+     &:hover {
+      background-color:  $ui-04;
+    }
+  }
+
+  .#{$prefix}--table-header-resizable {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .#{$prefix}--table-header-resizer {
+    width: $spacing-05;
+    &:hover {
+      background-color:  $ui-05;
+      cursor: col-resize;
+    }
+  }
+
   // -------------
   // Sticky header
   // -------------

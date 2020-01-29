@@ -18,6 +18,7 @@ export const Table = ({
   useZebraStyles,
   size,
   isSortable,
+  isResizable,
   useStaticWidth,
   shouldShowBorder,
   stickyHeader,
@@ -31,6 +32,7 @@ export const Table = ({
     [`${prefix}--data-table--zebra`]: useZebraStyles,
     [`${prefix}--data-table--static`]: useStaticWidth,
     [`${prefix}--data-table--no-border`]: !shouldShowBorder,
+    [`${prefix}--data-table--resizable`]: isResizable,
     [`${prefix}--data-table--sticky-header`]: stickyHeader,
   });
   const table = (
@@ -74,6 +76,11 @@ Table.propTypes = {
    * `false` If true, will apply sorting styles
    */
   isSortable: PropTypes.bool,
+
+  /**
+   * `false` If true, will apply resizable styles
+   */
+  isResizable: PropTypes.bool,
 
   /**
    * `false` If true, will keep the header sticky (only data rows will scroll)

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /**
  * Copyright IBM Corp. 2016, 2018
  *
@@ -7,7 +8,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import { settings } from 'carbon-components';
 import {
   ArrowUp20 as Arrow,
@@ -54,17 +55,57 @@ const TableHeader = React.forwardRef(function TableHeader(
     colSpan,
     isSortable,
     isSortHeader,
+    isResizable,
     onClick,
     scope,
     sortDirection,
     translateWithId: t,
+    colWidth,
+    colKey,
+    modifyColumnWidth,
     ...rest
   },
   ref
 ) {
+
+  const [resizing, setResizing] = useState(false);
+
+  if (isResizable) {
+
+    const doResizing = ev => {
+      if (resizing) {
+        const br = ref.current.getBoundingClientRect();
+        const newWidth = colWidth + ev.movementX;// ev.clientX - br.x + 3;
+        console.log(`cw: ${colWidth} w: ${br.width} m: ${ev.movementX} nw:${newWidth}`);
+        modifyColumnWidth(colKey, ev.movementX);
+      }
+    }
+
+    return (
+      <th
+        className={headerClassName}
+        colSpan={colSpan}
+        ref={ref}
+        scope={scope}
+        style={{ width: colWidth }}>
+        <div className={`${prefix}--table-header-resizable`} {...rest}>
+          <span className={`${prefix}--table-header-label`}>{children}</span>
+          <div
+            className={`${prefix}--table-header-resizer`}
+            onMouseDown={() => setResizing(true)}
+            onMouseUp={() => setResizing(false)}
+            /*onMouseLeave={() => setResizing(false)} /* TODO: required? */
+            onMouseMove={e => doResizing(e)}
+            role="separator">
+          </div>
+        </div>
+      </th>
+    );
+  }
+
   if (!isSortable) {
     return (
-      <th {...rest} className={headerClassName} scope={scope} colSpan={colSpan}>
+      <th {...rest} className={headerClassName} scope={scope} colSpan={colSpan} ref={ref}>
         <span className={`${prefix}--table-header-label`}>{children}</span>
       </th>
     );
@@ -163,6 +204,12 @@ TableHeader.propTypes = {
    * this component.
    */
   translateWithId: PropTypes.func,
+
+  isResizable: PropTypes.bool,
+
+  colKey: PropTypes.string.isRequired,
+
+  modifyColumnWidth: PropTypes.func,
 };
 
 TableHeader.defaultProps = {

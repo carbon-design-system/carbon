@@ -91,6 +91,22 @@ storiesOf('DataTable', module)
     }
   )
   .add(
+    'with resizable columns',
+    withReadme(readme, () =>
+      require('./stories/with-resizable-columns').default(props())
+    ),
+    {
+      info: {
+        text: `
+        DataTable with resizable columns
+
+        You can find more detailed information surrounding usage of this component
+        at the following url: ${readmeURL}
+      `,
+      },
+    }
+  )
+  .add(
     'with radio button selection',
     withReadme(readme, () =>
       require('./stories/with-selection--radio').default(props())
