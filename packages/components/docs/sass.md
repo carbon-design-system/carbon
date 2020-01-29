@@ -13165,6 +13165,8 @@ Button base styles
   outline: none;
   position: relative;
   max-width: rem(320px);
+  // Fix to remove added margins on buttons in safari (see #5155)
+  margin: 0;
 
   &:disabled,
   &.#{$prefix}--btn--disabled {
@@ -15374,8 +15376,6 @@ Data table expandable styles
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
-    padding-bottom: rem(23px);
-    transition: padding $duration--moderate-01 motion(standard, productive);
     border-bottom: 1px solid $ui-03;
   }
 
