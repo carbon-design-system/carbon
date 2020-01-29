@@ -62,6 +62,7 @@ exports[`SideNavMenu should render 1`] = `
 >
   <li
     className="bx--side-nav__item bx--side-nav__item--icon custom-classname"
+    onKeyDown={[Function]}
   >
     <button
       aria-expanded={false}

@@ -11,6 +11,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SideNavIcon from './SideNavIcon';
+import { keys, match } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -100,6 +101,12 @@ export class SideNavMenu extends React.Component {
     this.setState(state => ({ isExpanded: !state.isExpanded }));
   };
 
+  handleKeyDown = event => {
+    if (match(event, keys.Escape)) {
+      this.setState(() => ({ isExpanded: false }));
+    }
+  };
+
   render() {
     const {
       buttonRef,
@@ -138,7 +145,8 @@ export class SideNavMenu extends React.Component {
       [customClassName]: !!customClassName,
     });
     return (
-      <li className={className}>
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+      <li className={className} onKeyDown={this.handleKeyDown}>
         <button
           aria-haspopup="true"
           aria-expanded={isExpanded}
