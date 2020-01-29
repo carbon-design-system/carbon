@@ -132,10 +132,6 @@
     }
   }
 
-  .#{$prefix}--inline-notification--info .bx--inline-notification__icon {
-    display: none;
-  }
-
   .#{$prefix}--inline-notification--warning {
     @include notification--experimental($inverse-support-03, $inverse-02);
   }
