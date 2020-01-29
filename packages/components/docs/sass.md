@@ -3386,7 +3386,6 @@ $carbon--spacing-04: 0.75rem;
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [lists [mixin]](#lists-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
 
@@ -18964,10 +18963,6 @@ Inline notification styles
     }
   }
 
-  .#{$prefix}--inline-notification--info .bx--inline-notification__icon {
-    display: none;
-  }
-
   .#{$prefix}--inline-notification--warning {
     @include notification--experimental($inverse-support-03, $inverse-02);
   }
@@ -19199,7 +19194,7 @@ Toast notification styles
     display: flex;
     width: rem(288px);
     height: auto;
-    padding-left: $carbon--spacing-05;
+    padding-left: rem(14px);
     color: $inverse-01;
     margin-top: $carbon--spacing-03;
     margin-bottom: $carbon--spacing-03;
@@ -19295,8 +19290,8 @@ Toast notification styles
 
   .#{$prefix}--toast-notification__icon {
     flex-shrink: 0;
-    margin-right: $carbon--spacing-05;
-    margin-top: $carbon--spacing-04;
+    margin-right: rem(14px);
+    margin-top: rem(14px);
   }
 
   .#{$prefix}--toast-notification__details {
@@ -19380,9 +19375,9 @@ Toast notification styles
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
   - [prefix [variable]](#prefix-variable)
-  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [inverse-link [variable]](#inverse-link-variable)
   - [inverse-support-01 [variable]](#inverse-support-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
@@ -19393,7 +19388,6 @@ Toast notification styles
   - [support-04 [variable]](#support-04-variable)
   - [inverse-support-03 [variable]](#inverse-support-03-variable)
   - [support-03 [variable]](#support-03-variable)
-  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
 
