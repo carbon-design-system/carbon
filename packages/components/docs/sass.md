@@ -15374,8 +15374,6 @@ Data table expandable styles
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
-    padding-bottom: rem(23px);
-    transition: padding $duration--moderate-01 motion(standard, productive);
     border-bottom: 1px solid $ui-03;
   }
 

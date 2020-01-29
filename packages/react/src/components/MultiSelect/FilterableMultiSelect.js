@@ -243,6 +243,7 @@ export default class FilterableMultiSelect extends React.Component {
         }
         return {
           inputValue: inputValue || '',
+          isOpen: Boolean(inputValue) || this.state.isOpen,
         };
       });
   };
