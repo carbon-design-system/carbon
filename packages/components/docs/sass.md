@@ -13165,6 +13165,8 @@ Button base styles
   outline: none;
   position: relative;
   max-width: rem(320px);
+  // Fix to remove added margins on buttons in safari (see #5155)
+  margin: 0;
 
   &:disabled,
   &.#{$prefix}--btn--disabled {
@@ -13711,6 +13713,9 @@ Code snippet styles
 
   // Show more / less button
   button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+    @include type-style('body-short-01');
+    @include carbon--font-family('sans');
+    border: 0;
     display: inline-flex;
     align-items: center;
     position: absolute;
@@ -13751,6 +13756,7 @@ Code snippet styles
 
   .#{$prefix}--snippet-btn--expand:focus {
     @include focus-outline('outline');
+    border-color: transparent;
   }
 
   .#{$prefix}--snippet--expand
