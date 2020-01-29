@@ -90,11 +90,6 @@
     padding: 0 $spacing-03;
   }
 
-  .#{$prefix}--snippet--single .#{$prefix}--snippet-container,
-  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
-    @include focus-outline('reset');
-  }
-
   // Single Line Snippet
   .#{$prefix}--snippet--single {
     @include bx--snippet;
@@ -304,6 +299,7 @@
 
   .#{$prefix}--snippet-btn--expand:focus {
     @include focus-outline('outline');
+    border-color: transparent;
   }
 
   .#{$prefix}--snippet--expand
