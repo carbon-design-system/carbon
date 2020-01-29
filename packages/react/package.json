@@ -24,7 +24,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && node scripts/build.js",
+    "build": "yarn clean && node scripts/build.js && rollup -c",
     "build-storybook": "cross-env NODE_ENV=production build-storybook",
     "clean": "rimraf es lib umd storybook-static build react-docgen.json",
     "prepublish": "yarn build",
@@ -107,6 +107,7 @@
     "rollup-plugin-node-resolve": "^4.2.3",
     "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-sizes": "^0.5.0",
+    "rollup-plugin-strip-banner": "^1.0.0",
     "rollup-plugin-terser": "^4.0.0",
     "rtlcss": "^2.4.0",
     "sass-loader": "^8.0.2",
