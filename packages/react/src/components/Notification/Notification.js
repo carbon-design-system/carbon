@@ -14,6 +14,7 @@ import {
   ErrorFilled20,
   CheckmarkFilled20,
   WarningFilled20,
+  InformationFilled20,
 } from '@carbon/icons-react';
 
 import Button from '../Button';
@@ -212,6 +213,7 @@ const iconTypes = {
   error: ErrorFilled20,
   success: CheckmarkFilled20,
   warning: WarningFilled20,
+  info: InformationFilled20,
 };
 
 function NotificationIcon({ iconDescription, kind, notificationType }) {
