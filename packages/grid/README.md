@@ -20,6 +20,9 @@ yarn add @carbon/grid
 
 ## Usage
 
+_More examples and documentation can be found on this
+[live demo website](https://carbon-elements.netlify.com/grid/examples/preview/)._
+
 `@carbon/grid` has three primitive class types to use in order to structure your
 application. They include:
 
