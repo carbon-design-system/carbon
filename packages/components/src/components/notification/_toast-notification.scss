@@ -26,7 +26,7 @@
     display: flex;
     width: rem(288px);
     height: auto;
-    padding-left: $carbon--spacing-05;
+    padding-left: rem(14px);
     color: $inverse-01;
     margin-top: $carbon--spacing-03;
     margin-bottom: $carbon--spacing-03;
@@ -122,8 +122,8 @@
 
   .#{$prefix}--toast-notification__icon {
     flex-shrink: 0;
-    margin-right: $carbon--spacing-05;
-    margin-top: $carbon--spacing-04;
+    margin-right: rem(14px);
+    margin-top: rem(14px);
   }
 
   .#{$prefix}--toast-notification__details {

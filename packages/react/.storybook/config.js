@@ -32,6 +32,8 @@ addDecorator(
 
 addParameters({
   options: {
+    // display in alphabetic order
+    storySort: (a, b) => a[1].id.localeCompare(b[1].id),
     theme: {
       brandTitle: 'carbon components react',
       brandUrl:
@@ -68,9 +70,4 @@ addons.getChannel().on(CARBON_TYPE_TOKEN, ({ tokenName, tokenValue }) => {
   );
 });
 
-function loadStories() {
-  const req = require.context('../src/components', true, /\-story\.js$/);
-  req.keys().forEach(filename => req(filename));
-}
-
-configure(loadStories, module);
+configure(require.context('../src/components', true, /\-story\.js$/), module);
