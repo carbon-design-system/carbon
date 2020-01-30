@@ -205,7 +205,7 @@ describe('NumberInput', () => {
           expect(invalidText.length).toEqual(0);
         });
 
-        it.only('should allow updating the value with empty string and not be invalid', () => {
+        it('should allow updating the value with empty string and not be invalid', () => {
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
           wrapper
             .find('NumberInput')
