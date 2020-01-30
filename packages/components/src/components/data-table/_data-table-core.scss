@@ -448,11 +448,9 @@
   //----------------------------------------------------------------------------
   // Column resize
   //----------------------------------------------------------------------------
-  .#{$prefix}--data-table--resizable th{
-    padding-right: 0;
-     &:hover {
-      background-color:  $ui-04;
-    }
+  .#{$prefix}--data-table--resizable th {
+    padding-right: 0; /* ensure that resizer is at right-most position */
+    min-width: rem(40px);
   }
 
   .#{$prefix}--table-header-resizable {
@@ -460,11 +458,30 @@
     justify-content: space-between;
   }
 
+  /* keep col-resize cursor while resizing */
+  .#{$prefix}--data-table--resizing-active {
+    cursor: col-resize;
+  }
+
+  /* resizer bar */
   .#{$prefix}--table-header-resizer {
-    width: $spacing-03;
+    width: rem(4px);
     &:hover {
-      background-color:  $ui-05;
+      background-color: $ui-05;
       cursor: col-resize;
+    }
+  }
+
+  /* permanently highlight active resizer while resizing */
+  .#{$prefix}--table-header-resizer-active {
+    background-color: $ui-04;
+    cursor: col-resize;
+  }
+
+  /* don't highlight passive resizers while resizing */
+  .#{$prefix}--table-header-resizer-passive {
+    &:hover {
+      background-color: $ui-03;
     }
   }
 

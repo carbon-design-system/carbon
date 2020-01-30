@@ -62,35 +62,58 @@ const TableHeader = React.forwardRef(function TableHeader(
     translateWithId: t,
     colWidth,
     colKey,
-    modifyColumnWidth,
+    resizeColumn,
+    finalizeColumnResizing,
     ...rest
   },
   ref
 ) {
-  const [resizing, setResizing] = useState(false);
-  const [expectedColWidth, setExpectedColWidth] = useState(colWidth);
+  // is a resizing active for this column
+  const [columnResizingActive, setColumnResizingActive] = useState(false);
 
   if (isResizable) {
-    const doResizing = ev => {
-      if (resizing) {
-        if (expectedColWidth && expectedColWidth !== colWidth) {
-          console.log(`! cw: ${colWidth} ecw ${expectedColWidth} `);
-          setResizing(false);
-        } else {
-          const br = ref.current.getBoundingClientRect();
-          const newWidth = colWidth + ev.movementX; // ev.clientX - br.x + 3;
-          setExpectedColWidth(newWidth);
-          console.log(
-            `cw: ${colWidth} w: ${br.width} m: ${ev.movementX} nw:${newWidth}`
-          );
-          modifyColumnWidth(colKey, ev.movementX);
-        }
-      }
+    const startResizing = () => {
+      setColumnResizingActive(true);
+      document.onmouseup = endResizing;
+      document.onmousemove = doResizing;
     };
+
+    const endResizing = () => {
+      setColumnResizingActive(false);
+      document.onmouseup = null;
+      document.onmousemove = null;
+      // resets memoized column widths to current values
+      finalizeColumnResizing();
+    };
+
+    // is resizing active on any column
+    const isResizingActive = () => {
+      return Boolean(document.onmouseup && document.onmousemove);
+    };
+
+    const doResizing = ev => {
+      // prevent other mouse actions like text selection
+      ev.stopPropagation();
+      ev.preventDefault();
+      resizeColumn(colKey, ev.movementX);
+    };
+
+    // keep col-resize cursor during resizing on complete header
+    const theHeaderClassName = cx(headerClassName, {
+      [`${prefix}--table-header-resizer-active`]: isResizingActive(),
+    });
+
+    // permanently highlight only active resizer while resizing
+    const resizerClassName = cx({
+      [`${prefix}--table-header-resizer`]: true,
+      [`${prefix}--table-header-resizer-active`]: columnResizingActive,
+      [`${prefix}--table-header-resizer-passive`]:
+        isResizingActive() && !columnResizingActive,
+    });
 
     return (
       <th
-        className={headerClassName}
+        className={theHeaderClassName}
         colSpan={colSpan}
         ref={ref}
         scope={scope}
@@ -98,11 +121,8 @@ const TableHeader = React.forwardRef(function TableHeader(
         <div className={`${prefix}--table-header-resizable`} {...rest}>
           <span className={`${prefix}--table-header-label`}>{children}</span>
           <div
-            className={`${prefix}--table-header-resizer`}
-            onMouseDown={() => setResizing(true)}
-            onMouseUp={() => setResizing(false)}
-            onMouseLeave={() => setResizing(false)} /* TODO: required? */
-            onMouseMove={e => doResizing(e)}
+            className={resizerClassName}
+            onMouseDown={() => startResizing()}
             role="separator"></div>
         </div>
       </th>
@@ -216,11 +236,11 @@ TableHeader.propTypes = {
    */
   translateWithId: PropTypes.func,
 
+  // internal properties
   isResizable: PropTypes.bool,
-
   colKey: PropTypes.string.isRequired,
-
-  modifyColumnWidth: PropTypes.func,
+  resizeColumn: PropTypes.func,
+  finalizeColumnResizing: PropTypes.func,
 };
 
 TableHeader.defaultProps = {
