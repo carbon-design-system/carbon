@@ -12,11 +12,13 @@ const TableCell = React.forwardRef(function TableCell(
   { children, colWidth, ...rest },
   ref
 ) {
-  return (
-    <td {...rest} ref={ref} style={{ width: colWidth }}>
-      {children}
-    </td>
-  );
+  const cellProps = {
+    ...rest,
+    ref,
+    style: colWidth && { width: colWidth },
+  };
+
+  return <td {...cellProps}>{children}</td>;
 });
 
 TableCell.propTypes = {

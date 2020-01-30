@@ -25,6 +25,38 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
             "expandAll": [Function],
             "expandRow": [Function],
             "getBatchActionProps": [Function],
+            "getCellProps": [Function],
+            "getExpandHeaderProps": [Function],
+            "getHeaderProps": [Function],
+            "getRowProps": [Function],
+            "getSelectionProps": [Function],
+            "getTableContainerProps": [Function],
+            "getTableProps": [Function],
+            "headers": Array [
+              Object {
+                "header": "Field A",
+                "key": "fieldA",
+              },
+              Object {
+                "header": "Field B",
+                "key": "fieldB",
+              },
+            ],
+            "onInputChange": [Function],
+            "radio": true,
+            "rows": Array [],
+            "selectAll": [Function],
+            "selectRow": [Function],
+            "selectedRows": Array [],
+            "sortBy": [Function],
+          },
+        ],
+        Array [
+          Object {
+            "expandAll": [Function],
+            "expandRow": [Function],
+            "getBatchActionProps": [Function],
+            "getCellProps": [Function],
             "getExpandHeaderProps": [Function],
             "getHeaderProps": [Function],
             "getRowProps": [Function],
@@ -63,9 +95,12 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
               <TableHead>
                 <TableRow>
                   <ForwardRef(TableHeader)
+                    colKey="fieldA"
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -73,9 +108,58 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                     Field A
                   </ForwardRef(TableHeader)>
                   <ForwardRef(TableHeader)
+                    colKey="fieldB"
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
+                    resizeColumn={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field B
+                  </ForwardRef(TableHeader)>
+                </TableRow>
+              </TableHead>
+              <TableBody
+                aria-live="polite"
+              />
+            </Table>
+          </TableContainer>,
+        },
+        Object {
+          "type": "return",
+          "value": <TableContainer
+            title="DataTable with selection"
+          >
+            <Table
+              isSortable={false}
+            >
+              <TableHead>
+                <TableRow>
+                  <ForwardRef(TableHeader)
+                    colKey="fieldA"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    resizeColumn={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field A
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
+                    colKey="fieldB"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -126,10 +210,14 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
               <TableRow>
                 <tr>
                   <TableHeader
+                    colKey="fieldA"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldA"
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -145,10 +233,14 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                     </th>
                   </TableHeader>
                   <TableHeader
+                    colKey="fieldB"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldB"
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -206,6 +298,129 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
             "expandAll": [Function],
             "expandRow": [Function],
             "getBatchActionProps": [Function],
+            "getCellProps": [Function],
+            "getExpandHeaderProps": [Function],
+            "getHeaderProps": [Function],
+            "getRowProps": [Function],
+            "getSelectionProps": [Function],
+            "getTableContainerProps": [Function],
+            "getTableProps": [Function],
+            "headers": Array [
+              Object {
+                "header": "Field A",
+                "key": "fieldA",
+              },
+              Object {
+                "header": "Field B",
+                "key": "fieldB",
+              },
+            ],
+            "onInputChange": [Function],
+            "radio": true,
+            "rows": Array [
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "b",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "a",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "c:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 3:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "c:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 3:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "c",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+            ],
+            "selectAll": [Function],
+            "selectRow": [Function],
+            "selectedRows": Array [],
+            "sortBy": [Function],
+          },
+        ],
+        Array [
+          Object {
+            "expandAll": [Function],
+            "expandRow": [Function],
+            "getBatchActionProps": [Function],
+            "getCellProps": [Function],
             "getExpandHeaderProps": [Function],
             "getHeaderProps": [Function],
             "getRowProps": [Function],
@@ -335,9 +550,12 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
               <TableHead>
                 <TableRow>
                   <ForwardRef(TableHeader)
+                    colKey="fieldA"
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -345,9 +563,12 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     Field A
                   </ForwardRef(TableHeader)>
                   <ForwardRef(TableHeader)
+                    colKey="fieldB"
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -369,12 +590,12 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     onSelect={[Function]}
                     radio={true}
                   />
-                  <TableCell>
+                  <ForwardRef(TableCell)>
                     Field 2:A
-                  </TableCell>
-                  <TableCell>
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
                     Field 2:B
-                  </TableCell>
+                  </ForwardRef(TableCell)>
                 </TableRow>
                 <TableRow>
                   <TableSelectRow
@@ -386,12 +607,12 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     onSelect={[Function]}
                     radio={true}
                   />
-                  <TableCell>
+                  <ForwardRef(TableCell)>
                     Field 1:A
-                  </TableCell>
-                  <TableCell>
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
                     Field 1:B
-                  </TableCell>
+                  </ForwardRef(TableCell)>
                 </TableRow>
                 <TableRow>
                   <TableSelectRow
@@ -403,12 +624,110 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     onSelect={[Function]}
                     radio={true}
                   />
-                  <TableCell>
+                  <ForwardRef(TableCell)>
                     Field 3:A
-                  </TableCell>
-                  <TableCell>
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
                     Field 3:B
-                  </TableCell>
+                  </ForwardRef(TableCell)>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>,
+        },
+        Object {
+          "type": "return",
+          "value": <TableContainer
+            title="DataTable with selection"
+          >
+            <Table
+              isSortable={false}
+            >
+              <TableHead>
+                <TableRow>
+                  <ForwardRef(TableHeader)
+                    colKey="fieldA"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    resizeColumn={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field A
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
+                    colKey="fieldB"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    resizeColumn={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field B
+                  </ForwardRef(TableHeader)>
+                </TableRow>
+              </TableHead>
+              <TableBody
+                aria-live="polite"
+              >
+                <TableRow>
+                  <TableSelectRow
+                    ariaLabel="Select row"
+                    checked={false}
+                    disabled={false}
+                    id="data-table-14__select-row-b"
+                    name="select-row-b"
+                    onSelect={[Function]}
+                    radio={true}
+                  />
+                  <ForwardRef(TableCell)>
+                    Field 2:A
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
+                    Field 2:B
+                  </ForwardRef(TableCell)>
+                </TableRow>
+                <TableRow>
+                  <TableSelectRow
+                    ariaLabel="Select row"
+                    checked={false}
+                    disabled={false}
+                    id="data-table-14__select-row-a"
+                    name="select-row-a"
+                    onSelect={[Function]}
+                    radio={true}
+                  />
+                  <ForwardRef(TableCell)>
+                    Field 1:A
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
+                    Field 1:B
+                  </ForwardRef(TableCell)>
+                </TableRow>
+                <TableRow>
+                  <TableSelectRow
+                    ariaLabel="Select row"
+                    checked={false}
+                    disabled={false}
+                    id="data-table-14__select-row-c"
+                    name="select-row-c"
+                    onSelect={[Function]}
+                    radio={true}
+                  />
+                  <ForwardRef(TableCell)>
+                    Field 3:A
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
+                    Field 3:B
+                  </ForwardRef(TableCell)>
                 </TableRow>
               </TableBody>
             </Table>
@@ -468,10 +787,14 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
               <TableRow>
                 <tr>
                   <TableHeader
+                    colKey="fieldA"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldA"
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -487,10 +810,14 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     </th>
                   </TableHeader>
                   <TableHeader
+                    colKey="fieldB"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldB"
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -806,6 +1133,38 @@ exports[`DataTable selection should have select-all default to un-checked if no 
             "expandAll": [Function],
             "expandRow": [Function],
             "getBatchActionProps": [Function],
+            "getCellProps": [Function],
+            "getExpandHeaderProps": [Function],
+            "getHeaderProps": [Function],
+            "getRowProps": [Function],
+            "getSelectionProps": [Function],
+            "getTableContainerProps": [Function],
+            "getTableProps": [Function],
+            "headers": Array [
+              Object {
+                "header": "Field A",
+                "key": "fieldA",
+              },
+              Object {
+                "header": "Field B",
+                "key": "fieldB",
+              },
+            ],
+            "onInputChange": [Function],
+            "radio": undefined,
+            "rows": Array [],
+            "selectAll": [Function],
+            "selectRow": [Function],
+            "selectedRows": Array [],
+            "sortBy": [Function],
+          },
+        ],
+        Array [
+          Object {
+            "expandAll": [Function],
+            "expandRow": [Function],
+            "getBatchActionProps": [Function],
+            "getCellProps": [Function],
             "getExpandHeaderProps": [Function],
             "getHeaderProps": [Function],
             "getRowProps": [Function],
@@ -852,9 +1211,12 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     onSelect={[Function]}
                   />
                   <ForwardRef(TableHeader)
+                    colKey="fieldA"
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -862,9 +1224,66 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     Field A
                   </ForwardRef(TableHeader)>
                   <ForwardRef(TableHeader)
+                    colKey="fieldB"
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
+                    resizeColumn={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field B
+                  </ForwardRef(TableHeader)>
+                </TableRow>
+              </TableHead>
+              <TableBody
+                aria-live="polite"
+              />
+            </Table>
+          </TableContainer>,
+        },
+        Object {
+          "type": "return",
+          "value": <TableContainer
+            title="DataTable with selection"
+          >
+            <Table
+              isSortable={false}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableSelectAll
+                    ariaLabel="Select all rows"
+                    checked={false}
+                    id="data-table-7__select-all"
+                    indeterminate={false}
+                    name="select-all"
+                    onSelect={[Function]}
+                  />
+                  <ForwardRef(TableHeader)
+                    colKey="fieldA"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    resizeColumn={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field A
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
+                    colKey="fieldB"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -963,10 +1382,14 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     </th>
                   </TableSelectAll>
                   <TableHeader
+                    colKey="fieldA"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldA"
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -982,10 +1405,14 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     </th>
                   </TableHeader>
                   <TableHeader
+                    colKey="fieldB"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldB"
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -1042,6 +1469,129 @@ exports[`DataTable selection should render 1`] = `
             "expandAll": [Function],
             "expandRow": [Function],
             "getBatchActionProps": [Function],
+            "getCellProps": [Function],
+            "getExpandHeaderProps": [Function],
+            "getHeaderProps": [Function],
+            "getRowProps": [Function],
+            "getSelectionProps": [Function],
+            "getTableContainerProps": [Function],
+            "getTableProps": [Function],
+            "headers": Array [
+              Object {
+                "header": "Field A",
+                "key": "fieldA",
+              },
+              Object {
+                "header": "Field B",
+                "key": "fieldB",
+              },
+            ],
+            "onInputChange": [Function],
+            "radio": undefined,
+            "rows": Array [
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "b",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "a",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "c:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 3:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "c:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 3:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "c",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+            ],
+            "selectAll": [Function],
+            "selectRow": [Function],
+            "selectedRows": Array [],
+            "sortBy": [Function],
+          },
+        ],
+        Array [
+          Object {
+            "expandAll": [Function],
+            "expandRow": [Function],
+            "getBatchActionProps": [Function],
+            "getCellProps": [Function],
             "getExpandHeaderProps": [Function],
             "getHeaderProps": [Function],
             "getRowProps": [Function],
@@ -1179,9 +1729,12 @@ exports[`DataTable selection should render 1`] = `
                     onSelect={[Function]}
                   />
                   <ForwardRef(TableHeader)
+                    colKey="fieldA"
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -1189,9 +1742,12 @@ exports[`DataTable selection should render 1`] = `
                     Field A
                   </ForwardRef(TableHeader)>
                   <ForwardRef(TableHeader)
+                    colKey="fieldB"
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -1213,12 +1769,12 @@ exports[`DataTable selection should render 1`] = `
                     onSelect={[Function]}
                     radio={null}
                   />
-                  <TableCell>
+                  <ForwardRef(TableCell)>
                     Field 2:A
-                  </TableCell>
-                  <TableCell>
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
                     Field 2:B
-                  </TableCell>
+                  </ForwardRef(TableCell)>
                 </TableRow>
                 <TableRow>
                   <TableSelectRow
@@ -1230,12 +1786,12 @@ exports[`DataTable selection should render 1`] = `
                     onSelect={[Function]}
                     radio={null}
                   />
-                  <TableCell>
+                  <ForwardRef(TableCell)>
                     Field 1:A
-                  </TableCell>
-                  <TableCell>
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
                     Field 1:B
-                  </TableCell>
+                  </ForwardRef(TableCell)>
                 </TableRow>
                 <TableRow>
                   <TableSelectRow
@@ -1247,12 +1803,118 @@ exports[`DataTable selection should render 1`] = `
                     onSelect={[Function]}
                     radio={null}
                   />
-                  <TableCell>
+                  <ForwardRef(TableCell)>
                     Field 3:A
-                  </TableCell>
-                  <TableCell>
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
                     Field 3:B
-                  </TableCell>
+                  </ForwardRef(TableCell)>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>,
+        },
+        Object {
+          "type": "return",
+          "value": <TableContainer
+            title="DataTable with selection"
+          >
+            <Table
+              isSortable={false}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableSelectAll
+                    ariaLabel="Select all rows"
+                    checked={false}
+                    id="data-table-6__select-all"
+                    indeterminate={false}
+                    name="select-all"
+                    onSelect={[Function]}
+                  />
+                  <ForwardRef(TableHeader)
+                    colKey="fieldA"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    resizeColumn={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field A
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
+                    colKey="fieldB"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    resizeColumn={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field B
+                  </ForwardRef(TableHeader)>
+                </TableRow>
+              </TableHead>
+              <TableBody
+                aria-live="polite"
+              >
+                <TableRow>
+                  <TableSelectRow
+                    ariaLabel="Select row"
+                    checked={false}
+                    disabled={false}
+                    id="data-table-6__select-row-b"
+                    name="select-row-b"
+                    onSelect={[Function]}
+                    radio={null}
+                  />
+                  <ForwardRef(TableCell)>
+                    Field 2:A
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
+                    Field 2:B
+                  </ForwardRef(TableCell)>
+                </TableRow>
+                <TableRow>
+                  <TableSelectRow
+                    ariaLabel="Select row"
+                    checked={false}
+                    disabled={false}
+                    id="data-table-6__select-row-a"
+                    name="select-row-a"
+                    onSelect={[Function]}
+                    radio={null}
+                  />
+                  <ForwardRef(TableCell)>
+                    Field 1:A
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
+                    Field 1:B
+                  </ForwardRef(TableCell)>
+                </TableRow>
+                <TableRow>
+                  <TableSelectRow
+                    ariaLabel="Select row"
+                    checked={false}
+                    disabled={false}
+                    id="data-table-6__select-row-c"
+                    name="select-row-c"
+                    onSelect={[Function]}
+                    radio={null}
+                  />
+                  <ForwardRef(TableCell)>
+                    Field 3:A
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
+                    Field 3:B
+                  </ForwardRef(TableCell)>
                 </TableRow>
               </TableBody>
             </Table>
@@ -1360,10 +2022,14 @@ exports[`DataTable selection should render 1`] = `
                     </th>
                   </TableSelectAll>
                   <TableHeader
+                    colKey="fieldA"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldA"
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -1379,10 +2045,14 @@ exports[`DataTable selection should render 1`] = `
                     </th>
                   </TableHeader>
                   <TableHeader
+                    colKey="fieldB"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldB"
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -1647,6 +2317,129 @@ exports[`DataTable should render 1`] = `
             "expandAll": [Function],
             "expandRow": [Function],
             "getBatchActionProps": [Function],
+            "getCellProps": [Function],
+            "getExpandHeaderProps": [Function],
+            "getHeaderProps": [Function],
+            "getRowProps": [Function],
+            "getSelectionProps": [Function],
+            "getTableContainerProps": [Function],
+            "getTableProps": [Function],
+            "headers": Array [
+              Object {
+                "header": "Field A",
+                "key": "fieldA",
+              },
+              Object {
+                "header": "Field B",
+                "key": "fieldB",
+              },
+            ],
+            "onInputChange": [Function],
+            "radio": undefined,
+            "rows": Array [
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "b",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "a",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "c:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 3:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "c:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 3:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "c",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+            ],
+            "selectAll": [Function],
+            "selectRow": [Function],
+            "selectedRows": Array [],
+            "sortBy": [Function],
+          },
+        ],
+        Array [
+          Object {
+            "expandAll": [Function],
+            "expandRow": [Function],
+            "getBatchActionProps": [Function],
+            "getCellProps": [Function],
             "getExpandHeaderProps": [Function],
             "getHeaderProps": [Function],
             "getRowProps": [Function],
@@ -1865,9 +2658,12 @@ exports[`DataTable should render 1`] = `
               <TableHead>
                 <TableRow>
                   <ForwardRef(TableHeader)
+                    colKey="fieldA"
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -1875,9 +2671,12 @@ exports[`DataTable should render 1`] = `
                     Field A
                   </ForwardRef(TableHeader)>
                   <ForwardRef(TableHeader)
+                    colKey="fieldB"
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -1890,28 +2689,188 @@ exports[`DataTable should render 1`] = `
                 aria-live="polite"
               >
                 <TableRow>
-                  <TableCell>
+                  <ForwardRef(TableCell)>
                     Field 2:A
-                  </TableCell>
-                  <TableCell>
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
                     Field 2:B
-                  </TableCell>
+                  </ForwardRef(TableCell)>
                 </TableRow>
                 <TableRow>
-                  <TableCell>
+                  <ForwardRef(TableCell)>
                     Field 1:A
-                  </TableCell>
-                  <TableCell>
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
                     Field 1:B
-                  </TableCell>
+                  </ForwardRef(TableCell)>
                 </TableRow>
                 <TableRow>
-                  <TableCell>
+                  <ForwardRef(TableCell)>
                     Field 3:A
-                  </TableCell>
-                  <TableCell>
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
                     Field 3:B
-                  </TableCell>
+                  </ForwardRef(TableCell)>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>,
+        },
+        Object {
+          "type": "return",
+          "value": <TableContainer
+            title="DataTable with toolbar"
+          >
+            <TableToolbar
+              aria-label="data table toolbar"
+            >
+              <TableBatchActions
+                onCancel={[Function]}
+                shouldShowBatchActions={false}
+                totalSelected={0}
+                translateWithId={[Function]}
+              >
+                <TableBatchAction
+                  onClick={[MockFunction]}
+                  renderIcon={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "render": [Function],
+                    }
+                  }
+                >
+                  Ghost
+                </TableBatchAction>
+                <TableBatchAction
+                  onClick={[MockFunction]}
+                  renderIcon={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "render": [Function],
+                    }
+                  }
+                >
+                  Ghost
+                </TableBatchAction>
+                <TableBatchAction
+                  onClick={[MockFunction]}
+                  renderIcon={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "render": [Function],
+                    }
+                  }
+                >
+                  Ghost
+                </TableBatchAction>
+              </TableBatchActions>
+              <TableToolbarContent>
+                <TableToolbarSearch
+                  id="custom-id"
+                  onChange={[Function]}
+                  persistent={true}
+                  tabIndex="0"
+                  translateWithId={[Function]}
+                />
+                <TableToolbarMenu
+                  iconDescription="Settings"
+                  renderIcon={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "render": [Function],
+                    }
+                  }
+                >
+                  <ForwardRef
+                    onClick={[MockFunction]}
+                    primaryFocus={true}
+                  >
+                    Action 1
+                  </ForwardRef>
+                  <ForwardRef
+                    onClick={[MockFunction]}
+                  >
+                    Action 2
+                  </ForwardRef>
+                  <ForwardRef
+                    onClick={[MockFunction]}
+                  >
+                    Action 3
+                  </ForwardRef>
+                </TableToolbarMenu>
+                <ForwardRef(Button)
+                  disabled={false}
+                  kind="primary"
+                  onClick={[MockFunction]}
+                  size="small"
+                  tabIndex={0}
+                  type="button"
+                >
+                  Add new
+                </ForwardRef(Button)>
+              </TableToolbarContent>
+            </TableToolbar>
+            <Table
+              isSortable={false}
+            >
+              <TableHead>
+                <TableRow>
+                  <ForwardRef(TableHeader)
+                    colKey="fieldA"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    resizeColumn={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field A
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
+                    colKey="fieldB"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    resizeColumn={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field B
+                  </ForwardRef(TableHeader)>
+                </TableRow>
+              </TableHead>
+              <TableBody
+                aria-live="polite"
+              >
+                <TableRow>
+                  <ForwardRef(TableCell)>
+                    Field 2:A
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
+                    Field 2:B
+                  </ForwardRef(TableCell)>
+                </TableRow>
+                <TableRow>
+                  <ForwardRef(TableCell)>
+                    Field 1:A
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
+                    Field 1:B
+                  </ForwardRef(TableCell)>
+                </TableRow>
+                <TableRow>
+                  <ForwardRef(TableCell)>
+                    Field 3:A
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
+                    Field 3:B
+                  </ForwardRef(TableCell)>
                 </TableRow>
               </TableBody>
             </Table>
@@ -2485,10 +3444,14 @@ exports[`DataTable should render 1`] = `
               <TableRow>
                 <tr>
                   <TableHeader
+                    colKey="fieldA"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldA"
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -2504,10 +3467,14 @@ exports[`DataTable should render 1`] = `
                     </th>
                   </TableHeader>
                   <TableHeader
+                    colKey="fieldB"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldB"
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -2625,6 +3592,129 @@ exports[`DataTable sticky header should render 1`] = `
             "expandAll": [Function],
             "expandRow": [Function],
             "getBatchActionProps": [Function],
+            "getCellProps": [Function],
+            "getExpandHeaderProps": [Function],
+            "getHeaderProps": [Function],
+            "getRowProps": [Function],
+            "getSelectionProps": [Function],
+            "getTableContainerProps": [Function],
+            "getTableProps": [Function],
+            "headers": Array [
+              Object {
+                "header": "Field A",
+                "key": "fieldA",
+              },
+              Object {
+                "header": "Field B",
+                "key": "fieldB",
+              },
+            ],
+            "onInputChange": [Function],
+            "radio": undefined,
+            "rows": Array [
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "b",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "a",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "c:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 3:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "c:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 3:B",
+                  },
+                ],
+                "disabled": false,
+                "id": "c",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+            ],
+            "selectAll": [Function],
+            "selectRow": [Function],
+            "selectedRows": Array [],
+            "sortBy": [Function],
+          },
+        ],
+        Array [
+          Object {
+            "expandAll": [Function],
+            "expandRow": [Function],
+            "getBatchActionProps": [Function],
+            "getCellProps": [Function],
             "getExpandHeaderProps": [Function],
             "getHeaderProps": [Function],
             "getRowProps": [Function],
@@ -2845,9 +3935,12 @@ exports[`DataTable sticky header should render 1`] = `
               <TableHead>
                 <TableRow>
                   <ForwardRef(TableHeader)
+                    colKey="fieldA"
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -2855,9 +3948,12 @@ exports[`DataTable sticky header should render 1`] = `
                     Field A
                   </ForwardRef(TableHeader)>
                   <ForwardRef(TableHeader)
+                    colKey="fieldB"
+                    finalizeColumnResizing={[Function]}
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
+                    resizeColumn={[Function]}
                     scope="col"
                     sortDirection="NONE"
                     translateWithId={[Function]}
@@ -2870,28 +3966,190 @@ exports[`DataTable sticky header should render 1`] = `
                 aria-live="polite"
               >
                 <TableRow>
-                  <TableCell>
+                  <ForwardRef(TableCell)>
                     Field 2:A
-                  </TableCell>
-                  <TableCell>
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
                     Field 2:B
-                  </TableCell>
+                  </ForwardRef(TableCell)>
                 </TableRow>
                 <TableRow>
-                  <TableCell>
+                  <ForwardRef(TableCell)>
                     Field 1:A
-                  </TableCell>
-                  <TableCell>
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
                     Field 1:B
-                  </TableCell>
+                  </ForwardRef(TableCell)>
                 </TableRow>
                 <TableRow>
-                  <TableCell>
+                  <ForwardRef(TableCell)>
                     Field 3:A
-                  </TableCell>
-                  <TableCell>
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
                     Field 3:B
-                  </TableCell>
+                  </ForwardRef(TableCell)>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>,
+        },
+        Object {
+          "type": "return",
+          "value": <TableContainer
+            stickyHeader={true}
+            title="DataTable with toolbar"
+          >
+            <TableToolbar
+              aria-label="data table toolbar"
+            >
+              <TableBatchActions
+                onCancel={[Function]}
+                shouldShowBatchActions={false}
+                totalSelected={0}
+                translateWithId={[Function]}
+              >
+                <TableBatchAction
+                  onClick={[MockFunction]}
+                  renderIcon={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "render": [Function],
+                    }
+                  }
+                >
+                  Ghost
+                </TableBatchAction>
+                <TableBatchAction
+                  onClick={[MockFunction]}
+                  renderIcon={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "render": [Function],
+                    }
+                  }
+                >
+                  Ghost
+                </TableBatchAction>
+                <TableBatchAction
+                  onClick={[MockFunction]}
+                  renderIcon={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "render": [Function],
+                    }
+                  }
+                >
+                  Ghost
+                </TableBatchAction>
+              </TableBatchActions>
+              <TableToolbarContent>
+                <TableToolbarSearch
+                  id="custom-id"
+                  onChange={[Function]}
+                  persistent={true}
+                  tabIndex="0"
+                  translateWithId={[Function]}
+                />
+                <TableToolbarMenu
+                  iconDescription="Settings"
+                  renderIcon={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "render": [Function],
+                    }
+                  }
+                >
+                  <ForwardRef
+                    onClick={[MockFunction]}
+                    primaryFocus={true}
+                  >
+                    Action 1
+                  </ForwardRef>
+                  <ForwardRef
+                    onClick={[MockFunction]}
+                  >
+                    Action 2
+                  </ForwardRef>
+                  <ForwardRef
+                    onClick={[MockFunction]}
+                  >
+                    Action 3
+                  </ForwardRef>
+                </TableToolbarMenu>
+                <ForwardRef(Button)
+                  disabled={false}
+                  kind="primary"
+                  onClick={[MockFunction]}
+                  size="small"
+                  tabIndex={0}
+                  type="button"
+                >
+                  Add new
+                </ForwardRef(Button)>
+              </TableToolbarContent>
+            </TableToolbar>
+            <Table
+              isSortable={false}
+              stickyHeader={true}
+            >
+              <TableHead>
+                <TableRow>
+                  <ForwardRef(TableHeader)
+                    colKey="fieldA"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    resizeColumn={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field A
+                  </ForwardRef(TableHeader)>
+                  <ForwardRef(TableHeader)
+                    colKey="fieldB"
+                    colWidth={0}
+                    finalizeColumnResizing={[Function]}
+                    isSortHeader={false}
+                    isSortable={false}
+                    onClick={[Function]}
+                    resizeColumn={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field B
+                  </ForwardRef(TableHeader)>
+                </TableRow>
+              </TableHead>
+              <TableBody
+                aria-live="polite"
+              >
+                <TableRow>
+                  <ForwardRef(TableCell)>
+                    Field 2:A
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
+                    Field 2:B
+                  </ForwardRef(TableCell)>
+                </TableRow>
+                <TableRow>
+                  <ForwardRef(TableCell)>
+                    Field 1:A
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
+                    Field 1:B
+                  </ForwardRef(TableCell)>
+                </TableRow>
+                <TableRow>
+                  <ForwardRef(TableCell)>
+                    Field 3:A
+                  </ForwardRef(TableCell)>
+                  <ForwardRef(TableCell)>
+                    Field 3:B
+                  </ForwardRef(TableCell)>
                 </TableRow>
               </TableBody>
             </Table>
@@ -3471,10 +4729,14 @@ exports[`DataTable sticky header should render 1`] = `
                 <TableRow>
                   <tr>
                     <TableHeader
+                      colKey="fieldA"
+                      colWidth={0}
+                      finalizeColumnResizing={[Function]}
                       isSortHeader={false}
                       isSortable={false}
                       key="fieldA"
                       onClick={[Function]}
+                      resizeColumn={[Function]}
                       scope="col"
                       sortDirection="NONE"
                       translateWithId={[Function]}
@@ -3490,10 +4752,14 @@ exports[`DataTable sticky header should render 1`] = `
                       </th>
                     </TableHeader>
                     <TableHeader
+                      colKey="fieldB"
+                      colWidth={0}
+                      finalizeColumnResizing={[Function]}
                       isSortHeader={false}
                       isSortable={false}
                       key="fieldB"
                       onClick={[Function]}
+                      resizeColumn={[Function]}
                       scope="col"
                       sortDirection="NONE"
                       translateWithId={[Function]}
