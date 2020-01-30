@@ -15,8 +15,14 @@ const TableCell = React.forwardRef(function TableCell(
   const cellProps = {
     ...rest,
     ref,
-    style: colWidth && { width: colWidth },
   };
+
+  if (colWidth) {
+    const style = {
+      width: `${colWidth}px`,
+    };
+    cellProps.style = style;
+  }
 
   return <td {...cellProps}>{children}</td>;
 });

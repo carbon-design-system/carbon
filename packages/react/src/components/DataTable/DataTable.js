@@ -152,9 +152,6 @@ export default class DataTable extends React.Component {
         return r;
       }, {});
     this.instanceId = getInstanceId();
-    this.updateColumnWidthState = this.updateColumnWidthState.bind(this);
-    this.resizeColumn = this.resizeColumn.bind(this);
-    this.finalizeColumnResizing = this.finalizeColumnResizing.bind(this);
 
     // build up a structure to look up column key of next column
     let prevHead = null;
@@ -186,7 +183,7 @@ export default class DataTable extends React.Component {
     window.removeEventListener('resize', this.updateColumnWidthState());
   }
 
-  updateColumnWidthState() {
+  updateColumnWidthState = () => {
     // update column width state based on actual state
     if (Object.keys(this.colRefs).length > 0) {
       const nextWidth = {};
@@ -200,9 +197,9 @@ export default class DataTable extends React.Component {
         colWidth: nextWidth,
       });
     }
-  }
+  };
 
-  resizeColumn(colId, increment) {
+  resizeColumn = (colId, increment) => {
     const nextColKey = this.nextCol[colId];
     const nextWidth = {
       ...this.state.colWidth,
@@ -216,11 +213,11 @@ export default class DataTable extends React.Component {
       colWidth: nextWidth,
     };
     this.setState(newState);
-  }
+  };
 
-  finalizeColumnResizing() {
+  finalizeColumnResizing = () => {
     this.updateColumnWidthState();
-  }
+  };
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     const rowIds = this.props.rows.map(row => row.id);

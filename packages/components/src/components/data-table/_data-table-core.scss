@@ -489,10 +489,8 @@
   }
 
   /* don't highlight passive resizers while resizing */
-  .#{$prefix}--table-header-resizer-passive {
-    &:hover {
-      background-color: $ui-03;
-    }
+  .#{$prefix}--table-header-resizer-passive:hover {
+    background-color: $ui-03;
   }
 
   // -------------
@@ -571,7 +569,6 @@
     }
 
     .#{$prefix}--table-header-label {
-      /*max-width: calc(100% - 10px);*/
       @include text-overflow;
     }
   }
