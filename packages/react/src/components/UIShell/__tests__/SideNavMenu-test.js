@@ -43,6 +43,17 @@ describe('SideNavMenu', () => {
     expect(wrapper.state('isExpanded')).toBe(true);
   });
 
+  it('should collapse the menu when the Esc key is pressed', () => {
+    wrapper = mount(<SideNavMenu {...mockProps} defaultExpanded={true} />);
+    expect(wrapper.state('isExpanded')).toBe(true);
+    wrapper.simulate('keydown', {
+      key: 'Escape',
+      keyCode: 27,
+      which: 27,
+    });
+    expect(wrapper.state('isExpanded')).toBe(false);
+  });
+
   it('should reset expanded state if the isSideNavExpanded prop is false', () => {
     wrapper = mount(<SideNavMenu {...mockProps} />);
     expect(wrapper.state('isExpanded')).toBe(false);
