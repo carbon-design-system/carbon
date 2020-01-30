@@ -13058,10 +13058,14 @@ Button styles
     @include tooltip--placement('icon', 'bottom', 'center');
   }
 
-  .#{$prefix}--btn--icon-only,
-  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only,
-  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
+  .#{$prefix}--btn--icon-only {
+    padding-left: rem(13px);
     padding-right: rem(13px);
+
+    &.#{$prefix}--btn--tertiary {
+      padding-left: rem(15px);
+      padding-right: rem(15px);
+    }
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -13069,6 +13073,26 @@ Button styles
 
     &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon {
       margin: 0;
+    }
+  }
+
+  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
+    padding-left: rem(9px);
+    padding-right: rem(9px);
+
+    &.#{$prefix}--btn--tertiary {
+      padding-left: rem(11px);
+      padding-right: rem(11px);
+    }
+  }
+
+  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
+    padding-left: rem(5px);
+    padding-right: rem(5px);
+
+    &.#{$prefix}--btn--tertiary {
+      padding-left: rem(7px);
+      padding-right: rem(7px);
     }
   }
 
