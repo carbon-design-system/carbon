@@ -100,6 +100,10 @@
       background-color: $interactive-03;
     }
 
+    &:active {
+      border-color: transparent;
+    }
+
     &:disabled,
     &:hover:disabled,
     &:focus:disabled,
