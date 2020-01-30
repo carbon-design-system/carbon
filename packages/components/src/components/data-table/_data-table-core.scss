@@ -461,7 +461,7 @@
   }
 
   .#{$prefix}--table-header-resizer {
-    width: $spacing-05;
+    width: $spacing-03;
     &:hover {
       background-color:  $ui-05;
       cursor: col-resize;

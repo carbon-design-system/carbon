@@ -69,15 +69,22 @@ const TableHeader = React.forwardRef(function TableHeader(
 ) {
 
   const [resizing, setResizing] = useState(false);
+  const [expectedColWidth, setExpectedColWidth] = useState(colWidth);
 
   if (isResizable) {
 
     const doResizing = ev => {
       if (resizing) {
-        const br = ref.current.getBoundingClientRect();
-        const newWidth = colWidth + ev.movementX;// ev.clientX - br.x + 3;
-        console.log(`cw: ${colWidth} w: ${br.width} m: ${ev.movementX} nw:${newWidth}`);
-        modifyColumnWidth(colKey, ev.movementX);
+        if (expectedColWidth && expectedColWidth !== colWidth) {
+          console.log(`! cw: ${colWidth} ecw ${expectedColWidth} `)
+          setResizing(false);
+        } else {
+          // const br = ref.current.getBoundingClientRect();
+          const newWidth = colWidth + ev.movementX;// ev.clientX - br.x + 3;
+          setExpectedColWidth(newWidth);
+          console.log(`cw: ${colWidth} w: ${br.width} m: ${ev.movementX} nw:${newWidth}`);
+          modifyColumnWidth(colKey, ev.movementX);
+        }
       }
     }
 
