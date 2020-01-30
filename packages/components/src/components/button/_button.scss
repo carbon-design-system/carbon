@@ -110,13 +110,26 @@
       color: $disabled;
       outline: none;
 
-      & > .#{$prefix}--btn__icon path {
+      > .#{$prefix}--btn__icon path {
         fill: $disabled;
       }
     }
 
     &:hover > .#{$prefix}--btn__icon path {
       fill: $inverse-01;
+    }
+  }
+
+  .#{$prefix}--btn--tertiary,
+  .#{$prefix}--btn--tertiary.#{$prefix}--btn--field,
+  .#{$prefix}--btn--tertiary.#{$prefix}--btn--sm {
+    padding-right: rem(62px);
+    padding-left: rem(14px);
+
+    &:focus {
+      border-width: rem(3px);
+      padding-right: rem(60px);
+      padding-left: rem(12px);
     }
   }
 
@@ -201,11 +214,6 @@
     padding-left: rem(13px);
     padding-right: rem(13px);
 
-    &.#{$prefix}--btn--tertiary {
-      padding-left: rem(15px);
-      padding-right: rem(15px);
-    }
-
     .#{$prefix}--btn__icon {
       position: static;
     }
@@ -215,23 +223,43 @@
     }
   }
 
+  .#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
+    padding-left: rem(15px);
+    padding-right: rem(15px);
+
+    &:focus {
+      padding-left: rem(13px);
+      padding-right: rem(13px);
+    }
+  }
+
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
     padding-left: rem(9px);
     padding-right: rem(9px);
+  }
 
-    &.#{$prefix}--btn--tertiary {
-      padding-left: rem(11px);
-      padding-right: rem(11px);
+  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
+    padding-left: rem(11px);
+    padding-right: rem(11px);
+
+    &:focus {
+      padding-left: rem(9px);
+      padding-right: rem(9px);
     }
   }
 
   .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
     padding-left: rem(5px);
     padding-right: rem(5px);
+  }
 
-    &.#{$prefix}--btn--tertiary {
-      padding-left: rem(7px);
-      padding-right: rem(7px);
+  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
+    padding-left: rem(7px);
+    padding-right: rem(7px);
+
+    &:focus {
+      padding-left: rem(5px);
+      padding-right: rem(5px);
     }
   }
 
