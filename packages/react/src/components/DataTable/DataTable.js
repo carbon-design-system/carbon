@@ -258,6 +258,10 @@ export default class DataTable extends React.Component {
     onClick,
     isSortable = this.props.isSortable,
     isResizable = this.props.isResizable,
+    colWidth = this.state.colWidth[header.key],
+    resizeColumn = this.resizeColumn,
+    finalizeColumnResizing = this.finalizeColumnResizing,
+    ref = this.colRefs[header.key],
     ...rest
   }) => {
     const { sortDirection, sortHeaderKey } = this.state;
@@ -269,10 +273,10 @@ export default class DataTable extends React.Component {
       isSortable,
       isSortHeader: sortHeaderKey === header.key,
       isResizable,
-      colWidth: this.state.colWidth[header.key],
-      resizeColumn: this.resizeColumn,
-      finalizeColumnResizing: this.finalizeColumnResizing,
-      ref: this.colRefs[header.key],
+      colWidth,
+      resizeColumn,
+      finalizeColumnResizing,
+      ref,
       // Compose the event handlers so we don't overwrite a consumer's `onClick`
       // handler
       onClick: composeEventHandlers([
