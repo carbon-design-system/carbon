@@ -148,10 +148,21 @@ export default class DataTable extends React.Component {
     this.instanceId = getInstanceId();
     this.updateColumnWidthState = this.updateColumnWidthState.bind(this);
     this.modifyColumnWidth = this.modifyColumnWidth.bind(this);
+
+    // build up a structure to look up column key of next column
+    let prevHead = null;
+    this.nextCol = {};
+    props.headers.forEach(head => {
+      if (prevHead) {
+        this.nextCol[prevHead] = head.key;
+      }
+      prevHead = head.key;
+    })
+
   }
 
   componentDidMount() {
-    const colWidth = this.props.headers.map(e => e.key).reduce((r, e) => { r[e] = null; return r }, {});
+    const colWidth = this.props.headers.map(head => head.key).reduce((r, e) => { r[e] = null; return r }, {});
     this.setState({
       ...this.state,
       colWidth,
@@ -180,15 +191,20 @@ export default class DataTable extends React.Component {
   }
 
   modifyColumnWidth(colId, increment) {
-    const nextWidth = {
-      ...this.state.colWidth,
-      [colId]: this.state.colWidth[colId] + increment
-    };
-    const newState = {
-      ...this.state,
-      colWidth: nextWidth,
-    };
-    this.setState(newState);
+    const nextColKey = this.nextCol[colId];
+    // dont resize right most column
+    if (nextColKey) {
+      const nextWidth = {
+        ...this.state.colWidth,
+        [colId]: this.state.colWidth[colId] + increment,
+        [nextColKey]: this.state.colWidth[nextColKey] - increment,
+      };
+      const newState = {
+        ...this.state,
+        colWidth: nextWidth,
+      };
+      this.setState(newState);
+    }
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {

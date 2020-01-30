@@ -94,7 +94,7 @@ const TableHeader = React.forwardRef(function TableHeader(
             className={`${prefix}--table-header-resizer`}
             onMouseDown={() => setResizing(true)}
             onMouseUp={() => setResizing(false)}
-            /*onMouseLeave={() => setResizing(false)} /* TODO: required? */
+            onMouseLeave={() => setResizing(false)} /* TODO: required? */
             onMouseMove={e => doResizing(e)}
             role="separator">
           </div>
