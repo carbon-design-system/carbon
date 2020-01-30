@@ -111,9 +111,13 @@
     margin-top: $carbon--spacing-05;
   }
 
+  .#{$prefix}--file ~ .#{$prefix}--file-container {
+    margin-top: $carbon--spacing-05;
+  }
+
   .#{$prefix}--file__selected-file {
     display: grid;
-    grid-gap: $carbon--spacing-03 $carbon--spacing-05;
+    grid-gap: $carbon--spacing-05 $carbon--spacing-05;
     grid-template-columns: 1fr auto;
     grid-auto-rows: auto;
     align-items: center;
@@ -165,13 +169,12 @@
 
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
-    outline-width: 1px;
-    padding: $carbon--spacing-04 0;
+    padding: $carbon--spacing-05 0;
   }
 
   .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
     border-top: 1px solid $ui-03;
-    padding-top: $carbon--spacing-03;
+    padding-top: $carbon--spacing-05;
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -179,8 +182,7 @@
   .#{$prefix}--file__selected-file--invalid
     .#{$prefix}--form-requirement__supplement {
     @include type-style('label-01');
-    padding-right: $carbon--spacing-03;
-    padding-left: $carbon--spacing-05;
+    padding: 0 $carbon--spacing-05;
   }
 
   .#{$prefix}--file__selected-file--invalid
