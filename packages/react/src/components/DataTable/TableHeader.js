@@ -67,26 +67,26 @@ const TableHeader = React.forwardRef(function TableHeader(
   },
   ref
 ) {
-
   const [resizing, setResizing] = useState(false);
   const [expectedColWidth, setExpectedColWidth] = useState(colWidth);
 
   if (isResizable) {
-
     const doResizing = ev => {
       if (resizing) {
         if (expectedColWidth && expectedColWidth !== colWidth) {
-          console.log(`! cw: ${colWidth} ecw ${expectedColWidth} `)
+          console.log(`! cw: ${colWidth} ecw ${expectedColWidth} `);
           setResizing(false);
         } else {
-          // const br = ref.current.getBoundingClientRect();
-          const newWidth = colWidth + ev.movementX;// ev.clientX - br.x + 3;
+          const br = ref.current.getBoundingClientRect();
+          const newWidth = colWidth + ev.movementX; // ev.clientX - br.x + 3;
           setExpectedColWidth(newWidth);
-          console.log(`cw: ${colWidth} w: ${br.width} m: ${ev.movementX} nw:${newWidth}`);
+          console.log(
+            `cw: ${colWidth} w: ${br.width} m: ${ev.movementX} nw:${newWidth}`
+          );
           modifyColumnWidth(colKey, ev.movementX);
         }
       }
-    }
+    };
 
     return (
       <th
@@ -103,8 +103,7 @@ const TableHeader = React.forwardRef(function TableHeader(
             onMouseUp={() => setResizing(false)}
             onMouseLeave={() => setResizing(false)} /* TODO: required? */
             onMouseMove={e => doResizing(e)}
-            role="separator">
-          </div>
+            role="separator"></div>
         </div>
       </th>
     );
@@ -112,7 +111,12 @@ const TableHeader = React.forwardRef(function TableHeader(
 
   if (!isSortable) {
     return (
-      <th {...rest} className={headerClassName} scope={scope} colSpan={colSpan} ref={ref}>
+      <th
+        {...rest}
+        className={headerClassName}
+        scope={scope}
+        colSpan={colSpan}
+        ref={ref}>
         <span className={`${prefix}--table-header-label`}>{children}</span>
       </th>
     );
