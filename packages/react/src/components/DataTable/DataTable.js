@@ -15,6 +15,7 @@ import { composeEventHandlers } from '../../tools/events';
 import { defaultFilterRows } from './tools/filter';
 import { defaultSortRow } from './tools/sorting';
 import setupGetInstanceId from './tools/instanceId';
+import { splitCellId } from './tools/cells';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -370,6 +371,28 @@ export default class DataTable extends React.Component {
   };
 
   /**
+   * Get the props associated with the given table cell. Mostly used for adding in
+   * column resizing behavior for sticky header tables.
+   *
+   * @param {object} config
+   * @param {string} config.cell the header we want the props for
+   * @returns {object}
+   */
+  getCellProps = ({
+    cell,
+    isResizable = this.props.isResizable,
+    colWidth = this.state.colWidth[splitCellId(cell.id)[1]],
+    ...rest
+  }) => {
+    return {
+      ...rest,
+      key: cell.id,
+      isResizable,
+      colWidth,
+    };
+  };
+
+  /**
    * Gets the props associated with selection for a header or a row, where
    * applicable. Most often used to indicate selection status of the table or
    * for a specific row.
@@ -707,6 +730,7 @@ export default class DataTable extends React.Component {
       getHeaderProps: this.getHeaderProps,
       getExpandHeaderProps: this.getExpandHeaderProps,
       getRowProps: this.getRowProps,
+      getCellProps: this.getCellProps,
       getSelectionProps: this.getSelectionProps,
       getBatchActionProps: this.getBatchActionProps,
       getTableProps: this.getTableProps,

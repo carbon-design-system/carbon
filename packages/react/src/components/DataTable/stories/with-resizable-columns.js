@@ -29,6 +29,7 @@ export default props => (
       headers,
       getHeaderProps,
       getRowProps,
+      getCellProps,
       getTableProps,
       getTableContainerProps,
     }) => (
@@ -50,7 +51,9 @@ export default props => (
             {rows.map(row => (
               <TableRow {...getRowProps({ row })}>
                 {row.cells.map(cell => (
-                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                  <TableCell {...getCellProps({ cell })}>
+                    {cell.value}
+                  </TableCell>
                 ))}
               </TableRow>
             ))}

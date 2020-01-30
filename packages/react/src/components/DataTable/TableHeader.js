@@ -236,7 +236,8 @@ TableHeader.propTypes = {
    */
   translateWithId: PropTypes.func,
 
-  // internal properties
+  // internal properties for resizing
+  colWidth: PropTypes.number,
   isResizable: PropTypes.bool,
   colKey: PropTypes.string.isRequired,
   resizeColumn: PropTypes.func,
