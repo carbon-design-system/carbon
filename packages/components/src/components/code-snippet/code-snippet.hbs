@@ -18,7 +18,8 @@
 
 <div class="{{@root.prefix}}--snippet {{@root.prefix}}--snippet--{{variant}}" {{#is variant "multi"}}
   data-code-snippet{{/is}}>
-  <div class="{{@root.prefix}}--snippet-container" aria-label="Code Snippet Text">
+  <div {{#is variant "single"}}tabindex="0" {{/is}} class="{{@root.prefix}}--snippet-container"
+    aria-label="Code Snippet Text">
     <pre>
 <code>@mixin grid-container {
     width: 100%;
