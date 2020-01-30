@@ -112,12 +112,16 @@
   }
 
   .#{$prefix}--file ~ .#{$prefix}--file-container {
-    margin-top: $carbon--spacing-05;
+    margin-top: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--file .#{$prefix}--file-container {
+    margin-top: $carbon--spacing-03;
   }
 
   .#{$prefix}--file__selected-file {
     display: grid;
-    grid-gap: $carbon--spacing-05 $carbon--spacing-05;
+    grid-gap: $carbon--spacing-05;
     grid-template-columns: 1fr auto;
     grid-auto-rows: auto;
     align-items: center;
