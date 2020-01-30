@@ -69,8 +69,8 @@ function CodeSnippet({
   return (
     <div {...rest} className={codeSnippetClasses}>
       <div
-        role="textbox"
-        tabIndex={0}
+        role={type === 'single' ? 'textbox' : null}
+        tabIndex={type === 'single' ? 0 : null}
         className={`${prefix}--snippet-container`}
         aria-label={ariaLabel || copyLabel || 'code-snippet'}>
         <code>
