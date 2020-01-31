@@ -129,7 +129,6 @@ exports[`SideNavMenu should render 1`] = `
     </button>
     <ul
       className="bx--side-nav__menu"
-      role="menu"
     >
       text
     </ul>
