@@ -8,14 +8,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const TableCell = ({ children, colWidth, ...rest }) => {
-  const cellProps = {
-    ...rest,
-    style: colWidth && { width: `${colWidth}px` }, // conditionally add column width
-  };
-
-  return <td {...cellProps}>{children}</td>;
-};
+const TableCell = ({ children, colWidth, ...rest }) => (
+  <td style={{ width: colWidth + 'px' }} {...rest}>
+    {children}
+  </td>
+);
 
 TableCell.propTypes = {
   /**

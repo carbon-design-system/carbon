@@ -467,11 +467,6 @@
     justify-content: space-between;
   }
 
-  /* keep col-resize cursor while resizing */
-  .#{$prefix}--data-table--resizing-active {
-    cursor: col-resize;
-  }
-
   /* resizer bar */
   .#{$prefix}--table-header-resizer {
     width: rem(4px);

@@ -8,13 +8,14 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import { settings } from 'carbon-components';
 import {
   ArrowUp20 as Arrow,
   ArrowsVertical20 as Arrows,
 } from '@carbon/icons-react';
 import { sortStates } from './state/sorting';
+import TableColumnResizer from './TableColumnResizer';
 
 const { prefix } = settings;
 
@@ -61,68 +62,22 @@ const TableHeader = React.forwardRef(function TableHeader(
     sortDirection,
     translateWithId: t,
     colWidth,
-    resizeColumn,
-    finalizeColumnResizing,
+    resizeAction,
     ...rest
   },
   ref
 ) {
-  // is a resizing active for this column
-  const [columnResizingActive, setColumnResizingActive] = useState(false);
-
   if (isResizable) {
-    const startResizing = () => {
-      setColumnResizingActive(true);
-      document.onmouseup = endResizing;
-      document.onmousemove = doResizing;
-    };
-
-    const endResizing = () => {
-      setColumnResizingActive(false);
-      document.onmouseup = null;
-      document.onmousemove = null;
-      // resets memoized column widths to current values
-      finalizeColumnResizing();
-    };
-
-    // is resizing active on any column
-    const isResizingActive = () => {
-      return Boolean(document.onmouseup && document.onmousemove);
-    };
-
-    const doResizing = ev => {
-      // prevent other mouse actions like text selection
-      ev.stopPropagation();
-      ev.preventDefault();
-      resizeColumn(ev.movementX);
-    };
-
-    // keep col-resize cursor during resizing on complete header
-    const theHeaderClassName = cx(headerClassName, {
-      [`${prefix}--table-header-resizer-active`]: isResizingActive(),
-    });
-
-    // permanently highlight only active resizer while resizing
-    const resizerClassName = cx({
-      [`${prefix}--table-header-resizer`]: true,
-      [`${prefix}--table-header-resizer-active`]: columnResizingActive,
-      [`${prefix}--table-header-resizer-passive`]:
-        isResizingActive() && !columnResizingActive,
-    });
-
     return (
       <th
-        className={theHeaderClassName}
+        className={headerClassName}
         colSpan={colSpan}
         ref={ref}
         scope={scope}
-        style={{ width: colWidth }}>
+        style={{ width: colWidth + 'px' }}>
         <div className={`${prefix}--table-header-resizable`} {...rest}>
           <span className={`${prefix}--table-header-label`}>{children}</span>
-          <div
-            className={resizerClassName}
-            onMouseDown={() => startResizing()}
-            role="separator"></div>
+          <TableColumnResizer resizeAction={resizeAction} />
         </div>
       </th>
     );
@@ -237,10 +192,8 @@ TableHeader.propTypes = {
 
   // internal properties for resizing
   colWidth: PropTypes.number,
+  resizeAction: PropTypes.func,
   isResizable: PropTypes.bool,
-  colKey: PropTypes.string.isRequired,
-  resizeColumn: PropTypes.func,
-  finalizeColumnResizing: PropTypes.func,
 };
 
 TableHeader.defaultProps = {
