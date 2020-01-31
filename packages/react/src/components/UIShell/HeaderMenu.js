@@ -120,8 +120,7 @@ class HeaderMenu extends React.Component {
   };
 
   /**
-   * ref handler for our menu button. This node is represented by the
-   * `role="menu"` attribute. If we are supplied a `focusRef` prop, we also
+   * ref handler for our menu button. If we are supplied a `focusRef` prop, we also
    * forward along the node.
    *
    * This is useful when this component is a child in a
@@ -199,10 +198,7 @@ class HeaderMenu extends React.Component {
           {menuLinkName}
           <MenuContent />
         </a>
-        <ul
-          {...accessibilityLabel}
-          className={`${prefix}--header__menu`}
-          role="menu">
+        <ul {...accessibilityLabel} className={`${prefix}--header__menu`}>
           {React.Children.map(children, this._renderMenuItem)}
         </ul>
       </li>
