@@ -206,11 +206,7 @@ class HeaderMenu extends React.Component {
   }
 
   /**
-   * Render an individual menuitem, passing along `role: 'none'` because the
-   * host node <li> doesn't apply when in a <ul> with `role="menu"` and so we
-   * need to revert the semantics.
-   *
-   * We also capture the `ref` for each child inside of `this.items` to properly
+   * We capture the `ref` for each child inside of `this.items` to properly
    * manage focus. In addition to this focus management, all items receive a
    * `tabIndex: -1` so the user won't hit a large number of items in their tab
    * sequence when they might not want to go through all the items.
@@ -219,7 +215,6 @@ class HeaderMenu extends React.Component {
     if (React.isValidElement(item)) {
       return React.cloneElement(item, {
         ref: this.handleItemRef(index),
-        role: 'none',
       });
     }
   };
