@@ -330,7 +330,7 @@ class NumberInput extends Component {
       if (!allowEmpty && this.state.value === '') {
         isInputInvalid = true;
       } else {
-        if (this.state.value > max || this.state.value < min) {
+        if (this.state.value !== '' && (this.state.value > max || this.state.value < min)) {
           isInputInvalid = true;
         }
       }
