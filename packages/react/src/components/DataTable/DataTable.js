@@ -257,7 +257,7 @@ export default class DataTable extends React.Component {
     isSortable = this.props.isSortable,
     isResizable = this.props.isResizable,
     colWidth = this.state.colWidth[header.key],
-    resizeColumn = this.resizeColumn,
+    resizeColumn = incr => this.resizeColumn(header.key, incr),
     finalizeColumnResizing = this.finalizeColumnResizing,
     ref = this.colRefs[header.key],
     ...rest

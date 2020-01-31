@@ -61,7 +61,6 @@ const TableHeader = React.forwardRef(function TableHeader(
     sortDirection,
     translateWithId: t,
     colWidth,
-    colKey,
     resizeColumn,
     finalizeColumnResizing,
     ...rest
@@ -95,7 +94,7 @@ const TableHeader = React.forwardRef(function TableHeader(
       // prevent other mouse actions like text selection
       ev.stopPropagation();
       ev.preventDefault();
-      resizeColumn(colKey, ev.movementX);
+      resizeColumn(ev.movementX);
     };
 
     // keep col-resize cursor during resizing on complete header

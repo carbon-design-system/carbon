@@ -8,24 +8,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const TableCell = React.forwardRef(function TableCell(
-  { children, colWidth, ...rest },
-  ref
-) {
+const TableCell = ({ children, colWidth, ...rest }) => {
   const cellProps = {
     ...rest,
-    ref,
+    style: colWidth && { width: `${colWidth}px` }, // conditionally add column width
   };
 
-  if (colWidth) {
-    const style = {
-      width: `${colWidth}px`,
-    };
-    cellProps.style = style;
-  }
-
   return <td {...cellProps}>{children}</td>;
-});
+};
 
 TableCell.propTypes = {
   /**
@@ -33,7 +23,7 @@ TableCell.propTypes = {
    */
   children: PropTypes.node,
 
-  // internal properties for column resizing
+  // fixed column width for resizing
   colWidth: PropTypes.number,
 };
 
