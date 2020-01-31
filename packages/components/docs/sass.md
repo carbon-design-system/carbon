@@ -3471,7 +3471,6 @@ $carbon--spacing-07: 2rem;
   - `spacing-07`
 - **Used by**:
   - [snippet [mixin]](#snippet-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -3494,6 +3493,7 @@ $carbon--spacing-08: 2.5rem;
   - `spacing-08`
 - **Used by**:
   - [snippet [mixin]](#snippet-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [search [mixin]](#search-mixin)
   - [text-area [mixin]](#text-area-mixin)
@@ -6533,6 +6533,7 @@ $icon-01: if(
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -6564,7 +6565,6 @@ $icon-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
@@ -16945,8 +16945,13 @@ File uploader styles
     margin-bottom: $carbon--spacing-05;
   }
 
+  // For backwards compatibility
   .#{$prefix}--file-btn ~ .#{$prefix}--file-container {
     margin-top: $carbon--spacing-06;
+  }
+
+  .#{$prefix}--btn ~ .#{$prefix}--file-container {
+    margin-top: $carbon--spacing-05;
   }
 
   .#{$prefix}--file__selected-file {
@@ -16955,7 +16960,7 @@ File uploader styles
     grid-template-columns: 1fr auto;
     grid-auto-rows: auto;
     align-items: center;
-    min-height: $carbon--spacing-07;
+    min-height: $carbon--spacing-08;
     max-width: rem(320px);
     margin-bottom: $carbon--spacing-03;
     background-color: $field-01;
@@ -17084,7 +17089,7 @@ File uploader styles
     border: none;
     cursor: pointer;
     padding: 0;
-    fill: $icon-02;
+    fill: $icon-01;
 
     &:focus {
       @include focus-outline('border');
@@ -17092,7 +17097,7 @@ File uploader styles
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
-    fill: $icon-02;
+    fill: $icon-01;
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
@@ -17132,14 +17137,14 @@ File uploader styles
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
-  - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [field-01 [variable]](#field-01-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
   - [icon-03 [variable]](#icon-03-variable)
-  - [icon-02 [variable]](#icon-02-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
 
 ## form
