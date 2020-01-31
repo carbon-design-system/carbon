@@ -24407,7 +24407,7 @@ UI shell header
     }
   }
 
-  .#{$prefix}--header__menu-bar[role='menubar'] {
+  .#{$prefix}--header__menu-bar {
     display: flex;
     height: 100%;
     list-style: none;
@@ -24480,7 +24480,7 @@ UI shell header
     transform: rotate(180deg);
   }
 
-  .#{$prefix}--header__menu[role='menu'] {
+  .#{$prefix}--header__menu {
     display: none;
     list-style: none;
     padding: 0;
@@ -25358,8 +25358,8 @@ UI shell side nav
     > .#{$prefix}--side-nav__submenu:hover,
   .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
     > .#{$prefix}--side-nav__link:hover,
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
+  .#{$prefix}--side-nav__menu
+    a.#{$prefix}--side-nav__link:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
@@ -25463,20 +25463,19 @@ UI shell side nav
     color: $ibm-color__gray-100;
   }
 
-  .#{$prefix}--side-nav__menu[role='menu'] {
+  .#{$prefix}--side-nav__menu {
     display: block;
     visibility: hidden;
     max-height: 0;
   }
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true']
-    + .#{$prefix}--side-nav__menu[role='menu'] {
+    + .#{$prefix}--side-nav__menu {
     max-height: rem(1500px);
     visibility: inherit;
   }
 
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[role='menuitem'] {
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link {
     height: mini-units(4);
     min-height: mini-units(4);
     padding-left: mini-units(4);
@@ -25484,13 +25483,11 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__item.#{$prefix}--side-nav__item--icon
-    a.#{$prefix}--side-nav__link[role='menuitem'] {
+    a.#{$prefix}--side-nav__link {
     padding-left: mini-units(9);
   }
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link--current,
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[aria-current='page'],
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link--current,
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link[aria-current='page'],
   a.#{$prefix}--side-nav__link--current {
     background-color: $ibm-color__gray-20;
 
@@ -25614,7 +25611,7 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav--fixed
-    .#{$prefix}--side-nav__menu[role='menu']
+    .#{$prefix}--side-nav__menu
     a.#{$prefix}--side-nav__link {
     padding-left: mini-units(4);
   }
