@@ -6395,7 +6395,6 @@ $text-02: if(
   - [modal [mixin]](#modal-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
-  - [search [mixin]](#search-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
@@ -6568,6 +6567,7 @@ $icon-02: if(
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [search [mixin]](#search-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [tile [mixin]](#tile-mixin)
   - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
@@ -20934,8 +20934,7 @@ Search styles
     width: rem(16px);
     top: 50%;
     transform: translateY(-50%);
-    // Ensure clear icon is rendered in Firefox (#1127)
-    fill: $text-02;
+    fill: $icon-02;
     pointer-events: none;
   }
 
@@ -21083,7 +21082,7 @@ Search styles
   - [ui-04 [variable]](#ui-04-variable)
   - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [text-02 [variable]](#text-02-variable)
+  - [icon-02 [variable]](#icon-02-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [hover-field [variable]](#hover-field-variable)

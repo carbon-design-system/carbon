@@ -104,8 +104,7 @@
     width: rem(16px);
     top: 50%;
     transform: translateY(-50%);
-    // Ensure clear icon is rendered in Firefox (#1127)
-    fill: $text-02;
+    fill: $icon-02;
     pointer-events: none;
   }
 
