@@ -43,7 +43,7 @@ export default props => (
         title="DataTable"
         description="With toolbar"
         {...getTableContainerProps()}>
-        <TableToolbar>
+        <TableToolbar aria-label="data table toolbar">
           <TableToolbarContent>
             <TableToolbarSearch onChange={onInputChange} />
             <TableToolbarMenu>
