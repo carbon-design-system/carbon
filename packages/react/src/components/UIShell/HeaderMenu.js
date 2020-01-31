@@ -199,10 +199,7 @@ class HeaderMenu extends React.Component {
           {menuLinkName}
           <MenuContent />
         </a>
-        <ul
-          {...accessibilityLabel}
-          className={`${prefix}--header__menu`}
-          role="menu">
+        <ul {...accessibilityLabel} className={`${prefix}--header__menu`}>
           {React.Children.map(children, this._renderMenuItem)}
         </ul>
       </li>
@@ -210,9 +207,7 @@ class HeaderMenu extends React.Component {
   }
 
   /**
-   * Render an individual menuitem, passing along `role: 'none'` because the
-   * host node <li> doesn't apply when in a <ul> with `role="menu"` and so we
-   * need to revert the semantics.
+   * Render an individual menuitem.
    *
    * We also capture the `ref` for each child inside of `this.items` to properly
    * manage focus. In addition to this focus management, all items receive a
@@ -223,7 +218,6 @@ class HeaderMenu extends React.Component {
     if (React.isValidElement(item)) {
       return React.cloneElement(item, {
         ref: this.handleItemRef(index),
-        role: 'none',
       });
     }
   };
