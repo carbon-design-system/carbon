@@ -15060,7 +15060,7 @@ Data table core styles
     padding-bottom: 0;
   }
 
-  th.#{$prefix}--table-column-checkbox:hover {
+  .#{$prefix}--date-table tbody th.#{$prefix}--table-column-checkbox:hover {
     background: $data-table-column-hover;
   }
 
