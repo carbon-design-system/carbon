@@ -41,7 +41,7 @@ jobs:
         run: |
           ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
           ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
-      - name: Deploy React storybook
+      - name: Deploy vanilla devenv
         run: |
           cd packages/components
           ibmcloud cf blue-green-deploy carbon-dev-environment \
