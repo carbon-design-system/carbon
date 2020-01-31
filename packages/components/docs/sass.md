@@ -6395,7 +6395,6 @@ $text-02: if(
   - [modal [mixin]](#modal-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
-  - [search [mixin]](#search-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
@@ -6568,6 +6567,7 @@ $icon-02: if(
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [search [mixin]](#search-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [tile [mixin]](#tile-mixin)
   - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
@@ -15060,7 +15060,7 @@ Data table core styles
     padding-bottom: 0;
   }
 
-  th.#{$prefix}--table-column-checkbox:hover {
+  .#{$prefix}--date-table tbody th.#{$prefix}--table-column-checkbox:hover {
     background: $data-table-column-hover;
   }
 
@@ -16797,13 +16797,6 @@ Dropdown styles
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
     font-weight: normal;
-    margin-right: $carbon--spacing-04;
-    margin-left: rem(10px);
-
-    &:focus {
-      margin: 0;
-      padding-left: rem(10px);
-    }
   }
 
   .#{$prefix}--dropdown--show-selected .#{$prefix}--dropdown--selected {
@@ -20934,8 +20927,7 @@ Search styles
     width: rem(16px);
     top: 50%;
     transform: translateY(-50%);
-    // Ensure clear icon is rendered in Firefox (#1127)
-    fill: $text-02;
+    fill: $icon-02;
     pointer-events: none;
   }
 
@@ -21083,7 +21075,7 @@ Search styles
   - [ui-04 [variable]](#ui-04-variable)
   - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [text-02 [variable]](#text-02-variable)
+  - [icon-02 [variable]](#icon-02-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [hover-field [variable]](#hover-field-variable)
@@ -24415,7 +24407,7 @@ UI shell header
     }
   }
 
-  .#{$prefix}--header__menu-bar[role='menubar'] {
+  .#{$prefix}--header__menu-bar {
     display: flex;
     height: 100%;
     list-style: none;
@@ -24488,7 +24480,7 @@ UI shell header
     transform: rotate(180deg);
   }
 
-  .#{$prefix}--header__menu[role='menu'] {
+  .#{$prefix}--header__menu {
     display: none;
     list-style: none;
     padding: 0;
@@ -25366,8 +25358,8 @@ UI shell side nav
     > .#{$prefix}--side-nav__submenu:hover,
   .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
     > .#{$prefix}--side-nav__link:hover,
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
+  .#{$prefix}--side-nav__menu
+    a.#{$prefix}--side-nav__link:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
@@ -25471,20 +25463,19 @@ UI shell side nav
     color: $ibm-color__gray-100;
   }
 
-  .#{$prefix}--side-nav__menu[role='menu'] {
+  .#{$prefix}--side-nav__menu {
     display: block;
     visibility: hidden;
     max-height: 0;
   }
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true']
-    + .#{$prefix}--side-nav__menu[role='menu'] {
+    + .#{$prefix}--side-nav__menu {
     max-height: rem(1500px);
     visibility: inherit;
   }
 
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[role='menuitem'] {
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link {
     height: mini-units(4);
     min-height: mini-units(4);
     padding-left: mini-units(4);
@@ -25492,13 +25483,11 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__item.#{$prefix}--side-nav__item--icon
-    a.#{$prefix}--side-nav__link[role='menuitem'] {
+    a.#{$prefix}--side-nav__link {
     padding-left: mini-units(9);
   }
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link--current,
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[aria-current='page'],
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link--current,
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link[aria-current='page'],
   a.#{$prefix}--side-nav__link--current {
     background-color: $ibm-color__gray-20;
 
@@ -25622,7 +25611,7 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav--fixed
-    .#{$prefix}--side-nav__menu[role='menu']
+    .#{$prefix}--side-nav__menu
     a.#{$prefix}--side-nav__link {
     padding-left: mini-units(4);
   }
