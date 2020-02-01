@@ -12955,7 +12955,7 @@ Button styles
     }
 
     &:active {
-      color: $inverse-01;
+      border-color: transparent;
     }
 
     &:disabled,
@@ -12968,13 +12968,26 @@ Button styles
       color: $disabled;
       outline: none;
 
-      & > .#{$prefix}--btn__icon path {
+      > .#{$prefix}--btn__icon path {
         fill: $disabled;
       }
     }
 
     &:hover > .#{$prefix}--btn__icon path {
       fill: $inverse-01;
+    }
+  }
+
+  .#{$prefix}--btn--tertiary,
+  .#{$prefix}--btn--tertiary.#{$prefix}--btn--field,
+  .#{$prefix}--btn--tertiary.#{$prefix}--btn--sm {
+    padding-right: rem(62px);
+    padding-left: rem(14px);
+
+    &:focus {
+      border-width: rem(3px);
+      padding-right: rem(60px);
+      padding-left: rem(12px);
     }
   }
 
@@ -13034,13 +13047,11 @@ Button styles
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
     @include tooltip--trigger('icon', 'bottom');
-    outline: $button-outline-width solid transparent;
-    outline-offset: -4px;
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
-    outline-color: $ui-02;
+    box-shadow: inset 0 0 0 $button-outline-width $ui-02;
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
@@ -13061,11 +13072,6 @@ Button styles
     padding-left: rem(13px);
     padding-right: rem(13px);
 
-    &.#{$prefix}--btn--tertiary {
-      padding-left: rem(15px);
-      padding-right: rem(15px);
-    }
-
     .#{$prefix}--btn__icon {
       position: static;
     }
@@ -13075,23 +13081,43 @@ Button styles
     }
   }
 
+  .#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
+    padding-left: rem(15px);
+    padding-right: rem(15px);
+
+    &:focus {
+      padding-left: rem(13px);
+      padding-right: rem(13px);
+    }
+  }
+
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
     padding-left: rem(9px);
     padding-right: rem(9px);
+  }
 
-    &.#{$prefix}--btn--tertiary {
-      padding-left: rem(11px);
-      padding-right: rem(11px);
+  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
+    padding-left: rem(11px);
+    padding-right: rem(11px);
+
+    &:focus {
+      padding-left: rem(9px);
+      padding-right: rem(9px);
     }
   }
 
   .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
     padding-left: rem(5px);
     padding-right: rem(5px);
+  }
 
-    &.#{$prefix}--btn--tertiary {
-      padding-left: rem(7px);
-      padding-right: rem(7px);
+  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
+    padding-left: rem(7px);
+    padding-right: rem(7px);
+
+    &:focus {
+      padding-left: rem(5px);
+      padding-right: rem(5px);
     }
   }
 
