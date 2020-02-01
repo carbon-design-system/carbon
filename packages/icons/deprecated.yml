@@ -1,0 +1,5 @@
+deprecated:
+  - name: cloud--lightning
+  - name: cloud--rain
+  - name: cloud--snow
+  - name: sunny

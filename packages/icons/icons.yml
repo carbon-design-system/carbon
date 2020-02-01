@@ -1,0 +1,10034 @@
+- name: add
+  friendly_name: Add
+  usage: This is a description for usage
+  aliases:
+    - plus
+    - positive
+    - addition
+    - increase
+  sizes:
+    - 16
+    - 32
+- name: add--alt
+  friendly_name: Add alt
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - plus
+    - positive
+    - addition
+    - increase
+- name: add--filled
+  friendly_name: Add filled
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - plus
+    - positive
+    - addition
+    - increase
+- name: app-switcher
+  friendly_name: App switcher
+  usage: This is a description for usage
+  aliases:
+    - switcher
+    - drawer
+    - 9 dot
+  sizes:
+    - 16
+    - 20
+    - 24
+    - 32
+- name: apps
+  friendly_name: Apps
+  usage: This is a description for usage
+  aliases:
+    - application
+    - drawer
+    - 9 dot
+    - 9 square
+  sizes:
+    - 16
+    - 32
+- name: arrow--down
+  friendly_name: Arrow down
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - direction
+    - point
+- name: arrow--left
+  friendly_name: Arrow left
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - direction
+    - point
+- name: arrow--right
+  friendly_name: Arrow right
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 20
+    - 24
+    - 32
+  aliases:
+    - direction
+    - point
+- name: arrow--up
+  friendly_name: Arrow up
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - direction
+    - point
+- name: arrow--down-left
+  friendly_name: Arrow down left
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - direction
+    - point
+- name: arrow--down-right
+  friendly_name: Arrow down right
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - direction
+    - point
+- name: arrow--up-left
+  friendly_name: Arrow up left
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - direction
+    - point
+- name: arrow--up-right
+  friendly_name: Arrow up right
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - direction
+    - point
+- name: arrow--annotation
+  friendly_name: Arrow annotation
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - direction
+    - point
+- name: arrows
+  friendly_name: Arrows
+  usage: This is a description for usage
+  aliases:
+    - direction
+    - point
+  sizes:
+    - 16
+    - 32
+- name: arrows--vertical
+  friendly_name: Arrows vertical
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - direction
+    - point
+- name: arrows--horizontal
+  friendly_name: Arrows horizontal
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - direction
+    - point
+- name: asleep
+  friendly_name: Asleep
+  usage: This is a description for usage
+  aliases:
+    - night
+    - moon
+    - sleep
+    - rest
+    - dark
+  sizes:
+    - 16
+    - 32
+- name: asleep--filled
+  friendly_name: Asleep filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - night
+    - moon
+    - sleep
+    - rest
+    - dark
+- name: attachment
+  friendly_name: Attachment
+  usage: This is a description for usage
+  aliases:
+    - paper clip
+    - attach
+    - file
+    - affix
+    - add
+  sizes:
+    - 16
+    - 32
+- name: awake
+  friendly_name: Awake
+  usage: This is a description for usage
+  aliases:
+    - sun
+    - active
+    - day
+    - bright
+  sizes:
+    - 16
+    - 32
+- name: back-to-top
+  friendly_name: Back to top
+  usage: This is a description for usage
+  aliases:
+    - up
+    - scroll up
+  sizes:
+    - 16
+    - 32
+- name: calendar
+  friendly_name: Calendar
+  usage: This is a description for usage
+  aliases:
+    - date
+    - schedule
+    - day
+    - time
+    - month
+    - year
+  sizes:
+    - 16
+    - 32
+- name: caret--down
+  friendly_name: Caret down
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+    - glyph
+  aliases:
+    - pointer
+    - open
+    - close
+    - expand
+    - collapse
+- name: caret--left
+  friendly_name: Caret left
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+    - glyph
+  aliases:
+    - pointer
+    - open
+    - close
+    - expand
+    - collapse
+- name: caret--right
+  friendly_name: Caret right
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+    - glyph
+  aliases:
+    - pointer
+    - open
+    - close
+    - expand
+    - collapse
+- name: caret--sort--down
+  friendly_name: Caret sort down
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - pointer
+    - open
+    - close
+    - expand
+    - collapse
+- name: caret--sort--up
+  friendly_name: Caret sort up
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - pointer
+    - open
+    - close
+    - expand
+    - collapse
+- name: caret--sort
+  friendly_name: Caret sort
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - pointer
+    - open
+    - close
+    - expand
+    - collapse
+- name: caret--up
+  friendly_name: Caret up
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+    - glyph
+  aliases:
+    - pointer
+    - open
+    - close
+    - expand
+    - collapse
+- name: chat
+  friendly_name: Chat
+  usage: This is a description for usage
+  aliases:
+    - sms
+    - text
+    - bubble
+    - bot
+    - speak
+  sizes:
+    - 16
+    - 32
+- name: checkmark
+  friendly_name: Checkmark
+  usage: This is a description for usage
+  aliases:
+    - approved
+    - 'yes'
+    - valid
+    - status
+  sizes:
+    - 16
+    - 20
+    - 24
+    - 32
+- name: checkmark--filled
+  friendly_name: Checkmark filled
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 20
+    - 24
+    - 32
+  aliases:
+    - approved
+    - 'yes'
+    - valid
+    - status
+- name: checkmark--outline
+  friendly_name: Checkmark outline
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - approved
+    - 'yes'
+    - valid
+    - status
+- name: chevron--down
+  friendly_name: Chevron down
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+    - glyph
+  aliases:
+    - open
+    - close
+    - expand
+    - collapse
+- name: chevron--left
+  friendly_name: Chevron left
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+    - glyph
+  aliases:
+    - open
+    - close
+    - expand
+    - collapse
+- name: chevron--mini
+  friendly_name: Chevron mini
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - open
+    - close
+    - expand
+    - collapse
+- name: chevron--right
+  friendly_name: Chevron right
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+    - glyph
+  aliases:
+    - open
+    - close
+    - expand
+    - collapse
+- name: chevron--sort--down
+  friendly_name: Chevron sort down
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - open
+    - close
+    - expand
+    - collapse
+- name: chevron--sort--up
+  friendly_name: Chevron sort up
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - open
+    - close
+    - expand
+    - collapse
+- name: chevron--sort
+  friendly_name: Chevron sort
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - open
+    - close
+    - expand
+    - collapse
+- name: chevron--up
+  friendly_name: Chevron up
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+    - glyph
+  aliases:
+    - open
+    - close
+    - expand
+    - collapse
+- name: close
+  friendly_name: Close
+  usage: This is a description for usage
+  aliases:
+    - X
+    - dismiss
+    - deny
+    - denied
+    - ex
+  sizes:
+    - 16
+    - 32
+- name: close--filled
+  friendly_name: Close filled
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - X
+    - dismiss
+    - deny
+    - denied
+    - ex
+- name: close--outline
+  friendly_name: Close outline
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - X
+    - dismiss
+    - deny
+    - denied
+    - ex
+- name: code
+  friendly_name: Code
+  usage: This is a description for usage
+  aliases:
+    - </>
+    - html
+    - java
+    - css
+    - dev
+    - development
+  sizes:
+    - 16
+    - 32
+- name: copy
+  friendly_name: Copy
+  usage: This is a description for usage
+  aliases:
+    - duplicate
+    - clipboard
+    - copied
+  sizes:
+    - 16
+    - 32
+- name: copy--file
+  friendly_name: Copy file
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - duplicate
+    - clipboard
+    - copied
+- name: delete
+  friendly_name: Delete
+  usage: This is a description for usage
+  aliases:
+    - trash can
+    - remove
+    - trash
+    - edit
+  sizes:
+    - 16
+    - 32
+- name: document
+  friendly_name: Document
+  usage: This is a description for usage
+  aliases:
+    - file
+    - doc
+    - paper
+  sizes:
+    - 16
+    - 32
+- name: document--add
+  friendly_name: Document add
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - file
+    - doc
+    - paper
+- name: document--blank
+  friendly_name: Document blank
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - file
+    - doc
+    - paper
+- name: document--export
+  friendly_name: Document export
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - file
+    - doc
+    - paper
+- name: document--import
+  friendly_name: Document import
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - file
+    - doc
+    - paper
+- name: document--subtract
+  friendly_name: Document subtract
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - file
+    - doc
+    - paper
+- name: document--tasks
+  friendly_name: Document tasks
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - file
+    - doc
+    - paper
+- name: down-to-bottom
+  friendly_name: Down to bottom
+  usage: This is a description for usage
+  aliases:
+    - jump to bottom
+    - down
+    - footer
+  sizes:
+    - 16
+    - 32
+- name: download
+  friendly_name: Download
+  usage: This is a description for usage
+  aliases:
+    - install
+  sizes:
+    - 16
+    - 32
+- name: draggable
+  friendly_name: Draggable
+  usage: This is a description for usage
+  aliases:
+    - handle
+    - drag
+  sizes:
+    - 16
+    - 32
+- name: edit
+  friendly_name: Edit
+  usage: This is a description for usage
+  aliases:
+    - modify
+    - pencil
+    - change
+  sizes:
+    - 16
+    - 32
+- name: edit--off
+  friendly_name: Edit off
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - modify
+    - pencil
+    - change
+- name: email
+  friendly_name: Email
+  usage: This is a description for usage
+  aliases:
+    - mail
+    - contact
+    - envelope
+    - post
+    - send
+  sizes:
+    - 16
+    - 32
+- name: error
+  friendly_name: Error
+  usage: This is a description for usage
+  aliases:
+    - state
+    - stop
+    - alert
+    - issue
+  sizes:
+    - 32
+- name: error--filled
+  friendly_name: Error filled
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 20
+    - 24
+    - 32
+  aliases:
+    - state
+    - stop
+    - alert
+    - issue
+- name: error--outline
+  friendly_name: Error outline
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - state
+    - stop
+    - alert
+    - issue
+- name: export
+  friendly_name: Export
+  usage: This is a description for usage
+  aliases:
+    - ship
+    - send
+    - out
+  sizes:
+    - 16
+    - 32
+- name: fade
+  friendly_name: Fade
+  usage: This is a description for usage
+  aliases:
+    - dim
+    - vanish
+    - remove
+    - dissolve
+    - disappear
+  sizes:
+    - 16
+    - 32
+- name: favorite
+  friendly_name: Favorite
+  usage: This is a description for usage
+  aliases:
+    - heart
+    - save
+    - like
+    - fave
+    - bookmark
+  sizes:
+    - 16
+    - 32
+- name: favorite--filled
+  friendly_name: Favorite filled
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - heart
+    - save
+    - like
+    - fave
+    - bookmark
+- name: folder
+  friendly_name: Folder
+  usage: This is a description for usage
+  aliases:
+    - file
+    - save
+    - document
+    - organize
+  sizes:
+    - 16
+    - 32
+- name: folder--add
+  friendly_name: Folder add
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - file
+    - save
+    - document
+    - organize
+- name: folder--details
+  friendly_name: Folder details
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - file
+    - save
+    - document
+    - organize
+- name: folder--off
+  friendly_name: Folder off
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - file
+    - save
+    - document
+    - organize
+- name: folder--shared
+  friendly_name: Folder shared
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - file
+    - save
+    - document
+    - organize
+- name: forum
+  friendly_name: Forum
+  usage: This is a description for usage
+  aliases:
+    - chat
+    - talk
+    - discuss
+    - conference
+  sizes:
+    - 16
+    - 32
+- name: grid
+  friendly_name: Grid
+  usage: This is a description for usage
+  aliases:
+    - align
+    - boxes
+    - 4 boxes
+    - 2x grid
+    - pattern
+  sizes:
+    - 16
+    - 32
+- name: help
+  friendly_name: Help
+  usage: This is a description for usage
+  aliases:
+    - support
+    - question
+    - assist
+    - more info
+  sizes:
+    - 16
+    - 32
+- name: help--filled
+  friendly_name: Help filled
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - support
+    - question
+    - assist
+    - more info
+- name: information
+  friendly_name: Information
+  usage: This is a description for usage
+  aliases:
+    - info
+    - learn
+    - more
+    - tip
+    - help
+  sizes:
+    - 16
+    - 32
+- name: information--filled
+  friendly_name: Information filled
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - info
+    - learn
+    - more
+    - tip
+    - help
+- name: interactions
+  friendly_name: Interactions
+  usage: This is a description for usage
+  aliases:
+    - statistics interaction
+  sizes:
+    - 16
+    - 32
+- name: launch
+  friendly_name: Launch
+  usage: This is a description for usage
+  aliases:
+    - open
+    - new window
+    - window
+    - expand
+  sizes:
+    - 16
+    - 32
+- name: light
+  friendly_name: Light
+  usage: This is a description for usage
+  aliases:
+    - bright
+    - sun
+    - sunny
+    - lightbulb
+    - glow
+    - luminous
+    - lamp
+  sizes:
+    - 16
+    - 32
+- name: light--filled
+  friendly_name: Light filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - bright
+    - sun
+    - sunny
+    - lightbulb
+    - glow
+    - luminous
+    - lamp
+- name: list
+  friendly_name: List
+  usage: This is a description for usage
+  aliases:
+    - bullet
+    - agenda
+    - checklist
+    - file
+    - index
+    - inventory
+    - table
+    - tally
+  sizes:
+    - 32
+- name: list--bulleted
+  friendly_name: List bulleted
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - bullet
+    - agenda
+    - checklist
+    - file
+    - index
+    - inventory
+    - table
+    - tally
+- name: list--boxes
+  friendly_name: List boxes
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - bullet
+    - agenda
+    - checklist
+    - file
+    - index
+    - inventory
+    - table
+    - tally
+- name: list--checked
+  friendly_name: List checked
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - bullet
+    - agenda
+    - checklist
+    - file
+    - index
+    - inventory
+    - table
+    - tally
+- name: list--dropdown
+  friendly_name: List dropdown
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - bullet
+    - agenda
+    - checklist
+    - file
+    - index
+    - inventory
+    - table
+    - tally
+- name: list--numbered
+  friendly_name: List numbered
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - bullet
+    - agenda
+    - checklist
+    - file
+    - index
+    - inventory
+    - table
+    - tally
+- name: locked
+  friendly_name: Locked
+  usage: This is a description for usage
+  aliases:
+    - lock
+    - seal
+    - hidden
+    - edit
+    - padlock
+  sizes:
+    - 16
+    - 32
+- name: maximize
+  friendly_name: Maximize
+  usage: This is a description for usage
+  aliases:
+    - enlarge
+    - full screen
+    - expand
+    - magnify
+    - stretch
+    - open
+    - minimize
+  sizes:
+    - 16
+    - 32
+- name: menu
+  friendly_name: Menu
+  usage: This is a description for usage
+  aliases:
+    - left nav
+    - drawer
+    - list
+    - nav
+    - navigation
+  sizes:
+    - 16
+    - 20
+    - 24
+    - 32
+- name: minimize
+  friendly_name: Minimize
+  usage: This is a description for usage
+  aliases:
+    - close
+    - small
+    - shrink
+    - maximize
+  sizes:
+    - 16
+    - 32
+- name: misuse
+  friendly_name: Misuse
+  usage: This is a description for usage
+  aliases:
+    - X
+    - close
+    - error
+    - don't
+  sizes:
+    - 16
+    - 20
+    - 24
+    - 32
+- name: misuse--outline
+  friendly_name: Misuse outline
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - X
+    - close
+    - error
+    - don't
+- name: misuse--alt
+  friendly_name: Misuse alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - X
+    - close
+    - error
+    - don't
+- name: new-tab
+  friendly_name: New tab
+  usage: This is a description for usage
+  aliases:
+    - open
+    - expand
+    - view
+    - browser
+    - window
+  sizes:
+    - 16
+    - 32
+- name: nominal
+  friendly_name: Nominal
+  usage: This is a description for usage
+  aliases:
+    - nominal data
+  sizes:
+    - 16
+    - 32
+- name: notification
+  friendly_name: Notification
+  usage: This is a description for usage
+  aliases:
+    - alert
+    - bell
+    - sound
+    - mute
+    - chime
+    - noise
+  sizes:
+    - 16
+    - 32
+- name: notification--off
+  friendly_name: Notification off
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - alert
+    - bell
+    - sound
+    - mute
+    - chime
+    - noise
+- name: notification--filled
+  friendly_name: Notification filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alert
+    - bell
+    - sound
+    - mute
+    - chime
+    - noise
+- name: notification--new
+  friendly_name: Notification new
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alert
+    - bell
+    - sound
+    - mute
+    - chime
+    - noise
+- name: notification--off--filled
+  friendly_name: Notification off filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alert
+    - bell
+    - sound
+    - mute
+    - chime
+    - noise
+- name: ordinal
+  friendly_name: Ordinal
+  usage: This is a description for usage
+  aliases:
+    - ordinal data
+  sizes:
+    - 16
+    - 32
+- name: overflow-menu--horizontal
+  friendly_name: Overflow menu horizontal
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - show more
+    - options
+    - extra
+    - hidden
+- name: overflow-menu--vertical
+  friendly_name: Overflow menu vertical
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - show more
+    - options
+    - extra
+    - hidden
+- name: pause
+  friendly_name: Pause
+  usage: This is a description for usage
+  aliases:
+    - stop
+    - play
+    - music
+    - control
+  sizes:
+    - 16
+    - 32
+- name: pause--outline--filled
+  friendly_name: Pause outline filled
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - stop
+    - play
+    - music
+    - control
+- name: pause--outline
+  friendly_name: Pause outline
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - stop
+    - play
+    - music
+    - control
+- name: pause--filled
+  friendly_name: Pause filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - stop
+    - play
+    - music
+    - control
+- name: play
+  friendly_name: Play
+  usage: This is a description for usage
+  aliases:
+    - start
+    - stop
+    - music
+    - control
+  sizes:
+    - 16
+    - 32
+- name: play--filled
+  friendly_name: Play filled
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - start
+    - stop
+    - music
+    - control
+- name: play--outline--filled
+  friendly_name: Play outline filled
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - start
+    - stop
+    - music
+    - control
+- name: play--outline
+  friendly_name: Play outline
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - start
+    - stop
+    - music
+    - control
+- name: play--filled--alt
+  friendly_name: Play filled alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - start
+    - stop
+    - music
+    - control
+- name: power
+  friendly_name: Power
+  usage: This is a description for usage
+  aliases:
+    - 'on'
+    - 'off'
+    - start
+    - stop
+  sizes:
+    - 16
+    - 32
+- name: redo
+  friendly_name: Redo
+  usage: This is a description for usage
+  aliases:
+    - restart
+    - return
+    - back
+    - revert
+    - undo
+  sizes:
+    - 16
+    - 20
+    - 24
+    - 32
+- name: restart
+  friendly_name: Restart
+  usage: This is a description for usage
+  aliases:
+    - undo
+    - rever
+    - refresh
+  sizes:
+    - 16
+    - 32
+- name: save
+  friendly_name: Save
+  usage: This is a description for usage
+  aliases:
+    - floppy
+    - floppy disk
+    - progress
+    - safe
+    - memory
+    - intact
+    - preserve
+  sizes:
+    - 16
+    - 20
+    - 24
+    - 32
+- name: save--annotation
+  friendly_name: Save annotation
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - floppy
+    - floppy disk
+    - progress
+    - safe
+    - memory
+    - intact
+    - preserve
+- name: save--image
+  friendly_name: Save image
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - floppy
+    - floppy disk
+    - progress
+    - safe
+    - memory
+    - intact
+    - preserve
+- name: save--series
+  friendly_name: Save series
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - floppy
+    - floppy disk
+    - progress
+    - safe
+    - memory
+    - intact
+    - preserve
+- name: search
+  friendly_name: Search
+  usage: This is a description for usage
+  aliases:
+    - find
+    - investigate
+    - explore
+    - look
+  sizes:
+    - 16
+    - 32
+- name: settings
+  friendly_name: Settings
+  usage: This is a description for usage
+  aliases:
+    - preferences
+    - options
+    - alternatives
+    - gear
+  sizes:
+    - 16
+    - 32
+- name: settings--adjust
+  friendly_name: Settings adjust
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - preferences
+    - options
+    - alternatives
+    - gear
+- name: star
+  friendly_name: Star
+  usage: This is a description for usage
+  aliases:
+    - favorite
+    - progress
+    - rate
+    - rating
+    - saved
+    - starred
+  sizes:
+    - 16
+    - 32
+- name: star--filled
+  friendly_name: Star filled
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - favorite
+    - progress
+    - rate
+    - rating
+    - saved
+    - starred
+- name: star--half
+  friendly_name: Star half
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - favorite
+    - progress
+    - rate
+    - rating
+    - saved
+    - starred
+- name: stop
+  friendly_name: Stop
+  usage: This is a description for usage
+  aliases:
+    - block
+    - break
+    - close
+    - cease
+    - control
+    - pause
+    - conclude
+  sizes:
+    - 16
+    - 32
+- name: stop--filled
+  friendly_name: Stop filled
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - block
+    - break
+    - close
+    - cease
+    - control
+    - pause
+    - conclude
+- name: stop--outline--filled
+  friendly_name: Stop outline filled
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - block
+    - break
+    - close
+    - cease
+    - control
+    - pause
+    - conclude
+- name: stop--outline
+  friendly_name: Stop outline
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - block
+    - break
+    - close
+    - cease
+    - control
+    - pause
+    - conclude
+- name: stop--filled--alt
+  friendly_name: Stop filled alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - block
+    - break
+    - close
+    - cease
+    - control
+    - pause
+    - conclude
+- name: subtract
+  friendly_name: Subtract
+  usage: This is a description for usage
+  aliases:
+    - minus
+    - remove
+    - deduct
+    - withold
+    - decrease
+    - diminish
+    - discount
+    - remove
+    - take
+    - delete
+  sizes:
+    - 16
+    - 32
+- name: subtract--alt
+  friendly_name: Subtract alt
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - minus
+    - remove
+    - deduct
+    - withold
+    - decrease
+    - diminish
+    - discount
+    - remove
+    - take
+    - delete
+- name: switcher
+  friendly_name: Switcher
+  usage: This is a description for usage
+  aliases:
+    - switcher
+  sizes:
+    - 16
+    - 20
+    - 24
+    - 32
+- name: trash-can
+  friendly_name: Trash can
+  usage: This is a description for usage
+  aliases:
+    - trash
+    - waste
+    - delete
+    - litter
+    - bin
+    - wastebin
+    - destroy
+    - remove
+  sizes:
+    - 16
+    - 32
+- name: undo
+  friendly_name: Undo
+  usage: This is a description for usage
+  aliases:
+    - go back
+    - revert
+    - back
+  sizes:
+    - 16
+    - 20
+    - 24
+    - 32
+- name: unlocked
+  friendly_name: Unlocked
+  usage: This is a description for usage
+  aliases:
+    - open
+    - lock
+    - opened
+  sizes:
+    - 16
+    - 32
+- name: up-to-top
+  friendly_name: Up to top
+  usage: This is a description for usage
+  aliases:
+    - top
+    - top of page
+    - page up
+    - up chevron
+    - up
+  sizes:
+    - 16
+    - 32
+- name: upload
+  friendly_name: Upload
+  usage: This is a description for usage
+  aliases:
+    - transfer
+    - connect
+    - exchange
+    - send
+    - sync
+    - transmit
+    - load
+  sizes:
+    - 16
+    - 32
+- name: user
+  friendly_name: User
+  usage: This is a description for usage
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+  sizes:
+    - 16
+    - 32
+- name: user--avatar
+  friendly_name: User avatar
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--activity
+  friendly_name: User activity
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--admin
+  friendly_name: User admin
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--avatar--filled--alt
+  friendly_name: User avatar filled alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--avatar--filled
+  friendly_name: User avatar filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--certification
+  friendly_name: User certification
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--data
+  friendly_name: User data
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--favorite--alt--filled
+  friendly_name: User favorite alt filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--favorite--alt
+  friendly_name: User favorite alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--favorite
+  friendly_name: User favorite
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--filled
+  friendly_name: User filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--follow
+  friendly_name: User follow
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--identification
+  friendly_name: User identification
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--online
+  friendly_name: User online
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--profile
+  friendly_name: User profile
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--role
+  friendly_name: User role
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--simulation
+  friendly_name: User simulation
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: user--x-ray
+  friendly_name: User x ray
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+- name: view
+  friendly_name: View
+  usage: This is a description for usage
+  aliases:
+    - eye
+    - eyeball
+    - examine
+    - look
+    - inspect
+    - visible
+  sizes:
+    - 16
+    - 32
+- name: view--off
+  friendly_name: View off
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - eye
+    - eyeball
+    - examine
+    - look
+    - inspect
+    - visible
+- name: view--filled
+  friendly_name: View filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - eye
+    - eyeball
+    - examine
+    - look
+    - inspect
+    - visible
+- name: view--mode-1
+  friendly_name: View mode 1
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - eye
+    - eyeball
+    - examine
+    - look
+    - inspect
+    - visible
+- name: view--mode-2
+  friendly_name: View mode 2
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - eye
+    - eyeball
+    - examine
+    - look
+    - inspect
+    - visible
+- name: view--off--filled
+  friendly_name: View off filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - eye
+    - eyeball
+    - examine
+    - look
+    - inspect
+    - visible
+- name: warning
+  friendly_name: Warning
+  usage: This is a description for usage
+  aliases:
+    - halt
+    - stop
+    - caution
+    - danger
+    - warn
+    - alert
+    - notification
+  sizes:
+    - 16
+    - 32
+- name: warning--alt--filled
+  friendly_name: Warning alt filled
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - halt
+    - stop
+    - caution
+    - danger
+    - warn
+    - alert
+    - notification
+- name: warning--alt
+  friendly_name: Warning alt
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - halt
+    - stop
+    - caution
+    - danger
+    - warn
+    - alert
+    - notification
+- name: warning--filled
+  friendly_name: Warning filled
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 20
+    - 24
+    - 32
+  aliases:
+    - halt
+    - stop
+    - caution
+    - danger
+    - warn
+    - alert
+    - notification
+- name: warning--alt-inverted--filled
+  friendly_name: Warning alt inverted filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - halt
+    - stop
+    - caution
+    - danger
+    - warn
+    - alert
+    - notification
+- name: warning--alt-inverted
+  friendly_name: Warning alt inverted
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - halt
+    - stop
+    - caution
+    - danger
+    - warn
+    - alert
+    - notification
+- name: zoom--in
+  friendly_name: Zoom in
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - expand
+    - inspect
+    - size
+    - enlarge
+    - detail
+- name: zoom--out
+  friendly_name: Zoom out
+  usage: This is a description for usage
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - expand
+    - inspect
+    - size
+    - enlarge
+    - detail
+- name: zoom--reset
+  friendly_name: Zoom reset
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - expand
+    - inspect
+    - size
+    - enlarge
+    - detail
+- name: time
+  friendly_name: Time
+  usage: This is a description for usage
+  aliases:
+    - clock
+    - hour
+    - minute
+    - watch
+  sizes:
+    - 20
+    - 32
+- name: 4K
+  friendly_name: 4 k
+  usage: This is a description for usage
+  aliases:
+    - four k
+    - resolution
+    - pixels
+    - HD
+    - high definition
+  sizes:
+    - 32
+- name: 4K--filled
+  friendly_name: 4 k filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - four k
+    - resolution
+    - pixels
+    - HD
+    - high definition
+- name: API--1
+  friendly_name: Api 1
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - Application Programming Interface
+    - tool
+    - application
+    - programming
+    - interface
+    - file
+    - file type
+- name: CAD
+  friendly_name: Cad
+  usage: This is a description for usage
+  aliases:
+    - computer aided design
+    - canada
+    - canadian dollar
+    - dollar
+    - money
+    - design
+    - print
+    - file
+    - file type
+  sizes:
+    - 32
+- name: CDA
+  friendly_name: Cda
+  usage: This is a description for usage
+  aliases:
+    - CDA
+  sizes:
+    - 32
+- name: CSV
+  friendly_name: Csv
+  usage: This is a description for usage
+  aliases:
+    - file
+    - file type
+    - comma
+    - separated
+    - variable
+    - spreadsheet
+    - data
+  sizes:
+    - 32
+- name: DOC
+  friendly_name: Doc
+  usage: This is a description for usage
+  aliases:
+    - DOC
+  sizes:
+    - 32
+- name: DVR
+  friendly_name: Dvr
+  usage: This is a description for usage
+  aliases:
+    - record
+    - digital
+    - video
+    - recorder
+    - cable
+    - TV
+  sizes:
+    - 32
+- name: GIF
+  friendly_name: Gif
+  usage: This is a description for usage
+  aliases:
+    - file
+    - file type
+    - move
+  sizes:
+    - 32
+- name: HD
+  friendly_name: Hd
+  usage: This is a description for usage
+  aliases:
+    - high
+    - def
+    - definition
+    - high quality
+    - 4K
+  sizes:
+    - 32
+- name: HD--filled
+  friendly_name: Hd filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - high
+    - def
+    - definition
+    - high quality
+    - 4K
+- name: HDR
+  friendly_name: Hdr
+  usage: This is a description for usage
+  aliases:
+    - high
+    - dynamic
+    - range
+    - color
+    - HD
+  sizes:
+    - 32
+- name: HTTP
+  friendly_name: Http
+  usage: This is a description for usage
+  aliases:
+    - internet
+    - web
+    - cert
+    - certificate
+    - website
+    - site
+    - URL
+  sizes:
+    - 32
+- name: ISO
+  friendly_name: Iso
+  usage: This is a description for usage
+  aliases:
+    - photo
+    - sensitivity
+    - light
+    - camera
+  sizes:
+    - 32
+- name: ISO--filled
+  friendly_name: Iso filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - photo
+    - sensitivity
+    - light
+    - camera
+- name: ISO--outline
+  friendly_name: Iso outline
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - photo
+    - sensitivity
+    - light
+    - camera
+- name: JPG
+  friendly_name: Jpg
+  usage: This is a description for usage
+  aliases:
+    - file
+    - type
+    - format
+    - pic
+    - picture
+    - photo
+    - image
+    - compress
+  sizes:
+    - 32
+- name: JSON
+  friendly_name: Json
+  usage: This is a description for usage
+  aliases:
+    - javascript
+    - object
+    - notation
+    - file
+    - type
+    - format
+    - data
+  sizes:
+    - 32
+- name: MOV
+  friendly_name: Mov
+  usage: This is a description for usage
+  aliases:
+    - movie
+    - video
+    - file
+    - type
+    - film
+    - format
+  sizes:
+    - 32
+- name: MP3
+  friendly_name: Mp3
+  usage: This is a description for usage
+  aliases:
+    - music
+    - audio
+    - song
+    - compress
+    - file
+    - type
+  sizes:
+    - 32
+- name: MP4
+  friendly_name: Mp4
+  usage: This is a description for usage
+  aliases:
+    - movie
+    - video
+    - file
+    - type
+    - film
+    - format
+  sizes:
+    - 32
+- name: MPEG
+  friendly_name: Mpeg
+  usage: This is a description for usage
+  aliases:
+    - MPEG
+  sizes:
+    - 32
+- name: MPG2
+  friendly_name: Mpg2
+  usage: This is a description for usage
+  aliases:
+    - MPG2
+  sizes:
+    - 32
+- name: PDF
+  friendly_name: Pdf
+  usage: This is a description for usage
+  aliases:
+    - document
+    - doc
+    - compress
+    - portable
+    - document
+    - format
+  sizes:
+    - 32
+- name: PNG
+  friendly_name: Png
+  usage: This is a description for usage
+  aliases:
+    - file
+    - type
+    - format
+    - pic
+    - picture
+    - photo
+    - image
+    - compress
+  sizes:
+    - 32
+- name: PPT
+  friendly_name: Ppt
+  usage: This is a description for usage
+  aliases:
+    - PPT
+  sizes:
+    - 32
+- name: H
+  friendly_name: H
+  usage: This is a description for usage
+  aliases:
+    - letter
+    - alphabet
+  sizes:
+    - 32
+- name: S
+  friendly_name: S
+  usage: This is a description for usage
+  aliases:
+    - standard
+    - letter
+    - alphabet
+    - alt
+  sizes:
+    - 32
+- name: S--alt
+  friendly_name: S alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - standard
+    - letter
+    - alphabet
+    - alt
+- name: T
+  friendly_name: T
+  usage: This is a description for usage
+  aliases:
+    - letter
+    - alphabet
+    - alt
+  sizes:
+    - 32
+- name: T--alt
+  friendly_name: T alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - alphabet
+    - alt
+- name: U1
+  friendly_name: U1
+  usage: This is a description for usage
+  aliases:
+    - Q
+  sizes:
+    - 32
+- name: U2
+  friendly_name: U2
+  usage: This is a description for usage
+  aliases:
+    - Q
+  sizes:
+    - 32
+- name: U3
+  friendly_name: U3
+  usage: This is a description for usage
+  aliases:
+    - Q
+  sizes:
+    - 32
+- name: X
+  friendly_name: X
+  usage: This is a description for usage
+  aliases:
+    - alphabet
+    - letter
+    - cross
+  sizes:
+    - 32
+- name: 'Y'
+  friendly_name: 'Y'
+  usage: This is a description for usage
+  aliases:
+    - alphabet
+    - letter
+  sizes:
+    - 32
+- name: Z
+  friendly_name: Z
+  usage: This is a description for usage
+  aliases:
+    - alphabet
+    - letter
+  sizes:
+    - 32
+- name: barrier
+  friendly_name: Barrier
+  usage: This is a description for usage
+  aliases:
+    - wall
+    - fence
+    - block
+    - stop
+    - divide
+  sizes:
+    - 32
+- name: bloch-sphere
+  friendly_name: Bloch sphere
+  usage: This is a description for usage
+  aliases:
+    - Q
+    - bloch
+    - sphere
+  sizes:
+    - 32
+- name: cU1
+  friendly_name: C u1
+  usage: This is a description for usage
+  aliases:
+    - Q
+    - c
+    - u
+    - one
+  sizes:
+    - 32
+- name: cU3
+  friendly_name: C u3
+  usage: This is a description for usage
+  aliases:
+    - q
+    - c
+    - u
+    - three
+  sizes:
+    - 32
+- name: cY
+  friendly_name: C y
+  usage: This is a description for usage
+  aliases:
+    - Q
+    - c
+    - 'y'
+  sizes:
+    - 32
+- name: cZ
+  friendly_name: C z
+  usage: This is a description for usage
+  aliases:
+    - Q
+    - c
+    - z
+  sizes:
+    - 32
+- name: ccX
+  friendly_name: Cc x
+  usage: This is a description for usage
+  aliases:
+    - Q
+    - cc
+    - c
+    - X
+  sizes:
+    - 32
+- name: circuit-composer
+  friendly_name: Circuit composer
+  usage: This is a description for usage
+  aliases:
+    - Q
+    - H
+    - circuit
+    - composer
+  sizes:
+    - 32
+- name: composer-edit
+  friendly_name: Composer edit
+  usage: This is a description for usage
+  aliases:
+    - Q
+    - circuit
+    - composer
+    - edit
+  sizes:
+    - 32
+    - 32
+- name: hinton-plot
+  friendly_name: Hinton plot
+  usage: This is a description for usage
+  aliases:
+    - Q
+    - hinton
+    - plot
+    - grid
+  sizes:
+    - 32
+- name: iD
+  friendly_name: I d
+  usage: This is a description for usage
+  aliases:
+    - identification
+    - identity
+  sizes:
+    - 32
+- name: matrix
+  friendly_name: Matrix
+  usage: This is a description for usage
+  aliases:
+    - cast
+    - grid
+    - model
+    - binary
+  sizes:
+    - 32
+- name: operation
+  friendly_name: Operation
+  usage: This is a description for usage
+  aliases:
+    - meter
+    - gauge
+    - indicator
+    - bracket
+  sizes:
+    - 32
+- name: operation--gauge
+  friendly_name: Operation gauge
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - meter
+    - gauge
+    - indicator
+    - bracket
+- name: operation--if
+  friendly_name: Operation if
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - meter
+    - gauge
+    - indicator
+    - bracket
+- name: RAW
+  friendly_name: Raw
+  usage: This is a description for usage
+  aliases:
+    - format
+    - unedited
+  sizes:
+    - 32
+- name: SDK
+  friendly_name: Sdk
+  usage: This is a description for usage
+  aliases:
+    - SDK
+  sizes:
+    - 32
+- name: SQL
+  friendly_name: Sql
+  usage: This is a description for usage
+  aliases:
+    - database
+    - query
+  sizes:
+    - 32
+- name: SVG
+  friendly_name: Svg
+  usage: This is a description for usage
+  aliases:
+    - format
+    - image
+    - vector
+  sizes:
+    - 32
+- name: TIF
+  friendly_name: Tif
+  usage: This is a description for usage
+  aliases:
+    - format
+    - image
+  sizes:
+    - 32
+- name: TSV
+  friendly_name: Tsv
+  usage: This is a description for usage
+  aliases:
+    - format
+    - data
+    - database
+    - spreadsheet
+  sizes:
+    - 32
+- name: TXT
+  friendly_name: Txt
+  usage: This is a description for usage
+  aliases:
+    - text
+    - format
+    - string
+  sizes:
+    - 32
+- name: USB
+  friendly_name: Usb
+  usage: This is a description for usage
+  aliases:
+    - connector
+    - protocol
+    - connection
+    - bus
+    - port
+  sizes:
+    - 32
+- name: VPN
+  friendly_name: Vpn
+  usage: This is a description for usage
+  aliases:
+    - protocol
+    - virtual
+    - network
+    - connection
+    - secure
+    - internet
+  sizes:
+    - 32
+- name: WMV
+  friendly_name: Wmv
+  usage: This is a description for usage
+  aliases:
+    - format
+    - music
+    - video
+    - codec
+  sizes:
+    - 32
+- name: XLS
+  friendly_name: Xls
+  usage: This is a description for usage
+  aliases:
+    - excel
+    - format
+    - spreadsheet
+  sizes:
+    - 32
+- name: XML
+  friendly_name: Xml
+  usage: This is a description for usage
+  aliases:
+    - format
+    - markup
+    - language
+    - HTML
+  sizes:
+    - 32
+- name: ZIP
+  friendly_name: Zip
+  usage: This is a description for usage
+  aliases:
+    - compress
+    - format
+  sizes:
+    - 32
+- name: accessibility
+  friendly_name: Accessibility
+  usage: This is a description for usage
+  aliases:
+    - wheelchair
+    - convenience
+    - accessible
+  sizes:
+    - 32
+- name: accessibility--alt
+  friendly_name: Accessibility alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - wheelchair
+    - convenience
+    - accessible
+- name: accessibility--color--filled
+  friendly_name: Accessibility color filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - wheelchair
+    - convenience
+    - accessible
+- name: accessibility--color
+  friendly_name: Accessibility color
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - wheelchair
+    - convenience
+    - accessible
+- name: account
+  friendly_name: Account
+  usage: This is a description for usage
+  aliases:
+    - account
+  sizes:
+    - 32
+- name: activity
+  friendly_name: Activity
+  usage: This is a description for usage
+  aliases:
+    - line chart
+    - vital
+    - action
+    - heartbeat
+  sizes:
+    - 32
+- name: add-comment
+  friendly_name: Add comment
+  usage: This is a description for usage
+  aliases:
+    - add
+    - comment
+    - chat
+    - bubble
+  sizes:
+    - 32
+- name: alarm
+  friendly_name: Alarm
+  usage: This is a description for usage
+  aliases:
+    - clock
+    - timer
+    - time
+    - alert
+  sizes:
+    - 32
+- name: alarm--add
+  friendly_name: Alarm add
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - clock
+    - timer
+    - time
+    - alert
+- name: alarm--subtract
+  friendly_name: Alarm subtract
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - clock
+    - timer
+    - time
+    - alert
+- name: align--horizontal-center
+  friendly_name: Align horizontal center
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - align
+- name: align--horizontal-left
+  friendly_name: Align horizontal left
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - align
+- name: align--horizontal-right
+  friendly_name: Align horizontal right
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - align
+- name: align--vertical-bottom
+  friendly_name: Align vertical bottom
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - align
+- name: align--vertical-center
+  friendly_name: Align vertical center
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - align
+- name: align--vertical-top
+  friendly_name: Align vertical top
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - align
+- name: analytics
+  friendly_name: Analytics
+  usage: This is a description for usage
+  aliases:
+    - line chart
+    - trend
+    - graph
+    - analyze
+    - data
+  sizes:
+    - 32
+- name: aperture
+  friendly_name: Aperture
+  usage: This is a description for usage
+  aliases:
+    - eye
+    - camera
+    - pinhole
+    - pinwheel
+  sizes:
+    - 32
+- name: api
+  friendly_name: Api
+  usage: This is a description for usage
+  aliases:
+    - program
+    - tool
+    - application
+    - format
+    - interface
+    - protocol
+    - connect
+    - group
+    - network
+  sizes:
+    - 32
+- name: app
+  friendly_name: App
+  usage: This is a description for usage
+  aliases:
+    - app
+  sizes:
+    - 32
+- name: apple
+  friendly_name: Apple
+  usage: This is a description for usage
+  aliases:
+    - apple
+  sizes:
+    - 32
+- name: application
+  friendly_name: Application
+  usage: This is a description for usage
+  aliases:
+    - box
+    - app
+    - interface
+  sizes:
+    - 32
+- name: archive
+  friendly_name: Archive
+  usage: This is a description for usage
+  aliases:
+    - drawer
+    - server
+    - stack
+    - tower
+    - file cabinet
+  sizes:
+    - 32
+- name: arrival
+  friendly_name: Arrival
+  usage: This is a description for usage
+  aliases:
+    - plane
+    - landing
+    - descend
+  sizes:
+    - 32
+- name: arrow-shift-down
+  friendly_name: Arrow shift down
+  usage: This is a description for usage
+  aliases:
+    - arrow-shift-down
+  sizes:
+    - 32
+- name: asset
+  friendly_name: Asset
+  usage: This is a description for usage
+  aliases:
+    - runtime
+    - wheel
+    - tape
+    - roll
+  sizes:
+    - 32
+- name: at
+  friendly_name: At
+  usage: This is a description for usage
+  aliases:
+    - at
+    - \@
+  sizes:
+    - 32
+- name: audio-console
+  friendly_name: Audio console
+  usage: This is a description for usage
+  aliases:
+    - audio-console
+  sizes:
+    - 32
+- name: augmented-reality
+  friendly_name: Augmented reality
+  usage: This is a description for usage
+  aliases:
+    - augmented-reality
+  sizes:
+    - 32
+- name: badge
+  friendly_name: Badge
+  usage: This is a description for usage
+  aliases:
+    - badge
+  sizes:
+    - 32
+- name: bar
+  friendly_name: Bar
+  usage: This is a description for usage
+  aliases:
+    - drink
+    - alcohol
+    - cocktail
+    - wine
+  sizes:
+    - 32
+- name: basketball
+  friendly_name: Basketball
+  usage: This is a description for usage
+  aliases:
+    - basketball
+  sizes:
+    - 32
+- name: battery--charging
+  friendly_name: Battery charging
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - charging
+    - power
+- name: battery--empty
+  friendly_name: Battery empty
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - charging
+    - power
+- name: battery--full
+  friendly_name: Battery full
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - charging
+    - power
+- name: battery--half
+  friendly_name: Battery half
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - charging
+    - power
+- name: battery--low
+  friendly_name: Battery low
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - charging
+    - power
+- name: battery--quarter
+  friendly_name: Battery quarter
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - charging
+    - power
+- name: bee
+  friendly_name: Bee
+  usage: This is a description for usage
+  aliases:
+    - ibm
+    - fly
+    - honey
+    - bumblebee
+    - drone
+    - insect
+  sizes:
+    - 32
+- name: bicycle
+  friendly_name: Bicycle
+  usage: This is a description for usage
+  aliases:
+    - bike
+    - cycle
+    - wheels
+    - transport
+    - transportation
+  sizes:
+    - 32
+- name: binoculars
+  friendly_name: Binoculars
+  usage: This is a description for usage
+  aliases:
+    - search
+    - vision
+    - field
+    - glasses
+    - zoom
+  sizes:
+    - 32
+- name: blockchain
+  friendly_name: Blockchain
+  usage: This is a description for usage
+  aliases:
+    - blockchain
+  sizes:
+    - 32
+- name: blog
+  friendly_name: Blog
+  usage: This is a description for usage
+  aliases:
+    - writing
+    - journal
+    - site
+    - layout
+    - page
+  sizes:
+    - 32
+- name: bluetooth
+  friendly_name: Bluetooth
+  usage: This is a description for usage
+  aliases:
+    - wireless
+    - connect
+    - blue
+    - tooth
+  sizes:
+    - 32
+- name: bluetooth--off
+  friendly_name: Bluetooth off
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - wireless
+    - connect
+    - blue
+    - tooth
+- name: bookmark
+  friendly_name: Bookmark
+  usage: This is a description for usage
+  aliases:
+    - flag
+    - marker
+  sizes:
+    - 32
+- name: box
+  friendly_name: Box
+  usage: This is a description for usage
+  aliases:
+    - file
+    - archive
+    - office
+  sizes:
+    - 32
+- name: branch
+  friendly_name: Branch
+  usage: This is a description for usage
+  aliases:
+    - branch
+  sizes:
+    - 32
+- name: brightness-contrast
+  friendly_name: Brightness contrast
+  usage: This is a description for usage
+  aliases:
+    - sun
+    - bright
+    - light
+    - dark
+    - contrast
+    - opposite
+  sizes:
+    - 32
+- name: building
+  friendly_name: Building
+  usage: This is a description for usage
+  aliases:
+    - factory
+    - architecture
+    - office
+  sizes:
+    - 32
+- name: building--insights-1
+  friendly_name: Building insights 1
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - factory
+    - architecture
+    - office
+- name: building--insights-2
+  friendly_name: Building insights 2
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - factory
+    - architecture
+    - office
+- name: building--insights-3
+  friendly_name: Building insights 3
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - factory
+    - architecture
+    - office
+- name: bullhorn
+  friendly_name: Bullhorn
+  usage: This is a description for usage
+  aliases:
+    - announcement
+    - announce
+    - broadcast
+    - news
+    - release
+    - notify
+    - decare
+    - blast
+    - speaker
+  sizes:
+    - 32
+- name: bus
+  friendly_name: Bus
+  usage: This is a description for usage
+  aliases:
+    - transport
+    - transportation
+    - travel
+    - public
+  sizes:
+    - 32
+- name: cafe
+  friendly_name: Cafe
+  usage: This is a description for usage
+  aliases:
+    - coffee
+    - caffine
+    - drink
+    - espresso
+    - brew
+    - mocha
+  sizes:
+    - 32
+- name: calculator
+  friendly_name: Calculator
+  usage: This is a description for usage
+  aliases:
+    - calculate
+    - PDA
+    - computer
+  sizes:
+    - 32
+- name: calculator--check
+  friendly_name: Calculator check
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - calculate
+    - PDA
+    - computer
+- name: calibrate
+  friendly_name: Calibrate
+  usage: This is a description for usage
+  aliases:
+    - caliper
+    - measure
+    - measurement
+    - adjust
+    - gauge
+  sizes:
+    - 32
+- name: camera
+  friendly_name: Camera
+  usage: This is a description for usage
+  aliases:
+    - photo
+    - photography
+    - image
+    - record
+    - picture
+    - snapshot
+  sizes:
+    - 32
+- name: camera--action
+  friendly_name: Camera action
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - photo
+    - photography
+    - image
+    - record
+    - picture
+    - snapshot
+- name: car
+  friendly_name: Car
+  usage: This is a description for usage
+  aliases:
+    - transport
+    - private
+    - automobile
+    - jeep
+    - ride
+    - pickup
+  sizes:
+    - 32
+- name: car--front
+  friendly_name: Car front
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - transport
+    - private
+    - automobile
+    - jeep
+    - ride
+    - pickup
+- name: carbon
+  friendly_name: Carbon
+  usage: This is a description for usage
+  aliases:
+    - carbon
+  sizes:
+    - 32
+- name: carousel--horizontal
+  friendly_name: Carousel horizontal
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - roundabout
+    - ride
+    - image
+    - gallery
+    - sequence
+- name: carousel--vertical
+  friendly_name: Carousel vertical
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - roundabout
+    - ride
+    - image
+    - gallery
+    - sequence
+- name: catalog
+  friendly_name: Catalog
+  usage: This is a description for usage
+  aliases:
+    - notebook
+    - book
+    - list
+    - schedule
+  sizes:
+    - 32
+- name: categories
+  friendly_name: Categories
+  usage: This is a description for usage
+  aliases:
+    - group
+    - section
+    - class
+    - department
+  sizes:
+    - 32
+- name: category
+  friendly_name: Category
+  usage: This is a description for usage
+  aliases:
+    - category
+  sizes:
+    - 32
+- name: category--add
+  friendly_name: Category add
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - category
+- name: category--and
+  friendly_name: Category and
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - category
+- name: category--new-each
+  friendly_name: Category new each
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - category
+- name: category--new
+  friendly_name: Category new
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - category
+- name: certificate
+  friendly_name: Certificate
+  usage: This is a description for usage
+  aliases:
+    - certificate
+  sizes:
+    - 32
+- name: certificate--check
+  friendly_name: Certificate check
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - certificate
+- name: change-catalog
+  friendly_name: Change catalog
+  usage: This is a description for usage
+  aliases:
+    - change-catalog
+  sizes:
+    - 32
+- name: character-patterns
+  friendly_name: Character patterns
+  usage: This is a description for usage
+  aliases:
+    - letters
+    - swap
+  sizes:
+    - 32
+- name: charging-station
+  friendly_name: Charging station
+  usage: This is a description for usage
+  aliases:
+    - charging-station
+  sizes:
+    - 32
+- name: charging-station--filled
+  friendly_name: Charging station filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - charging-station
+- name: chart--bar
+  friendly_name: Chart bar
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - graph
+    - bar
+    - data
+- name: chart--bubble
+  friendly_name: Chart bubble
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - graph
+    - bar
+    - data
+- name: chart--line--data
+  friendly_name: Chart line data
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - graph
+    - bar
+    - data
+- name: chart--line
+  friendly_name: Chart line
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - graph
+    - bar
+    - data
+- name: chart--network
+  friendly_name: Chart network
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - graph
+    - bar
+    - data
+- name: chart--pie
+  friendly_name: Chart pie
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - graph
+    - bar
+    - data
+- name: chart--scatter
+  friendly_name: Chart scatter
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - graph
+    - bar
+    - data
+- name: chart--venn-diagram
+  friendly_name: Chart venn diagram
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - graph
+    - bar
+    - data
+- name: chat-bot
+  friendly_name: Chat bot
+  usage: This is a description for usage
+  aliases:
+    - chat-bot
+  sizes:
+    - 32
+- name: checkbox
+  friendly_name: Checkbox
+  usage: This is a description for usage
+  aliases:
+    - check
+    - box
+  sizes:
+    - 32
+- name: checkbox--checked--filled
+  friendly_name: Checkbox checked filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - check
+    - box
+- name: checkbox--checked
+  friendly_name: Checkbox checked
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - check
+    - box
+- name: checkbox--indeterminate--filled
+  friendly_name: Checkbox indeterminate filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - check
+    - box
+- name: checkbox--indeterminate
+  friendly_name: Checkbox indeterminate
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - check
+    - box
+- name: checkbox--undeterminate--filled
+  friendly_name: Checkbox undeterminate filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - check
+    - box
+- name: checkbox--undeterminate
+  friendly_name: Checkbox undeterminate
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - check
+    - box
+- name: chemistry
+  friendly_name: Chemistry
+  usage: This is a description for usage
+  aliases:
+    - science
+    - flask
+    - glass
+  sizes:
+    - 32
+- name: chip
+  friendly_name: Chip
+  usage: This is a description for usage
+  aliases:
+    - microchip
+    - computer chip
+  sizes:
+    - 32
+- name: choices
+  friendly_name: Choices
+  usage: This is a description for usage
+  aliases:
+    - choices
+  sizes:
+    - 32
+- name: circle-dash
+  friendly_name: Circle dash
+  usage: This is a description for usage
+  aliases:
+    - circle
+    - dash
+    - dashed line
+  sizes:
+    - 32
+- name: classification
+  friendly_name: Classification
+  usage: This is a description for usage
+  aliases:
+    - classification
+  sizes:
+    - 32
+- name: classifier--language
+  friendly_name: Classifier language
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - measure word
+    - counter word
+- name: closed-caption
+  friendly_name: Closed caption
+  usage: This is a description for usage
+  aliases:
+    - caption
+    - closed
+    - cc
+  sizes:
+    - 32
+- name: closed-caption--alt
+  friendly_name: Closed caption alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - caption
+    - closed
+    - cc
+- name: closed-caption--filled
+  friendly_name: Closed caption filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - caption
+    - closed
+    - cc
+- name: cloud
+  friendly_name: Cloud
+  usage: This is a description for usage
+  aliases:
+    - donwload
+    - compute
+    - data
+    - hybrid
+  sizes:
+    - 32
+- name: cloud--download
+  friendly_name: Cloud download
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - donwload
+    - compute
+    - data
+    - hybrid
+- name: cloud--lightning
+  friendly_name: Cloud lightning
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - donwload
+    - compute
+    - data
+    - hybrid
+- name: cloud--rain
+  friendly_name: Cloud rain
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - donwload
+    - compute
+    - data
+    - hybrid
+- name: cloud--snow
+  friendly_name: Cloud snow
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - donwload
+    - compute
+    - data
+    - hybrid
+- name: cloud--upload
+  friendly_name: Cloud upload
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - donwload
+    - compute
+    - data
+    - hybrid
+- name: cloud-app
+  friendly_name: Cloud app
+  usage: This is a description for usage
+  aliases:
+    - cloud-app
+  sizes:
+    - 32
+- name: cloud-foundry--1
+  friendly_name: Cloud foundry 1
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - platform
+    - multi cloud
+    - cloud
+    - foundry
+- name: cloud-foundry--2
+  friendly_name: Cloud foundry 2
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - platform
+    - multi cloud
+    - cloud
+    - foundry
+- name: cloudy
+  friendly_name: Cloudy
+  usage: This is a description for usage
+  aliases:
+    - cloudy
+  sizes:
+    - 32
+- name: cognitive
+  friendly_name: Cognitive
+  usage: This is a description for usage
+  aliases:
+    - brain
+    - idea
+    - think
+    - mind
+  sizes:
+    - 32
+- name: collaborate
+  friendly_name: Collaborate
+  usage: This is a description for usage
+  aliases:
+    - people
+    - cooperate
+    - relation
+    - coworker
+    - rotate
+    - shift
+  sizes:
+    - 32
+- name: collapse-all
+  friendly_name: Collapse all
+  usage: This is a description for usage
+  aliases:
+    - collapse-all
+  sizes:
+    - 32
+- name: collapse-categories
+  friendly_name: Collapse categories
+  usage: This is a description for usage
+  aliases:
+    - collapse-categories
+  sizes:
+    - 32
+- name: color-palette
+  friendly_name: Color palette
+  usage: This is a description for usage
+  aliases:
+    - paint palette
+    - paint
+    - palette
+  sizes:
+    - 32
+- name: color-switch
+  friendly_name: Color switch
+  usage: This is a description for usage
+  aliases:
+    - color-switch
+  sizes:
+    - 32
+- name: column
+  friendly_name: Column
+  usage: This is a description for usage
+  aliases:
+    - grid
+    - lines
+    - structure
+  sizes:
+    - 32
+- name: compare
+  friendly_name: Compare
+  usage: This is a description for usage
+  aliases:
+    - arrows
+    - exchange
+    - merge
+    - match
+    - files
+    - documents
+  sizes:
+    - 32
+- name: compass
+  friendly_name: Compass
+  usage: This is a description for usage
+  aliases:
+    - direction
+    - navigation
+    - explore
+    - navigate
+    - destination
+    - guide
+  sizes:
+    - 32
+- name: concept
+  friendly_name: Concept
+  usage: This is a description for usage
+  aliases:
+    - concept
+  sizes:
+    - 32
+- name: connect
+  friendly_name: Connect
+  usage: This is a description for usage
+  aliases:
+    - network
+    - link
+    - join
+    - attach
+    - associate
+  sizes:
+    - 32
+- name: connection-signal
+  friendly_name: Connection signal
+  usage: This is a description for usage
+  aliases:
+    - signal
+    - tower
+    - service
+    - station
+    - radio
+    - connection
+    - wireless
+    - network
+  sizes:
+    - 32
+- name: container-software
+  friendly_name: Container software
+  usage: This is a description for usage
+  aliases:
+    - container-software
+  sizes:
+    - 32
+- name: contrast
+  friendly_name: Contrast
+  usage: This is a description for usage
+  aliases:
+    - brightness
+    - darkness
+    - sun
+    - light
+    - dark
+    - comparison
+  sizes:
+    - 32
+- name: corn
+  friendly_name: Corn
+  usage: This is a description for usage
+  aliases:
+    - corn
+  sizes:
+    - 32
+- name: corner
+  friendly_name: Corner
+  usage: This is a description for usage
+  aliases:
+    - frame
+    - flourish
+    - squares
+    - connection
+    - edge
+    - intersection
+    - decoration
+  sizes:
+    - 32
+- name: course
+  friendly_name: Course
+  usage: This is a description for usage
+  aliases:
+    - course
+  sizes:
+    - 32
+- name: credentials
+  friendly_name: Credentials
+  usage: This is a description for usage
+  aliases:
+    - credentials
+  sizes:
+    - 32
+- name: crop
+  friendly_name: Crop
+  usage: This is a description for usage
+  aliases:
+    - cut
+    - trim
+    - picture
+    - tool
+    - cropping
+    - editing
+    - photo
+  sizes:
+    - 32
+- name: cursor--1
+  friendly_name: Cursor 1
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - mouse
+    - arrow
+    - direction
+    - mouse
+    - click
+    - pointer
+- name: cursor--2
+  friendly_name: Cursor 2
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - mouse
+    - arrow
+    - direction
+    - mouse
+    - click
+    - pointer
+- name: cut
+  friendly_name: Cut
+  usage: This is a description for usage
+  aliases:
+    - scissors
+    - cutting
+    - snip
+    - trim
+    - shear
+    - clippers
+  sizes:
+    - 32
+- name: cyclist
+  friendly_name: Cyclist
+  usage: This is a description for usage
+  aliases:
+    - cyclist
+  sizes:
+    - 32
+- name: dashboard
+  friendly_name: Dashboard
+  usage: This is a description for usage
+  aliases:
+    - gauge
+    - ui
+    - control panel
+    - analytics
+    - metrics
+    - interface
+    - overview
+    - wireframe
+  sizes:
+    - 32
+- name: data--1
+  friendly_name: Data 1
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - connection
+    - dot
+    - numbers
+    - metrics
+    - characters
+- name: data--2
+  friendly_name: Data 2
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - connection
+    - dot
+    - numbers
+    - metrics
+    - characters
+- name: data--base
+  friendly_name: Data base
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - connection
+    - dot
+    - numbers
+    - metrics
+    - characters
+- name: data--check
+  friendly_name: Data check
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - connection
+    - dot
+    - numbers
+    - metrics
+    - characters
+- name: data--connected
+  friendly_name: Data connected
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - connection
+    - dot
+    - numbers
+    - metrics
+    - characters
+- name: data--error
+  friendly_name: Data error
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - connection
+    - dot
+    - numbers
+    - metrics
+    - characters
+- name: data--reference
+  friendly_name: Data reference
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - connection
+    - dot
+    - numbers
+    - metrics
+    - characters
+- name: data--set
+  friendly_name: Data set
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - connection
+    - dot
+    - numbers
+    - metrics
+    - characters
+- name: data--structured
+  friendly_name: Data structured
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - connection
+    - dot
+    - numbers
+    - metrics
+    - characters
+- name: data--unstructured
+  friendly_name: Data unstructured
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - connection
+    - dot
+    - numbers
+    - metrics
+    - characters
+- name: data-class
+  friendly_name: Data class
+  usage: This is a description for usage
+  aliases:
+    - data-class
+  sizes:
+    - 32
+- name: data-share
+  friendly_name: Data share
+  usage: This is a description for usage
+  aliases:
+    - data
+    - share
+    - link
+    - compare
+    - transfer
+    - exchange
+  sizes:
+    - 32
+- name: data-vis--1
+  friendly_name: Data vis 1
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - vis
+    - graph
+    - chart
+    - infographic
+    - analytics
+    - metrics
+    - stats
+    - web
+- name: data-vis--2
+  friendly_name: Data vis 2
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - vis
+    - graph
+    - chart
+    - infographic
+    - analytics
+    - metrics
+    - stats
+    - web
+- name: data-vis--3
+  friendly_name: Data vis 3
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - vis
+    - graph
+    - chart
+    - infographic
+    - analytics
+    - metrics
+    - stats
+    - web
+- name: data-vis--4
+  friendly_name: Data vis 4
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - vis
+    - graph
+    - chart
+    - infographic
+    - analytics
+    - metrics
+    - stats
+    - web
+- name: datastore
+  friendly_name: Datastore
+  usage: This is a description for usage
+  aliases:
+    - datastore
+  sizes:
+    - 32
+- name: debug
+  friendly_name: Debug
+  usage: This is a description for usage
+  aliases:
+    - bug
+    - beetle
+    - insect
+    - code bug
+  sizes:
+    - 32
+- name: delivery-truck
+  friendly_name: Delivery truck
+  usage: This is a description for usage
+  aliases:
+    - truck
+    - car
+    - delivery
+    - transportation
+    - shopping
+    - van
+    - shipping
+    - ecommerce
+  sizes:
+    - 32
+- name: departure
+  friendly_name: Departure
+  usage: This is a description for usage
+  aliases:
+    - plane
+    - airplane
+    - vacation
+    - travel
+    - journey
+    - leave
+  sizes:
+    - 32
+- name: deploy-rules
+  friendly_name: Deploy rules
+  usage: This is a description for usage
+  aliases:
+    - rules
+    - deploy
+    - document
+    - instruction
+    - deploy
+  sizes:
+    - 32
+- name: deploy
+  friendly_name: Deploy
+  usage: This is a description for usage
+  aliases:
+    - deploy
+  sizes:
+    - 32
+- name: development
+  friendly_name: Development
+  usage: This is a description for usage
+  aliases:
+    - build
+    - pixels
+    - squares
+    - structure
+    - code
+    - html
+    - code
+    - grid
+  sizes:
+    - 32
+- name: devices
+  friendly_name: Devices
+  usage: This is a description for usage
+  aliases:
+    - monitor
+    - screen
+    - devices
+    - compatibility
+  sizes:
+    - 32
+- name: diagram
+  friendly_name: Diagram
+  usage: This is a description for usage
+  aliases:
+    - pie chart
+    - pie
+    - chart
+    - infographic
+    - data vis
+  sizes:
+    - 32
+- name: distribute--horizontal-center
+  friendly_name: Distribute horizontal center
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - distribute
+- name: distribute--horizontal-left
+  friendly_name: Distribute horizontal left
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - distribute
+- name: distribute--horizontal-right
+  friendly_name: Distribute horizontal right
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - distribute
+- name: distribute--vertical-bottom
+  friendly_name: Distribute vertical bottom
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - distribute
+- name: distribute--vertical-center
+  friendly_name: Distribute vertical center
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - distribute
+- name: distribute--vertical-top
+  friendly_name: Distribute vertical top
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - distribute
+- name: document-sentiment
+  friendly_name: Document sentiment
+  usage: This is a description for usage
+  aliases:
+    - emotion
+    - meaning
+    - understanding
+  sizes:
+    - 32
+- name: dot-mark
+  friendly_name: Dot mark
+  usage: This is a description for usage
+  aliases:
+    - dot-mark
+  sizes:
+    - 32
+- name: drag--horizontal
+  friendly_name: Drag horizontal
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - expand
+    - drop
+    - move
+    - expand
+    - drop
+    - move
+- name: drag--vertical
+  friendly_name: Drag vertical
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - expand
+    - drop
+    - move
+    - expand
+    - drop
+    - move
+- name: draw
+  friendly_name: Draw
+  usage: This is a description for usage
+  aliases:
+    - squiggle
+    - drawing
+    - graphic
+    - line
+    - doodle
+  sizes:
+    - 32
+- name: drop-photo
+  friendly_name: Drop photo
+  usage: This is a description for usage
+  aliases:
+    - drop-photo
+  sizes:
+    - 32
+- name: drop-photo--filled
+  friendly_name: Drop photo filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - drop-photo
+- name: earth
+  friendly_name: Earth
+  usage: This is a description for usage
+  aliases:
+    - earth
+  sizes:
+    - 32
+- name: earth--americas--filled
+  friendly_name: Earth americas filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - earth
+- name: earth--americas
+  friendly_name: Earth americas
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - earth
+- name: earth--europe-africa--filled
+  friendly_name: Earth europe africa filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - earth
+- name: earth--europe-africa
+  friendly_name: Earth europe africa
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - earth
+- name: earth--filled
+  friendly_name: Earth filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - earth
+- name: earth--southeast-asia--filled
+  friendly_name: Earth southeast asia filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - earth
+- name: earth--southeast-asia
+  friendly_name: Earth southeast asia
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - earth
+- name: edt-loop
+  friendly_name: Edt loop
+  usage: This is a description for usage
+  aliases:
+    - version
+    - iteration
+    - repeat
+    - loop
+    - editing
+    - recycle
+  sizes:
+    - 32
+- name: education
+  friendly_name: Education
+  usage: This is a description for usage
+  aliases:
+    - graduation
+    - scholarship
+    - student
+    - university
+    - study
+    - school
+    - college
+  sizes:
+    - 32
+- name: enterprise
+  friendly_name: Enterprise
+  usage: This is a description for usage
+  aliases:
+    - enterprise
+  sizes:
+    - 32
+- name: erase
+  friendly_name: Erase
+  usage: This is a description for usage
+  aliases:
+    - eraser
+    - remove
+    - clear
+    - rubber
+    - change
+    - edit
+    - rubber
+    - format
+  sizes:
+    - 32
+- name: erase--3D
+  friendly_name: Erase 3 d
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - eraser
+    - remove
+    - clear
+    - rubber
+    - change
+    - edit
+    - rubber
+    - format
+- name: event
+  friendly_name: Event
+  usage: This is a description for usage
+  aliases:
+    - calendar
+    - star
+    - date
+    - favorite
+    - schedule
+  sizes:
+    - 32
+- name: event--schedule
+  friendly_name: Event schedule
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - calendar
+    - star
+    - date
+    - favorite
+    - schedule
+- name: events
+  friendly_name: Events
+  usage: This is a description for usage
+  aliases:
+    - people
+    - team
+    - group
+    - organization
+    - network
+  sizes:
+    - 32
+- name: events--alt
+  friendly_name: Events alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - people
+    - team
+    - group
+    - organization
+    - network
+- name: exam-mode
+  friendly_name: Exam mode
+  usage: This is a description for usage
+  aliases:
+    - dev test
+    - testing
+    - test
+    - exam
+  sizes:
+    - 32
+- name: exit
+  friendly_name: Exit
+  usage: This is a description for usage
+  aliases:
+    - leave
+    - quit
+    - escape
+  sizes:
+    - 32
+- name: expand-all
+  friendly_name: Expand all
+  usage: This is a description for usage
+  aliases:
+    - expand-all
+  sizes:
+    - 32
+- name: expand-categories
+  friendly_name: Expand categories
+  usage: This is a description for usage
+  aliases:
+    - expand-categories
+  sizes:
+    - 32
+- name: eyedropper
+  friendly_name: Eyedropper
+  usage: This is a description for usage
+  aliases:
+    - dropper
+    - pipette
+    - tester
+    - drop
+  sizes:
+    - 32
+- name: face--activated--add
+  friendly_name: Face activated add
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: face--activated--filled
+  friendly_name: Face activated filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: face--activated
+  friendly_name: Face activated
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: face--add
+  friendly_name: Face add
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: face--cool
+  friendly_name: Face cool
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: face--dissatisfied--filled
+  friendly_name: Face dissatisfied filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: face--dissatisfied
+  friendly_name: Face dissatisfied
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: face--dizzy--filled
+  friendly_name: Face dizzy filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: face--dizzy
+  friendly_name: Face dizzy
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: face--neutral--filled
+  friendly_name: Face neutral filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: face--neutral
+  friendly_name: Face neutral
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: face--pending--filled
+  friendly_name: Face pending filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: face--pending
+  friendly_name: Face pending
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: face--satisfied--filled
+  friendly_name: Face satisfied filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: face--satisfied
+  friendly_name: Face satisfied
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: face--wink--filled
+  friendly_name: Face wink filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: face--wink
+  friendly_name: Face wink
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - smiley
+    - smile
+    - smiley face
+    - emoji
+    - head
+    - emotion
+- name: filter
+  friendly_name: Filter
+  usage: This is a description for usage
+  aliases:
+    - refine
+    - funnel
+  sizes:
+    - 32
+- name: filter--edit
+  friendly_name: Filter edit
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - refine
+    - funnel
+- name: finance
+  friendly_name: Finance
+  usage: This is a description for usage
+  aliases:
+    - bank
+    - columns
+    - money
+    - business
+    - corporation
+    - business
+  sizes:
+    - 32
+- name: fingerprint-recognition
+  friendly_name: Fingerprint recognition
+  usage: This is a description for usage
+  aliases:
+    - identification
+    - fingerprint
+    - finger
+    - dna
+    - security
+    - touch
+    - identity
+    - mark
+  sizes:
+    - 32
+- name: fish
+  friendly_name: Fish
+  usage: This is a description for usage
+  aliases:
+    - fish
+  sizes:
+    - 32
+- name: fish--multiple
+  friendly_name: Fish multiple
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - fish
+- name: fit-to-screen
+  friendly_name: Fit to screen
+  usage: This is a description for usage
+  aliases:
+    - fit-to-screen
+  sizes:
+    - 32
+- name: flag
+  friendly_name: Flag
+  usage: This is a description for usage
+  aliases:
+    - country
+    - location
+    - nation
+    - banner
+    - notification
+    - marker
+  sizes:
+    - 32
+- name: flagging-taxi
+  friendly_name: Flagging taxi
+  usage: This is a description for usage
+  aliases:
+    - flagging-taxi
+  sizes:
+    - 32
+- name: flash
+  friendly_name: Flash
+  usage: This is a description for usage
+  aliases:
+    - battery
+    - lightning
+    - energy
+    - charge
+    - power
+    - camera
+    - electricity
+    - storm
+  sizes:
+    - 32
+- name: flash--filled
+  friendly_name: Flash filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - battery
+    - lightning
+    - energy
+    - charge
+    - power
+    - camera
+    - electricity
+    - storm
+- name: flash--off--filled
+  friendly_name: Flash off filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - battery
+    - lightning
+    - energy
+    - charge
+    - power
+    - camera
+    - electricity
+    - storm
+- name: flash--off
+  friendly_name: Flash off
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - battery
+    - lightning
+    - energy
+    - charge
+    - power
+    - camera
+    - electricity
+    - storm
+- name: flow
+  friendly_name: Flow
+  usage: This is a description for usage
+  aliases:
+    - flow chart
+    - chart
+    - graph
+    - diagram
+    - outline
+  sizes:
+    - 32
+- name: flow--data
+  friendly_name: Flow data
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - flow chart
+    - chart
+    - graph
+    - diagram
+    - outline
+- name: flow--stream
+  friendly_name: Flow stream
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - flow chart
+    - chart
+    - graph
+    - diagram
+    - outline
+- name: fog
+  friendly_name: Fog
+  usage: This is a description for usage
+  aliases:
+    - fog
+  sizes:
+    - 32
+- name: folders
+  friendly_name: Folders
+  usage: This is a description for usage
+  aliases:
+    - files
+    - collection
+  sizes:
+    - 32
+- name: fork
+  friendly_name: Fork
+  usage: This is a description for usage
+  aliases:
+    - fork
+  sizes:
+    - 32
+- name: forward--10
+  friendly_name: Forward 10
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - ahead
+    - future
+    - fast forward
+    - skip
+    - next
+    - fast
+- name: forward--30
+  friendly_name: Forward 30
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - ahead
+    - future
+    - fast forward
+    - skip
+    - next
+    - fast
+- name: forward--5
+  friendly_name: Forward 5
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - ahead
+    - future
+    - fast forward
+    - skip
+    - next
+    - fast
+- name: fruit-bowl
+  friendly_name: Fruit bowl
+  usage: This is a description for usage
+  aliases:
+    - fruit-bowl
+  sizes:
+    - 32
+- name: function
+  friendly_name: Function
+  usage: This is a description for usage
+  aliases:
+    - action
+    - behavior
+    - duty
+    - purpose
+    - role
+    - responsibility
+    - objective
+  sizes:
+    - 32
+- name: game--console
+  friendly_name: Game console
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - play
+    - match
+    - activity
+    - ballgame
+    - energy
+    - spirit
+- name: game--wireless
+  friendly_name: Game wireless
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - play
+    - match
+    - activity
+    - ballgame
+    - energy
+    - spirit
+- name: gamification
+  friendly_name: Gamification
+  usage: This is a description for usage
+  aliases:
+    - gamification
+  sizes:
+    - 32
+- name: gift
+  friendly_name: Gift
+  usage: This is a description for usage
+  aliases:
+    - gift
+  sizes:
+    - 32
+- name: globe
+  friendly_name: Globe
+  usage: This is a description for usage
+  aliases:
+    - planet
+    - earth
+    - world
+    - map
+    - orb
+  sizes:
+    - 32
+- name: group
+  friendly_name: Group
+  usage: This is a description for usage
+  aliases:
+    - category
+    - band
+    - bucket
+    - club
+    - association
+    - bunch
+    - organization
+    - cluster
+  sizes:
+    - 32
+- name: hail
+  friendly_name: Hail
+  usage: This is a description for usage
+  aliases:
+    - hail
+  sizes:
+    - 32
+- name: haze
+  friendly_name: Haze
+  usage: This is a description for usage
+  aliases:
+    - haze
+  sizes:
+    - 32
+- name: haze--night
+  friendly_name: Haze night
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - haze
+- name: headphones
+  friendly_name: Headphones
+  usage: This is a description for usage
+  aliases:
+    - headset
+    - listening device
+    - listening
+    - ear buds
+    - hearing
+    - transceiver
+  sizes:
+    - 32
+- name: headset
+  friendly_name: Headset
+  usage: This is a description for usage
+  aliases:
+    - headphones
+    - listening device
+    - listening
+    - ear buds
+    - hearing
+    - console
+    - transceiver
+  sizes:
+    - 32
+- name: health-cross
+  friendly_name: Health cross
+  usage: This is a description for usage
+  aliases:
+    - red cross
+    - medicine
+    - healthcare
+    - medical
+    - ambulance
+  sizes:
+    - 32
+- name: hearing
+  friendly_name: Hearing
+  usage: This is a description for usage
+  aliases:
+    - detecting
+    - ear
+    - headphones
+    - headset
+    - listen
+    - auditory
+    - perception
+    - senses
+  sizes:
+    - 32
+- name: help-desk
+  friendly_name: Help desk
+  usage: This is a description for usage
+  aliases:
+    - help-desk
+  sizes:
+    - 32
+- name: home
+  friendly_name: Home
+  usage: This is a description for usage
+  aliases:
+    - detecting
+    - ear
+    - headphones
+    - headset
+    - listen
+    - auditory
+    - perception
+    - senses
+  sizes:
+    - 32
+- name: hotel
+  friendly_name: Hotel
+  usage: This is a description for usage
+  aliases:
+    - hostel
+    - motel
+    - house
+    - inn
+    - lodging
+    - resort
+  sizes:
+    - 32
+- name: hourglass
+  friendly_name: Hourglass
+  usage: This is a description for usage
+  aliases:
+    - clock
+    - metronome
+    - timepiece
+    - timer
+    - time
+    - duration
+  sizes:
+    - 32
+- name: humidity
+  friendly_name: Humidity
+  usage: This is a description for usage
+  aliases:
+    - weather
+    - damp
+    - dampness
+    - moisture
+    - dew
+    - muggy
+    - mugginess
+    - steaminess
+    - steam
+  sizes:
+    - 32
+- name: hurricane
+  friendly_name: Hurricane
+  usage: This is a description for usage
+  aliases:
+    - hurricane
+  sizes:
+    - 32
+- name: hybrid-networking
+  friendly_name: Hybrid networking
+  usage: This is a description for usage
+  aliases:
+    - hybrid-networking
+  sizes:
+    - 32
+- name: ibm-cloud
+  friendly_name: Ibm cloud
+  usage: This is a description for usage
+  aliases:
+    - product
+    - cloud
+    - hybrid
+    - service
+    - offerring
+    - online
+    - internet
+    - brand
+  sizes:
+    - 32
+- name: ibm-security
+  friendly_name: Ibm security
+  usage: This is a description for usage
+  aliases:
+    - safe
+    - cyber security
+    - hacking
+    - data security
+    - offerring
+    - product
+    - protection
+    - cyber crime
+    - cyber
+    - secure
+  sizes:
+    - 32
+- name: idea
+  friendly_name: Idea
+  usage: This is a description for usage
+  aliases:
+    - thought
+    - notion
+    - belief
+    - concept
+    - light bulb
+    - inspiration
+    - opinion
+    - intention
+    - design
+  sizes:
+    - 32
+- name: identification
+  friendly_name: Identification
+  usage: This is a description for usage
+  aliases:
+    - id
+    - passport
+    - drivers license
+    - recognition
+    - badge
+    - papers
+    - avatar
+  sizes:
+    - 32
+- name: image
+  friendly_name: Image
+  usage: This is a description for usage
+  aliases:
+    - appearance
+    - form
+    - drawing
+    - illustration
+    - picture
+    - portrait
+    - likeness
+    - avatar
+  sizes:
+    - 32
+- name: image--medical
+  friendly_name: Image medical
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - appearance
+    - form
+    - drawing
+    - illustration
+    - picture
+    - portrait
+    - likeness
+    - avatar
+- name: improve-relevance
+  friendly_name: Improve relevance
+  usage: This is a description for usage
+  aliases:
+    - target
+    - bullseye
+  sizes:
+    - 32
+- name: increase-level
+  friendly_name: Increase level
+  usage: This is a description for usage
+  aliases:
+    - increase-level
+  sizes:
+    - 32
+- name: industry
+  friendly_name: Industry
+  usage: This is a description for usage
+  aliases:
+    - field
+    - business
+    - commerce
+    - corporation
+    - trade
+    - line of work
+    - job
+    - career
+  sizes:
+    - 32
+- name: insert
+  friendly_name: Insert
+  usage: This is a description for usage
+  aliases:
+    - embed
+    - enter
+    - fill in
+    - paste
+    - inject
+    - include
+    - infuse
+  sizes:
+    - 32
+- name: integration
+  friendly_name: Integration
+  usage: This is a description for usage
+  aliases:
+    - assimilate
+    - assimilation
+    - amalgamation
+    - synthesis
+    - combination
+    - combine
+    - union
+  sizes:
+    - 32
+- name: inventory-management
+  friendly_name: Inventory management
+  usage: This is a description for usage
+  aliases:
+    - supervision
+    - asset management
+    - inventory
+    - dashboard
+    - supply chain
+    - analytics
+    - administration
+    - oversight
+  sizes:
+    - 32
+- name: iot--connect
+  friendly_name: Iot connect
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - internet of things
+    - smart objects
+    - connectivity
+    - connected
+    - network
+    - communication
+    - wireless
+    - sensors
+    - analytics
+    - machine learning
+    - smart devices
+    - connect
+    - platform
+- name: iot--platform
+  friendly_name: Iot platform
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - internet of things
+    - smart objects
+    - connectivity
+    - connected
+    - network
+    - communication
+    - wireless
+    - sensors
+    - analytics
+    - machine learning
+    - smart devices
+    - connect
+    - platform
+- name: jump-link
+  friendly_name: Jump link
+  usage: This is a description for usage
+  aliases:
+    - jump-link
+  sizes:
+    - 32
+- name: keyboard
+  friendly_name: Keyboard
+  usage: This is a description for usage
+  aliases:
+    - console
+    - typing
+    - type
+    - key commands
+    - computer
+    - word processor
+    - write
+  sizes:
+    - 32
+- name: language
+  friendly_name: Language
+  usage: This is a description for usage
+  aliases:
+    - language
+  sizes:
+    - 32
+- name: laptop
+  friendly_name: Laptop
+  usage: This is a description for usage
+  aliases:
+    - laptop
+  sizes:
+    - 32
+- name: legend
+  friendly_name: Legend
+  usage: This is a description for usage
+  aliases:
+    - legend
+  sizes:
+    - 32
+- name: letter--Aa
+  friendly_name: Letter aa
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Bb
+  friendly_name: Letter bb
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Cc
+  friendly_name: Letter cc
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Dd
+  friendly_name: Letter dd
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Ee
+  friendly_name: Letter ee
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Ff
+  friendly_name: Letter ff
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Gg
+  friendly_name: Letter gg
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Hh
+  friendly_name: Letter hh
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Ii
+  friendly_name: Letter ii
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Jj
+  friendly_name: Letter jj
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Kk
+  friendly_name: Letter kk
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Ll
+  friendly_name: Letter ll
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Mm
+  friendly_name: Letter mm
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Nn
+  friendly_name: Letter nn
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Oo
+  friendly_name: Letter oo
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Pp
+  friendly_name: Letter pp
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Qq
+  friendly_name: Letter qq
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Rr
+  friendly_name: Letter rr
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Ss
+  friendly_name: Letter ss
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Tt
+  friendly_name: Letter tt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Uu
+  friendly_name: Letter uu
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Vv
+  friendly_name: Letter vv
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Ww
+  friendly_name: Letter ww
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Xx
+  friendly_name: Letter xx
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Yy
+  friendly_name: Letter yy
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: letter--Zz
+  friendly_name: Letter zz
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - alphabet
+    - language
+    - english
+- name: lightning
+  friendly_name: Lightning
+  usage: This is a description for usage
+  aliases:
+    - lightning
+  sizes:
+    - 32
+- name: link
+  friendly_name: Link
+  usage: This is a description for usage
+  aliases:
+    - associate
+    - association
+    - network
+    - connect
+    - join
+    - hookup
+  sizes:
+    - 32
+- name: location
+  friendly_name: Location
+  usage: This is a description for usage
+  aliases:
+    - place
+    - locate
+    - gps
+    - destination
+    - map
+    - pin
+    - site
+    - area
+  sizes:
+    - 32
+- name: login
+  friendly_name: Login
+  usage: This is a description for usage
+  aliases:
+    - log on
+    - password
+    - enter
+    - sign in
+    - sign on
+    - pin
+    - username
+  sizes:
+    - 32
+- name: logo--digg
+  friendly_name: Logo digg
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--facebook
+  friendly_name: Logo facebook
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--flickr
+  friendly_name: Logo flickr
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--github
+  friendly_name: Logo github
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--glassdoor
+  friendly_name: Logo glassdoor
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--google
+  friendly_name: Logo google
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--instagram
+  friendly_name: Logo instagram
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--linkedin
+  friendly_name: Logo linkedin
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--livestream
+  friendly_name: Logo livestream
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--medium
+  friendly_name: Logo medium
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--openshift
+  friendly_name: Logo openshift
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--pinterest
+  friendly_name: Logo pinterest
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--quora
+  friendly_name: Logo quora
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--skype
+  friendly_name: Logo skype
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--slack
+  friendly_name: Logo slack
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--snapchat
+  friendly_name: Logo snapchat
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--tumblr
+  friendly_name: Logo tumblr
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--twitter
+  friendly_name: Logo twitter
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--vmware
+  friendly_name: Logo vmware
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--xing
+  friendly_name: Logo xing
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--yelp
+  friendly_name: Logo yelp
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--youtube
+  friendly_name: Logo youtube
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logout
+  friendly_name: Logout
+  usage: This is a description for usage
+  aliases:
+    - sign off
+    - sign out
+    - log off
+    - quit
+    - exit
+  sizes:
+    - 32
+- name: loop
+  friendly_name: Loop
+  usage: This is a description for usage
+  aliases:
+    - knot
+    - curl
+    - circuit
+    - bend
+    - coil
+    - curve
+    - around
+    - twirl
+  sizes:
+    - 32
+- name: mac--command
+  friendly_name: Mac command
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - command
+    - key command
+    - command key
+    - macintosh
+    - apple
+    - keyboard
+- name: mac--option
+  friendly_name: Mac option
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - command
+    - key command
+    - command key
+    - macintosh
+    - apple
+    - keyboard
+- name: mac--shift
+  friendly_name: Mac shift
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - command
+    - key command
+    - command key
+    - macintosh
+    - apple
+    - keyboard
+- name: machine-learning
+  friendly_name: Machine learning
+  usage: This is a description for usage
+  aliases:
+    - machine-learning
+  sizes:
+    - 32
+- name: magic-wand
+  friendly_name: Magic wand
+  usage: This is a description for usage
+  aliases:
+    - magic-wand
+  sizes:
+    - 32
+- name: magic-wand--filled
+  friendly_name: Magic wand filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - magic-wand
+- name: mail--all
+  friendly_name: Mail all
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - email
+    - send
+    - letter
+    - reply
+    - envelope
+    - letter
+- name: manage-protection
+  friendly_name: Manage protection
+  usage: This is a description for usage
+  aliases:
+    - manage-protection
+  sizes:
+    - 32
+- name: managed-solutions
+  friendly_name: Managed solutions
+  usage: This is a description for usage
+  aliases:
+    - managed-solutions
+  sizes:
+    - 32
+- name: map
+  friendly_name: Map
+  usage: This is a description for usage
+  aliases:
+    - atlas
+    - locate
+    - gps
+    - location
+    - graph
+    - directions
+    - diagram
+    - plan
+  sizes:
+    - 32
+- name: medication
+  friendly_name: Medication
+  usage: This is a description for usage
+  aliases:
+    - medicine
+    - drug
+    - treatment
+    - remedy
+    - medicate
+    - assistance
+    - placebo
+    - pill
+    - antidote
+  sizes:
+    - 32
+- name: medication--alert
+  friendly_name: Medication alert
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - medicine
+    - drug
+    - treatment
+    - remedy
+    - medicate
+    - assistance
+    - placebo
+    - pill
+    - antidote
+- name: medication--reminder
+  friendly_name: Medication reminder
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - medicine
+    - drug
+    - treatment
+    - remedy
+    - medicate
+    - assistance
+    - placebo
+    - pill
+    - antidote
+- name: meter
+  friendly_name: Meter
+  usage: This is a description for usage
+  aliases:
+    - meter
+  sizes:
+    - 32
+- name: microphone
+  friendly_name: Microphone
+  usage: This is a description for usage
+  aliases:
+    - mic
+    - speaker
+    - wire
+    - speaker
+    - MC
+    - presenter
+    - present
+  sizes:
+    - 32
+- name: microphone--filled
+  friendly_name: Microphone filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - mic
+    - speaker
+    - wire
+    - speaker
+    - MC
+    - presenter
+    - present
+- name: microphone--off--filled
+  friendly_name: Microphone off filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - mic
+    - speaker
+    - wire
+    - speaker
+    - MC
+    - presenter
+    - present
+- name: microphone--off
+  friendly_name: Microphone off
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - mic
+    - speaker
+    - wire
+    - speaker
+    - MC
+    - presenter
+    - present
+- name: microscope
+  friendly_name: Microscope
+  usage: This is a description for usage
+  aliases:
+    - microscope
+  sizes:
+    - 32
+- name: migrate
+  friendly_name: Migrate
+  usage: This is a description for usage
+  aliases:
+    - drift
+    - roam
+    - shift
+    - emigrate
+    - immigrate
+    - journey
+    - transfer
+    - move
+  sizes:
+    - 32
+- name: migrate--alt
+  friendly_name: Migrate alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - drift
+    - roam
+    - shift
+    - emigrate
+    - immigrate
+    - journey
+    - transfer
+    - move
+- name: mixed-rain-hail
+  friendly_name: Mixed rain hail
+  usage: This is a description for usage
+  aliases:
+    - mixed-rain-hail
+  sizes:
+    - 32
+- name: mobile
+  friendly_name: Mobile
+  usage: This is a description for usage
+  aliases:
+    - phone
+    - iphone
+    - responsive
+    - view port
+    - telephone
+    - roaming
+    - ux
+    - portable
+  sizes:
+    - 32
+- name: mobile--add
+  friendly_name: Mobile add
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - phone
+    - iphone
+    - responsive
+    - view port
+    - telephone
+    - roaming
+    - ux
+    - portable
+- name: mobile--audio
+  friendly_name: Mobile audio
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - phone
+    - iphone
+    - responsive
+    - view port
+    - telephone
+    - roaming
+    - ux
+    - portable
+- name: mobile--check
+  friendly_name: Mobile check
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - phone
+    - iphone
+    - responsive
+    - view port
+    - telephone
+    - roaming
+    - ux
+    - portable
+- name: mobile--download
+  friendly_name: Mobile download
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - phone
+    - iphone
+    - responsive
+    - view port
+    - telephone
+    - roaming
+    - ux
+    - portable
+- name: mobile--landscape
+  friendly_name: Mobile landscape
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - phone
+    - iphone
+    - responsive
+    - view port
+    - telephone
+    - roaming
+    - ux
+    - portable
+- name: model
+  friendly_name: Model
+  usage: This is a description for usage
+  aliases:
+    - reference
+    - 3d
+    - prototype
+    - sketch
+    - illustrate
+    - assemble
+    - fabricate
+    - manufacture
+    - construct
+  sizes:
+    - 32
+- name: model--reference
+  friendly_name: Model reference
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - reference
+    - 3d
+    - prototype
+    - sketch
+    - illustrate
+    - assemble
+    - fabricate
+    - manufacture
+    - construct
+- name: money
+  friendly_name: Money
+  usage: This is a description for usage
+  aliases:
+    - money
+  sizes:
+    - 32
+- name: moon
+  friendly_name: Moon
+  usage: This is a description for usage
+  aliases:
+    - moon
+  sizes:
+    - 32
+- name: mostly-cloudy
+  friendly_name: Mostly cloudy
+  usage: This is a description for usage
+  aliases:
+    - mostly-cloudy
+  sizes:
+    - 32
+- name: mostly-cloudy--night
+  friendly_name: Mostly cloudy night
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - mostly-cloudy
+- name: move
+  friendly_name: Move
+  usage: This is a description for usage
+  aliases:
+    - action
+    - transfer
+    - direction
+    - directional
+    - shift
+    - maneuver
+  sizes:
+    - 32
+- name: movement
+  friendly_name: Movement
+  usage: This is a description for usage
+  aliases:
+    - action
+    - transfer
+    - direction
+    - directional
+    - shift
+    - maneuver
+  sizes:
+    - 32
+- name: music
+  friendly_name: Music
+  usage: This is a description for usage
+  aliases:
+    - audio
+    - melody
+    - sound
+    - singing
+    - harmony
+    - beat
+    - rhythm
+  sizes:
+    - 32
+- name: network--1
+  friendly_name: Network 1
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - network
+- name: network--2
+  friendly_name: Network 2
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - network
+- name: network--3
+  friendly_name: Network 3
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - network
+- name: network--4
+  friendly_name: Network 4
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - network
+- name: no-image
+  friendly_name: No image
+  usage: This is a description for usage
+  aliases:
+    - no-image
+  sizes:
+    - 32
+- name: no-ticket
+  friendly_name: No ticket
+  usage: This is a description for usage
+  aliases:
+    - no-ticket
+  sizes:
+    - 32
+- name: noodle-bowl
+  friendly_name: Noodle bowl
+  usage: This is a description for usage
+  aliases:
+    - noodle-bowl
+  sizes:
+    - 32
+- name: not-available
+  friendly_name: Not available
+  usage: This is a description for usage
+  aliases:
+    - not-available
+  sizes:
+    - 32
+- name: not-sent
+  friendly_name: Not sent
+  usage: This is a description for usage
+  aliases:
+    - failed
+    - failure
+    - incomplete
+    - sent
+    - send
+    - email
+  sizes:
+    - 32
+- name: not-sent--filled
+  friendly_name: Not sent filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - failed
+    - failure
+    - incomplete
+    - sent
+    - send
+    - email
+- name: notebook
+  friendly_name: Notebook
+  usage: This is a description for usage
+  aliases:
+    - book
+    - notes
+    - diary
+    - journal
+    - binder
+    - log
+    - workbook
+  sizes:
+    - 32
+- name: notebook--reference
+  friendly_name: Notebook reference
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - book
+    - notes
+    - diary
+    - journal
+    - binder
+    - log
+    - workbook
+- name: number--0
+  friendly_name: Number 0
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--1
+  friendly_name: Number 1
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--2
+  friendly_name: Number 2
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--3
+  friendly_name: Number 3
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--4
+  friendly_name: Number 4
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--5
+  friendly_name: Number 5
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--6
+  friendly_name: Number 6
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--7
+  friendly_name: Number 7
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--8
+  friendly_name: Number 8
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--9
+  friendly_name: Number 9
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--small--0
+  friendly_name: Number small 0
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--small--1
+  friendly_name: Number small 1
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--small--2
+  friendly_name: Number small 2
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--small--3
+  friendly_name: Number small 3
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--small--4
+  friendly_name: Number small 4
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--small--5
+  friendly_name: Number small 5
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--small--6
+  friendly_name: Number small 6
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--small--7
+  friendly_name: Number small 7
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--small--8
+  friendly_name: Number small 8
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: number--small--9
+  friendly_name: Number small 9
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - count
+    - numeral
+    - digit
+    - statistic
+    - figure
+- name: omega
+  friendly_name: Omega
+  usage: This is a description for usage
+  aliases:
+    - omega
+  sizes:
+    - 32
+- name: opacity
+  friendly_name: Opacity
+  usage: This is a description for usage
+  aliases:
+    - transparency
+    - dim
+    - darkness
+    - shade
+    - color
+    - gradient
+  sizes:
+    - 32
+- name: open-panel--bottom
+  friendly_name: Open panel bottom
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - open
+    - panel
+    - navigation
+    - side nav
+    - ui
+    - nav
+- name: open-panel--filled--bottom
+  friendly_name: Open panel filled bottom
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - open
+    - panel
+    - navigation
+    - side nav
+    - ui
+    - nav
+- name: open-panel--filled--left
+  friendly_name: Open panel filled left
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - open
+    - panel
+    - navigation
+    - side nav
+    - ui
+    - nav
+- name: open-panel--filled--right
+  friendly_name: Open panel filled right
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - open
+    - panel
+    - navigation
+    - side nav
+    - ui
+    - nav
+- name: open-panel--filled--top
+  friendly_name: Open panel filled top
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - open
+    - panel
+    - navigation
+    - side nav
+    - ui
+    - nav
+- name: open-panel--left
+  friendly_name: Open panel left
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - open
+    - panel
+    - navigation
+    - side nav
+    - ui
+    - nav
+- name: open-panel--right
+  friendly_name: Open panel right
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - open
+    - panel
+    - navigation
+    - side nav
+    - ui
+    - nav
+- name: open-panel--top
+  friendly_name: Open panel top
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - open
+    - panel
+    - navigation
+    - side nav
+    - ui
+    - nav
+- name: package
+  friendly_name: Package
+  usage: This is a description for usage
+  aliases:
+    - download
+    - kit
+    - packet
+    - assortment
+    - bunch
+    - load
+    - group
+  sizes:
+    - 32
+- name: page--first
+  friendly_name: Page first
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - next
+    - forward
+    - backward
+    - read
+    - back
+- name: page--last
+  friendly_name: Page last
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - next
+    - forward
+    - backward
+    - read
+    - back
+- name: paint-brush
+  friendly_name: Paint brush
+  usage: This is a description for usage
+  aliases:
+    - brush
+    - paint
+    - color
+    - art
+    - artwork
+    - image
+    - portrait
+    - palette
+  sizes:
+    - 32
+- name: paint-brush--alt
+  friendly_name: Paint brush alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brush
+    - paint
+    - color
+    - art
+    - artwork
+    - image
+    - portrait
+    - palette
+- name: panel-expansion
+  friendly_name: Panel expansion
+  usage: This is a description for usage
+  aliases:
+    - side
+    - navigation
+    - UI
+    - open
+  sizes:
+    - 32
+- name: paragraph
+  friendly_name: Paragraph
+  usage: This is a description for usage
+  aliases:
+    - paragraph
+  sizes:
+    - 32
+- name: parent-child
+  friendly_name: Parent child
+  usage: This is a description for usage
+  aliases:
+    - nested
+    - relation
+    - tree
+    - org
+  sizes:
+    - 32
+- name: partly-cloudy
+  friendly_name: Partly cloudy
+  usage: This is a description for usage
+  aliases:
+    - partly-cloudy
+  sizes:
+    - 32
+- name: partly-cloudy--night
+  friendly_name: Partly cloudy night
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - partly-cloudy
+- name: partnership
+  friendly_name: Partnership
+  usage: This is a description for usage
+  aliases:
+    - relationship
+    - handshake
+    - people
+    - business
+  sizes:
+    - 32
+- name: password
+  friendly_name: Password
+  usage: This is a description for usage
+  aliases:
+    - key
+    - code
+    - lock
+    - security
+  sizes:
+    - 32
+- name: paste
+  friendly_name: Paste
+  usage: This is a description for usage
+  aliases:
+    - copy
+    - file
+    - text
+  sizes:
+    - 32
+- name: pedestrian-child
+  friendly_name: Pedestrian child
+  usage: This is a description for usage
+  aliases:
+    - pedestrian-child
+  sizes:
+    - 32
+- name: pedestrian
+  friendly_name: Pedestrian
+  usage: This is a description for usage
+  aliases:
+    - pedestrian
+  sizes:
+    - 32
+- name: percentage
+  friendly_name: Percentage
+  usage: This is a description for usage
+  aliases:
+    - percentage
+  sizes:
+    - 32
+- name: percentage--filled
+  friendly_name: Percentage filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - percentage
+- name: person
+  friendly_name: Person
+  usage: This is a description for usage
+  aliases:
+    - human
+    - male
+    - female
+    - figure
+    - user
+  sizes:
+    - 32
+- name: person--favorite
+  friendly_name: Person favorite
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - human
+    - male
+    - female
+    - figure
+    - user
+- name: phone
+  friendly_name: Phone
+  usage: This is a description for usage
+  aliases:
+    - call
+    - cell
+    - connect
+    - chat
+    - sound
+    - mute
+  sizes:
+    - 32
+- name: phone--filled
+  friendly_name: Phone filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - call
+    - cell
+    - connect
+    - chat
+    - sound
+    - mute
+- name: phone--off--filled
+  friendly_name: Phone off filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - call
+    - cell
+    - connect
+    - chat
+    - sound
+    - mute
+- name: phone--off
+  friendly_name: Phone off
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - call
+    - cell
+    - connect
+    - chat
+    - sound
+    - mute
+- name: phrase-sentiment
+  friendly_name: Phrase sentiment
+  usage: This is a description for usage
+  aliases:
+    - emotion
+    - meaning
+    - understanding
+  sizes:
+    - 32
+- name: pills
+  friendly_name: Pills
+  usage: This is a description for usage
+  aliases:
+    - health
+    - medicine
+  sizes:
+    - 32
+- name: pills--add
+  friendly_name: Pills add
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - health
+    - medicine
+- name: pills--subtract
+  friendly_name: Pills subtract
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - health
+    - medicine
+- name: pin
+  friendly_name: Pin
+  usage: This is a description for usage
+  aliases:
+    - save
+    - favorite
+  sizes:
+    - 32
+- name: plane
+  friendly_name: Plane
+  usage: This is a description for usage
+  aliases:
+    - airplane
+    - flight
+    - travel
+  sizes:
+    - 32
+- name: playlist
+  friendly_name: Playlist
+  usage: This is a description for usage
+  aliases:
+    - music
+    - play
+    - dj
+  sizes:
+    - 32
+- name: policy
+  friendly_name: Policy
+  usage: This is a description for usage
+  aliases:
+    - policy
+  sizes:
+    - 32
+- name: popup
+  friendly_name: Popup
+  usage: This is a description for usage
+  aliases:
+    - modal
+    - overlay
+    - expand
+  sizes:
+    - 32
+- name: portfolio
+  friendly_name: Portfolio
+  usage: This is a description for usage
+  aliases:
+    - briefcase
+    - suitcase
+    - travel
+    - case
+  sizes:
+    - 32
+- name: presentation-file
+  friendly_name: Presentation file
+  usage: This is a description for usage
+  aliases:
+    - keynote
+    - chart
+    - meeting
+    - graph
+  sizes:
+    - 32
+- name: printer
+  friendly_name: Printer
+  usage: This is a description for usage
+  aliases:
+    - print
+    - copy
+    - file
+    - paper
+  sizes:
+    - 32
+- name: product
+  friendly_name: Product
+  usage: This is a description for usage
+  aliases:
+    - product
+  sizes:
+    - 32
+- name: purchase
+  friendly_name: Purchase
+  usage: This is a description for usage
+  aliases:
+    - charge
+    - card
+    - credit card
+    - debit
+  sizes:
+    - 32
+- name: qr-code
+  friendly_name: Qr code
+  usage: This is a description for usage
+  aliases:
+    - qr-code
+  sizes:
+    - 32
+- name: query-queue
+  friendly_name: Query queue
+  usage: This is a description for usage
+  aliases:
+    - list
+  sizes:
+    - 32
+- name: quotes
+  friendly_name: Quotes
+  usage: This is a description for usage
+  aliases:
+    - mark
+    - punctuation
+  sizes:
+    - 32
+- name: radio-button
+  friendly_name: Radio button
+  usage: This is a description for usage
+  aliases:
+    - component
+    - circle
+    - travel
+    - case
+  sizes:
+    - 32
+- name: radio-button--checked
+  friendly_name: Radio button checked
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - component
+    - circle
+    - travel
+    - case
+- name: radio
+  friendly_name: Radio
+  usage: This is a description for usage
+  aliases:
+    - music
+    - sound
+    - audio
+    - broadcast
+  sizes:
+    - 32
+- name: rain
+  friendly_name: Rain
+  usage: This is a description for usage
+  aliases:
+    - rain
+  sizes:
+    - 32
+- name: rain--drizzle
+  friendly_name: Rain drizzle
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - rain
+- name: rain--heavy
+  friendly_name: Rain heavy
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - rain
+- name: rain--scattered--night
+  friendly_name: Rain scattered night
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - rain
+- name: rain--scattered
+  friendly_name: Rain scattered
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - rain
+- name: rain-drop
+  friendly_name: Rain drop
+  usage: This is a description for usage
+  aliases:
+    - rain-drop
+  sizes:
+    - 32
+- name: receipt
+  friendly_name: Receipt
+  usage: This is a description for usage
+  aliases:
+    - check
+    - bill
+    - total
+  sizes:
+    - 32
+- name: recently-viewed
+  friendly_name: Recently viewed
+  usage: This is a description for usage
+  aliases:
+    - history
+    - version
+    - back
+    - recent
+  sizes:
+    - 32
+- name: recommend
+  friendly_name: Recommend
+  usage: This is a description for usage
+  aliases:
+    - suggest
+    - award
+    - favorite
+  sizes:
+    - 32
+- name: recording
+  friendly_name: Recording
+  usage: This is a description for usage
+  aliases:
+    - start
+    - music
+    - sound
+    - control
+  sizes:
+    - 32
+- name: recording--filled--alt
+  friendly_name: Recording filled alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - start
+    - music
+    - sound
+    - control
+- name: recording--filled
+  friendly_name: Recording filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - start
+    - music
+    - sound
+    - control
+- name: reminder
+  friendly_name: Reminder
+  usage: This is a description for usage
+  aliases:
+    - reminder
+  sizes:
+    - 32
+- name: reminder--medical
+  friendly_name: Reminder medical
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - reminder
+- name: renew
+  friendly_name: Renew
+  usage: This is a description for usage
+  aliases:
+    - refresh
+    - replay
+    - restart
+  sizes:
+    - 32
+- name: repeat
+  friendly_name: Repeat
+  usage: This is a description for usage
+  aliases:
+    - repeat once
+    - music
+    - control
+  sizes:
+    - 32
+- name: repeat--one
+  friendly_name: Repeat one
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - repeat once
+    - music
+    - control
+- name: reply
+  friendly_name: Reply
+  usage: This is a description for usage
+  aliases:
+    - back
+    - respond
+    - email
+  sizes:
+    - 32
+- name: report
+  friendly_name: Report
+  usage: This is a description for usage
+  aliases:
+    - clipboard
+    - paper
+    - chart
+    - summary
+  sizes:
+    - 32
+- name: report--data
+  friendly_name: Report data
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - clipboard
+    - paper
+    - chart
+    - summary
+- name: request-quote
+  friendly_name: Request quote
+  usage: This is a description for usage
+  aliases:
+    - edit
+    - pencil
+    - paper
+    - modify
+  sizes:
+    - 32
+- name: research--bloch-sphere
+  friendly_name: Research bloch sphere
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - study
+    - sphere
+- name: research--hinton-plot
+  friendly_name: Research hinton plot
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - study
+    - sphere
+- name: research--matrix
+  friendly_name: Research matrix
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - study
+    - sphere
+- name: reset
+  friendly_name: Reset
+  usage: This is a description for usage
+  aliases:
+    - refresh
+    - undo
+    - revert
+  sizes:
+    - 32
+- name: reset--alt
+  friendly_name: Reset alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - refresh
+    - undo
+    - revert
+- name: restaurant
+  friendly_name: Restaurant
+  usage: This is a description for usage
+  aliases:
+    - dining
+    - knife
+    - fork
+    - utensil
+    - dinner
+    - food
+    - cafe
+    - eat
+  sizes:
+    - 32
+- name: restaurant--fine
+  friendly_name: Restaurant fine
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - dining
+    - knife
+    - fork
+    - utensil
+    - dinner
+    - food
+    - cafe
+    - eat
+- name: rewind--10
+  friendly_name: Rewind 10
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - back
+    - previous
+    - past
+    - reverse
+- name: rewind--30
+  friendly_name: Rewind 30
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - back
+    - previous
+    - past
+    - reverse
+- name: rewind--5
+  friendly_name: Rewind 5
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - back
+    - previous
+    - past
+    - reverse
+- name: rocket
+  friendly_name: Rocket
+  usage: This is a description for usage
+  aliases:
+    - missile
+    - spaceship
+    - spacecraft
+    - boost
+    - launch
+  sizes:
+    - 32
+- name: rotate
+  friendly_name: Rotate
+  usage: This is a description for usage
+  aliases:
+    - revolve
+    - circle
+    - circulate
+    - circle arrow
+    - launch
+  sizes:
+    - 32
+- name: rotate--clockwise--alt--filled
+  friendly_name: Rotate clockwise alt filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - revolve
+    - circle
+    - circulate
+    - circle arrow
+    - launch
+- name: rotate--clockwise--alt
+  friendly_name: Rotate clockwise alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - revolve
+    - circle
+    - circulate
+    - circle arrow
+    - launch
+- name: rotate--clockwise--filled
+  friendly_name: Rotate clockwise filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - revolve
+    - circle
+    - circulate
+    - circle arrow
+    - launch
+- name: rotate--clockwise
+  friendly_name: Rotate clockwise
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - revolve
+    - circle
+    - circulate
+    - circle arrow
+    - launch
+- name: rotate--counterclockwise--alt--filled
+  friendly_name: Rotate counterclockwise alt filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - revolve
+    - circle
+    - circulate
+    - circle arrow
+    - launch
+- name: rotate--counterclockwise--alt
+  friendly_name: Rotate counterclockwise alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - revolve
+    - circle
+    - circulate
+    - circle arrow
+    - launch
+- name: rotate--counterclockwise--filled
+  friendly_name: Rotate counterclockwise filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - revolve
+    - circle
+    - circulate
+    - circle arrow
+    - launch
+- name: rotate--counterclockwise
+  friendly_name: Rotate counterclockwise
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - revolve
+    - circle
+    - circulate
+    - circle arrow
+    - launch
+- name: rotate--180
+  friendly_name: Rotate 180
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - revolve
+    - circle
+    - circulate
+    - circle arrow
+    - launch
+- name: rotate--360
+  friendly_name: Rotate 360
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - revolve
+    - circle
+    - circulate
+    - circle arrow
+    - launch
+- name: row
+  friendly_name: Row
+  usage: This is a description for usage
+  aliases:
+    - line
+    - tier
+    - queue
+    - column
+    - composition
+    - layout
+    - horizontal
+    - template
+  sizes:
+    - 32
+- name: rss
+  friendly_name: Rss
+  usage: This is a description for usage
+  aliases:
+    - web feed
+    - feed
+    - news
+    - reading
+    - subscribe
+    - subscription
+  sizes:
+    - 32
+- name: rule
+  friendly_name: Rule
+  usage: This is a description for usage
+  aliases:
+    - rule
+  sizes:
+    - 32
+- name: ruler
+  friendly_name: Ruler
+  usage: This is a description for usage
+  aliases:
+    - measure
+    - tool
+    - school
+    - office
+    - length
+    - scale
+  sizes:
+    - 32
+- name: ruler--alt
+  friendly_name: Ruler alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - measure
+    - tool
+    - school
+    - office
+    - length
+    - scale
+- name: run
+  friendly_name: Run
+  usage: This is a description for usage
+  aliases:
+    - start
+    - play
+    - program
+  sizes:
+    - 32
+- name: scale
+  friendly_name: Scale
+  usage: This is a description for usage
+  aliases:
+    - scalable
+    - ratio
+    - proportion
+    - scope
+    - spectrum
+    - resize
+    - design
+    - square
+    - tool
+  sizes:
+    - 32
+- name: scalpel
+  friendly_name: Scalpel
+  usage: This is a description for usage
+  aliases:
+    - blade
+    - cutter
+    - knife
+    - cut
+    - tool
+    - surgery
+    - sharp
+    - health
+    - hospital
+    - medical
+  sizes:
+    - 32
+- name: scalpel--cursor
+  friendly_name: Scalpel cursor
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - blade
+    - cutter
+    - knife
+    - cut
+    - tool
+    - surgery
+    - sharp
+    - health
+    - hospital
+    - medical
+- name: scalpel--lasso
+  friendly_name: Scalpel lasso
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - blade
+    - cutter
+    - knife
+    - cut
+    - tool
+    - surgery
+    - sharp
+    - health
+    - hospital
+    - medical
+- name: scalpel--select
+  friendly_name: Scalpel select
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - blade
+    - cutter
+    - knife
+    - cut
+    - tool
+    - surgery
+    - sharp
+    - health
+    - hospital
+    - medical
+- name: scan
+  friendly_name: Scan
+  usage: This is a description for usage
+  aliases:
+    - scanner
+    - code
+    - barcode
+    - detect
+    - examine
+    - check
+    - qr
+  sizes:
+    - 32
+- name: schematics
+  friendly_name: Schematics
+  usage: This is a description for usage
+  aliases:
+    - schematics
+  sizes:
+    - 32
+- name: scooter
+  friendly_name: Scooter
+  usage: This is a description for usage
+  aliases:
+    - scooter
+  sizes:
+    - 32
+- name: scooter--front
+  friendly_name: Scooter front
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - scooter
+- name: screen
+  friendly_name: Screen
+  usage: This is a description for usage
+  aliases:
+    - computer
+    - display
+    - monitor
+    - desktop
+    - device
+    - technology
+    - pc
+    - mac
+  sizes:
+    - 32
+- name: screen--off
+  friendly_name: Screen off
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - computer
+    - display
+    - monitor
+    - desktop
+    - device
+    - technology
+    - pc
+    - mac
+- name: send
+  friendly_name: Send
+  usage: This is a description for usage
+  aliases:
+    - mail
+    - message
+    - paper plane
+    - sending
+    - message
+    - arrow
+    - deliver
+    - letter
+    - email
+  sizes:
+    - 32
+- name: send--alt--filled
+  friendly_name: Send alt filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - mail
+    - message
+    - paper plane
+    - sending
+    - message
+    - arrow
+    - deliver
+    - letter
+    - email
+- name: send--alt
+  friendly_name: Send alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - mail
+    - message
+    - paper plane
+    - sending
+    - message
+    - arrow
+    - deliver
+    - letter
+    - email
+- name: send--filled
+  friendly_name: Send filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - mail
+    - message
+    - paper plane
+    - sending
+    - message
+    - arrow
+    - deliver
+    - letter
+    - email
+- name: service-desk
+  friendly_name: Service desk
+  usage: This is a description for usage
+  aliases:
+    - service-desk
+  sizes:
+    - 32
+- name: share-knowledge
+  friendly_name: Share knowledge
+  usage: This is a description for usage
+  aliases:
+    - people
+    - communicate
+    - idea
+    - contribution
+    - brainstorm
+    - thinking
+    - knowledge
+    - exchange
+  sizes:
+    - 32
+- name: share
+  friendly_name: Share
+  usage: This is a description for usage
+  aliases:
+    - social media
+    - facebook
+    - twitter
+    - media
+    - social
+    - network
+    - nodes
+    - connect
+  sizes:
+    - 32
+- name: shopping--bag
+  friendly_name: Shopping bag
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - bag
+    - cart
+    - shop
+    - buy
+    - e-commerce
+    - purchase
+    - store
+    - retail
+- name: shopping--cart
+  friendly_name: Shopping cart
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - bag
+    - cart
+    - shop
+    - buy
+    - e-commerce
+    - purchase
+    - store
+    - retail
+- name: shopping--catalog
+  friendly_name: Shopping catalog
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - bag
+    - cart
+    - shop
+    - buy
+    - e-commerce
+    - purchase
+    - store
+    - retail
+- name: shrink-screen
+  friendly_name: Shrink screen
+  usage: This is a description for usage
+  aliases:
+    - minimize
+    - resize
+    - arrow
+    - smaller
+    - reduce
+    - shrink
+    - screen
+    - zoom out
+  sizes:
+    - 32
+- name: shrink-screen--filled
+  friendly_name: Shrink screen filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - minimize
+    - resize
+    - arrow
+    - smaller
+    - reduce
+    - shrink
+    - screen
+    - zoom out
+- name: shuffle
+  friendly_name: Shuffle
+  usage: This is a description for usage
+  aliases:
+    - move
+    - reorder
+    - cross arrows
+    - randomize
+    - random
+    - songs
+    - player
+    - music
+    - multimedia
+  sizes:
+    - 32
+- name: shuttle
+  friendly_name: Shuttle
+  usage: This is a description for usage
+  aliases:
+    - bus
+    - truck
+    - transportation
+    - transit
+    - vehicle
+    - delivery
+    - car
+  sizes:
+    - 32
+- name: sigma
+  friendly_name: Sigma
+  usage: This is a description for usage
+  aliases:
+    - sigma
+  sizes:
+    - 32
+- name: skill-level
+  friendly_name: Skill level
+  usage: This is a description for usage
+  aliases:
+    - skill-level
+  sizes:
+    - 32
+- name: skip--back--filled
+  friendly_name: Skip back filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - arrow
+    - next
+    - forward
+    - button
+    - music
+    - media
+    - multi-media
+    - player
+    - song
+    - music
+- name: skip--back
+  friendly_name: Skip back
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - arrow
+    - next
+    - forward
+    - button
+    - music
+    - media
+    - multi-media
+    - player
+    - song
+    - music
+- name: skip--forward--filled
+  friendly_name: Skip forward filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - arrow
+    - next
+    - forward
+    - button
+    - music
+    - media
+    - multi-media
+    - player
+    - song
+    - music
+- name: skip--forward
+  friendly_name: Skip forward
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - arrow
+    - next
+    - forward
+    - button
+    - music
+    - media
+    - multi-media
+    - player
+    - song
+    - music
+- name: sleet
+  friendly_name: Sleet
+  usage: This is a description for usage
+  aliases:
+    - sleet
+  sizes:
+    - 32
+- name: smell
+  friendly_name: Smell
+  usage: This is a description for usage
+  aliases:
+    - nose
+    - scent
+    - odor
+    - fragrance
+    - nostril
+    - senses
+  sizes:
+    - 32
+- name: smoke
+  friendly_name: Smoke
+  usage: This is a description for usage
+  aliases:
+    - smoke
+  sizes:
+    - 32
+- name: snooze
+  friendly_name: Snooze
+  usage: This is a description for usage
+  aliases:
+    - snooze
+  sizes:
+    - 32
+- name: snow
+  friendly_name: Snow
+  usage: This is a description for usage
+  aliases:
+    - snow
+  sizes:
+    - 32
+- name: snow--blizzard
+  friendly_name: Snow blizzard
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - snow
+- name: snow--heavy
+  friendly_name: Snow heavy
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - snow
+- name: snow--scattered--night
+  friendly_name: Snow scattered night
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - snow
+- name: snow--scattered
+  friendly_name: Snow scattered
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - snow
+- name: snowflake
+  friendly_name: Snowflake
+  usage: This is a description for usage
+  aliases:
+    - snowflake
+  sizes:
+    - 32
+- name: soccer
+  friendly_name: Soccer
+  usage: This is a description for usage
+  aliases:
+    - soccer
+  sizes:
+    - 32
+- name: spell-check
+  friendly_name: Spell check
+  usage: This is a description for usage
+  aliases:
+    - check
+    - correction
+    - spelling
+    - type
+    - tool
+    - school
+    - writing
+    - grammar
+    - education
+  sizes:
+    - 32
+- name: split-screen
+  friendly_name: Split screen
+  usage: This is a description for usage
+  aliases:
+    - divide
+    - dual
+    - split
+    - screen
+    - multitask
+    - view
+    - half
+    - even
+  sizes:
+    - 32
+- name: spray-paint
+  friendly_name: Spray paint
+  usage: This is a description for usage
+  aliases:
+    - paint
+    - spray
+    - spray can
+    - aerosol
+    - art
+    - bottle
+    - half
+  sizes:
+    - 32
+- name: sprout
+  friendly_name: Sprout
+  usage: This is a description for usage
+  aliases:
+    - sprout
+  sizes:
+    - 32
+- name: stamp
+  friendly_name: Stamp
+  usage: This is a description for usage
+  aliases:
+    - stamp
+  sizes:
+    - 32
+- name: store
+  friendly_name: Store
+  usage: This is a description for usage
+  aliases:
+    - building
+    - shop
+    - house
+    - retail
+    - buisness
+    - online
+    - ecommerce
+    - market
+    - buy
+  sizes:
+    - 32
+- name: strawberry
+  friendly_name: Strawberry
+  usage: This is a description for usage
+  aliases:
+    - strawberry
+  sizes:
+    - 32
+- name: sun
+  friendly_name: Sun
+  usage: This is a description for usage
+  aliases:
+    - sun
+  sizes:
+    - 32
+- name: sunny
+  friendly_name: Sunny
+  usage: This is a description for usage
+  aliases:
+    - sunny
+  sizes:
+    - 32
+- name: sunrise
+  friendly_name: Sunrise
+  usage: This is a description for usage
+  aliases:
+    - sunrise
+  sizes:
+    - 32
+- name: sunset
+  friendly_name: Sunset
+  usage: This is a description for usage
+  aliases:
+    - sunset
+  sizes:
+    - 32
+- name: table
+  friendly_name: Table
+  usage: This is a description for usage
+  aliases:
+    - data
+    - spreadsheet
+    - excel
+    - chart
+    - rows
+    - grid
+  sizes:
+    - 32
+- name: table--split
+  friendly_name: Table split
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - data
+    - spreadsheet
+    - excel
+    - chart
+    - rows
+    - grid
+- name: table-of-contents
+  friendly_name: Table of contents
+  usage: This is a description for usage
+  aliases:
+    - list
+    - chart
+    - schedule
+    - record
+    - appendix
+    - index
+    - summary
+    - bullet point
+    - content
+    - menu
+  sizes:
+    - 32
+- name: tablet
+  friendly_name: Tablet
+  usage: This is a description for usage
+  aliases:
+    - tablet
+  sizes:
+    - 32
+- name: tablet--landscape
+  friendly_name: Tablet landscape
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - tablet
+- name: tag
+  friendly_name: Tag
+  usage: This is a description for usage
+  aliases:
+    - label
+    - mark
+    - price
+    - sale
+    - shop
+    - marker
+  sizes:
+    - 32
+- name: tag--edit
+  friendly_name: Tag edit
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - label
+    - mark
+    - price
+    - sale
+    - shop
+    - marker
+- name: tag--group
+  friendly_name: Tag group
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - label
+    - mark
+    - price
+    - sale
+    - shop
+    - marker
+- name: task
+  friendly_name: Task
+  usage: This is a description for usage
+  aliases:
+    - clipboard
+    - checkmark
+    - checklist
+    - assignment
+    - to do list
+    - list
+    - chore
+  sizes:
+    - 32
+- name: taste
+  friendly_name: Taste
+  usage: This is a description for usage
+  aliases:
+    - tongue
+    - mouth
+    - eat
+    - senses
+  sizes:
+    - 32
+- name: taxi
+  friendly_name: Taxi
+  usage: This is a description for usage
+  aliases:
+    - car
+    - cab
+    - transportation
+    - transit
+    - vehicle
+  sizes:
+    - 32
+- name: temperature
+  friendly_name: Temperature
+  usage: This is a description for usage
+  aliases:
+    - weather
+    - thermometer
+    - degree
+    - heat
+    - hot
+    - cold
+  sizes:
+    - 32
+- name: temperature--frigid
+  friendly_name: Temperature frigid
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - weather
+    - thermometer
+    - degree
+    - heat
+    - hot
+    - cold
+- name: temperature--hot
+  friendly_name: Temperature hot
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - weather
+    - thermometer
+    - degree
+    - heat
+    - hot
+    - cold
+- name: template
+  friendly_name: Template
+  usage: This is a description for usage
+  aliases:
+    - dashboard
+    - arrange
+    - layout
+    - wireframe
+    - pattern
+  sizes:
+    - 32
+- name: tennis-ball
+  friendly_name: Tennis ball
+  usage: This is a description for usage
+  aliases:
+    - tennis-ball
+  sizes:
+    - 32
+- name: tennis
+  friendly_name: Tennis
+  usage: This is a description for usage
+  aliases:
+    - tennis
+  sizes:
+    - 32
+- name: term
+  friendly_name: Term
+  usage: This is a description for usage
+  aliases:
+    - term
+  sizes:
+    - 32
+- name: terminal
+  friendly_name: Terminal
+  usage: This is a description for usage
+  aliases:
+    - code
+    - code editor
+    - command line
+  sizes:
+    - 32
+- name: text--align--center
+  friendly_name: Text align center
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--align--justify
+  friendly_name: Text align justify
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--align--left
+  friendly_name: Text align left
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--align--right
+  friendly_name: Text align right
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--all-caps
+  friendly_name: Text all caps
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--bold
+  friendly_name: Text bold
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--color
+  friendly_name: Text color
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--creation
+  friendly_name: Text creation
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--fill
+  friendly_name: Text fill
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--highlight
+  friendly_name: Text highlight
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--indent--less
+  friendly_name: Text indent less
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--indent--more
+  friendly_name: Text indent more
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--indent
+  friendly_name: Text indent
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--italic
+  friendly_name: Text italic
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--kerning
+  friendly_name: Text kerning
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--leading
+  friendly_name: Text leading
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--line-spacing
+  friendly_name: Text line spacing
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--new-line
+  friendly_name: Text new line
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--scale
+  friendly_name: Text scale
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--selection
+  friendly_name: Text selection
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--small-caps
+  friendly_name: Text small caps
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--strikethrough
+  friendly_name: Text strikethrough
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--subscript
+  friendly_name: Text subscript
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--superscript
+  friendly_name: Text superscript
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--tracking
+  friendly_name: Text tracking
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--underline
+  friendly_name: Text underline
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text--wrap
+  friendly_name: Text wrap
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - letter
+    - typography
+    - alphabet
+    - editor
+- name: text-link
+  friendly_name: Text link
+  usage: This is a description for usage
+  aliases:
+    - text-link
+  sizes:
+    - 32
+- name: text-link--analysis
+  friendly_name: Text link analysis
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - text-link
+- name: text-mining
+  friendly_name: Text mining
+  usage: This is a description for usage
+  aliases:
+    - text-mining
+  sizes:
+    - 32
+- name: text-mining--applier
+  friendly_name: Text mining applier
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - text-mining
+- name: thumbnail--1
+  friendly_name: Thumbnail 1
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - preview
+    - carousel
+    - grid
+- name: thumbnail--2
+  friendly_name: Thumbnail 2
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - preview
+    - carousel
+    - grid
+- name: thumbs-down
+  friendly_name: Thumbs down
+  usage: This is a description for usage
+  aliases:
+    - dislike
+    - hand
+    - down vote
+    - 'no'
+    - disagree
+  sizes:
+    - 32
+- name: thumbs-up
+  friendly_name: Thumbs up
+  usage: This is a description for usage
+  aliases:
+    - like
+    - hand
+    - up vote
+    - 'yes'
+    - agree
+  sizes:
+    - 32
+- name: thunderstorm
+  friendly_name: Thunderstorm
+  usage: This is a description for usage
+  aliases:
+    - thunderstorm
+  sizes:
+    - 32
+- name: thunderstorm--scattered--night
+  friendly_name: Thunderstorm scattered night
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - thunderstorm
+- name: thunderstorm--scattered
+  friendly_name: Thunderstorm scattered
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - thunderstorm
+- name: thunderstorm--severe
+  friendly_name: Thunderstorm severe
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - thunderstorm
+- name: thunderstorm--strong
+  friendly_name: Thunderstorm strong
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - thunderstorm
+- name: ticket
+  friendly_name: Ticket
+  usage: This is a description for usage
+  aliases:
+    - stub
+    - admission
+  sizes:
+    - 32
+- name: timer
+  friendly_name: Timer
+  usage: This is a description for usage
+  aliases:
+    - alarm
+    - alert
+    - stop watch
+  sizes:
+    - 32
+- name: tool-box
+  friendly_name: Tool box
+  usage: This is a description for usage
+  aliases:
+    - kit
+    - container
+  sizes:
+    - 32
+- name: tools
+  friendly_name: Tools
+  usage: This is a description for usage
+  aliases:
+    - wrench
+    - fix
+    - setting
+    - customize
+  sizes:
+    - 32
+- name: tornado
+  friendly_name: Tornado
+  usage: This is a description for usage
+  aliases:
+    - tornado
+  sizes:
+    - 32
+- name: touch--1
+  friendly_name: Touch 1
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - hand
+    - tap
+    - press
+    - click
+- name: touch--2
+  friendly_name: Touch 2
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - hand
+    - tap
+    - press
+    - click
+- name: train
+  friendly_name: Train
+  usage: This is a description for usage
+  aliases:
+    - subway
+    - metro
+    - underground
+  sizes:
+    - 32
+- name: tram
+  friendly_name: Tram
+  usage: This is a description for usage
+  aliases:
+    - tram
+  sizes:
+    - 32
+- name: translate
+  friendly_name: Translate
+  usage: This is a description for usage
+  aliases:
+    - language
+  sizes:
+    - 32
+- name: tree-view
+  friendly_name: Tree view
+  usage: This is a description for usage
+  aliases:
+    - flow chart
+  sizes:
+    - 32
+- name: tree-view--alt
+  friendly_name: Tree view alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - flow chart
+- name: tree
+  friendly_name: Tree
+  usage: This is a description for usage
+  aliases:
+    - tree
+  sizes:
+    - 32
+- name: trophy
+  friendly_name: Trophy
+  usage: This is a description for usage
+  aliases:
+    - trophy
+  sizes:
+    - 32
+- name: trophy--filled
+  friendly_name: Trophy filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - trophy
+- name: tropical-storm
+  friendly_name: Tropical storm
+  usage: This is a description for usage
+  aliases:
+    - tropical-storm
+  sizes:
+    - 32
+- name: type-pattern
+  friendly_name: Type pattern
+  usage: This is a description for usage
+  aliases:
+    - type-pattern
+  sizes:
+    - 32
+- name: types
+  friendly_name: Types
+  usage: This is a description for usage
+  aliases:
+    - types
+  sizes:
+    - 32
+- name: undefined
+  friendly_name: Undefined
+  usage: This is a description for usage
+  aliases:
+    - undefined
+  sizes:
+    - 32
+- name: undefined--filled
+  friendly_name: Undefined filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - undefined
+- name: unknown
+  friendly_name: Unknown
+  usage: This is a description for usage
+  aliases:
+    - unknown
+  sizes:
+    - 32
+- name: unknown--filled
+  friendly_name: Unknown filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - unknown
+- name: unlink
+  friendly_name: Unlink
+  usage: This is a description for usage
+  aliases:
+    - detach
+    - paperclip
+    - break
+  sizes:
+    - 32
+- name: user-profile--alt
+  friendly_name: User profile alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - person
+    - account
+- name: van
+  friendly_name: Van
+  usage: This is a description for usage
+  aliases:
+    - vehicle
+    - car
+    - delivery
+  sizes:
+    - 32
+- name: video
+  friendly_name: Video
+  usage: This is a description for usage
+  aliases:
+    - camera
+    - recorder
+    - movie
+  sizes:
+    - 32
+- name: video--add
+  friendly_name: Video add
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - camera
+    - recorder
+    - movie
+- name: video--chat
+  friendly_name: Video chat
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - camera
+    - recorder
+    - movie
+- name: video--filled
+  friendly_name: Video filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - camera
+    - recorder
+    - movie
+- name: video--off--filled
+  friendly_name: Video off filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - camera
+    - recorder
+    - movie
+- name: video--off
+  friendly_name: Video off
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - camera
+    - recorder
+    - movie
+- name: virtual-column
+  friendly_name: Virtual column
+  usage: This is a description for usage
+  aliases:
+    - virtual-column
+  sizes:
+    - 32
+- name: virtual-column--key
+  friendly_name: Virtual column key
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - virtual-column
+- name: virtual-machine
+  friendly_name: Virtual machine
+  usage: This is a description for usage
+  aliases:
+    - virtual-machine
+  sizes:
+    - 32
+- name: virtual-private-cloud
+  friendly_name: Virtual private cloud
+  usage: This is a description for usage
+  aliases:
+    - virtual-private-cloud
+  sizes:
+    - 32
+- name: virtual-private-cloud--alt
+  friendly_name: Virtual private cloud alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - virtual-private-cloud
+- name: visual-recognition
+  friendly_name: Visual recognition
+  usage: This is a description for usage
+  aliases:
+    - picture
+    - ai
+  sizes:
+    - 32
+- name: vmdk-disk
+  friendly_name: Vmdk disk
+  usage: This is a description for usage
+  aliases:
+    - vmdk-disk
+  sizes:
+    - 32
+- name: voicemail
+  friendly_name: Voicemail
+  usage: This is a description for usage
+  aliases:
+    - recording
+    - audio
+    - tape
+  sizes:
+    - 32
+- name: volume--down--filled
+  friendly_name: Volume down filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - sound
+    - noise
+- name: volume--down
+  friendly_name: Volume down
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - sound
+    - noise
+- name: volume--mute--filled
+  friendly_name: Volume mute filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - sound
+    - noise
+- name: volume--mute
+  friendly_name: Volume mute
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - sound
+    - noise
+- name: volume--up--filled
+  friendly_name: Volume up filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - sound
+    - noise
+- name: volume--up
+  friendly_name: Volume up
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - sound
+    - noise
+- name: wallet
+  friendly_name: Wallet
+  usage: This is a description for usage
+  aliases:
+    - money
+    - purse
+  sizes:
+    - 32
+- name: warning-square
+  friendly_name: Warning square
+  usage: This is a description for usage
+  aliases:
+    - warning-square
+  sizes:
+    - 32
+- name: warning-square--filled
+  friendly_name: Warning square filled
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - warning-square
+- name: watch
+  friendly_name: Watch
+  usage: This is a description for usage
+  aliases:
+    - time
+    - clock
+  sizes:
+    - 32
+- name: watson
+  friendly_name: Watson
+  usage: This is a description for usage
+  aliases:
+    - ai
+  sizes:
+    - 32
+- name: watson--machine-learning
+  friendly_name: Watson machine learning
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - ai
+- name: 3D-Cursor
+  friendly_name: 3D cursor
+  usage: This is a description for usage
+  aliases:
+    - watson
+  sizes:
+    - 32
+- name: 3D-MPR-Toggle
+  friendly_name: 3D mpr toggle
+  usage: This is a description for usage
+  aliases:
+    - watson
+  sizes:
+    - 32
+- name: 3D-cursor--alt
+  friendly_name: 3 d cursor alt
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - 3D-cursor
+- name: 3D-curve--auto-colon
+  friendly_name: 3 d curve auto colon
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - watson
+    - curve
+    - spline
+- name: 3D-curve--auto-vessels
+  friendly_name: 3 d curve auto vessels
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - watson
+    - curve
+    - spline
+- name: 3D-curve--manual
+  friendly_name: 3 d curve manual
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - watson
+    - curve
+    - spline
+- name: 3D-iCa
+  friendly_name: 3D iCa
+  usage: This is a description for usage
+  aliases:
+    - iCA
+    - dimension
+    - cube
+    - space
+  sizes:
+    - 32
+- name: 3D-software
+  friendly_name: 3D software
+  usage: This is a description for usage
+  aliases:
+    - 3D-software
+  sizes:
+    - 32
+- name: 3rd-party-connected
+  friendly_name: 3rd party connected
+  usage: This is a description for usage
+  aliases:
+    - watson
+    - dots
+    - connection
+    - lattice
+    - group
+  sizes:
+    - 32
+- name: angle
+  friendly_name: Angle
+  usage: This is a description for usage
+  aliases:
+    - watson
+    - tilt
+    - meter
+    - gauge
+  sizes:
+    - 32
+- name: annotation-visibility
+  friendly_name: Annotation visibility
+  usage: This is a description for usage
+  aliases:
+    - meter
+    - instrument
+    - annotate
+    - diagram
+    - comment
+  sizes:
+    - 32
+- name: auto-scroll
+  friendly_name: Auto scroll
+  usage: This is a description for usage
+  aliases:
+    - scrolling
+    - slide
+    - control
+  sizes:
+    - 32
+- name: cd--archive
+  friendly_name: Cd archive
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - target
+    - mark
+    - spot
+    - bull's eye
+- name: cd--create-archive
+  friendly_name: Cd create archive
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - target
+    - mark
+    - spot
+    - bull's eye
+- name: cd--create-exchange
+  friendly_name: Cd create exchange
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - target
+    - mark
+    - spot
+    - bull's eye
+- name: circle-measurement
+  friendly_name: Circle measurement
+  usage: This is a description for usage
+  aliases:
+    - pan
+    - scan
+    - track
+  sizes:
+    - 32
+- name: cobb-angle
+  friendly_name: Cobb angle
+  usage: This is a description for usage
+  aliases:
+    - corner
+    - slant
+    - twist
+    - bend
+    - crook
+    - stack
+  sizes:
+    - 32
+- name: cross-reference
+  friendly_name: Cross reference
+  usage: This is a description for usage
+  aliases:
+    - read
+    - research
+    - refer
+  sizes:
+    - 32
+- name: denominate
+  friendly_name: Denominate
+  usage: This is a description for usage
+  aliases:
+    - denominate
+  sizes:
+    - 32
+- name: dicom--6000
+  friendly_name: Dicom 6000
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - digital
+    - imaging
+    - communication
+- name: dicom--overlay
+  friendly_name: Dicom overlay
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - digital
+    - imaging
+    - communication
+- name: dna
+  friendly_name: Dna
+  usage: This is a description for usage
+  aliases:
+    - dna
+  sizes:
+    - 32
+- name: edge-enhancement
+  friendly_name: Edge enhancement
+  usage: This is a description for usage
+  aliases:
+    - edge-enhancement
+  sizes:
+    - 32
+- name: edit-filter
+  friendly_name: Edit filter
+  usage: This is a description for usage
+  aliases:
+    - pencil
+    - funnel
+  sizes:
+    - 32
+- name: fusion-blender
+  friendly_name: Fusion blender
+  usage: This is a description for usage
+  aliases:
+    - bar
+    - box
+    - plot
+  sizes:
+    - 32
+- name: hanging-protocol
+  friendly_name: Hanging protocol
+  usage: This is a description for usage
+  aliases:
+    - hanger
+    - clothes
+    - suspended
+    - swing
+  sizes:
+    - 32
+- name: iCA-2D
+  friendly_name: I ca 2 d
+  usage: This is a description for usage
+  aliases:
+    - iCA-2D
+  sizes:
+    - 32
+- name: interactive-segmentation-cursor
+  friendly_name: Interactive segmentation cursor
+  usage: This is a description for usage
+  aliases:
+    - interactive-segmentation-cursor
+  sizes:
+    - 32
+- name: launch-study--1
+  friendly_name: Launch study 1
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - push
+    - pull
+    - server
+    - drive
+- name: launch-study--2
+  friendly_name: Launch study 2
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - push
+    - pull
+    - server
+    - drive
+- name: launch-study--3
+  friendly_name: Launch study 3
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - push
+    - pull
+    - server
+    - drive
+- name: magnify
+  friendly_name: Magnify
+  usage: This is a description for usage
+  aliases:
+    - expand
+    - zoom
+    - amplify
+    - enhance
+  sizes:
+    - 32
+- name: mammogram
+  friendly_name: Mammogram
+  usage: This is a description for usage
+  aliases:
+    - mammogram
+  sizes:
+    - 32
+- name: nominate
+  friendly_name: Nominate
+  usage: This is a description for usage
+  aliases:
+    - nominate
+  sizes:
+    - 32
+- name: page-scroll
+  friendly_name: Page scroll
+  usage: This is a description for usage
+  aliases:
+    - pages
+    - stack
+    - flip
+    - browse
+    - shuffle
+    - sheets
+  sizes:
+    - 32
+- name: pet-image--B
+  friendly_name: Pet image b
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - cursor
+    - brightness
+    - contrast
+- name: pet-image--O
+  friendly_name: Pet image o
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - cursor
+    - brightness
+    - contrast
+- name: pointer-text
+  friendly_name: Pointer text
+  usage: This is a description for usage
+  aliases:
+    - cursor
+    - text
+    - arrow
+  sizes:
+    - 32
+- name: region-analysis--area
+  friendly_name: Region analysis area
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - circle
+    - hash
+    - select
+    - area
+- name: region-analysis--volume
+  friendly_name: Region analysis volume
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - circle
+    - hash
+    - select
+    - area
+- name: registration
+  friendly_name: Registration
+  usage: This is a description for usage
+  aliases:
+    - registration
+  sizes:
+    - 32
+- name: spine-label
+  friendly_name: Spine label
+  usage: This is a description for usage
+  aliases:
+    - backbone
+    - stack
+    - pointer
+    - gap
+    - annotate
+  sizes:
+    - 32
+- name: stacked-move
+  friendly_name: Stacked move
+  usage: This is a description for usage
+  aliases:
+    - stack
+    - pages
+    - sheet
+    - migrate
+    - drag
+  sizes:
+    - 32
+- name: stacked-scrolling--1
+  friendly_name: Stacked scrolling 1
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - stack
+    - pages
+    - sheet
+    - browse
+    - thick
+    - tall
+- name: stacked-scrolling--2
+  friendly_name: Stacked scrolling 2
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - stack
+    - pages
+    - sheet
+    - browse
+    - thick
+    - tall
+- name: stress-breath-editor
+  friendly_name: Stress breath editor
+  usage: This is a description for usage
+  aliases:
+    - air
+    - gas
+    - blow
+    - flow
+    - breathalyzer
+  sizes:
+    - 32
+- name: study--next
+  friendly_name: Study next
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - patient
+    - user
+    - profile
+- name: study--previous
+  friendly_name: Study previous
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - patient
+    - user
+    - profile
+- name: study--skip
+  friendly_name: Study skip
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - patient
+    - user
+    - profile
+- name: text-annotation-toggle
+  friendly_name: Text annotation toggle
+  usage: This is a description for usage
+  aliases:
+    - text-annotation-toggle
+  sizes:
+    - 32
+- name: thumbnail-preview
+  friendly_name: Thumbnail preview
+  usage: This is a description for usage
+  aliases:
+    - thumbnail-preview
+  sizes:
+    - 32
+- name: window--auto
+  friendly_name: Window auto
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brightness
+    - contrast
+    - sun
+- name: window--base
+  friendly_name: Window base
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brightness
+    - contrast
+    - sun
+- name: window--overlay
+  friendly_name: Window overlay
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - brightness
+    - contrast
+    - sun
+- name: zoom-pan
+  friendly_name: Zoom pan
+  usage: This is a description for usage
+  aliases:
+    - track
+    - move
+    - view
+    - zoom
+    - magnifying glass
+    - search
+  sizes:
+    - 32
+- name: wheat
+  friendly_name: Wheat
+  usage: This is a description for usage
+  aliases:
+    - wheat
+  sizes:
+    - 32
+- name: wifi
+  friendly_name: Wifi
+  usage: This is a description for usage
+  aliases:
+    - wifi
+  sizes:
+    - 32
+- name: wifi--off
+  friendly_name: Wifi off
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - wifi
+- name: wikis
+  friendly_name: Wikis
+  usage: This is a description for usage
+  aliases:
+    - globe
+    - wikipedia
+    - earth
+    - world
+    - international
+  sizes:
+    - 32
+- name: windy
+  friendly_name: Windy
+  usage: This is a description for usage
+  aliases:
+    - windy
+  sizes:
+    - 32
+- name: windy--dust
+  friendly_name: Windy dust
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - windy
+- name: windy--snow
+  friendly_name: Windy snow
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - windy
+- name: windy--strong
+  friendly_name: Windy strong
+  usage: This is a description for usage
+  sizes:
+    - 32
+  aliases:
+    - windy
+- name: wintry-mix
+  friendly_name: Wintry mix
+  usage: This is a description for usage
+  aliases:
+    - wintry-mix
+  sizes:
+    - 32
+- name: wireless-checkout
+  friendly_name: Wireless checkout
+  usage: This is a description for usage
+  aliases:
+    - shopping bag
+    - buy
+    - tote
+    - WiFi
+  sizes:
+    - 32
+- name: workspace
+  friendly_name: Workspace
+  usage: This is a description for usage
+  aliases:
+    - tiles
+    - dashboard
+    - apps
+  sizes:
+    - 32
+- name: x-axis
+  friendly_name: X axis
+  usage: This is a description for usage
+  aliases:
+    - horizontal
+    - data
+    - right
+    - angle
+    - corner
+    - turn
+  sizes:
+    - 32
+- name: y-axis
+  friendly_name: Y axis
+  usage: This is a description for usage
+  aliases:
+    - verticle
+    - data
+    - up
+    - angle
+    - corner
+    - turn
+  sizes:
+    - 32
+- name: z-axis
+  friendly_name: Z axis
+  usage: This is a description for usage
+  aliases:
+    - depth
+    - 3D
+    - dimension
+    - '3'
+  sizes:
+    - 32
