@@ -30,7 +30,6 @@ async function build({
   directory,
   extensions = [Extensions.icons],
 }) {
-  console.log('Building');
   const registry = await Registry.create(path.join(directory, 'svg'));
   const loaded = await Storage.load(adapter, directory, extensions);
   validate(registry, loaded);
@@ -72,17 +71,36 @@ async function build({
     spaces: 2,
   });
 
-  console.log('Done!');
   return metadata;
+}
+
+// Help generate metadata info for icons that have an asset (.svg) but no
+// metadata information
+async function scaffold({ adapter = adapters.yml, directory }) {
+  const registry = await Registry.create(path.join(directory, 'svg'));
+  const [icons] = await Storage.load(adapter, directory, [Extensions.icons]);
+
+  for (const item of registry.values()) {
+    const match = icons.data.find(icon => item.id === icon.name);
+    if (!match) {
+      const metadata = {
+        name: item.id,
+        friendly_name: item.id,
+        usage: 'This is a description of usage',
+        aliases: [],
+        sizes: item.assets.map(asset => asset.size),
+      };
+      icons.data.push(metadata);
+    }
+  }
+
+  await Storage.save(adapter, directory, [icons]);
 }
 
 module.exports = {
   adapters,
-  extensions: Extensions,
-
   build,
   check,
-
-  // scaffold??
-  scaffold() {},
+  extensions: Extensions,
+  scaffold,
 };

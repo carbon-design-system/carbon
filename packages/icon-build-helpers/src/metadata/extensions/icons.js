@@ -45,7 +45,7 @@ const icons = {
     // 1. All assets in the registry are defined in the metadata
     // 2. No extra icons are defined in the metadata that aren't in the source
     //    directory
-    for (const [_id, item] of registry) {
+    for (const item of registry.values()) {
       const metadata = icons.find(icon => icon.name === item.id);
       if (!metadata) {
         const filepaths = item.assets.map(asset => asset.filepath).join('\n');

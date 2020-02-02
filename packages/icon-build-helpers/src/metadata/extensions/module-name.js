@@ -16,7 +16,7 @@ const moduleName = {
   computed: true,
   extend(metadata) {
     for (const icon of metadata.icons) {
-      icon.moduleName = getModuleName(icon.name, icon.prefix);
+      icon.moduleName = getModuleName(icon.name, icon.namespace);
     }
   },
 };
@@ -27,8 +27,8 @@ const moduleName = {
  * @param {Array<string>} [prefix]
  * @returns {string}
  */
-function getModuleName(name, prefix = []) {
-  const namespace = prefix.map(part => pascalCase(part)).join('');
+function getModuleName(name, parts = []) {
+  const namespace = parts.map(part => pascalCase(part)).join('');
   if (namespace !== '') {
     return `${namespace}${pascalCase(name)}`;
   }
