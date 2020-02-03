@@ -237,17 +237,11 @@ export default class Slider extends PureComponent {
           39: 1, // increasing
         }[evt.which];
 
-        if (stepMultiplier && direction !== undefined) {
+        const multiplyStep = stepMuliplier || stepMultiplier;
+
+        if (direction !== undefined) {
           const multiplier =
-            evt.shiftKey === true ? range / step / stepMultiplier : 1;
-          const stepMultiplied = step * multiplier;
-          const stepSize = (stepMultiplied / range) * 100;
-          left = valuePercentage + stepSize * direction;
-          newValue = Number(value) + stepMultiplied * direction;
-        }
-        if (stepMuliplier && direction !== undefined) {
-          const multiplier =
-            evt.shiftKey === true ? range / step / stepMuliplier : 1;
+            evt.shiftKey === true ? range / step / multiplyStep : 1;
           const stepMultiplied = step * multiplier;
           const stepSize = (stepMultiplied / range) * 100;
           left = valuePercentage + stepSize * direction;
