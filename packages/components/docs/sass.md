@@ -17456,11 +17456,11 @@ Link styles
     }
 
     &:visited {
-      color: $visited-link;
+      color: $link-01;
     }
 
     &:visited:hover {
-      color: $hover-primary-text;
+      color: $link-01;
     }
   }
 
@@ -17471,6 +17471,14 @@ Link styles
     color: $disabled-02;
     font-weight: 400;
     cursor: not-allowed;
+  }
+
+  .#{$prefix}--link.#{$prefix}--link--visited:visited {
+    color: $visited-link;
+  }
+
+  .#{$prefix}--link.#{$prefix}--link--visited:visited:hover {
+    color: $hover-primary-text;
   }
 
   .#{$prefix}--link.#{$prefix}--link--inline {
