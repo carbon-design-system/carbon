@@ -159,7 +159,7 @@ class NumberInput extends Component {
   static getDerivedStateFromProps({ min, max, value = 0 }, state) {
     const { prevValue } = state;
 
-    if (typeof value === 'string' && value === '' && state.value !== '') {
+    if (useControlledStateWithValue && value === '' && prevValue !== '') {
       return {
         value: '',
         prevValue: '',
@@ -330,7 +330,10 @@ class NumberInput extends Component {
       if (!allowEmpty && this.state.value === '') {
         isInputInvalid = true;
       } else {
-        if (this.state.value !== '' && (this.state.value > max || this.state.value < min)) {
+        if (
+          this.state.value !== '' &&
+          (this.state.value > max || this.state.value < min)
+        ) {
           isInputInvalid = true;
         }
       }
