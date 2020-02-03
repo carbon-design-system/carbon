@@ -7,12 +7,17 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useColumnResizing } from './tools/columnResize';
 
-const TableCell = ({ children, colWidth, ...rest }) => (
-  <td style={{ width: colWidth + 'px' }} {...rest}>
-    {children}
-  </td>
-);
+const TableCell = ({ children, colKey, ...rest }) => {
+  const { colWidth } = useColumnResizing(colKey);
+
+  return (
+    <td style={{ width: colWidth + 'px' }} {...rest}>
+      {children}
+    </td>
+  );
+};
 
 TableCell.propTypes = {
   /**
@@ -20,8 +25,10 @@ TableCell.propTypes = {
    */
   children: PropTypes.node,
 
-  // fixed column width for resizing
-  colWidth: PropTypes.number,
+  /**
+   * key for the column as defined in the header data
+   */
+  colKey: PropTypes.string.isRequired,
 };
 
 TableCell.displayName = 'TableCell';

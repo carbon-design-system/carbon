@@ -9,6 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { settings } from 'carbon-components';
+import { ResizeProvider } from './tools/columnResize';
 
 const { prefix } = settings;
 
@@ -35,9 +36,15 @@ export const Table = ({
     [`${prefix}--data-table--resizable`]: isResizable,
     [`${prefix}--data-table--sticky-header`]: stickyHeader,
   });
+  const childrenWithProvider = isResizable ? (
+    <ResizeProvider>{children}</ResizeProvider>
+  ) : (
+    children
+  );
+
   const table = (
     <table {...other} className={componentClass}>
-      {children}
+      {childrenWithProvider}
     </table>
   );
   return stickyHeader ? (

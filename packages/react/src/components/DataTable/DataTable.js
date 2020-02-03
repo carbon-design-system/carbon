@@ -15,8 +15,7 @@ import { composeEventHandlers } from '../../tools/events';
 import { defaultFilterRows } from './tools/filter';
 import { defaultSortRow } from './tools/sorting';
 import setupGetInstanceId from './tools/instanceId';
-import { splitCellId } from './tools/cells';
-import { actionTypes as resizeActionTypes } from './TableColumnResizer';
+import { getColKey } from './tools/cells';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -143,84 +142,9 @@ export default class DataTable extends React.Component {
     this.state = {
       ...getDerivedStateFromProps(props, {}),
       isExpandedAll: false, // Start with collapsed state, treat `undefined` as neutral state
-      colWidth: {},
     };
     this.instanceId = getInstanceId();
-
-    // create refs for the columns
-    this.colRefs = props.headers
-      .map(e => e.key)
-      .reduce((r, e) => {
-        r[e] = createRef();
-        return r;
-      }, {});
-
-    // build up a structure to look up column key of next column
-    let prevHead = null;
-    this.nextCol = {};
-    props.headers.forEach(head => {
-      if (prevHead) {
-        this.nextCol[prevHead] = head.key;
-      }
-      prevHead = head.key;
-    });
   }
-
-  componentDidMount() {
-    this.syncColumnWidthState();
-    window.addEventListener('resize', this.syncColumnWidthState());
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.syncColumnWidthState());
-  }
-
-  syncColumnWidthState = () => {
-    // update column width state based on actual state
-    if (Object.keys(this.colRefs).length > 0) {
-      const nextWidth = {};
-      Object.entries(this.colRefs).forEach(entry => {
-        const [key, ref] = entry;
-        nextWidth[key] =
-          ref.current && ref.current.getBoundingClientRect().width;
-      });
-      this.setState({
-        ...this.state,
-        colWidth: nextWidth,
-      });
-    }
-  };
-
-  resizeAction = (colId, type, arg) => {
-    switch (type) {
-      case resizeActionTypes.UPDATE_COLWIDTH:
-        this.resizeColumn(colId, arg);
-        break;
-      case resizeActionTypes.END_RESIZING:
-        this.syncColumnWidthState();
-        break;
-
-      default:
-        break;
-    }
-  };
-
-  // this is the resize algorithm: resize this column and the one to the right
-  resizeColumn = (colId, increment) => {
-    const nextColKey = this.nextCol[colId];
-    const nextWidth = {
-      ...this.state.colWidth,
-      [colId]: this.state.colWidth[colId] + increment,
-    };
-    if (nextColKey) {
-      nextWidth[nextColKey] = this.state.colWidth[nextColKey] - increment;
-    }
-    const newState = {
-      ...this.state,
-      colWidth: nextWidth,
-    };
-    this.setState(newState);
-  };
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     const rowIds = this.props.rows.map(row => row.id);
@@ -259,9 +183,7 @@ export default class DataTable extends React.Component {
     onClick,
     isSortable = this.props.isSortable,
     isResizable = this.props.isResizable,
-    colWidth = this.state.colWidth[header.key],
-    resizeAction = (type, arg) => this.resizeAction(header.key, type, arg),
-    ref = this.colRefs[header.key],
+    ref = createRef(),
     ...rest
   }) => {
     const { sortDirection, sortHeaderKey } = this.state;
@@ -273,8 +195,6 @@ export default class DataTable extends React.Component {
       isSortable,
       isSortHeader: sortHeaderKey === header.key,
       isResizable,
-      colWidth,
-      resizeAction,
       ref,
       // Compose the event handlers so we don't overwrite a consumer's `onClick`
       // handler
@@ -379,14 +299,14 @@ export default class DataTable extends React.Component {
   getCellProps = ({
     cell,
     isResizable = this.props.isResizable,
-    colWidth = this.state.colWidth[splitCellId(cell.id)[1]],
+    colKey = getColKey(cell.id),
     ...rest
   }) => {
     return {
       ...rest,
       key: cell.id,
       isResizable,
-      colWidth,
+      colKey,
     };
   };
 

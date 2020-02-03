@@ -8,23 +8,37 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+
 import { settings } from 'carbon-components';
+import { useColumnResizing } from './tools/columnResize';
 const { prefix } = settings;
 
-export const actionTypes = {
-  START_RESIZING: 'START_RESIZING',
-  UPDATE_COLWIDTH: 'UPDATE_COLWIDTH',
-  END_RESIZING: 'END_RESIZING',
-};
+// resizer component within table header
 
-const TableColumnResizer = ({ resizeAction, ...rest }) => {
-  // is a resizing active for this column
-  const [columnResizingActive, setColumnResizingActive] = useState(false);
+const TableColumnResizer = ({ headerRef, colKey, ...rest }) => {
+  const {
+    columnKeyResizeActive,
+    initColumnResizing,
+    cleanupColumnResizing,
+    startResizeAction,
+    endResizeAction,
+    resizeColumn,
+  } = useColumnResizing(colKey);
+
+  useEffect(() => {
+    // initially set width of our column
+    initColumnResizing(headerRef);
+    return () => {
+      cleanupColumnResizing();
+    };
+
+    // disable lint rule since a ref may not be included in the dependencies
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const startResizing = () => {
-    resizeAction(actionTypes.START_RESIZING);
-    setColumnResizingActive(true);
+    startResizeAction();
     document.onmouseup = endResizing;
     document.onmousemove = doResizing;
     // keep cursor style everywhere during resizing
@@ -35,29 +49,23 @@ const TableColumnResizer = ({ resizeAction, ...rest }) => {
     document.onmouseup = null;
     document.onmousemove = null;
     document.body.style.cursor = 'default';
-    setColumnResizingActive(false);
-    // resets memoized column widths to current values
-    resizeAction(actionTypes.END_RESIZING);
+    endResizeAction();
   };
 
   const doResizing = ev => {
     // prevent other mouse actions like text selection
     ev.stopPropagation();
     ev.preventDefault();
-    resizeAction(actionTypes.UPDATE_COLWIDTH, ev.movementX);
-  };
-
-  // is resizing active on any column
-  const isResizingActive = () => {
-    return Boolean(document.onmouseup && document.onmousemove);
+    resizeColumn(ev.movementX);
   };
 
   // permanently highlight only active resizer while resizing
   const resizerClassName = cx({
     [`${prefix}--table-header-resizer`]: true,
-    [`${prefix}--table-header-resizer-active`]: columnResizingActive,
+    [`${prefix}--table-header-resizer-active`]:
+      columnKeyResizeActive === colKey,
     [`${prefix}--table-header-resizer-passive`]:
-      isResizingActive() && !columnResizingActive,
+      columnKeyResizeActive && columnKeyResizeActive !== colKey,
   });
 
   return (
@@ -65,13 +73,21 @@ const TableColumnResizer = ({ resizeAction, ...rest }) => {
       className={resizerClassName}
       onMouseDown={() => startResizing()}
       role="separator"
-      {...rest}></div>
+      {...rest}
+    />
   );
 };
 
 TableColumnResizer.propTypes = {
-  resizeColumn: PropTypes.func,
-  finalizeColumnResizing: PropTypes.func,
+  /**
+   * key for the column as defined in the header data
+   */
+  colKey: PropTypes.string.isRequired,
+
+  /**
+   * ref of the table header that includes this component
+   */
+  headerRef: PropTypes.object.isRequired,
 };
 
 TableColumnResizer.displayName = 'TableColumnResizer';

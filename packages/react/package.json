@@ -44,6 +44,7 @@
     "flatpickr": "4.6.1",
     "focus-trap-react": "^6.0.0",
     "invariant": "^2.2.3",
+    "lodash.clonedeep": "^4.5.0",
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
     "lodash.omit": "^4.5.0",
