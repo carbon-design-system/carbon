@@ -151,15 +151,10 @@ export class FileUploaderButton extends Component {
       disabled,
       ...other
     } = this.props;
-    const classes = classNames(
-      `${prefix}--btn`,
-      `${prefix}--btn--sm`,
-      className,
-      {
-        [`${prefix}--btn--${buttonKind}`]: buttonKind,
-        [`${prefix}--btn--disabled`]: disabled,
-      }
-    );
+    const classes = classNames(`${prefix}--btn`, className, {
+      [`${prefix}--btn--${buttonKind}`]: buttonKind,
+      [`${prefix}--btn--disabled`]: disabled,
+    });
 
     this.uid = this.props.id || uid();
 

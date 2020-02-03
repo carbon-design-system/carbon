@@ -3383,10 +3383,8 @@ $carbon--spacing-04: 0.75rem;
   - `spacing-04`
 - **Used by**:
   - [dropdown [mixin]](#dropdown-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
   - [lists [mixin]](#lists-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
 
@@ -3472,7 +3470,6 @@ $carbon--spacing-07: 2rem;
   - `spacing-07`
 - **Used by**:
   - [snippet [mixin]](#snippet-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -3518,6 +3515,7 @@ $carbon--spacing-09: 3rem;
 - **Used by**:
   - [accordion [mixin]](#accordion-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [tile [mixin]](#tile-mixin)
@@ -6396,7 +6394,6 @@ $text-02: if(
   - [modal [mixin]](#modal-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
-  - [search [mixin]](#search-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
@@ -6535,6 +6532,7 @@ $icon-01: if(
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -6566,9 +6564,9 @@ $icon-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [search [mixin]](#search-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [tile [mixin]](#tile-mixin)
   - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
@@ -7108,6 +7106,7 @@ $focus: if(
   - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [modal [mixin]](#modal-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
@@ -12956,7 +12955,7 @@ Button styles
     }
 
     &:active {
-      color: $inverse-01;
+      border-color: transparent;
     }
 
     &:disabled,
@@ -12969,13 +12968,26 @@ Button styles
       color: $disabled;
       outline: none;
 
-      & > .#{$prefix}--btn__icon path {
+      > .#{$prefix}--btn__icon path {
         fill: $disabled;
       }
     }
 
     &:hover > .#{$prefix}--btn__icon path {
       fill: $inverse-01;
+    }
+  }
+
+  .#{$prefix}--btn--tertiary,
+  .#{$prefix}--btn--tertiary.#{$prefix}--btn--field,
+  .#{$prefix}--btn--tertiary.#{$prefix}--btn--sm {
+    padding-right: rem(62px);
+    padding-left: rem(14px);
+
+    &:focus {
+      border-width: rem(3px);
+      padding-right: rem(60px);
+      padding-left: rem(12px);
     }
   }
 
@@ -13035,13 +13047,11 @@ Button styles
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
     @include tooltip--trigger('icon', 'bottom');
-    outline: $button-outline-width solid transparent;
-    outline-offset: -4px;
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
-    outline-color: $ui-02;
+    box-shadow: inset 0 0 0 $button-outline-width $ui-02;
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
@@ -13058,9 +13068,8 @@ Button styles
     @include tooltip--placement('icon', 'bottom', 'center');
   }
 
-  .#{$prefix}--btn--icon-only,
-  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only,
-  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
+  .#{$prefix}--btn--icon-only {
+    padding-left: rem(13px);
     padding-right: rem(13px);
 
     .#{$prefix}--btn__icon {
@@ -13069,6 +13078,46 @@ Button styles
 
     &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon {
       margin: 0;
+    }
+  }
+
+  .#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
+    padding-left: rem(15px);
+    padding-right: rem(15px);
+
+    &:focus {
+      padding-left: rem(13px);
+      padding-right: rem(13px);
+    }
+  }
+
+  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
+    padding-left: rem(9px);
+    padding-right: rem(9px);
+  }
+
+  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
+    padding-left: rem(11px);
+    padding-right: rem(11px);
+
+    &:focus {
+      padding-left: rem(9px);
+      padding-right: rem(9px);
+    }
+  }
+
+  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
+    padding-left: rem(5px);
+    padding-right: rem(5px);
+  }
+
+  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
+    padding-left: rem(7px);
+    padding-right: rem(7px);
+
+    &:focus {
+      padding-left: rem(5px);
+      padding-right: rem(5px);
     }
   }
 
@@ -13094,8 +13143,7 @@ Button styles
   }
 
   .#{$prefix}--btn--field {
-    height: 40px;
-    min-height: 40px;
+    min-height: rem(40px);
     padding: $button-padding-field;
   }
 
@@ -13165,6 +13213,8 @@ Button base styles
   outline: none;
   position: relative;
   max-width: rem(320px);
+  // Fix to remove added margins on buttons in safari (see #5155)
+  margin: 0;
 
   &:disabled,
   &.#{$prefix}--btn--disabled {
@@ -13711,6 +13761,9 @@ Code snippet styles
 
   // Show more / less button
   button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+    @include type-style('body-short-01');
+    @include carbon--font-family('sans');
+    border: 0;
     display: inline-flex;
     align-items: center;
     position: absolute;
@@ -13751,6 +13804,7 @@ Code snippet styles
 
   .#{$prefix}--snippet-btn--expand:focus {
     @include focus-outline('outline');
+    border-color: transparent;
   }
 
   .#{$prefix}--snippet--expand
@@ -14269,6 +14323,12 @@ Data table action styles
     }
   }
 
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--search-close:focus::before {
+    background-color: $focus;
+  }
+
   //-------------------------------------------------
   //ACTIVE SEARCH - DEFAULT TOOLBAR
   //-------------------------------------------------
@@ -14287,7 +14347,7 @@ Data table action styles
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
     .#{$prefix}--search-input {
-    padding-left: $spacing-09;
+    padding: 0 $spacing-09;
     visibility: inherit;
   }
 
@@ -14341,6 +14401,11 @@ Data table action styles
     .#{$prefix}--search-close:hover {
     border: none; //to-do: is there a spec for close button on hover?
     background-color: transparent;
+  }
+
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search-close::before {
+    display: none;
   }
 
   //-------------------------------------------------
@@ -14442,7 +14507,7 @@ Data table action styles
     .#{$prefix}--search
     .#{$prefix}--search-input {
     height: $layout-04;
-    padding-left: $spacing-09;
+    padding: 0 $spacing-09;
     border: none;
   }
 
@@ -14659,7 +14724,7 @@ Data table action styles
     .#{$prefix}--toolbar-search-container-expandable
       .#{$prefix}--search
       .#{$prefix}--search-input {
-      padding-left: $spacing-xl;
+      padding: 0 $spacing-09;
     }
 
     //active
@@ -14749,6 +14814,7 @@ Data table action styles
   - [spacing-05 [variable]](#spacing-05-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [focus [variable]](#focus-variable)
   - [spacing-09 [variable]](#spacing-09-variable)
   - [layout-01 [variable]](#layout-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
@@ -15019,7 +15085,7 @@ Data table core styles
     padding-bottom: 0;
   }
 
-  th.#{$prefix}--table-column-checkbox:hover {
+  .#{$prefix}--date-table tbody th.#{$prefix}--table-column-checkbox:hover {
     background: $data-table-column-hover;
   }
 
@@ -15362,8 +15428,6 @@ Data table expandable styles
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
-    padding-bottom: rem(23px);
-    transition: padding $duration--moderate-01 motion(standard, productive);
     border-bottom: 1px solid $ui-03;
   }
 
@@ -16758,13 +16822,6 @@ Dropdown styles
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
     font-weight: normal;
-    margin-right: $carbon--spacing-04;
-    margin-left: rem(10px);
-
-    &:focus {
-      margin: 0;
-      padding-left: rem(10px);
-    }
   }
 
   .#{$prefix}--dropdown--show-selected .#{$prefix}--dropdown--selected {
@@ -16913,17 +16970,27 @@ File uploader styles
     margin-bottom: $carbon--spacing-05;
   }
 
+  // For backwards compatibility
   .#{$prefix}--file-btn ~ .#{$prefix}--file-container {
     margin-top: $carbon--spacing-06;
   }
 
+  .#{$prefix}--btn ~ .#{$prefix}--file-container {
+    margin-top: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--file .#{$prefix}--file-container,
+  .#{$prefix}--file ~ .#{$prefix}--file-container {
+    margin-top: $carbon--spacing-03;
+  }
+
   .#{$prefix}--file__selected-file {
     display: grid;
-    grid-gap: $carbon--spacing-03 $carbon--spacing-05;
+    grid-gap: $carbon--spacing-05;
     grid-template-columns: 1fr auto;
     grid-auto-rows: auto;
     align-items: center;
-    min-height: $carbon--spacing-07;
+    min-height: $carbon--spacing-09;
     max-width: rem(320px);
     margin-bottom: $carbon--spacing-03;
     background-color: $field-01;
@@ -16971,13 +17038,12 @@ File uploader styles
 
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
-    outline-width: 1px;
-    padding: $carbon--spacing-04 0;
+    padding: $carbon--spacing-05 0;
   }
 
   .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
     border-top: 1px solid $ui-03;
-    padding-top: $carbon--spacing-03;
+    padding-top: $carbon--spacing-05;
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -16985,8 +17051,7 @@ File uploader styles
   .#{$prefix}--file__selected-file--invalid
     .#{$prefix}--form-requirement__supplement {
     @include type-style('label-01');
-    padding-right: $carbon--spacing-03;
-    padding-left: $carbon--spacing-05;
+    padding: 0 $carbon--spacing-05;
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -17016,7 +17081,7 @@ File uploader styles
     display: flex;
     justify-content: center;
     min-width: 1.5rem;
-    padding-right: $carbon--spacing-03;
+    padding-right: $carbon--spacing-05;
 
     .#{$prefix}--loading__svg {
       stroke: $ui-05;
@@ -17052,7 +17117,7 @@ File uploader styles
     border: none;
     cursor: pointer;
     padding: 0;
-    fill: $icon-02;
+    fill: $icon-01;
 
     &:focus {
       @include focus-outline('border');
@@ -17060,7 +17125,7 @@ File uploader styles
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
-    fill: $icon-02;
+    fill: $icon-01;
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
@@ -17100,14 +17165,13 @@ File uploader styles
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
-  - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [field-01 [variable]](#field-01-variable)
-  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
   - [icon-03 [variable]](#icon-03-variable)
-  - [icon-02 [variable]](#icon-02-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
 
 ## form
@@ -17269,7 +17333,7 @@ Inline loading styles
   }
 
   .#{$prefix}--inline-loading__text {
-    @include type-style('body-short-01');
+    @include type-style('label-01');
     color: $text-02;
   }
 
@@ -18948,10 +19012,6 @@ Inline notification styles
     }
   }
 
-  .#{$prefix}--inline-notification--info .bx--inline-notification__icon {
-    display: none;
-  }
-
   .#{$prefix}--inline-notification--warning {
     @include notification--experimental($inverse-support-03, $inverse-02);
   }
@@ -19183,7 +19243,7 @@ Toast notification styles
     display: flex;
     width: rem(288px);
     height: auto;
-    padding-left: $carbon--spacing-05;
+    padding-left: rem(14px);
     color: $inverse-01;
     margin-top: $carbon--spacing-03;
     margin-bottom: $carbon--spacing-03;
@@ -19279,8 +19339,8 @@ Toast notification styles
 
   .#{$prefix}--toast-notification__icon {
     flex-shrink: 0;
-    margin-right: $carbon--spacing-05;
-    margin-top: $carbon--spacing-04;
+    margin-right: rem(14px);
+    margin-top: rem(14px);
   }
 
   .#{$prefix}--toast-notification__details {
@@ -19364,9 +19424,9 @@ Toast notification styles
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
   - [prefix [variable]](#prefix-variable)
-  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [inverse-link [variable]](#inverse-link-variable)
   - [inverse-support-01 [variable]](#inverse-support-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
@@ -19377,7 +19437,6 @@ Toast notification styles
   - [support-04 [variable]](#support-04-variable)
   - [inverse-support-03 [variable]](#inverse-support-03-variable)
   - [support-03 [variable]](#support-03-variable)
-  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
 
@@ -20464,10 +20523,12 @@ Progress indicator styles
   }
 
   .#{$prefix}--progress-step--current svg {
-    width: 14px;
-    height: 14px;
+    stroke: $interactive-01;
     fill: $interactive-01;
-    margin-top: rem(9.5px);
+
+    path:last-of-type {
+      stroke-width: 40%;
+    }
   }
 
   //INCOMPLETE STYLING
@@ -20898,8 +20959,7 @@ Search styles
     width: rem(16px);
     top: 50%;
     transform: translateY(-50%);
-    // Ensure clear icon is rendered in Firefox (#1127)
-    fill: $text-02;
+    fill: $icon-02;
     pointer-events: none;
   }
 
@@ -21047,7 +21107,7 @@ Search styles
   - [ui-04 [variable]](#ui-04-variable)
   - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [text-02 [variable]](#text-02-variable)
+  - [icon-02 [variable]](#icon-02-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [hover-field [variable]](#hover-field-variable)
@@ -21163,7 +21223,7 @@ Select styles
     background-color: $field-02;
 
     &:hover {
-      background-color: $ui-01;
+      background-color: $hover-ui;
     }
 
     &:disabled,
@@ -21308,8 +21368,8 @@ Select styles
   - [disabled-02 [variable]](#disabled-02-variable)
   - [support-01 [variable]](#support-01-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [ui-01 [variable]](#ui-01-variable)
   - [ui-05 [variable]](#ui-05-variable)
+  - [ui-01 [variable]](#ui-01-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [spacing-07 [variable]](#spacing-07-variable)
@@ -22126,8 +22186,8 @@ Tag styles
 ```scss
 @mixin tags() {
   .#{$prefix}--tag {
-    @include type-style('label-01');
     @include button-reset($width: false);
+    @include type-style('label-01');
 
     display: inline-flex;
     align-items: center;
@@ -24379,7 +24439,7 @@ UI shell header
     }
   }
 
-  .#{$prefix}--header__menu-bar[role='menubar'] {
+  .#{$prefix}--header__menu-bar {
     display: flex;
     height: 100%;
     list-style: none;
@@ -24452,7 +24512,7 @@ UI shell header
     transform: rotate(180deg);
   }
 
-  .#{$prefix}--header__menu[role='menu'] {
+  .#{$prefix}--header__menu {
     display: none;
     list-style: none;
     padding: 0;
@@ -25330,8 +25390,8 @@ UI shell side nav
     > .#{$prefix}--side-nav__submenu:hover,
   .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
     > .#{$prefix}--side-nav__link:hover,
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
+  .#{$prefix}--side-nav__menu
+    a.#{$prefix}--side-nav__link:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
@@ -25435,20 +25495,19 @@ UI shell side nav
     color: $ibm-color__gray-100;
   }
 
-  .#{$prefix}--side-nav__menu[role='menu'] {
+  .#{$prefix}--side-nav__menu {
     display: block;
     visibility: hidden;
     max-height: 0;
   }
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true']
-    + .#{$prefix}--side-nav__menu[role='menu'] {
+    + .#{$prefix}--side-nav__menu {
     max-height: rem(1500px);
     visibility: inherit;
   }
 
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[role='menuitem'] {
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link {
     height: mini-units(4);
     min-height: mini-units(4);
     padding-left: mini-units(4);
@@ -25456,13 +25515,11 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__item.#{$prefix}--side-nav__item--icon
-    a.#{$prefix}--side-nav__link[role='menuitem'] {
+    a.#{$prefix}--side-nav__link {
     padding-left: mini-units(9);
   }
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link--current,
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[aria-current='page'],
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link--current,
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link[aria-current='page'],
   a.#{$prefix}--side-nav__link--current {
     background-color: $ibm-color__gray-20;
 
@@ -25586,7 +25643,7 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav--fixed
-    .#{$prefix}--side-nav__menu[role='menu']
+    .#{$prefix}--side-nav__menu
     a.#{$prefix}--side-nav__link {
     padding-left: mini-units(4);
   }
