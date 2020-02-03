@@ -211,11 +211,23 @@
 /// @group @carbon/grid
 $carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
 
+
+/// Outputs the value needed based on an aspect ratio
+/// @param {List} $aspect-ratio [nth($carbon--aspect-ratios, 1)] - An aspect ratios to calculate
+/// @access private
+/// @group @carbon/grid
+@function carbon--aspect-ratio($aspect-ratio: nth($carbon--aspect-ratios, 1)) {
+  $width: nth($aspect-ratio, 1);
+  $height: nth($aspect-ratio, 2);
+
+  @return percentage($height / $width);
+}
+
 /// Output the CSS classes for generating aspect ratio classes
 /// @param {List} $aspect-ratios [$carbon--aspect-ratios] - A list of aspect ratios to generate
 /// @access private
 /// @group @carbon/grid
-@mixin carbon--aspect-ratio($aspect-ratios: $carbon--aspect-ratios) {
+@mixin carbon--make-aspect-ratio($aspect-ratios: $carbon--aspect-ratios) {
   .#{$prefix}--aspect-ratio {
     height: 0;
     position: relative;
@@ -233,11 +245,8 @@ $carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
   }
 
   @each $ratio in $aspect-ratios {
-    $width: nth($ratio, 1);
-    $height: nth($ratio, 2);
-
     .#{$prefix}--aspect-ratio--#{$width}x#{$height} {
-      padding-bottom: percentage($height / $width);
+      padding-bottom: carbon--aspect-ratio($ratio);
     }
   }
 }
@@ -341,5 +350,5 @@ $carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
   @include carbon--make-grid-columns($breakpoints, $grid-gutter);
   @include carbon--no-gutter();
   @include carbon--hang($grid-gutter);
-  @include carbon--aspect-ratio();
+  @include carbon--make-aspect-ratio();
 }
