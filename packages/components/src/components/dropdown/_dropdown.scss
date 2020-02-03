@@ -399,13 +399,6 @@
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
     font-weight: normal;
-    margin-right: $carbon--spacing-04;
-    margin-left: rem(10px);
-
-    &:focus {
-      margin: 0;
-      padding-left: rem(10px);
-    }
   }
 
   .#{$prefix}--dropdown--show-selected .#{$prefix}--dropdown--selected {
