@@ -57,16 +57,12 @@ exports[`HeaderMenu should render 1`] = `
       </a>
       <ul
         className="bx--header__menu"
-        role="menu"
       >
         <ForwardRef(HeaderMenuItem)
           href="/a"
           key=".0"
-          role="none"
         >
-          <li
-            role="none"
-          >
+          <li>
             <Link
               className="bx--header__menu-item"
               element="a"
@@ -90,11 +86,8 @@ exports[`HeaderMenu should render 1`] = `
         <ForwardRef(HeaderMenuItem)
           href="/b"
           key=".1"
-          role="none"
         >
-          <li
-            role="none"
-          >
+          <li>
             <Link
               className="bx--header__menu-item"
               element="a"
@@ -118,11 +111,8 @@ exports[`HeaderMenu should render 1`] = `
         <ForwardRef(HeaderMenuItem)
           href="/c"
           key=".2"
-          role="none"
         >
-          <li
-            role="none"
-          >
+          <li>
             <Link
               className="bx--header__menu-item"
               element="a"
