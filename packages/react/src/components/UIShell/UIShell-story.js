@@ -588,7 +588,7 @@ storiesOf('UI Shell', module)
           </HeaderGlobalAction>
         </HeaderGlobalBar>
         <HeaderPanel aria-label="Header Panel" expanded>
-          <Switcher role="menu" aria-label="Switcher Container">
+          <Switcher aria-label="Switcher Container">
             <SwitcherItem isSelected aria-label="Link 1" href="#">
               Link 1
             </SwitcherItem>
