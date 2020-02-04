@@ -6503,6 +6503,13 @@ $text-error: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [form [mixin]](#form-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [select [mixin]](#select-mixin)
+  - [text-area [mixin]](#text-area-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -6528,7 +6535,6 @@ $icon-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
@@ -6821,10 +6827,8 @@ $support-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
-  - [form [mixin]](#form-mixin)
   - [inline-loading [mixin]](#inline-loading-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -13412,8 +13416,8 @@ Checkbox styles
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
-    background-color: $icon-01;
-    border-color: $icon-01;
+    background-color: $ui-05;
+    border-color: $ui-05;
     border-width: 1px;
   }
 
@@ -13505,7 +13509,6 @@ Checkbox styles
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
-  - [icon-01 [variable]](#icon-01-variable)
   - [focus [variable]](#focus-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
@@ -13599,16 +13602,21 @@ Code snippet styles
     max-width: rem(760px);
     min-width: rem(320px);
     height: $carbon--spacing-08;
-    padding: 0 56px 0 $carbon--spacing-05;
+    padding: 0 $carbon--spacing-08 0 0;
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
+    position: relative;
     display: flex;
     align-items: center;
+    height: 100%;
+    padding-left: $carbon--spacing-05;
+    border-right: solid $carbon--spacing-05 transparent;
     overflow-x: auto;
-    position: relative;
-    padding: 0 0 $carbon--spacing-05 0;
-    height: rem(56px);
+
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 
   .#{$prefix}--snippet--single pre {
@@ -15964,7 +15972,7 @@ Date picker styles
     ~ .#{$prefix}--form-requirement {
       max-height: rem(200px);
       display: block;
-      color: $support-01;
+      color: $text-error;
       font-weight: 400;
       margin-top: $carbon--spacing-02;
       overflow: visible;
@@ -16414,7 +16422,7 @@ Date picker styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [support-01 [variable]](#support-01-variable)
+  - [text-error [variable]](#text-error-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [field-01 [variable]](#field-01-variable)
@@ -16520,7 +16528,7 @@ Dropdown styles
     + .#{$prefix}--form-requirement {
       display: inline-block;
       max-height: rem(200px);
-      color: $support-01;
+      color: $text-error;
     }
   }
 
@@ -16864,6 +16872,7 @@ Dropdown styles
   - [text-01 [variable]](#text-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [ui-03 [variable]](#ui-03-variable)
+  - [text-error [variable]](#text-error-variable)
   - [support-01 [variable]](#support-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
@@ -17064,7 +17073,7 @@ File uploader styles
     @include type-style('caption-01');
     display: block;
     max-height: rem(200px);
-    color: $support-01;
+    color: $text-error;
     font-weight: 400;
     padding: $carbon--spacing-03 $carbon--spacing-05;
     overflow: visible;
@@ -17168,6 +17177,7 @@ File uploader styles
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
+  - [text-error [variable]](#text-error-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
   - [icon-03 [variable]](#icon-03-variable)
@@ -17249,7 +17259,7 @@ Form styles
     ~ .#{$prefix}--form-requirement {
       max-height: rem(200px);
       display: block;
-      color: $support-01;
+      color: $text-error;
     }
   }
 
@@ -17301,7 +17311,7 @@ Form styles
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [support-01 [variable]](#support-01-variable)
+  - [text-error [variable]](#text-error-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [text-05 [variable]](#text-05-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
@@ -19523,7 +19533,7 @@ Number input styles
     position: relative;
 
     ~ .#{$prefix}--form-requirement {
-      color: $support-01;
+      color: $text-error;
       font-weight: 400;
       margin-top: $carbon--spacing-02;
       overflow: visible;
@@ -19687,9 +19697,10 @@ Number input styles
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [support-01 [variable]](#support-01-variable)
+  - [text-error [variable]](#text-error-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
+  - [support-01 [variable]](#support-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
@@ -21218,7 +21229,7 @@ Select styles
 
   .#{$prefix}--form-requirement {
     display: block;
-    color: $support-01;
+    color: $text-error;
     font-weight: 400;
     overflow: visible;
   }
@@ -21374,9 +21385,10 @@ Select styles
   - [ui-04 [variable]](#ui-04-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
-  - [support-01 [variable]](#support-01-variable)
+  - [text-error [variable]](#text-error-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
+  - [support-01 [variable]](#support-01-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
@@ -22377,7 +22389,7 @@ Text area styles
 
     & ~ .#{$prefix}--form-requirement {
       order: 4;
-      color: $support-01;
+      color: $text-error;
       font-weight: 400;
       margin-top: $carbon--spacing-02;
 
@@ -22458,11 +22470,12 @@ Text area styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [support-01 [variable]](#support-01-variable)
+  - [text-error [variable]](#text-error-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
+  - [support-01 [variable]](#support-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
 ## text-input
