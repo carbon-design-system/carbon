@@ -209,7 +209,15 @@
 /// @type List
 /// @access public
 /// @group @carbon/grid
-$carbon--aspect-ratios: ((16, 9), (9, 16), (2, 1), (1, 2), (4, 3), (3, 4), (1, 1));
+$carbon--aspect-ratios: (
+  (16, 9),
+  (9, 16),
+  (2, 1),
+  (1, 2),
+  (4, 3),
+  (3, 4),
+  (1, 1)
+);
 
 /// Outputs the height value needed based on an aspect ratio
 /// @param {Number} $width width from an aspect ratio
@@ -266,7 +274,7 @@ $carbon--aspect-ratios: ((16, 9), (9, 16), (2, 1), (1, 2), (4, 3), (3, 4), (1, 1
       $height: nth($aspect-ratio, 2);
 
       &#{$width}-#{$height} {
-        @include carbon--make-aspect-ratio($width, $height)
+        @include carbon--make-aspect-ratio($width, $height);
       }
     }
   }
