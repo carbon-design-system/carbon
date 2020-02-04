@@ -236,7 +236,8 @@ describe('NumberInput', () => {
           );
         });
 
-        it('should avoid capping when non-number prop is given to value prop', () => {
+        // NumberInput propTypes do not allow a string to be passed
+        it.skip('should avoid capping when non-number prop is given to value prop', () => {
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
           wrapper
             .find('NumberInput')

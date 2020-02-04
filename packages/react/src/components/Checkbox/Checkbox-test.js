@@ -144,7 +144,14 @@ describe('refs', () => {
         this.myRef = React.createRef();
       }
       render() {
-        return <Checkbox indeterminate ref={this.myRef} />;
+        return (
+          <Checkbox
+            id="test-id"
+            labelText="test"
+            indeterminate
+            ref={this.myRef}
+          />
+        );
       }
     }
     const wrapper = mount(<MyComponent />);

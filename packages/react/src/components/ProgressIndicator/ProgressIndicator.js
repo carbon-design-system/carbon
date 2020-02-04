@@ -9,7 +9,12 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
-import { CheckmarkOutline16, Warning16 } from '@carbon/icons-react';
+import {
+  CheckmarkOutline16,
+  Warning16,
+  RadioButtonChecked16,
+  RadioButton16,
+} from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
@@ -61,10 +66,9 @@ export function ProgressStep({
     }
     if (current) {
       return (
-        <svg>
-          <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
+        <RadioButtonChecked16>
           <title>{description}</title>
-        </svg>
+        </RadioButtonChecked16>
       );
     }
     if (complete) {
@@ -75,10 +79,9 @@ export function ProgressStep({
       );
     }
     return (
-      <svg>
+      <RadioButton16>
         <title>{description}</title>
-        <path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z" />
-      </svg>
+      </RadioButton16>
     );
   };
 

@@ -1,0 +1,18 @@
+@import '~@carbon/type/scss/type';
+@import '~@carbon/themes/scss/themes';
+
+.demo-expanded-td td {
+  padding-left: 3.25rem !important;
+  padding-bottom: 1.5rem;
+  padding-top: 1rem;
+}
+
+.demo-inner-container-header {
+  @include carbon--type-style('productive-heading-01');
+  color: $text-01;
+}
+
+.demo-inner-container-content {
+  @include carbon--type-style('body-long-01');
+  color: $text-02;
+}
