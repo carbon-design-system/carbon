@@ -10,7 +10,8 @@ import React, { useContext, createContext, useReducer } from 'react';
 import cloneDeep from 'lodash.clonedeep';
 
 // resizing actions
-const actionTypes = {
+// currently only exported for testing
+export const actionTypes = {
   ADD_COLUMN: 'ADD_COLUMN',
   REMOVE_COLUMN: 'REMOVE_COLUMN',
   START_RESIZE_ACTION: 'START_RESIZE_ACTION',
@@ -23,14 +24,16 @@ const actionTypes = {
 const ResizeContext = createContext();
 
 // the resizing store's initial values
-const initialState = {
+// currently only exported for testing
+export const initialState = {
   allColumnKeys: [], // used for column order
   columnsByKey: {}, // contains columns with width
   columnKeyResizeActive: null, // key of column currently being resized
 };
 
 // reducer for the resizing actions
-const resizeReducer = (state, action) => {
+// currently only exported for testing
+export const resizeReducer = (state, action) => {
   if (action.type === actionTypes.ADD_COLUMN) {
     return {
       ...state,
@@ -97,14 +100,16 @@ export const ResizeProvider = ({ children }) => {
 };
 
 // utility function to get the column key of the column to the right
-function getNextColKey(state, colKey) {
+// currently only exported for testing
+export function getNextColKey(state, colKey) {
   const idx = state.allColumnKeys.indexOf(colKey);
   return idx >= 0 && idx < state.allColumnKeys.length - 1
     ? state.allColumnKeys[idx + 1]
     : null;
 }
 
-function getColRefs(state) {
+// currently only exported for testing
+export function getColRefs(state) {
   return Object.keys(state.columnsByKey).map(colKey => {
     return {
       key: colKey,

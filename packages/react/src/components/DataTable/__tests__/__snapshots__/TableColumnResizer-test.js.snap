@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.TableColumnResizer should render 1`] = `
+<TableColumnResizer
+  className="custom-class"
+  colKey="aKey"
+  headerRef={
+    Object {
+      "current": null,
+    }
+  }
+>
+  <div
+    className="custom-class"
+    onMouseDown={[Function]}
+    role="separator"
+  />
+</TableColumnResizer>
+`;
