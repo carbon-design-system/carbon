@@ -42,7 +42,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
           className="bx--btn__icon"
           height={16}
           preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 16 16"
+          viewBox="0 0 32 32"
           width={16}
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -59,12 +59,17 @@ exports[`DataTable.TableBatchAction should render 1`] = `
                 "willChange": "transform",
               }
             }
-            viewBox="0 0 16 16"
+            viewBox="0 0 32 32"
             width={16}
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M8,1C4.2,1,1,4.2,1,8s3.2,7,7,7s7-3.2,7-7S11.8,1,8,1z M12,9H9v3H7V9H4V7h3V4h2v3h3V9z"
+              d="M16,2C8.4,2,2,8.4,2,16s6.4,14,14,14s14-6.4,14-14S23.6,2,16,2z M24,17h-7v7h-2v-7H8v-2h7V8h2v7h7V17z"
+            />
+            <path
+              d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15z"
+              data-icon-path="inner-path"
+              fill="none"
             />
           </svg>
         </Icon>
