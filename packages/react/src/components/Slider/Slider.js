@@ -9,6 +9,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -87,7 +88,16 @@ export default class Slider extends PureComponent {
      * A value determining how much the value should increase/decrease by Shift+arrow keys,
      * which will be `(max - min) / stepMuliplier`.
      */
-    stepMuliplier: PropTypes.number,
+    stepMuliplier: deprecate(
+      PropTypes.number,
+      ' The `stepMuliplier` prop has been deprecated in favor of `stepMultiplier`. It will be removed in the next major release.'
+    ),
+
+    /**
+     * A value determining how much the value should increase/decrease by Shift+arrow keys,
+     * which will be `(max - min) / stepMultiplier`.
+     */
+    stepMultiplier: PropTypes.number,
 
     /**
      * The child nodes.
@@ -123,7 +133,7 @@ export default class Slider extends PureComponent {
   static defaultProps = {
     hideTextInput: false,
     step: 1,
-    stepMuliplier: 4,
+    stepMultiplier: 4,
     disabled: false,
     minLabel: '',
     maxLabel: '',
@@ -204,7 +214,7 @@ export default class Slider extends PureComponent {
   };
 
   calcValue = (evt, prevState, props) => {
-    const { min, max, step, stepMuliplier } = props;
+    const { min, max, step, stepMuliplier, stepMultiplier } = props;
 
     const { value } = prevState;
 
@@ -227,9 +237,11 @@ export default class Slider extends PureComponent {
           39: 1, // increasing
         }[evt.which];
 
+        const multiplyStep = stepMuliplier || stepMultiplier;
+
         if (direction !== undefined) {
           const multiplier =
-            evt.shiftKey === true ? range / step / stepMuliplier : 1;
+            evt.shiftKey === true ? range / step / multiplyStep : 1;
           const stepMultiplied = step * multiplier;
           const stepSize = (stepMultiplied / range) * 100;
           left = valuePercentage + stepSize * direction;
@@ -366,6 +378,7 @@ export default class Slider extends PureComponent {
       labelText,
       step,
       stepMuliplier, // eslint-disable-line no-unused-vars
+      stepMultiplier, // eslint-disable-line no-unused-vars
       inputType,
       required,
       disabled,
