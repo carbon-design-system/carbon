@@ -6258,6 +6258,7 @@ $ui-04: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
@@ -6297,6 +6298,7 @@ $ui-05: if(
   - [accordion [mixin]](#accordion-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
@@ -15272,6 +15274,49 @@ Data table core styles
     width: auto;
   }
 
+  //----------------------------------------------------------------------------
+  // Column resize
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--resizable {
+    th {
+      padding-right: 0; /* ensure that resizer is at right-most position */
+      min-width: rem(40px);
+    }
+    td {
+      min-width: rem(40px);
+    }
+    .#{$prefix}--table-header-label {
+      max-width: none;
+    }
+  }
+
+  .#{$prefix}--table-header-resizable {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* resizer bar */
+  .#{$prefix}--table-header-resizer {
+    width: rem(4px);
+    flex-shrink: 0;
+    &:hover {
+      background-color: $ui-05;
+      cursor: col-resize;
+    }
+  }
+
+  /* permanently highlight active resizer while resizing */
+  .#{$prefix}--table-header-resizer-active {
+    background-color: $ui-04;
+    cursor: col-resize;
+  }
+
+  /* don't highlight passive resizers while resizing */
+  .#{$prefix}--table-header-resizer-passive:hover {
+    background-color: $ui-03;
+  }
+
   // -------------
   // Sticky header
   // -------------
@@ -15344,16 +15389,15 @@ Data table core styles
     th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon),
     td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon) {
       width: 100%;
-      min-width: 0;
+      min-width: rem(40px);
     }
 
     .#{$prefix}--table-header-label {
-      max-width: calc(100% - 10px);
       @include text-overflow;
     }
   }
 
-  @include sticky-header($max-width: rem(900px));
+  @include sticky-header();
 }
 ```
 
@@ -15376,6 +15420,8 @@ Data table core styles
   - [spacing-03 [variable]](#spacing-03-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [ui-04 [variable]](#ui-04-variable)
 
 ### ❌data-table-expandable [mixin]
 
