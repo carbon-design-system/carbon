@@ -102,13 +102,19 @@ storiesOf('Tabs', module)
     () => (
       <Tabs {...props.tabs()}>
         <Tab id="tab-1" {...props.tab()} label="Tab label 1">
-          <div className="some-content">Content for first tab goes here.</div>
+          <div className="some-content">
+            <p>Content for first tab goes here.</p>
+          </div>
         </Tab>
         <Tab id="tab-2" {...props.tab()} label="Tab label 2">
-          <div className="some-content">Content for second tab goes here.</div>
+          <div className="some-content">
+            <p>Content for second tab goes here.</p>
+          </div>
         </Tab>
         <Tab id="tab-3" {...props.tab()} label="Tab label 3" disabled>
-          <div className="some-content">Content for third tab goes here.</div>
+          <div className="some-content">
+            <p>Content for third tab goes here.</p>
+          </div>
         </Tab>
         <Tab
           id="tab-4"
@@ -129,7 +135,9 @@ storiesOf('Tabs', module)
           id="tab-5"
           {...props.tab()}
           label={<CustomLabel text="Custom Label" />}>
-          <div className="some-content">Content for fifth tab goes here.</div>
+          <div className="some-content">
+            <p>Content for fifth tab goes here.</p>
+          </div>
         </Tab>
       </Tabs>
     ),
@@ -147,10 +155,14 @@ storiesOf('Tabs', module)
     () => (
       <Tabs type="container" {...props.tabs()}>
         <Tab id="tab-1" {...props.tab()} label="Tab label 1">
-          <div className="some-content">Content for first tab goes here.</div>
+          <div className="some-content">
+            <p>Content for first tab goes here.</p>
+          </div>
         </Tab>
         <Tab id="tab-2" {...props.tab()} label="Tab label 2">
-          <div className="some-content">Content for second tab goes here.</div>
+          <div className="some-content">
+            <p>Content for second tab goes here.</p>
+          </div>
         </Tab>
         <Tab
           id="tab-3"
@@ -171,7 +183,9 @@ storiesOf('Tabs', module)
           id="tab-4"
           {...props.tab()}
           label={<CustomLabel text="Custom Label" />}>
-          <div className="some-content">Content for fourth tab goes here.</div>
+          <div className="some-content">
+            <p>Content for fourth tab goes here.</p>
+          </div>
         </Tab>
       </Tabs>
     ),
