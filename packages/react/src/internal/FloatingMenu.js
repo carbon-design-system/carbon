@@ -342,7 +342,7 @@ class FloatingMenu extends React.Component {
             ref={this.startSentinel}
             tabIndex="0"
             role="link"
-            class={`${prefix}--visually-hidden`}>
+            className={`${prefix}--visually-hidden`}>
             Focus sentinel
           </span>
           {this._getChildrenWithProps()}
@@ -351,7 +351,7 @@ class FloatingMenu extends React.Component {
             ref={this.endSentinel}
             tabIndex="0"
             role="link"
-            class={`${prefix}--visually-hidden`}>
+            className={`${prefix}--visually-hidden`}>
             Focus sentinel
           </span>
         </>,

@@ -91,4 +91,5 @@ function wrapFocus({
   }
 }
 
+export { elementOrParentIsFloatingMenu };
 export default wrapFocus;

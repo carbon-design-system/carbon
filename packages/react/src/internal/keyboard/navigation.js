@@ -38,6 +38,8 @@ export const getNextIndex = (key, index, arrayLength) => {
  * that indicates `target` is located earlier than `node` in the document or `target` contains `node`.
  */
 export const DOCUMENT_POSITION_BROAD_PRECEDING =
+  // Checks `typeof Node` for `react-docgen`
+  typeof Node !== 'undefined' &&
   Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
 
 /**
@@ -45,6 +47,8 @@ export const DOCUMENT_POSITION_BROAD_PRECEDING =
  * that indicates `target` is located later than `node` in the document or `node` contains `target`.
  */
 export const DOCUMENT_POSITION_BROAD_FOLLOWING =
+  // Checks `typeof Node` for `react-docgen`
+  typeof Node !== 'undefined' &&
   Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
 
 /**

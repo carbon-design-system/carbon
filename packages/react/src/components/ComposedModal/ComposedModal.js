@@ -237,7 +237,7 @@ export default class ComposedModal extends Component {
           ref={this.startSentinel}
           tabIndex="0"
           role="link"
-          class={`${prefix}--visually-hidden`}>
+          className={`${prefix}--visually-hidden`}>
           Focus sentinel
         </span>
         <div ref={this.innerModal} className={containerClass} tabIndex={-1}>
@@ -248,7 +248,7 @@ export default class ComposedModal extends Component {
           ref={this.endSentinel}
           tabIndex="0"
           role="link"
-          class={`${prefix}--visually-hidden`}>
+          className={`${prefix}--visually-hidden`}>
           Focus sentinel
         </span>
       </div>

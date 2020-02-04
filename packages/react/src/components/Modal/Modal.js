@@ -14,7 +14,9 @@ import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
 import deprecate from '../../prop-types/deprecate';
 import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
-import wrapFocus from '../../internal/wrapFocus';
+import wrapFocus, {
+  elementOrParentIsFloatingMenu,
+} from '../../internal/wrapFocus';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
@@ -198,7 +200,10 @@ export default class Modal extends Component {
     if (
       this.innerModal.current &&
       !this.innerModal.current.contains(evt.target) &&
-      !this.elementOrParentIsFloatingMenu(evt.target)
+      !elementOrParentIsFloatingMenu(
+        evt.target,
+        this.props.selectorsFloatingMenus
+      )
     ) {
       this.props.onRequestClose(evt);
     }
@@ -426,7 +431,7 @@ export default class Modal extends Component {
           ref={this.startSentinel}
           tabIndex="0"
           role="link"
-          class={`${prefix}--visually-hidden`}>
+          className={`${prefix}--visually-hidden`}>
           Focus sentinel
         </span>
         {modalBody}
@@ -435,7 +440,7 @@ export default class Modal extends Component {
           ref={this.endSentinel}
           tabIndex="0"
           role="link"
-          class={`${prefix}--visually-hidden`}>
+          className={`${prefix}--visually-hidden`}>
           Focus sentinel
         </span>
       </div>
