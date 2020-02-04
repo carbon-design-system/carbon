@@ -36,11 +36,6 @@
 
   .#{$prefix}--btn {
     @include button-base;
-
-    &.#{$prefix}--btn--disabled > svg.#{$prefix}--btn__icon,
-    &:disabled > svg.#{$prefix}--btn__icon {
-      fill: $disabled-03;
-    }
   }
 
   // Reset intrisic padding in Firefox (see #731)
@@ -113,14 +108,6 @@
       background: transparent;
       color: $disabled;
       outline: none;
-
-      > .#{$prefix}--btn__icon path {
-        fill: $disabled;
-      }
-    }
-
-    &:hover > .#{$prefix}--btn__icon path {
-      fill: $inverse-01;
     }
   }
 
@@ -156,10 +143,6 @@
     &:hover,
     &:active {
       color: $hover-primary-text;
-
-      .#{$prefix}--btn__icon path {
-        fill: $hover-primary-text;
-      }
     }
 
     &:active {
@@ -176,10 +159,6 @@
       background: transparent;
       border-color: transparent;
       outline: none;
-
-      .#{$prefix}--btn__icon path {
-        fill: $disabled;
-      }
     }
 
     &.#{$prefix}--btn--sm {
@@ -273,7 +252,7 @@
       $danger,
       $text-04,
       $hover-danger,
-      $icon-03,
+      currentColor,
       $active-danger
     );
 
