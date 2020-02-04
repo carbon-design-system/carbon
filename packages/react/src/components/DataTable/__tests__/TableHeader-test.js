@@ -17,6 +17,7 @@ describe('DataTable.TableHeader', () => {
       isSortHeader: false,
       onClick: jest.fn(),
       sortDirection: 'NONE',
+      colKey: 'aKey',
     };
   });
 

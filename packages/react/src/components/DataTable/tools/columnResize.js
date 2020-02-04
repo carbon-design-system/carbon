@@ -104,6 +104,15 @@ function getNextColKey(state, colKey) {
     : null;
 }
 
+function getColRefs(state) {
+  return Object.keys(state.columnsByKey).map(colKey => {
+    return {
+      key: colKey,
+      ref: state.columnsByKey[colKey].ref,
+    };
+  });
+}
+
 // the custom hook that provides the resizing functionality
 // including the width of the column
 export const useColumnResizing = colKey => {
@@ -144,8 +153,7 @@ export const useColumnResizing = colKey => {
       dispatch({ type: actionTypes.END_RESIZE_ACTION, colKey });
       // sync column width in store with actual column width
       const colWidths = {};
-      Object.keys(state.columnsByKey).forEach(key => {
-        const ref = state.columnsByKey[key].ref;
+      getColRefs(state).forEach(({ key, ref }) => {
         const colWidth =
           ref.current && ref.current.getBoundingClientRect().width;
         colWidths[key] = colWidth;

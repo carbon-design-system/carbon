@@ -9,14 +9,18 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useColumnResizing } from './tools/columnResize';
 
-const TableCell = ({ children, colKey, ...rest }) => {
+const TableCell = ({ children, colKey, isResizable, ...rest }) => {
   const { colWidth } = useColumnResizing(colKey);
 
-  return (
-    <td style={{ width: colWidth + 'px' }} {...rest}>
-      {children}
-    </td>
-  );
+  if (isResizable && colWidth && colKey) {
+    return (
+      <td style={{ width: colWidth + 'px' }} {...rest}>
+        {children}
+      </td>
+    );
+  }
+
+  return <td {...rest}>{children}</td>;
 };
 
 TableCell.propTypes = {
@@ -28,7 +32,12 @@ TableCell.propTypes = {
   /**
    * key for the column as defined in the header data
    */
-  colKey: PropTypes.string.isRequired,
+  colKey: PropTypes.string,
+
+  /**
+   * `false` If true, will apply resizable styles
+   */
+  isResizable: PropTypes.bool,
 };
 
 TableCell.displayName = 'TableCell';
