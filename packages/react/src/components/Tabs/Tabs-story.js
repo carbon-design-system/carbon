@@ -12,6 +12,7 @@ import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import { settings } from 'carbon-components';
 import classNames from 'classnames';
 import './Tabs-story.scss';
+import CodeSnippet from '../CodeSnippet';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
@@ -51,6 +52,32 @@ const props = {
 
 const CustomLabel = ({ text }) => <>{text}</>;
 
+const CodeSnippetExample = () => (
+  <CodeSnippet type="multi">
+    {`@mixin grid-container {
+      width: 100%;
+      padding-right: padding(mobile);
+      padding-left: padding(mobile);
+    
+      @include breakpoint(bp--xs--major) {
+        padding-right: padding(xs);
+        padding-left: padding(xs);
+      }
+    }
+    
+    $z-indexes: (
+      modal : 9000,
+      overlay : 8000,
+      dropdown : 7000,
+      header : 6000,
+      footer : 5000,
+      hidden : - 1,
+      overflowHidden: - 1,
+      floating: 10000
+    );`}
+  </CodeSnippet>
+);
+
 const TabContentRenderedOnlyWhenSelected = ({
   selected,
   children,
@@ -88,7 +115,10 @@ storiesOf('Tabs', module)
           {...props.tab()}
           label="Tab label 4"
           renderContent={TabContentRenderedOnlyWhenSelected}>
-          <div className="some-content">Content for fourth tab goes here.</div>
+          <div className="some-content">
+            <p>Content for fourth tab goes here.</p>
+            <CodeSnippetExample />
+          </div>
         </Tab>
         <Tab
           id="tab-5"
@@ -122,7 +152,10 @@ storiesOf('Tabs', module)
           {...props.tab()}
           label="Tab label 3"
           renderContent={TabContentRenderedOnlyWhenSelected}>
-          <div className="some-content">Content for third tab goes here.</div>
+          <div className="some-content">
+            <p>Content for third tab goes here.</p>
+            <CodeSnippetExample />
+          </div>
         </Tab>
         <Tab
           id="tab-4"
