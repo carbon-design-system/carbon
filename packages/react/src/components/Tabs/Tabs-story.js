@@ -117,7 +117,11 @@ storiesOf('Tabs', module)
           renderContent={TabContentRenderedOnlyWhenSelected}>
           <div className="some-content">
             <p>Content for fourth tab goes here.</p>
-            <p>This example uses the <CodeSnippet type="inline">renderContent</CodeSnippet> prop to re-render content when the tab is selected.</p>
+            <p>
+              This example uses the&nbsp;
+              <CodeSnippet type="inline">renderContent</CodeSnippet> prop to
+              re-render content when the tab is selected.
+            </p>
             <CodeSnippetExample />
           </div>
         </Tab>
@@ -155,7 +159,12 @@ storiesOf('Tabs', module)
           renderContent={TabContentRenderedOnlyWhenSelected}>
           <div className="some-content">
             <p>Content for third tab goes here.</p>
-            <p>This example uses the <CodeSnippet type="inline">renderContent</CodeSnippet> prop to re-render content when the tab is selected.</p>            <CodeSnippetExample />
+            <p>
+              This example uses the&nbsp;
+              <CodeSnippet type="inline">renderContent</CodeSnippet> prop to
+              re-render content when the tab is selected.
+            </p>
+            <CodeSnippetExample />
           </div>
         </Tab>
         <Tab
