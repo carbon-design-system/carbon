@@ -8,13 +8,17 @@ import Color from 'color';
 
 /**
  * Adjust a given token's lightness by a specified percentage
+ * Example: token = hsl(10, 10, 10);
+ * adjustLightness(token, 5) === hsl(10, 10, 15);
+ * adjustLightness(token, -5) === hsl(10, 10, 5);
  * @param {string} token
- * @param {integer} percentage The amount by which to lighten or darkn the token. Accepts values -100% and 100% (inclusive).
+ * @param {integer} shift The number of percentage points (positive or negative) by which to shift the lightness of a token.
  * @returns {string}
  */
-export function adjustLightness(token, percentage) {
-  return Color(token)
-    .lighten(token, parseInt(percentage, 10))
-    .hex()
-    .toLowerCase();
+export function adjustLightness(token, shift) {
+  const original = Color(token)
+    .hsl()
+    .object();
+
+  return Color({ ...original, l: (original.l += shift) }).hex();
 }
