@@ -4173,6 +4173,16 @@ icons:
       - container-software
     sizes:
       - 32
+  - name: covariate
+    friendly_name: Covariate
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - covariate
+    sizes:
+      - 32
   - name: contrast
     friendly_name: Contrast
     usage: This is a description for usage
@@ -5277,6 +5287,16 @@ icons:
         categories:
           - name: Actions
             subcategory: Toggle
+  - name: factor
+    friendly_name: Factor
+    usage: This is a description for usage
+    categories:
+      - name: Organization
+        subcategory: Data
+    aliases:
+      - factor
+    sizes:
+      - 32
   - name: flow
     friendly_name: Flow
     usage: This is a description for usage

@@ -578,6 +578,7 @@ categories:
           - classifier--language
           - concept
           - container-software
+          - covariate
           - data--1
           - data--2
           - data--base
@@ -597,6 +598,7 @@ categories:
           - datastore
           - diagram
           - document-sentiment
+          - factor
           - flow
           - flow--data
           - flow--stream
