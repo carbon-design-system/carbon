@@ -18732,7 +18732,7 @@ Modal styles
   }
 
   // Required so overflow-indicator disappears at end of content
-  .#{$prefix}--modal-content > *:last-child {
+  .#{$prefix}--modal-scroll-content > *:last-child {
     padding-bottom: $spacing-07;
   }
 
