@@ -80,7 +80,7 @@
     position: relative;
 
     ~ .#{$prefix}--form-requirement {
-      color: $support-01;
+      color: $text-error;
       font-weight: 400;
       margin-top: $carbon--spacing-02;
       overflow: visible;
