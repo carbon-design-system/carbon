@@ -22,5 +22,6 @@ export function adjustLightness(token, shift) {
 
   return Color({ ...original, l: (original.l += shift) })
     .round()
-    .hex();
+    .hex()
+    .toLowerCase();
 }
