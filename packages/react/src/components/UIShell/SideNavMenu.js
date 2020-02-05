@@ -161,7 +161,7 @@ export class SideNavMenu extends React.Component {
           )}
           <span className={`${prefix}--side-nav__submenu-title`}>{title}</span>
           <SideNavIcon className={`${prefix}--side-nav__submenu-chevron`} small>
-            <ChevronDown20 />
+            <ChevronDown20 style={{ willChange: 'unset' }} />
           </SideNavIcon>
         </button>
         <ul className={`${prefix}--side-nav__menu`}>{children}</ul>

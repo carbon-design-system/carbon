@@ -48,7 +48,7 @@ const SideNavSwitcher = React.forwardRef(function SideNavSwitcher(props, ref) {
         ))}
       </select>
       <div className={`${prefix}--side-nav__switcher-chevron`}>
-        <ChevronDown20 />
+        <ChevronDown20 style={{ willChange: 'unset' }} />
       </div>
     </div>
   );
