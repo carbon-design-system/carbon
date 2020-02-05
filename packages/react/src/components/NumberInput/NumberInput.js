@@ -40,21 +40,6 @@ const capMax = (max, value) =>
     : Math.min(max, value);
 
 class NumberInput extends Component {
-  constructor(props) {
-    super(props);
-    this.isControlled = props.value !== undefined;
-    if (useControlledStateWithValue && this.isControlled) {
-      // Skips the logic of setting initial state if this component is controlled
-      return;
-    }
-    let value = useControlledStateWithValue ? props.defaultValue : props.value;
-    value = value === undefined ? 0 : value;
-    if (props.min || props.min === 0) {
-      value = Math.max(props.min, value);
-    }
-    this.state = { value };
-  }
-
   static propTypes = {
     /**
      * Specify an optional className to be applied to the wrapper node
@@ -113,11 +98,11 @@ class NumberInput extends Component {
     /**
      * Optional starting value for uncontrolled state
      */
-    defaultValue: PropTypes.number,
+    defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     /**
      * Specify the value of the input
      */
-    value: PropTypes.number,
+    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     /**
      * Specify if the component should be read-only
      */
@@ -171,14 +156,16 @@ class NumberInput extends Component {
     translateWithId: id => defaultTranslations[id],
   };
 
-  /**
-   * The DOM node refernce to the `<input>`.
-   * @type {HTMLInputElement}
-   */
-  _inputRef = null;
-
   static getDerivedStateFromProps({ min, max, value = 0 }, state) {
     const { prevValue } = state;
+
+    if (useControlledStateWithValue && value === '' && prevValue !== '') {
+      return {
+        value: '',
+        prevValue: '',
+      };
+    }
+
     // If `useControlledStateWithValue` feature flag is on, do nothing here.
     // Otherwise, do prop -> state sync with "value capping".
     return useControlledStateWithValue || prevValue === value
@@ -187,6 +174,27 @@ class NumberInput extends Component {
           value: capMax(max, capMin(min, value)),
           prevValue: value,
         };
+  }
+
+  /**
+   * The DOM node refernce to the `<input>`.
+   * @type {HTMLInputElement}
+   */
+  _inputRef = null;
+
+  constructor(props) {
+    super(props);
+    this.isControlled = props.value !== undefined;
+    if (useControlledStateWithValue && this.isControlled) {
+      // Skips the logic of setting initial state if this component is controlled
+      return;
+    }
+    let value = useControlledStateWithValue ? props.defaultValue : props.value;
+    value = value === undefined ? 0 : value;
+    if (props.min || props.min === 0) {
+      value = Math.max(props.min, value);
+    }
+    this.state = { value };
   }
 
   handleChange = evt => {
@@ -310,12 +318,28 @@ class NumberInput extends Component {
     const inputWrapperProps = {};
     let errorId = null;
     let error = null;
-    if (
-      invalid ||
-      (!allowEmpty && this.state.value === '') ||
-      this.state.value > max ||
-      this.state.value < min
-    ) {
+
+    let isInputInvalid;
+
+    // If the user supplied `invalid` through props, we'll defer to the passed in value
+    if (invalid) {
+      isInputInvalid = true;
+    } else {
+      // Otherwise, if we don't allow an empty value then we check to see
+      // if the value is empty, or if it is out of range
+      if (!allowEmpty && this.state.value === '') {
+        isInputInvalid = true;
+      } else {
+        if (
+          this.state.value !== '' &&
+          (this.state.value > max || this.state.value < min)
+        ) {
+          isInputInvalid = true;
+        }
+      }
+    }
+
+    if (isInputInvalid) {
       inputWrapperProps['data-invalid'] = true;
       errorId = `${id}-error-id`;
       error = (
@@ -391,8 +415,8 @@ class NumberInput extends Component {
                 {helper}
                 <div className={`${prefix}--number__input-wrapper`}>
                   <input
-                    data-invalid={invalid || null}
-                    aria-invalid={invalid || null}
+                    data-invalid={isInputInvalid}
+                    aria-invalid={isInputInvalid}
                     aria-describedby={errorId}
                     type="number"
                     pattern="[0-9]*"
@@ -400,7 +424,7 @@ class NumberInput extends Component {
                     {...props}
                     ref={mergeRefs(ref, this._handleInputRef)}
                   />
-                  {invalid && (
+                  {isInputInvalid && (
                     <WarningFilled16 className={`${prefix}--number__invalid`} />
                   )}
                   <div className={`${prefix}--number__controls`}>
