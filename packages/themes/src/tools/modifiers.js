@@ -20,5 +20,7 @@ export function adjustLightness(token, shift) {
     .hsl()
     .object();
 
-  return Color({ ...original, l: (original.l += shift) }).hex();
+  return Color({ ...original, l: (original.l += shift) })
+    .round()
+    .hex();
 }
