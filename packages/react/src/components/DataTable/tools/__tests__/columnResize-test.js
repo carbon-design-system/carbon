@@ -11,21 +11,35 @@ import {
   actionTypes,
   initialState,
   resizeReducer,
-  getNextColKey,
   getColRefs,
 } from '../columnResize';
 
 describe('column resizer reducer', () => {
-  const ref1 = createRef();
   const key1 = 'aKey';
+  const key2 = 'aKey2';
+  const key3 = 'aKey3';
+  const ref1 = createRef();
+  const ref2 = createRef();
+  const ref3 = createRef();
 
-  function getAddAction(key = key1, ref = ref1) {
+  function getAddAction(key = key1, ref = ref1, width = 100) {
     return {
       type: actionTypes.ADD_COLUMN,
       colKey: key,
       ref,
-      colWidth: 100,
+      colWidth: width,
     };
+  }
+
+  function getStateFor3Columns(w1 = 100, w2 = 100, w3 = 100) {
+    const addAction1 = getAddAction(key1, ref1, w1);
+    const addAction2 = getAddAction(key2, ref2, w2);
+    const addAction3 = getAddAction(key3, ref3, w3);
+
+    return resizeReducer(
+      resizeReducer(resizeReducer(initialState, addAction1), addAction2),
+      addAction3
+    );
   }
 
   it('should handle ADD_COLUMN.', () => {
@@ -36,6 +50,7 @@ describe('column resizer reducer', () => {
         [key1]: {
           ref: ref1,
           colWidth: 100,
+          initialColWidth: 100,
         },
       },
       columnKeyResizeActive: null,
@@ -69,6 +84,7 @@ describe('column resizer reducer', () => {
         [key1]: {
           ref: ref1,
           colWidth: 100,
+          initialColWidth: 100,
         },
       },
       columnKeyResizeActive: key1,
@@ -95,13 +111,14 @@ describe('column resizer reducer', () => {
         [key1]: {
           ref: ref1,
           colWidth: 100,
+          initialColWidth: 100,
         },
       },
       columnKeyResizeActive: null,
     });
   });
 
-  it('should handle UPDATE_COLWIDTH.', () => {
+  it('should handle single column UPDATE_COLWIDTH.', () => {
     const updateAction = {
       type: actionTypes.UPDATE_COLWIDTH,
       colKey: key1,
@@ -111,25 +128,252 @@ describe('column resizer reducer', () => {
       resizeReducer(initialState, getAddAction()),
       updateAction
     );
-    expect(nextState).toEqual({
-      allColumnKeys: [key1],
-      columnsByKey: {
-        [key1]: {
-          ref: ref1,
-          colWidth: 150,
+    expect(nextState).toEqual(
+      expect.objectContaining({
+        columnsByKey: {
+          [key1]: {
+            ref: ref1,
+            colWidth: 150,
+            initialColWidth: 100,
+          },
         },
-      },
-      columnKeyResizeActive: null,
-    });
+      })
+    );
+  });
+
+  it('should handle multi column UPDATE_COLWIDTH.', () => {
+    const nextState = getStateFor3Columns();
+
+    const updateAction = {
+      type: actionTypes.UPDATE_COLWIDTH,
+      colKey: key1,
+      incr: 51,
+    };
+    const nextState2 = resizeReducer(nextState, updateAction);
+
+    expect(nextState2).toEqual(
+      expect.objectContaining({
+        columnsByKey: {
+          [key1]: {
+            ref: ref1,
+            colWidth: 151,
+            initialColWidth: 100,
+          },
+          [key2]: {
+            ref: ref1,
+            colWidth: 74,
+            initialColWidth: 100,
+          },
+          [key3]: {
+            ref: ref1,
+            colWidth: 75,
+            initialColWidth: 100,
+          },
+        },
+      })
+    );
+  });
+
+  it('should handle UPDATE_COLWIDTH hitting min width.', () => {
+    const nextState = getStateFor3Columns(100, 40, 100);
+
+    const updateAction = {
+      type: actionTypes.UPDATE_COLWIDTH,
+      colKey: key2,
+      incr: -50,
+    };
+    const nextState2 = resizeReducer(nextState, updateAction);
+
+    expect(nextState2).toEqual(
+      expect.objectContaining({
+        columnsByKey: {
+          [key1]: {
+            ref: ref1,
+            colWidth: 100,
+            initialColWidth: 100,
+          },
+          [key2]: {
+            ref: ref1,
+            colWidth: 40,
+            initialColWidth: 40,
+          },
+          [key3]: {
+            ref: ref1,
+            colWidth: 100,
+            initialColWidth: 100,
+          },
+        },
+      })
+    );
+  });
+
+  it('should handle UPDATE_COLWIDTH hitting min width to the right.', () => {
+    const nextState = getStateFor3Columns();
+
+    const updateAction = {
+      type: actionTypes.UPDATE_COLWIDTH,
+      colKey: key2,
+      incr: 70,
+    };
+    const nextState2 = resizeReducer(nextState, updateAction);
+
+    expect(nextState2).toEqual(
+      expect.objectContaining({
+        columnsByKey: {
+          [key1]: {
+            ref: ref1,
+            colWidth: 100,
+            initialColWidth: 100,
+          },
+          [key2]: {
+            ref: ref1,
+            colWidth: 170,
+            initialColWidth: 100,
+          },
+          [key3]: {
+            ref: ref1,
+            colWidth: 40,
+            initialColWidth: 100,
+          },
+        },
+      })
+    );
+  });
+
+  it('should handle UPDATE_COLWIDTH modifying left columns.', () => {
+    const nextState = getStateFor3Columns(100, 100, 40);
+
+    const updateAction = {
+      type: actionTypes.UPDATE_COLWIDTH,
+      colKey: key2,
+      incr: 50,
+    };
+    const nextState2 = resizeReducer(nextState, updateAction);
+
+    expect(nextState2).toEqual(
+      expect.objectContaining({
+        columnsByKey: {
+          [key1]: {
+            ref: ref1,
+            colWidth: 50,
+            initialColWidth: 100,
+          },
+          [key2]: {
+            ref: ref1,
+            colWidth: 150,
+            initialColWidth: 100,
+          },
+          [key3]: {
+            ref: ref1,
+            colWidth: 40,
+            initialColWidth: 40,
+          },
+        },
+      })
+    );
+  });
+
+  it('should handle UPDATE_COLWIDTH modifying right most column.', () => {
+    const nextState = getStateFor3Columns();
+
+    const updateAction = {
+      type: actionTypes.UPDATE_COLWIDTH,
+      colKey: key3,
+      incr: 51,
+    };
+    const nextState2 = resizeReducer(nextState, updateAction);
+
+    expect(nextState2).toEqual(
+      expect.objectContaining({
+        columnsByKey: {
+          [key1]: {
+            ref: ref1,
+            colWidth: 74,
+            initialColWidth: 100,
+          },
+          [key2]: {
+            ref: ref1,
+            colWidth: 75,
+            initialColWidth: 100,
+          },
+          [key3]: {
+            ref: ref1,
+            colWidth: 151,
+            initialColWidth: 100,
+          },
+        },
+      })
+    );
+  });
+
+  it('should handle UPDATE_COLWIDTH only columns wider than min width to the right.', () => {
+    const nextState = getStateFor3Columns(100, 40, 100);
+
+    const updateAction = {
+      type: actionTypes.UPDATE_COLWIDTH,
+      colKey: key1,
+      incr: 51,
+    };
+    const nextState2 = resizeReducer(nextState, updateAction);
+
+    expect(nextState2).toEqual(
+      expect.objectContaining({
+        columnsByKey: {
+          [key1]: {
+            ref: ref1,
+            colWidth: 151,
+            initialColWidth: 100,
+          },
+          [key2]: {
+            ref: ref1,
+            colWidth: 40,
+            initialColWidth: 40,
+          },
+          [key3]: {
+            ref: ref1,
+            colWidth: 49,
+            initialColWidth: 100,
+          },
+        },
+      })
+    );
+  });
+
+  it('should handle UPDATE_COLWIDTH only columns wider than min width to the left.', () => {
+    const nextState = getStateFor3Columns(100, 40, 100);
+
+    const updateAction = {
+      type: actionTypes.UPDATE_COLWIDTH,
+      colKey: key3,
+      incr: 51,
+    };
+    const nextState2 = resizeReducer(nextState, updateAction);
+
+    expect(nextState2).toEqual(
+      expect.objectContaining({
+        columnsByKey: {
+          [key1]: {
+            ref: ref1,
+            colWidth: 49,
+            initialColWidth: 100,
+          },
+          [key2]: {
+            ref: ref1,
+            colWidth: 40,
+            initialColWidth: 40,
+          },
+          [key3]: {
+            ref: ref1,
+            colWidth: 151,
+            initialColWidth: 100,
+          },
+        },
+      })
+    );
   });
 
   it('should handle BATCH_SET_COLWIDTHS.', () => {
-    const key2 = 'aKey2';
-    const key3 = 'aKey3';
-    const ref2 = createRef();
-    const ref3 = createRef();
-    const addAction2 = getAddAction(key2, ref2);
-    const addAction3 = getAddAction(key3, ref3);
+    const nextState = getStateFor3Columns();
 
     const setAction = {
       type: actionTypes.BATCH_SET_COLWIDTHS,
@@ -140,10 +384,6 @@ describe('column resizer reducer', () => {
         aKey3: 250,
       },
     };
-    const nextState = resizeReducer(
-      resizeReducer(resizeReducer(initialState, getAddAction()), addAction2),
-      addAction3
-    );
     const nextState2 = resizeReducer(nextState, setAction);
 
     expect(nextState2).toEqual({
@@ -152,48 +392,25 @@ describe('column resizer reducer', () => {
         [key1]: {
           ref: ref1,
           colWidth: 150,
+          initialColWidth: 150,
         },
         [key2]: {
           ref: ref2,
           colWidth: 200,
+          initialColWidth: 200,
         },
         [key3]: {
           ref: ref3,
           colWidth: 250,
+          initialColWidth: 250,
         },
       },
       columnKeyResizeActive: null,
     });
   });
 
-  it('should return key of next column.', () => {
-    const key2 = 'aKey2';
-    const key3 = 'aKey3';
-    const ref2 = createRef();
-    const ref3 = createRef();
-    const addAction2 = getAddAction(key2, ref2);
-    const addAction3 = getAddAction(key3, ref3);
-
-    const nextState = resizeReducer(
-      resizeReducer(resizeReducer(initialState, getAddAction()), addAction2),
-      addAction3
-    );
-
-    expect(getNextColKey(nextState, key2)).toEqual(key3);
-  });
-
   it('should return column refs.', () => {
-    const key2 = 'aKey2';
-    const key3 = 'aKey3';
-    const ref2 = createRef();
-    const ref3 = createRef();
-    const addAction2 = getAddAction(key2, ref2);
-    const addAction3 = getAddAction(key3, ref3);
-
-    const nextState = resizeReducer(
-      resizeReducer(resizeReducer(initialState, getAddAction()), addAction2),
-      addAction3
-    );
+    const nextState = getStateFor3Columns();
 
     expect(getColRefs(nextState)).toEqual([
       { key: key1, ref: ref1 },

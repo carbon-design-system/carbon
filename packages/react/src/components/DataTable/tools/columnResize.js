@@ -9,6 +9,10 @@
 import React, { useContext, createContext, useReducer } from 'react';
 import cloneDeep from 'lodash.clonedeep';
 
+// minimal column width
+// based on the minimal width in sticky header tables
+const colMinWidth = 40;
+
 // resizing actions
 // currently only exported for testing
 export const actionTypes = {
@@ -42,6 +46,7 @@ export const resizeReducer = (state, action) => {
         [action.colKey]: {
           ref: action.ref,
           colWidth: action.colWidth,
+          initialColWidth: action.colWidth,
         },
       },
       allColumnKeys: [...state.allColumnKeys, action.colKey],
@@ -57,6 +62,7 @@ export const resizeReducer = (state, action) => {
   if (action.type === actionTypes.END_RESIZE_ACTION) {
     const clonedState = cloneDeep(state);
     clonedState.columnKeyResizeActive = null;
+    // initialColWidths will be reset by BATCH_SET_COLWIDTHS
     return clonedState;
   }
 
@@ -71,7 +77,119 @@ export const resizeReducer = (state, action) => {
 
   if (action.type === actionTypes.UPDATE_COLWIDTH) {
     const clonedState = cloneDeep(state);
-    clonedState.columnsByKey[action.colKey].colWidth += action.incr;
+
+    // update resized column - only reduce until minimal width
+    clonedState.columnsByKey[action.colKey].colWidth = Math.max(
+      colMinWidth,
+      clonedState.columnsByKey[action.colKey].colWidth + action.incr
+    );
+    if (clonedState.columnsByKey[action.colKey].colWidth <= colMinWidth) {
+      return clonedState;
+    }
+
+    const completeWidthChange =
+      clonedState.columnsByKey[action.colKey].colWidth -
+      clonedState.columnsByKey[action.colKey].initialColWidth;
+
+    // current resize strategy (works perfect on columns with minmal width - like sticky header tables)
+    // first we try to modify the columns to the right
+    // going right: when we reach the min width of the columns to the right, ...
+    // ... then we start modifying the left columns
+    // when we move back to the left: we first increase cols to the left up to their initial width
+    // then increase the columns to the right again
+
+    const colIdx = clonedState.allColumnKeys.indexOf(action.colKey);
+    const numCols = clonedState.allColumnKeys.length;
+
+    const colKeysToTheLeft = clonedState.allColumnKeys.slice(0, colIdx);
+    const curWidthLeft =
+      colKeysToTheLeft.length &&
+      colKeysToTheLeft
+        .map(key => clonedState.columnsByKey[key].colWidth)
+        .reduce((sum, width) => sum + width);
+    const initialWidthLeft =
+      colKeysToTheLeft.length &&
+      colKeysToTheLeft
+        .map(key => clonedState.columnsByKey[key].initialColWidth)
+        .reduce((sum, width) => sum + width);
+
+    const colKeysToTheRight = clonedState.allColumnKeys.slice(colIdx + 1);
+    const minWidthRight = colMinWidth * colKeysToTheRight.length;
+    const curWidthRight =
+      colKeysToTheRight.length &&
+      colKeysToTheRight
+        .map(key => clonedState.columnsByKey[key].colWidth)
+        .reduce((sum, width) => sum + width);
+    const initialWidthRight =
+      colKeysToTheRight.length &&
+      colKeysToTheRight
+        .map(key => clonedState.columnsByKey[key].initialColWidth)
+        .reduce((sum, width) => sum + width);
+
+    // console.log(`diff: (col): ${completeWidthChange}`);
+    // console.log(`right (min/initial/cur/diff): ${minWidthRight} ${initialWidthRight} ${curWidthRight} ${initialWidthRight-curWidthRight}`);
+    // console.log(`left (initial/cur/diff): ${initialWidthLeft} ${curWidthLeft} ${initialWidthLeft - curWidthLeft}`);
+
+    // modify right columns as long as we do not hit min width
+    // or when left columns are at initial width
+    // but not if we are the last column
+    if (
+      colIdx !== numCols - 1 &&
+      (curWidthRight > minWidthRight || initialWidthLeft < curWidthLeft)
+    ) {
+      // dont reduce columns at minimal width
+      const colKeysToDistribute =
+        action.incr < 0
+          ? colKeysToTheRight
+          : colKeysToTheRight.filter(
+              key => clonedState.columnsByKey[key].colWidth > colMinWidth
+            );
+
+      const firstColWidthDiff = Math.ceil(
+        completeWidthChange / colKeysToDistribute.length
+      );
+      const newColWidthDiff = Math.floor(
+        completeWidthChange / colKeysToDistribute.length
+      );
+
+      colKeysToDistribute.forEach((key, idx) => {
+        const diff = idx === 0 ? firstColWidthDiff : newColWidthDiff;
+        clonedState.columnsByKey[key].colWidth = Math.max(
+          colMinWidth,
+          clonedState.columnsByKey[key].initialColWidth - diff
+        );
+      });
+    } else {
+      // modify columns to the left
+
+      // what we already distributed to the right cols
+      const currentlyDistributedToTheRight = initialWidthRight - curWidthRight;
+      const stillToDistribute =
+        completeWidthChange - currentlyDistributedToTheRight;
+
+      // dont reduce columns at minimal width
+      const colKeysToDistribute =
+        action.incr < 0
+          ? colKeysToTheLeft
+          : colKeysToTheLeft.filter(
+              key => clonedState.columnsByKey[key].colWidth > colMinWidth
+            );
+
+      const firstColWidthDiff = Math.ceil(
+        stillToDistribute / colKeysToDistribute.length
+      );
+      const newColWidthDiff = Math.floor(
+        stillToDistribute / colKeysToDistribute.length
+      );
+
+      colKeysToDistribute.forEach((key, idx) => {
+        const diff = idx === 0 ? firstColWidthDiff : newColWidthDiff;
+        clonedState.columnsByKey[key].colWidth = Math.max(
+          colMinWidth,
+          clonedState.columnsByKey[key].initialColWidth - diff
+        );
+      });
+    }
     return clonedState;
   }
 
@@ -80,6 +198,7 @@ export const resizeReducer = (state, action) => {
     Object.entries(action.colWidths).forEach(entry => {
       const [key, width] = entry;
       clonedState.columnsByKey[key].colWidth = width;
+      clonedState.columnsByKey[key].initialColWidth = width;
     });
     return clonedState;
   }
@@ -98,15 +217,6 @@ export const ResizeProvider = ({ children }) => {
     </ResizeContext.Provider>
   );
 };
-
-// utility function to get the column key of the column to the right
-// currently only exported for testing
-export function getNextColKey(state, colKey) {
-  const idx = state.allColumnKeys.indexOf(colKey);
-  return idx >= 0 && idx < state.allColumnKeys.length - 1
-    ? state.allColumnKeys[idx + 1]
-    : null;
-}
 
 // currently only exported for testing
 export function getColRefs(state) {
@@ -168,16 +278,7 @@ export const useColumnResizing = colKey => {
 
     // change the column width by an increment
     resizeColumn: incr => {
-      // current resize-algorithm: move boundary between 2 columns
       dispatch({ type: actionTypes.UPDATE_COLWIDTH, colKey, incr });
-      const nextColKey = getNextColKey(state, colKey);
-      if (nextColKey) {
-        dispatch({
-          type: actionTypes.UPDATE_COLWIDTH,
-          colKey: nextColKey,
-          incr: -incr,
-        });
-      }
     },
   };
 };
