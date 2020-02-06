@@ -98,6 +98,11 @@ class Tooltip extends Component {
     tooltipId: PropTypes.string,
 
     /**
+     * The ID of the tooltip body content.
+     */
+    tooltipBodyId: PropTypes.string,
+
+    /**
      * Optional starting value for uncontrolled state
      */
     defaultOpen: PropTypes.bool,
@@ -369,6 +374,7 @@ class Tooltip extends Component {
         `__carbon-tooltip_${Math.random()
           .toString(36)
           .substr(2)}`),
+      tooltipBodyId,
       children,
       className,
       triggerClassName,
@@ -412,6 +418,7 @@ class Tooltip extends Component {
       onMouseOut: this.handleMouse,
       onFocus: this.handleMouse,
       onBlur: this.handleMouse,
+      'aria-controls': !open ? undefined : tooltipId,
       'aria-haspopup': 'true',
       'aria-expanded': open,
       'aria-describedby': open ? tooltipId : null,
@@ -469,7 +476,14 @@ class Tooltip extends Component {
               onContextMenu={this.handleMouse}
               role="tooltip">
               <span className={`${prefix}--tooltip__caret`} />
-              {children}
+              <div
+                className={`${prefix}--tooltip__content`}
+                tabindex="-1"
+                role="dialog"
+                aria-describedby={tooltipBodyId}
+                aria-labelledby={triggerId}>
+                {children}
+              </div>
             </div>
           </FloatingMenu>
         )}
