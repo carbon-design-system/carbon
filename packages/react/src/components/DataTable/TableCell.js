@@ -5,41 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
-import React from 'react';
-import { useColumnResizing } from './tools/columnResize';
+import wrapComponent from '../../tools/wrapComponent';
 
-const TableCell = ({ children, colKey, isResizable, ...rest }) => {
-  const { colWidth } = useColumnResizing(colKey);
-
-  if (isResizable && colWidth && colKey) {
-    return (
-      <td style={{ width: colWidth + 'px' }} {...rest}>
-        {children}
-      </td>
-    );
-  }
-
-  return <td {...rest}>{children}</td>;
-};
-
-TableCell.propTypes = {
-  /**
-   * Pass in children that will be embedded in the table header label
-   */
-  children: PropTypes.node,
-
-  /**
-   * key for the column as defined in the header data
-   */
-  colKey: PropTypes.string,
-
-  /**
-   * `false` If true, will apply resizable styles
-   */
-  isResizable: PropTypes.bool,
-};
-
-TableCell.displayName = 'TableCell';
+const TableCell = wrapComponent({
+  name: 'TableCell',
+  type: 'td',
+});
 
 export default TableCell;

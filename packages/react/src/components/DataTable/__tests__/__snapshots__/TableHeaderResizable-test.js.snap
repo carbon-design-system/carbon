@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DataTable.TableHeader should have an active and ascending class if sorting by ASC 1`] = `
+exports[`DataTable.TableHeaderResizable should have an active and ascending class if sorting by ASC 1`] = `
 <Table
   isSortable={false}
 >
@@ -11,7 +11,8 @@ exports[`DataTable.TableHeader should have an active and ascending class if sort
       <thead>
         <TableRow>
           <tr>
-            <TableHeader
+            <TableHeaderResizable
+              colKey="aKey"
               isSortHeader={true}
               isSortable={false}
               onClick={[MockFunction]}
@@ -28,7 +29,7 @@ exports[`DataTable.TableHeader should have an active and ascending class if sort
                   Header
                 </span>
               </th>
-            </TableHeader>
+            </TableHeaderResizable>
           </tr>
         </TableRow>
       </thead>
@@ -37,7 +38,7 @@ exports[`DataTable.TableHeader should have an active and ascending class if sort
 </Table>
 `;
 
-exports[`DataTable.TableHeader should have an active class if it is the sort header and the sort state is not NONE 1`] = `
+exports[`DataTable.TableHeaderResizable should have an active class if it is the sort header and the sort state is not NONE 1`] = `
 <Table
   isSortable={false}
 >
@@ -48,7 +49,8 @@ exports[`DataTable.TableHeader should have an active class if it is the sort hea
       <thead>
         <TableRow>
           <tr>
-            <TableHeader
+            <TableHeaderResizable
+              colKey="aKey"
               isSortHeader={true}
               isSortable={false}
               onClick={[MockFunction]}
@@ -65,7 +67,7 @@ exports[`DataTable.TableHeader should have an active class if it is the sort hea
                   Header
                 </span>
               </th>
-            </TableHeader>
+            </TableHeaderResizable>
           </tr>
         </TableRow>
       </thead>
@@ -74,7 +76,7 @@ exports[`DataTable.TableHeader should have an active class if it is the sort hea
 </Table>
 `;
 
-exports[`DataTable.TableHeader should render 1`] = `
+exports[`DataTable.TableHeaderResizable should render 1`] = `
 <Table
   isSortable={false}
 >
@@ -85,7 +87,8 @@ exports[`DataTable.TableHeader should render 1`] = `
       <thead>
         <TableRow>
           <tr>
-            <TableHeader
+            <TableHeaderResizable
+              colKey="aKey"
               isSortHeader={false}
               isSortable={false}
               onClick={[MockFunction]}
@@ -102,7 +105,7 @@ exports[`DataTable.TableHeader should render 1`] = `
                   Header
                 </span>
               </th>
-            </TableHeader>
+            </TableHeaderResizable>
           </tr>
         </TableRow>
       </thead>
@@ -111,7 +114,7 @@ exports[`DataTable.TableHeader should render 1`] = `
 </Table>
 `;
 
-exports[`DataTable.TableHeader should render 2`] = `
+exports[`DataTable.TableHeaderResizable should render 2`] = `
 <Table
   isSortable={false}
 >
@@ -122,7 +125,8 @@ exports[`DataTable.TableHeader should render 2`] = `
       <thead>
         <TableRow>
           <tr>
-            <TableHeader
+            <TableHeaderResizable
+              colKey="aKey"
               isSortHeader={true}
               isSortable={false}
               onClick={[MockFunction]}
@@ -139,7 +143,7 @@ exports[`DataTable.TableHeader should render 2`] = `
                   Header
                 </span>
               </th>
-            </TableHeader>
+            </TableHeaderResizable>
           </tr>
         </TableRow>
       </thead>

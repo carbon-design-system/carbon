@@ -25,7 +25,6 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
             "expandAll": [Function],
             "expandRow": [Function],
             "getBatchActionProps": [Function],
-            "getCellProps": [Function],
             "getExpandHeaderProps": [Function],
             "getHeaderProps": [Function],
             "getRowProps": [Function],
@@ -64,7 +63,6 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
               <TableHead>
                 <TableRow>
                   <ForwardRef(TableHeader)
-                    colKey="fieldA"
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -75,7 +73,6 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                     Field A
                   </ForwardRef(TableHeader)>
                   <ForwardRef(TableHeader)
-                    colKey="fieldB"
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -129,7 +126,6 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
               <TableRow>
                 <tr>
                   <TableHeader
-                    colKey="fieldA"
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldA"
@@ -149,7 +145,6 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                     </th>
                   </TableHeader>
                   <TableHeader
-                    colKey="fieldB"
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldB"
@@ -211,7 +206,6 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
             "expandAll": [Function],
             "expandRow": [Function],
             "getBatchActionProps": [Function],
-            "getCellProps": [Function],
             "getExpandHeaderProps": [Function],
             "getHeaderProps": [Function],
             "getRowProps": [Function],
@@ -341,7 +335,6 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
               <TableHead>
                 <TableRow>
                   <ForwardRef(TableHeader)
-                    colKey="fieldA"
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -352,7 +345,6 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     Field A
                   </ForwardRef(TableHeader)>
                   <ForwardRef(TableHeader)
-                    colKey="fieldB"
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -476,7 +468,6 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
               <TableRow>
                 <tr>
                   <TableHeader
-                    colKey="fieldA"
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldA"
@@ -496,7 +487,6 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     </th>
                   </TableHeader>
                   <TableHeader
-                    colKey="fieldB"
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldB"
@@ -816,7 +806,6 @@ exports[`DataTable selection should have select-all default to un-checked if no 
             "expandAll": [Function],
             "expandRow": [Function],
             "getBatchActionProps": [Function],
-            "getCellProps": [Function],
             "getExpandHeaderProps": [Function],
             "getHeaderProps": [Function],
             "getRowProps": [Function],
@@ -863,7 +852,6 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     onSelect={[Function]}
                   />
                   <ForwardRef(TableHeader)
-                    colKey="fieldA"
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -874,7 +862,6 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     Field A
                   </ForwardRef(TableHeader)>
                   <ForwardRef(TableHeader)
-                    colKey="fieldB"
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -976,7 +963,6 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     </th>
                   </TableSelectAll>
                   <TableHeader
-                    colKey="fieldA"
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldA"
@@ -996,7 +982,6 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     </th>
                   </TableHeader>
                   <TableHeader
-                    colKey="fieldB"
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldB"
@@ -1057,7 +1042,6 @@ exports[`DataTable selection should render 1`] = `
             "expandAll": [Function],
             "expandRow": [Function],
             "getBatchActionProps": [Function],
-            "getCellProps": [Function],
             "getExpandHeaderProps": [Function],
             "getHeaderProps": [Function],
             "getRowProps": [Function],
@@ -1195,7 +1179,6 @@ exports[`DataTable selection should render 1`] = `
                     onSelect={[Function]}
                   />
                   <ForwardRef(TableHeader)
-                    colKey="fieldA"
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -1206,7 +1189,6 @@ exports[`DataTable selection should render 1`] = `
                     Field A
                   </ForwardRef(TableHeader)>
                   <ForwardRef(TableHeader)
-                    colKey="fieldB"
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -1378,7 +1360,6 @@ exports[`DataTable selection should render 1`] = `
                     </th>
                   </TableSelectAll>
                   <TableHeader
-                    colKey="fieldA"
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldA"
@@ -1398,7 +1379,6 @@ exports[`DataTable selection should render 1`] = `
                     </th>
                   </TableHeader>
                   <TableHeader
-                    colKey="fieldB"
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldB"
@@ -1667,7 +1647,6 @@ exports[`DataTable should render 1`] = `
             "expandAll": [Function],
             "expandRow": [Function],
             "getBatchActionProps": [Function],
-            "getCellProps": [Function],
             "getExpandHeaderProps": [Function],
             "getHeaderProps": [Function],
             "getRowProps": [Function],
@@ -1886,7 +1865,6 @@ exports[`DataTable should render 1`] = `
               <TableHead>
                 <TableRow>
                   <ForwardRef(TableHeader)
-                    colKey="fieldA"
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -1897,7 +1875,6 @@ exports[`DataTable should render 1`] = `
                     Field A
                   </ForwardRef(TableHeader)>
                   <ForwardRef(TableHeader)
-                    colKey="fieldB"
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -2523,7 +2500,6 @@ exports[`DataTable should render 1`] = `
               <TableRow>
                 <tr>
                   <TableHeader
-                    colKey="fieldA"
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldA"
@@ -2543,7 +2519,6 @@ exports[`DataTable should render 1`] = `
                     </th>
                   </TableHeader>
                   <TableHeader
-                    colKey="fieldB"
                     isSortHeader={false}
                     isSortable={false}
                     key="fieldB"
@@ -2665,7 +2640,6 @@ exports[`DataTable sticky header should render 1`] = `
             "expandAll": [Function],
             "expandRow": [Function],
             "getBatchActionProps": [Function],
-            "getCellProps": [Function],
             "getExpandHeaderProps": [Function],
             "getHeaderProps": [Function],
             "getRowProps": [Function],
@@ -2886,7 +2860,6 @@ exports[`DataTable sticky header should render 1`] = `
               <TableHead>
                 <TableRow>
                   <ForwardRef(TableHeader)
-                    colKey="fieldA"
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -2897,7 +2870,6 @@ exports[`DataTable sticky header should render 1`] = `
                     Field A
                   </ForwardRef(TableHeader)>
                   <ForwardRef(TableHeader)
-                    colKey="fieldB"
                     isSortHeader={false}
                     isSortable={false}
                     onClick={[Function]}
@@ -3529,7 +3501,6 @@ exports[`DataTable sticky header should render 1`] = `
                 <TableRow>
                   <tr>
                     <TableHeader
-                      colKey="fieldA"
                       isSortHeader={false}
                       isSortable={false}
                       key="fieldA"
@@ -3549,7 +3520,6 @@ exports[`DataTable sticky header should render 1`] = `
                       </th>
                     </TableHeader>
                     <TableHeader
-                      colKey="fieldB"
                       isSortHeader={false}
                       isSortable={false}
                       key="fieldB"

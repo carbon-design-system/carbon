@@ -9,7 +9,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { settings } from 'carbon-components';
-import { ResizeProvider } from './tools/columnResize';
 
 const { prefix } = settings;
 
@@ -19,7 +18,6 @@ export const Table = ({
   useZebraStyles,
   size,
   isSortable,
-  isResizable,
   useStaticWidth,
   shouldShowBorder,
   stickyHeader,
@@ -33,18 +31,11 @@ export const Table = ({
     [`${prefix}--data-table--zebra`]: useZebraStyles,
     [`${prefix}--data-table--static`]: useStaticWidth,
     [`${prefix}--data-table--no-border`]: !shouldShowBorder,
-    [`${prefix}--data-table--resizable`]: isResizable,
     [`${prefix}--data-table--sticky-header`]: stickyHeader,
   });
-  const childrenWithProvider = isResizable ? (
-    <ResizeProvider>{children}</ResizeProvider>
-  ) : (
-    children
-  );
-
   const table = (
     <table {...other} className={componentClass}>
-      {childrenWithProvider}
+      {children}
     </table>
   );
   return stickyHeader ? (
@@ -83,11 +74,6 @@ Table.propTypes = {
    * `false` If true, will apply sorting styles
    */
   isSortable: PropTypes.bool,
-
-  /**
-   * `false` If true, will apply resizable styles
-   */
-  isResizable: PropTypes.bool,
 
   /**
    * `false` If true, will keep the header sticky (only data rows will scroll)

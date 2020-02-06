@@ -7,7 +7,7 @@
 
 import React, { createRef } from 'react';
 import { mount } from 'enzyme';
-import { TableColumnResizer } from '../';
+import TableColumnResizer from '../TableColumnResizer';
 import columnResize from '../tools/columnResize';
 
 jest.mock('../tools/columnResize', () => {

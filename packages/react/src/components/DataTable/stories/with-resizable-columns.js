@@ -5,31 +5,36 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { createRef } from 'react';
 
 import DataTable, {
   Table,
   TableBody,
-  TableCell,
   TableContainer,
   TableHead,
-  TableHeader,
   TableRow,
 } from '..';
 import { initialRows, headers } from './shared';
+
+// addition for column resizing
+import { settings } from 'carbon-components';
+const { prefix } = settings;
+import TableCellResizable from '../TableCellResizable';
+import TableHeaderResizable from '../TableHeaderResizable';
+import { ResizeProvider } from '../tools/columnResize';
+
+export const getColKey = cellId => cellId.split(':')[1];
 
 export default props => (
   <DataTable
     rows={initialRows}
     headers={headers}
-    isResizable={true}
     {...props}
     render={({
       rows,
       headers,
       getHeaderProps,
       getRowProps,
-      getCellProps,
       getTableProps,
       getTableContainerProps,
     }) => (
@@ -37,27 +42,38 @@ export default props => (
         title="DataTable"
         description="With resizable columns"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()}>
-          <TableHead>
-            <TableRow>
-              {headers.map(header => (
-                <TableHeader {...getHeaderProps({ header })}>
-                  {header.header}
-                </TableHeader>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map(row => (
-              <TableRow {...getRowProps({ row })}>
-                {row.cells.map(cell => (
-                  <TableCell {...getCellProps({ cell })}>
-                    {cell.value}
-                  </TableCell>
+        <Table
+          {...getTableProps()}
+          className={`${prefix}--data-table--resizable`}>
+          <ResizeProvider>
+            <TableHead>
+              <TableRow>
+                {headers.map(header => (
+                  <TableHeaderResizable
+                    {...getHeaderProps({ header })}
+                    ref={createRef()}
+                    isResizable={true}
+                    colKey={header.key}>
+                    {header.header}
+                  </TableHeaderResizable>
                 ))}
               </TableRow>
-            ))}
-          </TableBody>
+            </TableHead>
+            <TableBody>
+              {rows.map(row => (
+                <TableRow {...getRowProps({ row })}>
+                  {row.cells.map(cell => (
+                    <TableCellResizable
+                      id={cell.id}
+                      isResizable={true}
+                      colKey={getColKey(cell.id)}>
+                      {cell.value}
+                    </TableCellResizable>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </ResizeProvider>
         </Table>
       </TableContainer>
     )}

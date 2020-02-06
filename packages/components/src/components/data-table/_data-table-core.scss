@@ -445,49 +445,6 @@
     width: auto;
   }
 
-  //----------------------------------------------------------------------------
-  // Column resize
-  //----------------------------------------------------------------------------
-  .#{$prefix}--data-table--resizable {
-    th {
-      padding-right: 0; /* ensure that resizer is at right-most position */
-      min-width: rem(40px);
-    }
-    td {
-      min-width: rem(40px);
-    }
-    .#{$prefix}--table-header-label {
-      max-width: none;
-    }
-  }
-
-  .#{$prefix}--table-header-resizable {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  /* resizer bar */
-  .#{$prefix}--table-header-resizer {
-    width: rem(4px);
-    flex-shrink: 0;
-    &:hover {
-      background-color: $ui-05;
-      cursor: col-resize;
-    }
-  }
-
-  /* permanently highlight active resizer while resizing */
-  .#{$prefix}--table-header-resizer-active {
-    background-color: $ui-04;
-    cursor: col-resize;
-  }
-
-  /* don't highlight passive resizers while resizing */
-  .#{$prefix}--table-header-resizer-passive:hover {
-    background-color: $ui-03;
-  }
-
   // -------------
   // Sticky header
   // -------------

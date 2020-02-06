@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { createRef } from 'react';
+import React from 'react';
 import isEqual from 'lodash.isequal';
 import getDerivedStateFromProps from './state/getDerivedStateFromProps';
 import { getNextSortState } from './state/sorting';
@@ -15,7 +15,6 @@ import { composeEventHandlers } from '../../tools/events';
 import { defaultFilterRows } from './tools/filter';
 import { defaultSortRow } from './tools/sorting';
 import setupGetInstanceId from './tools/instanceId';
-import { getColKey } from './tools/cells';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -118,11 +117,6 @@ export default class DataTable extends React.Component {
     stickyHeader: PropTypes.bool,
 
     /**
-     * Specify whether the table columns should be resizable
-     */
-    isResizable: PropTypes.bool,
-
-    /**
      * Specify whether the table should be able to be sorted by its headers
      */
     isSortable: PropTypes.bool,
@@ -182,20 +176,15 @@ export default class DataTable extends React.Component {
     header,
     onClick,
     isSortable = this.props.isSortable,
-    isResizable = this.props.isResizable,
-    ref = createRef(),
     ...rest
   }) => {
     const { sortDirection, sortHeaderKey } = this.state;
     return {
       ...rest,
       key: header.key,
-      colKey: header.key,
       sortDirection,
       isSortable,
       isSortHeader: sortHeaderKey === header.key,
-      isResizable,
-      ref,
       // Compose the event handlers so we don't overwrite a consumer's `onClick`
       // handler
       onClick: composeEventHandlers([
@@ -289,28 +278,6 @@ export default class DataTable extends React.Component {
   };
 
   /**
-   * Get the props associated with the given table cell. Mostly used for adding in
-   * column resizing behavior for sticky header tables.
-   *
-   * @param {object} config
-   * @param {string} config.cell the header we want the props for
-   * @returns {object}
-   */
-  getCellProps = ({
-    cell,
-    isResizable = this.props.isResizable,
-    colKey = getColKey(cell.id),
-    ...rest
-  }) => {
-    return {
-      ...rest,
-      key: cell.id,
-      isResizable,
-      colKey,
-    };
-  };
-
-  /**
    * Gets the props associated with selection for a header or a row, where
    * applicable. Most often used to indicate selection status of the table or
    * for a specific row.
@@ -381,7 +348,6 @@ export default class DataTable extends React.Component {
       useZebraStyles,
       size,
       isSortable,
-      isResizable,
       useStaticWidth,
       shouldShowBorder,
       stickyHeader,
@@ -390,7 +356,6 @@ export default class DataTable extends React.Component {
       useZebraStyles,
       size,
       isSortable,
-      isResizable,
       useStaticWidth,
       shouldShowBorder,
       stickyHeader,
@@ -648,7 +613,6 @@ export default class DataTable extends React.Component {
       getHeaderProps: this.getHeaderProps,
       getExpandHeaderProps: this.getExpandHeaderProps,
       getRowProps: this.getRowProps,
-      getCellProps: this.getCellProps,
       getSelectionProps: this.getSelectionProps,
       getBatchActionProps: this.getBatchActionProps,
       getTableProps: this.getTableProps,

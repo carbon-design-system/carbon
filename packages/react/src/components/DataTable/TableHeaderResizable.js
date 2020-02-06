@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /**
  * Copyright IBM Corp. 2016, 2018
  *
@@ -14,6 +15,8 @@ import {
   ArrowsVertical20 as Arrows,
 } from '@carbon/icons-react';
 import { sortStates } from './state/sorting';
+import { useColumnResizing } from './tools/columnResize';
+import TableColumnResizer from './TableColumnResizer';
 
 const { prefix } = settings;
 
@@ -47,24 +50,50 @@ const sortDirections = {
   [sortStates.DESC]: 'descending',
 };
 
-const TableHeader = React.forwardRef(function TableHeader(
+const TableHeaderResizable = React.forwardRef(function TableHeaderResizable(
   {
     className: headerClassName,
     children,
     colSpan,
     isSortable,
     isSortHeader,
+    isResizable,
     onClick,
     scope,
     sortDirection,
     translateWithId: t,
+    colKey,
+
     ...rest
   },
   ref
 ) {
+  const { colWidth } = useColumnResizing(colKey);
+
+  if (isResizable) {
+    return (
+      <th
+        className={headerClassName}
+        colSpan={colSpan}
+        ref={ref}
+        scope={scope}
+        style={{ width: colWidth + 'px' }}>
+        <div className={`${prefix}--table-header-resizable`} {...rest}>
+          <span className={`${prefix}--table-header-label`}>{children}</span>
+          <TableColumnResizer headerRef={ref} colKey={colKey} />
+        </div>
+      </th>
+    );
+  }
+
   if (!isSortable) {
     return (
-      <th {...rest} className={headerClassName} scope={scope} colSpan={colSpan}>
+      <th
+        {...rest}
+        className={headerClassName}
+        scope={scope}
+        colSpan={colSpan}
+        ref={ref}>
         <span className={`${prefix}--table-header-label`}>{children}</span>
       </th>
     );
@@ -111,7 +140,7 @@ const TableHeader = React.forwardRef(function TableHeader(
   );
 });
 
-TableHeader.propTypes = {
+TableHeaderResizable.propTypes = {
   /**
    * Specify an optional className to be applied to the container node
    */
@@ -163,16 +192,26 @@ TableHeader.propTypes = {
    * this component.
    */
   translateWithId: PropTypes.func,
+
+  /**
+   * key for the column as defined in the header data
+   */
+  colKey: PropTypes.string.isRequired,
+
+  /**
+   * Specify whether the column of this header can be resized
+   */
+  isResizable: PropTypes.bool,
 };
 
-TableHeader.defaultProps = {
+TableHeaderResizable.defaultProps = {
   isSortable: false,
   scope: 'col',
   translateWithId,
 };
 
-TableHeader.translationKeys = Object.values(translationKeys);
+TableHeaderResizable.translationKeys = Object.values(translationKeys);
 
-TableHeader.displayName = 'TableHeader';
+TableHeaderResizable.displayName = 'TableHeaderResizable';
 
-export default TableHeader;
+export default TableHeaderResizable;

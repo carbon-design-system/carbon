@@ -26,7 +26,6 @@ import TableToolbarAction from './TableToolbarAction';
 import TableToolbarContent from './TableToolbarContent';
 import TableToolbarSearch from './TableToolbarSearch';
 import TableToolbarMenu from './TableToolbarMenu';
-import TableColumnResizer from './TableColumnResizer';
 
 DataTable.Table = Table;
 DataTable.TableActionList = TableActionList;
@@ -48,7 +47,6 @@ DataTable.TableToolbarAction = TableToolbarAction;
 DataTable.TableToolbarContent = TableToolbarContent;
 DataTable.TableToolbarSearch = TableToolbarSearch;
 DataTable.TableToolbarMenu = TableToolbarMenu;
-DataTable.TableColumnResizer = TableColumnResizer;
 
 export {
   Table,
@@ -71,7 +69,6 @@ export {
   TableToolbarContent,
   TableToolbarSearch,
   TableToolbarMenu,
-  TableColumnResizer,
 };
 
 export default DataTable;

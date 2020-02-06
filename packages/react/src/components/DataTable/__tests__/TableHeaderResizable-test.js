@@ -7,9 +7,10 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import { Table, TableHead, TableHeader, TableRow } from '../';
+import { Table, TableHead, TableRow } from '..';
+import TableHeaderResizable from '../TableHeaderResizable';
 
-describe('DataTable.TableHeader', () => {
+describe('DataTable.TableHeaderResizable', () => {
   let mockProps;
 
   beforeEach(() => {
@@ -17,6 +18,7 @@ describe('DataTable.TableHeader', () => {
       isSortHeader: false,
       onClick: jest.fn(),
       sortDirection: 'NONE',
+      colKey: 'aKey',
     };
   });
 
@@ -25,7 +27,7 @@ describe('DataTable.TableHeader', () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableHeader {...mockProps}>Header</TableHeader>
+            <TableHeaderResizable {...mockProps}>Header</TableHeaderResizable>
           </TableRow>
         </TableHead>
       </Table>
@@ -36,9 +38,9 @@ describe('DataTable.TableHeader', () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableHeader {...mockProps} isSortHeader>
+            <TableHeaderResizable {...mockProps} isSortHeader>
               Header
-            </TableHeader>
+            </TableHeaderResizable>
           </TableRow>
         </TableHead>
       </Table>
@@ -51,9 +53,9 @@ describe('DataTable.TableHeader', () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableHeader {...mockProps} isSortHeader>
+            <TableHeaderResizable {...mockProps} isSortHeader>
               Header
-            </TableHeader>
+            </TableHeaderResizable>
           </TableRow>
         </TableHead>
       </Table>
@@ -66,9 +68,12 @@ describe('DataTable.TableHeader', () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableHeader {...mockProps} isSortHeader sortDirection="ASC">
+            <TableHeaderResizable
+              {...mockProps}
+              isSortHeader
+              sortDirection="ASC">
               Header
-            </TableHeader>
+            </TableHeaderResizable>
           </TableRow>
         </TableHead>
       </Table>
