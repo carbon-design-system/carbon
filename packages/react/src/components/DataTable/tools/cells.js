@@ -15,5 +15,3 @@
  * @returns {string}
  */
 export const getCellId = (rowId, header) => `${rowId}:${header}`;
-
-export const getColKey = cellId => cellId.split(':')[1];
