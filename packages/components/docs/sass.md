@@ -18927,6 +18927,7 @@ Inline notification styles
     min-height: rem(48px);
     min-width: rem(288px);
     max-width: rem(288px);
+    width: 100%;
     color: $inverse-01;
     margin-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-05;
