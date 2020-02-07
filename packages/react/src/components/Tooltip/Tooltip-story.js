@@ -92,8 +92,8 @@ storiesOf('Tooltip', module)
     'default (bottom)',
     () => (
       <div style={{ marginTop: '2rem' }}>
-        <Tooltip {...props.withIcon()}>
-          <p>
+        <Tooltip {...props.withIcon()} tooltipBodyId="tooltip-body">
+          <p id="tooltip-body">
             This is some tooltip text. This box shows the maximum amount of text
             that should appear inside. If more room is needed please use a modal
             instead.
