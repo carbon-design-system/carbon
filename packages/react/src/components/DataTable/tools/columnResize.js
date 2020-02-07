@@ -97,28 +97,21 @@ export const resizeReducer = (state, action) => {
       // then increase the columns to the right again
 
       const colIdx = clonedState.allColumnKeys.indexOf(action.colKey);
-      const numCols = clonedState.allColumnKeys.length;
 
       const colKeysToTheLeft = clonedState.allColumnKeys.slice(0, colIdx);
-      const curWidthLeft =
-        colKeysToTheLeft.length &&
-        colKeysToTheLeft
-          .map(key => clonedState.columnsByKey[key].colWidth)
-          .reduce((sum, width) => sum + width);
-      const initialWidthLeft =
-        colKeysToTheLeft.length &&
-        colKeysToTheLeft
-          .map(key => clonedState.columnsByKey[key].initialColWidth)
-          .reduce((sum, width) => sum + width);
+      const {
+        colWidthSum: curWidthLeft,
+        initialColWidthSum: initialWidthLeft,
+      } = getAccumulatedWidths(state, colKeysToTheLeft);
 
       const colKeysToTheRight = clonedState.allColumnKeys.slice(colIdx + 1);
-      const minWidthRight = colMinWidth * colKeysToTheRight.length;
-      const curWidthRight =
-        colKeysToTheRight.length &&
-        colKeysToTheRight
-          .map(key => clonedState.columnsByKey[key].colWidth)
-          .reduce((sum, width) => sum + width);
+      const {
+        colWidthSum: curWidthRight,
+        initialColWidthSum: initialWidthRight,
+        minColWidthSum: minWidthRight,
+      } = getAccumulatedWidths(state, colKeysToTheRight);
 
+      const numCols = clonedState.allColumnKeys.length;
       const decreasingColumnWith =
         action.pos < clonedState.resizeActivity.lastUpdatedPos;
 
@@ -143,12 +136,6 @@ export const resizeReducer = (state, action) => {
         );
       } else {
         // modify columns to the left
-        const initialWidthRight =
-          colKeysToTheRight.length &&
-          colKeysToTheRight
-            .map(key => clonedState.columnsByKey[key].initialColWidth)
-            .reduce((sum, width) => sum + width);
-
         // what we already distributed to the right cols
         const distributedToTheRight = initialWidthRight - curWidthRight;
         const distributeToTheLeft = completeWidthChange - distributedToTheRight;
@@ -201,6 +188,34 @@ export const resizeReducer = (state, action) => {
 
   throw new Error(`Unhandled action type: ${action.type}`);
 };
+
+// sum up column width, initial col width and min col width for a list of columns
+function getAccumulatedWidths(state, columnIds) {
+  return columnIds.length
+    ? columnIds
+        .map(key => ({
+          width: state.columnsByKey[key].colWidth,
+          iwidth: state.columnsByKey[key].initialColWidth,
+          mwidth: colMinWidth,
+        }))
+        .reduce(
+          (sum, val) => ({
+            colWidthSum: sum.colWidthSum + val.width,
+            initialColWidthSum: sum.initialColWidthSum + val.iwidth,
+            minColWidthSum: sum.minColWidthSum + val.mwidth,
+          }),
+          {
+            colWidthSum: 0,
+            initialColWidthSum: 0,
+            minColWidthSum: 0,
+          }
+        )
+    : {
+        colWidthSum: 0,
+        initialColWidthSum: 0,
+        minColWidthSum: 0,
+      };
+}
 
 // increment column over initial with min width in mind
 function incrementColumnFromInitial(state, incr, key) {
