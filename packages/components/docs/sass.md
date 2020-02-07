@@ -6604,7 +6604,6 @@ $icon-03: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button [mixin]](#button-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -12896,11 +12895,6 @@ Button styles
 
   .#{$prefix}--btn {
     @include button-base;
-
-    &.#{$prefix}--btn--disabled > svg.#{$prefix}--btn__icon,
-    &:disabled > svg.#{$prefix}--btn__icon {
-      fill: $disabled-03;
-    }
   }
 
   // Reset intrisic padding in Firefox (see #731)
@@ -12973,14 +12967,6 @@ Button styles
       background: transparent;
       color: $disabled;
       outline: none;
-
-      > .#{$prefix}--btn__icon path {
-        fill: $disabled;
-      }
-    }
-
-    &:hover > .#{$prefix}--btn__icon path {
-      fill: $inverse-01;
     }
   }
 
@@ -13016,10 +13002,6 @@ Button styles
     &:hover,
     &:active {
       color: $hover-primary-text;
-
-      .#{$prefix}--btn__icon path {
-        fill: $hover-primary-text;
-      }
     }
 
     &:active {
@@ -13036,10 +13018,6 @@ Button styles
       background: transparent;
       border-color: transparent;
       outline: none;
-
-      .#{$prefix}--btn__icon path {
-        fill: $disabled;
-      }
     }
 
     &.#{$prefix}--btn--sm {
@@ -13133,7 +13111,7 @@ Button styles
       $danger,
       $text-04,
       $hover-danger,
-      $icon-03,
+      currentColor,
       $active-danger
     );
 
@@ -13189,7 +13167,6 @@ Button styles
   - [ui-02 [variable]](#ui-02-variable)
   - [danger [variable]](#danger-variable)
   - [hover-danger [variable]](#hover-danger-variable)
-  - [icon-03 [variable]](#icon-03-variable)
   - [active-danger [variable]](#active-danger-variable)
 
 ### ❌button-base [mixin]
