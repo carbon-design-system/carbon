@@ -12656,7 +12656,7 @@ Accordion styles
     margin: $accordion-title-margin;
     width: 100%;
     text-align: left;
-    z-index: 0;
+    z-index: 1;
   }
 
   .#{$prefix}--accordion__content {
