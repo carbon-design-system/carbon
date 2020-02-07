@@ -58,6 +58,11 @@ const props = {
   }),
 };
 
+const containerStyles = {
+  marginTop: '2rem',
+  marginLeft: '5rem',
+};
+
 Tooltip.displayName = 'Tooltip';
 
 function UncontrolledTooltipExample() {
@@ -91,7 +96,7 @@ storiesOf('Tooltip', module)
   .add(
     'default (bottom)',
     () => (
-      <div style={{ marginTop: '2rem' }}>
+      <div style={containerStyles}>
         <Tooltip {...props.withIcon()} tooltipBodyId="tooltip-body">
           <p id="tooltip-body">
             This is some tooltip text. This box shows the maximum amount of text
@@ -120,7 +125,7 @@ storiesOf('Tooltip', module)
   .add(
     'no icon',
     () => (
-      <div style={{ marginTop: '2rem' }}>
+      <div style={containerStyles}>
         <Tooltip {...props.withoutIcon()}>
           <p>
             This is some tooltip text. This box shows the maximum amount of text
@@ -149,7 +154,7 @@ storiesOf('Tooltip', module)
   .add(
     'custom icon',
     () => (
-      <div style={{ marginTop: '2rem' }}>
+      <div style={containerStyles}>
         <Tooltip {...props.customIcon()}>
           <p>
             This is some tooltip text. This box shows the maximum amount of text
@@ -178,7 +183,7 @@ storiesOf('Tooltip', module)
   .add(
     'only custom icon',
     () => (
-      <div style={{ marginTop: '2rem' }}>
+      <div style={containerStyles}>
         <Tooltip {...props.customIconOnly()}>
           <p>
             This is some tooltip text. This box shows the maximum amount of text
