@@ -418,6 +418,42 @@ describe('column resizer reducer', () => {
     });
   });
 
+  it('should handle SYNC_TABLE_WIDTH.', () => {
+    const nextState = getStateFor3Columns();
+
+    const setAction = {
+      type: actionTypes.SYNC_TABLE_WIDTH,
+      tableWidth: 450, // +150
+    };
+    const nextState2 = resizeReducer(nextState, setAction);
+
+    expect(nextState2).toEqual({
+      allColumnKeys: [key1, key2, key3],
+      columnsByKey: {
+        [key1]: {
+          ref: ref1,
+          colWidth: 150,
+          initialColWidth: 100,
+        },
+        [key2]: {
+          ref: ref2,
+          colWidth: 150,
+          initialColWidth: 100,
+        },
+        [key3]: {
+          ref: ref3,
+          colWidth: 150,
+          initialColWidth: 100,
+        },
+      },
+      resizeActivity: {
+        colKey: key1,
+        initialPos: 400,
+        lastUpdatedPos: 400,
+      },
+    });
+  });
+
   it('should return column refs.', () => {
     const nextState = getStateFor3Columns();
 
