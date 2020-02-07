@@ -12675,7 +12675,7 @@ Accordion styles
       padding-right: 25%;
     }
 
-    p {
+    > p {
       @include type-style('body-long-01');
     }
   }

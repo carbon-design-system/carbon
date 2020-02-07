@@ -419,7 +419,6 @@ class Tooltip extends Component {
       onFocus: this.handleMouse,
       onBlur: this.handleMouse,
       'aria-controls': !open ? undefined : tooltipId,
-      'aria-haspopup': 'true',
       'aria-expanded': open,
       'aria-describedby': open ? tooltipId : null,
       // if the user provides property `triggerText`,
