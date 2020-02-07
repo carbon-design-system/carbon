@@ -24,12 +24,15 @@ const TableColumnResizer = ({ headerRef, colKey, ...rest }) => {
     startResizeAction,
     endResizeAction,
     resizeColumn,
+    syncOnWindowResize,
   } = useColumnResizing(colKey);
 
   useEffect(() => {
     // initially set width of our column
     initColumnResizing(headerRef);
+    window.addEventListener('resize', handleWindowResize);
     return () => {
+      window.removeEventListener('resize', handleWindowResize);
       cleanupColumnResizing();
     };
 
@@ -37,8 +40,12 @@ const TableColumnResizer = ({ headerRef, colKey, ...rest }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const startResizing = () => {
-    startResizeAction();
+  const handleWindowResize = () => {
+    syncOnWindowResize(headerRef);
+  };
+
+  const startResizing = ev => {
+    startResizeAction(ev.clientX);
     document.onmouseup = endResizing;
     document.onmousemove = doResizing;
     // keep cursor style everywhere during resizing
@@ -56,7 +63,7 @@ const TableColumnResizer = ({ headerRef, colKey, ...rest }) => {
     // prevent other mouse actions like text selection
     ev.stopPropagation();
     ev.preventDefault();
-    resizeColumn(ev.movementX);
+    resizeColumn(ev.clientX);
   };
 
   // permanently highlight only active resizer while resizing
@@ -71,7 +78,7 @@ const TableColumnResizer = ({ headerRef, colKey, ...rest }) => {
   return (
     <div
       className={resizerClassName}
-      onMouseDown={() => startResizing()}
+      onMouseDown={ev => startResizing(ev)}
       role="separator"
       {...rest}
     />
