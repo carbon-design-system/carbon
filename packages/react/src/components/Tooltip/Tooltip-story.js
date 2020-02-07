@@ -38,15 +38,13 @@ const props = {
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
     renderIcon: React.forwardRef((props, ref) => (
-      <div
-        style={{
-          width: '10px',
-          height: '10px',
-          borderRadius: '5px',
-          background: 'red',
-        }}
-        ref={ref}
-      />
+      <div ref={ref}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+          <path d="M8.5 11V6.5h-2v1h1V11H6v1h4v-1zM8 3.5c-.4 0-.8.3-.8.8s.4.7.8.7.8-.3.8-.8-.4-.7-.8-.7z" />
+          <path d="M8 15c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7zM8 2C4.7 2 2 4.7 2 8s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z" />
+          <path fill="none" d="M0 0h16v16H0z" />
+        </svg>
+      </div>
     )),
   }),
   customIconOnly: () => ({
@@ -59,8 +57,10 @@ const props = {
 };
 
 const containerStyles = {
-  marginTop: '2rem',
-  marginLeft: '5rem',
+  height: 'calc(100vh - 6rem)',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 };
 
 Tooltip.displayName = 'Tooltip';
@@ -152,7 +152,7 @@ storiesOf('Tooltip', module)
     }
   )
   .add(
-    'custom icon',
+    'render custom icon',
     () => (
       <div style={containerStyles}>
         <Tooltip {...props.customIcon()}>
