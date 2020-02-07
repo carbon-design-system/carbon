@@ -29,5 +29,22 @@ module.exports = {
         exampleUploadStates: true,
       },
     },
+    {
+      name: 'legacy',
+      label: 'Legacy file uploader',
+      context: {
+        id: 'legacy-file-uploader',
+        legacy: true,
+      },
+    },
+    {
+      name: 'legacy with example upload states',
+      label: 'Legacy file uploader with example upload states',
+      context: {
+        id: 'legacy-file-uploader-states',
+        legacy: true,
+        exampleUploadStates: true,
+      },
+    },
   ],
 };

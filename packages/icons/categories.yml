@@ -207,6 +207,7 @@ categories:
           - compare
           - connect
           - delete
+          - deploy
           - deploy-rules
           - drag--horizontal
           - drag--vertical
@@ -220,6 +221,7 @@ categories:
           - flag
           - fork
           - insert
+          - jump-link
           - launch
           - login
           - logout
@@ -260,6 +262,7 @@ categories:
           - shuffle
           - split-screen
           - tag
+          - tag--edit
           - tag--group
           - translate
           - undo
@@ -378,6 +381,7 @@ categories:
           - fish
           - fish--multiple
           - fruit-bowl
+          - gift
           - industry
           - inventory-management
           - money
@@ -456,6 +460,9 @@ categories:
           - save--annotation
           - save--image
           - save--series
+          - scalpel--cursor
+          - scalpel--lasso
+          - scalpel--select
           - spine-label
           - stacked-move
           - stacked-scrolling--1
@@ -465,6 +472,7 @@ categories:
           - study--previous
           - study--skip
           - thumbnail-preview
+          - text-annotation-toggle
           - window--auto
           - window--base
           - window--overlay
@@ -885,14 +893,54 @@ categories:
           - cloud--lightning
           - cloud--rain
           - cloud--snow
+          - cloudy
           - fog
+          - hail
+          - haze
+          - haze--night
           - humidity
           - hurricane
+          - lightning
+          - mixed-rain-hail
+          - moon
+          - mostly-cloudy
+          - mostly-cloudy--night
+          - not-available
           - partly-cloudy
+          - partly-cloudy--night
+          - rain
+          - rain--drizzle
+          - rain--heavy
+          - rain--scattered
+          - rain--scattered--night
+          - rain-drop
+          - sleet
+          - smoke
+          - snow
+          - snow--blizzard
+          - snow--heavy
+          - snow--scattered
+          - snow--scattered--night
+          - snowflake
+          - sun
           - sunny
           - sunrise
           - sunset
           - temperature
+          - temperature--frigid
+          - temperature--hot
+          - thunderstorm
+          - thunderstorm--scattered
+          - thunderstorm--scattered--night
+          - thunderstorm--severe
+          - thunderstorm--strong
+          - tornado
+          - tropical-storm
+          - windy
+          - windy--dust
+          - windy--snow
+          - windy--strong
+          - wintry-mix
   - name: Tools
     subcategories:
       - name: Technology

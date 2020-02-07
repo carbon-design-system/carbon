@@ -198,8 +198,23 @@ describe('NumberInput', () => {
             .find('NumberInput')
             .instance()
             .setState({ value: '' });
+
           wrapper.update();
           wrapper.setProps({ allowEmpty: true });
+          const invalidText = wrapper.find(`.${prefix}--form-requirement`);
+          expect(invalidText.length).toEqual(0);
+        });
+
+        it('should allow updating the value with empty string and not be invalid', () => {
+          // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
+          wrapper
+            .find('NumberInput')
+            .instance()
+            .setState({ value: 50 });
+
+          wrapper.update();
+          wrapper.setProps({ value: '', allowEmpty: true });
+          wrapper.update();
           const invalidText = wrapper.find(`.${prefix}--form-requirement`);
           expect(invalidText.length).toEqual(0);
         });
@@ -236,7 +251,8 @@ describe('NumberInput', () => {
           );
         });
 
-        it('should avoid capping when non-number prop is given to value prop', () => {
+        // NumberInput propTypes do not allow a string to be passed
+        it.skip('should avoid capping when non-number prop is given to value prop', () => {
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
           wrapper
             .find('NumberInput')

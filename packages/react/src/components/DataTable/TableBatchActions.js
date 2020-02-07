@@ -50,6 +50,7 @@ const TableBatchActions = ({
         {children}
         <Button
           className={`${prefix}--batch-summary__cancel`}
+          tabIndex={shouldShowBatchActions ? 0 : -1}
           onClick={onCancel}>
           {t('carbon.table.batch.cancel')}
         </Button>

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, number } from '@storybook/addon-knobs';
+import { withKnobs, number, boolean, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { ProgressIndicator, ProgressStep } from '../ProgressIndicator';
 import ProgressIndicatorSkeleton from '../ProgressIndicator/ProgressIndicator.Skeleton';
@@ -22,9 +22,10 @@ storiesOf('ProgressIndicator', module)
     'Default',
     () => (
       <ProgressIndicator
+        vertical={boolean('Vertical', false)}
         currentIndex={number('Current progress (currentIndex)', 1)}>
         <ProgressStep
-          label="First step"
+          label={text('Label', 'First step')}
           description="Step 1: Getting started with Carbon Design System"
           secondaryLabel="Optional label"
         />

@@ -113,7 +113,7 @@ describe('DataTable', () => {
                     Action 3
                   </TableToolbarAction>
                 </TableToolbarMenu>
-                <Button onClick={jest.fn()} small kind="primary">
+                <Button onClick={jest.fn()} size="small" kind="primary">
                   Add new
                 </Button>
               </TableToolbarContent>
@@ -400,7 +400,7 @@ describe('DataTable', () => {
                       Action 3
                     </TableToolbarAction>
                   </TableToolbarMenu>
-                  <Button onClick={jest.fn()} small kind="primary">
+                  <Button onClick={jest.fn()} size="small" kind="primary">
                     Add new
                   </Button>
                 </TableToolbarContent>
@@ -689,6 +689,7 @@ describe('DataTable', () => {
             rows,
             headers,
             getHeaderProps,
+            getExpandHeaderProps,
             getSelectionProps,
             getBatchActionProps,
             getRowProps,
@@ -704,7 +705,7 @@ describe('DataTable', () => {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableExpandHeader />
+                    <TableExpandHeader {...getExpandHeaderProps()} />
                     <TableSelectAll {...getSelectionProps()} />
                     {headers.map(header => (
                       <TableHeader {...getHeaderProps({ header })}>
