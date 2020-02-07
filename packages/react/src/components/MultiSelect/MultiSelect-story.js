@@ -61,10 +61,6 @@ const props = () => ({
   id: text('MultiSelect ID (id)', 'carbon-multiselect-example'),
   titleText: text('Title (titleText)', 'Multiselect title'),
   helperText: text('Helper text (helperText)', 'This is not helper text'),
-  filterable: boolean(
-    'Filterable (`<MultiSelect.Filterable>` instead of `<MultiSelect>`)',
-    false
-  ),
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
   useTitleInItem: boolean('Show tooltip on hover', false),
@@ -99,20 +95,16 @@ storiesOf('MultiSelect', module)
     'default',
     withReadme(readme, () => {
       const {
-        filterable,
         listBoxMenuIconTranslationIds,
         selectionFeedback,
         ...multiSelectProps
       } = props();
-      const ComponentToUse = !filterable ? MultiSelect : MultiSelect.Filterable;
-      const placeholder = !filterable ? undefined : defaultPlaceholder;
       return (
         <div style={{ width: 300 }}>
-          <ComponentToUse
+          <MultiSelect
             {...multiSelectProps}
             items={items}
             itemToString={item => (item ? item.text : '')}
-            placeholder={placeholder}
             translateWithId={id => listBoxMenuIconTranslationIds[id]}
             selectionFeedback={selectionFeedback}
           />
@@ -131,22 +123,18 @@ storiesOf('MultiSelect', module)
     'with initial selected items',
     withReadme(readme, () => {
       const {
-        filterable,
         listBoxMenuIconTranslationIds,
         selectionFeedback,
         ...multiSelectProps
       } = props();
-      const ComponentToUse = !filterable ? MultiSelect : MultiSelect.Filterable;
-      const placeholder = !filterable ? undefined : defaultPlaceholder;
 
       return (
         <div style={{ width: 300 }}>
-          <ComponentToUse
+          <MultiSelect
             {...multiSelectProps}
             items={items}
             itemToString={item => (item ? item.text : '')}
             initialSelectedItems={[items[0], items[1]]}
-            placeholder={placeholder}
             translateWithId={id => listBoxMenuIconTranslationIds[id]}
             selectionFeedback={selectionFeedback}
           />
@@ -157,6 +145,36 @@ storiesOf('MultiSelect', module)
       info: {
         text: `
             Provide a set of items to initially select in the control
+          `,
+      },
+    }
+  )
+  .add(
+    'filterable',
+    withReadme(readme, () => {
+      const {
+        listBoxMenuIconTranslationIds,
+        selectionFeedback,
+        ...multiSelectProps
+      } = props();
+
+      return (
+        <div style={{ width: 300 }}>
+          <MultiSelect.Filterable
+            {...multiSelectProps}
+            items={items}
+            itemToString={item => (item ? item.text : '')}
+            placeholder={defaultPlaceholder}
+            translateWithId={id => listBoxMenuIconTranslationIds[id]}
+            selectionFeedback={selectionFeedback}
+          />
+        </div>
+      );
+    }),
+    {
+      info: {
+        text: `
+            When a list contains more than 25 items, use \`MultiSelect.Filterable\` to help find options from the list.
           `,
       },
     }
