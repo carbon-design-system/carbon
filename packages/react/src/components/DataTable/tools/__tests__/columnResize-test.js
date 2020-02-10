@@ -12,7 +12,88 @@ import {
   initialState,
   resizeReducer,
   getColRefs,
+  distributeOverColumns,
 } from '../columnResize';
+
+describe('distributeOverColumns tests', () => {
+  const minimalState = {
+    columnsByKey: {
+      a: {
+        initialColWidth: 50, // 10 over min width
+      },
+      b: {
+        initialColWidth: 80, //
+      },
+    },
+    allColumnKeys: ['a', 'b'],
+  };
+
+  it('should distribute diff value over all columns', () => {
+    const distributed = distributeOverColumns(
+      minimalState,
+      100,
+      minimalState.allColumnKeys
+    );
+    expect(minimalState).toEqual({
+      columnsByKey: {
+        a: {
+          initialColWidth: 50,
+          colWidth: 70, // added 1/5 * 100
+        },
+        b: {
+          initialColWidth: 80,
+          colWidth: 160, // added 4/5 * 100
+        },
+      },
+      allColumnKeys: ['a', 'b'],
+    });
+    expect(distributed).toEqual(100);
+  });
+
+  it('should distribute negative diff value over all columns', () => {
+    const distributed = distributeOverColumns(
+      minimalState,
+      -20,
+      minimalState.allColumnKeys
+    );
+    expect(minimalState).toEqual({
+      columnsByKey: {
+        a: {
+          initialColWidth: 50,
+          colWidth: 46, // minus 1/5 * 20
+        },
+        b: {
+          initialColWidth: 80,
+          colWidth: 64, // minus 4/5 * 20
+        },
+      },
+      allColumnKeys: ['a', 'b'],
+    });
+    expect(distributed).toEqual(-20);
+  });
+
+  it('should distribute negative diff value until min width is hit', () => {
+    const distributed = distributeOverColumns(
+      minimalState,
+      -100,
+      minimalState.allColumnKeys
+    );
+    expect(minimalState).toEqual({
+      columnsByKey: {
+        a: {
+          initialColWidth: 50,
+          colWidth: 40, // min width
+        },
+        b: {
+          initialColWidth: 80,
+          colWidth: 40, // min width
+        },
+      },
+      allColumnKeys: ['a', 'b'],
+    });
+    expect(distributed).toEqual(-50);
+  });
+});
 
 describe('column resizer reducer', () => {
   const key1 = 'aKey';
