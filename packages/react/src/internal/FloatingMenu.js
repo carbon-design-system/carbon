@@ -94,7 +94,7 @@ const getFloatingPosition = ({
   return {
     [DIRECTION_LEFT]: () => ({
       left: refLeft - width + scrollX - left,
-      top: refCenterVertical - height / 2 + scrollY + top,
+      top: refCenterVertical - height / 2 + scrollY + top - 9,
     }),
     [DIRECTION_TOP]: () => ({
       left: refCenterHorizontal - width / 2 + scrollX + left,
@@ -102,7 +102,7 @@ const getFloatingPosition = ({
     }),
     [DIRECTION_RIGHT]: () => ({
       left: refRight + scrollX + left,
-      top: refCenterVertical - height / 2 + scrollY + top,
+      top: refCenterVertical - height / 2 + scrollY + top + 3,
     }),
     [DIRECTION_BOTTOM]: () => ({
       left: refCenterHorizontal - width / 2 + scrollX + left,
