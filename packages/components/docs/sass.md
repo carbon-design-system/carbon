@@ -2214,7 +2214,6 @@ Generate a media query for the maximum width of the given styles
   - [carbon--is-smallest-breakpoint [function]](#carbon--is-smallest-breakpoint-function)
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
-  - [carbon-header [mixin]](#carbon-header-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅carbon--breakpoint-between [mixin]
@@ -6602,7 +6601,6 @@ $icon-03: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button [mixin]](#button-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -12657,7 +12655,7 @@ Accordion styles
     margin: $accordion-title-margin;
     width: 100%;
     text-align: left;
-    z-index: 0;
+    z-index: 1;
   }
 
   .#{$prefix}--accordion__content {
@@ -12676,7 +12674,7 @@ Accordion styles
       padding-right: 25%;
     }
 
-    p {
+    > p {
       @include type-style('body-long-01');
     }
   }
@@ -12894,11 +12892,6 @@ Button styles
 
   .#{$prefix}--btn {
     @include button-base;
-
-    &.#{$prefix}--btn--disabled > svg.#{$prefix}--btn__icon,
-    &:disabled > svg.#{$prefix}--btn__icon {
-      fill: $disabled-03;
-    }
   }
 
   // Reset intrisic padding in Firefox (see #731)
@@ -12971,14 +12964,6 @@ Button styles
       background: transparent;
       color: $disabled;
       outline: none;
-
-      > .#{$prefix}--btn__icon path {
-        fill: $disabled;
-      }
-    }
-
-    &:hover > .#{$prefix}--btn__icon path {
-      fill: $inverse-01;
     }
   }
 
@@ -13014,10 +12999,6 @@ Button styles
     &:hover,
     &:active {
       color: $hover-primary-text;
-
-      .#{$prefix}--btn__icon path {
-        fill: $hover-primary-text;
-      }
     }
 
     &:active {
@@ -13034,10 +13015,6 @@ Button styles
       background: transparent;
       border-color: transparent;
       outline: none;
-
-      .#{$prefix}--btn__icon path {
-        fill: $disabled;
-      }
     }
 
     &.#{$prefix}--btn--sm {
@@ -13131,7 +13108,7 @@ Button styles
       $danger,
       $text-04,
       $hover-danger,
-      $icon-03,
+      currentColor,
       $active-danger
     );
 
@@ -13187,7 +13164,6 @@ Button styles
   - [ui-02 [variable]](#ui-02-variable)
   - [danger [variable]](#danger-variable)
   - [hover-danger [variable]](#hover-danger-variable)
-  - [icon-03 [variable]](#icon-03-variable)
   - [active-danger [variable]](#active-danger-variable)
 
 ### ❌button-base [mixin]
@@ -18732,7 +18708,7 @@ Modal styles
   }
 
   // Required so overflow-indicator disappears at end of content
-  .#{$prefix}--modal-content > *:last-child {
+  .#{$prefix}--modal-scroll-content > *:last-child {
     padding-bottom: $spacing-07;
   }
 
@@ -18927,6 +18903,7 @@ Inline notification styles
     min-height: rem(48px);
     min-width: rem(288px);
     max-width: rem(288px);
+    width: 100%;
     color: $inverse-01;
     margin-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-05;
@@ -24441,10 +24418,10 @@ UI shell header
     height: 100%;
     padding-left: mini-units(2);
     position: relative;
-    display: block;
+    display: none;
 
-    @include carbon--breakpoint-down('lg') {
-      display: none;
+    @include carbon--breakpoint('lg') {
+      display: block;
     }
 
     &::before {
@@ -24630,7 +24607,6 @@ UI shell header
 - **Group**: [ui-shell](#ui-shell)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
-  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
   - [mini-units [function]](#mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
