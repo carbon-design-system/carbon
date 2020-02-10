@@ -3326,7 +3326,7 @@ $hover-danger: if(
       'hover-danger'
     ),
   map-get($carbon--theme, 'hover-danger'),
-  #c91c25
+  #b81921
 );
 ```
 
