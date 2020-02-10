@@ -89,7 +89,7 @@ export const resizeReducer = (state, action) => {
 
     // dont do any changes if we have reached minimum width
     if (clonedState.columnsByKey[action.colKey].colWidth > colMinWidth) {
-      // current resize strategy (works perfect on columns with minmal width - like sticky header tables)
+      // current resize strategy (works best on columns with minmal width - like sticky header tables)
       // first we try to modify the columns to the right
       // going right: when we reach the min width of the columns to the right, ...
       // ... then we start modifying the left columns
@@ -325,12 +325,14 @@ export const useColumnResizing = colKey => {
     // sync stored column widths with resized table width
     syncOnWindowResize: ref => {
       const tr = ref.current.closest('tr');
-      const { width } = tr.getBoundingClientRect();
-      dispatch({
-        type: actionTypes.SYNC_TABLE_WIDTH,
-        colKey,
-        tableWidth: width,
-      });
+      if (tr) {
+        const { width } = tr.getBoundingClientRect();
+        dispatch({
+          type: actionTypes.SYNC_TABLE_WIDTH,
+          colKey,
+          tableWidth: width,
+        });
+      }
     },
   };
 };

@@ -64,7 +64,7 @@ export default props => (
                 <TableRow {...getRowProps({ row })}>
                   {row.cells.map(cell => (
                     <TableCellResizable
-                      id={cell.id}
+                      key={cell.id}
                       isResizable={true}
                       colKey={getColKey(cell.id)}>
                       {cell.value}
