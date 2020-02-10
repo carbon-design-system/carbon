@@ -16,10 +16,7 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 const { prefix } = settings;
 
 const defaultRenderMenuContent = () => (
-  <ChevronDown16
-    style={{ willChange: 'unset' }}
-    className={`${prefix}--header__menu-arrow`}
-  />
+  <ChevronDown16 className={`${prefix}--header__menu-arrow`} />
 );
 
 /**
