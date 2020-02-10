@@ -91,8 +91,6 @@ export const resizeReducer = (state, action) => {
     const maxColWidth =
       fullWidth - (clonedState.allColumnKeys.length - 1) * colMinWidth;
 
-    console.log(`full: ${fullWidth}, new: ${newWidth}, max:${maxColWidth}`);
-
     // dont do any changes if we have reached minimum width or all other columns are at minimum
     if (newWidth > colMinWidth && newWidth < maxColWidth) {
       clonedState.columnsByKey[action.colKey].colWidth = newWidth;
@@ -130,7 +128,6 @@ export const resizeReducer = (state, action) => {
         colIdx !== numCols - 1 &&
         (curWidthRight > minWidthRight || initialWidthLeft < curWidthLeft)
       ) {
-        console.log('R');
         // only distribute to columns at minimal width when they can grow
         const colKeysToDistribute = decreasingColumnWith
           ? colKeysToTheRight
@@ -144,7 +141,6 @@ export const resizeReducer = (state, action) => {
           true
         );
       } else {
-        console.log('L');
         // modify columns to the left
         // what we already distributed to the right cols
         const distributedToTheRight = initialWidthRight - curWidthRight;
@@ -179,7 +175,6 @@ export const resizeReducer = (state, action) => {
       clonedState.allColumnKeys
         .map(key => clonedState.columnsByKey[key].colWidth)
         .reduce((sum, width) => sum + width);
-
     const diff = action.tableWidth - curWidth;
     distributeOverColumn(clonedState, diff, clonedState.allColumnKeys, false);
     clonedState.tableWidth = action.tableWidth;
