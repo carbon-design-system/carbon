@@ -206,6 +206,13 @@
     }
   }
 
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
+    .#{$prefix}--btn__icon
+    path,
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
+    fill: $icon-01;
+  }
+
   .#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
     padding-left: rem(15px);
     padding-right: rem(15px);
