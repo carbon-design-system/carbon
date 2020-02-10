@@ -13,22 +13,31 @@ import { blue60 } from '@carbon/colors';
 
 describe('tools', () => {
   describe('adjustLightness', () => {
-    it('should shift lightness by a specified amount', () => {
-      const SHIFT_AMOUNT = 5;
+    const SHIFT_AMOUNT = 5;
 
-      const baseColor = Color(blue60);
-      const baseLightness = baseColor
-        .hsl()
-        .round()
-        .object().l;
+    const baseColor = Color(blue60);
+    const baseLightness = baseColor
+      .hsl()
+      .round()
+      .object().l;
 
+    it('should increase lightness by a specified amount', () => {
       const newColor = Color(adjustLightness(blue60, SHIFT_AMOUNT));
       const newLightness = newColor
         .hsl()
         .round()
         .object().l;
-
       expect(newLightness).toEqual(baseLightness + SHIFT_AMOUNT);
+    });
+
+    it('should decrease lightness by a specified amount when given a negative shift', () => {
+      const newColor = Color(adjustLightness(blue60, SHIFT_AMOUNT * -1));
+      const newLightness = newColor
+        .hsl()
+        .round()
+        .object().l;
+
+      expect(newLightness).toEqual(baseLightness - SHIFT_AMOUNT);
     });
   });
 });
