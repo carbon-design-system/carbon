@@ -363,7 +363,7 @@ ToastNotification.propTypes = {
   /**
    * Provide a description for "status" icon that can be read by screen readers
    */
-  statusIconDescription: PropTypes.string,
+  statusIconDescription: PropTypes.string.isRequired,
 
   /**
    * By default, this value is "toast". You can also provide an alternate type
@@ -509,7 +509,7 @@ InlineNotification.propTypes = {
   /**
    * Provide a description for "status" icon that can be read by screen readers
    */
-  statusIconDescription: PropTypes.string,
+  statusIconDescription: PropTypes.string.isRequired,
 
   /**
    * By default, this value is "inline". You can also provide an alternate type
