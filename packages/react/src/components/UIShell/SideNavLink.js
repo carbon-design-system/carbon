@@ -62,7 +62,7 @@ SideNavLink.propTypes = {
   /**
    * Specify the text content for the link
    */
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 
   /**
    * Property to indicate if the side nav container is open (or not). Use to
