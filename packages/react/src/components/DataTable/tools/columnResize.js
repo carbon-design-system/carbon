@@ -34,24 +34,21 @@ export const initialState = {
   allColumnKeys: [], // used for column order
   columnsByKey: {}, // contains columns with width
   resizeActivity: {}, // colKey and pos when resizing is active
+  tableWidth: 0,
 };
 
 // reducer for the resizing actions
 // currently only exported for testing
 export const resizeReducer = (state, action) => {
   if (action.type === actionTypes.ADD_COLUMN) {
-    return {
-      ...state,
-      columnsByKey: {
-        ...state.columnsByKey,
-        [action.colKey]: {
-          ref: action.ref,
-          colWidth: action.colWidth,
-          initialColWidth: action.colWidth,
-        },
-      },
-      allColumnKeys: [...state.allColumnKeys, action.colKey],
+    const clonedState = cloneDeep(state);
+    clonedState.columnsByKey[action.colKey] = {
+      ref: action.ref,
+      colWidth: action.colWidth,
+      initialColWidth: action.colWidth,
     };
+    clonedState.allColumnKeys = state.allColumnKeys.concat([action.colKey]);
+    return clonedState;
   }
 
   if (action.type === actionTypes.START_RESIZE_ACTION) {
@@ -83,12 +80,23 @@ export const resizeReducer = (state, action) => {
   if (action.type === actionTypes.UPDATE_COLWIDTH) {
     const clonedState = cloneDeep(state);
 
-    const completeWidthChange =
-      action.pos - clonedState.resizeActivity.initialPos;
-    incrementColumnFromInitial(clonedState, completeWidthChange, action.colKey);
+    const widthDiff = action.pos - clonedState.resizeActivity.initialPos;
+    const newWidth = incrementColumnFromInitial(
+      clonedState,
+      widthDiff,
+      action.colKey
+    );
 
-    // dont do any changes if we have reached minimum width
-    if (clonedState.columnsByKey[action.colKey].colWidth > colMinWidth) {
+    const fullWidth = clonedState.tableWidth;
+    const maxColWidth =
+      fullWidth - (clonedState.allColumnKeys.length - 1) * colMinWidth;
+
+    console.log(`full: ${fullWidth}, new: ${newWidth}, max:${maxColWidth}`);
+
+    // dont do any changes if we have reached minimum width or all other columns are at minimum
+    if (newWidth > colMinWidth && newWidth < maxColWidth) {
+      clonedState.columnsByKey[action.colKey].colWidth = newWidth;
+
       // current resize strategy (works best on columns with minmal width - like sticky header tables)
       // first we try to modify the columns to the right
       // going right: when we reach the min width of the columns to the right, ...
@@ -122,6 +130,7 @@ export const resizeReducer = (state, action) => {
         colIdx !== numCols - 1 &&
         (curWidthRight > minWidthRight || initialWidthLeft < curWidthLeft)
       ) {
+        console.log('R');
         // only distribute to columns at minimal width when they can grow
         const colKeysToDistribute = decreasingColumnWith
           ? colKeysToTheRight
@@ -130,15 +139,16 @@ export const resizeReducer = (state, action) => {
             );
         distributeOverColumn(
           clonedState,
-          -completeWidthChange,
+          -widthDiff,
           colKeysToDistribute,
           true
         );
       } else {
+        console.log('L');
         // modify columns to the left
         // what we already distributed to the right cols
         const distributedToTheRight = initialWidthRight - curWidthRight;
-        const distributeToTheLeft = completeWidthChange - distributedToTheRight;
+        const distributeToTheLeft = widthDiff - distributedToTheRight;
 
         // only distribute to columns at minimal width when they can grow
         const colKeysToDistribute = decreasingColumnWith
@@ -172,12 +182,14 @@ export const resizeReducer = (state, action) => {
 
     const diff = action.tableWidth - curWidth;
     distributeOverColumn(clonedState, diff, clonedState.allColumnKeys, false);
+    clonedState.tableWidth = action.tableWidth;
 
     return clonedState;
   }
 
   if (action.type === actionTypes.BATCH_SET_COLWIDTHS) {
     const clonedState = cloneDeep(state);
+    clonedState.tableWidth = action.tableWidth;
     Object.entries(action.colWidths).forEach(entry => {
       const [key, width] = entry;
       clonedState.columnsByKey[key].colWidth = width;
@@ -220,24 +232,28 @@ function getAccumulatedWidths(state, columnIds) {
 // increment column over initial with min width in mind
 function incrementColumnFromInitial(state, incr, key) {
   const newColWidth = state.columnsByKey[key].initialColWidth + incr;
-  state.columnsByKey[key].colWidth = Math.max(colMinWidth, newColWidth);
+  return Math.max(colMinWidth, newColWidth);
 }
 
 // increment column over last width with min width in mind
 function incrementColumn(state, incr, key) {
   const newColWidth = state.columnsByKey[key].colWidth + incr;
-  state.columnsByKey[key].colWidth = Math.max(colMinWidth, newColWidth);
+  return Math.max(colMinWidth, newColWidth);
 }
 
 // distribute an increment of width `diff` (positive or negative)
 // over the columns specified in `columnIds`, and respect
 // the minimal column width
 function distributeOverColumn(state, diff, columnIds, fromInititial) {
-  const colDiff = diff / columnIds.length; // subpixels
-  columnIds.forEach(key => {
-    fromInititial && incrementColumnFromInitial(state, colDiff, key);
-    !fromInititial && incrementColumn(state, colDiff, key);
-  });
+  if (diff) {
+    const colDiff = diff / columnIds.length; // subpixels
+    columnIds.forEach(key => {
+      const newWidth = fromInititial
+        ? incrementColumnFromInitial(state, colDiff, key)
+        : incrementColumn(state, colDiff, key);
+      state.columnsByKey[key].colWidth = newWidth;
+    });
+  }
 }
 
 // context provider for resizing actions
@@ -254,12 +270,10 @@ export const ResizeProvider = ({ children }) => {
 
 // currently only exported for testing
 export function getColRefs(state) {
-  return Object.keys(state.columnsByKey).map(colKey => {
-    return {
-      key: colKey,
-      ref: state.columnsByKey[colKey].ref,
-    };
-  });
+  return Object.keys(state.columnsByKey).map(colKey => ({
+    key: colKey,
+    ref: state.columnsByKey[colKey].ref,
+  }));
 }
 
 // the custom hook that provides the resizing functionality
@@ -267,7 +281,30 @@ export function getColRefs(state) {
 export const useColumnResizing = colKey => {
   const context = useContext(ResizeContext);
   if (!context) {
-    return {}; // no resizing context defined
+    // no resizing context defined
+    return {
+      colWidth: 0,
+      ref: null,
+      columnKeyResizeActive: null,
+      initColumnResizing: () => {
+        /* empty */
+      },
+      cleanupColumnResizing: () => {
+        /* empty */
+      },
+      startResizeAction: () => {
+        /* empty */
+      },
+      endResizeAction: () => {
+        /* empty */
+      },
+      resizeColumn: () => {
+        /* empty */
+      },
+      syncOnWindowResize: () => {
+        /* empty */
+      },
+    };
   }
 
   const { state, dispatch } = context;
@@ -280,6 +317,15 @@ export const useColumnResizing = colKey => {
       colWidths[key] = colWidth;
     });
     return colWidths;
+  };
+
+  const getFullWidth = headerRef => {
+    const tr = headerRef.current.closest('tr');
+    if (tr) {
+      const { width } = tr.getBoundingClientRect();
+      return width;
+    }
+    return 0;
   };
 
   return {
@@ -302,12 +348,14 @@ export const useColumnResizing = colKey => {
     },
 
     // a resizing action has started on this column
-    startResizeAction: initialPos => {
+    startResizeAction: (initialPos, ref) => {
       // sync column width in store with actual column width
       // because they may not exactly align anymore
+      const tableWidth = getFullWidth(ref);
       dispatch({
         type: actionTypes.BATCH_SET_COLWIDTHS,
         colWidths: getActualColWidths(),
+        tableWidth,
       });
       dispatch({ type: actionTypes.START_RESIZE_ACTION, colKey, initialPos });
     },
@@ -324,13 +372,12 @@ export const useColumnResizing = colKey => {
 
     // sync stored column widths with resized table width
     syncOnWindowResize: ref => {
-      const tr = ref.current.closest('tr');
-      if (tr) {
-        const { width } = tr.getBoundingClientRect();
+      const tableWidth = getFullWidth(ref);
+      if (tableWidth) {
         dispatch({
           type: actionTypes.SYNC_TABLE_WIDTH,
           colKey,
-          tableWidth: width,
+          tableWidth,
         });
       }
     },

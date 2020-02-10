@@ -38,14 +38,28 @@ describe('column resizer reducer', () => {
   }
 
   function getStateFor3Columns(w1 = 100, w2 = 100, w3 = 100) {
+    const setWidthAction = {
+      type: actionTypes.BATCH_SET_COLWIDTHS,
+      colKey: key1,
+      colWidths: {
+        aKey: w1,
+        aKey2: w2,
+        aKey3: w3,
+      },
+      tableWidth: w1 + w2 + w3,
+    };
+
     const addAction1 = getAddAction(key1, ref1, w1);
     const addAction2 = getAddAction(key2, ref2, w2);
     const addAction3 = getAddAction(key3, ref3, w3);
 
     return resizeReducer(
       resizeReducer(
-        resizeReducer(resizeReducer(initialState, addAction1), addAction2),
-        addAction3
+        resizeReducer(
+          resizeReducer(resizeReducer(initialState, addAction1), addAction2),
+          addAction3
+        ),
+        setWidthAction
       ),
       startAction
     );
@@ -63,6 +77,7 @@ describe('column resizer reducer', () => {
         },
       },
       resizeActivity: {},
+      tableWidth: 0,
     });
   });
 
@@ -97,6 +112,7 @@ describe('column resizer reducer', () => {
         initialPos: 400,
         lastUpdatedPos: 400,
       },
+      tableWidth: 0,
     });
   });
 
@@ -120,30 +136,8 @@ describe('column resizer reducer', () => {
         },
       },
       resizeActivity: {},
+      tableWidth: 0,
     });
-  });
-
-  it('should handle single column UPDATE_COLWIDTH.', () => {
-    const updateAction = {
-      type: actionTypes.UPDATE_COLWIDTH,
-      colKey: key1,
-      pos: 450,
-    };
-    const nextState = resizeReducer(
-      resizeReducer(resizeReducer(initialState, startAction), getAddAction()),
-      updateAction
-    );
-    expect(nextState).toEqual(
-      expect.objectContaining({
-        columnsByKey: {
-          [key1]: {
-            ref: ref1,
-            colWidth: 150,
-            initialColWidth: 100,
-          },
-        },
-      })
-    );
   });
 
   it('should handle multi column UPDATE_COLWIDTH.', () => {
@@ -388,6 +382,7 @@ describe('column resizer reducer', () => {
         aKey2: 200,
         aKey3: 250,
       },
+      tableWidth: 600,
     };
     const nextState2 = resizeReducer(nextState, setAction);
 
@@ -415,6 +410,7 @@ describe('column resizer reducer', () => {
         initialPos: 400,
         lastUpdatedPos: 400,
       },
+      tableWidth: 600,
     });
   });
 
@@ -451,6 +447,7 @@ describe('column resizer reducer', () => {
         initialPos: 400,
         lastUpdatedPos: 400,
       },
+      tableWidth: 450,
     });
   });
 

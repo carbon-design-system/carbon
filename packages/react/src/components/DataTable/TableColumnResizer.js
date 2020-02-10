@@ -45,7 +45,7 @@ const TableColumnResizer = ({ headerRef, colKey, ...rest }) => {
   };
 
   const startResizing = ev => {
-    startResizeAction(ev.clientX);
+    startResizeAction(ev.clientX, headerRef);
     document.onmouseup = endResizing;
     document.onmousemove = doResizing;
     // keep cursor style everywhere during resizing
