@@ -62,21 +62,10 @@ exports[`SideNavSwitcher should render 1`] = `
     <div
       className="bx--side-nav__switcher-chevron"
     >
-      <ForwardRef(ChevronDown20)
-        style={
-          Object {
-            "willChange": "unset",
-          }
-        }
-      >
+      <ForwardRef(ChevronDown20)>
         <Icon
           height={20}
           preserveAspectRatio="xMidYMid meet"
-          style={
-            Object {
-              "willChange": "unset",
-            }
-          }
           viewBox="0 0 32 32"
           width={20}
           xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +77,7 @@ exports[`SideNavSwitcher should render 1`] = `
             preserveAspectRatio="xMidYMid meet"
             style={
               Object {
-                "willChange": "unset",
+                "willChange": "transform",
               }
             }
             viewBox="0 0 32 32"

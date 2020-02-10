@@ -23,21 +23,11 @@ exports[`HeaderMenu should render 1`] = `
         <defaultRenderMenuContent>
           <ForwardRef(ChevronDown16)
             className="bx--header__menu-arrow"
-            style={
-              Object {
-                "willChange": "unset",
-              }
-            }
           >
             <Icon
               className="bx--header__menu-arrow"
               height={16}
               preserveAspectRatio="xMidYMid meet"
-              style={
-                Object {
-                  "willChange": "unset",
-                }
-              }
               viewBox="0 0 16 16"
               width={16}
               xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +40,7 @@ exports[`HeaderMenu should render 1`] = `
                 preserveAspectRatio="xMidYMid meet"
                 style={
                   Object {
-                    "willChange": "unset",
+                    "willChange": "transform",
                   }
                 }
                 viewBox="0 0 16 16"
