@@ -2214,7 +2214,6 @@ Generate a media query for the maximum width of the given styles
   - [carbon--is-smallest-breakpoint [function]](#carbon--is-smallest-breakpoint-function)
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
-  - [carbon-header [mixin]](#carbon-header-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅carbon--breakpoint-between [mixin]
@@ -12658,7 +12657,7 @@ Accordion styles
     margin: $accordion-title-margin;
     width: 100%;
     text-align: left;
-    z-index: 0;
+    z-index: 1;
   }
 
   .#{$prefix}--accordion__content {
@@ -12677,7 +12676,7 @@ Accordion styles
       padding-right: 25%;
     }
 
-    p {
+    > p {
       @include type-style('body-long-01');
     }
   }
@@ -24465,10 +24464,10 @@ UI shell header
     height: 100%;
     padding-left: mini-units(2);
     position: relative;
-    display: block;
+    display: none;
 
-    @include carbon--breakpoint-down('lg') {
-      display: none;
+    @include carbon--breakpoint('lg') {
+      display: block;
     }
 
     &::before {
@@ -24654,7 +24653,6 @@ UI shell header
 - **Group**: [ui-shell](#ui-shell)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
-  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
   - [mini-units [function]](#mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
