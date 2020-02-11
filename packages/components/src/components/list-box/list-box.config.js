@@ -62,5 +62,14 @@ module.exports = {
         items,
       },
     },
+    {
+      name: 'inline (light)',
+      label: 'Inline (Light)',
+      context: {
+        inline: true,
+        light: true,
+        items,
+      },
+    },
   ],
 };

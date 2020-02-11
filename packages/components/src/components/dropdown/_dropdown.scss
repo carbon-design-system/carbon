@@ -360,6 +360,10 @@
     }
   }
 
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--light {
+    background-color: $field-01;
+  }
+
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open {
     background-color: transparent;
   }
