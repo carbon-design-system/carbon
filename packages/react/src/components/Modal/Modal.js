@@ -141,7 +141,7 @@ export default class Modal extends Component {
     size: PropTypes.oneOf(['xs', 'sm', 'lg']),
 
     /**
-     * Deprecated; Used for advanced focust-wrapping feature using 3rd party library,
+     * Deprecated; Used for advanced focus-wrapping feature using 3rd party library,
      * but it's now achieved without a 3rd party library.
      */
     focusTrap: deprecate(
