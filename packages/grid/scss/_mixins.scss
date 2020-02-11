@@ -229,6 +229,13 @@ $carbon--aspect-ratios: (
 }
 
 /// Lays down the common CSS for an aspect ratio
+///
+/// CSS Tricks article on aspect ratios and all the different ways it can be done.
+/// https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
+///
+/// That article references an earlier article on the topic.
+/// https://keithjgrant.com/posts/2017/03/aspect-ratios/
+///
 /// @access private
 /// @group @carbon/grid
 @mixin carbon--make-aspect-ratio-ready() {
@@ -248,6 +255,13 @@ $carbon--aspect-ratios: (
 }
 
 /// Sets the height for a given aspect ratio
+///
+/// CSS Tricks article on aspect ratios and all the different ways it can be done.
+/// https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
+///
+/// That article references an earlier article on the topic.
+/// https://keithjgrant.com/posts/2017/03/aspect-ratios/
+///
 /// @param {Number} $width width from an aspect ratio
 /// @param {Number} $height height from an aspect ratio
 /// @access private
