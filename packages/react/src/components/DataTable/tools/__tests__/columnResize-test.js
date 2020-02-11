@@ -15,7 +15,7 @@ import {
   distributeOverColumns,
 } from '../columnResize';
 
-describe('distributeOverColumns tests', () => {
+describe('distributeOverColumns function tests', () => {
   const minimalState = {
     columnsByKey: {
       a: {
@@ -93,6 +93,28 @@ describe('distributeOverColumns tests', () => {
     });
     expect(distributed).toEqual(-50);
   });
+
+  it('should not distribute for 0 diff', () => {
+    const distributed = distributeOverColumns(
+      minimalState,
+      0,
+      minimalState.allColumnKeys
+    );
+    expect(minimalState).toEqual({
+      columnsByKey: {
+        a: {
+          initialColWidth: 50,
+          colWidth: 40,
+        },
+        b: {
+          initialColWidth: 80,
+          colWidth: 40,
+        },
+      },
+      allColumnKeys: ['a', 'b'],
+    });
+    expect(distributed).toEqual(0);
+  });
 });
 
 describe('column resizer reducer', () => {
@@ -127,7 +149,6 @@ describe('column resizer reducer', () => {
         aKey2: w2,
         aKey3: w3,
       },
-      tableWidth: w1 + w2 + w3,
     };
 
     const addAction1 = getAddAction(key1, ref1, w1);
@@ -158,7 +179,6 @@ describe('column resizer reducer', () => {
         },
       },
       resizeActivity: {},
-      tableWidth: 0,
     });
   });
 
@@ -191,9 +211,7 @@ describe('column resizer reducer', () => {
       resizeActivity: {
         colKey: key1,
         initialPos: 400,
-        lastUpdatedPos: 400,
       },
-      tableWidth: 0,
     });
   });
 
@@ -217,11 +235,10 @@ describe('column resizer reducer', () => {
         },
       },
       resizeActivity: {},
-      tableWidth: 0,
     });
   });
 
-  it('should handle multi column UPDATE_COLWIDTH.', () => {
+  it('should handle multi column UPDATE_COLWIDTH increasing the width.', () => {
     const nextState = getStateFor3Columns();
 
     const updateAction = {
@@ -254,8 +271,41 @@ describe('column resizer reducer', () => {
     );
   });
 
-  it('should handle UPDATE_COLWIDTH hitting min width.', () => {
-    const nextState = getStateFor3Columns(100, 40, 100);
+  it('should handle UPDATE_COLWIDTH hitting min width to the right.', () => {
+    const nextState = getStateFor3Columns();
+
+    const updateAction = {
+      type: actionTypes.UPDATE_COLWIDTH,
+      colKey: key2,
+      pos: 470, // +70
+    };
+    const nextState2 = resizeReducer(nextState, updateAction);
+
+    expect(nextState2).toEqual(
+      expect.objectContaining({
+        columnsByKey: {
+          [key1]: {
+            ref: ref1,
+            colWidth: 100,
+            initialColWidth: 100,
+          },
+          [key2]: {
+            ref: ref1,
+            colWidth: 160,
+            initialColWidth: 100,
+          },
+          [key3]: {
+            ref: ref1,
+            colWidth: 40,
+            initialColWidth: 100,
+          },
+        },
+      })
+    );
+  });
+
+  it('should handle UPDATE_COLWIDTH reducing the width.', () => {
+    const nextState = getStateFor3Columns();
 
     const updateAction = {
       type: actionTypes.UPDATE_COLWIDTH,
@@ -274,86 +324,86 @@ describe('column resizer reducer', () => {
           },
           [key2]: {
             ref: ref1,
-            colWidth: 40,
-            initialColWidth: 40,
-          },
-          [key3]: {
-            ref: ref1,
-            colWidth: 100,
-            initialColWidth: 100,
-          },
-        },
-      })
-    );
-  });
-
-  it('should handle UPDATE_COLWIDTH hitting min width to the right.', () => {
-    const nextState = getStateFor3Columns();
-
-    const updateAction = {
-      type: actionTypes.UPDATE_COLWIDTH,
-      colKey: key2,
-      pos: 470, // +40
-    };
-    const nextState2 = resizeReducer(nextState, updateAction);
-
-    expect(nextState2).toEqual(
-      expect.objectContaining({
-        columnsByKey: {
-          [key1]: {
-            ref: ref1,
-            colWidth: 100,
-            initialColWidth: 100,
-          },
-          [key2]: {
-            ref: ref1,
-            colWidth: 170,
-            initialColWidth: 100,
-          },
-          [key3]: {
-            ref: ref1,
-            colWidth: 40,
-            initialColWidth: 100,
-          },
-        },
-      })
-    );
-  });
-
-  it('should handle UPDATE_COLWIDTH modifying left columns.', () => {
-    const nextState = getStateFor3Columns(100, 100, 40);
-
-    const updateAction = {
-      type: actionTypes.UPDATE_COLWIDTH,
-      colKey: key2,
-      pos: 450, // +50,
-    };
-    const nextState2 = resizeReducer(nextState, updateAction);
-
-    expect(nextState2).toEqual(
-      expect.objectContaining({
-        columnsByKey: {
-          [key1]: {
-            ref: ref1,
             colWidth: 50,
             initialColWidth: 100,
           },
-          [key2]: {
+          [key3]: {
             ref: ref1,
             colWidth: 150,
             initialColWidth: 100,
           },
+        },
+      })
+    );
+  });
+
+  it('should handle UPDATE_COLWIDTH reducing the width of more than 1 column.', () => {
+    const nextState = getStateFor3Columns();
+
+    const updateAction = {
+      type: actionTypes.UPDATE_COLWIDTH,
+      colKey: key2,
+      pos: 300, // i.e. -100
+    };
+    const nextState2 = resizeReducer(nextState, updateAction);
+
+    expect(nextState2).toEqual(
+      expect.objectContaining({
+        columnsByKey: {
+          [key1]: {
+            ref: ref1,
+            colWidth: 60, // -40
+            initialColWidth: 100,
+          },
+          [key2]: {
+            ref: ref1,
+            colWidth: 40, // -60 (up to min width)
+            initialColWidth: 100,
+          },
           [key3]: {
             ref: ref1,
-            colWidth: 40,
-            initialColWidth: 40,
+            colWidth: 200,
+            initialColWidth: 100,
           },
         },
       })
     );
   });
 
-  it('should handle UPDATE_COLWIDTH modifying right most column.', () => {
+  it('should handle UPDATE_COLWIDTH reducing the width to min width.', () => {
+    const nextState = getStateFor3Columns();
+
+    const updateAction = {
+      type: actionTypes.UPDATE_COLWIDTH,
+      colKey: key2,
+      pos: 250, // i.e. -150
+    };
+    const nextState2 = resizeReducer(nextState, updateAction);
+
+    expect(nextState2).toEqual(
+      expect.objectContaining({
+        columnsByKey: {
+          [key1]: {
+            ref: ref1,
+            colWidth: 40, // -60 (up to min width)
+            initialColWidth: 100,
+          },
+          [key2]: {
+            ref: ref1,
+            colWidth: 40, // -60 (up to min width)
+            initialColWidth: 100,
+          },
+          [key3]: {
+            ref: ref1,
+            colWidth: 220,
+            initialColWidth: 100,
+          },
+        },
+      })
+    );
+  });
+
+  it('should not do anything on UPDATE_COLWIDTH for right most column.', () => {
     const nextState = getStateFor3Columns();
 
     const updateAction = {
@@ -368,83 +418,17 @@ describe('column resizer reducer', () => {
         columnsByKey: {
           [key1]: {
             ref: ref1,
-            colWidth: 74.5,
+            colWidth: 100,
             initialColWidth: 100,
           },
           [key2]: {
             ref: ref1,
-            colWidth: 74.5,
+            colWidth: 100,
             initialColWidth: 100,
           },
           [key3]: {
             ref: ref1,
-            colWidth: 151,
-            initialColWidth: 100,
-          },
-        },
-      })
-    );
-  });
-
-  it('should handle UPDATE_COLWIDTH only columns wider than min width to the right.', () => {
-    const nextState = getStateFor3Columns(100, 40, 100);
-
-    const updateAction = {
-      type: actionTypes.UPDATE_COLWIDTH,
-      colKey: key1,
-      pos: 451, // +51,
-    };
-    const nextState2 = resizeReducer(nextState, updateAction);
-
-    expect(nextState2).toEqual(
-      expect.objectContaining({
-        columnsByKey: {
-          [key1]: {
-            ref: ref1,
-            colWidth: 151,
-            initialColWidth: 100,
-          },
-          [key2]: {
-            ref: ref1,
-            colWidth: 40,
-            initialColWidth: 40,
-          },
-          [key3]: {
-            ref: ref1,
-            colWidth: 49,
-            initialColWidth: 100,
-          },
-        },
-      })
-    );
-  });
-
-  it('should handle UPDATE_COLWIDTH only for columns wider than min width to the left.', () => {
-    const nextState = getStateFor3Columns(100, 40, 100);
-
-    const updateAction = {
-      type: actionTypes.UPDATE_COLWIDTH,
-      colKey: key3,
-      pos: 451, // +51,
-    };
-    const nextState2 = resizeReducer(nextState, updateAction);
-
-    expect(nextState2).toEqual(
-      expect.objectContaining({
-        columnsByKey: {
-          [key1]: {
-            ref: ref1,
-            colWidth: 49,
-            initialColWidth: 100,
-          },
-          [key2]: {
-            ref: ref1,
-            colWidth: 40,
-            initialColWidth: 40,
-          },
-          [key3]: {
-            ref: ref1,
-            colWidth: 151,
+            colWidth: 100,
             initialColWidth: 100,
           },
         },
@@ -489,9 +473,7 @@ describe('column resizer reducer', () => {
       resizeActivity: {
         colKey: key1,
         initialPos: 400,
-        lastUpdatedPos: 400,
       },
-      tableWidth: 600,
     });
   });
 
@@ -526,9 +508,7 @@ describe('column resizer reducer', () => {
       resizeActivity: {
         colKey: key1,
         initialPos: 400,
-        lastUpdatedPos: 400,
       },
-      tableWidth: 450,
     });
   });
 
