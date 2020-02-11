@@ -15,12 +15,37 @@ exports[`DataTable.TableCellResizable should render 1`] = `
       >
         <TableRow>
           <tr>
+            <TableCellResizable>
+              <td />
+            </TableCellResizable>
+          </tr>
+        </TableRow>
+      </tbody>
+    </TableBody>
+  </table>
+</Table>
+`;
+
+exports[`DataTable.TableCellResizable should render with resizable columns 1`] = `
+<Table
+  isSortable={false}
+>
+  <table
+    className="bx--data-table bx--data-table--no-border"
+  >
+    <TableBody
+      aria-live="polite"
+    >
+      <tbody
+        aria-live="polite"
+      >
+        <TableRow>
+          <tr>
             <TableCellResizable
-              className="custom-class"
+              colKey="aKey"
+              key="aKey"
             >
-              <td
-                className="custom-class"
-              />
+              <td />
             </TableCellResizable>
           </tr>
         </TableRow>
