@@ -27,6 +27,14 @@
         display: flex;
         justify-content: space-between;
       }
+
+      /* revert background styles for columns not being resized (to prevent hover styles) */
+      &.#{$prefix}--table-header--resizing-passive {
+        background-color: $ui-03 !important;
+        .#{$prefix}--table-header-resizer {
+          background-color: $ui-03 !important;
+        }
+      }
     }
 
     /* highlight resizer on header hover, on all but last header */
@@ -52,14 +60,6 @@
         background-color: $ui-04;
         .#{$prefix}--table-header-resizer {
           background-color: $ui-05;
-        }
-      }
-
-      /* revert background styles for columns not being resized (to prevent hover styles) */
-      &.#{$prefix}--table-header--resizing-passive {
-        background-color: $ui-03 !important;
-        .#{$prefix}--table-header-resizer {
-          background-color: $ui-03 !important;
         }
       }
     }
