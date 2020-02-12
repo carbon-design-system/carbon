@@ -27,12 +27,6 @@ $css--helpers: true !default;
 /// @group feature-flags
 $css--body: true !default;
 
-/// If true, the `layer()` mixin sets `box-shadow` values
-/// @access public
-/// @type Bool
-/// @group feature-flags
-$css--use-layer: true !default;
-
 /// If true, include reset CSS
 /// @access public
 /// @type Bool
@@ -73,7 +67,6 @@ $css--use-experimental-grid-fallback: false !default;
 @import 'theme';
 @import 'mixins';
 @import 'layout';
-@import 'layer';
 @import 'spacing';
 @import 'typography';
 @import './vendor/@carbon/elements/scss/import-once/import-once';

@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './datatable-story.scss';
+
 import React from 'react';
 import DataTable, {
   Table,
@@ -56,9 +58,15 @@ export default props => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
                 </TableExpandRow>
-                <TableExpandedRow colSpan={headers.length + 1}>
-                  <h1>Expandable row content</h1>
-                  <p>Description here</p>
+                <TableExpandedRow
+                  colSpan={headers.length + 1}
+                  className="demo-expanded-td">
+                  <h1 className="demo-inner-container-header">
+                    Expandable row content
+                  </h1>
+                  <p className="demo-inner-container-content">
+                    Description here
+                  </p>
                 </TableExpandedRow>
               </React.Fragment>
             ))}

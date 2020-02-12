@@ -18,7 +18,7 @@ const packagePaths = fs
   .readdirSync(PACKAGES_DIR)
   .filter(basename => {
     const filename = path.join(PACKAGES_DIR, basename);
-    if (!denylist.has(filename)) {
+    if (denylist.has(filename)) {
       return false;
     }
 
