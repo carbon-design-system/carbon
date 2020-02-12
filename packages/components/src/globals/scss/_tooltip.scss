@@ -148,6 +148,7 @@
     content: none;
   }
 
+  &.#{$prefix}--tooltip--visible,
   &:hover,
   &:focus {
     &::before,
