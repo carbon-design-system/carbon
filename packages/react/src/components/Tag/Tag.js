@@ -31,7 +31,7 @@ const Tag = ({
   className,
   type,
   filter,
-  short,
+  size,
   title,
   disabled,
   ...other
@@ -40,7 +40,7 @@ const Tag = ({
   const tagClasses = classNames(`${prefix}--tag`, tagClass, className, {
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
-    [`${prefix}--tag--short`]: short,
+    [`${prefix}--tag--short`]: size === 'short',
   });
   return filter ? (
     <button
@@ -93,7 +93,7 @@ Tag.propTypes = {
   /**
    * Determine if <Tag> is a 18px high
    */
-  short: PropTypes.bool,
+  short: PropTypes.oneOf(['regular', 'short']),
 
   /**
    * Text to show on clear filters

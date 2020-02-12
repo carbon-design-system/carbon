@@ -72,7 +72,7 @@ storiesOf('Tag', module)
   .add(
     'Short',
     () => (
-      <Tag className="some-class" {...props.filter()} filter short>
+      <Tag className="some-class" {...props.filter()} filter size="short">
         {text('Content (children)', 'This is not a tag')}
       </Tag>
     ),
