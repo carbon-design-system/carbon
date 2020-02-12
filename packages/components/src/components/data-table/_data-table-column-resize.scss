@@ -16,21 +16,13 @@
   //----------------------------------------------------------------------------
 
   .#{$prefix}--data-table {
-    tr {
-      /* rows somewhat more dense than standard
-	     * cannot easily use DataTable size property since it does not
-	     * yet work with sticky header */
-      min-height: 2rem;
-    }
-
-    th {
-      background-color: $ui-03; /* somewhat lighter than usually */
-      padding: 0 0 0 0.1rem; /* less padding: more content */
+    th.#{$prefix}--table-header-resizable {
+      padding-right: 0; /* resizer should appear at the very right */
       &:hover {
         background-color: $ui-04;
       }
 
-      .#{$prefix}--table-header-resizable {
+      .#{$prefix}--table-header-resizable-container {
         width: 100%;
         display: flex;
         justify-content: space-between;
@@ -70,14 +62,6 @@
           background-color: $ui-03 !important;
         }
       }
-    }
-
-    td {
-      background-color: $ui-02;
-      min-width: rem(40px);
-      padding-left: 0.1rem; /* less padding: more content */
-      padding-right: 0.95rem; /* to align cols with header (bug in DataTable) */
-      padding-bottom: 0; /* prevent text being truncated from below */
     }
   }
 }
