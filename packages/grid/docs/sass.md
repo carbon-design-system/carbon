@@ -423,6 +423,12 @@ Outputs the height value needed based on an aspect ratio
 
 Lays down the common CSS for an aspect ratio
 
+CSS Tricks article on aspect ratios and all the different ways it can be done.
+https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
+
+That article references an earlier article on the topic.
+https://keithjgrant.com/posts/2017/03/aspect-ratios/
+
 <details>
 <summary>Source code</summary>
 
@@ -453,6 +459,12 @@ Lays down the common CSS for an aspect ratio
 ### ❌carbon--make-aspect-ratio [mixin]
 
 Sets the height for a given aspect ratio
+
+CSS Tricks article on aspect ratios and all the different ways it can be done.
+https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
+
+That article references an earlier article on the topic.
+https://keithjgrant.com/posts/2017/03/aspect-ratios/
 
 <details>
 <summary>Source code</summary>
