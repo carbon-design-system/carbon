@@ -6,19 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
-
 import { settings } from 'carbon-components';
 import { useColumnResizing } from './tools/columnResize';
 const { prefix } = settings;
 
 // resizer component within table header
 
-const TableColumnResizer = ({ headerRef, colKey, ...rest }) => {
+const TableColumnResizer = ({ headerRef, colKey }) => {
   const {
-    columnKeyResizeActive,
     initColumnResizing,
     cleanupColumnResizing,
     startResizeAction,
@@ -48,6 +45,8 @@ const TableColumnResizer = ({ headerRef, colKey, ...rest }) => {
     startResizeAction(ev.clientX, headerRef);
     document.onmouseup = endResizing;
     document.onmousemove = doResizing;
+    // dont select during resizing (firefox)
+    document.onselectstart = () => false;
     // keep cursor style everywhere during resizing
     document.body.style.cursor = 'col-resize';
   };
@@ -55,6 +54,7 @@ const TableColumnResizer = ({ headerRef, colKey, ...rest }) => {
   const endResizing = () => {
     document.onmouseup = null;
     document.onmousemove = null;
+    document.onselectstart = () => true;
     document.body.style.cursor = 'default';
     endResizeAction();
   };
@@ -66,21 +66,11 @@ const TableColumnResizer = ({ headerRef, colKey, ...rest }) => {
     resizeColumn(ev.clientX);
   };
 
-  // permanently highlight only active resizer while resizing
-  const resizerClassName = cx({
-    [`${prefix}--table-header-resizer`]: true,
-    [`${prefix}--table-header-resizer-active`]:
-      columnKeyResizeActive === colKey,
-    [`${prefix}--table-header-resizer-passive`]:
-      columnKeyResizeActive && columnKeyResizeActive !== colKey,
-  });
-
   return (
     <div
-      className={resizerClassName}
+      className={`${prefix}--table-header-resizer`}
       onMouseDown={ev => startResizing(ev)}
       role="separator"
-      {...rest}
     />
   );
 };

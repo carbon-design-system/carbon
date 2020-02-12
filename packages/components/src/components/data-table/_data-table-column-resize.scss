@@ -14,44 +14,71 @@
   //----------------------------------------------------------------------------
   // Column resize
   //----------------------------------------------------------------------------
-  .#{$prefix}--data-table--resizable {
+
+  .#{$prefix}--data-table {
+    tr {
+      /* rows somewhat more dense than standard
+	     * cannot easily use DataTable size property since it does not
+	     * yet work with sticky header */
+      min-height: 2rem;
+    }
+
     th {
-      padding-right: 0; /* ensure that resizer is at right-most position */
-      min-width: rem(40px);
+      background-color: $ui-03; /* somewhat lighter than usually */
+      padding: 0 0 0 0.1rem; /* less padding: more content */
+      &:hover {
+        background-color: $ui-04;
+      }
+
+      .#{$prefix}--table-header-resizable {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
     }
+
+    /* highlight resizer on header hover, on all but last header */
+    th:not(:last-child) {
+      &:hover {
+        .#{$prefix}--table-header-resizer {
+          background-color: $ui-05;
+        }
+      }
+
+      /* resizer */
+      .#{$prefix}--table-header-resizer {
+        width: rem(4px);
+        flex-shrink: 0;
+        &:hover {
+          background-color: $ui-05;
+          cursor: col-resize;
+        }
+      }
+
+      /* highlight active resizer and header background while resizing */
+      &.#{$prefix}--table-header--resizing-active {
+        background-color: $ui-04;
+        .#{$prefix}--table-header-resizer {
+          background-color: $ui-05;
+        }
+      }
+
+      /* revert background styles for columns not being resized (to prevent hover styles) */
+      &.#{$prefix}--table-header--resizing-passive {
+        background-color: $ui-03 !important;
+        .#{$prefix}--table-header-resizer {
+          background-color: $ui-03 !important;
+        }
+      }
+    }
+
     td {
+      background-color: $ui-02;
       min-width: rem(40px);
+      padding-left: 0.1rem; /* less padding: more content */
+      padding-right: 0.95rem; /* to align cols with header (bug in DataTable) */
+      padding-bottom: 0; /* prevent text being truncated from below */
     }
-    .#{$prefix}--table-header-label {
-      max-width: none;
-    }
-  }
-
-  .#{$prefix}--table-header-resizable {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  /* resizer bar */
-  .#{$prefix}--table-header-resizer {
-    width: rem(4px);
-    flex-shrink: 0;
-    &:hover {
-      background-color: $ui-05;
-      cursor: col-resize;
-    }
-  }
-
-  /* permanently highlight active resizer while resizing */
-  .#{$prefix}--table-header-resizer-active {
-    background-color: $ui-04;
-    cursor: col-resize;
-  }
-
-  /* don't highlight passive resizers while resizing */
-  .#{$prefix}--table-header-resizer-passive:hover {
-    background-color: $ui-03;
   }
 }
 

@@ -68,12 +68,19 @@ const TableHeaderResizable = React.forwardRef(function TableHeaderResizable(
   },
   ref
 ) {
-  const { colWidth } = useColumnResizing(colKey);
+  const { colWidth, columnKeyResizeActive } = useColumnResizing(colKey);
 
   if (isResizable) {
+    const className = cx(headerClassName, {
+      [`${prefix}--table-header--resizing-active`]:
+        columnKeyResizeActive === colKey,
+      [`${prefix}--table-header--resizing-passive`]:
+        columnKeyResizeActive && columnKeyResizeActive !== colKey,
+    });
+
     return (
       <th
-        className={headerClassName}
+        className={className}
         colSpan={colSpan}
         ref={ref}
         scope={scope}

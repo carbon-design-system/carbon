@@ -2,7 +2,6 @@
 
 exports[`DataTable.TableColumnResizer should render 1`] = `
 <TableColumnResizer
-  className="custom-class"
   colKey="aKey"
   headerRef={
     Object {
@@ -11,7 +10,7 @@ exports[`DataTable.TableColumnResizer should render 1`] = `
   }
 >
   <div
-    className="custom-class"
+    className="bx--table-header-resizer"
     onMouseDown={[Function]}
     role="separator"
   />

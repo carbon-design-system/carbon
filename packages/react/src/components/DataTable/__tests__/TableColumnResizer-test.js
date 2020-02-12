@@ -6,7 +6,11 @@
  */
 
 import React, { createRef } from 'react';
-import { mount } from 'enzyme';
+import { mount, configure as enzymeConfigure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+enzymeConfigure({
+  adapter: new Adapter(),
+});
 import TableColumnResizer from '../TableColumnResizer';
 import columnResize from '../tools/columnResize';
 
@@ -30,13 +34,16 @@ jest.mock('../tools/columnResize', () => {
 
 describe('DataTable.TableColumnResizer', () => {
   const ref = createRef();
+  let wrapper = null;
 
   beforeEach(() => {
     jest.clearAllMocks();
+    // make sure we only have one wrapper around - otherwise
+    // wrappers from earlier tests will receive mouse events
+    wrapper = mount(<TableColumnResizer headerRef={ref} colKey="aKey" />);
   });
 
-  xit('should render', () => {
-    const wrapper = mount(<TableColumnResizer headerRef={ref} colKey="aKey" />);
+  it('should render', () => {
     expect(wrapper).toMatchSnapshot();
     expect(columnResize.hookReturnVal.initColumnResizing).toHaveBeenCalledTimes(
       1
@@ -48,8 +55,7 @@ describe('DataTable.TableColumnResizer', () => {
     ).toHaveBeenCalledTimes(1);
   });
 
-  xit('should start resizing on mouse-down and stop on mouse-up', () => {
-    const wrapper = mount(<TableColumnResizer headerRef={ref} colKey="aKey" />);
+  it('should start resizing on mouse-down and stop on mouse-up', () => {
     expect(document.onmouseup).toBeFalsy();
     expect(document.onmousemove).toBeFalsy();
     expect(document.body.style.cursor).toEqual('');
@@ -73,11 +79,10 @@ describe('DataTable.TableColumnResizer', () => {
     expect(document.onmouseup).toBeFalsy();
     expect(document.onmousemove).toBeFalsy();
     expect(document.body.style.cursor).toEqual('default');
+    wrapper.unmount();
   });
 
   it('should sync column widths on window resize', () => {
-    const wrapper = mount(<TableColumnResizer headerRef={ref} colKey="aKey" />);
-
     // mouse move is not caught with react so explicitely call it
     global.dispatchEvent(new Event('resize'));
     expect(columnResize.hookReturnVal.syncOnWindowResize).toHaveBeenCalledTimes(
