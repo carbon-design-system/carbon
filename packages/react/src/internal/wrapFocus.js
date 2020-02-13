@@ -37,16 +37,16 @@ function elementOrParentIsFloatingMenu(
  * Ensures the focus is kept in the given `modalNode`, implementing "focus-wrap" behavior.
  * @param {object} options The options.
  * @param {Node} options.modalNode The DOM node of the inner modal.
- * @param {Node} options.startSentinelNode The DOM node of the focus sentinel the is placed earlier next to `modalNode`.
- * @param {Node} options.endSentinelNode The DOM node of the focus sentinel the is placed next to `modalNode`.
+ * @param {Node} options.startTrapNode The DOM node of the focus sentinel the is placed earlier next to `modalNode`.
+ * @param {Node} options.endTrapNode The DOM node of the focus sentinel the is placed next to `modalNode`.
  * @param {Node} options.currentActiveNode The DOM node that has focus.
  * @param {Node} options.oldActiveNode The DOM node that previously had focus.
  * @param {Node} [options.selectorsFloatingMenus] The CSS selectors that matches floating menus.
  */
 function wrapFocus({
   modalNode,
-  startSentinelNode,
-  endSentinelNode,
+  startTrapNode,
+  endTrapNode,
   currentActiveNode,
   oldActiveNode,
   selectorsFloatingMenus,
@@ -62,7 +62,7 @@ function wrapFocus({
       currentActiveNode
     );
     if (
-      currentActiveNode === startSentinelNode ||
+      currentActiveNode === startTrapNode ||
       comparisonResult & DOCUMENT_POSITION_BROAD_PRECEDING
     ) {
       const tabbable = findLast(
@@ -75,7 +75,7 @@ function wrapFocus({
         modalNode.focus();
       }
     } else if (
-      currentActiveNode === endSentinelNode ||
+      currentActiveNode === endTrapNode ||
       comparisonResult & DOCUMENT_POSITION_BROAD_FOLLOWING
     ) {
       const tabbable = Array.prototype.find.call(

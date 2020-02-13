@@ -146,7 +146,7 @@ export default class Modal extends Component {
      */
     focusTrap: deprecate(
       PropTypes.bool,
-      `\nThe prop \`focusTrap\` for Modal has been deprecated, as the feature of \`persistent\` runs by default.`
+      `\nThe prop \`focusTrap\` for Modal has been deprecated, as the feature of \`focusTrap\` runs by default.`
     ),
 
     /**
@@ -179,8 +179,8 @@ export default class Modal extends Component {
   button = React.createRef();
   outerModal = React.createRef();
   innerModal = React.createRef();
-  startSentinel = React.createRef();
-  endSentinel = React.createRef();
+  startTrap = React.createRef();
+  endTrap = React.createRef();
   modalInstanceId = `modal-${getInstanceId()}`;
   modalLabelId = `${prefix}--modal-header__label--${this.modalInstanceId}`;
   modalHeadingId = `${prefix}--modal-header__heading--${this.modalInstanceId}`;
@@ -216,12 +216,12 @@ export default class Modal extends Component {
     const { open, selectorsFloatingMenus } = this.props;
     if (open && currentActiveNode && oldActiveNode) {
       const { current: modalNode } = this.innerModal;
-      const { current: startSentinelNode } = this.startSentinel;
-      const { current: endSentinelNode } = this.endSentinel;
+      const { current: startTrapNode } = this.startTrap;
+      const { current: endTrapNode } = this.endTrap;
       wrapFocus({
         modalNode,
-        startSentinelNode,
-        endSentinelNode,
+        startTrapNode,
+        endTrapNode,
         currentActiveNode,
         oldActiveNode,
         selectorsFloatingMenus,
@@ -428,7 +428,7 @@ export default class Modal extends Component {
         ref={this.outerModal}>
         {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
         <span
-          ref={this.startSentinel}
+          ref={this.startTrap}
           tabIndex="0"
           role="link"
           className={`${prefix}--visually-hidden`}>
@@ -437,7 +437,7 @@ export default class Modal extends Component {
         {modalBody}
         {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
         <span
-          ref={this.endSentinel}
+          ref={this.endTrap}
           tabIndex="0"
           role="link"
           className={`${prefix}--visually-hidden`}>
