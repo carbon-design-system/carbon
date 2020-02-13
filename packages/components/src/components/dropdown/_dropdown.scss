@@ -11,7 +11,6 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/layer';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/layout';
@@ -51,6 +50,7 @@
     border: none;
     border-bottom: 1px solid $ui-04;
     width: 100%;
+    height: rem(40px);
     cursor: pointer;
     color: $text-01;
     outline: 2px solid transparent;
@@ -97,7 +97,7 @@
     + .#{$prefix}--form-requirement {
       display: inline-block;
       max-height: rem(200px);
-      color: $support-01;
+      color: $text-error;
     }
   }
 
@@ -118,7 +118,7 @@
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
-    @include layer('overlay');
+    @include box-shadow;
   }
 
   .#{$prefix}--dropdown--light {
@@ -166,7 +166,7 @@
   .#{$prefix}--dropdown-list {
     @include reset;
     @include focus-outline('reset');
-    @include layer('overlay');
+    @include box-shadow;
     @include type-style('body-short-01');
     background-color: $ui-01;
     display: flex;
@@ -236,6 +236,18 @@
       color: $text-01;
       border-color: transparent;
     }
+  }
+
+  .#{$prefix}--dropdown--sm .#{$prefix}--dropdown-link {
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--dropdown--xl .#{$prefix}--dropdown-link {
+    padding-top: rem(15px);
+    padding-bottom: rem(15px);
+    height: rem(48px);
   }
 
   .#{$prefix}--dropdown--focused,
@@ -382,18 +394,11 @@
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus
     .#{$prefix}--dropdown-list {
-    @include layer('overlay');
+    @include box-shadow;
   }
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
     font-weight: normal;
-    margin-right: $carbon--spacing-04;
-    margin-left: rem(10px);
-
-    &:focus {
-      margin: 0;
-      padding-left: rem(10px);
-    }
   }
 
   .#{$prefix}--dropdown--show-selected .#{$prefix}--dropdown--selected {

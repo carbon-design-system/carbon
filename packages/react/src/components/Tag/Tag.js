@@ -58,9 +58,9 @@ const Tag = ({
       <Close16 />
     </button>
   ) : (
-    <button className={tagClasses} {...other}>
+    <span className={tagClasses} {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
-    </button>
+    </span>
   );
 };
 

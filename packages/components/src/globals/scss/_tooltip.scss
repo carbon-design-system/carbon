@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import 'layer';
+@import 'helper-mixins';
 
 // Tooltip
 // Tooltip caret visual styles
@@ -26,7 +26,7 @@
 /// @access public
 /// @group tooltip
 @mixin tooltip--content($tooltip-type: 'icon') {
-  @include layer('overlay');
+  @include box-shadow;
   width: max-content;
   max-width: rem(208px);
   height: auto;
@@ -178,6 +178,18 @@
     &.#{$prefix}--tooltip--a11y::before {
       animation: tooltip-fade $duration--fast-01 motion(standard, productive);
     }
+  }
+
+  &.#{$prefix}--tooltip--hidden .#{$prefix}--assistive-text,
+  &.#{$prefix}--tooltip--hidden + .#{$prefix}--assistive-text {
+    clip: rect(0, 0, 0, 0);
+    margin: -1px;
+    overflow: hidden;
+  }
+
+  &.#{$prefix}--tooltip--hidden.#{$prefix}--tooltip--a11y::before {
+    animation: none;
+    opacity: 0;
   }
 }
 
