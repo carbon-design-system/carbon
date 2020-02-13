@@ -399,3 +399,25 @@ describe('DatePickerSkeleton', () => {
     });
   });
 });
+
+describe('Opening up calendar dropdown', () => {
+  const wrapper = mount(
+    <DatePicker datePickerType="range" className="extra-class">
+      <DatePickerInput labelText="Date Picker label" id="input-from" />
+      <DatePickerInput labelText="Date Picker label" id="input-to" />
+    </DatePicker>
+  );
+
+  it('has the range date picker with min and max dates', () => {
+    const datePicker = wrapper.instance();
+    const input = wrapper.find('input').at(0);
+
+    jest.spyOn(datePicker.cal, 'open');
+
+    input
+      .getDOMNode()
+      .dispatchEvent(new window.KeyboardEvent('keydown', { key: 'ArrowDown' }));
+
+    expect(datePicker.cal.open).toHaveBeenCalled();
+  });
+});
