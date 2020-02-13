@@ -236,13 +236,13 @@ export default class Dropdown extends React.Component {
             selectedItem,
             highlightedIndex,
             getRootProps,
-            getButtonProps,
+            getToggleButtonProps,
             getItemProps,
             getLabelProps,
             toggleMenu,
           }) => {
             const buttonProps = {
-              ...getButtonProps({
+              ...getToggleButtonProps({
                 onKeyDown: event => {
                   if (match(event, keys.Enter)) {
                     toggleMenu();

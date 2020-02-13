@@ -316,7 +316,7 @@ export default class ComboBox extends React.Component {
         defaultSelectedItem={initialSelectedItem}
         selectedItem={selectedItem}>
         {({
-          getButtonProps,
+          getToggleButtonProps,
           getInputProps,
           getItemProps,
           getRootProps,
@@ -343,7 +343,7 @@ export default class ComboBox extends React.Component {
               disabled={disabled}
               aria-labelledby={comboBoxLabelId}
               aria-describedby={comboBoxHelperId}
-              {...getButtonProps({
+              {...getToggleButtonProps({
                 disabled,
                 onClick: this.onToggleClick(isOpen),
               })}>

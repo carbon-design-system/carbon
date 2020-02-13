@@ -56,7 +56,6 @@ exports[`MultiSelect.Filterable should render 1`] = `
       render={[Function]}
     >
       <Downshift
-        breakingChanges={Object {}}
         defaultHighlightedIndex={null}
         defaultInputValue=""
         defaultIsOpen={false}
@@ -73,26 +72,36 @@ exports[`MultiSelect.Filterable should render 1`] = `
         onSelect={[Function]}
         onStateChange={[Function]}
         onUserAction={[Function]}
-        render={[Function]}
+        scrollIntoView={[Function]}
         selectedItem={Array []}
         selectedItemChanged={[Function]}
         stateReducer={[Function]}
+        suppressRefError={false}
       >
         <ListBox
+          aria-expanded={false}
+          aria-haspopup="listbox"
+          aria-labelledby="downshift-0-label"
+          aria-owns={null}
           className="bx--multi-select bx--combo-box bx--multi-select--filterable"
           disabled={false}
           innerRef={[Function]}
           isOpen={false}
           light={false}
+          role="combobox"
           type="default"
         >
           <div
+            aria-expanded={false}
+            aria-haspopup="listbox"
+            aria-labelledby="downshift-0-label"
+            aria-owns={null}
             className="bx--multi-select bx--combo-box bx--multi-select--filterable bx--list-box"
             onClick={[Function]}
             onKeyDown={[Function]}
+            role="combobox"
           >
             <ListBoxField
-              aria-expanded={false}
               aria-haspopup={true}
               aria-labelledby="filterablemultiselect-label-1"
               data-toggle={true}
@@ -101,12 +110,12 @@ exports[`MultiSelect.Filterable should render 1`] = `
               onBlur={[Function]}
               onClick={[Function]}
               onKeyDown={[Function]}
+              onKeyUp={[Function]}
               role="button"
               type="button"
             >
               <div
                 aria-controls={null}
-                aria-expanded={false}
                 aria-haspopup={true}
                 aria-labelledby="filterablemultiselect-label-1"
                 aria-owns={null}
@@ -115,6 +124,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
                 onBlur={[Function]}
                 onClick={[Function]}
                 onKeyDown={[Function]}
+                onKeyUp={[Function]}
                 role="button"
                 tabIndex={-1}
                 type="button"
@@ -122,8 +132,8 @@ exports[`MultiSelect.Filterable should render 1`] = `
                 <input
                   aria-activedescendant={null}
                   aria-autocomplete="list"
-                  aria-controls="test-filterable-multiselect__menu"
-                  aria-expanded={false}
+                  aria-controls={null}
+                  aria-labelledby="downshift-0-label"
                   autoComplete="off"
                   className="bx--text-input bx--text-input--empty"
                   disabled={false}
@@ -132,7 +142,6 @@ exports[`MultiSelect.Filterable should render 1`] = `
                   onChange={[Function]}
                   onKeyDown={[Function]}
                   placeholder="Placeholder..."
-                  role="combobox"
                   value=""
                 />
                 <ListBoxMenuIcon

@@ -331,9 +331,9 @@ export default class FilterableMultiSelect extends React.Component {
             itemToString={itemToString}
             onStateChange={this.handleOnStateChange}
             onOuterClick={this.handleOnOuterClick}
-            selectedItem={selectedItems}
-            render={({
-              getButtonProps,
+            selectedItem={selectedItems}>
+            {({
+              getToggleButtonProps,
               getInputProps,
               getItemProps,
               getRootProps,
@@ -355,7 +355,7 @@ export default class FilterableMultiSelect extends React.Component {
                 }
               );
               const buttonProps = {
-                ...getButtonProps({ disabled }),
+                ...getToggleButtonProps({ disabled }),
                 'aria-label': undefined,
               };
               return (
@@ -456,7 +456,7 @@ export default class FilterableMultiSelect extends React.Component {
                 </ListBox>
               );
             }}
-          />
+          </Downshift>
         )}
       />
     );

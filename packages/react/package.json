@@ -40,7 +40,7 @@
   "dependencies": {
     "@carbon/icons-react": "^10.8.0",
     "classnames": "2.2.6",
-    "downshift": "^1.31.14",
+    "downshift": "^2.2.3",
     "flatpickr": "4.6.1",
     "focus-trap-react": "^6.0.0",
     "invariant": "^2.2.3",

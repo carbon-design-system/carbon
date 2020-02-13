@@ -288,15 +288,15 @@ export default class MultiSelect extends React.Component {
             onChange={onItemChange}
             onStateChange={this.handleOnStateChange}
             onOuterClick={this.handleOnOuterClick}
-            selectedItem={selectedItems}
-            render={({
+            selectedItem={selectedItems}>
+            {({
               getRootProps,
               selectedItem,
               isOpen,
               itemToString,
               highlightedIndex,
               getItemProps,
-              getButtonProps,
+              getToggleButtonProps,
             }) => {
               const className = cx(
                 `${prefix}--multi-select`,
@@ -309,7 +309,7 @@ export default class MultiSelect extends React.Component {
                 }
               );
               const buttonProps = {
-                ...getButtonProps({ disabled }),
+                ...getToggleButtonProps({ disabled }),
                 'aria-label': undefined,
               };
               return (
@@ -403,7 +403,7 @@ export default class MultiSelect extends React.Component {
                 </ListBox>
               );
             }}
-          />
+          </Downshift>
         )}
       />
     );
