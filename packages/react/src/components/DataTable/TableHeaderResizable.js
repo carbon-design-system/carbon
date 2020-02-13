@@ -15,7 +15,7 @@ import {
   ArrowsVertical20 as Arrows,
 } from '@carbon/icons-react';
 import { sortStates } from './state/sorting';
-import { useColumnResizing } from './tools/columnResize';
+import { useResizedColumnWidth } from './tools/columnResize';
 import TableColumnResizer from './TableColumnResizer';
 
 const { prefix } = settings;
@@ -68,7 +68,7 @@ const TableHeaderResizable = React.forwardRef(function TableHeaderResizable(
   },
   ref
 ) {
-  const { colWidth, columnKeyResizeActive } = useColumnResizing(colKey);
+  const { colWidth, columnKeyResizeActive } = useResizedColumnWidth(colKey);
 
   if (isResizable) {
     const className = cx(headerClassName, {

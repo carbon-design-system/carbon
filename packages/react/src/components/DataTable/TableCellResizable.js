@@ -7,10 +7,10 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useColumnResizing } from './tools/columnResize';
+import { useResizedColumnWidth } from './tools/columnResize';
 
 const TableCellResizable = ({ children, colKey, isResizable, ...rest }) => {
-  const { colWidth } = useColumnResizing(colKey);
+  const { colWidth } = useResizedColumnWidth(colKey);
 
   if (isResizable && colWidth && colKey) {
     return (

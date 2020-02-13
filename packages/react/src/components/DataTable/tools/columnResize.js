@@ -6,7 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useContext, createContext, useReducer } from 'react';
+import React, {
+  useContext,
+  createContext,
+  useReducer,
+  useEffect,
+  useRef,
+} from 'react';
 import cloneDeep from 'lodash.clonedeep';
 
 // minimal column width
@@ -21,8 +27,8 @@ export const actionTypes = {
   START_RESIZE_ACTION: 'START_RESIZE_ACTION',
   END_RESIZE_ACTION: 'END_RESIZE_ACTION',
   UPDATE_COLWIDTH: 'UPDATE_COLWIDTH',
-  BATCH_SET_COLWIDTHS: 'BATCH_SET_COLWIDTHS',
-  SYNC_TABLE_WIDTH: 'SYNC_TABLE_WIDTH,',
+  UPDATE_COLWIDTH_FROM_ACTUAL: 'UPDATE_COLWIDTH_FROM_ACTUAL',
+  REDISTRIBUTE_TABLE_WIDTH: 'REDISTRIBUTE_TABLE_WIDTH,',
 };
 
 // context that holds the store
@@ -147,7 +153,7 @@ export const resizeReducer = (state, action) => {
     return clonedState;
   }
 
-  if (action.type === actionTypes.SYNC_TABLE_WIDTH) {
+  if (action.type === actionTypes.REDISTRIBUTE_TABLE_WIDTH) {
     const clonedState = cloneDeep(state);
 
     // compare actual table with with what we have stored
@@ -163,12 +169,17 @@ export const resizeReducer = (state, action) => {
     return clonedState;
   }
 
-  if (action.type === actionTypes.BATCH_SET_COLWIDTHS) {
+  if (action.type === actionTypes.UPDATE_COLWIDTH_FROM_ACTUAL) {
     const clonedState = cloneDeep(state);
-    Object.entries(action.colWidths).forEach(entry => {
-      const [key, width] = entry;
-      clonedState.columnsByKey[key].colWidth = width;
-      clonedState.columnsByKey[key].initialColWidth = width;
+
+    clonedState.allColumnKeys.forEach(key => {
+      const colRef = clonedState.columnsByKey[key].ref;
+      if (colRef.current) {
+        const curWidth =
+          colRef.current && colRef.current.getBoundingClientRect().width;
+        clonedState.columnsByKey[key].colWidth = curWidth;
+        clonedState.columnsByKey[key].initialColWidth = curWidth;
+      }
     });
     return clonedState;
   }
@@ -245,100 +256,109 @@ export function getColRefs(state) {
   }));
 }
 
-// the custom hook that provides the resizing functionality
-// including the width of the column
-export const useColumnResizing = colKey => {
+// the custom hook that provides the resizing callbacks for the resizer
+export const useColumnResizing = (colKey, headerRef) => {
   const context = useContext(ResizeContext);
-  if (!context) {
-    // no resizing context defined
-    return {
-      colWidth: 0,
-      ref: null,
-      columnKeyResizeActive: null,
-      initColumnResizing: () => {
-        /* empty */
-      },
-      cleanupColumnResizing: () => {
-        /* empty */
-      },
-      startResizeAction: () => {
-        /* empty */
-      },
-      endResizeAction: () => {
-        /* empty */
-      },
-      resizeColumn: () => {
-        /* empty */
-      },
-      syncOnWindowResize: () => {
-        /* empty */
-      },
-    };
-  }
 
-  const { state, dispatch } = context;
-  const col = state.columnsByKey[colKey];
+  useEffect(() => {
+    // initially add the new column to the store
+    if (context) {
+      const { dispatch } = context;
+      const colWidth =
+        headerRef &&
+        headerRef.current &&
+        headerRef.current.getBoundingClientRect().width;
+      dispatch({
+        type: actionTypes.ADD_COLUMN,
+        colKey,
+        ref: headerRef,
+        colWidth,
+      });
 
-  const getActualColWidths = () => {
-    const colWidths = {};
-    getColRefs(state).forEach(({ key, ref }) => {
-      const colWidth = ref.current && ref.current.getBoundingClientRect().width;
-      colWidths[key] = colWidth;
-    });
-    return colWidths;
-  };
+      return () => {
+        // finally remove the column from the store
+        dispatch({ type: actionTypes.REMOVE_COLUMN, colKey });
+      };
+    }
+  }, [colKey, context, headerRef]);
 
   return {
-    colWidth: col && col.colWidth,
-    ref: col && col.ref,
-    columnKeyResizeActive: state.resizeActivity.colKey,
-
-    // add a new column to the store
-    initColumnResizing: newRef => {
-      const colWidth =
-        newRef &&
-        newRef.current &&
-        newRef.current.getBoundingClientRect().width;
-      dispatch({ type: actionTypes.ADD_COLUMN, colKey, ref: newRef, colWidth });
-    },
-
-    // removes a column from the store
-    cleanupColumnResizing: () => {
-      dispatch({ type: actionTypes.REMOVE_COLUMN, colKey });
-    },
-
     // a resizing action has started on this column
     startResizeAction: initialPos => {
-      // sync column width in store with actual column width
-      // because they may not exactly align anymore
-      dispatch({
-        type: actionTypes.BATCH_SET_COLWIDTHS,
-        colWidths: getActualColWidths(),
-      });
-      dispatch({ type: actionTypes.START_RESIZE_ACTION, colKey, initialPos });
+      if (context) {
+        const { dispatch } = context;
+        // sync column width in store with actual column width as precaution
+        dispatch({ type: actionTypes.UPDATE_COLWIDTH_FROM_ACTUAL });
+        dispatch({ type: actionTypes.START_RESIZE_ACTION, colKey, initialPos });
+      }
     },
 
     // a resizing action has finishes on this column
     endResizeAction: () => {
-      dispatch({ type: actionTypes.END_RESIZE_ACTION, colKey });
+      if (context) {
+        const { dispatch } = context;
+        dispatch({ type: actionTypes.END_RESIZE_ACTION, colKey });
+      }
     },
 
     // change the column width by an increment
     resizeColumn: pos => {
-      dispatch({ type: actionTypes.UPDATE_COLWIDTH, colKey, pos });
+      if (context) {
+        const { dispatch } = context;
+        dispatch({ type: actionTypes.UPDATE_COLWIDTH, colKey, pos });
+      }
     },
+  };
+};
 
-    // sync stored column widths with resized table width
-    syncOnWindowResize: headerRef => {
-      const tr = headerRef.current.closest('tr');
-      if (tr) {
-        const { width } = tr.getBoundingClientRect();
+// the custom hook that provides only what we need in the header and cell
+export const useResizedColumnWidth = colKey => {
+  const context = useContext(ResizeContext);
+
+  if (!context) {
+    return {
+      colWidth: 0,
+      columnKeyResizeActive: false,
+    };
+  }
+
+  const { state } = context;
+  const col = state.columnsByKey[colKey];
+
+  return {
+    colWidth: col && col.colWidth,
+    columnKeyResizeActive: context && context.state.resizeActivity.colKey,
+  };
+};
+
+// the custom hook to be used in the table head that triggers on window resize
+export const useResizableColumnsTableHead = href => {
+  const tableHeadRef = useRef();
+  const context = useContext(ResizeContext);
+
+  useEffect(() => {
+    function handleWindowResize() {
+      if (context && tableHeadRef.current) {
+        const { dispatch } = context;
+        dispatch({ type: actionTypes.UPDATE_COLWIDTH_FROM_ACTUAL });
+        const { width } = tableHeadRef.current.getBoundingClientRect();
+        // distribute changed table to individual columns
         dispatch({
-          type: actionTypes.SYNC_TABLE_WIDTH,
-          colKey,
+          type: actionTypes.REDISTRIBUTE_TABLE_WIDTH,
           tableWidth: width,
         });
       }
-    },
+    }
+
+    // add resize listeners that distribute new width over columns
+    window.addEventListener('resize', handleWindowResize);
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, [context, href]);
+
+  return {
+    // reference to be used for <thead>
+    ref: tableHeadRef,
   };
 };

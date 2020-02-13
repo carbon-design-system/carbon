@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.TableHeadResizable should render 1`] = `
+<Table
+  isSortable={false}
+>
+  <table
+    className="bx--data-table bx--data-table--no-border"
+  >
+    <TableHeadResizable
+      className="custom-class"
+    >
+      <thead
+        className="custom-class"
+      />
+    </TableHeadResizable>
+  </table>
+</Table>
+`;
+
+exports[`DataTable.TableHeadResizable should render with isResizable 1`] = `
+<Table
+  isSortable={false}
+>
+  <table
+    className="bx--data-table bx--data-table--no-border"
+  >
+    <TableHeadResizable
+      className="custom-class"
+      isResizable={true}
+    >
+      <thead
+        className="custom-class"
+      />
+    </TableHeadResizable>
+  </table>
+</Table>
+`;

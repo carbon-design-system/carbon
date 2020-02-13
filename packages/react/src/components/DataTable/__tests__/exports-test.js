@@ -21,6 +21,7 @@ const blacklist = new Set([
   '__tests__',
   '__mocks__',
   'DataTable.js',
+  'TableHeadResizable.js',
   'TableCellResizable.js',
   'TableHeaderResizable.js',
   'TableColumnResizer.js',

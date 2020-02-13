@@ -7,13 +7,7 @@
 
 import React, { createRef } from 'react';
 
-import DataTable, {
-  Table,
-  TableBody,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '..';
+import DataTable, { Table, TableBody, TableContainer, TableRow } from '..';
 import { initialRows, headers } from './shared';
 
 // addition for column resizing
@@ -21,6 +15,7 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 import TableCellResizable from '../TableCellResizable';
 import TableHeaderResizable from '../TableHeaderResizable';
+import TableHeadResizable from '../TableHeadResizable';
 import { ResizeProvider } from '../tools/columnResize';
 
 export const getColKey = cellId => cellId.split(':')[1];
@@ -46,26 +41,26 @@ export default props => (
           {...getTableProps()}
           className={`${prefix}--data-table--resizable`}>
           <ResizeProvider>
-            <TableHead>
+            <TableHeadResizable isResizable>
               <TableRow>
                 {headers.map(header => (
                   <TableHeaderResizable
                     {...getHeaderProps({ header })}
                     ref={createRef()}
-                    isResizable={true}
+                    isResizable
                     colKey={header.key}>
                     {header.header}
                   </TableHeaderResizable>
                 ))}
               </TableRow>
-            </TableHead>
+            </TableHeadResizable>
             <TableBody>
               {rows.map(row => (
                 <TableRow {...getRowProps({ row })}>
                   {row.cells.map(cell => (
                     <TableCellResizable
                       key={cell.id}
-                      isResizable={true}
+                      isResizable
                       colKey={getColKey(cell.id)}>
                       {cell.value}
                     </TableCellResizable>

@@ -7,39 +7,19 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { settings } from 'carbon-components';
 import { useColumnResizing } from './tools/columnResize';
 const { prefix } = settings;
 
 // resizer component within table header
 
-const TableColumnResizer = ({ headerRef, colKey }) => {
+const TableColumnResizer = ({ colKey, headerRef }) => {
   const {
-    initColumnResizing,
-    cleanupColumnResizing,
     startResizeAction,
     endResizeAction,
     resizeColumn,
-    syncOnWindowResize,
-  } = useColumnResizing(colKey);
-
-  useEffect(() => {
-    // initially set width of our column
-    initColumnResizing(headerRef);
-    window.addEventListener('resize', handleWindowResize);
-    return () => {
-      window.removeEventListener('resize', handleWindowResize);
-      cleanupColumnResizing();
-    };
-
-    // disable lint rule since a ref may not be included in the dependencies
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const handleWindowResize = () => {
-    syncOnWindowResize(headerRef);
-  };
+  } = useColumnResizing(colKey, headerRef);
 
   const startResizing = ev => {
     startResizeAction(ev.clientX, headerRef);

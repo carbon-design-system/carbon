@@ -16,15 +16,9 @@ import columnResize from '../tools/columnResize';
 
 jest.mock('../tools/columnResize', () => {
   const hookReturnVal = {
-    colWidth: 100,
-    ref: null,
-    columnKeyResizeActive: null,
-    initColumnResizing: jest.fn(),
-    cleanupColumnResizing: jest.fn(),
     startResizeAction: jest.fn(),
     endResizeAction: jest.fn(),
     resizeColumn: jest.fn(),
-    syncOnWindowResize: jest.fn(),
   };
   return {
     hookReturnVal,
@@ -45,14 +39,6 @@ describe('DataTable.TableColumnResizer', () => {
 
   it('should render', () => {
     expect(wrapper).toMatchSnapshot();
-    expect(columnResize.hookReturnVal.initColumnResizing).toHaveBeenCalledTimes(
-      1
-    );
-
-    wrapper.unmount();
-    expect(
-      columnResize.hookReturnVal.cleanupColumnResizing
-    ).toHaveBeenCalledTimes(1);
   });
 
   it('should start resizing on mouse-down and stop on mouse-up', () => {
@@ -80,20 +66,5 @@ describe('DataTable.TableColumnResizer', () => {
     expect(document.onmousemove).toBeFalsy();
     expect(document.body.style.cursor).toEqual('default');
     wrapper.unmount();
-  });
-
-  it('should sync column widths on window resize', () => {
-    // mouse move is not caught with react so explicitely call it
-    global.dispatchEvent(new Event('resize'));
-    expect(columnResize.hookReturnVal.syncOnWindowResize).toHaveBeenCalledTimes(
-      1
-    );
-    wrapper.unmount();
-    jest.clearAllMocks();
-
-    global.dispatchEvent(new Event('resize'));
-    expect(columnResize.hookReturnVal.syncOnWindowResize).toHaveBeenCalledTimes(
-      0
-    );
   });
 });

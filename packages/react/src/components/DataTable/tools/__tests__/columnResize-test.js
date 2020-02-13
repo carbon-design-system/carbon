@@ -141,27 +141,14 @@ describe('column resizer reducer', () => {
   }
 
   function getStateFor3Columns(w1 = 100, w2 = 100, w3 = 100) {
-    const setWidthAction = {
-      type: actionTypes.BATCH_SET_COLWIDTHS,
-      colKey: key1,
-      colWidths: {
-        aKey: w1,
-        aKey2: w2,
-        aKey3: w3,
-      },
-    };
-
     const addAction1 = getAddAction(key1, ref1, w1);
     const addAction2 = getAddAction(key2, ref2, w2);
     const addAction3 = getAddAction(key3, ref3, w3);
 
     return resizeReducer(
       resizeReducer(
-        resizeReducer(
-          resizeReducer(resizeReducer(initialState, addAction1), addAction2),
-          addAction3
-        ),
-        setWidthAction
+        resizeReducer(resizeReducer(initialState, addAction1), addAction2),
+        addAction3
       ),
       startAction
     );
@@ -436,17 +423,28 @@ describe('column resizer reducer', () => {
     );
   });
 
-  it('should handle BATCH_SET_COLWIDTHS.', () => {
+  it('should handle UPDATE_COLWIDTH_FROM_ACTUAL.', () => {
+    ref1.current = {
+      getBoundingClientRect: () => ({
+        width: 150,
+      }),
+    };
+    ref2.current = {
+      getBoundingClientRect: () => ({
+        width: 200,
+      }),
+    };
+    ref3.current = {
+      getBoundingClientRect: () => ({
+        width: 250,
+      }),
+    };
+
     const nextState = getStateFor3Columns();
 
     const setAction = {
-      type: actionTypes.BATCH_SET_COLWIDTHS,
+      type: actionTypes.UPDATE_COLWIDTH_FROM_ACTUAL,
       colKey: key1,
-      colWidths: {
-        aKey: 150,
-        aKey2: 200,
-        aKey3: 250,
-      },
       tableWidth: 600,
     };
     const nextState2 = resizeReducer(nextState, setAction);
@@ -477,11 +475,11 @@ describe('column resizer reducer', () => {
     });
   });
 
-  it('should handle SYNC_TABLE_WIDTH.', () => {
+  it('should handle REDISTRIBUTE_TABLE_WIDTH.', () => {
     const nextState = getStateFor3Columns();
 
     const setAction = {
-      type: actionTypes.SYNC_TABLE_WIDTH,
+      type: actionTypes.REDISTRIBUTE_TABLE_WIDTH,
       tableWidth: 450, // +150
     };
     const nextState2 = resizeReducer(nextState, setAction);

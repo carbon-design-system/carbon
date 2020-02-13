@@ -23,7 +23,7 @@ jest.mock('../tools/columnResize', () => {
   };
   return {
     hookReturnVal,
-    useColumnResizing: () => hookReturnVal,
+    useResizedColumnWidth: () => hookReturnVal,
   };
 });
 
