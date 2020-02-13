@@ -228,7 +228,7 @@ export default class Dropdown extends React.Component {
           {...downshiftProps}
           onChange={this.handleOnChange}
           itemToString={itemToString}
-          defaultSelectedItem={initialSelectedItem}
+          initialSelectedItem={initialSelectedItem}
           selectedItem={selectedItem}>
           {({
             isOpen,

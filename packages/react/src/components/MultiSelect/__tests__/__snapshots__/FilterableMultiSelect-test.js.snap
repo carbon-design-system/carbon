@@ -57,9 +57,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
     >
       <Downshift
         defaultHighlightedIndex={null}
-        defaultInputValue=""
         defaultIsOpen={false}
-        defaultSelectedItem={null}
         environment={[Window]}
         getA11yStatusMessage={[Function]}
         highlightedIndex={null}

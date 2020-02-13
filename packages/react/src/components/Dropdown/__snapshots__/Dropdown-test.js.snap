@@ -48,9 +48,7 @@ exports[`Dropdown should render 1`] = `
   >
     <Downshift
       defaultHighlightedIndex={null}
-      defaultInputValue=""
       defaultIsOpen={false}
-      defaultSelectedItem={null}
       environment={[Window]}
       getA11yStatusMessage={[Function]}
       itemToString={[Function]}
@@ -232,9 +230,7 @@ exports[`Dropdown should render custom item components 1`] = `
   >
     <Downshift
       defaultHighlightedIndex={null}
-      defaultInputValue=""
       defaultIsOpen={false}
-      defaultSelectedItem={null}
       environment={[Window]}
       getA11yStatusMessage={[Function]}
       itemToString={[Function]}
@@ -595,9 +591,7 @@ exports[`Dropdown should render with strings as items 1`] = `
   >
     <Downshift
       defaultHighlightedIndex={null}
-      defaultInputValue=""
       defaultIsOpen={false}
-      defaultSelectedItem={null}
       environment={[Window]}
       getA11yStatusMessage={[Function]}
       itemToString={[Function]}
