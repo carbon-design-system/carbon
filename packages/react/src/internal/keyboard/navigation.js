@@ -24,7 +24,7 @@ import { match } from './match';
  * 	getNextIndex(keyCodes.RIGHT, 0, 4)
  */
 
-const getNextIndex = (key, index, arrayLength) => {
+export const getNextIndex = (key, index, arrayLength) => {
   if (match(key, ArrowRight)) {
     return (index + 1) % arrayLength;
   }
@@ -33,4 +33,30 @@ const getNextIndex = (key, index, arrayLength) => {
   }
 };
 
-export { getNextIndex };
+/**
+ * A flag `node.compareDocumentPosition(target)` returns,
+ * that indicates `target` is located earlier than `node` in the document or `target` contains `node`.
+ */
+export const DOCUMENT_POSITION_BROAD_PRECEDING =
+  // Checks `typeof Node` for `react-docgen`
+  typeof Node !== 'undefined' &&
+  Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
+
+/**
+ * A flag `node.compareDocumentPosition(target)` returns,
+ * that indicates `target` is located later than `node` in the document or `node` contains `target`.
+ */
+export const DOCUMENT_POSITION_BROAD_FOLLOWING =
+  // Checks `typeof Node` for `react-docgen`
+  typeof Node !== 'undefined' &&
+  Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
+
+/**
+ * CSS selector that selects major nodes that is sequential-focusable.
+ */
+export const selectorTabbable = `
+  a[href], area[href], input:not([disabled]):not([tabindex='-1']),
+  button:not([disabled]):not([tabindex='-1']),select:not([disabled]):not([tabindex='-1']),
+  textarea:not([disabled]):not([tabindex='-1']),
+  iframe, object, embed, *[tabindex]:not([tabindex='-1']), *[contenteditable=true]
+`;
