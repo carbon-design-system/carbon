@@ -134,9 +134,7 @@ function App({ meta }) {
                       <td className="icon-name">
                         <a href={`#${id}`}>{name}</a>
                       </td>
-                      <td className="icon-size">{`${attrs.width}x${
-                        attrs.height
-                      }`}</td>
+                      <td className="icon-size">{`${attrs.width}x${attrs.height}`}</td>
                       <td className="icon-preview-container">
                         <div className="icon-preview">{svg}</div>
                       </td>
@@ -201,22 +199,24 @@ function js2svg(descriptor) {
     attributes = {
       ...iconAttributes,
       style: style
-        .split(';')
-        .map(declaration => {
-          const [property, value] = declaration
-            .split(':')
-            .map(string => string.trim());
-          return {
-            [property]: value,
-          };
-        })
-        .reduce(
-          (acc, declaration) => ({
-            ...acc,
-            ...declaration,
-          }),
-          {}
-        ),
+        ? style
+            .split(';')
+            .map(declaration => {
+              const [property, value] = declaration
+                .split(':')
+                .map(string => string.trim());
+              return {
+                [property]: value,
+              };
+            })
+            .reduce(
+              (acc, declaration) => ({
+                ...acc,
+                ...declaration,
+              }),
+              {}
+            )
+        : null,
     };
   }
 
@@ -232,16 +232,16 @@ function format(attrs) {
 }
 
 function getBugTemplate(info, source) {
-  const url = new URL('https://github.com/carbon-design-system/carbon/issues/new');
+  const url = new URL(
+    'https://github.com/carbon-design-system/carbon/issues/new'
+  );
   const params = new URLSearchParams();
   params.append('title', `🔍 Visual bug for the \`${info.filename}\` icon`);
   params.append(
     'body',
     `<!-- Feel free to remove sections that aren't relevant. -->
 
-There is an issue for the \`${
-      info.basename
-    }\` icon when viewing [the elements demo](https://carbon-elements.netlify.com/icons/examples/preview/).
+There is an issue for the \`${info.basename}\` icon when viewing [the elements demo](https://carbon-elements.netlify.com/icons/examples/preview/).
 
 The source for this icon is available [here](${source}).
 

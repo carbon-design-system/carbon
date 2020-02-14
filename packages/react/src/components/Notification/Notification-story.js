@@ -35,6 +35,10 @@ const notificationProps = () => ({
     'Icon description (iconDescription)',
     'describes the close button'
   ),
+  statusIconDescription: text(
+    'Status icon description (statusIconDescription)',
+    'describes the status icon'
+  ),
   hideCloseButton: boolean('Hide close button (hideCloseButton)', false),
   onCloseButtonClick: action('onCloseButtonClick'),
 });
