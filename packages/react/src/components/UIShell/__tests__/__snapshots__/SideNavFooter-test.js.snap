@@ -3,7 +3,7 @@
 exports[`SideNavFooter should render 1`] = `
 <SideNavFooter
   assistiveText="open"
-  isExpanded={false}
+  expanded={false}
   onToggle={[MockFunction]}
 >
   <footer
@@ -60,6 +60,7 @@ exports[`SideNavFooter should render 1`] = `
 exports[`SideNavFooter should render 2`] = `
 <SideNavFooter
   assistiveText="close"
+  expanded={false}
   isExpanded={true}
   onToggle={[MockFunction]}
 >

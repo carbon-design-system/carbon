@@ -182,19 +182,10 @@ storiesOf('UI Shell', module)
                 isPersistent={false}>
                 <SideNavItems>
                   <HeaderSideNavItems>
-                    <HeaderMenuItem linkRole="link" href="#">
-                      Link 1
-                    </HeaderMenuItem>
-                    <HeaderMenuItem linkRole="link" href="#">
-                      Link 2
-                    </HeaderMenuItem>
-                    <HeaderMenuItem linkRole="link" href="#">
-                      Link 3
-                    </HeaderMenuItem>
-                    <HeaderMenu
-                      linkRole="link"
-                      aria-label="Link 4"
-                      menuLinkName="Link 4">
+                    <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+                    <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
                       <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
                       <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
                       <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
@@ -315,19 +306,10 @@ storiesOf('UI Shell', module)
                 isPersistent={false}>
                 <SideNavItems>
                   <HeaderSideNavItems>
-                    <HeaderMenuItem linkRole="link" href="#">
-                      Link 1
-                    </HeaderMenuItem>
-                    <HeaderMenuItem linkRole="link" href="#">
-                      Link 2
-                    </HeaderMenuItem>
-                    <HeaderMenuItem linkRole="link" href="#">
-                      Link 3
-                    </HeaderMenuItem>
-                    <HeaderMenu
-                      linkRole="link"
-                      aria-label="Link 4"
-                      menuLinkName="Link 4">
+                    <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+                    <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
                       <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
                       <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
                       <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
@@ -389,19 +371,10 @@ storiesOf('UI Shell', module)
                 expanded={isSideNavExpanded}>
                 <SideNavItems>
                   <HeaderSideNavItems hasDivider={true}>
-                    <HeaderMenuItem linkRole="link" href="#">
-                      Link 1
-                    </HeaderMenuItem>
-                    <HeaderMenuItem linkRole="link" href="#">
-                      Link 2
-                    </HeaderMenuItem>
-                    <HeaderMenuItem linkRole="link" href="#">
-                      Link 3
-                    </HeaderMenuItem>
-                    <HeaderMenu
-                      linkRole="link"
-                      aria-label="Link 4"
-                      menuLinkName="Link 4">
+                    <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+                    <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
                       <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
                       <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
                       <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
@@ -588,7 +561,7 @@ storiesOf('UI Shell', module)
           </HeaderGlobalAction>
         </HeaderGlobalBar>
         <HeaderPanel aria-label="Header Panel" expanded>
-          <Switcher role="menu" aria-label="Switcher Container">
+          <Switcher aria-label="Switcher Container">
             <SwitcherItem isSelected aria-label="Link 1" href="#">
               Link 1
             </SwitcherItem>
