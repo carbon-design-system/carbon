@@ -225,8 +225,11 @@
     width: rem(40px);
   }
 
+  // Vertical Variant
+
   .#{$prefix}--progress--vertical {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
@@ -270,7 +273,6 @@
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
     margin-top: auto;
-    position: initial;
     margin-left: 2.25rem;
   }
 
