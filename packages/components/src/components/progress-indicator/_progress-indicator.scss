@@ -232,10 +232,6 @@
     flex-direction: column;
   }
 
-  .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
-    padding-bottom: rem(24px);
-  }
-
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button {
     display: list-item;
@@ -277,7 +273,6 @@
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
-    top: 0;
     left: 0;
     height: 100%;
     width: 1px;
