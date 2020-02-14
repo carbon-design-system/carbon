@@ -10,6 +10,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import window from 'window-or-global';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 /**
  * The structure for the position of floating menu.
@@ -333,7 +336,25 @@ class FloatingMenu extends React.Component {
     if (typeof document !== 'undefined') {
       const { target } = this.props;
       return ReactDOM.createPortal(
-        this._getChildrenWithProps(),
+        <>
+          {/* Non-translatable: Focus management code makes this `<span>` not actually read by screen readers */}
+          <span
+            ref={this.startSentinel}
+            tabIndex="0"
+            role="link"
+            className={`${prefix}--visually-hidden`}>
+            Focus sentinel
+          </span>
+          {this._getChildrenWithProps()}
+          {/* Non-translatable: Focus management code makes this `<span>` not actually read by screen readers */}
+          <span
+            ref={this.endSentinel}
+            tabIndex="0"
+            role="link"
+            className={`${prefix}--visually-hidden`}>
+            Focus sentinel
+          </span>
+        </>,
         !target ? document.body : target()
       );
     }

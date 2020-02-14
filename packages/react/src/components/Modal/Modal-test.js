@@ -15,7 +15,7 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 // The modal is the 0th child inside the wrapper on account of focus-trap-react
-const getModal = wrapper => wrapper.childAt(0);
+const getModal = wrapper => wrapper.find('.bx--modal');
 
 describe('Modal', () => {
   describe('Renders as expected', () => {
