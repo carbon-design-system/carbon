@@ -36,6 +36,9 @@ export default config => fp => {
         // so user can move the keyboard cursor for editing dates
         // Workaround for: https://github.com/flatpickr/flatpickr/issues/1943
         event.stopPropagation();
+      } else if (match(event, keys.ArrowDown)) {
+        event.preventDefault();
+        fp.open();
       }
     }
   };
