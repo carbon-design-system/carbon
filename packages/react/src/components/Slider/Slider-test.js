@@ -150,10 +150,15 @@ describe('Slider', () => {
 
     describe('user is holding the handle', () => {
       it('does not call onRelease', () => {
+        const evt = {
+          type: 'mousedown',
+          clientX: '1000',
+          persist: jest.fn(),
+        };
         handleRelease.mockClear();
         expect(handleRelease).not.toHaveBeenCalled();
 
-        wrapper.instance().handleMouseStart();
+        wrapper.instance().handleMouseStart(evt);
         wrapper.instance().updatePosition();
         expect(handleRelease).not.toHaveBeenCalled();
       });
@@ -165,6 +170,7 @@ describe('Slider', () => {
         expect(handleRelease).not.toHaveBeenCalled();
         wrapper.setState({
           holding: false,
+          needsOnRelease: true,
         });
         wrapper.instance().updatePosition();
         expect(handleRelease).toHaveBeenCalled();

@@ -17,6 +17,38 @@ const defaultFormatLabel = (value, label) => {
   return typeof label === 'function' ? label(value) : `${value}${label}`;
 };
 
+/**
+ * Types of events used to indicate that the slider's value should get recalculated.
+ */
+const CALC_VALUE_EVENT_TYPES = Object.freeze([
+  'mousemove',
+  'mousedown',
+  'click',
+  'touchmove',
+  'touchstart',
+]);
+
+/**
+ * Notes on Slider event handling:
+ * - The Slider handles 6 types of events. Five of them are defined in the `CALC_VALUE_EVENT_TYPES`
+ *   array, while the last one, `mouseup`, is added on-the-fly in response to a `mousedown` event.
+ *   'mouseup' will remove itself as an event listener when fired.
+ *
+ * - All of the event handlers eventually drop into `this.updatePosition`.
+ *
+ * - `this.updatePosition` serves 3 main roles: 1) Calculating a new value and thumb position; 2)
+ *   Updating the state with the new values; 3) Requesting an animation frame from the browser,
+ *   during which the `onChange` and `onRelease` callbacks are potentially called.
+ *
+ * - `requestAnimationFrame` is used to rate-limit the number of events that are sent back to the
+ *   component user as the slider changes.
+ *
+ * - As the value/thumb position are updated, `this.state.needsOnChange` and
+ *   `this.state.needsOnRelease` may be set to true, indicating that during the next requested
+ *   animation frame, the `onChange` and/or `onRelease` callbacks should be called.
+ * - Events fired with types other than those listed in `CALC_VALUE_EVENT_TYPES` will not result in
+ *   the value/thumb position being recalculated.
+ */
 export default class Slider extends PureComponent {
   static propTypes = {
     /**
@@ -143,10 +175,11 @@ export default class Slider extends PureComponent {
   };
 
   state = {
-    dragging: false,
     holding: false,
     value: this.props.value,
     left: 0,
+    needsOnChange: false,
+    needsOnRelease: false,
   };
 
   static getDerivedStateFromProps({ value, min, max }, state) {
@@ -176,41 +209,56 @@ export default class Slider extends PureComponent {
       evt.persist();
     }
 
-    if (this.state.dragging) {
-      return;
-    }
-    this.setState({ dragging: true });
+    const setStateUpdater = (prevState, props) => {
+      // Note: In FF, `evt.target` of `mousemove` event can be `HTMLDocument` which doesn't have
+      // `classList`. One example is dragging out of browser viewport.
+      const fromInput =
+        evt &&
+        evt.target &&
+        evt.target.classList &&
+        evt.target.classList.contains('bx-slider-text-input');
 
-    this.handleDrag();
+      const { left, newValue: newSliderValue } = this.calcValue(
+        evt,
+        prevState,
+        props
+      );
 
-    requestAnimationFrame(() => {
-      this.setState((prevState, props) => {
-        // Note: In FF, `evt.target` of `mousemove` event can be `HTMLDocument` which doesn't have `classList`.
-        // One example is dragging out of browser viewport.
-        const fromInput =
-          evt &&
-          evt.target &&
-          evt.target.classList &&
-          evt.target.classList.contains('bx-slider-text-input');
-        const { left, newValue: newSliderValue } = this.calcValue(
-          evt,
-          prevState,
-          props
-        );
-        const newValue = fromInput ? Number(evt.target.value) : newSliderValue;
-        if (prevState.left === left && prevState.value === newValue) {
-          return { dragging: false };
+      const newValue = fromInput ? Number(evt.target.value) : newSliderValue;
+
+      if (prevState.left === left && prevState.value === newValue) {
+        return;
+      }
+
+      return {
+        left,
+        value: newValue,
+        needsOnChange: true,
+      };
+    };
+
+    const setStateCallback = () => {
+      this.handleDragComplete();
+
+      requestAnimationFrame(() => {
+        if (this.state.needsOnChange) {
+          if (typeof this.props.onChange === 'function') {
+            this.props.onChange({ value: this.state.value });
+          }
         }
-        if (typeof props.onChange === 'function') {
-          props.onChange({ value: newValue });
+        if (this.state.needsOnRelease) {
+          if (typeof this.props.onRelease === 'function') {
+            this.props.onRelease({ value: this.state.value });
+          }
         }
-        return {
-          dragging: false,
-          left,
-          value: newValue,
-        };
+        this.setState({
+          needsOnChange: false,
+          needsOnRelease: false,
+        });
       });
-    });
+    };
+
+    this.setState(setStateUpdater, setStateCallback);
   };
 
   calcValue = (evt, prevState, props) => {
@@ -248,7 +296,8 @@ export default class Slider extends PureComponent {
           newValue = Number(value) + stepMultiplied * direction;
         }
       }
-      if (type === 'mousemove' || type === 'click' || type === 'touchmove') {
+      // If the event type indicates that we should update, then recalculate the value.
+      if (CALC_VALUE_EVENT_TYPES.includes(type)) {
         const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
         const track = this.track.getBoundingClientRect();
         const ratio = (clientX - track.left) / track.width;
@@ -270,10 +319,38 @@ export default class Slider extends PureComponent {
     return { left, newValue };
   };
 
-  handleMouseStart = () => {
-    this.setState({
-      holding: true,
-    });
+  /**
+   * Check if dragging is done. If so, request an `onRelease` by setting `needsOnRelease` in the
+   * component state.
+   */
+  handleDragComplete = () => {
+    if (
+      typeof this.props.onRelease === 'function' &&
+      !this.props.disabled &&
+      !this.state.holding
+    ) {
+      this.setState({
+        needsOnRelease: true,
+      });
+    }
+  };
+
+  handleMouseStart = evt => {
+    if (!evt) {
+      return;
+    } else {
+      // Persist the synthetic event so it can be accessed below in setState
+      evt.persist();
+    }
+
+    this.setState(
+      {
+        holding: true,
+      },
+      () => {
+        this.updatePosition(evt);
+      }
+    );
 
     this.element.ownerDocument.addEventListener(
       'mousemove',
@@ -301,9 +378,12 @@ export default class Slider extends PureComponent {
   };
 
   handleTouchStart = () => {
-    this.setState({
-      holding: true,
-    });
+    this.setState(
+      {
+        holding: true,
+      },
+      this.updatePosition
+    );
     this.element.ownerDocument.addEventListener(
       'touchmove',
       this.updatePosition
@@ -348,16 +428,6 @@ export default class Slider extends PureComponent {
   handleChange = evt => {
     this.setState({ value: evt.target.value });
     this.updatePosition(evt);
-  };
-
-  handleDrag = () => {
-    if (
-      typeof this.props.onRelease === 'function' &&
-      !this.props.disabled &&
-      !this.state.holding
-    ) {
-      this.props.onRelease({ value: this.state.value });
-    }
   };
 
   render() {
@@ -433,6 +503,9 @@ export default class Slider extends PureComponent {
             }}
             onClick={this.updatePosition}
             onKeyPress={this.updatePosition}
+            onMouseDown={this.handleMouseStart}
+            onTouchStart={this.handleTouchStart}
+            onKeyDown={this.updatePosition}
             role="presentation"
             tabIndex={-1}
             {...other}>
@@ -445,9 +518,6 @@ export default class Slider extends PureComponent {
               aria-valuemin={min}
               aria-valuenow={value}
               style={thumbStyle}
-              onMouseDown={this.handleMouseStart}
-              onTouchStart={this.handleTouchStart}
-              onKeyDown={this.updatePosition}
             />
             <div
               className={`${prefix}--slider__track`}
