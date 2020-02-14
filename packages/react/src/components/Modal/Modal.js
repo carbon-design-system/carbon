@@ -10,10 +10,13 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
-import FocusTrap from 'focus-trap-react';
 import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
+import deprecate from '../../prop-types/deprecate';
 import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
+import wrapFocus, {
+  elementOrParentIsFloatingMenu,
+} from '../../internal/wrapFocus';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
@@ -138,10 +141,13 @@ export default class Modal extends Component {
     size: PropTypes.oneOf(['xs', 'sm', 'lg']),
 
     /**
-     * Specify whether the modal should use 3rd party `focus-trap-react` for the focus-wrap feature.
-     * NOTE: by default this is true.
+     * Deprecated; Used for advanced focus-wrapping feature using 3rd party library,
+     * but it's now achieved without a 3rd party library.
      */
-    focusTrap: PropTypes.bool,
+    focusTrap: deprecate(
+      PropTypes.bool,
+      `\nThe prop \`focusTrap\` for Modal has been deprecated, as the feature of \`focusTrap\` runs by default.`
+    ),
 
     /**
      * Specify whether the modal contains scrolling content
@@ -167,29 +173,17 @@ export default class Modal extends Component {
     modalHeading: '',
     modalLabel: '',
     selectorPrimaryFocus: '[data-modal-primary-focus]',
-    focusTrap: true,
     hasScrollingContent: false,
   };
 
   button = React.createRef();
   outerModal = React.createRef();
   innerModal = React.createRef();
+  startTrap = React.createRef();
+  endTrap = React.createRef();
   modalInstanceId = `modal-${getInstanceId()}`;
   modalLabelId = `${prefix}--modal-header__label--${this.modalInstanceId}`;
   modalHeadingId = `${prefix}--modal-header__heading--${this.modalInstanceId}`;
-
-  elementOrParentIsFloatingMenu = target => {
-    const {
-      selectorsFloatingMenus = [
-        `.${prefix}--overflow-menu-options`,
-        `.${prefix}--tooltip`,
-        '.flatpickr-calendar',
-      ],
-    } = this.props;
-    if (target && typeof target.closest === 'function') {
-      return selectorsFloatingMenus.some(selector => target.closest(selector));
-    }
-  };
 
   handleKeyDown = evt => {
     if (this.props.open) {
@@ -206,28 +200,32 @@ export default class Modal extends Component {
     if (
       this.innerModal.current &&
       !this.innerModal.current.contains(evt.target) &&
-      !this.elementOrParentIsFloatingMenu(evt.target)
+      !elementOrParentIsFloatingMenu(
+        evt.target,
+        this.props.selectorsFloatingMenus
+      )
     ) {
       this.props.onRequestClose(evt);
     }
   };
 
-  focusModal = () => {
-    if (this.outerModal.current) {
-      this.outerModal.current.focus();
-    }
-  };
-
-  handleBlur = evt => {
-    // Keyboard trap
-    if (
-      this.innerModal.current &&
-      this.props.open &&
-      evt.relatedTarget &&
-      !this.innerModal.current.contains(evt.relatedTarget) &&
-      !this.elementOrParentIsFloatingMenu(evt.relatedTarget)
-    ) {
-      this.focusModal();
+  handleBlur = ({
+    target: oldActiveNode,
+    relatedTarget: currentActiveNode,
+  }) => {
+    const { open, selectorsFloatingMenus } = this.props;
+    if (open && currentActiveNode && oldActiveNode) {
+      const { current: modalNode } = this.innerModal;
+      const { current: startTrapNode } = this.startTrap;
+      const { current: endTrapNode } = this.endTrap;
+      wrapFocus({
+        modalNode,
+        startTrapNode,
+        endTrapNode,
+        currentActiveNode,
+        oldActiveNode,
+        selectorsFloatingMenus,
+      });
     }
   };
 
@@ -277,9 +275,7 @@ export default class Modal extends Component {
     if (!this.props.open) {
       return;
     }
-    if (!this.props.focusTrap) {
-      this.focusButton(this.innerModal.current);
-    }
+    this.focusButton(this.innerModal.current);
   }
 
   handleTransitionEnd = evt => {
@@ -290,9 +286,7 @@ export default class Modal extends Component {
       this.outerModal.current.offsetHeight &&
       this.beingOpen
     ) {
-      if (!this.props.focusTrap) {
-        this.focusButton(evt.currentTarget);
-      }
+      this.focusButton(evt.currentTarget);
       this.beingOpen = false;
     }
   };
@@ -317,7 +311,6 @@ export default class Modal extends Component {
       selectorsFloatingMenus, // eslint-disable-line
       shouldSubmitOnEnter, // eslint-disable-line
       size,
-      focusTrap,
       hasScrollingContent,
       ...other
     } = this.props;
@@ -379,7 +372,8 @@ export default class Modal extends Component {
         role="dialog"
         className={containerClasses}
         aria-label={ariaLabel}
-        aria-modal="true">
+        aria-modal="true"
+        tabIndex="-1">
         <div className={`${prefix}--modal-header`}>
           {passiveModal && modalButton}
           {modalLabel && (
@@ -422,7 +416,7 @@ export default class Modal extends Component {
       </div>
     );
 
-    const modal = (
+    return (
       <div
         {...other}
         onKeyDown={this.handleKeyDown}
@@ -430,22 +424,26 @@ export default class Modal extends Component {
         onBlur={this.handleBlur}
         className={modalClasses}
         role="presentation"
-        tabIndex={-1}
         onTransitionEnd={this.props.open ? this.handleTransitionEnd : undefined}
         ref={this.outerModal}>
+        {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
+        <span
+          ref={this.startTrap}
+          tabIndex="0"
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
         {modalBody}
+        {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
+        <span
+          ref={this.endTrap}
+          tabIndex="0"
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
       </div>
-    );
-
-    return !focusTrap ? (
-      modal
-    ) : (
-      // `<FocusTrap>` has `active: true` in its `defaultProps`
-      <FocusTrap
-        active={!!open}
-        focusTrapOptions={{ initialFocus: this.initialFocus }}>
-        {modal}
-      </FocusTrap>
     );
   }
 }
