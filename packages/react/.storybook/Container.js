@@ -37,11 +37,6 @@ function Container({ story }) {
         }}>
         {story()}
       </div>
-      <input
-        aria-label="input-text-offleft"
-        type="text"
-        className={`${prefix}--visually-hidden`}
-      />
     </React.StrictMode>
   );
 }
