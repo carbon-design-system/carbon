@@ -13,6 +13,7 @@ import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
 import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
+import wrapFocus from '../../internal/wrapFocus';
 
 const { prefix } = settings;
 
@@ -27,6 +28,8 @@ export default class ComposedModal extends Component {
   outerModal = React.createRef();
   innerModal = React.createRef();
   button = React.createRef();
+  startSentinel = React.createRef();
+  endSentinel = React.createRef();
 
   static propTypes = {
     /**
@@ -78,19 +81,6 @@ export default class ComposedModal extends Component {
         };
   }
 
-  elementOrParentIsFloatingMenu = target => {
-    const {
-      selectorsFloatingMenus = [
-        `.${prefix}--overflow-menu-options`,
-        `.${prefix}--tooltip`,
-        '.flatpickr-calendar',
-      ],
-    } = this.props;
-    if (target && typeof target.closest === 'function') {
-      return selectorsFloatingMenus.some(selector => target.closest(selector));
-    }
-  };
-
   handleKeyDown = evt => {
     // Esc key
     if (evt.which === 27) {
@@ -109,22 +99,23 @@ export default class ComposedModal extends Component {
     }
   };
 
-  focusModal = () => {
-    if (this.outerModal.current) {
-      this.outerModal.current.focus();
-    }
-  };
-
-  handleBlur = evt => {
-    // Keyboard trap
-    if (
-      this.innerModal.current &&
-      this.props.open &&
-      evt.relatedTarget &&
-      !this.innerModal.current.contains(evt.relatedTarget) &&
-      !this.elementOrParentIsFloatingMenu(evt.relatedTarget)
-    ) {
-      this.focusModal();
+  handleBlur = ({
+    target: oldActiveNode,
+    relatedTarget: currentActiveNode,
+  }) => {
+    const { open, selectorsFloatingMenus } = this.props;
+    if (open && currentActiveNode && oldActiveNode) {
+      const { current: modalNode } = this.innerModal;
+      const { current: startSentinelNode } = this.startSentinel;
+      const { current: endSentinelNode } = this.endSentinel;
+      wrapFocus({
+        modalNode,
+        startSentinelNode,
+        endSentinelNode,
+        currentActiveNode,
+        oldActiveNode,
+        selectorsFloatingMenus,
+      });
     }
   };
 
@@ -240,11 +231,26 @@ export default class ComposedModal extends Component {
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         onTransitionEnd={open ? this.handleTransitionEnd : undefined}
-        className={modalClass}
-        tabIndex={-1}>
-        <div ref={this.innerModal} className={containerClass}>
+        className={modalClass}>
+        {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
+        <span
+          ref={this.startSentinel}
+          tabIndex="0"
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
+        <div ref={this.innerModal} className={containerClass} tabIndex={-1}>
           {childrenWithProps}
         </div>
+        {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
+        <span
+          ref={this.endSentinel}
+          tabIndex="0"
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
       </div>
     );
   }
