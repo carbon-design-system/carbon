@@ -11,7 +11,6 @@ import {
   actionTypes,
   initialState,
   resizeReducer,
-  getColRefs,
   distributeOverColumns,
 } from '../columnResize';
 
@@ -508,16 +507,6 @@ describe('column resizer reducer', () => {
         initialPos: 400,
       },
     });
-  });
-
-  it('should return column refs.', () => {
-    const nextState = getStateFor3Columns();
-
-    expect(getColRefs(nextState)).toEqual([
-      { key: key1, ref: ref1 },
-      { key: key2, ref: ref2 },
-      { key: key3, ref: ref3 },
-    ]);
   });
 
   it('should not handle unkown actions.', () => {

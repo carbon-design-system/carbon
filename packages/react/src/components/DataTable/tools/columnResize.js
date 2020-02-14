@@ -206,6 +206,7 @@ export function resetToInitialWidth(state, columnIds) {
 // over the columns specified in `columnIds` proportially to their initial width
 // and respect the minimal column width
 // returns the actually distributed width
+// only exported for tests
 export function distributeOverColumns(state, diff, columnIds) {
   if (diff) {
     // sum of width over minimal width
@@ -248,22 +249,14 @@ export const ResizeProvider = ({ children }) => {
   );
 };
 
-// currently only exported for testing
-export function getColRefs(state) {
-  return Object.keys(state.columnsByKey).map(colKey => ({
-    key: colKey,
-    ref: state.columnsByKey[colKey].ref,
-  }));
-}
-
 // the custom hook that provides the resizing callbacks for the resizer
 export const useColumnResizing = (colKey, headerRef) => {
   const context = useContext(ResizeContext);
+  const dispatch = context ? context.dispatch : null;
 
   useEffect(() => {
     // initially add the new column to the store
-    if (context) {
-      const { dispatch } = context;
+    if (dispatch) {
       const colWidth =
         headerRef &&
         headerRef.current &&
@@ -280,13 +273,14 @@ export const useColumnResizing = (colKey, headerRef) => {
         dispatch({ type: actionTypes.REMOVE_COLUMN, colKey });
       };
     }
-  }, [colKey, context, headerRef]);
+    // no direct dependency on context
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [colKey, dispatch, headerRef]);
 
   return {
     // a resizing action has started on this column
     startResizeAction: initialPos => {
-      if (context) {
-        const { dispatch } = context;
+      if (dispatch) {
         // sync column width in store with actual column width as precaution
         dispatch({ type: actionTypes.UPDATE_COLWIDTH_FROM_ACTUAL });
         dispatch({ type: actionTypes.START_RESIZE_ACTION, colKey, initialPos });
@@ -295,16 +289,14 @@ export const useColumnResizing = (colKey, headerRef) => {
 
     // a resizing action has finishes on this column
     endResizeAction: () => {
-      if (context) {
-        const { dispatch } = context;
+      if (dispatch) {
         dispatch({ type: actionTypes.END_RESIZE_ACTION, colKey });
       }
     },
 
     // change the column width by an increment
     resizeColumn: pos => {
-      if (context) {
-        const { dispatch } = context;
+      if (dispatch) {
         dispatch({ type: actionTypes.UPDATE_COLWIDTH, colKey, pos });
       }
     },
@@ -332,14 +324,14 @@ export const useResizedColumnWidth = colKey => {
 };
 
 // the custom hook to be used in the table head that triggers on window resize
-export const useResizableColumnsTableHead = href => {
+export const useResizableColumnsTableHead = () => {
   const tableHeadRef = useRef();
   const context = useContext(ResizeContext);
+  const dispatch = context ? context.dispatch : null;
 
   useEffect(() => {
     function handleWindowResize() {
-      if (context && tableHeadRef.current) {
-        const { dispatch } = context;
+      if (dispatch && tableHeadRef.current) {
         dispatch({ type: actionTypes.UPDATE_COLWIDTH_FROM_ACTUAL });
         const { width } = tableHeadRef.current.getBoundingClientRect();
         // distribute changed table to individual columns
@@ -355,7 +347,10 @@ export const useResizableColumnsTableHead = href => {
     return () => {
       window.removeEventListener('resize', handleWindowResize);
     };
-  }, [context, href]);
+
+    // no direct dependency on context
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   return {
     // reference to be used for <thead>
