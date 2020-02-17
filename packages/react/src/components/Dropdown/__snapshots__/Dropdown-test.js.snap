@@ -350,6 +350,7 @@ exports[`Dropdown should render custom item components 1`] = `
               role="listbox"
             >
               <ListBoxMenuItem
+                aria-selected={false}
                 id="downshift-4-item-0"
                 isActive={false}
                 isHighlighted={false}
@@ -357,13 +358,16 @@ exports[`Dropdown should render custom item components 1`] = `
                 onClick={[Function]}
                 onMouseDown={[Function]}
                 onMouseMove={[Function]}
+                role="option"
               >
                 <div
+                  aria-selected={false}
                   className="bx--list-box__menu-item"
                   id="downshift-4-item-0"
                   onClick={[Function]}
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
+                  role="option"
                 >
                   <div
                     className="bx--list-box__menu-item__option"
@@ -384,6 +388,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 </div>
               </ListBoxMenuItem>
               <ListBoxMenuItem
+                aria-selected={false}
                 id="downshift-4-item-1"
                 isActive={false}
                 isHighlighted={false}
@@ -391,13 +396,16 @@ exports[`Dropdown should render custom item components 1`] = `
                 onClick={[Function]}
                 onMouseDown={[Function]}
                 onMouseMove={[Function]}
+                role="option"
               >
                 <div
+                  aria-selected={false}
                   className="bx--list-box__menu-item"
                   id="downshift-4-item-1"
                   onClick={[Function]}
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
+                  role="option"
                 >
                   <div
                     className="bx--list-box__menu-item__option"
@@ -418,6 +426,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 </div>
               </ListBoxMenuItem>
               <ListBoxMenuItem
+                aria-selected={false}
                 id="downshift-4-item-2"
                 isActive={false}
                 isHighlighted={false}
@@ -425,13 +434,16 @@ exports[`Dropdown should render custom item components 1`] = `
                 onClick={[Function]}
                 onMouseDown={[Function]}
                 onMouseMove={[Function]}
+                role="option"
               >
                 <div
+                  aria-selected={false}
                   className="bx--list-box__menu-item"
                   id="downshift-4-item-2"
                   onClick={[Function]}
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
+                  role="option"
                 >
                   <div
                     className="bx--list-box__menu-item__option"
@@ -452,6 +464,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 </div>
               </ListBoxMenuItem>
               <ListBoxMenuItem
+                aria-selected={false}
                 id="downshift-4-item-3"
                 isActive={false}
                 isHighlighted={false}
@@ -459,13 +472,16 @@ exports[`Dropdown should render custom item components 1`] = `
                 onClick={[Function]}
                 onMouseDown={[Function]}
                 onMouseMove={[Function]}
+                role="option"
               >
                 <div
+                  aria-selected={false}
                   className="bx--list-box__menu-item"
                   id="downshift-4-item-3"
                   onClick={[Function]}
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
+                  role="option"
                 >
                   <div
                     className="bx--list-box__menu-item__option"
@@ -486,6 +502,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 </div>
               </ListBoxMenuItem>
               <ListBoxMenuItem
+                aria-selected={false}
                 id="downshift-4-item-4"
                 isActive={false}
                 isHighlighted={false}
@@ -493,13 +510,16 @@ exports[`Dropdown should render custom item components 1`] = `
                 onClick={[Function]}
                 onMouseDown={[Function]}
                 onMouseMove={[Function]}
+                role="option"
               >
                 <div
+                  aria-selected={false}
                   className="bx--list-box__menu-item"
                   id="downshift-4-item-4"
                   onClick={[Function]}
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
+                  role="option"
                 >
                   <div
                     className="bx--list-box__menu-item__option"
@@ -682,6 +702,7 @@ exports[`Dropdown should render with strings as items 1`] = `
               role="listbox"
             >
               <ListBoxMenuItem
+                aria-selected={false}
                 id="downshift-3-item-0"
                 isActive={false}
                 isHighlighted={false}
@@ -689,14 +710,17 @@ exports[`Dropdown should render with strings as items 1`] = `
                 onClick={[Function]}
                 onMouseDown={[Function]}
                 onMouseMove={[Function]}
+                role="option"
                 title="zar"
               >
                 <div
+                  aria-selected={false}
                   className="bx--list-box__menu-item"
                   id="downshift-3-item-0"
                   onClick={[Function]}
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
+                  role="option"
                   title="zar"
                 >
                   <div
@@ -707,6 +731,7 @@ exports[`Dropdown should render with strings as items 1`] = `
                 </div>
               </ListBoxMenuItem>
               <ListBoxMenuItem
+                aria-selected={false}
                 id="downshift-3-item-1"
                 isActive={false}
                 isHighlighted={false}
@@ -714,14 +739,17 @@ exports[`Dropdown should render with strings as items 1`] = `
                 onClick={[Function]}
                 onMouseDown={[Function]}
                 onMouseMove={[Function]}
+                role="option"
                 title="doz"
               >
                 <div
+                  aria-selected={false}
                   className="bx--list-box__menu-item"
                   id="downshift-3-item-1"
                   onClick={[Function]}
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
+                  role="option"
                   title="doz"
                 >
                   <div

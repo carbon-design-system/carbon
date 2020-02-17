@@ -293,13 +293,15 @@ export default class Dropdown extends React.Component {
                   <ListBox.Menu aria-labelledby={id} id={id}>
                     {items.map((item, index) => {
                       const itemProps = getItemProps({ item, index });
+                      const isHighlighted =
+                        highlightedIndex === index || selectedItem === item;
                       return (
                         <ListBox.MenuItem
                           key={itemProps.id}
                           isActive={selectedItem === item}
-                          isHighlighted={
-                            highlightedIndex === index || selectedItem === item
-                          }
+                          isHighlighted={isHighlighted}
+                          role="option"
+                          aria-selected={isHighlighted}
                           title={itemToElement ? item.text : itemToString(item)}
                           {...itemProps}>
                           {itemToElement ? (
