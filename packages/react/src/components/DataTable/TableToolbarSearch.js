@@ -101,7 +101,6 @@ const TableToolbarSearch = ({
   return (
     <div
       tabIndex={expandedState ? '-1' : tabIndex}
-      role="search"
       ref={searchRef}
       onClick={event => onClick(event)}
       onFocus={event => handleExpand(event, true)}
