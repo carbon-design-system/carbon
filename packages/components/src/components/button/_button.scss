@@ -206,6 +206,31 @@
     }
   }
 
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
+    .#{$prefix}--btn__icon
+    path,
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
+    .#{$prefix}--btn__icon
+    path,
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
+    .#{$prefix}--btn__icon {
+    fill: $disabled-02;
+  }
+
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled] {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
+    .#{$prefix}--assistive-text,
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]::before {
+    display: none;
+  }
+
   .#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
     padding-left: rem(15px);
     padding-right: rem(15px);

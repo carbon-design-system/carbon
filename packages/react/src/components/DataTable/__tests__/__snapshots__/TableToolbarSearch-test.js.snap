@@ -14,7 +14,6 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    role="search"
     tabIndex="0"
   >
     <Search
@@ -31,7 +30,9 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
       value=""
     >
       <div
+        aria-labelledby="custom-id-search"
         className="bx--search bx--search--sm custom-class"
+        role="search"
       >
         <ForwardRef(Search16)
           className="bx--search-magnifier"
@@ -68,6 +69,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
         <label
           className="bx--label"
           htmlFor="custom-id"
+          id="custom-id-search"
         >
           Filter table
         </label>
