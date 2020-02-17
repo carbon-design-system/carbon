@@ -145,7 +145,6 @@ class NumberInput extends Component {
     disabled: false,
     hideLabel: false,
     iconDescription: 'choose a number',
-    label: ' ',
     step: 1,
     invalid: false,
     invalidText: 'Provide invalidText',
