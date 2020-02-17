@@ -196,16 +196,12 @@ $list-box-menu-width: rem(300px);
 
   // Inline variant for a `list-box`
   .#{$prefix}--list-box.#{$prefix}--list-box--inline {
-    background-color: $ui-background;
+    background-color: transparent;
     border-width: 0;
 
     &:hover {
       background-color: $hover-ui;
     }
-  }
-
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--light {
-    background-color: $field-01;
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded {
