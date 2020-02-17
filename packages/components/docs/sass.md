@@ -3675,7 +3675,6 @@ $spacing-04: $carbon--spacing-04;
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [tabs [mixin]](#tabs-mixin)
 
 ### ✅spacing-05 [variable]
@@ -3700,6 +3699,7 @@ $spacing-05: $carbon--spacing-05;
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [modal [mixin]](#modal-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [select [mixin]](#select-mixin)
@@ -14921,8 +14921,8 @@ Data table core styles
 
   .#{$prefix}--data-table th,
   .#{$prefix}--data-table td {
-    padding-left: $spacing-04;
-    padding-right: $spacing-04;
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
     vertical-align: top;
     text-align: left;
   }
@@ -14954,7 +14954,7 @@ Data table core styles
     color: $text-02;
     border-top: 1px solid $ui-01;
     border-bottom: 1px solid $ui-03;
-    padding: rem(14px) $spacing-04;
+    padding: rem(14px) $spacing-05;
     padding-bottom: rem(13px);
 
     & + td:first-of-type {
@@ -15783,12 +15783,12 @@ Data table sort styles
   }
 
   .#{$prefix}--data-table--sort td {
-    padding-left: $spacing-03;
-    padding-right: $spacing-03;
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
   }
 
   .#{$prefix}--data-table--sort th:first-of-type .#{$prefix}--table-sort {
-    padding-left: $spacing-04;
+    padding-left: $spacing-05;
   }
 
   // -------------------------------------
@@ -15803,7 +15803,7 @@ Data table sort styles
     justify-content: space-between;
     width: 100%;
     color: $text-01;
-    padding: 0 $spacing-03;
+    padding: 0 $spacing-05;
     height: 100%;
     background-color: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive),
@@ -15944,10 +15944,10 @@ Data table sort styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [layout-04 [variable]](#layout-04-variable)
-  - [spacing-03 [variable]](#spacing-03-variable)
-  - [spacing-04 [variable]](#spacing-04-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [layout-01 [variable]](#layout-01-variable)
 
