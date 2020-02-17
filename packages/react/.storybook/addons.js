@@ -14,11 +14,8 @@ import '@storybook/addon-a11y/register';
 // Community addons
 import 'storybook-readme/register';
 
-if (process.env.CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES === 'true') {
-  import('./addon-carbon-theme/register').catch(error => {
-    console.error(error);
-  });
-}
+// Custom addons
+import './addon-carbon-theme/register';
 
 // These options used by storybook often conflict with developer tools,
 // conditional panels, or other things that get in the way of our workflow

@@ -10,6 +10,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import window from 'window-or-global';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 /**
  * The structure for the position of floating menu.
@@ -94,7 +97,7 @@ const getFloatingPosition = ({
   return {
     [DIRECTION_LEFT]: () => ({
       left: refLeft - width + scrollX - left,
-      top: refCenterVertical - height / 2 + scrollY + top,
+      top: refCenterVertical - height / 2 + scrollY + top - 9,
     }),
     [DIRECTION_TOP]: () => ({
       left: refCenterHorizontal - width / 2 + scrollX + left,
@@ -102,7 +105,7 @@ const getFloatingPosition = ({
     }),
     [DIRECTION_RIGHT]: () => ({
       left: refRight + scrollX + left,
-      top: refCenterVertical - height / 2 + scrollY + top,
+      top: refCenterVertical - height / 2 + scrollY + top + 3,
     }),
     [DIRECTION_BOTTOM]: () => ({
       left: refCenterHorizontal - width / 2 + scrollX + left,
@@ -333,7 +336,25 @@ class FloatingMenu extends React.Component {
     if (typeof document !== 'undefined') {
       const { target } = this.props;
       return ReactDOM.createPortal(
-        this._getChildrenWithProps(),
+        <>
+          {/* Non-translatable: Focus management code makes this `<span>` not actually read by screen readers */}
+          <span
+            ref={this.startSentinel}
+            tabIndex="0"
+            role="link"
+            className={`${prefix}--visually-hidden`}>
+            Focus sentinel
+          </span>
+          {this._getChildrenWithProps()}
+          {/* Non-translatable: Focus management code makes this `<span>` not actually read by screen readers */}
+          <span
+            ref={this.endSentinel}
+            tabIndex="0"
+            role="link"
+            className={`${prefix}--visually-hidden`}>
+            Focus sentinel
+          </span>
+        </>,
         !target ? document.body : target()
       );
     }

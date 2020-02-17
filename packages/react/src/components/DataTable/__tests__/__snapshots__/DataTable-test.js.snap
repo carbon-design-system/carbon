@@ -2245,7 +2245,6 @@ exports[`DataTable should render 1`] = `
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
-                  role="search"
                   tabIndex="0"
                 >
                   <Search
@@ -2261,7 +2260,9 @@ exports[`DataTable should render 1`] = `
                     value=""
                   >
                     <div
+                      aria-labelledby="custom-id-search"
                       className="bx--search bx--search--sm"
+                      role="search"
                     >
                       <ForwardRef(Search16)
                         className="bx--search-magnifier"
@@ -2298,6 +2299,7 @@ exports[`DataTable should render 1`] = `
                       <label
                         className="bx--label"
                         htmlFor="custom-id"
+                        id="custom-id-search"
                       >
                         Filter table
                       </label>
@@ -3242,7 +3244,6 @@ exports[`DataTable sticky header should render 1`] = `
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
-                  role="search"
                   tabIndex="0"
                 >
                   <Search
@@ -3258,7 +3259,9 @@ exports[`DataTable sticky header should render 1`] = `
                     value=""
                   >
                     <div
+                      aria-labelledby="custom-id-search"
                       className="bx--search bx--search--sm"
+                      role="search"
                     >
                       <ForwardRef(Search16)
                         className="bx--search-magnifier"
@@ -3295,6 +3298,7 @@ exports[`DataTable sticky header should render 1`] = `
                       <label
                         className="bx--label"
                         htmlFor="custom-id"
+                        id="custom-id-search"
                       >
                         Filter table
                       </label>
