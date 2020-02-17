@@ -6534,6 +6534,7 @@ $icon-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
@@ -7641,6 +7642,7 @@ $disabled-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
@@ -13062,6 +13064,31 @@ Button styles
     }
   }
 
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
+    .#{$prefix}--btn__icon
+    path,
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
+    .#{$prefix}--btn__icon
+    path,
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
+    .#{$prefix}--btn__icon {
+    fill: $disabled-02;
+  }
+
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled] {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
+    .#{$prefix}--assistive-text,
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]::before {
+    display: none;
+  }
+
   .#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
     padding-left: rem(15px);
     padding-right: rem(15px);
@@ -13162,6 +13189,8 @@ Button styles
   - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [focus [variable]](#focus-variable)
   - [ui-02 [variable]](#ui-02-variable)
+  - [icon-01 [variable]](#icon-01-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
   - [danger [variable]](#danger-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [active-danger [variable]](#active-danger-variable)
