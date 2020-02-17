@@ -1,6 +1,5 @@
 - name: add
   friendly_name: Add
-  usage: This is a description for usage
   aliases:
     - plus
     - positive
@@ -11,7 +10,6 @@
     - 32
 - name: add--alt
   friendly_name: Add alt
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -22,7 +20,6 @@
     - increase
 - name: add--filled
   friendly_name: Add filled
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -33,7 +30,6 @@
     - increase
 - name: app-switcher
   friendly_name: App switcher
-  usage: This is a description for usage
   aliases:
     - switcher
     - drawer
@@ -45,7 +41,6 @@
     - 32
 - name: apps
   friendly_name: Apps
-  usage: This is a description for usage
   aliases:
     - application
     - drawer
@@ -56,7 +51,6 @@
     - 32
 - name: arrow--down
   friendly_name: Arrow down
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -65,7 +59,6 @@
     - point
 - name: arrow--left
   friendly_name: Arrow left
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -74,7 +67,6 @@
     - point
 - name: arrow--right
   friendly_name: Arrow right
-  usage: This is a description for usage
   sizes:
     - 16
     - 20
@@ -85,7 +77,6 @@
     - point
 - name: arrow--up
   friendly_name: Arrow up
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -94,7 +85,6 @@
     - point
 - name: arrow--down-left
   friendly_name: Arrow down left
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -102,7 +92,6 @@
     - point
 - name: arrow--down-right
   friendly_name: Arrow down right
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -110,7 +99,6 @@
     - point
 - name: arrow--up-left
   friendly_name: Arrow up left
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -118,7 +106,6 @@
     - point
 - name: arrow--up-right
   friendly_name: Arrow up right
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -126,7 +113,6 @@
     - point
 - name: arrow--annotation
   friendly_name: Arrow annotation
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -134,7 +120,6 @@
     - point
 - name: arrows
   friendly_name: Arrows
-  usage: This is a description for usage
   aliases:
     - direction
     - point
@@ -143,7 +128,6 @@
     - 32
 - name: arrows--vertical
   friendly_name: Arrows vertical
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -152,7 +136,6 @@
     - point
 - name: arrows--horizontal
   friendly_name: Arrows horizontal
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -160,7 +143,6 @@
     - point
 - name: asleep
   friendly_name: Asleep
-  usage: This is a description for usage
   aliases:
     - night
     - moon
@@ -172,7 +154,6 @@
     - 32
 - name: asleep--filled
   friendly_name: Asleep filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -183,7 +164,6 @@
     - dark
 - name: attachment
   friendly_name: Attachment
-  usage: This is a description for usage
   aliases:
     - paper clip
     - attach
@@ -195,7 +175,6 @@
     - 32
 - name: awake
   friendly_name: Awake
-  usage: This is a description for usage
   aliases:
     - sun
     - active
@@ -206,7 +185,6 @@
     - 32
 - name: back-to-top
   friendly_name: Back to top
-  usage: This is a description for usage
   aliases:
     - up
     - scroll up
@@ -215,7 +193,6 @@
     - 32
 - name: calendar
   friendly_name: Calendar
-  usage: This is a description for usage
   aliases:
     - date
     - schedule
@@ -228,7 +205,6 @@
     - 32
 - name: caret--down
   friendly_name: Caret down
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -241,7 +217,6 @@
     - collapse
 - name: caret--left
   friendly_name: Caret left
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -254,7 +229,6 @@
     - collapse
 - name: caret--right
   friendly_name: Caret right
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -267,7 +241,6 @@
     - collapse
 - name: caret--sort--down
   friendly_name: Caret sort down
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -279,7 +252,6 @@
     - collapse
 - name: caret--sort--up
   friendly_name: Caret sort up
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -291,7 +263,6 @@
     - collapse
 - name: caret--sort
   friendly_name: Caret sort
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -303,7 +274,6 @@
     - collapse
 - name: caret--up
   friendly_name: Caret up
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -316,7 +286,6 @@
     - collapse
 - name: chat
   friendly_name: Chat
-  usage: This is a description for usage
   aliases:
     - sms
     - text
@@ -328,7 +297,6 @@
     - 32
 - name: checkmark
   friendly_name: Checkmark
-  usage: This is a description for usage
   aliases:
     - approved
     - 'yes'
@@ -341,7 +309,6 @@
     - 32
 - name: checkmark--filled
   friendly_name: Checkmark filled
-  usage: This is a description for usage
   sizes:
     - 16
     - 20
@@ -354,7 +321,6 @@
     - status
 - name: checkmark--outline
   friendly_name: Checkmark outline
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -365,7 +331,6 @@
     - status
 - name: chevron--down
   friendly_name: Chevron down
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -377,7 +342,6 @@
     - collapse
 - name: chevron--left
   friendly_name: Chevron left
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -389,7 +353,6 @@
     - collapse
 - name: chevron--mini
   friendly_name: Chevron mini
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -400,7 +363,6 @@
     - collapse
 - name: chevron--right
   friendly_name: Chevron right
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -412,7 +374,6 @@
     - collapse
 - name: chevron--sort--down
   friendly_name: Chevron sort down
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -423,7 +384,6 @@
     - collapse
 - name: chevron--sort--up
   friendly_name: Chevron sort up
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -434,7 +394,6 @@
     - collapse
 - name: chevron--sort
   friendly_name: Chevron sort
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -445,7 +404,6 @@
     - collapse
 - name: chevron--up
   friendly_name: Chevron up
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -457,7 +415,6 @@
     - collapse
 - name: close
   friendly_name: Close
-  usage: This is a description for usage
   aliases:
     - X
     - dismiss
@@ -469,7 +426,6 @@
     - 32
 - name: close--filled
   friendly_name: Close filled
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -481,7 +437,6 @@
     - ex
 - name: close--outline
   friendly_name: Close outline
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -493,7 +448,6 @@
     - ex
 - name: code
   friendly_name: Code
-  usage: This is a description for usage
   aliases:
     - </>
     - html
@@ -506,7 +460,6 @@
     - 32
 - name: copy
   friendly_name: Copy
-  usage: This is a description for usage
   aliases:
     - duplicate
     - clipboard
@@ -516,7 +469,6 @@
     - 32
 - name: copy--file
   friendly_name: Copy file
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -526,7 +478,6 @@
     - copied
 - name: delete
   friendly_name: Delete
-  usage: This is a description for usage
   aliases:
     - trash can
     - remove
@@ -537,7 +488,6 @@
     - 32
 - name: document
   friendly_name: Document
-  usage: This is a description for usage
   aliases:
     - file
     - doc
@@ -547,7 +497,6 @@
     - 32
 - name: document--add
   friendly_name: Document add
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -556,7 +505,6 @@
     - paper
 - name: document--blank
   friendly_name: Document blank
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -565,7 +513,6 @@
     - paper
 - name: document--export
   friendly_name: Document export
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -574,7 +521,6 @@
     - paper
 - name: document--import
   friendly_name: Document import
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -583,7 +529,6 @@
     - paper
 - name: document--subtract
   friendly_name: Document subtract
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -592,7 +537,6 @@
     - paper
 - name: document--tasks
   friendly_name: Document tasks
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -601,7 +545,6 @@
     - paper
 - name: down-to-bottom
   friendly_name: Down to bottom
-  usage: This is a description for usage
   aliases:
     - jump to bottom
     - down
@@ -611,7 +554,6 @@
     - 32
 - name: download
   friendly_name: Download
-  usage: This is a description for usage
   aliases:
     - install
   sizes:
@@ -619,7 +561,6 @@
     - 32
 - name: draggable
   friendly_name: Draggable
-  usage: This is a description for usage
   aliases:
     - handle
     - drag
@@ -628,7 +569,6 @@
     - 32
 - name: edit
   friendly_name: Edit
-  usage: This is a description for usage
   aliases:
     - modify
     - pencil
@@ -638,7 +578,6 @@
     - 32
 - name: edit--off
   friendly_name: Edit off
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -648,7 +587,6 @@
     - change
 - name: email
   friendly_name: Email
-  usage: This is a description for usage
   aliases:
     - mail
     - contact
@@ -660,7 +598,6 @@
     - 32
 - name: error
   friendly_name: Error
-  usage: This is a description for usage
   aliases:
     - state
     - stop
@@ -670,7 +607,6 @@
     - 32
 - name: error--filled
   friendly_name: Error filled
-  usage: This is a description for usage
   sizes:
     - 16
     - 20
@@ -683,7 +619,6 @@
     - issue
 - name: error--outline
   friendly_name: Error outline
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -694,7 +629,6 @@
     - issue
 - name: export
   friendly_name: Export
-  usage: This is a description for usage
   aliases:
     - ship
     - send
@@ -704,7 +638,6 @@
     - 32
 - name: fade
   friendly_name: Fade
-  usage: This is a description for usage
   aliases:
     - dim
     - vanish
@@ -716,7 +649,6 @@
     - 32
 - name: favorite
   friendly_name: Favorite
-  usage: This is a description for usage
   aliases:
     - heart
     - save
@@ -728,7 +660,6 @@
     - 32
 - name: favorite--filled
   friendly_name: Favorite filled
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -740,7 +671,6 @@
     - bookmark
 - name: folder
   friendly_name: Folder
-  usage: This is a description for usage
   aliases:
     - file
     - save
@@ -751,7 +681,6 @@
     - 32
 - name: folder--add
   friendly_name: Folder add
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -762,7 +691,6 @@
     - organize
 - name: folder--details
   friendly_name: Folder details
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -772,7 +700,6 @@
     - organize
 - name: folder--off
   friendly_name: Folder off
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -782,7 +709,6 @@
     - organize
 - name: folder--shared
   friendly_name: Folder shared
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -792,7 +718,6 @@
     - organize
 - name: forum
   friendly_name: Forum
-  usage: This is a description for usage
   aliases:
     - chat
     - talk
@@ -803,7 +728,6 @@
     - 32
 - name: grid
   friendly_name: Grid
-  usage: This is a description for usage
   aliases:
     - align
     - boxes
@@ -815,7 +739,6 @@
     - 32
 - name: help
   friendly_name: Help
-  usage: This is a description for usage
   aliases:
     - support
     - question
@@ -826,7 +749,6 @@
     - 32
 - name: help--filled
   friendly_name: Help filled
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -837,7 +759,6 @@
     - more info
 - name: information
   friendly_name: Information
-  usage: This is a description for usage
   aliases:
     - info
     - learn
@@ -849,7 +770,6 @@
     - 32
 - name: information--filled
   friendly_name: Information filled
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -861,7 +781,6 @@
     - help
 - name: interactions
   friendly_name: Interactions
-  usage: This is a description for usage
   aliases:
     - statistics interaction
   sizes:
@@ -869,7 +788,6 @@
     - 32
 - name: launch
   friendly_name: Launch
-  usage: This is a description for usage
   aliases:
     - open
     - new window
@@ -880,7 +798,6 @@
     - 32
 - name: light
   friendly_name: Light
-  usage: This is a description for usage
   aliases:
     - bright
     - sun
@@ -894,7 +811,6 @@
     - 32
 - name: light--filled
   friendly_name: Light filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -907,7 +823,6 @@
     - lamp
 - name: list
   friendly_name: List
-  usage: This is a description for usage
   aliases:
     - bullet
     - agenda
@@ -921,7 +836,6 @@
     - 32
 - name: list--bulleted
   friendly_name: List bulleted
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -936,7 +850,6 @@
     - tally
 - name: list--boxes
   friendly_name: List boxes
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -950,7 +863,6 @@
     - tally
 - name: list--checked
   friendly_name: List checked
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -964,7 +876,6 @@
     - tally
 - name: list--dropdown
   friendly_name: List dropdown
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -978,7 +889,6 @@
     - tally
 - name: list--numbered
   friendly_name: List numbered
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -992,7 +902,6 @@
     - tally
 - name: locked
   friendly_name: Locked
-  usage: This is a description for usage
   aliases:
     - lock
     - seal
@@ -1004,7 +913,6 @@
     - 32
 - name: maximize
   friendly_name: Maximize
-  usage: This is a description for usage
   aliases:
     - enlarge
     - full screen
@@ -1018,7 +926,6 @@
     - 32
 - name: menu
   friendly_name: Menu
-  usage: This is a description for usage
   aliases:
     - left nav
     - drawer
@@ -1032,7 +939,6 @@
     - 32
 - name: minimize
   friendly_name: Minimize
-  usage: This is a description for usage
   aliases:
     - close
     - small
@@ -1043,7 +949,6 @@
     - 32
 - name: misuse
   friendly_name: Misuse
-  usage: This is a description for usage
   aliases:
     - X
     - close
@@ -1056,7 +961,6 @@
     - 32
 - name: misuse--outline
   friendly_name: Misuse outline
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1067,7 +971,6 @@
     - don't
 - name: misuse--alt
   friendly_name: Misuse alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1077,7 +980,6 @@
     - don't
 - name: new-tab
   friendly_name: New tab
-  usage: This is a description for usage
   aliases:
     - open
     - expand
@@ -1089,7 +991,6 @@
     - 32
 - name: nominal
   friendly_name: Nominal
-  usage: This is a description for usage
   aliases:
     - nominal data
   sizes:
@@ -1097,7 +998,6 @@
     - 32
 - name: notification
   friendly_name: Notification
-  usage: This is a description for usage
   aliases:
     - alert
     - bell
@@ -1110,7 +1010,6 @@
     - 32
 - name: notification--off
   friendly_name: Notification off
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1123,7 +1022,6 @@
     - noise
 - name: notification--filled
   friendly_name: Notification filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1135,7 +1033,6 @@
     - noise
 - name: notification--new
   friendly_name: Notification new
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1147,7 +1044,6 @@
     - noise
 - name: notification--off--filled
   friendly_name: Notification off filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1159,7 +1055,6 @@
     - noise
 - name: ordinal
   friendly_name: Ordinal
-  usage: This is a description for usage
   aliases:
     - ordinal data
   sizes:
@@ -1167,7 +1062,6 @@
     - 32
 - name: overflow-menu--horizontal
   friendly_name: Overflow menu horizontal
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1178,7 +1072,6 @@
     - hidden
 - name: overflow-menu--vertical
   friendly_name: Overflow menu vertical
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1189,7 +1082,6 @@
     - hidden
 - name: pause
   friendly_name: Pause
-  usage: This is a description for usage
   aliases:
     - stop
     - play
@@ -1200,7 +1092,6 @@
     - 32
 - name: pause--outline--filled
   friendly_name: Pause outline filled
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1211,7 +1102,6 @@
     - control
 - name: pause--outline
   friendly_name: Pause outline
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1222,7 +1112,6 @@
     - control
 - name: pause--filled
   friendly_name: Pause filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1232,7 +1121,6 @@
     - control
 - name: play
   friendly_name: Play
-  usage: This is a description for usage
   aliases:
     - start
     - stop
@@ -1243,7 +1131,6 @@
     - 32
 - name: play--filled
   friendly_name: Play filled
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1254,7 +1141,6 @@
     - control
 - name: play--outline--filled
   friendly_name: Play outline filled
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1265,7 +1151,6 @@
     - control
 - name: play--outline
   friendly_name: Play outline
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1276,7 +1161,6 @@
     - control
 - name: play--filled--alt
   friendly_name: Play filled alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1286,7 +1170,6 @@
     - control
 - name: power
   friendly_name: Power
-  usage: This is a description for usage
   aliases:
     - 'on'
     - 'off'
@@ -1297,7 +1180,6 @@
     - 32
 - name: redo
   friendly_name: Redo
-  usage: This is a description for usage
   aliases:
     - restart
     - return
@@ -1311,7 +1193,6 @@
     - 32
 - name: restart
   friendly_name: Restart
-  usage: This is a description for usage
   aliases:
     - undo
     - rever
@@ -1321,7 +1202,6 @@
     - 32
 - name: save
   friendly_name: Save
-  usage: This is a description for usage
   aliases:
     - floppy
     - floppy disk
@@ -1337,7 +1217,6 @@
     - 32
 - name: save--annotation
   friendly_name: Save annotation
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1350,7 +1229,6 @@
     - preserve
 - name: save--image
   friendly_name: Save image
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1363,7 +1241,6 @@
     - preserve
 - name: save--series
   friendly_name: Save series
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1376,7 +1253,6 @@
     - preserve
 - name: search
   friendly_name: Search
-  usage: This is a description for usage
   aliases:
     - find
     - investigate
@@ -1387,7 +1263,6 @@
     - 32
 - name: settings
   friendly_name: Settings
-  usage: This is a description for usage
   aliases:
     - preferences
     - options
@@ -1398,7 +1273,6 @@
     - 32
 - name: settings--adjust
   friendly_name: Settings adjust
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1409,7 +1283,6 @@
     - gear
 - name: star
   friendly_name: Star
-  usage: This is a description for usage
   aliases:
     - favorite
     - progress
@@ -1422,7 +1295,6 @@
     - 32
 - name: star--filled
   friendly_name: Star filled
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1435,7 +1307,6 @@
     - starred
 - name: star--half
   friendly_name: Star half
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1448,7 +1319,6 @@
     - starred
 - name: stop
   friendly_name: Stop
-  usage: This is a description for usage
   aliases:
     - block
     - break
@@ -1462,7 +1332,6 @@
     - 32
 - name: stop--filled
   friendly_name: Stop filled
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1476,7 +1345,6 @@
     - conclude
 - name: stop--outline--filled
   friendly_name: Stop outline filled
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1490,7 +1358,6 @@
     - conclude
 - name: stop--outline
   friendly_name: Stop outline
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1504,7 +1371,6 @@
     - conclude
 - name: stop--filled--alt
   friendly_name: Stop filled alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1517,7 +1383,6 @@
     - conclude
 - name: subtract
   friendly_name: Subtract
-  usage: This is a description for usage
   aliases:
     - minus
     - remove
@@ -1534,7 +1399,6 @@
     - 32
 - name: subtract--alt
   friendly_name: Subtract alt
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1551,7 +1415,6 @@
     - delete
 - name: switcher
   friendly_name: Switcher
-  usage: This is a description for usage
   aliases:
     - switcher
   sizes:
@@ -1561,7 +1424,6 @@
     - 32
 - name: trash-can
   friendly_name: Trash can
-  usage: This is a description for usage
   aliases:
     - trash
     - waste
@@ -1576,7 +1438,6 @@
     - 32
 - name: undo
   friendly_name: Undo
-  usage: This is a description for usage
   aliases:
     - go back
     - revert
@@ -1588,7 +1449,6 @@
     - 32
 - name: unlocked
   friendly_name: Unlocked
-  usage: This is a description for usage
   aliases:
     - open
     - lock
@@ -1598,7 +1458,6 @@
     - 32
 - name: up-to-top
   friendly_name: Up to top
-  usage: This is a description for usage
   aliases:
     - top
     - top of page
@@ -1610,7 +1469,6 @@
     - 32
 - name: upload
   friendly_name: Upload
-  usage: This is a description for usage
   aliases:
     - transfer
     - connect
@@ -1624,7 +1482,6 @@
     - 32
 - name: user
   friendly_name: User
-  usage: This is a description for usage
   aliases:
     - person
     - avatar
@@ -1639,7 +1496,6 @@
     - 32
 - name: user--avatar
   friendly_name: User avatar
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1654,7 +1510,6 @@
     - my account
 - name: user--activity
   friendly_name: User activity
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1668,7 +1523,6 @@
     - my account
 - name: user--admin
   friendly_name: User admin
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1682,7 +1536,6 @@
     - my account
 - name: user--avatar--filled--alt
   friendly_name: User avatar filled alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1696,7 +1549,6 @@
     - my account
 - name: user--avatar--filled
   friendly_name: User avatar filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1710,7 +1562,6 @@
     - my account
 - name: user--certification
   friendly_name: User certification
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1724,7 +1575,6 @@
     - my account
 - name: user--data
   friendly_name: User data
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1738,7 +1588,6 @@
     - my account
 - name: user--favorite--alt--filled
   friendly_name: User favorite alt filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1752,7 +1601,6 @@
     - my account
 - name: user--favorite--alt
   friendly_name: User favorite alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1766,7 +1614,6 @@
     - my account
 - name: user--favorite
   friendly_name: User favorite
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1780,7 +1627,6 @@
     - my account
 - name: user--filled
   friendly_name: User filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1794,7 +1640,6 @@
     - my account
 - name: user--follow
   friendly_name: User follow
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1808,7 +1653,6 @@
     - my account
 - name: user--identification
   friendly_name: User identification
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1822,7 +1666,6 @@
     - my account
 - name: user--online
   friendly_name: User online
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1836,7 +1679,6 @@
     - my account
 - name: user--profile
   friendly_name: User profile
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1850,7 +1692,6 @@
     - my account
 - name: user--role
   friendly_name: User role
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1864,7 +1705,6 @@
     - my account
 - name: user--simulation
   friendly_name: User simulation
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1878,7 +1718,6 @@
     - my account
 - name: user--x-ray
   friendly_name: User x ray
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1892,7 +1731,6 @@
     - my account
 - name: view
   friendly_name: View
-  usage: This is a description for usage
   aliases:
     - eye
     - eyeball
@@ -1905,7 +1743,6 @@
     - 32
 - name: view--off
   friendly_name: View off
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1918,7 +1755,6 @@
     - visible
 - name: view--filled
   friendly_name: View filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1930,7 +1766,6 @@
     - visible
 - name: view--mode-1
   friendly_name: View mode 1
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1942,7 +1777,6 @@
     - visible
 - name: view--mode-2
   friendly_name: View mode 2
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1954,7 +1788,6 @@
     - visible
 - name: view--off--filled
   friendly_name: View off filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -1966,7 +1799,6 @@
     - visible
 - name: warning
   friendly_name: Warning
-  usage: This is a description for usage
   aliases:
     - halt
     - stop
@@ -1980,7 +1812,6 @@
     - 32
 - name: warning--alt--filled
   friendly_name: Warning alt filled
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -1994,7 +1825,6 @@
     - notification
 - name: warning--alt
   friendly_name: Warning alt
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -2008,7 +1838,6 @@
     - notification
 - name: warning--filled
   friendly_name: Warning filled
-  usage: This is a description for usage
   sizes:
     - 16
     - 20
@@ -2024,7 +1853,6 @@
     - notification
 - name: warning--alt-inverted--filled
   friendly_name: Warning alt inverted filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2037,7 +1865,6 @@
     - notification
 - name: warning--alt-inverted
   friendly_name: Warning alt inverted
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2050,7 +1877,6 @@
     - notification
 - name: zoom--in
   friendly_name: Zoom in
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -2062,7 +1888,6 @@
     - detail
 - name: zoom--out
   friendly_name: Zoom out
-  usage: This is a description for usage
   sizes:
     - 16
     - 32
@@ -2074,7 +1899,6 @@
     - detail
 - name: zoom--reset
   friendly_name: Zoom reset
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2085,7 +1909,6 @@
     - detail
 - name: time
   friendly_name: Time
-  usage: This is a description for usage
   aliases:
     - clock
     - hour
@@ -2096,7 +1919,6 @@
     - 32
 - name: 4K
   friendly_name: 4 k
-  usage: This is a description for usage
   aliases:
     - four k
     - resolution
@@ -2107,7 +1929,6 @@
     - 32
 - name: 4K--filled
   friendly_name: 4 k filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2118,7 +1939,6 @@
     - high definition
 - name: API--1
   friendly_name: Api 1
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2131,7 +1951,6 @@
     - file type
 - name: CAD
   friendly_name: Cad
-  usage: This is a description for usage
   aliases:
     - computer aided design
     - canada
@@ -2146,14 +1965,12 @@
     - 32
 - name: CDA
   friendly_name: Cda
-  usage: This is a description for usage
   aliases:
     - CDA
   sizes:
     - 32
 - name: CSV
   friendly_name: Csv
-  usage: This is a description for usage
   aliases:
     - file
     - file type
@@ -2166,14 +1983,12 @@
     - 32
 - name: DOC
   friendly_name: Doc
-  usage: This is a description for usage
   aliases:
     - DOC
   sizes:
     - 32
 - name: DVR
   friendly_name: Dvr
-  usage: This is a description for usage
   aliases:
     - record
     - digital
@@ -2185,7 +2000,6 @@
     - 32
 - name: GIF
   friendly_name: Gif
-  usage: This is a description for usage
   aliases:
     - file
     - file type
@@ -2194,7 +2008,6 @@
     - 32
 - name: HD
   friendly_name: Hd
-  usage: This is a description for usage
   aliases:
     - high
     - def
@@ -2205,7 +2018,6 @@
     - 32
 - name: HD--filled
   friendly_name: Hd filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2216,7 +2028,6 @@
     - 4K
 - name: HDR
   friendly_name: Hdr
-  usage: This is a description for usage
   aliases:
     - high
     - dynamic
@@ -2227,7 +2038,6 @@
     - 32
 - name: HTTP
   friendly_name: Http
-  usage: This is a description for usage
   aliases:
     - internet
     - web
@@ -2240,7 +2050,6 @@
     - 32
 - name: ISO
   friendly_name: Iso
-  usage: This is a description for usage
   aliases:
     - photo
     - sensitivity
@@ -2250,7 +2059,6 @@
     - 32
 - name: ISO--filled
   friendly_name: Iso filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2260,7 +2068,6 @@
     - camera
 - name: ISO--outline
   friendly_name: Iso outline
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2270,7 +2077,6 @@
     - camera
 - name: JPG
   friendly_name: Jpg
-  usage: This is a description for usage
   aliases:
     - file
     - type
@@ -2284,7 +2090,6 @@
     - 32
 - name: JSON
   friendly_name: Json
-  usage: This is a description for usage
   aliases:
     - javascript
     - object
@@ -2297,7 +2102,6 @@
     - 32
 - name: MOV
   friendly_name: Mov
-  usage: This is a description for usage
   aliases:
     - movie
     - video
@@ -2309,7 +2113,6 @@
     - 32
 - name: MP3
   friendly_name: Mp3
-  usage: This is a description for usage
   aliases:
     - music
     - audio
@@ -2321,7 +2124,6 @@
     - 32
 - name: MP4
   friendly_name: Mp4
-  usage: This is a description for usage
   aliases:
     - movie
     - video
@@ -2333,21 +2135,18 @@
     - 32
 - name: MPEG
   friendly_name: Mpeg
-  usage: This is a description for usage
   aliases:
     - MPEG
   sizes:
     - 32
 - name: MPG2
   friendly_name: Mpg2
-  usage: This is a description for usage
   aliases:
     - MPG2
   sizes:
     - 32
 - name: PDF
   friendly_name: Pdf
-  usage: This is a description for usage
   aliases:
     - document
     - doc
@@ -2359,7 +2158,6 @@
     - 32
 - name: PNG
   friendly_name: Png
-  usage: This is a description for usage
   aliases:
     - file
     - type
@@ -2373,14 +2171,12 @@
     - 32
 - name: PPT
   friendly_name: Ppt
-  usage: This is a description for usage
   aliases:
     - PPT
   sizes:
     - 32
 - name: H
   friendly_name: H
-  usage: This is a description for usage
   aliases:
     - letter
     - alphabet
@@ -2388,7 +2184,6 @@
     - 32
 - name: S
   friendly_name: S
-  usage: This is a description for usage
   aliases:
     - standard
     - letter
@@ -2398,7 +2193,6 @@
     - 32
 - name: S--alt
   friendly_name: S alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2408,7 +2202,6 @@
     - alt
 - name: T
   friendly_name: T
-  usage: This is a description for usage
   aliases:
     - letter
     - alphabet
@@ -2417,7 +2210,6 @@
     - 32
 - name: T--alt
   friendly_name: T alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2426,28 +2218,24 @@
     - alt
 - name: U1
   friendly_name: U1
-  usage: This is a description for usage
   aliases:
     - Q
   sizes:
     - 32
 - name: U2
   friendly_name: U2
-  usage: This is a description for usage
   aliases:
     - Q
   sizes:
     - 32
 - name: U3
   friendly_name: U3
-  usage: This is a description for usage
   aliases:
     - Q
   sizes:
     - 32
 - name: X
   friendly_name: X
-  usage: This is a description for usage
   aliases:
     - alphabet
     - letter
@@ -2456,7 +2244,6 @@
     - 32
 - name: 'Y'
   friendly_name: 'Y'
-  usage: This is a description for usage
   aliases:
     - alphabet
     - letter
@@ -2464,7 +2251,6 @@
     - 32
 - name: Z
   friendly_name: Z
-  usage: This is a description for usage
   aliases:
     - alphabet
     - letter
@@ -2472,7 +2258,6 @@
     - 32
 - name: barrier
   friendly_name: Barrier
-  usage: This is a description for usage
   aliases:
     - wall
     - fence
@@ -2483,7 +2268,6 @@
     - 32
 - name: bloch-sphere
   friendly_name: Bloch sphere
-  usage: This is a description for usage
   aliases:
     - Q
     - bloch
@@ -2492,7 +2276,6 @@
     - 32
 - name: cU1
   friendly_name: C u1
-  usage: This is a description for usage
   aliases:
     - Q
     - c
@@ -2502,7 +2285,6 @@
     - 32
 - name: cU3
   friendly_name: C u3
-  usage: This is a description for usage
   aliases:
     - q
     - c
@@ -2512,7 +2294,6 @@
     - 32
 - name: cY
   friendly_name: C y
-  usage: This is a description for usage
   aliases:
     - Q
     - c
@@ -2521,7 +2302,6 @@
     - 32
 - name: cZ
   friendly_name: C z
-  usage: This is a description for usage
   aliases:
     - Q
     - c
@@ -2530,7 +2310,6 @@
     - 32
 - name: ccX
   friendly_name: Cc x
-  usage: This is a description for usage
   aliases:
     - Q
     - cc
@@ -2540,7 +2319,6 @@
     - 32
 - name: circuit-composer
   friendly_name: Circuit composer
-  usage: This is a description for usage
   aliases:
     - Q
     - H
@@ -2550,7 +2328,6 @@
     - 32
 - name: composer-edit
   friendly_name: Composer edit
-  usage: This is a description for usage
   aliases:
     - Q
     - circuit
@@ -2561,7 +2338,6 @@
     - 32
 - name: hinton-plot
   friendly_name: Hinton plot
-  usage: This is a description for usage
   aliases:
     - Q
     - hinton
@@ -2571,7 +2347,6 @@
     - 32
 - name: iD
   friendly_name: I d
-  usage: This is a description for usage
   aliases:
     - identification
     - identity
@@ -2579,7 +2354,6 @@
     - 32
 - name: matrix
   friendly_name: Matrix
-  usage: This is a description for usage
   aliases:
     - cast
     - grid
@@ -2589,7 +2363,6 @@
     - 32
 - name: operation
   friendly_name: Operation
-  usage: This is a description for usage
   aliases:
     - meter
     - gauge
@@ -2599,7 +2372,6 @@
     - 32
 - name: operation--gauge
   friendly_name: Operation gauge
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2609,7 +2381,6 @@
     - bracket
 - name: operation--if
   friendly_name: Operation if
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2619,7 +2390,6 @@
     - bracket
 - name: RAW
   friendly_name: Raw
-  usage: This is a description for usage
   aliases:
     - format
     - unedited
@@ -2627,14 +2397,12 @@
     - 32
 - name: SDK
   friendly_name: Sdk
-  usage: This is a description for usage
   aliases:
     - SDK
   sizes:
     - 32
 - name: SQL
   friendly_name: Sql
-  usage: This is a description for usage
   aliases:
     - database
     - query
@@ -2642,7 +2410,6 @@
     - 32
 - name: SVG
   friendly_name: Svg
-  usage: This is a description for usage
   aliases:
     - format
     - image
@@ -2651,7 +2418,6 @@
     - 32
 - name: TIF
   friendly_name: Tif
-  usage: This is a description for usage
   aliases:
     - format
     - image
@@ -2659,7 +2425,6 @@
     - 32
 - name: TSV
   friendly_name: Tsv
-  usage: This is a description for usage
   aliases:
     - format
     - data
@@ -2669,7 +2434,6 @@
     - 32
 - name: TXT
   friendly_name: Txt
-  usage: This is a description for usage
   aliases:
     - text
     - format
@@ -2678,7 +2442,6 @@
     - 32
 - name: USB
   friendly_name: Usb
-  usage: This is a description for usage
   aliases:
     - connector
     - protocol
@@ -2689,7 +2452,6 @@
     - 32
 - name: VPN
   friendly_name: Vpn
-  usage: This is a description for usage
   aliases:
     - protocol
     - virtual
@@ -2701,7 +2463,6 @@
     - 32
 - name: WMV
   friendly_name: Wmv
-  usage: This is a description for usage
   aliases:
     - format
     - music
@@ -2711,7 +2472,6 @@
     - 32
 - name: XLS
   friendly_name: Xls
-  usage: This is a description for usage
   aliases:
     - excel
     - format
@@ -2720,7 +2480,6 @@
     - 32
 - name: XML
   friendly_name: Xml
-  usage: This is a description for usage
   aliases:
     - format
     - markup
@@ -2730,7 +2489,6 @@
     - 32
 - name: ZIP
   friendly_name: Zip
-  usage: This is a description for usage
   aliases:
     - compress
     - format
@@ -2738,7 +2496,6 @@
     - 32
 - name: accessibility
   friendly_name: Accessibility
-  usage: This is a description for usage
   aliases:
     - wheelchair
     - convenience
@@ -2747,7 +2504,6 @@
     - 32
 - name: accessibility--alt
   friendly_name: Accessibility alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2756,7 +2512,6 @@
     - accessible
 - name: accessibility--color--filled
   friendly_name: Accessibility color filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2765,7 +2520,6 @@
     - accessible
 - name: accessibility--color
   friendly_name: Accessibility color
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2774,14 +2528,12 @@
     - accessible
 - name: account
   friendly_name: Account
-  usage: This is a description for usage
   aliases:
     - account
   sizes:
     - 32
 - name: activity
   friendly_name: Activity
-  usage: This is a description for usage
   aliases:
     - line chart
     - vital
@@ -2791,7 +2543,6 @@
     - 32
 - name: add-comment
   friendly_name: Add comment
-  usage: This is a description for usage
   aliases:
     - add
     - comment
@@ -2801,7 +2552,6 @@
     - 32
 - name: alarm
   friendly_name: Alarm
-  usage: This is a description for usage
   aliases:
     - clock
     - timer
@@ -2811,7 +2561,6 @@
     - 32
 - name: alarm--add
   friendly_name: Alarm add
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2821,7 +2570,6 @@
     - alert
 - name: alarm--subtract
   friendly_name: Alarm subtract
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -2831,49 +2579,42 @@
     - alert
 - name: align--horizontal-center
   friendly_name: Align horizontal center
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - align
 - name: align--horizontal-left
   friendly_name: Align horizontal left
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - align
 - name: align--horizontal-right
   friendly_name: Align horizontal right
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - align
 - name: align--vertical-bottom
   friendly_name: Align vertical bottom
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - align
 - name: align--vertical-center
   friendly_name: Align vertical center
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - align
 - name: align--vertical-top
   friendly_name: Align vertical top
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - align
 - name: analytics
   friendly_name: Analytics
-  usage: This is a description for usage
   aliases:
     - line chart
     - trend
@@ -2884,7 +2625,6 @@
     - 32
 - name: aperture
   friendly_name: Aperture
-  usage: This is a description for usage
   aliases:
     - eye
     - camera
@@ -2894,7 +2634,6 @@
     - 32
 - name: api
   friendly_name: Api
-  usage: This is a description for usage
   aliases:
     - program
     - tool
@@ -2909,21 +2648,18 @@
     - 32
 - name: app
   friendly_name: App
-  usage: This is a description for usage
   aliases:
     - app
   sizes:
     - 32
 - name: apple
   friendly_name: Apple
-  usage: This is a description for usage
   aliases:
     - apple
   sizes:
     - 32
 - name: application
   friendly_name: Application
-  usage: This is a description for usage
   aliases:
     - box
     - app
@@ -2932,7 +2668,6 @@
     - 32
 - name: archive
   friendly_name: Archive
-  usage: This is a description for usage
   aliases:
     - drawer
     - server
@@ -2943,7 +2678,6 @@
     - 32
 - name: arrival
   friendly_name: Arrival
-  usage: This is a description for usage
   aliases:
     - plane
     - landing
@@ -2952,14 +2686,12 @@
     - 32
 - name: arrow-shift-down
   friendly_name: Arrow shift down
-  usage: This is a description for usage
   aliases:
     - arrow-shift-down
   sizes:
     - 32
 - name: asset
   friendly_name: Asset
-  usage: This is a description for usage
   aliases:
     - runtime
     - wheel
@@ -2969,7 +2701,6 @@
     - 32
 - name: at
   friendly_name: At
-  usage: This is a description for usage
   aliases:
     - at
     - \@
@@ -2977,28 +2708,24 @@
     - 32
 - name: audio-console
   friendly_name: Audio console
-  usage: This is a description for usage
   aliases:
     - audio-console
   sizes:
     - 32
 - name: augmented-reality
   friendly_name: Augmented reality
-  usage: This is a description for usage
   aliases:
     - augmented-reality
   sizes:
     - 32
 - name: badge
   friendly_name: Badge
-  usage: This is a description for usage
   aliases:
     - badge
   sizes:
     - 32
 - name: bar
   friendly_name: Bar
-  usage: This is a description for usage
   aliases:
     - drink
     - alcohol
@@ -3008,14 +2735,12 @@
     - 32
 - name: basketball
   friendly_name: Basketball
-  usage: This is a description for usage
   aliases:
     - basketball
   sizes:
     - 32
 - name: battery--charging
   friendly_name: Battery charging
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3023,7 +2748,6 @@
     - power
 - name: battery--empty
   friendly_name: Battery empty
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3031,7 +2755,6 @@
     - power
 - name: battery--full
   friendly_name: Battery full
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3039,7 +2762,6 @@
     - power
 - name: battery--half
   friendly_name: Battery half
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3047,7 +2769,6 @@
     - power
 - name: battery--low
   friendly_name: Battery low
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3055,7 +2776,6 @@
     - power
 - name: battery--quarter
   friendly_name: Battery quarter
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3063,7 +2783,6 @@
     - power
 - name: bee
   friendly_name: Bee
-  usage: This is a description for usage
   aliases:
     - ibm
     - fly
@@ -3075,7 +2794,6 @@
     - 32
 - name: bicycle
   friendly_name: Bicycle
-  usage: This is a description for usage
   aliases:
     - bike
     - cycle
@@ -3086,7 +2804,6 @@
     - 32
 - name: binoculars
   friendly_name: Binoculars
-  usage: This is a description for usage
   aliases:
     - search
     - vision
@@ -3097,14 +2814,12 @@
     - 32
 - name: blockchain
   friendly_name: Blockchain
-  usage: This is a description for usage
   aliases:
     - blockchain
   sizes:
     - 32
 - name: blog
   friendly_name: Blog
-  usage: This is a description for usage
   aliases:
     - writing
     - journal
@@ -3115,7 +2830,6 @@
     - 32
 - name: bluetooth
   friendly_name: Bluetooth
-  usage: This is a description for usage
   aliases:
     - wireless
     - connect
@@ -3125,7 +2839,6 @@
     - 32
 - name: bluetooth--off
   friendly_name: Bluetooth off
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3135,7 +2848,6 @@
     - tooth
 - name: bookmark
   friendly_name: Bookmark
-  usage: This is a description for usage
   aliases:
     - flag
     - marker
@@ -3143,7 +2855,6 @@
     - 32
 - name: box
   friendly_name: Box
-  usage: This is a description for usage
   aliases:
     - file
     - archive
@@ -3152,14 +2863,12 @@
     - 32
 - name: branch
   friendly_name: Branch
-  usage: This is a description for usage
   aliases:
     - branch
   sizes:
     - 32
 - name: brightness-contrast
   friendly_name: Brightness contrast
-  usage: This is a description for usage
   aliases:
     - sun
     - bright
@@ -3171,7 +2880,6 @@
     - 32
 - name: building
   friendly_name: Building
-  usage: This is a description for usage
   aliases:
     - factory
     - architecture
@@ -3180,7 +2888,6 @@
     - 32
 - name: building--insights-1
   friendly_name: Building insights 1
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3189,7 +2896,6 @@
     - office
 - name: building--insights-2
   friendly_name: Building insights 2
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3198,7 +2904,6 @@
     - office
 - name: building--insights-3
   friendly_name: Building insights 3
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3207,7 +2912,6 @@
     - office
 - name: bullhorn
   friendly_name: Bullhorn
-  usage: This is a description for usage
   aliases:
     - announcement
     - announce
@@ -3222,7 +2926,6 @@
     - 32
 - name: bus
   friendly_name: Bus
-  usage: This is a description for usage
   aliases:
     - transport
     - transportation
@@ -3232,7 +2935,6 @@
     - 32
 - name: cafe
   friendly_name: Cafe
-  usage: This is a description for usage
   aliases:
     - coffee
     - caffine
@@ -3244,7 +2946,6 @@
     - 32
 - name: calculator
   friendly_name: Calculator
-  usage: This is a description for usage
   aliases:
     - calculate
     - PDA
@@ -3253,7 +2954,6 @@
     - 32
 - name: calculator--check
   friendly_name: Calculator check
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3262,7 +2962,6 @@
     - computer
 - name: calibrate
   friendly_name: Calibrate
-  usage: This is a description for usage
   aliases:
     - caliper
     - measure
@@ -3273,7 +2972,6 @@
     - 32
 - name: camera
   friendly_name: Camera
-  usage: This is a description for usage
   aliases:
     - photo
     - photography
@@ -3285,7 +2983,6 @@
     - 32
 - name: camera--action
   friendly_name: Camera action
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3297,7 +2994,6 @@
     - snapshot
 - name: car
   friendly_name: Car
-  usage: This is a description for usage
   aliases:
     - transport
     - private
@@ -3309,7 +3005,6 @@
     - 32
 - name: car--front
   friendly_name: Car front
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3321,14 +3016,12 @@
     - pickup
 - name: carbon
   friendly_name: Carbon
-  usage: This is a description for usage
   aliases:
     - carbon
   sizes:
     - 32
 - name: carousel--horizontal
   friendly_name: Carousel horizontal
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3339,7 +3032,6 @@
     - sequence
 - name: carousel--vertical
   friendly_name: Carousel vertical
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3350,7 +3042,6 @@
     - sequence
 - name: catalog
   friendly_name: Catalog
-  usage: This is a description for usage
   aliases:
     - notebook
     - book
@@ -3360,7 +3051,6 @@
     - 32
 - name: categories
   friendly_name: Categories
-  usage: This is a description for usage
   aliases:
     - group
     - section
@@ -3370,63 +3060,54 @@
     - 32
 - name: category
   friendly_name: Category
-  usage: This is a description for usage
   aliases:
     - category
   sizes:
     - 32
 - name: category--add
   friendly_name: Category add
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - category
 - name: category--and
   friendly_name: Category and
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - category
 - name: category--new-each
   friendly_name: Category new each
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - category
 - name: category--new
   friendly_name: Category new
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - category
 - name: certificate
   friendly_name: Certificate
-  usage: This is a description for usage
   aliases:
     - certificate
   sizes:
     - 32
 - name: certificate--check
   friendly_name: Certificate check
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - certificate
 - name: change-catalog
   friendly_name: Change catalog
-  usage: This is a description for usage
   aliases:
     - change-catalog
   sizes:
     - 32
 - name: character-patterns
   friendly_name: Character patterns
-  usage: This is a description for usage
   aliases:
     - letters
     - swap
@@ -3434,21 +3115,18 @@
     - 32
 - name: charging-station
   friendly_name: Charging station
-  usage: This is a description for usage
   aliases:
     - charging-station
   sizes:
     - 32
 - name: charging-station--filled
   friendly_name: Charging station filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - charging-station
 - name: chart--bar
   friendly_name: Chart bar
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3457,7 +3135,6 @@
     - data
 - name: chart--bubble
   friendly_name: Chart bubble
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3466,7 +3143,6 @@
     - data
 - name: chart--line--data
   friendly_name: Chart line data
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3475,7 +3151,6 @@
     - data
 - name: chart--line
   friendly_name: Chart line
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3484,7 +3159,6 @@
     - data
 - name: chart--network
   friendly_name: Chart network
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3493,7 +3167,6 @@
     - data
 - name: chart--pie
   friendly_name: Chart pie
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3502,7 +3175,6 @@
     - data
 - name: chart--scatter
   friendly_name: Chart scatter
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3511,7 +3183,6 @@
     - data
 - name: chart--venn-diagram
   friendly_name: Chart venn diagram
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3520,14 +3191,12 @@
     - data
 - name: chat-bot
   friendly_name: Chat bot
-  usage: This is a description for usage
   aliases:
     - chat-bot
   sizes:
     - 32
 - name: checkbox
   friendly_name: Checkbox
-  usage: This is a description for usage
   aliases:
     - check
     - box
@@ -3535,7 +3204,6 @@
     - 32
 - name: checkbox--checked--filled
   friendly_name: Checkbox checked filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3543,7 +3211,6 @@
     - box
 - name: checkbox--checked
   friendly_name: Checkbox checked
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3551,7 +3218,6 @@
     - box
 - name: checkbox--indeterminate--filled
   friendly_name: Checkbox indeterminate filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3559,7 +3225,6 @@
     - box
 - name: checkbox--indeterminate
   friendly_name: Checkbox indeterminate
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3567,7 +3232,6 @@
     - box
 - name: checkbox--undeterminate--filled
   friendly_name: Checkbox undeterminate filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3575,7 +3239,6 @@
     - box
 - name: checkbox--undeterminate
   friendly_name: Checkbox undeterminate
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3583,7 +3246,6 @@
     - box
 - name: chemistry
   friendly_name: Chemistry
-  usage: This is a description for usage
   aliases:
     - science
     - flask
@@ -3592,7 +3254,6 @@
     - 32
 - name: chip
   friendly_name: Chip
-  usage: This is a description for usage
   aliases:
     - microchip
     - computer chip
@@ -3600,14 +3261,12 @@
     - 32
 - name: choices
   friendly_name: Choices
-  usage: This is a description for usage
   aliases:
     - choices
   sizes:
     - 32
 - name: circle-dash
   friendly_name: Circle dash
-  usage: This is a description for usage
   aliases:
     - circle
     - dash
@@ -3616,14 +3275,12 @@
     - 32
 - name: classification
   friendly_name: Classification
-  usage: This is a description for usage
   aliases:
     - classification
   sizes:
     - 32
 - name: classifier--language
   friendly_name: Classifier language
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3631,7 +3288,6 @@
     - counter word
 - name: closed-caption
   friendly_name: Closed caption
-  usage: This is a description for usage
   aliases:
     - caption
     - closed
@@ -3640,7 +3296,6 @@
     - 32
 - name: closed-caption--alt
   friendly_name: Closed caption alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3649,7 +3304,6 @@
     - cc
 - name: closed-caption--filled
   friendly_name: Closed caption filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3658,7 +3312,6 @@
     - cc
 - name: cloud
   friendly_name: Cloud
-  usage: This is a description for usage
   aliases:
     - donwload
     - compute
@@ -3668,7 +3321,6 @@
     - 32
 - name: cloud--download
   friendly_name: Cloud download
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3678,7 +3330,6 @@
     - hybrid
 - name: cloud--lightning
   friendly_name: Cloud lightning
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3688,7 +3339,6 @@
     - hybrid
 - name: cloud--rain
   friendly_name: Cloud rain
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3698,7 +3348,6 @@
     - hybrid
 - name: cloud--snow
   friendly_name: Cloud snow
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3708,7 +3357,6 @@
     - hybrid
 - name: cloud--upload
   friendly_name: Cloud upload
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3718,14 +3366,12 @@
     - hybrid
 - name: cloud-app
   friendly_name: Cloud app
-  usage: This is a description for usage
   aliases:
     - cloud-app
   sizes:
     - 32
 - name: cloud-foundry--1
   friendly_name: Cloud foundry 1
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3735,7 +3381,6 @@
     - foundry
 - name: cloud-foundry--2
   friendly_name: Cloud foundry 2
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3745,14 +3390,12 @@
     - foundry
 - name: cloudy
   friendly_name: Cloudy
-  usage: This is a description for usage
   aliases:
     - cloudy
   sizes:
     - 32
 - name: cognitive
   friendly_name: Cognitive
-  usage: This is a description for usage
   aliases:
     - brain
     - idea
@@ -3762,7 +3405,6 @@
     - 32
 - name: collaborate
   friendly_name: Collaborate
-  usage: This is a description for usage
   aliases:
     - people
     - cooperate
@@ -3774,21 +3416,18 @@
     - 32
 - name: collapse-all
   friendly_name: Collapse all
-  usage: This is a description for usage
   aliases:
     - collapse-all
   sizes:
     - 32
 - name: collapse-categories
   friendly_name: Collapse categories
-  usage: This is a description for usage
   aliases:
     - collapse-categories
   sizes:
     - 32
 - name: color-palette
   friendly_name: Color palette
-  usage: This is a description for usage
   aliases:
     - paint palette
     - paint
@@ -3797,14 +3436,12 @@
     - 32
 - name: color-switch
   friendly_name: Color switch
-  usage: This is a description for usage
   aliases:
     - color-switch
   sizes:
     - 32
 - name: column
   friendly_name: Column
-  usage: This is a description for usage
   aliases:
     - grid
     - lines
@@ -3813,7 +3450,6 @@
     - 32
 - name: compare
   friendly_name: Compare
-  usage: This is a description for usage
   aliases:
     - arrows
     - exchange
@@ -3825,7 +3461,6 @@
     - 32
 - name: compass
   friendly_name: Compass
-  usage: This is a description for usage
   aliases:
     - direction
     - navigation
@@ -3837,14 +3472,12 @@
     - 32
 - name: concept
   friendly_name: Concept
-  usage: This is a description for usage
   aliases:
     - concept
   sizes:
     - 32
 - name: connect
   friendly_name: Connect
-  usage: This is a description for usage
   aliases:
     - network
     - link
@@ -3855,7 +3488,6 @@
     - 32
 - name: connection-signal
   friendly_name: Connection signal
-  usage: This is a description for usage
   aliases:
     - signal
     - tower
@@ -3869,14 +3501,12 @@
     - 32
 - name: container-software
   friendly_name: Container software
-  usage: This is a description for usage
   aliases:
     - container-software
   sizes:
     - 32
 - name: contrast
   friendly_name: Contrast
-  usage: This is a description for usage
   aliases:
     - brightness
     - darkness
@@ -3888,14 +3518,12 @@
     - 32
 - name: corn
   friendly_name: Corn
-  usage: This is a description for usage
   aliases:
     - corn
   sizes:
     - 32
 - name: corner
   friendly_name: Corner
-  usage: This is a description for usage
   aliases:
     - frame
     - flourish
@@ -3908,21 +3536,18 @@
     - 32
 - name: course
   friendly_name: Course
-  usage: This is a description for usage
   aliases:
     - course
   sizes:
     - 32
 - name: credentials
   friendly_name: Credentials
-  usage: This is a description for usage
   aliases:
     - credentials
   sizes:
     - 32
 - name: crop
   friendly_name: Crop
-  usage: This is a description for usage
   aliases:
     - cut
     - trim
@@ -3935,7 +3560,6 @@
     - 32
 - name: cursor--1
   friendly_name: Cursor 1
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3947,7 +3571,6 @@
     - pointer
 - name: cursor--2
   friendly_name: Cursor 2
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -3959,7 +3582,6 @@
     - pointer
 - name: cut
   friendly_name: Cut
-  usage: This is a description for usage
   aliases:
     - scissors
     - cutting
@@ -3971,14 +3593,12 @@
     - 32
 - name: cyclist
   friendly_name: Cyclist
-  usage: This is a description for usage
   aliases:
     - cyclist
   sizes:
     - 32
 - name: dashboard
   friendly_name: Dashboard
-  usage: This is a description for usage
   aliases:
     - gauge
     - ui
@@ -3992,7 +3612,6 @@
     - 32
 - name: data--1
   friendly_name: Data 1
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4003,7 +3622,6 @@
     - characters
 - name: data--2
   friendly_name: Data 2
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4014,7 +3632,6 @@
     - characters
 - name: data--base
   friendly_name: Data base
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4025,7 +3642,6 @@
     - characters
 - name: data--check
   friendly_name: Data check
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4036,7 +3652,6 @@
     - characters
 - name: data--connected
   friendly_name: Data connected
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4047,7 +3662,6 @@
     - characters
 - name: data--error
   friendly_name: Data error
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4058,7 +3672,6 @@
     - characters
 - name: data--reference
   friendly_name: Data reference
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4069,7 +3682,6 @@
     - characters
 - name: data--set
   friendly_name: Data set
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4080,7 +3692,6 @@
     - characters
 - name: data--structured
   friendly_name: Data structured
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4091,7 +3702,6 @@
     - characters
 - name: data--unstructured
   friendly_name: Data unstructured
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4102,14 +3712,12 @@
     - characters
 - name: data-class
   friendly_name: Data class
-  usage: This is a description for usage
   aliases:
     - data-class
   sizes:
     - 32
 - name: data-share
   friendly_name: Data share
-  usage: This is a description for usage
   aliases:
     - data
     - share
@@ -4121,7 +3729,6 @@
     - 32
 - name: data-vis--1
   friendly_name: Data vis 1
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4135,7 +3742,6 @@
     - web
 - name: data-vis--2
   friendly_name: Data vis 2
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4149,7 +3755,6 @@
     - web
 - name: data-vis--3
   friendly_name: Data vis 3
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4163,7 +3768,6 @@
     - web
 - name: data-vis--4
   friendly_name: Data vis 4
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4177,14 +3781,12 @@
     - web
 - name: datastore
   friendly_name: Datastore
-  usage: This is a description for usage
   aliases:
     - datastore
   sizes:
     - 32
 - name: debug
   friendly_name: Debug
-  usage: This is a description for usage
   aliases:
     - bug
     - beetle
@@ -4194,7 +3796,6 @@
     - 32
 - name: delivery-truck
   friendly_name: Delivery truck
-  usage: This is a description for usage
   aliases:
     - truck
     - car
@@ -4208,7 +3809,6 @@
     - 32
 - name: departure
   friendly_name: Departure
-  usage: This is a description for usage
   aliases:
     - plane
     - airplane
@@ -4220,7 +3820,6 @@
     - 32
 - name: deploy-rules
   friendly_name: Deploy rules
-  usage: This is a description for usage
   aliases:
     - rules
     - deploy
@@ -4231,14 +3830,12 @@
     - 32
 - name: deploy
   friendly_name: Deploy
-  usage: This is a description for usage
   aliases:
     - deploy
   sizes:
     - 32
 - name: development
   friendly_name: Development
-  usage: This is a description for usage
   aliases:
     - build
     - pixels
@@ -4252,7 +3849,6 @@
     - 32
 - name: devices
   friendly_name: Devices
-  usage: This is a description for usage
   aliases:
     - monitor
     - screen
@@ -4262,7 +3858,6 @@
     - 32
 - name: diagram
   friendly_name: Diagram
-  usage: This is a description for usage
   aliases:
     - pie chart
     - pie
@@ -4273,49 +3868,42 @@
     - 32
 - name: distribute--horizontal-center
   friendly_name: Distribute horizontal center
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - distribute
 - name: distribute--horizontal-left
   friendly_name: Distribute horizontal left
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - distribute
 - name: distribute--horizontal-right
   friendly_name: Distribute horizontal right
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - distribute
 - name: distribute--vertical-bottom
   friendly_name: Distribute vertical bottom
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - distribute
 - name: distribute--vertical-center
   friendly_name: Distribute vertical center
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - distribute
 - name: distribute--vertical-top
   friendly_name: Distribute vertical top
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - distribute
 - name: document-sentiment
   friendly_name: Document sentiment
-  usage: This is a description for usage
   aliases:
     - emotion
     - meaning
@@ -4324,14 +3912,12 @@
     - 32
 - name: dot-mark
   friendly_name: Dot mark
-  usage: This is a description for usage
   aliases:
     - dot-mark
   sizes:
     - 32
 - name: drag--horizontal
   friendly_name: Drag horizontal
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4343,7 +3929,6 @@
     - move
 - name: drag--vertical
   friendly_name: Drag vertical
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4355,7 +3940,6 @@
     - move
 - name: draw
   friendly_name: Draw
-  usage: This is a description for usage
   aliases:
     - squiggle
     - drawing
@@ -4366,77 +3950,66 @@
     - 32
 - name: drop-photo
   friendly_name: Drop photo
-  usage: This is a description for usage
   aliases:
     - drop-photo
   sizes:
     - 32
 - name: drop-photo--filled
   friendly_name: Drop photo filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - drop-photo
 - name: earth
   friendly_name: Earth
-  usage: This is a description for usage
   aliases:
     - earth
   sizes:
     - 32
 - name: earth--americas--filled
   friendly_name: Earth americas filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - earth
 - name: earth--americas
   friendly_name: Earth americas
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - earth
 - name: earth--europe-africa--filled
   friendly_name: Earth europe africa filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - earth
 - name: earth--europe-africa
   friendly_name: Earth europe africa
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - earth
 - name: earth--filled
   friendly_name: Earth filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - earth
 - name: earth--southeast-asia--filled
   friendly_name: Earth southeast asia filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - earth
 - name: earth--southeast-asia
   friendly_name: Earth southeast asia
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - earth
 - name: edt-loop
   friendly_name: Edt loop
-  usage: This is a description for usage
   aliases:
     - version
     - iteration
@@ -4448,7 +4021,6 @@
     - 32
 - name: education
   friendly_name: Education
-  usage: This is a description for usage
   aliases:
     - graduation
     - scholarship
@@ -4461,14 +4033,12 @@
     - 32
 - name: enterprise
   friendly_name: Enterprise
-  usage: This is a description for usage
   aliases:
     - enterprise
   sizes:
     - 32
 - name: erase
   friendly_name: Erase
-  usage: This is a description for usage
   aliases:
     - eraser
     - remove
@@ -4482,7 +4052,6 @@
     - 32
 - name: erase--3D
   friendly_name: Erase 3 d
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4496,7 +4065,6 @@
     - format
 - name: event
   friendly_name: Event
-  usage: This is a description for usage
   aliases:
     - calendar
     - star
@@ -4507,7 +4075,6 @@
     - 32
 - name: event--schedule
   friendly_name: Event schedule
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4518,7 +4085,6 @@
     - schedule
 - name: events
   friendly_name: Events
-  usage: This is a description for usage
   aliases:
     - people
     - team
@@ -4529,7 +4095,6 @@
     - 32
 - name: events--alt
   friendly_name: Events alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4540,7 +4105,6 @@
     - network
 - name: exam-mode
   friendly_name: Exam mode
-  usage: This is a description for usage
   aliases:
     - dev test
     - testing
@@ -4550,7 +4114,6 @@
     - 32
 - name: exit
   friendly_name: Exit
-  usage: This is a description for usage
   aliases:
     - leave
     - quit
@@ -4559,21 +4122,18 @@
     - 32
 - name: expand-all
   friendly_name: Expand all
-  usage: This is a description for usage
   aliases:
     - expand-all
   sizes:
     - 32
 - name: expand-categories
   friendly_name: Expand categories
-  usage: This is a description for usage
   aliases:
     - expand-categories
   sizes:
     - 32
 - name: eyedropper
   friendly_name: Eyedropper
-  usage: This is a description for usage
   aliases:
     - dropper
     - pipette
@@ -4583,7 +4143,6 @@
     - 32
 - name: face--activated--add
   friendly_name: Face activated add
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4595,7 +4154,6 @@
     - emotion
 - name: face--activated--filled
   friendly_name: Face activated filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4607,7 +4165,6 @@
     - emotion
 - name: face--activated
   friendly_name: Face activated
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4619,7 +4176,6 @@
     - emotion
 - name: face--add
   friendly_name: Face add
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4631,7 +4187,6 @@
     - emotion
 - name: face--cool
   friendly_name: Face cool
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4643,7 +4198,6 @@
     - emotion
 - name: face--dissatisfied--filled
   friendly_name: Face dissatisfied filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4655,7 +4209,6 @@
     - emotion
 - name: face--dissatisfied
   friendly_name: Face dissatisfied
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4667,7 +4220,6 @@
     - emotion
 - name: face--dizzy--filled
   friendly_name: Face dizzy filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4679,7 +4231,6 @@
     - emotion
 - name: face--dizzy
   friendly_name: Face dizzy
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4691,7 +4242,6 @@
     - emotion
 - name: face--neutral--filled
   friendly_name: Face neutral filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4703,7 +4253,6 @@
     - emotion
 - name: face--neutral
   friendly_name: Face neutral
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4715,7 +4264,6 @@
     - emotion
 - name: face--pending--filled
   friendly_name: Face pending filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4727,7 +4275,6 @@
     - emotion
 - name: face--pending
   friendly_name: Face pending
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4739,7 +4286,6 @@
     - emotion
 - name: face--satisfied--filled
   friendly_name: Face satisfied filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4751,7 +4297,6 @@
     - emotion
 - name: face--satisfied
   friendly_name: Face satisfied
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4763,7 +4308,6 @@
     - emotion
 - name: face--wink--filled
   friendly_name: Face wink filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4775,7 +4319,6 @@
     - emotion
 - name: face--wink
   friendly_name: Face wink
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4787,7 +4330,6 @@
     - emotion
 - name: filter
   friendly_name: Filter
-  usage: This is a description for usage
   aliases:
     - refine
     - funnel
@@ -4795,7 +4337,6 @@
     - 32
 - name: filter--edit
   friendly_name: Filter edit
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4803,7 +4344,6 @@
     - funnel
 - name: finance
   friendly_name: Finance
-  usage: This is a description for usage
   aliases:
     - bank
     - columns
@@ -4815,7 +4355,6 @@
     - 32
 - name: fingerprint-recognition
   friendly_name: Fingerprint recognition
-  usage: This is a description for usage
   aliases:
     - identification
     - fingerprint
@@ -4829,28 +4368,24 @@
     - 32
 - name: fish
   friendly_name: Fish
-  usage: This is a description for usage
   aliases:
     - fish
   sizes:
     - 32
 - name: fish--multiple
   friendly_name: Fish multiple
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - fish
 - name: fit-to-screen
   friendly_name: Fit to screen
-  usage: This is a description for usage
   aliases:
     - fit-to-screen
   sizes:
     - 32
 - name: flag
   friendly_name: Flag
-  usage: This is a description for usage
   aliases:
     - country
     - location
@@ -4862,14 +4397,12 @@
     - 32
 - name: flagging-taxi
   friendly_name: Flagging taxi
-  usage: This is a description for usage
   aliases:
     - flagging-taxi
   sizes:
     - 32
 - name: flash
   friendly_name: Flash
-  usage: This is a description for usage
   aliases:
     - battery
     - lightning
@@ -4883,7 +4416,6 @@
     - 32
 - name: flash--filled
   friendly_name: Flash filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4897,7 +4429,6 @@
     - storm
 - name: flash--off--filled
   friendly_name: Flash off filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4911,7 +4442,6 @@
     - storm
 - name: flash--off
   friendly_name: Flash off
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4925,7 +4455,6 @@
     - storm
 - name: flow
   friendly_name: Flow
-  usage: This is a description for usage
   aliases:
     - flow chart
     - chart
@@ -4936,7 +4465,6 @@
     - 32
 - name: flow--data
   friendly_name: Flow data
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4947,7 +4475,6 @@
     - outline
 - name: flow--stream
   friendly_name: Flow stream
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4958,14 +4485,12 @@
     - outline
 - name: fog
   friendly_name: Fog
-  usage: This is a description for usage
   aliases:
     - fog
   sizes:
     - 32
 - name: folders
   friendly_name: Folders
-  usage: This is a description for usage
   aliases:
     - files
     - collection
@@ -4973,14 +4498,12 @@
     - 32
 - name: fork
   friendly_name: Fork
-  usage: This is a description for usage
   aliases:
     - fork
   sizes:
     - 32
 - name: forward--10
   friendly_name: Forward 10
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -4992,7 +4515,6 @@
     - fast
 - name: forward--30
   friendly_name: Forward 30
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5004,7 +4526,6 @@
     - fast
 - name: forward--5
   friendly_name: Forward 5
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5016,14 +4537,12 @@
     - fast
 - name: fruit-bowl
   friendly_name: Fruit bowl
-  usage: This is a description for usage
   aliases:
     - fruit-bowl
   sizes:
     - 32
 - name: function
   friendly_name: Function
-  usage: This is a description for usage
   aliases:
     - action
     - behavior
@@ -5036,7 +4555,6 @@
     - 32
 - name: game--console
   friendly_name: Game console
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5048,7 +4566,6 @@
     - spirit
 - name: game--wireless
   friendly_name: Game wireless
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5060,21 +4577,18 @@
     - spirit
 - name: gamification
   friendly_name: Gamification
-  usage: This is a description for usage
   aliases:
     - gamification
   sizes:
     - 32
 - name: gift
   friendly_name: Gift
-  usage: This is a description for usage
   aliases:
     - gift
   sizes:
     - 32
 - name: globe
   friendly_name: Globe
-  usage: This is a description for usage
   aliases:
     - planet
     - earth
@@ -5085,7 +4599,6 @@
     - 32
 - name: group
   friendly_name: Group
-  usage: This is a description for usage
   aliases:
     - category
     - band
@@ -5099,28 +4612,24 @@
     - 32
 - name: hail
   friendly_name: Hail
-  usage: This is a description for usage
   aliases:
     - hail
   sizes:
     - 32
 - name: haze
   friendly_name: Haze
-  usage: This is a description for usage
   aliases:
     - haze
   sizes:
     - 32
 - name: haze--night
   friendly_name: Haze night
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - haze
 - name: headphones
   friendly_name: Headphones
-  usage: This is a description for usage
   aliases:
     - headset
     - listening device
@@ -5132,7 +4641,6 @@
     - 32
 - name: headset
   friendly_name: Headset
-  usage: This is a description for usage
   aliases:
     - headphones
     - listening device
@@ -5145,7 +4653,6 @@
     - 32
 - name: health-cross
   friendly_name: Health cross
-  usage: This is a description for usage
   aliases:
     - red cross
     - medicine
@@ -5156,7 +4663,6 @@
     - 32
 - name: hearing
   friendly_name: Hearing
-  usage: This is a description for usage
   aliases:
     - detecting
     - ear
@@ -5170,14 +4676,12 @@
     - 32
 - name: help-desk
   friendly_name: Help desk
-  usage: This is a description for usage
   aliases:
     - help-desk
   sizes:
     - 32
 - name: home
   friendly_name: Home
-  usage: This is a description for usage
   aliases:
     - detecting
     - ear
@@ -5191,7 +4695,6 @@
     - 32
 - name: hotel
   friendly_name: Hotel
-  usage: This is a description for usage
   aliases:
     - hostel
     - motel
@@ -5203,7 +4706,6 @@
     - 32
 - name: hourglass
   friendly_name: Hourglass
-  usage: This is a description for usage
   aliases:
     - clock
     - metronome
@@ -5215,7 +4717,6 @@
     - 32
 - name: humidity
   friendly_name: Humidity
-  usage: This is a description for usage
   aliases:
     - weather
     - damp
@@ -5230,21 +4731,18 @@
     - 32
 - name: hurricane
   friendly_name: Hurricane
-  usage: This is a description for usage
   aliases:
     - hurricane
   sizes:
     - 32
 - name: hybrid-networking
   friendly_name: Hybrid networking
-  usage: This is a description for usage
   aliases:
     - hybrid-networking
   sizes:
     - 32
 - name: ibm-cloud
   friendly_name: Ibm cloud
-  usage: This is a description for usage
   aliases:
     - product
     - cloud
@@ -5258,7 +4756,6 @@
     - 32
 - name: ibm-security
   friendly_name: Ibm security
-  usage: This is a description for usage
   aliases:
     - safe
     - cyber security
@@ -5274,7 +4771,6 @@
     - 32
 - name: idea
   friendly_name: Idea
-  usage: This is a description for usage
   aliases:
     - thought
     - notion
@@ -5289,7 +4785,6 @@
     - 32
 - name: identification
   friendly_name: Identification
-  usage: This is a description for usage
   aliases:
     - id
     - passport
@@ -5302,7 +4797,6 @@
     - 32
 - name: image
   friendly_name: Image
-  usage: This is a description for usage
   aliases:
     - appearance
     - form
@@ -5316,7 +4810,6 @@
     - 32
 - name: image--medical
   friendly_name: Image medical
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5330,7 +4823,6 @@
     - avatar
 - name: improve-relevance
   friendly_name: Improve relevance
-  usage: This is a description for usage
   aliases:
     - target
     - bullseye
@@ -5338,14 +4830,12 @@
     - 32
 - name: increase-level
   friendly_name: Increase level
-  usage: This is a description for usage
   aliases:
     - increase-level
   sizes:
     - 32
 - name: industry
   friendly_name: Industry
-  usage: This is a description for usage
   aliases:
     - field
     - business
@@ -5359,7 +4849,6 @@
     - 32
 - name: insert
   friendly_name: Insert
-  usage: This is a description for usage
   aliases:
     - embed
     - enter
@@ -5372,7 +4861,6 @@
     - 32
 - name: integration
   friendly_name: Integration
-  usage: This is a description for usage
   aliases:
     - assimilate
     - assimilation
@@ -5385,7 +4873,6 @@
     - 32
 - name: inventory-management
   friendly_name: Inventory management
-  usage: This is a description for usage
   aliases:
     - supervision
     - asset management
@@ -5399,7 +4886,6 @@
     - 32
 - name: iot--connect
   friendly_name: Iot connect
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5418,7 +4904,6 @@
     - platform
 - name: iot--platform
   friendly_name: Iot platform
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5437,14 +4922,12 @@
     - platform
 - name: jump-link
   friendly_name: Jump link
-  usage: This is a description for usage
   aliases:
     - jump-link
   sizes:
     - 32
 - name: keyboard
   friendly_name: Keyboard
-  usage: This is a description for usage
   aliases:
     - console
     - typing
@@ -5457,28 +4940,24 @@
     - 32
 - name: language
   friendly_name: Language
-  usage: This is a description for usage
   aliases:
     - language
   sizes:
     - 32
 - name: laptop
   friendly_name: Laptop
-  usage: This is a description for usage
   aliases:
     - laptop
   sizes:
     - 32
 - name: legend
   friendly_name: Legend
-  usage: This is a description for usage
   aliases:
     - legend
   sizes:
     - 32
 - name: letter--Aa
   friendly_name: Letter aa
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5487,7 +4966,6 @@
     - english
 - name: letter--Bb
   friendly_name: Letter bb
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5496,7 +4974,6 @@
     - english
 - name: letter--Cc
   friendly_name: Letter cc
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5505,7 +4982,6 @@
     - english
 - name: letter--Dd
   friendly_name: Letter dd
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5514,7 +4990,6 @@
     - english
 - name: letter--Ee
   friendly_name: Letter ee
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5523,7 +4998,6 @@
     - english
 - name: letter--Ff
   friendly_name: Letter ff
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5532,7 +5006,6 @@
     - english
 - name: letter--Gg
   friendly_name: Letter gg
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5541,7 +5014,6 @@
     - english
 - name: letter--Hh
   friendly_name: Letter hh
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5550,7 +5022,6 @@
     - english
 - name: letter--Ii
   friendly_name: Letter ii
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5559,7 +5030,6 @@
     - english
 - name: letter--Jj
   friendly_name: Letter jj
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5568,7 +5038,6 @@
     - english
 - name: letter--Kk
   friendly_name: Letter kk
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5577,7 +5046,6 @@
     - english
 - name: letter--Ll
   friendly_name: Letter ll
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5586,7 +5054,6 @@
     - english
 - name: letter--Mm
   friendly_name: Letter mm
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5595,7 +5062,6 @@
     - english
 - name: letter--Nn
   friendly_name: Letter nn
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5604,7 +5070,6 @@
     - english
 - name: letter--Oo
   friendly_name: Letter oo
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5613,7 +5078,6 @@
     - english
 - name: letter--Pp
   friendly_name: Letter pp
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5622,7 +5086,6 @@
     - english
 - name: letter--Qq
   friendly_name: Letter qq
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5631,7 +5094,6 @@
     - english
 - name: letter--Rr
   friendly_name: Letter rr
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5640,7 +5102,6 @@
     - english
 - name: letter--Ss
   friendly_name: Letter ss
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5649,7 +5110,6 @@
     - english
 - name: letter--Tt
   friendly_name: Letter tt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5658,7 +5118,6 @@
     - english
 - name: letter--Uu
   friendly_name: Letter uu
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5667,7 +5126,6 @@
     - english
 - name: letter--Vv
   friendly_name: Letter vv
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5676,7 +5134,6 @@
     - english
 - name: letter--Ww
   friendly_name: Letter ww
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5685,7 +5142,6 @@
     - english
 - name: letter--Xx
   friendly_name: Letter xx
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5694,7 +5150,6 @@
     - english
 - name: letter--Yy
   friendly_name: Letter yy
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5703,7 +5158,6 @@
     - english
 - name: letter--Zz
   friendly_name: Letter zz
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5712,14 +5166,12 @@
     - english
 - name: lightning
   friendly_name: Lightning
-  usage: This is a description for usage
   aliases:
     - lightning
   sizes:
     - 32
 - name: link
   friendly_name: Link
-  usage: This is a description for usage
   aliases:
     - associate
     - association
@@ -5731,7 +5183,6 @@
     - 32
 - name: location
   friendly_name: Location
-  usage: This is a description for usage
   aliases:
     - place
     - locate
@@ -5745,7 +5196,6 @@
     - 32
 - name: login
   friendly_name: Login
-  usage: This is a description for usage
   aliases:
     - log on
     - password
@@ -5758,7 +5208,6 @@
     - 32
 - name: logo--digg
   friendly_name: Logo digg
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5772,7 +5221,6 @@
     - identification
 - name: logo--facebook
   friendly_name: Logo facebook
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5786,7 +5234,6 @@
     - identification
 - name: logo--flickr
   friendly_name: Logo flickr
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5800,7 +5247,6 @@
     - identification
 - name: logo--github
   friendly_name: Logo github
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5814,7 +5260,6 @@
     - identification
 - name: logo--glassdoor
   friendly_name: Logo glassdoor
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5828,7 +5273,6 @@
     - identification
 - name: logo--google
   friendly_name: Logo google
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5842,7 +5286,6 @@
     - identification
 - name: logo--instagram
   friendly_name: Logo instagram
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5856,7 +5299,6 @@
     - identification
 - name: logo--linkedin
   friendly_name: Logo linkedin
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5870,7 +5312,6 @@
     - identification
 - name: logo--livestream
   friendly_name: Logo livestream
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5884,7 +5325,6 @@
     - identification
 - name: logo--medium
   friendly_name: Logo medium
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5898,7 +5338,6 @@
     - identification
 - name: logo--openshift
   friendly_name: Logo openshift
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5912,7 +5351,6 @@
     - identification
 - name: logo--pinterest
   friendly_name: Logo pinterest
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5926,7 +5364,6 @@
     - identification
 - name: logo--quora
   friendly_name: Logo quora
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5940,7 +5377,6 @@
     - identification
 - name: logo--skype
   friendly_name: Logo skype
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5954,7 +5390,6 @@
     - identification
 - name: logo--slack
   friendly_name: Logo slack
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5968,7 +5403,6 @@
     - identification
 - name: logo--snapchat
   friendly_name: Logo snapchat
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5982,7 +5416,6 @@
     - identification
 - name: logo--tumblr
   friendly_name: Logo tumblr
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -5996,7 +5429,6 @@
     - identification
 - name: logo--twitter
   friendly_name: Logo twitter
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6010,7 +5442,6 @@
     - identification
 - name: logo--vmware
   friendly_name: Logo vmware
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6024,7 +5455,6 @@
     - identification
 - name: logo--xing
   friendly_name: Logo xing
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6038,7 +5468,6 @@
     - identification
 - name: logo--yelp
   friendly_name: Logo yelp
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6052,7 +5481,6 @@
     - identification
 - name: logo--youtube
   friendly_name: Logo youtube
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6066,7 +5494,6 @@
     - identification
 - name: logout
   friendly_name: Logout
-  usage: This is a description for usage
   aliases:
     - sign off
     - sign out
@@ -6077,7 +5504,6 @@
     - 32
 - name: loop
   friendly_name: Loop
-  usage: This is a description for usage
   aliases:
     - knot
     - curl
@@ -6091,7 +5517,6 @@
     - 32
 - name: mac--command
   friendly_name: Mac command
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6103,7 +5528,6 @@
     - keyboard
 - name: mac--option
   friendly_name: Mac option
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6115,7 +5539,6 @@
     - keyboard
 - name: mac--shift
   friendly_name: Mac shift
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6127,28 +5550,24 @@
     - keyboard
 - name: machine-learning
   friendly_name: Machine learning
-  usage: This is a description for usage
   aliases:
     - machine-learning
   sizes:
     - 32
 - name: magic-wand
   friendly_name: Magic wand
-  usage: This is a description for usage
   aliases:
     - magic-wand
   sizes:
     - 32
 - name: magic-wand--filled
   friendly_name: Magic wand filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - magic-wand
 - name: mail--all
   friendly_name: Mail all
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6160,21 +5579,18 @@
     - letter
 - name: manage-protection
   friendly_name: Manage protection
-  usage: This is a description for usage
   aliases:
     - manage-protection
   sizes:
     - 32
 - name: managed-solutions
   friendly_name: Managed solutions
-  usage: This is a description for usage
   aliases:
     - managed-solutions
   sizes:
     - 32
 - name: map
   friendly_name: Map
-  usage: This is a description for usage
   aliases:
     - atlas
     - locate
@@ -6188,7 +5604,6 @@
     - 32
 - name: medication
   friendly_name: Medication
-  usage: This is a description for usage
   aliases:
     - medicine
     - drug
@@ -6203,7 +5618,6 @@
     - 32
 - name: medication--alert
   friendly_name: Medication alert
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6218,7 +5632,6 @@
     - antidote
 - name: medication--reminder
   friendly_name: Medication reminder
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6233,14 +5646,12 @@
     - antidote
 - name: meter
   friendly_name: Meter
-  usage: This is a description for usage
   aliases:
     - meter
   sizes:
     - 32
 - name: microphone
   friendly_name: Microphone
-  usage: This is a description for usage
   aliases:
     - mic
     - speaker
@@ -6253,7 +5664,6 @@
     - 32
 - name: microphone--filled
   friendly_name: Microphone filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6266,7 +5676,6 @@
     - present
 - name: microphone--off--filled
   friendly_name: Microphone off filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6279,7 +5688,6 @@
     - present
 - name: microphone--off
   friendly_name: Microphone off
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6292,14 +5700,12 @@
     - present
 - name: microscope
   friendly_name: Microscope
-  usage: This is a description for usage
   aliases:
     - microscope
   sizes:
     - 32
 - name: migrate
   friendly_name: Migrate
-  usage: This is a description for usage
   aliases:
     - drift
     - roam
@@ -6313,7 +5719,6 @@
     - 32
 - name: migrate--alt
   friendly_name: Migrate alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6327,14 +5732,12 @@
     - move
 - name: mixed-rain-hail
   friendly_name: Mixed rain hail
-  usage: This is a description for usage
   aliases:
     - mixed-rain-hail
   sizes:
     - 32
 - name: mobile
   friendly_name: Mobile
-  usage: This is a description for usage
   aliases:
     - phone
     - iphone
@@ -6348,7 +5751,6 @@
     - 32
 - name: mobile--add
   friendly_name: Mobile add
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6362,7 +5764,6 @@
     - portable
 - name: mobile--audio
   friendly_name: Mobile audio
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6376,7 +5777,6 @@
     - portable
 - name: mobile--check
   friendly_name: Mobile check
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6390,7 +5790,6 @@
     - portable
 - name: mobile--download
   friendly_name: Mobile download
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6404,7 +5803,6 @@
     - portable
 - name: mobile--landscape
   friendly_name: Mobile landscape
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6418,7 +5816,6 @@
     - portable
 - name: model
   friendly_name: Model
-  usage: This is a description for usage
   aliases:
     - reference
     - 3d
@@ -6433,7 +5830,6 @@
     - 32
 - name: model--reference
   friendly_name: Model reference
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6448,35 +5844,30 @@
     - construct
 - name: money
   friendly_name: Money
-  usage: This is a description for usage
   aliases:
     - money
   sizes:
     - 32
 - name: moon
   friendly_name: Moon
-  usage: This is a description for usage
   aliases:
     - moon
   sizes:
     - 32
 - name: mostly-cloudy
   friendly_name: Mostly cloudy
-  usage: This is a description for usage
   aliases:
     - mostly-cloudy
   sizes:
     - 32
 - name: mostly-cloudy--night
   friendly_name: Mostly cloudy night
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - mostly-cloudy
 - name: move
   friendly_name: Move
-  usage: This is a description for usage
   aliases:
     - action
     - transfer
@@ -6488,7 +5879,6 @@
     - 32
 - name: movement
   friendly_name: Movement
-  usage: This is a description for usage
   aliases:
     - action
     - transfer
@@ -6500,7 +5890,6 @@
     - 32
 - name: music
   friendly_name: Music
-  usage: This is a description for usage
   aliases:
     - audio
     - melody
@@ -6513,63 +5902,54 @@
     - 32
 - name: network--1
   friendly_name: Network 1
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - network
 - name: network--2
   friendly_name: Network 2
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - network
 - name: network--3
   friendly_name: Network 3
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - network
 - name: network--4
   friendly_name: Network 4
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - network
 - name: no-image
   friendly_name: No image
-  usage: This is a description for usage
   aliases:
     - no-image
   sizes:
     - 32
 - name: no-ticket
   friendly_name: No ticket
-  usage: This is a description for usage
   aliases:
     - no-ticket
   sizes:
     - 32
 - name: noodle-bowl
   friendly_name: Noodle bowl
-  usage: This is a description for usage
   aliases:
     - noodle-bowl
   sizes:
     - 32
 - name: not-available
   friendly_name: Not available
-  usage: This is a description for usage
   aliases:
     - not-available
   sizes:
     - 32
 - name: not-sent
   friendly_name: Not sent
-  usage: This is a description for usage
   aliases:
     - failed
     - failure
@@ -6581,7 +5961,6 @@
     - 32
 - name: not-sent--filled
   friendly_name: Not sent filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6593,7 +5972,6 @@
     - email
 - name: notebook
   friendly_name: Notebook
-  usage: This is a description for usage
   aliases:
     - book
     - notes
@@ -6606,7 +5984,6 @@
     - 32
 - name: notebook--reference
   friendly_name: Notebook reference
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6619,7 +5996,6 @@
     - workbook
 - name: number--0
   friendly_name: Number 0
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6630,7 +6006,6 @@
     - figure
 - name: number--1
   friendly_name: Number 1
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6641,7 +6016,6 @@
     - figure
 - name: number--2
   friendly_name: Number 2
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6652,7 +6026,6 @@
     - figure
 - name: number--3
   friendly_name: Number 3
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6663,7 +6036,6 @@
     - figure
 - name: number--4
   friendly_name: Number 4
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6674,7 +6046,6 @@
     - figure
 - name: number--5
   friendly_name: Number 5
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6685,7 +6056,6 @@
     - figure
 - name: number--6
   friendly_name: Number 6
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6696,7 +6066,6 @@
     - figure
 - name: number--7
   friendly_name: Number 7
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6707,7 +6076,6 @@
     - figure
 - name: number--8
   friendly_name: Number 8
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6718,7 +6086,6 @@
     - figure
 - name: number--9
   friendly_name: Number 9
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6729,7 +6096,6 @@
     - figure
 - name: number--small--0
   friendly_name: Number small 0
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6740,7 +6106,6 @@
     - figure
 - name: number--small--1
   friendly_name: Number small 1
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6751,7 +6116,6 @@
     - figure
 - name: number--small--2
   friendly_name: Number small 2
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6762,7 +6126,6 @@
     - figure
 - name: number--small--3
   friendly_name: Number small 3
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6773,7 +6136,6 @@
     - figure
 - name: number--small--4
   friendly_name: Number small 4
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6784,7 +6146,6 @@
     - figure
 - name: number--small--5
   friendly_name: Number small 5
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6795,7 +6156,6 @@
     - figure
 - name: number--small--6
   friendly_name: Number small 6
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6806,7 +6166,6 @@
     - figure
 - name: number--small--7
   friendly_name: Number small 7
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6817,7 +6176,6 @@
     - figure
 - name: number--small--8
   friendly_name: Number small 8
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6828,7 +6186,6 @@
     - figure
 - name: number--small--9
   friendly_name: Number small 9
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6839,14 +6196,12 @@
     - figure
 - name: omega
   friendly_name: Omega
-  usage: This is a description for usage
   aliases:
     - omega
   sizes:
     - 32
 - name: opacity
   friendly_name: Opacity
-  usage: This is a description for usage
   aliases:
     - transparency
     - dim
@@ -6858,7 +6213,6 @@
     - 32
 - name: open-panel--bottom
   friendly_name: Open panel bottom
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6870,7 +6224,6 @@
     - nav
 - name: open-panel--filled--bottom
   friendly_name: Open panel filled bottom
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6882,7 +6235,6 @@
     - nav
 - name: open-panel--filled--left
   friendly_name: Open panel filled left
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6894,7 +6246,6 @@
     - nav
 - name: open-panel--filled--right
   friendly_name: Open panel filled right
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6906,7 +6257,6 @@
     - nav
 - name: open-panel--filled--top
   friendly_name: Open panel filled top
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6918,7 +6268,6 @@
     - nav
 - name: open-panel--left
   friendly_name: Open panel left
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6930,7 +6279,6 @@
     - nav
 - name: open-panel--right
   friendly_name: Open panel right
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6942,7 +6290,6 @@
     - nav
 - name: open-panel--top
   friendly_name: Open panel top
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6954,7 +6301,6 @@
     - nav
 - name: package
   friendly_name: Package
-  usage: This is a description for usage
   aliases:
     - download
     - kit
@@ -6967,7 +6313,6 @@
     - 32
 - name: page--first
   friendly_name: Page first
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6978,7 +6323,6 @@
     - back
 - name: page--last
   friendly_name: Page last
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -6989,7 +6333,6 @@
     - back
 - name: paint-brush
   friendly_name: Paint brush
-  usage: This is a description for usage
   aliases:
     - brush
     - paint
@@ -7003,7 +6346,6 @@
     - 32
 - name: paint-brush--alt
   friendly_name: Paint brush alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7017,7 +6359,6 @@
     - palette
 - name: panel-expansion
   friendly_name: Panel expansion
-  usage: This is a description for usage
   aliases:
     - side
     - navigation
@@ -7027,14 +6368,12 @@
     - 32
 - name: paragraph
   friendly_name: Paragraph
-  usage: This is a description for usage
   aliases:
     - paragraph
   sizes:
     - 32
 - name: parent-child
   friendly_name: Parent child
-  usage: This is a description for usage
   aliases:
     - nested
     - relation
@@ -7044,21 +6383,18 @@
     - 32
 - name: partly-cloudy
   friendly_name: Partly cloudy
-  usage: This is a description for usage
   aliases:
     - partly-cloudy
   sizes:
     - 32
 - name: partly-cloudy--night
   friendly_name: Partly cloudy night
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - partly-cloudy
 - name: partnership
   friendly_name: Partnership
-  usage: This is a description for usage
   aliases:
     - relationship
     - handshake
@@ -7068,7 +6404,6 @@
     - 32
 - name: password
   friendly_name: Password
-  usage: This is a description for usage
   aliases:
     - key
     - code
@@ -7078,7 +6413,6 @@
     - 32
 - name: paste
   friendly_name: Paste
-  usage: This is a description for usage
   aliases:
     - copy
     - file
@@ -7087,35 +6421,30 @@
     - 32
 - name: pedestrian-child
   friendly_name: Pedestrian child
-  usage: This is a description for usage
   aliases:
     - pedestrian-child
   sizes:
     - 32
 - name: pedestrian
   friendly_name: Pedestrian
-  usage: This is a description for usage
   aliases:
     - pedestrian
   sizes:
     - 32
 - name: percentage
   friendly_name: Percentage
-  usage: This is a description for usage
   aliases:
     - percentage
   sizes:
     - 32
 - name: percentage--filled
   friendly_name: Percentage filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - percentage
 - name: person
   friendly_name: Person
-  usage: This is a description for usage
   aliases:
     - human
     - male
@@ -7126,7 +6455,6 @@
     - 32
 - name: person--favorite
   friendly_name: Person favorite
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7137,7 +6465,6 @@
     - user
 - name: phone
   friendly_name: Phone
-  usage: This is a description for usage
   aliases:
     - call
     - cell
@@ -7149,7 +6476,6 @@
     - 32
 - name: phone--filled
   friendly_name: Phone filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7161,7 +6487,6 @@
     - mute
 - name: phone--off--filled
   friendly_name: Phone off filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7173,7 +6498,6 @@
     - mute
 - name: phone--off
   friendly_name: Phone off
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7185,7 +6509,6 @@
     - mute
 - name: phrase-sentiment
   friendly_name: Phrase sentiment
-  usage: This is a description for usage
   aliases:
     - emotion
     - meaning
@@ -7194,7 +6517,6 @@
     - 32
 - name: pills
   friendly_name: Pills
-  usage: This is a description for usage
   aliases:
     - health
     - medicine
@@ -7202,7 +6524,6 @@
     - 32
 - name: pills--add
   friendly_name: Pills add
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7210,7 +6531,6 @@
     - medicine
 - name: pills--subtract
   friendly_name: Pills subtract
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7218,7 +6538,6 @@
     - medicine
 - name: pin
   friendly_name: Pin
-  usage: This is a description for usage
   aliases:
     - save
     - favorite
@@ -7226,7 +6545,6 @@
     - 32
 - name: plane
   friendly_name: Plane
-  usage: This is a description for usage
   aliases:
     - airplane
     - flight
@@ -7235,7 +6553,6 @@
     - 32
 - name: playlist
   friendly_name: Playlist
-  usage: This is a description for usage
   aliases:
     - music
     - play
@@ -7244,14 +6561,12 @@
     - 32
 - name: policy
   friendly_name: Policy
-  usage: This is a description for usage
   aliases:
     - policy
   sizes:
     - 32
 - name: popup
   friendly_name: Popup
-  usage: This is a description for usage
   aliases:
     - modal
     - overlay
@@ -7260,7 +6575,6 @@
     - 32
 - name: portfolio
   friendly_name: Portfolio
-  usage: This is a description for usage
   aliases:
     - briefcase
     - suitcase
@@ -7270,7 +6584,6 @@
     - 32
 - name: presentation-file
   friendly_name: Presentation file
-  usage: This is a description for usage
   aliases:
     - keynote
     - chart
@@ -7280,7 +6593,6 @@
     - 32
 - name: printer
   friendly_name: Printer
-  usage: This is a description for usage
   aliases:
     - print
     - copy
@@ -7290,14 +6602,12 @@
     - 32
 - name: product
   friendly_name: Product
-  usage: This is a description for usage
   aliases:
     - product
   sizes:
     - 32
 - name: purchase
   friendly_name: Purchase
-  usage: This is a description for usage
   aliases:
     - charge
     - card
@@ -7307,21 +6617,18 @@
     - 32
 - name: qr-code
   friendly_name: Qr code
-  usage: This is a description for usage
   aliases:
     - qr-code
   sizes:
     - 32
 - name: query-queue
   friendly_name: Query queue
-  usage: This is a description for usage
   aliases:
     - list
   sizes:
     - 32
 - name: quotes
   friendly_name: Quotes
-  usage: This is a description for usage
   aliases:
     - mark
     - punctuation
@@ -7329,7 +6636,6 @@
     - 32
 - name: radio-button
   friendly_name: Radio button
-  usage: This is a description for usage
   aliases:
     - component
     - circle
@@ -7339,7 +6645,6 @@
     - 32
 - name: radio-button--checked
   friendly_name: Radio button checked
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7349,7 +6654,6 @@
     - case
 - name: radio
   friendly_name: Radio
-  usage: This is a description for usage
   aliases:
     - music
     - sound
@@ -7359,49 +6663,42 @@
     - 32
 - name: rain
   friendly_name: Rain
-  usage: This is a description for usage
   aliases:
     - rain
   sizes:
     - 32
 - name: rain--drizzle
   friendly_name: Rain drizzle
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - rain
 - name: rain--heavy
   friendly_name: Rain heavy
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - rain
 - name: rain--scattered--night
   friendly_name: Rain scattered night
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - rain
 - name: rain--scattered
   friendly_name: Rain scattered
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - rain
 - name: rain-drop
   friendly_name: Rain drop
-  usage: This is a description for usage
   aliases:
     - rain-drop
   sizes:
     - 32
 - name: receipt
   friendly_name: Receipt
-  usage: This is a description for usage
   aliases:
     - check
     - bill
@@ -7410,7 +6707,6 @@
     - 32
 - name: recently-viewed
   friendly_name: Recently viewed
-  usage: This is a description for usage
   aliases:
     - history
     - version
@@ -7420,7 +6716,6 @@
     - 32
 - name: recommend
   friendly_name: Recommend
-  usage: This is a description for usage
   aliases:
     - suggest
     - award
@@ -7429,7 +6724,6 @@
     - 32
 - name: recording
   friendly_name: Recording
-  usage: This is a description for usage
   aliases:
     - start
     - music
@@ -7439,7 +6733,6 @@
     - 32
 - name: recording--filled--alt
   friendly_name: Recording filled alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7449,7 +6742,6 @@
     - control
 - name: recording--filled
   friendly_name: Recording filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7459,21 +6751,18 @@
     - control
 - name: reminder
   friendly_name: Reminder
-  usage: This is a description for usage
   aliases:
     - reminder
   sizes:
     - 32
 - name: reminder--medical
   friendly_name: Reminder medical
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - reminder
 - name: renew
   friendly_name: Renew
-  usage: This is a description for usage
   aliases:
     - refresh
     - replay
@@ -7482,7 +6771,6 @@
     - 32
 - name: repeat
   friendly_name: Repeat
-  usage: This is a description for usage
   aliases:
     - repeat once
     - music
@@ -7491,7 +6779,6 @@
     - 32
 - name: repeat--one
   friendly_name: Repeat one
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7500,7 +6787,6 @@
     - control
 - name: reply
   friendly_name: Reply
-  usage: This is a description for usage
   aliases:
     - back
     - respond
@@ -7509,7 +6795,6 @@
     - 32
 - name: report
   friendly_name: Report
-  usage: This is a description for usage
   aliases:
     - clipboard
     - paper
@@ -7519,7 +6804,6 @@
     - 32
 - name: report--data
   friendly_name: Report data
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7529,7 +6813,6 @@
     - summary
 - name: request-quote
   friendly_name: Request quote
-  usage: This is a description for usage
   aliases:
     - edit
     - pencil
@@ -7539,7 +6822,6 @@
     - 32
 - name: research--bloch-sphere
   friendly_name: Research bloch sphere
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7547,7 +6829,6 @@
     - sphere
 - name: research--hinton-plot
   friendly_name: Research hinton plot
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7555,7 +6836,6 @@
     - sphere
 - name: research--matrix
   friendly_name: Research matrix
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7563,7 +6843,6 @@
     - sphere
 - name: reset
   friendly_name: Reset
-  usage: This is a description for usage
   aliases:
     - refresh
     - undo
@@ -7572,7 +6851,6 @@
     - 32
 - name: reset--alt
   friendly_name: Reset alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7581,7 +6859,6 @@
     - revert
 - name: restaurant
   friendly_name: Restaurant
-  usage: This is a description for usage
   aliases:
     - dining
     - knife
@@ -7595,7 +6872,6 @@
     - 32
 - name: restaurant--fine
   friendly_name: Restaurant fine
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7609,7 +6885,6 @@
     - eat
 - name: rewind--10
   friendly_name: Rewind 10
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7619,7 +6894,6 @@
     - reverse
 - name: rewind--30
   friendly_name: Rewind 30
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7629,7 +6903,6 @@
     - reverse
 - name: rewind--5
   friendly_name: Rewind 5
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7639,7 +6912,6 @@
     - reverse
 - name: rocket
   friendly_name: Rocket
-  usage: This is a description for usage
   aliases:
     - missile
     - spaceship
@@ -7650,7 +6922,6 @@
     - 32
 - name: rotate
   friendly_name: Rotate
-  usage: This is a description for usage
   aliases:
     - revolve
     - circle
@@ -7661,7 +6932,6 @@
     - 32
 - name: rotate--clockwise--alt--filled
   friendly_name: Rotate clockwise alt filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7672,7 +6942,6 @@
     - launch
 - name: rotate--clockwise--alt
   friendly_name: Rotate clockwise alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7683,7 +6952,6 @@
     - launch
 - name: rotate--clockwise--filled
   friendly_name: Rotate clockwise filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7694,7 +6962,6 @@
     - launch
 - name: rotate--clockwise
   friendly_name: Rotate clockwise
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7705,7 +6972,6 @@
     - launch
 - name: rotate--counterclockwise--alt--filled
   friendly_name: Rotate counterclockwise alt filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7716,7 +6982,6 @@
     - launch
 - name: rotate--counterclockwise--alt
   friendly_name: Rotate counterclockwise alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7727,7 +6992,6 @@
     - launch
 - name: rotate--counterclockwise--filled
   friendly_name: Rotate counterclockwise filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7738,7 +7002,6 @@
     - launch
 - name: rotate--counterclockwise
   friendly_name: Rotate counterclockwise
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7749,7 +7012,6 @@
     - launch
 - name: rotate--180
   friendly_name: Rotate 180
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7760,7 +7022,6 @@
     - launch
 - name: rotate--360
   friendly_name: Rotate 360
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7771,7 +7032,6 @@
     - launch
 - name: row
   friendly_name: Row
-  usage: This is a description for usage
   aliases:
     - line
     - tier
@@ -7785,7 +7045,6 @@
     - 32
 - name: rss
   friendly_name: Rss
-  usage: This is a description for usage
   aliases:
     - web feed
     - feed
@@ -7797,14 +7056,12 @@
     - 32
 - name: rule
   friendly_name: Rule
-  usage: This is a description for usage
   aliases:
     - rule
   sizes:
     - 32
 - name: ruler
   friendly_name: Ruler
-  usage: This is a description for usage
   aliases:
     - measure
     - tool
@@ -7816,7 +7073,6 @@
     - 32
 - name: ruler--alt
   friendly_name: Ruler alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7828,7 +7084,6 @@
     - scale
 - name: run
   friendly_name: Run
-  usage: This is a description for usage
   aliases:
     - start
     - play
@@ -7837,7 +7092,6 @@
     - 32
 - name: scale
   friendly_name: Scale
-  usage: This is a description for usage
   aliases:
     - scalable
     - ratio
@@ -7852,7 +7106,6 @@
     - 32
 - name: scalpel
   friendly_name: Scalpel
-  usage: This is a description for usage
   aliases:
     - blade
     - cutter
@@ -7868,7 +7121,6 @@
     - 32
 - name: scalpel--cursor
   friendly_name: Scalpel cursor
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7884,7 +7136,6 @@
     - medical
 - name: scalpel--lasso
   friendly_name: Scalpel lasso
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7900,7 +7151,6 @@
     - medical
 - name: scalpel--select
   friendly_name: Scalpel select
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7916,7 +7166,6 @@
     - medical
 - name: scan
   friendly_name: Scan
-  usage: This is a description for usage
   aliases:
     - scanner
     - code
@@ -7929,28 +7178,24 @@
     - 32
 - name: schematics
   friendly_name: Schematics
-  usage: This is a description for usage
   aliases:
     - schematics
   sizes:
     - 32
 - name: scooter
   friendly_name: Scooter
-  usage: This is a description for usage
   aliases:
     - scooter
   sizes:
     - 32
 - name: scooter--front
   friendly_name: Scooter front
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - scooter
 - name: screen
   friendly_name: Screen
-  usage: This is a description for usage
   aliases:
     - computer
     - display
@@ -7964,7 +7209,6 @@
     - 32
 - name: screen--off
   friendly_name: Screen off
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -7978,7 +7222,6 @@
     - mac
 - name: send
   friendly_name: Send
-  usage: This is a description for usage
   aliases:
     - mail
     - message
@@ -7993,7 +7236,6 @@
     - 32
 - name: send--alt--filled
   friendly_name: Send alt filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8008,7 +7250,6 @@
     - email
 - name: send--alt
   friendly_name: Send alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8023,7 +7264,6 @@
     - email
 - name: send--filled
   friendly_name: Send filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8038,14 +7278,12 @@
     - email
 - name: service-desk
   friendly_name: Service desk
-  usage: This is a description for usage
   aliases:
     - service-desk
   sizes:
     - 32
 - name: share-knowledge
   friendly_name: Share knowledge
-  usage: This is a description for usage
   aliases:
     - people
     - communicate
@@ -8059,7 +7297,6 @@
     - 32
 - name: share
   friendly_name: Share
-  usage: This is a description for usage
   aliases:
     - social media
     - facebook
@@ -8073,7 +7310,6 @@
     - 32
 - name: shopping--bag
   friendly_name: Shopping bag
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8087,7 +7323,6 @@
     - retail
 - name: shopping--cart
   friendly_name: Shopping cart
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8101,7 +7336,6 @@
     - retail
 - name: shopping--catalog
   friendly_name: Shopping catalog
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8115,7 +7349,6 @@
     - retail
 - name: shrink-screen
   friendly_name: Shrink screen
-  usage: This is a description for usage
   aliases:
     - minimize
     - resize
@@ -8129,7 +7362,6 @@
     - 32
 - name: shrink-screen--filled
   friendly_name: Shrink screen filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8143,7 +7375,6 @@
     - zoom out
 - name: shuffle
   friendly_name: Shuffle
-  usage: This is a description for usage
   aliases:
     - move
     - reorder
@@ -8158,7 +7389,6 @@
     - 32
 - name: shuttle
   friendly_name: Shuttle
-  usage: This is a description for usage
   aliases:
     - bus
     - truck
@@ -8171,21 +7401,18 @@
     - 32
 - name: sigma
   friendly_name: Sigma
-  usage: This is a description for usage
   aliases:
     - sigma
   sizes:
     - 32
 - name: skill-level
   friendly_name: Skill level
-  usage: This is a description for usage
   aliases:
     - skill-level
   sizes:
     - 32
 - name: skip--back--filled
   friendly_name: Skip back filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8201,7 +7428,6 @@
     - music
 - name: skip--back
   friendly_name: Skip back
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8217,7 +7443,6 @@
     - music
 - name: skip--forward--filled
   friendly_name: Skip forward filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8233,7 +7458,6 @@
     - music
 - name: skip--forward
   friendly_name: Skip forward
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8249,14 +7473,12 @@
     - music
 - name: sleet
   friendly_name: Sleet
-  usage: This is a description for usage
   aliases:
     - sleet
   sizes:
     - 32
 - name: smell
   friendly_name: Smell
-  usage: This is a description for usage
   aliases:
     - nose
     - scent
@@ -8268,70 +7490,60 @@
     - 32
 - name: smoke
   friendly_name: Smoke
-  usage: This is a description for usage
   aliases:
     - smoke
   sizes:
     - 32
 - name: snooze
   friendly_name: Snooze
-  usage: This is a description for usage
   aliases:
     - snooze
   sizes:
     - 32
 - name: snow
   friendly_name: Snow
-  usage: This is a description for usage
   aliases:
     - snow
   sizes:
     - 32
 - name: snow--blizzard
   friendly_name: Snow blizzard
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - snow
 - name: snow--heavy
   friendly_name: Snow heavy
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - snow
 - name: snow--scattered--night
   friendly_name: Snow scattered night
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - snow
 - name: snow--scattered
   friendly_name: Snow scattered
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - snow
 - name: snowflake
   friendly_name: Snowflake
-  usage: This is a description for usage
   aliases:
     - snowflake
   sizes:
     - 32
 - name: soccer
   friendly_name: Soccer
-  usage: This is a description for usage
   aliases:
     - soccer
   sizes:
     - 32
 - name: spell-check
   friendly_name: Spell check
-  usage: This is a description for usage
   aliases:
     - check
     - correction
@@ -8346,7 +7558,6 @@
     - 32
 - name: split-screen
   friendly_name: Split screen
-  usage: This is a description for usage
   aliases:
     - divide
     - dual
@@ -8360,7 +7571,6 @@
     - 32
 - name: spray-paint
   friendly_name: Spray paint
-  usage: This is a description for usage
   aliases:
     - paint
     - spray
@@ -8373,21 +7583,18 @@
     - 32
 - name: sprout
   friendly_name: Sprout
-  usage: This is a description for usage
   aliases:
     - sprout
   sizes:
     - 32
 - name: stamp
   friendly_name: Stamp
-  usage: This is a description for usage
   aliases:
     - stamp
   sizes:
     - 32
 - name: store
   friendly_name: Store
-  usage: This is a description for usage
   aliases:
     - building
     - shop
@@ -8402,42 +7609,36 @@
     - 32
 - name: strawberry
   friendly_name: Strawberry
-  usage: This is a description for usage
   aliases:
     - strawberry
   sizes:
     - 32
 - name: sun
   friendly_name: Sun
-  usage: This is a description for usage
   aliases:
     - sun
   sizes:
     - 32
 - name: sunny
   friendly_name: Sunny
-  usage: This is a description for usage
   aliases:
     - sunny
   sizes:
     - 32
 - name: sunrise
   friendly_name: Sunrise
-  usage: This is a description for usage
   aliases:
     - sunrise
   sizes:
     - 32
 - name: sunset
   friendly_name: Sunset
-  usage: This is a description for usage
   aliases:
     - sunset
   sizes:
     - 32
 - name: table
   friendly_name: Table
-  usage: This is a description for usage
   aliases:
     - data
     - spreadsheet
@@ -8449,7 +7650,6 @@
     - 32
 - name: table--split
   friendly_name: Table split
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8461,7 +7661,6 @@
     - grid
 - name: table-of-contents
   friendly_name: Table of contents
-  usage: This is a description for usage
   aliases:
     - list
     - chart
@@ -8477,21 +7676,18 @@
     - 32
 - name: tablet
   friendly_name: Tablet
-  usage: This is a description for usage
   aliases:
     - tablet
   sizes:
     - 32
 - name: tablet--landscape
   friendly_name: Tablet landscape
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - tablet
 - name: tag
   friendly_name: Tag
-  usage: This is a description for usage
   aliases:
     - label
     - mark
@@ -8503,7 +7699,6 @@
     - 32
 - name: tag--edit
   friendly_name: Tag edit
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8515,7 +7710,6 @@
     - marker
 - name: tag--group
   friendly_name: Tag group
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8527,7 +7721,6 @@
     - marker
 - name: task
   friendly_name: Task
-  usage: This is a description for usage
   aliases:
     - clipboard
     - checkmark
@@ -8540,7 +7733,6 @@
     - 32
 - name: taste
   friendly_name: Taste
-  usage: This is a description for usage
   aliases:
     - tongue
     - mouth
@@ -8550,7 +7742,6 @@
     - 32
 - name: taxi
   friendly_name: Taxi
-  usage: This is a description for usage
   aliases:
     - car
     - cab
@@ -8561,7 +7752,6 @@
     - 32
 - name: temperature
   friendly_name: Temperature
-  usage: This is a description for usage
   aliases:
     - weather
     - thermometer
@@ -8573,7 +7763,6 @@
     - 32
 - name: temperature--frigid
   friendly_name: Temperature frigid
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8585,7 +7774,6 @@
     - cold
 - name: temperature--hot
   friendly_name: Temperature hot
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8597,7 +7785,6 @@
     - cold
 - name: template
   friendly_name: Template
-  usage: This is a description for usage
   aliases:
     - dashboard
     - arrange
@@ -8608,28 +7795,24 @@
     - 32
 - name: tennis-ball
   friendly_name: Tennis ball
-  usage: This is a description for usage
   aliases:
     - tennis-ball
   sizes:
     - 32
 - name: tennis
   friendly_name: Tennis
-  usage: This is a description for usage
   aliases:
     - tennis
   sizes:
     - 32
 - name: term
   friendly_name: Term
-  usage: This is a description for usage
   aliases:
     - term
   sizes:
     - 32
 - name: terminal
   friendly_name: Terminal
-  usage: This is a description for usage
   aliases:
     - code
     - code editor
@@ -8638,7 +7821,6 @@
     - 32
 - name: text--align--center
   friendly_name: Text align center
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8648,7 +7830,6 @@
     - editor
 - name: text--align--justify
   friendly_name: Text align justify
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8658,7 +7839,6 @@
     - editor
 - name: text--align--left
   friendly_name: Text align left
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8668,7 +7848,6 @@
     - editor
 - name: text--align--right
   friendly_name: Text align right
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8678,7 +7857,6 @@
     - editor
 - name: text--all-caps
   friendly_name: Text all caps
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8688,7 +7866,6 @@
     - editor
 - name: text--bold
   friendly_name: Text bold
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8698,7 +7875,6 @@
     - editor
 - name: text--color
   friendly_name: Text color
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8708,7 +7884,6 @@
     - editor
 - name: text--creation
   friendly_name: Text creation
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8718,7 +7893,6 @@
     - editor
 - name: text--fill
   friendly_name: Text fill
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8728,7 +7902,6 @@
     - editor
 - name: text--highlight
   friendly_name: Text highlight
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8738,7 +7911,6 @@
     - editor
 - name: text--indent--less
   friendly_name: Text indent less
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8748,7 +7920,6 @@
     - editor
 - name: text--indent--more
   friendly_name: Text indent more
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8758,7 +7929,6 @@
     - editor
 - name: text--indent
   friendly_name: Text indent
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8768,7 +7938,6 @@
     - editor
 - name: text--italic
   friendly_name: Text italic
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8778,7 +7947,6 @@
     - editor
 - name: text--kerning
   friendly_name: Text kerning
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8788,7 +7956,6 @@
     - editor
 - name: text--leading
   friendly_name: Text leading
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8798,7 +7965,6 @@
     - editor
 - name: text--line-spacing
   friendly_name: Text line spacing
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8808,7 +7974,6 @@
     - editor
 - name: text--new-line
   friendly_name: Text new line
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8818,7 +7983,6 @@
     - editor
 - name: text--scale
   friendly_name: Text scale
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8828,7 +7992,6 @@
     - editor
 - name: text--selection
   friendly_name: Text selection
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8838,7 +8001,6 @@
     - editor
 - name: text--small-caps
   friendly_name: Text small caps
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8848,7 +8010,6 @@
     - editor
 - name: text--strikethrough
   friendly_name: Text strikethrough
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8858,7 +8019,6 @@
     - editor
 - name: text--subscript
   friendly_name: Text subscript
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8868,7 +8028,6 @@
     - editor
 - name: text--superscript
   friendly_name: Text superscript
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8878,7 +8037,6 @@
     - editor
 - name: text--tracking
   friendly_name: Text tracking
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8888,7 +8046,6 @@
     - editor
 - name: text--underline
   friendly_name: Text underline
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8898,7 +8055,6 @@
     - editor
 - name: text--wrap
   friendly_name: Text wrap
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8908,35 +8064,30 @@
     - editor
 - name: text-link
   friendly_name: Text link
-  usage: This is a description for usage
   aliases:
     - text-link
   sizes:
     - 32
 - name: text-link--analysis
   friendly_name: Text link analysis
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - text-link
 - name: text-mining
   friendly_name: Text mining
-  usage: This is a description for usage
   aliases:
     - text-mining
   sizes:
     - 32
 - name: text-mining--applier
   friendly_name: Text mining applier
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - text-mining
 - name: thumbnail--1
   friendly_name: Thumbnail 1
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8945,7 +8096,6 @@
     - grid
 - name: thumbnail--2
   friendly_name: Thumbnail 2
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -8954,7 +8104,6 @@
     - grid
 - name: thumbs-down
   friendly_name: Thumbs down
-  usage: This is a description for usage
   aliases:
     - dislike
     - hand
@@ -8965,7 +8114,6 @@
     - 32
 - name: thumbs-up
   friendly_name: Thumbs up
-  usage: This is a description for usage
   aliases:
     - like
     - hand
@@ -8976,42 +8124,36 @@
     - 32
 - name: thunderstorm
   friendly_name: Thunderstorm
-  usage: This is a description for usage
   aliases:
     - thunderstorm
   sizes:
     - 32
 - name: thunderstorm--scattered--night
   friendly_name: Thunderstorm scattered night
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - thunderstorm
 - name: thunderstorm--scattered
   friendly_name: Thunderstorm scattered
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - thunderstorm
 - name: thunderstorm--severe
   friendly_name: Thunderstorm severe
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - thunderstorm
 - name: thunderstorm--strong
   friendly_name: Thunderstorm strong
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - thunderstorm
 - name: ticket
   friendly_name: Ticket
-  usage: This is a description for usage
   aliases:
     - stub
     - admission
@@ -9019,7 +8161,6 @@
     - 32
 - name: timer
   friendly_name: Timer
-  usage: This is a description for usage
   aliases:
     - alarm
     - alert
@@ -9028,7 +8169,6 @@
     - 32
 - name: tool-box
   friendly_name: Tool box
-  usage: This is a description for usage
   aliases:
     - kit
     - container
@@ -9036,7 +8176,6 @@
     - 32
 - name: tools
   friendly_name: Tools
-  usage: This is a description for usage
   aliases:
     - wrench
     - fix
@@ -9046,14 +8185,12 @@
     - 32
 - name: tornado
   friendly_name: Tornado
-  usage: This is a description for usage
   aliases:
     - tornado
   sizes:
     - 32
 - name: touch--1
   friendly_name: Touch 1
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9063,7 +8200,6 @@
     - click
 - name: touch--2
   friendly_name: Touch 2
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9073,7 +8209,6 @@
     - click
 - name: train
   friendly_name: Train
-  usage: This is a description for usage
   aliases:
     - subway
     - metro
@@ -9082,105 +8217,90 @@
     - 32
 - name: tram
   friendly_name: Tram
-  usage: This is a description for usage
   aliases:
     - tram
   sizes:
     - 32
 - name: translate
   friendly_name: Translate
-  usage: This is a description for usage
   aliases:
     - language
   sizes:
     - 32
 - name: tree-view
   friendly_name: Tree view
-  usage: This is a description for usage
   aliases:
     - flow chart
   sizes:
     - 32
 - name: tree-view--alt
   friendly_name: Tree view alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - flow chart
 - name: tree
   friendly_name: Tree
-  usage: This is a description for usage
   aliases:
     - tree
   sizes:
     - 32
 - name: trophy
   friendly_name: Trophy
-  usage: This is a description for usage
   aliases:
     - trophy
   sizes:
     - 32
 - name: trophy--filled
   friendly_name: Trophy filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - trophy
 - name: tropical-storm
   friendly_name: Tropical storm
-  usage: This is a description for usage
   aliases:
     - tropical-storm
   sizes:
     - 32
 - name: type-pattern
   friendly_name: Type pattern
-  usage: This is a description for usage
   aliases:
     - type-pattern
   sizes:
     - 32
 - name: types
   friendly_name: Types
-  usage: This is a description for usage
   aliases:
     - types
   sizes:
     - 32
 - name: undefined
   friendly_name: Undefined
-  usage: This is a description for usage
   aliases:
     - undefined
   sizes:
     - 32
 - name: undefined--filled
   friendly_name: Undefined filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - undefined
 - name: unknown
   friendly_name: Unknown
-  usage: This is a description for usage
   aliases:
     - unknown
   sizes:
     - 32
 - name: unknown--filled
   friendly_name: Unknown filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - unknown
 - name: unlink
   friendly_name: Unlink
-  usage: This is a description for usage
   aliases:
     - detach
     - paperclip
@@ -9189,7 +8309,6 @@
     - 32
 - name: user-profile--alt
   friendly_name: User profile alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9197,7 +8316,6 @@
     - account
 - name: van
   friendly_name: Van
-  usage: This is a description for usage
   aliases:
     - vehicle
     - car
@@ -9206,7 +8324,6 @@
     - 32
 - name: video
   friendly_name: Video
-  usage: This is a description for usage
   aliases:
     - camera
     - recorder
@@ -9215,7 +8332,6 @@
     - 32
 - name: video--add
   friendly_name: Video add
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9224,7 +8340,6 @@
     - movie
 - name: video--chat
   friendly_name: Video chat
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9233,7 +8348,6 @@
     - movie
 - name: video--filled
   friendly_name: Video filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9242,7 +8356,6 @@
     - movie
 - name: video--off--filled
   friendly_name: Video off filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9251,7 +8364,6 @@
     - movie
 - name: video--off
   friendly_name: Video off
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9260,42 +8372,36 @@
     - movie
 - name: virtual-column
   friendly_name: Virtual column
-  usage: This is a description for usage
   aliases:
     - virtual-column
   sizes:
     - 32
 - name: virtual-column--key
   friendly_name: Virtual column key
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - virtual-column
 - name: virtual-machine
   friendly_name: Virtual machine
-  usage: This is a description for usage
   aliases:
     - virtual-machine
   sizes:
     - 32
 - name: virtual-private-cloud
   friendly_name: Virtual private cloud
-  usage: This is a description for usage
   aliases:
     - virtual-private-cloud
   sizes:
     - 32
 - name: virtual-private-cloud--alt
   friendly_name: Virtual private cloud alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - virtual-private-cloud
 - name: visual-recognition
   friendly_name: Visual recognition
-  usage: This is a description for usage
   aliases:
     - picture
     - ai
@@ -9303,14 +8409,12 @@
     - 32
 - name: vmdk-disk
   friendly_name: Vmdk disk
-  usage: This is a description for usage
   aliases:
     - vmdk-disk
   sizes:
     - 32
 - name: voicemail
   friendly_name: Voicemail
-  usage: This is a description for usage
   aliases:
     - recording
     - audio
@@ -9319,7 +8423,6 @@
     - 32
 - name: volume--down--filled
   friendly_name: Volume down filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9327,7 +8430,6 @@
     - noise
 - name: volume--down
   friendly_name: Volume down
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9335,7 +8437,6 @@
     - noise
 - name: volume--mute--filled
   friendly_name: Volume mute filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9343,7 +8444,6 @@
     - noise
 - name: volume--mute
   friendly_name: Volume mute
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9351,7 +8451,6 @@
     - noise
 - name: volume--up--filled
   friendly_name: Volume up filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9359,7 +8458,6 @@
     - noise
 - name: volume--up
   friendly_name: Volume up
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9367,7 +8465,6 @@
     - noise
 - name: wallet
   friendly_name: Wallet
-  usage: This is a description for usage
   aliases:
     - money
     - purse
@@ -9375,21 +8472,18 @@
     - 32
 - name: warning-square
   friendly_name: Warning square
-  usage: This is a description for usage
   aliases:
     - warning-square
   sizes:
     - 32
 - name: warning-square--filled
   friendly_name: Warning square filled
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - warning-square
 - name: watch
   friendly_name: Watch
-  usage: This is a description for usage
   aliases:
     - time
     - clock
@@ -9397,42 +8491,36 @@
     - 32
 - name: watson
   friendly_name: Watson
-  usage: This is a description for usage
   aliases:
     - ai
   sizes:
     - 32
 - name: watson--machine-learning
   friendly_name: Watson machine learning
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - ai
 - name: 3D-Cursor
   friendly_name: 3D cursor
-  usage: This is a description for usage
   aliases:
     - watson
   sizes:
     - 32
 - name: 3D-MPR-Toggle
   friendly_name: 3D mpr toggle
-  usage: This is a description for usage
   aliases:
     - watson
   sizes:
     - 32
 - name: 3D-cursor--alt
   friendly_name: 3 d cursor alt
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - 3D-cursor
 - name: 3D-curve--auto-colon
   friendly_name: 3 d curve auto colon
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9441,7 +8529,6 @@
     - spline
 - name: 3D-curve--auto-vessels
   friendly_name: 3 d curve auto vessels
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9450,7 +8537,6 @@
     - spline
 - name: 3D-curve--manual
   friendly_name: 3 d curve manual
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9459,7 +8545,6 @@
     - spline
 - name: 3D-iCa
   friendly_name: 3D iCa
-  usage: This is a description for usage
   aliases:
     - iCA
     - dimension
@@ -9469,14 +8554,12 @@
     - 32
 - name: 3D-software
   friendly_name: 3D software
-  usage: This is a description for usage
   aliases:
     - 3D-software
   sizes:
     - 32
 - name: 3rd-party-connected
   friendly_name: 3rd party connected
-  usage: This is a description for usage
   aliases:
     - watson
     - dots
@@ -9487,7 +8570,6 @@
     - 32
 - name: angle
   friendly_name: Angle
-  usage: This is a description for usage
   aliases:
     - watson
     - tilt
@@ -9497,7 +8579,6 @@
     - 32
 - name: annotation-visibility
   friendly_name: Annotation visibility
-  usage: This is a description for usage
   aliases:
     - meter
     - instrument
@@ -9508,7 +8589,6 @@
     - 32
 - name: auto-scroll
   friendly_name: Auto scroll
-  usage: This is a description for usage
   aliases:
     - scrolling
     - slide
@@ -9517,7 +8597,6 @@
     - 32
 - name: cd--archive
   friendly_name: Cd archive
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9527,7 +8606,6 @@
     - bull's eye
 - name: cd--create-archive
   friendly_name: Cd create archive
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9537,7 +8615,6 @@
     - bull's eye
 - name: cd--create-exchange
   friendly_name: Cd create exchange
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9547,7 +8624,6 @@
     - bull's eye
 - name: circle-measurement
   friendly_name: Circle measurement
-  usage: This is a description for usage
   aliases:
     - pan
     - scan
@@ -9556,7 +8632,6 @@
     - 32
 - name: cobb-angle
   friendly_name: Cobb angle
-  usage: This is a description for usage
   aliases:
     - corner
     - slant
@@ -9568,7 +8643,6 @@
     - 32
 - name: cross-reference
   friendly_name: Cross reference
-  usage: This is a description for usage
   aliases:
     - read
     - research
@@ -9577,14 +8651,12 @@
     - 32
 - name: denominate
   friendly_name: Denominate
-  usage: This is a description for usage
   aliases:
     - denominate
   sizes:
     - 32
 - name: dicom--6000
   friendly_name: Dicom 6000
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9593,7 +8665,6 @@
     - communication
 - name: dicom--overlay
   friendly_name: Dicom overlay
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9602,21 +8673,18 @@
     - communication
 - name: dna
   friendly_name: Dna
-  usage: This is a description for usage
   aliases:
     - dna
   sizes:
     - 32
 - name: edge-enhancement
   friendly_name: Edge enhancement
-  usage: This is a description for usage
   aliases:
     - edge-enhancement
   sizes:
     - 32
 - name: edit-filter
   friendly_name: Edit filter
-  usage: This is a description for usage
   aliases:
     - pencil
     - funnel
@@ -9624,7 +8692,6 @@
     - 32
 - name: fusion-blender
   friendly_name: Fusion blender
-  usage: This is a description for usage
   aliases:
     - bar
     - box
@@ -9633,7 +8700,6 @@
     - 32
 - name: hanging-protocol
   friendly_name: Hanging protocol
-  usage: This is a description for usage
   aliases:
     - hanger
     - clothes
@@ -9643,21 +8709,18 @@
     - 32
 - name: iCA-2D
   friendly_name: I ca 2 d
-  usage: This is a description for usage
   aliases:
     - iCA-2D
   sizes:
     - 32
 - name: interactive-segmentation-cursor
   friendly_name: Interactive segmentation cursor
-  usage: This is a description for usage
   aliases:
     - interactive-segmentation-cursor
   sizes:
     - 32
 - name: launch-study--1
   friendly_name: Launch study 1
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9667,7 +8730,6 @@
     - drive
 - name: launch-study--2
   friendly_name: Launch study 2
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9677,7 +8739,6 @@
     - drive
 - name: launch-study--3
   friendly_name: Launch study 3
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9687,7 +8748,6 @@
     - drive
 - name: magnify
   friendly_name: Magnify
-  usage: This is a description for usage
   aliases:
     - expand
     - zoom
@@ -9697,21 +8757,18 @@
     - 32
 - name: mammogram
   friendly_name: Mammogram
-  usage: This is a description for usage
   aliases:
     - mammogram
   sizes:
     - 32
 - name: nominate
   friendly_name: Nominate
-  usage: This is a description for usage
   aliases:
     - nominate
   sizes:
     - 32
 - name: page-scroll
   friendly_name: Page scroll
-  usage: This is a description for usage
   aliases:
     - pages
     - stack
@@ -9723,7 +8780,6 @@
     - 32
 - name: pet-image--B
   friendly_name: Pet image b
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9732,7 +8788,6 @@
     - contrast
 - name: pet-image--O
   friendly_name: Pet image o
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9741,7 +8796,6 @@
     - contrast
 - name: pointer-text
   friendly_name: Pointer text
-  usage: This is a description for usage
   aliases:
     - cursor
     - text
@@ -9750,7 +8804,6 @@
     - 32
 - name: region-analysis--area
   friendly_name: Region analysis area
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9760,7 +8813,6 @@
     - area
 - name: region-analysis--volume
   friendly_name: Region analysis volume
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9770,14 +8822,12 @@
     - area
 - name: registration
   friendly_name: Registration
-  usage: This is a description for usage
   aliases:
     - registration
   sizes:
     - 32
 - name: spine-label
   friendly_name: Spine label
-  usage: This is a description for usage
   aliases:
     - backbone
     - stack
@@ -9788,7 +8838,6 @@
     - 32
 - name: stacked-move
   friendly_name: Stacked move
-  usage: This is a description for usage
   aliases:
     - stack
     - pages
@@ -9799,7 +8848,6 @@
     - 32
 - name: stacked-scrolling--1
   friendly_name: Stacked scrolling 1
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9811,7 +8859,6 @@
     - tall
 - name: stacked-scrolling--2
   friendly_name: Stacked scrolling 2
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9823,7 +8870,6 @@
     - tall
 - name: stress-breath-editor
   friendly_name: Stress breath editor
-  usage: This is a description for usage
   aliases:
     - air
     - gas
@@ -9834,7 +8880,6 @@
     - 32
 - name: study--next
   friendly_name: Study next
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9843,7 +8888,6 @@
     - profile
 - name: study--previous
   friendly_name: Study previous
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9852,7 +8896,6 @@
     - profile
 - name: study--skip
   friendly_name: Study skip
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9861,21 +8904,18 @@
     - profile
 - name: text-annotation-toggle
   friendly_name: Text annotation toggle
-  usage: This is a description for usage
   aliases:
     - text-annotation-toggle
   sizes:
     - 32
 - name: thumbnail-preview
   friendly_name: Thumbnail preview
-  usage: This is a description for usage
   aliases:
     - thumbnail-preview
   sizes:
     - 32
 - name: window--auto
   friendly_name: Window auto
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9884,7 +8924,6 @@
     - sun
 - name: window--base
   friendly_name: Window base
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9893,7 +8932,6 @@
     - sun
 - name: window--overlay
   friendly_name: Window overlay
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
@@ -9902,7 +8940,6 @@
     - sun
 - name: zoom-pan
   friendly_name: Zoom pan
-  usage: This is a description for usage
   aliases:
     - track
     - move
@@ -9914,28 +8951,24 @@
     - 32
 - name: wheat
   friendly_name: Wheat
-  usage: This is a description for usage
   aliases:
     - wheat
   sizes:
     - 32
 - name: wifi
   friendly_name: Wifi
-  usage: This is a description for usage
   aliases:
     - wifi
   sizes:
     - 32
 - name: wifi--off
   friendly_name: Wifi off
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - wifi
 - name: wikis
   friendly_name: Wikis
-  usage: This is a description for usage
   aliases:
     - globe
     - wikipedia
@@ -9946,42 +8979,36 @@
     - 32
 - name: windy
   friendly_name: Windy
-  usage: This is a description for usage
   aliases:
     - windy
   sizes:
     - 32
 - name: windy--dust
   friendly_name: Windy dust
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - windy
 - name: windy--snow
   friendly_name: Windy snow
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - windy
 - name: windy--strong
   friendly_name: Windy strong
-  usage: This is a description for usage
   sizes:
     - 32
   aliases:
     - windy
 - name: wintry-mix
   friendly_name: Wintry mix
-  usage: This is a description for usage
   aliases:
     - wintry-mix
   sizes:
     - 32
 - name: wireless-checkout
   friendly_name: Wireless checkout
-  usage: This is a description for usage
   aliases:
     - shopping bag
     - buy
@@ -9991,7 +9018,6 @@
     - 32
 - name: workspace
   friendly_name: Workspace
-  usage: This is a description for usage
   aliases:
     - tiles
     - dashboard
@@ -10000,7 +9026,6 @@
     - 32
 - name: x-axis
   friendly_name: X axis
-  usage: This is a description for usage
   aliases:
     - horizontal
     - data
@@ -10012,7 +9037,6 @@
     - 32
 - name: y-axis
   friendly_name: Y axis
-  usage: This is a description for usage
   aliases:
     - verticle
     - data
@@ -10024,7 +9048,6 @@
     - 32
 - name: z-axis
   friendly_name: Z axis
-  usage: This is a description for usage
   aliases:
     - depth
     - 3D

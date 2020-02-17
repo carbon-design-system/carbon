@@ -25,7 +25,6 @@ const icons = {
     Joi.object().keys({
       name: Joi.string().required(),
       friendly_name: Joi.string().required(),
-      usage: Joi.string().required(),
       sizes: Joi.array().items(
         Joi.string().valid('glyph'),
         Joi.number().valid([16, 20, 24, 32])

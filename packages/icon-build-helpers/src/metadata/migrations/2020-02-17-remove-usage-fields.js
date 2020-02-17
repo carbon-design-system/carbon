@@ -16,7 +16,7 @@ async function migrate() {
   const metadataPath = path.resolve(__dirname, '../../../../icons/icons.yml');
   const metadata = yaml.safeLoad(await fs.readFile(metadataPath, 'utf8'));
 
-  for (const icon of metadata.icons) {
+  for (const icon of metadata) {
     if (icon.usage) {
       delete icon.usage;
     }
