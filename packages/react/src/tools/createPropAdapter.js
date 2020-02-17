@@ -2,10 +2,10 @@
  * Generically maps a give old prop to a new prop. Used for deprecations,
  * breaking changes etc --
  *
- * @param {object} spec - the old prop to map and the new prop to map to
+ * @param {Array} spec - the matcher we're looking for and what to replace it with
  */
 function createPropAdapter(spec) {
-  // if downshift props aren't pass input should be object by default
+  // if props aren't passed in we should default the prop to empty object
   return (input = {}) => {
     const output = {};
     Object.keys(input).forEach(key => {
@@ -23,7 +23,12 @@ function createPropAdapter(spec) {
   };
 }
 
-// g
+/**
+ * TODO: REMOVE IN v11
+ * props staring with "default..." were changed to "initial..." in Downshift v3
+ *
+ * @see https://github.com/downshift-js/downshift/releases/tag/v3.0.0
+ */
 const mapDownshiftProps = createPropAdapter([[/^default/g, 'initial']]);
 
 export { mapDownshiftProps };
