@@ -6084,6 +6084,7 @@ $interactive-04: if(
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [inline-loading [mixin]](#inline-loading-mixin)
   - [loading [mixin]](#loading-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
 
@@ -6393,6 +6394,7 @@ $text-02: if(
   - [modal [mixin]](#modal-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
@@ -20464,11 +20466,12 @@ Progress indicator styles
     height: $carbon--spacing-05;
     border-radius: 50%;
     margin: 9px $carbon--spacing-03 0 0;
-    fill: $interactive-01;
+    fill: $interactive-04;
   }
 
   .#{$prefix}--progress-label {
     @include type-style('body-short-01');
+    color: $text-01;
     line-height: 1.45;
     max-width: rem(88px);
     margin: $carbon--spacing-03 0 0 0;
@@ -20546,7 +20549,7 @@ Progress indicator styles
     left: 0;
     margin-left: $carbon--spacing-06;
     margin-top: rem(28px);
-    color: $text-01;
+    color: $text-02;
     text-align: start;
   }
 
@@ -20558,8 +20561,8 @@ Progress indicator styles
   }
 
   .#{$prefix}--progress-step--current svg {
-    stroke: $interactive-01;
-    fill: $interactive-01;
+    stroke: $interactive-04;
+    fill: $interactive-04;
 
     path:last-of-type {
       stroke-width: 40%;
@@ -20702,11 +20705,13 @@ Progress indicator styles
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [interactive-01 [variable]](#interactive-01-variable)
+  - [interactive-04 [variable]](#interactive-04-variable)
+  - [text-01 [variable]](#text-01-variable)
   - [link-01 [variable]](#link-01-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
-  - [text-01 [variable]](#text-01-variable)
+  - [text-02 [variable]](#text-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [support-01 [variable]](#support-01-variable)
