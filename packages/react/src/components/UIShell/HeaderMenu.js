@@ -113,10 +113,11 @@ class HeaderMenu extends React.Component {
     const itemTriggeredBlur = this.items.find(
       element => element === event.relatedTarget
     );
-
     if (
       event.relatedTarget &&
-      (event.relatedTarget.getAttribute('href') !== '#' || itemTriggeredBlur)
+      ((event.relatedTarget.getAttribute('href') &&
+        event.relatedTarget.getAttribute('href') !== '#') ||
+        itemTriggeredBlur)
     ) {
       return;
     }
