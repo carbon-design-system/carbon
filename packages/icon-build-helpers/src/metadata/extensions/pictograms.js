@@ -26,16 +26,15 @@ const pictograms = {
   ),
 
   extend(metadata, data, registry) {
-    metadata.pictograms = data.map(pictogram => {
+    metadata.icons = data.map(pictogram => {
       return {
         name: pictogram.name,
         friendlyName: pictogram.friendly_name,
         aliases: pictogram.aliases,
-        sizes: pictogram.sizes,
       };
     });
 
-    for (const entry of metadata.pictograms) {
+    for (const entry of metadata.icons) {
       const pictogram = registry.get(entry.name);
 
       // Add namespace information for the pictogram
@@ -59,33 +58,6 @@ const pictograms = {
             `locations:\n\n` +
             filepaths
         );
-      }
-
-      // Verify that all the size information from the
-      for (const size of metadata.sizes) {
-        const match = item.assets.find(asset => {
-          return asset.size === size;
-        });
-        if (!match) {
-          throw new Error(
-            `Expected the asset \`${item.id}\` to have the size ${size} ` +
-              `defined. This asset may not exist, or is not available in the ` +
-              `SVG folder`
-          );
-        }
-      }
-
-      for (const asset of item.assets) {
-        const match = metadata.sizes.find(size => {
-          return size === asset.size;
-        });
-        if (!match) {
-          throw new Error(
-            `Expected the entry \`${metadata.name}\` to have size ` +
-              `\`${asset.size}\` defined. This asset exists at:\n` +
-              asset.filepath
-          );
-        }
       }
     }
 

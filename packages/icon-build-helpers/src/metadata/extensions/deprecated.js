@@ -33,6 +33,7 @@ const deprecated = {
 
   extend(metadata, data) {
     const { deprecated } = data;
+
     for (const icon of metadata.icons) {
       const entry = deprecated.find(({ name }) => name === icon.name);
       if (entry) {

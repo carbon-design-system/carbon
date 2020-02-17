@@ -10,8 +10,8 @@
 const { Metadata } = require('@carbon/icon-build-helpers');
 const path = require('path');
 
-async function check() {
-  await Metadata.check({
+async function scaffold() {
+  await Metadata.scaffold({
     directory: path.resolve(__dirname, '../'),
     extensions: [
       Metadata.extensions.pictograms,
@@ -22,7 +22,7 @@ async function check() {
   });
 }
 
-check().catch(error => {
+scaffold().catch(error => {
   console.log(error);
   process.exit(1);
 });
