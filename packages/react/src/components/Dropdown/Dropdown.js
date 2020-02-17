@@ -13,6 +13,7 @@ import { settings } from 'carbon-components';
 import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { match, keys } from '../../internal/keyboard';
+import { mapDownshiftProps } from '../../tools/createPropAdapter';
 
 const { prefix } = settings;
 
@@ -225,7 +226,7 @@ export default class Dropdown extends React.Component {
         {title}
         {!inline && helper}
         <Downshift
-          {...downshiftProps}
+          {...mapDownshiftProps(downshiftProps)}
           onChange={this.handleOnChange}
           itemToString={itemToString}
           initialSelectedItem={initialSelectedItem}

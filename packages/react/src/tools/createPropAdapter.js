@@ -1,13 +1,12 @@
 /**
- * Certain props were changed in the update from Downshift v1 to v5.
- * This function maps old props being passed in to their new values.
- *
- * TO BE REMOVED IN V11
+ * Generically maps a give old prop to a new prop. Used for deprecations,
+ * breaking changes etc --
  *
  * @param {object} spec - the old prop to map and the new prop to map to
  */
 function createPropAdapter(spec) {
-  return input => {
+  // if downshift props aren't pass input should be object by default
+  return (input = {}) => {
     const output = {};
     Object.keys(input).forEach(key => {
       const match = spec.find(([regex]) => {
@@ -23,6 +22,8 @@ function createPropAdapter(spec) {
     return output;
   };
 }
+
+// g
 const mapDownshiftProps = createPropAdapter([[/^default/g, 'initial']]);
 
 export { mapDownshiftProps };
