@@ -69,14 +69,17 @@ async function create(directory) {
 
     // Our namespace is generated from every directory that is not a size
     const namespace = directories.filter(directory => isNaN(directory));
-    // Our size folder is generated from the first directory that is a number
-    const sizeFolderName = directories.find(directory => !isNaN(directory));
     const asset = {
       id: path.basename(filepath, '.svg'),
-      size: sizeFolderName ? parseInt(sizeFolderName, 10) : 'glyph',
       filepath,
       namespace,
     };
+
+    // Our size folder is generated from the first directory that is a number
+    const sizeFolderName = directories.find(directory => !isNaN(directory));
+    if (sizeFolderName) {
+      asset.size = parseInt(sizeFolderName, 10);
+    }
 
     if (!registry.has(asset.id)) {
       registry.set(asset.id, {

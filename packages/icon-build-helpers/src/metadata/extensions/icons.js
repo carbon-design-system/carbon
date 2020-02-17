@@ -34,13 +34,31 @@ const icons = {
   ),
 
   extend(metadata, data, registry) {
-    metadata.icons = data;
+    metadata.icons = data.map(icon => {
+      return {
+        name: icon.name,
+        friendlyName: icon.friendly_name,
+        aliases: icon.aliases,
+        sizes: icon.sizes,
+      };
+    });
 
-    // Add namespace information for the icon
     for (const entry of metadata.icons) {
       const icon = registry.get(entry.name);
+
+      // Add namespace information for the icon
       if (Array.isArray(icon.namespace) && icon.namespace.length > 0) {
-        entry.namespace = icon.namespace;
+        entry.namespace = icon.namespace.join('/');
+      }
+
+      // We currently support bespoke assets called "glyphs". If there is no
+      // size for an asset, then for icons we would call it a glyph. If the
+      // entry in metadata does not already contain a mention of glyph, then
+      // we'll add it in.
+      for (const asset of icon.assets) {
+        if (!asset.size && !entry.sizes.includes('glyph')) {
+          entry.sizes.push('glyph');
+        }
       }
     }
   },
@@ -65,7 +83,12 @@ const icons = {
 
       // Verify that all the size information from the
       for (const size of metadata.sizes) {
-        const match = item.assets.find(asset => asset.size === size);
+        const match = item.assets.find(asset => {
+          if (size === 'glyph') {
+            return asset.size === undefined;
+          }
+          return asset.size === size;
+        });
         if (!match) {
           throw new Error(
             `Expected the asset \`${item.id}\` to have the size ${size} ` +
@@ -76,7 +99,12 @@ const icons = {
       }
 
       for (const asset of item.assets) {
-        const match = metadata.sizes.find(size => size === asset.size);
+        const match = metadata.sizes.find(size => {
+          if (asset.size === undefined) {
+            return size === 'glyph';
+          }
+          return size === asset.size;
+        });
         if (!match) {
           throw new Error(
             `Expected the entry \`${metadata.name}\` to have size ` +
