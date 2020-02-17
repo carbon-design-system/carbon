@@ -1266,7 +1266,6 @@
 - name: settings--adjust
   friendly_name: Settings adjust
   sizes:
-    - 16
     - 32
   aliases:
     - preferences
