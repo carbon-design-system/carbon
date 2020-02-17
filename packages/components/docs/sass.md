@@ -14965,6 +14965,16 @@ Data table core styles
   }
 
   // Overflow Menu Overrides
+  .#{$prefix}--data-table td .#{$prefix}--overflow-menu {
+    margin: rem(-7px) 0 rem(-8px);
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact
+    td
+    .#{$prefix}--overflow-menu {
+    margin: 0;
+  }
+
   .#{$prefix}--data-table
     td.#{$prefix}--table-column-menu
     .#{$prefix}--overflow-menu[aria-expanded='false']:focus {
