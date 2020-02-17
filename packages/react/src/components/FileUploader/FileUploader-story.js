@@ -21,7 +21,6 @@ import {
 import { settings } from 'carbon-components';
 import FileUploader, { FileUploaderButton } from '../FileUploader';
 import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
-import Button from '../Button';
 import FileUploaderItem from './FileUploaderItem';
 import FileUploaderDropContainer from './FileUploaderDropContainer';
 
@@ -133,22 +132,9 @@ storiesOf('FileUploader', module)
   .add(
     'FileUploader',
     () => {
-      let fileUploader;
       return (
         <div className={`${prefix}--file__container`}>
-          <FileUploader
-            {...props.fileUploader()}
-            ref={node => (fileUploader = node)}
-          />
-          <Button
-            kind="secondary"
-            size="small"
-            style={{ marginTop: '1rem' }}
-            onClick={() => {
-              fileUploader.clearFiles();
-            }}>
-            Clear File
-          </Button>
+          <FileUploader {...props.fileUploader()} />
         </div>
       );
     },

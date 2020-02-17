@@ -10,6 +10,6 @@ $css--reset: false;
 @import '~carbon-components/src/globals/scss/css--helpers';
 
 .bx--tabs--container ~ div {
-  height: 320px;
+  min-height: 320px;
   background-color: $ui-01;
 }
