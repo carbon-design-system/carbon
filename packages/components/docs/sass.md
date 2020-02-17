@@ -20640,12 +20640,11 @@ Progress indicator styles
     width: rem(40px);
   }
 
-  .#{$prefix}--progress--vertical {
-    display: block;
-  }
+  // Vertical Variant
 
-  .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
-    padding-bottom: rem(24px);
+  .#{$prefix}--progress--vertical {
+    display: flex;
+    flex-direction: column;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
@@ -20685,12 +20684,10 @@ Progress indicator styles
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
     margin-top: auto;
-    position: initial;
     margin-left: 2.25rem;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
-    top: 0;
     left: 0;
     height: 100%;
     width: 1px;
