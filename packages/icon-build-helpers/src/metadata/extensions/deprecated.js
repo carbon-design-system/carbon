@@ -25,6 +25,7 @@ const deprecated = {
       .items(
         Joi.object().keys({
           name: Joi.string().required(),
+          reason: Joi.string(),
         })
       )
       .required(),
@@ -36,6 +37,9 @@ const deprecated = {
       const entry = deprecated.find(({ name }) => name === icon.name);
       if (entry) {
         icon.deprecated = true;
+        if (entry.reason) {
+          icon.reason = entry.reason;
+        }
       }
     }
   },
@@ -45,7 +49,9 @@ const deprecated = {
       const entry = registry.has(icon.name);
       if (!entry) {
         throw new Error(
-          `Expected a deprecated asset to exist with the name ${icon.name}`
+          `Expected the deprecated icon \`${icon.name}\` to exist. Either ` +
+            `this icon does not exist, or is not available in the given SVG ` +
+            `directory`
         );
       }
     }

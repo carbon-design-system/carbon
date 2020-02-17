@@ -28,12 +28,12 @@ const path = require('path');
 /**
  * An asset for an icon that details its size and filepath information
  * @typedef {object} Asset
- * @property {number|('glyph')} size
+ * @property {(number|('glyph'))} size
  * @property {string} filepath
  */
 
 /**
- * Create a registry from the assets found within the given directory
+ * Create a registry of icons from the assets found within the given directory
  * @param {string} directory
  * @returns {Registry}
  */

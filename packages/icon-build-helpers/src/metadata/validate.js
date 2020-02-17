@@ -15,7 +15,6 @@ const Joi = require('joi');
  * extension. This is a useful check to guarantee that icons exist in both the
  * source directory of SVG assets and in metadata and corresponding extensions.
  * @param {Registry} registry
- * @param {Array} icons
  * @param {Array<Extension>} [extensions]
  * @returns {void}
  */

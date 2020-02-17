@@ -3,7 +3,6 @@ categories:
     subcategories:
       - name: Controls
         members:
-          - bobloblaw
           - dashboard
           - fit-to-screen
           - forward--10

@@ -11,6 +11,9 @@ const yaml = require('js-yaml');
 const path = require('path');
 
 /**
+ * An adapter defines how we work with a specific file format, in particular
+ * how to get the filename for a particular extension and how to
+ * work with the data in JavaScript
  * @typedef {object} Adapter
  * @property {Function} getFilenameFor
  * @property {Function} serialize

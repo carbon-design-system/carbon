@@ -10,6 +10,14 @@
 const fs = require('fs-extra');
 const path = require('path');
 
+/**
+ * Use the provided file adapter and directory information to load the given
+ * set of extensions.
+ * @param {Adapter} adapter
+ * @param {string} directory
+ * @param {Array<Extension>} [extensions]
+ * @returns {Array<Extension>}
+ */
 function load(adapter, directory, extensions = []) {
   return Promise.all(
     extensions.map(async extension => {
@@ -26,7 +34,8 @@ function load(adapter, directory, extensions = []) {
       if (!(await fs.pathExists(filepath))) {
         throw new Error(
           `Unable to find extension \`${extension.name}\` at filepath: ` +
-            `${filepath}`
+            `${filepath}. Either create the file or update the extension ` +
+            `to be computed.`
         );
       }
       const data = adapter.deserialize(await fs.readFile(filepath, 'utf8'));
@@ -38,9 +47,18 @@ function load(adapter, directory, extensions = []) {
   );
 }
 
+/**
+ * Use the provided file adapter and directory information to save the given
+ * set of extensions.
+ * @param {Adapter} adapter
+ * @param {string} directory
+ * @param {Array<Extension>} [extensions]
+ * @returns {Array<Extension>}
+ */
 function save(adapter, directory, extensions = []) {
   return Promise.all(
     extensions.map(async extension => {
+      // If the extension is computed, there is nothing to persist to disk
       if (extension.computed) {
         return;
       }

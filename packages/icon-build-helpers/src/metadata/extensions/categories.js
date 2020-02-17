@@ -47,58 +47,82 @@ const categories = {
   }),
 
   extend(metadata, data) {
-    return;
     const { categories } = data;
+
+    metadata.categories = categories;
+
     for (const category of categories) {
       const { name, members, subcategories } = category;
 
       if (Array.isArray(subcategories)) {
         for (const subcategory of subcategories) {
           for (const member of subcategory.members) {
-            const icon = index.find(({ name }) => name === member);
+            const icon = metadata.icons.find(({ name }) => name === member);
             icon.category = name;
             icon.subcategory = subcategory.name;
           }
         }
-        return;
+        continue;
       }
 
       for (const member of members) {
-        const icon = index.find(({ name }) => name === member);
+        const icon = metadata.icons.find(({ name }) => name === member);
         icon.category = name;
       }
     }
   },
 
   validate(registry, data) {
-    return;
-    const { categories } = data;
+    // Flatten the category data into a flat list of members with corresponding
+    // name and category data
+    const members = [];
 
-    const icons = categories
-      .map(({ subcategories, members }) => {
-        if (Array.isArray(subcategories)) {
-          return subcategories
-            .map(subcategory => subcategory.members)
-            .reduce((acc, members) => acc.concat(members), []);
+    for (const category of data.categories) {
+      if (Array.isArray(category.subcategories)) {
+        for (const subcategory of category.subcategories) {
+          for (const member of subcategory.members) {
+            members.push({
+              name: member,
+              category: category.name,
+              subcategory: subcategory.name,
+            });
+          }
         }
-        return members;
-      })
-      .reduce((acc, members) => acc.concat(members), []);
+        continue;
+      }
 
-    // Every entry in index should exist in data
-    for (const icon of index) {
-      if (!icons.includes(icon.name)) {
+      for (const member of category.members) {
+        members.push({
+          name: member,
+          category: category.name,
+        });
+      }
+    }
+
+    // Verify that every asset in the registry has category information
+    for (const icon of registry.values()) {
+      const match = members.find(member => member.name === icon.id);
+      if (!match) {
+        const filepaths = icon.assets.map(asset => asset.filepath);
         throw new Error(
-          `Expected icon \`${icon.name}\` from index to exist in category data`
+          `Expected the following icon to have category information: ` +
+            `\`${icon.id}\`. This icon has assets in the following locations:\n` +
+            filepaths.join('\n')
         );
       }
     }
 
-    // Every entry in data should exist in index
-    for (const icon of icons) {
-      if (!index.find(({ name }) => icon === name)) {
+    // Verify that every asset with a category exists in the registry
+    for (const member of members) {
+      if (!registry.has(member.name)) {
+        let categoryPath = `category \`${member.category}\``;
+        if (member.subcategory) {
+          categoryPath += `, subcategory \`${member.subcategory}\``;
+        }
         throw new Error(
-          `Expected icon \`${icon}\` from category data to exist in index`
+          `Found the entry \`${member.name}\` in ${categoryPath} that does ` +
+            `not have a corresponding icon or asset. Either this icon does ` +
+            `not exist, or is not available in the current directory.`
         );
       }
     }

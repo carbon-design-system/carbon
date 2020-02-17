@@ -15,6 +15,14 @@ const Registry = require('./registry');
 const Storage = require('./storage');
 const validate = require('./validate');
 
+/**
+ * Validate the given extensions against the assets found in a directory
+ * @param {object} options
+ * @param {Adapter} [options.adapter] The adapter to use to load the extensions
+ * @param {string} options.directory
+ * @param {Array<Extension>} [options.extensions] The extensions to load
+ * @returns {Promise<void>}
+ */
 async function check({
   adapter = adapters.yml,
   directory,
@@ -25,9 +33,19 @@ async function check({
   validate(registry, loaded);
 }
 
+/**
+ * Build the metadata for the assets in the given directory with a given list of
+ * extensions
+ * @param {object} options
+ * @param {Adapter} [options.adapter] The adapter to use to load the extensions
+ * @param {string} options.directory
+ * @param {Array<Extension>} [options.extensions] The extensions to load
+ * @returns {Promise<void>}
+ */
 async function build({
   adapter = adapters.yml,
   directory,
+  assets,
   extensions = [Extensions.icons],
 }) {
   const registry = await Registry.create(path.join(directory, 'svg'));
@@ -36,27 +54,6 @@ async function build({
 
   const metadataFilePath = path.join(directory, 'metadata.json');
   const metadata = {};
-
-  // Add each decorator data to the metadata, decorator names should be unique
-  for (const { data, name } of loaded) {
-    // Decorators that are computed won't have any data associated with them
-    // as they operate on the icon list in-memory versus saving any data to
-    // disk.
-    if (!data) {
-      continue;
-    }
-
-    // Ergonomic check to see if the decorator has a top-level key that matches
-    // its name. If so, we'll include the contents as a convenience instead of
-    // duplicate the key. For example, instead of:
-    //
-    // { "aliases": { "aliases": [...] } }
-    //
-    // We'd have:
-    //
-    // { "aliases": [...] }
-    metadata[name] = data[name] || data;
-  }
 
   // For each decorator, decorate the icon metadata with the given loaded data
   // for the decorator
@@ -74,8 +71,14 @@ async function build({
   return metadata;
 }
 
-// Help generate metadata info for icons that have an asset (.svg) but no
-// metadata information
+/**
+ * Help generate metadata info for icons that have an asset (.svg) but no
+ * metadata information
+ * @param {object} options
+ * @param {Adapter} [options.adapter] The adapter to use to write data
+ * @param {string} options.directory
+ * @returns {Promise<void>}
+ */
 async function scaffold({ adapter = adapters.yml, directory }) {
   const registry = await Registry.create(path.join(directory, 'svg'));
   const [icons] = await Storage.load(adapter, directory, [Extensions.icons]);
@@ -86,7 +89,6 @@ async function scaffold({ adapter = adapters.yml, directory }) {
       const metadata = {
         name: item.id,
         friendly_name: item.id,
-        usage: 'This is a description of usage',
         aliases: [],
         sizes: item.assets.map(asset => asset.size),
       };
@@ -98,9 +100,12 @@ async function scaffold({ adapter = adapters.yml, directory }) {
 }
 
 module.exports = {
+  // Data associated with storing and adding metadata information
   adapters,
+  extensions: Extensions,
+
+  // Commands to run for icon packages
   build,
   check,
-  extensions: Extensions,
   scaffold,
 };

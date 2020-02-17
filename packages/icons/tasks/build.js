@@ -23,13 +23,8 @@ async function build() {
       Metadata.extensions.icons,
       Metadata.extensions.moduleName,
       Metadata.extensions.deprecated,
+      Metadata.extensions.categories,
     ],
-    // decorators: [
-    // Metadata.decorators.categories,
-    // Metadata.decorators.deprecated,
-    // await Metadata.decorators.asset(directory, SVG_DIR),
-    // Metadata.decorators.moduleName,
-    // ],
   });
 }
 

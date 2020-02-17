@@ -9,6 +9,11 @@
 
 const Joi = require('joi');
 
+/**
+ * The default icons extension for the metadata. This validates an icon file
+ * and adds icon information to the metadata file.
+ * @type {Extension}
+ */
 const icons = {
   name: 'icons',
 
@@ -30,6 +35,8 @@ const icons = {
   ),
 
   extend(metadata, data, registry) {
+    metadata.icons = data;
+
     // Add namespace information for the icon
     for (const entry of metadata.icons) {
       const icon = registry.get(entry.name);
@@ -39,18 +46,18 @@ const icons = {
     }
   },
 
-  validate(registry, icons) {
-    // Our first step is to validate that all of the icons listed in `icons` are
+  validate(registry, data) {
+    // Our first step is to validate that all of the data listed in `data` are
     // available in the registry. This is useful to verify that:
     // 1. All assets in the registry are defined in the metadata
-    // 2. No extra icons are defined in the metadata that aren't in the source
+    // 2. No extra data are defined in the metadata that aren't in the source
     //    directory
     for (const item of registry.values()) {
-      const metadata = icons.find(icon => icon.name === item.id);
+      const metadata = data.find(icon => icon.name === item.id);
       if (!metadata) {
         const filepaths = item.assets.map(asset => asset.filepath).join('\n');
         throw new Error(
-          `Expected the icon \`${item.id}\` to be defined in the icons ` +
+          `Expected the icon \`${item.id}\` to be defined in the data ` +
             `metadata file. Found matches for this asset in the following ` +
             `locations:\n\n` +
             filepaths
@@ -75,13 +82,13 @@ const icons = {
           throw new Error(
             `Expected the entry \`${metadata.name}\` to have size ` +
               `\`${asset.size}\` defined. This asset exists at:\n` +
-              filepath
+              asset.filepath
           );
         }
       }
     }
 
-    for (const icon of icons) {
+    for (const icon of data) {
       if (!registry.has(icon.name)) {
         throw new Error(
           `Expected the metadata entry \`${icon.name}\` to have a ` +

@@ -1,4 +1,6 @@
 deprecated:
+  - name: app-switcher
+    reason: The app switcher icon has been replaced in favor of switcher
   - name: cloud--lightning
   - name: cloud--rain
   - name: cloud--snow
