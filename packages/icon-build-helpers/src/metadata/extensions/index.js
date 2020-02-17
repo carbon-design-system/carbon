@@ -11,6 +11,7 @@ const categories = require('./categories');
 const deprecated = require('./deprecated');
 const icons = require('./icons');
 const moduleName = require('./module-name');
+const pictograms = require('./pictograms');
 
 /**
  * @typedef {object} Extension
@@ -28,4 +29,5 @@ module.exports = {
   deprecated,
   icons,
   moduleName,
+  pictograms,
 };
