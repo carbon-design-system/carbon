@@ -54,8 +54,8 @@ async function build({
   const metadataFilePath = path.join(directory, 'metadata.json');
   const metadata = {};
 
-  // For each decorator, decorate the icon metadata with the given loaded data
-  // for the decorator
+  // For each extension, extend the icon metadata with the given loaded data
+  // for the extension
   for (const { data, extend } of loaded) {
     if (extend) {
       extend(metadata, data, registry);
