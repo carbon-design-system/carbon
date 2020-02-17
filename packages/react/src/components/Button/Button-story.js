@@ -71,6 +71,7 @@ const props = {
           'Primary button (primary)': 'primary',
           'Secondary button (secondary)': 'secondary',
           'Tertiary button (tertiary)': 'tertiary',
+          'Ghost button (ghost)': 'ghost',
         },
         'primary'
       ),
