@@ -45,7 +45,6 @@ async function check({
 async function build({
   adapter = adapters.yml,
   directory,
-  assets,
   extensions = [Extensions.icons],
 }) {
   const registry = await Registry.create(path.join(directory, 'svg'));
@@ -77,11 +76,16 @@ async function build({
  * @param {object} options
  * @param {Adapter} [options.adapter] The adapter to use to write data
  * @param {string} options.directory
+ * @param {Array<Extension>} [options.extensions]
  * @returns {Promise<void>}
  */
-async function scaffold({ adapter = adapters.yml, directory }) {
+async function scaffold({
+  adapter = adapters.yml,
+  directory,
+  extensions = [Extensions.icons],
+}) {
   const registry = await Registry.create(path.join(directory, 'svg'));
-  const [icons] = await Storage.load(adapter, directory, [Extensions.icons]);
+  const [icons] = await Storage.load(adapter, directory, extensions);
 
   for (const item of registry.values()) {
     const match = icons.data.find(icon => item.id === icon.name);
