@@ -6,12 +6,10 @@
     - addition
     - increase
   sizes:
-    - 16
     - 32
 - name: add--alt
   friendly_name: Add alt
   sizes:
-    - 16
     - 32
   aliases:
     - plus
@@ -21,7 +19,6 @@
 - name: add--filled
   friendly_name: Add filled
   sizes:
-    - 16
     - 32
   aliases:
     - plus
@@ -35,9 +32,6 @@
     - drawer
     - 9 dot
   sizes:
-    - 16
-    - 20
-    - 24
     - 32
 - name: apps
   friendly_name: Apps
@@ -1063,7 +1057,6 @@
 - name: overflow-menu--horizontal
   friendly_name: Overflow menu horizontal
   sizes:
-    - 16
     - 32
   aliases:
     - show more
@@ -1073,7 +1066,6 @@
 - name: overflow-menu--vertical
   friendly_name: Overflow menu vertical
   sizes:
-    - 16
     - 32
   aliases:
     - show more
@@ -1395,12 +1387,10 @@
     - take
     - delete
   sizes:
-    - 16
     - 32
 - name: subtract--alt
   friendly_name: Subtract alt
   sizes:
-    - 16
     - 32
   aliases:
     - minus
@@ -1418,9 +1408,6 @@
   aliases:
     - switcher
   sizes:
-    - 16
-    - 20
-    - 24
     - 32
 - name: trash-can
   friendly_name: Trash can
