@@ -347,7 +347,10 @@ class OverflowMenu extends Component {
   };
 
   handleClickOutside = evt => {
-    if (!this._menuBody || !this._menuBody.contains(evt.target)) {
+    if (
+      this.state.open &&
+      (!this._menuBody || !this._menuBody.contains(evt.target))
+    ) {
       this.closeMenu();
     }
   };
