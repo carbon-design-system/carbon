@@ -36,7 +36,7 @@ describe('registry', () => {
     vol.fromJSON(files);
 
     const registry = await Registry.create('/svg');
-    for (const [id, icon] of registry) {
+    for (const [id] of registry) {
       expect(assets.indexOf(id)).not.toBe(-1);
     }
   });

@@ -20,15 +20,7 @@ async function migrate() {
 
   const data = {};
   for (const group of metadata.icons) {
-    const {
-      name,
-      friendly_name,
-      usage,
-      categories,
-      aliases,
-      variants = [],
-      sizes,
-    } = group;
+    const { name, friendly_name, usage, aliases, variants = [], sizes } = group;
     const entry = names.find(({ basename }) => name === basename);
     if (entry) {
       data[name] = {

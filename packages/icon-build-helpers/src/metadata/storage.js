@@ -68,7 +68,7 @@ function save(adapter, directory, extensions = []) {
         adapter.getFilenameFor(extension.name)
       );
       await fs.ensureFile(filepath);
-      await fs.writeFile(filepath, adapter.serialize(data), 'utf8');
+      await fs.writeFile(filepath, adapter.serialize(extension.data), 'utf8');
     })
   );
 }
