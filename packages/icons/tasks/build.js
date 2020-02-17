@@ -13,9 +13,9 @@ const path = require('path');
 const SVG_DIR = path.resolve(__dirname, '../svg');
 
 async function build() {
-  // await builders.vanilla.run(SVG_DIR, {
-  // cwd: process.cwd(),
-  // });
+  await builders.vanilla.run(SVG_DIR, {
+    cwd: process.cwd(),
+  });
 
   await Metadata.build({
     directory: path.resolve(__dirname, '../'),
