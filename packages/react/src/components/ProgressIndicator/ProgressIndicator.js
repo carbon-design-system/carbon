@@ -204,6 +204,11 @@ ProgressStep.propTypes = {
   onClick: PropTypes.func,
 
   /**
+   * Specify whether the progress step should fit the text without truncating
+   */
+  fitText: PropTypes.bool,
+
+  /**
    * Optional method that takes in a message id and returns an
    * internationalized string.
    */
