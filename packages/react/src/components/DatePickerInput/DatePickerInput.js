@@ -30,6 +30,12 @@ export default class DatePickerInput extends Component {
      * control
      */
     labelText: PropTypes.node.isRequired,
+
+    /**
+     * Provide text to be read to screen readers so we can tell user that
+     * he/she can start using calendar dropdown with down arrow key
+     */
+    calendarDropdownAssistiveText: PropTypes.string,
   };
 
   static defaultProps = {
@@ -37,6 +43,11 @@ export default class DatePickerInput extends Component {
     type: 'text',
     disabled: false,
     invalid: false,
+    calendarDropdownAssistiveText: [
+      'Use down arrow key to navigate to calendar dropdown.',
+      'Use arrow keys to navigate through dates.',
+      'Use control-arrow keys to increment and decrement year and month.',
+    ].join(' '),
     onClick: () => {},
     onChange: () => {},
   };
@@ -57,6 +68,7 @@ export default class DatePickerInput extends Component {
       pattern,
       iconDescription,
       openCalendar,
+      calendarDropdownAssistiveText,
       ...other
     } = this.props;
 
@@ -75,6 +87,8 @@ export default class DatePickerInput extends Component {
       placeholder,
       type,
       pattern,
+      'aria-describedby':
+        datePickerType === 'simple' ? undefined : `${id}__assistive-text`,
     };
 
     const labelClasses = classNames(`${prefix}--label`, {
@@ -140,6 +154,13 @@ export default class DatePickerInput extends Component {
         <div className={`${prefix}--date-picker-input__wrapper`}>
           {input}
           {datePickerIcon}
+          {datePickerType !== 'simple' && (
+            <div
+              id={`${id}__assistive-text`}
+              className={`${prefix}--assistive-text`}>
+              {calendarDropdownAssistiveText}
+            </div>
+          )}
         </div>
         {error}
       </div>
