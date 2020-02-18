@@ -17999,6 +17999,9 @@ List box styles
   .#{$prefix}--list-box__selection {
     position: absolute;
     right: rem(33px); // to preserve .5rem space between icons according to spec
+    // top/transform used to center invalid icon in IE11
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22559,6 +22562,9 @@ Text input styles
     .#{$prefix}--text-input__invalid-icon {
       position: absolute;
       right: $carbon--spacing-05;
+      // top/transform used to center invalid icon in IE11
+      top: 50%;
+      transform: translateY(-50%);
       fill: $support-01;
     }
 
