@@ -602,9 +602,9 @@ $list-box-menu-width: rem(300px);
 
   // Tweaks for descendants
   // When handling input, we need to target nodes that specifically opt-in to
-  // the `combobox` role in order to make sure the text input is styled
+  // the type text in order to make sure the text input is styled
   // correctly.
-  .#{$prefix}--list-box input[role='combobox'] {
+  .#{$prefix}--list-box input[type='text'] {
     background-color: inherit;
     min-width: 0;
   }
