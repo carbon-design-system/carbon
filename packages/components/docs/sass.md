@@ -3675,7 +3675,6 @@ $spacing-04: $carbon--spacing-04;
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [tabs [mixin]](#tabs-mixin)
 
 ### ✅spacing-05 [variable]
@@ -3700,6 +3699,7 @@ $spacing-05: $carbon--spacing-05;
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [modal [mixin]](#modal-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [select [mixin]](#select-mixin)
@@ -6112,8 +6112,6 @@ $ui-background: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [dropdown [mixin]](#dropdown-mixin)
-  - [listbox [mixin]](#listbox-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅ui-01 [variable]
@@ -7500,7 +7498,7 @@ $hover-danger: if(
       'hover-danger'
     ),
   map-get($carbon--theme, 'hover-danger'),
-  #ba1b23
+  #b81921
 );
 ```
 
@@ -14921,8 +14919,8 @@ Data table core styles
 
   .#{$prefix}--data-table th,
   .#{$prefix}--data-table td {
-    padding-left: $spacing-04;
-    padding-right: $spacing-04;
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
     vertical-align: top;
     text-align: left;
   }
@@ -14954,7 +14952,7 @@ Data table core styles
     color: $text-02;
     border-top: 1px solid $ui-01;
     border-bottom: 1px solid $ui-03;
-    padding: rem(14px) $spacing-04;
+    padding: rem(14px) $spacing-05;
     padding-bottom: rem(13px);
 
     & + td:first-of-type {
@@ -15783,12 +15781,12 @@ Data table sort styles
   }
 
   .#{$prefix}--data-table--sort td {
-    padding-left: $spacing-03;
-    padding-right: $spacing-03;
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
   }
 
   .#{$prefix}--data-table--sort th:first-of-type .#{$prefix}--table-sort {
-    padding-left: $spacing-04;
+    padding-left: $spacing-05;
   }
 
   // -------------------------------------
@@ -15803,7 +15801,7 @@ Data table sort styles
     justify-content: space-between;
     width: 100%;
     color: $text-01;
-    padding: 0 $spacing-03;
+    padding: 0 $spacing-05;
     height: 100%;
     background-color: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive),
@@ -15944,10 +15942,10 @@ Data table sort styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [layout-04 [variable]](#layout-04-variable)
-  - [spacing-03 [variable]](#spacing-03-variable)
-  - [spacing-04 [variable]](#spacing-04-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [layout-01 [variable]](#layout-01-variable)
 
@@ -16791,7 +16789,7 @@ Dropdown styles
     border-bottom-color: transparent;
     width: auto;
     height: rem(32px);
-    background-color: $ui-background;
+    background-color: transparent;
     transition: background $duration--fast-01 motion(entrance, productive);
 
     &:hover {
@@ -16799,7 +16797,7 @@ Dropdown styles
     }
 
     &.#{$prefix}--dropdown--disabled {
-      background-color: $ui-background;
+      background-color: transparent;
     }
 
     .#{$prefix}--dropdown__arrow {
@@ -16898,7 +16896,6 @@ Dropdown styles
   - [selected-ui [variable]](#selected-ui-variable)
   - [text-02 [variable]](#text-02-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
-  - [ui-background [variable]](#ui-background-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
 
 ## file-uploader
@@ -17855,7 +17852,7 @@ List box styles
 
   // Inline variant for a `list-box`
   .#{$prefix}--list-box.#{$prefix}--list-box--inline {
-    background-color: $ui-background;
+    background-color: transparent;
     border-width: 0;
 
     &:hover {
@@ -18002,6 +17999,9 @@ List box styles
   .#{$prefix}--list-box__selection {
     position: absolute;
     right: rem(33px); // to preserve .5rem space between icons according to spec
+    // top/transform used to center invalid icon in IE11
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18287,7 +18287,6 @@ List box styles
   - [support-01 [variable]](#support-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
-  - [ui-background [variable]](#ui-background-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -22563,6 +22562,9 @@ Text input styles
     .#{$prefix}--text-input__invalid-icon {
       position: absolute;
       right: $carbon--spacing-05;
+      // top/transform used to center invalid icon in IE11
+      top: 50%;
+      transform: translateY(-50%);
       fill: $support-01;
     }
 
