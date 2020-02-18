@@ -42,11 +42,13 @@ export function ProgressStep({
   secondaryLabel,
   disabled,
   onClick,
+  fitText,
   renderLabel: ProgressStepLabel,
   translateWithId: t,
 }) {
   const classes = classnames({
     [`${prefix}--progress-step`]: true,
+    [`${prefix}--progress-step--no-max-width`]: fitText,
     [`${prefix}--progress-step--current`]: current,
     [`${prefix}--progress-step--complete`]: complete,
     [`${prefix}--progress-step--incomplete`]: !complete && !current,
@@ -117,13 +119,18 @@ export function ProgressStep({
           invalid={invalid}
           prefix={prefix}
         />
-        <ProgressStepLabel className={`${prefix}--progress-label sammy-g another`}>
+        <ProgressStepLabel
+          className={`${prefix}--progress-label ${fitText &&
+            prefix + '--progress-label--no-max-width'}`}>
           {label}
         </ProgressStepLabel>
         {secondaryLabel !== null && secondaryLabel !== undefined ? (
           <p className={`${prefix}--progress-optional`}>{secondaryLabel}</p>
         ) : null}
-        <span className={`${prefix}--progress-line`} />
+        <span
+          className={`${prefix}--progress-line ${fitText &&
+            prefix + '--progress-line--no-max-width'}`}
+        />
       </button>
     </li>
   );

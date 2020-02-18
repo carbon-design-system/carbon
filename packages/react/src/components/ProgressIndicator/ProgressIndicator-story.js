@@ -128,6 +128,37 @@ storiesOf('ProgressIndicator', module)
       },
     }
   )
+  .add(
+    'Fits Text',
+    () => (
+      <ProgressIndicator
+        currentIndex={number('Current progress (currentIndex)', 1)}
+        onChange={action('onChange')}>
+        <ProgressStep
+          label="Click me"
+          description="Step 1: Register a onChange event"
+          fitText
+        />
+        <ProgressStep
+          label="Really long label"
+          description="The progress indicator will listen for clicks on the steps"
+          fitText
+        />
+        <ProgressStep
+          label="Tooltip and really long label"
+          description="A really long tooltip"
+          fitText
+        />
+      </ProgressIndicator>
+    ),
+    {
+      info: {
+        text: `
+           If you register an onChange handler, the Progress Indicator will become interactive.  Your parent component should update the currentIndex prop within the onChange handler.
+          `,
+      },
+    }
+  )
   .add('skeleton', () => <ProgressIndicatorSkeleton />, {
     info: {
       text: `
