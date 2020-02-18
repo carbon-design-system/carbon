@@ -15,7 +15,6 @@ const { prefix } = settings;
 
 function Container({ story }) {
   useEffect(() => {
-    console.log(window);
     const originalDirection = document.documentElement.dir;
     if (process.env.CARBON_REACT_STORYBOOK_USE_RTL === 'true') {
       document.documentElement.dir = 'rtl';
