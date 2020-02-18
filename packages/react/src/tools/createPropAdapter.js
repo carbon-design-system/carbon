@@ -1,8 +1,11 @@
 /**
- * Generically maps a give old prop to a new prop. Used for deprecations,
- * breaking changes etc --
+ * Create an adapter that converts an object of props with potentially deprecated
+ * prop names to the replacement prop names in a newer version. Useful for guarding
+ * against breaking changes when a prop has been renamed
  *
- * @param {Array} spec - the matcher we're looking for and what to replace it with
+ * @param {Array} spec - an array of options which specify a text or regex
+ * matcher alongside a replacement if there is a match
+ * @returns {Function}
  */
 function createPropAdapter(spec) {
   // if props aren't passed in we should default the prop to empty object
