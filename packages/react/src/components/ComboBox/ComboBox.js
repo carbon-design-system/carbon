@@ -326,6 +326,7 @@ export default class ComboBox extends React.Component {
           highlightedIndex,
           clearSelection,
           toggleMenu,
+          getMenuProps,
         }) => (
           <ListBox
             className={className}
@@ -350,6 +351,7 @@ export default class ComboBox extends React.Component {
               <input
                 className={inputClasses}
                 aria-labelledby={comboBoxA11yId}
+                type="text"
                 tabIndex="0"
                 aria-disabled={disabled}
                 aria-controls={isOpen ? `${id}__menu` : null}
@@ -388,7 +390,10 @@ export default class ComboBox extends React.Component {
               />
             </ListBox.Field>
             {isOpen && (
-              <ListBox.Menu aria-label={ariaLabel} id={id}>
+              <ListBox.Menu
+                aria-label={ariaLabel}
+                id={id}
+                {...getMenuProps({ 'aria-label': ariaLabel })}>
                 {this.filterItems(items, itemToString, inputValue).map(
                   (item, index) => {
                     const itemProps = getItemProps({ item, index });
