@@ -1,5 +1,4 @@
 {
-  "lerna": "3.13.4",
   "version": "independent",
   "npmClient": "yarn",
   "npmClientArgs": [
@@ -13,5 +12,8 @@
     "**/e2e/**",
     "**/examples/**",
     "**/*.md"
+  ],
+  "packages": [
+    "packages/*"
   ]
 }

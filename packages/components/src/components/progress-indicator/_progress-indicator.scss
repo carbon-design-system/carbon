@@ -25,8 +25,8 @@
     position: relative;
     display: inline-flex;
     flex-direction: row;
-    min-width: 7rem;
-    width: rem(128px);
+    min-width: 8rem;
+    // width: rem(128px);
     overflow: visible;
 
     .#{$prefix}--tooltip__label {
@@ -38,7 +38,8 @@
     position: absolute;
     left: 0;
     height: 1px;
-    width: rem(128px);
+    min-width: rem(128px);
+    width: 100%;
     border: $progress-indicator-bar-width;
   }
 
@@ -63,11 +64,16 @@
     text-overflow: ellipsis;
     transition: box-shadow $duration--fast-02 motion(standard, productive),
       color $duration--fast-02 motion(standard, productive);
+    padding-right: 0.5;
 
     &::before {
       content: '';
       display: block;
     }
+  }
+
+  .sammy-g {
+    color: red;
   }
 
   .#{$prefix}--progress-label:hover {
@@ -140,6 +146,7 @@
   .#{$prefix}--progress-step--current {
     .#{$prefix}--progress-line {
       background-color: $interactive-01;
+      width: 100%
     }
   }
 
@@ -160,6 +167,7 @@
 
     .#{$prefix}--progress-line {
       background-color: $ui-03;
+      width: 100%
     }
   }
 

@@ -25,10 +25,10 @@ const ignoreGlobs = ['**/__tests__/*', '**/*-test.js', '**/*-story.js'].join(
 );
 
 try {
-  exec(`${babelPath} src --quiet -d es --ignore "${ignoreGlobs}"`, {
+  exec(`${babelPath} src -d es --ignore "${ignoreGlobs}"`, {
     BABEL_ENV: 'es',
   });
-  exec(`${babelPath} src --quiet -d lib --ignore "${ignoreGlobs}"`, {
+  exec(`${babelPath} src -d lib --ignore "${ignoreGlobs}"`, {
     BABEL_ENV: 'cjs',
   });
 

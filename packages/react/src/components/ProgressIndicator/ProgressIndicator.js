@@ -117,7 +117,7 @@ export function ProgressStep({
           invalid={invalid}
           prefix={prefix}
         />
-        <ProgressStepLabel className={`${prefix}--progress-label`}>
+        <ProgressStepLabel className={`${prefix}--progress-label sammy-g another`}>
           {label}
         </ProgressStepLabel>
         {secondaryLabel !== null && secondaryLabel !== undefined ? (
