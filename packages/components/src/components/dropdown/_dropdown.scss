@@ -343,7 +343,7 @@
     border-bottom-color: transparent;
     width: auto;
     height: rem(32px);
-    background-color: $ui-background;
+    background-color: transparent;
     transition: background $duration--fast-01 motion(entrance, productive);
 
     &:hover {
@@ -351,7 +351,7 @@
     }
 
     &.#{$prefix}--dropdown--disabled {
-      background-color: $ui-background;
+      background-color: transparent;
     }
 
     .#{$prefix}--dropdown__arrow {

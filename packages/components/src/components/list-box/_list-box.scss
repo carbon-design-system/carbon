@@ -196,7 +196,7 @@ $list-box-menu-width: rem(300px);
 
   // Inline variant for a `list-box`
   .#{$prefix}--list-box.#{$prefix}--list-box--inline {
-    background-color: $ui-background;
+    background-color: transparent;
     border-width: 0;
 
     &:hover {
