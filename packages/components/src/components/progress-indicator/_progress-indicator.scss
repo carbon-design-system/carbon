@@ -44,7 +44,6 @@
     left: 0;
     height: 1px;
     width: rem(128px);
-
     border: $progress-indicator-bar-width;
   }
 
@@ -74,6 +73,7 @@
     text-overflow: ellipsis;
     transition: box-shadow $duration--fast-02 motion(standard, productive),
       color $duration--fast-02 motion(standard, productive);
+
     &::before {
       content: '';
       display: block;
@@ -155,7 +155,6 @@
   .#{$prefix}--progress-step--current {
     .#{$prefix}--progress-line {
       background-color: $interactive-01;
-      width: 100%;
     }
   }
 
@@ -176,7 +175,6 @@
 
     .#{$prefix}--progress-line {
       background-color: $ui-03;
-      width: 100%;
     }
   }
 
