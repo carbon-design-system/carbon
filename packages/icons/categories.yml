@@ -194,6 +194,8 @@ categories:
           - caret--sort
           - caret--sort--down
           - caret--sort--up
+          - center--circle
+          - center--square
           - change-catalog
           - chat
           - chevron--mini
@@ -238,6 +240,8 @@ categories:
           - new-tab
           - not-sent
           - not-sent--filled
+          - operations--field
+          - operations--record
           - package
           - pin
           - recently-viewed
@@ -253,6 +257,7 @@ categories:
           - restart
           - rotate
           - run
+          - save--model
           - scan
           - search
           - send
@@ -352,7 +357,6 @@ categories:
           - logo--flickr
           - logo--github
           - logo--glassdoor
-          - logo--google
           - logo--instagram
           - logo--linkedin
           - logo--livestream
@@ -427,12 +431,15 @@ categories:
           - dicom--6000
           - dicom--overlay
           - dna
+          - download-study
           - edge-enhancement
           - erase--3D
           - exam-mode
           - fusion-blender
           - hanging-protocol
           - health-cross
+          - hole-filling
+          - hole-filling--cursor
           - iCA-2D
           - image--medical
           - interactive-segmentation-cursor
@@ -463,6 +470,8 @@ categories:
           - scalpel--cursor
           - scalpel--lasso
           - scalpel--select
+          - smoothing
+          - smoothing--cursor
           - spine-label
           - stacked-move
           - stacked-scrolling--1
@@ -575,9 +584,11 @@ categories:
           - chart--pie
           - chart--scatter
           - chart--venn-diagram
+          - circle--filled
           - classifier--language
           - concept
           - container-software
+          - covariate
           - data--1
           - data--2
           - data--base
@@ -589,7 +600,9 @@ categories:
           - data--structured
           - data--unstructured
           - data-class
+          - data-refinery
           - data-share
+          - data-table
           - data-vis--1
           - data-vis--2
           - data-vis--3
@@ -597,14 +610,20 @@ categories:
           - datastore
           - diagram
           - document-sentiment
+          - double-integer
+          - factor
           - flow
           - flow--data
           - flow--stream
+          - graphical-data-flow
+          - hashtag
           - hybrid-networking
           - improve-relevance
+          - in-progress
           - interactions
           - increase-level
           - managed-solutions
+          - model-builder
           - network--1
           - network--2
           - network--3
@@ -620,6 +639,9 @@ categories:
           - schematics
           - share-knowledge
           - skill-level
+          - string-integer
+          - string-text
+          - sys-provision
           - table
           - table--split
           - term
@@ -672,10 +694,13 @@ categories:
           - document
           - document--add
           - document--blank
+          - document--download
           - document--export
           - document--import
+          - document--pdf
           - document--subtract
           - document--tasks
+          - document--view
           - download
           - DVR
           - export
@@ -687,6 +712,7 @@ categories:
           - folders
           - gamification
           - GIF
+          - generate-pdf
           - HD
           - HD--filled
           - HDR
@@ -721,11 +747,13 @@ categories:
           - RAW
           - rule
           - scale
+          - script
           - SDK
           - SQL
           - SVG
           - table-of-contents
           - task
+          - task--view
           - template
           - ticket
           - TIF
@@ -827,6 +855,7 @@ categories:
           - user--profile
           - user--role
           - user--simulation
+          - user--speaker
           - user--x-ray
           - user-profile--alt
   - name: Planning
@@ -976,6 +1005,9 @@ categories:
           - development
           - devices
           - email
+          - email--new
+          - fetch-upload
+          - fetch-upload--cloud
           - fingerprint-recognition
           - forum
           - function
@@ -988,7 +1020,10 @@ categories:
           - iot--platform
           - keyboard
           - laptop
+          - logo--jupyter
           - logo--openshift
+          - logo--python
+          - logo--r-script
           - logo--vmware
           - machine-learning
           - mail--all
