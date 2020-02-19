@@ -36,7 +36,7 @@
 
   .#{$prefix}--progress-step--no-max-width {
     min-width: 8rem;
-    width: auto;
+    flex-grow: 1;
   }
 
   .#{$prefix}--progress-line {
@@ -82,7 +82,7 @@
 
   .#{$prefix}--progress-label--no-max-width {
     max-width: 100%;
-    padding-right: 1rem;
+    padding-right: 0.75rem;
   }
 
   .#{$prefix}--progress-label:hover {
