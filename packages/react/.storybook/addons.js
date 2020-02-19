@@ -16,6 +16,7 @@ import 'storybook-readme/register';
 
 // Custom addons
 import './addon-carbon-theme/register';
+import './addon-fathom/register';
 
 // These options used by storybook often conflict with developer tools,
 // conditional panels, or other things that get in the way of our workflow
