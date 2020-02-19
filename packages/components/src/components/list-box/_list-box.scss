@@ -535,7 +535,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__menu-item__option {
-    margin: 0 rem(32px) 0 $carbon--spacing-03;
+    margin: 0 $carbon--spacing-03;
 
     &:focus {
       margin: 0;
