@@ -5257,19 +5257,6 @@
     - avatar
     - tag
     - identification
-- name: logo--google
-  friendly_name: Logo google
-  sizes:
-    - 32
-  aliases:
-    - brand
-    - emblem
-    - logotype
-    - symbol
-    - id
-    - avatar
-    - tag
-    - identification
 - name: logo--instagram
   friendly_name: Logo instagram
   sizes:
@@ -9039,5 +9026,185 @@
     - 3D
     - dimension
     - '3'
+  sizes:
+    - 32
+- name: center--circle
+  friendly_name: center--circle
+  aliases: []
+  sizes:
+    - 32
+- name: center--square
+  friendly_name: center--square
+  aliases: []
+  sizes:
+    - 32
+- name: circle--filled
+  friendly_name: circle--filled
+  aliases: []
+  sizes:
+    - 32
+- name: covariate
+  friendly_name: covariate
+  aliases: []
+  sizes:
+    - 32
+- name: data-refinery
+  friendly_name: data-refinery
+  aliases: []
+  sizes:
+    - 32
+- name: data-table
+  friendly_name: data-table
+  aliases: []
+  sizes:
+    - 32
+- name: document--download
+  friendly_name: document--download
+  aliases: []
+  sizes:
+    - 32
+- name: document--pdf
+  friendly_name: document--pdf
+  aliases: []
+  sizes:
+    - 32
+- name: document--view
+  friendly_name: document--view
+  aliases: []
+  sizes:
+    - 32
+- name: double-integer
+  friendly_name: double-integer
+  aliases: []
+  sizes:
+    - 32
+- name: email--new
+  friendly_name: email--new
+  aliases: []
+  sizes:
+    - 32
+- name: factor
+  friendly_name: factor
+  aliases: []
+  sizes:
+    - 32
+- name: fetch-upload--cloud
+  friendly_name: fetch-upload--cloud
+  aliases: []
+  sizes:
+    - 32
+- name: fetch-upload
+  friendly_name: fetch-upload
+  aliases: []
+  sizes:
+    - 32
+- name: generate-pdf
+  friendly_name: generate-pdf
+  aliases: []
+  sizes:
+    - 32
+- name: graphical-data-flow
+  friendly_name: graphical-data-flow
+  aliases: []
+  sizes:
+    - 32
+- name: hashtag
+  friendly_name: hashtag
+  aliases: []
+  sizes:
+    - 32
+- name: in-progress
+  friendly_name: in-progress
+  aliases: []
+  sizes:
+    - 32
+- name: logo--jupyter
+  friendly_name: logo--jupyter
+  aliases: []
+  sizes:
+    - 32
+- name: logo--python
+  friendly_name: logo--python
+  aliases: []
+  sizes:
+    - 32
+- name: logo--r-script
+  friendly_name: logo--r-script
+  aliases: []
+  sizes:
+    - 32
+- name: model-builder
+  friendly_name: model-builder
+  aliases: []
+  sizes:
+    - 32
+- name: operations--field
+  friendly_name: operations--field
+  aliases: []
+  sizes:
+    - 32
+- name: operations--record
+  friendly_name: operations--record
+  aliases: []
+  sizes:
+    - 32
+- name: save--model
+  friendly_name: save--model
+  aliases: []
+  sizes:
+    - 32
+- name: script
+  friendly_name: script
+  aliases: []
+  sizes:
+    - 32
+- name: string-integer
+  friendly_name: string-integer
+  aliases: []
+  sizes:
+    - 32
+- name: string-text
+  friendly_name: string-text
+  aliases: []
+  sizes:
+    - 32
+- name: sys-provision
+  friendly_name: sys-provision
+  aliases: []
+  sizes:
+    - 32
+- name: task--view
+  friendly_name: task--view
+  aliases: []
+  sizes:
+    - 32
+- name: user--speaker
+  friendly_name: user--speaker
+  aliases: []
+  sizes:
+    - 32
+- name: download-study
+  friendly_name: download-study
+  aliases: []
+  sizes:
+    - 32
+- name: hole-filling--cursor
+  friendly_name: hole-filling--cursor
+  aliases: []
+  sizes:
+    - 32
+- name: hole-filling
+  friendly_name: hole-filling
+  aliases: []
+  sizes:
+    - 32
+- name: smoothing--cursor
+  friendly_name: smoothing--cursor
+  aliases: []
+  sizes:
+    - 32
+- name: smoothing
+  friendly_name: smoothing
+  aliases: []
   sizes:
     - 32
