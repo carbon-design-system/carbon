@@ -265,7 +265,7 @@ export class ProgressIndicator extends Component {
         };
   }
 
-  renderSteps = () => {
+  renderSteps = fitText => {
     const { onChange } = this.props;
 
     return React.Children.map(this.props.children, (child, index) => {
@@ -275,6 +275,7 @@ export class ProgressIndicator extends Component {
         return React.cloneElement(child, {
           current: true,
           index,
+          fitText,
           onClick,
         });
       }
@@ -282,6 +283,7 @@ export class ProgressIndicator extends Component {
         return React.cloneElement(child, {
           complete: true,
           index,
+          fitText,
           onClick,
         });
       }
@@ -289,6 +291,7 @@ export class ProgressIndicator extends Component {
         return React.cloneElement(child, {
           complete: false,
           index,
+          fitText,
           onClick,
         });
       }
@@ -297,7 +300,7 @@ export class ProgressIndicator extends Component {
   };
 
   render() {
-    const { className, currentIndex, vertical, ...other } = this.props; // eslint-disable-line no-unused-vars
+    const { className, currentIndex, fitText, vertical, ...other } = this.props; // eslint-disable-line no-unused-vars
     const classes = classnames({
       [`${prefix}--progress`]: true,
       [`${prefix}--progress--vertical`]: vertical,
@@ -305,7 +308,7 @@ export class ProgressIndicator extends Component {
     });
     return (
       <ul className={classes} {...other}>
-        {this.renderSteps()}
+        {this.renderSteps(fitText)}
       </ul>
     );
   }

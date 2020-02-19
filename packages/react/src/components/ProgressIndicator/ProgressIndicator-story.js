@@ -133,21 +133,19 @@ storiesOf('ProgressIndicator', module)
     () => (
       <ProgressIndicator
         currentIndex={number('Current progress (currentIndex)', 1)}
-        onChange={action('onChange')}>
+        onChange={action('onChange')}
+        fitText>
         <ProgressStep
           label="Click me"
           description="Step 1: Register a onChange event"
-          fitText
         />
         <ProgressStep
           label="Really long label"
           description="The progress indicator will listen for clicks on the steps"
-          fitText
         />
         <ProgressStep
           label="Tooltip and really long label"
           description="A really long tooltip"
-          fitText
         />
       </ProgressIndicator>
     ),
