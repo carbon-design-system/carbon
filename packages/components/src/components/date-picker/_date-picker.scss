@@ -201,10 +201,16 @@
     width: rem(40px);
     padding: 0;
     fill: $text-01;
+    border: none;
+    background-color: transparent;
     transition: background-color $duration--fast-01 motion(standard, productive);
 
     &:hover {
       background-color: $hover-ui;
+    }
+
+    &:focus {
+      @include focus-outline;
     }
   }
 

@@ -421,3 +421,130 @@ describe('Opening up calendar dropdown', () => {
     expect(datePicker.cal.open).toHaveBeenCalled();
   });
 });
+
+describe('Focus management', () => {
+  let wrapper;
+  const addedNodes = [];
+
+  beforeEach(() => {
+    wrapper = mount(
+      <>
+        <input id="dummy-focus-node-before" type="text" />
+        <DatePicker
+          onChange={() => {}}
+          datePickerType="single"
+          className="extra-class">
+          <div className="test-child">
+            <input type="text" className={`${prefix}--date-picker__input`} />
+          </div>
+        </DatePicker>
+        <input id="dummy-focus-node-after" type="text" />
+      </>
+    );
+  });
+
+  it('focuses on calendar dropdown when focus goes next to the date picker input', () => {
+    const datePicker = wrapper.find('DatePicker').instance();
+    datePicker.cal.open();
+    datePicker.cal.selectedDateElem = {
+      focus: jest.fn(),
+    };
+    const event = Object.assign(
+      new CustomEvent('focusout', { bubbles: true }),
+      {
+        relatedTarget: wrapper.find('#dummy-focus-node-after').getDOMNode(),
+      }
+    );
+    wrapper
+      .find('.bx--date-picker__input')
+      .getDOMNode()
+      .dispatchEvent(event);
+    expect(datePicker.cal.selectedDateElem.focus).toHaveBeenCalled();
+  });
+
+  it('closes calendar dropdown when focus goes before next to the date picker input', () => {
+    const datePicker = wrapper.find('DatePicker').instance();
+    datePicker.cal.open();
+    const event = Object.assign(
+      new CustomEvent('focusout', { bubbles: true }),
+      {
+        relatedTarget: wrapper.find('#dummy-focus-node-before').getDOMNode(),
+      }
+    );
+    wrapper
+      .find('.bx--date-picker__input')
+      .getDOMNode()
+      .dispatchEvent(event);
+    expect(datePicker.cal.isOpen).toBe(false);
+  });
+
+  it('focuses on the date picker input when focus goes before next to calendar dropdown', () => {
+    jest.useFakeTimers();
+
+    const datePicker = wrapper.find('DatePicker').instance();
+    datePicker.cal.open();
+
+    const datePickerInput = wrapper
+      .find('.bx--date-picker__input')
+      .getDOMNode();
+    jest.spyOn(datePickerInput, 'focus');
+
+    const { calendarContainer } = datePicker.cal;
+    const dummyNodeBeforeCalendar = document.createElement('input');
+    calendarContainer.parentNode.insertBefore(
+      dummyNodeBeforeCalendar,
+      calendarContainer
+    );
+    addedNodes.push(dummyNodeBeforeCalendar);
+
+    const event = Object.assign(
+      new CustomEvent('focusout', { bubbles: true }),
+      {
+        relatedTarget: dummyNodeBeforeCalendar,
+      }
+    );
+    calendarContainer
+      .querySelector('button.flatpickr-prev-month')
+      .dispatchEvent(event);
+    jest.runAllTimers();
+
+    expect(datePickerInput.focus).toHaveBeenCalled();
+  });
+
+  it('closes calendar dropdown when focus goes next to calendar dropdown', () => {
+    jest.useFakeTimers();
+
+    const datePicker = wrapper.find('DatePicker').instance();
+    datePicker.cal.open();
+
+    const event = Object.assign(
+      new CustomEvent('focusout', { bubbles: true }),
+      {
+        relatedTarget: wrapper.find('#dummy-focus-node-after').getDOMNode(),
+      }
+    );
+    datePicker.cal.calendarContainer
+      .querySelector('button.flatpickr-prev-month')
+      .dispatchEvent(event);
+    jest.runAllTimers();
+
+    expect(datePicker.cal.isOpen).toBe(false);
+  });
+
+  it('makes the focused day element sequential focusable', () => {
+    const datePicker = wrapper.find('DatePicker').instance();
+    const dayElem = datePicker.cal.calendarContainer.querySelector(
+      '.flatpickr-day'
+    );
+    dayElem.dispatchEvent(new CustomEvent('focusin', { bubbles: true }));
+    expect(dayElem.tabIndex).toBe(0);
+    dayElem.dispatchEvent(new CustomEvent('focusout', { bubbles: true }));
+    expect(dayElem.tabIndex).toBe(-1);
+  });
+
+  afterEach(() => {
+    while (addedNodes.length > 0) {
+      addedNodes.pop().remove();
+    }
+  });
+});
