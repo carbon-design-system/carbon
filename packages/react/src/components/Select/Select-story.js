@@ -9,11 +9,17 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { withKnobs, boolean, text } from '@storybook/addon-knobs';
+import { withKnobs, boolean, text, select } from '@storybook/addon-knobs';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import SelectItemGroup from '../SelectItemGroup';
 import SelectSkeleton from '../Select/Select.Skeleton';
+
+const sizes = {
+  'Extra large size (xl)': 'xl',
+  'Regular size (lg)': '',
+  'Small size (sm)': 'sm',
+};
 
 const props = {
   select: () => ({
@@ -23,6 +29,7 @@ const props = {
       'Put control in-line with label (inline in <Select>)',
       false
     ),
+    size: select('Field size (size)', sizes, '') || undefined,
     disabled: boolean('Disabled (disabled in <Select>)', false),
     hideLabel: boolean('No label (hideLabel in <Select>)', false),
     invalid: boolean('Show form validation UI (invalid in <Select>)', false),
