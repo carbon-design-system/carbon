@@ -21234,6 +21234,16 @@ Select styles
     }
   }
 
+  .#{$prefix}--select-input--sm {
+    height: rem(32px);
+    max-height: rem(32px);
+  }
+
+  .#{$prefix}--select-input--xl {
+    height: rem(48px);
+    max-height: rem(48px);
+  }
+
   .#{$prefix}--select--disabled .#{$prefix}--label,
   .#{$prefix}--select--disabled .#{$prefix}--form__helper-text {
     color: $disabled-02;
