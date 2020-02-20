@@ -31,6 +31,7 @@ const Select = React.forwardRef(function Select(
     invalidText,
     helperText,
     light,
+    size,
     ...other
   },
   ref
@@ -46,6 +47,10 @@ const Select = React.forwardRef(function Select(
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
+  });
+  const inputClasses = classNames({
+    [`${prefix}--select-input`]: true,
+    [`${prefix}--select-input--${size}`]: size,
   });
   const errorId = `${id}-error-msg`;
   const error = invalid ? (
@@ -70,7 +75,7 @@ const Select = React.forwardRef(function Select(
           {...other}
           {...ariaProps}
           id={id}
-          className={`${prefix}--select-input`}
+          className={inputClasses}
           disabled={disabled || undefined}
           aria-invalid={invalid || undefined}
           ref={ref}>
@@ -202,6 +207,11 @@ Select.propTypes = {
    * select since Pagination renders one for us.
    */
   noLabel: PropTypes.bool,
+
+  /**
+   * Specify the size of the Text Input. Currently supports either `sm` or `xl` as an option.
+   */
+  size: PropTypes.oneOf(['sm', 'xl']),
 };
 
 Select.defaultProps = {
@@ -212,6 +222,7 @@ Select.defaultProps = {
   invalidText: '',
   helperText: '',
   light: false,
+  size: '',
 };
 
 export default Select;
