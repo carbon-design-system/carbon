@@ -118,12 +118,10 @@
     - direction
     - point
   sizes:
-    - 16
     - 32
 - name: arrows--vertical
   friendly_name: Arrows vertical
   sizes:
-    - 16
     - 32
   aliases:
     - direction
@@ -165,7 +163,6 @@
     - affix
     - add
   sizes:
-    - 16
     - 32
 - name: awake
   friendly_name: Awake
@@ -183,7 +180,6 @@
     - up
     - scroll up
   sizes:
-    - 16
     - 32
 - name: calendar
   friendly_name: Calendar
@@ -195,7 +191,6 @@
     - month
     - year
   sizes:
-    - 16
     - 32
 - name: caret--down
   friendly_name: Caret down
@@ -287,7 +282,6 @@
     - bot
     - speak
   sizes:
-    - 16
     - 32
 - name: checkmark
   friendly_name: Checkmark
@@ -297,7 +291,6 @@
     - valid
     - status
   sizes:
-    - 16
     - 20
     - 24
     - 32
@@ -316,7 +309,6 @@
 - name: checkmark--outline
   friendly_name: Checkmark outline
   sizes:
-    - 16
     - 32
   aliases:
     - approved
@@ -416,7 +408,6 @@
     - denied
     - ex
   sizes:
-    - 16
     - 32
 - name: close--filled
   friendly_name: Close filled
@@ -432,7 +423,6 @@
 - name: close--outline
   friendly_name: Close outline
   sizes:
-    - 16
     - 32
   aliases:
     - X
@@ -459,12 +449,10 @@
     - clipboard
     - copied
   sizes:
-    - 16
     - 32
 - name: copy--file
   friendly_name: Copy file
   sizes:
-    - 16
     - 32
   aliases:
     - duplicate
@@ -487,7 +475,6 @@
     - doc
     - paper
   sizes:
-    - 16
     - 32
 - name: document--add
   friendly_name: Document add
@@ -544,7 +531,6 @@
     - down
     - footer
   sizes:
-    - 16
     - 32
 - name: download
   friendly_name: Download
@@ -559,7 +545,6 @@
     - handle
     - drag
   sizes:
-    - 16
     - 32
 - name: edit
   friendly_name: Edit
@@ -568,7 +553,6 @@
     - pencil
     - change
   sizes:
-    - 16
     - 32
 - name: edit--off
   friendly_name: Edit off
@@ -671,12 +655,10 @@
     - document
     - organize
   sizes:
-    - 16
     - 32
 - name: folder--add
   friendly_name: Folder add
   sizes:
-    - 16
     - 32
   aliases:
     - file
@@ -718,7 +700,6 @@
     - discuss
     - conference
   sizes:
-    - 16
     - 32
 - name: grid
   friendly_name: Grid
