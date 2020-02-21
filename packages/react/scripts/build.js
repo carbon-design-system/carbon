@@ -28,7 +28,7 @@ try {
   exec(`${babelPath} src --quiet -d es --ignore "${ignoreGlobs}"`, {
     BABEL_ENV: 'es',
   });
-  exec(`${babelPath} src -d lib --ignore "${ignoreGlobs}"`, {
+  exec(`${babelPath} src --quiet -d lib --ignore "${ignoreGlobs}"`, {
     BABEL_ENV: 'cjs',
   });
 
