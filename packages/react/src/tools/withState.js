@@ -13,8 +13,11 @@ export default class WithState extends React.PureComponent {
     initialState: PropTypes.object,
   };
 
-  UNSAFE_componentWillMount() {
-    this.setState(this.props.initialState);
+  constructor(props) {
+    super(props);
+    this.state = {
+      initialState: this.props.initialState,
+    };
   }
 
   boundSetState = (...args) => this.setState(...args);
