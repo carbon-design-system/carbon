@@ -30,6 +30,48 @@ export default class DatePickerInput extends Component {
      * control
      */
     labelText: PropTypes.node.isRequired,
+
+    /**
+     * Provide a regular expression that the input value must match
+     */
+    pattern: (props, propName, componentName) => {
+      if (props[propName] === undefined) {
+        return;
+      }
+      try {
+        new RegExp(props[propName]);
+      } catch (e) {
+        return new Error(
+          `Invalid value of prop '${propName}' supplied to '${componentName}', it should be a valid regular expression`
+        );
+      }
+    },
+
+    /**
+     * Specify the type of the <input>
+     */
+    type: PropTypes.string,
+
+    /**
+     * Specify whether or not the input should be disabled
+     */
+    disabled: PropTypes.bool,
+
+    /**
+     * Specify whether or not the input should be invalid
+     */
+    invalid: PropTypes.bool,
+
+    /**
+     * Provide a function to be called when the input field is clicked
+     */
+    onClick: PropTypes.func,
+
+    /**
+     * Specify an `onChange` handler that is called whenever a change in the
+     * input field has occurred
+     */
+    onChange: PropTypes.func,
   };
 
   static defaultProps = {
