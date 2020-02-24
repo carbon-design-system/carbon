@@ -15185,7 +15185,8 @@ Data table core styles
   // Compact
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table--compact thead tr,
-  .#{$prefix}--data-table--compact tbody tr {
+  .#{$prefix}--data-table--compact tbody tr,
+  .#{$prefix}--data-table--compact tbody tr th {
     height: rem(24px);
   }
 
@@ -15225,7 +15226,8 @@ Data table core styles
   // Short
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table--short thead tr,
-  .#{$prefix}--data-table--short tbody tr {
+  .#{$prefix}--data-table--short tbody tr,
+  .#{$prefix}--data-table--short tbody tr th {
     height: rem(32px);
   }
 
@@ -15257,7 +15259,8 @@ Data table core styles
   // Tall
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table--tall thead tr,
-  .#{$prefix}--data-table--tall tbody tr {
+  .#{$prefix}--data-table--tall tbody tr,
+  .#{$prefix}--data-table--tall tbody tr th {
     height: rem(64px);
   }
 
