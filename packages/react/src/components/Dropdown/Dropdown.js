@@ -239,12 +239,12 @@ export default class Dropdown extends React.Component {
           getMenuProps,
           toggleMenu,
         }) => {
-          const menuProps = getMenuProps({
-            'aria-labelledby': null,
-          });
+          //const menuProps = getMenuProps({
+          //'aria-labelledby': null,
+          //});
           const rootProps = getRootProps({
             'aria-labelledby': null,
-            refKey: 'innerRef',
+            //refKey: 'innerRef',
           });
           const buttonProps = {
             ...getToggleButtonProps({
@@ -257,7 +257,7 @@ export default class Dropdown extends React.Component {
             }),
           };
           return (
-            <div className={wrapperClasses}>
+            <div aria-label={ariaLabel} className={wrapperClasses}>
               {title}
               {!inline && helper}
               <ListBox
@@ -271,7 +271,8 @@ export default class Dropdown extends React.Component {
                 invalidText={invalidText}
                 light={light}
                 aria-label={ariaLabel}
-                {...menuProps}
+                //{...menuProps}
+                {...getMenuProps()}
                 {...rootProps}>
                 {invalid && (
                   <WarningFilled16
@@ -308,13 +309,10 @@ export default class Dropdown extends React.Component {
                             highlightedIndex === index || selectedItem === item
                           }
                           title={itemToElement ? item.text : itemToString(item)}
+                          aria-label={item.text}
                           {...itemProps}>
                           {itemToElement ? (
-                            <ItemToElement
-                              aria-label={ariaLabel}
-                              key={itemProps.id}
-                              {...item}
-                            />
+                            <ItemToElement key={itemProps.id} {...item} />
                           ) : (
                             itemToString(item)
                           )}
