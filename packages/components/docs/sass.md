@@ -14604,10 +14604,12 @@ Data table action styles
 
   .#{$prefix}--action-list .#{$prefix}--btn {
     color: $text-04;
+    padding: $button-padding-ghost;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {
     fill: $icon-03;
+    position: static;
     margin-left: $spacing-03;
   }
 
