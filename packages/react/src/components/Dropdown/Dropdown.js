@@ -222,49 +222,48 @@ export default class Dropdown extends React.Component {
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
     return (
-      <div className={wrapperClasses}>
-        {title}
-        {!inline && helper}
-        <Downshift
-          {...mapDownshiftProps(downshiftProps)}
-          onChange={this.handleOnChange}
-          itemToString={itemToString}
-          initialSelectedItem={initialSelectedItem}
-          selectedItem={selectedItem}>
-          {({
-            isOpen,
-            itemToString,
-            selectedItem,
-            highlightedIndex,
-            getRootProps,
-            getToggleButtonProps,
-            getItemProps,
-            getLabelProps,
-            toggleMenu,
-          }) => {
-            const buttonProps = {
-              ...getToggleButtonProps({
-                onKeyDown: event => {
-                  if (match(event, keys.Enter)) {
-                    toggleMenu();
-                  }
-                },
-                disabled,
-              }),
-              'aria-label': undefined,
-            };
-            return (
+      <Downshift
+        {...mapDownshiftProps(downshiftProps)}
+        onChange={this.handleOnChange}
+        itemToString={itemToString}
+        initialSelectedItem={initialSelectedItem}
+        selectedItem={selectedItem}>
+        {({
+          isOpen,
+          itemToString,
+          selectedItem,
+          highlightedIndex,
+          getRootProps,
+          getToggleButtonProps,
+          getItemProps,
+          getMenuProps,
+          toggleMenu,
+        }) => {
+          const buttonProps = {
+            ...getToggleButtonProps({
+              onKeyDown: event => {
+                if (match(event, keys.Enter)) {
+                  toggleMenu();
+                }
+              },
+              disabled,
+            }),
+          };
+          return (
+            <div className={wrapperClasses}>
+              {title}
+              {!inline && helper}
               <ListBox
                 type={type}
                 size={size}
                 id={id}
-                aria-label={ariaLabel}
                 className={className({ isOpen })}
                 disabled={disabled}
                 isOpen={isOpen}
                 invalid={invalid}
                 invalidText={invalidText}
                 light={light}
+                {...getMenuProps({ 'aria-label': ariaLabel })}
                 {...getRootProps({ refKey: 'innerRef' })}>
                 {invalid && (
                   <WarningFilled16
@@ -281,8 +280,7 @@ export default class Dropdown extends React.Component {
                   {...buttonProps}>
                   <span
                     id={fieldLabelId}
-                    className={`${prefix}--list-box__label`}
-                    {...getLabelProps()}>
+                    className={`${prefix}--list-box__label`}>
                     {selectedItem ? itemToString(selectedItem) : label}
                   </span>
                   <ListBox.MenuIcon
@@ -319,10 +317,10 @@ export default class Dropdown extends React.Component {
                   </ListBox.Menu>
                 )}
               </ListBox>
-            );
-          }}
-        </Downshift>
-      </div>
+            </div>
+          );
+        }}
+      </Downshift>
     );
   }
 }
