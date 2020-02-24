@@ -239,6 +239,13 @@ export default class Dropdown extends React.Component {
           getMenuProps,
           toggleMenu,
         }) => {
+          const menuProps = getMenuProps({
+            'aria-labelledby': null,
+          });
+          const rootProps = getRootProps({
+            'aria-labelledby': null,
+            refKey: 'innerRef',
+          });
           const buttonProps = {
             ...getToggleButtonProps({
               onKeyDown: event => {
@@ -263,8 +270,9 @@ export default class Dropdown extends React.Component {
                 invalid={invalid}
                 invalidText={invalidText}
                 light={light}
-                {...getMenuProps({ 'aria-label': ariaLabel })}
-                {...getRootProps({ refKey: 'innerRef' })}>
+                aria-label={ariaLabel}
+                {...menuProps}
+                {...rootProps}>
                 {invalid && (
                   <WarningFilled16
                     className={`${prefix}--list-box__invalid-icon`}
@@ -302,7 +310,11 @@ export default class Dropdown extends React.Component {
                           title={itemToElement ? item.text : itemToString(item)}
                           {...itemProps}>
                           {itemToElement ? (
-                            <ItemToElement key={itemProps.id} {...item} />
+                            <ItemToElement
+                              aria-label={ariaLabel}
+                              key={itemProps.id}
+                              {...item}
+                            />
                           ) : (
                             itemToString(item)
                           )}
