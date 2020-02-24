@@ -244,7 +244,6 @@ export default class Dropdown extends React.Component {
           });
           const rootProps = getRootProps({
             'aria-labelledby': null,
-            refKey: 'innerRef',
           });
           const buttonProps = {
             ...getToggleButtonProps({
