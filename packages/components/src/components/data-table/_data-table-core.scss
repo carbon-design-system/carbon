@@ -353,7 +353,8 @@
   // Compact
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table--compact thead tr,
-  .#{$prefix}--data-table--compact tbody tr {
+  .#{$prefix}--data-table--compact tbody tr,
+  .#{$prefix}--data-table--compact tbody tr th {
     height: rem(24px);
   }
 
@@ -393,7 +394,8 @@
   // Short
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table--short thead tr,
-  .#{$prefix}--data-table--short tbody tr {
+  .#{$prefix}--data-table--short tbody tr,
+  .#{$prefix}--data-table--short tbody tr th {
     height: rem(32px);
   }
 
@@ -425,7 +427,8 @@
   // Tall
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table--tall thead tr,
-  .#{$prefix}--data-table--tall tbody tr {
+  .#{$prefix}--data-table--tall tbody tr,
+  .#{$prefix}--data-table--tall tbody tr th {
     height: rem(64px);
   }
 
