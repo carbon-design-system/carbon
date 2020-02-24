@@ -15,9 +15,7 @@ export default class WithState extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = {
-      initialState: this.props.initialState,
-    };
+    this.state = this.props.initialState;
   }
 
   boundSetState = (...args) => this.setState(...args);
