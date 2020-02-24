@@ -18410,7 +18410,7 @@ react-docgen@^5.0.0:
     node-dir "^0.1.10"
     strip-indent "^3.0.0"
 
-react-dom@^16.6.0, react-dom@^16.8.3, react-dom@^16.8.6, react-dom@^16.9.0, react-dom@~16.9.0:
+react-dom@^16.6.0, react-dom@^16.8.3, react-dom@^16.8.6, react-dom@^16.9.0:
   version "16.9.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.9.0.tgz#5e65527a5e26f22ae3701131bcccaee9fb0d3962"
   integrity sha512-YFT2rxO9hM70ewk9jq0y6sQk8cL02xm4+IzYBz75CQGlClQQ1Bxq0nhHF6OtSbit+AIahujJgb/CPRibFkMNJQ==
@@ -18498,7 +18498,12 @@ react-inspector@^4.0.0:
     prop-types "^15.6.1"
     storybook-chromatic "^2.2.2"
 
-react-is@^16.12.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.2, react-is@^16.8.3, react-is@^16.8.4, react-is@^16.8.6, react-is@^16.9.0, react-is@~16.9.0:
+react-is@^16.12.0:
+  version "16.12.0"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
+  integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
+
+react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.2, react-is@^16.8.3, react-is@^16.8.4, react-is@^16.8.6, react-is@^16.9.0:
   version "16.9.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.9.0.tgz#21ca9561399aad0ff1a7701c01683e8ca981edcb"
   integrity sha512-tJBzzzIgnnRfEm046qRcURvwQnZVXmuCbscxUO5RWrGTXpon2d4c8mI0D8WE6ydVIm29JiLB6+RslkIvym9Rjw==
@@ -18576,7 +18581,7 @@ react-syntax-highlighter@^11.0.2:
     prismjs "^1.8.4"
     refractor "^2.4.1"
 
-react-test-renderer@^16.0.0-0, react-test-renderer@^16.8.6, react-test-renderer@~16.9.0:
+react-test-renderer@^16.0.0-0, react-test-renderer@^16.8.6:
   version "16.9.0"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.9.0.tgz#7ed657a374af47af88f66f33a3ef99c9610c8ae9"
   integrity sha512-R62stB73qZyhrJo7wmCW9jgl/07ai+YzvouvCXIJLBkRlRqLx4j9RqcLEAfNfU3OxTGucqR2Whmn3/Aad6L3hQ==
@@ -18604,7 +18609,7 @@ react-transition-group@^2.2.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react@^16.6.0, react@^16.8.3, react@^16.8.6, react@^16.9.0, react@~16.9.0:
+react@^16.6.0, react@^16.8.3, react@^16.8.6, react@^16.9.0:
   version "16.9.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.9.0.tgz#40ba2f9af13bc1a38d75dbf2f4359a5185c4f7aa"
   integrity sha512-+7LQnFBwkiw+BobzOF6N//BdoNw0ouwmSJTEm9cglOOmsg/TMiFHZLe2sEoN5M7LgJTj9oHH0gxklfnQe66S1w==
@@ -19716,14 +19721,7 @@ rollup-pluginutils@2.0.1:
     estree-walker "^0.3.0"
     micromatch "^2.3.11"
 
-rollup-pluginutils@2.8.2:
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.8.2.tgz#72f2af0748b592364dbd3389e600e5a9444a351e"
-  integrity sha512-EEp9NhnUkwY8aif6bxgovPHMoMoNr2FulJziTndpt5H9RdwC47GSGuII9XxpSdzVGM0GWrNPHV6ie1LTNJPaLQ==
-  dependencies:
-    estree-walker "^0.6.1"
-
-rollup-pluginutils@^2.6.0, rollup-pluginutils@^2.8.1:
+rollup-pluginutils@2.8.2, rollup-pluginutils@^2.6.0, rollup-pluginutils@^2.8.1:
   version "2.8.2"
   resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.8.2.tgz#72f2af0748b592364dbd3389e600e5a9444a351e"
   integrity sha512-EEp9NhnUkwY8aif6bxgovPHMoMoNr2FulJziTndpt5H9RdwC47GSGuII9XxpSdzVGM0GWrNPHV6ie1LTNJPaLQ==
