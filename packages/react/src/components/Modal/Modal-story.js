@@ -32,7 +32,6 @@ const props = () => ({
     'Enter key to submit (shouldSubmitOnEnter)',
     false
   ),
-  focusTrap: boolean('Trap focus (focusTrap)', false),
   hasScrollingContent: boolean(
     'Modal contains scrollable content (hasScrollingContent)',
     false
