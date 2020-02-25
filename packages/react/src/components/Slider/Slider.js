@@ -199,7 +199,7 @@ export default class Slider extends PureComponent {
    * should be called.
    */
   componentDidUpdate(_, prevState) {
-    // Fire onChange event handler, if present, if there's a usable value, and
+    // Fire onChange event handler if present, if there's a usable value, and
     // if the value is different from the last one
     if (
       this.state.value !== '' &&
@@ -209,7 +209,7 @@ export default class Slider extends PureComponent {
       this.props.onChange({ value: this.state.value });
     }
 
-    // Fire onRelease event handler, if present and if needed
+    // Fire onRelease event handler if present and if needed
     if (
       this.state.needsOnRelease &&
       typeof this.props.onRelease === 'function'
@@ -274,78 +274,92 @@ export default class Slider extends PureComponent {
 
   /**
    * Handles a "drag" event by recalculating the value/thumb and setting state
-   * accordingly. This function throttles "drag" events to be processed at most
-   * once every `EVENT_THROTTLE` milliseconds.
+   * accordingly.
    *
    * @param {Event} evt The event.
    */
-  onDrag = throttle(
-    evt => {
-      // Do nothing if component is disabled
-      if (this.props.disabled) {
-        return;
-      }
+  _onDrag = evt => {
+    // Do nothing if component is disabled or we have no event
+    if (this.props.disabled || !evt) {
+      return;
+    }
 
-      // Do nothing if we have no valid event or clientX
-      if (!evt || !('clientX' in evt)) {
-        return;
-      }
+    let clientX;
+    if ('clientX' in evt) {
+      clientX = evt.clientX;
+    } else if (
+      'touches' in evt &&
+      0 in evt.touches &&
+      'clientX' in evt.touches[0]
+    ) {
+      clientX = evt.touches[0].clientX;
+    } else {
+      // Do nothing if we have no valid clientX
+      return;
+    }
 
-      const { value, left } = this.calcValue({ clientX: evt.clientX });
-      this.setState({ value, left });
-    },
-    EVENT_THROTTLE,
-    { leading: true, trailing: false }
-  );
+    const { value, left } = this.calcValue({ clientX });
+    this.setState({ value, left });
+  };
+
+  /**
+   * Throttles calls to `this._onDrag` by limiting events to being processed at
+   * most once every `EVENT_THROTTLE` milliseconds.
+   */
+  onDrag = throttle(this._onDrag, EVENT_THROTTLE, {
+    leading: true,
+    trailing: false,
+  });
 
   /**
    * Handles a `keydown` event by recalculating the value/thumb and setting
-   * state accordingly. This function throttles "drag" events to be processed at
-   * most once every `EVENT_THROTTLE` milliseconds.
+   * state accordingly.
    *
    * @param {Event} evt The event.
    */
-  onKeyDown = throttle(
-    evt => {
-      // Do nothing if component is disabled
-      if (this.props.disabled) {
+  _onKeyDown = evt => {
+    // Do nothing if component is disabled or we don't have a valid event
+    if (this.props.disabled || !('which' in evt)) {
+      return;
+    }
+
+    const which = Number.parseInt(evt.which);
+    let delta = 0;
+    switch (which) {
+      case ARROW_KEYS.ArrowDown:
+      case ARROW_KEYS.ArrowLeft:
+        delta = -this.props.step;
+        break;
+      case ARROW_KEYS.ArrowUp:
+      case ARROW_KEYS.ArrowRight:
+        delta = this.props.step;
+        break;
+      default:
+        // Ignore keys we don't want to handle
         return;
-      }
+    }
 
-      // Make sure it's a key we want to handle
-      if (!('which' in evt) || !Object.values(ARROW_KEYS).includes(evt.which)) {
-        return;
-      }
+    // If shift was held, account for the stepMultiplier
+    if (evt.shiftKey) {
+      const stepMultiplier =
+        this.props.stepMultiplier || this.props.stepMuliplier;
+      delta *= stepMultiplier;
+    }
 
-      let delta = 0;
-      switch (evt.which) {
-        case ARROW_KEYS.ArrowDown:
-        case ARROW_KEYS.ArrowLeft:
-          delta = -this.props.step;
-          break;
-        case ARROW_KEYS.ArrowUp:
-        case ARROW_KEYS.ArrowRight:
-          delta = this.props.step;
-          break;
-        default:
-          return;
-      }
+    const { value, left } = this.calcValue({
+      value: this.state.value + delta,
+    });
+    this.setState({ value, left });
+  };
 
-      // If shift was held, account for the stepMultiplier
-      if (evt.shiftKey) {
-        const stepMultiplier =
-          this.props.stepMultiplier || this.props.stepMuliplier;
-        delta *= stepMultiplier;
-      }
-
-      const { value, left } = this.calcValue({
-        value: this.state.value + delta,
-      });
-      this.setState({ value, left });
-    },
-    EVENT_THROTTLE,
-    { leading: true, trailing: false }
-  );
+  /**
+   * Throttles calls to `this._onKeyDown` by limiting events to being processed
+   * at most once every `EVENT_THROTTLE` milliseconds.
+   */
+  onKeyDown = throttle(this._onKeyDown, EVENT_THROTTLE, {
+    leading: true,
+    trailing: false,
+  });
 
   /**
    * Provides the two-way binding for the input field of the Slider. It also
@@ -400,8 +414,13 @@ export default class Slider extends PureComponent {
   calcValue = ({ clientX = null, value = null }) => {
     const range = this.props.max - this.props.min;
     const boundingRect = this.element.getBoundingClientRect();
-    const width = boundingRect.right - boundingRect.left;
     const totalSteps = range / this.props.step;
+    let width = boundingRect.right - boundingRect.left;
+
+    // Enforce a minimum width of at least 1 for calculations
+    if (width <= 0) {
+      width = 1;
+    }
 
     // If a clientX is specified, use it to calculate the leftPercent. If not,
     // use the provided value or state's value to calculate it instead.
@@ -484,6 +503,9 @@ export default class Slider extends PureComponent {
     const thumbStyle = {
       left: `${left}%`,
     };
+    const hiddenInputStyle = {
+      display: 'none',
+    };
 
     return (
       <div className={`${prefix}--form-item`}>
@@ -529,22 +551,21 @@ export default class Slider extends PureComponent {
           <span className={`${prefix}--slider__range-label`}>
             {formatLabel(max, maxLabel)}
           </span>
-          {!hideTextInput && (
-            <input
-              type={inputType}
-              id={`${id}-input-for-slider`}
-              name={name}
-              className={inputClasses}
-              value={value}
-              aria-label={ariaLabelInput}
-              disabled={disabled}
-              required={required}
-              min={min}
-              max={max}
-              step={step}
-              onChange={this.onChange}
-            />
-          )}
+          <input
+            type={hideTextInput ? 'hidden' : inputType}
+            style={hideTextInput ? hiddenInputStyle : null}
+            id={`${id}-input-for-slider`}
+            name={name}
+            className={inputClasses}
+            value={value}
+            aria-label={ariaLabelInput}
+            disabled={disabled}
+            required={required}
+            min={min}
+            max={max}
+            step={step}
+            onChange={this.onChange}
+          />
         </div>
       </div>
     );
