@@ -139,7 +139,7 @@ describe('Slider', () => {
         type: 'keydown',
         which: '38',
       };
-      wrapper.instance()._onKeyDown(evt);
+      wrapper.instance().onKeyDown(evt);
       expect(wrapper.state().value).toEqual(51);
       expect(handleChange).lastCalledWith({ value: 51 });
     });
@@ -149,7 +149,7 @@ describe('Slider', () => {
         type: 'keydown',
         which: '40',
       };
-      wrapper.instance()._onKeyDown(evt);
+      wrapper.instance().onKeyDown(evt);
       expect(wrapper.state().value).toEqual(50);
       expect(handleChange).lastCalledWith({ value: 50 });
     });
@@ -160,7 +160,7 @@ describe('Slider', () => {
         which: '38',
         shiftKey: true,
       };
-      wrapper.instance()._onKeyDown(evt);
+      wrapper.instance().onKeyDown(evt);
       expect(wrapper.state().value).toEqual(55);
       expect(handleChange).lastCalledWith({ value: 55 });
     });
@@ -183,17 +183,6 @@ describe('Slider', () => {
       wrapper.instance()._onDrag(evt);
       expect(handleChange).lastCalledWith({ value: 0 });
       expect(wrapper.state().value).toEqual(0);
-    });
-
-    it('throttles keydown events', () => {
-      const evt = {
-        type: 'keydown',
-        which: '38',
-      };
-      wrapper.instance().onKeyDown(evt);
-      wrapper.instance().onKeyDown(evt);
-      expect(wrapper.state().value).toEqual(1);
-      expect(handleChange).lastCalledWith({ value: 1 });
     });
 
     it('throttles mousemove events', () => {
@@ -291,18 +280,18 @@ describe('Slider', () => {
       expect(handleChange).not.toHaveBeenCalled();
     });
 
-    it('gracefully tolerates empty event passed to _onKeydown', () => {
+    it('gracefully tolerates empty event passed to onKeyDown', () => {
       const evt = {};
-      wrapper.instance()._onKeyDown(evt);
+      wrapper.instance().onKeyDown(evt);
       expect(wrapper.state().value).toEqual(''); // from last test
       expect(handleChange).not.toHaveBeenCalled();
     });
 
-    it('gracefully tolerates bad key code passed to _onKeydown', () => {
+    it('gracefully tolerates bad key code passed to onKeyDown', () => {
       const evt = {
         which: '123',
       };
-      wrapper.instance()._onKeyDown(evt);
+      wrapper.instance().onKeyDown(evt);
       expect(wrapper.state().value).toEqual(''); // from last test
       expect(handleChange).not.toHaveBeenCalled();
     });
@@ -372,7 +361,7 @@ describe('Slider', () => {
         type: 'keydown',
         which: '40',
       };
-      wrapper.instance()._onKeyDown(evt);
+      wrapper.instance().onKeyDown(evt);
       expect(wrapper.state().value).toEqual(50);
       expect(handleChange).not.toHaveBeenCalled();
     });

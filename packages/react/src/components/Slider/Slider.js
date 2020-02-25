@@ -323,7 +323,7 @@ export default class Slider extends PureComponent {
    *
    * @param {Event} evt The event.
    */
-  _onKeyDown = evt => {
+  onKeyDown = evt => {
     // Do nothing if component is disabled or we don't have a valid event
     if (this.props.disabled || !('which' in evt)) {
       return;
@@ -357,15 +357,6 @@ export default class Slider extends PureComponent {
     });
     this.setState({ value, left });
   };
-
-  /**
-   * Throttles calls to `this._onKeyDown` by limiting events to being processed
-   * at most once every `EVENT_THROTTLE` milliseconds.
-   */
-  onKeyDown = throttle(this._onKeyDown, EVENT_THROTTLE, {
-    leading: true,
-    trailing: false,
-  });
 
   /**
    * Provides the two-way binding for the input field of the Slider. It also
