@@ -60,7 +60,9 @@ export default function Copy({
         onAnimationEnd,
         handleAnimationEnd,
       ])}
-      {...other}>
+      {...other}
+      aria-live="polite"
+      aria-label={animation ? feedback : other['aria-label']}>
       {children}
       <span
         className={`${prefix}--assistive-text ${prefix}--copy-btn__feedback`}>
