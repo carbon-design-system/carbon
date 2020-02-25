@@ -57,11 +57,18 @@ describe('Slider', () => {
       expect(wrapper.props().light).toEqual(true);
     });
 
-    it('marks the input field as hidden if specified in props', () => {
+    it('marks input field as hidden if hidden via props', () => {
       wrapper.setProps({ hideTextInput: true });
       expect(wrapper.find(`#${id}-input-for-slider`).props().type).toEqual(
         'hidden'
       );
+    });
+
+    it('sets style to display:none on input field if hidden via props', () => {
+      wrapper.setProps({ hideTextInput: true });
+      expect(wrapper.find(`#${id}-input-for-slider`).props().style).toEqual({
+        display: 'none',
+      });
     });
   });
 

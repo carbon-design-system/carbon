@@ -44,13 +44,6 @@ const ARROW_KEYS = Object.freeze({
   ArrowDown: 40,
 });
 
-// Define a Math.clamp function if the browser doesn't have it (ECMA2017+)
-if (!('clamp' in Math)) {
-  Math.clamp = function(val, min, max) {
-    return Math.max(min, Math.min(val, max));
-  };
-}
-
 export default class Slider extends PureComponent {
   static propTypes = {
     /**
@@ -221,6 +214,19 @@ export default class Slider extends PureComponent {
   }
 
   /**
+   * Synonymous to ECMA2017+ `Math.clamp`.
+   *
+   * @param {number} val
+   * @param {number} min
+   * @param {number} max
+   *
+   * @returns `val` if `max>=val>=min`; `min` if `val<min`; `max` if `val>max`.
+   */
+  clamp(val, min, max) {
+    return Math.max(min, Math.min(val, max));
+  }
+
+  /**
    * Sets up "drag" event handlers and calls `this.onDrag` in case dragging
    * started on somewhere other than the thumb without a corresponding "move"
    * event.
@@ -382,10 +388,10 @@ export default class Slider extends PureComponent {
     let targetValue = Number.parseFloat(evt.target.value);
 
     // Avoid calling calcValue for invaid numbers, but still update the state
-    if (Number.isNaN(targetValue)) {
+    if (isNaN(targetValue)) {
       this.setState({ value: evt.target.value });
     } else {
-      targetValue = Math.clamp(targetValue, this.props.min, this.props.max);
+      targetValue = this.clamp(targetValue, this.props.min, this.props.max);
 
       // Recalculate the state's value and update the Slider
       const { value, left } = this.calcValue({ value: targetValue });
@@ -436,9 +442,9 @@ export default class Slider extends PureComponent {
     }
 
     let steppedValue = Math.round(leftPercent * totalSteps) * this.props.step;
-    let steppedPercent = Math.clamp(steppedValue / range, 0, 1);
+    let steppedPercent = this.clamp(steppedValue / range, 0, 1);
 
-    steppedValue = Math.clamp(
+    steppedValue = this.clamp(
       steppedValue + this.props.min,
       this.props.min,
       this.props.max
