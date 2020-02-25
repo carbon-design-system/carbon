@@ -195,7 +195,6 @@
 - name: caret--down
   friendly_name: Caret down
   sizes:
-    - 16
     - 32
     - glyph
   aliases:
@@ -207,7 +206,6 @@
 - name: caret--left
   friendly_name: Caret left
   sizes:
-    - 16
     - 32
     - glyph
   aliases:
@@ -219,7 +217,6 @@
 - name: caret--right
   friendly_name: Caret right
   sizes:
-    - 16
     - 32
     - glyph
   aliases:
@@ -231,7 +228,6 @@
 - name: caret--sort--down
   friendly_name: Caret sort down
   sizes:
-    - 16
     - 32
   aliases:
     - pointer
@@ -242,7 +238,6 @@
 - name: caret--sort--up
   friendly_name: Caret sort up
   sizes:
-    - 16
     - 32
   aliases:
     - pointer
@@ -253,7 +248,6 @@
 - name: caret--sort
   friendly_name: Caret sort
   sizes:
-    - 16
     - 32
   aliases:
     - pointer
@@ -264,7 +258,6 @@
 - name: caret--up
   friendly_name: Caret up
   sizes:
-    - 16
     - 32
     - glyph
   aliases:
