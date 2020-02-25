@@ -16,10 +16,11 @@ addons.register('fathom', api => {
     m.parentNode.insertBefore(o, m);
   })(document, window, 'https://cdn.usefathom.com/tracker.js', 'fathom');
   fathom('set', 'siteId', 'LLBKOSZK');
+  fathom('set', 'spa', 'pushstate');
 
   api.on(STORY_CHANGED, () => {
     const pathString = api.getUrlState().path;
-
+    console.log(pathString);
     if (typeof window.fathom === 'function') {
       window.fathom('trackPageview', { path: pathString });
     }
