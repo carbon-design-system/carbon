@@ -11,7 +11,6 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
 import Button from '../Button';
-import WithState from '../../tools/withState';
 
 const items = [
   {
@@ -135,31 +134,6 @@ storiesOf('ComboBox', module)
     {
       info: {
         text: 'ComboBox',
-      },
-    }
-  )
-  .add(
-    'custom text input handling',
-    () => (
-      <WithState initialState={{ inputText: '' }}>
-        {({ state, setState }) => (
-          <div style={{ width: 300 }}>
-            <ComboBox
-              items={items}
-              itemToString={item =>
-                item ? `${item.text} queried with ${state.inputText}` : ''
-              }
-              shouldFilterItem={() => true}
-              onInputChange={text => setState({ inputText: text })}
-              {...props()}
-            />
-          </div>
-        )}
-      </WithState>
-    ),
-    {
-      info: {
-        text: `Sometimes you want to perform an async action to trigger a backend call on input change.`,
       },
     }
   )
