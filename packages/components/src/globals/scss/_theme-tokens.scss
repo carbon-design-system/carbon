@@ -126,7 +126,7 @@ $button-padding-ghost-field: calc(0.675rem - 3px) 12px !default;
 /// @access public
 /// @group button
 /// Uses the same padding-y as small buttons, but removes extra padding-right
-$button-padding-ghost-sm: calc(0.375rem - 3px) 1rem !default;
+$button-padding-ghost-sm: calc(0.375rem - 3px) 12px !default;
 
 /// @type Number
 /// @access public

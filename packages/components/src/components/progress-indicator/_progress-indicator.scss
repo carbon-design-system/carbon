@@ -49,11 +49,12 @@
     height: $carbon--spacing-05;
     border-radius: 50%;
     margin: 9px $carbon--spacing-03 0 0;
-    fill: $interactive-01;
+    fill: $interactive-04;
   }
 
   .#{$prefix}--progress-label {
     @include type-style('body-short-01');
+    color: $text-01;
     line-height: 1.45;
     max-width: rem(88px);
     margin: $carbon--spacing-03 0 0 0;
@@ -131,7 +132,7 @@
     left: 0;
     margin-left: $carbon--spacing-06;
     margin-top: rem(28px);
-    color: $text-01;
+    color: $text-02;
     text-align: start;
   }
 
@@ -143,8 +144,8 @@
   }
 
   .#{$prefix}--progress-step--current svg {
-    stroke: $interactive-01;
-    fill: $interactive-01;
+    stroke: $interactive-04;
+    fill: $interactive-04;
 
     path:last-of-type {
       stroke-width: 40%;
@@ -225,12 +226,11 @@
     width: rem(40px);
   }
 
-  .#{$prefix}--progress--vertical {
-    display: block;
-  }
+  // Vertical Variant
 
-  .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
-    padding-bottom: rem(24px);
+  .#{$prefix}--progress--vertical {
+    display: flex;
+    flex-direction: column;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
@@ -270,12 +270,10 @@
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
     margin-top: auto;
-    position: initial;
     margin-left: 2.25rem;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
-    top: 0;
     left: 0;
     height: 100%;
     width: 1px;
