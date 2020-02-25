@@ -15197,7 +15197,8 @@ Data table core styles
     padding: rem(2px) 0;
   }
 
-  .#{$prefix}--data-table--compact td {
+  .#{$prefix}--data-table--compact td,
+  .#{$prefix}--data-table--compact tbody tr th {
     padding-top: rem(2px);
     padding-bottom: rem(2px);
   }
@@ -15238,7 +15239,8 @@ Data table core styles
     padding: rem(7px) 0;
   }
 
-  .#{$prefix}--data-table--short td {
+  .#{$prefix}--data-table--short td,
+  .#{$prefix}--data-table--short tbody tr th {
     padding-top: rem(7px);
     padding-bottom: rem(6px);
   }
@@ -15271,7 +15273,8 @@ Data table core styles
     padding: rem(16px) 0;
   }
 
-  .#{$prefix}--data-table--tall td {
+  .#{$prefix}--data-table--tall td,
+  .#{$prefix}--data-table--tall tbody tr th {
     padding-top: 1rem;
   }
 
