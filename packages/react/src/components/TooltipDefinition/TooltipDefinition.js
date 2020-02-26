@@ -9,6 +9,7 @@ import cx from 'classnames';
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
+import debounce from 'lodash.debounce';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { composeEventHandlers } from '../../tools/events';
 import { keys, matches } from '../../internal/keyboard';
@@ -24,10 +25,12 @@ const TooltipDefinition = ({
   align,
   onFocus,
   onMouseEnter,
+  onMouseLeave,
   tooltipText,
   ...rest
 }) => {
   const [allowTooltipVisibility, setAllowTooltipVisibility] = useState(true);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
   const tooltipId = id || `definition-tooltip-${getInstanceId()}`;
   const tooltipClassName = cx(
     `${prefix}--tooltip--definition`,
@@ -43,10 +46,17 @@ const TooltipDefinition = ({
       [`${prefix}--tooltip--${direction}`]: direction,
       [`${prefix}--tooltip--align-${align}`]: align,
       [`${prefix}--tooltip--hidden`]: !allowTooltipVisibility,
+      [`${prefix}--tooltip--visible`]: tooltipVisible,
     }
   );
+  const debounceTooltipVisible = debounce(() => setTooltipVisible(false), 100);
   const handleFocus = () => setAllowTooltipVisibility(true);
-  const handleMouseEnter = () => setAllowTooltipVisibility(true);
+  const handleMouseEnter = () => {
+    debounceTooltipVisible.cancel();
+    setAllowTooltipVisibility(true);
+    setTooltipVisible(true);
+  };
+  const handleMouseLeave = debounceTooltipVisible;
   useEffect(() => {
     const handleEscKeyDown = event => {
       if (matches(event, [keys.Escape])) {
@@ -61,7 +71,8 @@ const TooltipDefinition = ({
     <div
       {...rest}
       className={tooltipClassName}
-      onMouseEnter={composeEventHandlers([onMouseEnter, handleMouseEnter])}>
+      onMouseEnter={composeEventHandlers([onMouseEnter, handleMouseEnter])}
+      onMouseLeave={composeEventHandlers([onMouseLeave, handleMouseLeave])}>
       <button
         className={tooltipTriggerClasses}
         aria-describedby={tooltipId}
