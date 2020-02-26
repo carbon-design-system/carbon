@@ -18,21 +18,29 @@ const { prefix } = settings;
  * class into a single component. It is also being used to validate given
  * `children` components.
  */
-const ListBoxMenu = React.forwardRef(({ children, id, ...rest }, ref) => (
-  <div
-    ref={ref}
-    id={`${id}__menu`}
-    className={`${prefix}--list-box__menu`}
-    role="listbox"
-    {...rest}>
-    {children}
-  </div>
-));
+const ListBoxMenu = React.forwardRef(function ListBoxMenu(
+  { children, id, ...rest },
+  ref
+) {
+  return (
+    <div
+      ref={ref}
+      id={`${id}__menu`}
+      className={`${prefix}--list-box__menu`}
+      role="listbox"
+      {...rest}>
+      {children}
+    </div>
+  );
+});
+
+ListBoxMenu.displayName = 'ListBoxMenu';
 ListBoxMenu.propTypes = {
   /**
    * Provide the contents of your ListBoxMenu
    */
   children: childrenOfType(ListBoxMenuItem),
+
   /**
    * Specify a custom `id`
    */

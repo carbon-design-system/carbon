@@ -28,19 +28,21 @@ const handleClick = event => {
  * `ListBox` is a generic container component that handles creating the
  * container class name in response to certain props.
  */
-const ListBox = ({
-  children,
-  className: containerClassName,
-  disabled,
-  innerRef,
-  type,
-  size,
-  invalid,
-  invalidText,
-  light,
-  isOpen,
-  ...rest
-}) => {
+const ListBox = React.forwardRef(function ListBox(
+  {
+    children,
+    className: containerClassName,
+    disabled,
+    type,
+    size,
+    invalid,
+    invalidText,
+    light,
+    isOpen,
+    ...rest
+  },
+  ref
+) {
   const className = cx({
     [containerClassName]: !!containerClassName,
     [`${prefix}--list-box`]: true,
@@ -55,7 +57,7 @@ const ListBox = ({
       <div
         {...rest}
         className={className}
-        ref={innerRef}
+        ref={ref}
         onKeyDown={handleOnKeyDown}
         onClick={handleClick}
         data-invalid={invalid || undefined}>
@@ -66,8 +68,9 @@ const ListBox = ({
       ) : null}
     </>
   );
-};
+});
 
+ListBox.displayName = 'ListBox';
 ListBox.propTypes = {
   /**
    * Provide the contents of your ListBox
@@ -78,12 +81,6 @@ ListBox.propTypes = {
    * Specify a class name to be applied on the containing list box node
    */
   className: PropTypes.string,
-
-  /**
-   * `innerRef` hook used for libraries like Downshift that require a reference
-   * on a container node when it is not a native element
-   */
-  innerRef: PropTypes.func.isRequired,
 
   /**
    * Specify whether the ListBox is currently disabled
@@ -103,7 +100,6 @@ ListBox.propTypes = {
 };
 
 ListBox.defaultProps = {
-  innerRef: () => {},
   disabled: false,
   type: 'default',
 };

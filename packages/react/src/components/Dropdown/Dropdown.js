@@ -239,15 +239,25 @@ export default class Dropdown extends React.Component {
           getMenuProps,
           toggleMenu,
         }) => {
-          const menuProps = getMenuProps({
-            'aria-labelledby': null,
-          });
-          console.log(menuProps);
-          const rootProps = getRootProps({
-            'aria-labelledby': null,
-            refKey: 'innerRef',
-          });
-          console.log(rootProps);
+          // We suppress the `ref` error from `getMenuProps` because our menu is
+          // only rendered when it is opened. When it is opened, we apply the
+          // `ref` correctly
+          const menuProps = getMenuProps(
+            {
+              'aria-labelledby': null,
+            },
+            {
+              suppressRefError: true,
+            }
+          );
+          const rootProps = getRootProps(
+            {
+              'aria-labelledby': null,
+            },
+            {
+              suppressRefError: true,
+            }
+          );
           const buttonProps = {
             ...getToggleButtonProps({
               onKeyDown: event => {
@@ -258,6 +268,7 @@ export default class Dropdown extends React.Component {
               disabled,
             }),
           };
+
           return (
             <div className={wrapperClasses}>
               {title}
@@ -273,7 +284,6 @@ export default class Dropdown extends React.Component {
                 invalid={invalid}
                 invalidText={invalidText}
                 light={light}
-                //{...menuProps}
                 {...rootProps}>
                 {invalid && (
                   <WarningFilled16
