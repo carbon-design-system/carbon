@@ -18,6 +18,7 @@ import {
   // Gray
   gray10,
   gray30,
+  gray40,
   gray50,
   gray60,
   gray70,
