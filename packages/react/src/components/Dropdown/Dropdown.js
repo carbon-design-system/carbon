@@ -242,9 +242,12 @@ export default class Dropdown extends React.Component {
           const menuProps = getMenuProps({
             'aria-labelledby': null,
           });
+          console.log(menuProps);
           const rootProps = getRootProps({
             'aria-labelledby': null,
+            refKey: 'innerRef',
           });
+          console.log(rootProps);
           const buttonProps = {
             ...getToggleButtonProps({
               onKeyDown: event => {
@@ -270,7 +273,7 @@ export default class Dropdown extends React.Component {
                 invalid={invalid}
                 invalidText={invalidText}
                 light={light}
-                {...menuProps}
+                //{...menuProps}
                 {...rootProps}>
                 {invalid && (
                   <WarningFilled16
@@ -296,7 +299,7 @@ export default class Dropdown extends React.Component {
                   />
                 </ListBox.Field>
                 {isOpen && (
-                  <ListBox.Menu aria-labelledby={id} id={id}>
+                  <ListBox.Menu {...menuProps} aria-labelledby={id} id={id}>
                     {items.map((item, index) => {
                       const itemProps = getItemProps({ item, index });
                       return (
