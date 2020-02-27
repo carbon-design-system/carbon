@@ -14,7 +14,7 @@ export const initialRows = [
     protocol: 'HTTP',
     port: 3000,
     rule: 'Round robin',
-    attached_groups: 'Kevins VM Groups',
+    attached_groups: 'Kevin’s VM Groups',
     status: 'Disabled',
   },
   {
@@ -23,7 +23,7 @@ export const initialRows = [
     protocol: 'HTTP',
     port: 443,
     rule: 'Round robin',
-    attached_groups: 'Maureens VM Groups',
+    attached_groups: 'Maureen’s VM Groups',
     status: 'Starting',
   },
   {
@@ -32,7 +32,7 @@ export const initialRows = [
     protocol: 'HTTP',
     port: 80,
     rule: 'DNS delegation',
-    attached_groups: 'Andrews VM Groups',
+    attached_groups: 'Andrew’s VM Groups',
     status: 'Active',
   },
   {
@@ -41,7 +41,7 @@ export const initialRows = [
     protocol: 'HTTP',
     port: 3000,
     rule: 'Round robin',
-    attached_groups: 'Marcs VM Groups',
+    attached_groups: 'Marc’s VM Groups',
     status: 'Disabled',
   },
   {
@@ -50,7 +50,7 @@ export const initialRows = [
     protocol: 'HTTP',
     port: 443,
     rule: 'Round robin',
-    attached_groups: 'Mels VM Groups',
+    attached_groups: 'Mel’s VM Groups',
     status: 'Starting',
   },
   {
@@ -59,7 +59,7 @@ export const initialRows = [
     protocol: 'HTTP',
     port: 80,
     rule: 'DNS delegation',
-    attached_groups: 'Ronjas VM Groups',
+    attached_groups: 'Ronja’s VM Groups',
     status: 'Active',
   },
 ];
