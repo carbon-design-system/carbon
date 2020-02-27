@@ -176,6 +176,12 @@ class FloatingMenu extends React.Component {
     ]),
 
     /**
+     * Specify a CSS selector that matches the DOM element that should
+     * be focused when the Modal opens
+     */
+    selectorPrimaryFocus: PropTypes.string,
+
+    /**
      * The additional styles to put to the floating menu.
      */
     styles: PropTypes.object,
