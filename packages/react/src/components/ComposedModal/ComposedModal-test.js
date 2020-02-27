@@ -214,25 +214,35 @@ describe('<ComposedModal />', () => {
   });
 
   it('should focus on the primary actionable button in ModalFooter by default', () => {
+    const container = document.createElement('div');
+    container.id = 'container';
+    document.body.appendChild(container);
     mount(
       <ComposedModal open>
         <ModalFooter primaryButtonText="Save" />
-      </ComposedModal>
+      </ComposedModal>,
+      { attachTo: document.querySelector('#container') }
     );
     expect(
       document.activeElement.classList.contains(`${prefix}--btn--primary`)
     ).toEqual(true);
+    document.body.removeChild(container);
   });
 
   it('should focus on the element that matches selectorPrimaryFocus', () => {
+    const container = document.createElement('div');
+    container.id = 'container';
+    document.body.appendChild(container);
     mount(
       <ComposedModal open selectorPrimaryFocus={`.${prefix}--modal-close`}>
         <ModalHeader label="Optional Label" title="Example" />
         <ModalFooter primaryButtonText="Save" />
-      </ComposedModal>
+      </ComposedModal>,
+      { attachTo: document.querySelector('#container') }
     );
     expect(
       document.activeElement.classList.contains(`${prefix}--modal-close`)
     ).toEqual(true);
+    document.body.removeChild(container);
   });
 });

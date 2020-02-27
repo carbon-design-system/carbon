@@ -47,7 +47,12 @@ describe('TextInput', () => {
             );
           }
         }
-        const wrapper = mount(<MyComponent />);
+        const container = document.createElement('div');
+        container.id = 'container';
+        document.body.appendChild(container);
+        const wrapper = mount(<MyComponent />, {
+          attachTo: document.querySelector('#container'),
+        });
         expect(document.activeElement.type).toBeUndefined();
         wrapper.instance().focus();
         expect(document.activeElement.type).toEqual('text');
