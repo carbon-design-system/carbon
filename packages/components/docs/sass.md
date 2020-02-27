@@ -1623,16 +1623,14 @@ Generates the CSS classnames for each aspect ratio
 
 ```scss
 @mixin carbon--make-aspect-ratios($width, $height) {
-  [class*='#{$prefix}--aspect-ratio--'] {
+  .#{$prefix}--aspect-ratio {
     @include carbon--make-aspect-ratio-ready;
-  }
 
-  .#{$prefix}--aspect-ratio-- {
     @each $aspect-ratio in $aspect-ratios {
       $width: nth($aspect-ratio, 1);
       $height: nth($aspect-ratio, 2);
 
-      &#{$width}-#{$height} {
+      &--#{$width}x#{$height} {
         @include carbon--make-aspect-ratio($width, $height);
       }
     }

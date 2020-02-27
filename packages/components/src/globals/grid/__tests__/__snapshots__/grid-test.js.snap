@@ -1061,37 +1061,37 @@ em {
 .bx--hang--right {
   padding-right: 1rem; }
 
-[class*='bx--aspect-ratio--']::before {
+.bx--aspect-ratio::before {
   content: '';
   width: 1px;
   margin-left: -1px;
   float: left;
   height: 0; }
 
-[class*='bx--aspect-ratio--']::after {
+.bx--aspect-ratio::after {
   content: '';
   display: table;
   clear: both; }
 
-.bx--aspect-ratio--16-9::before {
+.bx--aspect-ratio--16x9::before {
   padding-top: 56.25%; }
 
-.bx--aspect-ratio--9-16::before {
+.bx--aspect-ratio--9x16::before {
   padding-top: 177.77778%; }
 
-.bx--aspect-ratio--2-1::before {
+.bx--aspect-ratio--2x1::before {
   padding-top: 50%; }
 
-.bx--aspect-ratio--1-2::before {
+.bx--aspect-ratio--1x2::before {
   padding-top: 200%; }
 
-.bx--aspect-ratio--4-3::before {
+.bx--aspect-ratio--4x3::before {
   padding-top: 75%; }
 
-.bx--aspect-ratio--3-4::before {
+.bx--aspect-ratio--3x4::before {
   padding-top: 133.33333%; }
 
-.bx--aspect-ratio--1-1::before {
+.bx--aspect-ratio--1x1::before {
   padding-top: 100%; }
 "
 `;

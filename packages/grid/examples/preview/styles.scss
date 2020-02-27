@@ -50,7 +50,8 @@ article {
 
 .example [class*='--aspect-ratio--'] {
   .inside,
-  .outside {
+  .outside,
+  &.outside {
     height: 100%;
   }
 }
