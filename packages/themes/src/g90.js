@@ -18,6 +18,7 @@ import {
   // Gray
   gray10,
   gray30,
+  gray40,
   gray50,
   gray60,
   gray70,
@@ -121,7 +122,7 @@ export const visitedLink = purple40;
 
 export const disabled01 = gray80;
 export const disabled02 = gray60;
-export const disabled03 = gray50;
+export const disabled03 = gray40;
 
 export const highlight = blue70;
 
