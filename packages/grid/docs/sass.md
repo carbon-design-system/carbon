@@ -434,6 +434,16 @@ https://keithjgrant.com/posts/2017/03/aspect-ratios/
 
 ```scss
 @mixin carbon--make-aspect-ratio-ready() {
+  position: relative;
+
+  &--object {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
   &::before {
     content: '';
     width: 1px;

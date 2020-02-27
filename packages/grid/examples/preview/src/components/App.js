@@ -655,23 +655,39 @@ const sections = [
           <div className="bx--grid">
             <div className="bx--row">
               <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--2x1">
-                  <div className="inside">1</div>
+                <div className="bx--aspect-ratio bx--aspect-ratio--2x1">
+                  <div className="bx--aspect-ratio--object">
+                    <div className="outside">
+                      <div className="inside">1</div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--2x1">
-                  <div className="inside">1</div>
+                <div className="bx--aspect-ratio bx--aspect-ratio--2x1">
+                  <div className="bx--aspect-ratio--object">
+                    <div className="outside">
+                      <div className="inside">1</div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--2x1">
-                  <div className="inside">1</div>
+                <div className="bx--aspect-ratio bx--aspect-ratio--2x1">
+                  <div className="bx--aspect-ratio--object">
+                    <div className="outside">
+                      <div className="inside">1</div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--2x1">
-                  <div className="inside">1</div>
+                <div className="bx--aspect-ratio bx--aspect-ratio--2x1">
+                  <div className="bx--aspect-ratio--object">
+                    <div className="outside">
+                      <div className="inside">1</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
