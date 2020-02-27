@@ -10,7 +10,8 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
 import setupGetInstanceId from '../../../tools/setupGetInstanceId';
-import { Select, SelectItem } from '../../Select';
+import Select from '../../Select';
+import SelectItem from '../../SelectItem';
 
 const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();

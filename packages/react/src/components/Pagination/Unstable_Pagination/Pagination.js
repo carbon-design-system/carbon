@@ -10,8 +10,9 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
 import { CaretRight24, CaretLeft24 } from '@carbon/icons-react';
-import { Button } from '../../Button';
-import { Select, SelectItem } from '../../Select';
+import Button from '../../Button';
+import Select from '../../Select';
+import SelectItem from '../../SelectItem';
 
 const { prefix } = settings;
 
