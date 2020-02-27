@@ -39,7 +39,6 @@
   font-weight: 400;
   text-align: left;
   transform: translateX(-50%);
-  pointer-events: none;
   background-color: $inverse-02;
   @include type-style('body-short-01');
 
@@ -96,7 +95,6 @@
     display: flex;
     align-items: center;
     opacity: 0;
-    pointer-events: none;
 
     // IE media query
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
@@ -149,6 +147,7 @@
     content: none;
   }
 
+  &.#{$prefix}--tooltip--visible,
   &:hover,
   &:focus {
     &::before,
