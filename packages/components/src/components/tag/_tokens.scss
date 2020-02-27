@@ -1,0 +1,76 @@
+@function themeIsDark() {
+  @if global-variable-exists('carbon--theme') {
+    @return $carbon--theme == $carbon--theme--g90 or $carbon--theme == $carbon--theme--g100;
+  }
+  @return false;
+}
+
+/// @access private
+$tag-red-background: if(themeIsDark(), $ibm-color__red-80, $ibm-color__red-20);
+/// @access private
+$tag-red-color: if(themeIsDark(), $ibm-color__red-30, $ibm-color__red-70);
+/// @access private
+$tag-red-hover: if(themeIsDark(), $ibm-color__red-70, $ibm-color__red-30);
+
+/// @access private
+$tag-magenta-background: if(themeIsDark(), $ibm-color__magenta-80, $ibm-color__magenta-20);
+/// @access private
+$tag-magenta-color: if(themeIsDark(), $ibm-color__magenta-30, $ibm-color__magenta-70);
+/// @access private
+$tag-magenta-hover: if(themeIsDark(), $ibm-color__magenta-70, $ibm-color__magenta-30);
+
+/// @access private
+$tag-purple-background: if(themeIsDark(), $ibm-color__purple-80, $ibm-color__purple-20);
+/// @access private
+$tag-purple-color: if(themeIsDark(), $ibm-color__purple-30, $ibm-color__purple-70);
+/// @access private
+$tag-purple-hover: if(themeIsDark(), $ibm-color__purple-70, $ibm-color__purple-30);
+
+/// @access private
+$tag-blue-background: if(themeIsDark(), $ibm-color__blue-80, $ibm-color__blue-20);
+/// @access private
+$tag-blue-color: if(themeIsDark(), $ibm-color__blue-30, $ibm-color__blue-70);
+/// @access private
+$tag-blue-hover: if(themeIsDark(), $ibm-color__blue-70, $ibm-color__blue-30);
+
+/// @access private
+$tag-cyan-background: if(themeIsDark(), $ibm-color__cyan-80, $ibm-color__cyan-20);
+/// @access private
+$tag-cyan-color: if(themeIsDark(), $ibm-color__cyan-30, $ibm-color__cyan-70);
+/// @access private
+$tag-cyan-hover: if(themeIsDark(), $ibm-color__cyan-70, $ibm-color__cyan-30);
+
+/// @access private
+$tag-teal-background: if(themeIsDark(), $ibm-color__teal-80, $ibm-color__teal-20);
+/// @access private
+$tag-teal-color: if(themeIsDark(), $ibm-color__teal-30, $ibm-color__teal-70);
+/// @access private
+$tag-teal-hover: if(themeIsDark(), $ibm-color__teal-70, $ibm-color__teal-30);
+
+/// @access private
+$tag-green-background: if(themeIsDark(), $ibm-color__green-80, $ibm-color__green-20);
+/// @access private
+$tag-green-color: if(themeIsDark(), $ibm-color__green-30, $ibm-color__green-70);
+/// @access private
+$tag-green-hover: if(themeIsDark(), $ibm-color__green-70, $ibm-color__green-30);
+
+/// @access private
+$tag-gray-background: if(themeIsDark(), $ibm-color__gray-80, $ibm-color__gray-20);
+/// @access private
+$tag-gray-color: if(themeIsDark(), $ibm-color__gray-30, $ibm-color__gray-70);
+/// @access private
+$tag-gray-hover: if(themeIsDark(), $ibm-color__gray-70, $ibm-color__gray-30);
+
+/// @access private
+$tag-cool-gray-background: if(themeIsDark(), $ibm-color__cool-gray-80, $ibm-color__cool-gray-20);
+/// @access private
+$tag-cool-gray-color: if(themeIsDark(), $ibm-color__cool-gray-30, $ibm-color__cool-gray-70);
+/// @access private
+$tag-cool-gray-hover: if(themeIsDark(), $ibm-color__cool-gray-70, $ibm-color__cool-gray-30);
+
+/// @access private
+$tag-warm-gray-background: if(themeIsDark(), $ibm-color__warm-gray-80, $ibm-color__warm-gray-20);
+/// @access private
+$tag-warm-gray-color: if(themeIsDark(), $ibm-color__warm-gray-30, $ibm-color__warm-gray-70);
+/// @access private
+$tag-warm-gray-hover: if(themeIsDark(), $ibm-color__warm-gray-70, $ibm-color__warm-gray-30);

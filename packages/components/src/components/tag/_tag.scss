@@ -10,6 +10,7 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import 'mixins';
+@import 'tokens';
 
 /// Tag styles
 /// @access private
@@ -41,87 +42,87 @@
 
   .#{$prefix}--tag--red {
     @include tag-theme(
-      $ibm-color__red-20,
-      $ibm-color__red-70,
-      $ibm-color__red-30
+      $tag-red-background,
+      $tag-red-color,
+      $tag-red-hover
     );
   }
 
   .#{$prefix}--tag--magenta {
     @include tag-theme(
-      $ibm-color__magenta-20,
-      $ibm-color__magenta-70,
-      $ibm-color__magenta-30
+      $tag-magenta-background,
+      $tag-magenta-color,
+      $tag-magenta-hover
     );
   }
 
   .#{$prefix}--tag--purple {
     @include tag-theme(
-      $ibm-color__purple-20,
-      $ibm-color__purple-70,
-      $ibm-color__purple-30
+      $tag-purple-background,
+      $tag-purple-color,
+      $tag-purple-hover
     );
   }
 
   .#{$prefix}--tag--blue {
     @include tag-theme(
-      $ibm-color__blue-20,
-      $ibm-color__blue-70,
-      $ibm-color__blue-30
+      $tag-blue-background,
+      $tag-blue-color,
+      $tag-blue-hover
     );
   }
 
   .#{$prefix}--tag--cyan {
     @include tag-theme(
-      $ibm-color__cyan-20,
-      $ibm-color__cyan-70,
-      $ibm-color__cyan-30
+      $tag-cyan-background,
+      $tag-cyan-color,
+      $tag-cyan-hover
     );
   }
 
   .#{$prefix}--tag--teal {
     @include tag-theme(
-      $ibm-color__teal-20,
-      $ibm-color__teal-70,
-      $ibm-color__teal-30
+      $tag-teal-background,
+      $tag-teal-color,
+      $tag-teal-hover
     );
   }
 
   .#{$prefix}--tag--green {
     @include tag-theme(
-      $ibm-color__green-20,
-      $ibm-color__green-70,
-      $ibm-color__green-30
+      $tag-green-background,
+      $tag-green-color,
+      $tag-green-hover
     );
   }
 
   .#{$prefix}--tag--gray {
     @include tag-theme(
-      $ibm-color__gray-20,
-      $ibm-color__gray-100,
-      $ibm-color__gray-30
+      $tag-gray-background,
+      $tag-gray-color,
+      $tag-gray-hover
     );
   }
 
   .#{$prefix}--tag--cool-gray {
     @include tag-theme(
-      $ibm-color__cool-gray-20,
-      $ibm-color__cool-gray-100,
-      $ibm-color__cool-gray-30
+      $tag-cool-gray-background,
+      $tag-cool-gray-color,
+      $tag-cool-gray-hover
     );
   }
 
   .#{$prefix}--tag--warm-gray {
     @include tag-theme(
-      $ibm-color__warm-gray-20,
-      $ibm-color__warm-gray-100,
-      $ibm-color__warm-gray-30
+      $tag-warm-gray-background,
+      $tag-warm-gray-color,
+      $tag-warm-gray-hover
     );
   }
 
   .#{$prefix}--tag--disabled,
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled {
-    @include tag-theme($ibm-color__gray-10, $ibm-color__gray-30);
+    @include tag-theme($disabled-01, $disabled-02);
 
     &:hover {
       cursor: not-allowed;
