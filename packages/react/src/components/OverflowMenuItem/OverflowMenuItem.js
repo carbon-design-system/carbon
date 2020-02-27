@@ -120,7 +120,6 @@ export default class OverflowMenuItem extends React.Component {
       onClick, // eslint-disable-line
       handleOverflowMenuItemFocus, // eslint-disable-line
       onKeyDown,
-      primaryFocus,
       wrapperClassName,
       requireTitle,
       index,
@@ -149,9 +148,6 @@ export default class OverflowMenuItem extends React.Component {
       },
       wrapperClassName
     );
-    const primaryFocusProp = primaryFocus
-      ? { 'data-floating-menu-primary-focus': true }
-      : {};
     const TagToUse = href ? 'a' : 'button';
     const OverflowMenuItemContent = (() => {
       if (typeof itemText !== 'string') {
@@ -167,7 +163,6 @@ export default class OverflowMenuItem extends React.Component {
       <li className={overflowMenuItemClasses} role="menuitem">
         <TagToUse
           {...other}
-          {...primaryFocusProp}
           href={href}
           className={overflowMenuBtnClasses}
           disabled={disabled}
