@@ -5283,6 +5283,7 @@ $carbon--theme--g90: map-merge(
     visited-link: #be95ff,
     disabled-01: #393939,
     disabled-02: #6f6f6f,
+    disabled-03: #a8a8a8,
     highlight: #0043ce,
     skeleton-01: #353535,
     skeleton-02: #525252,
@@ -6832,7 +6833,7 @@ $hover-danger: if(
       'hover-danger'
     ),
   map-get($carbon--theme, 'hover-danger'),
-  #ba1b23
+  #b81921
 );
 ```
 

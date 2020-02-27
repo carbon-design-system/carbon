@@ -1,0 +1,1305 @@
+- name: active--server
+  friendly_name: Active server
+- name: advocate
+  friendly_name: Advocate
+  aliases:
+    - advocate
+- name: agriculture
+  friendly_name: Agriculture
+  aliases:
+    - agriculture
+- name: air--conditioner
+  friendly_name: Air conditioner
+- name: airplane
+  friendly_name: Airplane
+  aliases:
+    - airplane
+- name: alarm
+  friendly_name: Alarm
+  aliases:
+    - alarm
+- name: alchemy--data--news
+  friendly_name: Alchemy data news
+- name: alchemy--language--alphabet--a--expanded
+  friendly_name: Alchemy language alphabet a expanded
+- name: alchemy--language
+  friendly_name: Alchemy language
+- name: alchemy--vision
+  friendly_name: Alchemy vision
+- name: americas
+  friendly_name: Americas
+  aliases:
+    - americas
+- name: amsterdam--canal
+  friendly_name: Amsterdam canal
+- name: amsterdam--farm
+  friendly_name: Amsterdam farm
+- name: amsterdam--windmill
+  friendly_name: Amsterdam windmill
+- name: analyze
+  friendly_name: Analyze
+  aliases:
+    - analyze
+- name: analyzes--data
+  friendly_name: Analyzes data
+- name: apartment
+  friendly_name: Apartment
+  aliases:
+    - apartment
+- name: api
+  friendly_name: Api
+  aliases:
+    - api
+- name: app--developer
+  friendly_name: App developer
+- name: apple
+  friendly_name: Apple
+  aliases:
+    - apple
+- name: application
+  friendly_name: Application
+  aliases:
+    - application
+- name: archive
+  friendly_name: Archive
+  aliases:
+    - archive
+- name: asia--australia
+  friendly_name: Asia australia
+- name: augmented--reality
+  friendly_name: Augmented reality
+- name: austin
+  friendly_name: Austin
+  aliases:
+    - austin
+- name: automate--modular--management
+  friendly_name: Automate modular management
+- name: automobile
+  friendly_name: Automobile
+  aliases:
+    - automobile
+- name: bag
+  friendly_name: Bag
+  aliases:
+    - bag
+- name: bangalore
+  friendly_name: Bangalore
+  aliases:
+    - bangalore
+- name: bee
+  friendly_name: Bee
+  aliases:
+    - bee
+- name: beijing--municipal
+  friendly_name: Beijing municipal
+- name: beijing--tower
+  friendly_name: Beijing tower
+- name: berlin--brandenburg--gate
+  friendly_name: Berlin brandenburg gate
+- name: berlin--brandenburg
+  friendly_name: Berlin brandenburg
+- name: berlin--cathedral
+  friendly_name: Berlin cathedral
+- name: berlin--tower
+  friendly_name: Berlin tower
+- name: bicycle
+  friendly_name: Bicycle
+  aliases:
+    - bicycle
+- name: blockchain
+  friendly_name: Blockchain
+  aliases:
+    - block
+- name: build
+  friendly_name: Build
+  aliases:
+    - build
+- name: building
+  friendly_name: Building
+  aliases:
+    - building
+- name: bulldozer
+  friendly_name: Bulldozer
+  aliases:
+    - bulldozer
+- name: bus
+  friendly_name: Bus
+  aliases:
+    - bus
+- name: cafe
+  friendly_name: Cafe
+  aliases:
+    - cafe
+- name: calendar
+  friendly_name: Calendar
+  aliases:
+    - calendar
+- name: calendar--date
+  friendly_name: Calendar date
+- name: calendar--event
+  friendly_name: Calendar event
+- name: camera
+  friendly_name: Camera
+  aliases:
+    - camera
+- name: capitol
+  friendly_name: Capitol
+  aliases:
+    - capitol
+- name: care
+  friendly_name: Care
+  aliases:
+    - care
+- name: cell
+  friendly_name: Cell
+  aliases:
+    - cell
+- name: chart--bar
+  friendly_name: Chart bar
+- name: chart--bubble--line
+  friendly_name: Chart bubble line
+- name: chart--line
+  friendly_name: Chart line
+- name: chart--scatterplot
+  friendly_name: Chart scatterplot
+- name: cherries
+  friendly_name: Cherries
+  aliases:
+    - cherries
+- name: chip--circuit
+  friendly_name: Chip circuit
+- name: chip--credit
+  friendly_name: Chip credit
+- name: chip--debit
+  friendly_name: Chip debit
+- name: cloud--analytics
+  friendly_name: Cloud analytics
+- name: cloud--assets
+  friendly_name: Cloud assets
+- name: cloud--builder--professional--services
+  friendly_name: Cloud builder professional services
+- name: cloud--computing
+  friendly_name: Cloud computing
+- name: cloud--data--services
+  friendly_name: Cloud data services
+- name: cloud--download
+  friendly_name: Cloud download
+- name: cloud--ecosystem
+  friendly_name: Cloud ecosystem
+- name: cloud--guidelines
+  friendly_name: Cloud guidelines
+- name: cloud--managed--services
+  friendly_name: Cloud managed services
+- name: cloud--oracle
+  friendly_name: Cloud oracle
+- name: cloud--partners
+  friendly_name: Cloud partners
+- name: cloud--planning
+  friendly_name: Cloud planning
+- name: cloud--sap
+  friendly_name: Cloud sap
+- name: cloud--services--pricing
+  friendly_name: Cloud services pricing
+- name: cloud--services
+  friendly_name: Cloud services
+- name: cloud--storage
+  friendly_name: Cloud storage
+- name: cloud--strategy
+  friendly_name: Cloud strategy
+- name: cloud--tutorials
+  friendly_name: Cloud tutorials
+- name: cloud--upload
+  friendly_name: Cloud upload
+- name: cloud--vmware
+  friendly_name: Cloud vmware
+- name: cloudy
+  friendly_name: Cloudy
+  aliases:
+    - cloudy
+- name: cloudy--dewy
+  friendly_name: Cloudy dewy
+- name: cloudy--hazy
+  friendly_name: Cloudy hazy
+- name: cloudy--humid
+  friendly_name: Cloudy humid
+- name: cloudy--partial
+  friendly_name: Cloudy partial
+- name: cloudy--windy
+  friendly_name: Cloudy windy
+- name: coat--hanger
+  friendly_name: Coat hanger
+- name: cognos--analytics
+  friendly_name: Cognos analytics
+- name: college
+  friendly_name: College
+  aliases:
+    - college
+- name: concept--expansion
+  friendly_name: Concept expansion
+- name: concept--insights
+  friendly_name: Concept insights
+- name: connect
+  friendly_name: Connect
+  aliases:
+    - connect
+- name: console
+  friendly_name: Console
+  aliases:
+    - console
+- name: console--wireless
+  friendly_name: Console wireless
+- name: construct
+  friendly_name: Construct
+  aliases:
+    - construct
+- name: conversation
+  friendly_name: Conversation
+  aliases:
+    - conversation
+- name: copenhagen--planetarium
+  friendly_name: Copenhagan planetarium
+- name: copenhagen--snekkja
+  friendly_name: Copenhagen snekkja
+- name: credit--card
+  friendly_name: Credit card
+- name: crop
+  friendly_name: Crop
+  aliases:
+    - crop
+- name: customer--service
+  friendly_name: Customer service
+- name: data--backup
+  friendly_name: Data backup
+- name: data--insights
+  friendly_name: Data insights
+- name: data--processing
+  friendly_name: Data processing
+- name: data--storage
+  friendly_name: Data storage
+- name: delete
+  friendly_name: Delete
+  aliases:
+    - delete
+- name: deliver--insights
+  friendly_name: Deliver insights
+- name: delivery--truck
+  friendly_name: Delivery truck
+- name: design--and--development--01
+  friendly_name: Design and development 01
+- name: design--and--development--02
+  friendly_name: Design and development 02
+- name: desktop
+  friendly_name: Desktop
+  aliases:
+    - desktop
+- name: devops
+  friendly_name: Devops
+  aliases:
+    - devops
+- name: dialogue
+  friendly_name: Dialogue
+  aliases:
+    - dialogue
+- name: digital
+  friendly_name: Digital
+  aliases:
+    - digital
+- name: dining
+  friendly_name: Dining
+  aliases:
+    - dining
+- name: dna
+  friendly_name: Dna
+  aliases:
+    - dna
+- name: do--not
+  friendly_name: Do not
+- name: docker
+  friendly_name: Docker
+  aliases:
+    - docker
+- name: doctor
+  friendly_name: Doctor
+  aliases:
+    - doctor
+- name: document--conversion
+  friendly_name: Document conversion
+- name: door--handle
+  friendly_name: Door handle
+- name: download
+  friendly_name: Download
+  aliases:
+    - download
+- name: download--alt
+  friendly_name: Download alt
+- name: dubai--palm--islands
+  friendly_name: Dubai palm islands
+- name: dubai--skyscraper
+  friendly_name: Dubai skyscraper
+- name: dublin--brewery
+  friendly_name: Dublin brewery
+- name: dublin--castle
+  friendly_name: Dublin castle
+- name: duplicate--file
+  friendly_name: Duplicate file
+- name: education
+  friendly_name: Education
+  aliases:
+    - education
+- name: electric
+  friendly_name: Electric
+  aliases:
+    - electric
+- name: electric--charge
+  friendly_name: Electric charge
+- name: elevator
+  friendly_name: Elevator
+  aliases:
+    - elevator
+- name: embed
+  friendly_name: Embed
+  aliases:
+    - embed
+- name: engine
+  friendly_name: Engine
+  aliases:
+    - engine
+- name: enterprise--design--thinking--alt
+  friendly_name: Enterprise design thinking alt
+- name: enterprise--design--thinking
+  friendly_name: Enterprise design thinking
+- name: envelope
+  friendly_name: Envelope
+  aliases:
+    - envelope
+- name: erlenmeyer--flask
+  friendly_name: Erlenmeyer flask
+- name: escalator--down
+  friendly_name: Escalator down
+- name: escalator--up
+  friendly_name: Escalator up
+- name: europe-africa
+  friendly_name: Europe Africa
+  aliases:
+    - europe
+    - africa
+- name: expand--horz
+  friendly_name: Expand horz
+- name: expand--user
+  friendly_name: Expand user
+- name: expand--vert
+  friendly_name: Expand vert
+- name: export
+  friendly_name: Export
+  aliases:
+    - export
+- name: export--alt
+  friendly_name: Export alt
+- name: eye
+  friendly_name: Eye
+  aliases:
+    - eye
+- name: face--dissatisfied
+  friendly_name: Face dissatisfied
+- name: face--neutral
+  friendly_name: Face neutral
+- name: face--satisfied
+  friendly_name: Face satisfied
+- name: face--very--dissatisfied
+  friendly_name: Face very dissatisfied
+- name: face--very--satisfied
+  friendly_name: Face very satisfied
+- name: factory
+  friendly_name: Factory
+  aliases:
+    - factory
+- name: farm
+  friendly_name: Farm
+  aliases:
+    - farm
+- name: faucet
+  friendly_name: Faucet
+  aliases:
+    - faucet
+- name: feedback
+  friendly_name: Feedback
+  aliases:
+    - feedback
+- name: file--backup
+  friendly_name: File backup
+- name: file--transfer
+  friendly_name: File transfer
+- name: financial--consultant
+  friendly_name: Financial consultant
+- name: financial--gain
+  friendly_name: Financial gain
+- name: financial--news
+  friendly_name: Financial news
+- name: fire--alarm
+  friendly_name: Fire alarm
+- name: fire--extinguisher
+  friendly_name: Fire extinguisher
+- name: firewall
+  friendly_name: Firewall
+  aliases:
+    - firewall
+- name: flow--chart--detail
+  friendly_name: Flow chart detail
+- name: flow--chart
+  friendly_name: Flow chart
+- name: fog
+  friendly_name: Fog
+  aliases:
+    - fog
+- name: folder
+  friendly_name: Folder
+  aliases:
+    - folder
+- name: forklift
+  friendly_name: Forklift
+  aliases:
+    - forklift
+- name: free--trial
+  friendly_name: Free trial
+- name: fuel
+  friendly_name: Fuel
+  aliases:
+    - fuel
+- name: gear
+  friendly_name: Gear
+  aliases:
+    - gear
+- name: global--business--services
+  friendly_name: Global business services
+- name: global--finance--euro
+  friendly_name: Global finance euro
+- name: global--finance--sterling
+  friendly_name: Global finance sterling
+- name: global--network
+  friendly_name: Global network
+- name: global--technology--services
+  friendly_name: Global technology services
+- name: globe
+  friendly_name: Globe
+  aliases:
+    - globe
+- name: globe--locations
+  friendly_name: Globe locations
+- name: group
+  friendly_name: Group
+  aliases:
+    - group
+- name: hail
+  friendly_name: Hail
+  aliases:
+    - hail
+- name: hail--heavy
+  friendly_name: Hail heavy
+- name: hail--mixed
+  friendly_name: Hail mixed
+- name: handicap
+  friendly_name: Handicap
+  aliases:
+    - handicap
+- name: handicap--active
+  friendly_name: Handicap active
+- name: hard--drive--network
+  friendly_name: Hard drive network
+- name: hard--drive
+  friendly_name: Hard drive
+- name: hard--ice--cream
+  friendly_name: Hard ice cream
+- name: hazy
+  friendly_name: Hazy
+  aliases:
+    - hazy
+- name: headphones
+  friendly_name: Headphones
+  aliases:
+    - headphones
+- name: heart
+  friendly_name: Heart
+  aliases:
+    - heart
+- name: heart--health
+  friendly_name: Heart health
+- name: heat--map
+  friendly_name: Heat map
+- name: high--five
+  friendly_name: High five
+- name: home--front
+  friendly_name: Home front
+- name: home--garage
+  friendly_name: Home garage
+- name: home--profile
+  friendly_name: Home profile
+- name: hospital
+  friendly_name: Hospital
+  aliases:
+    - hospital
+- name: humid
+  friendly_name: Humid
+  aliases:
+    - humid
+- name: hurricane
+  friendly_name: Hurricane
+  aliases:
+    - hurricane
+- name: hybrid--cloud--services
+  friendly_name: Hybrid cloud services
+- name: hybrid--cloud
+  friendly_name: Hybrid cloud
+- name: ibm--ix
+  friendly_name: Ibm ix
+- name: ibm--z
+  friendly_name: Ibm z
+- name: idea
+  friendly_name: Idea
+  aliases:
+    - idea
+- name: ideate
+  friendly_name: Ideate
+  aliases:
+    - ideate
+- name: innovate
+  friendly_name: Innovate
+  aliases:
+    - innovate
+- name: integration
+  friendly_name: Integration
+  aliases:
+    - integration
+- name: intelligence
+  friendly_name: Intelligence
+  aliases:
+    - intelligence
+- name: intercom
+  friendly_name: Intercom
+  aliases:
+    - intercom
+- name: iot--munich
+  friendly_name: Iot munich
+- name: java
+  friendly_name: Java
+  aliases:
+    - java
+- name: javascript
+  friendly_name: Javascript
+  aliases:
+    - javascript
+- name: justice
+  friendly_name: Justice
+  aliases:
+    - justice
+- name: key--users
+  friendly_name: Key users
+- name: knows--dark--data
+  friendly_name: Knows dark data
+- name: language
+  friendly_name: Language
+  aliases:
+    - language
+- name: language--01
+  friendly_name: Language 01
+- name: language--02
+  friendly_name: Language 02
+- name: language--03
+  friendly_name: Language 03
+- name: language--04
+  friendly_name: Language 04
+- name: language--translation--alphabet--a--expanded
+  friendly_name: Language translation alphabet a expanded
+- name: language--translation
+  friendly_name: Language translation
+- name: launch
+  friendly_name: Launch
+  aliases:
+    - launch
+- name: lightning
+  friendly_name: Lightning
+  aliases:
+    - lightning
+- name: list--bullet
+  friendly_name: List bullet
+- name: list--checkbox
+  friendly_name: List checkbox
+- name: location
+  friendly_name: Location
+  aliases:
+    - location
+- name: lock
+  friendly_name: Lock
+  aliases:
+    - lock
+- name: lock--alt
+  friendly_name: Lock alt
+- name: locked--network--alt
+  friendly_name: Locked network alt
+- name: locked--network
+  friendly_name: Locked network
+- name: london
+  friendly_name: London
+  aliases:
+    - london
+- name: london--big--ben
+  friendly_name: London big ben
+- name: london--expanded--base
+  friendly_name: London expanded base
+- name: lungs
+  friendly_name: Lungs
+  aliases:
+    - lungs
+- name: machine--learning--01
+  friendly_name: Machine learning 01
+- name: machine--learning--02
+  friendly_name: Machine learning 02
+- name: machine--learning--03
+  friendly_name: Machine learning 03
+- name: machine--learning--04
+  friendly_name: Machine learning 04
+- name: machine--learning--05
+  friendly_name: Machine learning 05
+- name: machine--learning--06
+  friendly_name: Machine learning 06
+- name: madrid--cathedral
+  friendly_name: Madrid cathedral
+- name: madrid--skyscrapers
+  friendly_name: Madrid skyscrapers
+- name: madrid--statue
+  friendly_name: Madrid statue
+- name: magnify
+  friendly_name: Magnify
+  aliases:
+    - magnify
+- name: marketplace
+  friendly_name: Marketplace
+  aliases:
+    - marketplace
+- name: mas
+  friendly_name: Mas
+  aliases:
+    - mas
+- name: maximize
+  friendly_name: Maximize
+  aliases:
+    - maximize
+- name: medical
+  friendly_name: Medical
+  aliases:
+    - medical
+- name: medical--charts
+  friendly_name: Medical charts
+- name: medical--staff
+  friendly_name: Medical staff
+- name: melbourne
+  friendly_name: Melbourne
+  aliases:
+    - melbourne
+- name: meter
+  friendly_name: Meter
+  aliases:
+    - meter
+- name: mexico-city--angel--of--independence
+  friendly_name: Mexico City Angel of Independence
+  aliases:
+    - statue
+- name: mexico-city--museo--soumaya
+  friendly_name: Mexico City Museo Soumaya
+  aliases:
+    - museum
+- name: microorganisms
+  friendly_name: Microorganisms
+  aliases:
+    - microorganisms
+- name: milan--duomo--di--milano
+  friendly_name: Milan Duomo di Milano
+  aliases:
+    - church
+- name: milan--skyscrapers
+  friendly_name: Milan Skyscrapers
+  aliases:
+    - skyline
+- name: microscope
+  friendly_name: Microscope
+  aliases:
+    - microscope
+- name: minimize
+  friendly_name: Minimize
+  aliases:
+    - minimize
+- name: mobile--add
+  friendly_name: Mobile add
+- name: mobile--chat
+  friendly_name: Mobile chat
+- name: mobile--devices
+  friendly_name: Mobile devices
+- name: mobile--phone
+  friendly_name: Mobile phone
+- name: mortar--and--pestle
+  friendly_name: Mortar and pestle
+- name: moscow
+  friendly_name: Moscow
+  aliases:
+    - moscow
+- name: mqa
+  friendly_name: Mqa
+  aliases:
+    - mqa
+- name: multitask
+  friendly_name: Multitask
+  aliases:
+    - multitask
+- name: munich
+  friendly_name: Munich
+  aliases:
+    - munich
+- name: natural--language--classifier
+  friendly_name: Natural language classifier
+- name: network
+  friendly_name: Network
+  aliases:
+    - network
+- name: network--services
+  friendly_name: Network services
+- name: networking--01
+  friendly_name: Networking 01
+- name: networking--02
+  friendly_name: Networking 02
+- name: networking--03
+  friendly_name: Networking 03
+- name: networking--04
+  friendly_name: Networking 04
+- name: networking--05
+  friendly_name: Networking 05
+- name: nice
+  friendly_name: Nice
+  aliases:
+    - nice
+- name: night--clear
+  friendly_name: Night clear
+- name: nyc--brooklyn
+  friendly_name: Nyc brooklyn
+- name: nyc--manhattan--alt
+  friendly_name: Nyc manhattan alt
+- name: nyc--manhattan
+  friendly_name: Nyc manhattan
+- name: office
+  friendly_name: Office
+  aliases:
+    - office
+- name: oil--pump
+  friendly_name: Oil pump
+- name: oil--rig
+  friendly_name: Oil rig
+- name: overcast
+  friendly_name: Overcast
+  aliases:
+    - overcast
+- name: paper--clip
+  friendly_name: Paper clip
+- name: parliament
+  friendly_name: Parliament
+  aliases:
+    - parliament
+- name: partner--relationship
+  friendly_name: Partner relationship
+- name: path
+  friendly_name: Path
+  aliases:
+    - path
+- name: pattern
+  friendly_name: Pattern
+  aliases:
+    - pattern
+- name: perfume
+  friendly_name: Perfume
+  aliases:
+    - perfume
+- name: person--01
+  friendly_name: Person 01
+- name: person--02
+  friendly_name: Person 02
+- name: person--03
+  friendly_name: Person 03
+- name: person--04
+  friendly_name: Person 04
+- name: person--05
+  friendly_name: Person 05
+- name: person--06
+  friendly_name: Person 06
+- name: person--07
+  friendly_name: Person 07
+- name: person--08
+  friendly_name: Person 08
+- name: person--09
+  friendly_name: Person 09
+- name: personality--insights
+  friendly_name: Personality insights
+- name: petri--culture
+  friendly_name: Petri cultures
+- name: pill--bottle--01
+  friendly_name: Pill bottle 01
+- name: pills
+  friendly_name: Pills
+  aliases:
+    - pills
+- name: podcast
+  friendly_name: Podcast
+  aliases:
+    - podcast
+- name: police
+  friendly_name: Police
+  aliases:
+    - police
+- name: power
+  friendly_name: Power
+  aliases:
+    - power
+- name: presentation
+  friendly_name: Presentation
+  aliases:
+    - presentation
+- name: presenter
+  friendly_name: Presenter
+  aliases:
+    - presenter
+- name: price
+  friendly_name: Price
+  aliases:
+    - price
+- name: printer
+  friendly_name: Printer
+  aliases:
+    - printer
+- name: private--network--01
+  friendly_name: Private network 01
+- name: private--network--alt--01
+  friendly_name: Private network alt 01
+- name: private--network--alt
+  friendly_name: Private network alt
+- name: private--network
+  friendly_name: Private network
+- name: progress
+  friendly_name: Progress
+  aliases:
+    - progress
+- name: puzzle
+  friendly_name: Puzzle
+  aliases:
+    - puzzle
+- name: question
+  friendly_name: Question
+  aliases:
+    - question
+- name: question--and--answer
+  friendly_name: Question and answer
+- name: rainy
+  friendly_name: Rainy
+  aliases:
+    - rainy
+- name: rainy--heavy
+  friendly_name: Rainy heavy
+- name: rank
+  friendly_name: Rank
+  aliases:
+    - rank
+- name: receipt
+  friendly_name: Receipt
+  aliases:
+    - receipt
+- name: recycle
+  friendly_name: Recycle
+  aliases:
+    - recycle
+- name: refinery
+  friendly_name: Refinery
+  aliases:
+    - refinery
+- name: refresh
+  friendly_name: Refresh
+  aliases:
+    - refresh
+- name: relationship--extraction
+  friendly_name: Relationship extraction
+- name: renew
+  friendly_name: Renew
+  aliases:
+    - renew
+- name: renew--team
+  friendly_name: Renew team
+- name: repeat
+  friendly_name: Repeat
+  aliases:
+    - repeat
+- name: report
+  friendly_name: Report
+  aliases:
+    - report
+- name: reset
+  friendly_name: Reset
+  aliases:
+    - reset
+- name: reset--hybrid--cloud
+  friendly_name: Reset hybrid cloud
+- name: reset--settings
+  friendly_name: Reset settings
+- name: retrieve--and--rank
+  friendly_name: Retrieve and rank
+- name: rich--text--format
+  friendly_name: Rich text format
+- name: robot
+  friendly_name: Robot
+  aliases:
+    - robot
+- name: robotics
+  friendly_name: Robotics
+  aliases:
+    - robotics
+- name: rome
+  friendly_name: Rome
+  aliases:
+    - rome
+- name: saas--enablement
+  friendly_name: Saas enablement
+- name: san--francisco
+  friendly_name: San francisco
+- name: san--francisco--fog
+  friendly_name: San franciso fog
+- name: sao--paulo--expanded--base
+  friendly_name: Sao paulo expanded base
+- name: sao--paulo
+  friendly_name: Sao paulo
+- name: satellite
+  friendly_name: Satellite
+  aliases:
+    - satellite
+- name: satellite--dish
+  friendly_name: Satellite dish
+- name: scale
+  friendly_name: Scale
+  aliases:
+    - scale
+- name: seattle
+  friendly_name: Seattle
+  aliases:
+    - seattle
+- name: secure--data
+  friendly_name: Secure data
+- name: secure--profile
+  friendly_name: Secure profile
+- name: security
+  friendly_name: Security
+  aliases:
+    - security
+- name: security--shield
+  friendly_name: Security shield
+- name: server--rack
+  friendly_name: Server rack
+- name: servers
+  friendly_name: Servers
+  aliases:
+    - servers
+- name: shop
+  friendly_name: Shop
+  aliases:
+    - shop
+- name: shopping--cart
+  friendly_name: Shopping cart
+- name: shower
+  friendly_name: Shower
+  aliases:
+    - shower
+- name: singapore
+  friendly_name: Singapore
+  aliases:
+    - singapore
+- name: single--sign-on
+  friendly_name: Single sign on
+- name: slider
+  friendly_name: Slider
+  aliases:
+    - slider
+- name: sneaker
+  friendly_name: Sneaker
+  aliases:
+    - sneaker
+- name: snow
+  friendly_name: Snow
+  aliases:
+    - snow
+- name: soft--ice--cream
+  friendly_name: Soft ice cream
+- name: softlayer--enablement
+  friendly_name: Softlayer enablement
+- name: solve
+  friendly_name: Solve
+  aliases:
+    - solve
+- name: spaceship
+  friendly_name: Spaceship
+  aliases:
+    - spaceship
+- name: speech
+  friendly_name: Speech
+  aliases:
+    - speech
+- name: speech--alphabet--a--expanded
+  friendly_name: Speech alphabet a expanded
+- name: speech--to--text
+  friendly_name: Speech to text
+- name: speedometer
+  friendly_name: Speedometer
+  aliases:
+    - speedometer
+- name: stairs--plan--view
+  friendly_name: Stairs plan view
+- name: stationary--bicycle
+  friendly_name: Stationary bicycle
+- name: steel
+  friendly_name: Steel
+  aliases:
+    - steel
+- name: steering--wheel
+  friendly_name: Steering wheel
+- name: stethoscope
+  friendly_name: Stethoscope
+  aliases:
+    - stethoscope
+- name: strategy
+  friendly_name: Strategy
+  aliases:
+    - strategy
+- name: strategy--direct
+  friendly_name: Strategy direct
+- name: strategy--move
+  friendly_name: Strategy move
+- name: strategy--play
+  friendly_name: Strategy play
+- name: streamline
+  friendly_name: Streamline
+  aliases:
+    - streamline
+- name: sunny
+  friendly_name: Sunny
+  aliases:
+    - sunny
+- name: sunny--hazy
+  friendly_name: Sunny hazy
+- name: support--services
+  friendly_name: Support services
+- name: swipe--left
+  friendly_name: Swipe left
+- name: swipe--right
+  friendly_name: Swipe right
+- name: tags
+  friendly_name: Tags
+  aliases:
+    - tags
+- name: target
+  friendly_name: Target
+  aliases:
+    - target
+- name: target--area
+  friendly_name: Target area
+- name: tel--aviv
+  friendly_name: Tel aviv
+- name: telecom
+  friendly_name: Telecom
+  aliases:
+    - telecom
+- name: telephone
+  friendly_name: Telephone
+  aliases:
+    - telephone
+- name: television
+  friendly_name: Television
+  aliases:
+    - television
+- name: temperature--high
+  friendly_name: Temperature high
+- name: temperature--low
+  friendly_name: Temperature low
+- name: tennis
+  friendly_name: Tennis
+  aliases:
+    - tennis
+- name: test--tubes
+  friendly_name: Test tubes
+- name: text--to--speech
+  friendly_name: Text to speech
+- name: time
+  friendly_name: Time
+  aliases:
+    - time
+- name: time-lapse
+  friendly_name: Time lapse
+  aliases:
+    - time
+- name: toggle
+  friendly_name: Toggle
+  aliases:
+    - toggle
+- name: tokyo--cherry--blossom
+  friendly_name: Tokyo cherry blossom
+- name: tokyo--gates
+  friendly_name: Tokyo gates
+- name: tokyo--temple
+  friendly_name: Tokyo temple
+- name: tokyo--volcano
+  friendly_name: Tokyo volcano
+- name: tone--analyzer
+  friendly_name: Tone analyzer
+- name: tools
+  friendly_name: Tools
+  aliases:
+    - tools
+- name: tornado
+  friendly_name: Tornado
+  aliases:
+    - tornado
+- name: toronto
+  friendly_name: Toronto
+  aliases:
+    - toronto
+- name: touch
+  friendly_name: Touch
+  aliases:
+    - touch
+- name: touch--gesture
+  friendly_name: Touch gesture
+- name: touch--id
+  friendly_name: Touch id
+- name: touch--screen
+  friendly_name: Touch screen
+- name: touch--swipe
+  friendly_name: Touch swipe
+- name: tractor
+  friendly_name: Tractor
+  aliases:
+    - tractor
+- name: tradeoff--analytics
+  friendly_name: Tradeoff analytics
+- name: train
+  friendly_name: Train
+  aliases:
+    - train
+- name: transform
+  friendly_name: Transform
+  aliases:
+    - transform
+- name: trash
+  friendly_name: Trash
+  aliases:
+    - trash
+- name: university
+  friendly_name: University
+  aliases:
+    - university
+- name: unlock
+  friendly_name: Unlock
+  aliases:
+    - unlock
+- name: unlock--alt
+  friendly_name: Unlock alt
+- name: upload
+  friendly_name: Upload
+  aliases:
+    - upload
+- name: upload--alt
+  friendly_name: Upload alt
+- name: user--analytics
+  friendly_name: User analytics
+- name: user--insights
+  friendly_name: User insights
+- name: user--search
+  friendly_name: User search
+- name: vancouver
+  friendly_name: Vancouver
+  aliases:
+    - vancouver
+- name: video
+  friendly_name: Video
+  aliases:
+    - video
+- name: video--alt
+  friendly_name: Video alt
+- name: video--chat
+  friendly_name: Video chat
+- name: video--play
+  friendly_name: Video play
+- name: virus
+  friendly_name: Virus
+  aliases:
+    - virus
+- name: vision
+  friendly_name: Vision
+  aliases:
+    - vision
+- name: visual--insights
+  friendly_name: Visual insights
+- name: visual--recognition
+  friendly_name: Visual recognition
+- name: warning
+  friendly_name: Warning
+  aliases:
+    - warning
+- name: warning--alt
+  friendly_name: Warning alt
+- name: washer
+  friendly_name: Washer
+  aliases:
+    - washer
+- name: washington--dc--monument
+  friendly_name: Washington dc monument
+- name: washington--dc
+  friendly_name: Washington dc
+- name: washington--dc--capitol
+  friendly_name: Washington D.C. capitol
+- name: watson--avatar
+  friendly_name: Watson avatar
+- name: weather
+  friendly_name: Weather
+  aliases:
+    - weather
+- name: web--developer
+  friendly_name: Web developer
+- name: webcast
+  friendly_name: Webcast
+  aliases:
+    - webcast
+- name: wheat
+  friendly_name: Wheat
+  aliases:
+    - wheat
+- name: wifi
+  friendly_name: Wifi
+  aliases:
+    - wifi
+- name: wind--power
+  friendly_name: Wind power
+- name: windows
+  friendly_name: Windows
+  aliases:
+    - windows
+- name: windy
+  friendly_name: Windy
+  aliases:
+    - windy
+- name: wine
+  friendly_name: Wine
+  aliases:
+    - wine
+- name: wireless--home
+  friendly_name: Wireless home
+- name: wireless--modem
+  friendly_name: Wireless modem
+- name: wrecking--ball
+  friendly_name: Wrecking ball
+- name: yoga--01
+  friendly_name: Yoga 01
+- name: yoga--02
+  friendly_name: Yoga 02
+- name: yoga--03
+  friendly_name: Yoga 03
+- name: yoga--04
+  friendly_name: Yoga 04

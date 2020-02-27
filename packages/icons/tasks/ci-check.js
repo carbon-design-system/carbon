@@ -7,14 +7,22 @@
 
 'use strict';
 
-const { check } = require('@carbon/icon-build-helpers');
+const { Metadata } = require('@carbon/icon-build-helpers');
 const path = require('path');
 
-check({
-  categoriesPath: path.resolve(__dirname, '../categories.yml'),
-  metadataPath: path.resolve(__dirname, '../metadata.yml'),
-  iconsPath: path.resolve(__dirname, '../svg'),
-}).catch(error => {
-  console.error(error);
+async function check() {
+  await Metadata.check({
+    directory: path.resolve(__dirname, '../'),
+    extensions: [
+      Metadata.extensions.icons,
+      Metadata.extensions.moduleName,
+      Metadata.extensions.deprecated,
+      Metadata.extensions.categories,
+    ],
+  });
+}
+
+check().catch(error => {
+  console.log(error);
   process.exit(1);
 });
