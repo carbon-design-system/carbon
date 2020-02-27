@@ -42,13 +42,13 @@ export function ProgressStep({
   secondaryLabel,
   disabled,
   onClick,
-  fitText,
+  spaceEqually,
   renderLabel: ProgressStepLabel,
   translateWithId: t,
 }) {
   const classes = classnames({
     [`${prefix}--progress-step`]: true,
-    [`${prefix}--progress-step--no-max-width`]: fitText,
+    [`${prefix}--progress-step--no-max-width`]: spaceEqually,
     [`${prefix}--progress-step--current`]: current,
     [`${prefix}--progress-step--complete`]: complete,
     [`${prefix}--progress-step--incomplete`]: !complete && !current,
@@ -120,7 +120,7 @@ export function ProgressStep({
           prefix={prefix}
         />
         <ProgressStepLabel
-          className={`${prefix}--progress-label ${fitText &&
+          className={`${prefix}--progress-label ${spaceEqually &&
             prefix + '--progress-label--no-max-width'}`}>
           {label}
         </ProgressStepLabel>
@@ -128,7 +128,7 @@ export function ProgressStep({
           <p className={`${prefix}--progress-optional`}>{secondaryLabel}</p>
         ) : null}
         <span
-          className={`${prefix}--progress-line ${fitText &&
+          className={`${prefix}--progress-line ${spaceEqually &&
             prefix + '--progress-line--no-max-width'}`}
         />
       </button>
@@ -206,7 +206,7 @@ ProgressStep.propTypes = {
   /**
    * Specify whether the progress step should fit the text without truncating
    */
-  fitText: PropTypes.bool,
+  spaceEqually: PropTypes.bool,
 
   /**
    * Optional method that takes in a message id and returns an
@@ -265,7 +265,7 @@ export class ProgressIndicator extends Component {
         };
   }
 
-  renderSteps = fitText => {
+  renderSteps = spaceEqually => {
     const { onChange } = this.props;
 
     return React.Children.map(this.props.children, (child, index) => {
@@ -275,7 +275,7 @@ export class ProgressIndicator extends Component {
         return React.cloneElement(child, {
           current: true,
           index,
-          fitText,
+          spaceEqually,
           onClick,
         });
       }
@@ -283,7 +283,7 @@ export class ProgressIndicator extends Component {
         return React.cloneElement(child, {
           complete: true,
           index,
-          fitText,
+          spaceEqually,
           onClick,
         });
       }
@@ -291,7 +291,7 @@ export class ProgressIndicator extends Component {
         return React.cloneElement(child, {
           complete: false,
           index,
-          fitText,
+          spaceEqually,
           onClick,
         });
       }
@@ -300,7 +300,15 @@ export class ProgressIndicator extends Component {
   };
 
   render() {
-    const { className, currentIndex, fitText, vertical, ...other } = this.props; // eslint-disable-line no-unused-vars
+    /* eslint-disable no-unused-vars */
+    const {
+      className,
+      currentIndex,
+      spaceEqually,
+      vertical,
+      ...other
+    } = this.props;
+    /* eslint-enable no-unused-vars */
     const classes = classnames({
       [`${prefix}--progress`]: true,
       [`${prefix}--progress--vertical`]: vertical,
@@ -308,7 +316,8 @@ export class ProgressIndicator extends Component {
     });
     return (
       <ul className={classes} {...other}>
-        {this.renderSteps(fitText)}
+        {/* Only add spaceEqually if vertical is not true! */}
+        {this.renderSteps(spaceEqually && !vertical && spaceEqually)}
       </ul>
     );
   }

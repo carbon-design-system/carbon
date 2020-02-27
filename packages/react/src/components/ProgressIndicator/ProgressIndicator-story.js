@@ -16,14 +16,25 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
+let spaceEquallyKnob = () => {
+  const spaceEqually = boolean('Space Equally', false);
+  return spaceEqually;
+};
+
+let verticalKnob = () => {
+  const vertical = boolean('Vertical', false);
+  return vertical;
+};
+
 storiesOf('ProgressIndicator', module)
   .addDecorator(withKnobs)
   .add(
     'Default',
     () => (
       <ProgressIndicator
-        vertical={boolean('Vertical', false)}
-        currentIndex={number('Current progress (currentIndex)', 1)}>
+        vertical={verticalKnob()}
+        currentIndex={number('Current progress (currentIndex)', 1)}
+        spaceEqually={spaceEquallyKnob()}>
         <ProgressStep
           label={text('Label', 'First step')}
           description="Step 1: Getting started with Carbon Design System"
@@ -36,7 +47,9 @@ storiesOf('ProgressIndicator', module)
             <Tooltip
               direction="bottom"
               showIcon={false}
-              triggerClassName={`${prefix}--progress-label`}
+              triggerClassName={`${prefix}--progress-label ${spaceEquallyKnob() &&
+                !verticalKnob() &&
+                `${prefix}--progress-label--no-max-width`}`}
               triggerText={'Second step with tooltip'}
               tooltipId="tooltipId-0">
               <p>Overflow tooltip content.</p>
@@ -50,7 +63,9 @@ storiesOf('ProgressIndicator', module)
             <Tooltip
               direction="bottom"
               showIcon={false}
-              triggerClassName={`${prefix}--progress-label`}
+              triggerClassName={`${prefix}--progress-label ${spaceEquallyKnob() &&
+                !verticalKnob() &&
+                `${prefix}--progress-label--no-max-width`}`}
               triggerText={'Third step with tooltip'}
               tooltipId="tooltipId-1">
               <p>
@@ -117,36 +132,6 @@ storiesOf('ProgressIndicator', module)
               </p>
             </Tooltip>
           )}
-        />
-      </ProgressIndicator>
-    ),
-    {
-      info: {
-        text: `
-           If you register an onChange handler, the Progress Indicator will become interactive.  Your parent component should update the currentIndex prop within the onChange handler.
-          `,
-      },
-    }
-  )
-  .add(
-    'Fits Text',
-    () => (
-      <ProgressIndicator
-        currentIndex={number('Current progress (currentIndex)', 1)}
-        onChange={action('onChange')}
-        style={{ width: '50%' }} // This is a simulation of adding a 'className' to the ProgressIndicator
-        fitText>
-        <ProgressStep
-          label="Click me"
-          description="Step 1: Register a onChange event"
-        />
-        <ProgressStep
-          label="Really long label"
-          description="The progress indicator will listen for clicks on the steps"
-        />
-        <ProgressStep
-          label="Tooltip and really long label"
-          description="A really long tooltip"
         />
       </ProgressIndicator>
     ),
