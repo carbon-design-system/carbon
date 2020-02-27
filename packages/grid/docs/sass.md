@@ -510,7 +510,7 @@ Generates the CSS classnames for each aspect ratio
       $width: nth($aspect-ratio, 1);
       $height: nth($aspect-ratio, 2);
 
-      &#{$width}-#{$height} {
+      &#{$width}x#{$height} {
         @include carbon--make-aspect-ratio($width, $height);
       }
     }

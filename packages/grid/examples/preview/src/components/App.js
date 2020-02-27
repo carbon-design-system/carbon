@@ -606,7 +606,7 @@ const sections = [
             </div>
             <div className="bx--row bx--no-gutter--left">
               <div className="bx--col">
-                <div className="image-example bx--aspect-ratio--1-1">
+                <div className="image-example bx--aspect-ratio--1x1">
                   Full width image
                 </div>
                 <div className="outside bx--hang--left">
@@ -614,7 +614,7 @@ const sections = [
                 </div>
               </div>
               <div className="bx--col">
-                <div className="image-example bx--aspect-ratio--1-1">
+                <div className="image-example bx--aspect-ratio--1x1">
                   Full width image
                 </div>
                 <div className="outside bx--hang--left">
@@ -622,7 +622,7 @@ const sections = [
                 </div>
               </div>
               <div className="bx--col">
-                <div className="image-example bx--aspect-ratio--1-1">
+                <div className="image-example bx--aspect-ratio--1x1">
                   Full width image
                 </div>
                 <div className="outside bx--hang--left">
@@ -630,7 +630,7 @@ const sections = [
                 </div>
               </div>
               <div className="bx--col">
-                <div className="image-example bx--aspect-ratio--1-1">
+                <div className="image-example bx--aspect-ratio--1x1">
                   Full width image
                 </div>
                 <div className="outside bx--hang--left">
@@ -654,23 +654,23 @@ const sections = [
         content: () => (
           <div className="bx--grid">
             <div className="bx--row">
-              <div className="bx--col bx--aspect-ratio--2-1">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--2x1">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--2-1">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--2x1">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--2-1">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--2x1">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--2-1">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--2x1">
                   <div className="inside">1</div>
                 </div>
               </div>
@@ -683,23 +683,23 @@ const sections = [
         content: () => (
           <div className="bx--grid">
             <div className="bx--row">
-              <div className="bx--col bx--aspect-ratio--16-9">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--16x9">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--16-9">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--16x9">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--16-9">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--16x9">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--16-9">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--16x9">
                   <div className="inside">1</div>
                 </div>
               </div>
@@ -712,23 +712,23 @@ const sections = [
         content: () => (
           <div className="bx--grid">
             <div className="bx--row">
-              <div className="bx--col bx--aspect-ratio--4-3">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--4x3">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--4-3">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--4x3">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--4-3">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--4x3">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--4-3">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--4x3">
                   <div className="inside">1</div>
                 </div>
               </div>
@@ -741,23 +741,23 @@ const sections = [
         content: () => (
           <div className="bx--grid">
             <div className="bx--row">
-              <div className="bx--col bx--aspect-ratio--1-1">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--1x1">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--1-1">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--1x1">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--1-1">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--1x1">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--1-1">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--1x1">
                   <div className="inside">1</div>
                 </div>
               </div>
@@ -770,23 +770,23 @@ const sections = [
         content: () => (
           <div className="bx--grid">
             <div className="bx--row">
-              <div className="bx--col bx--aspect-ratio--3-4">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--3x4">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--3-4">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--3x4">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--3-4">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--3x4">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--3-4">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--3x4">
                   <div className="inside">1</div>
                 </div>
               </div>
@@ -799,23 +799,23 @@ const sections = [
         content: () => (
           <div className="bx--grid">
             <div className="bx--row">
-              <div className="bx--col bx--aspect-ratio--9-16">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--9x16">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--9-16">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--9x16">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--9-16">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--9x16">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--9-16">
-                <div className="outside">
+              <div className="bx--col">
+                <div className="outside bx--aspect-ratio--9x16">
                   <div className="inside">1</div>
                 </div>
               </div>
@@ -828,24 +828,24 @@ const sections = [
         content: () => (
           <div className="bx--grid">
             <div className="bx--row">
-              <div className="bx--col bx--aspect-ratio--1-2">
+              <div className="bx--col">
                 <div className="outside">
-                  <div className="inside">1</div>
+                  <div className="inside bx--aspect-ratio--1x2">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--1-2">
+              <div className="bx--col">
                 <div className="outside">
-                  <div className="inside">1</div>
+                  <div className="inside bx--aspect-ratio--1x2">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--1-2">
+              <div className="bx--col">
                 <div className="outside">
-                  <div className="inside">1</div>
+                  <div className="inside bx--aspect-ratio--1x2">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--1-2">
+              <div className="bx--col">
                 <div className="outside">
-                  <div className="inside">1</div>
+                  <div className="inside bx--aspect-ratio--1x2">1</div>
                 </div>
               </div>
             </div>
@@ -857,28 +857,28 @@ const sections = [
         content: () => (
           <div className="bx--grid">
             <div className="bx--row">
-              <div className="bx--col bx--aspect-ratio--2-1">
+              <div className="bx--col bx--aspect-ratio--2x1">
                 <div className="outside">
                   <div className="inside">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquam tempus rutrum. Morbi consequat, mi quis pharetra eleifend, ipsum arcu porta arcu, malesuada egestas sapien enim ac nisi. Maecenas ipsum nibh, viverra viverra feugiat quis, convallis pulvinar nisi. Fusce eget erat in nulla vestibulum posuere id eu augue. Aliquam eget nulla volutpat, suscipit leo quis, vulputate risus. Cras orci arcu, aliquet ac eleifend placerat, interdum id augue. Morbi mollis urna sed euismod condimentum. Nulla ut mauris ex. Pellentesque id volutpat arcu. In ligula est, varius at facilisis eu, blandit ornare turpis. Nullam consequat venenatis magna sed sodales. Nam ornare nibh augue, non suscipit quam feugiat ut. Vivamus mollis libero mauris, vel venenatis justo feugiat sed. Ut consectetur nunc condimentum egestas vestibulum. Integer metus metus, elementum at magna vel, cursus commodo urna.
                   </div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--2-1">
+              <div className="bx--col bx--aspect-ratio--2x1">
                 <div className="outside">
                   <div className="inside">
                     1
                   </div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--2-1">
+              <div className="bx--col bx--aspect-ratio--2x1">
                 <div className="outside">
                   <div className="inside">
                     1
                   </div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio--2-1">
+              <div className="bx--col bx--aspect-ratio--2x1">
                 <div className="outside">
                   <div className="inside">
                     1
