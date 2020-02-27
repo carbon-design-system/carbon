@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { match, keys } from '../../../internal/keyboard';
 import {
   DOCUMENT_POSITION_BROAD_PRECEDING,
   DOCUMENT_POSITION_BROAD_FOLLOWING,
@@ -24,6 +25,19 @@ export default config => fp => {
   };
 
   /**
+   * Clean-up `tabindex` of Flatpickr day elements.
+   */
+  const cleanDayElemTabIndices = () => {
+    const { calendarContainer } = fp;
+    Array.prototype.forEach.call(
+      calendarContainer.querySelectorAll('.flatpickr-day'),
+      elem => {
+        elem.tabIndex = -1;
+      }
+    );
+  };
+
+  /**
    * Handles `focusin` event to ensure an day element in calendar dropdown is sequential-focusable
    * when it gets focus.
    * Doing so ensures the next sequential-focusable element of an day element won't be date picker `<input>`.
@@ -32,6 +46,7 @@ export default config => fp => {
     const currentDayElem =
       currentActiveNode && currentActiveNode.closest('.flatpickr-day');
     if (currentDayElem) {
+      cleanDayElemTabIndices();
       currentDayElem.tabIndex = 0;
     }
   };
@@ -46,10 +61,6 @@ export default config => fp => {
     target: oldActiveNode,
     relatedTarget: currentActiveNode,
   }) => {
-    const oldDayElem = oldActiveNode && oldActiveNode.closest('.flatpickr-day');
-    if (oldDayElem) {
-      oldDayElem.tabIndex = -1;
-    }
     const { inputFrom, inputTo } = config;
     const { calendarContainer, isOpen } = fp;
     if (
@@ -57,6 +68,7 @@ export default config => fp => {
       calendarContainer.contains(oldActiveNode) &&
       !calendarContainer.contains(currentActiveNode)
     ) {
+      cleanDayElemTabIndices();
       const comparisonResult = !currentActiveNode
         ? DOCUMENT_POSITION_BROAD_FOLLOWING
         : oldActiveNode.compareDocumentPosition(currentActiveNode);
@@ -78,6 +90,17 @@ export default config => fp => {
           }
         }
       }, 0);
+    }
+  };
+
+  /**
+   * Handles `keydown` event to disable Flatpickr's back-tab hehavior.
+   */
+  const handleKeydownCalendarDropdown = event => {
+    if (match(event, keys.Tab) && event.shiftKey) {
+      // Flatpickr attempts to take over back-tab key to move focus onto the date picker `<input>`.
+      // We want default sequential focusing behavior to allow focusing onto prev/next buttons.
+      event.stopPropagation();
     }
   };
 
@@ -120,6 +143,10 @@ export default config => fp => {
     const { container } = config;
     container.removeEventListener('focusout', handleBlurContainer);
     fp.calendarContainer.removeEventListener(
+      'keydown',
+      handleKeydownCalendarDropdown
+    );
+    fp.calendarContainer.removeEventListener(
       'focusout',
       handleBlurCalendarDropdown
     );
@@ -142,6 +169,10 @@ export default config => fp => {
     fp.calendarContainer.addEventListener(
       'focusout',
       handleBlurCalendarDropdown
+    );
+    fp.calendarContainer.addEventListener(
+      'keydown',
+      handleKeydownCalendarDropdown
     );
     container.addEventListener('focusout', handleBlurContainer);
   };

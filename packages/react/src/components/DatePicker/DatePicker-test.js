@@ -533,6 +533,7 @@ describe('Focus management', () => {
 
   it('makes the focused day element sequential focusable', () => {
     const datePicker = wrapper.find('DatePicker').instance();
+    datePicker.cal.open();
     const dayElem = datePicker.cal.calendarContainer.querySelector(
       '.flatpickr-day'
     );
