@@ -33,6 +33,7 @@ const Tag = ({
   filter,
   title,
   disabled,
+  onClose,
   ...other
 }) => {
   const tagClass = `${prefix}--tag--${type}`;
@@ -40,6 +41,10 @@ const Tag = ({
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
   });
+  const handleClose = event => {
+    event.stopPropagation();
+    onClose(event);
+  };
   return filter ? (
     <button
       className={tagClasses}
@@ -53,7 +58,7 @@ const Tag = ({
       <span className={`${prefix}--tag__label`}>
         {children !== null && children !== undefined ? children : TYPES[type]}
       </span>
-      <Close16 />
+      <Close16 onClick={handleClose} />
     </button>
   ) : (
     <span className={tagClasses} {...other}>
@@ -92,6 +97,11 @@ Tag.propTypes = {
    * Text to show on clear filters
    */
   title: PropTypes.string,
+
+  /**
+   * Click handler for filter tag close button.
+   */
+  onClose: PropTypes.func,
 };
 
 export const types = Object.keys(TYPES);
