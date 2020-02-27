@@ -235,6 +235,7 @@ export default class Dropdown extends React.Component {
           highlightedIndex,
           getRootProps,
           getToggleButtonProps,
+          getInputProps,
           getItemProps,
           getMenuProps,
           toggleMenu,
@@ -294,6 +295,7 @@ export default class Dropdown extends React.Component {
                   id={id}
                   tabIndex="0"
                   disabled={disabled}
+                  aria-activedescendant={getInputProps.activedescendant}
                   aria-disabled={disabled}
                   aria-labelledby={`${labelId} ${fieldLabelId}`}
                   aria-describedby={helperId}
