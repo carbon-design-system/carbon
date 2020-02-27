@@ -16019,14 +16019,9 @@ Date picker styles
     }
   }
 
-  .#{$prefix}--date-picker.#{$prefix}--date-picker--single {
-    .#{$prefix}--date-picker-container {
-      max-width: rem(288px);
-    }
-
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--single
     .#{$prefix}--date-picker__input {
-      width: rem(288px);
-    }
+    width: rem(288px);
   }
 
   .#{$prefix}--date-picker__input {
@@ -16037,7 +16032,7 @@ Date picker styles
     display: block;
     position: relative;
     height: rem(40px);
-    max-width: rem(288px);
+    min-width: rem(144px);
     padding: 0 $carbon--spacing-05;
     background-color: $field-01;
     border: none;
