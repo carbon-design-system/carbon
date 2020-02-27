@@ -5653,6 +5653,7 @@ $carbon--theme--g90: map-merge(
     visited-link: #be95ff,
     disabled-01: #393939,
     disabled-02: #6f6f6f,
+    disabled-03: #a8a8a8,
     highlight: #0043ce,
     skeleton-01: #353535,
     skeleton-02: #525252,
@@ -5725,7 +5726,6 @@ $carbon--theme--g100: map-merge(
     visited-link: #be95ff,
     disabled-01: #262626,
     disabled-02: #525252,
-    disabled-03: #6f6f6f,
     highlight: #002d9c,
     skeleton-01: #353535,
     skeleton-02: #393939,
@@ -16019,14 +16019,9 @@ Date picker styles
     }
   }
 
-  .#{$prefix}--date-picker.#{$prefix}--date-picker--single {
-    .#{$prefix}--date-picker-container {
-      max-width: rem(288px);
-    }
-
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--single
     .#{$prefix}--date-picker__input {
-      width: rem(288px);
-    }
+    width: rem(288px);
   }
 
   .#{$prefix}--date-picker__input {
@@ -16037,7 +16032,7 @@ Date picker styles
     display: block;
     position: relative;
     height: rem(40px);
-    max-width: rem(288px);
+    min-width: rem(144px);
     padding: 0 $carbon--spacing-05;
     background-color: $field-01;
     border: none;
