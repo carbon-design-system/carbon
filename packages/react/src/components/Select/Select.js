@@ -211,7 +211,7 @@ Select.propTypes = {
   /**
    * Specify the size of the Text Input. Currently supports either `sm` or `xl` as an option.
    */
-  size: PropTypes.oneOf(['sm', 'xl']),
+  size: PropTypes.oneOf(['sm', 'xl', '']),
 };
 
 Select.defaultProps = {
