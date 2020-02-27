@@ -134,6 +134,7 @@ storiesOf('ProgressIndicator', module)
       <ProgressIndicator
         currentIndex={number('Current progress (currentIndex)', 1)}
         onChange={action('onChange')}
+        style={{ width: '50%' }} // This is a simulation of adding a 'className' to the ProgressIndicator
         fitText>
         <ProgressStep
           label="Click me"
