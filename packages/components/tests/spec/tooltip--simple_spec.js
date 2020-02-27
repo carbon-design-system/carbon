@@ -1,3 +1,4 @@
+import Promise, { delay } from 'bluebird';
 import Tooltip from '../../src/components/tooltip/tooltip--simple';
 import TooltipDefinitionHTML from '../../html/tooltip/tooltip--definition.html';
 import TooltipIconHTML from '../../html/tooltip/tooltip--icon.html';
@@ -86,6 +87,23 @@ describe('Test simple tooltip', function() {
     it('Should not have hidden class after mouseenter', function() {
       element.dispatchEvent(new CustomEvent('mouseenter', { bubbles: true }));
       expect(element.classList.contains('bx--tooltip--hidden')).toBe(false);
+    });
+
+    it('Should have visible class after mouseenter', function() {
+      element.dispatchEvent(new CustomEvent('mouseenter', { bubbles: true }));
+      expect(element.classList.contains('bx--tooltip--visible')).toBe(true);
+    });
+
+    it('Should not have visible class after mouseleave', async function() {
+      await new Promise(resolve => {
+        resolve(
+          element.dispatchEvent(
+            new CustomEvent('mouseleave', { bubbles: true })
+          )
+        );
+      });
+      await delay(100);
+      expect(element.classList.contains('bx--tooltip--visible')).toBe(false);
     });
 
     it('Should not have hidden class after focus', function() {
