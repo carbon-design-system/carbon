@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import uid from '../../tools/uniqueId';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
 
@@ -95,6 +95,8 @@ export class StructuredListHead extends Component {
   }
 }
 
+const getInstanceId = setupGetInstanceId();
+
 export class StructuredListInput extends Component {
   static propTypes = {
     /**
@@ -139,8 +141,9 @@ export class StructuredListInput extends Component {
     title: 'title',
   };
 
-  UNSAFE_componentWillMount() {
-    this.uid = this.props.id || uid();
+  constructor(props) {
+    super(props);
+    this.uid = this.props.id || getInstanceId();
   }
 
   render() {
