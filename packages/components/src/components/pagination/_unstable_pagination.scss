@@ -47,14 +47,15 @@ $css--helpers: true;
     display: flex;
     height: 100%;
     align-items: center;
-
-    & > .#{$prefix}--form-item {
-      height: 100%;
-    }
   }
 
   .#{$prefix}--pagination__left {
     padding: 0 $carbon--spacing-05 0 0;
+  }
+
+  .#{$prefix}--pagination__left > .#{$prefix}--form-item, 
+  .#{$prefix}--pagination__right > .#{$prefix}--form-item {
+    height: 100%;
   }
 
   .#{$prefix}--pagination__left .#{$prefix}--pagination__text {
@@ -81,12 +82,12 @@ $css--helpers: true;
     fill: $ui-05;
     transition: outline $duration--fast-02 motion(standard, productive);
     transition: background-color $duration--fast-02 motion(standard, productive);
+  }
 
-    // Required to prevent tooltip trigger button from shrinking icon:
-    &.#{$prefix}--btn .#{$prefix}--btn__icon {
-      height: unset;
-      width: unset;
-    }
+  // Required to prevent tooltip trigger button from shrinking icon:
+  .#{$prefix}--pagination__button.#{$prefix}--btn .#{$prefix}--btn__icon {
+    height: unset;
+    width: unset;
   }
 
   .#{$prefix}--pagination__button,
@@ -121,35 +122,41 @@ $css--helpers: true;
   .#{$prefix}--pagination__page-sizer {
     height: 100%;
     align-items: center;
+  }
 
-    .#{$prefix}--select-input--inline__wrapper {
-      display: flex;
-      height: 100%;
+  .#{$prefix}--pagination__page-selector .#{$prefix}--select-input--inline__wrapper,
+  .#{$prefix}--pagination__page-sizer .#{$prefix}--select-input--inline__wrapper {
+    display: flex;
+    height: 100%;
+  }
+
+  .#{$prefix}--pagination__page-selector .#{$prefix}--select__arrow,
+  .#{$prefix}--pagination__page-sizer .#{$prefix}--select-input {
+    @include carbon--type-style('body-short-01');
+    width: auto;
+    min-width: auto;
+    height: 100%;
+    padding: 0 $carbon--spacing-08 0 $carbon--spacing-05;
+    margin-right: -0.65rem;
+
+    @include carbon--breakpoint('md') {
+      padding-right: carbon--mini-units(4.5);
+      margin-right: 0;
     }
+  }
 
-    .#{$prefix}--select-input {
-      @include carbon--type-style('body-short-01');
-      width: auto;
-      min-width: auto;
-      height: 100%;
-      padding: 0 $carbon--spacing-08 0 $carbon--spacing-05;
-      margin-right: -0.65rem;
-      @include carbon--breakpoint('md') {
-        padding-right: carbon--mini-units(4.5);
-        margin-right: 0;
-      }
+  .#{$prefix}--pagination__page-selector .#{$prefix}--select__arrow:hover,
+  .#{$prefix}--pagination__page-sizer .#{$prefix}--select-input:hover {
+    background: $hover-ui;
+  }
 
-      &:hover {
-        background: $hover-ui;
-      }
-    }
+  .#{$prefix}--pagination__page-selector .#{$prefix}--select__arrow,
+  .#{$prefix}--pagination__page-sizer .#{$prefix}--select__arrow {
+    top: 50%;
+    transform: translateY(-50%);
 
-    .#{$prefix}--select__arrow {
-      top: 50%;
-      transform: translateY(-50%);
-      @include carbon--breakpoint('md') {
-        right: $carbon--spacing-05;
-      }
+    @include carbon--breakpoint('md') {
+      right: $carbon--spacing-05;
     }
   }
 
@@ -165,15 +172,15 @@ $css--helpers: true;
     height: 100%;
     justify-content: center;
     margin-right: $carbon--spacing-03;
+  }
 
-    &.#{$prefix}--number input[type='number'] {
-      border: none;
-      background-color: $ui-03;
-    }
+  .#{$prefix}--pagination__page-input.#{$prefix}--number input[type='number'] {
+    border: none;
+    background-color: $ui-03;
+  }
 
-    // Visually hide error text for now:
-    .#{$prefix}--form-requirement {
-      @include hidden;
-    }
+  // Visually hide error text for now:
+  .#{$prefix}--pagination__page-input .#{$prefix}--form-requirement {
+    @include hidden;
   }
 }
