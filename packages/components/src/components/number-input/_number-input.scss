@@ -220,6 +220,51 @@
     }
   }
 
+  // Size Variant styles
+  .#{$prefix}--number--xl input[type='number'] {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--number--xl .#{$prefix}--number__control-btn {
+    height: rem(24px);
+  }
+
+  .#{$prefix}--number--xl.#{$prefix}--number--mobile
+    .#{$prefix}--number__control-btn {
+    height: rem(48px);
+    width: rem(48px);
+  }
+
+  .#{$prefix}--number--xl .#{$prefix}--number__control-btn.up-icon svg {
+    top: 0.4125rem;
+  }
+
+  .#{$prefix}--number--xl .#{$prefix}--number__control-btn.down-icon svg {
+    top: -0.4125rem;
+  }
+
+  .#{$prefix}--number--sm input[type='number'] {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--number--sm .#{$prefix}--number__control-btn {
+    height: rem(16px);
+  }
+
+  .#{$prefix}--number--sm.#{$prefix}--number--mobile
+    .#{$prefix}--number__control-btn {
+    height: rem(32px);
+    width: rem(32px);
+  }
+
+  .#{$prefix}--number--sm .#{$prefix}--number__control-btn.up-icon svg {
+    top: 0.2125rem;
+  }
+
+  .#{$prefix}--number--sm .#{$prefix}--number__control-btn.down-icon svg {
+    top: -0.2125rem;
+  }
+
   //No label positioning adjustment
   .#{$prefix}--number--nolabel .bx--label + .bx--form__helper-text {
     margin-top: 0;
