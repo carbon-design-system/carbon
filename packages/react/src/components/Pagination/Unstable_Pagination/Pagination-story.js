@@ -10,7 +10,9 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { array, boolean, number, text, withKnobs } from '@storybook/addon-knobs';
 
-import Unstable_Pagination, { PageInput, PageSelector } from '../Unstable_Pagination';
+import Unstable_Pagination from './Pagination';
+import PageInput from './PageInput';
+import PageSelector from './PageSelector';
 
 const props = () => ({
   disabled: boolean('Disable backward/forward buttons (disabled)', false),

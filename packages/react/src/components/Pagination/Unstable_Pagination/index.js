@@ -5,6 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './Pagination';
+export Unstable_Pagination from './Pagination';
 export PageInput from './PageInput';
 export PageSelector from './PageSelector';

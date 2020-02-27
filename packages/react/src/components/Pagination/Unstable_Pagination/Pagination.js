@@ -15,7 +15,7 @@ import { Select, SelectItem } from '../../Select';
 
 const { prefix } = settings;
 
-function unstable__Pagination({
+function Unstable_Pagination({
   backwardText,
   children,
   className,
@@ -171,7 +171,7 @@ function unstable__Pagination({
   );
 }
 
-unstable__Pagination.defaultProps = {
+Unstable_Pagination.defaultProps = {
   backwardText: 'Previous page',
   className: null,
   children: undefined,
@@ -190,7 +190,7 @@ unstable__Pagination.defaultProps = {
   totalItems: undefined,
 };
 
-unstable__Pagination.propTypes = {
+Unstable_Pagination.propTypes = {
   /**
    * The description for the backward icon.
    */
@@ -275,4 +275,4 @@ unstable__Pagination.propTypes = {
   totalItems: PropTypes.number,
 };
 
-export default unstable__Pagination;
+export default Unstable_Pagination;

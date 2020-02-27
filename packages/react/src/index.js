@@ -165,4 +165,4 @@ export DatePickerSkeleton from './components/DatePicker/DatePicker.Skeleton';
 export * from './components/UIShell';
 
 // experimental
-export Unstable_Pagination, { PageInput, PageSelect } from './components/Pagination/Unstable_Pagination';
+export { PageInput, PageSelect, Unstable_Pagination } from './components/Pagination/Unstable_Pagination';
