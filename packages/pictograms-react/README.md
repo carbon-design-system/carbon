@@ -21,7 +21,7 @@ yarn add @carbon/pictograms-react
 
 ## Usage
 
-You can import a pictogram component into your project by referring to its name and size:
+You can import a pictogram component into your project by referring to its name:
 
 ```jsx
 import { Airplane } from '@carbon/pictograms-react';
