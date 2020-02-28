@@ -140,7 +140,7 @@ class NumberInput extends Component {
      */
     isMobile: PropTypes.bool,
     /**
-     * Specify the size of the Text Input. Currently supports either `sm` or `xl` as an option.
+     * Specify the size of the Number Input. Currently supports either `sm` or `xl` as an option.
      */
     size: PropTypes.oneOf(['sm', 'xl']),
   };
@@ -180,7 +180,7 @@ class NumberInput extends Component {
   }
 
   /**
-   * The DOM node refernce to the `<input>`.
+   * The DOM node reference to the `<input>`.
    * @type {HTMLInputElement}
    */
   _inputRef = null;

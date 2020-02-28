@@ -72,6 +72,7 @@
     cursor: not-allowed;
     background-color: $disabled-background-color;
     color: $disabled;
+    border-bottom-color: transparent;
   }
 
   .#{$prefix}--number__input-wrapper {
@@ -236,11 +237,11 @@
   }
 
   .#{$prefix}--number--xl .#{$prefix}--number__control-btn.up-icon svg {
-    top: 0.4125rem;
+    top: rem(6.6px); // Needed to maintain arrow spacing between input sizes.
   }
 
   .#{$prefix}--number--xl .#{$prefix}--number__control-btn.down-icon svg {
-    top: -0.4125rem;
+    top: rem(-6.6px); // Needed to maintain arrow spacing between input sizes.
   }
 
   .#{$prefix}--number--sm input[type='number'] {
@@ -258,11 +259,11 @@
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__control-btn.up-icon svg {
-    top: 0.2125rem;
+    top: rem(3.4px); // Needed to maintain arrow spacing between input sizes.
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__control-btn.down-icon svg {
-    top: -0.2125rem;
+    top: rem(-3.4px); // Needed to maintain arrow spacing between input sizes.
   }
 
   //No label positioning adjustment
