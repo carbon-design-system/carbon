@@ -22,7 +22,7 @@ import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
 
 const sizes = {
   'Extra large size (xl)': 'xl',
-  'Regular size (lg)': '',
+  'Regular size (lg)': undefined,
   'Small size (sm)': 'sm',
 };
 
@@ -35,7 +35,7 @@ const props = () => ({
   max: number('Maximum value (max)', 100),
   value: number('Value (value)', 50),
   step: number('Step of up/down arrow (step)', 10),
-  size: select('Field size (size)', sizes, '') || undefined,
+  size: select('Field size (size)', sizes, undefined) || undefined,
   disabled: boolean('Disabled (disabled)', false),
   readOnly: boolean('Read only (readOnly)', false),
   invalid: boolean('Show form validation UI (invalid)', false),
