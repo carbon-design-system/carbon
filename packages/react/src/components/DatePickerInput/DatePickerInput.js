@@ -32,9 +32,9 @@ export default class DatePickerInput extends Component {
     labelText: PropTypes.node.isRequired,
 
     /**
-     * Specify the size of the Date Picker Input. Currently supports either `sm` or `xl` as an option. Defaults to ''.
+     * Specify the size of the Date Picker Input. Currently supports either `sm` or `xl` as an option.
      */
-    size: PropTypes.oneOf(['sm', 'xl', '']),
+    size: PropTypes.oneOf(['sm', 'xl']),
 
     /**
      * Provide a regular expression that the input value must match
@@ -86,7 +86,6 @@ export default class DatePickerInput extends Component {
     invalid: false,
     onClick: () => {},
     onChange: () => {},
-    size: '',
   };
 
   render() {
