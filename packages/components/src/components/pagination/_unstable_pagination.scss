@@ -7,22 +7,22 @@
 
 $css--helpers: true;
 
-@import '../../globals/scss/vars';
-@import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/typography';
-@import '../../globals/scss/layout';
-@import '../../globals/scss/css--helpers';
-@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
-@import '../number-input/number-input';
-@import '../select/select';
+@import "../../globals/scss/vars";
+@import "../../globals/scss/helper-mixins";
+@import "../../globals/scss/typography";
+@import "../../globals/scss/layout";
+@import "../../globals/scss/css--helpers";
+@import "../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once";
+@import "../number-input/number-input";
+@import "../select/select";
 
 /// Unstable pagination styles
 /// @access private
 /// @group pagination
 @mixin unstable_pagination {
-  .#{$prefix}--pagination {
+  .#{$prefix}--unstable-pagination {
     @include reset;
-    @include carbon--type-style('body-short-01');
+    @include carbon--type-style("body-short-01");
     width: 100%;
     background-color: $ui-01;
     display: flex;
@@ -30,10 +30,9 @@ $css--helpers: true;
     justify-content: space-between;
     border-top: 1px solid $ui-03;
     height: rem(48px);
-    overflow: hidden;
   }
 
-  .#{$prefix}--pagination__text {
+  .#{$prefix}--unstable-pagination__text {
     @include carbon--breakpoint('md') {
       display: inline-block;
     }
@@ -42,32 +41,32 @@ $css--helpers: true;
     color: $text-02;
   }
 
-  .#{$prefix}--pagination__left,
-  .#{$prefix}--pagination__right {
+  .#{$prefix}--unstable-pagination__left,
+  .#{$prefix}--unstable-pagination__right {
     display: flex;
     height: 100%;
     align-items: center;
   }
 
-  .#{$prefix}--pagination__left {
+  .#{$prefix}--unstable-pagination__left {
     padding: 0 $carbon--spacing-05 0 0;
   }
 
-  .#{$prefix}--pagination__left > .#{$prefix}--form-item, 
-  .#{$prefix}--pagination__right > .#{$prefix}--form-item {
+  .#{$prefix}--unstable-pagination__left > .#{$prefix}--form-item,
+  .#{$prefix}--unstable-pagination__right > .#{$prefix}--form-item {
     height: 100%;
   }
 
-  .#{$prefix}--pagination__left .#{$prefix}--pagination__text {
+  .#{$prefix}--unstable-pagination__left .#{$prefix}--unstable-pagination__text {
     margin-right: rem(1px);
   }
 
-  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
+  .#{$prefix}--unstable-pagination__right .#{$prefix}--unstable-pagination__text {
     margin-right: $carbon--spacing-05;
     margin-left: rem(1px);
   }
 
-  .#{$prefix}--pagination__button {
+  .#{$prefix}--unstable-pagination__button {
     @include reset;
     border: none;
     background: none;
@@ -79,108 +78,117 @@ $css--helpers: true;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: $ui-05; // for currentColor
     fill: $ui-05;
     transition: outline $duration--fast-02 motion(standard, productive);
     transition: background-color $duration--fast-02 motion(standard, productive);
   }
 
-  // Required to prevent tooltip trigger button from shrinking icon:
-  .#{$prefix}--pagination__button.#{$prefix}--btn .#{$prefix}--btn__icon {
+  // Unset height/width set by icon-only button:
+  .#{$prefix}--unstable-pagination__button .#{$prefix}--btn__icon {
     height: unset;
     width: unset;
   }
 
-  .#{$prefix}--pagination__button,
-  .#{$prefix}--pagination__button:disabled {
-    background: none;
-    border: 0;
-    border-left: 1px solid $ui-03;
+  .#{$prefix}--unstable-pagination__button:focus {
+    @include focus-outline('outline');
   }
 
-  .#{$prefix}--pagination__button:hover {
+  .#{$prefix}--unstable-pagination__button:hover {
     background: $hover-ui;
+    color: $ui-05;
   }
 
-  .#{$prefix}--pagination__button.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
-    outline: none;
-    border: 2px solid $focus;
-  }
-
-  .#{$prefix}--pagination__button--no-index {
+  .#{$prefix}--unstable-pagination__button--no-index {
     fill: $disabled-02;
     cursor: not-allowed;
   }
 
-  .#{$prefix}--pagination__button:disabled:hover,
-  .#{$prefix}--pagination__button--no-index:hover {
+  .#{$prefix}--unstable-pagination__button.#{$prefix}--btn:disabled {
+    background: inherit;
+  }
+
+  .#{$prefix}--unstable-pagination__button:disabled:hover,
+  .#{$prefix}--unstable-pagination__button--no-index:hover {
     cursor: not-allowed;
     fill: $disabled-02;
     background: $ui-01;
   }
 
-  .#{$prefix}--pagination__page-selector,
-  .#{$prefix}--pagination__page-sizer {
+  .#{$prefix}--unstable-pagination__button.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
+    outline: none;
+    border: 2px solid $focus;
+  }
+
+  .#{$prefix}--unstable-pagination__page-selector,
+  .#{$prefix}--unstable-pagination__page-sizer {
     height: 100%;
     align-items: center;
   }
 
-  .#{$prefix}--pagination__page-selector .#{$prefix}--select-input--inline__wrapper,
-  .#{$prefix}--pagination__page-sizer .#{$prefix}--select-input--inline__wrapper {
+  .#{$prefix}--unstable-pagination__page-selector
+    .#{$prefix}--select-input--inline__wrapper,
+  .#{$prefix}--unstable-pagination__page-sizer
+    .#{$prefix}--select-input--inline__wrapper {
     display: flex;
     height: 100%;
   }
 
-  .#{$prefix}--pagination__page-selector .#{$prefix}--select__arrow,
-  .#{$prefix}--pagination__page-sizer .#{$prefix}--select-input {
-    @include carbon--type-style('body-short-01');
+  .#{$prefix}--unstable-pagination__page-selector .#{$prefix}--select-input,
+  .#{$prefix}--unstable-pagination__page-sizer .#{$prefix}--select-input {
+    @include carbon--type-style("body-short-01");
     width: auto;
     min-width: auto;
     height: 100%;
     padding: 0 $carbon--spacing-08 0 $carbon--spacing-05;
     margin-right: -0.65rem;
 
-    @include carbon--breakpoint('md') {
+    @include carbon--breakpoint("md") {
       padding-right: carbon--mini-units(4.5);
       margin-right: 0;
     }
   }
 
-  .#{$prefix}--pagination__page-selector .#{$prefix}--select__arrow:hover,
-  .#{$prefix}--pagination__page-sizer .#{$prefix}--select-input:hover {
+  .#{$prefix}--unstable-pagination__page-selector .#{$prefix}--select__arrow:hover,
+  .#{$prefix}--unstable-pagination__page-sizer .#{$prefix}--select-input:hover {
     background: $hover-ui;
   }
 
-  .#{$prefix}--pagination__page-selector .#{$prefix}--select__arrow,
-  .#{$prefix}--pagination__page-sizer .#{$prefix}--select__arrow {
+  .#{$prefix}--unstable-pagination__page-selector .#{$prefix}--select__arrow,
+  .#{$prefix}--unstable-pagination__page-sizer .#{$prefix}--select__arrow {
     top: 50%;
     transform: translateY(-50%);
 
-    @include carbon--breakpoint('md') {
+    @include carbon--breakpoint("md") {
       right: $carbon--spacing-05;
     }
   }
 
-  .#{$prefix}--pagination__page-selector {
-    border-left: 1px solid $ui-02;
+  .#{$prefix}--unstable-pagination__page-selector {
+    border-left: 1px solid $ui-03;
   }
 
-  .#{$prefix}--pagination__page-sizer {
-    border-right: 1px solid $ui-02;
+  .#{$prefix}--unstable-pagination__page-sizer {
+    border-right: 1px solid $ui-03;
   }
 
-  .#{$prefix}--pagination__page-input {
+  .#{$prefix}--unstable-pagination__page-input {
     height: 100%;
     justify-content: center;
     margin-right: $carbon--spacing-03;
   }
 
-  .#{$prefix}--pagination__page-input.#{$prefix}--number input[type='number'] {
+  .#{$prefix}--unstable-pagination__page-input.#{$prefix}--number input[type="number"] {
     border: none;
     background-color: $ui-03;
   }
 
   // Visually hide error text for now:
-  .#{$prefix}--pagination__page-input .#{$prefix}--form-requirement {
+  .#{$prefix}--unstable-pagination__page-input .#{$prefix}--form-requirement {
     @include hidden;
   }
+}
+
+@include exports('unstable_pagination') {
+  @include unstable_pagination;
 }

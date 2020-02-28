@@ -68,7 +68,7 @@ PageInput.propTypes = {
 
   /**
    * Total number of pages.
-   * This value is calculated using a valid `totalItems` prop passed to the parent `UNSTABLE__Pagination`.
+   * This value is calculated using a valid `totalItems` prop passed to the parent `Unstable_Pagination`.
    * Here, `totalItems` is used to set the `max` on the page input.
    */
   totalPages: PropTypes.number.isRequired,

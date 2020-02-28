@@ -67,7 +67,7 @@ PageSelector.propTypes = {
 
   /**
    * Total number of pages.
-   * This value is calculated using a valid `totalItems` prop passed to the parent `UNSTABLE__Pagination`.
+   * This value is calculated using a valid `totalItems` prop passed to the parent `Unstable_Pagination`.
    */
   totalPages: PropTypes.number.isRequired,
 };
