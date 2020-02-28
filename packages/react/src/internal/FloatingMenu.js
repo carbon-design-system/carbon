@@ -307,7 +307,7 @@ class FloatingMenu extends React.Component {
    */
   _focusMenuContent = menuBody => {
     const primaryFocusNode = menuBody.querySelector(
-      this.props.selectorPrimaryFocus
+      this.props.selectorPrimaryFocus || null
     );
     const tabbableNode = menuBody.querySelector(selectorTabbable);
     const focusableNode = menuBody.querySelector(selectorFocusable);
