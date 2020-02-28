@@ -8,7 +8,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { array, boolean, number, text, withKnobs } from '@storybook/addon-knobs';
+import {
+  array,
+  boolean,
+  number,
+  text,
+  withKnobs,
+} from '@storybook/addon-knobs';
 
 import Unstable_Pagination from './Pagination';
 import PageInput from './PageInput';
@@ -42,8 +48,7 @@ storiesOf('UNSTABLE Pagination', module)
       <Unstable_Pagination
         {...props()}
         totalItems={350}
-        pageSizes={array('Choices of `pageSize` (pageSizes)', [10, 20, 30])}
-      >
+        pageSizes={array('Choices of `pageSize` (pageSizes)', [10, 20, 30])}>
         {({ currentPage, onSetPage, totalPages }) => (
           <PageSelector
             currentPage={currentPage}
@@ -97,8 +102,7 @@ storiesOf('UNSTABLE Pagination', module)
       <Unstable_Pagination
         {...props()}
         totalItems={350}
-        pageSizes={array('Choices of `pageSize` (pageSizes)', [10, 20, 30])}
-      >
+        pageSizes={array('Choices of `pageSize` (pageSizes)', [10, 20, 30])}>
         {({ currentPage, onSetPage, totalPages }) => (
           <PageInput
             currentPage={currentPage}

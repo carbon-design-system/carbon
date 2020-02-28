@@ -7,14 +7,14 @@
 
 $css--helpers: true;
 
-@import "../../globals/scss/vars";
-@import "../../globals/scss/helper-mixins";
-@import "../../globals/scss/typography";
-@import "../../globals/scss/layout";
-@import "../../globals/scss/css--helpers";
-@import "../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once";
-@import "../number-input/number-input";
-@import "../select/select";
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/css--helpers';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../number-input/number-input';
+@import '../select/select';
 
 /// Unstable pagination styles
 /// @access private
@@ -22,7 +22,7 @@ $css--helpers: true;
 @mixin unstable_pagination {
   .#{$prefix}--unstable-pagination {
     @include reset;
-    @include carbon--type-style("body-short-01");
+    @include carbon--type-style('body-short-01');
     width: 100%;
     background-color: $ui-01;
     display: flex;
@@ -57,11 +57,13 @@ $css--helpers: true;
     height: 100%;
   }
 
-  .#{$prefix}--unstable-pagination__left .#{$prefix}--unstable-pagination__text {
+  .#{$prefix}--unstable-pagination__left
+    .#{$prefix}--unstable-pagination__text {
     margin-right: rem(1px);
   }
 
-  .#{$prefix}--unstable-pagination__right .#{$prefix}--unstable-pagination__text {
+  .#{$prefix}--unstable-pagination__right
+    .#{$prefix}--unstable-pagination__text {
     margin-right: $carbon--spacing-05;
     margin-left: rem(1px);
   }
@@ -136,20 +138,21 @@ $css--helpers: true;
 
   .#{$prefix}--unstable-pagination__page-selector .#{$prefix}--select-input,
   .#{$prefix}--unstable-pagination__page-sizer .#{$prefix}--select-input {
-    @include carbon--type-style("body-short-01");
+    @include carbon--type-style('body-short-01');
     width: auto;
     min-width: auto;
     height: 100%;
     padding: 0 $carbon--spacing-08 0 $carbon--spacing-05;
     margin-right: -0.65rem;
 
-    @include carbon--breakpoint("md") {
+    @include carbon--breakpoint('md') {
       padding-right: carbon--mini-units(4.5);
       margin-right: 0;
     }
   }
 
-  .#{$prefix}--unstable-pagination__page-selector .#{$prefix}--select__arrow:hover,
+  .#{$prefix}--unstable-pagination__page-selector
+    .#{$prefix}--select__arrow:hover,
   .#{$prefix}--unstable-pagination__page-sizer .#{$prefix}--select-input:hover {
     background: $hover-ui;
   }
@@ -159,7 +162,7 @@ $css--helpers: true;
     top: 50%;
     transform: translateY(-50%);
 
-    @include carbon--breakpoint("md") {
+    @include carbon--breakpoint('md') {
       right: $carbon--spacing-05;
     }
   }
@@ -178,7 +181,8 @@ $css--helpers: true;
     margin-right: $carbon--spacing-03;
   }
 
-  .#{$prefix}--unstable-pagination__page-input.#{$prefix}--number input[type="number"] {
+  .#{$prefix}--unstable-pagination__page-input.#{$prefix}--number
+    input[type='number'] {
     border: none;
     background-color: $ui-03;
   }

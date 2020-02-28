@@ -45,8 +45,7 @@ function PageSelector({
       inline
       labelText={labelText}
       value={currentPage}
-      {...other}
-    >
+      {...other}>
       {renderPages(totalPages)}
     </Select>
   );

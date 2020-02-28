@@ -59,8 +59,7 @@ function Unstable_Pagination({
             <label
               id={`${namespace}__page-sizer__counter-${id}`}
               className={`${namespace}__text`}
-              htmlFor={`${namespace}__page-sizer__input-${id}`}
-            >
+              htmlFor={`${namespace}__page-sizer__input-${id}`}>
               {itemsPerPageText}
             </label>
             <Select
@@ -71,8 +70,7 @@ function Unstable_Pagination({
               noLabel
               inline
               onChange={event => setCurrentPageSize(Number(event.target.value))}
-              value={currentPageSize}
-            >
+              value={currentPageSize}>
               {pageSizes.map(size => (
                 <SelectItem key={size} value={size} text={String(size)} />
               ))}
