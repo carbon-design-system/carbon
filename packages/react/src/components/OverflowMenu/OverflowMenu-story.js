@@ -26,6 +26,10 @@ const props = {
     iconDescription: text('Icon description (iconDescription)', ''),
     flipped: boolean('Flipped (flipped)', false),
     light: boolean('Light (light)', false),
+    selectorPrimaryFocus: text(
+      'Primary focus element selector (selectorPrimaryFocus)',
+      ''
+    ),
     onClick: action('onClick'),
     onFocus: action('onFocus'),
     onKeyDown: action('onKeyDown'),
