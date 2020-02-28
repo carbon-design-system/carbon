@@ -272,7 +272,6 @@ Check to see if the given breakpoint name
 - **Returns**: `Bool`
 - **Used by**:
   - [carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
-  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
 
 ### ✅carbon--largest-breakpoint-name [function]
 
@@ -391,12 +390,8 @@ Generate a media query for the maximum width of the given styles
   } @else if map-has-key($breakpoints, $name) {
     $breakpoint: map-get($breakpoints, $name);
     $width: map-get($breakpoint, width);
-    @if carbon--is-smallest-breakpoint($name, $breakpoints) {
+    @media (max-width: $width) {
       @content;
-    } @else {
-      @media (max-width: $width) {
-        @content;
-      }
     }
   } @else {
     @error 'Unable to find a breakpoint with name `#{$name}`. Expected one of: (#{map-keys($breakpoints)})';
@@ -414,8 +409,6 @@ Generate a media query for the maximum width of the given styles
 | `$breakpoints` | A map of breakpoints where the key is the name | `Map`              | `$carbon--grid-breakpoints` |
 
 - **Group**: [@carbon/layout](#carbonlayout)
-- **Requires**:
-  - [carbon--is-smallest-breakpoint [function]](#carbon--is-smallest-breakpoint-function)
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
 
