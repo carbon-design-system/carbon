@@ -146,9 +146,9 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
 
   /**
-   * Specify the size of the Text Input. Currently supports either `sm`, `lg` (default), or `xl` as an option.
+   * Specify the size of the Text Input. Currently supports either `sm` or `xl` as an option.
    */
-  size: PropTypes.oneOf(['sm', 'lg', 'xl']),
+  size: PropTypes.oneOf(['sm', 'xl']),
 
   /**
    * Specify the type of the <input>
@@ -195,7 +195,6 @@ TextInput.defaultProps = {
   invalidText: '',
   helperText: '',
   light: false,
-  size: 'lg',
 };
 
 export default TextInput;
