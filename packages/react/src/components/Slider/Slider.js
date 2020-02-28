@@ -11,6 +11,8 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import throttle from 'lodash.throttle';
 
+import * as keys from '../../internal/keyboard/keys';
+import { matches } from '../../internal/keyboard/match';
 import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
@@ -33,16 +35,6 @@ const DRAG_EVENT_TYPES = new Set(['mousemove', 'touchmove']);
  * Event types that trigger a "drag" to stop.
  */
 const DRAG_STOP_EVENT_TYPES = new Set(['mouseup', 'touchend', 'touchcancel']);
-
-/**
- * Constants used during keydown event processing.
- */
-const ARROW_KEYS = Object.freeze({
-  ArrowLeft: 37,
-  ArrowUp: 38,
-  ArrowRight: 39,
-  ArrowDown: 40,
-});
 
 export default class Slider extends PureComponent {
   static propTypes = {
@@ -331,18 +323,13 @@ export default class Slider extends PureComponent {
 
     const which = Number.parseInt(evt.which);
     let delta = 0;
-    switch (which) {
-      case ARROW_KEYS.ArrowDown:
-      case ARROW_KEYS.ArrowLeft:
-        delta = -this.props.step;
-        break;
-      case ARROW_KEYS.ArrowUp:
-      case ARROW_KEYS.ArrowRight:
-        delta = this.props.step;
-        break;
-      default:
-        // Ignore keys we don't want to handle
-        return;
+    if (matches(which, [keys.ArrowDown, keys.ArrowLeft])) {
+      delta = -this.props.step;
+    } else if (matches(which, [keys.ArrowUp, keys.ArrowRight])) {
+      delta = this.props.step;
+    } else {
+      // Ignore keys we don't want to handle
+      return;
     }
 
     // If shift was held, account for the stepMultiplier
