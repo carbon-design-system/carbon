@@ -21,7 +21,7 @@ const types = {
 
 const sizes = {
   'Extra large size (xl)': 'xl',
-  'Regular size (lg)': undefined,
+  'Default size': undefined,
   'Small size (sm)': 'sm',
 };
 
