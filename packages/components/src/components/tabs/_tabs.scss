@@ -257,8 +257,8 @@
       .#{$prefix}--tabs__nav-link,
       .#{$prefix}--tabs__nav-link:focus,
       .#{$prefix}--tabs__nav-link:active {
-        color: $text-01;
         @include type-style('productive-heading-01');
+        color: $text-01;
         border-bottom: 2px solid $interactive-01;
       }
     }
@@ -292,7 +292,8 @@
   //-----------------------------
   a.#{$prefix}--tabs__nav-link {
     @include focus-outline('reset');
-    display: inline-block;
+    display: inline-flex;
+    align-items: flex-end;
     color: $text-02;
     text-decoration: none;
     font-weight: 400;
@@ -310,10 +311,10 @@
 
     &:focus,
     &:active {
+      @include focus-outline('outline');
       width: 100%;
       margin: 0;
       padding-left: 16px;
-      @include focus-outline('outline');
     }
 
     @include carbon--breakpoint(md) {
