@@ -13353,9 +13353,13 @@ Checkbox styles
     position: relative;
     display: flex;
     cursor: pointer;
-    padding-left: rem(26px); //width of checkbox 16px + 10px of padding
     min-height: rem(24px);
     user-select: none;
+    padding-left: rem(20px);
+  }
+
+  .#{$prefix}--checkbox-label-text {
+    padding-left: rem(6px); // Add extra spacing when label is present
   }
 
   // Required because `$css--reset: true` cannot currently apply to this `::before` and `::after`
