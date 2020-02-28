@@ -29,7 +29,6 @@
 @mixin tooltip--content($tooltip-type: 'icon') {
   @include box-shadow;
   width: max-content;
-  max-width: rem(208px);
   height: auto;
   padding: if(
     $tooltip-type == 'definition',
