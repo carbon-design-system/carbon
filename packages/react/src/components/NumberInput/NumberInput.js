@@ -186,6 +186,7 @@ class NumberInput extends Component {
     this.isControlled = props.value !== undefined;
     if (useControlledStateWithValue && this.isControlled) {
       // Skips the logic of setting initial state if this component is controlled
+      this.state = {};
       return;
     }
     let value = useControlledStateWithValue ? props.defaultValue : props.value;
