@@ -26,7 +26,7 @@ function PageInput({
   totalPages,
   ...other
 }) {
-  const namespace = `${prefix}--pagination__page-input`;
+  const namespace = `${prefix}--unstable-pagination__page-input`;
   const instanceId = `${namespace}__input-${getInstanceId()}`;
 
   return (

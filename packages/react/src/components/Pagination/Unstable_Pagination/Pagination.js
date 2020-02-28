@@ -49,7 +49,7 @@ function Unstable_Pagination({
     setCurrentPage(Number(newPage));
   }
 
-  const namespace = `${prefix}--pagination`;
+  const namespace = `${prefix}--unstable-pagination`;
 
   return (
     <section className={classnames(namespace, className)} {...other}>

@@ -24,7 +24,7 @@ function PageSelector({
   totalPages,
   ...other
 }) {
-  const namespace = `${prefix}--pagination__page-selector`;
+  const namespace = `${prefix}--unstable-pagination__page-selector`;
   const instanceId = `${namespace}__select-${getInstanceId()}`;
 
   const renderPages = total => {
