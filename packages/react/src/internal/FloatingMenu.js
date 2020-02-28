@@ -330,7 +330,9 @@ class FloatingMenu extends React.Component {
     this._updateMenuSize(prevProps);
     const { onPlace } = this.props;
     if (this._placeInProgress && this.state.floatingPosition) {
-      this._focusMenuContent(this._menuBody);
+      if (this._menuBody && !this._menuBody.contains(document.activeElement)) {
+        this._focusMenuContent(this._menuBody);
+      }
       if (typeof onPlace === 'function') {
         onPlace(this._menuBody);
         this._placeInProgress = false;
