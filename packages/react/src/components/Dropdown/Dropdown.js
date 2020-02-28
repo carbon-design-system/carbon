@@ -107,7 +107,7 @@ export default class Dropdown extends React.Component {
     type: ListBoxPropTypes.ListBoxType,
 
     /**
-     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+     * Specify the size of the ListBox. Currently supports either `sm` or `xl` as an option.
      */
     size: ListBoxPropTypes.ListBoxSize,
 
