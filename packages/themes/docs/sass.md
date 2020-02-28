@@ -1850,7 +1850,6 @@ $carbon--theme--g100: map-merge(
     visited-link: #be95ff,
     disabled-01: #262626,
     disabled-02: #525252,
-    disabled-03: #6f6f6f,
     highlight: #002d9c,
     skeleton-01: #353535,
     skeleton-02: #393939,
