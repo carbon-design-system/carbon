@@ -28,7 +28,7 @@ const patterns = {
 
 const sizes = {
   'Extra large size (xl)': 'xl',
-  'Regular size (lg)': '',
+  'Regular size (lg)': undefined,
   'Small size (sm)': 'sm',
 };
 
@@ -42,7 +42,7 @@ const props = {
   datePickerInput: () => ({
     id: 'date-picker-input-id',
     className: 'some-class',
-    size: select('Field size (size)', sizes, '') || undefined,
+    size: select('Field size (size)', sizes, undefined) || undefined,
     labelText: text(
       'Label text (labelText in <DatePickerInput>)',
       'Date Picker label'
