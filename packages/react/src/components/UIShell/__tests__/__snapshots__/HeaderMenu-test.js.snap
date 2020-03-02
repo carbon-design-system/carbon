@@ -64,12 +64,14 @@ exports[`HeaderMenu should render 1`] = `
         >
           <li>
             <Link
+              aria-current={null}
               className="bx--header__menu-item"
               element="a"
               href="/a"
               tabIndex={0}
             >
               <a
+                aria-current={null}
                 className="bx--header__menu-item"
                 href="/a"
                 tabIndex={0}
@@ -89,12 +91,14 @@ exports[`HeaderMenu should render 1`] = `
         >
           <li>
             <Link
+              aria-current={null}
               className="bx--header__menu-item"
               element="a"
               href="/b"
               tabIndex={0}
             >
               <a
+                aria-current={null}
                 className="bx--header__menu-item"
                 href="/b"
                 tabIndex={0}
@@ -114,12 +118,14 @@ exports[`HeaderMenu should render 1`] = `
         >
           <li>
             <Link
+              aria-current={null}
               className="bx--header__menu-item"
               element="a"
               href="/c"
               tabIndex={0}
             >
               <a
+                aria-current={null}
                 className="bx--header__menu-item"
                 href="/c"
                 tabIndex={0}
