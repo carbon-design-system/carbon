@@ -13,13 +13,14 @@ import Link, { LinkPropTypes } from './Link';
 const { prefix } = settings;
 
 const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
-  { className, children, role, ...rest },
+  { className, isActive, children, role, ...rest },
   ref
 ) {
   return (
     <li className={className} role={role}>
       <Link
         {...rest}
+        aria-current={isActive ? 'page' : null}
         className={`${prefix}--header__menu-item`}
         ref={ref}
         tabIndex={0}>
@@ -52,6 +53,11 @@ HeaderMenuItem.propTypes = {
    * <ul> semantics for menus.
    */
   role: PropTypes.string,
+
+  /**
+   * Apply `aria-current='page'` to Link to apply selected styles
+   */
+  isActive: PropTypes.bool,
 };
 
 export default HeaderMenuItem;

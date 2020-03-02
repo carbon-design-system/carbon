@@ -27,7 +27,6 @@
     right: 0;
     height: mini-units(6);
     background-color: $shell-header-bg-01;
-    border-bottom: 1px solid $shell-header-border-01;
     z-index: z('header');
   }
 
@@ -217,6 +216,13 @@
   a.#{$prefix}--header__menu-item:active > svg,
   a.#{$prefix}--header__menu-item:focus > svg {
     fill: $shell-header-icon-01;
+  }
+
+  a.#{$prefix}--header__menu-item[aria-current='page'] {
+    color: $shell-header-text-01;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 3px solid $inverse-support-04;
   }
 
   .#{$prefix}--header__submenu {
