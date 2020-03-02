@@ -216,6 +216,28 @@ const sections = [
                   </div>
                 </div>
               </div>
+              <div className="bx--row bx--row-padding">
+                <div className="bx--col">
+                  <div className="outside">
+                    <div className="inside">1/4</div>
+                  </div>
+                </div>
+                <div className="bx--col">
+                  <div className="outside">
+                    <div className="inside">1/4</div>
+                  </div>
+                </div>
+                <div className="bx--col">
+                  <div className="outside">
+                    <div className="inside">1/4</div>
+                  </div>
+                </div>
+                <div className="bx--col">
+                  <div className="outside">
+                    <div className="inside">1/4</div>
+                  </div>
+                </div>
+              </div>
             </div>
           );
         },
