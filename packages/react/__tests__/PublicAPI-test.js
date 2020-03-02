@@ -137,7 +137,7 @@ test('Public API should only change with a semver change', () => {
 
     Object.keys(Component).forEach(key => {
       // There are a couple of properties on components that we don't believe
-      // are part of our API, such `_` prefixed variables, or capture details
+      // are part of our API, such as `_` prefixed variables, or capture details
       // that are internal to a library-specific piece of functionality. For
       // example, React's context functionality.
       if (key[0] === '_') {
