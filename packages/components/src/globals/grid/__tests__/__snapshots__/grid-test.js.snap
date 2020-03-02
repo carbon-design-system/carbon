@@ -119,10 +119,6 @@ em {
   padding-top: 0.0625rem;
   padding-bottom: 0.0625rem; }
 
-.bx--col-padding {
-  padding-top: 1rem;
-  padding-bottom: 1rem; }
-
 .bx--col {
   width: 100%;
   padding-right: 1rem;
