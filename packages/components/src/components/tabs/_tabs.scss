@@ -319,7 +319,7 @@
 
     @include carbon--breakpoint(md) {
       border-bottom: $tab-underline-color;
-      padding: $spacing-03 $spacing-05;
+      padding: $spacing-02 $spacing-05;
       width: rem(160px);
       margin: 0;
       line-height: inherit;
@@ -327,7 +327,7 @@
       &:focus,
       &:active {
         width: rem(160px);
-        padding: $spacing-03 $spacing-05;
+        padding: $spacing-02 $spacing-05;
         border-bottom: 2px;
       }
     }
