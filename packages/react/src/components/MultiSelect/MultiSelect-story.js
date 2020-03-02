@@ -53,7 +53,7 @@ const types = {
 
 const sizes = {
   'Extra large size (xl)': 'xl',
-  'Regular size (lg)': '',
+  'Default size': undefined,
   'Small size (sm)': 'sm',
 };
 
@@ -65,7 +65,7 @@ const props = () => ({
   light: boolean('Light variant (light)', false),
   useTitleInItem: boolean('Show tooltip on hover', false),
   type: select('UI type (Only for `<MultiSelect>`) (type)', types, 'default'),
-  size: select('Field size (size)', sizes, '') || undefined,
+  size: select('Field size (size)', sizes, undefined) || undefined,
   label: text('Label (label)', defaultLabel),
   invalid: boolean('Show form validation UI (invalid)', false),
   invalidText: text(
