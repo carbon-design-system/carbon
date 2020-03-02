@@ -17,7 +17,7 @@ import SelectSkeleton from '../Select/Select.Skeleton';
 
 const sizes = {
   'Extra large size (xl)': 'xl',
-  'Regular size (lg)': 'lg',
+  'Default size': undefined,
   'Small size (sm)': 'sm',
 };
 
@@ -29,7 +29,7 @@ const props = {
       'Put control in-line with label (inline in <Select>)',
       false
     ),
-    size: select('Field size (size)', sizes, 'lg'),
+    size: select('Field size (size)', sizes, undefined) || undefined,
     disabled: boolean('Disabled (disabled in <Select>)', false),
     hideLabel: boolean('No label (hideLabel in <Select>)', false),
     invalid: boolean('Show form validation UI (invalid in <Select>)', false),
