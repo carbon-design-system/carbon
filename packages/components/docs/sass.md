@@ -13353,9 +13353,13 @@ Checkbox styles
     position: relative;
     display: flex;
     cursor: pointer;
-    padding-left: rem(26px); //width of checkbox 16px + 10px of padding
     min-height: rem(24px);
     user-select: none;
+    padding-left: rem(20px);
+  }
+
+  .#{$prefix}--checkbox-label-text {
+    padding-left: rem(6px); // Add extra spacing when label is present
   }
 
   // Required because `$css--reset: true` cannot currently apply to this `::before` and `::after`
@@ -16062,6 +16066,15 @@ Date picker styles
       color: $text-05;
       opacity: 1;
     }
+  }
+
+  // Size variant styles
+  .#{$prefix}--date-picker__input--xl {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--date-picker__input--sm {
+    height: rem(32px);
   }
 
   .#{$prefix}--date-picker__icon {
@@ -19546,6 +19559,7 @@ Number input styles
     cursor: not-allowed;
     background-color: $disabled-background-color;
     color: $disabled;
+    border-bottom-color: transparent;
   }
 
   .#{$prefix}--number__input-wrapper {
@@ -19692,6 +19706,51 @@ Number input styles
         background-color: $ui-02;
       }
     }
+  }
+
+  // Size Variant styles
+  .#{$prefix}--number--xl input[type='number'] {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--number--xl .#{$prefix}--number__control-btn {
+    height: rem(24px);
+  }
+
+  .#{$prefix}--number--xl.#{$prefix}--number--mobile
+    .#{$prefix}--number__control-btn {
+    height: rem(48px);
+    width: rem(48px);
+  }
+
+  .#{$prefix}--number--xl .#{$prefix}--number__control-btn.up-icon svg {
+    top: rem(6.6px); // Needed to maintain arrow spacing between input sizes.
+  }
+
+  .#{$prefix}--number--xl .#{$prefix}--number__control-btn.down-icon svg {
+    top: rem(-6.6px); // Needed to maintain arrow spacing between input sizes.
+  }
+
+  .#{$prefix}--number--sm input[type='number'] {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--number--sm .#{$prefix}--number__control-btn {
+    height: rem(16px);
+  }
+
+  .#{$prefix}--number--sm.#{$prefix}--number--mobile
+    .#{$prefix}--number__control-btn {
+    height: rem(32px);
+    width: rem(32px);
+  }
+
+  .#{$prefix}--number--sm .#{$prefix}--number__control-btn.up-icon svg {
+    top: rem(3.4px); // Needed to maintain arrow spacing between input sizes.
+  }
+
+  .#{$prefix}--number--sm .#{$prefix}--number__control-btn.down-icon svg {
+    top: rem(-3.4px); // Needed to maintain arrow spacing between input sizes.
   }
 
   //No label positioning adjustment
