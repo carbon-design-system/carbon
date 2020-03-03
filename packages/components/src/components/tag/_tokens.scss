@@ -1,3 +1,6 @@
+@import '../../globals/scss/vars';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+
 @function themeIsDark() {
   @if global-variable-exists('carbon--theme') {
     @return $carbon--theme == $carbon--theme--g90 or $carbon--theme == $carbon--theme--g100;
