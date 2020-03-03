@@ -331,7 +331,7 @@ class Tooltip extends Component {
       evt.target &&
       this._tooltipEl &&
       this._tooltipEl.contains(evt.target);
-    if (!shouldPreventClose) {
+    if (!shouldPreventClose && this.state.open) {
       this._handleUserInputOpenClose(evt, { open: false });
     }
   };

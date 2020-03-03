@@ -139,13 +139,16 @@ class NumberInput extends Component {
      * `true` to use the mobile variant.
      */
     isMobile: PropTypes.bool,
+    /**
+     * Specify the size of the Number Input. Currently supports either `sm` or `xl` as an option.
+     */
+    size: PropTypes.oneOf(['sm', 'xl']),
   };
 
   static defaultProps = {
     disabled: false,
     hideLabel: false,
     iconDescription: 'choose a number',
-    label: ' ',
     step: 1,
     invalid: false,
     invalidText: 'Provide invalidText',
@@ -177,7 +180,7 @@ class NumberInput extends Component {
   }
 
   /**
-   * The DOM node refernce to the `<input>`.
+   * The DOM node reference to the `<input>`.
    * @type {HTMLInputElement}
    */
   _inputRef = null;
@@ -187,6 +190,7 @@ class NumberInput extends Component {
     this.isControlled = props.value !== undefined;
     if (useControlledStateWithValue && this.isControlled) {
       // Skips the logic of setting initial state if this component is controlled
+      this.state = {};
       return;
     }
     let value = useControlledStateWithValue ? props.defaultValue : props.value;
@@ -281,6 +285,7 @@ class NumberInput extends Component {
       innerRef: ref,
       translateWithId: t,
       isMobile,
+      size,
       ...other
     } = this.props;
 
@@ -292,6 +297,7 @@ class NumberInput extends Component {
         [`${prefix}--number--light`]: light,
         [`${prefix}--number--nolabel`]: hideLabel,
         [`${prefix}--number--mobile`]: isMobile,
+        [`${prefix}--number--${size}`]: size,
       }
     );
 

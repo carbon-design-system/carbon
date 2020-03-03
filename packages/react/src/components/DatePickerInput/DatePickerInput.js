@@ -30,6 +30,53 @@ export default class DatePickerInput extends Component {
      * control
      */
     labelText: PropTypes.node.isRequired,
+
+    /**
+     * Specify the size of the Date Picker Input. Currently supports either `sm` or `xl` as an option.
+     */
+    size: PropTypes.oneOf(['sm', 'xl']),
+
+    /**
+     * Provide a regular expression that the input value must match
+     */
+    pattern: (props, propName, componentName) => {
+      if (props[propName] === undefined) {
+        return;
+      }
+      try {
+        new RegExp(props[propName]);
+      } catch (e) {
+        return new Error(
+          `Invalid value of prop '${propName}' supplied to '${componentName}', it should be a valid regular expression`
+        );
+      }
+    },
+
+    /**
+     * Specify the type of the <input>
+     */
+    type: PropTypes.string,
+
+    /**
+     * Specify whether or not the input should be disabled
+     */
+    disabled: PropTypes.bool,
+
+    /**
+     * Specify whether or not the input should be invalid
+     */
+    invalid: PropTypes.bool,
+
+    /**
+     * Provide a function to be called when the input field is clicked
+     */
+    onClick: PropTypes.func,
+
+    /**
+     * Specify an `onChange` handler that is called whenever a change in the
+     * input field has occurred
+     */
+    onChange: PropTypes.func,
   };
 
   static defaultProps = {
@@ -57,6 +104,7 @@ export default class DatePickerInput extends Component {
       pattern,
       iconDescription,
       openCalendar,
+      size,
       ...other
     } = this.props;
 
@@ -80,6 +128,10 @@ export default class DatePickerInput extends Component {
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: disabled,
+    });
+
+    const inputClasses = classNames(`${prefix}--date-picker__input`, {
+      [`${prefix}--date-picker__input--${size}`]: size,
     });
 
     const datePickerIcon = (() => {
@@ -120,7 +172,7 @@ export default class DatePickerInput extends Component {
           this.input = input;
         }}
         data-invalid
-        className={`${prefix}--date-picker__input`}
+        className={inputClasses}
       />
     ) : (
       <input
@@ -130,7 +182,7 @@ export default class DatePickerInput extends Component {
         {...other}
         {...datePickerInputProps}
         disabled={disabled}
-        className={`${prefix}--date-picker__input`}
+        className={inputClasses}
       />
     );
 

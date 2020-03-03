@@ -187,6 +187,10 @@ export default class ComboBox extends React.Component {
     light: false,
   };
 
+  static getDerivedStateFromProps(nextProps, state) {
+    return { inputValue: getInputValue(nextProps, state) };
+  }
+
   constructor(props) {
     super(props);
 
@@ -197,12 +201,6 @@ export default class ComboBox extends React.Component {
     this.state = {
       inputValue: getInputValue(props, {}),
     };
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.setState(state => ({
-      inputValue: getInputValue(nextProps, state),
-    }));
   }
 
   filterItems = (items, itemToString, inputValue) =>

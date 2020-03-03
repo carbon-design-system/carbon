@@ -196,7 +196,7 @@ $list-box-menu-width: rem(300px);
 
   // Inline variant for a `list-box`
   .#{$prefix}--list-box.#{$prefix}--list-box--inline {
-    background-color: $ui-background;
+    background-color: transparent;
     border-width: 0;
 
     &:hover {
@@ -343,6 +343,9 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__selection {
     position: absolute;
     right: rem(33px); // to preserve .5rem space between icons according to spec
+    // top/transform used to center the combobox clear selection icon in IE11
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -355,6 +358,12 @@ $list-box-menu-width: rem(300px);
     &:focus {
       @include focus-outline('outline');
     }
+  }
+
+  // reset multiselect selection counter positioning
+  .#{$prefix}--list-box__selection--multi {
+    top: auto;
+    transform: none;
   }
 
   .#{$prefix}--list-box__selection > svg {
@@ -488,7 +497,7 @@ $list-box-menu-width: rem(300px);
     line-height: rem(16px);
     padding: rem(11px) 0;
     margin: 0 $carbon--spacing-05;
-    padding-right: rem(32px); // 40px - `$carbon--spacing-05`
+    padding-right: $carbon--spacing-06;
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
     border-top-color: $ui-03;
@@ -532,7 +541,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__menu-item__option {
-    margin: 0 rem(32px) 0 $carbon--spacing-03;
+    margin: 0 $carbon--spacing-03;
 
     &:focus {
       margin: 0;

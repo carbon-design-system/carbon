@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ChevronDownGlyph } from '@carbon/icons-react';
+import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
@@ -16,7 +16,7 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 const { prefix } = settings;
 
 const defaultRenderMenuContent = () => (
-  <ChevronDownGlyph className={`${prefix}--header__menu-arrow`} />
+  <ChevronDown16 className={`${prefix}--header__menu-arrow`} />
 );
 
 /**
@@ -57,6 +57,8 @@ class HeaderMenu extends React.Component {
     renderMenuContent: defaultRenderMenuContent,
   };
 
+  _subMenus = React.createRef();
+
   constructor(props) {
     super(props);
     this.state = {
@@ -73,7 +75,10 @@ class HeaderMenu extends React.Component {
    * Toggle the expanded state of the menu on click.
    */
   handleOnClick = e => {
-    e.preventDefault();
+    const { current: subMenusNode } = this._subMenus;
+    if (!subMenusNode || !subMenusNode.contains(e.target)) {
+      e.preventDefault();
+    }
 
     this.setState(prevState => ({
       expanded: !prevState.expanded,
@@ -108,10 +113,11 @@ class HeaderMenu extends React.Component {
     const itemTriggeredBlur = this.items.find(
       element => element === event.relatedTarget
     );
-
     if (
       event.relatedTarget &&
-      (event.relatedTarget.getAttribute('href') !== '#' || itemTriggeredBlur)
+      ((event.relatedTarget.getAttribute('href') &&
+        event.relatedTarget.getAttribute('href') !== '#') ||
+        itemTriggeredBlur)
     ) {
       return;
     }
@@ -198,7 +204,10 @@ class HeaderMenu extends React.Component {
           {menuLinkName}
           <MenuContent />
         </a>
-        <ul {...accessibilityLabel} className={`${prefix}--header__menu`}>
+        <ul
+          {...accessibilityLabel}
+          ref={this._subMenus}
+          className={`${prefix}--header__menu`}>
           {React.Children.map(children, this._renderMenuItem)}
         </ul>
       </li>

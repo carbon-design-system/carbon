@@ -261,18 +261,6 @@ export default class Pagination extends Component {
       }
     );
     const selectItems = this.renderSelectItems(totalPages);
-    const pageRange = (() => {
-      if (pageInputDisabled) {
-        return null;
-      }
-      return (
-        <span className={`${prefix}--pagination__text`}>
-          {pagesUnknown
-            ? pageText(statePage)
-            : pageRangeText(statePage, totalPages)}
-        </span>
-      );
-    })();
     return (
       <div className={classNames} {...other}>
         <div className={`${prefix}--pagination__left`}>
@@ -309,19 +297,22 @@ export default class Pagination extends Component {
           </span>
         </div>
         <div className={`${prefix}--pagination__right`}>
-          {pageInputDisabled ? null : (
-            <Select
-              id={`${prefix}-pagination-select-${inputId}-right`}
-              className={`${prefix}--select__page-number`}
-              labelText={`Page number, of ${totalPages} pages`}
-              inline
-              hideLabel
-              onChange={this.handlePageInputChange}
-              value={statePage}>
-              {selectItems}
-            </Select>
-          )}
-          {pageRange}
+          <Select
+            id={`${prefix}-pagination-select-${inputId}-right`}
+            className={`${prefix}--select__page-number`}
+            labelText={`Page number, of ${totalPages} pages`}
+            inline
+            hideLabel
+            onChange={this.handlePageInputChange}
+            value={statePage}
+            disabled={pageInputDisabled}>
+            {selectItems}
+          </Select>
+          <span className={`${prefix}--pagination__text`}>
+            {pagesUnknown
+              ? pageText(statePage)
+              : pageRangeText(statePage, totalPages)}
+          </span>
           <button
             type="button"
             className={backButtonClasses}

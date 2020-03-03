@@ -4,6 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import { adjustLightness } from './tools';
 
 import {
   // Blue
@@ -17,6 +18,7 @@ import {
   // Gray
   gray10,
   gray30,
+  gray40,
   gray50,
   gray60,
   gray70,
@@ -111,7 +113,7 @@ export const inverseHoverUI = '#e5e5e5';
 
 export const hoverSelectedUI = '#656565';
 
-export const hoverDanger = '#ba1b23';
+export const hoverDanger = adjustLightness(danger, -8);
 export const activeDanger = red80;
 
 export const hoverRow = '#4c4c4c';
@@ -120,7 +122,7 @@ export const visitedLink = purple40;
 
 export const disabled01 = gray80;
 export const disabled02 = gray60;
-export const disabled03 = gray50;
+export const disabled03 = gray40;
 
 export const highlight = blue70;
 
