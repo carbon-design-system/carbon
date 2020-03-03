@@ -27,6 +27,8 @@ describe('TextInput', () => {
     const textInput = () => wrapper.find('input');
 
     describe('input', () => {
+      let container;
+
       it('renders as expected', () => {
         expect(textInput().length).toBe(1);
       });
@@ -47,7 +49,12 @@ describe('TextInput', () => {
             );
           }
         }
-        const wrapper = mount(<MyComponent />);
+        container = document.createElement('div');
+        container.id = 'container';
+        document.body.appendChild(container);
+        const wrapper = mount(<MyComponent />, {
+          attachTo: document.querySelector('#container'),
+        });
         expect(document.activeElement.type).toBeUndefined();
         wrapper.instance().focus();
         expect(document.activeElement.type).toEqual('text');
@@ -90,6 +97,13 @@ describe('TextInput', () => {
         expect(textInput().props().placeholder).not.toBeDefined();
         wrapper.setProps({ placeholder: 'Enter text' });
         expect(textInput().props().placeholder).toEqual('Enter text');
+      });
+
+      afterEach(() => {
+        if (container && container.parentNode) {
+          container.parentNode.removeChild(container);
+        }
+        container = null;
       });
     });
 
