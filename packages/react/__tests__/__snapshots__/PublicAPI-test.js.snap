@@ -1936,6 +1936,15 @@ Map {
         "type": "func",
       },
       "pattern": [Function],
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "type": Object {
         "type": "string",
       },
