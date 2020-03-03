@@ -1386,7 +1386,6 @@
     - destroy
     - remove
   sizes:
-    - 16
     - 32
 - name: undo
   friendly_name: Undo
