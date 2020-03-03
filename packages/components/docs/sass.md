@@ -7449,8 +7449,8 @@ $hover-selected-ui: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [tabs [mixin]](#tabs-mixin)
 
 ### ✅inverse-hover-ui [variable]
@@ -15058,6 +15058,13 @@ Data table core styles
     ); //used to center svg without setting display flex //display block needed for overflow text truncation
   }
 
+  .#{$prefix}--data-table .#{$prefix}--overflow-menu,
+  .#{$prefix}--data-table .#{$prefix}--overflow-menu__trigger {
+    &:hover {
+      background-color: $hover-selected-ui;
+    }
+  }
+
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu,
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu__trigger {
     &:hover {
@@ -15395,6 +15402,7 @@ Data table core styles
   - [hover-field [variable]](#hover-field-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
 
@@ -19823,7 +19831,7 @@ Overflow menu styles
     }
 
     &:hover {
-      background-color: $hover-selected-ui;
+      background-color: $hover-ui;
     }
   }
 
@@ -20061,7 +20069,7 @@ Overflow menu styles
 - **Group**: [overflow-menu](#overflow-menu)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
@@ -20070,7 +20078,6 @@ Overflow menu styles
   - [text-02 [variable]](#text-02-variable)
   - [text-01 [variable]](#text-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
-  - [hover-ui [variable]](#hover-ui-variable)
   - [text-04 [variable]](#text-04-variable)
   - [support-01 [variable]](#support-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
