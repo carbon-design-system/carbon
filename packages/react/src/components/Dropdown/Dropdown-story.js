@@ -51,14 +51,14 @@ const types = {
 
 const sizes = {
   'Extra large size (xl)': 'xl',
-  'Regular size (lg)': '',
+  'Default size': undefined,
   'Small size (sm)': 'sm',
 };
 
 const props = () => ({
   id: text('Dropdown ID (id)', 'carbon-dropdown-example'),
   type: select('Dropdown type (type)', types, 'default'),
-  size: select('Field size (size)', sizes, '') || undefined,
+  size: select('Field size (size)', sizes, undefined) || undefined,
   label: text('Label (label)', 'Dropdown menu options'),
   ariaLabel: text('Aria Label (ariaLabel)', 'Dropdown'),
   disabled: boolean('Disabled (disabled)', false),

@@ -209,7 +209,7 @@ Select.propTypes = {
   noLabel: PropTypes.bool,
 
   /**
-   * Specify the size of the Text Input. Currently supports either `sm` or `xl` as an option.
+   * Specify the size of the Select Input. Currently supports either `sm` or `xl` as an option.
    */
   size: PropTypes.oneOf(['sm', 'xl']),
 };
@@ -222,7 +222,6 @@ Select.defaultProps = {
   invalidText: '',
   helperText: '',
   light: false,
-  size: '',
 };
 
 export default Select;
