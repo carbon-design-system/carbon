@@ -292,16 +292,16 @@
 
   .#{$prefix}--modal-footer {
     display: flex;
+    justify-content: flex-end;
     margin-top: auto;
     height: 4rem;
-    background-color: $modal-footer-background-color;
 
     grid-row: -1/-1;
     grid-column: 1/-1;
 
     button.#{$prefix}--btn {
       max-width: none;
-      flex: 1;
+      flex: 0 1 50%;
       height: 4rem;
       margin: 0;
       padding-top: $spacing-05;
