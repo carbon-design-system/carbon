@@ -46,7 +46,7 @@ const Tag = ({
     onClose(event);
   };
   return filter ? (
-    <button
+    <div
       className={tagClasses}
       aria-label={
         title !== undefined
@@ -58,8 +58,10 @@ const Tag = ({
       <span className={`${prefix}--tag__label`}>
         {children !== null && children !== undefined ? children : TYPES[type]}
       </span>
-      <Close16 onClick={handleClose} />
-    </button>
+      <button className={`${prefix}--tag__close-icon`} onClick={handleClose}>
+        <Close16 />
+      </button>
+    </div>
   ) : (
     <span className={tagClasses} {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
