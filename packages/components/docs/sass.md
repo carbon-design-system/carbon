@@ -5989,7 +5989,6 @@ $interactive-01: if(
   - [date-picker [mixin]](#date-picker-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
-  - [tabs [mixin]](#tabs-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
@@ -22070,16 +22069,12 @@ Tabs styles
 
     @include carbon--breakpoint(md) {
       display: flex;
-      .#{$prefix}--tabs__nav-link {
-        color: $text-01;
-        @include type-style('productive-heading-01');
-        border-bottom: 3px solid $interactive-01;
-      }
-
+      .#{$prefix}--tabs__nav-link,
       .#{$prefix}--tabs__nav-link:focus,
       .#{$prefix}--tabs__nav-link:active {
+        @include type-style('productive-heading-01');
         color: $text-01;
-        border-bottom: 2px solid $interactive-01;
+        border-bottom: 2px solid $interactive-04;
       }
     }
   }
@@ -22112,7 +22107,8 @@ Tabs styles
   //-----------------------------
   a.#{$prefix}--tabs__nav-link {
     @include focus-outline('reset');
-    display: inline-block;
+    display: inline-flex;
+    align-items: flex-end;
     color: $text-02;
     text-decoration: none;
     font-weight: 400;
@@ -22130,10 +22126,10 @@ Tabs styles
 
     &:focus,
     &:active {
+      @include focus-outline('outline');
       width: 100%;
       margin: 0;
       padding-left: 16px;
-      @include focus-outline('outline');
     }
 
     @include carbon--breakpoint(md) {
@@ -22270,9 +22266,8 @@ Tabs styles
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
-  - [interactive-01 [variable]](#interactive-01-variable)
-  - [spacing-03 [variable]](#spacing-03-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
   - [text-02 [variable]](#text-02-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
