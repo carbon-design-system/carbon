@@ -16068,6 +16068,15 @@ Date picker styles
     }
   }
 
+  // Size variant styles
+  .#{$prefix}--date-picker__input--xl {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--date-picker__input--sm {
+    height: rem(32px);
+  }
+
   .#{$prefix}--date-picker__icon {
     position: absolute;
     right: 1rem;
