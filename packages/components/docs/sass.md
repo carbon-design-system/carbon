@@ -21604,7 +21604,6 @@ Slider styles
   .#{$prefix}-slider-text-input {
     width: rem(64px);
     height: rem(40px);
-    padding: 0;
     text-align: center;
     -moz-appearance: textfield;
 
