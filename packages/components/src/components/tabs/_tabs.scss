@@ -259,7 +259,7 @@
       .#{$prefix}--tabs__nav-link:active {
         @include type-style('productive-heading-01');
         color: $text-01;
-        border-bottom: 2px solid $interactive-01;
+        border-bottom: 2px solid $interactive-04;
       }
     }
   }
