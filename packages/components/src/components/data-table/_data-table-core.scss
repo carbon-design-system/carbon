@@ -226,6 +226,13 @@
     ); //used to center svg without setting display flex //display block needed for overflow text truncation
   }
 
+  .#{$prefix}--data-table .#{$prefix}--overflow-menu,
+  .#{$prefix}--data-table .#{$prefix}--overflow-menu__trigger {
+    &:hover {
+      background-color: $hover-selected-ui;
+    }
+  }
+
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu,
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu__trigger {
     &:hover {
