@@ -337,12 +337,12 @@ $structured-list-text-transform: none !default;
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-color: 3px solid $ui-03 !default;
+$tab-underline-color: 2px solid $ui-03 !default;
 
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-color-hover: 3px solid $ui-04 !default;
+$tab-underline-color-hover: 2px solid $ui-04 !default;
 
 /// @type Color
 /// @access public
@@ -352,7 +352,7 @@ $tab-text-disabled: $disabled-02 !default;
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-disabled: 3px solid $disabled-01 !default;
+$tab-underline-disabled: 2px solid $disabled-01 !default;
 
 // Skeleton Loading
 
