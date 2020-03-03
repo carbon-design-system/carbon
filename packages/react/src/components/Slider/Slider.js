@@ -9,6 +9,10 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import throttle from 'lodash.throttle';
+
+import * as keys from '../../internal/keyboard/keys';
+import { matches } from '../../internal/keyboard/match';
 import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
@@ -16,6 +20,21 @@ const { prefix } = settings;
 const defaultFormatLabel = (value, label) => {
   return typeof label === 'function' ? label(value) : `${value}${label}`;
 };
+
+/**
+ * Minimum time between processed "drag" events.
+ */
+const EVENT_THROTTLE = 16; // ms
+
+/**
+ * Event types that trigger "drags".
+ */
+const DRAG_EVENT_TYPES = new Set(['mousemove', 'touchmove']);
+
+/**
+ * Event types that trigger a "drag" to stop.
+ */
+const DRAG_STOP_EVENT_TYPES = new Set(['mouseup', 'touchend', 'touchcancel']);
 
 export default class Slider extends PureComponent {
   static propTypes = {
@@ -143,221 +162,273 @@ export default class Slider extends PureComponent {
   };
 
   state = {
-    dragging: false,
-    holding: false,
     value: this.props.value,
     left: 0,
+    needsOnRelease: false,
   };
 
-  static getDerivedStateFromProps({ value, min, max }, state) {
-    const { value: currentValue, prevValue, prevMin, prevMax } = state;
-    if (prevValue === value && prevMin === min && prevMax === max) {
-      return null;
-    }
-    const effectiveValue = Math.min(
-      Math.max(prevValue === value ? currentValue : value, min),
-      max
-    );
-    return {
-      value: effectiveValue,
-      left: ((effectiveValue - min) / (max - min)) * 100,
-      prevValue: value,
-      prevMin: min,
-      prevMax: max,
-    };
+  /**
+   * Sets up initial slider position and value in response to component mount.
+   */
+  componentDidMount() {
+    const { value, left } = this.calcValue({});
+    this.setState({ value, left });
   }
 
-  updatePosition = evt => {
-    if (evt && this.props.disabled) {
-      return;
-    }
-
-    if (evt && evt.dispatchConfig) {
-      evt.persist();
-    }
-
-    if (this.state.dragging) {
-      return;
-    }
-    this.setState({ dragging: true });
-
-    this.handleDrag();
-
-    requestAnimationFrame(() => {
-      this.setState((prevState, props) => {
-        // Note: In FF, `evt.target` of `mousemove` event can be `HTMLDocument` which doesn't have `classList`.
-        // One example is dragging out of browser viewport.
-        const fromInput =
-          evt &&
-          evt.target &&
-          evt.target.classList &&
-          evt.target.classList.contains('bx-slider-text-input');
-        const { left, newValue: newSliderValue } = this.calcValue(
-          evt,
-          prevState,
-          props
-        );
-        const newValue = fromInput ? Number(evt.target.value) : newSliderValue;
-        if (prevState.left === left && prevState.value === newValue) {
-          return { dragging: false };
-        }
-        if (typeof props.onChange === 'function') {
-          props.onChange({ value: newValue });
-        }
-        return {
-          dragging: false,
-          left,
-          value: newValue,
-        };
-      });
-    });
-  };
-
-  calcValue = (evt, prevState, props) => {
-    const { min, max, step, stepMuliplier, stepMultiplier } = props;
-
-    const { value } = prevState;
-
-    const range = max - min;
-    const valuePercentage = ((value - min) / range) * 100;
-
-    let left;
-    let newValue;
-    left = valuePercentage;
-    newValue = value;
-
-    if (evt) {
-      const { type } = evt;
-
-      if (type === 'keydown') {
-        const direction = {
-          40: -1, // decreasing
-          37: -1, // decreasing
-          38: 1, // increasing
-          39: 1, // increasing
-        }[evt.which];
-
-        const multiplyStep = stepMuliplier || stepMultiplier;
-
-        if (direction !== undefined) {
-          const multiplier =
-            evt.shiftKey === true ? range / step / multiplyStep : 1;
-          const stepMultiplied = step * multiplier;
-          const stepSize = (stepMultiplied / range) * 100;
-          left = valuePercentage + stepSize * direction;
-          newValue = Number(value) + stepMultiplied * direction;
-        }
-      }
-      if (type === 'mousemove' || type === 'click' || type === 'touchmove') {
-        const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
-        const track = this.track.getBoundingClientRect();
-        const ratio = (clientX - track.left) / track.width;
-        const rounded = min + Math.round((range * ratio) / step) * step;
-        left = ((rounded - min) / range) * 100;
-        newValue = rounded;
-      }
-    }
-
-    if (newValue <= Number(min)) {
-      left = 0;
-      newValue = min;
-    }
-    if (newValue >= Number(max)) {
-      left = 100;
-      newValue = max;
-    }
-
-    return { left, newValue };
-  };
-
-  handleMouseStart = () => {
-    this.setState({
-      holding: true,
-    });
-
-    this.element.ownerDocument.addEventListener(
-      'mousemove',
-      this.updatePosition
-    );
-    this.element.ownerDocument.addEventListener('mouseup', this.handleMouseEnd);
-  };
-
-  handleMouseEnd = () => {
-    this.setState(
-      {
-        holding: false,
-      },
-      this.updatePosition
-    );
-
-    this.element.ownerDocument.removeEventListener(
-      'mousemove',
-      this.updatePosition
-    );
-    this.element.ownerDocument.removeEventListener(
-      'mouseup',
-      this.handleMouseEnd
-    );
-  };
-
-  handleTouchStart = () => {
-    this.setState({
-      holding: true,
-    });
-    this.element.ownerDocument.addEventListener(
-      'touchmove',
-      this.updatePosition
-    );
-    this.element.ownerDocument.addEventListener('touchup', this.handleTouchEnd);
-    this.element.ownerDocument.addEventListener(
-      'touchend',
-      this.handleTouchEnd
-    );
-    this.element.ownerDocument.addEventListener(
-      'touchcancel',
-      this.handleTouchEnd
-    );
-  };
-
-  handleTouchEnd = () => {
-    this.setState(
-      {
-        holding: false,
-      },
-      this.updatePosition
-    );
-
-    this.element.ownerDocument.removeEventListener(
-      'touchmove',
-      this.updatePosition
-    );
-    this.element.ownerDocument.removeEventListener(
-      'touchup',
-      this.handleTouchEnd
-    );
-    this.element.ownerDocument.removeEventListener(
-      'touchend',
-      this.handleTouchEnd
-    );
-    this.element.ownerDocument.removeEventListener(
-      'touchcancel',
-      this.handleTouchEnd
-    );
-  };
-
-  handleChange = evt => {
-    this.setState({ value: evt.target.value });
-    this.updatePosition(evt);
-  };
-
-  handleDrag = () => {
+  /**
+   * Handles firing of `onChange` and `onRelease` callbacks to parent in
+   * response to state changes.
+   *
+   * @param {*} _ Unused (prevProps)
+   * @param {*} prevState The previous Slider state, used to see if callbacks
+   * should be called.
+   */
+  componentDidUpdate(_, prevState) {
+    // Fire onChange event handler if present, if there's a usable value, and
+    // if the value is different from the last one
     if (
-      typeof this.props.onRelease === 'function' &&
-      !this.props.disabled &&
-      !this.state.holding
+      this.state.value !== '' &&
+      prevState.value !== this.state.value &&
+      typeof this.props.onChange === 'function'
+    ) {
+      this.props.onChange({ value: this.state.value });
+    }
+
+    // Fire onRelease event handler if present and if needed
+    if (
+      this.state.needsOnRelease &&
+      typeof this.props.onRelease === 'function'
     ) {
       this.props.onRelease({ value: this.state.value });
+      // Reset the flag
+      this.setState({ needsOnRelease: false });
     }
+  }
+
+  /**
+   * Synonymous to ECMA2017+ `Math.clamp`.
+   *
+   * @param {number} val
+   * @param {number} min
+   * @param {number} max
+   *
+   * @returns `val` if `max>=val>=min`; `min` if `val<min`; `max` if `val>max`.
+   */
+  clamp(val, min, max) {
+    return Math.max(min, Math.min(val, max));
+  }
+
+  /**
+   * Sets up "drag" event handlers and calls `this.onDrag` in case dragging
+   * started on somewhere other than the thumb without a corresponding "move"
+   * event.
+   *
+   * @param {Event} evt The event.
+   */
+  onDragStart = evt => {
+    // Do nothing if component is disabled
+    if (this.props.disabled) {
+      return;
+    }
+
+    // Register drag stop handlers
+    DRAG_STOP_EVENT_TYPES.forEach(element => {
+      this.element.ownerDocument.addEventListener(element, this.onDragStop);
+    });
+
+    // Register drag handlers
+    DRAG_EVENT_TYPES.forEach(element => {
+      this.element.ownerDocument.addEventListener(element, this.onDrag);
+    });
+
+    // Perform first recalculation since we probably didn't click exactly in the
+    // middle of the thumb
+    this.onDrag(evt);
+  };
+
+  /**
+   * Unregisters "drag" and "drag stop" event handlers and calls sets the flag
+   * inidicating that the `onRelease` callback should be called.
+   */
+  onDragStop = () => {
+    // Do nothing if component is disabled
+    if (this.props.disabled) {
+      return;
+    }
+
+    // Remove drag stop handlers
+    DRAG_STOP_EVENT_TYPES.forEach(element => {
+      this.element.ownerDocument.removeEventListener(element, this.onDragStop);
+    });
+
+    // Remove drag handlers
+    DRAG_EVENT_TYPES.forEach(element => {
+      this.element.ownerDocument.removeEventListener(element, this.onDrag);
+    });
+
+    // Set needsOnRelease flag so event fires on next update
+    this.setState({ needsOnRelease: true });
+  };
+
+  /**
+   * Handles a "drag" event by recalculating the value/thumb and setting state
+   * accordingly.
+   *
+   * @param {Event} evt The event.
+   */
+  _onDrag = evt => {
+    // Do nothing if component is disabled or we have no event
+    if (this.props.disabled || !evt) {
+      return;
+    }
+
+    let clientX;
+    if ('clientX' in evt) {
+      clientX = evt.clientX;
+    } else if (
+      'touches' in evt &&
+      0 in evt.touches &&
+      'clientX' in evt.touches[0]
+    ) {
+      clientX = evt.touches[0].clientX;
+    } else {
+      // Do nothing if we have no valid clientX
+      return;
+    }
+
+    const { value, left } = this.calcValue({ clientX });
+    this.setState({ value, left });
+  };
+
+  /**
+   * Throttles calls to `this._onDrag` by limiting events to being processed at
+   * most once every `EVENT_THROTTLE` milliseconds.
+   */
+  onDrag = throttle(this._onDrag, EVENT_THROTTLE, {
+    leading: true,
+    trailing: false,
+  });
+
+  /**
+   * Handles a `keydown` event by recalculating the value/thumb and setting
+   * state accordingly.
+   *
+   * @param {Event} evt The event.
+   */
+  onKeyDown = evt => {
+    // Do nothing if component is disabled or we don't have a valid event
+    if (this.props.disabled || !('which' in evt)) {
+      return;
+    }
+
+    const which = Number.parseInt(evt.which);
+    let delta = 0;
+    if (matches(which, [keys.ArrowDown, keys.ArrowLeft])) {
+      delta = -this.props.step;
+    } else if (matches(which, [keys.ArrowUp, keys.ArrowRight])) {
+      delta = this.props.step;
+    } else {
+      // Ignore keys we don't want to handle
+      return;
+    }
+
+    // If shift was held, account for the stepMultiplier
+    if (evt.shiftKey) {
+      const stepMultiplier =
+        this.props.stepMultiplier || this.props.stepMuliplier;
+      delta *= stepMultiplier;
+    }
+
+    const { value, left } = this.calcValue({
+      value: this.state.value + delta,
+    });
+    this.setState({ value, left });
+  };
+
+  /**
+   * Provides the two-way binding for the input field of the Slider. It also
+   * Handles a change to the input field by recalculating the value/thumb and
+   * setting state accordingly.
+   *
+   * @param {Event} evt The event.
+   */
+  onChange = evt => {
+    // Do nothing if component is disabled
+    if (this.props.disabled) {
+      return;
+    }
+
+    // Do nothing if we have no valid event, target, or value
+    if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
+      return;
+    }
+
+    let targetValue = Number.parseFloat(evt.target.value);
+
+    // Avoid calling calcValue for invaid numbers, but still update the state
+    if (isNaN(targetValue)) {
+      this.setState({ value: evt.target.value });
+    } else {
+      targetValue = this.clamp(targetValue, this.props.min, this.props.max);
+
+      // Recalculate the state's value and update the Slider
+      const { value, left } = this.calcValue({ value: targetValue });
+      this.setState({ value, left, needsOnRelease: true });
+    }
+  };
+
+  /**
+   * Calculates a new Slider `value` and `left` (thumb offset) given a `clientX`,
+   * `value`, or neither of those.
+   * - If `clientX` is specified, it will be used in
+   *   conjunction with the Slider's bounding rectangle to calculate the new
+   *   values.
+   * - If `clientX` is not specified and `value` is, it will be used to
+   *   calculate new values as though it were the current value of the Slider.
+   * - If neither `clientX` nor `value` are specified, `this.props.value` will
+   *   be used to calculate the new values as though it were the current value
+   *   of the Slider.
+   *
+   * @param {object} params
+   * @param {number} [params.clientX] Optional clientX value expected to be from
+   *   an event fired by one of the Slider's `DRAG_EVENT_TYPES` events.
+   * @param {number} [params.value] Optional value use during calculations if
+   *   clientX is not provided.
+   */
+  calcValue = ({ clientX = null, value = null }) => {
+    const range = this.props.max - this.props.min;
+    const boundingRect = this.element.getBoundingClientRect();
+    const totalSteps = range / this.props.step;
+    let width = boundingRect.right - boundingRect.left;
+
+    // Enforce a minimum width of at least 1 for calculations
+    if (width <= 0) {
+      width = 1;
+    }
+
+    // If a clientX is specified, use it to calculate the leftPercent. If not,
+    // use the provided value or state's value to calculate it instead.
+    let leftPercent;
+    if (clientX != null) {
+      const leftOffset = clientX - boundingRect.left;
+      leftPercent = leftOffset / width;
+    } else {
+      if (value == null) {
+        value = this.state.value;
+      }
+      leftPercent = value / (range - this.props.min);
+    }
+
+    let steppedValue = Math.round(leftPercent * totalSteps) * this.props.step;
+    let steppedPercent = this.clamp(steppedValue / range, 0, 1);
+
+    steppedValue = this.clamp(
+      steppedValue + this.props.min,
+      this.props.min,
+      this.props.max
+    );
+
+    return { value: steppedValue, left: steppedPercent * 100 };
   };
 
   render() {
@@ -416,6 +487,9 @@ export default class Slider extends PureComponent {
     const thumbStyle = {
       left: `${left}%`,
     };
+    const hiddenInputStyle = {
+      display: 'none',
+    };
 
     return (
       <div className={`${prefix}--form-item`}>
@@ -431,8 +505,9 @@ export default class Slider extends PureComponent {
             ref={node => {
               this.element = node;
             }}
-            onClick={this.updatePosition}
-            onKeyPress={this.updatePosition}
+            onMouseDown={this.onDragStart}
+            onTouchStart={this.onDragStart}
+            onKeyDown={this.onKeyDown}
             role="presentation"
             tabIndex={-1}
             {...other}>
@@ -445,9 +520,6 @@ export default class Slider extends PureComponent {
               aria-valuemin={min}
               aria-valuenow={value}
               style={thumbStyle}
-              onMouseDown={this.handleMouseStart}
-              onTouchStart={this.handleTouchStart}
-              onKeyDown={this.updatePosition}
             />
             <div
               className={`${prefix}--slider__track`}
@@ -459,32 +531,25 @@ export default class Slider extends PureComponent {
               className={`${prefix}--slider__filled-track`}
               style={filledTrackStyle}
             />
-            <input
-              className={`${prefix}--slider__input`}
-              type="hidden"
-              name={name}
-              value={value}
-              required={required}
-              min={min}
-              max={max}
-              step={step}
-              onChange={this.handleChange}
-            />
           </div>
           <span className={`${prefix}--slider__range-label`}>
             {formatLabel(max, maxLabel)}
           </span>
-          {!hideTextInput && (
-            <input
-              type={inputType}
-              id={`${id}-input-for-slider`}
-              className={inputClasses}
-              value={value}
-              onChange={this.handleChange}
-              aria-label={ariaLabelInput}
-              disabled={disabled}
-            />
-          )}
+          <input
+            type={hideTextInput ? 'hidden' : inputType}
+            style={hideTextInput ? hiddenInputStyle : null}
+            id={`${id}-input-for-slider`}
+            name={name}
+            className={inputClasses}
+            value={value}
+            aria-label={ariaLabelInput}
+            disabled={disabled}
+            required={required}
+            min={min}
+            max={max}
+            step={step}
+            onChange={this.onChange}
+          />
         </div>
       </div>
     );
