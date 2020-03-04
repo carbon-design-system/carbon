@@ -24556,7 +24556,8 @@ UI shell header
     fill: $shell-header-icon-01;
   }
 
-  a.#{$prefix}--header__menu-item[aria-current='page'] {
+  a.#{$prefix}--header__menu-item[aria-current='page'],
+  a.#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current {
     color: $shell-header-text-01;
     border-left: 0;
     border-right: 0;

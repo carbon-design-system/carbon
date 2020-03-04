@@ -10,13 +10,11 @@ exports[`HeaderMenuItem should render 1`] = `
     role="none"
   >
     <Link
-      aria-current={null}
       className="bx--header__menu-item"
       element="a"
       tabIndex={0}
     >
       <a
-        aria-current={null}
         className="bx--header__menu-item"
         tabIndex={0}
       >

@@ -167,7 +167,7 @@ storiesOf('UI Shell', module)
                 [Platform]
               </HeaderName>
               <HeaderNavigation aria-label="IBM [Platform]">
-                <HeaderMenuItem isActive="true" href="#">
+                <HeaderMenuItem isCurrentPage="true" href="#">
                   Link 1
                 </HeaderMenuItem>
                 <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
