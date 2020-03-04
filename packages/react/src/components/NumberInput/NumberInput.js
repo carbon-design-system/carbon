@@ -139,6 +139,10 @@ class NumberInput extends Component {
      * `true` to use the mobile variant.
      */
     isMobile: PropTypes.bool,
+    /**
+     * Specify the size of the Number Input. Currently supports either `sm` or `xl` as an option.
+     */
+    size: PropTypes.oneOf(['sm', 'xl']),
   };
 
   static defaultProps = {
@@ -176,7 +180,7 @@ class NumberInput extends Component {
   }
 
   /**
-   * The DOM node refernce to the `<input>`.
+   * The DOM node reference to the `<input>`.
    * @type {HTMLInputElement}
    */
   _inputRef = null;
@@ -281,6 +285,7 @@ class NumberInput extends Component {
       innerRef: ref,
       translateWithId: t,
       isMobile,
+      size,
       ...other
     } = this.props;
 
@@ -292,6 +297,7 @@ class NumberInput extends Component {
         [`${prefix}--number--light`]: light,
         [`${prefix}--number--nolabel`]: hideLabel,
         [`${prefix}--number--mobile`]: isMobile,
+        [`${prefix}--number--${size}`]: size,
       }
     );
 
