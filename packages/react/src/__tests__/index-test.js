@@ -89,6 +89,8 @@ describe('Carbon Components React', () => {
         "OrderedList",
         "OverflowMenu",
         "OverflowMenuItem",
+        "PageInput",
+        "PageSelector",
         "Pagination",
         "PrimaryButton",
         "ProgressIndicator",
@@ -188,6 +190,7 @@ describe('Carbon Components React', () => {
         "TooltipDefinition",
         "TooltipIcon",
         "UnorderedList",
+        "Unstable_Pagination",
       ]
     `);
   });
