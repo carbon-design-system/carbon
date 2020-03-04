@@ -55,7 +55,7 @@ async function search(directory) {
     const dirname = path.dirname(filepath);
     const prefix = path
       .relative(directory, dirname)
-      .split('/')
+      .split(path.sep)
       .filter(Boolean);
     return {
       ...file,
