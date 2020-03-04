@@ -26,6 +26,12 @@ const patterns = {
   'Regular (d{1,2}/d{1,2}/d{4})': '\\d{1,2}/\\d{1,2}/\\d{4}',
 };
 
+const sizes = {
+  'Extra large size (xl)': 'xl',
+  'Default size': undefined,
+  'Small size (sm)': 'sm',
+};
+
 const props = {
   datePicker: () => ({
     id: 'date-picker',
@@ -36,6 +42,7 @@ const props = {
   datePickerInput: () => ({
     id: 'date-picker-input-id',
     className: 'some-class',
+    size: select('Field size (size)', sizes, undefined) || undefined,
     labelText: text(
       'Label text (labelText in <DatePickerInput>)',
       'Date Picker label'
