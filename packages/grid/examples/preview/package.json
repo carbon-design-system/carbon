@@ -8,7 +8,7 @@
     "develop": "parcel index.html --no-cache"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.10.0-beta.1"
+    "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
