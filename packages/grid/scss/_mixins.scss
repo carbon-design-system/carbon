@@ -219,16 +219,7 @@ $carbon--aspect-ratios: (
   (1, 1)
 );
 
-/// Outputs the height value needed based on an aspect ratio
-/// @param {Number} $width width from an aspect ratio
-/// @param {Number} $height height from an aspect ratio
-/// @access private
-/// @group @carbon/grid
-@function carbon--aspect-ratio($width, $height) {
-  @return percentage($height / $width);
-}
-
-/// Lays down the common CSS for an aspect ratio
+/// Generates the CSS classname utilities for the aspect ratios
 ///
 /// CSS Tricks article on aspect ratios and all the different ways it can be done.
 /// https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
@@ -236,20 +227,16 @@ $carbon--aspect-ratios: (
 /// That article references an earlier article on the topic.
 /// https://keithjgrant.com/posts/2017/03/aspect-ratios/
 ///
+/// @param {Number} $width width from an aspect ratio
+/// @param {Number} $height height from an aspect ratio
 /// @access private
 /// @group @carbon/grid
-@mixin carbon--make-aspect-ratio-ready() {
-  position: relative;
-
-  &--object {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+@mixin carbon--make-aspect-ratios($aspect-ratios: $carbon--aspect-ratios) {
+  .#{$prefix}--aspect-ratio {
+    position: relative;
   }
 
-  &::before {
+  .#{$prefix}--aspect-ratio::before {
     content: '';
     width: 1px;
     margin-left: -1px;
@@ -257,48 +244,28 @@ $carbon--aspect-ratios: (
     height: 0;
   }
 
-  &::after {
+  .#{$prefix}--aspect-ratio::after {
     content: '';
     display: table;
     clear: both;
   }
-}
 
-/// Sets the height for a given aspect ratio
-///
-/// CSS Tricks article on aspect ratios and all the different ways it can be done.
-/// https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
-///
-/// That article references an earlier article on the topic.
-/// https://keithjgrant.com/posts/2017/03/aspect-ratios/
-///
-/// @param {Number} $width width from an aspect ratio
-/// @param {Number} $height height from an aspect ratio
-/// @access private
-/// @group @carbon/grid
-@mixin carbon--make-aspect-ratio($width, $height) {
-  &::before {
-    padding-top: carbon--aspect-ratio($width, $height);
-  }
-}
+  @each $aspect-ratio in $aspect-ratios {
+    $width: nth($aspect-ratio, 1);
+    $height: nth($aspect-ratio, 2);
 
-/// Generates the CSS classnames for each aspect ratio
-/// @param {Number} $width width from an aspect ratio
-/// @param {Number} $height height from an aspect ratio
-/// @access private
-/// @group @carbon/grid
-@mixin carbon--make-aspect-ratios($aspect-ratios: $carbon--aspect-ratios) {
-  .#{$prefix}--aspect-ratio {
-    @include carbon--make-aspect-ratio-ready;
-
-    @each $aspect-ratio in $aspect-ratios {
-      $width: nth($aspect-ratio, 1);
-      $height: nth($aspect-ratio, 2);
-
-      &--#{$width}x#{$height} {
-        @include carbon--make-aspect-ratio($width, $height);
-      }
+    .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
+      padding-top: percentage($height / $width);
     }
+  }
+
+  // leaving here for legacy support
+  .#{$prefix}--aspect-ratio--object {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 }
 
