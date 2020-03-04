@@ -343,10 +343,14 @@ export default class FileUploader extends Component {
 
   handleChange = evt => {
     evt.stopPropagation();
+    const filenames = Array.prototype.map.call(
+      evt.target.files,
+      file => file.name
+    );
     this.setState({
-      filenames: this.state.filenames.concat(
-        Array.prototype.map.call(evt.target.files, file => file.name)
-      ),
+      filenames: this.props.multiple
+        ? this.state.filenames.concat(filenames)
+        : filenames,
     });
     if (this.props.onChange) {
       this.props.onChange(evt);
