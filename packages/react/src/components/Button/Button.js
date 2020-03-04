@@ -68,9 +68,7 @@ const Button = React.forwardRef(function Button(
     type,
   };
   const anchorProps = {
-    role: 'button',
     href,
-    'aria-label': children,
   };
   const assistiveText = hasIconOnly ? (
     <span className={`${prefix}--assistive-text`}>{iconDescription}</span>
