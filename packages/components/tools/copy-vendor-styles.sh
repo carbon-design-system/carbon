@@ -21,7 +21,7 @@ root_path=$PWD
 echo "Cleaning vendor directory..."
 
 VENDOR_DIR="$PWD/src/globals/scss/vendor"
-rm -rf $VENDOR_DIR
+rm -rf "$VENDOR_DIR"
 
 for package in node_modules/@carbon/*; do
   PKG_NAME="@carbon/$(basename $package)"
@@ -30,8 +30,8 @@ for package in node_modules/@carbon/*; do
 
   if [ -d "$SCSS_FILES" ]; then
     echo "Copying scss files for package: $PKG_NAME to $TARGET_DIR"
-    mkdir -p $TARGET_DIR
-    cp -R $SCSS_FILES $TARGET_DIR
+    mkdir -p "$TARGET_DIR"
+    cp -R $SCSS_FILES "$TARGET_DIR"
   fi
 done
 
@@ -44,8 +44,8 @@ for symlink in $(find ../../node_modules/@carbon -type l -maxdepth 1); do
 
   if [ -d "$SCSS_FILES" ]; then
     echo "Copying scss files for package: $PKG_NAME to $TARGET_DIR"
-    mkdir -p $TARGET_DIR
-    cp -R $SCSS_FILES $TARGET_DIR
+    mkdir -p "$TARGET_DIR"
+    cp -R $SCSS_FILES "$TARGET_DIR"
   fi
 done
 
