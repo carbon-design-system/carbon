@@ -87,8 +87,7 @@ describe('Button', () => {
     const wrapper = shallow(
       // eslint-disable-next-line jsx-a11y/tabindex-no-positive
       <Button href="#" tabIndex={2}>
-        <div className="child">child</div>
-        <div className="child">child</div>
+        Child
       </Button>
     );
 
@@ -98,6 +97,17 @@ describe('Button', () => {
 
     it('should always render with [role="button"] by default', () => {
       expect(wrapper.props().role).toEqual('button');
+    });
+
+    /**
+     * Implicit labeling only works for native button elements. We have
+     * to designate an `aria-label` that matches the visible text to avoid
+     * DAP violations.
+     *
+     * ref: https://github.com/carbon-design-system/carbon/issues/5521
+     */
+    it('should have an aria-label matching visible label text', () => {
+      expect(wrapper.props()['aria-label']).toEqual('Child');
     });
   });
 
