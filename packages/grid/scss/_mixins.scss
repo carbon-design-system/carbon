@@ -231,7 +231,7 @@ $carbon--aspect-ratios: (
 /// @param {Number} $height height from an aspect ratio
 /// @access private
 /// @group @carbon/grid
-@mixin carbon--make-aspect-ratios($aspect-ratios: $carbon--aspect-ratios) {
+@mixin carbon--aspect-ratio($aspect-ratios: $carbon--aspect-ratios) {
   .#{$prefix}--aspect-ratio {
     position: relative;
   }
@@ -368,5 +368,5 @@ $carbon--aspect-ratios: (
   @include carbon--make-grid-columns($breakpoints, $grid-gutter);
   @include carbon--no-gutter();
   @include carbon--hang($grid-gutter);
-  @include carbon--make-aspect-ratios();
+  @include carbon--aspect-ratio();
 }
