@@ -1695,6 +1695,12 @@ Generate the CSS for a grid for the given breakpoints and gutters
     @include carbon--make-row();
   }
 
+  .#{$prefix}--row-padding [class*='#{$prefix}--col'],
+  .#{$prefix}--col-padding {
+    padding-top: $grid-gutter / 2;
+    padding-bottom: $grid-gutter / 2;
+  }
+
   .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
     padding-top: $condensed-gutter / 2;
     padding-bottom: $condensed-gutter / 2;
@@ -3755,7 +3761,6 @@ $spacing-08: $carbon--spacing-08;
 - **Alias**: `carbon--spacing-08`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [modal [mixin]](#modal-mixin)
 
 ### ✅spacing-09 [variable]
 
@@ -5989,7 +5994,6 @@ $interactive-01: if(
   - [date-picker [mixin]](#date-picker-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
-  - [tabs [mixin]](#tabs-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
@@ -7450,8 +7454,8 @@ $hover-selected-ui: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [tabs [mixin]](#tabs-mixin)
 
 ### ✅inverse-hover-ui [variable]
@@ -15059,6 +15063,13 @@ Data table core styles
     ); //used to center svg without setting display flex //display block needed for overflow text truncation
   }
 
+  .#{$prefix}--data-table .#{$prefix}--overflow-menu,
+  .#{$prefix}--data-table .#{$prefix}--overflow-menu__trigger {
+    &:hover {
+      background-color: $hover-selected-ui;
+    }
+  }
+
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu,
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu__trigger {
     &:hover {
@@ -15396,6 +15407,7 @@ Data table core styles
   - [hover-field [variable]](#hover-field-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
 
@@ -16067,6 +16079,15 @@ Date picker styles
       color: $text-05;
       opacity: 1;
     }
+  }
+
+  // Size variant styles
+  .#{$prefix}--date-picker__input--xl {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--date-picker__input--sm {
+    height: rem(32px);
   }
 
   .#{$prefix}--date-picker__icon {
@@ -18744,7 +18765,7 @@ Modal styles
     grid-column: 1/-1;
 
     overflow-y: auto;
-    margin-bottom: $spacing-08;
+    margin-bottom: $spacing-09;
     color: $text-01;
     font-weight: 400;
 
@@ -18775,7 +18796,7 @@ Modal styles
     content: '';
     position: absolute;
     left: 0;
-    bottom: $spacing-08;
+    bottom: $spacing-09;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to bottom, rgba($ui-01, 0), $ui-01);
   }
@@ -18788,16 +18809,16 @@ Modal styles
 
   .#{$prefix}--modal-footer {
     display: flex;
+    justify-content: flex-end;
     margin-top: auto;
     height: 4rem;
-    background-color: $modal-footer-background-color;
 
     grid-row: -1/-1;
     grid-column: 1/-1;
 
     button.#{$prefix}--btn {
       max-width: none;
-      flex: 1;
+      flex: 0 1 50%;
       height: 4rem;
       margin: 0;
       padding-top: $spacing-05;
@@ -18860,7 +18881,6 @@ Modal styles
   - [text-02 [variable]](#text-02-variable)
   - [spacing-02 [variable]](#spacing-02-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [spacing-08 [variable]](#spacing-08-variable)
   - [spacing-07 [variable]](#spacing-07-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [focus [variable]](#focus-variable)
@@ -19551,6 +19571,7 @@ Number input styles
     cursor: not-allowed;
     background-color: $disabled-background-color;
     color: $disabled;
+    border-bottom-color: transparent;
   }
 
   .#{$prefix}--number__input-wrapper {
@@ -19699,6 +19720,51 @@ Number input styles
     }
   }
 
+  // Size Variant styles
+  .#{$prefix}--number--xl input[type='number'] {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--number--xl .#{$prefix}--number__control-btn {
+    height: rem(24px);
+  }
+
+  .#{$prefix}--number--xl.#{$prefix}--number--mobile
+    .#{$prefix}--number__control-btn {
+    height: rem(48px);
+    width: rem(48px);
+  }
+
+  .#{$prefix}--number--xl .#{$prefix}--number__control-btn.up-icon svg {
+    top: rem(6.6px); // Needed to maintain arrow spacing between input sizes.
+  }
+
+  .#{$prefix}--number--xl .#{$prefix}--number__control-btn.down-icon svg {
+    top: rem(-6.6px); // Needed to maintain arrow spacing between input sizes.
+  }
+
+  .#{$prefix}--number--sm input[type='number'] {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--number--sm .#{$prefix}--number__control-btn {
+    height: rem(16px);
+  }
+
+  .#{$prefix}--number--sm.#{$prefix}--number--mobile
+    .#{$prefix}--number__control-btn {
+    height: rem(32px);
+    width: rem(32px);
+  }
+
+  .#{$prefix}--number--sm .#{$prefix}--number__control-btn.up-icon svg {
+    top: rem(3.4px); // Needed to maintain arrow spacing between input sizes.
+  }
+
+  .#{$prefix}--number--sm .#{$prefix}--number__control-btn.down-icon svg {
+    top: rem(-3.4px); // Needed to maintain arrow spacing between input sizes.
+  }
+
   //No label positioning adjustment
   .#{$prefix}--number--nolabel .bx--label + .bx--form__helper-text {
     margin-top: 0;
@@ -19769,7 +19835,7 @@ Overflow menu styles
     }
 
     &:hover {
-      background-color: $hover-selected-ui;
+      background-color: $hover-ui;
     }
   }
 
@@ -20007,7 +20073,7 @@ Overflow menu styles
 - **Group**: [overflow-menu](#overflow-menu)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
@@ -20016,7 +20082,6 @@ Overflow menu styles
   - [text-02 [variable]](#text-02-variable)
   - [text-01 [variable]](#text-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
-  - [hover-ui [variable]](#hover-ui-variable)
   - [text-04 [variable]](#text-04-variable)
   - [support-01 [variable]](#support-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
@@ -21543,7 +21608,6 @@ Slider styles
   .#{$prefix}-slider-text-input {
     width: rem(64px);
     height: rem(40px);
-    padding: 0;
     text-align: center;
     -moz-appearance: textfield;
 
@@ -22010,16 +22074,12 @@ Tabs styles
 
     @include carbon--breakpoint(md) {
       display: flex;
-      .#{$prefix}--tabs__nav-link {
-        color: $text-01;
-        @include type-style('productive-heading-01');
-        border-bottom: 3px solid $interactive-01;
-      }
-
+      .#{$prefix}--tabs__nav-link,
       .#{$prefix}--tabs__nav-link:focus,
       .#{$prefix}--tabs__nav-link:active {
+        @include type-style('productive-heading-01');
         color: $text-01;
-        border-bottom: 2px solid $interactive-01;
+        border-bottom: 2px solid $interactive-04;
       }
     }
   }
@@ -22052,7 +22112,8 @@ Tabs styles
   //-----------------------------
   a.#{$prefix}--tabs__nav-link {
     @include focus-outline('reset');
-    display: inline-block;
+    display: inline-flex;
+    align-items: flex-end;
     color: $text-02;
     text-decoration: none;
     font-weight: 400;
@@ -22070,10 +22131,10 @@ Tabs styles
 
     &:focus,
     &:active {
+      @include focus-outline('outline');
       width: 100%;
       margin: 0;
       padding-left: 16px;
-      @include focus-outline('outline');
     }
 
     @include carbon--breakpoint(md) {
@@ -22210,9 +22271,8 @@ Tabs styles
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
-  - [interactive-01 [variable]](#interactive-01-variable)
-  - [spacing-03 [variable]](#spacing-03-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
   - [text-02 [variable]](#text-02-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
