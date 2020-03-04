@@ -37,6 +37,25 @@ export function syncIconSymbols(
   const icons = normalize(meta);
   const iconNames = Object.keys(icons);
 
+  // const layer = createSVGLayer(icons[iconNames[2]][0].descriptor);
+  const svgString = NSString.stringWithString(
+    // `<svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>API</title><path d="M8,9H4a2,2,0,0,0-2,2V23H4V18H8v5h2V11A2,2,0,0,0,8,9ZM4,16V11H8v5Z" transform="translate(0 0)"/><polygon points="22 11 25 11 25 21 22 21 22 23 30 23 30 21 27 21 27 11 30 11 30 9 22 9 22 11"/><path d="M14,23H12V9h6a2,2,0,0,1,2,2v5a2,2,0,0,1-2,2H14Zm0-7h4V11H14Z" transform="translate(0 0)"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/></svg>
+    // `
+    `<svg focusable="false" preserveAspectRatio="xMidYMid meet"
+  xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
+aria-hidden="true"><path d="M8 9H4a2 2 0 00-2 2V23H4V18H8v5h2V11A2 2 0 008 9zM4
+  16V11H8v5zM22 11L25 11 25 21 22 21 22 23 30 23 30 21 27 21 27 11 30 11 30 9 22
+9 22 11zM14 23H12V9h6a2 2 0 012 2v5a2 2 0 01-2 2H14zm0-7h4V11H14z"></path><rect
+width="32" height="32" fill="none"></rect></svg>`
+  );
+  const svgData = svgString.dataUsingEncoding(NSUTF8StringEncoding);
+  const svgImporter = MSSVGImporter.svgImporter();
+  svgImporter.prepareToImportFromData(svgData);
+  const svgLayer = svgImporter.importAsLayer();
+
+  symbolsPage.layers = [svgLayer];
+  return;
+
   // To help with debugging, we have `start` and `end` values here to focus on
   // specific icon ranges. You can also work on a specific icon by finding
   // it's index and setting the value of start to the index and end to the
@@ -48,8 +67,9 @@ export function syncIconSymbols(
   //  const start = 50;
   //  const end = 51;
   // This will allow you to focus only on the icon named 'name-to-find'
-  const start = 0;
-  const end = iconNames.length;
+  const start = 2;
+  // const end = iconNames.length;
+  const end = 3;
 
   // We keep track of the current X and Y offsets at the top-level, each
   // iteration of an icon set should reset the X_OFFSET and update the
@@ -107,17 +127,17 @@ export function syncIconSymbols(
         },
       };
 
-      const info = findIconByName(name);
-      const categories = info.categories;
+      const info = metadata.icons.find(icon => {
+        return icon.name === name;
+      });
       let symbolName = name;
 
       if (sizes.length !== 1) {
         symbolName = `${name} / ${icon.size}`;
       }
 
-      if (Array.isArray(categories) && categories.length > 0) {
-        const [category] = categories;
-        symbolName = `${category.name} / ${category.subcategory} / ${symbolName}`;
+      if (info.category && info.subcategory) {
+        symbolName = `${info.category} / ${info.subcategory} / ${symbolName}`;
       }
 
       symbolName = `icon / ${symbolName}`;
@@ -181,8 +201,8 @@ export function syncIconSymbols(
         innerPath.sharedStyleId = sharedStyle.id;
       }
 
-      artboard.layers.push(shape, ...innerPaths);
-      group.remove();
+      // artboard.layers.push(shape, ...innerPaths);
+      // group.remove();
 
       return syncSymbol(symbols, sharedLayerStyles, artboard.name, {
         name: artboard.name,
@@ -247,28 +267,4 @@ function createSVGLayer(svg) {
   const svgLayer = svgImporter.importAsLayer();
 
   return svgLayer;
-}
-
-function findIconByName(name) {
-  const [basename, ...variants] = name.split('--');
-  const iconEntry = icons.find(icon => {
-    return icon.name === basename;
-  });
-
-  if (!iconEntry) {
-    console.log(`Unable to find the following icon by name ${name}`);
-    return iconEntry;
-  }
-
-  if (variants.length > 0) {
-    const icon = iconEntry.variants.find(variant => {
-      return variant.name === name;
-    });
-    return {
-      ...iconEntry,
-      ...icon,
-    };
-  }
-
-  return iconEntry;
 }
