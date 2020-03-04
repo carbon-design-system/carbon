@@ -24556,12 +24556,19 @@ UI shell header
     fill: $shell-header-icon-01;
   }
 
+  // Styles for selected state
+
   a.#{$prefix}--header__menu-item[aria-current='page'],
   a.#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current {
     color: $shell-header-text-01;
     border-left: 0;
     border-right: 0;
     border-bottom: 3px solid $inverse-support-04;
+  }
+
+  a.#{$prefix}--header__menu-item[aria-current='page']:focus,
+  a.#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current:focus {
+    border: 2px solid $shell-header-focus;
   }
 
   .#{$prefix}--header__submenu {
