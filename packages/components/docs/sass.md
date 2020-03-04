@@ -3755,7 +3755,6 @@ $spacing-08: $carbon--spacing-08;
 - **Alias**: `carbon--spacing-08`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [modal [mixin]](#modal-mixin)
 
 ### ✅spacing-09 [variable]
 
@@ -18759,7 +18758,7 @@ Modal styles
     grid-column: 1/-1;
 
     overflow-y: auto;
-    margin-bottom: $spacing-08;
+    margin-bottom: $spacing-09;
     color: $text-01;
     font-weight: 400;
 
@@ -18790,7 +18789,7 @@ Modal styles
     content: '';
     position: absolute;
     left: 0;
-    bottom: $spacing-08;
+    bottom: $spacing-09;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to bottom, rgba($ui-01, 0), $ui-01);
   }
@@ -18875,7 +18874,6 @@ Modal styles
   - [text-02 [variable]](#text-02-variable)
   - [spacing-02 [variable]](#spacing-02-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [spacing-08 [variable]](#spacing-08-variable)
   - [spacing-07 [variable]](#spacing-07-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [focus [variable]](#focus-variable)
