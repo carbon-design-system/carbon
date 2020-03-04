@@ -47,9 +47,7 @@ storiesOf('ProgressIndicator', module)
             <Tooltip
               direction="bottom"
               showIcon={false}
-              triggerClassName={`${prefix}--progress-label ${spaceEquallyKnob() &&
-                !verticalKnob() &&
-                `${prefix}--progress-label--no-max-width`}`}
+              triggerClassName={`${prefix}--progress-label`}
               triggerText={'Second step with tooltip'}
               tooltipId="tooltipId-0">
               <p>Overflow tooltip content.</p>
@@ -63,9 +61,7 @@ storiesOf('ProgressIndicator', module)
             <Tooltip
               direction="bottom"
               showIcon={false}
-              triggerClassName={`${prefix}--progress-label ${spaceEquallyKnob() &&
-                !verticalKnob() &&
-                `${prefix}--progress-label--no-max-width`}`}
+              triggerClassName={`${prefix}--progress-label`}
               triggerText={'Third step with tooltip'}
               tooltipId="tooltipId-1">
               <p>

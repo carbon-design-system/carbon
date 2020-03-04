@@ -34,7 +34,7 @@
     }
   }
 
-  .#{$prefix}--progress-step--no-max-width {
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-step {
     min-width: 8rem;
     flex-grow: 1;
   }
@@ -47,7 +47,7 @@
     border: $progress-indicator-bar-width;
   }
 
-  .#{$prefix}--progress-line--no-max-width {
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-line {
     min-width: rem(128px);
     width: 100%;
   }
@@ -80,7 +80,7 @@
     }
   }
 
-  .#{$prefix}--progress-label--no-max-width {
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-line {
     max-width: 100%;
     padding-right: 0.75rem;
   }
