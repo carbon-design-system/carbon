@@ -16,6 +16,7 @@ import {
   CARBON_TYPE_TOKEN,
 } from './addon-carbon-theme/shared';
 import Container from './Container';
+import PackageInfo from './../package.json';
 
 const customPropertyPrefix = 'cds';
 
@@ -35,7 +36,7 @@ addParameters({
     // display in alphabetic order
     storySort: (a, b) => a[1].id.localeCompare(b[1].id),
     theme: {
-      brandTitle: 'carbon components react',
+      brandTitle: `Carbon Components React v${PackageInfo.version}`,
       brandUrl:
         'https://github.com/carbon-design-system/carbon/tree/master/packages/react',
     },
