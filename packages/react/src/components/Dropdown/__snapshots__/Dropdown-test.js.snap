@@ -114,6 +114,7 @@ exports[`Dropdown should render 1`] = `
                 className="bx--list-box__label"
                 htmlFor="downshift-0-input"
                 id="dropdown-field-label-test-dropdown"
+                title="input"
               >
                 input
               </span>
@@ -287,6 +288,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 className="bx--list-box__label"
                 htmlFor="downshift-4-input"
                 id="dropdown-field-label-test-dropdown"
+                title="input"
               >
                 input
               </span>
@@ -619,6 +621,7 @@ exports[`Dropdown should render with strings as items 1`] = `
                 className="bx--list-box__label"
                 htmlFor="downshift-3-input"
                 id="dropdown-field-label-test-dropdown"
+                title="input"
               >
                 input
               </span>
