@@ -12,6 +12,7 @@
     "lib",
     "scss",
     "svg",
+    "build-info.json",
     "metadata.json"
   ],
   "keywords": [
