@@ -281,6 +281,7 @@ export default class Dropdown extends React.Component {
                   <span
                     id={fieldLabelId}
                     className={`${prefix}--list-box__label`}
+                    title={selectedItem ? itemToString(selectedItem) : label}
                     {...getLabelProps()}>
                     {selectedItem ? itemToString(selectedItem) : label}
                   </span>
