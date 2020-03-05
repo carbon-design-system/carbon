@@ -146,7 +146,7 @@ describe('DatePicker', () => {
         datePickerType="single"
         dateFormat="m/d/Y"
         value={'02/26/2017'}
-        appendTo={document.body.firstChild}
+        appendTo={document.body}
         onChange={() => {}}>
         <DatePickerInput
           key="label"
@@ -166,9 +166,7 @@ describe('DatePicker', () => {
     });
 
     it('sends appendTo to Flatpickr', () => {
-      expect(wrapper.instance().cal.config.appendTo).toBe(
-        document.body.firstChild
-      );
+      expect(wrapper.instance().cal.config.appendTo).toBe(document.body);
     });
   });
 
@@ -444,6 +442,22 @@ describe('Focus management', () => {
   });
 
   it('focuses on calendar dropdown when focus goes next to the date picker input', () => {
+    wrapper = mount(
+      <>
+        <input id="dummy-focus-node-before" type="text" />
+        <DatePicker
+          onChange={() => {}}
+          datePickerType="single"
+          className="extra-class"
+          appendTo={document.body}>
+          <div className="test-child">
+            <input type="text" className={`${prefix}--date-picker__input`} />
+          </div>
+        </DatePicker>
+        <input id="dummy-focus-node-after" type="text" />
+      </>
+    );
+
     const datePicker = wrapper.find('DatePicker').instance();
     datePicker.cal.open();
     datePicker.cal.selectedDateElem = {

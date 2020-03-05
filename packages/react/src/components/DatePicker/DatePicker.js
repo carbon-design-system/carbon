@@ -247,7 +247,7 @@ export default class DatePicker extends Component {
 
   componentDidMount() {
     const {
-      appendTo,
+      appendTo = this._container.current,
       datePickerType,
       dateFormat,
       id = this._instanceId,
@@ -296,6 +296,7 @@ export default class DatePicker extends Component {
               container: this._container.current,
               inputFrom: this.inputField,
               inputTo: this.toInputField,
+              appendTo,
             }),
           ],
           clickOpens: true,

@@ -19,6 +19,7 @@
 @mixin date-picker {
   .#{$prefix}--date-picker {
     display: flex;
+    position: relative;
   }
 
   .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {

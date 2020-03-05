@@ -17,12 +17,8 @@ export default config => fp => {
    */
   const handlePreCalendarPosition = () => {
     Promise.resolve().then(() => {
-      const {
-        calendarContainer,
-        config: fpConfig,
-        _positionElement: positionElement,
-      } = fp;
-      const { appendTo } = fpConfig;
+      const { calendarContainer, _positionElement: positionElement } = fp;
+      const { appendTo } = config;
       const {
         left: containerLeft,
         top: containerTop,

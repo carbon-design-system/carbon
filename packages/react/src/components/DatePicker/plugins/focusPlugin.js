@@ -43,8 +43,11 @@ export default config => fp => {
    * Doing so ensures the next sequential-focusable element of an day element won't be date picker `<input>`.
    */
   const handleFocusCalendarDropdown = ({ target: currentActiveNode }) => {
+    const { selectedDateElem, todayDateElem } = fp;
     const currentDayElem =
-      currentActiveNode && currentActiveNode.closest('.flatpickr-day');
+      (currentActiveNode && currentActiveNode.closest('.flatpickr-day')) ||
+      selectedDateElem ||
+      todayDateElem;
     if (currentDayElem) {
       cleanDayElemTabIndices();
       currentDayElem.tabIndex = 0;
@@ -111,12 +114,13 @@ export default config => fp => {
     target: oldActiveNode,
     relatedTarget: currentActiveNode,
   }) => {
-    const { container } = config;
+    const { container, appendTo } = config;
     const { calendarContainer, isOpen } = fp;
     let shouldFocusOnCalendarDropdown = false;
     if (
       isOpen &&
       container &&
+      !container.contains(appendTo) &&
       oldActiveNode &&
       currentActiveNode &&
       container.contains(oldActiveNode) &&
