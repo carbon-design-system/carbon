@@ -137,7 +137,7 @@
     }
 
     .#{$prefix}--tile-content__below-the-fold {
-      visibility: visible;
+      visibility: inherit;
       opacity: 1;
       transition: opacity $duration--fast-02 motion(standard, productive),
         visibility $duration--fast-02 motion(standard, productive);
