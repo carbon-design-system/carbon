@@ -340,7 +340,7 @@ export default class DataTable extends React.Component {
     const { size } = this.props;
     return {
       ...props,
-      size,
+      size: size === 'compact' || size === 'short' ? 'small' : 'normal',
     };
   };
 

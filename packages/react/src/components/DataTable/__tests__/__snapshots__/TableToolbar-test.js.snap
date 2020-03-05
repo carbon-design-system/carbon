@@ -4,7 +4,6 @@ exports[`DataTable.TableToolbar should render 1`] = `
 <TableToolbar
   aria-label="data table toolbar"
   className="custom-class"
-  size="normal"
 >
   <section
     aria-label="data table toolbar"

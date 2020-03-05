@@ -16,7 +16,7 @@ const { prefix } = settings;
 const TableToolbar = ({ children, size, ...rest }) => {
   const className = cx({
     [`${prefix}--table-toolbar`]: true,
-    [`${prefix}--table-toolbar--small`]: size === 'compact' || size === 'short',
+    [`${prefix}--table-toolbar--${size}`]: size,
   });
   return (
     <section {...rest} className={className}>
@@ -34,7 +34,7 @@ TableToolbar.propTypes = {
   /**
    * `normal` Change the row height of table
    */
-  size: PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
+  size: PropTypes.oneOf(['small', 'normal']),
 
   /**
    * Required props for the accessibility label of the TableToolbar
@@ -43,7 +43,6 @@ TableToolbar.propTypes = {
 };
 
 TableToolbar.defaultProps = {
-  size: 'normal',
   'aria-label': 'data table toolbar',
 };
 

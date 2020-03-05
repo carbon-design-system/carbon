@@ -1781,7 +1781,6 @@ exports[`DataTable should render 1`] = `
           >
             <TableToolbar
               aria-label="data table toolbar"
-              size="normal"
             >
               <TableBatchActions
                 onCancel={[Function]}
@@ -1974,7 +1973,6 @@ exports[`DataTable should render 1`] = `
       </div>
       <TableToolbar
         aria-label="data table toolbar"
-        size="normal"
       >
         <section
           aria-label="data table toolbar"
@@ -2783,7 +2781,6 @@ exports[`DataTable sticky header should render 1`] = `
           >
             <TableToolbar
               aria-label="data table toolbar"
-              size="normal"
             >
               <TableBatchActions
                 onCancel={[Function]}
@@ -2979,7 +2976,6 @@ exports[`DataTable sticky header should render 1`] = `
       </div>
       <TableToolbar
         aria-label="data table toolbar"
-        size="normal"
       >
         <section
           aria-label="data table toolbar"
