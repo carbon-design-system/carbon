@@ -1695,6 +1695,12 @@ Generate the CSS for a grid for the given breakpoints and gutters
     @include carbon--make-row();
   }
 
+  .#{$prefix}--row-padding [class*='#{$prefix}--col'],
+  .#{$prefix}--col-padding {
+    padding-top: $grid-gutter / 2;
+    padding-bottom: $grid-gutter / 2;
+  }
+
   .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
     padding-top: $condensed-gutter / 2;
     padding-bottom: $condensed-gutter / 2;
