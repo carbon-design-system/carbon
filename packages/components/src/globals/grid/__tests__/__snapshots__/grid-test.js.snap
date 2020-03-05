@@ -115,6 +115,11 @@ em {
   margin-right: -1rem;
   margin-left: -1rem; }
 
+.bx--row-padding [class*='bx--col'],
+.bx--col-padding {
+  padding-top: 1rem;
+  padding-bottom: 1rem; }
+
 .bx--grid--condensed [class*='bx--col'] {
   padding-top: 0.0625rem;
   padding-bottom: 0.0625rem; }

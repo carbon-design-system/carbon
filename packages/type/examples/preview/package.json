@@ -10,7 +10,7 @@
   "devDependencies": {
     "@babel/core": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
-    "parcel-bundler": "^1.10.0-beta.1"
+    "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
     "change-case": "^3.1.0",
