@@ -10,7 +10,6 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import 'mixins';
-@import 'tokens';
 
 /// Tag styles
 /// @access private
@@ -44,7 +43,7 @@
     @include tag-theme(
       $tag-red-background,
       $tag-red-color,
-      $tag-red-hover
+      $tag-red-hover,
     );
   }
 
@@ -52,7 +51,7 @@
     @include tag-theme(
       $tag-magenta-background,
       $tag-magenta-color,
-      $tag-magenta-hover
+      $tag-magenta-hover,
     );
   }
 
@@ -60,7 +59,7 @@
     @include tag-theme(
       $tag-purple-background,
       $tag-purple-color,
-      $tag-purple-hover
+      $tag-purple-hover,
     );
   }
 
@@ -68,7 +67,7 @@
     @include tag-theme(
       $tag-blue-background,
       $tag-blue-color,
-      $tag-blue-hover
+      $tag-blue-hover,
     );
   }
 
@@ -76,7 +75,7 @@
     @include tag-theme(
       $tag-cyan-background,
       $tag-cyan-color,
-      $tag-cyan-hover
+      $tag-cyan-hover,
     );
   }
 
@@ -84,7 +83,7 @@
     @include tag-theme(
       $tag-teal-background,
       $tag-teal-color,
-      $tag-teal-hover
+      $tag-teal-hover,
     );
   }
 
@@ -92,7 +91,7 @@
     @include tag-theme(
       $tag-green-background,
       $tag-green-color,
-      $tag-green-hover
+      $tag-green-hover,
     );
   }
 
@@ -100,7 +99,7 @@
     @include tag-theme(
       $tag-gray-background,
       $tag-gray-color,
-      $tag-gray-hover
+      $tag-gray-hover,
     );
   }
 
@@ -108,7 +107,7 @@
     @include tag-theme(
       $tag-cool-gray-background,
       $tag-cool-gray-color,
-      $tag-cool-gray-hover
+      $tag-cool-gray-hover,
     );
   }
 
@@ -116,7 +115,7 @@
     @include tag-theme(
       $tag-warm-gray-background,
       $tag-warm-gray-color,
-      $tag-warm-gray-hover
+      $tag-warm-gray-hover,
     );
   }
 

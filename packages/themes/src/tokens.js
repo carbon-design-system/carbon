@@ -8,6 +8,8 @@
 import { unstable_tokens as type } from '@carbon/type';
 import { unstable_tokens as layout } from '@carbon/layout';
 
+import { tokens as components } from './components';
+
 // The color token names for a Carbon theme, value corresponds to what they're
 // exported as in JavaScript
 const colors = [
@@ -146,7 +148,10 @@ export function formatTokenName(token) {
 }
 
 export const tokens = {
-  colors,
+  colors: [
+    ...colors,
+    ...components,
+  ],
   type,
   layout,
 };
@@ -225,6 +230,12 @@ export const unstable__meta = {
         'inverseHoverUI',
         'active01',
         'hoverField',
+      ],
+    },
+    {
+      type: 'components',
+      tokens: [
+        ...components,
       ],
     },
   ],
