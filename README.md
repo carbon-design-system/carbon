@@ -22,6 +22,7 @@
   <a href="https://lernajs.io/">
     <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="Maintained with Lerna" />
   </a>
+  <a href="https://gitpod.io/#https://github.com/carbon-design-system/carbon"><img src="https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod" alt="Gitpod Ready-to-Code"></a>
   <a href="https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
   </a>
@@ -32,7 +33,7 @@
 
 ## Getting started
 
-If you're just getting started, check out
+If you're getting started, check out
 [`carbon-components`](./packages/components). If you're looking for React
 components, take a look at [`carbon-components-react`](./packages/react).
 
@@ -74,6 +75,8 @@ We're always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
 check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
 [Developer Guide](./docs/developer-handbook.md)! 👀
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/carbon-design-system/carbon)
 
 ## 📝 License
 
