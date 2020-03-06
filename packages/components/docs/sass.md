@@ -17477,7 +17477,7 @@ Link styles
     transition: $duration--fast-01 motion(standard, productive);
 
     &:hover {
-      color: $link-01;
+      color: $hover-primary-text;
       text-decoration: underline;
     }
 
@@ -17504,7 +17504,7 @@ Link styles
     }
 
     &:visited:hover {
-      color: $link-01;
+      color: $hover-primary-text;
     }
   }
 
@@ -17553,10 +17553,10 @@ Link styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [link-01 [variable]](#link-01-variable)
+  - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [text-01 [variable]](#text-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [visited-link [variable]](#visited-link-variable)
-  - [hover-primary-text [variable]](#hover-primary-text-variable)
 
 ## list
 
