@@ -88,28 +88,25 @@ const umdBundleConfig = {
 };
 
 module.exports = [
+  // TODO: update configuration to correctly support tree-shaking for React
+  // components. See:
+  // https://github.com/carbon-design-system/carbon/issues/5442
   // Generates the following bundles:
   // ESM:       es/index.js
   // CommonJS: lib/index.js
-  {
-    ...baseConfig,
-    plugins: [
-      ...baseConfig.plugins,
-      replace({
-        'process.env.NODE_ENV': JSON.stringify('development'),
-      }),
-    ],
-    output: [
-      {
-        format: 'esm',
-        file: 'es/index.js',
-      },
-      {
-        format: 'cjs',
-        file: 'lib/index.js',
-      },
-    ],
-  },
+  // {
+  //   ...baseConfig,
+  //   output: [
+  //     {
+  //       format: 'esm',
+  //       file: 'es/index.js',
+  //     },
+  //     {
+  //       format: 'cjs',
+  //       file: 'lib/index.js',
+  //     },
+  //   ],
+  // },
 
   // Generate the development UMD bundle:
   // UMD: umd/carbon-components-react.js

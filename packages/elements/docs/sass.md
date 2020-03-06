@@ -1159,7 +1159,7 @@ Output the CSS required for all the columns in a given grid system.
   $gutter: $carbon--grid-gutter
 ) {
   .#{$prefix}--col {
-    @include carbon--make-col-ready();
+    @include carbon--make-col-ready($gutter);
   }
 
   @each $breakpoint in map-keys($breakpoints) {
@@ -1169,13 +1169,13 @@ Output the CSS required for all the columns in a given grid system.
     // Allow columns to stretch full width below their breakpoints
     @for $i from 0 through $columns {
       .#{$prefix}--col#{$infix}-#{$i} {
-        @include carbon--make-col-ready();
+        @include carbon--make-col-ready($gutter);
       }
     }
 
     .#{$prefix}--col#{$infix},
     .#{$prefix}--col#{$infix}--auto {
-      @include carbon--make-col-ready();
+      @include carbon--make-col-ready($gutter);
     }
 
     @include carbon--breakpoint($breakpoint, $breakpoints) {
@@ -1539,6 +1539,12 @@ Generate the CSS for a grid for the given breakpoints and gutters
     @include carbon--make-row();
   }
 
+  .#{$prefix}--row-padding [class*='#{$prefix}--col'],
+  .#{$prefix}--col-padding {
+    padding-top: $grid-gutter / 2;
+    padding-bottom: $grid-gutter / 2;
+  }
+
   .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
     padding-top: $condensed-gutter / 2;
     padding-bottom: $condensed-gutter / 2;
@@ -1852,7 +1858,6 @@ Check to see if the given breakpoint name
 - **Returns**: `Bool`
 - **Used by**:
   - [carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
-  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
 
 ### ✅carbon--largest-breakpoint-name [function]
 
@@ -1973,12 +1978,8 @@ Generate a media query for the maximum width of the given styles
   } @else if map-has-key($breakpoints, $name) {
     $breakpoint: map-get($breakpoints, $name);
     $width: map-get($breakpoint, width);
-    @if carbon--is-smallest-breakpoint($name, $breakpoints) {
+    @media (max-width: $width) {
       @content;
-    } @else {
-      @media (max-width: $width) {
-        @content;
-      }
     }
   } @else {
     @error 'Unable to find a breakpoint with name `#{$name}`. Expected one of: (#{map-keys($breakpoints)})';
@@ -1996,8 +1997,6 @@ Generate a media query for the maximum width of the given styles
 | `$breakpoints` | A map of breakpoints where the key is the name | `Map`              | `$carbon--grid-breakpoints` |
 
 - **Group**: [@carbon/layout](#carbonlayout)
-- **Requires**:
-  - [carbon--is-smallest-breakpoint [function]](#carbon--is-smallest-breakpoint-function)
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
 
@@ -5283,6 +5282,7 @@ $carbon--theme--g90: map-merge(
     visited-link: #be95ff,
     disabled-01: #393939,
     disabled-02: #6f6f6f,
+    disabled-03: #a8a8a8,
     highlight: #0043ce,
     skeleton-01: #353535,
     skeleton-02: #525252,
@@ -5355,7 +5355,6 @@ $carbon--theme--g100: map-merge(
     visited-link: #be95ff,
     disabled-01: #262626,
     disabled-02: #525252,
-    disabled-03: #6f6f6f,
     highlight: #002d9c,
     skeleton-01: #353535,
     skeleton-02: #393939,
@@ -9555,12 +9554,11 @@ Include a type reset for a given body and mono font family
 
 ```scss
 @mixin carbon--type-reset(
-  $base-font-size: $carbon--base-font-size,
   $body-font-family: carbon--font-family('sans'),
   $mono-font-family: carbon--font-family('mono')
 ) {
   html {
-    font-size: $base-font-size;
+    font-size: 100%;
   }
 
   body {
@@ -9588,7 +9586,6 @@ Include a type reset for a given body and mono font family
 
 | Name                | Description                                                                         | Type     | Default value                 |
 | ------------------- | ----------------------------------------------------------------------------------- | -------- | ----------------------------- |
-| `$base-font-size`   | The base font size for your document                                                | `Number` | `$carbon--base-font-size`     |
 | `$body-font-family` | The font family used on the `<body>` element                                        | `String` | `carbon--font-family('sans')` |
 | `$mono-font-family` | The font family used on elements that require mono fonts, like the `<code>` element | `String` | `carbon--font-family('mono')` |
 

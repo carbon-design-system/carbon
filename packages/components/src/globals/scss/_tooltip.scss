@@ -6,6 +6,7 @@
 //
 
 @import 'helper-mixins';
+@import 'css--helpers';
 
 // Tooltip
 // Tooltip caret visual styles
@@ -28,6 +29,7 @@
 @mixin tooltip--content($tooltip-type: 'icon') {
   @include box-shadow;
   width: max-content;
+  min-width: rem(24px);
   max-width: rem(208px);
   height: auto;
   padding: if(

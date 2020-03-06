@@ -39,7 +39,7 @@ const items = [
 
 const sizes = {
   'Extra large size (xl)': 'xl',
-  'Regular size (lg)': '',
+  'Default size': undefined,
   'Small size (sm)': 'sm',
 };
 
@@ -52,7 +52,7 @@ const props = () => ({
   disabled: boolean('Disabled (disabled)', false),
   invalid: boolean('Invalid (invalid)', false),
   invalidText: text('Invalid text (invalidText)', 'A valid value is required'),
-  size: select('Field size (size)', sizes, '') || undefined,
+  size: select('Field size (size)', sizes, undefined) || undefined,
   onChange: action('onChange'),
 });
 

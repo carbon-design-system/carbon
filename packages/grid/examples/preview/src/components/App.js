@@ -187,6 +187,61 @@ const sections = [
           </div>
         ),
       },
+      {
+        name: 'Include column padding',
+        description:
+          'Use the column padding helper to add vertical padding to a node in a column',
+        content() {
+          return (
+            <div className="bx--grid">
+              <div className="bx--row">
+                <div className="bx--col bx--col-padding">
+                  <div className="outside">
+                    <div className="inside">1/4</div>
+                  </div>
+                </div>
+                <div className="bx--col">
+                  <div className="outside bx--col-padding">
+                    <div className="inside">1/4</div>
+                  </div>
+                </div>
+                <div className="bx--col bx--col-padding">
+                  <div className="outside">
+                    <div className="inside">1/4</div>
+                  </div>
+                </div>
+                <div className="bx--col bx--col-padding">
+                  <div className="outside">
+                    <div className="inside">1/4</div>
+                  </div>
+                </div>
+              </div>
+              <div className="bx--row bx--row-padding">
+                <div className="bx--col">
+                  <div className="outside">
+                    <div className="inside">1/4</div>
+                  </div>
+                </div>
+                <div className="bx--col">
+                  <div className="outside">
+                    <div className="inside">1/4</div>
+                  </div>
+                </div>
+                <div className="bx--col">
+                  <div className="outside">
+                    <div className="inside">1/4</div>
+                  </div>
+                </div>
+                <div className="bx--col">
+                  <div className="outside">
+                    <div className="inside">1/4</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        },
+      },
     ],
   },
   {
