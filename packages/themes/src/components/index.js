@@ -1,8 +1,6 @@
 import * as tag from './_tag';
 
-export const tokens = [
-  ...tag.tokens,
-];
+export const tokens = [...tag.tokens];
 
 export const white = {
   ...tag.white,

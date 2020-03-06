@@ -148,10 +148,7 @@ export function formatTokenName(token) {
 }
 
 export const tokens = {
-  colors: [
-    ...colors,
-    ...components,
-  ],
+  colors: [...colors, ...components],
   type,
   layout,
 };
@@ -234,9 +231,7 @@ export const unstable__meta = {
     },
     {
       type: 'components',
-      tokens: [
-        ...components,
-      ],
+      tokens: [...components],
     },
   ],
   deprecated: ['brand01', 'brand02', 'brand03', 'active01'],
