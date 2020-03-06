@@ -1077,6 +1077,15 @@ Map {
         "children": Object {
           "type": "node",
         },
+        "size": Object {
+          "args": Array [
+            Array [
+              "small",
+              "normal",
+            ],
+          ],
+          "type": "oneOf",
+        },
       },
     },
     "TableToolbarAction": Object {
@@ -1196,6 +1205,7 @@ Map {
     "defaultProps": Object {
       "filterRows": [Function],
       "locale": "en",
+      "size": "normal",
       "sortRow": [Function],
       "translateWithId": [Function],
     },
@@ -1258,6 +1268,17 @@ Map {
         ],
         "isRequired": true,
         "type": "arrayOf",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "compact",
+            "short",
+            "normal",
+            "tall",
+          ],
+        ],
+        "type": "oneOf",
       },
       "sortRow": Object {
         "type": "func",
@@ -1640,6 +1661,15 @@ Map {
       "aria-labelledby": [Function],
       "children": Object {
         "type": "node",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "small",
+            "normal",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
