@@ -18,11 +18,8 @@ import carbonFlatpickrFocusPlugin from './plugins/focusPlugin';
 import carbonFlatpickrMonthSelectPlugin from './plugins/monthSelectPlugin';
 import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
 import { match, keys } from '../../internal/keyboard';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
-
-const getInstanceId = setupGetInstanceId();
 
 // Weekdays shorthand for english locale
 l10n.en.weekdays.shorthand.forEach((day, index) => {
@@ -229,7 +226,6 @@ export default class DatePicker extends Component {
     locale: 'en',
   };
 
-  _instanceId = getInstanceId();
   _container = React.createRef();
 
   UNSAFE_componentWillUpdate(nextProps) {
@@ -250,7 +246,7 @@ export default class DatePicker extends Component {
       appendTo = this._container.current,
       datePickerType,
       dateFormat,
-      id = this._instanceId,
+      id,
       locale,
       minDate,
       maxDate,
@@ -488,7 +484,6 @@ export default class DatePicker extends Component {
       short,
       light,
       datePickerType,
-      id = this._instanceId,
       minDate, // eslint-disable-line
       maxDate, // eslint-disable-line
       dateFormat, // eslint-disable-line
@@ -537,13 +532,7 @@ export default class DatePicker extends Component {
     });
     return (
       <div className={`${prefix}--form-item`}>
-        <div
-          ref={this._container}
-          className={datePickerClasses}
-          {...other}
-          aria-owns={
-            datePickerType === 'simple' ? undefined : `${id}__calendar`
-          }>
+        <div ref={this._container} className={datePickerClasses} {...other}>
           {childrenWithProps}
         </div>
       </div>

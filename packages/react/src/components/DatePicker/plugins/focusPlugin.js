@@ -6,24 +6,12 @@
  */
 
 import { match, keys } from '../../../internal/keyboard';
-import {
-  DOCUMENT_POSITION_BROAD_PRECEDING,
-  DOCUMENT_POSITION_BROAD_FOLLOWING,
-} from '../../../internal/keyboard/navigation';
 
 /**
  * @param config Plugin configuration.
  * @returns A Flatpickr plugin to manage focus to align with the UX pattern in our design system.
  */
 export default config => fp => {
-  /**
-   * Focuses on calendar dropdown.
-   */
-  const focusCalendar = () => {
-    const { calendarContainer, selectedDateElem, todayDateElem } = fp;
-    (selectedDateElem || todayDateElem || calendarContainer).focus();
-  };
-
   /**
    * Clean-up `tabindex` of Flatpickr day elements.
    */
@@ -64,7 +52,7 @@ export default config => fp => {
     target: oldActiveNode,
     relatedTarget: currentActiveNode,
   }) => {
-    const { inputFrom, inputTo } = config;
+    // const { inputFrom, inputTo } = config;
     const { calendarContainer, isOpen } = fp;
     if (
       isOpen &&
@@ -72,27 +60,6 @@ export default config => fp => {
       !calendarContainer.contains(currentActiveNode)
     ) {
       cleanDayElemTabIndices();
-      const comparisonResult = !currentActiveNode
-        ? DOCUMENT_POSITION_BROAD_FOLLOWING
-        : oldActiveNode.compareDocumentPosition(currentActiveNode);
-      setTimeout(() => {
-        // This `focusout` event handler can be called from Flatpickr's code cleaning up calenar dropdown's DOM,
-        // and changing focus in such condition causes removing an orphaned DOM node,
-        // because Flatpickr redraws the calendar dropdown when the `<input>` gets focus.
-        if (comparisonResult & DOCUMENT_POSITION_BROAD_PRECEDING) {
-          (inputTo || inputFrom).focus();
-        } else {
-          // When VO cursor moves onto the `<input>` for year, keyboard focus is temporary lost for some reason.
-          // Ensure we don't close the calanedar dropdown in such condition.
-          const lostFocusWasTemporary = calendarContainer.contains(
-            document.activeElement
-          );
-          if (!lostFocusWasTemporary) {
-            // Closing after moving focus. Reversing the order will cause re-opening calendar dropdown upon focusing
-            fp.close();
-          }
-        }
-      }, 0);
     }
   };
 
@@ -110,33 +77,26 @@ export default config => fp => {
   /**
    * Handles `focusout` event on the date picker container to focus on the calendar dropdown or close the calendar dropdown.
    */
-  const handleBlurContainer = ({
-    target: oldActiveNode,
-    relatedTarget: currentActiveNode,
-  }) => {
-    const { container, appendTo } = config;
-    const { calendarContainer, isOpen } = fp;
-    let shouldFocusOnCalendarDropdown = false;
-    if (
-      isOpen &&
-      container &&
-      !container.contains(appendTo) &&
-      oldActiveNode &&
-      currentActiveNode &&
-      container.contains(oldActiveNode) &&
-      !container.contains(currentActiveNode)
-    ) {
-      const comparisonResult = oldActiveNode.compareDocumentPosition(
-        currentActiveNode
-      );
-      if (comparisonResult & DOCUMENT_POSITION_BROAD_FOLLOWING) {
-        shouldFocusOnCalendarDropdown = true;
+  const handleBlurContainer = ({ relatedTarget: currentActiveNode }) => {
+    const { inputFrom, inputTo } = config;
+    const { calendarContainer } = fp;
+    if (!calendarContainer.contains(currentActiveNode)) {
+      if (currentActiveNode) {
+        fp.close();
+      } else {
+        setTimeout(() => {
+          // When VO cursor moves onto the `<input>` for year, keyboard focus is temporary lost from browser for some reason.
+          // Ensure we don't close the calanedar dropdown in such condition.
+          const lostFocusWasTemporary =
+            calendarContainer.contains(document.activeElement) ||
+            document.activeElement === inputFrom ||
+            document.activeElement === inputTo;
+          if (!lostFocusWasTemporary) {
+            // Closing after moving focus. Reversing the order will cause re-opening calendar dropdown upon focusing
+            fp.close();
+          }
+        }, 0);
       }
-    }
-    if (shouldFocusOnCalendarDropdown) {
-      focusCalendar();
-    } else if (!calendarContainer.contains(currentActiveNode)) {
-      fp.close();
     }
   };
 
