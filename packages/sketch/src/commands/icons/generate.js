@@ -63,8 +63,6 @@ export function generate() {
         let COLUMN_COUNT = 0;
 
         for (const icon of subcategory.members) {
-          console.log(icon);
-          continue;
           const symbol = symbols.find(symbol => {
             const parts = symbol.name.split('/').map(string => string.trim());
             const [_type, _category, _subcategory, name, size] = parts;
@@ -100,22 +98,4 @@ export function generate() {
 
     page.layers.push(...groups);
   });
-}
-
-function getIconsGroupedByBase(members) {
-  return Object.values(
-    members.reduce((acc, member) => {
-      const [type] = member.split('--');
-      if (acc[type]) {
-        return {
-          ...acc,
-          [type]: acc[type].concat(member),
-        };
-      }
-      return {
-        ...acc,
-        [type]: [member],
-      };
-    }, {})
-  );
 }
