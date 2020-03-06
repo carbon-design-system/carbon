@@ -1425,7 +1425,6 @@
     - up chevron
     - up
   sizes:
-    - 16
     - 32
 - name: upload
   friendly_name: Upload

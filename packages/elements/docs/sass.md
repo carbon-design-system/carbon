@@ -1569,6 +1569,12 @@ Generate the CSS for a grid for the given breakpoints and gutters
     @include carbon--make-row();
   }
 
+  .#{$prefix}--row-padding [class*='#{$prefix}--col'],
+  .#{$prefix}--col-padding {
+    padding-top: $grid-gutter / 2;
+    padding-bottom: $grid-gutter / 2;
+  }
+
   .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
     padding-top: $condensed-gutter / 2;
     padding-bottom: $condensed-gutter / 2;
@@ -10872,12 +10878,11 @@ Include a type reset for a given body and mono font family
 
 ```scss
 @mixin carbon--type-reset(
-  $base-font-size: $carbon--base-font-size,
   $body-font-family: carbon--font-family('sans'),
   $mono-font-family: carbon--font-family('mono')
 ) {
   html {
-    font-size: $base-font-size;
+    font-size: 100%;
   }
 
   body {
@@ -10905,7 +10910,6 @@ Include a type reset for a given body and mono font family
 
 | Name                | Description                                                                         | Type     | Default value                 |
 | ------------------- | ----------------------------------------------------------------------------------- | -------- | ----------------------------- |
-| `$base-font-size`   | The base font size for your document                                                | `Number` | `$carbon--base-font-size`     |
 | `$body-font-family` | The font family used on the `<body>` element                                        | `String` | `carbon--font-family('sans')` |
 | `$mono-font-family` | The font family used on elements that require mono fonts, like the `<code>` element | `String` | `carbon--font-family('mono')` |
 
