@@ -178,46 +178,46 @@ export default class Dropdown extends React.Component {
       invalidText,
       downshiftProps,
     } = this.props;
-    const inline = type === 'inline';
-    const className = ({ isOpen }) =>
-      cx(`${prefix}--dropdown`, containerClassName, {
-        [`${prefix}--dropdown--invalid`]: invalid,
-        [`${prefix}--dropdown--open`]: isOpen,
-        [`${prefix}--dropdown--inline`]: inline,
-        [`${prefix}--dropdown--disabled`]: disabled,
-        [`${prefix}--dropdown--light`]: light,
-        [`${prefix}--dropdown--${size}`]: size,
-      });
-    const titleClasses = cx(`${prefix}--label`, {
-      [`${prefix}--label--disabled`]: disabled,
-    });
+    //const inline = type === 'inline';
+    //const className = ({ isOpen }) =>
+    //cx(`${prefix}--dropdown`, containerClassName, {
+    //[`${prefix}--dropdown--invalid`]: invalid,
+    //[`${prefix}--dropdown--open`]: isOpen,
+    //[`${prefix}--dropdown--inline`]: inline,
+    //[`${prefix}--dropdown--disabled`]: disabled,
+    //[`${prefix}--dropdown--light`]: light,
+    //[`${prefix}--dropdown--${size}`]: size,
+    //});
+    //const titleClasses = cx(`${prefix}--label`, {
+    //[`${prefix}--label--disabled`]: disabled,
+    //});
 
-    const helperId =
-      !id || !helperText ? undefined : `dropdown-helper-text-${id}`;
-    const labelId = `dropdown-label-${id}`;
-    const fieldLabelId = `dropdown-field-label-${id}`;
+    //const helperId =
+    //!id || !helperText ? undefined : `dropdown-helper-text-${id}`;
+    //const labelId = `dropdown-label-${id}`;
+    //const fieldLabelId = `dropdown-field-label-${id}`;
 
-    const title = titleText ? (
-      <span className={titleClasses}>{titleText}</span>
-    ) : null;
-    const helperClasses = cx(`${prefix}--form__helper-text`, {
-      [`${prefix}--form__helper-text--disabled`]: disabled,
-    });
-    const helper = helperText ? (
-      <div id={helperId} className={helperClasses}>
-        {helperText}
-      </div>
-    ) : null;
-    const wrapperClasses = cx(
-      `${prefix}--dropdown__wrapper`,
-      `${prefix}--list-box__wrapper`,
-      {
-        [`${prefix}--dropdown__wrapper--inline`]: inline,
-        [`${prefix}--list-box__wrapper--inline`]: inline,
-        [`${prefix}--dropdown__wrapper--inline--invalid`]: inline && invalid,
-        [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
-      }
-    );
+    //const title = titleText ? (
+    //<span className={titleClasses}>{titleText}</span>
+    //) : null;
+    //const helperClasses = cx(`${prefix}--form__helper-text`, {
+    //[`${prefix}--form__helper-text--disabled`]: disabled,
+    //});
+    //const helper = helperText ? (
+    //<div id={helperId} className={helperClasses}>
+    //{helperText}
+    //</div>
+    //) : null;
+    //const wrapperClasses = cx(
+    //`${prefix}--dropdown__wrapper`,
+    //`${prefix}--list-box__wrapper`,
+    //{
+    //[`${prefix}--dropdown__wrapper--inline`]: inline,
+    //[`${prefix}--list-box__wrapper--inline`]: inline,
+    //[`${prefix}--dropdown__wrapper--inline--invalid`]: inline && invalid,
+    //[`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
+    //}
+    //);
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
