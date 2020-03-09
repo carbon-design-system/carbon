@@ -217,6 +217,15 @@ export default class Dropdown extends React.Component {
         [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
       }
     );
+    const SelectedItem = ({ children: selectedItem }) => {
+      if (selectedItem) {
+        if (itemToElement) {
+          return itemToElement(selectedItem);
+        }
+        return itemToString(selectedItem);
+      }
+      return label;
+    };
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
@@ -283,7 +292,7 @@ export default class Dropdown extends React.Component {
                     className={`${prefix}--list-box__label`}
                     title={selectedItem ? itemToString(selectedItem) : label}
                     {...getLabelProps()}>
-                    {selectedItem ? itemToString(selectedItem) : label}
+                    <SelectedItem>{selectedItem}</SelectedItem>
                   </span>
                   <ListBox.MenuIcon
                     isOpen={isOpen}
