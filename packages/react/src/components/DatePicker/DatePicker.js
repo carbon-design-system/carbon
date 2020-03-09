@@ -217,6 +217,16 @@ export default class DatePicker extends Component {
      * The maximum date that a user can pick to.
      */
     maxDate: PropTypes.string,
+
+    /**
+     * The assistive text for the previous month button.
+     */
+    prevMonthNavLabel: PropTypes.string,
+
+    /**
+     * The assistive text for the next month button.
+     */
+    nextMonthNavLabel: PropTypes.string,
   };
 
   static defaultProps = {
@@ -224,6 +234,8 @@ export default class DatePicker extends Component {
     light: false,
     dateFormat: 'm/d/Y',
     locale: 'en',
+    prevMonthNavLabel: 'Go to previous month',
+    nextMonthNavLabel: 'Go to next month',
   };
 
   _container = React.createRef();
@@ -251,6 +263,8 @@ export default class DatePicker extends Component {
       minDate,
       maxDate,
       value,
+      prevMonthNavLabel,
+      nextMonthNavLabel,
       onClose,
     } = this.props;
     if (datePickerType === 'single' || datePickerType === 'range') {
@@ -283,6 +297,8 @@ export default class DatePicker extends Component {
               selectorFlatpickrYearContainer: '.numInputWrapper',
               selectorFlatpickrCurrentMonth: '.cur-month',
               classFlatpickrCurrentMonth: 'cur-month',
+              prevMonthNavLabel,
+              nextMonthNavLabel,
             }),
             carbonFlatpickrFixEventsPlugin({
               inputFrom: this.inputField,

@@ -21,13 +21,17 @@ const monthToStr = (monthNumber, shorthand, locale) =>
  * @param {string} config.selectorFlatpickrYearContainer The CSS selector for the container of year selection UI.
  * @param {string} config.selectorFlatpickrCurrentMonth The CSS selector for the text-based month selection UI.
  * @param {string} config.classFlatpickrCurrentMonth The CSS class for the text-based month selection UI.
+ * @param {string} config.prevMonthNavLabel The assistive text for the previous month button.
+ * @param {string} config.nextMonthNavLabel The assistive text for the next month button.
  * @returns {Plugin} A Flatpickr plugin to use text instead of `<select>` for month picker.
  */
 export default config => fp => {
   const setupElements = () => {
+    const { prevMonthNavLabel, nextMonthNavLabel } = config;
     if (fp.prevMonthNav) {
       const prevMonthNav = document.createElement('button');
       prevMonthNav.className = fp.prevMonthNav.className;
+      prevMonthNav.setAttribute('aria-label', prevMonthNavLabel);
       while (fp.prevMonthNav.firstChild) {
         prevMonthNav.appendChild(fp.prevMonthNav.firstChild);
       }
@@ -36,6 +40,7 @@ export default config => fp => {
     if (fp.nextMonthNav) {
       const nextMonthNav = document.createElement('button');
       nextMonthNav.className = fp.nextMonthNav.className;
+      nextMonthNav.setAttribute('aria-label', nextMonthNavLabel);
       while (fp.nextMonthNav.firstChild) {
         nextMonthNav.appendChild(fp.nextMonthNav.firstChild);
       }
