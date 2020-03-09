@@ -17,7 +17,6 @@ import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
 import carbonFlatpickrFocusPlugin from './plugins/focusPlugin';
 import carbonFlatpickrMonthSelectPlugin from './plugins/monthSelectPlugin';
 import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
-import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -374,31 +373,11 @@ export default class DatePicker extends Component {
     }
   };
 
-  addKeyboardEvents = cal => {
+  addKeyboardEvents = () => {
     if (this.inputField) {
-      this.inputField.addEventListener('keydown', e => {
-        if (match(e, keys.ArrowDown)) {
-          (
-            cal.selectedDateElem ||
-            cal.todayDateElem ||
-            cal.calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
-            cal.calendarContainer
-          ).focus();
-        }
-      });
       this.inputField.addEventListener('change', this.onChange);
     }
     if (this.toInputField) {
-      this.toInputField.addEventListener('keydown', e => {
-        if (match(e, keys.ArrowDown)) {
-          (
-            cal.selectedDateElem ||
-            cal.todayDateElem ||
-            cal.calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
-            cal.calendarContainer
-          ).focus();
-        }
-      });
       this.toInputField.addEventListener('change', this.onChange);
     }
   };

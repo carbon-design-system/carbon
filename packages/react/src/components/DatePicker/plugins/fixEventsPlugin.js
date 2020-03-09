@@ -12,6 +12,20 @@ import { match, keys } from '../../../internal/keyboard';
  * @returns {Plugin} A Flatpickr plugin to fix Flatpickr's behavior of certain events.
  */
 export default config => fp => {
+  const focusOnCalendar = () => {
+    const focusTarget =
+      fp.selectedDateElem ||
+      fp.todayDateElem ||
+      fp.calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
+      fp.calendarContainer;
+    if (focusTarget) {
+      if (focusTarget !== fp.calendarContainer) {
+        focusTarget.tabIndex = '0';
+      }
+      focusTarget.focus();
+    }
+  };
+
   /**
    * Handles `keydown` event.
    */
@@ -39,6 +53,9 @@ export default config => fp => {
       } else if (match(event, keys.ArrowDown)) {
         event.preventDefault();
         fp.open();
+        setTimeout(() => {
+          focusOnCalendar();
+        }, 100); // VO seems to attempt to steal focus back to `<input>` for unknown reason
       }
     }
   };
