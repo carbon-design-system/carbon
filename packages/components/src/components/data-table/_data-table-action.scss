@@ -260,6 +260,8 @@
 
   .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
     margin: 0;
+    max-width: none;
+    white-space: nowrap;
   }
 
   .#{$prefix}--overflow-menu--data-table {
@@ -600,7 +602,6 @@
     .#{$prefix}--toolbar-action
     ~ .#{$prefix}--btn {
     height: rem(32px);
-    width: rem(160px);
     overflow: hidden;
   }
 }
