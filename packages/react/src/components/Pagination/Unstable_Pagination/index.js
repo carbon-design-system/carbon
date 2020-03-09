@@ -6,5 +6,4 @@
  */
 
 export Unstable_Pagination from './Pagination';
-export PageInput from './PageInput';
 export PageSelector from './PageSelector';

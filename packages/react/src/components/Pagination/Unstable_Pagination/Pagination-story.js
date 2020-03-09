@@ -17,7 +17,6 @@ import {
 } from '@storybook/addon-knobs';
 
 import Unstable_Pagination from './Pagination';
-import PageInput from './PageInput';
 import PageSelector from './PageSelector';
 
 const props = () => ({
@@ -88,63 +87,6 @@ storiesOf('UNSTABLE Pagination', module)
                   id="select-1"
                   onChange={event => onSetPage(event.target.value)}
                   totalPages={totalPages}
-                />
-              )}
-            </Unstable_Pagination>
-            \`\`\`
-          `,
-      },
-    }
-  )
-  .add(
-    'with a page input',
-    () => (
-      <Unstable_Pagination
-        {...props()}
-        totalItems={350}
-        pageSizes={array('Choices of `pageSize` (pageSizes)', [10, 20, 30])}>
-        {({ currentPage, onSetPage, totalPages }) => (
-          <PageInput
-            currentPage={currentPage}
-            totalPages={totalPages}
-            id="number-input-1"
-            onChange={event => onSetPage(event.imaginaryTarget.value)}
-          />
-        )}
-      </Unstable_Pagination>
-    ),
-    {
-      info: {
-        propTables: [Unstable_Pagination, PageInput],
-        text: `
-            🚨 This component is *experimental* and may change. 🚨
-            \`Unstable_Pagination\` accepts a render prop \`children\`.
-            This example wraps the \`children\` (\`PageInput\`) in a function, allowing it to pass information back to the parent component.
-            \`\`\`jsx
-            {/** 
-              * Provide \`totalItems\` to \`Unstable_Pagination\` when using the \`PageSelector\` child.
-              * \`Unstable_Pagination\` uses \`totalItems\` to calculate \`totalPages\`.
-              * And then, \`PageInput\` uses the calculated \`totalPages\` to set the \`max\` for the input.
-              */}
-            <Unstable_Pagination
-              totalItems={350}
-              pageSizes={[10, 15, 20, 25]}
-            >
-              {/** 
-                * Below, \`children\` is a render prop, wrapped in a function.
-                * - \`currentPage\` is used to display the current page.
-                * - \`onSetPage\` is used to update the current page state in the parent component.
-                * - \`totalPages\` is calculated using the \`totalItems\` value provided to the parent component. In the child \`PageInput\` component shown below, \`totalPages\` is used to set the \`max\` for the input.
-                */}
-              {({ currentPage, onSetPage, totalPages }) => (
-                <PageInput
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  id="number-input-1"
-                  /**
-                   * NOTE: we are using \`event.imaginaryTarget.value\` because this is a controlled input:
-                   */
-                  onChange={event => onSetPage(event.imaginaryTarget.value)}
                 />
               )}
             </Unstable_Pagination>
