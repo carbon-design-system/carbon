@@ -3425,6 +3425,7 @@ $carbon--spacing-05: 1rem;
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [tile [mixin]](#tile-mixin)
+  - [toggle [mixin]](#toggle-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
@@ -10261,12 +10262,11 @@ Include a type reset for a given body and mono font family
 
 ```scss
 @mixin carbon--type-reset(
-  $base-font-size: $carbon--base-font-size,
   $body-font-family: carbon--font-family('sans'),
   $mono-font-family: carbon--font-family('mono')
 ) {
   html {
-    font-size: $base-font-size;
+    font-size: 100%;
   }
 
   body {
@@ -10294,7 +10294,6 @@ Include a type reset for a given body and mono font family
 
 | Name                | Description                                                                         | Type     | Default value                 |
 | ------------------- | ----------------------------------------------------------------------------------- | -------- | ----------------------------- |
-| `$base-font-size`   | The base font size for your document                                                | `Number` | `$carbon--base-font-size`     |
 | `$body-font-family` | The font family used on the `<body>` element                                        | `String` | `carbon--font-family('sans')` |
 | `$mono-font-family` | The font family used on elements that require mono fonts, like the `<code>` element | `String` | `carbon--font-family('mono')` |
 
@@ -17480,7 +17479,7 @@ Link styles
     transition: $duration--fast-01 motion(standard, productive);
 
     &:hover {
-      color: $link-01;
+      color: $hover-primary-text;
       text-decoration: underline;
     }
 
@@ -17507,7 +17506,7 @@ Link styles
     }
 
     &:visited:hover {
-      color: $link-01;
+      color: $hover-primary-text;
     }
   }
 
@@ -17556,10 +17555,10 @@ Link styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [link-01 [variable]](#link-01-variable)
+  - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [text-01 [variable]](#text-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [visited-link [variable]](#visited-link-variable)
-  - [hover-primary-text [variable]](#hover-primary-text-variable)
 
 ## list
 
@@ -23267,7 +23266,6 @@ Toggle styles
     align-items: center;
     width: carbon--rem(48px);
     height: carbon--rem(24px);
-    margin: $carbon--spacing-03 0;
     cursor: pointer;
 
     // Toggle background oval
@@ -23301,6 +23299,10 @@ Toggle styles
       background-color: $icon-03;
       content: '';
       transition: transform $duration--fast-01 motion(exit, productive);
+    }
+
+    .#{$prefix}--toggle-input__label & {
+      margin-top: $carbon--spacing-05;
     }
   }
 
@@ -23465,6 +23467,7 @@ Toggle styles
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [text-02 [variable]](#text-02-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
 
 ## toolbar
 
