@@ -272,7 +272,6 @@
     align-items: center;
     width: carbon--rem(48px);
     height: carbon--rem(24px);
-    margin: $carbon--spacing-03 0;
     cursor: pointer;
 
     // Toggle background oval
@@ -306,6 +305,10 @@
       background-color: $icon-03;
       content: '';
       transition: transform $duration--fast-01 motion(exit, productive);
+    }
+    
+    .#{$prefix}--toggle-input__label & {
+      margin-top: $carbon--spacing-05;
     }
   }
 
