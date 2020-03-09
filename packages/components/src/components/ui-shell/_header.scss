@@ -223,9 +223,7 @@
   a.#{$prefix}--header__menu-item[aria-current='page'],
   a.#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current {
     color: $shell-header-text-01;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 3px solid $inverse-support-04;
+    border-bottom: 2px solid $inverse-support-04;
   }
 
   a.#{$prefix}--header__menu-item[aria-current='page']:focus,
