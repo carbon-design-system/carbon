@@ -27,9 +27,29 @@ export default config => fp => {
   };
 
   /**
+   * Cleans-up tab indices of prev/next month buttons.
+   */
+  const handleCloseCalendarDropdown = () => {
+    const { calendarContainer } = fp;
+    const prevMonthNav = calendarContainer.querySelector(
+      '.flatpickr-prev-month'
+    );
+    if (prevMonthNav) {
+      prevMonthNav.tabIndex = '0';
+    }
+    const nextMonthNav = calendarContainer.querySelector(
+      '.flatpickr-next-month'
+    );
+    if (nextMonthNav) {
+      nextMonthNav.tabIndex = '0';
+    }
+  };
+
+  /**
    * Handles `keydown` event.
    */
   const handleKeydown = event => {
+    const { calendarContainer } = fp;
     const { inputFrom, inputTo } = config;
     const { target } = event;
     if (inputFrom === target || inputTo === target) {
@@ -54,6 +74,20 @@ export default config => fp => {
         event.preventDefault();
         fp.open();
         setTimeout(() => {
+          // Makes prev/next month buttons not sequential-focusable
+          // when user hits down arrow keys to open calendar dropdown
+          const prevMonthNav = calendarContainer.querySelector(
+            '.flatpickr-prev-month'
+          );
+          if (prevMonthNav) {
+            prevMonthNav.tabIndex = '-1';
+          }
+          const nextMonthNav = calendarContainer.querySelector(
+            '.flatpickr-next-month'
+          );
+          if (nextMonthNav) {
+            nextMonthNav.tabIndex = '-1';
+          }
           focusOnCalendar();
         }, 100); // VO seems to attempt to steal focus back to `<input>` for unknown reason
       }
@@ -91,6 +125,7 @@ export default config => fp => {
   };
 
   return {
+    onClose: [handleCloseCalendarDropdown],
     onReady: [register, init],
     onDestroy: [release],
   };
