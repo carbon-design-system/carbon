@@ -48,7 +48,7 @@
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
     border-radius: 50%;
-    margin: 9px $carbon--spacing-03 0 0;
+    margin: rem(10px) $carbon--spacing-03 0 0;
     fill: $interactive-04;
   }
 
@@ -140,15 +140,6 @@
   .#{$prefix}--progress-step--current {
     .#{$prefix}--progress-line {
       background-color: $interactive-01;
-    }
-  }
-
-  .#{$prefix}--progress-step--current svg {
-    stroke: $interactive-04;
-    fill: $interactive-04;
-
-    path:last-of-type {
-      stroke-width: 40%;
     }
   }
 
