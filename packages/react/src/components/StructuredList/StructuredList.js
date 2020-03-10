@@ -26,11 +26,6 @@ export class StructuredListWrapper extends Component {
     className: PropTypes.string,
 
     /**
-     * Specify whether a border should be added to your StructuredListWrapper
-     */
-    border: PropTypes.bool,
-
-    /**
      * Specify whether your StructuredListWrapper should have selections
      */
     selection: PropTypes.bool,
@@ -42,23 +37,14 @@ export class StructuredListWrapper extends Component {
   };
 
   static defaultProps = {
-    border: false,
     selection: false,
     ariaLabel: 'Structured list section',
   };
 
   render() {
-    const {
-      children,
-      selection,
-      className,
-      border,
-      ariaLabel,
-      ...other
-    } = this.props;
+    const { children, selection, className, ariaLabel, ...other } = this.props;
 
     const classes = classNames(`${prefix}--structured-list`, className, {
-      [`${prefix}--structured-list--border`]: border,
       [`${prefix}--structured-list--selection`]: selection,
     });
 
