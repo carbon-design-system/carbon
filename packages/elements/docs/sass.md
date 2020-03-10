@@ -21,7 +21,7 @@
   - [❌carbon--no-gutter [mixin]](#carbon--no-gutter-mixin)
   - [❌carbon--hang [mixin]](#carbon--hang-mixin)
   - [✅carbon--aspect-ratios [variable]](#carbon--aspect-ratios-variable)
-  - [❌carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
+  - [❌carbon--make-aspect-ratios [mixin]](#carbon--make-aspect-ratios-mixin)
   - [❌carbon--make-container [mixin]](#carbon--make-container-mixin)
   - [❌carbon--set-largest-breakpoint [mixin]](#carbon--set-largest-breakpoint-mixin)
   - [❌carbon--make-container-max-widths [mixin]](#carbon--make-container-max-widths-mixin)
@@ -1340,7 +1340,15 @@ in code
 <summary>Source code</summary>
 
 ```scss
-$carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
+$carbon--aspect-ratios: (
+  (16, 9),
+  (9, 16),
+  (2, 1),
+  (1, 2),
+  (4, 3),
+  (3, 4),
+  (1, 1)
+);
 ```
 
 </details>
@@ -1348,38 +1356,55 @@ $carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
 - **Group**: [@carbon/grid](#carbongrid)
 - **Type**: `List`
 
-### ❌carbon--aspect-ratio [mixin]
+### ❌carbon--make-aspect-ratios [mixin]
 
-Output the CSS classes for generating aspect ratio classes
+Generates the CSS classname utilities for the aspect ratios
+
+CSS Tricks article on aspect ratios and all the different ways it can be done.
+https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
+
+That article references an earlier article on the topic.
+https://keithjgrant.com/posts/2017/03/aspect-ratios/
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-@mixin carbon--aspect-ratio($aspect-ratios: $carbon--aspect-ratios) {
+@mixin carbon--make-aspect-ratios($width, $height) {
   .#{$prefix}--aspect-ratio {
-    height: 0;
     position: relative;
   }
 
+  .#{$prefix}--aspect-ratio::before {
+    content: '';
+    width: 1px;
+    margin-left: -1px;
+    float: left;
+    height: 0;
+  }
+
+  .#{$prefix}--aspect-ratio::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  @each $aspect-ratio in $aspect-ratios {
+    $width: nth($aspect-ratio, 1);
+    $height: nth($aspect-ratio, 2);
+
+    .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
+      padding-top: percentage($height / $width);
+    }
+  }
+
+  // leaving here for legacy support
   .#{$prefix}--aspect-ratio--object {
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 100;
-  }
-
-  @each $ratio in $aspect-ratios {
-    $width: nth($ratio, 1);
-    $height: nth($ratio, 2);
-
-    .#{$prefix}--aspect-ratio--#{$width}x#{$height} {
-      padding-bottom: percentage($height / $width);
-    }
   }
 }
 ```
@@ -1388,9 +1413,10 @@ Output the CSS classes for generating aspect ratio classes
 
 - **Parameters**:
 
-| Name             | Description                         | Type   | Default value            |
-| ---------------- | ----------------------------------- | ------ | ------------------------ |
-| `$aspect-ratios` | A list of aspect ratios to generate | `List` | `$carbon--aspect-ratios` |
+| Name      | Description                 | Type     | Default value |
+| --------- | --------------------------- | -------- | ------------- |
+| `$width`  | width from an aspect ratio  | `Number` | —             |
+| `$height` | height from an aspect ratio | `Number` | —             |
 
 - **Group**: [@carbon/grid](#carbongrid)
 - **Requires**:
@@ -1553,7 +1579,7 @@ Generate the CSS for a grid for the given breakpoints and gutters
   @include carbon--make-grid-columns($breakpoints, $grid-gutter);
   @include carbon--no-gutter();
   @include carbon--hang($grid-gutter);
-  @include carbon--aspect-ratio();
+  @include carbon--make-aspect-ratios();
 }
 ```
 
@@ -1575,7 +1601,7 @@ Generate the CSS for a grid for the given breakpoints and gutters
   - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
   - [carbon--no-gutter [mixin]](#carbon--no-gutter-mixin)
   - [carbon--hang [mixin]](#carbon--hang-mixin)
-  - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
+  - [carbon--make-aspect-ratios [mixin]](#carbon--make-aspect-ratios-mixin)
   - [prefix [variable]](#prefix-variable)
 
 ### ✅prefix [variable]
@@ -1598,7 +1624,7 @@ $prefix: 'bx';
   - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
   - [carbon--no-gutter [mixin]](#carbon--no-gutter-mixin)
   - [carbon--hang [mixin]](#carbon--hang-mixin)
-  - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
+  - [carbon--make-aspect-ratios [mixin]](#carbon--make-aspect-ratios-mixin)
   - [carbon--grid [mixin]](#carbon--grid-mixin)
   - [custom-property [mixin]](#custom-property-mixin)
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
