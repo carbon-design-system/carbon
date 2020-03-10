@@ -14,30 +14,13 @@ import * as g90 from './g90';
 import * as v9 from './v9';
 import { tokens, formatTokenName, unstable__meta } from './tokens';
 
-import * as components from './components';
-
 export { g10, g90, g100, white, v9 };
 export { tokens, formatTokenName, unstable__meta };
 
 export const themes = {
-  white: {
-    ...white,
-    ...components.white,
-  },
-  g10: {
-    ...g10,
-    ...components.g10,
-  },
-  g90: {
-    ...g90,
-    ...components.g90,
-  },
-  g100: {
-    ...g100,
-    ...components.g100,
-  },
-  v9: {
-    ...v9,
-    ...components.v9,
-  },
+  white,
+  g10,
+  g90,
+  g100,
+  v9,
 };

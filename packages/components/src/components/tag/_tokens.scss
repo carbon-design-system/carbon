@@ -1,0 +1,212 @@
+//
+// Copyright IBM Corp. 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/component-tokens';
+@import '../../globals/scss/vendor/@carbon/elements/scss/colors/colors';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+
+$tag-colors: (
+  // red
+  'tag-background-red': (
+    $theme-white: $carbon__red-20,
+    $theme-g10: $carbon__red-20,
+    $theme-g90: $carbon__red-80,
+    $theme-g100: $carbon__red-80,
+  ),
+  'tag-color-red': (
+    $theme-white: $carbon__red-70,
+    $theme-g10: $carbon__red-70,
+    $theme-g90: $carbon__red-30,
+    $theme-g100: $carbon__red-30,
+  ),
+  'tag-hover-red': (
+    $theme-white: $carbon__red-30,
+    $theme-g10: $carbon__red-30,
+    $theme-g90: $carbon__red-70,
+    $theme-g100: $carbon__red-70,
+  ),
+
+  // magenta
+  'tag-background-magenta': (
+    $theme-white: $carbon__magenta-20,
+    $theme-g10: $carbon__magenta-20,
+    $theme-g90: $carbon__magenta-80,
+    $theme-g100: $carbon__magenta-80,
+  ),
+  'tag-color-magenta': (
+    $theme-white: $carbon__magenta-70,
+    $theme-g10: $carbon__magenta-70,
+    $theme-g90: $carbon__magenta-30,
+    $theme-g100: $carbon__magenta-30,
+  ),
+  'tag-hover-magenta': (
+    $theme-white: $carbon__magenta-30,
+    $theme-g10: $carbon__magenta-30,
+    $theme-g90: $carbon__magenta-70,
+    $theme-g100: $carbon__magenta-70,
+  ),
+
+  // purple
+  'tag-background-purple': (
+    $theme-white: $carbon__purple-20,
+    $theme-g10: $carbon__purple-20,
+    $theme-g90: $carbon__purple-80,
+    $theme-g100: $carbon__purple-80,
+  ),
+  'tag-color-purple': (
+    $theme-white: $carbon__purple-70,
+    $theme-g10: $carbon__purple-70,
+    $theme-g90: $carbon__purple-30,
+    $theme-g100: $carbon__purple-30,
+  ),
+  'tag-hover-purple': (
+    $theme-white: $carbon__purple-30,
+    $theme-g10: $carbon__purple-30,
+    $theme-g90: $carbon__purple-70,
+    $theme-g100: $carbon__purple-70,
+  ),
+
+  // blue
+  'tag-background-blue': (
+    $theme-white: $carbon__blue-20,
+    $theme-g10: $carbon__blue-20,
+    $theme-g90: $carbon__blue-80,
+    $theme-g100: $carbon__blue-80,
+  ),
+  'tag-color-blue': (
+    $theme-white: $carbon__blue-70,
+    $theme-g10: $carbon__blue-70,
+    $theme-g90: $carbon__blue-30,
+    $theme-g100: $carbon__blue-30,
+  ),
+  'tag-hover-blue': (
+    $theme-white: $carbon__blue-30,
+    $theme-g10: $carbon__blue-30,
+    $theme-g90: $carbon__blue-70,
+    $theme-g100: $carbon__blue-70,
+  ),
+
+  // cyan
+  'tag-background-cyan': (
+    $theme-white: $carbon__cyan-20,
+    $theme-g10: $carbon__cyan-20,
+    $theme-g90: $carbon__cyan-80,
+    $theme-g100: $carbon__cyan-80,
+  ),
+  'tag-color-cyan': (
+    $theme-white: $carbon__cyan-70,
+    $theme-g10: $carbon__cyan-70,
+    $theme-g90: $carbon__cyan-30,
+    $theme-g100: $carbon__cyan-30,
+  ),
+  'tag-hover-cyan': (
+    $theme-white: $carbon__cyan-30,
+    $theme-g10: $carbon__cyan-30,
+    $theme-g90: $carbon__cyan-70,
+    $theme-g100: $carbon__cyan-70,
+  ),
+
+  // teal
+  'tag-background-teal': (
+    $theme-white: $carbon__teal-20,
+    $theme-g10: $carbon__teal-20,
+    $theme-g90: $carbon__teal-80,
+    $theme-g100: $carbon__teal-80,
+  ),
+  'tag-color-teal': (
+    $theme-white: $carbon__teal-70,
+    $theme-g10: $carbon__teal-70,
+    $theme-g90: $carbon__teal-30,
+    $theme-g100: $carbon__teal-30,
+  ),
+  'tag-hover-teal': (
+    $theme-white: $carbon__teal-30,
+    $theme-g10: $carbon__teal-30,
+    $theme-g90: $carbon__teal-70,
+    $theme-g100: $carbon__teal-70,
+  ),
+
+  // green
+  'tag-background-green': (
+    $theme-white: $carbon__green-20,
+    $theme-g10: $carbon__green-20,
+    $theme-g90: $carbon__green-80,
+    $theme-g100: $carbon__green-80,
+  ),
+  'tag-color-green': (
+    $theme-white: $carbon__green-70,
+    $theme-g10: $carbon__green-70,
+    $theme-g90: $carbon__green-30,
+    $theme-g100: $carbon__green-30,
+  ),
+  'tag-hover-green': (
+    $theme-white: $carbon__green-30,
+    $theme-g10: $carbon__green-30,
+    $theme-g90: $carbon__green-70,
+    $theme-g100: $carbon__green-70,
+  ),
+
+  // gray
+  'tag-background-gray': (
+    $theme-white: $carbon__gray-20,
+    $theme-g10: $carbon__gray-20,
+    $theme-g90: $carbon__gray-80,
+    $theme-g100: $carbon__gray-80,
+  ),
+  'tag-color-gray': (
+    $theme-white: $carbon__gray-70,
+    $theme-g10: $carbon__gray-70,
+    $theme-g90: $carbon__gray-30,
+    $theme-g100: $carbon__gray-30,
+  ),
+  'tag-hover-gray': (
+    $theme-white: $carbon__gray-30,
+    $theme-g10: $carbon__gray-30,
+    $theme-g90: $carbon__gray-70,
+    $theme-g100: $carbon__gray-70,
+  ),
+
+  // cool-gray
+  'tag-background-cool-gray': (
+    $theme-white: $carbon__cool-gray-20,
+    $theme-g10: $carbon__cool-gray-20,
+    $theme-g90: $carbon__cool-gray-80,
+    $theme-g100: $carbon__cool-gray-80,
+  ),
+  'tag-color-cool-gray': (
+    $theme-white: $carbon__cool-gray-70,
+    $theme-g10: $carbon__cool-gray-70,
+    $theme-g90: $carbon__cool-gray-30,
+    $theme-g100: $carbon__cool-gray-30,
+  ),
+  'tag-hover-cool-gray': (
+    $theme-white: $carbon__cool-gray-30,
+    $theme-g10: $carbon__cool-gray-30,
+    $theme-g90: $carbon__cool-gray-70,
+    $theme-g100: $carbon__cool-gray-70,
+  ),
+
+  // warm-gray
+  'tag-background-warm-gray': (
+    $theme-white: $carbon__warm-gray-20,
+    $theme-g10: $carbon__warm-gray-20,
+    $theme-g90: $carbon__warm-gray-80,
+    $theme-g100: $carbon__warm-gray-80,
+  ),
+  'tag-color-warm-gray': (
+    $theme-white: $carbon__warm-gray-70,
+    $theme-g10: $carbon__warm-gray-70,
+    $theme-g90: $carbon__warm-gray-30,
+    $theme-g100: $carbon__warm-gray-30,
+  ),
+  'tag-hover-warm-gray': (
+    $theme-white: $carbon__warm-gray-30,
+    $theme-g10: $carbon__warm-gray-30,
+    $theme-g90: $carbon__warm-gray-70,
+    $theme-g100: $carbon__warm-gray-70,
+  ),
+);
