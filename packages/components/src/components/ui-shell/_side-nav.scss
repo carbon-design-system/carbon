@@ -52,7 +52,7 @@
   .#{$prefix}--side-nav--fixed &,
   .#{$prefix}--side-nav--expanded & {
     @if $visibility == true {
-      visibility: visible;
+      visibility: inherit;
     }
     @if $opacity == true {
       opacity: 1;
