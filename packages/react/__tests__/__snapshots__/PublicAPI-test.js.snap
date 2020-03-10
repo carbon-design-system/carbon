@@ -4724,6 +4724,9 @@ Map {
       "filter": Object {
         "type": "bool",
       },
+      "onClose": Object {
+        "type": "func",
+      },
       "title": Object {
         "type": "string",
       },
