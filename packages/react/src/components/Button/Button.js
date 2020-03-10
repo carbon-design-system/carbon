@@ -68,7 +68,6 @@ const Button = React.forwardRef(function Button(
     type,
   };
   const anchorProps = {
-    role: 'button',
     href,
   };
   const assistiveText = hasIconOnly ? (
