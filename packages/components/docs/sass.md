@@ -14752,7 +14752,7 @@ Data table action styles
     .#{$prefix}--toolbar-search-container-active
       .#{$prefix}--search
       .#{$prefix}--search-input {
-      visibility: visible;
+      visibility: inherit;
     }
 
     .#{$prefix}--toolbar-search-container-active
@@ -15764,7 +15764,7 @@ Data table expandable styles
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
-  visibility: visible;
+  visibility: inherit;
   white-space: nowrap;
 }
 ```
@@ -18556,7 +18556,7 @@ Modal styles
       visibility 0ms linear $duration--moderate-02;
 
     &.is-visible {
-      visibility: visible;
+      visibility: inherit;
       opacity: 1;
       background-color: $overlay-01;
       transition: background-color $duration--slow-02 motion(entrance, expressive),
@@ -20583,7 +20583,7 @@ Progress indicator styles
   //OVERFLOW STYLING
   .#{$prefix}--progress-label-overflow:hover ~ .#{$prefix}--tooltip,
   .#{$prefix}--progress-label-overflow:focus ~ .#{$prefix}--tooltip {
-    visibility: visible;
+    visibility: inherit;
   }
 
   .#{$prefix}--progress-step .#{$prefix}--tooltip .#{$prefix}--tooltip__caret {
@@ -21127,7 +21127,7 @@ Search styles
       outline $duration--fast-02 motion(standard, productive), border
         $duration--fast-02 motion(standard, productive);
     cursor: pointer;
-    visibility: visible;
+    visibility: inherit;
     opacity: 1;
     height: rem(40px);
     width: rem(40px);
@@ -22891,7 +22891,7 @@ Tile styles
     }
 
     .#{$prefix}--tile-content__below-the-fold {
-      visibility: visible;
+      visibility: inherit;
       opacity: 1;
       transition: opacity $duration--fast-02 motion(standard, productive), visibility
           $duration--fast-02 motion(standard, productive);
@@ -24714,7 +24714,7 @@ UI shell header
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
-    visibility: visible;
+    visibility: inherit;
     white-space: nowrap;
   }
 
@@ -25224,7 +25224,7 @@ properties for opacity and visibility to help with the transition animation.
   .#{$prefix}--side-nav--fixed &,
   .#{$prefix}--side-nav--expanded & {
     @if $visibility == true {
-      visibility: visible;
+      visibility: inherit;
     }
     @if $opacity == true {
       opacity: 1;
