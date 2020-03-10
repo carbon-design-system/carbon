@@ -3538,7 +3538,6 @@ Map {
         "type": "bool",
       },
       "iconDescription": Object {
-        "isRequired": true,
         "type": "string",
       },
       "kind": Object {
@@ -3567,7 +3566,6 @@ Map {
         "type": "string",
       },
       "statusIconDescription": Object {
-        "isRequired": true,
         "type": "string",
       },
       "subtitle": Object {
@@ -3604,7 +3602,6 @@ Map {
         "type": "bool",
       },
       "iconDescription": Object {
-        "isRequired": true,
         "type": "string",
       },
       "kind": Object {
@@ -3633,7 +3630,6 @@ Map {
         "type": "string",
       },
       "statusIconDescription": Object {
-        "isRequired": true,
         "type": "string",
       },
       "subtitle": Object {
