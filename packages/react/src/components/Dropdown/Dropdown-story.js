@@ -11,6 +11,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
+import Link from '../Link';
 import WithState from '../../tools/withState';
 
 const items = [
@@ -81,8 +82,7 @@ const itemToElement = item => {
         overflow: 'hidden',
         whiteSpace: 'nowrap',
       }}>
-      <span>{first}</span>
-      <span style={{ color: 'blue' }}> {rest.join(' ')}</span>
+      <span>{first}</span> <Link href="#">{rest.join(' ')}</Link>
     </div>
   );
 };
