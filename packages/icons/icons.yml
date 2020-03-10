@@ -433,7 +433,6 @@
     - dev
     - development
   sizes:
-    - 16
     - 32
 - name: copy
   friendly_name: Copy
@@ -459,7 +458,6 @@
     - trash
     - edit
   sizes:
-    - 16
     - 32
 - name: document
   friendly_name: Document
@@ -550,7 +548,6 @@
 - name: edit--off
   friendly_name: Edit off
   sizes:
-    - 16
     - 32
   aliases:
     - modify
@@ -565,7 +562,6 @@
     - post
     - send
   sizes:
-    - 16
     - 32
 - name: error
   friendly_name: Error
@@ -627,12 +623,10 @@
     - fave
     - bookmark
   sizes:
-    - 16
     - 32
 - name: favorite--filled
   friendly_name: Favorite filled
   sizes:
-    - 16
     - 32
   aliases:
     - heart
@@ -703,7 +697,6 @@
     - 2x grid
     - pattern
   sizes:
-    - 16
     - 32
 - name: help
   friendly_name: Help
@@ -877,7 +870,6 @@
     - edit
     - padlock
   sizes:
-    - 16
     - 32
 - name: maximize
   friendly_name: Maximize
@@ -1394,7 +1386,6 @@
     - destroy
     - remove
   sizes:
-    - 16
     - 32
 - name: undo
   friendly_name: Undo
