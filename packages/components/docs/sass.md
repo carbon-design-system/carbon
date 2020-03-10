@@ -3425,6 +3425,7 @@ $carbon--spacing-05: 1rem;
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [tile [mixin]](#tile-mixin)
+  - [toggle [mixin]](#toggle-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
@@ -12885,7 +12886,7 @@ Button styles
     + .#{$prefix}--btn--primary.#{$prefix}--btn--disabled,
   .#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled
     + .#{$prefix}--btn--danger.#{$prefix}--btn--disabled {
-    border-left: rem(1px) solid $disabled-03;
+    box-shadow: rem(-1px) 0 0 0 $disabled-03;
   }
 
   .#{$prefix}--btn {
@@ -17477,7 +17478,7 @@ Link styles
     transition: $duration--fast-01 motion(standard, productive);
 
     &:hover {
-      color: $link-01;
+      color: $hover-primary-text;
       text-decoration: underline;
     }
 
@@ -17504,7 +17505,7 @@ Link styles
     }
 
     &:visited:hover {
-      color: $link-01;
+      color: $hover-primary-text;
     }
   }
 
@@ -17553,10 +17554,10 @@ Link styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [link-01 [variable]](#link-01-variable)
+  - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [text-01 [variable]](#text-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [visited-link [variable]](#visited-link-variable)
-  - [hover-primary-text [variable]](#hover-primary-text-variable)
 
 ## list
 
@@ -22386,8 +22387,6 @@ Tag styles
   // tags used for filtering
   .#{$prefix}--tag--filter {
     @include tag-theme($inverse-02, $inverse-01);
-
-    cursor: pointer;
     padding-right: rem(2px);
 
     &:focus,
@@ -22396,28 +22395,34 @@ Tag styles
     }
   }
 
-  .#{$prefix}--tag--filter > svg {
+  .#{$prefix}--tag__close-icon {
     flex-shrink: 0;
     width: rem(20px);
     height: rem(20px);
     margin: 0 0 0 rem(4px);
     padding: rem(2px);
     border: 0;
-    fill: $inverse-01;
     background-color: transparent;
     border-radius: 50%;
+    cursor: pointer;
 
     &:hover {
       background-color: $inverse-hover-ui;
     }
   }
 
-  .#{$prefix}--tag--filter:focus > svg {
+  .#{$prefix}--tag__close-icon svg {
+    fill: $inverse-01;
+  }
+
+  .#{$prefix}--tag__close-icon:focus {
+    outline: none;
     box-shadow: inset 0 0 0 2px $inverse-focus-ui;
     border-radius: 50%;
   }
 
-  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg:hover {
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
+    .#{$prefix}--tag__close-icon:hover {
     background-color: transparent;
   }
 
@@ -23264,7 +23269,6 @@ Toggle styles
     align-items: center;
     width: carbon--rem(48px);
     height: carbon--rem(24px);
-    margin: $carbon--spacing-03 0;
     cursor: pointer;
 
     // Toggle background oval
@@ -23298,6 +23302,10 @@ Toggle styles
       background-color: $icon-03;
       content: '';
       transition: transform $duration--fast-01 motion(exit, productive);
+    }
+
+    .#{$prefix}--toggle-input__label & {
+      margin-top: $carbon--spacing-05;
     }
   }
 
@@ -23462,6 +23470,7 @@ Toggle styles
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [text-02 [variable]](#text-02-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
 
 ## toolbar
 

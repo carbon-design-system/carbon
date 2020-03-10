@@ -15,7 +15,6 @@ import { syncSymbol } from '../../tools/symbols';
 
 const meta = require('@carbon/icons/build-info.json');
 const metadata = require('@carbon/icons/metadata.json');
-const { icons } = metadata;
 
 export function syncIconSymbols(
   document,
@@ -107,17 +106,17 @@ export function syncIconSymbols(
         },
       };
 
-      const info = findIconByName(name);
-      const categories = info.categories;
+      const info = metadata.icons.find(icon => {
+        return icon.name === name;
+      });
       let symbolName = name;
 
       if (sizes.length !== 1) {
         symbolName = `${name} / ${icon.size}`;
       }
 
-      if (Array.isArray(categories) && categories.length > 0) {
-        const [category] = categories;
-        symbolName = `${category.name} / ${category.subcategory} / ${symbolName}`;
+      if (info.category && info.subcategory) {
+        symbolName = `${info.category} / ${info.subcategory} / ${symbolName}`;
       }
 
       symbolName = `icon / ${symbolName}`;
@@ -247,28 +246,4 @@ function createSVGLayer(svg) {
   const svgLayer = svgImporter.importAsLayer();
 
   return svgLayer;
-}
-
-function findIconByName(name) {
-  const [basename, ...variants] = name.split('--');
-  const iconEntry = icons.find(icon => {
-    return icon.name === basename;
-  });
-
-  if (!iconEntry) {
-    console.log(`Unable to find the following icon by name ${name}`);
-    return iconEntry;
-  }
-
-  if (variants.length > 0) {
-    const icon = iconEntry.variants.find(variant => {
-      return variant.name === name;
-    });
-    return {
-      ...iconEntry,
-      ...icon,
-    };
-  }
-
-  return iconEntry;
 }
