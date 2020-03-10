@@ -358,7 +358,7 @@ ToastNotification.propTypes = {
   /**
    * Provide a description for "close" icon that can be read by screen readers
    */
-  iconDescription: PropTypes.string.isRequired,
+  iconDescription: PropTypes.string,
 
   /**
    * Provide a description for "status" icon that can be read by screen readers
@@ -504,7 +504,7 @@ InlineNotification.propTypes = {
   /**
    * Provide a description for "close" icon that can be read by screen readers
    */
-  iconDescription: PropTypes.string.isRequired,
+  iconDescription: PropTypes.string,
 
   /**
    * Provide a description for "status" icon that can be read by screen readers
