@@ -33,7 +33,7 @@
 .flatpickr-calendar.open,
 .flatpickr-calendar.inline {
   opacity: 1;
-  visibility: visible;
+  visibility: inherit;
   overflow: visible;
   max-height: 640px;
 }
