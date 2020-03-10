@@ -160,7 +160,7 @@
       outline $duration--fast-02 motion(standard, productive),
       border $duration--fast-02 motion(standard, productive);
     cursor: pointer;
-    visibility: visible;
+    visibility: inherit;
     opacity: 1;
     height: rem(40px);
     width: rem(40px);
