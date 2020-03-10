@@ -201,88 +201,70 @@ export default function Dropdown(props) {
 
   return (
     <div className={wrapperClasses}>
-      <DropdownLabel
-        className={titleClasses}
-        titleText={titleText}
-        {...getLabelProps()}>
-        <DropdownHelper className={helperClasses}>{helperText}</DropdownHelper>
-        <ListBox
-          onChange={handleOnChange}
-          //itemToString={itemToString}
-          //initialSelectedItem={initialSelectedItem}
-          aria-label={ariaLabel}
-          type={type}
-          size={size}
-          className={className({ isOpen })}
-          invalid={invalid}
-          invalidText={invalidText}
-          light={light}
-          isOpen={isOpen}>
-          {invalid && (
-            <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
-          )}
-          <button
-            id={id}
-            disabled={disabled}
-            aria-disabled={disabled}
-            {...getToggleButtonProps()}>
-            <span className={`${prefix}--list-box__label`}>
-              {selectedItem ? itemToString(selectedItem) : label}
-            </span>
-            <ListBox.MenuIcon
-              isOpen={isOpen}
-              translateWithId={translateWithId}
-            />
-          </button>
-          <ListBox.Menu {...getMenuProps()}>
-            {isOpen &&
-              items.map((item, index) => {
-                const itemProps = getItemProps({ item, index });
-                return (
-                  <ListBox.MenuItem
-                    selectedItem={selectedItem}
-                    key={itemProps.id}
-                    isActive={selectedItem === item}
-                    isHighlighted={
-                      highlightedIndex === index || selectedItem === item
-                    }
-                    title={itemToElement ? item.text : itemToString(item)}
-                    {...itemProps}>
-                    {itemToElement ? (
-                      <ItemToElement key={itemProps.id} {...item} />
-                    ) : (
-                      itemToString(item)
-                    )}
-                    {selectedItem === item && (
-                      <Checkmark16
-                        className={`${prefix}--list-box__menu-item__selected-icon`}
-                      />
-                    )}
-                  </ListBox.MenuItem>
-                );
-              })}
-          </ListBox.Menu>
-        </ListBox>
-      </DropdownLabel>
+      {titleText ? (
+        <label className={titleClasses} {...getLabelProps()}>
+          {titleText}
+        </label>
+      ) : null}
+      {helperText ? <div className={helperClasses}>{helperText}</div> : null}
+      <ListBox
+        onChange={handleOnChange}
+        //itemToString={itemToString}
+        //initialSelectedItem={initialSelectedItem}
+        aria-label={ariaLabel}
+        type={type}
+        size={size}
+        className={className({ isOpen })}
+        invalid={invalid}
+        invalidText={invalidText}
+        light={light}
+        isOpen={isOpen}>
+        {invalid && (
+          <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
+        )}
+        <button
+          id={id}
+          className={`${prefix}--list-box__field`}
+          disabled={disabled}
+          aria-disabled={disabled}
+          {...getToggleButtonProps()}>
+          <span className={`${prefix}--list-box__label`}>
+            {selectedItem ? itemToString(selectedItem) : label}
+          </span>
+          <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
+        </button>
+        <ListBox.Menu {...getMenuProps()}>
+          {isOpen &&
+            items.map((item, index) => {
+              const itemProps = getItemProps({ item, index });
+              return (
+                <ListBox.MenuItem
+                  selectedItem={selectedItem}
+                  key={itemProps.id}
+                  isActive={selectedItem === item}
+                  isHighlighted={
+                    highlightedIndex === index || selectedItem === item
+                  }
+                  title={itemToElement ? item.text : itemToString(item)}
+                  {...itemProps}>
+                  {itemToElement ? (
+                    <ItemToElement key={itemProps.id} {...item} />
+                  ) : (
+                    itemToString(item)
+                  )}
+                  {selectedItem === item && (
+                    <Checkmark16
+                      className={`${prefix}--list-box__menu-item__selected-icon`}
+                    />
+                  )}
+                </ListBox.MenuItem>
+              );
+            })}
+        </ListBox.Menu>
+      </ListBox>
     </div>
   );
 }
-
-const DropdownLabel = props => {
-  const { children, titleText, ...rest } = props;
-  return titleText ? (
-    <label {...rest}>
-      {titleText}
-      {children}
-    </label>
-  ) : (
-    <>{children}</>
-  );
-};
-
-const DropdownHelper = ({ children, ...rest }) => (
-  <div {...rest}>{children}</div>
-);
 
 Dropdown.defaultProps = {
   disabled: false,
@@ -292,5 +274,5 @@ Dropdown.defaultProps = {
   light: false,
   titleText: '',
   helperText: '',
-  size: 'sm',
+  size: 'lg',
 };
