@@ -2,7 +2,8 @@ import React from 'react';
 import { useSelect } from 'downshift';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
-import ListBox from '../ListBox';
+import PropTypes from 'prop-types';
+import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
@@ -13,6 +14,115 @@ const defaultItemToString = item => {
   }
 
   return item ? item.label : '';
+};
+
+Dropdown.propTypes = {
+  /**
+   * Disable the control
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * We try to stay as generic as possible here to allow individuals to pass
+   * in a collection of whatever kind of data structure they prefer
+   */
+  items: PropTypes.array.isRequired,
+
+  /**
+   * Allow users to pass in an arbitrary item or a string (in case their items are an array of strings)
+   * from their collection that are pre-selected
+   */
+  initialSelectedItem: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+  ]),
+
+  /**
+   * Specify a custom `id`
+   */
+  id: PropTypes.string.isRequired,
+
+  /**
+   * Specify whether you want the inline version of this control
+   */
+  inline: PropTypes.bool,
+
+  /**
+   * Specify if the currently selected value is invalid.
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * Message which is displayed if the value is invalid.
+   */
+  invalidText: PropTypes.string,
+
+  /**
+   * Helper function passed to downshift that allows the library to render a
+   * given item to a string label. By default, it extracts the `label` field
+   * from a given item to serve as the item label in the list.
+   */
+  itemToString: PropTypes.func,
+
+  /**
+   * Function to render items as custom components instead of strings.
+   * Defaults to null and is overriden by a getter
+   */
+  itemToElement: PropTypes.func,
+
+  /**
+   * `onChange` is a utility for this controlled component to communicate to a
+   * consuming component what kind of internal state changes are occuring.
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Generic `label` that will be used as the textual representation of what
+   * this field is for
+   */
+  label: PropTypes.node.isRequired,
+
+  /**
+   * Callback function for translating ListBoxMenuIcon SVG title
+   */
+  translateWithId: PropTypes.func,
+
+  /**
+   * 'aria-label' of the ListBox component.
+   */
+  ariaLabel: PropTypes.string,
+
+  /**
+   * The dropdown type, `default` or `inline`
+   */
+  type: ListBoxPropTypes.ListBoxType,
+
+  /**
+   * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+   */
+  size: ListBoxPropTypes.ListBoxSize,
+
+  /**
+   * In the case you want to control the dropdown selection entirely.
+   */
+  selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+
+  /**
+   * `true` to use the light version.
+   */
+  light: PropTypes.bool,
+
+  /**
+   * Provide the title text that will be read by a screen reader when
+   * visiting this control
+   */
+  titleText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+
+  /**
+   * Provide helper text that is used alongside the control label for
+   * additional help
+   */
+  helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 
 export default function Dropdown(props) {
@@ -26,14 +136,16 @@ export default function Dropdown(props) {
     itemToElement,
     type,
     size,
+    //initialSelectedItem,
+    // selectedItem,
     id,
     titleText,
     helperText,
+    translateWithId,
     light,
     invalid,
     invalidText,
-    translateWithId,
-    initialSelectedItem,
+    // mapDownshiftProps
   } = props;
 
   const {
@@ -62,9 +174,6 @@ export default function Dropdown(props) {
     [`${prefix}--label--disabled`]: disabled,
   });
 
-  const helperId =
-    !id || !helperText ? undefined : `dropdown-helper-text-${id}`;
-
   const helperClasses = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
@@ -80,10 +189,12 @@ export default function Dropdown(props) {
     }
   );
 
+  // needs to be Capitalized for react to render it correctly
   const ItemToElement = itemToElement;
 
-  const handleOnChange = selectedItem => {
-    if (props.onChange) {
+  const handleOnChange = ({ onChange }, selectedItem) => {
+    console.log('checking checking');
+    if (onChange) {
       props.onChange({ selectedItem });
     }
   };
@@ -94,13 +205,11 @@ export default function Dropdown(props) {
         className={titleClasses}
         titleText={titleText}
         {...getLabelProps()}>
-        <DropdownHelper id={helperId} className={helperClasses}>
-          {helperText}
-        </DropdownHelper>
+        <DropdownHelper className={helperClasses}>{helperText}</DropdownHelper>
         <ListBox
           onChange={handleOnChange}
-          itemToString={itemToString}
-          initialSelectedItem={initialSelectedItem}
+          //itemToString={itemToString}
+          //initialSelectedItem={initialSelectedItem}
           aria-label={ariaLabel}
           type={type}
           size={size}
@@ -108,7 +217,6 @@ export default function Dropdown(props) {
           invalid={invalid}
           invalidText={invalidText}
           light={light}
-          selectedItem={selectedItem}
           isOpen={isOpen}>
           {invalid && (
             <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
@@ -132,6 +240,7 @@ export default function Dropdown(props) {
                 const itemProps = getItemProps({ item, index });
                 return (
                   <ListBox.MenuItem
+                    selectedItem={selectedItem}
                     key={itemProps.id}
                     isActive={selectedItem === item}
                     isHighlighted={

@@ -41,8 +41,12 @@
   }
 
   .#{$prefix}--dropdown {
-    @include reset;
+    // Menu's triggering element updated to button with Downshift v5 upgrade
     @include focus-outline('reset');
+    & button {
+      @include button-reset;
+    }
+
     position: relative;
     list-style: none;
     display: block;
