@@ -588,7 +588,8 @@
   }
 
   .#{$prefix}--table-toolbar--small .#{$prefix}--btn--primary {
-    padding-top: rem(3px);
+    padding-top: calc(0.375rem - 3px);
+    padding-bottom: calc(0.375rem - 3px);
     height: rem(32px);
     min-height: auto;
   }
