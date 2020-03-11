@@ -18,6 +18,7 @@ const TableContainer = ({
   title,
   titleId,
   description,
+  descriptionId,
   stickyHeader,
   ...rest
 }) => {
@@ -36,7 +37,9 @@ const TableContainer = ({
           <h4 id={titleId} className={`${prefix}--data-table-header__title`}>
             {title}
           </h4>
-          <p className={`${prefix}--data-table-header__description`}>
+          <p
+            id={descriptionId}
+            className={`${prefix}--data-table-header__description`}>
             {description}
           </p>
         </div>
@@ -63,6 +66,11 @@ TableContainer.propTypes = {
    * Optional description text for the Table
    */
   description: PropTypes.node,
+
+  /**
+   * Provide an element ID of the description for the Table
+   */
+  descriptionId: PropTypes.string,
 };
 
 export default TableContainer;

@@ -117,7 +117,6 @@ export default props => {
           }) => (
             <TableContainer
               title="DataTable"
-              titleId="table-container-title"
               description="Use the toolbar menu to add rows and headers"
               {...getTableContainerProps()}>
               <TableToolbar {...getToolbarProps()}>
@@ -155,9 +154,7 @@ export default props => {
                   </TableToolbarMenu>
                 </TableToolbarContent>
               </TableToolbar>
-              <Table
-                {...getTableProps()}
-                aria-describedby="table-container-title">
+              <Table {...getTableProps()}>
                 <TableHead>
                   <TableRow>
                     <TableExpandHeader />

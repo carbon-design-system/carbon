@@ -373,6 +373,8 @@ export default class DataTable extends React.Component {
       useStaticWidth,
       shouldShowBorder,
       stickyHeader,
+      'aria-labeledby': `${this.getTablePrefix()}__table-container__title`,
+      'aria-describedby': `${this.getTablePrefix()}__table-container__description`,
     };
   };
 
@@ -383,6 +385,8 @@ export default class DataTable extends React.Component {
     const { stickyHeader } = this.props;
 
     return {
+      titleId: `${this.getTablePrefix()}__table-container__title`,
+      descriptionId: `${this.getTablePrefix()}__table-container__description`,
       stickyHeader,
     };
   };

@@ -42,7 +42,6 @@ export default props => (
     }) => (
       <TableContainer
         title="DataTable"
-        titleId="table-container-title"
         description="With toolbar"
         {...getTableContainerProps()}>
         <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
@@ -64,7 +63,7 @@ export default props => (
             <Button onClick={action('ButtonCLick')}>Primary Button</Button>
           </TableToolbarContent>
         </TableToolbar>
-        <Table {...getTableProps()} aria-describedby="table-container-title">
+        <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
               {headers.map(header => (

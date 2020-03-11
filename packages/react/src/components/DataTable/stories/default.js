@@ -33,10 +33,9 @@ export default props => (
     }) => (
       <TableContainer
         title="DataTable"
-        titleId="table-container-title"
         description="With default options"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()} aria-describedby="table-container-title">
+        <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
               {headers.map(header => (
