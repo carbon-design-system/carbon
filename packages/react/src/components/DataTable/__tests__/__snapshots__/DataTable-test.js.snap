@@ -1777,7 +1777,9 @@ exports[`DataTable should render 1`] = `
         Object {
           "type": "return",
           "value": <TableContainer
+            descriptionId="data-table-1__table-container__description"
             title="DataTable with toolbar"
+            titleId="data-table-1__table-container__title"
           >
             <TableToolbar
               aria-label="data table toolbar"
@@ -1869,6 +1871,8 @@ exports[`DataTable should render 1`] = `
               </TableToolbarContent>
             </TableToolbar>
             <Table
+              aria-describedby="data-table-1__table-container__description"
+              aria-labeledby="data-table-1__table-container__title"
               isSortable={false}
               size="normal"
             >
@@ -1954,7 +1958,9 @@ exports[`DataTable should render 1`] = `
   translateWithId={[Function]}
 >
   <TableContainer
+    descriptionId="data-table-1__table-container__description"
     title="DataTable with toolbar"
+    titleId="data-table-1__table-container__title"
   >
     <div
       className="bx--data-table-container"
@@ -1964,11 +1970,13 @@ exports[`DataTable should render 1`] = `
       >
         <h4
           className="bx--data-table-header__title"
+          id="data-table-1__table-container__title"
         >
           DataTable with toolbar
         </h4>
         <p
           className="bx--data-table-header__description"
+          id="data-table-1__table-container__description"
         />
       </div>
       <TableToolbar
@@ -2503,10 +2511,14 @@ exports[`DataTable should render 1`] = `
         </section>
       </TableToolbar>
       <Table
+        aria-describedby="data-table-1__table-container__description"
+        aria-labeledby="data-table-1__table-container__title"
         isSortable={false}
         size="normal"
       >
         <table
+          aria-describedby="data-table-1__table-container__description"
+          aria-labeledby="data-table-1__table-container__title"
           className="bx--data-table bx--data-table--no-border"
         >
           <TableHead>
@@ -2776,8 +2788,10 @@ exports[`DataTable sticky header should render 1`] = `
         Object {
           "type": "return",
           "value": <TableContainer
+            descriptionId="data-table-24__table-container__description"
             stickyHeader={true}
             title="DataTable with toolbar"
+            titleId="data-table-24__table-container__title"
           >
             <TableToolbar
               aria-label="data table toolbar"
@@ -2869,6 +2883,8 @@ exports[`DataTable sticky header should render 1`] = `
               </TableToolbarContent>
             </TableToolbar>
             <Table
+              aria-describedby="data-table-24__table-container__description"
+              aria-labeledby="data-table-24__table-container__title"
               isSortable={false}
               size="normal"
               stickyHeader={true}
@@ -2956,8 +2972,10 @@ exports[`DataTable sticky header should render 1`] = `
   translateWithId={[Function]}
 >
   <TableContainer
+    descriptionId="data-table-24__table-container__description"
     stickyHeader={true}
     title="DataTable with toolbar"
+    titleId="data-table-24__table-container__title"
   >
     <div
       className="bx--data-table-container bx--data-table--max-width"
@@ -2967,11 +2985,13 @@ exports[`DataTable sticky header should render 1`] = `
       >
         <h4
           className="bx--data-table-header__title"
+          id="data-table-24__table-container__title"
         >
           DataTable with toolbar
         </h4>
         <p
           className="bx--data-table-header__description"
+          id="data-table-24__table-container__description"
         />
       </div>
       <TableToolbar
@@ -3506,6 +3526,8 @@ exports[`DataTable sticky header should render 1`] = `
         </section>
       </TableToolbar>
       <Table
+        aria-describedby="data-table-24__table-container__description"
+        aria-labeledby="data-table-24__table-container__title"
         isSortable={false}
         size="normal"
         stickyHeader={true}
@@ -3514,6 +3536,8 @@ exports[`DataTable sticky header should render 1`] = `
           className="bx--data-table_inner-container"
         >
           <table
+            aria-describedby="data-table-24__table-container__description"
+            aria-labeledby="data-table-24__table-container__title"
             className="bx--data-table bx--data-table--no-border bx--data-table--sticky-header"
           >
             <TableHead>

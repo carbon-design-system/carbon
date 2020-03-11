@@ -861,8 +861,14 @@ Map {
         "description": Object {
           "type": "node",
         },
+        "descriptionId": Object {
+          "type": "string",
+        },
         "title": Object {
           "type": "node",
+        },
+        "titleId": Object {
+          "type": "string",
         },
       },
     },
@@ -1446,8 +1452,14 @@ Map {
       "description": Object {
         "type": "node",
       },
+      "descriptionId": Object {
+        "type": "string",
+      },
       "title": Object {
         "type": "node",
+      },
+      "titleId": Object {
+        "type": "string",
       },
     },
   },
