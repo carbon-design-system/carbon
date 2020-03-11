@@ -12,8 +12,8 @@ import { settings } from 'carbon-components';
 import {
   CheckmarkOutline16,
   Warning16,
-  RadioButtonChecked16,
   RadioButton16,
+  CircleFilled16,
 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
 
@@ -66,9 +66,9 @@ export function ProgressStep({
     }
     if (current) {
       return (
-        <RadioButtonChecked16>
+        <CircleFilled16>
           <title>{description}</title>
-        </RadioButtonChecked16>
+        </CircleFilled16>
       );
     }
     if (complete) {
