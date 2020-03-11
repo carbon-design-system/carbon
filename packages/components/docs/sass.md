@@ -20485,7 +20485,7 @@ Progress indicator styles
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
     border-radius: 50%;
-    margin: 9px $carbon--spacing-03 0 0;
+    margin: rem(10px) $carbon--spacing-03 0 0;
     fill: $interactive-04;
   }
 
@@ -20576,16 +20576,7 @@ Progress indicator styles
   //CURRENT STYLING
   .#{$prefix}--progress-step--current {
     .#{$prefix}--progress-line {
-      background-color: $interactive-01;
-    }
-  }
-
-  .#{$prefix}--progress-step--current svg {
-    stroke: $interactive-04;
-    fill: $interactive-04;
-
-    path:last-of-type {
-      stroke-width: 40%;
+      background-color: $interactive-04;
     }
   }
 
@@ -20603,7 +20594,7 @@ Progress indicator styles
   //COMPLETED STYLING
   .#{$prefix}--progress-step--complete {
     .#{$prefix}--progress-line {
-      background-color: $interactive-01;
+      background-color: $interactive-04;
     }
   }
 
@@ -20681,7 +20672,7 @@ Progress indicator styles
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step svg,
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
     display: inline-block;
-    margin: 0.1rem 0.5rem;
+    margin: rem(3px) 0.5rem 0;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
