@@ -118,6 +118,10 @@
     }
   }
 
+  .#{$prefix}--tile__chevron::-moz-focus-inner {
+    border: 0;
+  }
+
   .#{$prefix}--tile--expandable {
     overflow: hidden;
     transition: max-height $duration--moderate-01 motion(standard, productive);
