@@ -27,8 +27,6 @@ function Dropdown(props) {
     itemToElement,
     type,
     size,
-    //initialSelectedItem,
-    // selectedItem,
     id,
     titleText,
     helperText,
@@ -36,7 +34,6 @@ function Dropdown(props) {
     light,
     invalid,
     invalidText,
-    // mapDownshiftProps
   } = props;
 
   const {
@@ -83,6 +80,9 @@ function Dropdown(props) {
   // needs to be Capitalized for react to render it correctly
   const ItemToElement = itemToElement;
 
+  // defaultSelectedItem prop renamed initialSelectedItem in v5
+  const initiallySelectedItem = props.initialSelectedItem;
+
   function handleOnChange({ onChange }, selectedItem) {
     console.log('checking checking');
     if (onChange) {
@@ -100,8 +100,8 @@ function Dropdown(props) {
       {helperText ? <div className={helperClasses}>{helperText}</div> : null}
       <ListBox
         onChange={handleOnChange}
-        //itemToString={itemToString}
-        //initialSelectedItem={initialSelectedItem}
+        itemToString={itemToString}
+        initialSelectedItem={initiallySelectedItem}
         aria-label={ariaLabel}
         type={type}
         size={size}
@@ -274,7 +274,6 @@ Dropdown.defaultProps = {
   light: false,
   titleText: '',
   helperText: '',
-  size: 'xl',
 };
 
 export default Dropdown;
