@@ -10,10 +10,10 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@master
-      - name: Use Node.js 10.x
+      - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: '12.x'
       - name: Install dependencies
         run: yarn install --offline
       - name: Build project
@@ -23,4 +23,4 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
-          yarn lerna publish --canary minor --dist-tag nightly --no-push --no-git-tag-version --yes --force-publish='*'
+          yarn lerna publish --canary minor --dist-tag nightly --no-push --no-git-tag-version --yes

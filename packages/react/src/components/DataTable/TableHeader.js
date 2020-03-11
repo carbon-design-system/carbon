@@ -64,7 +64,12 @@ const TableHeader = React.forwardRef(function TableHeader(
 ) {
   if (!isSortable) {
     return (
-      <th {...rest} className={headerClassName} scope={scope} colSpan={colSpan}>
+      <th
+        {...rest}
+        className={headerClassName}
+        scope={scope}
+        colSpan={colSpan}
+        ref={ref}>
         <span className={`${prefix}--table-header-label`}>{children}</span>
       </th>
     );

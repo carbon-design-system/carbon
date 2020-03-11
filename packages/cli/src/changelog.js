@@ -7,7 +7,7 @@
 
 'use strict';
 
-const parse = require('@commitlint/parse');
+const { default: parse } = require('@commitlint/parse');
 const execa = require('execa');
 
 // We keep a list of commits that are process-oriented that we never want to

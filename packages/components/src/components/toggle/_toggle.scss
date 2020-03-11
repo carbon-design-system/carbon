@@ -272,7 +272,6 @@
     align-items: center;
     width: carbon--rem(48px);
     height: carbon--rem(24px);
-    margin: $carbon--spacing-03 0;
     cursor: pointer;
 
     // Toggle background oval
@@ -307,6 +306,10 @@
       content: '';
       transition: transform $duration--fast-01 motion(exit, productive);
     }
+
+    .#{$prefix}--toggle-input__label & {
+      margin-top: $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--toggle__text--off,
@@ -315,6 +318,7 @@
     margin-left: carbon--rem(56px);
     @include type-style('body-short-01');
     user-select: none;
+    white-space: nowrap;
     // top offset needed to vertically center absolutely positioned flex child in IE11
     top: 50%;
     transform: translateY(-50%);

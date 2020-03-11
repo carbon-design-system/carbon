@@ -21,7 +21,7 @@
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
-  visibility: visible;
+  visibility: inherit;
   white-space: nowrap;
 }
 
@@ -295,7 +295,7 @@
     position: absolute;
     top: rem(-1px);
     right: -1rem;
-    color: $support-01;
+    color: $text-error;
     // TODO: sync with caption sizes
     font-size: rem(12px);
     background-color: $inverse-01;

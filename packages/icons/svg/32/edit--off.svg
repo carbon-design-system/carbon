@@ -1,1 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><title>Asset 2</title><path d="M30,28.59,3.41,2,2,3.41,12.09,13.5,4,21.59V28h6.41l8.09-8.09L28.59,30ZM9.59,26H6V22.41l7.5-7.5,3.59,3.59Z"/><path d="M29.41,6.17h0L25.83,2.59a2,2,0,0,0-2.83,0h0l-8.08,8.08,1.41,1.41L20,8.41,23.59,12l-3.67,3.67,1.41,1.41L29.41,9A2,2,0,0,0,29.41,6.17ZM25,10.59,21.41,7l3-3L28,7.59Z"/><rect width="32" height="32" style="fill:none"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="32px" height="32px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+</style>
+<title>Asset 2</title>
+<path d="M30,28.6L3.4,2L2,3.4l10.1,10.1L4,21.6V28h6.4l8.1-8.1L28.6,30L30,28.6z M9.6,26H6v-3.6l7.5-7.5l3.6,3.6L9.6,26z"/>
+<path d="M29.4,6.2L29.4,6.2l-3.6-3.6c-0.8-0.8-2-0.8-2.8,0l0,0l0,0l-8,8l1.4,1.4L20,8.4l3.6,3.6L20,15.6l1.4,1.4l8-8
+	C30.2,8.2,30.2,7,29.4,6.2L29.4,6.2z M25,10.6L21.4,7l3-3L28,7.6L25,10.6z"/>
+<rect class="st0" width="32" height="32"/>
+</svg>

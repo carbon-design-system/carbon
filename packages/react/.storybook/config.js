@@ -16,6 +16,7 @@ import {
   CARBON_TYPE_TOKEN,
 } from './addon-carbon-theme/shared';
 import Container from './Container';
+import PackageInfo from './../package.json';
 
 const customPropertyPrefix = 'cds';
 
@@ -32,8 +33,10 @@ addDecorator(
 
 addParameters({
   options: {
+    // display in alphabetic order
+    storySort: (a, b) => a[1].id.localeCompare(b[1].id),
     theme: {
-      brandTitle: 'carbon components react',
+      brandTitle: `Carbon Components React v${PackageInfo.version}`,
       brandUrl:
         'https://github.com/carbon-design-system/carbon/tree/master/packages/react',
     },
@@ -68,9 +71,4 @@ addons.getChannel().on(CARBON_TYPE_TOKEN, ({ tokenName, tokenValue }) => {
   );
 });
 
-function loadStories() {
-  const req = require.context('../src/components', true, /\-story\.js$/);
-  req.keys().forEach(filename => req(filename));
-}
-
-configure(loadStories, module);
+configure(require.context('../src/components', true, /\-story\.js$/), module);

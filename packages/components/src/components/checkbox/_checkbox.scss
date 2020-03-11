@@ -53,9 +53,13 @@
     position: relative;
     display: flex;
     cursor: pointer;
-    padding-left: rem(26px); //width of checkbox 16px + 10px of padding
     min-height: rem(24px);
     user-select: none;
+    padding-left: rem(20px);
+  }
+
+  .#{$prefix}--checkbox-label-text {
+    padding-left: rem(6px); // Add extra spacing when label is present
   }
 
   // Required because `$css--reset: true` cannot currently apply to this `::before` and `::after`
@@ -115,8 +119,8 @@
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
-    background-color: $icon-01;
-    border-color: $icon-01;
+    background-color: $ui-05;
+    border-color: $ui-05;
     border-width: 1px;
   }
 

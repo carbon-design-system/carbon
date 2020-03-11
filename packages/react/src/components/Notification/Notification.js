@@ -14,6 +14,7 @@ import {
   ErrorFilled20,
   CheckmarkFilled20,
   WarningFilled20,
+  InformationFilled20,
 } from '@carbon/icons-react';
 
 import Button from '../Button';
@@ -212,6 +213,7 @@ const iconTypes = {
   error: ErrorFilled20,
   success: CheckmarkFilled20,
   warning: WarningFilled20,
+  info: InformationFilled20,
 };
 
 function NotificationIcon({ iconDescription, kind, notificationType }) {
@@ -236,8 +238,9 @@ NotificationIcon.propTypes = {
 export function ToastNotification({
   role,
   notificationType,
-  onCloseButtonClick, // eslint-disable-line
-  iconDescription, // eslint-disable-line
+  onCloseButtonClick,
+  iconDescription,
+  statusIconDescription,
   className,
   caption,
   subtitle,
@@ -285,7 +288,7 @@ export function ToastNotification({
       <NotificationIcon
         notificationType={notificationType}
         kind={kind}
-        iconDescription={iconDescription}
+        iconDescription={statusIconDescription || `${kind} icon`}
       />
       <NotificationTextDetails
         title={title}
@@ -355,7 +358,12 @@ ToastNotification.propTypes = {
   /**
    * Provide a description for "close" icon that can be read by screen readers
    */
-  iconDescription: PropTypes.string.isRequired,
+  iconDescription: PropTypes.string,
+
+  /**
+   * Provide a description for "status" icon that can be read by screen readers
+   */
+  statusIconDescription: PropTypes.string,
 
   /**
    * By default, this value is "toast". You can also provide an alternate type
@@ -390,8 +398,9 @@ export function InlineNotification({
   actions,
   role,
   notificationType,
-  onCloseButtonClick, // eslint-disable-line
-  iconDescription, // eslint-disable-line
+  onCloseButtonClick,
+  iconDescription,
+  statusIconDescription,
   className,
   subtitle,
   title,
@@ -424,7 +433,7 @@ export function InlineNotification({
         <NotificationIcon
           notificationType={notificationType}
           kind={kind}
-          iconDescription={iconDescription}
+          iconDescription={statusIconDescription || `${kind} icon`}
         />
         <NotificationTextDetails
           title={title}
@@ -495,7 +504,12 @@ InlineNotification.propTypes = {
   /**
    * Provide a description for "close" icon that can be read by screen readers
    */
-  iconDescription: PropTypes.string.isRequired,
+  iconDescription: PropTypes.string,
+
+  /**
+   * Provide a description for "status" icon that can be read by screen readers
+   */
+  statusIconDescription: PropTypes.string,
 
   /**
    * By default, this value is "inline". You can also provide an alternate type

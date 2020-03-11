@@ -195,7 +195,7 @@ Output the CSS required for all the columns in a given grid system.
   $gutter: $carbon--grid-gutter
 ) {
   .#{$prefix}--col {
-    @include carbon--make-col-ready();
+    @include carbon--make-col-ready($gutter);
   }
 
   @each $breakpoint in map-keys($breakpoints) {
@@ -205,13 +205,13 @@ Output the CSS required for all the columns in a given grid system.
     // Allow columns to stretch full width below their breakpoints
     @for $i from 0 through $columns {
       .#{$prefix}--col#{$infix}-#{$i} {
-        @include carbon--make-col-ready();
+        @include carbon--make-col-ready($gutter);
       }
     }
 
     .#{$prefix}--col#{$infix},
     .#{$prefix}--col#{$infix}--auto {
-      @include carbon--make-col-ready();
+      @include carbon--make-col-ready($gutter);
     }
 
     @include carbon--breakpoint($breakpoint, $breakpoints) {
@@ -374,7 +374,15 @@ in code
 <summary>Source code</summary>
 
 ```scss
-$carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
+$carbon--aspect-ratios: (
+  (16, 9),
+  (9, 16),
+  (2, 1),
+  (1, 2),
+  (4, 3),
+  (3, 4),
+  (1, 1)
+);
 ```
 
 </details>
@@ -384,36 +392,53 @@ $carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
 
 ### ❌carbon--aspect-ratio [mixin]
 
-Output the CSS classes for generating aspect ratio classes
+Generates the CSS classname utilities for the aspect ratios
+
+CSS Tricks article on aspect ratios and all the different ways it can be done.
+https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
+
+That article references an earlier article on the topic.
+https://keithjgrant.com/posts/2017/03/aspect-ratios/
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-@mixin carbon--aspect-ratio($aspect-ratios: $carbon--aspect-ratios) {
+@mixin carbon--aspect-ratio($width, $height) {
   .#{$prefix}--aspect-ratio {
-    height: 0;
     position: relative;
   }
 
+  .#{$prefix}--aspect-ratio::before {
+    content: '';
+    width: 1px;
+    margin-left: -1px;
+    float: left;
+    height: 0;
+  }
+
+  .#{$prefix}--aspect-ratio::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  @each $aspect-ratio in $aspect-ratios {
+    $width: nth($aspect-ratio, 1);
+    $height: nth($aspect-ratio, 2);
+
+    .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
+      padding-top: percentage($height / $width);
+    }
+  }
+
+  // leaving here for legacy support
   .#{$prefix}--aspect-ratio--object {
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 100;
-  }
-
-  @each $ratio in $aspect-ratios {
-    $width: nth($ratio, 1);
-    $height: nth($ratio, 2);
-
-    .#{$prefix}--aspect-ratio--#{$width}x#{$height} {
-      padding-bottom: percentage($height / $width);
-    }
   }
 }
 ```
@@ -422,9 +447,10 @@ Output the CSS classes for generating aspect ratio classes
 
 - **Parameters**:
 
-| Name             | Description                         | Type   | Default value            |
-| ---------------- | ----------------------------------- | ------ | ------------------------ |
-| `$aspect-ratios` | A list of aspect ratios to generate | `List` | `$carbon--aspect-ratios` |
+| Name      | Description                 | Type     | Default value |
+| --------- | --------------------------- | -------- | ------------- |
+| `$width`  | width from an aspect ratio  | `Number` | —             |
+| `$height` | height from an aspect ratio | `Number` | —             |
 
 - **Group**: [@carbon/grid](#carbongrid)
 - **Requires**:
@@ -564,6 +590,12 @@ Generate the CSS for a grid for the given breakpoints and gutters
 
   .#{$prefix}--row {
     @include carbon--make-row();
+  }
+
+  .#{$prefix}--row-padding [class*='#{$prefix}--col'],
+  .#{$prefix}--col-padding {
+    padding-top: $grid-gutter / 2;
+    padding-bottom: $grid-gutter / 2;
   }
 
   .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {

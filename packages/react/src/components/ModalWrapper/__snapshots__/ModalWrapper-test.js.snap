@@ -43,7 +43,6 @@ exports[`ModalWrapper should render 1`] = `
     </ForwardRef(Button)>
     <Modal
       aria-label="test modal"
-      focusTrap={true}
       hasScrollingContent={false}
       iconDescription="close the modal"
       id="modal"
@@ -59,122 +58,154 @@ exports[`ModalWrapper should render 1`] = `
       secondaryButtonText="Cancel"
       selectorPrimaryFocus="[data-modal-primary-focus]"
     >
-      <FocusTrap
-        _createFocusTrap={[Function]}
-        active={false}
-        focusTrapOptions={
-          Object {
-            "initialFocus": [Function],
-          }
-        }
-        paused={false}
+      <div
+        aria-label="test modal"
+        className="bx--modal bx--modal-tall"
+        id="modal"
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onMouseDown={[Function]}
+        role="presentation"
       >
+        <span
+          className="bx--visually-hidden"
+          role="link"
+          tabIndex="0"
+        >
+          Focus sentinel
+        </span>
         <div
-          aria-label="test modal"
-          className="bx--modal bx--modal-tall"
-          id="modal"
-          onBlur={[Function]}
-          onKeyDown={[Function]}
-          onMouseDown={[Function]}
-          role="presentation"
-          tabIndex={-1}
+          aria-label="Test Modal Label"
+          aria-modal="true"
+          className="bx--modal-container"
+          role="dialog"
+          tabIndex="-1"
         >
           <div
-            aria-label="Test Modal Label"
-            aria-modal="true"
-            className="bx--modal-container"
-            role="dialog"
+            className="bx--modal-header"
           >
-            <div
-              className="bx--modal-header"
+            <h2
+              className="bx--modal-header__label"
+              id="bx--modal-header__label--modal-1"
             >
-              <h2
-                className="bx--modal-header__label"
-                id="bx--modal-header__label--modal-1"
-              >
-                Test Modal Label
-              </h2>
-              <h3
-                className="bx--modal-header__heading"
-                id="bx--modal-header__heading--modal-1"
-              >
-                Transactional Modal
-              </h3>
-              <button
+              Test Modal Label
+            </h2>
+            <h3
+              className="bx--modal-header__heading"
+              id="bx--modal-header__heading--modal-1"
+            >
+              Transactional Modal
+            </h3>
+            <button
+              aria-label="close the modal"
+              className="bx--modal-close"
+              onClick={[Function]}
+              title="close the modal"
+              type="button"
+            >
+              <ForwardRef(Close20)
                 aria-label="close the modal"
-                className="bx--modal-close"
-                onClick={[Function]}
-                title="close the modal"
-                type="button"
+                className="bx--modal-close__icon"
               >
-                <ForwardRef(Close20)
+                <Icon
                   aria-label="close the modal"
                   className="bx--modal-close__icon"
+                  height={20}
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 32 32"
+                  width={20}
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <Icon
+                  <svg
                     aria-label="close the modal"
                     className="bx--modal-close__icon"
+                    focusable="false"
                     height={20}
                     preserveAspectRatio="xMidYMid meet"
+                    role="img"
+                    style={
+                      Object {
+                        "willChange": "transform",
+                      }
+                    }
                     viewBox="0 0 32 32"
                     width={20}
                     xmlns="http://www.w3.org/2000/svg"
                   >
+                    <path
+                      d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                    />
+                  </svg>
+                </Icon>
+              </ForwardRef(Close20)>
+            </button>
+          </div>
+          <div
+            aria-labelledby="bx--modal-header__label--modal-1"
+            className="bx--modal-content"
+          >
+            <p
+              className="bx--modal-content__text"
+            >
+              Text
+            </p>
+          </div>
+          <div
+            className="bx--modal-footer"
+          >
+            <ForwardRef(Button)
+              disabled={false}
+              kind="secondary"
+              onClick={[Function]}
+              tabIndex={0}
+              type="button"
+            >
+              <button
+                className="bx--btn bx--btn--secondary"
+                disabled={false}
+                onClick={[Function]}
+                tabIndex={0}
+                type="button"
+              >
+                Cancel
+              </button>
+            </ForwardRef(Button)>
+            <ForwardRef(Button)
+              disabled={false}
+              inputref={
+                Object {
+                  "current": <button
+                    aria-label="close the modal"
+                    class="bx--modal-close"
+                    title="close the modal"
+                    type="button"
+                  >
                     <svg
                       aria-label="close the modal"
-                      className="bx--modal-close__icon"
+                      class="bx--modal-close__icon"
                       focusable="false"
-                      height={20}
+                      height="20"
                       preserveAspectRatio="xMidYMid meet"
                       role="img"
-                      style={
-                        Object {
-                          "willChange": "transform",
-                        }
-                      }
+                      style="will-change: transform;"
                       viewBox="0 0 32 32"
-                      width={20}
+                      width="20"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
                       />
                     </svg>
-                  </Icon>
-                </ForwardRef(Close20)>
-              </button>
-            </div>
-            <div
-              aria-labelledby="bx--modal-header__label--modal-1"
-              className="bx--modal-content"
+                  </button>,
+                }
+              }
+              kind="primary"
+              onClick={[Function]}
+              tabIndex={0}
+              type="button"
             >
-              <p
-                className="bx--modal-content__text"
-              >
-                Text
-              </p>
-            </div>
-            <div
-              className="bx--modal-footer"
-            >
-              <ForwardRef(Button)
-                disabled={false}
-                kind="secondary"
-                onClick={[Function]}
-                tabIndex={0}
-                type="button"
-              >
-                <button
-                  className="bx--btn bx--btn--secondary"
-                  disabled={false}
-                  onClick={[Function]}
-                  tabIndex={0}
-                  type="button"
-                >
-                  Cancel
-                </button>
-              </ForwardRef(Button)>
-              <ForwardRef(Button)
+              <button
+                className="bx--btn bx--btn--primary"
                 disabled={false}
                 inputref={
                   Object {
@@ -203,52 +234,23 @@ exports[`ModalWrapper should render 1`] = `
                     </button>,
                   }
                 }
-                kind="primary"
                 onClick={[Function]}
                 tabIndex={0}
                 type="button"
               >
-                <button
-                  className="bx--btn bx--btn--primary"
-                  disabled={false}
-                  inputref={
-                    Object {
-                      "current": <button
-                        aria-label="close the modal"
-                        class="bx--modal-close"
-                        title="close the modal"
-                        type="button"
-                      >
-                        <svg
-                          aria-label="close the modal"
-                          class="bx--modal-close__icon"
-                          focusable="false"
-                          height="20"
-                          preserveAspectRatio="xMidYMid meet"
-                          role="img"
-                          style="will-change: transform;"
-                          viewBox="0 0 32 32"
-                          width="20"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
-                          />
-                        </svg>
-                      </button>,
-                    }
-                  }
-                  onClick={[Function]}
-                  tabIndex={0}
-                  type="button"
-                >
-                  Save
-                </button>
-              </ForwardRef(Button)>
-            </div>
+                Save
+              </button>
+            </ForwardRef(Button)>
           </div>
         </div>
-      </FocusTrap>
+        <span
+          className="bx--visually-hidden"
+          role="link"
+          tabIndex="0"
+        >
+          Focus sentinel
+        </span>
+      </div>
     </Modal>
   </div>
 </ModalWrapper>

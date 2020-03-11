@@ -6,7 +6,6 @@
  */
 
 export { default as FileUploaderSkeleton } from './FileUploader.Skeleton';
-export FileUploaderItem from './FileUploaderItem';
-export FileUploaderDropContainer from './FileUploaderDropContainer';
-export * from './FileUploader';
+export { default as FileUploaderItem } from './FileUploaderItem';
+export { default as FileUploaderDropContainer } from './FileUploaderDropContainer';
 export default from './FileUploader';

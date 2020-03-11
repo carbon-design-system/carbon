@@ -6,7 +6,7 @@
 //
 
 @mixin content-visible {
-  visibility: visible;
+  visibility: inherit;
   opacity: 1;
 }
 

@@ -1315,7 +1315,7 @@ Output the CSS required for all the columns in a given grid system.
   $gutter: $carbon--grid-gutter
 ) {
   .#{$prefix}--col {
-    @include carbon--make-col-ready();
+    @include carbon--make-col-ready($gutter);
   }
 
   @each $breakpoint in map-keys($breakpoints) {
@@ -1325,13 +1325,13 @@ Output the CSS required for all the columns in a given grid system.
     // Allow columns to stretch full width below their breakpoints
     @for $i from 0 through $columns {
       .#{$prefix}--col#{$infix}-#{$i} {
-        @include carbon--make-col-ready();
+        @include carbon--make-col-ready($gutter);
       }
     }
 
     .#{$prefix}--col#{$infix},
     .#{$prefix}--col#{$infix}--auto {
-      @include carbon--make-col-ready();
+      @include carbon--make-col-ready($gutter);
     }
 
     @include carbon--breakpoint($breakpoint, $breakpoints) {
@@ -1496,7 +1496,15 @@ in code
 <summary>Source code</summary>
 
 ```scss
-$carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
+$carbon--aspect-ratios: (
+  (16, 9),
+  (9, 16),
+  (2, 1),
+  (1, 2),
+  (4, 3),
+  (3, 4),
+  (1, 1)
+);
 ```
 
 </details>
@@ -1506,36 +1514,53 @@ $carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
 
 ### ❌carbon--aspect-ratio [mixin]
 
-Output the CSS classes for generating aspect ratio classes
+Generates the CSS classname utilities for the aspect ratios
+
+CSS Tricks article on aspect ratios and all the different ways it can be done.
+https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
+
+That article references an earlier article on the topic.
+https://keithjgrant.com/posts/2017/03/aspect-ratios/
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-@mixin carbon--aspect-ratio($aspect-ratios: $carbon--aspect-ratios) {
+@mixin carbon--aspect-ratio($width, $height) {
   .#{$prefix}--aspect-ratio {
-    height: 0;
     position: relative;
   }
 
+  .#{$prefix}--aspect-ratio::before {
+    content: '';
+    width: 1px;
+    margin-left: -1px;
+    float: left;
+    height: 0;
+  }
+
+  .#{$prefix}--aspect-ratio::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  @each $aspect-ratio in $aspect-ratios {
+    $width: nth($aspect-ratio, 1);
+    $height: nth($aspect-ratio, 2);
+
+    .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
+      padding-top: percentage($height / $width);
+    }
+  }
+
+  // leaving here for legacy support
   .#{$prefix}--aspect-ratio--object {
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 100;
-  }
-
-  @each $ratio in $aspect-ratios {
-    $width: nth($ratio, 1);
-    $height: nth($ratio, 2);
-
-    .#{$prefix}--aspect-ratio--#{$width}x#{$height} {
-      padding-bottom: percentage($height / $width);
-    }
   }
 }
 ```
@@ -1544,9 +1569,10 @@ Output the CSS classes for generating aspect ratio classes
 
 - **Parameters**:
 
-| Name             | Description                         | Type   | Default value            |
-| ---------------- | ----------------------------------- | ------ | ------------------------ |
-| `$aspect-ratios` | A list of aspect ratios to generate | `List` | `$carbon--aspect-ratios` |
+| Name      | Description                 | Type     | Default value |
+| --------- | --------------------------- | -------- | ------------- |
+| `$width`  | width from an aspect ratio  | `Number` | —             |
+| `$height` | height from an aspect ratio | `Number` | —             |
 
 - **Group**: [@carbon/grid](#carbongrid)
 - **Requires**:
@@ -1693,6 +1719,12 @@ Generate the CSS for a grid for the given breakpoints and gutters
 
   .#{$prefix}--row {
     @include carbon--make-row();
+  }
+
+  .#{$prefix}--row-padding [class*='#{$prefix}--col'],
+  .#{$prefix}--col-padding {
+    padding-top: $grid-gutter / 2;
+    padding-bottom: $grid-gutter / 2;
   }
 
   .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
@@ -2065,7 +2097,6 @@ Check to see if the given breakpoint name
 - **Returns**: `Bool`
 - **Used by**:
   - [carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
-  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
 
 ### ✅carbon--largest-breakpoint-name [function]
 
@@ -2187,12 +2218,8 @@ Generate a media query for the maximum width of the given styles
   } @else if map-has-key($breakpoints, $name) {
     $breakpoint: map-get($breakpoints, $name);
     $width: map-get($breakpoint, width);
-    @if carbon--is-smallest-breakpoint($name, $breakpoints) {
+    @media (max-width: $width) {
       @content;
-    } @else {
-      @media (max-width: $width) {
-        @content;
-      }
     }
   } @else {
     @error 'Unable to find a breakpoint with name `#{$name}`. Expected one of: (#{map-keys($breakpoints)})';
@@ -2210,11 +2237,8 @@ Generate a media query for the maximum width of the given styles
 | `$breakpoints` | A map of breakpoints where the key is the name | `Map`              | `$carbon--grid-breakpoints` |
 
 - **Group**: [@carbon/layout](#carbonlayout)
-- **Requires**:
-  - [carbon--is-smallest-breakpoint [function]](#carbon--is-smallest-breakpoint-function)
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
-  - [carbon-header [mixin]](#carbon-header-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅carbon--breakpoint-between [mixin]
@@ -3383,10 +3407,8 @@ $carbon--spacing-04: 0.75rem;
   - `spacing-04`
 - **Used by**:
   - [dropdown [mixin]](#dropdown-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
   - [lists [mixin]](#lists-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
 
@@ -3429,6 +3451,7 @@ $carbon--spacing-05: 1rem;
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [tile [mixin]](#tile-mixin)
+  - [toggle [mixin]](#toggle-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
@@ -3451,6 +3474,7 @@ $carbon--spacing-06: 1.5rem;
   - [accordion [mixin]](#accordion-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [lists [mixin]](#lists-mixin)
+  - [listbox [mixin]](#listbox-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
@@ -3472,7 +3496,6 @@ $carbon--spacing-07: 2rem;
   - `spacing-07`
 - **Used by**:
   - [snippet [mixin]](#snippet-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -3518,6 +3541,7 @@ $carbon--spacing-09: 3rem;
 - **Used by**:
   - [accordion [mixin]](#accordion-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [tile [mixin]](#tile-mixin)
@@ -3678,7 +3702,6 @@ $spacing-04: $carbon--spacing-04;
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [tabs [mixin]](#tabs-mixin)
 
 ### ✅spacing-05 [variable]
@@ -3703,6 +3726,7 @@ $spacing-05: $carbon--spacing-05;
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [modal [mixin]](#modal-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [select [mixin]](#select-mixin)
@@ -3764,7 +3788,6 @@ $spacing-08: $carbon--spacing-08;
 - **Alias**: `carbon--spacing-08`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [modal [mixin]](#modal-mixin)
 
 ### ✅spacing-09 [variable]
 
@@ -5655,6 +5678,7 @@ $carbon--theme--g90: map-merge(
     visited-link: #be95ff,
     disabled-01: #393939,
     disabled-02: #6f6f6f,
+    disabled-03: #a8a8a8,
     highlight: #0043ce,
     skeleton-01: #353535,
     skeleton-02: #525252,
@@ -5727,7 +5751,6 @@ $carbon--theme--g100: map-merge(
     visited-link: #be95ff,
     disabled-01: #262626,
     disabled-02: #525252,
-    disabled-03: #6f6f6f,
     highlight: #002d9c,
     skeleton-01: #353535,
     skeleton-02: #393939,
@@ -5998,7 +6021,6 @@ $interactive-01: if(
   - [date-picker [mixin]](#date-picker-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
-  - [tabs [mixin]](#tabs-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
@@ -6087,6 +6109,7 @@ $interactive-04: if(
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [inline-loading [mixin]](#inline-loading-mixin)
   - [loading [mixin]](#loading-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
 
@@ -6114,8 +6137,6 @@ $ui-background: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [dropdown [mixin]](#dropdown-mixin)
-  - [listbox [mixin]](#listbox-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅ui-01 [variable]
@@ -6360,6 +6381,7 @@ $text-01: if(
   - [tags [mixin]](#tags-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
+  - [tile [mixin]](#tile-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
 
 ### ✅text-02 [variable]
@@ -6396,7 +6418,7 @@ $text-02: if(
   - [modal [mixin]](#modal-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
-  - [search [mixin]](#search-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
@@ -6506,6 +6528,13 @@ $text-error: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [form [mixin]](#form-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [select [mixin]](#select-mixin)
+  - [text-area [mixin]](#text-area-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -6531,10 +6560,11 @@ $icon-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
+  - [button [mixin]](#button-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -6566,9 +6596,9 @@ $icon-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [search [mixin]](#search-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [tile [mixin]](#tile-mixin)
   - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
@@ -6598,7 +6628,6 @@ $icon-03: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button [mixin]](#button-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -6823,10 +6852,8 @@ $support-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
-  - [form [mixin]](#form-mixin)
   - [inline-loading [mixin]](#inline-loading-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -7454,8 +7481,8 @@ $hover-selected-ui: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [tabs [mixin]](#tabs-mixin)
 
 ### ✅inverse-hover-ui [variable]
@@ -7497,7 +7524,7 @@ $hover-danger: if(
       'hover-danger'
     ),
   map-get($carbon--theme, 'hover-danger'),
-  #ba1b23
+  #b81921
 );
 ```
 
@@ -7641,6 +7668,7 @@ $disabled-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
@@ -10260,12 +10288,11 @@ Include a type reset for a given body and mono font family
 
 ```scss
 @mixin carbon--type-reset(
-  $base-font-size: $carbon--base-font-size,
   $body-font-family: carbon--font-family('sans'),
   $mono-font-family: carbon--font-family('mono')
 ) {
   html {
-    font-size: $base-font-size;
+    font-size: 100%;
   }
 
   body {
@@ -10293,7 +10320,6 @@ Include a type reset for a given body and mono font family
 
 | Name                | Description                                                                         | Type     | Default value                 |
 | ------------------- | ----------------------------------------------------------------------------------- | -------- | ----------------------------- |
-| `$base-font-size`   | The base font size for your document                                                | `Number` | `$carbon--base-font-size`     |
 | `$body-font-family` | The font family used on the `<body>` element                                        | `String` | `carbon--font-family('sans')` |
 | `$mono-font-family` | The font family used on elements that require mono fonts, like the `<code>` element | `String` | `carbon--font-family('mono')` |
 
@@ -12655,7 +12681,7 @@ Accordion styles
     margin: $accordion-title-margin;
     width: 100%;
     text-align: left;
-    z-index: 0;
+    z-index: 1;
   }
 
   .#{$prefix}--accordion__content {
@@ -12674,7 +12700,7 @@ Accordion styles
       padding-right: 25%;
     }
 
-    p {
+    > p {
       @include type-style('body-long-01');
     }
   }
@@ -12887,16 +12913,11 @@ Button styles
     + .#{$prefix}--btn--primary.#{$prefix}--btn--disabled,
   .#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled
     + .#{$prefix}--btn--danger.#{$prefix}--btn--disabled {
-    border-left: rem(1px) solid $disabled-03;
+    box-shadow: rem(-1px) 0 0 0 $disabled-03;
   }
 
   .#{$prefix}--btn {
     @include button-base;
-
-    &.#{$prefix}--btn--disabled > svg.#{$prefix}--btn__icon,
-    &:disabled > svg.#{$prefix}--btn__icon {
-      fill: $disabled-03;
-    }
   }
 
   // Reset intrisic padding in Firefox (see #731)
@@ -12957,7 +12978,7 @@ Button styles
     }
 
     &:active {
-      color: $inverse-01;
+      border-color: transparent;
     }
 
     &:disabled,
@@ -12969,14 +12990,19 @@ Button styles
       background: transparent;
       color: $disabled;
       outline: none;
-
-      & > .#{$prefix}--btn__icon path {
-        fill: $disabled;
-      }
     }
+  }
 
-    &:hover > .#{$prefix}--btn__icon path {
-      fill: $inverse-01;
+  .#{$prefix}--btn--tertiary,
+  .#{$prefix}--btn--tertiary.#{$prefix}--btn--field,
+  .#{$prefix}--btn--tertiary.#{$prefix}--btn--sm {
+    padding-right: rem(62px);
+    padding-left: rem(14px);
+
+    &:focus {
+      border-width: rem(3px);
+      padding-right: rem(60px);
+      padding-left: rem(12px);
     }
   }
 
@@ -12999,10 +13025,6 @@ Button styles
     &:hover,
     &:active {
       color: $hover-primary-text;
-
-      .#{$prefix}--btn__icon path {
-        fill: $hover-primary-text;
-      }
     }
 
     &:active {
@@ -13019,10 +13041,6 @@ Button styles
       background: transparent;
       border-color: transparent;
       outline: none;
-
-      .#{$prefix}--btn__icon path {
-        fill: $disabled;
-      }
     }
 
     &.#{$prefix}--btn--sm {
@@ -13036,13 +13054,11 @@ Button styles
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
     @include tooltip--trigger('icon', 'bottom');
-    outline: $button-outline-width solid transparent;
-    outline-offset: -4px;
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
-    outline-color: $ui-02;
+    box-shadow: inset 0 0 0 $button-outline-width $ui-02;
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
@@ -13059,9 +13075,8 @@ Button styles
     @include tooltip--placement('icon', 'bottom', 'center');
   }
 
-  .#{$prefix}--btn--icon-only,
-  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only,
-  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
+  .#{$prefix}--btn--icon-only {
+    padding-left: rem(13px);
     padding-right: rem(13px);
 
     .#{$prefix}--btn__icon {
@@ -13073,13 +13088,78 @@ Button styles
     }
   }
 
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
+    .#{$prefix}--btn__icon
+    path,
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
+    .#{$prefix}--btn__icon
+    path,
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
+    .#{$prefix}--btn__icon {
+    fill: $disabled-02;
+  }
+
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled] {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
+    .#{$prefix}--assistive-text,
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]::before {
+    display: none;
+  }
+
+  .#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
+    padding-left: rem(15px);
+    padding-right: rem(15px);
+
+    &:focus {
+      padding-left: rem(13px);
+      padding-right: rem(13px);
+    }
+  }
+
+  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
+    padding-left: rem(9px);
+    padding-right: rem(9px);
+  }
+
+  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
+    padding-left: rem(11px);
+    padding-right: rem(11px);
+
+    &:focus {
+      padding-left: rem(9px);
+      padding-right: rem(9px);
+    }
+  }
+
+  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
+    padding-left: rem(5px);
+    padding-right: rem(5px);
+  }
+
+  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
+    padding-left: rem(7px);
+    padding-right: rem(7px);
+
+    &:focus {
+      padding-left: rem(5px);
+      padding-right: rem(5px);
+    }
+  }
+
   .#{$prefix}--btn--danger {
     @include button-theme(
       $danger,
       $danger,
       $text-04,
       $hover-danger,
-      $icon-03,
+      currentColor,
       $active-danger
     );
 
@@ -13133,9 +13213,10 @@ Button styles
   - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [focus [variable]](#focus-variable)
   - [ui-02 [variable]](#ui-02-variable)
+  - [icon-01 [variable]](#icon-01-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
   - [danger [variable]](#danger-variable)
   - [hover-danger [variable]](#hover-danger-variable)
-  - [icon-03 [variable]](#icon-03-variable)
   - [active-danger [variable]](#active-danger-variable)
 
 ### ❌button-base [mixin]
@@ -13165,6 +13246,8 @@ Button base styles
   outline: none;
   position: relative;
   max-width: rem(320px);
+  // Fix to remove added margins on buttons in safari (see #5155)
+  margin: 0;
 
   &:disabled,
   &.#{$prefix}--btn--disabled {
@@ -13300,9 +13383,13 @@ Checkbox styles
     position: relative;
     display: flex;
     cursor: pointer;
-    padding-left: rem(26px); //width of checkbox 16px + 10px of padding
     min-height: rem(24px);
     user-select: none;
+    padding-left: rem(20px);
+  }
+
+  .#{$prefix}--checkbox-label-text {
+    padding-left: rem(6px); // Add extra spacing when label is present
   }
 
   // Required because `$css--reset: true` cannot currently apply to this `::before` and `::after`
@@ -13362,8 +13449,8 @@ Checkbox styles
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
-    background-color: $icon-01;
-    border-color: $icon-01;
+    background-color: $ui-05;
+    border-color: $ui-05;
     border-width: 1px;
   }
 
@@ -13455,7 +13542,6 @@ Checkbox styles
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
-  - [icon-01 [variable]](#icon-01-variable)
   - [focus [variable]](#focus-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
@@ -13549,16 +13635,21 @@ Code snippet styles
     max-width: rem(760px);
     min-width: rem(320px);
     height: $carbon--spacing-08;
-    padding: 0 56px 0 $carbon--spacing-05;
+    padding: 0 $carbon--spacing-08 0 0;
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
+    position: relative;
     display: flex;
     align-items: center;
+    height: 100%;
+    padding-left: $carbon--spacing-05;
+    border-right: solid $carbon--spacing-05 transparent;
     overflow-x: auto;
-    position: relative;
-    padding: 0 0 $carbon--spacing-05 0;
-    height: rem(56px);
+
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 
   .#{$prefix}--snippet--single pre {
@@ -13711,6 +13802,9 @@ Code snippet styles
 
   // Show more / less button
   button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+    @include type-style('body-short-01');
+    @include carbon--font-family('sans');
+    border: 0;
     display: inline-flex;
     align-items: center;
     position: absolute;
@@ -13751,6 +13845,7 @@ Code snippet styles
 
   .#{$prefix}--snippet-btn--expand:focus {
     @include focus-outline('outline');
+    border-color: transparent;
   }
 
   .#{$prefix}--snippet--expand
@@ -14406,7 +14501,8 @@ Data table action styles
 
   .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
     margin: 0;
-    height: $layout-04;
+    max-width: none;
+    white-space: nowrap;
   }
 
   .#{$prefix}--overflow-menu--data-table {
@@ -14536,10 +14632,12 @@ Data table action styles
 
   .#{$prefix}--action-list .#{$prefix}--btn {
     color: $text-04;
+    padding: $button-padding-ghost;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {
     fill: $icon-03;
+    position: static;
     margin-left: $spacing-03;
   }
 
@@ -14682,7 +14780,7 @@ Data table action styles
     .#{$prefix}--toolbar-search-container-active
       .#{$prefix}--search
       .#{$prefix}--search-input {
-      visibility: visible;
+      visibility: inherit;
     }
 
     .#{$prefix}--toolbar-search-container-active
@@ -14727,12 +14825,14 @@ Data table action styles
   .#{$prefix}--table-toolbar--small .#{$prefix}--toolbar-action {
     height: rem(32px);
     width: rem(32px);
-    padding: $spacing-03;
+    padding: $spacing-03 0;
   }
 
   .#{$prefix}--table-toolbar--small .#{$prefix}--btn--primary {
-    padding-top: rem(3px);
+    padding-top: calc(0.375rem - 3px);
+    padding-bottom: calc(0.375rem - 3px);
     height: rem(32px);
+    min-height: auto;
   }
 
   .#{$prefix}--table-toolbar--small
@@ -14744,7 +14844,6 @@ Data table action styles
     .#{$prefix}--toolbar-action
     ~ .#{$prefix}--btn {
     height: rem(32px);
-    width: rem(160px);
     overflow: hidden;
   }
 }
@@ -14852,8 +14951,8 @@ Data table core styles
 
   .#{$prefix}--data-table th,
   .#{$prefix}--data-table td {
-    padding-left: $spacing-04;
-    padding-right: $spacing-04;
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
     vertical-align: top;
     text-align: left;
   }
@@ -14885,7 +14984,7 @@ Data table core styles
     color: $text-02;
     border-top: 1px solid $ui-01;
     border-bottom: 1px solid $ui-03;
-    padding: rem(14px) $spacing-04;
+    padding: rem(14px) $spacing-05;
     padding-bottom: rem(13px);
 
     & + td:first-of-type {
@@ -14927,6 +15026,16 @@ Data table core styles
   }
 
   // Overflow Menu Overrides
+  .#{$prefix}--data-table td .#{$prefix}--overflow-menu {
+    margin: rem(-7px) 0 rem(-8px);
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact
+    td
+    .#{$prefix}--overflow-menu {
+    margin: 0;
+  }
+
   .#{$prefix}--data-table
     td.#{$prefix}--table-column-menu
     .#{$prefix}--overflow-menu[aria-expanded='false']:focus {
@@ -14981,6 +15090,13 @@ Data table core styles
     ); //used to center svg without setting display flex //display block needed for overflow text truncation
   }
 
+  .#{$prefix}--data-table .#{$prefix}--overflow-menu,
+  .#{$prefix}--data-table .#{$prefix}--overflow-menu__trigger {
+    &:hover {
+      background-color: $hover-selected-ui;
+    }
+  }
+
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu,
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu__trigger {
     &:hover {
@@ -15031,7 +15147,7 @@ Data table core styles
     padding-bottom: 0;
   }
 
-  th.#{$prefix}--table-column-checkbox:hover {
+  .#{$prefix}--date-table tbody th.#{$prefix}--table-column-checkbox:hover {
     background: $data-table-column-hover;
   }
 
@@ -15108,7 +15224,8 @@ Data table core styles
   // Compact
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table--compact thead tr,
-  .#{$prefix}--data-table--compact tbody tr {
+  .#{$prefix}--data-table--compact tbody tr,
+  .#{$prefix}--data-table--compact tbody tr th {
     height: rem(24px);
   }
 
@@ -15116,7 +15233,8 @@ Data table core styles
     padding: rem(2px) 0;
   }
 
-  .#{$prefix}--data-table--compact td {
+  .#{$prefix}--data-table--compact td,
+  .#{$prefix}--data-table--compact tbody tr th {
     padding-top: rem(2px);
     padding-bottom: rem(2px);
   }
@@ -15148,7 +15266,8 @@ Data table core styles
   // Short
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table--short thead tr,
-  .#{$prefix}--data-table--short tbody tr {
+  .#{$prefix}--data-table--short tbody tr,
+  .#{$prefix}--data-table--short tbody tr th {
     height: rem(32px);
   }
 
@@ -15156,7 +15275,8 @@ Data table core styles
     padding: rem(7px) 0;
   }
 
-  .#{$prefix}--data-table--short td {
+  .#{$prefix}--data-table--short td,
+  .#{$prefix}--data-table--short tbody tr th {
     padding-top: rem(7px);
     padding-bottom: rem(6px);
   }
@@ -15180,7 +15300,8 @@ Data table core styles
   // Tall
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table--tall thead tr,
-  .#{$prefix}--data-table--tall tbody tr {
+  .#{$prefix}--data-table--tall tbody tr,
+  .#{$prefix}--data-table--tall tbody tr th {
     height: rem(64px);
   }
 
@@ -15188,7 +15309,8 @@ Data table core styles
     padding: rem(16px) 0;
   }
 
-  .#{$prefix}--data-table--tall td {
+  .#{$prefix}--data-table--tall td,
+  .#{$prefix}--data-table--tall tbody tr th {
     padding-top: 1rem;
   }
 
@@ -15312,6 +15434,7 @@ Data table core styles
   - [hover-field [variable]](#hover-field-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
 
@@ -15374,8 +15497,6 @@ Data table expandable styles
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
-    padding-bottom: rem(23px);
-    transition: padding $duration--moderate-01 motion(standard, productive);
     border-bottom: 1px solid $ui-03;
   }
 
@@ -15672,7 +15793,7 @@ Data table expandable styles
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
-  visibility: visible;
+  visibility: inherit;
   white-space: nowrap;
 }
 ```
@@ -15706,12 +15827,12 @@ Data table sort styles
   }
 
   .#{$prefix}--data-table--sort td {
-    padding-left: $spacing-03;
-    padding-right: $spacing-03;
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
   }
 
   .#{$prefix}--data-table--sort th:first-of-type .#{$prefix}--table-sort {
-    padding-left: $spacing-04;
+    padding-left: $spacing-05;
   }
 
   // -------------------------------------
@@ -15726,7 +15847,7 @@ Data table sort styles
     justify-content: space-between;
     width: 100%;
     color: $text-01;
-    padding: 0 $spacing-03;
+    padding: 0 $spacing-05;
     height: 100%;
     background-color: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive),
@@ -15867,10 +15988,10 @@ Data table sort styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [layout-04 [variable]](#layout-04-variable)
-  - [spacing-03 [variable]](#spacing-03-variable)
-  - [spacing-04 [variable]](#spacing-04-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [layout-01 [variable]](#layout-01-variable)
 
@@ -15912,7 +16033,7 @@ Date picker styles
     ~ .#{$prefix}--form-requirement {
       max-height: rem(200px);
       display: block;
-      color: $support-01;
+      color: $text-error;
       font-weight: 400;
       margin-top: $carbon--spacing-02;
       overflow: visible;
@@ -15935,14 +16056,9 @@ Date picker styles
     }
   }
 
-  .#{$prefix}--date-picker.#{$prefix}--date-picker--single {
-    .#{$prefix}--date-picker-container {
-      max-width: rem(288px);
-    }
-
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--single
     .#{$prefix}--date-picker__input {
-      width: rem(288px);
-    }
+    width: rem(288px);
   }
 
   .#{$prefix}--date-picker__input {
@@ -15953,7 +16069,7 @@ Date picker styles
     display: block;
     position: relative;
     height: rem(40px);
-    max-width: rem(288px);
+    min-width: rem(144px);
     padding: 0 $carbon--spacing-05;
     background-color: $field-01;
     border: none;
@@ -15990,6 +16106,15 @@ Date picker styles
       color: $text-05;
       opacity: 1;
     }
+  }
+
+  // Size variant styles
+  .#{$prefix}--date-picker__input--xl {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--date-picker__input--sm {
+    height: rem(32px);
   }
 
   .#{$prefix}--date-picker__icon {
@@ -16362,7 +16487,7 @@ Date picker styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [support-01 [variable]](#support-01-variable)
+  - [text-error [variable]](#text-error-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [field-01 [variable]](#field-01-variable)
@@ -16468,7 +16593,7 @@ Dropdown styles
     + .#{$prefix}--form-requirement {
       display: inline-block;
       max-height: rem(200px);
-      color: $support-01;
+      color: $text-error;
     }
   }
 
@@ -16714,7 +16839,7 @@ Dropdown styles
     border-bottom-color: transparent;
     width: auto;
     height: rem(32px);
-    background-color: $ui-background;
+    background-color: transparent;
     transition: background $duration--fast-01 motion(entrance, productive);
 
     &:hover {
@@ -16722,7 +16847,7 @@ Dropdown styles
     }
 
     &.#{$prefix}--dropdown--disabled {
-      background-color: $ui-background;
+      background-color: transparent;
     }
 
     .#{$prefix}--dropdown__arrow {
@@ -16770,13 +16895,6 @@ Dropdown styles
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
     font-weight: normal;
-    margin-right: $carbon--spacing-04;
-    margin-left: rem(10px);
-
-    &:focus {
-      margin: 0;
-      padding-left: rem(10px);
-    }
   }
 
   .#{$prefix}--dropdown--show-selected .#{$prefix}--dropdown--selected {
@@ -16819,6 +16937,7 @@ Dropdown styles
   - [text-01 [variable]](#text-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [ui-03 [variable]](#ui-03-variable)
+  - [text-error [variable]](#text-error-variable)
   - [support-01 [variable]](#support-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
@@ -16827,7 +16946,6 @@ Dropdown styles
   - [selected-ui [variable]](#selected-ui-variable)
   - [text-02 [variable]](#text-02-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
-  - [ui-background [variable]](#ui-background-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
 
 ## file-uploader
@@ -16925,17 +17043,27 @@ File uploader styles
     margin-bottom: $carbon--spacing-05;
   }
 
+  // For backwards compatibility
   .#{$prefix}--file-btn ~ .#{$prefix}--file-container {
     margin-top: $carbon--spacing-06;
   }
 
+  .#{$prefix}--btn ~ .#{$prefix}--file-container {
+    margin-top: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--file .#{$prefix}--file-container,
+  .#{$prefix}--file ~ .#{$prefix}--file-container {
+    margin-top: $carbon--spacing-03;
+  }
+
   .#{$prefix}--file__selected-file {
     display: grid;
-    grid-gap: $carbon--spacing-03 $carbon--spacing-05;
+    grid-gap: $carbon--spacing-05;
     grid-template-columns: 1fr auto;
     grid-auto-rows: auto;
     align-items: center;
-    min-height: $carbon--spacing-07;
+    min-height: $carbon--spacing-09;
     max-width: rem(320px);
     margin-bottom: $carbon--spacing-03;
     background-color: $field-01;
@@ -16983,13 +17111,12 @@ File uploader styles
 
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
-    outline-width: 1px;
-    padding: $carbon--spacing-04 0;
+    padding: $carbon--spacing-05 0;
   }
 
   .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
     border-top: 1px solid $ui-03;
-    padding-top: $carbon--spacing-03;
+    padding-top: $carbon--spacing-05;
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -16997,8 +17124,7 @@ File uploader styles
   .#{$prefix}--file__selected-file--invalid
     .#{$prefix}--form-requirement__supplement {
     @include type-style('label-01');
-    padding-right: $carbon--spacing-03;
-    padding-left: $carbon--spacing-05;
+    padding: 0 $carbon--spacing-05;
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -17011,7 +17137,7 @@ File uploader styles
     @include type-style('caption-01');
     display: block;
     max-height: rem(200px);
-    color: $support-01;
+    color: $text-error;
     font-weight: 400;
     padding: $carbon--spacing-03 $carbon--spacing-05;
     overflow: visible;
@@ -17028,7 +17154,7 @@ File uploader styles
     display: flex;
     justify-content: center;
     min-width: 1.5rem;
-    padding-right: $carbon--spacing-03;
+    padding-right: $carbon--spacing-05;
 
     .#{$prefix}--loading__svg {
       stroke: $ui-05;
@@ -17064,7 +17190,7 @@ File uploader styles
     border: none;
     cursor: pointer;
     padding: 0;
-    fill: $icon-02;
+    fill: $icon-01;
 
     &:focus {
       @include focus-outline('border');
@@ -17072,7 +17198,7 @@ File uploader styles
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
-    fill: $icon-02;
+    fill: $icon-01;
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
@@ -17112,14 +17238,14 @@ File uploader styles
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
-  - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [field-01 [variable]](#field-01-variable)
-  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [ui-03 [variable]](#ui-03-variable)
+  - [text-error [variable]](#text-error-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
   - [icon-03 [variable]](#icon-03-variable)
-  - [icon-02 [variable]](#icon-02-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
 
 ## form
@@ -17197,7 +17323,7 @@ Form styles
     ~ .#{$prefix}--form-requirement {
       max-height: rem(200px);
       display: block;
-      color: $support-01;
+      color: $text-error;
     }
   }
 
@@ -17249,7 +17375,7 @@ Form styles
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [support-01 [variable]](#support-01-variable)
+  - [text-error [variable]](#text-error-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [text-05 [variable]](#text-05-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
@@ -17381,7 +17507,7 @@ Link styles
     transition: $duration--fast-01 motion(standard, productive);
 
     &:hover {
-      color: $link-01;
+      color: $hover-primary-text;
       text-decoration: underline;
     }
 
@@ -17404,7 +17530,7 @@ Link styles
     }
 
     &:visited {
-      color: $visited-link;
+      color: $link-01;
     }
 
     &:visited:hover {
@@ -17419,6 +17545,14 @@ Link styles
     color: $disabled-02;
     font-weight: 400;
     cursor: not-allowed;
+  }
+
+  .#{$prefix}--link.#{$prefix}--link--visited:visited {
+    color: $visited-link;
+  }
+
+  .#{$prefix}--link.#{$prefix}--link--visited:visited:hover {
+    color: $hover-primary-text;
   }
 
   .#{$prefix}--link.#{$prefix}--link--inline {
@@ -17449,10 +17583,10 @@ Link styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [link-01 [variable]](#link-01-variable)
+  - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [text-01 [variable]](#text-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [visited-link [variable]](#visited-link-variable)
-  - [hover-primary-text [variable]](#hover-primary-text-variable)
 
 ## list
 
@@ -17768,7 +17902,7 @@ List box styles
 
   // Inline variant for a `list-box`
   .#{$prefix}--list-box.#{$prefix}--list-box--inline {
-    background-color: $ui-background;
+    background-color: transparent;
     border-width: 0;
 
     &:hover {
@@ -17915,6 +18049,9 @@ List box styles
   .#{$prefix}--list-box__selection {
     position: absolute;
     right: rem(33px); // to preserve .5rem space between icons according to spec
+    // top/transform used to center the combobox clear selection icon in IE11
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17927,6 +18064,12 @@ List box styles
     &:focus {
       @include focus-outline('outline');
     }
+  }
+
+  // reset multiselect selection counter positioning
+  .#{$prefix}--list-box__selection--multi {
+    top: auto;
+    transform: none;
   }
 
   .#{$prefix}--list-box__selection > svg {
@@ -18060,7 +18203,7 @@ List box styles
     line-height: rem(16px);
     padding: rem(11px) 0;
     margin: 0 $carbon--spacing-05;
-    padding-right: rem(32px); // 40px - `$carbon--spacing-05`
+    padding-right: $carbon--spacing-06;
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
     border-top-color: $ui-03;
@@ -18104,7 +18247,7 @@ List box styles
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__menu-item__option {
-    margin: 0 rem(32px) 0 $carbon--spacing-03;
+    margin: 0 $carbon--spacing-03;
 
     &:focus {
       margin: 0;
@@ -18200,7 +18343,6 @@ List box styles
   - [support-01 [variable]](#support-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
-  - [ui-background [variable]](#ui-background-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -18212,6 +18354,7 @@ List box styles
   - [ui-01 [variable]](#ui-01-variable)
   - [text-02 [variable]](#text-02-variable)
   - [selected-ui [variable]](#selected-ui-variable)
+  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
 
 ## loading
 
@@ -18442,7 +18585,7 @@ Modal styles
       visibility 0ms linear $duration--moderate-02;
 
     &.is-visible {
-      visibility: visible;
+      visibility: inherit;
       opacity: 1;
       background-color: $overlay-01;
       transition: background-color $duration--slow-02 motion(entrance, expressive),
@@ -18649,7 +18792,7 @@ Modal styles
     grid-column: 1/-1;
 
     overflow-y: auto;
-    margin-bottom: $spacing-08;
+    margin-bottom: $spacing-09;
     color: $text-01;
     font-weight: 400;
 
@@ -18662,7 +18805,7 @@ Modal styles
   }
 
   // Required so overflow-indicator disappears at end of content
-  .#{$prefix}--modal-content > *:last-child {
+  .#{$prefix}--modal-scroll-content > *:last-child {
     padding-bottom: $spacing-07;
   }
 
@@ -18680,7 +18823,7 @@ Modal styles
     content: '';
     position: absolute;
     left: 0;
-    bottom: $spacing-08;
+    bottom: $spacing-09;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to bottom, rgba($ui-01, 0), $ui-01);
   }
@@ -18693,16 +18836,16 @@ Modal styles
 
   .#{$prefix}--modal-footer {
     display: flex;
+    justify-content: flex-end;
     margin-top: auto;
     height: 4rem;
-    background-color: $modal-footer-background-color;
 
     grid-row: -1/-1;
     grid-column: 1/-1;
 
     button.#{$prefix}--btn {
       max-width: none;
-      flex: 1;
+      flex: 0 1 50%;
       height: 4rem;
       margin: 0;
       padding-top: $spacing-05;
@@ -18765,7 +18908,6 @@ Modal styles
   - [text-02 [variable]](#text-02-variable)
   - [spacing-02 [variable]](#spacing-02-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [spacing-08 [variable]](#spacing-08-variable)
   - [spacing-07 [variable]](#spacing-07-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [focus [variable]](#focus-variable)
@@ -18857,6 +18999,7 @@ Inline notification styles
     min-height: rem(48px);
     min-width: rem(288px);
     max-width: rem(288px);
+    width: 100%;
     color: $inverse-01;
     margin-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-05;
@@ -18958,10 +19101,6 @@ Inline notification styles
     &:before {
       border-color: $support-04;
     }
-  }
-
-  .#{$prefix}--inline-notification--info .bx--inline-notification__icon {
-    display: none;
   }
 
   .#{$prefix}--inline-notification--warning {
@@ -19195,7 +19334,7 @@ Toast notification styles
     display: flex;
     width: rem(288px);
     height: auto;
-    padding-left: $carbon--spacing-05;
+    padding-left: rem(14px);
     color: $inverse-01;
     margin-top: $carbon--spacing-03;
     margin-bottom: $carbon--spacing-03;
@@ -19291,8 +19430,8 @@ Toast notification styles
 
   .#{$prefix}--toast-notification__icon {
     flex-shrink: 0;
-    margin-right: $carbon--spacing-05;
-    margin-top: $carbon--spacing-04;
+    margin-right: rem(14px);
+    margin-top: rem(14px);
   }
 
   .#{$prefix}--toast-notification__details {
@@ -19376,9 +19515,9 @@ Toast notification styles
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
   - [prefix [variable]](#prefix-variable)
-  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [inverse-link [variable]](#inverse-link-variable)
   - [inverse-support-01 [variable]](#inverse-support-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
@@ -19389,7 +19528,6 @@ Toast notification styles
   - [support-04 [variable]](#support-04-variable)
   - [inverse-support-03 [variable]](#inverse-support-03-variable)
   - [support-03 [variable]](#support-03-variable)
-  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
 
@@ -19460,6 +19598,7 @@ Number input styles
     cursor: not-allowed;
     background-color: $disabled-background-color;
     color: $disabled;
+    border-bottom-color: transparent;
   }
 
   .#{$prefix}--number__input-wrapper {
@@ -19468,7 +19607,7 @@ Number input styles
     position: relative;
 
     ~ .#{$prefix}--form-requirement {
-      color: $support-01;
+      color: $text-error;
       font-weight: 400;
       margin-top: $carbon--spacing-02;
       overflow: visible;
@@ -19608,6 +19747,56 @@ Number input styles
     }
   }
 
+  // Size Variant styles
+  .#{$prefix}--number--xl input[type='number'] {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--number--xl .#{$prefix}--number__control-btn {
+    height: rem(24px);
+  }
+
+  .#{$prefix}--number--xl.#{$prefix}--number--mobile
+    .#{$prefix}--number__control-btn {
+    height: rem(48px);
+    width: rem(48px);
+  }
+
+  .#{$prefix}--number--xl .#{$prefix}--number__control-btn.up-icon svg {
+    top: rem(6.6px); // Needed to maintain arrow spacing between input sizes.
+  }
+
+  .#{$prefix}--number--xl .#{$prefix}--number__control-btn.down-icon svg {
+    top: rem(-6.6px); // Needed to maintain arrow spacing between input sizes.
+  }
+
+  .#{$prefix}--number--sm input[type='number'] {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--number--sm .#{$prefix}--number__control-btn {
+    height: rem(16px);
+  }
+
+  .#{$prefix}--number--sm.#{$prefix}--number--mobile
+    .#{$prefix}--number__control-btn {
+    height: rem(32px);
+    width: rem(32px);
+  }
+
+  .#{$prefix}--number--sm .#{$prefix}--number__control-btn.up-icon svg {
+    top: rem(3.4px); // Needed to maintain arrow spacing between input sizes.
+  }
+
+  .#{$prefix}--number--sm .#{$prefix}--number__control-btn.down-icon svg {
+    top: rem(-3.4px); // Needed to maintain arrow spacing between input sizes.
+  }
+
+  //No label positioning adjustment
+  .#{$prefix}--number--nolabel .bx--label + .bx--form__helper-text {
+    margin-top: 0;
+  }
+
   // Skeleton State
   .#{$prefix}--number.#{$prefix}--skeleton {
     @include skeleton;
@@ -19632,9 +19821,10 @@ Number input styles
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [support-01 [variable]](#support-01-variable)
+  - [text-error [variable]](#text-error-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
+  - [support-01 [variable]](#support-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
@@ -19672,7 +19862,7 @@ Overflow menu styles
     }
 
     &:hover {
-      background-color: $hover-selected-ui;
+      background-color: $hover-ui;
     }
   }
 
@@ -19910,7 +20100,7 @@ Overflow menu styles
 - **Group**: [overflow-menu](#overflow-menu)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
@@ -19919,7 +20109,6 @@ Overflow menu styles
   - [text-02 [variable]](#text-02-variable)
   - [text-01 [variable]](#text-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
-  - [hover-ui [variable]](#hover-ui-variable)
   - [text-04 [variable]](#text-04-variable)
   - [support-01 [variable]](#support-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
@@ -20381,12 +20570,13 @@ Progress indicator styles
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
     border-radius: 50%;
-    margin: 9px $carbon--spacing-03 0 0;
-    fill: $interactive-01;
+    margin: rem(10px) $carbon--spacing-03 0 0;
+    fill: $interactive-04;
   }
 
   .#{$prefix}--progress-label {
     @include type-style('body-short-01');
+    color: $text-01;
     line-height: 1.45;
     max-width: rem(88px);
     margin: $carbon--spacing-03 0 0 0;
@@ -20422,7 +20612,7 @@ Progress indicator styles
   //OVERFLOW STYLING
   .#{$prefix}--progress-label-overflow:hover ~ .#{$prefix}--tooltip,
   .#{$prefix}--progress-label-overflow:focus ~ .#{$prefix}--tooltip {
-    visibility: visible;
+    visibility: inherit;
   }
 
   .#{$prefix}--progress-step .#{$prefix}--tooltip .#{$prefix}--tooltip__caret {
@@ -20464,22 +20654,15 @@ Progress indicator styles
     left: 0;
     margin-left: $carbon--spacing-06;
     margin-top: rem(28px);
-    color: $text-01;
+    color: $text-02;
     text-align: start;
   }
 
   //CURRENT STYLING
   .#{$prefix}--progress-step--current {
     .#{$prefix}--progress-line {
-      background-color: $interactive-01;
+      background-color: $interactive-04;
     }
-  }
-
-  .#{$prefix}--progress-step--current svg {
-    width: 14px;
-    height: 14px;
-    fill: $interactive-01;
-    margin-top: rem(9.5px);
   }
 
   //INCOMPLETE STYLING
@@ -20496,7 +20679,7 @@ Progress indicator styles
   //COMPLETED STYLING
   .#{$prefix}--progress-step--complete {
     .#{$prefix}--progress-line {
-      background-color: $interactive-01;
+      background-color: $interactive-04;
     }
   }
 
@@ -20556,12 +20739,11 @@ Progress indicator styles
     width: rem(40px);
   }
 
-  .#{$prefix}--progress--vertical {
-    display: block;
-  }
+  // Vertical Variant
 
-  .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
-    padding-bottom: rem(24px);
+  .#{$prefix}--progress--vertical {
+    display: flex;
+    flex-direction: column;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
@@ -20575,7 +20757,7 @@ Progress indicator styles
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step svg,
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
     display: inline-block;
-    margin: 0.1rem 0.5rem;
+    margin: rem(3px) 0.5rem 0;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
@@ -20601,12 +20783,10 @@ Progress indicator styles
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
     margin-top: auto;
-    position: initial;
     margin-left: 2.25rem;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
-    top: 0;
     left: 0;
     height: 100%;
     width: 1px;
@@ -20621,11 +20801,13 @@ Progress indicator styles
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [interactive-01 [variable]](#interactive-01-variable)
+  - [interactive-04 [variable]](#interactive-04-variable)
+  - [text-01 [variable]](#text-01-variable)
   - [link-01 [variable]](#link-01-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
-  - [text-01 [variable]](#text-01-variable)
+  - [text-02 [variable]](#text-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -20910,8 +21092,7 @@ Search styles
     width: rem(16px);
     top: 50%;
     transform: translateY(-50%);
-    // Ensure clear icon is rendered in Firefox (#1127)
-    fill: $text-02;
+    fill: $icon-02;
     pointer-events: none;
   }
 
@@ -20966,7 +21147,7 @@ Search styles
       outline $duration--fast-02 motion(standard, productive), border
         $duration--fast-02 motion(standard, productive);
     cursor: pointer;
-    visibility: visible;
+    visibility: inherit;
     opacity: 1;
     height: rem(40px);
     width: rem(40px);
@@ -21059,7 +21240,7 @@ Search styles
   - [ui-04 [variable]](#ui-04-variable)
   - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [text-02 [variable]](#text-02-variable)
+  - [icon-02 [variable]](#icon-02-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [hover-field [variable]](#hover-field-variable)
@@ -21145,6 +21326,16 @@ Select styles
     }
   }
 
+  .#{$prefix}--select-input--sm {
+    height: rem(32px);
+    max-height: rem(32px);
+  }
+
+  .#{$prefix}--select-input--xl {
+    height: rem(48px);
+    max-height: rem(48px);
+  }
+
   .#{$prefix}--select--disabled .#{$prefix}--label,
   .#{$prefix}--select--disabled .#{$prefix}--form__helper-text {
     color: $disabled-02;
@@ -21162,7 +21353,7 @@ Select styles
 
   .#{$prefix}--form-requirement {
     display: block;
-    color: $support-01;
+    color: $text-error;
     font-weight: 400;
     overflow: visible;
   }
@@ -21318,9 +21509,10 @@ Select styles
   - [ui-04 [variable]](#ui-04-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
-  - [support-01 [variable]](#support-01-variable)
+  - [text-error [variable]](#text-error-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
+  - [support-01 [variable]](#support-01-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
@@ -21434,7 +21626,6 @@ Slider styles
   .#{$prefix}-slider-text-input {
     width: rem(64px);
     height: rem(40px);
-    padding: 0;
     text-align: center;
     -moz-appearance: textfield;
 
@@ -21901,16 +22092,12 @@ Tabs styles
 
     @include carbon--breakpoint(md) {
       display: flex;
-      .#{$prefix}--tabs__nav-link {
-        color: $text-01;
-        @include type-style('productive-heading-01');
-        border-bottom: 3px solid $interactive-01;
-      }
-
+      .#{$prefix}--tabs__nav-link,
       .#{$prefix}--tabs__nav-link:focus,
       .#{$prefix}--tabs__nav-link:active {
+        @include type-style('productive-heading-01');
         color: $text-01;
-        border-bottom: 2px solid $interactive-01;
+        border-bottom: 2px solid $interactive-04;
       }
     }
   }
@@ -21943,7 +22130,8 @@ Tabs styles
   //-----------------------------
   a.#{$prefix}--tabs__nav-link {
     @include focus-outline('reset');
-    display: inline-block;
+    display: inline-flex;
+    align-items: flex-end;
     color: $text-02;
     text-decoration: none;
     font-weight: 400;
@@ -21961,10 +22149,10 @@ Tabs styles
 
     &:focus,
     &:active {
+      @include focus-outline('outline');
       width: 100%;
       margin: 0;
       padding-left: 16px;
-      @include focus-outline('outline');
     }
 
     @include carbon--breakpoint(md) {
@@ -22101,9 +22289,8 @@ Tabs styles
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
-  - [interactive-01 [variable]](#interactive-01-variable)
-  - [spacing-03 [variable]](#spacing-03-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
   - [text-02 [variable]](#text-02-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -22220,8 +22407,6 @@ Tag styles
   // tags used for filtering
   .#{$prefix}--tag--filter {
     @include tag-theme($inverse-02, $inverse-01);
-
-    cursor: pointer;
     padding-right: rem(2px);
 
     &:focus,
@@ -22230,28 +22415,34 @@ Tag styles
     }
   }
 
-  .#{$prefix}--tag--filter > svg {
+  .#{$prefix}--tag__close-icon {
     flex-shrink: 0;
     width: rem(20px);
     height: rem(20px);
     margin: 0 0 0 rem(4px);
     padding: rem(2px);
     border: 0;
-    fill: $inverse-01;
     background-color: transparent;
     border-radius: 50%;
+    cursor: pointer;
 
     &:hover {
       background-color: $inverse-hover-ui;
     }
   }
 
-  .#{$prefix}--tag--filter:focus > svg {
+  .#{$prefix}--tag__close-icon svg {
+    fill: $inverse-01;
+  }
+
+  .#{$prefix}--tag__close-icon:focus {
+    outline: none;
     box-shadow: inset 0 0 0 2px $inverse-focus-ui;
     border-radius: 50%;
   }
 
-  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg:hover {
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
+    .#{$prefix}--tag__close-icon:hover {
     background-color: transparent;
   }
 
@@ -22321,7 +22512,7 @@ Text area styles
 
     & ~ .#{$prefix}--form-requirement {
       order: 4;
-      color: $support-01;
+      color: $text-error;
       font-weight: 400;
       margin-top: $carbon--spacing-02;
 
@@ -22402,11 +22593,12 @@ Text area styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [support-01 [variable]](#support-01-variable)
+  - [text-error [variable]](#text-error-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
+  - [support-01 [variable]](#support-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
 ## text-input
@@ -22476,6 +22668,9 @@ Text input styles
     .#{$prefix}--text-input__invalid-icon {
       position: absolute;
       right: $carbon--spacing-05;
+      // top/transform used to center invalid icon in IE11
+      top: 50%;
+      transform: translateY(-50%);
       fill: $support-01;
     }
 
@@ -22641,6 +22836,13 @@ Tile styles
     }
   }
 
+  .#{$prefix}--tile--clickable {
+    @include reset;
+    @include type-style('body-short-01');
+    color: $text-01;
+    text-decoration: none;
+  }
+
   .#{$prefix}--tile--selectable {
     padding-right: $carbon--spacing-09;
   }
@@ -22716,7 +22918,7 @@ Tile styles
     }
 
     .#{$prefix}--tile-content__below-the-fold {
-      visibility: visible;
+      visibility: inherit;
       opacity: 1;
       transition: opacity $duration--fast-02 motion(standard, productive), visibility
           $duration--fast-02 motion(standard, productive);
@@ -22759,6 +22961,7 @@ Tile styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [text-01 [variable]](#text-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
@@ -23094,7 +23297,6 @@ Toggle styles
     align-items: center;
     width: carbon--rem(48px);
     height: carbon--rem(24px);
-    margin: $carbon--spacing-03 0;
     cursor: pointer;
 
     // Toggle background oval
@@ -23129,6 +23331,10 @@ Toggle styles
       content: '';
       transition: transform $duration--fast-01 motion(exit, productive);
     }
+
+    .#{$prefix}--toggle-input__label & {
+      margin-top: $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--toggle__text--off,
@@ -23137,6 +23343,7 @@ Toggle styles
     margin-left: carbon--rem(56px);
     @include type-style('body-short-01');
     user-select: none;
+    white-space: nowrap;
     // top offset needed to vertically center absolutely positioned flex child in IE11
     top: 50%;
     transform: translateY(-50%);
@@ -23291,6 +23498,7 @@ Toggle styles
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [text-02 [variable]](#text-02-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
 
 ## toolbar
 
@@ -24372,10 +24580,10 @@ UI shell header
     height: 100%;
     padding-left: mini-units(2);
     position: relative;
-    display: block;
+    display: none;
 
-    @include carbon--breakpoint-down('lg') {
-      display: none;
+    @include carbon--breakpoint('lg') {
+      display: block;
     }
 
     &::before {
@@ -24391,7 +24599,7 @@ UI shell header
     }
   }
 
-  .#{$prefix}--header__menu-bar[role='menubar'] {
+  .#{$prefix}--header__menu-bar {
     display: flex;
     height: 100%;
     list-style: none;
@@ -24464,7 +24672,7 @@ UI shell header
     transform: rotate(180deg);
   }
 
-  .#{$prefix}--header__menu[role='menu'] {
+  .#{$prefix}--header__menu {
     display: none;
     list-style: none;
     padding: 0;
@@ -24534,7 +24742,7 @@ UI shell header
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
-    visibility: visible;
+    visibility: inherit;
     white-space: nowrap;
   }
 
@@ -24561,7 +24769,6 @@ UI shell header
 - **Group**: [ui-shell](#ui-shell)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
-  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
   - [mini-units [function]](#mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
@@ -25045,7 +25252,7 @@ properties for opacity and visibility to help with the transition animation.
   .#{$prefix}--side-nav--fixed &,
   .#{$prefix}--side-nav--expanded & {
     @if $visibility == true {
-      visibility: visible;
+      visibility: inherit;
     }
     @if $opacity == true {
       opacity: 1;
@@ -25124,7 +25331,7 @@ UI shell side nav
     width: 0;
   }
 
-  .#{$prefix}--side-nav:not(.#{$prefix}--side-nav--fixed):hover,
+  .#{$prefix}--side-nav.bx--side-nav--rail:not(.#{$prefix}--side-nav--fixed):hover,
   .#{$prefix}--side-nav--expanded {
     width: mini-units(32);
   }
@@ -25342,8 +25549,8 @@ UI shell side nav
     > .#{$prefix}--side-nav__submenu:hover,
   .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
     > .#{$prefix}--side-nav__link:hover,
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
+  .#{$prefix}--side-nav__menu
+    a.#{$prefix}--side-nav__link:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
@@ -25447,20 +25654,19 @@ UI shell side nav
     color: $ibm-color__gray-100;
   }
 
-  .#{$prefix}--side-nav__menu[role='menu'] {
+  .#{$prefix}--side-nav__menu {
     display: block;
     visibility: hidden;
     max-height: 0;
   }
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true']
-    + .#{$prefix}--side-nav__menu[role='menu'] {
+    + .#{$prefix}--side-nav__menu {
     max-height: rem(1500px);
     visibility: inherit;
   }
 
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[role='menuitem'] {
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link {
     height: mini-units(4);
     min-height: mini-units(4);
     padding-left: mini-units(4);
@@ -25468,13 +25674,11 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__item.#{$prefix}--side-nav__item--icon
-    a.#{$prefix}--side-nav__link[role='menuitem'] {
+    a.#{$prefix}--side-nav__link {
     padding-left: mini-units(9);
   }
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link--current,
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[aria-current='page'],
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link--current,
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link[aria-current='page'],
   a.#{$prefix}--side-nav__link--current {
     background-color: $ibm-color__gray-20;
 
@@ -25598,7 +25802,7 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav--fixed
-    .#{$prefix}--side-nav__menu[role='menu']
+    .#{$prefix}--side-nav__menu
     a.#{$prefix}--side-nav__link {
     padding-left: mini-units(4);
   }

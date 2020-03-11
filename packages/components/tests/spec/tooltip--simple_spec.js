@@ -88,6 +88,22 @@ describe('Test simple tooltip', function() {
       expect(element.classList.contains('bx--tooltip--hidden')).toBe(false);
     });
 
+    it('Should have visible class after mouseenter', function() {
+      element.dispatchEvent(new CustomEvent('mouseenter', { bubbles: true }));
+      expect(element.classList.contains('bx--tooltip--visible')).toBe(true);
+    });
+
+    it('Should not have visible class after mouseleave', async function() {
+      return Tooltip.__with__({
+        debounce: fn => fn,
+      })(() => {
+        tooltip.release();
+        tooltip = new Tooltip(element);
+        element.dispatchEvent(new CustomEvent('mouseleave', { bubbles: true }));
+        expect(element.classList.contains('bx--tooltip--visible')).toBe(false);
+      });
+    });
+
     it('Should not have hidden class after focus', function() {
       element.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
       expect(element.classList.contains('bx--tooltip--hidden')).toBe(false);
