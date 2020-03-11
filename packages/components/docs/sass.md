@@ -1496,7 +1496,15 @@ in code
 <summary>Source code</summary>
 
 ```scss
-$carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
+$carbon--aspect-ratios: (
+  (16, 9),
+  (9, 16),
+  (2, 1),
+  (1, 2),
+  (4, 3),
+  (3, 4),
+  (1, 1)
+);
 ```
 
 </details>
@@ -1506,36 +1514,53 @@ $carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
 
 ### ❌carbon--aspect-ratio [mixin]
 
-Output the CSS classes for generating aspect ratio classes
+Generates the CSS classname utilities for the aspect ratios
+
+CSS Tricks article on aspect ratios and all the different ways it can be done.
+https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
+
+That article references an earlier article on the topic.
+https://keithjgrant.com/posts/2017/03/aspect-ratios/
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-@mixin carbon--aspect-ratio($aspect-ratios: $carbon--aspect-ratios) {
+@mixin carbon--aspect-ratio($width, $height) {
   .#{$prefix}--aspect-ratio {
-    height: 0;
     position: relative;
   }
 
+  .#{$prefix}--aspect-ratio::before {
+    content: '';
+    width: 1px;
+    margin-left: -1px;
+    float: left;
+    height: 0;
+  }
+
+  .#{$prefix}--aspect-ratio::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  @each $aspect-ratio in $aspect-ratios {
+    $width: nth($aspect-ratio, 1);
+    $height: nth($aspect-ratio, 2);
+
+    .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
+      padding-top: percentage($height / $width);
+    }
+  }
+
+  // leaving here for legacy support
   .#{$prefix}--aspect-ratio--object {
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 100;
-  }
-
-  @each $ratio in $aspect-ratios {
-    $width: nth($ratio, 1);
-    $height: nth($ratio, 2);
-
-    .#{$prefix}--aspect-ratio--#{$width}x#{$height} {
-      padding-bottom: percentage($height / $width);
-    }
   }
 }
 ```
@@ -1544,9 +1569,10 @@ Output the CSS classes for generating aspect ratio classes
 
 - **Parameters**:
 
-| Name             | Description                         | Type   | Default value            |
-| ---------------- | ----------------------------------- | ------ | ------------------------ |
-| `$aspect-ratios` | A list of aspect ratios to generate | `List` | `$carbon--aspect-ratios` |
+| Name      | Description                 | Type     | Default value |
+| --------- | --------------------------- | -------- | ------------- |
+| `$width`  | width from an aspect ratio  | `Number` | —             |
+| `$height` | height from an aspect ratio | `Number` | —             |
 
 - **Group**: [@carbon/grid](#carbongrid)
 - **Requires**:
@@ -12886,7 +12912,7 @@ Button styles
     + .#{$prefix}--btn--primary.#{$prefix}--btn--disabled,
   .#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled
     + .#{$prefix}--btn--danger.#{$prefix}--btn--disabled {
-    border-left: rem(1px) solid $disabled-03;
+    box-shadow: rem(-1px) 0 0 0 $disabled-03;
   }
 
   .#{$prefix}--btn {
@@ -14474,7 +14500,8 @@ Data table action styles
 
   .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
     margin: 0;
-    height: $layout-04;
+    max-width: none;
+    white-space: nowrap;
   }
 
   .#{$prefix}--overflow-menu--data-table {
@@ -14752,7 +14779,7 @@ Data table action styles
     .#{$prefix}--toolbar-search-container-active
       .#{$prefix}--search
       .#{$prefix}--search-input {
-      visibility: visible;
+      visibility: inherit;
     }
 
     .#{$prefix}--toolbar-search-container-active
@@ -14797,12 +14824,14 @@ Data table action styles
   .#{$prefix}--table-toolbar--small .#{$prefix}--toolbar-action {
     height: rem(32px);
     width: rem(32px);
-    padding: $spacing-03;
+    padding: $spacing-03 0;
   }
 
   .#{$prefix}--table-toolbar--small .#{$prefix}--btn--primary {
-    padding-top: rem(3px);
+    padding-top: calc(0.375rem - 3px);
+    padding-bottom: calc(0.375rem - 3px);
     height: rem(32px);
+    min-height: auto;
   }
 
   .#{$prefix}--table-toolbar--small
@@ -14814,7 +14843,6 @@ Data table action styles
     .#{$prefix}--toolbar-action
     ~ .#{$prefix}--btn {
     height: rem(32px);
-    width: rem(160px);
     overflow: hidden;
   }
 }
@@ -15764,7 +15792,7 @@ Data table expandable styles
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
-  visibility: visible;
+  visibility: inherit;
   white-space: nowrap;
 }
 ```
@@ -18556,7 +18584,7 @@ Modal styles
       visibility 0ms linear $duration--moderate-02;
 
     &.is-visible {
-      visibility: visible;
+      visibility: inherit;
       opacity: 1;
       background-color: $overlay-01;
       transition: background-color $duration--slow-02 motion(entrance, expressive),
@@ -20583,7 +20611,7 @@ Progress indicator styles
   //OVERFLOW STYLING
   .#{$prefix}--progress-label-overflow:hover ~ .#{$prefix}--tooltip,
   .#{$prefix}--progress-label-overflow:focus ~ .#{$prefix}--tooltip {
-    visibility: visible;
+    visibility: inherit;
   }
 
   .#{$prefix}--progress-step .#{$prefix}--tooltip .#{$prefix}--tooltip__caret {
@@ -21127,7 +21155,7 @@ Search styles
       outline $duration--fast-02 motion(standard, productive), border
         $duration--fast-02 motion(standard, productive);
     cursor: pointer;
-    visibility: visible;
+    visibility: inherit;
     opacity: 1;
     height: rem(40px);
     width: rem(40px);
@@ -22387,8 +22415,6 @@ Tag styles
   // tags used for filtering
   .#{$prefix}--tag--filter {
     @include tag-theme($inverse-02, $inverse-01);
-
-    cursor: pointer;
     padding-right: rem(2px);
 
     &:focus,
@@ -22397,28 +22423,34 @@ Tag styles
     }
   }
 
-  .#{$prefix}--tag--filter > svg {
+  .#{$prefix}--tag__close-icon {
     flex-shrink: 0;
     width: rem(20px);
     height: rem(20px);
     margin: 0 0 0 rem(4px);
     padding: rem(2px);
     border: 0;
-    fill: $inverse-01;
     background-color: transparent;
     border-radius: 50%;
+    cursor: pointer;
 
     &:hover {
       background-color: $inverse-hover-ui;
     }
   }
 
-  .#{$prefix}--tag--filter:focus > svg {
+  .#{$prefix}--tag__close-icon svg {
+    fill: $inverse-01;
+  }
+
+  .#{$prefix}--tag__close-icon:focus {
+    outline: none;
     box-shadow: inset 0 0 0 2px $inverse-focus-ui;
     border-radius: 50%;
   }
 
-  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg:hover {
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
+    .#{$prefix}--tag__close-icon:hover {
     background-color: transparent;
   }
 
@@ -22887,7 +22919,7 @@ Tile styles
     }
 
     .#{$prefix}--tile-content__below-the-fold {
-      visibility: visible;
+      visibility: inherit;
       opacity: 1;
       transition: opacity $duration--fast-02 motion(standard, productive), visibility
           $duration--fast-02 motion(standard, productive);
@@ -24710,7 +24742,7 @@ UI shell header
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
-    visibility: visible;
+    visibility: inherit;
     white-space: nowrap;
   }
 
@@ -25220,7 +25252,7 @@ properties for opacity and visibility to help with the transition animation.
   .#{$prefix}--side-nav--fixed &,
   .#{$prefix}--side-nav--expanded & {
     @if $visibility == true {
-      visibility: visible;
+      visibility: inherit;
     }
     @if $opacity == true {
       opacity: 1;
@@ -25299,7 +25331,7 @@ UI shell side nav
     width: 0;
   }
 
-  .#{$prefix}--side-nav:not(.#{$prefix}--side-nav--fixed):hover,
+  .#{$prefix}--side-nav.bx--side-nav--rail:not(.#{$prefix}--side-nav--fixed):hover,
   .#{$prefix}--side-nav--expanded {
     width: mini-units(32);
   }
