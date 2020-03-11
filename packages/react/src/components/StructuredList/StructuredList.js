@@ -51,7 +51,14 @@ export class StructuredListWrapper extends Component {
   };
 
   render() {
-    const { children, selection, className, ariaLabel, ...other } = this.props;
+    const {
+      children,
+      selection,
+      className,
+      ariaLabel,
+      border: _border,
+      ...other
+    } = this.props;
 
     const classes = classNames(`${prefix}--structured-list`, className, {
       [`${prefix}--structured-list--selection`]: selection,
