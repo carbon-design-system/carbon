@@ -14500,7 +14500,8 @@ Data table action styles
 
   .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
     margin: 0;
-    height: $layout-04;
+    max-width: none;
+    white-space: nowrap;
   }
 
   .#{$prefix}--overflow-menu--data-table {
@@ -14823,12 +14824,14 @@ Data table action styles
   .#{$prefix}--table-toolbar--small .#{$prefix}--toolbar-action {
     height: rem(32px);
     width: rem(32px);
-    padding: $spacing-03;
+    padding: $spacing-03 0;
   }
 
   .#{$prefix}--table-toolbar--small .#{$prefix}--btn--primary {
-    padding-top: rem(3px);
+    padding-top: calc(0.375rem - 3px);
+    padding-bottom: calc(0.375rem - 3px);
     height: rem(32px);
+    min-height: auto;
   }
 
   .#{$prefix}--table-toolbar--small
@@ -14840,7 +14843,6 @@ Data table action styles
     .#{$prefix}--toolbar-action
     ~ .#{$prefix}--btn {
     height: rem(32px);
-    width: rem(160px);
     overflow: hidden;
   }
 }
