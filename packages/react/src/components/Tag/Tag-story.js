@@ -29,7 +29,11 @@ const props = {
     title: 'Clear Filter',
   }),
   filter() {
-    return { ...this.regular(), onClick: action('onClick') };
+    return {
+      ...this.regular(),
+      onClick: action('onClick'),
+      onClose: action('onClose'),
+    };
   },
 };
 
