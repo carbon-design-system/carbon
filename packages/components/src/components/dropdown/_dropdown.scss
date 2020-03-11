@@ -55,7 +55,6 @@
     outline: 2px solid transparent;
     transition: background-color $duration--fast-01 motion(standard, productive);
 
-    // Menu's triggering element updated to button with Downshift v5 upgrade
     &:focus {
       @include focus-outline('outline');
     }
@@ -65,6 +64,7 @@
     }
   }
 
+  // Menu's triggering element updated to button with Downshift v5 upgrade
   .#{prefix}--dropdown button {
     @include button-reset;
     text-align: left;
