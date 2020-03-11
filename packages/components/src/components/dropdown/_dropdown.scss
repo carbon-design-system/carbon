@@ -41,6 +41,7 @@
   }
 
   .#{$prefix}--dropdown {
+    @include reset;
     @include focus-outline('reset');
     position: relative;
     list-style: none;
