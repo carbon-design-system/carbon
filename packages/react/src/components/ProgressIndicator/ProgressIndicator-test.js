@@ -88,7 +88,7 @@ describe('ProgressIndicator', () => {
       mountedList
         .find(ProgressStep)
         .at(0)
-        .find('[role="button"]')
+        .find('button')
         .simulate('click');
       expect(mockOnChange).toHaveBeenCalledWith(0);
     });

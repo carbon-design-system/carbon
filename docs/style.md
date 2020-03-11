@@ -66,6 +66,18 @@ row before the </tbody></table> line.
 - [React](#react)
   - [Guidelines](#guidelines)
     - [Writing a component](#writing-a-component)
+  - [Style](#style-1)
+    - [Naming event handlers](#naming-event-handlers)
+- [Sass](#sass)
+  - [Guidelines](#guidelines-1)
+    - [Author component styles using mixins](#author-component-styles-using-mixins)
+    - [Use design tokens where appropriate](#use-design-tokens-where-appropriate)
+    - [Avoid nesting selectors](#avoid-nesting-selectors)
+    - [Use only as much specificity as needed](#use-only-as-much-specificity-as-needed)
+    - [Use the global `$prefix` variable](#use-the-global-prefix-variable)
+    - [Annotate relevant Sass values with SassDoc](#annotate-relevant-sass-values-with-sassdoc)
+  - [Style](#style-2)
+    - [Comments](#comments)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
@@ -269,3 +281,194 @@ When writing event handlers, we prefer using the exact name, `onClick` to a
 shorthand. If that name is already being used in a given scope, which often
 happens if the component supports a prop `onClick`, then we prefer to specify
 the function as `handleOnClick`.
+
+## Sass
+
+### Guidelines
+
+#### Author component styles using mixins
+
+When authoring the styles for a component, it's important that we use
+[`mixins`](https://sass-lang.com/documentation/at-rules/mixin) to allow
+developers to control when the CSS for a specific component gets emitted. For
+example:
+
+```scss
+// src/components/accordion/_accordion.scss
+
+/// Accordion
+/// @access private
+/// @group accordion
+@mixin accordion {
+  .#{$prefix}--accordion {
+    // ...
+  }
+}
+```
+
+Authoring component styles under a mixin allows the design system to:
+
+- Control when the CSS for accordion gets emitted, or not emitted, from the
+  library
+- Allows us to author experimental or future styles in a separate mixin and
+  toggle its inclusion through feature flags
+- Could allow developers consuming the design system to control when styles get
+  emitted
+
+#### Use design tokens where appropriate
+
+We have a number of Sass variables available in the project to be used as design
+tokens when building out a component. Almost always you will want to leverage
+these instead of hard coding values for colors, type, or even spacing. You can
+visit the following SassDoc links to view all of the design tokens relevant to
+this project:
+
+- [Color](../packages/theme/docs/sass.md)
+- [Layout](../packages/layout/docs/sass.md)
+- [Motion](../packages/motion/docs/sass.md)
+- [Type](../packages/type/docs/sass.md)
+
+#### Avoid nesting selectors
+
+Nesting selectors is often a convenient and fast way to author styles in Sass.
+Unfortunately, they also add a performance and maintenance burden for the design
+system. The performance burden is due to the generated nature of selectors which
+can lead to unexpected CSS bundle bloat. The maintenance burden manifests itself
+in a way that makes it harder to find specific selectors while working on the
+codebase. For example, if we are looking for the selector `.component:focus` in
+the following file:
+
+```scss
+// Early on in the file
+.component {
+  // ...
+}
+
+// ...
+
+// Later on in the file
+.component {
+  &:focus {
+    // ...
+  }
+}
+```
+
+It can be difficult to track down the specific `.component:focus` selector
+without having to navigate through the file and relevant matches to see where
+`&:focus` is being defined. While this may be hard to visualize in a short code
+snippet, as file size grows and our Sass is rewritten or updated, this problem
+becomes increasingly obvious.
+
+#### Use only as much specificity as needed
+
+It's important that we write selectors that use only as much specificity as
+needed. Ideally, we would only need one selector per component but this is
+rarely the case. As a result, adding specificity should be done sparingly or
+when including it is helpful when building a component. For example, if you
+would like to enforce a specific element or ARIA attribute then using this
+attribute in a selector would be appropriate:
+
+```scss
+button[aria-expanded='false'] {
+  // ...
+}
+```
+
+If we compared this to a class selector, for example `.my-component__button`,
+then we may consider this as adding more specificity than needed. However, for
+the design system it is more important that the component itself implements this
+contract for accessibility.
+
+#### Use the global `$prefix` variable
+
+When writing selectors, always include the global `$prefix` variable. This value
+is used to namespace all of the selectors that we ship in the design system.
+
+<table>
+<thead><tr><th>Unpreferred</th><th>Preferred</th></tr></thead>
+<tbody>
+<tr><td>
+
+```scss
+.my-component {
+  // ...
+}
+```
+
+</td><td>
+
+```scss
+.#{$prefix}--my-component {
+  // ...
+}
+```
+
+</td></tr>
+</tbody></table>
+
+#### Annotate relevant Sass values with SassDoc
+
+When authoring functions, mixins, or values that are intended to be shared, you
+should leverage SassDoc. The typical format we use includes the following
+information:
+
+```scss
+/// <Details about the mixin>
+/// @access <public|private>
+/// @group <name-of-group>
+@mixin my-component {
+  // ...
+}
+```
+
+### Style
+
+#### Comments
+
+When annotating individual selectors or properties, you should add an inline
+comment above the piece of code you're commenting.
+
+<table>
+<thead><tr><th>Unpreferred</th><th>Preferred</th></tr></thead>
+<tbody>
+<tr><td>
+
+```scss
+.#{$prefix}--my-component {
+  width: 100%; // Comment about why we need 100% width
+}
+```
+
+</td><td>
+
+```scss
+.#{$prefix}--my-component {
+  // Comment about why we need 100% width
+  width: 100%;
+}
+```
+
+</td></tr>
+</tbody></table>
+
+When annotating a section of a Sass file, it is helpful to use the following
+banner comment style:
+
+```scss
+//----------------------------------------------------------------------------
+// Section name
+//----------------------------------------------------------------------------
+```
+
+_Note: this banner should be formatted to span 80 columns_
+
+When writing SassDoc comments, you should use three forward slashes:
+
+```scss
+/// This is a comment for SassDoc
+/// @access public
+.#{$prefix}--my-component {
+  // ...
+}
+```

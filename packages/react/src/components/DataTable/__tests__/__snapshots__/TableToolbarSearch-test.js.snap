@@ -6,6 +6,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
   id="custom-id"
   onChange={[MockFunction]}
   persistent={false}
+  tabIndex="0"
   translateWithId={[Function]}
 >
   <div
@@ -13,7 +14,6 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    role="search"
     tabIndex="0"
   >
     <Search
@@ -25,11 +25,14 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
       onChange={[Function]}
       placeHolderText="Filter table"
       size="sm"
+      tabIndex="-1"
       type="text"
       value=""
     >
       <div
+        aria-labelledby="custom-id-search"
         className="bx--search bx--search--sm custom-class"
+        role="search"
       >
         <ForwardRef(Search16)
           className="bx--search-magnifier"
@@ -66,6 +69,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
         <label
           className="bx--label"
           htmlFor="custom-id"
+          id="custom-id-search"
         >
           Filter table
         </label>
@@ -77,6 +81,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
           onChange={[Function]}
           placeholder="Filter table"
           role="searchbox"
+          tabIndex="-1"
           type="text"
           value=""
         />
@@ -90,7 +95,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
             <Icon
               height={16}
               preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 16 16"
+              viewBox="0 0 32 32"
               width={16}
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -104,12 +109,12 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
                     "willChange": "transform",
                   }
                 }
-                viewBox="0 0 16 16"
+                viewBox="0 0 32 32"
                 width={16}
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M12 4.7L11.3 4 8 7.3 4.7 4 4 4.7 7.3 8 4 11.3 4.7 12 8 8.7 11.3 12 12 11.3 8.7 8z"
+                  d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
                 />
               </svg>
             </Icon>

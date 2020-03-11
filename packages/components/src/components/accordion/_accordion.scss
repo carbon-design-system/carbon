@@ -90,7 +90,7 @@
     margin: $accordion-title-margin;
     width: 100%;
     text-align: left;
-    z-index: 0;
+    z-index: 1;
   }
 
   .#{$prefix}--accordion__content {
@@ -98,13 +98,18 @@
     // Transition property for when the accordion closes
     transition: padding motion(standard, productive) $duration--fast-02;
     padding-left: $carbon--spacing-05;
-    padding-right: 25%;
+    padding-right: $carbon--spacing-05;
 
-    @include carbon--breakpoint-down('md') {
+    // Custom breakpoints based on issue #4993
+    @include carbon--breakpoint-up(480px) {
       padding-right: $carbon--spacing-09;
     }
 
-    p {
+    @include carbon--breakpoint-up(640px) {
+      padding-right: 25%;
+    }
+
+    > p {
       @include type-style('body-long-01');
     }
   }
@@ -174,6 +179,11 @@
       outline: none;
       cursor: default;
     }
+  }
+
+  .#{$prefix}--accordion--end.#{$prefix}--skeleton
+    .#{$prefix}--accordion__arrow {
+    margin-left: $spacing-05;
   }
 
   .#{$prefix}--skeleton

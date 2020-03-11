@@ -44,6 +44,14 @@
     }
   }
 
+  .#{$prefix}--text-input--xl {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--text-input--sm {
+    height: rem(32px);
+  }
+
   .#{$prefix}--password-input {
     padding-right: $carbon--spacing-08;
   }
@@ -68,6 +76,9 @@
     .#{$prefix}--text-input__invalid-icon {
       position: absolute;
       right: $carbon--spacing-05;
+      // top/transform used to center invalid icon in IE11
+      top: 50%;
+      transform: translateY(-50%);
       fill: $support-01;
     }
 

@@ -151,6 +151,7 @@
   - [✅text-03 [variable]](#text-03-variable)
   - [✅text-04 [variable]](#text-04-variable)
   - [✅text-05 [variable]](#text-05-variable)
+  - [✅text-error [variable]](#text-error-variable)
   - [✅icon-01 [variable]](#icon-01-variable)
   - [✅icon-02 [variable]](#icon-02-variable)
   - [✅icon-03 [variable]](#icon-03-variable)
@@ -1079,18 +1080,25 @@ yet.
 
 ### ❌carbon--make-col [mixin]
 
-Define the width of the column for a given span and column count.
+Define the width of the column for a given span and column count. A width of 0
+will hide the column entirely.
 
 <details>
 <summary>Source code</summary>
 
 ```scss
 @mixin carbon--make-col($span, $columns) {
-  flex: 0 0 percentage($span / $columns);
-  // Add a `max-width` to ensure content within each column does not blow out
-  // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
-  // do not appear to require this.
-  max-width: percentage($span / $columns);
+  @if $span == 0 {
+    display: none;
+  } @else {
+    // Explicitly include `display: block` to override
+    display: block;
+    flex: 0 0 percentage($span / $columns);
+    // Add a `max-width` to ensure content within each column does not blow out
+    // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
+    // do not appear to require this.
+    max-width: percentage($span / $columns);
+  }
 }
 ```
 
@@ -1151,7 +1159,7 @@ Output the CSS required for all the columns in a given grid system.
   $gutter: $carbon--grid-gutter
 ) {
   .#{$prefix}--col {
-    @include carbon--make-col-ready();
+    @include carbon--make-col-ready($gutter);
   }
 
   @each $breakpoint in map-keys($breakpoints) {
@@ -1159,15 +1167,15 @@ Output the CSS required for all the columns in a given grid system.
     $columns: map-get(map-get($breakpoints, $breakpoint), columns);
 
     // Allow columns to stretch full width below their breakpoints
-    @for $i from 1 through $columns {
+    @for $i from 0 through $columns {
       .#{$prefix}--col#{$infix}-#{$i} {
-        @include carbon--make-col-ready();
+        @include carbon--make-col-ready($gutter);
       }
     }
 
     .#{$prefix}--col#{$infix},
     .#{$prefix}--col#{$infix}--auto {
-      @include carbon--make-col-ready();
+      @include carbon--make-col-ready($gutter);
     }
 
     @include carbon--breakpoint($breakpoint, $breakpoints) {
@@ -1187,7 +1195,7 @@ Output the CSS required for all the columns in a given grid system.
         max-width: 100%;
       }
 
-      @for $i from 1 through $columns {
+      @for $i from 0 through $columns {
         .#{$prefix}--col#{$infix}-#{$i} {
           @include carbon--make-col($i, $columns);
         }
@@ -1332,7 +1340,15 @@ in code
 <summary>Source code</summary>
 
 ```scss
-$carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
+$carbon--aspect-ratios: (
+  (16, 9),
+  (9, 16),
+  (2, 1),
+  (1, 2),
+  (4, 3),
+  (3, 4),
+  (1, 1)
+);
 ```
 
 </details>
@@ -1342,36 +1358,53 @@ $carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
 
 ### ❌carbon--aspect-ratio [mixin]
 
-Output the CSS classes for generating aspect ratio classes
+Generates the CSS classname utilities for the aspect ratios
+
+CSS Tricks article on aspect ratios and all the different ways it can be done.
+https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
+
+That article references an earlier article on the topic.
+https://keithjgrant.com/posts/2017/03/aspect-ratios/
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-@mixin carbon--aspect-ratio($aspect-ratios: $carbon--aspect-ratios) {
+@mixin carbon--aspect-ratio($width, $height) {
   .#{$prefix}--aspect-ratio {
-    height: 0;
     position: relative;
   }
 
+  .#{$prefix}--aspect-ratio::before {
+    content: '';
+    width: 1px;
+    margin-left: -1px;
+    float: left;
+    height: 0;
+  }
+
+  .#{$prefix}--aspect-ratio::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  @each $aspect-ratio in $aspect-ratios {
+    $width: nth($aspect-ratio, 1);
+    $height: nth($aspect-ratio, 2);
+
+    .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
+      padding-top: percentage($height / $width);
+    }
+  }
+
+  // leaving here for legacy support
   .#{$prefix}--aspect-ratio--object {
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 100;
-  }
-
-  @each $ratio in $aspect-ratios {
-    $width: nth($ratio, 1);
-    $height: nth($ratio, 2);
-
-    .#{$prefix}--aspect-ratio--#{$width}x#{$height} {
-      padding-bottom: percentage($height / $width);
-    }
   }
 }
 ```
@@ -1380,9 +1413,10 @@ Output the CSS classes for generating aspect ratio classes
 
 - **Parameters**:
 
-| Name             | Description                         | Type   | Default value            |
-| ---------------- | ----------------------------------- | ------ | ------------------------ |
-| `$aspect-ratios` | A list of aspect ratios to generate | `List` | `$carbon--aspect-ratios` |
+| Name      | Description                 | Type     | Default value |
+| --------- | --------------------------- | -------- | ------------- |
+| `$width`  | width from an aspect ratio  | `Number` | —             |
+| `$height` | height from an aspect ratio | `Number` | —             |
 
 - **Group**: [@carbon/grid](#carbongrid)
 - **Requires**:
@@ -1531,12 +1565,15 @@ Generate the CSS for a grid for the given breakpoints and gutters
     @include carbon--make-row();
   }
 
-  .#{$prefix}--grid--condensed .#{$prefix}--row:not(:last-of-type) {
-    margin-bottom: $condensed-gutter;
+  .#{$prefix}--row-padding [class*='#{$prefix}--col'],
+  .#{$prefix}--col-padding {
+    padding-top: $grid-gutter / 2;
+    padding-bottom: $grid-gutter / 2;
   }
 
-  .#{$prefix}--row--condensed + .#{$prefix}--row--condensed {
-    margin-top: $condensed-gutter;
+  .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
+    padding-top: $condensed-gutter / 2;
+    padding-bottom: $condensed-gutter / 2;
   }
 
   @include carbon--make-grid-columns($breakpoints, $grid-gutter);
@@ -1847,7 +1884,6 @@ Check to see if the given breakpoint name
 - **Returns**: `Bool`
 - **Used by**:
   - [carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
-  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
 
 ### ✅carbon--largest-breakpoint-name [function]
 
@@ -1968,12 +2004,8 @@ Generate a media query for the maximum width of the given styles
   } @else if map-has-key($breakpoints, $name) {
     $breakpoint: map-get($breakpoints, $name);
     $width: map-get($breakpoint, width);
-    @if carbon--is-smallest-breakpoint($name, $breakpoints) {
+    @media (max-width: $width) {
       @content;
-    } @else {
-      @media (max-width: $width) {
-        @content;
-      }
     }
   } @else {
     @error 'Unable to find a breakpoint with name `#{$name}`. Expected one of: (#{map-keys($breakpoints)})';
@@ -1991,8 +2023,6 @@ Generate a media query for the maximum width of the given styles
 | `$breakpoints` | A map of breakpoints where the key is the name | `Map`              | `$carbon--grid-breakpoints` |
 
 - **Group**: [@carbon/layout](#carbonlayout)
-- **Requires**:
-  - [carbon--is-smallest-breakpoint [function]](#carbon--is-smallest-breakpoint-function)
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
 
@@ -3735,6 +3765,7 @@ Define theme variables from a map of tokens
   $text-03: map-get($theme, 'text-03') !global;
   $text-04: map-get($theme, 'text-04') !global;
   $text-05: map-get($theme, 'text-05') !global;
+  $text-error: map-get($theme, 'text-error') !global;
   $icon-01: map-get($theme, 'icon-01') !global;
   $icon-02: map-get($theme, 'icon-02') !global;
   $icon-03: map-get($theme, 'icon-03') !global;
@@ -3907,6 +3938,10 @@ Define theme variables from a map of tokens
     $text-05: var(
       --#{$custom-property-prefix}-text-05,
       map-get($theme, 'text-05')
+    ) !global;
+    $text-error: var(
+      --#{$custom-property-prefix}-text-error,
+      map-get($theme, 'text-error')
     ) !global;
     $icon-01: var(
       --#{$custom-property-prefix}-icon-01,
@@ -4299,6 +4334,10 @@ Define theme variables from a map of tokens
 
     @if should-emit($theme, $carbon--theme, 'text-05', $emit-difference) {
       @include custom-property('text-05', map-get($theme, 'text-05'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'text-error', $emit-difference) {
+      @include custom-property('text-error', map-get($theme, 'text-error'));
     }
 
     @if should-emit($theme, $carbon--theme, 'icon-01', $emit-difference) {
@@ -5075,6 +5114,7 @@ Define theme variables from a map of tokens
   - [text-03 [variable]](#text-03-variable)
   - [text-04 [variable]](#text-04-variable)
   - [text-05 [variable]](#text-05-variable)
+  - [text-error [variable]](#text-error-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [icon-03 [variable]](#icon-03-variable)
@@ -5236,6 +5276,7 @@ $carbon--theme--g90: map-merge(
     text-02: #c6c6c6,
     text-03: #6f6f6f,
     text-05: #8d8d8d,
+    text-error: #ffb3b8,
     icon-01: #f4f4f4,
     icon-02: #c6c6c6,
     link-01: #78a9ff,
@@ -5244,7 +5285,7 @@ $carbon--theme--g90: map-merge(
     field-02: #525252,
     inverse-01: #161616,
     inverse-02: #f4f4f4,
-    support-01: #fa4d56,
+    support-01: #ff8389,
     support-02: #42be65,
     support-04: #4589ff,
     inverse-support-01: #da1e28,
@@ -5267,6 +5308,7 @@ $carbon--theme--g90: map-merge(
     visited-link: #be95ff,
     disabled-01: #393939,
     disabled-02: #6f6f6f,
+    disabled-03: #a8a8a8,
     highlight: #0043ce,
     skeleton-01: #353535,
     skeleton-02: #525252,
@@ -5307,6 +5349,7 @@ $carbon--theme--g100: map-merge(
     text-02: #c6c6c6,
     text-03: #6f6f6f,
     text-05: #8d8d8d,
+    text-error: #ff8389,
     icon-01: #f4f4f4,
     icon-02: #c6c6c6,
     link-01: #78a9ff,
@@ -5338,7 +5381,6 @@ $carbon--theme--g100: map-merge(
     visited-link: #be95ff,
     disabled-01: #262626,
     disabled-02: #525252,
-    disabled-03: #6f6f6f,
     highlight: #002d9c,
     skeleton-01: #353535,
     skeleton-02: #393939,
@@ -5367,8 +5409,8 @@ $carbon--theme--v9: map-merge(
   $carbon--theme--white,
   (
     interactive-01: #3d70b2,
-    interactive-02: #5a6872,
-    interactive-03: #5a6872,
+    interactive-02: #4d5358,
+    interactive-03: #3d70b2,
     interactive-04: #3d70b2,
     ui-background: #f4f7fb,
     ui-01: #ffffff,
@@ -5380,6 +5422,7 @@ $carbon--theme--v9: map-merge(
     text-02: #5a6872,
     text-03: #cdd1d4,
     text-05: #5a6872,
+    text-error: #e0182d,
     icon-01: #3d70b2,
     icon-02: #5a6872,
     link-01: #3d70b2,
@@ -5420,8 +5463,8 @@ $carbon--theme--v9: map-merge(
     skeleton-01: rgba(61, 112, 178, 0.1),
     skeleton-02: rgba(61, 112, 178, 0.1),
     brand-01: #3d70b2,
-    brand-02: #5a6872,
-    brand-03: #5a6872,
+    brand-02: #4d5358,
+    brand-03: #3d70b2,
     active-01: #dfeafa,
     hover-field: #eef4fc,
   )
@@ -5457,6 +5500,7 @@ $carbon--theme: (
   text-03: if(global-variable-exists('text-03'), $text-03, map-get($carbon--theme--white, 'text-03')),
   text-04: if(global-variable-exists('text-04'), $text-04, map-get($carbon--theme--white, 'text-04')),
   text-05: if(global-variable-exists('text-05'), $text-05, map-get($carbon--theme--white, 'text-05')),
+  text-error: if(global-variable-exists('text-error'), $text-error, map-get($carbon--theme--white, 'text-error')),
   icon-01: if(global-variable-exists('icon-01'), $icon-01, map-get($carbon--theme--white, 'icon-01')),
   icon-02: if(global-variable-exists('icon-02'), $icon-02, map-get($carbon--theme--white, 'icon-02')),
   icon-03: if(global-variable-exists('icon-03'), $icon-03, map-get($carbon--theme--white, 'icon-03')),
@@ -5945,6 +5989,29 @@ $text-05: if(
     ),
   map-get($carbon--theme, 'text-05'),
   #6f6f6f
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅text-error [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$text-error: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'text-error'
+    ),
+  map-get($carbon--theme, 'text-error'),
+  #da1e28
 );
 ```
 
@@ -6790,7 +6857,7 @@ $hover-danger: if(
       'hover-danger'
     ),
   map-get($carbon--theme, 'hover-danger'),
-  #ba1b23
+  #b81921
 );
 ```
 
@@ -9513,17 +9580,17 @@ Include a type reset for a given body and mono font family
 
 ```scss
 @mixin carbon--type-reset(
-  $base-font-size: $carbon--base-font-size,
   $body-font-family: carbon--font-family('sans'),
   $mono-font-family: carbon--font-family('mono')
 ) {
   html {
-    font-size: $base-font-size;
+    font-size: 100%;
   }
 
   body {
-    font-family: $body-font-family;
     @include carbon--font-weight('regular');
+
+    font-family: $body-font-family;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -9545,7 +9612,6 @@ Include a type reset for a given body and mono font family
 
 | Name                | Description                                                                         | Type     | Default value                 |
 | ------------------- | ----------------------------------------------------------------------------------- | -------- | ----------------------------- |
-| `$base-font-size`   | The base font size for your document                                                | `Number` | `$carbon--base-font-size`     |
 | `$body-font-family` | The font family used on the `<body>` element                                        | `String` | `carbon--font-family('sans')` |
 | `$mono-font-family` | The font family used on elements that require mono fonts, like the `<code>` element | `String` | `carbon--font-family('mono')` |
 

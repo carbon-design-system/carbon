@@ -110,6 +110,8 @@ describe('Checkbox', () => {
 });
 
 describe('refs', () => {
+  let container;
+
   it('should accept refs', () => {
     class MyComponent extends React.Component {
       constructor(props) {
@@ -131,7 +133,12 @@ describe('refs', () => {
         );
       }
     }
-    const wrapper = mount(<MyComponent />);
+    container = document.createElement('div');
+    container.id = 'container';
+    document.body.appendChild(container);
+    const wrapper = mount(<MyComponent />, {
+      attachTo: document.querySelector('#container'),
+    });
     expect(document.activeElement.type).toBeUndefined();
     wrapper.instance().focus();
     expect(document.activeElement.type).toEqual('checkbox');
@@ -144,11 +151,25 @@ describe('refs', () => {
         this.myRef = React.createRef();
       }
       render() {
-        return <Checkbox indeterminate ref={this.myRef} />;
+        return (
+          <Checkbox
+            id="test-id"
+            labelText="test"
+            indeterminate
+            ref={this.myRef}
+          />
+        );
       }
     }
     const wrapper = mount(<MyComponent />);
     expect(wrapper.find('input').getDOMNode().indeterminate).toBe(true);
+  });
+
+  afterEach(() => {
+    if (container && container.parentNode) {
+      container.parentNode.removeChild(container);
+    }
+    container = null;
   });
 });
 

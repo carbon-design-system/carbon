@@ -106,6 +106,11 @@ export default class DataTable extends React.Component {
     translateWithId: PropTypes.func,
 
     /**
+     * `normal` Change the row height of table
+     */
+    size: PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
+
+    /**
      * Specify whether the control should be a radio button or inline checkbox
      */
     radio: PropTypes.bool,
@@ -126,6 +131,7 @@ export default class DataTable extends React.Component {
     sortRow: defaultSortRow,
     filterRows: defaultFilterRows,
     locale: 'en',
+    size: 'normal',
     translateWithId,
   };
 
@@ -327,6 +333,14 @@ export default class DataTable extends React.Component {
       indeterminate,
       name: 'select-all',
       onSelect: composeEventHandlers([this.handleSelectAll, onClick]),
+    };
+  };
+
+  getToolbarProps = (props = {}) => {
+    const { size } = this.props;
+    return {
+      ...props,
+      size: size === 'compact' || size === 'short' ? 'small' : 'normal',
     };
   };
 
@@ -581,9 +595,13 @@ export default class DataTable extends React.Component {
    *
    * @param {Event} event
    */
-  handleOnInputValueChange = event => {
+  handleOnInputValueChange = (event, defaultValue) => {
     if (event.target) {
       this.setState({ filterInputValue: event.target.value });
+    }
+
+    if (defaultValue) {
+      this.setState({ filterInputValue: defaultValue });
     }
   };
 
@@ -610,6 +628,7 @@ export default class DataTable extends React.Component {
       getExpandHeaderProps: this.getExpandHeaderProps,
       getRowProps: this.getRowProps,
       getSelectionProps: this.getSelectionProps,
+      getToolbarProps: this.getToolbarProps,
       getBatchActionProps: this.getBatchActionProps,
       getTableProps: this.getTableProps,
       getTableContainerProps: this.getTableContainerProps,

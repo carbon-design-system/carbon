@@ -151,15 +151,10 @@ export class FileUploaderButton extends Component {
       disabled,
       ...other
     } = this.props;
-    const classes = classNames(
-      `${prefix}--btn`,
-      `${prefix}--btn--sm`,
-      className,
-      {
-        [`${prefix}--btn--${buttonKind}`]: buttonKind,
-        [`${prefix}--btn--disabled`]: disabled,
-      }
-    );
+    const classes = classNames(`${prefix}--btn`, className, {
+      [`${prefix}--btn--${buttonKind}`]: buttonKind,
+      [`${prefix}--btn--disabled`]: disabled,
+    });
 
     this.uid = this.props.id || uid();
 
@@ -348,10 +343,14 @@ export default class FileUploader extends Component {
 
   handleChange = evt => {
     evt.stopPropagation();
+    const filenames = Array.prototype.map.call(
+      evt.target.files,
+      file => file.name
+    );
     this.setState({
-      filenames: this.state.filenames.concat(
-        Array.prototype.map.call(evt.target.files, file => file.name)
-      ),
+      filenames: this.props.multiple
+        ? this.state.filenames.concat(filenames)
+        : filenames,
     });
     if (this.props.onChange) {
       this.props.onChange(evt);

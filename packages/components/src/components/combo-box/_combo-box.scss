@@ -12,6 +12,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../list-box/list-box';
+@import '../../globals/scss/css--reset';
 
 /// Combo box styles
 /// @access private
@@ -34,6 +35,8 @@
 
   .#{$prefix}--combo-box .#{$prefix}--list-box__field,
   .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field {
     padding: 0;
   }

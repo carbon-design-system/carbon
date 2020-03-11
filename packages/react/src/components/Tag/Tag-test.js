@@ -19,14 +19,14 @@ describe('Tag', () => {
 
   describe('automated accessibility testing', () => {
     it('should have no Axe violations', async () => {
-      const { container } = render(<Tag>This is not a tag</Tag>);
+      const { container } = render(<Tag type="red">This is not a tag</Tag>);
       await expect(container).toHaveNoAxeViolations();
     });
 
     it('should have no DAP violations', async () => {
       const { container } = render(
         <main>
-          <Tag>This is not a tag</Tag>
+          <Tag type="red">This is not a tag</Tag>
         </main>
       );
       await expect(container).toHaveNoDAPViolations('Tag');
@@ -36,7 +36,11 @@ describe('Tag', () => {
   describe('with a screenreader', () => {
     it('filtered variant should have appropriate aria-label', () => {
       const children = 'tag content';
-      const { container } = render(<Tag filter>{children}</Tag>);
+      const { container } = render(
+        <Tag type="red" filter>
+          {children}
+        </Tag>
+      );
       const button = container.querySelector('[aria-label], [aria-labelledby]');
       const accessibilityLabel =
         button.getAttribute('aria-label') ||
@@ -49,19 +53,19 @@ describe('Tag', () => {
 
   describe('Renders as expected', () => {
     it('should render with the appropriate type', () => {
-      const tag = shallow(<Tag type="beta" />);
+      const tag = shallow(<Tag type="red" />);
       expect(tag.hasClass(`${prefix}--tag`)).toEqual(true);
-      expect(tag.hasClass(`${prefix}--tag--beta`)).toEqual(true);
+      expect(tag.hasClass(`${prefix}--tag--red`)).toEqual(true);
     });
   });
 
   it('should allow for a custom label', () => {
-    const tag = shallow(<Tag type="beta">New Version!</Tag>);
+    const tag = shallow(<Tag type="red">New Version!</Tag>);
     expect(tag.text()).toEqual('New Version!');
   });
 
   it('should support extra class names', () => {
-    const tag = shallow(<Tag type="beta" className="extra-class" />);
+    const tag = shallow(<Tag type="red" className="extra-class" />);
     expect(tag.hasClass('extra-class')).toEqual(true);
   });
 });

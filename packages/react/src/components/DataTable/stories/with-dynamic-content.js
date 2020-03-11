@@ -107,6 +107,7 @@ export default props => {
             headers,
             getHeaderProps,
             getSelectionProps,
+            getToolbarProps,
             getBatchActionProps,
             getRowProps,
             onInputChange,
@@ -119,7 +120,7 @@ export default props => {
               titleId="table-container-title"
               description="Use the toolbar menu to add rows and headers"
               {...getTableContainerProps()}>
-              <TableToolbar>
+              <TableToolbar {...getToolbarProps()}>
                 <TableBatchActions {...getBatchActionProps()}>
                   <TableBatchAction
                     renderIcon={Delete}

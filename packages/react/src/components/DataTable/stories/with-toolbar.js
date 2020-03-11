@@ -36,6 +36,7 @@ export default props => (
       getHeaderProps,
       getRowProps,
       getTableProps,
+      getToolbarProps,
       onInputChange,
       getTableContainerProps,
     }) => (
@@ -44,7 +45,7 @@ export default props => (
         titleId="table-container-title"
         description="With toolbar"
         {...getTableContainerProps()}>
-        <TableToolbar>
+        <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
             <TableToolbarSearch onChange={onInputChange} />
             <TableToolbarMenu>

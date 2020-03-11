@@ -31,7 +31,7 @@ const Switcher = React.forwardRef(function Switcher(props, ref) {
   });
 
   return (
-    <ul ref={ref} className={className} role="menu" {...accessibilityLabel}>
+    <ul ref={ref} className={className} {...accessibilityLabel}>
       {children}
     </ul>
   );

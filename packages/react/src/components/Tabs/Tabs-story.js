@@ -12,6 +12,7 @@ import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import { settings } from 'carbon-components';
 import classNames from 'classnames';
 import './Tabs-story.scss';
+import CodeSnippet from '../CodeSnippet';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
@@ -51,13 +52,39 @@ const props = {
 
 const CustomLabel = ({ text }) => <>{text}</>;
 
+const CodeSnippetExample = () => (
+  <CodeSnippet type="multi">
+    {`@mixin grid-container {
+  width: 100%;
+  padding-right: padding(mobile);
+  padding-left: padding(mobile);
+  @include breakpoint(bp--xs--major) {
+    padding-right: padding(xs);
+    padding-left: padding(xs);
+  }
+}
+$z-indexes: (
+  modal : 9000,
+  overlay : 8000,
+  dropdown : 7000,
+  header : 6000,
+  footer : 5000,
+  hidden : - 1,
+  overflowHidden: - 1,
+  floating: 10000
+);`}
+  </CodeSnippet>
+);
+
 const TabContentRenderedOnlyWhenSelected = ({
   selected,
   children,
   className,
   ...other
 }) =>
-  !selected ? null : (
+  !selected ? (
+    <div {...other} className={`${prefix}--visually-hidden`} />
+  ) : (
     <div
       {...other}
       className={classNames(className, `${prefix}--tab-content`)}
@@ -72,20 +99,43 @@ storiesOf('Tabs', module)
     'Default',
     () => (
       <Tabs {...props.tabs()}>
-        <Tab {...props.tab()} label="Tab label 1">
-          <div className="some-content">Content for first tab goes here.</div>
+        <Tab id="tab-1" {...props.tab()} label="Tab label 1">
+          <div className="some-content">
+            <p>Content for first tab goes here.</p>
+          </div>
         </Tab>
-        <Tab {...props.tab()} label="Tab label 2">
-          <div className="some-content">Content for second tab goes here.</div>
+        <Tab id="tab-2" {...props.tab()} label="Tab label 2">
+          <div className="some-content">
+            <p>Content for second tab goes here.</p>
+          </div>
+        </Tab>
+        <Tab id="tab-3" {...props.tab()} label="Tab label 3" disabled>
+          <div className="some-content">
+            <p>Content for third tab goes here.</p>
+          </div>
         </Tab>
         <Tab
+          id="tab-4"
           {...props.tab()}
-          label="Tab label 3"
+          label="Tab label 4"
           renderContent={TabContentRenderedOnlyWhenSelected}>
-          <div className="some-content">Content for third tab goes here.</div>
+          <div className="some-content">
+            <p>Content for fourth tab goes here.</p>
+            <p>
+              This example uses the&nbsp;
+              <CodeSnippet type="inline">renderContent</CodeSnippet> prop to
+              re-render content when the tab is selected.
+            </p>
+            <CodeSnippetExample />
+          </div>
         </Tab>
-        <Tab {...props.tab()} label={<CustomLabel text="Custom Label" />}>
-          <div className="some-content">Content for fourth tab goes here.</div>
+        <Tab
+          id="tab-5"
+          {...props.tab()}
+          label={<CustomLabel text="Custom Label" />}>
+          <div className="some-content">
+            <p>Content for fifth tab goes here.</p>
+          </div>
         </Tab>
       </Tabs>
     ),
@@ -102,20 +152,38 @@ storiesOf('Tabs', module)
     'Container',
     () => (
       <Tabs type="container" {...props.tabs()}>
-        <Tab {...props.tab()} label="Tab label 1">
-          <div className="some-content">Content for first tab goes here.</div>
+        <Tab id="tab-1" {...props.tab()} label="Tab label 1">
+          <div className="some-content">
+            <p>Content for first tab goes here.</p>
+          </div>
         </Tab>
-        <Tab {...props.tab()} label="Tab label 2">
-          <div className="some-content">Content for second tab goes here.</div>
+        <Tab id="tab-2" {...props.tab()} label="Tab label 2">
+          <div className="some-content">
+            <p>Content for second tab goes here.</p>
+          </div>
         </Tab>
         <Tab
+          id="tab-3"
           {...props.tab()}
           label="Tab label 3"
           renderContent={TabContentRenderedOnlyWhenSelected}>
-          <div className="some-content">Content for third tab goes here.</div>
+          <div className="some-content">
+            <p>Content for third tab goes here.</p>
+            <p>
+              This example uses the&nbsp;
+              <CodeSnippet type="inline">renderContent</CodeSnippet> prop to
+              re-render content when the tab is selected.
+            </p>
+            <CodeSnippetExample />
+          </div>
         </Tab>
-        <Tab {...props.tab()} label={<CustomLabel text="Custom Label" />}>
-          <div className="some-content">Content for fourth tab goes here.</div>
+        <Tab
+          id="tab-4"
+          {...props.tab()}
+          label={<CustomLabel text="Custom Label" />}>
+          <div className="some-content">
+            <p>Content for fourth tab goes here.</p>
+          </div>
         </Tab>
       </Tabs>
     ),

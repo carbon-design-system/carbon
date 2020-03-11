@@ -30,9 +30,19 @@ const items = [
     id: 'option-4',
     text: 'Option 4',
   },
+  {
+    id: 'option-5',
+    text:
+      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.',
+  },
 ];
 
-const stringItems = ['Option 1', 'Option 2', 'Option 3'];
+const stringItems = [
+  'Option 1',
+  'Option 2',
+  'Option 3',
+  'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.',
+];
 
 const types = {
   'Default (default)': 'default',
@@ -41,14 +51,14 @@ const types = {
 
 const sizes = {
   'Extra large size (xl)': 'xl',
-  'Regular size (lg)': '',
+  'Default size': undefined,
   'Small size (sm)': 'sm',
 };
 
 const props = () => ({
   id: text('Dropdown ID (id)', 'carbon-dropdown-example'),
   type: select('Dropdown type (type)', types, 'default'),
-  size: select('Field size (size)', sizes, '') || undefined,
+  size: select('Field size (size)', sizes, undefined) || undefined,
   label: text('Label (label)', 'Dropdown menu options'),
   ariaLabel: text('Aria Label (ariaLabel)', 'Dropdown'),
   disabled: boolean('Disabled (disabled)', false),
@@ -63,11 +73,16 @@ const props = () => ({
 });
 
 const itemToElement = item => {
-  const itemAsArray = item.text.split(' ');
+  const [first, ...rest] = item.text.split(' ');
   return (
-    <div>
-      <span>{itemAsArray[0]}</span>
-      <span style={{ color: 'blue' }}> {itemAsArray[1]}</span>
+    <div
+      style={{
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+      }}>
+      <span>{first}</span>
+      <span style={{ color: 'blue' }}> {rest.join(' ')}</span>
     </div>
   );
 };

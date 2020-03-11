@@ -1,0 +1,17 @@
+deprecated:
+  - name: app-switcher
+    reason: The app switcher icon has been replaced by switcher
+  - name: back-to-top
+    reason: The back-to-top icon has been replaced by up-to-top
+  - name: cloud--lightning
+  - name: cloud--rain
+  - name: cloud--snow
+  - name: delete
+    reason: The delete icon has been replaced by trash-can
+  - name: sunny
+  - name: research--bloch-sphere
+    reason: research--bloch-sphere has been replaced by bloch-sphere 
+  - name: research--hinton-plot 
+    reason: research--hinton-plot has been replaced by hinton-plot
+  - name: research--matrix
+    reason: research--matrix has been replaced by matrix
