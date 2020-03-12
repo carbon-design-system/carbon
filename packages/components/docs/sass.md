@@ -21,7 +21,7 @@
   - [❌carbon--no-gutter [mixin]](#carbon--no-gutter-mixin)
   - [❌carbon--hang [mixin]](#carbon--hang-mixin)
   - [✅carbon--aspect-ratios [variable]](#carbon--aspect-ratios-variable)
-  - [❌carbon--make-aspect-ratios [mixin]](#carbon--make-aspect-ratios-mixin)
+  - [❌carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
   - [❌carbon--make-container [mixin]](#carbon--make-container-mixin)
   - [❌carbon--set-largest-breakpoint [mixin]](#carbon--set-largest-breakpoint-mixin)
   - [❌carbon--make-container-max-widths [mixin]](#carbon--make-container-max-widths-mixin)
@@ -1512,7 +1512,7 @@ $carbon--aspect-ratios: (
 - **Group**: [@carbon/grid](#carbongrid)
 - **Type**: `List`
 
-### ❌carbon--make-aspect-ratios [mixin]
+### ❌carbon--aspect-ratio [mixin]
 
 Generates the CSS classname utilities for the aspect ratios
 
@@ -1526,7 +1526,7 @@ https://keithjgrant.com/posts/2017/03/aspect-ratios/
 <summary>Source code</summary>
 
 ```scss
-@mixin carbon--make-aspect-ratios($width, $height) {
+@mixin carbon--aspect-ratio($width, $height) {
   .#{$prefix}--aspect-ratio {
     position: relative;
   }
@@ -1735,7 +1735,7 @@ Generate the CSS for a grid for the given breakpoints and gutters
   @include carbon--make-grid-columns($breakpoints, $grid-gutter);
   @include carbon--no-gutter();
   @include carbon--hang($grid-gutter);
-  @include carbon--make-aspect-ratios();
+  @include carbon--aspect-ratio();
 }
 ```
 
@@ -1757,7 +1757,7 @@ Generate the CSS for a grid for the given breakpoints and gutters
   - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
   - [carbon--no-gutter [mixin]](#carbon--no-gutter-mixin)
   - [carbon--hang [mixin]](#carbon--hang-mixin)
-  - [carbon--make-aspect-ratios [mixin]](#carbon--make-aspect-ratios-mixin)
+  - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
   - [prefix [variable]](#prefix-variable)
 
 ### ✅prefix [variable]
@@ -1780,7 +1780,7 @@ $prefix: 'bx';
   - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
   - [carbon--no-gutter [mixin]](#carbon--no-gutter-mixin)
   - [carbon--hang [mixin]](#carbon--hang-mixin)
-  - [carbon--make-aspect-ratios [mixin]](#carbon--make-aspect-ratios-mixin)
+  - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
   - [carbon--grid [mixin]](#carbon--grid-mixin)
   - [custom-property [mixin]](#custom-property-mixin)
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
@@ -6381,6 +6381,7 @@ $text-01: if(
   - [tags [mixin]](#tags-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
+  - [tile [mixin]](#tile-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
 
 ### ✅text-02 [variable]
@@ -14500,7 +14501,8 @@ Data table action styles
 
   .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
     margin: 0;
-    height: $layout-04;
+    max-width: none;
+    white-space: nowrap;
   }
 
   .#{$prefix}--overflow-menu--data-table {
@@ -14823,12 +14825,14 @@ Data table action styles
   .#{$prefix}--table-toolbar--small .#{$prefix}--toolbar-action {
     height: rem(32px);
     width: rem(32px);
-    padding: $spacing-03;
+    padding: $spacing-03 0;
   }
 
   .#{$prefix}--table-toolbar--small .#{$prefix}--btn--primary {
-    padding-top: rem(3px);
+    padding-top: calc(0.375rem - 3px);
+    padding-bottom: calc(0.375rem - 3px);
     height: rem(32px);
+    min-height: auto;
   }
 
   .#{$prefix}--table-toolbar--small
@@ -14840,7 +14844,6 @@ Data table action styles
     .#{$prefix}--toolbar-action
     ~ .#{$prefix}--btn {
     height: rem(32px);
-    width: rem(160px);
     overflow: hidden;
   }
 }
@@ -20567,7 +20570,7 @@ Progress indicator styles
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
     border-radius: 50%;
-    margin: 9px $carbon--spacing-03 0 0;
+    margin: rem(10px) $carbon--spacing-03 0 0;
     fill: $interactive-04;
   }
 
@@ -20658,16 +20661,7 @@ Progress indicator styles
   //CURRENT STYLING
   .#{$prefix}--progress-step--current {
     .#{$prefix}--progress-line {
-      background-color: $interactive-01;
-    }
-  }
-
-  .#{$prefix}--progress-step--current svg {
-    stroke: $interactive-04;
-    fill: $interactive-04;
-
-    path:last-of-type {
-      stroke-width: 40%;
+      background-color: $interactive-04;
     }
   }
 
@@ -20685,7 +20679,7 @@ Progress indicator styles
   //COMPLETED STYLING
   .#{$prefix}--progress-step--complete {
     .#{$prefix}--progress-line {
-      background-color: $interactive-01;
+      background-color: $interactive-04;
     }
   }
 
@@ -20763,7 +20757,7 @@ Progress indicator styles
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step svg,
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
     display: inline-block;
-    margin: 0.1rem 0.5rem;
+    margin: rem(3px) 0.5rem 0;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
@@ -22842,6 +22836,13 @@ Tile styles
     }
   }
 
+  .#{$prefix}--tile--clickable {
+    @include reset;
+    @include type-style('body-short-01');
+    color: $text-01;
+    text-decoration: none;
+  }
+
   .#{$prefix}--tile--selectable {
     padding-right: $carbon--spacing-09;
   }
@@ -22960,6 +22961,7 @@ Tile styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [text-01 [variable]](#text-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [ui-05 [variable]](#ui-05-variable)

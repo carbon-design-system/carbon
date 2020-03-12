@@ -62,6 +62,13 @@
     }
   }
 
+  .#{$prefix}--tile--clickable {
+    @include reset;
+    @include type-style('body-short-01');
+    color: $text-01;
+    text-decoration: none;
+  }
+
   .#{$prefix}--tile--selectable {
     padding-right: $carbon--spacing-09;
   }

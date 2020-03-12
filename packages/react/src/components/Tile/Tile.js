@@ -147,7 +147,6 @@ export class ClickableTile extends Component {
     } = this.props;
 
     const classes = classNames(
-      `${prefix}--link`,
       `${prefix}--tile`,
       `${prefix}--tile--clickable`,
       {
