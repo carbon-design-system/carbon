@@ -336,7 +336,7 @@ export default class ComboBox extends React.Component {
             isOpen={isOpen}
             light={light}
             size={size}
-            {...getRootProps({ refKey: 'innerRef' })}>
+            {...getRootProps()}>
             <ListBox.Field
               id={id}
               disabled={disabled}
