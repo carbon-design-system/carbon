@@ -94,7 +94,7 @@ describe('ComboBox', () => {
     expect(wrapper.find(`.mock-item`).length).toBe(mockProps.items.length);
   });
 
-  it('should let the user select an option by clicking on the option node', () => {
+  it.only('should let the user select an option by clicking on the option node', () => {
     const wrapper = mount(<ComboBox {...mockProps} />);
     openMenu(wrapper);
     findMenuItemNode(wrapper, 0).simulate('click');

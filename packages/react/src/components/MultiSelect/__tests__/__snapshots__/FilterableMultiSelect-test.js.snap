@@ -95,6 +95,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
             aria-labelledby="downshift-0-label"
             aria-owns={null}
             className="bx--multi-select bx--combo-box bx--multi-select--filterable bx--list-box"
+            innerRef={[Function]}
             onClick={[Function]}
             onKeyDown={[Function]}
             role="combobox"

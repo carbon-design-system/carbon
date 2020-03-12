@@ -323,7 +323,7 @@ export default class MultiSelect extends React.Component {
                   invalid={invalid}
                   invalidText={invalidText}
                   isOpen={isOpen}
-                  {...getRootProps({ refKey: 'innerRef' })}>
+                  {...getRootProps()}>
                   {invalid && (
                     <WarningFilled16
                       className={`${prefix}--list-box__invalid-icon`}

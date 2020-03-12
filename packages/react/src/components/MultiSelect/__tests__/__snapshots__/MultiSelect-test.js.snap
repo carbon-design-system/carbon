@@ -95,6 +95,7 @@ exports[`MultiSelect should render 1`] = `
             aria-owns={null}
             className="bx--multi-select bx--list-box"
             id="test-multiselect"
+            innerRef={[Function]}
             onClick={[Function]}
             onKeyDown={[Function]}
             role="combobox"
