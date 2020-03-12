@@ -31,6 +31,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getToolbarProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -94,6 +95,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
     }
   }
   rows={Array []}
+  size="normal"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -212,6 +214,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getToolbarProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -436,6 +439,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
       },
     ]
   }
+  size="normal"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -812,6 +816,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getToolbarProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -883,6 +888,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
     }
   }
   rows={Array []}
+  size="normal"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -1048,6 +1054,7 @@ exports[`DataTable selection should render 1`] = `
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getToolbarProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -1280,6 +1287,7 @@ exports[`DataTable selection should render 1`] = `
       },
     ]
   }
+  size="normal"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -1653,6 +1661,7 @@ exports[`DataTable should render 1`] = `
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getToolbarProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -1861,6 +1870,7 @@ exports[`DataTable should render 1`] = `
             </TableToolbar>
             <Table
               isSortable={false}
+              size="normal"
             >
               <TableHead>
                 <TableRow>
@@ -1939,6 +1949,7 @@ exports[`DataTable should render 1`] = `
       },
     ]
   }
+  size="normal"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -2493,6 +2504,7 @@ exports[`DataTable should render 1`] = `
       </TableToolbar>
       <Table
         isSortable={false}
+        size="normal"
       >
         <table
           className="bx--data-table bx--data-table--no-border"
@@ -2648,6 +2660,7 @@ exports[`DataTable sticky header should render 1`] = `
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getToolbarProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -2857,6 +2870,7 @@ exports[`DataTable sticky header should render 1`] = `
             </TableToolbar>
             <Table
               isSortable={false}
+              size="normal"
               stickyHeader={true}
             >
               <TableHead>
@@ -2936,6 +2950,7 @@ exports[`DataTable sticky header should render 1`] = `
       },
     ]
   }
+  size="normal"
   sortRow={[Function]}
   stickyHeader={true}
   translateWithId={[Function]}
@@ -3492,6 +3507,7 @@ exports[`DataTable sticky header should render 1`] = `
       </TableToolbar>
       <Table
         isSortable={false}
+        size="normal"
         stickyHeader={true}
       >
         <section

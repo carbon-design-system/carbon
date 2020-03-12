@@ -18,7 +18,7 @@
   - [❌carbon--no-gutter [mixin]](#carbon--no-gutter-mixin)
   - [❌carbon--hang [mixin]](#carbon--hang-mixin)
   - [✅carbon--aspect-ratios [variable]](#carbon--aspect-ratios-variable)
-  - [❌carbon--make-aspect-ratios [mixin]](#carbon--make-aspect-ratios-mixin)
+  - [❌carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
   - [❌carbon--make-container [mixin]](#carbon--make-container-mixin)
   - [❌carbon--set-largest-breakpoint [mixin]](#carbon--set-largest-breakpoint-mixin)
   - [❌carbon--make-container-max-widths [mixin]](#carbon--make-container-max-widths-mixin)
@@ -390,7 +390,7 @@ $carbon--aspect-ratios: (
 - **Group**: [@carbon/grid](#carbongrid)
 - **Type**: `List`
 
-### ❌carbon--make-aspect-ratios [mixin]
+### ❌carbon--aspect-ratio [mixin]
 
 Generates the CSS classname utilities for the aspect ratios
 
@@ -404,7 +404,7 @@ https://keithjgrant.com/posts/2017/03/aspect-ratios/
 <summary>Source code</summary>
 
 ```scss
-@mixin carbon--make-aspect-ratios($width, $height) {
+@mixin carbon--aspect-ratio($width, $height) {
   .#{$prefix}--aspect-ratio {
     position: relative;
   }
@@ -606,7 +606,7 @@ Generate the CSS for a grid for the given breakpoints and gutters
   @include carbon--make-grid-columns($breakpoints, $grid-gutter);
   @include carbon--no-gutter();
   @include carbon--hang($grid-gutter);
-  @include carbon--make-aspect-ratios();
+  @include carbon--aspect-ratio();
 }
 ```
 
@@ -627,7 +627,7 @@ Generate the CSS for a grid for the given breakpoints and gutters
   - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
   - [carbon--no-gutter [mixin]](#carbon--no-gutter-mixin)
   - [carbon--hang [mixin]](#carbon--hang-mixin)
-  - [carbon--make-aspect-ratios [mixin]](#carbon--make-aspect-ratios-mixin)
+  - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
   - [prefix [variable]](#prefix-variable)
 
 ### ✅prefix [variable]
@@ -650,5 +650,5 @@ $prefix: 'bx';
   - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
   - [carbon--no-gutter [mixin]](#carbon--no-gutter-mixin)
   - [carbon--hang [mixin]](#carbon--hang-mixin)
-  - [carbon--make-aspect-ratios [mixin]](#carbon--make-aspect-ratios-mixin)
+  - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
   - [carbon--grid [mixin]](#carbon--grid-mixin)
