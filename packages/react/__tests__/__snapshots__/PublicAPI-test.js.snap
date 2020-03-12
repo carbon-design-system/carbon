@@ -2324,6 +2324,16 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "default",
+            "field",
+            "small",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "Filename" => Object {
@@ -2418,6 +2428,16 @@ Map {
       },
       "role": Object {
         "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "default",
+            "field",
+            "small",
+          ],
+        ],
+        "type": "oneOf",
       },
       "tabIndex": Object {
         "type": "number",
