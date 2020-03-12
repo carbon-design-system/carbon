@@ -10,7 +10,12 @@ import Slider from '../Slider';
 import SliderSkeleton from '../Slider/Slider.Skeleton';
 import { mount, shallow } from 'enzyme';
 import 'requestanimationframe';
+import throttle from 'lodash.throttle';
 import { settings } from 'carbon-components';
+
+jest.mock('lodash.throttle');
+
+throttle.mockImplementation(fn => Object.assign(fn, { throttled: true }));
 
 const { prefix } = settings;
 describe('Slider', () => {
@@ -186,18 +191,7 @@ describe('Slider', () => {
     });
 
     it('throttles mousemove events', () => {
-      const evt1 = {
-        type: 'mousemove',
-        clientX: '1000',
-      };
-      const evt2 = {
-        type: 'mousemove',
-        clientX: '0',
-      };
-      wrapper.instance().onDrag(evt1);
-      wrapper.instance().onDrag(evt2);
-      expect(wrapper.state().value).toEqual(100);
-      expect(handleChange).lastCalledWith({ value: 100 });
+      expect(wrapper.instance().onDrag.throttled).toBe(true);
     });
 
     describe('user is holding the handle', () => {
