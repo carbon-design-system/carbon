@@ -10,9 +10,10 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Close16 } from '@carbon/icons-react';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
-
+const getInstanceId = setupGetInstanceId();
 const TYPES = {
   red: 'Red',
   magenta: 'Magenta',
@@ -29,32 +30,45 @@ const TYPES = {
 const Tag = ({
   children,
   className,
+  id,
   type,
   filter,
   title,
   disabled,
+  onClose,
   ...other
 }) => {
+  const tagId = id || `tag-${getInstanceId()}`;
   const tagClass = `${prefix}--tag--${type}`;
   const tagClasses = classNames(`${prefix}--tag`, tagClass, className, {
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
   });
+  const handleClose = event => {
+    event.stopPropagation();
+    onClose(event);
+  };
   return filter ? (
-    <button
+    <div
       className={tagClasses}
       aria-label={
         title !== undefined
           ? `${title} ${children}`
           : `Clear filter ${children}`
       }
+      id={tagId}
       disabled={disabled}
       {...other}>
       <span className={`${prefix}--tag__label`}>
         {children !== null && children !== undefined ? children : TYPES[type]}
       </span>
-      <Close16 />
-    </button>
+      <button
+        className={`${prefix}--tag__close-icon`}
+        onClick={handleClose}
+        aria-labelledby={tagId}>
+        <Close16 />
+      </button>
+    </div>
   ) : (
     <span className={tagClasses} {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
@@ -92,6 +106,11 @@ Tag.propTypes = {
    * Text to show on clear filters
    */
   title: PropTypes.string,
+
+  /**
+   * Click handler for filter tag close button.
+   */
+  onClose: PropTypes.func,
 };
 
 export const types = Object.keys(TYPES);

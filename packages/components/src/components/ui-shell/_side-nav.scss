@@ -52,7 +52,7 @@
   .#{$prefix}--side-nav--fixed &,
   .#{$prefix}--side-nav--expanded & {
     @if $visibility == true {
-      visibility: visible;
+      visibility: inherit;
     }
     @if $opacity == true {
       opacity: 1;
@@ -110,7 +110,7 @@
     width: 0;
   }
 
-  .#{$prefix}--side-nav:not(.#{$prefix}--side-nav--fixed):hover,
+  .#{$prefix}--side-nav.bx--side-nav--rail:not(.#{$prefix}--side-nav--fixed):hover,
   .#{$prefix}--side-nav--expanded {
     width: mini-units(32);
   }
