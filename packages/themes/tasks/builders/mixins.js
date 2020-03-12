@@ -95,21 +95,32 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
                   const name = formatTokenName(token);
                   return t.Assignment({
                     id: t.Identifier(name),
-                    init: t.CallExpression({
-                      callee: t.Identifier('var'),
-                      arguments: [
-                        t.SassValue({
-                          value: `--#{$custom-property-prefix}-${name}`,
-                        }),
-                        t.CallExpression({
-                          callee: t.Identifier('map-get'),
-                          arguments: [
-                            t.Identifier('theme'),
-                            t.SassString(name),
-                          ],
-                        }),
-                      ],
-                    }),
+                    init:
+                      // token "themeIdentifier" should not be transformed
+                      // into var(--cds-theme-identifier)
+                      token === 'themeIdentifier'
+                        ? t.CallExpression({
+                            callee: t.Identifier('map-get'),
+                            arguments: [
+                              t.Identifier('theme'),
+                              t.SassString(name),
+                            ],
+                          })
+                        : t.CallExpression({
+                            callee: t.Identifier('var'),
+                            arguments: [
+                              t.SassValue({
+                                value: `--#{$custom-property-prefix}-${name}`,
+                              }),
+                              t.CallExpression({
+                                callee: t.Identifier('map-get'),
+                                arguments: [
+                                  t.Identifier('theme'),
+                                  t.SassString(name),
+                                ],
+                              }),
+                            ],
+                          }),
                     global: true,
                   });
                 });

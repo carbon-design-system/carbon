@@ -16,18 +16,21 @@ $tag-colors: (
     $theme-g10: $carbon__red-20,
     $theme-g90: $carbon__red-80,
     $theme-g100: $carbon__red-80,
+    $theme-v9: $carbon__red-20,
   ),
   'tag-color-red': (
     $theme-white: $carbon__red-70,
     $theme-g10: $carbon__red-70,
     $theme-g90: $carbon__red-30,
     $theme-g100: $carbon__red-30,
+    $theme-v9: $carbon__red-70,
   ),
   'tag-hover-red': (
     $theme-white: $carbon__red-30,
     $theme-g10: $carbon__red-30,
     $theme-g90: $carbon__red-70,
     $theme-g100: $carbon__red-70,
+    $theme-v9: $carbon__red-30,
   ),
 
   // magenta
@@ -36,18 +39,21 @@ $tag-colors: (
     $theme-g10: $carbon__magenta-20,
     $theme-g90: $carbon__magenta-80,
     $theme-g100: $carbon__magenta-80,
+    $theme-v9: $carbon__magenta-20,
   ),
   'tag-color-magenta': (
     $theme-white: $carbon__magenta-70,
     $theme-g10: $carbon__magenta-70,
     $theme-g90: $carbon__magenta-30,
     $theme-g100: $carbon__magenta-30,
+    $theme-v9: $carbon__magenta-70,
   ),
   'tag-hover-magenta': (
     $theme-white: $carbon__magenta-30,
     $theme-g10: $carbon__magenta-30,
     $theme-g90: $carbon__magenta-70,
     $theme-g100: $carbon__magenta-70,
+    $theme-v9: $carbon__magenta-30,
   ),
 
   // purple
@@ -56,18 +62,21 @@ $tag-colors: (
     $theme-g10: $carbon__purple-20,
     $theme-g90: $carbon__purple-80,
     $theme-g100: $carbon__purple-80,
+    $theme-v9: $carbon__purple-20,
   ),
   'tag-color-purple': (
     $theme-white: $carbon__purple-70,
     $theme-g10: $carbon__purple-70,
     $theme-g90: $carbon__purple-30,
     $theme-g100: $carbon__purple-30,
+    $theme-v9: $carbon__purple-70,
   ),
   'tag-hover-purple': (
     $theme-white: $carbon__purple-30,
     $theme-g10: $carbon__purple-30,
     $theme-g90: $carbon__purple-70,
     $theme-g100: $carbon__purple-70,
+    $theme-v9: $carbon__purple-30,
   ),
 
   // blue
@@ -76,18 +85,21 @@ $tag-colors: (
     $theme-g10: $carbon__blue-20,
     $theme-g90: $carbon__blue-80,
     $theme-g100: $carbon__blue-80,
+    $theme-v9: $carbon__blue-20,
   ),
   'tag-color-blue': (
     $theme-white: $carbon__blue-70,
     $theme-g10: $carbon__blue-70,
     $theme-g90: $carbon__blue-30,
     $theme-g100: $carbon__blue-30,
+    $theme-v9: $carbon__blue-70,
   ),
   'tag-hover-blue': (
     $theme-white: $carbon__blue-30,
     $theme-g10: $carbon__blue-30,
     $theme-g90: $carbon__blue-70,
     $theme-g100: $carbon__blue-70,
+    $theme-v9: $carbon__blue-30,
   ),
 
   // cyan
@@ -96,18 +108,21 @@ $tag-colors: (
     $theme-g10: $carbon__cyan-20,
     $theme-g90: $carbon__cyan-80,
     $theme-g100: $carbon__cyan-80,
+    $theme-v9: $carbon__cyan-20,
   ),
   'tag-color-cyan': (
     $theme-white: $carbon__cyan-70,
     $theme-g10: $carbon__cyan-70,
     $theme-g90: $carbon__cyan-30,
     $theme-g100: $carbon__cyan-30,
+    $theme-v9: $carbon__cyan-70,
   ),
   'tag-hover-cyan': (
     $theme-white: $carbon__cyan-30,
     $theme-g10: $carbon__cyan-30,
     $theme-g90: $carbon__cyan-70,
     $theme-g100: $carbon__cyan-70,
+    $theme-v9: $carbon__cyan-30,
   ),
 
   // teal
@@ -116,18 +131,21 @@ $tag-colors: (
     $theme-g10: $carbon__teal-20,
     $theme-g90: $carbon__teal-80,
     $theme-g100: $carbon__teal-80,
+    $theme-v9: $carbon__teal-20,
   ),
   'tag-color-teal': (
     $theme-white: $carbon__teal-70,
     $theme-g10: $carbon__teal-70,
     $theme-g90: $carbon__teal-30,
     $theme-g100: $carbon__teal-30,
+    $theme-v9: $carbon__teal-70,
   ),
   'tag-hover-teal': (
     $theme-white: $carbon__teal-30,
     $theme-g10: $carbon__teal-30,
     $theme-g90: $carbon__teal-70,
     $theme-g100: $carbon__teal-70,
+    $theme-v9: $carbon__teal-30,
   ),
 
   // green
@@ -136,18 +154,21 @@ $tag-colors: (
     $theme-g10: $carbon__green-20,
     $theme-g90: $carbon__green-80,
     $theme-g100: $carbon__green-80,
+    $theme-v9: $carbon__green-20,
   ),
   'tag-color-green': (
     $theme-white: $carbon__green-70,
     $theme-g10: $carbon__green-70,
     $theme-g90: $carbon__green-30,
     $theme-g100: $carbon__green-30,
+    $theme-v9: $carbon__green-70,
   ),
   'tag-hover-green': (
     $theme-white: $carbon__green-30,
     $theme-g10: $carbon__green-30,
     $theme-g90: $carbon__green-70,
     $theme-g100: $carbon__green-70,
+    $theme-v9: $carbon__green-30,
   ),
 
   // gray
@@ -156,18 +177,21 @@ $tag-colors: (
     $theme-g10: $carbon__gray-20,
     $theme-g90: $carbon__gray-80,
     $theme-g100: $carbon__gray-80,
+    $theme-v9: $carbon__gray-20,
   ),
   'tag-color-gray': (
     $theme-white: $carbon__gray-70,
     $theme-g10: $carbon__gray-70,
     $theme-g90: $carbon__gray-30,
     $theme-g100: $carbon__gray-30,
+    $theme-v9: $carbon__gray-70,
   ),
   'tag-hover-gray': (
     $theme-white: $carbon__gray-30,
     $theme-g10: $carbon__gray-30,
     $theme-g90: $carbon__gray-70,
     $theme-g100: $carbon__gray-70,
+    $theme-v9: $carbon__gray-30,
   ),
 
   // cool-gray
@@ -176,18 +200,21 @@ $tag-colors: (
     $theme-g10: $carbon__cool-gray-20,
     $theme-g90: $carbon__cool-gray-80,
     $theme-g100: $carbon__cool-gray-80,
+    $theme-v9: $carbon__cool-gray-20,
   ),
   'tag-color-cool-gray': (
     $theme-white: $carbon__cool-gray-70,
     $theme-g10: $carbon__cool-gray-70,
     $theme-g90: $carbon__cool-gray-30,
     $theme-g100: $carbon__cool-gray-30,
+    $theme-v9: $carbon__cool-gray-70,
   ),
   'tag-hover-cool-gray': (
     $theme-white: $carbon__cool-gray-30,
     $theme-g10: $carbon__cool-gray-30,
     $theme-g90: $carbon__cool-gray-70,
     $theme-g100: $carbon__cool-gray-70,
+    $theme-v9: $carbon__cool-gray-30,
   ),
 
   // warm-gray
@@ -196,17 +223,20 @@ $tag-colors: (
     $theme-g10: $carbon__warm-gray-20,
     $theme-g90: $carbon__warm-gray-80,
     $theme-g100: $carbon__warm-gray-80,
+    $theme-v9: $carbon__warm-gray-20,
   ),
   'tag-color-warm-gray': (
     $theme-white: $carbon__warm-gray-70,
     $theme-g10: $carbon__warm-gray-70,
     $theme-g90: $carbon__warm-gray-30,
     $theme-g100: $carbon__warm-gray-30,
+    $theme-v9: $carbon__warm-gray-70,
   ),
   'tag-hover-warm-gray': (
     $theme-white: $carbon__warm-gray-30,
     $theme-g10: $carbon__warm-gray-30,
     $theme-g90: $carbon__warm-gray-70,
     $theme-g100: $carbon__warm-gray-70,
+    $theme-v9: $carbon__warm-gray-30,
   ),
 );

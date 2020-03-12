@@ -8,6 +8,8 @@
 import { unstable_tokens as type } from '@carbon/type';
 import { unstable_tokens as layout } from '@carbon/layout';
 
+const general = ['themeIdentifier'];
+
 // The color token names for a Carbon theme, value corresponds to what they're
 // exported as in JavaScript
 const colors = [
@@ -146,12 +148,14 @@ export function formatTokenName(token) {
 }
 
 export const tokens = {
+  general,
   colors,
   type,
   layout,
 };
 
 export const unstable__meta = {
+  general: ['themeIdentifier'],
   colors: [
     {
       type: 'core',

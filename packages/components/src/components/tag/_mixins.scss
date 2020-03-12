@@ -11,11 +11,13 @@
   background-color: $bg-color;
   color: $text-color;
 
-  &.#{$prefix}--tag--filter svg {
-    fill: $text-color;
-
+  .#{$prefix}--tag__close-icon {
     &:hover {
       background-color: $filter-hover-color;
+    }
+
+    svg {
+      fill: $text-color;
     }
   }
 }

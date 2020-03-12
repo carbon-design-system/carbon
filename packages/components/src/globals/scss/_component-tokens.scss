@@ -13,11 +13,9 @@ $theme-white: 'white';
 $theme-g10: 'g10';
 $theme-g90: 'g90';
 $theme-g100: 'g100';
+$theme-v9: 'v9';
 
 $enable-css-custom-properties: feature-flag-enabled('enable-css-custom-properties');
-
-// TOOD: determine current theme regardless of implementation technique of the user
-$current-theme: $theme-white;
 
 /// Get a component token value for a given theme.
 /// @access public
@@ -28,6 +26,10 @@ $current-theme: $theme-white;
 /// @returns {String} Token value
 /// @group component-tokens
 @function get-token-value($tokens, $theme, $name) {
+  @if $enable-css-custom-properties == true {
+    @return var(--#{$custom-property-prefix}-#{$name});
+  }
+
   $options: map-get($tokens, $name);
 
   @if type-of($options) == 'map' {
@@ -36,7 +38,7 @@ $current-theme: $theme-white;
 
       @return if(
         $enable-css-custom-properties == true,
-        var(--cds-#{$name}, #{$value}),
+        var(--#{$custom-property-prefix}-#{$name}, #{$value}),
         $value
       )
     }

@@ -42,6 +42,10 @@ import {
   rgba,
 } from '@carbon/colors';
 
+// General
+export const themeIdentifier = 'g10';
+
+// Colors
 export const interactive01 = blue60;
 export const interactive02 = gray80;
 export const interactive03 = blue60;
