@@ -65,7 +65,14 @@ const props = {
     };
   },
   fileUploader: () => {
-    const buttonKind = select('Button kind (buttonKind)', buttonKinds, '');
+    const buttonKind = select(
+      'Button kind (buttonKind)',
+      {
+        'Primary (primary)': 'primary',
+        'Tertiary (tertiary)': 'tertiary',
+      },
+      ''
+    );
     return {
       labelTitle: text('The label title (labelTitle)', 'Upload'),
       labelDescription: text(
