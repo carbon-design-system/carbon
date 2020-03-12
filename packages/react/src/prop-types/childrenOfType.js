@@ -23,6 +23,9 @@ const childrenOfType = expectedChildType => {
   );
   const validate = (props, propName, componentName) => {
     Children.forEach(props[propName], child => {
+      if (!child) {
+        return;
+      }
       const childDisplayName = getDisplayName(child.type);
       if (
         child.type !== expectedChildType.type &&

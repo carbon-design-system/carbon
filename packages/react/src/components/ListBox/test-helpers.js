@@ -30,7 +30,7 @@ export const assertMenuOpen = (wrapper, mockProps) => {
   expect(findMenuIconNode(wrapper).prop('className')).toEqual(
     expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
   );
-  expect(findComboboxNode(wrapper).props()).toEqual(
+  expect(findFieldNode(wrapper).props()).toEqual(
     expect.objectContaining({
       'aria-expanded': true,
       'aria-haspopup': 'listbox',
@@ -44,7 +44,7 @@ export const assertMenuClosed = wrapper => {
   expect(findMenuIconNode(wrapper).prop('className')).not.toEqual(
     expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
   );
-  expect(findComboboxNode(wrapper).props()).toEqual(
+  expect(findFieldNode(wrapper).props()).toEqual(
     expect.objectContaining({
       'aria-expanded': false,
       'aria-haspopup': 'listbox',

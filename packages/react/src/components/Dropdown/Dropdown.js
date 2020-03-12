@@ -16,47 +16,59 @@ const defaultItemToString = item => {
   return item ? item.label : '';
 };
 
-function Dropdown(props) {
-  const {
-    className: containerClassName,
-    disabled,
+function Dropdown({
+  className: containerClassName,
+  disabled,
+  items,
+  label,
+  ariaLabel,
+  itemToString,
+  itemToElement,
+  type,
+  size,
+  onChange,
+  id,
+  titleText,
+  helperText,
+  translateWithId,
+  light,
+  invalid,
+  invalidText,
+  initialSelectedItem,
+  selectedItem: controlledSelectedItem,
+}) {
+  const selectProps = {
     items,
-    label,
-    ariaLabel,
     itemToString,
-    itemToElement,
-    type,
-    size,
-    id,
-    titleText,
-    helperText,
-    translateWithId,
-    light,
-    invalid,
-    invalidText,
-  } = props;
+    initialSelectedItem,
+    onSelectedItemChange,
+  };
+
+  // only set selectedItem if the prop is defined. Setting if it is undefined
+  // will overwrite default selected items from useSelect
+  if (controlledSelectedItem !== undefined) {
+    selectProps.selectedItem = controlledSelectedItem;
+  }
 
   const {
     isOpen,
-    selectedItem,
     getToggleButtonProps,
     getLabelProps,
     getMenuProps,
     getItemProps,
     highlightedIndex,
-  } = useSelect({ items });
-
+    selectedItem,
+  } = useSelect(selectProps);
   const inline = type === 'inline';
 
-  const className = ({ isOpen }) =>
-    cx(`${prefix}--dropdown`, containerClassName, {
-      [`${prefix}--dropdown--invalid`]: invalid,
-      [`${prefix}--dropdown--open`]: isOpen,
-      [`${prefix}--dropdown--inline`]: inline,
-      [`${prefix}--dropdown--disabled`]: disabled,
-      [`${prefix}--dropdown--light`]: light,
-      [`${prefix}--dropdown--${size}`]: size,
-    });
+  const className = cx(`${prefix}--dropdown`, containerClassName, {
+    [`${prefix}--dropdown--invalid`]: invalid,
+    [`${prefix}--dropdown--open`]: isOpen,
+    [`${prefix}--dropdown--inline`]: inline,
+    [`${prefix}--dropdown--disabled`]: disabled,
+    [`${prefix}--dropdown--light`]: light,
+    [`${prefix}--dropdown--${size}`]: size,
+  });
 
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
@@ -80,11 +92,7 @@ function Dropdown(props) {
   // needs to be Capitalized for react to render it correctly
   const ItemToElement = itemToElement;
 
-  // defaultSelectedItem prop renamed initialSelectedItem in v5
-  const initiallySelectedItem = props.initialSelectedItem;
-
-  function handleOnChange({ onChange }, selectedItem) {
-    console.log('checking checking');
+  function onSelectedItemChange({ selectedItem }) {
     if (onChange) {
       onChange({ selectedItem });
     }
@@ -92,20 +100,16 @@ function Dropdown(props) {
 
   return (
     <div className={wrapperClasses}>
-      {titleText ? (
+      {titleText && (
         <label className={titleClasses} {...getLabelProps()}>
           {titleText}
         </label>
-      ) : null}
-      {helperText ? <div className={helperClasses}>{helperText}</div> : null}
+      )}
+      {helperText && <div className={helperClasses}>{helperText}</div>}
       <ListBox
-        onChange={handleOnChange}
-        itemToString={itemToString}
-        initialSelectedItem={initiallySelectedItem}
         aria-label={ariaLabel}
-        type={type}
         size={size}
-        className={className({ isOpen })}
+        className={className}
         invalid={invalid}
         invalidText={invalidText}
         light={light}
@@ -130,7 +134,6 @@ function Dropdown(props) {
               const itemProps = getItemProps({ item, index });
               return (
                 <ListBox.MenuItem
-                  selectedItem={selectedItem}
                   key={itemProps.id}
                   isActive={selectedItem === item}
                   isHighlighted={
