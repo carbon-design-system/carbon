@@ -40,7 +40,7 @@
       visibility 0ms linear $duration--moderate-02;
 
     &.is-visible {
-      visibility: visible;
+      visibility: inherit;
       opacity: 1;
       background-color: $overlay-01;
       transition: background-color $duration--slow-02

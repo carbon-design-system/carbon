@@ -1,6 +1,6 @@
 @mixin content-visible {
   height: 100%;
-  visibility: visible;
+  visibility: inherit;
   opacity: 1;
 }
 
