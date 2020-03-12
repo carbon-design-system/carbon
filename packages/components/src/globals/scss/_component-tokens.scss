@@ -26,10 +26,6 @@ $enable-css-custom-properties: feature-flag-enabled('enable-css-custom-propertie
 /// @returns {String} Token value
 /// @group component-tokens
 @function get-token-value($tokens, $theme, $name) {
-  @if $enable-css-custom-properties == true {
-    @return var(--#{$custom-property-prefix}-#{$name});
-  }
-
   $options: map-get($tokens, $name);
 
   @if type-of($options) == 'map' {
