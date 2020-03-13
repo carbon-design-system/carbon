@@ -14,6 +14,18 @@ import { uploadFiles } from '../test-helpers';
 describe('FileUploader', () => {
   afterEach(cleanup);
 
+  describe('automated accessibility tests', () => {
+    it.skip('should have no axe violations', async () => {
+      const { container } = render(<FileUploader />);
+      await expect(container).toHaveNoAxeViolations();
+    });
+
+    it.skip('should have no DAP violations', async () => {
+      const { container } = render(<FileUploader />);
+      await expect(container).toHaveNoDAPViolations('FileUploader');
+    });
+  });
+
   it('should support a custom class name on the root element', () => {
     const { container } = render(<FileUploader className="test" />);
     expect(container.firstChild.classList.contains('test')).toBe(true);
