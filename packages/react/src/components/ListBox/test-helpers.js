@@ -32,8 +32,7 @@ export const assertMenuOpen = (wrapper, mockProps) => {
   );
   expect(findFieldNode(wrapper).props()).toEqual(
     expect.objectContaining({
-      'aria-expanded': true,
-      'aria-haspopup': 'listbox',
+      'aria-haspopup': true,
     })
   );
 };
@@ -46,8 +45,7 @@ export const assertMenuClosed = wrapper => {
   );
   expect(findFieldNode(wrapper).props()).toEqual(
     expect.objectContaining({
-      'aria-expanded': false,
-      'aria-haspopup': 'listbox',
+      'aria-haspopup': true,
     })
   );
 };
