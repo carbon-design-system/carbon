@@ -93,7 +93,7 @@ function ExampleDropContainerApp(props) {
         Only .jpg and .png files. 500kb max file size
       </p>
       <FileUploaderDropContainer {...props} onAddFiles={onAddFiles} />
-      <div className={`${prefix}--file-container`}>
+      <div className={`${prefix}--file-container`} style={{ width: '100%' }}>
         {files.map(
           ({
             uuid,
