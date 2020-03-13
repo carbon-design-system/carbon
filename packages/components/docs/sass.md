@@ -5437,6 +5437,8 @@ Define theme variables from a map of tokens
     @if should-emit($theme, $carbon--theme, 'icon-size-02', $emit-difference) {
       @include custom-property('icon-size-02', map-get($theme, 'icon-size-02'));
     }
+
+    @include emit-component-tokens($tag-colors, $theme-identifier);
   }
 
   @content;
@@ -22386,7 +22388,6 @@ Tag styles
   .#{$prefix}--tag {
     @include button-reset($width: false);
     @include type-style('label-01');
-    @include emit-component-tokens($tag-colors, $theme-identifier);
 
     display: inline-flex;
     align-items: center;
@@ -22566,11 +22567,11 @@ Tag styles
 - **Requires**:
   - [tag-theme [mixin]](#tag-theme-mixin)
   - [prefix [variable]](#prefix-variable)
-  - [theme-identifier [variable]](#theme-identifier-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [theme-identifier [variable]](#theme-identifier-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [focus [variable]](#focus-variable)

@@ -11,7 +11,13 @@ const { types: t } = require('@carbon/scss-generator');
 const { formatTokenName } = require('../../lib');
 const { FILE_BANNER } = require('./shared');
 
-function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
+function buildMixinsFile(
+  themes,
+  tokens,
+  defaultTheme,
+  defaultThemeMapName,
+  componentTokens
+) {
   const comment = t.Comment(`/ Define theme variables from a map of tokens
 / @access public
 / @param {Map} $theme [$${defaultThemeMapName}] - Map of theme tokens
@@ -133,33 +139,42 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
             operator: '==',
             right: t.SassBoolean(true),
           }),
-          consequent: t.BlockStatement(
-            Object.keys(tokens).flatMap(group => {
-              return tokens[group].flatMap(token => {
-                const name = formatTokenName(token);
-                return [
-                  t.Newline(),
-                  t.IfStatement({
-                    test: t.SassFunctionCall(t.Identifier('should-emit'), [
-                      t.Identifier('theme'),
-                      t.Identifier('carbon--theme'),
-                      t.SassString(name),
-                      t.Identifier('emit-difference'),
-                    ]),
-                    consequent: t.BlockStatement([
-                      t.SassMixinCall(t.Identifier('custom-property'), [
+          consequent: t.BlockStatement({
+            body: [
+              ...Object.keys(tokens).flatMap(group => {
+                return tokens[group].flatMap(token => {
+                  const name = formatTokenName(token);
+                  return [
+                    t.Newline(),
+                    t.IfStatement({
+                      test: t.SassFunctionCall(t.Identifier('should-emit'), [
+                        t.Identifier('theme'),
+                        t.Identifier('carbon--theme'),
                         t.SassString(name),
-                        t.SassFunctionCall(t.Identifier('map-get'), [
-                          t.Identifier('theme'),
+                        t.Identifier('emit-difference'),
+                      ]),
+                      consequent: t.BlockStatement([
+                        t.SassMixinCall(t.Identifier('custom-property'), [
                           t.SassString(name),
+                          t.SassFunctionCall(t.Identifier('map-get'), [
+                            t.Identifier('theme'),
+                            t.SassString(name),
+                          ]),
                         ]),
                       ]),
-                    ]),
-                  }),
-                ];
-              });
-            })
-          ),
+                    }),
+                  ];
+                });
+              }),
+              ...componentTokens.flatMap(component => [
+                t.Newline(),
+                t.SassMixinCall(t.Identifier('emit-component-tokens'), [
+                  t.Identifier(component),
+                  t.Identifier('theme-identifier'),
+                ]),
+              ]),
+            ],
+          }),
         }),
         t.AtContent(),
         t.Comment(' Reset to default theme after apply in content'),

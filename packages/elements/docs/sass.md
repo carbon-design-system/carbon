@@ -5066,6 +5066,8 @@ Define theme variables from a map of tokens
     @if should-emit($theme, $carbon--theme, 'icon-size-02', $emit-difference) {
       @include custom-property('icon-size-02', map-get($theme, 'icon-size-02'));
     }
+
+    @include emit-component-tokens($tag-colors, $theme-identifier);
   }
 
   @content;
