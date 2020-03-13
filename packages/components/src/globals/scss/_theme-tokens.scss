@@ -138,6 +138,18 @@ $button-border-width: 2px !default;
 /// @group button
 $button-outline-width: 1px !default;
 
+/// @type Number
+/// @access public
+/// @group button
+/// @deprecated
+$button-outline-offset: -5px !default;
+
+/// @type Value
+/// @access public
+/// @group button
+/// @deprecated
+$button-outline: 1px solid $ibm-color__white-0 !default;
+
 // Accordion
 
 /// @type Value
