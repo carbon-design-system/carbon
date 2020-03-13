@@ -5,85 +5,66 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
-import { mount, shallow } from 'enzyme';
+import { getByText } from '@carbon/test-utils/dom';
+import { render, cleanup } from '@carbon/test-utils/react';
 import React from 'react';
-import FileUploader, {
-  FileUploaderButton,
-  Filename,
-  FileUploaderDropContainer,
-  FileUploaderItem,
-  FileUploaderSkeleton,
-} from '../';
-
-const { prefix } = settings;
+import FileUploader from '../';
+import { uploadFiles } from '../test-helpers';
 
 describe('FileUploader', () => {
-  const fileUploader = <FileUploader className="extra-class" />;
-  const mountWrapper = mount(fileUploader);
+  afterEach(cleanup);
 
-  describe('Renders as expected with defaults', () => {
-    it('should render with default className', () => {
-      expect(mountWrapper.children().hasClass(`${prefix}--form-item`)).toEqual(
-        true
-      );
-    });
-
-    it('should render with given className', () => {
-      expect(mountWrapper.hasClass('extra-class')).toEqual(true);
-    });
-
-    it('renders with FileUploaderButton with disableLabelChanges set to true', () => {
-      expect(
-        mountWrapper.find('FileUploaderButton').props().disableLabelChanges
-      ).toEqual(true);
-    });
-    it('renders input with hidden prop', () => {
-      expect(mountWrapper.find('input').props().className).toEqual(
-        `${prefix}--visually-hidden`
-      );
-    });
-    it(`renders with empty div.${prefix}--file-container by default`, () => {
-      expect(mountWrapper.find(`div.${prefix}--file-container`).text()).toEqual(
-        ''
-      );
-    });
-    it('clears all uploaded files when the clearFiles method is called', () => {
-      const mountUploadedWrapper = mount(fileUploader);
-      mountUploadedWrapper.setState({
-        filenames: ['examplefile.jpg'],
-        filenameStatus: 'complete',
-      });
-
-      // Test to make sure that the Filename is rendered
-      expect(mountUploadedWrapper.find(Filename)).toHaveLength(1);
-
-      // Test to make sure it was properly removed
-      mountUploadedWrapper.instance().clearFiles();
-      expect(mountUploadedWrapper.update().find(Filename)).toHaveLength(0);
-    });
+  it('should support a custom class name on the root element', () => {
+    const { container } = render(<FileUploader className="test" />);
+    expect(container.firstChild.classList.contains('test')).toBe(true);
   });
 
-  describe('Update filenameStatus', () => {
-    it('should have equal state and props', () => {
-      expect(
-        shallow(<FileUploader filenameStatus="uploading" />).state()
-          .filenameStatus
-      ).toEqual('uploading');
-    });
+  it('should not update the label by default when selecting files', () => {
+    const { container } = render(<FileUploader buttonLabel="upload" />);
+    const input = container.querySelector('input');
+    const label = getByText(container, 'upload');
 
-    it('should change the label text upon change in props', () => {
-      mountWrapper.setProps({ filenameStatus: 'uploading' });
-      mountWrapper.setState({ filenameStatus: 'uploading' });
-      mountWrapper.setProps({ filenameStatus: 'edit' });
-      expect(mountWrapper.state().filenameStatus).toEqual('edit');
-    });
+    expect(label).toBeInstanceOf(HTMLElement);
+    uploadFiles(input, [new File(['test'], 'test.png', { type: 'image/png' })]);
+    expect(getByText(container, 'upload')).toBeInstanceOf(HTMLElement);
+  });
 
-    it('should avoid change the label text upon setting props, unless there the value actually changes', () => {
-      mountWrapper.setProps({ filenameStatus: 'uploading' });
-      mountWrapper.setState({ filenameStatus: 'edit' });
-      mountWrapper.setProps({ filenameStatus: 'uploading' });
-      expect(mountWrapper.state().filenameStatus).toEqual('edit');
-    });
+  it('should clear all uploaded files when `clearFiles` is called on a ref', () => {
+    const ref = React.createRef();
+    const { container } = render(<FileUploader ref={ref} />);
+    const input = container.querySelector('input');
+
+    const filename = 'test.png';
+    uploadFiles(input, [new File(['test'], filename, { type: 'image/png' })]);
+
+    expect(getByText(container, filename)).toBeInstanceOf(HTMLElement);
+    ref.current.clearFiles();
+    expect(getByText(container, filename)).not.toBeInstanceOf(HTMLElement);
+  });
+
+  it('should synchronize the filename status state when its prop changes', () => {
+    const container = document.createElement('div');
+    const description = 'test';
+    render(
+      <FileUploader filenameStatus="edit" iconDescription={description} />,
+      {
+        container,
+      }
+    );
+
+    const input = container.querySelector('input');
+    uploadFiles(input, [new File(['test'], 'test.png', { type: 'image/png' })]);
+
+    const edit = getByText(container, description);
+
+    render(
+      <FileUploader filenameStatus="complete" iconDescription={description} />,
+      {
+        container,
+      }
+    );
+
+    const complete = getByText(container, description);
+    expect(edit.parentNode).not.toEqual(complete.parentNode);
   });
 });
