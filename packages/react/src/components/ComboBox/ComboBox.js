@@ -336,12 +336,12 @@ export default class ComboBox extends React.Component {
               size={size}>
               <ListBox.Field
                 id={id}
-                disabled={disabled}
                 {...getToggleButtonProps({
                   disabled,
                   onClick: this.onToggleClick(isOpen),
                 })}>
                 <input
+                  disabled={disabled}
                   className={inputClasses}
                   type="text"
                   tabIndex="0"

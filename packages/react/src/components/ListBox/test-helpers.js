@@ -32,7 +32,8 @@ export const assertMenuOpen = (wrapper, mockProps) => {
   );
   expect(findFieldNode(wrapper).props()).toEqual(
     expect.objectContaining({
-      'aria-haspopup': true,
+      'aria-expanded': true,
+      'aria-haspopup': 'listbox',
     })
   );
 };
@@ -45,7 +46,33 @@ export const assertMenuClosed = wrapper => {
   );
   expect(findFieldNode(wrapper).props()).toEqual(
     expect.objectContaining({
-      'aria-haspopup': true,
+      'aria-expanded': false,
+      'aria-haspopup': 'listbox',
+    })
+  );
+};
+
+export const assertComboboxMenuOpen = (wrapper, mockProps) => {
+  expect(findMenuNode(wrapper).children().length).toBe(mockProps.items.length);
+  expect(findMenuIconNode(wrapper).prop('className')).toEqual(
+    expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
+  );
+  expect(findFieldNode(wrapper).props()).toEqual(
+    expect.objectContaining({
+      'aria-label': 'close menu',
+    })
+  );
+};
+export const assertComboboxMenuClosed = wrapper => {
+  expect(findMenuIconNode(wrapper).prop('className')).toEqual(
+    expect.stringContaining(`${prefix}--list-box__menu-icon`)
+  );
+  expect(findMenuIconNode(wrapper).prop('className')).not.toEqual(
+    expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
+  );
+  expect(findFieldNode(wrapper).props()).toEqual(
+    expect.objectContaining({
+      'aria-label': 'open menu',
     })
   );
 };
