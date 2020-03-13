@@ -37,8 +37,8 @@ exports[`SideNavMenu should render 1`] = `
                 width="20"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M16 22L6 12 7.4 10.6 16 19.2 24.6 10.6 26 12z"
+                <polygon
+                  points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"
                 />
               </svg>
             </div>
@@ -118,8 +118,8 @@ exports[`SideNavMenu should render 1`] = `
                 width={20}
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M16 22L6 12 7.4 10.6 16 19.2 24.6 10.6 26 12z"
+                <polygon
+                  points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"
                 />
               </svg>
             </Icon>

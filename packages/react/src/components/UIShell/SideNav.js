@@ -99,7 +99,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     eventHandlers.onBlur = event => handleToggle(event, false);
   }
 
-  if (addMouseListeners) {
+  if (addMouseListeners && isRail) {
     eventHandlers.onMouseEnter = () => handleToggle(true, true);
     eventHandlers.onMouseLeave = () => handleToggle(false, false);
   }
