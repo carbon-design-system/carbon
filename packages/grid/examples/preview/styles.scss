@@ -41,13 +41,19 @@ article {
 
 .example .outside {
   min-height: 80px;
-  height: 100%;
 }
 
 .example .inside {
   background-color: #edf4ff;
   min-height: 80px;
-  height: 100%;
+}
+
+.example [class*='--aspect-ratio--'] {
+  .inside,
+  .outside,
+  &.outside {
+    height: 100%;
+  }
 }
 
 .example [class*='col'] {

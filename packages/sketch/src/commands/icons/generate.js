@@ -22,7 +22,6 @@ export function generate() {
 
     for (const category of categories) {
       const categoryText = new Text({
-        frame: new Rectangle(0, 0),
         text: category.name,
         style: {
           fontFamily: 'IBM Plex Sans',
@@ -42,9 +41,7 @@ export function generate() {
       let GROUP_Y_OFFSET = categoryText.frame.height + 32;
 
       for (const subcategory of category.subcategories) {
-        const iconsGroupedByBase = getIconsGroupedByBase(subcategory.members);
         const subcategoryText = new Text({
-          frame: new Rectangle(0, 0),
           text: subcategory.name,
           style: {
             fontFamily: 'IBM Plex Sans',
@@ -65,26 +62,24 @@ export function generate() {
         let ICON_Y_OFFSET = subcategoryText.frame.height + 8;
         let COLUMN_COUNT = 0;
 
-        for (const icons of iconsGroupedByBase) {
-          for (const icon of icons) {
-            const symbol = symbols.find(symbol => {
-              const parts = symbol.name.split('/').map(string => string.trim());
-              const [_type, _category, _subcategory, name, size] = parts;
-              return name === icon && size === '32';
-            });
-            const instance = symbol.createNewInstance();
-            instance.frame.offset(ICON_X_OFFSET, ICON_Y_OFFSET);
+        for (const icon of subcategory.members) {
+          const symbol = symbols.find(symbol => {
+            const parts = symbol.name.split('/').map(string => string.trim());
+            const [_type, _category, _subcategory, name, size] = parts;
+            return name === icon && size === '32';
+          });
+          const instance = symbol.createNewInstance();
+          instance.frame.offset(ICON_X_OFFSET, ICON_Y_OFFSET);
 
-            layers.push(instance);
-            ICON_X_OFFSET = ICON_X_OFFSET + 32 + MARGIN;
-            COLUMN_COUNT = COLUMN_COUNT + 1;
+          layers.push(instance);
+          ICON_X_OFFSET = ICON_X_OFFSET + 32 + MARGIN;
+          COLUMN_COUNT = COLUMN_COUNT + 1;
 
-            // 8 column layout
-            if (COLUMN_COUNT > 7) {
-              ICON_X_OFFSET = 0;
-              COLUMN_COUNT = 0;
-              ICON_Y_OFFSET = ICON_Y_OFFSET + 32 + MARGIN;
-            }
+          // 8 column layout
+          if (COLUMN_COUNT > 7) {
+            ICON_X_OFFSET = 0;
+            COLUMN_COUNT = 0;
+            ICON_Y_OFFSET = ICON_Y_OFFSET + 32 + MARGIN;
           }
         }
 
@@ -103,22 +98,4 @@ export function generate() {
 
     page.layers.push(...groups);
   });
-}
-
-function getIconsGroupedByBase(members) {
-  return Object.values(
-    members.reduce((acc, member) => {
-      const [type] = member.split('--');
-      if (acc[type]) {
-        return {
-          ...acc,
-          [type]: acc[type].concat(member),
-        };
-      }
-      return {
-        ...acc,
-        [type]: [member],
-      };
-    }, {})
-  );
 }
