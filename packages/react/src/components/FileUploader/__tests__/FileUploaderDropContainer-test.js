@@ -5,100 +5,81 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
-import { mount, shallow } from 'enzyme';
+import { getByText } from '@carbon/test-utils/dom';
+import { render, cleanup } from '@carbon/test-utils/react';
 import React from 'react';
+import { Simulate } from 'react-dom/test-utils';
 import { FileUploaderDropContainer } from '../';
-
-const { prefix } = settings;
+import { uploadFiles } from '../test-helpers';
 
 describe('FileUploaderDropContainer', () => {
-  let onAddFiles;
-  let dropContainer;
-  let mountWrapper;
+  afterEach(cleanup);
 
-  beforeEach(() => {
-    onAddFiles = jest.fn();
-    dropContainer = (
-      <FileUploaderDropContainer
-        className="extra-class"
-        onAddFiles={onAddFiles}
-      />
+  it('should support a custom class name on the drop area', () => {
+    const { container } = render(
+      <FileUploaderDropContainer className="test" />
     );
-    mountWrapper = mount(dropContainer);
+    const dropArea = container.querySelector('[role="button"]');
+    expect(dropArea.classList.contains('test')).toBe(true);
   });
 
-  describe('Renders as expected with default props', () => {
-    it('renders with given className', () => {
-      expect(mountWrapper.hasClass('extra-class')).toBe(true);
-    });
-
-    it('renders with default labelText prop', () => {
-      expect(mountWrapper.props().labelText).toEqual('Add file');
-    });
-
-    it('renders with default multiple prop', () => {
-      expect(mountWrapper.props().multiple).toEqual(false);
-    });
-
-    it('renders with default accept prop', () => {
-      expect(mountWrapper.props().accept).toEqual([]);
-    });
-
-    it('disables file upload input', () => {
-      const wrapper = shallow(dropContainer);
-      wrapper.setProps({ disabled: true });
-      expect(wrapper.find('input').prop('disabled')).toEqual(true);
-    });
-
-    it('does not have default role', () => {
-      expect(mountWrapper.props().role).not.toBeTruthy();
-    });
-
-    it('resets the input value onClick', () => {
-      const input = mountWrapper.find(`.${prefix}--file-input`);
-      input.instance().value = '';
-      const evt = { target: { value: input.instance().value } };
-      input.simulate('click', evt);
-
-      expect(evt.target.value).toEqual(null);
-    });
-
-    it('should call `onAddFiles` when a file is selected', () => {
-      const fileFoo = new File(['foo'], 'foo.txt', { type: 'text/plain' });
-      const fileBar = new File(['bar'], 'bar.txt', { type: 'text/plain' });
-      const mockFiles = [fileFoo, fileBar];
-      const input = mountWrapper.find(`.${prefix}--file-input`);
-      const evt = { target: { files: mockFiles } };
-      input.simulate('change', evt);
-      expect(onAddFiles).toHaveBeenCalledTimes(1);
-      expect(onAddFiles).toHaveBeenCalledWith(
-        expect.objectContaining({
-          target: {
-            files: [fileFoo, fileBar],
-          },
-        }),
-        { addedFiles: [fileFoo, fileBar] }
-      );
-    });
+  it('should have a unique id each time it is used', () => {
+    const { container } = render(
+      <>
+        <FileUploaderDropContainer />
+        <FileUploaderDropContainer />
+      </>
+    );
+    const inputs = container.querySelectorAll('input');
+    expect(inputs[0].getAttribute('id')).not.toBe(inputs[1].getAttribute('id'));
   });
 
-  describe('Unique id props', () => {
-    it('each FileUploaderDropContainer should have a unique ID', () => {
-      const mountedDropContainers = mount(
-        <div>
-          <FileUploaderDropContainer className="extra-class" />
-          <FileUploaderDropContainer className="extra-class" />
-        </div>
-      );
-      const firstDropContainer = mountedDropContainers
-        .find(FileUploaderDropContainer)
-        .at(0);
-      const lastDropContainer = mountedDropContainers
-        .find(FileUploaderDropContainer)
-        .at(1);
-      const isEqual = firstDropContainer === lastDropContainer;
-      expect(isEqual).toBe(false);
-    });
+  it('should render with the default labelText prop', () => {
+    const { container } = render(<FileUploaderDropContainer />);
+    const label = getByText(container, 'Add file');
+    expect(label).toBeInstanceOf(HTMLElement);
+  });
+
+  it('should render with multiple set to false by default', () => {
+    const { container } = render(<FileUploaderDropContainer />);
+    const input = container.querySelector('input');
+    expect(input.getAttribute('multiple')).toBeFalsy();
+  });
+
+  it('should reset the value of the input when the drop area is clicked', () => {
+    const { container } = render(
+      <FileUploaderDropContainer labelText="test" />
+    );
+    const input = container.querySelector('input');
+
+    uploadFiles(input, [
+      new File(['content'], 'test.png', { type: 'image/png' }),
+    ]);
+    expect(input.files.length).toBe(1);
+    Simulate.click(input);
+    expect(input.files.length).toBe(0);
+  });
+
+  it('should call `onAddFiles` when a file is selected', () => {
+    const onAddFiles = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer onAddFiles={onAddFiles} />
+    );
+    const input = container.querySelector('input');
+    const files = [
+      new File(['foo'], 'foo.txt', { type: 'text/plain' }),
+      new File(['bar'], 'bar.txt', { type: 'text/plain' }),
+    ];
+
+    uploadFiles(input, files);
+    expect(onAddFiles).toHaveBeenCalledTimes(1);
+    expect(onAddFiles).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: {
+          files,
+        },
+      }),
+      { addedFiles: files }
+    );
   });
 });
