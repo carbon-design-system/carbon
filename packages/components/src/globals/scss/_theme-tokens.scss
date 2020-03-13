@@ -131,22 +131,12 @@ $button-padding-ghost-sm: calc(0.375rem - 3px) 12px !default;
 /// @type Number
 /// @access public
 /// @group button
-$button-border-width: 3px !default;
+$button-border-width: 2px !default;
 
 /// @type Number
 /// @access public
 /// @group button
 $button-outline-width: 1px !default;
-
-/// @type Number
-/// @access public
-/// @group button
-$button-outline-offset: -5px !default;
-
-/// @type Value
-/// @access public
-/// @group button
-$button-outline: 1px solid $ibm-color__white-0 !default;
 
 // Accordion
 
