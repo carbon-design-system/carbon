@@ -13642,12 +13642,14 @@ Code snippet styles
     }
 
     .#{$prefix}--copy-btn__feedback {
+      box-sizing: content-box;
       @include tooltip--content('icon');
       clip: auto;
       margin: auto;
       overflow: visible;
       display: none;
     }
+
     @include tooltip--placement('icon', 'bottom', 'center');
   }
 
