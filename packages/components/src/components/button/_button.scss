@@ -122,6 +122,14 @@
       border-width: rem(3px);
       padding-right: rem(60px);
       padding-left: rem(12px);
+
+      .#{$prefix}--btn__icon {
+        right: rem(16px);
+      }
+    }
+
+    .#{$prefix}--btn__icon {
+      right: rem(18px);
     }
   }
 
