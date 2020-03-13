@@ -41,8 +41,8 @@ exports[`AccordionSkeleton should render 1`] = `
               width={16}
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+              <polygon
+                points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3"
               />
             </svg>
           </Icon>
@@ -149,8 +149,8 @@ exports[`AccordionSkeleton should render 1`] = `
                 width={16}
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                <polygon
+                  points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3"
                 />
               </svg>
             </Icon>
@@ -209,8 +209,8 @@ exports[`AccordionSkeleton should render 1`] = `
                 width={16}
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                <polygon
+                  points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3"
                 />
               </svg>
             </Icon>
@@ -269,8 +269,8 @@ exports[`AccordionSkeleton should render 1`] = `
                 width={16}
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                <polygon
+                  points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3"
                 />
               </svg>
             </Icon>
