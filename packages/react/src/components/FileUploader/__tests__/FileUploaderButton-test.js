@@ -7,129 +7,176 @@
 
 import { render, cleanup } from '@carbon/test-utils/react';
 import { getByText } from '@carbon/test-utils/dom';
-import { settings } from 'carbon-components';
 import React from 'react';
+import { Simulate } from 'react-dom/test-utils';
 import { FileUploaderButton } from '../';
-
-const { prefix } = settings;
 
 describe('FileUploaderButton', () => {
   afterEach(cleanup);
-  // const button = <FileUploaderButton className="extra-class" />;
-  // const mountWrapper = mount(button);
 
   describe('automated accessibility tests', () => {
     it('should have no axe violations', async () => {
-      const { container } = render(<FileUploaderButton />);
+      const { container } = render(<FileUploaderButton name="test" />);
       await expect(container).toHaveNoAxeViolations();
     });
   });
 
-  xdescribe('Renders as expected with default props', () => {
-    it('renders with expected className', () => {
-      expect(mountWrapper.find('label').hasClass(`${prefix}--btn`)).toBe(true);
-    });
-
-    it('renders with given className', () => {
-      expect(mountWrapper.hasClass('extra-class')).toBe(true);
-    });
-
-    it('renders with default labelText prop', () => {
-      expect(mountWrapper.props().labelText).toEqual('Add file');
-    });
-
-    it('renders with default buttonKind prop', () => {
-      expect(mountWrapper.props().buttonKind).toEqual('primary');
-    });
-
-    it('renders with expected button className', () => {
-      expect(mountWrapper.find(`.${prefix}--btn--primary`).exists()).toBe(true);
-    });
-
-    it('renders with default multiple prop', () => {
-      expect(mountWrapper.props().multiple).toEqual(false);
-    });
-
-    it('renders with default disableLabelChanges prop', () => {
-      expect(mountWrapper.props().disableLabelChanges).toEqual(false);
-    });
-
-    it('renders with default accept prop', () => {
-      expect(mountWrapper.props().accept).toEqual([]);
-    });
-
-    it('renders with default disabled prop', () => {
-      expect(mountWrapper.props().disabled).toBe(false);
-    });
-
-    it('disables file upload input', () => {
-      const wrapper = shallow(button);
-      wrapper.setProps({ disabled: true });
-      expect(wrapper.find('input').prop('disabled')).toEqual(true);
-    });
-
-    it('does have default role', () => {
-      expect(mountWrapper.props().role).toBeTruthy();
-    });
-
-    it('resets the input value onClick', () => {
-      const input = mountWrapper.find(`.${prefix}--visually-hidden`);
-      input.instance().value = '';
-      const evt = { target: { value: input.instance().value } };
-      input.simulate('click', evt);
-
-      expect(evt.target.value).toEqual(null);
-    });
+  it('should support a custom class name on the root element', () => {
+    const { container } = render(<FileUploaderButton className="test" />);
+    expect(container.firstChild.classList.contains('test')).toBe(true);
   });
 
-  xdescribe('Unique id props', () => {
-    it('each FileUploaderButton should have a unique ID', () => {
-      const mountedButtons = mount(
-        <div>
-          <FileUploaderButton className="extra-class" />
-          <FileUploaderButton className="extra-class" />
-        </div>
+  it('should call `onClick` if the label is clicked', () => {
+    const onClick = jest.fn();
+    const { container } = render(
+      <FileUploaderButton labelText="test" onClick={onClick} />
+    );
+    const label = getByText(container, 'test');
+    Simulate.click(label);
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call `onChange` if the value of the input changes', () => {
+    const onChange = jest.fn();
+    const { container } = render(
+      <FileUploaderButton onChange={onChange} accept={['.png']} />
+    );
+    const input = container.querySelector('input');
+    const file = new File(['test'], 'test.png', { type: 'image/png' });
+    uploadFiles(input, file);
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not support multiple files by default', () => {
+    const { container } = render(<FileUploaderButton />);
+    const input = container.querySelector('input');
+    expect(input.getAttribute('multiple')).toBeFalsy();
+  });
+
+  it('should have a unique id', () => {
+    const { container } = render(
+      <>
+        <FileUploaderButton />
+        <FileUploaderButton />
+      </>
+    );
+    const inputs = container.querySelectorAll('input');
+    expect(inputs[0].getAttribute('id')).not.toBe(inputs[1].getAttribute('id'));
+  });
+
+  it('should reset the input value when the label is clicked', () => {
+    const { container } = render(
+      <FileUploaderButton accept={['.png']} labelText="test" />
+    );
+    const input = container.querySelector('input');
+
+    const filename = 'test.png';
+    const file = new File(['test'], filename, { type: 'image/png' });
+    uploadFiles(input, [file]);
+
+    expect(input.files.length).toBe(1);
+    Simulate.click(input);
+    expect(input.files.length).toBe(0);
+  });
+
+  it('should update the label text if it receives a new value from props', () => {
+    const container = document.createElement('div');
+    render(<FileUploaderButton labelText="test" />, { container });
+    expect(getByText(container, 'test')).toBeInstanceOf(HTMLElement);
+
+    render(<FileUploaderButton labelText="tester" />, { container });
+    expect(getByText(container, 'tester')).toBeInstanceOf(HTMLElement);
+  });
+
+  describe('FileUploaderButton label', () => {
+    it('should update the label when a file is selected', () => {
+      const { container } = render(
+        <FileUploaderButton accept={['.png']} labelText="test" />
       );
-      const firstButton = mountedButtons.find(FileUploaderButton).at(0);
-      const lastButton = mountedButtons.find(FileUploaderButton).at(1);
-      const isEqual = firstButton === lastButton;
-      expect(isEqual).toBe(false);
+      const input = container.querySelector('input');
+      const label = getByText(container, 'test');
+      expect(label).toBeInstanceOf(HTMLElement);
+
+      const filename = 'test.png';
+      const file = new File(['test'], filename, { type: 'image/png' });
+      uploadFiles(input, [file]);
+
+      expect(getByText(container, filename)).toBeInstanceOf(HTMLElement);
+    });
+
+    it('should update the label when multiple files are selected', () => {
+      const { container } = render(
+        <FileUploaderButton accept={['.png']} labelText="test" multiple />
+      );
+      const input = container.querySelector('input');
+      const label = getByText(container, 'test');
+      expect(label).toBeInstanceOf(HTMLElement);
+
+      const files = [
+        new File(['test-1'], 'test-1.png', { type: 'image/png' }),
+        new File(['test-2'], 'test-1.png', { type: 'image/png' }),
+        new File(['test-3'], 'test-1.png', { type: 'image/png' }),
+      ];
+
+      uploadFiles(input, files);
+      expect(getByText(container, `${files.length} files`)).toBeInstanceOf(
+        HTMLElement
+      );
+    });
+
+    it('should not update the label when files are selected but `disableLabelChanges` is false', () => {
+      const { container } = render(
+        <FileUploaderButton
+          accept={['.png']}
+          labelText="test"
+          disableLabelChanges
+        />
+      );
+      const input = container.querySelector('input');
+      const label = getByText(container, 'test');
+      expect(label).toBeInstanceOf(HTMLElement);
+
+      const filename = 'test.png';
+      const file = new File(['test'], filename, { type: 'image/png' });
+      uploadFiles(input, [file]);
+
+      expect(getByText(container, 'test')).toBeInstanceOf(HTMLElement);
     });
   });
-
-  xdescribe('Update labelText', () => {
-    it('should have equal state and props', () => {
-      expect(
-        shallow(<FileUploaderButton labelText="foo" />).state().labelText
-      ).toEqual('foo');
-    });
-
-    it('should change the label text upon change in props', () => {
-      mountWrapper.setProps({ labelText: 'foo' });
-      mountWrapper.setState({ labelText: 'foo' });
-      mountWrapper.setProps({ labelText: 'bar' });
-      expect(mountWrapper.state().labelText).toEqual('bar');
-    });
-
-    it('should avoid change the label text upon setting props, unless there the value actually changes', () => {
-      mountWrapper.setProps({ labelText: 'foo' });
-      mountWrapper.setState({ labelText: 'bar' });
-      mountWrapper.setProps({ labelText: 'foo' });
-      expect(mountWrapper.state().labelText).toEqual('bar');
-    });
-  });
-
-  // labelText is how to find the thing
-
-  // Class name
-  // Prevent label changes
-  // id
-  // name
-  // role
-  // tabIndex
-  // disabled
-  // listFiles should list files
-  // support multiple files with multiple
-  // should call onChange when value changes
-  // should call onClick when clicked
 });
+
+/**
+ * A helper with standardizing behavior around selecting and clearing files with
+ * an input with type="file".
+ *
+ * Based on comments on this discussion over in react-testing-library:
+ * https://github.com/testing-library/react-testing-library/issues/93#issuecomment-392126991
+ *
+ * @param {HTMLInputElement} input
+ * @param {Array<File>} [files]
+ */
+function uploadFiles(input, files = []) {
+  // Define the 'files' property on the input with the given files
+  Object.defineProperty(input, 'files', {
+    writable: true,
+    value: files,
+  });
+
+  // When we update the value of the empty, if it is falsy we clear the input
+  // files to mirror browser behavior
+  Object.defineProperty(input, 'value', {
+    set(newValue) {
+      if (!newValue) {
+        input.files.length = 0;
+      }
+      return newValue;
+    },
+  });
+
+  // Simulate the change event with the given options
+  Simulate.change(input, {
+    target: {
+      files,
+    },
+  });
+}
