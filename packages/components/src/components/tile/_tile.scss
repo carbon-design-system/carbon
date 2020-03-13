@@ -118,7 +118,11 @@
     }
   }
 
-  .#{$prefix}--tile__chevron::-moz-focus-inner {
+  .#{$prefix}--tile--expandable {
+    width: inherit;
+    color: inherit;
+    font-size: inherit;
+    text-align: left;
     border: 0;
   }
 
