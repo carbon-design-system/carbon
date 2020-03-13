@@ -116,9 +116,9 @@ exports[`Dropdown should render 1`] = `
                 id="dropdown-field-label-test-dropdown"
                 title="input"
               >
-                <SelectedItem>
+                <ItemContent>
                   input
-                </SelectedItem>
+                </ItemContent>
               </span>
               <ListBoxMenuIcon
                 isOpen={false}
@@ -292,9 +292,9 @@ exports[`Dropdown should render custom item components 1`] = `
                 id="dropdown-field-label-test-dropdown"
                 title="input"
               >
-                <SelectedItem>
+                <ItemContent>
                   input
-                </SelectedItem>
+                </ItemContent>
               </span>
               <ListBoxMenuIcon
                 isOpen={true}
@@ -627,9 +627,9 @@ exports[`Dropdown should render with strings as items 1`] = `
                 id="dropdown-field-label-test-dropdown"
                 title="input"
               >
-                <SelectedItem>
+                <ItemContent>
                   input
-                </SelectedItem>
+                </ItemContent>
               </span>
               <ListBoxMenuIcon
                 isOpen={true}
