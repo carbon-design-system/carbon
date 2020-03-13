@@ -6203,7 +6203,6 @@ $ui-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button [mixin]](#button-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [loading [mixin]](#loading-mixin)
@@ -12964,8 +12963,7 @@ Button styles
       $interactive-03,
       $hover-tertiary,
       currentColor,
-      $active-tertiary,
-      1px
+      $active-tertiary
     );
 
     &:hover {
@@ -12990,19 +12988,6 @@ Button styles
       background: transparent;
       color: $disabled;
       outline: none;
-    }
-  }
-
-  .#{$prefix}--btn--tertiary,
-  .#{$prefix}--btn--tertiary.#{$prefix}--btn--field,
-  .#{$prefix}--btn--tertiary.#{$prefix}--btn--sm {
-    padding-right: rem(62px);
-    padding-left: rem(14px);
-
-    &:focus {
-      border-width: rem(3px);
-      padding-right: rem(60px);
-      padding-left: rem(12px);
     }
   }
 
@@ -13058,7 +13043,6 @@ Button styles
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
-    box-shadow: inset 0 0 0 $button-outline-width $ui-02;
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
@@ -13076,8 +13060,8 @@ Button styles
   }
 
   .#{$prefix}--btn--icon-only {
-    padding-left: rem(13px);
-    padding-right: rem(13px);
+    padding-left: rem(15px);
+    padding-right: rem(15px);
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -13113,44 +13097,14 @@ Button styles
     display: none;
   }
 
-  .#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
-    padding-left: rem(15px);
-    padding-right: rem(15px);
-
-    &:focus {
-      padding-left: rem(13px);
-      padding-right: rem(13px);
-    }
-  }
-
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
-    padding-left: rem(9px);
-    padding-right: rem(9px);
-  }
-
-  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
     padding-left: rem(11px);
     padding-right: rem(11px);
-
-    &:focus {
-      padding-left: rem(9px);
-      padding-right: rem(9px);
-    }
   }
 
   .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
-    padding-left: rem(5px);
-    padding-right: rem(5px);
-  }
-
-  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
     padding-left: rem(7px);
     padding-right: rem(7px);
-
-    &:focus {
-      padding-left: rem(5px);
-      padding-right: rem(5px);
-    }
   }
 
   .#{$prefix}--btn--danger {
@@ -13165,7 +13119,6 @@ Button styles
 
     &:hover {
       color: $text-04;
-      border: $button-border-width solid transparent;
     }
   }
 
@@ -13212,7 +13165,6 @@ Button styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [focus [variable]](#focus-variable)
-  - [ui-02 [variable]](#ui-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [danger [variable]](#danger-variable)
@@ -13287,7 +13239,7 @@ Button variant styles
 ```scss
 @mixin button-theme() {
   background-color: $bg-color;
-  border-width: $border-width;
+  border-width: $button-outline-width;
   border-style: solid;
   border-color: $border-color;
   color: $font-color;
@@ -13298,7 +13250,8 @@ Button variant styles
 
   &:focus {
     border-color: $focus;
-    box-shadow: inset 0 0 0 $button-outline-width $ui-02;
+    box-shadow: inset 0 0 0 $button-border-width $focus, inset 0 0 0
+        ($button-border-width + $button-outline-width) $ui-02;
   }
 
   &:disabled:hover,
