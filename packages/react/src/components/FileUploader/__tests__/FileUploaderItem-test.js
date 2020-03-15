@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Close16 } from '@carbon/icons-react';
 import { render, cleanup } from '@carbon/test-utils/react';
 import { getByText } from '@carbon/test-utils/dom';
 import React from 'react';

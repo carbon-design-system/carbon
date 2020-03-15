@@ -5,14 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Close16, CheckmarkFilled16 } from '@carbon/icons-react';
 import { getByText } from '@carbon/test-utils/dom';
 import { render, cleanup } from '@carbon/test-utils/react';
-import { mount, shallow } from 'enzyme';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
 import { Filename } from '../';
-import Loading from '../../Loading';
 
 const statuses = ['uploading', 'edit', 'complete'];
 
