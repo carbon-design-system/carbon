@@ -552,7 +552,6 @@ export class ExpandableTile extends Component {
         title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
         {...other}
         onClick={this.handleClick}
-        // onKeyPress={this.handleKeyDown}
         tabIndex={tabIndex}>
         <div
           ref={tileContent => {
