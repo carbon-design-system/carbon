@@ -107,7 +107,7 @@ export default props => (
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              <TableSelectAll {...getSelectionProps()} />
+              <TableSelectAll {...getSelectionProps()} tooltipText="Select all rows" />
               {headers.map(header => (
                 <TableHeader {...getHeaderProps({ header })}>
                   {header.header}

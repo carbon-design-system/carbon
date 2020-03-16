@@ -23,38 +23,54 @@ exports[`DataTable.TableSelectAll should render 1`] = `
                 className="bx--table-column-checkbox custom-class-name"
                 scope="col"
               >
-                <ForwardRef(InlineCheckbox)
-                  ariaLabel="Select all rows in the table"
-                  checked={false}
-                  id="id"
-                  name="select-all"
-                  onClick={[MockFunction]}
+                <div
+                  className=""
                 >
-                  <InlineCheckbox
-                    ariaLabel="Select all rows in the table"
-                    checked={false}
-                    id="id"
-                    innerRef={null}
-                    name="select-all"
-                    onChange={[Function]}
-                    onClick={[MockFunction]}
+                  <div
+                    className="bx--tooltip__trigger"
                   >
-                    <input
+                    <ForwardRef(InlineCheckbox)
+                      ariaLabel="Select all rows in the table"
                       checked={false}
-                      className="bx--checkbox"
                       id="id"
                       name="select-all"
-                      onChange={[Function]}
                       onClick={[MockFunction]}
-                      type="checkbox"
+                    >
+                      <InlineCheckbox
+                        ariaLabel="Select all rows in the table"
+                        checked={false}
+                        id="id"
+                        innerRef={null}
+                        name="select-all"
+                        onChange={[Function]}
+                        onClick={[MockFunction]}
+                      >
+                        <input
+                          checked={false}
+                          className="bx--checkbox"
+                          id="id"
+                          name="select-all"
+                          onChange={[Function]}
+                          onClick={[MockFunction]}
+                          type="checkbox"
+                        />
+                        <label
+                          aria-label="Select all rows in the table"
+                          className="bx--checkbox-label"
+                          htmlFor="id"
+                        />
+                      </InlineCheckbox>
+                    </ForwardRef(InlineCheckbox)>
+                  </div>
+                  <div
+                    className="bx--tooltip--definition__bottom"
+                  >
+                    <span
+                      className="bx--tooltip__caret"
                     />
-                    <label
-                      aria-label="Select all rows in the table"
-                      className="bx--checkbox-label"
-                      htmlFor="id"
-                    />
-                  </InlineCheckbox>
-                </ForwardRef(InlineCheckbox)>
+                    <p />
+                  </div>
+                </div>
               </th>
             </TableSelectAll>
           </tr>

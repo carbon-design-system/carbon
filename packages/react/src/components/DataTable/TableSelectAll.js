@@ -23,17 +23,26 @@ const TableSelectAll = ({
   onSelect,
   disabled,
   className,
+  tooltipText,
 }) => (
   <th scope="col" className={cx(`${prefix}--table-column-checkbox`, className)}>
-    <InlineCheckbox
-      ariaLabel={ariaLabel}
-      checked={checked}
-      id={id}
-      indeterminate={indeterminate}
-      name={name}
-      onClick={onSelect}
-      disabled={disabled}
-    />
+    <div className={cx({ [`${prefix}--tooltip--definition`]: tooltipText })}>
+      <div className={`${prefix}--tooltip__trigger`}>
+        <InlineCheckbox
+          ariaLabel={ariaLabel}
+          checked={checked}
+          id={id}
+          indeterminate={indeterminate}
+          name={name}
+          onClick={onSelect}
+          disabled={disabled}
+        />
+      </div>
+      <div className={`${prefix}--tooltip--definition__bottom`}>
+        <span className={`${prefix}--tooltip__caret`}></span>
+        <p>{tooltipText}</p>
+      </div>
+    </div>
   </th>
 );
 
@@ -72,6 +81,11 @@ TableSelectAll.propTypes = {
    * The CSS class names of the cell that wraps the underlying input control
    */
   className: PropTypes.string,
+
+  /**
+   * Tooltip for Select All Checkbox.
+   */
+  tooltipText: PropTypes.string,
 };
 
 TableSelectAll.defaultProps = {

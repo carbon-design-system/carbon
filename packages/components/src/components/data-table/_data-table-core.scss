@@ -267,6 +267,16 @@
     padding-left: $spacing-05;
   }
 
+  .#{$prefix}--table-column-checkbox {
+    .#{$prefix}--tooltip--definition .#{$prefix}--tooltip__trigger {
+      border-bottom: none;
+    }
+    .#{$prefix}--tooltip--definition__bottom {
+      left: rem(-11px);
+      margin-top: 0;
+    }
+  }
+
   .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
     // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
     position: static;
