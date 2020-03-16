@@ -51,7 +51,7 @@ we support!
 | [`@carbon/elements`](./packages/elements)     | IBM Design Language elements like colors, type, iconography, and more                                                                               |
 | [`@carbon/colors`](./packages/colors)         | Work with IBM Design Language colors                                                                                                                |
 | [`@carbon/grid`](./packages/grid)             | Build layouts using the new 16 column grid system                                                                                                   |
-| [`@carbon/icons`](./packages/icons)           | Iconography assets. We also offer support in: [React](./packages/icons-react), [Angular](./packages/icons-angular), and [Vue](./packages/icons-vue) |
+| [`@carbon/icons`](./packages/icons)           | Iconography assets. We also offer support in: [React](./packages/icons-react), [Angular](https://github.com/carbon-design-system/carbon-icons-angular), and [Vue](./packages/icons-vue) |
 | [`@carbon/pictograms`](./packages/pictograms) | Pictogram assets. We also offer support in: [React](./packages/pictograms-react)                                                                    |
 | [`@carbon/layout`](./packages/layout)         | Layout-based units and spacing scale                                                                                                                |
 | [`@carbon/motion`](./packages/motion)         | Productive and expressive motion curves                                                                                                             |
