@@ -7,12 +7,8 @@ exports[`DataTable.TableExpandRow should render 1`] = `
   <table
     className="bx--data-table bx--data-table--no-border"
   >
-    <TableBody
-      aria-live="polite"
-    >
-      <tbody
-        aria-live="polite"
-      >
+    <TableBody>
+      <tbody>
         <TableExpandRow
           ariaLabel="Aria label"
           className="custom-class"

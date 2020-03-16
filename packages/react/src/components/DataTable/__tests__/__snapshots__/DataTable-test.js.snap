@@ -85,9 +85,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                   </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
-              <TableBody
-                aria-live="polite"
-              />
+              <TableBody />
             </Table>
           </TableContainer>,
         },
@@ -169,12 +167,8 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
               </TableRow>
             </thead>
           </TableHead>
-          <TableBody
-            aria-live="polite"
-          >
-            <tbody
-              aria-live="polite"
-            />
+          <TableBody>
+            <tbody />
           </TableBody>
         </table>
       </Table>
@@ -359,11 +353,10 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                   </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
-              <TableBody
-                aria-live="polite"
-              >
+              <TableBody>
                 <TableRow>
                   <TableSelectRow
+                    aria-controls="data-table-14__batch-action"
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
@@ -381,6 +374,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                 </TableRow>
                 <TableRow>
                   <TableSelectRow
+                    aria-controls="data-table-14__batch-action"
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
@@ -398,6 +392,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                 </TableRow>
                 <TableRow>
                   <TableSelectRow
+                    aria-controls="data-table-14__batch-action"
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
@@ -513,17 +508,14 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
               </TableRow>
             </thead>
           </TableHead>
-          <TableBody
-            aria-live="polite"
-          >
-            <tbody
-              aria-live="polite"
-            >
+          <TableBody>
+            <tbody>
               <TableRow
                 key="b"
               >
                 <tr>
                   <TableSelectRow
+                    aria-controls="data-table-14__batch-action"
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
@@ -536,6 +528,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                       className="bx--table-column-checkbox"
                     >
                       <ForwardRef(RadioButton)
+                        aria-controls="data-table-14__batch-action"
+                        aria-expanded={false}
                         checked={false}
                         disabled={false}
                         hideLabel={true}
@@ -545,6 +539,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         onClick={[Function]}
                       >
                         <RadioButton
+                          aria-controls="data-table-14__batch-action"
+                          aria-expanded={false}
                           checked={false}
                           disabled={false}
                           hideLabel={true}
@@ -561,6 +557,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             className="bx--radio-button-wrapper"
                           >
                             <input
+                              aria-controls="data-table-14__batch-action"
+                              aria-expanded={false}
                               checked={false}
                               className="bx--radio-button"
                               disabled={false}
@@ -610,6 +608,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
               >
                 <tr>
                   <TableSelectRow
+                    aria-controls="data-table-14__batch-action"
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
@@ -622,6 +621,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                       className="bx--table-column-checkbox"
                     >
                       <ForwardRef(RadioButton)
+                        aria-controls="data-table-14__batch-action"
+                        aria-expanded={false}
                         checked={false}
                         disabled={false}
                         hideLabel={true}
@@ -631,6 +632,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         onClick={[Function]}
                       >
                         <RadioButton
+                          aria-controls="data-table-14__batch-action"
+                          aria-expanded={false}
                           checked={false}
                           disabled={false}
                           hideLabel={true}
@@ -647,6 +650,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             className="bx--radio-button-wrapper"
                           >
                             <input
+                              aria-controls="data-table-14__batch-action"
+                              aria-expanded={false}
                               checked={false}
                               className="bx--radio-button"
                               disabled={false}
@@ -696,6 +701,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
               >
                 <tr>
                   <TableSelectRow
+                    aria-controls="data-table-14__batch-action"
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
@@ -708,6 +714,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                       className="bx--table-column-checkbox"
                     >
                       <ForwardRef(RadioButton)
+                        aria-controls="data-table-14__batch-action"
+                        aria-expanded={false}
                         checked={false}
                         disabled={false}
                         hideLabel={true}
@@ -717,6 +725,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         onClick={[Function]}
                       >
                         <RadioButton
+                          aria-controls="data-table-14__batch-action"
+                          aria-expanded={false}
                           checked={false}
                           disabled={false}
                           hideLabel={true}
@@ -733,6 +743,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             className="bx--radio-button-wrapper"
                           >
                             <input
+                              aria-controls="data-table-14__batch-action"
+                              aria-expanded={false}
                               checked={false}
                               className="bx--radio-button"
                               disabled={false}
@@ -878,9 +890,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                   </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
-              <TableBody
-                aria-live="polite"
-              />
+              <TableBody />
             </Table>
           </TableContainer>,
         },
@@ -1010,12 +1020,8 @@ exports[`DataTable selection should have select-all default to un-checked if no 
               </TableRow>
             </thead>
           </TableHead>
-          <TableBody
-            aria-live="polite"
-          >
-            <tbody
-              aria-live="polite"
-            />
+          <TableBody>
+            <tbody />
           </TableBody>
         </table>
       </Table>
@@ -1207,11 +1213,10 @@ exports[`DataTable selection should render 1`] = `
                   </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
-              <TableBody
-                aria-live="polite"
-              >
+              <TableBody>
                 <TableRow>
                   <TableSelectRow
+                    aria-controls="data-table-6__batch-action"
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
@@ -1229,6 +1234,7 @@ exports[`DataTable selection should render 1`] = `
                 </TableRow>
                 <TableRow>
                   <TableSelectRow
+                    aria-controls="data-table-6__batch-action"
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
@@ -1246,6 +1252,7 @@ exports[`DataTable selection should render 1`] = `
                 </TableRow>
                 <TableRow>
                   <TableSelectRow
+                    aria-controls="data-table-6__batch-action"
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
@@ -1409,17 +1416,14 @@ exports[`DataTable selection should render 1`] = `
               </TableRow>
             </thead>
           </TableHead>
-          <TableBody
-            aria-live="polite"
-          >
-            <tbody
-              aria-live="polite"
-            >
+          <TableBody>
+            <tbody>
               <TableRow
                 key="b"
               >
                 <tr>
                   <TableSelectRow
+                    aria-controls="data-table-6__batch-action"
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
@@ -1432,6 +1436,8 @@ exports[`DataTable selection should render 1`] = `
                       className="bx--table-column-checkbox"
                     >
                       <ForwardRef(InlineCheckbox)
+                        aria-controls="data-table-6__batch-action"
+                        aria-expanded={false}
                         ariaLabel="Select row"
                         checked={false}
                         disabled={false}
@@ -1440,6 +1446,8 @@ exports[`DataTable selection should render 1`] = `
                         onClick={[Function]}
                       >
                         <InlineCheckbox
+                          aria-controls="data-table-6__batch-action"
+                          aria-expanded={false}
                           ariaLabel="Select row"
                           checked={false}
                           disabled={false}
@@ -1450,6 +1458,8 @@ exports[`DataTable selection should render 1`] = `
                           onClick={[Function]}
                         >
                           <input
+                            aria-controls="data-table-6__batch-action"
+                            aria-expanded={false}
                             checked={false}
                             className="bx--checkbox"
                             disabled={false}
@@ -1489,6 +1499,7 @@ exports[`DataTable selection should render 1`] = `
               >
                 <tr>
                   <TableSelectRow
+                    aria-controls="data-table-6__batch-action"
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
@@ -1501,6 +1512,8 @@ exports[`DataTable selection should render 1`] = `
                       className="bx--table-column-checkbox"
                     >
                       <ForwardRef(InlineCheckbox)
+                        aria-controls="data-table-6__batch-action"
+                        aria-expanded={false}
                         ariaLabel="Select row"
                         checked={false}
                         disabled={false}
@@ -1509,6 +1522,8 @@ exports[`DataTable selection should render 1`] = `
                         onClick={[Function]}
                       >
                         <InlineCheckbox
+                          aria-controls="data-table-6__batch-action"
+                          aria-expanded={false}
                           ariaLabel="Select row"
                           checked={false}
                           disabled={false}
@@ -1519,6 +1534,8 @@ exports[`DataTable selection should render 1`] = `
                           onClick={[Function]}
                         >
                           <input
+                            aria-controls="data-table-6__batch-action"
+                            aria-expanded={false}
                             checked={false}
                             className="bx--checkbox"
                             disabled={false}
@@ -1558,6 +1575,7 @@ exports[`DataTable selection should render 1`] = `
               >
                 <tr>
                   <TableSelectRow
+                    aria-controls="data-table-6__batch-action"
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
@@ -1570,6 +1588,8 @@ exports[`DataTable selection should render 1`] = `
                       className="bx--table-column-checkbox"
                     >
                       <ForwardRef(InlineCheckbox)
+                        aria-controls="data-table-6__batch-action"
+                        aria-expanded={false}
                         ariaLabel="Select row"
                         checked={false}
                         disabled={false}
@@ -1578,6 +1598,8 @@ exports[`DataTable selection should render 1`] = `
                         onClick={[Function]}
                       >
                         <InlineCheckbox
+                          aria-controls="data-table-6__batch-action"
+                          aria-expanded={false}
                           ariaLabel="Select row"
                           checked={false}
                           disabled={false}
@@ -1588,6 +1610,8 @@ exports[`DataTable selection should render 1`] = `
                           onClick={[Function]}
                         >
                           <input
+                            aria-controls="data-table-6__batch-action"
+                            aria-expanded={false}
                             checked={false}
                             className="bx--checkbox"
                             disabled={false}
@@ -1779,10 +1803,9 @@ exports[`DataTable should render 1`] = `
           "value": <TableContainer
             title="DataTable with toolbar"
           >
-            <TableToolbar
-              aria-label="data table toolbar"
-            >
+            <TableToolbar>
               <TableBatchActions
+                id="data-table-1__batch-action"
                 onCancel={[Function]}
                 shouldShowBatchActions={false}
                 totalSelected={0}
@@ -1896,9 +1919,7 @@ exports[`DataTable should render 1`] = `
                   </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
-              <TableBody
-                aria-live="polite"
-              >
+              <TableBody>
                 <TableRow>
                   <TableCell>
                     Field 2:A
@@ -1971,21 +1992,22 @@ exports[`DataTable should render 1`] = `
           className="bx--data-table-header__description"
         />
       </div>
-      <TableToolbar
-        aria-label="data table toolbar"
-      >
+      <TableToolbar>
         <section
-          aria-label="data table toolbar"
           className="bx--table-toolbar"
         >
           <TableBatchActions
+            id="data-table-1__batch-action"
             onCancel={[Function]}
             shouldShowBatchActions={false}
             totalSelected={0}
             translateWithId={[Function]}
           >
             <div
+              aria-hidden="true"
+              aria-live="polite"
               className="bx--batch-actions"
+              id="data-table-1__batch-action"
             >
               <TableActionList>
                 <div
@@ -2555,12 +2577,8 @@ exports[`DataTable should render 1`] = `
               </TableRow>
             </thead>
           </TableHead>
-          <TableBody
-            aria-live="polite"
-          >
-            <tbody
-              aria-live="polite"
-            >
+          <TableBody>
+            <tbody>
               <TableRow
                 key="b"
               >
@@ -2779,10 +2797,9 @@ exports[`DataTable sticky header should render 1`] = `
             stickyHeader={true}
             title="DataTable with toolbar"
           >
-            <TableToolbar
-              aria-label="data table toolbar"
-            >
+            <TableToolbar>
               <TableBatchActions
+                id="data-table-24__batch-action"
                 onCancel={[Function]}
                 shouldShowBatchActions={false}
                 totalSelected={0}
@@ -2897,9 +2914,7 @@ exports[`DataTable sticky header should render 1`] = `
                   </ForwardRef(TableHeader)>
                 </TableRow>
               </TableHead>
-              <TableBody
-                aria-live="polite"
-              >
+              <TableBody>
                 <TableRow>
                   <TableCell>
                     Field 2:A
@@ -2974,21 +2989,22 @@ exports[`DataTable sticky header should render 1`] = `
           className="bx--data-table-header__description"
         />
       </div>
-      <TableToolbar
-        aria-label="data table toolbar"
-      >
+      <TableToolbar>
         <section
-          aria-label="data table toolbar"
           className="bx--table-toolbar"
         >
           <TableBatchActions
+            id="data-table-24__batch-action"
             onCancel={[Function]}
             shouldShowBatchActions={false}
             totalSelected={0}
             translateWithId={[Function]}
           >
             <div
+              aria-hidden="true"
+              aria-live="polite"
               className="bx--batch-actions"
+              id="data-table-24__batch-action"
             >
               <TableActionList>
                 <div
@@ -3562,12 +3578,8 @@ exports[`DataTable sticky header should render 1`] = `
                 </TableRow>
               </thead>
             </TableHead>
-            <TableBody
-              aria-live="polite"
-            >
-              <tbody
-                aria-live="polite"
-              >
+            <TableBody>
+              <tbody>
                 <TableRow
                   key="b"
                 >

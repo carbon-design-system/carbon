@@ -22,6 +22,7 @@ const TableSelectRow = ({
   disabled,
   radio,
   className,
+  ...rest
 }) => {
   const selectionInputProps = {
     id,
@@ -29,6 +30,8 @@ const TableSelectRow = ({
     onClick: onSelect,
     checked,
     disabled,
+    'aria-expanded': checked,
+    ...rest,
   };
   const InlineInputComponent = radio ? RadioButton : InlineCheckbox;
   const tableSelectRowClasses = classNames(`${prefix}--table-column-checkbox`, {

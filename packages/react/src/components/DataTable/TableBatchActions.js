@@ -45,7 +45,11 @@ const TableBatchActions = ({
   );
 
   return (
-    <div {...rest} className={batchActionsClasses}>
+    <div
+      aria-hidden={String(Boolean(!shouldShowBatchActions))}
+      aria-live="polite"
+      {...rest}
+      className={batchActionsClasses}>
       <TableActionList>
         {children}
         <Button

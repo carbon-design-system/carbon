@@ -99,6 +99,7 @@ class InlineCheckbox extends React.Component {
       onKeyDown,
       title = undefined,
       innerRef: ref,
+      ...rest
     } = this.props;
     const inputProps = {
       id,
@@ -113,6 +114,7 @@ class InlineCheckbox extends React.Component {
       ref: mergeRefs(ref, this.handleRef),
       checked: false,
       disabled,
+      ...rest,
     };
 
     if (checked) {

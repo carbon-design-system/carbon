@@ -17,15 +17,6 @@ const TableBody = ({ children, className, ...rest }) => (
 TableBody.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
-
-  /**
-   * `polite` Adjust the notification behavior of screen readers
-   */
-  'aria-live': PropTypes.oneOf(['polite', 'assertive', 'off']),
-};
-
-TableBody.defaultProps = {
-  'aria-live': 'polite',
 };
 
 export default TableBody;

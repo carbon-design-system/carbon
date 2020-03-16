@@ -9,6 +9,8 @@ exports[`DataTable.TableBatchActions should render 1`] = `
   translateWithId={[Function]}
 >
   <div
+    aria-hidden="true"
+    aria-live="polite"
     className="bx--batch-actions custom-class"
   >
     <TableActionList>
@@ -59,6 +61,8 @@ exports[`DataTable.TableBatchActions should render 2`] = `
   translateWithId={[Function]}
 >
   <div
+    aria-hidden="false"
+    aria-live="polite"
     className="bx--batch-actions bx--batch-actions--active custom-class"
   >
     <TableActionList>

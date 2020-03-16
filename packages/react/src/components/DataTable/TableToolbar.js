@@ -42,8 +42,4 @@ TableToolbar.propTypes = {
   ...AriaLabelPropType,
 };
 
-TableToolbar.defaultProps = {
-  'aria-label': 'data table toolbar',
-};
-
 export default TableToolbar;

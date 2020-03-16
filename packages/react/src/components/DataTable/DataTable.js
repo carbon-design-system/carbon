@@ -308,6 +308,7 @@ export default class DataTable extends React.Component {
         ]),
         id: `${this.getTablePrefix()}__select-row-${row.id}`,
         name: `select-row-${row.id}`,
+        'aria-controls': `${this.getTablePrefix()}__batch-action`,
         ariaLabel: t(translationKey),
         disabled: row.disabled,
         radio: this.props.radio || null,
@@ -349,6 +350,7 @@ export default class DataTable extends React.Component {
     const totalSelected = this.getSelectedRows().length;
     return {
       ...props,
+      id: `${this.getTablePrefix()}__batch-action`,
       shouldShowBatchActions,
       totalSelected,
       onCancel: this.handleOnCancel,

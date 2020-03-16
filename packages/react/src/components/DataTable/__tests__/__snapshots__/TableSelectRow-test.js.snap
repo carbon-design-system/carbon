@@ -23,6 +23,7 @@ exports[`DataTable.TableSelectRow should render 1`] = `
                 className="bx--table-column-checkbox custom-class-name"
               >
                 <ForwardRef(InlineCheckbox)
+                  aria-expanded={false}
                   ariaLabel="Aria label"
                   checked={false}
                   id="id"
@@ -30,6 +31,7 @@ exports[`DataTable.TableSelectRow should render 1`] = `
                   onClick={[MockFunction]}
                 >
                   <InlineCheckbox
+                    aria-expanded={false}
                     ariaLabel="Aria label"
                     checked={false}
                     id="id"
@@ -39,6 +41,7 @@ exports[`DataTable.TableSelectRow should render 1`] = `
                     onClick={[MockFunction]}
                   >
                     <input
+                      aria-expanded={false}
                       checked={false}
                       className="bx--checkbox"
                       id="id"
