@@ -181,10 +181,10 @@ const plugins = [
     removeRasterImages: false,
   },
   {
-    mergePaths: true,
+    mergePaths: false,
   },
   {
-    convertShapeToPath: true,
+    convertShapeToPath: false,
   },
   {
     sortAttrs: true,

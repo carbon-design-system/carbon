@@ -4456,16 +4456,13 @@ Map {
   "StructuredListWrapper" => Object {
     "defaultProps": Object {
       "ariaLabel": "Structured list section",
-      "border": false,
       "selection": false,
     },
     "propTypes": Object {
       "ariaLabel": Object {
         "type": "string",
       },
-      "border": Object {
-        "type": "bool",
-      },
+      "border": [Function],
       "children": Object {
         "type": "node",
       },
