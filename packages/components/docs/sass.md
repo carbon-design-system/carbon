@@ -13039,6 +13039,12 @@ Button styles
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
     @include tooltip--trigger('icon', 'bottom');
+
+    svg,
+    &:hover svg,
+    &:focus svg {
+      fill: currentColor;
+    }
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
@@ -13110,7 +13116,7 @@ Button styles
   .#{$prefix}--btn--danger {
     @include button-theme(
       $danger,
-      $danger,
+      transparent,
       $text-04,
       $hover-danger,
       currentColor,
