@@ -820,20 +820,7 @@ Map {
       ],
     },
     "TableBody": Object {
-      "defaultProps": Object {
-        "aria-live": "polite",
-      },
       "propTypes": Object {
-        "aria-live": Object {
-          "args": Array [
-            Array [
-              "polite",
-              "assertive",
-              "off",
-            ],
-          ],
-          "type": "oneOf",
-        },
         "children": Object {
           "type": "node",
         },
@@ -1068,12 +1055,7 @@ Map {
       },
     },
     "TableToolbar": Object {
-      "defaultProps": Object {
-        "aria-label": "data table toolbar",
-      },
       "propTypes": Object {
-        "aria-label": [Function],
-        "aria-labelledby": [Function],
         "children": Object {
           "type": "node",
         },
@@ -1405,20 +1387,7 @@ Map {
     ],
   },
   "TableBody" => Object {
-    "defaultProps": Object {
-      "aria-live": "polite",
-    },
     "propTypes": Object {
-      "aria-live": Object {
-        "args": Array [
-          Array [
-            "polite",
-            "assertive",
-            "off",
-          ],
-        ],
-        "type": "oneOf",
-      },
       "children": Object {
         "type": "node",
       },
@@ -1653,12 +1622,7 @@ Map {
     },
   },
   "TableToolbar" => Object {
-    "defaultProps": Object {
-      "aria-label": "data table toolbar",
-    },
     "propTypes": Object {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
       "children": Object {
         "type": "node",
       },

@@ -9,7 +9,6 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from 'carbon-components';
-import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
@@ -35,11 +34,6 @@ TableToolbar.propTypes = {
    * `normal` Change the row height of table
    */
   size: PropTypes.oneOf(['small', 'normal']),
-
-  /**
-   * Required props for the accessibility label of the TableToolbar
-   */
-  ...AriaLabelPropType,
 };
 
 export default TableToolbar;
