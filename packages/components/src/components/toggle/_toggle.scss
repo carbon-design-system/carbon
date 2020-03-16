@@ -306,7 +306,7 @@
       content: '';
       transition: transform $duration--fast-01 motion(exit, productive);
     }
-    
+
     .#{$prefix}--toggle-input__label & {
       margin-top: $carbon--spacing-05;
     }
