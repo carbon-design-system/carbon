@@ -85,7 +85,7 @@ async function run() {
     return review.state === 'APPROVED';
   });
 
-  const additionalReviewLabel = 'one more review';
+  const additionalReviewLabel = 'status: one more review 👀';
   const readyForReviewLabel = 'ready for review';
   const readyToMergeLabel = 'ready to merge';
 
