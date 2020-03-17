@@ -22,7 +22,6 @@ describe('ListBox', () => {
       children: <ListBox.Field id="test-listbox" />,
       className: `${prefix}--list-box__container`,
       disabled: false,
-      innerRef: jest.fn(),
     };
   });
 
@@ -39,11 +38,6 @@ describe('ListBox', () => {
   it('should render a disabled class if disabled is true', () => {
     const wrapper = mount(<ListBox {...mockProps} disabled />);
     expect(wrapper.find(`.${prefix}--list-box--disabled`).length).toBe(1);
-  });
-
-  it('should call the provided `innerRef` function with a ref to the node', () => {
-    mount(<ListBox {...mockProps} />);
-    expect(mockProps.innerRef).toHaveBeenCalled();
   });
 
   it('should add the provided `className` to the root node', () => {

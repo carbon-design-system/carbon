@@ -5,13 +5,11 @@ exports[`ListBox should render 1`] = `
   className="bx--list-box__container"
   disabled={false}
   id="test-listbox"
-  innerRef={[MockFunction]}
   type="default"
 >
   <div
     className="bx--list-box__container bx--list-box"
     id="test-listbox"
-    innerRef={[MockFunction]}
     onClick={[Function]}
     onKeyDown={[Function]}
   >

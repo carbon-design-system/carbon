@@ -21,7 +21,7 @@ export const findFieldNode = wrapper =>
 export const findComboboxNode = wrapper =>
   wrapper.find(`.${prefix}--list-box[role="combobox"]`);
 export const findPopupNode = wrapper =>
-  wrapper.find('[aria-haspopup="listbox"]');
+  wrapper.find('[aria-haspopup="listbox"]').hostNodes();
 
 // Actions
 export const openMenu = wrapper => findFieldNode(wrapper).simulate('click');
@@ -33,11 +33,6 @@ export const assertMenuOpen = (wrapper, mockProps) => {
     expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
   );
   expect(findPopupNode(wrapper).prop('aria-expanded')).toBe(true);
-  // expect(findPopupNode(wrapper).props()).toEqual(
-  // expect.objectContaining({
-  // 'aria-expanded': true,
-  // })
-  // );
 };
 export const assertMenuClosed = wrapper => {
   expect(findMenuIconNode(wrapper).prop('className')).toEqual(
@@ -47,36 +42,6 @@ export const assertMenuClosed = wrapper => {
     expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
   );
   expect(findPopupNode(wrapper).prop('aria-expanded')).toBe(false);
-  // expect(findPopupNode(wrapper).props()).toEqual(
-  // expect.objectContaining({
-  // 'aria-expanded': false,
-  // })
-  // );
-};
-
-export const assertComboboxMenuOpen = (wrapper, mockProps) => {
-  expect(findMenuNode(wrapper).children().length).toBe(mockProps.items.length);
-  expect(findMenuIconNode(wrapper).prop('className')).toEqual(
-    expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
-  );
-  expect(findFieldNode(wrapper).props()).toEqual(
-    expect.objectContaining({
-      'aria-label': 'close menu',
-    })
-  );
-};
-export const assertComboboxMenuClosed = wrapper => {
-  expect(findMenuIconNode(wrapper).prop('className')).toEqual(
-    expect.stringContaining(`${prefix}--list-box__menu-icon`)
-  );
-  expect(findMenuIconNode(wrapper).prop('className')).not.toEqual(
-    expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
-  );
-  expect(findFieldNode(wrapper).props()).toEqual(
-    expect.objectContaining({
-      'aria-label': 'open menu',
-    })
-  );
 };
 
 /**
