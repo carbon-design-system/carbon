@@ -87,7 +87,7 @@ async function run() {
 
   const additionalReviewLabel = 'status: one more review 👀';
   const readyForReviewLabel = 'status: ready for review 👀';
-  const readyToMergeLabel = 'ready to merge';
+  const readyToMergeLabel = 'status: ready to merge 🎉';
 
   if (approved.length > 0) {
     const hasReadyLabel = pullRequest.labels.find(label => {
