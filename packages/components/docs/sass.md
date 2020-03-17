@@ -1496,7 +1496,15 @@ in code
 <summary>Source code</summary>
 
 ```scss
-$carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
+$carbon--aspect-ratios: (
+  (16, 9),
+  (9, 16),
+  (2, 1),
+  (1, 2),
+  (4, 3),
+  (3, 4),
+  (1, 1)
+);
 ```
 
 </details>
@@ -1506,36 +1514,53 @@ $carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
 
 ### ❌carbon--aspect-ratio [mixin]
 
-Output the CSS classes for generating aspect ratio classes
+Generates the CSS classname utilities for the aspect ratios
+
+CSS Tricks article on aspect ratios and all the different ways it can be done.
+https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
+
+That article references an earlier article on the topic.
+https://keithjgrant.com/posts/2017/03/aspect-ratios/
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-@mixin carbon--aspect-ratio($aspect-ratios: $carbon--aspect-ratios) {
+@mixin carbon--aspect-ratio($width, $height) {
   .#{$prefix}--aspect-ratio {
-    height: 0;
     position: relative;
   }
 
+  .#{$prefix}--aspect-ratio::before {
+    content: '';
+    width: 1px;
+    margin-left: -1px;
+    float: left;
+    height: 0;
+  }
+
+  .#{$prefix}--aspect-ratio::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  @each $aspect-ratio in $aspect-ratios {
+    $width: nth($aspect-ratio, 1);
+    $height: nth($aspect-ratio, 2);
+
+    .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
+      padding-top: percentage($height / $width);
+    }
+  }
+
+  // leaving here for legacy support
   .#{$prefix}--aspect-ratio--object {
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 100;
-  }
-
-  @each $ratio in $aspect-ratios {
-    $width: nth($ratio, 1);
-    $height: nth($ratio, 2);
-
-    .#{$prefix}--aspect-ratio--#{$width}x#{$height} {
-      padding-bottom: percentage($height / $width);
-    }
   }
 }
 ```
@@ -1544,9 +1569,10 @@ Output the CSS classes for generating aspect ratio classes
 
 - **Parameters**:
 
-| Name             | Description                         | Type   | Default value            |
-| ---------------- | ----------------------------------- | ------ | ------------------------ |
-| `$aspect-ratios` | A list of aspect ratios to generate | `List` | `$carbon--aspect-ratios` |
+| Name      | Description                 | Type     | Default value |
+| --------- | --------------------------- | -------- | ------------- |
+| `$width`  | width from an aspect ratio  | `Number` | —             |
+| `$height` | height from an aspect ratio | `Number` | —             |
 
 - **Group**: [@carbon/grid](#carbongrid)
 - **Requires**:
@@ -6177,7 +6203,6 @@ $ui-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button [mixin]](#button-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [loading [mixin]](#loading-mixin)
@@ -6355,6 +6380,7 @@ $text-01: if(
   - [tags [mixin]](#tags-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
+  - [tile [mixin]](#tile-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
 
 ### ✅text-02 [variable]
@@ -12886,7 +12912,7 @@ Button styles
     + .#{$prefix}--btn--primary.#{$prefix}--btn--disabled,
   .#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled
     + .#{$prefix}--btn--danger.#{$prefix}--btn--disabled {
-    border-left: rem(1px) solid $disabled-03;
+    box-shadow: rem(-1px) 0 0 0 $disabled-03;
   }
 
   .#{$prefix}--btn {
@@ -12937,8 +12963,7 @@ Button styles
       $interactive-03,
       $hover-tertiary,
       currentColor,
-      $active-tertiary,
-      1px
+      $active-tertiary
     );
 
     &:hover {
@@ -12963,19 +12988,6 @@ Button styles
       background: transparent;
       color: $disabled;
       outline: none;
-    }
-  }
-
-  .#{$prefix}--btn--tertiary,
-  .#{$prefix}--btn--tertiary.#{$prefix}--btn--field,
-  .#{$prefix}--btn--tertiary.#{$prefix}--btn--sm {
-    padding-right: rem(62px);
-    padding-left: rem(14px);
-
-    &:focus {
-      border-width: rem(3px);
-      padding-right: rem(60px);
-      padding-left: rem(12px);
     }
   }
 
@@ -13027,11 +13039,16 @@ Button styles
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
     @include tooltip--trigger('icon', 'bottom');
+
+    svg,
+    &:hover svg,
+    &:focus svg {
+      fill: currentColor;
+    }
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
-    box-shadow: inset 0 0 0 $button-outline-width $ui-02;
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
@@ -13049,8 +13066,8 @@ Button styles
   }
 
   .#{$prefix}--btn--icon-only {
-    padding-left: rem(13px);
-    padding-right: rem(13px);
+    padding-left: rem(15px);
+    padding-right: rem(15px);
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -13086,50 +13103,20 @@ Button styles
     display: none;
   }
 
-  .#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
-    padding-left: rem(15px);
-    padding-right: rem(15px);
-
-    &:focus {
-      padding-left: rem(13px);
-      padding-right: rem(13px);
-    }
-  }
-
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
-    padding-left: rem(9px);
-    padding-right: rem(9px);
-  }
-
-  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
     padding-left: rem(11px);
     padding-right: rem(11px);
-
-    &:focus {
-      padding-left: rem(9px);
-      padding-right: rem(9px);
-    }
   }
 
   .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
-    padding-left: rem(5px);
-    padding-right: rem(5px);
-  }
-
-  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
     padding-left: rem(7px);
     padding-right: rem(7px);
-
-    &:focus {
-      padding-left: rem(5px);
-      padding-right: rem(5px);
-    }
   }
 
   .#{$prefix}--btn--danger {
     @include button-theme(
       $danger,
-      $danger,
+      transparent,
       $text-04,
       $hover-danger,
       currentColor,
@@ -13138,7 +13125,6 @@ Button styles
 
     &:hover {
       color: $text-04;
-      border: $button-border-width solid transparent;
     }
   }
 
@@ -13185,7 +13171,6 @@ Button styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [focus [variable]](#focus-variable)
-  - [ui-02 [variable]](#ui-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [danger [variable]](#danger-variable)
@@ -13260,7 +13245,7 @@ Button variant styles
 ```scss
 @mixin button-theme() {
   background-color: $bg-color;
-  border-width: $border-width;
+  border-width: $button-outline-width;
   border-style: solid;
   border-color: $border-color;
   color: $font-color;
@@ -13271,7 +13256,8 @@ Button variant styles
 
   &:focus {
     border-color: $focus;
-    box-shadow: inset 0 0 0 $button-outline-width $ui-02;
+    box-shadow: inset 0 0 0 $button-border-width $focus, inset 0 0 0
+        ($button-border-width + $button-outline-width) $ui-02;
   }
 
   &:disabled:hover,
@@ -13570,12 +13556,14 @@ Code snippet styles
     }
 
     .#{$prefix}--copy-btn__feedback {
+      box-sizing: content-box;
       @include tooltip--content('icon');
       clip: auto;
       margin: auto;
       overflow: visible;
       display: none;
     }
+
     @include tooltip--placement('icon', 'bottom', 'center');
   }
 
@@ -14474,7 +14462,8 @@ Data table action styles
 
   .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
     margin: 0;
-    height: $layout-04;
+    max-width: none;
+    white-space: nowrap;
   }
 
   .#{$prefix}--overflow-menu--data-table {
@@ -14752,7 +14741,7 @@ Data table action styles
     .#{$prefix}--toolbar-search-container-active
       .#{$prefix}--search
       .#{$prefix}--search-input {
-      visibility: visible;
+      visibility: inherit;
     }
 
     .#{$prefix}--toolbar-search-container-active
@@ -14797,12 +14786,14 @@ Data table action styles
   .#{$prefix}--table-toolbar--small .#{$prefix}--toolbar-action {
     height: rem(32px);
     width: rem(32px);
-    padding: $spacing-03;
+    padding: $spacing-03 0;
   }
 
   .#{$prefix}--table-toolbar--small .#{$prefix}--btn--primary {
-    padding-top: rem(3px);
+    padding-top: calc(0.375rem - 3px);
+    padding-bottom: calc(0.375rem - 3px);
     height: rem(32px);
+    min-height: auto;
   }
 
   .#{$prefix}--table-toolbar--small
@@ -14814,7 +14805,6 @@ Data table action styles
     .#{$prefix}--toolbar-action
     ~ .#{$prefix}--btn {
     height: rem(32px);
-    width: rem(160px);
     overflow: hidden;
   }
 }
@@ -15764,7 +15754,7 @@ Data table expandable styles
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
-  visibility: visible;
+  visibility: inherit;
   white-space: nowrap;
 }
 ```
@@ -17069,6 +17059,14 @@ File uploader styles
       text-overflow: ellipsis;
       overflow: hidden;
     }
+  }
+
+  .#{$prefix}--file__selected-file--field {
+    min-height: rem(40px);
+  }
+
+  .#{$prefix}--file__selected-file--sm {
+    min-height: rem(32px);
   }
 
   // TODO: deprecate this block
@@ -18556,7 +18554,7 @@ Modal styles
       visibility 0ms linear $duration--moderate-02;
 
     &.is-visible {
-      visibility: visible;
+      visibility: inherit;
       opacity: 1;
       background-color: $overlay-01;
       transition: background-color $duration--slow-02 motion(entrance, expressive),
@@ -20541,7 +20539,7 @@ Progress indicator styles
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
     border-radius: 50%;
-    margin: 9px $carbon--spacing-03 0 0;
+    margin: rem(10px) $carbon--spacing-03 0 0;
     fill: $interactive-04;
   }
 
@@ -20583,7 +20581,7 @@ Progress indicator styles
   //OVERFLOW STYLING
   .#{$prefix}--progress-label-overflow:hover ~ .#{$prefix}--tooltip,
   .#{$prefix}--progress-label-overflow:focus ~ .#{$prefix}--tooltip {
-    visibility: visible;
+    visibility: inherit;
   }
 
   .#{$prefix}--progress-step .#{$prefix}--tooltip .#{$prefix}--tooltip__caret {
@@ -20632,16 +20630,7 @@ Progress indicator styles
   //CURRENT STYLING
   .#{$prefix}--progress-step--current {
     .#{$prefix}--progress-line {
-      background-color: $interactive-01;
-    }
-  }
-
-  .#{$prefix}--progress-step--current svg {
-    stroke: $interactive-04;
-    fill: $interactive-04;
-
-    path:last-of-type {
-      stroke-width: 40%;
+      background-color: $interactive-04;
     }
   }
 
@@ -20659,7 +20648,7 @@ Progress indicator styles
   //COMPLETED STYLING
   .#{$prefix}--progress-step--complete {
     .#{$prefix}--progress-line {
-      background-color: $interactive-01;
+      background-color: $interactive-04;
     }
   }
 
@@ -20737,7 +20726,7 @@ Progress indicator styles
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step svg,
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
     display: inline-block;
-    margin: 0.1rem 0.5rem;
+    margin: rem(3px) 0.5rem 0;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
@@ -21127,7 +21116,7 @@ Search styles
       outline $duration--fast-02 motion(standard, productive), border
         $duration--fast-02 motion(standard, productive);
     cursor: pointer;
-    visibility: visible;
+    visibility: inherit;
     opacity: 1;
     height: rem(40px);
     width: rem(40px);
@@ -22387,8 +22376,6 @@ Tag styles
   // tags used for filtering
   .#{$prefix}--tag--filter {
     @include tag-theme($inverse-02, $inverse-01);
-
-    cursor: pointer;
     padding-right: rem(2px);
 
     &:focus,
@@ -22397,28 +22384,34 @@ Tag styles
     }
   }
 
-  .#{$prefix}--tag--filter > svg {
+  .#{$prefix}--tag__close-icon {
     flex-shrink: 0;
     width: rem(20px);
     height: rem(20px);
     margin: 0 0 0 rem(4px);
     padding: rem(2px);
     border: 0;
-    fill: $inverse-01;
     background-color: transparent;
     border-radius: 50%;
+    cursor: pointer;
 
     &:hover {
       background-color: $inverse-hover-ui;
     }
   }
 
-  .#{$prefix}--tag--filter:focus > svg {
+  .#{$prefix}--tag__close-icon svg {
+    fill: $inverse-01;
+  }
+
+  .#{$prefix}--tag__close-icon:focus {
+    outline: none;
     box-shadow: inset 0 0 0 2px $inverse-focus-ui;
     border-radius: 50%;
   }
 
-  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg:hover {
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
+    .#{$prefix}--tag__close-icon:hover {
     background-color: transparent;
   }
 
@@ -22812,6 +22805,13 @@ Tile styles
     }
   }
 
+  .#{$prefix}--tile--clickable {
+    @include reset;
+    @include type-style('body-short-01');
+    color: $text-01;
+    text-decoration: none;
+  }
+
   .#{$prefix}--tile--selectable {
     padding-right: $carbon--spacing-09;
   }
@@ -22887,7 +22887,7 @@ Tile styles
     }
 
     .#{$prefix}--tile-content__below-the-fold {
-      visibility: visible;
+      visibility: inherit;
       opacity: 1;
       transition: opacity $duration--fast-02 motion(standard, productive), visibility
           $duration--fast-02 motion(standard, productive);
@@ -22930,6 +22930,7 @@ Tile styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [text-01 [variable]](#text-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
@@ -24710,7 +24711,7 @@ UI shell header
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
-    visibility: visible;
+    visibility: inherit;
     white-space: nowrap;
   }
 
@@ -25220,7 +25221,7 @@ properties for opacity and visibility to help with the transition animation.
   .#{$prefix}--side-nav--fixed &,
   .#{$prefix}--side-nav--expanded & {
     @if $visibility == true {
-      visibility: visible;
+      visibility: inherit;
     }
     @if $opacity == true {
       opacity: 1;
@@ -25299,7 +25300,7 @@ UI shell side nav
     width: 0;
   }
 
-  .#{$prefix}--side-nav:not(.#{$prefix}--side-nav--fixed):hover,
+  .#{$prefix}--side-nav.bx--side-nav--rail:not(.#{$prefix}--side-nav--fixed):hover,
   .#{$prefix}--side-nav--expanded {
     width: mini-units(32);
   }
