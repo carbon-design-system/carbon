@@ -86,7 +86,7 @@ async function run() {
   });
 
   const additionalReviewLabel = 'status: one more review 👀';
-  const readyForReviewLabel = 'ready for review';
+  const readyForReviewLabel = 'status: ready for review 👀';
   const readyToMergeLabel = 'ready to merge';
 
   if (approved.length > 0) {
