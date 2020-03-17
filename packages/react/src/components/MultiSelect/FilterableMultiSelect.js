@@ -367,7 +367,7 @@ export default class FilterableMultiSelect extends React.Component {
                   invalidText={invalidText}
                   isOpen={isOpen}
                   size={size}
-                  {...getRootProps({ refKey: 'innerRef' })}>
+                  {...getRootProps()}>
                   <ListBox.Field
                     id={id}
                     disabled={disabled}

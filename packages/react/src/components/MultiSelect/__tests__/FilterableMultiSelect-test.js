@@ -9,7 +9,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import MultiSelect from '../../MultiSelect';
 import {
-  assertMenuClosed,
+  assertComboboxMenuClosed,
+  assertComboboxMenuOpen,
   assertMenuOpen,
   findMenuIconNode,
   openMenu,
@@ -51,10 +52,11 @@ describe('MultiSelect.Filterable', () => {
 
   it('should let the user toggle the menu by the menu icon', () => {
     const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
+    console.log(wrapper.debug());
     findMenuIconNode(wrapper).simulate('click');
-    assertMenuOpen(wrapper, mockProps);
+    assertComboboxMenuOpen(wrapper, mockProps);
     findMenuIconNode(wrapper).simulate('click');
-    assertMenuClosed(wrapper);
+    assertComboboxMenuClosed(wrapper);
   });
 
   it('should not close the menu after a user makes a selection', () => {
