@@ -24,10 +24,13 @@ export default function FileUploaderItem({
   invalid,
   errorSubject,
   errorBody,
+  size,
   ...other
 }) {
   const classes = classNames(`${prefix}--file__selected-file`, {
     [`${prefix}--file__selected-file--invalid`]: invalid,
+    [`${prefix}--file__selected-file--field`]: size === 'field',
+    [`${prefix}--file__selected-file--sm`]: size === 'small',
   });
   return (
     <span className={classes} {...other}>
