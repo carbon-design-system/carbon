@@ -11,8 +11,8 @@ import {
   findMenuNode,
   findMenuItemNode,
   openMenu,
-  assertComboboxMenuOpen,
-  assertComboboxMenuClosed,
+  assertMenuOpen,
+  assertMenuClosed,
   generateItems,
   generateGenericItem,
 } from '../ListBox/test-helpers';
@@ -53,7 +53,7 @@ describe('ComboBox', () => {
     const wrapper = mount(<ComboBox {...mockProps} />);
     findInputNode(wrapper).simulate('click');
 
-    assertComboboxMenuOpen(wrapper, mockProps);
+    assertMenuOpen(wrapper, mockProps);
   });
 
   it('should call `onChange` each time an item is selected', () => {
@@ -102,7 +102,7 @@ describe('ComboBox', () => {
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[0],
     });
-    assertComboboxMenuClosed(wrapper);
+    assertMenuClosed(wrapper);
 
     mockProps.onChange.mockClear();
 
