@@ -284,7 +284,7 @@ describe('Tile', () => {
       expect(wrapper.state().expanded).toEqual(false);
     });
 
-    fit('displays the default tooltip for the button depending on state', () => {
+    it('displays the default tooltip for the button depending on state', () => {
       const defaultExpandedIconText = 'Interact to collapse Tile';
       const defaultCollapsedIconText = 'Interact to expand Tile';
 
