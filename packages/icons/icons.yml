@@ -433,7 +433,6 @@
     - dev
     - development
   sizes:
-    - 16
     - 32
 - name: copy
   friendly_name: Copy
