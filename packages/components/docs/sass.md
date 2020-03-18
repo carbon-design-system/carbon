@@ -1506,15 +1506,13 @@ $carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
 
 ### ❌carbon--aspect-ratio [mixin]
 
-Generates the CSS classname utilities for the aspect ratios
-
 Output the CSS classes for generating aspect ratio classes
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-@mixin carbon--aspect-ratio($width, $height) {
+@mixin carbon--aspect-ratio($aspect-ratios: $carbon--aspect-ratios) {
   .#{$prefix}--aspect-ratio {
     height: 0;
     position: relative;
@@ -14432,8 +14430,7 @@ Data table action styles
 
   .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
     margin: 0;
-    max-width: none;
-    white-space: nowrap;
+    height: $layout-04;
   }
 
   .#{$prefix}--overflow-menu--data-table {
@@ -14756,14 +14753,12 @@ Data table action styles
   .#{$prefix}--table-toolbar--small .#{$prefix}--toolbar-action {
     height: rem(32px);
     width: rem(32px);
-    padding: $spacing-03 0;
+    padding: $spacing-03;
   }
 
   .#{$prefix}--table-toolbar--small .#{$prefix}--btn--primary {
-    padding-top: calc(0.375rem - 3px);
-    padding-bottom: calc(0.375rem - 3px);
+    padding-top: rem(3px);
     height: rem(32px);
-    min-height: auto;
   }
 
   .#{$prefix}--table-toolbar--small
@@ -14775,6 +14770,7 @@ Data table action styles
     .#{$prefix}--toolbar-action
     ~ .#{$prefix}--btn {
     height: rem(32px);
+    width: rem(160px);
     overflow: hidden;
   }
 }
@@ -17020,14 +17016,6 @@ File uploader styles
       text-overflow: ellipsis;
       overflow: hidden;
     }
-  }
-
-  .#{$prefix}--file__selected-file--field {
-    min-height: rem(40px);
-  }
-
-  .#{$prefix}--file__selected-file--sm {
-    min-height: rem(32px);
   }
 
   // TODO: deprecate this block
@@ -22291,6 +22279,8 @@ Tag styles
   // tags used for filtering
   .#{$prefix}--tag--filter {
     @include tag-theme($inverse-02, $inverse-01);
+
+    cursor: pointer;
     padding-right: rem(2px);
 
     &:focus,
@@ -22299,34 +22289,28 @@ Tag styles
     }
   }
 
-  .#{$prefix}--tag__close-icon {
+  .#{$prefix}--tag--filter > svg {
     flex-shrink: 0;
     width: rem(20px);
     height: rem(20px);
     margin: 0 0 0 rem(4px);
     padding: rem(2px);
     border: 0;
+    fill: $inverse-01;
     background-color: transparent;
     border-radius: 50%;
-    cursor: pointer;
 
     &:hover {
       background-color: $inverse-hover-ui;
     }
   }
 
-  .#{$prefix}--tag__close-icon svg {
-    fill: $inverse-01;
-  }
-
-  .#{$prefix}--tag__close-icon:focus {
-    outline: none;
+  .#{$prefix}--tag--filter:focus > svg {
     box-shadow: inset 0 0 0 2px $inverse-focus-ui;
     border-radius: 50%;
   }
 
-  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
-    .#{$prefix}--tag__close-icon:hover {
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg:hover {
     background-color: transparent;
   }
 
