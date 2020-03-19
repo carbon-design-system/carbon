@@ -964,7 +964,7 @@
 - name: san-francisco
   friendly_name: San Francisco
 - name: san-francisco--fog
-  friendly_name: San Franciso fog
+  friendly_name: San Francisco fog
 - name: sao-paulo--expanded--base
   friendly_name: Sao Paulo expanded base
 - name: sao-paulo
