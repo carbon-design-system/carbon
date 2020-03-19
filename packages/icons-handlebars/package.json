@@ -27,5 +27,6 @@
   },
   "devDependencies": {
     "handlebars": "^4.0.12"
-  }
+  },
+  "gitHead": "bb04f2f061de0bda6e457a07a67cf624db375808"
 }

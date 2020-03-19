@@ -35,5 +35,6 @@
     "@carbon/icon-build-helpers": "^0.4.2-rc.0",
     "@carbon/pictograms": "^10.9.2-rc.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "gitHead": "bb04f2f061de0bda6e457a07a67cf624db375808"
 }

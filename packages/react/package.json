@@ -162,5 +162,6 @@
   "bundleSizeThreshold": 120000,
   "release": {
     "branch": "master"
-  }
+  },
+  "gitHead": "bb04f2f061de0bda6e457a07a67cf624db375808"
 }

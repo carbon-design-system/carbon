@@ -27,5 +27,6 @@
   "devDependencies": {
     "@carbon/icon-build-helpers": "^0.4.2-rc.0",
     "rimraf": "^3.0.0"
-  }
+  },
+  "gitHead": "bb04f2f061de0bda6e457a07a67cf624db375808"
 }

@@ -46,5 +46,6 @@
     "klaw-sync": "^6.0.0",
     "replace-in-file": "^3.4.2",
     "rimraf": "^3.0.0"
-  }
+  },
+  "gitHead": "bb04f2f061de0bda6e457a07a67cf624db375808"
 }

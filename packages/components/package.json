@@ -193,5 +193,6 @@
       "@babel/plugin-proposal-object-rest-spread",
       "dev-expression"
     ]
-  }
+  },
+  "gitHead": "bb04f2f061de0bda6e457a07a67cf624db375808"
 }

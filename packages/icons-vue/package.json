@@ -35,5 +35,6 @@
     "rollup": "^1.15.1",
     "vue": "^2.6.8"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "gitHead": "bb04f2f061de0bda6e457a07a67cf624db375808"
 }
