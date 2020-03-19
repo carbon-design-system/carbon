@@ -28,6 +28,7 @@
     "@carbon/colors": "^10.8.1",
     "@carbon/icon-helpers": "^10.6.0",
     "@carbon/icons": "^10.9.3",
+    "@carbon/pictograms": "^10.9.2",
     "@carbon/themes": "^10.10.3",
     "@carbon/type": "^10.9.3",
     "@skpm/builder": "^0.7.0",
