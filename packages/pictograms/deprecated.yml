@@ -1,17 +1,1 @@
-deprecated:
-  - name: san--francisco--fog
-    reason: san--francisco--fog has been replaced by san-francisco--fog
-  - name: san--francisco
-    reason: san--francisco has been replaced by san-francisco
-  - name: sao--paulo--expanded--base
-    reason:
-      sao--paulo--expanded--base has been replaced by sao-paulo--expanded--base
-  - name: sao--paulo
-    reason: sao--paulo has been replaced by sao-paulo
-  - name: washington--dc--capitol
-    reason: washington--dc--capitol has been replaced by washington-dc--capitol
-  - name: washington--dc--monument
-    reason:
-      washington--dc--monument has been replaced by washington-dc--monument
-  - name: washington--dc
-    reason: washington--dc has been replaced by washington-dc
+deprecated: []
