@@ -20,6 +20,7 @@
     "build": "cross-env NODE_ENV=production skpm-build",
     "clean": "rimraf carbon-elements.sketchplugin",
     "develop": "cross-env NODE_ENV=development skpm-build --watch",
+    "log": "skpm log -f",
     "skpm:link": "skpm-link"
   },
   "dependencies": {
