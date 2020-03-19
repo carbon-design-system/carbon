@@ -184,7 +184,6 @@ export default class Tabs extends React.Component {
         const tab = this.getTabAt(nextIndex);
         if (tab && matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
           evt.preventDefault();
-          this.selectTabAt(nextIndex, onSelectionChange);
           if (tab.tabAnchor) {
             tab.tabAnchor.focus();
           }

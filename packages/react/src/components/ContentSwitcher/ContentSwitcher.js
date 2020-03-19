@@ -73,21 +73,9 @@ export default class ContentSwitcher extends React.Component {
     const { key } = data;
 
     if (matches(data, [keys.ArrowRight, keys.ArrowLeft])) {
-      const nextIndex = getNextIndex(
-        key,
-        selectedIndex,
-        this.props.children.length
-      );
-      this.setState(
-        {
-          selectedIndex: nextIndex,
-        },
-        () => {
-          const switchRef = this._switchRefs[nextIndex];
-          switchRef && switchRef.focus();
-          this.props.onChange(data);
-        }
-      );
+      const nextIndex = getNextIndex(key, index, this.props.children.length);
+      const switchRef = this._switchRefs[nextIndex];
+      switchRef && switchRef.focus();
     } else {
       if (selectedIndex !== index) {
         this.setState({ selectedIndex: index }, () => {
