@@ -65,9 +65,6 @@
     "babel-core": "7.0.0-bridge.0",
     "freshy": ">= 1.0.3"
   },
-  "peerDependencies": {
-    "@carbon/icons": "^10.9.0"
-  },
   "dependencies": {
     "flatpickr": "4.6.1",
     "lodash.debounce": "^4.0.8",
