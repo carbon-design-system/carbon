@@ -13,6 +13,7 @@
   - [❌custom-property [mixin]](#custom-property-mixin)
   - [❌should-emit [function]](#should-emit-function)
   - [✅carbon--theme [mixin]](#carbon--theme-mixin)
+  - [❌emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [✅carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
   - [✅carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
   - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
@@ -163,6 +164,7 @@ $custom-property-prefix: 'cds';
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
 
 ### ❌custom-property [mixin]
 
@@ -1536,7 +1538,9 @@ Define theme variables from a map of tokens
       @include custom-property('icon-size-02', map-get($theme, 'icon-size-02'));
     }
 
-    @include emit-component-tokens($tag-colors, $theme-identifier);
+    @if variable-exists('tag-colors') {
+      @include emit-component-tokens($tag-colors, $theme-identifier);
+    }
   }
 
   @content;
@@ -1585,6 +1589,7 @@ Define theme variables from a map of tokens
   maps set theming variables.
 - **Requires**:
   - [custom-property [mixin]](#custom-property-mixin)
+  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [should-emit [function]](#should-emit-function)
   - [theme-identifier [variable]](#theme-identifier-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
@@ -1714,6 +1719,52 @@ Define theme variables from a map of tokens
   - [icon-size-02 [variable]](#icon-size-02-variable)
   - [custom-property-prefix [variable]](#custom-property-prefix-variable)
   - [carbon--theme [variable]](#carbon--theme-variable)
+
+### ❌emit-component-tokens [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin emit-component-tokens($tokens, $theme) {
+  @if type-of($tokens) == 'map' {
+    @each $key, $options in $tokens {
+      @if map-has-key($options, $theme) {
+        $option: map-get($options, $theme);
+        --#{$custom-property-prefix}-#{$key}: #{$option};
+      }
+    }
+  } @else {
+    @error 'Unable to find map';
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name      | Description             | Type     | Default value |
+| --------- | ----------------------- | -------- | ------------- |
+| `$tokens` | Map of component tokens | `Map`    | —             |
+| `$theme`  | Theme identifier        | `String` | —             |
+
+**Example**:
+
+<details>
+<summary>Example code</summary>
+
+```scss
+@include emit-component-tokens($component-tokens, $theme-white);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Requires**:
+  - [custom-property-prefix [variable]](#custom-property-prefix-variable)
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--theme--g10 [variable]
 

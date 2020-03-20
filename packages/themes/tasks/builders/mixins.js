@@ -168,10 +168,17 @@ function buildMixinsFile(
               }),
               ...componentTokens.flatMap(component => [
                 t.Newline(),
-                t.SassMixinCall(t.Identifier('emit-component-tokens'), [
-                  t.Identifier(component),
-                  t.Identifier('theme-identifier'),
-                ]),
+                t.IfStatement({
+                  test: t.SassFunctionCall(t.Identifier('variable-exists'), [ t.SassString(component) ]),
+                  consequent: t.BlockStatement({
+                    body: [
+                      t.SassMixinCall(t.Identifier('emit-component-tokens'), [
+                        t.Identifier(component),
+                        t.Identifier('theme-identifier'),
+                      ]),
+                    ],
+                  }),
+                }),
               ]),
             ],
           }),

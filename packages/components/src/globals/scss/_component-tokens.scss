@@ -44,24 +44,3 @@ $enable-css-custom-properties: feature-flag-enabled('enable-css-custom-propertie
 
   @error 'Unable to find map';
 }
-
-/// Adds text overflow styling
-/// @access public
-/// @param {Map} $tokens - Map of component tokens
-/// @param {String} $theme - Theme identifier
-/// @example @include emit-component-tokens($component-tokens, $theme-white);
-/// @group component-tokens
-@mixin emit-component-tokens($tokens, $theme) {
-  @if $enable-css-custom-properties == true {
-    @if type-of($tokens) == 'map' {
-      @each $key, $options in $tokens {
-        @if map-has-key($options, $theme) {
-          $option: map-get($options, $theme);
-          --#{$custom-property-prefix}-#{$key}: #{$option};
-        }
-      }
-    } @else {
-      @error 'Unable to find map';
-    }
-  }
-}
