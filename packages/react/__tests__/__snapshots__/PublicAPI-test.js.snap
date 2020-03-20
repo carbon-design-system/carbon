@@ -1620,6 +1620,9 @@ Map {
         "isRequired": true,
         "type": "func",
       },
+      "tooltipText": Object {
+        "type": "string",
+      },
     },
   },
   "TableSelectRow" => Object {
