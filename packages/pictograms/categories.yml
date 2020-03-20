@@ -150,19 +150,43 @@ categories:
       - webcast
   - name: Data Analytics
     members:
+      - 3D chart
       - analyze
+      - area chart
       - blockchain
+      - box plot
+      - bubble chart
+      - candlestick chart
       - chart--bar
       - chart--bubble--line
       - chart--line
       - chart--scatterplot
+      - circling packing
+      - error bar chart
+      - evaluation chart
       - flow--chart
       - flow--chart--detail
       - heat--map
+      - heat map 02
+      - high low chart
+      - histogram chart
+      - math curve
+      - multi line chart
+      - parallel chart
+      - population diagram
+      - q-q plot
+      - radar chart
       - rank
+      - relationship diagram
       - report
+      - river chart
+      - scatter matrix
       - secure--data
+      - t-SNE chart
+      - tree diagram
+      - tree map
       - user--analytics
+      - word cloud
   - name: Data Storage
     members:
       - archive
