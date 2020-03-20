@@ -169,7 +169,9 @@ function buildMixinsFile(
               ...componentTokens.flatMap(component => [
                 t.Newline(),
                 t.IfStatement({
-                  test: t.SassFunctionCall(t.Identifier('variable-exists'), [ t.SassString(component) ]),
+                  test: t.SassFunctionCall(t.Identifier('variable-exists'), [
+                    t.SassString(component),
+                  ]),
                   consequent: t.BlockStatement({
                     body: [
                       t.SassMixinCall(t.Identifier('emit-component-tokens'), [
