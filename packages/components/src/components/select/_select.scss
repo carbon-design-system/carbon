@@ -140,9 +140,11 @@
   }
 
   .#{$prefix}--select__arrow {
-    fill: $ui-05;
     position: absolute;
+    top: 0;
     right: $spacing-05;
+    height: 100%;
+    fill: $ui-05;
     pointer-events: none;
   }
 
