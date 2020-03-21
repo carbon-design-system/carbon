@@ -49,5 +49,9 @@ or removed. This file contains a list of deprecated pictograms with a required
 `name` field alongside an optional `reason` field. You can use the `reason`
 field to indicate that:
 
-- The pictogram has been replaced by an alternate pictogram
-- The pictogram has been removed
+- The icon has been replaced by an alternate icon
+- The icon has been removed
+
+Use `deprecated.yml` when assets are renamed to indicate the change. This will hide the depreacated name from display on the web site, and signal to teams that the originally named file is a candidate for future removal. It's recommended that you also add the deprecated name to `aliases` for the asset in `icons.yml`, so that the nem asset name will be a search result for the deprecated name. We then persist both named assets in the repo for 2 releases to allow teams time to migrate to the new asset name.
+
+When an asset is removed with no replacement, it is also captured in `deprecated.yml`. Removed icon assets represent breaking changes and should be carefully considered. To remove an asset, add the asset name to `deprecated.yml`; we then persist the to-be removed assets in the repo for 2 releases to allow teams time to migrate to a different asset.
