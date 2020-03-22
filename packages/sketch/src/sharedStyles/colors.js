@@ -51,5 +51,7 @@ export function syncColorStyles(document) {
  * @returns {string}
  */
 function formatSharedStyleName(name, grade) {
-  return ['color', name.split('-').join(' '), grade].filter(Boolean).join('/');
+  return ['color', name.split('-').join(' '), grade]
+    .filter(Boolean)
+    .join(' / ');
 }
