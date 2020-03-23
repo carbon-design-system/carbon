@@ -14,6 +14,10 @@ import Switch from '../Switch';
 
 const props = {
   contentSwitcher: () => ({
+    requiresExplicitSelection: boolean(
+      'Requires explicit selection (requiresExplicitSelection)',
+      false
+    ),
     onChange: action('onChange'),
   }),
   switch: () => ({

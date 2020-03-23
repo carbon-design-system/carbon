@@ -45,6 +45,11 @@ export default class ContentSwitcher extends React.Component {
      * Specify a selected index for the initially selected content
      */
     selectedIndex: PropTypes.number,
+
+    /**
+     * `true` to avoid changing seleciton upon focusing
+     */
+    requiresExplicitSelection: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -66,6 +71,7 @@ export default class ContentSwitcher extends React.Component {
   };
 
   handleChildChange = data => {
+    const { requiresExplicitSelection } = this.props;
     // the currently selected child index
     const { selectedIndex } = this.state;
     // the newly selected child index
@@ -74,8 +80,21 @@ export default class ContentSwitcher extends React.Component {
 
     if (matches(data, [keys.ArrowRight, keys.ArrowLeft])) {
       const nextIndex = getNextIndex(key, index, this.props.children.length);
-      const switchRef = this._switchRefs[nextIndex];
-      switchRef && switchRef.focus();
+      if (requiresExplicitSelection) {
+        const switchRef = this._switchRefs[nextIndex];
+        switchRef && switchRef.focus();
+      } else {
+        this.setState(
+          {
+            selectedIndex: nextIndex,
+          },
+          () => {
+            const switchRef = this._switchRefs[nextIndex];
+            switchRef && switchRef.focus();
+            this.props.onChange(data);
+          }
+        );
+      }
     } else {
       if (selectedIndex !== index) {
         this.setState({ selectedIndex: index }, () => {

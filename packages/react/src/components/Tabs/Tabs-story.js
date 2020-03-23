@@ -39,6 +39,10 @@ const props = {
       'The className for the child `<TabContent>` components',
       'tab-content'
     ),
+    requiresExplicitSelection: boolean(
+      'Requires explicit selection (requiresExplicitSelection)',
+      false
+    ),
   }),
   tab: () => ({
     disabled: boolean('Disabled (disabled in <Tab>)', false),

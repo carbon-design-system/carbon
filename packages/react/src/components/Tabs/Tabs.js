@@ -89,6 +89,11 @@ export default class Tabs extends React.Component {
      * Provide a className that is applied to the <TabContent> components
      */
     tabContentClassName: PropTypes.string,
+
+    /**
+     * `true` to avoid changing seleciton upon focusing
+     */
+    requiresExplicitSelection: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -184,6 +189,9 @@ export default class Tabs extends React.Component {
         const tab = this.getTabAt(nextIndex);
         if (tab && matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
           evt.preventDefault();
+          if (!this.props.requiresExplicitSelection) {
+            this.selectTabAt(nextIndex, onSelectionChange);
+          }
           if (tab.tabAnchor) {
             tab.tabAnchor.focus();
           }

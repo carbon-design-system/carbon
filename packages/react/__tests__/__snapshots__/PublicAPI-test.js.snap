@@ -660,6 +660,9 @@ Map {
         "isRequired": true,
         "type": "func",
       },
+      "requiresExplicitSelection": Object {
+        "type": "bool",
+      },
       "selectedIndex": Object {
         "type": "number",
       },
@@ -4725,6 +4728,9 @@ Map {
       },
       "onSelectionChange": Object {
         "type": "func",
+      },
+      "requiresExplicitSelection": Object {
+        "type": "bool",
       },
       "role": Object {
         "isRequired": true,
