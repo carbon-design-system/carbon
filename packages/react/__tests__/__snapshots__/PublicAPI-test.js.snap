@@ -2324,6 +2324,16 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "default",
+            "field",
+            "small",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "Filename" => Object {
@@ -2419,6 +2429,16 @@ Map {
       "role": Object {
         "type": "string",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "default",
+            "field",
+            "small",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "tabIndex": Object {
         "type": "number",
       },
@@ -2475,7 +2495,6 @@ Map {
     "defaultProps": Object {
       "onDelete": [Function],
       "status": "uploading",
-      "uuid": "id1",
     },
     "propTypes": Object {
       "errorBody": Object {
@@ -2507,7 +2526,6 @@ Map {
         "type": "oneOf",
       },
       "uuid": Object {
-        "isRequired": true,
         "type": "string",
       },
     },
