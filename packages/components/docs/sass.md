@@ -22707,6 +22707,11 @@ Tile styles
     }
   }
 
+  // Removes Firefox automatic border on buttons
+  .#{$prefix}--tile--expandable::-moz-focus-inner {
+    border: 0;
+  }
+
   .#{$prefix}--tile--clickable {
     @include reset;
     @include type-style('body-short-01');
@@ -22764,7 +22769,7 @@ Tile styles
   }
 
   .#{$prefix}--tile--expandable {
-    width: inherit;
+    width: 100%;
     color: inherit;
     font-size: inherit;
     text-align: left;
