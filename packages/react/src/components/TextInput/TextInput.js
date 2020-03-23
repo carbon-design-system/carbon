@@ -56,6 +56,7 @@ const TextInput = React.forwardRef(function TextInput(
     type,
     ref,
     className: textInputClasses,
+    title: placeholder,
     ...other,
   };
   const labelClasses = classNames(`${prefix}--label`, {
@@ -195,7 +196,6 @@ TextInput.defaultProps = {
   invalidText: '',
   helperText: '',
   light: false,
-  size: '',
 };
 
 export default TextInput;

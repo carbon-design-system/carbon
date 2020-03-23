@@ -1159,7 +1159,7 @@ Output the CSS required for all the columns in a given grid system.
   $gutter: $carbon--grid-gutter
 ) {
   .#{$prefix}--col {
-    @include carbon--make-col-ready();
+    @include carbon--make-col-ready($gutter);
   }
 
   @each $breakpoint in map-keys($breakpoints) {
@@ -1169,13 +1169,13 @@ Output the CSS required for all the columns in a given grid system.
     // Allow columns to stretch full width below their breakpoints
     @for $i from 0 through $columns {
       .#{$prefix}--col#{$infix}-#{$i} {
-        @include carbon--make-col-ready();
+        @include carbon--make-col-ready($gutter);
       }
     }
 
     .#{$prefix}--col#{$infix},
     .#{$prefix}--col#{$infix}--auto {
-      @include carbon--make-col-ready();
+      @include carbon--make-col-ready($gutter);
     }
 
     @include carbon--breakpoint($breakpoint, $breakpoints) {
@@ -1340,7 +1340,15 @@ in code
 <summary>Source code</summary>
 
 ```scss
-$carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
+$carbon--aspect-ratios: (
+  (16, 9),
+  (9, 16),
+  (2, 1),
+  (1, 2),
+  (4, 3),
+  (3, 4),
+  (1, 1)
+);
 ```
 
 </details>
@@ -1350,36 +1358,53 @@ $carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
 
 ### ❌carbon--aspect-ratio [mixin]
 
-Output the CSS classes for generating aspect ratio classes
+Generates the CSS classname utilities for the aspect ratios
+
+CSS Tricks article on aspect ratios and all the different ways it can be done.
+https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
+
+That article references an earlier article on the topic.
+https://keithjgrant.com/posts/2017/03/aspect-ratios/
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-@mixin carbon--aspect-ratio($aspect-ratios: $carbon--aspect-ratios) {
+@mixin carbon--aspect-ratio($width, $height) {
   .#{$prefix}--aspect-ratio {
-    height: 0;
     position: relative;
   }
 
+  .#{$prefix}--aspect-ratio::before {
+    content: '';
+    width: 1px;
+    margin-left: -1px;
+    float: left;
+    height: 0;
+  }
+
+  .#{$prefix}--aspect-ratio::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  @each $aspect-ratio in $aspect-ratios {
+    $width: nth($aspect-ratio, 1);
+    $height: nth($aspect-ratio, 2);
+
+    .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
+      padding-top: percentage($height / $width);
+    }
+  }
+
+  // leaving here for legacy support
   .#{$prefix}--aspect-ratio--object {
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 100;
-  }
-
-  @each $ratio in $aspect-ratios {
-    $width: nth($ratio, 1);
-    $height: nth($ratio, 2);
-
-    .#{$prefix}--aspect-ratio--#{$width}x#{$height} {
-      padding-bottom: percentage($height / $width);
-    }
   }
 }
 ```
@@ -1388,9 +1413,10 @@ Output the CSS classes for generating aspect ratio classes
 
 - **Parameters**:
 
-| Name             | Description                         | Type   | Default value            |
-| ---------------- | ----------------------------------- | ------ | ------------------------ |
-| `$aspect-ratios` | A list of aspect ratios to generate | `List` | `$carbon--aspect-ratios` |
+| Name      | Description                 | Type     | Default value |
+| --------- | --------------------------- | -------- | ------------- |
+| `$width`  | width from an aspect ratio  | `Number` | —             |
+| `$height` | height from an aspect ratio | `Number` | —             |
 
 - **Group**: [@carbon/grid](#carbongrid)
 - **Requires**:
@@ -1537,6 +1563,12 @@ Generate the CSS for a grid for the given breakpoints and gutters
 
   .#{$prefix}--row {
     @include carbon--make-row();
+  }
+
+  .#{$prefix}--row-padding [class*='#{$prefix}--col'],
+  .#{$prefix}--col-padding {
+    padding-top: $grid-gutter / 2;
+    padding-bottom: $grid-gutter / 2;
   }
 
   .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
@@ -1852,7 +1884,6 @@ Check to see if the given breakpoint name
 - **Returns**: `Bool`
 - **Used by**:
   - [carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
-  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
 
 ### ✅carbon--largest-breakpoint-name [function]
 
@@ -1973,12 +2004,8 @@ Generate a media query for the maximum width of the given styles
   } @else if map-has-key($breakpoints, $name) {
     $breakpoint: map-get($breakpoints, $name);
     $width: map-get($breakpoint, width);
-    @if carbon--is-smallest-breakpoint($name, $breakpoints) {
+    @media (max-width: $width) {
       @content;
-    } @else {
-      @media (max-width: $width) {
-        @content;
-      }
     }
   } @else {
     @error 'Unable to find a breakpoint with name `#{$name}`. Expected one of: (#{map-keys($breakpoints)})';
@@ -1996,8 +2023,6 @@ Generate a media query for the maximum width of the given styles
 | `$breakpoints` | A map of breakpoints where the key is the name | `Map`              | `$carbon--grid-breakpoints` |
 
 - **Group**: [@carbon/layout](#carbonlayout)
-- **Requires**:
-  - [carbon--is-smallest-breakpoint [function]](#carbon--is-smallest-breakpoint-function)
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
 
@@ -5283,6 +5308,7 @@ $carbon--theme--g90: map-merge(
     visited-link: #be95ff,
     disabled-01: #393939,
     disabled-02: #6f6f6f,
+    disabled-03: #a8a8a8,
     highlight: #0043ce,
     skeleton-01: #353535,
     skeleton-02: #525252,
@@ -5355,7 +5381,6 @@ $carbon--theme--g100: map-merge(
     visited-link: #be95ff,
     disabled-01: #262626,
     disabled-02: #525252,
-    disabled-03: #6f6f6f,
     highlight: #002d9c,
     skeleton-01: #353535,
     skeleton-02: #393939,
@@ -9555,12 +9580,11 @@ Include a type reset for a given body and mono font family
 
 ```scss
 @mixin carbon--type-reset(
-  $base-font-size: $carbon--base-font-size,
   $body-font-family: carbon--font-family('sans'),
   $mono-font-family: carbon--font-family('mono')
 ) {
   html {
-    font-size: $base-font-size;
+    font-size: 100%;
   }
 
   body {
@@ -9588,7 +9612,6 @@ Include a type reset for a given body and mono font family
 
 | Name                | Description                                                                         | Type     | Default value                 |
 | ------------------- | ----------------------------------------------------------------------------------- | -------- | ----------------------------- |
-| `$base-font-size`   | The base font size for your document                                                | `Number` | `$carbon--base-font-size`     |
 | `$body-font-family` | The font family used on the `<body>` element                                        | `String` | `carbon--font-family('sans')` |
 | `$mono-font-family` | The font family used on elements that require mono fonts, like the `<code>` element | `String` | `carbon--font-family('mono')` |
 
@@ -11200,6 +11223,7 @@ $expressive-heading-05: (
   breakpoints: (
     md: (
       font-size: carbon--type-scale(9),
+      font-weight: carbon--font-weight('light'),
       line-height: 122%,
     ),
     lg: (
@@ -11212,6 +11236,7 @@ $expressive-heading-05: (
     ),
     max: (
       font-size: carbon--type-scale(13),
+      line-height: carbon--rem(70px),
     ),
   ),
 );
@@ -11248,6 +11273,7 @@ $expressive-heading-06: (
     ),
     max: (
       font-size: carbon--type-scale(13),
+      line-height: carbon--rem(70px),
     ),
   ),
 );

@@ -94,7 +94,7 @@ ListBox.propTypes = {
   type: ListBoxType.isRequired,
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+   * Specify the size of the ListBox. Currently supports either `sm` or `xl` as an option.
    */
   size: ListBoxSize,
 };

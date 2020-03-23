@@ -81,9 +81,17 @@ exports[`Dropdown should render 1`] = `
             <div
               className="bx--list-box__menu-icon"
             >
+<<<<<<< HEAD
               <ForwardRef(ChevronDown16)
                 aria-label="Open menu"
                 name="chevron--down"
+=======
+              <span
+                className="bx--list-box__label"
+                htmlFor="downshift-0-input"
+                id="dropdown-field-label-test-dropdown"
+                title="input"
+>>>>>>> master
               >
                 <Icon
                   aria-label="Open menu"
@@ -110,6 +118,7 @@ exports[`Dropdown should render 1`] = `
                     width={16}
                     xmlns="http://www.w3.org/2000/svg"
                   >
+<<<<<<< HEAD
                     <path
                       d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
                     />
@@ -119,6 +128,44 @@ exports[`Dropdown should render 1`] = `
                   </svg>
                 </Icon>
               </ForwardRef(ChevronDown16)>
+=======
+                    <Icon
+                      aria-label="Open menu"
+                      height={16}
+                      name="chevron--down"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 16 16"
+                      width={16}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <svg
+                        aria-label="Open menu"
+                        focusable="false"
+                        height={16}
+                        name="chevron--down"
+                        preserveAspectRatio="xMidYMid meet"
+                        role="img"
+                        style={
+                          Object {
+                            "willChange": "transform",
+                          }
+                        }
+                        viewBox="0 0 16 16"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <polygon
+                          points="8,11 3,6 3.7,5.3 8,9.6 12.3,5.3 13,6"
+                        />
+                        <title>
+                          Open menu
+                        </title>
+                      </svg>
+                    </Icon>
+                  </ForwardRef(ChevronDown16)>
+                </div>
+              </ListBoxMenuIcon>
+>>>>>>> master
             </div>
           </ListBoxMenuIcon>
         </button>
@@ -229,9 +276,23 @@ exports[`Dropdown should render custom item components 1`] = `
             <div
               className="bx--list-box__menu-icon bx--list-box__menu-icon--open"
             >
+<<<<<<< HEAD
               <ForwardRef(ChevronDown16)
                 aria-label="Close menu"
                 name="chevron--down"
+=======
+              <span
+                className="bx--list-box__label"
+                htmlFor="downshift-4-input"
+                id="dropdown-field-label-test-dropdown"
+                title="input"
+              >
+                input
+              </span>
+              <ListBoxMenuIcon
+                isOpen={true}
+                translateWithId={[Function]}
+>>>>>>> master
               >
                 <Icon
                   aria-label="Close menu"
@@ -258,6 +319,7 @@ exports[`Dropdown should render custom item components 1`] = `
                     width={16}
                     xmlns="http://www.w3.org/2000/svg"
                   >
+<<<<<<< HEAD
                     <path
                       d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
                     />
@@ -267,6 +329,44 @@ exports[`Dropdown should render custom item components 1`] = `
                   </svg>
                 </Icon>
               </ForwardRef(ChevronDown16)>
+=======
+                    <Icon
+                      aria-label="Close menu"
+                      height={16}
+                      name="chevron--down"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 16 16"
+                      width={16}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <svg
+                        aria-label="Close menu"
+                        focusable="false"
+                        height={16}
+                        name="chevron--down"
+                        preserveAspectRatio="xMidYMid meet"
+                        role="img"
+                        style={
+                          Object {
+                            "willChange": "transform",
+                          }
+                        }
+                        viewBox="0 0 16 16"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <polygon
+                          points="8,11 3,6 3.7,5.3 8,9.6 12.3,5.3 13,6"
+                        />
+                        <title>
+                          Close menu
+                        </title>
+                      </svg>
+                    </Icon>
+                  </ForwardRef(ChevronDown16)>
+                </div>
+              </ListBoxMenuIcon>
+>>>>>>> master
             </div>
           </ListBoxMenuIcon>
         </button>
@@ -535,9 +635,17 @@ exports[`Dropdown should render with strings as items 1`] = `
             <div
               className="bx--list-box__menu-icon bx--list-box__menu-icon--open"
             >
+<<<<<<< HEAD
               <ForwardRef(ChevronDown16)
                 aria-label="Close menu"
                 name="chevron--down"
+=======
+              <span
+                className="bx--list-box__label"
+                htmlFor="downshift-3-input"
+                id="dropdown-field-label-test-dropdown"
+                title="input"
+>>>>>>> master
               >
                 <Icon
                   aria-label="Close menu"
@@ -564,6 +672,7 @@ exports[`Dropdown should render with strings as items 1`] = `
                     width={16}
                     xmlns="http://www.w3.org/2000/svg"
                   >
+<<<<<<< HEAD
                     <path
                       d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
                     />
@@ -573,6 +682,44 @@ exports[`Dropdown should render with strings as items 1`] = `
                   </svg>
                 </Icon>
               </ForwardRef(ChevronDown16)>
+=======
+                    <Icon
+                      aria-label="Close menu"
+                      height={16}
+                      name="chevron--down"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 16 16"
+                      width={16}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <svg
+                        aria-label="Close menu"
+                        focusable="false"
+                        height={16}
+                        name="chevron--down"
+                        preserveAspectRatio="xMidYMid meet"
+                        role="img"
+                        style={
+                          Object {
+                            "willChange": "transform",
+                          }
+                        }
+                        viewBox="0 0 16 16"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <polygon
+                          points="8,11 3,6 3.7,5.3 8,9.6 12.3,5.3 13,6"
+                        />
+                        <title>
+                          Close menu
+                        </title>
+                      </svg>
+                    </Icon>
+                  </ForwardRef(ChevronDown16)>
+                </div>
+              </ListBoxMenuIcon>
+>>>>>>> master
             </div>
           </ListBoxMenuIcon>
         </button>

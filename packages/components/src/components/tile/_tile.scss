@@ -62,6 +62,18 @@
     }
   }
 
+  // Removes Firefox automatic border on buttons
+  .#{$prefix}--tile--expandable::-moz-focus-inner {
+    border: 0;
+  }
+
+  .#{$prefix}--tile--clickable {
+    @include reset;
+    @include type-style('body-short-01');
+    color: $text-01;
+    text-decoration: none;
+  }
+
   .#{$prefix}--tile--selectable {
     padding-right: $carbon--spacing-09;
   }
@@ -112,6 +124,14 @@
   }
 
   .#{$prefix}--tile--expandable {
+    width: 100%;
+    color: inherit;
+    font-size: inherit;
+    text-align: left;
+    border: 0;
+  }
+
+  .#{$prefix}--tile--expandable {
     overflow: hidden;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
@@ -137,7 +157,7 @@
     }
 
     .#{$prefix}--tile-content__below-the-fold {
-      visibility: visible;
+      visibility: inherit;
       opacity: 1;
       transition: opacity $duration--fast-02 motion(standard, productive),
         visibility $duration--fast-02 motion(standard, productive);

@@ -1,7 +1,7 @@
 {
   "name": "carbon-components",
   "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
-  "version": "10.9.0",
+  "version": "10.10.1",
   "license": "Apache-2.0",
   "main": "umd/index.js",
   "module": "es/index.js",
@@ -66,10 +66,8 @@
     "freshy": ">= 1.0.3"
   },
   "dependencies": {
-    "carbon-icons": "^7.0.7",
     "flatpickr": "4.6.1",
     "lodash.debounce": "^4.0.8",
-    "scss-to-json": "^2.0.0",
     "warning": "^3.0.0"
   },
   "devDependencies": {
@@ -81,10 +79,10 @@
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
     "@babel/runtime": "^7.7.7",
-    "@carbon/elements": "^10.9.0",
-    "@carbon/icons-handlebars": "^10.8.0",
-    "@carbon/icons-react": "^10.8.0",
-    "@carbon/test-utils": "^10.6.0",
+    "@carbon/elements": "^10.10.1",
+    "@carbon/icons-handlebars": "^10.9.1",
+    "@carbon/icons-react": "^10.9.1",
+    "@carbon/test-utils": "^10.7.0",
     "@frctl/fractal": "^1.1.0",
     "adaro": "1.0.4",
     "autoprefixer": "^9.7.4",
@@ -95,7 +93,7 @@
     "babel-plugin-rewire": "^1.1.0",
     "bluebird": "~3.1.1",
     "browser-sync": "^2.26.3",
-    "browserslist-config-carbon": "10.4.0",
+    "browserslist-config-carbon": "^10.4.0",
     "carbon-components": "^9.0.0",
     "carbon-components-react": "^6.0.0",
     "chokidar": "^2.0.0",
@@ -166,7 +164,6 @@
     "rollup-plugin-virtual": "^1.0.0",
     "sass": "^1.24.5",
     "sass-loader": "^8.0.2",
-    "scss-to-json": "1.1.0",
     "serve-static": "^1.13.0",
     "style-loader": "^1.1.3",
     "terser": "^4.6.3",
