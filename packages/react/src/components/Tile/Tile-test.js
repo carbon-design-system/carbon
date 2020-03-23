@@ -290,17 +290,14 @@ describe('Tile', () => {
 
       // Force the expanded tile to be collapsed.
       wrapper.setState({ expanded: false });
-      const collapsedDescription = wrapper.find('button').getElements()[0]
-        .props['aria-label'];
+      const collapsedDescription = wrapper.find('button').prop('title');
       expect(collapsedDescription).toEqual(defaultCollapsedIconText);
 
       // click on the item to expand it.
       wrapper.simulate('click');
 
       // Validate the description change
-      const expandedDescription = wrapper.find('button').getElements()[0].props[
-        'aria-label'
-      ];
+      const expandedDescription = wrapper.find('button').prop('title');
       expect(expandedDescription).toEqual(defaultExpandedIconText);
     });
 
@@ -313,17 +310,15 @@ describe('Tile', () => {
 
       // Force the expanded tile to be collapsed.
       wrapper.setState({ expanded: false });
-      const collapsedDescription = wrapper.find('button').getElements()[0]
-        .props['aria-label'];
+      const collapsedDescription = wrapper.find('button').prop('title');
+
       expect(collapsedDescription).toEqual(tileCollapsedIconText);
 
       // click on the item to expand it.
       wrapper.simulate('click');
 
       // Validate the description change
-      const expandedDescription = wrapper.find('button').getElements()[0].props[
-        'aria-label'
-      ];
+      const expandedDescription = wrapper.find('button').prop('title');
       expect(expandedDescription).toEqual(tileExpandedIconText);
     });
 
