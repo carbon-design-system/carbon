@@ -43,7 +43,7 @@ $css--helpers: true;
   .#{$prefix}--unstable-pagination__left,
   .#{$prefix}--unstable-pagination__right {
     display: flex;
-    height: 100%;
+    height: auto;
     align-items: center;
   }
 
