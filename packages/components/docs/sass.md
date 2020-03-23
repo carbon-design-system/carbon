@@ -22865,6 +22865,14 @@ Tile styles
   }
 
   .#{$prefix}--tile--expandable {
+    width: inherit;
+    color: inherit;
+    font-size: inherit;
+    text-align: left;
+    border: 0;
+  }
+
+  .#{$prefix}--tile--expandable {
     overflow: hidden;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
