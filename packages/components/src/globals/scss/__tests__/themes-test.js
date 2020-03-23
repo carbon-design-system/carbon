@@ -81,7 +81,6 @@ const classic = [
 
   // Modal
   'modal-border-top',
-  'modal-footer-background-color',
 
   // Progress Indicator
   'progress-indicator-bar-width',

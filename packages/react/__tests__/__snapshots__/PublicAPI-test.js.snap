@@ -1077,6 +1077,15 @@ Map {
         "children": Object {
           "type": "node",
         },
+        "size": Object {
+          "args": Array [
+            Array [
+              "small",
+              "normal",
+            ],
+          ],
+          "type": "oneOf",
+        },
       },
     },
     "TableToolbarAction": Object {
@@ -1196,6 +1205,7 @@ Map {
     "defaultProps": Object {
       "filterRows": [Function],
       "locale": "en",
+      "size": "normal",
       "sortRow": [Function],
       "translateWithId": [Function],
     },
@@ -1258,6 +1268,17 @@ Map {
         ],
         "isRequired": true,
         "type": "arrayOf",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "compact",
+            "short",
+            "normal",
+            "tall",
+          ],
+        ],
+        "type": "oneOf",
       },
       "sortRow": Object {
         "type": "func",
@@ -1640,6 +1661,15 @@ Map {
       "aria-labelledby": [Function],
       "children": Object {
         "type": "node",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "small",
+            "normal",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
@@ -2294,6 +2324,16 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "default",
+            "field",
+            "small",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "Filename" => Object {
@@ -2389,6 +2429,16 @@ Map {
       "role": Object {
         "type": "string",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "default",
+            "field",
+            "small",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "tabIndex": Object {
         "type": "number",
       },
@@ -2445,7 +2495,6 @@ Map {
     "defaultProps": Object {
       "onDelete": [Function],
       "status": "uploading",
-      "uuid": "id1",
     },
     "propTypes": Object {
       "errorBody": Object {
@@ -2477,7 +2526,6 @@ Map {
         "type": "oneOf",
       },
       "uuid": Object {
-        "isRequired": true,
         "type": "string",
       },
     },
@@ -3538,7 +3586,6 @@ Map {
         "type": "bool",
       },
       "iconDescription": Object {
-        "isRequired": true,
         "type": "string",
       },
       "kind": Object {
@@ -3567,7 +3614,6 @@ Map {
         "type": "string",
       },
       "statusIconDescription": Object {
-        "isRequired": true,
         "type": "string",
       },
       "subtitle": Object {
@@ -3604,7 +3650,6 @@ Map {
         "type": "bool",
       },
       "iconDescription": Object {
-        "isRequired": true,
         "type": "string",
       },
       "kind": Object {
@@ -3633,7 +3678,6 @@ Map {
         "type": "string",
       },
       "statusIconDescription": Object {
-        "isRequired": true,
         "type": "string",
       },
       "subtitle": Object {
@@ -4430,16 +4474,13 @@ Map {
   "StructuredListWrapper" => Object {
     "defaultProps": Object {
       "ariaLabel": "Structured list section",
-      "border": false,
       "selection": false,
     },
     "propTypes": Object {
       "ariaLabel": Object {
         "type": "string",
       },
-      "border": Object {
-        "type": "bool",
-      },
+      "border": [Function],
       "children": Object {
         "type": "node",
       },
@@ -4723,6 +4764,9 @@ Map {
       },
       "filter": Object {
         "type": "bool",
+      },
+      "onClose": Object {
+        "type": "func",
       },
       "title": Object {
         "type": "string",

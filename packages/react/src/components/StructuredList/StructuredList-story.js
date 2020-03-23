@@ -97,7 +97,7 @@ storiesOf('StructuredList', module)
         ));
       };
       return (
-        <StructuredListWrapper selection border>
+        <StructuredListWrapper selection>
           <StructuredListHead>
             <StructuredListRow head>
               <StructuredListCell head>ColumnA</StructuredListCell>
@@ -125,7 +125,7 @@ storiesOf('StructuredList', module)
     () => (
       <div style={{ width: '800px' }}>
         <StructuredListSkeleton />
-        <StructuredListSkeleton border />
+        <StructuredListSkeleton />
       </div>
     ),
     {

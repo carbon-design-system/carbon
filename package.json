@@ -9,7 +9,8 @@
   },
   "workspaces": {
     "packages": [
-      "packages/*"
+      "packages/*",
+      "actions/*"
     ],
     "nohoist": []
   },
@@ -20,7 +21,7 @@
     "doctoc": "doctoc --title '## Table of Contents'",
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
-    "lint": "eslint packages",
+    "lint": "eslint packages actions",
     "lint:docs": "alex 'docs/**/*.md' -q",
     "lint:styles": "stylelint '**/*.{css,scss}' --config ./packages/stylelint-config-elements",
     "sync": "carbon-cli sync",
@@ -60,7 +61,7 @@
     "fs-extra": "^8.1.0",
     "glob": "^7.1.4",
     "husky": "^4.0.10",
-    "jest": "^24.9.0",
+    "jest": "^25.1.0",
     "jest-circus": "^24.9.0",
     "jest-junit": "^10.0.0",
     "lerna": "^3.20.2",
