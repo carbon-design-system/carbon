@@ -373,7 +373,7 @@ export default class DataTable extends React.Component {
       useStaticWidth,
       shouldShowBorder,
       stickyHeader,
-      'aria-labeledby': `${this.getTablePrefix()}__table-container__title`,
+      'aria-labelledby': `${this.getTablePrefix()}__table-container__title`,
       'aria-describedby': `${this.getTablePrefix()}__table-container__description`,
     };
   };
