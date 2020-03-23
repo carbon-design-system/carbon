@@ -28,6 +28,7 @@ $css--helpers: true;
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid $ui-03;
+    border-bottom: 1px solid transparent;
     height: rem(48px);
   }
 
@@ -70,12 +71,12 @@ $css--helpers: true;
   .#{$prefix}--unstable-pagination__button {
     @include reset;
     border: none;
+    border-left: 1px solid $ui-03;
     background: none;
     cursor: pointer;
     height: 100%;
     margin: 0;
     padding: 0 rem(14px);
-    border-left: 1px solid $ui-03;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,7 +92,7 @@ $css--helpers: true;
     width: unset;
   }
 
-  .#{$prefix}--unstable-pagination__button:focus {
+  .#{$prefix}--unstable-pagination__button.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     @include focus-outline('outline');
   }
 
@@ -114,11 +115,6 @@ $css--helpers: true;
     cursor: not-allowed;
     fill: $disabled-02;
     background: $ui-01;
-  }
-
-  .#{$prefix}--unstable-pagination__button.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
-    outline: none;
-    border: 2px solid $focus;
   }
 
   .#{$prefix}--unstable-pagination__page-selector,
