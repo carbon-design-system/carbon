@@ -78,12 +78,12 @@ TableExpandHeader.propTypes = {
    * Specify whether this row is expanded or not. This helps coordinate data
    * attributes so that `TableExpandRow` and `TableExapndedRow` work together
    */
-  isExpanded: isRequiredIfPropExists('isExpanded'),
+  isExpanded: isRequiredIfPropExists('enableExpando'),
 
   /**
    * Hook for when a listener initiates a request to expand the given row
    */
-  onExpand: isRequiredIfPropExists('onExpand'),
+  onExpand: isRequiredIfPropExists('enableExpando'),
 
   /**
    * The description of the chevron right icon, to be put in its SVG `<title>` element.
