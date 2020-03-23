@@ -224,7 +224,6 @@
   a.#{$prefix}--header__menu-item[aria-current='page']::after,
   .#{$prefix}--header__menu-item--current::after {
     content: '';
-    // color: $shell-header-text-01;
     width: 100%;
     position: absolute;
     top: 0;
