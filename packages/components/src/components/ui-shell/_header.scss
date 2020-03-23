@@ -175,6 +175,7 @@
   }
 
   a.#{$prefix}--header__menu-item {
+    position: relative;
     display: flex;
     align-items: center;
     color: $shell-header-text-02;
@@ -220,10 +221,22 @@
 
   // Styles for selected state
 
-  a.#{$prefix}--header__menu-item[aria-current='page'],
-  a.#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current {
-    color: $shell-header-text-01;
-    border-bottom: 2px solid $inverse-support-04;
+  a.#{$prefix}--header__menu-item[aria-current='page']::after,
+  .#{$prefix}--header__menu-item--current::after {
+    content: '';
+    // color: $shell-header-text-01;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    border-bottom: 3px solid $inverse-support-04;
+  }
+
+  a.#{$prefix}--header__menu-item[aria-current='page']:focus::after,
+  .#{$prefix}--header__menu-item--current:focus::after {
+    border: 0;
   }
 
   a.#{$prefix}--header__menu-item[aria-current='page']:focus,
