@@ -56,7 +56,7 @@ Use `deprecated.yml` when assets are renamed to indicate the change. This will
 hide the depreacated name from display on the web site, and signal to teams that
 the originally named file is a candidate for future removal. It's recommended
 that you also add the deprecated name to `aliases` for the asset in `icons.yml`,
-so that the nem asset name will be a search result for the deprecated name. We
+so that the new asset name will be a search result for the deprecated name. We
 then persist both named assets in the repo for 2 releases to allow teams time to
 migrate to the new asset name.
 
