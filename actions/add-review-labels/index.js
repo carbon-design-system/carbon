@@ -88,6 +88,9 @@ async function run() {
   const additionalReviewLabel = 'status: one more review 👀';
   const readyForReviewLabel = 'status: ready for review 👀';
   const readyToMergeLabel = 'status: ready to merge 🎉';
+  const visualReviewLabel = 'status: visual review 🔍';
+  const contentReviewLabel = 'status: content review ✍️';
+  const needsReviewLabels = new Set([visualReviewLabel, contentReviewLabel]);
 
   if (approved.length > 0) {
     const hasReadyLabel = pullRequest.labels.find(label => {
@@ -129,6 +132,13 @@ async function run() {
         issue_number: pullRequest.number,
         name: additionalReviewLabel,
       });
+    }
+
+    const allNeedsReviewLabels = pullRequest.labels.filter(label => {
+      return needsReviewLabels.has(label.name);
+    });
+    if (allNeedsReviewLabels.length > 0) {
+      return;
     }
 
     const shouldAutoLabel = autoLabelUsers.find(user => {
