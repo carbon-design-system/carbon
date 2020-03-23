@@ -11930,6 +11930,7 @@ $expressive-heading-05: (
   breakpoints: (
     md: (
       font-size: carbon--type-scale(9),
+      font-weight: carbon--font-weight('light'),
       line-height: 122%,
     ),
     lg: (
@@ -11942,6 +11943,7 @@ $expressive-heading-05: (
     ),
     max: (
       font-size: carbon--type-scale(13),
+      line-height: carbon--rem(70px),
     ),
   ),
 );
@@ -11978,6 +11980,7 @@ $expressive-heading-06: (
     ),
     max: (
       font-size: carbon--type-scale(13),
+      line-height: carbon--rem(70px),
     ),
   ),
 );
@@ -22805,6 +22808,11 @@ Tile styles
     }
   }
 
+  // Removes Firefox automatic border on buttons
+  .#{$prefix}--tile--expandable::-moz-focus-inner {
+    border: 0;
+  }
+
   .#{$prefix}--tile--clickable {
     @include reset;
     @include type-style('body-short-01');
@@ -22859,6 +22867,14 @@ Tile styles
     &:focus {
       outline: none;
     }
+  }
+
+  .#{$prefix}--tile--expandable {
+    width: 100%;
+    color: inherit;
+    font-size: inherit;
+    text-align: left;
+    border: 0;
   }
 
   .#{$prefix}--tile--expandable {
