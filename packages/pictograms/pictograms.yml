@@ -961,14 +961,14 @@
     - rome
 - name: saas--enablement
   friendly_name: Saas enablement
-- name: san--francisco
-  friendly_name: San francisco
-- name: san--francisco--fog
-  friendly_name: San franciso fog
-- name: sao--paulo--expanded--base
-  friendly_name: Sao paulo expanded base
-- name: sao--paulo
-  friendly_name: Sao paulo
+- name: san-francisco
+  friendly_name: San Francisco
+- name: san-francisco--fog
+  friendly_name: San Francisco fog
+- name: sao-paulo--expanded--base
+  friendly_name: Sao Paulo expanded base
+- name: sao-paulo
+  friendly_name: Sao Paulo
 - name: satellite
   friendly_name: Satellite
   aliases:
@@ -1249,11 +1249,11 @@
   friendly_name: Washer
   aliases:
     - washer
-- name: washington--dc--monument
-  friendly_name: Washington dc monument
-- name: washington--dc
-  friendly_name: Washington dc
-- name: washington--dc--capitol
+- name: washington-dc--monument
+  friendly_name: Washington D.C. monument
+- name: washington-dc
+  friendly_name: Washington D.C.
+- name: washington-dc--capitol
   friendly_name: Washington D.C. capitol
 - name: watson--avatar
   friendly_name: Watson avatar
