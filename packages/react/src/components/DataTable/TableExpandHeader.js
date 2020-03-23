@@ -49,6 +49,21 @@ const TableExpandHeader = ({
   );
 };
 
+function isRequiredIfPropExists(requiredProp) {
+  function checker(props, propName, componentName) {
+    if (props[requiredProp] === undefined) {
+      return;
+    }
+    if (props[propName] === undefined) {
+      throw new Error(
+        `${componentName} requires ${propName} if ${requiredProp} is defined`
+      );
+    }
+  }
+
+  return checker;
+}
+
 TableExpandHeader.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
@@ -57,18 +72,18 @@ TableExpandHeader.propTypes = {
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  ariaLabel: PropTypes.string.isRequired,
+  ariaLabel: isRequiredIfPropExists('ariaLabel'),
 
   /**
    * Specify whether this row is expanded or not. This helps coordinate data
    * attributes so that `TableExpandRow` and `TableExapndedRow` work together
    */
-  isExpanded: PropTypes.bool.isRequired,
+  isExpanded: isRequiredIfPropExists('isExpanded'),
 
   /**
    * Hook for when a listener initiates a request to expand the given row
    */
-  onExpand: PropTypes.func.isRequired,
+  onExpand: isRequiredIfPropExists('onExpand'),
 
   /**
    * The description of the chevron right icon, to be put in its SVG `<title>` element.
