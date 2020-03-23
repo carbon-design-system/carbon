@@ -24,7 +24,7 @@ export function generate() {
       sharedStyles,
       sharedStyle => {
         const { name } = sharedStyle;
-        const [_category, swatch] = name.split('/');
+        const [_category, swatch] = name.split(' / ');
         switch (swatch) {
           case 'black':
             return 'black';
@@ -74,9 +74,6 @@ export function generate() {
 }
 
 function createArtboardFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
-  const [category, swatch, grade] = sharedStyle.name.split('/');
-
-  const colorName = grade ? `${swatch}/${swatch}-${grade}` : swatch;
   const rectangle = new ShapePath({
     name: 'Color',
     frame: new Rectangle(0, 0, ARTBOARD_WIDTH, ARTBOARD_HEIGHT),
@@ -91,7 +88,7 @@ function createArtboardFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
 
   const artboard = new Artboard({
     parent,
-    name: `${category}/${colorName}`,
+    name: sharedStyle.name,
     frame: new Rectangle(offsetX, offsetY, ARTBOARD_WIDTH, ARTBOARD_HEIGHT),
     layers: [rectangle],
   });
