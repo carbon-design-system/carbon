@@ -1872,7 +1872,7 @@ exports[`DataTable should render 1`] = `
             </TableToolbar>
             <Table
               aria-describedby="data-table-1__table-container__description"
-              aria-labeledby="data-table-1__table-container__title"
+              aria-labelledby="data-table-1__table-container__title"
               isSortable={false}
               size="normal"
             >
@@ -2512,13 +2512,13 @@ exports[`DataTable should render 1`] = `
       </TableToolbar>
       <Table
         aria-describedby="data-table-1__table-container__description"
-        aria-labeledby="data-table-1__table-container__title"
+        aria-labelledby="data-table-1__table-container__title"
         isSortable={false}
         size="normal"
       >
         <table
           aria-describedby="data-table-1__table-container__description"
-          aria-labeledby="data-table-1__table-container__title"
+          aria-labelledby="data-table-1__table-container__title"
           className="bx--data-table bx--data-table--no-border"
         >
           <TableHead>
@@ -2884,7 +2884,7 @@ exports[`DataTable sticky header should render 1`] = `
             </TableToolbar>
             <Table
               aria-describedby="data-table-24__table-container__description"
-              aria-labeledby="data-table-24__table-container__title"
+              aria-labelledby="data-table-24__table-container__title"
               isSortable={false}
               size="normal"
               stickyHeader={true}
@@ -3527,7 +3527,7 @@ exports[`DataTable sticky header should render 1`] = `
       </TableToolbar>
       <Table
         aria-describedby="data-table-24__table-container__description"
-        aria-labeledby="data-table-24__table-container__title"
+        aria-labelledby="data-table-24__table-container__title"
         isSortable={false}
         size="normal"
         stickyHeader={true}
@@ -3537,7 +3537,7 @@ exports[`DataTable sticky header should render 1`] = `
         >
           <table
             aria-describedby="data-table-24__table-container__description"
-            aria-labeledby="data-table-24__table-container__title"
+            aria-labelledby="data-table-24__table-container__title"
             className="bx--data-table bx--data-table--no-border bx--data-table--sticky-header"
           >
             <TableHead>
