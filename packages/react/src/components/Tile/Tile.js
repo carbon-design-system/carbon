@@ -542,15 +542,16 @@ export class ExpandableTile extends Component {
 
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-      <div
+      <button
         ref={tile => {
           this.tile = tile;
         }}
         style={tileStyle}
         className={classes}
+        aria-expanded={isExpanded}
+        title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
         {...other}
         onClick={this.handleClick}
-        onKeyPress={this.handleKeyDown}
         tabIndex={tabIndex}>
         <div
           ref={tileContent => {
@@ -563,17 +564,12 @@ export class ExpandableTile extends Component {
             className={`${prefix}--tile-content`}>
             {childrenAsArray[0]}
           </div>
-          <button
-            aria-expanded={isExpanded}
-            aria-label={
-              isExpanded ? tileExpandedIconText : tileCollapsedIconText
-            }
-            className={`${prefix}--tile__chevron`}>
+          <div className={`${prefix}--tile__chevron`}>
             <ChevronDown16 />
-          </button>
+          </div>
           <div className={`${prefix}--tile-content`}>{childrenAsArray[1]}</div>
         </div>
-      </div>
+      </button>
     );
   }
 }

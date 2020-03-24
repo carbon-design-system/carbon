@@ -354,6 +354,7 @@ export default class ComboBox extends React.Component {
                 aria-owns={isOpen ? `${id}__menu` : null}
                 aria-autocomplete="list"
                 ref={this.textInput}
+                title={inputValue}
                 {...rest}
                 {...getInputProps({
                   disabled,
