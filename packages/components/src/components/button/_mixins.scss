@@ -33,11 +33,16 @@
   margin: 0;
 
   &:disabled,
-  &.#{$prefix}--btn--disabled {
+  &:hover:disabled,
+  &:focus:disabled,
+  &.#{$prefix}--btn--disabled,
+  &.#{$prefix}--btn--disabled:hover,
+  &.#{$prefix}--btn--disabled:focus {
     cursor: not-allowed;
     color: $disabled-03;
     background: $disabled-02;
     border-color: $disabled-02;
+    box-shadow: none;
   }
 
   .#{$prefix}--btn__icon {
