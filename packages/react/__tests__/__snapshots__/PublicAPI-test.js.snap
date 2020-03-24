@@ -4786,7 +4786,6 @@ Map {
             "warm-gray",
           ],
         ],
-        "isRequired": true,
         "type": "oneOf",
       },
     },

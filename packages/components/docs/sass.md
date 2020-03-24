@@ -6279,7 +6279,6 @@ $ui-04: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button-theme [mixin]](#button-theme-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
@@ -7670,7 +7669,6 @@ $disabled-02: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
-  - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
@@ -13212,11 +13210,16 @@ Button base styles
   margin: 0;
 
   &:disabled,
-  &.#{$prefix}--btn--disabled {
+  &:hover:disabled,
+  &:focus:disabled,
+  &.#{$prefix}--btn--disabled,
+  &.#{$prefix}--btn--disabled:hover,
+  &.#{$prefix}--btn--disabled:focus {
     cursor: not-allowed;
     color: $disabled-03;
     background: $disabled-02;
     border-color: $disabled-02;
+    box-shadow: none;
   }
 
   .#{$prefix}--btn__icon {
@@ -13264,17 +13267,6 @@ Button variant styles
         ($button-border-width + $button-outline-width) $ui-02;
   }
 
-  &:disabled:hover,
-  &:disabled:focus,
-  &:hover.#{$prefix}--btn--disabled,
-  &:focus.#{$prefix}--btn--disabled {
-    color: $ui-04;
-    background-color: $disabled-02;
-    border-color: $disabled-02;
-    text-decoration: none;
-    box-shadow: none;
-  }
-
   &:active {
     background-color: $active-color;
   }
@@ -13293,8 +13285,6 @@ Button variant styles
   - [focus [variable]](#focus-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [prefix [variable]](#prefix-variable)
-  - [ui-04 [variable]](#ui-04-variable)
-  - [disabled-02 [variable]](#disabled-02-variable)
 - **Used by**:
   - [button [mixin]](#button-mixin)
 
@@ -22300,6 +22290,7 @@ Tag styles
   .#{$prefix}--tag {
     @include button-reset($width: false);
     @include type-style('label-01');
+    @include tag-theme($ibm-color__gray-20, $ibm-color__gray-100);
 
     display: inline-flex;
     align-items: center;
@@ -22809,6 +22800,11 @@ Tile styles
     }
   }
 
+  // Removes Firefox automatic border on buttons
+  .#{$prefix}--tile--expandable::-moz-focus-inner {
+    border: 0;
+  }
+
   .#{$prefix}--tile--clickable {
     @include reset;
     @include type-style('body-short-01');
@@ -22863,6 +22859,14 @@ Tile styles
     &:focus {
       outline: none;
     }
+  }
+
+  .#{$prefix}--tile--expandable {
+    width: 100%;
+    color: inherit;
+    font-size: inherit;
+    text-align: left;
+    border: 0;
   }
 
   .#{$prefix}--tile--expandable {
