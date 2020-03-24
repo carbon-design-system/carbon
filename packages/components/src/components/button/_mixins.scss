@@ -63,7 +63,7 @@
   $font-color,
   $hover-bg-color,
   $icon-color,
-  $active-color,
+  $active-color
 ) {
   background-color: $bg-color;
   border-width: $button-outline-width;
@@ -77,9 +77,8 @@
 
   &:focus {
     border-color: $focus;
-    box-shadow:
-    inset 0 0 0 $button-border-width $focus,
-    inset 0 0 0 ($button-border-width + $button-outline-width) $ui-02;
+    box-shadow: inset 0 0 0 $button-border-width $focus,
+      inset 0 0 0 ($button-border-width + $button-outline-width) $ui-02;
   }
 
   &:active {
