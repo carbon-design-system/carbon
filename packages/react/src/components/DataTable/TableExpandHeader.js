@@ -7,6 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
+import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
 import React from 'react';
 import { ChevronRight16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
@@ -49,21 +50,6 @@ const TableExpandHeader = ({
   );
 };
 
-function isRequiredIfPropExists(requiredProp) {
-  function checker(props, propName, componentName) {
-    if (props[requiredProp] === undefined) {
-      return;
-    }
-    if (props[propName] === undefined) {
-      throw new Error(
-        `${componentName} requires ${propName} if ${requiredProp} is defined`
-      );
-    }
-  }
-
-  return checker;
-}
-
 TableExpandHeader.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
@@ -72,18 +58,18 @@ TableExpandHeader.propTypes = {
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  ariaLabel: isRequiredIfPropExists('ariaLabel'),
+  ariaLabel: requiredIfGivenPropExists('enableExpando', PropTypes.string),
 
   /**
    * Specify whether this row is expanded or not. This helps coordinate data
    * attributes so that `TableExpandRow` and `TableExapndedRow` work together
    */
-  isExpanded: isRequiredIfPropExists('enableExpando'),
+  isExpanded: requiredIfGivenPropExists('enableExpando', PropTypes.bool),
 
   /**
    * Hook for when a listener initiates a request to expand the given row
    */
-  onExpand: isRequiredIfPropExists('enableExpando'),
+  onExpand: requiredIfGivenPropExists('enableExpando', PropTypes.func),
 
   /**
    * The description of the chevron right icon, to be put in its SVG `<title>` element.
