@@ -50,6 +50,12 @@ export function syncIconSymbols(
   });
 }
 
+/**
+ * Given a page, determine what the initial y-offset is based on the layers in
+ * the page
+ * @param {Page} page
+ * @returns {number}
+ */
 function getInitialPageOffset(page) {
   return page.layers.reduce((acc, layer) => {
     if (layer.frame.y + layer.frame.height > acc) {
@@ -59,6 +65,15 @@ function getInitialPageOffset(page) {
   }, 0);
 }
 
+/**
+ * Create the SVG artboards for a given set of icons and sizes and place them in
+ * the given page with the given shared style set as th e fill.
+ * @param {Page} page
+ * @param {SharedStyle} sharedStyle
+ * @param {Array} icons
+ * @param {Array<number>} [sizes]
+ * @returns {Array<Artboard>}
+ */
 function createSVGArtboards(
   page,
   sharedStyle,
