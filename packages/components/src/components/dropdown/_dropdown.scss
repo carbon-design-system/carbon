@@ -182,6 +182,10 @@
     overflow-y: auto;
   }
 
+  .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list {
+    background-color: $field-02;
+  }
+
   .#{$prefix}--dropdown:not(.#{$prefix}--dropdown--open)
     .#{$prefix}--dropdown-item {
     visibility: hidden;
@@ -236,6 +240,10 @@
       color: $text-01;
       border-color: transparent;
     }
+  }
+
+  .#{$prefix}--dropdown--light .#{$prefix}--dropdown-link {
+    border-top-color: $decorative-01;
   }
 
   .#{$prefix}--dropdown--sm .#{$prefix}--dropdown-link {
