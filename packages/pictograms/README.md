@@ -18,6 +18,12 @@ instead:
 yarn add @carbon/pictograms
 ```
 
+## 📖 API Documentation
+
+If you're looking for `@carbon/pictograms` API documentation, check out:
+
+- [Contributing](./docs/contributing.md)
+
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,
