@@ -25,7 +25,7 @@ const ListBoxMenu = React.forwardRef(function ListBoxMenu(
   return (
     <div
       ref={ref}
-      id={`${id}__menu`}
+      id={id}
       className={`${prefix}--list-box__menu`}
       role="listbox"
       {...rest}>
