@@ -124,27 +124,21 @@ storiesOf('CodeSnippet', module)
           style={{ width: '800px' }}>
           {multilineProps.light && lightPropMessage}
           <CodeSnippet type="multi" {...multilineProps}>
-            {`@mixin grid-container {
-  width: 100%;
-  padding-right: padding(mobile);
-  padding-left: padding(mobile);
-
-  @include breakpoint(bp--xs--major) {
-    padding-right: padding(xs);
-    padding-left: padding(xs);
-  }
-}
-
-$z-indexes: (
-  modal : 9000,
-  overlay : 8000,
-  dropdown : 7000,
-  header : 6000,
-  footer : 5000,
-  hidden : - 1,
-  overflowHidden: - 1,
-  floating: 10000
-);`}
+            {`http_server_requests_seconds_count{appName="samplemicrosvc",env="local",exception="None",instanceId="1",method="GET",outcome="SUCCESS",status="200",uri="/addressDetails/{addressId}",} 67.0
+http_server_requests_seconds_count{appName="samplemicrosvc",env="local",exception="InternalServerError",instanceId="1",method="GET",outcome="SERVER_ERROR",status="500",uri="/userInfo/{userId}",} 39.0
+http_server_requests_seconds_count{appName="samplemicrosvc",env="local",exception="None",instanceId="1",method="GET",outcome="SUCCESS",status="200",uri="/userInfo/{userId}",} 67.0
+http_server_requests_seconds_count{appName="samplemicrosvc",env="local",exception="IllegalArgumentException",instanceId="1",method="GET",outcome="SERVER_ERROR",status="500",uri="/addressDetails/{addressId}",} 13.0
+http_server_requests_seconds_count{appName="samplemicrosvc",env="local",exception="IllegalStateException",instanceId="1",method="GET",outcome="SERVER_ERROR",status="500",uri="/addressDetails/{addressId}",} 26.0
+http_server_requests_seconds_count{appName="samplemicrosvc",env="local",exception="None",instanceId="1",method="GET",outcome="SUCCESS",status="200",uri="/addressDetails/{addressId}",} 67.0
+http_server_requests_seconds_count{appName="samplemicrosvc",env="local",exception="InternalServerError",instanceId="1",method="GET",outcome="SERVER_ERROR",status="500",uri="/userInfo/{userId}",} 39.0
+http_server_requests_seconds_count{appName="samplemicrosvc",env="local",exception="None",instanceId="1",method="GET",outcome="SUCCESS",status="200",uri="/userInfo/{userId}",} 67.0
+http_server_requests_seconds_count{appName="samplemicrosvc",env="local",exception="IllegalArgumentException",instanceId="1",method="GET",outcome="SERVER_ERROR",status="500",uri="/addressDetails/{addressId}",} 13.0
+http_server_requests_seconds_count{appName="samplemicrosvc",env="local",exception="IllegalStateException",instanceId="1",method="GET",outcome="SERVER_ERROR",status="500",uri="/addressDetails/{addressId}",} 26.0
+http_server_requests_seconds_count{appName="samplemicrosvc",env="local",exception="None",instanceId="1",method="GET",outcome="SUCCESS",status="200",uri="/addressDetails/{addressId}",} 67.0
+http_server_requests_seconds_count{appName="samplemicrosvc",env="local",exception="InternalServerError",instanceId="1",method="GET",outcome="SERVER_ERROR",status="500",uri="/userInfo/{userId}",} 39.0
+http_server_requests_seconds_count{appName="samplemicrosvc",env="local",exception="None",instanceId="1",method="GET",outcome="SUCCESS",status="200",uri="/userInfo/{userId}",} 67.0
+http_server_requests_seconds_count{appName="samplemicrosvc",env="local",exception="IllegalArgumentException",instanceId="1",method="GET",outcome="SERVER_ERROR",status="500",uri="/addressDetails/{addressId}",} 13.0
+http_server_requests_seconds_count{appName="samplemicrosvc",env="local",exception="IllegalStateException",instanceId="1",method="GET",outcome="SERVER_ERROR",status="500",uri="/addressDetails/{addressId}",} 26.0`}
           </CodeSnippet>
           <br />
           <CodeSnippet type="multi" {...multilineProps}>
