@@ -126,6 +126,8 @@ export const disabled03 = gray40;
 
 export const highlight = blue70;
 
+export const decorative01 = gray60;
+
 export const skeleton01 = '#353535';
 export const skeleton02 = gray70;
 
