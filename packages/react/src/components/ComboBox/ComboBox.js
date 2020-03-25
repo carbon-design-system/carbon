@@ -337,6 +337,7 @@ export default class ComboBox extends React.Component {
               <ListBox.Field
                 id={id}
                 {...getToggleButtonProps({
+                  disabled,
                   onClick: this.onToggleClick(isOpen),
                 })}>
                 <input
@@ -348,6 +349,7 @@ export default class ComboBox extends React.Component {
                   ref={this.textInput}
                   {...rest}
                   {...getInputProps({
+                    disabled,
                     placeholder,
                     onKeyDown: event => {
                       event.stopPropagation();
