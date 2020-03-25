@@ -35,7 +35,6 @@ const Tag = ({
   disabled,
   ...other
 }) => {
-  const tagId = id || `tag-${getInstanceId()}`;
   const tagClass = `${prefix}--tag--${type}`;
   const tagClasses = classNames(`${prefix}--tag`, tagClass, className, {
     [`${prefix}--tag--disabled`]: disabled,
