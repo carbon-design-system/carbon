@@ -10,7 +10,7 @@ import { command } from '../command';
 import { syncIconSymbols } from './shared';
 import { findOrCreateSymbolPage } from '../../tools/page';
 
-export function sync() {
+export async function sync() {
   command('commands/icons/sync', () => {
     const document = Document.getSelectedDocument();
     const symbolsPage = findOrCreateSymbolPage(document);

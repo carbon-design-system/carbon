@@ -13,8 +13,7 @@ import { syncColorStyles } from '../../sharedStyles/colors';
 import { groupByKey } from '../../tools/grouping';
 import { syncSymbol } from '../../tools/symbols';
 
-const meta = require('@carbon/icons/build-info.json');
-const metadata = require('@carbon/icons/metadata.json');
+const metadata = require('../../../generated/icons/metadata.json');
 
 export function syncIconSymbols(
   document,
@@ -24,7 +23,148 @@ export function syncIconSymbols(
 ) {
   const sharedStyles = syncColorStyles(document);
   const [sharedStyle] = sharedStyles.filter(
-    ({ name }) => name === 'color/black'
+    ({ name }) => name === 'color / black'
+  );
+
+  if (!sharedStyle) {
+    throw new Error(
+      'Unexpected error occurred, expected shared style but found none'
+    );
+  }
+
+  // We keep track of the current X and Y offsets at the top-level, each
+  // iteration of an icon set should reset the X_OFFSET and update the
+  // Y_OFFSET with the maximum size in the icon set.
+  const ARTBOARD_MARGIN = 32;
+  const INITIAL_Y_OFFSET =
+    symbolsPage.layers.reduce((acc, layer) => {
+      if (layer.frame.y + layer.frame.height > acc) {
+        return layer.frame.y + layer.frame.height;
+      }
+      return acc;
+    }, 0) + 32;
+  let X_OFFSET = 0;
+  let Y_OFFSET = INITIAL_Y_OFFSET;
+
+  const sizes = [32];
+  // const sizes = [32, 24, 20, 16];
+  const symbolsToSync = metadata.icons
+    .slice(0, 1)
+    .filter(icon => !icon.deprecated)
+    .flatMap(icon => {
+      const defaultAsset = icon.assets.find(asset => asset.size === 32);
+
+      X_OFFSET = 0;
+
+      const artboards = sizes.map(size => {
+        const asset =
+          icon.assets.find(asset => asset.size === size) || defaultAsset;
+        const svgString = NSString.stringWithString(asset.source);
+        const svgData = svgString.dataUsingEncoding(NSUTF8StringEncoding);
+        const svgImporter = MSSVGImporter.svgImporter();
+        svgImporter.prepareToImportFromData(svgData);
+        const svgLayer = svgImporter.importAsLayer();
+
+        svgLayer.rect = {
+          origin: {
+            x: 0,
+            y: 0,
+          },
+          size: {
+            width: size,
+            height: size,
+          },
+        };
+
+        let symbolName = `${icon.friendlyName} / ${size}`;
+
+        if (icon.category && icon.subcategory) {
+          symbolName = `${icon.category} / ${icon.subcategory} / ${symbolName}`;
+        }
+
+        symbolName = `icon / ${symbolName}`;
+
+        const artboard = new Artboard({
+          name: symbolName,
+          frame: new Rectangle(X_OFFSET, Y_OFFSET, size, size),
+          layers: [svgLayer],
+        });
+
+        const [group] = artboard.layers;
+        const paths = group.layers.map(layer => layer.duplicate());
+        const { fillPaths = [], transparent = [] } = groupByKey(
+          paths,
+          layer => {
+            if (layer.name === 'Rectangle') {
+              if (layer.frame.width === size && layer.frame.height === size) {
+                return 'transparent';
+              }
+            }
+
+            return 'fillPaths';
+          }
+        );
+
+        let shape;
+        if (fillPaths.length === 1) {
+          shape = fillPaths[0];
+          shape.name = 'Fill';
+          shape.style = sharedStyle.style;
+          shape.sharedStyleId = sharedStyle.id;
+        } else {
+          // If we have multiple fill paths, we need to consolidate them into a
+          // single Shape so that we can style the icon with one override in the
+          // symbol
+          shape = new Shape({
+            name: 'Fill',
+            frame: new Rectangle(0, 0, icon.size, icon.size),
+            layers: fillPaths,
+            style: sharedStyle.style,
+            sharedStyleId: sharedStyle.id,
+          });
+        }
+
+        for (const layer of transparent) {
+          layer.style.opacity = 0;
+        }
+
+        shape.style.borders = [];
+
+        artboard.layers.push(...transparent, shape);
+        group.remove();
+
+        // const transparent = group.layers.find(
+        // layer => layer.name === '_Transparent_Rectangle_'
+        // );
+
+        // if (transparent) {
+        // transparent.moveToBack();
+        // transparent.style.opacity = 0;
+        // }
+
+        X_OFFSET += size + ARTBOARD_MARGIN;
+
+        return artboard;
+      });
+
+      Y_OFFSET += 32 + ARTBOARD_MARGIN;
+
+      return artboards;
+    });
+
+  symbolsPage.layers = symbolsToSync;
+  // return symbolsToSync;
+}
+
+export function syncIconSymbolz(
+  document,
+  symbols,
+  symbolsPage,
+  sharedLayerStyles
+) {
+  const sharedStyles = syncColorStyles(document);
+  const [sharedStyle] = sharedStyles.filter(
+    ({ name }) => name === 'color / black'
   );
 
   if (!sharedStyle) {
@@ -194,56 +334,4 @@ export function syncIconSymbols(
   });
 
   return symbolsToSync;
-}
-
-/**
- * Normalize a collection of icons by their basename
- * @param {Array<Icon>} icons
- * @returns {object}
- */
-function normalize(icons) {
-  // Collect all icons and group them by their base names. The value of the
-  // basename key is the array of all sizes for that icon
-  const iconsByBasename = icons.reduce((acc, icon) => {
-    // Ignore glyphs
-    if (!icon.size) {
-      return acc;
-    }
-    const name = icon.basename;
-    if (acc[name]) {
-      return {
-        ...acc,
-        [name]: acc[name].concat(icon).sort(sortBySize),
-      };
-    }
-    return {
-      ...acc,
-      [name]: [icon],
-    };
-  }, {});
-
-  return iconsByBasename;
-}
-
-function sortBySize(a, b) {
-  return b.size - a.size;
-}
-
-/**
- * Create a layer from an SVG descriptor
- *
- * Reference:
- * https://github.com/airbnb/react-sketchapp/blob/aa3070556c47883974edbc7f78978c421a8199f7/src/jsonUtils/sketchImpl/makeSvgLayer.js#L12
- *
- * @param {object} svg
- * @returns {Layer}
- */
-function createSVGLayer(svg) {
-  const svgString = NSString.stringWithString(toString(svg));
-  const svgData = svgString.dataUsingEncoding(NSUTF8StringEncoding);
-  const svgImporter = MSSVGImporter.svgImporter();
-  svgImporter.prepareToImportFromData(svgData);
-  const svgLayer = svgImporter.importAsLayer();
-
-  return svgLayer;
 }
