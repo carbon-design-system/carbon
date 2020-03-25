@@ -648,6 +648,7 @@ Map {
   "ContentSwitcher" => Object {
     "defaultProps": Object {
       "selectedIndex": 0,
+      "selectionMode": "automatic",
     },
     "propTypes": Object {
       "children": Object {
@@ -660,11 +661,17 @@ Map {
         "isRequired": true,
         "type": "func",
       },
-      "requiresExplicitSelection": Object {
-        "type": "bool",
-      },
       "selectedIndex": Object {
         "type": "number",
+      },
+      "selectionMode": Object {
+        "args": Array [
+          Array [
+            "automatic",
+            "manual",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
@@ -4700,6 +4707,7 @@ Map {
       "iconDescription": "show menu options",
       "role": "navigation",
       "selected": 0,
+      "selectionMode": "automatic",
       "triggerHref": "#",
       "type": "default",
     },
@@ -4729,15 +4737,21 @@ Map {
       "onSelectionChange": Object {
         "type": "func",
       },
-      "requiresExplicitSelection": Object {
-        "type": "bool",
-      },
       "role": Object {
         "isRequired": true,
         "type": "string",
       },
       "selected": Object {
         "type": "number",
+      },
+      "selectionMode": Object {
+        "args": Array [
+          Array [
+            "automatic",
+            "manual",
+          ],
+        ],
+        "type": "oneOf",
       },
       "tabContentClassName": Object {
         "type": "string",
