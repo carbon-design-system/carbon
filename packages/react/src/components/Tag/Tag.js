@@ -36,10 +36,10 @@ const Tag = ({
   ...other
 }) => {
   const tagId = id || `tag-${getInstanceId()}`;
-  const tagClasses = classNames(`${prefix}--tag`, className, {
+  const tagClass = `${prefix}--tag--${type}`;
+  const tagClasses = classNames(`${prefix}--tag`, tagClass, className, {
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
-    [`${prefix}--tag--${type}`]: type,
   });
   return filter ? (
     <button
@@ -77,7 +77,7 @@ Tag.propTypes = {
   /**
    * Specify the type of the <Tag>
    */
-  type: PropTypes.oneOf(Object.keys(TYPES)),
+  type: PropTypes.oneOf(Object.keys(TYPES)).isRequired,
 
   /**
    * Specify if the <Tag> is disabled
