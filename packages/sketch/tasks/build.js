@@ -7,7 +7,7 @@
 
 'use strict';
 
-const { builders, Metadata } = require('@carbon/icon-build-helpers');
+const { Metadata } = require('@carbon/icon-build-helpers');
 const path = require('path');
 
 async function build() {
