@@ -1,5 +1,6 @@
 @import '../../scss/type';
 @import '../../scss/font-face/sans';
+@import '../../scss/font-face/sans-condensed';
 @import '../../scss/font-face/serif';
 @import '../../scss/font-face/mono';
 @import '../../scss/classes';
@@ -8,6 +9,7 @@
 @include carbon--type-classes();
 
 @include carbon--font-face-sans();
+@include carbon--font-face-sans-condensed();
 @include carbon--font-face-serif();
 @include carbon--font-face-mono();
 
@@ -15,6 +17,7 @@
 // Font-face
 //------------------------------------------------------------------------------
 .bx--type-sans,
+.bx--type-sans-condensed,
 .bx--type-serif,
 .bx--type-mono {
   @include carbon--font-size(8);
