@@ -5978,6 +5978,13 @@ Map {
       },
     },
   },
+  "PaginationSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "ProgressIndicatorSkeleton" => Object {
     "propTypes": Object {
       "className": Object {
