@@ -408,7 +408,7 @@ export default class Modal extends Component {
               kind={danger ? 'danger' : 'primary'}
               disabled={primaryButtonDisabled}
               onClick={onRequestSubmit}
-              inputref={this.button}>
+              ref={this.button}>
               {primaryButtonText}
             </Button>
           </div>

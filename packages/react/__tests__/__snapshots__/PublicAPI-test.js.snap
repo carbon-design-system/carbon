@@ -878,10 +878,7 @@ Map {
     },
     "TableExpandHeader": Object {
       "propTypes": Object {
-        "ariaLabel": Object {
-          "isRequired": true,
-          "type": "string",
-        },
+        "ariaLabel": [Function],
         "children": Object {
           "type": "node",
         },
@@ -891,14 +888,8 @@ Map {
         "expandIconDescription": Object {
           "type": "string",
         },
-        "isExpanded": Object {
-          "isRequired": true,
-          "type": "bool",
-        },
-        "onExpand": Object {
-          "isRequired": true,
-          "type": "func",
-        },
+        "isExpanded": [Function],
+        "onExpand": [Function],
       },
     },
     "TableExpandRow": Object {
@@ -1463,10 +1454,7 @@ Map {
   },
   "TableExpandHeader" => Object {
     "propTypes": Object {
-      "ariaLabel": Object {
-        "isRequired": true,
-        "type": "string",
-      },
+      "ariaLabel": [Function],
       "children": Object {
         "type": "node",
       },
@@ -1476,14 +1464,8 @@ Map {
       "expandIconDescription": Object {
         "type": "string",
       },
-      "isExpanded": Object {
-        "isRequired": true,
-        "type": "bool",
-      },
-      "onExpand": Object {
-        "isRequired": true,
-        "type": "func",
-      },
+      "isExpanded": [Function],
+      "onExpand": [Function],
     },
   },
   "TableExpandRow" => Object {
@@ -4806,7 +4788,6 @@ Map {
             "warm-gray",
           ],
         ],
-        "isRequired": true,
         "type": "oneOf",
       },
     },

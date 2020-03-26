@@ -21,9 +21,10 @@ const props = {
           ...acc,
           [`${type} (${type})`]: type,
         }),
-        {}
-      ),
-      'red'
+        {
+          Default: undefined,
+        }
+      )
     ),
     disabled: boolean('Disabled (disabled)', false),
     title: 'Clear Filter',
