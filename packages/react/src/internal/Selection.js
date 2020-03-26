@@ -5,9 +5,46 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash.isequal';
+
+export function useSelection({ disabled, initialSelectedItems = [] }) {
+  const [selectedItems, setSelectedItems] = useState(initialSelectedItems);
+
+  function onItemChange(item) {
+    if (disabled) {
+      return;
+    }
+
+    let selectedIndex;
+    selectedItems.forEach((selectedItem, index) => {
+      if (isEqual(selectedItem, item)) {
+        selectedIndex = index;
+      }
+    });
+
+    if (selectedIndex === undefined) {
+      setSelectedItems(selectedItems => selectedItems.concat(item));
+      return;
+    }
+
+    setSelectedItems(selectedItems => removeAtIndex(selectedItems, index));
+  }
+
+  function clearSelection() {
+    if (disabled) {
+      return;
+    }
+    setSelectedItems([]);
+  }
+
+  return {
+    selectedItems,
+    onItemChange,
+    clearSelection,
+  };
+}
 
 export default class Selection extends React.Component {
   static propTypes = {
@@ -55,6 +92,7 @@ export default class Selection extends React.Component {
       selectedItems: removeAtIndex(state.selectedItems, index),
     }));
   };
+
   handleOnItemChange = item => {
     if (this.props.disabled) {
       return;
