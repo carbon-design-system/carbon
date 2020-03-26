@@ -37,7 +37,7 @@
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-step {
     min-width: 8rem;
     flex-grow: 1;
-  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+  }
 
   .#{$prefix}--progress-line {
     position: absolute;
@@ -91,10 +91,10 @@
     color: $link-01;
     box-shadow: 0 rem(3px) 0 0 $link-01;
   }
-  
+
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-label {
     max-width: 100%;
-    padding-right: 0.75rem;
+    margin-right: 0.75rem;
   }
 
   .#{$prefix}--progress-label:active {

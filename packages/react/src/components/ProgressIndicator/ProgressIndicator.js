@@ -289,7 +289,13 @@ export class ProgressIndicator extends Component {
   };
 
   render() {
-    const { className, currentIndex, vertical, spaceEqually, ...other } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      className,
+      currentIndex,
+      vertical,
+      spaceEqually,
+      ...other
+    } = this.props; // eslint-disable-line no-unused-vars
     const classes = classnames({
       [`${prefix}--progress`]: true,
       [`${prefix}--progress--vertical`]: vertical,

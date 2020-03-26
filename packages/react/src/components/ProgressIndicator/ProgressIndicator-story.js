@@ -16,16 +16,6 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-let spaceEquallyKnob = () => {
-  const spaceEqually = boolean('Space Equally', false);
-  return spaceEqually;
-};
-
-let verticalKnob = () => {
-  const vertical = boolean('Vertical', false);
-  return vertical;
-};
-
 storiesOf('ProgressIndicator', module)
   .addDecorator(withKnobs)
   .add(
