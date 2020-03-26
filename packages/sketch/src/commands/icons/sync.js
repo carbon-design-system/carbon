@@ -25,7 +25,7 @@ export function syncSmallIcons() {
   });
 }
 
-export async function syncLargeIcons() {
+export function syncLargeIcons() {
   command('commands/icons/syncLargeIcons', () => {
     const document = Document.getSelectedDocument();
     const symbolsPage = findOrCreateSymbolPage(document);
