@@ -22,6 +22,18 @@ import setupGetInstanceId from '../../tools/setupGetInstanceId';
 const { prefix } = settings;
 const noop = () => {};
 const getInstanceId = setupGetInstanceId();
+const {
+  MenuKeyDownArrowDown,
+  MenuKeyDownArrowUp,
+  MenuKeyDownEscape,
+  MenuMouseLeave,
+  ItemClick,
+  ItemMouseMove,
+  ToggleButtonClick,
+
+  MenuKeyDownEnter,
+  MenuKeyDownSpace,
+} = useSelect.stateChangeTypes;
 
 function MultiSelect({
   className: containerClassName,
@@ -112,18 +124,13 @@ function MultiSelect({
     getItemProps,
     selectedItem: selectedItems,
   } = useSelect({
-    // ...downshiftProps,
-    // highlightedIndex,
-    // isOpen,
-    // itemToString,
-    // onChange: onItemChange,
-    // onStateChange,
+    ...downshiftProps,
+    highlightedIndex,
+    isOpen,
+    itemToString,
+    onStateChange,
     // onOuterClick: () => {},
-    onIsOpenChange(changes) {
-      console.log(changes.type);
-      // setIsOpen(changes.isOpen);
-    },
-    // selectedItem: controlledSelectedItems,
+    selectedItem: controlledSelectedItems,
     items,
   });
 
@@ -138,6 +145,32 @@ function MultiSelect({
     sortOptions.selectedItems = [];
   } else if (selectionFeedback === 'top-after-reopen') {
     sortOptions.selectionItems = topItems;
+  }
+
+  function onStateChange(changes) {
+    // if (changes.isOpen && !this.state.isOpen) {
+    // this.setState({ topItems: downshift.selectedItem });
+    // }
+
+    const { type } = changes;
+    switch (type) {
+      case ItemClick:
+      case MenuKeyDownSpace:
+      case MenuKeyDownEnter:
+        onItemChange(changes.selectedItem);
+        break;
+      case MenuKeyDownArrowDown:
+      case MenuKeyDownArrowUp:
+        // case ItemMouseMove:
+        setHighlightedIndex(changes.highlightedIndex);
+        break;
+      case MenuKeyDownEscape:
+        setIsOpen(false);
+        break;
+      case ToggleButtonClick:
+        setIsOpen(changes.isOpen || false);
+        break;
+    }
   }
 
   return (
@@ -179,8 +212,34 @@ function MultiSelect({
         <ListBox.Menu aria-multiselectable="true" {...getMenuProps()}>
           {isOpen &&
             sortItems(items, sortOptions).map((item, index) => {
-              const itemProps = getItemProps({ item, index });
-              return null;
+              const itemProps = getItemProps({
+                item,
+              });
+              const itemText = itemToString(item);
+              const isChecked =
+                selectedItems.filter(selected => isEqual(selected, item))
+                  .length > 0;
+              return (
+                <ListBox.MenuItem
+                  key={itemProps.id}
+                  isActive={isChecked}
+                  role="option"
+                  aria-selected={isChecked}
+                  tabIndex={-1}
+                  isHighlighted={highlightedIndex === index}
+                  title={itemText}
+                  {...itemProps}>
+                  <div className={`${prefix}--checkbox-wrapper`}>
+                    <span
+                      title={useTitleInItem ? itemText : null}
+                      className={`${prefix}--checkbox-label`}
+                      data-contained-checkbox-state={isChecked}
+                      id={`${itemProps.id}__checkbox`}>
+                      {itemText}
+                    </span>
+                  </div>
+                </ListBox.MenuItem>
+              );
             })}
         </ListBox.Menu>
       </ListBox>

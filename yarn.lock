@@ -8711,10 +8711,10 @@ downshift@^1.31.14:
   resolved "https://registry.yarnpkg.com/downshift/-/downshift-1.31.16.tgz#acd81631539502d4112d01bd573654419fd9f640"
   integrity sha512-RskXmiGSoz0EHAyBrmTBGSLHg6+NYDGuLu2W3GpmuOe6hmZEWhCiQrq5g6DWzhnUaJD41xHbbfC6j1Fe86YqgA==
 
-downshift@^5.0.0:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/downshift/-/downshift-5.0.3.tgz#4912e1deeda89c6f78b2af765f6700722f00918d"
-  integrity sha512-J6cfEcv0qbCUuI4yUhdoj08aJ025MxjLe+GkQ53eY5iC1NrjMj+FgjGkA0dGsyHm5JzVuKTJFd5wQNWOvsLP0g==
+downshift@^5.0.5:
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/downshift/-/downshift-5.0.5.tgz#1cc90dc09ae62998ce28a4ce457e0f1cdd0bfcfa"
+  integrity sha512-V1idov3Rkvz1YWA1K67aIx51EgokIDvep4x6KmU7HhsayI8DvTEZBeH4O92zeFVGximKujRO7ChBzBAf4PKWFA==
   dependencies:
     "@babel/runtime" "^7.4.5"
     compute-scroll-into-view "^1.0.9"
