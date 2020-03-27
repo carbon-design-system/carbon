@@ -74,10 +74,13 @@ function ExampleDropContainerApp(props) {
         status: 'uploading',
         iconDescription: 'Uploading',
       }));
-      props.multiple
-        ? setFiles([...files, ...newFiles])
-        : setFiles([newFiles[0]]);
-      newFiles.forEach(uploadFile);
+      if (props.multiple) {
+        setFiles([...files, ...newFiles]);
+        newFiles.forEach(uploadFile);
+      } else {
+        setFiles([newFiles[0]]);
+        uploadFile(newFiles[0]);
+      }
     },
     [files, props.multiple]
   );
