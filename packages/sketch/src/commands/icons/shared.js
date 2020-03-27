@@ -194,7 +194,7 @@ function createSVGArtboards(
         shape.style.borders = [];
 
         for (const layer of transparent) {
-          layer.style.opacity = 0;
+          layer.remove();
         }
 
         for (const innerPath of innerPaths) {
@@ -204,7 +204,7 @@ function createSVGArtboards(
           innerPath.sharedStyleId = sharedStyle.id;
         }
 
-        artboard.layers.push(...transparent, shape, ...innerPaths, ...cutouts);
+        artboard.layers.push(shape, ...innerPaths, ...cutouts);
         group.remove();
 
         X_OFFSET += size + ARTBOARD_MARGIN;
