@@ -38,8 +38,8 @@ const Tag = ({
   onClose,
   ...other
 }) => {
-  const tagClass = `${prefix}--tag--${type}`;
-  const tagClasses = classNames(`${prefix}--tag`, tagClass, className, {
+  const tagId = id || `tag-${getInstanceId()}`;
+  const tagClasses = classNames(`${prefix}--tag`, className, {
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
     [`${prefix}--tag--${type}`]: type,
