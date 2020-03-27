@@ -58,7 +58,7 @@ async function build() {
           themes,
           tokens,
           defaultTheme,
-          defaultThemeMapName,
+          defaultThemeMapName
         );
       },
     },
