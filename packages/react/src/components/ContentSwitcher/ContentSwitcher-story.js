@@ -8,12 +8,22 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
+import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import ContentSwitcher from '../ContentSwitcher';
 import Switch from '../Switch';
 
+const selectionModes = {
+  'Change selection automatically upon focus (automatic)': 'automatic',
+  'Change selection on explicit gesture (manual)': 'manual',
+};
+
 const props = {
   contentSwitcher: () => ({
+    selectionMode: select(
+      'Selection mode (selectionMode)',
+      selectionModes,
+      'automatic'
+    ),
     onChange: action('onChange'),
   }),
   switch: () => ({
