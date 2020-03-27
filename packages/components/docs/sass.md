@@ -6770,6 +6770,7 @@ $field-02: if(
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -7783,6 +7784,8 @@ $decorative-01: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
 
 ### ✅skeleton-01 [variable]
 
@@ -14015,7 +14018,8 @@ Code snippet styles
 
   // closed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
-    overflow: hidden;
+    overflow-x: scroll;
+    padding-right: $carbon--spacing-08;
     padding-bottom: rem(24px);
   }
 
@@ -18175,8 +18179,16 @@ List box styles
     background-color: $field-02;
   }
 
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu {
+    background: $field-02;
+  }
+
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $decorative-01;
+  }
+
   .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
-    border-bottom-width: 0;
+    border-bottom-color: $decorative-01;
   }
 
   // Disabled state for `list-box`
@@ -18620,6 +18632,13 @@ List box styles
     color: $text-01;
   }
 
+  // Hide top border if previous list item is selected
+  .#{$prefix}--list-box__menu-item--active
+    + .#{$prefix}--list-box__menu-item
+    > .#{$prefix}--list-box__menu-item__option {
+    border-top-color: transparent;
+  }
+
   .#{$prefix}--list-box__menu-item__selected-icon {
     display: none;
     position: absolute;
@@ -18675,6 +18694,7 @@ List box styles
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [decorative-01 [variable]](#decorative-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
@@ -20220,7 +20240,7 @@ Overflow menu styles
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open,
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open
     .#{$prefix}--overflow-menu__trigger {
-    background-color: $ui-02;
+    background-color: $field-02;
   }
 
   .#{$prefix}--overflow-menu__icon {
@@ -20322,6 +20342,10 @@ Overflow menu styles
     border-top: 1px solid $ui-03;
   }
 
+  .#{$prefix}--overflow-menu--light .#{$prefix}--overflow-menu--divider {
+    border-top: 1px solid $decorative-01;
+  }
+
   a.#{$prefix}--overflow-menu-options__btn::before {
     content: '';
     height: 100%;
@@ -20383,6 +20407,11 @@ Overflow menu styles
     border-top: 1px solid $ui-03;
   }
 
+  .#{$prefix}--overflow-menu--light
+    .#{$prefix}--overflow-menu-options__option--danger {
+    border-top: 1px solid $decorative-01;
+  }
+
   .#{$prefix}--overflow-menu-options__option--danger
     .#{$prefix}--overflow-menu-options__btn:hover,
   .#{$prefix}--overflow-menu-options__option--danger
@@ -20436,9 +20465,11 @@ Overflow menu styles
   - [prefix [variable]](#prefix-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [ui-01 [variable]](#ui-01-variable)
-  - [ui-02 [variable]](#ui-02-variable)
+  - [field-02 [variable]](#field-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
+  - [ui-02 [variable]](#ui-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
+  - [decorative-01 [variable]](#decorative-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-02 [variable]](#text-02-variable)
   - [text-01 [variable]](#text-01-variable)
