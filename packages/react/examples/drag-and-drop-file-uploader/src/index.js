@@ -26,7 +26,7 @@ function ExampleDropContainerApp(props) {
   const [files, setFiles] = useState([]);
   const uploadFile = async fileToUpload => {
     // file size validation
-    if (fileToUpload.size > 512000) {
+    if (fileToUpload.filesize > 512000) {
       const updatedFile = {
         ...fileToUpload,
         status: 'edit',
