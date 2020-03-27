@@ -137,7 +137,6 @@
   - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
   - [✅carbon--theme--v9 [variable]](#carbon--theme--v9-variable)
   - [✅carbon--theme [variable]](#carbon--theme-variable)
-  - [✅theme-identifier [variable]](#theme-identifier-variable)
   - [✅interactive-01 [variable]](#interactive-01-variable)
   - [✅interactive-02 [variable]](#interactive-02-variable)
   - [✅interactive-03 [variable]](#interactive-03-variable)
@@ -4124,7 +4123,6 @@ Define theme variables from a map of tokens
 
 ```scss
 @mixin carbon--theme($theme: $carbon--theme, $emit-custom-properties: false) {
-  $theme-identifier: map-get($theme, 'theme-identifier') !global;
   $interactive-01: map-get($theme, 'interactive-01') !global;
   $interactive-02: map-get($theme, 'interactive-02') !global;
   $interactive-03: map-get($theme, 'interactive-03') !global;
@@ -4254,7 +4252,6 @@ Define theme variables from a map of tokens
   @if global-variable-exists('feature-flags') and
     map-get($feature-flags, 'enable-css-custom-properties')
   {
-    $theme-identifier: map-get($theme, 'theme-identifier') !global;
     $interactive-01: var(
       --#{$custom-property-prefix}-interactive-01,
       map-get($theme, 'interactive-01')
@@ -4633,19 +4630,6 @@ Define theme variables from a map of tokens
     ) !global;
   }
   @if $emit-custom-properties == true {
-    @if should-emit(
-      $theme,
-      $carbon--theme,
-      'theme-identifier',
-      $emit-difference
-    )
-    {
-      @include custom-property(
-        'theme-identifier',
-        map-get($theme, 'theme-identifier')
-      );
-    }
-
     @if should-emit($theme, $carbon--theme, 'interactive-01', $emit-difference)
     {
       @include custom-property(
@@ -5439,10 +5423,6 @@ Define theme variables from a map of tokens
     @if should-emit($theme, $carbon--theme, 'icon-size-02', $emit-difference) {
       @include custom-property('icon-size-02', map-get($theme, 'icon-size-02'));
     }
-
-    @if variable-exists('tag-colors') {
-      @include emit-component-tokens($tag-colors, $theme-identifier);
-    }
   }
 
   @content;
@@ -5491,9 +5471,7 @@ Define theme variables from a map of tokens
   maps set theming variables.
 - **Requires**:
   - [custom-property [mixin]](#custom-property-mixin)
-  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [should-emit [function]](#should-emit-function)
-  - [theme-identifier [variable]](#theme-identifier-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [interactive-02 [variable]](#interactive-02-variable)
   - [interactive-03 [variable]](#interactive-03-variable)
@@ -5631,9 +5609,14 @@ Define theme variables from a map of tokens
 @mixin emit-component-tokens($tokens, $theme) {
   @if type-of($tokens) == 'map' {
     @each $key, $options in $tokens {
-      @if map-has-key($options, $theme) {
-        $option: map-get($options, $theme);
-        --#{$custom-property-prefix}-#{$key}: #{$option};
+      @each $option in $options {
+        $theme: map-get($option, 'theme');
+
+        @if ($theme == $carbon--theme) {
+          $value: map-get($option, 'value');
+
+          --#{$custom-property-prefix}-#{$key}: #{$value};
+        }
       }
     }
   } @else {
@@ -5657,7 +5640,7 @@ Define theme variables from a map of tokens
 <summary>Example code</summary>
 
 ```scss
-@include emit-component-tokens($component-tokens, $theme-white);
+@include emit-component-tokens($component-tokens);
 ```
 
 </details>
@@ -5665,9 +5648,8 @@ Define theme variables from a map of tokens
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Requires**:
   - [tokens [variable]](#tokens-variable)
+  - [carbon--theme [variable]](#carbon--theme-variable)
   - [custom-property-prefix [variable]](#custom-property-prefix-variable)
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--theme--g10 [variable]
 
@@ -5680,7 +5662,6 @@ Carbon's g10 color theme
 $carbon--theme--g10: map-merge(
   $carbon--theme--white,
   (
-    theme-identifier: unquote('g10'),
     ui-background: #f4f4f4,
     ui-01: #ffffff,
     ui-02: #f4f4f4,
@@ -5707,7 +5688,6 @@ Carbon's g90 color theme
 $carbon--theme--g90: map-merge(
   $carbon--theme--white,
   (
-    theme-identifier: unquote('g90'),
     interactive-02: #6f6f6f,
     interactive-03: #ffffff,
     interactive-04: #4589ff,
@@ -5780,7 +5760,6 @@ Carbon's g100 color theme
 $carbon--theme--g100: map-merge(
   $carbon--theme--white,
   (
-    theme-identifier: unquote('g100'),
     interactive-02: #6f6f6f,
     interactive-03: #ffffff,
     interactive-04: #4589ff,
@@ -5853,7 +5832,6 @@ Carbon's v9 color theme
 $carbon--theme--v9: map-merge(
   $carbon--theme--white,
   (
-    theme-identifier: unquote('v9'),
     interactive-01: #3d70b2,
     interactive-02: #4d5358,
     interactive-03: #3d70b2,
@@ -5931,7 +5909,6 @@ Carbon's default theme
 
 ```scss
 $carbon--theme: (
-  theme-identifier: if(global-variable-exists('theme-identifier'), $theme-identifier, map-get($carbon--theme--white, 'theme-identifier')),
   interactive-01: if(global-variable-exists('interactive-01'), $interactive-01, map-get($carbon--theme--white, 'interactive-01')),
   interactive-02: if(global-variable-exists('interactive-02'), $interactive-02, map-get($carbon--theme--white, 'interactive-02')),
   interactive-03: if(global-variable-exists('interactive-03'), $interactive-03, map-get($carbon--theme--white, 'interactive-03')),
@@ -6066,30 +6043,7 @@ $carbon--theme: (
 - **Type**: `Map`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-
-### ✅theme-identifier [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$theme-identifier: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'theme-identifier'
-    ),
-  map-get($carbon--theme, 'theme-identifier'),
-  unquote('white')
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `{undefined}`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [tags [mixin]](#tags-mixin)
+  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
 
 ### ✅interactive-01 [variable]
 
@@ -22431,89 +22385,81 @@ Tag styles
 
   .#{$prefix}--tag--red {
     @include tag-theme(
-      get-token-value($tag-colors, $theme-identifier, 'tag-background-red'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-color-red'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-hover-red')
+      get-token-value($tag-colors, 'tag-background-red'),
+      get-token-value($tag-colors, 'tag-color-red'),
+      get-token-value($tag-colors, 'tag-hover-red')
     );
   }
 
   .#{$prefix}--tag--magenta {
     @include tag-theme(
-      get-token-value($tag-colors, $theme-identifier, 'tag-background-magenta'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-color-magenta'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-hover-magenta')
+      get-token-value($tag-colors, 'tag-background-magenta'),
+      get-token-value($tag-colors, 'tag-color-magenta'),
+      get-token-value($tag-colors, 'tag-hover-magenta')
     );
   }
 
   .#{$prefix}--tag--purple {
     @include tag-theme(
-      get-token-value($tag-colors, $theme-identifier, 'tag-background-purple'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-color-purple'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-hover-purple')
+      get-token-value($tag-colors, 'tag-background-purple'),
+      get-token-value($tag-colors, 'tag-color-purple'),
+      get-token-value($tag-colors, 'tag-hover-purple')
     );
   }
 
   .#{$prefix}--tag--blue {
     @include tag-theme(
-      get-token-value($tag-colors, $theme-identifier, 'tag-background-blue'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-color-blue'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-hover-blue')
+      get-token-value($tag-colors, 'tag-background-blue'),
+      get-token-value($tag-colors, 'tag-color-blue'),
+      get-token-value($tag-colors, 'tag-hover-blue')
     );
   }
 
   .#{$prefix}--tag--cyan {
     @include tag-theme(
-      get-token-value($tag-colors, $theme-identifier, 'tag-background-cyan'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-color-cyan'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-hover-cyan')
+      get-token-value($tag-colors, 'tag-background-cyan'),
+      get-token-value($tag-colors, 'tag-color-cyan'),
+      get-token-value($tag-colors, 'tag-hover-cyan')
     );
   }
 
   .#{$prefix}--tag--teal {
     @include tag-theme(
-      get-token-value($tag-colors, $theme-identifier, 'tag-background-teal'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-color-teal'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-hover-teal')
+      get-token-value($tag-colors, 'tag-background-teal'),
+      get-token-value($tag-colors, 'tag-color-teal'),
+      get-token-value($tag-colors, 'tag-hover-teal')
     );
   }
 
   .#{$prefix}--tag--green {
     @include tag-theme(
-      get-token-value($tag-colors, $theme-identifier, 'tag-background-green'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-color-green'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-hover-green')
+      get-token-value($tag-colors, 'tag-background-green'),
+      get-token-value($tag-colors, 'tag-color-green'),
+      get-token-value($tag-colors, 'tag-hover-green')
     );
   }
 
   .#{$prefix}--tag--gray {
     @include tag-theme(
-      get-token-value($tag-colors, $theme-identifier, 'tag-background-gray'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-color-gray'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-hover-gray')
+      get-token-value($tag-colors, 'tag-background-gray'),
+      get-token-value($tag-colors, 'tag-color-gray'),
+      get-token-value($tag-colors, 'tag-hover-gray')
     );
   }
 
   .#{$prefix}--tag--cool-gray {
     @include tag-theme(
-      get-token-value(
-        $tag-colors,
-        $theme-identifier,
-        'tag-background-cool-gray'
-      ),
-      get-token-value($tag-colors, $theme-identifier, 'tag-color-cool-gray'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-hover-cool-gray')
+      get-token-value($tag-colors, 'tag-background-cool-gray'),
+      get-token-value($tag-colors, 'tag-color-cool-gray'),
+      get-token-value($tag-colors, 'tag-hover-cool-gray')
     );
   }
 
   .#{$prefix}--tag--warm-gray {
     @include tag-theme(
-      get-token-value(
-        $tag-colors,
-        $theme-identifier,
-        'tag-background-warm-gray'
-      ),
-      get-token-value($tag-colors, $theme-identifier, 'tag-color-warm-gray'),
-      get-token-value($tag-colors, $theme-identifier, 'tag-hover-warm-gray')
+      get-token-value($tag-colors, 'tag-background-warm-gray'),
+      get-token-value($tag-colors, 'tag-color-warm-gray'),
+      get-token-value($tag-colors, 'tag-hover-warm-gray')
     );
   }
 
@@ -22591,7 +22537,6 @@ Tag styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [theme-identifier [variable]](#theme-identifier-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [focus [variable]](#focus-variable)

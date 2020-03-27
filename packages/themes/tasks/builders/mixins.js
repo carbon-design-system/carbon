@@ -16,7 +16,6 @@ function buildMixinsFile(
   tokens,
   defaultTheme,
   defaultThemeMapName,
-  componentTokens
 ) {
   const comment = t.Comment(`/ Define theme variables from a map of tokens
 / @access public
@@ -101,32 +100,21 @@ function buildMixinsFile(
                   const name = formatTokenName(token);
                   return t.Assignment({
                     id: t.Identifier(name),
-                    init:
-                      // token "themeIdentifier" should not be transformed
-                      // into var(--cds-theme-identifier)
-                      token === 'themeIdentifier'
-                        ? t.CallExpression({
-                            callee: t.Identifier('map-get'),
-                            arguments: [
-                              t.Identifier('theme'),
-                              t.SassString(name),
-                            ],
-                          })
-                        : t.CallExpression({
-                            callee: t.Identifier('var'),
-                            arguments: [
-                              t.SassValue({
-                                value: `--#{$custom-property-prefix}-${name}`,
-                              }),
-                              t.CallExpression({
-                                callee: t.Identifier('map-get'),
-                                arguments: [
-                                  t.Identifier('theme'),
-                                  t.SassString(name),
-                                ],
-                              }),
-                            ],
-                          }),
+                    init: t.CallExpression({
+                      callee: t.Identifier('var'),
+                      arguments: [
+                        t.SassValue({
+                          value: `--#{$custom-property-prefix}-${name}`,
+                        }),
+                        t.CallExpression({
+                          callee: t.Identifier('map-get'),
+                          arguments: [
+                            t.Identifier('theme'),
+                            t.SassString(name),
+                          ],
+                        }),
+                      ],
+                    }),
                     global: true,
                   });
                 });
@@ -166,22 +154,6 @@ function buildMixinsFile(
                   ];
                 });
               }),
-              ...componentTokens.flatMap(component => [
-                t.Newline(),
-                t.IfStatement({
-                  test: t.SassFunctionCall(t.Identifier('variable-exists'), [
-                    t.SassString(component),
-                  ]),
-                  consequent: t.BlockStatement({
-                    body: [
-                      t.SassMixinCall(t.Identifier('emit-component-tokens'), [
-                        t.Identifier(component),
-                        t.Identifier('theme-identifier'),
-                      ]),
-                    ],
-                  }),
-                }),
-              ]),
             ],
           }),
         }),

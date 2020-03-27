@@ -23,7 +23,6 @@ const buildMixinsFile = require('./builders/mixins');
 
 const defaultTheme = 'white';
 const defaultThemeMapName = 'carbon--theme';
-const componentTokens = ['tag-colors'];
 
 async function build() {
   reporter.info('Building scss files for themes...');
@@ -60,7 +59,6 @@ async function build() {
           tokens,
           defaultTheme,
           defaultThemeMapName,
-          componentTokens
         );
       },
     },
