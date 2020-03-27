@@ -16,7 +16,6 @@ import { tokens, formatTokenName, unstable__meta } from './tokens';
 
 export { g10, g90, g100, white, v9 };
 export { tokens, formatTokenName, unstable__meta };
-
 export const themes = {
   white,
   g10,

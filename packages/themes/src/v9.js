@@ -7,7 +7,6 @@
 
 import { white, red60 } from '@carbon/colors';
 
-// Colors
 export const interactive01 = '#3d70b2';
 export const interactive02 = '#4d5358';
 export const interactive03 = '#3d70b2';

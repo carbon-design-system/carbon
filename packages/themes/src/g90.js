@@ -43,7 +43,6 @@ import {
   rgba,
 } from '@carbon/colors';
 
-// Colors
 export const interactive01 = blue60;
 export const interactive02 = gray60;
 export const interactive03 = white;

@@ -122,35 +122,33 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
             operator: '==',
             right: t.SassBoolean(true),
           }),
-          consequent: t.BlockStatement({
-            body: [
-              ...Object.keys(tokens).flatMap(group => {
-                return tokens[group].flatMap(token => {
-                  const name = formatTokenName(token);
-                  return [
-                    t.Newline(),
-                    t.IfStatement({
-                      test: t.SassFunctionCall(t.Identifier('should-emit'), [
-                        t.Identifier('theme'),
-                        t.Identifier('carbon--theme'),
+          consequent: t.BlockStatement(
+            Object.keys(tokens).flatMap(group => {
+              return tokens[group].flatMap(token => {
+                const name = formatTokenName(token);
+                return [
+                  t.Newline(),
+                  t.IfStatement({
+                    test: t.SassFunctionCall(t.Identifier('should-emit'), [
+                      t.Identifier('theme'),
+                      t.Identifier('carbon--theme'),
+                      t.SassString(name),
+                      t.Identifier('emit-difference'),
+                    ]),
+                    consequent: t.BlockStatement([
+                      t.SassMixinCall(t.Identifier('custom-property'), [
                         t.SassString(name),
-                        t.Identifier('emit-difference'),
-                      ]),
-                      consequent: t.BlockStatement([
-                        t.SassMixinCall(t.Identifier('custom-property'), [
+                        t.SassFunctionCall(t.Identifier('map-get'), [
+                          t.Identifier('theme'),
                           t.SassString(name),
-                          t.SassFunctionCall(t.Identifier('map-get'), [
-                            t.Identifier('theme'),
-                            t.SassString(name),
-                          ]),
                         ]),
                       ]),
-                    }),
-                  ];
-                });
-              }),
-            ],
-          }),
+                    ]),
+                  }),
+                ];
+              });
+            })
+          ),
         }),
         t.AtContent(),
         t.Comment(' Reset to default theme after apply in content'),
