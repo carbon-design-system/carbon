@@ -107,6 +107,7 @@ useful for finding the path information in order to import an icon.
 
 If you're looking for `@carbon/icons` API documentation, check out:
 
+- [Contributing](./docs/contributing.md)
 - [Sass](./docs/sass.md)
 
 ## 🙌 Contributing
