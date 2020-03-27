@@ -228,8 +228,8 @@ describe('Slider', () => {
         },
       };
       wrapper.instance().onChange(evt);
-      expect(wrapper.state().value).toEqual(100);
-      expect(handleChange).lastCalledWith({ value: 100 });
+      expect(wrapper.state().value).toEqual(999);
+      expect(handleChange).lastCalledWith({ value: 999 });
     });
   });
 
