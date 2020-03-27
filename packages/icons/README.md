@@ -90,6 +90,8 @@ svg [data-icon-path='inner-path'] {
 }
 ```
 
+<!-- alex ignore color -->
+
 In the code snippet above, we are targetting the inner path attribute with
 `[data-icon-path="inner-path"]`. The value of `fill` will be the custom color
 you would like to set for the inner path. We also need to set `opacity` to `1`
@@ -105,6 +107,7 @@ useful for finding the path information in order to import an icon.
 
 If you're looking for `@carbon/icons` API documentation, check out:
 
+- [Contributing](./docs/contributing.md)
 - [Sass](./docs/sass.md)
 
 ## 🙌 Contributing
