@@ -6,4 +6,4 @@
  */
 
 export { generate } from './generate';
-export { sync } from './sync';
+export { syncSmallIcons, syncLargeIcons } from './sync';
