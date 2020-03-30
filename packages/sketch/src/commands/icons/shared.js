@@ -24,7 +24,7 @@ export function syncIconSymbols(
 ) {
   const sharedStyles = syncColorStyles(document);
   const [sharedStyle] = sharedStyles.filter(
-    ({ name }) => name === 'color/black'
+    ({ name }) => name === 'color / black'
   );
 
   if (!sharedStyle) {
