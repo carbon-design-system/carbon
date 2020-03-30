@@ -183,6 +183,7 @@
   - [✅hover-ui [variable]](#hover-ui-variable)
   - [✅active-ui [variable]](#active-ui-variable)
   - [✅selected-ui [variable]](#selected-ui-variable)
+  - [✅selected-light-ui [variable]](#selected-light-ui-variable)
   - [✅hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [✅inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [✅hover-danger [variable]](#hover-danger-variable)
@@ -4169,6 +4170,7 @@ Define theme variables from a map of tokens
   $hover-ui: map-get($theme, 'hover-ui') !global;
   $active-ui: map-get($theme, 'active-ui') !global;
   $selected-ui: map-get($theme, 'selected-ui') !global;
+  $selected-light-ui: map-get($theme, 'selected-light-ui') !global;
   $hover-selected-ui: map-get($theme, 'hover-selected-ui') !global;
   $inverse-hover-ui: map-get($theme, 'inverse-hover-ui') !global;
   $hover-danger: map-get($theme, 'hover-danger') !global;
@@ -4439,6 +4441,10 @@ Define theme variables from a map of tokens
     $selected-ui: var(
       --#{$custom-property-prefix}-selected-ui,
       map-get($theme, 'selected-ui')
+    ) !global;
+    $selected-light-ui: var(
+      --#{$custom-property-prefix}-selected-light-ui,
+      map-get($theme, 'selected-light-ui')
     ) !global;
     $hover-selected-ui: var(
       --#{$custom-property-prefix}-hover-selected-ui,
@@ -4921,6 +4927,19 @@ Define theme variables from a map of tokens
 
     @if should-emit($theme, $carbon--theme, 'selected-ui', $emit-difference) {
       @include custom-property('selected-ui', map-get($theme, 'selected-ui'));
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'selected-light-ui',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'selected-light-ui',
+        map-get($theme, 'selected-light-ui')
+      );
     }
 
     @if should-emit(
@@ -5530,6 +5549,7 @@ Define theme variables from a map of tokens
   - [hover-ui [variable]](#hover-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
+  - [selected-light-ui [variable]](#selected-light-ui-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [hover-danger [variable]](#hover-danger-variable)
@@ -5687,6 +5707,7 @@ $carbon--theme--g90: map-merge(
     hover-ui: #4c4c4c,
     active-ui: #6f6f6f,
     selected-ui: #525252,
+    selected-light-ui: #6f6f6f,
     inverse-hover-ui: #e5e5e5,
     hover-selected-ui: #656565,
     hover-row: #4c4c4c,
@@ -5761,6 +5782,7 @@ $carbon--theme--g100: map-merge(
     hover-ui: #353535,
     active-ui: #525252,
     selected-ui: #393939,
+    selected-light-ui: #525252,
     inverse-hover-ui: #e5e5e5,
     hover-selected-ui: #4c4c4c,
     hover-row: #353535,
@@ -5838,6 +5860,7 @@ $carbon--theme--v9: map-merge(
     hover-ui: #eef4fc,
     active-ui: #dfeafa,
     selected-ui: #eef4fc,
+    selected-light-ui: #eef4fc,
     hover-selected-ui: #dfeafa,
     hover-danger: #c70014,
     active-danger: #ad1625,
@@ -5920,6 +5943,7 @@ $carbon--theme: (
   hover-ui: if(global-variable-exists('hover-ui'), $hover-ui, map-get($carbon--theme--white, 'hover-ui')),
   active-ui: if(global-variable-exists('active-ui'), $active-ui, map-get($carbon--theme--white, 'active-ui')),
   selected-ui: if(global-variable-exists('selected-ui'), $selected-ui, map-get($carbon--theme--white, 'selected-ui')),
+  selected-light-ui: if(global-variable-exists('selected-light-ui'), $selected-light-ui, map-get($carbon--theme--white, 'selected-light-ui')),
   hover-selected-ui: if(global-variable-exists('hover-selected-ui'), $hover-selected-ui, map-get($carbon--theme--white, 'hover-selected-ui')),
   inverse-hover-ui: if(global-variable-exists('inverse-hover-ui'), $inverse-hover-ui, map-get($carbon--theme--white, 'inverse-hover-ui')),
   hover-danger: if(global-variable-exists('hover-danger'), $hover-danger, map-get($carbon--theme--white, 'hover-danger')),
@@ -7474,6 +7498,29 @@ $selected-ui: if(
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [search [mixin]](#search-mixin)
+
+### ✅selected-light-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$selected-light-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'selected-light-ui'
+    ),
+  map-get($carbon--theme, 'selected-light-ui'),
+  #e0e0e0
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅hover-selected-ui [variable]
 
