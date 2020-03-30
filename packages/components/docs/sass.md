@@ -183,6 +183,7 @@
   - [✅hover-ui [variable]](#hover-ui-variable)
   - [✅active-ui [variable]](#active-ui-variable)
   - [✅selected-ui [variable]](#selected-ui-variable)
+  - [✅selected-light-ui [variable]](#selected-light-ui-variable)
   - [✅hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [✅inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [✅hover-danger [variable]](#hover-danger-variable)
@@ -4169,6 +4170,7 @@ Define theme variables from a map of tokens
   $hover-ui: map-get($theme, 'hover-ui') !global;
   $active-ui: map-get($theme, 'active-ui') !global;
   $selected-ui: map-get($theme, 'selected-ui') !global;
+  $selected-light-ui: map-get($theme, 'selected-light-ui') !global;
   $hover-selected-ui: map-get($theme, 'hover-selected-ui') !global;
   $inverse-hover-ui: map-get($theme, 'inverse-hover-ui') !global;
   $hover-danger: map-get($theme, 'hover-danger') !global;
@@ -4439,6 +4441,10 @@ Define theme variables from a map of tokens
     $selected-ui: var(
       --#{$custom-property-prefix}-selected-ui,
       map-get($theme, 'selected-ui')
+    ) !global;
+    $selected-light-ui: var(
+      --#{$custom-property-prefix}-selected-light-ui,
+      map-get($theme, 'selected-light-ui')
     ) !global;
     $hover-selected-ui: var(
       --#{$custom-property-prefix}-hover-selected-ui,
@@ -4921,6 +4927,19 @@ Define theme variables from a map of tokens
 
     @if should-emit($theme, $carbon--theme, 'selected-ui', $emit-difference) {
       @include custom-property('selected-ui', map-get($theme, 'selected-ui'));
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
+      'selected-light-ui',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'selected-light-ui',
+        map-get($theme, 'selected-light-ui')
+      );
     }
 
     @if should-emit(
@@ -5530,6 +5549,7 @@ Define theme variables from a map of tokens
   - [hover-ui [variable]](#hover-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
+  - [selected-light-ui [variable]](#selected-light-ui-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [hover-danger [variable]](#hover-danger-variable)
@@ -5687,6 +5707,7 @@ $carbon--theme--g90: map-merge(
     hover-ui: #4c4c4c,
     active-ui: #6f6f6f,
     selected-ui: #525252,
+    selected-light-ui: #6f6f6f,
     inverse-hover-ui: #e5e5e5,
     hover-selected-ui: #656565,
     hover-row: #4c4c4c,
@@ -5761,6 +5782,7 @@ $carbon--theme--g100: map-merge(
     hover-ui: #353535,
     active-ui: #525252,
     selected-ui: #393939,
+    selected-light-ui: #525252,
     inverse-hover-ui: #e5e5e5,
     hover-selected-ui: #4c4c4c,
     hover-row: #353535,
@@ -5838,6 +5860,7 @@ $carbon--theme--v9: map-merge(
     hover-ui: #eef4fc,
     active-ui: #dfeafa,
     selected-ui: #eef4fc,
+    selected-light-ui: #eef4fc,
     hover-selected-ui: #dfeafa,
     hover-danger: #c70014,
     active-danger: #ad1625,
@@ -5920,6 +5943,7 @@ $carbon--theme: (
   hover-ui: if(global-variable-exists('hover-ui'), $hover-ui, map-get($carbon--theme--white, 'hover-ui')),
   active-ui: if(global-variable-exists('active-ui'), $active-ui, map-get($carbon--theme--white, 'active-ui')),
   selected-ui: if(global-variable-exists('selected-ui'), $selected-ui, map-get($carbon--theme--white, 'selected-ui')),
+  selected-light-ui: if(global-variable-exists('selected-light-ui'), $selected-light-ui, map-get($carbon--theme--white, 'selected-light-ui')),
   hover-selected-ui: if(global-variable-exists('hover-selected-ui'), $hover-selected-ui, map-get($carbon--theme--white, 'hover-selected-ui')),
   inverse-hover-ui: if(global-variable-exists('inverse-hover-ui'), $inverse-hover-ui, map-get($carbon--theme--white, 'inverse-hover-ui')),
   hover-danger: if(global-variable-exists('hover-danger'), $hover-danger, map-get($carbon--theme--white, 'hover-danger')),
@@ -6770,6 +6794,7 @@ $field-02: if(
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -7474,6 +7499,29 @@ $selected-ui: if(
   - [listbox [mixin]](#listbox-mixin)
   - [search [mixin]](#search-mixin)
 
+### ✅selected-light-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$selected-light-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'selected-light-ui'
+    ),
+  map-get($carbon--theme, 'selected-light-ui'),
+  #e0e0e0
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
 ### ✅hover-selected-ui [variable]
 
 Data table selected row hover
@@ -7783,6 +7831,8 @@ $decorative-01: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
 
 ### ✅skeleton-01 [variable]
 
@@ -14015,7 +14065,8 @@ Code snippet styles
 
   // closed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
-    overflow: hidden;
+    overflow-x: scroll;
+    padding-right: $carbon--spacing-08;
     padding-bottom: rem(24px);
   }
 
@@ -18175,8 +18226,16 @@ List box styles
     background-color: $field-02;
   }
 
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu {
+    background: $field-02;
+  }
+
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $decorative-01;
+  }
+
   .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
-    border-bottom-width: 0;
+    border-bottom-color: $decorative-01;
   }
 
   // Disabled state for `list-box`
@@ -18620,6 +18679,13 @@ List box styles
     color: $text-01;
   }
 
+  // Hide top border if previous list item is selected
+  .#{$prefix}--list-box__menu-item--active
+    + .#{$prefix}--list-box__menu-item
+    > .#{$prefix}--list-box__menu-item__option {
+    border-top-color: transparent;
+  }
+
   .#{$prefix}--list-box__menu-item__selected-icon {
     display: none;
     position: absolute;
@@ -18675,6 +18741,7 @@ List box styles
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [decorative-01 [variable]](#decorative-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
@@ -20220,7 +20287,7 @@ Overflow menu styles
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open,
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open
     .#{$prefix}--overflow-menu__trigger {
-    background-color: $ui-02;
+    background-color: $field-02;
   }
 
   .#{$prefix}--overflow-menu__icon {
@@ -20322,6 +20389,10 @@ Overflow menu styles
     border-top: 1px solid $ui-03;
   }
 
+  .#{$prefix}--overflow-menu--light .#{$prefix}--overflow-menu--divider {
+    border-top: 1px solid $decorative-01;
+  }
+
   a.#{$prefix}--overflow-menu-options__btn::before {
     content: '';
     height: 100%;
@@ -20383,6 +20454,11 @@ Overflow menu styles
     border-top: 1px solid $ui-03;
   }
 
+  .#{$prefix}--overflow-menu--light
+    .#{$prefix}--overflow-menu-options__option--danger {
+    border-top: 1px solid $decorative-01;
+  }
+
   .#{$prefix}--overflow-menu-options__option--danger
     .#{$prefix}--overflow-menu-options__btn:hover,
   .#{$prefix}--overflow-menu-options__option--danger
@@ -20436,9 +20512,11 @@ Overflow menu styles
   - [prefix [variable]](#prefix-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [ui-01 [variable]](#ui-01-variable)
-  - [ui-02 [variable]](#ui-02-variable)
+  - [field-02 [variable]](#field-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
+  - [ui-02 [variable]](#ui-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
+  - [decorative-01 [variable]](#decorative-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-02 [variable]](#text-02-variable)
   - [text-01 [variable]](#text-01-variable)

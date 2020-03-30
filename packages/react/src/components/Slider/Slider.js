@@ -171,7 +171,7 @@ export default class Slider extends PureComponent {
    * Sets up initial slider position and value in response to component mount.
    */
   componentDidMount() {
-    const { value, left } = this.calcValue({});
+    const { value, left } = this.calcValue({ useRawValue: true });
     this.setState({ value, left });
   }
 
@@ -339,8 +339,14 @@ export default class Slider extends PureComponent {
       delta *= stepMultiplier;
     }
 
+    Math.floor(this.state.value / this.props.step) * this.props.step;
     const { value, left } = this.calcValue({
-      value: this.state.value + delta,
+      // Ensures custom value from `<input>` won't cause skipping next stepping point with right arrow key,
+      // e.g. Typing 51 in `<input>`, moving focus onto the thumb and the hitting right arrow key should yield 52 instead of 54
+      value:
+        (delta > 0
+          ? Math.floor(this.state.value / this.props.step) * this.props.step
+          : this.state.value) + delta,
     });
     this.setState({ value, left });
   };
@@ -369,10 +375,11 @@ export default class Slider extends PureComponent {
     if (isNaN(targetValue)) {
       this.setState({ value: evt.target.value });
     } else {
-      targetValue = this.clamp(targetValue, this.props.min, this.props.max);
-
       // Recalculate the state's value and update the Slider
-      const { value, left } = this.calcValue({ value: targetValue });
+      const { value, left } = this.calcValue({
+        value: targetValue,
+        useRawValue: true,
+      });
       this.setState({ value, left, needsOnRelease: true });
     }
   };
@@ -394,8 +401,9 @@ export default class Slider extends PureComponent {
    *   an event fired by one of the Slider's `DRAG_EVENT_TYPES` events.
    * @param {number} [params.value] Optional value use during calculations if
    *   clientX is not provided.
+   * @param {boolean} [params.useRawValue=false] `true` to use the given value as-is.
    */
-  calcValue = ({ clientX = null, value = null }) => {
+  calcValue = ({ clientX = null, value = null, useRawValue = false }) => {
     const range = this.props.max - this.props.min;
     const boundingRect = this.element.getBoundingClientRect();
     const totalSteps = range / this.props.step;
@@ -417,6 +425,11 @@ export default class Slider extends PureComponent {
         value = this.state.value;
       }
       leftPercent = value / (range - this.props.min);
+    }
+
+    if (useRawValue) {
+      // Adjusts only for min/max of thumb position
+      return { value, left: Math.min(1, Math.max(0, leftPercent)) * 100 };
     }
 
     let steppedValue = Math.round(leftPercent * totalSteps) * this.props.step;
