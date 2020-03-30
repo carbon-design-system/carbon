@@ -56,16 +56,6 @@ const props = () => ({
   onChange: action('onChange'),
 });
 
-const itemToElement = item => {
-  const itemAsArray = item.text.split(' ');
-  return (
-    <div>
-      <span>{itemAsArray[0]}</span>
-      <span style={{ color: 'blue' }}> {itemAsArray[1]}</span>
-    </div>
-  );
-};
-
 const ControlledComboBoxApp = props => {
   const [selectedItem, setSelectedItem] = useState(items[0]);
   let uid = items.length;
@@ -109,24 +99,6 @@ storiesOf('ComboBox', module)
         <ComboBox
           items={items}
           itemToString={item => (item ? item.text : '')}
-          {...props()}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: 'ComboBox',
-      },
-    }
-  )
-  .add(
-    'items as components',
-    () => (
-      <div style={{ width: 300 }}>
-        <ComboBox
-          items={items}
-          itemToString={item => (item ? item.text : '')}
-          itemToElement={itemToElement}
           {...props()}
         />
       </div>
