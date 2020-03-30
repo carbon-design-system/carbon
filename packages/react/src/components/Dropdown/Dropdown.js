@@ -193,7 +193,7 @@ export default class Dropdown extends React.Component {
         [`${prefix}--dropdown--disabled`]: disabled,
         [`${prefix}--dropdown--light`]: light,
         [`${prefix}--dropdown--${size}`]: size,
-        [`${prefix}--dropdown--up`]: direction === 'top',
+        [`${prefix}--list-box--up`]: direction === 'top',
       });
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
