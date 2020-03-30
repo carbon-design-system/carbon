@@ -61,15 +61,18 @@ export function syncSharedStyle(
  * @param {Document} document
  * @param {string} name
  * @param {string} value
+ * @param {string} type
  * @returns {SharedStyle}
  */
-export function syncColorStyle(document, name, value) {
-  return syncSharedStyle(document, name, {
-    fills: [
-      {
-        color: value,
-        fillType: Style.FillType.Color,
-      },
-    ],
-  });
+export function syncColorStyle(document, name, value, type) {
+  if (type === 'fill') {
+    return syncSharedStyle(document, name, {
+      fills: [
+        {
+          color: value,
+          fillType: Style.FillType.Color,
+        },
+      ],
+    });
+  }
 }
