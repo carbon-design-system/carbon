@@ -648,6 +648,7 @@ Map {
   "ContentSwitcher" => Object {
     "defaultProps": Object {
       "selectedIndex": 0,
+      "selectionMode": "automatic",
     },
     "propTypes": Object {
       "children": Object {
@@ -662,6 +663,15 @@ Map {
       },
       "selectedIndex": Object {
         "type": "number",
+      },
+      "selectionMode": Object {
+        "args": Array [
+          Array [
+            "automatic",
+            "manual",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
@@ -868,10 +878,7 @@ Map {
     },
     "TableExpandHeader": Object {
       "propTypes": Object {
-        "ariaLabel": Object {
-          "isRequired": true,
-          "type": "string",
-        },
+        "ariaLabel": [Function],
         "children": Object {
           "type": "node",
         },
@@ -881,14 +888,8 @@ Map {
         "expandIconDescription": Object {
           "type": "string",
         },
-        "isExpanded": Object {
-          "isRequired": true,
-          "type": "bool",
-        },
-        "onExpand": Object {
-          "isRequired": true,
-          "type": "func",
-        },
+        "isExpanded": [Function],
+        "onExpand": [Function],
       },
     },
     "TableExpandRow": Object {
@@ -1453,10 +1454,7 @@ Map {
   },
   "TableExpandHeader" => Object {
     "propTypes": Object {
-      "ariaLabel": Object {
-        "isRequired": true,
-        "type": "string",
-      },
+      "ariaLabel": [Function],
       "children": Object {
         "type": "node",
       },
@@ -1466,14 +1464,8 @@ Map {
       "expandIconDescription": Object {
         "type": "string",
       },
-      "isExpanded": Object {
-        "isRequired": true,
-        "type": "bool",
-      },
-      "onExpand": Object {
-        "isRequired": true,
-        "type": "func",
-      },
+      "isExpanded": [Function],
+      "onExpand": [Function],
     },
   },
   "TableExpandRow" => Object {
@@ -2324,6 +2316,16 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "default",
+            "field",
+            "small",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "Filename" => Object {
@@ -2419,6 +2421,16 @@ Map {
       "role": Object {
         "type": "string",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "default",
+            "field",
+            "small",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "tabIndex": Object {
         "type": "number",
       },
@@ -2475,7 +2487,6 @@ Map {
     "defaultProps": Object {
       "onDelete": [Function],
       "status": "uploading",
-      "uuid": "id1",
     },
     "propTypes": Object {
       "errorBody": Object {
@@ -2507,7 +2518,6 @@ Map {
         "type": "oneOf",
       },
       "uuid": Object {
-        "isRequired": true,
         "type": "string",
       },
     },
@@ -4456,16 +4466,13 @@ Map {
   "StructuredListWrapper" => Object {
     "defaultProps": Object {
       "ariaLabel": "Structured list section",
-      "border": false,
       "selection": false,
     },
     "propTypes": Object {
       "ariaLabel": Object {
         "type": "string",
       },
-      "border": Object {
-        "type": "bool",
-      },
+      "border": [Function],
       "children": Object {
         "type": "node",
       },
@@ -4682,6 +4689,7 @@ Map {
       "iconDescription": "show menu options",
       "role": "navigation",
       "selected": 0,
+      "selectionMode": "automatic",
       "triggerHref": "#",
       "type": "default",
     },
@@ -4717,6 +4725,15 @@ Map {
       },
       "selected": Object {
         "type": "number",
+      },
+      "selectionMode": Object {
+        "args": Array [
+          Array [
+            "automatic",
+            "manual",
+          ],
+        ],
+        "type": "oneOf",
       },
       "tabContentClassName": Object {
         "type": "string",
@@ -4771,7 +4788,6 @@ Map {
             "warm-gray",
           ],
         ],
-        "isRequired": true,
         "type": "oneOf",
       },
     },
@@ -5979,6 +5995,13 @@ Map {
       },
       "hideLabel": Object {
         "type": "bool",
+      },
+    },
+  },
+  "PaginationSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
       },
     },
   },

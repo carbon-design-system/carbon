@@ -70,7 +70,7 @@ function ExampleDropContainerApp(props) {
       const newFiles = addedFiles.map(file => ({
         uuid: uid(),
         name: file.name,
-        size: file.size,
+        filesize: file.size,
         status: 'uploading',
         iconDescription: 'Uploading',
       }));
@@ -93,14 +93,23 @@ function ExampleDropContainerApp(props) {
         Only .jpg and .png files. 500kb max file size
       </p>
       <FileUploaderDropContainer {...props} onAddFiles={onAddFiles} />
-      <div className={`${prefix}--file-container`}>
+      <div className={`${prefix}--file-container`} style={{ width: '100%' }}>
         {files.map(
-          ({ uuid, name, size, status, iconDescription, invalid, ...rest }) => (
+          ({
+            uuid,
+            name,
+            filesize,
+            status,
+            iconDescription,
+            invalid,
+            ...rest
+          }) => (
             <FileUploaderItem
               key={uid()}
               uuid={uuid}
               name={name}
-              size={size}
+              filesize={filesize}
+              size={props.size}
               status={status}
               iconDescription={iconDescription}
               invalid={invalid}

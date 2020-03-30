@@ -33,24 +33,9 @@ describe('StructuredListWrapper', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
 
-    it('By default, border prop is false', () => {
-      wrapper.setProps({ border: false });
-      expect(wrapper.hasClass(`${prefix}--structured-list--border`)).toEqual(
-        false
-      );
-    });
-
     it('By default, selection prop is false', () => {
-      wrapper.setProps({ border: false });
       expect(wrapper.hasClass(`${prefix}--structured-list--selection`)).toEqual(
         false
-      );
-    });
-
-    it('Should add the modifier class for border when border prop is true', () => {
-      wrapper.setProps({ border: true });
-      expect(wrapper.hasClass(`${prefix}--structured-list--border`)).toEqual(
-        true
       );
     });
 

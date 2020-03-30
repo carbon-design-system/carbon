@@ -1,0 +1,12 @@
+name: Add review labels
+description: A custom action that adds review labels to a Pull Request
+inputs:
+  GITHUB_TOKEN:
+    description: A GitHub token to execute GitHub tasks
+    required: true
+  AUTO_LABEL_USERS:
+    description:
+      Opt-in users who want the ready to merge label automatically applied
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

@@ -13,5 +13,5 @@
 
 # Release team should be notified of Public API changes in the following
 # packages
-/packages/react/__tests__/PublicAPI-test.js @carbon-design-system/developers-system @carbon-design-system/release
-/packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap @carbon-design-system/developers-system @carbon-design-system/release
+/packages/react/__tests__/PublicAPI-test.js @carbon-design-system/release @carbon-design-system/developers-system
+/packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap @carbon-design-system/release @carbon-design-system/developers-system

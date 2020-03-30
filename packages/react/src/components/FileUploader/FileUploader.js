@@ -99,6 +99,12 @@ export class FileUploaderButton extends Component {
      * Specify whether file input is disabled
      */
     disabled: PropTypes.bool,
+
+    /**
+     * Specify the size of the button, from a list of available sizes.
+     * For `default` buttons, this prop can remain unspecified.
+     */
+    size: PropTypes.oneOf(['default', 'field', 'small']),
   };
 
   static defaultProps = {
@@ -149,11 +155,14 @@ export class FileUploaderButton extends Component {
       accept,
       name,
       disabled,
+      size,
       ...other
     } = this.props;
     const classes = classNames(`${prefix}--btn`, className, {
       [`${prefix}--btn--${buttonKind}`]: buttonKind,
       [`${prefix}--btn--disabled`]: disabled,
+      [`${prefix}--btn--field`]: size === 'field',
+      [`${prefix}--btn--sm`]: size === 'small',
     });
 
     this.uid = this.props.id || uid();
@@ -313,6 +322,12 @@ export default class FileUploader extends Component {
      * Specify the types of files that this input should be able to receive
      */
     accept: PropTypes.arrayOf(PropTypes.string),
+
+    /**
+     * Specify the size of the FileUploaderButton, from a list of available
+     * sizes. For `default` buttons, this prop can remain unspecified.
+     */
+    size: PropTypes.oneOf(['default', 'field', 'small']),
   };
 
   static defaultProps = {
@@ -382,12 +397,18 @@ export default class FileUploader extends Component {
       multiple,
       accept,
       name,
+      size,
       ...other
     } = this.props;
 
     const classes = classNames({
       [`${prefix}--form-item`]: true,
       [className]: className,
+    });
+
+    const selectedFileClasses = classNames(`${prefix}--file__selected-file`, {
+      [`${prefix}--file__selected-file--field`]: size === 'field',
+      [`${prefix}--file__selected-file--sm`]: size === 'small',
     });
 
     return (
@@ -402,6 +423,7 @@ export default class FileUploader extends Component {
           disableLabelChanges
           accept={accept}
           name={name}
+          size={size}
         />
         <div className={`${prefix}--file-container`}>
           {this.state.filenames.length === 0
@@ -409,7 +431,7 @@ export default class FileUploader extends Component {
             : this.state.filenames.map((name, index) => (
                 <span
                   key={index}
-                  className={`${prefix}--file__selected-file`}
+                  className={selectedFileClasses}
                   ref={node => (this.nodes[index] = node)} // eslint-disable-line
                   {...other}>
                   <p className={`${prefix}--file-filename`}>{name}</p>

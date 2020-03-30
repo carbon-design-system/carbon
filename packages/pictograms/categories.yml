@@ -74,10 +74,10 @@ categories:
       - nyc--manhattan--alt
       #    - portland
       - rome
-      - san--francisco
-      - san--francisco--fog
-      - sao--paulo
-      - sao--paulo--expanded--base
+      - san-francisco
+      - san-francisco--fog
+      - sao-paulo
+      - sao-paulo--expanded--base
       - seattle
       #    - shanghai
       - singapore
@@ -89,9 +89,9 @@ categories:
       - tokyo--volcano
       - toronto
       - vancouver
-      - washington--dc
-      - washington--dc--capitol
-      - washington--dc--monument
+      - washington-dc
+      - washington-dc--capitol
+      - washington-dc--monument
   - name: Cloud
     members:
       - active--server

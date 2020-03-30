@@ -33,8 +33,8 @@ describe('Custom icon in DataTable.TableToolbarMenu', () => {
     );
     const originalIcon = mount(<Download16 />).find('svg');
     const icon = iconAction.find('svg');
-    expect(icon.find(':not(svg):not(title)').html()).toBe(
-      originalIcon.children().html()
+    expect(icon.getDOMNode().querySelectorAll(':not(svg):not(title)')).toEqual(
+      originalIcon.getDOMNode().querySelectorAll(':not(svg):not(title)')
     );
   });
 });

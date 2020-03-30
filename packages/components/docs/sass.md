@@ -183,6 +183,7 @@
   - [✅hover-ui [variable]](#hover-ui-variable)
   - [✅active-ui [variable]](#active-ui-variable)
   - [✅selected-ui [variable]](#selected-ui-variable)
+  - [✅selected-light-ui [variable]](#selected-light-ui-variable)
   - [✅hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [✅inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [✅hover-danger [variable]](#hover-danger-variable)
@@ -193,6 +194,7 @@
   - [✅disabled-02 [variable]](#disabled-02-variable)
   - [✅disabled-03 [variable]](#disabled-03-variable)
   - [✅highlight [variable]](#highlight-variable)
+  - [✅decorative-01 [variable]](#decorative-01-variable)
   - [✅skeleton-01 [variable]](#skeleton-01-variable)
   - [✅skeleton-02 [variable]](#skeleton-02-variable)
   - [✅⚠️brand-01 [variable]](#brand-01-variable)
@@ -273,6 +275,7 @@
   - [✅prefix [variable]](#prefix-variable)
   - [✅carbon--type-reset [mixin]](#carbon--type-reset-mixin)
   - [✅carbon--default-type [mixin]](#carbon--default-type-mixin)
+  - [✅carbon--font-face-sans-condensed [mixin]](#carbon--font-face-sans-condensed-mixin)
   - [✅carbon--font-face-sans [mixin]](#carbon--font-face-sans-mixin)
   - [✅carbon--get-type-size [function]](#carbon--get-type-size-function)
   - [✅carbon--type-scale [variable]](#carbon--type-scale-variable)
@@ -4167,6 +4170,7 @@ Define theme variables from a map of tokens
   $hover-ui: map-get($theme, 'hover-ui') !global;
   $active-ui: map-get($theme, 'active-ui') !global;
   $selected-ui: map-get($theme, 'selected-ui') !global;
+  $selected-light-ui: map-get($theme, 'selected-light-ui') !global;
   $hover-selected-ui: map-get($theme, 'hover-selected-ui') !global;
   $inverse-hover-ui: map-get($theme, 'inverse-hover-ui') !global;
   $hover-danger: map-get($theme, 'hover-danger') !global;
@@ -4177,6 +4181,7 @@ Define theme variables from a map of tokens
   $disabled-02: map-get($theme, 'disabled-02') !global;
   $disabled-03: map-get($theme, 'disabled-03') !global;
   $highlight: map-get($theme, 'highlight') !global;
+  $decorative-01: map-get($theme, 'decorative-01') !global;
   $skeleton-01: map-get($theme, 'skeleton-01') !global;
   $skeleton-02: map-get($theme, 'skeleton-02') !global;
   $brand-01: map-get($theme, 'brand-01') !global;
@@ -4437,6 +4442,10 @@ Define theme variables from a map of tokens
       --#{$custom-property-prefix}-selected-ui,
       map-get($theme, 'selected-ui')
     ) !global;
+    $selected-light-ui: var(
+      --#{$custom-property-prefix}-selected-light-ui,
+      map-get($theme, 'selected-light-ui')
+    ) !global;
     $hover-selected-ui: var(
       --#{$custom-property-prefix}-hover-selected-ui,
       map-get($theme, 'hover-selected-ui')
@@ -4476,6 +4485,10 @@ Define theme variables from a map of tokens
     $highlight: var(
       --#{$custom-property-prefix}-highlight,
       map-get($theme, 'highlight')
+    ) !global;
+    $decorative-01: var(
+      --#{$custom-property-prefix}-decorative-01,
+      map-get($theme, 'decorative-01')
     ) !global;
     $skeleton-01: var(
       --#{$custom-property-prefix}-skeleton-01,
@@ -4919,6 +4932,19 @@ Define theme variables from a map of tokens
     @if should-emit(
       $theme,
       $carbon--theme,
+      'selected-light-ui',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'selected-light-ui',
+        map-get($theme, 'selected-light-ui')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $carbon--theme,
       'hover-selected-ui',
       $emit-difference
     )
@@ -4975,6 +5001,13 @@ Define theme variables from a map of tokens
 
     @if should-emit($theme, $carbon--theme, 'highlight', $emit-difference) {
       @include custom-property('highlight', map-get($theme, 'highlight'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'decorative-01', $emit-difference) {
+      @include custom-property(
+        'decorative-01',
+        map-get($theme, 'decorative-01')
+      );
     }
 
     @if should-emit($theme, $carbon--theme, 'skeleton-01', $emit-difference) {
@@ -5516,6 +5549,7 @@ Define theme variables from a map of tokens
   - [hover-ui [variable]](#hover-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
+  - [selected-light-ui [variable]](#selected-light-ui-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [hover-danger [variable]](#hover-danger-variable)
@@ -5526,6 +5560,7 @@ Define theme variables from a map of tokens
   - [disabled-02 [variable]](#disabled-02-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
   - [highlight [variable]](#highlight-variable)
+  - [decorative-01 [variable]](#decorative-01-variable)
   - [skeleton-01 [variable]](#skeleton-01-variable)
   - [skeleton-02 [variable]](#skeleton-02-variable)
   - [brand-01 [variable]](#brand-01-variable)
@@ -5672,6 +5707,7 @@ $carbon--theme--g90: map-merge(
     hover-ui: #4c4c4c,
     active-ui: #6f6f6f,
     selected-ui: #525252,
+    selected-light-ui: #6f6f6f,
     inverse-hover-ui: #e5e5e5,
     hover-selected-ui: #656565,
     hover-row: #4c4c4c,
@@ -5680,6 +5716,7 @@ $carbon--theme--g90: map-merge(
     disabled-02: #6f6f6f,
     disabled-03: #a8a8a8,
     highlight: #0043ce,
+    decorative-01: #6f6f6f,
     skeleton-01: #353535,
     skeleton-02: #525252,
     brand-02: #6f6f6f,
@@ -5745,6 +5782,7 @@ $carbon--theme--g100: map-merge(
     hover-ui: #353535,
     active-ui: #525252,
     selected-ui: #393939,
+    selected-light-ui: #525252,
     inverse-hover-ui: #e5e5e5,
     hover-selected-ui: #4c4c4c,
     hover-row: #353535,
@@ -5752,6 +5790,7 @@ $carbon--theme--g100: map-merge(
     disabled-01: #262626,
     disabled-02: #525252,
     highlight: #002d9c,
+    decorative-01: #525252,
     skeleton-01: #353535,
     skeleton-02: #393939,
     brand-02: #6f6f6f,
@@ -5821,6 +5860,7 @@ $carbon--theme--v9: map-merge(
     hover-ui: #eef4fc,
     active-ui: #dfeafa,
     selected-ui: #eef4fc,
+    selected-light-ui: #eef4fc,
     hover-selected-ui: #dfeafa,
     hover-danger: #c70014,
     active-danger: #ad1625,
@@ -5830,6 +5870,7 @@ $carbon--theme--v9: map-merge(
     disabled-02: #dfe3e6,
     disabled-03: #cdd1d4,
     highlight: #f4f7fb,
+    decorative-01: #eef4fc,
     skeleton-01: rgba(61, 112, 178, 0.1),
     skeleton-02: rgba(61, 112, 178, 0.1),
     brand-01: #3d70b2,
@@ -5902,6 +5943,7 @@ $carbon--theme: (
   hover-ui: if(global-variable-exists('hover-ui'), $hover-ui, map-get($carbon--theme--white, 'hover-ui')),
   active-ui: if(global-variable-exists('active-ui'), $active-ui, map-get($carbon--theme--white, 'active-ui')),
   selected-ui: if(global-variable-exists('selected-ui'), $selected-ui, map-get($carbon--theme--white, 'selected-ui')),
+  selected-light-ui: if(global-variable-exists('selected-light-ui'), $selected-light-ui, map-get($carbon--theme--white, 'selected-light-ui')),
   hover-selected-ui: if(global-variable-exists('hover-selected-ui'), $hover-selected-ui, map-get($carbon--theme--white, 'hover-selected-ui')),
   inverse-hover-ui: if(global-variable-exists('inverse-hover-ui'), $inverse-hover-ui, map-get($carbon--theme--white, 'inverse-hover-ui')),
   hover-danger: if(global-variable-exists('hover-danger'), $hover-danger, map-get($carbon--theme--white, 'hover-danger')),
@@ -5912,6 +5954,7 @@ $carbon--theme: (
   disabled-02: if(global-variable-exists('disabled-02'), $disabled-02, map-get($carbon--theme--white, 'disabled-02')),
   disabled-03: if(global-variable-exists('disabled-03'), $disabled-03, map-get($carbon--theme--white, 'disabled-03')),
   highlight: if(global-variable-exists('highlight'), $highlight, map-get($carbon--theme--white, 'highlight')),
+  decorative-01: if(global-variable-exists('decorative-01'), $decorative-01, map-get($carbon--theme--white, 'decorative-01')),
   skeleton-01: if(global-variable-exists('skeleton-01'), $skeleton-01, map-get($carbon--theme--white, 'skeleton-01')),
   skeleton-02: if(global-variable-exists('skeleton-02'), $skeleton-02, map-get($carbon--theme--white, 'skeleton-02')),
   brand-01: if(global-variable-exists('brand-01'), $brand-01, map-get($carbon--theme--white, 'brand-01')),
@@ -6203,7 +6246,6 @@ $ui-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button [mixin]](#button-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [loading [mixin]](#loading-mixin)
@@ -6280,7 +6322,6 @@ $ui-04: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button-theme [mixin]](#button-theme-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
@@ -6753,6 +6794,7 @@ $field-02: if(
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -7457,6 +7499,29 @@ $selected-ui: if(
   - [listbox [mixin]](#listbox-mixin)
   - [search [mixin]](#search-mixin)
 
+### ✅selected-light-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$selected-light-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'selected-light-ui'
+    ),
+  map-get($carbon--theme, 'selected-light-ui'),
+  #e0e0e0
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
 ### ✅hover-selected-ui [variable]
 
 Data table selected row hover
@@ -7670,7 +7735,6 @@ $disabled-02: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
-  - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
@@ -7743,6 +7807,32 @@ $highlight: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅decorative-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$decorative-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'decorative-01'
+    ),
+  map-get($carbon--theme, 'decorative-01'),
+  #e0e0e0
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
 
 ### ✅skeleton-01 [variable]
 
@@ -10380,6 +10470,326 @@ Include default type styles
 - **Requires**:
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
 
+### ✅carbon--font-face-sans-condensed [mixin]
+
+Sans `@font-face`'s
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon--font-face-sans-condensed() {
+  // .woff support for IE11
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 300;
+    src: local('IBM Plex Sans Condensed Light Italic'), local(
+        'IBMPlexSansCond-LightItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8AfppYA.woff)
+        format('woff');
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 400;
+    src: local('IBM Plex Sans Condensed Italic'), local(
+        'IBMPlexSansCond-Italic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8nN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYasyKg.woff)
+        format('woff');
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 600;
+    src: local('IBM Plex Sans Condensed SemiBold Italic'), local(
+        'IBMPlexSansCond-SemiBoldItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8HPvpYA.woff)
+        format('woff');
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 300;
+    src: local('IBM Plex Sans Condensed Light'), local('IBMPlexSansCond-Light'),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4C6ovo.woff)
+        format('woff');
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 400;
+    src: local('IBM Plex Sans Condensed'), local('IBMPlexSansCond'),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8lN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHbat.woff)
+        format('woff');
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 600;
+    src: local('IBM Plex Sans Condensed SemiBold'), local(
+        'IBMPlexSansCond-SemiBold'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY527Ivo.woff)
+        format('woff');
+  }
+
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Light Italic'), local(
+        'IBMPlexSansCond-LightItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8AfplYstEzi6D11GTg.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
+      U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Light Italic'), local(
+        'IBMPlexSansCond-LightItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8AfplYotEzi6D11GTg.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Light Italic'), local(
+        'IBMPlexSansCond-LightItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8AfplYQtEzi6D10.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Italic'), local(
+        'IBMPlexSansCond-Italic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8nN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas-KPLgKkPHhKABg.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
+      U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Italic'), local(
+        'IBMPlexSansCond-Italic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8nN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas-KLLgKkPHhKABg.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Italic'), local(
+        'IBMPlexSansCond-Italic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8nN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas-KzLgKkPHhI.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed SemiBold Italic'), local(
+        'IBMPlexSansCond-SemiBoldItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8HPvlYstEzi6D11GTg.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
+      U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed SemiBold Italic'), local(
+        'IBMPlexSansCond-SemiBoldItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8HPvlYotEzi6D11GTg.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed SemiBold Italic'), local(
+        'IBMPlexSansCond-SemiBoldItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8HPvlYQtEzi6D10.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Light'), local('IBMPlexSansCond-Light'),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4C6rvjpYYnFBq4P1w.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
+      U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Light'), local('IBMPlexSansCond-Light'),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4C6rvipYYnFBq4P1w.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Light'), local('IBMPlexSansCond-Light'),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4C6rvspYYnFBq4.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed'), local('IBMPlexSansCond'),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8lN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYamyK7Bh4sNLhM.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
+      U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed'), local('IBMPlexSansCond'),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8lN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYanyK7Bh4sNLhM.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed'), local('IBMPlexSansCond'),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8lN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYapyK7Bh4sN.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed SemiBold'), local(
+        'IBMPlexSansCond-SemiBold'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY527LvjpYYnFBq4P1w.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
+      U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed SemiBold'), local(
+        'IBMPlexSansCond-SemiBold'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY527LvipYYnFBq4P1w.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed SemiBold'), local(
+        'IBMPlexSansCond-SemiBold'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY527LvspYYnFBq4.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+
 ### ✅carbon--font-face-sans [mixin]
 
 Sans `@font-face`'s
@@ -11931,6 +12341,7 @@ $expressive-heading-05: (
   breakpoints: (
     md: (
       font-size: carbon--type-scale(9),
+      font-weight: carbon--font-weight('light'),
       line-height: 122%,
     ),
     lg: (
@@ -11943,6 +12354,7 @@ $expressive-heading-05: (
     ),
     max: (
       font-size: carbon--type-scale(13),
+      line-height: carbon--rem(70px),
     ),
   ),
 );
@@ -11979,6 +12391,7 @@ $expressive-heading-06: (
     ),
     max: (
       font-size: carbon--type-scale(13),
+      line-height: carbon--rem(70px),
     ),
   ),
 );
@@ -12964,8 +13377,7 @@ Button styles
       $interactive-03,
       $hover-tertiary,
       currentColor,
-      $active-tertiary,
-      1px
+      $active-tertiary
     );
 
     &:hover {
@@ -12990,19 +13402,6 @@ Button styles
       background: transparent;
       color: $disabled;
       outline: none;
-    }
-  }
-
-  .#{$prefix}--btn--tertiary,
-  .#{$prefix}--btn--tertiary.#{$prefix}--btn--field,
-  .#{$prefix}--btn--tertiary.#{$prefix}--btn--sm {
-    padding-right: rem(62px);
-    padding-left: rem(14px);
-
-    &:focus {
-      border-width: rem(3px);
-      padding-right: rem(60px);
-      padding-left: rem(12px);
     }
   }
 
@@ -13054,11 +13453,16 @@ Button styles
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
     @include tooltip--trigger('icon', 'bottom');
+
+    svg,
+    &:hover svg,
+    &:focus svg {
+      fill: currentColor;
+    }
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
-    box-shadow: inset 0 0 0 $button-outline-width $ui-02;
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
@@ -13076,8 +13480,8 @@ Button styles
   }
 
   .#{$prefix}--btn--icon-only {
-    padding-left: rem(13px);
-    padding-right: rem(13px);
+    padding-left: rem(15px);
+    padding-right: rem(15px);
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -13113,50 +13517,20 @@ Button styles
     display: none;
   }
 
-  .#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
-    padding-left: rem(15px);
-    padding-right: rem(15px);
-
-    &:focus {
-      padding-left: rem(13px);
-      padding-right: rem(13px);
-    }
-  }
-
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
-    padding-left: rem(9px);
-    padding-right: rem(9px);
-  }
-
-  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
     padding-left: rem(11px);
     padding-right: rem(11px);
-
-    &:focus {
-      padding-left: rem(9px);
-      padding-right: rem(9px);
-    }
   }
 
   .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
-    padding-left: rem(5px);
-    padding-right: rem(5px);
-  }
-
-  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
     padding-left: rem(7px);
     padding-right: rem(7px);
-
-    &:focus {
-      padding-left: rem(5px);
-      padding-right: rem(5px);
-    }
   }
 
   .#{$prefix}--btn--danger {
     @include button-theme(
       $danger,
-      $danger,
+      transparent,
       $text-04,
       $hover-danger,
       currentColor,
@@ -13165,7 +13539,6 @@ Button styles
 
     &:hover {
       color: $text-04;
-      border: $button-border-width solid transparent;
     }
   }
 
@@ -13212,7 +13585,6 @@ Button styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [focus [variable]](#focus-variable)
-  - [ui-02 [variable]](#ui-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [danger [variable]](#danger-variable)
@@ -13250,11 +13622,16 @@ Button base styles
   margin: 0;
 
   &:disabled,
-  &.#{$prefix}--btn--disabled {
+  &:hover:disabled,
+  &:focus:disabled,
+  &.#{$prefix}--btn--disabled,
+  &.#{$prefix}--btn--disabled:hover,
+  &.#{$prefix}--btn--disabled:focus {
     cursor: not-allowed;
     color: $disabled-03;
     background: $disabled-02;
     border-color: $disabled-02;
+    box-shadow: none;
   }
 
   .#{$prefix}--btn__icon {
@@ -13287,7 +13664,7 @@ Button variant styles
 ```scss
 @mixin button-theme() {
   background-color: $bg-color;
-  border-width: $border-width;
+  border-width: $button-outline-width;
   border-style: solid;
   border-color: $border-color;
   color: $font-color;
@@ -13298,18 +13675,8 @@ Button variant styles
 
   &:focus {
     border-color: $focus;
-    box-shadow: inset 0 0 0 $button-outline-width $ui-02;
-  }
-
-  &:disabled:hover,
-  &:disabled:focus,
-  &:hover.#{$prefix}--btn--disabled,
-  &:focus.#{$prefix}--btn--disabled {
-    color: $ui-04;
-    background-color: $disabled-02;
-    border-color: $disabled-02;
-    text-decoration: none;
-    box-shadow: none;
+    box-shadow: inset 0 0 0 $button-border-width $focus, inset 0 0 0
+        ($button-border-width + $button-outline-width) $ui-02;
   }
 
   &:active {
@@ -13330,8 +13697,6 @@ Button variant styles
   - [focus [variable]](#focus-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [prefix [variable]](#prefix-variable)
-  - [ui-04 [variable]](#ui-04-variable)
-  - [disabled-02 [variable]](#disabled-02-variable)
 - **Used by**:
   - [button [mixin]](#button-mixin)
 
@@ -13700,7 +14065,8 @@ Code snippet styles
 
   // closed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
-    overflow: hidden;
+    overflow-x: scroll;
+    padding-right: $carbon--spacing-08;
     padding-bottom: rem(24px);
   }
 
@@ -16680,6 +17046,10 @@ Dropdown styles
     overflow-y: auto;
   }
 
+  .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list {
+    background-color: $field-02;
+  }
+
   .#{$prefix}--dropdown:not(.#{$prefix}--dropdown--open)
     .#{$prefix}--dropdown-item {
     visibility: hidden;
@@ -16734,6 +17104,10 @@ Dropdown styles
       color: $text-01;
       border-color: transparent;
     }
+  }
+
+  .#{$prefix}--dropdown--light .#{$prefix}--dropdown-link {
+    border-top-color: $decorative-01;
   }
 
   .#{$prefix}--dropdown--sm .#{$prefix}--dropdown-link {
@@ -16947,6 +17321,7 @@ Dropdown styles
   - [ui-01 [variable]](#ui-01-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [text-02 [variable]](#text-02-variable)
+  - [decorative-01 [variable]](#decorative-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
 
@@ -17100,6 +17475,14 @@ File uploader styles
       text-overflow: ellipsis;
       overflow: hidden;
     }
+  }
+
+  .#{$prefix}--file__selected-file--field {
+    min-height: rem(40px);
+  }
+
+  .#{$prefix}--file__selected-file--sm {
+    min-height: rem(32px);
   }
 
   // TODO: deprecate this block
@@ -17843,8 +18226,16 @@ List box styles
     background-color: $field-02;
   }
 
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu {
+    background: $field-02;
+  }
+
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $decorative-01;
+  }
+
   .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
-    border-bottom-width: 0;
+    border-bottom-color: $decorative-01;
   }
 
   // Disabled state for `list-box`
@@ -18288,6 +18679,13 @@ List box styles
     color: $text-01;
   }
 
+  // Hide top border if previous list item is selected
+  .#{$prefix}--list-box__menu-item--active
+    + .#{$prefix}--list-box__menu-item
+    > .#{$prefix}--list-box__menu-item__option {
+    border-top-color: transparent;
+  }
+
   .#{$prefix}--list-box__menu-item__selected-icon {
     display: none;
     position: absolute;
@@ -18343,6 +18741,7 @@ List box styles
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [decorative-01 [variable]](#decorative-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
@@ -19888,7 +20287,7 @@ Overflow menu styles
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open,
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open
     .#{$prefix}--overflow-menu__trigger {
-    background-color: $ui-02;
+    background-color: $field-02;
   }
 
   .#{$prefix}--overflow-menu__icon {
@@ -19990,6 +20389,10 @@ Overflow menu styles
     border-top: 1px solid $ui-03;
   }
 
+  .#{$prefix}--overflow-menu--light .#{$prefix}--overflow-menu--divider {
+    border-top: 1px solid $decorative-01;
+  }
+
   a.#{$prefix}--overflow-menu-options__btn::before {
     content: '';
     height: 100%;
@@ -20051,6 +20454,11 @@ Overflow menu styles
     border-top: 1px solid $ui-03;
   }
 
+  .#{$prefix}--overflow-menu--light
+    .#{$prefix}--overflow-menu-options__option--danger {
+    border-top: 1px solid $decorative-01;
+  }
+
   .#{$prefix}--overflow-menu-options__option--danger
     .#{$prefix}--overflow-menu-options__btn:hover,
   .#{$prefix}--overflow-menu-options__option--danger
@@ -20104,9 +20512,11 @@ Overflow menu styles
   - [prefix [variable]](#prefix-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [ui-01 [variable]](#ui-01-variable)
-  - [ui-02 [variable]](#ui-02-variable)
+  - [field-02 [variable]](#field-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
+  - [ui-02 [variable]](#ui-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
+  - [decorative-01 [variable]](#decorative-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-02 [variable]](#text-02-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -21380,9 +21790,11 @@ Select styles
   }
 
   .#{$prefix}--select__arrow {
-    fill: $ui-05;
     position: absolute;
+    top: 0;
     right: $spacing-05;
+    height: 100%;
+    fill: $ui-05;
     pointer-events: none;
   }
 
@@ -22329,6 +22741,7 @@ Tag styles
   .#{$prefix}--tag {
     @include button-reset($width: false);
     @include type-style('label-01');
+    @include tag-theme($ibm-color__gray-20, $ibm-color__gray-100);
 
     display: inline-flex;
     align-items: center;
@@ -22838,6 +23251,11 @@ Tile styles
     }
   }
 
+  // Removes Firefox automatic border on buttons
+  .#{$prefix}--tile--expandable::-moz-focus-inner {
+    border: 0;
+  }
+
   .#{$prefix}--tile--clickable {
     @include reset;
     @include type-style('body-short-01');
@@ -22892,6 +23310,14 @@ Tile styles
     &:focus {
       outline: none;
     }
+  }
+
+  .#{$prefix}--tile--expandable {
+    width: 100%;
+    color: inherit;
+    font-size: inherit;
+    text-align: left;
+    border: 0;
   }
 
   .#{$prefix}--tile--expandable {
