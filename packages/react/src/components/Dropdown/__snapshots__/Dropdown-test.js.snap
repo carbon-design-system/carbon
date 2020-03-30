@@ -2,6 +2,7 @@
 
 exports[`Dropdown should render 1`] = `
 <Dropdown
+  direction="bottom"
   disabled={false}
   helperText=""
   id="test-dropdown"
@@ -176,6 +177,7 @@ exports[`Dropdown should render 1`] = `
 
 exports[`Dropdown should render custom item components 1`] = `
 <Dropdown
+  direction="bottom"
   disabled={false}
   helperText=""
   id="test-dropdown"
@@ -532,6 +534,7 @@ exports[`Dropdown should render custom item components 1`] = `
 
 exports[`Dropdown should render with strings as items 1`] = `
 <Dropdown
+  direction="bottom"
   disabled={false}
   helperText=""
   id="test-dropdown"
