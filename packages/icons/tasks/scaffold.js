@@ -12,7 +12,7 @@ const path = require('path');
 
 async function scaffold() {
   await Metadata.scaffold({
-    directory: path.resolve(__dirname, '../'),
+    input: path.resolve(__dirname, '../'),
   });
 }
 
