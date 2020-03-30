@@ -5,39 +5,42 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash.isequal';
 
 export function useSelection({ disabled, initialSelectedItems = [] }) {
   const [selectedItems, setSelectedItems] = useState(initialSelectedItems);
-
-  function onItemChange(item) {
-    if (disabled) {
-      return;
-    }
-
-    let selectedIndex;
-    selectedItems.forEach((selectedItem, index) => {
-      if (isEqual(selectedItem, item)) {
-        selectedIndex = index;
+  const onItemChange = useCallback(
+    item => {
+      if (disabled) {
+        return;
       }
-    });
 
-    if (selectedIndex === undefined) {
-      setSelectedItems(selectedItems => selectedItems.concat(item));
-      return;
-    }
+      let selectedIndex;
+      selectedItems.forEach((selectedItem, index) => {
+        if (isEqual(selectedItem, item)) {
+          selectedIndex = index;
+        }
+      });
 
-    setSelectedItems(selectedItems => removeAtIndex(selectedItems, index));
-  }
+      if (selectedIndex === undefined) {
+        setSelectedItems(selectedItems => selectedItems.concat(item));
+        return;
+      }
 
-  function clearSelection() {
+      setSelectedItems(selectedItems =>
+        removeAtIndex(selectedItems, selectedIndex)
+      );
+    },
+    [disabled, selectedItems]
+  );
+  const clearSelection = useCallback(() => {
     if (disabled) {
       return;
     }
     setSelectedItems([]);
-  }
+  }, [disabled]);
 
   return {
     selectedItems,

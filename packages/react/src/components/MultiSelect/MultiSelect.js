@@ -16,23 +16,21 @@ import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
-import Selection, { useSelection } from '../../internal/Selection';
+import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
 const noop = () => {};
 const getInstanceId = setupGetInstanceId();
 const {
+  ItemClick,
+  MenuBlur,
   MenuKeyDownArrowDown,
   MenuKeyDownArrowUp,
-  MenuKeyDownEscape,
-  MenuMouseLeave,
-  ItemClick,
-  ItemMouseMove,
-  ToggleButtonClick,
-
   MenuKeyDownEnter,
-  MenuKeyDownSpace,
+  MenuKeyDownEscape,
+  MenuKeyDownSpaceButton,
+  ToggleButtonClick,
 } = useSelect.stateChangeTypes;
 
 function MultiSelect({
@@ -68,10 +66,25 @@ function MultiSelect({
   const {
     selectedItems: controlledSelectedItems,
     onItemChange,
-    clearSelecton,
+    clearSelection,
   } = useSelection({
     disabled,
     initialSelectedItems,
+  });
+  const {
+    getToggleButtonProps,
+    getLabelProps,
+    getMenuProps,
+    getItemProps,
+    selectedItem: selectedItems,
+  } = useSelect({
+    ...downshiftProps,
+    highlightedIndex,
+    isOpen,
+    itemToString,
+    onStateChange,
+    selectedItem: controlledSelectedItems,
+    items,
   });
 
   /**
@@ -112,30 +125,8 @@ function MultiSelect({
       selectedItems && selectedItems.length > 0,
   });
 
-  // const buttonProps = {
-  //   ...getToggleButtonProps({ disabled }),
-  //   'aria-label': undefined,
-  // };
-
-  const {
-    getToggleButtonProps,
-    getLabelProps,
-    getMenuProps,
-    getItemProps,
-    selectedItem: selectedItems,
-  } = useSelect({
-    ...downshiftProps,
-    highlightedIndex,
-    isOpen,
-    itemToString,
-    onStateChange,
-    // onOuterClick: () => {},
-    selectedItem: controlledSelectedItems,
-    items,
-  });
-
   const sortOptions = {
-    selectedItems,
+    selectedItems: controlledSelectedItems,
     itemToString,
     compareItems,
     locale: 'en',
@@ -144,31 +135,33 @@ function MultiSelect({
   if (selectionFeedback === 'fixed') {
     sortOptions.selectedItems = [];
   } else if (selectionFeedback === 'top-after-reopen') {
-    sortOptions.selectionItems = topItems;
+    sortOptions.selectedItems = topItems;
   }
 
   function onStateChange(changes) {
-    // if (changes.isOpen && !this.state.isOpen) {
-    // this.setState({ topItems: downshift.selectedItem });
-    // }
+    if (changes.isOpen && !isOpen) {
+      setTopItems(controlledSelectedItems);
+    }
 
     const { type } = changes;
     switch (type) {
       case ItemClick:
-      case MenuKeyDownSpace:
+      case MenuKeyDownSpaceButton:
       case MenuKeyDownEnter:
         onItemChange(changes.selectedItem);
         break;
       case MenuKeyDownArrowDown:
       case MenuKeyDownArrowUp:
-        // case ItemMouseMove:
         setHighlightedIndex(changes.highlightedIndex);
         break;
+      case MenuBlur:
       case MenuKeyDownEscape:
         setIsOpen(false);
+        setHighlightedIndex(changes.highlightedIndex);
         break;
       case ToggleButtonClick:
         setIsOpen(changes.isOpen || false);
+        setHighlightedIndex(changes.highlightedIndex);
         break;
     }
   }
@@ -204,6 +197,14 @@ function MultiSelect({
           disabled={disabled}
           aria-disabled={disabled}
           {...getToggleButtonProps()}>
+          {selectedItems.length > 0 && (
+            <ListBox.Selection
+              clearSelection={!disabled ? clearSelection : noop}
+              selectionCount={selectedItems.length}
+              translateWithId={translateWithId}
+              disabled={disabled}
+            />
+          )}
           <span id={fieldLabelId} className={`${prefix}--list-box__label`}>
             {label}
           </span>
@@ -221,11 +222,9 @@ function MultiSelect({
                   .length > 0;
               return (
                 <ListBox.MenuItem
+                  aria-selected={isChecked}
                   key={itemProps.id}
                   isActive={isChecked}
-                  role="option"
-                  aria-selected={isChecked}
-                  tabIndex={-1}
                   isHighlighted={highlightedIndex === index}
                   title={itemText}
                   {...itemProps}>
