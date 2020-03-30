@@ -76,6 +76,7 @@
   - [✅disabled-02 [variable]](#disabled-02-variable)
   - [✅disabled-03 [variable]](#disabled-03-variable)
   - [✅highlight [variable]](#highlight-variable)
+  - [✅decorative-01 [variable]](#decorative-01-variable)
   - [✅skeleton-01 [variable]](#skeleton-01-variable)
   - [✅skeleton-02 [variable]](#skeleton-02-variable)
   - [✅⚠️brand-01 [variable]](#brand-01-variable)
@@ -278,6 +279,7 @@ Define theme variables from a map of tokens
   $disabled-02: map-get($theme, 'disabled-02') !global;
   $disabled-03: map-get($theme, 'disabled-03') !global;
   $highlight: map-get($theme, 'highlight') !global;
+  $decorative-01: map-get($theme, 'decorative-01') !global;
   $skeleton-01: map-get($theme, 'skeleton-01') !global;
   $skeleton-02: map-get($theme, 'skeleton-02') !global;
   $brand-01: map-get($theme, 'brand-01') !global;
@@ -577,6 +579,10 @@ Define theme variables from a map of tokens
     $highlight: var(
       --#{$custom-property-prefix}-highlight,
       map-get($theme, 'highlight')
+    ) !global;
+    $decorative-01: var(
+      --#{$custom-property-prefix}-decorative-01,
+      map-get($theme, 'decorative-01')
     ) !global;
     $skeleton-01: var(
       --#{$custom-property-prefix}-skeleton-01,
@@ -1076,6 +1082,13 @@ Define theme variables from a map of tokens
 
     @if should-emit($theme, $carbon--theme, 'highlight', $emit-difference) {
       @include custom-property('highlight', map-get($theme, 'highlight'));
+    }
+
+    @if should-emit($theme, $carbon--theme, 'decorative-01', $emit-difference) {
+      @include custom-property(
+        'decorative-01',
+        map-get($theme, 'decorative-01')
+      );
     }
 
     @if should-emit($theme, $carbon--theme, 'skeleton-01', $emit-difference) {
@@ -1627,6 +1640,7 @@ Define theme variables from a map of tokens
   - [disabled-02 [variable]](#disabled-02-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
   - [highlight [variable]](#highlight-variable)
+  - [decorative-01 [variable]](#decorative-01-variable)
   - [skeleton-01 [variable]](#skeleton-01-variable)
   - [skeleton-02 [variable]](#skeleton-02-variable)
   - [brand-01 [variable]](#brand-01-variable)
@@ -1831,6 +1845,7 @@ $carbon--theme--g90: map-merge(
     disabled-02: #6f6f6f,
     disabled-03: #a8a8a8,
     highlight: #0043ce,
+    decorative-01: #6f6f6f,
     skeleton-01: #353535,
     skeleton-02: #525252,
     brand-02: #6f6f6f,
@@ -1903,6 +1918,7 @@ $carbon--theme--g100: map-merge(
     disabled-01: #262626,
     disabled-02: #525252,
     highlight: #002d9c,
+    decorative-01: #525252,
     skeleton-01: #353535,
     skeleton-02: #393939,
     brand-02: #6f6f6f,
@@ -1981,6 +1997,7 @@ $carbon--theme--v9: map-merge(
     disabled-02: #dfe3e6,
     disabled-03: #cdd1d4,
     highlight: #f4f7fb,
+    decorative-01: #eef4fc,
     skeleton-01: rgba(61, 112, 178, 0.1),
     skeleton-02: rgba(61, 112, 178, 0.1),
     brand-01: #3d70b2,
@@ -2063,6 +2080,7 @@ $carbon--theme: (
   disabled-02: if(global-variable-exists('disabled-02'), $disabled-02, map-get($carbon--theme--white, 'disabled-02')),
   disabled-03: if(global-variable-exists('disabled-03'), $disabled-03, map-get($carbon--theme--white, 'disabled-03')),
   highlight: if(global-variable-exists('highlight'), $highlight, map-get($carbon--theme--white, 'highlight')),
+  decorative-01: if(global-variable-exists('decorative-01'), $decorative-01, map-get($carbon--theme--white, 'decorative-01')),
   skeleton-01: if(global-variable-exists('skeleton-01'), $skeleton-01, map-get($carbon--theme--white, 'skeleton-01')),
   skeleton-02: if(global-variable-exists('skeleton-02'), $skeleton-02, map-get($carbon--theme--white, 'skeleton-02')),
   brand-01: if(global-variable-exists('brand-01'), $brand-01, map-get($carbon--theme--white, 'brand-01')),
@@ -3556,6 +3574,29 @@ $highlight: if(
     ),
   map-get($carbon--theme, 'highlight'),
   #d0e2ff
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅decorative-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$decorative-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'decorative-01'
+    ),
+  map-get($carbon--theme, 'decorative-01'),
+  #e0e0e0
 );
 ```
 

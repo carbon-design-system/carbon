@@ -148,6 +148,7 @@ export CodeSnippetSkeleton from './components/CodeSnippet/CodeSnippet.Skeleton';
 export DropdownSkeleton from './components/Dropdown/Dropdown.Skeleton';
 export FileUploaderSkeleton from './components/FileUploader/FileUploader.Skeleton';
 export NumberInputSkeleton from './components/NumberInput/NumberInput.Skeleton';
+export PaginationSkeleton from './components/Pagination/Pagination.Skeleton';
 export ProgressIndicatorSkeleton from './components/ProgressIndicator/ProgressIndicator.Skeleton';
 export RadioButtonSkeleton from './components/RadioButton/RadioButton.Skeleton';
 export SearchSkeleton from './components/Search/Search.Skeleton';

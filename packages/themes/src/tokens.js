@@ -94,6 +94,8 @@ const colors = [
 
   'highlight',
 
+  'decorative01',
+
   'skeleton01',
   'skeleton02',
 
@@ -225,6 +227,7 @@ export const unstable__meta = {
         'inverseHoverUI',
         'active01',
         'hoverField',
+        'decorative01',
       ],
     },
   ],

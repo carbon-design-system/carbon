@@ -33,11 +33,16 @@
   margin: 0;
 
   &:disabled,
-  &.#{$prefix}--btn--disabled {
+  &:hover:disabled,
+  &:focus:disabled,
+  &.#{$prefix}--btn--disabled,
+  &.#{$prefix}--btn--disabled:hover,
+  &.#{$prefix}--btn--disabled:focus {
     cursor: not-allowed;
     color: $disabled-03;
     background: $disabled-02;
     border-color: $disabled-02;
+    box-shadow: none;
   }
 
   .#{$prefix}--btn__icon {
@@ -58,7 +63,7 @@
   $font-color,
   $hover-bg-color,
   $icon-color,
-  $active-color,
+  $active-color
 ) {
   background-color: $bg-color;
   border-width: $button-outline-width;
@@ -72,20 +77,8 @@
 
   &:focus {
     border-color: $focus;
-    box-shadow:
-    inset 0 0 0 $button-border-width $focus,
-    inset 0 0 0 ($button-border-width + $button-outline-width) $ui-02;
-  }
-
-  &:disabled:hover,
-  &:disabled:focus,
-  &:hover.#{$prefix}--btn--disabled,
-  &:focus.#{$prefix}--btn--disabled {
-    color: $ui-04;
-    background-color: $disabled-02;
-    border-color: $disabled-02;
-    text-decoration: none;
-    box-shadow: none;
+    box-shadow: inset 0 0 0 $button-border-width $focus,
+      inset 0 0 0 ($button-border-width + $button-outline-width) $ui-02;
   }
 
   &:active {

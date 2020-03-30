@@ -162,7 +162,8 @@
 
   // closed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
-    overflow: hidden;
+    overflow-x: scroll;
+    padding-right: $carbon--spacing-08;
     padding-bottom: rem(24px);
   }
 

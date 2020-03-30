@@ -477,7 +477,7 @@ class Tooltip extends Component {
               <span className={`${prefix}--tooltip__caret`} />
               <div
                 className={`${prefix}--tooltip__content`}
-                tabindex="-1"
+                tabIndex="-1"
                 role="dialog"
                 aria-describedby={tooltipBodyId}
                 aria-labelledby={triggerId}>
