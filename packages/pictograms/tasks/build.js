@@ -18,7 +18,7 @@ async function build() {
   });
 
   await Metadata.build({
-    directory: path.resolve(__dirname, '../'),
+    input: path.resolve(__dirname, '../'),
     extensions: [
       Metadata.extensions.pictograms,
       Metadata.extensions.moduleName,
