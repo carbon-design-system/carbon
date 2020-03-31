@@ -467,6 +467,10 @@ $list-box-menu-width: rem(300px);
     background-color: transparent;
   }
 
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:active {
+    background-color: $selected-light-ui;
+  }
+
   .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item__option:hover {
     border-top-color: $ui-03;
@@ -581,6 +585,16 @@ $list-box-menu-width: rem(300px);
     color: $text-01;
     background-color: $selected-ui;
     border-bottom-color: $selected-ui;
+  }
+
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item--active {
+    background-color: $selected-light-ui;
+    border-bottom-color: $selected-light-ui;
+  }
+
+  .#{$prefix}--list-box__menu-item--active:hover {
+    background-color: $hover-ui;
+    border-bottom-color: $hover-ui;
   }
 
   .#{$prefix}--list-box__menu-item--active

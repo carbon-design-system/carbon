@@ -7521,6 +7521,7 @@ $selected-light-ui: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [listbox [mixin]](#listbox-mixin)
 
 ### ✅hover-selected-ui [variable]
 
@@ -18575,6 +18576,10 @@ List box styles
     background-color: transparent;
   }
 
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:active {
+    background-color: $selected-light-ui;
+  }
+
   .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item__option:hover {
     border-top-color: $ui-03;
@@ -18691,6 +18696,16 @@ List box styles
     border-bottom-color: $selected-ui;
   }
 
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item--active {
+    background-color: $selected-light-ui;
+    border-bottom-color: $selected-light-ui;
+  }
+
+  .#{$prefix}--list-box__menu-item--active:hover {
+    background-color: $hover-ui;
+    border-bottom-color: $hover-ui;
+  }
+
   .#{$prefix}--list-box__menu-item--active
     .#{$prefix}--list-box__menu-item__option {
     color: $text-01;
@@ -18772,6 +18787,7 @@ List box styles
   - [ui-01 [variable]](#ui-01-variable)
   - [text-02 [variable]](#text-02-variable)
   - [selected-ui [variable]](#selected-ui-variable)
+  - [selected-light-ui [variable]](#selected-light-ui-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
 
 ## loading
