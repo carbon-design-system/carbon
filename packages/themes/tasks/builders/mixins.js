@@ -140,7 +140,7 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
                   t.IfStatement({
                     test: t.SassFunctionCall(t.Identifier('should-emit'), [
                       t.Identifier('theme'),
-                      t.Identifier('carbon--theme'),
+                      t.Identifier('parent-carbon-theme'),
                       t.SassString(name),
                       t.Identifier('emit-difference'),
                     ]),
