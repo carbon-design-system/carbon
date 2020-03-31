@@ -3411,7 +3411,6 @@ $carbon--spacing-04: 0.75rem;
 - **Used by**:
   - [dropdown [mixin]](#dropdown-mixin)
   - [lists [mixin]](#lists-mixin)
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
 
@@ -19574,14 +19573,12 @@ Inline notification styles
   .#{$prefix}--inline-notification__text-wrapper {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    padding: $carbon--spacing-04 0;
+    padding: rem(15px) 0;
   }
 
   .#{$prefix}--inline-notification__title {
     @include type-style('productive-heading-01');
     margin: 0 $carbon--spacing-02 0 0;
-    line-height: rem(24px);
   }
 
   .#{$prefix}--inline-notification__subtitle {
@@ -19684,7 +19681,6 @@ Inline notification styles
   - [support-04 [variable]](#support-04-variable)
   - [inverse-support-03 [variable]](#inverse-support-03-variable)
   - [support-03 [variable]](#support-03-variable)
-  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
