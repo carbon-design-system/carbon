@@ -43,7 +43,7 @@
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
     "@babel/runtime": "^7.7.7",
-    "@carbon/cli": "10.8.0",
+    "@carbon/cli": "10.8.1",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@ibma/aat": "https://able.ibm.com/tools/dist/ibma-aat-2.0.6.tgz",
