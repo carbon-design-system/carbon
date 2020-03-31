@@ -39,10 +39,10 @@ const Tag = ({
   ...other
 }) => {
   const tagId = id || `tag-${getInstanceId()}`;
-  const tagClass = `${prefix}--tag--${type}`;
-  const tagClasses = classNames(`${prefix}--tag`, tagClass, className, {
+  const tagClasses = classNames(`${prefix}--tag`, className, {
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
+    [`${prefix}--tag--${type}`]: type,
   });
   const handleClose = event => {
     event.stopPropagation();
@@ -90,7 +90,7 @@ Tag.propTypes = {
   /**
    * Specify the type of the <Tag>
    */
-  type: PropTypes.oneOf(Object.keys(TYPES)).isRequired,
+  type: PropTypes.oneOf(Object.keys(TYPES)),
 
   /**
    * Specify if the <Tag> is disabled
