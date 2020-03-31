@@ -12,9 +12,16 @@ import React from 'react';
 
 const { prefix } = settings;
 
-function Accordion({ align, children, className: customClassName, ...rest }) {
+function Accordion({
+  align,
+  children,
+  expressive,
+  className: customClassName,
+  ...rest
+}) {
   const className = cx(`${prefix}--accordion`, customClassName, {
     [`${prefix}--accordion--${align}`]: align,
+    [`${prefix}--accordion--expressive`]: expressive,
   });
   return (
     <ul className={className} {...rest}>
@@ -42,6 +49,11 @@ Accordion.propTypes = {
    * Specify the alignment of the accordion heading title and chevron.
    */
   align: PropTypes.oneOf(['start', 'end']),
+
+  /**
+   * Turns off/on expressive variation for component
+   */
+  expressive: PropTypes.bool,
 };
 
 export default Accordion;

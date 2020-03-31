@@ -39,7 +39,8 @@ storiesOf('Accordion', module)
           'Accordion heading alignment (align)',
           ['start', 'end'],
           'end'
-        )}>
+        )}
+        expressive={boolean('expressive theme', false)}>
         <AccordionItem
           title={text('The title (title)', 'Section 1 title')}
           open={boolean('Open the section (open)', false)}
