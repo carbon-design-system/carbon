@@ -7521,6 +7521,7 @@ $selected-light-ui: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [listbox [mixin]](#listbox-mixin)
 
 ### ✅hover-selected-ui [variable]
 
@@ -13461,6 +13462,14 @@ Button styles
     }
   }
 
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:focus svg {
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover svg {
+    fill: $icon-01;
+  }
+
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
   }
@@ -13492,6 +13501,13 @@ Button styles
     }
   }
 
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost
+    .#{$prefix}--btn__icon,
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover
+    .#{$prefix}--btn__icon {
+    fill: $icon-01;
+  }
+
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
     .#{$prefix}--btn__icon
     path,
@@ -13503,6 +13519,8 @@ Button styles
     .#{$prefix}--btn__icon
     path,
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
+    .#{$prefix}--btn__icon,
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost[disabled]:hover
     .#{$prefix}--btn__icon {
     fill: $disabled-02;
   }
@@ -13584,8 +13602,8 @@ Button styles
   - [active-ui [variable]](#active-ui-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [hover-primary-text [variable]](#hover-primary-text-variable)
-  - [focus [variable]](#focus-variable)
   - [icon-01 [variable]](#icon-01-variable)
+  - [focus [variable]](#focus-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [danger [variable]](#danger-variable)
   - [hover-danger [variable]](#hover-danger-variable)
@@ -15781,7 +15799,7 @@ Data table core styles
     }
   }
 
-  @include sticky-header($max-width: rem(900px));
+  @include sticky-header($max-width: 100%);
 }
 ```
 
@@ -18558,6 +18576,10 @@ List box styles
     background-color: transparent;
   }
 
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:active {
+    background-color: $selected-light-ui;
+  }
+
   .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item__option:hover {
     border-top-color: $ui-03;
@@ -18674,6 +18696,16 @@ List box styles
     border-bottom-color: $selected-ui;
   }
 
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item--active {
+    background-color: $selected-light-ui;
+    border-bottom-color: $selected-light-ui;
+  }
+
+  .#{$prefix}--list-box__menu-item--active:hover {
+    background-color: $hover-ui;
+    border-bottom-color: $hover-ui;
+  }
+
   .#{$prefix}--list-box__menu-item--active
     .#{$prefix}--list-box__menu-item__option {
     color: $text-01;
@@ -18755,6 +18787,7 @@ List box styles
   - [ui-01 [variable]](#ui-01-variable)
   - [text-02 [variable]](#text-02-variable)
   - [selected-ui [variable]](#selected-ui-variable)
+  - [selected-light-ui [variable]](#selected-light-ui-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
 
 ## loading
@@ -23429,6 +23462,7 @@ Time picker styles
   }
 
   .#{$prefix}--time-picker .#{$prefix}--select-input {
+    margin: 0;
     min-width: auto;
     width: auto;
     padding-right: rem(48px);
