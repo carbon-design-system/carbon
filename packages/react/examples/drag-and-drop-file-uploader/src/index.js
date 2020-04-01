@@ -26,7 +26,7 @@ function ExampleDropContainerApp(props) {
   const [files, setFiles] = useState([]);
   const uploadFile = async fileToUpload => {
     // file size validation
-    if (fileToUpload.size > 512000) {
+    if (fileToUpload.filesize > 512000) {
       const updatedFile = {
         ...fileToUpload,
         status: 'edit',
@@ -101,10 +101,13 @@ function ExampleDropContainerApp(props) {
         status: 'uploading',
         iconDescription: 'Uploading',
       }));
-      props.multiple
-        ? setFiles([...files, ...newFiles])
-        : setFiles([...files, newFiles[0]]);
-      newFiles.forEach(uploadFile);
+      if (props.multiple) {
+        setFiles([...files, ...newFiles]);
+        newFiles.forEach(uploadFile);
+      } else {
+        setFiles([newFiles[0]]);
+        uploadFile(newFiles[0]);
+      }
     },
     [files, props.multiple]
   );
