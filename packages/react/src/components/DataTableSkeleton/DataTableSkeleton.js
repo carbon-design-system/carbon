@@ -8,11 +8,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import {
-  Search16 as Search,
-  Edit16 as Edit,
-  Settings16 as Settings,
-} from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -57,15 +52,6 @@ const DataTableSkeleton = ({
         aria-label="data table toolbar"
         className={`${prefix}--table-toolbar`}>
         <div className={`${prefix}--toolbar-content`}>
-          <button className={`${prefix}--search`}>
-            <Search />
-          </button>
-          <button className={`${prefix}--toolbar-action`} title="Edit">
-            <Edit />
-          </button>
-          <button className={`${prefix}--toolbar-action`} title="Settings">
-            <Settings />
-          </button>
           <button
             className={`${prefix}--skeleton ${prefix}--btn ${prefix}--btn--sm`}
             type="button"></button>

@@ -48,20 +48,6 @@
     background: $skeleton-01;
   }
 
-  .#{$prefix}--data-table-container.#{$prefix}--skeleton .#{$prefix}--search,
-  .#{$prefix}--data-table-container.#{$prefix}--skeleton
-    .#{$prefix}--toolbar-action {
-    background-color: transparent;
-    border: none;
-    justify-content: center;
-    width: rem(48px);
-  }
-
-  .#{$prefix}--data-table-container.#{$prefix}--skeleton
-    .#{$prefix}--toolbar-action:hover {
-    background-color: transparent;
-  }
-
   .#{$prefix}--data-table-container.#{$prefix}--skeleton
     .#{$prefix}--data-table-header__title {
     @include skeleton;
