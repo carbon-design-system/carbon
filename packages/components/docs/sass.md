@@ -3409,6 +3409,7 @@ $carbon--spacing-04: 0.75rem;
 - **Aliased**:
   - `spacing-04`
 - **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [lists [mixin]](#lists-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -13007,6 +13008,7 @@ fixed contexts.
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [carbon--default-type [mixin]](#carbon--default-type-mixin)
+  - [accordion [mixin]](#accordion-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
@@ -13201,6 +13203,25 @@ Accordion styles
   .#{$prefix}--accordion__title.#{$prefix}--skeleton__text {
     margin-bottom: 0;
   }
+
+  .#{$prefix}--accordion--expressive {
+    overflow: hidden;
+
+    .#{$prefix}--accordion__heading {
+      padding: $carbon--spacing-04 0;
+    }
+
+    .#{$prefix}--accordion__title {
+      @include carbon--type-style('body-long-02');
+    }
+
+    .#{$prefix}--accordion__arrow {
+      flex: 0 0 1.25rem;
+      width: 1.25rem;
+      height: 1.25rem;
+      margin-right: $carbon--spacing-03;
+    }
+  }
 }
 ```
 
@@ -13209,6 +13230,7 @@ Accordion styles
 - **Group**: [accordion](#accordion)
 - **Requires**:
   - [carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
   - [prefix [variable]](#prefix-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -13220,6 +13242,7 @@ Accordion styles
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
+  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
 
 ## breadcrumb
 
