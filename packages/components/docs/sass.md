@@ -15799,7 +15799,7 @@ Data table core styles
     }
   }
 
-  @include sticky-header($max-width: rem(900px));
+  @include sticky-header($max-width: 100%);
 }
 ```
 
