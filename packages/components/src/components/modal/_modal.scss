@@ -67,7 +67,8 @@
   }
 
   .#{$prefix}--modal-container {
-    position: relative;
+    position: fixed;
+    top: 0;
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: auto;
@@ -83,13 +84,8 @@
     transform: translate3d(0, -24px, 0);
     transition: transform $duration--moderate-02 motion(exit, expressive);
 
-    @supports (-webkit-touch-callout: none) {
-      /* CSS specific to iOS devices, fixes (#5755) */
-      position: fixed;
-      top: 0;
-    }
-
     @include carbon--breakpoint(md) {
+      position: initial;
       width: 84%;
       max-height: 90%;
       height: auto;
