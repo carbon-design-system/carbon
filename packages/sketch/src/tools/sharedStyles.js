@@ -75,4 +75,14 @@ export function syncColorStyle(document, name, value, type) {
       ],
     });
   }
+  if (type === 'border') {
+    return syncSharedStyle(document, name, {
+      borders: [
+        {
+          color: value,
+          fillType: Style.FillType.Color,
+        },
+      ],
+    });
+  }
 }
