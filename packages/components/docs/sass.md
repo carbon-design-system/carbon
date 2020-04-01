@@ -15799,7 +15799,7 @@ Data table core styles
     }
   }
 
-  @include sticky-header($max-width: rem(900px));
+  @include sticky-header($max-width: 100%);
 }
 ```
 
@@ -23462,6 +23462,7 @@ Time picker styles
   }
 
   .#{$prefix}--time-picker .#{$prefix}--select-input {
+    margin: 0;
     min-width: auto;
     width: auto;
     padding-right: rem(48px);
