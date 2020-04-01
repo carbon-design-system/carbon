@@ -9,7 +9,7 @@ import { Document, Text, Rectangle, Group } from 'sketch/dom';
 import { command } from '../command';
 import { findOrCreatePage, selectPage } from '../../tools/page';
 
-const { categories } = require('@carbon/icons/metadata.json');
+const { icons, categories } = require('../../../generated/icons/metadata.json');
 
 export function generate() {
   command('commands/icons/generate', () => {
@@ -26,6 +26,7 @@ export function generate() {
         style: {
           fontFamily: 'IBM Plex Sans',
           fontSize: 32,
+          fontStyle: undefined,
           fontWeight: 4,
           lineHeight: 40,
         },
@@ -46,6 +47,7 @@ export function generate() {
           style: {
             fontFamily: 'IBM Plex Sans',
             fontSize: 20,
+            fontStyle: undefined,
             fontWeight: 4,
             lineHeight: 26,
           },
@@ -62,7 +64,12 @@ export function generate() {
         let ICON_Y_OFFSET = subcategoryText.frame.height + 8;
         let COLUMN_COUNT = 0;
 
-        for (const icon of subcategory.members) {
+        const members = subcategory.members.filter(member => {
+          const icon = icons.find(icon => icon.name === member);
+          return !icon.deprecated;
+        });
+
+        for (const icon of members) {
           const symbol = symbols.find(symbol => {
             const parts = symbol.name.split('/').map(string => string.trim());
             const [_type, _category, _subcategory, name, size] = parts;
