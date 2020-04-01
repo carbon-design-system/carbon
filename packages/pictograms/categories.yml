@@ -150,43 +150,43 @@ categories:
       - webcast
   - name: Data Analytics
     members:
-      - 3D--chart
       - analyze
-      - area--chart
       - blockchain
-      - box--plot
-      - bubble--chart
-      - candlestick--chart
+      - box-plot
+      - chart--3D
+      - chart--area
       - chart--bar
-      - chart--bubble--line
+      - chart--bubble
+      - chart--bubble-line
+      - chart--candlestick
+      - chart--error-bar
+      - chart--evaluation
+      - chart--high-low
+      - chart--histogram
       - chart--line
+      - chart--multi-line
+      - chart--parallel
+      - chart--radar
+      - chart--river
       - chart--scatterplot
-      - circling--packing
-      - error--bar--chart
-      - evaluation--chart
+      - chart--t-SNE
+      - circle-packing
       - flow--chart
       - flow--chart--detail
-      - heat--map
-      - heat--map--02
-      - high--low--chart
-      - histogram--chart
-      - math--curve
-      - multi--line--chart
-      - parallel--chart
-      - population--diagram
-      - q-q--plot
-      - radar--chart
+      - heat-map--01
+      - heat-map--02
+      - math-curve
+      - population-diagram
+      - q-q-plot
       - rank
-      - relationship--diagram
+      - relationship-diagram
       - report
-      - river--chart
-      - scatter--matrix
+      - scatter-matrix
       - secure--data
-      - t-SNE--chart
       - tree--diagram
       - tree--map
       - user--analytics
-      - word--cloud
+      - word-cloud
   - name: Data Storage
     members:
       - archive
