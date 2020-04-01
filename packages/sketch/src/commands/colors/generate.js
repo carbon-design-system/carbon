@@ -20,11 +20,12 @@ export function generate() {
     const document = Document.getSelectedDocument();
     const page = selectPage(findOrCreatePage(document, 'color'));
     const sharedStyles = syncColorStyles(document, 'fill');
+    console.log(sharedStyles);
     const { black, white, colors, support } = groupByKey(
       sharedStyles,
       sharedStyle => {
         const { name } = sharedStyle;
-        const [_category, swatch] = name.split(' / ');
+        const [_category, _type, swatch] = name.split(' / ');
         switch (swatch) {
           case 'black':
             return 'black';
@@ -43,7 +44,7 @@ export function generate() {
     let Y_OFFSET = 0;
 
     const swatches = groupByKey(colors, sharedStyle => {
-      const [_category, swatch] = sharedStyle.name.split('/');
+      const [_category, _type, swatch] = sharedStyle.name.split('/');
       return swatch;
     });
 
