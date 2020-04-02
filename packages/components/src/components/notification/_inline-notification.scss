@@ -251,7 +251,7 @@
     }
 
     @include carbon--breakpoint(md) {
-      position: initial;
+      position: static;
     }
   }
 
