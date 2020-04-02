@@ -1,0 +1,43 @@
+//
+// Copyright IBM Corp. 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import 'vars';
+@import 'theme';
+@import 'feature-flags';
+
+$enable-css-custom-properties: feature-flag-enabled('enable-css-custom-properties');
+
+/// Get a component token value.
+/// @access public
+/// @param {Map} $tokens - Map of component tokens
+/// @param {String} $name - Token name
+/// @example get-token-value($component-tokens, 'tag-background-red');
+/// @returns {String} Token value
+/// @group component-tokens
+@function get-token-value($tokens, $name) {
+  $options: map-get($tokens, $name);
+
+  @if type-of($options) == 'list' {
+    @each $option in $options {
+      $theme: map-get($option, 'theme');
+
+      @if $theme == $carbon--theme {
+        $value: map-get($option, 'value');
+
+        @return if(
+          $enable-css-custom-properties == true,
+          var(--#{$custom-property-prefix}-#{$name}, #{$value}),
+          $value
+        )
+      }
+
+      @error 'Unable to find value for theme';
+    }
+  }
+
+  @error 'Unable to find list';
+}
