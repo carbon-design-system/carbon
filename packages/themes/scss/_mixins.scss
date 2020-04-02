@@ -34,6 +34,29 @@ $custom-property-prefix: 'cds' !default;
   @return map-get($theme-a, $token) != map-get($theme-b, $token);
 }
 
+/// @access private
+/// @param {Map} $tokens - Map of component tokens
+/// @param {String} $theme - Theme identifier
+/// @example @include emit-component-tokens($component-tokens);
+/// @group @carbon/themes
+@mixin emit-component-tokens($tokens) {
+  @if type-of($tokens) == 'map' {
+    @each $key, $options in $tokens {
+      @each $option in $options {
+        $theme: map-get($option, 'theme');
+
+        @if ($theme == $carbon--theme) {
+          $value: map-get($option, 'value');
+
+          --#{$custom-property-prefix}-#{$key}: #{$value};
+        }
+      }
+    }
+  } @else {
+    @error 'Unable to find map';
+  }
+}
+
 // We import mixins last so that these methods are made available to the
 // carbon--theme mixin
 @import './generated/mixins';
