@@ -23228,7 +23228,11 @@ Tag styles
   .#{$prefix}--tag {
     @include button-reset($width: false);
     @include type-style('label-01');
-    @include tag-theme($ibm-color__gray-20, $ibm-color__gray-100);
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-gray'),
+      get-token-value($tag-colors, 'tag-color-gray'),
+      get-token-value($tag-colors, 'tag-hover-gray')
+    );
 
     display: inline-flex;
     align-items: center;
