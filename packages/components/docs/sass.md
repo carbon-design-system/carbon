@@ -13454,7 +13454,6 @@ fixed contexts.
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [carbon--default-type [mixin]](#carbon--default-type-mixin)
-  - [accordion [mixin]](#accordion-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
@@ -13657,15 +13656,15 @@ Accordion styles
       padding: $carbon--spacing-04 0;
     }
 
-    .#{$prefix}--accordion__title {
-      @include carbon--type-style('body-long-02');
+    .#{$prefix}--accordion__title,
+    .#{$prefix}--accordion__content > p {
+      @include type-style('body-long-02');
     }
 
     .#{$prefix}--accordion__arrow {
       flex: 0 0 1.25rem;
       width: 1.25rem;
       height: 1.25rem;
-      margin-right: $carbon--spacing-03;
     }
   }
 }
@@ -13676,7 +13675,6 @@ Accordion styles
 - **Group**: [accordion](#accordion)
 - **Requires**:
   - [carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
-  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
   - [prefix [variable]](#prefix-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
