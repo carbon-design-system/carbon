@@ -113,9 +113,6 @@
 - name: box-plot
   friendly_name: box-plot
   aliases: []
-- name: bubble--chart
-  friendly_name: bubble--chart
-  aliases: []
 - name: build
   friendly_name: Build
   aliases:
@@ -148,9 +145,6 @@
   friendly_name: Camera
   aliases:
     - camera
-- name: candlestick--chart
-  friendly_name: candlestick--chart
-  aliases: []
 - name: capitol
   friendly_name: Capitol
   aliases:
@@ -171,8 +165,14 @@
   aliases: []
 - name: chart--bar
   friendly_name: Chart bar
+- name: chart--bubble
+  friendly_name: bubble--chart
+  aliases: []
 - name: chart--bubble--line
   friendly_name: Chart bubble line
+- name: chart--candlestick
+  friendly_name: candlestick--chart
+  aliases: []
 - name: chart--error-bar
   friendly_name: chart--error-bar
   aliases: []
