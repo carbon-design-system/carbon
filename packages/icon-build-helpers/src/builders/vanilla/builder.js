@@ -232,7 +232,10 @@ function getModuleName(name, size, prefixParts, descriptor) {
     if (isGlyph) {
       return pascalCase(name) + 'Glyph';
     }
-    return pascalCase(name);
+    if (isNaN(name[0])) {
+      return pascalCase(name);
+    }
+    return '_' + pascalCase(name);
   }
 
   if (isNaN(name[0])) {

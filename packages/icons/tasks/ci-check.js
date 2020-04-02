@@ -12,7 +12,7 @@ const path = require('path');
 
 async function check() {
   await Metadata.check({
-    directory: path.resolve(__dirname, '../'),
+    input: path.resolve(__dirname, '../'),
     extensions: [
       Metadata.extensions.icons,
       Metadata.extensions.moduleName,
