@@ -20,10 +20,10 @@
     - alarm
 - name: alchemy--data--news
   friendly_name: Alchemy data news
-- name: alchemy--language--alphabet--a--expanded
-  friendly_name: Alchemy language alphabet a expanded
 - name: alchemy--language
   friendly_name: Alchemy language
+- name: alchemy--language--alphabet--a--expanded
+  friendly_name: Alchemy language alphabet a expanded
 - name: alchemy--vision
   friendly_name: Alchemy vision
 - name: americas
@@ -94,10 +94,10 @@
   friendly_name: Beijing municipal
 - name: beijing--tower
   friendly_name: Beijing tower
-- name: berlin--brandenburg--gate
-  friendly_name: Berlin brandenburg gate
 - name: berlin--brandenburg
   friendly_name: Berlin brandenburg
+- name: berlin--brandenburg--gate
+  friendly_name: Berlin brandenburg gate
 - name: berlin--cathedral
   friendly_name: Berlin cathedral
 - name: berlin--tower
@@ -110,6 +110,9 @@
   friendly_name: Blockchain
   aliases:
     - block
+- name: box-plot
+  friendly_name: box-plot
+  aliases: []
 - name: build
   friendly_name: Build
   aliases:
@@ -154,14 +157,53 @@
   friendly_name: Cell
   aliases:
     - cell
+- name: chart--3D
+  friendly_name: chart--3D
+  aliases: []
+- name: chart--area
+  friendly_name: chart--area
+  aliases: []
 - name: chart--bar
   friendly_name: Chart bar
+- name: chart--bubble
+  friendly_name: bubble--chart
+  aliases: []
 - name: chart--bubble--line
   friendly_name: Chart bubble line
+- name: chart--candlestick
+  friendly_name: candlestick--chart
+  aliases: []
+- name: chart--error-bar
+  friendly_name: chart--error-bar
+  aliases: []
+- name: chart--evaluation
+  friendly_name: chart--evaluation
+  aliases: []
+- name: chart--high-low
+  friendly_name: chart--high-low
+  aliases: []
+- name: chart--histogram
+  friendly_name: chart--histogram
+  aliases: []
 - name: chart--line
   friendly_name: Chart line
+- name: chart--multi-line
+  friendly_name: chart--multi-line
+  aliases: []
+- name: chart--parallel
+  friendly_name: chart--parallel
+  aliases: []
+- name: chart--radar
+  friendly_name: chart--radar
+  aliases: []
+- name: chart--river
+  friendly_name: chart--river
+  aliases: []
 - name: chart--scatterplot
   friendly_name: Chart scatterplot
+- name: chart--t-SNE
+  friendly_name: chart--t-SNE
+  aliases: []
 - name: cherries
   friendly_name: Cherries
   aliases:
@@ -172,6 +214,9 @@
   friendly_name: Chip credit
 - name: chip--debit
   friendly_name: Chip debit
+- name: circle-packing
+  friendly_name: circle-packing
+  aliases: []
 - name: cloud--analytics
   friendly_name: Cloud analytics
 - name: cloud--assets
@@ -198,10 +243,10 @@
   friendly_name: Cloud planning
 - name: cloud--sap
   friendly_name: Cloud sap
-- name: cloud--services--pricing
-  friendly_name: Cloud services pricing
 - name: cloud--services
   friendly_name: Cloud services
+- name: cloud--services--pricing
+  friendly_name: Cloud services pricing
 - name: cloud--storage
   friendly_name: Cloud storage
 - name: cloud--strategy
@@ -364,10 +409,10 @@
   friendly_name: Engine
   aliases:
     - engine
-- name: enterprise--design--thinking--alt
-  friendly_name: Enterprise design thinking alt
 - name: enterprise--design--thinking
   friendly_name: Enterprise design thinking
+- name: enterprise--design--thinking--alt
+  friendly_name: Enterprise design thinking alt
 - name: envelope
   friendly_name: Envelope
   aliases:
@@ -443,10 +488,10 @@
   friendly_name: Firewall
   aliases:
     - firewall
-- name: flow--chart--detail
-  friendly_name: Flow chart detail
 - name: flow--chart
   friendly_name: Flow chart
+- name: flow--chart--detail
+  friendly_name: Flow chart detail
 - name: fog
   friendly_name: Fog
   aliases:
@@ -503,10 +548,10 @@
     - handicap
 - name: handicap--active
   friendly_name: Handicap active
-- name: hard--drive--network
-  friendly_name: Hard drive network
 - name: hard--drive
   friendly_name: Hard drive
+- name: hard--drive--network
+  friendly_name: Hard drive network
 - name: hard--ice--cream
   friendly_name: Hard ice cream
 - name: hazy
@@ -525,6 +570,9 @@
   friendly_name: Heart health
 - name: heat--map
   friendly_name: Heat map
+- name: heat-map--02
+  friendly_name: heat-map--02
+  aliases: []
 - name: high--five
   friendly_name: High five
 - name: home--front
@@ -545,10 +593,10 @@
   friendly_name: Hurricane
   aliases:
     - hurricane
-- name: hybrid--cloud--services
-  friendly_name: Hybrid cloud services
 - name: hybrid--cloud
   friendly_name: Hybrid cloud
+- name: hybrid--cloud--services
+  friendly_name: Hybrid cloud services
 - name: ibm--ix
   friendly_name: Ibm ix
 - name: ibm--z
@@ -607,10 +655,10 @@
   friendly_name: Language 03
 - name: language--04
   friendly_name: Language 04
-- name: language--translation--alphabet--a--expanded
-  friendly_name: Language translation alphabet a expanded
 - name: language--translation
   friendly_name: Language translation
+- name: language--translation--alphabet--a--expanded
+  friendly_name: Language translation alphabet a expanded
 - name: launch
   friendly_name: Launch
   aliases:
@@ -633,10 +681,10 @@
     - lock
 - name: lock--alt
   friendly_name: Lock alt
-- name: locked--network--alt
-  friendly_name: Locked network alt
 - name: locked--network
   friendly_name: Locked network
+- name: locked--network--alt
+  friendly_name: Locked network alt
 - name: london
   friendly_name: London
   aliases:
@@ -679,6 +727,9 @@
   friendly_name: Mas
   aliases:
     - mas
+- name: math-curve
+  friendly_name: math-curve
+  aliases: []
 - name: maximize
   friendly_name: Maximize
   aliases:
@@ -711,6 +762,10 @@
   friendly_name: Microorganisms
   aliases:
     - microorganisms
+- name: microscope
+  friendly_name: Microscope
+  aliases:
+    - microscope
 - name: milan--duomo--di--milano
   friendly_name: Milan Duomo di Milano
   aliases:
@@ -719,10 +774,6 @@
   friendly_name: Milan Skyscrapers
   aliases:
     - skyline
-- name: microscope
-  friendly_name: Microscope
-  aliases:
-    - microscope
 - name: minimize
   friendly_name: Minimize
   aliases:
@@ -779,10 +830,10 @@
   friendly_name: Night clear
 - name: nyc--brooklyn
   friendly_name: Nyc brooklyn
-- name: nyc--manhattan--alt
-  friendly_name: Nyc manhattan alt
 - name: nyc--manhattan
   friendly_name: Nyc manhattan
+- name: nyc--manhattan--alt
+  friendly_name: Nyc manhattan alt
 - name: office
   friendly_name: Office
   aliases:
@@ -851,6 +902,9 @@
   friendly_name: Police
   aliases:
     - police
+- name: population-diagram
+  friendly_name: population-diagram
+  aliases: []
 - name: power
   friendly_name: Power
   aliases:
@@ -871,14 +925,14 @@
   friendly_name: Printer
   aliases:
     - printer
-- name: private--network--01
-  friendly_name: Private network 01
-- name: private--network--alt--01
-  friendly_name: Private network alt 01
-- name: private--network--alt
-  friendly_name: Private network alt
 - name: private--network
   friendly_name: Private network
+- name: private--network--01
+  friendly_name: Private network 01
+- name: private--network--alt
+  friendly_name: Private network alt
+- name: private--network--alt--01
+  friendly_name: Private network alt 01
 - name: progress
   friendly_name: Progress
   aliases:
@@ -887,6 +941,9 @@
   friendly_name: Puzzle
   aliases:
     - puzzle
+- name: q-q-plot
+  friendly_name: q-q-plot
+  aliases: []
 - name: question
   friendly_name: Question
   aliases:
@@ -921,6 +978,9 @@
     - refresh
 - name: relationship--extraction
   friendly_name: Relationship extraction
+- name: relationship-diagram
+  friendly_name: relationship-diagram
+  aliases: []
 - name: renew
   friendly_name: Renew
   aliases:
@@ -965,10 +1025,10 @@
   friendly_name: San Francisco
 - name: san-francisco--fog
   friendly_name: San Francisco fog
-- name: sao-paulo--expanded--base
-  friendly_name: Sao Paulo expanded base
 - name: sao-paulo
   friendly_name: Sao Paulo
+- name: sao-paulo--expanded--base
+  friendly_name: Sao Paulo expanded base
 - name: satellite
   friendly_name: Satellite
   aliases:
@@ -979,6 +1039,9 @@
   friendly_name: Scale
   aliases:
     - scale
+- name: scatter-matrix
+  friendly_name: scatter-matrix
+  aliases: []
 - name: seattle
   friendly_name: Seattle
   aliases:
@@ -1191,6 +1254,12 @@
   friendly_name: Trash
   aliases:
     - trash
+- name: tree--diagram
+  friendly_name: tree--diagram
+  aliases: []
+- name: tree--map
+  friendly_name: tree--map
+  aliases: []
 - name: university
   friendly_name: University
   aliases:
@@ -1249,12 +1318,12 @@
   friendly_name: Washer
   aliases:
     - washer
-- name: washington-dc--monument
-  friendly_name: Washington D.C. monument
 - name: washington-dc
   friendly_name: Washington D.C.
 - name: washington-dc--capitol
   friendly_name: Washington D.C. capitol
+- name: washington-dc--monument
+  friendly_name: Washington D.C. monument
 - name: watson--avatar
   friendly_name: Watson avatar
 - name: weather
@@ -1293,6 +1362,9 @@
   friendly_name: Wireless home
 - name: wireless--modem
   friendly_name: Wireless modem
+- name: word-cloud
+  friendly_name: word-cloud
+  aliases: []
 - name: wrecking--ball
   friendly_name: Wrecking ball
 - name: yoga--01
