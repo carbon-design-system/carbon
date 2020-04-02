@@ -407,6 +407,32 @@
     padding: $carbon--spacing-05;
   }
 
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--text-input,
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--text-area,
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--search-input,
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--select-input,
+  .#{$prefix}--tabs--container ~ .#{$prefix}--tab-content .#{$prefix}--dropdown,
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--dropdown-list,
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--number
+    input[type='number'],
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--date-picker__input {
+    background-color: $field-02;
+  }
+
   //-----------------------------
   // Skeleton state
   //-----------------------------
