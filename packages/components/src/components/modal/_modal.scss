@@ -85,7 +85,7 @@
     transition: transform $duration--moderate-02 motion(exit, expressive);
 
     @include carbon--breakpoint(md) {
-      position: initial;
+      position: static;
       width: 84%;
       max-height: 90%;
       height: auto;
