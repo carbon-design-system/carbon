@@ -169,7 +169,7 @@ export default class Modal extends Component {
     primaryButtonDisabled: false,
     onKeyDown: () => {},
     passiveModal: false,
-    iconDescription: 'close the modal',
+    iconDescription: 'Close',
     modalHeading: '',
     modalLabel: '',
     selectorPrimaryFocus: '[data-modal-primary-focus]',
