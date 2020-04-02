@@ -20,7 +20,6 @@ export function generate() {
     const document = Document.getSelectedDocument();
     const page = selectPage(findOrCreatePage(document, 'color'));
     const sharedStyles = syncColorStyles(document, 'fill');
-    console.log(sharedStyles);
     const { black, white, colors, support } = groupByKey(
       sharedStyles,
       sharedStyle => {
