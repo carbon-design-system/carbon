@@ -8,7 +8,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  number,
+  select,
+  text,
+} from '@storybook/addon-knobs';
 import { settings } from 'carbon-components';
 import classNames from 'classnames';
 import './Tabs-story.scss';
@@ -17,6 +23,11 @@ import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TextInput from '../TextInput';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
+
+const selectionModes = {
+  'Change selection automatically upon focus (automatic)': 'automatic',
+  'Change selection on explicit gesture (manual)': 'manual',
+};
 
 const { prefix } = settings;
 const props = {
@@ -39,6 +50,11 @@ const props = {
     tabContentClassName: text(
       'The className for the child `<TabContent>` components',
       'tab-content'
+    ),
+    selectionMode: select(
+      'Selection mode (selectionMode)',
+      selectionModes,
+      'automatic'
     ),
   }),
   tab: () => ({

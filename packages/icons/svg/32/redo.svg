@@ -6,7 +6,9 @@
 	.st0{fill:#FFFFFF;}
 	.st1{fill:#F9E4C2;}
 	.st2{fill:#C1D7FB;}
+  .cls-1{fill:none;}
 </style>
 <path id="_x33_2_px_4_" d="M9,15c-2.5,0-4,1.5-4,4c0,2.5,1.5,4,4,4h5v2H9c-3.5,0-6-2.5-6-6c0-3.5,2.5-6,6-6h16.2l-4-4l1.4-1.5L29,14
 	l-6.4,6.4L21.2,19l4-4H9z"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
 </svg>
