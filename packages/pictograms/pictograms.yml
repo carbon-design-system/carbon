@@ -110,8 +110,8 @@
   friendly_name: Blockchain
   aliases:
     - block
-- name: box--plot
-  friendly_name: box--plot
+- name: box-plot
+  friendly_name: box-plot
   aliases: []
 - name: bubble--chart
   friendly_name: bubble--chart

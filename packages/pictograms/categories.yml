@@ -153,12 +153,12 @@ categories:
       - analyze
       - blockchain
       - box-plot
+      - bubble--chart
+      - candlestick--chart
       - chart--3D
       - chart--area
       - chart--bar
-      - chart--bubble
-      - chart--bubble-line
-      - chart--candlestick
+      - chart--bubble--line
       - chart--error-bar
       - chart--evaluation
       - chart--high-low
@@ -173,7 +173,7 @@ categories:
       - circle-packing
       - flow--chart
       - flow--chart--detail
-      - heat-map--01
+      - heat--map
       - heat-map--02
       - math-curve
       - population-diagram
