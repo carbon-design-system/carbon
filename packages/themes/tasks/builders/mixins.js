@@ -57,6 +57,15 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
     ],
     body: t.BlockStatement({
       body: [
+        t.Assignment({
+          id: t.Identifier('parent-carbon-theme'),
+          init: t.Identifier('carbon--theme'),
+        }),
+        t.Assignment({
+          id: t.Identifier('carbon--theme'),
+          init: t.Identifier('theme'),
+          global: true,
+        }),
         ...Object.keys(tokens).flatMap(group => {
           return tokens[group].flatMap(token => {
             const name = formatTokenName(token);
@@ -131,7 +140,7 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
                   t.IfStatement({
                     test: t.SassFunctionCall(t.Identifier('should-emit'), [
                       t.Identifier('theme'),
-                      t.Identifier('carbon--theme'),
+                      t.Identifier('parent-carbon-theme'),
                       t.SassString(name),
                       t.Identifier('emit-difference'),
                     ]),
@@ -151,14 +160,20 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
           ),
         }),
         t.AtContent(),
+        t.Newline(),
         t.Comment(' Reset to default theme after apply in content'),
         t.IfStatement({
           test: t.LogicalExpression({
-            left: t.Identifier('theme'),
+            left: t.Identifier('carbon--theme'),
             operator: '!=',
-            right: t.Identifier(defaultThemeMapName),
+            right: t.Identifier('parent-carbon-theme'),
           }),
           consequent: t.BlockStatement([
+            t.Assignment({
+              id: t.Identifier('carbon--theme'),
+              init: t.Identifier('parent-carbon-theme'),
+              global: true,
+            }),
             t.SassMixinCall(t.Identifier('carbon--theme')),
           ]),
         }),
