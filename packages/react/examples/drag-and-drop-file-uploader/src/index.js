@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { render } from 'react-dom';
 import { settings } from 'carbon-components';
 import {
@@ -24,9 +24,23 @@ const { prefix } = settings;
 
 function ExampleDropContainerApp(props) {
   const [files, setFiles] = useState([]);
+  const handleDrop = e => {
+    e.preventDefault();
+  };
+  const handleDragover = e => {
+    e.preventDefault();
+  };
+  useEffect(() => {
+    document.addEventListener('drop', handleDrop);
+    document.addEventListener('dragover', handleDragover);
+    return () => {
+      document.removeEventListener('drop', handleDrop);
+      document.removeEventListener('dragover', handleDragover);
+    };
+  }, []);
   const uploadFile = async fileToUpload => {
     // file size validation
-    if (fileToUpload.size > 512000) {
+    if (fileToUpload.filesize > 512000) {
       const updatedFile = {
         ...fileToUpload,
         status: 'edit',
@@ -101,10 +115,13 @@ function ExampleDropContainerApp(props) {
         status: 'uploading',
         iconDescription: 'Uploading',
       }));
-      props.multiple
-        ? setFiles([...files, ...newFiles])
-        : setFiles([...files, newFiles[0]]);
-      newFiles.forEach(uploadFile);
+      if (props.multiple) {
+        setFiles([...files, ...newFiles]);
+        newFiles.forEach(uploadFile);
+      } else {
+        setFiles([newFiles[0]]);
+        uploadFile(newFiles[0]);
+      }
     },
     [files, props.multiple]
   );

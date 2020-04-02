@@ -120,6 +120,24 @@ describe('_mixins.scss', () => {
     expect(colors[2]).toBe(`var(--cds-interactive-01, ${colors[0]})`);
   });
 
+  it('should set the global carbon--theme to match the given theme', async () => {
+    const { calls } = await render(`
+      @import '../scss/themes';
+      $carbon--theme: ( value-01: #000000 );
+      $custom-theme: ( value-01: #ffffff );
+
+      @include carbon--theme($custom-theme) {
+        $t: test($carbon--theme);
+      }
+
+      $t: test($carbon--theme);
+    `);
+
+    const [custom, reset] = calls.map(([call]) => convert(call));
+    expect(custom['value-01']).toBe('#ffffff');
+    expect(reset['value-01']).toBe('#000000');
+  });
+
   describe('@mixin custom-property', () => {
     it('should create a custom property for a given token name and value', async () => {
       const { result } = await render(`
