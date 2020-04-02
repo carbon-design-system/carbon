@@ -223,10 +223,10 @@ export default class TimePicker extends Component {
               {...timePickerInputProps}
               data-invalid={invalid ? invalid : undefined}
             />
-            {error}
           </div>
           {children}
         </div>
+        {error}
       </div>
     );
   }
