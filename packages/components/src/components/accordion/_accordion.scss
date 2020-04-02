@@ -207,7 +207,7 @@
 
     .#{$prefix}--accordion__title,
     .#{$prefix}--accordion__content > p {
-      @include expressive-typing('body-long-01');
+      @include type-style('body-long-02');
     }
 
     .#{$prefix}--accordion__arrow {
