@@ -21,6 +21,7 @@ import './Tabs-story.scss';
 import CodeSnippet from '../CodeSnippet';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
+import TextInput from '../TextInput';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
 
 const selectionModes = {
@@ -199,6 +200,7 @@ storiesOf('Tabs', module)
           label={<CustomLabel text="Custom Label" />}>
           <div className="some-content">
             <p>Content for fourth tab goes here.</p>
+            <TextInput id="sample-input" labelText="text input label" />
           </div>
         </Tab>
       </Tabs>

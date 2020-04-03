@@ -188,7 +188,16 @@ export default class ComboBox extends React.Component {
   };
 
   static getDerivedStateFromProps(nextProps, state) {
-    return { inputValue: getInputValue(nextProps, state) };
+    const { prevSelectedItem, doneInitialSelectedItem } = state;
+    const { selectedItem } = nextProps;
+    if (!doneInitialSelectedItem || prevSelectedItem !== selectedItem) {
+      return {
+        doneInitialSelectedItem: true,
+        prevSelectedItem: selectedItem,
+        inputValue: getInputValue(nextProps, state),
+      };
+    }
+    return null;
   }
 
   constructor(props) {
