@@ -22,6 +22,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "expressive": Object {
+        "type": "bool",
+      },
     },
   },
   "AccordionItem" => Object {

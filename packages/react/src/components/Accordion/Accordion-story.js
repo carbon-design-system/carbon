@@ -40,7 +40,7 @@ storiesOf('Accordion', module)
           ['start', 'end'],
           'end'
         )}
-        expressive={boolean('expressive theme', false)}>
+        expressive={boolean('expressive', false)}>
         <AccordionItem
           title={text('The title (title)', 'Section 1 title')}
           open={boolean('Open the section (open)', false)}
