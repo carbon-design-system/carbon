@@ -9,10 +9,6 @@ import { getAttributes } from '@carbon/icon-helpers';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const defaultStyle = {
-  willChange: 'transform',
-};
-
 const Icon = React.forwardRef(function Icon(
   { className, children, style = {}, tabIndex, ...rest },
   ref
@@ -35,7 +31,6 @@ const Icon = React.forwardRef(function Icon(
   }
 
   props.style = {
-    ...defaultStyle,
     ...style,
   };
 
