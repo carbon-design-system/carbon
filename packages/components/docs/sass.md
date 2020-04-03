@@ -3523,6 +3523,7 @@ $carbon--spacing-08: 2.5rem;
 - **Used by**:
   - [snippet [mixin]](#snippet-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [search [mixin]](#search-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
@@ -3548,6 +3549,7 @@ $carbon--spacing-09: 3rem;
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [tile [mixin]](#tile-mixin)
 
 ### ✅carbon--spacing-10 [variable]
@@ -19874,6 +19876,7 @@ Inline notification styles
     @include reset;
 
     display: flex;
+    flex-wrap: wrap;
     position: relative;
     height: auto;
     min-height: rem(48px);
@@ -19886,6 +19889,7 @@ Inline notification styles
 
     @include carbon--breakpoint(md) {
       max-width: rem(608px);
+      flex-wrap: nowrap;
     }
 
     @include carbon--breakpoint(lg) {
@@ -20008,7 +20012,11 @@ Inline notification styles
   .#{$prefix}--inline-notification__details {
     display: flex;
     flex-grow: 1;
-    margin: 0 $carbon--spacing-05;
+    margin: 0 $carbon--spacing-09 0 $carbon--spacing-05;
+
+    @include carbon--breakpoint(md) {
+      margin: 0 $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--inline-notification__icon {
@@ -20035,7 +20043,12 @@ Inline notification styles
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
     height: rem(32px);
-    margin: $carbon--spacing-03 0;
+    margin-bottom: $carbon--spacing-03;
+    margin-left: $carbon--spacing-08;
+
+    @include carbon--breakpoint(md) {
+      margin: $carbon--spacing-03 0;
+    }
 
     &,
     &:hover,
@@ -20062,6 +20075,9 @@ Inline notification styles
 
   .#{$prefix}--inline-notification__close-button {
     @include focus-outline('reset');
+    position: absolute;
+    top: 0;
+    right: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20084,6 +20100,10 @@ Inline notification styles
 
     .#{$prefix}--inline-notification__close-icon {
       fill: $inverse-01;
+    }
+
+    @include carbon--breakpoint(md) {
+      position: static;
     }
   }
 
@@ -20128,8 +20148,10 @@ Inline notification styles
   - [support-04 [variable]](#support-04-variable)
   - [inverse-support-03 [variable]](#inverse-support-03-variable)
   - [support-03 [variable]](#support-03-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
 
