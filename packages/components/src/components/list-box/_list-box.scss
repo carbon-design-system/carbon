@@ -136,7 +136,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
-    border-bottom-width: 0;
+    border-bottom-color: transparent;
   }
 
   // Disabled state for `list-box`
@@ -151,7 +151,7 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--disabled,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field:focus {
-    border-bottom-width: 0;
+    border-bottom-color: transparent;
     outline: none;
   }
 
@@ -426,6 +426,12 @@ $list-box-menu-width: rem(300px);
     max-height: rem(140px);
     overflow-y: auto;
     z-index: z('dropdown');
+
+    &:focus {
+      // remove default browser focus in firefox
+      @include focus-outline('reset');
+      @include focus-outline('outline-compat');
+    }
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control
