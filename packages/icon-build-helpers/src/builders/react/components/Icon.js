@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const Icon = React.forwardRef(function Icon(
-  { className, children, style = {}, tabIndex, ...rest },
+  { className, children, tabIndex, ...rest },
   ref
 ) {
   const { tabindex, ...props } = getAttributes({
@@ -29,10 +29,6 @@ const Icon = React.forwardRef(function Icon(
   if (ref) {
     props.ref = ref;
   }
-
-  props.style = {
-    ...style,
-  };
 
   return React.createElement('svg', props, children);
 });
