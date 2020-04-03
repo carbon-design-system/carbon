@@ -64,7 +64,7 @@
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open,
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open
     .#{$prefix}--overflow-menu__trigger {
-    background-color: $ui-02;
+    background-color: $field-02;
   }
 
   .#{$prefix}--overflow-menu__icon {
@@ -167,6 +167,10 @@
     border-top: 1px solid $ui-03;
   }
 
+  .#{$prefix}--overflow-menu--light .#{$prefix}--overflow-menu--divider {
+    border-top: 1px solid $decorative-01;
+  }
+
   a.#{$prefix}--overflow-menu-options__btn::before {
     content: '';
     height: 100%;
@@ -226,6 +230,11 @@
 
   .#{$prefix}--overflow-menu-options__option--danger {
     border-top: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--overflow-menu--light
+    .#{$prefix}--overflow-menu-options__option--danger {
+    border-top: 1px solid $decorative-01;
   }
 
   .#{$prefix}--overflow-menu-options__option--danger

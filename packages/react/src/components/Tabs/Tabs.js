@@ -89,6 +89,11 @@ export default class Tabs extends React.Component {
      * Provide a className that is applied to the <TabContent> components
      */
     tabContentClassName: PropTypes.string,
+
+    /**
+     * Choose whether or not to automatically change selection on focus
+     */
+    selectionMode: PropTypes.oneOf(['automatic', 'manual']),
   };
 
   static defaultProps = {
@@ -98,6 +103,7 @@ export default class Tabs extends React.Component {
     triggerHref: '#',
     selected: 0,
     ariaLabel: 'listbox',
+    selectionMode: 'automatic',
   };
 
   state = {
@@ -184,7 +190,9 @@ export default class Tabs extends React.Component {
         const tab = this.getTabAt(nextIndex);
         if (tab && matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
           evt.preventDefault();
-          this.selectTabAt(nextIndex, onSelectionChange);
+          if (this.props.selectionMode !== 'manual') {
+            this.selectTabAt(nextIndex, onSelectionChange);
+          }
           if (tab.tabAnchor) {
             tab.tabAnchor.focus();
           }

@@ -549,7 +549,7 @@
     }
   }
 
-  @include sticky-header($max-width: rem(900px));
+  @include sticky-header($max-width: 100%);
 }
 
 @include exports('data-table-v2-core') {
