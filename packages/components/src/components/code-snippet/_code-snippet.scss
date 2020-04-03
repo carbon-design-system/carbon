@@ -124,11 +124,13 @@
 
   .#{$prefix}--snippet--single::after {
     width: rem(16px);
-    height: 100%;
     content: '';
     position: absolute;
-    top: 0;
     right: rem(56px);
+
+    // Prevents gradient from clipping focus outline:
+    top: 2px;
+    bottom: 2px;
 
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
