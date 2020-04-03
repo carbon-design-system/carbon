@@ -22883,8 +22883,9 @@ Tabs styles
     @include carbon--breakpoint(md) {
       background: transparent;
       height: auto;
-      & + .#{$prefix}--tabs__nav-item {
-        margin-left: rem(2px);
+
+      + .#{$prefix}--tabs__nav-item {
+        margin-left: rem(1px);
       }
     }
   }
