@@ -16,7 +16,13 @@ import DataTableSkeleton from '../DataTableSkeleton';
 const props = () => ({
   headers: array(
     'Optional table headers (headers)',
-    ['Name', 'Protocol', 'Port', 'Rule', 'Attached Groups'],
+    [
+      { key: 'name' },
+      { key: 'protocol' },
+      { key: 'port' },
+      { key: 'rule' },
+      { key: 'attached-groups' },
+    ],
     ','
   ),
   zebra: boolean('Use zebra stripe (zebra)', false),
