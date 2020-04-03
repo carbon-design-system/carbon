@@ -15,6 +15,7 @@ const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
 
 function Loading({
+  id,
   active,
   className: customClassName,
   withOverlay,
@@ -32,7 +33,7 @@ function Loading({
     [`${prefix}--loading-overlay`]: true,
     [`${prefix}--loading-overlay--stop`]: !active,
   });
-  const loadingId = `loading-id-${instanceId}`;
+  const loadingId = id || `loading-id-${instanceId}`;
   const spinnerRadius = small ? '26.8125' : '37.5';
 
   const loading = (
@@ -73,6 +74,11 @@ function Loading({
 }
 
 Loading.propTypes = {
+  /**
+   * Provide an `id` to uniquely identify the label
+   */
+  id: PropTypes.string,
+
   /**
    * Specify whether you want the loading indicator to be spinning or not
    */
