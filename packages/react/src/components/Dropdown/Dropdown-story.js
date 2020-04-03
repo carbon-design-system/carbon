@@ -72,21 +72,6 @@ const props = () => ({
   ),
 });
 
-const itemToElement = item => {
-  const [first, ...rest] = item.text.split(' ');
-  return (
-    <div
-      style={{
-        textOverflow: 'ellipsis',
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
-      }}>
-      <span>{first}</span>
-      <span style={{ color: 'blue' }}> {rest.join(' ')}</span>
-    </div>
-  );
-};
-
 storiesOf('Dropdown', module)
   .addDecorator(withKnobs)
   .add(
@@ -121,25 +106,6 @@ storiesOf('Dropdown', module)
     {
       info: {
         text: 'Rendering an array of strings as `items`',
-      },
-    }
-  )
-  .add(
-    'items as components',
-    () => (
-      <div style={{ width: 300 }}>
-        <Dropdown
-          {...props()}
-          items={items}
-          itemToString={item => (item ? item.text : '')}
-          itemToElement={itemToElement}
-          onChange={action('onChange')}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: `Rendering items as custom components`,
       },
     }
   )

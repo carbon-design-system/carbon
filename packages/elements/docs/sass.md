@@ -131,6 +131,7 @@
   - [❌custom-property [mixin]](#custom-property-mixin)
   - [❌should-emit [function]](#should-emit-function)
   - [✅carbon--theme [mixin]](#carbon--theme-mixin)
+  - [❌emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [✅carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
   - [✅carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
   - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
@@ -183,6 +184,7 @@
   - [✅hover-ui [variable]](#hover-ui-variable)
   - [✅active-ui [variable]](#active-ui-variable)
   - [✅selected-ui [variable]](#selected-ui-variable)
+  - [✅selected-light-ui [variable]](#selected-light-ui-variable)
   - [✅hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [✅inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [✅hover-danger [variable]](#hover-danger-variable)
@@ -193,6 +195,7 @@
   - [✅disabled-02 [variable]](#disabled-02-variable)
   - [✅disabled-03 [variable]](#disabled-03-variable)
   - [✅highlight [variable]](#highlight-variable)
+  - [✅decorative-01 [variable]](#decorative-01-variable)
   - [✅skeleton-01 [variable]](#skeleton-01-variable)
   - [✅skeleton-02 [variable]](#skeleton-02-variable)
   - [✅⚠️brand-01 [variable]](#brand-01-variable)
@@ -273,6 +276,7 @@
   - [✅prefix [variable]](#prefix-variable)
   - [✅carbon--type-reset [mixin]](#carbon--type-reset-mixin)
   - [✅carbon--default-type [mixin]](#carbon--default-type-mixin)
+  - [✅carbon--font-face-sans-condensed [mixin]](#carbon--font-face-sans-condensed-mixin)
   - [✅carbon--font-face-sans [mixin]](#carbon--font-face-sans-mixin)
   - [✅carbon--get-type-size [function]](#carbon--get-type-size-function)
   - [✅carbon--type-scale [variable]](#carbon--type-scale-variable)
@@ -3690,6 +3694,7 @@ $custom-property-prefix: 'cds';
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [custom-properties [mixin]](#custom-properties-mixin)
 
 ### ❌custom-property [mixin]
@@ -3750,6 +3755,8 @@ Define theme variables from a map of tokens
 
 ```scss
 @mixin carbon--theme($theme: $carbon--theme, $emit-custom-properties: false) {
+  $parent-carbon-theme: $carbon--theme;
+  $carbon--theme: $theme !global;
   $interactive-01: map-get($theme, 'interactive-01') !global;
   $interactive-02: map-get($theme, 'interactive-02') !global;
   $interactive-03: map-get($theme, 'interactive-03') !global;
@@ -3797,6 +3804,7 @@ Define theme variables from a map of tokens
   $hover-ui: map-get($theme, 'hover-ui') !global;
   $active-ui: map-get($theme, 'active-ui') !global;
   $selected-ui: map-get($theme, 'selected-ui') !global;
+  $selected-light-ui: map-get($theme, 'selected-light-ui') !global;
   $hover-selected-ui: map-get($theme, 'hover-selected-ui') !global;
   $inverse-hover-ui: map-get($theme, 'inverse-hover-ui') !global;
   $hover-danger: map-get($theme, 'hover-danger') !global;
@@ -3807,6 +3815,7 @@ Define theme variables from a map of tokens
   $disabled-02: map-get($theme, 'disabled-02') !global;
   $disabled-03: map-get($theme, 'disabled-03') !global;
   $highlight: map-get($theme, 'highlight') !global;
+  $decorative-01: map-get($theme, 'decorative-01') !global;
   $skeleton-01: map-get($theme, 'skeleton-01') !global;
   $skeleton-02: map-get($theme, 'skeleton-02') !global;
   $brand-01: map-get($theme, 'brand-01') !global;
@@ -4067,6 +4076,10 @@ Define theme variables from a map of tokens
       --#{$custom-property-prefix}-selected-ui,
       map-get($theme, 'selected-ui')
     ) !global;
+    $selected-light-ui: var(
+      --#{$custom-property-prefix}-selected-light-ui,
+      map-get($theme, 'selected-light-ui')
+    ) !global;
     $hover-selected-ui: var(
       --#{$custom-property-prefix}-hover-selected-ui,
       map-get($theme, 'hover-selected-ui')
@@ -4106,6 +4119,10 @@ Define theme variables from a map of tokens
     $highlight: var(
       --#{$custom-property-prefix}-highlight,
       map-get($theme, 'highlight')
+    ) !global;
+    $decorative-01: var(
+      --#{$custom-property-prefix}-decorative-01,
+      map-get($theme, 'decorative-01')
     ) !global;
     $skeleton-01: var(
       --#{$custom-property-prefix}-skeleton-01,
@@ -4257,7 +4274,12 @@ Define theme variables from a map of tokens
     ) !global;
   }
   @if $emit-custom-properties == true {
-    @if should-emit($theme, $carbon--theme, 'interactive-01', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'interactive-01',
+      $emit-difference
+    )
     {
       @include custom-property(
         'interactive-01',
@@ -4265,7 +4287,12 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'interactive-02', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'interactive-02',
+      $emit-difference
+    )
     {
       @include custom-property(
         'interactive-02',
@@ -4273,7 +4300,12 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'interactive-03', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'interactive-03',
+      $emit-difference
+    )
     {
       @include custom-property(
         'interactive-03',
@@ -4281,7 +4313,12 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'interactive-04', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'interactive-04',
+      $emit-difference
+    )
     {
       @include custom-property(
         'interactive-04',
@@ -4289,112 +4326,168 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'ui-background', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'ui-background',
+      $emit-difference
+    )
+    {
       @include custom-property(
         'ui-background',
         map-get($theme, 'ui-background')
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'ui-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'ui-01', $emit-difference) {
       @include custom-property('ui-01', map-get($theme, 'ui-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'ui-02', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'ui-02', $emit-difference) {
       @include custom-property('ui-02', map-get($theme, 'ui-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'ui-03', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'ui-03', $emit-difference) {
       @include custom-property('ui-03', map-get($theme, 'ui-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'ui-04', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'ui-04', $emit-difference) {
       @include custom-property('ui-04', map-get($theme, 'ui-04'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'ui-05', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'ui-05', $emit-difference) {
       @include custom-property('ui-05', map-get($theme, 'ui-05'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'text-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'text-01', $emit-difference) {
       @include custom-property('text-01', map-get($theme, 'text-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'text-02', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'text-02', $emit-difference) {
       @include custom-property('text-02', map-get($theme, 'text-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'text-03', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'text-03', $emit-difference) {
       @include custom-property('text-03', map-get($theme, 'text-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'text-04', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'text-04', $emit-difference) {
       @include custom-property('text-04', map-get($theme, 'text-04'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'text-05', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'text-05', $emit-difference) {
       @include custom-property('text-05', map-get($theme, 'text-05'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'text-error', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'text-error',
+      $emit-difference
+    )
+    {
       @include custom-property('text-error', map-get($theme, 'text-error'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'icon-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'icon-01', $emit-difference) {
       @include custom-property('icon-01', map-get($theme, 'icon-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'icon-02', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'icon-02', $emit-difference) {
       @include custom-property('icon-02', map-get($theme, 'icon-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'icon-03', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'icon-03', $emit-difference) {
       @include custom-property('icon-03', map-get($theme, 'icon-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'link-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'link-01', $emit-difference) {
       @include custom-property('link-01', map-get($theme, 'link-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'inverse-link', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'inverse-link',
+      $emit-difference
+    )
+    {
       @include custom-property('inverse-link', map-get($theme, 'inverse-link'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'field-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'field-01', $emit-difference)
+    {
       @include custom-property('field-01', map-get($theme, 'field-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'field-02', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'field-02', $emit-difference)
+    {
       @include custom-property('field-02', map-get($theme, 'field-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'inverse-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'inverse-01',
+      $emit-difference
+    )
+    {
       @include custom-property('inverse-01', map-get($theme, 'inverse-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'inverse-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'inverse-02',
+      $emit-difference
+    )
+    {
       @include custom-property('inverse-02', map-get($theme, 'inverse-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'support-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'support-01',
+      $emit-difference
+    )
+    {
       @include custom-property('support-01', map-get($theme, 'support-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'support-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'support-02',
+      $emit-difference
+    )
+    {
       @include custom-property('support-02', map-get($theme, 'support-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'support-03', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'support-03',
+      $emit-difference
+    )
+    {
       @include custom-property('support-03', map-get($theme, 'support-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'support-04', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'support-04',
+      $emit-difference
+    )
+    {
       @include custom-property('support-04', map-get($theme, 'support-04'));
     }
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'inverse-support-01',
       $emit-difference
     )
@@ -4407,7 +4500,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'inverse-support-02',
       $emit-difference
     )
@@ -4420,7 +4513,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'inverse-support-03',
       $emit-difference
     )
@@ -4433,7 +4526,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'inverse-support-04',
       $emit-difference
     )
@@ -4444,21 +4537,27 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'overlay-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'overlay-01',
+      $emit-difference
+    )
+    {
       @include custom-property('overlay-01', map-get($theme, 'overlay-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'danger', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'danger', $emit-difference) {
       @include custom-property('danger', map-get($theme, 'danger'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'focus', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'focus', $emit-difference) {
       @include custom-property('focus', map-get($theme, 'focus'));
     }
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'inverse-focus-ui',
       $emit-difference
     )
@@ -4469,14 +4568,25 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'hover-primary', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'hover-primary',
+      $emit-difference
+    )
+    {
       @include custom-property(
         'hover-primary',
         map-get($theme, 'hover-primary')
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'active-primary', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'active-primary',
+      $emit-difference
+    )
     {
       @include custom-property(
         'active-primary',
@@ -4486,7 +4596,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'hover-primary-text',
       $emit-difference
     )
@@ -4497,7 +4607,12 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'hover-secondary', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'hover-secondary',
+      $emit-difference
+    )
     {
       @include custom-property(
         'hover-secondary',
@@ -4507,7 +4622,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'active-secondary',
       $emit-difference
     )
@@ -4518,7 +4633,12 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'hover-tertiary', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'hover-tertiary',
+      $emit-difference
+    )
     {
       @include custom-property(
         'hover-tertiary',
@@ -4526,7 +4646,12 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'active-tertiary', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'active-tertiary',
+      $emit-difference
+    )
     {
       @include custom-property(
         'active-tertiary',
@@ -4534,21 +4659,42 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'hover-ui', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'hover-ui', $emit-difference)
+    {
       @include custom-property('hover-ui', map-get($theme, 'hover-ui'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'active-ui', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'active-ui', $emit-difference)
+    {
       @include custom-property('active-ui', map-get($theme, 'active-ui'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'selected-ui', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'selected-ui',
+      $emit-difference
+    )
+    {
       @include custom-property('selected-ui', map-get($theme, 'selected-ui'));
     }
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
+      'selected-light-ui',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'selected-light-ui',
+        map-get($theme, 'selected-light-ui')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
       'hover-selected-ui',
       $emit-difference
     )
@@ -4561,7 +4707,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'inverse-hover-ui',
       $emit-difference
     )
@@ -4572,78 +4718,163 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'hover-danger', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'hover-danger',
+      $emit-difference
+    )
+    {
       @include custom-property('hover-danger', map-get($theme, 'hover-danger'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'active-danger', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'active-danger',
+      $emit-difference
+    )
+    {
       @include custom-property(
         'active-danger',
         map-get($theme, 'active-danger')
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'hover-row', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'hover-row', $emit-difference)
+    {
       @include custom-property('hover-row', map-get($theme, 'hover-row'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'visited-link', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'visited-link',
+      $emit-difference
+    )
+    {
       @include custom-property('visited-link', map-get($theme, 'visited-link'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'disabled-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'disabled-01',
+      $emit-difference
+    )
+    {
       @include custom-property('disabled-01', map-get($theme, 'disabled-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'disabled-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'disabled-02',
+      $emit-difference
+    )
+    {
       @include custom-property('disabled-02', map-get($theme, 'disabled-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'disabled-03', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'disabled-03',
+      $emit-difference
+    )
+    {
       @include custom-property('disabled-03', map-get($theme, 'disabled-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'highlight', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'highlight', $emit-difference)
+    {
       @include custom-property('highlight', map-get($theme, 'highlight'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'skeleton-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'decorative-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'decorative-01',
+        map-get($theme, 'decorative-01')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'skeleton-01',
+      $emit-difference
+    )
+    {
       @include custom-property('skeleton-01', map-get($theme, 'skeleton-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'skeleton-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'skeleton-02',
+      $emit-difference
+    )
+    {
       @include custom-property('skeleton-02', map-get($theme, 'skeleton-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'brand-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'brand-01', $emit-difference)
+    {
       @include custom-property('brand-01', map-get($theme, 'brand-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'brand-02', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'brand-02', $emit-difference)
+    {
       @include custom-property('brand-02', map-get($theme, 'brand-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'brand-03', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'brand-03', $emit-difference)
+    {
       @include custom-property('brand-03', map-get($theme, 'brand-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'active-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'active-01', $emit-difference)
+    {
       @include custom-property('active-01', map-get($theme, 'active-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'hover-field', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'hover-field',
+      $emit-difference
+    )
+    {
       @include custom-property('hover-field', map-get($theme, 'hover-field'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'caption-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'caption-01',
+      $emit-difference
+    )
+    {
       @include custom-property('caption-01', map-get($theme, 'caption-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'label-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'label-01', $emit-difference)
+    {
       @include custom-property('label-01', map-get($theme, 'label-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'helper-text-01', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'helper-text-01',
+      $emit-difference
+    )
     {
       @include custom-property(
         'helper-text-01',
@@ -4651,43 +4882,73 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'body-short-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'body-short-01',
+      $emit-difference
+    )
+    {
       @include custom-property(
         'body-short-01',
         map-get($theme, 'body-short-01')
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'body-long-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'body-long-01',
+      $emit-difference
+    )
+    {
       @include custom-property('body-long-01', map-get($theme, 'body-long-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'body-short-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'body-short-02',
+      $emit-difference
+    )
+    {
       @include custom-property(
         'body-short-02',
         map-get($theme, 'body-short-02')
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'body-long-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'body-long-02',
+      $emit-difference
+    )
+    {
       @include custom-property('body-long-02', map-get($theme, 'body-long-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'code-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'code-01', $emit-difference) {
       @include custom-property('code-01', map-get($theme, 'code-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'code-02', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'code-02', $emit-difference) {
       @include custom-property('code-02', map-get($theme, 'code-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'heading-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'heading-01',
+      $emit-difference
+    )
+    {
       @include custom-property('heading-01', map-get($theme, 'heading-01'));
     }
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'productive-heading-01',
       $emit-difference
     )
@@ -4698,13 +4959,19 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'heading-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'heading-02',
+      $emit-difference
+    )
+    {
       @include custom-property('heading-02', map-get($theme, 'heading-02'));
     }
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'productive-heading-02',
       $emit-difference
     )
@@ -4717,7 +4984,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'productive-heading-03',
       $emit-difference
     )
@@ -4730,7 +4997,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'productive-heading-04',
       $emit-difference
     )
@@ -4743,7 +5010,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'productive-heading-05',
       $emit-difference
     )
@@ -4756,7 +5023,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'productive-heading-06',
       $emit-difference
     )
@@ -4769,7 +5036,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'productive-heading-07',
       $emit-difference
     )
@@ -4782,7 +5049,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'expressive-heading-01',
       $emit-difference
     )
@@ -4795,7 +5062,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'expressive-heading-02',
       $emit-difference
     )
@@ -4808,7 +5075,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'expressive-heading-03',
       $emit-difference
     )
@@ -4821,7 +5088,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'expressive-heading-04',
       $emit-difference
     )
@@ -4834,7 +5101,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'expressive-heading-05',
       $emit-difference
     )
@@ -4847,7 +5114,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'expressive-heading-06',
       $emit-difference
     )
@@ -4860,7 +5127,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'expressive-paragraph-01',
       $emit-difference
     )
@@ -4871,81 +5138,189 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'quotation-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'quotation-01',
+      $emit-difference
+    )
+    {
       @include custom-property('quotation-01', map-get($theme, 'quotation-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'quotation-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'quotation-02',
+      $emit-difference
+    )
+    {
       @include custom-property('quotation-02', map-get($theme, 'quotation-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'display-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'display-01',
+      $emit-difference
+    )
+    {
       @include custom-property('display-01', map-get($theme, 'display-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'display-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'display-02',
+      $emit-difference
+    )
+    {
       @include custom-property('display-02', map-get($theme, 'display-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'display-03', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'display-03',
+      $emit-difference
+    )
+    {
       @include custom-property('display-03', map-get($theme, 'display-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'display-04', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'display-04',
+      $emit-difference
+    )
+    {
       @include custom-property('display-04', map-get($theme, 'display-04'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-01',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-01', map-get($theme, 'spacing-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-02',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-02', map-get($theme, 'spacing-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-03', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-03',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-03', map-get($theme, 'spacing-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-04', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-04',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-04', map-get($theme, 'spacing-04'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-05', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-05',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-05', map-get($theme, 'spacing-05'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-06', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-06',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-06', map-get($theme, 'spacing-06'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-07', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-07',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-07', map-get($theme, 'spacing-07'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-08', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-08',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-08', map-get($theme, 'spacing-08'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-09', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-09',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-09', map-get($theme, 'spacing-09'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-10', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-10',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-10', map-get($theme, 'spacing-10'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-11', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-11',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-11', map-get($theme, 'spacing-11'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-12', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-12',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-12', map-get($theme, 'spacing-12'));
     }
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'fluid-spacing-01',
       $emit-difference
     )
@@ -4958,7 +5333,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'fluid-spacing-02',
       $emit-difference
     )
@@ -4971,7 +5346,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'fluid-spacing-03',
       $emit-difference
     )
@@ -4984,7 +5359,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'fluid-spacing-04',
       $emit-difference
     )
@@ -4995,66 +5370,118 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'layout-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'layout-01', $emit-difference)
+    {
       @include custom-property('layout-01', map-get($theme, 'layout-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'layout-02', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'layout-02', $emit-difference)
+    {
       @include custom-property('layout-02', map-get($theme, 'layout-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'layout-03', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'layout-03', $emit-difference)
+    {
       @include custom-property('layout-03', map-get($theme, 'layout-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'layout-04', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'layout-04', $emit-difference)
+    {
       @include custom-property('layout-04', map-get($theme, 'layout-04'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'layout-05', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'layout-05', $emit-difference)
+    {
       @include custom-property('layout-05', map-get($theme, 'layout-05'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'layout-06', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'layout-06', $emit-difference)
+    {
       @include custom-property('layout-06', map-get($theme, 'layout-06'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'layout-07', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'layout-07', $emit-difference)
+    {
       @include custom-property('layout-07', map-get($theme, 'layout-07'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'container-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'container-01',
+      $emit-difference
+    )
+    {
       @include custom-property('container-01', map-get($theme, 'container-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'container-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'container-02',
+      $emit-difference
+    )
+    {
       @include custom-property('container-02', map-get($theme, 'container-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'container-03', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'container-03',
+      $emit-difference
+    )
+    {
       @include custom-property('container-03', map-get($theme, 'container-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'container-04', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'container-04',
+      $emit-difference
+    )
+    {
       @include custom-property('container-04', map-get($theme, 'container-04'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'container-05', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'container-05',
+      $emit-difference
+    )
+    {
       @include custom-property('container-05', map-get($theme, 'container-05'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'icon-size-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'icon-size-01',
+      $emit-difference
+    )
+    {
       @include custom-property('icon-size-01', map-get($theme, 'icon-size-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'icon-size-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'icon-size-02',
+      $emit-difference
+    )
+    {
       @include custom-property('icon-size-02', map-get($theme, 'icon-size-02'));
     }
   }
 
   @content;
+
   // Reset to default theme after apply in content
-  @if $theme != $carbon--theme {
+  @if $carbon--theme != $parent-carbon-theme {
+    $carbon--theme: $parent-carbon-theme !global;
+
     @include carbon--theme();
   }
 }
@@ -5099,6 +5526,7 @@ Define theme variables from a map of tokens
 - **Requires**:
   - [custom-property [mixin]](#custom-property-mixin)
   - [should-emit [function]](#should-emit-function)
+  - [carbon--theme [variable]](#carbon--theme-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [interactive-02 [variable]](#interactive-02-variable)
   - [interactive-03 [variable]](#interactive-03-variable)
@@ -5146,6 +5574,7 @@ Define theme variables from a map of tokens
   - [hover-ui [variable]](#hover-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
+  - [selected-light-ui [variable]](#selected-light-ui-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [hover-danger [variable]](#hover-danger-variable)
@@ -5156,6 +5585,7 @@ Define theme variables from a map of tokens
   - [disabled-02 [variable]](#disabled-02-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
   - [highlight [variable]](#highlight-variable)
+  - [decorative-01 [variable]](#decorative-01-variable)
   - [skeleton-01 [variable]](#skeleton-01-variable)
   - [skeleton-02 [variable]](#skeleton-02-variable)
   - [brand-01 [variable]](#brand-01-variable)
@@ -5225,7 +5655,57 @@ Define theme variables from a map of tokens
   - [icon-size-01 [variable]](#icon-size-01-variable)
   - [icon-size-02 [variable]](#icon-size-02-variable)
   - [custom-property-prefix [variable]](#custom-property-prefix-variable)
+
+### ❌emit-component-tokens [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin emit-component-tokens($tokens, $theme) {
+  @if type-of($tokens) == 'map' {
+    @each $key, $options in $tokens {
+      @each $option in $options {
+        $theme: map-get($option, 'theme');
+
+        @if ($theme == $carbon--theme) {
+          $value: map-get($option, 'value');
+
+          --#{$custom-property-prefix}-#{$key}: #{$value};
+        }
+      }
+    }
+  } @else {
+    @error 'Unable to find map';
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name      | Description             | Type     | Default value |
+| --------- | ----------------------- | -------- | ------------- |
+| `$tokens` | Map of component tokens | `Map`    | —             |
+| `$theme`  | Theme identifier        | `String` | —             |
+
+**Example**:
+
+<details>
+<summary>Example code</summary>
+
+```scss
+@include emit-component-tokens($component-tokens);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Requires**:
+  - [tokens [variable]](#tokens-variable)
   - [carbon--theme [variable]](#carbon--theme-variable)
+  - [custom-property-prefix [variable]](#custom-property-prefix-variable)
 
 ### ✅carbon--theme--g10 [variable]
 
@@ -5302,6 +5782,7 @@ $carbon--theme--g90: map-merge(
     hover-ui: #4c4c4c,
     active-ui: #6f6f6f,
     selected-ui: #525252,
+    selected-light-ui: #6f6f6f,
     inverse-hover-ui: #e5e5e5,
     hover-selected-ui: #656565,
     hover-row: #4c4c4c,
@@ -5310,6 +5791,7 @@ $carbon--theme--g90: map-merge(
     disabled-02: #6f6f6f,
     disabled-03: #a8a8a8,
     highlight: #0043ce,
+    decorative-01: #6f6f6f,
     skeleton-01: #353535,
     skeleton-02: #525252,
     brand-02: #6f6f6f,
@@ -5375,6 +5857,7 @@ $carbon--theme--g100: map-merge(
     hover-ui: #353535,
     active-ui: #525252,
     selected-ui: #393939,
+    selected-light-ui: #525252,
     inverse-hover-ui: #e5e5e5,
     hover-selected-ui: #4c4c4c,
     hover-row: #353535,
@@ -5382,6 +5865,7 @@ $carbon--theme--g100: map-merge(
     disabled-01: #262626,
     disabled-02: #525252,
     highlight: #002d9c,
+    decorative-01: #525252,
     skeleton-01: #353535,
     skeleton-02: #393939,
     brand-02: #6f6f6f,
@@ -5451,6 +5935,7 @@ $carbon--theme--v9: map-merge(
     hover-ui: #eef4fc,
     active-ui: #dfeafa,
     selected-ui: #eef4fc,
+    selected-light-ui: #eef4fc,
     hover-selected-ui: #dfeafa,
     hover-danger: #c70014,
     active-danger: #ad1625,
@@ -5460,6 +5945,7 @@ $carbon--theme--v9: map-merge(
     disabled-02: #dfe3e6,
     disabled-03: #cdd1d4,
     highlight: #f4f7fb,
+    decorative-01: #eef4fc,
     skeleton-01: rgba(61, 112, 178, 0.1),
     skeleton-02: rgba(61, 112, 178, 0.1),
     brand-01: #3d70b2,
@@ -5532,6 +6018,7 @@ $carbon--theme: (
   hover-ui: if(global-variable-exists('hover-ui'), $hover-ui, map-get($carbon--theme--white, 'hover-ui')),
   active-ui: if(global-variable-exists('active-ui'), $active-ui, map-get($carbon--theme--white, 'active-ui')),
   selected-ui: if(global-variable-exists('selected-ui'), $selected-ui, map-get($carbon--theme--white, 'selected-ui')),
+  selected-light-ui: if(global-variable-exists('selected-light-ui'), $selected-light-ui, map-get($carbon--theme--white, 'selected-light-ui')),
   hover-selected-ui: if(global-variable-exists('hover-selected-ui'), $hover-selected-ui, map-get($carbon--theme--white, 'hover-selected-ui')),
   inverse-hover-ui: if(global-variable-exists('inverse-hover-ui'), $inverse-hover-ui, map-get($carbon--theme--white, 'inverse-hover-ui')),
   hover-danger: if(global-variable-exists('hover-danger'), $hover-danger, map-get($carbon--theme--white, 'hover-danger')),
@@ -5542,6 +6029,7 @@ $carbon--theme: (
   disabled-02: if(global-variable-exists('disabled-02'), $disabled-02, map-get($carbon--theme--white, 'disabled-02')),
   disabled-03: if(global-variable-exists('disabled-03'), $disabled-03, map-get($carbon--theme--white, 'disabled-03')),
   highlight: if(global-variable-exists('highlight'), $highlight, map-get($carbon--theme--white, 'highlight')),
+  decorative-01: if(global-variable-exists('decorative-01'), $decorative-01, map-get($carbon--theme--white, 'decorative-01')),
   skeleton-01: if(global-variable-exists('skeleton-01'), $skeleton-01, map-get($carbon--theme--white, 'skeleton-01')),
   skeleton-02: if(global-variable-exists('skeleton-02'), $skeleton-02, map-get($carbon--theme--white, 'skeleton-02')),
   brand-01: if(global-variable-exists('brand-01'), $brand-01, map-get($carbon--theme--white, 'brand-01')),
@@ -5619,6 +6107,7 @@ $carbon--theme: (
 - **Type**: `Map`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
 
 ### ✅interactive-01 [variable]
 
@@ -6795,6 +7284,29 @@ $selected-ui: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+### ✅selected-light-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$selected-light-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'selected-light-ui'
+    ),
+  map-get($carbon--theme, 'selected-light-ui'),
+  #e0e0e0
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
 ### ✅hover-selected-ui [variable]
 
 Data table selected row hover
@@ -7034,6 +7546,29 @@ $highlight: if(
     ),
   map-get($carbon--theme, 'highlight'),
   #d0e2ff
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅decorative-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$decorative-01: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'decorative-01'
+    ),
+  map-get($carbon--theme, 'decorative-01'),
+  #e0e0e0
 );
 ```
 
@@ -9672,6 +10207,326 @@ Include default type styles
 - **Requires**:
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
 
+### ✅carbon--font-face-sans-condensed [mixin]
+
+Sans `@font-face`'s
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon--font-face-sans-condensed() {
+  // .woff support for IE11
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 300;
+    src: local('IBM Plex Sans Condensed Light Italic'), local(
+        'IBMPlexSansCond-LightItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8AfppYA.woff)
+        format('woff');
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 400;
+    src: local('IBM Plex Sans Condensed Italic'), local(
+        'IBMPlexSansCond-Italic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8nN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYasyKg.woff)
+        format('woff');
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 600;
+    src: local('IBM Plex Sans Condensed SemiBold Italic'), local(
+        'IBMPlexSansCond-SemiBoldItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8HPvpYA.woff)
+        format('woff');
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 300;
+    src: local('IBM Plex Sans Condensed Light'), local('IBMPlexSansCond-Light'),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4C6ovo.woff)
+        format('woff');
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 400;
+    src: local('IBM Plex Sans Condensed'), local('IBMPlexSansCond'),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8lN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHbat.woff)
+        format('woff');
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 600;
+    src: local('IBM Plex Sans Condensed SemiBold'), local(
+        'IBMPlexSansCond-SemiBold'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY527Ivo.woff)
+        format('woff');
+  }
+
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Light Italic'), local(
+        'IBMPlexSansCond-LightItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8AfplYstEzi6D11GTg.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
+      U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Light Italic'), local(
+        'IBMPlexSansCond-LightItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8AfplYotEzi6D11GTg.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Light Italic'), local(
+        'IBMPlexSansCond-LightItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8AfplYQtEzi6D10.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Italic'), local(
+        'IBMPlexSansCond-Italic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8nN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas-KPLgKkPHhKABg.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
+      U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Italic'), local(
+        'IBMPlexSansCond-Italic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8nN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas-KLLgKkPHhKABg.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Italic'), local(
+        'IBMPlexSansCond-Italic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8nN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas-KzLgKkPHhI.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed SemiBold Italic'), local(
+        'IBMPlexSansCond-SemiBoldItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8HPvlYstEzi6D11GTg.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
+      U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed SemiBold Italic'), local(
+        'IBMPlexSansCond-SemiBoldItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8HPvlYotEzi6D11GTg.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed SemiBold Italic'), local(
+        'IBMPlexSansCond-SemiBoldItalic'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8HPvlYQtEzi6D10.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Light'), local('IBMPlexSansCond-Light'),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4C6rvjpYYnFBq4P1w.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
+      U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Light'), local('IBMPlexSansCond-Light'),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4C6rvipYYnFBq4P1w.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed Light'), local('IBMPlexSansCond-Light'),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4C6rvspYYnFBq4.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed'), local('IBMPlexSansCond'),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8lN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYamyK7Bh4sNLhM.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
+      U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed'), local('IBMPlexSansCond'),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8lN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYanyK7Bh4sNLhM.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed'), local('IBMPlexSansCond'),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8lN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYapyK7Bh4sN.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed SemiBold'), local(
+        'IBMPlexSansCond-SemiBold'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY527LvjpYYnFBq4P1w.woff2)
+        format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
+      U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed SemiBold'), local(
+        'IBMPlexSansCond-SemiBold'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY527LvipYYnFBq4P1w.woff2)
+        format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: local('IBM Plex Sans Condensed SemiBold'), local(
+        'IBMPlexSansCond-SemiBold'
+      ),
+      url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY527LvspYYnFBq4.woff2)
+        format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+
 ### ✅carbon--font-face-sans [mixin]
 
 Sans `@font-face`'s
@@ -11581,6 +12436,7 @@ $tokens: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 - **Used by**:
+  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
 

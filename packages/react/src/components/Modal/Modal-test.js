@@ -49,7 +49,7 @@ describe('Modal', () => {
     });
 
     it('has the expected default iconDescription', () => {
-      expect(mounted.props().iconDescription).toEqual('close the modal');
+      expect(mounted.props().iconDescription).toEqual('Close');
     });
 
     it('adds new iconDescription when passed via props', () => {

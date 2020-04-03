@@ -44,7 +44,7 @@ exports[`ModalWrapper should render 1`] = `
     <Modal
       aria-label="test modal"
       hasScrollingContent={false}
-      iconDescription="close the modal"
+      iconDescription="Close"
       id="modal"
       modalHeading="Transactional Modal"
       modalLabel="Test Modal Label"
@@ -97,18 +97,18 @@ exports[`ModalWrapper should render 1`] = `
               Transactional Modal
             </h3>
             <button
-              aria-label="close the modal"
+              aria-label="Close"
               className="bx--modal-close"
               onClick={[Function]}
-              title="close the modal"
+              title="Close"
               type="button"
             >
               <ForwardRef(Close20)
-                aria-label="close the modal"
+                aria-label="Close"
                 className="bx--modal-close__icon"
               >
                 <Icon
-                  aria-label="close the modal"
+                  aria-label="Close"
                   className="bx--modal-close__icon"
                   height={20}
                   preserveAspectRatio="xMidYMid meet"
@@ -117,7 +117,7 @@ exports[`ModalWrapper should render 1`] = `
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <svg
-                    aria-label="close the modal"
+                    aria-label="Close"
                     className="bx--modal-close__icon"
                     focusable="false"
                     height={20}
@@ -172,6 +172,7 @@ exports[`ModalWrapper should render 1`] = `
             </ForwardRef(Button)>
             <ForwardRef(Button)
               disabled={false}
+<<<<<<< HEAD
               inputref={
                 Object {
                   "current": <button
@@ -199,6 +200,8 @@ exports[`ModalWrapper should render 1`] = `
                   </button>,
                 }
               }
+=======
+>>>>>>> master
               kind="primary"
               onClick={[Function]}
               tabIndex={0}
@@ -207,6 +210,7 @@ exports[`ModalWrapper should render 1`] = `
               <button
                 className="bx--btn bx--btn--primary"
                 disabled={false}
+<<<<<<< HEAD
                 inputref={
                   Object {
                     "current": <button
@@ -234,6 +238,8 @@ exports[`ModalWrapper should render 1`] = `
                     </button>,
                   }
                 }
+=======
+>>>>>>> master
                 onClick={[Function]}
                 tabIndex={0}
                 type="button"
