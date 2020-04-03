@@ -19,7 +19,7 @@
   <a href="https://circleci.com/gh/carbon-design-system/carbon">
     <img src="https://circleci.com/gh/carbon-design-system/carbon.svg?style=shield" alt="Build Status" />
   </a>
-  <a href="https://lernajs.io/">
+  <a href="https://lerna.js.org/">
     <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="Maintained with Lerna" />
   </a>
   <a href="https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md">
