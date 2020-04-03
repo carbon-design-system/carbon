@@ -347,7 +347,6 @@ class FloatingMenu extends React.Component {
           visibility: 'hidden',
           top: '0px',
         };
-
     return React.cloneElement(children, {
       ref: this._menuRef,
       style: {
