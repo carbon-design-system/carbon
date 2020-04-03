@@ -392,7 +392,10 @@ export default class MultiSelect extends React.Component {
                                 className={`${prefix}--checkbox-label`}
                                 data-contained-checkbox-state={isChecked}
                                 id={`${itemProps.id}__checkbox`}>
-                                {itemText}
+                                <span
+                                  className={`${prefix}--checkbox-label-text`}>
+                                  {itemText}
+                                </span>
                               </span>
                             </div>
                           </ListBox.MenuItem>
