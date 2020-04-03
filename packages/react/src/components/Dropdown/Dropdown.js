@@ -92,6 +92,10 @@ function Dropdown({
   // needs to be Capitalized for react to render it correctly
   const ItemToElement = itemToElement;
 
+  const helper = helperText ? (
+    <div className={helperClasses}>{helperText}</div>
+  ) : null;
+
   function onSelectedItemChange({ selectedItem }) {
     if (onChange) {
       onChange({ selectedItem });
@@ -105,7 +109,7 @@ function Dropdown({
           {titleText}
         </label>
       )}
-      {helperText && <div className={helperClasses}>{helperText}</div>}
+      {!inline && helper}
       <ListBox
         aria-label={ariaLabel}
         size={size}
