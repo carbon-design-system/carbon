@@ -36,29 +36,8 @@ exports[`HeaderMenuButton should render 1`] = `
           width={20}
           xmlns="http://www.w3.org/2000/svg"
         >
-          <rect
-            height="1.2"
-            width="16"
-            x="2"
-            y="14.8"
-          />
-          <rect
-            height="1.2"
-            width="16"
-            x="2"
-            y="11.2"
-          />
-          <rect
-            height="1.2"
-            width="16"
-            x="2"
-            y="7.6"
-          />
-          <rect
-            height="1.2"
-            width="16"
-            x="2"
-            y="4"
+          <path
+            d="M2 14.8h16V16H2zm0-3.6h16v1.2H2zm0-3.6h16v1.2H2zM2 4h16v1.2H2z"
           />
         </svg>
       </Icon>

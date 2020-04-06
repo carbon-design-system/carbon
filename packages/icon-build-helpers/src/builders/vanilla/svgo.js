@@ -146,7 +146,7 @@ const plugins = [
     convertColors: true,
   },
   {
-    convertPathData: false,
+    convertPathData: true,
   },
   {
     convertTransform: true,
@@ -181,10 +181,10 @@ const plugins = [
     removeRasterImages: false,
   },
   {
-    mergePaths: false,
+    mergePaths: true,
   },
   {
-    convertShapeToPath: false,
+    convertShapeToPath: true,
   },
   {
     sortAttrs: true,
