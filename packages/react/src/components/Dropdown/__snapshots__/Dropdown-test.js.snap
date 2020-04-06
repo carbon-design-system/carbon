@@ -145,11 +145,6 @@ exports[`Dropdown should render 1`] = `
                         name="chevron--down"
                         preserveAspectRatio="xMidYMid meet"
                         role="img"
-                        style={
-                          Object {
-                            "willChange": "transform",
-                          }
-                        }
                         viewBox="0 0 16 16"
                         width={16}
                         xmlns="http://www.w3.org/2000/svg"
@@ -319,11 +314,6 @@ exports[`Dropdown should render custom item components 1`] = `
                         name="chevron--down"
                         preserveAspectRatio="xMidYMid meet"
                         role="img"
-                        style={
-                          Object {
-                            "willChange": "transform",
-                          }
-                        }
                         viewBox="0 0 16 16"
                         width={16}
                         xmlns="http://www.w3.org/2000/svg"
@@ -652,11 +642,6 @@ exports[`Dropdown should render with strings as items 1`] = `
                         name="chevron--down"
                         preserveAspectRatio="xMidYMid meet"
                         role="img"
-                        style={
-                          Object {
-                            "willChange": "transform",
-                          }
-                        }
                         viewBox="0 0 16 16"
                         width={16}
                         xmlns="http://www.w3.org/2000/svg"
