@@ -9,7 +9,7 @@ import { ChevronRight16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { match, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 
