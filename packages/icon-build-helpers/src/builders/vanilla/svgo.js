@@ -146,7 +146,7 @@ const plugins = [
     convertColors: true,
   },
   {
-    convertPathData: true,
+    convertPathData: false,
   },
   {
     convertTransform: true,
