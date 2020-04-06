@@ -20108,6 +20108,11 @@ Inline notification styles
     }
   }
 
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__close-button {
+    @include focus-outline('outline');
+  }
+
   .#{$prefix}--inline-notification--low-contrast {
     .#{$prefix}--inline-notification__close-button
       .#{$prefix}--inline-notification__close-icon {
@@ -20363,6 +20368,11 @@ Toast notification styles
     .#{$prefix}--toast-notification__close-icon {
       fill: $inverse-01;
     }
+  }
+
+  .#{$prefix}--toast-notification--low-contrast
+    .#{$prefix}--toast-notification__close-button {
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--toast-notification--low-contrast
