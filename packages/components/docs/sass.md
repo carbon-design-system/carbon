@@ -13998,12 +13998,6 @@ Button styles
     cursor: not-allowed;
   }
 
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
-    .#{$prefix}--assistive-text,
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]::before {
-    display: none;
-  }
-
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
     padding-left: rem(11px);
     padding-right: rem(11px);
@@ -19514,7 +19508,8 @@ Modal styles
   }
 
   .#{$prefix}--modal-container {
-    position: relative;
+    position: fixed;
+    top: 0;
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: auto;
@@ -19531,6 +19526,7 @@ Modal styles
     transition: transform $duration--moderate-02 motion(exit, expressive);
 
     @include carbon--breakpoint(md) {
+      position: static;
       width: 84%;
       max-height: 90%;
       height: auto;
