@@ -152,17 +152,41 @@ categories:
     members:
       - analyze
       - blockchain
+      - box-plot
+      - chart--3D
+      - chart--area
       - chart--bar
+      - chart--bubble
       - chart--bubble--line
+      - chart--candlestick
+      - chart--error-bar
+      - chart--evaluation
+      - chart--high-low
+      - chart--histogram
       - chart--line
+      - chart--multi-line
+      - chart--parallel
+      - chart--radar
+      - chart--river
       - chart--scatterplot
+      - chart--t-SNE
+      - circle-packing
       - flow--chart
       - flow--chart--detail
       - heat--map
+      - heat-map--02
+      - math-curve
+      - population-diagram
+      - q-q-plot
       - rank
+      - relationship-diagram
       - report
+      - scatter-matrix
       - secure--data
+      - tree--diagram
+      - tree--map
       - user--analytics
+      - word-cloud
   - name: Data Storage
     members:
       - archive
