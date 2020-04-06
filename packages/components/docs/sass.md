@@ -13977,12 +13977,6 @@ Button styles
     cursor: not-allowed;
   }
 
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
-    .#{$prefix}--assistive-text,
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]::before {
-    display: none;
-  }
-
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
     padding-left: rem(11px);
     padding-right: rem(11px);
