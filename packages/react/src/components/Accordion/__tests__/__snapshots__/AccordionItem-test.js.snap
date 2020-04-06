@@ -45,11 +45,6 @@ exports[`AccordionItem should render 1`] = `
               height={16}
               preserveAspectRatio="xMidYMid meet"
               role="img"
-              style={
-                Object {
-                  "willChange": "transform",
-                }
-              }
               viewBox="0 0 16 16"
               width={16}
               xmlns="http://www.w3.org/2000/svg"

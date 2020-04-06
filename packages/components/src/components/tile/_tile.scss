@@ -33,6 +33,17 @@
     }
   }
 
+  .#{$prefix}--tile .#{$prefix}--text-input,
+  .#{$prefix}--tile .#{$prefix}--text-area,
+  .#{$prefix}--tile .#{$prefix}--search-input,
+  .#{$prefix}--tile .#{$prefix}--select-input,
+  .#{$prefix}--tile .#{$prefix}--dropdown,
+  .#{$prefix}--tile .#{$prefix}--dropdown-list,
+  .#{$prefix}--tile .#{$prefix}--number input[type='number'],
+  .#{$prefix}--tile .#{$prefix}--date-picker__input {
+    background-color: $field-02;
+  }
+
   .#{$prefix}--tile--light {
     background-color: $ui-02;
   }

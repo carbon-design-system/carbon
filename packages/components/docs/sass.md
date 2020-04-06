@@ -2221,8 +2221,13 @@ Generate a media query for the maximum width of the given styles
       @content;
     }
   } @else if map-has-key($breakpoints, $name) {
+    // We borrow this logic from bootstrap for specifying the value of the
+    // max-width. The maximum width is calculated by finding the breakpoint and
+    // subtracting .02 from its value. This value is used instead of .01 to
+    // avoid rounding issues in Safari
+    // https://github.com/twbs/bootstrap/blob/c5b1919deaf5393fcca9e9b9d7ce9c338160d99d/scss/mixins/_breakpoints.scss#L34-L46
     $breakpoint: map-get($breakpoints, $name);
-    $width: map-get($breakpoint, width);
+    $width: map-get($breakpoint, width) - 0.02;
     @media (max-width: $width) {
       @content;
     }
@@ -3523,6 +3528,7 @@ $carbon--spacing-08: 2.5rem;
 - **Used by**:
   - [snippet [mixin]](#snippet-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [search [mixin]](#search-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
@@ -3548,6 +3554,7 @@ $carbon--spacing-09: 3rem;
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [tile [mixin]](#tile-mixin)
 
 ### ✅carbon--spacing-10 [variable]
@@ -7246,6 +7253,7 @@ $field-02: if(
   - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
+  - [tile [mixin]](#tile-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
 
 ### ✅inverse-01 [variable]
@@ -13974,12 +13982,6 @@ Button styles
     cursor: not-allowed;
   }
 
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
-    .#{$prefix}--assistive-text,
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]::before {
-    display: none;
-  }
-
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
     padding-left: rem(11px);
     padding-right: rem(11px);
@@ -19490,7 +19492,8 @@ Modal styles
   }
 
   .#{$prefix}--modal-container {
-    position: relative;
+    position: fixed;
+    top: 0;
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: auto;
@@ -19507,6 +19510,7 @@ Modal styles
     transition: transform $duration--moderate-02 motion(exit, expressive);
 
     @include carbon--breakpoint(md) {
+      position: static;
       width: 84%;
       max-height: 90%;
       height: auto;
@@ -19873,6 +19877,7 @@ Inline notification styles
     @include reset;
 
     display: flex;
+    flex-wrap: wrap;
     position: relative;
     height: auto;
     min-height: rem(48px);
@@ -19885,6 +19890,7 @@ Inline notification styles
 
     @include carbon--breakpoint(md) {
       max-width: rem(608px);
+      flex-wrap: nowrap;
     }
 
     @include carbon--breakpoint(lg) {
@@ -20007,7 +20013,11 @@ Inline notification styles
   .#{$prefix}--inline-notification__details {
     display: flex;
     flex-grow: 1;
-    margin: 0 $carbon--spacing-05;
+    margin: 0 $carbon--spacing-09 0 $carbon--spacing-05;
+
+    @include carbon--breakpoint(md) {
+      margin: 0 $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--inline-notification__icon {
@@ -20034,7 +20044,12 @@ Inline notification styles
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
     height: rem(32px);
-    margin: $carbon--spacing-03 0;
+    margin-bottom: $carbon--spacing-03;
+    margin-left: $carbon--spacing-08;
+
+    @include carbon--breakpoint(md) {
+      margin: $carbon--spacing-03 0;
+    }
 
     &,
     &:hover,
@@ -20061,6 +20076,9 @@ Inline notification styles
 
   .#{$prefix}--inline-notification__close-button {
     @include focus-outline('reset');
+    position: absolute;
+    top: 0;
+    right: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20084,6 +20102,15 @@ Inline notification styles
     .#{$prefix}--inline-notification__close-icon {
       fill: $inverse-01;
     }
+
+    @include carbon--breakpoint(md) {
+      position: static;
+    }
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__close-button {
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--inline-notification--low-contrast {
@@ -20127,8 +20154,10 @@ Inline notification styles
   - [support-04 [variable]](#support-04-variable)
   - [inverse-support-03 [variable]](#inverse-support-03-variable)
   - [support-03 [variable]](#support-03-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
 
@@ -20339,6 +20368,11 @@ Toast notification styles
     .#{$prefix}--toast-notification__close-icon {
       fill: $inverse-01;
     }
+  }
+
+  .#{$prefix}--toast-notification--low-contrast
+    .#{$prefix}--toast-notification__close-button {
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--toast-notification--low-contrast
@@ -22882,8 +22916,9 @@ Tabs styles
     @include carbon--breakpoint(md) {
       background: transparent;
       height: auto;
-      & + .#{$prefix}--tabs__nav-item {
-        margin-left: rem(2px);
+
+      + .#{$prefix}--tabs__nav-item {
+        margin-left: rem(1px);
       }
     }
   }
@@ -23132,6 +23167,32 @@ Tabs styles
   //-----------------------------
   .#{$prefix}--tab-content {
     padding: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--text-input,
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--text-area,
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--search-input,
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--select-input,
+  .#{$prefix}--tabs--container ~ .#{$prefix}--tab-content .#{$prefix}--dropdown,
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--dropdown-list,
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--number
+    input[type='number'],
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--date-picker__input {
+    background-color: $field-02;
   }
 
   //-----------------------------
@@ -23743,6 +23804,17 @@ Tile styles
     }
   }
 
+  .#{$prefix}--tile .#{$prefix}--text-input,
+  .#{$prefix}--tile .#{$prefix}--text-area,
+  .#{$prefix}--tile .#{$prefix}--search-input,
+  .#{$prefix}--tile .#{$prefix}--select-input,
+  .#{$prefix}--tile .#{$prefix}--dropdown,
+  .#{$prefix}--tile .#{$prefix}--dropdown-list,
+  .#{$prefix}--tile .#{$prefix}--number input[type='number'],
+  .#{$prefix}--tile .#{$prefix}--date-picker__input {
+    background-color: $field-02;
+  }
+
   .#{$prefix}--tile--light {
     background-color: $ui-02;
   }
@@ -23908,6 +23980,7 @@ Tile styles
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [field-02 [variable]](#field-02-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [text-01 [variable]](#text-01-variable)
