@@ -6264,6 +6264,9 @@ Map {
       "element": Object {
         "type": "elementType",
       },
+      "isCurrentPage": Object {
+        "type": "bool",
+      },
       "isSideNavExpanded": Object {
         "type": "bool",
       },
