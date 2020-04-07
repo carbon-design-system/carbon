@@ -48,11 +48,6 @@ exports[`ListBoxSelection should render 1`] = `
           focusable="false"
           height={16}
           preserveAspectRatio="xMidYMid meet"
-          style={
-            Object {
-              "willChange": "transform",
-            }
-          }
           viewBox="0 0 32 32"
           width={16}
           xmlns="http://www.w3.org/2000/svg"
@@ -117,11 +112,6 @@ exports[`ListBoxSelection should render 2`] = `
           focusable="false"
           height={16}
           preserveAspectRatio="xMidYMid meet"
-          style={
-            Object {
-              "willChange": "transform",
-            }
-          }
           viewBox="0 0 32 32"
           width={16}
           xmlns="http://www.w3.org/2000/svg"
