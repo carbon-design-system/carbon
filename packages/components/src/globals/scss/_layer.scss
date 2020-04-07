@@ -1,0 +1,93 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-------------------------------------------
+// 📑 Layer
+// ------------------------------------------
+//
+//   Layer                 ||  Elevation
+//   ==========================================
+//   0 - Base              ||  0
+//   1 - Flat              ||  1
+//   2 - Raised            ||  2
+//   3 - Overlay           ||  8
+//   4 - Pop-out           ||  24
+//   ==========================================
+//   Custom: Left Nav      ||  16
+//   Custom: Global Header ||  12
+//
+
+// Box shadow variables
+
+/// Box shadow color
+/// @access private
+/// @type Value
+/// @group global-layer
+/// @example box-shadow: 0px 3px 3px 0 $box-shadow;
+$box-shadow: rgba(0, 0, 0, 0.2);
+
+/// Raised box shadow
+/// @access private
+/// @type Value
+/// @group global-layer
+$box-shadow--raised: 0 2px 6px 0 $box-shadow;
+
+/// Overlay box shadow
+/// @access private
+/// @type Value
+/// @group global-layer
+$box-shadow--overlay: 0 2px 6px 0 $box-shadow;
+
+/// Sticky nav box shadow
+/// @access private
+/// @type Value
+/// @group global-layer
+$box-shadow--sticky-nav: 0 2px 6px 0 $box-shadow;
+
+/// Temporary nav box shadow
+/// @access private
+/// @type Value
+/// @group global-layer
+$box-shadow--temporary-nav: 0 2px 6px 0 $box-shadow;
+
+/// Pop out box shadow
+/// @access private
+/// @type Value
+/// @group global-layer
+$box-shadow--pop-out: 0 2px 6px 0 $box-shadow;
+
+// Layer box-shadow map
+
+/// Map of box shadows used in the `layer()` mixin
+/// @access private
+/// @type Map
+/// @group global-layer
+/// @example - @include layer('raised');
+$layer-shadows: (
+  base: none,
+  flat: none,
+  raised: $box-shadow--raised,
+  overlay: $box-shadow--overlay,
+  pop-out: $box-shadow--pop-out,
+  temporary-nav: $box-shadow--temporary-nav,
+  sticky-nav: $box-shadow--sticky-nav,
+);
+
+/// Layer mixin to set `box-shadow`
+/// @access public
+/// @param {String} $layer - A value from the `$layer-shadows` map
+/// @group global-layer
+/// @example - @include layer('raised');
+@mixin layer($layer) {
+  @if variable-exists('css--use-layer') == false or $css--use-layer == true {
+    @if map-has-key($layer-shadows, $layer) {
+      box-shadow: #{map-get($layer-shadows, $layer)};
+    } @else {
+      @warn '#{$layer} is not a valid layer.';
+    }
+  }
+}
