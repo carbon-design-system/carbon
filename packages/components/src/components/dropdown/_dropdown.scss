@@ -334,6 +334,8 @@
       outline: none;
     }
 
+    // TODO: remove in v11
+    .#{$prefix}--dropdown-text,
     .#{$prefix}--list-box__label {
       color: $disabled-02;
     }
