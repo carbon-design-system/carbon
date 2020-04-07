@@ -67,6 +67,7 @@ $css--use-experimental-grid-fallback: false !default;
 @import 'theme';
 @import 'mixins';
 @import 'layout';
+@import 'layer';
 @import 'spacing';
 @import 'typography';
 @import './vendor/@carbon/elements/scss/import-once/import-once';
