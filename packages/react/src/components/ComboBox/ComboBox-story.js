@@ -43,6 +43,11 @@ const sizes = {
   'Small size (sm)': 'sm',
 };
 
+const directions = {
+  'Bottom (default)': 'bottom',
+  'Top ': 'top',
+};
+
 const props = () => ({
   id: text('Combobox ID (id)', 'carbon-combobox-example'),
   placeholder: text('Placeholder text (placeholder)', 'Filter...'),
@@ -53,6 +58,7 @@ const props = () => ({
   invalid: boolean('Invalid (invalid)', false),
   invalidText: text('Invalid text (invalidText)', 'A valid value is required'),
   size: select('Field size (size)', sizes, undefined) || undefined,
+  direction: select('Dropdown direction (direction)', directions, 'bottom'),
   onChange: action('onChange'),
 });
 
