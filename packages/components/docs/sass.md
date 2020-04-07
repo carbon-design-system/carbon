@@ -18889,8 +18889,9 @@ List box styles
     position: absolute;
     top: 0;
     right: $carbon--spacing-05;
-    bottom: 0;
     height: 100%;
+    display: flex;
+    align-items: center;
     transition: transform $duration--fast-01 motion(standard, productive);
     cursor: pointer;
   }
@@ -19193,6 +19194,25 @@ List box styles
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+  }
+
+  // Dropdown top orientation modifiers
+  .#{$prefix}--list-box--up .#{$prefix}--list-box__menu {
+    bottom: 2.5rem;
+  }
+
+  .#{$prefix}--list-box--up.#{$prefix}--dropdown--sm
+    .#{$prefix}--list-box__menu,
+  .#{$prefix}--list-box--up.#{$prefix}--list-box--sm
+    .#{$prefix}--list-box__menu {
+    bottom: 2rem;
+  }
+
+  .#{$prefix}--list-box--up.#{$prefix}--dropdown--xl
+    .#{$prefix}--list-box__menu,
+  .#{$prefix}--list-box--up.#{$prefix}--list-box--xl
+    .#{$prefix}--list-box__menu {
+    bottom: 3rem;
   }
 
   // Tweaks for descendants
