@@ -301,6 +301,7 @@ Map {
   "ComboBox" => Object {
     "defaultProps": Object {
       "ariaLabel": "Choose an item",
+      "direction": "bottom",
       "disabled": false,
       "itemToElement": null,
       "itemToString": [Function],
@@ -314,6 +315,15 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "direction": Object {
+        "args": Array [
+          Array [
+            "top",
+            "bottom",
+          ],
+        ],
+        "type": "oneOf",
       },
       "disabled": Object {
         "type": "bool",
@@ -1974,6 +1984,7 @@ Map {
   },
   "Dropdown" => Object {
     "defaultProps": Object {
+      "direction": "bottom",
       "disabled": false,
       "helperText": "",
       "itemToElement": null,
@@ -1985,6 +1996,15 @@ Map {
     "propTypes": Object {
       "ariaLabel": Object {
         "type": "string",
+      },
+      "direction": Object {
+        "args": Array [
+          Array [
+            "top",
+            "bottom",
+          ],
+        ],
+        "type": "oneOf",
       },
       "disabled": Object {
         "type": "bool",
@@ -3348,6 +3368,7 @@ Map {
     },
     "defaultProps": Object {
       "compareItems": [Function],
+      "direction": "bottom",
       "disabled": false,
       "initialSelectedItems": Array [],
       "itemToString": [Function],
@@ -3363,6 +3384,15 @@ Map {
       "compareItems": Object {
         "isRequired": true,
         "type": "func",
+      },
+      "direction": Object {
+        "args": Array [
+          Array [
+            "top",
+            "bottom",
+          ],
+        ],
+        "type": "oneOf",
       },
       "disabled": Object {
         "type": "bool",
