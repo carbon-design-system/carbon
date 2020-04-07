@@ -3,6 +3,7 @@
 exports[`MultiSelect should render 1`] = `
 <MultiSelect
   compareItems={[Function]}
+  direction="bottom"
   disabled={false}
   id="test-multiselect"
   initialSelectedItems={Array []}
