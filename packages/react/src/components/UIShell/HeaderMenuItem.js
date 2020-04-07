@@ -8,19 +8,36 @@
 import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
 import React from 'react';
+import cx from 'classnames';
 import Link, { LinkPropTypes } from './Link';
 
 const { prefix } = settings;
 
 const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
-  { className, children, role, ...rest },
+  {
+    className,
+    isCurrentPage,
+    'aria-current': ariaCurrent,
+    children,
+    role,
+    ...rest
+  },
   ref
 ) {
+  const linkClassName = cx({
+    [`${prefix}--header__menu-item`]: true,
+    // We set the current class only if `isCurrentPage` is passed in and we do
+    // not have an `aria-current="page"` set for the breadcrumb item
+    [`${prefix}--header__menu-item--current`]:
+      isCurrentPage && ariaCurrent !== 'page',
+  });
+
   return (
     <li className={className} role={role}>
       <Link
         {...rest}
-        className={`${prefix}--header__menu-item`}
+        aria-current={ariaCurrent}
+        className={linkClassName}
         ref={ref}
         tabIndex={0}>
         <span className={`${prefix}--text-truncate--end`}>{children}</span>
@@ -52,6 +69,11 @@ HeaderMenuItem.propTypes = {
    * <ul> semantics for menus.
    */
   role: PropTypes.string,
+
+  /**
+   * Applies selected styles to the item if a user sets this to true and aria-current !== 'page'.
+   */
+  isCurrentPage: PropTypes.bool,
 };
 
 export default HeaderMenuItem;
