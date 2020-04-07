@@ -2221,8 +2221,13 @@ Generate a media query for the maximum width of the given styles
       @content;
     }
   } @else if map-has-key($breakpoints, $name) {
+    // We borrow this logic from bootstrap for specifying the value of the
+    // max-width. The maximum width is calculated by finding the breakpoint and
+    // subtracting .02 from its value. This value is used instead of .01 to
+    // avoid rounding issues in Safari
+    // https://github.com/twbs/bootstrap/blob/c5b1919deaf5393fcca9e9b9d7ce9c338160d99d/scss/mixins/_breakpoints.scss#L34-L46
     $breakpoint: map-get($breakpoints, $name);
-    $width: map-get($breakpoint, width);
+    $width: map-get($breakpoint, width) - 0.02;
     @media (max-width: $width) {
       @content;
     }
@@ -6542,7 +6547,6 @@ $interactive-02: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
-  - [tile [mixin]](#tile-mixin)
 
 ### ✅interactive-03 [variable]
 
@@ -6698,7 +6702,6 @@ $ui-02: if(
   - [snippet [mixin]](#snippet-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
-  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [tile [mixin]](#tile-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [carbon-content [mixin]](#carbon-content-mixin)
@@ -7207,6 +7210,7 @@ $field-01: if(
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -7543,6 +7547,7 @@ $inverse-support-04: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [carbon-header [mixin]](#carbon-header-mixin)
 
 ### ✅overlay-01 [variable]
 
@@ -13977,12 +13982,6 @@ Button styles
     cursor: not-allowed;
   }
 
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
-    .#{$prefix}--assistive-text,
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]::before {
-    display: none;
-  }
-
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
     padding-left: rem(11px);
     padding-right: rem(11px);
@@ -15853,14 +15852,8 @@ Data table core styles
     padding-bottom: 0;
   }
 
-  .#{$prefix}--data-table
-    td.#{$prefix}--table-column-menu
-    .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
-    background: $ui-03;
-  }
-
   // Overflow Menu Overrides
-  .#{$prefix}--data-table td .#{$prefix}--overflow-menu {
+  .#{$prefix}--data-table td button.#{$prefix}--overflow-menu {
     margin: rem(-7px) 0 rem(-8px);
   }
 
@@ -15891,6 +15884,13 @@ Data table core styles
       .#{$prefix}--overflow-menu__icon {
       opacity: 0;
     }
+  }
+
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open
+    .#{$prefix}--overflow-menu__icon {
+    opacity: 1;
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--visible-overflow-menu
@@ -19710,6 +19710,7 @@ Modal styles
     bottom: $spacing-09;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to bottom, rgba($ui-01, 0), $ui-01);
+    pointer-events: none;
   }
 
   .#{$prefix}--modal-content:focus
@@ -20109,6 +20110,11 @@ Inline notification styles
     }
   }
 
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__close-button {
+    @include focus-outline('outline');
+  }
+
   .#{$prefix}--inline-notification--low-contrast {
     .#{$prefix}--inline-notification__close-button
       .#{$prefix}--inline-notification__close-icon {
@@ -20364,6 +20370,11 @@ Toast notification styles
     .#{$prefix}--toast-notification__close-icon {
       fill: $inverse-01;
     }
+  }
+
+  .#{$prefix}--toast-notification--low-contrast
+    .#{$prefix}--toast-notification__close-button {
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--toast-notification--low-contrast
@@ -20779,9 +20790,9 @@ Overflow menu styles
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open,
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open
     .#{$prefix}--overflow-menu__trigger {
-    background-color: $ui-01;
+    @include box-shadow;
+    background-color: $field-01;
     transition: none;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
   }
 
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open,
@@ -20798,13 +20809,13 @@ Overflow menu styles
 
   .#{$prefix}--overflow-menu-options {
     @include reset;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+    @include box-shadow;
     display: none;
     flex-direction: column;
     align-items: flex-start;
     position: absolute;
     z-index: z('floating');
-    background-color: $ui-01;
+    background-color: $field-01;
     width: rem(160px);
     list-style: none;
     top: 32px;
@@ -20814,16 +20825,24 @@ Overflow menu styles
       content: '';
       position: absolute;
       display: block;
-      background-color: $ui-01;
+      background-color: $field-01;
       transition: background-color $duration--fast-02 motion(entrance, productive);
     }
   }
 
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open:hover {
+    background-color: $field-01;
+  }
+
   .#{$prefix}--overflow-menu-options--light {
-    background-color: $ui-02;
+    background-color: $field-02;
     &::after {
-      background-color: $ui-02;
+      background-color: $field-02;
     }
+  }
+
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open:hover {
+    background-color: $field-02;
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
@@ -21011,10 +21030,9 @@ Overflow menu styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [hover-ui [variable]](#hover-ui-variable)
-  - [ui-01 [variable]](#ui-01-variable)
+  - [field-01 [variable]](#field-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
-  - [ui-02 [variable]](#ui-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -21023,6 +21041,7 @@ Overflow menu styles
   - [icon-02 [variable]](#icon-02-variable)
   - [text-04 [variable]](#text-04-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [ui-01 [variable]](#ui-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
 ## pagination
@@ -23819,7 +23838,10 @@ Tile styles
     &:hover {
       background: $hover-ui;
     }
+  }
 
+  .#{$prefix}--tile--clickable,
+  .#{$prefix}--tile--expandable {
     &:hover,
     &:focus {
       .#{$prefix}--tile__checkmark {
@@ -23938,7 +23960,7 @@ Tile styles
   }
 
   .#{$prefix}--tile--is-selected {
-    outline: 1px solid $interactive-02;
+    outline: 1px solid $ui-05;
     outline-offset: -1px;
   }
 
@@ -23978,7 +24000,6 @@ Tile styles
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
-  - [interactive-02 [variable]](#interactive-02-variable)
 
 ## time-picker
 
@@ -25473,7 +25494,6 @@ UI shell header
     right: 0;
     height: mini-units(6);
     background-color: $shell-header-bg-01;
-    border-bottom: 1px solid $shell-header-border-01;
     z-index: z('header');
   }
 
@@ -25622,6 +25642,7 @@ UI shell header
   }
 
   a.#{$prefix}--header__menu-item {
+    position: relative;
     display: flex;
     align-items: center;
     color: $shell-header-text-02;
@@ -25663,6 +25684,30 @@ UI shell header
   a.#{$prefix}--header__menu-item:active > svg,
   a.#{$prefix}--header__menu-item:focus > svg {
     fill: $shell-header-icon-01;
+  }
+
+  // Styles for selected state
+
+  a.#{$prefix}--header__menu-item[aria-current='page']::after,
+  .#{$prefix}--header__menu-item--current::after {
+    content: '';
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    border-bottom: 3px solid $inverse-support-04;
+  }
+
+  a.#{$prefix}--header__menu-item[aria-current='page']:focus::after,
+  .#{$prefix}--header__menu-item--current:focus::after {
+    border: 0;
+  }
+
+  a.#{$prefix}--header__menu-item[aria-current='page']:focus,
+  a.#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current:focus {
+    border: 2px solid $shell-header-focus;
   }
 
   .#{$prefix}--header__submenu {
@@ -25786,8 +25831,8 @@ UI shell header
   - [mini-units [function]](#mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
-  - [shell-header-border-01 [variable]](#shell-header-border-01-variable)
   - [shell-header-bg-04 [variable]](#shell-header-bg-04-variable)
+  - [shell-header-border-01 [variable]](#shell-header-border-01-variable)
   - [shell-header-focus [variable]](#shell-header-focus-variable)
   - [shell-header-bg-03 [variable]](#shell-header-bg-03-variable)
   - [shell-header-icon-02 [variable]](#shell-header-icon-02-variable)
@@ -25795,6 +25840,7 @@ UI shell header
   - [shell-header-bg-02 [variable]](#shell-header-bg-02-variable)
   - [shell-header-text-01 [variable]](#shell-header-text-01-variable)
   - [shell-header-text-02 [variable]](#shell-header-text-02-variable)
+  - [inverse-support-04 [variable]](#inverse-support-04-variable)
   - [shell-header-bg-06 [variable]](#shell-header-bg-06-variable)
   - [shell-header-icon-03 [variable]](#shell-header-icon-03-variable)
 
