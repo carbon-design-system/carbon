@@ -10,6 +10,7 @@ exports[`AccordionItem should render 1`] = `
     onAnimationEnd={[Function]}
   >
     <defaultRenderExpando
+      aria-controls="accordion-item-1"
       aria-expanded={false}
       className="bx--accordion__heading"
       onClick={[Function]}
@@ -18,6 +19,7 @@ exports[`AccordionItem should render 1`] = `
       type="button"
     >
       <button
+        aria-controls="accordion-item-1"
         aria-expanded={false}
         className="bx--accordion__heading"
         onClick={[Function]}
@@ -64,6 +66,7 @@ exports[`AccordionItem should render 1`] = `
     </defaultRenderExpando>
     <div
       className="bx--accordion__content"
+      id="accordion-item-1"
     >
       Lorem ipsum.
     </div>
