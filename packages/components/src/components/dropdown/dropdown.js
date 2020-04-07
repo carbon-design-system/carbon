@@ -269,11 +269,11 @@ class Dropdown extends mixin(
         });
       }
 
-      const listNodeIncludingClassic = this.element.querySelector(
+      const menuListNode = this.element.querySelector(
         this.options.selectorMenu
       );
-      if (listNodeIncludingClassic) {
-        listNodeIncludingClassic.tabIndex = this.element.classList.contains(
+      if (menuListNode) {
+        menuListNode.tabIndex = this.element.classList.contains(
           this.options.classOpen
         )
           ? '0'
