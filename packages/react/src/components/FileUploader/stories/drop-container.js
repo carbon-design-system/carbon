@@ -91,7 +91,7 @@ function ExampleDropContainerApp(props) {
       if (props.multiple) {
         setFiles([...files, ...newFiles]);
         newFiles.forEach(uploadFile);
-      } else {
+      } else if (newFiles[0]) {
         setFiles([newFiles[0]]);
         uploadFile(newFiles[0]);
       }

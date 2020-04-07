@@ -126,6 +126,11 @@ export default class MultiSelect extends React.Component {
      * Additional props passed to Downshift
      */
     downshiftProps: PropTypes.shape(Downshift.propTypes),
+
+    /**
+     * Specify the direction of the multiselect dropdown. Can be either top or bottom.
+     */
+    direction: PropTypes.oneOf(['top', 'bottom']),
   };
 
   static getDerivedStateFromProps({ open }, state) {
@@ -153,6 +158,7 @@ export default class MultiSelect extends React.Component {
     title: false,
     open: false,
     selectionFeedback: 'top-after-reopen',
+    direction: 'bottom',
   };
 
   constructor(props) {
@@ -187,7 +193,9 @@ export default class MultiSelect extends React.Component {
       case Downshift.stateChangeTypes.keyDownArrowDown:
       case Downshift.stateChangeTypes.keyDownArrowUp:
       case Downshift.stateChangeTypes.itemMouseEnter:
-        this.setState({ highlightedIndex: changes.highlightedIndex });
+        this.setState({
+          highlightedIndex: changes.highlightedIndex,
+        });
         break;
       case Downshift.stateChangeTypes.keyDownEscape:
       case Downshift.stateChangeTypes.mouseUp:
@@ -239,6 +247,7 @@ export default class MultiSelect extends React.Component {
       useTitleInItem,
       translateWithId,
       downshiftProps,
+      direction,
     } = this.props;
     const inline = type === 'inline';
     const wrapperClasses = cx(
@@ -306,6 +315,7 @@ export default class MultiSelect extends React.Component {
                   [`${prefix}--multi-select--inline`]: inline,
                   [`${prefix}--multi-select--selected`]:
                     selectedItem.length > 0,
+                  [`${prefix}--list-box--up`]: direction === 'top',
                 }
               );
               const buttonProps = {
