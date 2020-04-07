@@ -6702,7 +6702,6 @@ $ui-02: if(
   - [snippet [mixin]](#snippet-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
-  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [tile [mixin]](#tile-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [carbon-content [mixin]](#carbon-content-mixin)
@@ -7211,6 +7210,7 @@ $field-01: if(
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -15852,14 +15852,8 @@ Data table core styles
     padding-bottom: 0;
   }
 
-  .#{$prefix}--data-table
-    td.#{$prefix}--table-column-menu
-    .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
-    background: $ui-03;
-  }
-
   // Overflow Menu Overrides
-  .#{$prefix}--data-table td .#{$prefix}--overflow-menu {
+  .#{$prefix}--data-table td button.#{$prefix}--overflow-menu {
     margin: rem(-7px) 0 rem(-8px);
   }
 
@@ -15890,6 +15884,13 @@ Data table core styles
       .#{$prefix}--overflow-menu__icon {
       opacity: 0;
     }
+  }
+
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open
+    .#{$prefix}--overflow-menu__icon {
+    opacity: 1;
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--visible-overflow-menu
@@ -20789,9 +20790,9 @@ Overflow menu styles
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open,
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open
     .#{$prefix}--overflow-menu__trigger {
-    background-color: $ui-01;
+    @include box-shadow;
+    background-color: $field-01;
     transition: none;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
   }
 
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open,
@@ -20808,13 +20809,13 @@ Overflow menu styles
 
   .#{$prefix}--overflow-menu-options {
     @include reset;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+    @include box-shadow;
     display: none;
     flex-direction: column;
     align-items: flex-start;
     position: absolute;
     z-index: z('floating');
-    background-color: $ui-01;
+    background-color: $field-01;
     width: rem(160px);
     list-style: none;
     top: 32px;
@@ -20824,16 +20825,24 @@ Overflow menu styles
       content: '';
       position: absolute;
       display: block;
-      background-color: $ui-01;
+      background-color: $field-01;
       transition: background-color $duration--fast-02 motion(entrance, productive);
     }
   }
 
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open:hover {
+    background-color: $field-01;
+  }
+
   .#{$prefix}--overflow-menu-options--light {
-    background-color: $ui-02;
+    background-color: $field-02;
     &::after {
-      background-color: $ui-02;
+      background-color: $field-02;
     }
+  }
+
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open:hover {
+    background-color: $field-02;
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
@@ -21021,10 +21030,9 @@ Overflow menu styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [hover-ui [variable]](#hover-ui-variable)
-  - [ui-01 [variable]](#ui-01-variable)
+  - [field-01 [variable]](#field-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
-  - [ui-02 [variable]](#ui-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -21033,6 +21041,7 @@ Overflow menu styles
   - [icon-02 [variable]](#icon-02-variable)
   - [text-04 [variable]](#text-04-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [ui-01 [variable]](#ui-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
 ## pagination
