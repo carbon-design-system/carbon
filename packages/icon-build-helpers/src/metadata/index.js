@@ -101,11 +101,24 @@ async function scaffold({
         name: item.id,
         friendly_name: item.id,
         aliases: [],
-        sizes: item.assets.map(asset => asset.size),
       };
+      const sizes = item.assets
+        .map(asset => asset.size)
+        .filter(size => {
+          return size !== undefined;
+        });
+
+      if (sizes.length > 0) {
+        metadata.sizes = sizes;
+      }
+
       icons.data.push(metadata);
     }
   }
+
+  icons.data.sort((a, b) => {
+    return a.name.localeCompare(b.name);
+  });
 
   await Storage.save(adapter, output, [icons]);
 }
