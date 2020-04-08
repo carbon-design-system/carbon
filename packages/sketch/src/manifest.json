@@ -71,6 +71,12 @@
       "handler": "testSyncSharedStyles"
     },
     {
+      "name": "Generate pictogram page",
+      "identifier": "carbon.elements.pictograms.generate",
+      "script": "commands/index.js",
+      "handler": "generatePictograms"
+    },
+    {
       "name": "Sync pictogram symbols",
       "identifier": "carbon.elements.pictograms.sync",
       "script": "commands/index.js",
