@@ -9,7 +9,7 @@ import { Document, Text, Rectangle, Group } from 'sketch/dom';
 import { command } from '../command';
 import { findOrCreatePage, selectPage } from '../../tools/page';
 
-const { categories } = require('@carbon/pictograms/metadata.json');
+const { categories } = require('../../../generated/pictograms/metadata.json');
 
 export function generate() {
   command('commands/pictograms/generate', () => {
@@ -26,6 +26,7 @@ export function generate() {
         style: {
           fontFamily: 'IBM Plex Sans',
           fontSize: 32,
+          fontStyle: undefined,
           fontWeight: 4,
           lineHeight: 40,
         },
@@ -45,7 +46,7 @@ export function generate() {
       for (const pictogram of category.members) {
         const symbol = symbols.find(symbol => {
           const parts = symbol.name.split('/').map(string => string.trim());
-          const [_type, name] = parts;
+          const [_type, _category, name] = parts;
           return name === pictogram;
         });
 
@@ -57,14 +58,14 @@ export function generate() {
         instance.frame.offset(PICTOGRAM_X_OFFSET, PICTOGRAM_Y_OFFSET);
 
         layers.push(instance);
-        PICTOGRAM_X_OFFSET = PICTOGRAM_X_OFFSET + 32 + MARGIN;
+        PICTOGRAM_X_OFFSET = PICTOGRAM_X_OFFSET + 48 + MARGIN;
         COLUMN_COUNT = COLUMN_COUNT + 1;
 
         // 8 column layout
         if (COLUMN_COUNT > 7) {
           PICTOGRAM_X_OFFSET = 0;
           COLUMN_COUNT = 0;
-          PICTOGRAM_Y_OFFSET = PICTOGRAM_Y_OFFSET + 32 + MARGIN;
+          PICTOGRAM_Y_OFFSET = PICTOGRAM_Y_OFFSET + 48 + MARGIN;
         }
       }
 

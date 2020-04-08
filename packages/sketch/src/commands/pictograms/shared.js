@@ -7,19 +7,18 @@
 
 /* global MSSVGImporter, NSString, NSUTF8StringEncoding */
 
-import { toString } from '@carbon/icon-helpers';
 import { Artboard, Rectangle, Shape } from 'sketch/dom';
 import { syncColorStyles } from '../../sharedStyles/colors';
 import { syncSymbol } from '../../tools/symbols';
 
-const meta = require('@carbon/pictograms/build-info.json');
-const metadata = require('@carbon/pictograms/metadata.json');
+const metadata = require('../../../generated/pictograms/metadata.json');
 
 export function syncPictogramSymbols(
   document,
   symbols,
   symbolsPage,
-  sharedLayerStyles
+  sharedLayerStyles,
+  sizes = [48]
 ) {
   const sharedStyles = syncColorStyles(document, 'border');
   const [sharedStyle] = sharedStyles.filter(
@@ -32,189 +31,116 @@ export function syncPictogramSymbols(
     );
   }
 
-  const pictograms = normalize(meta);
-  const pictogramNames = Object.keys(pictograms);
+  const artboards = createSVGArtboards(
+    symbolsPage,
+    sharedStyle,
+    metadata.icons,
+    sizes
+  );
 
-  // To help with debugging, we have `start` and `end` values here to focus on
-  // specific pictogram ranges. You can also work on a specific pictogram by finding
-  // it's index and setting the value of start to the index and end to the
-  // index + 1.
-  //
-  // To find the index, you can use:
-  //   console.log(pictogramNames.findIndex(name === 'name-to-find')); // 50
-  // And use that value below like:
-  //  const start = 50;
-  //  const end = 51;
-  // This will allow you to focus only on the pictogram named 'name-to-find'
-  const start = 0;
-  const end = pictogramNames.length;
+  return artboards.map(artboard => {
+    return syncSymbol(symbols, sharedLayerStyles, artboard.name, {
+      name: artboard.name,
+      frame: artboard.frame,
+      layers: artboard.layers,
+      background: artboard.background,
+      parent: symbolsPage,
+    });
+  });
+}
 
-  // We keep track of the current X and Y offsets at the top-level, each
-  // iteration of an pictogram set should reset the X_OFFSET and update the
-  // Y_OFFSET with the maximum size in the pictogram set.
-  const ARTBOARD_MARGIN = 32;
-  const INITIAL_Y_OFFSET =
-    symbolsPage.layers.reduce((acc, layer) => {
-      if (layer.frame.y + layer.frame.height > acc) {
-        return layer.frame.y + layer.frame.height;
-      }
-      return acc;
-    }, 0) + 32;
-  let X_OFFSET = 0;
-  let Y_OFFSET = INITIAL_Y_OFFSET;
-  let maxSize = -Infinity;
-
-  const symbolsToSync = pictogramNames.slice(start, end).flatMap((name, i) => {
-    const sizes = pictograms[name];
-
-    X_OFFSET = 0;
-    if (i !== 0) {
-      Y_OFFSET = Y_OFFSET + maxSize + ARTBOARD_MARGIN;
+/**
+ * Given a page, determine what the initial y-offset is based on the layers in
+ * the page
+ * @param {Page} page
+ * @returns {number}
+ */
+function getInitialPageOffset(page) {
+  return page.layers.reduce((acc, layer) => {
+    if (layer.frame.y + layer.frame.height > acc) {
+      return layer.frame.y + layer.frame.height;
     }
-    maxSize = -Infinity;
+    return acc;
+  }, 0);
+}
 
-    return sizes.map(pictogram => {
-      const size = 48;
-      const descriptor = Object.assign({}, pictogram.descriptor);
+/**
+ * Create the SVG artboards for the pictograms and place them in
+ * the given page with the given shared style set as the border.
+ * @param {Page} page
+ * @param {SharedStyle} sharedStyle
+ * @param {Array} pictograms
+ * @param {Array<number>} [sizes]
+ * @returns {Array<Artboard>}
+ */
+function createSVGArtboards(page, sharedStyle, pictograms, sizes = [48]) {
+  // We keep track of the current X and Y offsets at the top-level, each
+  // iteration of pictogram should reset the X_OFFSET and update the
+  // Y_OFFSET with the maximum size in the pictogram.
+  const ARTBOARD_MARGIN = 48;
+  let X_OFFSET = 0;
+  let Y_OFFSET = getInitialPageOffset(page) + ARTBOARD_MARGIN;
 
-      // We push a transparent rectangle to mirror the "bounding box" found in
-      // pictogram artboards that is stripped by our build process. Including this
-      // makes sure that our pictogram renders true to the path data
-      descriptor.content.push({
-        elem: 'rect',
-        attrs: {
-          width: size,
-          height: size,
-          fill: 'none',
-        },
-      });
+  return pictograms
+    .filter(pictogram => !pictogram.deprecated)
+    .flatMap(pictogram => {
+      X_OFFSET = 0;
 
-      const layer = createSVGLayer(pictogram.descriptor);
+      const artboards = sizes.map(size => {
+        const [asset] = pictogram.assets;
+        const svgString = NSString.stringWithString(asset.source);
+        const svgData = svgString.dataUsingEncoding(NSUTF8StringEncoding);
+        const svgImporter = MSSVGImporter.svgImporter();
+        svgImporter.prepareToImportFromData(svgData);
+        const svgLayer = svgImporter.importAsLayer();
 
-      layer.name = pictogram.basename;
-      layer.rect = {
-        origin: {
-          x: 0,
-          y: 0,
-        },
-        size: {
-          width: size,
-          height: size,
-        },
-      };
+        svgLayer.rect = {
+          origin: {
+            x: 0,
+            y: 0,
+          },
+          size: {
+            width: size,
+            height: size,
+          },
+        };
 
-      const info = metadata.icons.find(pictogram => {
-        return pictogram.name === name;
-      });
+        let symbolName = `${pictogram.name}`;
 
-      let symbolName = name;
+        if (pictogram.category) {
+          symbolName = `${pictogram.category} / ${symbolName}`;
+        }
 
-      if (sizes.length !== 1) {
-        symbolName = `${name} / ${size}`;
-      }
+        symbolName = `pictogram / ${symbolName}`;
 
-      if (info.category && info.subcategory) {
-        symbolName = `${info.category} / ${info.subcategory} / ${symbolName}`;
-      }
+        const artboard = new Artboard({
+          name: symbolName,
+          frame: new Rectangle(X_OFFSET, Y_OFFSET, size, size),
+          layers: [svgLayer],
+        });
 
-      symbolName = `pictogram / ${symbolName}`;
-
-      const artboard = new Artboard({
-        name: symbolName,
-        frame: new Rectangle(X_OFFSET, Y_OFFSET, size, size),
-        layers: [layer],
-      });
-
-      if (size > maxSize) {
-        maxSize = size;
-      }
-
-      X_OFFSET = X_OFFSET + size + 8;
-
-      const [group] = artboard.layers;
-
-      // Last layer will be the transparent rectangle we added above
-      const strokePaths = group.layers
-        .slice(0, -1)
-        .map(layer => layer.duplicate());
-
-      let shape;
-      if (strokePaths.length === 1) {
-        shape = strokePaths[0];
-        shape.name = 'Border';
-        shape.style = sharedStyle.style;
-        shape.sharedStyleId = sharedStyle.id;
-      } else {
-        // If we have multiple fill paths, we need to consolidate them into a
-        // single Shape so that we can style the pictogram with one override in the
-        // symbol
-        shape = new Shape({
+        const [group] = artboard.layers;
+        const strokePaths = group.layers.map(layer => layer.duplicate());
+        const shape = new Shape({
           name: 'Border',
           frame: new Rectangle(0, 0, size, size),
           layers: strokePaths,
           style: sharedStyle.style,
           sharedStyleId: sharedStyle.id,
         });
-      }
 
-      shape.style.fills = [];
+        shape.style.borders = [];
 
-      artboard.layers.push(shape);
-      group.remove();
+        artboard.layers.push(shape);
+        group.remove();
 
-      return syncSymbol(symbols, sharedLayerStyles, artboard.name, {
-        name: artboard.name,
-        frame: artboard.frame,
-        layers: artboard.layers,
-        background: artboard.background,
-        parent: symbolsPage,
+        X_OFFSET += size + ARTBOARD_MARGIN;
+
+        return artboard;
       });
+
+      Y_OFFSET += 48 + ARTBOARD_MARGIN;
+
+      return artboards;
     });
-  });
-
-  return symbolsToSync;
-}
-
-/**
- * Normalize a collection of pictograms by their basename
- * @param {Array<Pictogram>} pictograms
- * @returns {object}
- */
-function normalize(pictograms) {
-  // Collect all pictograms and group them by their base names. The value of the
-  // basename key is the array of all sizes for that pictogram
-  const pictogramsByBasename = pictograms.reduce((acc, pictogram) => {
-    const name = pictogram.basename;
-    if (acc[name]) {
-      return {
-        ...acc,
-        [name]: acc[name].concat(pictogram),
-      };
-    }
-    return {
-      ...acc,
-      [name]: [pictogram],
-    };
-  }, {});
-
-  return pictogramsByBasename;
-}
-
-/**
- * Create a layer from an SVG descriptor
- *
- * Reference:
- * https://github.com/airbnb/react-sketchapp/blob/aa3070556c47883974edbc7f78978c421a8199f7/src/jsonUtils/sketchImpl/makeSvgLayer.js#L12
- *
- * @param {object} svg
- * @returns {Layer}
- */
-function createSVGLayer(svg) {
-  const svgString = NSString.stringWithString(toString(svg));
-  const svgData = svgString.dataUsingEncoding(NSUTF8StringEncoding);
-  const svgImporter = MSSVGImporter.svgImporter();
-  svgImporter.prepareToImportFromData(svgData);
-  const svgLayer = svgImporter.importAsLayer();
-
-  return svgLayer;
 }
