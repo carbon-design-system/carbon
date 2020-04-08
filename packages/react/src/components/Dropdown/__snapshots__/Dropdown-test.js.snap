@@ -163,6 +163,143 @@ exports[`Dropdown should render 1`] = `
               </ListBoxMenuIcon>
             </div>
           </ListBoxField>
+          <ListBoxMenu
+            aria-labelledby="test-dropdown"
+            id="test-dropdown"
+          >
+            <div
+              aria-labelledby="test-dropdown"
+              className="bx--list-box__menu"
+              id="test-dropdown__menu"
+              role="listbox"
+            >
+              <ListBoxMenuItem
+                id="downshift-0-item-0"
+                isActive={false}
+                isHighlighted={false}
+                key="downshift-0-item-0"
+                onClick={[Function]}
+                onMouseDown={[Function]}
+                onMouseMove={[Function]}
+                title="Item 0"
+              >
+                <div
+                  className="bx--list-box__menu-item"
+                  id="downshift-0-item-0"
+                  onClick={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseMove={[Function]}
+                  title="Item 0"
+                >
+                  <div
+                    className="bx--list-box__menu-item__option"
+                  >
+                    Item 0
+                  </div>
+                </div>
+              </ListBoxMenuItem>
+              <ListBoxMenuItem
+                id="downshift-0-item-1"
+                isActive={false}
+                isHighlighted={false}
+                key="downshift-0-item-1"
+                onClick={[Function]}
+                onMouseDown={[Function]}
+                onMouseMove={[Function]}
+                title="Item 1"
+              >
+                <div
+                  className="bx--list-box__menu-item"
+                  id="downshift-0-item-1"
+                  onClick={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseMove={[Function]}
+                  title="Item 1"
+                >
+                  <div
+                    className="bx--list-box__menu-item__option"
+                  >
+                    Item 1
+                  </div>
+                </div>
+              </ListBoxMenuItem>
+              <ListBoxMenuItem
+                id="downshift-0-item-2"
+                isActive={false}
+                isHighlighted={false}
+                key="downshift-0-item-2"
+                onClick={[Function]}
+                onMouseDown={[Function]}
+                onMouseMove={[Function]}
+                title="Item 2"
+              >
+                <div
+                  className="bx--list-box__menu-item"
+                  id="downshift-0-item-2"
+                  onClick={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseMove={[Function]}
+                  title="Item 2"
+                >
+                  <div
+                    className="bx--list-box__menu-item__option"
+                  >
+                    Item 2
+                  </div>
+                </div>
+              </ListBoxMenuItem>
+              <ListBoxMenuItem
+                id="downshift-0-item-3"
+                isActive={false}
+                isHighlighted={false}
+                key="downshift-0-item-3"
+                onClick={[Function]}
+                onMouseDown={[Function]}
+                onMouseMove={[Function]}
+                title="Item 3"
+              >
+                <div
+                  className="bx--list-box__menu-item"
+                  id="downshift-0-item-3"
+                  onClick={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseMove={[Function]}
+                  title="Item 3"
+                >
+                  <div
+                    className="bx--list-box__menu-item__option"
+                  >
+                    Item 3
+                  </div>
+                </div>
+              </ListBoxMenuItem>
+              <ListBoxMenuItem
+                id="downshift-0-item-4"
+                isActive={false}
+                isHighlighted={false}
+                key="downshift-0-item-4"
+                onClick={[Function]}
+                onMouseDown={[Function]}
+                onMouseMove={[Function]}
+                title="Item 4"
+              >
+                <div
+                  className="bx--list-box__menu-item"
+                  id="downshift-0-item-4"
+                  onClick={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseMove={[Function]}
+                  title="Item 4"
+                >
+                  <div
+                    className="bx--list-box__menu-item__option"
+                  >
+                    Item 4
+                  </div>
+                </div>
+              </ListBoxMenuItem>
+            </div>
+          </ListBoxMenu>
         </div>
       </ListBox>
     </Downshift>

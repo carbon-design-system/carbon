@@ -298,37 +298,35 @@ export default class Dropdown extends React.Component {
                     translateWithId={translateWithId}
                   />
                 </ListBox.Field>
-                {isOpen && (
-                  <ListBox.Menu aria-labelledby={id} id={id}>
-                    {items.map((item, index) => {
-                      const itemProps = getItemProps({
-                        item,
-                        index,
-                      });
-                      return (
-                        <ListBox.MenuItem
-                          key={itemProps.id}
-                          isActive={selectedItem === item}
-                          isHighlighted={
-                            highlightedIndex === index || selectedItem === item
-                          }
-                          title={itemToElement ? item.text : itemToString(item)}
-                          {...itemProps}>
-                          {itemToElement ? (
-                            <ItemToElement key={itemProps.id} {...item} />
-                          ) : (
-                            itemToString(item)
-                          )}
-                          {selectedItem === item && (
-                            <Checkmark16
-                              className={`${prefix}--list-box__menu-item__selected-icon`}
-                            />
-                          )}
-                        </ListBox.MenuItem>
-                      );
-                    })}
-                  </ListBox.Menu>
-                )}
+                <ListBox.Menu aria-labelledby={id} id={id}>
+                  {items.map((item, index) => {
+                    const itemProps = getItemProps({
+                      item,
+                      index,
+                    });
+                    return (
+                      <ListBox.MenuItem
+                        key={itemProps.id}
+                        isActive={selectedItem === item}
+                        isHighlighted={
+                          highlightedIndex === index || selectedItem === item
+                        }
+                        title={itemToElement ? item.text : itemToString(item)}
+                        {...itemProps}>
+                        {itemToElement ? (
+                          <ItemToElement key={itemProps.id} {...item} />
+                        ) : (
+                          itemToString(item)
+                        )}
+                        {selectedItem === item && (
+                          <Checkmark16
+                            className={`${prefix}--list-box__menu-item__selected-icon`}
+                          />
+                        )}
+                      </ListBox.MenuItem>
+                    );
+                  })}
+                </ListBox.Menu>
               </ListBox>
             );
           }}
