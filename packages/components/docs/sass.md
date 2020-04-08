@@ -21679,7 +21679,7 @@ Progress indicator styles
   }
 
   //ERROR STYLING
-  .#{$prefix}--progress__warning > path {
+  .#{$prefix}--progress__warning > * {
     fill: $support-01;
   }
 

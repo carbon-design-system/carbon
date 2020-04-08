@@ -21,9 +21,10 @@ const { colors } = tokens;
 /**
  * Sync theme color shared styles to the given document and return the result
  * @param {Document} document
+ * @param {string} styleType
  * @returns {Array<SharedStyle>}
  */
-export function syncThemeColorStyles(document) {
+export function syncThemeColorStyles(document, styleType) {
   const themes = {
     'White theme': white,
     'Gray 10 theme': g10,
@@ -43,7 +44,7 @@ export function syncThemeColorStyles(document) {
         const name = `theme / ${theme.toLowerCase()} / ${type} tokens / ${formatTokenName(
           token
         )}`;
-        return syncColorStyle(document, name, themes[theme][token]);
+        return syncColorStyle(document, name, themes[theme][token], styleType);
       });
   });
 
