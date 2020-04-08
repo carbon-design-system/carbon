@@ -100,7 +100,9 @@ function ExampleDropContainerApp(props) {
         invalid: true,
       };
       setFiles(files =>
-        files.map(file => (file === fileToUpload ? updatedFile : file))
+        files.map(file =>
+          file.uuid === fileToUpload.uuid ? updatedFile : file
+        )
       );
       console.log(error);
     }
@@ -118,7 +120,7 @@ function ExampleDropContainerApp(props) {
       if (props.multiple) {
         setFiles([...files, ...newFiles]);
         newFiles.forEach(uploadFile);
-      } else {
+      } else if (newFiles[0]) {
         setFiles([newFiles[0]]);
         uploadFile(newFiles[0]);
       }
