@@ -404,41 +404,39 @@ export default class ComboBox extends React.Component {
                 translateWithId={translateWithId}
               />
             </ListBox.Field>
-            {isOpen && (
-              <ListBox.Menu aria-label={ariaLabel} id={id}>
-                {this.filterItems(items, itemToString, inputValue).map(
-                  (item, index) => {
-                    const itemProps = getItemProps({
-                      item,
-                      index,
-                    });
-                    return (
-                      <ListBox.MenuItem
-                        key={itemProps.id}
-                        isActive={selectedItem === item}
-                        isHighlighted={
-                          highlightedIndex === index ||
-                          (selectedItem && selectedItem.id === item.id) ||
-                          false
-                        }
-                        title={itemToElement ? item.text : itemToString(item)}
-                        {...itemProps}>
-                        {itemToElement ? (
-                          <ItemToElement key={itemProps.id} {...item} />
-                        ) : (
-                          itemToString(item)
-                        )}
-                        {selectedItem === item && (
-                          <Checkmark16
-                            className={`${prefix}--list-box__menu-item__selected-icon`}
-                          />
-                        )}
-                      </ListBox.MenuItem>
-                    );
-                  }
-                )}
-              </ListBox.Menu>
-            )}
+            <ListBox.Menu aria-label={ariaLabel} id={id}>
+              {this.filterItems(items, itemToString, inputValue).map(
+                (item, index) => {
+                  const itemProps = getItemProps({
+                    item,
+                    index,
+                  });
+                  return (
+                    <ListBox.MenuItem
+                      key={itemProps.id}
+                      isActive={selectedItem === item}
+                      isHighlighted={
+                        highlightedIndex === index ||
+                        (selectedItem && selectedItem.id === item.id) ||
+                        false
+                      }
+                      title={itemToElement ? item.text : itemToString(item)}
+                      {...itemProps}>
+                      {itemToElement ? (
+                        <ItemToElement key={itemProps.id} {...item} />
+                      ) : (
+                        itemToString(item)
+                      )}
+                      {selectedItem === item && (
+                        <Checkmark16
+                          className={`${prefix}--list-box__menu-item__selected-icon`}
+                        />
+                      )}
+                    </ListBox.MenuItem>
+                  );
+                }
+              )}
+            </ListBox.Menu>
           </ListBox>
         )}
       </Downshift>

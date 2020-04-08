@@ -365,54 +365,51 @@ export default class MultiSelect extends React.Component {
                       translateWithId={translateWithId}
                     />
                   </ListBox.Field>
-                  {isOpen && (
-                    <ListBox.Menu
-                      aria-multiselectable="true"
-                      aria-labelledby={`${labelId}`}
-                      id={id}>
-                      {sortItems(items, {
-                        selectedItems: {
-                          top: selectedItems,
-                          fixed: [],
-                          'top-after-reopen': this.state.topItems,
-                        }[this.props.selectionFeedback],
-                        itemToString,
-                        compareItems,
-                        locale: 'en',
-                      }).map((item, index) => {
-                        const itemProps = getItemProps({ item });
-                        const itemText = itemToString(item);
-                        const isChecked =
-                          selectedItem.filter(selected =>
-                            isEqual(selected, item)
-                          ).length > 0;
-                        return (
-                          <ListBox.MenuItem
-                            key={itemProps.id}
-                            isActive={isChecked}
-                            role="option"
-                            aria-selected={isChecked}
-                            tabIndex={-1}
-                            isHighlighted={highlightedIndex === index}
-                            title={itemText}
-                            {...itemProps}>
-                            <div className={`${prefix}--checkbox-wrapper`}>
+                  <ListBox.Menu
+                    aria-multiselectable="true"
+                    aria-labelledby={`${labelId}`}
+                    id={id}>
+                    {sortItems(items, {
+                      selectedItems: {
+                        top: selectedItems,
+                        fixed: [],
+                        'top-after-reopen': this.state.topItems,
+                      }[this.props.selectionFeedback],
+                      itemToString,
+                      compareItems,
+                      locale: 'en',
+                    }).map((item, index) => {
+                      const itemProps = getItemProps({ item });
+                      const itemText = itemToString(item);
+                      const isChecked =
+                        selectedItem.filter(selected => isEqual(selected, item))
+                          .length > 0;
+                      return (
+                        <ListBox.MenuItem
+                          key={itemProps.id}
+                          isActive={isChecked}
+                          role="option"
+                          aria-selected={isChecked}
+                          tabIndex={-1}
+                          isHighlighted={highlightedIndex === index}
+                          title={itemText}
+                          {...itemProps}>
+                          <div className={`${prefix}--checkbox-wrapper`}>
+                            <span
+                              title={useTitleInItem ? itemText : null}
+                              className={`${prefix}--checkbox-label`}
+                              data-contained-checkbox-state={isChecked}
+                              id={`${itemProps.id}__checkbox`}>
                               <span
-                                title={useTitleInItem ? itemText : null}
-                                className={`${prefix}--checkbox-label`}
-                                data-contained-checkbox-state={isChecked}
-                                id={`${itemProps.id}__checkbox`}>
-                                <span
-                                  className={`${prefix}--checkbox-label-text`}>
-                                  {itemText}
-                                </span>
+                                className={`${prefix}--checkbox-label-text`}>
+                                {itemText}
                               </span>
-                            </div>
-                          </ListBox.MenuItem>
-                        );
-                      })}
-                    </ListBox.Menu>
-                  )}
+                            </span>
+                          </div>
+                        </ListBox.MenuItem>
+                      );
+                    })}
+                  </ListBox.Menu>
                 </ListBox>
               );
             }}
