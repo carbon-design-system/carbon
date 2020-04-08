@@ -69,6 +69,12 @@
       "identifier": "carbon.elements.icons.fixture.shared-styles-sync",
       "script": "commands/index.js",
       "handler": "testSyncSharedStyles"
+    },
+    {
+      "name": "Sync pictogram symbols",
+      "identifier": "carbon.elements.pictograms.sync",
+      "script": "commands/index.js",
+      "handler": "syncPictograms"
     }
   ],
   "menu": {
@@ -96,8 +102,18 @@
         ]
       },
       {
+        "title": "Pictograms",
+        "items": [
+          "carbon.elements.pictograms.sync",
+          "carbon.elements.pictograms.generate"
+        ]
+      },
+      {
         "title": "Type",
-        "items": ["carbon.elements.type.sync", "carbon.elements.type.generate"]
+        "items": [
+          "carbon.elements.type.sync",
+          "carbon.elements.type.generate"
+        ]
       },
       {
         "title": "Test",
