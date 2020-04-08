@@ -18989,9 +18989,14 @@ List box styles
     right: 0;
     width: $list-box-width;
     background-color: $ui-01;
-    max-height: rem(140px);
+    max-height: 0;
+    transition: max-height $duration--fast-02 motion(standard, productive);
     overflow-y: auto;
     z-index: z('dropdown');
+  }
+
+  .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
+    max-height: rem(140px);
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control
