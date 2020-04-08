@@ -131,6 +131,7 @@
   - [❌custom-property [mixin]](#custom-property-mixin)
   - [❌should-emit [function]](#should-emit-function)
   - [✅carbon--theme [mixin]](#carbon--theme-mixin)
+  - [❌emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [✅carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
   - [✅carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
   - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
@@ -1826,6 +1827,7 @@ $prefix: 'bx';
   - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [tag-theme [mixin]](#tag-theme-mixin)
   - [tags [mixin]](#tags-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
@@ -2219,8 +2221,13 @@ Generate a media query for the maximum width of the given styles
       @content;
     }
   } @else if map-has-key($breakpoints, $name) {
+    // We borrow this logic from bootstrap for specifying the value of the
+    // max-width. The maximum width is calculated by finding the breakpoint and
+    // subtracting .02 from its value. This value is used instead of .01 to
+    // avoid rounding issues in Safari
+    // https://github.com/twbs/bootstrap/blob/c5b1919deaf5393fcca9e9b9d7ce9c338160d99d/scss/mixins/_breakpoints.scss#L34-L46
     $breakpoint: map-get($breakpoints, $name);
-    $width: map-get($breakpoint, width);
+    $width: map-get($breakpoint, width) - 0.02;
     @media (max-width: $width) {
       @content;
     }
@@ -3411,7 +3418,6 @@ $carbon--spacing-04: 0.75rem;
 - **Used by**:
   - [dropdown [mixin]](#dropdown-mixin)
   - [lists [mixin]](#lists-mixin)
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
 
@@ -3522,6 +3528,7 @@ $carbon--spacing-08: 2.5rem;
 - **Used by**:
   - [snippet [mixin]](#snippet-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [search [mixin]](#search-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
@@ -3547,6 +3554,7 @@ $carbon--spacing-09: 3rem;
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [tile [mixin]](#tile-mixin)
 
 ### ✅carbon--spacing-10 [variable]
@@ -4063,6 +4071,7 @@ $custom-property-prefix: 'cds';
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [custom-properties [mixin]](#custom-properties-mixin)
 
 ### ❌custom-property [mixin]
@@ -4123,6 +4132,8 @@ Define theme variables from a map of tokens
 
 ```scss
 @mixin carbon--theme($theme: $carbon--theme, $emit-custom-properties: false) {
+  $parent-carbon-theme: $carbon--theme;
+  $carbon--theme: $theme !global;
   $interactive-01: map-get($theme, 'interactive-01') !global;
   $interactive-02: map-get($theme, 'interactive-02') !global;
   $interactive-03: map-get($theme, 'interactive-03') !global;
@@ -4640,7 +4651,12 @@ Define theme variables from a map of tokens
     ) !global;
   }
   @if $emit-custom-properties == true {
-    @if should-emit($theme, $carbon--theme, 'interactive-01', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'interactive-01',
+      $emit-difference
+    )
     {
       @include custom-property(
         'interactive-01',
@@ -4648,7 +4664,12 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'interactive-02', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'interactive-02',
+      $emit-difference
+    )
     {
       @include custom-property(
         'interactive-02',
@@ -4656,7 +4677,12 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'interactive-03', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'interactive-03',
+      $emit-difference
+    )
     {
       @include custom-property(
         'interactive-03',
@@ -4664,7 +4690,12 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'interactive-04', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'interactive-04',
+      $emit-difference
+    )
     {
       @include custom-property(
         'interactive-04',
@@ -4672,112 +4703,168 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'ui-background', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'ui-background',
+      $emit-difference
+    )
+    {
       @include custom-property(
         'ui-background',
         map-get($theme, 'ui-background')
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'ui-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'ui-01', $emit-difference) {
       @include custom-property('ui-01', map-get($theme, 'ui-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'ui-02', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'ui-02', $emit-difference) {
       @include custom-property('ui-02', map-get($theme, 'ui-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'ui-03', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'ui-03', $emit-difference) {
       @include custom-property('ui-03', map-get($theme, 'ui-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'ui-04', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'ui-04', $emit-difference) {
       @include custom-property('ui-04', map-get($theme, 'ui-04'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'ui-05', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'ui-05', $emit-difference) {
       @include custom-property('ui-05', map-get($theme, 'ui-05'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'text-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'text-01', $emit-difference) {
       @include custom-property('text-01', map-get($theme, 'text-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'text-02', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'text-02', $emit-difference) {
       @include custom-property('text-02', map-get($theme, 'text-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'text-03', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'text-03', $emit-difference) {
       @include custom-property('text-03', map-get($theme, 'text-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'text-04', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'text-04', $emit-difference) {
       @include custom-property('text-04', map-get($theme, 'text-04'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'text-05', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'text-05', $emit-difference) {
       @include custom-property('text-05', map-get($theme, 'text-05'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'text-error', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'text-error',
+      $emit-difference
+    )
+    {
       @include custom-property('text-error', map-get($theme, 'text-error'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'icon-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'icon-01', $emit-difference) {
       @include custom-property('icon-01', map-get($theme, 'icon-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'icon-02', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'icon-02', $emit-difference) {
       @include custom-property('icon-02', map-get($theme, 'icon-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'icon-03', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'icon-03', $emit-difference) {
       @include custom-property('icon-03', map-get($theme, 'icon-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'link-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'link-01', $emit-difference) {
       @include custom-property('link-01', map-get($theme, 'link-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'inverse-link', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'inverse-link',
+      $emit-difference
+    )
+    {
       @include custom-property('inverse-link', map-get($theme, 'inverse-link'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'field-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'field-01', $emit-difference)
+    {
       @include custom-property('field-01', map-get($theme, 'field-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'field-02', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'field-02', $emit-difference)
+    {
       @include custom-property('field-02', map-get($theme, 'field-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'inverse-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'inverse-01',
+      $emit-difference
+    )
+    {
       @include custom-property('inverse-01', map-get($theme, 'inverse-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'inverse-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'inverse-02',
+      $emit-difference
+    )
+    {
       @include custom-property('inverse-02', map-get($theme, 'inverse-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'support-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'support-01',
+      $emit-difference
+    )
+    {
       @include custom-property('support-01', map-get($theme, 'support-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'support-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'support-02',
+      $emit-difference
+    )
+    {
       @include custom-property('support-02', map-get($theme, 'support-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'support-03', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'support-03',
+      $emit-difference
+    )
+    {
       @include custom-property('support-03', map-get($theme, 'support-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'support-04', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'support-04',
+      $emit-difference
+    )
+    {
       @include custom-property('support-04', map-get($theme, 'support-04'));
     }
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'inverse-support-01',
       $emit-difference
     )
@@ -4790,7 +4877,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'inverse-support-02',
       $emit-difference
     )
@@ -4803,7 +4890,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'inverse-support-03',
       $emit-difference
     )
@@ -4816,7 +4903,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'inverse-support-04',
       $emit-difference
     )
@@ -4827,21 +4914,27 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'overlay-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'overlay-01',
+      $emit-difference
+    )
+    {
       @include custom-property('overlay-01', map-get($theme, 'overlay-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'danger', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'danger', $emit-difference) {
       @include custom-property('danger', map-get($theme, 'danger'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'focus', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'focus', $emit-difference) {
       @include custom-property('focus', map-get($theme, 'focus'));
     }
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'inverse-focus-ui',
       $emit-difference
     )
@@ -4852,14 +4945,25 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'hover-primary', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'hover-primary',
+      $emit-difference
+    )
+    {
       @include custom-property(
         'hover-primary',
         map-get($theme, 'hover-primary')
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'active-primary', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'active-primary',
+      $emit-difference
+    )
     {
       @include custom-property(
         'active-primary',
@@ -4869,7 +4973,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'hover-primary-text',
       $emit-difference
     )
@@ -4880,7 +4984,12 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'hover-secondary', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'hover-secondary',
+      $emit-difference
+    )
     {
       @include custom-property(
         'hover-secondary',
@@ -4890,7 +4999,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'active-secondary',
       $emit-difference
     )
@@ -4901,7 +5010,12 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'hover-tertiary', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'hover-tertiary',
+      $emit-difference
+    )
     {
       @include custom-property(
         'hover-tertiary',
@@ -4909,7 +5023,12 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'active-tertiary', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'active-tertiary',
+      $emit-difference
+    )
     {
       @include custom-property(
         'active-tertiary',
@@ -4917,21 +5036,29 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'hover-ui', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'hover-ui', $emit-difference)
+    {
       @include custom-property('hover-ui', map-get($theme, 'hover-ui'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'active-ui', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'active-ui', $emit-difference)
+    {
       @include custom-property('active-ui', map-get($theme, 'active-ui'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'selected-ui', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'selected-ui',
+      $emit-difference
+    )
+    {
       @include custom-property('selected-ui', map-get($theme, 'selected-ui'));
     }
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'selected-light-ui',
       $emit-difference
     )
@@ -4944,7 +5071,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'hover-selected-ui',
       $emit-difference
     )
@@ -4957,7 +5084,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'inverse-hover-ui',
       $emit-difference
     )
@@ -4968,85 +5095,163 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'hover-danger', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'hover-danger',
+      $emit-difference
+    )
+    {
       @include custom-property('hover-danger', map-get($theme, 'hover-danger'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'active-danger', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'active-danger',
+      $emit-difference
+    )
+    {
       @include custom-property(
         'active-danger',
         map-get($theme, 'active-danger')
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'hover-row', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'hover-row', $emit-difference)
+    {
       @include custom-property('hover-row', map-get($theme, 'hover-row'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'visited-link', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'visited-link',
+      $emit-difference
+    )
+    {
       @include custom-property('visited-link', map-get($theme, 'visited-link'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'disabled-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'disabled-01',
+      $emit-difference
+    )
+    {
       @include custom-property('disabled-01', map-get($theme, 'disabled-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'disabled-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'disabled-02',
+      $emit-difference
+    )
+    {
       @include custom-property('disabled-02', map-get($theme, 'disabled-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'disabled-03', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'disabled-03',
+      $emit-difference
+    )
+    {
       @include custom-property('disabled-03', map-get($theme, 'disabled-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'highlight', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'highlight', $emit-difference)
+    {
       @include custom-property('highlight', map-get($theme, 'highlight'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'decorative-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'decorative-01',
+      $emit-difference
+    )
+    {
       @include custom-property(
         'decorative-01',
         map-get($theme, 'decorative-01')
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'skeleton-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'skeleton-01',
+      $emit-difference
+    )
+    {
       @include custom-property('skeleton-01', map-get($theme, 'skeleton-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'skeleton-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'skeleton-02',
+      $emit-difference
+    )
+    {
       @include custom-property('skeleton-02', map-get($theme, 'skeleton-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'brand-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'brand-01', $emit-difference)
+    {
       @include custom-property('brand-01', map-get($theme, 'brand-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'brand-02', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'brand-02', $emit-difference)
+    {
       @include custom-property('brand-02', map-get($theme, 'brand-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'brand-03', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'brand-03', $emit-difference)
+    {
       @include custom-property('brand-03', map-get($theme, 'brand-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'active-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'active-01', $emit-difference)
+    {
       @include custom-property('active-01', map-get($theme, 'active-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'hover-field', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'hover-field',
+      $emit-difference
+    )
+    {
       @include custom-property('hover-field', map-get($theme, 'hover-field'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'caption-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'caption-01',
+      $emit-difference
+    )
+    {
       @include custom-property('caption-01', map-get($theme, 'caption-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'label-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'label-01', $emit-difference)
+    {
       @include custom-property('label-01', map-get($theme, 'label-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'helper-text-01', $emit-difference)
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'helper-text-01',
+      $emit-difference
+    )
     {
       @include custom-property(
         'helper-text-01',
@@ -5054,43 +5259,73 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'body-short-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'body-short-01',
+      $emit-difference
+    )
+    {
       @include custom-property(
         'body-short-01',
         map-get($theme, 'body-short-01')
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'body-long-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'body-long-01',
+      $emit-difference
+    )
+    {
       @include custom-property('body-long-01', map-get($theme, 'body-long-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'body-short-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'body-short-02',
+      $emit-difference
+    )
+    {
       @include custom-property(
         'body-short-02',
         map-get($theme, 'body-short-02')
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'body-long-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'body-long-02',
+      $emit-difference
+    )
+    {
       @include custom-property('body-long-02', map-get($theme, 'body-long-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'code-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'code-01', $emit-difference) {
       @include custom-property('code-01', map-get($theme, 'code-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'code-02', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'code-02', $emit-difference) {
       @include custom-property('code-02', map-get($theme, 'code-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'heading-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'heading-01',
+      $emit-difference
+    )
+    {
       @include custom-property('heading-01', map-get($theme, 'heading-01'));
     }
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'productive-heading-01',
       $emit-difference
     )
@@ -5101,13 +5336,19 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'heading-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'heading-02',
+      $emit-difference
+    )
+    {
       @include custom-property('heading-02', map-get($theme, 'heading-02'));
     }
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'productive-heading-02',
       $emit-difference
     )
@@ -5120,7 +5361,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'productive-heading-03',
       $emit-difference
     )
@@ -5133,7 +5374,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'productive-heading-04',
       $emit-difference
     )
@@ -5146,7 +5387,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'productive-heading-05',
       $emit-difference
     )
@@ -5159,7 +5400,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'productive-heading-06',
       $emit-difference
     )
@@ -5172,7 +5413,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'productive-heading-07',
       $emit-difference
     )
@@ -5185,7 +5426,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'expressive-heading-01',
       $emit-difference
     )
@@ -5198,7 +5439,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'expressive-heading-02',
       $emit-difference
     )
@@ -5211,7 +5452,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'expressive-heading-03',
       $emit-difference
     )
@@ -5224,7 +5465,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'expressive-heading-04',
       $emit-difference
     )
@@ -5237,7 +5478,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'expressive-heading-05',
       $emit-difference
     )
@@ -5250,7 +5491,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'expressive-heading-06',
       $emit-difference
     )
@@ -5263,7 +5504,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'expressive-paragraph-01',
       $emit-difference
     )
@@ -5274,81 +5515,189 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'quotation-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'quotation-01',
+      $emit-difference
+    )
+    {
       @include custom-property('quotation-01', map-get($theme, 'quotation-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'quotation-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'quotation-02',
+      $emit-difference
+    )
+    {
       @include custom-property('quotation-02', map-get($theme, 'quotation-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'display-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'display-01',
+      $emit-difference
+    )
+    {
       @include custom-property('display-01', map-get($theme, 'display-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'display-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'display-02',
+      $emit-difference
+    )
+    {
       @include custom-property('display-02', map-get($theme, 'display-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'display-03', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'display-03',
+      $emit-difference
+    )
+    {
       @include custom-property('display-03', map-get($theme, 'display-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'display-04', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'display-04',
+      $emit-difference
+    )
+    {
       @include custom-property('display-04', map-get($theme, 'display-04'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-01',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-01', map-get($theme, 'spacing-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-02',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-02', map-get($theme, 'spacing-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-03', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-03',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-03', map-get($theme, 'spacing-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-04', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-04',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-04', map-get($theme, 'spacing-04'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-05', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-05',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-05', map-get($theme, 'spacing-05'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-06', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-06',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-06', map-get($theme, 'spacing-06'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-07', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-07',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-07', map-get($theme, 'spacing-07'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-08', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-08',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-08', map-get($theme, 'spacing-08'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-09', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-09',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-09', map-get($theme, 'spacing-09'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-10', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-10',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-10', map-get($theme, 'spacing-10'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-11', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-11',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-11', map-get($theme, 'spacing-11'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'spacing-12', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-12',
+      $emit-difference
+    )
+    {
       @include custom-property('spacing-12', map-get($theme, 'spacing-12'));
     }
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'fluid-spacing-01',
       $emit-difference
     )
@@ -5361,7 +5710,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'fluid-spacing-02',
       $emit-difference
     )
@@ -5374,7 +5723,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'fluid-spacing-03',
       $emit-difference
     )
@@ -5387,7 +5736,7 @@ Define theme variables from a map of tokens
 
     @if should-emit(
       $theme,
-      $carbon--theme,
+      $parent-carbon-theme,
       'fluid-spacing-04',
       $emit-difference
     )
@@ -5398,66 +5747,118 @@ Define theme variables from a map of tokens
       );
     }
 
-    @if should-emit($theme, $carbon--theme, 'layout-01', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'layout-01', $emit-difference)
+    {
       @include custom-property('layout-01', map-get($theme, 'layout-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'layout-02', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'layout-02', $emit-difference)
+    {
       @include custom-property('layout-02', map-get($theme, 'layout-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'layout-03', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'layout-03', $emit-difference)
+    {
       @include custom-property('layout-03', map-get($theme, 'layout-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'layout-04', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'layout-04', $emit-difference)
+    {
       @include custom-property('layout-04', map-get($theme, 'layout-04'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'layout-05', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'layout-05', $emit-difference)
+    {
       @include custom-property('layout-05', map-get($theme, 'layout-05'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'layout-06', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'layout-06', $emit-difference)
+    {
       @include custom-property('layout-06', map-get($theme, 'layout-06'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'layout-07', $emit-difference) {
+    @if should-emit($theme, $parent-carbon-theme, 'layout-07', $emit-difference)
+    {
       @include custom-property('layout-07', map-get($theme, 'layout-07'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'container-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'container-01',
+      $emit-difference
+    )
+    {
       @include custom-property('container-01', map-get($theme, 'container-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'container-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'container-02',
+      $emit-difference
+    )
+    {
       @include custom-property('container-02', map-get($theme, 'container-02'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'container-03', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'container-03',
+      $emit-difference
+    )
+    {
       @include custom-property('container-03', map-get($theme, 'container-03'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'container-04', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'container-04',
+      $emit-difference
+    )
+    {
       @include custom-property('container-04', map-get($theme, 'container-04'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'container-05', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'container-05',
+      $emit-difference
+    )
+    {
       @include custom-property('container-05', map-get($theme, 'container-05'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'icon-size-01', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'icon-size-01',
+      $emit-difference
+    )
+    {
       @include custom-property('icon-size-01', map-get($theme, 'icon-size-01'));
     }
 
-    @if should-emit($theme, $carbon--theme, 'icon-size-02', $emit-difference) {
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'icon-size-02',
+      $emit-difference
+    )
+    {
       @include custom-property('icon-size-02', map-get($theme, 'icon-size-02'));
     }
   }
 
   @content;
+
   // Reset to default theme after apply in content
-  @if $theme != $carbon--theme {
+  @if $carbon--theme != $parent-carbon-theme {
+    $carbon--theme: $parent-carbon-theme !global;
+
     @include carbon--theme();
   }
 }
@@ -5502,6 +5903,7 @@ Define theme variables from a map of tokens
 - **Requires**:
   - [custom-property [mixin]](#custom-property-mixin)
   - [should-emit [function]](#should-emit-function)
+  - [carbon--theme [variable]](#carbon--theme-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [interactive-02 [variable]](#interactive-02-variable)
   - [interactive-03 [variable]](#interactive-03-variable)
@@ -5630,7 +6032,57 @@ Define theme variables from a map of tokens
   - [icon-size-01 [variable]](#icon-size-01-variable)
   - [icon-size-02 [variable]](#icon-size-02-variable)
   - [custom-property-prefix [variable]](#custom-property-prefix-variable)
+
+### ❌emit-component-tokens [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin emit-component-tokens($tokens, $theme) {
+  @if type-of($tokens) == 'map' {
+    @each $key, $options in $tokens {
+      @each $option in $options {
+        $theme: map-get($option, 'theme');
+
+        @if ($theme == $carbon--theme) {
+          $value: map-get($option, 'value');
+
+          --#{$custom-property-prefix}-#{$key}: #{$value};
+        }
+      }
+    }
+  } @else {
+    @error 'Unable to find map';
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name      | Description             | Type     | Default value |
+| --------- | ----------------------- | -------- | ------------- |
+| `$tokens` | Map of component tokens | `Map`    | —             |
+| `$theme`  | Theme identifier        | `String` | —             |
+
+**Example**:
+
+<details>
+<summary>Example code</summary>
+
+```scss
+@include emit-component-tokens($component-tokens);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Requires**:
+  - [tokens [variable]](#tokens-variable)
   - [carbon--theme [variable]](#carbon--theme-variable)
+  - [custom-property-prefix [variable]](#custom-property-prefix-variable)
 
 ### ✅carbon--theme--g10 [variable]
 
@@ -6032,6 +6484,7 @@ $carbon--theme: (
 - **Type**: `Map`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
 
 ### ✅interactive-01 [variable]
 
@@ -6094,7 +6547,6 @@ $interactive-02: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
-  - [tile [mixin]](#tile-mixin)
 
 ### ✅interactive-03 [variable]
 
@@ -6250,7 +6702,6 @@ $ui-02: if(
   - [snippet [mixin]](#snippet-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
-  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [tile [mixin]](#tile-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [carbon-content [mixin]](#carbon-content-mixin)
@@ -6759,6 +7210,7 @@ $field-01: if(
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -6800,6 +7252,7 @@ $field-02: if(
   - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
+  - [tile [mixin]](#tile-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
 
 ### ✅inverse-01 [variable]
@@ -6833,7 +7286,6 @@ $inverse-01: if(
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
-  - [tags [mixin]](#tags-mixin)
   - [tooltip--icon [mixin]](#tooltip--icon-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -6865,7 +7317,6 @@ $inverse-02: if(
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
-  - [tags [mixin]](#tags-mixin)
   - [tooltip--icon [mixin]](#tooltip--icon-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -7096,6 +7547,7 @@ $inverse-support-04: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [carbon-header [mixin]](#carbon-header-mixin)
 
 ### ✅overlay-01 [variable]
 
@@ -7182,6 +7634,7 @@ $focus: if(
   - [modal [mixin]](#modal-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
+  - [tags [mixin]](#tags-mixin)
   - [toggle [mixin]](#toggle-mixin)
 
 ### ✅inverse-focus-ui [variable]
@@ -7208,7 +7661,6 @@ $inverse-focus-ui: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
-  - [tags [mixin]](#tags-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅hover-primary [variable]
@@ -7574,7 +8026,6 @@ $inverse-hover-ui: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [tags [mixin]](#tags-mixin)
 
 ### ✅hover-danger [variable]
 
@@ -7706,6 +8157,7 @@ $disabled-01: if(
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [slider [mixin]](#slider-mixin)
+  - [tags [mixin]](#tags-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
 
@@ -12700,6 +13152,7 @@ $tokens: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 - **Used by**:
+  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
 
@@ -13527,12 +13980,6 @@ Button styles
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled] {
     cursor: not-allowed;
-  }
-
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
-    .#{$prefix}--assistive-text,
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]::before {
-    display: none;
   }
 
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
@@ -15405,14 +15852,8 @@ Data table core styles
     padding-bottom: 0;
   }
 
-  .#{$prefix}--data-table
-    td.#{$prefix}--table-column-menu
-    .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
-    background: $ui-03;
-  }
-
   // Overflow Menu Overrides
-  .#{$prefix}--data-table td .#{$prefix}--overflow-menu {
+  .#{$prefix}--data-table td button.#{$prefix}--overflow-menu {
     margin: rem(-7px) 0 rem(-8px);
   }
 
@@ -15443,6 +15884,13 @@ Data table core styles
       .#{$prefix}--overflow-menu__icon {
       opacity: 0;
     }
+  }
+
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open
+    .#{$prefix}--overflow-menu__icon {
+    opacity: 1;
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--visible-overflow-menu
@@ -15799,7 +16247,7 @@ Data table core styles
     }
   }
 
-  @include sticky-header($max-width: rem(900px));
+  @include sticky-header($max-width: 100%);
 }
 ```
 
@@ -18441,8 +18889,9 @@ List box styles
     position: absolute;
     top: 0;
     right: $carbon--spacing-05;
-    bottom: 0;
     height: 100%;
+    display: flex;
+    align-items: center;
     transition: transform $duration--fast-01 motion(standard, productive);
     cursor: pointer;
   }
@@ -18747,6 +19196,25 @@ List box styles
     overflow: hidden;
   }
 
+  // Dropdown top orientation modifiers
+  .#{$prefix}--list-box--up .#{$prefix}--list-box__menu {
+    bottom: 2.5rem;
+  }
+
+  .#{$prefix}--list-box--up.#{$prefix}--dropdown--sm
+    .#{$prefix}--list-box__menu,
+  .#{$prefix}--list-box--up.#{$prefix}--list-box--sm
+    .#{$prefix}--list-box__menu {
+    bottom: 2rem;
+  }
+
+  .#{$prefix}--list-box--up.#{$prefix}--dropdown--xl
+    .#{$prefix}--list-box__menu,
+  .#{$prefix}--list-box--up.#{$prefix}--list-box--xl
+    .#{$prefix}--list-box__menu {
+    bottom: 3rem;
+  }
+
   // Tweaks for descendants
   // When handling input, we need to target nodes that specifically opt-in to
   // the `combobox` role in order to make sure the text input is styled
@@ -19045,7 +19513,8 @@ Modal styles
   }
 
   .#{$prefix}--modal-container {
-    position: relative;
+    position: fixed;
+    top: 0;
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: auto;
@@ -19062,6 +19531,7 @@ Modal styles
     transition: transform $duration--moderate-02 motion(exit, expressive);
 
     @include carbon--breakpoint(md) {
+      position: static;
       width: 84%;
       max-height: 90%;
       height: auto;
@@ -19260,6 +19730,7 @@ Modal styles
     bottom: $spacing-09;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to bottom, rgba($ui-01, 0), $ui-01);
+    pointer-events: none;
   }
 
   .#{$prefix}--modal-content:focus
@@ -19428,6 +19899,7 @@ Inline notification styles
     @include reset;
 
     display: flex;
+    flex-wrap: wrap;
     position: relative;
     height: auto;
     min-height: rem(48px);
@@ -19440,6 +19912,7 @@ Inline notification styles
 
     @include carbon--breakpoint(md) {
       max-width: rem(608px);
+      flex-wrap: nowrap;
     }
 
     @include carbon--breakpoint(lg) {
@@ -19562,7 +20035,11 @@ Inline notification styles
   .#{$prefix}--inline-notification__details {
     display: flex;
     flex-grow: 1;
-    margin: 0 $carbon--spacing-05;
+    margin: 0 $carbon--spacing-09 0 $carbon--spacing-05;
+
+    @include carbon--breakpoint(md) {
+      margin: 0 $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--inline-notification__icon {
@@ -19574,14 +20051,12 @@ Inline notification styles
   .#{$prefix}--inline-notification__text-wrapper {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    padding: $carbon--spacing-04 0;
+    padding: rem(15px) 0;
   }
 
   .#{$prefix}--inline-notification__title {
     @include type-style('productive-heading-01');
     margin: 0 $carbon--spacing-02 0 0;
-    line-height: rem(24px);
   }
 
   .#{$prefix}--inline-notification__subtitle {
@@ -19591,7 +20066,12 @@ Inline notification styles
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
     height: rem(32px);
-    margin: $carbon--spacing-03 0;
+    margin-bottom: $carbon--spacing-03;
+    margin-left: $carbon--spacing-08;
+
+    @include carbon--breakpoint(md) {
+      margin: $carbon--spacing-03 0;
+    }
 
     &,
     &:hover,
@@ -19618,6 +20098,9 @@ Inline notification styles
 
   .#{$prefix}--inline-notification__close-button {
     @include focus-outline('reset');
+    position: absolute;
+    top: 0;
+    right: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19641,6 +20124,15 @@ Inline notification styles
     .#{$prefix}--inline-notification__close-icon {
       fill: $inverse-01;
     }
+
+    @include carbon--breakpoint(md) {
+      position: static;
+    }
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__close-button {
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--inline-notification--low-contrast {
@@ -19684,9 +20176,10 @@ Inline notification styles
   - [support-04 [variable]](#support-04-variable)
   - [inverse-support-03 [variable]](#inverse-support-03-variable)
   - [support-03 [variable]](#support-03-variable)
-  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
 
@@ -19897,6 +20390,11 @@ Toast notification styles
     .#{$prefix}--toast-notification__close-icon {
       fill: $inverse-01;
     }
+  }
+
+  .#{$prefix}--toast-notification--low-contrast
+    .#{$prefix}--toast-notification__close-button {
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--toast-notification--low-contrast
@@ -20312,9 +20810,9 @@ Overflow menu styles
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open,
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open
     .#{$prefix}--overflow-menu__trigger {
-    background-color: $ui-01;
+    @include box-shadow;
+    background-color: $field-01;
     transition: none;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
   }
 
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open,
@@ -20331,13 +20829,13 @@ Overflow menu styles
 
   .#{$prefix}--overflow-menu-options {
     @include reset;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+    @include box-shadow;
     display: none;
     flex-direction: column;
     align-items: flex-start;
     position: absolute;
     z-index: z('floating');
-    background-color: $ui-01;
+    background-color: $field-01;
     width: rem(160px);
     list-style: none;
     top: 32px;
@@ -20347,16 +20845,24 @@ Overflow menu styles
       content: '';
       position: absolute;
       display: block;
-      background-color: $ui-01;
+      background-color: $field-01;
       transition: background-color $duration--fast-02 motion(entrance, productive);
     }
   }
 
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open:hover {
+    background-color: $field-01;
+  }
+
   .#{$prefix}--overflow-menu-options--light {
-    background-color: $ui-02;
+    background-color: $field-02;
     &::after {
-      background-color: $ui-02;
+      background-color: $field-02;
     }
+  }
+
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open:hover {
+    background-color: $field-02;
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
@@ -20544,10 +21050,9 @@ Overflow menu styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [hover-ui [variable]](#hover-ui-variable)
-  - [ui-01 [variable]](#ui-01-variable)
+  - [field-01 [variable]](#field-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
-  - [ui-02 [variable]](#ui-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -20556,6 +21061,7 @@ Overflow menu styles
   - [icon-02 [variable]](#icon-02-variable)
   - [text-04 [variable]](#text-04-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [ui-01 [variable]](#ui-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
 ## pagination
@@ -21173,7 +21679,7 @@ Progress indicator styles
   }
 
   //ERROR STYLING
-  .#{$prefix}--progress__warning > path {
+  .#{$prefix}--progress__warning > * {
     fill: $support-01;
   }
 
@@ -22440,8 +22946,9 @@ Tabs styles
     @include carbon--breakpoint(md) {
       background: transparent;
       height: auto;
-      & + .#{$prefix}--tabs__nav-item {
-        margin-left: rem(2px);
+
+      + .#{$prefix}--tabs__nav-item {
+        margin-left: rem(1px);
       }
     }
   }
@@ -22692,6 +23199,32 @@ Tabs styles
     padding: $carbon--spacing-05;
   }
 
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--text-input,
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--text-area,
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--search-input,
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--select-input,
+  .#{$prefix}--tabs--container ~ .#{$prefix}--tab-content .#{$prefix}--dropdown,
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--dropdown-list,
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--number
+    input[type='number'],
+  .#{$prefix}--tabs--container
+    ~ .#{$prefix}--tab-content
+    .#{$prefix}--date-picker__input {
+    background-color: $field-02;
+  }
+
   //-----------------------------
   // Skeleton state
   //-----------------------------
@@ -22753,12 +23286,24 @@ Tabs styles
 @mixin tag-theme() {
   background-color: $bg-color;
   color: $text-color;
+
+  .#{$prefix}--tag__close-icon {
+    &:hover {
+      background-color: $filter-hover-color;
+    }
+
+    svg {
+      fill: $text-color;
+    }
+  }
 }
 ```
 
 </details>
 
 - **Group**: [tag](#tag)
+- **Requires**:
+  - [prefix [variable]](#prefix-variable)
 - **Used by**:
   - [tags [mixin]](#tags-mixin)
 
@@ -22774,7 +23319,11 @@ Tag styles
   .#{$prefix}--tag {
     @include button-reset($width: false);
     @include type-style('label-01');
-    @include tag-theme($ibm-color__gray-20, $ibm-color__gray-100);
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-gray'),
+      get-token-value($tag-colors, 'tag-color-gray'),
+      get-token-value($tag-colors, 'tag-hover-gray')
+    );
 
     display: inline-flex;
     align-items: center;
@@ -22797,48 +23346,88 @@ Tag styles
   }
 
   .#{$prefix}--tag--red {
-    @include tag-theme($ibm-color__red-20, $ibm-color__red-70);
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-red'),
+      get-token-value($tag-colors, 'tag-color-red'),
+      get-token-value($tag-colors, 'tag-hover-red')
+    );
   }
 
   .#{$prefix}--tag--magenta {
-    @include tag-theme($ibm-color__magenta-20, $ibm-color__magenta-70);
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-magenta'),
+      get-token-value($tag-colors, 'tag-color-magenta'),
+      get-token-value($tag-colors, 'tag-hover-magenta')
+    );
   }
 
   .#{$prefix}--tag--purple {
-    @include tag-theme($ibm-color__purple-20, $ibm-color__purple-70);
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-purple'),
+      get-token-value($tag-colors, 'tag-color-purple'),
+      get-token-value($tag-colors, 'tag-hover-purple')
+    );
   }
 
   .#{$prefix}--tag--blue {
-    @include tag-theme($ibm-color__blue-20, $ibm-color__blue-70);
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-blue'),
+      get-token-value($tag-colors, 'tag-color-blue'),
+      get-token-value($tag-colors, 'tag-hover-blue')
+    );
   }
 
   .#{$prefix}--tag--cyan {
-    @include tag-theme($ibm-color__cyan-20, $ibm-color__cyan-70);
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-cyan'),
+      get-token-value($tag-colors, 'tag-color-cyan'),
+      get-token-value($tag-colors, 'tag-hover-cyan')
+    );
   }
 
   .#{$prefix}--tag--teal {
-    @include tag-theme($ibm-color__teal-20, $ibm-color__teal-70);
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-teal'),
+      get-token-value($tag-colors, 'tag-color-teal'),
+      get-token-value($tag-colors, 'tag-hover-teal')
+    );
   }
 
   .#{$prefix}--tag--green {
-    @include tag-theme($ibm-color__green-20, $ibm-color__green-70);
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-green'),
+      get-token-value($tag-colors, 'tag-color-green'),
+      get-token-value($tag-colors, 'tag-hover-green')
+    );
   }
 
   .#{$prefix}--tag--gray {
-    @include tag-theme($ibm-color__gray-20, $ibm-color__gray-100);
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-gray'),
+      get-token-value($tag-colors, 'tag-color-gray'),
+      get-token-value($tag-colors, 'tag-hover-gray')
+    );
   }
 
   .#{$prefix}--tag--cool-gray {
-    @include tag-theme($ibm-color__cool-gray-20, $ibm-color__cool-gray-100);
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-cool-gray'),
+      get-token-value($tag-colors, 'tag-color-cool-gray'),
+      get-token-value($tag-colors, 'tag-hover-cool-gray')
+    );
   }
 
   .#{$prefix}--tag--warm-gray {
-    @include tag-theme($ibm-color__warm-gray-20, $ibm-color__warm-gray-100);
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-warm-gray'),
+      get-token-value($tag-colors, 'tag-color-warm-gray'),
+      get-token-value($tag-colors, 'tag-hover-warm-gray')
+    );
   }
 
   .#{$prefix}--tag--disabled,
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled {
-    @include tag-theme($ibm-color__gray-10, $ibm-color__gray-30);
+    @include tag-theme($disabled-01, $disabled-02);
 
     &:hover {
       cursor: not-allowed;
@@ -22854,7 +23443,7 @@ Tag styles
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    @include tag-theme($inverse-02, $inverse-01);
+    cursor: pointer;
     padding-right: rem(2px);
 
     &:focus,
@@ -22873,19 +23462,11 @@ Tag styles
     background-color: transparent;
     border-radius: 50%;
     cursor: pointer;
-
-    &:hover {
-      background-color: $inverse-hover-ui;
-    }
-  }
-
-  .#{$prefix}--tag__close-icon svg {
-    fill: $inverse-01;
   }
 
   .#{$prefix}--tag__close-icon:focus {
     outline: none;
-    box-shadow: inset 0 0 0 2px $inverse-focus-ui;
+    box-shadow: inset 0 0 0 2px $focus;
     border-radius: 50%;
   }
 
@@ -22918,11 +23499,9 @@ Tag styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [inverse-02 [variable]](#inverse-02-variable)
-  - [inverse-01 [variable]](#inverse-01-variable)
-  - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
-  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [focus [variable]](#focus-variable)
 
 ## text-area
 
@@ -23255,6 +23834,17 @@ Tile styles
     }
   }
 
+  .#{$prefix}--tile .#{$prefix}--text-input,
+  .#{$prefix}--tile .#{$prefix}--text-area,
+  .#{$prefix}--tile .#{$prefix}--search-input,
+  .#{$prefix}--tile .#{$prefix}--select-input,
+  .#{$prefix}--tile .#{$prefix}--dropdown,
+  .#{$prefix}--tile .#{$prefix}--dropdown-list,
+  .#{$prefix}--tile .#{$prefix}--number input[type='number'],
+  .#{$prefix}--tile .#{$prefix}--date-picker__input {
+    background-color: $field-02;
+  }
+
   .#{$prefix}--tile--light {
     background-color: $ui-02;
   }
@@ -23268,7 +23858,10 @@ Tile styles
     &:hover {
       background: $hover-ui;
     }
+  }
 
+  .#{$prefix}--tile--clickable,
+  .#{$prefix}--tile--expandable {
     &:hover,
     &:focus {
       .#{$prefix}--tile__checkmark {
@@ -23387,7 +23980,7 @@ Tile styles
   }
 
   .#{$prefix}--tile--is-selected {
-    outline: 1px solid $interactive-02;
+    outline: 1px solid $ui-05;
     outline-offset: -1px;
   }
 
@@ -23420,13 +24013,13 @@ Tile styles
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [field-02 [variable]](#field-02-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [text-01 [variable]](#text-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
-  - [interactive-02 [variable]](#interactive-02-variable)
 
 ## time-picker
 
@@ -23462,6 +24055,7 @@ Time picker styles
   }
 
   .#{$prefix}--time-picker .#{$prefix}--select-input {
+    margin: 0;
     min-width: auto;
     width: auto;
     padding-right: rem(48px);
@@ -24920,7 +25514,6 @@ UI shell header
     right: 0;
     height: mini-units(6);
     background-color: $shell-header-bg-01;
-    border-bottom: 1px solid $shell-header-border-01;
     z-index: z('header');
   }
 
@@ -25069,6 +25662,7 @@ UI shell header
   }
 
   a.#{$prefix}--header__menu-item {
+    position: relative;
     display: flex;
     align-items: center;
     color: $shell-header-text-02;
@@ -25110,6 +25704,30 @@ UI shell header
   a.#{$prefix}--header__menu-item:active > svg,
   a.#{$prefix}--header__menu-item:focus > svg {
     fill: $shell-header-icon-01;
+  }
+
+  // Styles for selected state
+
+  a.#{$prefix}--header__menu-item[aria-current='page']::after,
+  .#{$prefix}--header__menu-item--current::after {
+    content: '';
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    border-bottom: 3px solid $inverse-support-04;
+  }
+
+  a.#{$prefix}--header__menu-item[aria-current='page']:focus::after,
+  .#{$prefix}--header__menu-item--current:focus::after {
+    border: 0;
+  }
+
+  a.#{$prefix}--header__menu-item[aria-current='page']:focus,
+  a.#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current:focus {
+    border: 2px solid $shell-header-focus;
   }
 
   .#{$prefix}--header__submenu {
@@ -25233,8 +25851,8 @@ UI shell header
   - [mini-units [function]](#mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
-  - [shell-header-border-01 [variable]](#shell-header-border-01-variable)
   - [shell-header-bg-04 [variable]](#shell-header-bg-04-variable)
+  - [shell-header-border-01 [variable]](#shell-header-border-01-variable)
   - [shell-header-focus [variable]](#shell-header-focus-variable)
   - [shell-header-bg-03 [variable]](#shell-header-bg-03-variable)
   - [shell-header-icon-02 [variable]](#shell-header-icon-02-variable)
@@ -25242,6 +25860,7 @@ UI shell header
   - [shell-header-bg-02 [variable]](#shell-header-bg-02-variable)
   - [shell-header-text-01 [variable]](#shell-header-text-01-variable)
   - [shell-header-text-02 [variable]](#shell-header-text-02-variable)
+  - [inverse-support-04 [variable]](#inverse-support-04-variable)
   - [shell-header-bg-06 [variable]](#shell-header-bg-06-variable)
   - [shell-header-icon-03 [variable]](#shell-header-icon-03-variable)
 

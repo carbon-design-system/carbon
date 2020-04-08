@@ -43,6 +43,11 @@ const sizes = {
   'Small size (sm)': 'sm',
 };
 
+const directions = {
+  'Bottom (default)': 'bottom',
+  'Top ': 'top',
+};
+
 const props = () => ({
   id: text('Combobox ID (id)', 'carbon-combobox-example'),
   placeholder: text('Placeholder text (placeholder)', 'Filter...'),
@@ -53,18 +58,9 @@ const props = () => ({
   invalid: boolean('Invalid (invalid)', false),
   invalidText: text('Invalid text (invalidText)', 'A valid value is required'),
   size: select('Field size (size)', sizes, undefined) || undefined,
+  direction: select('Dropdown direction (direction)', directions, 'bottom'),
   onChange: action('onChange'),
 });
-
-const itemToElement = item => {
-  const itemAsArray = item.text.split(' ');
-  return (
-    <div>
-      <span>{itemAsArray[0]}</span>
-      <span style={{ color: 'blue' }}> {itemAsArray[1]}</span>
-    </div>
-  );
-};
 
 const ControlledComboBoxApp = props => {
   const [selectedItem, setSelectedItem] = useState(items[0]);
@@ -109,24 +105,6 @@ storiesOf('ComboBox', module)
         <ComboBox
           items={items}
           itemToString={item => (item ? item.text : '')}
-          {...props()}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: 'ComboBox',
-      },
-    }
-  )
-  .add(
-    'items as components',
-    () => (
-      <div style={{ width: 300 }}>
-        <ComboBox
-          items={items}
-          itemToString={item => (item ? item.text : '')}
-          itemToElement={itemToElement}
           {...props()}
         />
       </div>

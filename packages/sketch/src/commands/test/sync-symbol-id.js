@@ -26,14 +26,19 @@ export function testSyncSymbolId() {
   command('commands/test/sync-symbol-id', () => {
     const document = Document.getSelectedDocument();
 
-    syncSymbol(document, 'test-symbol', {
-      layers: [
-        new ShapePath({
-          name: 'Inner',
-          shapeType: ShapePath.ShapeType.Oval,
-          frame: new Rectangle(0, 0, 16, 16),
-        }),
-      ],
-    });
+    syncSymbol(
+      document.getSymbols(),
+      document.sharedLayerStyles,
+      'test-symbol',
+      {
+        layers: [
+          new ShapePath({
+            name: 'Inner',
+            shapeType: ShapePath.ShapeType.Oval,
+            frame: new Rectangle(0, 0, 16, 16),
+          }),
+        ],
+      }
+    );
   });
 }

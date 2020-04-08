@@ -215,18 +215,18 @@ export default class TimePicker extends Component {
 
     return (
       <div className={`${prefix}--form-item`}>
+        {label}
         <div className={timePickerClasses}>
           <div className={`${prefix}--time-picker__input`}>
-            {label}
             <input
               {...other}
               {...timePickerInputProps}
               data-invalid={invalid ? invalid : undefined}
             />
-            {error}
           </div>
           {children}
         </div>
+        {error}
       </div>
     );
   }
