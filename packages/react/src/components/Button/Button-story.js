@@ -51,6 +51,7 @@ const props = {
       className: 'some-class',
       kind: select('Button kind (kind)', kinds, 'primary'),
       disabled: boolean('Disabled (disabled)', false),
+      expressive: boolean('Expressive variation (expressive)', false),
       size: select('Button size (size)', sizes, 'default'),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(
@@ -76,6 +77,7 @@ const props = {
         'primary'
       ),
       disabled: boolean('Disabled (disabled)', false),
+      expressive: boolean('Expressive variation (expressive)', false),
       size: select('Button size (size)', sizes, 'default'),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(
@@ -101,6 +103,7 @@ const props = {
     return {
       className: 'some-class',
       disabled: boolean('Disabled (disabled)', false),
+      expressive: boolean('Expressive variation (expressive)', false),
       size: select('Button size (size)', sizes, 'default'),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(

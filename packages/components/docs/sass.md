@@ -13656,23 +13656,19 @@ Accordion styles
     margin-bottom: 0;
   }
 
-  .#{$prefix}--accordion--expressive {
-    overflow: hidden;
+  .#{$prefix}--accordion--expressive .#{$prefix}--accordion__heading {
+    padding: $carbon--spacing-04 0;
+  }
 
-    .#{$prefix}--accordion__heading {
-      padding: $carbon--spacing-04 0;
-    }
+  .#{$prefix}--accordion--expressive .#{$prefix}--accordion__title,
+  .#{$prefix}--accordion--expressive .#{$prefix}--accordion__content > p {
+    @include type-style('body-long-02');
+  }
 
-    .#{$prefix}--accordion__title,
-    .#{$prefix}--accordion__content > p {
-      @include type-style('body-long-02');
-    }
-
-    .#{$prefix}--accordion__arrow {
-      flex: 0 0 1.25rem;
-      width: 1.25rem;
-      height: 1.25rem;
-    }
+  .#{$prefix}--accordion--expressive .#{$prefix}--accordion__arrow {
+    flex: 0 0 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
   }
 }
 ```
@@ -14042,6 +14038,12 @@ Button styles
   .#{$prefix}--btn.#{$prefix}--skeleton {
     @include skeleton;
     width: rem(150px);
+  }
+
+  // expressive styles
+  .#{prefix}--btn.#{prefix}--btn--expressive {
+    @include type-style('body-short-02');
+    width: 500px;
   }
 }
 ```
