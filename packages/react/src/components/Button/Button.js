@@ -199,6 +199,11 @@ Button.propTypes = {
    * Can be one of: start, center, or end.
    */
   tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * Turns off/on expressive variation for component
+   */
+  expressive: PropTypes.bool,
 };
 
 Button.defaultProps = {

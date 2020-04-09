@@ -47,12 +47,17 @@ const sizes = {
 const props = {
   regular: () => {
     const iconToUse = iconMap[select('Icon (icon)', icons, 'none')];
+    const size = select('Button size (size)', sizes, 'default');
+    const expressive =
+      size === 'default'
+        ? boolean('Expressive variation (expressive)', false)
+        : false;
     return {
       className: 'some-class',
       kind: select('Button kind (kind)', kinds, 'primary'),
       disabled: boolean('Disabled (disabled)', false),
-      expressive: boolean('Expressive variation (expressive)', false),
-      size: select('Button size (size)', sizes, 'default'),
+      expressive: expressive,
+      size: size,
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(
         'Icon description (iconDescription)',
@@ -64,6 +69,11 @@ const props = {
   },
   iconOnly: () => {
     const iconToUse = iconMap[select('Icon (icon)', icons, 'Add16')];
+    const size = select('Button size (size)', sizes, 'default');
+    const expressive =
+      size === 'default'
+        ? boolean('Expressive variation (expressive)', false)
+        : false;
     return {
       className: 'some-class',
       kind: select(
@@ -77,8 +87,8 @@ const props = {
         'primary'
       ),
       disabled: boolean('Disabled (disabled)', false),
-      expressive: boolean('Expressive variation (expressive)', false),
-      size: select('Button size (size)', sizes, 'default'),
+      expressive: expressive,
+      size: size,
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(
         'Icon description (iconDescription)',
@@ -100,11 +110,16 @@ const props = {
   },
   set: () => {
     const iconToUse = iconMap[select('Icon (icon)', icons, 'none')];
+    const size = select('Button size (size)', sizes, 'default');
+    const expressive =
+      size === 'default'
+        ? boolean('Expressive variation (expressive)', false)
+        : false;
     return {
       className: 'some-class',
       disabled: boolean('Disabled (disabled)', false),
-      expressive: boolean('Expressive variation (expressive)', false),
-      size: select('Button size (size)', sizes, 'default'),
+      expressive: expressive,
+      size: size,
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(
         'Icon description (iconDescription)',

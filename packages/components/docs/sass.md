@@ -14041,9 +14041,18 @@ Button styles
   }
 
   // expressive styles
-  .#{prefix}--btn.#{prefix}--btn--expressive {
+  .#{$prefix}--btn--expressive {
     @include type-style('body-short-02');
-    width: 500px;
+  }
+
+  .#{$prefix}--btn--expressive .#{$prefix}--btn__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .#{$prefix}--btn--expressive.#{$prefix}--btn--icon-only {
+    padding-left: rem(13px);
+    padding-right: rem(13px);
   }
 }
 ```
