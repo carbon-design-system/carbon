@@ -30,6 +30,7 @@ const TextInput = React.forwardRef(function TextInput(
     helperText,
     light,
     size,
+    fluidInput,
     ...other
   },
   ref
@@ -59,6 +60,13 @@ const TextInput = React.forwardRef(function TextInput(
     title: placeholder,
     ...other,
   };
+  const inputWrapperClasses = classNames(
+    `${prefix}--form-item`,
+    `${prefix}--text-input-wrapper`,
+    {
+      [`${prefix}--text-input-wrapper--fluid`]: fluidInput,
+    }
+  );
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: other.disabled,
@@ -84,7 +92,7 @@ const TextInput = React.forwardRef(function TextInput(
   ) : null;
 
   return (
-    <div className={`${prefix}--form-item ${prefix}--text-input-wrapper`}>
+    <div className={inputWrapperClasses}>
       {label}
       {helper}
       <div

@@ -65,6 +65,28 @@
   }
 
   //-----------------------------
+  // Fluid Text Input
+  //-----------------------------
+  .#{$prefix}--text-input-wrapper--fluid {
+    position: relative;
+  }
+  .#{$prefix}--text-input-wrapper--fluid .#{$prefix}--label {
+    position: absolute;
+    top: rem(14px);
+    left: rem(14px);
+    z-index: 1;
+  }
+
+  .#{$prefix}--text-input-wrapper--fluid .#{$prefix}--form__helper-text {
+    display: none;
+  }
+
+  .#{$prefix}--text-input-wrapper--fluid .#{$prefix}--text-input {
+    min-height: rem(64px);
+    padding: rem(32px) rem(14px) $carbon--spacing-05;
+  }
+
+  //-----------------------------
   // Disabled & Error icon spacing
   //-----------------------------
   .#{$prefix}--text-input__field-wrapper {
