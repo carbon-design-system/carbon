@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -53,7 +54,11 @@ export default class TimePickerSelect extends Component {
     /**
      * Specify whether the label should be hidden, or not
      */
-    hideLabel: PropTypes.bool,
+    hideLabel: deprecate(
+      PropTypes.bool,
+      'The `hideLabel` prop for `TimePickerSelect` is no longer needed and has ' +
+        'been deprecated. It will be removed in the next major release.'
+    ),
 
     /**
      * Provide label text to be read by screen readers when interacting with the
@@ -89,6 +94,7 @@ export default class TimePickerSelect extends Component {
     });
 
     const labelClasses = classNames(`${prefix}--label`, {
+      // TODO: set to always be `true` after `hideLabel` is deprecated
       [`${prefix}--visually-hidden`]: hideLabel,
     });
 
