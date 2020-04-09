@@ -739,12 +739,16 @@ Map {
     "Table": Object {
       "defaultProps": Object {
         "isSortable": false,
+        "overflowMenuOnHover": true,
       },
       "propTypes": Object {
         "className": Object {
           "type": "string",
         },
         "isSortable": Object {
+          "type": "bool",
+        },
+        "overflowMenuOnHover": Object {
           "type": "bool",
         },
         "shouldShowBorder": Object {
@@ -1216,6 +1220,7 @@ Map {
     "defaultProps": Object {
       "filterRows": [Function],
       "locale": "en",
+      "overflowMenuOnHover": true,
       "size": "normal",
       "sortRow": [Function],
       "translateWithId": [Function],
@@ -1250,6 +1255,9 @@ Map {
       },
       "locale": Object {
         "type": "string",
+      },
+      "overflowMenuOnHover": Object {
+        "type": "bool",
       },
       "radio": Object {
         "type": "bool",
@@ -1315,12 +1323,16 @@ Map {
   "Table" => Object {
     "defaultProps": Object {
       "isSortable": false,
+      "overflowMenuOnHover": true,
     },
     "propTypes": Object {
       "className": Object {
         "type": "string",
       },
       "isSortable": Object {
+        "type": "bool",
+      },
+      "overflowMenuOnHover": Object {
         "type": "bool",
       },
       "shouldShowBorder": Object {
