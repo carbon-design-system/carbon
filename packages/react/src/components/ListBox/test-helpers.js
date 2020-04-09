@@ -10,6 +10,7 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 // Finding nodes in a ListBox
+export const findListBoxNode = wrapper => wrapper.find(`.${prefix}--list-box`);
 export const findMenuNode = wrapper =>
   wrapper.find(`.${prefix}--list-box__menu`);
 export const findMenuItemNode = (wrapper, index) =>

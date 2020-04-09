@@ -16,6 +16,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   radio={true}
   render={
     [MockFunction] {
@@ -60,6 +61,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
           >
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
             >
               <TableHead>
                 <TableRow>
@@ -119,6 +121,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
       </div>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
       >
         <table
           className="bx--data-table bx--data-table--no-border"
@@ -199,6 +202,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   radio={true}
   render={
     [MockFunction] {
@@ -334,6 +338,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
           >
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
             >
               <TableHead>
                 <TableRow>
@@ -463,6 +468,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
       </div>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
       >
         <table
           className="bx--data-table bx--data-table--no-border"
@@ -802,6 +808,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   render={
     [MockFunction] {
       "calls": Array [
@@ -845,6 +852,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
           >
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
             >
               <TableHead>
                 <TableRow>
@@ -912,6 +920,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
       </div>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
       >
         <table
           className="bx--data-table bx--data-table--no-border"
@@ -1040,6 +1049,7 @@ exports[`DataTable selection should render 1`] = `
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   render={
     [MockFunction] {
       "calls": Array [
@@ -1174,6 +1184,7 @@ exports[`DataTable selection should render 1`] = `
           >
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
             >
               <TableHead>
                 <TableRow>
@@ -1311,6 +1322,7 @@ exports[`DataTable selection should render 1`] = `
       </div>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
       >
         <table
           className="bx--data-table bx--data-table--no-border"
@@ -1647,6 +1659,7 @@ exports[`DataTable should render 1`] = `
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   render={
     [MockFunction] {
       "calls": Array [
@@ -1870,6 +1883,7 @@ exports[`DataTable should render 1`] = `
             </TableToolbar>
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
               size="normal"
             >
               <TableHead>
@@ -2047,10 +2061,10 @@ exports[`DataTable should render 1`] = `
                               <path
                                 d="M16,2C8.4,2,2,8.4,2,16s6.4,14,14,14s14-6.4,14-14S23.6,2,16,2z M24,17h-7v7h-2v-7H8v-2h7V8h2v7h7V17z"
                               />
-                              <polygon
+                              <path
+                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15z"
                                 data-icon-path="inner-path"
                                 fill="none"
-                                points="24,17 17,17 17,24 15,24 15,17 8,17 8,15 15,15 15,8 17,8 17,15 24,15"
                               />
                             </svg>
                           </Icon>
@@ -2114,10 +2128,10 @@ exports[`DataTable should render 1`] = `
                               <path
                                 d="M16,2C8.4,2,2,8.4,2,16s6.4,14,14,14s14-6.4,14-14S23.6,2,16,2z M24,17h-7v7h-2v-7H8v-2h7V8h2v7h7V17z"
                               />
-                              <polygon
+                              <path
+                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15z"
                                 data-icon-path="inner-path"
                                 fill="none"
-                                points="24,17 17,17 17,24 15,24 15,17 8,17 8,15 15,15 15,8 17,8 17,15 24,15"
                               />
                             </svg>
                           </Icon>
@@ -2181,10 +2195,10 @@ exports[`DataTable should render 1`] = `
                               <path
                                 d="M16,2C8.4,2,2,8.4,2,16s6.4,14,14,14s14-6.4,14-14S23.6,2,16,2z M24,17h-7v7h-2v-7H8v-2h7V8h2v7h7V17z"
                               />
-                              <polygon
+                              <path
+                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15z"
                                 data-icon-path="inner-path"
                                 fill="none"
-                                points="24,17 17,17 17,24 15,24 15,17 8,17 8,15 15,15 15,8 17,8 17,15 24,15"
                               />
                             </svg>
                           </Icon>
@@ -2329,8 +2343,8 @@ exports[`DataTable should render 1`] = `
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
                             >
-                              <polygon
-                                points="24 9.4 22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4"
+                              <path
+                                d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
                               />
                             </svg>
                           </Icon>
@@ -2474,6 +2488,7 @@ exports[`DataTable should render 1`] = `
       </TableToolbar>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
         size="normal"
       >
         <table
@@ -2616,6 +2631,7 @@ exports[`DataTable sticky header should render 1`] = `
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   render={
     [MockFunction] {
       "calls": Array [
@@ -2840,6 +2856,7 @@ exports[`DataTable sticky header should render 1`] = `
             </TableToolbar>
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
               size="normal"
               stickyHeader={true}
             >
@@ -3020,10 +3037,10 @@ exports[`DataTable sticky header should render 1`] = `
                               <path
                                 d="M16,2C8.4,2,2,8.4,2,16s6.4,14,14,14s14-6.4,14-14S23.6,2,16,2z M24,17h-7v7h-2v-7H8v-2h7V8h2v7h7V17z"
                               />
-                              <polygon
+                              <path
+                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15z"
                                 data-icon-path="inner-path"
                                 fill="none"
-                                points="24,17 17,17 17,24 15,24 15,17 8,17 8,15 15,15 15,8 17,8 17,15 24,15"
                               />
                             </svg>
                           </Icon>
@@ -3087,10 +3104,10 @@ exports[`DataTable sticky header should render 1`] = `
                               <path
                                 d="M16,2C8.4,2,2,8.4,2,16s6.4,14,14,14s14-6.4,14-14S23.6,2,16,2z M24,17h-7v7h-2v-7H8v-2h7V8h2v7h7V17z"
                               />
-                              <polygon
+                              <path
+                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15z"
                                 data-icon-path="inner-path"
                                 fill="none"
-                                points="24,17 17,17 17,24 15,24 15,17 8,17 8,15 15,15 15,8 17,8 17,15 24,15"
                               />
                             </svg>
                           </Icon>
@@ -3154,10 +3171,10 @@ exports[`DataTable sticky header should render 1`] = `
                               <path
                                 d="M16,2C8.4,2,2,8.4,2,16s6.4,14,14,14s14-6.4,14-14S23.6,2,16,2z M24,17h-7v7h-2v-7H8v-2h7V8h2v7h7V17z"
                               />
-                              <polygon
+                              <path
+                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15z"
                                 data-icon-path="inner-path"
                                 fill="none"
-                                points="24,17 17,17 17,24 15,24 15,17 8,17 8,15 15,15 15,8 17,8 17,15 24,15"
                               />
                             </svg>
                           </Icon>
@@ -3302,8 +3319,8 @@ exports[`DataTable sticky header should render 1`] = `
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
                             >
-                              <polygon
-                                points="24 9.4 22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4"
+                              <path
+                                d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
                               />
                             </svg>
                           </Icon>
@@ -3447,6 +3464,7 @@ exports[`DataTable sticky header should render 1`] = `
       </TableToolbar>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
         size="normal"
         stickyHeader={true}
       >
