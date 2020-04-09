@@ -39,5 +39,5 @@ $enable-css-custom-properties: feature-flag-enabled('enable-css-custom-propertie
     @error 'Unable to find matching theme value for token #{$name}';
   }
 
-  @error 'Unable to find the token name #{$name} in the given token list';
+  @error 'Unable to find the token #{$name} in the given token list';
 }
