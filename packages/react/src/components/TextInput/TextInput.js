@@ -193,6 +193,11 @@ TextInput.propTypes = {
    * `true` to use the light version.
    */
   light: PropTypes.bool,
+
+  /**
+   * `true` to use fluid variation of input field.
+   */
+  fluidInput: PropTypes.bool,
 };
 
 TextInput.defaultProps = {

@@ -5159,6 +5159,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "fluidInput": Object {
+        "type": "bool",
+      },
       "helperText": Object {
         "type": "node",
       },
