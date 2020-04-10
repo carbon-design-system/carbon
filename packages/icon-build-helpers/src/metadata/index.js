@@ -35,7 +35,7 @@ async function check({
 
 /**
  * Build the metadata for the assets in the given directory with a given list of
- * extensions
+ * extensions and write it to disk
  * @param {object} options
  * @param {Adapter} [options.adapter] The adapter to use to load the extensions
  * @param {string} options.input The directory of source files
@@ -71,10 +71,18 @@ async function build({
   await fs.writeJson(metadataFilePath, metadata, {
     spaces: 2,
   });
-
-  return metadata;
 }
 
+/**
+ * Load the metadata for the assets in the given directory with a given list of
+ * extensions and return it
+ * @param {object} options
+ * @param {Adapter} [options.adapter] The adapter to use to load the extensions
+ * @param {string} options.input The directory of source files
+ * @param {string} [options.output] The directory for the built metadata
+ * @param {Array<Extension>} [options.extensions] The extensions to load
+ * @returns {Promise<object>}
+ */
 async function load({
   adapter = adapters.yml,
   extensions = [Extensions.icons],
