@@ -11,7 +11,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const adapters = require('./adapters');
 const Extensions = require('./extensions');
-const Registry = require('./registry');
+const Registry = require('../registry');
 const Storage = require('./storage');
 const validate = require('./validate');
 
@@ -75,6 +75,31 @@ async function build({
   return metadata;
 }
 
+async function load({
+  adapter = adapters.yml,
+  extensions = [Extensions.icons],
+  input,
+}) {
+  const registry = await Registry.create(path.join(input, 'svg'));
+  const loaded = await Storage.load(adapter, input, extensions);
+  validate(registry, loaded);
+
+  const metadata = {};
+  const context = {
+    input,
+  };
+
+  // For each extension, extend the icon metadata with the given loaded data
+  // for the extension
+  for (const { data, extend } of loaded) {
+    if (extend) {
+      extend(metadata, data, registry, context);
+    }
+  }
+
+  return metadata;
+}
+
 /**
  * Help generate metadata info for icons that have an asset (.svg) but no
  * metadata information
@@ -131,5 +156,6 @@ module.exports = {
   // Commands to run for icon packages
   build,
   check,
+  load,
   scaffold,
 };
