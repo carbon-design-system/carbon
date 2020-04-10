@@ -41,7 +41,8 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--sm`]: size === 'small' || small,
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
-    [`${prefix}--btn--expressive`]: expressive,
+    [`${prefix}--btn--expressive`]:
+      expressive && size !== 'field' && size !== 'small' && !small,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
     [`${prefix}--tooltip__trigger`]: hasIconOnly,
     [`${prefix}--tooltip--a11y`]: hasIconOnly,

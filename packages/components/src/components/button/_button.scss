@@ -14,6 +14,21 @@
 @import 'mixins';
 @import '../../globals/scss/css--reset';
 
+// expressive moment
+@mixin btn-expressive {
+  @include type-style('body-short-02');
+
+  .#{$prefix}--btn__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  &.#{$prefix}--btn--icon-only {
+    padding-left: rem(13px);
+    padding-right: rem(13px);
+  }
+}
+
 /// Button styles
 /// @access private
 /// @group button
@@ -277,17 +292,7 @@
 
   // expressive styles
   .#{$prefix}--btn--expressive {
-    @include type-style('body-short-02');
-  }
-
-  .#{$prefix}--btn--expressive .#{$prefix}--btn__icon {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-
-  .#{$prefix}--btn--expressive.#{$prefix}--btn--icon-only {
-    padding-left: rem(13px);
-    padding-right: rem(13px);
+    @include btn-expressive;
   }
 }
 
