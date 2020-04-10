@@ -402,7 +402,7 @@ export default class DataTable extends React.Component {
   getSelectedRows = () =>
     this.state.rowIds.filter(id => {
       const row = this.state.rowsById[id];
-      return row.isSelected;
+      return row.isSelected && !row.disabled;
     });
 
   /**
@@ -447,10 +447,9 @@ export default class DataTable extends React.Component {
           ...acc,
           [id]: {
             ...initialState.rowsById[id],
-            isSelected:
-              !initialState.rowsById[id].disabled &&
-              filteredRowIds.includes(id) &&
-              isSelected,
+            ...(!initialState.rowsById[id].disabled && {
+              isSelected: filteredRowIds.includes(id) && isSelected,
+            }),
           },
         }),
         {}
@@ -479,7 +478,8 @@ export default class DataTable extends React.Component {
       const filteredRowIds = this.getFilteredRowIds();
       const { rowsById } = state;
       const isSelected = !(
-        Object.values(rowsById).filter(row => row.isSelected == true).length > 0
+        Object.values(rowsById).filter(row => row.isSelected && !row.disabled)
+          .length > 0
       );
       return {
         shouldShowBatchActions: isSelected,
