@@ -10,7 +10,6 @@
 'use strict';
 
 const path = require('path');
-const CarbonIconsReact = require('@carbon/icons-react');
 const { Metadata } = require('../../packages/icon-build-helpers');
 
 const PACKAGE_DIR = path.resolve(__dirname, '../../packages/icons-react');
@@ -31,19 +30,22 @@ describe('@carbon/icons-react', () => {
     });
   });
 
-  it('should export each SVG asset', () => {
+  it('should export each SVG asset', async () => {
+    const CarbonIconsReactCommonJS = require('@carbon/icons-react');
+    const CarbonIconsReactESM = await import('@carbon/icons-react');
     for (const icon of metadata.icons) {
       const { moduleName } = icon;
       for (const size of sizes) {
         const exportName = `${moduleName}${size}`;
-        expect(CarbonIconsReact[exportName]).toBeDefined();
+        expect(CarbonIconsReactCommonJS[exportName]).toBeDefined();
+        expect(CarbonIconsReactESM[exportName]).toBeDefined();
       }
     }
   });
 
-  it('should export each SVG asset as a direct path', () => {
+  it('should export each SVG asset as a direct path', async () => {
     for (const icon of metadata.icons) {
-      // CommonJS should be require-able
+      const esm = path.join(PACKAGE_DIR, 'es', ...icon.namespace, icon.name);
       const commonjs = path.join(
         PACKAGE_DIR,
         'lib',
@@ -52,10 +54,12 @@ describe('@carbon/icons-react', () => {
       );
 
       for (const size of sizes) {
-        const filepath = path.join(commonjs, `${size}.js`);
+        const es = path.join(esm, `${size}.js`);
+        const lib = path.join(commonjs, `${size}.js`);
         expect(() => {
-          require(filepath);
+          require(lib);
         }).not.toThrow();
+        await expect(import(es)).resolves.toBeDefined();
       }
     }
   });
