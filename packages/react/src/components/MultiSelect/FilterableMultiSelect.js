@@ -327,7 +327,15 @@ export default class FilterableMultiSelect extends React.Component {
             isOpen={isOpen}
             inputValue={inputValue}
             onInputValueChange={this.handleOnInputValueChange}
-            onChange={onItemChange}
+            onChange={selectedItem => {
+              // `selectedItem`: The item that was just selected. null if the selection was cleared.
+              // https://github.com/downshift-js/downshift#onchange
+              if (selectedItem === null) {
+                clearSelection();
+                return;
+              }
+              onItemChange(selectedItem);
+            }}
             itemToString={itemToString}
             onStateChange={this.handleOnStateChange}
             onOuterClick={this.handleOnOuterClick}
