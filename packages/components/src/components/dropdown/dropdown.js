@@ -268,6 +268,17 @@ class Dropdown extends mixin(
           }
         });
       }
+
+      const menuListNode = this.element.querySelector(
+        this.options.selectorMenu
+      );
+      if (menuListNode) {
+        menuListNode.tabIndex = this.element.classList.contains(
+          this.options.classOpen
+        )
+          ? '0'
+          : '-1';
+      }
     }
   }
 
