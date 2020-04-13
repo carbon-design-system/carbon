@@ -45,7 +45,7 @@ const Checkbox = React.forwardRef(function Checkbox(
           onChange(evt.target.checked, id, evt);
         }}
         className={`${prefix}--checkbox`}
-        id={id}
+        aria-labelledby={id}
         ref={el => {
           if (el) {
             el.indeterminate = indeterminate;
@@ -57,7 +57,7 @@ const Checkbox = React.forwardRef(function Checkbox(
           }
         }}
       />
-      <label htmlFor={id} className={labelClasses} title={title || null}>
+      <label id={id} className={labelClasses} title={title || null}>
         <span className={innerLabelClasses}>{labelText}</span>
       </label>
     </div>

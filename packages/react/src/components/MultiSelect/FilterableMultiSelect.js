@@ -419,7 +419,7 @@ export default class FilterableMultiSelect extends React.Component {
                     />
                   </ListBox.Field>
                   {isOpen && (
-                    <ListBox.Menu aria-label={ariaLabel} id={id}>
+                    <ListBox.Menu aria-label={ariaLabel} id={`${id}-menu`}>
                       {sortItems(
                         filterItems(items, { itemToString, inputValue }),
                         {
@@ -447,7 +447,7 @@ export default class FilterableMultiSelect extends React.Component {
                             title={itemText}
                             {...itemProps}>
                             <Checkbox
-                              id={itemProps.id}
+                              id={`${itemProps.id}-item`}
                               title={useTitleInItem ? itemText : null}
                               name={itemText}
                               checked={isChecked}
