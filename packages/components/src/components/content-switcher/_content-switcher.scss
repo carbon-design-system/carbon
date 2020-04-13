@@ -142,6 +142,70 @@
     .#{$prefix}--content-switcher__icon {
     fill: $inverse-01;
   }
+
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected { 
+    background-color: transparent; 
+    color: inherit; 
+  }
+
+  .#{$prefix}--content-switcher-btn INPUT[type="radio"] { 
+    opacity: 0; 
+    position: fixed; 
+    width: 0; 
+    height: rem(16px); 
+    left: rem(16px); 
+  }
+
+  .#{$prefix}--content-switcher-btn INPUT[type="radio"]:checked 
+    + .#{$prefix}--content-switcher__label { 
+    background-color: $ui-05; 
+    color: $inverse-01; 
+  }
+
+  .#{$prefix}--content-switcher-btn { 
+    padding: 0; 
+  }
+
+  .#{$prefix}--content-switcher__label { 
+    height:100%; 
+    width: 100%; 
+    padding: $carbon--spacing-03 $carbon--spacing-05; 
+    line-height: 1.6; 
+    margin-bottom: 0; 
+  }
+
+  .#{$prefix}--content-switcher__label:hover { 
+    cursor: pointer; 
+  }
+
+  .#{$prefix}--content-switcher-btn INPUT[type="radio"]:focus 
+    + .#{$prefix}--content-switcher__label { 
+    box-shadow: inset 0 0 0 2px $focus; 
+  }
+
+  .#{$prefix}--content-switcher-btn:not(:first-of-type)::before { 
+    background-color: transparent; 
+  }
+
+  .#{$prefix}--content-switcher-btn:not(:first-of-type) 
+    .#{$prefix}--content-switcher__label::before { 
+    content: ''; 
+    display: block; 
+    height: rem(16px); 
+    width: rem(1px); 
+    background-color: $content-switcher-divider; 
+    position: absolute; 
+    z-index: 2; 
+    left: 0; 
+    top: rem(12px); 
+  }
+
+  .#{$prefix}--content-switcher-btn:not(:first-of-type) INPUT[type="radio"]:checked 
+    + .#{$prefix}--content-switcher__label::before,
+  .#{$prefix}--content-switcher-btn:not(:first-of-type) INPUT[type="radio"]:focus 
+    + .#{$prefix}--content-switcher__label::before { 
+    background-color: transparent; 
+  }
 }
 
 @include exports('content-switcher') {
