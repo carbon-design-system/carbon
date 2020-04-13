@@ -20,6 +20,7 @@ const TextInput = React.forwardRef(function TextInput(
     labelText,
     className = `${prefix}--text__input`,
     id,
+    expressive,
     placeholder,
     type,
     onChange,
@@ -40,6 +41,10 @@ const TextInput = React.forwardRef(function TextInput(
     [`${prefix}--text-input--invalid`]: invalid,
     [`${prefix}--text-input--${size}`]: size,
   });
+  const wrapperClasses = classNames(
+    `${prefix}--form-item ${prefix}--text-input-wrapper`,
+    { [`${prefix}--text-input--expressive`]: expressive }
+  );
   const sharedTextInputProps = {
     id,
     onChange: evt => {
@@ -84,7 +89,7 @@ const TextInput = React.forwardRef(function TextInput(
   ) : null;
 
   return (
-    <div className={`${prefix}--form-item ${prefix}--text-input-wrapper`}>
+    <div className={wrapperClasses}>
       {label}
       {helper}
       <div

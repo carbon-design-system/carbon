@@ -13,6 +13,7 @@ const ControlledPasswordInput = React.forwardRef(
       labelText,
       className,
       id,
+      expressive,
       placeholder,
       onChange,
       onClick,
@@ -31,6 +32,10 @@ const ControlledPasswordInput = React.forwardRef(
     ref
   ) {
     const errorId = id + '-error-msg';
+    const wrapperClasses = classNames(
+      `${prefix}--form-item ${prefix}--text-input-wrapper ${prefix}--password-input-wrapper`,
+      { [`${prefix}--text-input--expressive`]: expressive }
+    );
     const textInputClasses = classNames(
       `${prefix}--text-input`,
       `${prefix}--password-input`,
@@ -114,8 +119,7 @@ const ControlledPasswordInput = React.forwardRef(
     ) : null;
 
     return (
-      <div
-        className={`${prefix}--form-item ${prefix}--text-input-wrapper ${prefix}--password-input-wrapper`}>
+      <div className={wrapperClasses}>
         {label}
         {helper}
         <div

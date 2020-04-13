@@ -11,6 +11,7 @@ export default function PasswordInput({
   labelText,
   className,
   id,
+  expressive,
   placeholder,
   onChange,
   onClick,
@@ -30,6 +31,10 @@ export default function PasswordInput({
   const togglePasswordVisibility = () =>
     setInputType(inputType === 'password' ? 'text' : 'password');
   const errorId = id + '-error-msg';
+  const wrapperClasses = classNames(
+    `${prefix}--form-item ${prefix}--text-input-wrapper ${prefix}--password-input-wrapper`,
+    { [`${prefix}--text-input--expressive`]: expressive }
+  );
   const textInputClasses = classNames(
     `${prefix}--text-input`,
     `${prefix}--password-input`,
@@ -112,8 +117,7 @@ export default function PasswordInput({
   ) : null;
 
   return (
-    <div
-      className={`${prefix}--form-item ${prefix}--text-input-wrapper ${prefix}--password-input-wrapper`}>
+    <div className={wrapperClasses}>
       {label}
       {helper}
       <div

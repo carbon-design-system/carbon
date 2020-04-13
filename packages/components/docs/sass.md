@@ -3416,7 +3416,6 @@ $carbon--spacing-04: 0.75rem;
 - **Aliased**:
   - `spacing-04`
 - **Used by**:
-  - [accordion [mixin]](#accordion-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [lists [mixin]](#lists-mixin)
   - [text-area [mixin]](#text-area-mixin)
@@ -13656,19 +13655,8 @@ Accordion styles
     margin-bottom: 0;
   }
 
-  .#{$prefix}--accordion--expressive .#{$prefix}--accordion__heading {
-    padding: $carbon--spacing-04 0;
-  }
-
-  .#{$prefix}--accordion--expressive .#{$prefix}--accordion__title,
-  .#{$prefix}--accordion--expressive .#{$prefix}--accordion__content > p {
-    @include type-style('body-long-02');
-  }
-
-  .#{$prefix}--accordion--expressive .#{$prefix}--accordion__arrow {
-    flex: 0 0 1.25rem;
-    width: 1.25rem;
-    height: 1.25rem;
+  .#{$prefix}--accordion--expressive {
+    @include accordion-expressive;
   }
 }
 ```
@@ -13689,7 +13677,6 @@ Accordion styles
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
-  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
 
 ## breadcrumb
 
@@ -14042,17 +14029,7 @@ Button styles
 
   // expressive styles
   .#{$prefix}--btn--expressive {
-    @include type-style('body-short-02');
-  }
-
-  .#{$prefix}--btn--expressive .#{$prefix}--btn__icon {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-
-  .#{$prefix}--btn--expressive.#{$prefix}--btn--icon-only {
-    padding-left: rem(13px);
-    padding-right: rem(13px);
+    @include btn-expressive;
   }
 }
 ```
