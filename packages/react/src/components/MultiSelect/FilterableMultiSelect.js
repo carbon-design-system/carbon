@@ -419,7 +419,10 @@ export default class FilterableMultiSelect extends React.Component {
                     />
                   </ListBox.Field>
                   {isOpen && (
-                    <ListBox.Menu aria-label={ariaLabel} id={`${id}-menu`}>
+                    <ListBox.Menu
+                      role="group"
+                      aria-label={ariaLabel}
+                      id={`${id}-menu`}>
                       {sortItems(
                         filterItems(items, { itemToString, inputValue }),
                         {
