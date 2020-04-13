@@ -6,6 +6,8 @@ deprecated:
   - name: cloud--lightning
   - name: cloud--rain
   - name: cloud--snow
+  - name: delete
+    reason: The delete icon has been replaced by trash-can
   - name: sunny
   - name: research--bloch-sphere
     reason: research--bloch-sphere has been replaced by bloch-sphere 

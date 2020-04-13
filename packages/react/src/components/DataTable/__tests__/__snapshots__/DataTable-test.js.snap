@@ -16,6 +16,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   radio={true}
   render={
     [MockFunction] {
@@ -31,6 +32,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getToolbarProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -59,6 +61,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
           >
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
             >
               <TableHead>
                 <TableRow>
@@ -94,6 +97,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
     }
   }
   rows={Array []}
+  size="normal"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -117,6 +121,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
       </div>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
       >
         <table
           className="bx--data-table bx--data-table--no-border"
@@ -197,6 +202,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   radio={true}
   render={
     [MockFunction] {
@@ -212,6 +218,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getToolbarProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -331,6 +338,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
           >
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
             >
               <TableHead>
                 <TableRow>
@@ -436,6 +444,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
       },
     ]
   }
+  size="normal"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -459,6 +468,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
       </div>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
       >
         <table
           className="bx--data-table bx--data-table--no-border"
@@ -798,6 +808,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   render={
     [MockFunction] {
       "calls": Array [
@@ -812,6 +823,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getToolbarProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -840,6 +852,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
           >
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
             >
               <TableHead>
                 <TableRow>
@@ -883,6 +896,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
     }
   }
   rows={Array []}
+  size="normal"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -906,6 +920,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
       </div>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
       >
         <table
           className="bx--data-table bx--data-table--no-border"
@@ -1034,6 +1049,7 @@ exports[`DataTable selection should render 1`] = `
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   render={
     [MockFunction] {
       "calls": Array [
@@ -1048,6 +1064,7 @@ exports[`DataTable selection should render 1`] = `
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getToolbarProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -1167,6 +1184,7 @@ exports[`DataTable selection should render 1`] = `
           >
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
             >
               <TableHead>
                 <TableRow>
@@ -1280,6 +1298,7 @@ exports[`DataTable selection should render 1`] = `
       },
     ]
   }
+  size="normal"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -1303,6 +1322,7 @@ exports[`DataTable selection should render 1`] = `
       </div>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
       >
         <table
           className="bx--data-table bx--data-table--no-border"
@@ -1639,6 +1659,7 @@ exports[`DataTable should render 1`] = `
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   render={
     [MockFunction] {
       "calls": Array [
@@ -1653,6 +1674,7 @@ exports[`DataTable should render 1`] = `
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getToolbarProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -1861,6 +1883,8 @@ exports[`DataTable should render 1`] = `
             </TableToolbar>
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
+              size="normal"
             >
               <TableHead>
                 <TableRow>
@@ -1939,6 +1963,7 @@ exports[`DataTable should render 1`] = `
       },
     ]
   }
+  size="normal"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -2029,11 +2054,6 @@ exports[`DataTable should render 1`] = `
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
-                              style={
-                                Object {
-                                  "willChange": "transform",
-                                }
-                              }
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -2101,11 +2121,6 @@ exports[`DataTable should render 1`] = `
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
-                              style={
-                                Object {
-                                  "willChange": "transform",
-                                }
-                              }
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -2173,11 +2188,6 @@ exports[`DataTable should render 1`] = `
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
-                              style={
-                                Object {
-                                  "willChange": "transform",
-                                }
-                              }
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -2281,11 +2291,6 @@ exports[`DataTable should render 1`] = `
                             focusable="false"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
-                            style={
-                              Object {
-                                "willChange": "transform",
-                              }
-                            }
                             viewBox="0 0 16 16"
                             width={16}
                             xmlns="http://www.w3.org/2000/svg"
@@ -2334,11 +2339,6 @@ exports[`DataTable should render 1`] = `
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
-                              style={
-                                Object {
-                                  "willChange": "transform",
-                                }
-                              }
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -2443,11 +2443,6 @@ exports[`DataTable should render 1`] = `
                               onKeyDown={[Function]}
                               preserveAspectRatio="xMidYMid meet"
                               role="img"
-                              style={
-                                Object {
-                                  "willChange": "transform",
-                                }
-                              }
                               viewBox="0 0 16 16"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -2493,6 +2488,8 @@ exports[`DataTable should render 1`] = `
       </TableToolbar>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
+        size="normal"
       >
         <table
           className="bx--data-table bx--data-table--no-border"
@@ -2634,6 +2631,7 @@ exports[`DataTable sticky header should render 1`] = `
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   render={
     [MockFunction] {
       "calls": Array [
@@ -2648,6 +2646,7 @@ exports[`DataTable sticky header should render 1`] = `
             "getSelectionProps": [Function],
             "getTableContainerProps": [Function],
             "getTableProps": [Function],
+            "getToolbarProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -2857,6 +2856,8 @@ exports[`DataTable sticky header should render 1`] = `
             </TableToolbar>
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
+              size="normal"
               stickyHeader={true}
             >
               <TableHead>
@@ -2936,6 +2937,7 @@ exports[`DataTable sticky header should render 1`] = `
       },
     ]
   }
+  size="normal"
   sortRow={[Function]}
   stickyHeader={true}
   translateWithId={[Function]}
@@ -3028,11 +3030,6 @@ exports[`DataTable sticky header should render 1`] = `
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
-                              style={
-                                Object {
-                                  "willChange": "transform",
-                                }
-                              }
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -3100,11 +3097,6 @@ exports[`DataTable sticky header should render 1`] = `
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
-                              style={
-                                Object {
-                                  "willChange": "transform",
-                                }
-                              }
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -3172,11 +3164,6 @@ exports[`DataTable sticky header should render 1`] = `
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
-                              style={
-                                Object {
-                                  "willChange": "transform",
-                                }
-                              }
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -3280,11 +3267,6 @@ exports[`DataTable sticky header should render 1`] = `
                             focusable="false"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
-                            style={
-                              Object {
-                                "willChange": "transform",
-                              }
-                            }
                             viewBox="0 0 16 16"
                             width={16}
                             xmlns="http://www.w3.org/2000/svg"
@@ -3333,11 +3315,6 @@ exports[`DataTable sticky header should render 1`] = `
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
-                              style={
-                                Object {
-                                  "willChange": "transform",
-                                }
-                              }
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -3442,11 +3419,6 @@ exports[`DataTable sticky header should render 1`] = `
                               onKeyDown={[Function]}
                               preserveAspectRatio="xMidYMid meet"
                               role="img"
-                              style={
-                                Object {
-                                  "willChange": "transform",
-                                }
-                              }
                               viewBox="0 0 16 16"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -3492,6 +3464,8 @@ exports[`DataTable sticky header should render 1`] = `
       </TableToolbar>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
+        size="normal"
         stickyHeader={true}
       >
         <section

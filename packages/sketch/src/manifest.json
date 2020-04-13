@@ -47,10 +47,16 @@
       "handler": "generateIcons"
     },
     {
-      "name": "Sync icon symbols",
-      "identifier": "carbon.elements.icons.sync",
+      "name": "Sync icon symbols (24 / 32)",
+      "identifier": "carbon.elements.icons.sync.large",
       "script": "commands/index.js",
-      "handler": "syncIcons"
+      "handler": "syncLargeIcons"
+    },
+    {
+      "name": "Sync icon symbols (16 / 20)",
+      "identifier": "carbon.elements.icons.sync.small",
+      "script": "commands/index.js",
+      "handler": "syncSmallIcons"
     },
     {
       "name": "Run symbol-id-sync fixture",
@@ -84,16 +90,14 @@
       {
         "title": "Icons",
         "items": [
-          "carbon.elements.icons.sync",
+          "carbon.elements.icons.sync.small",
+          "carbon.elements.icons.sync.large",
           "carbon.elements.icons.generate"
         ]
       },
       {
         "title": "Type",
-        "items": [
-          "carbon.elements.type.sync",
-          "carbon.elements.type.generate"
-        ]
+        "items": ["carbon.elements.type.sync", "carbon.elements.type.generate"]
       },
       {
         "title": "Test",

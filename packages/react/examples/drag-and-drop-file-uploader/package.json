@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "carbon-components": "10.7.0",
-    "carbon-components-react": "7.7.0",
+    "carbon-components": "latest",
+    "carbon-components-react": "latest",
+    "carbon-icons": "latest",
     "react": "16.10.2",
     "react-dom": "16.10.2",
     "react-scripts": "3.2.0"

@@ -46,6 +46,7 @@ export default props => (
       getHeaderProps,
       getRowProps,
       getSelectionProps,
+      getToolbarProps,
       getBatchActionProps,
       onInputChange,
       selectedRows,
@@ -56,7 +57,7 @@ export default props => (
         title="DataTable"
         description="With batch actions"
         {...getTableContainerProps()}>
-        <TableToolbar>
+        <TableToolbar {...getToolbarProps()}>
           <TableBatchActions {...getBatchActionProps()}>
             <TableBatchAction
               tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}

@@ -106,6 +106,11 @@ export default class DataTable extends React.Component {
     translateWithId: PropTypes.func,
 
     /**
+     * `normal` Change the row height of table
+     */
+    size: PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
+
+    /**
      * Specify whether the control should be a radio button or inline checkbox
      */
     radio: PropTypes.bool,
@@ -120,12 +125,19 @@ export default class DataTable extends React.Component {
      * Specify whether the table should be able to be sorted by its headers
      */
     isSortable: PropTypes.bool,
+
+    /**
+     * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
+     */
+    overflowMenuOnHover: PropTypes.bool,
   };
 
   static defaultProps = {
     sortRow: defaultSortRow,
     filterRows: defaultFilterRows,
     locale: 'en',
+    size: 'normal',
+    overflowMenuOnHover: true,
     translateWithId,
   };
 
@@ -330,6 +342,14 @@ export default class DataTable extends React.Component {
     };
   };
 
+  getToolbarProps = (props = {}) => {
+    const { size } = this.props;
+    return {
+      ...props,
+      size: size === 'compact' || size === 'short' ? 'small' : 'normal',
+    };
+  };
+
   getBatchActionProps = (props = {}) => {
     const { shouldShowBatchActions } = this.state;
     const totalSelected = this.getSelectedRows().length;
@@ -351,6 +371,7 @@ export default class DataTable extends React.Component {
       useStaticWidth,
       shouldShowBorder,
       stickyHeader,
+      overflowMenuOnHover,
     } = this.props;
     return {
       useZebraStyles,
@@ -359,6 +380,7 @@ export default class DataTable extends React.Component {
       useStaticWidth,
       shouldShowBorder,
       stickyHeader,
+      overflowMenuOnHover,
     };
   };
 
@@ -380,7 +402,7 @@ export default class DataTable extends React.Component {
   getSelectedRows = () =>
     this.state.rowIds.filter(id => {
       const row = this.state.rowsById[id];
-      return row.isSelected;
+      return row.isSelected && !row.disabled;
     });
 
   /**
@@ -425,10 +447,9 @@ export default class DataTable extends React.Component {
           ...acc,
           [id]: {
             ...initialState.rowsById[id],
-            isSelected:
-              !initialState.rowsById[id].disabled &&
-              filteredRowIds.includes(id) &&
-              isSelected,
+            ...(!initialState.rowsById[id].disabled && {
+              isSelected: filteredRowIds.includes(id) && isSelected,
+            }),
           },
         }),
         {}
@@ -457,7 +478,8 @@ export default class DataTable extends React.Component {
       const filteredRowIds = this.getFilteredRowIds();
       const { rowsById } = state;
       const isSelected = !(
-        Object.values(rowsById).filter(row => row.isSelected == true).length > 0
+        Object.values(rowsById).filter(row => row.isSelected && !row.disabled)
+          .length > 0
       );
       return {
         shouldShowBatchActions: isSelected,
@@ -614,6 +636,7 @@ export default class DataTable extends React.Component {
       getExpandHeaderProps: this.getExpandHeaderProps,
       getRowProps: this.getRowProps,
       getSelectionProps: this.getSelectionProps,
+      getToolbarProps: this.getToolbarProps,
       getBatchActionProps: this.getBatchActionProps,
       getTableProps: this.getTableProps,
       getTableContainerProps: this.getTableContainerProps,

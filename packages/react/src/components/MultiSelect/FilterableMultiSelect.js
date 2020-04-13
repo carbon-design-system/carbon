@@ -410,49 +410,46 @@ export default class FilterableMultiSelect extends React.Component {
                       translateWithId={translateWithId}
                     />
                   </ListBox.Field>
-                  {isOpen && (
-                    <ListBox.Menu aria-label={ariaLabel} id={id}>
-                      {sortItems(
-                        filterItems(items, { itemToString, inputValue }),
-                        {
-                          selectedItems: {
-                            top: selectedItems,
-                            fixed: [],
-                            'top-after-reopen': this.state.topItems,
-                          }[this.props.selectionFeedback],
-                          itemToString,
-                          compareItems,
-                          locale,
-                        }
-                      ).map((item, index) => {
-                        const itemProps = getItemProps({ item });
-                        const itemText = itemToString(item);
-                        const isChecked =
-                          selectedItem.filter(selected =>
-                            isEqual(selected, item)
-                          ).length > 0;
-                        return (
-                          <ListBox.MenuItem
-                            key={itemProps.id}
-                            isActive={isChecked}
-                            isHighlighted={highlightedIndex === index}
-                            title={itemText}
-                            {...itemProps}>
-                            <Checkbox
-                              id={itemProps.id}
-                              title={useTitleInItem ? itemText : null}
-                              name={itemText}
-                              checked={isChecked}
-                              disabled={disabled}
-                              readOnly={true}
-                              tabIndex="-1"
-                              labelText={itemText}
-                            />
-                          </ListBox.MenuItem>
-                        );
-                      })}
-                    </ListBox.Menu>
-                  )}
+                  <ListBox.Menu aria-label={ariaLabel} id={id}>
+                    {sortItems(
+                      filterItems(items, { itemToString, inputValue }),
+                      {
+                        selectedItems: {
+                          top: selectedItems,
+                          fixed: [],
+                          'top-after-reopen': this.state.topItems,
+                        }[this.props.selectionFeedback],
+                        itemToString,
+                        compareItems,
+                        locale,
+                      }
+                    ).map((item, index) => {
+                      const itemProps = getItemProps({ item });
+                      const itemText = itemToString(item);
+                      const isChecked =
+                        selectedItem.filter(selected => isEqual(selected, item))
+                          .length > 0;
+                      return (
+                        <ListBox.MenuItem
+                          key={itemProps.id}
+                          isActive={isChecked}
+                          isHighlighted={highlightedIndex === index}
+                          title={itemText}
+                          {...itemProps}>
+                          <Checkbox
+                            id={itemProps.id}
+                            title={useTitleInItem ? itemText : null}
+                            name={itemText}
+                            checked={isChecked}
+                            disabled={disabled}
+                            readOnly={true}
+                            tabIndex="-1"
+                            labelText={itemText}
+                          />
+                        </ListBox.MenuItem>
+                      );
+                    })}
+                  </ListBox.Menu>
                 </ListBox>
               );
             }}

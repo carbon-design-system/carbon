@@ -30,7 +30,7 @@
     transition: $duration--fast-01 motion(standard, productive);
 
     &:hover {
-      color: $link-01;
+      color: $hover-primary-text;
       text-decoration: underline;
     }
 
@@ -57,7 +57,7 @@
     }
 
     &:visited:hover {
-      color: $link-01;
+      color: $hover-primary-text;
     }
   }
 

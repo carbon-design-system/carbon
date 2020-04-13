@@ -19,12 +19,12 @@ export function generate() {
   command('commands/colors/generate', () => {
     const document = Document.getSelectedDocument();
     const page = selectPage(findOrCreatePage(document, 'color'));
-    const sharedStyles = syncColorStyles(document);
+    const sharedStyles = syncColorStyles(document, 'fill');
     const { black, white, colors, support } = groupByKey(
       sharedStyles,
       sharedStyle => {
         const { name } = sharedStyle;
-        const [_category, swatch] = name.split('/');
+        const [_category, _type, swatch] = name.split(' / ');
         switch (swatch) {
           case 'black':
             return 'black';
@@ -43,7 +43,7 @@ export function generate() {
     let Y_OFFSET = 0;
 
     const swatches = groupByKey(colors, sharedStyle => {
-      const [_category, swatch] = sharedStyle.name.split('/');
+      const [_category, _type, swatch] = sharedStyle.name.split('/');
       return swatch;
     });
 
@@ -74,9 +74,6 @@ export function generate() {
 }
 
 function createArtboardFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
-  const [category, swatch, grade] = sharedStyle.name.split('/');
-
-  const colorName = grade ? `${swatch}/${swatch}-${grade}` : swatch;
   const rectangle = new ShapePath({
     name: 'Color',
     frame: new Rectangle(0, 0, ARTBOARD_WIDTH, ARTBOARD_HEIGHT),
@@ -91,7 +88,7 @@ function createArtboardFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
 
   const artboard = new Artboard({
     parent,
-    name: `${category}/${colorName}`,
+    name: sharedStyle.name,
     frame: new Rectangle(offsetX, offsetY, ARTBOARD_WIDTH, ARTBOARD_HEIGHT),
     layers: [rectangle],
   });
