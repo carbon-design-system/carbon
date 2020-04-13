@@ -23778,6 +23778,10 @@ Text input styles
       right: $carbon--spacing-08;
     }
   }
+
+  .#{$prefix}--text-input--expressive {
+    @include text-input-expressive;
+  }
 }
 ```
 

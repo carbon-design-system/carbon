@@ -16,6 +16,27 @@
 @import '../../globals/scss/tooltip';
 @import '../form/form';
 
+@mixin text-input-expressive {
+  input {
+    height: rem(48px);
+    @include type-style('body-long-02');
+  }
+
+  .#{$prefix}--text-input__invalid-icon,
+  .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger,
+  .#{$prefix}--icon-visibility-on,
+  .#{$prefix}--icon-visibility-off {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+
+  .#{$prefix}--label,
+  .#{$prefix}--form__helper-text,
+  .#{$prefix}--form-requirement {
+    @include type-style('body-short-01');
+  }
+}
+
 /// Text input styles
 /// @access private
 /// @group text-input
@@ -171,24 +192,8 @@
     }
   }
 
-  .#{$prefix}--text-input--expressive input {
-    height: rem(48px);
-    @include type-style('body-long-02');
-  }
-
-  .#{$prefix}--text-input--expressive .#{$prefix}--text-input__invalid-icon,
-  .#{$prefix}--text-input--expressive
-    .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger,
-  .#{$prefix}--text-input--expressive .#{$prefix}--icon-visibility-on,
-  .#{$prefix}--text-input--expressive .#{$prefix}--icon-visibility-off {
-    height: 1.25rem;
-    width: 1.25rem;
-  }
-
-  .#{$prefix}--text-input--expressive .#{$prefix}--label,
-  .#{$prefix}--text-input--expressive .#{$prefix}--form__helper-text,
-  .#{$prefix}--text-input--expressive .#{$prefix}--form-requirement {
-    @include type-style('body-short-01');
+  .#{$prefix}--text-input--expressive {
+    @include text-input-expressive;
   }
 }
 
