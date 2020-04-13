@@ -53,7 +53,7 @@ export default props => (
                 {row.cells.map(cell => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
-                <TableCell>
+                <TableCell className="bx--table-column-menu">
                   <OverflowMenu flipped>
                     <OverflowMenuItem primaryFocus>Action 1</OverflowMenuItem>
                     <OverflowMenuItem>Action 2</OverflowMenuItem>
