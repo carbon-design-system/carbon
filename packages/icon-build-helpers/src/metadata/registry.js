@@ -90,6 +90,19 @@ async function create(directory) {
     }
 
     const entry = registry.get(asset.id);
+
+    // We have an invariant that all icons in a source SVG folder must have a
+    // unique name even if they are under different namespaces.
+    if (hash(entry.id, entry.namespace) !== hash(asset.id, asset.namespace)) {
+      const expected = entry.namespace.join(', ');
+      const actual = asset.namespace.join(', ');
+      throw new Error(
+        `Found namespace mismatch with asset ${asset.id}. Expected ` +
+          `[${expected}] but received [${actual}]. This likely means that ` +
+          `there is a duplicate asset in the source SVG folder`
+      );
+    }
+
     entry.assets.push({
       filepath: asset.filepath,
       size: asset.size,
@@ -97,6 +110,17 @@ async function create(directory) {
   }
 
   return registry;
+}
+
+/**
+ * Generate a hash with the basename and namespace of an asset to compare if two
+ * assets in the registry are equivalent
+ * @param {string} basename
+ * @param {Array<string>} [namespace]
+ * @returns {string}
+ */
+function hash(basename, namespace = []) {
+  return [...namespace, basename].join('/');
 }
 
 const denylist = new Set(['.DS_Store']);
