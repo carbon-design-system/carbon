@@ -125,6 +125,11 @@ export default class DataTable extends React.Component {
      * Specify whether the table should be able to be sorted by its headers
      */
     isSortable: PropTypes.bool,
+
+    /**
+     * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
+     */
+    overflowMenuOnHover: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -132,6 +137,7 @@ export default class DataTable extends React.Component {
     filterRows: defaultFilterRows,
     locale: 'en',
     size: 'normal',
+    overflowMenuOnHover: true,
     translateWithId,
   };
 
@@ -365,6 +371,7 @@ export default class DataTable extends React.Component {
       useStaticWidth,
       shouldShowBorder,
       stickyHeader,
+      overflowMenuOnHover,
     } = this.props;
     return {
       useZebraStyles,
@@ -373,6 +380,7 @@ export default class DataTable extends React.Component {
       useStaticWidth,
       shouldShowBorder,
       stickyHeader,
+      overflowMenuOnHover,
     };
   };
 
@@ -394,7 +402,7 @@ export default class DataTable extends React.Component {
   getSelectedRows = () =>
     this.state.rowIds.filter(id => {
       const row = this.state.rowsById[id];
-      return row.isSelected;
+      return row.isSelected && !row.disabled;
     });
 
   /**
@@ -439,10 +447,9 @@ export default class DataTable extends React.Component {
           ...acc,
           [id]: {
             ...initialState.rowsById[id],
-            isSelected:
-              !initialState.rowsById[id].disabled &&
-              filteredRowIds.includes(id) &&
-              isSelected,
+            ...(!initialState.rowsById[id].disabled && {
+              isSelected: filteredRowIds.includes(id) && isSelected,
+            }),
           },
         }),
         {}
@@ -471,7 +478,8 @@ export default class DataTable extends React.Component {
       const filteredRowIds = this.getFilteredRowIds();
       const { rowsById } = state;
       const isSelected = !(
-        Object.values(rowsById).filter(row => row.isSelected == true).length > 0
+        Object.values(rowsById).filter(row => row.isSelected && !row.disabled)
+          .length > 0
       );
       return {
         shouldShowBatchActions: isSelected,

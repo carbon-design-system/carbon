@@ -21,6 +21,7 @@ export const Table = ({
   useStaticWidth,
   shouldShowBorder,
   stickyHeader,
+  overflowMenuOnHover,
   ...other
 }) => {
   const componentClass = cx(`${prefix}--data-table`, className, {
@@ -32,6 +33,7 @@ export const Table = ({
     [`${prefix}--data-table--static`]: useStaticWidth,
     [`${prefix}--data-table--no-border`]: !shouldShowBorder,
     [`${prefix}--data-table--sticky-header`]: stickyHeader,
+    [`${prefix}--data-table--visible-overflow-menu`]: !overflowMenuOnHover,
   });
   const table = (
     <table {...other} className={componentClass}>
@@ -79,10 +81,16 @@ Table.propTypes = {
    * `false` If true, will keep the header sticky (only data rows will scroll)
    */
   stickyHeader: PropTypes.bool,
+
+  /**
+   * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
+   */
+  overflowMenuOnHover: PropTypes.bool,
 };
 
 Table.defaultProps = {
   isSortable: false,
+  overflowMenuOnHover: true,
 };
 
 export default Table;

@@ -16,6 +16,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   radio={true}
   render={
     [MockFunction] {
@@ -60,6 +61,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
           >
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
             >
               <TableHead>
                 <TableRow>
@@ -119,6 +121,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
       </div>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
       >
         <table
           className="bx--data-table bx--data-table--no-border"
@@ -199,6 +202,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   radio={true}
   render={
     [MockFunction] {
@@ -334,6 +338,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
           >
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
             >
               <TableHead>
                 <TableRow>
@@ -463,6 +468,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
       </div>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
       >
         <table
           className="bx--data-table bx--data-table--no-border"
@@ -802,6 +808,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   render={
     [MockFunction] {
       "calls": Array [
@@ -845,6 +852,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
           >
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
             >
               <TableHead>
                 <TableRow>
@@ -912,6 +920,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
       </div>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
       >
         <table
           className="bx--data-table bx--data-table--no-border"
@@ -1040,6 +1049,7 @@ exports[`DataTable selection should render 1`] = `
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   render={
     [MockFunction] {
       "calls": Array [
@@ -1174,6 +1184,7 @@ exports[`DataTable selection should render 1`] = `
           >
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
             >
               <TableHead>
                 <TableRow>
@@ -1311,6 +1322,7 @@ exports[`DataTable selection should render 1`] = `
       </div>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
       >
         <table
           className="bx--data-table bx--data-table--no-border"
@@ -1647,6 +1659,7 @@ exports[`DataTable should render 1`] = `
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   render={
     [MockFunction] {
       "calls": Array [
@@ -1870,6 +1883,7 @@ exports[`DataTable should render 1`] = `
             </TableToolbar>
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
               size="normal"
             >
               <TableHead>
@@ -2474,6 +2488,7 @@ exports[`DataTable should render 1`] = `
       </TableToolbar>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
         size="normal"
       >
         <table
@@ -2616,6 +2631,7 @@ exports[`DataTable sticky header should render 1`] = `
     ]
   }
   locale="en"
+  overflowMenuOnHover={true}
   render={
     [MockFunction] {
       "calls": Array [
@@ -2840,6 +2856,7 @@ exports[`DataTable sticky header should render 1`] = `
             </TableToolbar>
             <Table
               isSortable={false}
+              overflowMenuOnHover={true}
               size="normal"
               stickyHeader={true}
             >
@@ -3447,6 +3464,7 @@ exports[`DataTable sticky header should render 1`] = `
       </TableToolbar>
       <Table
         isSortable={false}
+        overflowMenuOnHover={true}
         size="normal"
         stickyHeader={true}
       >
