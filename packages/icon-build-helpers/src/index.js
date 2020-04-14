@@ -9,8 +9,10 @@
 
 const builders = require('./builders');
 const Metadata = require('./metadata');
+const Registry = require('./registry');
 
 module.exports = {
   builders,
   Metadata,
+  Registry,
 };

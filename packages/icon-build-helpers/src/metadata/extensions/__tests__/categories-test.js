@@ -24,7 +24,7 @@ describe('categories', () => {
       return memfs.fs;
     });
 
-    Registry = require('../../registry');
+    Registry = require('../../../registry');
     Storage = require('../../storage');
     extension = require('../categories');
     validate = require('../../validate');
