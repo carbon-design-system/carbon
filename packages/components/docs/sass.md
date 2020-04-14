@@ -14358,7 +14358,7 @@ Checkbox styles
     @include skeleton;
     width: rem(100px);
     height: $spacing-05;
-    margin: auto 0;
+    margin: auto 0 auto rem(6px); // Add extra spacing when label is present
   }
 }
 ```
