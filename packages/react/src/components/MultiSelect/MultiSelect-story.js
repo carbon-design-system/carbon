@@ -65,7 +65,7 @@ const directions = {
 const props = () => ({
   id: text('MultiSelect ID (id)', 'carbon-multiselect-example'),
   titleText: text('Title (titleText)', 'Multiselect title'),
-  helperText: text('Helper text (helperText)', 'This is not helper text'),
+  helperText: text('Helper text (helperText)', 'This is helper text'),
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
   useTitleInItem: boolean('Show tooltip on hover', false),
