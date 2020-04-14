@@ -30,6 +30,7 @@ const TextInput = React.forwardRef(function TextInput(
     helperText,
     light,
     size,
+    fluid,
     ...other
   },
   ref
@@ -98,8 +99,9 @@ const TextInput = React.forwardRef(function TextInput(
           <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
         )}
         {input}
+        {fluid ? error : null}
       </div>
-      {error}
+      {fluid ? null : error}
     </div>
   );
 });
