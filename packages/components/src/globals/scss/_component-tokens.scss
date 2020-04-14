@@ -63,3 +63,12 @@
 
   @return true;
 }
+
+/// @access private
+/// @param {Map} $tokens - Map of component tokens
+/// @example @include emit-component-tokens($component-tokens);
+@mixin emit-component-tokens($tokens) {
+  @each $key, $options in $tokens {
+    @include custom-property($key, get-token-value($tokens, $key));
+  }
+}
