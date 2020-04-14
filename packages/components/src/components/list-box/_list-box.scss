@@ -437,8 +437,7 @@ $list-box-menu-width: rem(300px);
 
     &:focus {
       // remove default browser focus in firefox
-      @include focus-outline('reset');
-      @include focus-outline('outline');
+      @include focus-outline('border');
     }
   }
 
