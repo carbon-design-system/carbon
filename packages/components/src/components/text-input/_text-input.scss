@@ -67,23 +67,25 @@
   //-----------------------------
   // Fluid Text Input
   //-----------------------------
-  .#{$prefix}--text-input-wrapper--fluid {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper {
     position: relative;
   }
-  .#{$prefix}--text-input-wrapper--fluid .#{$prefix}--label {
+
+  .#{$prefix}--form--fluid .#{$prefix}--label {
     position: absolute;
-    top: rem(14px);
-    left: rem(14px);
+    top: rem(13px);
+    left: $carbon--spacing-05;
     z-index: 1;
+    margin: 0;
   }
 
-  .#{$prefix}--text-input-wrapper--fluid .#{$prefix}--form__helper-text {
+  .#{$prefix}--form--fluid .#{$prefix}--form__helper-text {
     display: none;
   }
 
-  .#{$prefix}--text-input-wrapper--fluid .#{$prefix}--text-input {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input {
     min-height: rem(64px);
-    padding: rem(32px) rem(14px) $carbon--spacing-05;
+    padding: rem(32px) $carbon--spacing-05 rem(13px);
   }
 
   //-----------------------------

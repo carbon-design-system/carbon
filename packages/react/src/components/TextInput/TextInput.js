@@ -30,7 +30,6 @@ const TextInput = React.forwardRef(function TextInput(
     helperText,
     light,
     size,
-    fluidInput,
     ...other
   },
   ref
@@ -62,10 +61,7 @@ const TextInput = React.forwardRef(function TextInput(
   };
   const inputWrapperClasses = classNames(
     `${prefix}--form-item`,
-    `${prefix}--text-input-wrapper`,
-    {
-      [`${prefix}--text-input-wrapper--fluid`]: fluidInput,
-    }
+    `${prefix}--text-input-wrapper`
   );
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
@@ -193,11 +189,6 @@ TextInput.propTypes = {
    * `true` to use the light version.
    */
   light: PropTypes.bool,
-
-  /**
-   * `true` to use fluid variation of input field.
-   */
-  fluidInput: PropTypes.bool,
 };
 
 TextInput.defaultProps = {
