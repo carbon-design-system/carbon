@@ -28,7 +28,7 @@ class HeaderSubmenu extends mixin(
    * @extends Handles
    * @param {HTMLElement} element The element working as a submenu in header nav.
    * @param {object} [options] The component options.
-   * @param {string} [options.selectorTrigger] The CSS selector to find the trigger butotn.
+   * @param {string} [options.selectorTrigger] The CSS selector to find the trigger button.
    * @param {string} [options.selectorItem] The CSS selector to find the menu items.
    * @param {string} [options.attribExpanded] The attribute that represents the expanded/collapsed state.
    */
@@ -293,7 +293,7 @@ class HeaderSubmenu extends mixin(
    * @member HeaderSubmenu.options
    * @type {object}
    * @property {string} selectorInit The data attribute to find side navs.
-   * @property {string} [selectorTrigger] The CSS selector to find the trigger butotn.
+   * @property {string} [selectorTrigger] The CSS selector to find the trigger button.
    * @property {string} [selectorItem] The CSS selector to find the menu items.
    * @property {string} [attribExpanded] The attribute that represents the expanded/collapsed state.
    */

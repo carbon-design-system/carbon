@@ -137,13 +137,13 @@ class SideNav extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} [selectorSideNavToggle] The CSS selector to find the toggle button.
    * @property {string} [selectorSideNavSubmenu] The CSS selector to find the trigger buttons for sub nav items.
    * @property {string} [selectorSideNavItem] The CSS selector to find the nav items.
-   * @property {string} [selectorSideNavLink] The CSS selector to find the interactive potions in non-nested nav items.
+   * @property {string} [selectorSideNavLink] The CSS selector to find the interactive portions in non-nested nav items.
    * @property {string} [selectorSideNavLinkCurrent]
    *   The CSS selector to find the interactive potion in active non-nested nav item.
    * @property {string} [classSideNavExpanded] The CSS class for the expanded state.
    * @property {string} [classSideNavItemActive] The CSS class for the active/inactive state for nav items.
    * @property {string} [classSideNavLinkCurrent]
-   *   The CSS class for the active/inactive state of the interactive potion in non-nested nav items.
+   *   The CSS class for the active/inactive state of the interactive portion in non-nested nav items.
    */
   static options /* #__PURE_CLASS_PROPERTY__ */ = {
     selectorInit: '[data-side-nav]',
