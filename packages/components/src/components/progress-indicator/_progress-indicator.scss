@@ -184,7 +184,22 @@
 
   //unclickable button
   .#{$prefix}--progress-step-button--unclickable {
+    cursor: default;
     outline: none;
+  }
+
+  .#{$prefix}--progress-step-button--unclickable
+    .#{$prefix}--progress-label:hover {
+    color: $text-01;
+    cursor: default;
+    box-shadow: none;
+  }
+
+  .#{$prefix}--progress-step-button--unclickable
+    .#{$prefix}--tooltip__label:hover {
+    color: $link-01;
+    cursor: pointer;
+    box-shadow: 0 rem(1px) $link-01;
   }
 
   //DISABLED STYLING
