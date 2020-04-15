@@ -12,20 +12,26 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const Form = ({ className, children, fluid, ...other }) => {
-  const classNames = classnames(`${prefix}--form`, className, {
-    [`${prefix}--form--fluid`]: fluid,
+const FluidForm = ({ className, children, ...other }) => {
+  const classNames = classnames(
+    `${prefix}--form`,
+    `${prefix}--form--fluid`,
+    className
+  );
+
+  const childrenWithProps = React.Children.map(children, child => {
+    return React.cloneElement(child, { fluid: true });
   });
 
   return (
     <form className={classNames} {...other}>
       {' '}
-      {children}{' '}
+      {childrenWithProps}{' '}
     </form>
   );
 };
 
-Form.propTypes = {
+FluidForm.propTypes = {
   /**
    * Provide children to be rendered inside of the <form> element
    */
@@ -35,6 +41,11 @@ Form.propTypes = {
    * Provide a custom className to be applied on the containing <form> node
    */
   className: PropTypes.string,
+
+  /**
+   * `true` to use fluid variation of input field.
+   */
+  fluid: PropTypes.bool,
 };
 
-export default Form;
+export default FluidForm;
