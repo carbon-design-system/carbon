@@ -44,7 +44,7 @@ storiesOf('Notifications', module)
   .add('Toast', () => (
     <ToastNotification
       {...notificationProps()}
-      caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
+      caption={text('Caption (caption)', '00:00:00 AM')}
       style={{ minWidth: '30rem', marginBottom: '.5rem' }}
     />
   ))
