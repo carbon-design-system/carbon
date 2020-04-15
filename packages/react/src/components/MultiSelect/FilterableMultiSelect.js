@@ -376,7 +376,7 @@ export default class FilterableMultiSelect extends React.Component {
                   isOpen={isOpen}
                   size={size}
                   {...getRootProps()}>
-                  <ListBox.Field
+                  <input
                     id={id}
                     disabled={disabled}
                     aria-labelledby={labelId}
@@ -390,7 +390,7 @@ export default class FilterableMultiSelect extends React.Component {
                         disabled={disabled}
                       />
                     )}
-                    <input
+                    <Field
                       className={inputClasses}
                       aria-controls={`${id}__menu`}
                       aria-autocomplete="list"
@@ -417,7 +417,7 @@ export default class FilterableMultiSelect extends React.Component {
                       isOpen={isOpen}
                       translateWithId={translateWithId}
                     />
-                  </ListBox.Field>
+                  </input>
                   {isOpen && (
                     <ListBox.Menu
                       role="group"
