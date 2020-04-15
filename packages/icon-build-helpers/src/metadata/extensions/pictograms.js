@@ -38,12 +38,9 @@ const pictograms = {
       const pictogram = registry.get(entry.name);
 
       // Add namespace information for the pictogram
-      if (
-        Array.isArray(pictogram.namespace) &&
-        pictogram.namespace.length > 0
-      ) {
-        entry.namespace = pictogram.namespace.join('/');
-      }
+      entry.namespace = Array.isArray(pictogram.namespace)
+        ? pictogram.namespace
+        : [];
     }
   },
 
