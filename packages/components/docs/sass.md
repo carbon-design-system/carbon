@@ -131,7 +131,6 @@
   - [❌custom-property [mixin]](#custom-property-mixin)
   - [❌should-emit [function]](#should-emit-function)
   - [✅carbon--theme [mixin]](#carbon--theme-mixin)
-  - [❌emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [✅carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
   - [✅carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
   - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
@@ -4071,7 +4070,6 @@ $custom-property-prefix: 'cds';
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [custom-properties [mixin]](#custom-properties-mixin)
 
 ### ❌custom-property [mixin]
@@ -6033,57 +6031,6 @@ Define theme variables from a map of tokens
   - [icon-size-02 [variable]](#icon-size-02-variable)
   - [custom-property-prefix [variable]](#custom-property-prefix-variable)
 
-### ❌emit-component-tokens [mixin]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin emit-component-tokens($tokens, $theme) {
-  @if type-of($tokens) == 'map' {
-    @each $key, $options in $tokens {
-      @each $option in $options {
-        $theme: map-get($option, 'theme');
-
-        @if ($theme == $carbon--theme) {
-          $value: map-get($option, 'value');
-
-          --#{$custom-property-prefix}-#{$key}: #{$value};
-        }
-      }
-    }
-  } @else {
-    @error 'Unable to find map';
-  }
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name      | Description             | Type     | Default value |
-| --------- | ----------------------- | -------- | ------------- |
-| `$tokens` | Map of component tokens | `Map`    | —             |
-| `$theme`  | Theme identifier        | `String` | —             |
-
-**Example**:
-
-<details>
-<summary>Example code</summary>
-
-```scss
-@include emit-component-tokens($component-tokens);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Requires**:
-  - [tokens [variable]](#tokens-variable)
-  - [carbon--theme [variable]](#carbon--theme-variable)
-  - [custom-property-prefix [variable]](#custom-property-prefix-variable)
-
 ### ✅carbon--theme--g10 [variable]
 
 Carbon's g10 color theme
@@ -6484,7 +6431,6 @@ $carbon--theme: (
 - **Type**: `Map`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
 
 ### ✅interactive-01 [variable]
 
@@ -13152,7 +13098,6 @@ $tokens: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 - **Used by**:
-  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
 
