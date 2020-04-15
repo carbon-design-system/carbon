@@ -131,7 +131,6 @@
   - [❌custom-property [mixin]](#custom-property-mixin)
   - [❌should-emit [function]](#should-emit-function)
   - [✅carbon--theme [mixin]](#carbon--theme-mixin)
-  - [❌emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [✅carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
   - [✅carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
   - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
@@ -4071,7 +4070,6 @@ $custom-property-prefix: 'cds';
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [custom-properties [mixin]](#custom-properties-mixin)
 
 ### ❌custom-property [mixin]
@@ -6033,57 +6031,6 @@ Define theme variables from a map of tokens
   - [icon-size-02 [variable]](#icon-size-02-variable)
   - [custom-property-prefix [variable]](#custom-property-prefix-variable)
 
-### ❌emit-component-tokens [mixin]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin emit-component-tokens($tokens, $theme) {
-  @if type-of($tokens) == 'map' {
-    @each $key, $options in $tokens {
-      @each $option in $options {
-        $theme: map-get($option, 'theme');
-
-        @if ($theme == $carbon--theme) {
-          $value: map-get($option, 'value');
-
-          --#{$custom-property-prefix}-#{$key}: #{$value};
-        }
-      }
-    }
-  } @else {
-    @error 'Unable to find map';
-  }
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name      | Description             | Type     | Default value |
-| --------- | ----------------------- | -------- | ------------- |
-| `$tokens` | Map of component tokens | `Map`    | —             |
-| `$theme`  | Theme identifier        | `String` | —             |
-
-**Example**:
-
-<details>
-<summary>Example code</summary>
-
-```scss
-@include emit-component-tokens($component-tokens);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Requires**:
-  - [tokens [variable]](#tokens-variable)
-  - [carbon--theme [variable]](#carbon--theme-variable)
-  - [custom-property-prefix [variable]](#custom-property-prefix-variable)
-
 ### ✅carbon--theme--g10 [variable]
 
 Carbon's g10 color theme
@@ -6484,7 +6431,6 @@ $carbon--theme: (
 - **Type**: `Map`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
 
 ### ✅interactive-01 [variable]
 
@@ -13152,7 +13098,6 @@ $tokens: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 - **Used by**:
-  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
 
@@ -14358,7 +14303,7 @@ Checkbox styles
     @include skeleton;
     width: rem(100px);
     height: $spacing-05;
-    margin: auto 0;
+    margin: auto 0 auto rem(6px); // Add extra spacing when label is present
   }
 }
 ```
@@ -15839,19 +15784,6 @@ Data table core styles
     padding-right: $spacing-05;
   }
 
-  // specific padding/width for overflow menu columns
-  .#{$prefix}--data-table .#{$prefix}--table-column-menu,
-  .#{$prefix}--data-table .#{$prefix}--table-column-menu:last-of-type {
-    width: rem(52px);
-    min-width: rem(52px);
-    padding-top: $spacing-03;
-    padding-right: $spacing-03;
-  }
-
-  .#{$prefix}--data-table td.#{$prefix}--table-column-menu {
-    padding-bottom: 0;
-  }
-
   // Overflow Menu Overrides
   .#{$prefix}--data-table td button.#{$prefix}--overflow-menu {
     margin: rem(-7px) 0 rem(-8px);
@@ -16079,11 +16011,6 @@ Data table core styles
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--compact
-    .#{$prefix}--table-column-menu {
-    padding-top: 0;
-  }
-
-  .#{$prefix}--data-table.#{$prefix}--data-table--compact
     .#{$prefix}--table-column-checkbox {
     padding-top: 0;
     padding-bottom: 0;
@@ -16120,11 +16047,6 @@ Data table core styles
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--short
-    .#{$prefix}--table-column-menu {
-    padding-top: 0;
-  }
-
-  .#{$prefix}--data-table.#{$prefix}--data-table--short
     .#{$prefix}--table-column-checkbox {
     padding-top: rem(3px);
     padding-bottom: rem(3px);
@@ -16152,8 +16074,6 @@ Data table core styles
     @include type-style('label-01');
   }
 
-  .#{$prefix}--data-table.#{$prefix}--data-table--tall
-    .#{$prefix}--table-column-menu,
   .#{$prefix}--data-table.#{$prefix}--data-table--tall
     .#{$prefix}--table-column-checkbox {
     padding-top: rem(12px);
@@ -18989,9 +18909,14 @@ List box styles
     right: 0;
     width: $list-box-width;
     background-color: $ui-01;
-    max-height: rem(140px);
+    max-height: 0;
+    transition: max-height $duration--fast-02 motion(standard, productive);
     overflow-y: auto;
     z-index: z('dropdown');
+  }
+
+  .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
+    max-height: rem(140px);
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control
