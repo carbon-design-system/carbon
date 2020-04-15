@@ -180,6 +180,13 @@
     box-shadow: none;
   }
 
+  .#{$prefix}--progress-step-button--unclickable
+    .#{$prefix}--tooltip__label:hover {
+    color: $link-01;
+    cursor: pointer;
+    box-shadow: 0 rem(1px) $link-01;
+  }
+
   //DISABLED STYLING
   .#{$prefix}--progress-step--disabled {
     cursor: not-allowed;
