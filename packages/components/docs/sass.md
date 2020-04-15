@@ -21432,12 +21432,22 @@ Progress indicator styles
     }
   }
 
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-step {
+    min-width: 8rem;
+    flex-grow: 1;
+  }
+
   .#{$prefix}--progress-line {
     position: absolute;
     left: 0;
     height: 1px;
     width: rem(128px);
     border: $progress-indicator-bar-width;
+  }
+
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-line {
+    min-width: rem(128px);
+    width: 100%;
   }
 
   .#{$prefix}--progress-step svg {
@@ -21478,6 +21488,11 @@ Progress indicator styles
     outline: none;
     color: $link-01;
     box-shadow: 0 rem(3px) 0 0 $link-01;
+  }
+
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-label {
+    max-width: 100%;
+    margin-right: 0.75rem;
   }
 
   .#{$prefix}--progress-label:active {
