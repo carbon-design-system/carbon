@@ -7,9 +7,16 @@
 
 'use strict';
 
-const AAT = require('@ibma/aat');
+let AAT;
 
 async function toHaveNoDAPViolations(node, label) {
+  // We defer initialization of AAT as it seems to have a race condition if
+  // we are running a test suite in node instead of jsdom. As a result, we only
+  // initialize it if this matcher is called
+  if (!AAT) {
+    AAT = require('@ibma/aat');
+  }
+
   const results = await AAT.getCompliance(node, label);
   if (AAT.assertCompliance(results.report) === 0) {
     return {
