@@ -627,10 +627,10 @@ In practice, this looks like the following:
               iconDescription="Settings"
               onClick={action('TableToolbarAction - Settings')}
             />
-            <Button onClick={action('Add new row')} small kind="primary">
-              Add new
-            </Button>
           </TableToolbarMenu>
+          <Button onClick={action('Add new row')} small kind="primary">
+            Add new
+          </Button>
         </TableToolbarContent>
       </TableToolbar>
       <Table>
@@ -725,10 +725,10 @@ In practice, this looks like the following:
               iconDescription="Settings"
               onClick={action('TableToolbarAction - Settings')}
             />
-            <Button onClick={action('Add new row')} small kind="primary">
-              Add new
-            </Button>
           </TableToolbarMenu>
+          <Button onClick={action('Add new row')} small kind="primary">
+            Add new
+          </Button>
         </TableToolbarContent>
       </TableToolbar>
       <Table>
