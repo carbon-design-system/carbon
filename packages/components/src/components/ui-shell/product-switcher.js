@@ -5,9 +5,9 @@ import onFocusOutByKeyboard from '../../globals/js/misc/on-focus-by-keyboard';
 
 let seq = 0;
 
-export default class ProductSwitcher extends NavigationMenuPanel {
+class ProductSwitcher extends NavigationMenuPanel {
   /**
-   * A navigation menu
+   * A navigation menu.
    * @extends NavigationMenuPanel
    * @param {HTMLElement} element The element working as a selector.
    * @param {object} [options] The component options.
@@ -195,3 +195,5 @@ export default class ProductSwitcher extends NavigationMenuPanel {
     });
   }
 }
+
+export default ProductSwitcher;
