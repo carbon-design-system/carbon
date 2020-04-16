@@ -15791,6 +15791,19 @@ Data table core styles
     padding-right: $spacing-05;
   }
 
+  // specific padding/width for overflow menu columns
+  .#{$prefix}--data-table .#{$prefix}--table-column-menu,
+  .#{$prefix}--data-table .#{$prefix}--table-column-menu:last-of-type {
+    width: rem(52px);
+    min-width: rem(52px);
+    padding-top: $spacing-03;
+    padding-right: $spacing-03;
+  }
+
+  .#{$prefix}--data-table td.#{$prefix}--table-column-menu {
+    padding-bottom: 0;
+  }
+
   // Overflow Menu Overrides
   .#{$prefix}--data-table td button.#{$prefix}--overflow-menu {
     margin: rem(-7px) 0 rem(-8px);
@@ -16018,6 +16031,11 @@ Data table core styles
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--compact
+    .#{$prefix}--table-column-menu {
+    padding-top: 0;
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact
     .#{$prefix}--table-column-checkbox {
     padding-top: 0;
     padding-bottom: 0;
@@ -16054,6 +16072,11 @@ Data table core styles
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--short
+    .#{$prefix}--table-column-menu {
+    padding-top: 0;
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--short
     .#{$prefix}--table-column-checkbox {
     padding-top: rem(3px);
     padding-bottom: rem(3px);
@@ -16081,6 +16104,8 @@ Data table core styles
     @include type-style('label-01');
   }
 
+  .#{$prefix}--data-table.#{$prefix}--data-table--tall
+    .#{$prefix}--table-column-menu,
   .#{$prefix}--data-table.#{$prefix}--data-table--tall
     .#{$prefix}--table-column-checkbox {
     padding-top: rem(12px);
@@ -21459,22 +21484,12 @@ Progress indicator styles
     }
   }
 
-  .#{$prefix}--progress--space-equal .#{$prefix}--progress-step {
-    min-width: 8rem;
-    flex-grow: 1;
-  }
-
   .#{$prefix}--progress-line {
     position: absolute;
     left: 0;
     height: 1px;
     width: rem(128px);
     border: $progress-indicator-bar-width;
-  }
-
-  .#{$prefix}--progress--space-equal .#{$prefix}--progress-line {
-    min-width: rem(128px);
-    width: 100%;
   }
 
   .#{$prefix}--progress-step svg {
@@ -21515,11 +21530,6 @@ Progress indicator styles
     outline: none;
     color: $link-01;
     box-shadow: 0 rem(3px) 0 0 $link-01;
-  }
-
-  .#{$prefix}--progress--space-equal .#{$prefix}--progress-label {
-    max-width: 100%;
-    margin-right: 0.75rem;
   }
 
   .#{$prefix}--progress-label:active {
