@@ -56,9 +56,9 @@
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open,
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open
     .#{$prefix}--overflow-menu__trigger {
-    background-color: $ui-01;
+    @include box-shadow;
+    background-color: $field-01;
     transition: none;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
   }
 
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open,
@@ -75,13 +75,13 @@
 
   .#{$prefix}--overflow-menu-options {
     @include reset;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+    @include box-shadow;
     display: none;
     flex-direction: column;
     align-items: flex-start;
     position: absolute;
     z-index: z('floating');
-    background-color: $ui-01;
+    background-color: $field-01;
     width: rem(160px);
     list-style: none;
     top: 32px;
@@ -91,17 +91,25 @@
       content: '';
       position: absolute;
       display: block;
-      background-color: $ui-01;
+      background-color: $field-01;
       transition: background-color $duration--fast-02
         motion(entrance, productive);
     }
   }
 
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open:hover {
+    background-color: $field-01;
+  }
+
   .#{$prefix}--overflow-menu-options--light {
-    background-color: $ui-02;
+    background-color: $field-02;
     &::after {
-      background-color: $ui-02;
+      background-color: $field-02;
     }
+  }
+
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open:hover {
+    background-color: $field-02;
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {

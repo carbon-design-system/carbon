@@ -24,7 +24,7 @@ describe('deprecated', () => {
       return memfs.fs;
     });
 
-    Registry = require('../../registry');
+    Registry = require('../../../registry');
     Storage = require('../../storage');
     extension = require('../deprecated');
     validate = require('../../validate');

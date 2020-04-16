@@ -11,7 +11,6 @@
 # Brand
 /packages/colors/artifacts/ @lisalind-ibm
 
-# Release team should be notified of Public API changes in the following
-# packages
-/packages/react/__tests__/PublicAPI-test.js @carbon-design-system/release @carbon-design-system/developers-system
-/packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap @carbon-design-system/release @carbon-design-system/developers-system
+# Release team should be notified of Public API changes in the system
+**/PublicAPI-test.js @carbon-design-system/release @carbon-design-system/developers-system
+**/PublicAPI-test.js.snap @carbon-design-system/release @carbon-design-system/developers-system

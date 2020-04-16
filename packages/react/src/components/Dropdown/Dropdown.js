@@ -137,6 +137,11 @@ export default class Dropdown extends React.Component {
      * Additional props passed to Downshift
      */
     downshiftProps: PropTypes.shape(Downshift.propTypes),
+
+    /**
+     * Specify the direction of the dropdown. Can be either top or bottom.
+     */
+    direction: PropTypes.oneOf(['top', 'bottom']),
   };
 
   static defaultProps = {
@@ -147,6 +152,7 @@ export default class Dropdown extends React.Component {
     light: false,
     titleText: '',
     helperText: '',
+    direction: 'bottom',
   };
 
   handleOnChange = selectedItem => {
@@ -176,6 +182,7 @@ export default class Dropdown extends React.Component {
       invalid,
       invalidText,
       downshiftProps,
+      direction,
     } = this.props;
     const inline = type === 'inline';
     const className = ({ isOpen }) =>
@@ -186,6 +193,7 @@ export default class Dropdown extends React.Component {
         [`${prefix}--dropdown--disabled`]: disabled,
         [`${prefix}--dropdown--light`]: light,
         [`${prefix}--dropdown--${size}`]: size,
+        [`${prefix}--list-box--up`]: direction === 'top',
       });
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
@@ -290,34 +298,35 @@ export default class Dropdown extends React.Component {
                     translateWithId={translateWithId}
                   />
                 </ListBox.Field>
-                {isOpen && (
-                  <ListBox.Menu aria-labelledby={id} id={id}>
-                    {items.map((item, index) => {
-                      const itemProps = getItemProps({ item, index });
-                      return (
-                        <ListBox.MenuItem
-                          key={itemProps.id}
-                          isActive={selectedItem === item}
-                          isHighlighted={
-                            highlightedIndex === index || selectedItem === item
-                          }
-                          title={itemToElement ? item.text : itemToString(item)}
-                          {...itemProps}>
-                          {itemToElement ? (
-                            <ItemToElement key={itemProps.id} {...item} />
-                          ) : (
-                            itemToString(item)
-                          )}
-                          {selectedItem === item && (
-                            <Checkmark16
-                              className={`${prefix}--list-box__menu-item__selected-icon`}
-                            />
-                          )}
-                        </ListBox.MenuItem>
-                      );
-                    })}
-                  </ListBox.Menu>
-                )}
+                <ListBox.Menu aria-labelledby={id} id={id}>
+                  {items.map((item, index) => {
+                    const itemProps = getItemProps({
+                      item,
+                      index,
+                    });
+                    return (
+                      <ListBox.MenuItem
+                        key={itemProps.id}
+                        isActive={selectedItem === item}
+                        isHighlighted={
+                          highlightedIndex === index || selectedItem === item
+                        }
+                        title={itemToElement ? item.text : itemToString(item)}
+                        {...itemProps}>
+                        {itemToElement ? (
+                          <ItemToElement key={itemProps.id} {...item} />
+                        ) : (
+                          itemToString(item)
+                        )}
+                        {selectedItem === item && (
+                          <Checkmark16
+                            className={`${prefix}--list-box__menu-item__selected-icon`}
+                          />
+                        )}
+                      </ListBox.MenuItem>
+                    );
+                  })}
+                </ListBox.Menu>
               </ListBox>
             );
           }}

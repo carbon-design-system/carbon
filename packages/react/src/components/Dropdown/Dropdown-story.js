@@ -55,10 +55,16 @@ const sizes = {
   'Small size (sm)': 'sm',
 };
 
+const directions = {
+  'Bottom (default)': 'bottom',
+  'Top ': 'top',
+};
+
 const props = () => ({
   id: text('Dropdown ID (id)', 'carbon-dropdown-example'),
   type: select('Dropdown type (type)', types, 'default'),
   size: select('Field size (size)', sizes, undefined) || undefined,
+  direction: select('Dropdown direction (direction)', directions, 'bottom'),
   label: text('Label (label)', 'Dropdown menu options'),
   ariaLabel: text('Aria Label (ariaLabel)', 'Dropdown'),
   disabled: boolean('Disabled (disabled)', false),
@@ -71,21 +77,6 @@ const props = () => ({
     'A valid value is required'
   ),
 });
-
-const itemToElement = item => {
-  const [first, ...rest] = item.text.split(' ');
-  return (
-    <div
-      style={{
-        textOverflow: 'ellipsis',
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
-      }}>
-      <span>{first}</span>
-      <span style={{ color: 'blue' }}> {rest.join(' ')}</span>
-    </div>
-  );
-};
 
 storiesOf('Dropdown', module)
   .addDecorator(withKnobs)
@@ -121,25 +112,6 @@ storiesOf('Dropdown', module)
     {
       info: {
         text: 'Rendering an array of strings as `items`',
-      },
-    }
-  )
-  .add(
-    'items as components',
-    () => (
-      <div style={{ width: 300 }}>
-        <Dropdown
-          {...props()}
-          items={items}
-          itemToString={item => (item ? item.text : '')}
-          itemToElement={itemToElement}
-          onChange={action('onChange')}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: `Rendering items as custom components`,
       },
     }
   )

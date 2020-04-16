@@ -8,6 +8,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import {
+  findListBoxNode,
   findMenuNode,
   findMenuItemNode,
   openMenu,
@@ -182,7 +183,9 @@ describe('ComboBox', () => {
     it('should not let the user expand the menu', () => {
       const wrapper = mount(<ComboBox {...mockProps} disabled={true} />);
       openMenu(wrapper);
-      expect(findMenuNode(wrapper).length).toBe(0);
+      expect(findListBoxNode(wrapper).hasClass('bx--list-box--expanded')).toBe(
+        false
+      );
     });
   });
 

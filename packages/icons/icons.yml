@@ -2285,7 +2285,6 @@
     - edit
   sizes:
     - 32
-    - 32
 - name: hinton-plot
   friendly_name: Hinton plot
   aliases:

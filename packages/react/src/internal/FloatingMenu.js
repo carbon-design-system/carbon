@@ -37,6 +37,13 @@ const { prefix } = settings;
  * @property {number} left The left position.
  */
 
+/**
+ * The structure for the target container.
+ * @typedef {object} FloatingMenu~container
+ * @property {DOMRect} rect Return of element.getBoundingClientRect()
+ * @property {string} position Position style (static, absolute, relative...)
+ */
+
 export const DIRECTION_LEFT = 'left';
 export const DIRECTION_TOP = 'top';
 export const DIRECTION_RIGHT = 'right';
@@ -71,6 +78,7 @@ const hasChangeInOffset = (oldMenuOffset = {}, menuOffset = {}) => {
  * @param {string} [params.direction=bottom] The menu direction.
  * @param {number} [params.scrollX=0] The scroll position of the viewport.
  * @param {number} [params.scrollY=0] The scroll position of the viewport.
+ * @param {FloatingMenu~container} [params.container] The size and position type of target element.
  * @returns {FloatingMenu~offset} The position of the menu, relative to the top-left corner of the viewport.
  * @private
  */
@@ -81,6 +89,7 @@ const getFloatingPosition = ({
   direction = DIRECTION_BOTTOM,
   scrollX = 0,
   scrollY = 0,
+  container,
 }) => {
   const {
     left: refLeft = 0,
@@ -88,6 +97,16 @@ const getFloatingPosition = ({
     right: refRight = 0,
     bottom: refBottom = 0,
   } = refPosition;
+  const relativeDiff =
+    container.position !== 'static'
+      ? {
+          top: container.rect.top,
+          left: container.rect.left,
+        }
+      : {
+          top: 0,
+          left: 0,
+        };
 
   const { width, height } = menuSize;
   const { top = 0, left = 0 } = offset;
@@ -96,20 +115,24 @@ const getFloatingPosition = ({
 
   return {
     [DIRECTION_LEFT]: () => ({
-      left: refLeft - width + scrollX - left,
-      top: refCenterVertical - height / 2 + scrollY + top - 9,
+      left: refLeft - width + scrollX - left - relativeDiff.left,
+      top:
+        refCenterVertical - height / 2 + scrollY + top - 9 - relativeDiff.top,
     }),
     [DIRECTION_TOP]: () => ({
-      left: refCenterHorizontal - width / 2 + scrollX + left,
-      top: refTop - height + scrollY - top,
+      left:
+        refCenterHorizontal - width / 2 + scrollX + left - relativeDiff.left,
+      top: refTop - height + scrollY - top - relativeDiff.top,
     }),
     [DIRECTION_RIGHT]: () => ({
-      left: refRight + scrollX + left,
-      top: refCenterVertical - height / 2 + scrollY + top + 3,
+      left: refRight + scrollX + left - relativeDiff.left,
+      top:
+        refCenterVertical - height / 2 + scrollY + top + 3 - relativeDiff.top,
     }),
     [DIRECTION_BOTTOM]: () => ({
-      left: refCenterHorizontal - width / 2 + scrollX + left,
-      top: refBottom + scrollY + top,
+      left:
+        refCenterHorizontal - width / 2 + scrollX + left - relativeDiff.left,
+      top: refBottom + scrollY + top - relativeDiff.top,
     }),
   }[direction]();
 };
@@ -269,6 +292,10 @@ class FloatingMenu extends React.Component {
             offset,
             scrollX: window.pageXOffset,
             scrollY: window.pageYOffset,
+            container: {
+              rect: this.props.target().getBoundingClientRect(),
+              position: getComputedStyle(this.props.target()).position,
+            },
           }),
         });
       }

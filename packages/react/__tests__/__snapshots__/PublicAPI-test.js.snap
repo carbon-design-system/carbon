@@ -301,6 +301,7 @@ Map {
   "ComboBox" => Object {
     "defaultProps": Object {
       "ariaLabel": "Choose an item",
+      "direction": "bottom",
       "disabled": false,
       "itemToElement": null,
       "itemToString": [Function],
@@ -314,6 +315,15 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "direction": Object {
+        "args": Array [
+          Array [
+            "top",
+            "bottom",
+          ],
+        ],
+        "type": "oneOf",
       },
       "disabled": Object {
         "type": "bool",
@@ -729,12 +739,16 @@ Map {
     "Table": Object {
       "defaultProps": Object {
         "isSortable": false,
+        "overflowMenuOnHover": true,
       },
       "propTypes": Object {
         "className": Object {
           "type": "string",
         },
         "isSortable": Object {
+          "type": "bool",
+        },
+        "overflowMenuOnHover": Object {
           "type": "bool",
         },
         "shouldShowBorder": Object {
@@ -1206,6 +1220,7 @@ Map {
     "defaultProps": Object {
       "filterRows": [Function],
       "locale": "en",
+      "overflowMenuOnHover": true,
       "size": "normal",
       "sortRow": [Function],
       "translateWithId": [Function],
@@ -1240,6 +1255,9 @@ Map {
       },
       "locale": Object {
         "type": "string",
+      },
+      "overflowMenuOnHover": Object {
+        "type": "bool",
       },
       "radio": Object {
         "type": "bool",
@@ -1305,12 +1323,16 @@ Map {
   "Table" => Object {
     "defaultProps": Object {
       "isSortable": false,
+      "overflowMenuOnHover": true,
     },
     "propTypes": Object {
       "className": Object {
         "type": "string",
       },
       "isSortable": Object {
+        "type": "bool",
+      },
+      "overflowMenuOnHover": Object {
         "type": "bool",
       },
       "shouldShowBorder": Object {
@@ -1974,6 +1996,7 @@ Map {
   },
   "Dropdown" => Object {
     "defaultProps": Object {
+      "direction": "bottom",
       "disabled": false,
       "helperText": "",
       "itemToElement": null,
@@ -1985,6 +2008,15 @@ Map {
     "propTypes": Object {
       "ariaLabel": Object {
         "type": "string",
+      },
+      "direction": Object {
+        "args": Array [
+          Array [
+            "top",
+            "bottom",
+          ],
+        ],
+        "type": "oneOf",
       },
       "disabled": Object {
         "type": "bool",
@@ -2937,6 +2969,9 @@ Map {
       "description": Object {
         "type": "string",
       },
+      "id": Object {
+        "type": "string",
+      },
       "small": Object {
         "type": "bool",
       },
@@ -3345,6 +3380,7 @@ Map {
     },
     "defaultProps": Object {
       "compareItems": [Function],
+      "direction": "bottom",
       "disabled": false,
       "initialSelectedItems": Array [],
       "itemToString": [Function],
@@ -3360,6 +3396,15 @@ Map {
       "compareItems": Object {
         "isRequired": true,
         "type": "func",
+      },
+      "direction": Object {
+        "args": Array [
+          Array [
+            "top",
+            "bottom",
+          ],
+        ],
+        "type": "oneOf",
       },
       "disabled": Object {
         "type": "bool",
@@ -3978,6 +4023,9 @@ Map {
       },
       "onChange": Object {
         "type": "func",
+      },
+      "spaceEqually": Object {
+        "type": "bool",
       },
       "vertical": Object {
         "type": "bool",
@@ -5528,9 +5576,7 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
-      "hideLabel": Object {
-        "type": "bool",
-      },
+      "hideLabel": [Function],
       "iconDescription": Object {
         "isRequired": true,
         "type": "string",
@@ -5872,9 +5918,6 @@ Map {
             Object {
               "args": Array [
                 Object {
-                  "header": Object {
-                    "type": "node",
-                  },
                   "key": Object {
                     "type": "string",
                   },
@@ -6260,6 +6303,9 @@ Map {
       },
       "element": Object {
         "type": "elementType",
+      },
+      "isCurrentPage": Object {
+        "type": "bool",
       },
       "isSideNavExpanded": Object {
         "type": "bool",
