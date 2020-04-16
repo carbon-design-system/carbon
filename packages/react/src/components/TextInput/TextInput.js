@@ -62,7 +62,10 @@ const TextInput = React.forwardRef(function TextInput(
   };
   const inputWrapperClasses = classNames(
     `${prefix}--form-item`,
-    `${prefix}--text-input-wrapper`
+    `${prefix}--text-input-wrapper`,
+    {
+      [`${prefix}--text-input-wrapper--light`]: light && fluid,
+    }
   );
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
@@ -99,6 +102,7 @@ const TextInput = React.forwardRef(function TextInput(
           <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
         )}
         {input}
+        <hr className={`${prefix}--text-input__divider`} />
         {fluid ? error : null}
       </div>
       {fluid ? null : error}

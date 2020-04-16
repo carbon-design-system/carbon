@@ -86,8 +86,7 @@
   //Fluid Form
   .#{$prefix}--form--fluid
     .#{$prefix}--text-input__field-wrapper[data-invalid] {
-    flex-direction: column;
-    align-items: start;
+    display: block;
   }
 
   .#{$prefix}--form--fluid input[data-invalid] {
