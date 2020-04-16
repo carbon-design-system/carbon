@@ -10,10 +10,8 @@
 'use strict';
 
 describe('icons', () => {
-  let Registry;
-  let Storage;
+  let Metadata;
   let extension;
-  let validate;
   let vol;
   let yml;
 
@@ -24,11 +22,9 @@ describe('icons', () => {
       return memfs.fs;
     });
 
-    Registry = require('../../../registry');
-    Storage = require('../../storage');
+    Metadata = require('../../');
     extension = require('../icons');
-    validate = require('../../validate');
-    yml = require('../../adapters').yml;
+    yml = require('../../adapters/yml');
   });
 
   afterEach(() => {
@@ -36,36 +32,38 @@ describe('icons', () => {
   });
 
   it('should throw an error if an icon is in the registry that is not in metadata', async () => {
-    const filename = yml.getFilenameFor(extension.name);
     const files = {
       '/svg/a.svg': 'mock',
-      [`/${filename}`]: yml.serialize([]),
+      [`/${extension.name}.yml`]: yml.serialize([]),
     };
     vol.fromJSON(files);
 
-    const registry = await Registry.create('/svg');
-    const extensions = await Storage.load(yml, '/', [extension]);
-    expect(() => {
-      validate(registry, extensions);
-    }).toThrow();
+    await expect(
+      Metadata.check({
+        adapter: yml,
+        input: '/',
+        extensions: [extension],
+      })
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+"Expected the icon \`a\` to be defined in the data metadata file. Found matches for this asset in the following locations:
+
+/svg/a.svg"
+`);
   });
 
   it('should throw an error if an icon is in metadata that is not in the registry', async () => {
-    const filename = yml.getFilenameFor(extension.name);
     const files = {
       '/svg/a.svg': 'mock',
-      [`/${filename}`]: yml.serialize([
+      [`/${extension.name}.yml`]: yml.serialize([
         {
           name: 'a',
           friendly_name: 'a',
-          usage: 'mock',
           aliases: [],
           sizes: ['glyph'],
         },
         {
           name: 'b',
           friendly_name: 'b',
-          usage: 'mock',
           aliases: [],
           sizes: ['glyph'],
         },
@@ -73,23 +71,25 @@ describe('icons', () => {
     };
     vol.fromJSON(files);
 
-    const registry = await Registry.create('/svg');
-    const extensions = await Storage.load(yml, '/', [extension]);
-    expect(() => {
-      validate(registry, extensions);
-    }).toThrow();
+    await expect(
+      Metadata.check({
+        adapter: yml,
+        input: '/',
+        extensions: [extension],
+      })
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `"Expected the metadata entry \`b\` to have a corresponding .svg asset in the SVG folder"`
+    );
   });
 
   it('should throw an error if there is a missing size in the metadata', async () => {
-    const filename = yml.getFilenameFor(extension.name);
     const files = {
       '/svg/16/a.svg': 'mock',
       '/svg/32/a.svg': 'mock',
-      [`/${filename}`]: yml.serialize([
+      [`/${extension.name}.yml`]: yml.serialize([
         {
           name: 'a',
           friendly_name: 'a',
-          usage: 'mock',
           aliases: [],
           sizes: [16],
         },
@@ -97,22 +97,25 @@ describe('icons', () => {
     };
     vol.fromJSON(files);
 
-    const registry = await Registry.create('/svg');
-    const extensions = await Storage.load(yml, '/', [extension]);
-    expect(() => {
-      validate(registry, extensions);
-    }).toThrow();
+    await expect(
+      Metadata.check({
+        adapter: yml,
+        input: '/',
+        extensions: [extension],
+      })
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+"Expected the entry \`a\` to have size \`32\` defined. This asset exists at:
+/svg/32/a.svg"
+`);
   });
 
   it('should throw an error if there is size in metadata not in the registry', async () => {
-    const filename = yml.getFilenameFor(extension.name);
     const files = {
       '/svg/16/a.svg': 'mock',
-      [`/${filename}`]: yml.serialize([
+      [`/${extension.name}.yml`]: yml.serialize([
         {
           name: 'a',
           friendly_name: 'a',
-          usage: 'mock',
           aliases: [],
           sizes: [16, 32],
         },
@@ -120,10 +123,14 @@ describe('icons', () => {
     };
     vol.fromJSON(files);
 
-    const registry = await Registry.create('/svg');
-    const extensions = await Storage.load(yml, '/', [extension]);
-    expect(() => {
-      validate(registry, extensions);
-    }).toThrow();
+    await expect(
+      Metadata.check({
+        adapter: yml,
+        input: '/',
+        extensions: [extension],
+      })
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `"Expected the asset \`a\` to have the size 32 defined. This asset may not exist, or is not available in the SVG folder"`
+    );
   });
 });

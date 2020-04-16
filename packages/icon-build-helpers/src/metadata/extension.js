@@ -24,6 +24,18 @@
  * @returns {Extension}
  */
 
+/**
+ * @param {Extension} extension
+ * @returns {void}
+ */
+function validate(extension) {
+  if (!extension.name) {
+    throw new Error(
+      `Expected extension to have a name, instead received: \`${extension.name}\``
+    );
+  }
+}
+
 const defaultOptions = {};
 
 /**
@@ -34,9 +46,12 @@ function loadExtension(builderOrOptions) {
   if (Array.isArray(builderOrOptions)) {
     const [builder, options] = builderOrOptions;
     const extension = builder(options);
-    return builder(options);
+    validate(extension);
+    return extension;
   }
-  return builderOrOptions(defaultOptions);
+  const extension = builderOrOptions(defaultOptions);
+  validate(extension);
+  return extension;
 }
 
 /**
