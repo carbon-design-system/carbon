@@ -131,7 +131,6 @@
   - [❌custom-property [mixin]](#custom-property-mixin)
   - [❌should-emit [function]](#should-emit-function)
   - [✅carbon--theme [mixin]](#carbon--theme-mixin)
-  - [❌emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [✅carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
   - [✅carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
   - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
@@ -2221,8 +2220,13 @@ Generate a media query for the maximum width of the given styles
       @content;
     }
   } @else if map-has-key($breakpoints, $name) {
+    // We borrow this logic from bootstrap for specifying the value of the
+    // max-width. The maximum width is calculated by finding the breakpoint and
+    // subtracting .02 from its value. This value is used instead of .01 to
+    // avoid rounding issues in Safari
+    // https://github.com/twbs/bootstrap/blob/c5b1919deaf5393fcca9e9b9d7ce9c338160d99d/scss/mixins/_breakpoints.scss#L34-L46
     $breakpoint: map-get($breakpoints, $name);
-    $width: map-get($breakpoint, width);
+    $width: map-get($breakpoint, width) - 0.02;
     @media (max-width: $width) {
       @content;
     }
@@ -4066,7 +4070,6 @@ $custom-property-prefix: 'cds';
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [custom-properties [mixin]](#custom-properties-mixin)
 
 ### ❌custom-property [mixin]
@@ -6028,57 +6031,6 @@ Define theme variables from a map of tokens
   - [icon-size-02 [variable]](#icon-size-02-variable)
   - [custom-property-prefix [variable]](#custom-property-prefix-variable)
 
-### ❌emit-component-tokens [mixin]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin emit-component-tokens($tokens, $theme) {
-  @if type-of($tokens) == 'map' {
-    @each $key, $options in $tokens {
-      @each $option in $options {
-        $theme: map-get($option, 'theme');
-
-        @if ($theme == $carbon--theme) {
-          $value: map-get($option, 'value');
-
-          --#{$custom-property-prefix}-#{$key}: #{$value};
-        }
-      }
-    }
-  } @else {
-    @error 'Unable to find map';
-  }
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name      | Description             | Type     | Default value |
-| --------- | ----------------------- | -------- | ------------- |
-| `$tokens` | Map of component tokens | `Map`    | —             |
-| `$theme`  | Theme identifier        | `String` | —             |
-
-**Example**:
-
-<details>
-<summary>Example code</summary>
-
-```scss
-@include emit-component-tokens($component-tokens);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Requires**:
-  - [tokens [variable]](#tokens-variable)
-  - [carbon--theme [variable]](#carbon--theme-variable)
-  - [custom-property-prefix [variable]](#custom-property-prefix-variable)
-
 ### ✅carbon--theme--g10 [variable]
 
 Carbon's g10 color theme
@@ -6479,7 +6431,6 @@ $carbon--theme: (
 - **Type**: `Map`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
 
 ### ✅interactive-01 [variable]
 
@@ -6542,7 +6493,6 @@ $interactive-02: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
-  - [tile [mixin]](#tile-mixin)
 
 ### ✅interactive-03 [variable]
 
@@ -6698,7 +6648,6 @@ $ui-02: if(
   - [snippet [mixin]](#snippet-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
-  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [tile [mixin]](#tile-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [carbon-content [mixin]](#carbon-content-mixin)
@@ -7207,6 +7156,7 @@ $field-01: if(
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -7543,6 +7493,7 @@ $inverse-support-04: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [carbon-header [mixin]](#carbon-header-mixin)
 
 ### ✅overlay-01 [variable]
 
@@ -13147,7 +13098,6 @@ $tokens: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 - **Used by**:
-  - [emit-component-tokens [mixin]](#emit-component-tokens-mixin)
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
 
@@ -13977,12 +13927,6 @@ Button styles
     cursor: not-allowed;
   }
 
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
-    .#{$prefix}--assistive-text,
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]::before {
-    display: none;
-  }
-
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
     padding-left: rem(11px);
     padding-right: rem(11px);
@@ -14359,7 +14303,7 @@ Checkbox styles
     @include skeleton;
     width: rem(100px);
     height: $spacing-05;
-    margin: auto 0;
+    margin: auto 0 auto rem(6px); // Add extra spacing when label is present
   }
 }
 ```
@@ -15840,27 +15784,8 @@ Data table core styles
     padding-right: $spacing-05;
   }
 
-  // specific padding/width for overflow menu columns
-  .#{$prefix}--data-table .#{$prefix}--table-column-menu,
-  .#{$prefix}--data-table .#{$prefix}--table-column-menu:last-of-type {
-    width: rem(52px);
-    min-width: rem(52px);
-    padding-top: $spacing-03;
-    padding-right: $spacing-03;
-  }
-
-  .#{$prefix}--data-table td.#{$prefix}--table-column-menu {
-    padding-bottom: 0;
-  }
-
-  .#{$prefix}--data-table
-    td.#{$prefix}--table-column-menu
-    .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
-    background: $ui-03;
-  }
-
   // Overflow Menu Overrides
-  .#{$prefix}--data-table td .#{$prefix}--overflow-menu {
+  .#{$prefix}--data-table td button.#{$prefix}--overflow-menu {
     margin: rem(-7px) 0 rem(-8px);
   }
 
@@ -15891,6 +15816,13 @@ Data table core styles
       .#{$prefix}--overflow-menu__icon {
       opacity: 0;
     }
+  }
+
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open
+    .#{$prefix}--overflow-menu__icon {
+    opacity: 1;
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--visible-overflow-menu
@@ -16079,11 +16011,6 @@ Data table core styles
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--compact
-    .#{$prefix}--table-column-menu {
-    padding-top: 0;
-  }
-
-  .#{$prefix}--data-table.#{$prefix}--data-table--compact
     .#{$prefix}--table-column-checkbox {
     padding-top: 0;
     padding-bottom: 0;
@@ -16120,11 +16047,6 @@ Data table core styles
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--short
-    .#{$prefix}--table-column-menu {
-    padding-top: 0;
-  }
-
-  .#{$prefix}--data-table.#{$prefix}--data-table--short
     .#{$prefix}--table-column-checkbox {
     padding-top: rem(3px);
     padding-bottom: rem(3px);
@@ -16152,8 +16074,6 @@ Data table core styles
     @include type-style('label-01');
   }
 
-  .#{$prefix}--data-table.#{$prefix}--data-table--tall
-    .#{$prefix}--table-column-menu,
   .#{$prefix}--data-table.#{$prefix}--data-table--tall
     .#{$prefix}--table-column-checkbox {
     padding-top: rem(12px);
@@ -18889,8 +18809,9 @@ List box styles
     position: absolute;
     top: 0;
     right: $carbon--spacing-05;
-    bottom: 0;
     height: 100%;
+    display: flex;
+    align-items: center;
     transition: transform $duration--fast-01 motion(standard, productive);
     cursor: pointer;
   }
@@ -18988,9 +18909,14 @@ List box styles
     right: 0;
     width: $list-box-width;
     background-color: $ui-01;
-    max-height: rem(140px);
+    max-height: 0;
+    transition: max-height $duration--fast-02 motion(standard, productive);
     overflow-y: auto;
     z-index: z('dropdown');
+  }
+
+  .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
+    max-height: rem(140px);
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control
@@ -19193,6 +19119,25 @@ List box styles
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+  }
+
+  // Dropdown top orientation modifiers
+  .#{$prefix}--list-box--up .#{$prefix}--list-box__menu {
+    bottom: 2.5rem;
+  }
+
+  .#{$prefix}--list-box--up.#{$prefix}--dropdown--sm
+    .#{$prefix}--list-box__menu,
+  .#{$prefix}--list-box--up.#{$prefix}--list-box--sm
+    .#{$prefix}--list-box__menu {
+    bottom: 2rem;
+  }
+
+  .#{$prefix}--list-box--up.#{$prefix}--dropdown--xl
+    .#{$prefix}--list-box__menu,
+  .#{$prefix}--list-box--up.#{$prefix}--list-box--xl
+    .#{$prefix}--list-box__menu {
+    bottom: 3rem;
   }
 
   // Tweaks for descendants
@@ -19710,6 +19655,7 @@ Modal styles
     bottom: $spacing-09;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to bottom, rgba($ui-01, 0), $ui-01);
+    pointer-events: none;
   }
 
   .#{$prefix}--modal-content:focus
@@ -20109,6 +20055,11 @@ Inline notification styles
     }
   }
 
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__close-button {
+    @include focus-outline('outline');
+  }
+
   .#{$prefix}--inline-notification--low-contrast {
     .#{$prefix}--inline-notification__close-button
       .#{$prefix}--inline-notification__close-icon {
@@ -20364,6 +20315,11 @@ Toast notification styles
     .#{$prefix}--toast-notification__close-icon {
       fill: $inverse-01;
     }
+  }
+
+  .#{$prefix}--toast-notification--low-contrast
+    .#{$prefix}--toast-notification__close-button {
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--toast-notification--low-contrast
@@ -20779,9 +20735,9 @@ Overflow menu styles
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open,
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open
     .#{$prefix}--overflow-menu__trigger {
-    background-color: $ui-01;
+    @include box-shadow;
+    background-color: $field-01;
     transition: none;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
   }
 
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open,
@@ -20798,13 +20754,13 @@ Overflow menu styles
 
   .#{$prefix}--overflow-menu-options {
     @include reset;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+    @include box-shadow;
     display: none;
     flex-direction: column;
     align-items: flex-start;
     position: absolute;
     z-index: z('floating');
-    background-color: $ui-01;
+    background-color: $field-01;
     width: rem(160px);
     list-style: none;
     top: 32px;
@@ -20814,16 +20770,24 @@ Overflow menu styles
       content: '';
       position: absolute;
       display: block;
-      background-color: $ui-01;
+      background-color: $field-01;
       transition: background-color $duration--fast-02 motion(entrance, productive);
     }
   }
 
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open:hover {
+    background-color: $field-01;
+  }
+
   .#{$prefix}--overflow-menu-options--light {
-    background-color: $ui-02;
+    background-color: $field-02;
     &::after {
-      background-color: $ui-02;
+      background-color: $field-02;
     }
+  }
+
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open:hover {
+    background-color: $field-02;
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
@@ -21011,10 +20975,9 @@ Overflow menu styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [hover-ui [variable]](#hover-ui-variable)
-  - [ui-01 [variable]](#ui-01-variable)
+  - [field-01 [variable]](#field-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
-  - [ui-02 [variable]](#ui-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -21023,6 +20986,7 @@ Overflow menu styles
   - [icon-02 [variable]](#icon-02-variable)
   - [text-04 [variable]](#text-04-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [ui-01 [variable]](#ui-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
 ## pagination
@@ -21468,12 +21432,22 @@ Progress indicator styles
     }
   }
 
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-step {
+    min-width: 8rem;
+    flex-grow: 1;
+  }
+
   .#{$prefix}--progress-line {
     position: absolute;
     left: 0;
     height: 1px;
     width: rem(128px);
     border: $progress-indicator-bar-width;
+  }
+
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-line {
+    min-width: rem(128px);
+    width: 100%;
   }
 
   .#{$prefix}--progress-step svg {
@@ -21514,6 +21488,11 @@ Progress indicator styles
     outline: none;
     color: $link-01;
     box-shadow: 0 rem(3px) 0 0 $link-01;
+  }
+
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-label {
+    max-width: 100%;
+    margin-right: 0.75rem;
   }
 
   .#{$prefix}--progress-label:active {
@@ -21603,7 +21582,22 @@ Progress indicator styles
 
   //unclickable button
   .#{$prefix}--progress-step-button--unclickable {
+    cursor: default;
     outline: none;
+  }
+
+  .#{$prefix}--progress-step-button--unclickable
+    .#{$prefix}--progress-label:hover {
+    color: $text-01;
+    cursor: default;
+    box-shadow: none;
+  }
+
+  .#{$prefix}--progress-step-button--unclickable
+    .#{$prefix}--tooltip__label:hover {
+    color: $link-01;
+    cursor: pointer;
+    box-shadow: 0 rem(1px) $link-01;
   }
 
   //DISABLED STYLING
@@ -21640,7 +21634,7 @@ Progress indicator styles
   }
 
   //ERROR STYLING
-  .#{$prefix}--progress__warning > path {
+  .#{$prefix}--progress__warning > * {
     fill: $support-01;
   }
 
@@ -23819,7 +23813,10 @@ Tile styles
     &:hover {
       background: $hover-ui;
     }
+  }
 
+  .#{$prefix}--tile--clickable,
+  .#{$prefix}--tile--expandable {
     &:hover,
     &:focus {
       .#{$prefix}--tile__checkmark {
@@ -23938,7 +23935,7 @@ Tile styles
   }
 
   .#{$prefix}--tile--is-selected {
-    outline: 1px solid $interactive-02;
+    outline: 1px solid $ui-05;
     outline-offset: -1px;
   }
 
@@ -23978,7 +23975,6 @@ Tile styles
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
-  - [interactive-02 [variable]](#interactive-02-variable)
 
 ## time-picker
 
@@ -25473,7 +25469,6 @@ UI shell header
     right: 0;
     height: mini-units(6);
     background-color: $shell-header-bg-01;
-    border-bottom: 1px solid $shell-header-border-01;
     z-index: z('header');
   }
 
@@ -25622,6 +25617,7 @@ UI shell header
   }
 
   a.#{$prefix}--header__menu-item {
+    position: relative;
     display: flex;
     align-items: center;
     color: $shell-header-text-02;
@@ -25663,6 +25659,30 @@ UI shell header
   a.#{$prefix}--header__menu-item:active > svg,
   a.#{$prefix}--header__menu-item:focus > svg {
     fill: $shell-header-icon-01;
+  }
+
+  // Styles for selected state
+
+  a.#{$prefix}--header__menu-item[aria-current='page']::after,
+  .#{$prefix}--header__menu-item--current::after {
+    content: '';
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    border-bottom: 3px solid $inverse-support-04;
+  }
+
+  a.#{$prefix}--header__menu-item[aria-current='page']:focus::after,
+  .#{$prefix}--header__menu-item--current:focus::after {
+    border: 0;
+  }
+
+  a.#{$prefix}--header__menu-item[aria-current='page']:focus,
+  a.#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current:focus {
+    border: 2px solid $shell-header-focus;
   }
 
   .#{$prefix}--header__submenu {
@@ -25786,8 +25806,8 @@ UI shell header
   - [mini-units [function]](#mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
-  - [shell-header-border-01 [variable]](#shell-header-border-01-variable)
   - [shell-header-bg-04 [variable]](#shell-header-bg-04-variable)
+  - [shell-header-border-01 [variable]](#shell-header-border-01-variable)
   - [shell-header-focus [variable]](#shell-header-focus-variable)
   - [shell-header-bg-03 [variable]](#shell-header-bg-03-variable)
   - [shell-header-icon-02 [variable]](#shell-header-icon-02-variable)
@@ -25795,6 +25815,7 @@ UI shell header
   - [shell-header-bg-02 [variable]](#shell-header-bg-02-variable)
   - [shell-header-text-01 [variable]](#shell-header-text-01-variable)
   - [shell-header-text-02 [variable]](#shell-header-text-02-variable)
+  - [inverse-support-04 [variable]](#inverse-support-04-variable)
   - [shell-header-bg-06 [variable]](#shell-header-bg-06-variable)
   - [shell-header-icon-03 [variable]](#shell-header-icon-03-variable)
 
