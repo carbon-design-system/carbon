@@ -65,30 +65,6 @@
   }
 
   //-----------------------------
-  // Fluid Text Input
-  //-----------------------------
-  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper {
-    position: relative;
-  }
-
-  .#{$prefix}--form--fluid .#{$prefix}--label {
-    position: absolute;
-    top: rem(13px);
-    left: $carbon--spacing-05;
-    z-index: 1;
-    margin: 0;
-  }
-
-  .#{$prefix}--form--fluid .#{$prefix}--form__helper-text {
-    display: none;
-  }
-
-  .#{$prefix}--form--fluid .#{$prefix}--text-input {
-    min-height: rem(64px);
-    padding: rem(32px) $carbon--spacing-05 rem(13px);
-  }
-
-  //-----------------------------
   // Disabled & Error icon spacing
   //-----------------------------
   .#{$prefix}--text-input__field-wrapper {
@@ -193,6 +169,34 @@
     .#{$prefix}--text-input--password__visibility__toggle {
       right: $carbon--spacing-08;
     }
+  }
+
+  //-----------------------------
+  // Fluid Text Input
+  //-----------------------------
+  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper {
+    position: relative;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--label {
+    position: absolute;
+    top: rem(13px);
+    left: $carbon--spacing-05;
+    z-index: 1;
+    margin: 0;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--form__helper-text {
+    display: none;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input {
+    min-height: rem(64px);
+    padding: rem(32px) $carbon--spacing-05 rem(13px);
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__invalid-icon {
+    top: 80px;
   }
 }
 

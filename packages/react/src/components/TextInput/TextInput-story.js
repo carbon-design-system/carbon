@@ -11,7 +11,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import TextInput from '../TextInput';
 import TextInputSkeleton from '../TextInput/TextInput.Skeleton';
-import Form from '../Form/Form';
+import FluidForm from '../FluidForm/FluidForm';
 
 const types = {
   None: '',
@@ -115,12 +115,12 @@ storiesOf('TextInput', module)
   .add(
     'Fluid',
     () => (
-      <Form fluid>
+      <FluidForm>
         <TextInput
           type={select('Form control type (type)', types, 'text')}
           {...props.TextInputProps()}
         />
-      </Form>
+      </FluidForm>
     ),
     {
       info: {
