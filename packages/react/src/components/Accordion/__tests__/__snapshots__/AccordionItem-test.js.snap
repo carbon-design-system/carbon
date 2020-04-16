@@ -10,6 +10,7 @@ exports[`AccordionItem should render 1`] = `
     onAnimationEnd={[Function]}
   >
     <defaultRenderExpando
+      aria-controls="accordion-item-1"
       aria-expanded={false}
       className="bx--accordion__heading"
       onClick={[Function]}
@@ -18,6 +19,7 @@ exports[`AccordionItem should render 1`] = `
       type="button"
     >
       <button
+        aria-controls="accordion-item-1"
         aria-expanded={false}
         className="bx--accordion__heading"
         onClick={[Function]}
@@ -45,17 +47,12 @@ exports[`AccordionItem should render 1`] = `
               height={16}
               preserveAspectRatio="xMidYMid meet"
               role="img"
-              style={
-                Object {
-                  "willChange": "transform",
-                }
-              }
               viewBox="0 0 16 16"
               width={16}
               xmlns="http://www.w3.org/2000/svg"
             >
-              <polygon
-                points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3"
+              <path
+                d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
               />
             </svg>
           </Icon>
@@ -69,6 +66,7 @@ exports[`AccordionItem should render 1`] = `
     </defaultRenderExpando>
     <div
       className="bx--accordion__content"
+      id="accordion-item-1"
     >
       Lorem ipsum.
     </div>

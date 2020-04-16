@@ -57,7 +57,10 @@
     &:hover {
       background: $hover-ui;
     }
+  }
 
+  .#{$prefix}--tile--clickable,
+  .#{$prefix}--tile--expandable {
     &:hover,
     &:focus {
       .#{$prefix}--tile__checkmark {
@@ -176,7 +179,7 @@
   }
 
   .#{$prefix}--tile--is-selected {
-    outline: 1px solid $interactive-02;
+    outline: 1px solid $ui-05;
     outline-offset: -1px;
   }
 

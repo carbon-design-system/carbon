@@ -158,6 +158,11 @@
   }
 
   .#{$prefix}--toast-notification--low-contrast
+    .#{$prefix}--toast-notification__close-button {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__close-button
     .#{$prefix}--toast-notification__close-icon {
     fill: map-get($carbon--theme--white, 'text-01');

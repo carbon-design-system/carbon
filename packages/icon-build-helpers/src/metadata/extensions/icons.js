@@ -47,9 +47,7 @@ const icons = {
       const icon = registry.get(entry.name);
 
       // Add namespace information for the icon
-      if (Array.isArray(icon.namespace) && icon.namespace.length > 0) {
-        entry.namespace = icon.namespace.join('/');
-      }
+      entry.namespace = Array.isArray(icon.namespace) ? icon.namespace : [];
 
       // We currently support bespoke assets called "glyphs". If there is no
       // size for an asset, then for icons we would call it a glyph. If the
@@ -121,6 +119,21 @@ const icons = {
           `Expected the metadata entry \`${icon.name}\` to have a ` +
             `corresponding .svg asset in the SVG folder`
         );
+      }
+    }
+
+    // Verify that all sizes are unique
+    for (const icon of data) {
+      const sizes = [];
+      for (const size of icon.sizes) {
+        if (sizes.includes(size)) {
+          throw new Error(
+            `Expected the metadata entry \`${icon.name}\` to have unique ` +
+              `sizes. Instead there is a duplicate size \`${size}\`.`
+          );
+        }
+
+        sizes.push(size);
       }
     }
   },

@@ -332,8 +332,9 @@ $list-box-menu-width: rem(300px);
     position: absolute;
     top: 0;
     right: $carbon--spacing-05;
-    bottom: 0;
     height: 100%;
+    display: flex;
+    align-items: center;
     transition: transform $duration--fast-01 motion(standard, productive);
     cursor: pointer;
   }
@@ -431,7 +432,8 @@ $list-box-menu-width: rem(300px);
     right: 0;
     width: $list-box-width;
     background-color: $ui-01;
-    max-height: rem(140px);
+    max-height: 0;
+    transition: max-height $duration--fast-02 motion(standard, productive);
     overflow-y: auto;
     z-index: z('dropdown');
 
@@ -439,6 +441,10 @@ $list-box-menu-width: rem(300px);
       // remove default browser focus in firefox
       @include focus-outline('border');
     }
+  }
+
+  .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
+    max-height: rem(140px);
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control
@@ -641,6 +647,25 @@ $list-box-menu-width: rem(300px);
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+  }
+
+  // Dropdown top orientation modifiers
+  .#{$prefix}--list-box--up .#{$prefix}--list-box__menu {
+    bottom: 2.5rem;
+  }
+
+  .#{$prefix}--list-box--up.#{$prefix}--dropdown--sm
+    .#{$prefix}--list-box__menu,
+  .#{$prefix}--list-box--up.#{$prefix}--list-box--sm
+    .#{$prefix}--list-box__menu {
+    bottom: 2rem;
+  }
+
+  .#{$prefix}--list-box--up.#{$prefix}--dropdown--xl
+    .#{$prefix}--list-box__menu,
+  .#{$prefix}--list-box--up.#{$prefix}--list-box--xl
+    .#{$prefix}--list-box__menu {
+    bottom: 3rem;
   }
 
   // Tweaks for descendants

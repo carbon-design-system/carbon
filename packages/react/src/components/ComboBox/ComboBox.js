@@ -175,6 +175,11 @@ export default class ComboBox extends React.Component {
      * Additional props passed to Downshift
      */
     downshiftProps: PropTypes.shape(Downshift.propTypes),
+
+    /**
+     * Specify the direction of the combobox dropdown. Can be either top or bottom.
+     */
+    direction: PropTypes.oneOf(['top', 'bottom']),
   };
 
   static defaultProps = {
@@ -185,6 +190,7 @@ export default class ComboBox extends React.Component {
     type: 'default',
     ariaLabel: 'Choose an item',
     light: false,
+    direction: 'bottom',
   };
 
   static getDerivedStateFromProps(nextProps, state) {
@@ -281,9 +287,12 @@ export default class ComboBox extends React.Component {
       onChange, // eslint-disable-line no-unused-vars
       onInputChange, // eslint-disable-line no-unused-vars
       downshiftProps,
+      direction,
       ...rest
     } = this.props;
-    const className = cx(`${prefix}--combo-box`, containerClassName);
+    const className = cx(`${prefix}--combo-box`, containerClassName, {
+      [`${prefix}--list-box--up`]: direction === 'top',
+    });
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
