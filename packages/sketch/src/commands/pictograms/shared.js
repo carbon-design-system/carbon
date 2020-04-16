@@ -129,7 +129,7 @@ function createSVGArtboards(page, sharedStyle, pictograms, sizes = [48]) {
           sharedStyleId: sharedStyle.id,
         });
 
-        shape.style.borders = [];
+        shape.style.fills = [];
 
         artboard.layers.push(shape);
         group.remove();
