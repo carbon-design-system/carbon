@@ -8,26 +8,16 @@
 import React from 'react';
 import FluidForm from '../FluidForm';
 import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
 
 describe('FluidForm', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<FluidForm className="extra-class" />);
-
+    const wrapper = mount(<FluidForm className="extra-class" />);
     it('renders children as expected', () => {
       expect(wrapper.find('.child').length).toBe(0);
     });
     it('renders wrapper as expected', () => {
       expect(wrapper.length).toBe(1);
     });
-    it('has the expected classes', () => {
-      expect(
-        wrapper.hasClass(`${prefix}--form ${prefix}--form--fluid`)
-      ).toEqual(true);
-    });
-
     it('renders extra classes passed in via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
