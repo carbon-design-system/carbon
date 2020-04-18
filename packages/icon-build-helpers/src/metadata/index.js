@@ -49,8 +49,12 @@ async function load({
   extensions = [defaultExtensions.icons],
   input,
 }) {
-  const registry = await Registry.create(path.join(input, 'svg'));
-  const loaded = await Storage.load(adapter, input, Extension.load(extensions));
+  const registry = await Registry.create(input.svg);
+  const loaded = await Storage.load(
+    adapter,
+    input.extensions,
+    Extension.load(extensions)
+  );
   validate(registry, loaded);
 
   const metadata = {};
@@ -74,8 +78,8 @@ async function load({
  * extensions and write it to disk
  * @param {object} options
  * @param {Adapter} [options.adapter] The adapter to use to load the extensions
- * @param {string} options.input The directory of source files
- * @param {string} [options.output] The directory for the built metadata
+ * @param {object} options.input The directory of source files
+ * @param {object} options.output The directory for the built metadata
  * @param {Array<Extension>} [options.extensions] The extensions to load
  * @returns {Promise<void>}
  */
@@ -86,7 +90,7 @@ async function build({
   output = input,
 }) {
   const metadata = await load({ adapter, extensions, input });
-  const metadataFilePath = path.join(output, 'metadata.json');
+  const metadataFilePath = path.join(output.extensions, 'metadata.json');
 
   await fs.ensureFile(metadataFilePath);
   await fs.writeJson(metadataFilePath, metadata, {

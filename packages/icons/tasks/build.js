@@ -13,18 +13,22 @@ const path = require('path');
 const SVG_DIR = path.resolve(__dirname, '../svg');
 
 async function build() {
-  await builders.vanilla.run(SVG_DIR, {
-    cwd: process.cwd(),
-  });
-
-  await Metadata.build({
-    input: path.resolve(__dirname, '../'),
+  const metadata = await Metadata.load({
+    input: {
+      svg: path.resolve(__dirname, '../src/svg'),
+      extensions: path.resolve(__dirname, '../'),
+    },
     extensions: [
       Metadata.extensions.icons,
-      Metadata.extensions.moduleName,
+      Metadata.extensions.assets,
       Metadata.extensions.deprecated,
+      Metadata.extensions.build,
       Metadata.extensions.categories,
     ],
+  });
+
+  await builders.vanilla.run(metadata, {
+    output: path.resolve(__dirname, '../'),
   });
 }
 

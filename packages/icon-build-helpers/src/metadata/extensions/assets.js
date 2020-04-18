@@ -9,6 +9,7 @@
 
 const fs = require('fs-extra');
 const path = require('path');
+const icons = require('./icons');
 
 /**
  * Provide source and filepath asset information for a given icon
@@ -24,7 +25,7 @@ const assets = () => {
         entry.assets = icon.assets.map(({ size, filepath }) => {
           return {
             size,
-            filepath: path.relative(input, filepath),
+            filepath: path.relative(input.svg, filepath),
             source: fs.readFileSync(filepath, 'utf8'),
           };
         });
