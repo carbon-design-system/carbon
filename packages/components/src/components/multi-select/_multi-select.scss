@@ -59,6 +59,7 @@
       right: auto;
       margin-left: $carbon--spacing-03;
       margin-right: 0;
+      z-index: 1;
     }
 
     .#{$prefix}--list-box--showSelectedText {
