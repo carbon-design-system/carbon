@@ -24,6 +24,7 @@ const ListBoxSelection = ({
   selectionCount,
   translateWithId: t,
   disabled,
+  selectionText,
 }) => {
   const className = cx(`${prefix}--list-box__selection`, {
     [`${prefix}--tag--filter`]: selectionCount,
@@ -57,7 +58,7 @@ const ListBoxSelection = ({
       onKeyDown={handleOnKeyDown}
       aria-label="Clear Selection"
       title={description}>
-      {selectionCount}
+      {selectionText || selectionCount}
       <Close16 />
     </div>
   );
@@ -85,6 +86,12 @@ ListBoxSelection.propTypes = {
    * whether the selection should display a badge or a single clear icon.
    */
   selectionCount: PropTypes.number,
+
+  /**
+   * Specify an optional `selectionCount` value that will be used to determine
+   * whether the selection should display a badge or a single clear icon.
+   */
+  selectionText: PropTypes.string,
 
   /**
    * i18n hook used to provide the appropriate description for the given menu

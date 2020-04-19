@@ -131,6 +131,17 @@ export default class MultiSelect extends React.Component {
      * Specify the direction of the multiselect dropdown. Can be either top or bottom.
      */
     direction: PropTypes.oneOf(['top', 'bottom']),
+
+    /**
+     * If true, show selected itens counter
+     * default is true
+     */
+    showSelectedCounter: PropTypes.bool,
+
+    /**
+     * If true, selected itens is rendered in title
+     */
+    showSelectedText: PropTypes.bool,
   };
 
   static getDerivedStateFromProps({ open }, state) {
@@ -159,6 +170,8 @@ export default class MultiSelect extends React.Component {
     open: false,
     selectionFeedback: 'top-after-reopen',
     direction: 'bottom',
+    showSelectedCounter: true,
+    showSelectedText: false,
   };
 
   constructor(props) {
@@ -248,6 +261,8 @@ export default class MultiSelect extends React.Component {
       translateWithId,
       downshiftProps,
       direction,
+      showSelectedText,
+      showSelectedCounter,
     } = this.props;
     const inline = type === 'inline';
     const wrapperClasses = cx(
@@ -347,19 +362,41 @@ export default class MultiSelect extends React.Component {
                     aria-labelledby={`${labelId} ${fieldLabelId}`}
                     aria-describedby={helperId}
                     {...buttonProps}>
-                    {selectedItem.length > 0 && (
-                      <ListBox.Selection
-                        clearSelection={!disabled ? clearSelection : noop}
-                        selectionCount={selectedItem.length}
-                        translateWithId={translateWithId}
-                        disabled={disabled}
-                      />
+                    {selectedItem.length > 0 &&
+                      (showSelectedCounter || !showSelectedText) && (
+                        <ListBox.Selection
+                          clearSelection={!disabled ? clearSelection : noop}
+                          selectionCount={selectedItem.length}
+                          translateWithId={translateWithId}
+                          disabled={disabled}
+                        />
+                      )}
+                    {!showSelectedText && (
+                      <span
+                        id={fieldLabelId}
+                        className={`${prefix}--list-box__label`}>
+                        {label}
+                      </span>
                     )}
-                    <span
-                      id={fieldLabelId}
-                      className={`${prefix}--list-box__label`}>
-                      {label}
-                    </span>
+                    {selectedItem.length > 0 && showSelectedText && (
+                      <div className={`${prefix}--list-box--showSelectedText`}>
+                        {selectedItem.map(item => {
+                          const itemProps = getItemProps({
+                            item,
+                          });
+                          return (
+                            <ListBox.Selection
+                              key={item.id}
+                              clearSelection={itemProps.onClick}
+                              selectionCount={1}
+                              selectionText={item.text}
+                              translateWithId={translateWithId}
+                              disabled={disabled}
+                            />
+                          );
+                        })}
+                      </div>
+                    )}
                     <ListBox.MenuIcon
                       isOpen={isOpen}
                       translateWithId={translateWithId}

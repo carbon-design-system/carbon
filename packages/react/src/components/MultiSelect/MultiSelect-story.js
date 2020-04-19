@@ -69,6 +69,8 @@ const props = () => ({
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
   useTitleInItem: boolean('Show tooltip on hover', false),
+  showSelectedCounter: boolean('Show selected items counter', true),
+  showSelectedText: boolean('Show selected items text', false),
   type: select('UI type (Only for `<MultiSelect>`) (type)', types, 'default'),
   size: select('Field size (size)', sizes, undefined) || undefined,
   direction: select('Dropdown direction (direction)', directions, 'bottom'),
@@ -103,6 +105,8 @@ storiesOf('MultiSelect', module)
       const {
         listBoxMenuIconTranslationIds,
         selectionFeedback,
+        showSelectedCounter,
+        showSelectedText,
         ...multiSelectProps
       } = props();
       return (
@@ -113,6 +117,8 @@ storiesOf('MultiSelect', module)
             itemToString={item => (item ? item.text : '')}
             translateWithId={id => listBoxMenuIconTranslationIds[id]}
             selectionFeedback={selectionFeedback}
+            showSelectedCounter={showSelectedCounter}
+            showSelectedText={showSelectedText}
           />
         </div>
       );
@@ -131,6 +137,8 @@ storiesOf('MultiSelect', module)
       const {
         listBoxMenuIconTranslationIds,
         selectionFeedback,
+        showSelectedText,
+        showSelectedCounter,
         ...multiSelectProps
       } = props();
 
@@ -143,6 +151,8 @@ storiesOf('MultiSelect', module)
             initialSelectedItems={[items[0], items[1]]}
             translateWithId={id => listBoxMenuIconTranslationIds[id]}
             selectionFeedback={selectionFeedback}
+            showSelectedCounter={showSelectedCounter}
+            showSelectedText={showSelectedText}
           />
         </div>
       );
@@ -161,6 +171,8 @@ storiesOf('MultiSelect', module)
       const {
         listBoxMenuIconTranslationIds,
         selectionFeedback,
+        showSelectedCounter,
+        showSelectedText,
         ...multiSelectProps
       } = props();
 
@@ -173,6 +185,8 @@ storiesOf('MultiSelect', module)
             placeholder={defaultPlaceholder}
             translateWithId={id => listBoxMenuIconTranslationIds[id]}
             selectionFeedback={selectionFeedback}
+            showSelectedCounter={showSelectedCounter}
+            showSelectedText={showSelectedText}
           />
         </div>
       );

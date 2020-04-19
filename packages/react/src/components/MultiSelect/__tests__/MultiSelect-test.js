@@ -378,5 +378,26 @@ describe('MultiSelect', () => {
         []
       );
     });
+
+    it('should allow a user to click on the text item icon to deselect clicked item', () => {
+      const wrapper = mount(
+        <MultiSelect
+          id="test-multiselect"
+          {...mockProps}
+          showSelectedCounter={false}
+          showSelectedText={true}
+        />
+      );
+      openMenu(wrapper);
+      wrapper
+        .find(`.${prefix}--list-box__menu-item`)
+        .at(0)
+        .simulate('click');
+
+      wrapper.find(`.${prefix}--list-box__selection`).simulate('click');
+      expect(wrapper.find('Selection').instance().state.selectedItems).toEqual(
+        []
+      );
+    });
   });
 });

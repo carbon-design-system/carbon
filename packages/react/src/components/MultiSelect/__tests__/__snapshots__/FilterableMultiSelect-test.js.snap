@@ -44,6 +44,8 @@ exports[`MultiSelect.Filterable should render 1`] = `
   open={false}
   placeholder="Placeholder..."
   selectionFeedback="top-after-reopen"
+  showSelectedCounter={true}
+  showSelectedText={false}
   sortItems={[Function]}
 >
   <div

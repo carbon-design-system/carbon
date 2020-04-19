@@ -127,6 +127,17 @@ export default class FilterableMultiSelect extends React.Component {
      * Additional props passed to Downshift
      */
     downshiftProps: PropTypes.shape(Downshift.propTypes),
+
+    /**
+     * If true, show selected itens counter
+     * default is true
+     */
+    showSelectedCounter: PropTypes.bool,
+
+    /**
+     * If true, selected itens is rendered in title
+     */
+    showSelectedText: PropTypes.bool,
   };
 
   static getDerivedStateFromProps({ open }, state) {
@@ -154,6 +165,8 @@ export default class FilterableMultiSelect extends React.Component {
     light: false,
     open: false,
     selectionFeedback: 'top-after-reopen',
+    showSelectedCounter: true,
+    showSelectedText: false,
   };
 
   constructor(props) {
@@ -279,7 +292,10 @@ export default class FilterableMultiSelect extends React.Component {
       useTitleInItem,
       translateWithId,
       downshiftProps,
+      showSelectedCounter,
+      showSelectedText,
     } = this.props;
+
     const inline = type === 'inline';
     const wrapperClasses = cx(
       `${prefix}--multi-select__wrapper`,
@@ -344,7 +360,9 @@ export default class FilterableMultiSelect extends React.Component {
               const className = cx(
                 `${prefix}--multi-select`,
                 `${prefix}--combo-box`,
-                `${prefix}--multi-select--filterable`,
+                `${prefix}--multi-select--filterable${
+                  showSelectedText ? '--text' : ''
+                }`,
                 containerClassName,
                 {
                   [`${prefix}--multi-select--invalid`]: invalid,
@@ -374,13 +392,37 @@ export default class FilterableMultiSelect extends React.Component {
                     aria-labelledby={labelId}
                     aria-describedby={helperId}
                     {...buttonProps}>
-                    {selectedItem.length > 0 && (
+                    {selectedItem.length > 0 && showSelectedCounter && (
                       <ListBox.Selection
                         clearSelection={clearSelection}
                         selectionCount={selectedItem.length}
                         translateWithId={translateWithId}
                         disabled={disabled}
                       />
+                    )}
+                    {selectedItem.length > 0 && showSelectedText && (
+                      <div
+                        className={[
+                          `${prefix}--list-box--showSelectedText ${
+                            showSelectedCounter
+                              ? `${prefix}--list-box--showSelectedText-small`
+                              : ''
+                          } }`,
+                        ]}>
+                        {selectedItem.map(item => {
+                          const itemProps = getItemProps({ item });
+                          return (
+                            <ListBox.Selection
+                              key={item.id}
+                              clearSelection={itemProps.onClick}
+                              selectionCount={1}
+                              selectionText={item.text}
+                              translateWithId={translateWithId}
+                              disabled={disabled}
+                            />
+                          );
+                        })}
+                      </div>
                     )}
                     <input
                       className={inputClasses}
@@ -429,6 +471,7 @@ export default class FilterableMultiSelect extends React.Component {
                       const isChecked =
                         selectedItem.filter(selected => isEqual(selected, item))
                           .length > 0;
+
                       return (
                         <ListBox.MenuItem
                           key={itemProps.id}
