@@ -3185,6 +3185,8 @@ Map {
         "locale": "en",
         "open": false,
         "selectionFeedback": "top-after-reopen",
+        "showSelectedCounter": true,
+        "showSelectedText": false,
         "sortItems": [Function],
       },
       "displayName": "MultiSelect.Filterable",
@@ -3357,6 +3359,12 @@ Map {
           ],
           "type": "oneOf",
         },
+        "showSelectedCounter": Object {
+          "type": "bool",
+        },
+        "showSelectedText": Object {
+          "type": "bool",
+        },
         "size": Object {
           "args": Array [
             Array [
@@ -3388,6 +3396,8 @@ Map {
       "locale": "en",
       "open": false,
       "selectionFeedback": "top-after-reopen",
+      "showSelectedCounter": true,
+      "showSelectedText": false,
       "sortItems": [Function],
       "title": false,
       "type": "default",
@@ -3566,6 +3576,12 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "showSelectedCounter": Object {
+        "type": "bool",
+      },
+      "showSelectedText": Object {
+        "type": "bool",
       },
       "size": Object {
         "args": Array [
