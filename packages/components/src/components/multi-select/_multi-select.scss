@@ -75,11 +75,11 @@
 
   .#{$prefix}--multi-select--filterable--text {
     .#{$prefix}--list-box--showSelectedText {
-      max-width: 66%;
+      max-width: calc(100% - 9rem);
     }
 
     .#{$prefix}--list-box--showSelectedText-small {
-      max-width: 50%;
+      max-width: calc(100% - 12rem);
     }
 
     .#{$prefix}--text-input {

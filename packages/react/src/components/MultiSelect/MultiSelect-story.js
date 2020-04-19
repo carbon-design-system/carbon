@@ -177,7 +177,7 @@ storiesOf('MultiSelect', module)
       } = props();
 
       return (
-        <div style={{ width: 300 }}>
+        <div style={{ width: 600 }}>
           <MultiSelect.Filterable
             {...multiSelectProps}
             items={items}

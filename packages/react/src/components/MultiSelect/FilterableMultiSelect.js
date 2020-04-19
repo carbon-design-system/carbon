@@ -361,7 +361,7 @@ export default class FilterableMultiSelect extends React.Component {
                 `${prefix}--multi-select`,
                 `${prefix}--combo-box`,
                 `${prefix}--multi-select--filterable${
-                  showSelectedText ? '--text' : ''
+                  showSelectedText && selectedItem.length > 0 ? '--text' : ''
                 }`,
                 containerClassName,
                 {
