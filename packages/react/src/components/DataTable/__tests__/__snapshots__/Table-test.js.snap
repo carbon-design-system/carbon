@@ -4,6 +4,7 @@ exports[`DataTable.Table should render 1`] = `
 <Table
   className="custom-class"
   isSortable={false}
+  overflowMenuOnHover={true}
 >
   <table
     className="bx--data-table custom-class bx--data-table--no-border"
