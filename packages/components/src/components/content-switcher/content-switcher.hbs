@@ -7,12 +7,9 @@
 
 <div data-content-switcher class="{{@root.prefix}}--content-switcher" role="tablist" aria-label="Demo switch content">
   {{#each items}}
-  <button class="{{@root.prefix}}--content-switcher-btn{{#if selected}} {{@root.prefix}}--content-switcher--selected{{/if}}"
-    data-target="{{target}}" role="tab" {{#if selected}} aria-selected="true" {{/if}} {{#if disabled}} disabled {{/if}}>
-    {{#if ../hasIcon}}
-      {{ carbon-icon 'AddFilled16' class=(add @root.prefix '--content-switcher__icon') }}
-    {{/if}}
-    {{#if label}}<span class={{@root.prefix}}--content-switcher__label>{{label}}</span>{{/if}}
-  </button>
+  <div class="{{@root.prefix}}--content-switcher-btn" role="presentation">
+    <input type="radio" id="{{id}}" name="{{../group}}" value="{{value}}" tabindex="0" role="radio"{{#if selected}} checked{{/if}}{{#if disabled}} disabled{{/if}}>
+    <label for="{{id}}" class="{{@root.prefix}}--content-switcher__label">{{label}}</label>
+  </div>
   {{/each}}
 </div>
