@@ -9,27 +9,22 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
+import Form from '../Form';
+import { FormContext } from './FormContext';
 
 const { prefix } = settings;
 
-const FluidForm = ({ className, children, ...other }) => {
-  const classNames = classnames(
-    `${prefix}--form`,
-    `${prefix}--form--fluid`,
-    className
-  );
-
-  const childrenWithProps = React.Children.map(children, child => {
-    return React.cloneElement(child, { fluid: true });
-  });
+function FluidForm({ className, children, ...other }) {
+  const classNames = classnames(`${prefix}--form--fluid`, className);
 
   return (
-    <form className={classNames} {...other}>
-      {' '}
-      {childrenWithProps}{' '}
-    </form>
+    <FormContext.Provider value={{ isFluid: true }}>
+      <Form className={classNames} {...other}>
+        {children}
+      </Form>
+    </FormContext.Provider>
   );
-};
+}
 
 FluidForm.propTypes = {
   /**

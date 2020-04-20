@@ -2564,6 +2564,19 @@ Map {
       },
     },
   },
+  "FluidForm" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fluid": Object {
+        "type": "bool",
+      },
+    },
+  },
   "FormGroup" => Object {
     "defaultProps": Object {
       "invalid": false,
@@ -5172,9 +5185,6 @@ Map {
         "type": "oneOfType",
       },
       "disabled": Object {
-        "type": "bool",
-      },
-      "fluidInput": Object {
         "type": "bool",
       },
       "helperText": Object {
