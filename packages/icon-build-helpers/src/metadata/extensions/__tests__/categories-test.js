@@ -10,10 +10,8 @@
 'use strict';
 
 describe('categories', () => {
-  let Registry;
-  let Storage;
+  let Metadata;
   let extension;
-  let validate;
   let vol;
   let yml;
 
@@ -24,10 +22,8 @@ describe('categories', () => {
       return memfs.fs;
     });
 
-    Registry = require('../../../registry');
-    Storage = require('../../storage');
+    Metadata = require('../../');
     extension = require('../categories');
-    validate = require('../../validate');
     yml = require('../../adapters').yml;
   });
 
@@ -36,11 +32,10 @@ describe('categories', () => {
   });
 
   it('should throw an error if an icon is in the registry but has no category information', async () => {
-    const filename = yml.getFilenameFor(extension.name);
     const files = {
       '/svg/icon-with-category.svg': 'mock',
       '/svg/icon-without-category.svg': 'mock',
-      [`/${filename}`]: yml.serialize({
+      [`/${extension.name}.yml`]: yml.serialize({
         categories: [
           {
             name: 'test',
@@ -51,19 +46,23 @@ describe('categories', () => {
     };
     vol.fromJSON(files);
 
-    const registry = await Registry.create('/svg');
-    const extensions = await Storage.load(yml, '/', [extension]);
-    expect(() => {
-      validate(registry, extensions);
-    }).toThrow();
+    await expect(
+      Metadata.check({
+        adapter: yml,
+        input: '/',
+        extensions: [extension],
+      })
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+"Expected the following icon to have category information: \`icon-without-category\`. This icon has assets in the following locations:
+/svg/icon-without-category.svg"
+`);
   });
 
   it('should throw an error if an icon is in the registry but has no subcategory information', async () => {
-    const filename = yml.getFilenameFor(extension.name);
     const files = {
       '/svg/icon-with-category.svg': 'mock',
       '/svg/icon-without-category.svg': 'mock',
-      [`/${filename}`]: yml.serialize({
+      [`/${extension.name}.yml`]: yml.serialize({
         categories: [
           {
             name: 'test-category',
@@ -79,18 +78,22 @@ describe('categories', () => {
     };
     vol.fromJSON(files);
 
-    const registry = await Registry.create('/svg');
-    const extensions = await Storage.load(yml, '/', [extension]);
-    expect(() => {
-      validate(registry, extensions);
-    }).toThrow();
+    await expect(
+      Metadata.check({
+        adapter: yml,
+        input: '/',
+        extensions: [extension],
+      })
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+"Expected the following icon to have category information: \`icon-without-category\`. This icon has assets in the following locations:
+/svg/icon-without-category.svg"
+`);
   });
 
   it('should throw an error if an icon has category information but is not in the registry', async () => {
-    const filename = yml.getFilenameFor(extension.name);
     const files = {
       '/svg/icon-with-category.svg': 'mock',
-      [`/${filename}`]: yml.serialize({
+      [`/${extension.name}.yml`]: yml.serialize({
         categories: [
           {
             name: 'test',
@@ -101,18 +104,21 @@ describe('categories', () => {
     };
     vol.fromJSON(files);
 
-    const registry = await Registry.create('/svg');
-    const extensions = await Storage.load(yml, '/', [extension]);
-    expect(() => {
-      validate(registry, extensions);
-    }).toThrow();
+    await expect(
+      Metadata.check({
+        adapter: yml,
+        input: '/',
+        extensions: [extension],
+      })
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `"Found the entry \`missing-icon-in-registry\` in category \`test\` that does not have a corresponding icon or asset. Either this icon does not exist, or is not available in the current directory."`
+    );
   });
 
   it('should throw an error if an icon has subcategory information but is not in the registry', async () => {
-    const filename = yml.getFilenameFor(extension.name);
     const files = {
       '/svg/icon-with-category.svg': 'mock',
-      [`/${filename}`]: yml.serialize({
+      [`/${extension.name}.yml`]: yml.serialize({
         categories: [
           {
             name: 'test',
@@ -128,10 +134,14 @@ describe('categories', () => {
     };
     vol.fromJSON(files);
 
-    const registry = await Registry.create('/svg');
-    const extensions = await Storage.load(yml, '/', [extension]);
-    expect(() => {
-      validate(registry, extensions);
-    }).toThrow();
+    await expect(
+      Metadata.check({
+        adapter: yml,
+        input: '/',
+        extensions: [extension],
+      })
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `"Found the entry \`missing-icon-in-registry\` in category \`test\`, subcategory \`test-subcategory\` that does not have a corresponding icon or asset. Either this icon does not exist, or is not available in the current directory."`
+    );
   });
 });

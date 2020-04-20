@@ -14,21 +14,23 @@ const path = require('path');
  * Provide source and filepath asset information for a given icon
  * @type {Extension}
  */
-const assets = {
-  name: 'assets',
-  computed: true,
-  extend(metadata, _data, registry, { input }) {
-    for (const entry of metadata.icons) {
-      const icon = registry.get(entry.name);
-      entry.assets = icon.assets.map(({ size, filepath }) => {
-        return {
-          size,
-          filepath: path.relative(input, filepath),
-          source: fs.readFileSync(filepath, 'utf8'),
-        };
-      });
-    }
-  },
+const assets = () => {
+  return {
+    name: 'assets',
+    computed: true,
+    extend(metadata, _data, registry, { input }) {
+      for (const entry of metadata.icons) {
+        const icon = registry.get(entry.name);
+        entry.assets = icon.assets.map(({ size, filepath }) => {
+          return {
+            size,
+            filepath: path.relative(input, filepath),
+            source: fs.readFileSync(filepath, 'utf8'),
+          };
+        });
+      }
+    },
+  };
 };
 
 module.exports = assets;
