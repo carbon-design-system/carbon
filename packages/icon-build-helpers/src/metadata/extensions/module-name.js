@@ -10,15 +10,17 @@
 const { pascalCase } = require('change-case');
 
 // Computed property for icons to determine their module name in code
-const moduleName = {
-  name: 'moduleName',
-  computed: true,
-  extend(metadata, _data, registry) {
-    for (const entry of metadata.icons) {
-      const icon = registry.get(entry.name);
-      entry.moduleName = getModuleName(icon.id, icon.namespace);
-    }
-  },
+const moduleName = () => {
+  return {
+    name: 'moduleName',
+    computed: true,
+    extend(metadata, _data, registry) {
+      for (const entry of metadata.icons) {
+        const icon = registry.get(entry.name);
+        entry.moduleName = getModuleName(icon.id, icon.namespace);
+      }
+    },
+  };
 };
 
 /**
