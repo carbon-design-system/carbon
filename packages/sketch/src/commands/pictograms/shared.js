@@ -9,6 +9,7 @@
 
 import { Artboard, Rectangle, Shape } from 'sketch/dom';
 import { syncColorStyles } from '../../sharedStyles/colors';
+import { groupByKey } from '../../tools/grouping';
 import { syncSymbol } from '../../tools/symbols';
 
 const metadata = require('../../../generated/pictograms/metadata.json');
@@ -120,18 +121,69 @@ function createSVGArtboards(page, sharedStyle, pictograms, sizes = [48]) {
         });
 
         const [group] = artboard.layers;
-        const strokePaths = group.layers.map(layer => layer.duplicate());
-        const shape = new Shape({
-          name: 'Border',
-          frame: new Rectangle(0, 0, size, size),
-          layers: strokePaths,
-          style: sharedStyle.style,
-          sharedStyleId: sharedStyle.id,
-        });
+        const paths = group.layers.map(layer => layer.duplicate());
+
+        /**
+         * There are several different types of layers that we might run into.
+         * These include:
+         * 1. Stroke paths, used to specify the stroke for the majority of the
+         *    icon
+         * 2. Transparent, used as the bounding box for icon artboards
+         * 3. Cutouts, leftover assets or ones used to cut out certain parts of
+         *    an icon. They should have no stroke associated with them
+         */
+        const { strokePaths = [], transparent = [], cutouts = [] } = groupByKey(
+          paths,
+          layer => {
+            if (layer.name === 'Rectangle') {
+              if (layer.frame.width === size && layer.frame.height === size) {
+                return 'transparent';
+              }
+            }
+
+            // workspace
+            if (layer.name.includes('_Rectangle_')) {
+              return 'transparent';
+            }
+
+            if (layer.name.includes('Transparent_Rectangle')) {
+              return 'transparent';
+            }
+
+            if (layer.style.fills.length > 0) {
+              return 'strokePaths';
+            }
+
+            return 'cutouts';
+          }
+        );
+
+        let shape;
+        if (strokePaths.length === 1) {
+          shape = strokePaths[0];
+          shape.name = 'Border';
+          shape.style = sharedStyle.style;
+          shape.sharedStyleId = sharedStyle.id;
+        } else {
+          // If we have multiple stroke paths, we need to consolidate them into
+          // a single Shape so that we can style the icon with one override in
+          // the symbol
+          shape = new Shape({
+            name: 'Border',
+            frame: new Rectangle(0, 0, size, size),
+            layers: strokePaths,
+            style: sharedStyle.style,
+            sharedStyleId: sharedStyle.id,
+          });
+        }
 
         shape.style.fills = [];
 
-        artboard.layers.push(shape);
+        for (const layer of transparent) {
+          layer.remove();
+        }
+
+        artboard.layers.push(shape, ...cutouts);
         group.remove();
 
         X_OFFSET += size + ARTBOARD_MARGIN;
