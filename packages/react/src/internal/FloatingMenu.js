@@ -11,6 +11,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import window from 'window-or-global';
 import { settings } from 'carbon-components';
+import OptimizedResize from './OptimizedResize';
 
 const { prefix } = settings;
 
@@ -84,7 +85,7 @@ const hasChangeInOffset = (oldMenuOffset = {}, menuOffset = {}) => {
  */
 const getFloatingPosition = ({
   menuSize,
-  refPosition,
+  refPosition = {},
   offset = {},
   direction = DIRECTION_BOTTOM,
   scrollX = 0,
@@ -154,16 +155,6 @@ class FloatingMenu extends React.Component {
     target: PropTypes.func,
 
     /**
-     * The position in the viewport of the trigger button.
-     */
-    menuPosition: PropTypes.shape({
-      top: PropTypes.number,
-      right: PropTypes.number,
-      bottom: PropTypes.number,
-      left: PropTypes.number,
-    }),
-
-    /**
      * Where to put the tooltip, relative to the trigger button.
      */
     menuDirection: PropTypes.oneOf([
@@ -201,7 +192,6 @@ class FloatingMenu extends React.Component {
   };
 
   static defaultProps = {
-    menuPosition: {},
     menuOffset: {},
     menuDirection: DIRECTION_BOTTOM,
   };
@@ -239,7 +229,6 @@ class FloatingMenu extends React.Component {
    * Calculates the position in the viewport of floating menu,
    * once this component is mounted or updated upon change in the following props:
    *
-   * * `menuPosition` (The position in the viewport of the trigger button)
    * * `menuOffset` (The adjustment that should be applied to the calculated floating menu's position)
    * * `menuDirection` (Where the floating menu menu should be placed relative to the trigger button)
    *
@@ -256,30 +245,23 @@ class FloatingMenu extends React.Component {
     }
 
     const {
-      menuPosition: oldRefPosition = {},
       menuOffset: oldMenuOffset = {},
       menuDirection: oldMenuDirection,
     } = prevProps;
-    const {
-      menuPosition: refPosition = {},
-      menuOffset = {},
-      menuDirection,
-    } = this.props;
+    const { menuOffset = {}, menuDirection } = this.props;
 
     if (
-      oldRefPosition.top !== refPosition.top ||
-      oldRefPosition.right !== refPosition.right ||
-      oldRefPosition.bottom !== refPosition.bottom ||
-      oldRefPosition.left !== refPosition.left ||
       hasChangeInOffset(oldMenuOffset, menuOffset) ||
       oldMenuDirection !== menuDirection
     ) {
+      const { flipped, triggerRef } = this.props;
+      const { current: triggerEl } = triggerRef;
       const menuSize = menuBody.getBoundingClientRect();
-      const { menuEl, flipped } = this.props;
+      const refPosition = triggerEl && triggerEl.getBoundingClientRect();
       const offset =
         typeof menuOffset !== 'function'
           ? menuOffset
-          : menuOffset(menuBody, menuDirection, menuEl, flipped);
+          : menuOffset(menuBody, menuDirection, triggerEl, flipped);
       // Skips if either in the following condition:
       // a) Menu body has `display:none`
       // b) `menuOffset` as a callback returns `undefined` (The callback saw that it couldn't calculate the value)
@@ -301,6 +283,16 @@ class FloatingMenu extends React.Component {
       }
     }
   };
+
+  componentWillUnmount() {
+    this.hResize.release();
+  }
+
+  componentDidMount() {
+    this.hResize = OptimizedResize.add(() => {
+      this._updateMenuSize();
+    });
+  }
 
   componentDidUpdate(prevProps) {
     this._updateMenuSize(prevProps);
