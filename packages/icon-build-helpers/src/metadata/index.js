@@ -66,7 +66,7 @@ async function load({
   // for the extension
   for (const { data, extend } of loaded) {
     if (extend) {
-      extend(metadata, data, registry, context);
+      await extend(metadata, data, registry, context);
     }
   }
 

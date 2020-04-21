@@ -8,24 +8,26 @@
 'use strict';
 
 const assets = require('../assets');
-const icons = require('../icons');
 const { svgo } = require('./optimizer');
 const { getModuleName } = require('./getModuleName');
 
+// Icon size targets and default size. Not used with pictograms
+const sizes = [32, 24, 20, 16];
+const defaultSize = 32;
+
 const defaultOptions = {
-  // sizes: [32, 24, 20, 16],
-  // defaultSize: 32,
+  target: 'icons',
 };
 
 /**
  * @type {Extension}
  */
-const build = (options = defaultOptions) => {
+const output = (options = defaultOptions) => {
   return {
-    name: 'build',
+    name: 'output',
     computed: true,
     before: [assets],
-    async extend(metadata, _data, registry) {
+    async extend(metadata, _data) {
       for (const icon of metadata.icons) {
         for (const asset of icon.assets) {
           asset.optimized = await svgo.optimize(asset.source, {
@@ -33,49 +35,34 @@ const build = (options = defaultOptions) => {
           });
         }
 
-        icon.output = {
-          name: icon.name,
-        };
-
-        continue;
-        icon.output = await Promise.all(
-          options.sizes.map(async size => {
-            const asset = icon.assets.find(asset => asset.size === size);
-            const descriptor = asset
-              ? await createDescriptor(icon.name, asset.optimized.data, size)
-              : await createDescriptor(
-                  icon.name,
-                  defaultAsset.optimized.data,
-                  size,
-                  defaultAsset.size
-                );
-            return {
+        if (options.target === 'pictograms') {
+          const [asset] = icon.assets;
+          const descriptor = await createDescriptor(
+            icon.name,
+            asset.optimized.data
+          );
+          icon.output = [
+            {
               moduleName: getModuleName(
                 icon.name,
-                size,
+                null,
                 icon.namespace,
                 descriptor
               ),
-              filepath: [...icon.namespace, icon.name, `${size}.js`].join('/'),
+              filepath: [...icon.namespace, `${icon.name}.js`].join('/'),
               descriptor,
-            };
-          })
-        );
-      }
-
-      return;
-      for (const icon of metadata.icons) {
-        for (const asset of icon.assets) {
-          asset.optimized = await svgo.optimize(asset.source, {
-            path: asset.filepath,
-          });
+            },
+          ];
+          continue;
         }
 
+        // If the target is not set to pictograms, then we're building up
+        // metadata for icons
         const defaultAsset = icon.assets.find(
-          asset => asset.size === options.defaultSize
+          asset => asset.size === defaultSize
         );
         icon.output = await Promise.all(
-          options.sizes.map(async size => {
+          sizes.map(async size => {
             const asset = icon.assets.find(asset => asset.size === size);
             const descriptor = asset
               ? await createDescriptor(icon.name, asset.optimized.data, size)
@@ -177,4 +164,4 @@ function convert(root) {
   return safeFormat;
 }
 
-module.exports = build;
+module.exports = output;
