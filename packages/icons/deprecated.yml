@@ -6,9 +6,13 @@ deprecated:
   - name: back-to-top
     reason: The back-to-top icon has been replaced by up-to-top
   - name: checkbox--undeterminate
-    reason: The checkbox--undeterminate icon has been replaced by checkbox--indeterminate
+    reason:
+      The checkbox--undeterminate icon has been replaced by
+      checkbox--indeterminate
   - name: checkbox--undeterminate--filled
-    reason: The checkbox--undeterminate--filled icon has been replaced by checkbox--indeterminate
+    reason:
+      The checkbox--undeterminate--filled icon has been replaced by
+      checkbox--indeterminate
   - name: cloud--lightning
   - name: cloud--rain
   - name: cloud--snow
