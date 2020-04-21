@@ -128,8 +128,8 @@
   }
 
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
-    background-color: $ui-05;
-    color: $inverse-01;
+    background-color: transparent;
+    color: inherit;
     z-index: 3;
 
     &:disabled {
@@ -141,11 +141,6 @@
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
     .#{$prefix}--content-switcher__icon {
     fill: $inverse-01;
-  }
-
-  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected { 
-    background-color: transparent; 
-    color: inherit; 
   }
 
   .#{$prefix}--content-switcher-btn INPUT[type="radio"] { 
