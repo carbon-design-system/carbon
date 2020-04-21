@@ -16091,7 +16091,6 @@ Data table core styles
   // -------------
   .#{$prefix}--data-table_inner-container {
     background-color: $ui-03;
-    padding-top: rem(48px);
     transform: translateZ(0);
   }
 
@@ -16109,7 +16108,8 @@ Data table core styles
     }
 
     thead {
-      position: fixed;
+      position: sticky;
+      z-index: 1;
       top: 0;
       width: 100%;
       overflow: scroll;

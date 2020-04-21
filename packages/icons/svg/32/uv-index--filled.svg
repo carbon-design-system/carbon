@@ -1,0 +1,12 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <title>uv-index--filled</title>
+  <path d="M16,30l-3.4634-5.8223L6,26l1.8223-6.5369L2,16l5.8223-3.4631L6,6l6.5366,1.8223L16,2l3.4634,5.8223L26,6l-1.8223,6.5369L30,16l-5.8223,3.4631L26,26l-6.5366-1.8223Z"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>
