@@ -130,6 +130,21 @@ describe('Test Number Input', function() {
       expect(inputNode.value).toBe('0');
     });
 
+    it('Should not decrease the value past the min', async function() {
+      inputNode.value = 3;
+      inputNode.step = 5;
+      const downArrowNode = document.querySelector('.down-icon');
+      const e = await new Promise(resolve => {
+        events.on(document.body, 'change', resolve);
+        downArrowNode.dispatchEvent(
+          new CustomEvent('click', { bubbles: true })
+        );
+      });
+      await delay(0);
+      expect(e.cancelable).toBe(false);
+      expect(inputNode.value).toBe('0');
+    });
+
     afterEach(function() {
       events.reset();
     });
