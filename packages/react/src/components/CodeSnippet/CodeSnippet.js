@@ -6,8 +6,9 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
+import useResizeObserver from 'use-resize-observer/polyfilled';
 import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import Copy from '../Copy';
@@ -36,12 +37,15 @@ function CodeSnippet({
   const { current: uid } = useRef(getUniqueId());
   const codeContentRef = useRef();
 
-  useLayoutEffect(() => {
-    if (codeContentRef.current) {
-      const { height } = codeContentRef.current.getBoundingClientRect();
-      setShouldShowMoreLessBtn(type === 'multi' && height > 255);
-    }
-  }, [children, type]);
+  useResizeObserver({
+    ref: codeContentRef,
+    onResize: () => {
+      if (codeContentRef.current) {
+        const { height } = codeContentRef.current.getBoundingClientRect();
+        setShouldShowMoreLessBtn(type === 'multi' && height > 255);
+      }
+    },
+  });
 
   const codeSnippetClasses = classNames(className, {
     [`${prefix}--snippet`]: true,

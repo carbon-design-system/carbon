@@ -10,8 +10,9 @@
 const fs = require('fs-extra');
 const path = require('path');
 const adapters = require('./adapters');
-const Extensions = require('./extensions');
-const Registry = require('./registry');
+const Extension = require('./extension');
+const defaultExtensions = require('./extensions');
+const Registry = require('../registry');
 const Storage = require('./storage');
 const validate = require('./validate');
 
@@ -26,34 +27,32 @@ const validate = require('./validate');
 async function check({
   adapter = adapters.yml,
   input,
-  extensions = [Extensions.icons],
+  extensions = [defaultExtensions.icons],
 }) {
   const registry = await Registry.create(path.join(input, 'svg'));
-  const loaded = await Storage.load(adapter, input, extensions);
+  const loaded = await Storage.load(adapter, input, Extension.load(extensions));
   validate(registry, loaded);
 }
 
 /**
- * Build the metadata for the assets in the given directory with a given list of
- * extensions
+ * Load the metadata for the assets in the given directory with a given list of
+ * extensions and return it
  * @param {object} options
  * @param {Adapter} [options.adapter] The adapter to use to load the extensions
  * @param {string} options.input The directory of source files
  * @param {string} [options.output] The directory for the built metadata
  * @param {Array<Extension>} [options.extensions] The extensions to load
- * @returns {Promise<void>}
+ * @returns {Promise<object>}
  */
-async function build({
+async function load({
   adapter = adapters.yml,
-  extensions = [Extensions.icons],
+  extensions = [defaultExtensions.icons],
   input,
-  output = input,
 }) {
   const registry = await Registry.create(path.join(input, 'svg'));
-  const loaded = await Storage.load(adapter, input, extensions);
+  const loaded = await Storage.load(adapter, input, Extension.load(extensions));
   validate(registry, loaded);
 
-  const metadataFilePath = path.join(output, 'metadata.json');
   const metadata = {};
   const context = {
     input,
@@ -67,12 +66,32 @@ async function build({
     }
   }
 
+  return metadata;
+}
+
+/**
+ * Build the metadata for the assets in the given directory with a given list of
+ * extensions and write it to disk
+ * @param {object} options
+ * @param {Adapter} [options.adapter] The adapter to use to load the extensions
+ * @param {string} options.input The directory of source files
+ * @param {string} [options.output] The directory for the built metadata
+ * @param {Array<Extension>} [options.extensions] The extensions to load
+ * @returns {Promise<void>}
+ */
+async function build({
+  adapter = adapters.yml,
+  extensions = [defaultExtensions.icons],
+  input,
+  output = input,
+}) {
+  const metadata = await load({ adapter, extensions, input });
+  const metadataFilePath = path.join(output, 'metadata.json');
+
   await fs.ensureFile(metadataFilePath);
   await fs.writeJson(metadataFilePath, metadata, {
     spaces: 2,
   });
-
-  return metadata;
 }
 
 /**
@@ -89,10 +108,14 @@ async function scaffold({
   adapter = adapters.yml,
   input,
   output = input,
-  extensions = [Extensions.icons],
+  extensions = [defaultExtensions.icons],
 }) {
   const registry = await Registry.create(path.join(input, 'svg'));
-  const [icons] = await Storage.load(adapter, input, extensions);
+  const [icons] = await Storage.load(
+    adapter,
+    input,
+    Extension.load(extensions)
+  );
 
   for (const item of registry.values()) {
     const match = icons.data.find(icon => item.id === icon.name);
@@ -126,10 +149,11 @@ async function scaffold({
 module.exports = {
   // Data associated with storing and adding metadata information
   adapters,
-  extensions: Extensions,
+  extensions: defaultExtensions,
 
   // Commands to run for icon packages
   build,
   check,
+  load,
   scaffold,
 };
