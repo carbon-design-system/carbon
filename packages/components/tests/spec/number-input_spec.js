@@ -116,6 +116,19 @@ describe('Test Number Input', function() {
       expect(inputNode.value).toBe('1');
     });
 
+    it('Should not increase the value past the max', async function() {
+      inputNode.step = 5;
+      inputNode.max = 3;
+      const upArrowNode = document.querySelector('.up-icon');
+      const e = await new Promise(resolve => {
+        events.on(document.body, 'change', resolve);
+        upArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      });
+      await delay(0);
+      expect(e.cancelable).toBe(false);
+      expect(inputNode.value).toBe('3');
+    });
+
     it('Should decrease the value', async function() {
       const downArrowNode = document.querySelector('.down-icon');
       inputNode.value = '1';
