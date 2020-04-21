@@ -1,8 +1,18 @@
 deprecated:
   - name: app-switcher
     reason: The app switcher icon has been replaced by switcher
+  - name: arrows
+    reason: The arrows icon has been replaced by arrows--vertical
   - name: back-to-top
     reason: The back-to-top icon has been replaced by up-to-top
+  - name: checkbox--undeterminate
+    reason:
+      The checkbox--undeterminate icon has been replaced by
+      checkbox--indeterminate
+  - name: checkbox--undeterminate--filled
+    reason:
+      The checkbox--undeterminate--filled icon has been replaced by
+      checkbox--indeterminate
   - name: cloud--lightning
   - name: cloud--rain
   - name: cloud--snow
@@ -10,8 +20,8 @@ deprecated:
     reason: The delete icon has been replaced by trash-can
   - name: sunny
   - name: research--bloch-sphere
-    reason: research--bloch-sphere has been replaced by bloch-sphere 
-  - name: research--hinton-plot 
+    reason: research--bloch-sphere has been replaced by bloch-sphere
+  - name: research--hinton-plot
     reason: research--hinton-plot has been replaced by hinton-plot
   - name: research--matrix
     reason: research--matrix has been replaced by matrix
