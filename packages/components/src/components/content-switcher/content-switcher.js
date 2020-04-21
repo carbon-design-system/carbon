@@ -41,18 +41,18 @@ class ContentSwitcher extends mixin(
   constructor(element, options) {
     super(element, options);
     this.manage(
-      on(this.element, 'click', event => {
-        this._handleClick(event);
+      on(this.element, 'change', event => {
+        this._handleChange(event);
       })
     );
   }
 
   /**
-   * Handles click on content switcher button set.
+   * Handles change action on content switcher button set.
    * If the click is on a content switcher button, activates it.
    * @param {Event} event The event triggering this method.
    */
-  _handleClick(event) {
+  _handleChange(event) {
     const button = eventMatches(event, this.options.selectorButton);
 
     if (button) {
@@ -91,7 +91,6 @@ class ContentSwitcher extends mixin(
 
     selectorButtons.forEach(button => {
       if (button !== item) {
-        button.setAttribute('aria-selected', false);
         button.classList.toggle(this.options.classActive, false);
         toArray(
           button.ownerDocument.querySelectorAll(button.dataset.target)
@@ -103,7 +102,7 @@ class ContentSwitcher extends mixin(
     });
 
     item.classList.toggle(this.options.classActive, true);
-    item.setAttribute('aria-selected', true);
+    item.checked = true;
     toArray(item.ownerDocument.querySelectorAll(item.dataset.target)).forEach(
       element => {
         element.removeAttribute('hidden');
