@@ -10,10 +10,8 @@
 'use strict';
 
 describe('deprecated', () => {
-  let Registry;
-  let Storage;
+  let Metadata;
   let extension;
-  let validate;
   let vol;
   let yml;
 
@@ -24,10 +22,8 @@ describe('deprecated', () => {
       return memfs.fs;
     });
 
-    Registry = require('../../../registry');
-    Storage = require('../../storage');
+    Metadata = require('../../');
     extension = require('../deprecated');
-    validate = require('../../validate');
     yml = require('../../adapters').yml;
   });
 
@@ -36,10 +32,9 @@ describe('deprecated', () => {
   });
 
   it('should throw an error if a deprecated icon is not in the registry', async () => {
-    const filename = yml.getFilenameFor(extension.name);
     const files = {
       '/svg/a.svg': 'mock',
-      [`/${filename}`]: yml.serialize({
+      [`/${extension.name}.yml`]: yml.serialize({
         deprecated: [
           {
             name: 'a',
@@ -52,10 +47,14 @@ describe('deprecated', () => {
     };
     vol.fromJSON(files);
 
-    const registry = await Registry.create('/svg');
-    const extensions = await Storage.load(yml, '/', [extension]);
-    expect(() => {
-      validate(registry, extensions);
-    }).toThrow();
+    await expect(
+      Metadata.check({
+        adapter: yml,
+        input: '/',
+        extensions: [extension],
+      })
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `"Expected the deprecated icon \`b\` to exist. Either this icon does not exist, or is not available in the given SVG directory"`
+    );
   });
 });

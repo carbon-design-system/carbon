@@ -80,7 +80,7 @@ const TableToolbarSearch = ({
   const handleExpand = (event, value = !expanded) => {
     if (!controlled && (!persistent || (!persistent && !persistant))) {
       setExpandedState(value);
-      if (value) {
+      if (value && !expanded) {
         setFocusTarget(searchRef);
       }
     }
