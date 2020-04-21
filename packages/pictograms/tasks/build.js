@@ -25,13 +25,11 @@ async function build() {
     ],
   });
 
-  console.log(metadata.icons[0]);
-
-  return;
-
-  await builders.vanilla.run(metadata, {
-    output: path.resolve(__dirname, '../'),
-  });
+  const output = path.resolve(__dirname, '../');
+  await Promise.all([
+    builders.svg.run(metadata, { output }),
+    builders.vanilla.run(metadata, { output }),
+  ]);
 }
 
 build().catch(error => {
