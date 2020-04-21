@@ -7,25 +7,28 @@ import { textInputProps } from './util';
 
 const { prefix } = settings;
 
-export default function PasswordInput({
-  labelText,
-  className,
-  id,
-  placeholder,
-  onChange,
-  onClick,
-  hideLabel,
-  invalid,
-  invalidText,
-  helperText,
-  light,
-  tooltipPosition = 'bottom',
-  tooltipAlignment = 'center',
-  hidePasswordLabel = 'Hide password',
-  showPasswordLabel = 'Show password',
-  size,
-  ...other
-}) {
+const PasswordInput = React.forwardRef(function PasswordInput(
+  {
+    labelText,
+    className,
+    id,
+    placeholder,
+    onChange,
+    onClick,
+    hideLabel,
+    invalid,
+    invalidText,
+    helperText,
+    light,
+    tooltipPosition = 'bottom',
+    tooltipAlignment = 'center',
+    hidePasswordLabel = 'Hide password',
+    showPasswordLabel = 'Show password',
+    size,
+    ...other
+  },
+  ref
+) {
   const [inputType, setInputType] = useState('password');
   const togglePasswordVisibility = () =>
     setInputType(inputType === 'password' ? 'text' : 'password');
@@ -55,6 +58,7 @@ export default function PasswordInput({
     placeholder,
     type: inputType,
     className: textInputClasses,
+    ref,
     ...other,
   };
   const labelClasses = classNames(`${prefix}--label`, {
@@ -127,7 +131,7 @@ export default function PasswordInput({
       {error}
     </div>
   );
-}
+});
 
 PasswordInput.propTypes = {
   /**
@@ -243,3 +247,5 @@ PasswordInput.defaultProps = {
   light: false,
   size: '',
 };
+
+export default PasswordInput;
