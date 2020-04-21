@@ -5,5 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './FluidForm';
-export { FormContext } from './FormContext';
+import { createContext } from 'react';
+
+export const FormContext = createContext({
+  isFluid: false,
+});
