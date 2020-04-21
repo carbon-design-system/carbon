@@ -89,6 +89,10 @@
     display: block;
   }
 
+  .#{$prefix}--form--fluid .#{$prefix}--fieldset {
+    margin: 0;
+  }
+
   .#{$prefix}--form--fluid input[data-invalid] {
     outline: none;
   }

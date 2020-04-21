@@ -11,9 +11,6 @@ import { action } from '@storybook/addon-actions';
 
 import { withKnobs } from '@storybook/addon-knobs';
 import FluidForm from '../FluidForm';
-import FormGroup from '../FormGroup';
-import Button from '../Button';
-
 import TextInput from '../TextInput';
 
 const additionalProps = {
@@ -31,12 +28,6 @@ const TextInputProps = {
   placeholder: 'Placeholder text',
 };
 
-const PasswordProps = {
-  className: 'some-class',
-  id: 'test3',
-  labelText: 'Password',
-};
-
 const InvalidPasswordProps = {
   className: 'some-class',
   id: 'test4',
@@ -46,26 +37,13 @@ const InvalidPasswordProps = {
     'Your password must be at least 6 characters as well as contain at least one uppercase, one lowercase, and one number.',
 };
 
-const buttonEvents = {
-  className: 'some-class',
-};
-
 storiesOf('FluidForm', module)
   .addDecorator(withKnobs)
   .add(
     'Default',
     () => (
       <FluidForm {...additionalProps}>
-        <FormGroup>
-          <TextInput {...TextInputProps} />
-
-          <TextInput
-            type="password"
-            required
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-            {...PasswordProps}
-          />
-        </FormGroup>
+        <TextInput {...TextInputProps} />
 
         <TextInput
           type="password"
@@ -73,10 +51,6 @@ storiesOf('FluidForm', module)
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
           {...InvalidPasswordProps}
         />
-
-        <Button type="submit" className="some-class" {...buttonEvents}>
-          Submit
-        </Button>
       </FluidForm>
     ),
     {
