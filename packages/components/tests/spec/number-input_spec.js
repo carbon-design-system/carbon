@@ -116,6 +116,18 @@ describe('Test Number Input', function() {
       expect(inputNode.value).toBe('1');
     });
 
+    it('Should increase the value by the step amount', async function() {
+      inputNode.step = 5;
+      const upArrowNode = document.querySelector('.up-icon');
+      const e = await new Promise(resolve => {
+        events.on(document.body, 'change', resolve);
+        upArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      });
+      await delay(0);
+      expect(e.cancelable).toBe(false);
+      expect(inputNode.value).toBe('5');
+    });
+
     it('Should not increase the value past the max', async function() {
       inputNode.step = 5;
       inputNode.max = 3;
@@ -132,6 +144,21 @@ describe('Test Number Input', function() {
     it('Should decrease the value', async function() {
       const downArrowNode = document.querySelector('.down-icon');
       inputNode.value = '1';
+      const e = await new Promise(resolve => {
+        events.on(document.body, 'change', resolve);
+        downArrowNode.dispatchEvent(
+          new CustomEvent('click', { bubbles: true })
+        );
+      });
+      await delay(0);
+      expect(e.cancelable).toBe(false);
+      expect(inputNode.value).toBe('0');
+    });
+
+    it('Should decrease the value by the step amount', async function() {
+      inputNode.value = 5;
+      inputNode.step = 5;
+      const downArrowNode = document.querySelector('.down-icon');
       const e = await new Promise(resolve => {
         events.on(document.body, 'change', resolve);
         downArrowNode.dispatchEvent(
