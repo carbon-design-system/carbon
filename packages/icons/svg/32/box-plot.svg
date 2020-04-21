@@ -1,0 +1,13 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <title>box-plot</title>
+  <path d="M22,6V4H12V6h4V8H12V20h4v2H12v2H22V22H18V20h4V8H18V6ZM14,18V15h6v3Zm6-5H14V10h6Z"/>
+  <path d="M30,30H4a2,2,0,0,1-2-2V2H4V28H30Z"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>
