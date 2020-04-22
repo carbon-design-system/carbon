@@ -39,16 +39,18 @@ describe('MultiSelect', () => {
     const wrapper = mount(
       <MultiSelect id="test-multiselect" label="Field" items={items} />
     );
-    expect(wrapper.find('Selection').instance().state.selectedItems).toEqual(
-      []
-    );
+
+    expect(wrapper.find('Selection')).toEqual({});
   });
+
   it('should initialize with the menu not open', () => {
     const items = generateItems(5, generateGenericItem);
     const wrapper = mount(
       <MultiSelect id="test-multiselect" label="Field" items={items} />
     );
-    expect(wrapper.state('isOpen')).toEqual(false);
+    expect(
+      wrapper.find({ role: 'listbox' }).children({ role: 'option' })
+    ).toBeFalsy();
   });
 
   it('should initialize with the menu open', () => {
@@ -56,7 +58,10 @@ describe('MultiSelect', () => {
     const wrapper = mount(
       <MultiSelect id="test-multiselect" label="Field" items={items} open />
     );
-    expect(wrapper.state('isOpen')).toEqual(true);
+
+    expect(
+      wrapper.find({ role: 'listbox' }).children({ role: 'option' })
+    ).toBeTruthy();
   });
 
   describe('#handleOnToggleMenu', () => {
@@ -65,11 +70,28 @@ describe('MultiSelect', () => {
       const wrapper = mount(
         <MultiSelect id="test-multiselect" label="Field" items={items} />
       );
-      expect(wrapper.state('isOpen')).toBe(false);
+
+      expect(
+        wrapper
+          .find({ role: 'listbox' })
+          .containsMatchingElement({ role: 'option' })
+      ).toBeFalsy();
+
       wrapper.find(`.${prefix}--list-box__field`).simulate('click');
-      expect(wrapper.state('isOpen')).toBe(true);
+
+      expect(
+        wrapper
+          .find({ role: 'listbox' })
+          .containsMatchingElement({ role: 'option' })
+      ).toBeTruthy();
+
       wrapper.find(`.${prefix}--list-box__field`).simulate('click');
-      expect(wrapper.state('isOpen')).toBe(false);
+
+      expect(
+        wrapper
+          .find({ role: 'listbox' })
+          .containsMatchingElement({ role: 'option' })
+      ).toBeFalsy();
     });
   });
 
@@ -84,10 +106,8 @@ describe('MultiSelect', () => {
           initialSelectedItems={[items[0], items[1]]}
         />
       );
-      expect(wrapper.find('Selection').instance().state.selectedItems).toEqual([
-        items[0],
-        items[1],
-      ]);
+
+      expect(wrapper.find({ 'aria-label': 'Clear Selection' })).toBeTruthy();
     });
   });
 
@@ -109,43 +129,38 @@ describe('MultiSelect', () => {
       const wrapper = mount(
         <MultiSelect id="test-multiselect" {...mockProps} />
       );
+      wrapper.find(`.${prefix}--list-box__field`).simulate('click');
       expect(
-        wrapper.find('Selection').instance().state.selectedItems.length
+        wrapper.find({ 'data-contained-checkbox-state': true }).length
       ).toBe(3);
 
-      wrapper.find(`.${prefix}--list-box__field`).simulate('click');
       wrapper
-        .find(`.${prefix}--list-box__menu-item`)
+        .find({ 'data-contained-checkbox-state': true })
         .at(0)
         .simulate('click');
 
       expect(
-        wrapper.find('Selection').instance().state.selectedItems.length
+        wrapper.find({ 'data-contained-checkbox-state': true }).length
       ).toBe(2);
     });
 
-    it('should allow a user to de-select an initial selected item by hitting enter on initial selected item', () => {
+    it.only('should allow a user to de-select an initial selected item by hitting enter on initial selected item', () => {
       const wrapper = mount(
         <MultiSelect id="test-multiselect" {...mockProps} />
       );
-      const simulateArrowDown = wrapper =>
-        wrapper.find(`.${prefix}--list-box__field`).simulate('keydown', {
-          key: 'ArrowDown',
-        });
+
+      openMenu(wrapper);
 
       expect(
-        wrapper.find('Selection').instance().state.selectedItems.length
+        wrapper.find({ 'data-contained-checkbox-state': true }).length
       ).toBe(3);
-      openMenu(wrapper);
-      simulateArrowDown(wrapper);
-      wrapper
-        .find(`.${prefix}--list-box__field`)
-        .at(0)
-        .simulate('keydown', {
-          key: 'Enter',
-        });
+
+      wrapper.find('bx--list-box__menu-item--active').simulate('keydown', {
+        key: 'Enter',
+      });
+
       expect(
-        wrapper.find('Selection').instance().state.selectedItems.length
+        wrapper.find({ 'data-contained-checkbox-state': true }).length
       ).toBe(2);
     });
 
