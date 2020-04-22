@@ -26847,6 +26847,7 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav--fixed
+    .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--icon)
     .#{$prefix}--side-nav__menu
     a.#{$prefix}--side-nav__link {
     padding-left: mini-units(4);
