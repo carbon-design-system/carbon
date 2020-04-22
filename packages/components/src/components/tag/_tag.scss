@@ -126,6 +126,14 @@
     );
   }
 
+  .#{$prefix}--tag--high-contrast {
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-high-contrast'),
+      get-token-value($tag-colors, 'tag-color-high-contrast'),
+      get-token-value($tag-colors, 'tag-hover-high-contrast'),
+    );
+  }
+
   .#{$prefix}--tag--disabled,
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled {
     @include tag-theme($disabled-01, $disabled-02);
