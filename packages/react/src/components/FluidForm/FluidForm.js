@@ -36,11 +36,6 @@ FluidForm.propTypes = {
    * Provide a custom className to be applied on the containing <form> node
    */
   className: PropTypes.string,
-
-  /**
-   * `true` to use fluid variation of input field.
-   */
-  fluid: PropTypes.bool,
 };
 
 export default FluidForm;

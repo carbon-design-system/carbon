@@ -218,7 +218,7 @@
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input__invalid-icon {
-    top: 80px;
+    top: rem(80px);
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--light {
