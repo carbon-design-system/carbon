@@ -141,6 +141,64 @@ describe('Test Number Input', function() {
       expect(inputNode.value).toBe('3');
     });
 
+    it('Should ignore increment when current value is above maximum', async function() {
+      inputNode.value = 1000;
+      inputNode.step = 10;
+      inputNode.max = 100;
+      const upArrowNode = document.querySelector('.up-icon');
+      const e = await new Promise(resolve => {
+        events.on(document.body, 'change', resolve);
+        upArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      });
+      await delay(0);
+      expect(e.cancelable).toBe(false);
+      expect(inputNode.value).toBe('1000');
+    });
+
+    it('Should set value to maximum on decrement when current value is above maximum', async function() {
+      inputNode.value = inputNode.max + 1;
+      inputNode.step = 10;
+      const downArrowNode = document.querySelector('.down-icon');
+      const e = await new Promise(resolve => {
+        events.on(document.body, 'change', resolve);
+        downArrowNode.dispatchEvent(
+          new CustomEvent('click', { bubbles: true })
+        );
+      });
+      await delay(0);
+      expect(e.cancelable).toBe(false);
+      expect(inputNode.value).toBe(inputNode.max);
+    });
+
+    it('Should ignore decrement when current value is below minimum', async function() {
+      inputNode.value = -100;
+      inputNode.step = 10;
+      inputNode.min = 0;
+      const downArrowNode = document.querySelector('.down-icon');
+      const e = await new Promise(resolve => {
+        events.on(document.body, 'change', resolve);
+        downArrowNode.dispatchEvent(
+          new CustomEvent('click', { bubbles: true })
+        );
+      });
+      await delay(0);
+      expect(e.cancelable).toBe(false);
+      expect(inputNode.value).toBe('-100');
+    });
+
+    it('Should set value to minimum on increment when current value is below minimum', async function() {
+      inputNode.value = inputNode.min - 100;
+      inputNode.step = 10;
+      const upArrowNode = document.querySelector('.up-icon');
+      const e = await new Promise(resolve => {
+        events.on(document.body, 'change', resolve);
+        upArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      });
+      await delay(0);
+      expect(e.cancelable).toBe(false);
+      expect(inputNode.value).toBe(inputNode.min);
+    });
+
     it('Should decrease the value', async function() {
       const downArrowNode = document.querySelector('.down-icon');
       inputNode.value = '1';
