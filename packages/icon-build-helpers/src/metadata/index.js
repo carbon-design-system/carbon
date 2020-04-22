@@ -81,7 +81,7 @@ async function load({
  * @param {object} options.input The directory of source files
  * @param {object} options.output The directory for the built metadata
  * @param {Array<Extension>} [options.extensions] The extensions to load
- * @returns {Promise<void>}
+ * @returns {Promise<object>}
  */
 async function build({
   adapter = adapters.yml,
@@ -96,6 +96,8 @@ async function build({
   await fs.writeJson(metadataFilePath, metadata, {
     spaces: 2,
   });
+
+  return metadata;
 }
 
 /**
