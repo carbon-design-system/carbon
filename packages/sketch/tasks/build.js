@@ -11,25 +11,35 @@ const { Metadata } = require('@carbon/icon-build-helpers');
 const path = require('path');
 
 async function build() {
+  const icons = path.resolve(__dirname, '../../icons');
   await Metadata.build({
-    input: path.resolve(__dirname, '../../icons'),
-    output: path.resolve(__dirname, '../generated/icons'),
+    input: {
+      extensions: icons,
+      svg: path.join(icons, 'src/svg'),
+    },
+    output: {
+      extensions: path.resolve(__dirname, '../generated/icons'),
+    },
     extensions: [
       Metadata.extensions.icons,
       Metadata.extensions.assets,
-      Metadata.extensions.moduleName,
       Metadata.extensions.deprecated,
       Metadata.extensions.categories,
     ],
   });
 
+  const pictograms = path.resolve(__dirname, '../../pictograms');
   await Metadata.build({
-    input: path.resolve(__dirname, '../../pictograms'),
-    output: path.resolve(__dirname, '../generated/pictograms'),
+    input: {
+      extensions: pictograms,
+      svg: path.join(pictograms, 'src/svg'),
+    },
+    output: {
+      extensions: path.resolve(__dirname, '../generated/pictograms'),
+    },
     extensions: [
       Metadata.extensions.pictograms,
       Metadata.extensions.assets,
-      Metadata.extensions.moduleName,
       Metadata.extensions.deprecated,
       Metadata.extensions.categories,
     ],

@@ -11,7 +11,7 @@ const { builders, Metadata } = require('@carbon/icon-build-helpers');
 const path = require('path');
 
 async function build() {
-  const metadata = await Metadata.load({
+  const metadata = await Metadata.build({
     input: {
       svg: path.resolve(__dirname, '../src/svg'),
       extensions: path.resolve(__dirname, '../'),
