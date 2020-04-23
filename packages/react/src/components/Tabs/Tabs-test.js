@@ -74,6 +74,12 @@ describe('Tabs', () => {
             .hasClass(`${prefix}--tabs--container`)
         ).toBe(true);
       });
+
+      it('has no selectionMode prop', () => {
+        expect(
+          'selectionMode' in wrapper.find(`.${prefix}--tabs`).props()
+        ).toBe(false);
+      });
     });
 
     describe('Trigger (<div>)', () => {

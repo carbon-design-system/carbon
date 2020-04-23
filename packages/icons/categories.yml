@@ -83,6 +83,7 @@ categories:
           - edit--off
           - erase
           - eyedropper
+          - gradient
           - image
           - language
           - link
@@ -137,6 +138,7 @@ categories:
           - text--superscript
           - text--tracking
           - text--underline
+          - text--vertical-alignment
           - text--wrap
           - trash-can
           - unlink
@@ -204,6 +206,7 @@ categories:
           - chevron--sort--up
           - choices
           - circle-dash
+          - clean
           - collapse-all
           - collapse-categories
           - compare
@@ -222,7 +225,9 @@ categories:
           - filter--edit
           - flag
           - fork
+          - image--search
           - insert
+          - insert--page
           - jump-link
           - launch
           - login
@@ -265,12 +270,14 @@ categories:
           - send--alt--filled
           - send--filled
           - shuffle
+          - split
           - split-screen
           - tag
           - tag--edit
           - tag--group
           - translate
           - undo
+          - upgrade
           - x-axis
           - y-axis
           - z-axis
@@ -427,6 +434,7 @@ categories:
           - circle-measurement
           - cobb-angle
           - cross-reference
+          - cut-in-half
           - denominate
           - dicom--6000
           - dicom--overlay
@@ -480,6 +488,7 @@ categories:
           - study--next
           - study--previous
           - study--skip
+          - threshold
           - thumbnail-preview
           - text-annotation-toggle
           - window--auto
@@ -573,17 +582,41 @@ categories:
         members:
           - activity
           - analytics
+          - app-connectivity
           - archive
           - blockchain
+          - box-plot
           - character-patterns
+          - chart--3D
+          - chart--area
           - chart--bar
           - chart--bubble
+          - chart--candlestick
+          - chart--cluster-bar
+          - chart--custom
+          - chart--error-bar
+          - chart--error-bar--alt
+          - chart--evaluation
+          - chart--high-low
+          - chart--histogram
           - chart--line
           - chart--line--data
+          - chart--multi-line
           - chart--network
+          - chart--parallel
           - chart--pie
+          - chart--population
+          - chart--radar
+          - chart--relationship
+          - chart--ring
+          - chart--river
+          - chart--rose
           - chart--scatter
+          - chart--stacked
+          - chart--treemap
+          - chart--t-sne
           - chart--venn-diagram
+          - circle-packing
           - circle--filled
           - classifier--language
           - concept
@@ -592,6 +625,7 @@ categories:
           - data--1
           - data--2
           - data--base
+          - data--base--alt
           - data--check
           - data--connected
           - data--error
@@ -613,16 +647,25 @@ categories:
           - double-integer
           - factor
           - flow
+          - flow--connection
           - flow--data
           - flow--stream
           - graphical-data-flow
           - hashtag
+          - heat-map
+          - heat-map--02
+          - heat-map--03
           - hybrid-networking
           - improve-relevance
           - in-progress
           - interactions
           - increase-level
+          - join--inner
+          - join--left
+          - join--outer
+          - join--right
           - managed-solutions
+          - math-curve
           - model-builder
           - network--1
           - network--2
@@ -633,12 +676,20 @@ categories:
           - parent-child
           - phrase-sentiment
           - presentation-file
+          - qq-plot
           - query-queue
           - report
           - report--data
+          - row--collapse
+          - row--expand
+          - scatter-matrix
           - schematics
           - share-knowledge
           - skill-level
+          - skill-level--advanced
+          - skill-level--basic
+          - skill-level--intermediate
+          - stem-leaf-plot
           - string-integer
           - string-text
           - sys-provision
@@ -660,6 +711,7 @@ categories:
           - virtual-private-cloud--alt
           - visual-recognition
           - vmdk-disk
+          - word-cloud
       - name: File
         members:
           - 4K
@@ -745,11 +797,13 @@ categories:
           - PPT
           - product
           - RAW
+          - roadmap
           - rule
           - scale
           - script
           - SDK
           - SQL
+          - star--review
           - SVG
           - table-of-contents
           - task
@@ -804,6 +858,7 @@ categories:
           - taste
           - touch--1
           - touch--2
+          - touch--interaction
       - name: User
         members:
           - accessibility
@@ -851,6 +906,7 @@ categories:
           - user--filled
           - user--follow
           - user--identification
+          - user--multiple
           - user--online
           - user--profile
           - user--role
@@ -866,6 +922,7 @@ categories:
           - alarm--add
           - alarm--subtract
           - calendar
+          - calendar--settings
           - event
           - event--schedule
           - hourglass
@@ -881,6 +938,7 @@ categories:
           - bicycle
           - bus
           - cafe
+          - campsite
           - car
           - car--front
           - charging-station
@@ -889,6 +947,32 @@ categories:
           - cyclist
           - delivery-truck
           - departure
+          - direction--bear-right--01
+          - direction--bear-right--01--filled
+          - direction--bear-right--02
+          - direction--bear-right--02--filled
+          - direction--curve
+          - direction--curve--filled
+          - direction--merge
+          - direction--merge--filled
+          - direction--right--01
+          - direction--right--01--filled
+          - direction--right--02
+          - direction--right--02--filled
+          - direction--rotary--first-right
+          - direction--rotary--first-right--filled
+          - direction--rotary--right
+          - direction--rotary--right--filled
+          - direction--rotary--straight
+          - direction--rotary--straight--filled
+          - direction--sharp-turn
+          - direction--sharp-turn--filled
+          - direction--straight
+          - direction--straight--filled
+          - direction--straight--right
+          - direction--straight--right--filled
+          - direction--u-turn
+          - direction--u-turn--filled
           - earth
           - earth--americas
           - earth--americas--filled
@@ -897,25 +981,42 @@ categories:
           - earth--filled
           - earth--southeast-asia
           - earth--southeast-asia--filled
+          - fire
           - flagging-taxi
+          - gas-station
           - globe
+          - harbor
+          - helicopter
           - help-desk
+          - hospital
+          - hospital-bed
           - hotel
           - location
           - map
+          - milestone
+          - monument
+          - mountain
           - pedestrian
           - pedestrian-child
+          - picnic-area
           - plane
+          - police
           - restaurant
           - restaurant--fine
           - scooter
           - scooter--front
           - service-desk
           - shuttle
+          - swim
           - taxi
+          - theater
           - train
           - tram
           - van
+          - worship
+          - worship--christian
+          - worship--jewish
+          - worship--muslim
       - name: Weather
         members:
           - cloud
@@ -923,11 +1024,14 @@ categories:
           - cloud--rain
           - cloud--snow
           - cloudy
+          - dew-point
+          - dew-point--filled
           - fog
           - hail
           - haze
           - haze--night
           - humidity
+          - humidity--alt
           - hurricane
           - lightning
           - mixed-rain-hail
@@ -937,6 +1041,8 @@ categories:
           - not-available
           - partly-cloudy
           - partly-cloudy--night
+          - pressure
+          - pressure--filled
           - rain
           - rain--drizzle
           - rain--heavy
@@ -965,6 +1071,8 @@ categories:
           - thunderstorm--strong
           - tornado
           - tropical-storm
+          - uv-index
+          - uv-index--filled
           - windy
           - windy--dust
           - windy--snow
@@ -988,6 +1096,7 @@ categories:
           - blog
           - bluetooth
           - bluetooth--off
+          - bot
           - building--insights-1
           - building--insights-2
           - building--insights-3
@@ -1027,6 +1136,7 @@ categories:
           - logo--vmware
           - machine-learning
           - mail--all
+          - mail--reply
           - mobile
           - mobile--add
           - mobile--audio
@@ -1034,6 +1144,8 @@ categories:
           - mobile--download
           - mobile--landscape
           - password
+          - plug
+          - plug--filled
           - printer
           - qr-code
           - radio
@@ -1059,11 +1171,14 @@ categories:
           - cursor--1
           - cursor--2
           - meter
+          - meter--alt
           - microscope
           - portfolio
           - ruler
           - ruler--alt
           - scalpel
           - stamp
+          - stethoscope
           - tool-box
           - tools
+          - umbrella
