@@ -14,13 +14,11 @@
  */
 export default function requiredIfGivenPropExists(name, propType) {
   return function check(props, propName, componentName, ...rest) {
-    if (props[name] && props[propName]) {
-      return propType(props, propName, componentName, ...rest);
-    }
-    if (__DEV__ && props[name]) {
+    if (__DEV__ && props[name] == true && props[propName] == null) {
       return new Error(
         `You must provide a value for \`${propName}\` in \`${componentName}\` if \`${name}\` exists.`
       );
     }
+    return propType(props, propName, componentName, ...rest);
   };
 }
