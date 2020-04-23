@@ -85,9 +85,9 @@
     .#{$prefix}--text-input__invalid-icon--warning {
       fill: $support-03;
 
-      path[data-icon-path="inner-path"] {
+      path[data-icon-path='inner-path'] {
         opacity: 1;
-        fill: $icon-01;
+        fill: $carbon__black-100;
       }
     }
 

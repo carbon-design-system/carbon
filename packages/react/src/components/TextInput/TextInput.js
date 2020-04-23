@@ -83,13 +83,23 @@ const TextInput = React.forwardRef(function TextInput(
     );
   } else if (warn) {
     error = (
-      <div className={`${prefix}--form-requirement ${prefix}--form-requirement--warning`} id={warnId}>
+      <div
+        className={`${prefix}--form-requirement ${prefix}--form-requirement--warning`}
+        id={warnId}>
         {warnText}
       </div>
     );
   }
   const input = (
-    <input {...textInputProps({ invalid, sharedTextInputProps, errorId, warn, warnId })} />
+    <input
+      {...textInputProps({
+        invalid,
+        sharedTextInputProps,
+        errorId,
+        warn,
+        warnId,
+      })}
+    />
   );
   const helper = helperText ? (
     <div className={helperTextClasses}>{helperText}</div>
@@ -106,7 +116,9 @@ const TextInput = React.forwardRef(function TextInput(
           <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
         )}
         {!invalid && warn && (
-          <WarningFilled16 className={`${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`} />
+          <WarningFilled16
+            className={`${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`}
+          />
         )}
         {input}
       </div>
