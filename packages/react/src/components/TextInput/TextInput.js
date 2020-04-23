@@ -89,7 +89,7 @@ const TextInput = React.forwardRef(function TextInput(
     );
   }
   const input = (
-    <input {...textInputProps({ invalid, sharedTextInputProps, errorId })} />
+    <input {...textInputProps({ invalid, sharedTextInputProps, errorId, warn, warnId })} />
   );
   const helper = helperText ? (
     <div className={helperTextClasses}>{helperText}</div>
