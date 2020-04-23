@@ -10,7 +10,10 @@
 const { pascalCase } = require('change-case');
 
 /**
- *
+ * @param {string} name
+ * @param {(string | 'glyph')} [size]
+ * @param {Array<string>} [namespace]
+ * @returns {string}
  */
 function getModuleName(name, size, namespace = []) {
   let moduleName = namespace
@@ -21,7 +24,11 @@ function getModuleName(name, size, namespace = []) {
   moduleName = moduleName + pascalCase(name);
 
   if (size) {
-    moduleName = moduleName + size;
+    if (size === 'glyph') {
+      moduleName = moduleName + 'Glyph';
+    } else {
+      moduleName = moduleName + size;
+    }
   }
 
   if (!isNaN(moduleName[0])) {
@@ -29,44 +36,6 @@ function getModuleName(name, size, namespace = []) {
   }
 
   return moduleName;
-
-  const width = parseInt(descriptor.attrs.width, 10);
-  const height = parseInt(descriptor.attrs.height, 10);
-  let prefix = namespace
-    .filter(size => isNaN(size))
-    .map(pascalCase)
-    .join('');
-  const isGlyph = width < 16 || height < 16;
-  const isPictogram = width > 32 || height > 32;
-
-  if (prefix !== '') {
-    if (prefix.match(/^\d/)) {
-      prefix = '_' + prefix;
-    }
-    if (!size) {
-      if (isGlyph) {
-        return prefix + pascalCase(name) + 'Glyph';
-      }
-      return prefix + pascalCase(name);
-    }
-    return prefix + pascalCase(name) + size;
-  }
-
-  if (!size) {
-    if (isGlyph) {
-      return pascalCase(name) + 'Glyph';
-    }
-    if (isNaN(name[0])) {
-      return pascalCase(name);
-    }
-    return '_' + pascalCase(name);
-  }
-
-  if (isNaN(name[0])) {
-    return pascalCase(name) + size;
-  }
-
-  return '_' + pascalCase(name) + size;
 }
 
 module.exports = {
