@@ -176,12 +176,12 @@ function createIconComponent(moduleName, descriptor, isDeprecated = false) {
   const source = `
     ${deprecatedTopLevel}
     const ${moduleName} = /*#__PURE__*/ React.forwardRef(
-      function ${moduleName}(props, ref) {
+      function ${moduleName}({ children, ...rest }, ref) {
         ${deprecatedBlock}
         return (
-          <Icon width={${width}} height={${height}} viewBox="${viewBox}" ref={ref} {...props}>
+          <Icon width={${width}} height={${height}} viewBox="${viewBox}" ref={ref} {...rest}>
             ${content.map(convertToJSX).join('\n')}
-            {props.children}
+            {children}
           </Icon>
         );
       }
