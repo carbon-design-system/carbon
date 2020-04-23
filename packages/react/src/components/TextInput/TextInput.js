@@ -27,6 +27,8 @@ const TextInput = React.forwardRef(function TextInput(
     hideLabel,
     invalid,
     invalidText,
+    warn,
+    warnText,
     helperText,
     light,
     size,
@@ -35,6 +37,7 @@ const TextInput = React.forwardRef(function TextInput(
   ref
 ) {
   const errorId = id + '-error-msg';
+  const warnId = id + '-warn-msg';
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,
     [`${prefix}--text-input--invalid`]: invalid,
@@ -71,11 +74,20 @@ const TextInput = React.forwardRef(function TextInput(
       {labelText}
     </label>
   ) : null;
-  const error = invalid ? (
-    <div className={`${prefix}--form-requirement`} id={errorId}>
-      {invalidText}
-    </div>
-  ) : null;
+  let error = null;
+  if (invalid) {
+    error = (
+      <div className={`${prefix}--form-requirement`} id={errorId}>
+        {invalidText}
+      </div>
+    );
+  } else if (warn) {
+    error = (
+      <div className={`${prefix}--form-requirement ${prefix}--form-requirement--warning`} id={warnId}>
+        {warnText}
+      </div>
+    );
+  }
   const input = (
     <input {...textInputProps({ invalid, sharedTextInputProps, errorId })} />
   );
@@ -92,6 +104,9 @@ const TextInput = React.forwardRef(function TextInput(
         data-invalid={invalid || null}>
         {invalid && (
           <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
+        )}
+        {!invalid && warn && (
+          <WarningFilled16 className={`${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`} />
         )}
         {input}
       </div>
@@ -177,6 +192,16 @@ TextInput.propTypes = {
   invalidText: PropTypes.string,
 
   /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.string,
+
+  /**
    * Provide text that is used alongside the control label for additional help
    */
   helperText: PropTypes.node,
@@ -194,6 +219,8 @@ TextInput.defaultProps = {
   onClick: () => {},
   invalid: false,
   invalidText: '',
+  warn: false,
+  warnText: '',
   helperText: '',
   light: false,
 };

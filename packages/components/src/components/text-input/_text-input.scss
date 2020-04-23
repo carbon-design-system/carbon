@@ -82,6 +82,15 @@
       fill: $support-01;
     }
 
+    .#{$prefix}--text-input__invalid-icon--warning {
+      fill: $support-03;
+
+      path[data-icon-path="inner-path"] {
+        opacity: 1;
+        fill: $icon-01;
+      }
+    }
+
     // TODO: deprecate this style block
     .#{$prefix}--text-input--password__visibility {
       @include tooltip--trigger('icon', 'bottom');
