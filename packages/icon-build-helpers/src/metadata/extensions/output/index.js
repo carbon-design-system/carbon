@@ -8,6 +8,7 @@
 'use strict';
 
 const assets = require('../assets');
+const icons = require('../icons');
 const { svgo } = require('./optimizer');
 const { getModuleName } = require('./getModuleName');
 
@@ -26,7 +27,6 @@ const output = (options = defaultOptions) => {
   return {
     name: 'output',
     computed: true,
-    before: [assets],
     async extend(metadata, _data) {
       for (const icon of metadata.icons) {
         for (const asset of icon.assets) {
@@ -49,7 +49,7 @@ const output = (options = defaultOptions) => {
                 icon.namespace,
                 descriptor
               ),
-              filepath: [...icon.namespace, `${icon.name}.js`].join('/'),
+              filepath: [...icon.namespace, `${icon.name}/index.js`].join('/'),
               descriptor,
             },
           ];
@@ -84,6 +84,21 @@ const output = (options = defaultOptions) => {
             };
           })
         );
+
+        // Handle glyph sizes that may not be one of our predetermined sizes
+        const hasGlyphAsset = icon.sizes.find(size => size === 'glyph');
+        if (hasGlyphAsset) {
+          const asset = icon.assets.find(asset => !asset.size);
+          icon.output.push({
+            descriptor: await createDescriptor(
+              icon.name,
+              asset.optimized.data,
+              'glyph'
+            ),
+            moduleName: getModuleName(icon.name, 'glyph', icon.namespace),
+            filepath: [...icon.namespace, icon.name, 'glyph.js'].join('/'),
+          });
+        }
       }
     },
   };
@@ -105,11 +120,13 @@ async function createDescriptor(name, data, size, original) {
 
   if (size) {
     descriptor.size = size;
-    descriptor.attrs.width = size;
-    descriptor.attrs.height = size;
-    descriptor.attrs.viewBox = original
-      ? `0 0 ${original} ${original}`
-      : `0 0 ${size} ${size}`;
+    if (size !== 'glyph') {
+      descriptor.attrs.width = size;
+      descriptor.attrs.height = size;
+      descriptor.attrs.viewBox = original
+        ? `0 0 ${original} ${original}`
+        : `0 0 ${size} ${size}`;
+    }
   } else {
     const [width, height] = info.attrs.viewBox.split(' ').slice(2);
     descriptor.attrs.width = width;
