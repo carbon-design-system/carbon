@@ -11,37 +11,73 @@
 
 const { getModuleName } = require('../getModuleName');
 
-// Size
-// Size in beginning
-// Icon vs pictogram vs glyph
-// namespace
-// preferred??
-
 const cases = [
   [
-    'test one',
+    'without size',
     {
       name: 'test',
-      size: 16,
       namespace: [],
-      descriptor: {
-        attrs: {
-          width: 16,
-          height: 16,
-        },
-      },
     },
-    'Test16',
+    'Test',
+  ],
+  [
+    'with size',
+    {
+      name: 'test',
+      size: '32',
+      namespace: [],
+    },
+    'Test32',
+  ],
+  [
+    'with namespce',
+    {
+      name: 'test',
+      size: '32',
+      namespace: ['acme'],
+    },
+    'AcmeTest32',
+  ],
+  [
+    'with kebab-case',
+    {
+      name: 'test-foo-bar',
+      size: '32',
+      namespace: [],
+    },
+    'TestFooBar32',
+  ],
+  [
+    'with variant',
+    {
+      name: 'test--foo',
+      size: '32',
+      namespace: [],
+    },
+    'TestFoo32',
+  ],
+  [
+    'with invalid identifier as first character',
+    {
+      name: '1-test',
+      size: '32',
+      namespace: [],
+    },
+    '_1Test32',
+  ],
+  [
+    'with glyph',
+    {
+      name: 'test',
+      size: 'glyph',
+      namespace: [],
+    },
+    'TestGlyph',
   ],
 ];
 
 test.each(cases)('%s', (_name, options, expected) => {
-  // expect(
-  // getModuleName(
-  // options.name,
-  // options.size,
-  // options.namespace,
-  // options.descriptor
-  // )
-  // ).toBe(expected);
+  expect(getModuleName(options.name, options.size, options.namespace)).toBe(
+    expected
+  );
 });
