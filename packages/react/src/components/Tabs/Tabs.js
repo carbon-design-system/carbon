@@ -227,6 +227,7 @@ export default class Tabs extends React.Component {
       role,
       type,
       onSelectionChange,
+      selectionMode, // eslint-disable-line no-unused-vars
       tabContentClassName,
       ...other
     } = this.props;

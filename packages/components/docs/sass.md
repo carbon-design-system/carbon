@@ -7198,7 +7198,6 @@ $field-02: if(
   - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
-  - [tile [mixin]](#tile-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
 
 ### ✅inverse-01 [variable]
@@ -23154,32 +23153,6 @@ Tabs styles
     padding: $carbon--spacing-05;
   }
 
-  .#{$prefix}--tabs--container
-    ~ .#{$prefix}--tab-content
-    .#{$prefix}--text-input,
-  .#{$prefix}--tabs--container
-    ~ .#{$prefix}--tab-content
-    .#{$prefix}--text-area,
-  .#{$prefix}--tabs--container
-    ~ .#{$prefix}--tab-content
-    .#{$prefix}--search-input,
-  .#{$prefix}--tabs--container
-    ~ .#{$prefix}--tab-content
-    .#{$prefix}--select-input,
-  .#{$prefix}--tabs--container ~ .#{$prefix}--tab-content .#{$prefix}--dropdown,
-  .#{$prefix}--tabs--container
-    ~ .#{$prefix}--tab-content
-    .#{$prefix}--dropdown-list,
-  .#{$prefix}--tabs--container
-    ~ .#{$prefix}--tab-content
-    .#{$prefix}--number
-    input[type='number'],
-  .#{$prefix}--tabs--container
-    ~ .#{$prefix}--tab-content
-    .#{$prefix}--date-picker__input {
-    background-color: $field-02;
-  }
-
   //-----------------------------
   // Skeleton state
   //-----------------------------
@@ -23789,17 +23762,6 @@ Tile styles
     }
   }
 
-  .#{$prefix}--tile .#{$prefix}--text-input,
-  .#{$prefix}--tile .#{$prefix}--text-area,
-  .#{$prefix}--tile .#{$prefix}--search-input,
-  .#{$prefix}--tile .#{$prefix}--select-input,
-  .#{$prefix}--tile .#{$prefix}--dropdown,
-  .#{$prefix}--tile .#{$prefix}--dropdown-list,
-  .#{$prefix}--tile .#{$prefix}--number input[type='number'],
-  .#{$prefix}--tile .#{$prefix}--date-picker__input {
-    background-color: $field-02;
-  }
-
   .#{$prefix}--tile--light {
     background-color: $ui-02;
   }
@@ -23968,7 +23930,6 @@ Tile styles
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
-  - [field-02 [variable]](#field-02-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [text-01 [variable]](#text-01-variable)

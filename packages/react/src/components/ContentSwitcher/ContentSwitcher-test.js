@@ -40,6 +40,10 @@ describe('ContentSwitcher', () => {
     it('should apply extra classes passed to it', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
+
+    it('should not have a selectionMode prop', () => {
+      expect('selectionMode' in wrapper.props()).toEqual(false);
+    });
   });
 
   describe('Allow initial state to draw from props', () => {
