@@ -112,6 +112,7 @@ export default class ContentSwitcher extends React.Component {
       children,
       className,
       selectedIndex, // eslint-disable-line no-unused-vars
+      selectionMode, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
 
