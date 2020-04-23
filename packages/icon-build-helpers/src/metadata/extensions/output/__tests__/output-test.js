@@ -9,11 +9,10 @@
 
 'use strict';
 
-describe('categories', () => {
+describe('output', () => {
   let Metadata;
   let extension;
   let vol;
-  let yml;
 
   beforeEach(() => {
     jest.mock('fs', () => {
@@ -41,4 +40,8 @@ describe('categories', () => {
     // extensions: [extension],
     // });
   });
+
+  // no size
+  // icons
+  // glyph
 });
