@@ -128,9 +128,9 @@
 
   .#{$prefix}--tag--high-contrast {
     @include tag-theme(
-      get-token-value($tag-colors, 'tag-background-high-contrast'),
-      get-token-value($tag-colors, 'tag-color-high-contrast'),
-      get-token-value($tag-colors, 'tag-hover-high-contrast'),
+      $inverse-02,
+      $inverse-01,
+      $inverse-hover-ui,
     );
   }
 
