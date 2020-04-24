@@ -21602,6 +21602,7 @@ Progress indicator styles
   //DISABLED STYLING
   .#{$prefix}--progress-step--disabled {
     cursor: not-allowed;
+    pointer-events: none;
 
     svg {
       fill: $disabled;
