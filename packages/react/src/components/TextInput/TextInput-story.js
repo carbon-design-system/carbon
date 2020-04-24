@@ -25,23 +25,26 @@ const sizes = {
   'Small size (sm)': 'sm',
 };
 
-function ControlledPasswordInputApp(props) {
-  const [type, setType] = useState('password');
-  const togglePasswordVisibility = () => {
-    setType(type === 'password' ? 'text' : 'password');
-  };
-  return (
-    <>
-      <TextInput.ControlledPasswordInput
-        type={type}
-        togglePasswordVisibility={togglePasswordVisibility}
-        {...props}
-      />
-      <button onClick={() => setType('text')}>Show password</button>
-      <button onClick={() => setType('password')}>Hide password</button>
-    </>
-  );
-}
+const ControlledPasswordInputApp = React.forwardRef(
+  function ControlledPasswordInputApp(props, ref) {
+    const [type, setType] = useState('password');
+    const togglePasswordVisibility = () => {
+      setType(type === 'password' ? 'text' : 'password');
+    };
+    return (
+      <>
+        <TextInput.ControlledPasswordInput
+          type={type}
+          togglePasswordVisibility={togglePasswordVisibility}
+          ref={ref}
+          {...props}
+        />
+        <button onClick={() => setType('text')}>Show password</button>
+        <button onClick={() => setType('password')}>Hide password</button>
+      </>
+    );
+  }
+);
 
 const props = {
   TextInputProps: () => ({
