@@ -1,0 +1,12 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <title>direction--bear-right</title>
+  <path d="M12,4V6h6.5859L12.05,12.5356a6.954,6.954,0,0,0-2.05,4.95V28h2V17.4854A4.9683,4.9683,0,0,1,13.4644,13.95L20,7.4141V14h2V4Z"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>
