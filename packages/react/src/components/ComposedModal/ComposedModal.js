@@ -208,11 +208,11 @@ export default class ComposedModal extends Component {
 
     const childrenWithProps = React.Children.toArray(children).map(child => {
       switch (child.type) {
-        case ModalHeader:
+        case React.createElement(ModalHeader).type:
           return React.cloneElement(child, {
             closeModal: this.closeModal,
           });
-        case ModalFooter:
+        case React.createElement(ModalFooter).type:
           return React.cloneElement(child, {
             closeModal: this.closeModal,
             inputref: this.button,
