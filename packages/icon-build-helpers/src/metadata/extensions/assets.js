@@ -9,7 +9,6 @@
 
 const fs = require('fs-extra');
 const path = require('path');
-const icons = require('./icons');
 
 /**
  * Provide source and filepath asset information for a given icon

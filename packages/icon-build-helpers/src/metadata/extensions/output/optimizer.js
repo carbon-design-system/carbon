@@ -8,7 +8,6 @@
 'use strict';
 
 const SVGO = require('svgo');
-const svg2js = require('svgo/lib/svgo/svg2js');
 
 /**
  * Our SVGO plugin options differ a bit from the defaults, namely in the
@@ -217,17 +216,6 @@ const svgo = new SVGO({
   full: true,
   multipass: true,
 });
-
-const svg2jsAsync = (...args) =>
-  new Promise((resolve, reject) => {
-    svg2js(...args, ({ error, ...rest }) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-      resolve(rest);
-    });
-  });
 
 module.exports = {
   svgo,
