@@ -133,15 +133,17 @@ export default class ComposedModal extends Component {
   }
 
   focusButton = focusContainerElement => {
-    const primaryFocusElement = focusContainerElement.querySelector(
-      this.props.selectorPrimaryFocus
-    );
-    if (primaryFocusElement) {
-      primaryFocusElement.focus();
-      return;
-    }
-    if (this.button.current) {
-      this.button.current.focus();
+    if (focusContainerElement) {
+      const primaryFocusElement = focusContainerElement.querySelector(
+        this.props.selectorPrimaryFocus
+      );
+      if (primaryFocusElement) {
+        primaryFocusElement.focus();
+        return;
+      }
+      if (this.button.current) {
+        this.button.current.focus();
+      }
     }
   };
 
