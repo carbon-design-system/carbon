@@ -8,7 +8,7 @@
 const path = require('path');
 const { rollup } = require('rollup');
 const babel = require('rollup-plugin-babel');
-const virtual = require('../plugins/virtual');
+const virtual = require('./plugins/virtual');
 
 const BANNER = `/**
  * Copyright IBM Corp. 2016, 2020

@@ -9,7 +9,7 @@
 
 const react = require('./react/builder');
 const svg = require('./svg');
-const vanilla = require('./vanilla/builder');
+const vanilla = require('./vanilla');
 const vue = require('./vue');
 
 const builders = {

@@ -29,8 +29,12 @@ async function check({
   input,
   extensions = [defaultExtensions.icons],
 }) {
-  const registry = await Registry.create(path.join(input, 'svg'));
-  const loaded = await Storage.load(adapter, input, Extension.load(extensions));
+  const registry = await Registry.create(input.svg);
+  const loaded = await Storage.load(
+    adapter,
+    input.extensions,
+    Extension.load(extensions)
+  );
   validate(registry, loaded);
 }
 
@@ -116,10 +120,10 @@ async function scaffold({
   output = input,
   extensions = [defaultExtensions.icons],
 }) {
-  const registry = await Registry.create(path.join(input, 'svg'));
+  const registry = await Registry.create(input.svg);
   const [icons] = await Storage.load(
     adapter,
-    input,
+    input.extensions,
     Extension.load(extensions)
   );
 
@@ -149,7 +153,7 @@ async function scaffold({
     return a.name.localeCompare(b.name);
   });
 
-  await Storage.save(adapter, output, [icons]);
+  await Storage.save(adapter, output.extensions, [icons]);
 }
 
 module.exports = {
