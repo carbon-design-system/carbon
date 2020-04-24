@@ -7,8 +7,7 @@
 
 'use strict';
 
-const assets = require('../assets');
-const icons = require('../icons');
+const svg2js = require('svgo/lib/svgo/svg2js');
 const { svgo } = require('./optimizer');
 const { getModuleName } = require('./getModuleName');
 
@@ -16,6 +15,10 @@ const { getModuleName } = require('./getModuleName');
 const sizes = [32, 24, 20, 16];
 const defaultSize = 32;
 
+/**
+ * @typedef {object} OutputExtensionOptions
+ * @property {('icons' | 'pictograms')} target
+ */
 const defaultOptions = {
   target: 'icons',
 };
@@ -27,7 +30,7 @@ const output = (options = defaultOptions) => {
   return {
     name: 'output',
     computed: true,
-    async extend(metadata, _data) {
+    async extend(metadata) {
       for (const icon of metadata.icons) {
         for (const asset of icon.assets) {
           asset.optimized = await svgo.optimize(asset.source, {
@@ -105,9 +108,21 @@ const output = (options = defaultOptions) => {
 };
 
 /**
+ * Create a descriptor for the given asset data given its target size and an
+ * optional original size.
+ *
+ * Size can optionally be passed in as `undefined` or `null` for pictograms, or
+ * for modules that don't want a size set on the descriptor. It can also be set
+ * to `glyph` in order to set the exact dimensions from the data on the
+ * descriptor.
+ *
+ * In cases where we want to downsample a given icon, for example going from
+ * 32x32px to 16x16px, you can pass in the original size so that the generated
+ * viewBox attribute is correct.
+ *
  * @param {string} name
  * @param {string} data
- * @param {string} [size]
+ * @param {(string | 'glyph')} [size]
  * @param {string} [original]
  * @returns {object}
  */
@@ -136,8 +151,13 @@ async function createDescriptor(name, data, size, original) {
   return descriptor;
 }
 
-const svg2js = require('svgo/lib/svgo/svg2js');
-
+/**
+ * Attempt to parse the given svg string to an object-based representation
+ * using SVGO's svg2js
+ * @param {string} svg - the source svg for the icon
+ * @param {string} name - the name of the icon
+ * @returns {object}
+ */
 async function parse(svg, name) {
   const root = await svg2jsAsync(svg);
   try {
@@ -150,6 +170,11 @@ async function parse(svg, name) {
   }
 }
 
+/**
+ * Convert svg2js from a callback style to a Promise
+ * @param {any} args
+ * @returns {Promise}
+ */
 function svg2jsAsync(...args) {
   return new Promise((resolve, reject) => {
     svg2js(...args, ({ error, ...rest }) => {
@@ -162,6 +187,12 @@ function svg2jsAsync(...args) {
   });
 }
 
+/**
+ * Converts the data structure from svg2js to one that we can use for a
+ * descriptor
+ * @param {object} root
+ * @returns {object}
+ */
 function convert(root) {
   const { elem, attrs = {}, content } = root;
   const safeFormat = {
