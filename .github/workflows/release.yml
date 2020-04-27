@@ -24,6 +24,9 @@ jobs:
       - name: Build project
         run: yarn build
 
+      - name: Run Continuous Integration checks
+        run: yarn ci-check
+
       - name: Publish packages under the `next` dist tag
         run: yarn lerna publish from-package --dist-tag next
         env:
