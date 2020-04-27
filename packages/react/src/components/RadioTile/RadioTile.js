@@ -28,6 +28,7 @@ function RadioTile({
   id,
   onChange,
   tabIndex,
+  style,
   ...other
 }) {
   const { current: inputId } = useRef(id || uid());
@@ -68,7 +69,8 @@ function RadioTile({
         htmlFor={inputId}
         className={classes}
         tabIndex={tabIndex}
-        onKeyDown={handleOnKeyDown}>
+        onKeyDown={handleOnKeyDown}
+        style={style}>
         <span className={`${prefix}--tile__checkmark`}>
           <CheckmarkFilled />
         </span>
