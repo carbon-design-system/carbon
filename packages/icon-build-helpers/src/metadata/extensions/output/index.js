@@ -84,6 +84,7 @@ const output = (options = defaultOptions) => {
               ),
               filepath: [...icon.namespace, icon.name, `${size}.js`].join('/'),
               descriptor,
+              size,
             };
           })
         );
@@ -100,6 +101,7 @@ const output = (options = defaultOptions) => {
             ),
             moduleName: getModuleName(icon.name, 'glyph', icon.namespace),
             filepath: [...icon.namespace, icon.name, 'glyph.js'].join('/'),
+            size: 'glyph',
           });
         }
       }
@@ -141,6 +143,10 @@ async function createDescriptor(name, data, size, original) {
       descriptor.attrs.viewBox = original
         ? `0 0 ${original} ${original}`
         : `0 0 ${size} ${size}`;
+    } else {
+      const [width, height] = info.attrs.viewBox.split(' ').slice(2);
+      descriptor.attrs.width = width;
+      descriptor.attrs.height = height;
     }
   } else {
     const [width, height] = info.attrs.viewBox.split(' ').slice(2);
