@@ -118,9 +118,9 @@ AccordionItem.propTypes = {
   iconDescription: deprecate(
     PropTypes.string,
     'The `iconDescription` prop has been deprecated as it is no longer ' +
-      'required for accessibility. Feel free to remove this prop from ' +
-      '<AccordionItem>. This prop will be removed in the next major release ' +
-      'of `carbon-components-react`'
+      'required. Feel free to remove this prop from <AccordionItem>. This ' +
+      'prop will be removed in the next major release of ' +
+      '`carbon-components-react`'
   ),
 
   /**
