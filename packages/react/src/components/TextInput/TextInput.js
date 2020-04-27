@@ -104,7 +104,8 @@ const TextInput = React.forwardRef(function TextInput(
           <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
         )}
         {input}
-        <hr className={`${prefix}--text-input__divider`} />
+        {isFluid && <hr className={`${prefix}--text-input__divider`} />}
+        {/* <hr className={`${prefix}--text-input__divider`} /> */}
         {isFluid ? error : null}
       </div>
       {isFluid ? null : error}
