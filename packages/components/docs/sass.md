@@ -13630,6 +13630,7 @@ Breadcrumb styles
 ```scss
 @mixin breadcrumb() {
   .#{$prefix}--breadcrumb {
+    @include reset;
     @include type-style('body-short-01');
     display: inline;
     @include carbon--breakpoint(md) {
