@@ -632,6 +632,9 @@ Map {
       "closeModal": Object {
         "type": "func",
       },
+      "danger": Object {
+        "type": "bool",
+      },
       "onRequestClose": Object {
         "type": "func",
       },
