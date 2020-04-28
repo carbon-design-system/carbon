@@ -408,7 +408,7 @@ describe('MultiSelect', () => {
       expect(testFunction).toHaveBeenCalled();
     });
 
-    it('invalid, invalidText', () => {
+    it('should support an invalid state with invalidText that describes the field', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
 
