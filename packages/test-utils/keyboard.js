@@ -132,12 +132,68 @@ export function pressSpace(node = document.activeElement) {
     }),
   ];
 
-  if (node.tagName === 'BUTTON') {
+  if (node.tagName === 'BUTTON' || node.getAttribute('role') === 'button') {
     events.push(
       new MouseEvent('click', {
         bubbles: true,
         cancelable: true,
       })
+    );
+  }
+
+  for (const event of events) {
+    node.dispatchEvent(event);
+  }
+
+  return node;
+}
+
+export function pressArrow(node = document.activeElement, direction) {
+  let events;
+
+  if (direction === 'up') {
+    events = [
+      new KeyboardEvent('keydown', {
+        key: 'ArrowUp',
+        bubbles: true,
+        cancelable: true,
+      }),
+    ];
+  }
+
+  if (direction === 'right') {
+    events = [
+      new KeyboardEvent('keydown', {
+        key: 'ArrowRight',
+        bubbles: true,
+        cancelable: true,
+      }),
+    ];
+  }
+
+  if (direction === 'down') {
+    events = [
+      new KeyboardEvent('keydown', {
+        key: 'ArrowDown',
+        bubbles: true,
+        cancelable: true,
+      }),
+    ];
+  }
+
+  if (direction === 'left') {
+    events = [
+      new KeyboardEvent('keydown', {
+        key: 'ArrowLeft',
+        bubbles: true,
+        cancelable: true,
+      }),
+    ];
+  }
+
+  if (events === undefined) {
+    return console.error(
+      "'up', 'down', 'left', 'right' arrow direction required!"
     );
   }
 
