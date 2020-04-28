@@ -9,6 +9,7 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
+import { match, keys } from '../../internal/keyboard';
 import Tag from '../Tag';
 
 const { prefix } = settings;
@@ -34,6 +35,17 @@ const ListBoxSelection = ({
     }
     clearSelection(event);
   };
+  const handleOnKeyDown = event => {
+    event.stopPropagation();
+    if (disabled) {
+      return;
+    }
+
+    // When a user hits ENTER, we'll clear the selection
+    if (match(event, keys.Enter)) {
+      clearSelection(event);
+    }
+  };
   const description = selectionCount ? t('clear.all') : t('clear.selection');
   return (
     <Tag
@@ -41,6 +53,8 @@ const ListBoxSelection = ({
       type="high-contrast"
       filter
       onClose={handleOnClick}
+      onClick={handleOnClick}
+      onKeyDown={handleOnKeyDown}
       aria-label="Clear Selection"
       title={description}>
       {selectionCount}
