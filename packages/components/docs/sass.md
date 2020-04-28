@@ -7231,6 +7231,7 @@ $inverse-01: if(
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [tags [mixin]](#tags-mixin)
   - [tooltip--icon [mixin]](#tooltip--icon-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -7262,6 +7263,7 @@ $inverse-02: if(
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [tags [mixin]](#tags-mixin)
   - [tooltip--icon [mixin]](#tooltip--icon-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -7971,6 +7973,7 @@ $inverse-hover-ui: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [tags [mixin]](#tags-mixin)
 
 ### ✅hover-danger [variable]
 
@@ -13630,6 +13633,7 @@ Breadcrumb styles
 ```scss
 @mixin breadcrumb() {
   .#{$prefix}--breadcrumb {
+    @include reset;
     @include type-style('body-short-01');
     display: inline;
     @include carbon--breakpoint(md) {
@@ -14636,7 +14640,8 @@ Code snippet styles
   .#{$prefix}--snippet.#{$prefix}--snippet--light,
   .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--snippet-button,
   .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-btn--expand {
+    .#{$prefix}--snippet-btn--expand,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn {
     background-color: $ui-02;
   }
 
@@ -14644,7 +14649,8 @@ Code snippet styles
   .#{$prefix}--snippet.#{$prefix}--snippet--light
     .#{$prefix}--snippet-button:hover,
   .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-btn--expand:hover {
+    .#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
     background-color: $hover-ui-light;
   }
 
@@ -23354,6 +23360,10 @@ Tag styles
     );
   }
 
+  .#{$prefix}--tag--high-contrast {
+    @include tag-theme($inverse-02, $inverse-01, $inverse-hover-ui);
+  }
+
   .#{$prefix}--tag--disabled,
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled {
     @include tag-theme($disabled-01, $disabled-02);
@@ -23428,6 +23438,9 @@ Tag styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [inverse-02 [variable]](#inverse-02-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+  - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [focus [variable]](#focus-variable)
