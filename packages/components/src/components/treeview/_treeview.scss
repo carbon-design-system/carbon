@@ -1,0 +1,85 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Treeview
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/typography';
+
+/// Treeview styles
+/// @access private
+/// @group treeview
+@mixin treeview {
+  .#{$prefix}--tree {
+    overflow: hidden;
+
+    .#{$prefix}--tree-node {
+      padding-left: $spacing-05;
+      background-color: $ui-01;
+      color: $text-02;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .#{$prefix}--tree-node:focus > .#{$prefix}--tree-node__label {
+      @include focus-outline('outline');
+    }
+
+    .#{$prefix}--tree-node__label {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      min-height: rem(32px);
+
+      &:hover {
+        background-color: $hover-ui;
+      }
+    }
+
+    .#{$prefix}--tree-leaf-node {
+      display: flex;
+      padding-left: $spacing-08;
+    }
+
+    .#{$prefix}--tree-parent-node__toggle {
+      margin-right: $spacing-03;
+      padding: 0;
+      border: 0;
+      height: rem(16px);
+      width: rem(16px);
+      background-color: transparent;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:focus {
+        @include focus-outline('outline');
+      }
+    }
+
+    .#{$prefix}--tree-parent-node__toggle-icon {
+      fill: $icon-01;
+      transition: all $duration--fast-02 motion(standard, productive);
+      transform: rotate(270deg);
+    }
+
+    .#{$prefix}--tree-parent-node__toggle-icon--expanded {
+      transform: rotate(0);
+    }
+  }
+}
+
+@include exports('treeview') {
+  @include treeview;
+}
