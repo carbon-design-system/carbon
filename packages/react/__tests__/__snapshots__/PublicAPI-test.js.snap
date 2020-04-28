@@ -4832,6 +4832,7 @@ Map {
             "gray",
             "cool-gray",
             "warm-gray",
+            "high-contrast",
           ],
         ],
         "type": "oneOf",
