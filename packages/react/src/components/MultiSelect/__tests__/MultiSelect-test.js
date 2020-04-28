@@ -428,7 +428,7 @@ describe('MultiSelect', () => {
       );
     });
 
-    it('selectionFeedback', () => {
+    it('should support different feedback modes with selectionFeedback', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       // eslint-disable-next-line no-unused-vars
