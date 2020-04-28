@@ -471,6 +471,12 @@ export class ModalFooter extends Component {
     secondaryButtonText: PropTypes.string,
 
     /**
+     * Specify whether the primary button should be replaced with danger button.
+     * Note that this prop is not applied if you render primary/danger button by yourself
+     */
+    danger: PropTypes.bool,
+
+    /**
      * Specify an optional function for when the modal is requesting to be
      * closed
      */
