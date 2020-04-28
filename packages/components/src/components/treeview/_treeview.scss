@@ -51,6 +51,11 @@
       padding-left: $spacing-08;
     }
 
+    .#{$prefix}--tree-node__label__details {
+      display: flex;
+      align-items: center;
+    }
+
     .#{$prefix}--tree-parent-node__toggle {
       margin-right: $spacing-03;
       padding: 0;
@@ -76,6 +81,10 @@
 
     .#{$prefix}--tree-parent-node__toggle-icon--expanded {
       transform: rotate(0);
+    }
+
+    .#{$prefix}--tree-node__icon {
+      margin-right: $spacing-03;
     }
   }
 }

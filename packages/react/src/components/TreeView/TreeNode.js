@@ -88,7 +88,10 @@ export default function TreeNode({
         ref={currentNode}
         role="treeitem"
         tabIndex="-1">
-        <div className={`${prefix}--tree-node__label`}>{label}</div>
+        <div className={`${prefix}--tree-node__label`}>
+          {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
+          {label}
+        </div>
       </li>
     );
   }
@@ -107,8 +110,10 @@ export default function TreeNode({
           onClick={handleToggleClick}>
           <CaretDown16 className={toggleClasses} />
         </button>
-        {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
-        <span className={`${prefix}--tree-node__label--details`}>{label}</span>
+        <span className={`${prefix}--tree-node__label__details`}>
+          {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
+          {label}
+        </span>
       </div>
       {expanded && (
         <ul role="group" className={`${prefix}--tree-node__children`}>
