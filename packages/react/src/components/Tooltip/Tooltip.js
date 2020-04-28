@@ -455,7 +455,6 @@ class Tooltip extends Component {
               this._tooltipEl = node;
             }}>
             <div
-              id={tooltipId}
               className={tooltipClasses}
               {...other}
               data-floating-menu-direction={direction}
@@ -467,6 +466,7 @@ class Tooltip extends Component {
               role="tooltip">
               <span className={`${prefix}--tooltip__caret`} />
               <div
+                id={tooltipId}
                 className={`${prefix}--tooltip__content`}
                 tabIndex="-1"
                 role="dialog"
