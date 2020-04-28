@@ -322,7 +322,7 @@ describe('MultiSelect', () => {
       ).toBeInstanceOf(HTMLElement);
     });
 
-    it('should recieve a custom id', () => {
+    it('should place the given id on the ___ node when passed in as a prop', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       // eslint-disable-next-line no-unused-vars
