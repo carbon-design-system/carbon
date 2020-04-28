@@ -258,7 +258,7 @@ describe('MultiSelect', () => {
     ).toBeNull();
   });
 
-  it('clear selected items', () => {
+  it('should clear selected items when the user clicks the clear selection button', () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
     const { container } = render(
