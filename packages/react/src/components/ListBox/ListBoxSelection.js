@@ -8,9 +8,8 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Close16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
-import { match, keys } from '../../internal/keyboard';
+import Tag from '../Tag';
 
 const { prefix } = settings;
 
@@ -26,7 +25,6 @@ const ListBoxSelection = ({
   disabled,
 }) => {
   const className = cx(`${prefix}--list-box__selection`, {
-    [`${prefix}--tag--filter`]: selectionCount,
     [`${prefix}--list-box__selection--multi`]: selectionCount,
   });
   const handleOnClick = event => {
@@ -36,30 +34,17 @@ const ListBoxSelection = ({
     }
     clearSelection(event);
   };
-  const handleOnKeyDown = event => {
-    event.stopPropagation();
-    if (disabled) {
-      return;
-    }
-
-    // When a user hits ENTER, we'll clear the selection
-    if (match(event, keys.Enter)) {
-      clearSelection(event);
-    }
-  };
   const description = selectionCount ? t('clear.all') : t('clear.selection');
   return (
-    <div
-      role="button"
+    <Tag
       className={className}
-      tabIndex={disabled ? -1 : 0}
-      onClick={handleOnClick}
-      onKeyDown={handleOnKeyDown}
+      type="high-contrast"
+      filter
+      onClose={handleOnClick}
       aria-label="Clear Selection"
       title={description}>
       {selectionCount}
-      <Close16 />
-    </div>
+    </Tag>
   );
 };
 

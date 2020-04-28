@@ -388,40 +388,18 @@ $list-box-menu-width: rem(300px);
   }
 
   // Modifier for a selection to show that multiple selections have been made
-  .#{$prefix}--list-box__selection--multi {
-    @include type-style('label-01');
+  .#{$prefix}--tag.#{$prefix}--list-box__selection--multi {
     position: static;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0;
-    background-color: $inverse-02;
     height: rem(24px);
     width: auto;
-    color: $inverse-01;
-    line-height: 0;
     padding: rem(8px);
     padding-right: rem(2px); // Align with hover circle of X button
     margin-right: rem(10px);
+    margin-left: 0;
     border-radius: rem(12px);
-  }
-
-  .#{$prefix}--list-box__selection--multi > svg {
-    fill: $inverse-01;
-    margin-left: rem(4px);
-    width: rem(20px);
-    height: rem(20px);
-    padding: rem(2px);
-  }
-
-  .#{$prefix}--list-box__selection--multi > svg:hover {
-    border-radius: 50%;
-    background-color: $hover-secondary;
-  }
-
-  .#{$prefix}--list-box__selection--multi:focus,
-  .#{$prefix}--list-box__selection--multi:hover {
-    outline: none;
   }
 
   // Descendant of a `list-box` that displays a list of options to select
