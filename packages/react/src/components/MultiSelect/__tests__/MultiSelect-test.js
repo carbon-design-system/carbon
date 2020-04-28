@@ -297,7 +297,7 @@ describe('MultiSelect', () => {
   });
 
   describe('Component API', () => {
-    it('default selected items', () => {
+    it('should set the default selected items with the `initialSelectedItems` prop', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       const { container } = render(
