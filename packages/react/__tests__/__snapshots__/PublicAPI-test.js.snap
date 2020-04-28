@@ -2575,9 +2575,6 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "fluid": Object {
-        "type": "bool",
-      },
     },
   },
   "FormGroup" => Object {
