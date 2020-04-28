@@ -8,12 +8,7 @@
 
 import 'carbon-components/src/components/multi-select/_multi-select.scss';
 import { getByText, isElementVisible } from '@carbon/test-utils/dom';
-import {
-  pressEnter,
-  pressSpace,
-  pressTab,
-  pressArrow,
-} from '@carbon/test-utils/keyboard';
+import { pressEnter, pressSpace, pressTab } from '@carbon/test-utils/keyboard';
 import { render, cleanup } from '@carbon/test-utils/react';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
@@ -78,7 +73,9 @@ describe('MultiSelect', () => {
       <MultiSelect.Filterable placeholder="catdog" id="test" items={items} />
     );
 
-    pressArrow(container.querySelector('[role="button"]'), 'down');
+    Simulate.keyDown(container.querySelector('[role="button"]'), {
+      key: 'ArrowDown',
+    });
 
     expect(
       container.querySelector('[aria-expanded="true"][aria-haspopup="true"]')
@@ -192,6 +189,8 @@ describe('MultiSelect', () => {
     expect(
       container.querySelector('[aria-expanded="true"][aria-haspopup="true"]')
     ).toBeFalsy();
+
+    document.body.removeChild(button);
   });
 
   it.skip('should toggle selection with enter', () => {
@@ -370,8 +369,7 @@ describe('MultiSelect', () => {
       const label = 'test-label';
       const translateWithId = jest.fn(() => 'message');
 
-      // eslint-disable-next-line no-unused-vars
-      const { container } = render(
+      render(
         <MultiSelect
           id="custom-id"
           translateWithId={translateWithId}
