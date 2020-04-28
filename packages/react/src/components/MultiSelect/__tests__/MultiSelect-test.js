@@ -366,7 +366,7 @@ describe('MultiSelect', () => {
       expect(getByText(container, 'marky')).toBeTruthy();
     });
 
-    it('translateWithId', () => {
+    it('should support custom translation with translateWithId', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       const translateWithId = jest.fn(() => 'message');
