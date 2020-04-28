@@ -239,7 +239,6 @@ describe('MultiSelect', () => {
 
     const [item] = items;
     const itemNode = getByText(container, item.label);
-    console.log(item.label);
 
     expect(
       document.querySelector('[aria-selected="true"][role="option"]')
