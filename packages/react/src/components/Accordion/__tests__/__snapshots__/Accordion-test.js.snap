@@ -22,7 +22,7 @@ exports[`Accordion should render 1`] = `
           className="bx--accordion__heading"
           onClick={[Function]}
           onKeyDown={[Function]}
-          title="Expand/Collapse"
+          title="Heading A"
           type="button"
         >
           <button
@@ -31,15 +31,13 @@ exports[`Accordion should render 1`] = `
             className="bx--accordion__heading"
             onClick={[Function]}
             onKeyDown={[Function]}
-            title="Expand/Collapse"
+            title="Heading A"
             type="button"
           >
             <ForwardRef(ChevronRight16)
-              aria-label="Expand/Collapse"
               className="bx--accordion__arrow"
             >
               <Icon
-                aria-label="Expand/Collapse"
                 className="bx--accordion__arrow"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
@@ -48,12 +46,11 @@ exports[`Accordion should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <svg
-                  aria-label="Expand/Collapse"
+                  aria-hidden={true}
                   className="bx--accordion__arrow"
                   focusable="false"
                   height={16}
                   preserveAspectRatio="xMidYMid meet"
-                  role="img"
                   viewBox="0 0 16 16"
                   width={16}
                   xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +90,7 @@ exports[`Accordion should render 1`] = `
           className="bx--accordion__heading"
           onClick={[Function]}
           onKeyDown={[Function]}
-          title="Expand/Collapse"
+          title="Heading B"
           type="button"
         >
           <button
@@ -102,15 +99,13 @@ exports[`Accordion should render 1`] = `
             className="bx--accordion__heading"
             onClick={[Function]}
             onKeyDown={[Function]}
-            title="Expand/Collapse"
+            title="Heading B"
             type="button"
           >
             <ForwardRef(ChevronRight16)
-              aria-label="Expand/Collapse"
               className="bx--accordion__arrow"
             >
               <Icon
-                aria-label="Expand/Collapse"
                 className="bx--accordion__arrow"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
@@ -119,12 +114,11 @@ exports[`Accordion should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <svg
-                  aria-label="Expand/Collapse"
+                  aria-hidden={true}
                   className="bx--accordion__arrow"
                   focusable="false"
                   height={16}
                   preserveAspectRatio="xMidYMid meet"
-                  role="img"
                   viewBox="0 0 16 16"
                   width={16}
                   xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +158,7 @@ exports[`Accordion should render 1`] = `
           className="bx--accordion__heading"
           onClick={[Function]}
           onKeyDown={[Function]}
-          title="Expand/Collapse"
+          title="Heading C"
           type="button"
         >
           <button
@@ -173,15 +167,13 @@ exports[`Accordion should render 1`] = `
             className="bx--accordion__heading"
             onClick={[Function]}
             onKeyDown={[Function]}
-            title="Expand/Collapse"
+            title="Heading C"
             type="button"
           >
             <ForwardRef(ChevronRight16)
-              aria-label="Expand/Collapse"
               className="bx--accordion__arrow"
             >
               <Icon
-                aria-label="Expand/Collapse"
                 className="bx--accordion__arrow"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
@@ -190,12 +182,11 @@ exports[`Accordion should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <svg
-                  aria-label="Expand/Collapse"
+                  aria-hidden={true}
                   className="bx--accordion__arrow"
                   focusable="false"
                   height={16}
                   preserveAspectRatio="xMidYMid meet"
-                  role="img"
                   viewBox="0 0 16 16"
                   width={16}
                   xmlns="http://www.w3.org/2000/svg"

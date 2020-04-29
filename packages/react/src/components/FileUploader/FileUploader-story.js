@@ -94,6 +94,9 @@ const props = {
         'Close button icon description (iconDescription)',
         'Clear file'
       ),
+      onChange: action('onChange'),
+      onClick: action('onClick'),
+      onDelete: action('onDelete'),
     };
   },
   fileUploaderItem: () => ({

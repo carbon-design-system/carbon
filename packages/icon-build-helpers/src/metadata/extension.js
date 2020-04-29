@@ -36,8 +36,6 @@ function validate(extension) {
   }
 }
 
-const defaultOptions = {};
-
 /**
  * @param {(ExtensionBuilder | [Extension, object])} builderOrOptions
  * @returns {Extension}
@@ -49,7 +47,7 @@ function loadExtension(builderOrOptions) {
     validate(extension);
     return extension;
   }
-  const extension = builderOrOptions(defaultOptions);
+  const extension = builderOrOptions();
   validate(extension);
   return extension;
 }

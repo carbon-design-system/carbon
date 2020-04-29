@@ -32,9 +32,7 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "iconDescription": Object {
-        "type": "string",
-      },
+      "iconDescription": [Function],
       "onClick": Object {
         "type": "func",
       },
@@ -2349,6 +2347,9 @@ Map {
         "type": "func",
       },
       "onClick": Object {
+        "type": "func",
+      },
+      "onDelete": Object {
         "type": "func",
       },
       "size": Object {
