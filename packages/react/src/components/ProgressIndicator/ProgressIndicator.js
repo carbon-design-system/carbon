@@ -105,6 +105,7 @@ export function ProgressStep({
         className={classnames(`${prefix}--progress-step-button`, {
           [`${prefix}--progress-step-button--unclickable`]: !onClick || current,
         })}
+        disabled={disabled}
         aria-disabled={disabled}
         tabIndex={!current && onClick ? 0 : -1}
         onClick={!current ? onClick : undefined}
