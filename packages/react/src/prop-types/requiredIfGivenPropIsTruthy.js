@@ -12,7 +12,7 @@
  * @returns {Function} The new prop type checker for the current prop that
  * becomes required if the prop corresponding to the provided prop name exists.
  */
-export default function requiredIfGivenPropExists(name, propType) {
+export default function requiredIfGivenPropIsTruthy(name, propType) {
   return function check(props, propName, componentName, ...rest) {
     if (__DEV__ && props[name] == true && props[propName] == null) {
       return new Error(

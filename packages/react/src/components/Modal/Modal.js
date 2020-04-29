@@ -13,7 +13,7 @@ import { Close20 } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
 import deprecate from '../../prop-types/deprecate';
-import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
+import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
   elementOrParentIsFloatingMenu,
 } from '../../internal/wrapFocus';
@@ -157,7 +157,7 @@ export default class Modal extends Component {
     /**
      * Required props for the accessibility label of the header
      */
-    ['aria-label']: requiredIfGivenPropExists(
+    ['aria-label']: requiredIfGivenPropIsTruthy(
       'hasScrollingContent',
       PropTypes.string
     ),
