@@ -3442,6 +3442,7 @@ $carbon--spacing-05: 1rem;
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
+  - [form [mixin]](#form-mixin)
   - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -6693,6 +6694,7 @@ $ui-03: if(
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tags [mixin]](#tags-mixin)
+  - [text-input [mixin]](#text-input-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
 
 ### ✅ui-04 [variable]
@@ -18103,6 +18105,25 @@ Form styles
     }
   }
 
+  //Fluid Form
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid] {
+    display: block;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--fieldset {
+    margin: 0;
+  }
+
+  .#{$prefix}--form--fluid input[data-invalid] {
+    outline: none;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--form-requirement {
+    margin: 0;
+    padding: $carbon--spacing-03 rem(40px) $carbon--spacing-03 $carbon--spacing-05;
+  }
+
   // Fix for red ring when input is marked required in Firefox, refs #744
   input:not(output):not([data-invalid]):-moz-ui-invalid {
     box-shadow: none;
@@ -18152,6 +18173,7 @@ Form styles
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [text-error [variable]](#text-error-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [text-05 [variable]](#text-05-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
@@ -23731,6 +23753,60 @@ Text input styles
       right: $carbon--spacing-08;
     }
   }
+
+  //-----------------------------
+  // Fluid Text Input
+  //-----------------------------
+  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper {
+    position: relative;
+    background: $field-01;
+    transition: background-color $duration--fast-01 motion(standard, productive),
+      outline $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--label {
+    position: absolute;
+    top: rem(13px);
+    left: $carbon--spacing-05;
+    z-index: 1;
+    margin: 0;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--form__helper-text {
+    display: none;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input {
+    min-height: rem(64px);
+    padding: rem(32px) $carbon--spacing-05 rem(13px);
+  }
+
+  .#{$prefix}--text-input__divider,
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__divider {
+    display: none;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid {
+    border-bottom: none;
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input--invalid
+    + .#{$prefix}--text-input__divider {
+    display: block;
+    margin: 0 1rem;
+    border-style: solid;
+    border-bottom: none;
+    border-color: $ui-03;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__invalid-icon {
+    top: rem(80px);
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--light {
+    background: $field-02;
+  }
 }
 ```
 
@@ -23749,6 +23825,7 @@ Text input styles
   - [icon-02 [variable]](#icon-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [ui-03 [variable]](#ui-03-variable)
 
 ## tile
 

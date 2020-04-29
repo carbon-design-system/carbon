@@ -132,7 +132,7 @@ export function pressSpace(node = document.activeElement) {
     }),
   ];
 
-  if (node.tagName === 'BUTTON') {
+  if (node.tagName === 'BUTTON' || node.getAttribute('role') === 'button') {
     events.push(
       new MouseEvent('click', {
         bubbles: true,
