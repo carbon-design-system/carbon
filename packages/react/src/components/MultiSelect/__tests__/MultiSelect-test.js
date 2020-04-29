@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getByText, isElementVisible } from '@carbon/test-utils/dom';
+import { getByText } from '@carbon/test-utils/dom';
 import { pressEnter, pressSpace, pressTab } from '@carbon/test-utils/keyboard';
 import { render, cleanup } from '@carbon/test-utils/react';
 import React from 'react';
