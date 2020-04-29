@@ -32,6 +32,7 @@ export default function TreeNode({
   const depth = useRef(0);
   const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
     [`${prefix}--tree-node--selected`]: selected,
+    [`${prefix}--tree-node--with-icon`]: Icon,
     [`${prefix}--tree-leaf-node`]: !children,
     [`${prefix}--tree-parent-node`]: children,
   });

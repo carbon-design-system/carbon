@@ -51,6 +51,10 @@
       padding-left: $spacing-08;
     }
 
+    .#{$prefix}--tree-leaf-node.#{$prefix}--tree-node--with-icon {
+      padding-left: $spacing-07;
+    }
+
     .#{$prefix}--tree-node__label__details {
       display: flex;
       align-items: center;
