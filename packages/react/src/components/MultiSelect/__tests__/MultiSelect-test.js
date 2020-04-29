@@ -9,7 +9,7 @@ import { getByText, isElementVisible } from '@carbon/test-utils/dom';
 import { pressEnter, pressSpace, pressTab } from '@carbon/test-utils/keyboard';
 import { render, cleanup } from '@carbon/test-utils/react';
 import React from 'react';
-import { Simulate } from 'react-dom/test-utils';
+import { act, Simulate } from 'react-dom/test-utils';
 import MultiSelect from '../';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
 import { keys } from '../../../internal/keyboard';
@@ -364,7 +364,7 @@ describe('MultiSelect', () => {
       expect(translateWithId).toHaveBeenCalled();
     });
 
-    it('should call onChange when the selection changes', () => {
+    it.only('should call onChange when the selection changes', () => {
       const testFunction = jest.fn();
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
@@ -383,7 +383,10 @@ describe('MultiSelect', () => {
 
       const [item] = items;
       const itemNode = getByText(container, item.label);
-      Simulate.click(itemNode);
+
+      act(() => {
+        Simulate.click(itemNode);
+      });
 
       expect(testFunction).toHaveBeenCalledTimes(1);
     });

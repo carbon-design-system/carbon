@@ -5,11 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash.isequal';
 
-export function useSelection({ disabled, initialSelectedItems = [] }) {
+export function useSelection({
+  disabled,
+  onChange,
+  initialSelectedItems = [],
+}) {
+  const isMounted = useRef(false);
   const [selectedItems, setSelectedItems] = useState(initialSelectedItems);
   const onItemChange = useCallback(
     item => {
@@ -35,12 +40,26 @@ export function useSelection({ disabled, initialSelectedItems = [] }) {
     },
     [disabled, selectedItems]
   );
+
   const clearSelection = useCallback(() => {
     if (disabled) {
       return;
     }
     setSelectedItems([]);
   }, [disabled]);
+
+  useEffect(() => {
+    if (isMounted.current === true && onChange) {
+      onChange({ selectedItems });
+    }
+  }, [onChange, selectedItems]);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   return {
     selectedItems,

@@ -57,6 +57,8 @@ function MultiSelect({
   open,
 
   selectionFeedback,
+
+  onChange,
 }) {
   const { current: multiSelectInstanceId } = useRef(getInstanceId());
   const [highlightedIndex, setHighlightedIndex] = useState(null);
@@ -70,7 +72,9 @@ function MultiSelect({
   } = useSelection({
     disabled,
     initialSelectedItems,
+    onChange,
   });
+
   const {
     getToggleButtonProps,
     getLabelProps,
