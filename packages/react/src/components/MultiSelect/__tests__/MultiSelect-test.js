@@ -413,7 +413,6 @@ describe('MultiSelect', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       // eslint-disable-next-line no-unused-vars
-      const [firstItem, secondItem, thirdItem, fourthItem] = items;
       const { container } = render(
         <MultiSelect
           id="custom-id"
