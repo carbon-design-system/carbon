@@ -105,17 +105,15 @@
       cursor: not-allowed;
     }
 
-    &:disabled {
-      @include placeholder {
-        color: $disabled-02;
-      }
+    &:disabled::placeholder {
+      color: $disabled-02;
     }
 
     &:disabled:hover {
       border-bottom: 1px solid transparent;
     }
 
-    @include placeholder {
+    &::placeholder {
       color: $text-05;
       opacity: 1;
     }
@@ -481,7 +479,7 @@
     @include skeleton;
     width: 100%;
 
-    @include placeholder {
+    &::placeholder {
       color: transparent;
     }
   }

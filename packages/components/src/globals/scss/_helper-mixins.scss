@@ -49,25 +49,6 @@
   color: $text-03;
 }
 
-/// Adds cross browser placeholder 
-/// @access public
-/// @example @include placeholder { color: grey; };
-/// @group global-helpers
-@mixin placeholder {
-  &::-webkit-input-placeholder {
-    @content;
-  }
-  &:-moz-placeholder {
-    @content;
-  }
-  &::-moz-placeholder {
-    @content;
-  }
-  &:-ms-input-placeholder {
-    @content;
-  }  
-}
-
 /// Adds box shadow
 /// @access public
 /// @example @include box-shadow;
