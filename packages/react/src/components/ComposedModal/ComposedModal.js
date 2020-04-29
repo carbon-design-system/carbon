@@ -133,15 +133,17 @@ export default class ComposedModal extends Component {
   }
 
   focusButton = focusContainerElement => {
-    const primaryFocusElement = focusContainerElement.querySelector(
-      this.props.selectorPrimaryFocus
-    );
-    if (primaryFocusElement) {
-      primaryFocusElement.focus();
-      return;
-    }
-    if (this.button.current) {
-      this.button.current.focus();
+    if (focusContainerElement) {
+      const primaryFocusElement = focusContainerElement.querySelector(
+        this.props.selectorPrimaryFocus
+      );
+      if (primaryFocusElement) {
+        primaryFocusElement.focus();
+        return;
+      }
+      if (this.button.current) {
+        this.button.current.focus();
+      }
     }
   };
 
@@ -208,11 +210,11 @@ export default class ComposedModal extends Component {
 
     const childrenWithProps = React.Children.toArray(children).map(child => {
       switch (child.type) {
-        case ModalHeader:
+        case React.createElement(ModalHeader).type:
           return React.cloneElement(child, {
             closeModal: this.closeModal,
           });
-        case ModalFooter:
+        case React.createElement(ModalFooter).type:
           return React.cloneElement(child, {
             closeModal: this.closeModal,
             inputref: this.button,
@@ -469,6 +471,12 @@ export class ModalFooter extends Component {
      * Specify the text for the secondary button
      */
     secondaryButtonText: PropTypes.string,
+
+    /**
+     * Specify whether the primary button should be replaced with danger button.
+     * Note that this prop is not applied if you render primary/danger button by yourself
+     */
+    danger: PropTypes.bool,
 
     /**
      * Specify an optional function for when the modal is requesting to be

@@ -1,0 +1,18 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <title>text--vertical-alignment</title>
+  <rect x="16" y="28" width="14" height="2"/>
+  <rect x="16" y="23" width="14" height="2"/>
+  <path d="M10.8458,30H13L8.64,20H6.36L2,30H4.1542l.8-2h5.0916ZM5.7541,26,7.5,21.6347,9.2459,26Z"/>
+  <rect x="2" y="15" width="28" height="2"/>
+  <rect x="16" y="7" width="14" height="2"/>
+  <rect x="16" y="2" width="14" height="2"/>
+  <path d="M10.8458,12H13L8.64,2H6.36L2,12H4.1542l.8-2h5.0916ZM5.7541,8,7.5,3.6347,9.2459,8Z"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>

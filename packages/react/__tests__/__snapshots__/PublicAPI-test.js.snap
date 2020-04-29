@@ -32,9 +32,7 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "iconDescription": Object {
-        "type": "string",
-      },
+      "iconDescription": [Function],
       "onClick": Object {
         "type": "func",
       },
@@ -642,6 +640,9 @@ Map {
       },
       "closeModal": Object {
         "type": "func",
+      },
+      "danger": Object {
+        "type": "bool",
       },
       "onRequestClose": Object {
         "type": "func",
@@ -2237,6 +2238,9 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "onDelete": Object {
+        "type": "func",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -2444,6 +2448,16 @@ Map {
     },
   },
   "Form" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "FluidForm" => Object {
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -4735,6 +4749,7 @@ Map {
             "gray",
             "cool-gray",
             "warm-gray",
+            "high-contrast",
           ],
         ],
         "type": "oneOf",
@@ -4937,6 +4952,7 @@ Map {
       "render": [Function],
     },
     "PasswordInput": Object {
+      "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
         "className": "\${prefix}--text__input",
         "disabled": false,
@@ -5044,6 +5060,7 @@ Map {
           "type": "oneOfType",
         },
       },
+      "render": [Function],
     },
     "defaultProps": Object {
       "disabled": false,

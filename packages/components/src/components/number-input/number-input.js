@@ -47,11 +47,28 @@ class NumberInput extends mixin(
   _handleClick(event) {
     const numberInput = this.element.querySelector(this.options.selectorInput);
     const target = event.currentTarget.getAttribute('class').split(' ');
+    const min = Number(numberInput.min);
+    const max = Number(numberInput.max);
+    const step = Number(numberInput.step) || 1;
 
-    if (target.indexOf('up-icon') >= 0) {
-      ++numberInput.value;
-    } else if (target.indexOf('down-icon') >= 0) {
-      --numberInput.value;
+    if (target.indexOf('up-icon') >= 0 && numberInput.value < max) {
+      const nextValue = Number(numberInput.value) + step;
+      if (nextValue > max) {
+        numberInput.value = max;
+      } else if (nextValue < min) {
+        numberInput.value = min;
+      } else {
+        numberInput.value = nextValue;
+      }
+    } else if (target.indexOf('down-icon') >= 0 && numberInput.value > min) {
+      const nextValue = Number(numberInput.value) - step;
+      if (nextValue < min) {
+        numberInput.value = min;
+      } else if (nextValue > max) {
+        numberInput.value = max;
+      } else {
+        numberInput.value = nextValue;
+      }
     }
 
     // Programmatic change in value (including `stepUp()`/`stepDown()`) won't fire change event
