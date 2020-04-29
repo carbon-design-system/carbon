@@ -20,7 +20,7 @@ const defaultRenderExpando = props => <button {...props} />;
 function AccordionItem({
   children,
   className: customClassName,
-  iconDescription, // eslint-disable-line no-unused-vars
+  iconDescription,
   open = false,
   onHeadingClick,
   renderExpando: Expando = defaultRenderExpando,
