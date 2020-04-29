@@ -60,6 +60,10 @@
       align-items: center;
     }
 
+    .#{$prefix}--tree-node--with-icon .#{$prefix}--tree-parent-node__toggle {
+      margin-right: 0;
+    }
+
     .#{$prefix}--tree-parent-node__toggle {
       margin-right: $spacing-03;
       padding: 0;
