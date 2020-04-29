@@ -385,7 +385,7 @@ describe('MultiSelect', () => {
       const itemNode = getByText(container, item.label);
       Simulate.click(itemNode);
 
-      expect(testFunction).toHaveBeenCalled();
+      expect(testFunction).toHaveBeenCalledTimes(1);
     });
 
     it('should support an invalid state with invalidText that describes the field', () => {
