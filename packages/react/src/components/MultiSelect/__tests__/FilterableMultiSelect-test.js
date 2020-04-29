@@ -46,7 +46,14 @@ describe('MultiSelect.Filterable', () => {
 
   it('should initially have the menu open when open prop is provided', () => {
     const wrapper = mount(<MultiSelect.Filterable {...mockProps} open />);
-    expect(wrapper.state('isOpen')).toBe(true);
+    assertMenuOpen(wrapper, mockProps);
+  });
+
+  it('should open the menu with a down arrow', () => {
+    const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
+
+    findMenuIconNode(wrapper).simulate('keyDown', { key: 'ArrowDown' });
+    assertMenuOpen(wrapper, mockProps);
   });
 
   it('should let the user toggle the menu by the menu icon', () => {
@@ -71,7 +78,12 @@ describe('MultiSelect.Filterable', () => {
     const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
     openMenu(wrapper);
     expect(wrapper.find(listItemName).length).toBe(mockProps.items.length);
-    wrapper.setState({ inputValue: '3' });
+
+    wrapper
+      .find('[role="combobox"]')
+      .at(0)
+      .simulate('change', { target: { value: '3' } });
+
     expect(wrapper.find(listItemName).length).toBe(1);
   });
 
@@ -154,12 +166,17 @@ describe('MultiSelect.Filterable', () => {
     const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
     const inputValue = 'Item';
     openMenu(wrapper);
-    wrapper.setState({ inputValue });
+
+    wrapper
+      .find('[role="combobox"]')
+      .at(0)
+      .simulate('change', { target: { value: 'Item' } });
+
     wrapper
       .find(listItemName)
       .at(0)
       .simulate('click');
 
-    expect(wrapper.state('inputValue')).toEqual(inputValue);
+    expect(wrapper.find('[role="combobox"]').props().value).toEqual(inputValue);
   });
 });

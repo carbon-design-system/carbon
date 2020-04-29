@@ -2568,6 +2568,16 @@ Map {
       },
     },
   },
+  "FluidForm" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "FormGroup" => Object {
     "defaultProps": Object {
       "invalid": false,
