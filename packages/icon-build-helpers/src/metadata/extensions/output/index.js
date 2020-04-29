@@ -100,7 +100,7 @@ const output = (options = defaultOptions) => {
               'glyph'
             ),
             moduleName: getModuleName(icon.name, 'glyph', icon.namespace),
-            filepath: [...icon.namespace, icon.name, 'glyph.js'].join('/'),
+            filepath: [...icon.namespace, icon.name, 'index.js'].join('/'),
             size: 'glyph',
           });
         }
