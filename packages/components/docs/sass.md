@@ -23622,7 +23622,9 @@ Text input styles
     &:active {
       @include focus-outline('outline');
     }
-
+    &-wrapper-inline {
+      flex-direction: row;
+    }
     &-wrapper svg[hidden] {
       display: none;
     }

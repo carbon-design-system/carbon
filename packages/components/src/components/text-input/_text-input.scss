@@ -38,12 +38,22 @@
     &:active {
       @include focus-outline('outline');
     }
-
     &-wrapper svg[hidden] {
       display: none;
     }
   }
 
+  .#{$prefix}--text-input-wrapper--inline {
+    flex-direction: row;
+    align-items: center;
+    .bx--label {
+      white-space: nowrap;
+      margin: 0 0.5rem 0 0;
+    }
+  }
+  .#{$prefix}--text-input__field-wrapper--inline{
+    width: 100%;
+  }
   .#{$prefix}--text-input--xl {
     height: rem(48px);
   }

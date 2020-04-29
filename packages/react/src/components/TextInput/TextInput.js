@@ -21,6 +21,7 @@ const TextInput = React.forwardRef(function TextInput(
     labelText,
     className = `${prefix}--text__input`,
     id,
+    inline,
     placeholder,
     type,
     onChange,
@@ -36,6 +37,7 @@ const TextInput = React.forwardRef(function TextInput(
   ref
 ) {
   const errorId = id + '-error-msg';
+
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,
     [`${prefix}--text-input--invalid`]: invalid,
@@ -65,6 +67,7 @@ const TextInput = React.forwardRef(function TextInput(
     `${prefix}--text-input-wrapper`,
     {
       [`${prefix}--text-input-wrapper--light`]: light,
+      [`${prefix}--text-input-wrapper--inline`]: inline,
     }
   );
   const labelClasses = classNames(`${prefix}--label`, {
@@ -93,22 +96,26 @@ const TextInput = React.forwardRef(function TextInput(
 
   const { isFluid } = useContext(FormContext);
 
+  const inputWrapper = (<><div
+    className={`${prefix}--text-input__field-wrapper`}
+    data-invalid={invalid || null}>
+    {invalid && (
+      <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
+    )}
+    {input}
+    {isFluid && <hr className={`${prefix}--text-input__divider`} />}
+    {/* <hr className={`${prefix}--text-input__divider`} /> */}
+    {isFluid ? error : null}
+  </div> {isFluid ? null : error}</>);
+  const inputWrapperInline = (<div className={`${prefix}--text-input__field-wrapper--inline`}>{inputWrapper}</div>);
+
   return (
     <div className={inputWrapperClasses}>
       {label}
-      {helper}
-      <div
-        className={`${prefix}--text-input__field-wrapper`}
-        data-invalid={invalid || null}>
-        {invalid && (
-          <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
-        )}
-        {input}
-        {isFluid && <hr className={`${prefix}--text-input__divider`} />}
-        {/* <hr className={`${prefix}--text-input__divider`} /> */}
-        {isFluid ? error : null}
-      </div>
-      {isFluid ? null : error}
+      {!inline && helper}
+      {!inline &&inputWrapper}
+      {inline &&inputWrapperInline}
+      {inline && helper}
     </div>
   );
 });
@@ -135,6 +142,11 @@ TextInput.propTypes = {
    * Specify a custom `id` for the <input>
    */
   id: PropTypes.string.isRequired,
+
+  /**
+   * Specify whether you want the inline version of this control
+   */
+  inline: PropTypes.bool,
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
@@ -203,6 +215,7 @@ TextInput.propTypes = {
 TextInput.defaultProps = {
   disabled: false,
   type: 'text',
+  inline: false,
   onChange: () => {},
   onClick: () => {},
   invalid: false,
