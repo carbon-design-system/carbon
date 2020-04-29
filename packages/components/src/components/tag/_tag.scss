@@ -126,6 +126,14 @@
     );
   }
 
+  .#{$prefix}--tag--high-contrast {
+    @include tag-theme(
+      $inverse-02,
+      $inverse-01,
+      $inverse-hover-ui,
+    );
+  }
+
   .#{$prefix}--tag--disabled,
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled {
     @include tag-theme($disabled-01, $disabled-02);
