@@ -24,9 +24,9 @@ export default function TreeNode({
   ...rest
 }) {
   const [expanded, setExpanded] = useState(isExpanded);
-  const handleToggleClick = evt => {
+  const handleToggleClick = event => {
     setExpanded(!expanded);
-    onToggle && onToggle(evt, { isExpanded: !expanded });
+    onToggle && onToggle(event, { isExpanded: !expanded });
   };
   const currentNode = useRef(null);
   const depth = useRef(0);
@@ -38,16 +38,18 @@ export default function TreeNode({
   const toggleClasses = classNames(`${prefix}--tree-parent-node__toggle-icon`, {
     [`${prefix}--tree-parent-node__toggle-icon--expanded`]: expanded,
   });
-  const handleKeyDown = evt => {
-    evt.stopPropagation();
+  const handleKeyDown = event => {
+    event.stopPropagation();
 
-    if (children && match(evt, keys.ArrowLeft)) {
+    if (children && match(event, keys.ArrowLeft)) {
       setExpanded(false);
     }
-    if (children && match(evt, keys.ArrowRight)) {
+    if (children && match(event, keys.ArrowRight)) {
       setExpanded(true);
     }
-    rest.onKeyDown && rest.onKeyDown(evt);
+    if (rest.onKeyDown) {
+      rest.onKeyDown(event);
+    }
   };
 
   useEffect(() => {
