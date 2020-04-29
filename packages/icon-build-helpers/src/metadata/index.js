@@ -29,8 +29,12 @@ async function check({
   input,
   extensions = [defaultExtensions.icons],
 }) {
-  const registry = await Registry.create(path.join(input, 'svg'));
-  const loaded = await Storage.load(adapter, input, Extension.load(extensions));
+  const registry = await Registry.create(input.svg);
+  const loaded = await Storage.load(
+    adapter,
+    input.extensions,
+    Extension.load(extensions)
+  );
   validate(registry, loaded);
 }
 
@@ -49,8 +53,12 @@ async function load({
   extensions = [defaultExtensions.icons],
   input,
 }) {
-  const registry = await Registry.create(path.join(input, 'svg'));
-  const loaded = await Storage.load(adapter, input, Extension.load(extensions));
+  const registry = await Registry.create(input.svg);
+  const loaded = await Storage.load(
+    adapter,
+    input.extensions,
+    Extension.load(extensions)
+  );
   validate(registry, loaded);
 
   const metadata = {};
@@ -62,7 +70,7 @@ async function load({
   // for the extension
   for (const { data, extend } of loaded) {
     if (extend) {
-      extend(metadata, data, registry, context);
+      await extend(metadata, data, registry, context);
     }
   }
 
@@ -74,10 +82,10 @@ async function load({
  * extensions and write it to disk
  * @param {object} options
  * @param {Adapter} [options.adapter] The adapter to use to load the extensions
- * @param {string} options.input The directory of source files
- * @param {string} [options.output] The directory for the built metadata
+ * @param {object} options.input The directory of source files
+ * @param {object} options.output The directory for the built metadata
  * @param {Array<Extension>} [options.extensions] The extensions to load
- * @returns {Promise<void>}
+ * @returns {Promise<object>}
  */
 async function build({
   adapter = adapters.yml,
@@ -86,12 +94,14 @@ async function build({
   output = input,
 }) {
   const metadata = await load({ adapter, extensions, input });
-  const metadataFilePath = path.join(output, 'metadata.json');
+  const metadataFilePath = path.join(output.extensions, 'metadata.json');
 
   await fs.ensureFile(metadataFilePath);
   await fs.writeJson(metadataFilePath, metadata, {
     spaces: 2,
   });
+
+  return metadata;
 }
 
 /**
@@ -110,10 +120,10 @@ async function scaffold({
   output = input,
   extensions = [defaultExtensions.icons],
 }) {
-  const registry = await Registry.create(path.join(input, 'svg'));
+  const registry = await Registry.create(input.svg);
   const [icons] = await Storage.load(
     adapter,
-    input,
+    input.extensions,
     Extension.load(extensions)
   );
 
@@ -143,7 +153,7 @@ async function scaffold({
     return a.name.localeCompare(b.name);
   });
 
-  await Storage.save(adapter, output, [icons]);
+  await Storage.save(adapter, output.extensions, [icons]);
 }
 
 module.exports = {
