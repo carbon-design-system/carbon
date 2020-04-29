@@ -2349,6 +2349,9 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "onDelete": Object {
+        "type": "func",
+      },
       "size": Object {
         "args": Array [
           Array [
