@@ -12,10 +12,15 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 export default function TreeView({ children, className, ...rest }) {
+  const nodesWithProps = React.Children.map(children, node => {
+    if (React.isValidElement(node)) {
+      return React.cloneElement(node, { depth: 0 });
+    }
+  });
   const treeClasses = classNames(className, `${prefix}--tree`);
   return (
     <ul className={treeClasses} role="tree" {...rest}>
-      {children}
+      {nodesWithProps}
     </ul>
   );
 }

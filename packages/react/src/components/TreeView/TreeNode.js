@@ -16,6 +16,7 @@ const { prefix } = settings;
 export default function TreeNode({
   className,
   children,
+  depth,
   isExpanded,
   label,
   onToggle,
@@ -29,7 +30,11 @@ export default function TreeNode({
     onToggle && onToggle(event, { isExpanded: !expanded });
   };
   const currentNode = useRef(null);
-  const depth = useRef(0);
+  const nodesWithProps = React.Children.map(children, node => {
+    if (React.isValidElement(node)) {
+      return React.cloneElement(node, { depth: depth + 1 });
+    }
+  });
   const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
     [`${prefix}--tree-node--selected`]: selected,
     [`${prefix}--tree-node--with-icon`]: Icon,
@@ -55,32 +60,36 @@ export default function TreeNode({
 
   useEffect(() => {
     /**
-     * compute current node depth by finding the difference in client rect x
-     * values between the tree root and current node
-     */
-    const { x: treeRootX } = currentNode.current
-      .closest(`.${prefix}--tree`)
-      .getBoundingClientRect();
-    const { x: currentNodeX } = currentNode.current.getBoundingClientRect();
-    depth.current = (currentNodeX - treeRootX) / 16;
-
-    /**
      * Negative margin shifts node to align with the left side boundary of the
      * tree
      * Dynamically calculate padding to recreate tree node indentation
-     * - parent nodes have 1rem left padding
-     * - leaf nodes have 2.5rem left padding (because of expando icon + spacing)
+     * - parent nodes have (depth + 1rem) left padding
+     * - leaf nodes have (depth + 2.5rem) left padding without icons (because
+     *   of expando icon + spacing)
+     * - leaf nodes have (depth + 2rem) left padding with icons (because of
+     *   reduced spacing between the expando icon and the node icon + label)
      */
+    const calcOffset = () => {
+      // parent node
+      if (children) {
+        return depth + 1;
+      }
+      // leaf node with icon
+      if (Icon) {
+        return depth + 2;
+      }
+      // leaf node without icon
+      return depth + 2.5;
+    };
     const currentNodeLabel = currentNode.current.querySelector(
       `.${prefix}--tree-node__label`
     );
-    const offset = `${depth.current + (!children ? 2.5 : 1)}rem`;
-    currentNodeLabel.style.marginLeft = `-${offset}`;
-    currentNodeLabel.style.paddingLeft = `${offset}`;
+    currentNodeLabel.style.marginLeft = `-${calcOffset()}rem`;
+    currentNodeLabel.style.paddingLeft = `${calcOffset()}rem`;
 
     // sync props and state
     setExpanded(isExpanded);
-  }, [children, isExpanded]);
+  }, [children, depth, Icon, isExpanded]);
 
   if (!children) {
     return (
@@ -120,7 +129,7 @@ export default function TreeNode({
       </div>
       {expanded && (
         <ul role="group" className={`${prefix}--tree-node__children`}>
-          {children}
+          {nodesWithProps}
         </ul>
       )}
     </li>
