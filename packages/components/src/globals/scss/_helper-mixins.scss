@@ -51,20 +51,20 @@
 
 /// Adds cross browser placeholder 
 /// @access public
-/// @example @include placeholder;
+/// @example @include placeholder { color: grey; };
 /// @group global-helpers
 @mixin placeholder {
   &::-webkit-input-placeholder {
-    @include placeholder-colors;
+    @content;
   }
   &:-moz-placeholder {
-    @include placeholder-colors;
+    @content;
   }
   &::-moz-placeholder {
-    @include placeholder-colors;
+    @content;
   }
   &:-ms-input-placeholder {
-    @include placeholder-colors;
+    @content;
   }  
 }
 
