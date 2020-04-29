@@ -78,7 +78,7 @@ function AccordionItem({
         className={`${prefix}--accordion__heading`}
         onClick={onClick}
         onKeyDown={onKeyDown}
-        title={title}
+        title={title || iconDescription}
         type="button">
         <ChevronRight16 className={`${prefix}--accordion__arrow`} />
         <div className={`${prefix}--accordion__title`}>{title}</div>
