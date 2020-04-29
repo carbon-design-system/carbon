@@ -30,7 +30,7 @@
   "scripts": {
     "build": "yarn clean && node tasks/build.js && bundler sassdoc \"scss/*.scss\"",
     "ci-check": "node tasks/ci-check.js",
-    "clean": "rimraf es lib build-info.json metadata.json",
+    "clean": "rimraf es lib metadata.json svg",
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
