@@ -35,6 +35,25 @@
       @include focus-outline('outline');
     }
 
+    .#{$prefix}--tree-node--disabled {
+      background-color: $disabled-01;
+      color: $disabled-02;
+    }
+
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__label:hover {
+      background-color: $disabled-01;
+    }
+
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-parent-node__toggle-icon,
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__icon {
+      fill: $disabled-02;
+    }
+
+    .#{$prefix}--tree-node--disabled
+      .#{$prefix}--tree-parent-node__toggle-icon:hover {
+      cursor: default;
+    }
+
     .#{$prefix}--tree-node__label {
       display: flex;
       align-items: center;

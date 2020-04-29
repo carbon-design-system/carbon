@@ -17,6 +17,7 @@ export default function TreeNode({
   className,
   children,
   depth,
+  disabled,
   isExpanded,
   label,
   onToggle,
@@ -32,10 +33,11 @@ export default function TreeNode({
   const currentNode = useRef(null);
   const nodesWithProps = React.Children.map(children, node => {
     if (React.isValidElement(node)) {
-      return React.cloneElement(node, { depth: depth + 1 });
+      return React.cloneElement(node, { depth: depth + 1, disabled });
     }
   });
   const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
+    [`${prefix}--tree-node--disabled`]: disabled,
     [`${prefix}--tree-node--selected`]: selected,
     [`${prefix}--tree-node--with-icon`]: Icon,
     [`${prefix}--tree-leaf-node`]: !children,
@@ -97,6 +99,7 @@ export default function TreeNode({
         {...rest}
         className={treeNodeClasses}
         onKeyDown={handleKeyDown}
+        disabled={disabled}
         ref={currentNode}
         role="treeitem"
         tabIndex="-1">
@@ -119,6 +122,7 @@ export default function TreeNode({
       <div className={`${prefix}--tree-node__label`}>
         <button
           className={`${prefix}--tree-parent-node__toggle`}
+          disabled={disabled}
           onClick={handleToggleClick}>
           <CaretDown16 className={toggleClasses} />
         </button>
