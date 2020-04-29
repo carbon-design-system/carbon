@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getByText } from '@carbon/test-utils/dom';
+import { getByText, isElementVisible } from '@carbon/test-utils/dom';
 import { pressEnter, pressSpace, pressTab } from '@carbon/test-utils/keyboard';
 import { render, cleanup } from '@carbon/test-utils/react';
 import React from 'react';
@@ -306,8 +306,8 @@ describe('MultiSelect', () => {
     it('should place the given id on the ___ node when passed in as a prop', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
-      // eslint-disable-next-line no-unused-vars
-      const { container } = render(
+
+      render(
         <MultiSelect
           id="custom-id"
           label={label}
@@ -412,7 +412,7 @@ describe('MultiSelect', () => {
     it('should support different feedback modes with selectionFeedback', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
-      // eslint-disable-next-line no-unused-vars
+      const [_firstItem, _secondItem, thirdItem] = items;
       const { container } = render(
         <MultiSelect
           id="custom-id"
