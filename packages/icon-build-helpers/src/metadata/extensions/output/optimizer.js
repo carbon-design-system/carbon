@@ -8,7 +8,6 @@
 'use strict';
 
 const SVGO = require('svgo');
-const svg2js = require('svgo/lib/svgo/svg2js');
 
 /**
  * Our SVGO plugin options differ a bit from the defaults, namely in the
@@ -158,7 +157,13 @@ const plugins = [
     removeNonInheritableGroupAttrs: true,
   },
   {
-    removeUselessStrokeAndFill: true,
+    // We disable `stroke` for this plugin as enabling it will cause relevant
+    // stroke-* attributes to be removed from the resulting SVG. This can cause
+    // issues with pictograms that use stroke attributes for rendering
+    // correctly
+    removeUselessStrokeAndFill: {
+      stroke: false,
+    },
   },
   {
     removeUnusedNS: true,
@@ -198,9 +203,9 @@ const plugins = [
       attrs: [
         'class',
         'data-name',
-        // Remove all fill attributes where the value is not "none"
+        // Remove all fill and stroke attributes where the value is not "none"
         // https://github.com/svg/svgo/pull/977
-        '*:fill:((?!^none$).)*',
+        '*:(fill|stroke):((?!^none$).)*',
       ],
     },
   },
@@ -212,51 +217,7 @@ const svgo = new SVGO({
   multipass: true,
 });
 
-const svg2jsAsync = (...args) =>
-  new Promise((resolve, reject) => {
-    svg2js(...args, ({ error, ...rest }) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-      resolve(rest);
-    });
-  });
-
-const parse = async (svg, name) => {
-  const root = await svg2jsAsync(svg);
-  try {
-    return convert(root.content[0]);
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error);
-    // eslint-disable-next-line no-console
-    console.log(`Error parsing icon with name: ${name}`);
-  }
-};
-
-const convert = root => {
-  const { elem, attrs = {}, content } = root;
-  const safeFormat = {
-    elem,
-    attrs: Object.keys(attrs).reduce((acc, attr) => {
-      return {
-        ...acc,
-        [attr]: attrs[attr].value,
-      };
-    }, {}),
-  };
-
-  if (content) {
-    safeFormat.content = content.map(convert);
-  }
-
-  return safeFormat;
-};
-
 module.exports = {
   svgo,
   plugins,
-  svg2js: svg2jsAsync,
-  parse,
 };
