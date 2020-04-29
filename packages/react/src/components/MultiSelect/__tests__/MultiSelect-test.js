@@ -67,21 +67,6 @@ describe('MultiSelect', () => {
     ).toBeInstanceOf(HTMLElement);
   });
 
-  it('should open the menu with a down arrow', () => {
-    const items = generateItems(4, generateGenericItem);
-    const { container } = render(
-      <MultiSelect.Filterable placeholder="catdog" id="test" items={items} />
-    );
-
-    Simulate.keyDown(container.querySelector('[role="button"]'), {
-      key: 'ArrowDown',
-    });
-
-    expect(
-      container.querySelector('[aria-expanded="true"][aria-haspopup="true"]')
-    ).toBeInstanceOf(HTMLElement);
-  });
-
   it('should open the menu when a user hits space while the field is focused', () => {
     const items = generateItems(4, generateGenericItem);
     const { container } = render(
