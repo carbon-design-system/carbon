@@ -18,6 +18,7 @@ import {
 import Loading from '../Loading';
 import uid from '../../tools/uniqueId';
 import { ButtonKinds } from '../../prop-types/types';
+import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -308,8 +309,14 @@ export default class FileUploader extends Component {
     onChange: PropTypes.func,
 
     /**
-     * Provide an optional `onClick` hook that is called each time the button is
-     * clicked
+     * Provide an optional `onDelete` hook that is called when an uploaded item
+     * is removed
+     */
+    onDelete: PropTypes.func,
+
+    /**
+     * Provide an optional `onClick` hook that is called each time the
+     * FileUploader is clicked
      */
     onClick: PropTypes.func,
 
@@ -372,12 +379,18 @@ export default class FileUploader extends Component {
     }
   };
 
-  handleClick = (evt, index) => {
-    const filteredArray = this.state.filenames.filter(
-      filename => filename !== this.nodes[index].innerText.trim()
-    );
-    this.setState({ filenames: filteredArray });
-    this.props.onClick(evt);
+  handleClick = (evt, { index, filenameStatus }) => {
+    if (filenameStatus === 'edit') {
+      evt.stopPropagation();
+      const filteredArray = this.state.filenames.filter(
+        filename => filename !== this.nodes[index].innerText.trim()
+      );
+      this.setState({ filenames: filteredArray });
+      if (this.props.onDelete) {
+        this.props.onDelete(evt);
+      }
+      this.props.onClick(evt);
+    }
   };
 
   clearFiles = () => {
@@ -398,6 +411,7 @@ export default class FileUploader extends Component {
       accept,
       name,
       size,
+      onDelete, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
 
@@ -440,15 +454,13 @@ export default class FileUploader extends Component {
                       iconDescription={iconDescription}
                       status={filenameStatus}
                       onKeyDown={evt => {
-                        if (evt.which === 13 || evt.which === 32) {
-                          this.handleClick(evt, index);
+                        if (matches(evt, [keys.Enter, keys.Space])) {
+                          this.handleClick(evt, { index, filenameStatus });
                         }
                       }}
-                      onClick={evt => {
-                        if (filenameStatus === 'edit') {
-                          this.handleClick(evt, index);
-                        }
-                      }}
+                      onClick={evt =>
+                        this.handleClick(evt, { index, filenameStatus })
+                      }
                     />
                   </span>
                 </span>

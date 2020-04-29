@@ -8,14 +8,22 @@
 'use strict';
 
 const react = require('./react/builder');
-const vanilla = require('./vanilla/builder');
+const svg = require('./svg');
+const vanilla = require('./vanilla');
+const vue = require('./vue');
 
 const builders = {
   react: {
     run: react,
   },
+  svg: {
+    run: svg,
+  },
   vanilla: {
     run: vanilla,
+  },
+  vue: {
+    run: vue,
   },
 };
 
