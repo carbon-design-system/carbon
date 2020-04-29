@@ -105,6 +105,7 @@ export function ProgressStep({
         className={classnames(`${prefix}--progress-step-button`, {
           [`${prefix}--progress-step-button--unclickable`]: !onClick || current,
         })}
+        disabled={disabled}
         aria-disabled={disabled}
         tabIndex={!current && onClick ? 0 : -1}
         onClick={!current ? onClick : undefined}
@@ -237,6 +238,10 @@ export class ProgressIndicator extends Component {
      * Determines whether or not the ProgressIndicator should be rendered vertically.
      */
     vertical: PropTypes.bool,
+    /**
+     * Specify whether the progress steps should be split equally in size in the div
+     */
+    spaceEqually: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -285,10 +290,17 @@ export class ProgressIndicator extends Component {
   };
 
   render() {
-    const { className, currentIndex, vertical, ...other } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      className,
+      currentIndex, // eslint-disable-line no-unused-vars
+      vertical,
+      spaceEqually,
+      ...other
+    } = this.props;
     const classes = classnames({
       [`${prefix}--progress`]: true,
       [`${prefix}--progress--vertical`]: vertical,
+      [`${prefix}--progress--space-equal`]: spaceEqually && !vertical,
       [className]: className,
     });
     return (
