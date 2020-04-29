@@ -60,10 +60,12 @@
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--text-area::placeholder {
-    @include placeholder-colors;
-    @include type-style('body-long-01');
-    opacity: 1;
+  .#{$prefix}--text-area {
+    @include placeholder {
+      @include placeholder-colors;
+      @include type-style('body-long-01');
+      opacity: 1;
+    }
   }
 
   .#{$prefix}--text-area--light {
@@ -97,8 +99,10 @@
     border-bottom: 1px solid transparent;
   }
 
-  .#{$prefix}--text-area:disabled::placeholder {
-    color: $disabled-02;
+  .#{$prefix}--text-area:disabled {
+    @include placeholder {
+      color: $disabled-02;
+    }
   }
 
   .#{$prefix}--text-area.#{$prefix}--text-area--light:disabled {
@@ -110,7 +114,7 @@
     @include skeleton;
     height: rem(100px);
 
-    &::placeholder {
+    @include placeholder {
       color: transparent;
     }
   }

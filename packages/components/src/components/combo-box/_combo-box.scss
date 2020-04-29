@@ -19,12 +19,14 @@
 /// @group combo-box
 @mixin combo-box {
   .#{$prefix}--combo-box .#{$prefix}--text-input {
-    &::placeholder {
+    @include placeholder {
       color: $text-05;
     }
 
-    &[disabled]::placeholder {
-      color: $disabled-02;
+    &[disabled] {
+      @include placeholder {
+        color: $disabled-02;
+      }
     }
   }
 

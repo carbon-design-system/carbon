@@ -56,8 +56,10 @@
     padding-right: $carbon--spacing-08;
   }
 
-  .#{$prefix}--text-input::-webkit-input-placeholder {
-    @include placeholder-colors;
+  .#{$prefix}--text-input {
+    @include placeholder {
+      @include placeholder-colors;
+    }
   }
 
   .#{$prefix}--text-input--light {
@@ -152,9 +154,11 @@
     background-color: $field-02;
   }
 
-  .#{$prefix}--text-input:disabled::placeholder {
-    opacity: 1;
-    color: $disabled-02;
+  .#{$prefix}--text-input:disabled {
+    @include placeholder {
+      opacity: 1;
+      color: $disabled-02;
+    }
   }
 
   //-----------------------------
