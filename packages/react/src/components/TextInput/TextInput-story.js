@@ -59,6 +59,7 @@ const props = {
     labelText: text('Label text (labelText)', 'Text Input label'),
     placeholder: text('Placeholder text (placeholder)', 'Placeholder text'),
     light: boolean('Light variant (light)', false),
+    inline: boolean('Put input in-line with label (inline in <div>)', false),
     disabled: boolean('Disabled (disabled)', false),
     hideLabel: boolean('No label (hideLabel)', false),
     invalid: boolean('Show form validation UI (invalid)', false),

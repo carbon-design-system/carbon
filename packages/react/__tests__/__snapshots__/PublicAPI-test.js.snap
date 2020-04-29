@@ -5164,6 +5164,7 @@ Map {
     "defaultProps": Object {
       "disabled": false,
       "helperText": "",
+      "inline": false,
       "invalid": false,
       "invalidText": "",
       "light": false,
@@ -5200,6 +5201,9 @@ Map {
       "id": Object {
         "isRequired": true,
         "type": "string",
+      },
+      "inline": Object {
+        "type": "bool",
       },
       "invalid": Object {
         "type": "bool",
