@@ -428,6 +428,7 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__menu {
     @include box-shadow();
     position: absolute;
+    top: 100%;
     left: 0;
     right: 0;
     width: $list-box-width;
@@ -646,21 +647,8 @@ $list-box-menu-width: rem(300px);
 
   // Dropdown top orientation modifiers
   .#{$prefix}--list-box--up .#{$prefix}--list-box__menu {
-    bottom: 2.5rem;
-  }
-
-  .#{$prefix}--list-box--up.#{$prefix}--dropdown--sm
-    .#{$prefix}--list-box__menu,
-  .#{$prefix}--list-box--up.#{$prefix}--list-box--sm
-    .#{$prefix}--list-box__menu {
-    bottom: 2rem;
-  }
-
-  .#{$prefix}--list-box--up.#{$prefix}--dropdown--xl
-    .#{$prefix}--list-box__menu,
-  .#{$prefix}--list-box--up.#{$prefix}--list-box--xl
-    .#{$prefix}--list-box__menu {
-    bottom: 3rem;
+    top: auto;
+    bottom: 100%;
   }
 
   // Tweaks for descendants
