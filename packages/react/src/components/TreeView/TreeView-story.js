@@ -7,33 +7,85 @@
 
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs } from '@storybook/addon-knobs';
+import { Document16, Folder16 } from '@carbon/icons-react';
 import TreeView, { TreeNode } from '../TreeView';
 
 storiesOf('TreeView', module)
-  .addDecorator(withKnobs)
-  .add('default', () => (
-    <TreeView>
-      <TreeNode label={<button>1</button>} />
-      <TreeNode label="2" />
-      <TreeNode label="3">
-        <TreeNode label="3-1" />
-        <TreeNode label="3-2" />
-      </TreeNode>
-      <TreeNode label="4" />
-      <TreeNode label="5" isExpanded>
-        <TreeNode label="5-1" />
-        <TreeNode label="5-2" />
-        <TreeNode label="5-3" isExpanded>
-          <TreeNode label="5-4" selected />
-          <TreeNode label="5-5" isExpanded>
-            <TreeNode label="5-6" />
+  .add(
+    'default',
+    () => (
+      <TreeView>
+        <TreeNode value="1" label={<button>1</button>} />
+        <TreeNode value="2" label="2" />
+        <TreeNode value="3" label="3">
+          <TreeNode value="3-1" label="3-1" />
+          <TreeNode value="3-2" label="3-2" />
+        </TreeNode>
+        <TreeNode value="4" label="4" />
+        <TreeNode value="5" label="5" isExpanded selected>
+          <TreeNode value="5-1" label="5-1" />
+          <TreeNode value="5-2" label="5-2" />
+          <TreeNode value="5-3" label="5-3" isExpanded>
+            <TreeNode value="5-4" label="5-4" />
+            <TreeNode value="5-5" label="5-5" isExpanded>
+              <TreeNode value="5-6" label="5-6" />
+            </TreeNode>
           </TreeNode>
         </TreeNode>
-      </TreeNode>
-      <TreeNode label="6">
-        <TreeNode label="6-1" />
-        <TreeNode label="6-2" />
-      </TreeNode>
-    </TreeView>
-  ));
+        <TreeNode value="6" label="6">
+          <TreeNode value="6-1" label="6-1" />
+          <TreeNode value="6-2" label="6-2" />
+        </TreeNode>
+        <TreeNode value="7" label="7" isExpanded disabled>
+          <TreeNode value="7-1" label="7-1" />
+          <TreeNode value="7-2" label="7-2" />
+        </TreeNode>
+      </TreeView>
+    ),
+    {
+      info: {
+        text: ``,
+      },
+    }
+  )
+  .add(
+    'with icons',
+    () => (
+      <TreeView>
+        <TreeNode
+          renderIcon={Document16}
+          value="1"
+          label={<button>1</button>}
+        />
+        <TreeNode renderIcon={Document16} value="2" label="2" />
+        <TreeNode renderIcon={Folder16} value="3" label="3">
+          <TreeNode renderIcon={Document16} value="3-1" label="3-1" />
+          <TreeNode renderIcon={Document16} value="3-2" label="3-2" />
+        </TreeNode>
+        <TreeNode renderIcon={Document16} value="4" label="4" />
+        <TreeNode renderIcon={Folder16} value="5" label="5" isExpanded selected>
+          <TreeNode renderIcon={Document16} value="5-1" label="5-1" />
+          <TreeNode renderIcon={Document16} value="5-2" label="5-2" />
+          <TreeNode renderIcon={Folder16} value="5-3" label="5-3" isExpanded>
+            <TreeNode renderIcon={Document16} value="5-4" label="5-4" />
+            <TreeNode renderIcon={Folder16} value="5-5" label="5-5" isExpanded>
+              <TreeNode renderIcon={Document16} value="5-6" label="5-6" />
+            </TreeNode>
+          </TreeNode>
+        </TreeNode>
+        <TreeNode renderIcon={Folder16} value="6" label="6">
+          <TreeNode renderIcon={Document16} value="6-1" label="6-1" />
+          <TreeNode renderIcon={Document16} value="6-2" label="6-2" />
+        </TreeNode>
+        <TreeNode renderIcon={Folder16} value="7" label="7" isExpanded disabled>
+          <TreeNode renderIcon={Document16} value="7-1" label="7-1" />
+          <TreeNode renderIcon={Document16} value="7-2" label="7-2" />
+        </TreeNode>
+      </TreeView>
+    ),
+    {
+      info: {
+        text: ``,
+      },
+    }
+  );
