@@ -10,22 +10,26 @@
 const { builders, Metadata } = require('@carbon/icon-build-helpers');
 const path = require('path');
 
-const SVG_DIR = path.resolve(__dirname, '../svg');
-
 async function build() {
-  await builders.vanilla.run(SVG_DIR, {
-    cwd: process.cwd(),
-  });
-
-  await Metadata.build({
-    input: path.resolve(__dirname, '../'),
+  const metadata = await Metadata.build({
+    input: {
+      svg: path.resolve(__dirname, '../src/svg'),
+      extensions: path.resolve(__dirname, '../'),
+    },
     extensions: [
       Metadata.extensions.icons,
-      Metadata.extensions.moduleName,
+      Metadata.extensions.assets,
       Metadata.extensions.deprecated,
+      Metadata.extensions.output,
       Metadata.extensions.categories,
     ],
   });
+
+  const output = path.resolve(__dirname, '../');
+  await Promise.all([
+    builders.svg.run(metadata, { output }),
+    builders.vanilla.run(metadata, { output }),
+  ]);
 }
 
 build().catch(error => {

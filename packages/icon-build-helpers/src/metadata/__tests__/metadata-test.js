@@ -57,7 +57,14 @@ describe('Metadata', () => {
       adapter.filesystem.set('/test/extension-a', data);
 
       await expect(
-        Metadata.check({ adapter, input: '/test', extensions: [a] })
+        Metadata.check({
+          adapter,
+          input: {
+            svg: '/test',
+            extensions: '/test',
+          },
+          extensions: [a],
+        })
       ).resolves.toBeUndefined();
 
       // Extension should be loaded
@@ -98,7 +105,10 @@ describe('Metadata', () => {
 
       const metadata = await Metadata.load({
         adapter,
-        input: '/test',
+        input: {
+          svg: '/test',
+          extensions: '/test',
+        },
         extensions: [extension],
       });
 
@@ -109,7 +119,10 @@ describe('Metadata', () => {
         data,
         expect.any(Map),
         {
-          input: '/test',
+          input: {
+            svg: '/test',
+            extensions: '/test',
+          },
         }
       );
     });
@@ -136,7 +149,10 @@ describe('Metadata', () => {
 
       await Metadata.build({
         adapter,
-        input: '/test',
+        input: {
+          svg: '/test',
+          extensions: '/test',
+        },
         extensions: [extension],
       });
 
@@ -145,7 +161,10 @@ describe('Metadata', () => {
         icons: ['a'],
         data,
         context: {
-          input: '/test',
+          input: {
+            svg: '/test',
+            extensions: '/test',
+          },
         },
       });
     });
