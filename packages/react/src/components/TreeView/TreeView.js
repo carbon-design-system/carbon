@@ -29,6 +29,8 @@ export default function TreeView({
     if (multiselect && event.metaKey) {
       if (!selected.includes(value)) {
         setSelected(selected.concat(value));
+      } else {
+        setSelected(selected.filter(selectedValue => selectedValue !== value));
       }
     } else {
       setSelected([value]);
