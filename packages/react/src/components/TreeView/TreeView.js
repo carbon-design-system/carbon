@@ -17,9 +17,12 @@ export default function TreeView({
   multiselect,
   onChange,
   selected: preselected = '',
+  size = 'default',
   ...rest
 }) {
-  const treeClasses = classNames(className, `${prefix}--tree`);
+  const treeClasses = classNames(className, `${prefix}--tree`, {
+    [`${prefix}--tree--${size}`]: size !== 'default',
+  });
   const [selected, setSelected] = useState(preselected);
   const handleSelect = (event, { value } = {}) => {
     if (multiselect && event.metaKey) {

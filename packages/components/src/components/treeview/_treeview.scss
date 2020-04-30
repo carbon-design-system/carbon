@@ -130,6 +130,10 @@
       }
     }
   }
+
+  .#{$prefix}--tree--compact .#{$prefix}--tree-node__label {
+    min-height: rem(24px);
+  }
 }
 
 @include exports('treeview') {
