@@ -190,5 +190,6 @@
       "@babel/plugin-proposal-object-rest-spread",
       "dev-expression"
     ]
-  }
+  },
+  "sideEffects": false
 }
