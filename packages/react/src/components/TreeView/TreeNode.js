@@ -57,7 +57,7 @@ export default function TreeNode({
   };
   const handleClick = event => {
     event.stopPropagation();
-    if (onSelect) {
+    if (onSelect && !disabled) {
       onSelect(event, { value });
     }
   };
