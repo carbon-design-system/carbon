@@ -403,6 +403,10 @@ $list-box-menu-width: rem(300px);
     border-radius: rem(12px);
   }
 
+  .#{$prefix}--tag.#{$prefix}--list-box__selection--disabled {
+    @include tag-theme($disabled-02, $disabled-03);
+  }
+
   // Descendant of a `list-box` that displays a list of options to select
   .#{$prefix}--list-box__menu {
     @include box-shadow();

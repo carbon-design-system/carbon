@@ -27,6 +27,7 @@ const ListBoxSelection = ({
 }) => {
   const className = cx(`${prefix}--list-box__selection`, {
     [`${prefix}--list-box__selection--multi`]: selectionCount,
+    [`${prefix}--list-box__selection--disabled`]: disabled,
   });
   const handleOnClick = event => {
     event.stopPropagation();
