@@ -7229,7 +7229,6 @@ $inverse-01: if(
   - [button [mixin]](#button-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
-  - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
@@ -7262,7 +7261,6 @@ $inverse-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [tags [mixin]](#tags-mixin)
@@ -7717,7 +7715,6 @@ $hover-secondary: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
-  - [listbox [mixin]](#listbox-mixin)
 
 ### ✅active-secondary [variable]
 
@@ -18892,40 +18889,18 @@ List box styles
   }
 
   // Modifier for a selection to show that multiple selections have been made
-  .#{$prefix}--list-box__selection--multi {
-    @include type-style('label-01');
+  .#{$prefix}--tag.#{$prefix}--list-box__selection--multi {
     position: static;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0;
-    background-color: $inverse-02;
     height: rem(24px);
     width: auto;
-    color: $inverse-01;
-    line-height: 0;
     padding: rem(8px);
     padding-right: rem(2px); // Align with hover circle of X button
+    margin: 0;
     margin-right: rem(10px);
     border-radius: rem(12px);
-  }
-
-  .#{$prefix}--list-box__selection--multi > svg {
-    fill: $inverse-01;
-    margin-left: rem(4px);
-    width: rem(20px);
-    height: rem(20px);
-    padding: rem(2px);
-  }
-
-  .#{$prefix}--list-box__selection--multi > svg:hover {
-    border-radius: 50%;
-    background-color: $hover-secondary;
-  }
-
-  .#{$prefix}--list-box__selection--multi:focus,
-  .#{$prefix}--list-box__selection--multi:hover {
-    outline: none;
   }
 
   // Descendant of a `list-box` that displays a list of options to select
@@ -19201,9 +19176,6 @@ List box styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
-  - [inverse-02 [variable]](#inverse-02-variable)
-  - [inverse-01 [variable]](#inverse-01-variable)
-  - [hover-secondary [variable]](#hover-secondary-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [text-02 [variable]](#text-02-variable)
   - [selected-ui [variable]](#selected-ui-variable)
