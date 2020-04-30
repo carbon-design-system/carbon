@@ -259,7 +259,9 @@ describe('MultiSelect', () => {
       document.querySelector(`.${prefix}--list-box__selection--multi`)
     ).toBeTruthy();
 
-    Simulate.click(document.querySelector(`.${prefix}--list-box__selection--multi`));
+    Simulate.click(
+      document.querySelector(`.${prefix}--list-box__selection--multi`)
+    );
 
     expect(
       document.querySelector(`.${prefix}--list-box__selection--multi`)
