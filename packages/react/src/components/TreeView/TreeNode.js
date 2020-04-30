@@ -108,16 +108,19 @@ export default function TreeNode({
     setExpanded(isExpanded);
   }, [children, depth, Icon, isExpanded]);
 
+  const treeNodeProps = {
+    ...rest,
+    className: treeNodeClasses,
+    onClick: handleClick,
+    onKeyDown: handleKeyDown,
+    ref: currentNode,
+    role: 'treeitem',
+    tabIndex: (!disabled && -1) || null,
+  };
+
   if (!children) {
     return (
-      <li
-        {...rest}
-        className={treeNodeClasses}
-        onKeyDown={handleKeyDown}
-        disabled={disabled}
-        ref={currentNode}
-        role="treeitem"
-        tabIndex="-1">
+      <li {...treeNodeProps}>
         <div className={`${prefix}--tree-node__label`}>
           {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
           {label}
@@ -126,15 +129,7 @@ export default function TreeNode({
     );
   }
   return (
-    <li
-      {...rest}
-      aria-expanded={isExpanded}
-      className={treeNodeClasses}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      ref={currentNode}
-      role="treeitem"
-      tabIndex="-1">
+    <li {...treeNodeProps} aria-expanded={isExpanded}>
       <div className={`${prefix}--tree-node__label`}>
         <button
           className={`${prefix}--tree-parent-node__toggle`}
