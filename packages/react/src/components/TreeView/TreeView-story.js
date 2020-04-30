@@ -8,7 +8,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Document16, Folder16 } from '@carbon/icons-react';
-import { withKnobs, boolean, text, select } from '@storybook/addon-knobs';
+import { withKnobs, boolean, object, select } from '@storybook/addon-knobs';
 import TreeView, { TreeNode } from '../TreeView';
 
 const sizes = {
@@ -20,7 +20,9 @@ const props = () => ({
     'Allow selection of multiple tree nodes (multiselect)',
     false
   ),
-  selected: text('Comma delimited string of selected values (selected)', '5'),
+  selected: object('Comma delimited string of selected values (selected)', [
+    '5',
+  ]),
   size: select('Tree size (sizes)', sizes, 'default'),
 });
 

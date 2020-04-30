@@ -17,7 +17,7 @@ export default function TreeView({
   className,
   multiselect,
   onChange,
-  selected: preselected = '',
+  selected: preselected = [],
   size = 'default',
   ...rest
 }) {
@@ -27,17 +27,11 @@ export default function TreeView({
   const [selected, setSelected] = useState(preselected);
   const handleSelect = (event, { value } = {}) => {
     if (multiselect && event.metaKey) {
-      const valuesList = selected.split(',');
-      if (valuesList.indexOf(value) < 0) {
-        setSelected(
-          valuesList
-            .concat([value])
-            .sort()
-            .join(',')
-        );
+      if (!selected.includes(value)) {
+        setSelected(selected.concat(value));
       }
     } else {
-      setSelected(value);
+      setSelected([value]);
     }
     if (onChange) {
       onChange(event, { value: value?.value });
@@ -87,9 +81,9 @@ TreeView.propTypes = {
   onChange: PropTypes.func,
 
   /**
-   * Comma delimited string representing all selected values in the tree
+   * Array representing all selected values in the tree
    */
-  selected: PropTypes.string,
+  selected: PropTypes.arrayOf(PropTypes.string),
 
   /**
    * Specify the size of the tree from a list of available sizes.

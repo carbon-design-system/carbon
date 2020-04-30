@@ -42,7 +42,7 @@ export default function TreeNode({
   });
   const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
     [`${prefix}--tree-node--disabled`]: disabled,
-    [`${prefix}--tree-node--selected`]: selected.split(',').indexOf(value) >= 0,
+    [`${prefix}--tree-node--selected`]: selected.includes(value),
     [`${prefix}--tree-node--with-icon`]: Icon,
     [`${prefix}--tree-leaf-node`]: !children,
     [`${prefix}--tree-parent-node`]: children,
@@ -200,9 +200,9 @@ TreeNode.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * Comma delimited string representing all selected values in the tree
+   * Array containing all selected values in the tree
    */
-  selected: PropTypes.string,
+  selected: PropTypes.arrayOf(PropTypes.string),
 
   /**
    * Specify the value of the TreeNode
