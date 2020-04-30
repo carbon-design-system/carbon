@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { CaretDown16 } from '@carbon/icons-react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
@@ -14,8 +15,8 @@ import { keys, match } from '../../internal/keyboard';
 const { prefix } = settings;
 
 export default function TreeNode({
-  className,
   children,
+  className,
   depth,
   disabled,
   isExpanded,
@@ -150,3 +151,61 @@ export default function TreeNode({
     </li>
   );
 }
+
+TreeNode.propTypes = {
+  /**
+   * Specify the children of the TreeNode
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the TreeNode
+   */
+  className: PropTypes.string,
+
+  /**
+   * TreeNode depth to determine spacing, automatically calculated by default
+   */
+  depth: PropTypes.number,
+
+  /**
+   * Specify if the TreeNode is disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Specify if the TreeNode is expanded (only applicable to parent nodes)
+   */
+  isExpanded: PropTypes.bool,
+
+  /**
+   * Rendered label for the TreeNode
+   */
+  label: PropTypes.node,
+
+  /**
+   * Callback function for when a node is selected
+   */
+  onSelect: PropTypes.func,
+
+  /**
+   * Callback function for when a parent node is expanded or collapsed
+   */
+  onToggle: PropTypes.func,
+
+  /**
+   * Optional prop to allow each node to have an associated icon.
+   * Can be a React component class
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Comma delimited string representing all selected values in the tree
+   */
+  selected: PropTypes.string,
+
+  /**
+   * Specify the value of the TreeNode
+   */
+  value: PropTypes.string,
+};
