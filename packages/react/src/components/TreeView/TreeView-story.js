@@ -20,7 +20,7 @@ const props = () => ({
     'Allow selection of multiple tree nodes (multiselect)',
     false
   ),
-  selected: text('Comma separated list of selected values (selected)', '5'),
+  selected: text('Comma delimited string of selected values (selected)', '5'),
   size: select('Tree size (sizes)', sizes, 'default'),
 });
 
