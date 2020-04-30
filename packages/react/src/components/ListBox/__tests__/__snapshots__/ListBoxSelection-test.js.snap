@@ -26,39 +26,63 @@ exports[`ListBoxSelection should render 1`] = `
     }
   }
 >
-  <div
-    aria-label="Clear Selection"
+  <Tag
     className="bx--list-box__selection"
+    filter={true}
     onClick={[Function]}
+    onClose={[Function]}
     onKeyDown={[Function]}
-    role="button"
-    tabIndex={0}
     title="translation"
+    type="high-contrast"
   >
-    <ForwardRef(Close16)>
-      <Icon
-        height={16}
-        preserveAspectRatio="xMidYMid meet"
-        viewBox="0 0 32 32"
-        width={16}
-        xmlns="http://www.w3.org/2000/svg"
+    <div
+      aria-label="translation undefined"
+      className="bx--tag bx--list-box__selection bx--tag--filter bx--tag--high-contrast"
+      id="tag-1"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      <span
+        className="bx--tag__label"
       >
-        <svg
-          aria-hidden={true}
-          focusable="false"
-          height={16}
-          preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 32 32"
-          width={16}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
-          />
-        </svg>
-      </Icon>
-    </ForwardRef(Close16)>
-  </div>
+        High-Contrast
+      </span>
+      <button
+        aria-labelledby="tag-1"
+        className="bx--tag__close-icon"
+        onClick={[Function]}
+      >
+        <ForwardRef(Close16)>
+          <Icon
+            height={16}
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+            width={16}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <svg
+              aria-hidden={true}
+              focusable="false"
+              height={16}
+              preserveAspectRatio="xMidYMid meet"
+              style={
+                Object {
+                  "willChange": "transform",
+                }
+              }
+              viewBox="0 0 32 32"
+              width={16}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                points="24 9.4 22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4"
+              />
+            </svg>
+          </Icon>
+        </ForwardRef(Close16)>
+      </button>
+    </div>
+  </Tag>
 </ListBoxSelection>
 `;
 
@@ -89,39 +113,62 @@ exports[`ListBoxSelection should render 2`] = `
     }
   }
 >
-  <div
-    aria-label="Clear Selection"
-    className="bx--list-box__selection bx--tag--filter bx--list-box__selection--multi"
+  <Tag
+    className="bx--list-box__selection bx--list-box__selection--multi"
+    filter={true}
     onClick={[Function]}
+    onClose={[Function]}
     onKeyDown={[Function]}
-    role="button"
-    tabIndex={0}
     title="translation"
+    type="high-contrast"
   >
-    3
-    <ForwardRef(Close16)>
-      <Icon
-        height={16}
-        preserveAspectRatio="xMidYMid meet"
-        viewBox="0 0 32 32"
-        width={16}
-        xmlns="http://www.w3.org/2000/svg"
+    <div
+      aria-label="translation 3"
+      className="bx--tag bx--list-box__selection bx--list-box__selection--multi bx--tag--filter bx--tag--high-contrast"
+      id="tag-2"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      <span
+        className="bx--tag__label"
       >
-        <svg
-          aria-hidden={true}
-          focusable="false"
-          height={16}
-          preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 32 32"
-          width={16}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
-          />
-        </svg>
-      </Icon>
-    </ForwardRef(Close16)>
-  </div>
+        3
+      </span>
+      <button
+        aria-labelledby="tag-2"
+        className="bx--tag__close-icon"
+        onClick={[Function]}
+      >
+        <ForwardRef(Close16)>
+          <Icon
+            height={16}
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+            width={16}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <svg
+              aria-hidden={true}
+              focusable="false"
+              height={16}
+              preserveAspectRatio="xMidYMid meet"
+              style={
+                Object {
+                  "willChange": "transform",
+                }
+              }
+              viewBox="0 0 32 32"
+              width={16}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                points="24 9.4 22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4"
+              />
+            </svg>
+          </Icon>
+        </ForwardRef(Close16)>
+      </button>
+    </div>
+  </Tag>
 </ListBoxSelection>
 `;
