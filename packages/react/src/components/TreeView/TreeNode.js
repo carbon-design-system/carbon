@@ -20,25 +20,28 @@ export default function TreeNode({
   disabled,
   isExpanded,
   label,
+  onSelect,
   onToggle,
   renderIcon: Icon,
   selected,
+  value,
   ...rest
 }) {
   const [expanded, setExpanded] = useState(isExpanded);
-  const handleToggleClick = event => {
-    setExpanded(!expanded);
-    onToggle && onToggle(event, { isExpanded: !expanded });
-  };
   const currentNode = useRef(null);
   const nodesWithProps = React.Children.map(children, node => {
     if (React.isValidElement(node)) {
-      return React.cloneElement(node, { depth: depth + 1, disabled });
+      return React.cloneElement(node, {
+        depth: depth + 1,
+        disabled,
+        onSelect,
+        selected,
+      });
     }
   });
   const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
     [`${prefix}--tree-node--disabled`]: disabled,
-    [`${prefix}--tree-node--selected`]: selected,
+    [`${prefix}--tree-node--selected`]: selected.split(',').indexOf(value) >= 0,
     [`${prefix}--tree-node--with-icon`]: Icon,
     [`${prefix}--tree-leaf-node`]: !children,
     [`${prefix}--tree-parent-node`]: children,
@@ -46,6 +49,18 @@ export default function TreeNode({
   const toggleClasses = classNames(`${prefix}--tree-parent-node__toggle-icon`, {
     [`${prefix}--tree-parent-node__toggle-icon--expanded`]: expanded,
   });
+  const handleToggleClick = event => {
+    if (onToggle) {
+      onToggle(event, { isExpanded: !expanded });
+    }
+    setExpanded(!expanded);
+  };
+  const handleClick = event => {
+    event.stopPropagation();
+    if (onSelect) {
+      onSelect(event, { value });
+    }
+  };
   const handleKeyDown = event => {
     event.stopPropagation();
 
@@ -115,6 +130,7 @@ export default function TreeNode({
       {...rest}
       aria-expanded={isExpanded}
       className={treeNodeClasses}
+      onClick={handleClick}
       onKeyDown={handleKeyDown}
       ref={currentNode}
       role="treeitem"

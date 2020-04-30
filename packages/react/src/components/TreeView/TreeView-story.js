@@ -8,13 +8,23 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Document16, Folder16 } from '@carbon/icons-react';
+import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import TreeView, { TreeNode } from '../TreeView';
 
+const props = () => ({
+  multiselect: boolean(
+    'Allow selection of multiple tree nodes (multiselect)',
+    false
+  ),
+  selected: text('Comma separated list of selected values (selected)', '5'),
+});
+
 storiesOf('TreeView', module)
+  .addDecorator(withKnobs)
   .add(
     'default',
     () => (
-      <TreeView>
+      <TreeView {...props()}>
         <TreeNode value="1" label={<button>1</button>} />
         <TreeNode value="2" label="2" />
         <TreeNode value="3" label="3">
@@ -22,7 +32,7 @@ storiesOf('TreeView', module)
           <TreeNode value="3-2" label="3-2" />
         </TreeNode>
         <TreeNode value="4" label="4" />
-        <TreeNode value="5" label="5" isExpanded selected>
+        <TreeNode value="5" label="5" isExpanded>
           <TreeNode value="5-1" label="5-1" />
           <TreeNode value="5-2" label="5-2" />
           <TreeNode value="5-3" label="5-3" isExpanded>
@@ -39,6 +49,10 @@ storiesOf('TreeView', module)
         <TreeNode value="7" label="7" isExpanded disabled>
           <TreeNode value="7-1" label="7-1" />
           <TreeNode value="7-2" label="7-2" />
+          <TreeNode value="8" label="8" isExpanded>
+            <TreeNode value="8-1" label="8-1" />
+            <TreeNode value="8-2" label="8-2" />
+          </TreeNode>
         </TreeNode>
       </TreeView>
     ),
@@ -51,7 +65,7 @@ storiesOf('TreeView', module)
   .add(
     'with icons',
     () => (
-      <TreeView>
+      <TreeView {...props()}>
         <TreeNode
           renderIcon={Document16}
           value="1"
@@ -63,7 +77,7 @@ storiesOf('TreeView', module)
           <TreeNode renderIcon={Document16} value="3-2" label="3-2" />
         </TreeNode>
         <TreeNode renderIcon={Document16} value="4" label="4" />
-        <TreeNode renderIcon={Folder16} value="5" label="5" isExpanded selected>
+        <TreeNode renderIcon={Folder16} value="5" label="5" isExpanded>
           <TreeNode renderIcon={Document16} value="5-1" label="5-1" />
           <TreeNode renderIcon={Document16} value="5-2" label="5-2" />
           <TreeNode renderIcon={Folder16} value="5-3" label="5-3" isExpanded>
@@ -80,6 +94,15 @@ storiesOf('TreeView', module)
         <TreeNode renderIcon={Folder16} value="7" label="7" isExpanded disabled>
           <TreeNode renderIcon={Document16} value="7-1" label="7-1" />
           <TreeNode renderIcon={Document16} value="7-2" label="7-2" />
+          <TreeNode
+            renderIcon={Folder16}
+            value="8"
+            label="8"
+            isExpanded
+            disabled>
+            <TreeNode renderIcon={Document16} value="8-1" label="8-1" />
+            <TreeNode renderIcon={Document16} value="8-2" label="8-2" />
+          </TreeNode>
         </TreeNode>
       </TreeView>
     ),
