@@ -6,6 +6,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 
@@ -62,3 +63,36 @@ export default function TreeView({
     </ul>
   );
 }
+
+TreeView.propTypes = {
+  /**
+   * Specify the children of the TreeView
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the TreeView
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify the selection mode of the tree.
+   * If `multiselect` is `false` then only one node can be selected at a time
+   */
+  multiselect: PropTypes.bool,
+
+  /**
+   * Callback function that is called in response to the `change` event
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Comma delimited string representing all selected values in the tree
+   */
+  selected: PropTypes.string,
+
+  /**
+   * Specify the size of the tree from a list of available sizes.
+   */
+  size: PropTypes.oneOf(['default', 'compact']),
+};
