@@ -13,6 +13,9 @@ import { Simulate } from 'react-dom/test-utils';
 import MultiSelect from '../';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
 import { keys } from '../../../internal/keyboard';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('MultiSelect', () => {
   afterEach(cleanup);
@@ -253,13 +256,13 @@ describe('MultiSelect', () => {
     Simulate.click(itemNode);
 
     expect(
-      document.querySelector('[aria-label="Clear Selection"]')
+      document.querySelector(`.${prefix}--list-box__selection--multi`)
     ).toBeTruthy();
 
-    Simulate.click(document.querySelector('[aria-label="Clear Selection"]'));
+    Simulate.click(document.querySelector(`.${prefix}--list-box__selection--multi`));
 
     expect(
-      document.querySelector('[aria-label="Clear Selection"]')
+      document.querySelector(`.${prefix}--list-box__selection--multi`)
     ).toBeFalsy();
   });
 
@@ -291,7 +294,7 @@ describe('MultiSelect', () => {
       );
 
       expect(
-        document.querySelector('[aria-label="Clear Selection"]')
+        document.querySelector(`.${prefix}--list-box__selection--multi`)
       ).toBeTruthy();
 
       const labelNode = getByText(container, label);
