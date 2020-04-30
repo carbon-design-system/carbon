@@ -55,7 +55,6 @@ const ListBoxSelection = ({
       onClose={handleOnClick}
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}
-      aria-label="Clear Selection"
       title={description}>
       {selectionCount}
     </Tag>
