@@ -6,13 +6,14 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
 import PasswordInput from './PasswordInput';
 import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';
+import { FormContext } from '../FluidForm';
 
 const { prefix } = settings;
 const TextInput = React.forwardRef(function TextInput(
@@ -59,6 +60,13 @@ const TextInput = React.forwardRef(function TextInput(
     title: placeholder,
     ...other,
   };
+  const inputWrapperClasses = classNames(
+    `${prefix}--form-item`,
+    `${prefix}--text-input-wrapper`,
+    {
+      [`${prefix}--text-input-wrapper--light`]: light,
+    }
+  );
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: other.disabled,
@@ -83,8 +91,10 @@ const TextInput = React.forwardRef(function TextInput(
     <div className={helperTextClasses}>{helperText}</div>
   ) : null;
 
+  const { isFluid } = useContext(FormContext);
+
   return (
-    <div className={`${prefix}--form-item ${prefix}--text-input-wrapper`}>
+    <div className={inputWrapperClasses}>
       {label}
       {helper}
       <div
@@ -94,8 +104,11 @@ const TextInput = React.forwardRef(function TextInput(
           <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
         )}
         {input}
+        {isFluid && <hr className={`${prefix}--text-input__divider`} />}
+        {/* <hr className={`${prefix}--text-input__divider`} /> */}
+        {isFluid ? error : null}
       </div>
-      {error}
+      {isFluid ? null : error}
     </div>
   );
 });

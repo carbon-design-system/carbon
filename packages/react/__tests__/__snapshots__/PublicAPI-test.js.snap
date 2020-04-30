@@ -32,9 +32,7 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "iconDescription": Object {
-        "type": "string",
-      },
+      "iconDescription": [Function],
       "onClick": Object {
         "type": "func",
       },
@@ -2351,6 +2349,9 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "onDelete": Object {
+        "type": "func",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -2558,6 +2559,16 @@ Map {
     },
   },
   "Form" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "FluidForm" => Object {
     "propTypes": Object {
       "children": Object {
         "type": "node",

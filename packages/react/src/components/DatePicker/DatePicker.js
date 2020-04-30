@@ -581,14 +581,20 @@ export default class DatePicker extends Component {
 
     const childArray = React.Children.toArray(children);
     const childrenWithProps = childArray.map((child, index) => {
-      if (index === 0 && child.type === DatePickerInput) {
+      if (
+        index === 0 &&
+        child.type === React.createElement(DatePickerInput).type
+      ) {
         return React.cloneElement(child, {
           datePickerType,
           ref: this.assignInputFieldRef,
           openCalendar: this.openCalendar,
         });
       }
-      if (index === 1 && child.type === DatePickerInput) {
+      if (
+        index === 1 &&
+        child.type === React.createElement(DatePickerInput).type
+      ) {
         return React.cloneElement(child, {
           datePickerType,
           ref: this.assignToInputFieldRef,

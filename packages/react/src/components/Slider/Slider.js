@@ -424,7 +424,7 @@ export default class Slider extends PureComponent {
       if (value == null) {
         value = this.state.value;
       }
-      leftPercent = value / (range - this.props.min);
+      leftPercent = (value - this.props.min) / range;
     }
 
     if (useRawValue) {
