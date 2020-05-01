@@ -66,6 +66,7 @@ const Tag = ({
       <button
         className={`${prefix}--tag__close-icon`}
         onClick={handleClose}
+        disabled={disabled}
         aria-labelledby={tagId}>
         <Close16 />
       </button>

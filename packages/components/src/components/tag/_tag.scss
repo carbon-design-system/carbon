@@ -171,6 +171,10 @@
     background-color: transparent;
     border-radius: 50%;
     cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 
   .#{$prefix}--tag__close-icon:focus {
