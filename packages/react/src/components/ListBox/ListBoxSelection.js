@@ -56,7 +56,8 @@ const ListBoxSelection = ({
       onClose={handleOnClick}
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}
-      title={description}>
+      title={description}
+      disabled={disabled}>
       {selectionCount}
     </Tag>
   );
