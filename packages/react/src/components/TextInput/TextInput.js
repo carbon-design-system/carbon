@@ -96,26 +96,34 @@ const TextInput = React.forwardRef(function TextInput(
 
   const { isFluid } = useContext(FormContext);
 
-  const inputWrapper = (<><div
-    className={`${prefix}--text-input__field-wrapper`}
-    data-invalid={invalid || null}>
-    {invalid && (
-      <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
-    )}
-    {input}
-    {isFluid && <hr className={`${prefix}--text-input__divider`} />}
-    {/* <hr className={`${prefix}--text-input__divider`} /> */}
-    {isFluid ? error : null}
-  </div> {isFluid ? null : error}</>);
-  const inputWrapperInline = (<div className={`${prefix}--text-input__field-wrapper--inline`}>{inputWrapper}</div>);
+  const inputWrapper = (
+    <>
+      {helper}
+      <div
+        className={`${prefix}--text-input__field-wrapper`}
+        data-invalid={invalid || null}>
+        {invalid && (
+          <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
+        )}
+        {input}
+        {isFluid && <hr className={`${prefix}--text-input__divider`} />}
+        {/* <hr className={`${prefix}--text-input__divider`} /> */}
+        {isFluid ? error : null}
+      </div>
+      {isFluid ? null : error}
+    </>
+  );
+  const inputWrapperInline = (
+    <div className={`${prefix}--text-input__field-wrapper--inline`}>
+      {inputWrapper}
+    </div>
+  );
 
   return (
     <div className={inputWrapperClasses}>
       {label}
-      {!inline && helper}
-      {!inline &&inputWrapper}
-      {inline &&inputWrapperInline}
-      {inline && helper}
+      {!inline && inputWrapper}
+      {inline && inputWrapperInline}
     </div>
   );
 });
