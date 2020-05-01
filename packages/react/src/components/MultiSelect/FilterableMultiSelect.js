@@ -160,7 +160,6 @@ export default class FilterableMultiSelect extends React.Component {
     super(props);
     this.filterableMultiSelectInstanceId = getInstanceId();
     this.state = {
-      highlightedIndex: null,
       isOpen: props.open,
       inputValue: '',
       topItems: [],

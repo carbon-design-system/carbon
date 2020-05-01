@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { debug, getByText, isElementVisible } from '@carbon/test-utils/dom';
+import { getByText, isElementVisible } from '@carbon/test-utils/dom';
 import { pressEnter, pressSpace, pressTab } from '@carbon/test-utils/keyboard';
 import { render, cleanup } from '@carbon/test-utils/react';
 import React from 'react';
@@ -78,7 +78,7 @@ describe('MultiSelect', () => {
     ).toBeInstanceOf(HTMLElement);
   });
 
-  it.skip('should open the menu when a user hits enter while the field is focused', () => {
+  it('should open the menu when a user hits enter while the field is focused', () => {
     const items = generateItems(4, generateGenericItem);
     const { container } = render(
       <MultiSelect id="test" label="test-label" items={items} />
@@ -192,39 +192,6 @@ describe('MultiSelect', () => {
     expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe('true');
 
     pressEnter();
-
-    expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe(
-      'false'
-    );
-  });
-
-  it.skip('toggle selection with space', () => {
-    const items = generateItems(4, generateGenericItem);
-    const label = 'test-label';
-    const { container } = render(
-      <MultiSelect id="test" label={label} items={items} />
-    );
-    const labelNode = getByText(container, label);
-    console.log(debug(labelNode));
-    pressTab();
-    pressSpace();
-
-    const [item] = items;
-    const itemNode = getByText(container, item.label);
-
-    expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe(
-      'false'
-    );
-
-    Simulate.keyDown(container.querySelector('[role="listbox"]'), {
-      key: 'ArrowDown',
-    });
-
-    pressSpace(labelNode);
-
-    expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe('true');
-
-    pressSpace();
 
     expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe(
       'false'
