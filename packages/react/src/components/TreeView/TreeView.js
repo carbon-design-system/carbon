@@ -9,7 +9,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { keys, match } from '../../internal/keyboard';
+import { keys, match, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -54,6 +54,9 @@ export default function TreeView({
 
   const handleKeyDown = event => {
     event.stopPropagation();
+    if (matches(event, [keys.ArrowUp, keys.ArrowDown])) {
+      event.preventDefault();
+    }
     treeWalker.current.currentNode = document.activeElement;
     if (match(event, keys.ArrowUp)) {
       treeWalker.current.previousNode()?.focus();
