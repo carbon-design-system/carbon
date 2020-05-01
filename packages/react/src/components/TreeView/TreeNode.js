@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { CaretDown16 } from '@carbon/icons-react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { keys, match } from '../../internal/keyboard';
+import { keys, match, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -63,8 +63,9 @@ export default function TreeNode({
     }
   };
   const handleKeyDown = event => {
-    event.stopPropagation();
-
+    if (matches(event, [keys.ArrowLeft, keys.ArrowRight])) {
+      event.stopPropagation();
+    }
     if (children && match(event, keys.ArrowLeft)) {
       setExpanded(false);
     }
