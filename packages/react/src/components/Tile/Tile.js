@@ -449,15 +449,17 @@ export class ExpandableTile extends Component {
   }
 
   componentDidMount = () => {
-    const getStyle = window.getComputedStyle(this.tile, null);
+    if (this.tile) {
+      const getStyle = window.getComputedStyle(this.tile, null);
 
-    if (this.aboveTheFold) {
-      this.setState({
-        tileMaxHeight: this.aboveTheFold.getBoundingClientRect().height,
-        tilePadding:
-          parseInt(getStyle.getPropertyValue('padding-top'), 10) +
-          parseInt(getStyle.getPropertyValue('padding-bottom'), 10),
-      });
+      if (this.aboveTheFold) {
+        this.setState({
+          tileMaxHeight: this.aboveTheFold.getBoundingClientRect().height,
+          tilePadding:
+            parseInt(getStyle.getPropertyValue('padding-top'), 10) +
+            parseInt(getStyle.getPropertyValue('padding-bottom'), 10),
+        });
+      }
     }
   };
 
@@ -465,12 +467,15 @@ export class ExpandableTile extends Component {
     if (prevProps.expanded !== this.props.expanded) this.setMaxHeight();
   };
 
-  setMaxHeight = () =>
-    this.setState({
-      tileMaxHeight: this.state.expanded
-        ? this.tileContent.getBoundingClientRect().height
-        : this.aboveTheFold.getBoundingClientRect().height,
-    });
+  setMaxHeight = () => {
+    if (this.state.expanded ? this.tileContent : this.aboveTheFold) {
+      this.setState({
+        tileMaxHeight: this.state.expanded
+          ? this.tileContent.getBoundingClientRect().height
+          : this.aboveTheFold.getBoundingClientRect().height,
+      });
+    }
+  };
 
   handleClick = evt => {
     if (!this.props.onBeforeClick(evt)) return;
