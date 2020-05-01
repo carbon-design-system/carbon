@@ -63,7 +63,7 @@ export default function TreeNode({
     }
   };
   const handleKeyDown = event => {
-    if (matches(event, [keys.ArrowLeft, keys.ArrowRight])) {
+    if (matches(event, [keys.ArrowLeft, keys.ArrowRight, keys.Enter])) {
       event.stopPropagation();
     }
     if (children && match(event, keys.ArrowLeft)) {
@@ -71,6 +71,9 @@ export default function TreeNode({
     }
     if (children && match(event, keys.ArrowRight)) {
       setExpanded(true);
+    }
+    if (match(event, keys.Enter) && onSelect && !disabled) {
+      onSelect(event, { value });
     }
     if (rest.onKeyDown) {
       rest.onKeyDown(event);
