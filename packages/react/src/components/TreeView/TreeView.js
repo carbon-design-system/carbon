@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import { keys, match } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -24,6 +25,8 @@ export default function TreeView({
   const treeClasses = classNames(className, `${prefix}--tree`, {
     [`${prefix}--tree--${size}`]: size !== 'default',
   });
+  const treeRootRef = useRef(null);
+  const treeWalker = useRef(treeRootRef?.current);
   const [selected, setSelected] = useState(preselected);
   const handleSelect = (event, { value } = {}) => {
     if (multiselect && event.metaKey) {
@@ -49,12 +52,47 @@ export default function TreeView({
     }
   });
 
+  const handleKeyDown = event => {
+    event.stopPropagation();
+    treeWalker.current.currentNode = document.activeElement;
+    if (match(event, keys.ArrowUp)) {
+      treeWalker.current.previousNode()?.focus();
+    }
+    if (match(event, keys.ArrowDown)) {
+      treeWalker.current.nextNode()?.focus();
+    }
+    if (rest.onKeyDown) {
+      rest.onKeyDown(event);
+    }
+  };
+
   useEffect(() => {
+    treeWalker.current =
+      treeWalker.current ??
+      document.createTreeWalker(treeRootRef?.current, NodeFilter.SHOW_ELEMENT, {
+        acceptNode: function(node) {
+          if (node.classList.contains(`${prefix}--tree-node--disabled`)) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          if (
+            node.tagName === 'LI' &&
+            node.classList.contains(`${prefix}--tree-node`)
+          ) {
+            return NodeFilter.FILTER_ACCEPT;
+          }
+          return NodeFilter.FILTER_SKIP;
+        },
+      });
     setSelected(preselected);
   }, [preselected]);
 
   return (
-    <ul {...rest} className={treeClasses} role="tree">
+    <ul
+      {...rest}
+      className={treeClasses}
+      onKeyDown={handleKeyDown}
+      ref={treeRootRef}
+      role="tree">
       {nodesWithProps}
     </ul>
   );
