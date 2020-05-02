@@ -479,7 +479,7 @@
     @include skeleton;
     width: 100%;
 
-    &::-webkit-input-placeholder {
+    &::placeholder {
       color: transparent;
     }
   }
