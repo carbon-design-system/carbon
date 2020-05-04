@@ -13588,6 +13588,11 @@ Accordion styles
     }
   }
 
+  .#{$prefix}--accordion.#{$prefix}--skeleton
+    .#{$prefix}--accordion__heading:hover::before {
+    background-color: transparent;
+  }
+
   .#{$prefix}--accordion--end.#{$prefix}--skeleton
     .#{$prefix}--accordion__arrow {
     margin-left: $spacing-05;
