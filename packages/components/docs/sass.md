@@ -13450,6 +13450,7 @@ Accordion styles
     padding: rem(6px) 0;
     flex-direction: $accordion-flex-direction;
     position: relative;
+    height: rem(40px);
     width: 100%;
     margin: 0;
     transition: background-color motion(standard, productive) $duration--fast-02;
@@ -13585,6 +13586,11 @@ Accordion styles
       outline: none;
       cursor: default;
     }
+  }
+
+  .#{$prefix}--accordion.#{$prefix}--skeleton
+    .#{$prefix}--accordion__heading:hover::before {
+    background-color: transparent;
   }
 
   .#{$prefix}--accordion--end.#{$prefix}--skeleton
@@ -17229,7 +17235,7 @@ Date picker styles
     @include skeleton;
     width: 100%;
 
-    &::-webkit-input-placeholder {
+    &::placeholder {
       color: transparent;
     }
   }
@@ -17607,7 +17613,6 @@ Dropdown styles
     display: inline-block;
     border-bottom-color: transparent;
     width: auto;
-    height: rem(32px);
     background-color: transparent;
     transition: background $duration--fast-01 motion(entrance, productive);
 
@@ -18731,12 +18736,6 @@ List box styles
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded:hover {
     background-color: $field-02;
-  }
-
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline,
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline
-    .#{$prefix}--list-box__field {
-    height: rem(32px);
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
@@ -23639,7 +23638,7 @@ Text input styles
     padding-right: $carbon--spacing-08;
   }
 
-  .#{$prefix}--text-input::-webkit-input-placeholder {
+  .#{$prefix}--text-input::placeholder {
     @include placeholder-colors;
   }
 
