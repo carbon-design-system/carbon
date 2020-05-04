@@ -28,7 +28,7 @@ jobs:
         run: yarn ci-check
 
       - name: Publish packages under the `next` dist tag
-        run: yarn lerna publish from-package --dist-tag next
+        run: yarn lerna publish from-package --dist-tag next --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

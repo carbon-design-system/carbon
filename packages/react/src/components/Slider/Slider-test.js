@@ -25,9 +25,9 @@ describe('Slider', () => {
       <Slider
         id={id}
         className="extra-class"
-        value={50}
-        min={0}
-        max={100}
+        value={1}
+        min={1}
+        max={3}
         step={1}
       />
     );
@@ -54,6 +54,10 @@ describe('Slider', () => {
     it('can set value via props', () => {
       wrapper.setProps({ value: 55 });
       expect(wrapper.props().value).toEqual(55);
+    });
+
+    it('should accurately position slider on mount', () => {
+      expect(wrapper.state().left).toEqual(0);
     });
 
     it('should specify light version as expected', () => {
