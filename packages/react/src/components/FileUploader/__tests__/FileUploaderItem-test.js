@@ -6,7 +6,7 @@
  */
 
 import { render, cleanup } from '@carbon/test-utils/react';
-import { getByText } from '@carbon/test-utils/dom';
+import { getByLabel, getByText } from '@carbon/test-utils/dom';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
 import { FileUploaderItem } from '../';
@@ -42,7 +42,7 @@ describe('FileUploaderItem', () => {
       />
     );
 
-    let removeFile = getByText(edit.container, description);
+    let removeFile = getByLabel(edit.container, description);
     Simulate.click(removeFile);
     expect(onDelete).toHaveBeenCalledTimes(1);
 

@@ -2390,18 +2390,6 @@ Map {
     },
   },
   "FileUploaderButton" => Object {
-    "defaultProps": Object {
-      "accept": Array [],
-      "buttonKind": "primary",
-      "disableLabelChanges": false,
-      "disabled": false,
-      "labelText": "Add file",
-      "multiple": false,
-      "onChange": [Function],
-      "onClick": [Function],
-      "role": "button",
-      "tabIndex": 0,
-    },
     "propTypes": Object {
       "accept": Object {
         "args": Array [
