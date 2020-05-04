@@ -24,7 +24,7 @@ const assets = () => {
         entry.assets = icon.assets.map(({ size, filepath }) => {
           return {
             size,
-            filepath: path.relative(input, filepath),
+            filepath: path.relative(input.svg, filepath),
             source: fs.readFileSync(filepath, 'utf8'),
           };
         });
