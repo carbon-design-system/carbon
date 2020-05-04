@@ -58,7 +58,6 @@ const Tag = ({
           : `Clear filter ${children}`
       }
       id={tagId}
-      disabled={disabled}
       {...other}>
       <span className={`${prefix}--tag__label`}>
         {children !== null && children !== undefined ? children : TYPES[type]}
