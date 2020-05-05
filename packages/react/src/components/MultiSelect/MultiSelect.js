@@ -53,12 +53,10 @@ function MultiSelect({
   useTitleInItem,
   translateWithId,
   downshiftProps,
-
   open,
-
   selectionFeedback,
-
   onChange,
+  direction,
 }) {
   const { current: multiSelectInstanceId } = useRef(getInstanceId());
   const [highlightedIndex, setHighlightedIndex] = useState(null);
@@ -127,6 +125,7 @@ function MultiSelect({
     [`${prefix}--multi-select--inline`]: inline,
     [`${prefix}--multi-select--selected`]:
       selectedItems && selectedItems.length > 0,
+    [`${prefix}--list-box--up`]: direction === 'top',
   });
 
   const sortOptions = {
@@ -352,6 +351,11 @@ MultiSelect.propTypes = {
    * Additional props passed to Downshift
    */
   downshiftProps: PropTypes.shape(Downshift.propTypes),
+
+  /**
+   * Specify the direction of the multiselect dropdown. Can be either top or bottom.
+   */
+  direction: PropTypes.oneOf(['top', 'bottom']),
 };
 
 MultiSelect.defaultProps = {
@@ -366,6 +370,7 @@ MultiSelect.defaultProps = {
   title: false,
   open: false,
   selectionFeedback: 'top-after-reopen',
+  direction: 'bottom',
 };
 
 export default MultiSelect;
