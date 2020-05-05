@@ -45,7 +45,7 @@ const Checkbox = React.forwardRef(function Checkbox(
           onChange(evt.target.checked, id, evt);
         }}
         className={`${prefix}--checkbox`}
-        aria-labelledby={id}
+        id={id}
         ref={el => {
           if (el) {
             el.indeterminate = indeterminate;
