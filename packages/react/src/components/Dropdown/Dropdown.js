@@ -26,6 +26,7 @@ const defaultItemToString = item => {
 function Dropdown({
   className: containerClassName,
   disabled,
+  direction,
   items,
   label,
   ariaLabel,
@@ -75,6 +76,7 @@ function Dropdown({
     [`${prefix}--dropdown--disabled`]: disabled,
     [`${prefix}--dropdown--light`]: light,
     [`${prefix}--dropdown--${size}`]: size,
+    [`${prefix}--list-box--up`]: direction === 'top',
   });
 
   const titleClasses = cx(`${prefix}--label`, {
@@ -278,6 +280,11 @@ Dropdown.propTypes = {
    * additional help
    */
   helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+
+  /**
+   * Specify the direction of the dropdown. Can be either top or bottom.
+   */
+  direction: PropTypes.oneOf(['top', 'bottom']),
 };
 
 Dropdown.defaultProps = {
@@ -288,6 +295,7 @@ Dropdown.defaultProps = {
   light: false,
   titleText: '',
   helperText: '',
+  direction: 'bottom',
 };
 
 export default Dropdown;
