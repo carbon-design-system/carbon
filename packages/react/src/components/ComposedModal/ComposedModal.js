@@ -160,7 +160,9 @@ export default class ComposedModal extends Component {
     if (!this.props.open) {
       return;
     }
-    this.focusButton(this.innerModal.current);
+    if (this.innerModal.current) {
+      this.focusButton(this.innerModal.current);
+    }
   }
 
   handleTransitionEnd = evt => {
