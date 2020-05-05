@@ -72,7 +72,6 @@ const props = () => ({
   ),
 });
 
-console.log(props.type);
 storiesOf('Dropdown', module)
   .addDecorator(withKnobs)
   .add(
