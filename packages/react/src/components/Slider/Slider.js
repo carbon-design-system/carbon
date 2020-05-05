@@ -171,8 +171,10 @@ export default class Slider extends PureComponent {
    * Sets up initial slider position and value in response to component mount.
    */
   componentDidMount() {
-    const { value, left } = this.calcValue({ useRawValue: true });
-    this.setState({ value, left });
+    if (this.element) {
+      const { value, left } = this.calcValue({ useRawValue: true });
+      this.setState({ value, left });
+    }
   }
 
   /**
