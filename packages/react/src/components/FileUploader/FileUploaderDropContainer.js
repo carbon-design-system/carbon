@@ -14,22 +14,21 @@ import uniqueId from '../../tools/uniqueId';
 
 const { prefix } = settings;
 
-export default function FileUploaderDropContainer(props) {
-  const inputRef = useRef();
-  const {
-    accept,
-    className,
-    id,
-    disabled,
-    labelText,
-    multiple,
-    name,
-    onAddFiles,
-    role,
-    tabIndex,
-    ...other
-  } = props;
-  const uid = useRef(uniqueId());
+function FileUploaderDropContainer({
+  accept,
+  className,
+  id,
+  disabled,
+  labelText,
+  multiple,
+  name,
+  onAddFiles,
+  role,
+  tabIndex,
+  ...rest
+}) {
+  const inputRef = useRef(null);
+  const { current: uid } = useRef(id || uniqueId());
   const [isActive, setActive] = useState(false);
   const labelClasses = classNames(`${prefix}--file-browse-btn`, {
     [`${prefix}--file-browse-btn--disabled`]: disabled,
@@ -38,13 +37,14 @@ export default function FileUploaderDropContainer(props) {
     [`${prefix}--file__drop-container--drag-over`]: isActive,
     [className]: className,
   });
+
   /**
    * Filters the array of added files based on file type restrictions
-   * @param {Event} evt - Event object, used to get the list of files added
+   * @param {Event} event - Event object, used to get the list of files added
    */
-  const validateFiles = evt => {
-    if (evt.type === 'drop') {
-      const transferredFiles = [...evt.dataTransfer.files];
+  function validateFiles(event) {
+    if (event.type === 'drop') {
+      const transferredFiles = [...event.dataTransfer.files];
       if (!accept.length) {
         return transferredFiles;
       }
@@ -59,12 +59,14 @@ export default function FileUploaderDropContainer(props) {
         return acceptedTypes.has(mimeType) || acceptedTypes.has(fileExtension);
       });
     }
-    return [...evt.target.files];
-  };
-  const handleChange = evt => {
-    const addedFiles = validateFiles(evt);
-    return onAddFiles(evt, { addedFiles });
-  };
+    return [...event.target.files];
+  }
+
+  function handleChange(event) {
+    const addedFiles = validateFiles(event);
+    return onAddFiles(event, { addedFiles });
+  }
+
   return (
     <div
       className={`${prefix}--file`}
@@ -97,19 +99,19 @@ export default function FileUploaderDropContainer(props) {
       }}>
       <label
         className={labelClasses}
-        htmlFor={id || uid.current}
+        htmlFor={uid}
         tabIndex={tabIndex || 0}
         onKeyDown={evt => {
           if (matches(evt, [keys.Enter, keys.Space])) {
             inputRef.current.click();
           }
         }}
-        {...other}>
+        {...rest}>
         <div className={dropareaClasses} role={role || 'button'}>
           {labelText}
           <input
             type="file"
-            id={id || uid.current}
+            id={uid}
             className={`${prefix}--file-input`}
             ref={inputRef}
             tabIndex="-1"
@@ -189,3 +191,5 @@ FileUploaderDropContainer.defaultProps = {
   onAddFiles: () => {},
   accept: [],
 };
+
+export default FileUploaderDropContainer;
