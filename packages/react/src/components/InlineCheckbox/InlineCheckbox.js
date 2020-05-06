@@ -73,11 +73,16 @@ class InlineCheckbox extends React.Component {
   };
 
   componentDidMount() {
-    this.inputNode.indeterminate = this.props.indeterminate;
+    if (this.inputNode) {
+      this.inputNode.indeterminate = this.props.indeterminate;
+    }
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.indeterminate !== this.props.indeterminate) {
+    if (
+      this.inputNode &&
+      prevProps.indeterminate !== this.props.indeterminate
+    ) {
       this.inputNode.indeterminate = this.props.indeterminate;
     }
   }
