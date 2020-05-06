@@ -248,6 +248,10 @@ $list-box-menu-width: rem(300px);
     color: $text-01;
   }
 
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    height: 100%;
+  }
+
   // The field we use for input, showing selection, etc.
   .#{$prefix}--list-box__field {
     @include button-reset;
