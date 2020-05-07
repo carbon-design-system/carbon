@@ -81,4 +81,4 @@ storiesOf('ComboBox', module)
         text: 'ComboBox',
       },
     }
-  )
+  );
