@@ -3442,6 +3442,7 @@ $carbon--spacing-05: 1rem;
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
+  - [form [mixin]](#form-mixin)
   - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -6693,6 +6694,7 @@ $ui-03: if(
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tags [mixin]](#tags-mixin)
+  - [text-input [mixin]](#text-input-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
 
 ### ✅ui-04 [variable]
@@ -7231,6 +7233,7 @@ $inverse-01: if(
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [tags [mixin]](#tags-mixin)
   - [tooltip--icon [mixin]](#tooltip--icon-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -7262,6 +7265,7 @@ $inverse-02: if(
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [tags [mixin]](#tags-mixin)
   - [tooltip--icon [mixin]](#tooltip--icon-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -7971,6 +7975,7 @@ $inverse-hover-ui: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [tags [mixin]](#tags-mixin)
 
 ### ✅hover-danger [variable]
 
@@ -13445,6 +13450,7 @@ Accordion styles
     padding: rem(6px) 0;
     flex-direction: $accordion-flex-direction;
     position: relative;
+    height: rem(40px);
     width: 100%;
     margin: 0;
     transition: background-color motion(standard, productive) $duration--fast-02;
@@ -13582,6 +13588,11 @@ Accordion styles
     }
   }
 
+  .#{$prefix}--accordion.#{$prefix}--skeleton
+    .#{$prefix}--accordion__heading:hover::before {
+    background-color: transparent;
+  }
+
   .#{$prefix}--accordion--end.#{$prefix}--skeleton
     .#{$prefix}--accordion__arrow {
     margin-left: $spacing-05;
@@ -13630,6 +13641,7 @@ Breadcrumb styles
 ```scss
 @mixin breadcrumb() {
   .#{$prefix}--breadcrumb {
+    @include reset;
     @include type-style('body-short-01');
     display: inline;
     @include carbon--breakpoint(md) {
@@ -14636,7 +14648,8 @@ Code snippet styles
   .#{$prefix}--snippet.#{$prefix}--snippet--light,
   .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--snippet-button,
   .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-btn--expand {
+    .#{$prefix}--snippet-btn--expand,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn {
     background-color: $ui-02;
   }
 
@@ -14644,7 +14657,8 @@ Code snippet styles
   .#{$prefix}--snippet.#{$prefix}--snippet--light
     .#{$prefix}--snippet-button:hover,
   .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-btn--expand:hover {
+    .#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
     background-color: $hover-ui-light;
   }
 
@@ -17221,7 +17235,7 @@ Date picker styles
     @include skeleton;
     width: 100%;
 
-    &::-webkit-input-placeholder {
+    &::placeholder {
       color: transparent;
     }
   }
@@ -17599,7 +17613,6 @@ Dropdown styles
     display: inline-block;
     border-bottom-color: transparent;
     width: auto;
-    height: rem(32px);
     background-color: transparent;
     transition: background $duration--fast-01 motion(entrance, productive);
 
@@ -18097,6 +18110,25 @@ Form styles
     }
   }
 
+  //Fluid Form
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid] {
+    display: block;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--fieldset {
+    margin: 0;
+  }
+
+  .#{$prefix}--form--fluid input[data-invalid] {
+    outline: none;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--form-requirement {
+    margin: 0;
+    padding: $carbon--spacing-03 rem(40px) $carbon--spacing-03 $carbon--spacing-05;
+  }
+
   // Fix for red ring when input is marked required in Firefox, refs #744
   input:not(output):not([data-invalid]):-moz-ui-invalid {
     box-shadow: none;
@@ -18146,6 +18178,7 @@ Form styles
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [text-error [variable]](#text-error-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [text-05 [variable]](#text-05-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
@@ -18705,12 +18738,6 @@ List box styles
     background-color: $field-02;
   }
 
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline,
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline
-    .#{$prefix}--list-box__field {
-    height: rem(32px);
-  }
-
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__field {
     padding: 0 carbon--mini-units(4) 0 $carbon--spacing-03;
@@ -18908,10 +18935,15 @@ List box styles
     right: 0;
     width: $list-box-width;
     background-color: $ui-01;
-    max-height: 0;
     transition: max-height $duration--fast-02 motion(standard, productive);
     overflow-y: auto;
     z-index: z('dropdown');
+  }
+
+  .#{$prefix}--list-box
+    .#{$prefix}--list-box__field[aria-expanded='false']
+    + .#{$prefix}--list-box__menu {
+    max-height: 0;
   }
 
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
@@ -23220,10 +23252,6 @@ Tabs styles
     &:hover {
       background-color: $filter-hover-color;
     }
-
-    svg {
-      fill: $text-color;
-    }
   }
 }
 ```
@@ -23354,6 +23382,10 @@ Tag styles
     );
   }
 
+  .#{$prefix}--tag--high-contrast {
+    @include tag-theme($inverse-02, $inverse-01, $inverse-hover-ui);
+  }
+
   .#{$prefix}--tag--disabled,
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled {
     @include tag-theme($disabled-01, $disabled-02);
@@ -23390,7 +23422,12 @@ Tag styles
     border: 0;
     background-color: transparent;
     border-radius: 50%;
+    color: currentColor;
     cursor: pointer;
+
+    svg {
+      fill: currentColor;
+    }
   }
 
   .#{$prefix}--tag__close-icon:focus {
@@ -23428,6 +23465,9 @@ Tag styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [inverse-02 [variable]](#inverse-02-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+  - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [focus [variable]](#focus-variable)
@@ -23604,7 +23644,7 @@ Text input styles
     padding-right: $carbon--spacing-08;
   }
 
-  .#{$prefix}--text-input::-webkit-input-placeholder {
+  .#{$prefix}--text-input::placeholder {
     @include placeholder-colors;
   }
 
@@ -23689,8 +23729,8 @@ Text input styles
   // Disabled
   //-----------------------------
   .#{$prefix}--text-input:disabled {
+    @include focus-outline('reset');
     cursor: not-allowed;
-    outline: none;
     background-color: $disabled-01;
     border-bottom: 1px solid transparent;
     color: $disabled-02;
@@ -23718,6 +23758,60 @@ Text input styles
       right: $carbon--spacing-08;
     }
   }
+
+  //-----------------------------
+  // Fluid Text Input
+  //-----------------------------
+  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper {
+    position: relative;
+    background: $field-01;
+    transition: background-color $duration--fast-01 motion(standard, productive),
+      outline $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--label {
+    position: absolute;
+    top: rem(13px);
+    left: $carbon--spacing-05;
+    z-index: 1;
+    margin: 0;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--form__helper-text {
+    display: none;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input {
+    min-height: rem(64px);
+    padding: rem(32px) $carbon--spacing-05 rem(13px);
+  }
+
+  .#{$prefix}--text-input__divider,
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__divider {
+    display: none;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid {
+    border-bottom: none;
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input--invalid
+    + .#{$prefix}--text-input__divider {
+    display: block;
+    margin: 0 1rem;
+    border-style: solid;
+    border-bottom: none;
+    border-color: $ui-03;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__invalid-icon {
+    top: rem(80px);
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--light {
+    background: $field-02;
+  }
 }
 ```
 
@@ -23736,6 +23830,7 @@ Text input styles
   - [icon-02 [variable]](#icon-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [ui-03 [variable]](#ui-03-variable)
 
 ## tile
 
