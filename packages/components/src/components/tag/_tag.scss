@@ -23,7 +23,7 @@
     @include tag-theme(
       get-token-value($tag-colors, 'tag-background-gray'),
       get-token-value($tag-colors, 'tag-color-gray'),
-      get-token-value($tag-colors, 'tag-hover-gray'),
+      get-token-value($tag-colors, 'tag-hover-gray')
     );
 
     display: inline-flex;
@@ -50,7 +50,7 @@
     @include tag-theme(
       get-token-value($tag-colors, 'tag-background-red'),
       get-token-value($tag-colors, 'tag-color-red'),
-      get-token-value($tag-colors, 'tag-hover-red'),
+      get-token-value($tag-colors, 'tag-hover-red')
     );
   }
 
@@ -58,7 +58,7 @@
     @include tag-theme(
       get-token-value($tag-colors, 'tag-background-magenta'),
       get-token-value($tag-colors, 'tag-color-magenta'),
-      get-token-value($tag-colors, 'tag-hover-magenta'),
+      get-token-value($tag-colors, 'tag-hover-magenta')
     );
   }
 
@@ -66,7 +66,7 @@
     @include tag-theme(
       get-token-value($tag-colors, 'tag-background-purple'),
       get-token-value($tag-colors, 'tag-color-purple'),
-      get-token-value($tag-colors, 'tag-hover-purple'),
+      get-token-value($tag-colors, 'tag-hover-purple')
     );
   }
 
@@ -74,7 +74,7 @@
     @include tag-theme(
       get-token-value($tag-colors, 'tag-background-blue'),
       get-token-value($tag-colors, 'tag-color-blue'),
-      get-token-value($tag-colors, 'tag-hover-blue'),
+      get-token-value($tag-colors, 'tag-hover-blue')
     );
   }
 
@@ -82,7 +82,7 @@
     @include tag-theme(
       get-token-value($tag-colors, 'tag-background-cyan'),
       get-token-value($tag-colors, 'tag-color-cyan'),
-      get-token-value($tag-colors, 'tag-hover-cyan'),
+      get-token-value($tag-colors, 'tag-hover-cyan')
     );
   }
 
@@ -90,7 +90,7 @@
     @include tag-theme(
       get-token-value($tag-colors, 'tag-background-teal'),
       get-token-value($tag-colors, 'tag-color-teal'),
-      get-token-value($tag-colors, 'tag-hover-teal'),
+      get-token-value($tag-colors, 'tag-hover-teal')
     );
   }
 
@@ -98,7 +98,7 @@
     @include tag-theme(
       get-token-value($tag-colors, 'tag-background-green'),
       get-token-value($tag-colors, 'tag-color-green'),
-      get-token-value($tag-colors, 'tag-hover-green'),
+      get-token-value($tag-colors, 'tag-hover-green')
     );
   }
 
@@ -106,7 +106,7 @@
     @include tag-theme(
       get-token-value($tag-colors, 'tag-background-gray'),
       get-token-value($tag-colors, 'tag-color-gray'),
-      get-token-value($tag-colors, 'tag-hover-gray'),
+      get-token-value($tag-colors, 'tag-hover-gray')
     );
   }
 
@@ -114,7 +114,7 @@
     @include tag-theme(
       get-token-value($tag-colors, 'tag-background-cool-gray'),
       get-token-value($tag-colors, 'tag-color-cool-gray'),
-      get-token-value($tag-colors, 'tag-hover-cool-gray'),
+      get-token-value($tag-colors, 'tag-hover-cool-gray')
     );
   }
 
@@ -122,16 +122,12 @@
     @include tag-theme(
       get-token-value($tag-colors, 'tag-background-warm-gray'),
       get-token-value($tag-colors, 'tag-color-warm-gray'),
-      get-token-value($tag-colors, 'tag-hover-warm-gray'),
+      get-token-value($tag-colors, 'tag-hover-warm-gray')
     );
   }
 
   .#{$prefix}--tag--high-contrast {
-    @include tag-theme(
-      $inverse-02,
-      $inverse-01,
-      $inverse-hover-ui,
-    );
+    @include tag-theme($inverse-02, $inverse-01, $inverse-hover-ui);
   }
 
   .#{$prefix}--tag--disabled,
