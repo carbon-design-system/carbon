@@ -249,6 +249,12 @@ export default class ComboBox extends React.Component {
     );
   };
 
+  handleSelectionClear = () => {
+    if (this.textInput?.current) {
+      this.textInput.current.focus();
+    }
+  };
+
   handleOnStateChange = (newState, { setHighlightedIndex }) => {
     if (Object.prototype.hasOwnProperty.call(newState, 'inputValue')) {
       const { inputValue } = newState;
@@ -383,6 +389,8 @@ export default class ComboBox extends React.Component {
                     clearSelection={clearSelection}
                     translateWithId={translateWithId}
                     disabled={disabled}
+                    onClick={this.handleSelectionClear}
+                    onKeyDown={this.handleSelectionClear}
                   />
                 )}
                 <ListBox.MenuIcon
