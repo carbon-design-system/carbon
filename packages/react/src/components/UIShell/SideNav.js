@@ -95,8 +95,16 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   let eventHandlers = {};
 
   if (addFocusListeners) {
-    eventHandlers.onFocus = event => handleToggle(event, true);
-    eventHandlers.onBlur = event => handleToggle(event, false);
+    eventHandlers.onFocus = event => {
+      if (!event.currentTarget.contains(event.relatedTarget)) {
+        handleToggle(event, true);
+      }
+    };
+    eventHandlers.onBlur = event => {
+      if (!event.currentTarget.contains(event.relatedTarget)) {
+        handleToggle(event, false);
+      }
+    };
   }
 
   if (addMouseListeners && isRail) {
