@@ -77,10 +77,7 @@ export default function TreeView({
           if (node.classList.contains(`${prefix}--tree-node--disabled`)) {
             return NodeFilter.FILTER_REJECT;
           }
-          if (
-            node.tagName === 'LI' &&
-            node.classList.contains(`${prefix}--tree-node`)
-          ) {
+          if (node.matches(`li.${prefix}--tree-node`)) {
             return NodeFilter.FILTER_ACCEPT;
           }
           return NodeFilter.FILTER_SKIP;
