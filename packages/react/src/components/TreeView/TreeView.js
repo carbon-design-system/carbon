@@ -57,7 +57,7 @@ export default function TreeView({
     if (matches(event, [keys.ArrowUp, keys.ArrowDown])) {
       event.preventDefault();
     }
-    treeWalker.current.currentNode = document.activeElement;
+    treeWalker.current.currentNode = event.target;
     if (match(event, keys.ArrowUp)) {
       treeWalker.current.previousNode()?.focus();
     }
