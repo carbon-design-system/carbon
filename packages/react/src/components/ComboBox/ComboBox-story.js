@@ -5,12 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
-import Button from '../Button';
 
 const items = [
   {
@@ -61,7 +60,6 @@ const props = () => ({
   direction: select('Dropdown direction (direction)', directions, 'bottom'),
   onChange: action('onChange'),
 });
-
 
 storiesOf('ComboBox', module)
   .addDecorator(withKnobs)
