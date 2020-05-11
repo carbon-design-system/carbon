@@ -52,9 +52,8 @@ const DataTableSkeleton = ({
         aria-label="data table toolbar"
         className={`${prefix}--table-toolbar`}>
         <div className={`${prefix}--toolbar-content`}>
-          <button
-            className={`${prefix}--skeleton ${prefix}--btn ${prefix}--btn--sm`}
-            type="button"></button>
+          <span
+            className={`${prefix}--skeleton ${prefix}--btn ${prefix}--btn--sm`}></span>
         </div>
       </section>
       <table className={dataTableSkeletonClasses} {...rest}>

@@ -6721,6 +6721,7 @@ $ui-04: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button-theme [mixin]](#button-theme-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
@@ -8138,6 +8139,7 @@ $disabled-02: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
+  - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
@@ -13450,6 +13452,7 @@ Accordion styles
     padding: rem(6px) 0;
     flex-direction: $accordion-flex-direction;
     position: relative;
+    height: rem(40px);
     width: 100%;
     margin: 0;
     transition: background-color motion(standard, productive) $duration--fast-02;
@@ -13585,6 +13588,11 @@ Accordion styles
       outline: none;
       cursor: default;
     }
+  }
+
+  .#{$prefix}--accordion.#{$prefix}--skeleton
+    .#{$prefix}--accordion__heading:hover::before {
+    background-color: transparent;
   }
 
   .#{$prefix}--accordion--end.#{$prefix}--skeleton
@@ -14094,6 +14102,17 @@ Button variant styles
         ($button-border-width + $button-outline-width) $ui-02;
   }
 
+  &:disabled:hover,
+  &:disabled:focus,
+  &:hover.#{$prefix}--btn--disabled,
+  &:focus.#{$prefix}--btn--disabled {
+    color: $ui-04;
+    background-color: $disabled-02;
+    border-color: $disabled-02;
+    text-decoration: none;
+    box-shadow: none;
+  }
+
   &:active {
     background-color: $active-color;
   }
@@ -14112,6 +14131,8 @@ Button variant styles
   - [focus [variable]](#focus-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [prefix [variable]](#prefix-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
 - **Used by**:
   - [button [mixin]](#button-mixin)
 
@@ -14263,13 +14284,8 @@ Checkbox styles
   // Indeterminate
   .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'].#{$prefix}--checkbox-label__focus::before {
-    // We can't use outline here because of the rounded corners so have to increase the width/height to fake an outline.
-    border-color: $focus;
-    border-width: 3px;
-    width: rem(20px);
-    height: rem(20px);
-    left: -2px;
-    top: 0;
+    // Must use box-shadow for appearance of multiple borders with rounded corners.
+    box-shadow: 0 0 0 2px $inverse-01, 0 0 0 4px $focus;
   }
 
   //----------------------------------------------
@@ -14842,6 +14858,10 @@ Combo box styles
 
     &[disabled]::placeholder {
       color: $disabled-02;
+    }
+
+    &::-ms-clear {
+      display: none;
     }
   }
 
@@ -17229,7 +17249,7 @@ Date picker styles
     @include skeleton;
     width: 100%;
 
-    &::-webkit-input-placeholder {
+    &::placeholder {
       color: transparent;
     }
   }
@@ -17313,13 +17333,16 @@ Dropdown styles
     outline: 2px solid transparent;
     transition: background-color $duration--fast-01 motion(standard, productive);
 
-    &:focus {
-      @include focus-outline('outline');
-    }
-
     &:hover {
       background-color: $hover-ui;
     }
+  }
+
+  // Menu's triggering element updated to button with Downshift v5 upgrade
+  .#{$prefix}--dropdown .#{$prefix}--list-box__field {
+    @include button-reset;
+    text-align: left;
+    padding: 0 rem(48px) 0 rem(16px);
   }
 
   .#{$prefix}--dropdown--xl {
@@ -17584,11 +17607,15 @@ Dropdown styles
       outline: none;
     }
 
-    .#{$prefix}--dropdown-text {
+    // TODO: remove in v11
+    .#{$prefix}--dropdown-text,
+    .#{$prefix}--list-box__label {
       color: $disabled-02;
     }
 
-    .#{$prefix}--dropdown__arrow {
+    // TODO: remove in v11
+    .#{$prefix}--dropdown__arrow,
+    .#{$prefix}--list-box__menu-icon svg {
       fill: $disabled-02;
     }
 
@@ -17607,7 +17634,6 @@ Dropdown styles
     display: inline-block;
     border-bottom-color: transparent;
     width: auto;
-    height: rem(32px);
     background-color: transparent;
     transition: background $duration--fast-01 motion(entrance, productive);
 
@@ -18648,7 +18674,7 @@ List box styles
   }
 
   .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
-    border-bottom-color: $decorative-01;
+    border-bottom-color: transparent;
   }
 
   // Disabled state for `list-box`
@@ -18663,7 +18689,7 @@ List box styles
   .#{$prefix}--list-box--disabled,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field:focus {
-    border-bottom-width: 0;
+    border-bottom-color: transparent;
     outline: none;
   }
 
@@ -18733,12 +18759,6 @@ List box styles
     background-color: $field-02;
   }
 
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline,
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline
-    .#{$prefix}--list-box__field {
-    height: rem(32px);
-  }
-
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__field {
     padding: 0 carbon--mini-units(4) 0 $carbon--spacing-03;
@@ -18756,6 +18776,10 @@ List box styles
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
     color: $text-01;
+  }
+
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    height: 100%;
   }
 
   // The field we use for input, showing selection, etc.
@@ -18887,10 +18911,6 @@ List box styles
     outline: none;
   }
 
-  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection > svg {
-    fill: $disabled-02;
-  }
-
   // Modifier for a selection to show that multiple selections have been made
   .#{$prefix}--list-box__selection--multi {
     @include type-style('label-01');
@@ -18916,11 +18936,21 @@ List box styles
     width: rem(20px);
     height: rem(20px);
     padding: rem(2px);
+
+    &:hover {
+      border-radius: 50%;
+      background-color: $hover-secondary;
+    }
   }
 
-  .#{$prefix}--list-box__selection--multi > svg:hover {
-    border-radius: 50%;
-    background-color: $hover-secondary;
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__selection--multi
+    > svg {
+    fill: $disabled-02;
+
+    &:hover {
+      background-color: unset;
+    }
   }
 
   .#{$prefix}--list-box__selection--multi:focus,
@@ -18936,10 +18966,20 @@ List box styles
     right: 0;
     width: $list-box-width;
     background-color: $ui-01;
-    max-height: 0;
     transition: max-height $duration--fast-02 motion(standard, productive);
     overflow-y: auto;
     z-index: z('dropdown');
+
+    &:focus {
+      // remove default browser focus in firefox
+      @include focus-outline('border');
+    }
+  }
+
+  .#{$prefix}--list-box
+    .#{$prefix}--list-box__field[aria-expanded='false']
+    + .#{$prefix}--list-box__menu {
+    max-height: 0;
   }
 
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
@@ -19169,9 +19209,11 @@ List box styles
 
   // Tweaks for descendants
   // When handling input, we need to target nodes that specifically opt-in to
-  // the `combobox` role in order to make sure the text input is styled
+  // the type text in order to make sure the text input is styled
   // correctly.
-  .#{$prefix}--list-box input[role='combobox'] {
+  // TODO: remove [role='combobox'] in v11
+  .#{$prefix}--list-box input[role='combobox'],
+  .#{$prefix}--list-box input[type='text'] {
     background-color: inherit;
     min-width: 0;
   }
@@ -23248,10 +23290,6 @@ Tabs styles
     &:hover {
       background-color: $filter-hover-color;
     }
-
-    svg {
-      fill: $text-color;
-    }
   }
 }
 ```
@@ -23422,7 +23460,12 @@ Tag styles
     border: 0;
     background-color: transparent;
     border-radius: 50%;
+    color: currentColor;
     cursor: pointer;
+
+    svg {
+      fill: currentColor;
+    }
   }
 
   .#{$prefix}--tag__close-icon:focus {
@@ -23639,7 +23682,7 @@ Text input styles
     padding-right: $carbon--spacing-08;
   }
 
-  .#{$prefix}--text-input::-webkit-input-placeholder {
+  .#{$prefix}--text-input::placeholder {
     @include placeholder-colors;
   }
 
@@ -23724,8 +23767,8 @@ Text input styles
   // Disabled
   //-----------------------------
   .#{$prefix}--text-input:disabled {
+    @include focus-outline('reset');
     cursor: not-allowed;
-    outline: none;
     background-color: $disabled-01;
     border-bottom: 1px solid transparent;
     color: $disabled-02;
