@@ -139,7 +139,8 @@ export default function TreeNode({
         <button
           className={`${prefix}--tree-parent-node__toggle`}
           disabled={disabled}
-          onClick={handleToggleClick}>
+          onClick={handleToggleClick}
+          tabIndex={-1}>
           <CaretDown16 className={toggleClasses} />
         </button>
         <span className={`${prefix}--tree-node__label__details`}>
