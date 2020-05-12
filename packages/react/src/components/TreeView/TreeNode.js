@@ -120,7 +120,6 @@ export default function TreeNode({
     onKeyDown: handleKeyDown,
     ref: currentNode,
     role: 'treeitem',
-    tabIndex: (!disabled && -1) || null,
   };
 
   if (!children) {

@@ -42,13 +42,20 @@ export default function TreeView({
       onSelect(event, { value });
     }
   };
+  let focusTarget = false;
   const nodesWithProps = React.Children.map(children, node => {
+    const sharedNodeProps = {
+      depth: 0,
+      onSelect: handleSelect,
+      selected,
+      tabIndex: -1,
+    };
+    if (!focusTarget && !node.props.disabled) {
+      sharedNodeProps.tabIndex = 0;
+      focusTarget = true;
+    }
     if (React.isValidElement(node)) {
-      return React.cloneElement(node, {
-        depth: 0,
-        onSelect: handleSelect,
-        selected,
-      });
+      return React.cloneElement(node, sharedNodeProps);
     }
   });
 
@@ -58,11 +65,22 @@ export default function TreeView({
       event.preventDefault();
     }
     treeWalker.current.currentNode = event.target;
+    let nextFocusNode;
     if (match(event, keys.ArrowUp)) {
-      treeWalker.current.previousNode()?.focus();
+      nextFocusNode = treeWalker.current.previousNode();
     }
     if (match(event, keys.ArrowDown)) {
-      treeWalker.current.nextNode()?.focus();
+      nextFocusNode = treeWalker.current.nextNode();
+    }
+    if (nextFocusNode && nextFocusNode !== event.target) {
+      Array.prototype.forEach.call(
+        treeRootRef?.current?.querySelectorAll('[tabIndex="0"]') ?? [],
+        item => {
+          item.tabIndex = -1;
+        }
+      );
+      nextFocusNode.tabIndex = 0;
+      nextFocusNode.focus();
     }
     if (rest.onKeyDown) {
       rest.onKeyDown(event);
