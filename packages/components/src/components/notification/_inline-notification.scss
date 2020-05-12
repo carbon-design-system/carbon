@@ -200,13 +200,13 @@
 
     &,
     &:hover,
-    &:focus,
     &:active {
       color: $inverse-link;
     }
 
     &:focus {
       border-color: transparent;
+      box-shadow: none;
       outline: 2px solid $inverse-focus-ui;
       outline-offset: -2px;
     }
@@ -267,10 +267,10 @@
     }
 
     .#{$prefix}--inline-notification__action-button {
-      color: $carbon--blue-60;
+      color: $interactive-01;
 
       &:active {
-        color: $carbon--blue-80;
+        color: $interactive-01;
       }
 
       &:active,
