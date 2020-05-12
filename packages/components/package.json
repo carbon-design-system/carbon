@@ -191,5 +191,9 @@
       "dev-expression"
     ]
   },
-  "sideEffects": false
+  "sideEffects": [
+    "es/bundle.js",
+    "es/globals/js/boot.js",
+    "es/globals/js/watch.js"
+  ]
 }
