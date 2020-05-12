@@ -190,6 +190,7 @@
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    color: $inverse-link;
     height: rem(32px);
     margin-bottom: $carbon--spacing-03;
     margin-left: $carbon--spacing-08;
@@ -199,11 +200,33 @@
     }
   }
 
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    color: $link-01;
+  }
+
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $inverse-hover-ui;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $carbon--white-0;
+  }
+
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
     border-color: transparent;
     box-shadow: none;
-    outline: 2px solid $focus;
+    outline: 2px solid $inverse-focus-ui;
     outline-offset: -2px;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
+    outline-color: $focus;
   }
 
   .#{$prefix}--inline-notification--hide-close-button
