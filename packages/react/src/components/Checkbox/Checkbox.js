@@ -57,7 +57,7 @@ const Checkbox = React.forwardRef(function Checkbox(
           }
         }}
       />
-      <label id={id} className={labelClasses} title={title || null}>
+      <label htmlFor={id} className={labelClasses} title={title || null}>
         <span className={innerLabelClasses}>{labelText}</span>
       </label>
     </div>
