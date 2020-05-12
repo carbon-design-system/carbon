@@ -96,7 +96,7 @@ letter-spacing: 0;"
 exports[`styles expressiveHeading03 should be printable 1`] = `
 "font-size: 1.25rem;
 font-weight: 400;
-line-height: 130%;
+line-height: 140%;
 letter-spacing: 0;"
 `;
 
@@ -174,7 +174,7 @@ letter-spacing: 0;"
 exports[`styles productiveHeading03 should be printable 1`] = `
 "font-size: 1.25rem;
 font-weight: 400;
-line-height: 1.625rem;
+line-height: 1.75rem;
 letter-spacing: 0;"
 `;
 
