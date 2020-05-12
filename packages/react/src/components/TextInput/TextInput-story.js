@@ -11,6 +11,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import TextInput from '../TextInput';
 import TextInputSkeleton from '../TextInput/TextInput.Skeleton';
+import FluidForm from '../FluidForm/FluidForm';
 
 const types = {
   None: '',
@@ -25,23 +26,26 @@ const sizes = {
   'Small size (sm)': 'sm',
 };
 
-function ControlledPasswordInputApp(props) {
-  const [type, setType] = useState('password');
-  const togglePasswordVisibility = () => {
-    setType(type === 'password' ? 'text' : 'password');
-  };
-  return (
-    <>
-      <TextInput.ControlledPasswordInput
-        type={type}
-        togglePasswordVisibility={togglePasswordVisibility}
-        {...props}
-      />
-      <button onClick={() => setType('text')}>Show password</button>
-      <button onClick={() => setType('password')}>Hide password</button>
-    </>
-  );
-}
+const ControlledPasswordInputApp = React.forwardRef(
+  function ControlledPasswordInputApp(props, ref) {
+    const [type, setType] = useState('password');
+    const togglePasswordVisibility = () => {
+      setType(type === 'password' ? 'text' : 'password');
+    };
+    return (
+      <>
+        <TextInput.ControlledPasswordInput
+          type={type}
+          togglePasswordVisibility={togglePasswordVisibility}
+          ref={ref}
+          {...props}
+        />
+        <button onClick={() => setType('text')}>Show password</button>
+        <button onClick={() => setType('password')}>Hide password</button>
+      </>
+    );
+  }
+);
 
 const props = {
   TextInputProps: () => ({
@@ -99,6 +103,27 @@ storiesOf('TextInput', module)
         type={select('Form control type (type)', types, 'text')}
         {...props.TextInputProps()}
       />
+    ),
+    {
+      info: {
+        text: `
+            Text fields enable the user to interact with and input data. A single line
+            field is used when the input anticipated by the user is a single line of
+            text as opposed to a paragraph.
+            The default type is 'text' and its value can be either 'string' or 'number'.
+          `,
+      },
+    }
+  )
+  .add(
+    'Fluid',
+    () => (
+      <FluidForm>
+        <TextInput
+          type={select('Form control type (type)', types, 'text')}
+          {...props.TextInputProps()}
+        />
+      </FluidForm>
     ),
     {
       info: {

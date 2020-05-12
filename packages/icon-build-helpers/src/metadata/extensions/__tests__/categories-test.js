@@ -49,7 +49,10 @@ describe('categories', () => {
     await expect(
       Metadata.check({
         adapter: yml,
-        input: '/',
+        input: {
+          svg: '/svg',
+          extensions: '/',
+        },
         extensions: [extension],
       })
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
@@ -81,7 +84,10 @@ describe('categories', () => {
     await expect(
       Metadata.check({
         adapter: yml,
-        input: '/',
+        input: {
+          svg: '/svg',
+          extensions: '/',
+        },
         extensions: [extension],
       })
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
@@ -107,7 +113,10 @@ describe('categories', () => {
     await expect(
       Metadata.check({
         adapter: yml,
-        input: '/',
+        input: {
+          svg: '/svg',
+          extensions: '/',
+        },
         extensions: [extension],
       })
     ).rejects.toThrowErrorMatchingInlineSnapshot(
@@ -137,7 +146,10 @@ describe('categories', () => {
     await expect(
       Metadata.check({
         adapter: yml,
-        input: '/',
+        input: {
+          svg: '/svg',
+          extensions: '/',
+        },
         extensions: [extension],
       })
     ).rejects.toThrowErrorMatchingInlineSnapshot(

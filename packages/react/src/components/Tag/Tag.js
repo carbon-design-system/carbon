@@ -25,6 +25,7 @@ const TYPES = {
   gray: 'Gray',
   'cool-gray': 'Cool-Gray',
   'warm-gray': 'Warm-Gray',
+  'high-contrast': 'High-Contrast',
 };
 
 const Tag = ({
@@ -45,8 +46,10 @@ const Tag = ({
     [`${prefix}--tag--${type}`]: type,
   });
   const handleClose = event => {
-    event.stopPropagation();
-    onClose(event);
+    if (onClose) {
+      event.stopPropagation();
+      onClose(event);
+    }
   };
   return filter ? (
     <div
