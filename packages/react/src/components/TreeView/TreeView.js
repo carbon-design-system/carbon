@@ -83,6 +83,9 @@ export default function TreeView({
           return NodeFilter.FILTER_SKIP;
         },
       });
+  }, []);
+
+  useEffect(() => {
     setSelected(preselected);
   }, [preselected]);
 
