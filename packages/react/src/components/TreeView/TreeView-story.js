@@ -30,7 +30,7 @@ storiesOf('TreeView', module)
     'default',
     () => (
       <TreeView {...props()}>
-        <TreeNode value="1" label={<button>1</button>} />
+        <TreeNode value="1" label={<button tabIndex="-1">1</button>} />
         <TreeNode value="2" label="2" />
         <TreeNode value="3" label="3">
           <TreeNode value="3-1" label="3-1" />
@@ -74,7 +74,7 @@ storiesOf('TreeView', module)
         <TreeNode
           renderIcon={Document16}
           value="1"
-          label={<button>1</button>}
+          label={<button tabIndex="-1">1</button>}
         />
         <TreeNode renderIcon={Document16} value="2" label="2" />
         <TreeNode renderIcon={Folder16} value="3" label="3">
