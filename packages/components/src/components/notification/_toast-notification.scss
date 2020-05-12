@@ -158,7 +158,7 @@
   }
 
   .#{$prefix}--toast-notification--low-contrast
-    .#{$prefix}--toast-notification__close-button {
+    .#{$prefix}--toast-notification__close-button:focus {
     @include focus-outline('outline');
   }
 
