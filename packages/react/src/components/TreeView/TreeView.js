@@ -17,7 +17,7 @@ export default function TreeView({
   children,
   className,
   multiselect,
-  onChange,
+  onSelect,
   selected: preselected = [],
   size = 'default',
   ...rest
@@ -38,8 +38,8 @@ export default function TreeView({
     } else {
       setSelected([value]);
     }
-    if (onChange) {
-      onChange(event, { value: value?.value });
+    if (onSelect) {
+      onSelect(event, { value });
     }
   };
   const nodesWithProps = React.Children.map(children, node => {
@@ -119,9 +119,9 @@ TreeView.propTypes = {
   multiselect: PropTypes.bool,
 
   /**
-   * Callback function that is called in response to the `change` event
+   * Callback function that is called when a node is seleected
    */
-  onChange: PropTypes.func,
+  onSelect: PropTypes.func,
 
   /**
    * Array representing all selected values in the tree
