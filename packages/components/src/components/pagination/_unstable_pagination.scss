@@ -44,7 +44,7 @@ $css--helpers: true;
   .#{$prefix}--unstable-pagination__left,
   .#{$prefix}--unstable-pagination__right {
     display: flex;
-    height: auto;
+    height: 100%;
     align-items: center;
   }
 
@@ -107,14 +107,15 @@ $css--helpers: true;
   }
 
   .#{$prefix}--unstable-pagination__button.#{$prefix}--btn:disabled {
-    background: inherit;
+    background: transparent;
+    border-color: $ui-03;
   }
 
   .#{$prefix}--unstable-pagination__button:disabled:hover,
   .#{$prefix}--unstable-pagination__button--no-index:hover {
     cursor: not-allowed;
     fill: $disabled-02;
-    background: $ui-01;
+    background: transparent;
   }
 
   .#{$prefix}--unstable-pagination__page-selector,
@@ -147,7 +148,7 @@ $css--helpers: true;
   }
 
   .#{$prefix}--unstable-pagination__page-selector
-    .#{$prefix}--select__arrow:hover,
+    .#{$prefix}--select-input:hover,
   .#{$prefix}--unstable-pagination__page-sizer .#{$prefix}--select-input:hover {
     background: $hover-ui;
   }
