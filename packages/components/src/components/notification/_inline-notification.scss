@@ -190,6 +190,7 @@
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    color: $inverse-link;
     height: rem(32px);
     margin-bottom: $carbon--spacing-03;
     margin-left: $carbon--spacing-08;
@@ -197,23 +198,35 @@
     @include carbon--breakpoint(md) {
       margin: $carbon--spacing-03 0;
     }
+  }
 
-    &,
-    &:hover,
-    &:focus,
-    &:active {
-      color: $inverse-link;
-    }
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    color: $link-01;
+  }
 
-    &:focus {
-      border-color: transparent;
-      outline: 2px solid $inverse-focus-ui;
-      outline-offset: -2px;
-    }
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $inverse-hover-ui;
+  }
 
-    &:hover {
-      background-color: $inverse-hover-ui;
-    }
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $carbon--white-0;
+  }
+
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
+    border-color: transparent;
+    box-shadow: none;
+    outline: 2px solid $inverse-focus-ui;
+    outline-offset: -2px;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
+    outline-color: $focus;
   }
 
   .#{$prefix}--inline-notification--hide-close-button
@@ -256,7 +269,7 @@
   }
 
   .#{$prefix}--inline-notification--low-contrast
-    .#{$prefix}--inline-notification__close-button {
+    .#{$prefix}--inline-notification__close-button:focus {
     @include focus-outline('outline');
   }
 
@@ -267,10 +280,10 @@
     }
 
     .#{$prefix}--inline-notification__action-button {
-      color: $carbon--blue-60;
+      color: $interactive-01;
 
       &:active {
-        color: $carbon--blue-80;
+        color: $interactive-01;
       }
 
       &:active,
