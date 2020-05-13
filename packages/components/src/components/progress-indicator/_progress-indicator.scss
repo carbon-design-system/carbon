@@ -287,7 +287,7 @@
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
     margin-top: auto;
-    margin-left: 2.25rem;
+    margin-left: $carbon--spacing-07;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
