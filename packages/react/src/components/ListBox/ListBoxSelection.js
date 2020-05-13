@@ -24,8 +24,7 @@ const ListBoxSelection = ({
   selectionCount,
   translateWithId: t,
   disabled,
-  onClick,
-  onKeyDown,
+  onClearSelection,
 }) => {
   const className = cx(`${prefix}--list-box__selection`, {
     [`${prefix}--tag--filter`]: selectionCount,
@@ -37,8 +36,8 @@ const ListBoxSelection = ({
       return;
     }
     clearSelection(event);
-    if (onClick) {
-      onClick(event);
+    if (onClearSelection) {
+      onClearSelection(event);
     }
   };
   const handleOnKeyDown = event => {
@@ -50,8 +49,8 @@ const ListBoxSelection = ({
     // When a user hits ENTER, we'll clear the selection
     if (match(event, keys.Enter)) {
       clearSelection(event);
-      if (onKeyDown) {
-        onKeyDown(event);
+      if (onClearSelection) {
+        onClearSelection(event);
       }
     }
   };

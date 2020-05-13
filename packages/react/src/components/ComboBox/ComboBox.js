@@ -389,8 +389,7 @@ export default class ComboBox extends React.Component {
                     clearSelection={clearSelection}
                     translateWithId={translateWithId}
                     disabled={disabled}
-                    onClick={this.handleSelectionClear}
-                    onKeyDown={this.handleSelectionClear}
+                    onClearSelection={this.handleSelectionClear}
                   />
                 )}
                 <ListBox.MenuIcon
