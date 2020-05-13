@@ -3852,6 +3852,7 @@ Map {
       "pageInputDisabled": false,
       "pageNumberText": "Page Number",
       "pageRangeText": [Function],
+      "pageSizeInputDisabled": false,
       "pageText": [Function],
       "pagesUnknown": false,
     },
@@ -3910,6 +3911,9 @@ Map {
       },
       "pageSize": Object {
         "type": "number",
+      },
+      "pageSizeInputDisabled": Object {
+        "type": "bool",
       },
       "pageSizes": Object {
         "args": Array [
