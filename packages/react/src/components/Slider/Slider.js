@@ -171,8 +171,10 @@ export default class Slider extends PureComponent {
    * Sets up initial slider position and value in response to component mount.
    */
   componentDidMount() {
-    const { value, left } = this.calcValue({ useRawValue: true });
-    this.setState({ value, left });
+    if (this.element) {
+      const { value, left } = this.calcValue({ useRawValue: true });
+      this.setState({ value, left });
+    }
   }
 
   /**
@@ -424,7 +426,7 @@ export default class Slider extends PureComponent {
       if (value == null) {
         value = this.state.value;
       }
-      leftPercent = value / (range - this.props.min);
+      leftPercent = (value - this.props.min) / range;
     }
 
     if (useRawValue) {

@@ -56,14 +56,10 @@ exports[`MultiSelect.Filterable should render 1`] = `
       render={[Function]}
     >
       <Downshift
-        breakingChanges={Object {}}
         defaultHighlightedIndex={null}
-        defaultInputValue=""
         defaultIsOpen={false}
-        defaultSelectedItem={null}
         environment={[Window]}
         getA11yStatusMessage={[Function]}
-        highlightedIndex={null}
         inputValue=""
         isOpen={false}
         itemToString={[Function]}
@@ -73,26 +69,35 @@ exports[`MultiSelect.Filterable should render 1`] = `
         onSelect={[Function]}
         onStateChange={[Function]}
         onUserAction={[Function]}
-        render={[Function]}
+        scrollIntoView={[Function]}
         selectedItem={Array []}
         selectedItemChanged={[Function]}
         stateReducer={[Function]}
+        suppressRefError={false}
       >
         <ListBox
+          aria-expanded={false}
+          aria-haspopup="listbox"
+          aria-labelledby="downshift-0-label"
+          aria-owns={null}
           className="bx--multi-select bx--combo-box bx--multi-select--filterable"
           disabled={false}
-          innerRef={[Function]}
           isOpen={false}
           light={false}
+          role="combobox"
           type="default"
         >
           <div
+            aria-expanded={false}
+            aria-haspopup="listbox"
+            aria-labelledby="downshift-0-label"
+            aria-owns={null}
             className="bx--multi-select bx--combo-box bx--multi-select--filterable bx--list-box"
             onClick={[Function]}
             onKeyDown={[Function]}
+            role="combobox"
           >
             <ListBoxField
-              aria-expanded={false}
               aria-haspopup={true}
               aria-labelledby="filterablemultiselect-label-1"
               data-toggle={true}
@@ -101,12 +106,12 @@ exports[`MultiSelect.Filterable should render 1`] = `
               onBlur={[Function]}
               onClick={[Function]}
               onKeyDown={[Function]}
+              onKeyUp={[Function]}
               role="button"
               type="button"
             >
               <div
                 aria-controls={null}
-                aria-expanded={false}
                 aria-haspopup={true}
                 aria-labelledby="filterablemultiselect-label-1"
                 aria-owns={null}
@@ -115,6 +120,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
                 onBlur={[Function]}
                 onClick={[Function]}
                 onKeyDown={[Function]}
+                onKeyUp={[Function]}
                 role="button"
                 tabIndex={-1}
                 type="button"
@@ -122,8 +128,8 @@ exports[`MultiSelect.Filterable should render 1`] = `
                 <input
                   aria-activedescendant={null}
                   aria-autocomplete="list"
-                  aria-controls="test-filterable-multiselect__menu"
-                  aria-expanded={false}
+                  aria-controls={null}
+                  aria-labelledby="downshift-0-label"
                   autoComplete="off"
                   className="bx--text-input bx--text-input--empty"
                   disabled={false}
@@ -132,7 +138,6 @@ exports[`MultiSelect.Filterable should render 1`] = `
                   onChange={[Function]}
                   onKeyDown={[Function]}
                   placeholder="Placeholder..."
-                  role="combobox"
                   value=""
                 />
                 <ListBoxMenuIcon
@@ -179,333 +184,6 @@ exports[`MultiSelect.Filterable should render 1`] = `
                 </ListBoxMenuIcon>
               </div>
             </ListBoxField>
-            <ListBoxMenu
-              aria-label="Choose an item"
-              id="test-filterable-multiselect"
-            >
-              <div
-                aria-label="Choose an item"
-                className="bx--list-box__menu"
-                id="test-filterable-multiselect__menu"
-                role="listbox"
-              >
-                <ListBoxMenuItem
-                  id="downshift-0-item-0"
-                  isActive={false}
-                  isHighlighted={false}
-                  key="downshift-0-item-0"
-                  onClick={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseMove={[Function]}
-                  title="Item 0"
-                >
-                  <div
-                    className="bx--list-box__menu-item"
-                    id="downshift-0-item-0"
-                    onClick={[Function]}
-                    onMouseDown={[Function]}
-                    onMouseMove={[Function]}
-                    title="Item 0"
-                  >
-                    <div
-                      className="bx--list-box__menu-item__option"
-                    >
-                      <Checkbox
-                        checked={false}
-                        disabled={false}
-                        id="downshift-0-item-0"
-                        indeterminate={false}
-                        labelText="Item 0"
-                        name="Item 0"
-                        onChange={[Function]}
-                        readOnly={true}
-                        tabIndex="-1"
-                        title={null}
-                      >
-                        <div
-                          className="bx--form-item bx--checkbox-wrapper"
-                        >
-                          <input
-                            checked={false}
-                            className="bx--checkbox"
-                            disabled={false}
-                            id="downshift-0-item-0"
-                            name="Item 0"
-                            onChange={[Function]}
-                            readOnly={true}
-                            tabIndex="-1"
-                            type="checkbox"
-                          />
-                          <label
-                            className="bx--checkbox-label"
-                            htmlFor="downshift-0-item-0"
-                            title={null}
-                          >
-                            <span
-                              className="bx--checkbox-label-text"
-                            >
-                              Item 0
-                            </span>
-                          </label>
-                        </div>
-                      </Checkbox>
-                    </div>
-                  </div>
-                </ListBoxMenuItem>
-                <ListBoxMenuItem
-                  id="downshift-0-item-1"
-                  isActive={false}
-                  isHighlighted={false}
-                  key="downshift-0-item-1"
-                  onClick={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseMove={[Function]}
-                  title="Item 1"
-                >
-                  <div
-                    className="bx--list-box__menu-item"
-                    id="downshift-0-item-1"
-                    onClick={[Function]}
-                    onMouseDown={[Function]}
-                    onMouseMove={[Function]}
-                    title="Item 1"
-                  >
-                    <div
-                      className="bx--list-box__menu-item__option"
-                    >
-                      <Checkbox
-                        checked={false}
-                        disabled={false}
-                        id="downshift-0-item-1"
-                        indeterminate={false}
-                        labelText="Item 1"
-                        name="Item 1"
-                        onChange={[Function]}
-                        readOnly={true}
-                        tabIndex="-1"
-                        title={null}
-                      >
-                        <div
-                          className="bx--form-item bx--checkbox-wrapper"
-                        >
-                          <input
-                            checked={false}
-                            className="bx--checkbox"
-                            disabled={false}
-                            id="downshift-0-item-1"
-                            name="Item 1"
-                            onChange={[Function]}
-                            readOnly={true}
-                            tabIndex="-1"
-                            type="checkbox"
-                          />
-                          <label
-                            className="bx--checkbox-label"
-                            htmlFor="downshift-0-item-1"
-                            title={null}
-                          >
-                            <span
-                              className="bx--checkbox-label-text"
-                            >
-                              Item 1
-                            </span>
-                          </label>
-                        </div>
-                      </Checkbox>
-                    </div>
-                  </div>
-                </ListBoxMenuItem>
-                <ListBoxMenuItem
-                  id="downshift-0-item-2"
-                  isActive={false}
-                  isHighlighted={false}
-                  key="downshift-0-item-2"
-                  onClick={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseMove={[Function]}
-                  title="Item 2"
-                >
-                  <div
-                    className="bx--list-box__menu-item"
-                    id="downshift-0-item-2"
-                    onClick={[Function]}
-                    onMouseDown={[Function]}
-                    onMouseMove={[Function]}
-                    title="Item 2"
-                  >
-                    <div
-                      className="bx--list-box__menu-item__option"
-                    >
-                      <Checkbox
-                        checked={false}
-                        disabled={false}
-                        id="downshift-0-item-2"
-                        indeterminate={false}
-                        labelText="Item 2"
-                        name="Item 2"
-                        onChange={[Function]}
-                        readOnly={true}
-                        tabIndex="-1"
-                        title={null}
-                      >
-                        <div
-                          className="bx--form-item bx--checkbox-wrapper"
-                        >
-                          <input
-                            checked={false}
-                            className="bx--checkbox"
-                            disabled={false}
-                            id="downshift-0-item-2"
-                            name="Item 2"
-                            onChange={[Function]}
-                            readOnly={true}
-                            tabIndex="-1"
-                            type="checkbox"
-                          />
-                          <label
-                            className="bx--checkbox-label"
-                            htmlFor="downshift-0-item-2"
-                            title={null}
-                          >
-                            <span
-                              className="bx--checkbox-label-text"
-                            >
-                              Item 2
-                            </span>
-                          </label>
-                        </div>
-                      </Checkbox>
-                    </div>
-                  </div>
-                </ListBoxMenuItem>
-                <ListBoxMenuItem
-                  id="downshift-0-item-3"
-                  isActive={false}
-                  isHighlighted={false}
-                  key="downshift-0-item-3"
-                  onClick={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseMove={[Function]}
-                  title="Item 3"
-                >
-                  <div
-                    className="bx--list-box__menu-item"
-                    id="downshift-0-item-3"
-                    onClick={[Function]}
-                    onMouseDown={[Function]}
-                    onMouseMove={[Function]}
-                    title="Item 3"
-                  >
-                    <div
-                      className="bx--list-box__menu-item__option"
-                    >
-                      <Checkbox
-                        checked={false}
-                        disabled={false}
-                        id="downshift-0-item-3"
-                        indeterminate={false}
-                        labelText="Item 3"
-                        name="Item 3"
-                        onChange={[Function]}
-                        readOnly={true}
-                        tabIndex="-1"
-                        title={null}
-                      >
-                        <div
-                          className="bx--form-item bx--checkbox-wrapper"
-                        >
-                          <input
-                            checked={false}
-                            className="bx--checkbox"
-                            disabled={false}
-                            id="downshift-0-item-3"
-                            name="Item 3"
-                            onChange={[Function]}
-                            readOnly={true}
-                            tabIndex="-1"
-                            type="checkbox"
-                          />
-                          <label
-                            className="bx--checkbox-label"
-                            htmlFor="downshift-0-item-3"
-                            title={null}
-                          >
-                            <span
-                              className="bx--checkbox-label-text"
-                            >
-                              Item 3
-                            </span>
-                          </label>
-                        </div>
-                      </Checkbox>
-                    </div>
-                  </div>
-                </ListBoxMenuItem>
-                <ListBoxMenuItem
-                  id="downshift-0-item-4"
-                  isActive={false}
-                  isHighlighted={false}
-                  key="downshift-0-item-4"
-                  onClick={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseMove={[Function]}
-                  title="Item 4"
-                >
-                  <div
-                    className="bx--list-box__menu-item"
-                    id="downshift-0-item-4"
-                    onClick={[Function]}
-                    onMouseDown={[Function]}
-                    onMouseMove={[Function]}
-                    title="Item 4"
-                  >
-                    <div
-                      className="bx--list-box__menu-item__option"
-                    >
-                      <Checkbox
-                        checked={false}
-                        disabled={false}
-                        id="downshift-0-item-4"
-                        indeterminate={false}
-                        labelText="Item 4"
-                        name="Item 4"
-                        onChange={[Function]}
-                        readOnly={true}
-                        tabIndex="-1"
-                        title={null}
-                      >
-                        <div
-                          className="bx--form-item bx--checkbox-wrapper"
-                        >
-                          <input
-                            checked={false}
-                            className="bx--checkbox"
-                            disabled={false}
-                            id="downshift-0-item-4"
-                            name="Item 4"
-                            onChange={[Function]}
-                            readOnly={true}
-                            tabIndex="-1"
-                            type="checkbox"
-                          />
-                          <label
-                            className="bx--checkbox-label"
-                            htmlFor="downshift-0-item-4"
-                            title={null}
-                          >
-                            <span
-                              className="bx--checkbox-label-text"
-                            >
-                              Item 4
-                            </span>
-                          </label>
-                        </div>
-                      </Checkbox>
-                    </div>
-                  </div>
-                </ListBoxMenuItem>
-              </div>
-            </ListBoxMenu>
           </div>
         </ListBox>
       </Downshift>
