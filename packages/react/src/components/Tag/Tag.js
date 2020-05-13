@@ -60,7 +60,6 @@ const Tag = ({
           : `Clear filter ${children}`
       }
       id={tagId}
-      disabled={disabled}
       {...other}>
       <span className={`${prefix}--tag__label`}>
         {children !== null && children !== undefined ? children : TYPES[type]}
@@ -68,6 +67,7 @@ const Tag = ({
       <button
         className={`${prefix}--tag__close-icon`}
         onClick={handleClose}
+        disabled={disabled}
         aria-labelledby={tagId}>
         <Close16 />
       </button>
