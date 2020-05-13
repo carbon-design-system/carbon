@@ -23449,6 +23449,10 @@ Tag styles
     }
   }
 
+  .#{$prefix}--tag--disabled .#{$prefix}--tag__close-icon {
+    cursor: not-allowed;
+  }
+
   .#{$prefix}--tag__close-icon:focus {
     outline: none;
     box-shadow: inset 0 0 0 2px $focus;
