@@ -9,22 +9,25 @@
 
 'use strict';
 
+const { Metadata } = require('@carbon/icon-build-helpers');
 const path = require('path');
-const { Metadata } = require('../../packages/icon-build-helpers');
 
 const ICONS_PACKAGE_DIR = path.resolve(__dirname, '../../packages/icons');
-const sizes = [16, 20, 24, 32];
 
 describe('@carbon/icons', () => {
   let metadata;
 
   beforeAll(async () => {
     metadata = await Metadata.load({
-      input: ICONS_PACKAGE_DIR,
+      input: {
+        svg: path.join(ICONS_PACKAGE_DIR, 'src/svg'),
+        extensions: ICONS_PACKAGE_DIR,
+      },
       extensions: [
         Metadata.extensions.icons,
         Metadata.extensions.deprecated,
-        Metadata.extensions.moduleName,
+        Metadata.extensions.assets,
+        Metadata.extensions.output,
       ],
     });
   });
@@ -33,38 +36,25 @@ describe('@carbon/icons', () => {
     const CarbonIconsCommonJS = require('@carbon/icons');
     const CarbonIconsESM = await import('@carbon/icons');
 
-    for (const icon of metadata.icons) {
-      const { moduleName } = icon;
-      for (const size of sizes) {
-        const exportName = `${moduleName}${size}`;
-        expect(CarbonIconsCommonJS[exportName]).toBeDefined();
-        expect(CarbonIconsESM[exportName]).toBeDefined();
+    for (const asset of metadata.icons) {
+      for (const icon of asset.output) {
+        const { moduleName } = icon;
+        expect(CarbonIconsCommonJS[moduleName]).toBeDefined();
+        expect(CarbonIconsESM[moduleName]).toBeDefined();
       }
     }
   });
 
   it('should export each SVG asset as a direct path', async () => {
-    for (const icon of metadata.icons) {
-      const esm = path.join(
-        ICONS_PACKAGE_DIR,
-        'es',
-        ...icon.namespace,
-        icon.name
-      );
-      const commonjs = path.join(
-        ICONS_PACKAGE_DIR,
-        'lib',
-        ...icon.namespace,
-        icon.name
-      );
+    for (const asset of metadata.icons) {
+      for (const icon of asset.output) {
+        const esm = path.join(ICONS_PACKAGE_DIR, 'es', icon.filepath);
+        const commonjs = path.join(ICONS_PACKAGE_DIR, 'lib', icon.filepath);
 
-      for (const size of sizes) {
-        const es = path.join(esm, `${size}.js`);
-        const lib = path.join(commonjs, `${size}.js`);
         expect(() => {
-          require(lib);
+          require(commonjs);
         }).not.toThrow();
-        await expect(import(es)).resolves.toBeDefined();
+        await expect(import(esm)).resolves.toBeDefined();
       }
     }
   });

@@ -9,6 +9,10 @@
 @import 'theme';
 @import 'feature-flags';
 
+$enable-css-custom-properties: feature-flag-enabled(
+  'enable-css-custom-properties'
+);
+
 /// Get a component token value.
 /// @access private
 /// @param {Map} $tokens - Map of component tokens
