@@ -269,15 +269,7 @@
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step svg,
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
     display: inline-block;
-    margin: rem(3px) 0.5rem 0;
-  }
-
-  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
-    margin-right: 0.7rem;
-  }
-
-  .#{$prefix}--progress--vertical .#{$prefix}--progress-step--current svg {
-    margin-left: 0.563rem;
+    margin: 0 $carbon--spacing-03;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-label {
