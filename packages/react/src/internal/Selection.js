@@ -5,9 +5,68 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash.isequal';
+
+export function useSelection({
+  disabled,
+  onChange,
+  initialSelectedItems = [],
+}) {
+  const isMounted = useRef(false);
+  const [selectedItems, setSelectedItems] = useState(initialSelectedItems);
+  const onItemChange = useCallback(
+    item => {
+      if (disabled) {
+        return;
+      }
+
+      let selectedIndex;
+      selectedItems.forEach((selectedItem, index) => {
+        if (isEqual(selectedItem, item)) {
+          selectedIndex = index;
+        }
+      });
+
+      if (selectedIndex === undefined) {
+        setSelectedItems(selectedItems => selectedItems.concat(item));
+        return;
+      }
+
+      setSelectedItems(selectedItems =>
+        removeAtIndex(selectedItems, selectedIndex)
+      );
+    },
+    [disabled, selectedItems]
+  );
+
+  const clearSelection = useCallback(() => {
+    if (disabled) {
+      return;
+    }
+    setSelectedItems([]);
+  }, [disabled]);
+
+  useEffect(() => {
+    if (isMounted.current === true && onChange) {
+      onChange({ selectedItems });
+    }
+  }, [onChange, selectedItems]);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  return {
+    selectedItems,
+    onItemChange,
+    clearSelection,
+  };
+}
 
 export default class Selection extends React.Component {
   static propTypes = {
@@ -55,6 +114,7 @@ export default class Selection extends React.Component {
       selectedItems: removeAtIndex(state.selectedItems, index),
     }));
   };
+
   handleOnItemChange = item => {
     if (this.props.disabled) {
       return;

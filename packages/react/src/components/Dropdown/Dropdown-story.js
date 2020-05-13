@@ -44,11 +44,6 @@ const stringItems = [
   'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.',
 ];
 
-const types = {
-  'Default (default)': 'default',
-  'Inline (inline)': 'inline',
-};
-
 const sizes = {
   'Extra large size (xl)': 'xl',
   'Default size': undefined,
@@ -62,7 +57,6 @@ const directions = {
 
 const props = () => ({
   id: text('Dropdown ID (id)', 'carbon-dropdown-example'),
-  type: select('Dropdown type (type)', types, 'default'),
   size: select('Field size (size)', sizes, undefined) || undefined,
   direction: select('Dropdown direction (direction)', directions, 'bottom'),
   label: text('Label (label)', 'Dropdown menu options'),
@@ -99,9 +93,28 @@ storiesOf('Dropdown', module)
     }
   )
   .add(
+    'inline',
+    () => (
+      <div style={{ width: 600 }}>
+        <Dropdown
+          {...props()}
+          type="inline"
+          items={items}
+          itemToString={item => (item ? item.text : '')}
+          onChange={action('onChange')}
+        />
+      </div>
+    ),
+    {
+      info: {
+        text: 'Dropdown',
+      },
+    }
+  )
+  .add(
     'items as strings',
     () => (
-      <div style={{ width: 300 }}>
+      <div style={props.inline ? { width: 500 } : { width: 300 }}>
         <Dropdown
           {...props()}
           items={stringItems}

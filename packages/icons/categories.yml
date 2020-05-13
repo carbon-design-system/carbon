@@ -831,6 +831,8 @@ categories:
           - help--filled
           - information
           - information--filled
+          - information--square
+          - information--square--filled
           - misuse
           - misuse--alt
           - misuse--outline
