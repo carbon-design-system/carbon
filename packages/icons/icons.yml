@@ -3998,6 +3998,16 @@
     - more
     - tip
     - help
+- name: information--square
+  friendly_name: information--square
+  aliases: []
+  sizes:
+    - 32
+- name: information--square--filled
+  friendly_name: information--square--filled
+  aliases: []
+  sizes:
+    - 32
 - name: insert
   friendly_name: Insert
   aliases:

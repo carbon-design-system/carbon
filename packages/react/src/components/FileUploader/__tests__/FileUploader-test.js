@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getByText } from '@carbon/test-utils/dom';
+import { getByLabel, getByText } from '@carbon/test-utils/dom';
 import { render, cleanup } from '@carbon/test-utils/react';
 import React from 'react';
 import FileUploader from '../';
@@ -67,7 +67,7 @@ describe('FileUploader', () => {
     const input = container.querySelector('input');
     uploadFiles(input, [new File(['test'], 'test.png', { type: 'image/png' })]);
 
-    const edit = getByText(container, description);
+    const edit = getByLabel(container, description);
 
     render(
       <FileUploader filenameStatus="complete" iconDescription={description} />,
@@ -76,7 +76,7 @@ describe('FileUploader', () => {
       }
     );
 
-    const complete = getByText(container, description);
+    const complete = getByLabel(container, description);
     expect(edit.parentNode).not.toEqual(complete.parentNode);
   });
 });
