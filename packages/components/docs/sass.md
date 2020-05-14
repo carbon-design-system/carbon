@@ -3359,7 +3359,6 @@ $carbon--spacing-02: 0.25rem;
   - [number-input [mixin]](#number-input-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [tags [mixin]](#tags-mixin)
-  - [text-area [mixin]](#text-area-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅carbon--spacing-03 [variable]
@@ -6973,7 +6972,6 @@ $text-error: if(
   - [form [mixin]](#form-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [select [mixin]](#select-mixin)
-  - [text-area [mixin]](#text-area-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -8798,7 +8796,7 @@ $productive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 1.625rem,
+    line-height: 1.75rem,
     letter-spacing: 0,
   )
 );
@@ -8994,7 +8992,7 @@ $expressive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 130%,
+    line-height: 140%,
     letter-spacing: 0,
     breakpoints: (
       xlg: (
@@ -12552,7 +12550,7 @@ $productive-heading-02: $heading-02;
 $productive-heading-03: (
   font-size: carbon--type-scale(5),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(26px),
+  line-height: carbon--rem(28px),
   letter-spacing: 0,
 );
 ```
@@ -12685,7 +12683,7 @@ $expressive-heading-02: map-merge(
 $expressive-heading-03: (
   font-size: carbon--type-scale(5),
   font-weight: carbon--font-weight('regular'),
-  line-height: 130%,
+  line-height: 140%,
   letter-spacing: 0,
   breakpoints: (
     xlg: (
@@ -23539,32 +23537,16 @@ Text area styles
 
     background-color: $field-01;
     width: 100%;
+    height: 100%;
     min-width: 10rem;
     min-height: rem(40px);
     padding: rem(11px) $carbon--spacing-05;
     color: $text-01;
-    order: 3;
     resize: vertical;
     border: none;
     border-bottom: 1px solid $ui-04;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
-
-    & ~ .#{$prefix}--form__helper-text {
-      margin-top: 0;
-      order: 2;
-    }
-
-    & ~ .#{$prefix}--form-requirement {
-      order: 4;
-      color: $text-error;
-      font-weight: 400;
-      margin-top: $carbon--spacing-02;
-
-      &::before {
-        display: none;
-      }
-    }
   }
 
   .#{$prefix}--text-area:focus,
@@ -23638,8 +23620,6 @@ Text area styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [text-error [variable]](#text-error-variable)
-  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
