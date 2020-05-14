@@ -286,6 +286,8 @@
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
+    position: static;
+    width: 100%;
     margin-top: auto;
     margin-left: $carbon--spacing-07;
   }
