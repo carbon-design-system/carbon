@@ -259,8 +259,8 @@
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button {
-    display: block;
-    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
     min-height: 3.625rem;
     width: initial;
     min-width: initial;
