@@ -7,20 +7,20 @@
 
 <div class="{{@root.prefix}}--form-item">
   <label for="text-input-3" class="{{@root.prefix}}--label">Text Input label</label>
-  <div class="{{prefix}}--form__helper-text">
-    Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
-  </div>
   <input id="text-input-3" type="text"
     class="{{@root.prefix}}--text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}"
     placeholder="Optional placeholder text">
-</div>
-<div class="{{@root.prefix}}--form-item">
-  <label for="text-area-2" class="{{@root.prefix}}--label">Text Area label</label>
   <div class="{{prefix}}--form__helper-text">
     Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
   </div>
+</div>
+<div class="{{@root.prefix}}--form-item">
+  <label for="text-area-2" class="{{@root.prefix}}--label">Text Area label</label>
   <textarea id="text-area-2" class="{{@root.prefix}}--text-area{{#if light}} {{@root.prefix}}--text-area--light{{/if}}"
     rows="4" cols="50" placeholder="Placeholder text."></textarea>
+  <div class="{{prefix}}--form__helper-text">
+    Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
+  </div>
 </div>
 <div class="{{@root.prefix}}--form-item">
   <div
