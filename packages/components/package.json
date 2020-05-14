@@ -194,6 +194,10 @@
   "sideEffects": [
     "es/bundle.js",
     "es/globals/js/boot.js",
-    "es/globals/js/watch.js"
+    "es/globals/js/watch.js",
+    "scripts/*",
+    "umd/bundle.js",
+    "umd/globals/js/boot.js",
+    "umd/globals/js/watch.js"
   ]
 }
