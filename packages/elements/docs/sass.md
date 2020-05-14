@@ -6355,7 +6355,7 @@ $text-02: if(
       'text-02'
     ),
   map-get($carbon--theme, 'text-02'),
-  #393939
+  #525252
 );
 ```
 

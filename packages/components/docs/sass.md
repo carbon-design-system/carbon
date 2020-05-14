@@ -2367,7 +2367,6 @@ Generate a media query for a given breakpoint
   - [carbon--largest-breakpoint [mixin]](#carbon--largest-breakpoint-mixin)
   - [fluid-type [mixin]](#fluid-type-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
-  - [form [mixin]](#form-mixin)
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
@@ -3483,7 +3482,6 @@ $carbon--spacing-06: 1.5rem;
   - [accordion [mixin]](#accordion-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [lists [mixin]](#lists-mixin)
-  - [listbox [mixin]](#listbox-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
@@ -6462,6 +6460,7 @@ $interactive-01: if(
   - [button [mixin]](#button-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
@@ -6721,6 +6720,7 @@ $ui-04: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button-theme [mixin]](#button-theme-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
@@ -6838,7 +6838,7 @@ $text-02: if(
       'text-02'
     ),
   map-get($carbon--theme, 'text-02'),
-  #393939
+  #525252
 );
 ```
 
@@ -6942,7 +6942,6 @@ $text-05: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
-  - [form [mixin]](#form-mixin)
   - [search [mixin]](#search-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
 
@@ -7100,6 +7099,7 @@ $link-01: if(
   - [button [mixin]](#button-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [link [mixin]](#link-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
 
 ### ✅inverse-link [variable]
@@ -7581,6 +7581,7 @@ $focus: if(
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
   - [tags [mixin]](#tags-mixin)
@@ -8138,6 +8139,7 @@ $disabled-02: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
+  - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
@@ -13588,6 +13590,11 @@ Accordion styles
     }
   }
 
+  .#{$prefix}--accordion.#{$prefix}--skeleton
+    .#{$prefix}--accordion__heading:hover::before {
+    background-color: transparent;
+  }
+
   .#{$prefix}--accordion--end.#{$prefix}--skeleton
     .#{$prefix}--accordion__arrow {
     margin-left: $spacing-05;
@@ -14095,6 +14102,17 @@ Button variant styles
         ($button-border-width + $button-outline-width) $ui-02;
   }
 
+  &:disabled:hover,
+  &:disabled:focus,
+  &:hover.#{$prefix}--btn--disabled,
+  &:focus.#{$prefix}--btn--disabled {
+    color: $ui-04;
+    background-color: $disabled-02;
+    border-color: $disabled-02;
+    text-decoration: none;
+    box-shadow: none;
+  }
+
   &:active {
     background-color: $active-color;
   }
@@ -14113,6 +14131,8 @@ Button variant styles
   - [focus [variable]](#focus-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [prefix [variable]](#prefix-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
 - **Used by**:
   - [button [mixin]](#button-mixin)
 
@@ -14264,13 +14284,8 @@ Checkbox styles
   // Indeterminate
   .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'].#{$prefix}--checkbox-label__focus::before {
-    // We can't use outline here because of the rounded corners so have to increase the width/height to fake an outline.
-    border-color: $focus;
-    border-width: 3px;
-    width: rem(20px);
-    height: rem(20px);
-    left: -2px;
-    top: 0;
+    // Must use box-shadow for appearance of multiple borders with rounded corners.
+    box-shadow: 0 0 0 2px $inverse-01, 0 0 0 4px $focus;
   }
 
   //----------------------------------------------
@@ -14843,6 +14858,10 @@ Combo box styles
 
     &[disabled]::placeholder {
       color: $disabled-02;
+    }
+
+    &::-ms-clear {
+      display: none;
     }
   }
 
@@ -17230,7 +17249,7 @@ Date picker styles
     @include skeleton;
     width: 100%;
 
-    &::-webkit-input-placeholder {
+    &::placeholder {
       color: transparent;
     }
   }
@@ -17314,13 +17333,16 @@ Dropdown styles
     outline: 2px solid transparent;
     transition: background-color $duration--fast-01 motion(standard, productive);
 
-    &:focus {
-      @include focus-outline('outline');
-    }
-
     &:hover {
       background-color: $hover-ui;
     }
+  }
+
+  // Menu's triggering element updated to button with Downshift v5 upgrade
+  .#{$prefix}--dropdown .#{$prefix}--list-box__field {
+    @include button-reset;
+    text-align: left;
+    padding: 0 rem(48px) 0 rem(16px);
   }
 
   .#{$prefix}--dropdown--xl {
@@ -17585,11 +17607,15 @@ Dropdown styles
       outline: none;
     }
 
-    .#{$prefix}--dropdown-text {
+    // TODO: remove in v11
+    .#{$prefix}--dropdown-text,
+    .#{$prefix}--list-box__label {
       color: $disabled-02;
     }
 
-    .#{$prefix}--dropdown__arrow {
+    // TODO: remove in v11
+    .#{$prefix}--dropdown__arrow,
+    .#{$prefix}--list-box__menu-icon svg {
       fill: $disabled-02;
     }
 
@@ -17608,7 +17634,6 @@ Dropdown styles
     display: inline-block;
     border-bottom-color: transparent;
     width: auto;
-    height: rem(32px);
     background-color: transparent;
     transition: background $duration--fast-01 motion(entrance, productive);
 
@@ -18136,24 +18161,19 @@ Form styles
     margin: $carbon--spacing-02 0 0;
     max-height: 0;
     overflow: hidden;
-    line-height: 1.5;
     display: none;
   }
 
-  .#{$prefix}--label + .#{$prefix}--form__helper-text {
-    margin-top: rem(-6px); // when both helper text and label are rendered
+  .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
+    margin-top: 0;
   }
 
   .#{$prefix}--form__helper-text {
     @include type-style('helper-text-01');
-    color: $text-05;
+    color: $text-02;
     z-index: 0;
     opacity: 1;
-    margin-bottom: $carbon--spacing-03;
-
-    @include carbon--breakpoint('sm') {
-      max-width: 75%;
-    }
+    margin-top: $carbon--spacing-02;
   }
 
   .#{$prefix}--label--disabled,
@@ -18167,7 +18187,6 @@ Form styles
 
 - **Group**: [form](#form)
 - **Requires**:
-  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
@@ -18176,7 +18195,6 @@ Form styles
   - [text-error [variable]](#text-error-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
-  - [text-05 [variable]](#text-05-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
 ## inline-loading
@@ -18649,7 +18667,7 @@ List box styles
   }
 
   .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
-    border-bottom-color: $decorative-01;
+    border-bottom-color: transparent;
   }
 
   // Disabled state for `list-box`
@@ -18664,7 +18682,7 @@ List box styles
   .#{$prefix}--list-box--disabled,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field:focus {
-    border-bottom-width: 0;
+    border-bottom-color: transparent;
     outline: none;
   }
 
@@ -18734,12 +18752,6 @@ List box styles
     background-color: $field-02;
   }
 
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline,
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline
-    .#{$prefix}--list-box__field {
-    height: rem(32px);
-  }
-
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__field {
     padding: 0 carbon--mini-units(4) 0 $carbon--spacing-03;
@@ -18757,6 +18769,10 @@ List box styles
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
     color: $text-01;
+  }
+
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    height: 100%;
   }
 
   // The field we use for input, showing selection, etc.
@@ -18888,10 +18904,6 @@ List box styles
     outline: none;
   }
 
-  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection > svg {
-    fill: $disabled-02;
-  }
-
   // Modifier for a selection to show that multiple selections have been made
   .#{$prefix}--list-box__selection--multi {
     @include type-style('label-01');
@@ -18917,11 +18929,21 @@ List box styles
     width: rem(20px);
     height: rem(20px);
     padding: rem(2px);
+
+    &:hover {
+      border-radius: 50%;
+      background-color: $hover-secondary;
+    }
   }
 
-  .#{$prefix}--list-box__selection--multi > svg:hover {
-    border-radius: 50%;
-    background-color: $hover-secondary;
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__selection--multi
+    > svg {
+    fill: $disabled-02;
+
+    &:hover {
+      background-color: unset;
+    }
   }
 
   .#{$prefix}--list-box__selection--multi:focus,
@@ -18937,10 +18959,20 @@ List box styles
     right: 0;
     width: $list-box-width;
     background-color: $ui-01;
-    max-height: 0;
     transition: max-height $duration--fast-02 motion(standard, productive);
     overflow-y: auto;
     z-index: z('dropdown');
+
+    &:focus {
+      // remove default browser focus in firefox
+      @include focus-outline('border');
+    }
+  }
+
+  .#{$prefix}--list-box
+    .#{$prefix}--list-box__field[aria-expanded='false']
+    + .#{$prefix}--list-box__menu {
+    max-height: 0;
   }
 
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
@@ -19020,7 +19052,6 @@ List box styles
     line-height: rem(16px);
     padding: rem(11px) 0;
     margin: 0 $carbon--spacing-05;
-    padding-right: $carbon--spacing-06;
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
     border-top-color: $ui-03;
@@ -19170,9 +19201,11 @@ List box styles
 
   // Tweaks for descendants
   // When handling input, we need to target nodes that specifically opt-in to
-  // the `combobox` role in order to make sure the text input is styled
+  // the type text in order to make sure the text input is styled
   // correctly.
-  .#{$prefix}--list-box input[role='combobox'] {
+  // TODO: remove [role='combobox'] in v11
+  .#{$prefix}--list-box input[role='combobox'],
+  .#{$prefix}--list-box input[type='text'] {
     background-color: inherit;
     min-width: 0;
   }
@@ -19209,7 +19242,6 @@ List box styles
   - [text-02 [variable]](#text-02-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [selected-light-ui [variable]](#selected-light-ui-variable)
-  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
 
 ## loading
 
@@ -20018,6 +20050,7 @@ Inline notification styles
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    color: $inverse-link;
     height: rem(32px);
     margin-bottom: $carbon--spacing-03;
     margin-left: $carbon--spacing-08;
@@ -20025,23 +20058,35 @@ Inline notification styles
     @include carbon--breakpoint(md) {
       margin: $carbon--spacing-03 0;
     }
+  }
 
-    &,
-    &:hover,
-    &:focus,
-    &:active {
-      color: $inverse-link;
-    }
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    color: $link-01;
+  }
 
-    &:focus {
-      border-color: transparent;
-      outline: 2px solid $inverse-focus-ui;
-      outline-offset: -2px;
-    }
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $inverse-hover-ui;
+  }
 
-    &:hover {
-      background-color: $inverse-hover-ui;
-    }
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $carbon--white-0;
+  }
+
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
+    border-color: transparent;
+    box-shadow: none;
+    outline: 2px solid $inverse-focus-ui;
+    outline-offset: -2px;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
+    outline-color: $focus;
   }
 
   .#{$prefix}--inline-notification--hide-close-button
@@ -20084,7 +20129,7 @@ Inline notification styles
   }
 
   .#{$prefix}--inline-notification--low-contrast
-    .#{$prefix}--inline-notification__close-button {
+    .#{$prefix}--inline-notification__close-button:focus {
     @include focus-outline('outline');
   }
 
@@ -20095,10 +20140,10 @@ Inline notification styles
     }
 
     .#{$prefix}--inline-notification__action-button {
-      color: $carbon--blue-60;
+      color: $interactive-01;
 
       &:active {
-        color: $carbon--blue-80;
+        color: $interactive-01;
       }
 
       &:active,
@@ -20133,8 +20178,11 @@ Inline notification styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
-  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
+  - [link-01 [variable]](#link-01-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
+  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
+  - [focus [variable]](#focus-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
 
 ### ❌inline-notification--color [mixin]
 
@@ -20346,7 +20394,7 @@ Toast notification styles
   }
 
   .#{$prefix}--toast-notification--low-contrast
-    .#{$prefix}--toast-notification__close-button {
+    .#{$prefix}--toast-notification__close-button:focus {
     @include focus-outline('outline');
   }
 
@@ -23249,10 +23297,6 @@ Tabs styles
     &:hover {
       background-color: $filter-hover-color;
     }
-
-    svg {
-      fill: $text-color;
-    }
   }
 }
 ```
@@ -23423,7 +23467,16 @@ Tag styles
     border: 0;
     background-color: transparent;
     border-radius: 50%;
+    color: currentColor;
     cursor: pointer;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  .#{$prefix}--tag--disabled .#{$prefix}--tag__close-icon {
+    cursor: not-allowed;
   }
 
   .#{$prefix}--tag__close-icon:focus {
@@ -23640,7 +23693,7 @@ Text input styles
     padding-right: $carbon--spacing-08;
   }
 
-  .#{$prefix}--text-input::-webkit-input-placeholder {
+  .#{$prefix}--text-input::placeholder {
     @include placeholder-colors;
   }
 
@@ -23725,8 +23778,8 @@ Text input styles
   // Disabled
   //-----------------------------
   .#{$prefix}--text-input:disabled {
+    @include focus-outline('reset');
     cursor: not-allowed;
-    outline: none;
     background-color: $disabled-01;
     border-bottom: 1px solid transparent;
     color: $disabled-02;
