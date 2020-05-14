@@ -23,7 +23,17 @@ const colorNameLookup = Object.keys(colors).reduce(
   }),
   {}
 );
-const tokens = Object.keys(themes[Object.keys(themes)[0]]);
+const allTokens = themes[Object.keys(themes)[0]];
+const filteredTokens = {};
+
+// Filter out non-color variables:
+Object.entries(allTokens).forEach(([key, value]) => {
+  if (typeof value === 'string' && value.startsWith('#')) {
+    filteredTokens[key] = value;
+  }
+});
+
+const tokens = Object.keys(filteredTokens);
 
 function App() {
   return (
