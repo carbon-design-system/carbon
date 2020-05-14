@@ -176,11 +176,6 @@ function MultiSelect({
           {titleText}
         </label>
       )}
-      {!inline && helperText && (
-        <div id={helperId} className={helperClasses}>
-          {helperText}
-        </div>
-      )}
       <ListBox
         id={id}
         type={type}
@@ -245,6 +240,11 @@ function MultiSelect({
             })}
         </ListBox.Menu>
       </ListBox>
+      {!inline && !invalid && helperText && (
+        <div id={helperId} className={helperClasses}>
+          {helperText}
+        </div>
+      )}
     </div>
   );
 }
