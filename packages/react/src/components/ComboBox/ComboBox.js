@@ -338,11 +338,6 @@ export default class ComboBox extends React.Component {
                 {titleText}
               </label>
             )}
-            {helperText && (
-              <div id={comboBoxHelperId} className={helperClasses}>
-                {helperText}
-              </div>
-            )}
             <ListBox
               className={className}
               disabled={disabled}
@@ -431,6 +426,11 @@ export default class ComboBox extends React.Component {
                 </ListBox.Menu>
               )}
             </ListBox>
+            {helperText && !invalid && (
+              <div id={comboBoxHelperId} className={helperClasses}>
+                {helperText}
+              </div>
+            )}
           </div>
         )}
       </Downshift>

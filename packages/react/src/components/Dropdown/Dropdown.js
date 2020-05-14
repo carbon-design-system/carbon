@@ -118,7 +118,6 @@ function Dropdown({
           {titleText}
         </label>
       )}
-      {!inline && helper}
       <ListBox
         aria-label={ariaLabel}
         size={size}
@@ -169,6 +168,7 @@ function Dropdown({
             })}
         </ListBox.Menu>
       </ListBox>
+      {!inline && !invalid && helper}
     </div>
   );
 }

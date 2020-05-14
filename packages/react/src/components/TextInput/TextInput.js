@@ -96,7 +96,6 @@ const TextInput = React.forwardRef(function TextInput(
   return (
     <div className={inputWrapperClasses}>
       {label}
-      {helper}
       <div
         className={`${prefix}--text-input__field-wrapper`}
         data-invalid={invalid || null}>
@@ -109,6 +108,7 @@ const TextInput = React.forwardRef(function TextInput(
         {isFluid ? error : null}
       </div>
       {isFluid ? null : error}
+      {!invalid && !isFluid && helper}
     </div>
   );
 });
