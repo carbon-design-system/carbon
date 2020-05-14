@@ -26,6 +26,10 @@
     &[disabled]::placeholder {
       color: $disabled-02;
     }
+
+    &::-ms-clear {
+      display: none;
+    }
   }
 
   .#{$prefix}--combo-box.#{$prefix}--list-box--expanded

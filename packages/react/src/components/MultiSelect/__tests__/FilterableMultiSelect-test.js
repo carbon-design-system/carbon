@@ -9,8 +9,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import MultiSelect from '../../MultiSelect';
 import {
-  assertMenuClosed,
   assertMenuOpen,
+  assertMenuClosed,
   findMenuIconNode,
   openMenu,
   generateItems,
@@ -51,8 +51,9 @@ describe('MultiSelect.Filterable', () => {
 
   it('should open the menu with a down arrow', () => {
     const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
+    const menuIconNode = findMenuIconNode(wrapper);
 
-    findMenuIconNode(wrapper).simulate('keyDown', { key: 'ArrowDown' });
+    menuIconNode.simulate('keyDown', { key: 'ArrowDown' });
     assertMenuOpen(wrapper, mockProps);
   });
 
@@ -67,10 +68,10 @@ describe('MultiSelect.Filterable', () => {
   it('should not close the menu after a user makes a selection', () => {
     const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
     openMenu(wrapper);
-    wrapper
-      .find(listItemName)
-      .at(0)
-      .simulate('click');
+
+    const firstListItem = wrapper.find(listItemName).at(0);
+
+    firstListItem.simulate('click');
     assertMenuOpen(wrapper, mockProps);
   });
 
@@ -80,8 +81,8 @@ describe('MultiSelect.Filterable', () => {
     expect(wrapper.find(listItemName).length).toBe(mockProps.items.length);
 
     wrapper
-      .find('[role="combobox"]')
-      .at(0)
+      .find('[placeholder="Placeholder..."]')
+      .at(1)
       .simulate('change', { target: { value: '3' } });
 
     expect(wrapper.find(listItemName).length).toBe(1);
@@ -164,19 +165,23 @@ describe('MultiSelect.Filterable', () => {
 
   it('should not clear input value after a user makes a selection', () => {
     const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
-    const inputValue = 'Item';
     openMenu(wrapper);
 
     wrapper
-      .find('[role="combobox"]')
-      .at(0)
-      .simulate('change', { target: { value: 'Item' } });
+      .find('[placeholder="Placeholder..."]')
+      .at(1)
+      .simulate('change', { target: { value: '3' } });
 
     wrapper
       .find(listItemName)
       .at(0)
       .simulate('click');
 
-    expect(wrapper.find('[role="combobox"]').props().value).toEqual(inputValue);
+    expect(
+      wrapper
+        .find('[placeholder="Placeholder..."]')
+        .at(1)
+        .props().value
+    ).toEqual('3');
   });
 });
