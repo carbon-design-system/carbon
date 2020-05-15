@@ -64,6 +64,21 @@
       color: $text-05;
     }
   }
+
+  .#{$prefix}--time-picker--light .#{$prefix}--select-input {
+    background-color: $field-02;
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+
+    &:disabled,
+    &:hover:disabled {
+      cursor: not-allowed;
+      border-bottom: 1px solid transparent;
+      color: $disabled-02;
+    }
+  }
 }
 
 @include exports('time-picker') {
