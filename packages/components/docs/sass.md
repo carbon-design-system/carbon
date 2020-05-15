@@ -3481,6 +3481,7 @@ $carbon--spacing-06: 1.5rem;
   - [accordion [mixin]](#accordion-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [lists [mixin]](#lists-mixin)
+  - [listbox [mixin]](#listbox-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
@@ -17986,6 +17987,7 @@ File uploader styles
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close {
+    display: flex;
     height: $carbon--spacing-05;
     width: $carbon--spacing-05;
     background-color: transparent;
@@ -19050,6 +19052,7 @@ List box styles
     line-height: rem(16px);
     padding: rem(11px) 0;
     margin: 0 $carbon--spacing-05;
+    padding-right: $carbon--spacing-06;
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
     border-top-color: $ui-03;
@@ -19240,6 +19243,7 @@ List box styles
   - [text-02 [variable]](#text-02-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [selected-light-ui [variable]](#selected-light-ui-variable)
+  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
 
 ## loading
 
@@ -21527,6 +21531,7 @@ Progress indicator styles
   .#{$prefix}--progress-step svg {
     position: relative;
     z-index: 1;
+    flex-shrink: 0;
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
     border-radius: 50%;
@@ -21652,6 +21657,7 @@ Progress indicator styles
   .#{$prefix}--progress-step-button {
     @include button-reset();
     display: flex;
+    text-align: left;
   }
 
   //unclickable button
@@ -21768,6 +21774,8 @@ Progress indicator styles
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
+    position: absolute;
+    top: 0;
     left: 0;
     height: 100%;
     width: 1px;
