@@ -134,7 +134,8 @@
     @include carbon--breakpoint(md) {
       display: flex;
       transition: inherit;
-      overflow: visible;
+      overflow: scroll;
+      max-width: 100%;
       max-height: none;
     }
   }
