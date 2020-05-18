@@ -75,6 +75,7 @@
     &:disabled,
     &:hover:disabled {
       cursor: not-allowed;
+      background-color: transparent;
       border-bottom: 1px solid transparent;
       color: $disabled-02;
     }
