@@ -16628,7 +16628,7 @@ Data table sort styles
     width: 100%;
     color: $text-01;
     padding: 0 $spacing-05;
-    height: 100%;
+    min-height: 100%;
     background-color: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive),
       outline $duration--fast-01 motion(entrance, productive);
