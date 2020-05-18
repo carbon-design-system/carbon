@@ -10,6 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { ChevronDown16, WarningFilled16 } from '@carbon/icons-react';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -21,13 +22,16 @@ const Select = React.forwardRef(function Select(
     labelText,
     disabled,
     children,
-    noLabel, // reserved for use with <Pagination> component
+    // reserved for use with <Pagination> component
+    noLabel,
+    // eslint-disable-next-line no-unused-vars
     iconDescription,
     hideLabel,
     invalid,
     invalidText,
     helperText,
     light,
+    size,
     ...other
   },
   ref
@@ -37,11 +41,16 @@ const Select = React.forwardRef(function Select(
     [`${prefix}--select--inline`]: inline,
     [`${prefix}--select--light`]: light,
     [`${prefix}--select--invalid`]: invalid,
+    [`${prefix}--select--disabled`]: disabled,
     [className]: className,
   });
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
+  });
+  const inputClasses = classNames({
+    [`${prefix}--select-input`]: true,
+    [`${prefix}--select-input--${size}`]: size,
   });
   const errorId = `${id}-error-msg`;
   const error = invalid ? (
@@ -66,18 +75,13 @@ const Select = React.forwardRef(function Select(
           {...other}
           {...ariaProps}
           id={id}
-          className={`${prefix}--select-input`}
+          className={inputClasses}
           disabled={disabled || undefined}
-          data-invalid={invalid || undefined}
           aria-invalid={invalid || undefined}
           ref={ref}>
           {children}
         </select>
-        <ChevronDown16
-          className={`${prefix}--select__arrow`}
-          aria-label={iconDescription}>
-          <title>{iconDescription}</title>
-        </ChevronDown16>
+        <ChevronDown16 className={`${prefix}--select__arrow`} />
         {invalid && (
           <WarningFilled16 className={`${prefix}--select__invalid-icon`} />
         )}
@@ -92,7 +96,6 @@ const Select = React.forwardRef(function Select(
             {labelText}
           </label>
         )}
-        {!inline && helper}
         {inline && (
           <>
             <div className={`${prefix}--select-input--inline__wrapper`}>
@@ -103,7 +106,6 @@ const Select = React.forwardRef(function Select(
               </div>
               {error}
             </div>
-            {helper}
           </>
         )}
         {!inline && (
@@ -113,11 +115,13 @@ const Select = React.forwardRef(function Select(
             {input}
           </div>
         )}
-        {!inline && error}
+        {!inline && error ? error : helper}
       </div>
     </div>
   );
 });
+
+Select.displayName = 'Select';
 
 Select.propTypes = {
   /**
@@ -165,7 +169,11 @@ Select.propTypes = {
   /**
    * Provide a description for the twistie icon that can be read by screen readers
    */
-  iconDescription: PropTypes.string.isRequired,
+  iconDescription: deprecate(
+    PropTypes.string,
+    'The `iconDescription` prop for `Select` is no longer needed and has ' +
+      'been deprecated. It will be moved in the next major release.'
+  ),
 
   /**
    * Specify whether the label should be hidden, or not
@@ -197,13 +205,17 @@ Select.propTypes = {
    * select since Pagination renders one for us.
    */
   noLabel: PropTypes.bool,
+
+  /**
+   * Specify the size of the Select Input. Currently supports either `sm` or `xl` as an option.
+   */
+  size: PropTypes.oneOf(['sm', 'xl']),
 };
 
 Select.defaultProps = {
   disabled: false,
   labelText: 'Select',
   inline: false,
-  iconDescription: 'open list of options',
   invalid: false,
   invalidText: '',
   helperText: '',

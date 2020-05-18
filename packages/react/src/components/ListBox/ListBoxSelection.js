@@ -10,6 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Close16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
+import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -22,6 +23,8 @@ const ListBoxSelection = ({
   clearSelection,
   selectionCount,
   translateWithId: t,
+  disabled,
+  onClearSelection,
 }) => {
   const className = cx(`${prefix}--list-box__selection`, {
     [`${prefix}--tag--filter`]: selectionCount,
@@ -29,14 +32,26 @@ const ListBoxSelection = ({
   });
   const handleOnClick = event => {
     event.stopPropagation();
+    if (disabled) {
+      return;
+    }
     clearSelection(event);
+    if (onClearSelection) {
+      onClearSelection(event);
+    }
   };
   const handleOnKeyDown = event => {
     event.stopPropagation();
+    if (disabled) {
+      return;
+    }
 
     // When a user hits ENTER, we'll clear the selection
-    if (event.keyCode === 13) {
+    if (match(event, keys.Enter)) {
       clearSelection(event);
+      if (onClearSelection) {
+        onClearSelection(event);
+      }
     }
   };
   const description = selectionCount ? t('clear.all') : t('clear.selection');
@@ -44,12 +59,13 @@ const ListBoxSelection = ({
     <div
       role="button"
       className={className}
-      tabIndex="0"
+      tabIndex={disabled ? -1 : 0}
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}
+      aria-label="Clear Selection"
       title={description}>
       {selectionCount}
-      <Close16 role="img" />
+      <Close16 />
     </div>
   );
 };
@@ -65,6 +81,11 @@ const defaultTranslations = {
 };
 
 ListBoxSelection.propTypes = {
+  /**
+   * Specify whether or not the clear selection element should be disabled
+   */
+  disabled: PropTypes.bool,
+
   /**
    * Specify a function to be invoked when a user interacts with the clear
    * selection element.
@@ -83,6 +104,18 @@ ListBoxSelection.propTypes = {
    * return a string message for that given message id.
    */
   translateWithId: PropTypes.func.isRequired,
+
+  /**
+   * Specify an optional `onClick` handler that is called when the underlying
+   * clear selection element is clicked
+   */
+  onClick: PropTypes.func,
+
+  /**
+   * Specify an optional `onKeyDown` handler that is called when the underlying
+   * clear selection element fires a keydown event
+   */
+  onKeyDown: PropTypes.func,
 };
 
 ListBoxSelection.defaultProps = {

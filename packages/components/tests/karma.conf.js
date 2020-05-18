@@ -1,8 +1,4 @@
-/* eslint-disable prettier/prettier */
-
 'use strict';
-
-/* eslint-disable import/no-extraneous-dependencies, global-require */
 
 const path = require('path');
 const commander = require('commander');

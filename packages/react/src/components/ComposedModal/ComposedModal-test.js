@@ -61,15 +61,13 @@ describe('<ModalBody />', () => {
     });
 
     it('renders wrapper as expected', () => {
-      expect(wrapper.length).toBe(1);
-    });
-
-    it('has the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--modal-content`)).toEqual(true);
+      expect(wrapper.find(`.${prefix}--modal-content`).length).toBe(1);
     });
 
     it('renders extra classes passed in via className', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
+      expect(
+        wrapper.find(`.${prefix}--modal-content`).hasClass('extra-class')
+      ).toEqual(true);
     });
   });
 });
@@ -155,6 +153,8 @@ describe('<ModalFooter />', () => {
 });
 
 describe('<ComposedModal />', () => {
+  let container;
+
   it('renders', () => {
     const wrapper = mount(<ComposedModal open />);
     expect(wrapper).toMatchSnapshot();
@@ -168,10 +168,14 @@ describe('<ComposedModal />', () => {
   });
 
   it('should change class of <body> upon open state', () => {
-    mount(<ComposedModal open />);
+    const wrapper = mount(<ComposedModal open />);
     expect(
       document.body.classList.contains('bx--body--with-modal-open')
     ).toEqual(true);
+    wrapper.unmount();
+    expect(
+      document.body.classList.contains('bx--body--with-modal-open')
+    ).toEqual(false);
     mount(<ComposedModal open={false} />);
     expect(
       document.body.classList.contains('bx--body--with-modal-open')
@@ -212,10 +216,14 @@ describe('<ComposedModal />', () => {
   });
 
   it('should focus on the primary actionable button in ModalFooter by default', () => {
+    container = document.createElement('div');
+    container.id = 'container';
+    document.body.appendChild(container);
     mount(
       <ComposedModal open>
         <ModalFooter primaryButtonText="Save" />
-      </ComposedModal>
+      </ComposedModal>,
+      { attachTo: document.querySelector('#container') }
     );
     expect(
       document.activeElement.classList.contains(`${prefix}--btn--primary`)
@@ -223,14 +231,25 @@ describe('<ComposedModal />', () => {
   });
 
   it('should focus on the element that matches selectorPrimaryFocus', () => {
+    container = document.createElement('div');
+    container.id = 'container';
+    document.body.appendChild(container);
     mount(
       <ComposedModal open selectorPrimaryFocus={`.${prefix}--modal-close`}>
         <ModalHeader label="Optional Label" title="Example" />
         <ModalFooter primaryButtonText="Save" />
-      </ComposedModal>
+      </ComposedModal>,
+      { attachTo: document.querySelector('#container') }
     );
     expect(
       document.activeElement.classList.contains(`${prefix}--modal-close`)
     ).toEqual(true);
+  });
+
+  afterEach(() => {
+    if (container && container.parentNode) {
+      container.parentNode.removeChild(container);
+    }
+    container = null;
   });
 });

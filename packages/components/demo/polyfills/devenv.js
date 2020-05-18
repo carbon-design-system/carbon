@@ -1,6 +1,6 @@
 // Polyfill for dev env UI based on `carbon-components-react`
-import 'core-js/modules/es6.string.includes';
-import 'core-js/modules/es7.object.values';
+import 'core-js/modules/es.string.includes';
+import 'core-js/modules/es.object.values';
 import 'whatwg-fetch';
 import PromisePolyfill from 'promise/lib/es6-extensions';
 import rejectionTracking from 'promise/lib/rejection-tracking';

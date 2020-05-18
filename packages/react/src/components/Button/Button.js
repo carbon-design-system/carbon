@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { ButtonTypes } from '../../prop-types/types';
+import { ButtonKinds } from '../../prop-types/types';
 import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
@@ -38,12 +38,7 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--field`]: size === 'field',
     [`${prefix}--btn--sm`]: size === 'small' || small,
-    [`${prefix}--btn--primary`]: kind === 'primary',
-    [`${prefix}--btn--danger`]: kind === 'danger',
-    [`${prefix}--btn--secondary`]: kind === 'secondary',
-    [`${prefix}--btn--ghost`]: kind === 'ghost',
-    [`${prefix}--btn--danger--primary`]: kind === 'danger--primary',
-    [`${prefix}--btn--tertiary`]: kind === 'tertiary',
+    [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
     [`${prefix}--tooltip__trigger`]: hasIconOnly,
@@ -63,7 +58,7 @@ const Button = React.forwardRef(function Button(
     <ButtonImageElement
       aria-label={iconDescription}
       className={`${prefix}--btn__icon`}
-      aria-hidden={true}
+      aria-hidden="true"
     />
   );
 
@@ -73,7 +68,6 @@ const Button = React.forwardRef(function Button(
     type,
   };
   const anchorProps = {
-    role: 'button',
     href,
   };
   const assistiveText = hasIconOnly ? (
@@ -85,7 +79,7 @@ const Button = React.forwardRef(function Button(
       ...otherProps,
       ...anchorProps,
     };
-  } else if (href) {
+  } else if (href && !disabled) {
     component = 'a';
     otherProps = anchorProps;
   }
@@ -112,7 +106,11 @@ Button.propTypes = {
    * Specify how the button itself should be rendered.
    * Make sure to apply all props to the root node and render children appropriately
    */
-  as: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  as: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.string,
+    PropTypes.elementType,
+  ]),
 
   /**
    * Specify an optional className to be added to your Button
@@ -142,7 +140,7 @@ Button.propTypes = {
   /**
    * Specify the kind of Button you want to create
    */
-  kind: ButtonTypes.buttonKind.isRequired,
+  kind: PropTypes.oneOf(ButtonKinds).isRequired,
 
   /**
    * Optionally specify an href for your Button to become an <a> element
@@ -171,7 +169,7 @@ Button.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * If specifying the `icon` prop, provide a description for that icon that can
+   * If specifying the `renderIcon` prop, provide a description for that icon that can
    * be read by screen readers
    */
   iconDescription: props => {

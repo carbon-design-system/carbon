@@ -1,55 +1,32 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const rtlcss = require('rtlcss');
+const customProperties = require('postcss-custom-properties');
 
-const useExternalCss =
-  process.env.CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS === 'true';
+const {
+  CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
+  CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS,
+  CARBON_REACT_USE_CONTROLLED_STATE_WITH_EVENT_LISTENER,
+  CARBON_REACT_STORYBOOK_USE_RTL,
+  NODE_ENV = 'development',
+} = process.env;
 
-const useStyleSourceMap =
-  process.env.CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP === 'true';
-
+const useExternalCss = NODE_ENV === 'production';
 const useControlledStateWithEventListener =
-  process.env.CARBON_REACT_USE_CONTROLLED_STATE_WITH_EVENT_LISTENER === 'true';
-const useRtl = process.env.CARBON_REACT_STORYBOOK_USE_RTL === 'true';
+  CARBON_REACT_USE_CONTROLLED_STATE_WITH_EVENT_LISTENER === 'true';
+const useRtl = CARBON_REACT_STORYBOOK_USE_RTL === 'true';
 
 const replaceTable = {
   useControlledStateWithEventListener,
 };
-
-const styleLoaders = [
-  {
-    loader: 'css-loader',
-    options: {
-      importLoaders: 2,
-      sourceMap: useStyleSourceMap,
-    },
-  },
-  {
-    loader: 'postcss-loader',
-    options: {
-      plugins: () => {
-        const autoPrefixer = require('autoprefixer')({
-          overrideBrowserslist: ['last 1 version', 'ie >= 11'],
-        });
-        return !useRtl ? [autoPrefixer] : [autoPrefixer, rtlcss];
-      },
-      sourceMap: useStyleSourceMap,
-    },
-  },
-  {
-    loader: 'sass-loader',
-    options: {
-      includePaths: [path.resolve(__dirname, '..', 'node_modules')],
-      data: `
-        $feature-flags: (
-          ui-shell: true,
-        );
-      `,
-      sourceMap: useStyleSourceMap,
-    },
-  },
-];
 
 class FeatureFlagProxyPlugin {
   /**
@@ -71,7 +48,8 @@ class FeatureFlagProxyPlugin {
 }
 
 module.exports = ({ config, mode }) => {
-  config.devtool = useStyleSourceMap ? 'source-map' : '';
+  config.devtool =
+    NODE_ENV === 'production' ? 'source-map' : 'cheap-module-eval-source-map';
   config.optimization = {
     ...config.optimization,
     minimizer: [
@@ -100,7 +78,7 @@ module.exports = ({ config, mode }) => {
     test: /-story\.jsx?$/,
     loaders: [
       {
-        loader: require.resolve('@storybook/addon-storysource/loader'),
+        loader: require.resolve('@storybook/source-loader'),
         options: {
           prettierConfig: {
             parser: 'babylon',
@@ -116,12 +94,67 @@ module.exports = ({ config, mode }) => {
     enforce: 'pre',
   });
 
+  const sassLoader = {
+    loader: 'sass-loader',
+    options: {
+      prependData() {
+        return `
+          $feature-flags: (
+            ui-shell: true,
+            enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+          );
+        `;
+      },
+      sassOptions: {
+        includePaths: [path.resolve(__dirname, '..', 'node_modules')],
+      },
+      sourceMap: true,
+    },
+  };
+
+  const fastSassLoader = {
+    loader: 'fast-sass-loader',
+    options: {
+      data: `
+        $feature-flags: (
+          ui-shell: true,
+          enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+        );
+      `,
+    },
+  };
+
   config.module.rules.push({
     test: /\.scss$/,
     sideEffects: true,
     use: [
-      { loader: useExternalCss ? MiniCssExtractPlugin.loader : 'style-loader' },
-      ...styleLoaders,
+      {
+        loader: useExternalCss ? MiniCssExtractPlugin.loader : 'style-loader',
+      },
+      {
+        loader: 'css-loader',
+        options: {
+          importLoaders: 2,
+          sourceMap: true,
+        },
+      },
+      {
+        loader: 'postcss-loader',
+        options: {
+          plugins: () => {
+            const autoPrefixer = require('autoprefixer')({
+              overrideBrowserslist: ['last 1 version', 'ie >= 11'],
+            });
+            return [
+              customProperties(),
+              autoPrefixer,
+              ...(useRtl ? [rtlcss] : []),
+            ];
+          },
+          sourceMap: true,
+        },
+      },
+      NODE_ENV === 'production' ? sassLoader : fastSassLoader,
     ],
   });
 

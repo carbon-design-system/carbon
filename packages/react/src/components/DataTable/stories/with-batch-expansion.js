@@ -32,8 +32,12 @@ export default props => (
       getExpandHeaderProps,
       getRowProps,
       getTableProps,
+      getTableContainerProps,
     }) => (
-      <TableContainer title="DataTable" description="With expansion">
+      <TableContainer
+        title="DataTable"
+        description="With expansion"
+        {...getTableContainerProps()}>
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>

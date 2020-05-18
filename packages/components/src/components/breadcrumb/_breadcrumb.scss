@@ -6,6 +6,7 @@
 //
 
 @import '../../globals/scss/vars';
+@import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/layout';
@@ -16,6 +17,7 @@
 /// @group breadcrumb
 @mixin breadcrumb {
   .#{$prefix}--breadcrumb {
+    @include reset;
     @include type-style('body-short-01');
     display: inline;
     @include carbon--breakpoint(md) {
@@ -29,6 +31,10 @@
     display: flex;
     align-items: center;
     margin-right: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited {
+    color: $link-01;
   }
 
   .#{$prefix}--breadcrumb-item::after {
@@ -55,6 +61,11 @@
   .#{$prefix}--breadcrumb-item.#{$prefix}--breadcrumb-item--current
     .#{$prefix}--link {
     color: $text-01;
+    cursor: auto;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   // Skeleton State

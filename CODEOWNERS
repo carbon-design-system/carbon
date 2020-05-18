@@ -1,3 +1,16 @@
-/packages/icons/src/svg/16/ @aagonzales @chrisconnors-ibm
-/packages/icons/src/svg/glyph/ @aagonzales @chrisconnors-ibm
-/packages/icons-angular/ @cal-smith
+# Default global
+* @carbon-design-system/developers-system
+
+# Core icons and pictograms
+/packages/icons/svg/ @laurenmrice @conradennis @carbon-design-system/developers-system
+/packages/pictograms/svg/ @laurenmrice @conradennis @carbon-design-system/developers-system
+
+# Angular icons
+/packages/icons-angular/ @cal-smith @carbon-design-system/developers-system
+
+# Brand
+/packages/colors/artifacts/ @lisalind-ibm
+
+# Release team should be notified of Public API changes in the system
+**/PublicAPI-test.js @carbon-design-system/release @carbon-design-system/developers-system
+**/PublicAPI-test.js.snap @carbon-design-system/release @carbon-design-system/developers-system

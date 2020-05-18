@@ -12,8 +12,16 @@ import React from 'react';
 
 const { prefix } = settings;
 
-const SideNavItem = ({ className: customClassName, children }) => {
-  const className = cx(`${prefix}--side-nav__item`, customClassName);
+const SideNavItem = ({
+  className: customClassName,
+  children,
+  large = false,
+}) => {
+  const className = cx({
+    [`${prefix}--side-nav__item`]: true,
+    [`${prefix}--side-nav__item--large`]: large,
+    [customClassName]: !!customClassName,
+  });
   return <li className={className}>{children}</li>;
 };
 
@@ -28,6 +36,11 @@ SideNavItem.propTypes = {
    * container
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * Specify if this is a large variation of the SideNavItem
+   */
+  large: PropTypes.bool,
 };
 
 export default SideNavItem;

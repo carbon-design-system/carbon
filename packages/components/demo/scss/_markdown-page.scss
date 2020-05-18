@@ -229,7 +229,7 @@
 
   ul,
   ol {
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
     margin-left: 1.5rem;
     margin-bottom: 1rem;
     line-height: 1.75;
@@ -331,7 +331,7 @@
   }
 
   blockquote + p strong {
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
     color: $brand-01;
   }
 

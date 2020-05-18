@@ -8,9 +8,6 @@
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label">List box label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
       <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
@@ -21,15 +18,15 @@
         </div>
       </div>
     </div>
+    {{#unless inline}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
+    {{/unless}}
   </div>
 </div>
 
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label">List box label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}"
       data-invalid>
@@ -51,11 +48,6 @@
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label {{@root.prefix}}--label--disabled">List box label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text {{@root.prefix}}--form__helper-text--disabled">Optional helper text
-      here
-    </div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--list-box {{@root.prefix}}--list-box--disabled{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}"
       data-invalid>
@@ -76,11 +68,6 @@
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label {{@root.prefix}}--label--disabled">List box label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text {{@root.prefix}}--form__helper-text--disabled">Optional helper text
-      here
-    </div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--list-box {{@root.prefix}}--list-box--disabled{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
       <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
@@ -91,17 +78,17 @@
         </div>
       </div>
     </div>
+    {{#unless inline}}
+    <div class="{{@root.prefix}}--form__helper-text {{@root.prefix}}--form__helper-text--disabled">Optional helper text
+      here
+    </div>
+    {{/unless}}
   </div>
 </div>
 
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label">List box label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text">Optional helper text
-      here
-    </div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--list-box {{@root.prefix}}--list-box--expanded{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
       <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="close menu"
@@ -114,14 +101,20 @@
       <ul class="{{@root.prefix}}--list-box__menu" role="combobox">
         {{#each items}}
         <li
-          class="{{@root.prefix}}--list-box__menu-item{{#if selected}} {{@root.prefix}}--list-box__menu-item--highlighted{{/if}}"
+          class="{{@root.prefix}}--list-box__menu-item{{#if selected}} {{@root.prefix}}--list-box__menu-item--active {{@root.prefix}}--list-box__menu-item--highlighted{{/if}}"
           id="{{id}}">
           <div class="{{@root.prefix}}--list-box__menu-item__option" tabindex="0">
             {{label}}
+            {{ carbon-icon 'Checkmark16' class=(add @root.prefix '--list-box__menu-item__selected-icon') aria-hidden="true" }}
           </div>
         </li>
         {{/each}}
       </ul>
     </div>
+    {{#unless inline}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text
+      here
+    </div>
+    {{/unless}}
   </div>
 </div>

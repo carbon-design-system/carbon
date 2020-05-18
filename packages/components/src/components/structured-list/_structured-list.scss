@@ -87,7 +87,7 @@
   .#{$prefix}--structured-list-th {
     @include reset;
     @include padding-th;
-    @include type-style('heading-01');
+    @include type-style('productive-heading-01');
     display: table-cell;
     font-weight: 600;
     height: rem(40px);

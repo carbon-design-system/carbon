@@ -19,7 +19,7 @@ const { prefix } = settings;
 
 const icons = {
   None: 'None',
-  'Add with filled circle (Add16 from `@carbon/icons-react`)': 'Add16',
+  'Add (Add16 from `@carbon/icons-react`)': 'Add16',
   'Search (Search16 from `@carbon/icons-react`)': 'Search16',
 };
 
@@ -33,6 +33,7 @@ const iconMap = {
 const kinds = {
   'Primary button (primary)': 'primary',
   'Secondary button (secondary)': 'secondary',
+  'Tertiary button (tertiary)': 'tertiary',
   'Danger button (danger)': 'danger',
   'Ghost button (ghost)': 'ghost',
 };
@@ -58,14 +59,22 @@ const props = {
       ),
       onClick: action('onClick'),
       onFocus: action('onFocus'),
-      small: boolean('Small (small) - Deprecated in favor of `size`', false),
     };
   },
   iconOnly: () => {
     const iconToUse = iconMap[select('Icon (icon)', icons, 'Add16')];
     return {
       className: 'some-class',
-      kind: select('Button kind (kind)', kinds, 'primary'),
+      kind: select(
+        'Button kind (kind)',
+        {
+          'Primary button (primary)': 'primary',
+          'Secondary button (secondary)': 'secondary',
+          'Tertiary button (tertiary)': 'tertiary',
+          'Ghost button (ghost)': 'ghost',
+        },
+        'primary'
+      ),
       disabled: boolean('Disabled (disabled)', false),
       size: select('Button size (size)', sizes, 'default'),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
@@ -92,7 +101,6 @@ const props = {
     return {
       className: 'some-class',
       disabled: boolean('Disabled (disabled)', false),
-      small: boolean('Small (small)', false),
       size: select('Button size (size)', sizes, 'default'),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(
@@ -104,6 +112,8 @@ const props = {
     };
   },
 };
+
+Button.displayName = 'Button';
 
 const CustomLink = ({ children, href, ...other }) => (
   <a href={href} {...other}>

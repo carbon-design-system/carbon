@@ -22,16 +22,16 @@
     font-family: inherit;
     vertical-align: baseline;
 
-    & > *,
-    & > *:before,
-    & > *:after {
+    *,
+    *:before,
+    *:after {
       box-sizing: inherit;
     }
   }
 }
 
 @include exports('css--reset') {
-  @if variable-exists(css--reset) == false or $css--reset==true {
+  @if variable-exists(css--reset) == false or $css--reset == true {
     // http://cssreset.com/scripts/eric-meyer-reset-css/
     html,
     body,
@@ -125,12 +125,7 @@
     // Chrome 62 fix
     button,
     select,
-    input[type='button'],
-    input[type='submit'],
-    input[type='reset'],
-    input[type='file'],
-    input[type='text'],
-    input[type='password'],
+    input,
     textarea {
       border-radius: 0;
       font-family: inherit;
@@ -195,7 +190,19 @@
       box-sizing: border-box;
     }
 
+    // Fix to remove added margins on buttons in safari (see #5155)
+    button {
+      margin: 0;
+    }
+
     @include carbon--type-reset;
     @include carbon--icons;
+  }
+}
+
+@include exports('css--default-type') {
+  @if variable-exists(css--default-type) == false or $css--default-type == true
+  {
+    @include carbon--default-type;
   }
 }

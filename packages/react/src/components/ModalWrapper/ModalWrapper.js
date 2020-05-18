@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Modal from '../Modal';
 import Button from '../Button';
-import { ButtonTypes } from '../../prop-types/types';
+import { ButtonKinds } from '../../prop-types/types';
 
 export default class ModalWrapper extends React.Component {
   static propTypes = {
@@ -34,7 +34,7 @@ export default class ModalWrapper extends React.Component {
       PropTypes.object,
     ]),
     triggerButtonIconDescription: PropTypes.string,
-    triggerButtonKind: ButtonTypes.buttonKind,
+    triggerButtonKind: PropTypes.oneOf(ButtonKinds),
     shouldCloseAfterSubmit: PropTypes.bool,
   };
 

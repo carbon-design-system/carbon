@@ -11,6 +11,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SideNavIcon from './SideNavIcon';
+import { keys, match } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -48,22 +49,62 @@ export class SideNavMenu extends React.Component {
      * be closed.
      */
     defaultExpanded: PropTypes.bool,
+
+    /**
+     * Property to indicate if the side nav container is open (or not). Use to
+     * keep local state and styling in step with the SideNav expansion state.
+     */
+    isSideNavExpanded: PropTypes.bool,
+
+    /**
+     * Specify if this is a large variation of the SideNavMenu
+     */
+    large: PropTypes.bool,
   };
 
   static defaultProps = {
     defaultExpanded: false,
     isActive: false,
+    large: false,
+  };
+
+  static getDerivedStateFromProps = (props, state) => {
+    let derivedState = null;
+
+    if (props.isSideNavExpanded === false && state.isExpanded === true) {
+      derivedState = {
+        isExpanded: props.isSideNavExpanded,
+        wasPreviouslyExpanded: true,
+      };
+    } else if (
+      props.isSideNavExpanded === true &&
+      state.wasPreviouslyExpanded === true
+    ) {
+      derivedState = {
+        isExpanded: props.isSideNavExpanded,
+        wasPreviouslyExpanded: false,
+      };
+    }
+
+    return derivedState;
   };
 
   constructor(props) {
     super(props);
     this.state = {
       isExpanded: props.defaultExpanded || false,
+      wasPreviouslyExpanded: props.defaultExpanded || false,
     };
   }
 
   handleToggleExpand = () => {
     this.setState(state => ({ isExpanded: !state.isExpanded }));
+  };
+
+  handleKeyDown = event => {
+    if (match(event, keys.Escape)) {
+      this.setState(() => ({ isExpanded: false }));
+    }
   };
 
   render() {
@@ -74,17 +115,25 @@ export class SideNavMenu extends React.Component {
       renderIcon: IconElement,
       isActive,
       title,
+      large,
     } = this.props;
     const { isExpanded } = this.state;
 
     let hasActiveChild;
-    if (children && typeof children === Object) {
-      hasActiveChild = children.some(child => {
-        if (child.props.isActive === true || child.props['aria-current']) {
-          return true;
-        }
-        return false;
-      });
+    if (children) {
+      // if we have children, either a single or multiple, find if it is active
+      hasActiveChild = Array.isArray(children)
+        ? children.some(child => {
+            if (
+              child.props &&
+              (child.props.isActive === true || child.props['aria-current'])
+            ) {
+              return true;
+            }
+            return false;
+          })
+        : children.props &&
+          (children.props.isActive === true || children.props['aria-current']);
     }
 
     const className = cx({
@@ -92,10 +141,12 @@ export class SideNavMenu extends React.Component {
       [`${prefix}--side-nav__item--active`]:
         isActive || (hasActiveChild && !isExpanded),
       [`${prefix}--side-nav__item--icon`]: IconElement,
+      [`${prefix}--side-nav__item--large`]: large,
       [customClassName]: !!customClassName,
     });
     return (
-      <li className={className}>
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+      <li className={className} onKeyDown={this.handleKeyDown}>
         <button
           aria-haspopup="true"
           aria-expanded={isExpanded}
@@ -113,14 +164,15 @@ export class SideNavMenu extends React.Component {
             <ChevronDown20 />
           </SideNavIcon>
         </button>
-        <ul className={`${prefix}--side-nav__menu`} role="menu">
-          {children}
-        </ul>
+        <ul className={`${prefix}--side-nav__menu`}>{children}</ul>
       </li>
     );
   }
 }
 
-export default React.forwardRef((props, ref) => {
+const SideNavMenuForwardRef = React.forwardRef((props, ref) => {
   return <SideNavMenu {...props} buttonRef={ref} />;
 });
+
+SideNavMenuForwardRef.displayName = 'SideNavMenu';
+export default SideNavMenuForwardRef;

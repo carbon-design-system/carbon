@@ -17,7 +17,7 @@ const TEXT_MARGIN = 16;
 export function generate() {
   command('commands/type/generate', () => {
     const document = Document.getSelectedDocument();
-    const page = selectPage(findOrCreatePage(document, 'Type'));
+    const page = selectPage(findOrCreatePage(document, 'type'));
     const sharedStyles = syncTextStyles(document);
 
     let Y_OFFSET = 0;

@@ -31,6 +31,10 @@ const notificationProps = () => ({
     'Icon description (iconDescription)',
     'describes the close button'
   ),
+  statusIconDescription: text(
+    'Status icon description (statusIconDescription)',
+    'describes the status icon'
+  ),
   hideCloseButton: boolean('Hide close button (hideCloseButton)', false),
   onCloseButtonClick: action('onCloseButtonClick'),
 });
@@ -40,7 +44,7 @@ storiesOf('Notifications', module)
   .add('Toast', () => (
     <ToastNotification
       {...notificationProps()}
-      caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
+      caption={text('Caption (caption)', '00:00:00 AM')}
       style={{ minWidth: '30rem', marginBottom: '.5rem' }}
     />
   ))

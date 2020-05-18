@@ -41,6 +41,12 @@ SideNavHeader.propTypes = {
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
     .isRequired,
+
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded: PropTypes.bool,
 };
 
 export default SideNavHeader;

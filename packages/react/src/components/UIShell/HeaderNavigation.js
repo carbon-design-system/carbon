@@ -81,8 +81,10 @@ export default class HeaderNavigation extends React.Component {
    * `this.items` to properly manage focus.
    */
   _renderNavItem = (child, index) => {
-    return React.cloneElement(child, {
-      ref: this.handleItemRef(index),
-    });
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, {
+        ref: this.handleItemRef(index),
+      });
+    }
   };
 }

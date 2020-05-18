@@ -8,7 +8,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, text } from '@storybook/addon-knobs';
+import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import ComposedModal, {
   ModalHeader,
   ModalBody,
@@ -19,24 +19,46 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
+const sizes = {
+  Default: '',
+  'Extra small (xs)': 'xs',
+  'Small (sm)': 'sm',
+  'Large (lg)': 'lg',
+};
+
 const props = {
-  composedModal: (includeOpen = true) => ({
-    open: includeOpen ? boolean('Open (open in <ComposedModal>)', true) : null,
+  composedModal: ({ titleOnly } = {}) => ({
+    open: boolean('Open (open in <ComposedModal>)', true),
     onKeyDown: action('onKeyDown'),
     danger: boolean('Danger mode (danger)', false),
     selectorPrimaryFocus: text(
       'Primary focus element selector (selectorPrimaryFocus)',
       '[data-modal-primary-focus]'
     ),
+    size: select('Size (size)', sizes, titleOnly ? 'sm' : ''),
   }),
-  modalHeader: () => ({
+  modalHeader: ({ titleOnly } = {}) => ({
     label: text('Optional Label (label in <ModalHeader>)', 'Optional Label'),
-    title: text('Optional title (title in <ModalHeader>)', 'Example'),
+    title: text(
+      'Optional title (title in <ModalHeader>)',
+      titleOnly
+        ? `
+      Passive modal title as the message. Should be direct and 3 lines or less.
+    `.trim()
+        : 'Example'
+    ),
     iconDescription: text(
       'Close icon description (iconDescription in <ModalHeader>)',
       'Close'
     ),
     buttonOnClick: action('buttonOnClick'),
+  }),
+  modalBody: () => ({
+    hasScrollingContent: boolean(
+      'Modal contains scrollable content (hasScrollingContent)',
+      true
+    ),
+    'aria-label': text('ARIA label for content', 'Example modal content'),
   }),
   modalFooter: () => ({
     primaryButtonText: text(
@@ -56,22 +78,84 @@ const props = {
   }),
 };
 
+const scrollingContent = (
+  <>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+      accumsan augue. Phasellus consequat augue vitae tellus tincidunt posuere.
+      Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum
+      risus. Nulla facilisi. Etiam venenatis molestie tellus. Quisque
+      consectetur non risus eu rutrum.{' '}
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+      accumsan augue. Phasellus consequat augue vitae tellus tincidunt posuere.
+      Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum
+      risus. Nulla facilisi. Etiam venenatis molestie tellus. Quisque
+      consectetur non risus eu rutrum.{' '}
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+      accumsan augue. Phasellus consequat augue vitae tellus tincidunt posuere.
+      Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum
+      risus. Nulla facilisi. Etiam venenatis molestie tellus. Quisque
+      consectetur non risus eu rutrum.{' '}
+    </p>
+    <h3>Lorem ipsum</h3>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+      accumsan augue. Phasellus consequat augue vitae tellus tincidunt posuere.
+      Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum
+      risus. Nulla facilisi. Etiam venenatis molestie tellus. Quisque
+      consectetur non risus eu rutrum.{' '}
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+      accumsan augue. Phasellus consequat augue vitae tellus tincidunt posuere.
+      Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum
+      risus. Nulla facilisi. Etiam venenatis molestie tellus. Quisque
+      consectetur non risus eu rutrum.{' '}
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+      accumsan augue. Phasellus consequat augue vitae tellus tincidunt posuere.
+      Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum
+      risus. Nulla facilisi. Etiam venenatis molestie tellus. Quisque
+      consectetur non risus eu rutrum.{' '}
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+      accumsan augue. Phasellus consequat augue vitae tellus tincidunt posuere.
+      Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum
+      risus. Nulla facilisi. Etiam venenatis molestie tellus. Quisque
+      consectetur non risus eu rutrum.{' '}
+    </p>
+  </>
+);
+
 storiesOf('ComposedModal', module)
   .addDecorator(withKnobs)
   .add(
     'Using Header / Footer Props',
-    () => (
-      <ComposedModal {...props.composedModal()}>
-        <ModalHeader {...props.modalHeader()} />
-        <ModalBody>
-          <p className={`${prefix}--modal-content__text}`}>
-            Please see ModalWrapper for more examples and demo of the
-            functionality.
-          </p>
-        </ModalBody>
-        <ModalFooter {...props.modalFooter()} />
-      </ComposedModal>
-    ),
+    () => {
+      const { size, ...rest } = props.composedModal();
+      const { hasScrollingContent, ...bodyProps } = props.modalBody();
+      return (
+        <ComposedModal {...rest} size={size || undefined}>
+          <ModalHeader {...props.modalHeader()} />
+          <ModalBody
+            {...bodyProps}
+            aria-label={hasScrollingContent ? 'Modal content' : undefined}>
+            <p className={`${prefix}--modal-content__text`}>
+              Please see ModalWrapper for more examples and demo of the
+              functionality.
+            </p>
+            {hasScrollingContent && scrollingContent}
+          </ModalBody>
+          <ModalFooter {...props.modalFooter()} />
+        </ComposedModal>
+      );
+    },
     {
       info: {
         text: `
@@ -86,30 +170,58 @@ storiesOf('ComposedModal', module)
   )
   .add(
     'Using child nodes',
-    () => (
-      <ComposedModal {...props.composedModal()}>
-        <ModalHeader {...props.modalHeader()}>
-          <h1>Testing</h1>
-        </ModalHeader>
-        <ModalBody>
-          <p>
-            Please see ModalWrapper for more examples and demo of the
-            functionality.
-          </p>
-        </ModalBody>
-        <ModalFooter>
-          <Button kind="secondary">Cancel</Button>
-          <Button kind={props.composedModal().danger ? 'danger' : 'primary'}>
-            Save
-          </Button>
-        </ModalFooter>
-      </ComposedModal>
-    ),
+    () => {
+      const { size, ...rest } = props.composedModal();
+      const { hasScrollingContent, ...bodyProps } = props.modalBody();
+      return (
+        <ComposedModal {...rest} size={size || undefined}>
+          <ModalHeader {...props.modalHeader()}>
+            <h1>Testing</h1>
+          </ModalHeader>
+          <ModalBody
+            {...bodyProps}
+            aria-label={hasScrollingContent ? 'Modal content' : undefined}>
+            <p>
+              Please see ModalWrapper for more examples and demo of the
+              functionality.
+            </p>
+            {hasScrollingContent && scrollingContent}
+          </ModalBody>
+          <ModalFooter>
+            <Button kind="secondary">Cancel</Button>
+            <Button kind={props.composedModal().danger ? 'danger' : 'primary'}>
+              Save
+            </Button>
+          </ModalFooter>
+        </ComposedModal>
+      );
+    },
     {
       info: {
         text: `
             Alternatively, you can just use the Modal components as wrapper elements and figure the children out yourself. We do suggest for the header you utilize the built in props for label and title though, for the footer it's mostly a composed element so creating the two buttons yourself (using the Button component) is probably the most straight-forward pattern.
           `,
+      },
+    }
+  )
+  .add(
+    'Title only',
+    () => {
+      const { size, ...rest } = props.composedModal({ titleOnly: true });
+      return (
+        <ComposedModal {...rest} size={size || undefined}>
+          <ModalHeader {...props.modalHeader({ titleOnly: true })} />
+          <ModalBody />
+          <ModalFooter {...props.modalFooter()} />
+        </ComposedModal>
+      );
+    },
+    {
+      info: {
+        text: `
+          In "small" and "xs" modals size, the title is allowed to span multiple lines and be used for the main message.
+          It should be less than 3 lines of text. If more room is required then use the standard body copy format.
+        `,
       },
     }
   )
@@ -121,21 +233,29 @@ storiesOf('ComposedModal', module)
         toggleModal = open => this.setState({ open });
         render() {
           const { open } = this.state;
+          const { size, ...rest } = props.composedModal();
+          const { hasScrollingContent, ...bodyProps } = props.modalBody();
           return (
             <>
               <Button onClick={() => this.toggleModal(true)}>
                 Launch composed modal
               </Button>
               <ComposedModal
-                {...props.composedModal()}
+                {...rest}
                 open={open}
+                size={size || undefined}
                 onClose={() => this.toggleModal(false)}>
                 <ModalHeader {...props.modalHeader()} />
-                <ModalBody>
+                <ModalBody
+                  {...bodyProps}
+                  aria-label={
+                    hasScrollingContent ? 'Modal content' : undefined
+                  }>
                   <p className={`${prefix}--modal-content__text`}>
                     Please see ModalWrapper for more examples and demo of the
                     functionality.
                   </p>
+                  {hasScrollingContent && scrollingContent}
                 </ModalBody>
                 <ModalFooter {...props.modalFooter()} />
               </ComposedModal>

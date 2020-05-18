@@ -9,3 +9,13 @@ exports[`DataTable.TableContainer should render 1`] = `
   />
 </TableContainer>
 `;
+
+exports[`DataTable.TableContainer should support enable sticky header 1`] = `
+<TableContainer
+  stickyHeader={true}
+>
+  <div
+    className="bx--data-table-container bx--data-table--max-width"
+  />
+</TableContainer>
+`;

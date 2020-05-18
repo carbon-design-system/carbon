@@ -1,4 +1,14 @@
-import { delay } from 'bluebird'; // For testing on browsers not supporting Promise
+/**
+ * Copyright IBM Corp. 2018, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/* eslint-disable max-classes-per-file */
+
+// For testing on browsers not supporting Promise
+import { delay } from 'bluebird';
 import settings from '../../src/globals/js/settings';
 import mixin from '../../src/globals/js/misc/mixin';
 import createComponent from '../../src/globals/js/mixins/create-component';

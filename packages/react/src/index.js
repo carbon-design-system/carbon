@@ -17,7 +17,7 @@ export ComposedModal, {
   ModalBody,
   ModalFooter,
 } from './components/ComposedModal';
-export ContentSwitcher, { Switch } from './components/ContentSwitcher';
+export ContentSwitcher from './components/ContentSwitcher';
 export Copy from './components/Copy';
 export CopyButton from './components/CopyButton';
 export DangerButton from './components/DangerButton';
@@ -47,14 +47,22 @@ export {
 export DatePicker from './components/DatePicker';
 export DatePickerInput from './components/DatePickerInput';
 export Dropdown from './components/Dropdown';
+export {
+  ErrorBoundary,
+  ErrorBoundaryContext,
+} from './components/ErrorBoundary';
 export FileUploader, {
   Filename,
   FileUploaderButton,
+  FileUploaderDropContainer,
+  FileUploaderItem,
 } from './components/FileUploader';
 export Form from './components/Form';
+export FluidForm from './components/FluidForm';
 export FormGroup from './components/FormGroup';
 export FormItem from './components/FormItem';
 export FormLabel from './components/FormLabel';
+export { Grid, Row, Column } from './components/Grid';
 export Icon from './components/Icon';
 export InlineLoading from './components/InlineLoading';
 export Link from './components/Link';
@@ -89,6 +97,7 @@ export SecondaryButton from './components/SecondaryButton';
 export Select from './components/Select';
 export SelectItem from './components/SelectItem';
 export SelectItemGroup from './components/SelectItemGroup';
+export Switch from './components/Switch';
 export Slider from './components/Slider';
 export {
   StructuredListWrapper,
@@ -140,6 +149,7 @@ export CodeSnippetSkeleton from './components/CodeSnippet/CodeSnippet.Skeleton';
 export DropdownSkeleton from './components/Dropdown/Dropdown.Skeleton';
 export FileUploaderSkeleton from './components/FileUploader/FileUploader.Skeleton';
 export NumberInputSkeleton from './components/NumberInput/NumberInput.Skeleton';
+export PaginationSkeleton from './components/Pagination/Pagination.Skeleton';
 export ProgressIndicatorSkeleton from './components/ProgressIndicator/ProgressIndicator.Skeleton';
 export RadioButtonSkeleton from './components/RadioButton/RadioButton.Skeleton';
 export SearchSkeleton from './components/Search/Search.Skeleton';

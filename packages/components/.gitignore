@@ -9,6 +9,7 @@ demo/hot
 !demo/index.js
 !demo/components.js
 dist
+docs/js
 
 # Test reports
 tests/a11y-results
@@ -22,3 +23,6 @@ tests/axe/allHtml
 
 # a11y testing
 .aat.yml
+
+# Generated Sass files
+src/globals/scss/vendor

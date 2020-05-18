@@ -14,6 +14,7 @@
     <button class="{{@root.prefix}}--search-close {{@root.prefix}}--search-close--hidden" title="Clear search
         input" aria-label="Clear search input">
       {{#is suffix "sm"}}{{ carbon-icon 'Close16' class=(add @root.prefix '--search-clear') }}{{/is}}
+      {{#is suffix "lg"}}{{ carbon-icon 'Close16' class=(add @root.prefix '--search-clear') }}{{/is}}
       {{#is suffix "xl"}}{{ carbon-icon 'Close20' class=(add @root.prefix '--search-clear') }}{{/is}}
     </button>
   </div>

@@ -48,8 +48,12 @@ const props = () => {
       'The text in the trigger button (buttonTriggerText)',
       'Launch Modal'
     ),
-    renderTriggerButtonIcon: typeof iconToUse === 'function' && iconToUse,
-    triggerButtonIcon: typeof iconToUse !== 'function' && iconToUse,
+    hasScrollingContent: boolean(
+      'Modal contains scrollable content (hasScrollingContent)',
+      true
+    ),
+    renderTriggerButtonIcon:
+      typeof iconToUse === 'function' ? iconToUse : undefined,
     modalLabel: text('The modal label (optional) (modalLabel)', 'Label'),
     modalHeading: text('The modal heading (modalHeading)', 'Modal'),
     selectorPrimaryFocus: text(
@@ -68,6 +72,7 @@ const props = () => {
       'Close after submit (shouldCloseAfterSubmit)',
       true
     ),
+    focusTrap: boolean('Trap focus (focusTrap)', false),
     onBlur: action('onBlur'),
     onClick: action('onClick'),
     onFocus: action('onFocus'),
@@ -118,6 +123,60 @@ storiesOf('ModalWrapper', module)
           amet, consectetur adipiscing elit. Mauris a lobortis ex. Nulla mollis
           tincidunt sodales.
         </p>
+        {props().hasScrollingContent && (
+          <>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <h3>Lorem ipsum</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+          </>
+        )}
       </ModalWrapper>
     ),
     {

@@ -11,7 +11,8 @@ import { shallow } from 'enzyme';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
-const shallowRender = props => shallow(<OverflowMenuItem {...props} />);
+const shallowRender = props =>
+  shallow(<OverflowMenuItem closeMenu={jest.fn()} {...props} />);
 
 describe('OverflowMenuItem', () => {
   describe('Renders as expected', () => {

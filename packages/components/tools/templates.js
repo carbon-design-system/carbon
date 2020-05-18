@@ -39,7 +39,6 @@ iconHelper({ handlebars: Handlebars });
 const readFile = promisify(fs.readFile);
 
 try {
-  // eslint-disable-next-line global-require, import/no-dynamic-require
   const logger = require(path.resolve(
     path.dirname(require.resolve('@frctl/fractal')),
     'core/log'

@@ -16,7 +16,7 @@ const defaultOptions = {
 function compile(filepaths, options) {
   return filepaths.map(
     filepath =>
-      new Promise((resolve, reject) => {
+      new Promise(resolve => {
         sass.render(
           {
             file: filepath,
@@ -25,7 +25,7 @@ function compile(filepaths, options) {
           },
           (error, result) => {
             if (error) {
-              reject(error);
+              resolve({ error });
               return;
             }
 

@@ -6,40 +6,85 @@
  */
 
 import cx from 'classnames';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
+import debounce from 'lodash.debounce';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { composeEventHandlers } from '../../tools/events';
+import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
 const TooltipDefinition = ({
   id,
   className,
+  triggerClassName,
   children,
   direction,
   align,
+  onFocus,
+  onMouseEnter,
+  onMouseLeave,
   tooltipText,
   ...rest
 }) => {
+  const [allowTooltipVisibility, setAllowTooltipVisibility] = useState(true);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
   const tooltipId = id || `definition-tooltip-${getInstanceId()}`;
-  const tooltipClassName = cx(`${prefix}--tooltip--definition`, className);
+  const tooltipClassName = cx(
+    `${prefix}--tooltip--definition`,
+    `${prefix}--tooltip--a11y`,
+    className
+  );
   const tooltipTriggerClasses = cx(
     `${prefix}--tooltip__trigger`,
+    `${prefix}--tooltip--a11y`,
     `${prefix}--tooltip__trigger--definition`,
+    triggerClassName,
     {
       [`${prefix}--tooltip--${direction}`]: direction,
       [`${prefix}--tooltip--align-${align}`]: align,
+      [`${prefix}--tooltip--hidden`]: !allowTooltipVisibility,
+      [`${prefix}--tooltip--visible`]: tooltipVisible,
     }
   );
+  const debounceTooltipVisible = debounce(() => setTooltipVisible(false), 100);
+  const handleFocus = () => setAllowTooltipVisibility(true);
+  const handleMouseEnter = () => {
+    debounceTooltipVisible.cancel();
+    setAllowTooltipVisibility(true);
+    setTooltipVisible(true);
+  };
+  const handleMouseLeave = debounceTooltipVisible;
+  useEffect(() => {
+    const handleEscKeyDown = event => {
+      if (matches(event, [keys.Escape])) {
+        setAllowTooltipVisibility(false);
+      }
+    };
+    document.addEventListener('keydown', handleEscKeyDown);
+    return () => document.removeEventListener('keydown', handleEscKeyDown);
+  }, []);
+
   return (
-    <div {...rest} className={tooltipClassName}>
+    <div
+      {...rest}
+      className={tooltipClassName}
+      onMouseEnter={composeEventHandlers([onMouseEnter, handleMouseEnter])}
+      onMouseLeave={composeEventHandlers([onMouseLeave, handleMouseLeave])}>
       <button
         className={tooltipTriggerClasses}
         aria-describedby={tooltipId}
-        aria-label={tooltipText}>
+        onFocus={composeEventHandlers([onFocus, handleFocus])}>
         {children}
       </button>
+      <div
+        className={`${prefix}--assistive-text`}
+        id={tooltipId}
+        role="tooltip">
+        {tooltipText}
+      </div>
     </div>
   );
 };
@@ -50,6 +95,11 @@ TooltipDefinition.propTypes = {
    * interact with in order to display the tooltip.
    */
   children: PropTypes.string.isRequired,
+
+  /**
+   * The CSS class name of the trigger element
+   */
+  triggerClassName: PropTypes.string,
 
   /**
    * Specify the direction of the tooltip. Can be either top or bottom.
@@ -70,8 +120,9 @@ TooltipDefinition.propTypes = {
 
   /**
    * Provide the text that will be displayed in the tooltip when it is rendered.
+   * TODO: rename this prop (will be a breaking change)
    */
-  tooltipText: PropTypes.string.isRequired,
+  tooltipText: PropTypes.node.isRequired,
 };
 
 TooltipDefinition.defaultProps = {

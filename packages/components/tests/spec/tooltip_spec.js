@@ -39,16 +39,34 @@ describe('Test tooltip', function() {
       });
     });
 
-    it('Should show the tooltip upon clicking/focusing', function() {
-      const hasFocusin = 'onfocusin' in window;
-      const focusinEventName = hasFocusin ? 'focusin' : 'focus';
-      element.dispatchEvent(
-        new CustomEvent(focusinEventName, { bubbles: true })
-      );
+    it('Content should be programmatically focusable', function() {
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      const content = floating.querySelector('.bx--tooltip__content');
+
+      expect(content.getAttribute('tabindex')).toBe('-1');
+    });
+
+    it('Should show the tooltip upon clicking', function() {
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
     });
 
-    it('Should hide the tooltip upon bluring', function() {
+    it('Should apply focus to a child element upon opening', function() {
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(document.activeElement.closest('.bx--tooltip')).not.toBe(null);
+    });
+
+    it('Should remain open upon focusing the content within the tooltip', function() {
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+
+      const content = floating.querySelector('.bx--tooltip__content');
+      content.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
+      expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
+    });
+
+    // Known bug: https://github.com/carbon-design-system/carbon/issues/3835
+
+    it('Should hide the tooltip upon blurring', function() {
       floating.classList.add('bx--tooltip--shown');
       element.dispatchEvent(new CustomEvent('blur', { bubbles: true }));
       expect(floating.classList.contains('bx--tooltip--shown')).toBe(false);
@@ -83,15 +101,11 @@ describe('Test tooltip', function() {
       initContext = Tooltip.init();
     });
 
-    it('Should create an instance upon clicking/focusing', function() {
-      const hasFocusin = 'onfocusin' in window;
-      const focusinEventName = hasFocusin ? 'focusin' : 'focus';
+    it('Should create an instance upon clicking', function() {
       return Tooltip.__with__({
         debounce: fn => fn,
       })(() => {
-        element.dispatchEvent(
-          new CustomEvent(focusinEventName, { bubbles: true })
-        );
+        element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
         expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
       });
     });

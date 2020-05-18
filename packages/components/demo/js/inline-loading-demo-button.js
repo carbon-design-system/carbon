@@ -38,10 +38,11 @@ class InlineLoadingDemoButton extends mixin(
    */
   toggle() {
     if (this.target) {
-      this.state =
-        this.state === InlineLoading.states.ACTIVE
-          ? InlineLoading.states.FINISHED
-          : InlineLoading.states.ACTIVE;
+      this.state = {
+        [InlineLoading.states.ACTIVE]: InlineLoading.states.FINISHED,
+        [InlineLoading.states.FINISHED]: InlineLoading.states.ERROR,
+        [InlineLoading.states.ERROR]: InlineLoading.states.ACTIVE,
+      }[this.state];
       this.target.setState(this.state);
     }
   }

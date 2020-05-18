@@ -8,9 +8,6 @@
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper{{#if inline}} {{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label">Combo box label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
       <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
@@ -22,15 +19,15 @@
         </div>
       </div>
     </div>
+    {{#unless inline}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
+    {{/unless}}
   </div>
 </div>
 
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper{{#if inline}} {{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label">Combo box label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
       <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
@@ -45,15 +42,15 @@
         </div>
       </div>
     </div>
+    {{#unless inline}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
+    {{/unless}}
   </div>
 </div>
 
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label">Combo box label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}"
       data-invalid>
@@ -76,9 +73,6 @@
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label">Combo box label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}"
       data-invalid>
@@ -104,10 +98,6 @@
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label {{@root.prefix}}--label--disabled">Combo box label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text {{@root.prefix}}--form__helper-text--disabled">Optional helper text
-      here</div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box {{@root.prefix}}--list-box--disabled{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}"
       data-invalid>
@@ -130,10 +120,6 @@
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label {{@root.prefix}}--label--disabled">Combo box label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text {{@root.prefix}}--form__helper-text--disabled">Optional helper text
-      here</div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box {{@root.prefix}}--list-box--disabled{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}"
       data-invalid>
@@ -159,10 +145,6 @@
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label {{@root.prefix}}--label--disabled">Combo box label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text {{@root.prefix}}--form__helper-text--disabled">Optional helper text
-      here</div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box {{@root.prefix}}--list-box--disabled{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
       <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
@@ -180,11 +162,6 @@
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label">Combo box label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text">Optional helper text
-      here
-    </div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box {{@root.prefix}}--list-box--expanded{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
       <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="close menu" aria-expanded="true"
@@ -207,17 +184,17 @@
         {{/each}}
       </ul>
     </div>
+    {{#unless inline}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text
+      here
+    </div>
+    {{/unless}}
   </div>
 </div>
 
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label">Combo box label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text">Optional helper text
-      here
-    </div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box {{@root.prefix}}--list-box--expanded{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
       <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="close menu" aria-expanded="true"
@@ -244,15 +221,17 @@
         {{/each}}
       </ul>
     </div>
+    {{#unless inline}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text
+      here
+    </div>
+    {{/unless}}
   </div>
 </div>
 
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label">Combo box label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}"
       data-invalid>

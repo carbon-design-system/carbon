@@ -10,9 +10,10 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Close16 } from '@carbon/icons-react';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
-
+const getInstanceId = setupGetInstanceId();
 const TYPES = {
   red: 'Red',
   magenta: 'Magenta',
@@ -24,23 +25,53 @@ const TYPES = {
   gray: 'Gray',
   'cool-gray': 'Cool-Gray',
   'warm-gray': 'Warm-Gray',
+  'high-contrast': 'High-Contrast',
 };
 
-const Tag = ({ children, className, type, filter, disabled, ...other }) => {
-  const tagClass = `${prefix}--tag--${type}`;
-  const tagClasses = classNames(`${prefix}--tag`, tagClass, className, {
+const Tag = ({
+  children,
+  className,
+  id,
+  type,
+  filter,
+  title,
+  disabled,
+  onClose,
+  ...other
+}) => {
+  const tagId = id || `tag-${getInstanceId()}`;
+  const tagClasses = classNames(`${prefix}--tag`, className, {
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
+    [`${prefix}--tag--${type}`]: type,
   });
+  const handleClose = event => {
+    if (onClose) {
+      event.stopPropagation();
+      onClose(event);
+    }
+  };
   return filter ? (
-    <span
+    <div
       className={tagClasses}
-      title="Clear filter"
-      tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      aria-label={
+        title !== undefined
+          ? `${title} ${children}`
+          : `Clear filter ${children}`
+      }
+      id={tagId}
       {...other}>
-      {children !== null && children !== undefined ? children : TYPES[type]}
-      <Close16 aria-label="Clear filter" />
-    </span>
+      <span className={`${prefix}--tag__label`}>
+        {children !== null && children !== undefined ? children : TYPES[type]}
+      </span>
+      <button
+        className={`${prefix}--tag__close-icon`}
+        onClick={handleClose}
+        disabled={disabled}
+        aria-labelledby={tagId}>
+        <Close16 />
+      </button>
+    </div>
   ) : (
     <span className={tagClasses} {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
@@ -62,7 +93,7 @@ Tag.propTypes = {
   /**
    * Specify the type of the <Tag>
    */
-  type: PropTypes.oneOf(Object.keys(TYPES)).isRequired,
+  type: PropTypes.oneOf(Object.keys(TYPES)),
 
   /**
    * Specify if the <Tag> is disabled
@@ -73,6 +104,16 @@ Tag.propTypes = {
    * Determine if <Tag> is a filter/chip
    */
   filter: PropTypes.bool,
+
+  /**
+   * Text to show on clear filters
+   */
+  title: PropTypes.string,
+
+  /**
+   * Click handler for filter tag close button.
+   */
+  onClose: PropTypes.func,
 };
 
 export const types = Object.keys(TYPES);

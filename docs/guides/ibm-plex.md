@@ -104,8 +104,7 @@ The following are the options for each of these sub-paths:
   - `Latin3`
   - `Pi`
 
-To get the hang of things, let's go through a couple of examples for various
-font families and formats.
+Let's go through a couple of examples for various font families and formats.
 
 <details>
 <summary>IBM Plex Arabic</summary>

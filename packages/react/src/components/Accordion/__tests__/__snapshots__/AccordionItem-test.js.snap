@@ -7,29 +7,30 @@ exports[`AccordionItem should render 1`] = `
 >
   <li
     className="bx--accordion__item extra-class"
+    onAnimationEnd={[Function]}
   >
     <defaultRenderExpando
+      aria-controls="accordion-item-1"
       aria-expanded={false}
       className="bx--accordion__heading"
       onClick={[Function]}
       onKeyDown={[Function]}
-      title="Expand/Collapse"
+      title="A heading"
       type="button"
     >
       <button
+        aria-controls="accordion-item-1"
         aria-expanded={false}
         className="bx--accordion__heading"
         onClick={[Function]}
         onKeyDown={[Function]}
-        title="Expand/Collapse"
+        title="A heading"
         type="button"
       >
         <ForwardRef(ChevronRight16)
-          aria-label="Expand/Collapse"
           className="bx--accordion__arrow"
         >
           <Icon
-            aria-label="Expand/Collapse"
             className="bx--accordion__arrow"
             height={16}
             preserveAspectRatio="xMidYMid meet"
@@ -38,23 +39,17 @@ exports[`AccordionItem should render 1`] = `
             xmlns="http://www.w3.org/2000/svg"
           >
             <svg
-              aria-label="Expand/Collapse"
+              aria-hidden={true}
               className="bx--accordion__arrow"
               focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"
-              role="img"
-              style={
-                Object {
-                  "willChange": "transform",
-                }
-              }
               viewBox="0 0 16 16"
               width={16}
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
+                d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
               />
             </svg>
           </Icon>
@@ -68,6 +63,7 @@ exports[`AccordionItem should render 1`] = `
     </defaultRenderExpando>
     <div
       className="bx--accordion__content"
+      id="accordion-item-1"
     >
       Lorem ipsum.
     </div>

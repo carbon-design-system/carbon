@@ -10,7 +10,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
 import {
   withKnobs,
   array,
@@ -19,10 +18,11 @@ import {
   select,
   text,
 } from '@storybook/addon-knobs';
+import { settings } from 'carbon-components';
 import FileUploader, { FileUploaderButton } from '../FileUploader';
 import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
-import Button from '../Button';
-import { settings } from 'carbon-components';
+import FileUploaderItem from './FileUploaderItem';
+import FileUploaderDropContainer from './FileUploaderDropContainer';
 
 const { prefix } = settings;
 const buttonKinds = {
@@ -33,7 +33,11 @@ const buttonKinds = {
   'Danger Primary (danger--primary)': 'danger--primary',
   'Tertiary (tertiary)': 'tertiary',
 };
-
+const sizes = {
+  Default: 'default',
+  Field: 'field',
+  Small: 'small',
+};
 const filenameStatuses = {
   'Edit (edit)': 'edit',
   'Complete (complete)': 'complete',
@@ -50,6 +54,7 @@ const props = {
       multiple: boolean('Supports multiple files (multiple)', true),
       disabled: boolean('Disabled (disabled)', false),
       buttonKind: buttonKind || 'primary',
+      size: select('Button size (size)', sizes, 'default'),
       disableLabelChanges: boolean(
         'Prevent the label from being replaced with file selected file (disableLabelChanges)',
         false
@@ -59,21 +64,76 @@ const props = {
       onChange: action('onChange'),
     };
   },
-  fileUploader: () => ({
-    labelTitle: text('The label title (labelTitle)', 'Upload'),
-    labelDescription: text(
-      'The label description (labelDescription)',
-      'only .jpg files at 500mb or less'
+  fileUploader: () => {
+    const buttonKind = select(
+      'Button kind (buttonKind)',
+      {
+        'Primary (primary)': 'primary',
+        'Tertiary (tertiary)': 'tertiary',
+      },
+      ''
+    );
+    return {
+      labelTitle: text('The label title (labelTitle)', 'Upload'),
+      labelDescription: text(
+        'The label description (labelDescription)',
+        'only .jpg files at 500mb or less'
+      ),
+      buttonLabel: text('The button label (buttonLabel)', 'Add files'),
+      buttonKind: buttonKind || 'primary',
+      size: select('Button size (size)', sizes, 'default'),
+      filenameStatus: select(
+        'Status for file name (filenameStatus)',
+        filenameStatuses,
+        'edit'
+      ),
+      accept: array('Accepted file extensions (accept)', ['.jpg', '.png'], ','),
+      name: text('Form item name: (name)', ''),
+      multiple: boolean('Supports multiple files (multiple)', true),
+      iconDescription: text(
+        'Close button icon description (iconDescription)',
+        'Clear file'
+      ),
+      onChange: action('onChange'),
+      onClick: action('onClick'),
+      onDelete: action('onDelete'),
+    };
+  },
+  fileUploaderItem: () => ({
+    name: text('Filename (name)', 'README.md'),
+    status: select('Status for file name (status)', filenameStatuses, 'edit'),
+    iconDescription: text(
+      'Close button icon description (iconDescription)',
+      'Clear file'
     ),
-    buttonLabel: text('The button label (buttonLabel)', 'Add files'),
-    filenameStatus: select(
-      'Status for file name (filenameStatus)',
-      filenameStatuses,
-      'edit'
+    onDelete: action('onDelete'),
+    invalid: boolean('Invalid (invalid)', false),
+    errorSubject: text(
+      'Error subject (errorSubject)',
+      'File size exceeds limit'
     ),
-    accept: array('Accepted file extensions (accept)', ['.jpg', '.png'], ','),
-    name: text('Form item name: (name)', ''),
+    errorBody: text(
+      'Error body (errorBody)',
+      '500kb max file size. Select a new file and try again.'
+    ),
+  }),
+  fileUploaderDropContainer: () => ({
+    size: select('Filename height (size)', sizes, 'default'),
+    labelText: text(
+      'Label text (labelText)',
+      'Drag and drop files here or click to upload'
+    ),
+    name: text('Form item name (name)', ''),
     multiple: boolean('Supports multiple files (multiple)', true),
+    accept: array(
+      'Accepted MIME types or file extensions (accept)',
+      ['image/jpeg', 'image/png'],
+      ','
+    ),
+    disabled: boolean('Disabled (disabled)', false),
+    role: text('ARIA role of the button (role)', ''),
+    tabIndex: number('Tab index (tabIndex)', 0),
+    onChange: action('onChange'),
   }),
 };
 
@@ -93,22 +153,9 @@ storiesOf('FileUploader', module)
   .add(
     'FileUploader',
     () => {
-      let fileUploader;
       return (
         <div className={`${prefix}--file__container`}>
-          <FileUploader
-            {...props.fileUploader()}
-            ref={node => (fileUploader = node)}
-          />
-          <Button
-            kind="secondary"
-            small
-            style={{ marginTop: '1rem' }}
-            onClick={() => {
-              fileUploader.clearFiles();
-            }}>
-            Clear File
-          </Button>
+          <FileUploader {...props.fileUploader()} />
         </div>
       );
     },
@@ -117,6 +164,39 @@ storiesOf('FileUploader', module)
         text: `
             The FileUploader components allow the user to upload any necessary files. This uses the FileUploaderButton and Filename components. Filename components will appear below the FileUploaderButton when files are added. Use the filenameStatus prop to control what icon appears in Filename ('edit', 'complete', or 'uploading').
           `,
+      },
+    }
+  )
+  .add(
+    'FileUploaderItem',
+    () => <FileUploaderItem {...props.fileUploaderItem()} />,
+    {
+      info: {
+        text: `
+          <FileUploaderItem /> represents an item that has been uploaded to the file uploader component. Use the \`status\` prop to control which icon appears ('edit', 'complete', or 'uploading').
+        `,
+      },
+    }
+  )
+  .add(
+    'FileUploaderDropContainer',
+    () => <FileUploaderDropContainer {...props.fileUploaderDropContainer()} />,
+    {
+      info: {
+        text:
+          '<FileUploaderDropContainer /> is a drag and drop file uploader which allows users to upload files via both the normal file selection dialog and by dragging and dropping files.',
+      },
+    }
+  )
+  .add(
+    'Drag and drop upload container example application',
+    () =>
+      require('./stories/drop-container').default(
+        props.fileUploaderDropContainer()
+      ),
+    {
+      info: {
+        text: 'Example application with drag and drop file uploader',
       },
     }
   )

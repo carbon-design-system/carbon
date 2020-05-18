@@ -14,11 +14,25 @@ exports[`<ComposedModal /> renders 1`] = `
     onTransitionEnd={[Function]}
     open={true}
     role="presentation"
-    tabIndex={-1}
   >
+    <span
+      className="bx--visually-hidden"
+      role="link"
+      tabIndex="0"
+    >
+      Focus sentinel
+    </span>
     <div
       className="bx--modal-container"
+      tabIndex={-1}
     />
+    <span
+      className="bx--visually-hidden"
+      role="link"
+      tabIndex="0"
+    >
+      Focus sentinel
+    </span>
   </div>
 </ComposedModal>
 `;

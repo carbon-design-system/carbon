@@ -23,6 +23,10 @@ const alignments = {
 };
 
 const props = () => ({
+  triggerClassName: text(
+    'Trigger element CSS class name (triggerClassName)',
+    ''
+  ),
   direction: select('Tooltip direction (direction)', directions, 'bottom'),
   align: select(
     'Tooltip alignment to trigger button (align)',

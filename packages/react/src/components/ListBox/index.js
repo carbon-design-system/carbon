@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+export * as PropTypes from './ListBoxPropTypes';
+
 import ListBox from './ListBox';
 import ListBoxField from './ListBoxField';
 import ListBoxMenu from './ListBoxMenu';
@@ -19,4 +21,3 @@ ListBox.MenuItem = ListBoxMenuItem;
 ListBox.Selection = ListBoxSelection;
 
 export default ListBox;
-export * as PropTypes from './ListBoxPropTypes';

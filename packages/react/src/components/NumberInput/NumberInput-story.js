@@ -15,9 +15,16 @@ import {
   number,
   text,
   object,
+  select,
 } from '@storybook/addon-knobs';
 import NumberInput from '../NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
+
+const sizes = {
+  'Extra large size (xl)': 'xl',
+  'Default size': undefined,
+  'Small size (sm)': 'sm',
+};
 
 const props = () => ({
   className: 'some-class',
@@ -28,6 +35,7 @@ const props = () => ({
   max: number('Maximum value (max)', 100),
   value: number('Value (value)', 50),
   step: number('Step of up/down arrow (step)', 10),
+  size: select('Field size (size)', sizes, undefined) || undefined,
   disabled: boolean('Disabled (disabled)', false),
   readOnly: boolean('Read only (readOnly)', false),
   invalid: boolean('Show form validation UI (invalid)', false),
@@ -49,6 +57,8 @@ const props = () => ({
     }
   ),
 });
+
+NumberInput.displayName = 'NumberInput';
 
 storiesOf('NumberInput', module)
   .addDecorator(withKnobs)
@@ -72,10 +82,23 @@ storiesOf('NumberInput', module)
       },
     }
   )
-  .add('skeleton', () => <NumberInputSkeleton />, {
-    info: {
-      text: `
+  .add(
+    'skeleton',
+    () => (
+      <div
+        aria-label="loading number input"
+        aria-live="assertive"
+        role="status"
+        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      >
+        <NumberInputSkeleton />
+      </div>
+    ),
+    {
+      info: {
+        text: `
             Placeholder skeleton state to use when content is loading.
           `,
-    },
-  });
+      },
+    }
+  );

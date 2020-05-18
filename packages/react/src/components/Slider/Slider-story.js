@@ -28,9 +28,9 @@ const props = () => ({
   min: number('The minimum value (min)', 0),
   max: number('The maximum value (max)', 100),
   step: number('The step (step)', 1),
-  stepMuliplier: number(
-    'The step factor for Shift+arrow keys (stepMuliplier)',
-    4
+  stepMultiplier: number(
+    'The step factor for Shift+arrow keys (stepMultiplier)',
+    5
   ),
   labelText: text('Label text (labelText)', 'Slider Label'),
   minLabel: text('Label for minimum value (minLabel)', ''),
@@ -51,7 +51,13 @@ storiesOf('Slider', module)
   .add(
     'skeleton',
     () => (
-      <div style={{ marginTop: '2rem' }}>
+      <div
+        style={{ marginTop: '2rem' }}
+        aria-label="loading slider"
+        aria-live="assertive"
+        role="status"
+        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      >
         <SliderSkeleton />
       </div>
     ),

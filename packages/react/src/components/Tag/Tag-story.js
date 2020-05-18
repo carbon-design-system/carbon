@@ -21,15 +21,20 @@ const props = {
           ...acc,
           [`${type} (${type})`]: type,
         }),
-        {}
-      ),
-      'red'
+        {
+          Default: undefined,
+        }
+      )
     ),
     disabled: boolean('Disabled (disabled)', false),
-    role: 'listitem',
+    title: 'Clear Filter',
   }),
   filter() {
-    return { ...this.regular(), onClick: action('onClick') };
+    return {
+      ...this.regular(),
+      onClick: action('onClick'),
+      onClose: action('onClose'),
+    };
   },
 };
 

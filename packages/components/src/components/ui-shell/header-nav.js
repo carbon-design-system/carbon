@@ -14,11 +14,18 @@ import settings from '../../globals/js/settings';
 
 const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
-export default class HeaderNav extends mixin(
-  createComponent,
-  initComponentBySearch,
-  handles
-) {
+class HeaderNav extends mixin(createComponent, initComponentBySearch, handles) {
+  /**
+   * Header nav.
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
+   * @extends Handles
+   * @param {HTMLElement} element The element working as an header nav.
+   * @param {object} [options] The component options.
+   * @param {string} [options.selectorSubmenu] The CSS selector to find sub menus.
+   * @param {string} [options.selectorSubmenuLink] The CSS selector to find the trigger buttons of sub menus.
+   * @param {string} [options.selectorSubmenuItem] The CSS selector to find the sub menu items.
+   */
   constructor(element, options) {
     super(element, options);
     this.manage(on(this.element, 'keydown', this._handleKeyDown));
@@ -92,6 +99,9 @@ export default class HeaderNav extends mixin(
    * @member HeaderNav.options
    * @type {object}
    * @property {string} selectorInit The data attribute to find side navs.
+   * @property {string} [selectorSubmenu] The CSS selector to find sub menus.
+   * @property {string} [selectorSubmenuLink] The CSS selector to find the trigger buttons of sub menus.
+   * @property {string} [selectorSubmenuItem] The CSS selector to find the sub menu items.
    */
   static get options() {
     const { prefix } = settings;
@@ -108,7 +118,7 @@ export default class HeaderNav extends mixin(
    * Enum for navigating backward/forward.
    * @readonly
    * @member Header.NAVIGATE
-   * @type {Object}
+   * @type {object}
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
    */
@@ -117,3 +127,5 @@ export default class HeaderNav extends mixin(
     FORWARD: 1,
   };
 }
+
+export default HeaderNav;

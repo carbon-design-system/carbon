@@ -8,10 +8,12 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import {
+  findListBoxNode,
   findMenuNode,
   findMenuItemNode,
   openMenu,
   assertMenuOpen,
+  assertMenuClosed,
   generateItems,
   generateGenericItem,
 } from '../ListBox/test-helpers';
@@ -25,13 +27,14 @@ const downshiftActions = {
   setHighlightedIndex: jest.fn(),
 };
 const clearInput = wrapper =>
-  wrapper.instance().handleOnInputValueChange('', downshiftActions);
+  wrapper.instance().handleOnStateChange({ inputValue: '' }, downshiftActions);
 
 describe('ComboBox', () => {
   let mockProps;
 
   beforeEach(() => {
     mockProps = {
+      id: 'test-combobox',
       items: generateItems(5, generateGenericItem),
       onChange: jest.fn(),
       placeholder: 'Filter...',
@@ -92,6 +95,26 @@ describe('ComboBox', () => {
     expect(wrapper.find(`.mock-item`).length).toBe(mockProps.items.length);
   });
 
+  it('should let the user select an option by clicking on the option node', () => {
+    const wrapper = mount(<ComboBox {...mockProps} />);
+    openMenu(wrapper);
+    findMenuItemNode(wrapper, 0).simulate('click');
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItem: mockProps.items[0],
+    });
+    assertMenuClosed(wrapper);
+
+    mockProps.onChange.mockClear();
+
+    openMenu(wrapper);
+    findMenuItemNode(wrapper, 1).simulate('click');
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItem: mockProps.items[1],
+    });
+  });
+
   describe('should display initially selected item found in `initialSelectedItem`', () => {
     it('using an object type for the `initialSelectedItem` prop', () => {
       const wrapper = mount(
@@ -117,6 +140,31 @@ describe('ComboBox', () => {
     });
   });
 
+  describe('should display selected item found in `selectedItem`', () => {
+    it('using an object type for the `selectedItem` prop', () => {
+      const wrapper = mount(
+        <ComboBox {...mockProps} selectedItem={mockProps.items[0]} />
+      );
+      expect(findInputNode(wrapper).prop('value')).toEqual(
+        mockProps.items[0].label
+      );
+    });
+
+    it('using a string type for the `selectedItem` prop', () => {
+      // Replace the 'items' property in mockProps with a list of strings
+      mockProps = {
+        ...mockProps,
+        items: ['1', '2', '3'],
+      };
+
+      const wrapper = mount(
+        <ComboBox {...mockProps} selectedItem={mockProps.items[1]} />
+      );
+
+      expect(findInputNode(wrapper).prop('value')).toEqual(mockProps.items[1]);
+    });
+  });
+
   describe('when disabled', () => {
     it('should not let the user edit the input node', () => {
       const wrapper = mount(<ComboBox {...mockProps} disabled={true} />);
@@ -135,7 +183,9 @@ describe('ComboBox', () => {
     it('should not let the user expand the menu', () => {
       const wrapper = mount(<ComboBox {...mockProps} disabled={true} />);
       openMenu(wrapper);
-      expect(findMenuNode(wrapper).length).toBe(0);
+      expect(findListBoxNode(wrapper).hasClass('bx--list-box--expanded')).toBe(
+        false
+      );
     });
   });
 

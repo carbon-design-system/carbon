@@ -23,4 +23,9 @@ describe('DataTable.Table', () => {
     expect(wrapper.hasClass(`${prefix}--data-table`)).toBe(true);
     expect(wrapper.hasClass(`${prefix}--data-table--zebra`)).toBe(false);
   });
+
+  it('should support enable sticky header', () => {
+    const wrapper = shallow(<Table stickyHeader={true} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });

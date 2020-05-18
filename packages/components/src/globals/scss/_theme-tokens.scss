@@ -7,8 +7,13 @@
 
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 @import 'colors';
+@import 'feature-flags';
 @import 'spacing';
 @import './vendor/@carbon/elements/scss/themes/themes';
+
+// The load order of tokens versus themes matter, so we use `carbon--theme` here
+// to make sure that they're in sync if one has diverged from the other.
+@include carbon--theme();
 
 /// Theme variables
 
@@ -37,12 +42,18 @@ $disabled-background-color: $disabled-01 !default;
 /// @group global-themes
 $focus: $ibm-color__blue-60 !default;
 
+/// @type Color
+/// @access public
+/// @group global-themes
+$inverse-focus-ui: $ibm-color__white-0 !default;
+
 // Link
 
 /// @type Color
 /// @access public
 /// @group link
-$link-visited: $ibm-color__purple-60 !default;
+/// @deprecated
+$link-visited: $visited-link !default;
 
 /// @type Color
 /// @access public
@@ -115,12 +126,12 @@ $button-padding-ghost-field: calc(0.675rem - 3px) 12px !default;
 /// @access public
 /// @group button
 /// Uses the same padding-y as small buttons, but removes extra padding-right
-$button-padding-ghost-sm: calc(0.375rem - 3px) 1rem !default;
+$button-padding-ghost-sm: calc(0.375rem - 3px) 12px !default;
 
 /// @type Number
 /// @access public
 /// @group button
-$button-border-width: 3px !default;
+$button-border-width: 2px !default;
 
 /// @type Number
 /// @access public
@@ -130,11 +141,13 @@ $button-outline-width: 1px !default;
 /// @type Number
 /// @access public
 /// @group button
+/// @deprecated
 $button-outline-offset: -5px !default;
 
 /// @type Value
 /// @access public
 /// @group button
+/// @deprecated
 $button-outline: 1px solid $ibm-color__white-0 !default;
 
 // Accordion
@@ -152,7 +165,7 @@ $accordion-justify-content: flex-start !default;
 /// @type Value
 /// @access public
 /// @group accordion
-$accordion-arrow-margin: 0 $carbon--spacing-05 0 0 !default;
+$accordion-arrow-margin: 2px $carbon--spacing-05 0 0 !default;
 
 /// @type Value
 /// @access public
@@ -244,6 +257,7 @@ $modal-border-top: $brand-01 4px solid !default;
 /// @type Color
 /// @access public
 /// @group modal
+/// @deprecated
 $modal-footer-background-color: $ui-03 !default;
 
 // Notification
@@ -262,7 +276,7 @@ $notification-error-background-color: $ibm-color__red-10 !default;
 /// @access public
 /// @group notification
 $notification-warning-background-color: mix(
-  $ibm-color__yellow-20,
+  $ibm-color__yellow-30,
   $ibm-color__white-0,
   15%
 ) !default;
@@ -325,22 +339,22 @@ $structured-list-text-transform: none !default;
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-color: 3px solid $ibm-color__gray-30 !default;
+$tab-underline-color: 2px solid $ui-03 !default;
 
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-color-hover: 3px solid $ibm-color__gray-60 !default;
+$tab-underline-color-hover: 2px solid $ui-04 !default;
 
 /// @type Color
 /// @access public
 /// @group tabs
-$tab-text-disabled: $ibm-color__gray-30 !default;
+$tab-text-disabled: $disabled-02 !default;
 
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-disabled: 3px solid $ibm-color__gray-10 !default;
+$tab-underline-disabled: 2px solid $disabled-01 !default;
 
 // Skeleton Loading
 
@@ -348,3 +362,41 @@ $tab-underline-disabled: 3px solid $ibm-color__gray-10 !default;
 /// @access public
 /// @group skeleton
 $skeleton: $skeleton-01 !default; // TODO: Remove this in next major release
+
+// Light UI
+
+// Determine the "light" color for a given token.
+/// @param {String} $token The theme token.
+/// @return {String} The new color value as a hex code or a custom property.
+/// @access public
+/// @group light-ui
+@function get-light-value($token) {
+  $value: map-get($carbon--theme, $token);
+
+  @if $carbon--theme ==
+    $carbon--theme--white or
+    $carbon--theme ==
+    $carbon--theme--g10
+  {
+    $value: darken($value, 8%);
+  }
+
+  @if $carbon--theme ==
+    $carbon--theme--g90 or
+    $carbon--theme ==
+    $carbon--theme--g100
+  {
+    $value: lighten($value, 8%);
+  }
+
+  @if feature-flags-enabled('enable-css-custom-properties') {
+    @return var(--#{$custom-property-prefix}-#{$token}-light, $value);
+  }
+
+  @return $value;
+}
+
+/// @type Color
+/// @access public
+/// @group light-ui
+$hover-ui-light: get-light-value('ui-01');

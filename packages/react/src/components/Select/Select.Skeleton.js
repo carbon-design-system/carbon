@@ -7,31 +7,30 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const SelectSkeleton = ({ hideLabel, id }) => {
-  const label = hideLabel ? null : (
-    // eslint-disable-next-line jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control
-    <label className={`${prefix}--label ${prefix}--skeleton`} htmlFor={id} />
-  );
-
-  return (
-    <div className={`${prefix}--form-item`}>
-      {label}
-      <div className={`${prefix}--select ${prefix}--skeleton`}>
-        <select className={`${prefix}--select-input`} />
-      </div>
+const SelectSkeleton = ({ hideLabel, className, ...rest }) => (
+  <div className={cx(`${prefix}--form-item`, className)} {...rest}>
+    {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
+    <div className={`${prefix}--select ${prefix}--skeleton`}>
+      <div className={`${prefix}--select-input`} />
     </div>
-  );
-};
+  </div>
+);
 
 SelectSkeleton.propTypes = {
   /**
    * Specify whether the label should be hidden, or not
    */
   hideLabel: PropTypes.bool,
+
+  /**
+   * Specify an optional className to add to the form item wrapper.
+   */
+  className: PropTypes.string,
 };
 
 export default SelectSkeleton;

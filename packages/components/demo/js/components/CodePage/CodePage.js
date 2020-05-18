@@ -29,8 +29,8 @@ const CodePage = ({
           component={metadata.name}
           htmlFile={item.renderedContent}
           hideViewFullRender={hideViewFullRender}
-          linkOnly={metadata.meta.linkOnly}
-          useIframe={metadata.meta.useIframe}
+          linkOnly={metadata.meta.linkOnly || item.meta.linkOnly}
+          useIframe={metadata.meta.useIframe || item.meta.useIframe}
           useStaticFullRenderPage={useStaticFullRenderPage}
         />
       </div>

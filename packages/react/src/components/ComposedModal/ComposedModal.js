@@ -12,6 +12,8 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
+import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
+import wrapFocus from '../../internal/wrapFocus';
 
 const { prefix } = settings;
 
@@ -26,6 +28,8 @@ export default class ComposedModal extends Component {
   outerModal = React.createRef();
   innerModal = React.createRef();
   button = React.createRef();
+  startSentinel = React.createRef();
+  endSentinel = React.createRef();
 
   static propTypes = {
     /**
@@ -60,6 +64,11 @@ export default class ComposedModal extends Component {
      * focused when the Modal opens
      */
     selectorPrimaryFocus: PropTypes.string,
+
+    /**
+     * Specify the size variant.
+     */
+    size: PropTypes.oneOf(['xs', 'sm', 'lg']),
   };
 
   static getDerivedStateFromProps({ open }, state) {
@@ -72,23 +81,10 @@ export default class ComposedModal extends Component {
         };
   }
 
-  elementOrParentIsFloatingMenu = target => {
-    const {
-      selectorsFloatingMenus = [
-        `.${prefix}--overflow-menu-options`,
-        `.${prefix}--tooltip`,
-        '.flatpickr-calendar',
-      ],
-    } = this.props;
-    if (target && typeof target.closest === 'function') {
-      return selectorsFloatingMenus.some(selector => target.closest(selector));
-    }
-  };
-
   handleKeyDown = evt => {
     // Esc key
     if (evt.which === 27) {
-      this.closeModal();
+      this.closeModal(evt);
     }
 
     this.props.onKeyDown(evt);
@@ -99,54 +95,61 @@ export default class ComposedModal extends Component {
       this.innerModal.current &&
       !this.innerModal.current.contains(evt.target)
     ) {
-      this.closeModal();
+      this.closeModal(evt);
     }
   };
 
-  focusModal = () => {
-    if (this.outerModal.current) {
-      this.outerModal.current.focus();
+  handleBlur = ({
+    target: oldActiveNode,
+    relatedTarget: currentActiveNode,
+  }) => {
+    const { open, selectorsFloatingMenus } = this.props;
+    if (open && currentActiveNode && oldActiveNode) {
+      const { current: modalNode } = this.innerModal;
+      const { current: startSentinelNode } = this.startSentinel;
+      const { current: endSentinelNode } = this.endSentinel;
+      wrapFocus({
+        modalNode,
+        startSentinelNode,
+        endSentinelNode,
+        currentActiveNode,
+        oldActiveNode,
+        selectorsFloatingMenus,
+      });
     }
   };
 
-  handleBlur = evt => {
-    // Keyboard trap
-    if (
-      this.innerModal.current &&
-      this.props.open &&
-      evt.relatedTarget &&
-      !this.innerModal.current.contains(evt.relatedTarget) &&
-      !this.elementOrParentIsFloatingMenu(evt.relatedTarget)
-    ) {
-      this.focusModal();
-    }
-  };
-
-  componentDidUpdate(prevProps) {
-    if (!prevProps.open && this.props.open) {
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevState.open && this.state.open) {
       this.beingOpen = true;
-    } else if (prevProps.open && !this.props.open) {
+    } else if (prevState.open && !this.state.open) {
       this.beingOpen = false;
     }
     toggleClass(
       document.body,
       `${prefix}--body--with-modal-open`,
-      this.props.open
+      this.state.open
     );
   }
 
   focusButton = focusContainerElement => {
-    const primaryFocusElement = focusContainerElement.querySelector(
-      this.props.selectorPrimaryFocus
-    );
-    if (primaryFocusElement) {
-      primaryFocusElement.focus();
-      return;
-    }
-    if (this.button.current) {
-      this.button.current.focus();
+    if (focusContainerElement) {
+      const primaryFocusElement = focusContainerElement.querySelector(
+        this.props.selectorPrimaryFocus
+      );
+      if (primaryFocusElement) {
+        primaryFocusElement.focus();
+        return;
+      }
+      if (this.button.current) {
+        this.button.current.focus();
+      }
     }
   };
+
+  componentWillUnmount() {
+    toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+  }
 
   componentDidMount() {
     toggleClass(
@@ -157,7 +160,9 @@ export default class ComposedModal extends Component {
     if (!this.props.open) {
       return;
     }
-    this.focusButton(this.innerModal.current);
+    if (this.innerModal.current) {
+      this.focusButton(this.innerModal.current);
+    }
   }
 
   handleTransitionEnd = evt => {
@@ -171,9 +176,9 @@ export default class ComposedModal extends Component {
     }
   };
 
-  closeModal = () => {
+  closeModal = evt => {
     const { onClose } = this.props;
-    if (!onClose || onClose() !== false) {
+    if (!onClose || onClose(evt) !== false) {
       this.setState({
         open: false,
       });
@@ -188,6 +193,7 @@ export default class ComposedModal extends Component {
       children,
       danger,
       selectorPrimaryFocus, // eslint-disable-line
+      size,
       ...other
     } = this.props;
 
@@ -200,16 +206,17 @@ export default class ComposedModal extends Component {
 
     const containerClass = classNames({
       [`${prefix}--modal-container`]: true,
+      [`${prefix}--modal-container--${size}`]: size,
       [containerClassName]: containerClassName,
     });
 
     const childrenWithProps = React.Children.toArray(children).map(child => {
       switch (child.type) {
-        case ModalHeader:
+        case React.createElement(ModalHeader).type:
           return React.cloneElement(child, {
             closeModal: this.closeModal,
           });
-        case ModalFooter:
+        case React.createElement(ModalFooter).type:
           return React.cloneElement(child, {
             closeModal: this.closeModal,
             inputref: this.button,
@@ -228,11 +235,26 @@ export default class ComposedModal extends Component {
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         onTransitionEnd={open ? this.handleTransitionEnd : undefined}
-        className={modalClass}
-        tabIndex={-1}>
-        <div ref={this.innerModal} className={containerClass}>
+        className={modalClass}>
+        {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
+        <span
+          ref={this.startSentinel}
+          tabIndex="0"
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
+        <div ref={this.innerModal} className={containerClass} tabIndex={-1}>
           {childrenWithProps}
         </div>
+        {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
+        <span
+          ref={this.endSentinel}
+          tabIndex="0"
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
       </div>
     );
   }
@@ -299,12 +321,12 @@ export class ModalHeader extends Component {
   };
 
   static defaultProps = {
-    iconDescription: 'Close the modal',
+    iconDescription: 'Close',
     buttonOnClick: () => {},
   };
 
-  handleCloseButtonClick = () => {
-    this.props.closeModal();
+  handleCloseButtonClick = evt => {
+    this.props.closeModal(evt);
     this.props.buttonOnClick();
   };
 
@@ -361,37 +383,64 @@ export class ModalHeader extends Component {
           onClick={this.handleCloseButtonClick}
           className={closeClass}
           title={iconDescription}
+          aria-label={iconDescription}
           type="button">
-          <Close20 aria-label={iconDescription} className={closeIconClass} />
+          <Close20 className={closeIconClass} />
         </button>
       </div>
     );
   }
 }
 
-export class ModalBody extends Component {
-  static propTypes = {
-    /**
-     * Specify an optional className to be added to the Modal Body node
-     */
-    className: PropTypes.string,
-  };
-
-  render() {
-    const { className, children, ...other } = this.props;
-
-    const contentClass = classNames({
-      [`${prefix}--modal-content`]: true,
-      [className]: className,
-    });
-
-    return (
-      <div className={contentClass} {...other}>
+export function ModalBody(props) {
+  const { className, children, hasForm, hasScrollingContent, ...other } = props;
+  const contentClass = classNames({
+    [`${prefix}--modal-content`]: true,
+    [`${prefix}--modal-content--with-form`]: hasForm,
+    [className]: className,
+  });
+  const hasScrollingContentProps = hasScrollingContent
+    ? {
+        tabIndex: 0,
+        role: 'region',
+      }
+    : {};
+  return (
+    <>
+      <div className={contentClass} {...hasScrollingContentProps} {...other}>
         {children}
       </div>
-    );
-  }
+      {hasScrollingContent && (
+        <div className={`${prefix}--modal-content--overflow-indicator`} />
+      )}
+    </>
+  );
 }
+ModalBody.propTypes = {
+  /**
+   * Specify an optional className to be added to the Modal Body node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Provide whether the modal content has a form element.
+   * If `true` is used here, non-form child content should have `bx--modal-content__regular-content` class.
+   */
+  hasForm: PropTypes.bool,
+
+  /**
+   * Specify whether the modal contains scrolling content
+   */
+  hasScrollingContent: PropTypes.bool,
+
+  /**
+   * Required props for the accessibility label of the header
+   */
+  ['aria-label']: requiredIfGivenPropIsTruthy(
+    'hasScrollingContent',
+    PropTypes.string
+  ),
+};
 
 export class ModalFooter extends Component {
   static propTypes = {
@@ -426,6 +475,12 @@ export class ModalFooter extends Component {
     secondaryButtonText: PropTypes.string,
 
     /**
+     * Specify whether the primary button should be replaced with danger button.
+     * Note that this prop is not applied if you render primary/danger button by yourself
+     */
+    danger: PropTypes.bool,
+
+    /**
      * Specify an optional function for when the modal is requesting to be
      * closed
      */
@@ -454,7 +509,7 @@ export class ModalFooter extends Component {
   };
 
   handleRequestClose = evt => {
-    this.props.closeModal();
+    this.props.closeModal(evt);
     this.props.onRequestClose(evt);
   };
 

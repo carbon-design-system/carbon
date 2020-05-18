@@ -34,7 +34,12 @@ The output of the `--help` option is:
 Usage: @carbon/cli [options]
 
 Commands:
-  @carbon/cli contribute <command>  get started contributing with Carbon
+  cli ci-check              run CI checks
+  cli contribute <command>  get started contributing with Carbon
+  cli publish <tag>         publish packages that have different versions from
+                            the package registry
+  cli release [bump]        run the release step for the given version bump
+  cli sync [target]         sync files across workspaces
 
 Options:
   --help     Show help                                                 [boolean]

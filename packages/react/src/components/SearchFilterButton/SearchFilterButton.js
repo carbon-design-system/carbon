@@ -7,27 +7,39 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import warning from 'warning';
 import { settings } from 'carbon-components';
 import { Filter16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
 
+let didWarnAboutDeprecation = false;
+
 /**
  * The filter button for `<Search>`.
  */
-const SearchFilterButton = ({ labelText, iconDescription, ...other }) => (
-  <button
-    className={`${prefix}--search-button`}
-    type="button"
-    aria-label={labelText}
-    title={labelText}
-    {...other}>
-    <Filter16
-      className={`${prefix}--search-filter`}
-      aria-label={iconDescription}
-    />
-  </button>
-);
+const SearchFilterButton = ({ labelText, iconDescription, ...other }) => {
+  if (__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      'The SearchFilterButton component has been deprecated and will be removed in the next major release of `carbon-components-react`'
+    );
+    didWarnAboutDeprecation = true;
+  }
+  return (
+    <button
+      className={`${prefix}--search-button`}
+      type="button"
+      aria-label={labelText}
+      title={labelText}
+      {...other}>
+      <Filter16
+        className={`${prefix}--search-filter`}
+        aria-label={iconDescription}
+      />
+    </button>
+  );
+};
 
 SearchFilterButton.propTypes = {
   /**

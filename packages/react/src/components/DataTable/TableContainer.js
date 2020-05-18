@@ -17,12 +17,17 @@ const TableContainer = ({
   children,
   title,
   description,
+  stickyHeader,
   ...rest
 }) => {
   const tableContainerClasses = cx(
     className,
-    `${prefix}--data-table-container`
+    `${prefix}--data-table-container`,
+    {
+      [`${prefix}--data-table--max-width`]: stickyHeader,
+    }
   );
+
   return (
     <div {...rest} className={tableContainerClasses}>
       {title && (

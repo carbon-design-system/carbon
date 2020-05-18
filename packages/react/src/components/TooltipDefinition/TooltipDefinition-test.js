@@ -26,6 +26,16 @@ describe('TooltipDefinition', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should support a custom trigger element class', () => {
+    const wrapper = mount(
+      <TooltipDefinition
+        {...mockProps}
+        triggerClassName="custom-trigger-class"
+      />
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should allow the user to specify the direction', () => {
     const wrapper = mount(<TooltipDefinition {...mockProps} direction="top" />);
     expect(wrapper).toMatchSnapshot();

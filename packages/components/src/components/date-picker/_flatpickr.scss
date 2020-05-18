@@ -33,7 +33,7 @@
 .flatpickr-calendar.open,
 .flatpickr-calendar.inline {
   opacity: 1;
-  visibility: visible;
+  visibility: inherit;
   overflow: visible;
   max-height: 640px;
 }
@@ -280,7 +280,7 @@
   opacity: 1;
 }
 .flatpickr-current-month {
-  @include type-style('heading-01');
+  @include type-style('productive-heading-01');
 
   color: inherit;
   position: absolute;
@@ -338,7 +338,6 @@
 }
 .flatpickr-current-month .numInputWrapper {
   width: 6ch;
-  width: 7ch\0;
   display: inline-block;
 }
 .flatpickr-current-month .numInputWrapper span.arrowUp:after {

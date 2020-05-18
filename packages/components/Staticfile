@@ -1,1 +1,2 @@
 root: demo
+force_https: true

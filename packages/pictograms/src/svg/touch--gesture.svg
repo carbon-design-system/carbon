@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+<g id="touch_gesture">
+	<g id="touch_gesture_1_">
+		<g>
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+				M25,36V24.5c0-0.828,0.672-1.5,1.5-1.5s1.5,0.672,1.5,1.5V35"/>
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+				M28,31.5c0-0.828,0.672-1.5,1.5-1.5s1.5,0.672,1.5,1.5V35"/>
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+				M31,32c0-0.828,0.672-1.5,1.5-1.5S34,31.172,34,32v3"/>
+		</g>
+		<g>
+			<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" points="20,33 9,33 
+				9,10 39,10 39,30 			"/>
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" d="M34,33
+				c0-0.828,0.672-1.5,1.5-1.5S37,32.172,37,33v5"/>
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" d="M22,38v-2.5
+				c0-0.828,0.672-1.5,1.5-1.5s1.5,0.672,1.5,1.5V38"/>
+		</g>
+	</g>
+</g>
+<g id="Layer_1">
+</g>
+</svg>

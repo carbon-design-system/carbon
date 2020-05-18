@@ -42,6 +42,7 @@
   }
 
   .#{$prefix}--time-picker .#{$prefix}--select-input {
+    margin: 0;
     min-width: auto;
     width: auto;
     padding-right: rem(48px);
@@ -58,6 +59,10 @@
     height: rem(40px);
     transition: outline $duration--fast-01 motion(standard, productive),
       background-color $duration--fast-01 motion(standard, productive);
+
+    &::placeholder {
+      color: $text-05;
+    }
   }
 }
 

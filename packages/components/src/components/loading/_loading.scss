@@ -39,6 +39,10 @@
     stroke-dashoffset: $loading__gap;
   }
 
+  .#{$prefix}--loading--small .#{$prefix}--loading__stroke {
+    stroke-dashoffset: $loading--small__gap;
+  }
+
   .#{$prefix}--loading--stop {
     @include animation__loading--stop;
   }

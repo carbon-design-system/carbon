@@ -7,13 +7,32 @@
 
 'use strict';
 
-const build = require('../src/build');
-const buildMetadata = require('./build-metadata');
-const { SVG_DIR } = require('../src/paths');
+const { builders, Metadata } = require('@carbon/icon-build-helpers');
+const path = require('path');
 
-build(SVG_DIR, { cwd: process.cwd() })
-  .then(buildMetadata)
-  .catch(error => {
-    // eslint-disable-next-line no-console
-    console.error(error);
+async function build() {
+  const metadata = await Metadata.build({
+    input: {
+      svg: path.resolve(__dirname, '../src/svg'),
+      extensions: path.resolve(__dirname, '../'),
+    },
+    extensions: [
+      Metadata.extensions.icons,
+      Metadata.extensions.assets,
+      Metadata.extensions.deprecated,
+      Metadata.extensions.output,
+      Metadata.extensions.categories,
+    ],
   });
+
+  const output = path.resolve(__dirname, '../');
+  await Promise.all([
+    builders.svg.run(metadata, { output }),
+    builders.vanilla.run(metadata, { output }),
+  ]);
+}
+
+build().catch(error => {
+  console.log(error);
+  process.exit(1);
+});

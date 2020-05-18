@@ -106,15 +106,38 @@ export default class DataTable extends React.Component {
     translateWithId: PropTypes.func,
 
     /**
+     * `normal` Change the row height of table
+     */
+    size: PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
+
+    /**
      * Specify whether the control should be a radio button or inline checkbox
      */
     radio: PropTypes.bool,
+
+    /**
+     * Specify whether the header should be sticky.
+     * Still experimental: may not work with every combination of table props
+     */
+    stickyHeader: PropTypes.bool,
+
+    /**
+     * Specify whether the table should be able to be sorted by its headers
+     */
+    isSortable: PropTypes.bool,
+
+    /**
+     * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
+     */
+    overflowMenuOnHover: PropTypes.bool,
   };
 
   static defaultProps = {
     sortRow: defaultSortRow,
     filterRows: defaultFilterRows,
     locale: 'en',
+    size: 'normal',
+    overflowMenuOnHover: true,
     translateWithId,
   };
 
@@ -304,10 +327,10 @@ export default class DataTable extends React.Component {
     const checked = rowCount > 0 && selectedRowCount === rowCount;
     const indeterminate =
       rowCount > 0 && selectedRowCount > 0 && selectedRowCount !== rowCount;
-
-    const translationKey = checked
-      ? translationKeys.unselectAll
-      : translationKeys.selectAll;
+    const translationKey =
+      checked || indeterminate
+        ? translationKeys.unselectAll
+        : translationKeys.selectAll;
     return {
       ...rest,
       ariaLabel: t(translationKey),
@@ -316,6 +339,14 @@ export default class DataTable extends React.Component {
       indeterminate,
       name: 'select-all',
       onSelect: composeEventHandlers([this.handleSelectAll, onClick]),
+    };
+  };
+
+  getToolbarProps = (props = {}) => {
+    const { size } = this.props;
+    return {
+      ...props,
+      size: size === 'compact' || size === 'short' ? 'small' : 'normal',
     };
   };
 
@@ -339,6 +370,8 @@ export default class DataTable extends React.Component {
       isSortable,
       useStaticWidth,
       shouldShowBorder,
+      stickyHeader,
+      overflowMenuOnHover,
     } = this.props;
     return {
       useZebraStyles,
@@ -346,6 +379,19 @@ export default class DataTable extends React.Component {
       isSortable,
       useStaticWidth,
       shouldShowBorder,
+      stickyHeader,
+      overflowMenuOnHover,
+    };
+  };
+
+  /**
+   * Helper utility to get the TableContainer Props.
+   */
+  getTableContainerProps = () => {
+    const { stickyHeader } = this.props;
+
+    return {
+      stickyHeader,
     };
   };
 
@@ -356,8 +402,28 @@ export default class DataTable extends React.Component {
   getSelectedRows = () =>
     this.state.rowIds.filter(id => {
       const row = this.state.rowsById[id];
-      return row.isSelected;
+      return row.isSelected && !row.disabled;
     });
+
+  /**
+   * Helper utility to get all of the available rows after applying the filter
+   * @returns {Array<string>} the array of rowIds that are currently included through the filter
+   *  */
+  getFilteredRowIds = () => {
+    const filteredRowIds =
+      typeof this.state.filterInputValue === 'string'
+        ? this.props.filterRows({
+            rowIds: this.state.rowIds,
+            headers: this.props.headers,
+            cellsById: this.state.cellsById,
+            inputValue: this.state.filterInputValue,
+          })
+        : this.state.rowIds;
+    if (filteredRowIds.length == 0) {
+      return this.state.rowIds;
+    }
+    return filteredRowIds;
+  };
 
   /**
    * Helper for getting the table prefix for elements that require an
@@ -373,7 +439,7 @@ export default class DataTable extends React.Component {
    * @param {object} initialState
    * @returns {object} object to put into this.setState (use spread operator)
    */
-  setAllSelectedState = (initialState, isSelected) => {
+  setAllSelectedState = (initialState, isSelected, filteredRowIds) => {
     const { rowIds } = initialState;
     return {
       rowsById: rowIds.reduce(
@@ -381,7 +447,9 @@ export default class DataTable extends React.Component {
           ...acc,
           [id]: {
             ...initialState.rowsById[id],
-            isSelected: initialState.rowsById[id].disabled ? false : isSelected,
+            ...(!initialState.rowsById[id].disabled && {
+              isSelected: filteredRowIds.includes(id) && isSelected,
+            }),
           },
         }),
         {}
@@ -397,7 +465,7 @@ export default class DataTable extends React.Component {
     this.setState(state => {
       return {
         shouldShowBatchActions: false,
-        ...this.setAllSelectedState(state, false),
+        ...this.setAllSelectedState(state, false, this.getFilteredRowIds()),
       };
     });
   };
@@ -407,14 +475,15 @@ export default class DataTable extends React.Component {
    */
   handleSelectAll = () => {
     this.setState(state => {
-      const { rowIds, rowsById } = state;
-      const selectableRows = rowIds.reduce((acc, rowId) => {
-        return (acc += rowsById[rowId].disabled ? 0 : 1);
-      }, 0);
-      const isSelected = this.getSelectedRows().length !== selectableRows;
+      const filteredRowIds = this.getFilteredRowIds();
+      const { rowsById } = state;
+      const isSelected = !(
+        Object.values(rowsById).filter(row => row.isSelected && !row.disabled)
+          .length > 0
+      );
       return {
         shouldShowBatchActions: isSelected,
-        ...this.setAllSelectedState(state, isSelected),
+        ...this.setAllSelectedState(state, isSelected, filteredRowIds),
       };
     });
   };
@@ -534,9 +603,13 @@ export default class DataTable extends React.Component {
    *
    * @param {Event} event
    */
-  handleOnInputValueChange = event => {
+  handleOnInputValueChange = (event, defaultValue) => {
     if (event.target) {
       this.setState({ filterInputValue: event.target.value });
+    }
+
+    if (defaultValue) {
+      this.setState({ filterInputValue: defaultValue });
     }
   };
 
@@ -563,8 +636,10 @@ export default class DataTable extends React.Component {
       getExpandHeaderProps: this.getExpandHeaderProps,
       getRowProps: this.getRowProps,
       getSelectionProps: this.getSelectionProps,
+      getToolbarProps: this.getToolbarProps,
       getBatchActionProps: this.getBatchActionProps,
       getTableProps: this.getTableProps,
+      getTableContainerProps: this.getTableContainerProps,
 
       // Custom event handlers
       onInputChange: this.handleOnInputValueChange,

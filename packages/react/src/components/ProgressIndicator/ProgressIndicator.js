@@ -9,25 +9,42 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
-import { CheckmarkOutline16, Warning16 } from '@carbon/icons-react';
+import {
+  CheckmarkOutline16,
+  Warning16,
+  RadioButton16,
+  CircleFilled16,
+} from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
-const defaultRenderLabel = props => <p {...props} />;
-export const ProgressStep = ({ ...props }) => {
-  const {
-    label,
-    description,
-    className,
-    current,
-    complete,
-    invalid,
-    secondaryLabel,
-    disabled,
-    onClick,
-    renderLabel: ProgressStepLabel,
-  } = props;
 
+const defaultRenderLabel = props => <p {...props} />;
+
+const defaultTranslations = {
+  'carbon.progress-step.complete': 'Complete',
+  'carbon.progress-step.incomplete': 'Incomplete',
+  'carbon.progress-step.current': 'Current',
+  'carbon.progress-step.invalid': 'Invalid',
+};
+
+function translateWithId(messageId) {
+  return defaultTranslations[messageId];
+}
+
+export function ProgressStep({
+  label,
+  description,
+  className,
+  current,
+  complete,
+  invalid,
+  secondaryLabel,
+  disabled,
+  onClick,
+  renderLabel: ProgressStepLabel,
+  translateWithId: t,
+}) {
   const classes = classnames({
     [`${prefix}--progress-step`]: true,
     [`${prefix}--progress-step--current`]: current,
@@ -43,48 +60,64 @@ export const ProgressStep = ({ ...props }) => {
     }
   };
 
-  const currentSvg = current && (
-    <svg>
-      <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
-      <title>{description}</title>
-    </svg>
-  );
-
-  const completeSvg = complete && (
-    <CheckmarkOutline16 aria-label={description} role="img">
-      <title>{description}</title>
-    </CheckmarkOutline16>
-  );
-  const incompleteSvg = (() => {
-    if (complete) {
-      return null;
-    }
+  const SVGIcon = ({ complete, current, description, invalid, prefix }) => {
     if (invalid) {
+      return <Warning16 className={`${prefix}--progress__warning`} />;
+    }
+    if (current) {
       return (
-        <Warning16 className={`${prefix}--progress__warning`}>
+        <CircleFilled16>
           <title>{description}</title>
-        </Warning16>
+        </CircleFilled16>
+      );
+    }
+    if (complete) {
+      return (
+        <CheckmarkOutline16>
+          <title>{description}</title>
+        </CheckmarkOutline16>
       );
     }
     return (
-      <svg>
+      <RadioButton16>
         <title>{description}</title>
-        <path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z" />
-      </svg>
+      </RadioButton16>
     );
-  })();
+  };
+
+  let message = t('carbon.progress-step.incomplete');
+
+  if (current) {
+    message = t('carbon.progress-step.current');
+  }
+
+  if (complete) {
+    message = t('carbon.progress-step.complete');
+  }
+
+  if (invalid) {
+    message = t('carbon.progress-step.invalid');
+  }
 
   return (
     <li className={classes}>
-      <div
+      <button
         className={classnames(`${prefix}--progress-step-button`, {
           [`${prefix}--progress-step-button--unclickable`]: !onClick || current,
         })}
-        role="button"
+        disabled={disabled}
+        aria-disabled={disabled}
         tabIndex={!current && onClick ? 0 : -1}
         onClick={!current ? onClick : undefined}
         onKeyDown={handleKeyDown}>
-        {currentSvg || completeSvg || incompleteSvg}
+        <span className={`${prefix}--assistive-text`}>{message}</span>
+        <SVGIcon
+          complete={complete}
+          current={current}
+          description={description}
+          invalid={invalid}
+          prefix={prefix}
+        />
         <ProgressStepLabel className={`${prefix}--progress-label`}>
           {label}
         </ProgressStepLabel>
@@ -92,10 +125,10 @@ export const ProgressStep = ({ ...props }) => {
           <p className={`${prefix}--progress-optional`}>{secondaryLabel}</p>
         ) : null}
         <span className={`${prefix}--progress-line`} />
-      </div>
+      </button>
     </li>
   );
-};
+}
 
 ProgressStep.propTypes = {
   /**
@@ -163,10 +196,17 @@ ProgressStep.propTypes = {
    * A callback called if the step is clicked or the enter key is pressed
    */
   onClick: PropTypes.func,
+
+  /**
+   * Optional method that takes in a message id and returns an
+   * internationalized string.
+   */
+  translateWithId: PropTypes.func,
 };
 
 ProgressStep.defaultProps = {
   renderLabel: defaultRenderLabel,
+  translateWithId,
 };
 
 export class ProgressIndicator extends Component {
@@ -193,6 +233,15 @@ export class ProgressIndicator extends Component {
      * Optional callback called if a ProgressStep is clicked on.  Returns the index of the step.
      */
     onChange: PropTypes.func,
+
+    /**
+     * Determines whether or not the ProgressIndicator should be rendered vertically.
+     */
+    vertical: PropTypes.bool,
+    /**
+     * Specify whether the progress steps should be split equally in size in the div
+     */
+    spaceEqually: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -241,9 +290,17 @@ export class ProgressIndicator extends Component {
   };
 
   render() {
-    const { className, currentIndex, ...other } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      className,
+      currentIndex, // eslint-disable-line no-unused-vars
+      vertical,
+      spaceEqually,
+      ...other
+    } = this.props;
     const classes = classnames({
       [`${prefix}--progress`]: true,
+      [`${prefix}--progress--vertical`]: vertical,
+      [`${prefix}--progress--space-equal`]: spaceEqually && !vertical,
       [className]: className,
     });
     return (

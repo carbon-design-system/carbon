@@ -26,6 +26,7 @@ describe('ModalWrapper', () => {
       secondaryButtonText: 'Cancel',
       handleSubmit: jest.fn(() => true),
       shouldCloseAfterSubmit: true,
+      'aria-label': 'test modal',
     };
   });
 

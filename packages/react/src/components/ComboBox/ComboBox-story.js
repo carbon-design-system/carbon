@@ -8,9 +8,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, text } from '@storybook/addon-knobs';
+import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
-import WithState from '../../tools/withState';
 
 const items = [
   {
@@ -37,6 +36,17 @@ const items = [
   },
 ];
 
+const sizes = {
+  'Extra large size (xl)': 'xl',
+  'Default size': undefined,
+  'Small size (sm)': 'sm',
+};
+
+const directions = {
+  'Bottom (default)': 'bottom',
+  'Top ': 'top',
+};
+
 const props = () => ({
   id: text('Combobox ID (id)', 'carbon-combobox-example'),
   placeholder: text('Placeholder text (placeholder)', 'Filter...'),
@@ -46,18 +56,10 @@ const props = () => ({
   disabled: boolean('Disabled (disabled)', false),
   invalid: boolean('Invalid (invalid)', false),
   invalidText: text('Invalid text (invalidText)', 'A valid value is required'),
+  size: select('Field size (size)', sizes, undefined) || undefined,
+  direction: select('Dropdown direction (direction)', directions, 'bottom'),
   onChange: action('onChange'),
 });
-
-const itemToElement = item => {
-  const itemAsArray = item.text.split(' ');
-  return (
-    <div>
-      <span>{itemAsArray[0]}</span>
-      <span style={{ color: 'red' }}> {itemAsArray[1]}</span>
-    </div>
-  );
-};
 
 storiesOf('ComboBox', module)
   .addDecorator(withKnobs)
@@ -75,49 +77,6 @@ storiesOf('ComboBox', module)
     {
       info: {
         text: 'ComboBox',
-      },
-    }
-  )
-  .add(
-    'items as components',
-    () => (
-      <div style={{ width: 300 }}>
-        <ComboBox
-          items={items}
-          itemToString={item => (item ? item.text : '')}
-          itemToElement={itemToElement}
-          {...props()}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: 'ComboBox',
-      },
-    }
-  )
-  .add(
-    'custom text input handling',
-    () => (
-      <WithState initialState={{ inputText: '' }}>
-        {({ state, setState }) => (
-          <div style={{ width: 300 }}>
-            <ComboBox
-              items={items}
-              itemToString={item =>
-                item ? `${item.text} queried with ${state.inputText}` : ''
-              }
-              shouldFilterItem={() => true}
-              onInputChange={text => setState({ inputText: text })}
-              {...props()}
-            />
-          </div>
-        )}
-      </WithState>
-    ),
-    {
-      info: {
-        text: `Sometimes you want to perform an async action to trigger a backend call on input change.`,
       },
     }
   );

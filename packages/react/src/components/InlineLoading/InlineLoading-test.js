@@ -73,13 +73,8 @@ describe('Loading', () => {
 
     it('should render the success animation', () => {
       expect(
-        wrapper.find(`.${prefix}--inline-loading__checkmark-container`).length
-      ).toEqual(1);
-    });
-
-    it('should render the checkmark within the success animation', () => {
-      expect(
-        wrapper.find(`.${prefix}--inline-loading__checkmark`).length
+        wrapper.find(`svg.${prefix}--inline-loading__checkmark-container`)
+          .length
       ).toEqual(1);
     });
 

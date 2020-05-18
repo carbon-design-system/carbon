@@ -33,7 +33,7 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
 
     /**
      * The component state.
-     * @type {Object}
+     * @type {object}
      */
     this.state = {
       /**

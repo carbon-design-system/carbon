@@ -47,20 +47,29 @@ const sortDirections = {
   [sortStates.DESC]: 'descending',
 };
 
-const TableHeader = ({
-  className: headerClassName,
-  children,
-  isSortable,
-  isSortHeader,
-  onClick,
-  scope,
-  sortDirection,
-  translateWithId: t,
-  ...rest
-}) => {
+const TableHeader = React.forwardRef(function TableHeader(
+  {
+    className: headerClassName,
+    children,
+    colSpan,
+    isSortable,
+    isSortHeader,
+    onClick,
+    scope,
+    sortDirection,
+    translateWithId: t,
+    ...rest
+  },
+  ref
+) {
   if (!isSortable) {
     return (
-      <th {...rest} className={headerClassName} scope={scope}>
+      <th
+        {...rest}
+        className={headerClassName}
+        scope={scope}
+        colSpan={colSpan}
+        ref={ref}>
         <span className={`${prefix}--table-header-label`}>{children}</span>
       </th>
     );
@@ -76,7 +85,12 @@ const TableHeader = ({
   const ariaSort = !isSortHeader ? 'none' : sortDirections[sortDirection];
 
   return (
-    <th scope={scope} className={headerClassName} aria-sort={ariaSort}>
+    <th
+      aria-sort={ariaSort}
+      className={headerClassName}
+      colSpan={colSpan}
+      ref={ref}
+      scope={scope}>
       <button className={className} onClick={onClick} {...rest}>
         <span className={`${prefix}--table-header-label`}>{children}</span>
         <Arrow
@@ -100,7 +114,7 @@ const TableHeader = ({
       </button>
     </th>
   );
-};
+});
 
 TableHeader.propTypes = {
   /**
@@ -112,6 +126,12 @@ TableHeader.propTypes = {
    * Pass in children that will be embedded in the table header label
    */
   children: PropTypes.node,
+
+  /**
+   * Specify `colSpan` as a non-negative integer value to indicate how
+   * many columns the TableHeader cell extends in a table
+   */
+  colSpan: PropTypes.number,
 
   /**
    * Specify whether this header is one through which a user can sort the table
@@ -157,5 +177,7 @@ TableHeader.defaultProps = {
 };
 
 TableHeader.translationKeys = Object.values(translationKeys);
+
+TableHeader.displayName = 'TableHeader';
 
 export default TableHeader;

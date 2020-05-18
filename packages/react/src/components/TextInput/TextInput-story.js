@@ -11,6 +11,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import TextInput from '../TextInput';
 import TextInputSkeleton from '../TextInput/TextInput.Skeleton';
+import FluidForm from '../FluidForm/FluidForm';
 
 const types = {
   None: '',
@@ -19,23 +20,32 @@ const types = {
   'For password (password)': 'password',
 };
 
-function ControlledPasswordInputApp(props) {
-  const [type, setType] = useState('password');
-  const togglePasswordVisibility = () => {
-    setType(type === 'password' ? 'text' : 'password');
-  };
-  return (
-    <>
-      <TextInput.ControlledPasswordInput
-        type={type}
-        togglePasswordVisibility={togglePasswordVisibility}
-        {...props}
-      />
-      <button onClick={() => setType('text')}>Show password</button>
-      <button onClick={() => setType('password')}>Hide password</button>
-    </>
-  );
-}
+const sizes = {
+  'Extra large size (xl)': 'xl',
+  'Default size': undefined,
+  'Small size (sm)': 'sm',
+};
+
+const ControlledPasswordInputApp = React.forwardRef(
+  function ControlledPasswordInputApp(props, ref) {
+    const [type, setType] = useState('password');
+    const togglePasswordVisibility = () => {
+      setType(type === 'password' ? 'text' : 'password');
+    };
+    return (
+      <>
+        <TextInput.ControlledPasswordInput
+          type={type}
+          togglePasswordVisibility={togglePasswordVisibility}
+          ref={ref}
+          {...props}
+        />
+        <button onClick={() => setType('text')}>Show password</button>
+        <button onClick={() => setType('password')}>Hide password</button>
+      </>
+    );
+  }
+);
 
 const props = {
   TextInputProps: () => ({
@@ -45,6 +55,7 @@ const props = {
       'Default value (defaultValue)',
       'This is not a default value'
     ),
+    size: select('Field size (size)', sizes, undefined) || undefined,
     labelText: text('Label text (labelText)', 'Text Input label'),
     placeholder: text('Placeholder text (placeholder)', 'Placeholder text'),
     light: boolean('Light variant (light)', false),
@@ -70,8 +81,18 @@ const props = {
       ['start', 'center', 'end'],
       'center'
     ),
+    hidePasswordLabel: text(
+      '"Hide password" tooltip label for password visibility toggle (hidePasswordLabel)',
+      'Hide password'
+    ),
+    showPasswordLabel: text(
+      '"Show password" tooltip label for password visibility toggle (showPasswordLabel)',
+      'Show password'
+    ),
   }),
 };
+
+TextInput.displayName = 'TextInput';
 
 storiesOf('TextInput', module)
   .addDecorator(withKnobs)
@@ -95,13 +116,36 @@ storiesOf('TextInput', module)
     }
   )
   .add(
-    'Toggle password visibility',
+    'Fluid',
     () => (
-      <TextInput.PasswordInput
-        {...props.TextInputProps()}
-        {...props.PasswordInputProps()}
-      />
+      <FluidForm>
+        <TextInput
+          type={select('Form control type (type)', types, 'text')}
+          {...props.TextInputProps()}
+        />
+      </FluidForm>
     ),
+    {
+      info: {
+        text: `
+            Text fields enable the user to interact with and input data. A single line
+            field is used when the input anticipated by the user is a single line of
+            text as opposed to a paragraph.
+            The default type is 'text' and its value can be either 'string' or 'number'.
+          `,
+      },
+    }
+  )
+  .add(
+    'Toggle password visibility',
+    () => {
+      return (
+        <TextInput.PasswordInput
+          {...props.TextInputProps()}
+          {...props.PasswordInputProps()}
+        />
+      );
+    },
     {
       info: {
         text: `
@@ -112,12 +156,21 @@ storiesOf('TextInput', module)
   )
   .add(
     'Fully controlled toggle password visibility',
-    () => (
-      <ControlledPasswordInputApp
-        {...props.TextInputProps()}
-        {...props.PasswordInputProps()}
-      />
-    ),
+    () => {
+      ControlledPasswordInputApp.__docgenInfo = {
+        ...TextInput.PasswordInput.__docgenInfo,
+        props: {
+          ...TextInput.PasswordInput.__docgenInfo.props,
+        },
+      };
+
+      return (
+        <ControlledPasswordInputApp
+          {...props.TextInputProps()}
+          {...props.PasswordInputProps()}
+        />
+      );
+    },
     {
       info: {
         text: `
@@ -129,7 +182,12 @@ storiesOf('TextInput', module)
   .add(
     'skeleton',
     () => (
-      <div>
+      <div
+        aria-label="loading text input"
+        aria-live="assertive"
+        role="status"
+        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      >
         <TextInputSkeleton />
         <br />
         <TextInputSkeleton hideLabel />

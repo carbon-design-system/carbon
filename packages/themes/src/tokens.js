@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { unstable_tokens as type } from '@carbon/type';
+import { unstable_tokens as layout } from '@carbon/layout';
+
 // The color token names for a Carbon theme, value corresponds to what they're
 // exported as in JavaScript
 const colors = [
@@ -26,6 +29,8 @@ const colors = [
   'text02',
   'text03',
   'text04',
+  'text05',
+  'textError',
 
   'icon01',
   'icon02',
@@ -53,8 +58,11 @@ const colors = [
 
   'overlay01',
 
+  'danger',
+
   // Interactive states
   'focus',
+  'inverseFocusUi',
 
   'hoverPrimary',
   'activePrimary',
@@ -70,6 +78,7 @@ const colors = [
   'activeUI',
 
   'selectedUI',
+  'selectedLightUI',
   'hoverSelectedUI',
   'inverseHoverUI',
 
@@ -85,6 +94,8 @@ const colors = [
   'disabled03',
 
   'highlight',
+
+  'decorative01',
 
   'skeleton01',
   'skeleton02',
@@ -139,4 +150,88 @@ export function formatTokenName(token) {
 
 export const tokens = {
   colors,
+  type,
+  layout,
+};
+
+export const unstable__meta = {
+  colors: [
+    {
+      type: 'core',
+      tokens: [
+        'uiBackground',
+        'interactive01',
+        'interactive02',
+        'interactive03',
+        'interactive04',
+        'brand01',
+        'brand02',
+        'brand03',
+        'danger',
+        'ui01',
+        'ui02',
+        'ui03',
+        'ui04',
+        'ui05',
+        'text01',
+        'text02',
+        'text03',
+        'text04',
+        'text05',
+        'textError',
+        'link01',
+        'icon01',
+        'icon02',
+        'icon03',
+        'field01',
+        'field02',
+        'inverse01',
+        'inverse02',
+        'inverseLink',
+        'support01',
+        'support02',
+        'support03',
+        'support04',
+        'inverseSupport01',
+        'inverseSupport02',
+        'inverseSupport03',
+        'inverseSupport04',
+        'overlay01',
+      ],
+    },
+    {
+      type: 'interactive',
+      tokens: [
+        'focus',
+        'inverseFocusUi',
+        'hoverPrimary',
+        'hoverPrimaryText',
+        'hoverSecondary',
+        'hoverTertiary',
+        'hoverUI',
+        'hoverSelectedUI',
+        'hoverDanger',
+        'hoverRow',
+        'activePrimary',
+        'activeSecondary',
+        'activeTertiary',
+        'activeUI',
+        'activeDanger',
+        'selectedUI',
+        'selectedLightUI',
+        'highlight',
+        'skeleton01',
+        'skeleton02',
+        'visitedLink',
+        'disabled01',
+        'disabled02',
+        'disabled03',
+        'inverseHoverUI',
+        'active01',
+        'hoverField',
+        'decorative01',
+      ],
+    },
+  ],
+  deprecated: ['brand01', 'brand02', 'brand03', 'active01'],
 };

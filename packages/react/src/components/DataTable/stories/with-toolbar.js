@@ -36,14 +36,21 @@ export default props => (
       getHeaderProps,
       getRowProps,
       getTableProps,
+      getToolbarProps,
       onInputChange,
+      getTableContainerProps,
     }) => (
-      <TableContainer title="DataTable" description="With toolbar">
-        <TableToolbar>
+      <TableContainer
+        title="DataTable"
+        description="With toolbar"
+        {...getTableContainerProps()}>
+        <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
             <TableToolbarSearch onChange={onInputChange} />
             <TableToolbarMenu>
-              <TableToolbarAction onClick={action('Action 1 Click')}>
+              <TableToolbarAction
+                onClick={action('Action 1 Click')}
+                primaryFocus>
                 Action 1
               </TableToolbarAction>
               <TableToolbarAction onClick={action('Action 2 Click')}>

@@ -17,11 +17,12 @@
   //TOOLBAR
   //-------------------------------------------------
   .#{$prefix}--table-toolbar {
-    display: flex;
-    width: 100%;
     background: $ui-01;
+    display: flex;
     height: $layout-04;
+    overflow: hidden;
     position: relative; //need for batch actions
+    width: 100%;
   }
 
   .#{$prefix}--toolbar-content {
@@ -74,7 +75,7 @@
     .#{$prefix}--search-magnifier {
     height: $layout-04;
     width: $layout-04;
-    padding: $spacing-md;
+    padding: $spacing-05;
     left: 0;
     cursor: pointer;
     pointer-events: all;
@@ -91,6 +92,12 @@
     .#{$prefix}--search
     .#{$prefix}--search-magnifier:hover {
     background: $hover-field;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--label {
+    visibility: hidden;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
@@ -116,6 +123,12 @@
     }
   }
 
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--search-close:focus::before {
+    background-color: $focus;
+  }
+
   //-------------------------------------------------
   //ACTIVE SEARCH - DEFAULT TOOLBAR
   //-------------------------------------------------
@@ -130,9 +143,12 @@
 
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
+    .#{$prefix}--label,
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
     .#{$prefix}--search-input {
-    padding-left: $spacing-3xl;
-    visibility: visible;
+    padding: 0 $spacing-09;
+    visibility: inherit;
   }
 
   .#{$prefix}--toolbar-search-container-active
@@ -187,6 +203,11 @@
     background-color: transparent;
   }
 
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search-close::before {
+    display: none;
+  }
+
   //-------------------------------------------------
   //TOOLBAR BUTTONS
   //-------------------------------------------------
@@ -196,7 +217,7 @@
     cursor: pointer;
     height: $layout-04;
     width: $layout-04;
-    padding: $spacing-md;
+    padding: $spacing-05;
     transition: background $duration--fast-02 motion(entrance, productive);
   }
 
@@ -230,11 +251,17 @@
   .#{$prefix}--toolbar-action:focus:not([disabled]),
   .#{$prefix}--toolbar-action:active:not([disabled]) {
     @include focus-outline('outline');
+
+    &.#{$prefix}--toolbar-search-container-expandable {
+      // The focus style is handled by search input in it, need to avoid duplicate animation
+      outline: none;
+    }
   }
 
   .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
     margin: 0;
-    height: $layout-04;
+    max-width: none;
+    white-space: nowrap;
   }
 
   .#{$prefix}--overflow-menu--data-table {
@@ -274,14 +301,14 @@
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search
     .#{$prefix}--search-magnifier {
-    left: $spacing-md;
+    left: $spacing-05;
   }
 
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search
     .#{$prefix}--search-input {
     height: $layout-04;
-    padding-left: $spacing-3xl;
+    padding: 0 $spacing-09;
     border: none;
   }
 
@@ -330,8 +357,8 @@
     top: 0;
     left: 0;
     align-items: center;
-    padding-left: $spacing-lg;
-    padding-right: $spacing-lg;
+    padding-left: $spacing-06;
+    padding-right: $spacing-06;
     width: 100%;
     height: 100%;
     pointer-events: none;
@@ -364,10 +391,12 @@
 
   .#{$prefix}--action-list .#{$prefix}--btn {
     color: $text-04;
+    padding: $button-padding-ghost;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {
     fill: $icon-03;
+    position: static;
     margin-left: $spacing-03;
   }
 
@@ -487,7 +516,7 @@
       .#{$prefix}--search-magnifier {
       height: rem(32px);
       width: rem(32px);
-      padding: $spacing-xs;
+      padding: $spacing-03;
     }
 
     //hidden
@@ -498,7 +527,7 @@
     .#{$prefix}--toolbar-search-container-expandable
       .#{$prefix}--search
       .#{$prefix}--search-input {
-      padding-left: $spacing-xl;
+      padding: 0 $spacing-09;
     }
 
     //active
@@ -510,7 +539,7 @@
     .#{$prefix}--toolbar-search-container-active
       .#{$prefix}--search
       .#{$prefix}--search-input {
-      visibility: visible;
+      visibility: inherit;
     }
 
     .#{$prefix}--toolbar-search-container-active
@@ -555,12 +584,14 @@
   .#{$prefix}--table-toolbar--small .#{$prefix}--toolbar-action {
     height: rem(32px);
     width: rem(32px);
-    padding: $spacing-xs;
+    padding: $spacing-03 0;
   }
 
   .#{$prefix}--table-toolbar--small .#{$prefix}--btn--primary {
-    padding-top: rem(3px);
+    padding-top: calc(0.375rem - 3px);
+    padding-bottom: calc(0.375rem - 3px);
     height: rem(32px);
+    min-height: auto;
   }
 
   .#{$prefix}--table-toolbar--small
@@ -572,7 +603,6 @@
     .#{$prefix}--toolbar-action
     ~ .#{$prefix}--btn {
     height: rem(32px);
-    width: rem(160px);
     overflow: hidden;
   }
 }

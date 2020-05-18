@@ -53,7 +53,7 @@ module.exports = {
       },
     },
     {
-      name: 'low-contrast',
+      name: 'inline-low-contrast',
       label: 'Inline Notification (Low contrast)',
       context: {
         variant: 'inline',
@@ -75,7 +75,7 @@ module.exports = {
       },
     },
     {
-      name: 'low-contrast',
+      name: 'toast-low-contrast',
       label: 'Toast Notification (Low contrast)',
       notes: `
         Toast notifications are typically passive, meaning they won't affect the user's workflow if not addressed.

@@ -84,8 +84,9 @@ Instead of using a type scale, `@carbon/type` provides tokens that represent
 what we call type styles. These tokens have a variety of properties for styling
 how text is rendered on a page.
 
-You can find a full reference of the type styles that are available
-[here](https://next.carbondesignsystem.com/guidelines/typography/productive) .
+You can find a full reference of the type styles that are available on the
+[Carbon Design System website](https://www.carbondesignsystem.com/guidelines/typography/productive)
+.
 
 You can include a token in your Sass file by writing:
 

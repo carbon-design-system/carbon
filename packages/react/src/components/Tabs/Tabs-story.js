@@ -8,12 +8,28 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  number,
+  select,
+  text,
+} from '@storybook/addon-knobs';
+import { settings } from 'carbon-components';
+import classNames from 'classnames';
+import './Tabs-story.scss';
+import CodeSnippet from '../CodeSnippet';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
+import TextInput from '../TextInput';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
 
+const selectionModes = {
+  'Change selection automatically upon focus (automatic)': 'automatic',
+  'Change selection on explicit gesture (manual)': 'manual',
+};
+
+const { prefix } = settings;
 const props = {
   tabs: () => ({
     className: 'some-class',
@@ -27,12 +43,18 @@ const props = {
       'The description of the trigger icon for narrow mode (iconDescription in <Tabs>)',
       'show menu options'
     ),
-    onClick: action('onClick'),
+    // Disabling action logger for `<Tabs onClick>` for now given it seems to be significantly slowing down Storybook
+    // onClick: action('onClick'),
     onKeyDown: action('onKeyDown'),
     onSelectionChange: action('onSelectionChange'),
     tabContentClassName: text(
       'The className for the child `<TabContent>` components',
       'tab-content'
+    ),
+    selectionMode: select(
+      'Selection mode (selectionMode)',
+      selectionModes,
+      'automatic'
     ),
   }),
   tab: () => ({
@@ -47,9 +69,43 @@ const props = {
 
 const CustomLabel = ({ text }) => <>{text}</>;
 
-const TabContentRenderedOnlyWhenSelected = ({ selected, children, ...other }) =>
-  !selected ? null : (
-    <div {...other} selected={selected}>
+const CodeSnippetExample = () => (
+  <CodeSnippet type="multi">
+    {`@mixin grid-container {
+  width: 100%;
+  padding-right: padding(mobile);
+  padding-left: padding(mobile);
+  @include breakpoint(bp--xs--major) {
+    padding-right: padding(xs);
+    padding-left: padding(xs);
+  }
+}
+$z-indexes: (
+  modal : 9000,
+  overlay : 8000,
+  dropdown : 7000,
+  header : 6000,
+  footer : 5000,
+  hidden : - 1,
+  overflowHidden: - 1,
+  floating: 10000
+);`}
+  </CodeSnippet>
+);
+
+const TabContentRenderedOnlyWhenSelected = ({
+  selected,
+  children,
+  className,
+  ...other
+}) =>
+  !selected ? (
+    <div {...other} className={`${prefix}--visually-hidden`} />
+  ) : (
+    <div
+      {...other}
+      className={classNames(className, `${prefix}--tab-content`)}
+      selected={selected}>
       {children}
     </div>
   );
@@ -60,27 +116,91 @@ storiesOf('Tabs', module)
     'Default',
     () => (
       <Tabs {...props.tabs()}>
-        <Tab {...props.tab()} label="Tab label 1">
-          <div className="some-content" style={{ paddingLeft: 16 }}>
-            Content for first tab goes here.
+        <Tab id="tab-1" {...props.tab()} label="Tab label 1">
+          <div className="some-content">
+            <p>Content for first tab goes here.</p>
           </div>
         </Tab>
-        <Tab {...props.tab()} label="Tab label 2">
-          <div className="some-content" style={{ paddingLeft: 16 }}>
-            Content for second tab goes here.
+        <Tab id="tab-2" {...props.tab()} label="Tab label 2">
+          <div className="some-content">
+            <p>Content for second tab goes here.</p>
+          </div>
+        </Tab>
+        <Tab id="tab-3" {...props.tab()} label="Tab label 3" disabled>
+          <div className="some-content">
+            <p>Content for third tab goes here.</p>
           </div>
         </Tab>
         <Tab
+          id="tab-4"
+          {...props.tab()}
+          label="Tab label 4"
+          renderContent={TabContentRenderedOnlyWhenSelected}>
+          <div className="some-content">
+            <p>Content for fourth tab goes here.</p>
+            <p>
+              This example uses the&nbsp;
+              <CodeSnippet type="inline">renderContent</CodeSnippet> prop to
+              re-render content when the tab is selected.
+            </p>
+            <CodeSnippetExample />
+          </div>
+        </Tab>
+        <Tab
+          id="tab-5"
+          {...props.tab()}
+          label={<CustomLabel text="Custom Label" />}>
+          <div className="some-content">
+            <p>Content for fifth tab goes here.</p>
+          </div>
+        </Tab>
+      </Tabs>
+    ),
+    {
+      info: {
+        text: `
+            Tabs are used to quickly navigate between views within the same context. Create individual
+            Tab components for each item in the Tabs list.
+          `,
+      },
+    }
+  )
+  .add(
+    'Container',
+    () => (
+      <Tabs type="container" {...props.tabs()}>
+        <Tab id="tab-1" {...props.tab()} label="Tab label 1">
+          <div className="some-content">
+            <p>Content for first tab goes here.</p>
+          </div>
+        </Tab>
+        <Tab id="tab-2" {...props.tab()} label="Tab label 2">
+          <div className="some-content">
+            <p>Content for second tab goes here.</p>
+          </div>
+        </Tab>
+        <Tab
+          id="tab-3"
           {...props.tab()}
           label="Tab label 3"
           renderContent={TabContentRenderedOnlyWhenSelected}>
-          <div className="some-content" style={{ paddingLeft: 16 }}>
-            Content for third tab goes here.
+          <div className="some-content">
+            <p>Content for third tab goes here.</p>
+            <p>
+              This example uses the&nbsp;
+              <CodeSnippet type="inline">renderContent</CodeSnippet> prop to
+              re-render content when the tab is selected.
+            </p>
+            <CodeSnippetExample />
           </div>
         </Tab>
-        <Tab {...props.tab()} label={<CustomLabel text="Custom Label" />}>
-          <div className="some-content" style={{ paddingLeft: 16 }}>
-            Content for fourth tab goes here.
+        <Tab
+          id="tab-4"
+          {...props.tab()}
+          label={<CustomLabel text="Custom Label" />}>
+          <div className="some-content">
+            <p>Content for fourth tab goes here.</p>
+            <TextInput light id="sample-input" labelText="Text Input Label" />
           </div>
         </Tab>
       </Tabs>

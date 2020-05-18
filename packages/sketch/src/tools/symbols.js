@@ -10,14 +10,14 @@ import { SymbolMaster } from 'sketch/dom';
 /**
  * Sync the given symbol name with a corresponding config in a document. Will
  * return a new symbol if none exist with the given name.
- * @param {Document} document
+ * @param {Array<SymbolMaster>} symbols
+ * @param {Array<SharedLayerStyles>} sharedLayerStyles
  * @param {string} name - the name of the symbol
  * @param {object} config - the config for the corresponding symbol master
  * @returns {SketchSymbol}
  */
-export function syncSymbol(document, name, config) {
-  const symbols = document.getSymbols();
-  const symbol = Array.from(symbols).find(symbol => symbol.name === name);
+export function syncSymbol(symbols, sharedLayerStyles, name, config) {
+  const symbol = symbols.find(symbol => symbol.name === name);
 
   if (!symbol) {
     return new SymbolMaster({
@@ -28,7 +28,7 @@ export function syncSymbol(document, name, config) {
 
   Object.keys(config).forEach(key => {
     if (key === 'layers') {
-      syncSymbolLayers(document, symbol, config);
+      syncSymbolLayers(sharedLayerStyles, symbol, config);
     } else {
       symbol[key] = config[key];
     }
@@ -42,12 +42,12 @@ export function syncSymbol(document, name, config) {
  * configuration for this symbol. We will try our best to update the layers for
  * the original symbol, but may have to de-opt and use the proposed layers if we
  * cannot safely merge the two.
- * @param {Document} document
+ * @param {Array<SharedLayerStyle>} sharedLayerStyles
  * @param {SketchSymbol} original - the original sketch symbol master
  * @param {object} proposed - a proposed set of changes to the symbol
  * @returns {void}
  */
-function syncSymbolLayers(document, original, proposed) {
+function syncSymbolLayers(sharedLayerStyles, original, proposed) {
   // We're going to update the `layers` value on `original` to what is found on
   // `proposed`. If we can, we'll update the `original` layer in-place. In cases
   // where we cannot, we'll use the proposed layers.
@@ -84,12 +84,16 @@ function syncSymbolLayers(document, original, proposed) {
 
       // If our original layer has a shared style, we'll update it to match
       if (originalLayer.sharedStyleId) {
-        const sharedStyle = document.sharedLayerStyles.find(sharedStyle => {
+        const sharedStyle = sharedLayerStyles.find(sharedStyle => {
           return originalLayer.sharedStyleId === sharedStyle.id;
         });
 
         if (sharedStyle) {
+          const opacity = originalLayer.style.opacity;
           originalLayer.style.syncWithSharedStyle(sharedStyle);
+          // We'll want to keep things like opacity from being overridden by the
+          // shared style as we use it to hide layers in certain icons
+          originalLayer.style.opacity = opacity;
         }
       }
 

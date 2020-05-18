@@ -16,11 +16,22 @@ import eventMatches from '../../globals/js/misc/event-matches';
 const forEach = /* #__PURE__ */ (() => Array.prototype.forEach)();
 const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
-export default class HeaderSubmenu extends mixin(
+class HeaderSubmenu extends mixin(
   createComponent,
   initComponentBySearch,
   handles
 ) {
+  /**
+   * Sub menus in header nav.
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
+   * @extends Handles
+   * @param {HTMLElement} element The element working as a submenu in header nav.
+   * @param {object} [options] The component options.
+   * @param {string} [options.selectorTrigger] The CSS selector to find the trigger button.
+   * @param {string} [options.selectorItem] The CSS selector to find the menu items.
+   * @param {string} [options.attribExpanded] The attribute that represents the expanded/collapsed state.
+   */
   constructor(element, options) {
     super(element, options);
     const hasFocusOut = 'onfocusout' in window;
@@ -282,6 +293,9 @@ export default class HeaderSubmenu extends mixin(
    * @member HeaderSubmenu.options
    * @type {object}
    * @property {string} selectorInit The data attribute to find side navs.
+   * @property {string} [selectorTrigger] The CSS selector to find the trigger button.
+   * @property {string} [selectorItem] The CSS selector to find the menu items.
+   * @property {string} [attribExpanded] The attribute that represents the expanded/collapsed state.
    */
   static get options() {
     const { prefix } = settings;
@@ -297,7 +311,7 @@ export default class HeaderSubmenu extends mixin(
    * Enum for navigating backward/forward.
    * @readonly
    * @member HeaderSubmenu.NAVIGATE
-   * @type {Object}
+   * @type {object}
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
    */
@@ -306,3 +320,5 @@ export default class HeaderSubmenu extends mixin(
     FORWARD: 1,
   };
 }
+
+export default HeaderSubmenu;

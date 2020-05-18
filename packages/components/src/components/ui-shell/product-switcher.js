@@ -3,9 +3,11 @@ import on from '../../globals/js/misc/on';
 import settings from '../../globals/js/settings';
 import onFocusOutByKeyboard from '../../globals/js/misc/on-focus-by-keyboard';
 
-export default class ProductSwitcher extends NavigationMenuPanel {
+let seq = 0;
+
+class ProductSwitcher extends NavigationMenuPanel {
   /**
-   * A navigation menu
+   * A navigation menu.
    * @extends NavigationMenuPanel
    * @param {HTMLElement} element The element working as a selector.
    * @param {object} [options] The component options.
@@ -80,9 +82,7 @@ export default class ProductSwitcher extends NavigationMenuPanel {
     );
     const launcher = event.delegateTarget;
     if (!launcher.id) {
-      launcher.id = `__carbon-product-switcher-launcher-${Math.random()
-        .toString(36)
-        .substr(2)}`;
+      launcher.id = `__carbon-product-switcher-launcher-${seq++}`;
     }
     const current = launcher.id;
     this.changeState(
@@ -195,3 +195,5 @@ export default class ProductSwitcher extends NavigationMenuPanel {
     });
   }
 }
+
+export default ProductSwitcher;

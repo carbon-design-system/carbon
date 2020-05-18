@@ -22,26 +22,27 @@ describe('NumberInput', () => {
     let formItem;
     let icons;
     let helper;
+    let mockProps;
 
     beforeEach(() => {
-      wrapper = mount(
-        <NumberInput
-          min={0}
-          max={100}
-          id="test"
-          label="Number Input"
-          className="extra-class"
-          invalidText="invalid text"
-          helperText="testHelper"
-          translateWithId={
-            /*
-              Simulates a condition where up/down button's hover over text matches `iconDescription` in `v10`,
-              which is, when the translation for up/down button are not there
-            */
-            () => undefined
-          }
-        />
-      );
+      mockProps = {
+        min: 0,
+        max: 100,
+        id: 'test',
+        label: 'Number Input',
+        ariaLabel: 'Number Input',
+        className: 'extra-class',
+        invalidText: 'invalid text',
+        helperText: 'testHelper',
+        translateWithId:
+          /*
+          Simulates a condition where up/down button's hover over text matches `iconDescription` in `v10`,
+          which is, when the translation for up/down button are not there
+        */
+          () => undefined,
+      };
+
+      wrapper = mount(<NumberInput {...mockProps} />);
 
       const iconTypes = [CaretDownGlyph, CaretUpGlyph];
       label = wrapper.find('label');
@@ -100,6 +101,16 @@ describe('NumberInput', () => {
         wrapper.setProps({ invalid: true });
         expect(wrapper.find(`.${prefix}--number`).prop('data-invalid')).toEqual(
           true
+        );
+      });
+
+      it('should apply aria-label based on the label', () => {
+        const getInputRegion = () => wrapper.find('input');
+        expect(getInputRegion().prop('aria-label')).toEqual(null);
+
+        wrapper.setProps({ label: '' });
+        expect(getInputRegion().prop('aria-label')).toEqual(
+          mockProps.ariaLabel
         );
       });
 
@@ -187,8 +198,23 @@ describe('NumberInput', () => {
             .find('NumberInput')
             .instance()
             .setState({ value: '' });
+
           wrapper.update();
           wrapper.setProps({ allowEmpty: true });
+          const invalidText = wrapper.find(`.${prefix}--form-requirement`);
+          expect(invalidText.length).toEqual(0);
+        });
+
+        it('should allow updating the value with empty string and not be invalid', () => {
+          // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
+          wrapper
+            .find('NumberInput')
+            .instance()
+            .setState({ value: 50 });
+
+          wrapper.update();
+          wrapper.setProps({ value: '', allowEmpty: true });
+          wrapper.update();
           const invalidText = wrapper.find(`.${prefix}--form-requirement`);
           expect(invalidText.length).toEqual(0);
         });
@@ -225,7 +251,8 @@ describe('NumberInput', () => {
           );
         });
 
-        it('should avoid capping when non-number prop is given to value prop', () => {
+        // NumberInput propTypes do not allow a string to be passed
+        it.skip('should avoid capping when non-number prop is given to value prop', () => {
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
           wrapper
             .find('NumberInput')

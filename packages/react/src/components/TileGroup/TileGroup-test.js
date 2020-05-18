@@ -14,8 +14,8 @@ describe('TileGroup', () => {
   describe('renders as expected', () => {
     const wrapper = mount(
       <TileGroup defaultSelected="female" name="gender">
-        <RadioTile labelText="Male" value="male" />
-        <RadioTile labelText="Female" value="female" />
+        <RadioTile value="male" />
+        <RadioTile value="female" />
       </TileGroup>
     );
 

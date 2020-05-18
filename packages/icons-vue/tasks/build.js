@@ -5,13 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable no-console */
-
 'use strict';
 
-const path = require('path');
-const build = require('../src/build');
+const { builders } = require('@carbon/icon-build-helpers');
+const metadata = require('@carbon/icons/metadata.json');
 
-build({ cwd: path.resolve(__dirname, '../') }).catch(error => {
-  console.log(error);
+async function build() {
+  await builders.vue.run(metadata, {
+    output: process.cwd(),
+  });
+}
+
+build().catch(error => {
+  console.error(error);
+  process.exit(1);
 });

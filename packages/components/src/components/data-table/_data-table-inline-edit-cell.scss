@@ -7,7 +7,6 @@
 
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
-@import '../../globals/scss/layer';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/vars';
 
@@ -22,7 +21,7 @@
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
-  visibility: visible;
+  visibility: inherit;
   white-space: nowrap;
 }
 
@@ -206,7 +205,7 @@
   $size--edit-actions--height: 3rem;
 
   .#{$prefix}--data-table__edit-actions {
-    @include layer('overlay');
+    @include box-shadow;
 
     display: flex;
     justify-content: flex-end;
@@ -291,12 +290,12 @@
   }
 
   .#{$prefix}--data-table__error-text {
-    @include layer('overlay');
+    @include box-shadow;
 
     position: absolute;
     top: rem(-1px);
     right: -1rem;
-    color: $support-01;
+    color: $text-error;
     // TODO: sync with caption sizes
     font-size: rem(12px);
     background-color: $inverse-01;

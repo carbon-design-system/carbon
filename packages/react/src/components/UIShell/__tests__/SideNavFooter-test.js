@@ -15,7 +15,7 @@ describe('SideNavFooter', () => {
   beforeEach(() => {
     mockProps = {
       assistiveText: 'open',
-      isExpanded: false,
+      expanded: false,
       onToggle: jest.fn(),
     };
   });

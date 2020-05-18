@@ -3,6 +3,7 @@
 exports[`DataTable.TableExpandHeader should render 1`] = `
 <Table
   isSortable={false}
+  overflowMenuOnHover={true}
 >
   <table
     className="bx--data-table bx--data-table--no-border"
@@ -12,7 +13,10 @@ exports[`DataTable.TableExpandHeader should render 1`] = `
         <TableRow>
           <tr>
             <TableExpandHeader
+              ariaLabel="test-label"
               className="custom-class"
+              isExpanded={false}
+              onExpand={[MockFunction]}
             >
               <th
                 className="bx--table-expand custom-class"

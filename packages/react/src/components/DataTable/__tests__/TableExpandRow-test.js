@@ -26,7 +26,7 @@ describe('DataTable.TableExpandRow', () => {
       <Table>
         <TableBody>
           <TableExpandRow {...mockProps} />
-          <TableExpandedRow />
+          <TableExpandedRow colSpan={1} />
         </TableBody>
       </Table>
     );
@@ -38,7 +38,7 @@ describe('DataTable.TableExpandRow', () => {
       <Table>
         <TableBody>
           <TableExpandRow {...mockProps} />
-          <TableExpandedRow />
+          <TableExpandedRow colSpan={1} />
         </TableBody>
       </Table>
     );
@@ -63,7 +63,7 @@ describe('DataTable.TableExpandRow', () => {
       <Table>
         <TableBody>
           <TableExpandRow {...mockProps} />
-          <TableExpandedRow />
+          <TableExpandedRow colSpan={1} />
         </TableBody>
       </Table>
     );
@@ -74,7 +74,7 @@ describe('DataTable.TableExpandRow', () => {
       <Table>
         <TableBody>
           <TableExpandRow {...mockProps} isExpanded />
-          <TableExpandedRow />
+          <TableExpandedRow colSpan={1} />
         </TableBody>
       </Table>
     );

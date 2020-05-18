@@ -15,7 +15,7 @@ import CodeSnippetSkeleton from './CodeSnippet.Skeleton';
 const props = {
   inline: () => ({
     light: boolean('Light variant (light)', false),
-    feedback: text('Feedback text (feedback)', 'Feedback Enabled 👍'),
+    feedback: text('Feedback text (feedback)', 'Copied to clipboard'),
     onClick: action('onClick'),
     copyLabel: text(
       'ARIA label for the snippet/copy button (copyLabel)',
@@ -23,16 +23,21 @@ const props = {
     ),
   }),
   single: () => ({
-    feedback: text('Feedback text (feedback)', 'Feedback Enabled 👍'),
+    light: boolean('Light variant (light)', false),
+    feedback: text('Feedback text (feedback)', 'Copied to clipboard'),
     copyButtonDescription: text(
       'Copy icon description (copyButtonDescription)',
-      ''
+      'copyable code snippet'
     ),
-    ariaLabel: text('ARIA label of the container (ariaLabel)', ''),
+    ariaLabel: text(
+      'ARIA label of the container (ariaLabel)',
+      'Container label'
+    ),
     onClick: action('onClick'),
   }),
   multiline: () => ({
-    feedback: text('Feedback text (feedback)', 'Feedback Enabled 👍'),
+    light: boolean('Light variant (light)', false),
+    feedback: text('Feedback text (feedback)', 'Copied to clipboard'),
     showMoreText: text(
       'Text for "show more" button (showMoreText)',
       'Show more'
@@ -45,12 +50,33 @@ const props = {
   }),
 };
 
+const lightPropMessage = (
+  <small style={{ display: 'block', paddingBottom: '1rem' }}>
+    The snippet container should never be the same color as the page background.
+    <br />
+    {'Do not use the '}
+    <CodeSnippet type="inline" light>
+      light
+    </CodeSnippet>
+    {' variant on '}
+    <CodeSnippet type="inline" light>
+      $ui-background
+    </CodeSnippet>
+    {' or '}
+    <CodeSnippet type="inline" light>
+      $ui-02
+    </CodeSnippet>
+    .
+  </small>
+);
+
 storiesOf('CodeSnippet', module)
   .addDecorator(withKnobs)
   .add(
     'inline',
     () => (
-      <div>
+      <div className={props.inline().light ? 'bx--tile' : ''}>
+        {props.inline().light && lightPropMessage}
         <CodeSnippet type="inline" {...props.inline()}>
           {'node -v'}
         </CodeSnippet>
@@ -60,7 +86,7 @@ storiesOf('CodeSnippet', module)
       info: {
         text: `
         Code snippets are small blocks of reusable code that can be inserted in a code file.
-  
+
         The Inline style is for code used within a block of text.
       `,
       },
@@ -69,17 +95,20 @@ storiesOf('CodeSnippet', module)
   .add(
     'single line',
     () => (
-      <CodeSnippet type="single" {...props.single()}>
-        {
-          'node -v Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, veritatis voluptate id incidunt molestiae officia possimus, quasi itaque alias, architecto hic, dicta fugit? Debitis delectus quidem explicabo vitae fuga laboriosam!'
-        }
-      </CodeSnippet>
+      <div className={props.single().light ? 'bx--tile' : ''}>
+        {props.single().light && lightPropMessage}
+        <CodeSnippet type="single" {...props.single()}>
+          {
+            'node -v Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, veritatis voluptate id incidunt molestiae officia possimus, quasi itaque alias, architecto hic, dicta fugit? Debitis delectus quidem explicabo vitae fuga laboriosam!'
+          }
+        </CodeSnippet>
+      </div>
     ),
     {
       info: {
         text: `
           Code snippets are small blocks of reusable code that can be inserted in a code file.
-  
+
           The Code style is for larger, multi-line code snippets.
         `,
       },
@@ -90,7 +119,10 @@ storiesOf('CodeSnippet', module)
     () => {
       const multilineProps = props.multiline();
       return (
-        <div style={{ width: '800px' }}>
+        <div
+          className={multilineProps.light ? 'bx--tile' : ''}
+          style={{ width: '800px' }}>
+          {multilineProps.light && lightPropMessage}
           <CodeSnippet type="multi" {...multilineProps}>
             {`@mixin grid-container {
   width: 100%;
@@ -133,7 +165,7 @@ $z-indexes: (
       info: {
         text: `
           Code snippets are small blocks of reusable code that can be inserted in a code file.
-  
+
           The Terminal style is for single-line .
         `,
       },

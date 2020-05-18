@@ -30,40 +30,47 @@ const items = [
     id: 'option-4',
     text: 'Option 4',
   },
+  {
+    id: 'option-5',
+    text:
+      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.',
+  },
 ];
 
-const stringItems = ['Option 1', 'Option 2', 'Option 3'];
+const stringItems = [
+  'Option 1',
+  'Option 2',
+  'Option 3',
+  'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.',
+];
 
-const types = {
-  'Default (default)': 'default',
-  'Inline (inline)': 'inline',
+const sizes = {
+  'Extra large size (xl)': 'xl',
+  'Default size': undefined,
+  'Small size (sm)': 'sm',
+};
+
+const directions = {
+  'Bottom (default)': 'bottom',
+  'Top ': 'top',
 };
 
 const props = () => ({
   id: text('Dropdown ID (id)', 'carbon-dropdown-example'),
-  type: select('Dropdown type (type)', types, 'default'),
+  size: select('Field size (size)', sizes, undefined) || undefined,
+  direction: select('Dropdown direction (direction)', directions, 'bottom'),
   label: text('Label (label)', 'Dropdown menu options'),
   ariaLabel: text('Aria Label (ariaLabel)', 'Dropdown'),
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
-  titleText: text('Title (titleText)', 'This is not a dropdown title.'),
-  helperText: text('Helper text (helperText)', 'This is not some helper text.'),
+  titleText: text('Title (titleText)', 'This is a dropdown title.'),
+  helperText: text('Helper text (helperText)', 'This is some helper text.'),
   invalid: boolean('Show form validation UI (invalid)', false),
   invalidText: text(
     'Form validation UI content (invalidText)',
     'A valid value is required'
   ),
 });
-
-const itemToElement = item => {
-  const itemAsArray = item.text.split(' ');
-  return (
-    <div>
-      <span>{itemAsArray[0]}</span>
-      <span style={{ color: 'red' }}> {itemAsArray[1]}</span>
-    </div>
-  );
-};
 
 storiesOf('Dropdown', module)
   .addDecorator(withKnobs)
@@ -86,9 +93,28 @@ storiesOf('Dropdown', module)
     }
   )
   .add(
+    'inline',
+    () => (
+      <div style={{ width: 600 }}>
+        <Dropdown
+          {...props()}
+          type="inline"
+          items={items}
+          itemToString={item => (item ? item.text : '')}
+          onChange={action('onChange')}
+        />
+      </div>
+    ),
+    {
+      info: {
+        text: 'Dropdown',
+      },
+    }
+  )
+  .add(
     'items as strings',
     () => (
-      <div style={{ width: 300 }}>
+      <div style={props.inline ? { width: 500 } : { width: 300 }}>
         <Dropdown
           {...props()}
           items={stringItems}
@@ -99,25 +125,6 @@ storiesOf('Dropdown', module)
     {
       info: {
         text: 'Rendering an array of strings as `items`',
-      },
-    }
-  )
-  .add(
-    'items as components',
-    () => (
-      <div style={{ width: 300 }}>
-        <Dropdown
-          {...props()}
-          items={items}
-          itemToString={item => (item ? item.text : '')}
-          itemToElement={itemToElement}
-          onChange={action('onChange')}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: `Rendering items as custom components`,
       },
     }
   )

@@ -6,14 +6,25 @@
  */
 
 import React from 'react';
-import { ChevronDownGlyph } from '@carbon/icons-react';
+import { ChevronDown16 } from '@carbon/icons-react';
+import { settings } from 'carbon-components';
+import { shallow, mount } from 'enzyme';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
-import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
 const { prefix } = settings;
+
+window.matchMedia = jest.fn().mockImplementation(query => ({
+  matches: true,
+  media: query,
+  onchange: null,
+  addListener: jest.fn(), // deprecated
+  removeListener: jest.fn(), // deprecated
+  addEventListener: jest.fn(),
+  removeEventListener: jest.fn(),
+  dispatchEvent: jest.fn(),
+}));
 
 describe('Tabs', () => {
   describe('renders as expected', () => {
@@ -49,6 +60,26 @@ describe('Tabs', () => {
             .hasClass(`${prefix}--tabs`)
         ).toBe(true);
       });
+
+      it('supports container variant', () => {
+        expect(
+          shallow(
+            <Tabs className="extra-class" type="container">
+              <Tab label="firstTab">content1</Tab>
+              <Tab label="lastTab">content2</Tab>
+            </Tabs>
+          )
+            .find('div')
+            .first()
+            .hasClass(`${prefix}--tabs--container`)
+        ).toBe(true);
+      });
+
+      it('has no selectionMode prop', () => {
+        expect(
+          'selectionMode' in wrapper.find(`.${prefix}--tabs`).props()
+        ).toBe(false);
+      });
     });
 
     describe('Trigger (<div>)', () => {
@@ -77,7 +108,7 @@ describe('Tabs', () => {
       });
 
       it('renders <Icon>', () => {
-        expect(trigger.find(ChevronDownGlyph).length).toBe(1);
+        expect(trigger.find(ChevronDown16).length).toBe(1);
       });
     });
 
@@ -184,40 +215,56 @@ describe('Tabs', () => {
     });
 
     describe('keydown', () => {
-      const wrapper = mount(
-        <Tabs selected={0}>
-          <Tab label="firstTab" className="firstTab">
-            content
-          </Tab>
-          <Tab label="lastTab" className="lastTab">
-            content
-          </Tab>
-        </Tabs>
-      );
-
-      const firstTab = wrapper.find('.firstTab').last();
-      const lastTab = wrapper.find('.lastTab').last();
       const leftKey = 37;
       const rightKey = 39;
       const spaceKey = 32;
       const enterKey = 13;
 
+      let wrapper;
+      let firstTab;
+      let lastTab;
+      let anchorInFirstTab;
+      let anchorInLastTab;
+      let spyFocusAnchorInFirstTab;
+      let spyFocusAnchorInLastTab;
+
       describe('state: selected', () => {
+        beforeEach(() => {
+          wrapper = mount(
+            <Tabs selected={0}>
+              <Tab label="firstTab" className="firstTab">
+                content
+              </Tab>
+              <Tab label="lastTab" className="lastTab">
+                content
+              </Tab>
+            </Tabs>
+          );
+          firstTab = wrapper.find('.firstTab').last();
+          lastTab = wrapper.find('.lastTab').last();
+          anchorInFirstTab = firstTab.find('a').getDOMNode();
+          anchorInLastTab = lastTab.find('a').getDOMNode();
+        });
+
         it('updates selected state when pressing arrow keys', () => {
+          spyFocusAnchorInFirstTab = jest.spyOn(anchorInFirstTab, 'focus');
+          spyFocusAnchorInLastTab = jest.spyOn(anchorInLastTab, 'focus');
           firstTab.simulate('keydown', { which: rightKey });
-          expect(wrapper.state().selected).toEqual(1);
+          expect(spyFocusAnchorInLastTab).toHaveBeenCalled();
           lastTab.simulate('keydown', { which: leftKey });
-          expect(wrapper.state().selected).toEqual(0);
+          expect(spyFocusAnchorInFirstTab).toHaveBeenCalled();
         });
 
         it('loops focus and selected state from lastTab to firstTab', () => {
+          spyFocusAnchorInFirstTab = jest.spyOn(anchorInFirstTab, 'focus');
           lastTab.simulate('keydown', { which: rightKey });
-          expect(wrapper.state().selected).toEqual(0);
+          expect(spyFocusAnchorInFirstTab).toHaveBeenCalled();
         });
 
         it('loops focus and selected state from firstTab to lastTab', () => {
+          spyFocusAnchorInLastTab = jest.spyOn(anchorInLastTab, 'focus');
           firstTab.simulate('keydown', { which: leftKey });
-          expect(wrapper.state().selected).toEqual(1);
+          expect(spyFocusAnchorInLastTab).toHaveBeenCalled();
         });
 
         it('updates selected state when pressing space or enter key', () => {
@@ -226,6 +273,67 @@ describe('Tabs', () => {
           lastTab.simulate('keydown', { which: enterKey });
           expect(wrapper.state().selected).toEqual(1);
         });
+      });
+
+      describe('ignore disabled child tab', () => {
+        beforeEach(() => {
+          wrapper = mount(
+            <Tabs>
+              <Tab label="firstTab" className="firstTab">
+                content1
+              </Tab>
+              <Tab label="middleTab" className="middleTab" disabled>
+                content2
+              </Tab>
+              <Tab label="lastTab" className="lastTab">
+                content3
+              </Tab>
+            </Tabs>
+          );
+          firstTab = wrapper.find('.firstTab').last();
+          lastTab = wrapper.find('.lastTab').last();
+          anchorInFirstTab = firstTab.find('a').getDOMNode();
+          anchorInLastTab = lastTab.find('a').getDOMNode();
+        });
+        it('updates selected state when pressing arrow keys', () => {
+          spyFocusAnchorInFirstTab = jest.spyOn(anchorInFirstTab, 'focus');
+          spyFocusAnchorInLastTab = jest.spyOn(anchorInLastTab, 'focus');
+          firstTab.simulate('keydown', { which: rightKey });
+          expect(spyFocusAnchorInLastTab).toHaveBeenCalled();
+          lastTab.simulate('keydown', { which: leftKey });
+          expect(spyFocusAnchorInFirstTab).toHaveBeenCalled();
+        });
+
+        it('loops focus and selected state from lastTab to firstTab', () => {
+          spyFocusAnchorInFirstTab = jest.spyOn(anchorInFirstTab, 'focus');
+          wrapper.setState({ selected: 2 });
+          lastTab.simulate('keydown', { which: rightKey });
+          expect(spyFocusAnchorInFirstTab).toHaveBeenCalled();
+        });
+
+        it('loops focus and selected state from firstTab to lastTab', () => {
+          spyFocusAnchorInLastTab = jest.spyOn(anchorInLastTab, 'focus');
+          firstTab.simulate('keydown', { which: leftKey });
+          expect(spyFocusAnchorInLastTab).toHaveBeenCalled();
+        });
+
+        it('updates selected state when pressing space or enter key', () => {
+          firstTab.simulate('keydown', { which: spaceKey });
+          expect(wrapper.state().selected).toEqual(0);
+          lastTab.simulate('keydown', { which: enterKey });
+          expect(wrapper.state().selected).toEqual(2);
+        });
+      });
+
+      afterEach(() => {
+        if (spyFocusAnchorInLastTab) {
+          spyFocusAnchorInLastTab.mockRestore();
+          spyFocusAnchorInLastTab = null;
+        }
+        if (spyFocusAnchorInFirstTab) {
+          spyFocusAnchorInFirstTab.mockRestore();
+          spyFocusAnchorInFirstTab = null;
+        }
       });
     });
   });

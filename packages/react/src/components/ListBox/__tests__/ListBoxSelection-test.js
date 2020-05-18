@@ -37,4 +37,36 @@ describe('ListBoxSelection', () => {
     mount(<ListBox.Selection {...mockProps} selectionCount={3} />);
     expect(mockProps.translateWithId).toHaveBeenCalledWith('clear.all');
   });
+
+  it('should call clearSelection when clicked', () => {
+    const wrapper = mount(<ListBox.Selection {...mockProps} />);
+    wrapper.simulate('click');
+    expect(mockProps.clearSelection).toHaveBeenCalled();
+  });
+
+  it('should call clearSelection on Enter keydown', () => {
+    const wrapper = mount(<ListBox.Selection {...mockProps} />);
+    wrapper.simulate('keydown', {
+      key: 'Enter',
+      keyCode: 13,
+      which: 13,
+    });
+    expect(mockProps.clearSelection).toHaveBeenCalled();
+  });
+
+  it('should not clearSelection on click when disabled', () => {
+    const wrapper = mount(<ListBox.Selection {...mockProps} disabled={true} />);
+    wrapper.simulate('click');
+    expect(mockProps.clearSelection).toHaveBeenCalledTimes(0);
+  });
+
+  it('should not call clearSelection on Enter keydown when disabled', () => {
+    const wrapper = mount(<ListBox.Selection {...mockProps} disabled={true} />);
+    wrapper.simulate('keydown', {
+      key: 'Enter',
+      keyCode: 13,
+      which: 13,
+    });
+    expect(mockProps.clearSelection).toHaveBeenCalledTimes(0);
+  });
 });

@@ -12,9 +12,18 @@ import React from 'react';
 
 const { prefix } = settings;
 
-const SideNavItems = ({ className: customClassName, children }) => {
+const SideNavItems = ({
+  className: customClassName,
+  children,
+  isSideNavExpanded,
+}) => {
   const className = cx([`${prefix}--side-nav__items`], customClassName);
-  return <ul className={className}>{children}</ul>;
+  const childrenWithExpandedState = React.Children.map(children, child => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, { isSideNavExpanded });
+    }
+  });
+  return <ul className={className}>{childrenWithExpandedState}</ul>;
 };
 
 SideNavItems.propTypes = {
@@ -28,6 +37,12 @@ SideNavItems.propTypes = {
    * container
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded: PropTypes.bool,
 };
 
 export default SideNavItems;

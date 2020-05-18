@@ -7,6 +7,7 @@
 
 import React from 'react';
 import OverflowMenu from '../OverflowMenu';
+import OverflowMenuItem from '../OverflowMenuItem';
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
@@ -17,11 +18,11 @@ describe('OverflowMenu', () => {
   describe('Renders as expected', () => {
     const rootWrapper = mount(
       <OverflowMenu className="extra-class">
-        <div className="test-child" />
-        <div className="test-child" />
+        <OverflowMenuItem className="test-child">one</OverflowMenuItem>
+        <OverflowMenuItem className="test-child">two</OverflowMenuItem>
       </OverflowMenu>
     );
-    const menu = rootWrapper.find(`div.${prefix}--overflow-menu`);
+    const menu = rootWrapper.find(`button.${prefix}--overflow-menu`);
     const icon = menu.find(OverflowMenuVertical16);
 
     it('should render an Icon', () => {
@@ -51,21 +52,23 @@ describe('OverflowMenu', () => {
       rootWrapper.setProps({ tabIndex: 2 });
 
       expect(
-        rootWrapper.find(`div.${prefix}--overflow-menu`).props().tabIndex
+        rootWrapper.find(`button.${prefix}--overflow-menu`).props().tabIndex
       ).toEqual(2);
     });
 
     it('should set ariaLabel if one is passed via props', () => {
       rootWrapper.setProps({ ariaLabel: 'test label' });
       expect(
-        rootWrapper.find(`div.${prefix}--overflow-menu`).props()['aria-label']
+        rootWrapper.find(`button.${prefix}--overflow-menu`).props()[
+          'aria-label'
+        ]
       ).toEqual('test label');
     });
 
     it('should set id if one is passed via props', () => {
       rootWrapper.setProps({ id: 'uniqueId' });
       expect(
-        rootWrapper.find(`div.${prefix}--overflow-menu`).props().id
+        rootWrapper.find(`button.${prefix}--overflow-menu`).props().id
       ).toEqual('uniqueId');
     });
 
@@ -79,6 +82,28 @@ describe('OverflowMenu', () => {
       expect(defaultMenu.find('OverflowMenu').instance().props.tabIndex).toBe(
         0
       );
+    });
+    it('should specify light version as expected', () => {
+      rootWrapper.setProps({ light: true });
+      expect(rootWrapper.props().light).toEqual(true);
+    });
+    it('should add light modifier to overflow menu', () => {
+      // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
+      rootWrapper
+        .setProps({ light: true })
+        .find('OverflowMenu')
+        .instance()
+        .setState({ open: true });
+      rootWrapper.update();
+
+      const oMenu = rootWrapper.find(`.${prefix}--overflow-menu`);
+      const oMenuOptions = rootWrapper.find(
+        `.${prefix}--overflow-menu-options`
+      );
+      expect(oMenu.hasClass(`${prefix}--overflow-menu--light`)).toEqual(true);
+      expect(
+        oMenuOptions.hasClass(`${prefix}--overflow-menu-options--light`)
+      ).toEqual(true);
     });
   });
 
@@ -98,8 +123,8 @@ describe('OverflowMenu', () => {
     it('should render a ul with the appropriate class', () => {
       const rootWrapper = mount(
         <OverflowMenu menuOptionsClass="extra-menu-class">
-          <div className="test-child" />
-          <div className="test-child" />
+          <OverflowMenuItem className="test-child">one</OverflowMenuItem>
+          <OverflowMenuItem className="test-child">two</OverflowMenuItem>
         </OverflowMenu>
       );
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
@@ -117,8 +142,8 @@ describe('OverflowMenu', () => {
     it('should render children as expected', () => {
       const rootWrapper = mount(
         <OverflowMenu>
-          <div className="test-child" />
-          <div className="test-child" />
+          <OverflowMenuItem className="test-child">one</OverflowMenuItem>
+          <OverflowMenuItem className="test-child">two</OverflowMenuItem>
         </OverflowMenu>
       );
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
@@ -127,7 +152,7 @@ describe('OverflowMenu', () => {
         .instance()
         .setState({ open: true });
       rootWrapper.update();
-      expect(rootWrapper.find('.test-child').length).toEqual(2);
+      expect(rootWrapper.find('button.test-child').length).toEqual(2);
     });
 
     it('should set expected class when state is open', () => {
@@ -149,30 +174,6 @@ describe('OverflowMenu', () => {
       const icon = menu.find(OverflowMenuVertical16);
 
       icon.simulate('click');
-      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-      expect(rootWrapper.find('OverflowMenu').instance().state.open).toEqual(
-        true
-      );
-    });
-
-    it('should toggle state in response to Enter or Space when the menu is closed', () => {
-      const enterKey = 13;
-      const spaceKey = 32;
-      const rootWrapper = mount(<OverflowMenu />);
-      const menu = rootWrapper.childAt(0);
-
-      // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-      rootWrapper
-        .find('OverflowMenu')
-        .instance()
-        .setState({ open: false });
-
-      menu.simulate('keydown', { which: spaceKey });
-      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-      expect(rootWrapper.find('OverflowMenu').instance().state.open).toEqual(
-        true
-      );
-      menu.simulate('keydown', { which: enterKey });
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(rootWrapper.find('OverflowMenu').instance().state.open).toEqual(
         true
@@ -267,8 +268,8 @@ describe('OverflowMenu', () => {
         <OverflowMenu
           className="extra-class"
           renderIcon={() => <div className="other">Other</div>}>
-          <div className="test-child" />
-          <div className="test-child" />
+          <OverflowMenuItem className="test-child">one</OverflowMenuItem>
+          <OverflowMenuItem className="test-child">two</OverflowMenuItem>
         </OverflowMenu>
       );
       // renderIcon should be the only component where `${prefix}--overflow-menu__icon` class is applied,

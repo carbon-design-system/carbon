@@ -17,11 +17,13 @@ const HeaderSideNavItems = ({
   children,
   hasDivider,
 }) => {
-  const className = cx({
-    [`${prefix}--side-nav__header-navigation`]: true,
-    [`${prefix}--side-nav__header-divider`]: hasDivider,
-    customClassName,
-  });
+  const className = cx(
+    {
+      [`${prefix}--side-nav__header-navigation`]: true,
+      [`${prefix}--side-nav__header-divider`]: hasDivider,
+    },
+    customClassName
+  );
   return <div className={className}>{children}</div>;
 };
 

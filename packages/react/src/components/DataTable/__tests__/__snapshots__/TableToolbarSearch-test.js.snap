@@ -6,6 +6,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
   id="custom-id"
   onChange={[MockFunction]}
   persistent={false}
+  tabIndex="0"
   translateWithId={[Function]}
 >
   <div
@@ -13,33 +14,33 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    role="searchbox"
     tabIndex="0"
   >
     <Search
       aria-hidden={true}
-      className="className bx--search-maginfier"
+      className="custom-class"
       closeButtonLabelText="Clear search input"
       id="custom-id"
       labelText="Filter table"
       onChange={[Function]}
       placeHolderText="Filter table"
-      small={true}
+      size="sm"
+      tabIndex="-1"
       type="text"
       value=""
     >
       <div
-        className="bx--search bx--search--sm className bx--search-maginfier"
+        aria-labelledby="custom-id-search"
+        className="bx--search bx--search--sm custom-class"
+        role="search"
       >
         <ForwardRef(Search16)
           className="bx--search-magnifier"
-          role="img"
         >
           <Icon
             className="bx--search-magnifier"
             height={16}
             preserveAspectRatio="xMidYMid meet"
-            role="img"
             viewBox="0 0 16 16"
             width={16}
             xmlns="http://www.w3.org/2000/svg"
@@ -50,18 +51,12 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
               focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"
-              role="img"
-              style={
-                Object {
-                  "willChange": "transform",
-                }
-              }
               viewBox="0 0 16 16"
               width={16}
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M15 14.3L10.7 10c1.9-2.3 1.6-5.8-.7-7.7S4.2.7 2.3 3 .7 8.8 3 10.7c2 1.7 5 1.7 7 0l4.3 4.3.7-.7zM2 6.5C2 4 4 2 6.5 2S11 4 11 6.5 9 11 6.5 11 2 9 2 6.5z"
+                d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
               />
             </svg>
           </Icon>
@@ -69,15 +64,19 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
         <label
           className="bx--label"
           htmlFor="custom-id"
+          id="custom-id-search"
         >
           Filter table
         </label>
         <input
           aria-hidden={true}
+          autoComplete="off"
           className="bx--search-input"
           id="custom-id"
           onChange={[Function]}
           placeholder="Filter table"
+          role="searchbox"
+          tabIndex="-1"
           type="text"
           value=""
         />
@@ -87,36 +86,25 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
           onClick={[Function]}
           type="button"
         >
-          <ForwardRef(Close16)
-            aria-label="Clear search input"
-            role="img"
-          >
+          <ForwardRef(Close16)>
             <Icon
-              aria-label="Clear search input"
               height={16}
               preserveAspectRatio="xMidYMid meet"
-              role="img"
-              viewBox="0 0 16 16"
+              viewBox="0 0 32 32"
               width={16}
               xmlns="http://www.w3.org/2000/svg"
             >
               <svg
-                aria-label="Clear search input"
+                aria-hidden={true}
                 focusable="false"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
-                role="img"
-                style={
-                  Object {
-                    "willChange": "transform",
-                  }
-                }
-                viewBox="0 0 16 16"
+                viewBox="0 0 32 32"
                 width={16}
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"
+                  d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
                 />
               </svg>
             </Icon>

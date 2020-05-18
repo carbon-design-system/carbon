@@ -154,17 +154,16 @@ export default class Pagination extends Component {
       pageSize: currentPageSize,
     } = state;
     const pageSizesChanged = !equals(pageSizes, prevPageSizes);
+    if (pageSizesChanged && !pageSizes.includes(pageSize)) {
+      pageSize = pageSizes[0];
+    }
     const pageChanged = page !== prevPage;
     const pageSizeChanged = pageSize !== prevPageSize;
     return !pageSizesChanged && !pageChanged && !pageSizeChanged
       ? null
       : {
-          page: pageSizesChanged ? 1 : pageChanged ? page : currentPage,
-          pageSize: pageSizesChanged
-            ? pageSizes[0]
-            : pageSizeChanged
-            ? pageSize
-            : currentPageSize,
+          page: (pageSizeChanged && 1) || (pageChanged && page) || currentPage,
+          pageSize: pageSizeChanged ? pageSize : currentPageSize,
           prevPageSizes: pageSizes,
           prevPage: page,
           prevPageSize: pageSize,
@@ -262,18 +261,6 @@ export default class Pagination extends Component {
       }
     );
     const selectItems = this.renderSelectItems(totalPages);
-    const pageRange = (() => {
-      if (pageInputDisabled) {
-        return null;
-      }
-      return (
-        <span className={`${prefix}--pagination__text`}>
-          {pagesUnknown
-            ? pageText(statePage)
-            : pageRangeText(statePage, totalPages)}
-        </span>
-      );
-    })();
     return (
       <div className={classNames} {...other}>
         <div className={`${prefix}--pagination__left`}>
@@ -310,20 +297,24 @@ export default class Pagination extends Component {
           </span>
         </div>
         <div className={`${prefix}--pagination__right`}>
-          {pageInputDisabled ? null : (
-            <Select
-              id={`${prefix}-pagination-select-${inputId + 2}`}
-              className={`${prefix}--select__page-number`}
-              labelText={`Page number, of ${totalPages} pages`}
-              inline
-              hideLabel
-              onChange={this.handlePageInputChange}
-              value={statePage}>
-              {selectItems}
-            </Select>
-          )}
-          {pageRange}
+          <Select
+            id={`${prefix}-pagination-select-${inputId}-right`}
+            className={`${prefix}--select__page-number`}
+            labelText={`Page number, of ${totalPages} pages`}
+            inline
+            hideLabel
+            onChange={this.handlePageInputChange}
+            value={statePage}
+            disabled={pageInputDisabled}>
+            {selectItems}
+          </Select>
+          <span className={`${prefix}--pagination__text`}>
+            {pagesUnknown
+              ? pageText(statePage)
+              : pageRangeText(statePage, totalPages)}
+          </span>
           <button
+            type="button"
             className={backButtonClasses}
             onClick={this.decrementPage}
             aria-label={backwardText}
@@ -331,6 +322,7 @@ export default class Pagination extends Component {
             <CaretLeft24 />
           </button>
           <button
+            type="button"
             className={forwardButtonClasses}
             aria-label={forwardText}
             onClick={this.incrementPage}

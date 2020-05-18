@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Search16, Close20 } from '@carbon/icons-react';
+import { Search16, Close16, Close20 } from '@carbon/icons-react';
 import Search from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
 import { mount, shallow } from 'enzyme';
@@ -109,11 +109,45 @@ describe('Search', () => {
         });
 
         it('renders two Icons', () => {
-          wrapper.setProps({ small: false });
+          wrapper.setProps({ size: undefined });
           const iconTypes = [Search16, Close20];
           const icons = wrapper.findWhere(n => iconTypes.includes(n.type()));
           expect(icons.length).toEqual(2);
         });
+      });
+    });
+
+    describe('Large Search', () => {
+      const large = mount(
+        <Search
+          id="test"
+          size="lg"
+          className="extra-class"
+          label="Search Field"
+          labelText="testlabel"
+        />
+      );
+
+      const largeContainer = large.find(`.${prefix}--search`);
+
+      it('renders correct search icon', () => {
+        const icons = large.find(Search16);
+        expect(icons.length).toBe(1);
+      });
+
+      it('should have the expected large class', () => {
+        expect(largeContainer.hasClass(`${prefix}--search--lg`)).toEqual(true);
+      });
+
+      it('should only have 1 button (clear)', () => {
+        const btn = large.find('button');
+        expect(btn.length).toEqual(1);
+      });
+
+      it('renders two Icons', () => {
+        const iconTypes = [Search16, Close16];
+        const icons = large.findWhere(n => iconTypes.includes(n.type()));
+        expect(icons.length).toEqual(2);
       });
     });
 

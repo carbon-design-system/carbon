@@ -117,6 +117,7 @@ const carbonFlatpickrMonthSelectPlugin = config => fp => {
 
   return {
     onMonthChange: updateCurrentMonth,
+    onValueUpdate: updateCurrentMonth,
     onOpen: updateCurrentMonth,
     onReady: [setupElements, updateCurrentMonth, register],
   };
@@ -142,7 +143,12 @@ class DatePicker extends mixin(
       this.manage(
         on(this.element, 'keydown', e => {
           if (e.which === 40) {
-            this.calendar.calendarContainer.focus();
+            e.preventDefault();
+            (
+              this.calendar.selectedDateElem ||
+              this.calendar.todayDateElem ||
+              this.calendar.calendarContainer
+            ).focus();
           }
         })
       );
@@ -240,6 +246,7 @@ class DatePicker extends mixin(
       Object.assign(flattenOptions(this.options), {
         allowInput: true,
         mode: type,
+        disableMobile: true,
         positionElement:
           type === 'range' &&
           this.element.querySelector(this.options.selectorDatePickerInputFrom),
