@@ -9,7 +9,7 @@ import cx from 'classnames';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import * as colors from '@carbon/colors';
-import { themes, formatTokenName } from '@carbon/themes';
+import { themes, formatTokenName, unstable__meta as meta } from '@carbon/themes';
 
 const mountNode = document.getElementById('root');
 function render(element) {
@@ -23,17 +23,8 @@ const colorNameLookup = Object.keys(colors).reduce(
   }),
   {}
 );
-const allTokens = themes[Object.keys(themes)[0]];
-const filteredTokens = {};
 
-// Filter out non-color variables:
-Object.entries(allTokens).forEach(([key, value]) => {
-  if (typeof value === 'string' && value.startsWith('#')) {
-    filteredTokens[key] = value;
-  }
-});
-
-const tokens = Object.keys(filteredTokens);
+const tokens = meta.colors.flatMap(color => color.tokens);
 
 function App() {
   return (
