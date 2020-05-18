@@ -63,12 +63,12 @@ export default class Modal extends Component {
     /**
      * Specify the text for the secondary button
      */
-    secondaryButtonText: PropTypes.string,
+    secondaryButtonText: PropTypes.node,
 
     /**
      * Specify the text for the primary button
      */
-    primaryButtonText: PropTypes.string,
+    primaryButtonText: PropTypes.node,
 
     /**
      * Specify whether the Modal is currently open

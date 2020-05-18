@@ -75,6 +75,22 @@ describe('Modal', () => {
         .at(0);
       expect(primaryButton.props().disabled).toEqual(true);
     });
+
+    it('Should have node in primary', () => {
+      mounted.setProps({ primaryButtonText: <InlineLoading /> });
+      const primaryButton = mounted
+        .find(`.${prefix}--btn.${prefix}--btn--primary`)
+        .at(0);
+      expect(primaryButton.find('InlineLoading').exists()).toEqual(true);
+    })
+
+    it('Should have node in secondary', () => {
+      mounted.setProps({ secondaryButtonText: <InlineLoading /> });
+      const secondaryButton = mounted
+        .find(`.${prefix}--btn.${prefix}--btn--secondary`)
+        .at(0);
+      expect(secondaryButton.find('InlineLoading').exists()).toEqual(true);
+    })
   });
 
   describe('Adds props as expected to the right children', () => {
