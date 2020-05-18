@@ -473,8 +473,8 @@ export default class FilterableMultiSelect extends React.Component {
     return (
       <div className={wrapperClasses}>
         {title}
-        {!inline && helper}
         {input}
+        {!inline && !invalid ? helper : null}
       </div>
     );
   }
