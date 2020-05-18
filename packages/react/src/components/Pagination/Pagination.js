@@ -315,24 +315,24 @@ export default class Pagination extends Component {
               : pageRangeText(statePage, totalPages)}
           </span>
           <Button
-            kind={'ghost'}
+            kind="ghost"
             className={backButtonClasses}
             hasIconOnly
             renderIcon={CaretLeft16}
             iconDescription={backwardText}
-            tooltipAlignment={'center'}
-            tooltipPosition={'top'}
+            tooltipAlignment="center"
+            tooltipPosition="top"
             onClick={this.decrementPage}
             disabled={backButtonDisabled}
           />
           <Button
-            kind={'ghost'}
+            kind="ghost"
             className={forwardButtonClasses}
             hasIconOnly
             renderIcon={CaretRight16}
             iconDescription={forwardText}
-            tooltipAlignment={'end'}
-            tooltipPosition={'top'}
+            tooltipAlignment="end"
+            tooltipPosition="top"
             onClick={this.incrementPage}
             disabled={forwardButtonDisabled || isLastPage}
           />
