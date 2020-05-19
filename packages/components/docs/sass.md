@@ -22965,7 +22965,8 @@ Tabs styles
     @include carbon--breakpoint(md) {
       display: flex;
       transition: inherit;
-      overflow: visible;
+      overflow-x: scroll;
+      max-width: 100%;
       max-height: none;
     }
   }
