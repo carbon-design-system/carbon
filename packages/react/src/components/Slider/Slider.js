@@ -14,6 +14,8 @@ import throttle from 'lodash.throttle';
 import * as keys from '../../internal/keyboard/keys';
 import { matches } from '../../internal/keyboard/match';
 import deprecate from '../../prop-types/deprecate';
+import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
+import { useControlledStateWithValue } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -56,7 +58,9 @@ export default class Slider extends PureComponent {
     /**
      * The callback to get notified of change in value.
      */
-    onChange: PropTypes.func,
+    onChange: !useControlledStateWithValue
+      ? PropTypes.func
+      : requiredIfValueExists(PropTypes.func),
 
     /**
      * The callback to get notified of value on handle release.
@@ -181,11 +185,11 @@ export default class Slider extends PureComponent {
    * Handles firing of `onChange` and `onRelease` callbacks to parent in
    * response to state changes.
    *
-   * @param {*} _ Unused (prevProps)
+   * @param {*} prevProps prevProps
    * @param {*} prevState The previous Slider state, used to see if callbacks
    * should be called.
    */
-  componentDidUpdate(_, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     // Fire onChange event handler if present, if there's a usable value, and
     // if the value is different from the last one
     if (
@@ -205,6 +209,15 @@ export default class Slider extends PureComponent {
       // Reset the flag
       this.setState({ needsOnRelease: false });
     }
+
+    // If `useControlledStateWithValue` feature flag is on, do nothing here.
+    // Otherwise, do prop -> state sync without "value capping".
+    if (useControlledStateWithValue || prevProps.value === this.props.value) {
+      return;
+    }
+    this.setState(
+      this.calcValue({ value: this.props.value, useRawValue: true })
+    );
   }
 
   /**
