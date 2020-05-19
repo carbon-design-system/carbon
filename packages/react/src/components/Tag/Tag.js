@@ -35,6 +35,7 @@ const Tag = ({
   type,
   filter,
   title,
+  enableTagTitle,
   disabled,
   onClose,
   ...other
@@ -61,19 +62,25 @@ const Tag = ({
       }
       id={tagId}
       {...other}>
-      <span className={`${prefix}--tag__label`}>
+      <span
+        className={`${prefix}--tag__label`}
+        title={enableTagTitle ? children : null}>
         {children !== null && children !== undefined ? children : TYPES[type]}
       </span>
       <button
         className={`${prefix}--tag__close-icon`}
         onClick={handleClose}
         disabled={disabled}
-        aria-labelledby={tagId}>
+        aria-labelledby={tagId}
+        title={title}>
         <Close16 />
       </button>
     </div>
   ) : (
-    <span className={tagClasses} {...other}>
+    <span
+      className={tagClasses}
+      title={enableTagTitle ? children : null}
+      {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
     </span>
   );
@@ -109,6 +116,11 @@ Tag.propTypes = {
    * Text to show on clear filters
    */
   title: PropTypes.string,
+
+  /**
+   * Used to enable the title attribute on the <Tag>
+   */
+  enableTagTitle: PropTypes.bool,
 
   /**
    * Click handler for filter tag close button.
