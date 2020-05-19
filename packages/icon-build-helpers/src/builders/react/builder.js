@@ -154,7 +154,7 @@ async function builder(metadata, { output }) {
  */
 function createIconComponent(moduleName, descriptor, isDeprecated = false) {
   const { attrs, content } = descriptor;
-  const { width, height, viewBox } = attrs;
+  const { width, height, viewBox, ...rest } = attrs;
 
   const deprecatedTopLevel = isDeprecated
     ? 'let didWarnAboutDeprecation = false;'
@@ -179,7 +179,13 @@ function createIconComponent(moduleName, descriptor, isDeprecated = false) {
       function ${moduleName}({ children, ...rest }, ref) {
         ${deprecatedBlock}
         return (
-          <Icon width={${width}} height={${height}} viewBox="${viewBox}" ref={ref} {...rest}>
+          <Icon
+            width={${width}}
+            height={${height}}
+            viewBox="${viewBox}"
+            ${formatAttributes(rest)}
+            ref={ref}
+            {...rest}>
             ${content.map(convertToJSX).join('\n')}
             {children}
           </Icon>
