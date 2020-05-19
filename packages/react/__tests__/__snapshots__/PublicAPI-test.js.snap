@@ -4735,6 +4735,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "enableTagTitle": Object {
+        "type": "bool",
+      },
       "filter": Object {
         "type": "bool",
       },
