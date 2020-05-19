@@ -56,6 +56,15 @@ describe('Slider', () => {
       expect(wrapper.props().value).toEqual(55);
     });
 
+    it('should change the value upon change in props', () => {
+      wrapper.setProps({ value: 1 });
+      wrapper.setState({ value: 1 });
+      wrapper.update();
+      wrapper.setProps({ value: 2 });
+      expect(wrapper.state().value).toEqual(2);
+      wrapper.setProps({ value: 1 });
+    });
+
     it('should accurately position slider on mount', () => {
       expect(wrapper.state().left).toEqual(0);
     });
