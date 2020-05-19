@@ -56,7 +56,7 @@ export const ui04 = gray50;
 export const ui05 = gray100;
 
 export const text01 = gray100;
-export const text02 = gray80;
+export const text02 = gray70;
 export const text03 = gray40;
 export const text04 = white;
 export const text05 = gray60;
