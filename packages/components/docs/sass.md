@@ -2367,7 +2367,6 @@ Generate a media query for a given breakpoint
   - [carbon--largest-breakpoint [mixin]](#carbon--largest-breakpoint-mixin)
   - [fluid-type [mixin]](#fluid-type-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
-  - [form [mixin]](#form-mixin)
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
@@ -3360,7 +3359,6 @@ $carbon--spacing-02: 0.25rem;
   - [number-input [mixin]](#number-input-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [tags [mixin]](#tags-mixin)
-  - [text-area [mixin]](#text-area-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅carbon--spacing-03 [variable]
@@ -3483,6 +3481,7 @@ $carbon--spacing-06: 1.5rem;
   - [accordion [mixin]](#accordion-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [lists [mixin]](#lists-mixin)
+  - [listbox [mixin]](#listbox-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
@@ -6839,7 +6838,7 @@ $text-02: if(
       'text-02'
     ),
   map-get($carbon--theme, 'text-02'),
-  #393939
+  #525252
 );
 ```
 
@@ -6943,7 +6942,6 @@ $text-05: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
-  - [form [mixin]](#form-mixin)
   - [search [mixin]](#search-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
 
@@ -6975,7 +6973,6 @@ $text-error: if(
   - [form [mixin]](#form-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [select [mixin]](#select-mixin)
-  - [text-area [mixin]](#text-area-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -8800,7 +8797,7 @@ $productive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 1.625rem,
+    line-height: 1.75rem,
     letter-spacing: 0,
   )
 );
@@ -8996,7 +8993,7 @@ $expressive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 130%,
+    line-height: 140%,
     letter-spacing: 0,
     breakpoints: (
       xlg: (
@@ -12554,7 +12551,7 @@ $productive-heading-02: $heading-02;
 $productive-heading-03: (
   font-size: carbon--type-scale(5),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(26px),
+  line-height: carbon--rem(28px),
   letter-spacing: 0,
 );
 ```
@@ -12687,7 +12684,7 @@ $expressive-heading-02: map-merge(
 $expressive-heading-03: (
   font-size: carbon--type-scale(5),
   font-weight: carbon--font-weight('regular'),
-  line-height: 130%,
+  line-height: 140%,
   letter-spacing: 0,
   breakpoints: (
     xlg: (
@@ -16644,7 +16641,7 @@ Data table sort styles
     width: 100%;
     color: $text-01;
     padding: 0 $spacing-05;
-    height: 100%;
+    min-height: 100%;
     background-color: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive),
       outline $duration--fast-01 motion(entrance, productive);
@@ -18003,6 +18000,7 @@ File uploader styles
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close {
+    display: flex;
     height: $carbon--spacing-05;
     width: $carbon--spacing-05;
     background-color: transparent;
@@ -18176,24 +18174,19 @@ Form styles
     margin: $carbon--spacing-02 0 0;
     max-height: 0;
     overflow: hidden;
-    line-height: 1.5;
     display: none;
   }
 
-  .#{$prefix}--label + .#{$prefix}--form__helper-text {
-    margin-top: rem(-6px); // when both helper text and label are rendered
+  .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
+    margin-top: 0;
   }
 
   .#{$prefix}--form__helper-text {
     @include type-style('helper-text-01');
-    color: $text-05;
+    color: $text-02;
     z-index: 0;
     opacity: 1;
-    margin-bottom: $carbon--spacing-03;
-
-    @include carbon--breakpoint('sm') {
-      max-width: 75%;
-    }
+    margin-top: $carbon--spacing-02;
   }
 
   .#{$prefix}--label--disabled,
@@ -18207,7 +18200,6 @@ Form styles
 
 - **Group**: [form](#form)
 - **Requires**:
-  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
@@ -18216,7 +18208,6 @@ Form styles
   - [text-error [variable]](#text-error-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
-  - [text-05 [variable]](#text-05-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
 ## inline-loading
@@ -19074,6 +19065,7 @@ List box styles
     line-height: rem(16px);
     padding: rem(11px) 0;
     margin: 0 $carbon--spacing-05;
+    padding-right: $carbon--spacing-06;
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
     border-top-color: $ui-03;
@@ -19264,6 +19256,7 @@ List box styles
   - [text-02 [variable]](#text-02-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [selected-light-ui [variable]](#selected-light-ui-variable)
+  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
 
 ## loading
 
@@ -21551,6 +21544,7 @@ Progress indicator styles
   .#{$prefix}--progress-step svg {
     position: relative;
     z-index: 1;
+    flex-shrink: 0;
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
     border-radius: 50%;
@@ -21676,6 +21670,7 @@ Progress indicator styles
   .#{$prefix}--progress-step-button {
     @include button-reset();
     display: flex;
+    text-align: left;
   }
 
   //unclickable button
@@ -21792,6 +21787,8 @@ Progress indicator styles
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
+    position: absolute;
+    top: 0;
     left: 0;
     height: 100%;
     width: 1px;
@@ -22112,6 +22109,7 @@ Search styles
     @include button-reset(false);
     @include focus-outline('reset');
     position: absolute;
+    top: 0;
     right: 0;
 
     &::before {
@@ -23352,12 +23350,13 @@ Tag styles
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0 $carbon--spacing-03;
-    height: 1.5rem;
+    padding: $carbon--spacing-02 $carbon--spacing-03;
+    min-height: 1.5rem;
     max-width: 100%; // restricts size of contained elements
     min-width: rem(32px); // ensures tag stays pill shaped;
     margin: $carbon--spacing-02;
     border-radius: rem(15px);
+    word-break: break-word;
     cursor: default;
 
     &:not(:first-child) {
@@ -23532,8 +23531,8 @@ Tag styles
 - **Requires**:
   - [tag-theme [mixin]](#tag-theme-mixin)
   - [prefix [variable]](#prefix-variable)
-  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
@@ -23561,32 +23560,16 @@ Text area styles
 
     background-color: $field-01;
     width: 100%;
+    height: 100%;
     min-width: 10rem;
     min-height: rem(40px);
     padding: rem(11px) $carbon--spacing-05;
     color: $text-01;
-    order: 3;
     resize: vertical;
     border: none;
     border-bottom: 1px solid $ui-04;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
-
-    & ~ .#{$prefix}--form__helper-text {
-      margin-top: 0;
-      order: 2;
-    }
-
-    & ~ .#{$prefix}--form-requirement {
-      order: 4;
-      color: $text-error;
-      font-weight: 400;
-      margin-top: $carbon--spacing-02;
-
-      &::before {
-        display: none;
-      }
-    }
   }
 
   .#{$prefix}--text-area:focus,
@@ -23660,8 +23643,6 @@ Text area styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [text-error [variable]](#text-error-variable)
-  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
