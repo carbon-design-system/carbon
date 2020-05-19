@@ -29,12 +29,20 @@ describe('Checkbox', () => {
         expect(label.hasClass(`${prefix}--checkbox-label`)).toEqual(true);
       });
 
+      it('has the expected htmlFor value', () => {
+        expect(label.props().htmlFor).toEqual('testing');
+      });
+
       it('applies extra classes to label', () => {
         expect(label.hasClass('extra-class')).toEqual(true);
       });
 
       describe('input', () => {
         const input = () => wrapper.find('input');
+
+        it('has id set as expected', () => {
+          expect(input().props().id).toEqual('testing');
+        });
 
         it('defaultChecked prop sets defaultChecked on input', () => {
           expect(input().props().defaultChecked).toBeUndefined();

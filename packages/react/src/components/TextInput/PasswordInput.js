@@ -119,7 +119,6 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     <div
       className={`${prefix}--form-item ${prefix}--text-input-wrapper ${prefix}--password-input-wrapper`}>
       {label}
-      {helper}
       <div
         className={`${prefix}--text-input__field-wrapper`}
         data-invalid={invalid || null}>
@@ -128,7 +127,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
         )}
         {input}
       </div>
-      {error}
+      {error ? error : helper}
     </div>
   );
 });

@@ -95,7 +95,7 @@ export const productiveHeading02 = heading02;
 export const productiveHeading03 = {
   fontSize: rem(scale[4]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(26),
+  lineHeight: rem(28),
   letterSpacing: 0,
 };
 
@@ -140,7 +140,7 @@ export const expressiveHeading02 = {
 export const expressiveHeading03 = {
   fontSize: rem(scale[4]),
   fontWeight: fontWeights.regular,
-  lineHeight: '130%',
+  lineHeight: '140%',
   letterSpacing: 0,
   breakpoints: {
     xlg: {
