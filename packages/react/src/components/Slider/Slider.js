@@ -193,6 +193,7 @@ export default class Slider extends PureComponent {
       prevState.value !== this.state.value &&
       typeof this.props.onChange === 'function'
     ) {
+      // TODO: pass event object as first param (breaking change/feat for v11)
       this.props.onChange({ value: this.state.value });
     }
 
@@ -201,6 +202,7 @@ export default class Slider extends PureComponent {
       this.state.needsOnRelease &&
       typeof this.props.onRelease === 'function'
     ) {
+      // TODO: pass event object as first param (breaking change/feat for v11)
       this.props.onRelease({ value: this.state.value });
       // Reset the flag
       this.setState({ needsOnRelease: false });
