@@ -19,9 +19,10 @@ throttle.mockImplementation(fn => Object.assign(fn, { throttled: true }));
 
 const { prefix } = settings;
 describe('Slider', () => {
-  describe('Renders as expected', () => {
-    const id = 'slider';
-    const wrapper = mount(
+  const id = 'slider';
+  let wrapper;
+  beforeEach(() => {
+    wrapper = mount(
       <Slider
         id={id}
         className="extra-class"
@@ -31,7 +32,9 @@ describe('Slider', () => {
         step={1}
       />
     );
+  });
 
+  describe('Renders as expected', () => {
     it('renders children as expected', () => {
       expect(wrapper.find(`.${prefix}--text-input`).length).toBe(1);
     });
@@ -62,7 +65,6 @@ describe('Slider', () => {
       wrapper.update();
       wrapper.setProps({ value: 2 });
       expect(wrapper.state().value).toEqual(2);
-      wrapper.setProps({ value: 1 });
     });
 
     it('should accurately position slider on mount', () => {
