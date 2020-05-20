@@ -235,15 +235,4 @@ storiesOf('Modal', module)
           `,
       },
     }
-  )
-  .add(
-    'Loading',
-    () => {
-      <Modal {...props()}>
-      <p className={`${prefix}--modal-content__text`}>
-        Please see ModalWrapper for more examples and demo of the
-        functionality.
-      </p>
-    </Modal>
-    },
   );
