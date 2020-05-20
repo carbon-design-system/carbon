@@ -21878,10 +21878,11 @@ Radio button styles
       content: '';
       display: inline-block;
       position: relative;
-      width: 0.5rem;
-      height: 0.5rem;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
       background-color: $icon-01;
+      transform: scale(0.5);
 
       // Allow the selected button to be seen in Windows HCM for IE/Edge
       @media screen and (-ms-high-contrast: active) {
@@ -22964,7 +22965,8 @@ Tabs styles
     @include carbon--breakpoint(md) {
       display: flex;
       transition: inherit;
-      overflow: visible;
+      overflow-x: scroll;
+      max-width: 100%;
       max-height: none;
     }
   }
