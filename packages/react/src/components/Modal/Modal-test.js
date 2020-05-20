@@ -9,6 +9,7 @@ import React from 'react';
 import { Close20 } from '@carbon/icons-react';
 import Modal from '../Modal';
 import ModalWrapper from '../ModalWrapper';
+import InlineLoading from '../InlineLoading';
 import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
 
