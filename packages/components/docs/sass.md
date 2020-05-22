@@ -7200,6 +7200,7 @@ $field-02: if(
   - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
 
 ### ✅inverse-01 [variable]
@@ -7840,6 +7841,7 @@ $hover-ui: if(
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tile [mixin]](#tile-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
 
 ### ✅active-ui [variable]
 
@@ -8157,6 +8159,7 @@ $disabled-02: if(
   - [tags [mixin]](#tags-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
   - [toggle [mixin]](#toggle-mixin)
 
 ### ✅disabled-03 [variable]
@@ -24129,6 +24132,22 @@ Time picker styles
       color: $text-05;
     }
   }
+
+  .#{$prefix}--time-picker--light .#{$prefix}--select-input {
+    background-color: $field-02;
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+
+    &:disabled,
+    &:hover:disabled {
+      cursor: not-allowed;
+      background-color: transparent;
+      border-bottom: 1px solid transparent;
+      color: $disabled-02;
+    }
+  }
 }
 ```
 
@@ -24139,6 +24158,9 @@ Time picker styles
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
   - [text-05 [variable]](#text-05-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
 
 ## toggle
 
