@@ -6647,6 +6647,7 @@ $ui-02: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [tile [mixin]](#tile-mixin)
@@ -17149,6 +17150,11 @@ Date picker styles
   .flatpickr-day.selected {
     color: $text-04;
     background: $interactive-01;
+
+    &:focus {
+      outline: rem(1px) solid $ui-02;
+      outline-offset: rem(-3px);
+    }
   }
 
   .#{$prefix}--date-picker__day.startRange.selected,
@@ -17287,6 +17293,7 @@ Date picker styles
   - [interactive-01 [variable]](#interactive-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [text-04 [variable]](#text-04-variable)
+  - [ui-02 [variable]](#ui-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
 
 ## dropdown
