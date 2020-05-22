@@ -28,7 +28,7 @@ const props = {
     ),
     disabled: boolean('Disabled (disabled)', false),
     title: text('Title (title)', 'Clear Filter'),
-    enableTagTitle: boolean('Add Title on hover (enableTagTitle)', false),
+    enableTagTitle: boolean('Add Title on hover (enableTagTitle)', true),
   }),
   filter() {
     return {
