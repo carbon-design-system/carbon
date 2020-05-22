@@ -35,7 +35,6 @@ const Tag = ({
   type,
   filter,
   title,
-  enableTagTitle,
   disabled,
   onClose,
   ...other
@@ -64,9 +63,7 @@ const Tag = ({
       {...other}>
       <span
         className={`${prefix}--tag__label`}
-        title={
-          enableTagTitle && typeof children === 'string' ? children : null
-        }>
+        title={typeof children === 'string' ? children : null}>
         {children !== null && children !== undefined ? children : TYPES[type]}
       </span>
       <button
@@ -81,7 +78,7 @@ const Tag = ({
   ) : (
     <span
       className={tagClasses}
-      title={enableTagTitle && typeof children === 'string' ? children : null}
+      title={typeof children === 'string' ? children : null}
       {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
     </span>
@@ -120,18 +117,9 @@ Tag.propTypes = {
   title: PropTypes.string,
 
   /**
-   * Used to enable the title attribute on the <Tag>
-   */
-  enableTagTitle: PropTypes.bool,
-
-  /**
    * Click handler for filter tag close button.
    */
   onClose: PropTypes.func,
-};
-
-Tag.defaultProps = {
-  enableTagTitle: true,
 };
 
 export const types = Object.keys(TYPES);
