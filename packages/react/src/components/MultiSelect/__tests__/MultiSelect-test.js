@@ -9,10 +9,9 @@ import { getByText, isElementVisible } from '@carbon/test-utils/dom';
 import { pressEnter, pressSpace, pressTab } from '@carbon/test-utils/keyboard';
 import { render, cleanup } from '@carbon/test-utils/react';
 import React from 'react';
-import { Simulate } from 'react-dom/test-utils';
+import { act, Simulate } from 'react-dom/test-utils';
 import MultiSelect from '../';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
-import { keys } from '../../../internal/keyboard';
 
 describe('MultiSelect', () => {
   afterEach(cleanup);
@@ -46,7 +45,7 @@ describe('MultiSelect', () => {
     expect(isElementVisible(labelNode)).toBe(true);
 
     expect(
-      container.querySelector('[aria-expanded="true"][aria-haspopup="true"]')
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeNull();
   });
 
@@ -61,7 +60,7 @@ describe('MultiSelect', () => {
     Simulate.click(labelNode);
 
     expect(
-      container.querySelector('[aria-expanded="true"][aria-haspopup="true"]')
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeInstanceOf(HTMLElement);
   });
 
@@ -75,11 +74,11 @@ describe('MultiSelect', () => {
     pressSpace();
 
     expect(
-      container.querySelector('[aria-expanded="true"][aria-haspopup="true"]')
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeInstanceOf(HTMLElement);
   });
 
-  it.skip('should open the menu when a user hits enter while the field is focused', () => {
+  it('should open the menu when a user hits enter while the field is focused', () => {
     const items = generateItems(4, generateGenericItem);
     const { container } = render(
       <MultiSelect id="test" label="test-label" items={items} />
@@ -89,7 +88,7 @@ describe('MultiSelect', () => {
     pressEnter();
 
     expect(
-      container.querySelector('[aria-expanded="true"][aria-haspopup="true"]')
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeInstanceOf(HTMLElement);
   });
 
@@ -112,15 +111,13 @@ describe('MultiSelect', () => {
 
     Simulate.click(itemNode);
 
-    expect(
-      document.querySelector('[aria-selected="true"][role="option"]')
-    ).toBeInstanceOf(HTMLElement);
+    expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe('true');
 
     Simulate.click(itemNode);
 
-    expect(
-      document.querySelector('[aria-selected="true"][role="option"]')
-    ).toBeNull();
+    expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe(
+      'false'
+    );
   });
 
   it('should close the menu when the user hits the Escape key', () => {
@@ -133,110 +130,72 @@ describe('MultiSelect', () => {
     pressSpace();
 
     expect(
-      container.querySelector('[aria-expanded="true"][aria-haspopup="true"]')
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeInstanceOf(HTMLElement);
 
-    Simulate.keyDown(document.activeElement, {
+    Simulate.keyDown(container.querySelector('[role="listbox"]'), {
       key: 'Escape',
     });
 
     expect(
-      container.querySelector('[aria-expanded="true"][aria-haspopup="true"]')
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeNull();
   });
 
-  it.skip('close menu with click outside of field', () => {
+  it('close menu with click outside of field', () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
     const { container } = render(
       <MultiSelect id="test" label={label} items={items} />
     );
     const labelNode = getByText(container, label);
-    const button = document.createElement('BUTTON');
-    button.id = 'button-id';
-    document.body.appendChild(button);
-    const buttonNode = document.getElementById('button-id');
 
     expect(
-      container.querySelector('[aria-expanded="true"][aria-haspopup="true"]')
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeFalsy();
 
     Simulate.click(labelNode);
 
     expect(
-      container.querySelector('[aria-expanded="true"][aria-haspopup="true"]')
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeTruthy();
 
-    Simulate.click(buttonNode);
+    Simulate.blur(container.querySelector('[role="listbox"]'));
 
     expect(
-      container.querySelector('[aria-expanded="true"][aria-haspopup="true"]')
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeFalsy();
-
-    document.body.removeChild(button);
   });
 
-  it.skip('should toggle selection with enter', () => {
-    // yeah focus is on the field, you hit the arrows to change the active index, and keydown is on the field since it has focus
+  it('should toggle selection with enter', () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
     const { container } = render(
       <MultiSelect id="test" label={label} items={items} />
     );
 
-    const labelNode = getByText(container, label);
-    Simulate.click(labelNode);
+    pressTab();
+    pressSpace();
 
     const [item] = items;
     const itemNode = getByText(container, item.label);
-    console.log(item.label);
 
-    expect(
-      document.querySelector('[aria-selected="true"][role="option"]')
-    ).toBeNull();
-
-    Simulate.keyDown(itemNode, { key: 'Enter' });
-
-    expect(
-      document.querySelector('[aria-selected="true"][role="option"]')
-    ).toBeInstanceOf(HTMLElement);
-
-    Simulate.keyDown(itemNode, { key: 'Enter' });
-
-    expect(
-      document.querySelector('[aria-selected="true"][role="option"]')
-    ).toBeNull();
-  });
-
-  it.skip('toggle selection with space', () => {
-    // yeah focus is on the field, you hit the arrows to change the active index, and keydown is on the field since it has focus
-    const items = generateItems(4, generateGenericItem);
-    const label = 'test-label';
-    const { container } = render(
-      <MultiSelect id="test" label={label} items={items} />
+    expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe(
+      'false'
     );
 
-    const labelNode = getByText(container, label);
-    Simulate.click(labelNode);
+    Simulate.keyDown(container.querySelector('[role="listbox"]'), {
+      key: 'ArrowDown',
+    });
+    pressEnter();
 
-    const [item] = items;
-    const itemNode = getByText(container, item.label);
+    expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe('true');
 
-    expect(
-      document.querySelector('[aria-selected="true"][role="option"]')
-    ).toBeNull();
+    pressEnter();
 
-    Simulate.keyDown(itemNode, keys.Space);
-
-    expect(
-      document.querySelector('[aria-selected="true"][role="option"]')
-    ).toBeInstanceOf(HTMLElement);
-
-    Simulate.keyDown(itemNode, keys.Space);
-
-    expect(
-      document.querySelector('[aria-selected="true"][role="option"]')
-    ).toBeNull();
+    expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe(
+      'false'
+    );
   });
 
   it('should clear selected items when the user clicks the clear selection button', () => {
@@ -273,7 +232,7 @@ describe('MultiSelect', () => {
     Simulate.click(labelNode);
 
     expect(
-      container.querySelector('[aria-expanded="true"][aria-haspopup="true"]')
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeFalsy();
   });
 
@@ -299,7 +258,7 @@ describe('MultiSelect', () => {
       Simulate.click(labelNode);
 
       expect(
-        document.querySelector('[aria-selected="true"][role="option"]')
+        document.querySelector('[data-contained-checkbox-state="true"]')
       ).toBeInstanceOf(HTMLElement);
     });
 
@@ -383,7 +342,10 @@ describe('MultiSelect', () => {
 
       const [item] = items;
       const itemNode = getByText(container, item.label);
-      Simulate.click(itemNode);
+
+      act(() => {
+        Simulate.click(itemNode);
+      });
 
       expect(testFunction).toHaveBeenCalledTimes(1);
     });

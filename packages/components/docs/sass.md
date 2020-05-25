@@ -2367,7 +2367,6 @@ Generate a media query for a given breakpoint
   - [carbon--largest-breakpoint [mixin]](#carbon--largest-breakpoint-mixin)
   - [fluid-type [mixin]](#fluid-type-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
-  - [form [mixin]](#form-mixin)
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
@@ -3311,7 +3310,6 @@ Get the value of the corresponding number of units
 - **Used by**:
   - [listbox [mixin]](#listbox-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
-  - [pagination [mixin]](#pagination-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
   - [select [mixin]](#select-mixin)
   - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
@@ -3360,7 +3358,6 @@ $carbon--spacing-02: 0.25rem;
   - [number-input [mixin]](#number-input-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [tags [mixin]](#tags-mixin)
-  - [text-area [mixin]](#text-area-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅carbon--spacing-03 [variable]
@@ -3508,6 +3505,7 @@ $carbon--spacing-07: 2rem;
   - [form [mixin]](#form-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅carbon--spacing-08 [variable]
@@ -6462,6 +6460,7 @@ $interactive-01: if(
   - [button [mixin]](#button-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
@@ -6647,6 +6646,7 @@ $ui-02: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [tile [mixin]](#tile-mixin)
@@ -6721,6 +6721,7 @@ $ui-04: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button-theme [mixin]](#button-theme-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
@@ -6838,7 +6839,7 @@ $text-02: if(
       'text-02'
     ),
   map-get($carbon--theme, 'text-02'),
-  #393939
+  #525252
 );
 ```
 
@@ -6942,7 +6943,6 @@ $text-05: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
-  - [form [mixin]](#form-mixin)
   - [search [mixin]](#search-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
 
@@ -6974,7 +6974,6 @@ $text-error: if(
   - [form [mixin]](#form-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [select [mixin]](#select-mixin)
-  - [text-area [mixin]](#text-area-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -7100,6 +7099,7 @@ $link-01: if(
   - [button [mixin]](#button-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [link [mixin]](#link-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
 
 ### ✅inverse-link [variable]
@@ -7200,6 +7200,7 @@ $field-02: if(
   - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
 
 ### ✅inverse-01 [variable]
@@ -7581,6 +7582,7 @@ $focus: if(
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
   - [tags [mixin]](#tags-mixin)
@@ -7839,6 +7841,7 @@ $hover-ui: if(
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tile [mixin]](#tile-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
 
 ### ✅active-ui [variable]
 
@@ -8138,6 +8141,7 @@ $disabled-02: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
+  - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
@@ -8155,6 +8159,7 @@ $disabled-02: if(
   - [tags [mixin]](#tags-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
   - [toggle [mixin]](#toggle-mixin)
 
 ### ✅disabled-03 [variable]
@@ -8796,7 +8801,7 @@ $productive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 1.625rem,
+    line-height: 1.75rem,
     letter-spacing: 0,
   )
 );
@@ -8992,7 +8997,7 @@ $expressive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 130%,
+    line-height: 140%,
     letter-spacing: 0,
     breakpoints: (
       xlg: (
@@ -12550,7 +12555,7 @@ $productive-heading-02: $heading-02;
 $productive-heading-03: (
   font-size: carbon--type-scale(5),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(26px),
+  line-height: carbon--rem(28px),
   letter-spacing: 0,
 );
 ```
@@ -12683,7 +12688,7 @@ $expressive-heading-02: map-merge(
 $expressive-heading-03: (
   font-size: carbon--type-scale(5),
   font-weight: carbon--font-weight('regular'),
-  line-height: 130%,
+  line-height: 140%,
   letter-spacing: 0,
   breakpoints: (
     xlg: (
@@ -14100,6 +14105,17 @@ Button variant styles
         ($button-border-width + $button-outline-width) $ui-02;
   }
 
+  &:disabled:hover,
+  &:disabled:focus,
+  &:hover.#{$prefix}--btn--disabled,
+  &:focus.#{$prefix}--btn--disabled {
+    color: $ui-04;
+    background-color: $disabled-02;
+    border-color: $disabled-02;
+    text-decoration: none;
+    box-shadow: none;
+  }
+
   &:active {
     background-color: $active-color;
   }
@@ -14118,6 +14134,8 @@ Button variant styles
   - [focus [variable]](#focus-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [prefix [variable]](#prefix-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
 - **Used by**:
   - [button [mixin]](#button-mixin)
 
@@ -14269,13 +14287,8 @@ Checkbox styles
   // Indeterminate
   .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'].#{$prefix}--checkbox-label__focus::before {
-    // We can't use outline here because of the rounded corners so have to increase the width/height to fake an outline.
-    border-color: $focus;
-    border-width: 3px;
-    width: rem(20px);
-    height: rem(20px);
-    left: -2px;
-    top: 0;
+    // Must use box-shadow for appearance of multiple borders with rounded corners.
+    box-shadow: 0 0 0 2px $inverse-01, 0 0 0 4px $focus;
   }
 
   //----------------------------------------------
@@ -14849,6 +14862,10 @@ Combo box styles
     &[disabled]::placeholder {
       color: $disabled-02;
     }
+
+    &::-ms-clear {
+      display: none;
+    }
   }
 
   .#{$prefix}--combo-box.#{$prefix}--list-box--expanded
@@ -15187,6 +15204,7 @@ Data table action styles
     .#{$prefix}--search
     .#{$prefix}--search-input:focus {
     @include focus-outline('outline');
+    box-shadow: inset 0 0 0 2px $focus;
   }
 
   .#{$prefix}--toolbar-search-container-active
@@ -16615,7 +16633,7 @@ Data table sort styles
     width: 100%;
     color: $text-01;
     padding: 0 $spacing-05;
-    height: 100%;
+    min-height: 100%;
     background-color: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive),
       outline $duration--fast-01 motion(entrance, productive);
@@ -17131,6 +17149,11 @@ Date picker styles
   .flatpickr-day.selected {
     color: $text-04;
     background: $interactive-01;
+
+    &:focus {
+      outline: rem(1px) solid $ui-02;
+      outline-offset: rem(-3px);
+    }
   }
 
   .#{$prefix}--date-picker__day.startRange.selected,
@@ -17269,6 +17292,7 @@ Date picker styles
   - [interactive-01 [variable]](#interactive-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [text-04 [variable]](#text-04-variable)
+  - [ui-02 [variable]](#ui-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
 
 ## dropdown
@@ -17319,13 +17343,16 @@ Dropdown styles
     outline: 2px solid transparent;
     transition: background-color $duration--fast-01 motion(standard, productive);
 
-    &:focus {
-      @include focus-outline('outline');
-    }
-
     &:hover {
       background-color: $hover-ui;
     }
+  }
+
+  // Menu's triggering element updated to button with Downshift v5 upgrade
+  .#{$prefix}--dropdown .#{$prefix}--list-box__field {
+    @include button-reset;
+    text-align: left;
+    padding: 0 rem(48px) 0 rem(16px);
   }
 
   .#{$prefix}--dropdown--xl {
@@ -17590,11 +17617,15 @@ Dropdown styles
       outline: none;
     }
 
-    .#{$prefix}--dropdown-text {
+    // TODO: remove in v11
+    .#{$prefix}--dropdown-text,
+    .#{$prefix}--list-box__label {
       color: $disabled-02;
     }
 
-    .#{$prefix}--dropdown__arrow {
+    // TODO: remove in v11
+    .#{$prefix}--dropdown__arrow,
+    .#{$prefix}--list-box__menu-icon svg {
       fill: $disabled-02;
     }
 
@@ -17967,6 +17998,7 @@ File uploader styles
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close {
+    display: flex;
     height: $carbon--spacing-05;
     width: $carbon--spacing-05;
     background-color: transparent;
@@ -18140,24 +18172,19 @@ Form styles
     margin: $carbon--spacing-02 0 0;
     max-height: 0;
     overflow: hidden;
-    line-height: 1.5;
     display: none;
   }
 
-  .#{$prefix}--label + .#{$prefix}--form__helper-text {
-    margin-top: rem(-6px); // when both helper text and label are rendered
+  .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
+    margin-top: 0;
   }
 
   .#{$prefix}--form__helper-text {
     @include type-style('helper-text-01');
-    color: $text-05;
+    color: $text-02;
     z-index: 0;
     opacity: 1;
-    margin-bottom: $carbon--spacing-03;
-
-    @include carbon--breakpoint('sm') {
-      max-width: 75%;
-    }
+    margin-top: $carbon--spacing-02;
   }
 
   .#{$prefix}--label--disabled,
@@ -18171,7 +18198,6 @@ Form styles
 
 - **Group**: [form](#form)
 - **Requires**:
-  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
@@ -18180,7 +18206,6 @@ Form styles
   - [text-error [variable]](#text-error-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
-  - [text-05 [variable]](#text-05-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
 ## inline-loading
@@ -18653,7 +18678,7 @@ List box styles
   }
 
   .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
-    border-bottom-color: $decorative-01;
+    border-bottom-color: transparent;
   }
 
   // Disabled state for `list-box`
@@ -18668,7 +18693,7 @@ List box styles
   .#{$prefix}--list-box--disabled,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field:focus {
-    border-bottom-width: 0;
+    border-bottom-color: transparent;
     outline: none;
   }
 
@@ -18755,6 +18780,10 @@ List box styles
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
     color: $text-01;
+  }
+
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    height: 100%;
   }
 
   // The field we use for input, showing selection, etc.
@@ -18886,10 +18915,6 @@ List box styles
     outline: none;
   }
 
-  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection > svg {
-    fill: $disabled-02;
-  }
-
   // Modifier for a selection to show that multiple selections have been made
   .#{$prefix}--list-box__selection--multi {
     @include type-style('label-01');
@@ -18915,11 +18940,21 @@ List box styles
     width: rem(20px);
     height: rem(20px);
     padding: rem(2px);
+
+    &:hover {
+      border-radius: 50%;
+      background-color: $hover-secondary;
+    }
   }
 
-  .#{$prefix}--list-box__selection--multi > svg:hover {
-    border-radius: 50%;
-    background-color: $hover-secondary;
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__selection--multi
+    > svg {
+    fill: $disabled-02;
+
+    &:hover {
+      background-color: unset;
+    }
   }
 
   .#{$prefix}--list-box__selection--multi:focus,
@@ -18935,10 +18970,20 @@ List box styles
     right: 0;
     width: $list-box-width;
     background-color: $ui-01;
-    max-height: 0;
     transition: max-height $duration--fast-02 motion(standard, productive);
     overflow-y: auto;
     z-index: z('dropdown');
+
+    &:focus {
+      // remove default browser focus in firefox
+      @include focus-outline('border');
+    }
+  }
+
+  .#{$prefix}--list-box
+    .#{$prefix}--list-box__field[aria-expanded='false']
+    + .#{$prefix}--list-box__menu {
+    max-height: 0;
   }
 
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
@@ -19168,9 +19213,11 @@ List box styles
 
   // Tweaks for descendants
   // When handling input, we need to target nodes that specifically opt-in to
-  // the `combobox` role in order to make sure the text input is styled
+  // the type text in order to make sure the text input is styled
   // correctly.
-  .#{$prefix}--list-box input[role='combobox'] {
+  // TODO: remove [role='combobox'] in v11
+  .#{$prefix}--list-box input[role='combobox'],
+  .#{$prefix}--list-box input[type='text'] {
     background-color: inherit;
     min-width: 0;
   }
@@ -20016,6 +20063,7 @@ Inline notification styles
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    color: $inverse-link;
     height: rem(32px);
     margin-bottom: $carbon--spacing-03;
     margin-left: $carbon--spacing-08;
@@ -20023,23 +20071,35 @@ Inline notification styles
     @include carbon--breakpoint(md) {
       margin: $carbon--spacing-03 0;
     }
+  }
 
-    &,
-    &:hover,
-    &:focus,
-    &:active {
-      color: $inverse-link;
-    }
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    color: $link-01;
+  }
 
-    &:focus {
-      border-color: transparent;
-      outline: 2px solid $inverse-focus-ui;
-      outline-offset: -2px;
-    }
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $inverse-hover-ui;
+  }
 
-    &:hover {
-      background-color: $inverse-hover-ui;
-    }
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $carbon--white-0;
+  }
+
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
+    border-color: transparent;
+    box-shadow: none;
+    outline: 2px solid $inverse-focus-ui;
+    outline-offset: -2px;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
+    outline-color: $focus;
   }
 
   .#{$prefix}--inline-notification--hide-close-button
@@ -20082,7 +20142,7 @@ Inline notification styles
   }
 
   .#{$prefix}--inline-notification--low-contrast
-    .#{$prefix}--inline-notification__close-button {
+    .#{$prefix}--inline-notification__close-button:focus {
     @include focus-outline('outline');
   }
 
@@ -20093,10 +20153,10 @@ Inline notification styles
     }
 
     .#{$prefix}--inline-notification__action-button {
-      color: $carbon--blue-60;
+      color: $interactive-01;
 
       &:active {
-        color: $carbon--blue-80;
+        color: $interactive-01;
       }
 
       &:active,
@@ -20131,8 +20191,11 @@ Inline notification styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
-  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
+  - [link-01 [variable]](#link-01-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
+  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
+  - [focus [variable]](#focus-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
 
 ### ❌inline-notification--color [mixin]
 
@@ -20344,7 +20407,7 @@ Toast notification styles
   }
 
   .#{$prefix}--toast-notification--low-contrast
-    .#{$prefix}--toast-notification__close-button {
+    .#{$prefix}--toast-notification__close-button:focus {
     @include focus-outline('outline');
   }
 
@@ -21034,6 +21097,7 @@ Pagination styles
     @include reset;
     @include type-style('body-short-01');
     width: 100%;
+    overflow-x: scroll;
     background-color: $ui-01;
     display: flex;
     align-items: center;
@@ -21058,12 +21122,7 @@ Pagination styles
     width: auto;
     min-width: auto;
     height: 100%;
-    padding: 0 2.5rem 0 $spacing-05;
-    margin-right: -0.65rem;
-    @include carbon--breakpoint('md') {
-      padding-right: carbon--mini-units(4.5);
-      margin-right: 0;
-    }
+    padding: 0 2.25rem 0 $spacing-05;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input:hover {
@@ -21072,10 +21131,7 @@ Pagination styles
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
     top: 50%;
-    transform: translateY(-50%);
-    @include carbon--breakpoint('md') {
-      right: $carbon--spacing-05;
-    }
+    transform: translate(-0.5rem, -50%);
   }
 
   .#{$prefix}--pagination
@@ -21100,6 +21156,11 @@ Pagination styles
   .#{$prefix}--pagination__left > .#{$prefix}--form-item,
   .#{$prefix}--pagination__right > .#{$prefix}--form-item {
     height: 100%;
+  }
+
+  .#{$prefix}--pagination__left .#{$prefix}--pagination__text,
+  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
+    white-space: nowrap;
   }
 
   .#{$prefix}--pagination__left .#{$prefix}--pagination__text {
@@ -21201,7 +21262,6 @@ Pagination styles
 - **Group**: [pagination](#pagination)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
-  - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
@@ -21479,6 +21539,7 @@ Progress indicator styles
   .#{$prefix}--progress-step svg {
     position: relative;
     z-index: 1;
+    flex-shrink: 0;
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
     border-radius: 50%;
@@ -21604,6 +21665,7 @@ Progress indicator styles
   .#{$prefix}--progress-step-button {
     @include button-reset();
     display: flex;
+    text-align: left;
   }
 
   //unclickable button
@@ -21681,7 +21743,8 @@ Progress indicator styles
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button {
-    display: list-item;
+    flex-wrap: wrap;
+    align-content: flex-start;
     min-height: 3.625rem;
     width: initial;
     min-width: initial;
@@ -21690,15 +21753,8 @@ Progress indicator styles
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step svg,
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
     display: inline-block;
-    margin: rem(3px) 0.5rem 0;
-  }
-
-  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
-    margin-right: 0.7rem;
-  }
-
-  .#{$prefix}--progress--vertical .#{$prefix}--progress-step--current svg {
-    margin-left: 0.563rem;
+    // 1px top margin based on visual review
+    margin: rem(1px) $carbon--spacing-03 0;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-label {
@@ -21715,11 +21771,15 @@ Progress indicator styles
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
+    position: static;
+    width: 100%;
     margin-top: auto;
-    margin-left: 2.25rem;
+    margin-left: $carbon--spacing-07;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
+    position: absolute;
+    top: 0;
     left: 0;
     height: 100%;
     width: 1px;
@@ -21744,6 +21804,7 @@ Progress indicator styles
   - [ui-05 [variable]](#ui-05-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
 
 ## radio-button
 
@@ -21822,10 +21883,11 @@ Radio button styles
       content: '';
       display: inline-block;
       position: relative;
-      width: 0.5rem;
-      height: 0.5rem;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
       background-color: $icon-01;
+      transform: scale(0.5);
 
       // Allow the selected button to be seen in Windows HCM for IE/Edge
       @media screen and (-ms-high-contrast: active) {
@@ -22040,6 +22102,7 @@ Search styles
     @include button-reset(false);
     @include focus-outline('reset');
     position: absolute;
+    top: 0;
     right: 0;
 
     &::before {
@@ -22907,7 +22970,8 @@ Tabs styles
     @include carbon--breakpoint(md) {
       display: flex;
       transition: inherit;
-      overflow: visible;
+      overflow-x: scroll;
+      max-width: 100%;
       max-height: none;
     }
   }
@@ -23247,10 +23311,6 @@ Tabs styles
     &:hover {
       background-color: $filter-hover-color;
     }
-
-    svg {
-      fill: $text-color;
-    }
   }
 }
 ```
@@ -23284,12 +23344,13 @@ Tag styles
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0 $carbon--spacing-03;
-    height: 1.5rem;
+    padding: $carbon--spacing-02 $carbon--spacing-03;
+    min-height: 1.5rem;
     max-width: 100%; // restricts size of contained elements
     min-width: rem(32px); // ensures tag stays pill shaped;
     margin: $carbon--spacing-02;
     border-radius: rem(15px);
+    word-break: break-word;
     cursor: default;
 
     &:not(:first-child) {
@@ -23421,7 +23482,16 @@ Tag styles
     border: 0;
     background-color: transparent;
     border-radius: 50%;
+    color: currentColor;
     cursor: pointer;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  .#{$prefix}--tag--disabled .#{$prefix}--tag__close-icon {
+    cursor: not-allowed;
   }
 
   .#{$prefix}--tag__close-icon:focus {
@@ -23455,8 +23525,8 @@ Tag styles
 - **Requires**:
   - [tag-theme [mixin]](#tag-theme-mixin)
   - [prefix [variable]](#prefix-variable)
-  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
@@ -23484,32 +23554,16 @@ Text area styles
 
     background-color: $field-01;
     width: 100%;
+    height: 100%;
     min-width: 10rem;
     min-height: rem(40px);
     padding: rem(11px) $carbon--spacing-05;
     color: $text-01;
-    order: 3;
     resize: vertical;
     border: none;
     border-bottom: 1px solid $ui-04;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
-
-    & ~ .#{$prefix}--form__helper-text {
-      margin-top: 0;
-      order: 2;
-    }
-
-    & ~ .#{$prefix}--form-requirement {
-      order: 4;
-      color: $text-error;
-      font-weight: 400;
-      margin-top: $carbon--spacing-02;
-
-      &::before {
-        display: none;
-      }
-    }
   }
 
   .#{$prefix}--text-area:focus,
@@ -23583,8 +23637,6 @@ Text area styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [text-error [variable]](#text-error-variable)
-  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
@@ -24083,6 +24135,22 @@ Time picker styles
       color: $text-05;
     }
   }
+
+  .#{$prefix}--time-picker--light .#{$prefix}--select-input {
+    background-color: $field-02;
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+
+    &:disabled,
+    &:hover:disabled {
+      cursor: not-allowed;
+      background-color: transparent;
+      border-bottom: 1px solid transparent;
+      color: $disabled-02;
+    }
+  }
 }
 ```
 
@@ -24093,6 +24161,9 @@ Time picker styles
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
   - [text-05 [variable]](#text-05-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
 
 ## toggle
 
