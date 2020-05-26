@@ -103,6 +103,8 @@ describe('Test Number Input', function() {
 
     beforeEach(function() {
       inputNode.value = '0';
+      inputNode.max = '100';
+      inputNode.min = '0';
     });
 
     it('Should increase the value', async function() {
