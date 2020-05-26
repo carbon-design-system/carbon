@@ -261,6 +261,9 @@ categories:
       - file--transfer
       - folder
       - rich--text--format
+  - name: Finance
+    members:
+      - client--financing--01
   - name: Healthcare
     members:
       - care
