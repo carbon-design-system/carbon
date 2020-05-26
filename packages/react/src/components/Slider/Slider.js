@@ -181,11 +181,11 @@ export default class Slider extends PureComponent {
    * Handles firing of `onChange` and `onRelease` callbacks to parent in
    * response to state changes.
    *
-   * @param {*} _ Unused (prevProps)
+   * @param {*} prevProps prevProps
    * @param {*} prevState The previous Slider state, used to see if callbacks
    * should be called.
    */
-  componentDidUpdate(_, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     // Fire onChange event handler if present, if there's a usable value, and
     // if the value is different from the last one
     if (
@@ -193,6 +193,7 @@ export default class Slider extends PureComponent {
       prevState.value !== this.state.value &&
       typeof this.props.onChange === 'function'
     ) {
+      // TODO: pass event object as first param (breaking change/feat for v11)
       this.props.onChange({ value: this.state.value });
     }
 
@@ -201,10 +202,20 @@ export default class Slider extends PureComponent {
       this.state.needsOnRelease &&
       typeof this.props.onRelease === 'function'
     ) {
+      // TODO: pass event object as first param (breaking change/feat for v11)
       this.props.onRelease({ value: this.state.value });
       // Reset the flag
       this.setState({ needsOnRelease: false });
     }
+
+    // If value from props does not change, do nothing here.
+    // Otherwise, do prop -> state sync without "value capping".
+    if (prevProps.value === this.props.value) {
+      return;
+    }
+    this.setState(
+      this.calcValue({ value: this.props.value, useRawValue: true })
+    );
   }
 
   /**
