@@ -17,7 +17,7 @@ function Container({ story }) {
       document.documentElement.dir = 'rtl';
     }
     return () => {
-      if(originalDirection) {
+      if (originalDirection) {
         document.documentElement.dir = originalDirection;
       } else {
         document.documentElement.removeAttribute('dir');
