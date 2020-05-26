@@ -264,6 +264,7 @@ categories:
   - name: Finance
     members:
       - client--financing--01
+      - client--financing--02
   - name: Healthcare
     members:
       - care
