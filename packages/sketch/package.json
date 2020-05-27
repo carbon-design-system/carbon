@@ -24,7 +24,7 @@
     "skpm:link": "skpm-link"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.7.0",
+    "@babel/polyfill": "^7.8.7",
     "@carbon/colors": "^10.9.2",
     "@carbon/icon-helpers": "^10.7.0",
     "@carbon/icons": "^10.10.2",
