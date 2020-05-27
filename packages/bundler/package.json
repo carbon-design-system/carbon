@@ -21,8 +21,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@babel/core": "^7.7.7",
-    "@babel/preset-env": "^7.7.7",
+    "@babel/core": "^7.10.0",
+    "@babel/preset-env": "^7.10.0",
     "@carbon/cli-reporter": "^10.3.0",
     "@commitlint/parse": "^8.3.4",
     "autoprefixer": "^9.7.4",
@@ -45,7 +45,7 @@
     "postcss-discard-comments": "^4.0.1",
     "replace-in-file": "^3.4.4",
     "rollup": "^0.67.1",
-    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^3.4.0",
     "sassdoc": "^2.5.1",
