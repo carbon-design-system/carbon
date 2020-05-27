@@ -15,7 +15,7 @@ import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate.js';
 
 const { prefix } = settings;
-const defaultRenderExpando = props => <button {...props} />;
+const defaultRenderExpando = (props) => <button {...props} />;
 
 function AccordionItem({
   children,

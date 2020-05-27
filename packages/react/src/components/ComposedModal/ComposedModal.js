@@ -81,7 +81,7 @@ export default class ComposedModal extends Component {
         };
   }
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     // Esc key
     if (evt.which === 27) {
       this.closeModal(evt);
@@ -90,7 +90,7 @@ export default class ComposedModal extends Component {
     this.props.onKeyDown(evt);
   };
 
-  handleClick = evt => {
+  handleClick = (evt) => {
     if (
       this.innerModal.current &&
       !this.innerModal.current.contains(evt.target)
@@ -132,7 +132,7 @@ export default class ComposedModal extends Component {
     );
   }
 
-  focusButton = focusContainerElement => {
+  focusButton = (focusContainerElement) => {
     if (focusContainerElement) {
       const primaryFocusElement = focusContainerElement.querySelector(
         this.props.selectorPrimaryFocus
@@ -165,7 +165,7 @@ export default class ComposedModal extends Component {
     }
   }
 
-  handleTransitionEnd = evt => {
+  handleTransitionEnd = (evt) => {
     if (
       this.outerModal.current.offsetWidth &&
       this.outerModal.current.offsetHeight &&
@@ -176,7 +176,7 @@ export default class ComposedModal extends Component {
     }
   };
 
-  closeModal = evt => {
+  closeModal = (evt) => {
     const { onClose } = this.props;
     if (!onClose || onClose(evt) !== false) {
       this.setState({
@@ -210,7 +210,7 @@ export default class ComposedModal extends Component {
       [containerClassName]: containerClassName,
     });
 
-    const childrenWithProps = React.Children.toArray(children).map(child => {
+    const childrenWithProps = React.Children.toArray(children).map((child) => {
       switch (child.type) {
         case React.createElement(ModalHeader).type:
           return React.cloneElement(child, {
@@ -325,7 +325,7 @@ export class ModalHeader extends Component {
     buttonOnClick: () => {},
   };
 
-  handleCloseButtonClick = evt => {
+  handleCloseButtonClick = (evt) => {
     this.props.closeModal(evt);
     this.props.buttonOnClick();
   };
@@ -508,7 +508,7 @@ export class ModalFooter extends Component {
     onRequestSubmit: () => {},
   };
 
-  handleRequestClose = evt => {
+  handleRequestClose = (evt) => {
     this.props.closeModal(evt);
     this.props.onRequestClose(evt);
   };

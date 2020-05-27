@@ -91,7 +91,7 @@ export default class OverflowMenuItem extends React.Component {
 
   overflowMenuItem = React.createRef();
 
-  setTabFocus = evt => {
+  setTabFocus = (evt) => {
     if (match(evt, keys.ArrowDown)) {
       this.props.handleOverflowMenuItemFocus(this.props.index + 1);
     }
@@ -100,7 +100,7 @@ export default class OverflowMenuItem extends React.Component {
     }
   };
 
-  handleClick = evt => {
+  handleClick = (evt) => {
     const { onClick, closeMenu } = this.props;
     onClick(evt);
     if (closeMenu) {
@@ -172,7 +172,7 @@ export default class OverflowMenuItem extends React.Component {
           className={overflowMenuBtnClasses}
           disabled={disabled}
           onClick={this.handleClick}
-          onKeyDown={evt => {
+          onKeyDown={(evt) => {
             this.setTabFocus(evt);
             onKeyDown(evt);
           }}

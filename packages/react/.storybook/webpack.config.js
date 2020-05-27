@@ -66,7 +66,7 @@ module.exports = ({ config, mode }) => {
     test: /(\/|\\)FeatureFlags\.js$/,
     loader: 'string-replace-loader',
     options: {
-      multiple: Object.keys(replaceTable).map(key => ({
+      multiple: Object.keys(replaceTable).map((key) => ({
         search: `export\\s+const\\s+${key}\\s*=\\s*false`,
         replace: `export const ${key} = ${replaceTable[key]}`,
         flags: 'i',

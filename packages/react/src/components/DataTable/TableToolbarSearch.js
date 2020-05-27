@@ -19,7 +19,7 @@ const translationKeys = {
   'carbon.table.toolbar.search.label': 'Filter table',
   'carbon.table.toolbar.search.placeholder': 'Filter table',
 };
-const translateWithId = id => {
+const translateWithId = (id) => {
   return translationKeys[id];
 };
 const TableToolbarSearch = ({
@@ -89,11 +89,11 @@ const TableToolbarSearch = ({
     }
   };
 
-  const onClick = e => {
+  const onClick = (e) => {
     handleExpand(e, true);
   };
 
-  const onChange = e => {
+  const onChange = (e) => {
     setValue(e.target.value);
     if (onChangeProp) {
       onChangeProp(e);
@@ -104,9 +104,9 @@ const TableToolbarSearch = ({
     <div
       tabIndex={expandedState ? '-1' : tabIndex}
       ref={searchRef}
-      onClick={event => onClick(event)}
-      onFocus={event => handleExpand(event, true)}
-      onBlur={event => !value && handleExpand(event, false)}
+      onClick={(event) => onClick(event)}
+      onFocus={(event) => handleExpand(event, true)}
+      onBlur={(event) => !value && handleExpand(event, false)}
       className={searchContainerClasses}>
       <Search
         size="sm"

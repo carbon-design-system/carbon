@@ -40,7 +40,7 @@ const consoleMethods = ['error', 'warn', process.env.CI && 'log'].filter(
 
 for (const methodName of consoleMethods) {
   const unexpectedConsoleCallStacks = [];
-  const newMethod = function(format, ...args) {
+  const newMethod = function (format, ...args) {
     const stack = new Error().stack;
     unexpectedConsoleCallStacks.push([
       stack.substr(stack.indexOf('\n') + 1),
@@ -65,7 +65,7 @@ for (const methodName of consoleMethods) {
           `${message}\n` +
           `${stack
             .split('\n')
-            .map(line => chalk.gray(line))
+            .map((line) => chalk.gray(line))
             .join('\n')}`
       );
       const message = `Expected test not to call ${chalk.bold(

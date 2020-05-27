@@ -69,7 +69,7 @@ storiesOf('ComboBox', module)
       <div style={{ width: 300 }}>
         <ComboBox
           items={items}
-          itemToString={item => (item ? item.text : '')}
+          itemToString={(item) => (item ? item.text : '')}
           {...props()}
         />
       </div>

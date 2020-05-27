@@ -87,7 +87,7 @@ class InlineCheckbox extends React.Component {
     }
   }
 
-  handleRef = el => {
+  handleRef = (el) => {
     this.inputNode = el;
   };
 
@@ -109,7 +109,7 @@ class InlineCheckbox extends React.Component {
       id,
       name,
       onClick,
-      onChange: evt => {
+      onChange: (evt) => {
         onChange(evt.target.checked, id, evt);
       },
       onKeyDown,

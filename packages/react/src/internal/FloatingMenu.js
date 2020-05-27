@@ -311,7 +311,7 @@ class FloatingMenu extends React.Component {
    * A callback for called when menu body is mounted or unmounted.
    * @param {Element} menuBody The menu body being mounted. `null` if the menu body is being unmounted.
    */
-  _menuRef = menuBody => {
+  _menuRef = (menuBody) => {
     const { menuRef } = this.props;
     this._placeInProgress = !!menuBody;
     menuRef && menuRef((this._menuBody = menuBody));

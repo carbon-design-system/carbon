@@ -49,12 +49,12 @@ const monthToStr = (monthNumber, shorthand, locale) =>
  * @param {string} config.classFlatpickrCurrentMonth The CSS class for the text-based month selection UI.
  * @returns {Plugin} A Flatpickr plugin to use text instead of `<select>` for month picker.
  */
-const carbonFlatpickrMonthSelectPlugin = config => fp => {
+const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
   const setupElements = () => {
     if (!fp.monthElements) {
       return;
     }
-    fp.monthElements.forEach(elem => {
+    fp.monthElements.forEach((elem) => {
       if (!elem.parentNode) return;
       elem.parentNode.removeChild(elem);
     });
@@ -89,13 +89,13 @@ const carbonFlatpickrMonthSelectPlugin = config => fp => {
       config.shorthand === true,
       fp.l10n
     );
-    fp.yearElements.forEach(elem => {
+    fp.yearElements.forEach((elem) => {
       const currentMonthContainer = elem.closest(
         config.selectorFlatpickrMonthYearContainer
       );
       Array.prototype.forEach.call(
         currentMonthContainer.querySelectorAll('.cur-month'),
-        monthElement => {
+        (monthElement) => {
           monthElement.textContent = monthStr;
         }
       );
@@ -419,7 +419,7 @@ export default class DatePicker extends Component {
     }
   }
 
-  onChange = e => {
+  onChange = (e) => {
     if (
       e.target.value === '' &&
       this.cal &&
@@ -429,9 +429,9 @@ export default class DatePicker extends Component {
     }
   };
 
-  addKeyboardEvents = cal => {
+  addKeyboardEvents = (cal) => {
     if (this.inputField) {
-      this.inputField.addEventListener('keydown', e => {
+      this.inputField.addEventListener('keydown', (e) => {
         if (match(e, keys.ArrowDown)) {
           (
             cal.selectedDateElem ||
@@ -444,12 +444,12 @@ export default class DatePicker extends Component {
       this.inputField.addEventListener('change', this.onChange);
     }
     if (this.toInputField) {
-      this.toInputField.addEventListener('blur', evt => {
+      this.toInputField.addEventListener('blur', (evt) => {
         if (!this.cal.calendarContainer.contains(evt.relatedTarget)) {
           this.cal.close();
         }
       });
-      this.toInputField.addEventListener('keydown', e => {
+      this.toInputField.addEventListener('keydown', (e) => {
         if (match(e, keys.ArrowDown)) {
           (
             cal.selectedDateElem ||
@@ -485,7 +485,7 @@ export default class DatePicker extends Component {
     }
   };
 
-  updateClassNames = calendar => {
+  updateClassNames = (calendar) => {
     const calendarContainer = calendar.calendarContainer;
     const daysContainer = calendar.days;
     if (calendarContainer && daysContainer) {
@@ -502,13 +502,13 @@ export default class DatePicker extends Component {
         .classList.add(`${prefix}--date-picker__days`);
       forEach.call(
         calendarContainer.querySelectorAll('.flatpickr-weekday'),
-        item => {
+        (item) => {
           const currentItem = item;
           currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
           currentItem.classList.add(`${prefix}--date-picker__weekday`);
         }
       );
-      forEach.call(daysContainer.querySelectorAll('.flatpickr-day'), item => {
+      forEach.call(daysContainer.querySelectorAll('.flatpickr-day'), (item) => {
         item.classList.add(`${prefix}--date-picker__day`);
         if (
           item.classList.contains('today') &&
@@ -525,7 +525,7 @@ export default class DatePicker extends Component {
     }
   };
 
-  assignInputFieldRef = node => {
+  assignInputFieldRef = (node) => {
     this.inputField = !node
       ? null
       : // Child is a regular DOM node, seen in tests
@@ -537,7 +537,7 @@ export default class DatePicker extends Component {
       : null;
   };
 
-  assignToInputFieldRef = node => {
+  assignToInputFieldRef = (node) => {
     this.toInputField = !node
       ? null
       : // Child is a regular DOM node, seen in tests
@@ -549,8 +549,8 @@ export default class DatePicker extends Component {
       : null;
   };
 
-  isLabelTextEmpty = children =>
-    children.every(child => !child.props.labelText);
+  isLabelTextEmpty = (children) =>
+    children.every((child) => !child.props.labelText);
 
   render() {
     const {

@@ -29,7 +29,7 @@ export default class TooltipSimple extends mixin(
   constructor(element, options) {
     super(element, options);
     this.manage(
-      on(this.element.ownerDocument, 'keydown', event => {
+      on(this.element.ownerDocument, 'keydown', (event) => {
         // ESC
         if (event.which === 27) {
           this.allowTooltipVisibility({ visible: false });
@@ -54,7 +54,7 @@ export default class TooltipSimple extends mixin(
     );
     this.manage(on(this.element, 'mouseleave', this.tooltipFadeOut));
     this.manage(
-      on(this.element, 'focusin', event => {
+      on(this.element, 'focusin', (event) => {
         if (eventMatches(event, this.options.selectorTriggerButton)) {
           this.allowTooltipVisibility({ visible: true });
         }

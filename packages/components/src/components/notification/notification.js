@@ -30,7 +30,7 @@ class Notification extends mixin(
     this.button = element.querySelector(this.options.selectorButton);
     if (this.button) {
       this.manage(
-        on(this.button, 'click', evt => {
+        on(this.button, 'click', (evt) => {
           if (evt.currentTarget === this.button) {
             this.remove();
           }

@@ -18,7 +18,7 @@ const props = () => ({
   href: text('The link href (href)', '#'),
   inline: boolean('Use the in-line variant (inline)', false),
   visited: boolean('Allow visited styles', false),
-  onClick: (handler => evt => {
+  onClick: ((handler) => (evt) => {
     evt.preventDefault(); // Prevent link from being followed for demo purpose
     handler(evt);
   })(action('onClick')),

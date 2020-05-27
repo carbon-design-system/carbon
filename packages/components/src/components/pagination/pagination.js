@@ -43,7 +43,7 @@ class Pagination extends mixin(
     super(element, options);
 
     this.manage(
-      on(this.element, 'click', evt => {
+      on(this.element, 'click', (evt) => {
         if (eventMatches(evt, this.options.selectorPageBackward)) {
           const detail = {
             initialEvt: evt,
@@ -63,7 +63,7 @@ class Pagination extends mixin(
     );
 
     this.manage(
-      on(this.element, 'input', evt => {
+      on(this.element, 'input', (evt) => {
         if (eventMatches(evt, this.options.selectorItemsPerPageInput)) {
           const detail = {
             initialEvt: evt,

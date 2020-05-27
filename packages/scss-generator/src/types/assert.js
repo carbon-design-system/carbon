@@ -20,7 +20,7 @@ function assertDefined(node) {
 }
 
 function assertValueType(expected) {
-  return value => {
+  return (value) => {
     if (typeof value !== expected) {
       throw new TypeError(
         `Expected value to be of type ${expected}, instead ` +
@@ -31,7 +31,7 @@ function assertValueType(expected) {
 }
 
 function assertType({ type }) {
-  return node => {
+  return (node) => {
     assertDefined(node);
 
     if (node.type !== type) {
@@ -62,7 +62,7 @@ function assertOneOf(types) {
 
     throw new TypeError(
       `Expected node to match one of the expected types for ${node.type}.\n\n` +
-        errors.map(error => error.message).join('\n') +
+        errors.map((error) => error.message).join('\n') +
         '\n'
     );
   };

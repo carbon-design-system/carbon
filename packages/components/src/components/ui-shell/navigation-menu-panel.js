@@ -21,7 +21,7 @@ export default class NavigationMenuPanel extends mixin(
   handles,
   eventedState
 ) {
-  createdByLauncher = event => {
+  createdByLauncher = (event) => {
     const isExpanded = !this.element.hasAttribute('hidden');
     const newState = isExpanded ? 'collapsed' : 'expanded';
     this.triggerButton = event.delegateTarget;
@@ -34,7 +34,7 @@ export default class NavigationMenuPanel extends mixin(
    * @param {string} state
    * @returns {boolean} true if given state is different from current state
    */
-  shouldStateBeChanged = state =>
+  shouldStateBeChanged = (state) =>
     (state === 'expanded') === this.element.hasAttribute('hidden');
 
   /**

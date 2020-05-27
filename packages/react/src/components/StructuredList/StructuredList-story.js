@@ -68,7 +68,7 @@ storiesOf('StructuredList', module)
   .add(
     'Selection',
     () => {
-      const structuredListBodyRowGenerator = numRows => {
+      const structuredListBodyRowGenerator = (numRows) => {
         return Array.apply(null, Array(numRows)).map((n, i) => (
           <StructuredListRow label key={`row-${i}`}>
             <StructuredListCell>Row {i}</StructuredListCell>

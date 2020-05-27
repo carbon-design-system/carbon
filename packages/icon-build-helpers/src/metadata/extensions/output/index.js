@@ -62,11 +62,11 @@ const output = (options = defaultOptions) => {
         // If the target is not set to pictograms, then we're building up
         // metadata for icons
         const defaultAsset = icon.assets.find(
-          asset => asset.size === defaultSize
+          (asset) => asset.size === defaultSize
         );
         icon.output = await Promise.all(
-          sizes.map(async size => {
-            const asset = icon.assets.find(asset => asset.size === size);
+          sizes.map(async (size) => {
+            const asset = icon.assets.find((asset) => asset.size === size);
             const descriptor = asset
               ? await createDescriptor(icon.name, asset.optimized.data, size)
               : await createDescriptor(
@@ -90,9 +90,9 @@ const output = (options = defaultOptions) => {
         );
 
         // Handle glyph sizes that may not be one of our predetermined sizes
-        const hasGlyphAsset = icon.sizes.find(size => size === 'glyph');
+        const hasGlyphAsset = icon.sizes.find((size) => size === 'glyph');
         if (hasGlyphAsset) {
-          const asset = icon.assets.find(asset => !asset.size);
+          const asset = icon.assets.find((asset) => !asset.size);
           icon.output.push({
             descriptor: await createDescriptor(
               icon.name,

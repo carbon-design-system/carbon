@@ -59,7 +59,7 @@ describe('Dropdown', () => {
   it('should render custom item components', () => {
     const wrapper = mount(<Dropdown {...mockProps} />);
     wrapper.setProps({
-      itemToElement: item => <div className="mock-item">{item.label}</div>,
+      itemToElement: (item) => <div className="mock-item">{item.label}</div>,
     });
     openMenu(wrapper);
     expect(wrapper).toMatchSnapshot();
