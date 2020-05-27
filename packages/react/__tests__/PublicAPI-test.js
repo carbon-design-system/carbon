@@ -40,7 +40,7 @@ const { isValidElementType } = require('react-is');
 
 beforeEach(() => {
   jest.mock('prop-types', () => {
-    const PropTypes = require.requireActual('prop-types');
+    const PropTypes = jest.requireActual('prop-types');
     const primitive = [
       'array',
       'bool',
