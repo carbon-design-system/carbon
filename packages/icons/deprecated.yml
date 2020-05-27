@@ -18,8 +18,8 @@ deprecated:
   - name: cloud--snow
   - name: delete
     reason: The delete icon has been replaced by trash-can
-  - name: edit--filter
-    reason: The edit--filter icon has been replaced by filter--edit
+  - name: edit-filter
+    reason: The edit-filter icon has been replaced by filter--edit
   - name: sunny
   - name: research--bloch-sphere
     reason: research--bloch-sphere has been replaced by bloch-sphere
