@@ -40,9 +40,10 @@ export default function TreeNode({
       });
     }
   });
+  const isSelected = selected.includes(value) || null;
   const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
     [`${prefix}--tree-node--disabled`]: disabled,
-    [`${prefix}--tree-node--selected`]: selected.includes(value),
+    [`${prefix}--tree-node--selected`]: isSelected,
     [`${prefix}--tree-node--with-icon`]: Icon,
     [`${prefix}--tree-leaf-node`]: !children,
     [`${prefix}--tree-parent-node`]: children,
@@ -115,7 +116,7 @@ export default function TreeNode({
 
   const treeNodeProps = {
     ...rest,
-    ['aria-selected']: selected.includes(value),
+    ['aria-selected']: isSelected,
     className: treeNodeClasses,
     onClick: handleClick,
     onKeyDown: handleKeyDown,
