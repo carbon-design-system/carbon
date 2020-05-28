@@ -217,6 +217,12 @@
 - name: circle-packing
   friendly_name: circle-packing
   aliases: []
+- name: client--financing--01
+  friendly_name: Client financing 01
+  aliases: []
+- name: client--financing--02
+  friendly_name: Client financing 02
+  aliases: []
 - name: cloud--analytics
   friendly_name: Cloud analytics
 - name: cloud--assets
@@ -279,6 +285,12 @@
   friendly_name: College
   aliases:
     - college
+- name: commercial--financing--01
+  friendly_name: Commercial financing 01
+  aliases: []
+- name: commercial--financing--02
+  friendly_name: Commercial financing 02
+  aliases: []
 - name: concept--expansion
   friendly_name: Concept expansion
 - name: concept--insights
@@ -474,10 +486,16 @@
   friendly_name: File backup
 - name: file--transfer
   friendly_name: File transfer
+- name: finance--strategy
+  friendly_name: Finance strategy
+  aliases: []
 - name: financial--consultant
   friendly_name: Financial consultant
 - name: financial--gain
   friendly_name: Financial gain
+- name: financial--networks
+  friendly_name: Financial networks
+  aliases: []
 - name: financial--news
   friendly_name: Financial news
 - name: fire--alarm
@@ -514,14 +532,44 @@
   friendly_name: Gear
   aliases:
     - gear
+- name: global--analytics
+  friendly_name: Global analytics
+  aliases: []
+- name: global--assets-and-recovery--01
+  friendly_name: Global assets and recovery 01
+  aliases: []
+- name: global--assets-and-recovery--02
+  friendly_name: Global assets and recovery 02
+  aliases: []
 - name: global--business--services
   friendly_name: Global business services
+- name: global--currency
+  friendly_name: Global currency
+  aliases: []
+- name: global--exchange
+  friendly_name: Global exchange
+  aliases: []
 - name: global--finance--euro
   friendly_name: Global finance euro
+- name: global--finance--network
+  friendly_name: Global finance network
+  aliases: []
 - name: global--finance--sterling
   friendly_name: Global finance sterling
+- name: global--markets
+  friendly_name: Global markets
+  aliases: []
+- name: global--markets--bar
+  friendly_name: Global markets bar
+  aliases: []
 - name: global--network
   friendly_name: Global network
+- name: global--security
+  friendly_name: Global security
+  aliases: []
+- name: global--strategy
+  friendly_name: Global strategy
+  aliases: []
 - name: global--technology--services
   friendly_name: Global technology services
 - name: globe
@@ -842,6 +890,12 @@
   friendly_name: Oil pump
 - name: oil--rig
   friendly_name: Oil rig
+- name: optimize--cash-flow--01
+  friendly_name: Optimize cash flow 01
+  aliases: []
+- name: optimize--cash-flow--02
+  friendly_name: Optimize cash flow 02
+  aliases: []
 - name: overcast
   friendly_name: Overcast
   aliases:
