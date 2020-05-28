@@ -30,6 +30,7 @@ export default function TreeNode({
 }) {
   const [expanded, setExpanded] = useState(isExpanded);
   const currentNode = useRef(null);
+  const currentNodeLabel = useRef(null);
   const nodesWithProps = React.Children.map(children, node => {
     if (React.isValidElement(node)) {
       return React.cloneElement(node, {
@@ -104,11 +105,11 @@ export default function TreeNode({
       // leaf node without icon
       return depth + 2.5;
     };
-    const currentNodeLabel = currentNode.current.querySelector(
-      `.${prefix}--tree-node__label`
-    );
-    currentNodeLabel.style.marginLeft = `-${calcOffset()}rem`;
-    currentNodeLabel.style.paddingLeft = `${calcOffset()}rem`;
+
+    if (currentNodeLabel.current) {
+      currentNodeLabel.current.style.marginLeft = `-${calcOffset()}rem`;
+      currentNodeLabel.current.style.paddingLeft = `${calcOffset()}rem`;
+    }
 
     // sync props and state
     setExpanded(isExpanded);
@@ -127,7 +128,7 @@ export default function TreeNode({
   if (!children) {
     return (
       <li {...treeNodeProps}>
-        <div className={`${prefix}--tree-node__label`}>
+        <div className={`${prefix}--tree-node__label`} ref={currentNodeLabel}>
           {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
           {label}
         </div>
@@ -136,7 +137,7 @@ export default function TreeNode({
   }
   return (
     <li {...treeNodeProps} aria-expanded={expanded}>
-      <div className={`${prefix}--tree-node__label`}>
+      <div className={`${prefix}--tree-node__label`} ref={currentNodeLabel}>
         <button
           className={`${prefix}--tree-parent-node__toggle`}
           disabled={disabled}
