@@ -8,7 +8,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Document16, Folder16 } from '@carbon/icons-react';
-import { withKnobs, boolean, object, select } from '@storybook/addon-knobs';
+import {
+  boolean,
+  object,
+  select,
+  text,
+  withKnobs,
+} from '@storybook/addon-knobs';
 import TreeView, { TreeNode } from '../TreeView';
 
 const sizes = {
@@ -16,6 +22,8 @@ const sizes = {
   compact: 'compact',
 };
 const props = () => ({
+  hideLabel: boolean('Visible label (hideLabel)', false),
+  label: text('Label (label)', 'Tree view'),
   multiselect: boolean(
     'Allow selection of multiple tree nodes (multiselect)',
     false

@@ -10,18 +10,22 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { keys, match, matches } from '../../internal/keyboard';
+import uniqueId from '../../tools/uniqueId';
 
 const { prefix } = settings;
 
 export default function TreeView({
   children,
   className,
+  hideLabel = false,
+  label,
   multiselect,
   onSelect,
   selected: preselected = [],
   size = 'default',
   ...rest
 }) {
+  const { current: id } = useRef(rest.id || uniqueId());
   const treeClasses = classNames(className, `${prefix}--tree`, {
     [`${prefix}--tree--${size}`]: size !== 'default',
   });
@@ -107,15 +111,27 @@ export default function TreeView({
     setSelected(preselected);
   }, [preselected]);
 
+  const labelId = `${id}__label`;
+  const TreeLabel = () =>
+    !hideLabel && (
+      <label id={labelId} className={`${prefix}--label`}>
+        {label}
+      </label>
+    );
   return (
-    <ul
-      {...rest}
-      className={treeClasses}
-      onKeyDown={handleKeyDown}
-      ref={treeRootRef}
-      role="tree">
-      {nodesWithProps}
-    </ul>
+    <>
+      <TreeLabel />
+      <ul
+        {...rest}
+        aria-label={hideLabel ? label : null}
+        aria-labelledby={!hideLabel ? labelId : null}
+        className={treeClasses}
+        onKeyDown={handleKeyDown}
+        ref={treeRootRef}
+        role="tree">
+        {nodesWithProps}
+      </ul>
+    </>
   );
 }
 
@@ -129,6 +145,16 @@ TreeView.propTypes = {
    * Specify an optional className to be applied to the TreeView
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether or not the label should be hidden
+   */
+  hideLabel: PropTypes.bool,
+
+  /**
+   * Provide the label text that will be read by a screen reader
+   */
+  label: PropTypes.string.isRequired,
 
   /**
    * Specify the selection mode of the tree.
