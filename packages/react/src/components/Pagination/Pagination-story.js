@@ -23,10 +23,6 @@ const props = () => ({
   page: number('The current page (page)', 1),
   totalItems: number('Total number of items (totalItems)', 103),
   pagesUnknown: boolean('Total number of items unknown (pagesUnknown)', false),
-  pageSizeInputDisabled: boolean(
-    'Disable page size input (pageSizeInputDisabled)',
-    false
-  ),
   pageInputDisabled: boolean('Disable page input (pageInputDisabled)', false),
   backwardText: text(
     'The description for the backward icon (backwardText)',

@@ -128,11 +128,6 @@ export default class Pagination extends Component {
      * `true` if the select box to change the page should be disabled.
      */
     pageInputDisabled: PropTypes.bool,
-
-    /**
-     * `true` if the select box to change the page size should be disabled.
-     */
-    pageSizeInputDisabled: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -147,7 +142,6 @@ export default class Pagination extends Component {
     pagesUnknown: false,
     isLastPage: false,
     pageInputDisabled: false,
-    pageSizeInputDisabled: false,
     itemText: (min, max) => `${min}–${max} items`,
     pageText: (page) => `page ${page}`,
   };
@@ -243,7 +237,6 @@ export default class Pagination extends Component {
       pagesUnknown,
       isLastPage,
       pageInputDisabled,
-      pageSizeInputDisabled,
       totalItems,
       onChange, // eslint-disable-line no-unused-vars
       page: pageNumber, // eslint-disable-line no-unused-vars
@@ -289,7 +282,7 @@ export default class Pagination extends Component {
             noLabel
             inline
             onChange={this.handleSizeChange}
-            disabled={pageSizeInputDisabled}
+            disabled={pageInputDisabled}
             value={statePageSize}>
             {pageSizes.map((size) => (
               <SelectItem key={size} value={size} text={String(size)} />
