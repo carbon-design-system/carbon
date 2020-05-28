@@ -115,6 +115,7 @@ export default function TreeNode({
 
   const treeNodeProps = {
     ...rest,
+    ['aria-selected']: selected.includes(value),
     className: treeNodeClasses,
     onClick: handleClick,
     onKeyDown: handleKeyDown,
