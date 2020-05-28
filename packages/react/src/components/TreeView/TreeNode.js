@@ -133,7 +133,7 @@ export default function TreeNode({
     );
   }
   return (
-    <li {...treeNodeProps} aria-expanded={isExpanded}>
+    <li {...treeNodeProps} aria-expanded={expanded}>
       <div className={`${prefix}--tree-node__label`}>
         <button
           className={`${prefix}--tree-parent-node__toggle`}
