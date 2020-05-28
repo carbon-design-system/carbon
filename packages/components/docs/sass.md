@@ -3310,7 +3310,6 @@ Get the value of the corresponding number of units
 - **Used by**:
   - [listbox [mixin]](#listbox-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
-  - [pagination [mixin]](#pagination-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
   - [select [mixin]](#select-mixin)
   - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
@@ -19994,11 +19993,13 @@ Inline notification styles
     }
   }
 
-  .#{$prefix}--inline-notification--info {
+  .#{$prefix}--inline-notification--info,
+  .#{$prefix}--inline-notification--info-square {
     @include notification--experimental($inverse-support-04, $inverse-02);
   }
 
-  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info {
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info,
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info-square {
     @include notification--experimental(
       $support-04,
       $notification-info-background-color
@@ -20009,11 +20010,13 @@ Inline notification styles
     }
   }
 
-  .#{$prefix}--inline-notification--warning {
+  .#{$prefix}--inline-notification--warning,
+  .#{$prefix}--inline-notification--warning-alt {
     @include notification--experimental($inverse-support-03, $inverse-02);
   }
 
-  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning {
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning,
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning-alt {
     @include notification--experimental(
       $support-03,
       $notification-warning-background-color
@@ -20341,22 +20344,26 @@ Toast notification styles
     );
   }
 
-  .#{$prefix}--toast-notification--info {
+  .#{$prefix}--toast-notification--info,
+  .#{$prefix}--toast-notification--info-square {
     @include notification--experimental($inverse-support-04, $inverse-02);
   }
 
-  .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--info {
+  .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--info,
+  .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--info-square {
     @include notification--experimental(
       $support-04,
       $notification-info-background-color
     );
   }
 
-  .#{$prefix}--toast-notification--warning {
+  .#{$prefix}--toast-notification--warning,
+  .#{$prefix}--toast-notification--warning-alt {
     @include notification--experimental($inverse-support-03, $inverse-02);
   }
 
-  .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--warning {
+  .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--warning,
+  .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--warning-alt {
     @include notification--experimental(
       $support-03,
       $notification-warning-background-color
@@ -21098,6 +21105,7 @@ Pagination styles
     @include reset;
     @include type-style('body-short-01');
     width: 100%;
+    overflow-x: scroll;
     background-color: $ui-01;
     display: flex;
     align-items: center;
@@ -21122,12 +21130,7 @@ Pagination styles
     width: auto;
     min-width: auto;
     height: 100%;
-    padding: 0 2.5rem 0 $spacing-05;
-    margin-right: -0.65rem;
-    @include carbon--breakpoint('md') {
-      padding-right: carbon--mini-units(4.5);
-      margin-right: 0;
-    }
+    padding: 0 2.25rem 0 $spacing-05;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input:hover {
@@ -21136,10 +21139,7 @@ Pagination styles
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
     top: 50%;
-    transform: translateY(-50%);
-    @include carbon--breakpoint('md') {
-      right: $carbon--spacing-05;
-    }
+    transform: translate(-0.5rem, -50%);
   }
 
   .#{$prefix}--pagination
@@ -21164,6 +21164,11 @@ Pagination styles
   .#{$prefix}--pagination__left > .#{$prefix}--form-item,
   .#{$prefix}--pagination__right > .#{$prefix}--form-item {
     height: 100%;
+  }
+
+  .#{$prefix}--pagination__left .#{$prefix}--pagination__text,
+  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
+    white-space: nowrap;
   }
 
   .#{$prefix}--pagination__left .#{$prefix}--pagination__text {
@@ -21265,7 +21270,6 @@ Pagination styles
 - **Group**: [pagination](#pagination)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
-  - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
