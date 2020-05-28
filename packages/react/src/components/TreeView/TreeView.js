@@ -48,7 +48,7 @@ export default function TreeView({
       depth: 0,
       onSelect: handleSelect,
       selected,
-      tabIndex: -1,
+      tabIndex: (!node.props.disabled && -1) || null,
     };
     if (!focusTarget && !node.props.disabled) {
       sharedNodeProps.tabIndex = 0;
