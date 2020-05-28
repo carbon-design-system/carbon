@@ -96,7 +96,7 @@
       }
 
       &:focus {
-        @include focus-outline('outline');
+        outline: none;
       }
     }
 
