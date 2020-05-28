@@ -38,6 +38,7 @@ export default function TreeNode({
         disabled,
         onSelect,
         selected,
+        tabIndex: (!node.props.disabled && -1) || null,
       });
     }
   });
