@@ -4,7 +4,8 @@
 
 ## Getting started
 
-To install `@carbon/type` in your project, you will need to run the following command using [npm](https://www.npmjs.com/):
+To install `@carbon/type` in your project, you will need to run the following
+command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/type
@@ -36,9 +37,9 @@ To include `@carbon/type` in your project, you can write the following in your
 Sass file:
 
 ```scss
-@import "@carbon/type/scss/type";
-@import "@carbon/type/scss/font-face/mono";
-@import "@carbon/type/scss/font-face/sans";
+@import '@carbon/type/scss/type';
+@import '@carbon/type/scss/font-face/mono';
+@import '@carbon/type/scss/font-face/sans';
 
 @include carbon--type-reset();
 @include carbon--font-face-mono();
@@ -52,13 +53,13 @@ Fonts.
 If you are using `@carbon/elements`, the import paths become:
 
 ```scss
-@import "@carbon/elements/scss/type/path-to-import";
+@import '@carbon/elements/scss/type/path-to-import';
 ```
 
 For example:
 
 ```scss
-@import "@carbon/elements/scss/type/styles";
+@import '@carbon/elements/scss/type/styles';
 ```
 
 In addition, you will need to setup `node-sass` so that `node_modules` is
@@ -90,9 +91,9 @@ You can find a full reference of the type styles that are available on the
 You can include a token in your Sass file by writing:
 
 ```scss
-@import "@carbon/type/scss/styles";
+@import '@carbon/type/scss/styles';
 
-@include carbon--type-style("token-name");
+@include carbon--type-style('token-name');
 ```
 
 In addition, if the type style you are using has a fluid style then you can pass
@@ -100,9 +101,9 @@ in `true` as the second argument to `carbon--type-style` to enable fluid styles.
 For example:
 
 ```scss
-@import "@carbon/type/scss/styles";
+@import '@carbon/type/scss/styles';
 
-@include carbon--type-style("token-name", true);
+@include carbon--type-style('token-name', true);
 ```
 
 ### Font-face
@@ -128,7 +129,7 @@ and calling its mixin. For example, if you wanted to include IBM Plex Mono in
 your project you would write the following in your Sass file:
 
 ```scss
-@import "@carbon/type/scss/font-face/mono";
+@import '@carbon/type/scss/font-face/mono';
 
 @include carbon--font-face-mono();
 ```
@@ -136,9 +137,9 @@ your project you would write the following in your Sass file:
 Similarly, you can include IBM Plex Sans and IBM Plex Serif by writing:
 
 ```scss
-@import "@carbon/type/scss/font-face/mono";
-@import "@carbon/type/scss/font-face/sans";
-@import "@carbon/type/scss/font-face/serif";
+@import '@carbon/type/scss/font-face/mono';
+@import '@carbon/type/scss/font-face/sans';
+@import '@carbon/type/scss/font-face/serif';
 
 @include carbon--font-face-mono();
 @include carbon--font-face-sans();
@@ -155,7 +156,7 @@ You can include type classes in your project by writing the following in your
 Sass file:
 
 ```scss
-@import "@carbon/type/scss/classes";
+@import '@carbon/type/scss/classes';
 ```
 
 | Selector                 | Description                               |
@@ -176,7 +177,7 @@ You can access the font family information by including the following import in
 your Sass file:
 
 ```scss
-@import "@carbon/type/scss/font-family";
+@import '@carbon/type/scss/font-family';
 ```
 
 The font stacks are available under the `$carbon--font-families` variable. You
@@ -185,7 +186,7 @@ function by doing:
 
 ```scss
 .my-selector {
-  font-family: carbon--font-family("mono");
+  font-family: carbon--font-family('mono');
 }
 ```
 
@@ -194,7 +195,7 @@ You can also use the `carbon--font-family` mixin to automatically set the
 
 ```scss
 .my-selector {
-  @include carbon--font-family("mono");
+  @include carbon--font-family('mono');
 }
 ```
 
@@ -206,7 +207,7 @@ An optional type reset is provided under the `carbon--type-reset` mixin. You can
 include this mixin by writing the following in your Sass file:
 
 ```scss
-@import "@carbon/type/scss/reset";
+@import '@carbon/type/scss/reset';
 
 @include carbon--type-reset();
 ```
@@ -225,14 +226,14 @@ If you are looking to use the type scale, you can include all the scale-related
 utilities and variables by writing the following in your Sass file:
 
 ```scss
-@import "@carbon/type/scss/scale";
+@import '@carbon/type/scss/scale';
 ```
 
 You can access a specific step in the type scale by using the
 `carbon--type-scale` function:
 
 ```scss
-@import "@carbon/type/scss/scale";
+@import '@carbon/type/scss/scale';
 
 .my-selector {
   font-size: carbon--type-scale(1);
@@ -242,7 +243,7 @@ You can access a specific step in the type scale by using the
 There is also a `type-scale` mixin that will set `font-size` for your directly:
 
 ```scss
-@import "@carbon/type/scss/scale";
+@import '@carbon/type/scss/scale';
 
 .my-selector {
   @include carbon--type-scale(1);
@@ -257,13 +258,16 @@ If you're looking for `@carbon/type` API documentation, check out:
 
 ## 📚 Examples
 
-If you're looking for more examples on how to use `@carbon/type`, we have some examples that you can check out:
+If you're looking for more examples on how to use `@carbon/type`, we have some
+examples that you can check out:
 
 - [styled-components](./examples/styled-components)
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new features, or help us improve the project documentation. If you're interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
+We're always looking for contributors to help us fix bugs, build new features,
+or help us improve the project documentation. If you're interested, definitely
+check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 

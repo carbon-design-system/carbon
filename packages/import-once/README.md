@@ -4,7 +4,8 @@
 
 ## Getting started
 
-To install `@carbon/import-once` in your project, you will need to run the following command using [npm](https://www.npmjs.com/):
+To install `@carbon/import-once` in your project, you will need to run the
+following command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/import-once
@@ -32,15 +33,15 @@ This looks like:
 
 ```scss
 // a.scss
-@import "c";
+@import 'c';
 
 // b.scss
-@import "c";
+@import 'c';
 
 // c.scss
-@import "@carbon/import-once/scss/import-once";
+@import '@carbon/import-once/scss/import-once';
 
-@include exports("c") {
+@include exports('c') {
   // ...
 }
 ```
@@ -53,7 +54,9 @@ If you're looking for `@carbon/import-once` API documentation, check out:
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new features, or help us improve the project documentation. If you're interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
+We're always looking for contributors to help us fix bugs, build new features,
+or help us improve the project documentation. If you're interested, definitely
+check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 

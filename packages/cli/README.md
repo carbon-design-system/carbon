@@ -4,7 +4,8 @@
 
 ## Getting started
 
-To install `@carbon/cli` in your project, you will need to run the following command using [npm](https://www.npmjs.com/):
+To install `@carbon/cli` in your project, you will need to run the following
+command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/cli
@@ -47,7 +48,9 @@ Options:
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new features, or help us improve the project documentation. If you're interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
+We're always looking for contributors to help us fix bugs, build new features,
+or help us improve the project documentation. If you're interested, definitely
+check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 

@@ -4,7 +4,8 @@
 
 ## Getting started
 
-To install `@carbon/colors` in your project, you will need to run the following command using [npm](https://www.npmjs.com/):
+To install `@carbon/colors` in your project, you will need to run the following
+command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/colors
@@ -27,7 +28,7 @@ Sass.
 In Sass, you can import the files individual by doing:
 
 ```scss
-@import "@carbon/colors/scss/colors";
+@import '@carbon/colors/scss/colors';
 ```
 
 This file automatically includes the `carbon--colors` mixin which initializes
@@ -61,7 +62,7 @@ If you would like you choose when these variables are defined, then you can call
 the `carbon--colors` mixin directly by importing the following file:
 
 ```scss
-@import "@carbon/colors/scss/mixins";
+@import '@carbon/colors/scss/mixins';
 
 // ...
 @include carbon--colors();
@@ -109,7 +110,7 @@ If you would like a mixin to conditionally include these variables, you can
 include the mixin by using:
 
 ```scss
-@import "@carbon/colors/scss/mixins";
+@import '@carbon/colors/scss/mixins';
 
 @include ibm--colors();
 ```
@@ -121,10 +122,10 @@ your code:
 
 ```js
 // ESM
-import { black, blue, warmGray } from "@carbon/colors";
+import { black, blue, warmGray } from '@carbon/colors';
 
 // CommonJS
-const { black, blue, warmGray } = require("@carbon/colors");
+const { black, blue, warmGray } = require('@carbon/colors');
 ```
 
 Each color swatch is exported as a variable, and each color name is also
@@ -144,7 +145,9 @@ If you're looking for `@carbon/colors` API documentation, check out:
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new features, or help us improve the project documentation. If you're interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
+We're always looking for contributors to help us fix bugs, build new features,
+or help us improve the project documentation. If you're interested, definitely
+check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 

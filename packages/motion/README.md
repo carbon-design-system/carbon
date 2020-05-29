@@ -1,10 +1,12 @@
 # @carbon/motion
 
-> Motion helpers for digital and software products using the Carbon Design System
+> Motion helpers for digital and software products using the Carbon Design
+> System
 
 ## Getting started
 
-To install `@carbon/motion` in your project, you will need to run the following command using [npm](https://www.npmjs.com/):
+To install `@carbon/motion` in your project, you will need to run the following
+command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/motion
@@ -31,7 +33,7 @@ the `transition-timing-function` for a selector. To use these helpers, you can
 do the following in your project:
 
 ```scss
-@import "@carbon/motion/scss/motion.scss";
+@import '@carbon/motion/scss/motion.scss';
 
 .my-custom-selector {
   // Supplies the standard easing curve, using the productive mode by default
@@ -55,16 +57,16 @@ easings and a function called `motion` that you can use. For example:
 
 ```js
 // CommonJS
-const { easings, motion } = require("@carbon/motion");
+const { easings, motion } = require('@carbon/motion');
 ```
 
 You can also include this as a JavaScript module:
 
 ```js
 // ESM
-import { easings, motion } from "@carbon/motion";
+import { easings, motion } from '@carbon/motion';
 
-motion("standard", "productive"); // Returns a string `cubic-bezier()` function
+motion('standard', 'productive'); // Returns a string `cubic-bezier()` function
 ```
 
 ## 📖 API Documentation
@@ -75,7 +77,9 @@ If you're looking for `@carbon/motion` API documentation, check out:
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new features, or help us improve the project documentation. If you're interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
+We're always looking for contributors to help us fix bugs, build new features,
+or help us improve the project documentation. If you're interested, definitely
+check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 

@@ -4,7 +4,8 @@
 
 ## Getting started
 
-To install `@carbon/grid` in your project, you will need to run the following command using [npm](https://www.npmjs.com/):
+To install `@carbon/grid` in your project, you will need to run the following
+command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/grid
@@ -77,7 +78,9 @@ If you're looking for `@carbon/grid` API documentation, check out:
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new features, or help us improve the project documentation. If you're interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
+We're always looking for contributors to help us fix bugs, build new features,
+or help us improve the project documentation. If you're interested, definitely
+check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 
