@@ -55,11 +55,7 @@ storiesOf('OverflowMenu', module)
     'basic',
     withReadme(OverflowREADME, () => (
       <OverflowMenu {...props.menu()}>
-        <OverflowMenuItem
-          {...props.menuItem()}
-          itemText="Option 1"
-          primaryFocus
-        />
+        <OverflowMenuItem {...props.menuItem()} itemText="Option 1" />
         <OverflowMenuItem
           {...props.menuItem()}
           itemText="Option 2 is an example of a really long string and how we recommend handling this"
@@ -94,7 +90,6 @@ storiesOf('OverflowMenu', module)
             href: 'https://www.ibm.com',
           }}
           itemText="Option 1"
-          primaryFocus
         />
         <OverflowMenuItem
           {...{
@@ -150,11 +145,7 @@ storiesOf('OverflowMenu', module)
           style: { width: 'auto' },
           renderIcon: () => <div style={{ padding: '0 1rem' }}>Menu</div>,
         }}>
-        <OverflowMenuItem
-          {...props.menuItem()}
-          itemText="Option 1"
-          primaryFocus
-        />
+        <OverflowMenuItem {...props.menuItem()} itemText="Option 1" />
         <OverflowMenuItem
           {...props.menuItem()}
           itemText="Option 2 is an example of a really long string and how we recommend handling this"

@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import warning from 'warning';
 import { settings } from 'carbon-components';
 import { match, keys } from '../../internal/keyboard';
+import deprecate from '../../prop-types/deprecate.js';
 
 const { prefix } = settings;
 
@@ -72,7 +73,13 @@ export default class OverflowMenuItem extends React.Component {
     /**
      * `true` if this menu item should get focus when the menu gets open.
      */
-    primaryFocus: PropTypes.bool,
+    primaryFocus: deprecate(
+      PropTypes.bool,
+      'The `primaryFocus` prop has been deprecated as it is no longer used. ' +
+        'Feel free to remove this prop from <OverflowMenuItem>. This prop will ' +
+        'be removed in the next major release of `carbon-components-react`. ' +
+        'Opt for `selectorPrimaryFocus` in `<OverflowMenu>` instead'
+    ),
 
     /**
      * `true` if this menu item has long text and requires a browser tooltip
@@ -120,6 +127,7 @@ export default class OverflowMenuItem extends React.Component {
       onClick, // eslint-disable-line
       handleOverflowMenuItemFocus, // eslint-disable-line
       onKeyDown,
+      primaryFocus,
       wrapperClassName,
       requireTitle,
       index,
@@ -163,6 +171,7 @@ export default class OverflowMenuItem extends React.Component {
       <li className={overflowMenuItemClasses} role="menuitem">
         <TagToUse
           {...other}
+          {...{ 'data-floating-menu-primary-focus': primaryFocus || null }}
           href={href}
           className={overflowMenuBtnClasses}
           disabled={disabled}

@@ -429,7 +429,7 @@ class OverflowMenu extends Component {
       iconClass,
       onClick, // eslint-disable-line
       onOpen, // eslint-disable-line
-      selectorPrimaryFocus, // eslint-disable-line
+      selectorPrimaryFocus = '[data-floating-menu-primary-focus]', // eslint-disable-line
       renderIcon: IconElement,
       innerRef: ref,
       menuOptionsClass,
