@@ -119,6 +119,7 @@ export default function TreeNode({
   const treeNodeProps = {
     ...rest,
     ['aria-selected']: isSelected,
+    ['aria-disabled']: disabled,
     className: treeNodeClasses,
     onClick: handleClick,
     onKeyDown: handleKeyDown,
