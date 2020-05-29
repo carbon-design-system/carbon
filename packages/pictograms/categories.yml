@@ -261,6 +261,26 @@ categories:
       - file--transfer
       - folder
       - rich--text--format
+  - name: Finance
+    members:
+      - client--financing--01
+      - client--financing--02
+      - commercial--financing--01
+      - commercial--financing--02
+      - finance--strategy
+      - financial--networks
+      - global--analytics
+      - global--assets-and-recovery--01
+      - global--assets-and-recovery--02
+      - global--currency
+      - global--exchange
+      - global--finance--network
+      - global--markets--bar
+      - global--markets
+      - global--security
+      - global--strategy
+      - optimize--cash-flow--01
+      - optimize--cash-flow--02
   - name: Healthcare
     members:
       - care
