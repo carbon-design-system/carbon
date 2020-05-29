@@ -1,12 +1,10 @@
 # @carbon/icons-vue
 
-> Vue components for icons in digital and software products using the Carbon
-> Design System
+> Vue components for icons in digital and software products using the Carbon Design System
 
 ## Getting started
 
-To install `@carbon/icons-vue` in your project, you will need to run the
-following command using [npm](https://www.npmjs.com/):
+To install `@carbon/icons-vue` in your project, you will need to run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/icons-vue
@@ -28,20 +26,20 @@ You can install these components from `@carbon/icons-vue` through two ways. The
 first is to install them when you're initializing your Vue app. For example:
 
 ```js
-import { CarbonIconsVue } from '@carbon/icons-vue';
-import Bee32 from '@carbon/icons-vue/es/bee/32';
-import Vue from 'vue';
-import App from './App.vue';
+import { CarbonIconsVue } from "@carbon/icons-vue";
+import Bee32 from "@carbon/icons-vue/es/bee/32";
+import Vue from "vue";
+import App from "./App.vue";
 
 Vue.use(CarbonIconsVue, {
   components: {
-    Bee32,
-  },
+    Bee32
+  }
 });
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app');
+  render: h => h(App)
+}).$mount("#app");
 ```
 
 _Note: if you would like to find the import path for an icon, you can reference
@@ -60,13 +58,13 @@ If you would rather not register icons globally, you can also import them into
 individual components.
 
 ```js
-import Bee32 from '@carbon/icons-vue/es/bee/32';
+import Bee32 from "@carbon/icons-vue/es/bee/32";
 
 export default {
-  name: 'MyComponent',
+  name: "MyComponent",
   component: {
-    Bee32,
-  },
+    Bee32
+  }
 };
 ```
 
@@ -81,16 +79,13 @@ labels, custom classes, event handlers, and more. For example:
 
 ## 📚 Examples
 
-If you're looking for more examples on how to use `@carbon/icons-vue`, we have
-some examples that you can check out:
+If you're looking for more examples on how to use `@carbon/icons-vue`, we have some examples that you can check out:
 
 - [vue-cli](./examples/vue-cli)
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new features,
-or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
+We're always looking for contributors to help us fix bugs, build new features, or help us improve the project documentation. If you're interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 

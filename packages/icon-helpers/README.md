@@ -1,12 +1,10 @@
 # @carbon/icon-helpers
 
-> Helpers used alongside icons for digital and software products using the
-> Carbon Design System
+> Helpers used alongside icons for digital and software products using the Carbon Design System
 
 ## Getting started
 
-To install `@carbon/icon-helpers` in your project, you will need to run the
-following command using [npm](https://www.npmjs.com/):
+To install `@carbon/icon-helpers` in your project, you will need to run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/icon-helpers
@@ -37,7 +35,7 @@ value would be if you were writing the HTML for the `<svg>`. For example, if we
 wanted to set `width` and `height` we would do the following:
 
 ```js
-const { getAttributes } = require('@carbon/icon-helpers');
+const { getAttributes } = require("@carbon/icon-helpers");
 const attributes = getAttributes({ width: 20, height: 20 });
 ```
 
@@ -46,10 +44,10 @@ either `aria-label`, `aria-labelledby`, or `title` in the given `attributes` in
 addition to `tabindex`. For example:
 
 ```js
-const { getAttributes } = require('@carbon/icon-helpers');
+const { getAttributes } = require("@carbon/icon-helpers");
 const attributes = getAttributes({
-  'aria-label': 'My icon label',
-  tabindex: '0',
+  "aria-label": "My icon label",
+  tabindex: "0"
 });
 ```
 
@@ -84,24 +82,22 @@ You can import these definitions directly from `@carbon/icons` and use them
 alongside `toSVG` or `toString` by doing:
 
 ```js
-import { IconName } from '@carbon/icons';
-import { toString, toSVG } from '@carbon/icon-helpers';
+import { IconName } from "@carbon/icons";
+import { toString, toSVG } from "@carbon/icon-helpers";
 
 const iconString = toString(IconName);
 const iconSVG = toSVG({
   ...IconName,
   attrs: {
     ...IconName.attrs,
-    myCustomAttribute: 'myCustomAttributeValue',
-  },
+    myCustomAttribute: "myCustomAttributeValue"
+  }
 });
 ```
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new features,
-or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
+We're always looking for contributors to help us fix bugs, build new features, or help us improve the project documentation. If you're interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 

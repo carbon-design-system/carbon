@@ -4,8 +4,7 @@
 
 ## Getting started
 
-To install `@carbon/icons` in your project, you will need to run the following
-command using [npm](https://www.npmjs.com/):
+To install `@carbon/icons` in your project, you will need to run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/icons
@@ -40,7 +39,7 @@ Once you've found an icon and you're looking to use it in Vanilla JavaScript,
 you can import the icon by writing the following in your JavaScript file:
 
 ```js
-import IconName from '@carbon/icons/<module-type>/path-to-icon/size';
+import IconName from "@carbon/icons/<module-type>/path-to-icon/size";
 ```
 
 For example, if I wanted to import the 16x16
@@ -48,7 +47,7 @@ For example, if I wanted to import the 16x16
 icon, I would write:
 
 ```js
-import AddIcon from '@carbon/icons/es/add/16';
+import AddIcon from "@carbon/icons/es/add/16";
 ```
 
 In this case, `es` is used for ES2015 modules (ESM), but one may also use `lib`
@@ -64,12 +63,12 @@ In our case, we'll use `toSVG` to create a node in the DOM for the 16x16 `add`
 icon:
 
 ```js
-import { getAttributes, toSVG } from '@carbon/icon-helpers';
-import addIcon from '@carbon/icons/es/add/16';
+import { getAttributes, toSVG } from "@carbon/icon-helpers";
+import addIcon from "@carbon/icons/es/add/16";
 
 const addIconNode = toSVG({
   ...addIcon,
-  attrs: getAttributes(addIcon.attrs),
+  attrs: getAttributes(addIcon.attrs)
 });
 ```
 
@@ -84,7 +83,7 @@ In order to style the inner path, you will need to target the SVG using CSS. In
 general, you can target the path by writing the following:
 
 ```css
-svg [data-icon-path='inner-path'] {
+svg [data-icon-path="inner-path"] {
   fill: blue;
   opacity: 1;
 }
@@ -112,9 +111,7 @@ If you're looking for `@carbon/icons` API documentation, check out:
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new features,
-or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
+We're always looking for contributors to help us fix bugs, build new features, or help us improve the project documentation. If you're interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 

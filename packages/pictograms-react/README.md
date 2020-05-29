@@ -1,12 +1,10 @@
 # @carbon/pictograms-react
 
-> React components for pictograms in digital and software products using the
-> Carbon Design System
+> React components for pictograms in digital and software products using the Carbon Design System
 
 ## Getting started
 
-To install `@carbon/pictograms-react` in your project, you will need to run the
-following command using [npm](https://www.npmjs.com/):
+To install `@carbon/pictograms-react` in your project, you will need to run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/pictograms-react
@@ -24,7 +22,7 @@ yarn add @carbon/pictograms-react
 You can import a pictogram component into your project by referring to its name:
 
 ```jsx
-import { Airplane } from '@carbon/pictograms-react';
+import { Airplane } from "@carbon/pictograms-react";
 ```
 
 We also provide CommonJS and UMD files in the `lib` and `umd` directories,
@@ -33,7 +31,7 @@ respectively.
 To import using CommonJS, you can do the following:
 
 ```js
-const { Airplane } = require('@carbon/pictograms-react');
+const { Airplane } = require("@carbon/pictograms-react");
 ```
 
 _Note: if you would like to find the import path for a pictogram, you can
@@ -54,7 +52,7 @@ svg.my-custom-class {
 ```
 
 ```jsx
-import { Airplane } from '@carbon/pictograms-react';
+import { Airplane } from "@carbon/pictograms-react";
 
 function MyComponent() {
   return (
@@ -75,7 +73,7 @@ If you would like the icon to be announced by a screen reader, you can supply an
 `aria-label` or `aria-labelledby`. For example:
 
 ```jsx
-import { Airplane } from '@carbon/pictograms-react';
+import { Airplane } from "@carbon/pictograms-react";
 
 function MyComponent() {
   return (
@@ -92,7 +90,7 @@ If you would like the `<svg>` to receive focus, you will need to pass in a
 `tabIndex` value. For example:
 
 ```jsx
-import { Airplane } from '@carbon/pictograms-react';
+import { Airplane } from "@carbon/pictograms-react";
 
 function MyComponent() {
   return <Airplane aria-label="Add" tabIndex="0" />;
@@ -105,9 +103,7 @@ browsers like Internet Explorer 11 by setting `focusable` to `true`.
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new features,
-or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
+We're always looking for contributors to help us fix bugs, build new features, or help us improve the project documentation. If you're interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 

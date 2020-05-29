@@ -1,12 +1,10 @@
 # @carbon/icons-handlebars
 
-> Handlebars helpers for IBM Design Language icons in digital and software
-> products using the Carbon Design System
+> Handlebars helpers for IBM Design Language icons in digital and software products using the Carbon Design System
 
 ## Getting started
 
-To install `@carbon/icons-handlebars` in your project, you will need to run the
-following command using [npm](https://www.npmjs.com/):
+To install `@carbon/icons-handlebars` in your project, you will need to run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/icons-handlebars
@@ -39,9 +37,7 @@ These attributes will be applied to the top-level `<svg>` node.
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new features,
-or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
+We're always looking for contributors to help us fix bugs, build new features, or help us improve the project documentation. If you're interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 

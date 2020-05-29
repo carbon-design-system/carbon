@@ -4,8 +4,7 @@
 
 ## Getting started
 
-To install `@carbon/themes` in your project, you will need to run the following
-command using [npm](https://www.npmjs.com/):
+To install `@carbon/themes` in your project, you will need to run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/themes
@@ -35,14 +34,14 @@ If you're project is using Sass, you can include this package and the
 corresponding default theme by writing the following in your Sass file:
 
 ```scss
-@import '@carbon/themes/scss/themes';
+@import "@carbon/themes/scss/themes";
 ```
 
 By default, the white theme will be initialized. If you would like to include
 another theme, you can do so by calling our mixin. For example:
 
 ```scss
-@import '@carbon/themes/scss/themes';
+@import "@carbon/themes/scss/themes";
 
 // Use the gray 10 theme
 @include carbon--theme($carbon--theme--g10);
@@ -58,7 +57,7 @@ Alternatively, you can set the global theme variable then call the mixin without
 passing in a theme name.
 
 ```scss
-@import '@carbon/themes/scss/themes';
+@import "@carbon/themes/scss/themes";
 
 $carbon--theme: $carbon--theme--g10;
 
@@ -69,7 +68,7 @@ $carbon--theme: $carbon--theme--g10;
 Inline theming can be done by using the mixin. For example:
 
 ```scss
-@import '@carbon/themes/scss/themes';
+@import "@carbon/themes/scss/themes";
 
 // Use the default white theme here
 
@@ -104,8 +103,8 @@ import {
 
   // Specific token values
   interactive01,
-  interactive02,
-} from '@carbon/themes';
+  interactive02
+} from "@carbon/themes";
 ```
 
 ## 📖 API Documentation
@@ -116,9 +115,7 @@ If you're looking for `@carbon/themes` API documentation, check out:
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new features,
-or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
+We're always looking for contributors to help us fix bugs, build new features, or help us improve the project documentation. If you're interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 

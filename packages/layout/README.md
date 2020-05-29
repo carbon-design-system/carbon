@@ -1,12 +1,10 @@
 # @carbon/layout
 
-> Layout helpers for digital and software products using the Carbon Design
-> System
+> Layout helpers for digital and software products using the Carbon Design System
 
 ## Getting started
 
-To install `@carbon/layout` in your project, you will need to run the following
-command using [npm](https://www.npmjs.com/):
+To install `@carbon/layout` in your project, you will need to run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/layout
@@ -49,9 +47,7 @@ If you're looking for `@carbon/layout` API documentation, check out:
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new features,
-or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
+We're always looking for contributors to help us fix bugs, build new features, or help us improve the project documentation. If you're interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 

@@ -4,8 +4,7 @@
 
 ## Getting started
 
-To install `@carbon/elements` in your project, you will need to run the
-following command using [npm](https://www.npmjs.com/):
+To install `@carbon/elements` in your project, you will need to run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/elements
@@ -51,7 +50,7 @@ To include the module entrypoint, you can include the following in your Sass
 file:
 
 ```scss
-@import '@carbon/elements/scss/index';
+@import "@carbon/elements/scss/index";
 ```
 
 ### JavaScript
@@ -62,13 +61,13 @@ import it the same way when using `@carbon/elements`. For example, with
 `@carbon/colors` we might write:
 
 ```js
-import { colors } from '@carbon/colors';
+import { colors } from "@carbon/colors";
 ```
 
 With `@carbon/elements`, you can also import `colors`:
 
 ```js
-import { colors } from '@carbon/elements';
+import { colors } from "@carbon/elements";
 ```
 
 ## 📖 API Documentation
@@ -79,9 +78,7 @@ If you're looking for `@carbon/elements` API documentation, check out:
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new features,
-or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
+We're always looking for contributors to help us fix bugs, build new features, or help us improve the project documentation. If you're interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 
