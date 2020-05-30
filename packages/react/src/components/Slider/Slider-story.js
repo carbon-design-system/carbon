@@ -73,7 +73,7 @@ storiesOf('Slider', module)
         aria-label="loading slider"
         aria-live="assertive"
         role="status"
-        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+        tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
       >
         <SliderSkeleton />
       </div>
