@@ -8,6 +8,3 @@
 **/packages/colors/**/*.scss
 **/packages/elements/scss/**/*.scss
 **/packages/themes/**/*.scss
-
-# Components
-**/packages/components/**

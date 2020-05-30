@@ -1,11 +1,11 @@
 {
-  "name": "@carbon/stylelint-config-elements",
+  "name": "stylelint-config-carbon",
   "private": true,
-  "description": "Stylelint configuration for Carbon Elements",
-  "version": "10.3.0",
+  "description": "Stylelint configuration for the Carbon Design System",
+  "version": "0.1.0",
   "license": "Apache-2.0",
   "main": "index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/stylelint-config-elements",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/stylelint-config-carbon",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "ibm",
