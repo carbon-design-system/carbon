@@ -29,6 +29,7 @@ module.exports = {
     'react/jsx-uses-vars': 1,
     'react/jsx-uses-react': 1,
     'react/no-find-dom-node': 1,
+    'react/jsx-no-useless-fragment': 2,
     'react/no-typos': 2,
 
     // react-hooks
