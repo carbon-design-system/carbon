@@ -426,7 +426,7 @@ export default class FilterableMultiSelect extends React.Component {
                       <div
                         role="button"
                         className={cx(`${prefix}--multi-select__clear-input`, {
-                          [`${prefix}--multi-select__clear-input--disabled`]: disabled
+                          [`${prefix}--multi-select__clear-input--disabled`]: disabled,
                         })}
                         tabIndex={disabled ? -1 : 0}
                         onClick={this.clearInputValue}
