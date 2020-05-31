@@ -414,16 +414,6 @@ $list-box-menu-width: rem(300px);
     }
   }
 
-  .#{$prefix}--list-box--disabled
-    .#{$prefix}--list-box__selection--multi
-    > svg {
-    fill: $disabled-02;
-
-    &:hover {
-      background-color: unset;
-    }
-  }
-
   .#{$prefix}--list-box__selection--multi:focus,
   .#{$prefix}--list-box__selection--multi:hover {
     outline: none;

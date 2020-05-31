@@ -20,6 +20,8 @@ import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { match, keys } from '../../internal/keyboard';
+import { Close16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
 
@@ -247,10 +249,23 @@ export default class FilterableMultiSelect extends React.Component {
       });
   };
 
+  handleOnClearInputKeyDown = event => {
+    event.stopPropagation();
+
+    if (match(event, keys.Enter)) {
+      this.clearInputValue(event);
+    }
+  };
+
   clearInputValue = event => {
     event.stopPropagation();
-    this.setState({ inputValue: '' });
-    this.inputNode && this.inputNode.focus && this.inputNode.focus();
+
+    const { disabled } = this.props;
+
+    if (!disabled) {
+      this.setState({ inputValue: '' });
+      this.inputNode && this.inputNode.focus && this.inputNode.focus();
+    }
   };
 
   render() {
@@ -407,10 +422,19 @@ export default class FilterableMultiSelect extends React.Component {
                       />
                     )}
                     {inputValue && isOpen && (
-                      <ListBox.Selection
-                        clearSelection={this.clearInputValue}
-                        disabled={disabled}
-                      />
+                      <div
+                        role="button"
+                        className={cx(`${prefix}--multi-select__clear-input`, {
+                          [`${prefix}--multi-select__clear-input--disabled`]: disabled
+                        })}
+                        tabIndex={disabled ? -1 : 0}
+                        onClick={this.clearInputValue}
+                        onKeyDown={this.handleOnClearInputKeyDown}
+                        aria-label="Clear input"
+                        title="Clear input"
+                        disabled={disabled}>
+                        <Close16 />
+                      </div>
                     )}
                     <ListBox.MenuIcon
                       isOpen={isOpen}

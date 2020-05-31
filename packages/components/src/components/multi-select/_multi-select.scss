@@ -53,6 +53,34 @@
     }
   }
 
+  .#{$prefix}--multi-select__clear-input {
+    position: absolute;
+    right: rem(33px); // to preserve .5rem space between icons according to spec
+    // top/transform used to center the combobox clear selection icon in IE11
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: rem(30px);
+    width: rem(30px);
+    cursor: pointer;
+    user-select: none;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--multi-select__clear-input--disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--multi-select__clear-input--disabled > svg {
+    fill: $disabled-02;
+  }
+
   .#{$prefix}--multi-select--selected .#{$prefix}--text-input {
     // this value will need to change based on the number of digits in
     // the number of items selected

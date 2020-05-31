@@ -189,10 +189,6 @@
     background-color: transparent;
   }
 
-  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg {
-    fill: $disabled-02;
-  }
-
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
     @include skeleton;
