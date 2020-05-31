@@ -60,6 +60,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
         defaultIsOpen={false}
         environment={[Window]}
         getA11yStatusMessage={[Function]}
+        id="test-filterable-multiselect"
         inputValue=""
         isOpen={false}
         itemToString={[Function]}
@@ -78,7 +79,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
         <ListBox
           aria-expanded={false}
           aria-haspopup="listbox"
-          aria-labelledby="downshift-0-label"
+          aria-labelledby="test-filterable-multiselect-label"
           aria-owns={null}
           className="bx--multi-select bx--combo-box bx--multi-select--filterable"
           disabled={false}
@@ -90,7 +91,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
           <div
             aria-expanded={false}
             aria-haspopup="listbox"
-            aria-labelledby="downshift-0-label"
+            aria-labelledby="test-filterable-multiselect-label"
             aria-owns={null}
             className="bx--multi-select bx--combo-box bx--multi-select--filterable bx--list-box"
             onClick={[Function]}
@@ -99,7 +100,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
           >
             <ListBoxField
               aria-haspopup={true}
-              aria-labelledby="filterablemultiselect-label-1"
+              aria-labelledby="test-filterable-multiselect-label"
               data-toggle={true}
               disabled={false}
               id="test-filterable-multiselect"
@@ -113,7 +114,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
               <div
                 aria-controls={null}
                 aria-haspopup={true}
-                aria-labelledby="filterablemultiselect-label-1"
+                aria-labelledby="test-filterable-multiselect-label"
                 aria-owns={null}
                 className="bx--list-box__field"
                 data-toggle={true}
@@ -129,7 +130,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
                   aria-activedescendant={null}
                   aria-autocomplete="list"
                   aria-controls={null}
-                  aria-labelledby="downshift-0-label"
+                  aria-labelledby="test-filterable-multiselect-label"
                   autoComplete="off"
                   className="bx--text-input bx--text-input--empty"
                   disabled={false}

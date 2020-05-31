@@ -375,6 +375,11 @@
   .flatpickr-day.selected {
     color: $text-04;
     background: $interactive-01;
+
+    &:focus {
+      outline: rem(1px) solid $ui-02;
+      outline-offset: rem(-3px);
+    }
   }
 
   .#{$prefix}--date-picker__day.startRange.selected,

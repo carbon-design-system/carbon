@@ -309,7 +309,7 @@ export default class FilterableMultiSelect extends React.Component {
     const helperId = !helperText
       ? undefined
       : `filterablemultiselect-helper-text-${this.filterableMultiSelectInstanceId}`;
-    const labelId = `filterablemultiselect-label-${this.filterableMultiSelectInstanceId}`;
+    const labelId = `${id}-label`;
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
@@ -338,6 +338,7 @@ export default class FilterableMultiSelect extends React.Component {
           <Downshift
             {...downshiftProps}
             highlightedIndex={highlightedIndex}
+            id={id}
             isOpen={isOpen}
             inputValue={inputValue}
             onInputValueChange={this.handleOnInputValueChange}

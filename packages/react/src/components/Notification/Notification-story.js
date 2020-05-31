@@ -18,8 +18,10 @@ import {
 const kinds = {
   'Error (error)': 'error',
   'Info (info)': 'info',
+  'Info square (info-square)': 'info-square',
   'Success (success)': 'success',
   'Warning (warning)': 'warning',
+  'Warning (warning-alt)': 'warning-alt',
 };
 const notificationProps = () => ({
   kind: select('The notification kind (kind)', kinds, 'info'),
