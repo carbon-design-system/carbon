@@ -35,23 +35,6 @@ module.exports = {
     // react-hooks
     'react-hooks/rules-of-hooks': 2,
     'react-hooks/exhaustive-deps': 2,
-
-    // jsx-a11y
-    'jsx-a11y/no-static-element-interactions': 1,
-    'jsx-a11y/no-noninteractive-element-interactions': 1,
-    'jsx-a11y/click-events-have-key-events': 1,
-    'jsx-a11y/anchor-is-valid': 1,
-    'jsx-a11y/interactive-supports-focus': 1,
-    'jsx-a11y/label-has-for': [
-      1,
-      {
-        components: ['Label'],
-        required: {
-          some: ['nesting', 'id'],
-        },
-        allowChildren: true,
-      },
-    ],
   },
   overrides: [
     // Sometimes we'll want to define a quick component in a story to use as a
