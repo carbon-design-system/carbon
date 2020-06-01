@@ -133,6 +133,12 @@ class Tooltip extends Component {
     direction: PropTypes.oneOf(['bottom', 'top', 'left', 'right']),
 
     /**
+     * Specify a CSS selector that matches the DOM element that should
+     * be focused when the Tooltip opens
+     */
+    selectorPrimaryFocus: PropTypes.string,
+
+    /**
      * The adjustment of the tooltip position.
      */
     menuOffset: PropTypes.oneOfType([
@@ -201,6 +207,7 @@ class Tooltip extends Component {
     showIcon: true,
     triggerText: null,
     menuOffset: getMenuOffset,
+    selectorPrimaryFocus: '[data-tooltip-primary-focus]',
   };
 
   /**
@@ -381,6 +388,7 @@ class Tooltip extends Component {
       menuOffset,
       tabIndex = 0,
       innerRef: ref,
+      selectorPrimaryFocus, // eslint-disable-line
       ...other
     } = this.props;
 
@@ -447,6 +455,7 @@ class Tooltip extends Component {
         </ClickListener>
         {open && (
           <FloatingMenu
+            selectorPrimaryFocus={this.props.selectorPrimaryFocus}
             target={this._getTarget}
             triggerRef={this._triggerRef}
             menuDirection={direction}

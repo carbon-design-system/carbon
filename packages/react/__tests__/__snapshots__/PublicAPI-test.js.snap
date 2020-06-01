@@ -3830,9 +3830,7 @@ Map {
       "onMouseUp": Object {
         "type": "func",
       },
-      "primaryFocus": Object {
-        "type": "bool",
-      },
+      "primaryFocus": [Function],
       "requireTitle": Object {
         "type": "bool",
       },
