@@ -13452,10 +13452,10 @@ Accordion styles
     align-items: flex-start;
     justify-content: $accordion-justify-content;
     cursor: pointer;
-    padding: rem(6px) 0;
+    padding: rem(10px) 0;
     flex-direction: $accordion-flex-direction;
     position: relative;
-    height: rem(40px);
+    min-height: rem(40px);
     width: 100%;
     margin: 0;
     transition: background-color motion(standard, productive) $duration--fast-02;
@@ -18332,7 +18332,7 @@ Link styles
     color: $link-01;
     text-decoration: none;
     outline: none;
-    transition: $duration--fast-01 motion(standard, productive);
+    transition: color $duration--fast-01 motion(standard, productive);
 
     &:hover {
       color: $hover-primary-text;

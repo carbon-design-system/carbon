@@ -45,6 +45,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
           "render": [Function],
         }
       }
+      selectorPrimaryFocus="[data-overflow-menu-primary-focus]"
       tabIndex={0}
       title="Add"
     >
