@@ -28,15 +28,6 @@
     border-bottom: none;
   }
 
-  .#{$prefix}--data-table--sort td {
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
-  }
-
-  .#{$prefix}--data-table--sort th:first-of-type .#{$prefix}--table-sort {
-    padding-left: $spacing-05;
-  }
-
   // -------------------------------------
   // Th > Button
   // -------------------------------------
@@ -49,7 +40,7 @@
     justify-content: space-between;
     width: 100%;
     color: $text-01;
-    padding: 0 $spacing-05;
+    padding-right: $spacing-05;
     min-height: 100%;
     background-color: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive),
