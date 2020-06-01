@@ -2407,6 +2407,7 @@ exports[`DataTable should render 1`] = `
                         "render": [Function],
                       }
                     }
+                    selectorPrimaryFocus="[data-overflow-menu-primary-focus]"
                     tabIndex={0}
                     title="Settings"
                   >
@@ -3395,6 +3396,7 @@ exports[`DataTable sticky header should render 1`] = `
                         "render": [Function],
                       }
                     }
+                    selectorPrimaryFocus="[data-overflow-menu-primary-focus]"
                     tabIndex={0}
                     title="Settings"
                   >
