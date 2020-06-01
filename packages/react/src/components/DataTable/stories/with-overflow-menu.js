@@ -55,7 +55,7 @@ export default props => (
                 ))}
                 <TableCell className="bx--table-column-menu">
                   <OverflowMenu flipped>
-                    <OverflowMenuItem primaryFocus>Action 1</OverflowMenuItem>
+                    <OverflowMenuItem>Action 1</OverflowMenuItem>
                     <OverflowMenuItem>Action 2</OverflowMenuItem>
                     <OverflowMenuItem>Action 3</OverflowMenuItem>
                   </OverflowMenu>
