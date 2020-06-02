@@ -51,23 +51,31 @@ class NumberInput extends mixin(
     const max = Number(numberInput.max);
     const step = Number(numberInput.step) || 1;
 
-    if (target.indexOf('up-icon') >= 0 && numberInput.value < max) {
+    if (target.indexOf('up-icon') >= 0) {
       const nextValue = Number(numberInput.value) + step;
-      if (nextValue > max) {
-        numberInput.value = max;
-      } else if (nextValue < min) {
-        numberInput.value = min;
-      } else {
+      if (numberInput.max === '') {
         numberInput.value = nextValue;
+      } else if (numberInput.value < max) {
+        if (nextValue > max) {
+          numberInput.value = max;
+        } else if (nextValue < min) {
+          numberInput.value = min;
+        } else {
+          numberInput.value = nextValue;
+        }
       }
-    } else if (target.indexOf('down-icon') >= 0 && numberInput.value > min) {
+    } else if (target.indexOf('down-icon') >= 0) {
       const nextValue = Number(numberInput.value) - step;
-      if (nextValue < min) {
-        numberInput.value = min;
-      } else if (nextValue > max) {
-        numberInput.value = max;
-      } else {
+      if (numberInput.min === '') {
         numberInput.value = nextValue;
+      } else if (numberInput.value > min) {
+        if (nextValue < min) {
+          numberInput.value = min;
+        } else if (nextValue > max) {
+          numberInput.value = max;
+        } else {
+          numberInput.value = nextValue;
+        }
       }
     }
 

@@ -25,18 +25,30 @@ const props = {
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
+    selectorPrimaryFocus: text(
+      'Primary focus element selector (selectorPrimaryFocus)',
+      ''
+    ),
   }),
   withoutIcon: () => ({
     showIcon: false,
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
+    selectorPrimaryFocus: text(
+      'Primary focus element selector (selectorPrimaryFocus)',
+      ''
+    ),
   }),
   customIcon: () => ({
     showIcon: true,
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
+    selectorPrimaryFocus: text(
+      'Primary focus element selector (selectorPrimaryFocus)',
+      ''
+    ),
     renderIcon: React.forwardRef((props, ref) => (
       <div ref={ref}>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
@@ -52,6 +64,10 @@ const props = {
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     iconDescription: 'Helpful Information',
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
+    selectorPrimaryFocus: text(
+      'Primary focus element selector (selectorPrimaryFocus)',
+      ''
+    ),
     renderIcon: OverflowMenuVertical16,
   }),
 };
