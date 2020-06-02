@@ -100,10 +100,16 @@ export default class OverflowMenuItem extends React.Component {
 
   setTabFocus = evt => {
     if (match(evt, keys.ArrowDown)) {
-      this.props.handleOverflowMenuItemFocus(this.props.index + 1);
+      this.props.handleOverflowMenuItemFocus({
+        currentIndex: this.props.index,
+        direction: 1,
+      });
     }
     if (match(evt, keys.ArrowUp)) {
-      this.props.handleOverflowMenuItemFocus(this.props.index - 1);
+      this.props.handleOverflowMenuItemFocus({
+        currentIndex: this.props.index,
+        direction: -1,
+      });
     }
   };
 
