@@ -165,3 +165,9 @@ export ToggleSmallSkeleton from './components/ToggleSmall/ToggleSmall.Skeleton';
 export IconSkeleton from './components/Icon/Icon.Skeleton';
 export DatePickerSkeleton from './components/DatePicker/DatePicker.Skeleton';
 export * from './components/UIShell';
+
+// experimental
+export {
+  PageSelector,
+  Unstable_Pagination,
+} from './components/Pagination/Unstable_Pagination';
