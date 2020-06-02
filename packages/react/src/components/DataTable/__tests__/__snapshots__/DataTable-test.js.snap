@@ -2042,6 +2042,7 @@ exports[`DataTable should render 1`] = `
                           <Icon
                             aria-hidden="true"
                             className="bx--btn__icon"
+                            fill="currentColor"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
                             viewBox="0 0 32 32"
@@ -2051,6 +2052,7 @@ exports[`DataTable should render 1`] = `
                             <svg
                               aria-hidden={true}
                               className="bx--btn__icon"
+                              fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
@@ -2109,6 +2111,7 @@ exports[`DataTable should render 1`] = `
                           <Icon
                             aria-hidden="true"
                             className="bx--btn__icon"
+                            fill="currentColor"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
                             viewBox="0 0 32 32"
@@ -2118,6 +2121,7 @@ exports[`DataTable should render 1`] = `
                             <svg
                               aria-hidden={true}
                               className="bx--btn__icon"
+                              fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
@@ -2176,6 +2180,7 @@ exports[`DataTable should render 1`] = `
                           <Icon
                             aria-hidden="true"
                             className="bx--btn__icon"
+                            fill="currentColor"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
                             viewBox="0 0 32 32"
@@ -2185,6 +2190,7 @@ exports[`DataTable should render 1`] = `
                             <svg
                               aria-hidden={true}
                               className="bx--btn__icon"
+                              fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
@@ -2279,6 +2285,7 @@ exports[`DataTable should render 1`] = `
                       >
                         <Icon
                           className="bx--search-magnifier"
+                          fill="currentColor"
                           height={16}
                           preserveAspectRatio="xMidYMid meet"
                           viewBox="0 0 16 16"
@@ -2288,6 +2295,7 @@ exports[`DataTable should render 1`] = `
                           <svg
                             aria-hidden={true}
                             className="bx--search-magnifier"
+                            fill="currentColor"
                             focusable="false"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
@@ -2328,6 +2336,7 @@ exports[`DataTable should render 1`] = `
                       >
                         <ForwardRef(Close16)>
                           <Icon
+                            fill="currentColor"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
                             viewBox="0 0 32 32"
@@ -2336,6 +2345,7 @@ exports[`DataTable should render 1`] = `
                           >
                             <svg
                               aria-hidden={true}
+                              fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
@@ -2426,6 +2436,7 @@ exports[`DataTable should render 1`] = `
                           <Icon
                             aria-label="Settings"
                             className="bx--overflow-menu__icon"
+                            fill="currentColor"
                             focusable="false"
                             height={16}
                             onClick={[Function]}
@@ -2438,6 +2449,7 @@ exports[`DataTable should render 1`] = `
                             <svg
                               aria-label="Settings"
                               className="bx--overflow-menu__icon"
+                              fill="currentColor"
                               focusable="false"
                               height={16}
                               onClick={[Function]}
@@ -3019,6 +3031,7 @@ exports[`DataTable sticky header should render 1`] = `
                           <Icon
                             aria-hidden="true"
                             className="bx--btn__icon"
+                            fill="currentColor"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
                             viewBox="0 0 32 32"
@@ -3028,6 +3041,7 @@ exports[`DataTable sticky header should render 1`] = `
                             <svg
                               aria-hidden={true}
                               className="bx--btn__icon"
+                              fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
@@ -3086,6 +3100,7 @@ exports[`DataTable sticky header should render 1`] = `
                           <Icon
                             aria-hidden="true"
                             className="bx--btn__icon"
+                            fill="currentColor"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
                             viewBox="0 0 32 32"
@@ -3095,6 +3110,7 @@ exports[`DataTable sticky header should render 1`] = `
                             <svg
                               aria-hidden={true}
                               className="bx--btn__icon"
+                              fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
@@ -3153,6 +3169,7 @@ exports[`DataTable sticky header should render 1`] = `
                           <Icon
                             aria-hidden="true"
                             className="bx--btn__icon"
+                            fill="currentColor"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
                             viewBox="0 0 32 32"
@@ -3162,6 +3179,7 @@ exports[`DataTable sticky header should render 1`] = `
                             <svg
                               aria-hidden={true}
                               className="bx--btn__icon"
+                              fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
@@ -3256,6 +3274,7 @@ exports[`DataTable sticky header should render 1`] = `
                       >
                         <Icon
                           className="bx--search-magnifier"
+                          fill="currentColor"
                           height={16}
                           preserveAspectRatio="xMidYMid meet"
                           viewBox="0 0 16 16"
@@ -3265,6 +3284,7 @@ exports[`DataTable sticky header should render 1`] = `
                           <svg
                             aria-hidden={true}
                             className="bx--search-magnifier"
+                            fill="currentColor"
                             focusable="false"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
@@ -3305,6 +3325,7 @@ exports[`DataTable sticky header should render 1`] = `
                       >
                         <ForwardRef(Close16)>
                           <Icon
+                            fill="currentColor"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
                             viewBox="0 0 32 32"
@@ -3313,6 +3334,7 @@ exports[`DataTable sticky header should render 1`] = `
                           >
                             <svg
                               aria-hidden={true}
+                              fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
@@ -3403,6 +3425,7 @@ exports[`DataTable sticky header should render 1`] = `
                           <Icon
                             aria-label="Settings"
                             className="bx--overflow-menu__icon"
+                            fill="currentColor"
                             focusable="false"
                             height={16}
                             onClick={[Function]}
@@ -3415,6 +3438,7 @@ exports[`DataTable sticky header should render 1`] = `
                             <svg
                               aria-label="Settings"
                               className="bx--overflow-menu__icon"
+                              fill="currentColor"
                               focusable="false"
                               height={16}
                               onClick={[Function]}

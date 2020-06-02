@@ -16,6 +16,7 @@ exports[`HeaderMenuButton should render 1`] = `
   >
     <ForwardRef(Menu20)>
       <Icon
+        fill="currentColor"
         height={20}
         preserveAspectRatio="xMidYMid meet"
         viewBox="0 0 20 20"
@@ -24,6 +25,7 @@ exports[`HeaderMenuButton should render 1`] = `
       >
         <svg
           aria-hidden={true}
+          fill="currentColor"
           focusable="false"
           height={20}
           preserveAspectRatio="xMidYMid meet"

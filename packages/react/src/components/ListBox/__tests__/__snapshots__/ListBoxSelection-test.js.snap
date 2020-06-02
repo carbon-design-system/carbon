@@ -37,6 +37,7 @@ exports[`ListBoxSelection should render 1`] = `
   >
     <ForwardRef(Close16)>
       <Icon
+        fill="currentColor"
         height={16}
         preserveAspectRatio="xMidYMid meet"
         viewBox="0 0 32 32"
@@ -45,6 +46,7 @@ exports[`ListBoxSelection should render 1`] = `
       >
         <svg
           aria-hidden={true}
+          fill="currentColor"
           focusable="false"
           height={16}
           preserveAspectRatio="xMidYMid meet"
@@ -101,6 +103,7 @@ exports[`ListBoxSelection should render 2`] = `
     3
     <ForwardRef(Close16)>
       <Icon
+        fill="currentColor"
         height={16}
         preserveAspectRatio="xMidYMid meet"
         viewBox="0 0 32 32"
@@ -109,6 +112,7 @@ exports[`ListBoxSelection should render 2`] = `
       >
         <svg
           aria-hidden={true}
+          fill="currentColor"
           focusable="false"
           height={16}
           preserveAspectRatio="xMidYMid meet"
