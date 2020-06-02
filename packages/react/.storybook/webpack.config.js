@@ -16,6 +16,7 @@ const {
   CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS,
   CARBON_REACT_USE_CONTROLLED_STATE_WITH_EVENT_LISTENER,
   CARBON_REACT_STORYBOOK_USE_RTL,
+  CARBON_REACT_STORYBOOK_USE_EXPRESSIVE_THEME,
   NODE_ENV = 'development',
 } = process.env;
 
@@ -99,6 +100,7 @@ module.exports = ({ config, mode }) => {
     options: {
       prependData() {
         return `
+          $use-expressive-theme: ${CARBON_REACT_STORYBOOK_USE_EXPRESSIVE_THEME};
           $feature-flags: (
             ui-shell: true,
             enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
@@ -116,6 +118,7 @@ module.exports = ({ config, mode }) => {
     loader: 'fast-sass-loader',
     options: {
       data: `
+        $use-expressive-theme: ${CARBON_REACT_STORYBOOK_USE_EXPRESSIVE_THEME};
         $feature-flags: (
           ui-shell: true,
           enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
