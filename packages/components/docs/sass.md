@@ -21195,7 +21195,8 @@ Pagination styles
     color: $text-02;
   }
 
-  .#{$prefix}--pagination__button {
+  .#{$prefix}--pagination__button,
+  .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
     @include reset;
     border: none;
     background: none;
@@ -21212,24 +21213,31 @@ Pagination styles
     transition: background-color $duration--fast-02 motion(standard, productive);
   }
 
-  .#{$prefix}--pagination__button:focus {
+  .#{$prefix}--pagination__button:focus,
+  .#{$prefix}--btn--ghost:focus.#{$prefix}--pagination__button {
     @include focus-outline('outline');
+    border-left: 0;
   }
 
-  .#{$prefix}--pagination__button:hover {
+  .#{$prefix}--pagination__button:hover,
+  .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button {
     background: $hover-ui;
   }
 
-  .#{$prefix}--pagination__button--no-index {
+  .#{$prefix}--pagination__button--no-index,
+  .#{$prefix}--btn--ghost.#{$prefix}--pagination__button--no-index {
     fill: $disabled-02;
     cursor: not-allowed;
   }
 
   .#{$prefix}--pagination__button:disabled:hover,
-  .#{$prefix}--pagination__button--no-index:hover {
+  .#{$prefix}--pagination__button--no-index:hover,
+  .#{$prefix}--btn--ghost:disabled:hover.#{$prefix}--pagination__button,
+  .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button--no-index {
     cursor: not-allowed;
     fill: $disabled-02;
     background: $ui-01;
+    border-color: $ui-03;
   }
 
   .#{$prefix}--pagination--inline {
@@ -21239,20 +21247,26 @@ Pagination styles
     margin-right: -1rem;
   }
 
-  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button {
+  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button,
+  .#{$prefix}--pagination--inline
+    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
     height: rem(40px);
     border-left: 1px solid $ui-03;
     border-right: 1px solid $ui-03;
     margin: 0;
   }
 
-  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--forward {
+  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--forward,
+  .#{$prefix}--pagination--inline
+    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button--forward {
     border-right: 0;
     padding: 0 $carbon--spacing-05;
     margin-left: $carbon--spacing-05;
   }
 
-  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--backward {
+  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--backward,
+  .#{$prefix}--pagination--inline
+    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button--backward {
     margin: 0 $carbon--spacing-05;
     padding: 0 $carbon--spacing-05;
   }
