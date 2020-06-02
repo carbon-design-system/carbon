@@ -15,5 +15,11 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "peerDependencies": {
+    "prettier": "v1 || v2"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1"
   }
 }
