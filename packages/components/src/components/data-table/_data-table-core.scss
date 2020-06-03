@@ -87,19 +87,18 @@
 
   .#{$prefix}--data-table th,
   .#{$prefix}--data-table td {
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
     vertical-align: top;
     text-align: left;
+  }
+
+  .#{$prefix}--data-table td {
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
   }
 
   .#{$prefix}--data-table th {
     color: $text-01;
     background-color: $ui-03;
-  }
-
-  .#{$prefix}--data-table th:first-of-type:not(.#{$prefix}--table-expand) {
-    padding-left: $spacing-05;
   }
 
   .#{$prefix}--data-table th:last-of-type {
@@ -110,7 +109,7 @@
 
   .#{$prefix}--data-table .#{$prefix}--table-header-label {
     display: block;
-    padding: rem(14px) 0;
+    padding: rem(14px) $spacing-05;
     text-align: left;
   }
 
@@ -123,7 +122,7 @@
     padding: rem(14px) $spacing-05;
     padding-bottom: rem(13px);
 
-    & + td:first-of-type {
+    + td:first-of-type {
       padding-left: $spacing-04;
     }
   }
@@ -132,14 +131,6 @@
     .#{$prefix}--data-table td {
       background-clip: padding-box; // fix to show borders in ff
     }
-  }
-
-  .#{$prefix}--data-table td:first-of-type {
-    padding-left: $spacing-05;
-  }
-
-  .#{$prefix}--data-table td:last-of-type {
-    padding-right: $spacing-05;
   }
 
   // Overflow Menu Overrides
@@ -354,7 +345,8 @@
   }
 
   .#{$prefix}--data-table--compact .#{$prefix}--table-header-label {
-    padding: rem(2px) 0;
+    padding-top: rem(2px);
+    padding-bottom: rem(2px);
   }
 
   .#{$prefix}--data-table--compact td,
@@ -391,7 +383,8 @@
   }
 
   .#{$prefix}--data-table--short .#{$prefix}--table-header-label {
-    padding: rem(7px) 0;
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
   }
 
   .#{$prefix}--data-table--short td,
@@ -420,7 +413,8 @@
   }
 
   .#{$prefix}--data-table--tall .#{$prefix}--table-header-label {
-    padding: rem(16px) 0;
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-05;
   }
 
   .#{$prefix}--data-table--tall td,

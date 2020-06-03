@@ -207,6 +207,8 @@
   th.#{$prefix}--table-expand {
     position: relative;
     vertical-align: middle;
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
   }
 
   th.#{$prefix}--table-expand + th.#{$prefix}--table-column-checkbox {
