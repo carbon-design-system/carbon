@@ -256,8 +256,17 @@
     border-top: 1px solid $data-table-zebra-color;
   }
 
+  .#{$prefix}--data-table--zebra tr.#{$prefix}--parent-row td,
+  .#{$prefix}--data-table--zebra
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
+    + tr[data-child-row]
+    td {
+    transition: all $duration--moderate-01 motion(standard, productive),
+      border-bottom $duration--moderate-01 motion(standard, productive),
+      border-top $duration--moderate-01 motion(standard, productive);
+  }
+
   // TODO add parent hover class when child hover(programatically)
-  //TODO remove blinking border on hover
   .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:hover td,
   .#{$prefix}--data-table--zebra
     tbody
