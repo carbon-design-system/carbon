@@ -14113,8 +14113,8 @@ Button variant styles
 
   &:focus {
     border-color: $focus;
-    box-shadow: inset 0 0 0 $button-border-width $focus, inset 0 0 0
-        ($button-border-width + $button-outline-width) $ui-02;
+    box-shadow: inset 0 0 0 $button-outline-width $focus, inset 0 0 0
+        $button-border-width $ui-02;
   }
 
   &:disabled:hover,
