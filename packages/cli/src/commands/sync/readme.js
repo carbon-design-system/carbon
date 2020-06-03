@@ -10,6 +10,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const prettier = require('prettier');
+const prettierConfig = require('prettier-config-carbon');
 const createRemark = require('remark');
 const monorepo = require('./remark/remark-monorepo');
 
@@ -24,7 +25,7 @@ function run({ root, packagePaths }) {
     root: root.directory,
   });
   const prettierOptions = {
-    ...root.packageJson.prettier,
+    ...prettierConfig,
     parser: 'markdown',
   };
 

@@ -39,6 +39,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
         >
           <Icon
             className="bx--search-magnifier"
+            fill="currentColor"
             height={16}
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 16 16"
@@ -48,6 +49,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
             <svg
               aria-hidden={true}
               className="bx--search-magnifier"
+              fill="currentColor"
               focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"
@@ -88,6 +90,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
         >
           <ForwardRef(Close16)>
             <Icon
+              fill="currentColor"
               height={16}
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 32 32"
@@ -96,6 +99,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
             >
               <svg
                 aria-hidden={true}
+                fill="currentColor"
                 focusable="false"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"

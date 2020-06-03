@@ -583,7 +583,7 @@ export default class DatePicker extends Component {
     const childrenWithProps = childArray.map((child, index) => {
       if (
         index === 0 &&
-        child.type === React.createElement(DatePickerInput).type
+        child.type === React.createElement(DatePickerInput, child.props).type
       ) {
         return React.cloneElement(child, {
           datePickerType,
@@ -593,7 +593,7 @@ export default class DatePicker extends Component {
       }
       if (
         index === 1 &&
-        child.type === React.createElement(DatePickerInput).type
+        child.type === React.createElement(DatePickerInput, child.props).type
       ) {
         return React.cloneElement(child, {
           datePickerType,
