@@ -2949,10 +2949,10 @@ Map {
         "type": "bool",
       },
       "primaryButtonText": Object {
-        "type": "string",
+        "type": "node",
       },
       "secondaryButtonText": Object {
-        "type": "string",
+        "type": "node",
       },
       "selectorPrimaryFocus": Object {
         "type": "string",

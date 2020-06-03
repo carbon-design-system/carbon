@@ -338,23 +338,40 @@ class OverflowMenu extends Component {
     }
   };
 
-  handleOverflowMenuItemFocus = index => {
-    const i = (() => {
-      switch (index) {
+  /**
+   * Focuses the next enabled overflow menu item given the currently focused
+   * item index and direction to move
+   * @param {object} params
+   * @param {number} params.currentIndex - the index of the currently focused
+   * overflow menu item in the list of overflow menu items
+   * @param {number} params.direction - number denoting the direction to move
+   * focus (1 for forwards, -1 for backwards)
+   */
+  handleOverflowMenuItemFocus = ({ currentIndex, direction }) => {
+    const enabledIndices = React.Children.toArray(this.props.children).reduce(
+      (acc, curr, i) => {
+        if (!curr.props.disabled) {
+          acc.push(i);
+        }
+        return acc;
+      },
+      []
+    );
+    const nextValidIndex = (() => {
+      const nextIndex = enabledIndices.indexOf(currentIndex) + direction;
+      switch (enabledIndices.indexOf(currentIndex) + direction) {
         case -1:
-          return React.Children.count(this.props.children) - 1;
-        case React.Children.count(this.props.children):
+          return enabledIndices.length - 1;
+        case enabledIndices.length:
           return 0;
         default:
-          return index;
+          return nextIndex;
       }
     })();
-    const { overflowMenuItem } =
-      this[`overflowMenuItem${i}`] ||
-      React.Children.toArray(this.props.children)[i];
-    if (overflowMenuItem && overflowMenuItem.current) {
-      overflowMenuItem.current.focus();
-    }
+    const { overflowMenuItem } = this[
+      `overflowMenuItem${enabledIndices[nextValidIndex]}`
+    ];
+    overflowMenuItem?.current?.focus();
   };
 
   /**

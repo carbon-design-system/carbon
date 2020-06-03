@@ -88,6 +88,7 @@ exports[`Dropdown should render 1`] = `
               >
                 <Icon
                   aria-label="Open menu"
+                  fill="currentColor"
                   height={16}
                   name="chevron--down"
                   preserveAspectRatio="xMidYMid meet"
@@ -97,6 +98,7 @@ exports[`Dropdown should render 1`] = `
                 >
                   <svg
                     aria-label="Open menu"
+                    fill="currentColor"
                     focusable="false"
                     height={16}
                     name="chevron--down"
@@ -232,6 +234,7 @@ exports[`Dropdown should render custom item components 1`] = `
               >
                 <Icon
                   aria-label="Close menu"
+                  fill="currentColor"
                   height={16}
                   name="chevron--down"
                   preserveAspectRatio="xMidYMid meet"
@@ -241,6 +244,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 >
                   <svg
                     aria-label="Close menu"
+                    fill="currentColor"
                     focusable="false"
                     height={16}
                     name="chevron--down"
@@ -534,6 +538,7 @@ exports[`Dropdown should render with strings as items 1`] = `
               >
                 <Icon
                   aria-label="Close menu"
+                  fill="currentColor"
                   height={16}
                   name="chevron--down"
                   preserveAspectRatio="xMidYMid meet"
@@ -543,6 +548,7 @@ exports[`Dropdown should render with strings as items 1`] = `
                 >
                   <svg
                     aria-label="Close menu"
+                    fill="currentColor"
                     focusable="false"
                     height={16}
                     name="chevron--down"

@@ -67,6 +67,7 @@
     "lerna": "^3.20.2",
     "lint-staged": "^9.5.0",
     "prettier": "^1.19.1",
+    "prettier-config-carbon": "^0.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "rimraf": "^3.0.0",
@@ -136,13 +137,6 @@
     "extends": [
       "eslint-config-carbon"
     ]
-  },
-  "prettier": {
-    "jsxBracketSameLine": true,
-    "printWidth": 80,
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "proseWrap": "always"
   },
   "stylelint": {
     "extends": [
