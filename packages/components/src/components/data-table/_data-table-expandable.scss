@@ -279,6 +279,18 @@
     border-top: 1px solid $hover-field;
   }
 
+  // .#{$prefix}--data-table--zebra .#{$prefix}--expandable-row--hover td {
+  //   background-color: ;
+  // }
+
+  .#{$prefix}--data-table--zebra
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
+    td {
+    background: $hover-ui;
+    border-bottom: 1px solid $hover-field;
+    border-top: 1px solid $hover-field;
+  }
+
   //----------------------------------------------------------------------------
   // Selected
   //----------------------------------------------------------------------------
