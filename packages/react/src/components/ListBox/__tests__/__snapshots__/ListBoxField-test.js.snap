@@ -27,6 +27,7 @@ exports[`ListBoxField should render 1`] = `
       >
         <ForwardRef(Close16)>
           <Icon
+            fill="currentColor"
             height={16}
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 32 32"
@@ -35,6 +36,7 @@ exports[`ListBoxField should render 1`] = `
           >
             <svg
               aria-hidden={true}
+              fill="currentColor"
               focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"
@@ -83,6 +85,7 @@ exports[`ListBoxField should set \`aria-owns\` based when expanded 1`] = `
       >
         <ForwardRef(Close16)>
           <Icon
+            fill="currentColor"
             height={16}
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 32 32"
@@ -91,6 +94,7 @@ exports[`ListBoxField should set \`aria-owns\` based when expanded 1`] = `
           >
             <svg
               aria-hidden={true}
+              fill="currentColor"
               focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"

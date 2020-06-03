@@ -3727,7 +3727,6 @@
 - name: help--filled
   friendly_name: Help filled
   sizes:
-    - 16
     - 32
   aliases:
     - support
@@ -3990,7 +3989,6 @@
 - name: information--filled
   friendly_name: Information filled
   sizes:
-    - 16
     - 32
   aliases:
     - info
@@ -9423,7 +9421,6 @@
 - name: warning--alt--filled
   friendly_name: Warning alt filled
   sizes:
-    - 16
     - 32
   aliases:
     - halt

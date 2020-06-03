@@ -154,6 +154,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
                     >
                       <Icon
                         aria-label="Open menu"
+                        fill="currentColor"
                         height={16}
                         name="chevron--down"
                         preserveAspectRatio="xMidYMid meet"
@@ -163,6 +164,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
                       >
                         <svg
                           aria-label="Open menu"
+                          fill="currentColor"
                           focusable="false"
                           height={16}
                           name="chevron--down"

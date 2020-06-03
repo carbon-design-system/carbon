@@ -15,6 +15,7 @@ exports[`HeaderGlobalAction should render 1`] = `
   >
     <ForwardRef(Fade32)>
       <Icon
+        fill="currentColor"
         height={32}
         preserveAspectRatio="xMidYMid meet"
         viewBox="0 0 32 32"
@@ -23,6 +24,7 @@ exports[`HeaderGlobalAction should render 1`] = `
       >
         <svg
           aria-hidden={true}
+          fill="currentColor"
           focusable="false"
           height={32}
           preserveAspectRatio="xMidYMid meet"

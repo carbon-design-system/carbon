@@ -137,6 +137,7 @@ async function createDescriptor(name, data, size, original) {
 
   if (size) {
     descriptor.size = size;
+    descriptor.attrs.fill = 'currentColor';
     if (size !== 'glyph') {
       descriptor.attrs.width = size;
       descriptor.attrs.height = size;

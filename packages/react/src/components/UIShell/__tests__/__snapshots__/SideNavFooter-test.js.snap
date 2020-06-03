@@ -20,6 +20,7 @@ exports[`SideNavFooter should render 1`] = `
       >
         <ForwardRef(ChevronRight20)>
           <Icon
+            fill="currentColor"
             height={20}
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 32 32"
@@ -28,6 +29,7 @@ exports[`SideNavFooter should render 1`] = `
           >
             <svg
               aria-hidden={true}
+              fill="currentColor"
               focusable="false"
               height={20}
               preserveAspectRatio="xMidYMid meet"
@@ -73,6 +75,7 @@ exports[`SideNavFooter should render 2`] = `
       >
         <ForwardRef(ChevronRight20)>
           <Icon
+            fill="currentColor"
             height={20}
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 32 32"
@@ -81,6 +84,7 @@ exports[`SideNavFooter should render 2`] = `
           >
             <svg
               aria-hidden={true}
+              fill="currentColor"
               focusable="false"
               height={20}
               preserveAspectRatio="xMidYMid meet"
