@@ -43,6 +43,7 @@ exports[`DataTable.TableExpandRow should render 1`] = `
                   >
                     <Icon
                       className="bx--table-expand__svg"
+                      fill="currentColor"
                       height={16}
                       preserveAspectRatio="xMidYMid meet"
                       viewBox="0 0 16 16"
@@ -52,6 +53,7 @@ exports[`DataTable.TableExpandRow should render 1`] = `
                       <svg
                         aria-hidden={true}
                         className="bx--table-expand__svg"
+                        fill="currentColor"
                         focusable="false"
                         height={16}
                         preserveAspectRatio="xMidYMid meet"

@@ -24,7 +24,7 @@ exports[`<ComposedModal /> renders 1`] = `
     </span>
     <div
       className="bx--modal-container"
-      tabIndex={-1}
+      role="dialog"
     />
     <span
       className="bx--visually-hidden"
