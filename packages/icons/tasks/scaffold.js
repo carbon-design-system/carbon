@@ -19,7 +19,7 @@ async function scaffold() {
   });
 }
 
-scaffold().catch(error => {
+scaffold().catch((error) => {
   console.log(error);
   process.exit(1);
 });

@@ -3,18 +3,18 @@ import Notification from '../../src/components/notification/notification';
 import HTML from '../../html/notification/toast-notification.html';
 import flattenOptions from '../utils/flatten-options';
 
-describe('ToastNotification', function() {
-  describe('Constructor', function() {
+describe('ToastNotification', function () {
+  describe('Constructor', function () {
     let toastElement;
     const wrapper = document.createElement('div');
     wrapper.innerHTML = HTML;
 
-    beforeAll(function() {
+    beforeAll(function () {
       document.body.appendChild(wrapper);
       toastElement = document.querySelector('.bx--toast-notification--error');
     });
 
-    it('Should throw if root element is not given', function() {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         new Notification();
       }).toThrowError(
@@ -23,7 +23,7 @@ describe('ToastNotification', function() {
       );
     });
 
-    it('Should throw if root element is not a DOM element', function() {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         new Notification(document.createTextNode(''));
       }).toThrowError(
@@ -32,7 +32,7 @@ describe('ToastNotification', function() {
       );
     });
 
-    it('should set default options', function() {
+    it('should set default options', function () {
       const instance = new Notification(toastElement);
       expect(flattenOptions(instance.options)).toEqual({
         selectorInit: '[data-notification]',
@@ -42,7 +42,7 @@ describe('ToastNotification', function() {
       });
     });
 
-    it('should search for an element with options.selectorInit', function() {
+    it('should search for an element with options.selectorInit', function () {
       toastElement.dataset.id = 'foo';
       const toastInstance = new Notification(toastElement, {
         selectorInit: '[data-id="foo"]',
@@ -51,7 +51,7 @@ describe('ToastNotification', function() {
       toastInstance.release();
     });
 
-    it('should search for close-button element with options.selectorButton', function() {
+    it('should search for close-button element with options.selectorButton', function () {
       const toastInstance = new Notification(toastElement);
       const toastButton = toastElement.querySelector(
         toastInstance.options.selectorButton
@@ -60,18 +60,18 @@ describe('ToastNotification', function() {
       toastInstance.release();
     });
 
-    afterAll(function() {
+    afterAll(function () {
       document.body.removeChild(wrapper);
     });
   });
 
-  describe('Remove notification', function() {
+  describe('Remove notification', function () {
     let element;
     let instance;
     let events;
     let wrapper;
 
-    beforeEach(function() {
+    beforeEach(function () {
       wrapper = document.createElement('div');
       wrapper.innerHTML = HTML;
       events = new EventManager();
@@ -80,7 +80,7 @@ describe('ToastNotification', function() {
       instance = new Notification(element);
     });
 
-    it('should call remove method', function() {
+    it('should call remove method', function () {
       spyOn(instance, 'remove');
       instance.button.dispatchEvent(
         new CustomEvent('click', { bubbles: true })
@@ -88,7 +88,7 @@ describe('ToastNotification', function() {
       expect(instance.remove).toHaveBeenCalled();
     });
 
-    it('should remove notification on click event', function() {
+    it('should remove notification on click event', function () {
       instance.button.dispatchEvent(
         new CustomEvent('click', { bubbles: true })
       );
@@ -97,7 +97,7 @@ describe('ToastNotification', function() {
       );
     });
 
-    it('should emit notification-before-delete event on click', function() {
+    it('should emit notification-before-delete event on click', function () {
       const spyNotificationCloseEvent = jasmine.createSpy();
       events.on(
         element,
@@ -111,7 +111,7 @@ describe('ToastNotification', function() {
       expect(spyNotificationCloseEvent).toHaveBeenCalled();
     });
 
-    it('should emit notification-after-delete event on click', function() {
+    it('should emit notification-after-delete event on click', function () {
       const spyNotificationCloseEvent = jasmine.createSpy();
       events.on(
         element,
@@ -125,12 +125,12 @@ describe('ToastNotification', function() {
       expect(spyNotificationCloseEvent).toHaveBeenCalled();
     });
 
-    it('should delete instance from WeakMap with release', function() {
+    it('should delete instance from WeakMap with release', function () {
       instance.release();
       expect(Notification.components.get(element)).toBe(undefined);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       instance.release();
       document.body.removeChild(wrapper);
     });

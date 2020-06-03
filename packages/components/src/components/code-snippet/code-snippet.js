@@ -30,7 +30,7 @@ class CodeSnippet extends mixin(
     this._initCodeSnippet();
     this.element
       .querySelector(this.options.classExpandBtn)
-      .addEventListener('click', evt => this._handleClick(evt));
+      .addEventListener('click', (evt) => this._handleClick(evt));
   }
 
   _handleClick() {

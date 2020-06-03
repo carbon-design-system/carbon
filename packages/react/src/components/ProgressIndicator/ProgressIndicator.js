@@ -19,7 +19,7 @@ import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
-const defaultRenderLabel = props => <p {...props} />;
+const defaultRenderLabel = (props) => <p {...props} />;
 
 const defaultTranslations = {
   'carbon.progress-step.complete': 'Complete',
@@ -54,7 +54,7 @@ export function ProgressStep({
     [className]: className,
   });
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (e) => {
     if (matches(e, [keys.Enter, keys.Space])) {
       onClick();
     }

@@ -72,9 +72,9 @@ async function build() {
     })
   );
   const colorMapProperties = t.SassMap({
-    properties: Object.keys(colors).flatMap(swatch => {
+    properties: Object.keys(colors).flatMap((swatch) => {
       const value = t.SassMap({
-        properties: Object.keys(colors[swatch]).map(grade => {
+        properties: Object.keys(colors[swatch]).map((grade) => {
           return t.SassMapProperty({
             key: t.Identifier(grade),
             value: t.SassColor(colors[swatch][grade]),
@@ -172,7 +172,7 @@ async function build() {
   ]);
 }
 
-build().catch(error => {
+build().catch((error) => {
   console.error(error);
   process.exit(1);
 });

@@ -30,7 +30,7 @@ async function migrate() {
   );
 }
 
-migrate().catch(error => {
+migrate().catch((error) => {
   console.log(error);
   process.exit(1);
 });

@@ -69,9 +69,11 @@ function Unstable_Pagination({
               hideLabel
               noLabel
               inline
-              onChange={event => setCurrentPageSize(Number(event.target.value))}
+              onChange={(event) =>
+                setCurrentPageSize(Number(event.target.value))
+              }
               value={currentPageSize}>
-              {pageSizes.map(size => (
+              {pageSizes.map((size) => (
                 <SelectItem key={size} value={size} text={String(size)} />
               ))}
             </Select>
@@ -184,7 +186,7 @@ Unstable_Pagination.defaultProps = {
   pageRangeText: (current, total) => `${current} of ${total} pages`,
   pageSize: 10,
   pageSizes: undefined,
-  pageText: page => `page ${page}`,
+  pageText: (page) => `page ${page}`,
   pagesUnknown: false,
   totalItems: undefined,
 };

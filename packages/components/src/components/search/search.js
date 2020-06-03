@@ -14,7 +14,7 @@ import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 import svgToggleClass from '../../globals/js/misc/svg-toggle-class';
 
-const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+const toArray = (arrayLike) => Array.prototype.slice.call(arrayLike);
 
 class Search extends mixin(createComponent, initComponentBySearch, handles) {
   /**
@@ -57,7 +57,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
     }
 
     this.manage(
-      on(this.element, 'click', evt => {
+      on(this.element, 'click', (evt) => {
         const toggleItem = eventMatches(
           evt,
           this.options.selectorIconContainer
@@ -67,7 +67,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
     );
 
     this.manage(
-      on(input, 'input', evt => {
+      on(input, 'input', (evt) => {
         if (closeIcon) this.showClear(evt.target.value, closeIcon);
       })
     );
@@ -79,7 +79,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
    */
   toggleLayout(element) {
     toArray(element.querySelectorAll(this.options.selectorSearchView)).forEach(
-      item => {
+      (item) => {
         item.classList.toggle(this.options.classLayoutHidden);
       }
     );

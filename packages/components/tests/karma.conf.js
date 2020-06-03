@@ -3,7 +3,7 @@
 const path = require('path');
 const commander = require('commander');
 
-const flatten = a =>
+const flatten = (a) =>
   a.reduce(
     (result, item) => [...result, ...(Array.isArray(item) ? item : [item])],
     []
@@ -64,7 +64,7 @@ class FeatureFlagProxyPlugin {
   }
 }
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
     basePath: '..',
 
@@ -260,7 +260,7 @@ module.exports = function(config) {
       (cloptions.browser.length === 0
         ? ['ChromeHeadless']
         : cloptions.browser
-      ).map(browser => {
+      ).map((browser) => {
         const browserLower = browser.toLowerCase();
         return (process.env.TRAVIS && travisLaunchers[browserLower]) || browser;
       })

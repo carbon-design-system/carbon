@@ -64,14 +64,14 @@ export function generate() {
         let ICON_Y_OFFSET = subcategoryText.frame.height + 8;
         let COLUMN_COUNT = 0;
 
-        const members = subcategory.members.filter(member => {
-          const icon = icons.find(icon => icon.name === member);
+        const members = subcategory.members.filter((member) => {
+          const icon = icons.find((icon) => icon.name === member);
           return !icon.deprecated;
         });
 
         for (const icon of members) {
-          const symbol = symbols.find(symbol => {
-            const parts = symbol.name.split('/').map(string => string.trim());
+          const symbol = symbols.find((symbol) => {
+            const parts = symbol.name.split('/').map((string) => string.trim());
             const [_type, _category, _subcategory, name, size] = parts;
             return name === icon && size === '32';
           });

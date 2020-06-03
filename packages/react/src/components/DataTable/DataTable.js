@@ -40,7 +40,7 @@ const defaultTranslations = {
   [translationKeys.unselectRow]: 'Unselect row',
 };
 
-const translateWithId = id => defaultTranslations[id];
+const translateWithId = (id) => defaultTranslations[id];
 
 /**
  * Data Tables are used to represent a collection of resources, displaying a
@@ -153,24 +153,24 @@ export default class DataTable extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    const rowIds = this.props.rows.map(row => row.id);
-    const nextRowIds = nextProps.rows.map(row => row.id);
+    const rowIds = this.props.rows.map((row) => row.id);
+    const nextRowIds = nextProps.rows.map((row) => row.id);
 
     if (!isEqual(rowIds, nextRowIds)) {
-      this.setState(state => getDerivedStateFromProps(nextProps, state));
+      this.setState((state) => getDerivedStateFromProps(nextProps, state));
       return;
     }
 
-    const headers = this.props.headers.map(header => header.key);
-    const nextHeaders = nextProps.headers.map(header => header.key);
+    const headers = this.props.headers.map((header) => header.key);
+    const nextHeaders = nextProps.headers.map((header) => header.key);
 
     if (!isEqual(headers, nextHeaders)) {
-      this.setState(state => getDerivedStateFromProps(nextProps, state));
+      this.setState((state) => getDerivedStateFromProps(nextProps, state));
       return;
     }
 
     if (!isEqual(this.props.rows, nextProps.rows)) {
-      this.setState(state => getDerivedStateFromProps(nextProps, state));
+      this.setState((state) => getDerivedStateFromProps(nextProps, state));
       return;
     }
   }
@@ -222,7 +222,7 @@ export default class DataTable extends React.Component {
     const { translateWithId: t } = this.props;
     const { isExpandedAll, rowIds, rowsById } = this.state;
     const isExpanded =
-      isExpandedAll || rowIds.every(id => rowsById[id].isExpanded);
+      isExpandedAll || rowIds.every((id) => rowsById[id].isExpanded);
     const translationKey = !isExpanded
       ? translationKeys.collapseAll
       : translationKeys.expandAll;
@@ -249,7 +249,7 @@ export default class DataTable extends React.Component {
    * @returns {Function}
    */
   handleOnHeaderClick = (onClick, sortParams) => {
-    return e => onClick(e, sortParams);
+    return (e) => onClick(e, sortParams);
   };
 
   /**
@@ -260,7 +260,7 @@ export default class DataTable extends React.Component {
    * @returns {Function}
    */
   handleOnExpandHeaderClick = (onClick, expandParams) => {
-    return e => onClick(e, expandParams);
+    return (e) => onClick(e, expandParams);
   };
 
   /**
@@ -400,7 +400,7 @@ export default class DataTable extends React.Component {
    * @returns {Array<string>} the array of rowIds that are currently selected
    */
   getSelectedRows = () =>
-    this.state.rowIds.filter(id => {
+    this.state.rowIds.filter((id) => {
       const row = this.state.rowsById[id];
       return row.isSelected && !row.disabled;
     });
@@ -462,7 +462,7 @@ export default class DataTable extends React.Component {
    * deselect all selected rows
    */
   handleOnCancel = () => {
-    this.setState(state => {
+    this.setState((state) => {
       return {
         shouldShowBatchActions: false,
         ...this.setAllSelectedState(state, false, this.getFilteredRowIds()),
@@ -474,11 +474,11 @@ export default class DataTable extends React.Component {
    * Handler for toggling the selection state of all rows in the database
    */
   handleSelectAll = () => {
-    this.setState(state => {
+    this.setState((state) => {
       const filteredRowIds = this.getFilteredRowIds();
       const { rowsById } = state;
       const isSelected = !(
-        Object.values(rowsById).filter(row => row.isSelected && !row.disabled)
+        Object.values(rowsById).filter((row) => row.isSelected && !row.disabled)
           .length > 0
       );
       return {
@@ -494,8 +494,8 @@ export default class DataTable extends React.Component {
    * @param {string} rowId
    * @returns {Function}
    */
-  handleOnSelectRow = rowId => () => {
-    this.setState(state => {
+  handleOnSelectRow = (rowId) => () => {
+    this.setState((state) => {
       const row = state.rowsById[rowId];
       if (this.props.radio) {
         // deselect all radio buttons
@@ -517,7 +517,7 @@ export default class DataTable extends React.Component {
         };
       }
       const selectedRows = state.rowIds.filter(
-        id => state.rowsById[id].isSelected
+        (id) => state.rowsById[id].isSelected
       ).length;
       // Predict the length of the selected rows after this change occurs
       const selectedRowsCount = !row.isSelected
@@ -546,8 +546,8 @@ export default class DataTable extends React.Component {
    * @param {string} rowId
    * @returns {Function}
    */
-  handleOnExpandRow = rowId => () => {
-    this.setState(state => {
+  handleOnExpandRow = (rowId) => () => {
+    this.setState((state) => {
       const row = state.rowsById[rowId];
       const { isExpandedAll } = state;
       return {
@@ -567,7 +567,7 @@ export default class DataTable extends React.Component {
    * Handler for changing the expansion state of all rows.
    */
   handleOnExpandAll = () => {
-    this.setState(state => {
+    this.setState((state) => {
       const { rowIds, isExpandedAll } = state;
       return {
         isExpandedAll: !isExpandedAll,
@@ -591,8 +591,8 @@ export default class DataTable extends React.Component {
    * @param {string} headerKey the field for the header that we are sorting by
    * @returns {Function}
    */
-  handleSortBy = headerKey => () => {
-    this.setState(state =>
+  handleSortBy = (headerKey) => () => {
+    this.setState((state) =>
       getNextSortState(this.props, state, { key: headerKey })
     );
   };
@@ -645,10 +645,10 @@ export default class DataTable extends React.Component {
       onInputChange: this.handleOnInputValueChange,
 
       // Expose internal state change actions
-      sortBy: headerKey => this.handleSortBy(headerKey)(),
+      sortBy: (headerKey) => this.handleSortBy(headerKey)(),
       selectAll: this.handleSelectAll,
-      selectRow: rowId => this.handleOnSelectRow(rowId)(),
-      expandRow: rowId => this.handleOnExpandRow(rowId)(),
+      selectRow: (rowId) => this.handleOnSelectRow(rowId)(),
+      expandRow: (rowId) => this.handleOnExpandRow(rowId)(),
       expandAll: this.handleOnExpandAll,
       radio: this.props.radio,
     };

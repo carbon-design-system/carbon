@@ -32,7 +32,7 @@ async function build() {
   ]);
 }
 
-build().catch(error => {
+build().catch((error) => {
   console.log(error);
   process.exit(1);
 });
