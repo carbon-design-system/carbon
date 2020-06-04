@@ -91,9 +91,7 @@ const TextInput = React.forwardRef(function TextInput(
     );
   } else if (warn) {
     error = (
-      <div
-        className={`${prefix}--form-requirement ${prefix}--form-requirement--warning`}
-        id={warnId}>
+      <div className={`${prefix}--form-requirement`} id={warnId}>
         {warnText}
       </div>
     );
@@ -135,7 +133,7 @@ const TextInput = React.forwardRef(function TextInput(
         {isFluid ? error : null}
       </div>
       {isFluid ? null : error}
-      {!invalid && !isFluid && helper}
+      {!invalid && !warn && !isFluid && helper}
     </div>
   );
 });
