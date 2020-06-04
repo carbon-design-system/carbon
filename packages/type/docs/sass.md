@@ -2329,7 +2329,7 @@ $helper-text-01: (
 $body-short-01: (
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(18px),
+  line-height: carbon--em(18px),
   letter-spacing: 0.16px,
 );
 ```
@@ -2348,7 +2348,7 @@ $body-short-01: (
 $body-long-01: (
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(20px),
+  line-height: carbon--em(20px),
   letter-spacing: 0.16px,
 );
 ```
@@ -2367,7 +2367,7 @@ $body-long-01: (
 $body-short-02: (
   font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(22px),
+  line-height: carbon--em(22px),
   letter-spacing: 0,
 );
 ```
@@ -2386,7 +2386,7 @@ $body-short-02: (
 $body-long-02: (
   font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(24px),
+  line-height: carbon--em(24px),
   letter-spacing: 0,
 );
 ```
