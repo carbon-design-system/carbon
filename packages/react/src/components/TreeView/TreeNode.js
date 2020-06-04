@@ -69,10 +69,34 @@ export default function TreeNode({
     if (matches(event, [keys.ArrowLeft, keys.ArrowRight, keys.Enter])) {
       event.stopPropagation();
     }
-    if (children && match(event, keys.ArrowLeft)) {
-      setExpanded(false);
+    if (match(event, keys.ArrowLeft)) {
+      const findParentTreeNode = node => {
+        if (node.classList.contains(`${prefix}--tree-parent-node`)) {
+          return node;
+        }
+        if (node.classList.contains(`${prefix}--tree`)) {
+          return null;
+        }
+        return findParentTreeNode(node.parentNode);
+      };
+      if (children && expanded) {
+        setExpanded(false);
+      } else {
+        /**
+         * When focus is on a leaf node or a closed parent node, move focus to
+         * its parent node (unless its depth is level 1)
+         */
+        findParentTreeNode(currentNode.current.parentNode)?.focus();
+      }
     }
     if (children && match(event, keys.ArrowRight)) {
+      if (expanded) {
+        /**
+         * When focus is on an expanded parent node, move focus to the first
+         * child node
+         */
+        currentNode.current.lastChild.firstChild.focus();
+      }
       setExpanded(true);
     }
     if (match(event, keys.Enter) && onSelect && !disabled) {
