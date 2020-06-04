@@ -12,6 +12,7 @@ import ReactDOM from 'react-dom';
 import window from 'window-or-global';
 import { settings } from 'carbon-components';
 import OptimizedResize from './OptimizedResize';
+import { selectorFocusable, selectorTabbable } from './keyboard/navigation';
 
 const { prefix } = settings;
 
@@ -176,6 +177,12 @@ class FloatingMenu extends React.Component {
     ]),
 
     /**
+     * Specify a CSS selector that matches the DOM element that should
+     * be focused when the Modal opens
+     */
+    selectorPrimaryFocus: PropTypes.string,
+
+    /**
      * The additional styles to put to the floating menu.
      */
     styles: PropTypes.object,
@@ -293,17 +300,43 @@ class FloatingMenu extends React.Component {
       this._updateMenuSize();
     });
   }
+  /**
+   * Set focus on floating menu content after menu placement.
+   * @param {Element} menuBody The DOM element of the menu body.
+   * @private
+   */
+  _focusMenuContent = menuBody => {
+    const primaryFocusNode = menuBody.querySelector(
+      this.props.selectorPrimaryFocus || null
+    );
+    const tabbableNode = menuBody.querySelector(selectorTabbable);
+    const focusableNode = menuBody.querySelector(selectorFocusable);
+    const focusTarget =
+      primaryFocusNode || // User defined focusable node
+      tabbableNode || // First sequentially focusable node
+      focusableNode || // First programmatic focusable node
+      menuBody;
+    focusTarget.focus();
+    if (focusTarget === menuBody && __DEV__) {
+      warning(
+        focusableNode === null,
+        'Floating Menus must have at least a programmatically focusable child. ' +
+          'This can be accomplished by adding tabIndex="-1" to the content element.'
+      );
+    }
+  };
 
   componentDidUpdate(prevProps) {
     this._updateMenuSize(prevProps);
     const { onPlace } = this.props;
-    if (
-      this._placeInProgress &&
-      this.state.floatingPosition &&
-      typeof onPlace === 'function'
-    ) {
-      onPlace(this._menuBody);
-      this._placeInProgress = false;
+    if (this._placeInProgress && this.state.floatingPosition) {
+      if (this._menuBody && !this._menuBody.contains(document.activeElement)) {
+        this._focusMenuContent(this._menuBody);
+      }
+      if (typeof onPlace === 'function') {
+        onPlace(this._menuBody);
+        this._placeInProgress = false;
+      }
     }
   }
 

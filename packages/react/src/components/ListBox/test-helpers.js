@@ -19,6 +19,10 @@ export const findMenuIconNode = wrapper =>
   wrapper.find(`.${prefix}--list-box__menu-icon`);
 export const findFieldNode = wrapper =>
   wrapper.find(`.${prefix}--list-box__field`);
+export const findComboboxNode = wrapper =>
+  wrapper.find(`.${prefix}--list-box[role="combobox"]`);
+export const findPopupNode = wrapper =>
+  wrapper.find('[aria-haspopup="listbox"]').hostNodes();
 
 // Actions
 export const openMenu = wrapper => findFieldNode(wrapper).simulate('click');
@@ -29,12 +33,7 @@ export const assertMenuOpen = (wrapper, mockProps) => {
   expect(findMenuIconNode(wrapper).prop('className')).toEqual(
     expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
   );
-  expect(findFieldNode(wrapper).props()).toEqual(
-    expect.objectContaining({
-      'aria-expanded': true,
-      'aria-haspopup': true,
-    })
-  );
+  expect(findPopupNode(wrapper).prop('aria-expanded')).toBe(true);
 };
 export const assertMenuClosed = wrapper => {
   expect(findMenuIconNode(wrapper).prop('className')).toEqual(
@@ -43,12 +42,7 @@ export const assertMenuClosed = wrapper => {
   expect(findMenuIconNode(wrapper).prop('className')).not.toEqual(
     expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
   );
-  expect(findFieldNode(wrapper).props()).toEqual(
-    expect.objectContaining({
-      'aria-expanded': false,
-      'aria-haspopup': true,
-    })
-  );
+  expect(findPopupNode(wrapper).prop('aria-expanded')).toBe(false);
 };
 
 /**

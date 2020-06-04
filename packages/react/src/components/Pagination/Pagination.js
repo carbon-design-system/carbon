@@ -8,11 +8,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { CaretRight24, CaretLeft24 } from '@carbon/icons-react';
+import { CaretRight16, CaretLeft16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import { equals } from '../../tools/array';
+import Button from '../Button';
 
 const { prefix } = settings;
 
@@ -313,22 +314,28 @@ export default class Pagination extends Component {
               ? pageText(statePage)
               : pageRangeText(statePage, totalPages)}
           </span>
-          <button
-            type="button"
+          <Button
+            kind="ghost"
             className={backButtonClasses}
+            hasIconOnly
+            renderIcon={CaretLeft16}
+            iconDescription={backwardText}
+            tooltipAlignment="center"
+            tooltipPosition="top"
             onClick={this.decrementPage}
-            aria-label={backwardText}
-            disabled={backButtonDisabled}>
-            <CaretLeft24 />
-          </button>
-          <button
-            type="button"
+            disabled={backButtonDisabled}
+          />
+          <Button
+            kind="ghost"
             className={forwardButtonClasses}
-            aria-label={forwardText}
+            hasIconOnly
+            renderIcon={CaretRight16}
+            iconDescription={forwardText}
+            tooltipAlignment="end"
+            tooltipPosition="top"
             onClick={this.incrementPage}
-            disabled={forwardButtonDisabled || isLastPage}>
-            <CaretRight24 />
-          </button>
+            disabled={forwardButtonDisabled || isLastPage}
+          />
         </div>
       </div>
     );

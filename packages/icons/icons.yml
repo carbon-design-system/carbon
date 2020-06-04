@@ -3727,7 +3727,6 @@
 - name: help--filled
   friendly_name: Help filled
   sizes:
-    - 16
     - 32
   aliases:
     - support
@@ -3990,7 +3989,6 @@
 - name: information--filled
   friendly_name: Information filled
   sizes:
-    - 16
     - 32
   aliases:
     - info
@@ -3998,6 +3996,16 @@
     - more
     - tip
     - help
+- name: information--square
+  friendly_name: information--square
+  aliases: []
+  sizes:
+    - 32
+- name: information--square--filled
+  friendly_name: information--square--filled
+  aliases: []
+  sizes:
+    - 32
 - name: insert
   friendly_name: Insert
   aliases:
@@ -9413,7 +9421,6 @@
 - name: warning--alt--filled
   friendly_name: Warning alt filled
   sizes:
-    - 16
     - 32
   aliases:
     - halt

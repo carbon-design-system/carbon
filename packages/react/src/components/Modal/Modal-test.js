@@ -9,6 +9,7 @@ import React from 'react';
 import { Close20 } from '@carbon/icons-react';
 import Modal from '../Modal';
 import ModalWrapper from '../ModalWrapper';
+import InlineLoading from '../InlineLoading';
 import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
 
@@ -76,6 +77,22 @@ describe('Modal', () => {
         .find(`.${prefix}--btn.${prefix}--btn--primary`)
         .at(0);
       expect(primaryButton.props().disabled).toEqual(true);
+    });
+
+    it('Should have node in primary', () => {
+      mounted.setProps({ primaryButtonText: <InlineLoading /> });
+      const primaryButton = mounted
+        .find(`.${prefix}--btn.${prefix}--btn--primary`)
+        .at(0);
+      expect(primaryButton.find('InlineLoading').exists()).toEqual(true);
+    });
+
+    it('Should have node in secondary', () => {
+      mounted.setProps({ secondaryButtonText: <InlineLoading /> });
+      const secondaryButton = mounted
+        .find(`.${prefix}--btn.${prefix}--btn--secondary`)
+        .at(0);
+      expect(secondaryButton.find('InlineLoading').exists()).toEqual(true);
     });
   });
 

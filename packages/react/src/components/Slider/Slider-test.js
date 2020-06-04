@@ -19,19 +19,22 @@ throttle.mockImplementation(fn => Object.assign(fn, { throttled: true }));
 
 const { prefix } = settings;
 describe('Slider', () => {
-  describe('Renders as expected', () => {
-    const id = 'slider';
-    const wrapper = mount(
+  const id = 'slider';
+  let wrapper;
+  beforeEach(() => {
+    wrapper = mount(
       <Slider
         id={id}
         className="extra-class"
-        value={50}
-        min={0}
-        max={100}
+        value={1}
+        min={1}
+        max={3}
         step={1}
       />
     );
+  });
 
+  describe('Renders as expected', () => {
     it('renders children as expected', () => {
       expect(wrapper.find(`.${prefix}--text-input`).length).toBe(1);
     });
@@ -54,6 +57,18 @@ describe('Slider', () => {
     it('can set value via props', () => {
       wrapper.setProps({ value: 55 });
       expect(wrapper.props().value).toEqual(55);
+    });
+
+    it('should change the value upon change in props', () => {
+      wrapper.setProps({ value: 1 });
+      wrapper.setState({ value: 1 });
+      wrapper.update();
+      wrapper.setProps({ value: 2 });
+      expect(wrapper.state().value).toEqual(2);
+    });
+
+    it('should accurately position slider on mount', () => {
+      expect(wrapper.state().left).toEqual(0);
     });
 
     it('should specify light version as expected', () => {

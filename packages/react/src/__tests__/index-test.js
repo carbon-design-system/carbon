@@ -52,6 +52,7 @@ describe('Carbon Components React', () => {
         "FileUploaderItem",
         "FileUploaderSkeleton",
         "Filename",
+        "FluidForm",
         "Form",
         "FormGroup",
         "FormItem",
@@ -89,6 +90,7 @@ describe('Carbon Components React', () => {
         "OrderedList",
         "OverflowMenu",
         "OverflowMenuItem",
+        "PageSelector",
         "Pagination",
         "PaginationSkeleton",
         "PrimaryButton",
@@ -189,6 +191,7 @@ describe('Carbon Components React', () => {
         "TooltipDefinition",
         "TooltipIcon",
         "UnorderedList",
+        "Unstable_Pagination",
       ]
     `);
   });

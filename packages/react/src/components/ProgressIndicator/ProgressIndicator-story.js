@@ -22,11 +22,11 @@ storiesOf('ProgressIndicator', module)
     'Default',
     () => (
       <ProgressIndicator
-        vertical={boolean('Vertical', false)}
+        vertical={boolean('Vertical (vertical)', false)}
         currentIndex={number('Current progress (currentIndex)', 1)}
-        spaceEqually={boolean('Space Equally', false)}>
+        spaceEqually={boolean('Space Equally (spaceEqually)', false)}>
         <ProgressStep
-          label={text('Label', 'First step')}
+          label={text('Label (label)', 'First step')}
           description="Step 1: Getting started with Carbon Design System"
           secondaryLabel="Optional label"
         />
