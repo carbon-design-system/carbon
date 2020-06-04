@@ -160,7 +160,6 @@ export default class FilterableMultiSelect extends React.Component {
     super(props);
     this.filterableMultiSelectInstanceId = getInstanceId();
     this.state = {
-      highlightedIndex: null,
       isOpen: props.open,
       inputValue: '',
       topItems: [],
@@ -295,7 +294,7 @@ export default class FilterableMultiSelect extends React.Component {
     const helperId = !helperText
       ? undefined
       : `filterablemultiselect-helper-text-${this.filterableMultiSelectInstanceId}`;
-    const labelId = `filterablemultiselect-label-${this.filterableMultiSelectInstanceId}`;
+    const labelId = `${id}-label`;
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
@@ -324,16 +323,25 @@ export default class FilterableMultiSelect extends React.Component {
           <Downshift
             {...downshiftProps}
             highlightedIndex={highlightedIndex}
+            id={id}
             isOpen={isOpen}
             inputValue={inputValue}
             onInputValueChange={this.handleOnInputValueChange}
-            onChange={onItemChange}
+            onChange={selectedItem => {
+              // `selectedItem`: The item that was just selected. null if the selection was cleared.
+              // https://github.com/downshift-js/downshift#onchange
+              if (selectedItem === null) {
+                clearSelection();
+                return;
+              }
+              onItemChange(selectedItem);
+            }}
             itemToString={itemToString}
             onStateChange={this.handleOnStateChange}
             onOuterClick={this.handleOnOuterClick}
-            selectedItem={selectedItems}
-            render={({
-              getButtonProps,
+            selectedItem={selectedItems}>
+            {({
+              getToggleButtonProps,
               getInputProps,
               getItemProps,
               getRootProps,
@@ -355,7 +363,7 @@ export default class FilterableMultiSelect extends React.Component {
                 }
               );
               const buttonProps = {
-                ...getButtonProps({ disabled }),
+                ...getToggleButtonProps({ disabled }),
                 'aria-label': undefined,
               };
               return (
@@ -367,7 +375,7 @@ export default class FilterableMultiSelect extends React.Component {
                   invalidText={invalidText}
                   isOpen={isOpen}
                   size={size}
-                  {...getRootProps({ refKey: 'innerRef' })}>
+                  {...getRootProps()}>
                   <ListBox.Field
                     id={id}
                     disabled={disabled}
@@ -411,7 +419,10 @@ export default class FilterableMultiSelect extends React.Component {
                     />
                   </ListBox.Field>
                   {isOpen && (
-                    <ListBox.Menu aria-label={ariaLabel} id={id}>
+                    <ListBox.Menu
+                      role="group"
+                      aria-label={ariaLabel}
+                      id={`${id}-menu`}>
                       {sortItems(
                         filterItems(items, { itemToString, inputValue }),
                         {
@@ -439,7 +450,7 @@ export default class FilterableMultiSelect extends React.Component {
                             title={itemText}
                             {...itemProps}>
                             <Checkbox
-                              id={itemProps.id}
+                              id={`${itemProps.id}-item`}
                               title={useTitleInItem ? itemText : null}
                               name={itemText}
                               checked={isChecked}
@@ -456,15 +467,15 @@ export default class FilterableMultiSelect extends React.Component {
                 </ListBox>
               );
             }}
-          />
+          </Downshift>
         )}
       />
     );
     return (
       <div className={wrapperClasses}>
         {title}
-        {!inline && helper}
         {input}
+        {!inline && !invalid ? helper : null}
       </div>
     );
   }

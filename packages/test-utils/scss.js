@@ -127,6 +127,9 @@ function createSassRenderer(cwd, initialData = '') {
       if (
         !error.message.includes('Function breakpoint finished without @return')
       ) {
+        if (error.formatted) {
+          throw new Error(error.formatted);
+        }
         throw error;
       }
       renderError = error;

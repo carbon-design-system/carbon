@@ -17,28 +17,29 @@ exports[`Accordion should render 1`] = `
         onAnimationEnd={[Function]}
       >
         <defaultRenderExpando
+          aria-controls="accordion-item-1"
           aria-expanded={false}
           className="bx--accordion__heading"
           onClick={[Function]}
           onKeyDown={[Function]}
-          title="Expand/Collapse"
+          title="Heading A"
           type="button"
         >
           <button
+            aria-controls="accordion-item-1"
             aria-expanded={false}
             className="bx--accordion__heading"
             onClick={[Function]}
             onKeyDown={[Function]}
-            title="Expand/Collapse"
+            title="Heading A"
             type="button"
           >
             <ForwardRef(ChevronRight16)
-              aria-label="Expand/Collapse"
               className="bx--accordion__arrow"
             >
               <Icon
-                aria-label="Expand/Collapse"
                 className="bx--accordion__arrow"
+                fill="currentColor"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 16 16"
@@ -46,23 +47,18 @@ exports[`Accordion should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <svg
-                  aria-label="Expand/Collapse"
+                  aria-hidden={true}
                   className="bx--accordion__arrow"
+                  fill="currentColor"
                   focusable="false"
                   height={16}
                   preserveAspectRatio="xMidYMid meet"
-                  role="img"
-                  style={
-                    Object {
-                      "willChange": "transform",
-                    }
-                  }
                   viewBox="0 0 16 16"
                   width={16}
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <polygon
-                    points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3"
+                  <path
+                    d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
                   />
                 </svg>
               </Icon>
@@ -76,6 +72,7 @@ exports[`Accordion should render 1`] = `
         </defaultRenderExpando>
         <div
           className="bx--accordion__content"
+          id="accordion-item-1"
         >
           Panel A
         </div>
@@ -90,28 +87,29 @@ exports[`Accordion should render 1`] = `
         onAnimationEnd={[Function]}
       >
         <defaultRenderExpando
+          aria-controls="accordion-item-2"
           aria-expanded={false}
           className="bx--accordion__heading"
           onClick={[Function]}
           onKeyDown={[Function]}
-          title="Expand/Collapse"
+          title="Heading B"
           type="button"
         >
           <button
+            aria-controls="accordion-item-2"
             aria-expanded={false}
             className="bx--accordion__heading"
             onClick={[Function]}
             onKeyDown={[Function]}
-            title="Expand/Collapse"
+            title="Heading B"
             type="button"
           >
             <ForwardRef(ChevronRight16)
-              aria-label="Expand/Collapse"
               className="bx--accordion__arrow"
             >
               <Icon
-                aria-label="Expand/Collapse"
                 className="bx--accordion__arrow"
+                fill="currentColor"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 16 16"
@@ -119,23 +117,18 @@ exports[`Accordion should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <svg
-                  aria-label="Expand/Collapse"
+                  aria-hidden={true}
                   className="bx--accordion__arrow"
+                  fill="currentColor"
                   focusable="false"
                   height={16}
                   preserveAspectRatio="xMidYMid meet"
-                  role="img"
-                  style={
-                    Object {
-                      "willChange": "transform",
-                    }
-                  }
                   viewBox="0 0 16 16"
                   width={16}
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <polygon
-                    points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3"
+                  <path
+                    d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
                   />
                 </svg>
               </Icon>
@@ -149,6 +142,7 @@ exports[`Accordion should render 1`] = `
         </defaultRenderExpando>
         <div
           className="bx--accordion__content"
+          id="accordion-item-2"
         >
           Panel B
         </div>
@@ -163,28 +157,29 @@ exports[`Accordion should render 1`] = `
         onAnimationEnd={[Function]}
       >
         <defaultRenderExpando
+          aria-controls="accordion-item-3"
           aria-expanded={false}
           className="bx--accordion__heading"
           onClick={[Function]}
           onKeyDown={[Function]}
-          title="Expand/Collapse"
+          title="Heading C"
           type="button"
         >
           <button
+            aria-controls="accordion-item-3"
             aria-expanded={false}
             className="bx--accordion__heading"
             onClick={[Function]}
             onKeyDown={[Function]}
-            title="Expand/Collapse"
+            title="Heading C"
             type="button"
           >
             <ForwardRef(ChevronRight16)
-              aria-label="Expand/Collapse"
               className="bx--accordion__arrow"
             >
               <Icon
-                aria-label="Expand/Collapse"
                 className="bx--accordion__arrow"
+                fill="currentColor"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 16 16"
@@ -192,23 +187,18 @@ exports[`Accordion should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <svg
-                  aria-label="Expand/Collapse"
+                  aria-hidden={true}
                   className="bx--accordion__arrow"
+                  fill="currentColor"
                   focusable="false"
                   height={16}
                   preserveAspectRatio="xMidYMid meet"
-                  role="img"
-                  style={
-                    Object {
-                      "willChange": "transform",
-                    }
-                  }
                   viewBox="0 0 16 16"
                   width={16}
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <polygon
-                    points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3"
+                  <path
+                    d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
                   />
                 </svg>
               </Icon>
@@ -222,6 +212,7 @@ exports[`Accordion should render 1`] = `
         </defaultRenderExpando>
         <div
           className="bx--accordion__content"
+          id="accordion-item-3"
         >
           Panel C
         </div>

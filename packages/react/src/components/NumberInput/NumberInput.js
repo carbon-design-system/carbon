@@ -418,7 +418,6 @@ class NumberInput extends Component {
             return (
               <>
                 {labelText}
-                {helper}
                 <div className={`${prefix}--number__input-wrapper`}>
                   <input
                     data-invalid={isInputInvalid}
@@ -456,6 +455,7 @@ class NumberInput extends Component {
                     </button>
                   </div>
                 </div>
+                {isInputInvalid ? null : helper}
               </>
             );
           })()}

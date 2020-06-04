@@ -11,6 +11,8 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { match, keys } from '../../internal/keyboard';
+import { useId } from '../../internal/useId';
+import deprecate from '../../prop-types/deprecate.js';
 
 const { prefix } = settings;
 const defaultRenderExpando = props => <button {...props} />;
@@ -18,7 +20,7 @@ const defaultRenderExpando = props => <button {...props} />;
 function AccordionItem({
   children,
   className: customClassName,
-  iconDescription = 'Expand/Collapse',
+  iconDescription,
   open = false,
   onHeadingClick,
   renderExpando: Expando = defaultRenderExpando,
@@ -28,6 +30,7 @@ function AccordionItem({
   const [isOpen, setIsOpen] = useState(open);
   const [prevIsOpen, setPrevIsOpen] = useState(open);
   const [animation, setAnimation] = useState('');
+  const id = useId('accordion-item');
   const className = cx({
     [`${prefix}--accordion__item`]: true,
     [`${prefix}--accordion__item--active`]: isOpen,
@@ -70,19 +73,19 @@ function AccordionItem({
   return (
     <li className={className} {...rest} onAnimationEnd={handleAnimationEnd}>
       <Expando
+        aria-controls={id}
         aria-expanded={isOpen}
         className={`${prefix}--accordion__heading`}
         onClick={onClick}
         onKeyDown={onKeyDown}
-        title={iconDescription}
+        title={title || iconDescription}
         type="button">
-        <ChevronRight16
-          aria-label={iconDescription}
-          className={`${prefix}--accordion__arrow`}
-        />
+        <ChevronRight16 className={`${prefix}--accordion__arrow`} />
         <div className={`${prefix}--accordion__title`}>{title}</div>
       </Expando>
-      <div className={`${prefix}--accordion__content`}>{children}</div>
+      <div id={id} className={`${prefix}--accordion__content`}>
+        {children}
+      </div>
     </li>
   );
 }
@@ -112,7 +115,13 @@ AccordionItem.propTypes = {
   /**
    * The description of the expando icon.
    */
-  iconDescription: PropTypes.string,
+  iconDescription: deprecate(
+    PropTypes.string,
+    'The `iconDescription` prop has been deprecated as it is no longer ' +
+      'required. Feel free to remove this prop from <AccordionItem>. This ' +
+      'prop will be removed in the next major release of ' +
+      '`carbon-components-react`'
+  ),
 
   /**
    * `true` to open the expando.

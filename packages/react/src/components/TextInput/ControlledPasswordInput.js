@@ -117,7 +117,6 @@ const ControlledPasswordInput = React.forwardRef(
       <div
         className={`${prefix}--form-item ${prefix}--text-input-wrapper ${prefix}--password-input-wrapper`}>
         {label}
-        {helper}
         <div
           className={`${prefix}--text-input__field-wrapper`}
           data-invalid={invalid || null}>
@@ -128,7 +127,7 @@ const ControlledPasswordInput = React.forwardRef(
           )}
           {input}
         </div>
-        {error}
+        {error ? error : helper}
       </div>
     );
   }

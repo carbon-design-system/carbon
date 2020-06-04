@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import warning from 'warning';
 import { settings } from 'carbon-components';
 import { match, keys } from '../../internal/keyboard';
+import deprecate from '../../prop-types/deprecate.js';
 
 const { prefix } = settings;
 
@@ -72,7 +73,13 @@ export default class OverflowMenuItem extends React.Component {
     /**
      * `true` if this menu item should get focus when the menu gets open.
      */
-    primaryFocus: PropTypes.bool,
+    primaryFocus: deprecate(
+      PropTypes.bool,
+      'The `primaryFocus` prop has been deprecated as it is no longer used. ' +
+        'Feel free to remove this prop from <OverflowMenuItem>. This prop will ' +
+        'be removed in the next major release of `carbon-components-react`. ' +
+        'Opt for `selectorPrimaryFocus` in `<OverflowMenu>` instead'
+    ),
 
     /**
      * `true` if this menu item has long text and requires a browser tooltip
@@ -93,10 +100,16 @@ export default class OverflowMenuItem extends React.Component {
 
   setTabFocus = evt => {
     if (match(evt, keys.ArrowDown)) {
-      this.props.handleOverflowMenuItemFocus(this.props.index + 1);
+      this.props.handleOverflowMenuItemFocus({
+        currentIndex: this.props.index,
+        direction: 1,
+      });
     }
     if (match(evt, keys.ArrowUp)) {
-      this.props.handleOverflowMenuItemFocus(this.props.index - 1);
+      this.props.handleOverflowMenuItemFocus({
+        currentIndex: this.props.index,
+        direction: -1,
+      });
     }
   };
 
@@ -149,9 +162,6 @@ export default class OverflowMenuItem extends React.Component {
       },
       wrapperClassName
     );
-    const primaryFocusProp = primaryFocus
-      ? { 'data-floating-menu-primary-focus': true }
-      : {};
     const TagToUse = href ? 'a' : 'button';
     const OverflowMenuItemContent = (() => {
       if (typeof itemText !== 'string') {
@@ -167,7 +177,7 @@ export default class OverflowMenuItem extends React.Component {
       <li className={overflowMenuItemClasses} role="menuitem">
         <TagToUse
           {...other}
-          {...primaryFocusProp}
+          {...{ 'data-floating-menu-primary-focus': primaryFocus || null }}
           href={href}
           className={overflowMenuBtnClasses}
           disabled={disabled}

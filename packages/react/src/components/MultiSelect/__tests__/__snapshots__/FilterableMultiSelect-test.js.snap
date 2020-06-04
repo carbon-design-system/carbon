@@ -56,14 +56,11 @@ exports[`MultiSelect.Filterable should render 1`] = `
       render={[Function]}
     >
       <Downshift
-        breakingChanges={Object {}}
         defaultHighlightedIndex={null}
-        defaultInputValue=""
         defaultIsOpen={false}
-        defaultSelectedItem={null}
         environment={[Window]}
         getA11yStatusMessage={[Function]}
-        highlightedIndex={null}
+        id="test-filterable-multiselect"
         inputValue=""
         isOpen={false}
         itemToString={[Function]}
@@ -73,48 +70,58 @@ exports[`MultiSelect.Filterable should render 1`] = `
         onSelect={[Function]}
         onStateChange={[Function]}
         onUserAction={[Function]}
-        render={[Function]}
+        scrollIntoView={[Function]}
         selectedItem={Array []}
         selectedItemChanged={[Function]}
         stateReducer={[Function]}
+        suppressRefError={false}
       >
         <ListBox
+          aria-expanded={false}
+          aria-haspopup="listbox"
+          aria-labelledby="test-filterable-multiselect-label"
+          aria-owns={null}
           className="bx--multi-select bx--combo-box bx--multi-select--filterable"
           disabled={false}
-          innerRef={[Function]}
           isOpen={false}
           light={false}
+          role="combobox"
           type="default"
         >
           <div
+            aria-expanded={false}
+            aria-haspopup="listbox"
+            aria-labelledby="test-filterable-multiselect-label"
+            aria-owns={null}
             className="bx--multi-select bx--combo-box bx--multi-select--filterable bx--list-box"
             onClick={[Function]}
             onKeyDown={[Function]}
+            role="combobox"
           >
             <ListBoxField
-              aria-expanded={false}
               aria-haspopup={true}
-              aria-labelledby="filterablemultiselect-label-1"
+              aria-labelledby="test-filterable-multiselect-label"
               data-toggle={true}
               disabled={false}
               id="test-filterable-multiselect"
               onBlur={[Function]}
               onClick={[Function]}
               onKeyDown={[Function]}
+              onKeyUp={[Function]}
               role="button"
               type="button"
             >
               <div
                 aria-controls={null}
-                aria-expanded={false}
                 aria-haspopup={true}
-                aria-labelledby="filterablemultiselect-label-1"
+                aria-labelledby="test-filterable-multiselect-label"
                 aria-owns={null}
                 className="bx--list-box__field"
                 data-toggle={true}
                 onBlur={[Function]}
                 onClick={[Function]}
                 onKeyDown={[Function]}
+                onKeyUp={[Function]}
                 role="button"
                 tabIndex={-1}
                 type="button"
@@ -122,8 +129,8 @@ exports[`MultiSelect.Filterable should render 1`] = `
                 <input
                   aria-activedescendant={null}
                   aria-autocomplete="list"
-                  aria-controls="test-filterable-multiselect__menu"
-                  aria-expanded={false}
+                  aria-controls={null}
+                  aria-labelledby="test-filterable-multiselect-label"
                   autoComplete="off"
                   className="bx--text-input bx--text-input--empty"
                   disabled={false}
@@ -132,7 +139,6 @@ exports[`MultiSelect.Filterable should render 1`] = `
                   onChange={[Function]}
                   onKeyDown={[Function]}
                   placeholder="Placeholder..."
-                  role="combobox"
                   value=""
                 />
                 <ListBoxMenuIcon
@@ -148,6 +154,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
                     >
                       <Icon
                         aria-label="Open menu"
+                        fill="currentColor"
                         height={16}
                         name="chevron--down"
                         preserveAspectRatio="xMidYMid meet"
@@ -157,22 +164,18 @@ exports[`MultiSelect.Filterable should render 1`] = `
                       >
                         <svg
                           aria-label="Open menu"
+                          fill="currentColor"
                           focusable="false"
                           height={16}
                           name="chevron--down"
                           preserveAspectRatio="xMidYMid meet"
                           role="img"
-                          style={
-                            Object {
-                              "willChange": "transform",
-                            }
-                          }
                           viewBox="0 0 16 16"
                           width={16}
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <polygon
-                            points="8,11 3,6 3.7,5.3 8,9.6 12.3,5.3 13,6"
+                          <path
+                            d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
                           />
                           <title>
                             Open menu

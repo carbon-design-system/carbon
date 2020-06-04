@@ -25,6 +25,7 @@ const TYPES = {
   gray: 'Gray',
   'cool-gray': 'Cool-Gray',
   'warm-gray': 'Warm-Gray',
+  'high-contrast': 'High-Contrast',
 };
 
 const Tag = ({
@@ -45,8 +46,10 @@ const Tag = ({
     [`${prefix}--tag--${type}`]: type,
   });
   const handleClose = event => {
-    event.stopPropagation();
-    onClose(event);
+    if (onClose) {
+      event.stopPropagation();
+      onClose(event);
+    }
   };
   return filter ? (
     <div
@@ -57,20 +60,26 @@ const Tag = ({
           : `Clear filter ${children}`
       }
       id={tagId}
-      disabled={disabled}
       {...other}>
-      <span className={`${prefix}--tag__label`}>
+      <span
+        className={`${prefix}--tag__label`}
+        title={typeof children === 'string' ? children : null}>
         {children !== null && children !== undefined ? children : TYPES[type]}
       </span>
       <button
         className={`${prefix}--tag__close-icon`}
         onClick={handleClose}
-        aria-labelledby={tagId}>
+        disabled={disabled}
+        aria-labelledby={tagId}
+        title={title}>
         <Close16 />
       </button>
     </div>
   ) : (
-    <span className={tagClasses} {...other}>
+    <span
+      className={tagClasses}
+      title={typeof children === 'string' ? children : null}
+      {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
     </span>
   );

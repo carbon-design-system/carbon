@@ -11,6 +11,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import window from 'window-or-global';
 import { settings } from 'carbon-components';
+import OptimizedResize from './OptimizedResize';
+import { selectorFocusable, selectorTabbable } from './keyboard/navigation';
 
 const { prefix } = settings;
 
@@ -35,6 +37,13 @@ const { prefix } = settings;
  * @typedef {object} FloatingMenu~offset
  * @property {number} top The top position.
  * @property {number} left The left position.
+ */
+
+/**
+ * The structure for the target container.
+ * @typedef {object} FloatingMenu~container
+ * @property {DOMRect} rect Return of element.getBoundingClientRect()
+ * @property {string} position Position style (static, absolute, relative...)
  */
 
 export const DIRECTION_LEFT = 'left';
@@ -71,16 +80,18 @@ const hasChangeInOffset = (oldMenuOffset = {}, menuOffset = {}) => {
  * @param {string} [params.direction=bottom] The menu direction.
  * @param {number} [params.scrollX=0] The scroll position of the viewport.
  * @param {number} [params.scrollY=0] The scroll position of the viewport.
+ * @param {FloatingMenu~container} [params.container] The size and position type of target element.
  * @returns {FloatingMenu~offset} The position of the menu, relative to the top-left corner of the viewport.
  * @private
  */
 const getFloatingPosition = ({
   menuSize,
-  refPosition,
+  refPosition = {},
   offset = {},
   direction = DIRECTION_BOTTOM,
   scrollX = 0,
   scrollY = 0,
+  container,
 }) => {
   const {
     left: refLeft = 0,
@@ -88,6 +99,16 @@ const getFloatingPosition = ({
     right: refRight = 0,
     bottom: refBottom = 0,
   } = refPosition;
+  const relativeDiff =
+    container.position !== 'static'
+      ? {
+          top: container.rect.top,
+          left: container.rect.left,
+        }
+      : {
+          top: 0,
+          left: 0,
+        };
 
   const { width, height } = menuSize;
   const { top = 0, left = 0 } = offset;
@@ -96,20 +117,24 @@ const getFloatingPosition = ({
 
   return {
     [DIRECTION_LEFT]: () => ({
-      left: refLeft - width + scrollX - left,
-      top: refCenterVertical - height / 2 + scrollY + top - 9,
+      left: refLeft - width + scrollX - left - relativeDiff.left,
+      top:
+        refCenterVertical - height / 2 + scrollY + top - 9 - relativeDiff.top,
     }),
     [DIRECTION_TOP]: () => ({
-      left: refCenterHorizontal - width / 2 + scrollX + left,
-      top: refTop - height + scrollY - top,
+      left:
+        refCenterHorizontal - width / 2 + scrollX + left - relativeDiff.left,
+      top: refTop - height + scrollY - top - relativeDiff.top,
     }),
     [DIRECTION_RIGHT]: () => ({
-      left: refRight + scrollX + left,
-      top: refCenterVertical - height / 2 + scrollY + top + 3,
+      left: refRight + scrollX + left - relativeDiff.left,
+      top:
+        refCenterVertical - height / 2 + scrollY + top + 3 - relativeDiff.top,
     }),
     [DIRECTION_BOTTOM]: () => ({
-      left: refCenterHorizontal - width / 2 + scrollX + left,
-      top: refBottom + scrollY + top,
+      left:
+        refCenterHorizontal - width / 2 + scrollX + left - relativeDiff.left,
+      top: refBottom + scrollY + top - relativeDiff.top,
     }),
   }[direction]();
 };
@@ -129,16 +154,6 @@ class FloatingMenu extends React.Component {
      * The query selector indicating where the floating menu body should be placed.
      */
     target: PropTypes.func,
-
-    /**
-     * The position in the viewport of the trigger button.
-     */
-    menuPosition: PropTypes.shape({
-      top: PropTypes.number,
-      right: PropTypes.number,
-      bottom: PropTypes.number,
-      left: PropTypes.number,
-    }),
 
     /**
      * Where to put the tooltip, relative to the trigger button.
@@ -162,6 +177,12 @@ class FloatingMenu extends React.Component {
     ]),
 
     /**
+     * Specify a CSS selector that matches the DOM element that should
+     * be focused when the Modal opens
+     */
+    selectorPrimaryFocus: PropTypes.string,
+
+    /**
      * The additional styles to put to the floating menu.
      */
     styles: PropTypes.object,
@@ -178,7 +199,6 @@ class FloatingMenu extends React.Component {
   };
 
   static defaultProps = {
-    menuPosition: {},
     menuOffset: {},
     menuDirection: DIRECTION_BOTTOM,
   };
@@ -216,7 +236,6 @@ class FloatingMenu extends React.Component {
    * Calculates the position in the viewport of floating menu,
    * once this component is mounted or updated upon change in the following props:
    *
-   * * `menuPosition` (The position in the viewport of the trigger button)
    * * `menuOffset` (The adjustment that should be applied to the calculated floating menu's position)
    * * `menuDirection` (Where the floating menu menu should be placed relative to the trigger button)
    *
@@ -233,30 +252,23 @@ class FloatingMenu extends React.Component {
     }
 
     const {
-      menuPosition: oldRefPosition = {},
       menuOffset: oldMenuOffset = {},
       menuDirection: oldMenuDirection,
     } = prevProps;
-    const {
-      menuPosition: refPosition = {},
-      menuOffset = {},
-      menuDirection,
-    } = this.props;
+    const { menuOffset = {}, menuDirection } = this.props;
 
     if (
-      oldRefPosition.top !== refPosition.top ||
-      oldRefPosition.right !== refPosition.right ||
-      oldRefPosition.bottom !== refPosition.bottom ||
-      oldRefPosition.left !== refPosition.left ||
       hasChangeInOffset(oldMenuOffset, menuOffset) ||
       oldMenuDirection !== menuDirection
     ) {
+      const { flipped, triggerRef } = this.props;
+      const { current: triggerEl } = triggerRef;
       const menuSize = menuBody.getBoundingClientRect();
-      const { menuEl, flipped } = this.props;
+      const refPosition = triggerEl && triggerEl.getBoundingClientRect();
       const offset =
         typeof menuOffset !== 'function'
           ? menuOffset
-          : menuOffset(menuBody, menuDirection, menuEl, flipped);
+          : menuOffset(menuBody, menuDirection, triggerEl, flipped);
       // Skips if either in the following condition:
       // a) Menu body has `display:none`
       // b) `menuOffset` as a callback returns `undefined` (The callback saw that it couldn't calculate the value)
@@ -269,22 +281,62 @@ class FloatingMenu extends React.Component {
             offset,
             scrollX: window.pageXOffset,
             scrollY: window.pageYOffset,
+            container: {
+              rect: this.props.target().getBoundingClientRect(),
+              position: getComputedStyle(this.props.target()).position,
+            },
           }),
         });
       }
     }
   };
 
+  componentWillUnmount() {
+    this.hResize.release();
+  }
+
+  componentDidMount() {
+    this.hResize = OptimizedResize.add(() => {
+      this._updateMenuSize();
+    });
+  }
+  /**
+   * Set focus on floating menu content after menu placement.
+   * @param {Element} menuBody The DOM element of the menu body.
+   * @private
+   */
+  _focusMenuContent = menuBody => {
+    const primaryFocusNode = menuBody.querySelector(
+      this.props.selectorPrimaryFocus || null
+    );
+    const tabbableNode = menuBody.querySelector(selectorTabbable);
+    const focusableNode = menuBody.querySelector(selectorFocusable);
+    const focusTarget =
+      primaryFocusNode || // User defined focusable node
+      tabbableNode || // First sequentially focusable node
+      focusableNode || // First programmatic focusable node
+      menuBody;
+    focusTarget.focus();
+    if (focusTarget === menuBody && __DEV__) {
+      warning(
+        focusableNode === null,
+        'Floating Menus must have at least a programmatically focusable child. ' +
+          'This can be accomplished by adding tabIndex="-1" to the content element.'
+      );
+    }
+  };
+
   componentDidUpdate(prevProps) {
     this._updateMenuSize(prevProps);
     const { onPlace } = this.props;
-    if (
-      this._placeInProgress &&
-      this.state.floatingPosition &&
-      typeof onPlace === 'function'
-    ) {
-      onPlace(this._menuBody);
-      this._placeInProgress = false;
+    if (this._placeInProgress && this.state.floatingPosition) {
+      if (this._menuBody && !this._menuBody.contains(document.activeElement)) {
+        this._focusMenuContent(this._menuBody);
+      }
+      if (typeof onPlace === 'function') {
+        onPlace(this._menuBody);
+        this._placeInProgress = false;
+      }
     }
   }
 

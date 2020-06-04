@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
-import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
+import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus from '../../internal/wrapFocus';
 
 const { prefix } = settings;
@@ -133,15 +133,17 @@ export default class ComposedModal extends Component {
   }
 
   focusButton = focusContainerElement => {
-    const primaryFocusElement = focusContainerElement.querySelector(
-      this.props.selectorPrimaryFocus
-    );
-    if (primaryFocusElement) {
-      primaryFocusElement.focus();
-      return;
-    }
-    if (this.button.current) {
-      this.button.current.focus();
+    if (focusContainerElement) {
+      const primaryFocusElement = focusContainerElement.querySelector(
+        this.props.selectorPrimaryFocus
+      );
+      if (primaryFocusElement) {
+        primaryFocusElement.focus();
+        return;
+      }
+      if (this.button.current) {
+        this.button.current.focus();
+      }
     }
   };
 
@@ -158,7 +160,9 @@ export default class ComposedModal extends Component {
     if (!this.props.open) {
       return;
     }
-    this.focusButton(this.innerModal.current);
+    if (this.innerModal.current) {
+      this.focusButton(this.innerModal.current);
+    }
   }
 
   handleTransitionEnd = evt => {
@@ -208,11 +212,11 @@ export default class ComposedModal extends Component {
 
     const childrenWithProps = React.Children.toArray(children).map(child => {
       switch (child.type) {
-        case ModalHeader:
+        case React.createElement(ModalHeader).type:
           return React.cloneElement(child, {
             closeModal: this.closeModal,
           });
-        case ModalFooter:
+        case React.createElement(ModalFooter).type:
           return React.cloneElement(child, {
             closeModal: this.closeModal,
             inputref: this.button,
@@ -240,7 +244,7 @@ export default class ComposedModal extends Component {
           className={`${prefix}--visually-hidden`}>
           Focus sentinel
         </span>
-        <div ref={this.innerModal} className={containerClass} tabIndex={-1}>
+        <div ref={this.innerModal} className={containerClass} role="dialog">
           {childrenWithProps}
         </div>
         {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
@@ -432,7 +436,7 @@ ModalBody.propTypes = {
   /**
    * Required props for the accessibility label of the header
    */
-  ['aria-label']: requiredIfGivenPropExists(
+  ['aria-label']: requiredIfGivenPropIsTruthy(
     'hasScrollingContent',
     PropTypes.string
   ),
@@ -469,6 +473,12 @@ export class ModalFooter extends Component {
      * Specify the text for the secondary button
      */
     secondaryButtonText: PropTypes.string,
+
+    /**
+     * Specify whether the primary button should be replaced with danger button.
+     * Note that this prop is not applied if you render primary/danger button by yourself
+     */
+    danger: PropTypes.bool,
 
     /**
      * Specify an optional function for when the modal is requesting to be

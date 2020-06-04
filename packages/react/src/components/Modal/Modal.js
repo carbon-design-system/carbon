@@ -13,7 +13,7 @@ import { Close20 } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
 import deprecate from '../../prop-types/deprecate';
-import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
+import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
   elementOrParentIsFloatingMenu,
 } from '../../internal/wrapFocus';
@@ -74,12 +74,12 @@ export default class Modal extends Component {
     /**
      * Specify the text for the secondary button
      */
-    secondaryButtonText: PropTypes.string,
+    secondaryButtonText: PropTypes.node,
 
     /**
      * Specify the text for the primary button
      */
-    primaryButtonText: PropTypes.string,
+    primaryButtonText: PropTypes.node,
 
     /**
      * Specify whether the Modal is currently open
@@ -157,7 +157,7 @@ export default class Modal extends Component {
     /**
      * Required props for the accessibility label of the header
      */
-    ['aria-label']: requiredIfGivenPropExists(
+    ['aria-label']: requiredIfGivenPropIsTruthy(
       'hasScrollingContent',
       PropTypes.string
     ),
@@ -169,7 +169,7 @@ export default class Modal extends Component {
     primaryButtonDisabled: false,
     onKeyDown: () => {},
     passiveModal: false,
-    iconDescription: 'close the modal',
+    iconDescription: 'Close',
     modalHeading: '',
     modalLabel: '',
     selectorPrimaryFocus: '[data-modal-primary-focus]',

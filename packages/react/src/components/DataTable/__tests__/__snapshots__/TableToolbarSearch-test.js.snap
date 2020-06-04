@@ -39,6 +39,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
         >
           <Icon
             className="bx--search-magnifier"
+            fill="currentColor"
             height={16}
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 16 16"
@@ -48,14 +49,10 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
             <svg
               aria-hidden={true}
               className="bx--search-magnifier"
+              fill="currentColor"
               focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"
-              style={
-                Object {
-                  "willChange": "transform",
-                }
-              }
               viewBox="0 0 16 16"
               width={16}
               xmlns="http://www.w3.org/2000/svg"
@@ -93,6 +90,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
         >
           <ForwardRef(Close16)>
             <Icon
+              fill="currentColor"
               height={16}
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 32 32"
@@ -101,20 +99,16 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
             >
               <svg
                 aria-hidden={true}
+                fill="currentColor"
                 focusable="false"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
-                style={
-                  Object {
-                    "willChange": "transform",
-                  }
-                }
                 viewBox="0 0 32 32"
                 width={16}
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <polygon
-                  points="24 9.4 22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4"
+                <path
+                  d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
                 />
               </svg>
             </Icon>

@@ -26,6 +26,7 @@ exports[`HeaderMenu should render 1`] = `
           >
             <Icon
               className="bx--header__menu-arrow"
+              fill="currentColor"
               height={16}
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 16 16"
@@ -35,20 +36,16 @@ exports[`HeaderMenu should render 1`] = `
               <svg
                 aria-hidden={true}
                 className="bx--header__menu-arrow"
+                fill="currentColor"
                 focusable="false"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
-                style={
-                  Object {
-                    "willChange": "transform",
-                  }
-                }
                 viewBox="0 0 16 16"
                 width={16}
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <polygon
-                  points="8,11 3,6 3.7,5.3 8,9.6 12.3,5.3 13,6"
+                <path
+                  d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
                 />
               </svg>
             </Icon>

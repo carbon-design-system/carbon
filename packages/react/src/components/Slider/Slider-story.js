@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
@@ -47,6 +47,23 @@ storiesOf('Slider', module)
             Sliders provide a visual indication of adjustable content, where the user can move the handle along a horizontal track to increase or decrease the value.
           `,
     },
+  })
+  .add('controlled slider', () => {
+    const [val, setVal] = useState(87);
+    return (
+      <>
+        <button onClick={() => setVal(Math.round(Math.random() * 100))}>
+          randomize value
+        </button>
+        <Slider
+          max={100}
+          min={0}
+          value={val}
+          onChange={({ value }) => setVal(value)}
+        />
+        <h1>{val}</h1>
+      </>
+    );
   })
   .add(
     'skeleton',

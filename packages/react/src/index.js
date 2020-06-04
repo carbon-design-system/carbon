@@ -58,6 +58,7 @@ export FileUploader, {
   FileUploaderItem,
 } from './components/FileUploader';
 export Form from './components/Form';
+export FluidForm from './components/FluidForm';
 export FormGroup from './components/FormGroup';
 export FormItem from './components/FormItem';
 export FormLabel from './components/FormLabel';
@@ -164,3 +165,9 @@ export ToggleSmallSkeleton from './components/ToggleSmall/ToggleSmall.Skeleton';
 export IconSkeleton from './components/Icon/Icon.Skeleton';
 export DatePickerSkeleton from './components/DatePicker/DatePicker.Skeleton';
 export * from './components/UIShell';
+
+// experimental
+export {
+  PageSelector,
+  Unstable_Pagination,
+} from './components/Pagination/Unstable_Pagination';

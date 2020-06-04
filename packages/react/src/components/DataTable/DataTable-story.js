@@ -210,7 +210,13 @@ storiesOf('DataTable', module)
   .add(
     'with overflow menu',
     withReadme(readme, () =>
-      require('./stories/with-overflow-menu').default(props())
+      require('./stories/with-overflow-menu').default({
+        ...props(),
+        overflowMenuOnHover: boolean(
+          'Show overflow menu on hover (overflowMenuOnHover)',
+          false
+        ),
+      })
     ),
     {
       info: {

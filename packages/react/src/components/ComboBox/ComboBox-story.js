@@ -5,12 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
-import Button from '../Button';
 
 const items = [
   {
@@ -43,6 +42,11 @@ const sizes = {
   'Small size (sm)': 'sm',
 };
 
+const directions = {
+  'Bottom (default)': 'bottom',
+  'Top ': 'top',
+};
+
 const props = () => ({
   id: text('Combobox ID (id)', 'carbon-combobox-example'),
   placeholder: text('Placeholder text (placeholder)', 'Filter...'),
@@ -53,52 +57,9 @@ const props = () => ({
   invalid: boolean('Invalid (invalid)', false),
   invalidText: text('Invalid text (invalidText)', 'A valid value is required'),
   size: select('Field size (size)', sizes, undefined) || undefined,
+  direction: select('Dropdown direction (direction)', directions, 'bottom'),
   onChange: action('onChange'),
 });
-
-const itemToElement = item => {
-  const itemAsArray = item.text.split(' ');
-  return (
-    <div>
-      <span>{itemAsArray[0]}</span>
-      <span style={{ color: 'blue' }}> {itemAsArray[1]}</span>
-    </div>
-  );
-};
-
-const ControlledComboBoxApp = props => {
-  const [selectedItem, setSelectedItem] = useState(items[0]);
-  let uid = items.length;
-  return (
-    <>
-      <ComboBox
-        {...props}
-        items={items}
-        itemToString={item => (item ? item.text : '')}
-        onChange={({ selectedItem }) => setSelectedItem(selectedItem)}
-        initialSelectedItem={items[0]}
-        selectedItem={selectedItem}
-      />
-      <Button
-        style={{ marginTop: '1rem' }}
-        onClick={() => {
-          items.push({
-            id: `id-${uid++}`,
-            text: `Option ${uid}`,
-          });
-          setSelectedItem(items[items.length - 1]);
-        }}>
-        Add new item
-      </Button>
-    </>
-  );
-};
-ControlledComboBoxApp.__docgenInfo = {
-  ...ComboBox.__docgenInfo,
-  props: {
-    ...ComboBox.__docgenInfo.props,
-  },
-};
 
 storiesOf('ComboBox', module)
   .addDecorator(withKnobs)
@@ -116,33 +77,6 @@ storiesOf('ComboBox', module)
     {
       info: {
         text: 'ComboBox',
-      },
-    }
-  )
-  .add(
-    'items as components',
-    () => (
-      <div style={{ width: 300 }}>
-        <ComboBox
-          items={items}
-          itemToString={item => (item ? item.text : '')}
-          itemToElement={itemToElement}
-          {...props()}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: 'ComboBox',
-      },
-    }
-  )
-  .add(
-    'application-level control for selection',
-    () => <ControlledComboBoxApp {...props()} />,
-    {
-      info: {
-        text: `Controlled ComboBox example application`,
       },
     }
   );

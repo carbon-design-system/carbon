@@ -9,7 +9,7 @@
 
 'use strict';
 
-const semver = require.requireActual('semver');
+const semver = jest.requireActual('semver');
 
 function defineInlineTest(
   pathToMigrations,

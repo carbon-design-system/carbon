@@ -67,6 +67,7 @@ $css--use-experimental-grid-fallback: false !default;
 @import 'theme';
 @import 'mixins';
 @import 'layout';
+@import 'layer';
 @import 'spacing';
 @import 'typography';
 @import './vendor/@carbon/elements/scss/import-once/import-once';
@@ -154,6 +155,7 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 //-------------------------------------
 // 🔬 Experimental
 //-------------------------------------
+@import '../../components/pagination/unstable_pagination';
 @import '../../components/ui-shell/ui-shell';
 
 //-------------------------------------
