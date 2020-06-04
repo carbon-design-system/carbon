@@ -265,9 +265,8 @@
     transition: background-color $duration--fast-01 motion(entrance, productive);
   }
 
-  .#{$prefix}--data-table td.#{$prefix}--table-column-checkbox {
-    padding-top: rem(11px);
-    padding-bottom: 0;
+  .#{$prefix}--date-table tbody th.#{$prefix}--table-column-checkbox:hover {
+    background: $data-table-column-hover;
   }
 
   .#{$prefix}--date-table tbody th.#{$prefix}--table-column-checkbox:hover {
