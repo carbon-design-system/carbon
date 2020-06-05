@@ -371,7 +371,9 @@ export default class ComboBox extends React.Component {
                     disabled,
                     placeholder,
                     onKeyDown: event => {
-                      event.stopPropagation();
+                      if (match(event, keys.Space)) {
+                        event.stopPropagation();
+                      }
 
                       if (match(event, keys.Enter)) {
                         toggleMenu();

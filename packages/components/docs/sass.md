@@ -12384,7 +12384,7 @@ $helper-text-01: (
 $body-short-01: (
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(18px),
+  line-height: carbon--em(18px),
   letter-spacing: 0.16px,
 );
 ```
@@ -12403,7 +12403,7 @@ $body-short-01: (
 $body-long-01: (
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(20px),
+  line-height: carbon--em(20px),
   letter-spacing: 0.16px,
 );
 ```
@@ -12422,7 +12422,7 @@ $body-long-01: (
 $body-short-02: (
   font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(22px),
+  line-height: carbon--em(22px),
   letter-spacing: 0,
 );
 ```
@@ -12441,7 +12441,7 @@ $body-short-02: (
 $body-long-02: (
   font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(24px),
+  line-height: carbon--em(24px),
   letter-spacing: 0,
 );
 ```
@@ -14113,8 +14113,8 @@ Button variant styles
 
   &:focus {
     border-color: $focus;
-    box-shadow: inset 0 0 0 $button-border-width $focus, inset 0 0 0
-        ($button-border-width + $button-outline-width) $ui-02;
+    box-shadow: inset 0 0 0 $button-outline-width $focus, inset 0 0 0
+        $button-border-width $ui-02;
   }
 
   &:disabled:hover,
@@ -15772,19 +15772,18 @@ Data table core styles
 
   .#{$prefix}--data-table th,
   .#{$prefix}--data-table td {
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
     vertical-align: top;
     text-align: left;
+  }
+
+  .#{$prefix}--data-table td {
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
   }
 
   .#{$prefix}--data-table th {
     color: $text-01;
     background-color: $ui-03;
-  }
-
-  .#{$prefix}--data-table th:first-of-type:not(.#{$prefix}--table-expand) {
-    padding-left: $spacing-05;
   }
 
   .#{$prefix}--data-table th:last-of-type {
@@ -15795,7 +15794,7 @@ Data table core styles
 
   .#{$prefix}--data-table .#{$prefix}--table-header-label {
     display: block;
-    padding: rem(14px) 0;
+    padding: rem(14px) $spacing-05;
     text-align: left;
   }
 
@@ -15808,7 +15807,7 @@ Data table core styles
     padding: rem(14px) $spacing-05;
     padding-bottom: rem(13px);
 
-    & + td:first-of-type {
+    + td:first-of-type {
       padding-left: $spacing-04;
     }
   }
@@ -15817,14 +15816,6 @@ Data table core styles
     .#{$prefix}--data-table td {
       background-clip: padding-box; // fix to show borders in ff
     }
-  }
-
-  .#{$prefix}--data-table td:first-of-type {
-    padding-left: $spacing-05;
-  }
-
-  .#{$prefix}--data-table td:last-of-type {
-    padding-right: $spacing-05;
   }
 
   // Overflow Menu Overrides
@@ -16039,7 +16030,8 @@ Data table core styles
   }
 
   .#{$prefix}--data-table--compact .#{$prefix}--table-header-label {
-    padding: rem(2px) 0;
+    padding-top: rem(2px);
+    padding-bottom: rem(2px);
   }
 
   .#{$prefix}--data-table--compact td,
@@ -16076,7 +16068,8 @@ Data table core styles
   }
 
   .#{$prefix}--data-table--short .#{$prefix}--table-header-label {
-    padding: rem(7px) 0;
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
   }
 
   .#{$prefix}--data-table--short td,
@@ -16105,7 +16098,8 @@ Data table core styles
   }
 
   .#{$prefix}--data-table--tall .#{$prefix}--table-header-label {
-    padding: rem(16px) 0;
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-05;
   }
 
   .#{$prefix}--data-table--tall td,
@@ -16438,6 +16432,8 @@ Data table expandable styles
   th.#{$prefix}--table-expand {
     position: relative;
     vertical-align: middle;
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
   }
 
   th.#{$prefix}--table-expand + th.#{$prefix}--table-column-checkbox {
@@ -16623,15 +16619,6 @@ Data table sort styles
     border-bottom: none;
   }
 
-  .#{$prefix}--data-table--sort td {
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
-  }
-
-  .#{$prefix}--data-table--sort th:first-of-type .#{$prefix}--table-sort {
-    padding-left: $spacing-05;
-  }
-
   // -------------------------------------
   // Th > Button
   // -------------------------------------
@@ -16644,7 +16631,7 @@ Data table sort styles
     justify-content: space-between;
     width: 100%;
     color: $text-01;
-    padding: 0 $spacing-05;
+    padding-right: $spacing-05;
     min-height: 100%;
     background-color: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive),
@@ -16785,8 +16772,8 @@ Data table sort styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [layout-04 [variable]](#layout-04-variable)
-  - [spacing-05 [variable]](#spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
