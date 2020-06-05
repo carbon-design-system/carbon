@@ -453,7 +453,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
-    max-height: rem(140px);
+    max-height: rem(220px);
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control

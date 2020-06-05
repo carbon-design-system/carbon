@@ -310,7 +310,7 @@
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
-    max-height: 15rem;
+    max-height: rem(220px);
     transition: max-height $duration--fast-02 motion(entrance, productive);
   }
 
