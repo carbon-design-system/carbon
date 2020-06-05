@@ -266,7 +266,6 @@
       border-top $duration--moderate-01 motion(standard, productive);
   }
 
-  // TODO add parent hover class when child hover(programatically)
   .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:hover td,
   .#{$prefix}--data-table--zebra
     tbody
@@ -278,10 +277,6 @@
     border-bottom: 1px solid $hover-field;
     border-top: 1px solid $hover-field;
   }
-
-  // .#{$prefix}--data-table--zebra .#{$prefix}--expandable-row--hover td {
-  //   background-color: ;
-  // }
 
   .#{$prefix}--data-table--zebra
     tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
