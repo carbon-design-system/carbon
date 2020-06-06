@@ -29,6 +29,7 @@ exports[`SideNavMenu should render 1`] = `
             >
               <svg
                 aria-hidden="true"
+                fill="currentColor"
                 focusable="false"
                 height="20"
                 preserveAspectRatio="xMidYMid meet"
@@ -97,6 +98,7 @@ exports[`SideNavMenu should render 1`] = `
         >
           <ForwardRef(ChevronDown20)>
             <Icon
+              fill="currentColor"
               height={20}
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 32 32"
@@ -105,6 +107,7 @@ exports[`SideNavMenu should render 1`] = `
             >
               <svg
                 aria-hidden={true}
+                fill="currentColor"
                 focusable="false"
                 height={20}
                 preserveAspectRatio="xMidYMid meet"

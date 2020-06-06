@@ -74,6 +74,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
             <Icon
               aria-label="Add"
               className="bx--overflow-menu__icon"
+              fill="currentColor"
               focusable="false"
               height={16}
               onClick={[Function]}
@@ -86,6 +87,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
               <svg
                 aria-label="Add"
                 className="bx--overflow-menu__icon"
+                fill="currentColor"
                 focusable="false"
                 height={16}
                 onClick={[Function]}

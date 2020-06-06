@@ -1,0 +1,25 @@
+{
+  "name": "prettier-config-carbon",
+  "description": "Prettier config for the Carbon Design System",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/prettier-config-carbon",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "prettier": "1.x || 2.x"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  }
+}
