@@ -223,17 +223,26 @@
   //ZEBRA
   //----------------------------------------------------------------------------
 
-  .#{$prefix}--data-table--zebra tbody tr:nth-child(even) td {
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:not(.#{$prefix}--parent-row):nth-child(even)
+    td {
     border-bottom: 1px solid $ui-01;
   }
 
-  .#{$prefix}--data-table--zebra tbody tr:nth-child(odd) td {
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:not(.#{$prefix}--parent-row):nth-child(odd)
+    td {
     background-color: $data-table-zebra-color;
     border-bottom: 1px solid $data-table-zebra-color;
     border-top: 1px solid $data-table-zebra-color;
   }
 
-  .#{$prefix}--data-table--zebra tbody tr:hover td {
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:not(.#{$prefix}--parent-row):hover
+    td {
     background-color: $hover-field;
     border-bottom: 1px solid $hover-field;
     border-top: 1px solid $hover-field;
