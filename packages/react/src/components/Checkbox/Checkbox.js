@@ -41,12 +41,12 @@ const Checkbox = React.forwardRef(function Checkbox(
       <input
         {...other}
         type="checkbox"
-        onChange={evt => {
+        onChange={(evt) => {
           onChange(evt.target.checked, id, evt);
         }}
         className={`${prefix}--checkbox`}
         id={id}
-        ref={el => {
+        ref={(el) => {
           if (el) {
             el.indeterminate = indeterminate;
           }

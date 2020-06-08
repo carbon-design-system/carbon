@@ -15,7 +15,7 @@ export default function toSVG(descriptor) {
   const node = document.createElementNS('http://www.w3.org/2000/svg', elem);
   const attributes = elem !== 'svg' ? attrs : getAttributes(attrs);
 
-  Object.keys(attributes).forEach(key => {
+  Object.keys(attributes).forEach((key) => {
     node.setAttribute(key, attrs[key]);
   });
 

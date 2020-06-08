@@ -20,7 +20,7 @@ class InlineLoadingDemoButton extends mixin(
   constructor(element) {
     super(element);
     this.manage(
-      on(element, 'click', event => {
+      on(element, 'click', (event) => {
         this.toggle(event);
       })
     );

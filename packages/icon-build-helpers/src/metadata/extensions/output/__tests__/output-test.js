@@ -66,7 +66,7 @@ describe('output', () => {
 
     memory.filesystem.set(
       '/icons',
-      icons.map(icon => {
+      icons.map((icon) => {
         return {
           name: icon.name,
           friendly_name: icon.friendly_name,
@@ -87,7 +87,7 @@ describe('output', () => {
     });
 
     for (const icon of icons) {
-      const match = metadata.icons.find(entry => {
+      const match = metadata.icons.find((entry) => {
         return icon.name === entry.name;
       });
 
@@ -134,7 +134,7 @@ describe('output', () => {
 
     memory.filesystem.set(
       '/icons',
-      icons.map(icon => {
+      icons.map((icon) => {
         return {
           name: icon.name,
           friendly_name: icon.friendly_name,
@@ -155,7 +155,7 @@ describe('output', () => {
     });
 
     const [icon] = metadata.icons;
-    const bespoke = icon.output.find(output => {
+    const bespoke = icon.output.find((output) => {
       return output.descriptor.size === 16;
     });
     expect(bespoke.descriptor.attrs).toHaveProperty('data-test-id', 'test');
@@ -184,7 +184,7 @@ describe('output', () => {
 
     memory.filesystem.set(
       '/pictograms',
-      pictograms.map(pictogram => {
+      pictograms.map((pictogram) => {
         return {
           name: pictogram.name,
           friendly_name: pictogram.friendly_name,
@@ -208,7 +208,7 @@ describe('output', () => {
     });
 
     for (const pictogram of pictograms) {
-      const icon = metadata.icons.find(icon => {
+      const icon = metadata.icons.find((icon) => {
         return icon.name === pictogram.name;
       });
 

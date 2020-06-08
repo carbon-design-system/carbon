@@ -66,8 +66,8 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
           init: t.Identifier('theme'),
           global: true,
         }),
-        ...Object.keys(tokens).flatMap(group => {
-          return tokens[group].flatMap(token => {
+        ...Object.keys(tokens).flatMap((group) => {
+          return tokens[group].flatMap((token) => {
             const name = formatTokenName(token);
 
             return t.Assignment({
@@ -92,15 +92,15 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
             ]),
           }),
           consequent: t.BlockStatement(
-            Object.keys(tokens).flatMap(group => {
+            Object.keys(tokens).flatMap((group) => {
               return tokens[group]
-                .filter(token => {
+                .filter((token) => {
                   // We don't want to inline CSS Custom Properties for tokens
                   // that are maps, we'll need to use a corresponding mixin for
                   // that token to embed CSS Custom Properties
                   return typeof themes[defaultTheme][token] !== 'object';
                 })
-                .flatMap(token => {
+                .flatMap((token) => {
                   const name = formatTokenName(token);
                   return t.Assignment({
                     id: t.Identifier(name),
@@ -132,8 +132,8 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
             right: t.SassBoolean(true),
           }),
           consequent: t.BlockStatement(
-            Object.keys(tokens).flatMap(group => {
-              return tokens[group].flatMap(token => {
+            Object.keys(tokens).flatMap((group) => {
+              return tokens[group].flatMap((token) => {
                 const name = formatTokenName(token);
                 return [
                   t.Newline(),

@@ -244,6 +244,51 @@
   }
 
   //----------------------------------------------------------------------------
+  //ZEBRA
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:nth-child(4n + 3) td,
+  .#{$prefix}--data-table--zebra tbody tr[data-child-row]:nth-child(4n + 4) td {
+    border-bottom: 1px solid $ui-01;
+  }
+
+  .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:nth-child(4n + 1) td,
+  .#{$prefix}--data-table--zebra tbody tr[data-child-row]:nth-child(4n + 2) td {
+    background-color: $data-table-zebra-color;
+    border-bottom: 1px solid $data-table-zebra-color;
+    border-top: 1px solid $data-table-zebra-color;
+  }
+
+  .#{$prefix}--data-table--zebra tr.#{$prefix}--parent-row td,
+  .#{$prefix}--data-table--zebra
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
+    + tr[data-child-row]
+    td {
+    transition: all $duration--moderate-01 motion(standard, productive),
+      border-bottom $duration--moderate-01 motion(standard, productive),
+      border-top $duration--moderate-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:hover td,
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr[data-parent-row]:hover
+    + tr[data-child-row]
+    td,
+  .#{$prefix}--data-table--zebra tbody tr[data-child-row]:hover td {
+    background-color: $hover-field;
+    border-bottom: 1px solid $hover-field;
+    border-top: 1px solid $hover-field;
+  }
+
+  .#{$prefix}--data-table--zebra
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
+    td {
+    background: $hover-ui;
+    border-bottom: 1px solid $hover-field;
+    border-top: 1px solid $hover-field;
+  }
+
+  //----------------------------------------------------------------------------
   // Selected
   //----------------------------------------------------------------------------
   // parent collapsed

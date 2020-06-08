@@ -273,7 +273,7 @@ describe('Tile', () => {
 
     it('ignores allows click events to be ignored using onBeforeClick', () => {
       wrapper.setProps({
-        onBeforeClick: evt => evt.target.tagName.toLowerCase() !== 'a', // ignore link clicks
+        onBeforeClick: (evt) => evt.target.tagName.toLowerCase() !== 'a', // ignore link clicks
       });
       expect(wrapper.state().expanded).toEqual(false);
       wrapper.simulate('click');

@@ -35,7 +35,7 @@ const DataTableSkeleton = ({
   for (let i = 0; i < rowRepeat; i++) {
     rows[i] = (
       <tr key={i}>
-        {columnsArray.map(j => (
+        {columnsArray.map((j) => (
           <td key={j}>
             <span />
           </td>
@@ -65,7 +65,7 @@ const DataTableSkeleton = ({
       <table className={dataTableSkeletonClasses} {...rest}>
         <thead>
           <tr>
-            {columnsArray.map(i => (
+            {columnsArray.map((i) => (
               <th key={i}>
                 <span></span>
               </th>

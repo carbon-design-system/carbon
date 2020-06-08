@@ -48,19 +48,20 @@ configureActions({
   limit: 10,
 });
 
-addDecorator(story => <Container story={story} />);
+addDecorator((story) => <Container story={story} />);
 // addDecorator(checkA11y);
 
-addons.getChannel().on(CARBON_CURRENT_THEME, theme => {
+addons.getChannel().on(CARBON_CURRENT_THEME, (theme) => {
   document.documentElement.setAttribute('storybook-carbon-theme', theme);
 });
 
 addons.getChannel().on(CARBON_TYPE_TOKEN, ({ tokenName, tokenValue }) => {
   const root = document.documentElement;
   const [fontSize, lineHeight] = tokenValue.split('-');
-  const rem = px =>
-    `${px /
-      parseFloat(getComputedStyle(document.documentElement).fontSize)}rem`;
+  const rem = (px) =>
+    `${
+      px / parseFloat(getComputedStyle(document.documentElement).fontSize)
+    }rem`;
   root.style.setProperty(
     `--${customPropertyPrefix}-${tokenName}-font-size`,
     rem(fontSize)

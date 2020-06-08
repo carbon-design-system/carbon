@@ -11,7 +11,7 @@
  * @param {object} config Plugin configuration.
  * @returns {Plugin} A Flatpickr plugin to put adjust the position of calendar dropdown.
  */
-export default config => fp => {
+export default (config) => (fp) => {
   /**
    * Adjusts the floating meun position after Flatpicker sets it.
    */

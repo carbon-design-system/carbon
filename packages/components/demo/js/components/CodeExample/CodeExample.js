@@ -40,7 +40,7 @@ class CodeExample extends Component {
     });
   };
 
-  highlight = node => {
+  highlight = (node) => {
     if (node) {
       if (window.Prism) {
         window.Prism.highlightElement(node);
@@ -50,7 +50,7 @@ class CodeExample extends Component {
           window.Prism &&
           Array.prototype.every.call(
             node.childNodes,
-            childNode => childNode.nodeType === Node.TEXT_NODE
+            (childNode) => childNode.nodeType === Node.TEXT_NODE
           )
         ) {
           window.Prism.highlightElement(node, this.determineShowBtnState());
@@ -96,7 +96,7 @@ class CodeExample extends Component {
       <div className="code-example">
         <div
           className={codeExampleClass}
-          ref={ref => {
+          ref={(ref) => {
             this.codeBlock = ref;
           }}>
           <pre className="line-numbers">
