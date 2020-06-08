@@ -87,7 +87,7 @@
 
   .#{$prefix}--data-table th,
   .#{$prefix}--data-table td {
-    vertical-align: top;
+    vertical-align: middle;
     text-align: left;
   }
 
@@ -430,6 +430,11 @@
   .#{$prefix}--data-table--tall td,
   .#{$prefix}--data-table--tall tbody tr th {
     padding-top: 1rem;
+  }
+
+  .#{$prefix}--data-table--tall th,
+  .#{$prefix}--data-table--tall td {
+    vertical-align: top;
   }
 
   .#{$prefix}--data-table--cell-secondary-text {
