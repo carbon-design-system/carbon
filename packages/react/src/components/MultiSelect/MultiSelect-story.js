@@ -43,7 +43,7 @@ const items = [
   },
   {
     id: 'downshift-1-item-5',
-    text: 'Option 6',
+    text: 'Option 5',
   },
 ];
 
