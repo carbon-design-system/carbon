@@ -31,7 +31,7 @@ function run({ root, packagePaths }) {
 
   return Promise.all(
     packagePaths
-      .filter(pkg => !packageDenyList.has(pkg.packageJson.name))
+      .filter((pkg) => !packageDenyList.has(pkg.packageJson.name))
       .map(async ({ packagePath }) => {
         const README_PATH = path.join(packagePath, 'README.md');
         if (!(await fs.pathExists(README_PATH))) {

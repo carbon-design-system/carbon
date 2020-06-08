@@ -87,7 +87,7 @@ storiesOf('Dropdown', module)
         <Dropdown
           {...props()}
           items={items}
-          itemToString={item => (item ? item.text : '')}
+          itemToString={(item) => (item ? item.text : '')}
           onChange={action('onChange')}
         />
       </div>
@@ -106,7 +106,7 @@ storiesOf('Dropdown', module)
           {...props()}
           type="inline"
           items={items}
-          itemToString={item => (item ? item.text : '')}
+          itemToString={(item) => (item ? item.text : '')}
           onChange={action('onChange')}
         />
       </div>
@@ -143,7 +143,7 @@ storiesOf('Dropdown', module)
             <Dropdown
               {...props()}
               items={items}
-              itemToString={item => (item ? item.text : '')}
+              itemToString={(item) => (item ? item.text : '')}
               onChange={({ selectedItem }) =>
                 setTimeout(() => setState({ selectedItem }), 1000)
               }

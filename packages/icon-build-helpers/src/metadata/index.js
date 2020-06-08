@@ -128,7 +128,7 @@ async function scaffold({
   );
 
   for (const item of registry.values()) {
-    const match = icons.data.find(icon => item.id === icon.name);
+    const match = icons.data.find((icon) => item.id === icon.name);
     if (!match) {
       const metadata = {
         name: item.id,
@@ -136,8 +136,8 @@ async function scaffold({
         aliases: [],
       };
       const sizes = item.assets
-        .map(asset => asset.size)
-        .filter(size => {
+        .map((asset) => asset.size)
+        .filter((size) => {
           return size !== undefined;
         });
 

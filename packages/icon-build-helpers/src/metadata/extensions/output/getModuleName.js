@@ -17,7 +17,7 @@ const { pascalCase } = require('change-case');
  */
 function getModuleName(name, size, namespace = []) {
   let moduleName = namespace
-    .filter(size => isNaN(size))
+    .filter((size) => isNaN(size))
     .map(pascalCase)
     .join('');
 

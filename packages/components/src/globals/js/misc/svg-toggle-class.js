@@ -6,10 +6,7 @@
  */
 
 function svgToggleClass(svg, name, forceAdd) {
-  const list = svg
-    .getAttribute('class')
-    .trim()
-    .split(/\s+/);
+  const list = svg.getAttribute('class').trim().split(/\s+/);
   const uniqueList = Object.keys(
     list.reduce((o, item) => Object.assign(o, { [item]: 1 }), {})
   );

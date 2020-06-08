@@ -85,7 +85,7 @@ function run({ packagePaths }) {
         }
 
         if (Array.isArray(packageJson.keywords)) {
-          const keywordsToAdd = DEFAULT_KEYWORDS.filter(keyword => {
+          const keywordsToAdd = DEFAULT_KEYWORDS.filter((keyword) => {
             return packageJson.keywords.indexOf(keyword) === -1;
           });
           if (keywordsToAdd.length > 0) {

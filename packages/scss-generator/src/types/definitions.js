@@ -570,7 +570,7 @@ const Assignment = defineType('Assignment', {
       // after an assignment
       if (collection && collection.length > 1) {
         const assignments = collection.filter(
-          node => node.type === Assignment.type
+          (node) => node.type === Assignment.type
         );
         if (
           assignments.length === 1 ||

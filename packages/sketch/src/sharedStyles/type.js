@@ -31,7 +31,7 @@ const expressiveTokens = new Set(['display', 'quotation', 'expressive']);
  */
 export function syncTextStyles(document) {
   return Object.keys(styles)
-    .filter(token => {
+    .filter((token) => {
       for (const pattern of expressiveTokens) {
         if (token.includes(pattern)) {
           return false;
@@ -39,7 +39,7 @@ export function syncTextStyles(document) {
       }
       return true;
     })
-    .map(token => {
+    .map((token) => {
       const name = formatSharedStyleName(token);
       const style = convertTypeStyle(token, styles[token]);
       const sharedTextStyle = syncSharedStyle(

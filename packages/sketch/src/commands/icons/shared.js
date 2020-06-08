@@ -39,7 +39,7 @@ export function syncIconSymbols(
     sizes.sort().reverse()
   );
 
-  return artboards.map(artboard => {
+  return artboards.map((artboard) => {
     return syncSymbol(symbols, sharedLayerStyles, artboard.name, {
       name: artboard.name,
       frame: artboard.frame,
@@ -88,15 +88,15 @@ function createSVGArtboards(
   let Y_OFFSET = getInitialPageOffset(page) + ARTBOARD_MARGIN;
 
   return icons
-    .filter(icon => !icon.deprecated)
-    .flatMap(icon => {
-      const defaultAsset = icon.assets.find(asset => asset.size === 32);
+    .filter((icon) => !icon.deprecated)
+    .flatMap((icon) => {
+      const defaultAsset = icon.assets.find((asset) => asset.size === 32);
 
       X_OFFSET = 0;
 
-      const artboards = sizes.map(size => {
+      const artboards = sizes.map((size) => {
         const asset =
-          icon.assets.find(asset => asset.size === size) || defaultAsset;
+          icon.assets.find((asset) => asset.size === size) || defaultAsset;
         const svgString = NSString.stringWithString(asset.source);
         const svgData = svgString.dataUsingEncoding(NSUTF8StringEncoding);
         const svgImporter = MSSVGImporter.svgImporter();
@@ -129,7 +129,7 @@ function createSVGArtboards(
         });
 
         const [group] = artboard.layers;
-        const paths = group.layers.map(layer => layer.duplicate());
+        const paths = group.layers.map((layer) => layer.duplicate());
 
         /**
          * There are several different types of layers that we might run into.
@@ -145,7 +145,7 @@ function createSVGArtboards(
           innerPaths = [],
           transparent = [],
           cutouts = [],
-        } = groupByKey(paths, layer => {
+        } = groupByKey(paths, (layer) => {
           if (layer.name === 'Rectangle') {
             if (layer.frame.width === size && layer.frame.height === size) {
               return 'transparent';

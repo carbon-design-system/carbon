@@ -82,7 +82,7 @@ export default class RadioButtonGroup extends React.Component {
   }
 
   getRadioButtons = () => {
-    const children = React.Children.map(this.props.children, radioButton => {
+    const children = React.Children.map(this.props.children, (radioButton) => {
       const { value, ...other } = radioButton.props;
       /* istanbul ignore if */
       if (typeof radioButton.props.checked !== 'undefined') {

@@ -103,7 +103,7 @@ function App() {
           <Table>
             <TableHead>
               <TableRow>
-                {headers.map(header => (
+                {headers.map((header) => (
                   <TableHeader {...getHeaderProps({ header })}>
                     {header.header}
                   </TableHeader>
@@ -111,9 +111,9 @@ function App() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map(row => (
+              {rows.map((row) => (
                 <TableRow key={row.id}>
-                  {row.cells.map(cell => (
+                  {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
                 </TableRow>
@@ -289,7 +289,7 @@ const renderProp = ({ rows, headers, getHeaderProps }) => (
     <Table>
       <TableHead>
         <TableRow>
-          {headers.map(header => (
+          {headers.map((header) => (
             <TableHeader {...getHeaderProps({ header })}>
               {header.header}
             </TableHeader>
@@ -297,9 +297,9 @@ const renderProp = ({ rows, headers, getHeaderProps }) => (
         </TableRow>
       </TableHead>
       <TableBody>
-        {rows.map(row => (
+        {rows.map((row) => (
           <TableRow key={row.id}>
-            {row.cells.map(cell => (
+            {row.cells.map((cell) => (
               <TableCell key={cell.id}>{cell.value}</TableCell>
             ))}
           </TableRow>
@@ -396,7 +396,7 @@ following:
       <Table>
         <TableHead>
           <TableRow>
-            {headers.map(header => (
+            {headers.map((header) => (
               <TableHeader {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
@@ -404,9 +404,9 @@ following:
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
+          {rows.map((row) => (
             <TableRow key={row.id}>
-              {row.cells.map(cell => (
+              {row.cells.map((cell) => (
                 <TableCell key={cell.id}>{cell.value}</TableCell>
               ))}
             </TableRow>
@@ -636,7 +636,7 @@ In practice, this looks like the following:
       <Table>
         <TableHead>
           <TableRow>
-            {headers.map(header => (
+            {headers.map((header) => (
               <TableHeader {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
@@ -644,9 +644,9 @@ In practice, this looks like the following:
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
+          {rows.map((row) => (
             <TableRow key={row.id}>
-              {row.cells.map(cell => (
+              {row.cells.map((cell) => (
                 <TableCell key={cell.id}>{cell.value}</TableCell>
               ))}
             </TableRow>

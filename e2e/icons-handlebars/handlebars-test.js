@@ -22,7 +22,7 @@ describe('icons-handlebars', () => {
     }).toThrow();
   });
 
-  test.each(Object.keys(CarbonIcons))('%s should compile', name => {
+  test.each(Object.keys(CarbonIcons))('%s should compile', (name) => {
     expect(() => {
       hbs.compile(`{{ carbon-icon "${name}" }}`)();
       hbs.compile(

@@ -25,7 +25,7 @@ let iconsList = icons;
  * this.findIcon('copy-code', icons.json);
  */
 export function findIcon(name, iconsObj = iconsList) {
-  const icon = iconsObj.filter(obj => obj.name === name);
+  const icon = iconsObj.filter((obj) => obj.name === name);
 
   if (icon.length === 0) {
     return false;
@@ -68,8 +68,8 @@ export function getSvgData(iconName) {
  */
 export function svgShapes(svgData) {
   const svgElements = Object.keys(svgData)
-    .filter(key => svgData[key])
-    .map(svgProp => {
+    .filter((key) => svgData[key])
+    .map((svgProp) => {
       const data = svgData[svgProp];
 
       if (svgProp === 'circles') {

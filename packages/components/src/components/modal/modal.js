@@ -165,7 +165,7 @@ class Modal extends mixin(
 
   _hookCloseActions() {
     this.manage(
-      on(this.element, 'click', evt => {
+      on(this.element, 'click', (evt) => {
         const closeButton = eventMatches(evt, this.options.selectorModalClose);
         if (closeButton) {
           evt.delegateTarget = closeButton; // eslint-disable-line no-param-reassign
@@ -183,7 +183,7 @@ class Modal extends mixin(
     }
 
     this._handleKeydownListener = this.manage(
-      on(this.element.ownerDocument.body, 'keydown', evt => {
+      on(this.element.ownerDocument.body, 'keydown', (evt) => {
         // Avoid running `evt.stopPropagation()` only when modal is shown
         if (evt.which === 27 && this.shouldStateBeChanged('hidden')) {
           evt.stopPropagation();
@@ -198,7 +198,7 @@ class Modal extends mixin(
    * @param {Event} evt The event.
    * @private
    */
-  _handleFocusin = evt => {
+  _handleFocusin = (evt) => {
     const focusWrapNode =
       this.element.querySelector(this.options.selectorModalContainer) ||
       this.element;
@@ -206,7 +206,7 @@ class Modal extends mixin(
       this.element.classList.contains(this.options.classVisible) &&
       !focusWrapNode.contains(evt.target) &&
       this.options.selectorsFloatingMenus.every(
-        selector => !eventMatches(evt, selector)
+        (selector) => !eventMatches(evt, selector)
       )
     ) {
       this.element.querySelector(settings.selectorTabbable).focus();

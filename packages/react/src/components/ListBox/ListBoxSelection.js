@@ -30,7 +30,7 @@ const ListBoxSelection = ({
     [`${prefix}--tag--filter`]: selectionCount,
     [`${prefix}--list-box__selection--multi`]: selectionCount,
   });
-  const handleOnClick = event => {
+  const handleOnClick = (event) => {
     event.stopPropagation();
     if (disabled) {
       return;
@@ -40,7 +40,7 @@ const ListBoxSelection = ({
       onClearSelection(event);
     }
   };
-  const handleOnKeyDown = event => {
+  const handleOnKeyDown = (event) => {
     event.stopPropagation();
     if (disabled) {
       return;
@@ -119,7 +119,7 @@ ListBoxSelection.propTypes = {
 };
 
 ListBoxSelection.defaultProps = {
-  translateWithId: id => defaultTranslations[id],
+  translateWithId: (id) => defaultTranslations[id],
 };
 
 export default ListBoxSelection;

@@ -81,7 +81,7 @@ async function run() {
     reviews.push(review);
   }
 
-  const approved = reviews.filter(review => {
+  const approved = reviews.filter((review) => {
     return review.state === 'APPROVED';
   });
 
@@ -93,7 +93,7 @@ async function run() {
   const needsReviewLabels = new Set([visualReviewLabel, contentReviewLabel]);
 
   if (approved.length > 0) {
-    const hasReadyLabel = pullRequest.labels.find(label => {
+    const hasReadyLabel = pullRequest.labels.find((label) => {
       return label.name === readyForReviewLabel;
     });
     if (hasReadyLabel) {
@@ -107,7 +107,7 @@ async function run() {
   }
 
   if (approved.length === 1) {
-    const hasAdditionalReviewLabel = pullRequest.labels.find(label => {
+    const hasAdditionalReviewLabel = pullRequest.labels.find((label) => {
       return label.name === additionalReviewLabel;
     });
     if (!hasAdditionalReviewLabel) {
@@ -122,7 +122,7 @@ async function run() {
   }
 
   if (approved.length >= 2) {
-    const hasAdditionalReviewLabel = pullRequest.labels.find(label => {
+    const hasAdditionalReviewLabel = pullRequest.labels.find((label) => {
       return label.name === additionalReviewLabel;
     });
     if (hasAdditionalReviewLabel) {
@@ -134,14 +134,14 @@ async function run() {
       });
     }
 
-    const allNeedsReviewLabels = pullRequest.labels.filter(label => {
+    const allNeedsReviewLabels = pullRequest.labels.filter((label) => {
       return needsReviewLabels.has(label.name);
     });
     if (allNeedsReviewLabels.length > 0) {
       return;
     }
 
-    const shouldAutoLabel = autoLabelUsers.find(user => {
+    const shouldAutoLabel = autoLabelUsers.find((user) => {
       return user === pullRequest.user.login;
     });
     if (shouldAutoLabel) {
@@ -156,7 +156,7 @@ async function run() {
   }
 }
 
-run().catch(error => {
+run().catch((error) => {
   console.log(error);
   process.exit(1);
 });

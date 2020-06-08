@@ -277,21 +277,21 @@ class OverflowMenu extends Component {
     }
   }
 
-  handleClick = evt => {
+  handleClick = (evt) => {
     if (!this._menuBody || !this._menuBody.contains(evt.target)) {
       this.setState({ open: !this.state.open });
       this.props.onClick(evt);
     }
   };
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     if (keyCodeMatches(evt, [keys.ArrowDown])) {
       this.setState({ open: !this.state.open });
       this.props.onClick(evt);
     }
   };
 
-  handleKeyPress = evt => {
+  handleKeyPress = (evt) => {
     if (
       this.state.open &&
       keyCodeMatches(evt, [
@@ -312,7 +312,7 @@ class OverflowMenu extends Component {
     }
   };
 
-  handleClickOutside = evt => {
+  handleClickOutside = (evt) => {
     if (
       this.state.open &&
       (!this._menuBody || !this._menuBody.contains(evt.target))
@@ -380,7 +380,7 @@ class OverflowMenu extends Component {
    * @param {Element} menuBody The DOM element of the menu body.
    * @private
    */
-  _bindMenuBody = menuBody => {
+  _bindMenuBody = (menuBody) => {
     if (!menuBody) {
       this._menuBody = menuBody;
     }
@@ -394,7 +394,7 @@ class OverflowMenu extends Component {
    * @param {Element} menuBody The DOM element of the menu body.
    * @private
    */
-  _handlePlace = menuBody => {
+  _handlePlace = (menuBody) => {
     if (menuBody) {
       this._menuBody = menuBody;
       const hasFocusin = 'onfocusin' in window;
@@ -402,7 +402,7 @@ class OverflowMenu extends Component {
       this._hFocusIn = on(
         menuBody.ownerDocument,
         focusinEventName,
-        event => {
+        (event) => {
           const { target } = event;
           const { current: triggerEl } = this._triggerRef;
           if (
@@ -485,7 +485,7 @@ class OverflowMenu extends Component {
         React.cloneElement(child, {
           closeMenu: this.closeMenu,
           handleOverflowMenuItemFocus: this.handleOverflowMenuItemFocus,
-          ref: e => {
+          ref: (e) => {
             this[`overflowMenuItem${index}`] = e;
           },
           index,

@@ -37,9 +37,7 @@ const categories = () => {
             subcategories: Joi.array().items(
               Joi.object().keys({
                 name: Joi.string().required(),
-                members: Joi.array()
-                  .items(Joi.string())
-                  .required(),
+                members: Joi.array().items(Joi.string()).required(),
               })
             ),
           })
@@ -102,9 +100,9 @@ const categories = () => {
 
       // Verify that every asset in the registry has category information
       for (const icon of registry.values()) {
-        const match = members.find(member => member.name === icon.id);
+        const match = members.find((member) => member.name === icon.id);
         if (!match) {
-          const filepaths = icon.assets.map(asset => asset.filepath);
+          const filepaths = icon.assets.map((asset) => asset.filepath);
           throw new Error(
             `Expected the following icon to have category information: ` +
               `\`${icon.id}\`. This icon has assets in the following locations:\n` +
