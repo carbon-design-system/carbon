@@ -422,7 +422,7 @@ versions for the package that it is being imported from.
 <tr><td>
 
 ```jsx
-function unstable_MyComponent() {
+function Unstable_MyComponent() {
   // ...
 }
 ```
@@ -430,7 +430,7 @@ function unstable_MyComponent() {
 </td><td>
 
 ```jsx
-function Unstable_MyComponent() {
+function unstable_MyComponent() {
   // ...
 }
 ```
