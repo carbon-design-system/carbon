@@ -285,7 +285,7 @@ function MyComponent({ translateWithId: t = translateWithId }) {
   return (
     <>
       <span>
-        {setSortDirection === 'ASC'
+        {sortDirection === 'ASC'
           ? t('carbon.component-name.sort.ascending')
           : t('carbon.component-name.sort.descending')}
       </span>
