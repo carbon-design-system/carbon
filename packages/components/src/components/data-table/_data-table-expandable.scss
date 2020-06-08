@@ -165,7 +165,7 @@
 
   .#{$prefix}--data-table td.#{$prefix}--table-expand,
   th.#{$prefix}--table-expand {
-    padding: rem(14px) $spacing-05;
+    padding: $spacing-05;
   }
 
   .#{$prefix}--data-table--compact td.#{$prefix}--table-expand,
