@@ -122,7 +122,7 @@ export default (props) => (
                         <Checkbox
                           id={'check-' + cell.id}
                           checked={cell.value}
-                          labelText=""
+                          hideLabel
                         />
                       </TableCell>
                     );
