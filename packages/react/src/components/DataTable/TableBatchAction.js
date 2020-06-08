@@ -10,7 +10,7 @@ import React from 'react';
 import { AddFilled16 as iconAddSolid } from '@carbon/icons-react';
 import Button from '../Button';
 
-const TableBatchAction = props => <Button {...props} />;
+const TableBatchAction = (props) => <Button {...props} />;
 
 TableBatchAction.propTypes = {
   /**
@@ -22,7 +22,7 @@ TableBatchAction.propTypes = {
    * If specifying the `renderIcon` prop, provide a description for that icon that can
    * be read by screen readers
    */
-  iconDescription: props => {
+  iconDescription: (props) => {
     if (props.renderIcon && !props.children && !props.iconDescription) {
       return new Error(
         'renderIcon property specified without also providing an iconDescription property.'

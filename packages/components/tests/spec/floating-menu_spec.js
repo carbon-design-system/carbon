@@ -2,9 +2,9 @@ import EventManager from '../utils/event-manager';
 import FloatingMenu from '../../src/components/floating-menu/floating-menu';
 import HTML from '../../html/overflow-menu/overflow-menu.html'; // Use .bx--overflow-menu-options for testing
 
-describe('Test floating menu', function() {
-  describe('Constructor', function() {
-    it('Should throw if root element is not given', function() {
+describe('Test floating menu', function () {
+  describe('Constructor', function () {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         new FloatingMenu();
       }).toThrowError(
@@ -13,7 +13,7 @@ describe('Test floating menu', function() {
       );
     });
 
-    it('Should throw if root element is not a DOM element', function() {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         new FloatingMenu(document.createTextNode(''));
       }).toThrowError(
@@ -23,23 +23,23 @@ describe('Test floating menu', function() {
     });
   });
 
-  describe('Setting menu direction', function() {
+  describe('Setting menu direction', function () {
     let menu;
 
-    it('Should use bottom by default', function() {
+    it('Should use bottom by default', function () {
       expect(
         (menu = new FloatingMenu(document.createElement('div'))).options
           .direction
       ).toBe('bottom');
     });
 
-    it('Should read the direction from data-floating-menu-direction', function() {
+    it('Should read the direction from data-floating-menu-direction', function () {
       const element = document.createElement('div');
       element.dataset.floatingMenuDirection = 'left';
       expect((menu = new FloatingMenu(element)).options.direction).toBe('left');
     });
 
-    it('Should use options.direction over data-floating-menu-direction', function() {
+    it('Should use options.direction over data-floating-menu-direction', function () {
       const element = document.createElement('div');
       element.dataset.floatingMenuDirection = 'left';
       expect(
@@ -48,14 +48,14 @@ describe('Test floating menu', function() {
       ).toBe('right');
     });
 
-    afterEach(function() {
+    afterEach(function () {
       if (menu) {
         menu = menu.release();
       }
     });
   });
 
-  describe('Showing/hiding', function() {
+  describe('Showing/hiding', function () {
     let menu;
     let element;
     let refNode;
@@ -63,7 +63,7 @@ describe('Test floating menu', function() {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = HTML;
 
-    beforeAll(function() {
+    beforeAll(function () {
       element = tempDiv.querySelector('.bx--overflow-menu-options');
       document.body.appendChild(element);
       refNode = document.createElement('div');
@@ -75,7 +75,7 @@ describe('Test floating menu', function() {
       });
     });
 
-    it("Should sanity check show()'s arguments", function() {
+    it("Should sanity check show()'s arguments", function () {
       expect(() => {
         menu.show({});
       }).toThrowError(
@@ -84,7 +84,7 @@ describe('Test floating menu', function() {
       );
     });
 
-    it('Should have show() do nothing if already visible', function() {
+    it('Should have show() do nothing if already visible', function () {
       element.classList.add('my-floating-menu-open');
       const spy = jasmine.createSpy();
       events.on(element, 'floating-menu-beingshown', spy);
@@ -100,7 +100,7 @@ describe('Test floating menu', function() {
       expect(spy, 'floating-menu-beingshown event').not.toHaveBeenCalled();
     });
 
-    it('Should have show() method show menu', function() {
+    it('Should have show() method show menu', function () {
       const spy = jasmine.createSpy();
       events.on(menu.element, 'floating-menu-shown', spy);
       menu.show();
@@ -115,7 +115,7 @@ describe('Test floating menu', function() {
       expect(spy, 'floating-menu-shown event').toHaveBeenCalledTimes(1);
     });
 
-    it('Should call callback of show() method after it finishes', function() {
+    it('Should call callback of show() method after it finishes', function () {
       const spy = jasmine.createSpy();
       menu.show(spy);
       menu.element.dispatchEvent(
@@ -124,7 +124,7 @@ describe('Test floating menu', function() {
       expect(spy).toHaveBeenCalledTimes(1);
     });
 
-    it("Should sanity check hide()'s arguments", function() {
+    it("Should sanity check hide()'s arguments", function () {
       expect(() => {
         menu.hide({});
       }).toThrowError(
@@ -133,7 +133,7 @@ describe('Test floating menu', function() {
       );
     });
 
-    it('Should have hide() not hide if not visible already', function() {
+    it('Should have hide() not hide if not visible already', function () {
       const spy = jasmine.createSpy();
       events.on(element, 'floating-menu-beinghidden', spy);
       menu.hide();
@@ -151,7 +151,7 @@ describe('Test floating menu', function() {
       expect(spy, 'floating-menu-beinghidden event').not.toHaveBeenCalled();
     });
 
-    it('Should have hide() method hide menu', function() {
+    it('Should have hide() method hide menu', function () {
       menu.show();
       menu.element.dispatchEvent(
         new CustomEvent('transitionend', { bubbles: true })
@@ -170,7 +170,7 @@ describe('Test floating menu', function() {
       expect(spy, 'floating-menu-hidden event').toHaveBeenCalled();
     });
 
-    it('Should have changeState() do nothing if the new state is neither shown or nor hidden', function() {
+    it('Should have changeState() do nothing if the new state is neither shown or nor hidden', function () {
       const spyBeingShown = jasmine.createSpy();
       const spyBeingHidden = jasmine.createSpy();
       events.on(element, 'floating-menu-beingshown', spyBeingShown);
@@ -194,20 +194,20 @@ describe('Test floating menu', function() {
       ).not.toHaveBeenCalled();
     });
 
-    it("Should fire event on delegator node if it's given", function() {
+    it("Should fire event on delegator node if it's given", function () {
       const spy = jasmine.createSpy();
       events.on(refNode, 'floating-menu-shown', spy);
       menu.changeState('shown', { delegatorNode: refNode });
       expect(spy, 'floating-menu-shown event').toHaveBeenCalledTimes(1);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       element.classList.remove('my-floating-menu-open');
       refNode.classList.remove('my-floating-menu-trigger-open');
       events.reset();
     });
 
-    afterAll(function() {
+    afterAll(function () {
       if (menu) {
         menu.release();
         menu = null;
@@ -227,14 +227,14 @@ describe('Test floating menu', function() {
     });
   });
 
-  describe('Placing menu', function() {
+  describe('Placing menu', function () {
     let menu;
     let element;
     let refNode;
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = HTML;
 
-    beforeAll(function() {
+    beforeAll(function () {
       window.pageXOffset = 0;
       window.pageYOffset = 0;
       element = tempDiv.querySelector('.bx--overflow-menu-options');
@@ -264,35 +264,35 @@ describe('Test floating menu', function() {
       });
     });
 
-    it('Should place the menu at the left', function() {
+    it('Should place the menu at the left', function () {
       menu.options.direction = 'left';
       menu.show();
       expect(element.style.left).toBe('-325px');
       expect(element.style.top).toBe('150px');
     });
 
-    it('Should place the menu at the top', function() {
+    it('Should place the menu at the top', function () {
       menu.options.direction = 'top';
       menu.show();
       expect(element.style.left).toBe('25px');
       expect(element.style.top).toBe('-250px');
     });
 
-    it('Should place the menu at the right', function() {
+    it('Should place the menu at the right', function () {
       menu.options.direction = 'right';
       menu.show();
       expect(element.style.left).toBe('325px');
       expect(element.style.top).toBe('150px');
     });
 
-    it('Should place the menu at the bottom', function() {
+    it('Should place the menu at the bottom', function () {
       menu.options.direction = 'bottom';
       menu.show();
       expect(element.style.left).toBe('25px');
       expect(element.style.top).toBe('450px');
     });
 
-    it('Should throw if refNode is not there', function() {
+    it('Should throw if refNode is not there', function () {
       menu.options.refNode = null;
       try {
         expect(() => {
@@ -306,12 +306,12 @@ describe('Test floating menu', function() {
       }
     });
 
-    afterEach(function() {
+    afterEach(function () {
       element.classList.remove('my-floating-menu-open');
       element.classList.remove('my-floating-menu-trigger-open');
     });
 
-    afterAll(function() {
+    afterAll(function () {
       if (menu) {
         menu.release();
         menu = null;
@@ -331,7 +331,7 @@ describe('Test floating menu', function() {
     });
   });
 
-  describe('Moving menu into the container', function() {
+  describe('Moving menu into the container', function () {
     let menu;
     let element;
     let refNode;
@@ -340,12 +340,12 @@ describe('Test floating menu', function() {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = HTML;
 
-    beforeAll(function() {
+    beforeAll(function () {
       refNode = document.createElement('div');
       document.body.appendChild(refNode);
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
       container = document.createElement('div');
       container.innerHTML = HTML;
       element = container.querySelector('.bx--overflow-menu-options');
@@ -357,18 +357,18 @@ describe('Test floating menu', function() {
       });
     });
 
-    it('Should move to body by default', function() {
+    it('Should move to body by default', function () {
       menu.show();
       expect(element.parentNode).toBe(document.body);
     });
 
-    it('Should move to element with data-floating-menu-container attribute', function() {
+    it('Should move to element with data-floating-menu-container attribute', function () {
       container.dataset.floatingMenuContainer = '';
       menu.show();
       expect(element.parentNode).toBe(container);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       if (menu) {
         menu.release();
         menu = null;
@@ -388,7 +388,7 @@ describe('Test floating menu', function() {
       events.reset();
     });
 
-    afterAll(function() {
+    afterAll(function () {
       if (refNode) {
         if (refNode.parentNode) {
           refNode.parentNode.removeChild(refNode);
@@ -398,14 +398,14 @@ describe('Test floating menu', function() {
     });
   });
 
-  describe('Handling resize', function() {
+  describe('Handling resize', function () {
     let menu;
     let element;
     let refNode;
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = HTML;
 
-    beforeAll(function() {
+    beforeAll(function () {
       element = tempDiv.querySelector('.bx--overflow-menu-options');
       document.body.appendChild(element);
       refNode = document.createElement('div');
@@ -417,30 +417,30 @@ describe('Test floating menu', function() {
       });
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
       spyOn(menu, '_place');
-      spyOn(window, 'requestAnimationFrame').and.callFake(callback => {
+      spyOn(window, 'requestAnimationFrame').and.callFake((callback) => {
         callback();
       });
     });
 
-    it('Should handle resizing while shown', function() {
+    it('Should handle resizing while shown', function () {
       menu.show();
       menu._place.calls.reset();
       window.dispatchEvent(new CustomEvent('resize'));
       expect(menu._place).toHaveBeenCalledTimes(1);
     });
 
-    it('Should not handle resizing while hidden', function() {
+    it('Should not handle resizing while hidden', function () {
       window.dispatchEvent(new CustomEvent('resize'));
       expect(menu._place).not.toHaveBeenCalled();
     });
 
-    afterEach(function() {
+    afterEach(function () {
       menu.hide();
     });
 
-    afterAll(function() {
+    afterAll(function () {
       if (menu) {
         menu.release();
         menu = null;
@@ -460,7 +460,7 @@ describe('Test floating menu', function() {
     });
   });
 
-  describe('Managing focus', function() {
+  describe('Managing focus', function () {
     let menu;
     let element;
     let primaryFocusNode;
@@ -469,7 +469,7 @@ describe('Test floating menu', function() {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = HTML;
 
-    beforeAll(function() {
+    beforeAll(function () {
       element = tempDiv.querySelector('.bx--overflow-menu-options');
       document.body.appendChild(element);
       primaryFocusNode = element.querySelector(
@@ -486,7 +486,7 @@ describe('Test floating menu', function() {
       });
     });
 
-    it('Should close menu when both the trigger button and the menu lose focus', function() {
+    it('Should close menu when both the trigger button and the menu lose focus', function () {
       primaryFocusNode.focus();
       menu.changeState('shown', {});
       input.focus();
@@ -495,7 +495,7 @@ describe('Test floating menu', function() {
       ).toBe(false);
     });
 
-    it('Should focus back on the trigger button when floating menu loses focus', function() {
+    it('Should focus back on the trigger button when floating menu loses focus', function () {
       const hasFocusin = 'onfocusin' in window;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
       menu.changeState('shown', {});
@@ -509,11 +509,11 @@ describe('Test floating menu', function() {
       expect(HTMLElement.prototype.focus).toHaveBeenCalledTimes(1);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       element.classList.remove('bx--overflow-menu-options--open');
     });
 
-    afterAll(function() {
+    afterAll(function () {
       if (menu) {
         menu = menu.release();
       }

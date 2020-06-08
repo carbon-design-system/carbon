@@ -78,7 +78,7 @@ export default class TileGroup extends React.Component {
 
   getRadioTiles = () => {
     const childrenArray = React.Children.toArray(this.props.children);
-    const children = childrenArray.map(tileRadio => {
+    const children = childrenArray.map((tileRadio) => {
       const { value, ...other } = tileRadio.props;
       /* istanbul ignore if */
       if (typeof tileRadio.props.checked !== 'undefined') {
@@ -111,7 +111,7 @@ export default class TileGroup extends React.Component {
     }
   };
 
-  renderLegend = legend => {
+  renderLegend = (legend) => {
     if (legend) {
       return <legend>{legend}</legend>;
     }

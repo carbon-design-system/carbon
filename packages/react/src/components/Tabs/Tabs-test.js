@@ -15,7 +15,7 @@ import TabsSkeleton from '../Tabs/Tabs.Skeleton';
 
 const { prefix } = settings;
 
-window.matchMedia = jest.fn().mockImplementation(query => ({
+window.matchMedia = jest.fn().mockImplementation((query) => ({
   matches: true,
   media: query,
   onchange: null,
@@ -53,12 +53,9 @@ describe('Tabs', () => {
       });
 
       it('renders expected classes on wrapping <div> by default', () => {
-        expect(
-          wrapper
-            .find('div')
-            .first()
-            .hasClass(`${prefix}--tabs`)
-        ).toBe(true);
+        expect(wrapper.find('div').first().hasClass(`${prefix}--tabs`)).toBe(
+          true
+        );
       });
 
       it('supports container variant', () => {
@@ -164,18 +161,12 @@ describe('Tabs', () => {
     });
 
     it('renders hidden props with boolean value', () => {
-      const hiddenProp = wrapper
-        .find('TabContent')
-        .first()
-        .props().hidden;
+      const hiddenProp = wrapper.find('TabContent').first().props().hidden;
       expect(typeof hiddenProp).toBe('boolean');
     });
 
     it('renders selected props with boolean value', () => {
-      const selectedProp = wrapper
-        .find('TabContent')
-        .first()
-        .props().hidden;
+      const selectedProp = wrapper.find('TabContent').first().props().hidden;
       expect(typeof selectedProp).toBe('boolean');
     });
   });
@@ -422,10 +413,7 @@ describe('selection change', () => {
   );
 
   it('updates selected state when selected prop changes', () => {
-    wrapper
-      .find('.secondTab')
-      .last()
-      .simulate('click');
+    wrapper.find('.secondTab').last().simulate('click');
     expect(wrapper.props().onSelectionChange).toHaveBeenCalledWith(1);
   });
 });

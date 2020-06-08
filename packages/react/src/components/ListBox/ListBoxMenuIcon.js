@@ -57,7 +57,7 @@ ListBoxMenuIcon.propTypes = {
 };
 
 ListBoxMenuIcon.defaultProps = {
-  translateWithId: id => defaultTranslations[id],
+  translateWithId: (id) => defaultTranslations[id],
 };
 
 export default ListBoxMenuIcon;

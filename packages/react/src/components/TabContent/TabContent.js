@@ -12,7 +12,7 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const TabContent = props => {
+const TabContent = (props) => {
   const { className, selected, children, ...other } = props;
   const tabContentClasses = classNames(`${prefix}--tab-content`, {
     [className]: className,

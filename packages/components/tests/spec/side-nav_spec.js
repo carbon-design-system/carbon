@@ -1,15 +1,15 @@
 import SideNav from '../../src/components/ui-shell/side-nav';
 
-describe('Side Nav', function() {
-  describe('Constructor', function() {
-    it('Should throw if root element is not given', function() {
+describe('Side Nav', function () {
+  describe('Constructor', function () {
+    it('Should throw if root element is not given', function () {
       expect(() => new SideNav()).toThrowError(
         TypeError,
         'DOM element should be given to initialize this widget.'
       );
     });
 
-    it('Should throw if root element is not a DOM element', function() {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => new SideNav(document.createTextNode(''))).toThrowError(
         TypeError,
         'DOM element should be given to initialize this widget.'
@@ -17,7 +17,7 @@ describe('Side Nav', function() {
     });
   });
 
-  describe('Click handler', function() {
+  describe('Click handler', function () {
     let element;
     let toggleNode;
     let navLinkNode1;
@@ -28,7 +28,7 @@ describe('Side Nav', function() {
     let navSubmenuTriggerNode;
     let sideNav;
 
-    beforeAll(function() {
+    beforeAll(function () {
       element = document.createElement('aside');
       element.className = 'bx--side-nav';
       element.setAttribute('data-side-nav', 'true');
@@ -57,13 +57,13 @@ describe('Side Nav', function() {
       document.body.appendChild(element);
     });
 
-    describe('Click toggle', function() {
-      it('should open the side nav on toggle click', function() {
+    describe('Click toggle', function () {
+      it('should open the side nav on toggle click', function () {
         toggleNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
         expect(element.classList.contains('bx--side-nav--expanded')).toBe(true);
       });
 
-      it('should close the open side nav on toggle click', function() {
+      it('should close the open side nav on toggle click', function () {
         toggleNode.setAttribute('aria-expanded', 'true');
         toggleNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
         expect(element.classList.contains('bx--side-nav--expanded')).toBe(
@@ -72,8 +72,8 @@ describe('Side Nav', function() {
       });
     });
 
-    describe('Click side nav link', function() {
-      it('should attach CSS classes on click', function() {
+    describe('Click side nav link', function () {
+      it('should attach CSS classes on click', function () {
         navLinkTriggerNode1.dispatchEvent(
           new CustomEvent('click', { bubbles: true })
         );
@@ -84,7 +84,7 @@ describe('Side Nav', function() {
           navLinkNode1.classList.contains('bx--side-nav__item--active')
         ).toBe(true);
       });
-      it('should detach CSS classes from previously active links when nav link is active', function() {
+      it('should detach CSS classes from previously active links when nav link is active', function () {
         navLinkTriggerNode1.dispatchEvent(
           new CustomEvent('click', { bubbles: true })
         );
@@ -106,8 +106,8 @@ describe('Side Nav', function() {
       });
     });
 
-    describe('Click nav submenu', function() {
-      it('should open the submenu on click', function() {
+    describe('Click nav submenu', function () {
+      it('should open the submenu on click', function () {
         navSubmenuTriggerNode.dispatchEvent(
           new CustomEvent('click', { bubbles: true })
         );
@@ -116,7 +116,7 @@ describe('Side Nav', function() {
         );
       });
 
-      it('should close the open submenu on click', function() {
+      it('should close the open submenu on click', function () {
         navSubmenuTriggerNode.setAttribute('aria-expanded', 'true');
         navSubmenuTriggerNode.dispatchEvent(
           new CustomEvent('click', { bubbles: true })
@@ -127,12 +127,12 @@ describe('Side Nav', function() {
       });
     });
 
-    afterEach(function() {
+    afterEach(function () {
       toggleNode.setAttribute('aria-expanded', 'false');
       navSubmenuTriggerNode.setAttribute('aria-expanded', 'false');
     });
 
-    afterAll(function() {
+    afterAll(function () {
       sideNav.release();
       document.body.removeChild(element);
     });

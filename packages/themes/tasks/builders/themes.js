@@ -21,7 +21,7 @@ function buildThemesFile(
   const defaultThemeMap = t.Assignment({
     id: t.Identifier(`carbon--theme--${defaultThemeName}`),
     init: t.SassMap({
-      properties: Object.keys(defaultTheme).map(token => {
+      properties: Object.keys(defaultTheme).map((token) => {
         return t.SassMapProperty(
           t.Identifier(formatTokenName(token)),
           primitive(defaultTheme[token])
@@ -31,8 +31,8 @@ function buildThemesFile(
     default: true,
   });
   const themeMaps = Object.keys(themes)
-    .filter(name => name !== defaultThemeName)
-    .flatMap(name => {
+    .filter((name) => name !== defaultThemeName)
+    .flatMap((name) => {
       const theme = themes[name];
       const comment = t.Comment(`/ Carbon's ${name} color theme
 / @type Map
@@ -47,10 +47,10 @@ function buildThemesFile(
             t.Identifier(`carbon--theme--${defaultThemeName}`),
             t.SassMap({
               properties: Object.keys(theme)
-                .filter(token => {
+                .filter((token) => {
                   return theme[token] !== defaultTheme[token];
                 })
-                .map(token => {
+                .map((token) => {
                   return t.SassMapProperty(
                     t.Identifier(formatTokenName(token)),
                     primitive(theme[token])
@@ -66,8 +66,8 @@ function buildThemesFile(
   const carbonTheme = t.Assignment({
     id: t.Identifier(defaultThemeMapName),
     init: t.SassMap({
-      properties: Object.keys(tokens).flatMap(group => {
-        return tokens[group].flatMap(token => {
+      properties: Object.keys(tokens).flatMap((group) => {
+        return tokens[group].flatMap((token) => {
           const name = formatTokenName(token);
           return t.SassMapProperty(
             t.Identifier(name),

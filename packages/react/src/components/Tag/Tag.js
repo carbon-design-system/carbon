@@ -45,7 +45,7 @@ const Tag = ({
     [`${prefix}--tag--filter`]: filter,
     [`${prefix}--tag--${type}`]: type,
   });
-  const handleClose = event => {
+  const handleClose = (event) => {
     if (onClose) {
       event.stopPropagation();
       onClose(event);

@@ -16,9 +16,9 @@ const packageJson = require('../../../package.json');
 const WORKSPACE_ROOT = path.resolve(__dirname, '../../../');
 const packagePaths = glob
   .sync(
-    packageJson.workspaces.packages.map(pattern => `${pattern}/package.json`)
+    packageJson.workspaces.packages.map((pattern) => `${pattern}/package.json`)
   )
-  .map(match => {
+  .map((match) => {
     const packageJsonPath = path.join(WORKSPACE_ROOT, match);
     return {
       packageJsonPath,
@@ -56,11 +56,8 @@ async function getPackages() {
   return JSON.parse(
     // Clean-up output by stripping out `yarn` information related to the
     // command and how long it took to run
-    lernaListOutput
-      .split('\n')
-      .slice(2, -1)
-      .join('\n')
-  ).filter(pkg => !pkg.private);
+    lernaListOutput.split('\n').slice(2, -1).join('\n')
+  ).filter((pkg) => !pkg.private);
 }
 
 module.exports = {

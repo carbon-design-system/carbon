@@ -8,10 +8,10 @@
 'use strict';
 
 function safeAsync(promise) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     promise
       .then((...args) => resolve([args, null]))
-      .catch(error => [null, error]);
+      .catch((error) => [null, error]);
   });
 }
 
