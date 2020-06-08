@@ -137,7 +137,7 @@ describe('Pagination Nav', () => {
       const pageButtonArray = element.querySelectorAll(
         instance.options.selectorPageElement
       );
-      pageButtonArray.forEach(el => {
+      pageButtonArray.forEach((el) => {
         el.dispatchEvent(new CustomEvent('click', { bubbles: true }));
         expect(el.classList.contains(instance.options.classActive)).toBe(true);
         expect(el.classList.contains(instance.options.classDisabled)).toBe(

@@ -106,6 +106,6 @@ the list. For instance you can use:
     { id: 'item-2', text: 'Item 2' },
   ]}
   translateWithId={translateWithId}
-  itemToString={item => (item ? item.text : '')}
+  itemToString={(item) => (item ? item.text : '')}
 />
 ```

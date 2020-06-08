@@ -85,11 +85,7 @@ describe('ProgressIndicator', () => {
       const mockOnChange = jest.fn();
 
       mountedList.setProps({ onChange: mockOnChange });
-      mountedList
-        .find(ProgressStep)
-        .at(0)
-        .find('button')
-        .simulate('click');
+      mountedList.find(ProgressStep).at(0).find('button').simulate('click');
       expect(mockOnChange).toHaveBeenCalledWith(0);
     });
 
@@ -105,30 +101,21 @@ describe('ProgressIndicator', () => {
       });
 
       it('should render with a label', () => {
-        expect(
-          mountedList
-            .find(ProgressStep)
-            .at(0)
-            .prop('label')
-        ).toEqual('label');
+        expect(mountedList.find(ProgressStep).at(0).prop('label')).toEqual(
+          'label'
+        );
       });
 
       it('should render with a description', () => {
         expect(
-          mountedList
-            .find(ProgressStep)
-            .at(0)
-            .prop('description')
+          mountedList.find(ProgressStep).at(0).prop('description')
         ).toEqual('Step 1: Getting Started with Node.js');
       });
 
       it('should render description in <title> node', () => {
-        expect(
-          mountedList
-            .find('ProgressStep title')
-            .at(0)
-            .text()
-        ).toEqual('Step 1: Getting Started with Node.js');
+        expect(mountedList.find('ProgressStep title').at(0).text()).toEqual(
+          'Step 1: Getting Started with Node.js'
+        );
       });
 
       describe('current', () => {
@@ -143,12 +130,9 @@ describe('ProgressIndicator', () => {
         });
 
         it('should render a current ProgressStep with correct props', () => {
-          expect(
-            mountedList
-              .find(ProgressStep)
-              .at(3)
-              .prop('current')
-          ).toBe(true);
+          expect(mountedList.find(ProgressStep).at(3).prop('current')).toBe(
+            true
+          );
         });
       });
 
@@ -163,12 +147,7 @@ describe('ProgressIndicator', () => {
           ).toEqual(true);
         });
         it('should render any completed ProgressSteps with correct props', () => {
-          expect(
-            list
-              .find(ProgressStep)
-              .at(0)
-              .prop('complete')
-          ).toBe(true);
+          expect(list.find(ProgressStep).at(0).prop('complete')).toBe(true);
         });
       });
 
@@ -183,12 +162,7 @@ describe('ProgressIndicator', () => {
           ).toEqual(true);
         });
         it('should render any incompleted ProgressSteps with correct props', () => {
-          expect(
-            list
-              .find(ProgressStep)
-              .at(5)
-              .prop('complete')
-          ).toBe(false);
+          expect(list.find(ProgressStep).at(5).prop('complete')).toBe(false);
         });
 
         it('should render any clickable ProgressSteps with correct classname', () => {

@@ -28,7 +28,7 @@ describe('_mixins.scss', () => {
   });
 
   it('should set token variables for the given theme', async () => {
-    const themeTests = Object.keys(themes).map(key => {
+    const themeTests = Object.keys(themes).map((key) => {
       const variable = `$carbon--theme--${key}`;
       const test = `
         @include carbon--theme(${variable}) {
@@ -51,7 +51,7 @@ describe('_mixins.scss', () => {
   });
 
   it('should set token variables for the given theme', async () => {
-    const themeTests = Object.keys(themes).map(key => {
+    const themeTests = Object.keys(themes).map((key) => {
       const variable = `$carbon--theme--${key}`;
       const test = `
         $feature-flags: (enable-css-custom-properties: true);
@@ -91,7 +91,7 @@ describe('_mixins.scss', () => {
       $t: test($interactive-01);
     `);
 
-    const colors = calls.map(call => convert(call[0]));
+    const colors = calls.map((call) => convert(call[0]));
     expect(colors[0]).toEqual(colors[2]);
     expect(colors[1]).toBe('#ffffff');
   });

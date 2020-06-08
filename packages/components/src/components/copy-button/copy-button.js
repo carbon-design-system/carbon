@@ -28,7 +28,9 @@ class CopyButton extends mixin(
     super(element, options);
     this.manage(on(this.element, 'click', () => this.handleClick()));
     this.manage(
-      on(this.element, 'animationend', event => this.handleAnimationEnd(event))
+      on(this.element, 'animationend', (event) =>
+        this.handleAnimationEnd(event)
+      )
     );
   }
 

@@ -11,11 +11,11 @@ import { unstable_tokens as tokens } from '../tokens';
 import * as styles from '../styles';
 
 describe('type tokens', () => {
-  test.each(tokens)('%s should be defined in styles', token => {
+  test.each(tokens)('%s should be defined in styles', (token) => {
     expect(styles[token]).toBeDefined();
   });
 
-  test.each(Object.keys(styles))('%s should be defined in tokens', token => {
+  test.each(Object.keys(styles))('%s should be defined in tokens', (token) => {
     expect(tokens.indexOf(token)).not.toBe(-1);
   });
 });

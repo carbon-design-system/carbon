@@ -156,7 +156,7 @@ class NumberInput extends Component {
     helperText: '',
     light: false,
     allowEmpty: false,
-    translateWithId: id => defaultTranslations[id],
+    translateWithId: (id) => defaultTranslations[id],
   };
 
   static getDerivedStateFromProps({ min, max, value = 0 }, state) {
@@ -201,7 +201,7 @@ class NumberInput extends Component {
     this.state = { value };
   }
 
-  handleChange = evt => {
+  handleChange = (evt) => {
     const { disabled, onChange } = this.props;
     if (!disabled) {
       evt.persist();
@@ -259,7 +259,7 @@ class NumberInput extends Component {
    * Preserves the DOM node ref of `<input>`.
    * @param {HTMLInputElement} ref The DOM node ref of `<input>`.
    */
-  _handleInputRef = ref => {
+  _handleInputRef = (ref) => {
     this._inputRef = ref;
   };
 
@@ -387,7 +387,7 @@ class NumberInput extends Component {
                     <button
                       className={`${prefix}--number__control-btn down-icon`}
                       {...buttonProps}
-                      onClick={evt => this.handleArrowClick(evt, 'down')}
+                      onClick={(evt) => this.handleArrowClick(evt, 'down')}
                       title={decrementNumLabel}
                       aria-label={decrementNumLabel || iconDescription}
                       aria-live="polite"
@@ -404,7 +404,7 @@ class NumberInput extends Component {
                     <button
                       className={`${prefix}--number__control-btn up-icon`}
                       {...buttonProps}
-                      onClick={evt => this.handleArrowClick(evt, 'up')}
+                      onClick={(evt) => this.handleArrowClick(evt, 'up')}
                       title={incrementNumLabel}
                       aria-label={incrementNumLabel || iconDescription}
                       aria-live="polite"
@@ -436,7 +436,7 @@ class NumberInput extends Component {
                     <button
                       className={`${prefix}--number__control-btn up-icon`}
                       {...buttonProps}
-                      onClick={evt => this.handleArrowClick(evt, 'up')}
+                      onClick={(evt) => this.handleArrowClick(evt, 'up')}
                       title={incrementNumLabel || iconDescription}
                       aria-label={incrementNumLabel || iconDescription}
                       aria-live="polite"
@@ -446,7 +446,7 @@ class NumberInput extends Component {
                     <button
                       className={`${prefix}--number__control-btn down-icon`}
                       {...buttonProps}
-                      onClick={evt => this.handleArrowClick(evt, 'down')}
+                      onClick={(evt) => this.handleArrowClick(evt, 'down')}
                       title={decrementNumLabel || iconDescription}
                       aria-label={decrementNumLabel || iconDescription}
                       aria-live="polite"

@@ -3,20 +3,20 @@ import ProgressIndicator from '../../src/components/progress-indicator/progress-
 import HTML from '../../html/progress-indicator/progress-indicator.html';
 import flattenOptions from '../utils/flatten-options';
 
-describe('ProgressIndicator', function() {
-  describe('Constructor', function() {
+describe('ProgressIndicator', function () {
+  describe('Constructor', function () {
     let element;
     let instance;
     const wrapper = document.createElement('div');
     wrapper.innerHTML = HTML;
 
-    beforeEach(function() {
+    beforeEach(function () {
       document.body.appendChild(wrapper);
       element = document.querySelector('[data-progress]');
       instance = new ProgressIndicator(element);
     });
 
-    it('Should throw if root element is not given', function() {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         new ProgressIndicator();
       }).toThrowError(
@@ -25,7 +25,7 @@ describe('ProgressIndicator', function() {
       );
     });
 
-    it('Should throw if root element is not a DOM element', function() {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         new ProgressIndicator(document.createTextNode(''));
       }).toThrowError(
@@ -34,7 +34,7 @@ describe('ProgressIndicator', function() {
       );
     });
 
-    it('should set default options', function() {
+    it('should set default options', function () {
       expect(flattenOptions(instance.options)).toEqual({
         selectorInit: '[data-progress]',
         selectorStepElement: '.bx--progress-step',
@@ -55,33 +55,33 @@ describe('ProgressIndicator', function() {
       });
     });
 
-    it('state.currentIndex should be a number', function() {
+    it('state.currentIndex should be a number', function () {
       expect(isNaN(instance.state.currentIndex)).toBe(false);
     });
 
-    it('state.totalSteps should be a number', function() {
+    it('state.totalSteps should be a number', function () {
       expect(isNaN(instance.state.totalSteps)).toBe(false);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       instance.release();
       document.body.removeChild(wrapper);
     });
   });
 
-  describe('_updateStep', function() {
+  describe('_updateStep', function () {
     let element;
     let instance;
     const wrapper = document.createElement('div');
     wrapper.innerHTML = HTML;
 
-    beforeEach(function() {
+    beforeEach(function () {
       document.body.appendChild(wrapper);
       element = document.querySelector('[data-progress]');
       instance = new ProgressIndicator(element);
     });
 
-    it('should remove the svg contained inside given element param', function() {
+    it('should remove the svg contained inside given element param', function () {
       const el = instance.element.querySelector(
         instance.options.selectorIncomplete
       );
@@ -92,7 +92,7 @@ describe('ProgressIndicator', function() {
       expect(el.firstElementChild.tagName).not.toBe('svg');
     });
 
-    it('should update className with given className param', function() {
+    it('should update className with given className param', function () {
       const el = instance.element.querySelector(
         instance.options.selectorIncomplete
       );
@@ -103,13 +103,13 @@ describe('ProgressIndicator', function() {
       expect(el.classList.contains(instance.options.classComplete)).toBe(true);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       instance.release();
       document.body.removeChild(wrapper);
     });
   });
 
-  describe('addOverflowTooltip', function() {
+  describe('addOverflowTooltip', function () {
     let element;
     let instance;
     let stepLabel;
@@ -118,7 +118,7 @@ describe('ProgressIndicator', function() {
     const wrapper = document.createElement('div');
     wrapper.innerHTML = HTML;
 
-    beforeEach(function() {
+    beforeEach(function () {
       document.body.appendChild(wrapper);
       element = document.querySelector('[data-progress]');
       stepLabel = element.querySelector('.bx--progress-label');
@@ -131,7 +131,7 @@ describe('ProgressIndicator', function() {
       element.appendChild(tooltipDiv);
     });
 
-    it('should not have overflow class', function() {
+    it('should not have overflow class', function () {
       stepLabel.textContent = 'Step';
       instance = new ProgressIndicator(element);
       expect(stepLabel.classList.contains('bx--progress-label-overflow')).toBe(
@@ -139,7 +139,7 @@ describe('ProgressIndicator', function() {
       );
     });
 
-    it('should have an overflow class', function() {
+    it('should have an overflow class', function () {
       stepLabel.textContent = 'Overflow Ex. 1';
       instance = new ProgressIndicator(element);
       expect(stepLabel.classList.contains('bx--progress-label-overflow')).toBe(
@@ -147,131 +147,131 @@ describe('ProgressIndicator', function() {
       );
     });
 
-    it('multi line tooltip should have multi line class', function() {
+    it('multi line tooltip should have multi line class', function () {
       stepLabel.textContent = 'Overflow Ex. 2 Multi Line';
       tooltipText.style.height = '24px';
       instance = new ProgressIndicator(element);
       expect(tooltipDiv.classList.contains('bx--tooltip_multi')).toBe(true);
     });
 
-    it('single line tooltip should not have multi line class', function() {
+    it('single line tooltip should not have multi line class', function () {
       stepLabel.textContent = 'Overflow Ex. 1';
       tooltipText.style.height = '20px';
       instance = new ProgressIndicator(element);
       expect(tooltipDiv.classList.contains('bx--tooltip_multi')).toBe(false);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       instance.release();
       document.body.removeChild(wrapper);
     });
   });
 
-  describe('getSteps', function() {
+  describe('getSteps', function () {
     let element;
     let instance;
     const wrapper = document.createElement('div');
     wrapper.innerHTML = HTML;
 
-    beforeEach(function() {
+    beforeEach(function () {
       document.body.appendChild(wrapper);
       element = document.querySelector('[data-progress]');
       instance = new ProgressIndicator(element);
     });
 
-    it('should loop through all step elements with the correct selector', function() {
+    it('should loop through all step elements with the correct selector', function () {
       const className = instance.options.classStep;
       const steps = instance.getSteps();
-      steps.forEach(step =>
+      steps.forEach((step) =>
         expect(step.element.classList.contains(className)).toBe(true)
       );
     });
 
-    it('should return an Array of objects with "element" and "index" keynames', function() {
+    it('should return an Array of objects with "element" and "index" keynames', function () {
       const elementKey = Object.keys(instance.getSteps()[0])[0];
       const indexKey = Object.keys(instance.getSteps()[0])[1];
       expect(elementKey).toBe('element');
       expect(indexKey).toBe('index');
     });
 
-    it('index should be a number', function() {
+    it('index should be a number', function () {
       expect(isNaN(instance.getSteps()[0].index)).toBe(false);
     });
 
-    it('order should start counting from 0', function() {
-      const firstStepIndex = instance.getSteps().map(step => step.index)[0];
+    it('order should start counting from 0', function () {
+      const firstStepIndex = instance.getSteps().map((step) => step.index)[0];
       expect(firstStepIndex).toBe(0);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       instance.release();
       document.body.removeChild(wrapper);
     });
   });
 
-  describe('getCurrent', function() {
+  describe('getCurrent', function () {
     let element;
     let instance;
     const wrapper = document.createElement('div');
     wrapper.innerHTML = HTML;
 
-    beforeEach(function() {
+    beforeEach(function () {
       document.body.appendChild(wrapper);
       element = document.querySelector('[data-progress]');
       instance = new ProgressIndicator(element);
     });
 
-    it('should return an object with element and index keys', function() {
+    it('should return an object with element and index keys', function () {
       expect(Object.keys(instance.getCurrent())[0]).toBe('element');
       expect(Object.keys(instance.getCurrent())[1]).toBe('index');
     });
 
-    it('element value should have correct className: classStep', function() {
+    it('element value should have correct className: classStep', function () {
       const el = instance.getCurrent().element;
       expect(el.classList.contains(instance.options.classStep)).toBe(true);
     });
 
-    it('element value should have correct className: classCurrent', function() {
+    it('element value should have correct className: classCurrent', function () {
       const el = instance.getCurrent().element;
       expect(el.classList.contains(instance.options.classCurrent)).toBe(true);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       instance.release();
       document.body.removeChild(wrapper);
     });
   });
 
-  describe('setCurrent', function() {
+  describe('setCurrent', function () {
     let element;
     let instance;
     const wrapper = document.createElement('div');
     wrapper.innerHTML = HTML;
 
-    beforeEach(function() {
+    beforeEach(function () {
       document.body.appendChild(wrapper);
       element = document.querySelector('[data-progress]');
       instance = new ProgressIndicator(element);
     });
 
-    it('should set a new currentIndex with a given number param', function() {
+    it('should set a new currentIndex with a given number param', function () {
       instance.setCurrent(2);
       expect(instance.state.currentIndex).toBe(2);
     });
 
-    it('should update className of new currentIndex', function() {
+    it('should update className of new currentIndex', function () {
       instance.setCurrent(2);
       const el = instance.getCurrent().element;
       expect(el.classList.contains(instance.options.classCurrent)).toBe(true);
     });
 
-    it('should set state of previous steps to complete', function() {
+    it('should set state of previous steps to complete', function () {
       instance.setCurrent(2);
 
       const previousStep = instance
         .getSteps()
-        .map(step => step)
-        .filter(step => step.index < 2)[0];
+        .map((step) => step)
+        .filter((step) => step.index < 2)[0];
 
       expect(
         previousStep.element.classList.contains(instance.options.classComplete)
@@ -281,13 +281,13 @@ describe('ProgressIndicator', function() {
       ).toBe(false);
     });
 
-    it('should set state of next steps to incomplete', function() {
+    it('should set state of next steps to incomplete', function () {
       instance.setCurrent(2);
 
       const nextStep = instance
         .getSteps()
-        .map(step => step)
-        .filter(step => step.index > 2)[0];
+        .map((step) => step)
+        .filter((step) => step.index > 2)[0];
 
       expect(
         nextStep.element.classList.contains(instance.options.classIncomplete)
@@ -300,7 +300,7 @@ describe('ProgressIndicator', function() {
       ).toBe(false);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       instance.release();
       document.body.removeChild(wrapper);
     });

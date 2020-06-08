@@ -14,7 +14,7 @@ import { Page } from 'sketch/dom';
  * @returns {Page}
  */
 export function findOrCreatePage(document, name) {
-  const [page] = document.pages.filter(page => page.name === name);
+  const [page] = document.pages.filter((page) => page.name === name);
 
   if (page) {
     page.remove();

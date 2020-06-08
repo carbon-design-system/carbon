@@ -47,7 +47,7 @@ export function getByLabel(node, label) {
 
     if (node.hasAttribute('aria-labelledby')) {
       const labelledby = node.getAttribute('aria-labelledby');
-      const labelers = labelledby.split(' ').map(id => {
+      const labelers = labelledby.split(' ').map((id) => {
         return document.getElementById(id);
       });
 

@@ -42,7 +42,7 @@ const typeTokenDefaults = {
 export const CarbonThemesPanel = ({ api, active }) => {
   const [currentTheme, setCurrentTheme] = useState('white');
   const handleChange = useCallback(
-    event => {
+    (event) => {
       const { value } = event.target;
       setCurrentTheme(value);
       api.getChannel().emit(CARBON_CURRENT_THEME, value);
@@ -97,7 +97,7 @@ CarbonThemesPanel.propTypes = {
 export const CarbonTypePanel = ({ api, active }) => {
   const [currentTypeTokens, setCurrentTypeTokens] = useState(typeTokenDefaults);
   const handleTokenChange = useCallback(
-    event => {
+    (event) => {
       const { name: tokenName, value: tokenValue } = event.target;
       setCurrentTypeTokens({ ...currentTypeTokens, [tokenName]: tokenValue });
       api.getChannel().emit(CARBON_TYPE_TOKEN, { tokenName, tokenValue });
@@ -107,14 +107,14 @@ export const CarbonTypePanel = ({ api, active }) => {
   return (
     active && (
       <Form>
-        {Object.keys(typeTokenDefaults).map(tokenName => (
+        {Object.keys(typeTokenDefaults).map((tokenName) => (
           <Form.Field key={tokenName} label={`${tokenName}:`}>
             <Form.Select
               name={tokenName}
               onChange={handleTokenChange}
               size="flex"
               value={currentTypeTokens[tokenName]}>
-              {typeTokenPairings.map(tokenValue => {
+              {typeTokenPairings.map((tokenValue) => {
                 const [fontSize, lineHeight] = tokenValue.split('-');
                 return (
                   <option key={tokenValue} value={tokenValue}>

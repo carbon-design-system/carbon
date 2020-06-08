@@ -15,17 +15,17 @@ const createAndReleaseComponentsUponDOMMutation = (
   componentClassesForWatchInit,
   options
 ) => {
-  records.forEach(record => {
-    forEach.call(record.addedNodes, node => {
+  records.forEach((record) => {
+    forEach.call(record.addedNodes, (node) => {
       if (node.nodeType === Node.ELEMENT_NODE) {
-        componentClassesForWatchInit.forEach(Clz => {
+        componentClassesForWatchInit.forEach((Clz) => {
           Clz.init(node, options);
         });
       }
     });
-    forEach.call(record.removedNodes, node => {
+    forEach.call(record.removedNodes, (node) => {
       if (node.nodeType === Node.ELEMENT_NODE) {
-        componentClasses.forEach(Clz => {
+        componentClasses.forEach((Clz) => {
           if (node.matches(Clz.options.selectorInit)) {
             const instance = Clz.components.get(node);
             if (instance) {
@@ -34,7 +34,7 @@ const createAndReleaseComponentsUponDOMMutation = (
           } else {
             forEach.call(
               node.querySelectorAll(Clz.options.selectorInit),
-              element => {
+              (element) => {
                 const instance = Clz.components.get(element);
                 if (instance) {
                   instance.release();
@@ -54,7 +54,7 @@ const createAndReleaseComponentsUponDOMMutation = (
  * @param {object} [options] The component options.
  * @returns {Handle} The handle to stop watching.
  */
-export default function(target = document, options = {}) {
+export default function (target = document, options = {}) {
   if (
     target.nodeType !== Node.ELEMENT_NODE &&
     target.nodeType !== Node.DOCUMENT_NODE
@@ -65,18 +65,18 @@ export default function(target = document, options = {}) {
   }
 
   const componentClasses = Object.keys(components)
-    .map(key => components[key])
-    .filter(component => typeof component.init === 'function');
+    .map((key) => components[key])
+    .filter((component) => typeof component.init === 'function');
 
   const handles = componentClasses
-    .map(Clz => Clz.init(target, options))
+    .map((Clz) => Clz.init(target, options))
     .filter(Boolean);
 
   const componentClassesForWatchInit = componentClasses.filter(
-    Clz => !Clz.forLazyInit
+    (Clz) => !Clz.forLazyInit
   );
 
-  let observer = new MutationObserver(records => {
+  let observer = new MutationObserver((records) => {
     createAndReleaseComponentsUponDOMMutation(
       records,
       componentClasses,

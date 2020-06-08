@@ -45,12 +45,12 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   );
   const sharedTextInputProps = {
     id,
-    onChange: evt => {
+    onChange: (evt) => {
       if (!other.disabled) {
         onChange(evt);
       }
     },
-    onClick: evt => {
+    onClick: (evt) => {
       if (!other.disabled) {
         onClick(evt);
       }

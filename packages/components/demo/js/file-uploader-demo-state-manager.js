@@ -54,7 +54,7 @@ class FileUploaderDemoStateManager extends mixin(
    * Handles `change` event of the "upload" button.
    * @param {Event} evt The event.
    */
-  _handleChange = evt => {
+  _handleChange = (evt) => {
     const uploader = FileUplaoder.components.get(this.element);
     if (!uploader) {
       throw new TypeError('Cannot find the file uploader instance.');
@@ -72,12 +72,12 @@ class FileUploaderDemoStateManager extends mixin(
       console.log('Simulated uploading files...:', files);
 
       setTimeout(() => {
-        Array.prototype.forEach.call(files, file => {
+        Array.prototype.forEach.call(files, (file) => {
           uploader.setState('complete', this._files.indexOf(file));
         });
 
         setTimeout(() => {
-          Array.prototype.forEach.call(files, file => {
+          Array.prototype.forEach.call(files, (file) => {
             uploader.setState('edit', this._files.indexOf(file));
           });
         }, 500);
@@ -90,7 +90,7 @@ class FileUploaderDemoStateManager extends mixin(
    * @param {MouseEvent} evt The event.
    * @private
    */
-  _handleDrop = evt => {
+  _handleDrop = (evt) => {
     const uploader = FileUplaoder.components.get(this.element);
     if (!uploader) {
       throw new TypeError('Cannot find the file uploader instance.');
@@ -108,12 +108,12 @@ class FileUploaderDemoStateManager extends mixin(
       console.log('Simulated uploading files...:', files);
 
       setTimeout(() => {
-        Array.prototype.forEach.call(files, file => {
+        Array.prototype.forEach.call(files, (file) => {
           uploader.setState('complete', this._files.indexOf(file));
         });
 
         setTimeout(() => {
-          Array.prototype.forEach.call(files, file => {
+          Array.prototype.forEach.call(files, (file) => {
             uploader.setState('edit', this._files.indexOf(file));
           });
         }, 500);
@@ -125,7 +125,7 @@ class FileUploaderDemoStateManager extends mixin(
    * Handles the event of deleting uploaded file.
    * @param {CustomEvent} evt The event.
    */
-  _handleDelete = evt => {
+  _handleDelete = (evt) => {
     if (evt.type === 'fileuploader-before-delete-filename') {
       evt.detail.filenameIndex = Array.prototype.indexOf.call(
         this.element.querySelectorAll(this.options.selectorSelectedFile),

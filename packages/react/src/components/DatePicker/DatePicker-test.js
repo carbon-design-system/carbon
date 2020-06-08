@@ -282,9 +282,9 @@ describe('DatePicker', () => {
 
   describe('Date picker can be used with enzyme shallow', () => {
     let spy;
-    beforeEach(done => {
+    beforeEach((done) => {
       spy = {};
-      spy.console = jest.spyOn(console, 'error').mockImplementation(e => {
+      spy.console = jest.spyOn(console, 'error').mockImplementation((e) => {
         done(e);
       });
       done();

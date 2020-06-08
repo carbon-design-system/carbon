@@ -32,7 +32,7 @@ async function measure(pattern, { cwd, output, ignore = [] }) {
   });
 
   const results = await Promise.all(
-    compile(files.map(file => path.join(cwd, file)))
+    compile(files.map((file) => path.join(cwd, file)))
   );
 
   const errors = results.reduce((acc, result) => {
@@ -45,7 +45,7 @@ async function measure(pattern, { cwd, output, ignore = [] }) {
   }, []);
 
   if (errors.length > 0) {
-    errors.forEach(error => {
+    errors.forEach((error) => {
       const { formatted, filepath } = error;
       reporter.error(`Error compiling ${path.relative(cwd, filepath)}`);
       console.log(chalk.gray(formatted));
@@ -113,12 +113,12 @@ function printResults(prevResults, results) {
   ];
 
   const table = new Table({
-    head: resultsHeaders.map(label => chalk.gray.yellow(label)),
+    head: resultsHeaders.map((label) => chalk.gray.yellow(label)),
   });
 
-  results.forEach(result => {
+  results.forEach((result) => {
     const prevResult =
-      prevResults.find(prevResult => {
+      prevResults.find((prevResult) => {
         return (
           prevResult.filename === result.filename &&
           prevResult.package === result.package

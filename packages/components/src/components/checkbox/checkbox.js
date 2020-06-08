@@ -30,17 +30,17 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
   constructor(element, options) {
     super(element, options);
     this.manage(
-      on(this.element, 'click', event => {
+      on(this.element, 'click', (event) => {
         this._handleClick(event);
       })
     );
     this.manage(
-      on(this.element, 'focus', event => {
+      on(this.element, 'focus', (event) => {
         this._handleFocus(event);
       })
     );
     this.manage(
-      on(this.element, 'blur', event => {
+      on(this.element, 'blur', (event) => {
         this._handleBlur(event);
       })
     );
