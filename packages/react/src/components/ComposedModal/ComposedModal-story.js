@@ -230,7 +230,7 @@ storiesOf('ComposedModal', module)
     () => {
       class ComposedModalExample extends React.Component {
         state = { open: false };
-        toggleModal = open => this.setState({ open });
+        toggleModal = (open) => this.setState({ open });
         render() {
           const { open } = this.state;
           const { size, ...rest } = props.composedModal();

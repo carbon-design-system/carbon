@@ -121,11 +121,11 @@ export default class FileUploader extends React.Component {
         };
   }
 
-  handleChange = evt => {
+  handleChange = (evt) => {
     evt.stopPropagation();
     const filenames = Array.prototype.map.call(
       evt.target.files,
-      file => file.name
+      (file) => file.name
     );
     this.setState({
       filenames: this.props.multiple
@@ -141,7 +141,7 @@ export default class FileUploader extends React.Component {
     if (filenameStatus === 'edit') {
       evt.stopPropagation();
       const filteredArray = this.state.filenames.filter(
-        filename => filename !== this.nodes[index].innerText.trim()
+        (filename) => filename !== this.nodes[index].innerText.trim()
       );
       this.setState({ filenames: filteredArray });
       if (this.props.onDelete) {
@@ -204,19 +204,19 @@ export default class FileUploader extends React.Component {
                 <span
                   key={index}
                   className={selectedFileClasses}
-                  ref={node => (this.nodes[index] = node)} // eslint-disable-line
+                  ref={(node) => (this.nodes[index] = node)} // eslint-disable-line
                   {...other}>
                   <p className={`${prefix}--file-filename`}>{name}</p>
                   <span className={`${prefix}--file__state-container`}>
                     <Filename
                       iconDescription={iconDescription}
                       status={filenameStatus}
-                      onKeyDown={evt => {
+                      onKeyDown={(evt) => {
                         if (matches(evt, [keys.Enter, keys.Space])) {
                           this.handleClick(evt, { index, filenameStatus });
                         }
                       }}
-                      onClick={evt =>
+                      onClick={(evt) =>
                         this.handleClick(evt, { index, filenameStatus })
                       }
                     />

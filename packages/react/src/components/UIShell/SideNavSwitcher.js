@@ -38,7 +38,7 @@ const SideNavSwitcher = React.forwardRef(function SideNavSwitcher(props, ref) {
           value="">
           {labelText}
         </option>
-        {options.map(option => (
+        {options.map((option) => (
           <option
             key={option}
             className={`${prefix}--side-nav__option`}

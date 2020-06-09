@@ -185,7 +185,7 @@ export default class Modal extends Component {
   modalLabelId = `${prefix}--modal-header__label--${this.modalInstanceId}`;
   modalHeadingId = `${prefix}--modal-header__heading--${this.modalInstanceId}`;
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     if (this.props.open) {
       if (evt.which === 27) {
         this.props.onRequestClose(evt);
@@ -196,7 +196,7 @@ export default class Modal extends Component {
     }
   };
 
-  handleMousedown = evt => {
+  handleMousedown = (evt) => {
     if (
       this.innerModal.current &&
       !this.innerModal.current.contains(evt.target) &&
@@ -242,7 +242,7 @@ export default class Modal extends Component {
     );
   }
 
-  initialFocus = focusContainerElement => {
+  initialFocus = (focusContainerElement) => {
     const containerElement = focusContainerElement || this.innerModal.current;
     const primaryFocusElement = containerElement
       ? containerElement.querySelector(this.props.selectorPrimaryFocus)
@@ -255,7 +255,7 @@ export default class Modal extends Component {
     return this.button && this.button.current;
   };
 
-  focusButton = focusContainerElement => {
+  focusButton = (focusContainerElement) => {
     const target = this.initialFocus(focusContainerElement);
     if (target) {
       target.focus();
@@ -278,7 +278,7 @@ export default class Modal extends Component {
     this.focusButton(this.innerModal.current);
   }
 
-  handleTransitionEnd = evt => {
+  handleTransitionEnd = (evt) => {
     if (
       evt.target === evt.currentTarget && // Not to handle `onTransitionEnd` on child DOM nodes
       this.outerModal.current &&

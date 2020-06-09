@@ -17,7 +17,7 @@ import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
 
-const defaultItemToString = item => {
+const defaultItemToString = (item) => {
   if (typeof item === 'string') {
     return item;
   }
@@ -219,7 +219,7 @@ export default class ComboBox extends React.Component {
   }
 
   filterItems = (items, itemToString, inputValue) =>
-    items.filter(item =>
+    items.filter((item) =>
       this.props.shouldFilterItem({
         item,
         itemToString,
@@ -227,13 +227,13 @@ export default class ComboBox extends React.Component {
       })
     );
 
-  handleOnChange = selectedItem => {
+  handleOnChange = (selectedItem) => {
     if (this.props.onChange) {
       this.props.onChange({ selectedItem });
     }
   };
 
-  handleOnInputValueChange = inputValue => {
+  handleOnInputValueChange = (inputValue) => {
     const { onInputChange } = this.props;
 
     this.setState(
@@ -262,7 +262,7 @@ export default class ComboBox extends React.Component {
     }
   };
 
-  onToggleClick = isOpen => event => {
+  onToggleClick = (isOpen) => (event) => {
     if (event.target === this.textInput.current && isOpen) {
       event.preventDownshiftDefault = true;
       event.persist();
@@ -370,7 +370,7 @@ export default class ComboBox extends React.Component {
                   {...getInputProps({
                     disabled,
                     placeholder,
-                    onKeyDown: event => {
+                    onKeyDown: (event) => {
                       if (match(event, keys.Space)) {
                         event.stopPropagation();
                       }

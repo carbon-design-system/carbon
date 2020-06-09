@@ -23,7 +23,9 @@ async function replace(globs, changes, options) {
     ignore: ['node_modules', ...ignore].filter(Boolean),
   });
 
-  return Promise.all(files.map(file => replaceInFile(file, changes, options)));
+  return Promise.all(
+    files.map((file) => replaceInFile(file, changes, options))
+  );
 }
 
 const diffOptions = {

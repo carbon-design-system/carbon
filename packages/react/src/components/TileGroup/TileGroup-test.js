@@ -45,26 +45,14 @@ describe('TileGroup', () => {
       });
 
       it('should set checked property based on defaultSelected prop', () => {
-        expect(
-          tileButton()
-            .last()
-            .props().checked
-        ).toEqual(true);
+        expect(tileButton().last().props().checked).toEqual(true);
       });
 
       it('should set checked property based on valueSelected prop', () => {
         wrapper.setProps({ valueSelected: 'male' });
-        expect(
-          tileButton()
-            .first()
-            .props().checked
-        ).toEqual(true);
+        expect(tileButton().first().props().checked).toEqual(true);
         wrapper.setProps({ valueSelected: 'female' });
-        expect(
-          tileButton()
-            .last()
-            .props().checked
-        ).toEqual(true);
+        expect(tileButton().last().props().checked).toEqual(true);
       });
 
       it('should set expected props on children', () => {
@@ -94,12 +82,7 @@ describe('TileGroup', () => {
     it('invoking onChange sets checked on correct child', () => {
       firstRadio.props().onChange(...args);
       wrapper.update();
-      expect(
-        wrapper
-          .find(RadioTile)
-          .first()
-          .props().checked
-      ).toEqual(true);
+      expect(wrapper.find(RadioTile).first().props().checked).toEqual(true);
     });
 
     it('should invoke onChange with correct arguments', () => {

@@ -45,7 +45,7 @@ module.exports = {
       name: 'disabled',
       label: 'Disabled',
       context: {
-        items: items.map(item => ({ ...item, disabled: true })),
+        items: items.map((item) => ({ ...item, disabled: true })),
       },
     },
   ],

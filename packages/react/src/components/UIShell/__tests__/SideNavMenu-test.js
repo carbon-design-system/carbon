@@ -86,10 +86,7 @@ describe('SideNavMenu', () => {
       children: <SideNavMenuItem isActive={true}>Test</SideNavMenuItem>,
     });
     expect(
-      wrapper
-        .find('li')
-        .at(0)
-        .hasClass(`${prefix}--side-nav__item--active`)
+      wrapper.find('li').at(0).hasClass(`${prefix}--side-nav__item--active`)
     ).toBe(true);
     wrapper.setProps({
       children: [
@@ -100,10 +97,7 @@ describe('SideNavMenu', () => {
       ],
     });
     expect(
-      wrapper
-        .find('li')
-        .at(0)
-        .hasClass(`${prefix}--side-nav__item--active`)
+      wrapper.find('li').at(0).hasClass(`${prefix}--side-nav__item--active`)
     ).toBe(true);
   });
 

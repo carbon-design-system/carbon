@@ -23,7 +23,7 @@ const render = promisify(sass.render);
 
 describe('styles', () => {
   jest.setTimeout(20000);
-  it.each(files)('%s should compile', async relativeFilePath => {
+  it.each(files)('%s should compile', async (relativeFilePath) => {
     const filepath = path.join(cwd, relativeFilePath);
     try {
       expect(

@@ -43,10 +43,7 @@ describe('ListBox', () => {
   it('should add the provided `className` to the root node', () => {
     const wrapper = mount(<ListBox {...mockProps} />);
     expect(
-      wrapper
-        .children()
-        .prop('className')
-        .includes(mockProps.className)
+      wrapper.children().prop('className').includes(mockProps.className)
     ).toBe(true);
   });
 });

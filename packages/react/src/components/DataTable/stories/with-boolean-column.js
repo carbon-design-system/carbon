@@ -82,7 +82,7 @@ export const headers = [
   },
 ];
 
-export default props => (
+export default (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}
@@ -102,7 +102,7 @@ export default props => (
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              {headers.map(header => (
+              {headers.map((header) => (
                 <TableHeader {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
@@ -110,9 +110,9 @@ export default props => (
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
+            {rows.map((row) => (
               <TableRow {...getRowProps({ row })}>
-                {row.cells.map(cell => {
+                {row.cells.map((cell) => {
                   if (cell.info.header === 'enabled') {
                     return (
                       <TableCell

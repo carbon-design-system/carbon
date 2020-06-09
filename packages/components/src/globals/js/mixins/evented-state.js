@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default function(ToMix) {
+export default function (ToMix) {
   /**
    * Mix-in class to manage events associated with states.
    * @class EventedState
@@ -62,7 +62,7 @@ export default function(ToMix) {
         .filter(Boolean)
         .join('-')
         .split('-') // Group or state may contain hyphen
-        .map(item => item[0].toUpperCase() + item.substr(1))
+        .map((item) => item[0].toUpperCase() + item.substr(1))
         .join('');
 
       const eventStart = new CustomEvent(
