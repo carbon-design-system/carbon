@@ -453,7 +453,17 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
-    max-height: rem(140px);
+    max-height: rem(220px); // 40px item height * 5.5 items shown
+  }
+
+  .#{$prefix}--list-box--expanded.#{$prefix}--list-box--xl
+    .#{$prefix}--list-box__menu {
+    max-height: rem(264px); // 48px item height * 5.5 items shown
+  }
+
+  .#{$prefix}--list-box--expanded.#{$prefix}--list-box--sm
+    .#{$prefix}--list-box__menu {
+    max-height: rem(176px); // 32px item height * 5.5 items shown
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control
