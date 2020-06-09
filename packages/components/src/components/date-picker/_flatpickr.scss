@@ -396,7 +396,6 @@ span.flatpickr-weekday {
   min-width: 315px;
   max-width: 315px;
   box-sizing: border-box;
-  display: inline-block;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -558,7 +557,6 @@ span.flatpickr-weekday {
   max-width: none;
 }
 .flatpickr-innerContainer {
-  display: block;
   display: flex;
   box-sizing: border-box;
   overflow: hidden;
@@ -571,7 +569,6 @@ span.flatpickr-weekday {
 .flatpickr-time {
   text-align: center;
   outline: 0;
-  display: block;
   height: 0;
   line-height: 40px;
   max-height: 40px;
