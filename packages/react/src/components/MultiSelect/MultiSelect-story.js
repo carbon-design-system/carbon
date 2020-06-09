@@ -41,6 +41,10 @@ const items = [
     text:
       'An example option that is really long to show what should be done to handle long text',
   },
+  {
+    id: 'downshift-1-item-5',
+    text: 'Option 5',
+  },
 ];
 
 const defaultLabel = 'MultiSelect Label';
@@ -110,8 +114,8 @@ storiesOf('MultiSelect', module)
           <MultiSelect
             {...multiSelectProps}
             items={items}
-            itemToString={item => (item ? item.text : '')}
-            translateWithId={id => listBoxMenuIconTranslationIds[id]}
+            itemToString={(item) => (item ? item.text : '')}
+            translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
             selectionFeedback={selectionFeedback}
           />
         </div>
@@ -139,9 +143,9 @@ storiesOf('MultiSelect', module)
           <MultiSelect
             {...multiSelectProps}
             items={items}
-            itemToString={item => (item ? item.text : '')}
+            itemToString={(item) => (item ? item.text : '')}
             initialSelectedItems={[items[0], items[1]]}
-            translateWithId={id => listBoxMenuIconTranslationIds[id]}
+            translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
             selectionFeedback={selectionFeedback}
           />
         </div>
@@ -169,9 +173,9 @@ storiesOf('MultiSelect', module)
           <MultiSelect.Filterable
             {...multiSelectProps}
             items={items}
-            itemToString={item => (item ? item.text : '')}
+            itemToString={(item) => (item ? item.text : '')}
             placeholder={defaultPlaceholder}
-            translateWithId={id => listBoxMenuIconTranslationIds[id]}
+            translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
             selectionFeedback={selectionFeedback}
           />
         </div>

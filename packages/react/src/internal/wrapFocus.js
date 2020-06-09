@@ -29,7 +29,7 @@ function elementOrParentIsFloatingMenu(
   ]
 ) {
   if (node && typeof node.closest === 'function') {
-    return selectorsFloatingMenus.some(selector => node.closest(selector));
+    return selectorsFloatingMenus.some((selector) => node.closest(selector));
   }
 }
 
@@ -67,7 +67,7 @@ function wrapFocus({
     ) {
       const tabbable = findLast(
         modalNode.querySelectorAll(selectorTabbable),
-        elem => Boolean(elem.offsetParent)
+        (elem) => Boolean(elem.offsetParent)
       );
       if (tabbable) {
         tabbable.focus();
@@ -80,7 +80,7 @@ function wrapFocus({
     ) {
       const tabbable = Array.prototype.find.call(
         modalNode.querySelectorAll(selectorTabbable),
-        elem => Boolean(elem.offsetParent)
+        (elem) => Boolean(elem.offsetParent)
       );
       if (tabbable) {
         tabbable.focus();

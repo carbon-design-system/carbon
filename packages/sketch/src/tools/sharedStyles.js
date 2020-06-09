@@ -27,9 +27,11 @@ export function syncSharedStyle(
     styleType === SharedStyle.StyleType.Layer
       ? document.sharedLayerStyles
       : document.sharedTextStyles;
-  const [sharedStyle] = Array.from(documentSharedStyles).filter(sharedStyle => {
-    return sharedStyle.name === name;
-  });
+  const [sharedStyle] = Array.from(documentSharedStyles).filter(
+    (sharedStyle) => {
+      return sharedStyle.name === name;
+    }
+  );
 
   // If none exists, we can create one from scratch
   if (!sharedStyle) {
@@ -43,7 +45,7 @@ export function syncSharedStyle(
 
   // Otherwise, we'll go and update values of the sharedStyle with the given
   // style if the values are different
-  Object.keys(style).forEach(key => {
+  Object.keys(style).forEach((key) => {
     if (sharedStyle.style[key] !== style[key]) {
       sharedStyle.style[key] = style[key];
     }

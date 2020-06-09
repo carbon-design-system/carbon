@@ -17,7 +17,7 @@ const render = createSassRenderer(__dirname);
 const { white: defaultTheme } = themes;
 
 function flatten(tokens) {
-  return Object.keys(tokens).flatMap(group => tokens[group]);
+  return Object.keys(tokens).flatMap((group) => tokens[group]);
 }
 
 function formatObjectKeys(object) {
@@ -42,7 +42,7 @@ describe('themes.scss', () => {
   describe('tokens', () => {
     it.each(flatten(tokens))(
       '%s should match the default theme',
-      async token => {
+      async (token) => {
         const name = formatTokenName(token);
         const { calls } = await render(`
           @import '../scss/themes';
@@ -69,7 +69,7 @@ describe('themes.scss', () => {
       `);
       const theme = convert(calls[0][0]);
 
-      Object.keys(defaultTheme).forEach(token => {
+      Object.keys(defaultTheme).forEach((token) => {
         expect(defaultTheme[token]).toEqual(
           formatObjectKeys(theme[formatTokenName(token)])
         );

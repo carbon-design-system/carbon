@@ -22,7 +22,7 @@ import DataTable, {
 } from '../../DataTable';
 import { initialRows, headers } from './shared';
 
-export default props => (
+export default (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}
@@ -43,7 +43,7 @@ export default props => (
           <TableHead>
             <TableRow>
               <TableExpandHeader />
-              {headers.map(header => (
+              {headers.map((header) => (
                 <TableHeader {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
@@ -51,10 +51,10 @@ export default props => (
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
+            {rows.map((row) => (
               <React.Fragment key={row.id}>
                 <TableExpandRow {...getRowProps({ row })}>
-                  {row.cells.map(cell => (
+                  {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
                 </TableExpandRow>

@@ -22,11 +22,11 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const findInputNode = wrapper => wrapper.find(`.${prefix}--text-input`);
+const findInputNode = (wrapper) => wrapper.find(`.${prefix}--text-input`);
 const downshiftActions = {
   setHighlightedIndex: jest.fn(),
 };
-const clearInput = wrapper =>
+const clearInput = (wrapper) =>
   wrapper.instance().handleOnStateChange({ inputValue: '' }, downshiftActions);
 
 describe('ComboBox', () => {
@@ -88,7 +88,7 @@ describe('ComboBox', () => {
   it('should render custom item components', () => {
     const wrapper = mount(<ComboBox {...mockProps} />);
     wrapper.setProps({
-      itemToElement: item => <div className="mock-item">{item.text}</div>,
+      itemToElement: (item) => <div className="mock-item">{item.text}</div>,
     });
     openMenu(wrapper);
 

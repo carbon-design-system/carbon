@@ -13,7 +13,7 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const TableRow = props => {
+const TableRow = (props) => {
   // Remove unnecessary props if provided to this component, these are
   // only useful in `TableExpandRow`
   const className = cx(props.className, {

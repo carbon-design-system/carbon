@@ -80,7 +80,7 @@ describe('ES modules', () => {
     lodashOutput = (await lodashBundle.generate({ format: 'iife' })).output;
   });
 
-  it.each(files)('%s should be tree-shakable', async relativeFilePath => {
+  it.each(files)('%s should be tree-shakable', async (relativeFilePath) => {
     const filepath = path.join(cwd, relativeFilePath);
     const bundle = await rollup({
       input: entry,
@@ -112,12 +112,12 @@ describe('ES modules', () => {
     const { output } = await bundle.generate({ format: 'iife' });
     // lo-dash seems to remain small chunk of code after tree-shaken
     const code = output
-      .map(item => item.code)
+      .map((item) => item.code)
       .join('')
       .trim()
       .replace(
         lodashOutput
-          .map(item => item.code)
+          .map((item) => item.code)
           .join('')
           .trim(),
         ''

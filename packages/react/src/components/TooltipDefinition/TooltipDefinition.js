@@ -58,7 +58,7 @@ const TooltipDefinition = ({
   };
   const handleMouseLeave = debounceTooltipVisible;
   useEffect(() => {
-    const handleEscKeyDown = event => {
+    const handleEscKeyDown = (event) => {
       if (matches(event, [keys.Escape])) {
         setAllowTooltipVisibility(false);
       }

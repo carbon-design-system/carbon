@@ -82,7 +82,7 @@ describe('Loading', () => {
       expect(wrapper.find(Loading).length).toEqual(0);
     });
 
-    it('should call the onSuccess function after a delay', done => {
+    it('should call the onSuccess function after a delay', (done) => {
       mount(
         <InlineLoading
           success
