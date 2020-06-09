@@ -165,19 +165,7 @@
 
   .#{$prefix}--data-table td.#{$prefix}--table-expand,
   th.#{$prefix}--table-expand {
-    padding: $spacing-05;
-  }
-
-  .#{$prefix}--data-table--compact td.#{$prefix}--table-expand,
-  .#{$prefix}--data-table--compact th.#{$prefix}--table-expand {
-    padding-top: rem(2px);
-    padding-bottom: rem(2px);
-  }
-
-  .#{$prefix}--data-table--short td.#{$prefix}--table-expand,
-  .#{$prefix}--data-table--short th.#{$prefix}--table-expand {
-    padding-top: rem(7px);
-    padding-bottom: rem(6px);
+    padding: 0 $spacing-05;
   }
 
   .#{$prefix}--data-table--tall td.#{$prefix}--table-expand,
@@ -200,10 +188,7 @@
   .#{$prefix}--table-expand__button {
     @include button-reset('false');
     height: rem(16px);
-  }
-
-  .#{$prefix}--data-table--short .#{$prefix}--table-expand__button {
-    height: auto;
+    vertical-align: inherit;
   }
 
   .#{$prefix}--table-expand__button:focus {
