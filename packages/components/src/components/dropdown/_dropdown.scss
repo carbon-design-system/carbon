@@ -310,8 +310,18 @@
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
-    max-height: 15rem;
+    max-height: rem(220px); // 40px item height * 5.5 items shown
     transition: max-height $duration--fast-02 motion(entrance, productive);
+  }
+
+  .#{$prefix}--dropdown--open.#{$prefix}--dropdown--xl
+    .#{$prefix}--dropdown-list {
+    max-height: rem(264px); // 48px item height * 5.5 items shown
+  }
+
+  .#{$prefix}--dropdown--open.#{$prefix}--dropdown--sm
+    .#{$prefix}--dropdown-list {
+    max-height: rem(176px); // 32px item height * 5.5 items shown
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-item {
