@@ -97,7 +97,7 @@
   }
 
   .#{$prefix}--btn__icon,
-  .#{$prefix}--btn__icon path {
+  .#{$prefix}--btn__icon path:first-of-type {
     fill: $icon-color;
   }
 }
