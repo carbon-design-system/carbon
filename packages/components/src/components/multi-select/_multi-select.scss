@@ -33,6 +33,17 @@
 
   .#{$prefix}--multi-select
     .#{$prefix}--list-box__menu-item__option
+    .#{$prefix}--checkbox-label {
+    padding-left: rem(28px);
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .#{$prefix}--multi-select
+    .#{$prefix}--list-box__menu-item__option
     > .#{$prefix}--form-item {
     margin: 0;
     flex-direction: row;
