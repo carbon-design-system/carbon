@@ -41,6 +41,10 @@ const items = [
     text:
       'An example option that is really long to show what should be done to handle long text',
   },
+  {
+    id: 'downshift-1-item-5',
+    text: 'Option 5',
+  },
 ];
 
 const defaultLabel = 'MultiSelect Label';
