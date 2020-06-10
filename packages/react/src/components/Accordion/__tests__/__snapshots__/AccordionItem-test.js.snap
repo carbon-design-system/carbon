@@ -15,7 +15,6 @@ exports[`AccordionItem should render 1`] = `
       className="bx--accordion__heading"
       onClick={[Function]}
       onKeyDown={[Function]}
-      title="A heading"
       type="button"
     >
       <button
@@ -24,7 +23,6 @@ exports[`AccordionItem should render 1`] = `
         className="bx--accordion__heading"
         onClick={[Function]}
         onKeyDown={[Function]}
-        title="A heading"
         type="button"
       >
         <ForwardRef(ChevronRight16)
