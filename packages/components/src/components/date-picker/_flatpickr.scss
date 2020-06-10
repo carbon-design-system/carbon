@@ -279,25 +279,23 @@
 }
 
 .flatpickr-weekdays {
-  background: transparent;
-  text-align: center;
-  overflow: hidden;
-  width: 315px;
   display: flex;
   align-items: center;
-  height: 28px;
+  height: rem(40px);
 }
-span.flatpickr-weekday {
-  @include type-style('body-short-01');
 
+.flatpickr-weekdaycontainer {
+  display: flex;
+  width: 100%;
+}
+
+.flatpickr-weekday {
+  @include type-style('body-short-01');
   cursor: default;
-  background: transparent;
-  color: rgba(0, 0, 0, 0.54);
-  margin: 0;
-  text-align: center;
-  display: block;
+  color: $text-01;
   flex: 1;
 }
+
 .dayContainer,
 .flatpickr-weeks {
   padding: 1px 0 0 0;
@@ -484,13 +482,6 @@ span.flatpickr-weekday {
   cursor: pointer;
 }
 
-span.#{$prefix}--date-picker__weekday,
-span.flatpickr-weekday {
-  @include type-style('body-short-01');
-  color: $text-01;
-  font-weight: 400;
-}
-
 .#{$prefix}--date-picker__day,
 .flatpickr-day {
   @include type-style('body-short-01');
@@ -623,23 +614,6 @@ span.flatpickr-weekday {
 .flatpickr-rContainer {
   width: 100%;
   height: auto;
-}
-
-.#{$prefix}--date-picker__weekdays,
-.flatpickr-weekdays,
-.flatpickr-weekdaycontainer {
-  width: 100%;
-}
-
-.flatpickr-weekdays {
-  height: rem(40px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.flatpickr-weekdaycontainer {
-  display: flex;
 }
 
 @keyframes fpFadeInDown {
