@@ -130,7 +130,7 @@ export default class Pagination extends Component {
      */
     pageInputDisabled: deprecate(
       PropTypes.bool,
-      `\nThe prop \`pageInputDisabled\` for Pagination has been deprecated, as the feature of \`pageInputDisabled\` has been combined with the general \`disabled\` prop.`
+      `The prop \`pageInputDisabled\` for Pagination has been deprecated, as the feature of \`pageInputDisabled\` has been combined with the general \`disabled\` prop.`
     ),
   };
 
