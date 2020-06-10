@@ -35,6 +35,14 @@ $css--helpers: true;
     justify-content: space-between;
     border-top: 1px solid $ui-03;
     height: rem(48px);
+
+    // Browser overrides to hide scrollbar
+    scrollbar-width: none;    // Firefox
+    -ms-overflow-style: none; // Edge
+    &::-webkit-scrollbar {    // WebKit
+      width: 0;
+      height: 0;
+    }
   }
 
   .#{$prefix}--pagination .#{$prefix}--select {
