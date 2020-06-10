@@ -7107,6 +7107,7 @@ $link-01: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [link [mixin]](#link-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -8227,6 +8228,7 @@ $highlight: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
 
 ### ✅decorative-01 [variable]
 
@@ -17158,7 +17160,7 @@ Date picker styles
   .#{$prefix}--date-picker__day.today,
   .flatpickr-day.today {
     position: relative;
-    color: $interactive-01;
+    color: $link-01;
     font-weight: 600;
 
     &::after {
@@ -17170,7 +17172,7 @@ Date picker styles
       transform: translateX(-50%);
       height: rem(4px);
       width: rem(4px);
-      background: $interactive-01;
+      background-color: $link-01;
     }
   }
 
@@ -17198,14 +17200,14 @@ Date picker styles
 
   .#{$prefix}--date-picker__day.inRange,
   .flatpickr-day.inRange {
-    background: $date-picker-in-range-background-color;
+    background-color: $highlight;
     color: $text-01;
   }
 
   .#{$prefix}--date-picker__day.selected,
   .flatpickr-day.selected {
     color: $text-04;
-    background: $interactive-01;
+    background-color: $interactive-01;
 
     &:focus {
       outline: rem(1px) solid $ui-02;
@@ -17348,6 +17350,8 @@ Date picker styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [link-01 [variable]](#link-01-variable)
+  - [highlight [variable]](#highlight-variable)
   - [text-04 [variable]](#text-04-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
@@ -25869,6 +25873,7 @@ UI shell header
     right: 0;
     height: mini-units(6);
     background-color: $shell-header-bg-01;
+    border-bottom: 1px solid $shell-header-border-01;
     z-index: z('header');
   }
 
@@ -26206,8 +26211,8 @@ UI shell header
   - [mini-units [function]](#mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
-  - [shell-header-bg-04 [variable]](#shell-header-bg-04-variable)
   - [shell-header-border-01 [variable]](#shell-header-border-01-variable)
+  - [shell-header-bg-04 [variable]](#shell-header-bg-04-variable)
   - [shell-header-focus [variable]](#shell-header-focus-variable)
   - [shell-header-bg-03 [variable]](#shell-header-bg-03-variable)
   - [shell-header-icon-02 [variable]](#shell-header-icon-02-variable)
