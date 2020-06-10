@@ -6,6 +6,7 @@
 //
 
 @import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
 
 .flatpickr-calendar {
   background: transparent;
@@ -39,8 +40,29 @@
 }
 
 .flatpickr-calendar.open {
-  display: inline-block;
+  @include box-shadow;
   z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: rem(288px);
+  height: rem(336px);
+  padding: $carbon--spacing-02 $carbon--spacing-02 $carbon--spacing-03
+    $carbon--spacing-02;
+  border: none;
+  margin-top: -2px;
+  overflow: hidden;
+  background-color: $ui-01;
+
+  &::before,
+  &::after {
+    display: none;
+  }
+
+  &:focus {
+    outline: focus-outline('border');
+  }
 }
 
 .flatpickr-calendar.animate.open {
