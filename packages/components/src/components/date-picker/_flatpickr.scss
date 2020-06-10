@@ -198,8 +198,50 @@
   opacity: 1;
 }
 
+.numInputWrapper:hover .numInput[disabled] ~ .arrowUp,
+.numInputWrapper:hover .numInput[disabled] ~ .arrowDown {
+  opacity: 0;
+}
+
 .numInputWrapper .numInput {
+  display: inline-block;
   width: 100%;
+  padding: $carbon--spacing-02;
+  margin: 0;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: 600;
+  background-color: $field-01;
+  cursor: default;
+  // Added in when upgraded to Flatpickr 4.5.5 (#1977)
+  -moz-appearance: textfield; /* Firefox */
+
+  &:focus {
+    @include focus-outline('border');
+  }
+
+  &[disabled],
+  &[disabled]:hover {
+    color: $disabled-02;
+    background-color: $ui-01;
+    pointer-events: none;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    // Added in when upgraded to Flatpickr 4.5.5 (#1977)
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+}
+
+.numInput[disabled] ~ .arrowUp::after {
+  border-bottom-color: $disabled-02;
+}
+
+.numInput[disabled] ~ .arrowDown::after {
+  border-top-color: $disabled-02;
 }
 
 .numInputWrapper .arrowUp,
@@ -246,38 +288,6 @@
   }
 }
 
-.numInputWrapper .numInput {
-  display: inline-block;
-  padding: $carbon--spacing-02;
-  margin: 0;
-  border: none;
-  font-size: inherit;
-  font-family: inherit;
-  font-weight: 600;
-  background-color: $field-01;
-  cursor: default;
-  // Added in when upgraded to Flatpickr 4.5.5 (#1977)
-  -moz-appearance: textfield; /* Firefox */
-
-  &:focus {
-    @include focus-outline('border');
-  }
-
-  &[disabled],
-  &[disabled]:hover {
-    color: $disabled-02;
-    background-color: transparent;
-    pointer-events: none;
-  }
-
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    // Added in when upgraded to Flatpickr 4.5.5 (#1977)
-    -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-  }
-}
-
 .flatpickr-weekdays {
   display: flex;
   align-items: center;
@@ -296,105 +306,148 @@
   flex: 1;
 }
 
-.dayContainer,
-.flatpickr-weeks {
-  padding: 1px 0 0 0;
-}
-.flatpickr-days {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  width: 315px;
-}
 .flatpickr-days:focus {
   outline: 0;
 }
+
 .dayContainer {
-  padding: 0;
-  outline: 0;
-  text-align: left;
-  width: 315px;
-  min-width: 315px;
-  max-width: 315px;
-  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  transform: translate3d(0px, 0px, 0px);
-  opacity: 1;
+  height: rem(246px);
+  padding: 0;
+  outline: 0;
 }
+
 .flatpickr-calendar.animate .dayContainer.slideLeft {
   animation: fpFadeOut 400ms cubic-bezier(0.23, 1, 0.32, 1),
     fpSlideLeft 400ms cubic-bezier(0.23, 1, 0.32, 1);
 }
+
 .flatpickr-calendar.animate .dayContainer.slideLeft,
 .flatpickr-calendar.animate .dayContainer.slideLeftNew {
   transform: translate3d(-100%, 0px, 0px);
 }
+
 .flatpickr-calendar.animate .dayContainer.slideLeftNew {
   animation: fpFadeIn 400ms cubic-bezier(0.23, 1, 0.32, 1),
     fpSlideLeft 400ms cubic-bezier(0.23, 1, 0.32, 1);
 }
+
 .flatpickr-calendar.animate .dayContainer.slideRight {
   animation: fpFadeOut 400ms cubic-bezier(0.23, 1, 0.32, 1),
     fpSlideRight 400ms cubic-bezier(0.23, 1, 0.32, 1);
   transform: translate3d(100%, 0px, 0px);
 }
+
 .flatpickr-calendar.animate .dayContainer.slideRightNew {
   animation: fpFadeIn 400ms cubic-bezier(0.23, 1, 0.32, 1),
     fpSlideRightNew 400ms cubic-bezier(0.23, 1, 0.32, 1);
 }
+
 .flatpickr-day {
-  background: none;
-  border: 1px solid transparent;
-  border-radius: 150px;
-  box-sizing: border-box;
-  color: #393939;
-  cursor: pointer;
-  font-weight: 400;
-  width: 14.2857143%;
-  flex-basis: 14.2857143%;
-  max-width: 40px;
-  height: 40px;
-  line-height: 40px;
-  margin: 0;
-  display: inline-block;
-  position: relative;
-  justify-content: center;
-  text-align: center;
-}
-.flatpickr-day.week.selected {
-  border-radius: 0;
-  box-shadow: -5px 0 0 #569ff7, 5px 0 0 #569ff7;
-}
-.flatpickr-weekwrapper {
-  display: inline-block;
-  float: left;
-}
-.flatpickr-weekwrapper .flatpickr-weeks {
-  padding: 0 12px;
-  box-shadow: 1px 0 0 #e6e6e6;
-}
-.flatpickr-weekwrapper .flatpickr-weekday {
-  float: none;
-  width: 100%;
-  line-height: 28px;
-}
-.flatpickr-weekwrapper span.flatpickr-day {
-  display: block;
-  width: 100%;
-  max-width: none;
-}
-.flatpickr-innerContainer {
+  @include type-style('body-short-01');
+  height: rem(40px);
+  width: rem(40px);
   display: flex;
-  box-sizing: border-box;
-  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  color: $text-01;
+  cursor: pointer;
+  transition: all $duration--fast-01 motion(standard, productive);
+
+  &:hover {
+    background: $hover-ui;
+  }
+
+  &:focus {
+    @include focus-outline('outline');
+    outline-color: $interactive-01;
+  }
 }
-.flatpickr-rContainer {
-  display: inline-block;
-  padding: 0;
-  box-sizing: border-box;
+
+.nextMonthDay,
+.prevMonthDay {
+  color: $text-05;
 }
+
+.flatpickr-day.today {
+  position: relative;
+  color: $link-01;
+  font-weight: 600;
+
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+    bottom: rem(7px);
+    left: 50%;
+    transform: translateX(-50%);
+    height: rem(4px);
+    width: rem(4px);
+    background-color: $link-01;
+  }
+}
+
+.flatpickr-day.today.no-border {
+  border: none;
+}
+
+.flatpickr-day.today.selected {
+  @include focus-outline('outline');
+  &::after {
+    display: none;
+  }
+}
+
+.flatpickr-day.inRange {
+  background-color: $highlight;
+  color: $text-01;
+}
+
+.flatpickr-day.selected {
+  color: $text-04;
+  background-color: $interactive-01;
+
+  &:focus {
+    outline: rem(1px) solid $ui-02;
+    outline-offset: rem(-3px);
+  }
+}
+
+.flatpickr-day.startRange.selected {
+  box-shadow: none;
+  z-index: 2;
+}
+
+.flatpickr-day.startRange.inRange:not(.selected),
+.flatpickr-day.endRange.inRange {
+  @include focus-outline('outline');
+  background: $ui-01;
+  z-index: 3;
+}
+
+.flatpickr-day.endRange:hover {
+  @include focus-outline('outline');
+  background: $ui-01;
+  color: $text-01;
+}
+
+.flatpickr-day.endRange.inRange.selected {
+  color: $text-04;
+  background: $interactive-01;
+}
+
+.flatpickr-day.flatpickr-disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  color: $disabled-02;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
 .flatpickr-time {
   text-align: center;
   outline: 0;
@@ -480,140 +533,6 @@
 }
 .flatpickr-input[readonly] {
   cursor: pointer;
-}
-
-.#{$prefix}--date-picker__day,
-.flatpickr-day {
-  @include type-style('body-short-01');
-  height: rem(40px);
-  width: rem(40px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: $text-01;
-  border-radius: 0;
-  border: none;
-  transition: all $duration--fast-01 motion(standard, productive);
-
-  &:hover {
-    background: $hover-ui;
-  }
-
-  &:focus {
-    @include focus-outline('outline');
-    outline-color: $interactive-01;
-  }
-}
-
-.#{$prefix}--date-picker__day.nextMonthDay,
-.#{$prefix}--date-picker__day.prevMonthDay {
-  color: $text-05;
-}
-
-.#{$prefix}--date-picker__day.today,
-.flatpickr-day.today {
-  position: relative;
-  color: $link-01;
-  font-weight: 600;
-
-  &::after {
-    content: '';
-    position: absolute;
-    display: block;
-    bottom: rem(7px);
-    left: 50%;
-    transform: translateX(-50%);
-    height: rem(4px);
-    width: rem(4px);
-    background-color: $link-01;
-  }
-}
-
-.#{$prefix}--date-picker__day.today.no-border,
-.flatpickr-day.today.no-border {
-  border: none;
-}
-
-.#{$prefix}--date-picker__day.today.selected {
-  border: 2px solid $interactive-01;
-  &::after {
-    display: none;
-  }
-}
-
-.#{$prefix}--date-picker__day.flatpickr-day.flatpickr-disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-  color: $disabled-02;
-
-  &:hover {
-    background: transparent;
-  }
-}
-
-.#{$prefix}--date-picker__day.inRange,
-.flatpickr-day.inRange {
-  background-color: $highlight;
-  color: $text-01;
-}
-
-.#{$prefix}--date-picker__day.selected,
-.flatpickr-day.selected {
-  color: $text-04;
-  background-color: $interactive-01;
-
-  &:focus {
-    outline: rem(1px) solid $ui-02;
-    outline-offset: rem(-3px);
-  }
-}
-
-.#{$prefix}--date-picker__day.startRange.selected,
-.flatpickr-day.startRange.selected {
-  box-shadow: none;
-  z-index: 2;
-}
-
-.#{$prefix}--date-picker__day.endRange,
-.flatpickr-day.endRange {
-  &:hover {
-    @include focus-outline('outline');
-    background: $ui-01;
-    color: $text-01;
-  }
-}
-
-.#{$prefix}--date-picker__day.endRange.inRange,
-.flatpickr-day.endRange.inRange {
-  @include focus-outline('outline');
-  background: $ui-01;
-  z-index: 3;
-}
-
-.#{$prefix}--date-picker__day.endRange.inRange.selected,
-.flatpickr-day.endRange.inRange.selected {
-  color: $text-04;
-  background: $interactive-01;
-}
-
-.#{$prefix}--date-picker__day.startRange.inRange:not(.selected),
-.flatpickr-day.startRange.inRange:not(.selected) {
-  @include focus-outline('outline');
-  background: $ui-01;
-  z-index: 3;
-}
-
-.#{$prefix}--date-picker__days,
-.dayContainer {
-  width: 100%;
-  min-width: 100%;
-  height: rem(246px);
-}
-
-.flatpickr-innerContainer,
-.flatpickr-rContainer {
-  width: 100%;
-  height: auto;
 }
 
 @keyframes fpFadeInDown {
