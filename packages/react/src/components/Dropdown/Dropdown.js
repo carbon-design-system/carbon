@@ -140,7 +140,7 @@ function Dropdown({
           </span>
           <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
         </button>
-        <ListBox.Menu {...getMenuProps()}>
+        <ListBox.Menu {...getMenuProps({ refKey: 'innerRef' })}>
           {isOpen &&
             items.map((item, index) => {
               const itemProps = getItemProps({ item, index });
