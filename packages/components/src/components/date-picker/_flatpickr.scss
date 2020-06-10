@@ -165,6 +165,24 @@
     fill: $ui-05;
   }
 }
+
+.flatpickr-current-month {
+  @include type-style('productive-heading-01');
+  color: inherit;
+  height: 28px;
+  text-align: center;
+  transform: translate3d(0px, 0px, 0px);
+}
+
+.flatpickr-current-month .cur-month {
+  margin-left: $carbon--spacing-02;
+  margin-right: $carbon--spacing-02;
+
+  &:hover {
+    background-color: $hover-ui;
+  }
+}
+
 .numInputWrapper {
   position: relative;
   height: auto;
@@ -229,50 +247,6 @@
 }
 .numInputWrapper:hover span {
   opacity: 1;
-}
-.flatpickr-current-month {
-  @include type-style('productive-heading-01');
-
-  color: inherit;
-  position: absolute;
-  width: 75%;
-  left: 12.5%;
-  padding: 6.16px 0 0 0;
-  height: 28px;
-  display: inline-block;
-  text-align: center;
-  transform: translate3d(0px, 0px, 0px);
-}
-.flatpickr-current-month.slideLeft {
-  transform: translate3d(-100%, 0px, 0px);
-  animation: fpFadeOut 400ms ease,
-    fpSlideLeft 400ms cubic-bezier(0.23, 1, 0.32, 1);
-}
-.flatpickr-current-month.slideLeftNew {
-  transform: translate3d(100%, 0px, 0px);
-  animation: fpFadeIn 400ms ease,
-    fpSlideLeftNew 400ms cubic-bezier(0.23, 1, 0.32, 1);
-}
-.flatpickr-current-month.slideRight {
-  transform: translate3d(100%, 0px, 0px);
-  animation: fpFadeOut 400ms ease,
-    fpSlideRight 400ms cubic-bezier(0.23, 1, 0.32, 1);
-}
-.flatpickr-current-month.slideRightNew {
-  transform: translate3d(0, 0, 0px);
-  animation: fpFadeIn 400ms ease,
-    fpSlideRightNew 400ms cubic-bezier(0.23, 1, 0.32, 1);
-}
-.flatpickr-current-month span.cur-month {
-  font-family: inherit;
-  font-weight: 600;
-  color: inherit;
-  display: inline-block;
-  margin-left: 0.5ch;
-  padding: 0;
-}
-.flatpickr-current-month span.cur-month:hover {
-  background: rgba(0, 0, 0, 0.05);
 }
 .flatpickr-current-month .numInputWrapper {
   width: 6ch;
@@ -515,83 +489,6 @@ span.flatpickr-weekday {
 }
 .flatpickr-input[readonly] {
   cursor: pointer;
-}
-
-.flatpickr-current-month .numInputWrapper {
-  width: 7ch;
-}
-
-.#{$prefix}--date-picker__month .flatpickr-current-month,
-.flatpickr-month .flatpickr-current-month {
-  @include type-style('productive-heading-01');
-  padding: 0;
-}
-
-.#{$prefix}--date-picker__month .flatpickr-current-month svg,
-.flatpickr-month .flatpickr-current-month svg {
-  fill: $text-01;
-}
-
-.#{$prefix}--date-picker__month .flatpickr-current-month .cur-month,
-.flatpickr-month .flatpickr-current-month .cur-month {
-  margin-right: $carbon--spacing-02;
-  color: $text-01;
-}
-
-.#{$prefix}--date-picker__month .numInputWrapper .numInput,
-.flatpickr-month .numInputWrapper .numInput {
-  font-weight: 600;
-  color: $text-01;
-  background-color: $field-01;
-  border: none;
-  border-radius: 0;
-  padding: $carbon--spacing-02;
-  // Added in when upgraded to Flatpickr 4.5.5
-  -moz-appearance: textfield; /* Firefox */
-
-  &:focus {
-    outline: 1px solid $interactive-01;
-  }
-
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    // Added in when upgraded to Flatpickr 4.5.5
-    -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-  }
-}
-
-.#{$prefix}--date-picker__month .numInputWrapper span.arrowUp,
-.#{$prefix}--date-picker__month .numInputWrapper span.arrowDown,
-.flatpickr-month .numInputWrapper span.arrowUp,
-.flatpickr-month .numInputWrapper span.arrowDown {
-  left: 2.6rem;
-  border: none;
-  width: rem(12px);
-
-  &:hover {
-    background: none;
-
-    &:after {
-      border-bottom-color: $interactive-01;
-      border-top-color: $interactive-01;
-    }
-  }
-
-  &:after {
-    border-bottom-color: $icon-01;
-    border-top-color: $icon-01;
-  }
-}
-
-.#{$prefix}--date-picker__month .numInputWrapper span.arrowUp,
-.flatpickr-month .numInputWrapper span.arrowUp {
-  top: 4px;
-}
-
-.#{$prefix}--date-picker__month .numInputWrapper span.arrowDown,
-.flatpickr-month .numInputWrapper span.arrowDown {
-  top: 11px;
 }
 
 span.#{$prefix}--date-picker__weekday,
