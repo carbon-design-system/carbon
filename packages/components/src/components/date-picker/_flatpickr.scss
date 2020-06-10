@@ -56,7 +56,7 @@
   background-color: $ui-01;
 
   &:focus {
-    outline: focus-outline('border');
+    @include focus-outline('border');
   }
 }
 
@@ -168,10 +168,11 @@
 
 .flatpickr-current-month {
   @include type-style('productive-heading-01');
-  color: inherit;
-  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: rem(28px);
   text-align: center;
-  transform: translate3d(0px, 0px, 0px);
 }
 
 .flatpickr-current-month .cur-month {
@@ -185,106 +186,98 @@
 
 .numInputWrapper {
   position: relative;
-  height: auto;
+  width: rem(60px);
+
+  &:hover {
+    background-color: $hover-ui;
+  }
 }
-.numInputWrapper input,
-.numInputWrapper span {
-  display: inline-block;
+
+.numInputWrapper:hover .arrowUp,
+.numInputWrapper:hover .arrowDown {
+  opacity: 1;
 }
-.numInputWrapper input {
+
+.numInputWrapper .numInput {
   width: 100%;
 }
-.numInputWrapper span {
+
+.numInputWrapper .arrowUp,
+.numInputWrapper .arrowDown {
   position: absolute;
-  right: 0;
-  width: 14px;
-  padding: 0 4px 0 2px;
+  left: 2.6rem;
+  width: rem(12px);
   height: 50%;
+  border: none;
+  padding: 0 rem(4px) 0 rem(2px);
   line-height: 50%;
   opacity: 0;
   cursor: pointer;
-  border: 1px solid rgba(57, 57, 57, 0.05);
-  box-sizing: border-box;
+
+  &::after {
+    position: absolute;
+    top: 33%;
+    display: block;
+    content: '';
+    border-left: rem(4px) solid transparent;
+    border-right: rem(4px) solid transparent;
+  }
+
+  &:hover::after {
+    border-bottom-color: $interactive-01;
+    border-top-color: $interactive-01;
+  }
 }
-.numInputWrapper span:hover {
-  background: rgba(0, 0, 0, 0.1);
-}
-.numInputWrapper span:active {
-  background: rgba(0, 0, 0, 0.2);
-}
-.numInputWrapper span::after {
-  display: block;
-  content: '';
-  position: absolute;
-  top: 33%;
-}
-.numInputWrapper span.arrowUp {
-  top: 0;
+
+.numInputWrapper .arrowUp {
+  top: rem(4px);
   border-bottom: 0;
+
+  &::after {
+    border-bottom: rem(4px) solid $icon-01;
+  }
 }
-.numInputWrapper span.arrowUp::after {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 4px solid rgba(57, 57, 57, 0.6);
+
+.numInputWrapper .arrowDown {
+  top: rem(11px);
+
+  &::after {
+    border-top: rem(4px) solid $icon-01;
+  }
 }
-.numInputWrapper span.arrowDown {
-  top: 50%;
-}
-.numInputWrapper span.arrowDown::after {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid rgba(57, 57, 57, 0.6);
-}
-.numInputWrapper span svg {
-  width: inherit;
-  height: auto;
-}
-.numInputWrapper span svg path {
-  fill: rgba(0, 0, 0, 0.5);
-}
-.numInputWrapper:hover {
-  background: rgba(0, 0, 0, 0.05);
-}
-.numInputWrapper:hover span {
-  opacity: 1;
-}
-.flatpickr-current-month .numInputWrapper {
-  width: 6ch;
+
+.numInputWrapper .numInput {
   display: inline-block;
-}
-.flatpickr-current-month .numInputWrapper span.arrowUp::after {
-  border-bottom-color: rgba(0, 0, 0, 0.9);
-}
-.flatpickr-current-month .numInputWrapper span.arrowDown::after {
-  border-top-color: rgba(0, 0, 0, 0.9);
-}
-.flatpickr-current-month input.cur-year {
-  background: transparent;
-  box-sizing: border-box;
-  color: inherit;
-  cursor: default;
-  padding: 0 0 0 0.5ch;
+  padding: $carbon--spacing-02;
   margin: 0;
-  display: inline-block;
+  border: none;
   font-size: inherit;
   font-family: inherit;
-  font-weight: 300;
-  line-height: inherit;
-  height: auto;
-  border: 0;
-  border-radius: 0;
-  vertical-align: baseline;
+  font-weight: 600;
+  background-color: $field-01;
+  cursor: default;
+  // Added in when upgraded to Flatpickr 4.5.5 (#1977)
+  -moz-appearance: textfield; /* Firefox */
+
+  &:focus {
+    @include focus-outline('border');
+  }
+
+  &[disabled],
+  &[disabled]:hover {
+    color: $disabled-02;
+    background-color: transparent;
+    pointer-events: none;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    // Added in when upgraded to Flatpickr 4.5.5 (#1977)
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
 }
-.flatpickr-current-month input.cur-year:focus {
-  outline: 0;
-}
-.flatpickr-current-month input.cur-year[disabled],
-.flatpickr-current-month input.cur-year[disabled]:hover {
-  font-size: 100%;
-  color: rgba(0, 0, 0, 0.5);
-  background: transparent;
-  pointer-events: none;
-}
+
 .flatpickr-weekdays {
   background: transparent;
   text-align: center;
