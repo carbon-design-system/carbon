@@ -28,21 +28,17 @@ $css--helpers: true;
     @include reset;
     @include type-style('body-short-01');
     width: 100%;
-    overflow-x: scroll;
     background-color: $ui-01;
+    overflow: hidden;
+    border-top: 1px solid $ui-03;
+    height: rem(48px);
+  }
+
+  .#{$prefix}--pagination--scroll-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid $ui-03;
-    height: rem(48px);
-
-    // Browser overrides to hide scrollbar
-    scrollbar-width: none;    // Firefox
-    -ms-overflow-style: none; // Edge
-    &::-webkit-scrollbar {    // WebKit
-      width: 0;
-      height: 0;
-    }
+    overflow-x: auto;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select {
@@ -60,7 +56,7 @@ $css--helpers: true;
     @include type-style('body-short-01');
     width: auto;
     min-width: auto;
-    height: 100%;
+    height: rem(48px);
     padding: 0 2.25rem 0 $spacing-05;
   }
 

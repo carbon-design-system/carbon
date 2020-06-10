@@ -264,78 +264,80 @@ export default class Pagination extends Component {
     const selectItems = this.renderSelectItems(totalPages);
     return (
       <div className={classNames} {...other}>
-        <div className={`${prefix}--pagination__left`}>
-          <label
-            id={`${prefix}-pagination-select-${inputId}-count-label`}
-            className={`${prefix}--pagination__text`}
-            htmlFor={`${prefix}-pagination-select-${inputId}`}>
-            {itemsPerPageText}
-          </label>
-          <Select
-            id={`${prefix}-pagination-select-${inputId}`}
-            className={`${prefix}--select__item-count`}
-            labelText=""
-            hideLabel
-            noLabel
-            inline
-            onChange={this.handleSizeChange}
-            value={statePageSize}>
-            {pageSizes.map((size) => (
-              <SelectItem key={size} value={size} text={String(size)} />
-            ))}
-          </Select>
-          <span className={`${prefix}--pagination__text`}>
-            {pagesUnknown
-              ? itemText(
-                  statePageSize * (statePage - 1) + 1,
-                  statePage * statePageSize
-                )
-              : itemRangeText(
-                  Math.min(statePageSize * (statePage - 1) + 1, totalItems),
-                  Math.min(statePage * statePageSize, totalItems),
-                  totalItems
-                )}
-          </span>
-        </div>
-        <div className={`${prefix}--pagination__right`}>
-          <Select
-            id={`${prefix}-pagination-select-${inputId}-right`}
-            className={`${prefix}--select__page-number`}
-            labelText={`Page number, of ${totalPages} pages`}
-            inline
-            hideLabel
-            onChange={this.handlePageInputChange}
-            value={statePage}
-            disabled={pageInputDisabled}>
-            {selectItems}
-          </Select>
-          <span className={`${prefix}--pagination__text`}>
-            {pagesUnknown
-              ? pageText(statePage)
-              : pageRangeText(statePage, totalPages)}
-          </span>
-          <Button
-            kind="ghost"
-            className={backButtonClasses}
-            hasIconOnly
-            renderIcon={CaretLeft16}
-            iconDescription={backwardText}
-            tooltipAlignment="center"
-            tooltipPosition="top"
-            onClick={this.decrementPage}
-            disabled={backButtonDisabled}
-          />
-          <Button
-            kind="ghost"
-            className={forwardButtonClasses}
-            hasIconOnly
-            renderIcon={CaretRight16}
-            iconDescription={forwardText}
-            tooltipAlignment="end"
-            tooltipPosition="top"
-            onClick={this.incrementPage}
-            disabled={forwardButtonDisabled || isLastPage}
-          />
+        <div className={`${prefix}--pagination--scroll-wrapper`}>
+          <div className={`${prefix}--pagination__left`}>
+            <label
+              id={`${prefix}-pagination-select-${inputId}-count-label`}
+              className={`${prefix}--pagination__text`}
+              htmlFor={`${prefix}-pagination-select-${inputId}`}>
+              {itemsPerPageText}
+            </label>
+            <Select
+              id={`${prefix}-pagination-select-${inputId}`}
+              className={`${prefix}--select__item-count`}
+              labelText=""
+              hideLabel
+              noLabel
+              inline
+              onChange={this.handleSizeChange}
+              value={statePageSize}>
+              {pageSizes.map((size) => (
+                <SelectItem key={size} value={size} text={String(size)} />
+              ))}
+            </Select>
+            <span className={`${prefix}--pagination__text`}>
+              {pagesUnknown
+                ? itemText(
+                    statePageSize * (statePage - 1) + 1,
+                    statePage * statePageSize
+                  )
+                : itemRangeText(
+                    Math.min(statePageSize * (statePage - 1) + 1, totalItems),
+                    Math.min(statePage * statePageSize, totalItems),
+                    totalItems
+                  )}
+            </span>
+          </div>
+          <div className={`${prefix}--pagination__right`}>
+            <Select
+              id={`${prefix}-pagination-select-${inputId}-right`}
+              className={`${prefix}--select__page-number`}
+              labelText={`Page number, of ${totalPages} pages`}
+              inline
+              hideLabel
+              onChange={this.handlePageInputChange}
+              value={statePage}
+              disabled={pageInputDisabled}>
+              {selectItems}
+            </Select>
+            <span className={`${prefix}--pagination__text`}>
+              {pagesUnknown
+                ? pageText(statePage)
+                : pageRangeText(statePage, totalPages)}
+            </span>
+            <Button
+              kind="ghost"
+              className={backButtonClasses}
+              hasIconOnly
+              renderIcon={CaretLeft16}
+              iconDescription={backwardText}
+              tooltipAlignment="center"
+              tooltipPosition="top"
+              onClick={this.decrementPage}
+              disabled={backButtonDisabled}
+            />
+            <Button
+              kind="ghost"
+              className={forwardButtonClasses}
+              hasIconOnly
+              renderIcon={CaretRight16}
+              iconDescription={forwardText}
+              tooltipAlignment="end"
+              tooltipPosition="top"
+              onClick={this.incrementPage}
+              disabled={forwardButtonDisabled || isLastPage}
+            />
+          </div>
         </div>
       </div>
     );
