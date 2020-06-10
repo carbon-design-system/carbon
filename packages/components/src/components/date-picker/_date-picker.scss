@@ -327,7 +327,7 @@
   .#{$prefix}--date-picker__day.today,
   .flatpickr-day.today {
     position: relative;
-    color: $interactive-01;
+    color: $link-01;
     font-weight: 600;
 
     &::after {
@@ -339,7 +339,7 @@
       transform: translateX(-50%);
       height: rem(4px);
       width: rem(4px);
-      background: $interactive-01;
+      background-color: $link-01;
     }
   }
 
@@ -367,14 +367,14 @@
 
   .#{$prefix}--date-picker__day.inRange,
   .flatpickr-day.inRange {
-    background: $date-picker-in-range-background-color;
+    background-color: $highlight;
     color: $text-01;
   }
 
   .#{$prefix}--date-picker__day.selected,
   .flatpickr-day.selected {
     color: $text-04;
-    background: $interactive-01;
+    background-color: $interactive-01;
 
     &:focus {
       outline: rem(1px) solid $ui-02;
