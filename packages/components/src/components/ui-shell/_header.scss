@@ -27,6 +27,7 @@
     right: 0;
     height: mini-units(6);
     background-color: $shell-header-bg-01;
+    border-bottom: 1px solid $shell-header-border-01;
     z-index: z('header');
   }
 
