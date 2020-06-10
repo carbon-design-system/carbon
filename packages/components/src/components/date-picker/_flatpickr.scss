@@ -157,7 +157,6 @@
 .flatpickr-prev-month.disabled {
   svg {
     fill: $ui-05;
-    opacity: 0.5;
     cursor: not-allowed;
   }
 
@@ -440,7 +439,6 @@
 
 .flatpickr-day.flatpickr-disabled {
   cursor: not-allowed;
-  opacity: 0.5;
   color: $disabled-02;
 
   &:hover {
