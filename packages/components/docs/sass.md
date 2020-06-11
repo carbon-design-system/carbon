@@ -25933,10 +25933,6 @@ UI shell header
     fill: $shell-header-icon-02;
   }
 
-  .#{$prefix}--header__menu-trigger {
-    margin-right: rem(-8px);
-  }
-
   .#{$prefix}--header__menu-trigger > svg {
     fill: $shell-header-icon-01;
   }
