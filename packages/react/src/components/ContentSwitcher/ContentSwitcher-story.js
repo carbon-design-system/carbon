@@ -39,11 +39,7 @@ storiesOf('ContentSwitcher', module)
     () => {
       const switchProps = props.switch();
       return (
-        <ContentSwitcher
-          {...props.contentSwitcher()}
-          onChange={(data) => {
-            console.log(data);
-          }}>
+        <ContentSwitcher {...props.contentSwitcher()}>
           <Switch name="one" text="First section" {...switchProps} />
           <Switch name="two" text="Second section" {...switchProps} />
           <Switch name="three" text="Third section" {...switchProps} />
