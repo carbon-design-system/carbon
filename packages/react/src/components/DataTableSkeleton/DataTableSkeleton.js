@@ -18,6 +18,8 @@ const DataTableSkeleton = ({
   zebra,
   compact,
   className,
+  showHeader,
+  showToolbar,
   ...rest
 }) => {
   const dataTableSkeletonClasses = cx(className, {
@@ -33,7 +35,7 @@ const DataTableSkeleton = ({
   for (let i = 0; i < rowRepeat; i++) {
     rows[i] = (
       <tr key={i}>
-        {columnsArray.map(j => (
+        {columnsArray.map((j) => (
           <td key={j}>
             <span />
           </td>
@@ -44,22 +46,26 @@ const DataTableSkeleton = ({
 
   return (
     <div className={`${prefix}--skeleton ${prefix}--data-table-container`}>
-      <div className={`${prefix}--data-table-header`}>
-        <div className={`${prefix}--data-table-header__title`}></div>
-        <div className={`${prefix}--data-table-header__description`}></div>
-      </div>
-      <section
-        aria-label="data table toolbar"
-        className={`${prefix}--table-toolbar`}>
-        <div className={`${prefix}--toolbar-content`}>
-          <span
-            className={`${prefix}--skeleton ${prefix}--btn ${prefix}--btn--sm`}></span>
+      {showHeader ? (
+        <div className={`${prefix}--data-table-header`}>
+          <div className={`${prefix}--data-table-header__title`}></div>
+          <div className={`${prefix}--data-table-header__description`}></div>
         </div>
-      </section>
+      ) : null}
+      {showToolbar ? (
+        <section
+          aria-label="data table toolbar"
+          className={`${prefix}--table-toolbar`}>
+          <div className={`${prefix}--toolbar-content`}>
+            <span
+              className={`${prefix}--skeleton ${prefix}--btn ${prefix}--btn--sm`}></span>
+          </div>
+        </section>
+      ) : null}
       <table className={dataTableSkeletonClasses} {...rest}>
         <thead>
           <tr>
-            {columnsArray.map(i => (
+            {columnsArray.map((i) => (
               <th key={i}>
                 <span></span>
               </th>
@@ -108,6 +114,16 @@ DataTableSkeleton.propTypes = {
    * Specify an optional className to add.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify if the table header should be rendered as part of the skeleton.
+   */
+  showHeader: PropTypes.bool,
+
+  /**
+   * Specify if the table toolbar should be rendered as part of the skeleton.
+   */
+  showToolbar: PropTypes.bool,
 };
 
 DataTableSkeleton.defaultProps = {
@@ -116,6 +132,8 @@ DataTableSkeleton.defaultProps = {
   zebra: false,
   compact: false,
   headers: [],
+  showHeader: true,
+  showToolbar: true,
 };
 
 export default DataTableSkeleton;

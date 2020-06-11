@@ -389,6 +389,7 @@
   - [❌overflow-menu [mixin]](#overflow-menu-mixin)
 - [pagination](#pagination)
   - [❌pagination [mixin]](#pagination-mixin)
+  - [❌unstable_pagination [mixin]](#unstable_pagination-mixin)
 - [pagination-nav](#pagination-nav)
   - [❌pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [❌pagination-nav [mixin]](#pagination-nav-mixin)
@@ -1818,6 +1819,7 @@ $prefix: 'bx';
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [pagination-nav [mixin]](#pagination-nav-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
@@ -2371,6 +2373,7 @@ Generate a media query for a given breakpoint
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [carbon-header [mixin]](#carbon-header-mixin)
 
@@ -3310,6 +3313,7 @@ Get the value of the corresponding number of units
 - **Used by**:
   - [listbox [mixin]](#listbox-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
+  - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
   - [select [mixin]](#select-mixin)
   - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
@@ -3353,7 +3357,6 @@ $carbon--spacing-02: 0.25rem;
   - [checkbox [mixin]](#checkbox-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [form [mixin]](#form-mixin)
-  - [lists [mixin]](#lists-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
@@ -3447,6 +3450,7 @@ $carbon--spacing-05: 1rem;
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
@@ -3527,6 +3531,7 @@ $carbon--spacing-08: 2.5rem;
   - [snippet [mixin]](#snippet-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [search [mixin]](#search-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
@@ -6608,6 +6613,7 @@ $ui-01: if(
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -6615,6 +6621,7 @@ $ui-01: if(
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -6690,6 +6697,7 @@ $ui-03: if(
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -6767,6 +6775,7 @@ $ui-05: if(
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
@@ -6859,6 +6868,7 @@ $text-02: if(
   - [modal [mixin]](#modal-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -7097,6 +7107,7 @@ $link-01: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [link [mixin]](#link-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -7838,6 +7849,7 @@ $hover-ui: if(
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tile [mixin]](#tile-mixin)
@@ -8153,6 +8165,7 @@ $disabled-02: if(
   - [listbox [mixin]](#listbox-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -8215,6 +8228,7 @@ $highlight: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
 
 ### ✅decorative-01 [variable]
 
@@ -8418,6 +8432,7 @@ $hover-field: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [search [mixin]](#search-mixin)
 - **Deprecated**: This may not be available in future releases
 
@@ -12373,7 +12388,7 @@ $helper-text-01: (
 $body-short-01: (
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(18px),
+  line-height: carbon--em(18px),
   letter-spacing: 0.16px,
 );
 ```
@@ -12392,7 +12407,7 @@ $body-short-01: (
 $body-long-01: (
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(20px),
+  line-height: carbon--em(20px),
   letter-spacing: 0.16px,
 );
 ```
@@ -12411,7 +12426,7 @@ $body-long-01: (
 $body-short-02: (
   font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(22px),
+  line-height: carbon--em(22px),
   letter-spacing: 0,
 );
 ```
@@ -12430,7 +12445,7 @@ $body-short-02: (
 $body-long-02: (
   font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(24px),
+  line-height: carbon--em(24px),
   letter-spacing: 0,
 );
 ```
@@ -13414,6 +13429,7 @@ fixed contexts.
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [carbon--default-type [mixin]](#carbon--default-type-mixin)
+  - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
@@ -13452,10 +13468,10 @@ Accordion styles
     align-items: flex-start;
     justify-content: $accordion-justify-content;
     cursor: pointer;
-    padding: rem(6px) 0;
+    padding: rem(10px) 0;
     flex-direction: $accordion-flex-direction;
     position: relative;
-    height: rem(40px);
+    min-height: rem(40px);
     width: 100%;
     margin: 0;
     transition: background-color motion(standard, productive) $duration--fast-02;
@@ -14101,8 +14117,8 @@ Button variant styles
 
   &:focus {
     border-color: $focus;
-    box-shadow: inset 0 0 0 $button-border-width $focus, inset 0 0 0
-        ($button-border-width + $button-outline-width) $ui-02;
+    box-shadow: inset 0 0 0 $button-outline-width $focus, inset 0 0 0
+        $button-border-width $ui-02;
   }
 
   &:disabled:hover,
@@ -15760,19 +15776,18 @@ Data table core styles
 
   .#{$prefix}--data-table th,
   .#{$prefix}--data-table td {
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
     vertical-align: top;
     text-align: left;
+  }
+
+  .#{$prefix}--data-table td {
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
   }
 
   .#{$prefix}--data-table th {
     color: $text-01;
     background-color: $ui-03;
-  }
-
-  .#{$prefix}--data-table th:first-of-type:not(.#{$prefix}--table-expand) {
-    padding-left: $spacing-05;
   }
 
   .#{$prefix}--data-table th:last-of-type {
@@ -15783,7 +15798,7 @@ Data table core styles
 
   .#{$prefix}--data-table .#{$prefix}--table-header-label {
     display: block;
-    padding: rem(14px) 0;
+    padding: rem(14px) $spacing-05;
     text-align: left;
   }
 
@@ -15796,7 +15811,7 @@ Data table core styles
     padding: rem(14px) $spacing-05;
     padding-bottom: rem(13px);
 
-    & + td:first-of-type {
+    + td:first-of-type {
       padding-left: $spacing-04;
     }
   }
@@ -15805,14 +15820,6 @@ Data table core styles
     .#{$prefix}--data-table td {
       background-clip: padding-box; // fix to show borders in ff
     }
-  }
-
-  .#{$prefix}--data-table td:first-of-type {
-    padding-left: $spacing-05;
-  }
-
-  .#{$prefix}--data-table td:last-of-type {
-    padding-right: $spacing-05;
   }
 
   // Overflow Menu Overrides
@@ -15905,17 +15912,26 @@ Data table core styles
   //ZEBRA
   //----------------------------------------------------------------------------
 
-  .#{$prefix}--data-table--zebra tbody tr:nth-child(even) td {
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:not(.#{$prefix}--parent-row):nth-child(even)
+    td {
     border-bottom: 1px solid $ui-01;
   }
 
-  .#{$prefix}--data-table--zebra tbody tr:nth-child(odd) td {
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:not(.#{$prefix}--parent-row):nth-child(odd)
+    td {
     background-color: $data-table-zebra-color;
     border-bottom: 1px solid $data-table-zebra-color;
     border-top: 1px solid $data-table-zebra-color;
   }
 
-  .#{$prefix}--data-table--zebra tbody tr:hover td {
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:not(.#{$prefix}--parent-row):hover
+    td {
     background-color: $hover-field;
     border-bottom: 1px solid $hover-field;
     border-top: 1px solid $hover-field;
@@ -16027,7 +16043,8 @@ Data table core styles
   }
 
   .#{$prefix}--data-table--compact .#{$prefix}--table-header-label {
-    padding: rem(2px) 0;
+    padding-top: rem(2px);
+    padding-bottom: rem(2px);
   }
 
   .#{$prefix}--data-table--compact td,
@@ -16064,7 +16081,8 @@ Data table core styles
   }
 
   .#{$prefix}--data-table--short .#{$prefix}--table-header-label {
-    padding: rem(7px) 0;
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
   }
 
   .#{$prefix}--data-table--short td,
@@ -16093,7 +16111,8 @@ Data table core styles
   }
 
   .#{$prefix}--data-table--tall .#{$prefix}--table-header-label {
-    padding: rem(16px) 0;
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-05;
   }
 
   .#{$prefix}--data-table--tall td,
@@ -16426,6 +16445,8 @@ Data table expandable styles
   th.#{$prefix}--table-expand {
     position: relative;
     vertical-align: middle;
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
   }
 
   th.#{$prefix}--table-expand + th.#{$prefix}--table-column-checkbox {
@@ -16458,6 +16479,51 @@ Data table expandable styles
     td.#{$prefix}--table-expand
     + td::after {
     display: none;
+  }
+
+  //----------------------------------------------------------------------------
+  //ZEBRA
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:nth-child(4n + 3) td,
+  .#{$prefix}--data-table--zebra tbody tr[data-child-row]:nth-child(4n + 4) td {
+    border-bottom: 1px solid $ui-01;
+  }
+
+  .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:nth-child(4n + 1) td,
+  .#{$prefix}--data-table--zebra tbody tr[data-child-row]:nth-child(4n + 2) td {
+    background-color: $data-table-zebra-color;
+    border-bottom: 1px solid $data-table-zebra-color;
+    border-top: 1px solid $data-table-zebra-color;
+  }
+
+  .#{$prefix}--data-table--zebra tr.#{$prefix}--parent-row td,
+  .#{$prefix}--data-table--zebra
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
+    + tr[data-child-row]
+    td {
+    transition: all $duration--moderate-01 motion(standard, productive), border-bottom
+        $duration--moderate-01 motion(standard, productive),
+      border-top $duration--moderate-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:hover td,
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr[data-parent-row]:hover
+    + tr[data-child-row]
+    td,
+  .#{$prefix}--data-table--zebra tbody tr[data-child-row]:hover td {
+    background-color: $hover-field;
+    border-bottom: 1px solid $hover-field;
+    border-top: 1px solid $hover-field;
+  }
+
+  .#{$prefix}--data-table--zebra
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
+    td {
+    background: $hover-ui;
+    border-bottom: 1px solid $hover-field;
+    border-top: 1px solid $hover-field;
   }
 
   //----------------------------------------------------------------------------
@@ -16559,6 +16625,8 @@ Data table expandable styles
   - [focus [variable]](#focus-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [hover-field [variable]](#hover-field-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
@@ -16611,15 +16679,6 @@ Data table sort styles
     border-bottom: none;
   }
 
-  .#{$prefix}--data-table--sort td {
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
-  }
-
-  .#{$prefix}--data-table--sort th:first-of-type .#{$prefix}--table-sort {
-    padding-left: $spacing-05;
-  }
-
   // -------------------------------------
   // Th > Button
   // -------------------------------------
@@ -16632,7 +16691,7 @@ Data table sort styles
     justify-content: space-between;
     width: 100%;
     color: $text-01;
-    padding: 0 $spacing-05;
+    padding-right: $spacing-05;
     min-height: 100%;
     background-color: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive),
@@ -16773,8 +16832,8 @@ Data table sort styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [layout-04 [variable]](#layout-04-variable)
-  - [spacing-05 [variable]](#spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
@@ -17101,7 +17160,7 @@ Date picker styles
   .#{$prefix}--date-picker__day.today,
   .flatpickr-day.today {
     position: relative;
-    color: $interactive-01;
+    color: $link-01;
     font-weight: 600;
 
     &::after {
@@ -17113,7 +17172,7 @@ Date picker styles
       transform: translateX(-50%);
       height: rem(4px);
       width: rem(4px);
-      background: $interactive-01;
+      background-color: $link-01;
     }
   }
 
@@ -17141,14 +17200,14 @@ Date picker styles
 
   .#{$prefix}--date-picker__day.inRange,
   .flatpickr-day.inRange {
-    background: $date-picker-in-range-background-color;
+    background-color: $highlight;
     color: $text-01;
   }
 
   .#{$prefix}--date-picker__day.selected,
   .flatpickr-day.selected {
     color: $text-04;
-    background: $interactive-01;
+    background-color: $interactive-01;
 
     &:focus {
       outline: rem(1px) solid $ui-02;
@@ -17291,6 +17350,8 @@ Date picker styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [link-01 [variable]](#link-01-variable)
+  - [highlight [variable]](#highlight-variable)
   - [text-04 [variable]](#text-04-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
@@ -17597,8 +17658,18 @@ Dropdown styles
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
-    max-height: 15rem;
+    max-height: rem(220px); // 40px item height * 5.5 items shown
     transition: max-height $duration--fast-02 motion(entrance, productive);
+  }
+
+  .#{$prefix}--dropdown--open.#{$prefix}--dropdown--xl
+    .#{$prefix}--dropdown-list {
+    max-height: rem(264px); // 48px item height * 5.5 items shown
+  }
+
+  .#{$prefix}--dropdown--open.#{$prefix}--dropdown--sm
+    .#{$prefix}--dropdown-list {
+    max-height: rem(176px); // 32px item height * 5.5 items shown
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-item {
@@ -18332,7 +18403,7 @@ Link styles
     color: $link-01;
     text-decoration: none;
     outline: none;
-    transition: $duration--fast-01 motion(standard, productive);
+    transition: color $duration--fast-01 motion(standard, productive);
 
     &:hover {
       color: $hover-primary-text;
@@ -18438,21 +18509,10 @@ List styles
 
   .#{$prefix}--list__item {
     color: $text-01;
-    margin-bottom: $carbon--spacing-02;
   }
 
   .#{$prefix}--list--nested {
-    margin-top: $carbon--spacing-02;
     margin-left: $carbon--spacing-06;
-  }
-
-  .#{$prefix}--list--nested > .#{$prefix}--list__item {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  .#{$prefix}--list--nested .#{$prefix}--list--nested {
-    margin-top: 0;
   }
 
   .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested) {
@@ -18500,7 +18560,6 @@ List styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
@@ -18987,7 +19046,17 @@ List box styles
   }
 
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
-    max-height: rem(140px);
+    max-height: rem(220px); // 40px item height * 5.5 items shown
+  }
+
+  .#{$prefix}--list-box--expanded.#{$prefix}--list-box--xl
+    .#{$prefix}--list-box__menu {
+    max-height: rem(264px); // 48px item height * 5.5 items shown
+  }
+
+  .#{$prefix}--list-box--expanded.#{$prefix}--list-box--sm
+    .#{$prefix}--list-box__menu {
+    max-height: rem(176px); // 32px item height * 5.5 items shown
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control
@@ -19838,6 +19907,17 @@ Multi select styles
     height: 100%;
     display: flex;
     align-items: center;
+  }
+
+  .#{$prefix}--multi-select
+    .#{$prefix}--list-box__menu-item__option
+    .#{$prefix}--checkbox-label {
+    padding-left: rem(28px);
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
   }
 
   .#{$prefix}--multi-select
@@ -21195,7 +21275,8 @@ Pagination styles
     color: $text-02;
   }
 
-  .#{$prefix}--pagination__button {
+  .#{$prefix}--pagination__button,
+  .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
     @include reset;
     border: none;
     background: none;
@@ -21212,24 +21293,31 @@ Pagination styles
     transition: background-color $duration--fast-02 motion(standard, productive);
   }
 
-  .#{$prefix}--pagination__button:focus {
+  .#{$prefix}--pagination__button:focus,
+  .#{$prefix}--btn--ghost:focus.#{$prefix}--pagination__button {
     @include focus-outline('outline');
+    border-left: 0;
   }
 
-  .#{$prefix}--pagination__button:hover {
+  .#{$prefix}--pagination__button:hover,
+  .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button {
     background: $hover-ui;
   }
 
-  .#{$prefix}--pagination__button--no-index {
+  .#{$prefix}--pagination__button--no-index,
+  .#{$prefix}--btn--ghost.#{$prefix}--pagination__button--no-index {
     fill: $disabled-02;
     cursor: not-allowed;
   }
 
   .#{$prefix}--pagination__button:disabled:hover,
-  .#{$prefix}--pagination__button--no-index:hover {
+  .#{$prefix}--pagination__button--no-index:hover,
+  .#{$prefix}--btn--ghost:disabled:hover.#{$prefix}--pagination__button,
+  .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button--no-index {
     cursor: not-allowed;
     fill: $disabled-02;
     background: $ui-01;
+    border-color: $ui-03;
   }
 
   .#{$prefix}--pagination--inline {
@@ -21239,20 +21327,26 @@ Pagination styles
     margin-right: -1rem;
   }
 
-  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button {
+  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button,
+  .#{$prefix}--pagination--inline
+    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
     height: rem(40px);
     border-left: 1px solid $ui-03;
     border-right: 1px solid $ui-03;
     margin: 0;
   }
 
-  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--forward {
+  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--forward,
+  .#{$prefix}--pagination--inline
+    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button--forward {
     border-right: 0;
     padding: 0 $carbon--spacing-05;
     margin-left: $carbon--spacing-05;
   }
 
-  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--backward {
+  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--backward,
+  .#{$prefix}--pagination--inline
+    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button--backward {
     margin: 0 $carbon--spacing-05;
     padding: 0 $carbon--spacing-05;
   }
@@ -21279,6 +21373,186 @@ Pagination styles
   - [text-02 [variable]](#text-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+
+### ❌unstable_pagination [mixin]
+
+Unstable pagination styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin unstable_pagination() {
+  .#{$prefix}--unstable-pagination {
+    @include reset;
+    @include carbon--type-style('body-short-01');
+    width: 100%;
+    background-color: $ui-01;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid $ui-03;
+    border-bottom: 1px solid transparent;
+    height: rem(48px);
+  }
+
+  .#{$prefix}--unstable-pagination__text {
+    @include carbon--breakpoint('md') {
+      display: inline-block;
+    }
+
+    margin: 0 $carbon--spacing-05;
+    color: $text-02;
+  }
+
+  .#{$prefix}--unstable-pagination__left,
+  .#{$prefix}--unstable-pagination__right {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+
+  .#{$prefix}--unstable-pagination__left {
+    padding: 0 $carbon--spacing-05 0 0;
+  }
+
+  .#{$prefix}--unstable-pagination__left > .#{$prefix}--form-item,
+  .#{$prefix}--unstable-pagination__right > .#{$prefix}--form-item {
+    height: 100%;
+  }
+
+  .#{$prefix}--unstable-pagination__left
+    .#{$prefix}--unstable-pagination__text {
+    margin-right: rem(1px);
+  }
+
+  .#{$prefix}--unstable-pagination__right
+    .#{$prefix}--unstable-pagination__text {
+    margin-right: $carbon--spacing-05;
+    margin-left: rem(1px);
+  }
+
+  .#{$prefix}--unstable-pagination__button {
+    @include reset;
+    border: none;
+    border-left: 1px solid $ui-03;
+    background: none;
+    cursor: pointer;
+    height: 100%;
+    margin: 0;
+    padding: 0 rem(14px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $ui-05; // for currentColor
+    fill: $ui-05;
+    transition: outline $duration--fast-02 motion(standard, productive);
+    transition: background-color $duration--fast-02 motion(standard, productive);
+  }
+
+  // Unset height/width set by icon-only button:
+  .#{$prefix}--unstable-pagination__button .#{$prefix}--btn__icon {
+    height: unset;
+    width: unset;
+  }
+
+  .#{$prefix}--unstable-pagination__button.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--unstable-pagination__button:hover {
+    background: $hover-ui;
+    color: $ui-05;
+  }
+
+  .#{$prefix}--unstable-pagination__button--no-index {
+    fill: $disabled-02;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--unstable-pagination__button.#{$prefix}--btn:disabled {
+    background: transparent;
+    border-color: $ui-03;
+  }
+
+  .#{$prefix}--unstable-pagination__button:disabled:hover,
+  .#{$prefix}--unstable-pagination__button--no-index:hover {
+    cursor: not-allowed;
+    fill: $disabled-02;
+    background: transparent;
+  }
+
+  .#{$prefix}--unstable-pagination__page-selector,
+  .#{$prefix}--unstable-pagination__page-sizer {
+    height: 100%;
+    align-items: center;
+  }
+
+  .#{$prefix}--unstable-pagination__page-selector
+    .#{$prefix}--select-input--inline__wrapper,
+  .#{$prefix}--unstable-pagination__page-sizer
+    .#{$prefix}--select-input--inline__wrapper {
+    display: flex;
+    height: 100%;
+  }
+
+  .#{$prefix}--unstable-pagination__page-selector .#{$prefix}--select-input,
+  .#{$prefix}--unstable-pagination__page-sizer .#{$prefix}--select-input {
+    @include carbon--type-style('body-short-01');
+    width: auto;
+    min-width: auto;
+    height: 100%;
+    padding: 0 $carbon--spacing-08 0 $carbon--spacing-05;
+    margin-right: -0.65rem;
+
+    @include carbon--breakpoint('md') {
+      padding-right: carbon--mini-units(4.5);
+      margin-right: 0;
+    }
+  }
+
+  .#{$prefix}--unstable-pagination__page-selector
+    .#{$prefix}--select-input:hover,
+  .#{$prefix}--unstable-pagination__page-sizer .#{$prefix}--select-input:hover {
+    background: $hover-ui;
+  }
+
+  .#{$prefix}--unstable-pagination__page-selector .#{$prefix}--select__arrow,
+  .#{$prefix}--unstable-pagination__page-sizer .#{$prefix}--select__arrow {
+    top: 50%;
+    transform: translateY(-50%);
+
+    @include carbon--breakpoint('md') {
+      right: $carbon--spacing-05;
+    }
+  }
+
+  .#{$prefix}--unstable-pagination__page-selector {
+    border-left: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--unstable-pagination__page-sizer {
+    border-right: 1px solid $ui-03;
+  }
+}
+```
+
+</details>
+
+- **Group**: [pagination](#pagination)
+- **Requires**:
+  - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [carbon--mini-units [function]](#carbon--mini-units-function)
+  - [prefix [variable]](#prefix-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
 
 ## pagination-nav
 
@@ -23124,6 +23398,7 @@ Tabs styles
         // Draws the border without affecting the inner-content
         box-shadow: inset 0 2px 0 0 $interactive-04;
         border-bottom: none;
+        padding: $spacing-03 $spacing-05;
       }
 
       .#{$prefix}--tabs__nav-link:focus,
@@ -23138,8 +23413,7 @@ Tabs styles
   //-----------------------------
   a.#{$prefix}--tabs__nav-link {
     @include focus-outline('reset');
-    display: inline-flex;
-    align-items: flex-end;
+    display: inline-block;
     color: $text-02;
     text-decoration: none;
     font-weight: 400;
@@ -23165,7 +23439,7 @@ Tabs styles
 
     @include carbon--breakpoint(md) {
       border-bottom: $tab-underline-color;
-      padding: $spacing-03 $spacing-05;
+      padding: $spacing-04 $spacing-05 $spacing-03;
       width: rem(160px);
       margin: 0;
       line-height: inherit;
@@ -23173,7 +23447,6 @@ Tabs styles
       &:focus,
       &:active {
         width: rem(160px);
-        padding: $spacing-03 $spacing-05;
         border-bottom: 2px;
       }
     }
@@ -23186,6 +23459,7 @@ Tabs styles
         #{rem(48px)} - (#{$spacing-03} * 2)
       ); // height - vertical padding
       border-bottom: none;
+      padding: $spacing-03 $spacing-05;
     }
   }
 
@@ -25599,6 +25873,7 @@ UI shell header
     right: 0;
     height: mini-units(6);
     background-color: $shell-header-bg-01;
+    border-bottom: 1px solid $shell-header-border-01;
     z-index: z('header');
   }
 
@@ -25656,10 +25931,6 @@ UI shell header
 
   .#{$prefix}--header__action > svg {
     fill: $shell-header-icon-02;
-  }
-
-  .#{$prefix}--header__menu-trigger {
-    margin-right: rem(-8px);
   }
 
   .#{$prefix}--header__menu-trigger > svg {
@@ -25936,8 +26207,8 @@ UI shell header
   - [mini-units [function]](#mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
-  - [shell-header-bg-04 [variable]](#shell-header-bg-04-variable)
   - [shell-header-border-01 [variable]](#shell-header-border-01-variable)
+  - [shell-header-bg-04 [variable]](#shell-header-bg-04-variable)
   - [shell-header-focus [variable]](#shell-header-focus-variable)
   - [shell-header-bg-03 [variable]](#shell-header-bg-03-variable)
   - [shell-header-icon-02 [variable]](#shell-header-icon-02-variable)

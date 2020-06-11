@@ -87,7 +87,7 @@ export function useAnnouncer() {
  */
 export function useAssertiveAnnouncer() {
   const announce = useAnnouncer();
-  return message => announce('assertive', message);
+  return (message) => announce('assertive', message);
 }
 
 /**
@@ -96,5 +96,5 @@ export function useAssertiveAnnouncer() {
  */
 export function usePoliteAnnouncer() {
   const announce = useAnnouncer();
-  return message => announce('polite', message);
+  return (message) => announce('polite', message);
 }

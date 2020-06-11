@@ -208,6 +208,12 @@ class OverflowMenu extends Component {
      * Don't use this to make OverflowMenu background color same as container background color.
      */
     light: PropTypes.bool,
+
+    /**
+     * Specify a CSS selector that matches the DOM element that should
+     * be focused when the OverflowMenu opens
+     */
+    selectorPrimaryFocus: PropTypes.string,
   };
 
   static defaultProps = {
@@ -225,6 +231,7 @@ class OverflowMenu extends Component {
     menuOffset: getMenuOffset,
     menuOffsetFlip: getMenuOffset,
     light: false,
+    selectorPrimaryFocus: '[data-overflow-menu-primary-focus]',
   };
 
   /**
@@ -245,26 +252,6 @@ class OverflowMenu extends Component {
    * @private
    */
   _triggerRef = React.createRef();
-
-  getPrimaryFocusableElement = () => {
-    const { current: triggerEl } = this._triggerRef;
-    if (triggerEl) {
-      const primaryFocusPropEl = triggerEl.querySelector(
-        '[data-floating-menu-primary-focus]'
-      );
-      if (primaryFocusPropEl) {
-        return primaryFocusPropEl;
-      }
-    }
-    const firstItem = this.overflowMenuItem0;
-    if (
-      firstItem &&
-      firstItem.overflowMenuItem &&
-      firstItem.overflowMenuItem.current
-    ) {
-      return firstItem.overflowMenuItem.current;
-    }
-  };
 
   componentDidUpdate(_, prevState) {
     const { onClose } = this.props;
@@ -290,21 +277,21 @@ class OverflowMenu extends Component {
     }
   }
 
-  handleClick = evt => {
+  handleClick = (evt) => {
     if (!this._menuBody || !this._menuBody.contains(evt.target)) {
       this.setState({ open: !this.state.open });
       this.props.onClick(evt);
     }
   };
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     if (keyCodeMatches(evt, [keys.ArrowDown])) {
       this.setState({ open: !this.state.open });
       this.props.onClick(evt);
     }
   };
 
-  handleKeyPress = evt => {
+  handleKeyPress = (evt) => {
     if (
       this.state.open &&
       keyCodeMatches(evt, [
@@ -325,7 +312,7 @@ class OverflowMenu extends Component {
     }
   };
 
-  handleClickOutside = evt => {
+  handleClickOutside = (evt) => {
     if (
       this.state.open &&
       (!this._menuBody || !this._menuBody.contains(evt.target))
@@ -351,23 +338,40 @@ class OverflowMenu extends Component {
     }
   };
 
-  handleOverflowMenuItemFocus = index => {
-    const i = (() => {
-      switch (index) {
+  /**
+   * Focuses the next enabled overflow menu item given the currently focused
+   * item index and direction to move
+   * @param {object} params
+   * @param {number} params.currentIndex - the index of the currently focused
+   * overflow menu item in the list of overflow menu items
+   * @param {number} params.direction - number denoting the direction to move
+   * focus (1 for forwards, -1 for backwards)
+   */
+  handleOverflowMenuItemFocus = ({ currentIndex, direction }) => {
+    const enabledIndices = React.Children.toArray(this.props.children).reduce(
+      (acc, curr, i) => {
+        if (!curr.props.disabled) {
+          acc.push(i);
+        }
+        return acc;
+      },
+      []
+    );
+    const nextValidIndex = (() => {
+      const nextIndex = enabledIndices.indexOf(currentIndex) + direction;
+      switch (enabledIndices.indexOf(currentIndex) + direction) {
         case -1:
-          return React.Children.count(this.props.children) - 1;
-        case React.Children.count(this.props.children):
+          return enabledIndices.length - 1;
+        case enabledIndices.length:
           return 0;
         default:
-          return index;
+          return nextIndex;
       }
     })();
-    const { overflowMenuItem } =
-      this[`overflowMenuItem${i}`] ||
-      React.Children.toArray(this.props.children)[i];
-    if (overflowMenuItem && overflowMenuItem.current) {
-      overflowMenuItem.current.focus();
-    }
+    const { overflowMenuItem } = this[
+      `overflowMenuItem${enabledIndices[nextValidIndex]}`
+    ];
+    overflowMenuItem?.current?.focus();
   };
 
   /**
@@ -376,7 +380,7 @@ class OverflowMenu extends Component {
    * @param {Element} menuBody The DOM element of the menu body.
    * @private
    */
-  _bindMenuBody = menuBody => {
+  _bindMenuBody = (menuBody) => {
     if (!menuBody) {
       this._menuBody = menuBody;
     }
@@ -390,19 +394,15 @@ class OverflowMenu extends Component {
    * @param {Element} menuBody The DOM element of the menu body.
    * @private
    */
-  _handlePlace = menuBody => {
+  _handlePlace = (menuBody) => {
     if (menuBody) {
       this._menuBody = menuBody;
-      const primaryFocus =
-        menuBody.querySelector('[data-floating-menu-primary-focus]') ||
-        menuBody;
-      primaryFocus.focus();
       const hasFocusin = 'onfocusin' in window;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
       this._hFocusIn = on(
         menuBody.ownerDocument,
         focusinEventName,
-        event => {
+        (event) => {
           const { target } = event;
           const { current: triggerEl } = this._triggerRef;
           if (
@@ -446,6 +446,7 @@ class OverflowMenu extends Component {
       iconClass,
       onClick, // eslint-disable-line
       onOpen, // eslint-disable-line
+      selectorPrimaryFocus = '[data-floating-menu-primary-focus]', // eslint-disable-line
       renderIcon: IconElement,
       innerRef: ref,
       menuOptionsClass,
@@ -484,7 +485,7 @@ class OverflowMenu extends Component {
         React.cloneElement(child, {
           closeMenu: this.closeMenu,
           handleOverflowMenuItemFocus: this.handleOverflowMenuItemFocus,
-          ref: e => {
+          ref: (e) => {
             this[`overflowMenuItem${index}`] = e;
           },
           index,
@@ -509,7 +510,8 @@ class OverflowMenu extends Component {
         menuRef={this._bindMenuBody}
         flipped={this.props.flipped}
         target={this._getTarget}
-        onPlace={this._handlePlace}>
+        onPlace={this._handlePlace}
+        selectorPrimaryFocus={this.props.selectorPrimaryFocus}>
         {React.cloneElement(menuBody, {
           'data-floating-menu-direction': direction,
         })}

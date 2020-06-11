@@ -40,7 +40,7 @@ const { isValidElementType } = require('react-is');
 
 beforeEach(() => {
   jest.mock('prop-types', () => {
-    const PropTypes = require.requireActual('prop-types');
+    const PropTypes = jest.requireActual('prop-types');
     const primitive = [
       'array',
       'bool',
@@ -94,7 +94,7 @@ beforeEach(() => {
     // prop-type. We'll also need to define the `isRequired` field similar to
     // how we used it in the primitive prop types
     for (const type of complex) {
-      PropTypes[type] = function(...args) {
+      PropTypes[type] = function (...args) {
         const value = {
           type,
           args,
@@ -127,7 +127,7 @@ test('Public API should only change with a semver change', () => {
   const CarbonReact = require('../src');
   const PublicAPI = new Map();
 
-  Object.keys(CarbonReact).forEach(name => {
+  Object.keys(CarbonReact).forEach((name) => {
     const Component = CarbonReact[name];
     PublicAPI.set(name, mapComponentToAPI(Component));
   });
@@ -135,7 +135,7 @@ test('Public API should only change with a semver change', () => {
   function mapComponentToAPI(Component) {
     const api = {};
 
-    Object.keys(Component).forEach(key => {
+    Object.keys(Component).forEach((key) => {
       // There are a couple of properties on components that we don't believe
       // are part of our API, such as `_` prefixed variables, or capture details
       // that are internal to a library-specific piece of functionality. For

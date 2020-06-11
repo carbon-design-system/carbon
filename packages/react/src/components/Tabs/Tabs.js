@@ -121,7 +121,7 @@ export default class Tabs extends React.Component {
   }
 
   getTabs() {
-    return React.Children.map(this.props.children, tab => tab);
+    return React.Children.map(this.props.children, (tab) => tab);
   }
 
   getEnabledTabs = () =>
@@ -142,7 +142,7 @@ export default class Tabs extends React.Component {
   };
 
   // following functions (handle*) are Props on Tab.js, see Tab.js for parameters
-  handleTabClick = onSelectionChange => {
+  handleTabClick = (onSelectionChange) => {
     return (index, evt) => {
       evt.preventDefault();
 
@@ -153,7 +153,7 @@ export default class Tabs extends React.Component {
     };
   };
 
-  getDirection = evt => {
+  getDirection = (evt) => {
     if (match(evt, keys.ArrowLeft)) {
       return -1;
     }
@@ -176,7 +176,7 @@ export default class Tabs extends React.Component {
     return enabledTabs[nextIndexLooped];
   };
 
-  handleTabKeyDown = onSelectionChange => {
+  handleTabKeyDown = (onSelectionChange) => {
     return (index, evt) => {
       if (matches(evt, [keys.Enter, keys.Space])) {
         this.selectTabAt(index, onSelectionChange);
@@ -252,7 +252,7 @@ export default class Tabs extends React.Component {
         selected: index === this.state.selected,
         handleTabClick: this.handleTabClick(onSelectionChange),
         tabIndex,
-        ref: e => {
+        ref: (e) => {
           this.setTabAt(index, e);
         },
         handleTabKeyDown: this.handleTabKeyDown(onSelectionChange),
@@ -261,7 +261,7 @@ export default class Tabs extends React.Component {
       return newTab;
     });
 
-    const tabContentWithProps = React.Children.map(tabsWithProps, tab => {
+    const tabContentWithProps = React.Children.map(tabsWithProps, (tab) => {
       const {
         id: tabId,
         children,

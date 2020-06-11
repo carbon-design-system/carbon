@@ -19,9 +19,9 @@ const { black, white, orange, yellow, ...swatches } = colors;
  * @returns {Array<SharedStyle>}
  */
 export function syncColorStyles(document, type) {
-  const sharedStyles = Object.keys(swatches).flatMap(swatchName => {
+  const sharedStyles = Object.keys(swatches).flatMap((swatchName) => {
     const name = formatTokenName(swatchName);
-    const result = Object.keys(swatches[swatchName]).map(grade => {
+    const result = Object.keys(swatches[swatchName]).map((grade) => {
       return syncColorStyle(
         document,
         formatSharedStyleName(name, type, grade),

@@ -45,7 +45,7 @@ const Tag = ({
     [`${prefix}--tag--filter`]: filter,
     [`${prefix}--tag--${type}`]: type,
   });
-  const handleClose = event => {
+  const handleClose = (event) => {
     if (onClose) {
       event.stopPropagation();
       onClose(event);
@@ -61,19 +61,25 @@ const Tag = ({
       }
       id={tagId}
       {...other}>
-      <span className={`${prefix}--tag__label`}>
+      <span
+        className={`${prefix}--tag__label`}
+        title={typeof children === 'string' ? children : null}>
         {children !== null && children !== undefined ? children : TYPES[type]}
       </span>
       <button
         className={`${prefix}--tag__close-icon`}
         onClick={handleClose}
         disabled={disabled}
-        aria-labelledby={tagId}>
+        aria-labelledby={tagId}
+        title={title}>
         <Close16 />
       </button>
     </div>
   ) : (
-    <span className={tagClasses} {...other}>
+    <span
+      className={tagClasses}
+      title={typeof children === 'string' ? children : null}
+      {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
     </span>
   );

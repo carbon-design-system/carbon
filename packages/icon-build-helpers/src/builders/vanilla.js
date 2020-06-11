@@ -35,8 +35,8 @@ const babelConfig = {
 };
 
 async function builder(metadata, { output }) {
-  const modules = metadata.icons.flatMap(icon => {
-    return icon.output.map(size => {
+  const modules = metadata.icons.flatMap((icon) => {
+    return icon.output.map((size) => {
       const source = `export default ${JSON.stringify(size.descriptor)};`;
       return {
         source,

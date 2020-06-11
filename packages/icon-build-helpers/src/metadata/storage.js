@@ -17,7 +17,7 @@
  */
 function load(adapter, directory, extensions = []) {
   return Promise.all(
-    extensions.map(async extension => {
+    extensions.map(async (extension) => {
       // If computed, the extension has no file that has been persisted to disk
       // so we don't have to load it.
       if (extension.computed) {
@@ -43,7 +43,7 @@ function load(adapter, directory, extensions = []) {
  */
 function save(adapter, directory, extensions = []) {
   return Promise.all(
-    extensions.map(extension => {
+    extensions.map((extension) => {
       // If the extension is computed, there is nothing to persist to disk
       if (extension.computed) {
         return;

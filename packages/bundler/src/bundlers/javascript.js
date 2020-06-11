@@ -96,7 +96,7 @@ async function bundle(entrypoint, options) {
 }
 
 function formatGlobals(string) {
-  const mappings = string.split(',').map(mapping => {
+  const mappings = string.split(',').map((mapping) => {
     return mapping.split('=');
   });
   return mappings.reduce(

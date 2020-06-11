@@ -1,11 +1,11 @@
 import ProductSwitcher from '../../src/components/ui-shell/product-switcher';
 import UiShellHtml from '../../html/ui-shell/ui-shell.html';
 
-describe('Popup Nav', function() {
-  describe('Constructor', function() {
+describe('Popup Nav', function () {
+  describe('Constructor', function () {
     let productSwitcher;
 
-    it('Should throw if root element is not given', function() {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         productSwitcher = new ProductSwitcher();
       }).toThrowError(
@@ -14,7 +14,7 @@ describe('Popup Nav', function() {
       );
     });
 
-    it('Should throw if root element is not a DOM element', function() {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         productSwitcher = new ProductSwitcher(document.createTextNode(''));
       }).toThrowError(
@@ -23,19 +23,19 @@ describe('Popup Nav', function() {
       );
     });
 
-    afterEach(function() {
+    afterEach(function () {
       if (productSwitcher) {
         productSwitcher = productSwitcher.release();
       }
     });
   });
 
-  describe('Init Component by Launch functionality', function() {
+  describe('Init Component by Launch functionality', function () {
     let button;
     let productSwitcher;
     let context;
 
-    beforeAll(function() {
+    beforeAll(function () {
       const range = document.createRange();
       button = range
         .createContextualFragment(UiShellHtml)
@@ -48,12 +48,12 @@ describe('Popup Nav', function() {
       context = ProductSwitcher.init();
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
       button.classList.remove('bx--header__action--active');
       productSwitcher.classList.remove('bx--panel--expanded');
     });
 
-    it('Should open the popup nav on button click', function() {
+    it('Should open the popup nav on button click', function () {
       button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(button.classList.contains('bx--header__action--active')).toBe(
         true
@@ -63,7 +63,7 @@ describe('Popup Nav', function() {
       );
     });
 
-    it('Should close an open popup nav on button click', function() {
+    it('Should close an open popup nav on button click', function () {
       productSwitcher.classList.add('bx--panel--expanded');
       button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(button.classList.contains('bx--header__action--active')).toBe(
@@ -74,7 +74,7 @@ describe('Popup Nav', function() {
       );
     });
 
-    afterAll(function() {
+    afterAll(function () {
       document.body.removeChild(button);
       document.body.removeChild(productSwitcher);
       context.release();

@@ -27,7 +27,7 @@ const pictograms = () => {
     ),
 
     extend(metadata, data, registry) {
-      metadata.icons = data.map(pictogram => {
+      metadata.icons = data.map((pictogram) => {
         return {
           name: pictogram.name,
           friendlyName: pictogram.friendly_name,
@@ -47,9 +47,11 @@ const pictograms = () => {
 
     validate(registry, data) {
       for (const item of registry.values()) {
-        const metadata = data.find(pictogram => pictogram.name === item.id);
+        const metadata = data.find((pictogram) => pictogram.name === item.id);
         if (!metadata) {
-          const filepaths = item.assets.map(asset => asset.filepath).join('\n');
+          const filepaths = item.assets
+            .map((asset) => asset.filepath)
+            .join('\n');
           throw new Error(
             `Expected the pictogram \`${item.id}\` to be defined in the data ` +
               `metadata file. Found matches for this asset in the following ` +

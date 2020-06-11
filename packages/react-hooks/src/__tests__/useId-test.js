@@ -38,7 +38,7 @@ describe('useId', () => {
       </>
     );
 
-    const ids = Array.from(container.childNodes).map(node => node.id);
+    const ids = Array.from(container.childNodes).map((node) => node.id);
     const uniqueIds = new Set(ids);
     expect(uniqueIds.size).toBe(2);
   });

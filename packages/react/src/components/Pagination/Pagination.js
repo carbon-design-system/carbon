@@ -8,11 +8,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { CaretRight24, CaretLeft24 } from '@carbon/icons-react';
+import { CaretRight16, CaretLeft16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import { equals } from '../../tools/array';
+import Button from '../Button';
 
 const { prefix } = settings;
 
@@ -142,7 +143,7 @@ export default class Pagination extends Component {
     isLastPage: false,
     pageInputDisabled: false,
     itemText: (min, max) => `${min}–${max} items`,
-    pageText: page => `page ${page}`,
+    pageText: (page) => `page ${page}`,
   };
 
   static getDerivedStateFromProps({ pageSizes, page, pageSize }, state) {
@@ -170,17 +171,17 @@ export default class Pagination extends Component {
         };
   }
 
-  handleSizeChange = evt => {
+  handleSizeChange = (evt) => {
     const pageSize = Number(evt.target.value);
     this.setState({ pageSize, page: 1 });
     this.props.onChange({ page: 1, pageSize });
   };
 
-  handlePageChange = evt => {
+  handlePageChange = (evt) => {
     this.setState({ page: evt.target.value });
   };
 
-  handlePageInputChange = evt => {
+  handlePageInputChange = (evt) => {
     const page = Number(evt.target.value);
     if (
       page > 0 &&
@@ -204,7 +205,7 @@ export default class Pagination extends Component {
     this.props.onChange({ page, pageSize: this.state.pageSize });
   };
 
-  renderSelectItems = total => {
+  renderSelectItems = (total) => {
     let counter = 1;
     let itemArr = [];
     while (counter <= total) {
@@ -279,7 +280,7 @@ export default class Pagination extends Component {
             inline
             onChange={this.handleSizeChange}
             value={statePageSize}>
-            {pageSizes.map(size => (
+            {pageSizes.map((size) => (
               <SelectItem key={size} value={size} text={String(size)} />
             ))}
           </Select>
@@ -313,22 +314,28 @@ export default class Pagination extends Component {
               ? pageText(statePage)
               : pageRangeText(statePage, totalPages)}
           </span>
-          <button
-            type="button"
+          <Button
+            kind="ghost"
             className={backButtonClasses}
+            hasIconOnly
+            renderIcon={CaretLeft16}
+            iconDescription={backwardText}
+            tooltipAlignment="center"
+            tooltipPosition="top"
             onClick={this.decrementPage}
-            aria-label={backwardText}
-            disabled={backButtonDisabled}>
-            <CaretLeft24 />
-          </button>
-          <button
-            type="button"
+            disabled={backButtonDisabled}
+          />
+          <Button
+            kind="ghost"
             className={forwardButtonClasses}
-            aria-label={forwardText}
+            hasIconOnly
+            renderIcon={CaretRight16}
+            iconDescription={forwardText}
+            tooltipAlignment="end"
+            tooltipPosition="top"
             onClick={this.incrementPage}
-            disabled={forwardButtonDisabled || isLastPage}>
-            <CaretRight24 />
-          </button>
+            disabled={forwardButtonDisabled || isLastPage}
+          />
         </div>
       </div>
     );

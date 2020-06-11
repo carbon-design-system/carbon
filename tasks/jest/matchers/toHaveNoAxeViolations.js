@@ -30,7 +30,7 @@ const defaultOptions = {
 };
 
 function toHaveNoAxeViolations(node, options = {}) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     axe.run(
       node,
       {
@@ -61,7 +61,7 @@ function toHaveNoAxeViolations(node, options = {}) {
 function formatOutput(violations) {
   const firstViolation = violations[0];
   const { description, id, impact, help, helpUrl } = firstViolation;
-  const nodes = firstViolation.nodes.map(node => {
+  const nodes = firstViolation.nodes.map((node) => {
     return ['Node:', node.html, '\n', ...node.failureSummary.split('\n')].join(
       '\n'
     );

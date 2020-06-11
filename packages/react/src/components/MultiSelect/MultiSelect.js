@@ -216,7 +216,7 @@ function MultiSelect({
               });
               const itemText = itemToString(item);
               const isChecked =
-                selectedItems.filter(selected => isEqual(selected, item))
+                selectedItems.filter((selected) => isEqual(selected, item))
                   .length > 0;
               return (
                 <ListBox.MenuItem

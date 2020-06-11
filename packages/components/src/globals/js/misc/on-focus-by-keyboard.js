@@ -28,7 +28,7 @@ export default function onFocusByKeyboard(node, name, callback) {
       clicked = false;
     });
   };
-  let handleFocusin = evt => {
+  let handleFocusin = (evt) => {
     if (!clicked) {
       callback(evt);
     }

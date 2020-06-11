@@ -70,7 +70,7 @@ function FileUploaderDropContainer({
   return (
     <div
       className={`${prefix}--file`}
-      onDragOver={evt => {
+      onDragOver={(evt) => {
         evt.stopPropagation();
         evt.preventDefault();
         if (disabled) {
@@ -79,7 +79,7 @@ function FileUploaderDropContainer({
         setActive(true);
         evt.dataTransfer.dropEffect = 'copy';
       }}
-      onDragLeave={evt => {
+      onDragLeave={(evt) => {
         evt.stopPropagation();
         evt.preventDefault();
         if (disabled) {
@@ -88,7 +88,7 @@ function FileUploaderDropContainer({
         setActive(false);
         evt.dataTransfer.dropEffect = 'move';
       }}
-      onDrop={evt => {
+      onDrop={(evt) => {
         evt.stopPropagation();
         evt.preventDefault();
         if (disabled) {
@@ -101,7 +101,7 @@ function FileUploaderDropContainer({
         className={labelClasses}
         htmlFor={uid}
         tabIndex={tabIndex || 0}
-        onKeyDown={evt => {
+        onKeyDown={(evt) => {
           if (matches(evt, [keys.Enter, keys.Space])) {
             inputRef.current.click();
           }
@@ -120,7 +120,7 @@ function FileUploaderDropContainer({
             name={name}
             multiple={multiple}
             onChange={handleChange}
-            onClick={evt => {
+            onClick={(evt) => {
               evt.target.value = null;
             }}
           />
