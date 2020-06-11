@@ -45,13 +45,6 @@
       @include focus-outline;
     }
 
-    &:not([href]):not(button) {
-      color: $disabled-02;
-      cursor: not-allowed;
-      pointer-events: none;
-      touch-action: none;
-    }
-
     &:visited {
       color: $link-01;
     }
