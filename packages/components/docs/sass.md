@@ -23398,6 +23398,7 @@ Tabs styles
         // Draws the border without affecting the inner-content
         box-shadow: inset 0 2px 0 0 $interactive-04;
         border-bottom: none;
+        padding: $spacing-03 $spacing-05;
       }
 
       .#{$prefix}--tabs__nav-link:focus,
@@ -23412,8 +23413,7 @@ Tabs styles
   //-----------------------------
   a.#{$prefix}--tabs__nav-link {
     @include focus-outline('reset');
-    display: inline-flex;
-    align-items: flex-end;
+    display: inline-block;
     color: $text-02;
     text-decoration: none;
     font-weight: 400;
@@ -23439,7 +23439,7 @@ Tabs styles
 
     @include carbon--breakpoint(md) {
       border-bottom: $tab-underline-color;
-      padding: $spacing-03 $spacing-05;
+      padding: $spacing-04 $spacing-05 $spacing-03;
       width: rem(160px);
       margin: 0;
       line-height: inherit;
@@ -23447,7 +23447,6 @@ Tabs styles
       &:focus,
       &:active {
         width: rem(160px);
-        padding: $spacing-03 $spacing-05;
         border-bottom: 2px;
       }
     }
@@ -23460,6 +23459,7 @@ Tabs styles
         #{rem(48px)} - (#{$spacing-03} * 2)
       ); // height - vertical padding
       border-bottom: none;
+      padding: $spacing-03 $spacing-05;
     }
   }
 
