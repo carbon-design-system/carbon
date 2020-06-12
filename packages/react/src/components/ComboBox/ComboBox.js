@@ -258,7 +258,20 @@ export default class ComboBox extends React.Component {
   handleOnStateChange = (newState, { setHighlightedIndex }) => {
     if (Object.prototype.hasOwnProperty.call(newState, 'inputValue')) {
       const { inputValue } = newState;
-      setHighlightedIndex(findHighlightedIndex(this.props, inputValue));
+      const items = this.filterItems(
+        this.props.items,
+        this.props.itemToString,
+        inputValue
+      );
+      setHighlightedIndex(
+        findHighlightedIndex(
+          {
+            ...this.props,
+            items,
+          },
+          inputValue
+        )
+      );
     }
   };
 

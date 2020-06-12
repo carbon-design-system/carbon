@@ -15,6 +15,11 @@ import WithState from '../../tools/withState';
 
 const items = [
   {
+    id: 'option-0',
+    text:
+      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.',
+  },
+  {
     id: 'option-1',
     text: 'Option 1',
   },
@@ -32,8 +37,7 @@ const items = [
   },
   {
     id: 'option-5',
-    text:
-      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.',
+    text: 'Option 5',
   },
 ];
 
@@ -42,6 +46,8 @@ const stringItems = [
   'Option 2',
   'Option 3',
   'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.',
+  'Option 5',
+  'Option 6',
 ];
 
 const sizes = {

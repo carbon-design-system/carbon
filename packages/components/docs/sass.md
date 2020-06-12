@@ -3691,7 +3691,6 @@ $spacing-03: $carbon--spacing-03;
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [modal [mixin]](#modal-mixin)
   - [select [mixin]](#select-mixin)
@@ -7107,6 +7106,7 @@ $link-01: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [link [mixin]](#link-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -8227,6 +8227,7 @@ $highlight: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
 
 ### ✅decorative-01 [variable]
 
@@ -15774,7 +15775,7 @@ Data table core styles
 
   .#{$prefix}--data-table th,
   .#{$prefix}--data-table td {
-    vertical-align: top;
+    vertical-align: middle;
     text-align: left;
   }
 
@@ -15795,8 +15796,8 @@ Data table core styles
   }
 
   .#{$prefix}--data-table .#{$prefix}--table-header-label {
-    display: block;
-    padding: rem(14px) $spacing-05;
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
     text-align: left;
   }
 
@@ -15806,8 +15807,8 @@ Data table core styles
     color: $text-02;
     border-top: 1px solid $ui-01;
     border-bottom: 1px solid $ui-03;
-    padding: rem(14px) $spacing-05;
-    padding-bottom: rem(13px);
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
 
     + td:first-of-type {
       padding-left: $spacing-04;
@@ -15946,20 +15947,31 @@ Data table core styles
     // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
     position: static;
     background: $ui-03;
-    padding: rem(12px) $spacing-03 0 $spacing-05;
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
     width: rem(
       44px
     ); // 16px padding left + 8px padding right + 20px checkbox width
     transition: background-color $duration--fast-01 motion(entrance, productive);
   }
 
-  .#{$prefix}--data-table td.#{$prefix}--table-column-checkbox {
-    padding-top: rem(11px);
-    padding-bottom: 0;
+  .#{$prefix}--data-table--tall .#{$prefix}--table-column-checkbox {
+    padding-top: rem(13px);
+  }
+
+  .#{$prefix}--data-table--tall .#{$prefix}--table-column-radio {
+    padding-top: $spacing-05;
   }
 
   .#{$prefix}--date-table tbody th.#{$prefix}--table-column-checkbox:hover {
     background: $data-table-column-hover;
+  }
+
+  //----------------------------------------------------------------------------
+  // Radio
+  //----------------------------------------------------------------------------
+  .#{$prefix}--table-column-radio {
+    width: 48px;
   }
 
   // default selected row + zebra select - even child
@@ -16118,13 +16130,13 @@ Data table core styles
     padding-top: 1rem;
   }
 
-  .#{$prefix}--data-table--cell-secondary-text {
-    @include type-style('label-01');
+  .#{$prefix}--data-table--tall th,
+  .#{$prefix}--data-table--tall td {
+    vertical-align: top;
   }
 
-  .#{$prefix}--data-table.#{$prefix}--data-table--tall
-    .#{$prefix}--table-column-checkbox {
-    padding-top: rem(12px);
+  .#{$prefix}--data-table--cell-secondary-text {
+    @include type-style('label-01');
   }
 
   //----------------------------------------------------------------------------
@@ -16356,7 +16368,7 @@ Data table expandable styles
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
-    border-bottom: 1px solid transparent; // first td doesn't have a visible border
+    border-bottom: 1px solid $hover-ui; // first td doesn't have a visible border
   }
 
   // child row when hovering on expanded parent
@@ -16396,10 +16408,18 @@ Data table expandable styles
   .#{$prefix}--data-table td.#{$prefix}--table-expand {
     width: 2.5rem;
     min-width: 2.5rem;
-    height: 3rem;
-    vertical-align: top;
-    padding: 0;
     border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--data-table td.#{$prefix}--table-expand,
+  th.#{$prefix}--table-expand {
+    padding: 0 $spacing-05;
+  }
+
+  .#{$prefix}--data-table--tall td.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--tall th.#{$prefix}--table-expand {
+    padding-top: rem(16px);
+    padding-bottom: rem(16px);
   }
 
   .#{$prefix}--data-table
@@ -16415,15 +16435,8 @@ Data table expandable styles
 
   .#{$prefix}--table-expand__button {
     @include button-reset('false');
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-  }
-
-  .#{$prefix}--data-table--short .#{$prefix}--table-expand__button {
-    height: auto;
+    height: rem(16px);
+    vertical-align: inherit;
   }
 
   .#{$prefix}--table-expand__button:focus {
@@ -16438,17 +16451,6 @@ Data table expandable styles
     fill: $ui-05;
     transform: rotate(90deg);
     transition: transform $duration--moderate-01 motion(standard, productive);
-  }
-
-  th.#{$prefix}--table-expand {
-    position: relative;
-    vertical-align: middle;
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
-  }
-
-  th.#{$prefix}--table-expand + th.#{$prefix}--table-column-checkbox {
-    padding-left: $spacing-03;
   }
 
   // fix expanded parent separating border length
@@ -16622,7 +16624,6 @@ Data table expandable styles
   - [text-01 [variable]](#text-01-variable)
   - [focus [variable]](#focus-variable)
   - [ui-05 [variable]](#ui-05-variable)
-  - [spacing-03 [variable]](#spacing-03-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [selected-ui [variable]](#selected-ui-variable)
@@ -17158,7 +17159,7 @@ Date picker styles
   .#{$prefix}--date-picker__day.today,
   .flatpickr-day.today {
     position: relative;
-    color: $interactive-01;
+    color: $link-01;
     font-weight: 600;
 
     &::after {
@@ -17170,7 +17171,7 @@ Date picker styles
       transform: translateX(-50%);
       height: rem(4px);
       width: rem(4px);
-      background: $interactive-01;
+      background-color: $link-01;
     }
   }
 
@@ -17198,14 +17199,14 @@ Date picker styles
 
   .#{$prefix}--date-picker__day.inRange,
   .flatpickr-day.inRange {
-    background: $date-picker-in-range-background-color;
+    background-color: $highlight;
     color: $text-01;
   }
 
   .#{$prefix}--date-picker__day.selected,
   .flatpickr-day.selected {
     color: $text-04;
-    background: $interactive-01;
+    background-color: $interactive-01;
 
     &:focus {
       outline: rem(1px) solid $ui-02;
@@ -17348,6 +17349,8 @@ Date picker styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [link-01 [variable]](#link-01-variable)
+  - [highlight [variable]](#highlight-variable)
   - [text-04 [variable]](#text-04-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
@@ -17654,8 +17657,18 @@ Dropdown styles
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
-    max-height: 15rem;
+    max-height: rem(220px); // 40px item height * 5.5 items shown
     transition: max-height $duration--fast-02 motion(entrance, productive);
+  }
+
+  .#{$prefix}--dropdown--open.#{$prefix}--dropdown--xl
+    .#{$prefix}--dropdown-list {
+    max-height: rem(264px); // 48px item height * 5.5 items shown
+  }
+
+  .#{$prefix}--dropdown--open.#{$prefix}--dropdown--sm
+    .#{$prefix}--dropdown-list {
+    max-height: rem(176px); // 32px item height * 5.5 items shown
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-item {
@@ -19032,7 +19045,17 @@ List box styles
   }
 
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
-    max-height: rem(140px);
+    max-height: rem(220px); // 40px item height * 5.5 items shown
+  }
+
+  .#{$prefix}--list-box--expanded.#{$prefix}--list-box--xl
+    .#{$prefix}--list-box__menu {
+    max-height: rem(264px); // 48px item height * 5.5 items shown
+  }
+
+  .#{$prefix}--list-box--expanded.#{$prefix}--list-box--sm
+    .#{$prefix}--list-box__menu {
+    max-height: rem(176px); // 32px item height * 5.5 items shown
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control
@@ -19883,6 +19906,17 @@ Multi select styles
     height: 100%;
     display: flex;
     align-items: center;
+  }
+
+  .#{$prefix}--multi-select
+    .#{$prefix}--list-box__menu-item__option
+    .#{$prefix}--checkbox-label {
+    padding-left: rem(28px);
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
   }
 
   .#{$prefix}--multi-select
@@ -23363,6 +23397,7 @@ Tabs styles
         // Draws the border without affecting the inner-content
         box-shadow: inset 0 2px 0 0 $interactive-04;
         border-bottom: none;
+        padding: $spacing-03 $spacing-05;
       }
 
       .#{$prefix}--tabs__nav-link:focus,
@@ -23377,8 +23412,7 @@ Tabs styles
   //-----------------------------
   a.#{$prefix}--tabs__nav-link {
     @include focus-outline('reset');
-    display: inline-flex;
-    align-items: flex-end;
+    display: inline-block;
     color: $text-02;
     text-decoration: none;
     font-weight: 400;
@@ -23404,7 +23438,7 @@ Tabs styles
 
     @include carbon--breakpoint(md) {
       border-bottom: $tab-underline-color;
-      padding: $spacing-03 $spacing-05;
+      padding: $spacing-04 $spacing-05 $spacing-03;
       width: rem(160px);
       margin: 0;
       line-height: inherit;
@@ -23412,7 +23446,6 @@ Tabs styles
       &:focus,
       &:active {
         width: rem(160px);
-        padding: $spacing-03 $spacing-05;
         border-bottom: 2px;
       }
     }
@@ -23425,6 +23458,7 @@ Tabs styles
         #{rem(48px)} - (#{$spacing-03} * 2)
       ); // height - vertical padding
       border-bottom: none;
+      padding: $spacing-03 $spacing-05;
     }
   }
 
@@ -25838,6 +25872,7 @@ UI shell header
     right: 0;
     height: mini-units(6);
     background-color: $shell-header-bg-01;
+    border-bottom: 1px solid $shell-header-border-01;
     z-index: z('header');
   }
 
@@ -25895,10 +25930,6 @@ UI shell header
 
   .#{$prefix}--header__action > svg {
     fill: $shell-header-icon-02;
-  }
-
-  .#{$prefix}--header__menu-trigger {
-    margin-right: rem(-8px);
   }
 
   .#{$prefix}--header__menu-trigger > svg {
@@ -26175,8 +26206,8 @@ UI shell header
   - [mini-units [function]](#mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
-  - [shell-header-bg-04 [variable]](#shell-header-bg-04-variable)
   - [shell-header-border-01 [variable]](#shell-header-border-01-variable)
+  - [shell-header-bg-04 [variable]](#shell-header-bg-04-variable)
   - [shell-header-focus [variable]](#shell-header-focus-variable)
   - [shell-header-bg-03 [variable]](#shell-header-bg-03-variable)
   - [shell-header-icon-02 [variable]](#shell-header-icon-02-variable)
