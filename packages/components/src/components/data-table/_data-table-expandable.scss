@@ -120,7 +120,7 @@
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
-    border-bottom: 1px solid transparent; // first td doesn't have a visible border
+    border-bottom: 1px solid $hover-ui; // first td doesn't have a visible border
   }
 
   // child row when hovering on expanded parent
@@ -160,10 +160,18 @@
   .#{$prefix}--data-table td.#{$prefix}--table-expand {
     width: 2.5rem;
     min-width: 2.5rem;
-    height: 3rem;
-    vertical-align: top;
-    padding: 0;
     border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--data-table td.#{$prefix}--table-expand,
+  th.#{$prefix}--table-expand {
+    padding: 0 $spacing-05;
+  }
+
+  .#{$prefix}--data-table--tall td.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--tall th.#{$prefix}--table-expand {
+    padding-top: rem(16px);
+    padding-bottom: rem(16px);
   }
 
   .#{$prefix}--data-table
@@ -179,15 +187,8 @@
 
   .#{$prefix}--table-expand__button {
     @include button-reset('false');
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-  }
-
-  .#{$prefix}--data-table--short .#{$prefix}--table-expand__button {
-    height: auto;
+    height: rem(16px);
+    vertical-align: inherit;
   }
 
   .#{$prefix}--table-expand__button:focus {
@@ -202,17 +203,6 @@
     fill: $ui-05;
     transform: rotate(90deg);
     transition: transform $duration--moderate-01 motion(standard, productive);
-  }
-
-  th.#{$prefix}--table-expand {
-    position: relative;
-    vertical-align: middle;
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
-  }
-
-  th.#{$prefix}--table-expand + th.#{$prefix}--table-column-checkbox {
-    padding-left: $spacing-03;
   }
 
   // fix expanded parent separating border length
