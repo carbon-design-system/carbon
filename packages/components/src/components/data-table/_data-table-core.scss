@@ -134,16 +134,6 @@
   }
 
   // Overflow Menu Overrides
-  .#{$prefix}--data-table td button.#{$prefix}--overflow-menu {
-    margin: rem(-7px) 0 rem(-8px);
-  }
-
-  .#{$prefix}--data-table.#{$prefix}--data-table--compact
-    td
-    .#{$prefix}--overflow-menu {
-    margin: 0;
-  }
-
   .#{$prefix}--data-table
     td.#{$prefix}--table-column-menu
     .#{$prefix}--overflow-menu[aria-expanded='false']:focus {
@@ -217,6 +207,10 @@
     &:hover {
       background-color: $hover-field;
     }
+  }
+
+  .#{$prefix}--data-table--tall .#{$prefix}--table-column-menu {
+    padding-top: $spacing-03;
   }
 
   //----------------------------------------------------------------------------
@@ -377,7 +371,7 @@
 
   .#{$prefix}--data-table--compact .#{$prefix}--overflow-menu {
     width: rem(32px);
-    height: rem(23px); //24px row - 1px border
+    height: auto;
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--compact
@@ -414,7 +408,7 @@
   }
 
   .#{$prefix}--data-table--short .#{$prefix}--overflow-menu {
-    height: rem(31px); //32px row - 1px border
+    height: auto;
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--short
