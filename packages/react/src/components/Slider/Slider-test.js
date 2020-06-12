@@ -15,7 +15,7 @@ import { settings } from 'carbon-components';
 
 jest.mock('lodash.throttle');
 
-throttle.mockImplementation(fn => Object.assign(fn, { throttled: true }));
+throttle.mockImplementation((fn) => Object.assign(fn, { throttled: true }));
 
 const { prefix } = settings;
 describe('Slider', () => {
@@ -98,16 +98,10 @@ describe('Slider', () => {
         <Slider min={0} minLabel="min" max={100} maxLabel="max" value={0} />
       );
       expect(
-        wrapper
-          .find(`.${prefix}--slider__range-label`)
-          .first()
-          .text()
+        wrapper.find(`.${prefix}--slider__range-label`).first().text()
       ).toBe('0min');
       expect(
-        wrapper
-          .find(`.${prefix}--slider__range-label`)
-          .last()
-          .text()
+        wrapper.find(`.${prefix}--slider__range-label`).last().text()
       ).toBe('100max');
     });
 
@@ -123,16 +117,10 @@ describe('Slider', () => {
         />
       );
       expect(
-        wrapper
-          .find(`.${prefix}--slider__range-label`)
-          .first()
-          .text()
+        wrapper.find(`.${prefix}--slider__range-label`).first().text()
       ).toBe('0-min');
       expect(
-        wrapper
-          .find(`.${prefix}--slider__range-label`)
-          .last()
-          .text()
+        wrapper.find(`.${prefix}--slider__range-label`).last().text()
       ).toBe('100-max');
     });
   });

@@ -81,12 +81,12 @@ async function build() {
  */
 function transformMetadata(metadata) {
   const namesRegEx = new RegExp(
-    metadata.tokens.map(token => token.name).join('|'),
+    metadata.tokens.map((token) => token.name).join('|'),
     'g'
   );
 
   const replaceMap = {};
-  metadata.tokens.map(token => {
+  metadata.tokens.map((token) => {
     replaceMap[token.name] = formatTokenName(token.name);
   });
 
@@ -94,7 +94,7 @@ function transformMetadata(metadata) {
     // interactive01 to `$interactive-01`
     if (token.role) {
       token.role.forEach((role, j) => {
-        metadata.tokens[i].role[j] = role.replace(namesRegEx, match => {
+        metadata.tokens[i].role[j] = role.replace(namesRegEx, (match) => {
           return '`$' + replaceMap[match] + '`';
         });
       });
@@ -109,7 +109,7 @@ function transformMetadata(metadata) {
   return metadata;
 }
 
-build().catch(error => {
+build().catch((error) => {
   console.error(error);
   process.exit(1);
 });

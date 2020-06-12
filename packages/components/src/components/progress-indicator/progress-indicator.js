@@ -10,7 +10,7 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 
-const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+const toArray = (arrayLike) => Array.prototype.slice.call(arrayLike);
 
 class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
   /**
@@ -69,7 +69,7 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
    */
   getCurrent() {
     const currentEl = this.element.querySelector(this.options.selectorCurrent);
-    return this.getSteps().filter(step => step.element === currentEl)[0];
+    return this.getSteps().filter((step) => step.element === currentEl)[0];
   }
 
   /**
@@ -85,7 +85,7 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
     }
 
     if (changed) {
-      this.getSteps().forEach(step => {
+      this.getSteps().forEach((step) => {
         if (step.index < newCurrentStep) {
           this._updateStep({
             element: step.element,
@@ -172,13 +172,13 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
       this.element.querySelectorAll(this.options.selectorTooltip)
     );
 
-    stepLabels.forEach(step => {
+    stepLabels.forEach((step) => {
       if (step.scrollWidth > this.options.maxWidth) {
         step.classList.add(this.options.classOverflowLabel);
       }
     });
 
-    tooltips.forEach(tooltip => {
+    tooltips.forEach((tooltip) => {
       const childText = tooltip.querySelector(this.options.selectorTooltipText);
       if (childText.scrollHeight > this.options.tooltipMaxHeight) {
         tooltip.classList.add(this.options.classTooltipMulti);

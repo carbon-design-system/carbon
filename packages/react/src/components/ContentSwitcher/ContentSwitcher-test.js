@@ -72,10 +72,7 @@ describe('ContentSwitcher', () => {
     it('should avoid change the selected index upon setting props, unless there the value actually changes', () => {
       wrapper.setProps({ selectedIndex: 1 });
       // Turns `state.selectedIndex` to `0`
-      children
-        .first()
-        .props()
-        .onClick(mockData);
+      children.first().props().onClick(mockData);
       wrapper.setProps({ selectedIndex: 1 }); // No change in `selectedIndex` prop
       const clonedChildren = wrapper.find(Switch);
       expect(clonedChildren.first().props().selected).toEqual(true);
@@ -84,10 +81,7 @@ describe('ContentSwitcher', () => {
 
     it('should change the selected index upon change in props', () => {
       wrapper.setProps({ selectedIndex: 0 });
-      children
-        .first()
-        .props()
-        .onClick(mockData);
+      children.first().props().onClick(mockData);
       wrapper.setProps({ selectedIndex: 1 });
       const clonedChildren = wrapper.find(Switch);
       expect(clonedChildren.first().props().selected).toEqual(false);
@@ -110,10 +104,7 @@ describe('ContentSwitcher', () => {
 
     const children = wrapper.find(Switch);
 
-    children
-      .first()
-      .props()
-      .onClick(mockData);
+    children.first().props().onClick(mockData);
 
     it('should invoke onChange', () => {
       expect(onChange).toBeCalledWith(mockData);
@@ -147,10 +138,7 @@ describe('ContentSwitcher', () => {
 
     const children = wrapper.find(Switch);
 
-    children
-      .first()
-      .props()
-      .onKeyDown(mockData);
+    children.first().props().onKeyDown(mockData);
 
     it('should invoke onChange', () => {
       expect(onChange).toBeCalledWith(mockData);

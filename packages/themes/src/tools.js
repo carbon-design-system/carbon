@@ -16,9 +16,7 @@ import Color from 'color';
  * @returns {string}
  */
 export function adjustLightness(token, shift) {
-  const original = Color(token)
-    .hsl()
-    .object();
+  const original = Color(token).hsl().object();
 
   return Color({ ...original, l: (original.l += shift) })
     .round()

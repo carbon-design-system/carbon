@@ -166,14 +166,14 @@ export default class FilterableMultiSelect extends React.Component {
     };
   }
 
-  handleOnChange = changes => {
+  handleOnChange = (changes) => {
     if (this.props.onChange) {
       this.props.onChange(changes);
     }
   };
 
   handleOnToggleMenu = () => {
-    this.setState(state => ({
+    this.setState((state) => ({
       isOpen: !state.isOpen,
     }));
   };
@@ -228,7 +228,7 @@ export default class FilterableMultiSelect extends React.Component {
     }
   };
 
-  handleOnInputKeyDown = event => {
+  handleOnInputKeyDown = (event) => {
     event.stopPropagation();
   };
 
@@ -247,7 +247,7 @@ export default class FilterableMultiSelect extends React.Component {
       });
   };
 
-  clearInputValue = event => {
+  clearInputValue = (event) => {
     event.stopPropagation();
     this.setState({ inputValue: '' });
     this.inputNode && this.inputNode.focus && this.inputNode.focus();
@@ -327,7 +327,7 @@ export default class FilterableMultiSelect extends React.Component {
             isOpen={isOpen}
             inputValue={inputValue}
             onInputValueChange={this.handleOnInputValueChange}
-            onChange={selectedItem => {
+            onChange={(selectedItem) => {
               // `selectedItem`: The item that was just selected. null if the selection was cleared.
               // https://github.com/downshift-js/downshift#onchange
               if (selectedItem === null) {
@@ -394,7 +394,7 @@ export default class FilterableMultiSelect extends React.Component {
                       className={inputClasses}
                       aria-controls={`${id}__menu`}
                       aria-autocomplete="list"
-                      ref={el => (this.inputNode = el)}
+                      ref={(el) => (this.inputNode = el)}
                       {...getInputProps({
                         disabled,
                         id,
@@ -439,7 +439,7 @@ export default class FilterableMultiSelect extends React.Component {
                         const itemProps = getItemProps({ item });
                         const itemText = itemToString(item);
                         const isChecked =
-                          selectedItem.filter(selected =>
+                          selectedItem.filter((selected) =>
                             isEqual(selected, item)
                           ).length > 0;
                         return (

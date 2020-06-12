@@ -24,7 +24,7 @@ class Accordion extends mixin(createComponent, initComponentBySearch, handles) {
   constructor(element, options) {
     super(element, options);
     this.manage(
-      on(this.element, 'click', event => {
+      on(this.element, 'click', (event) => {
         const item = eventMatches(event, this.options.selectorAccordionItem);
         if (
           item &&
@@ -47,7 +47,7 @@ class Accordion extends mixin(createComponent, initComponentBySearch, handles) {
 
     if (!this._checkIfButton()) {
       this.manage(
-        on(this.element, 'keypress', event => {
+        on(this.element, 'keypress', (event) => {
           const item = eventMatches(event, this.options.selectorAccordionItem);
 
           if (

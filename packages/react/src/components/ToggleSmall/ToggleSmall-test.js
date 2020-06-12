@@ -83,7 +83,7 @@ describe('ToggleSmall', () => {
       wrapper.find('input').simulate('change');
 
       expect(
-        onChange.mock.calls.map(call =>
+        onChange.mock.calls.map((call) =>
           call.map((arg, i) => (i > 0 ? arg : arg.target))
         )
       ).toEqual([[inputElement]]);

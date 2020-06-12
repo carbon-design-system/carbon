@@ -32,7 +32,7 @@ class SideNav extends Component {
     onItemClick: PropTypes.func,
   };
 
-  handleItemClick = evt => {
+  handleItemClick = (evt) => {
     const { onItemClick = () => {} } = this.props;
     onItemClick(evt);
     evt.preventDefault();
@@ -44,8 +44,8 @@ class SideNav extends Component {
       <UIShellSideNav className={className}>
         <SideNavItems>
           {items
-            .filter(item => !item.isHidden)
-            .map(item => {
+            .filter((item) => !item.isHidden)
+            .map((item) => {
               const { id, name, label } = item;
               return (
                 <SideNavLink

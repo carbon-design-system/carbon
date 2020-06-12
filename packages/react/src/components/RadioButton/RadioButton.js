@@ -89,7 +89,7 @@ class RadioButton extends React.Component {
 
   uid = this.props.id || uid();
 
-  handleChange = evt => {
+  handleChange = (evt) => {
     this.props.onChange(this.props.value, this.props.name, evt);
   };
 

@@ -14,7 +14,7 @@ function useTimedUpdate(interval, { maxValue = 10 } = {}) {
 
   useEffect(() => {
     function handler() {
-      updateValue(value => {
+      updateValue((value) => {
         if (value + 1 > maxValue) {
           window.clearInterval(timerId);
           return value;

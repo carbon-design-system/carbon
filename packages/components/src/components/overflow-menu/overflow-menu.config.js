@@ -37,15 +37,9 @@ const items = [
 ];
 
 const idSuffix = {
-  default: `example-${Math.random()
-    .toString(36)
-    .substr(2)}`,
-  flip: `example-${Math.random()
-    .toString(36)
-    .substr(2)}`,
-  link: `example-${Math.random()
-    .toString(36)
-    .substr(2)}`,
+  default: `example-${Math.random().toString(36).substr(2)}`,
+  flip: `example-${Math.random().toString(36).substr(2)}`,
+  link: `example-${Math.random().toString(36).substr(2)}`,
 };
 
 module.exports = {

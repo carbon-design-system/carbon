@@ -40,7 +40,7 @@ const props = () => ({
 
 storiesOf('UNSTABLE Pagination', module)
   .addDecorator(withKnobs)
-  .addDecorator(story => <div style={{ width: '800px' }}>{story()}</div>)
+  .addDecorator((story) => <div style={{ width: '800px' }}>{story()}</div>)
   .add(
     'with a page selector',
     () => (
@@ -52,7 +52,7 @@ storiesOf('UNSTABLE Pagination', module)
           <PageSelector
             currentPage={currentPage}
             id="select-1"
-            onChange={event => onSetPage(event.target.value)}
+            onChange={(event) => onSetPage(event.target.value)}
             totalPages={totalPages}
           />
         )}

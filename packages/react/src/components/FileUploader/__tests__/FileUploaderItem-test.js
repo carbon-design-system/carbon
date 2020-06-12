@@ -20,7 +20,7 @@ describe('FileUploaderItem', () => {
   describe('automated accessibility tests', () => {
     it.each(statuses)(
       'should have no axe violations with status %s',
-      async status => {
+      async (status) => {
         const { container } = render(
           <FileUploaderItem uuid="test" name="test" status={status} />
         );
