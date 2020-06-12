@@ -21,6 +21,7 @@ import DataTable, {
   TableSelectRow,
 } from '..';
 import { headers, initialRows } from './shared';
+import './with-expansion-story.scss';
 
 export default (props) => (
   <DataTable
@@ -65,9 +66,11 @@ export default (props) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
                 </TableExpandRow>
-                <TableExpandedRow colSpan={headers.length + 2}>
-                  <h1>Expandable row content</h1>
-                  <p>Description here</p>
+                <TableExpandedRow
+                  colSpan={headers.length + 2}
+                  className="demo-expanded-td">
+                  <h6>Expandable row content</h6>
+                  <div>Description here</div>
                 </TableExpandedRow>
               </React.Fragment>
             ))}
