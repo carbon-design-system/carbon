@@ -534,6 +534,20 @@
   }
 
   @include sticky-header($max-width: 100%);
+
+  // -------------------
+  // with boolean column
+  // -------------------
+  .#{$prefix}--data-table .bx--form-item.bx--checkbox-wrapper:last-of-type {
+    margin: 0;
+  }
+
+  .#{$prefix}--data-table--short
+    .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type,
+  .#{$prefix}--data-table--compact
+    .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
+    margin: rem(-3px) 0;
+  }
 }
 
 @include exports('data-table-v2-core') {
