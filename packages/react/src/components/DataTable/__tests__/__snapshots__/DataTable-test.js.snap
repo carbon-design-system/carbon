@@ -142,11 +142,11 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                     <th
                       scope="col"
                     >
-                      <span
+                      <div
                         className="bx--table-header-label"
                       >
                         Field A
-                      </span>
+                      </div>
                     </th>
                   </TableHeader>
                   <TableHeader
@@ -161,11 +161,11 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                     <th
                       scope="col"
                     >
-                      <span
+                      <div
                         className="bx--table-header-label"
                       >
                         Field B
-                      </span>
+                      </div>
                     </th>
                   </TableHeader>
                 </tr>
@@ -489,11 +489,11 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     <th
                       scope="col"
                     >
-                      <span
+                      <div
                         className="bx--table-header-label"
                       >
                         Field A
-                      </span>
+                      </div>
                     </th>
                   </TableHeader>
                   <TableHeader
@@ -508,11 +508,11 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     <th
                       scope="col"
                     >
-                      <span
+                      <div
                         className="bx--table-header-label"
                       >
                         Field B
-                      </span>
+                      </div>
                     </th>
                   </TableHeader>
                 </tr>
@@ -539,7 +539,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     radio={true}
                   >
                     <td
-                      className="bx--table-column-checkbox"
+                      className="bx--table-column-checkbox bx--table-column-radio"
                     >
                       <ForwardRef(RadioButton)
                         checked={false}
@@ -625,7 +625,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     radio={true}
                   >
                     <td
-                      className="bx--table-column-checkbox"
+                      className="bx--table-column-checkbox bx--table-column-radio"
                     >
                       <ForwardRef(RadioButton)
                         checked={false}
@@ -711,7 +711,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     radio={true}
                   >
                     <td
-                      className="bx--table-column-checkbox"
+                      className="bx--table-column-checkbox bx--table-column-radio"
                     >
                       <ForwardRef(RadioButton)
                         checked={false}
@@ -989,11 +989,11 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     <th
                       scope="col"
                     >
-                      <span
+                      <div
                         className="bx--table-header-label"
                       >
                         Field A
-                      </span>
+                      </div>
                     </th>
                   </TableHeader>
                   <TableHeader
@@ -1008,11 +1008,11 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     <th
                       scope="col"
                     >
-                      <span
+                      <div
                         className="bx--table-header-label"
                       >
                         Field B
-                      </span>
+                      </div>
                     </th>
                   </TableHeader>
                 </tr>
@@ -1391,11 +1391,11 @@ exports[`DataTable selection should render 1`] = `
                     <th
                       scope="col"
                     >
-                      <span
+                      <div
                         className="bx--table-header-label"
                       >
                         Field A
-                      </span>
+                      </div>
                     </th>
                   </TableHeader>
                   <TableHeader
@@ -1410,11 +1410,11 @@ exports[`DataTable selection should render 1`] = `
                     <th
                       scope="col"
                     >
-                      <span
+                      <div
                         className="bx--table-header-label"
                       >
                         Field B
-                      </span>
+                      </div>
                     </th>
                   </TableHeader>
                 </tr>
@@ -2523,11 +2523,11 @@ exports[`DataTable should render 1`] = `
                     <th
                       scope="col"
                     >
-                      <span
+                      <div
                         className="bx--table-header-label"
                       >
                         Field A
-                      </span>
+                      </div>
                     </th>
                   </TableHeader>
                   <TableHeader
@@ -2542,11 +2542,11 @@ exports[`DataTable should render 1`] = `
                     <th
                       scope="col"
                     >
-                      <span
+                      <div
                         className="bx--table-header-label"
                       >
                         Field B
-                      </span>
+                      </div>
                     </th>
                   </TableHeader>
                 </tr>
@@ -3516,11 +3516,11 @@ exports[`DataTable sticky header should render 1`] = `
                       <th
                         scope="col"
                       >
-                        <span
+                        <div
                           className="bx--table-header-label"
                         >
                           Field A
-                        </span>
+                        </div>
                       </th>
                     </TableHeader>
                     <TableHeader
@@ -3535,11 +3535,11 @@ exports[`DataTable sticky header should render 1`] = `
                       <th
                         scope="col"
                       >
-                        <span
+                        <div
                           className="bx--table-header-label"
                         >
                           Field B
-                        </span>
+                        </div>
                       </th>
                     </TableHeader>
                   </tr>
