@@ -17,7 +17,7 @@ const blacklist = new Set([
   'tools',
   '.DS_Store',
   'index.js',
-  'DataTable-story.js',
+  'DataTable.story.js',
   '__tests__',
   '__mocks__',
   'DataTable.js',

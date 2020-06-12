@@ -72,4 +72,4 @@ addons.getChannel().on(CARBON_TYPE_TOKEN, ({ tokenName, tokenValue }) => {
   );
 });
 
-configure(require.context('../src/components', true, /\-story\.js$/), module);
+configure(require.context('../src/components', true, /\.story\.js$/), module);
