@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import classnames from 'classnames';
 import {
   CaretRight16,
@@ -18,7 +18,9 @@ import Button from '../Button';
 
 const { prefix } = settings;
 
-const getCuts = (totalItems, itemsThatFit, page) => {
+const getCuts = (totalItems, itemsShown, page) => {
+  const itemsThatFit = itemsShown >= 4 ? itemsShown : 4;
+
   if (itemsThatFit >= totalItems) {
     return {
       front: 0,
@@ -71,293 +73,265 @@ const getCuts = (totalItems, itemsThatFit, page) => {
   };
 };
 
-export default class PaginationNav extends Component {
-  constructor(props) {
-    super(props);
-    const { page } = this.props;
+const DirectionButton = ({ direction, label, disabled, onClick }) => {
+  const icon = direction === 'forward' ? CaretRight16 : CaretLeft16;
 
-    this.state = {
-      page,
-      cuts: {
-        front: 0,
-        back: 0,
-      },
-      prevPage: page,
-    };
+  return (
+    <li className={`${prefix}--pagination-nav__list-item`}>
+      <Button
+        disabled={disabled}
+        renderIcon={icon}
+        kind="ghost"
+        hasIconOnly
+        iconDescription={label}
+        tooltipAlignment="center"
+        tooltipPosition="bottom"
+        onClick={onClick}
+      />
+    </li>
+  );
+};
 
-    this.jumpToItem = this.jumpToItem.bind(this);
-    this.jumpToNext = this.jumpToNext.bind(this);
-    this.jumpToPrevious = this.jumpToPrevious.bind(this);
+const PaginationItem = ({ page, itemLabel, isActive, onClick }) => {
+  return (
+    <li key={`item-${page}`} className={`${prefix}--pagination-nav__list-item`}>
+      <button
+        className={classnames(`${prefix}--pagination-nav__page`, {
+          [`${prefix}--pagination-nav__page--active`]: isActive,
+        })}
+        onClick={onClick}>
+        <span className={`${prefix}--pagination-nav__accessibility-label`}>
+          {itemLabel}
+        </span>
+        {page}
+      </button>
+    </li>
+  );
+};
+
+const PaginationOverflow = ({ fromIndex, count, itemLabel, onSelect }) => {
+  if (count > 1) {
+    return (
+      <li className={`${prefix}--pagination-nav__list-item`}>
+        <div className={`${prefix}--pagination-nav__select`}>
+          {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+          <select
+            className={`${prefix}--pagination-nav__page ${prefix}--pagination-nav__page--select`}
+            aria-label={`Select ${itemLabel} number`}
+            onChange={e => {
+              const index = Number(e.target.value);
+              onSelect(index);
+            }}>
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+            <option value="" hidden />
+            {[...Array(count)].map((e, i) => (
+              <option
+                value={(fromIndex + i).toString()}
+                key={`overflow-${fromIndex + i}`}>
+                {fromIndex + i + 1}
+              </option>
+            ))}
+          </select>
+          <div className={`${prefix}--pagination-nav__select-icon-wrapper`}>
+            <OverflowMenuHorizontal16
+              className={`${prefix}--pagination-nav__select-icon`}
+            />
+          </div>
+        </div>
+      </li>
+    );
   }
 
-  static propTypes = {
-    /**
-     * Additional CSS class names.
-     */
-    className: PropTypes.string,
-
-    /**
-     * The description for the backward icon.
-     */
-    backwardText: PropTypes.string,
-
-    /**
-     * The description for the forward icon.
-     */
-    forwardText: PropTypes.string,
-
-    /**
-     * The label that appears before the page number in browser tooltips and screen readers.
-     */
-    itemLabel: PropTypes.string,
-
-    /**
-     * The callback function called when the current page changes.
-     */
-    onChange: PropTypes.func,
-
-    /**
-     * The total number of items.
-     */
-    totalItems: PropTypes.number,
-
-    /**
-     * The number of items to be shown.
-     */
-    itemsShown: PropTypes.number,
-
-    /**
-     * The current page.
-     */
-    page: PropTypes.number,
-
-    /**
-     * Whether user should be able to loop through the items when reaching first / last.
-     */
-    loop: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    backwardText: 'Previous',
-    forwardText: 'Next',
-    page: 0,
-    itemLabel: 'Page',
-    itemsShown: 10,
-    loop: false,
-  };
-
-  static getDerivedStateFromProps({ page, totalItems, itemsShown }, state) {
-    const { page: currentPage, prevPage } = state;
-
-    const itemsThatFit = itemsShown >= 4 ? itemsShown : 4;
-    const pageChanged = page !== prevPage;
-    const cuts = getCuts(totalItems, itemsThatFit, currentPage);
-
-    return !pageChanged
-      ? {
-          cuts,
-        }
-      : {
-          page: (pageChanged && page) || currentPage,
-          prevPage: page,
-          cuts,
-        };
+  if (count === 1) {
+    return (
+      <PaginationItem
+        page={fromIndex + 1}
+        itemLabel={itemLabel}
+        onClick={() => {
+          onSelect(fromIndex);
+        }}
+      />
+    );
   }
 
-  jumpToItem(index) {
-    const { totalItems } = this.props;
+  return <></>;
+};
 
+export default function PaginationNav({
+  className,
+  backwardText = 'Previous',
+  forwardText = 'Next',
+  itemLabel = 'Page',
+  onChange,
+  totalItems,
+  itemsShown = 10,
+  page = 0,
+  loop = false,
+  ...rest
+}) {
+  const [currentPage, setCurrentPage] = useState(page);
+  const [cuts, setCuts] = useState({ front: 0, back: 0 });
+
+  function jumpToItem(index) {
     if (index >= 0 && index < totalItems) {
-      this.setState({
-        page: index,
-      });
-
-      this.props.onChange(index);
+      setCurrentPage(index);
+      onChange(index);
     }
   }
 
-  jumpToNext() {
-    const { totalItems, loop } = this.props;
-    const { page } = this.state;
-
-    const nextIndex = page + 1;
+  function jumpToNext() {
+    const nextIndex = currentPage + 1;
 
     if (nextIndex >= totalItems) {
       if (loop) {
-        this.jumpToItem(0);
+        jumpToItem(0);
       }
     } else {
-      this.jumpToItem(nextIndex);
+      jumpToItem(nextIndex);
     }
   }
 
-  jumpToPrevious() {
-    const { totalItems, loop } = this.props;
-    const { page } = this.state;
-
-    const previousIndex = page - 1;
+  function jumpToPrevious() {
+    const previousIndex = currentPage - 1;
 
     if (previousIndex < 0) {
       if (loop) {
-        this.jumpToItem(totalItems - 1);
+        jumpToItem(totalItems - 1);
       }
     } else {
-      this.jumpToItem(previousIndex);
+      jumpToItem(previousIndex);
     }
   }
 
-  renderDirectionButton(direction) {
-    const { loop, totalItems, backwardText, forwardText } = this.props;
-    const { page } = this.state;
+  useEffect(() => {
+    setCuts(getCuts(totalItems, itemsShown, currentPage));
+  }, [currentPage, itemsShown, totalItems]);
 
-    const disabled =
-      !loop &&
-      ((direction === 'forward' && page === totalItems - 1) ||
-        (direction === 'backward' && page === 0));
-    const label = direction === 'forward' ? forwardText : backwardText;
-    const icon = direction === 'forward' ? CaretRight16 : CaretLeft16;
-    const onClick =
-      direction === 'forward' ? this.jumpToNext : this.jumpToPrevious;
+  const classNames = classnames(`${prefix}--pagination-nav`, className);
 
-    return (
-      <li className={`${prefix}--pagination-nav__list-item`}>
-        <Button
-          disabled={disabled}
-          renderIcon={icon}
-          kind="ghost"
-          hasIconOnly
-          iconDescription={label}
-          tooltipAlignment="center"
-          tooltipPosition="bottom"
-          onClick={onClick}
+  const backwardButtonDisabled = !loop && currentPage === 0;
+  const forwardButtonDisabled = !loop && currentPage === totalItems - 1;
+
+  const startOffset = itemsShown < 5 && page > 1 ? 0 : 1;
+
+  return (
+    <nav className={classNames} {...rest} aria-label="pagination">
+      <ul className={`${prefix}--pagination-nav__list`}>
+        <DirectionButton
+          direction="backward"
+          label={backwardText}
+          disabled={backwardButtonDisabled}
+          onClick={jumpToPrevious}
         />
-      </li>
-    );
-  }
 
-  renderPreviousButton() {
-    return this.renderDirectionButton('backward');
-  }
+        {// render first item if at least 5 items can be displayed
+        // or the current page is first or second item
+        (itemsShown >= 5 || currentPage <= 1) && (
+          <PaginationItem
+            page="1"
+            itemLabel={itemLabel}
+            isActive={currentPage === 0}
+            onClick={() => {
+              jumpToItem(0);
+            }}
+          />
+        )}
 
-  renderNextButton() {
-    return this.renderDirectionButton('forward');
-  }
+        {/* render first overflow */}
+        <PaginationOverflow
+          fromIndex={startOffset}
+          count={cuts.front}
+          onSelect={jumpToItem}
+        />
 
-  renderItem(index) {
-    const { itemLabel } = this.props;
-    const { page } = this.state;
+        {// render items between overflows
+        [...Array(totalItems)]
+          .map((e, i) => i)
+          .slice(startOffset + cuts.front, (1 + cuts.back) * -1)
+          .map(item => (
+            <PaginationItem
+              page={item + 1}
+              itemLabel={itemLabel}
+              isActive={currentPage === item}
+              onClick={() => {
+                jumpToItem(item);
+              }}
+            />
+          ))}
 
-    const isActive = page === index;
+        {/* render second overflow */}
+        <PaginationOverflow
+          fromIndex={totalItems - cuts.back - 1}
+          count={cuts.back}
+          onSelect={jumpToItem}
+        />
 
-    return (
-      <li
-        key={`item-${index}`}
-        className={`${prefix}--pagination-nav__list-item`}>
-        <button
-          className={classnames(`${prefix}--pagination-nav__page`, {
-            [`${prefix}--pagination-nav__page--active`]: isActive,
-          })}
-          onClick={() => {
-            this.jumpToItem(index);
-          }}>
-          <span className={`${prefix}--pagination-nav__accessibility-label`}>
-            {itemLabel}
-          </span>
-          {index + 1}
-        </button>
-      </li>
-    );
-  }
+        {// render last item unless there is only one in total
+        totalItems > 1 && (
+          <PaginationItem
+            page={totalItems}
+            itemLabel={itemLabel}
+            isActive={currentPage === totalItems - 1}
+            onClick={() => {
+              jumpToItem(totalItems - 1);
+            }}
+          />
+        )}
 
-  renderOverflow(fromIndex, count) {
-    const { itemLabel } = this.props;
-
-    if (count > 1) {
-      return (
-        <li className={`${prefix}--pagination-nav__list-item`}>
-          <div className={`${prefix}--pagination-nav__select`}>
-            {/* eslint-disable-next-line jsx-a11y/no-onchange */}
-            <select
-              className={`${prefix}--pagination-nav__page ${prefix}--pagination-nav__page--select`}
-              aria-label={`Select ${itemLabel} number`}
-              onChange={e => {
-                const index = Number(e.target.value);
-                this.jumpToItem(index);
-              }}>
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <option value="" hidden />
-              {[...Array(count)].map((e, i) => (
-                <option
-                  value={(fromIndex + i).toString()}
-                  key={`overflow-${fromIndex + i}`}>
-                  {fromIndex + i + 1}
-                </option>
-              ))}
-            </select>
-            <div className={`${prefix}--pagination-nav__select-icon-wrapper`}>
-              <OverflowMenuHorizontal16
-                className={`${prefix}--pagination-nav__select-icon`}
-              />
-            </div>
-          </div>
-        </li>
-      );
-    }
-
-    if (count === 1) {
-      return this.renderItem(fromIndex);
-    }
-
-    return <></>;
-  }
-
-  render() {
-    const {
-      className,
-      totalItems,
-      itemsShown,
-      itemLabel, // eslint-disable-line no-unused-vars
-      backwardText, // eslint-disable-line no-unused-vars
-      forwardText, // eslint-disable-line no-unused-vars
-      onChange, // eslint-disable-line no-unused-vars
-      ...other
-    } = this.props;
-
-    const { page, cuts } = this.state;
-
-    const classNames = classnames(`${prefix}--pagination-nav`, className);
-
-    // if less than 5 items can be shown, the first overflow
-    // should appear at index 0, not 1 as usual
-    const startOffset = itemsShown < 5 && page > 1 ? 0 : 1;
-
-    return (
-      <nav className={classNames} {...other} aria-label="pagination" key={page}>
-        <ul className={`${prefix}--pagination-nav__list`}>
-          {this.renderPreviousButton()}
-
-          {// render first item if at least 5 items can be displayed
-          // or the current page is first or second item
-          (itemsShown >= 5 || page <= 1) && this.renderItem(0)}
-
-          {// render first overflow
-          this.renderOverflow(startOffset, cuts.front)}
-
-          {// render items between overflows
-          [...Array(totalItems)]
-            .map((e, i) => i)
-            .slice(startOffset + cuts.front, (1 + cuts.back) * -1)
-            .map(item => this.renderItem(item))}
-
-          {// render second overflow
-          this.renderOverflow(totalItems - cuts.back - 1, cuts.back)}
-
-          {// render last item unless there is only one in total
-          totalItems > 1 && this.renderItem(totalItems - 1)}
-
-          {this.renderNextButton()}
-        </ul>
-      </nav>
-    );
-  }
+        <DirectionButton
+          direction="forward"
+          label={forwardText}
+          disabled={forwardButtonDisabled}
+          onClick={jumpToNext}
+        />
+      </ul>
+    </nav>
+  );
 }
+
+PaginationNav.propTypes = {
+  /**
+   * Additional CSS class names.
+   */
+  className: PropTypes.string,
+
+  /**
+   * The description for the backward icon.
+   */
+  backwardText: PropTypes.string,
+
+  /**
+   * The description for the forward icon.
+   */
+  forwardText: PropTypes.string,
+
+  /**
+   * The label that appears before the page number in browser tooltips and screen readers.
+   */
+  itemLabel: PropTypes.string,
+
+  /**
+   * The callback function called when the current page changes.
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * The total number of items.
+   */
+  totalItems: PropTypes.number,
+
+  /**
+   * The number of items to be shown.
+   */
+  itemsShown: PropTypes.number,
+
+  /**
+   * The current page.
+   */
+  page: PropTypes.number,
+
+  /**
+   * Whether user should be able to loop through the items when reaching first / last.
+   */
+  loop: PropTypes.bool,
+};
