@@ -397,6 +397,7 @@ categories:
       - tools
   - name: Networking
     members:
+      - automation--decision
       - global--network
       - integration
       - inspect--data

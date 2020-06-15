@@ -78,6 +78,10 @@
   friendly_name: Automobile
   aliases:
     - automobile
+- name: automation--decision
+  friendly_name: Automation decision
+  aliases:
+    - automation decision
 - name: bag
   friendly_name: Bag
   aliases:
