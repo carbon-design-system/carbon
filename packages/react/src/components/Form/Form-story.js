@@ -27,7 +27,7 @@ import Toggle from '../Toggle';
 
 const additionalProps = {
   className: 'some-class',
-  onSubmit: e => {
+  onSubmit: (e) => {
     e.preventDefault();
     action('FormSubmitted')(e);
   },

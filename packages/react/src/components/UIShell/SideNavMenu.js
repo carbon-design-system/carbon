@@ -98,10 +98,10 @@ export class SideNavMenu extends React.Component {
   }
 
   handleToggleExpand = () => {
-    this.setState(state => ({ isExpanded: !state.isExpanded }));
+    this.setState((state) => ({ isExpanded: !state.isExpanded }));
   };
 
-  handleKeyDown = event => {
+  handleKeyDown = (event) => {
     if (match(event, keys.Escape)) {
       this.setState(() => ({ isExpanded: false }));
     }
@@ -123,7 +123,7 @@ export class SideNavMenu extends React.Component {
     if (children) {
       // if we have children, either a single or multiple, find if it is active
       hasActiveChild = Array.isArray(children)
-        ? children.some(child => {
+        ? children.some((child) => {
             if (
               child.props &&
               (child.props.isActive === true || child.props['aria-current'])

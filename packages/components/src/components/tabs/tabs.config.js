@@ -9,7 +9,7 @@
 
 const { prefix } = require('../../globals/js/settings');
 
-const items = idSuffix => [
+const items = (idSuffix) => [
   {
     linkId: `tab-link-1-${idSuffix}`,
     panelId: `tab-panel-1-${idSuffix}`,

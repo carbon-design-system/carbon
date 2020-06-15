@@ -54,7 +54,7 @@ async function inlineSassDependencies(
   ];
   const inlinedDependencies = (
     await Promise.all(
-      allPossibleDependencies.map(async dependency => {
+      allPossibleDependencies.map(async (dependency) => {
         const modules = await findSassModule(dependency, cwd);
         if (modules) {
           const [scssFolder] = modules;
@@ -106,7 +106,7 @@ async function inlineSassDependencies(
     'gm'
   );
   await Promise.all(
-    paths.map(async file => {
+    paths.map(async (file) => {
       const relativeImportPath = path.relative(
         path.dirname(file.path),
         vendorFolder

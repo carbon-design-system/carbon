@@ -67,11 +67,11 @@ export default class ContentSwitcher extends React.Component {
         };
   }
 
-  handleItemRef = index => ref => {
+  handleItemRef = (index) => (ref) => {
     this._switchRefs[index] = ref;
   };
 
-  handleChildChange = data => {
+  handleChildChange = (data) => {
     const { selectionMode } = this.props;
     // the currently selected child index
     const { selectedIndex } = this.state;

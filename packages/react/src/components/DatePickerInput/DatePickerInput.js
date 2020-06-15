@@ -110,12 +110,12 @@ export default class DatePickerInput extends Component {
 
     const datePickerInputProps = {
       id,
-      onChange: evt => {
+      onChange: (evt) => {
         if (!disabled) {
           onChange(evt);
         }
       },
-      onClick: evt => {
+      onClick: (evt) => {
         if (!disabled) {
           onClick(evt);
         }
@@ -168,7 +168,7 @@ export default class DatePickerInput extends Component {
         {...other}
         {...datePickerInputProps}
         disabled={disabled}
-        ref={input => {
+        ref={(input) => {
           this.input = input;
         }}
         data-invalid
@@ -176,7 +176,7 @@ export default class DatePickerInput extends Component {
       />
     ) : (
       <input
-        ref={input => {
+        ref={(input) => {
           this.input = input;
         }}
         {...other}

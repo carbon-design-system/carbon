@@ -117,7 +117,7 @@ describe('Icon', () => {
         ],
       };
       expect(
-        svgShapes(svgData).map(item =>
+        svgShapes(svgData).map((item) =>
           item.map(({ type, key, props }) => ({ type, key, props }))
         )
       ).toEqual([

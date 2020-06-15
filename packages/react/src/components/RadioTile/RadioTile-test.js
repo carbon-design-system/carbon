@@ -12,7 +12,7 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const render = props =>
+const render = (props) =>
   mount(
     <RadioButton
       {...props}

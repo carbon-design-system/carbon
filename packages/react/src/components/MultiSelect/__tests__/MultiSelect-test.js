@@ -292,7 +292,7 @@ describe('MultiSelect', () => {
           id="custom-id"
           label={label}
           items={items}
-          itemToString={item => (item ? item.text : '')}
+          itemToString={(item) => (item ? item.text : '')}
         />
       );
       const labelNode = getByText(container, label);

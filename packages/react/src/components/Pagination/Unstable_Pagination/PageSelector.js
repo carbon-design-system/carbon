@@ -27,7 +27,7 @@ function PageSelector({
   const namespace = `${prefix}--unstable-pagination__page-selector`;
   const instanceId = `${namespace}__select-${getInstanceId()}`;
 
-  const renderPages = total => {
+  const renderPages = (total) => {
     const pages = [];
     for (let counter = 1; counter <= total; counter += 1) {
       pages.push(

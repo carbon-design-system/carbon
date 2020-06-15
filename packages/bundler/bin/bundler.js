@@ -16,7 +16,7 @@
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err);
 });
 
@@ -40,7 +40,7 @@ if (major < 8) {
 
 var bundler = require('../src/bundler');
 
-bundler(process).catch(error => {
+bundler(process).catch((error) => {
   console.error(error);
   process.exit(1);
 });

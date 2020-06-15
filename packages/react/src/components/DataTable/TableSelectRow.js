@@ -33,6 +33,7 @@ const TableSelectRow = ({
   const InlineInputComponent = radio ? RadioButton : InlineCheckbox;
   const tableSelectRowClasses = classNames(`${prefix}--table-column-checkbox`, {
     [className]: className,
+    [`${prefix}--table-column-radio`]: radio,
   });
   return (
     <td className={tableSelectRowClasses}>

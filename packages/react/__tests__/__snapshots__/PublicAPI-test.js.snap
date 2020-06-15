@@ -3899,9 +3899,7 @@ Map {
       "page": Object {
         "type": "number",
       },
-      "pageInputDisabled": Object {
-        "type": "bool",
-      },
+      "pageInputDisabled": [Function],
       "pageNumberText": Object {
         "type": "string",
       },
@@ -5825,6 +5823,8 @@ Map {
       "compact": false,
       "headers": Array [],
       "rowCount": 5,
+      "showHeader": true,
+      "showToolbar": true,
       "zebra": false,
     },
     "propTypes": Object {
@@ -5859,6 +5859,12 @@ Map {
       },
       "rowCount": Object {
         "type": "number",
+      },
+      "showHeader": Object {
+        "type": "bool",
+      },
+      "showToolbar": Object {
+        "type": "bool",
       },
       "zebra": Object {
         "type": "bool",

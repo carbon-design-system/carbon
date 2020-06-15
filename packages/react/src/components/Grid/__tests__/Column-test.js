@@ -88,7 +88,7 @@ describe('Column', () => {
 
   it.each(['sm', 'md', 'lg', 'xlg', 'max'])(
     'should support specifying column span and offset as an object for breakpoint %s',
-    breakpoint => {
+    (breakpoint) => {
       const { container } = render(
         React.createElement(Column, {
           [breakpoint]: {

@@ -47,7 +47,7 @@ function defineInlineTest(
 
     const migrations = require(pathToMigrations);
 
-    [migration] = migrations.from.filter(migration => {
+    [migration] = migrations.from.filter((migration) => {
       return semver.satisfies(version, migration.version);
     });
     if (!migration) {

@@ -24,12 +24,12 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
     ...other
   } = props;
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     e.preventDefault();
     onClick({ index, name, text });
   };
 
-  const handleKeyDown = event => {
+  const handleKeyDown = (event) => {
     const key = event.key || event.which;
 
     onKeyDown({ index, name, text, key });

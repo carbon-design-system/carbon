@@ -81,7 +81,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   // if a rail, pass the expansion state as a prop, so children can update themselves to match
   if (isRail) {
-    childrenToRender = React.Children.map(children, child => {
+    childrenToRender = React.Children.map(children, (child) => {
       // if we are controlled, check for if we have hovered over or the expanded state, else just use the expanded state (uncontrolled)
       let currentExpansionState = controlled
         ? expandedViaHoverState || expanded
@@ -95,12 +95,12 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   let eventHandlers = {};
 
   if (addFocusListeners) {
-    eventHandlers.onFocus = event => {
+    eventHandlers.onFocus = (event) => {
       if (!event.currentTarget.contains(event.relatedTarget)) {
         handleToggle(event, true);
       }
     };
-    eventHandlers.onBlur = event => {
+    eventHandlers.onBlur = (event) => {
       if (!event.currentTarget.contains(event.relatedTarget)) {
         handleToggle(event, false);
       }
@@ -127,7 +127,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 });
 
 SideNav.defaultProps = {
-  translateById: id => {
+  translateById: (id) => {
     const translations = {
       'carbon.sidenav.state.open': 'Close',
       'carbon.sidenav.state.closed': 'Open',
