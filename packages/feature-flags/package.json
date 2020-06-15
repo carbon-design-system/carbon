@@ -1,0 +1,8 @@
+{
+  "name": "@carbon/feature-flags",
+  "private": true,
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "license": "MIT"
+}
