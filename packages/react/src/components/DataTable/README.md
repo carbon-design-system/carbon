@@ -104,7 +104,7 @@ function App() {
             <TableHead>
               <TableRow>
                 {headers.map((header) => (
-                  <TableHeader {...getHeaderProps({ header })}>
+                  <TableHeader key={header.key} {...getHeaderProps({ header })}>
                     {header.header}
                   </TableHeader>
                 ))}
