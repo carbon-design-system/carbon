@@ -34,6 +34,7 @@ import DataTable, {
   TableToolbarMenu,
 } from '../../DataTable';
 import { batchActionClick, initialRows, headers } from './shared';
+import './with-dynamic-content-story.scss';
 
 export default (props) => {
   const insertInRandomPosition = (array, element) => {
@@ -175,9 +176,11 @@ export default (props) => {
                           <TableCell key={cell.id}>{cell.value}</TableCell>
                         ))}
                       </TableExpandRow>
-                      <TableExpandedRow colSpan={headers.length + 3}>
-                        <h1>Expandable row content</h1>
-                        <p>Description here</p>
+                      <TableExpandedRow
+                        colSpan={headers.length + 3}
+                        className="demo-expanded-td">
+                        <h6>Expandable row content</h6>
+                        <div>Description here</div>
                       </TableExpandedRow>
                     </React.Fragment>
                   ))}
