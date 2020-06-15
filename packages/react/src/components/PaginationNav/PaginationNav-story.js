@@ -9,7 +9,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
+import { withKnobs, boolean, number } from '@storybook/addon-knobs';
 import PaginationNav from '../PaginationNav';
 
 const props = () => ({
@@ -22,18 +22,6 @@ const props = () => ({
   itemsShown: number(
     'Number of items to be shown (minimum 4) (itemsShown)',
     10
-  ),
-  backwardText: text(
-    'The description for the backward icon (backwardText)',
-    'Previous'
-  ),
-  forwardText: text(
-    'The description for the forward icon (forwardText)',
-    'Next'
-  ),
-  itemLabel: text(
-    'The label that appears before the page number for screen readers (itemLabel)',
-    'Page'
   ),
   onChange: action('onChange'),
 });

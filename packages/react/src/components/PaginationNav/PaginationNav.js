@@ -18,7 +18,17 @@ import Button from '../Button';
 
 const { prefix } = settings;
 
-const getCuts = (totalItems, itemsShown, page) => {
+const translationIds = {
+  'carbon.pagination-nav.next': 'Next',
+  'carbon.pagination-nav.previous': 'Previous',
+  'carbon.pagination-nav.item': 'Page',
+};
+
+function translateWithId(messageId) {
+  return translationIds[messageId];
+}
+
+function getCuts(totalItems, itemsShown, page) {
   const itemsThatFit = itemsShown >= 4 ? itemsShown : 4;
 
   if (itemsThatFit >= totalItems) {
@@ -71,9 +81,9 @@ const getCuts = (totalItems, itemsShown, page) => {
     front: frontHidden,
     back: backHidden,
   };
-};
+}
 
-const DirectionButton = ({ direction, label, disabled, onClick }) => {
+function DirectionButton({ direction, label, disabled, onClick }) {
   const icon = direction === 'forward' ? CaretRight16 : CaretLeft16;
 
   return (
@@ -90,26 +100,36 @@ const DirectionButton = ({ direction, label, disabled, onClick }) => {
       />
     </li>
   );
-};
+}
 
-const PaginationItem = ({ page, itemLabel, isActive, onClick }) => {
+function PaginationItem({
+  page,
+  isActive,
+  onClick,
+  translateWithId: t = translateWithId,
+}) {
   return (
-    <li key={`item-${page}`} className={`${prefix}--pagination-nav__list-item`}>
+    <li className={`${prefix}--pagination-nav__list-item`}>
       <button
         className={classnames(`${prefix}--pagination-nav__page`, {
           [`${prefix}--pagination-nav__page--active`]: isActive,
         })}
         onClick={onClick}>
         <span className={`${prefix}--pagination-nav__accessibility-label`}>
-          {itemLabel}
+          {t('carbon.pagination-nav.item')}
         </span>
         {page}
       </button>
     </li>
   );
-};
+}
 
-const PaginationOverflow = ({ fromIndex, count, itemLabel, onSelect }) => {
+function PaginationOverflow({
+  fromIndex,
+  count,
+  onSelect,
+  translateWithId: t = translateWithId,
+}) {
   if (count > 1) {
     return (
       <li className={`${prefix}--pagination-nav__list-item`}>
@@ -117,7 +137,7 @@ const PaginationOverflow = ({ fromIndex, count, itemLabel, onSelect }) => {
           {/* eslint-disable-next-line jsx-a11y/no-onchange */}
           <select
             className={`${prefix}--pagination-nav__page ${prefix}--pagination-nav__page--select`}
-            aria-label={`Select ${itemLabel} number`}
+            aria-label={`Select ${t('carbon.pagination-nav.item')} number`}
             onChange={e => {
               const index = Number(e.target.value);
               onSelect(index);
@@ -146,7 +166,7 @@ const PaginationOverflow = ({ fromIndex, count, itemLabel, onSelect }) => {
     return (
       <PaginationItem
         page={fromIndex + 1}
-        itemLabel={itemLabel}
+        translateWithId={t}
         onClick={() => {
           onSelect(fromIndex);
         }}
@@ -155,18 +175,16 @@ const PaginationOverflow = ({ fromIndex, count, itemLabel, onSelect }) => {
   }
 
   return <></>;
-};
+}
 
 export default function PaginationNav({
   className,
-  backwardText = 'Previous',
-  forwardText = 'Next',
-  itemLabel = 'Page',
   onChange,
   totalItems,
   itemsShown = 10,
   page = 0,
   loop = false,
+  translateWithId: t = translateWithId,
   ...rest
 }) {
   const [currentPage, setCurrentPage] = useState(page);
@@ -219,7 +237,7 @@ export default function PaginationNav({
       <ul className={`${prefix}--pagination-nav__list`}>
         <DirectionButton
           direction="backward"
-          label={backwardText}
+          label={t('carbon.pagination-nav.previous')}
           disabled={backwardButtonDisabled}
           onClick={jumpToPrevious}
         />
@@ -229,7 +247,7 @@ export default function PaginationNav({
         (itemsShown >= 5 || currentPage <= 1) && (
           <PaginationItem
             page="1"
-            itemLabel={itemLabel}
+            translateWithId={t}
             isActive={currentPage === 0}
             onClick={() => {
               jumpToItem(0);
@@ -250,8 +268,9 @@ export default function PaginationNav({
           .slice(startOffset + cuts.front, (1 + cuts.back) * -1)
           .map(item => (
             <PaginationItem
+              key={`item-${item}`}
               page={item + 1}
-              itemLabel={itemLabel}
+              translateWithId={t}
               isActive={currentPage === item}
               onClick={() => {
                 jumpToItem(item);
@@ -270,7 +289,7 @@ export default function PaginationNav({
         totalItems > 1 && (
           <PaginationItem
             page={totalItems}
-            itemLabel={itemLabel}
+            translateWithId={t}
             isActive={currentPage === totalItems - 1}
             onClick={() => {
               jumpToItem(totalItems - 1);
@@ -280,7 +299,7 @@ export default function PaginationNav({
 
         <DirectionButton
           direction="forward"
-          label={forwardText}
+          label={t('carbon.pagination-nav.next')}
           disabled={forwardButtonDisabled}
           onClick={jumpToNext}
         />
@@ -294,21 +313,6 @@ PaginationNav.propTypes = {
    * Additional CSS class names.
    */
   className: PropTypes.string,
-
-  /**
-   * The description for the backward icon.
-   */
-  backwardText: PropTypes.string,
-
-  /**
-   * The description for the forward icon.
-   */
-  forwardText: PropTypes.string,
-
-  /**
-   * The label that appears before the page number in browser tooltips and screen readers.
-   */
-  itemLabel: PropTypes.string,
 
   /**
    * The callback function called when the current page changes.
