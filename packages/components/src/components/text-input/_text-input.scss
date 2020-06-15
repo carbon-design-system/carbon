@@ -212,13 +212,13 @@
     display: none;
   }
 
-  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid,
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--warn {
     border-bottom: none;
   }
 
-  .#{$prefix}--form--fluid
-    .#{$prefix}--text-input--invalid
-    + .#{$prefix}--text-input__divider {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid + .#{$prefix}--text-input__divider,
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--warn + .#{$prefix}--text-input__divider {
     display: block;
     margin: 0 1rem;
     border-style: solid;
