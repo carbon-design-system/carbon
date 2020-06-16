@@ -16973,7 +16973,7 @@ Date picker styles
 
   .#{$prefix}--date-picker--range
     > .#{$prefix}--date-picker-container:first-child {
-    margin-right: rem(1px);
+    margin-right: rem(2px);
   }
 
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker-container,
