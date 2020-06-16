@@ -79,7 +79,6 @@
     // make modal edge visible on high contrast themes (#3880)
     outline: 3px solid transparent;
     outline-offset: -3px;
-    overflow: hidden;
     transform-origin: top center;
     transform: translate3d(0, -24px, 0);
     transition: transform $duration--moderate-02 motion(exit, expressive);
@@ -248,8 +247,6 @@
 
     grid-row: 2/-2;
     grid-column: 1/-1;
-
-    overflow-y: auto;
     margin-bottom: $spacing-09;
     color: $text-01;
     font-weight: 400;
