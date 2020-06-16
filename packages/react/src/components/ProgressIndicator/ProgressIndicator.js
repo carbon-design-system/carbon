@@ -44,6 +44,7 @@ export function ProgressStep({
   onClick,
   renderLabel: ProgressStepLabel,
   translateWithId: t,
+  ...rest
 }) {
   const classes = classnames({
     [`${prefix}--progress-step`]: true,
@@ -109,7 +110,8 @@ export function ProgressStep({
         aria-disabled={disabled}
         tabIndex={!current && onClick && !disabled ? 0 : -1}
         onClick={!current ? onClick : undefined}
-        onKeyDown={handleKeyDown}>
+        onKeyDown={handleKeyDown}
+        {...rest}>
         <span className={`${prefix}--assistive-text`}>{message}</span>
         <SVGIcon
           complete={complete}
