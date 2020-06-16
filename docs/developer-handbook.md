@@ -627,6 +627,32 @@ You don't need to do anything in `carbon-components` side.
 
 ## Maintainers
 
+### Working with icons and pictograms
+
+We get work submitted by the IBM Brand team, along with other designers at IBM, that contributes new or updated assets to our icons or pictograms packages. When you are requested to review these Pull Requests, here are some common things to look for:
+
+1. Do the assets follow a param-case naming convention?
+
+If not, we'll need to request changes so that they are named using the `param-case` convention.
+
+2. Is the CI check failing because of missing metadata?
+
+If so, you will need to help out the contributor by going into the package and running `node tasks/scaffold.js` to seed the metadata information required for the contribution.
+
+_Note: the scaffold task will only apply to the main metadata file, for new icons category information will have to be added by hand_
+
+3. Is the CI check failing because of a merge conflict?
+
+If so, you will need to help out the contributor by resolving the merge conflicts for the Pull Request.
+
+4. Is the CI check failing because of a snapshot change?
+
+If so, you will need to help out the contributor by updating the snapshot based on the changes.
+
+5. Does the Pull Request have an appropriate title?
+
+If not, then you will need to update it to the correct commit convention for the contribution.
+
 ### Code Patterns
 
 #### Deprecating a component
