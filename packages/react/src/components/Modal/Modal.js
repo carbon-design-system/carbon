@@ -155,6 +155,11 @@ export default class Modal extends Component {
     hasScrollingContent: PropTypes.bool,
 
     /**
+     * Specify whether the modal contains overflowing content
+     */
+    visibleOverflow: PropTypes.bool,
+
+    /**
      * Required props for the accessibility label of the header
      */
     ['aria-label']: requiredIfGivenPropIsTruthy(
@@ -174,6 +179,7 @@ export default class Modal extends Component {
     modalLabel: '',
     selectorPrimaryFocus: '[data-modal-primary-focus]',
     hasScrollingContent: false,
+    visibleOverflow: false,
   };
 
   button = React.createRef();
@@ -312,6 +318,7 @@ export default class Modal extends Component {
       shouldSubmitOnEnter, // eslint-disable-line
       size,
       hasScrollingContent,
+      visibleOverflow,
       ...other
     } = this.props;
 
@@ -329,11 +336,13 @@ export default class Modal extends Component {
 
     const containerClasses = classNames(`${prefix}--modal-container`, {
       [`${prefix}--modal-container--${size}`]: size,
+      [`${prefix}--modal-container--visible-overflow`]: visibleOverflow,
     });
 
     const contentClasses = classNames(`${prefix}--modal-content`, {
       [`${prefix}--modal-content--with-form`]: hasForm,
       [`${prefix}--modal-scroll-content`]: hasScrollingContent,
+      [`${prefix}--modal-content--visible-overflow`]: visibleOverflow,
     });
 
     const modalButton = (

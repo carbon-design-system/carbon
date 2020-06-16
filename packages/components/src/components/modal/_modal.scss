@@ -111,6 +111,10 @@
     }
   }
 
+  .#{$prefix}--modal-container--visible-overflow {
+    overflow: visible;
+  }
+
   .#{$prefix}--modal-header,
   .#{$prefix}--modal-content {
     padding-left: $spacing-05;
@@ -260,6 +264,10 @@
     &:focus {
       @include focus-outline('outline');
     }
+  }
+
+  .#{$prefix}--modal-content--visible-overflow {
+    overflow-y: visible;
   }
 
   // Required so overflow-indicator disappears at end of content
