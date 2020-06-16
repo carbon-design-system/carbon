@@ -123,7 +123,7 @@ export default class ToolbarSearch extends Component {
             id={id}
             aria-labelledby={labelId}
             placeholder={placeHolderText}
-            ref={input => {
+            ref={(input) => {
               this.input = input;
             }}
           />

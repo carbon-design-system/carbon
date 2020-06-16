@@ -18,7 +18,7 @@ function createPropAdapter(spec) {
   // if props aren't passed in we should default the prop to empty object
   return (input = {}) => {
     const output = {};
-    Object.keys(input).forEach(key => {
+    Object.keys(input).forEach((key) => {
       const match = spec.find(([regex]) => {
         return key.match(regex);
       });

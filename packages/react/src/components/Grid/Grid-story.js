@@ -3,7 +3,7 @@ import React from 'react';
 import { Grid, Row, Column } from './';
 
 export default {
-  decorators: [storyFn => <div id="templates">{storyFn()}</div>],
+  decorators: [(storyFn) => <div id="templates">{storyFn()}</div>],
   title: 'Grid',
 };
 

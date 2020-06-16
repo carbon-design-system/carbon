@@ -44,7 +44,7 @@ export default class HeaderNavigation extends React.Component {
    * Handles individual menuitem refs. We assign them to a class instance
    * property so that we can properly manage focus of our children.
    */
-  handleItemRef = index => node => {
+  handleItemRef = (index) => (node) => {
     this.items[index] = node;
   };
 

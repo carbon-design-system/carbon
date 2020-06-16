@@ -32,6 +32,7 @@ exports[`AccordionItem should render 1`] = `
         >
           <Icon
             className="bx--accordion__arrow"
+            fill="currentColor"
             height={16}
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 16 16"
@@ -41,6 +42,7 @@ exports[`AccordionItem should render 1`] = `
             <svg
               aria-hidden={true}
               className="bx--accordion__arrow"
+              fill="currentColor"
               focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"

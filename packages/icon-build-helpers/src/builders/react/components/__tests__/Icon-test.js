@@ -51,7 +51,7 @@ describe('Icon', () => {
 
   it('should forward refs to the rendered SVG DOM element', () => {
     let svg;
-    const ref = jest.fn(node => {
+    const ref = jest.fn((node) => {
       svg = node;
     });
     render(<Icon ref={ref} />, mountNode);

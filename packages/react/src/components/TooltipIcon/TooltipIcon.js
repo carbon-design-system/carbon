@@ -41,7 +41,7 @@ const TooltipIcon = ({
   const handleFocus = () => setAllowTooltipVisibility(true);
   const handleMouseEnter = () => setAllowTooltipVisibility(true);
   useEffect(() => {
-    const handleEscKeyDown = event => {
+    const handleEscKeyDown = (event) => {
       if (matches(event, [keys.Escape])) {
         setAllowTooltipVisibility(false);
       }

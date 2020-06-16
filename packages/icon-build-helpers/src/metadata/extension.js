@@ -61,7 +61,7 @@ function load(builderOrOptions = []) {
   const runOrder = [];
 
   function order(extension) {
-    const match = runOrder.find(entry => entry.name === extension.name);
+    const match = runOrder.find((entry) => entry.name === extension.name);
     if (match) {
       return;
     }

@@ -22,7 +22,7 @@ export function generate() {
     const sharedStyles = syncColorStyles(document, 'fill');
     const { black, white, colors, support } = groupByKey(
       sharedStyles,
-      sharedStyle => {
+      (sharedStyle) => {
         const { name } = sharedStyle;
         const [_category, _type, swatch] = name.split(' / ');
         switch (swatch) {
@@ -42,7 +42,7 @@ export function generate() {
     let X_OFFSET = 0;
     let Y_OFFSET = 0;
 
-    const swatches = groupByKey(colors, sharedStyle => {
+    const swatches = groupByKey(colors, (sharedStyle) => {
       const [_category, _type, swatch] = sharedStyle.name.split('/');
       return swatch;
     });

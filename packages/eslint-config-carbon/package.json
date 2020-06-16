@@ -1,7 +1,7 @@
 {
   "name": "eslint-config-carbon",
   "private": true,
-  "version": "10.6.0",
+  "version": "10.7.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/eslint-config-carbon",
@@ -20,7 +20,7 @@
     "eslint": "^6.0.0"
   },
   "dependencies": {
-    "babel-eslint": "^10.0.1",
+    "babel-eslint": "^10.1.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.9.0",

@@ -89,14 +89,8 @@ describe('Search', () => {
         });
 
         it('should have type="button"', () => {
-          const type1 = btns
-            .first()
-            .instance()
-            .getAttribute('type');
-          const type2 = btns
-            .last()
-            .instance()
-            .getAttribute('type');
+          const type1 = btns.first().instance().getAttribute('type');
+          const type2 = btns.last().instance().getAttribute('type');
           expect(type1).toEqual('button');
           expect(type2).toEqual('button');
         });
@@ -111,7 +105,7 @@ describe('Search', () => {
         it('renders two Icons', () => {
           wrapper.setProps({ size: undefined });
           const iconTypes = [Search16, Close20];
-          const icons = wrapper.findWhere(n => iconTypes.includes(n.type()));
+          const icons = wrapper.findWhere((n) => iconTypes.includes(n.type()));
           expect(icons.length).toEqual(2);
         });
       });
@@ -146,7 +140,7 @@ describe('Search', () => {
 
       it('renders two Icons', () => {
         const iconTypes = [Search16, Close16];
-        const icons = large.findWhere(n => iconTypes.includes(n.type()));
+        const icons = large.findWhere((n) => iconTypes.includes(n.type()));
         expect(icons.length).toEqual(2);
       });
     });
@@ -180,7 +174,7 @@ describe('Search', () => {
 
       it('renders two Icons', () => {
         const iconTypes = [Search16, Close20];
-        const icons = wrapper.findWhere(n => iconTypes.includes(n.type()));
+        const icons = wrapper.findWhere((n) => iconTypes.includes(n.type()));
         expect(icons.length).toEqual(2);
       });
     });

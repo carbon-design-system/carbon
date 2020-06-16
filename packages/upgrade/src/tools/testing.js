@@ -9,7 +9,7 @@
 
 'use strict';
 
-const semver = require.requireActual('semver');
+const semver = jest.requireActual('semver');
 
 function defineInlineTest(
   pathToMigrations,
@@ -47,7 +47,7 @@ function defineInlineTest(
 
     const migrations = require(pathToMigrations);
 
-    [migration] = migrations.from.filter(migration => {
+    [migration] = migrations.from.filter((migration) => {
       return semver.satisfies(version, migration.version);
     });
     if (!migration) {

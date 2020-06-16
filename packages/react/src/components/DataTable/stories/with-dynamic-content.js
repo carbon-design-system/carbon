@@ -34,8 +34,9 @@ import DataTable, {
   TableToolbarMenu,
 } from '../../DataTable';
 import { batchActionClick, initialRows, headers } from './shared';
+import './with-dynamic-content-story.scss';
 
-export default props => {
+export default (props) => {
   const insertInRandomPosition = (array, element) => {
     const index = Math.floor(Math.random() * (array.length + 1));
     return [...array.slice(0, index), element, ...array.slice(index)];
@@ -55,8 +56,8 @@ export default props => {
         header: `Header ${length}`,
       };
 
-      this.setState(state => {
-        const rows = state.rows.map(row => {
+      this.setState((state) => {
+        const rows = state.rows.map((row) => {
           return {
             ...row,
             [header.key]: header.header,
@@ -70,7 +71,7 @@ export default props => {
     };
 
     handleOnRowAdd = () => {
-      this.setState(state => {
+      this.setState((state) => {
         const { id: _id, rows } = state;
         const id = _id + 1;
         const row = {
@@ -84,8 +85,8 @@ export default props => {
         };
 
         state.headers
-          .filter(header => row[header.key] === undefined)
-          .forEach(header => {
+          .filter((header) => row[header.key] === undefined)
+          .forEach((header) => {
             row[header.key] = header.header;
           });
 
@@ -159,7 +160,7 @@ export default props => {
                   <TableRow>
                     <TableExpandHeader />
                     <TableSelectAll {...getSelectionProps()} />
-                    {headers.map(header => (
+                    {headers.map((header) => (
                       <TableHeader {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
@@ -167,17 +168,19 @@ export default props => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map(row => (
+                  {rows.map((row) => (
                     <React.Fragment key={row.id}>
                       <TableExpandRow {...getRowProps({ row })}>
                         <TableSelectRow {...getSelectionProps({ row })} />
-                        {row.cells.map(cell => (
+                        {row.cells.map((cell) => (
                           <TableCell key={cell.id}>{cell.value}</TableCell>
                         ))}
                       </TableExpandRow>
-                      <TableExpandedRow colSpan={headers.length + 3}>
-                        <h1>Expandable row content</h1>
-                        <p>Description here</p>
+                      <TableExpandedRow
+                        colSpan={headers.length + 3}
+                        className="demo-expanded-td">
+                        <h6>Expandable row content</h6>
+                        <div>Description here</div>
                       </TableExpandedRow>
                     </React.Fragment>
                   ))}
