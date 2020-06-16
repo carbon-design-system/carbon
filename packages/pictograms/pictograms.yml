@@ -1956,11 +1956,19 @@
     - hybrid
     - cloud
     - services
+- name: ibm--cloud
+  friendly_name: IBM Cloud
+  aliases:
+    - ibm cloud
 - name: ibm--ix
   friendly_name: IBM iX®
   aliases:
     - IBM iX®
     - IBM
+- name: ibm--watson
+  friendly_name: IBM Watson
+  aliases:
+    - ibm watson
 - name: ibm--z
   friendly_name: IBM Z®
   aliases:
