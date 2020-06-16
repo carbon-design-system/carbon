@@ -11,6 +11,7 @@ import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Modal from '../Modal';
+import Dropdown from '../Dropdown';
 import TextInput from '../TextInput';
 import { settings } from 'carbon-components';
 
@@ -97,6 +98,30 @@ const titleOnlyProps = () => {
     onRequestClose: action('onRequestClose'),
   };
 };
+
+const dropDownItems = [
+  {
+    id: 'option-1',
+    text: 'Option 1',
+  },
+  {
+    id: 'option-2',
+    text: 'Option 2',
+  },
+  {
+    id: 'option-3',
+    text: 'Option 3',
+  },
+  {
+    id: 'option-4',
+    text: 'Option 4',
+  },
+  {
+    id: 'option-5',
+    text:
+      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.',
+  },
+];
 
 storiesOf('Modal', module)
   .addDecorator(withKnobs)
@@ -232,6 +257,38 @@ storiesOf('Modal', module)
       info: {
         text: `
             Specify a selector for the primary element to focus when opening a modal.
+          `,
+      },
+    }
+  )
+  .add(
+    'Visible overflow',
+    () => {
+      const { size, ...rest } = props();
+      return (
+        <>
+          <Modal {...rest} size={size || undefined} visibleOverflow={true}>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <Dropdown
+              id="modalDropdown"
+              label="dropdown"
+              items={dropDownItems}
+              itemToString={(item) => (item ? item.text : '')}
+            />
+          </Modal>
+        </>
+      );
+    },
+    {
+      info: {
+        text: `
+            Enable overflow with visibleOverflow property
           `,
       },
     }
