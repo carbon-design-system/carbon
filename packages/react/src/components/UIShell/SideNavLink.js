@@ -81,7 +81,7 @@ SideNavLink.defaultProps = {
   large: false,
 };
 
-export const createCustomSideNavLink = element => props => {
+export const createCustomSideNavLink = (element) => (props) => {
   return <SideNavLink element={element} {...props} />;
 };
 

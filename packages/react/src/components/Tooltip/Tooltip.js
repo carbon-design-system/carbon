@@ -60,7 +60,7 @@ const getMenuOffset = (menuBody, menuDirection) => {
     {}
   );
   values[arrowPositionProp] = values[arrowPositionProp] || -6; // IE, etc.
-  if (Object.keys(values).every(name => !isNaN(values[name]))) {
+  if (Object.keys(values).every((name) => !isNaN(values[name]))) {
     const {
       [arrowPositionProp]: arrowPosition,
       'border-bottom-width': borderBottomWidth,
@@ -153,7 +153,7 @@ class Tooltip extends Component {
      * The callback function to optionally render the icon element.
      * It should be a component with React.forwardRef().
      */
-    renderIcon: function(props, propName, componentName) {
+    renderIcon: function (props, propName, componentName) {
       if (props[propName] == undefined) {
         return;
       }
@@ -304,7 +304,7 @@ class Tooltip extends Component {
     );
   };
 
-  handleMouse = evt => {
+  handleMouse = (evt) => {
     evt.persist();
     const state = {
       focus: 'over',
@@ -329,7 +329,7 @@ class Tooltip extends Component {
     }
   };
 
-  handleClickOutside = evt => {
+  handleClickOutside = (evt) => {
     const shouldPreventClose =
       evt &&
       evt.target &&
@@ -340,7 +340,7 @@ class Tooltip extends Component {
     }
   };
 
-  handleKeyPress = event => {
+  handleKeyPress = (event) => {
     if (keyDownMatch(event, [keys.Escape])) {
       event.stopPropagation();
       this._handleUserInputOpenClose(event, { open: false });
@@ -356,7 +356,7 @@ class Tooltip extends Component {
     }
   };
 
-  handleEscKeyPress = event => {
+  handleEscKeyPress = (event) => {
     const { open } = this.isControlled ? this.props : this.state;
     if (open && keyDownMatch(event, [keys.Escape])) {
       return this._handleUserInputOpenClose(event, { open: false });
@@ -367,14 +367,10 @@ class Tooltip extends Component {
     const {
       triggerId = (this.triggerId =
         this.triggerId ||
-        `__carbon-tooltip-trigger_${Math.random()
-          .toString(36)
-          .substr(2)}`),
+        `__carbon-tooltip-trigger_${Math.random().toString(36).substr(2)}`),
       tooltipId = (this.tooltipId =
         this.tooltipId ||
-        `__carbon-tooltip_${Math.random()
-          .toString(36)
-          .substr(2)}`),
+        `__carbon-tooltip_${Math.random().toString(36).substr(2)}`),
       tooltipBodyId,
       children,
       className,
@@ -460,7 +456,7 @@ class Tooltip extends Component {
             triggerRef={this._triggerRef}
             menuDirection={direction}
             menuOffset={menuOffset}
-            menuRef={node => {
+            menuRef={(node) => {
               this._tooltipEl = node;
             }}>
             <div

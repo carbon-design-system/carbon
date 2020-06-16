@@ -14,7 +14,7 @@ const PREFIX = 'virtual:';
 module.exports = function virtual(modules) {
   const resolvedIds = new Map();
 
-  Object.keys(modules).forEach(id => {
+  Object.keys(modules).forEach((id) => {
     resolvedIds.set(path.resolve(id), modules[id]);
   });
 

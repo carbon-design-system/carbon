@@ -13,7 +13,7 @@ import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+const toArray = (arrayLike) => Array.prototype.slice.call(arrayLike);
 
 class StructuredList extends mixin(
   createComponent,
@@ -33,7 +33,7 @@ class StructuredList extends mixin(
   constructor(element, options) {
     super(element, options);
     this.manage(
-      on(this.element, 'keydown', evt => {
+      on(this.element, 'keydown', (evt) => {
         if (
           evt.which === 37 ||
           evt.which === 38 ||
@@ -48,7 +48,7 @@ class StructuredList extends mixin(
       })
     );
     this.manage(
-      on(this.element, 'click', evt => {
+      on(this.element, 'click', (evt) => {
         this._handleClick(evt);
       })
     );
@@ -86,7 +86,7 @@ class StructuredList extends mixin(
     const selectedRow = eventMatches(evt, this.options.selectorRow);
     toArray(
       this.element.querySelectorAll(this.options.selectorRow)
-    ).forEach(row => row.classList.remove(this.options.classActive));
+    ).forEach((row) => row.classList.remove(this.options.classActive));
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
     }
@@ -98,7 +98,7 @@ class StructuredList extends mixin(
     const selectedRow = eventMatches(evt, this.options.selectorRow);
     toArray(
       this.element.querySelectorAll(this.options.selectorRow)
-    ).forEach(row => row.classList.remove(this.options.classActive));
+    ).forEach((row) => row.classList.remove(this.options.classActive));
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
       const input =
@@ -119,7 +119,7 @@ class StructuredList extends mixin(
       const rows = toArray(
         this.element.querySelectorAll(this.options.selectorRow)
       );
-      rows.forEach(row => row.classList.remove(this.options.classActive));
+      rows.forEach((row) => row.classList.remove(this.options.classActive));
       const firstIndex = 0;
       const nextIndex = this._nextIndex(rows, selectedRow, direction);
       const lastIndex = rows.length - 1;
@@ -147,7 +147,7 @@ class StructuredList extends mixin(
     return {
       selectorInit: '[data-structured-list]',
       selectorRow: `[data-structured-list] .${prefix}--structured-list-tbody > label.${prefix}--structured-list-row`,
-      selectorListInput: id => `#${id}.${prefix}--structured-list-input`,
+      selectorListInput: (id) => `#${id}.${prefix}--structured-list-input`,
       classActive: `${prefix}--structured-list-row--selected`,
     };
   }

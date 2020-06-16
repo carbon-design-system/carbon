@@ -128,10 +128,7 @@ describe('OverflowMenu', () => {
         </OverflowMenu>
       );
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-      rootWrapper
-        .find('OverflowMenu')
-        .instance()
-        .setState({ open: true });
+      rootWrapper.find('OverflowMenu').instance().setState({ open: true });
       rootWrapper.update();
       const list = rootWrapper.find('ul');
       expect(list.length).toEqual(1);
@@ -147,10 +144,7 @@ describe('OverflowMenu', () => {
         </OverflowMenu>
       );
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-      rootWrapper
-        .find('OverflowMenu')
-        .instance()
-        .setState({ open: true });
+      rootWrapper.find('OverflowMenu').instance().setState({ open: true });
       rootWrapper.update();
       expect(rootWrapper.find('button.test-child').length).toEqual(2);
     });
@@ -160,10 +154,7 @@ describe('OverflowMenu', () => {
       const openClass = `${prefix}--overflow-menu-options--open`;
       expect(rootWrapper.find('ul').length).toEqual(0);
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-      rootWrapper
-        .find('OverflowMenu')
-        .instance()
-        .setState({ open: true });
+      rootWrapper.find('OverflowMenu').instance().setState({ open: true });
       rootWrapper.update();
       expect(rootWrapper.find('ul').hasClass(openClass)).not.toEqual(false);
     });
@@ -187,10 +178,7 @@ describe('OverflowMenu', () => {
       const menu = rootWrapper.childAt(0);
 
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-      rootWrapper
-        .find('OverflowMenu')
-        .instance()
-        .setState({ open: true });
+      rootWrapper.find('OverflowMenu').instance().setState({ open: true });
 
       menu.simulate('keydown', { which: spaceKey });
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
@@ -230,10 +218,7 @@ describe('OverflowMenu', () => {
       ).not.toEqual(true);
 
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-      rootWrapper
-        .find('OverflowMenu')
-        .instance()
-        .setState({ open: true });
+      rootWrapper.find('OverflowMenu').instance().setState({ open: true });
 
       rootWrapper
         .find('ClickListener')
@@ -250,10 +235,7 @@ describe('OverflowMenu', () => {
       const rootWrapper = mount(<OverflowMenu />);
 
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-      rootWrapper
-        .find('OverflowMenu')
-        .instance()
-        .setState({ open: true });
+      rootWrapper.find('OverflowMenu').instance().setState({ open: true });
 
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(rootWrapper.find('OverflowMenu').instance().state.open).toEqual(
@@ -298,10 +280,7 @@ describe('OverflowMenu', () => {
       const wrapper = mount(<OverflowMenu />);
       wrapper.setProps({ open: true });
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-      wrapper
-        .find('OverflowMenu')
-        .instance()
-        .setState({ open: false });
+      wrapper.find('OverflowMenu').instance().setState({ open: false });
       wrapper.update();
       wrapper.setProps({ open: true });
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component

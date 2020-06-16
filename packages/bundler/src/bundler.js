@@ -62,7 +62,7 @@ async function bundler({ argv, cwd: getWorkingDirectory }) {
       'the directory to output inlined sass dependencies',
       'scss'
     )
-    .action(cmd =>
+    .action((cmd) =>
       inline(cleanArgs(cmd), {
         cwd,
       })

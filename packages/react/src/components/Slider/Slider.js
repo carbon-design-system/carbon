@@ -238,19 +238,19 @@ export default class Slider extends PureComponent {
    *
    * @param {Event} evt The event.
    */
-  onDragStart = evt => {
+  onDragStart = (evt) => {
     // Do nothing if component is disabled
     if (this.props.disabled) {
       return;
     }
 
     // Register drag stop handlers
-    DRAG_STOP_EVENT_TYPES.forEach(element => {
+    DRAG_STOP_EVENT_TYPES.forEach((element) => {
       this.element.ownerDocument.addEventListener(element, this.onDragStop);
     });
 
     // Register drag handlers
-    DRAG_EVENT_TYPES.forEach(element => {
+    DRAG_EVENT_TYPES.forEach((element) => {
       this.element.ownerDocument.addEventListener(element, this.onDrag);
     });
 
@@ -270,12 +270,12 @@ export default class Slider extends PureComponent {
     }
 
     // Remove drag stop handlers
-    DRAG_STOP_EVENT_TYPES.forEach(element => {
+    DRAG_STOP_EVENT_TYPES.forEach((element) => {
       this.element.ownerDocument.removeEventListener(element, this.onDragStop);
     });
 
     // Remove drag handlers
-    DRAG_EVENT_TYPES.forEach(element => {
+    DRAG_EVENT_TYPES.forEach((element) => {
       this.element.ownerDocument.removeEventListener(element, this.onDrag);
     });
 
@@ -289,7 +289,7 @@ export default class Slider extends PureComponent {
    *
    * @param {Event} evt The event.
    */
-  _onDrag = evt => {
+  _onDrag = (evt) => {
     // Do nothing if component is disabled or we have no event
     if (this.props.disabled || !evt) {
       return;
@@ -328,7 +328,7 @@ export default class Slider extends PureComponent {
    *
    * @param {Event} evt The event.
    */
-  onKeyDown = evt => {
+  onKeyDown = (evt) => {
     // Do nothing if component is disabled or we don't have a valid event
     if (this.props.disabled || !('which' in evt)) {
       return;
@@ -371,7 +371,7 @@ export default class Slider extends PureComponent {
    *
    * @param {Event} evt The event.
    */
-  onChange = evt => {
+  onChange = (evt) => {
     // Do nothing if component is disabled
     if (this.props.disabled) {
       return;
@@ -464,9 +464,7 @@ export default class Slider extends PureComponent {
       hideTextInput,
       id = (this.inputId =
         this.inputId ||
-        `__carbon-slider_${Math.random()
-          .toString(36)
-          .substr(2)}`),
+        `__carbon-slider_${Math.random().toString(36).substr(2)}`),
       min,
       minLabel,
       max,
@@ -528,7 +526,7 @@ export default class Slider extends PureComponent {
           </span>
           <div
             className={sliderClasses}
-            ref={node => {
+            ref={(node) => {
               this.element = node;
             }}
             onMouseDown={this.onDragStart}
@@ -549,7 +547,7 @@ export default class Slider extends PureComponent {
             />
             <div
               className={`${prefix}--slider__track`}
-              ref={node => {
+              ref={(node) => {
                 this.track = node;
               }}
             />
