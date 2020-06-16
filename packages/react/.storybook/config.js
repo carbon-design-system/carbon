@@ -51,6 +51,21 @@ configureActions({
 addDecorator((story) => <Container story={story} />);
 // addDecorator(checkA11y);
 
+addDecorator((story, { parameters }) => {
+  const { knobs } = parameters;
+  if (Object(knobs) === knobs) {
+    if (!parameters.props) {
+      parameters.props = {};
+    }
+    Object.keys(knobs).forEach((name) => {
+      if (typeof knobs[name] === 'function') {
+        parameters.props[name] = knobs[name]({ groupId: name });
+      }
+    });
+  }
+  return story();
+});
+
 addons.getChannel().on(CARBON_CURRENT_THEME, (theme) => {
   document.documentElement.setAttribute('storybook-carbon-theme', theme);
 });

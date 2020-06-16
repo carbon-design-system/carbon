@@ -28,18 +28,12 @@ const props = {
   onHeadingClick: action('onHeadingClick'),
 };
 
-export const AccordionDefault = () => {
+export const AccordionDefault = ({ parameters }) => {
+  const { align, title, open } = parameters?.props?.Accordion ?? {};
+
   return (
-    <Accordion
-      align={select(
-        'Accordion heading alignment (align)',
-        ['start', 'end'],
-        'end'
-      )}>
-      <AccordionItem
-        title={text('The title (title)', 'Section 1 title')}
-        open={boolean('Open the section (open)', false)}
-        {...props}>
+    <Accordion align={align}>
+      <AccordionItem title={title} open={open} {...props}>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -76,21 +70,41 @@ export const AccordionDefault = () => {
   );
 };
 
-export const accordionSkeleton = () => {
-  return (
-    <AccordionSkeleton
-      align={select(
-        'Accordion heading alignment (align)',
-        ['start', 'end'],
-        'end'
-      )}
-      open={boolean('Show first item opened (open)', true)}
-      count={number('Set number of items (count)', 4)}
-    />
-  );
+export const Skeleton = ({ parameters }) => {
+  const { align, open, count } = parameters?.props?.Skeleton ?? {};
+
+  return <AccordionSkeleton align={align} open={open} count={count} />;
+};
+
+AccordionDefault.story = {
+  name: 'Accordion',
 };
 
 export default {
   title: 'Accordion',
+  parameters: {
+    knobs: {
+      Accordion: ({ groupId }) => ({
+        align: select(
+          'Accordion heading alignment (align)',
+          ['start', 'end'],
+          'start',
+          groupId
+        ),
+        title: text('The title (title)', 'Section 1 title', groupId),
+        open: boolean('Open the section (open)', false, groupId),
+      }),
+      Skeleton: ({ groupId }) => ({
+        align: select(
+          'Accordion heading alignment (align)',
+          ['start', 'end'],
+          'start',
+          groupId
+        ),
+        count: number('Set number of items (count)', 4, {}, groupId),
+        open: boolean('Open the section (open)', false, groupId),
+      }),
+    },
+  },
   decorators: [withKnobs],
 };
