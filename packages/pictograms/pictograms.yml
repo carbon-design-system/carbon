@@ -1316,6 +1316,9 @@
   friendly_name: User analytics
 - name: user--insights
   friendly_name: User insights
+- name: user--inteface
+  friendly_name: user--inteface
+  aliases: []
 - name: user--interface
   friendly_name: User interface
 - name: user--search
