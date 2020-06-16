@@ -44,6 +44,7 @@ export function ProgressStep({
   onClick,
   renderLabel: ProgressStepLabel,
   translateWithId: t,
+  ...other
 }) {
   const classes = classnames({
     [`${prefix}--progress-step`]: true,
@@ -100,7 +101,7 @@ export function ProgressStep({
   }
 
   return (
-    <li className={classes}>
+    <li className={classes} {...other}>
       <button
         className={classnames(`${prefix}--progress-step-button`, {
           [`${prefix}--progress-step-button--unclickable`]: !onClick || current,
