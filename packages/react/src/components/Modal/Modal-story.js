@@ -116,11 +116,6 @@ const dropDownItems = [
     id: 'option-4',
     text: 'Option 4',
   },
-  {
-    id: 'option-5',
-    text:
-      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.',
-  },
 ];
 
 storiesOf('Modal', module)

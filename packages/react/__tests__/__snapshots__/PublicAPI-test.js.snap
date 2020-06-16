@@ -2893,6 +2893,7 @@ Map {
       "passiveModal": false,
       "primaryButtonDisabled": false,
       "selectorPrimaryFocus": "[data-modal-primary-focus]",
+      "visibleOverflow": false,
     },
     "propTypes": Object {
       "aria-label": [Function],
@@ -2977,6 +2978,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "visibleOverflow": Object {
+        "type": "bool",
       },
     },
   },
