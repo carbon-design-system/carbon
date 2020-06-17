@@ -50,12 +50,8 @@
   //-----------------------------
   .#{$prefix}--tabs__nav-item {
     @include reset;
-
     display: flex;
-    width: 100%;
-    height: rem(40px);
     padding: 0;
-    background-color: $ui-01;
     cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive);
   }
