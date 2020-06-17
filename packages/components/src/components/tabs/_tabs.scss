@@ -152,7 +152,7 @@
   //-----------------------------
   // Link
   //-----------------------------
-  a.#{$prefix}--tabs__nav-link {
+  .#{$prefix}--tabs__nav-link {
     @include focus-outline('reset');
 
     display: inline-block;
