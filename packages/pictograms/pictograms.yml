@@ -204,7 +204,7 @@
 - name: chart--t-SNE
   friendly_name: chart--t-SNE
   aliases: []
-- name: cheeese
+- name: cheese
   friendly_name: Cheese
   aliases:
     - cheese
@@ -474,6 +474,10 @@
   friendly_name: Factory
   aliases:
     - factory
+- name: farm
+  friendly_name: Farm
+  aliases:
+    - farm
 - name: farm--01
   friendly_name: Farm 01
   aliases:
