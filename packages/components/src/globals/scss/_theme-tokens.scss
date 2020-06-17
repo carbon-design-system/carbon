@@ -359,6 +359,13 @@ $tab-text-disabled: $disabled-02 !default;
 /// @group tabs
 $tab-underline-disabled: 2px solid $disabled-01 !default;
 
+/// @type Value
+/// @access public
+/// @group tabs
+$container-tab-line-height: calc(
+  #{rem(48px)} - (#{$spacing-03} * 2)
+); // height - vertical padding !default;
+
 // Skeleton Loading
 
 /// @type Color
