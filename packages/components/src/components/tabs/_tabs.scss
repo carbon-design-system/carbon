@@ -100,7 +100,7 @@
   .#{$prefix}--tabs__nav-item--disabled,
   .#{$prefix}--tabs__nav-item--disabled:hover {
     outline: none;
-    cursor: not-allowed;
+    background-color: transparent;
   }
 
   .#{$prefix}--tabs--container
