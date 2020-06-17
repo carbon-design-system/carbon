@@ -67,6 +67,7 @@ const props = {
       'A valid value is required'
     ),
     helperText: text('Helper text (helperText)', 'Optional helper text.'),
+    inline: boolean('Inline variant (inline)', false),
     onClick: action('onClick'),
     onChange: action('onChange'),
   }),
