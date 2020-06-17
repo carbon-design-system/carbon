@@ -119,10 +119,21 @@
   //-----------------------------
   // Item Selected
   //-----------------------------
-  .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled) {
-    display: none;
-    border: none;
+  .#{$prefix}--tabs__nav-item--selected {
     transition: color $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link,
+  .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link:active {
+    @include type-style('productive-heading-01');
+    color: $text-01;
+    border-bottom: 2px solid $interactive-04;
+  }
+
+  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item--selected,
+  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item--selected:hover {
+    background-color: $ui-01;
 
     .#{$prefix}--tabs__nav-link:focus,
     .#{$prefix}--tabs__nav-link:active {
@@ -202,7 +213,8 @@
   }
 
   .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:focus,
-  .#{$prefix}--tabs__nav-item--disabled a.#{$prefix}--tabs__nav-link:active {
+  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:active {
+    outline: none;
     border-bottom: $tab-underline-disabled;
     outline: none;
   }
