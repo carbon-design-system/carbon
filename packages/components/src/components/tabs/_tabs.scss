@@ -203,6 +203,8 @@
   }
 
   .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
+    cursor: not-allowed;
+    color: $tab-text-disabled;
     border-bottom: $tab-underline-disabled;
     cursor: no-drop;
   }
