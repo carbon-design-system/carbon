@@ -8,7 +8,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import { keys, match, matches } from '../../internal/keyboard';
 
@@ -16,12 +15,6 @@ const { prefix } = settings;
 
 export default class Tabs extends React.Component {
   static propTypes = {
-    /**
-     * Specify the text to be read by screen-readers when visiting the <Tabs>
-     * component
-     */
-    ariaLabel: PropTypes.string,
-
     /**
      * Pass in a collection of <Tab> children to be rendered depending on the
      * currently selected tab
@@ -65,20 +58,9 @@ export default class Tabs extends React.Component {
     onSelectionChange: PropTypes.func,
 
     /**
-     * By default, this value is "navigation". You can also provide an alternate
-     * role if it makes sense from the accessibility-side
-     */
-    role: PropTypes.string.isRequired,
-
-    /**
      * Optionally provide an index for the currently selected <Tab>
      */
     selected: PropTypes.number,
-
-    /**
-     * Choose whether or not to automatically change selection on focus
-     */
-    selectionMode: PropTypes.oneOf(['automatic', 'manual']),
 
     /**
      * Provide a className that is applied to the <TabContent> components
@@ -97,12 +79,9 @@ export default class Tabs extends React.Component {
   };
 
   static defaultProps = {
-    iconDescription: 'show menu options',
     role: 'navigation',
     type: 'default',
-    triggerHref: '#',
     selected: 0,
-    ariaLabel: 'listbox',
     selectionMode: 'automatic',
   };
 
@@ -147,9 +126,6 @@ export default class Tabs extends React.Component {
       evt.preventDefault();
 
       this.selectTabAt(index, onSelectionChange);
-      this.setState({
-        dropdownHidden: true,
-      });
     };
   };
 
@@ -180,9 +156,6 @@ export default class Tabs extends React.Component {
     return (index, evt) => {
       if (matches(evt, [keys.Enter, keys.Space])) {
         this.selectTabAt(index, onSelectionChange);
-        this.setState({
-          dropdownHidden: true,
-        });
       }
 
       if (window.matchMedia('(min-width: 42rem)').matches) {
@@ -201,12 +174,6 @@ export default class Tabs extends React.Component {
     };
   };
 
-  handleDropdownClick = () => {
-    this.setState({
-      dropdownHidden: !this.state.dropdownHidden,
-    });
-  };
-
   selectTabAt = (index, onSelectionChange) => {
     if (this.state.selected !== index) {
       this.setState({
@@ -220,10 +187,7 @@ export default class Tabs extends React.Component {
 
   render() {
     const {
-      ariaLabel,
-      iconDescription,
       className,
-      triggerHref,
       role,
       type,
       onSelectionChange,
@@ -245,8 +209,7 @@ export default class Tabs extends React.Component {
      * panel and separate components when it looks like a select list.
      */
     const tabsWithProps = this.getTabs().map((tab, index) => {
-      const tabPanelIndex = index === this.state.selected ? 0 : -1;
-      const tabIndex = !this.state.dropdownHidden ? 0 : tabPanelIndex;
+      const tabIndex = index === this.state.selected ? 0 : -1;
       const newTab = React.cloneElement(tab, {
         index,
         selected: index === this.state.selected,
@@ -286,35 +249,12 @@ export default class Tabs extends React.Component {
       tabs: classNames(`${prefix}--tabs`, className, {
         [`${prefix}--tabs--container`]: type === 'container',
       }),
-      tablist: classNames(`${prefix}--tabs__nav`, {
-        [`${prefix}--tabs__nav--hidden`]: this.state.dropdownHidden,
-      }),
+      tablist: classNames(`${prefix}--tabs__nav`),
     };
-
-    const selectedTab = this.getTabAt(this.state.selected, true);
-    const selectedLabel = selectedTab ? selectedTab.props.label : '';
 
     return (
       <>
         <div {...other} className={classes.tabs} role={role}>
-          <div
-            role="listbox"
-            aria-label={ariaLabel}
-            tabIndex={0}
-            className={`${prefix}--tabs-trigger`}
-            onClick={this.handleDropdownClick}
-            onKeyPress={this.handleDropdownClick}>
-            <a
-              tabIndex={-1}
-              className={`${prefix}--tabs-trigger-text`}
-              href={triggerHref}
-              onClick={this.handleDropdownClick}>
-              {selectedLabel}
-            </a>
-            <ChevronDown16 aria-hidden="true">
-              {iconDescription && <title>{iconDescription}</title>}
-            </ChevronDown16>
-          </div>
           <ul role="tablist" className={classes.tablist}>
             {tabsWithProps}
           </ul>
