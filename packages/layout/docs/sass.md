@@ -127,7 +127,7 @@ Carbon condensed gutter size in rem
 <summary>Source code</summary>
 
 ```scss
-$carbon--grid-gutter--condensed: carbon--rem(2px);
+$carbon--grid-gutter--condensed: carbon--rem(1px);
 ```
 
 </details>

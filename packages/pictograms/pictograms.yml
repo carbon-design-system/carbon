@@ -564,6 +564,8 @@
   aliases: []
 - name: global--network
   friendly_name: Global network
+- name: global--partner
+  friendly_name: Global partner
 - name: global--security
   friendly_name: Global security
   aliases: []
@@ -661,6 +663,8 @@
   friendly_name: Innovate
   aliases:
     - innovate
+- name: inspect--data
+  friendly_name: Inspect data
 - name: integration
   friendly_name: Integration
   aliases:
@@ -870,6 +874,8 @@
   friendly_name: Networking 04
 - name: networking--05
   friendly_name: Networking 05
+- name: networking--06
+  friendly_name: Networking 06
 - name: nice
   friendly_name: Nice
   aliases:

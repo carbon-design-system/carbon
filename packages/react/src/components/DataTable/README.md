@@ -104,7 +104,7 @@ function App() {
             <TableHead>
               <TableRow>
                 {headers.map((header) => (
-                  <TableHeader {...getHeaderProps({ header })}>
+                  <TableHeader key={header.key} {...getHeaderProps({ header })}>
                     {header.header}
                   </TableHeader>
                 ))}
@@ -290,7 +290,7 @@ const renderProp = ({ rows, headers, getHeaderProps }) => (
       <TableHead>
         <TableRow>
           {headers.map((header) => (
-            <TableHeader {...getHeaderProps({ header })}>
+            <TableHeader key={header.key} {...getHeaderProps({ header })}>
               {header.header}
             </TableHeader>
           ))}
@@ -397,7 +397,7 @@ following:
         <TableHead>
           <TableRow>
             {headers.map((header) => (
-              <TableHeader {...getHeaderProps({ header })}>
+              <TableHeader key={header.key} {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
             ))}
@@ -478,7 +478,7 @@ In practice, the combination of these components looks like the following:
             {/* add the expand header before all other headers */}
             <TableExpandHeader />
             {headers.map(header => (
-              <TableHeader {...getHeaderProps({ header })}>
+              <TableHeader key={header.key} {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
             ))}
@@ -550,7 +550,7 @@ In practice, it looks like the following in a `DataTable`:
           <TableRow>
             <TableSelectAll {...getSelectionProps()} />
             {headers.map(header => (
-              <TableHeader {...getHeaderProps({ header })}>
+              <TableHeader key={header.key} {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
             ))}
@@ -637,7 +637,7 @@ In practice, this looks like the following:
         <TableHead>
           <TableRow>
             {headers.map((header) => (
-              <TableHeader {...getHeaderProps({ header })}>
+              <TableHeader key={header.key} {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
             ))}
@@ -736,7 +736,7 @@ In practice, this looks like the following:
           <TableRow>
             <TableSelectAll {...getSelectionProps()} />
             {headers.map(header => (
-              <TableHeader {...getHeaderProps({ header })}>
+              <TableHeader key={header.key} {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
             ))}
