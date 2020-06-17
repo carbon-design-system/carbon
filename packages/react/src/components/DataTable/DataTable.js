@@ -153,6 +153,10 @@ export default class DataTable extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    if (prevProps === this.props) {
+      return;
+    }
+
     const prevRowIds = prevProps.rows.map((row) => row.id);
     const rowIds = this.props.rows.map((row) => row.id);
 
