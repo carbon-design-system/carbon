@@ -154,20 +154,15 @@
   //-----------------------------
   .#{$prefix}--tabs__nav-link {
     @include focus-outline('reset');
-
-    display: inline-block;
-    width: calc(100% - 32px);
-    height: rem(40px);
-    margin: 0 $spacing-05;
-    padding: $spacing-04 0;
-    overflow: hidden;
     color: $text-02;
-    font-weight: 400;
-    line-height: 1rem;
-    white-space: nowrap;
     text-decoration: none;
+    font-weight: 400;
+    padding: $spacing-04 $spacing-05 $spacing-03;
+    width: rem(160px);
+    white-space: nowrap;
     text-overflow: ellipsis;
-    border-bottom: 1px solid $ui-03;
+    border-bottom: $tab-underline-color;
+    overflow: hidden;
     transition: border $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
 
