@@ -33,9 +33,12 @@
   }
 
   .#{$prefix}--tabs__nav {
-    @include box-shadow;
-
-    position: absolute;
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
     list-style: none;
     transition: max-height $duration--fast-01 motion(standard, productive);
     overflow: hidden;
