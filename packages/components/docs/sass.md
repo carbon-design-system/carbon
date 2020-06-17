@@ -3383,7 +3383,6 @@ $carbon--spacing-03: 0.5rem;
   - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -3691,7 +3690,6 @@ $spacing-03: $carbon--spacing-03;
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [modal [mixin]](#modal-mixin)
   - [select [mixin]](#select-mixin)
@@ -6464,7 +6462,6 @@ $interactive-01: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
@@ -6614,7 +6611,6 @@ $ui-01: if(
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
@@ -6653,7 +6649,6 @@ $ui-02: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [tile [mixin]](#tile-mixin)
@@ -6771,7 +6766,6 @@ $ui-05: if(
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [pagination [mixin]](#pagination-mixin)
@@ -6926,7 +6920,6 @@ $text-04: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
 
 ### ✅text-05 [variable]
@@ -7107,7 +7100,6 @@ $link-01: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [link [mixin]](#link-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
@@ -7842,7 +7834,6 @@ $hover-ui: if(
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
@@ -8228,7 +8219,6 @@ $highlight: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
 
 ### ✅decorative-01 [variable]
 
@@ -15776,7 +15766,7 @@ Data table core styles
 
   .#{$prefix}--data-table th,
   .#{$prefix}--data-table td {
-    vertical-align: top;
+    vertical-align: middle;
     text-align: left;
   }
 
@@ -15797,8 +15787,8 @@ Data table core styles
   }
 
   .#{$prefix}--data-table .#{$prefix}--table-header-label {
-    display: block;
-    padding: rem(14px) $spacing-05;
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
     text-align: left;
   }
 
@@ -15808,8 +15798,8 @@ Data table core styles
     color: $text-02;
     border-top: 1px solid $ui-01;
     border-bottom: 1px solid $ui-03;
-    padding: rem(14px) $spacing-05;
-    padding-bottom: rem(13px);
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
 
     + td:first-of-type {
       padding-left: $spacing-04;
@@ -15948,20 +15938,31 @@ Data table core styles
     // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
     position: static;
     background: $ui-03;
-    padding: rem(12px) $spacing-03 0 $spacing-05;
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
     width: rem(
       44px
     ); // 16px padding left + 8px padding right + 20px checkbox width
     transition: background-color $duration--fast-01 motion(entrance, productive);
   }
 
-  .#{$prefix}--data-table td.#{$prefix}--table-column-checkbox {
-    padding-top: rem(11px);
-    padding-bottom: 0;
+  .#{$prefix}--data-table--tall .#{$prefix}--table-column-checkbox {
+    padding-top: rem(13px);
+  }
+
+  .#{$prefix}--data-table--tall .#{$prefix}--table-column-radio {
+    padding-top: $spacing-05;
   }
 
   .#{$prefix}--date-table tbody th.#{$prefix}--table-column-checkbox:hover {
     background: $data-table-column-hover;
+  }
+
+  //----------------------------------------------------------------------------
+  // Radio
+  //----------------------------------------------------------------------------
+  .#{$prefix}--table-column-radio {
+    width: 48px;
   }
 
   // default selected row + zebra select - even child
@@ -16120,13 +16121,13 @@ Data table core styles
     padding-top: 1rem;
   }
 
-  .#{$prefix}--data-table--cell-secondary-text {
-    @include type-style('label-01');
+  .#{$prefix}--data-table--tall th,
+  .#{$prefix}--data-table--tall td {
+    vertical-align: top;
   }
 
-  .#{$prefix}--data-table.#{$prefix}--data-table--tall
-    .#{$prefix}--table-column-checkbox {
-    padding-top: rem(12px);
+  .#{$prefix}--data-table--cell-secondary-text {
+    @include type-style('label-01');
   }
 
   //----------------------------------------------------------------------------
@@ -16358,7 +16359,7 @@ Data table expandable styles
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
-    border-bottom: 1px solid transparent; // first td doesn't have a visible border
+    border-bottom: 1px solid $hover-ui; // first td doesn't have a visible border
   }
 
   // child row when hovering on expanded parent
@@ -16398,10 +16399,18 @@ Data table expandable styles
   .#{$prefix}--data-table td.#{$prefix}--table-expand {
     width: 2.5rem;
     min-width: 2.5rem;
-    height: 3rem;
-    vertical-align: top;
-    padding: 0;
     border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--data-table td.#{$prefix}--table-expand,
+  th.#{$prefix}--table-expand {
+    padding: 0 $spacing-05;
+  }
+
+  .#{$prefix}--data-table--tall td.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--tall th.#{$prefix}--table-expand {
+    padding-top: rem(16px);
+    padding-bottom: rem(16px);
   }
 
   .#{$prefix}--data-table
@@ -16417,15 +16426,8 @@ Data table expandable styles
 
   .#{$prefix}--table-expand__button {
     @include button-reset('false');
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-  }
-
-  .#{$prefix}--data-table--short .#{$prefix}--table-expand__button {
-    height: auto;
+    height: rem(16px);
+    vertical-align: inherit;
   }
 
   .#{$prefix}--table-expand__button:focus {
@@ -16440,17 +16442,6 @@ Data table expandable styles
     fill: $ui-05;
     transform: rotate(90deg);
     transition: transform $duration--moderate-01 motion(standard, productive);
-  }
-
-  th.#{$prefix}--table-expand {
-    position: relative;
-    vertical-align: middle;
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
-  }
-
-  th.#{$prefix}--table-expand + th.#{$prefix}--table-column-checkbox {
-    padding-left: $spacing-03;
   }
 
   // fix expanded parent separating border length
@@ -16624,7 +16615,6 @@ Data table expandable styles
   - [text-01 [variable]](#text-01-variable)
   - [focus [variable]](#focus-variable)
   - [ui-05 [variable]](#ui-05-variable)
-  - [spacing-03 [variable]](#spacing-03-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [selected-ui [variable]](#selected-ui-variable)
@@ -16983,332 +16973,12 @@ Date picker styles
 
   .#{$prefix}--date-picker--range
     > .#{$prefix}--date-picker-container:first-child {
-    margin-right: rem(1px);
+    margin-right: rem(2px);
   }
 
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker-container,
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker__input {
     width: rem(143.5px);
-  }
-
-  .#{$prefix}--date-picker__calendar,
-  .flatpickr-calendar.open {
-    @include box-shadow;
-    background-color: $ui-01;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: $carbon--spacing-02 $carbon--spacing-02 $carbon--spacing-03
-      $carbon--spacing-02;
-    width: rem(288px) !important;
-    height: rem(336px);
-    border-radius: 0;
-    border: none;
-    overflow: hidden;
-    margin-top: -2px;
-
-    &:before,
-    &:after {
-      display: none;
-    }
-
-    &:focus {
-      outline: 1px solid $interactive-01;
-    }
-  }
-
-  .#{$prefix}--date-picker__month,
-  .flatpickr-month {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: rem(40px);
-    margin-bottom: $carbon--spacing-02;
-  }
-
-  .#{$prefix}--date-picker__month .flatpickr-prev-month,
-  .#{$prefix}--date-picker__month .flatpickr-next-month,
-  .flatpickr-months .flatpickr-prev-month,
-  .flatpickr-months .flatpickr-next-month {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    height: rem(40px);
-    width: rem(40px);
-    padding: 0;
-    fill: $text-01;
-    transition: background-color $duration--fast-01 motion(standard, productive);
-
-    &:hover {
-      background-color: $hover-ui;
-    }
-  }
-
-  .flatpickr-current-month .numInputWrapper {
-    width: 7ch;
-  }
-
-  .#{$prefix}--date-picker__month .flatpickr-current-month,
-  .flatpickr-month .flatpickr-current-month {
-    @include type-style('productive-heading-01');
-    padding: 0;
-  }
-
-  .#{$prefix}--date-picker__month .flatpickr-current-month svg,
-  .flatpickr-month .flatpickr-current-month svg {
-    fill: $text-01;
-  }
-
-  .#{$prefix}--date-picker__month .flatpickr-current-month .cur-month,
-  .flatpickr-month .flatpickr-current-month .cur-month {
-    margin-right: $carbon--spacing-02;
-    color: $text-01;
-  }
-
-  .#{$prefix}--date-picker__month .numInputWrapper .numInput,
-  .flatpickr-month .numInputWrapper .numInput {
-    font-weight: 600;
-    color: $text-01;
-    background-color: $field-01;
-    border: none;
-    border-radius: 0;
-    padding: $carbon--spacing-02;
-    // Added in when upgraded to Flatpickr 4.5.5
-    -moz-appearance: textfield; /* Firefox */
-
-    &:focus {
-      outline: 1px solid $interactive-01;
-    }
-
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-      // Added in when upgraded to Flatpickr 4.5.5
-      -webkit-appearance: none;
-      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-    }
-  }
-
-  .#{$prefix}--date-picker__month .numInputWrapper span.arrowUp,
-  .#{$prefix}--date-picker__month .numInputWrapper span.arrowDown,
-  .flatpickr-month .numInputWrapper span.arrowUp,
-  .flatpickr-month .numInputWrapper span.arrowDown {
-    left: 2.6rem;
-    border: none;
-    width: rem(12px);
-
-    &:hover {
-      background: none;
-
-      &:after {
-        border-bottom-color: $interactive-01;
-        border-top-color: $interactive-01;
-      }
-    }
-
-    &:after {
-      border-bottom-color: $icon-01;
-      border-top-color: $icon-01;
-    }
-  }
-
-  .#{$prefix}--date-picker__month .numInputWrapper span.arrowUp,
-  .flatpickr-month .numInputWrapper span.arrowUp {
-    top: 4px;
-  }
-
-  .#{$prefix}--date-picker__month .numInputWrapper span.arrowDown,
-  .flatpickr-month .numInputWrapper span.arrowDown {
-    top: 11px;
-  }
-
-  span.#{$prefix}--date-picker__weekday,
-  span.flatpickr-weekday {
-    @include type-style('body-short-01');
-    color: $text-01;
-    font-weight: 400;
-  }
-
-  .#{$prefix}--date-picker__day,
-  .flatpickr-day {
-    @include type-style('body-short-01');
-    height: rem(40px);
-    width: rem(40px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: $text-01;
-    border-radius: 0;
-    border: none;
-    transition: all $duration--fast-01 motion(standard, productive);
-
-    &:hover {
-      background: $hover-ui;
-    }
-
-    &:focus {
-      @include focus-outline('outline');
-      outline-color: $interactive-01;
-    }
-  }
-
-  .#{$prefix}--date-picker__day.nextMonthDay,
-  .#{$prefix}--date-picker__day.prevMonthDay {
-    color: $text-05;
-  }
-
-  .#{$prefix}--date-picker__day.today,
-  .flatpickr-day.today {
-    position: relative;
-    color: $link-01;
-    font-weight: 600;
-
-    &::after {
-      content: '';
-      position: absolute;
-      display: block;
-      bottom: rem(7px);
-      left: 50%;
-      transform: translateX(-50%);
-      height: rem(4px);
-      width: rem(4px);
-      background-color: $link-01;
-    }
-  }
-
-  .#{$prefix}--date-picker__day.today.no-border,
-  .flatpickr-day.today.no-border {
-    border: none;
-  }
-
-  .#{$prefix}--date-picker__day.today.selected {
-    border: 2px solid $interactive-01;
-    &::after {
-      display: none;
-    }
-  }
-
-  .#{$prefix}--date-picker__day.flatpickr-day.flatpickr-disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-    color: $disabled-02;
-
-    &:hover {
-      background: transparent;
-    }
-  }
-
-  .#{$prefix}--date-picker__day.inRange,
-  .flatpickr-day.inRange {
-    background-color: $highlight;
-    color: $text-01;
-  }
-
-  .#{$prefix}--date-picker__day.selected,
-  .flatpickr-day.selected {
-    color: $text-04;
-    background-color: $interactive-01;
-
-    &:focus {
-      outline: rem(1px) solid $ui-02;
-      outline-offset: rem(-3px);
-    }
-  }
-
-  .#{$prefix}--date-picker__day.startRange.selected,
-  .flatpickr-day.startRange.selected {
-    box-shadow: none;
-    z-index: 2;
-  }
-
-  .#{$prefix}--date-picker__day.endRange,
-  .flatpickr-day.endRange {
-    &:hover {
-      @include focus-outline('outline');
-      background: $ui-01;
-      color: $text-01;
-    }
-  }
-
-  .#{$prefix}--date-picker__day.endRange.inRange,
-  .flatpickr-day.endRange.inRange {
-    @include focus-outline('outline');
-    background: $ui-01;
-    z-index: 3;
-  }
-
-  .#{$prefix}--date-picker__day.endRange.inRange.selected,
-  .flatpickr-day.endRange.inRange.selected {
-    color: $text-04;
-    background: $interactive-01;
-  }
-
-  .#{$prefix}--date-picker__day.startRange.inRange:not(.selected),
-  .flatpickr-day.startRange.inRange:not(.selected) {
-    @include focus-outline('outline');
-    background: $ui-01;
-    z-index: 3;
-  }
-
-  .#{$prefix}--date-picker__days,
-  .dayContainer {
-    width: 100%;
-    min-width: 100%;
-    height: rem(246px);
-  }
-
-  .flatpickr-innerContainer,
-  .flatpickr-rContainer {
-    width: 100%;
-    height: auto;
-  }
-
-  .#{$prefix}--date-picker__weekdays,
-  .flatpickr-weekdays,
-  .flatpickr-weekdaycontainer {
-    width: 100%;
-  }
-
-  .flatpickr-weekdays {
-    height: rem(40px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .flatpickr-weekdaycontainer {
-    display: flex;
-  }
-
-  .flatpickr-months {
-    display: flex;
-    width: 100%;
-    position: relative;
-  }
-
-  .flatpickr-prev-month,
-  .flatpickr-next-month {
-    padding-top: 12px;
-  }
-
-  .flatpickr-prev-month:hover svg,
-  .flatpickr-next-month:hover svg {
-    fill: $text-01;
-  }
-
-  .flatpickr-next-month.disabled,
-  .flatpickr-prev-month.disabled {
-    svg {
-      fill: $ui-05;
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    &:hover {
-      svg {
-        fill: $ui-05;
-      }
-    }
   }
 
   // Skeleton State
@@ -17346,15 +17016,6 @@ Date picker styles
   - [text-05 [variable]](#text-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
-  - [ui-01 [variable]](#ui-01-variable)
-  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [interactive-01 [variable]](#interactive-01-variable)
-  - [hover-ui [variable]](#hover-ui-variable)
-  - [link-01 [variable]](#link-01-variable)
-  - [highlight [variable]](#highlight-variable)
-  - [text-04 [variable]](#text-04-variable)
-  - [ui-02 [variable]](#ui-02-variable)
-  - [ui-05 [variable]](#ui-05-variable)
 
 ## dropdown
 
