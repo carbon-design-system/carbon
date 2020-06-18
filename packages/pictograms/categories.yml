@@ -23,6 +23,15 @@ categories:
       - trash
       - upload
       - upload--alt
+  - name: Blockchain
+    members:
+      - connected--ecosystem
+      - consumer--engagement--food--journey
+      - supply--chain--optimization--01
+      - supply--chain--optimization--02
+      - transparency--01
+      - transparency--02
+      - trust
   - name: Building Structure
     members:
       - alarm
@@ -317,7 +326,12 @@ categories:
     members:
       - agriculture
       - bulldozer
+      - cheese
       - farm
+      - farm--01
+      - farm--02
+      - farmer--01
+      - farmer--02
       - oil--pump
       - oil--rig
       - power
