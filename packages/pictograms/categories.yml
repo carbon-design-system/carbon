@@ -326,7 +326,12 @@ categories:
     members:
       - agriculture
       - bulldozer
+      - cheese
       - farm
+      - farm--01
+      - farm--02
+      - farmer--01
+      - farmer--02
       - oil--pump
       - oil--rig
       - power

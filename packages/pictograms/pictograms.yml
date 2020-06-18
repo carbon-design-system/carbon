@@ -204,6 +204,10 @@
 - name: chart--t-SNE
   friendly_name: chart--t-SNE
   aliases: []
+- name: cheese
+  friendly_name: Cheese
+  aliases:
+    - cheese
 - name: cherries
   friendly_name: Cherries
   aliases:
@@ -480,6 +484,22 @@
   friendly_name: Farm
   aliases:
     - farm
+- name: farm--01
+  friendly_name: Farm 01
+  aliases:
+    - farm 01
+- name: farm--02
+  friendly_name: Farm 02
+  aliases:
+    - farm 02
+- name: farmer--01
+  friendly_name: Farmer 01
+  aliases:
+    - farmer 01
+- name: farmer--02
+  friendly_name: Farmer 02
+  aliases:
+    - farmer 02
 - name: faucet
   friendly_name: Faucet
   aliases:
