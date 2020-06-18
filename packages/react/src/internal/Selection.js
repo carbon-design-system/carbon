@@ -15,6 +15,7 @@ export function useSelection({
   initialSelectedItems = [],
 }) {
   const isMounted = useRef(false);
+  const savedOnChange = useRef(onChange);
   const [selectedItems, setSelectedItems] = useState(initialSelectedItems);
   const onItemChange = useCallback(
     (item) => {
@@ -49,10 +50,14 @@ export function useSelection({
   }, [disabled]);
 
   useEffect(() => {
-    if (isMounted.current === true && onChange) {
-      onChange({ selectedItems });
+    savedOnChange.current = onChange;
+  }, [onChange]);
+
+  useEffect(() => {
+    if (isMounted.current === true && savedOnChange.current) {
+      savedOnChange.current({ selectedItems });
     }
-  }, [onChange, selectedItems]);
+  }, [selectedItems]);
 
   useEffect(() => {
     isMounted.current = true;
