@@ -37,7 +37,9 @@ export default function TreeView({
       if (!selected.includes(value)) {
         setSelected(selected.concat(value));
       } else {
-        setSelected(selected.filter(selectedValue => selectedValue !== value));
+        setSelected(
+          selected.filter((selectedValue) => selectedValue !== value)
+        );
       }
     } else {
       setSelected([value]);
@@ -47,7 +49,7 @@ export default function TreeView({
     }
   };
   let focusTarget = false;
-  const nodesWithProps = React.Children.map(children, node => {
+  const nodesWithProps = React.Children.map(children, (node) => {
     const sharedNodeProps = {
       depth: 0,
       onSelect: handleSelect,
@@ -63,7 +65,7 @@ export default function TreeView({
     }
   });
 
-  const handleKeyDown = event => {
+  const handleKeyDown = (event) => {
     event.stopPropagation();
     if (matches(event, [keys.ArrowUp, keys.ArrowDown])) {
       event.preventDefault();
@@ -79,7 +81,7 @@ export default function TreeView({
     if (nextFocusNode && nextFocusNode !== event.target) {
       Array.prototype.forEach.call(
         treeRootRef?.current?.querySelectorAll('[tabIndex="0"]') ?? [],
-        item => {
+        (item) => {
           item.tabIndex = -1;
         }
       );
@@ -95,7 +97,7 @@ export default function TreeView({
     treeWalker.current =
       treeWalker.current ??
       document.createTreeWalker(treeRootRef?.current, NodeFilter.SHOW_ELEMENT, {
-        acceptNode: function(node) {
+        acceptNode: function (node) {
           if (node.classList.contains(`${prefix}--tree-node--disabled`)) {
             return NodeFilter.FILTER_REJECT;
           }

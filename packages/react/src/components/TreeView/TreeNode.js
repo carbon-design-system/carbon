@@ -31,7 +31,7 @@ export default function TreeNode({
   const [expanded, setExpanded] = useState(isExpanded);
   const currentNode = useRef(null);
   const currentNodeLabel = useRef(null);
-  const nodesWithProps = React.Children.map(children, node => {
+  const nodesWithProps = React.Children.map(children, (node) => {
     if (React.isValidElement(node)) {
       return React.cloneElement(node, {
         depth: depth + 1,
@@ -53,24 +53,24 @@ export default function TreeNode({
   const toggleClasses = classNames(`${prefix}--tree-parent-node__toggle-icon`, {
     [`${prefix}--tree-parent-node__toggle-icon--expanded`]: expanded,
   });
-  const handleToggleClick = event => {
+  const handleToggleClick = (event) => {
     if (onToggle) {
       onToggle(event, { isExpanded: !expanded });
     }
     setExpanded(!expanded);
   };
-  const handleClick = event => {
+  const handleClick = (event) => {
     event.stopPropagation();
     if (onSelect && !disabled) {
       onSelect(event, { value });
     }
   };
-  const handleKeyDown = event => {
+  const handleKeyDown = (event) => {
     if (matches(event, [keys.ArrowLeft, keys.ArrowRight, keys.Enter])) {
       event.stopPropagation();
     }
     if (match(event, keys.ArrowLeft)) {
-      const findParentTreeNode = node => {
+      const findParentTreeNode = (node) => {
         if (node.classList.contains(`${prefix}--tree-parent-node`)) {
           return node;
         }
