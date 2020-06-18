@@ -303,6 +303,8 @@
   friendly_name: Connect
   aliases:
     - connect
+- name: connected--ecosystem
+  friendly_name: Connected ecosystem
 - name: console
   friendly_name: Console
   aliases:
@@ -313,6 +315,8 @@
   friendly_name: Construct
   aliases:
     - construct
+- name: consumer--engagement--food--journey
+  friendly_name: Consumer engagement food journey
 - name: conversation
   friendly_name: Conversation
   aliases:
@@ -349,6 +353,8 @@
   friendly_name: Design and development 01
 - name: design--and--development--02
   friendly_name: Design and development 02
+- name: design-thinking-team
+  friendly_name: Design thinking team
 - name: desktop
   friendly_name: Desktop
   aliases:
@@ -584,6 +590,8 @@
   aliases: []
 - name: global--network
   friendly_name: Global network
+- name: global--partner
+  friendly_name: Global partner
 - name: global--security
   friendly_name: Global security
   aliases: []
@@ -681,6 +689,8 @@
   friendly_name: Innovate
   aliases:
     - innovate
+- name: inspect--data
+  friendly_name: Inspect data
 - name: integration
   friendly_name: Integration
   aliases:
@@ -890,6 +900,8 @@
   friendly_name: Networking 04
 - name: networking--05
   friendly_name: Networking 05
+- name: networking--06
+  friendly_name: Networking 06
 - name: nice
   friendly_name: Nice
   aliases:
@@ -1222,6 +1234,10 @@
     - sunny
 - name: sunny--hazy
   friendly_name: Sunny hazy
+- name: supply--chain--optimization--01
+  friendly_name: Supply chain optimization 01
+- name: supply--chain--optimization--02
+  friendly_name: Supply chain optimization 02
 - name: support--services
   friendly_name: Support services
 - name: swipe--left
@@ -1238,6 +1254,10 @@
     - target
 - name: target--area
   friendly_name: Target area
+- name: team--alignment
+  friendly_name: Team alignment
+- name: teammates
+  friendly_name: Teammates
 - name: tel--aviv
   friendly_name: Tel aviv
 - name: telecom
@@ -1324,6 +1344,10 @@
   friendly_name: Transform
   aliases:
     - transform
+- name: transparency--01
+  friendly_name: Transparency 01
+- name: transparency--02
+  friendly_name: Transparency 02
 - name: trash
   friendly_name: Trash
   aliases:
@@ -1334,6 +1358,8 @@
 - name: tree--map
   friendly_name: tree--map
   aliases: []
+- name: trust
+  friendly_name: Trust
 - name: university
   friendly_name: University
   aliases:
@@ -1350,10 +1376,14 @@
     - upload
 - name: upload--alt
   friendly_name: Upload alt
+- name: user
+  friendly_name: User
 - name: user--analytics
   friendly_name: User analytics
 - name: user--insights
   friendly_name: User insights
+- name: user--profile
+  friendly_name: User profile
 - name: user--search
   friendly_name: User search
 - name: vancouver

@@ -23,6 +23,15 @@ categories:
       - trash
       - upload
       - upload--alt
+  - name: Blockchain
+    members:
+      - connected--ecosystem
+      - consumer--engagement--food--journey
+      - supply--chain--optimization--01
+      - supply--chain--optimization--02
+      - transparency--01
+      - transparency--02
+      - trust
   - name: Building Structure
     members:
       - alarm
@@ -404,6 +413,8 @@ categories:
     members:
       - global--network
       - integration
+      - inspect--data
+      - global--partner
       - network
       - network--services
       - networking--01
@@ -411,6 +422,7 @@ categories:
       - networking--03
       - networking--04
       - networking--05
+      - networking--06
       - private--network
       - private--network--01
       - private--network--alt
@@ -422,6 +434,7 @@ categories:
   - name: People
     members:
       - advocate
+      - design-thinking-team
       - expand--user
       - face--dissatisfied
       - face--neutral
@@ -445,6 +458,10 @@ categories:
       - person--08
       - person--09
       - renew--team
+      - team--alignment
+      - teammates
+      - user
+      - user--profile
       - user--search
   - name: Retail
     members:

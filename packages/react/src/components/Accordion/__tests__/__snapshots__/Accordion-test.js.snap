@@ -22,7 +22,6 @@ exports[`Accordion should render 1`] = `
           className="bx--accordion__heading"
           onClick={[Function]}
           onKeyDown={[Function]}
-          title="Heading A"
           type="button"
         >
           <button
@@ -31,7 +30,6 @@ exports[`Accordion should render 1`] = `
             className="bx--accordion__heading"
             onClick={[Function]}
             onKeyDown={[Function]}
-            title="Heading A"
             type="button"
           >
             <ForwardRef(ChevronRight16)
@@ -92,7 +90,6 @@ exports[`Accordion should render 1`] = `
           className="bx--accordion__heading"
           onClick={[Function]}
           onKeyDown={[Function]}
-          title="Heading B"
           type="button"
         >
           <button
@@ -101,7 +98,6 @@ exports[`Accordion should render 1`] = `
             className="bx--accordion__heading"
             onClick={[Function]}
             onKeyDown={[Function]}
-            title="Heading B"
             type="button"
           >
             <ForwardRef(ChevronRight16)
@@ -162,7 +158,6 @@ exports[`Accordion should render 1`] = `
           className="bx--accordion__heading"
           onClick={[Function]}
           onKeyDown={[Function]}
-          title="Heading C"
           type="button"
         >
           <button
@@ -171,7 +166,6 @@ exports[`Accordion should render 1`] = `
             className="bx--accordion__heading"
             onClick={[Function]}
             onKeyDown={[Function]}
-            title="Heading C"
             type="button"
           >
             <ForwardRef(ChevronRight16)
