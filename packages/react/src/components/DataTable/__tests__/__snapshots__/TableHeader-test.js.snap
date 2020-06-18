@@ -23,11 +23,11 @@ exports[`DataTable.TableHeader should have an active and ascending class if sort
               <th
                 scope="col"
               >
-                <span
+                <div
                   className="bx--table-header-label"
                 >
                   Header
-                </span>
+                </div>
               </th>
             </TableHeader>
           </tr>
@@ -61,11 +61,11 @@ exports[`DataTable.TableHeader should have an active class if it is the sort hea
               <th
                 scope="col"
               >
-                <span
+                <div
                   className="bx--table-header-label"
                 >
                   Header
-                </span>
+                </div>
               </th>
             </TableHeader>
           </tr>
@@ -99,11 +99,11 @@ exports[`DataTable.TableHeader should render 1`] = `
               <th
                 scope="col"
               >
-                <span
+                <div
                   className="bx--table-header-label"
                 >
                   Header
-                </span>
+                </div>
               </th>
             </TableHeader>
           </tr>
@@ -137,11 +137,11 @@ exports[`DataTable.TableHeader should render 2`] = `
               <th
                 scope="col"
               >
-                <span
+                <div
                   className="bx--table-header-label"
                 >
                   Header
-                </span>
+                </div>
               </th>
             </TableHeader>
           </tr>

@@ -70,7 +70,7 @@ const TableHeader = React.forwardRef(function TableHeader(
         scope={scope}
         colSpan={colSpan}
         ref={ref}>
-        <span className={`${prefix}--table-header-label`}>{children}</span>
+        <div className={`${prefix}--table-header-label`}>{children}</div>
       </th>
     );
   }
@@ -92,7 +92,7 @@ const TableHeader = React.forwardRef(function TableHeader(
       ref={ref}
       scope={scope}>
       <button className={className} onClick={onClick} {...rest}>
-        <span className={`${prefix}--table-header-label`}>{children}</span>
+        <div className={`${prefix}--table-header-label`}>{children}</div>
         <Arrow
           className={`${prefix}--table-sort__icon`}
           aria-label={t('carbon.table.header.icon.description', {
