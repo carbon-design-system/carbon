@@ -409,6 +409,8 @@ categories:
     members:
       - global--network
       - integration
+      - inspect--data
+      - global--partner
       - network
       - network--services
       - networking--01
@@ -416,6 +418,7 @@ categories:
       - networking--03
       - networking--04
       - networking--05
+      - networking--06
       - private--network
       - private--network--01
       - private--network--alt
