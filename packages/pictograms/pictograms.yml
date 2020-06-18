@@ -345,6 +345,8 @@
   friendly_name: Design and development 01
 - name: design--and--development--02
   friendly_name: Design and development 02
+- name: design-thinking-team
+  friendly_name: Design thinking team
 - name: desktop
   friendly_name: Desktop
   aliases:
@@ -1224,6 +1226,10 @@
     - target
 - name: target--area
   friendly_name: Target area
+- name: team--alignment
+  friendly_name: Team alignment
+- name: teammates
+  friendly_name: Teammates
 - name: tel--aviv
   friendly_name: Tel aviv
 - name: telecom
@@ -1336,10 +1342,14 @@
     - upload
 - name: upload--alt
   friendly_name: Upload alt
+- name: user
+  friendly_name: User
 - name: user--analytics
   friendly_name: User analytics
 - name: user--insights
   friendly_name: User insights
+- name: user--profile
+  friendly_name: User profile
 - name: user--search
   friendly_name: User search
 - name: vancouver

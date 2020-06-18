@@ -420,6 +420,7 @@ categories:
   - name: People
     members:
       - advocate
+      - design-thinking-team
       - expand--user
       - face--dissatisfied
       - face--neutral
@@ -443,6 +444,10 @@ categories:
       - person--08
       - person--09
       - renew--team
+      - team--alignment
+      - teammates
+      - user
+      - user--profile
       - user--search
   - name: Retail
     members:
