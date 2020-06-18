@@ -299,6 +299,8 @@
   friendly_name: Connect
   aliases:
     - connect
+- name: connected--ecosystem
+  friendly_name: Connected ecosystem
 - name: console
   friendly_name: Console
   aliases:
@@ -309,6 +311,8 @@
   friendly_name: Construct
   aliases:
     - construct
+- name: consumer--engagement--food--journey
+  friendly_name: Consumer engagement food journey
 - name: conversation
   friendly_name: Conversation
   aliases:
@@ -1210,6 +1214,10 @@
     - sunny
 - name: sunny--hazy
   friendly_name: Sunny hazy
+- name: supply--chain--optimization--01
+  friendly_name: Supply chain optimization 01
+- name: supply--chain--optimization--02
+  friendly_name: Supply chain optimization 02
 - name: support--services
   friendly_name: Support services
 - name: swipe--left
@@ -1316,6 +1324,10 @@
   friendly_name: Transform
   aliases:
     - transform
+- name: transparency--01
+  friendly_name: Transparency 01
+- name: transparency--02
+  friendly_name: Transparency 02
 - name: trash
   friendly_name: Trash
   aliases:
@@ -1326,6 +1338,8 @@
 - name: tree--map
   friendly_name: tree--map
   aliases: []
+- name: trust
+  friendly_name: Trust
 - name: university
   friendly_name: University
   aliases:
