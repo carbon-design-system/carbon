@@ -106,6 +106,10 @@
   friendly_name: Bicycle
   aliases:
     - bicycle
+- name: blender
+  friendly_name: Blender
+  aliases:
+    - blender
 - name: blockchain
   friendly_name: Blockchain
   aliases:
