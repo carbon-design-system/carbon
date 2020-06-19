@@ -110,7 +110,9 @@ export default function TreeView({
   }, []);
 
   useEffect(() => {
-    setSelected(preselected);
+    if (preselected.length) {
+      setSelected(preselected);
+    }
   }, [preselected]);
 
   const labelId = `${id}__label`;
