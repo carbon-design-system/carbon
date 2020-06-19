@@ -7,8 +7,8 @@
 
 @import 'generated/feature-flags';
 
-$feature-flags: map-keys($generated-feature-flags);
-$feature-flag-state: map-merge((), $generated-feature-flags);
+// $feature-flags: map-keys($generated-feature-flags);
+// $feature-flag-state: map-merge((), $generated-feature-flags);
 
 @function add-feature-flag($name, $enabled: false) {
   $feature-flag-state: map-merge(

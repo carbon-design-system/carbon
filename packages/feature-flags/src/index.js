@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import featureFlagInfo from './generated/feature-flags';
+import { featureFlagInfo } from './generated/feature-flags';
 
 const featureFlagState = new Map();
 
@@ -16,7 +16,7 @@ for (let i = 0; i < featureFlagInfo.length; i++) {
 
 function checkForFlag(name) {
   if (!featureFlagState.has(name)) {
-    throw new Error(`Unable to find a feature flag with the name ${name}`);
+    throw new Error(`Unable to find a feature flag with the name \`${name}\``);
   }
 }
 
@@ -41,4 +41,4 @@ export function featureFlagEnabled(name) {
 
 export { featureFlagInfo as unstable_featureFlagInfo };
 
-export const featureFlags = featureFlagInfo.map((flag) => flag.name);
+export const featureFlags = featureFlagInfo.map(flag => flag.name);
