@@ -18,7 +18,7 @@ import WithState from '../../tools/withState';
 // Datepickers last argument contains an instance of flatpickr
 // and will cause action logger to enter an infinite loop. Just don't log that argument
 const datePickerOnChangeActions = decorateAction([
-  args => args.slice(0, args.length - 2),
+  (args) => args.slice(0, args.length - 2),
 ]);
 
 const patterns = {
@@ -185,7 +185,7 @@ storiesOf('DatePicker', module)
               datePickerType="single"
               dateFormat="m/d/Y"
               value={state.date}
-              onChange={eventOrDates => {
+              onChange={(eventOrDates) => {
                 const value = eventOrDates.target
                   ? eventOrDates.target.value
                   : eventOrDates[0];

@@ -62,7 +62,7 @@ describe('_component-tokens.scss', () => {
       }
     `);
 
-    const values = calls.map(call => convert(call[0]));
+    const values = calls.map((call) => convert(call[0]));
     expect(values[0]).toBe('#ffffff');
     expect(values[1]).toBe('#000000');
     expect(values[2]).toBe('#ffffff');

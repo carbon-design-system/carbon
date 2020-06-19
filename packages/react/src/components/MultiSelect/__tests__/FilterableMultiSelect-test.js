@@ -95,20 +95,14 @@ describe('MultiSelect.Filterable', () => {
     openMenu(wrapper);
 
     // Select the first two items
-    wrapper
-      .find(listItemName)
-      .at(0)
-      .simulate('click');
+    wrapper.find(listItemName).at(0).simulate('click');
 
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItems: [mockProps.items[0]],
     });
 
-    wrapper
-      .find(listItemName)
-      .at(1)
-      .simulate('click');
+    wrapper.find(listItemName).at(1).simulate('click');
 
     expect(mockProps.onChange).toHaveBeenCalledTimes(2);
     expect(mockProps.onChange).toHaveBeenCalledWith({
@@ -116,19 +110,13 @@ describe('MultiSelect.Filterable', () => {
     });
 
     // Un-select the next two items
-    wrapper
-      .find(listItemName)
-      .at(0)
-      .simulate('click');
+    wrapper.find(listItemName).at(0).simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(3);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItems: [mockProps.items[0]],
     });
 
-    wrapper
-      .find(listItemName)
-      .at(0)
-      .simulate('click');
+    wrapper.find(listItemName).at(0).simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(4);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItems: [],
@@ -142,20 +130,14 @@ describe('MultiSelect.Filterable', () => {
     openMenu(wrapper);
 
     // Select the first two items
-    wrapper
-      .find(listItemName)
-      .at(1)
-      .simulate('click');
+    wrapper.find(listItemName).at(1).simulate('click');
 
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItems: [mockProps.items[1]],
     });
 
-    wrapper
-      .find(listItemName)
-      .at(1)
-      .simulate('click');
+    wrapper.find(listItemName).at(1).simulate('click');
 
     expect(mockProps.onChange).toHaveBeenCalledTimes(2);
     expect(mockProps.onChange).toHaveBeenCalledWith({
@@ -172,16 +154,10 @@ describe('MultiSelect.Filterable', () => {
       .at(1)
       .simulate('change', { target: { value: '3' } });
 
-    wrapper
-      .find(listItemName)
-      .at(0)
-      .simulate('click');
+    wrapper.find(listItemName).at(0).simulate('click');
 
     expect(
-      wrapper
-        .find('[placeholder="Placeholder..."]')
-        .at(1)
-        .props().value
+      wrapper.find('[placeholder="Placeholder..."]').at(1).props().value
     ).toEqual('3');
   });
 });

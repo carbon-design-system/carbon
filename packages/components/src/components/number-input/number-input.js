@@ -29,12 +29,12 @@ class NumberInput extends mixin(
     // Broken DOM tree is seen with up/down arrows <svg> in IE, which breaks event delegation.
     // <svg> does not have `Element.classList` in IE11
     this.manage(
-      on(this.element.querySelector('.up-icon'), 'click', event => {
+      on(this.element.querySelector('.up-icon'), 'click', (event) => {
         this._handleClick(event);
       })
     );
     this.manage(
-      on(this.element.querySelector('.down-icon'), 'click', event => {
+      on(this.element.querySelector('.down-icon'), 'click', (event) => {
         this._handleClick(event);
       })
     );

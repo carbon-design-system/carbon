@@ -27,7 +27,7 @@ module.exports = {
           ...motion.from,
         ].filter(({ version }) => version === '<=0.0.1-alpha.31');
         await Promise.all(
-          migrations.map(migration => migration.migrate(options))
+          migrations.map((migration) => migration.migrate(options))
         );
       },
     },

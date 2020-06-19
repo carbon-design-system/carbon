@@ -15,7 +15,7 @@ import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
 
-const defaultItemToString = item => {
+const defaultItemToString = (item) => {
   if (typeof item === 'string') {
     return item;
   }

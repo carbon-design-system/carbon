@@ -1,11 +1,11 @@
 import NavigationMenuPanel from '../../src/components/ui-shell/navigation-menu-panel';
 import UiShellHtml from '../../html/ui-shell/ui-shell.html';
 
-describe('Popup Nav', function() {
-  describe('Constructor', function() {
+describe('Popup Nav', function () {
+  describe('Constructor', function () {
     let navigationMenuPanel;
 
-    it('Should throw if root element is not given', function() {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         navigationMenuPanel = new NavigationMenuPanel();
       }).toThrowError(
@@ -14,7 +14,7 @@ describe('Popup Nav', function() {
       );
     });
 
-    it('Should throw if root element is not a DOM element', function() {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         navigationMenuPanel = new NavigationMenuPanel(
           document.createTextNode('')
@@ -25,20 +25,20 @@ describe('Popup Nav', function() {
       );
     });
 
-    afterEach(function() {
+    afterEach(function () {
       if (navigationMenuPanel) {
         navigationMenuPanel = navigationMenuPanel.release();
       }
     });
   });
 
-  describe('Init Component by Launch functionality', function() {
+  describe('Init Component by Launch functionality', function () {
     let button;
     let navigationMenu;
     let context;
     let options;
 
-    beforeAll(function() {
+    beforeAll(function () {
       const range = document.createRange();
       button = range
         .createContextualFragment(UiShellHtml)
@@ -64,12 +64,12 @@ describe('Popup Nav', function() {
       context = NavigationMenuPanel.init(undefined, options);
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
       button.classList.remove('bx--header__action--active');
       navigationMenu.setAttribute('hidden', '');
     });
 
-    it('Should open the popup nav on button click', function() {
+    it('Should open the popup nav on button click', function () {
       button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(button.classList.contains('bx--header__action--active')).toBe(
         true
@@ -77,7 +77,7 @@ describe('Popup Nav', function() {
       expect(navigationMenu.hasAttribute('hidden')).toBe(false);
     });
 
-    it('Should close an open popup nav on button click', function() {
+    it('Should close an open popup nav on button click', function () {
       navigationMenu.removeAttribute('hidden');
       button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(button.classList.contains('bx--header__action--active')).toBe(
@@ -86,7 +86,7 @@ describe('Popup Nav', function() {
       expect(navigationMenu.hasAttribute('hidden')).toBe(true);
     });
 
-    afterAll(function() {
+    afterAll(function () {
       document.body.removeChild(button);
       document.body.removeChild(navigationMenu);
       context.release();

@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
-import { CaretRight24, CaretLeft24 } from '@carbon/icons-react';
+import { CaretRight16, CaretLeft16 } from '@carbon/icons-react';
 import Button from '../../Button';
 import Select from '../../Select';
 import SelectItem from '../../SelectItem';
@@ -69,9 +69,11 @@ function Unstable_Pagination({
               hideLabel
               noLabel
               inline
-              onChange={event => setCurrentPageSize(Number(event.target.value))}
+              onChange={(event) =>
+                setCurrentPageSize(Number(event.target.value))
+              }
               value={currentPageSize}>
-              {pageSizes.map(size => (
+              {pageSizes.map((size) => (
                 <SelectItem key={size} value={size} text={String(size)} />
               ))}
             </Select>
@@ -144,7 +146,7 @@ function Unstable_Pagination({
           onClick={() => setCurrentPage(currentPage - 1)}
           disabled={backButtonDisabled}
           hasIconOnly
-          renderIcon={CaretLeft24}
+          renderIcon={CaretLeft16}
           tooltipAlignment="center"
           tooltipPosition="top"
           iconDescription={backwardText}
@@ -160,7 +162,7 @@ function Unstable_Pagination({
           onClick={() => setCurrentPage(currentPage + 1)}
           disabled={forwardButtonDisabled}
           hasIconOnly
-          renderIcon={CaretRight24}
+          renderIcon={CaretRight16}
           tooltipAlignment="center"
           tooltipPosition="top"
           iconDescription={forwardText}
@@ -184,7 +186,7 @@ Unstable_Pagination.defaultProps = {
   pageRangeText: (current, total) => `${current} of ${total} pages`,
   pageSize: 10,
   pageSizes: undefined,
-  pageText: page => `page ${page}`,
+  pageText: (page) => `page ${page}`,
   pagesUnknown: false,
   totalItems: undefined,
 };

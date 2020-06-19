@@ -21,7 +21,7 @@ const { prefix } = settings;
 
 jest.mock('lodash.debounce');
 
-debounce.mockImplementation(fn => fn);
+debounce.mockImplementation((fn) => fn);
 
 describe('Tooltip', () => {
   // An icon component class
@@ -159,15 +159,9 @@ describe('Tooltip', () => {
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(rootWrapper.find('Tooltip').instance().state.open).toBeFalsy();
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-      rootWrapper
-        .find('Tooltip')
-        .instance()
-        .setState({ open: true });
+      rootWrapper.find('Tooltip').instance().setState({ open: true });
       rootWrapper.update();
-      rootWrapper
-        .find('Tooltip')
-        .instance()
-        .handleClickOutside();
+      rootWrapper.find('Tooltip').instance().handleClickOutside();
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(rootWrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
@@ -188,10 +182,7 @@ describe('Tooltip', () => {
       const rootWrapper = mount(<Tooltip />);
       rootWrapper.setProps({ open: true });
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-      rootWrapper
-        .find('Tooltip')
-        .instance()
-        .setState({ open: false });
+      rootWrapper.find('Tooltip').instance().setState({ open: false });
       rootWrapper.update();
       rootWrapper.setProps({ open: true });
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component

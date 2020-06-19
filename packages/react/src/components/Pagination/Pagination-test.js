@@ -25,7 +25,7 @@ describe('Pagination', () => {
 
     describe('icons', () => {
       const iconTypes = [CaretLeft16, CaretRight16];
-      const icons = pagination.findWhere(n => iconTypes.includes(n.type()));
+      const icons = pagination.findWhere((n) => iconTypes.includes(n.type()));
 
       it('should have 2 icons', () => {
         expect(icons.length).toEqual(2);

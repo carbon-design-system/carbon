@@ -81,7 +81,7 @@ class Loading extends mixin(createComponent, initComponentBySearch, handles) {
   end() {
     this.set(false);
     let handleAnimationEnd = this.manage(
-      on(this.element, 'animationend', evt => {
+      on(this.element, 'animationend', (evt) => {
         if (handleAnimationEnd) {
           handleAnimationEnd = this.unmanage(handleAnimationEnd).release();
         }

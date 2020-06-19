@@ -30,7 +30,7 @@ const moduleName = () => {
  * @returns {string}
  */
 function getModuleName(name, parts = []) {
-  const namespace = parts.map(part => pascalCase(part)).join('');
+  const namespace = parts.map((part) => pascalCase(part)).join('');
   if (namespace !== '') {
     return `${namespace}${pascalCase(name)}`;
   }
