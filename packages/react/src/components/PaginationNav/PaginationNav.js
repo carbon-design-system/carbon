@@ -101,7 +101,8 @@ function PaginationItem({
         className={classnames(`${prefix}--pagination-nav__page`, {
           [`${prefix}--pagination-nav__page--active`]: isActive,
         })}
-        onClick={onClick}>
+        onClick={onClick}
+        aria-current={isActive ? 'page' : null}>
         <span className={`${prefix}--pagination-nav__accessibility-label`}>
           {t('carbon.pagination-nav.item')}
         </span>
