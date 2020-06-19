@@ -28,7 +28,7 @@ const props = () => ({
 
 storiesOf('PaginationNav', module)
   .addDecorator(withKnobs)
-  .addDecorator(story => <div style={{ width: '800px' }}>{story()}</div>)
+  .addDecorator((story) => <div style={{ width: '800px' }}>{story()}</div>)
   .add('PaginationNav', () => <PaginationNav {...props()} />, {
     info: {
       text: `
