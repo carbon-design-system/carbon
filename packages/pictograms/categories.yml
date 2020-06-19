@@ -168,18 +168,25 @@ categories:
       - chart--bubble
       - chart--bubble--line
       - chart--candlestick
+      - chart--custom
       - chart--error-bar
       - chart--evaluation
       - chart--high-low
       - chart--histogram
       - chart--line
       - chart--multi-line
+      - chart--multi-type
       - chart--parallel
+      - chart--pie
       - chart--radar
       - chart--river
       - chart--scatterplot
+      - chart--stepper
+      - chart--sunburst
       - chart--t-SNE
       - circle-packing
+      - code--syntax
+      - data--set
       - flow--chart
       - flow--chart--detail
       - heat--map
@@ -190,8 +197,11 @@ categories:
       - rank
       - relationship-diagram
       - report
+      - sample--file
       - scatter-matrix
       - secure--data
+      - stem--leaf--plot
+      - time--plot
       - tree--diagram
       - tree--map
       - user--analytics

@@ -173,6 +173,10 @@
 - name: chart--candlestick
   friendly_name: candlestick--chart
   aliases: []
+- name: chart--custom
+  friendly_name: Chart custom
+  aliases:
+    - chart custom
 - name: chart--error-bar
   friendly_name: chart--error-bar
   aliases: []
@@ -190,9 +194,17 @@
 - name: chart--multi-line
   friendly_name: chart--multi-line
   aliases: []
+- name: chart--multi-type
+  friendly_name: Chart multi type
+  aliases:
+    - chart multi type
 - name: chart--parallel
   friendly_name: chart--parallel
   aliases: []
+- name: chart--pie
+  friendly_name: Chart pie
+  aliases:
+    - chart pie
 - name: chart--radar
   friendly_name: chart--radar
   aliases: []
@@ -201,6 +213,14 @@
   aliases: []
 - name: chart--scatterplot
   friendly_name: Chart scatterplot
+- name: chart--stepper
+  friendly_name: Chart stepper
+  aliases:
+    - chart stepper
+- name: chart--sunburst
+  friendly_name: Chart sunburst
+  aliases:
+    - chart sunburst
 - name: chart--t-SNE
   friendly_name: chart--t-SNE
   aliases: []
@@ -283,6 +303,10 @@
   friendly_name: Cloudy windy
 - name: coat--hanger
   friendly_name: Coat hanger
+- name: code--syntax
+  friendly_name: Code syntax
+  aliases:
+    - code syntax
 - name: cognos--analytics
   friendly_name: Cognos analytics
 - name: college
@@ -339,6 +363,10 @@
   friendly_name: Data insights
 - name: data--processing
   friendly_name: Data processing
+- name: data--set
+  friendly_name: Data set
+  aliases:
+    - data set
 - name: data--storage
   friendly_name: Data storage
 - name: delete
@@ -1107,6 +1135,10 @@
     - rome
 - name: saas--enablement
   friendly_name: Saas enablement
+- name: sample--file
+  friendly_name: Sample file
+  aliases:
+    - sample file
 - name: san-francisco
   friendly_name: San Francisco
 - name: san-francisco--fog
@@ -1210,6 +1242,10 @@
     - steel
 - name: steering--wheel
   friendly_name: Steering wheel
+- name: stem--leaf--plot
+  friendly_name: Stem leaf plot
+  aliases:
+    - stem leaf plot
 - name: stethoscope
   friendly_name: Stethoscope
   aliases:
@@ -1292,6 +1328,10 @@
   friendly_name: Time lapse
   aliases:
     - time
+- name: time--plot
+  friendly_name: Time plot
+  aliases:
+    - time plot
 - name: toggle
   friendly_name: Toggle
   aliases:
