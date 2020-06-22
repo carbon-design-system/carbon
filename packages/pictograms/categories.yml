@@ -23,6 +23,15 @@ categories:
       - trash
       - upload
       - upload--alt
+  - name: Blockchain
+    members:
+      - connected--ecosystem
+      - consumer--engagement--food--journey
+      - supply--chain--optimization--01
+      - supply--chain--optimization--02
+      - transparency--01
+      - transparency--02
+      - trust
   - name: Building Structure
     members:
       - alarm
@@ -159,18 +168,25 @@ categories:
       - chart--bubble
       - chart--bubble--line
       - chart--candlestick
+      - chart--custom
       - chart--error-bar
       - chart--evaluation
       - chart--high-low
       - chart--histogram
       - chart--line
       - chart--multi-line
+      - chart--multi-type
       - chart--parallel
+      - chart--pie
       - chart--radar
       - chart--river
       - chart--scatterplot
+      - chart--stepper
+      - chart--sunburst
       - chart--t-SNE
       - circle-packing
+      - code--syntax
+      - data--set
       - flow--chart
       - flow--chart--detail
       - heat--map
@@ -181,8 +197,11 @@ categories:
       - rank
       - relationship-diagram
       - report
+      - sample--file
       - scatter-matrix
       - secure--data
+      - stem--leaf--plot
+      - time--plot
       - tree--diagram
       - tree--map
       - user--analytics
@@ -317,7 +336,12 @@ categories:
     members:
       - agriculture
       - bulldozer
+      - cheese
       - farm
+      - farm--01
+      - farm--02
+      - farmer--01
+      - farmer--02
       - oil--pump
       - oil--rig
       - power
