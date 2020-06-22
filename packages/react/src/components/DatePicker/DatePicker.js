@@ -401,8 +401,7 @@ export default class DatePicker extends Component {
         this.cal.setDate(this.props.value);
         this.updateClassNames(this.cal);
       } else if (this.inputField) {
-          this.inputField.value = this.props.value;
-        }
+        this.inputField.value = this.props.value;
       }
     }
   }
