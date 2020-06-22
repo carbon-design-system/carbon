@@ -21,8 +21,9 @@ export default function TreeNode({
   disabled,
   isExpanded,
   label,
-  onSelect,
+  onSelect: onNodeSelect,
   onToggle,
+  onTreeSelect,
   renderIcon: Icon,
   selected,
   value,
@@ -36,7 +37,7 @@ export default function TreeNode({
       return React.cloneElement(node, {
         depth: depth + 1,
         disabled,
-        onSelect,
+        onTreeSelect,
         selected,
         tabIndex: (!node.props.disabled && -1) || null,
       });
@@ -61,8 +62,13 @@ export default function TreeNode({
   };
   const handleClick = (event) => {
     event.stopPropagation();
-    if (onSelect && !disabled) {
-      onSelect(event, { value });
+    if (!disabled) {
+      if (onTreeSelect) {
+        onTreeSelect(event, { value });
+      }
+      if (onNodeSelect) {
+        onNodeSelect(event, { value });
+      }
     }
   };
   const handleKeyDown = (event) => {
@@ -99,8 +105,13 @@ export default function TreeNode({
       }
       setExpanded(true);
     }
-    if (match(event, keys.Enter) && onSelect && !disabled) {
-      onSelect(event, { value });
+    if (match(event, keys.Enter) && !disabled) {
+      if (onTreeSelect) {
+        onTreeSelect(event, { value });
+      }
+      if (onNodeSelect) {
+        onNodeSelect(event, { value });
+      }
     }
     if (rest.onKeyDown) {
       rest.onKeyDown(event);
@@ -217,7 +228,7 @@ TreeNode.propTypes = {
   label: PropTypes.node,
 
   /**
-   * Callback function for when a node is selected
+   * Callback function for when the node is selected
    */
   onSelect: PropTypes.func,
 

@@ -32,7 +32,7 @@ export default function TreeView({
   const treeRootRef = useRef(null);
   const treeWalker = useRef(treeRootRef?.current);
   const [selected, setSelected] = useState(preselected);
-  const handleSelect = (event, { value } = {}) => {
+  const handleTreeSelect = (event, { value } = {}) => {
     if (multiselect && event.metaKey) {
       if (!selected.includes(value)) {
         setSelected(selected.concat(value));
@@ -52,7 +52,7 @@ export default function TreeView({
   const nodesWithProps = React.Children.map(children, (node) => {
     const sharedNodeProps = {
       depth: 0,
-      onSelect: handleSelect,
+      onTreeSelect: handleTreeSelect,
       selected,
       tabIndex: (!node.props.disabled && -1) || null,
     };
@@ -167,7 +167,7 @@ TreeView.propTypes = {
   multiselect: PropTypes.bool,
 
   /**
-   * Callback function that is called when a node is seleected
+   * Callback function that is called when any node is seleected
    */
   onSelect: PropTypes.func,
 
