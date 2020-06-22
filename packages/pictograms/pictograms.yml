@@ -1328,14 +1328,14 @@
   friendly_name: Time
   aliases:
     - time
-- name: time-lapse
-  friendly_name: Time lapse
-  aliases:
-    - time
 - name: time--plot
   friendly_name: Time plot
   aliases:
     - time plot
+- name: time-lapse
+  friendly_name: Time lapse
+  aliases:
+    - time
 - name: toggle
   friendly_name: Toggle
   aliases:
