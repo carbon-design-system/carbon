@@ -337,6 +337,7 @@ export default class ComboBox extends React.Component {
         inputValue={this.state.inputValue || ''}
         itemToString={itemToString}
         defaultSelectedItem={initialSelectedItem}
+        id={id}
         selectedItem={selectedItem}>
         {({
           getToggleButtonProps,
@@ -367,7 +368,6 @@ export default class ComboBox extends React.Component {
               light={light}
               size={size}>
               <ListBox.Field
-                id={id}
                 {...getToggleButtonProps({
                   disabled,
                   onClick: this.onToggleClick(isOpen),
