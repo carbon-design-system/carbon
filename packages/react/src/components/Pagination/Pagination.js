@@ -145,7 +145,6 @@ export default class Pagination extends Component {
     page: 1,
     pagesUnknown: false,
     isLastPage: false,
-    pageInputDisabled: false,
     itemText: (min, max) => `${min}–${max} items`,
     pageText: (page) => `page ${page}`,
   };
