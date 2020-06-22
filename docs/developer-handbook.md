@@ -33,6 +33,7 @@
   - [Using `npm link`/`yarn link`](#using-npm-linkyarn-link)
   - [Pointing NPM dependency of `carbon-components` right to the source code](#pointing-npm-dependency-of-carbon-components-right-to-the-source-code)
 - [Maintainers](#maintainers)
+  - [Working with icons and pictograms](#working-with-icons-and-pictograms)
   - [Code Patterns](#code-patterns)
     - [Deprecating a component](#deprecating-a-component)
   - [Publishing](#publishing)
@@ -677,6 +678,14 @@ yarn test:e2e -u
 
 If not, then you will need to update it to the correct commit convention for the
 contribution.
+
+6. Does the Pull Request remove an asset that used to exist?
+
+If so, remind the contributor that we can only remove assets in a major release.
+If an asset needs to be removed, they should add the asset back in under its
+original name and add it to the corresponding `deprecated.yml` file. They can
+still contribute the newly named asset, and it is recommended that they specify
+the replacement for the icon in `deprecated.yml` under the `reason` field.
 
 ### Code Patterns
 
