@@ -25,7 +25,7 @@ const props = () => ({
   pagesUnknown: boolean('Total number of items unknown (pagesUnknown)', false),
   pageInputDisabled: boolean(
     '[Deprecated]: Disable page input (pageInputDisabled)',
-    false
+    undefined
   ),
   backwardText: text(
     'The description for the backward icon (backwardText)',
