@@ -24,7 +24,7 @@ $feature-flags: (
   enable-css-custom-properties: true,
 );
 
-@import './expressive-theme';
+@import '../../src/globals/scss/vendor/@carbon/themes/scss/mixins';
 @import '../../src/globals/scss/styles';
 
 $deprecations--entry: true;
