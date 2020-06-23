@@ -235,6 +235,7 @@ categories:
       - windows
   - name: Device Interaction
     members:
+      - add--device
       - augmented--reality
       - mobile--add
       - mobile--chat

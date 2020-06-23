@@ -1,5 +1,9 @@
 - name: active--server
   friendly_name: Active server
+- name: add--device
+  friendly_name: Add device
+  aliases:
+    - add device
 - name: advocate
   friendly_name: Advocate
   aliases:
