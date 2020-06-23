@@ -16,6 +16,7 @@ categories:
       - maximize
       - minimize
       - paper--clip
+      - player--flow
       - refresh
       - renew
       - repeat
@@ -228,6 +229,7 @@ categories:
       - path
       - pattern
       - user--insights
+      - user--interface
       - web--developer
       - windows
   - name: Device Interaction
@@ -304,6 +306,7 @@ categories:
     members:
       - care
       - doctor
+      - first--aid
       - heart--health
       - hospital
       - medical
@@ -349,6 +352,8 @@ categories:
       - refinery
       - satellite
       - satellite--dish
+      - solar--field
+      - solar--panel
       - steel
       - telecom
       - tractor
@@ -394,6 +399,8 @@ categories:
       - cherries
       - dining
       - hard--ice--cream
+      - flower--01
+      - flower--02
       - perfume
       - scale
       - soft--ice--cream
@@ -476,15 +483,21 @@ categories:
   - name: Retail
     members:
       - bag
+      - clothes--rack--01
+      - clothes--rack--02
       - coat--hanger
       - credit--card
       - customer--service
       - price
       - receipt
+      - shirt
       - shop
       - shopping--cart
       - sneaker
+      - socks
       - tags
+      - t-shirt
+      - trousers
   - name: Security
     members:
       - firewall
@@ -518,6 +531,7 @@ categories:
       - strategy--move
       - strategy--play
       - streamline
+      - summit
       - target
       - target--area
   - name: Time
@@ -535,6 +549,7 @@ categories:
       - automobile
       - bicycle
       - bus
+      - electric--car
       - electric--charge
       - engine
       - fuel

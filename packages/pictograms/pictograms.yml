@@ -241,6 +241,10 @@
 - name: circle-packing
   friendly_name: circle-packing
   aliases: []
+- name: clothes--rack--01
+  friendly_name: Clothes rack 01
+- name: clothes--rack--02
+  friendly_name: Clothes rack 02
 - name: client--financing--01
   friendly_name: Client financing 01
   aliases: []
@@ -445,6 +449,8 @@
   friendly_name: Electric
   aliases:
     - electric
+- name: electric--car
+  friendly_name: Electric car
 - name: electric--charge
   friendly_name: Electric charge
 - name: elevator
@@ -560,10 +566,16 @@
   friendly_name: Firewall
   aliases:
     - firewall
+- name: first--aid
+  friendly_name: First aid
 - name: flow--chart
   friendly_name: Flow chart
 - name: flow--chart--detail
   friendly_name: Flow chart detail
+- name: flower--01
+  friendly_name: Flower 01
+- name: flower--02
+  friendly_name: Flower 02
 - name: fog
   friendly_name: Fog
   aliases:
@@ -1008,6 +1020,8 @@
   friendly_name: Pills
   aliases:
     - pills
+- name: player--flow
+  friendly_name: Player flow
 - name: podcast
   friendly_name: Podcast
   aliases:
@@ -1180,6 +1194,10 @@
   friendly_name: Servers
   aliases:
     - servers
+- name: shirt
+  friendly_name: Shirt
+  aliases:
+    - shirt
 - name: shop
   friendly_name: Shop
   aliases:
@@ -1208,10 +1226,18 @@
   friendly_name: Snow
   aliases:
     - snow
+- name: socks
+  friendly_name: Socks
+  aliases:
+    - socks
 - name: soft--ice--cream
   friendly_name: Soft ice cream
 - name: softlayer--enablement
   friendly_name: Softlayer enablement
+- name: solar--field
+  friendly_name: Solar field
+- name: solar--panel
+  friendly_name: Solar panel
 - name: solve
   friendly_name: Solve
   aliases:
@@ -1264,6 +1290,10 @@
   friendly_name: Streamline
   aliases:
     - streamline
+- name: summit
+  friendly_name: Summit
+  aliases:
+    - summit
 - name: sunny
   friendly_name: Sunny
   aliases:
@@ -1280,6 +1310,8 @@
   friendly_name: Swipe left
 - name: swipe--right
   friendly_name: Swipe right
+- name: t-shirt
+  friendly_name: T-shirt
 - name: tags
   friendly_name: Tags
   aliases:
@@ -1398,6 +1430,10 @@
 - name: tree--map
   friendly_name: tree--map
   aliases: []
+- name: trousers
+  friendly_name: Trousers
+  aliases:
+    - trousers
 - name: trust
   friendly_name: Trust
 - name: university
@@ -1422,6 +1458,8 @@
   friendly_name: User analytics
 - name: user--insights
   friendly_name: User insights
+- name: user--interface
+  friendly_name: User interface
 - name: user--profile
   friendly_name: User profile
 - name: user--search
