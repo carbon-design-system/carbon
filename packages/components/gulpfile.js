@@ -402,6 +402,7 @@ gulp.task('sass:dev', () => {
     .pipe(sourcemaps.init())
     .pipe(
       header(`
+      $use-expressive-theme: ${process.env.CARBON_DEMO_USE_EXPRESSIVE_THEME};
       $feature-flags: (${Object.keys(flags)
         .reduce((a, flag) => [...a, `${flag}: ${!!flags[flag]}`], [])
         .join(', ')});
