@@ -20449,7 +20449,7 @@ Number input styles
   }
 
   .#{$prefix}--number--xl .#{$prefix}--number__control-btn {
-    height: #{$input-xl-height / 2};
+    height: calc(#{$input-xl-height} / 2);
   }
 
   .#{$prefix}--number--xl.#{$prefix}--number--mobile
@@ -20471,7 +20471,7 @@ Number input styles
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__control-btn {
-    height: #{$input-sm-height / 2};
+    height: calc(#{$input-sm-height} / 2);
   }
 
   .#{$prefix}--number--sm.#{$prefix}--number--mobile
