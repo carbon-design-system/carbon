@@ -26,7 +26,7 @@
     @include focus-outline('reset');
     background-color: $field-01;
     width: 100%;
-    height: rem(40px);
+    height: $input-height;
     padding: 0 $carbon--spacing-05;
     color: $text-01;
     border: none;
@@ -45,11 +45,11 @@
   }
 
   .#{$prefix}--text-input--xl {
-    height: rem(48px);
+    height: $input-xl-height;
   }
 
   .#{$prefix}--text-input--sm {
-    height: rem(32px);
+    height: $input-sm-height;
   }
 
   .#{$prefix}--password-input {
@@ -80,6 +80,8 @@
       top: 50%;
       transform: translateY(-50%);
       fill: $support-01;
+      width: $icon-size-01;
+      height: $icon-size-01;
     }
 
     // TODO: deprecate this style block
@@ -135,6 +137,12 @@
     svg {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  .#{$prefix}--icon-visibility-off,
+  .#{$prefix}--icon-visibility-on {
+    width: $icon-size-01;
+    height: $icon-size-01;
   }
 
   //-----------------------------
