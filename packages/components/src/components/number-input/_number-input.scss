@@ -34,7 +34,7 @@
     padding-left: $carbon--spacing-05;
     padding-right: $carbon--spacing-07;
     font-weight: 300;
-    height: $input-height;
+    height: rem(40px);
     color: $text-01;
     background-color: $field-01;
     border: none;
@@ -111,7 +111,7 @@
     justify-content: center;
     align-items: center;
     width: rem(32px);
-    height: calc(#{$input-height} / 2);
+    height: rem(20px);
     color: $icon-01;
 
     svg {
@@ -167,8 +167,6 @@
     position: absolute;
     right: 2rem;
     fill: $support-01;
-    width: $icon-size-01;
-    height: $icon-size-01;
   }
 
   .#{$prefix}--number--light input[type='number'] {
@@ -182,8 +180,8 @@
     .#{$prefix}--number__control-btn,
     &.#{$prefix}--number--light .#{$prefix}--number__control-btn {
       position: static;
-      width: $input-height;
-      height: $input-height;
+      width: rem(40px);
+      height: rem(40px);
       background-color: $ui-01;
 
       &:hover,
@@ -225,17 +223,17 @@
 
   // Size Variant styles
   .#{$prefix}--number--xl input[type='number'] {
-    height: $input-xl-height;
+    height: rem(48px);
   }
 
   .#{$prefix}--number--xl .#{$prefix}--number__control-btn {
-    height: calc(#{$input-xl-height} / 2);
+    height: rem(24px);
   }
 
   .#{$prefix}--number--xl.#{$prefix}--number--mobile
     .#{$prefix}--number__control-btn {
-    height: $input-xl-height;
-    width: $input-xl-height;
+    height: rem(48px);
+    width: rem(48px);
   }
 
   .#{$prefix}--number--xl .#{$prefix}--number__control-btn.up-icon svg {
@@ -247,17 +245,17 @@
   }
 
   .#{$prefix}--number--sm input[type='number'] {
-    height: $input-sm-height;
+    height: rem(32px);
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__control-btn {
-    height: calc(#{$input-sm-height} / 2);
+    height: rem(16px);
   }
 
   .#{$prefix}--number--sm.#{$prefix}--number--mobile
     .#{$prefix}--number__control-btn {
-    height: $input-sm-height;
-    width: $input-sm-height;
+    height: rem(32px);
+    width: rem(32px);
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__control-btn.up-icon svg {
@@ -277,7 +275,7 @@
   .#{$prefix}--number.#{$prefix}--skeleton {
     @include skeleton;
     width: 100%;
-    height: $input-height;
+    height: 2.5rem;
 
     input[type='number'] {
       display: none;
