@@ -364,6 +364,23 @@ $tab-underline-disabled: 2px solid $disabled-01 !default;
 /// @group skeleton
 $skeleton: $skeleton-01 !default; // TODO: Remove this in next major release
 
+// Number/text input
+
+/// @type Number
+/// @access public
+/// @group input
+$input-height: $container-03 !default;
+
+/// @type Number
+/// @access public
+/// @group input
+$input-sm-height: $container-02 !default;
+
+/// @type Number
+/// @access public
+/// @group input
+$input-xl-height: $container-04 !default;
+
 // Light UI
 
 // Determine the "light" color for a given token.
