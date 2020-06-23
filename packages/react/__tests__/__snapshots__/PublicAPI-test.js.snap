@@ -3849,7 +3849,6 @@ Map {
       "itemText": [Function],
       "itemsPerPageText": "Items per page:",
       "page": 1,
-      "pageInputDisabled": false,
       "pageNumberText": "Page Number",
       "pageRangeText": [Function],
       "pageText": [Function],

@@ -11,7 +11,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { settings } from 'carbon-components';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
-import { Add16, Search16 } from '@carbon/icons-react';
+import { Add16, AddFilled16, Search16 } from '@carbon/icons-react';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 
@@ -20,6 +20,7 @@ const { prefix } = settings;
 const icons = {
   None: 'None',
   'Add (Add16 from `@carbon/icons-react`)': 'Add16',
+  'Add (Filled) (AddFilled16 from `@carbon/icons-react`)': 'AddFilled16',
   'Search (Search16 from `@carbon/icons-react`)': 'Search16',
 };
 
@@ -27,6 +28,7 @@ const iconMap = {
   iconAddSolid,
   iconSearch,
   Add16,
+  AddFilled16,
   Search16,
 };
 
