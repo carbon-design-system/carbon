@@ -74,6 +74,10 @@
     - austin
 - name: automate--modular--management
   friendly_name: Automate modular management
+- name: automation--decision
+  friendly_name: Automation decision
+  aliases:
+    - automation decision
 - name: automobile
   friendly_name: Automobile
   aliases:
