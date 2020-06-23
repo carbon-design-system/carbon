@@ -144,6 +144,7 @@ categories:
       - marketplace
       - mas
       - mqa
+      - planning--analytics
       - saas--enablement
       - single--sign-on
       - softlayer--enablement
@@ -428,6 +429,7 @@ categories:
       - tools
   - name: Networking
     members:
+      - automation--decision
       - global--network
       - integration
       - inspect--data

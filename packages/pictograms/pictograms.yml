@@ -74,6 +74,10 @@
     - austin
 - name: automate--modular--management
   friendly_name: Automate modular management
+- name: automation--decision
+  friendly_name: Automation decision
+  aliases:
+    - automation decision
 - name: automobile
   friendly_name: Automobile
   aliases:
@@ -1020,6 +1024,10 @@
   friendly_name: Pills
   aliases:
     - pills
+- name: planning--analytics
+  friendly_name: Planning analytics
+  aliases:
+    - planning analytics
 - name: player--flow
   friendly_name: Player flow
 - name: podcast
