@@ -50,7 +50,7 @@ function Dropdown({
     itemToString,
     initialSelectedItem,
     onSelectedItemChange,
-    id: { id },
+    id,
   };
 
   // only set selectedItem if the prop is defined. Setting if it is undefined

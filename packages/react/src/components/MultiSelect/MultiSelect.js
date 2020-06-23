@@ -83,7 +83,7 @@ function MultiSelect({
     ...downshiftProps,
     highlightedIndex,
     isOpen,
-    id: { id },
+    id,
     itemToString,
     onStateChange,
     selectedItem: controlledSelectedItems,
