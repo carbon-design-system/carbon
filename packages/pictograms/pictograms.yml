@@ -1024,6 +1024,10 @@
   friendly_name: Pills
   aliases:
     - pills
+- name: planning--analytics
+  friendly_name: Planning analytics
+  aliases:
+    - planning analytics
 - name: player--flow
   friendly_name: Player flow
 - name: podcast
