@@ -55,6 +55,15 @@
   }
 
   // -------------------------------------
+  // Th > Button > Span (span required for flex bugs in Safari)
+  // -------------------------------------
+  .#{$prefix}--data-table--sort th .#{$prefix}--table-sort__flex {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  // -------------------------------------
   //Th > Button > Svg (Sort Icons)
   // -------------------------------------
   // inactive icons
@@ -123,6 +132,13 @@
   .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
     th
     .#{$prefix}--table-sort {
+    display: inline-block;
+    height: rem(64px);
+  }
+
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
     align-items: flex-start;
   }
 
