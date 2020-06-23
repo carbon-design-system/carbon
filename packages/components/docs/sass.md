@@ -2859,9 +2859,6 @@ $icon-size-01: $carbon--icon-size-01;
 - **Alias**: `carbon--icon-size-01`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [number-input [mixin]](#number-input-mixin)
-  - [text-area [mixin]](#text-area-mixin)
-  - [text-input [mixin]](#text-input-mixin)
 
 ### ✅icon-size-02 [variable]
 
@@ -20254,7 +20251,7 @@ Number input styles
     padding-left: $carbon--spacing-05;
     padding-right: $carbon--spacing-07;
     font-weight: 300;
-    height: $input-height;
+    height: rem(40px);
     color: $text-01;
     background-color: $field-01;
     border: none;
@@ -20331,7 +20328,7 @@ Number input styles
     justify-content: center;
     align-items: center;
     width: rem(32px);
-    height: calc(#{$input-height} / 2);
+    height: rem(20px);
     color: $icon-01;
 
     svg {
@@ -20387,8 +20384,6 @@ Number input styles
     position: absolute;
     right: 2rem;
     fill: $support-01;
-    width: $icon-size-01;
-    height: $icon-size-01;
   }
 
   .#{$prefix}--number--light input[type='number'] {
@@ -20402,8 +20397,8 @@ Number input styles
     .#{$prefix}--number__control-btn,
     &.#{$prefix}--number--light .#{$prefix}--number__control-btn {
       position: static;
-      width: $input-height;
-      height: $input-height;
+      width: rem(40px);
+      height: rem(40px);
       background-color: $ui-01;
 
       &:hover,
@@ -20445,17 +20440,17 @@ Number input styles
 
   // Size Variant styles
   .#{$prefix}--number--xl input[type='number'] {
-    height: $input-xl-height;
+    height: rem(48px);
   }
 
   .#{$prefix}--number--xl .#{$prefix}--number__control-btn {
-    height: calc(#{$input-xl-height} / 2);
+    height: rem(24px);
   }
 
   .#{$prefix}--number--xl.#{$prefix}--number--mobile
     .#{$prefix}--number__control-btn {
-    height: $input-xl-height;
-    width: $input-xl-height;
+    height: rem(48px);
+    width: rem(48px);
   }
 
   .#{$prefix}--number--xl .#{$prefix}--number__control-btn.up-icon svg {
@@ -20467,17 +20462,17 @@ Number input styles
   }
 
   .#{$prefix}--number--sm input[type='number'] {
-    height: $input-sm-height;
+    height: rem(32px);
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__control-btn {
-    height: calc(#{$input-sm-height} / 2);
+    height: rem(16px);
   }
 
   .#{$prefix}--number--sm.#{$prefix}--number--mobile
     .#{$prefix}--number__control-btn {
-    height: $input-sm-height;
-    width: $input-sm-height;
+    height: rem(32px);
+    width: rem(32px);
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__control-btn.up-icon svg {
@@ -20497,7 +20492,7 @@ Number input styles
   .#{$prefix}--number.#{$prefix}--skeleton {
     @include skeleton;
     width: 100%;
-    height: $input-height;
+    height: 2.5rem;
 
     input[type='number'] {
       display: none;
@@ -20521,7 +20516,6 @@ Number input styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [support-01 [variable]](#support-01-variable)
-  - [icon-size-01 [variable]](#icon-size-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
@@ -23513,8 +23507,6 @@ Text area styles
     right: $carbon--spacing-05;
     top: $carbon--spacing-04;
     fill: $support-01;
-    width: $icon-size-01;
-    height: $icon-size-01;
   }
 
   //-----------------------------
@@ -23560,7 +23552,6 @@ Text area styles
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [support-01 [variable]](#support-01-variable)
-  - [icon-size-01 [variable]](#icon-size-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
 ## text-input
@@ -23580,7 +23571,7 @@ Text input styles
     @include focus-outline('reset');
     background-color: $field-01;
     width: 100%;
-    height: $input-height;
+    height: rem(40px);
     padding: 0 $carbon--spacing-05;
     color: $text-01;
     border: none;
@@ -23599,11 +23590,11 @@ Text input styles
   }
 
   .#{$prefix}--text-input--xl {
-    height: $input-xl-height;
+    height: rem(48px);
   }
 
   .#{$prefix}--text-input--sm {
-    height: $input-sm-height;
+    height: rem(32px);
   }
 
   .#{$prefix}--password-input {
@@ -23634,8 +23625,6 @@ Text input styles
       top: 50%;
       transform: translateY(-50%);
       fill: $support-01;
-      width: $icon-size-01;
-      height: $icon-size-01;
     }
 
     // TODO: deprecate this style block
@@ -23691,12 +23680,6 @@ Text input styles
     svg {
     opacity: 0.5;
     cursor: not-allowed;
-  }
-
-  .#{$prefix}--icon-visibility-off,
-  .#{$prefix}--icon-visibility-on {
-    width: $icon-size-01;
-    height: $icon-size-01;
   }
 
   //-----------------------------
@@ -23801,7 +23784,6 @@ Text input styles
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [field-02 [variable]](#field-02-variable)
   - [support-01 [variable]](#support-01-variable)
-  - [icon-size-01 [variable]](#icon-size-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)

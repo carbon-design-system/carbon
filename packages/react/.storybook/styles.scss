@@ -9,11 +9,6 @@ $css--font-face: true;
 $css--reset: true;
 $prefix: 'bx';
 
-// IMPORTANT: Demo-purpose only code.
-// This import path should _not_ be used outside our source tree
-// as `demo` directory is _not_ shipped in our NPM package.
-@import '~carbon-components/demo/scss/expressive-theme';
-
 // IMPORTANT: This import path should _not_ be used outside our source tree
 // as `src` directory is _not_ meant to be shipped in our NPM package.
 // Use e.g. `@import '~carbon-components/scss/globals/scss/styles.scss'` instead.
