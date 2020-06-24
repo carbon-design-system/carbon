@@ -47,11 +47,11 @@ function Dropdown({
   downshiftProps,
 }) {
   const selectProps = {
+    ...downshiftProps,
     items,
     itemToString,
     initialSelectedItem,
     onSelectedItemChange,
-    ...downshiftProps,
   };
 
   // only set selectedItem if the prop is defined. Setting if it is undefined
