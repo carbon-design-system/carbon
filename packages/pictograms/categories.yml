@@ -340,6 +340,8 @@ categories:
     members:
       - agriculture
       - bulldozer
+      - cargo--crane
+      - cargo--ship
       - cheese
       - farm
       - farm--01
@@ -396,6 +398,7 @@ categories:
   - name: Lifestyle
     members:
       - apple
+      - blender
       - cafe
       - cherries
       - dining
@@ -490,6 +493,7 @@ categories:
       - coat--hanger
       - credit--card
       - customer--service
+      - gift
       - price
       - receipt
       - shirt
@@ -536,6 +540,18 @@ categories:
       - summit
       - target
       - target--area
+  - name: Supply Chain
+    members:
+      - connected--nodes--to--the--cloud
+      - managing--contractual--flow
+      - managing--items
+      - monitored--item--on--conveyor
+      - movement--in--overlapping--networks
+      - movement--of--goods--01
+      - movement--of--goods--02
+      - movement--of--goods--03
+      - movement--of--items
+      - process
   - name: Time
     members:
       - calendar
