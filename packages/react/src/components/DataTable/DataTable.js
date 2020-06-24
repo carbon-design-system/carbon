@@ -152,25 +152,29 @@ export default class DataTable extends React.Component {
     this.instanceId = getInstanceId();
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
+    if (prevProps === this.props) {
+      return;
+    }
+
+    const prevRowIds = prevProps.rows.map((row) => row.id);
     const rowIds = this.props.rows.map((row) => row.id);
-    const nextRowIds = nextProps.rows.map((row) => row.id);
 
-    if (!isEqual(rowIds, nextRowIds)) {
-      this.setState((state) => getDerivedStateFromProps(nextProps, state));
+    if (!isEqual(prevRowIds, rowIds)) {
+      this.setState((state) => getDerivedStateFromProps(this.props, state));
       return;
     }
 
+    const prevHeaders = prevProps.headers.map((header) => header.key);
     const headers = this.props.headers.map((header) => header.key);
-    const nextHeaders = nextProps.headers.map((header) => header.key);
 
-    if (!isEqual(headers, nextHeaders)) {
-      this.setState((state) => getDerivedStateFromProps(nextProps, state));
+    if (!isEqual(prevHeaders, headers)) {
+      this.setState((state) => getDerivedStateFromProps(this.props, state));
       return;
     }
 
-    if (!isEqual(this.props.rows, nextProps.rows)) {
-      this.setState((state) => getDerivedStateFromProps(nextProps, state));
+    if (!isEqual(prevProps.rows, this.props.rows)) {
+      this.setState((state) => getDerivedStateFromProps(this.props, state));
       return;
     }
   }
@@ -331,6 +335,7 @@ export default class DataTable extends React.Component {
       checked || indeterminate
         ? translationKeys.unselectAll
         : translationKeys.selectAll;
+
     return {
       ...rest,
       ariaLabel: t(translationKey),

@@ -337,6 +337,7 @@ export default class ComboBox extends React.Component {
         inputValue={this.state.inputValue || ''}
         itemToString={itemToString}
         defaultSelectedItem={initialSelectedItem}
+        inputId={id}
         selectedItem={selectedItem}>
         {({
           getToggleButtonProps,
@@ -367,7 +368,6 @@ export default class ComboBox extends React.Component {
               light={light}
               size={size}>
               <ListBox.Field
-                id={id}
                 {...getToggleButtonProps({
                   disabled,
                   onClick: this.onToggleClick(isOpen),
@@ -413,9 +413,7 @@ export default class ComboBox extends React.Component {
                 />
               </ListBox.Field>
               {isOpen && (
-                <ListBox.Menu
-                  id={id}
-                  {...getMenuProps({ 'aria-label': ariaLabel })}>
+                <ListBox.Menu {...getMenuProps({ 'aria-label': ariaLabel })}>
                   {this.filterItems(items, itemToString, inputValue).map(
                     (item, index) => {
                       const itemProps = getItemProps({ item, index });
