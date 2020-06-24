@@ -44,12 +44,14 @@ function Dropdown({
   invalidText,
   initialSelectedItem,
   selectedItem: controlledSelectedItem,
+  downshiftProps,
 }) {
   const selectProps = {
     items,
     itemToString,
     initialSelectedItem,
     onSelectedItemChange,
+    ...downshiftProps,
   };
 
   // only set selectedItem if the prop is defined. Setting if it is undefined
@@ -285,6 +287,11 @@ Dropdown.propTypes = {
    * Specify the direction of the dropdown. Can be either top or bottom.
    */
   direction: PropTypes.oneOf(['top', 'bottom']),
+
+  /**
+   * Additional props passed to Downshift
+   */
+  downshiftProps: PropTypes.object,
 };
 
 Dropdown.defaultProps = {
