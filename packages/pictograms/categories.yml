@@ -340,6 +340,8 @@ categories:
     members:
       - agriculture
       - bulldozer
+      - cargo--crane
+      - cargo--ship
       - cheese
       - farm
       - farm--01
@@ -491,6 +493,7 @@ categories:
       - coat--hanger
       - credit--card
       - customer--service
+      - gift
       - price
       - receipt
       - shirt
