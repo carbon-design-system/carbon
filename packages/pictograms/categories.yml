@@ -340,6 +340,8 @@ categories:
     members:
       - agriculture
       - bulldozer
+      - cargo--crane
+      - cargo--ship
       - cheese
       - farm
       - farm--01
