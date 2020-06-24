@@ -1,5 +1,9 @@
 - name: active--server
   friendly_name: Active server
+- name: add--device
+  friendly_name: Add device
+  aliases:
+    - add device
 - name: advocate
   friendly_name: Advocate
   aliases:
@@ -415,6 +419,10 @@
   friendly_name: Devops
   aliases:
     - devops
+- name: developer-z-os
+  friendly_name: Developer z/OS
+  aliases:
+    - developer z os
 - name: dialogue
   friendly_name: Dialogue
   aliases:
@@ -1374,6 +1382,46 @@
   friendly_name: Swipe left
 - name: swipe--right
   friendly_name: Swipe right
+- name: systems-devops--analyze
+  friendly_name: Systems DevOps analyze
+  aliases:
+    - systems devops analyze
+- name: systems-devops--build
+  friendly_name: Systems DevOps build
+  aliases:
+    - systems devops build
+- name: systems-devops--cicd-pipeline
+  friendly_name: Systems DevOps CICD pipeline
+  aliases:
+    - systems devops cicd pipeline
+- name: systems-devops--code
+  friendly_name: Systems DevOps code
+  aliases:
+    - systems devops code
+- name: systems-devops--deploy
+  friendly_name: Systems DevOps deploy
+  aliases:
+    - systems devops deploy
+- name: systems-devops--monitor
+  friendly_name: Systems DevOps nonitor
+  aliases:
+    - systems devops monitor
+- name: systems-devops--plan
+  friendly_name: Systems DevOps plan
+  aliases:
+    - systems devops plan
+- name: systems-devops--provision
+  friendly_name: Systems DevOps provision
+  aliases:
+    - systems devops provision
+- name: systems-devops--release
+  friendly_name: Systems DevOps release
+  aliases:
+    - systems devops release
+- name: systems-devops--test
+  friendly_name: Systems DevOps test
+  aliases:
+    - systems devops test
 - name: t-shirt
   friendly_name: T-shirt
 - name: tags
