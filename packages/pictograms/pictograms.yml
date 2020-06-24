@@ -161,6 +161,14 @@
   friendly_name: Care
   aliases:
     - care
+- name: cargo--crane
+  friendly_name: Cargo crane
+  aliases:
+    - cargo crane shipment shipping
+- name: cargo--ship
+  friendly_name: Cargo ship
+  aliases:
+    - cargo ship shipment shipping
 - name: cell
   friendly_name: Cell
   aliases:
@@ -606,6 +614,10 @@
   friendly_name: Gear
   aliases:
     - gear
+- name: gift
+  friendly_name: Gift
+  aliases:
+    - gift box
 - name: global--analytics
   friendly_name: Global analytics
   aliases: []
