@@ -114,7 +114,6 @@ function MultiSelect({
   const helperId = !helperText
     ? undefined
     : `multiselect-helper-text-${multiSelectInstanceId}`;
-  const labelId = `multiselect-label-${multiSelectInstanceId}`;
   const fieldLabelId = `multiselect-field-label-${multiSelectInstanceId}`;
   const helperClasses = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
@@ -172,12 +171,11 @@ function MultiSelect({
   return (
     <div className={wrapperClasses}>
       {titleText && (
-        <label id={labelId} className={titleClasses} {...getLabelProps()}>
+        <label className={titleClasses} {...getLabelProps()}>
           {titleText}
         </label>
       )}
       <ListBox
-        id={id}
         type={type}
         size={size}
         className={className}
@@ -185,12 +183,12 @@ function MultiSelect({
         light={light}
         invalid={invalid}
         invalidText={invalidText}
-        isOpen={isOpen}>
+        isOpen={isOpen}
+        id={id}>
         {invalid && (
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
         )}
         <button
-          id={id}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}

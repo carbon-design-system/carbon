@@ -125,12 +125,12 @@ function Dropdown({
         invalid={invalid}
         invalidText={invalidText}
         light={light}
-        isOpen={isOpen}>
+        isOpen={isOpen}
+        id={id}>
         {invalid && (
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
         )}
         <button
-          id={id}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
