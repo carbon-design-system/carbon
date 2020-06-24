@@ -235,6 +235,7 @@ categories:
       - windows
   - name: Device Interaction
     members:
+      - add--device
       - augmented--reality
       - mobile--add
       - mobile--chat
@@ -552,6 +553,19 @@ categories:
       - movement--of--goods--03
       - movement--of--items
       - process
+  - name: Systems DevOps
+    members:
+      - developer-z-os
+      - systems-devops--analyze
+      - systems-devops--build
+      - systems-devops--cicd-pipeline
+      - systems-devops--code
+      - systems-devops--deploy
+      - systems-devops--monitor
+      - systems-devops--plan
+      - systems-devops--provision
+      - systems-devops--release
+      - systems-devops--test
   - name: Time
     members:
       - calendar
