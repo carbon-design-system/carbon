@@ -50,7 +50,6 @@ function Dropdown({
     itemToString,
     initialSelectedItem,
     onSelectedItemChange,
-    id,
   };
 
   // only set selectedItem if the prop is defined. Setting if it is undefined
@@ -126,7 +125,8 @@ function Dropdown({
         invalid={invalid}
         invalidText={invalidText}
         light={light}
-        isOpen={isOpen}>
+        isOpen={isOpen}
+        id={id}>
         {invalid && (
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
         )}

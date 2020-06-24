@@ -83,7 +83,6 @@ function MultiSelect({
     ...downshiftProps,
     highlightedIndex,
     isOpen,
-    id,
     itemToString,
     onStateChange,
     selectedItem: controlledSelectedItems,
@@ -184,7 +183,8 @@ function MultiSelect({
         light={light}
         invalid={invalid}
         invalidText={invalidText}
-        isOpen={isOpen}>
+        isOpen={isOpen}
+        id={id}>
         {invalid && (
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
         )}

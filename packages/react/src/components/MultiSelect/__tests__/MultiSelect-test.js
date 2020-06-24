@@ -275,7 +275,7 @@ describe('MultiSelect', () => {
         />
       );
 
-      expect(document.getElementById('custom-id-menu')).toBeTruthy();
+      expect(document.getElementById('custom-id')).toBeTruthy();
     });
 
     it('should support a custom itemToString with object items', () => {
