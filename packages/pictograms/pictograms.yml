@@ -610,6 +610,10 @@
   friendly_name: Gear
   aliases:
     - gear
+- name: gift
+  friendly_name: Gift
+  aliases:
+    - gift box
 - name: global--analytics
   friendly_name: Global analytics
   aliases: []
