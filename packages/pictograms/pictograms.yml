@@ -349,6 +349,10 @@
     - connect
 - name: connected--ecosystem
   friendly_name: Connected ecosystem
+- name: connected--nodes--to--the--cloud
+  friendly_name: Connected nodes to the cloud
+  aliases:
+    - connected nodes to the cloud
 - name: console
   friendly_name: Console
   aliases:
@@ -857,6 +861,14 @@
   friendly_name: Magnify
   aliases:
     - magnify
+- name: managing--contractual--flow
+  friendly_name: Managing contractual flow
+  aliases:
+    - managing contractual flow
+- name: managing--items
+  friendly_name: Managing items
+  aliases:
+    - managing items
 - name: marketplace
   friendly_name: Marketplace
   aliases:
@@ -924,12 +936,36 @@
   friendly_name: Mobile devices
 - name: mobile--phone
   friendly_name: Mobile phone
+- name: monitored--item--on--conveyor
+  friendly_name: Monitored item on conveyor
+  aliases:
+    - monitored item on conveyor
 - name: mortar--and--pestle
   friendly_name: Mortar and pestle
 - name: moscow
   friendly_name: Moscow
   aliases:
     - moscow
+- name: movement--in--overlapping--networks
+  friendly_name: Movement in overlapping networks
+  aliases:
+    - movement in overlapping networks
+- name: movement--of--goods--01
+  friendly_name: Movement of goods 01
+  aliases:
+    - movement of goods 01
+- name: movement--of--goods--02
+  friendly_name: Movement of goods 02
+  aliases:
+    - movement of goods 02
+- name: movement--of--goods--03
+  friendly_name: Movement of goods 03
+  aliases:
+    - movement of goods 03
+- name: movement--of--items
+  friendly_name: Movement of items
+  aliases:
+    - movement of items
 - name: mqa
   friendly_name: Mqa
   aliases:
@@ -1085,6 +1121,10 @@
   friendly_name: Private network alt
 - name: private--network--alt--01
   friendly_name: Private network alt 01
+- name: process
+  friendly_name: Process
+  aliases:
+    - process
 - name: progress
   friendly_name: Progress
   aliases:

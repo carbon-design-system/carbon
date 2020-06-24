@@ -540,6 +540,18 @@ categories:
       - summit
       - target
       - target--area
+  - name: Supply Chain
+    members:
+      - connected--nodes--to--the--cloud
+      - managing--contractual--flow
+      - managing--items
+      - monitored--item--on--conveyor
+      - movement--in--overlapping--networks
+      - movement--of--goods--01
+      - movement--of--goods--02
+      - movement--of--goods--03
+      - movement--of--items
+      - process
   - name: Time
     members:
       - calendar
