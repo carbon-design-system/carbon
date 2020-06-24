@@ -2033,6 +2033,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "downshiftProps": Object {
+        "type": "object",
+      },
       "helperText": Object {
         "args": Array [
           Array [
