@@ -3557,6 +3557,7 @@ $carbon--spacing-09: 3rem;
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [pagination [mixin]](#pagination-mixin)
   - [tile [mixin]](#tile-mixin)
 
 ### ✅carbon--spacing-10 [variable]
@@ -20942,15 +20943,15 @@ Pagination styles
     background: none;
     cursor: pointer;
     height: 100%;
+    width: $carbon--spacing-09;
     margin: 0;
-    padding: 0 rem(14px);
     border-left: 1px solid $ui-03;
     display: flex;
     justify-content: center;
     align-items: center;
     fill: $ui-05;
-    transition: outline $duration--fast-02 motion(standard, productive);
-    transition: background-color $duration--fast-02 motion(standard, productive);
+    transition: outline $duration--fast-02 motion(standard, productive), background-color
+        $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--pagination__button:focus,
@@ -21000,6 +21001,7 @@ Pagination styles
   - [hover-ui [variable]](#hover-ui-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-02 [variable]](#text-02-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
