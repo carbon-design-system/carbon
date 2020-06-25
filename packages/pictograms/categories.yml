@@ -385,6 +385,7 @@ categories:
   - name: Life Science
     members:
       - cell
+      - coronavirus
       - dna
       - erlenmeyer--flask
       - heart
