@@ -604,6 +604,12 @@
   friendly_name: Flower 01
 - name: flower--02
   friendly_name: Flower 02
+- name: focus
+  friendly_name: Focus
+  aliases:
+    - converge
+    - feedback
+    - focus
 - name: fog
   friendly_name: Fog
   aliases:
@@ -678,10 +684,21 @@
     - globe
 - name: globe--locations
   friendly_name: Globe locations
+- name: goals
+  friendly_name: Goals
+  aliases:
+    - target
+    - goals
+    - checkpoint
 - name: group
   friendly_name: Group
   aliases:
     - group
+- name: growth
+  friendly_name: Growth
+  aliases:
+    - growth
+    - personal growth
 - name: hail
   friendly_name: Hail
   aliases:
@@ -761,6 +778,12 @@
   friendly_name: Innovate
   aliases:
     - innovate
+- name: insights
+  friendly_name: Insights
+  aliases:
+    - insights
+    - assessment
+    - self-awareness
 - name: inspect--data
   friendly_name: Inspect data
 - name: integration
