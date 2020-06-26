@@ -7,7 +7,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { CaretDown16 } from '@carbon/icons-react';
+import { CaretDown16, Checkmark16 } from '@carbon/icons-react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { keys, match, matches } from '../../internal/keyboard';
@@ -167,7 +167,10 @@ export default function TreeNode({
       <li {...treeNodeProps}>
         <div className={`${prefix}--tree-node__label`} ref={currentNodeLabel}>
           {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
-          {label}
+          <div className={`${prefix}--tree-node__label-content`}>{label}</div>
+          {isSelected && (
+            <Checkmark16 className={`${prefix}--tree-node__selected-icon`} />
+          )}
         </div>
       </li>
     );
@@ -184,8 +187,11 @@ export default function TreeNode({
         </button>
         <span className={`${prefix}--tree-node__label__details`}>
           {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
-          {label}
+          <div className={`${prefix}--tree-node__label-content`}>{label}</div>
         </span>
+        {isSelected && (
+          <Checkmark16 className={`${prefix}--tree-node__selected-icon`} />
+        )}
       </div>
       {expanded && (
         <ul role="group" className={`${prefix}--tree-node__children`}>

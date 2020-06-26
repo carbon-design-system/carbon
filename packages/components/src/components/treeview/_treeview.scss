@@ -38,6 +38,7 @@
     .#{$prefix}--tree-node--disabled {
       background-color: $disabled-01;
       color: $disabled-02;
+      pointer-events: none;
     }
 
     .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__label:hover {
@@ -45,7 +46,8 @@
     }
 
     .#{$prefix}--tree-node--disabled .#{$prefix}--tree-parent-node__toggle-icon,
-    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__icon {
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__icon,
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__selected-icon {
       fill: $disabled-02;
     }
 
@@ -77,6 +79,7 @@
     .#{$prefix}--tree-node__label__details {
       display: flex;
       align-items: center;
+      flex-grow: 1;
     }
 
     .#{$prefix}--tree-node--with-icon .#{$prefix}--tree-parent-node__toggle {
@@ -115,9 +118,14 @@
       fill: $icon-01;
     }
 
+    .#{$prefix}--tree-node__label-content {
+      flex-grow: 1;
+    }
+
     .#{$prefix}--tree-node--selected > .#{$prefix}--tree-node__label {
       position: relative;
       background-color: $selected-ui;
+      color: $text-01;
 
       &::before {
         position: absolute;
@@ -128,6 +136,17 @@
         height: 100%;
         background-color: $interactive-01;
       }
+
+      &:hover {
+        background-color: $hover-selected-ui;
+      }
+    }
+
+    .#{$prefix}--tree-node__selected-icon {
+      justify-self: flex-end;
+      margin-right: $spacing-03;
+      margin-left: $spacing-03;
+      fill: $icon-01;
     }
   }
 
