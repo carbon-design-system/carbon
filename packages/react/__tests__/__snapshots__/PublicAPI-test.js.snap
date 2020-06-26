@@ -3185,6 +3185,9 @@ Map {
       "modalText": Object {
         "type": "string",
       },
+      "onKeyDown": Object {
+        "type": "func",
+      },
       "passiveModal": Object {
         "type": "bool",
       },
@@ -3205,6 +3208,9 @@ Map {
         "type": "oneOfType",
       },
       "secondaryButtonText": Object {
+        "type": "string",
+      },
+      "selectorPrimaryFocus": Object {
         "type": "string",
       },
       "shouldCloseAfterSubmit": Object {
@@ -3951,11 +3957,17 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "handleOverflowMenuItemFocus": Object {
+        "type": "func",
+      },
       "hasDivider": Object {
         "type": "bool",
       },
       "href": Object {
         "type": "string",
+      },
+      "index": Object {
+        "type": "number",
       },
       "isDelete": Object {
         "type": "bool",
