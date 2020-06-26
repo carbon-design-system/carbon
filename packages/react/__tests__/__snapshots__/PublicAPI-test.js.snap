@@ -2085,7 +2085,20 @@ Map {
       "type": "text",
     },
     "propTypes": Object {
+      "datePickerType": Object {
+        "args": Array [
+          Array [
+            "simple",
+            "single",
+            "range",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "disabled": Object {
+        "type": "bool",
+      },
+      "hideLabel": Object {
         "type": "bool",
       },
       "iconDescription": Object {
@@ -2098,6 +2111,9 @@ Map {
       "invalid": Object {
         "type": "bool",
       },
+      "invalidText": Object {
+        "type": "string",
+      },
       "labelText": Object {
         "isRequired": true,
         "type": "node",
@@ -2108,7 +2124,13 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "openCalendar": Object {
+        "type": "func",
+      },
       "pattern": [Function],
+      "placeholder": Object {
+        "type": "string",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -2136,6 +2158,9 @@ Map {
     },
     "propTypes": Object {
       "ariaLabel": Object {
+        "type": "string",
+      },
+      "className": Object {
         "type": "string",
       },
       "direction": Object {
@@ -2393,6 +2418,9 @@ Map {
       "iconDescription": Object {
         "type": "string",
       },
+      "invalid": Object {
+        "type": "bool",
+      },
       "status": Object {
         "args": Array [
           Array [
@@ -2549,6 +2577,16 @@ Map {
       },
       "onDelete": Object {
         "type": "func",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "default",
+            "field",
+            "small",
+          ],
+        ],
+        "type": "oneOf",
       },
       "status": Object {
         "args": Array [
@@ -2891,6 +2929,9 @@ Map {
         "type": "func",
       },
       "iconTitle": Object {
+        "type": "string",
+      },
+      "name": Object {
         "type": "string",
       },
       "role": Object {
@@ -6252,6 +6293,9 @@ Map {
   "DatePickerSkeleton" => Object {
     "propTypes": Object {
       "className": Object {
+        "type": "string",
+      },
+      "id": Object {
         "type": "string",
       },
       "range": Object {

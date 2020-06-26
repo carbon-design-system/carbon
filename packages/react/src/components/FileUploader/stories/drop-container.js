@@ -14,7 +14,7 @@ import uid from '../../../tools/uniqueId';
 
 const { prefix } = settings;
 
-function ExampleDropContainerApp(props) {
+const ExampleDropContainerApp = (props) => {
   const [files, setFiles] = useState([]);
   const handleDrop = (e) => {
     e.preventDefault();
@@ -88,6 +88,7 @@ function ExampleDropContainerApp(props) {
         status: 'uploading',
         iconDescription: 'Uploading',
       }));
+      // eslint-disable-next-line react/prop-types
       if (props.multiple) {
         setFiles([...files, ...newFiles]);
         newFiles.forEach(uploadFile);
@@ -96,6 +97,7 @@ function ExampleDropContainerApp(props) {
         uploadFile(newFiles[0]);
       }
     },
+    // eslint-disable-next-line react/prop-types
     [files, props.multiple]
   );
   const handleFileUploaderItemClick = useCallback(
@@ -126,6 +128,7 @@ function ExampleDropContainerApp(props) {
               uuid={uuid}
               name={name}
               filesize={filesize}
+              // eslint-disable-next-line react/prop-types
               size={props.size}
               status={status}
               iconDescription={iconDescription}
@@ -138,6 +141,6 @@ function ExampleDropContainerApp(props) {
       </div>
     </FormItem>
   );
-}
+};
 
-export default (props) => <ExampleDropContainerApp {...props} />;
+export default ExampleDropContainerApp;
