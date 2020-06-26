@@ -48,7 +48,40 @@ exports[`TreeView should render 1`] = `
         <div
           className="bx--tree-node__label"
         >
-          1
+          <div
+            className="bx--tree-node__label-content"
+          >
+            1
+          </div>
+          <ForwardRef(Checkmark16)
+            className="bx--tree-node__selected-icon"
+          >
+            <Icon
+              className="bx--tree-node__selected-icon"
+              fill="currentColor"
+              height={16}
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 32 32"
+              width={16}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <svg
+                aria-hidden={true}
+                className="bx--tree-node__selected-icon"
+                fill="currentColor"
+                focusable="false"
+                height={16}
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 32 32"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13 21.2L5.4 13.6 4 15 13 24 28 9 26.6 7.5 13 21.2z"
+                />
+              </svg>
+            </Icon>
+          </ForwardRef(Checkmark16)>
         </div>
       </li>
     </TreeNode>
@@ -76,7 +109,11 @@ exports[`TreeView should render 1`] = `
         <div
           className="bx--tree-node__label"
         >
-          2
+          <div
+            className="bx--tree-node__label-content"
+          >
+            2
+          </div>
         </div>
       </li>
     </TreeNode>
@@ -144,7 +181,11 @@ exports[`TreeView should render 1`] = `
           <span
             className="bx--tree-node__label__details"
           >
-            5
+            <div
+              className="bx--tree-node__label-content"
+            >
+              5
+            </div>
           </span>
         </div>
         <ul
@@ -175,7 +216,11 @@ exports[`TreeView should render 1`] = `
               <div
                 className="bx--tree-node__label"
               >
-                5-1
+                <div
+                  className="bx--tree-node__label-content"
+                >
+                  5-1
+                </div>
               </div>
             </li>
           </TreeNode>
@@ -203,7 +248,11 @@ exports[`TreeView should render 1`] = `
               <div
                 className="bx--tree-node__label"
               >
-                5-2
+                <div
+                  className="bx--tree-node__label-content"
+                >
+                  5-2
+                </div>
               </div>
             </li>
           </TreeNode>
@@ -271,7 +320,11 @@ exports[`TreeView should render 1`] = `
                 <span
                   className="bx--tree-node__label__details"
                 >
-                  5-3
+                  <div
+                    className="bx--tree-node__label-content"
+                  >
+                    5-3
+                  </div>
                 </span>
               </div>
               <ul
@@ -302,7 +355,11 @@ exports[`TreeView should render 1`] = `
                     <div
                       className="bx--tree-node__label"
                     >
-                      5-4
+                      <div
+                        className="bx--tree-node__label-content"
+                      >
+                        5-4
+                      </div>
                     </div>
                   </li>
                 </TreeNode>
@@ -402,7 +459,40 @@ exports[`TreeView should render with icons 1`] = `
               </svg>
             </Icon>
           </ForwardRef(Document16)>
-          1
+          <div
+            className="bx--tree-node__label-content"
+          >
+            1
+          </div>
+          <ForwardRef(Checkmark16)
+            className="bx--tree-node__selected-icon"
+          >
+            <Icon
+              className="bx--tree-node__selected-icon"
+              fill="currentColor"
+              height={16}
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 32 32"
+              width={16}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <svg
+                aria-hidden={true}
+                className="bx--tree-node__selected-icon"
+                fill="currentColor"
+                focusable="false"
+                height={16}
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 32 32"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13 21.2L5.4 13.6 4 15 13 24 28 9 26.6 7.5 13 21.2z"
+                />
+              </svg>
+            </Icon>
+          </ForwardRef(Checkmark16)>
         </div>
       </li>
     </TreeNode>
@@ -468,7 +558,11 @@ exports[`TreeView should render with icons 1`] = `
               </svg>
             </Icon>
           </ForwardRef(Document16)>
-          2
+          <div
+            className="bx--tree-node__label-content"
+          >
+            2
+          </div>
         </div>
       </li>
     </TreeNode>
@@ -571,7 +665,11 @@ exports[`TreeView should render with icons 1`] = `
                 </svg>
               </Icon>
             </ForwardRef(Folder16)>
-            5
+            <div
+              className="bx--tree-node__label-content"
+            >
+              5
+            </div>
           </span>
         </div>
         <ul
@@ -640,7 +738,11 @@ exports[`TreeView should render with icons 1`] = `
                     </svg>
                   </Icon>
                 </ForwardRef(Document16)>
-                5-1
+                <div
+                  className="bx--tree-node__label-content"
+                >
+                  5-1
+                </div>
               </div>
             </li>
           </TreeNode>
@@ -706,7 +808,11 @@ exports[`TreeView should render with icons 1`] = `
                     </svg>
                   </Icon>
                 </ForwardRef(Document16)>
-                5-2
+                <div
+                  className="bx--tree-node__label-content"
+                >
+                  5-2
+                </div>
               </div>
             </li>
           </TreeNode>
@@ -809,7 +915,11 @@ exports[`TreeView should render with icons 1`] = `
                       </svg>
                     </Icon>
                   </ForwardRef(Folder16)>
-                  5-3
+                  <div
+                    className="bx--tree-node__label-content"
+                  >
+                    5-3
+                  </div>
                 </span>
               </div>
               <ul
@@ -878,7 +988,11 @@ exports[`TreeView should render with icons 1`] = `
                           </svg>
                         </Icon>
                       </ForwardRef(Document16)>
-                      5-4
+                      <div
+                        className="bx--tree-node__label-content"
+                      >
+                        5-4
+                      </div>
                     </div>
                   </li>
                 </TreeNode>
