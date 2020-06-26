@@ -148,8 +148,8 @@ export default function TreeNode({
     }
 
     // sync props and state
-    setExpanded(isExpanded ?? expanded);
-  }, [children, depth, expanded, Icon, isExpanded]);
+    setExpanded(expanded);
+  }, [children, depth, expanded, Icon]);
 
   const treeNodeProps = {
     ...rest,
