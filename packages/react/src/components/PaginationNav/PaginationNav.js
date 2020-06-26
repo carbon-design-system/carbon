@@ -167,7 +167,7 @@ function PaginationOverflow({
 
 export default function PaginationNav({
   className,
-  onChange,
+  onChange = () => {},
   totalItems,
   itemsShown = 10,
   page = 0,
@@ -233,8 +233,6 @@ export default function PaginationNav({
   useEffect(() => {
     if (pageWouldBeHidden(currentPage)) {
       const delta = currentPage - prevPage || 0;
-
-      console.log(delta);
 
       if (delta > 0) {
         const splitPoint = itemsShown - 3;
