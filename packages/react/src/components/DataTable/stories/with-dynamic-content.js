@@ -36,7 +36,7 @@ import DataTable, {
 import { batchActionClick, initialRows, headers } from './shared';
 import './with-dynamic-content-story.scss';
 
-const DynamicContentStory = props => {
+const DynamicContentStory = (props) => {
   const insertInRandomPosition = (array, element) => {
     const index = Math.floor(Math.random() * (array.length + 1));
     return [...array.slice(0, index), element, ...array.slice(index)];

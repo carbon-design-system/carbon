@@ -68,6 +68,19 @@ Map {
   },
   "BreadcrumbItem" => Object {
     "propTypes": Object {
+      "aria-current": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "bool",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "children": Object {
         "type": "node",
       },
@@ -449,6 +462,9 @@ Map {
         ],
         "type": "shape",
       },
+      "helperText": Object {
+        "type": "string",
+      },
       "id": Object {
         "isRequired": true,
         "type": "string",
@@ -521,6 +537,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "titleText": Object {
+        "type": "string",
+      },
       "translateWithId": Object {
         "type": "func",
       },
@@ -541,11 +560,17 @@ Map {
       "selectorPrimaryFocus": "[data-modal-primary-focus]",
     },
     "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
       "className": Object {
         "type": "string",
       },
       "containerClassName": Object {
         "type": "string",
+      },
+      "danger": Object {
+        "type": "bool",
       },
       "onClose": Object {
         "type": "func",
@@ -557,6 +582,9 @@ Map {
         "type": "bool",
       },
       "selectorPrimaryFocus": Object {
+        "type": "string",
+      },
+      "selectorsFloatingMenus": Object {
         "type": "string",
       },
       "size": Object {
@@ -615,6 +643,9 @@ Map {
   "ModalBody" => Object {
     "propTypes": Object {
       "aria-label": [Function],
+      "children": Object {
+        "type": "node",
+      },
       "className": Object {
         "type": "string",
       },
@@ -643,6 +674,26 @@ Map {
       },
       "danger": Object {
         "type": "bool",
+      },
+      "inputref": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "current": Object {
+                    "type": "any",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "onRequestClose": Object {
         "type": "func",
@@ -716,6 +767,9 @@ Map {
       "feedbackTimeout": Object {
         "type": "number",
       },
+      "onAnimationEnd": Object {
+        "type": "func",
+      },
       "onClick": Object {
         "type": "func",
       },
@@ -754,6 +808,9 @@ Map {
         "overflowMenuOnHover": true,
       },
       "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
         "className": Object {
           "type": "string",
         },
@@ -897,6 +954,9 @@ Map {
         "description": Object {
           "type": "node",
         },
+        "stickyHeader": Object {
+          "type": "bool",
+        },
         "title": Object {
           "type": "node",
         },
@@ -910,6 +970,9 @@ Map {
         },
         "className": Object {
           "type": "string",
+        },
+        "enableExpando": Object {
+          "type": "bool",
         },
         "expandIconDescription": Object {
           "type": "string",
@@ -941,6 +1004,9 @@ Map {
         },
         "isExpanded": Object {
           "isRequired": true,
+          "type": "bool",
+        },
+        "isSelected": Object {
           "type": "bool",
         },
         "onExpand": Object {
@@ -1026,6 +1092,9 @@ Map {
         "className": Object {
           "type": "string",
         },
+        "isSelected": Object {
+          "type": "bool",
+        },
       },
     },
     "TableSelectAll": Object {
@@ -1043,6 +1112,9 @@ Map {
         },
         "className": Object {
           "type": "string",
+        },
+        "disabled": Object {
+          "type": "bool",
         },
         "id": Object {
           "isRequired": true,
@@ -1188,8 +1260,14 @@ Map {
         "className": Object {
           "type": "string",
         },
+        "defaultExpanded": Object {
+          "type": "bool",
+        },
         "defaultValue": Object {
           "type": "string",
+        },
+        "expanded": Object {
+          "type": "bool",
         },
         "id": Object {
           "type": "string",
@@ -1200,6 +1278,9 @@ Map {
         "onChange": Object {
           "type": "func",
         },
+        "onExpand": Object {
+          "type": "func",
+        },
         "persistant": [Function],
         "persistent": Object {
           "type": "bool",
@@ -1207,7 +1288,7 @@ Map {
         "placeHolderText": Object {
           "type": "string",
         },
-        "searchContainerClasses": Object {
+        "searchContainerClass": Object {
           "type": "string",
         },
         "tabIndex": Object {
@@ -1300,6 +1381,9 @@ Map {
         "isRequired": true,
         "type": "arrayOf",
       },
+      "shouldShowBorder": Object {
+        "type": "bool",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -1320,6 +1404,12 @@ Map {
       "translateWithId": Object {
         "type": "func",
       },
+      "useStaticWidth": Object {
+        "type": "bool",
+      },
+      "useZebraStyles": Object {
+        "type": "bool",
+      },
     },
     "translationKeys": Array [
       "carbon.table.row.expand",
@@ -1338,6 +1428,9 @@ Map {
       "overflowMenuOnHover": true,
     },
     "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
       "className": Object {
         "type": "string",
       },
@@ -1481,6 +1574,9 @@ Map {
       "description": Object {
         "type": "node",
       },
+      "stickyHeader": Object {
+        "type": "bool",
+      },
       "title": Object {
         "type": "node",
       },
@@ -1494,6 +1590,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "enableExpando": Object {
+        "type": "bool",
       },
       "expandIconDescription": Object {
         "type": "string",
@@ -1525,6 +1624,9 @@ Map {
       },
       "isExpanded": Object {
         "isRequired": true,
+        "type": "bool",
+      },
+      "isSelected": Object {
         "type": "bool",
       },
       "onExpand": Object {
@@ -1610,6 +1712,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "isSelected": Object {
+        "type": "bool",
+      },
     },
   },
   "TableSelectAll" => Object {
@@ -1627,6 +1732,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
       },
       "id": Object {
         "isRequired": true,
@@ -1737,8 +1845,14 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "defaultExpanded": Object {
+        "type": "bool",
+      },
       "defaultValue": Object {
         "type": "string",
+      },
+      "expanded": Object {
+        "type": "bool",
       },
       "id": Object {
         "type": "string",
@@ -1749,6 +1863,9 @@ Map {
       "onChange": Object {
         "type": "func",
       },
+      "onExpand": Object {
+        "type": "func",
+      },
       "persistant": [Function],
       "persistent": Object {
         "type": "bool",
@@ -1756,7 +1873,7 @@ Map {
       "placeHolderText": Object {
         "type": "string",
       },
-      "searchContainerClasses": Object {
+      "searchContainerClass": Object {
         "type": "string",
       },
       "tabIndex": Object {
@@ -6495,6 +6612,9 @@ Map {
     "propTypes": Object {
       "children": Object {
         "isRequired": true,
+        "type": "string",
+      },
+      "className": Object {
         "type": "string",
       },
       "href": Object {

@@ -105,10 +105,10 @@ const TableToolbarSearch = ({
     <div
       tabIndex={expandedState ? '-1' : tabIndex}
       ref={searchRef}
-      onKeyDown={event => onClick(event)}
-      onClick={event => onClick(event)}
-      onFocus={event => handleExpand(event, true)}
-      onBlur={event => !value && handleExpand(event, false)}
+      onKeyDown={(event) => onClick(event)}
+      onClick={(event) => onClick(event)}
+      onFocus={(event) => handleExpand(event, true)}
+      onBlur={(event) => !value && handleExpand(event, false)}
       className={searchContainerClasses}>
       <Search
         size="sm"

@@ -23,7 +23,7 @@ import DataTable, {
 import { headers, initialRows } from './shared';
 import './with-expansion-story.scss';
 
-const OptionsStory = props => (
+const OptionsStory = (props) => (
   <DataTable
     rows={[
       { ...initialRows[0], disabled: true },

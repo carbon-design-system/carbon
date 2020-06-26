@@ -21,7 +21,7 @@ import DataTable, {
 import { initialRows, headers } from './shared';
 import './with-expansion-story.scss';
 
-const BatchExpansionStory = props => (
+const BatchExpansionStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}

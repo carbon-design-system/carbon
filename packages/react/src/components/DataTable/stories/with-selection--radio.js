@@ -18,7 +18,7 @@ import DataTable, {
 } from '..';
 import { initialRows, headers } from './shared';
 
-const SelectionRadioStory = props => (
+const SelectionRadioStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}

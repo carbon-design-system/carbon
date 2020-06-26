@@ -25,7 +25,7 @@ import DataTable, {
 
 import { initialRows, headers } from './shared';
 
-const ToolbarStory = props => (
+const ToolbarStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}
@@ -76,7 +76,7 @@ const ToolbarStory = props => (
           <TableBody>
             {rows.map((row, i) => (
               <TableRow key={i} {...getRowProps({ row })}>
-                {row.cells.map(cell => (
+                {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
               </TableRow>

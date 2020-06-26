@@ -17,7 +17,7 @@ import DataTable, {
 } from '../../DataTable';
 import { initialRows, headers } from './shared';
 
-const SortingStory = props => (
+const SortingStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}
@@ -50,7 +50,7 @@ const SortingStory = props => (
           <TableBody>
             {rows.map((row, i) => (
               <TableRow key={i} {...getRowProps({ row })}>
-                {row.cells.map(cell => (
+                {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
               </TableRow>

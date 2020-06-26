@@ -20,7 +20,7 @@ import DataTable, {
 } from '../../DataTable';
 import { initialRows, headers } from './shared';
 
-const OverflowMenuStory = props => (
+const OverflowMenuStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}

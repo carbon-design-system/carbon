@@ -35,7 +35,7 @@ import DataTable, {
 
 import { batchActionClick, initialRows, headers } from './shared';
 
-const TableBatchActionsStory = props => (
+const TableBatchActionsStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}

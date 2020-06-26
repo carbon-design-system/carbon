@@ -19,7 +19,7 @@ import DataTable, {
 } from '../../DataTable';
 import { initialRows, headers } from './shared';
 
-const SelectionStory = props => (
+const SelectionStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}

@@ -82,7 +82,7 @@ export const headers = [
   },
 ];
 
-const BooleanColumnStory = props => (
+const BooleanColumnStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}
@@ -112,7 +112,7 @@ const BooleanColumnStory = props => (
           <TableBody>
             {rows.map((row, i) => (
               <TableRow key={i} {...getRowProps({ row })}>
-                {row.cells.map(cell => {
+                {row.cells.map((cell) => {
                   if (cell.info.header === 'enabled') {
                     return (
                       <TableCell

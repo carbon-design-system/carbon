@@ -22,7 +22,7 @@ import DataTable, {
 } from '../../DataTable';
 import { initialRows, headers } from './shared';
 
-const ExpansionStory = props => (
+const ExpansionStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}

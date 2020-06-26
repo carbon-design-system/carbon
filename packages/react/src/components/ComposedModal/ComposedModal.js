@@ -526,7 +526,12 @@ export class ModalFooter extends Component {
     /**
      * The `ref` callback for the primary button.
      */
-    inputref: PropTypes.func,
+    inputref: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({
+        current: PropTypes.any,
+      }),
+    ]),
   };
 
   static defaultProps = {

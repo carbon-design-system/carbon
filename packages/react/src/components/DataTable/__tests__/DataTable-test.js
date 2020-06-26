@@ -254,13 +254,8 @@ describe('DataTable', () => {
                 <TableHead>
                   <TableRow>
                     <TableSelectAll {...getSelectionProps()} />
-<<<<<<< HEAD
-                    {headers.map((header) => (
-                      <TableHeader {...getHeaderProps({ header })}>
-=======
                     {headers.map((header, i) => (
                       <TableHeader key={i} {...getHeaderProps({ header })}>
->>>>>>> chore(lint): begin fixing linting errors
                         {header.header}
                       </TableHeader>
                     ))}
@@ -414,13 +409,8 @@ describe('DataTable', () => {
                 <TableHead>
                   <TableRow>
                     <TableSelectAll {...getSelectionProps()} />
-<<<<<<< HEAD
-                    {headers.map((header) => (
-                      <TableHeader {...getHeaderProps({ header })}>
-=======
                     {headers.map((header, i) => (
                       <TableHeader key={i} {...getHeaderProps({ header })}>
->>>>>>> chore(lint): begin fixing linting errors
                         {header.header}
                       </TableHeader>
                     ))}
@@ -565,13 +555,8 @@ describe('DataTable', () => {
               <Table>
                 <TableHead>
                   <TableRow>
-<<<<<<< HEAD
-                    {headers.map((header) => (
-                      <TableHeader {...getHeaderProps({ header })}>
-=======
                     {headers.map((header, i) => (
                       <TableHeader key={i} {...getHeaderProps({ header })}>
->>>>>>> chore(lint): begin fixing linting errors
                         {header.header}
                       </TableHeader>
                     ))}
@@ -722,13 +707,8 @@ describe('DataTable', () => {
                   <TableRow>
                     <TableExpandHeader {...getExpandHeaderProps()} />
                     <TableSelectAll {...getSelectionProps()} />
-<<<<<<< HEAD
-                    {headers.map((header) => (
-                      <TableHeader {...getHeaderProps({ header })}>
-=======
                     {headers.map((header, i) => (
                       <TableHeader key={i} {...getHeaderProps({ header })}>
->>>>>>> chore(lint): begin fixing linting errors
                         {header.header}
                       </TableHeader>
                     ))}

@@ -18,7 +18,7 @@ import DataTable, {
 } from '../../DataTable';
 import { initialRows, headers } from './shared';
 
-const DefaultStory = props => (
+const DefaultStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}
@@ -48,7 +48,7 @@ const DefaultStory = props => (
           <TableBody>
             {rows.map((row, i) => (
               <TableRow key={i} {...getRowProps({ row })}>
-                {row.cells.map(cell => (
+                {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
               </TableRow>
