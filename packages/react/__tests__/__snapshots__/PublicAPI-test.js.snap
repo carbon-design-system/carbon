@@ -4288,6 +4288,9 @@ Map {
       "light": Object {
         "type": "bool",
       },
+      "onChange": Object {
+        "type": "func",
+      },
       "placeHolderText": Object {
         "type": "string",
       },
@@ -4564,6 +4567,9 @@ Map {
       "inputType": Object {
         "type": "string",
       },
+      "invalid": Object {
+        "type": "bool",
+      },
       "labelText": Object {
         "type": "node",
       },
@@ -4592,6 +4598,9 @@ Map {
       },
       "onRelease": Object {
         "type": "func",
+      },
+      "required": Object {
+        "type": "bool",
       },
       "step": Object {
         "type": "number",
@@ -4909,6 +4918,9 @@ Map {
       },
       "filter": Object {
         "type": "bool",
+      },
+      "id": Object {
+        "type": "string",
       },
       "onClose": Object {
         "type": "func",
@@ -5362,6 +5374,12 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "handleClick": Object {
+        "type": "func",
+      },
+      "handleKeyDown": Object {
+        "type": "func",
+      },
       "href": Object {
         "type": "string",
       },
@@ -5390,6 +5408,12 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "handleClick": Object {
+        "type": "func",
+      },
+      "handleKeyDown": Object {
+        "type": "func",
       },
       "iconDescription": [Function],
       "id": Object {
@@ -5451,6 +5475,9 @@ Map {
       "expanded": Object {
         "type": "bool",
       },
+      "handleClick": Object {
+        "type": "func",
+      },
       "id": Object {
         "type": "string",
       },
@@ -5494,6 +5521,9 @@ Map {
     "propTypes": Object {
       "checked": Object {
         "type": "bool",
+      },
+      "children": Object {
+        "type": "node",
       },
       "className": Object {
         "type": "string",
@@ -5726,6 +5756,9 @@ Map {
       "labelText": Object {
         "type": "string",
       },
+      "onChange": Object {
+        "type": "func",
+      },
       "onToggle": Object {
         "type": "func",
       },
@@ -5766,6 +5799,9 @@ Map {
       },
       "labelText": Object {
         "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
       },
       "onToggle": Object {
         "type": "func",
@@ -5842,10 +5878,16 @@ Map {
       "id": Object {
         "type": "string",
       },
+      "labelId": Object {
+        "type": "string",
+      },
       "labelText": Object {
         "type": "node",
       },
       "placeHolderText": Object {
+        "type": "string",
+      },
+      "role": Object {
         "type": "string",
       },
       "small": Object {
@@ -5880,6 +5922,9 @@ Map {
         "isRequired": true,
         "type": "string",
       },
+      "className": Object {
+        "type": "string",
+      },
       "direction": Object {
         "args": Array [
           Array [
@@ -5891,6 +5936,15 @@ Map {
       },
       "id": Object {
         "type": "string",
+      },
+      "onFocus": Object {
+        "type": "func",
+      },
+      "onMouseEnter": Object {
+        "type": "func",
+      },
+      "onMouseLeave": Object {
+        "type": "func",
       },
       "tooltipText": Object {
         "isRequired": true,
@@ -5921,6 +5975,9 @@ Map {
         "isRequired": true,
         "type": "node",
       },
+      "className": Object {
+        "type": "string",
+      },
       "direction": Object {
         "args": Array [
           Array [
@@ -5934,6 +5991,12 @@ Map {
       },
       "id": Object {
         "type": "string",
+      },
+      "onFocus": Object {
+        "type": "func",
+      },
+      "onMouseEnter": Object {
+        "type": "func",
       },
       "tooltipText": Object {
         "isRequired": true,
@@ -6614,6 +6677,9 @@ Map {
       "hasDivider": false,
     },
     "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
       "className": Object {
         "type": "string",
       },
@@ -6755,6 +6821,9 @@ Map {
         "isRequired": true,
         "type": "string",
       },
+      "className": Object {
+        "type": "string",
+      },
       "expanded": Object {
         "isRequired": true,
         "type": "bool",
@@ -6770,6 +6839,9 @@ Map {
   },
   "SideNavHeader" => Object {
     "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
       "className": Object {
         "type": "string",
       },
