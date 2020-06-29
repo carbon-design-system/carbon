@@ -100,6 +100,7 @@
     display: flex;
     align-items: center;
     opacity: 0;
+    pointer-events: none;
 
     // IE media query
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
