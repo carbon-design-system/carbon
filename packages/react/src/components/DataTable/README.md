@@ -671,6 +671,7 @@ Table components for selection and for batch actions, which include:
 
 - `TableToolbar`
 - `TableToolbarAction`
+- `TableToolbarSearch`
 - `TableBatchActions`
 - `TableBatchAction`
 - `TableSelectAll`
