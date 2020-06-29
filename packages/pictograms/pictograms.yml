@@ -1479,7 +1479,7 @@
   - consultant
   - banker
   - representative
-  - fianance
+  - finance
 - name: financial--gain
   friendly_name: Financial gain
   aliases:
@@ -1563,6 +1563,7 @@
     - fog
     - weather
     - sky
+    - forecast
 - name: folder
   friendly_name: Folder
   aliases:
@@ -1603,6 +1604,7 @@
   - analytics
   - global
   - study
+  - finance
 - name: global--assets-and-recovery--01
   friendly_name: Global assets and recovery 01
   aliases: 
@@ -1610,6 +1612,7 @@
   - global
   - assets
   - recover
+  - finance
 - name: global--assets-and-recovery--02
   friendly_name: Global assets and recovery 02
   aliases: 
@@ -1618,6 +1621,7 @@
   - global
   - assets
   - recover
+  - finance
 - name: global--business--services
   friendly_name: Global business services
   aliases:
@@ -1625,12 +1629,14 @@
   - global
   - business
   - services
+  - finance
 - name: global--currency
   friendly_name: Global currency
   aliases: 
   - global
   - currency
   - money
+  - finance
 - name: global--exchange
   friendly_name: Global exchange
   aliases: 
@@ -1639,86 +1645,219 @@
   - exchange
   - currency
   - money
+  - finance
 - name: global--finance--euro
   friendly_name: Global finance euro
+  aliases:
+  - global finance euro
+  - global
+  - finance
+  - euro
+  - currency
+  - money
 - name: global--finance--network
   friendly_name: Global finance network
-  aliases: []
+  aliases: 
+  - global finance network
+  - global
+  - finance
+  - network
 - name: global--finance--sterling
   friendly_name: Global finance sterling
+  aliases:
+  - global finance sterling
+  - global
+  - finance
+  - sterling
+  - currency
+  - money
 - name: global--markets
   friendly_name: Global markets
-  aliases: []
+  aliases: 
+  - global markets
+  - global
+  - markets
+  - finance
 - name: global--markets--bar
   friendly_name: Global markets bar
-  aliases: []
+  aliases:
+  - global markets bar
+  - global 
+  - markets
+  - bar
+  - finance
 - name: global--network
   friendly_name: Global network
+  aliases:
+  - global network
+  - global
+  - network
 - name: global--partner
   friendly_name: Global partner
+  aliases:
+  - global partner
+  - global
+  - partner
+  - business
+  - networking
+  - network
 - name: global--security
   friendly_name: Global security
-  aliases: []
+  aliases: 
+  - global security
+  - global
+  - security
+  - briefcase
+  - finance
 - name: global--strategy
   friendly_name: Global strategy
-  aliases: []
+  aliases: 
+  - global strategy
+  - global
+  - strategy
+  - finance
 - name: global--technology--services
   friendly_name: Global technology services
+  aliases:
+  - global technology services
+  - global
+  - technology
+  - services
+  - cloud
 - name: globe
   friendly_name: Globe
   aliases:
     - globe
 - name: globe--locations
   friendly_name: Globe locations
+  aliases: 
+  - globe locations
+  - globe
+  - location
 - name: group
   friendly_name: Group
   aliases:
     - group
+    - people
+    - team
 - name: hail
   friendly_name: Hail
   aliases:
     - hail
+    - weather
+    - sky
+    - precipitation
+    - forecast
 - name: hail--heavy
   friendly_name: Hail heavy
+  aliases:
+  - hail heavy
+  - hail
+  - weather
+  - sky
+  - precipitation
+  - forecast
 - name: hail--mixed
   friendly_name: Hail mixed
+  aliases:
+  - hail mixed
+  - hail
+  - weather
+  - sky
+  - precipitation
+  - forecast
 - name: handicap
   friendly_name: Handicap
   aliases:
     - handicap
+    - people
+    - wheelchair
 - name: handicap--active
   friendly_name: Handicap active
+  aliases:
+  - handicap active
+  - people
+  - wheelchair
 - name: hard--drive
   friendly_name: Hard drive
+  aliases: 
+  - hard drive
+  - hardware
+  - storage
+  - data storage
 - name: hard--drive--network
   friendly_name: Hard drive network
+  aliases:
+  - hard drive network
+  - hard drive
+  - network
+  - storage
+  - data storage
 - name: hard--ice--cream
   friendly_name: Hard ice cream
+  aliases:
+  - hard ice cream
+  - ice cream
+  - food
+  - lifestyle
 - name: hazy
   friendly_name: Hazy
   aliases:
     - hazy
+    - weather
+    - forecast
 - name: headphones
   friendly_name: Headphones
   aliases:
     - headphones
+    - electronics
 - name: heart
   friendly_name: Heart
   aliases:
     - heart
 - name: heart--health
   friendly_name: Heart health
+  aliases:
+  - heart health
+  - heart
 - name: heat--map
   friendly_name: Heat map
+  aliases: 
+  - heat map
+  - heat
+  - chart
+  - data analytics
+  - analytics
 - name: heat-map--02
   friendly_name: heat-map--02
+  aliases: 
+  - heat map 02
+  - heat
+  - chart
+  - data analytics
+  - analytics
   aliases: []
 - name: high--five
   friendly_name: High five
+  aliases:
+  - high five
+  - greeting
+  - gesture
+  - people
 - name: home--front
   friendly_name: Home front
+  aliases:
+  - home front
+  - front
+  - home
+  - house
 - name: home--garage
   friendly_name: Home garage
+  aliases:
+  - home garage
+  - garage
+  - house
+  - parking
 - name: home--profile
   friendly_name: Home profile
 - name: hospital
