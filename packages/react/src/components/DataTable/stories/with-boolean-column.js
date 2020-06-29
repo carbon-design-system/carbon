@@ -123,6 +123,7 @@ const BooleanColumnStory = (props) => (
                           id={'check-' + cell.id}
                           checked={cell.value}
                           hideLabel
+                          labelText="checkbox"
                         />
                       </TableCell>
                     );
