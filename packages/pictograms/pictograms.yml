@@ -261,16 +261,16 @@
 - name: circle-packing
   friendly_name: circle-packing
   aliases: []
-- name: clothes--rack--01
-  friendly_name: Clothes rack 01
-- name: clothes--rack--02
-  friendly_name: Clothes rack 02
 - name: client--financing--01
   friendly_name: Client financing 01
   aliases: []
 - name: client--financing--02
   friendly_name: Client financing 02
   aliases: []
+- name: clothes--rack--01
+  friendly_name: Clothes rack 01
+- name: clothes--rack--02
+  friendly_name: Clothes rack 02
 - name: cloud--analytics
   friendly_name: Cloud analytics
 - name: cloud--assets
@@ -419,14 +419,14 @@
   friendly_name: Desktop
   aliases:
     - desktop
-- name: devops
-  friendly_name: Devops
-  aliases:
-    - devops
 - name: developer-z-os
   friendly_name: Developer z/OS
   aliases:
     - developer z os
+- name: devops
+  friendly_name: Devops
+  aliases:
+    - devops
 - name: dialogue
   friendly_name: Dialogue
   aliases:
