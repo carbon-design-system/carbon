@@ -677,14 +677,14 @@
 - name: cheese
   friendly_name: Cheese
   aliases:
-    - cheese
+  - cheese
 - name: cherries
   friendly_name: Cherries
   aliases:
-    - cherries
-    - food
-    - fruit
-    - snack
+  - cherries
+  - food
+  - fruit
+  - snack
 - name: chip--circuit
   friendly_name: Chip circuit
   aliases:
@@ -883,9 +883,9 @@
 - name: cloudy
   friendly_name: Cloudy
   aliases:
-    - cloudy
-    - weather
-    - sky
+  - cloudy
+  - weather
+  - sky
 - name: cloudy--dewy
   friendly_name: Cloudy dewy
   aliases:
@@ -933,9 +933,9 @@
 - name: code--syntax
   friendly_name: Code syntax
   aliases:
-    - code syntax
-    - syntax
-    - code
+  - code syntax
+  - syntax
+  - code
 - name: cognos--analytics
   friendly_name: Cognos® analytics
   aliases:
@@ -945,11 +945,11 @@
 - name: college
   friendly_name: College
   aliases:
-    - college
-    - academics
-    - higher education
-    - education
-    - school
+  - college
+  - academics
+  - higher education
+  - education
+  - school
 - name: commercial--financing--01
   friendly_name: Commercial financing 01
   aliases:
@@ -1143,85 +1143,165 @@
     - desktop
     - computer
     - PC
+- name: developer-z-os
+  friendly_name: Developer z/OS®
+  aliases:
+    - developer z os
+    - operating system
 - name: devops
   friendly_name: Devops
   aliases:
     - devops
     - cloud
-- name: developer-z-os
-  friendly_name: Developer z/OS
-  aliases:
-    - developer z os
-- name: devops
-  friendly_name: Devops
-  aliases:
-    - devops
 - name: dialogue
   friendly_name: Dialogue
   aliases:
     - dialogue
+    - dialog
 - name: digital
   friendly_name: Digital
   aliases:
     - digital
+    - cloud
 - name: dining
   friendly_name: Dining
   aliases:
     - dining
+    - flatware
+    - cutlery
+    - silverware
+    - knife
+    - fork
 - name: distribution--ledger
   friendly_name: Distribution ledger
   aliases:
     - distibution ledger
 - name: dna
-  friendly_name: Dna
+  friendly_name: DNA
   aliases:
     - dna
+    - life science
+    - genetic
 - name: do--not
   friendly_name: Do not
+  aliases:
+  - do not
+  - warning
+  - caution
 - name: docker
   friendly_name: Docker
   aliases:
     - docker
+    - cloud
 - name: doctor
   friendly_name: Doctor
   aliases:
     - doctor
+    - physician
+    - medic
+    - provider
 - name: document--conversion
   friendly_name: Document conversion
+  aliases:
+    - document conversion
+    - conversion
+    - document
+    - file conversion
+    - file
 - name: document--security
   friendly_name: Document security
   aliases:
     - document security
 - name: door--handle
   friendly_name: Door handle
+  aliases:
+  - door handle
+  - door knob
+  - lockset
 - name: download
   friendly_name: Download
   aliases:
     - download
 - name: download--alt
   friendly_name: Download alt
+  aliases:
+  - download alt
+  - download
 - name: dubai--palm--islands
-  friendly_name: Dubai palm islands
+  friendly_name: Dubai Palm Islands
+  aliases:
+  - Dubai palm islands
+  - Dubai
+  - city
+  - cities
 - name: dubai--skyscraper
   friendly_name: Dubai skyscraper
+  aliases:
+  - Dubai skyscraper
+  - Dubai
+  - city
+  - cities
+  - skyscraper
 - name: dublin--brewery
   friendly_name: Dublin brewery
+  aliases:
+  - Dublin brewery
+  - Dublin
+  - city
+  - cities
+  - brewery
 - name: dublin--castle
   friendly_name: Dublin castle
+  aliases:
+  - Dublin castle
+  - Dublin
+  - city
+  - cities
+  - castle
 - name: duplicate--file
   friendly_name: Duplicate file
+  aliases:
+  - duplicate file
+  - duplicate
+  - copy
+  - copy file
 - name: education
   friendly_name: Education
   aliases:
     - education
+    - student
+    - graduate
+    - people
+    - person
+    - pupil
 - name: electric
   friendly_name: Electric
   aliases:
     - electric
+    - charger
+    - plug
+    - power cord
+    - power source
+    - power
 - name: electric--car
   friendly_name: Electric car
+  aliases:
+  - electric car
+  - electric
+  - car
+  - automobile
+  - vehicle
+  - travel
+  - transportation
 - name: electric--charge
   friendly_name: Electric charge
+  aliases:
+  - electric charge
+  - electric
+  - charge
+  - charger
+  - charging station
+  - charging
 - name: elevator
   friendly_name: Elevator
   aliases:
@@ -1238,59 +1318,137 @@
   friendly_name: Engine
   aliases:
     - engine
+    - motor
 - name: enterprise--design--thinking
   friendly_name: Enterprise design thinking
+  aliases:
+  - enterprise design thinking
+  - design thinking
+  - design
+  - EDT
 - name: enterprise--design--thinking--alt
   friendly_name: Enterprise design thinking alt
+  aliases:
+  - enterprise design thinking alt
+  - design thinking
+  - design
+  - EDT
 - name: envelope
   friendly_name: Envelope
   aliases:
     - envelope
+    - email
+    - stationery
+    - message
 - name: erlenmeyer--flask
   friendly_name: Erlenmeyer flask
+  aliases:
+  - Erlenmeyer flask
+  - flask
+  - lab
+  - laboratory
+  - science
 - name: escalator--down
   friendly_name: Escalator down
+  aliases:
+  - escalator down
+  - escalator
 - name: escalator--up
   friendly_name: Escalator up
+  aliases:
+  - escalator up
+  - escalator
 - name: europe-africa
   friendly_name: Europe Africa
   aliases:
     - europe
     - africa
+    - continent
+    - location
 - name: expand--horz
   friendly_name: Expand horz
+  aliases:
+  - expand horz
+  - expand
+  - horizontal
 - name: expand--user
   friendly_name: Expand user
+  aliases:
+  - expand user
+  - expand
+  - user
 - name: expand--vert
   friendly_name: Expand vert
+  aliases:
+  - expand vert
+  - expand
+  - vertical
 - name: export
   friendly_name: Export
   aliases:
     - export
+    - send
+    - ship
+    - transmit
 - name: export--alt
   friendly_name: Export alt
+  aliases:
+  - export alt
+  - export
+  - send
+  - ship
+  - transmit
 - name: eye
   friendly_name: Eye
   aliases:
     - eye
+    - vision
+    - see
 - name: face--dissatisfied
   friendly_name: Face dissatisfied
+  aliases:
+  - face dissatistified
+  - face
+  - unhappy
+  - people
 - name: face--neutral
   friendly_name: Face neutral
+  aliases:
+  - face neutral
+  - face
+  - people
 - name: face--satisfied
   friendly_name: Face satisfied
+  aliases:
+  - face satistified
+  - face
+  - happy
+  - people
 - name: face--very--dissatisfied
   friendly_name: Face very dissatisfied
+  aliases:
+  - face very dissatistified
+  - face
+  - unhappy
+  - people
 - name: face--very--satisfied
   friendly_name: Face very satisfied
+  aliases:
+  - face very satistified
+  - face
+  - happy
+  - people
 - name: factory
   friendly_name: Factory
   aliases:
     - factory
+    - manufacturing
 - name: farm
   friendly_name: Farm
   aliases:
     - farm
+    - rural
+    - landscape
 - name: farm--01
   friendly_name: Farm 01
   aliases:
@@ -1311,44 +1469,127 @@
   friendly_name: Faucet
   aliases:
     - faucet
+    - water
+    - spigot
+    - plumbing
 - name: feedback
   friendly_name: Feedback
   aliases:
     - feedback
+    - response
+    - iterate
+    - results
 - name: file--backup
   friendly_name: File backup
+  aliases:
+  - file backup
+  - file
+  - backup
+  - repository
+  - storage
+  - copy
+  - duplicate
 - name: file--transfer
   friendly_name: File transfer
+  aliases:
+  - file transfer
+  - file
+  - transfer
+  - move
 - name: finance--strategy
   friendly_name: Finance strategy
-  aliases: []
+  aliases:
+  - finance strategy
+  - finance
+  - strategy
+  - loan
+  - finance
 - name: financial--consultant
   friendly_name: Financial consultant
+  aliases:
+  - financial consultant
+  - financial
+  - consultant
+  - banker
+  - representative
+  - fianance
 - name: financial--gain
   friendly_name: Financial gain
+  aliases:
+  - financial gain
+  - financial
+  - gain
+  - results
+  - income
+  - revenue
+  - profit
+  - finance
 - name: financial--networks
   friendly_name: Financial networks
-  aliases: []
+  aliases:
+  - financial networks
+  - financial
+  - networks
+  - finance
 - name: financial--news
   friendly_name: Financial news
+  aliases:
+  - financial news
+  - financial
+  - news
+  - finance
 - name: fire--alarm
   friendly_name: Fire alarm
+  aliases:
+  - fire alarm
+  - fire
+  - alarm
 - name: fire--extinguisher
   friendly_name: Fire extinguisher
+  aliases:
+  - fire extinguisher
+  - fire
+  - extinguisher
 - name: firewall
   friendly_name: Firewall
   aliases:
     - firewall
+    - security
 - name: first--aid
   friendly_name: First aid
+  aliases:
+  - first aid
+  - aid
+  - medical
+  - healthcare
 - name: flow--chart
   friendly_name: Flow chart
+  aliases:
+  - flow chart
+  - flow
+  - chart
+  - org chart
 - name: flow--chart--detail
   friendly_name: Flow chart detail
+  aliases:
+  - flow chart detail
+  - flow chart
+  - chart
 - name: flower--01
   friendly_name: Flower 01
+  aliases:
+    - Flower 01
+    - flower
+    - bloom
+    - blossom
+    - tulip
 - name: flower--02
   friendly_name: Flower 02
+  aliases:
+    - Flower 02
+    - flower
+    - bloom
+    - blossom
 - name: feedback--02
   friendly_name: Feedback 02
   aliases:
@@ -1359,6 +1600,8 @@
   friendly_name: Fog
   aliases:
     - fog
+    - weather
+    - sky
 - name: folder
   friendly_name: Folder
   aliases:
@@ -1367,37 +1610,74 @@
   friendly_name: Forklift
   aliases:
     - forklift
+    - machinery
 - name: free--trial
   friendly_name: Free trial
+  aliases:
+  - trial
+  - complimentary
+  - sample
 - name: fuel
   friendly_name: Fuel
   aliases:
     - fuel
+    - gas
+    - gasoline
 - name: gear
   friendly_name: Gear
   aliases:
     - gear
+    - settings
+    - machinery
 - name: gift
   friendly_name: Gift
   aliases:
     - gift box
+    - gift
+    - present
 - name: global--analytics
   friendly_name: Global analytics
-  aliases: []
+  aliases:
+  - global analytics
+  - analytics
+  - global
+  - study
 - name: global--assets-and-recovery--01
   friendly_name: Global assets and recovery 01
-  aliases: []
+  aliases:
+  - global assets and recovery 01
+  - global
+  - assets
+  - recover
 - name: global--assets-and-recovery--02
   friendly_name: Global assets and recovery 02
-  aliases: []
+  aliases:
+  aliases:
+  - global assets and recovery 02
+  - global
+  - assets
+  - recover
 - name: global--business--services
   friendly_name: Global business services
+  aliases:
+  - global business services
+  - global
+  - business
+  - services
 - name: global--currency
   friendly_name: Global currency
-  aliases: []
+  aliases:
+  - global
+  - currency
+  - money
 - name: global--exchange
   friendly_name: Global exchange
-  aliases: []
+  aliases:
+  - global exchange
+  - global
+  - exchange
+  - currency
+  - money
 - name: global--finance--euro
   friendly_name: Global finance euro
 - name: global--finance--network
