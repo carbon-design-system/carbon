@@ -170,6 +170,6 @@ module.exports = {
       },
     ],
     // Disallow unknown animations.
-    'no-unknown-animations': true,
+    'no-unknown-animations': OFF,
   },
 };
