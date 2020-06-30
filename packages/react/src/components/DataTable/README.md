@@ -608,26 +608,26 @@ In practice, this looks like the following:
   render={({ rows, headers, getHeaderProps, onInputChange }) => (
     <TableContainer title="DataTable with toolbar">
       <TableToolbar>
-        {/* pass in `onInputChange` change here to make filtering work */}
-        <TableToolbarSearch onChange={onInputChange} />
         <TableToolbarContent>
-          <TableToolbarMenu>
-            <TableToolbarAction
-              icon={iconDownload}
-              iconDescription="Download"
-              onClick={action('TableToolbarAction - Download')}
-            />
-            <TableToolbarAction
-              icon={iconEdit}
-              iconDescription="Edit"
-              onClick={action('TableToolbarAction - Edit')}
-            />
-            <TableToolbarAction
-              icon={iconSettings}
-              iconDescription="Settings"
-              onClick={action('TableToolbarAction - Settings')}
-            />
-          </TableToolbarMenu>
+          {/* pass in `onInputChange` change here to make filtering work */}
+          <TableToolbarSearch onChange={onInputChange} />
+            <TableToolbarMenu>
+              <TableToolbarAction
+                icon={iconDownload}
+                iconDescription="Download"
+               onClick={action('TableToolbarAction - Download')}
+              />
+              <TableToolbarAction
+               icon={iconEdit}
+                iconDescription="Edit"
+                onClick={action('TableToolbarAction - Edit')}
+              />
+              <TableToolbarAction
+                icon={iconSettings}
+                iconDescription="Settings"
+                onClick={action('TableToolbarAction - Settings')}
+              />
+            </TableToolbarMenu>
           <Button onClick={action('Add new row')} small kind="primary">
             Add new
           </Button>
@@ -697,7 +697,7 @@ In practice, this looks like the following:
       <TableToolbar>
         {/* make sure to apply getBatchActionProps so that the bar renders */}
         <TableBatchActions {...getBatchActionProps()}>
-          {/* inside of you batch actinos, you can include selectedRows */}
+          {/* inside of your batch actions, you can include selectedRows */}
           <TableBatchAction primaryFocus onClick={batchActionClick(selectedRows)}>
             Ghost
           </TableBatchAction>
@@ -708,25 +708,25 @@ In practice, this looks like the following:
             Ghost
           </TableBatchAction>
         </TableBatchActions>
-        <TableToolbarSearch onChange={onInputChange} />
         <TableToolbarContent>
-          <TableToolbarMenu>
-            <TableToolbarAction
-              icon={iconDownload}
-              iconDescription="Download"
-              onClick={action('TableToolbarAction - Download')}
-            />
-            <TableToolbarAction
-              icon={iconEdit}
-              iconDescription="Edit"
-              onClick={action('TableToolbarAction - Edit')}
-            />
-            <TableToolbarAction
-              icon={iconSettings}
-              iconDescription="Settings"
-              onClick={action('TableToolbarAction - Settings')}
-            />
-          </TableToolbarMenu>
+          <TableToolbarSearch onChange={onInputChange} />
+            <TableToolbarMenu>
+              <TableToolbarAction
+                icon={iconDownload}
+                iconDescription="Download"
+                onClick={action('TableToolbarAction - Download')}
+              />
+              <TableToolbarAction
+                icon={iconEdit}
+                iconDescription="Edit"
+               onClick={action('TableToolbarAction - Edit')}
+              />
+              <TableToolbarAction
+                icon={iconSettings}
+                iconDescription="Settings"
+                onClick={action('TableToolbarAction - Settings')}
+              />
+            </TableToolbarMenu>
           <Button onClick={action('Add new row')} small kind="primary">
             Add new
           </Button>
