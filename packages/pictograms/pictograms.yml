@@ -377,6 +377,10 @@
   friendly_name: Copenhagan planetarium
 - name: copenhagen--snekkja
   friendly_name: Copenhagen snekkja
+- name: coronavirus
+  friendly_name: Coronavirus
+  aliases:
+    - coronavirus covid-19
 - name: credit--card
   friendly_name: Credit card
 - name: crop
