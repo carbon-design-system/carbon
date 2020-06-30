@@ -1,7 +1,14 @@
 - name: 3D-Cursor
   friendly_name: 3D cursor
   aliases:
-    - watson
+    - Watson
+    - IBM Watson
+    - Watson Health
+    - 3D cursor
+    - cursor
+    - health
+    - cube
+    - 3D cube
   sizes:
     - 32
 - name: 3D-cursor--alt
@@ -10,57 +17,100 @@
     - 32
   aliases:
     - 3D-cursor
+    - Watson
+    - IBM Watson
+    - Watson Health
+    - health
+    - crosshair
+    - circle
+    - cross
 - name: 3D-curve--auto-colon
   friendly_name: 3D curve auto colon
   sizes:
     - 32
   aliases:
-    - watson
+    - Watson
+    - IBM Watson
+    - Watson Health
+    - health
     - curve
+    - 3D curve
+    - auto colon
+    - health
     - spline
+    - s curve
 - name: 3D-curve--auto-vessels
   friendly_name: 3D curve auto vessels
   sizes:
     - 32
   aliases:
-    - watson
+    - Watson
+    - IBM Watson
+    - Watson Health
     - curve
+    - 3D curve
+    - auto vessels
     - spline
 - name: 3D-curve--manual
   friendly_name: 3D curve manual
   sizes:
     - 32
   aliases:
-    - watson
+    - Watson
+    - IBM Watson
+    - Watson Health
+    - health
     - curve
+    - 3D curve
+    - manual curve
+    - 3D manual curve
     - spline
 - name: 3D-iCa
   friendly_name: 3D iCA
   aliases:
     - iCA
+    - 3D iCA
     - dimension
     - cube
+    - 3D cube
     - space
+    - health
   sizes:
     - 32
 - name: 3D-MPR-Toggle
   friendly_name: 3D MPR toggle
   aliases:
-    - watson
+    - Watson
+    - IBM Watson
+    - Watson Health
+    - mpr toggle
+    - health
+    - 3D mpr toggle
+    - Carbon 3D mpr toggle
   sizes:
     - 32
 - name: 3D-software
   friendly_name: 3D software
   aliases:
     - 3D-software
+    - cube
+    - health
+    - cube plus
+    - cube plus sign
+    - health software
   sizes:
     - 32
 - name: 3rd-party-connected
   friendly_name: Third-party connect
   aliases:
-    - watson
+    - Watson
+    - IBM Watson
+    - Watson Health
+    - health
+    - third-party connect
     - dots
     - connection
+    - communication
     - lattice
     - group
   sizes:
@@ -73,6 +123,8 @@
     - pixels
     - HD
     - high definition
+    - file size
+    - 4K file
   sizes:
     - 32
 - name: 4K--filled
@@ -81,10 +133,15 @@
     - 32
   aliases:
     - four k
+    - four K filled
+    - 4K
+    - 4K filled
+    - 4K file
     - resolution
     - pixels
     - HD
     - high definition
+    - file size
 - name: accessibility
   friendly_name: Accessibility
   aliases:
@@ -101,26 +158,52 @@
     - wheelchair
     - convenience
     - accessible
+    - user accessibility
+    - handicap
+    - handicapped
+    - handicap accessibility
+    - user
 - name: accessibility--color
   friendly_name: Accessibility color
   sizes:
     - 32
   aliases:
     - wheelchair
+    - wheelchair accessible
     - convenience
     - accessible
+    - accessibility color
+    - user accessibility
+    - handicap
+    - handicapped
+    - handicap accessibility
+    - handicap accessible
+    - user
 - name: accessibility--color--filled
   friendly_name: Accessibility color filled
   sizes:
     - 32
   aliases:
     - wheelchair
+    - wheelchair acessible
     - convenience
     - accessible
+    - accessiblity color filled
+    - user accessibility
+    - handicap
+    - handicapped
+    - handicap accessibility
+    - handicap accessible
+    - user
 - name: account
   friendly_name: Account
   aliases:
     - account
+    - commerce
+    - report
+    - narrative
+    - record
+    - documentation
   sizes:
     - 32
 - name: activity
@@ -130,6 +213,12 @@
     - vital
     - action
     - heartbeat
+    - activity
+    - data
+    - data analytics
+    - data activity
+    - data tracking
+    - tracking
   sizes:
     - 32
 - name: add
@@ -139,6 +228,9 @@
     - positive
     - addition
     - increase
+    - navigation
+    - include
+    - plus sign
   sizes:
     - 32
 - name: add--alt
@@ -150,6 +242,9 @@
     - positive
     - addition
     - increase
+    - navigation
+    - include
+    - plus sign
 - name: add--filled
   friendly_name: Add filled
   sizes:
@@ -159,6 +254,10 @@
     - positive
     - addition
     - increase
+    - navigation
+    - include
+    - plus sign
+    - plus sign filled
 - name: add-comment
   friendly_name: Add comment
   aliases:
@@ -166,6 +265,11 @@
     - comment
     - chat
     - bubble
+    - operations
+    - comment bubble
+    - add comment
+    - remark
+    - add remark
   sizes:
     - 32
 - name: alarm
@@ -175,6 +279,9 @@
     - timer
     - time
     - alert
+    - warning
+    - notification
+    - notice
   sizes:
     - 32
 - name: alarm--add
@@ -186,6 +293,11 @@
     - timer
     - time
     - alert
+    - warning
+    - notification
+    - notice
+    - plus sign
+    - alarm add
 - name: alarm--subtract
   friendly_name: Alarm subtract
   sizes:
@@ -195,42 +307,89 @@
     - timer
     - time
     - alert
+    - warning
+    - notification
+    - notice
+    - minus sign
+    - alarm subtract
+    - alarm minus
 - name: align--horizontal-center
   friendly_name: Align horizontal center
   sizes:
     - 32
   aliases:
     - align
+    - alignment
+    - align horizontal
+    - align horizontal center
+    - formatting
+    - horizontal formatting
+    - horizontal formatting
+    - center formatting
 - name: align--horizontal-left
   friendly_name: Align horizontal left
   sizes:
     - 32
   aliases:
     - align
+    - alignment
+    - align horizontal
+    - align horizontal left
+    - left alignment
+    - formatting
+    - left formatting
+    - horizontal left
 - name: align--horizontal-right
   friendly_name: Align horizontal right
   sizes:
     - 32
   aliases:
     - align
+    - alignment
+    - align horizontal
+    - align horizontal right
+    - right alignment
+    - formatting
+    - right formatting
+    - horizontal right
 - name: align--vertical-bottom
   friendly_name: Align vertical bottom
   sizes:
     - 32
   aliases:
     - align
+    - alignment
+    - align vertical
+    - align vertical bottom
+    - vertical alignment
+    - formatting
+    - bottom formatting
+    - vertical bottom
 - name: align--vertical-center
   friendly_name: Align vertical center
   sizes:
     - 32
   aliases:
     - align
+    - alignment
+    - align center
+    - align vertical center
+    - vertical alignment
+    - formatting
+    - center formatting
+    - vertical center
 - name: align--vertical-top
   friendly_name: Align vertical top
   sizes:
     - 32
   aliases:
     - align
+    - alignment
+    - align vertical
+    - align vertical top
+    - formatting
+    - top formatting
+    - vertical top
 - name: analytics
   friendly_name: Analytics
   aliases:
@@ -239,15 +398,22 @@
     - graph
     - analyze
     - data
+    - data analytics
+    - arrow graph
   sizes:
     - 32
 - name: angle
   friendly_name: Angle
   aliases:
-    - watson
+    - Watson
+    - IBM Watson
+    - Watson Health
+    - health
     - tilt
     - meter
     - gauge
+    - angle
+    - axis
   sizes:
     - 32
 - name: annotation-visibility
@@ -258,6 +424,9 @@
     - annotate
     - diagram
     - comment
+    - health
+    - axis
+    - notation
   sizes:
     - 32
 - name: aperture
@@ -267,6 +436,9 @@
     - camera
     - pinhole
     - pinwheel
+    - lense
+    - opening
+    - hole
   sizes:
     - 32
 - name: api
@@ -281,6 +453,10 @@
     - connect
     - group
     - network
+    - application programming interface
+    - programming interface
+    - computing interface
+    - file
   sizes:
     - 32
 - name: API--1
@@ -288,22 +464,43 @@
   sizes:
     - 32
   aliases:
-    - Application Programming Interface
+    - Application programming interface
     - tool
     - application
     - programming
     - interface
     - file
     - file type
+    - program
+    - tool
+    - format
+    - protocol
+    - connect
+    - group
+    - network
+    - programming interface
+    - computing interface
 - name: app
   friendly_name: App
   aliases:
     - app
+    - file
+    - application
+    - software
   sizes:
     - 32
 - name: app-connectivity
   friendly_name: app-connectivity
-  aliases: []
+  aliases:
+  - data
+  - app
+  - connectivity
+  - app connectivity
+  - interconnection
+  - connection
+  - integration
+  - network
+  - network connection
   sizes:
     - 32
 - name: app-switcher
@@ -318,6 +515,8 @@
   friendly_name: Apple
   aliases:
     - apple
+    - commerce
+    - fruit
   sizes:
     - 32
 - name: application
@@ -326,6 +525,8 @@
     - box
     - app
     - interface
+    - software
+    - file
   sizes:
     - 32
 - name: apps
@@ -334,7 +535,10 @@
     - application
     - drawer
     - 9 dot
-    - 9 square
+    - 9 squares
+    - applications
+    - software
+    - programs
   sizes:
     - 16
     - 32
@@ -346,6 +550,12 @@
     - stack
     - tower
     - file cabinet
+    - data
+    - record
+    - document
+    - log
+    - catalog
+    - store
   sizes:
     - 32
 - name: arrival
@@ -354,6 +564,12 @@
     - plane
     - landing
     - descend
+    - travel
+    - descent
+    - land
+    - airplane
+    - aircraft
+    - airline
   sizes:
     - 32
 - name: arrow--annotation
@@ -363,6 +579,8 @@
   aliases:
     - direction
     - point
+    - health
+    - pointer
 - name: arrow--down
   friendly_name: Arrow down
   sizes:
@@ -371,6 +589,10 @@
   aliases:
     - direction
     - point
+    - pointer
+    - down
+    - down arrow
+    - arrow down
 - name: arrow--down-left
   friendly_name: Arrow down left
   sizes:
@@ -378,6 +600,11 @@
   aliases:
     - direction
     - point
+    - pointer
+    - left
+    - left arrow
+    - arrow left
+    - down arrow
 - name: arrow--down-right
   friendly_name: Arrow down right
   sizes:
@@ -385,6 +612,12 @@
   aliases:
     - direction
     - point
+    - pointer
+    - right
+    - right arrow
+    - right arrow down
+    - arrow right
+    - down arrow
 - name: arrow--left
   friendly_name: Arrow left
   sizes:
@@ -393,6 +626,10 @@
   aliases:
     - direction
     - point
+    - pointer
+    - left
+    - left arrow
+    - arrow left
 - name: arrow--right
   friendly_name: Arrow right
   sizes:
@@ -403,6 +640,10 @@
   aliases:
     - direction
     - point
+    - pointer
+    - right
+    - right arrow
+    - arrow right
 - name: arrow--up
   friendly_name: Arrow up
   sizes:
@@ -411,6 +652,9 @@
   aliases:
     - direction
     - point
+    - pointer
+    - up arrow
+    - arrow up
 - name: arrow--up-left
   friendly_name: Arrow up left
   sizes:
@@ -418,6 +662,9 @@
   aliases:
     - direction
     - point
+    - pointer
+    - up arrow left
+    - arrow up left
 - name: arrow--up-right
   friendly_name: Arrow up right
   sizes:
@@ -425,10 +672,19 @@
   aliases:
     - direction
     - point
+    - pointer
+    - up arrow right
+    - arrow up right
 - name: arrow-shift-down
   friendly_name: Arrow shift down
   aliases:
     - arrow-shift-down
+    - shift down arrow
+    - direction
+    - point
+    - pointer
+    - down arrow
+    - arrow down
   sizes:
     - 32
 - name: arrows
@@ -436,6 +692,9 @@
   aliases:
     - direction
     - point
+    - pointers
+    - arrows
+    - directional arrows
   sizes:
     - 32
 - name: arrows--horizontal
@@ -445,6 +704,9 @@
   aliases:
     - direction
     - point
+    - pointers
+    - horizontal arrows
+    - directional arrows
 - name: arrows--vertical
   friendly_name: Arrows vertical
   sizes:
@@ -452,6 +714,9 @@
   aliases:
     - direction
     - point
+    - pointers
+    - vertical arrows
+    - directional arrows
 - name: asleep
   friendly_name: Asleep
   aliases:
@@ -460,6 +725,14 @@
     - sleep
     - rest
     - dark
+    - new moon
+    - cresent
+    - cresent moon
+    - cresent moon light
+    - cresent moon outline
+    - light moon
+    - cresent light
+    - cresent outline
   sizes:
     - 16
     - 32
@@ -473,6 +746,14 @@
     - sleep
     - rest
     - dark
+    - new moon
+    - cresent
+    - cresent moon
+    - cresent moon dark
+    - cresent moon filled
+    - dark moon
+    - cresent dark
+    - cresent filled
 - name: asset
   friendly_name: Asset
   aliases:
@@ -480,6 +761,8 @@
     - wheel
     - tape
     - roll
+    - technology
+    - benefit
   sizes:
     - 32
 - name: at
@@ -487,6 +770,8 @@
   aliases:
     - at
     - \@
+    - technology
+    - @
   sizes:
     - 32
 - name: attachment
@@ -497,18 +782,33 @@
     - file
     - affix
     - add
+    - attachment
+    - formatting
   sizes:
     - 32
 - name: audio-console
   friendly_name: Audio console
   aliases:
     - audio-console
+    - audio
+    - soundboard
+    - audio
+    - sound
+    - audio mixer
+    - technology
   sizes:
     - 32
 - name: augmented-reality
   friendly_name: Augmented reality
   aliases:
     - augmented-reality
+    - technology
+    - computer enhancement
+    - AR
+    - enhanced reality
+    - interactive
+    - interactive experience
+    - image enhancement
   sizes:
     - 32
 - name: auto-scroll
@@ -517,6 +817,10 @@
     - scrolling
     - slide
     - control
+    - auto scroll
+    - highlighting
+    - virtual screen movement
+    - health
   sizes:
     - 32
 - name: awake
@@ -526,6 +830,12 @@
     - active
     - day
     - bright
+    - toggle
+    - activate
+    - brightness
+    - computer screen
+    - active screen
+    - active computer screen
   sizes:
     - 16
     - 32
