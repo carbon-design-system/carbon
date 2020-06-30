@@ -39,9 +39,7 @@ function usePrevious(value) {
   return ref.current;
 }
 
-function getCuts(page, totalItems, itemsShown, splitPoint = null) {
-  const itemsThatFit = itemsShown >= 4 ? itemsShown : 4;
-
+function getCuts(page, totalItems, itemsThatFit, splitPoint = null) {
   if (itemsThatFit >= totalItems) {
     return {
       front: 0,
@@ -176,8 +174,11 @@ export default function PaginationNav({
   ...rest
 }) {
   const [currentPage, setCurrentPage] = useState(page);
+  const [itemsThatFit, setItemsThatFit] = useState(
+    itemsShown >= 4 ? itemsShown : 4
+  );
   const [cuts, setCuts] = useState(
-    getCuts(currentPage, totalItems, itemsShown)
+    getCuts(currentPage, totalItems, itemsThatFit)
   );
   const prevPage = usePrevious(currentPage);
 
@@ -226,6 +227,7 @@ export default function PaginationNav({
 
   // re-calculate cuts if props.totalItems or props.itemsShown change
   useEffect(() => {
+    setItemsThatFit(itemsShown >= 4 ? itemsShown : 4);
     setCuts(getCuts(currentPage, totalItems, itemsShown));
   }, [totalItems, itemsShown]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -235,11 +237,11 @@ export default function PaginationNav({
       const delta = currentPage - prevPage || 0;
 
       if (delta > 0) {
-        const splitPoint = itemsShown - 3;
-        setCuts(getCuts(currentPage, totalItems, itemsShown, splitPoint));
+        const splitPoint = itemsThatFit - 3;
+        setCuts(getCuts(currentPage, totalItems, itemsThatFit, splitPoint));
       } else {
-        const splitPoint = itemsShown > 4 ? 2 : 1;
-        setCuts(getCuts(currentPage, totalItems, itemsShown, splitPoint));
+        const splitPoint = itemsThatFit > 4 ? 2 : 1;
+        setCuts(getCuts(currentPage, totalItems, itemsThatFit, splitPoint));
       }
     }
   }, [currentPage]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -249,7 +251,7 @@ export default function PaginationNav({
   const backwardButtonDisabled = !loop && currentPage === 0;
   const forwardButtonDisabled = !loop && currentPage === totalItems - 1;
 
-  const startOffset = itemsShown < 5 && page > 1 ? 0 : 1;
+  const startOffset = itemsThatFit <= 4 && currentPage > 1 ? 0 : 1;
 
   return (
     <nav className={classNames} {...rest} aria-label="pagination">
@@ -262,8 +264,9 @@ export default function PaginationNav({
         />
 
         {
-          // render first item if at least 5 items can be displayed
-          itemsShown >= 5 && (
+          // render first item if at least 5 items can be displayed or
+          // 4 items can be displayed and the current page is either 0 or 1
+          (itemsThatFit >= 5 || (itemsThatFit <= 4 && currentPage <= 1)) && (
             <PaginationItem
               page="1"
               translateWithId={t}
