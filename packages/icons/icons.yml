@@ -6945,6 +6945,7 @@
     - 32
   aliases:
     - network
+    - networking
 - name: network--2
   friendly_name: Network 2
   sizes:
