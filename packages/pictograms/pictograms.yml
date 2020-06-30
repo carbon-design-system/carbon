@@ -1911,6 +1911,7 @@
     - lightbulb
     - design
     - development
+    - design and development
 - name: ideate
   friendly_name: Ideate
   aliases:
@@ -1918,6 +1919,7 @@
     - iterate
     - design
     - development
+    - design and development
 - name: innovate
   friendly_name: Innovate
   aliases:
@@ -1925,6 +1927,7 @@
     - design
     - development
     - develop
+    - design and development
 - name: inspect--data
   friendly_name: Inspect data
   aliases: 
@@ -2377,153 +2380,388 @@
   friendly_name: Multitask
   aliases:
     - multitask
+    - people
+    - juggle
+    - priority
+    - prioritize
 - name: munich
   friendly_name: Munich
   aliases:
     - munich
+    - city
+    - cities
 - name: natural--language--classifier
   friendly_name: Natural language classifier
+  aliases:
+  - natural language classifier
+  - natural language
+  - language
+  - watson
+  - AI
 - name: network
   friendly_name: Network
   aliases:
     - network
+    - networking
+    - connect
 - name: network--services
   friendly_name: Network services
+  aliases:
+  - network services
+  - network
+  - networking
+  - services
+  - connect
 - name: networking--01
   friendly_name: Networking 01
+  aliases:
+  - networking 01
+  - network
+  - connect  
 - name: networking--02
   friendly_name: Networking 02
+  aliases:
+  - networking 02
+  - network
+  - connect  
 - name: networking--03
   friendly_name: Networking 03
+  aliases:
+  - networking 03
+  - network
+  - connect  
 - name: networking--04
   friendly_name: Networking 04
+  aliases:
+  - networking 04
+  - network
+  - connect  
 - name: networking--05
   friendly_name: Networking 05
+  aliases:
+  - networking 05
+  - network
+  - connect  
 - name: networking--06
   friendly_name: Networking 06
+  aliases:
+  - networking 06
+  - network
+  - connect  
 - name: nice
   friendly_name: Nice
   aliases:
     - nice
+    - city
+    - cities
 - name: night--clear
   friendly_name: Night clear
+  aliases:
+  - night clear
+  - clear
+  - weather
+  - sky
+  - stars
+  - moon
 - name: nyc--brooklyn
-  friendly_name: Nyc brooklyn
+  friendly_name: NYC Brooklyn
+  aliases:
+  - NYC Brooklyn
+  - NYC
+  - Brooklyn
+  - city
+  - cities
 - name: nyc--manhattan
-  friendly_name: Nyc manhattan
+  friendly_name: Nyc Manhattan
+  aliases:
+  - NYC Manhattan
+  - NYC
+  - Manhattan
+  - city
+  - cities
 - name: nyc--manhattan--alt
-  friendly_name: Nyc manhattan alt
+  friendly_name: NYC Manhattan alt
+  aliases:
+  - NYC Manhattan alt
+  - NYC
+  - Manhattan
+  - city
+  - cities
 - name: office
   friendly_name: Office
   aliases:
     - office
+    - building structure
+    - structure
 - name: oil--pump
   friendly_name: Oil pump
+  aliases:
+  - oil pump
+  - pump
 - name: oil--rig
   friendly_name: Oil rig
+  aliases:
+  - oil
+  - oil rig
+  - rig
+  - drilling platform
+  - drilling
 - name: optimize--cash-flow--01
   friendly_name: Optimize cash flow 01
-  aliases: []
+  aliases: 
+  - optimize cash flow 01
+  - optimize
+  - cash
+  - flow
+  - cash flow
+  - finance
 - name: optimize--cash-flow--02
   friendly_name: Optimize cash flow 02
-  aliases: []
+  aliases: 
+   aliases: 
+  - optimize cash flow 02
+  - optimize
+  - cash
+  - flow
+  - cash flow
+  - finance
 - name: overcast
   friendly_name: Overcast
   aliases:
     - overcast
+    - weather
+    - sky
 - name: paper--clip
   friendly_name: Paper clip
+  aliases:
+  - paper clip
+  - clip
+  - attachment
+  - attach
 - name: parliament
   friendly_name: Parliament
   aliases:
     - parliament
+    - government
+    - enforcement
 - name: partner--relationship
   friendly_name: Partner relationship
+  aliases:
+  - partner relationship
+  - partner
+  - relationship
+  - contract
+  - deal
+  - business
 - name: path
   friendly_name: Path
   aliases:
     - path
+    - design
+    - development
+    - direction
+    - flow
+    - guidance
+    - guide
+    - design and development
 - name: pattern
   friendly_name: Pattern
   aliases:
     - pattern
+    - design
+    - development
+    - design and development
 - name: perfume
   friendly_name: Perfume
   aliases:
     - perfume
+    - life style
+    - retail
+    - luxury
 - name: person--01
   friendly_name: Person 01
+  aliases:
+  - person 01
+  - people
+  - human
 - name: person--02
   friendly_name: Person 02
+  aliases:
+  - person 02
+  - people
+  - human
 - name: person--03
   friendly_name: Person 03
+  aliases:
+  - person 03
+  - people
+  - human
 - name: person--04
   friendly_name: Person 04
+  aliases:
+  - person 04
+  - people
+  - human
 - name: person--05
   friendly_name: Person 05
+  aliases:
+  - person 05
+  - people
+  - human
 - name: person--06
   friendly_name: Person 06
+  aliases:
+  - person 06
+  - people
+  - human
 - name: person--07
   friendly_name: Person 07
+  aliases:
+  - person 07
+  - people
+  - human
 - name: person--08
   friendly_name: Person 08
+  aliases:
+  - person 08
+  - people
+  - human
 - name: person--09
   friendly_name: Person 09
+  aliases:
+  - person 09
+  - people
+  - human
 - name: personality--insights
   friendly_name: Personality insights
+  aliases:
+  - personality insights
+  - personality
+  - insights
+  - watson
+  - AI
 - name: petri--culture
   friendly_name: Petri cultures
+  aliases:
+  - petri cultures
+  - petri dish
+  - petri
+  - life science
+  - research
 - name: pill--bottle--01
   friendly_name: Pill bottle 01
+  aliases:
+  - pill bottle 01
+  - medicine
+  - prescription
+  - rx
+  - healthcare
 - name: pills
   friendly_name: Pills
   aliases:
-    - pills
+  - pills
+  - medicine
+  - prescription
+  - rx
+  - healthcare
 - name: planning--analytics
   friendly_name: Planning analytics
   aliases:
     - planning analytics
+    - planning
+    - analytics
+    - data
 - name: player--flow
   friendly_name: Player flow
+  aliases:
+  - player flow
+  - player
+  - flow
 - name: podcast
   friendly_name: Podcast
   aliases:
     - podcast
+    - controls
+    - audio
 - name: police
   friendly_name: Police
   aliases:
     - police
+    - enforcement
+    - security
+    - people
 - name: population-diagram
   friendly_name: population-diagram
-  aliases: []
+  aliases: 
+  - population diagram
+  - population
+  - charts
+  - data analytics
+  - data
+  - analytics
 - name: power
   friendly_name: Power
   aliases:
     - power
+    - industry
+    - electricity
+    - tower
 - name: presentation
   friendly_name: Presentation
   aliases:
     - presentation
+    - strategy
+    - meeting
+    - webinar
+    - speaker
+    - audience
+    - presenter
 - name: presenter
   friendly_name: Presenter
   aliases:
     - presenter
+    - strategy
+    - meeting
+    - webinar
+    - speaker
+    - presentation
 - name: price
   friendly_name: Price
   aliases:
     - price
+    - tag
+    - retail
 - name: printer
   friendly_name: Printer
   aliases:
     - printer
+    - electronics
+    - office equipment
+    - office
 - name: private--network
   friendly_name: Private network
+  aliases:
+  - private network
+  - private
+  - network
 - name: private--network--01
   friendly_name: Private network 01
+  aliases:
+  - private network 01
+  - private
+  - network
 - name: private--network--alt
   friendly_name: Private network alt
+  aliases:
+  - private network alt
+  - private
+  - network
 - name: private--network--alt--01
   friendly_name: Private network alt 01
+  aliases:
+  - private network alt 01
+  - private
+  - network
 - name: process
   friendly_name: Process
   aliases:
@@ -2532,251 +2770,564 @@
   friendly_name: Progress
   aliases:
     - progress
+    - IBM
 - name: puzzle
   friendly_name: Puzzle
   aliases:
     - puzzle
+    - strategy
+    - approach
 - name: q-q-plot
   friendly_name: q-q-plot
-  aliases: []
+  aliases:
+  - q q plot
+  - qq plot
+  - q q
+  - plot
+  - chart
 - name: question
   friendly_name: Question
   aliases:
     - question
+    - status
 - name: question--and--answer
   friendly_name: Question and answer
+  aliases:
+  - question and answer
+  - q and a
+  - watson
+  - AI 
 - name: rainy
   friendly_name: Rainy
   aliases:
     - rainy
+    - precipitation
+    - weather
 - name: rainy--heavy
   friendly_name: Rainy heavy
+  aliases:
+  - rainy heavy
+  - rainy
+  - precipitation
+  - weather
 - name: rank
   friendly_name: Rank
   aliases:
     - rank
+    - data analytics
+    - data
+    - analytics
 - name: receipt
   friendly_name: Receipt
   aliases:
     - receipt
+    - retail
+    - shopping
+    - shop
+    - bill
 - name: recycle
   friendly_name: Recycle
   aliases:
     - recycle
+    - industry
+    - environment
 - name: refinery
   friendly_name: Refinery
   aliases:
     - refinery
+    - industry
+    - oil
 - name: refresh
   friendly_name: Refresh
   aliases:
     - refresh
+    - update
 - name: relationship--extraction
   friendly_name: Relationship extraction
+  aliases:
+  - relationship extraction
+  - relationship
+  - watson
+  - AI
 - name: relationship-diagram
   friendly_name: relationship-diagram
-  aliases: []
+  aliases:
+  - relationship diagram
+  - relationship
+  - data analytics
+  - data 
+  - analytics
+  - chart
 - name: renew
   friendly_name: Renew
   aliases:
     - renew
+    - refresh
+    - update
 - name: renew--team
   friendly_name: Renew team
+  aliases:
+  - renew team
+  - renew
+  - team
+  - people
+  - update
 - name: repeat
   friendly_name: Repeat
   aliases:
     - repeat
+    - update
+    - renew
 - name: report
   friendly_name: Report
   aliases:
     - report
+    - data analytics
+    - data
+    - analytics
+    - chart
 - name: reset
   friendly_name: Reset
   aliases:
     - reset
+    - refresh
+    - renew
+    - update
 - name: reset--hybrid--cloud
   friendly_name: Reset hybrid cloud
+  aliases:
+  - reset hybrid cloud
+  - reset
+  - hybrid
+  - cloud
+  - hybrid cloud
+  - networking
+  - network
 - name: reset--settings
   friendly_name: Reset settings
+  aliases:
+  - reset settings
+  - reset
+  - settings
+  - networking
+  - network
 - name: retrieve--and--rank
   friendly_name: Retrieve and rank
+  aliases:
+  - retrieve and rank
+  - retrieve
+  - rank
+  - watson
+  - AI
 - name: rich--text--format
   friendly_name: Rich text format
+  aliases:
+  - rich text format
+  - text format
+  - format
+  - file format
+  - file
 - name: robot
   friendly_name: Robot
   aliases:
     - robot
+    - manufacturing
 - name: robotics
   friendly_name: Robotics
   aliases:
     - robotics
+    - manufacturing
 - name: rome
   friendly_name: Rome
   aliases:
     - rome
+    - city
+    - cities
 - name: saas--enablement
-  friendly_name: Saas enablement
+  friendly_name: SaaS enablement
+  aliases:
+  - SaaS enablement
+  - saas
+  - enablement
+  - cloud
+  - software as a service
 - name: sample--file
   friendly_name: Sample file
   aliases:
     - sample file
+    - sample
+    - file
+    - data analytics
+    - data
+    - analytics
 - name: san-francisco
   friendly_name: San Francisco
+  aliases:
+  - San Francisco
+  - city
+  - cities
 - name: san-francisco--fog
   friendly_name: San Francisco fog
+  aliases:
+  - San Francisco fog
+  - city
+  - cities
 - name: sao-paulo
   friendly_name: Sao Paulo
+  aliases:
+  - Sao Paulo
+  - city
+  - cities
 - name: sao-paulo--expanded--base
   friendly_name: Sao Paulo expanded base
+  aliases:
+  - Sao Paulo
+  - city
+  - cities
 - name: satellite
   friendly_name: Satellite
   aliases:
     - satellite
+    - industry
 - name: satellite--dish
   friendly_name: Satellite dish
+  aliases:
+  - satellite dish
+  - dish
+  - satellite
+  - industry
 - name: scale
   friendly_name: Scale
   aliases:
     - scale
+    - weight
+    - healthcare
 - name: scatter-matrix
   friendly_name: scatter-matrix
-  aliases: []
+  aliases: 
+  - scatter matrix
+  - scatter
+  - matrix
+  - chart
+  - data analytics
+  - data
+  - analytics
 - name: seattle
   friendly_name: Seattle
   aliases:
     - seattle
+    - city
+    - cities
 - name: secure--data
   friendly_name: Secure data
+  aliases:
+  - secure data
+  - secure
+  - data
+  - data analytics
+  - analytics
 - name: secure--profile
   friendly_name: Secure profile
+  aliases: 
+  - secure profile
+  - secure
+  - security
 - name: security
   friendly_name: Security
   aliases:
     - security
+    - shield
 - name: security--shield
   friendly_name: Security shield
+  aliases:
+    - security
+    - shield
 - name: server--rack
   friendly_name: Server rack
+  aliases:
+  - server rack
+  - server
+  - rack
+  - data storage
+  - data
+  - storage
+  - backup
 - name: servers
   friendly_name: Servers
   aliases:
-    - servers
+  - servers
+  - data storage
+  - data
+  - storage
+  - backup
 - name: shirt
   friendly_name: Shirt
   aliases:
     - shirt
+    - clothing
+    - clothes
+    - retail
+    - garment
 - name: shop
   friendly_name: Shop
   aliases:
     - shop
+    - retail
+    - shopping
+    - storefront
 - name: shopping--cart
   friendly_name: Shopping cart
+  aliases:
+  - shopping cart
+  - shopping
+  - shop
+  - cart
+  - checkout
+  - retail
 - name: shower
   friendly_name: Shower
   aliases:
     - shower
+    - home
 - name: singapore
   friendly_name: Singapore
   aliases:
     - singapore
+    - city
+    - cities
 - name: single--sign-on
   friendly_name: Single sign on
+  aliases:
+  - single sign on
+  - password
+  - SSO
+  - cloud
+  - identity
 - name: slider
   friendly_name: Slider
   aliases:
     - slider
+    - controls
 - name: sneaker
   friendly_name: Sneaker
   aliases:
     - sneaker
+    - retail
+    - shoe
+    - clothing
+    - garment
 - name: snow
   friendly_name: Snow
   aliases:
     - snow
+    - precipitation
+    - weather
 - name: socks
   friendly_name: Socks
   aliases:
     - socks
+    - retail
+    - clothing
+    - garment
 - name: soft--ice--cream
   friendly_name: Soft ice cream
+  aliases:
+  - soft ice cream
+  - ice cream
+  - food
+  - 
 - name: softlayer--enablement
   friendly_name: Softlayer enablement
+  aliases:
+  - softlayer enablement
+  - enablement
+  - softlayer
+  - cloud
 - name: solar--field
   friendly_name: Solar field
+  aliases:
+  - solar field
+  - solar
+  - energy
+  - industry
 - name: solar--panel
   friendly_name: Solar panel
+  aliases:
+  - solar panel
+  - solar
+  - energy
+  - industry
 - name: solve
   friendly_name: Solve
   aliases:
     - solve
+    - iot
+    - internet of things
 - name: spaceship
   friendly_name: Spaceship
   aliases:
     - spaceship
+    - travel
+    - transportation
 - name: speech
   friendly_name: Speech
   aliases:
     - speech
+    - watson
+    - AI
 - name: speech--alphabet--a--expanded
   friendly_name: Speech alphabet a expanded
+  aliases:
+    - speech alphabet a expanded
+    - speech
+    - watson
+    - AI
 - name: speech--to--text
   friendly_name: Speech to text
+  aliases:
+    - speech to text
+    - speech
+    - text
+    - watson
+    - AI
 - name: speedometer
   friendly_name: Speedometer
   aliases:
     - speedometer
+    - time
+    - dashboard
 - name: stairs--plan--view
   friendly_name: Stairs plan view
+  aliases:
+  - stairs plan view
+  - stairs
+  - plan
+  - building structure
+  - structure
 - name: stationary--bicycle
   friendly_name: Stationary bicycle
+  aliases:
+  - stationary bicycle
+  - bicycle
+  - gym
+  - healthcare
 - name: steel
   friendly_name: Steel
   aliases:
     - steel
+    - industry
 - name: steering--wheel
   friendly_name: Steering wheel
+  aliases:
+  - steering wheel
+  - transportation
 - name: stem--leaf--plot
   friendly_name: Stem leaf plot
   aliases:
     - stem leaf plot
+    - plot
+    - chart
+    - data analytics
+    - data
+    - analytics
 - name: stethoscope
   friendly_name: Stethoscope
   aliases:
     - stethoscope
+    - healthcare
+    - medicine
+    - medical
 - name: strategy
   friendly_name: Strategy
   aliases:
     - strategy
+    - business
 - name: strategy--direct
   friendly_name: Strategy direct
+  aliases:
+    - strategy direct
+    - strategy
+    - business
 - name: strategy--move
   friendly_name: Strategy move
+  aliases:
+    - strategy move
+    - strategy
+    - business
 - name: strategy--play
   friendly_name: Strategy play
+  aliases:
+    - strategy play
+    - strategy
+    - business
 - name: streamline
   friendly_name: Streamline
   aliases:
     - streamline
+    - strategy
+    - business
 - name: summit
   friendly_name: Summit
   aliases:
     - summit
+    - strategy
+    - business
+    - mountain
 - name: sunny
   friendly_name: Sunny
   aliases:
     - sunny
+    - weather
+    - sky
 - name: sunny--hazy
   friendly_name: Sunny hazy
+  aliases:
+  - sunny hazy
+  - sunny
+  - weather
+  - sky
 - name: supply--chain--optimization--01
   friendly_name: Supply chain optimization 01
+  aliases:
+  - supply chain optimization 01
+  - supply chain
+  - optimization
+  - optimize
+  - blockchain
 - name: supply--chain--optimization--02
   friendly_name: Supply chain optimization 02
+  aliases:
+  - supply chain optimization 02
+  - supply chain
+  - optimization
+  - optimize
+  - blockchain
 - name: support--services
   friendly_name: Support services
+  aliases:
+  - support services
+  - support
+  - services
+  - networking
+  - network
 - name: swipe--left
   friendly_name: Swipe left
+  aliases:
+  - swipe left
+  - swipe
+  - device interaction
+  - interaction
+  - device
+  - mobile
 - name: swipe--right
   friendly_name: Swipe right
+  aliases:
+  - swipe right
+  - swipe
+  - device interaction
+  - interaction
+  - device
+  - mobile
 - name: systems-devops--analyze
   friendly_name: Systems DevOps analyze
   aliases:
@@ -2819,248 +3370,577 @@
     - systems devops test
 - name: t-shirt
   friendly_name: T-shirt
+  aliases:
+  - T-shirt
+  - tee shirt
+  - garment
+  - clothes
+  - clothing
+  - retail
 - name: tags
   friendly_name: Tags
   aliases:
     - tags
+    - retail
 - name: target
   friendly_name: Target
   aliases:
     - target
+    - business
+    - strategy
 - name: target--area
   friendly_name: Target area
+  aliases:
+  - target area
+  - target
+  - business
+  - strategy
 - name: team--alignment
   friendly_name: Team alignment
+  aliases:
+  - team alignment
+  - team
+  - people
 - name: teammates
   friendly_name: Teammates
+  aliases:
+  - teammates
+  - team
+  - people
 - name: tel--aviv
-  friendly_name: Tel aviv
+  friendly_name: Tel Aviv
+  aliases:
+  - Tel Aviv
+  - cities
+  - city
 - name: telecom
   friendly_name: Telecom
   aliases:
     - telecom
+    - industry
+    - cellular
 - name: telephone
   friendly_name: Telephone
   aliases:
     - telephone
+    - electronics
 - name: television
   friendly_name: Television
   aliases:
     - television
+    - electronics
 - name: temperature--high
   friendly_name: Temperature high
+  aliases:
+  - temperature high
+  - hot
+  - warm
+  - weather
 - name: temperature--low
   friendly_name: Temperature low
+  aliases:
+  - temperature low
+  - cold
+  - cool
+  - weather
 - name: tennis
   friendly_name: Tennis
   aliases:
     - tennis
+    - sports
+    - lifestyle
 - name: test--tubes
   friendly_name: Test tubes
+  aliases:
+  - test tubes
+  - test
+  - life science
+  - lab
+  - laboratory
+  - research
 - name: text--to--speech
   friendly_name: Text to speech
+  aliases:
+  - text to speech
+  - text
+  - speech
+  - watson
+  - AI
 - name: time
   friendly_name: Time
   aliases:
     - time
+    - clock
 - name: time--plot
   friendly_name: Time plot
   aliases:
     - time plot
+    - data analytics
+    - data
+    - analytics
 - name: time-lapse
   friendly_name: Time lapse
   aliases:
+    - time lapse
+    - lapse
     - time
 - name: toggle
   friendly_name: Toggle
   aliases:
     - toggle
+    - controls
 - name: tokyo--cherry--blossom
   friendly_name: Tokyo cherry blossom
+  aliases:
+  - Tokyo cherry blossom
+  - Tokyo
+  - city
+  - cities
 - name: tokyo--gates
   friendly_name: Tokyo gates
+  aliases:
+  - Tokyo gates
+  - Tokyo
+  - city
+  - cities
 - name: tokyo--temple
   friendly_name: Tokyo temple
+  aliases:
+  - Tokyo temple
+  - Tokyo
+  - city
+  - cities
 - name: tokyo--volcano
   friendly_name: Tokyo volcano
+  aliases:
+  - Tokyo volcano
+  - Tokyo
+  - city
+  - cities
 - name: tone--analyzer
   friendly_name: Tone analyzer
+  aliases:
+  - tone analyzer
+  - watson
+  - AI
 - name: tools
   friendly_name: Tools
   aliases:
     - tools
+    - manufacturing
 - name: tornado
   friendly_name: Tornado
   aliases:
     - tornado
+    - weather
+    - windy
 - name: toronto
   friendly_name: Toronto
   aliases:
     - toronto
+    - city
+    - cities
 - name: touch
   friendly_name: Touch
   aliases:
     - touch
+    - device
+    - device interaction
+    - interaction
+    - mobile
 - name: touch--gesture
   friendly_name: Touch gesture
+  aliases:
+  - touch gesture
+  - touch
+  - device interaction
+  - interaction
+  - device
+  - mobile
+  - gesture
 - name: touch--id
   friendly_name: Touch id
+  aliases:
+  - touch id
+  - touch
+  - device interaction
+  - interaction
+  - device
+  - mobile
+  - id
+  - identity
 - name: touch--screen
   friendly_name: Touch screen
+  aliases:
+  - touch screen
+  - touch
+  - device interaction
+  - interaction
+  - device
+  - mobile
+  - screen
 - name: touch--swipe
   friendly_name: Touch swipe
+  aliases:
+  - touch swipe
+  - touch
+  - device interaction
+  - interaction
+  - device
+  - mobile
+  - swipe
 - name: tractor
   friendly_name: Tractor
   aliases:
     - tractor
+    - industry
+    - agriculture
+    - farm
+    - farming
+    - transportation
 - name: tradeoff--analytics
   friendly_name: Tradeoff analytics
+  aliases: 
+  - tradeoff analytics
+  - analytics
+  - data
+  - data analytics
 - name: train
   friendly_name: Train
   aliases:
     - train
+    - transportation
+    - travel
 - name: transform
   friendly_name: Transform
   aliases:
     - transform
+    - networking
+    - network
 - name: transparency--01
   friendly_name: Transparency 01
+  aliases:
+  - transparency 01
+  - blockchain
 - name: transparency--02
   friendly_name: Transparency 02
+  aliases:
+  - transparency 02
+  - blockchain
 - name: trash
   friendly_name: Trash
   aliases:
     - trash
+    - rubbish
+    - garbage
+    - dustbin
 - name: tree--diagram
   friendly_name: tree--diagram
-  aliases: []
+  aliases:
+  - tree diagram
+  - tree
+  - diagram
+  - data
+  - analytics
+  - data analytics
 - name: tree--map
   friendly_name: tree--map
-  aliases: []
+  aliases:
+  - tree map
+  - tree
+  - map
+  - data
+  - analytics
+  - data analytics
 - name: trousers
   friendly_name: Trousers
   aliases:
     - trousers
+    - pants
+    - clothes
+    - clothing
+    - garment
+    - retail
 - name: trust
   friendly_name: Trust
+  aliases:
+  - trust
+  - blockchain
 - name: university
   friendly_name: University
   aliases:
     - university
+    - education
+    - college
 - name: unlock
   friendly_name: Unlock
   aliases:
     - unlock
+    - security
 - name: unlock--alt
   friendly_name: Unlock alt
+  aliases:
+    - unlock alt
+    - security
 - name: upload
   friendly_name: Upload
   aliases:
     - upload
 - name: upload--alt
   friendly_name: Upload alt
+  aliases:
+    - upload alt
 - name: user
   friendly_name: User
+  aliases:
+  - user
+  - people
 - name: user--analytics
   friendly_name: User analytics
+  aliases:
+  - user analytics
+  - data analytics
+  - data
+  - analytics
+  - user
 - name: user--insights
   friendly_name: User insights
+  aliases:
+  - user insights
+  - design
+  - development
+  - user
+  - insights
+  - design and development
 - name: user--interface
   friendly_name: User interface
+  aliases:
+  - user interface
+  - design
+  - development
+  - user
+  - interface
+  - UX
+  - design and development
 - name: user--profile
   friendly_name: User profile
+  aliases:
+  - user profile
+  - user
+  - profile
+  - people
 - name: user--search
   friendly_name: User search
+  aliases:
+  - user search
+  - user
+  - search
+  - people
 - name: vancouver
   friendly_name: Vancouver
   aliases:
     - vancouver
+    - city
+    - cities
 - name: video
   friendly_name: Video
   aliases:
     - video
+    - controls
 - name: video--alt
   friendly_name: Video alt
+  aliases:
+  - video alt
+  - video
+  - controls
 - name: video--chat
   friendly_name: Video chat
+  aliases:
+  - video chat
+  - video
+  - controls
 - name: video--play
   friendly_name: Video play
+  aliases:
+  - video play
+  - video
+  - controls
 - name: virus
   friendly_name: Virus
   aliases:
     - virus
+    - life science
 - name: vision
   friendly_name: Vision
   aliases:
     - vision
+    - watson
+    - AI
 - name: visual--insights
   friendly_name: Visual insights
+  aliases:
+  - visual insights
+  - visual
+  - insights
+  - watson
+  - AI
 - name: visual--recognition
   friendly_name: Visual recognition
+  aliases:
+  - visual recognition
+  - visual
+  - recognition
+  - watson
+  - AI
 - name: warning
   friendly_name: Warning
   aliases:
     - warning
+    - alert
+    - status
 - name: warning--alt
   friendly_name: Warning alt
+  aliases:
+  - warning
+  - alert
+  - status
 - name: washer
   friendly_name: Washer
   aliases:
     - washer
+    - electronics
+    - appliances
 - name: washington-dc
   friendly_name: Washington D.C.
+  aliases:
+  - Washington D.C.
+  - cities
+  - city
 - name: washington-dc--capitol
   friendly_name: Washington D.C. capitol
+  aliases:
+  - Washington D.C. capitol
+  - capitol
+  - cities
+  - city
 - name: washington-dc--monument
   friendly_name: Washington D.C. monument
+  aliases:
+  - Washington D.C. monument
+  - monument
+  - cities
+  - city
 - name: watson--avatar
   friendly_name: Watson avatar
+  aliases:
+  - Watson avatar
+  - watson
+  - avatar
 - name: weather
   friendly_name: Weather
   aliases:
     - weather
 - name: web--developer
   friendly_name: Web developer
+  aliases:
+  - Web developer
+  - web
+  - developer
+  - coder
+  - programmer
+  - design
+  - development
+  - design and development
 - name: webcast
   friendly_name: Webcast
   aliases:
     - webcast
+    - controls
 - name: wheat
   friendly_name: Wheat
   aliases:
     - wheat
+    - food
+    - crop
+    - farm
+    - farming
+    - agriculture
+    - industry
 - name: wifi
   friendly_name: Wifi
   aliases:
     - wifi
+    - electronics
 - name: wind--power
   friendly_name: Wind power
+  aliases: 
+  - wind power
+  - power
+  - wind
+  - industry
 - name: windows
   friendly_name: Windows
   aliases:
     - windows
+    - design
+    - development
+    - design and development
 - name: windy
   friendly_name: Windy
   aliases:
     - windy
+    - weather
 - name: wine
   friendly_name: Wine
   aliases:
     - wine
+    - food
+    - industry
 - name: wireless--home
   friendly_name: Wireless home
+  aliases:
+  - wireless home
+  - wireless
+  - home
 - name: wireless--modem
   friendly_name: Wireless modem
+   aliases:
+  - wireless modem
+  - modem
+  - wireless
+  - home
 - name: word-cloud
   friendly_name: word-cloud
-  aliases: []
+  aliases:
+  - word cloud
+  - word
+  - cloud
+  - data analytics
+  - data
+  - analytics
 - name: wrecking--ball
   friendly_name: Wrecking ball
+  aliases:
+  - wrecking ball
+  - industry
+  - machinery
 - name: yoga--01
   friendly_name: Yoga 01
+  aliases:
+  - yoga 01
+  - lifestyle
 - name: yoga--02
   friendly_name: Yoga 02
+  aliases:
+  - yoga 02
+  - lifestyle
 - name: yoga--03
   friendly_name: Yoga 03
+  aliases:
+  - yoga 04
+  - lifestyle
 - name: yoga--04
   friendly_name: Yoga 04
+  aliases:
+  - yoga 04
+  - lifestyle
