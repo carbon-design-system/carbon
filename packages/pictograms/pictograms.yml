@@ -1855,103 +1855,212 @@
   friendly_name: Home garage
   aliases:
   - home garage
+  - home
   - garage
   - house
   - parking
 - name: home--profile
   friendly_name: Home profile
+  aliases:
+  - home profile
+  - home
+  - house
 - name: hospital
   friendly_name: Hospital
   aliases:
     - hospital
+    - healthcare
+    - clinic
 - name: humid
   friendly_name: Humid
   aliases:
     - humid
+    - weather
 - name: hurricane
   friendly_name: Hurricane
   aliases:
     - hurricane
+    - weather
 - name: hybrid--cloud
   friendly_name: Hybrid cloud
+  aliases: 
+  - hybrid cloud
+  - hybrid
+  - cloud
 - name: hybrid--cloud--services
   friendly_name: Hybrid cloud services
+  aliases:
+  - hybrid cloud services
+  - hybrid
+  - cloud
+  - services
 - name: ibm--ix
-  friendly_name: Ibm ix
+  friendly_name: IBM iX®
+  aliases:
+  - IBM iX®
+  - IBM
 - name: ibm--z
-  friendly_name: Ibm z
+  friendly_name: Ibm Z®
+  aliases:
+  - IBM Z®
+  _ IBM
 - name: idea
   friendly_name: Idea
   aliases:
     - idea
+    - lightbulb
+    - design
+    - development
 - name: ideate
   friendly_name: Ideate
   aliases:
     - ideate
+    - iterate
+    - design
+    - development
 - name: innovate
   friendly_name: Innovate
   aliases:
     - innovate
+    - design
+    - development
+    - develop
 - name: inspect--data
   friendly_name: Inspect data
+  aliases: 
+  - inspect data
+  - inspect
+  - data
+  - review
+  - study
+  - networking
+  - network
 - name: integration
   friendly_name: Integration
   aliases:
     - integration
+    - networking
+    - network
+    - integrate
 - name: intelligence
   friendly_name: Intelligence
   aliases:
     - intelligence
+    - brain
+    - learning
+    - learn
 - name: intercom
   friendly_name: Intercom
   aliases:
     - intercom
 - name: iot--munich
-  friendly_name: Iot munich
+  friendly_name: IoT munich
+  aliases:
+  - iot munich
+  - iot
+  - munich
+  - city
+  - cities
+  - internet of things
 - name: java
   friendly_name: Java
   aliases:
     - java
+    - cloud
+    - software
+    - code
 - name: javascript
   friendly_name: Javascript
   aliases:
     - javascript
+    - cloud
+    - software
+    - code
 - name: justice
   friendly_name: Justice
   aliases:
     - justice
+    - court
+    - law
+    - enforcement
 - name: key--users
   friendly_name: Key users
+  aliases:
+  - key users
+  - users
+  - people
 - name: knows--dark--data
   friendly_name: Knows dark data
+  aliases:
+  - knows dark data
+  - dark data
+  - data
+  - watson
+  - AI  
 - name: language
   friendly_name: Language
   aliases:
     - language
+    - watson
 - name: language--01
   friendly_name: Language 01
+  aliases:
+  - language 01
+  - watson
 - name: language--02
   friendly_name: Language 02
+  aliases:
+  - language 02
+  - watson
 - name: language--03
   friendly_name: Language 03
+  aliases:
+  - language 03
+  - watson
 - name: language--04
   friendly_name: Language 04
+  aliases:
+  - language 04
+  - watson
 - name: language--translation
   friendly_name: Language translation
+  aliases:
+  - language translation
+  - language
+  - translation
+  - watson
 - name: language--translation--alphabet--a--expanded
   friendly_name: Language translation alphabet a expanded
+  aliases:
+  - language translation alphabet a expanded
+  - language
+  - translation
+  - watson
 - name: launch
   friendly_name: Launch
   aliases:
     - launch
+    - start
+    - open
 - name: lightning
   friendly_name: Lightning
   aliases:
     - lightning
+    - weather
 - name: list--bullet
   friendly_name: List bullet
+  aliases:
+  - list bullet
+  - list
+  - bullet
+  - cloud
 - name: list--checkbox
   friendly_name: List checkbox
+  aliases:
+  - list checkbox
+  - list
+  - checkbox
+  - cloud
 - name: location
   friendly_name: Location
   aliases:
@@ -1960,50 +2069,130 @@
   friendly_name: Lock
   aliases:
     - lock
+    - security
 - name: lock--alt
   friendly_name: Lock alt
+  aliases:
+    - lock alt
+    - security
 - name: locked--network
   friendly_name: Locked network
+  aliases:
+    - locked network
+    - network
+    - security
 - name: locked--network--alt
   friendly_name: Locked network alt
+  aliases:
+    - locked network alt
+    - network
+    - security
 - name: london
   friendly_name: London
   aliases:
     - london
+    - city
+    - cities
 - name: london--big--ben
   friendly_name: London big ben
+  aliases:
+  - london big ben
+  - london
+  - big ben
+  - cities
+  - city
 - name: london--expanded--base
   friendly_name: London expanded base
+  aliases:
+  - London expanded base
+  - London
+  - cities
+  - city
 - name: lungs
   friendly_name: Lungs
   aliases:
     - lungs
+    - life science
+    - healthcare
 - name: machine--learning--01
   friendly_name: Machine learning 01
+  aliases:
+  - machine learning 01
+  - ML
+  - learning
+  - learn
 - name: machine--learning--02
   friendly_name: Machine learning 02
+  aliases:
+  - machine learning 02
+  - ML
+  - learning
+  - learn
 - name: machine--learning--03
   friendly_name: Machine learning 03
+  aliases:
+  - machine learning 03
+  - ML
+  - learning
+  - learn
 - name: machine--learning--04
   friendly_name: Machine learning 04
+  aliases:
+  - machine learning 04
+  - ML
+  - learning
+  - learn
 - name: machine--learning--05
   friendly_name: Machine learning 05
+  aliases:
+  - machine learning 05
+  - ML
+  - learning
+  - learn
 - name: machine--learning--06
   friendly_name: Machine learning 06
+  aliases:
+  - machine learning 06
+  - ML
+  - learning
+  - learn
 - name: madrid--cathedral
   friendly_name: Madrid cathedral
+  aliases:
+  - Madrid cathedral
+  - cathedral
+  - Madrid
+  - city
+  - cities
 - name: madrid--skyscrapers
   friendly_name: Madrid skyscrapers
+  aliases:
+  - Madrid skyscrapers
+  - skyscrapers
+  - Madrid
+  - city
+  - cities
 - name: madrid--statue
   friendly_name: Madrid statue
+    aliases:
+  - Madrid statue
+  - statue
+  - Madrid
+  - city
+  - cities
 - name: magnify
   friendly_name: Magnify
   aliases:
     - magnify
+    - enlarge
+    - study
+    - life science
 - name: managing--contractual--flow
   friendly_name: Managing contractual flow
   aliases:
     - managing contractual flow
+    - contract
+    - flow
 - name: managing--items
   friendly_name: Managing items
   aliases:
@@ -2012,79 +2201,150 @@
   friendly_name: Marketplace
   aliases:
     - marketplace
+    - cloud
 - name: mas
-  friendly_name: Mas
+  friendly_name: MAS
   aliases:
     - mas
+    - code
+    - software
 - name: math-curve
-  friendly_name: math-curve
-  aliases: []
+  friendly_name: Math curve
+  aliases:
+  - math curve
+  - data analytics
+  - data
+  - analytics
 - name: maximize
   friendly_name: Maximize
   aliases:
     - maximize
+    - enlarge
 - name: medical
   friendly_name: Medical
   aliases:
     - medical
+    - healthcare
 - name: medical--charts
   friendly_name: Medical charts
+  aliases:
+    - medical charts
+    - charts
+    - healthcare
 - name: medical--staff
   friendly_name: Medical staff
+  aliases:
+    - medical staff
+    - staff
+    - healthcare
 - name: melbourne
   friendly_name: Melbourne
   aliases:
     - melbourne
+    - city
+    - cities
 - name: meter
   friendly_name: Meter
   aliases:
     - meter
+    - time
+    - dashboard
+    - instrument
 - name: mexico-city--angel--of--independence
   friendly_name: Mexico City Angel of Independence
   aliases:
+    - Mexico City Angel of Independence
     - statue
+    - city
+    - cities
 - name: mexico-city--museo--soumaya
   friendly_name: Mexico City Museo Soumaya
   aliases:
+    - Mexico City Museo Soumaya
     - museum
+    - city
+    - cities
 - name: microorganisms
   friendly_name: Microorganisms
   aliases:
     - microorganisms
+    - life science
 - name: microscope
   friendly_name: Microscope
   aliases:
     - microscope
+    - life science
+    - research
 - name: milan--duomo--di--milano
   friendly_name: Milan Duomo di Milano
   aliases:
     - church
+    - Milan Duomo di Milano
+    - city
+    - cities
 - name: milan--skyscrapers
   friendly_name: Milan Skyscrapers
   aliases:
+    - Milan Skyscrapers
     - skyline
+    - skyscrapers
+    - city
+    - cities
 - name: minimize
   friendly_name: Minimize
   aliases:
     - minimize
 - name: mobile--add
   friendly_name: Mobile add
+  aliases:
+  - mobile add
+  - mobile
+  - device interaction
+  - device
+  - add
 - name: mobile--chat
   friendly_name: Mobile chat
+  aliases:
+  - mobile chate
+  - mobile
+  - device interaction
+  - device
+  - chat
 - name: mobile--devices
   friendly_name: Mobile devices
+  aliases:
+  - mobile devices
+  - mobile
+  - device interaction
+  - device
 - name: mobile--phone
   friendly_name: Mobile phone
+  aliases:
+  - mobile phone
+  - mobile
+  - device interaction
+  - device
+  - phone
 - name: monitored--item--on--conveyor
   friendly_name: Monitored item on conveyor
   aliases:
     - monitored item on conveyor
+    - conveyor
 - name: mortar--and--pestle
   friendly_name: Mortar and pestle
+  aliases:
+  - mortar and pestle
+  - rx
+  - prescription
+  - formulary
+  - healthcare
+  - life science
 - name: moscow
   friendly_name: Moscow
   aliases:
     - moscow
+    - city
+    - cities
 - name: movement--in--overlapping--networks
   friendly_name: Movement in overlapping networks
   aliases:
@@ -2093,20 +2353,24 @@
   friendly_name: Movement of goods 01
   aliases:
     - movement of goods 01
+    - goods
 - name: movement--of--goods--02
   friendly_name: Movement of goods 02
   aliases:
     - movement of goods 02
+    - goods
 - name: movement--of--goods--03
   friendly_name: Movement of goods 03
   aliases:
     - movement of goods 03
+    - goods
 - name: movement--of--items
   friendly_name: Movement of items
   aliases:
     - movement of items
+    - goods
 - name: mqa
-  friendly_name: Mqa
+  friendly_name: MQA
   aliases:
     - mqa
 - name: multitask
