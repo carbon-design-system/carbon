@@ -35,7 +35,7 @@ module.exports = {
 
     // Time
     // Specify the minimum number of milliseconds for time values.
-    'time-min-milliseconds': 100,
+    'time-min-milliseconds': OFF,
 
     // Unit
     // Specify a blacklist of disallowed units.
@@ -49,7 +49,7 @@ module.exports = {
 
     // Value
     // Disallow vendor prefixes for values.
-    'value-no-vendor-prefix': true,
+    'value-no-vendor-prefix': OFF,
 
     // Custom property
     // Specify a pattern for custom properties.
