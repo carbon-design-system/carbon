@@ -611,23 +611,23 @@ In practice, this looks like the following:
         <TableToolbarContent>
           {/* pass in `onInputChange` change here to make filtering work */}
           <TableToolbarSearch onChange={onInputChange} />
-            <TableToolbarMenu>
-              <TableToolbarAction
-                icon={iconDownload}
-                iconDescription="Download"
-               onClick={action('TableToolbarAction - Download')}
-              />
-              <TableToolbarAction
-               icon={iconEdit}
-                iconDescription="Edit"
-                onClick={action('TableToolbarAction - Edit')}
-              />
-              <TableToolbarAction
-                icon={iconSettings}
-                iconDescription="Settings"
-                onClick={action('TableToolbarAction - Settings')}
-              />
-            </TableToolbarMenu>
+          <TableToolbarMenu>
+            <TableToolbarAction
+              icon={iconDownload}
+              iconDescription="Download"
+              onClick={action('TableToolbarAction - Download')}
+            />
+            <TableToolbarAction
+              icon={iconEdit}
+              iconDescription="Edit"
+              onClick={action('TableToolbarAction - Edit')}
+            />
+            <TableToolbarAction
+              icon={iconSettings}
+              iconDescription="Settings"
+              onClick={action('TableToolbarAction - Settings')}
+            />
+          </TableToolbarMenu>
           <Button onClick={action('Add new row')} small kind="primary">
             Add new
           </Button>
