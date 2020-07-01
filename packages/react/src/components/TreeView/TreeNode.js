@@ -62,7 +62,7 @@ export default function TreeNode({
   });
   const handleToggleClick = (event) => {
     if (onToggle) {
-      onToggle(event, { isExpanded: !expanded });
+      onToggle(event, { id, isExpanded: !expanded, label, value });
     }
     setExpanded(!expanded);
   };
