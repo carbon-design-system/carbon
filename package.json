@@ -70,7 +70,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "rimraf": "^3.0.0",
-    "stylelint": "^13.0.0"
+    "stylelint": "^13.6.0"
   },
   "husky": {
     "hooks": {
@@ -124,7 +124,7 @@
     ],
     "**/*.scss": [
       "prettier --write",
-      "yarn lint:styles",
+      "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input",
       "git add"
     ],
     "!(*sass).md": [
