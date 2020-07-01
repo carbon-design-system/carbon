@@ -86,6 +86,10 @@
   friendly_name: Automobile
   aliases:
     - automobile
+- name: backpack
+  friendly_name: Backpack
+  aliases:
+    - backpack
 - name: bag
   friendly_name: Bag
   aliases:
@@ -439,6 +443,10 @@
   friendly_name: Dining
   aliases:
     - dining
+- name: distribution--ledger
+  friendly_name: Distribution ledger
+  aliases:
+    - distibution ledger
 - name: dna
   friendly_name: Dna
   aliases:
@@ -455,6 +463,10 @@
     - doctor
 - name: document--conversion
   friendly_name: Document conversion
+- name: document--security
+  friendly_name: Document security
+  aliases:
+    - document security
 - name: door--handle
   friendly_name: Door handle
 - name: download
@@ -493,6 +505,10 @@
   friendly_name: Embed
   aliases:
     - embed
+- name: employee--insights
+  friendly_name: Employee insights
+  aliases:
+    - employee insights
 - name: engine
   friendly_name: Engine
   aliases:
@@ -753,6 +769,10 @@
   friendly_name: Ibm ix
 - name: ibm--z
   friendly_name: Ibm z
+- name: id--badge
+  friendly_name: ID badge
+  aliases:
+    - id badge
 - name: idea
   friendly_name: Idea
   aliases:
@@ -992,6 +1012,10 @@
     - munich
 - name: natural--language--classifier
   friendly_name: Natural language classifier
+- name: natural--language--understanding
+  friendly_name: Natural language understanding
+  aliases:
+    - natural language understanding
 - name: network
   friendly_name: Network
   aliases:
@@ -1148,6 +1172,10 @@
 - name: q-q-plot
   friendly_name: q-q-plot
   aliases: []
+- name: qr-code
+  friendly_name: QR code
+  aliases:
+    - qr code
 - name: question
   friendly_name: Question
   aliases:
@@ -1199,6 +1227,10 @@
   friendly_name: Report
   aliases:
     - report
+- name: research
+  friendly_name: Research
+  aliases:
+    - research
 - name: reset
   friendly_name: Reset
   aliases:
@@ -1334,6 +1366,10 @@
   friendly_name: Speedometer
   aliases:
     - speedometer
+- name: sports
+  friendly_name: Sports
+  aliases:
+    - sports
 - name: stairs--plan--view
   friendly_name: Stairs plan view
 - name: stationary--bicycle
@@ -1528,6 +1564,14 @@
   friendly_name: Train
   aliases:
     - train
+- name: transactional--blockchain
+  friendly_name: Transactional blockchain
+  aliases:
+    - transactional blockchain
+- name: transactional--trust
+  friendly_name: Transactional trust
+  aliases:
+    - transactional trust
 - name: transform
   friendly_name: Transform
   aliases:
