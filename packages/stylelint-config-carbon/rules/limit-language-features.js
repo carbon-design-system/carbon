@@ -75,9 +75,7 @@ module.exports = {
     // Specify a whitelist of allowed property and unit pairs within
     // declarations.
     'declaration-property-unit-whitelist': {
-      'font-size': ['rem', '%', 'vw'],
       '/^animation/': ['ms'],
-      'line-height': ['rem'],
     },
     // Specify a blacklist of disallowed property and value pairs within
     // declarations.

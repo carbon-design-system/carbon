@@ -122,8 +122,9 @@
       "eslint",
       "git add"
     ],
-    "packages/components/**/*.scss": [
+    "**/*.scss": [
       "prettier --write",
+      "yarn lint:styles",
       "git add"
     ],
     "!(*sass).md": [

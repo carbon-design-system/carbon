@@ -9,6 +9,7 @@
 
 module.exports = {
   extends: [
+    require.resolve('stylelint-config-standard'),
     require.resolve('./rules/possible-errors'),
     require.resolve('./rules/limit-language-features'),
     require.resolve('./rules/stylistic-issues'),

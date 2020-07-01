@@ -19,7 +19,7 @@ module.exports = {
     'font-family-no-missing-generic-family-keyword': true,
 
     // Function
-    'function-calc-no-unspaced-operator': true,
+    'function-calc-no-unspaced-operator': OFF,
     'function-linear-gradient-no-nonstandard-direction': true,
 
     // String

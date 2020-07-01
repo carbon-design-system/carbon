@@ -106,7 +106,7 @@ module.exports = {
     // Disallow linebreaks before Sass operators.
     'scss/operator-no-newline-before': true,
     // Disallow unspaced operators in Sass operations.
-    'scss/operator-no-unspaced': true,
+    'scss/operator-no-unspaced': OFF,
 
     // Partial
     // Disallow non-CSS @imports in partial files.
