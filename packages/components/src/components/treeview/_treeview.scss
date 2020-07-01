@@ -123,9 +123,16 @@
     }
 
     .#{$prefix}--tree-node--selected > .#{$prefix}--tree-node__label {
-      position: relative;
       background-color: $selected-ui;
       color: $text-01;
+
+      &:hover {
+        background-color: $hover-selected-ui;
+      }
+    }
+
+    .#{$prefix}--tree-node--active > .#{$prefix}--tree-node__label {
+      position: relative;
 
       &::before {
         position: absolute;
@@ -135,10 +142,6 @@
         width: rem(4px);
         height: 100%;
         background-color: $interactive-01;
-      }
-
-      &:hover {
-        background-color: $hover-selected-ui;
       }
     }
 

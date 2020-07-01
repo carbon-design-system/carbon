@@ -15,6 +15,7 @@ import uniqueId from '../../tools/uniqueId';
 const { prefix } = settings;
 
 export default function TreeView({
+  active: prespecifiedActive,
   children,
   className,
   hideLabel = false,
@@ -32,6 +33,7 @@ export default function TreeView({
   const treeRootRef = useRef(null);
   const treeWalker = useRef(treeRootRef?.current);
   const [selected, setSelected] = useState(preselected);
+  const [active, setActive] = useState(prespecifiedActive);
   const handleTreeSelect = (event, { value } = {}) => {
     if (multiselect && event.metaKey) {
       if (!selected.includes(value)) {
@@ -43,6 +45,7 @@ export default function TreeView({
       }
     } else {
       setSelected([value]);
+      setActive(value);
     }
     if (onSelect) {
       onSelect(event, { value });
@@ -51,6 +54,7 @@ export default function TreeView({
   let focusTarget = false;
   const nodesWithProps = React.Children.map(children, (node) => {
     const sharedNodeProps = {
+      active,
       depth: 0,
       onTreeSelect: handleTreeSelect,
       selected,
@@ -113,7 +117,10 @@ export default function TreeView({
     if (preselected.length) {
       setSelected(preselected);
     }
-  }, [preselected]);
+    if (prespecifiedActive) {
+      setActive(prespecifiedActive);
+    }
+  }, [preselected, prespecifiedActive]);
 
   const labelId = `${id}__label`;
   const TreeLabel = () =>
@@ -140,6 +147,11 @@ export default function TreeView({
 }
 
 TreeView.propTypes = {
+  /**
+   * Mark the active node in the tree, represented by its value
+   */
+  active: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
   /**
    * Specify the children of the TreeView
    */
@@ -174,7 +186,9 @@ TreeView.propTypes = {
   /**
    * Array representing all selected values in the tree
    */
-  selected: PropTypes.arrayOf(PropTypes.string),
+  selected: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
 
   /**
    * Specify the size of the tree from a list of available sizes.

@@ -15,6 +15,7 @@ import { keys, match, matches } from '../../internal/keyboard';
 const { prefix } = settings;
 
 export default function TreeNode({
+  active,
   children,
   className,
   depth,
@@ -35,6 +36,7 @@ export default function TreeNode({
   const nodesWithProps = React.Children.map(children, (node) => {
     if (React.isValidElement(node)) {
       return React.cloneElement(node, {
+        active,
         depth: depth + 1,
         disabled,
         onTreeSelect,
@@ -43,8 +45,10 @@ export default function TreeNode({
       });
     }
   });
+  const isActive = active === value;
   const isSelected = selected.includes(value) || null;
   const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
+    [`${prefix}--tree-node--active`]: isActive,
     [`${prefix}--tree-node--disabled`]: disabled,
     [`${prefix}--tree-node--selected`]: isSelected,
     [`${prefix}--tree-node--with-icon`]: Icon,
@@ -204,6 +208,11 @@ export default function TreeNode({
 
 TreeNode.propTypes = {
   /**
+   * The value of the active node in the tree
+   */
+  active: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
    * Specify the children of the TreeNode
    */
   children: PropTypes.node,
@@ -252,7 +261,9 @@ TreeNode.propTypes = {
   /**
    * Array containing all selected values in the tree
    */
-  selected: PropTypes.arrayOf(PropTypes.string),
+  selected: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
 
   /**
    * Specify the value of the TreeNode
