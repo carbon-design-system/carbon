@@ -11,6 +11,7 @@ import { CaretDown16, Checkmark16 } from '@carbon/icons-react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { keys, match, matches } from '../../internal/keyboard';
+import uniqueId from '../../tools/uniqueId';
 
 const { prefix } = settings;
 
@@ -30,6 +31,7 @@ export default function TreeNode({
   value,
   ...rest
 }) {
+  const { current: id } = useRef(rest.id || uniqueId());
   const [expanded, setExpanded] = useState(isExpanded);
   const currentNode = useRef(null);
   const currentNodeLabel = useRef(null);
@@ -45,8 +47,8 @@ export default function TreeNode({
       });
     }
   });
-  const isActive = active === value;
-  const isSelected = selected.includes(value) || null;
+  const isActive = active === id;
+  const isSelected = selected.includes(id) || null;
   const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
     [`${prefix}--tree-node--active`]: isActive,
     [`${prefix}--tree-node--disabled`]: disabled,
@@ -68,10 +70,10 @@ export default function TreeNode({
     event.stopPropagation();
     if (!disabled) {
       if (onTreeSelect) {
-        onTreeSelect(event, { value });
+        onTreeSelect(event, { id, label, value });
       }
       if (onNodeSelect) {
-        onNodeSelect(event, { value });
+        onNodeSelect(event, { id, label, value });
       }
     }
   };
@@ -160,6 +162,7 @@ export default function TreeNode({
     ['aria-selected']: isSelected,
     ['aria-disabled']: disabled,
     className: treeNodeClasses,
+    id,
     onClick: handleClick,
     onKeyDown: handleKeyDown,
     ref: currentNode,
@@ -259,7 +262,7 @@ TreeNode.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * Array containing all selected values in the tree
+   * Array containing all selected node IDs in the tree
    */
   selected: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])

@@ -29,75 +29,166 @@ const props = () => ({
     'Allow selection of multiple tree nodes (multiselect)',
     false
   ),
-  selected: object('Array of selected values (selected)', ['5']),
+  selected: object('Array of selected node IDs (selected)', ['5']),
   size: select('Tree size (sizes)', sizes, 'default'),
 });
 
 const nodes = [
-  { value: '1', label: <span>1</span>, renderIcon: Document16 },
-  { value: '2', label: '2', renderIcon: Document16 },
   {
+    id: '1',
+    value: '1',
+    label: <span>1</span>,
+    renderIcon: Document16,
+  },
+  {
+    id: '2',
+    value: '2',
+    label: '2',
+    renderIcon: Document16,
+  },
+  {
+    id: '3',
     value: '3',
     label: '3',
     renderIcon: Folder16,
+
     children: [
-      { value: '3-1', label: '3-1', renderIcon: Document16 },
-      { value: '3-2', label: '3-2', renderIcon: Document16 },
+      {
+        id: '3-1',
+        value: '3-1',
+        label: '3-1',
+        renderIcon: Document16,
+      },
+      {
+        id: '3-2',
+        value: '3-2',
+        label: '3-2',
+        renderIcon: Document16,
+      },
     ],
   },
-  { value: '4', label: '4', renderIcon: Document16 },
   {
+    id: '4',
+    value: '4',
+    label: '4',
+    renderIcon: Document16,
+  },
+  {
+    id: '5',
     value: '5',
     label: '5',
     isExpanded: true,
     renderIcon: Folder16,
+
     children: [
-      { value: '5-1', label: '5-1', renderIcon: Document16 },
-      { value: '5-2', label: '5-2', renderIcon: Document16 },
       {
+        id: '5-1',
+        value: '5-1',
+        label: '5-1',
+        renderIcon: Document16,
+      },
+      {
+        id: '5-2',
+        value: '5-2',
+        label: '5-2',
+        renderIcon: Document16,
+      },
+      {
+        id: '5-3',
         value: '5-3',
         label: '5-3',
         isExpanded: true,
         renderIcon: Folder16,
+
         children: [
-          { value: '5-4', label: '5-4', renderIcon: Document16 },
           {
+            id: '5-4',
+            value: '5-4',
+            label: '5-4',
+            renderIcon: Document16,
+          },
+          {
+            id: '5-5',
             value: '5-5',
             label: '5-5',
             isExpanded: true,
             renderIcon: Folder16,
-            children: [{ value: '5-6', label: '5-6', renderIcon: Document16 }],
+
+            children: [
+              {
+                id: '5-6',
+                value: '5-6',
+                label: '5-6',
+                renderIcon: Document16,
+              },
+            ],
           },
         ],
       },
     ],
   },
   {
+    id: '6',
     value: '6',
     label: '6',
     renderIcon: Folder16,
+
     children: [
-      { value: '6-1', label: '6-1', renderIcon: Document16 },
-      { value: '6-2', label: '6-2', renderIcon: Document16 },
+      {
+        id: '6-1',
+        value: '6-1',
+        label: '6-1',
+        renderIcon: Document16,
+      },
+      {
+        id: '6-2',
+        value: '6-2',
+        label: '6-2',
+        renderIcon: Document16,
+      },
     ],
   },
   {
+    id: '7',
     value: '7',
     label: '7',
     isExpanded: true,
     disabled: true,
     renderIcon: Folder16,
+
     children: [
-      { value: '7-1', label: '7-1', renderIcon: Document16 },
-      { value: '7-2', label: '7-2', renderIcon: Document16 },
       {
+        id: '7-1',
+        value: '7-1',
+        label: '7-1',
+        renderIcon: Document16,
+      },
+      {
+        id: '7-2',
+        value: '7-2',
+        label: '7-2',
+        renderIcon: Document16,
+      },
+      {
+        id: '8',
         value: '8',
         label: '8',
         isExpanded: true,
         renderIcon: Folder16,
+
         children: [
-          { value: '8-1', label: '8-1', renderIcon: Document16 },
-          { value: '8-2', label: '8-2', renderIcon: Document16 },
+          {
+            id: '8-1',
+            value: '8-1',
+            label: '8-1',
+            renderIcon: Document16,
+          },
+          {
+            id: '8-2',
+            value: '8-2',
+            label: '8-2',
+            renderIcon: Document16,
+          },
         ],
       },
     ],

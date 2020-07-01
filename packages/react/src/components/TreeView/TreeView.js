@@ -26,7 +26,7 @@ export default function TreeView({
   size = 'default',
   ...rest
 }) {
-  const { current: id } = useRef(rest.id || uniqueId());
+  const { current: treeId } = useRef(rest.id || uniqueId());
   const treeClasses = classNames(className, `${prefix}--tree`, {
     [`${prefix}--tree--${size}`]: size !== 'default',
   });
@@ -34,21 +34,20 @@ export default function TreeView({
   const treeWalker = useRef(treeRootRef?.current);
   const [selected, setSelected] = useState(preselected);
   const [active, setActive] = useState(prespecifiedActive);
-  const handleTreeSelect = (event, { value } = {}) => {
+  const handleTreeSelect = (event, node = {}) => {
+    const { id: nodeId } = node;
     if (multiselect && event.metaKey) {
-      if (!selected.includes(value)) {
-        setSelected(selected.concat(value));
+      if (!selected.includes(nodeId)) {
+        setSelected(selected.concat(nodeId));
       } else {
-        setSelected(
-          selected.filter((selectedValue) => selectedValue !== value)
-        );
+        setSelected(selected.filter((selectedId) => selectedId !== nodeId));
       }
     } else {
-      setSelected([value]);
-      setActive(value);
+      setSelected([nodeId]);
+      setActive(nodeId);
     }
     if (onSelect) {
-      onSelect(event, { value });
+      onSelect(event, node);
     }
   };
   let focusTarget = false;
@@ -122,7 +121,7 @@ export default function TreeView({
     }
   }, [preselected, prespecifiedActive]);
 
-  const labelId = `${id}__label`;
+  const labelId = `${treeId}__label`;
   const TreeLabel = () =>
     !hideLabel && (
       <label id={labelId} className={`${prefix}--label`}>
@@ -184,7 +183,7 @@ TreeView.propTypes = {
   onSelect: PropTypes.func,
 
   /**
-   * Array representing all selected values in the tree
+   * Array representing all selected node IDs in the tree
    */
   selected: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
