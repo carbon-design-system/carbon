@@ -33,92 +33,92 @@ const props = () => ({
   size: select('Tree size (sizes)', sizes, 'default'),
 });
 
+const nodes = [
+  { value: '1', label: <span>1</span>, renderIcon: Document16 },
+  { value: '2', label: '2', renderIcon: Document16 },
+  {
+    value: '3',
+    label: '3',
+    renderIcon: Folder16,
+    children: [
+      { value: '3-1', label: '3-1', renderIcon: Document16 },
+      { value: '3-2', label: '3-2', renderIcon: Document16 },
+    ],
+  },
+  { value: '4', label: '4', renderIcon: Document16 },
+  {
+    value: '5',
+    label: '5',
+    isExpanded: true,
+    renderIcon: Folder16,
+    children: [
+      { value: '5-1', label: '5-1', renderIcon: Document16 },
+      { value: '5-2', label: '5-2', renderIcon: Document16 },
+      {
+        value: '5-3',
+        label: '5-3',
+        isExpanded: true,
+        renderIcon: Folder16,
+        children: [
+          { value: '5-4', label: '5-4', renderIcon: Document16 },
+          {
+            value: '5-5',
+            label: '5-5',
+            isExpanded: true,
+            renderIcon: Folder16,
+            children: [{ value: '5-6', label: '5-6', renderIcon: Document16 }],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    value: '6',
+    label: '6',
+    renderIcon: Folder16,
+    children: [
+      { value: '6-1', label: '6-1', renderIcon: Document16 },
+      { value: '6-2', label: '6-2', renderIcon: Document16 },
+    ],
+  },
+  {
+    value: '7',
+    label: '7',
+    isExpanded: true,
+    disabled: true,
+    renderIcon: Folder16,
+    children: [
+      { value: '7-1', label: '7-1', renderIcon: Document16 },
+      { value: '7-2', label: '7-2', renderIcon: Document16 },
+      {
+        value: '8',
+        label: '8',
+        isExpanded: true,
+        renderIcon: Folder16,
+        children: [
+          { value: '8-1', label: '8-1', renderIcon: Document16 },
+          { value: '8-2', label: '8-2', renderIcon: Document16 },
+        ],
+      },
+    ],
+  },
+];
+function renderTree({ nodes, withIcons = false }) {
+  if (!nodes) {
+    return;
+  }
+  return nodes.map(({ children, renderIcon, ...nodeProps }) => (
+    <TreeNode renderIcon={withIcons ? renderIcon : null} {...nodeProps}>
+      {renderTree({ nodes: children, withIcons })}
+    </TreeNode>
+  ));
+}
+
 storiesOf('TreeView', module)
   .addDecorator(withKnobs)
-  .add(
-    'default',
-    () => (
-      <TreeView {...props()}>
-        <TreeNode value="1" label={<span>1</span>} />
-        <TreeNode value="2" label="2" />
-        <TreeNode value="3" label="3">
-          <TreeNode value="3-1" label="3-1" />
-          <TreeNode value="3-2" label="3-2" />
-        </TreeNode>
-        <TreeNode value="4" label="4" />
-        <TreeNode value="5" label="5" isExpanded>
-          <TreeNode value="5-1" label="5-1" />
-          <TreeNode value="5-2" label="5-2" />
-          <TreeNode value="5-3" label="5-3" isExpanded>
-            <TreeNode value="5-4" label="5-4" />
-            <TreeNode value="5-5" label="5-5" isExpanded>
-              <TreeNode value="5-6" label="5-6" />
-            </TreeNode>
-          </TreeNode>
-        </TreeNode>
-        <TreeNode value="6" label="6">
-          <TreeNode value="6-1" label="6-1" />
-          <TreeNode value="6-2" label="6-2" />
-        </TreeNode>
-        <TreeNode value="7" label="7" isExpanded disabled>
-          <TreeNode value="7-1" label="7-1" />
-          <TreeNode value="7-2" label="7-2" />
-          <TreeNode value="8" label="8" isExpanded>
-            <TreeNode value="8-1" label="8-1" />
-            <TreeNode value="8-2" label="8-2" />
-          </TreeNode>
-        </TreeNode>
-      </TreeView>
-    ),
-    {
-      info: {
-        text: ``,
-      },
-    }
-  )
-  .add(
-    'with icons',
-    () => (
-      <TreeView {...props()}>
-        <TreeNode renderIcon={Document16} value="1" label={<span>1</span>} />
-        <TreeNode renderIcon={Document16} value="2" label="2" />
-        <TreeNode renderIcon={Folder16} value="3" label="3">
-          <TreeNode renderIcon={Document16} value="3-1" label="3-1" />
-          <TreeNode renderIcon={Document16} value="3-2" label="3-2" />
-        </TreeNode>
-        <TreeNode renderIcon={Document16} value="4" label="4" />
-        <TreeNode renderIcon={Folder16} value="5" label="5" isExpanded>
-          <TreeNode renderIcon={Document16} value="5-1" label="5-1" />
-          <TreeNode renderIcon={Document16} value="5-2" label="5-2" />
-          <TreeNode renderIcon={Folder16} value="5-3" label="5-3" isExpanded>
-            <TreeNode renderIcon={Document16} value="5-4" label="5-4" />
-            <TreeNode renderIcon={Folder16} value="5-5" label="5-5" isExpanded>
-              <TreeNode renderIcon={Document16} value="5-6" label="5-6" />
-            </TreeNode>
-          </TreeNode>
-        </TreeNode>
-        <TreeNode renderIcon={Folder16} value="6" label="6">
-          <TreeNode renderIcon={Document16} value="6-1" label="6-1" />
-          <TreeNode renderIcon={Document16} value="6-2" label="6-2" />
-        </TreeNode>
-        <TreeNode renderIcon={Folder16} value="7" label="7" isExpanded disabled>
-          <TreeNode renderIcon={Document16} value="7-1" label="7-1" />
-          <TreeNode renderIcon={Document16} value="7-2" label="7-2" />
-          <TreeNode
-            renderIcon={Folder16}
-            value="8"
-            label="8"
-            isExpanded
-            disabled>
-            <TreeNode renderIcon={Document16} value="8-1" label="8-1" />
-            <TreeNode renderIcon={Document16} value="8-2" label="8-2" />
-          </TreeNode>
-        </TreeNode>
-      </TreeView>
-    ),
-    {
-      info: {
-        text: ``,
-      },
-    }
-  );
+  .add('default', () => (
+    <TreeView {...props()}>{renderTree({ nodes })}</TreeView>
+  ))
+  .add('with icons', () => (
+    <TreeView {...props()}>{renderTree({ nodes, withIcons: true })}</TreeView>
+  ));
