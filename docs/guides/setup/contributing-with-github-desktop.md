@@ -20,5 +20,7 @@
 1. First things first we need to create a "working" branch. At the top of the Github Desktop application click the drop down labeled 'Current branch'
 2. Click the button labeled 'New branch' and then name your branch. Typically this will be a general description of the work youre doing. Maybe 'updating-accessibility-docs' or 'adding-security-pictograms'. Then click 'Create branch' to continue
 3. Make and save your additions or changes. You should then see your changed files in the 'Changes' list on the left and can inspect the exact changes line by line on the right
-4. Once you've completed your work click the button labeled 'Commit to master' in the bottom left of the application
-5.  
+4. Once you've completed your work in the bottom left of the screen you can create a summary and description of your commit and then click the button labeled 'Commit to (name of your branch)' (tip! use commits like save points or check points; you can have as many as you want and they're super helpful for rolling back changes since your last commit by clicking the 'Undo' button in the bottom left).
+5. Once you're finished with your work committed. Click the button on the right of the application labeled 'Publish branch'. This will push all your work you've done locally to your forked copy of the repository on Github.com.
+6. Then click the 'Create Pull Request' button that replaced the previous button which will take you to Github.com
+7. Here you can fill out the pull request title and template. After you're done click 'Create pull request' and you're done!
