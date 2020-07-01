@@ -31,6 +31,7 @@
   .#{$prefix}--file--label {
     @include reset;
     @include type-style('productive-heading-01');
+
     color: $text-01;
     margin-bottom: $carbon--spacing-03;
   }
@@ -54,7 +55,6 @@
     width: 100%;
     max-width: rem(320px);
     color: $link-01;
-    outline: none;
     transition: $duration--fast-02 motion(standard, productive);
     cursor: pointer;
     outline: 2px solid transparent;
@@ -133,8 +133,7 @@
     }
 
     .#{$prefix}--form-requirement {
-      grid-column-start: 1;
-      grid-column-end: -1;
+      grid-column: 1 / -1;
       max-height: none;
       margin: 0;
     }
@@ -152,6 +151,7 @@
 
     .#{$prefix}--file-filename {
       @include type-style('body-short-01');
+
       margin-left: $carbon--spacing-05;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -170,6 +170,7 @@
   // TODO: deprecate this block
   .#{$prefix}--file__selected-file--invalid__wrapper {
     @include focus-outline('invalid');
+
     outline-width: 1px;
     background-color: $field-01;
     max-width: rem(320px);
@@ -178,6 +179,7 @@
 
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
+
     padding: $carbon--spacing-05 0;
   }
 
@@ -191,6 +193,7 @@
   .#{$prefix}--file__selected-file--invalid
     .#{$prefix}--form-requirement__supplement {
     @include type-style('label-01');
+
     padding: 0 $carbon--spacing-05;
   }
 
@@ -202,6 +205,7 @@
   // TODO: deprecate
   .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
     @include type-style('caption-01');
+
     display: block;
     max-height: rem(200px);
     color: $text-error;

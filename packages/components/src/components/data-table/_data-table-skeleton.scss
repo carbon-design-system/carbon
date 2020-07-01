@@ -19,6 +19,7 @@
     th span,
     td span {
       @include skeleton;
+
       width: rem(64px);
       height: rem(16px);
       display: block;
@@ -52,6 +53,7 @@
   .#{$prefix}--data-table-container.#{$prefix}--skeleton
     .#{$prefix}--data-table-header__title {
     @include skeleton;
+
     width: rem(120px);
     height: rem(24px);
   }
@@ -59,6 +61,7 @@
   .#{$prefix}--data-table-container.#{$prefix}--skeleton
     .#{$prefix}--data-table-header__description {
     @include skeleton;
+
     margin-top: $spacing-03;
     width: rem(160px);
     height: rem(16px);
