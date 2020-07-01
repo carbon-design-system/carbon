@@ -280,6 +280,7 @@ categories:
       - police
   - name: File
     members:
+      - contract
       - document--security
       - duplicate--file
       - envelope
