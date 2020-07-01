@@ -21,7 +21,7 @@ import { getCellId } from './cells';
  * @returns {Array<string>} rowIds
  */
 export const defaultFilterRows = ({ rowIds, headers, cellsById, inputValue }) =>
-  rowIds.filter(rowId =>
+  rowIds.filter((rowId) =>
     headers.some(({ key }) => {
       const id = getCellId(rowId, key);
       if (typeof cellsById[id].value === 'boolean') return false;

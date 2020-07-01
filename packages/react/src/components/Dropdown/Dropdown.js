@@ -15,7 +15,7 @@ import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
 
-const defaultItemToString = item => {
+const defaultItemToString = (item) => {
   if (typeof item === 'string') {
     return item;
   }
@@ -44,8 +44,10 @@ function Dropdown({
   invalidText,
   initialSelectedItem,
   selectedItem: controlledSelectedItem,
+  downshiftProps,
 }) {
   const selectProps = {
+    ...downshiftProps,
     items,
     itemToString,
     initialSelectedItem,
@@ -125,12 +127,12 @@ function Dropdown({
         invalid={invalid}
         invalidText={invalidText}
         light={light}
-        isOpen={isOpen}>
+        isOpen={isOpen}
+        id={id}>
         {invalid && (
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
         )}
         <button
-          id={id}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
@@ -285,6 +287,11 @@ Dropdown.propTypes = {
    * Specify the direction of the dropdown. Can be either top or bottom.
    */
   direction: PropTypes.oneOf(['top', 'bottom']),
+
+  /**
+   * Additional props passed to Downshift
+   */
+  downshiftProps: PropTypes.object,
 };
 
 Dropdown.defaultProps = {

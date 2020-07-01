@@ -43,8 +43,8 @@ try {
     path.dirname(require.resolve('@frctl/fractal')),
     'core/log'
   ));
-  ['log', 'error', 'warn'].forEach(name => {
-    logger.on(name, evt => {
+  ['log', 'error', 'warn'].forEach((name) => {
+    logger.on(name, (evt) => {
       console[name](`Fractal ${name}:`, evt); // eslint-disable-line no-console
     });
   });
@@ -56,15 +56,15 @@ try {
  * @param {string} glob A glob.
  * @returns {Set<string, string>} A set of file contents matching the given glob, keyed by the basename of the file.
  */
-const getContents = glob =>
-  globby(glob).then(filePaths => {
+const getContents = (glob) =>
+  globby(glob).then((filePaths) => {
     if (filePaths.length === 0) {
       return undefined;
     }
     const contents = new Map();
     return Promise.all(
-      filePaths.map(filePath =>
-        readFile(filePath, { encoding: 'utf8' }).then(content => {
+      filePaths.map((filePath) =>
+        readFile(filePath, { encoding: 'utf8' }).then((content) => {
           contents.set(
             path.basename(filePath, path.extname(filePath)),
             content
@@ -79,8 +79,8 @@ const getContents = glob =>
  * @param {string} glob A glob.
  * @returns {Set<string, string>} A set of file contents matching the given glob, keyed by the basename of the file.
  */
-const loadContents = glob =>
-  getContents(glob).then(contents => {
+const loadContents = (glob) =>
+  getContents(glob).then((contents) => {
     contents.forEach((content, templateName) => {
       Handlebars.registerPartial(templateName, content);
       contents.set(templateName, Handlebars.compile(content));
@@ -141,7 +141,7 @@ const renderComponent = ({ layout, concat, layoutContext } = {}, handle) =>
           'The most typical cause is a JavaScript error in one of the `*.config.js` files.'
       );
     }
-    componentSource.forEach(metadata => {
+    componentSource.forEach((metadata) => {
       const items = metadata.isCollection
         ? metadata
         : !metadata.meta.removed &&
@@ -152,8 +152,8 @@ const renderComponent = ({ layout, concat, layoutContext } = {}, handle) =>
         const filteredItems =
           !handle || handle === metadata.handle
             ? items
-            : items.filter(item => handle === item.handle);
-        filteredItems.forEach(item => {
+            : items.filter((item) => handle === item.handle);
+        filteredItems.forEach((item) => {
           const { handle: itemHandle, baseHandle, context, meta } = item;
           const template =
             !meta.removed &&
@@ -184,7 +184,7 @@ const renderComponent = ({ layout, concat, layoutContext } = {}, handle) =>
       return renderedItems;
     }
     const accumulated = [];
-    renderedItems.forEach(rendered => {
+    renderedItems.forEach((rendered) => {
       accumulated.push(rendered);
     });
     return accumulated.length > 0 ? accumulated.join('\n') : undefined;

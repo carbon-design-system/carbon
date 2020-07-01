@@ -19,7 +19,7 @@ import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
-const defaultRenderLabel = props => <p {...props} />;
+const defaultRenderLabel = (props) => <p {...props} />;
 
 const defaultTranslations = {
   'carbon.progress-step.complete': 'Complete',
@@ -44,6 +44,7 @@ export function ProgressStep({
   onClick,
   renderLabel: ProgressStepLabel,
   translateWithId: t,
+  ...rest
 }) {
   const classes = classnames({
     [`${prefix}--progress-step`]: true,
@@ -54,7 +55,7 @@ export function ProgressStep({
     [className]: className,
   });
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (e) => {
     if (matches(e, [keys.Enter, keys.Space])) {
       onClick();
     }
@@ -109,7 +110,9 @@ export function ProgressStep({
         aria-disabled={disabled}
         tabIndex={!current && onClick && !disabled ? 0 : -1}
         onClick={!current ? onClick : undefined}
-        onKeyDown={handleKeyDown}>
+        onKeyDown={handleKeyDown}
+        title={label}
+        {...rest}>
         <span className={`${prefix}--assistive-text`}>{message}</span>
         <SVGIcon
           complete={complete}

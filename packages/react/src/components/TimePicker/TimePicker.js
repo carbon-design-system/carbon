@@ -160,7 +160,7 @@ export default class TimePicker extends Component {
           [`${prefix}--text-input--invalid`]: invalid,
         }
       ),
-      onChange: evt => {
+      onChange: (evt) => {
         if (!other.disabled) {
           this.setState({
             value: evt.target.value,
@@ -168,7 +168,7 @@ export default class TimePicker extends Component {
           onChange(evt);
         }
       },
-      onClick: evt => {
+      onClick: (evt) => {
         if (!other.disabled) {
           this.setState({
             value: evt.target.value,
@@ -176,7 +176,7 @@ export default class TimePicker extends Component {
           onClick(evt);
         }
       },
-      onBlur: evt => {
+      onBlur: (evt) => {
         if (!other.disabled) {
           this.setState({
             value: evt.target.value,

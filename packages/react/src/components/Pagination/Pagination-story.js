@@ -19,11 +19,14 @@ import {
 import Pagination from '../Pagination';
 
 const props = () => ({
-  disabled: boolean('Disable backward/forward buttons (disabled)', false),
+  disabled: boolean('Disable page inputs (disabled)', false),
   page: number('The current page (page)', 1),
   totalItems: number('Total number of items (totalItems)', 103),
   pagesUnknown: boolean('Total number of items unknown (pagesUnknown)', false),
-  pageInputDisabled: boolean('Disable page input (pageInputDisabled)', false),
+  pageInputDisabled: boolean(
+    '[Deprecated]: Disable page input (pageInputDisabled)',
+    undefined
+  ),
   backwardText: text(
     'The description for the backward icon (backwardText)',
     'Previous page'
@@ -43,7 +46,7 @@ const props = () => ({
 
 storiesOf('Pagination', module)
   .addDecorator(withKnobs)
-  .addDecorator(story => <div style={{ maxWidth: '800px' }}>{story()}</div>)
+  .addDecorator((story) => <div style={{ maxWidth: '800px' }}>{story()}</div>)
   .add('Pagination', () => <Pagination {...props()} />, {
     info: {
       text: `

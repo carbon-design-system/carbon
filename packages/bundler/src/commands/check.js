@@ -25,7 +25,7 @@ async function check(pattern, { ignore, cwd, list } = {}) {
   reporter.info(`Compiling ${files.length} files...`);
 
   const results = await Promise.all(
-    compile(files.map(file => path.join(cwd, file)))
+    compile(files.map((file) => path.join(cwd, file)))
   );
 
   const errors = results.reduce((acc, result) => {
@@ -37,7 +37,7 @@ async function check(pattern, { ignore, cwd, list } = {}) {
   }, []);
 
   if (errors.length > 0) {
-    errors.forEach(error => {
+    errors.forEach((error) => {
       const { formatted, file } = error;
       reporter.error(`Error compiling ${path.relative(cwd, file)}`);
       console.log(chalk.gray(formatted));

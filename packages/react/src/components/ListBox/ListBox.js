@@ -13,13 +13,13 @@ import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
 
 const { prefix } = settings;
 
-const handleOnKeyDown = event => {
+const handleOnKeyDown = (event) => {
   if (event.keyCode === 27) {
     event.stopPropagation();
   }
 };
 
-const handleClick = event => {
+const handleClick = (event) => {
   event.preventDefault();
   event.stopPropagation();
 };

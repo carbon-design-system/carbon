@@ -1,5 +1,9 @@
 - name: active--server
   friendly_name: Active server
+- name: add--device
+  friendly_name: Add device
+  aliases:
+    - add device
 - name: advocate
   friendly_name: Advocate
   aliases:
@@ -74,10 +78,18 @@
     - austin
 - name: automate--modular--management
   friendly_name: Automate modular management
+- name: automation--decision
+  friendly_name: Automation decision
+  aliases:
+    - automation decision
 - name: automobile
   friendly_name: Automobile
   aliases:
     - automobile
+- name: backpack
+  friendly_name: Backpack
+  aliases:
+    - backpack
 - name: bag
   friendly_name: Bag
   aliases:
@@ -106,6 +118,10 @@
   friendly_name: Bicycle
   aliases:
     - bicycle
+- name: blender
+  friendly_name: Blender
+  aliases:
+    - blender
 - name: blockchain
   friendly_name: Blockchain
   aliases:
@@ -153,6 +169,14 @@
   friendly_name: Care
   aliases:
     - care
+- name: cargo--crane
+  friendly_name: Cargo crane
+  aliases:
+    - cargo crane shipment shipping
+- name: cargo--ship
+  friendly_name: Cargo ship
+  aliases:
+    - cargo ship shipment shipping
 - name: cell
   friendly_name: Cell
   aliases:
@@ -173,6 +197,10 @@
 - name: chart--candlestick
   friendly_name: candlestick--chart
   aliases: []
+- name: chart--custom
+  friendly_name: Chart custom
+  aliases:
+    - chart custom
 - name: chart--error-bar
   friendly_name: chart--error-bar
   aliases: []
@@ -190,9 +218,17 @@
 - name: chart--multi-line
   friendly_name: chart--multi-line
   aliases: []
+- name: chart--multi-type
+  friendly_name: Chart multi type
+  aliases:
+    - chart multi type
 - name: chart--parallel
   friendly_name: chart--parallel
   aliases: []
+- name: chart--pie
+  friendly_name: Chart pie
+  aliases:
+    - chart pie
 - name: chart--radar
   friendly_name: chart--radar
   aliases: []
@@ -201,9 +237,21 @@
   aliases: []
 - name: chart--scatterplot
   friendly_name: Chart scatterplot
+- name: chart--stepper
+  friendly_name: Chart stepper
+  aliases:
+    - chart stepper
+- name: chart--sunburst
+  friendly_name: Chart sunburst
+  aliases:
+    - chart sunburst
 - name: chart--t-SNE
   friendly_name: chart--t-SNE
   aliases: []
+- name: cheese
+  friendly_name: Cheese
+  aliases:
+    - cheese
 - name: cherries
   friendly_name: Cherries
   aliases:
@@ -223,6 +271,10 @@
 - name: client--financing--02
   friendly_name: Client financing 02
   aliases: []
+- name: clothes--rack--01
+  friendly_name: Clothes rack 01
+- name: clothes--rack--02
+  friendly_name: Clothes rack 02
 - name: cloud--analytics
   friendly_name: Cloud analytics
 - name: cloud--assets
@@ -279,6 +331,10 @@
   friendly_name: Cloudy windy
 - name: coat--hanger
   friendly_name: Coat hanger
+- name: code--syntax
+  friendly_name: Code syntax
+  aliases:
+    - code syntax
 - name: cognos--analytics
   friendly_name: Cognos analytics
 - name: college
@@ -299,6 +355,12 @@
   friendly_name: Connect
   aliases:
     - connect
+- name: connected--ecosystem
+  friendly_name: Connected ecosystem
+- name: connected--nodes--to--the--cloud
+  friendly_name: Connected nodes to the cloud
+  aliases:
+    - connected nodes to the cloud
 - name: console
   friendly_name: Console
   aliases:
@@ -309,6 +371,8 @@
   friendly_name: Construct
   aliases:
     - construct
+- name: consumer--engagement--food--journey
+  friendly_name: Consumer engagement food journey
 - name: conversation
   friendly_name: Conversation
   aliases:
@@ -317,6 +381,10 @@
   friendly_name: Copenhagan planetarium
 - name: copenhagen--snekkja
   friendly_name: Copenhagen snekkja
+- name: coronavirus
+  friendly_name: Coronavirus
+  aliases:
+    - coronavirus covid-19
 - name: credit--card
   friendly_name: Credit card
 - name: crop
@@ -331,6 +399,10 @@
   friendly_name: Data insights
 - name: data--processing
   friendly_name: Data processing
+- name: data--set
+  friendly_name: Data set
+  aliases:
+    - data set
 - name: data--storage
   friendly_name: Data storage
 - name: delete
@@ -345,10 +417,16 @@
   friendly_name: Design and development 01
 - name: design--and--development--02
   friendly_name: Design and development 02
+- name: design-thinking-team
+  friendly_name: Design thinking team
 - name: desktop
   friendly_name: Desktop
   aliases:
     - desktop
+- name: developer-z-os
+  friendly_name: Developer z/OS
+  aliases:
+    - developer z os
 - name: devops
   friendly_name: Devops
   aliases:
@@ -365,6 +443,10 @@
   friendly_name: Dining
   aliases:
     - dining
+- name: distribution--ledger
+  friendly_name: Distribution ledger
+  aliases:
+    - distibution ledger
 - name: dna
   friendly_name: Dna
   aliases:
@@ -381,6 +463,10 @@
     - doctor
 - name: document--conversion
   friendly_name: Document conversion
+- name: document--security
+  friendly_name: Document security
+  aliases:
+    - document security
 - name: door--handle
   friendly_name: Door handle
 - name: download
@@ -407,6 +493,8 @@
   friendly_name: Electric
   aliases:
     - electric
+- name: electric--car
+  friendly_name: Electric car
 - name: electric--charge
   friendly_name: Electric charge
 - name: elevator
@@ -417,6 +505,10 @@
   friendly_name: Embed
   aliases:
     - embed
+- name: employee--insights
+  friendly_name: Employee insights
+  aliases:
+    - employee insights
 - name: engine
   friendly_name: Engine
   aliases:
@@ -474,6 +566,22 @@
   friendly_name: Farm
   aliases:
     - farm
+- name: farm--01
+  friendly_name: Farm 01
+  aliases:
+    - farm 01
+- name: farm--02
+  friendly_name: Farm 02
+  aliases:
+    - farm 02
+- name: farmer--01
+  friendly_name: Farmer 01
+  aliases:
+    - farmer 01
+- name: farmer--02
+  friendly_name: Farmer 02
+  aliases:
+    - farmer 02
 - name: faucet
   friendly_name: Faucet
   aliases:
@@ -506,10 +614,16 @@
   friendly_name: Firewall
   aliases:
     - firewall
+- name: first--aid
+  friendly_name: First aid
 - name: flow--chart
   friendly_name: Flow chart
 - name: flow--chart--detail
   friendly_name: Flow chart detail
+- name: flower--01
+  friendly_name: Flower 01
+- name: flower--02
+  friendly_name: Flower 02
 - name: fog
   friendly_name: Fog
   aliases:
@@ -532,6 +646,10 @@
   friendly_name: Gear
   aliases:
     - gear
+- name: gift
+  friendly_name: Gift
+  aliases:
+    - gift box
 - name: global--analytics
   friendly_name: Global analytics
   aliases: []
@@ -564,6 +682,8 @@
   aliases: []
 - name: global--network
   friendly_name: Global network
+- name: global--partner
+  friendly_name: Global partner
 - name: global--security
   friendly_name: Global security
   aliases: []
@@ -649,6 +769,10 @@
   friendly_name: Ibm ix
 - name: ibm--z
   friendly_name: Ibm z
+- name: id--badge
+  friendly_name: ID badge
+  aliases:
+    - id badge
 - name: idea
   friendly_name: Idea
   aliases:
@@ -661,6 +785,8 @@
   friendly_name: Innovate
   aliases:
     - innovate
+- name: inspect--data
+  friendly_name: Inspect data
 - name: integration
   friendly_name: Integration
   aliases:
@@ -767,6 +893,14 @@
   friendly_name: Magnify
   aliases:
     - magnify
+- name: managing--contractual--flow
+  friendly_name: Managing contractual flow
+  aliases:
+    - managing contractual flow
+- name: managing--items
+  friendly_name: Managing items
+  aliases:
+    - managing items
 - name: marketplace
   friendly_name: Marketplace
   aliases:
@@ -834,12 +968,36 @@
   friendly_name: Mobile devices
 - name: mobile--phone
   friendly_name: Mobile phone
+- name: monitored--item--on--conveyor
+  friendly_name: Monitored item on conveyor
+  aliases:
+    - monitored item on conveyor
 - name: mortar--and--pestle
   friendly_name: Mortar and pestle
 - name: moscow
   friendly_name: Moscow
   aliases:
     - moscow
+- name: movement--in--overlapping--networks
+  friendly_name: Movement in overlapping networks
+  aliases:
+    - movement in overlapping networks
+- name: movement--of--goods--01
+  friendly_name: Movement of goods 01
+  aliases:
+    - movement of goods 01
+- name: movement--of--goods--02
+  friendly_name: Movement of goods 02
+  aliases:
+    - movement of goods 02
+- name: movement--of--goods--03
+  friendly_name: Movement of goods 03
+  aliases:
+    - movement of goods 03
+- name: movement--of--items
+  friendly_name: Movement of items
+  aliases:
+    - movement of items
 - name: mqa
   friendly_name: Mqa
   aliases:
@@ -854,6 +1012,10 @@
     - munich
 - name: natural--language--classifier
   friendly_name: Natural language classifier
+- name: natural--language--understanding
+  friendly_name: Natural language understanding
+  aliases:
+    - natural language understanding
 - name: network
   friendly_name: Network
   aliases:
@@ -870,6 +1032,8 @@
   friendly_name: Networking 04
 - name: networking--05
   friendly_name: Networking 05
+- name: networking--06
+  friendly_name: Networking 06
 - name: nice
   friendly_name: Nice
   aliases:
@@ -948,6 +1112,12 @@
   friendly_name: Pills
   aliases:
     - pills
+- name: planning--analytics
+  friendly_name: Planning analytics
+  aliases:
+    - planning analytics
+- name: player--flow
+  friendly_name: Player flow
 - name: podcast
   friendly_name: Podcast
   aliases:
@@ -987,6 +1157,10 @@
   friendly_name: Private network alt
 - name: private--network--alt--01
   friendly_name: Private network alt 01
+- name: process
+  friendly_name: Process
+  aliases:
+    - process
 - name: progress
   friendly_name: Progress
   aliases:
@@ -998,6 +1172,10 @@
 - name: q-q-plot
   friendly_name: q-q-plot
   aliases: []
+- name: qr-code
+  friendly_name: QR code
+  aliases:
+    - qr code
 - name: question
   friendly_name: Question
   aliases:
@@ -1049,6 +1227,10 @@
   friendly_name: Report
   aliases:
     - report
+- name: research
+  friendly_name: Research
+  aliases:
+    - research
 - name: reset
   friendly_name: Reset
   aliases:
@@ -1075,6 +1257,10 @@
     - rome
 - name: saas--enablement
   friendly_name: Saas enablement
+- name: sample--file
+  friendly_name: Sample file
+  aliases:
+    - sample file
 - name: san-francisco
   friendly_name: San Francisco
 - name: san-francisco--fog
@@ -1116,6 +1302,10 @@
   friendly_name: Servers
   aliases:
     - servers
+- name: shirt
+  friendly_name: Shirt
+  aliases:
+    - shirt
 - name: shop
   friendly_name: Shop
   aliases:
@@ -1144,10 +1334,18 @@
   friendly_name: Snow
   aliases:
     - snow
+- name: socks
+  friendly_name: Socks
+  aliases:
+    - socks
 - name: soft--ice--cream
   friendly_name: Soft ice cream
 - name: softlayer--enablement
   friendly_name: Softlayer enablement
+- name: solar--field
+  friendly_name: Solar field
+- name: solar--panel
+  friendly_name: Solar panel
 - name: solve
   friendly_name: Solve
   aliases:
@@ -1168,6 +1366,10 @@
   friendly_name: Speedometer
   aliases:
     - speedometer
+- name: sports
+  friendly_name: Sports
+  aliases:
+    - sports
 - name: stairs--plan--view
   friendly_name: Stairs plan view
 - name: stationary--bicycle
@@ -1178,6 +1380,10 @@
     - steel
 - name: steering--wheel
   friendly_name: Steering wheel
+- name: stem--leaf--plot
+  friendly_name: Stem leaf plot
+  aliases:
+    - stem leaf plot
 - name: stethoscope
   friendly_name: Stethoscope
   aliases:
@@ -1196,18 +1402,68 @@
   friendly_name: Streamline
   aliases:
     - streamline
+- name: summit
+  friendly_name: Summit
+  aliases:
+    - summit
 - name: sunny
   friendly_name: Sunny
   aliases:
     - sunny
 - name: sunny--hazy
   friendly_name: Sunny hazy
+- name: supply--chain--optimization--01
+  friendly_name: Supply chain optimization 01
+- name: supply--chain--optimization--02
+  friendly_name: Supply chain optimization 02
 - name: support--services
   friendly_name: Support services
 - name: swipe--left
   friendly_name: Swipe left
 - name: swipe--right
   friendly_name: Swipe right
+- name: systems-devops--analyze
+  friendly_name: Systems DevOps analyze
+  aliases:
+    - systems devops analyze
+- name: systems-devops--build
+  friendly_name: Systems DevOps build
+  aliases:
+    - systems devops build
+- name: systems-devops--cicd-pipeline
+  friendly_name: Systems DevOps CICD pipeline
+  aliases:
+    - systems devops cicd pipeline
+- name: systems-devops--code
+  friendly_name: Systems DevOps code
+  aliases:
+    - systems devops code
+- name: systems-devops--deploy
+  friendly_name: Systems DevOps deploy
+  aliases:
+    - systems devops deploy
+- name: systems-devops--monitor
+  friendly_name: Systems DevOps nonitor
+  aliases:
+    - systems devops monitor
+- name: systems-devops--plan
+  friendly_name: Systems DevOps plan
+  aliases:
+    - systems devops plan
+- name: systems-devops--provision
+  friendly_name: Systems DevOps provision
+  aliases:
+    - systems devops provision
+- name: systems-devops--release
+  friendly_name: Systems DevOps release
+  aliases:
+    - systems devops release
+- name: systems-devops--test
+  friendly_name: Systems DevOps test
+  aliases:
+    - systems devops test
+- name: t-shirt
+  friendly_name: T-shirt
 - name: tags
   friendly_name: Tags
   aliases:
@@ -1218,6 +1474,10 @@
     - target
 - name: target--area
   friendly_name: Target area
+- name: team--alignment
+  friendly_name: Team alignment
+- name: teammates
+  friendly_name: Teammates
 - name: tel--aviv
   friendly_name: Tel aviv
 - name: telecom
@@ -1248,6 +1508,10 @@
   friendly_name: Time
   aliases:
     - time
+- name: time--plot
+  friendly_name: Time plot
+  aliases:
+    - time plot
 - name: time-lapse
   friendly_name: Time lapse
   aliases:
@@ -1300,10 +1564,22 @@
   friendly_name: Train
   aliases:
     - train
+- name: transactional--blockchain
+  friendly_name: Transactional blockchain
+  aliases:
+    - transactional blockchain
+- name: transactional--trust
+  friendly_name: Transactional trust
+  aliases:
+    - transactional trust
 - name: transform
   friendly_name: Transform
   aliases:
     - transform
+- name: transparency--01
+  friendly_name: Transparency 01
+- name: transparency--02
+  friendly_name: Transparency 02
 - name: trash
   friendly_name: Trash
   aliases:
@@ -1314,6 +1590,12 @@
 - name: tree--map
   friendly_name: tree--map
   aliases: []
+- name: trousers
+  friendly_name: Trousers
+  aliases:
+    - trousers
+- name: trust
+  friendly_name: Trust
 - name: university
   friendly_name: University
   aliases:
@@ -1330,10 +1612,16 @@
     - upload
 - name: upload--alt
   friendly_name: Upload alt
+- name: user
+  friendly_name: User
 - name: user--analytics
   friendly_name: User analytics
 - name: user--insights
   friendly_name: User insights
+- name: user--interface
+  friendly_name: User interface
+- name: user--profile
+  friendly_name: User profile
 - name: user--search
   friendly_name: User search
 - name: vancouver

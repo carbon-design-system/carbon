@@ -16,7 +16,7 @@ const render = createSassRenderer(__dirname);
 
 describe('_theme-maps.scss', () => {
   it('should export all themes as sass maps', async () => {
-    const themeMapsTests = Object.keys(themes).map(theme => {
+    const themeMapsTests = Object.keys(themes).map((theme) => {
       return `$t: test(global-variable-exists(carbon--theme--${theme}));`;
     });
     const { calls } = await render(`

@@ -15,9 +15,10 @@ export function useSelection({
   initialSelectedItems = [],
 }) {
   const isMounted = useRef(false);
+  const savedOnChange = useRef(onChange);
   const [selectedItems, setSelectedItems] = useState(initialSelectedItems);
   const onItemChange = useCallback(
-    item => {
+    (item) => {
       if (disabled) {
         return;
       }
@@ -30,11 +31,11 @@ export function useSelection({
       });
 
       if (selectedIndex === undefined) {
-        setSelectedItems(selectedItems => selectedItems.concat(item));
+        setSelectedItems((selectedItems) => selectedItems.concat(item));
         return;
       }
 
-      setSelectedItems(selectedItems =>
+      setSelectedItems((selectedItems) =>
         removeAtIndex(selectedItems, selectedIndex)
       );
     },
@@ -49,10 +50,14 @@ export function useSelection({
   }, [disabled]);
 
   useEffect(() => {
-    if (isMounted.current === true && onChange) {
-      onChange({ selectedItems });
+    savedOnChange.current = onChange;
+  }, [onChange]);
+
+  useEffect(() => {
+    if (isMounted.current === true && savedOnChange.current) {
+      savedOnChange.current({ selectedItems });
     }
-  }, [onChange, selectedItems]);
+  }, [selectedItems]);
 
   useEffect(() => {
     isMounted.current = true;
@@ -103,19 +108,19 @@ export default class Selection extends React.Component {
     });
   };
 
-  handleSelectItem = item => {
-    this.internalSetState(state => ({
+  handleSelectItem = (item) => {
+    this.internalSetState((state) => ({
       selectedItems: state.selectedItems.concat(item),
     }));
   };
 
-  handleRemoveItem = index => {
-    this.internalSetState(state => ({
+  handleRemoveItem = (index) => {
+    this.internalSetState((state) => ({
       selectedItems: removeAtIndex(state.selectedItems, index),
     }));
   };
 
-  handleOnItemChange = item => {
+  handleOnItemChange = (item) => {
     if (this.props.disabled) {
       return;
     }

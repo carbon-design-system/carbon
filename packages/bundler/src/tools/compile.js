@@ -15,8 +15,8 @@ const defaultOptions = {
 
 function compile(filepaths, options) {
   return filepaths.map(
-    filepath =>
-      new Promise(resolve => {
+    (filepath) =>
+      new Promise((resolve) => {
         sass.render(
           {
             file: filepath,

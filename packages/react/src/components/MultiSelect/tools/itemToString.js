@@ -7,7 +7,7 @@
 
 import invariant from 'invariant';
 
-const itemToString = item => {
+const itemToString = (item) => {
   invariant(
     typeof item.label === 'string',
     '[MultiSelect] the default `itemToString` method expected to receive ' +
@@ -17,7 +17,7 @@ const itemToString = item => {
   return item.label || '';
 };
 
-export const defaultItemToString = item => {
+export const defaultItemToString = (item) => {
   if (Array.isArray(item)) {
     return item.map(itemToString);
   }

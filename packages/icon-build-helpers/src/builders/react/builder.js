@@ -44,8 +44,8 @@ const babelConfig = {
 };
 
 async function builder(metadata, { output }) {
-  const modules = metadata.icons.flatMap(icon => {
-    return icon.output.map(size => {
+  const modules = metadata.icons.flatMap((icon) => {
+    return icon.output.map((size) => {
       const { source } = createIconComponent(
         size.moduleName,
         size.descriptor,
@@ -218,7 +218,7 @@ const attributeDenylist = ['data', 'aria'];
  * @returns {boolean}
  */
 function shouldTransformAttribute(attribute) {
-  return attributeDenylist.every(prefix => !attribute.startsWith(prefix));
+  return attributeDenylist.every((prefix) => !attribute.startsWith(prefix));
 }
 
 /**

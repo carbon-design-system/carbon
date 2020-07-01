@@ -110,6 +110,7 @@ exports[`ModalWrapper should render 1`] = `
                 <Icon
                   aria-label="Close"
                   className="bx--modal-close__icon"
+                  fill="currentColor"
                   height={20}
                   preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 32 32"
@@ -119,6 +120,7 @@ exports[`ModalWrapper should render 1`] = `
                   <svg
                     aria-label="Close"
                     className="bx--modal-close__icon"
+                    fill="currentColor"
                     focusable="false"
                     height={20}
                     preserveAspectRatio="xMidYMid meet"

@@ -50,12 +50,14 @@ exports[`Dropdown should render 1`] = `
     <ListBox
       className="bx--dropdown"
       disabled={false}
+      id="test-dropdown"
       isOpen={false}
       light={false}
       type="default"
     >
       <div
         className="bx--dropdown bx--list-box"
+        id="test-dropdown"
         onClick={[Function]}
         onKeyDown={[Function]}
       >
@@ -88,6 +90,7 @@ exports[`Dropdown should render 1`] = `
               >
                 <Icon
                   aria-label="Open menu"
+                  fill="currentColor"
                   height={16}
                   name="chevron--down"
                   preserveAspectRatio="xMidYMid meet"
@@ -97,6 +100,7 @@ exports[`Dropdown should render 1`] = `
                 >
                   <svg
                     aria-label="Open menu"
+                    fill="currentColor"
                     focusable="false"
                     height={16}
                     name="chevron--down"
@@ -194,12 +198,14 @@ exports[`Dropdown should render custom item components 1`] = `
     <ListBox
       className="bx--dropdown bx--dropdown--open"
       disabled={false}
+      id="test-dropdown"
       isOpen={true}
       light={false}
       type="default"
     >
       <div
         className="bx--dropdown bx--dropdown--open bx--list-box bx--list-box--expanded"
+        id="test-dropdown"
         onClick={[Function]}
         onKeyDown={[Function]}
       >
@@ -232,6 +238,7 @@ exports[`Dropdown should render custom item components 1`] = `
               >
                 <Icon
                   aria-label="Close menu"
+                  fill="currentColor"
                   height={16}
                   name="chevron--down"
                   preserveAspectRatio="xMidYMid meet"
@@ -241,6 +248,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 >
                   <svg
                     aria-label="Close menu"
+                    fill="currentColor"
                     focusable="false"
                     height={16}
                     name="chevron--down"
@@ -496,12 +504,14 @@ exports[`Dropdown should render with strings as items 1`] = `
     <ListBox
       className="bx--dropdown bx--dropdown--open"
       disabled={false}
+      id="test-dropdown"
       isOpen={true}
       light={false}
       type="default"
     >
       <div
         className="bx--dropdown bx--dropdown--open bx--list-box bx--list-box--expanded"
+        id="test-dropdown"
         onClick={[Function]}
         onKeyDown={[Function]}
       >
@@ -534,6 +544,7 @@ exports[`Dropdown should render with strings as items 1`] = `
               >
                 <Icon
                   aria-label="Close menu"
+                  fill="currentColor"
                   height={16}
                   name="chevron--down"
                   preserveAspectRatio="xMidYMid meet"
@@ -543,6 +554,7 @@ exports[`Dropdown should render with strings as items 1`] = `
                 >
                   <svg
                     aria-label="Close menu"
+                    fill="currentColor"
                     focusable="false"
                     height={16}
                     name="chevron--down"

@@ -2033,6 +2033,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "downshiftProps": Object {
+        "type": "object",
+      },
       "helperText": Object {
         "args": Array [
           Array [
@@ -2949,10 +2952,10 @@ Map {
         "type": "bool",
       },
       "primaryButtonText": Object {
-        "type": "string",
+        "type": "node",
       },
       "secondaryButtonText": Object {
-        "type": "string",
+        "type": "node",
       },
       "selectorPrimaryFocus": Object {
         "type": "string",
@@ -3830,9 +3833,7 @@ Map {
       "onMouseUp": Object {
         "type": "func",
       },
-      "primaryFocus": Object {
-        "type": "bool",
-      },
+      "primaryFocus": [Function],
       "requireTitle": Object {
         "type": "bool",
       },
@@ -3851,7 +3852,6 @@ Map {
       "itemText": [Function],
       "itemsPerPageText": "Items per page:",
       "page": 1,
-      "pageInputDisabled": false,
       "pageNumberText": "Page Number",
       "pageRangeText": [Function],
       "pageText": [Function],
@@ -3901,9 +3901,7 @@ Map {
       "page": Object {
         "type": "number",
       },
-      "pageInputDisabled": Object {
-        "type": "bool",
-      },
+      "pageInputDisabled": [Function],
       "pageNumberText": Object {
         "type": "string",
       },
@@ -5827,6 +5825,8 @@ Map {
       "compact": false,
       "headers": Array [],
       "rowCount": 5,
+      "showHeader": true,
+      "showToolbar": true,
       "zebra": false,
     },
     "propTypes": Object {
@@ -5861,6 +5861,12 @@ Map {
       },
       "rowCount": Object {
         "type": "number",
+      },
+      "showHeader": Object {
+        "type": "bool",
+      },
+      "showToolbar": Object {
+        "type": "bool",
       },
       "zebra": Object {
         "type": "bool",
@@ -6133,6 +6139,137 @@ Map {
       },
       "range": Object {
         "type": "bool",
+      },
+    },
+  },
+  "PageSelector" => Object {
+    "defaultProps": Object {
+      "className": null,
+      "id": 1,
+      "labelText": "Current page number",
+    },
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "currentPage": Object {
+        "isRequired": true,
+        "type": "number",
+      },
+      "id": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "labelText": Object {
+        "type": "string",
+      },
+      "totalPages": Object {
+        "isRequired": true,
+        "type": "number",
+      },
+    },
+  },
+  "Unstable_Pagination" => Object {
+    "defaultProps": Object {
+      "backwardText": "Previous page",
+      "children": undefined,
+      "className": null,
+      "disabled": false,
+      "forwardText": "Next page",
+      "id": 1,
+      "initialPage": 1,
+      "itemRangeText": [Function],
+      "itemText": [Function],
+      "itemsPerPageText": "Items per page:",
+      "pageRangeText": [Function],
+      "pageSize": 10,
+      "pageSizes": undefined,
+      "pageText": [Function],
+      "pagesUnknown": false,
+      "totalItems": undefined,
+    },
+    "propTypes": Object {
+      "backwardText": Object {
+        "type": "string",
+      },
+      "children": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "node",
+            },
+            Object {
+              "type": "func",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "forwardText": Object {
+        "type": "string",
+      },
+      "id": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "initialPage": Object {
+        "type": "number",
+      },
+      "itemRangeText": Object {
+        "type": "func",
+      },
+      "itemText": Object {
+        "type": "func",
+      },
+      "itemsPerPageText": Object {
+        "type": "string",
+      },
+      "pageRangeText": Object {
+        "type": "func",
+      },
+      "pageSize": Object {
+        "type": "number",
+      },
+      "pageSizes": Object {
+        "args": Array [
+          Object {
+            "type": "number",
+          },
+        ],
+        "type": "arrayOf",
+      },
+      "pageText": Object {
+        "type": "func",
+      },
+      "pagesUnknown": Object {
+        "type": "bool",
+      },
+      "totalItems": Object {
+        "type": "number",
       },
     },
   },

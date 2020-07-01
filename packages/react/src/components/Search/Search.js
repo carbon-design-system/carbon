@@ -103,7 +103,7 @@ export default class Search extends Component {
         };
   }
 
-  clearInput = evt => {
+  clearInput = (evt) => {
     if (!this.props.value) {
       this.input.value = '';
       this.props.onChange(evt);
@@ -119,7 +119,7 @@ export default class Search extends Component {
     this.setState({ hasContent: false }, () => this.input.focus());
   };
 
-  handleChange = evt => {
+  handleChange = (evt) => {
     this.setState({
       hasContent: evt.target.value !== '',
     });
@@ -133,9 +133,7 @@ export default class Search extends Component {
       type,
       id = (this._inputId =
         this._inputId ||
-        `search__input__id_${Math.random()
-          .toString(36)
-          .substr(2)}`),
+        `search__input__id_${Math.random().toString(36).substr(2)}`),
       placeHolderText,
       labelText,
       closeButtonLabelText,
@@ -178,7 +176,7 @@ export default class Search extends Component {
           id={id}
           placeholder={placeHolderText}
           onChange={this.handleChange}
-          ref={input => {
+          ref={(input) => {
             this.input = input;
           }}
         />

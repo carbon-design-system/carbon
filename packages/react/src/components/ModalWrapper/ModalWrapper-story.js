@@ -31,10 +31,12 @@ const icons = {
 const iconMap = {
   iconAddSolid,
   iconSearch,
-  AddFilled16: props => (
+  AddFilled16: (props) => (
     <AddFilled16 className={`${prefix}--btn__icon`} {...props} />
   ),
-  Search16: props => <Search16 className={`${prefix}--btn__icon`} {...props} />,
+  Search16: (props) => (
+    <Search16 className={`${prefix}--btn__icon`} {...props} />
+  ),
 };
 
 const props = () => {
