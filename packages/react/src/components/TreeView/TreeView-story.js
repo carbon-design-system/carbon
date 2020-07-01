@@ -22,6 +22,7 @@ const sizes = {
   compact: 'compact',
 };
 const props = () => ({
+  active: text('Active node value (active)', '5'),
   hideLabel: boolean('Visible label (hideLabel)', false),
   label: text('Label (label)', 'Tree view'),
   multiselect: boolean(
