@@ -35,7 +35,7 @@
 1. First things first we need to create a "working" branch. At the top of the
    Github Desktop application click the drop down labeled 'Current branch'
 2. Click the button labeled 'New branch' and then name your branch. Typically
-   this will be a general description of the work youre doing. Maybe
+   this will be a general description of the work you're doing. Maybe
    'updating-accessibility-docs' or 'adding-security-pictograms'. Then click
    'Create branch' to continue
 3. Make and save your additions or changes. You should then see your changed
