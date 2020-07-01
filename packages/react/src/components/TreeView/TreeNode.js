@@ -75,6 +75,9 @@ export default function TreeNode({
       if (onNodeSelect) {
         onNodeSelect(event, { id, label, value });
       }
+      if (rest.onClick) {
+        rest.onClick(event);
+      }
     }
   };
   const handleKeyDown = (event) => {
@@ -111,13 +114,8 @@ export default function TreeNode({
       }
       setExpanded(true);
     }
-    if (match(event, keys.Enter) && !disabled) {
-      if (onTreeSelect) {
-        onTreeSelect(event, { value });
-      }
-      if (onNodeSelect) {
-        onNodeSelect(event, { value });
-      }
+    if (match(event, keys.Enter)) {
+      handleClick(event);
     }
     if (rest.onKeyDown) {
       rest.onKeyDown(event);

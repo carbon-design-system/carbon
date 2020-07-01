@@ -8,6 +8,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Document16, Folder16 } from '@carbon/icons-react';
+import { action } from '@storybook/addon-actions';
 import {
   boolean,
   object,
@@ -29,6 +30,7 @@ const props = () => ({
     'Allow selection of multiple tree nodes (multiselect)',
     false
   ),
+  onSelect: action('onSelect (TreeView onSelect)'),
   selected: object('Array of selected node IDs (selected)', ['5']),
   size: select('Tree size (sizes)', sizes, 'default'),
 });
@@ -39,31 +41,40 @@ const nodes = [
     value: '1',
     label: <span>1</span>,
     renderIcon: Document16,
+    onSelect: action('onSelect (TreeNode onSelect)'),
+    onToggle: action('onToggle'),
   },
   {
     id: '2',
     value: '2',
     label: '2',
     renderIcon: Document16,
+    onSelect: action('onSelect (TreeNode onSelect)'),
+    onToggle: action('onToggle'),
   },
   {
     id: '3',
     value: '3',
     label: '3',
     renderIcon: Folder16,
-
+    onSelect: action('onSelect (TreeNode onSelect)'),
+    onToggle: action('onToggle'),
     children: [
       {
         id: '3-1',
         value: '3-1',
         label: '3-1',
         renderIcon: Document16,
+        onSelect: action('onSelect (TreeNode onSelect)'),
+        onToggle: action('onToggle'),
       },
       {
         id: '3-2',
         value: '3-2',
         label: '3-2',
         renderIcon: Document16,
+        onSelect: action('onSelect (TreeNode onSelect)'),
+        onToggle: action('onToggle'),
       },
     ],
   },
@@ -72,6 +83,8 @@ const nodes = [
     value: '4',
     label: '4',
     renderIcon: Document16,
+    onSelect: action('onSelect (TreeNode onSelect)'),
+    onToggle: action('onToggle'),
   },
   {
     id: '5',
@@ -79,19 +92,24 @@ const nodes = [
     label: '5',
     isExpanded: true,
     renderIcon: Folder16,
-
+    onSelect: action('onSelect (TreeNode onSelect)'),
+    onToggle: action('onToggle'),
     children: [
       {
         id: '5-1',
         value: '5-1',
         label: '5-1',
         renderIcon: Document16,
+        onSelect: action('onSelect (TreeNode onSelect)'),
+        onToggle: action('onToggle'),
       },
       {
         id: '5-2',
         value: '5-2',
         label: '5-2',
         renderIcon: Document16,
+        onSelect: action('onSelect (TreeNode onSelect)'),
+        onToggle: action('onToggle'),
       },
       {
         id: '5-3',
@@ -99,13 +117,16 @@ const nodes = [
         label: '5-3',
         isExpanded: true,
         renderIcon: Folder16,
-
+        onSelect: action('onSelect (TreeNode onSelect)'),
+        onToggle: action('onToggle'),
         children: [
           {
             id: '5-4',
             value: '5-4',
             label: '5-4',
             renderIcon: Document16,
+            onSelect: action('onSelect (TreeNode onSelect)'),
+            onToggle: action('onToggle'),
           },
           {
             id: '5-5',
@@ -113,13 +134,16 @@ const nodes = [
             label: '5-5',
             isExpanded: true,
             renderIcon: Folder16,
-
+            onSelect: action('onSelect (TreeNode onSelect)'),
+            onToggle: action('onToggle'),
             children: [
               {
                 id: '5-6',
                 value: '5-6',
                 label: '5-6',
                 renderIcon: Document16,
+                onSelect: action('onSelect (TreeNode onSelect)'),
+                onToggle: action('onToggle'),
               },
             ],
           },
@@ -132,19 +156,24 @@ const nodes = [
     value: '6',
     label: '6',
     renderIcon: Folder16,
-
+    onSelect: action('onSelect (TreeNode onSelect)'),
+    onToggle: action('onToggle'),
     children: [
       {
         id: '6-1',
         value: '6-1',
         label: '6-1',
         renderIcon: Document16,
+        onSelect: action('onSelect (TreeNode onSelect)'),
+        onToggle: action('onToggle'),
       },
       {
         id: '6-2',
         value: '6-2',
         label: '6-2',
         renderIcon: Document16,
+        onSelect: action('onSelect (TreeNode onSelect)'),
+        onToggle: action('onToggle'),
       },
     ],
   },
@@ -155,19 +184,24 @@ const nodes = [
     isExpanded: true,
     disabled: true,
     renderIcon: Folder16,
-
+    onSelect: action('onSelect (TreeNode onSelect)'),
+    onToggle: action('onToggle'),
     children: [
       {
         id: '7-1',
         value: '7-1',
         label: '7-1',
         renderIcon: Document16,
+        onSelect: action('onSelect (TreeNode onSelect)'),
+        onToggle: action('onToggle'),
       },
       {
         id: '7-2',
         value: '7-2',
         label: '7-2',
         renderIcon: Document16,
+        onSelect: action('onSelect (TreeNode onSelect)'),
+        onToggle: action('onToggle'),
       },
       {
         id: '8',
@@ -175,19 +209,24 @@ const nodes = [
         label: '8',
         isExpanded: true,
         renderIcon: Folder16,
-
+        onSelect: action('onSelect (TreeNode onSelect)'),
+        onToggle: action('onToggle'),
         children: [
           {
             id: '8-1',
             value: '8-1',
             label: '8-1',
             renderIcon: Document16,
+            onSelect: action('onSelect (TreeNode onSelect)'),
+            onToggle: action('onToggle'),
           },
           {
             id: '8-2',
             value: '8-2',
             label: '8-2',
             renderIcon: Document16,
+            onSelect: action('onSelect (TreeNode onSelect)'),
+            onToggle: action('onToggle'),
           },
         ],
       },
