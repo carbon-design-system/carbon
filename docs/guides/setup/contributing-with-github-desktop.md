@@ -24,4 +24,4 @@
 5. Once you're finished with your work committed. Click the button on the right of the application labeled 'Publish branch'. This will push all your work you've done locally to your forked copy of the repository on Github.com.
 6. Then click the 'Create Pull Request' button that replaced the previous button which will take you to Github.com
 7. Here you can fill out the pull request title and template. After you're done click 'Create pull request' and you're done!
-8. If you want to amend or add more work to your pull request repeat steps 3 and 4 
+8. If you want to amend or add more work to your pull request repeat steps 3 and 4 and then click the button on the right labeled 'Push origin' and your pull request will be updated automatically. You can do this for as long as the pull request is open.
