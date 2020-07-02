@@ -19,13 +19,13 @@ describe('TreeView', () => {
   beforeEach(() => {
     wrapper = mount(
       <TreeView label="Tree view" selected={['1']}>
-        <TreeNode value="1" label="1" />
-        <TreeNode value="2" label="2" />
-        <TreeNode value="5" label="5" isExpanded>
-          <TreeNode value="5-1" label="5-1" />
-          <TreeNode value="5-2" label="5-2" />
-          <TreeNode value="5-3" label="5-3" isExpanded>
-            <TreeNode value="5-4" label="5-4" />
+        <TreeNode id="1" value="1" label="1" />
+        <TreeNode id="2" value="2" label="2" />
+        <TreeNode id="5" value="5" label="5" isExpanded>
+          <TreeNode id="5-1" value="5-1" label="5-1" />
+          <TreeNode id="5-2" value="5-2" label="5-2" />
+          <TreeNode id="5-3" value="5-3" label="5-3" isExpanded>
+            <TreeNode id="5-4" value="5-4" label="5-4" />
           </TreeNode>
         </TreeNode>
       </TreeView>
@@ -39,13 +39,23 @@ describe('TreeView', () => {
   it('should render with icons', () => {
     wrapper = mount(
       <TreeView label="Tree view" selected={['1']}>
-        <TreeNode renderIcon={Document16} value="1" label="1" />
-        <TreeNode renderIcon={Document16} value="2" label="2" />
-        <TreeNode renderIcon={Folder16} value="5" label="5" isExpanded>
-          <TreeNode renderIcon={Document16} value="5-1" label="5-1" />
-          <TreeNode renderIcon={Document16} value="5-2" label="5-2" />
-          <TreeNode renderIcon={Folder16} value="5-3" label="5-3" isExpanded>
-            <TreeNode renderIcon={Document16} value="5-4" label="5-4" />
+        <TreeNode renderIcon={Document16} id="1" value="1" label="1" />
+        <TreeNode renderIcon={Document16} id="2" value="2" label="2" />
+        <TreeNode renderIcon={Folder16} id="5" value="5" label="5" isExpanded>
+          <TreeNode renderIcon={Document16} id="5-1" value="5-1" label="5-1" />
+          <TreeNode renderIcon={Document16} id="5-2" value="5-2" label="5-2" />
+          <TreeNode
+            renderIcon={Folder16}
+            id="5-3"
+            value="5-3"
+            label="5-3"
+            isExpanded>
+            <TreeNode
+              renderIcon={Document16}
+              id="5-4"
+              value="5-4"
+              label="5-4"
+            />
           </TreeNode>
         </TreeNode>
       </TreeView>
@@ -76,13 +86,13 @@ describe('TreeView', () => {
       const onNodeSelect = jest.fn();
       wrapper = mount(
         <TreeView label="Tree view" selected={['1']} onSelect={onTreeSelect}>
-          <TreeNode value="1" label="1" />
-          <TreeNode value="2" label="2" onSelect={onNodeSelect} />
-          <TreeNode value="5" label="5" isExpanded>
-            <TreeNode value="5-1" label="5-1" />
-            <TreeNode value="5-2" label="5-2" />
-            <TreeNode value="5-3" label="5-3" isExpanded>
-              <TreeNode value="5-4" label="5-4" />
+          <TreeNode id="1" value="1" label="1" />
+          <TreeNode id="2" value="2" label="2" onSelect={onNodeSelect} />
+          <TreeNode id="5" value="5" label="5" isExpanded>
+            <TreeNode id="5-1" value="5-1" label="5-1" />
+            <TreeNode id="5-2" value="5-2" label="5-2" />
+            <TreeNode id="5-3" value="5-3" label="5-3" isExpanded>
+              <TreeNode id="5-4" value="5-4" label="5-4" />
             </TreeNode>
           </TreeNode>
         </TreeView>
@@ -97,10 +107,10 @@ describe('TreeView', () => {
     it('Caret icon should not render in leaf nodes', () => {
       wrapper = mount(
         <TreeView label="Tree view">
-          <TreeNode value="1" label="1" />
-          <TreeNode value="2" label="2" />
-          <TreeNode value="5" label="5" isExpanded>
-            <TreeNode value="5-1" label="5-1" />
+          <TreeNode id="1" value="1" label="1" />
+          <TreeNode id="2" value="2" label="2" />
+          <TreeNode id="5" value="5" label="5" isExpanded>
+            <TreeNode id="5-1" value="5-1" label="5-1" />
           </TreeNode>
         </TreeView>
       );
