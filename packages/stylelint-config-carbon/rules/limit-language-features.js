@@ -59,7 +59,7 @@ module.exports = {
     // Specify a blacklist of disallowed properties.
     'property-blacklist': OFF,
     // Disallow vendor prefixes for properties.
-    'property-no-vendor-prefix': true,
+    'property-no-vendor-prefix': OFF,
     // Specify a whitelist of allowed properties.
     'property-whitelist': OFF,
 
@@ -127,7 +127,7 @@ module.exports = {
     // Disallow qualifying a selector by type.
     'selector-no-qualifying-type': OFF,
     // Disallow vendor prefixes for selectors.
-    'selector-no-vendor-prefix': true,
+    'selector-no-vendor-prefix': OFF,
     // Specify a blacklist of disallowed pseudo-class selectors.
     'selector-pseudo-class-blacklist': OFF,
     // Specify a whitelist of allowed pseudo-class selectors.
