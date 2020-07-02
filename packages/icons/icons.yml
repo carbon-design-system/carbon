@@ -844,12 +844,22 @@
   aliases:
     - up
     - scroll up
+    - back to top
+    - top
+    - go to top
   sizes:
     - 32
 - name: badge
   friendly_name: Badge
   aliases:
     - badge
+    - ID
+    - identification
+    - user
+    - file
+    - award
+    - ribbon
+    - recognition
   sizes:
     - 32
 - name: bar
@@ -859,6 +869,11 @@
     - alcohol
     - cocktail
     - wine
+    - travel
+    - bottle
+    - glass
+    - wine bottle
+    - wine glass
   sizes:
     - 32
 - name: barrier
@@ -869,12 +884,19 @@
     - block
     - stop
     - divide
+    - research
+    - dotted line
   sizes:
     - 32
 - name: basketball
   friendly_name: Basketball
   aliases:
     - basketball
+    - commerce
+    - b-ball
+    - sport
+    - ball
+    - sports ball
   sizes:
     - 32
 - name: battery--charging
@@ -884,6 +906,11 @@
   aliases:
     - charging
     - power
+    - battery charging
+    - charging battery
+    - battery
+    - battery indicator
+    - technology
 - name: battery--empty
   friendly_name: Battery empty
   sizes:
@@ -891,6 +918,11 @@
   aliases:
     - charging
     - power
+    - no power
+    - battery empty
+    - empty battery
+    - battery indicator
+    - technology
 - name: battery--full
   friendly_name: Battery full
   sizes:
@@ -898,6 +930,12 @@
   aliases:
     - charging
     - power
+    - battery full
+    - full battery
+    - technology
+    - battery indicator
+    - battery
+    - battery charged
 - name: battery--half
   friendly_name: Battery half
   sizes:
@@ -905,6 +943,12 @@
   aliases:
     - charging
     - power
+    - battery half charged
+    - half charged battery
+    - battery half full
+    - technology
+    - battery indicator
+    - battery
 - name: battery--low
   friendly_name: Battery low
   sizes:
@@ -912,6 +956,11 @@
   aliases:
     - charging
     - power
+    - battery low
+    - low battery
+    - technology
+    - battery indicator
+    - battery
 - name: battery--quarter
   friendly_name: Battery quarter
   sizes:
@@ -919,6 +968,11 @@
   aliases:
     - charging
     - power
+    - battery quarter
+    - quartery battery
+    - technology
+    - battery indicator
+    - battery
 - name: bee
   friendly_name: Bee
   aliases:
@@ -928,6 +982,9 @@
     - bumblebee
     - drone
     - insect
+    - bee
+    - IBM
+    - IBM bee
   sizes:
     - 32
 - name: bicycle
@@ -938,6 +995,8 @@
     - wheels
     - transport
     - transportation
+    - bicycle
+    - travel
   sizes:
     - 32
 - name: binoculars
@@ -948,6 +1007,7 @@
     - field
     - glasses
     - zoom
+    - instruments
   sizes:
     - 32
 - name: bloch-sphere
@@ -956,12 +1016,15 @@
     - Q
     - bloch
     - sphere
+    - research
   sizes:
     - 32
 - name: blockchain
   friendly_name: Blockchain
   aliases:
     - blockchain
+    - data
+    - supply chain
   sizes:
     - 32
 - name: blog
@@ -972,6 +1035,9 @@
     - site
     - layout
     - page
+    - technology
+    - article
+    - story
   sizes:
     - 32
 - name: bluetooth
@@ -981,6 +1047,10 @@
     - connect
     - blue
     - tooth
+    - Bluetooth
+    - technology
+    - communication
+    - wireless communication
   sizes:
     - 32
 - name: bluetooth--off
@@ -992,11 +1062,18 @@
     - connect
     - blue
     - tooth
+    - Bluetooth
+    - Bluetooth off
+    - technology
+    - communication
+    - wireless communication
 - name: bookmark
   friendly_name: Bookmark
   aliases:
     - flag
     - marker
+    - operations
+    - bookmark
   sizes:
     - 32
 - name: bot
