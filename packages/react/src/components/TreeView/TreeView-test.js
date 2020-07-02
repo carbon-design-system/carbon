@@ -15,12 +15,16 @@ const { prefix } = settings;
 
 describe('TreeView', () => {
   let wrapper;
+  let onTreeSelect;
+  let onNodeSelect;
 
   beforeEach(() => {
+    onTreeSelect = jest.fn();
+    onNodeSelect = jest.fn();
     wrapper = mount(
-      <TreeView label="Tree view" selected={['1']}>
+      <TreeView label="Tree view" selected={['1']} onSelect={onTreeSelect}>
         <TreeNode id="1" value="1" label="1" />
-        <TreeNode id="2" value="2" label="2" />
+        <TreeNode id="2" value="2" label="2" onSelect={onNodeSelect} />
         <TreeNode id="5" value="5" label="5" isExpanded>
           <TreeNode id="5-1" value="5-1" label="5-1" />
           <TreeNode id="5-2" value="5-2" label="5-2" />
@@ -82,21 +86,6 @@ describe('TreeView', () => {
     });
 
     it('should handle selection at the node level', () => {
-      const onTreeSelect = jest.fn();
-      const onNodeSelect = jest.fn();
-      wrapper = mount(
-        <TreeView label="Tree view" selected={['1']} onSelect={onTreeSelect}>
-          <TreeNode id="1" value="1" label="1" />
-          <TreeNode id="2" value="2" label="2" onSelect={onNodeSelect} />
-          <TreeNode id="5" value="5" label="5" isExpanded>
-            <TreeNode id="5-1" value="5-1" label="5-1" />
-            <TreeNode id="5-2" value="5-2" label="5-2" />
-            <TreeNode id="5-3" value="5-3" label="5-3" isExpanded>
-              <TreeNode id="5-4" value="5-4" label="5-4" />
-            </TreeNode>
-          </TreeNode>
-        </TreeView>
-      );
       wrapper.find('TreeNode[value="2"]').simulate('click');
       expect(onTreeSelect).toHaveBeenCalledTimes(1);
       expect(onNodeSelect).toHaveBeenCalledTimes(1);
@@ -105,16 +94,7 @@ describe('TreeView', () => {
 
   describe('Tree node expansion', () => {
     it('Caret icon should not render in leaf nodes', () => {
-      wrapper = mount(
-        <TreeView label="Tree view">
-          <TreeNode id="1" value="1" label="1" />
-          <TreeNode id="2" value="2" label="2" />
-          <TreeNode id="5" value="5" label="5" isExpanded>
-            <TreeNode id="5-1" value="5-1" label="5-1" />
-          </TreeNode>
-        </TreeView>
-      );
-      expect(wrapper.find('ForwardRef(CaretDown16)').length).toBe(1);
+      expect(wrapper.find('ForwardRef(CaretDown16)').length).toBe(2);
     });
   });
 });
