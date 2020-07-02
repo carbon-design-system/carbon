@@ -188,9 +188,9 @@
     - historical
     - history
 - name: asia--australia
-  friendly_name: Asia australia
+  friendly_name: Asia Australia
   aliases:
-  - Asia australia
+  - Asia Australia
   - Asia
   - Australia
   - globe
@@ -198,8 +198,7 @@
 - name: augmented--reality
   friendly_name: Augmented reality
   aliases:
-
-- augmented reality
+  - augmented reality
   - augmented
   - reality
   - AR
@@ -284,7 +283,7 @@
   - city
   - cities
 - name: berlin--brandenburg--gate
-  friendly_name: Berlin brandenburg gate
+  friendly_name: Berlin Brandenburg gate
   aliases:
   - Berlin Brandenburg gate
   - Berlin
@@ -1219,13 +1218,14 @@
   - door knob
   - lockset
 - name: download
-  friendly_name: Download
+  friendly_name: Download 01
   aliases:
     - download
+    - download 01
 - name: download--alt
-  friendly_name: Download alt
+  friendly_name: Download 02
   aliases:
-  - download alt
+  - download 02
   - download
 - name: dubai--palm--islands
   friendly_name: Dubai Palm Islands
@@ -1320,16 +1320,18 @@
     - engine
     - motor
 - name: enterprise--design--thinking
-  friendly_name: Enterprise design thinking
+  friendly_name: Enterprise design thinking 01
   aliases:
+  - enterprise design thinking 01
   - enterprise design thinking
   - design thinking
   - design
   - EDT
 - name: enterprise--design--thinking--alt
-  friendly_name: Enterprise design thinking alt
+  friendly_name: Enterprise design thinking 02
   aliases:
-  - enterprise design thinking alt
+  - enterprise design thinking 02
+  - enterprise design thinking
   - design thinking
   - design
   - EDT
@@ -1384,16 +1386,17 @@
   - expand
   - vertical
 - name: export
-  friendly_name: Export
+  friendly_name: Export 01
   aliases:
+    - export 01
     - export
     - send
     - ship
     - transmit
 - name: export--alt
-  friendly_name: Export alt
+  friendly_name: Export 02
   aliases:
-  - export alt
+  - export 02
   - export
   - send
   - ship
@@ -1862,22 +1865,25 @@
     - headphones
     - electronics
 - name: heart
-  friendly_name: Heart
+  friendly_name: Love
   aliases:
     - heart
+    - love
+    - like
 - name: heart--health
   friendly_name: Heart health
   aliases:
   - heart health
   - heart
 - name: heat--map
-  friendly_name: Heat map
+  friendly_name: Heat map 01
   aliases:
-    - heat map
-    - heat
-    - chart
-    - data analytics
-    - analytics
+  - heat map 01
+  - heat map
+  - heat
+  - chart
+  - data analytics
+  - analytics
 - name: heat-map--02
   friendly_name: heat-map--02
   aliases:
@@ -1957,7 +1963,7 @@
   - IBM iX®
   - IBM
 - name: ibm--z
-  friendly_name: Ibm Z®
+  friendly_name: IBM Z®
   aliases:
   - IBM Z®
   - IBM
@@ -2024,11 +2030,11 @@
   aliases:
     - intercom
 - name: iot--munich
-  friendly_name: IoT munich
+  friendly_name: IoT Munich
   aliases:
-  - iot munich
+  - iot Munich
   - iot
-  - munich
+  - Munich
   - city
   - cities
   - internet of things
@@ -2712,9 +2718,9 @@
   - watson
   - AI
 - name: petri--culture
-  friendly_name: Petri cultures
+  friendly_name: Petri culture
   aliases:
-  - petri cultures
+  - petri culture
   - petri dish
   - petri
   - life science
@@ -2810,27 +2816,31 @@
     - office equipment
     - office
 - name: private--network
-  friendly_name: Private network
+  friendly_name: Private network 01
   aliases:
+  - private network 01
   - private network
   - private
   - network
 - name: private--network--01
-  friendly_name: Private network 01
+  friendly_name: Private network 02
   aliases:
-  - private network 01
+  - private network 02
+  - private network
   - private
   - network
 - name: private--network--alt
-  friendly_name: Private network alt
+  friendly_name: Private network 03
   aliases:
-  - private network alt
+  - private network 03
+  - private network
   - private
   - network
 - name: private--network--alt--01
-  friendly_name: Private network alt 01
+  friendly_name: Private network 04
   aliases:
-  - private network alt 01
+  - private network 04
+  - private network
   - private
   - network
 - name: process
@@ -3650,9 +3660,9 @@
   - mobile
   - gesture
 - name: touch--id
-  friendly_name: Touch id
+  friendly_name: Touch ID
   aliases:
-  - touch id
+  - touch ID
   - touch
   - device interaction
   - interaction
@@ -3782,13 +3792,15 @@
     - unlock alt
     - security
 - name: upload
-  friendly_name: Upload
+  friendly_name: Upload 01
   aliases:
+    - upload 01
     - upload
 - name: upload--alt
-  friendly_name: Upload alt
+  friendly_name: Upload 02
   aliases:
-    - upload alt
+    - upload 02
+    - upload
 - name: user
   friendly_name: User
   aliases:
@@ -3842,14 +3854,15 @@
     - city
     - cities
 - name: video
-  friendly_name: Video
+  friendly_name: Video 01
   aliases:
+    - video 01
     - video
     - controls
 - name: video--alt
-  friendly_name: Video alt
+  friendly_name: Video 02
   aliases:
-  - video alt
+  - video 02
   - video
   - controls
 - name: video--chat
@@ -3892,14 +3905,16 @@
   - watson
   - AI
 - name: warning
-  friendly_name: Warning
+  friendly_name: Warning 01
   aliases:
+    - warning 01
     - warning
     - alert
     - status
 - name: warning--alt
-  friendly_name: Warning alt
+  friendly_name: Warning 02
   aliases:
+  - warning 02
   - warning
   - alert
   - status
@@ -3930,9 +3945,10 @@
   - cities
   - city
 - name: watson--avatar
-  friendly_name: Watson avatar
+  friendly_name: Watson logo
   aliases:
-  - Watson avatar
+  - Watson logo
+  - logo
   - watson
   - avatar
 - name: weather
@@ -3966,9 +3982,9 @@
     - agriculture
     - industry
 - name: wifi
-  friendly_name: Wifi
+  friendly_name: WiFi
   aliases:
-    - wifi
+    - WiFi
     - electronics
 - name: wind--power
   friendly_name: Wind power
