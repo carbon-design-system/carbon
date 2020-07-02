@@ -7100,6 +7100,7 @@ e- name: notebook
     - mute
     - chime
     - noise
+    - notify
   sizes:
     - 16
     - 32
@@ -7115,6 +7116,7 @@ e- name: notebook
     - chime
     - noise
     - toggle
+    - notify
 - name: notification--new
   friendly_name: Notification new
   sizes:
@@ -7127,6 +7129,7 @@ e- name: notebook
     - chime
     - noise
     - toggle
+    - notify
 - name: notification--off
   friendly_name: Notification off
   sizes:
@@ -7140,6 +7143,7 @@ e- name: notebook
     - chime
     - noise
     - toggle
+    - notify
 - name: notification--off--filled
   friendly_name: Notification off filled
   sizes:
@@ -7152,6 +7156,7 @@ e- name: notebook
     - chime
     - noise
     - toggle
+    - notify
 - name: number--0
   friendly_name: Number 0
   sizes:
@@ -7500,6 +7505,7 @@ e- name: notebook
     - gauge
     - indicator
     - bracket
+    - research
   sizes:
     - 32
 - name: operation--gauge
@@ -7511,7 +7517,7 @@ e- name: notebook
     - gauge
     - indicator
     - bracket
-    - research
+    - resear
 - name: operation--if
   friendly_name: Operation if
   sizes:
@@ -7524,12 +7530,17 @@ e- name: notebook
     - research
 - name: operations--field
   friendly_name: operations--field
-  aliases: []
+  aliases: 
+    - field
+    - operations
   sizes:
     - 32
 - name: operations--record
   friendly_name: operations--record
-  aliases: []
+  aliases: 
+    - operations
+    - record
+    - data
   sizes:
     - 32
 - name: ordinal
@@ -7783,6 +7794,8 @@ e- name: notebook
     - pedestrian-child
     - people
     - travel
+    - parent
+    - child
   sizes:
     - 32
 - name: pending
@@ -7800,6 +7813,7 @@ e- name: notebook
   aliases:
     - percentage
     - formatting
+    - percent
   sizes:
     - 32
 - name: percentage--filled
@@ -7809,6 +7823,7 @@ e- name: notebook
   aliases:
     - percentage filled
     - formatting
+    - percent
 - name: person
   friendly_name: Person
   aliases:
@@ -7858,6 +7873,8 @@ e- name: notebook
     - chat
     - sound
     - mute
+    - landline
+    - phone
   sizes:
     - 32
 - name: phone--filled
@@ -7871,6 +7888,9 @@ e- name: notebook
     - chat
     - sound
     - mute
+    - landline
+    - phone
+    - toggle
 - name: phone--off
   friendly_name: Phone off
   sizes:
@@ -7882,6 +7902,8 @@ e- name: notebook
     - chat
     - sound
     - mute
+    - phone
+    - toggle
 - name: phone--off--filled
   friendly_name: Phone off filled
   sizes:
@@ -7893,12 +7915,14 @@ e- name: notebook
     - chat
     - sound
     - mute
+    - toggle
 - name: phrase-sentiment
   friendly_name: Phrase sentiment
   aliases:
     - emotion
     - meaning
     - understanding
+    - data
   sizes:
     - 32
 - name: picnic-area
