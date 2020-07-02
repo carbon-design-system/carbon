@@ -227,6 +227,7 @@ categories:
       - design--and--development--01
       - design--and--development--02
       - feedback
+      - hills
       - idea
       - ideate
       - path
@@ -280,6 +281,7 @@ categories:
       - police
   - name: File
     members:
+      - add--document
       - contract
       - document--security
       - duplicate--file
@@ -414,6 +416,7 @@ categories:
       - flower--01
       - flower--02
       - perfume
+      - racetrack
       - scale
       - soft--ice--cream
       - sports
