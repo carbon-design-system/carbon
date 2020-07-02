@@ -7927,7 +7927,11 @@ e- name: notebook
     - 32
 - name: picnic-area
   friendly_name: picnic-area
-  aliases: []
+  aliases: 
+    - rest area
+    - table
+    - travel
+    - rest stop
   sizes:
     - 32
 - name: pills
@@ -7935,6 +7939,9 @@ e- name: notebook
   aliases:
     - health
     - medicine
+    - medication
+    - rx
+    - prescription
   sizes:
     - 32
 - name: pills--add
@@ -7944,6 +7951,9 @@ e- name: notebook
   aliases:
     - health
     - medicine
+    - medication
+    - rx
+    - prescription
 - name: pills--subtract
   friendly_name: Pills subtract
   sizes:
@@ -7951,11 +7961,16 @@ e- name: notebook
   aliases:
     - health
     - medicine
+    - medication
+    - rx
+    - prescription
 - name: pin
   friendly_name: Pin
   aliases:
     - save
     - favorite
+    - operations
+    - keep
   sizes:
     - 32
 - name: plane
@@ -7964,6 +7979,8 @@ e- name: notebook
     - airplane
     - flight
     - travel
+    - jet
+    - transportation
   sizes:
     - 32
 - name: play
@@ -7972,7 +7989,10 @@ e- name: notebook
     - start
     - stop
     - music
+    - video
+    - audio
     - control
+    - controls
   sizes:
     - 16
     - 32
@@ -7985,7 +8005,10 @@ e- name: notebook
     - start
     - stop
     - music
+    - video
+    - audio
     - control
+    - controls
 - name: play--filled--alt
   friendly_name: Play filled alt
   sizes:
@@ -7994,7 +8017,10 @@ e- name: notebook
     - start
     - stop
     - music
+    - video
+    - audio
     - control
+    - controls
 - name: play--outline
   friendly_name: Play outline
   sizes:
@@ -8004,7 +8030,10 @@ e- name: notebook
     - start
     - stop
     - music
+    - video
+    - audio
     - control
+    - controls
 - name: play--outline--filled
   friendly_name: Play outline filled
   sizes:
@@ -8014,23 +8043,39 @@ e- name: notebook
     - start
     - stop
     - music
+    - video
+    - audio
     - control
+    - controls
 - name: playlist
   friendly_name: Playlist
   aliases:
     - music
     - play
     - dj
+    - file
+    - audio
+    - video
   sizes:
     - 32
 - name: plug
   friendly_name: plug
-  aliases: []
+  aliases: 
+  - technology
+  - electric
+  - power
+  - charge
+  - charger
   sizes:
     - 32
 - name: plug--filled
   friendly_name: plug--filled
-  aliases: []
+  aliases: 
+  - technology
+  - electric
+  - power
+  - charge
+  - charger
   sizes:
     - 32
 - name: PNG
@@ -8056,13 +8101,19 @@ e- name: notebook
     - 32
 - name: police
   friendly_name: police
-  aliases: []
+  aliases: 
+  - travel
+  - traffic
+  - enforcement
+  - security
+  - guard
   sizes:
     - 32
 - name: policy
   friendly_name: Policy
   aliases:
     - policy
+    - contract
   sizes:
     - 32
 - name: popup
@@ -8071,6 +8122,7 @@ e- name: notebook
     - modal
     - overlay
     - expand
+    - file
   sizes:
     - 32
 - name: portfolio
@@ -8080,6 +8132,7 @@ e- name: notebook
     - suitcase
     - travel
     - case
+    - instruments
   sizes:
     - 32
 - name: power
@@ -8089,6 +8142,7 @@ e- name: notebook
     - 'off'
     - start
     - stop
+    - controls
   sizes:
     - 16
     - 32
@@ -8096,6 +8150,9 @@ e- name: notebook
   friendly_name: PPT
   aliases:
     - PPT
+    - powerpoint
+    - presentation
+    - file
   sizes:
     - 32
 - name: presentation-file
@@ -8105,16 +8162,21 @@ e- name: notebook
     - chart
     - meeting
     - graph
+    - data
   sizes:
     - 32
 - name: pressure
   friendly_name: pressure
-  aliases: []
+  aliases: 
+  - weather
+  - atmosphere
   sizes:
     - 32
 - name: pressure--filled
   friendly_name: pressure--filled
-  aliases: []
+  aliases: 
+  - weather 
+  - atmosphere
   sizes:
     - 32
 - name: previous--filled
@@ -8153,7 +8215,10 @@ e- name: notebook
     - 32
 - name: qq-plot
   friendly_name: qq-plot
-  aliases: []
+  aliases: 
+  - chart
+  - data
+  - analytics
   sizes:
     - 32
 - name: qr-code
@@ -8211,6 +8276,7 @@ e- name: notebook
   friendly_name: Rain
   aliases:
     - rain
+    - precipitation
   sizes:
     - 32
 - name: rain--drizzle
@@ -8219,28 +8285,33 @@ e- name: notebook
     - 32
   aliases:
     - rain
+    - precipitation
 - name: rain--heavy
   friendly_name: Rain heavy
   sizes:
     - 32
   aliases:
     - rain
+    - precipitation
 - name: rain--scattered
   friendly_name: Rain scattered
   sizes:
     - 32
   aliases:
     - rain
+    - precipitation
 - name: rain--scattered--night
   friendly_name: Rain scattered night
   sizes:
     - 32
   aliases:
     - rain
+    - precipitation
 - name: rain-drop
   friendly_name: Rain drop
   aliases:
     - rain-drop
+    - precipitation
   sizes:
     - 32
 - name: RAW
@@ -8521,7 +8592,10 @@ e- name: notebook
     - reverse
 - name: roadmap
   friendly_name: roadmap
-  aliases: []
+  aliases: 
+  - gantt chart
+  - project
+  - timeline
   sizes:
     - 32
 - name: rocket
@@ -8659,12 +8733,18 @@ e- name: notebook
     - 32
 - name: row--collapse
   friendly_name: row--collapse
-  aliases: []
+  aliases: 
+  - spreadsheet
+  - table
+  - data analytics
   sizes:
     - 32
 - name: row--expand
   friendly_name: row--expand
-  aliases: []
+  aliases: 
+  - spreadsheet
+  - table
+  - data analytics
   sizes:
     - 32
 - name: rss
@@ -8682,6 +8762,9 @@ e- name: notebook
   friendly_name: Rule
   aliases:
     - rule
+    - governance
+    - control
+    - policy
   sizes:
     - 32
 - name: ruler
@@ -8773,7 +8856,10 @@ e- name: notebook
     - preserve
 - name: save--model
   friendly_name: save--model
-  aliases: []
+  aliases: 
+  - save
+  - model
+  - operations
   sizes:
     - 32
 - name: save--series
@@ -8876,19 +8962,26 @@ e- name: notebook
     - 32
 - name: scatter-matrix
   friendly_name: scatter-matrix
-  aliases: []
+  aliases: 
+  - chart
+  - data
+  - data analytics
+  - plot
   sizes:
     - 32
 - name: schematics
   friendly_name: Schematics
   aliases:
     - schematics
+    - flow
+    - process
   sizes:
     - 32
 - name: scooter
   friendly_name: Scooter
   aliases:
     - scooter
+    - transportation
   sizes:
     - 32
 - name: scooter--front
@@ -8897,6 +8990,7 @@ e- name: notebook
     - 32
   aliases:
     - scooter
+    - transportation
 - name: screen
   friendly_name: Screen
   aliases:
@@ -8925,7 +9019,9 @@ e- name: notebook
     - mac
 - name: script
   friendly_name: Script
-  aliases: []
+  aliases: 
+  - code
+  - development
   sizes:
     - 32
 - name: script--reference
@@ -8937,6 +9033,7 @@ e- name: notebook
   friendly_name: SDK
   aliases:
     - SDK
+    - software
   sizes:
     - 32
 - name: search
@@ -9024,6 +9121,8 @@ e- name: notebook
   friendly_name: Service desk
   aliases:
     - service-desk
+    - concierge
+    - front desk
   sizes:
     - 32
 - name: settings
@@ -9172,21 +9271,28 @@ e- name: notebook
   friendly_name: Skill level
   aliases:
     - skill-level
+    - scale
   sizes:
     - 32
 - name: skill-level--advanced
   friendly_name: skill-level--advanced
-  aliases: []
+  aliases: 
+  - skill-level
+  - scale
   sizes:
     - 32
 - name: skill-level--basic
   friendly_name: skill-level--basic
-  aliases: []
+  aliases: 
+  - skill level
+  - scale
   sizes:
     - 32
 - name: skill-level--intermediate
   friendly_name: skill-level--intermediate
-  aliases: []
+  aliases: 
+  - skill level
+  - scale
   sizes:
     - 32
 - name: skip--back
@@ -9197,8 +9303,7 @@ e- name: notebook
     - arrow
     - next
     - forward
-    - button
-    - music
+    - button    - music
     - media
     - multi-media
     - player
@@ -9314,24 +9419,29 @@ e- name: notebook
     - 32
 - name: smoothing
   friendly_name: smoothing
-  aliases: []
+  aliases: 
+  - even
   sizes:
     - 32
 - name: smoothing--cursor
   friendly_name: smoothing--cursor
-  aliases: []
+  aliases: 
+  - even
   sizes:
     - 32
 - name: snooze
   friendly_name: Snooze
   aliases:
     - snooze
+    - alarm
+    - timer
   sizes:
     - 32
 - name: snow
   friendly_name: Snow
   aliases:
     - snow
+    - precipitation
   sizes:
     - 32
 - name: snow--blizzard
@@ -9340,34 +9450,40 @@ e- name: notebook
     - 32
   aliases:
     - snow
+    - precipitation
 - name: snow--heavy
   friendly_name: Snow heavy
   sizes:
     - 32
   aliases:
     - snow
+    - precipitation
 - name: snow--scattered
   friendly_name: Snow scattered
   sizes:
     - 32
   aliases:
     - snow
+    - precipitation
 - name: snow--scattered--night
   friendly_name: Snow scattered night
   sizes:
     - 32
   aliases:
     - snow
+    - precipitation
 - name: snowflake
   friendly_name: Snowflake
   aliases:
     - snowflake
+    - precipitation
   sizes:
     - 32
 - name: soccer
   friendly_name: Soccer
   aliases:
     - soccer
+    - sports
   sizes:
     - 32
 - name: spell-check
@@ -9396,7 +9512,9 @@ e- name: notebook
     - 32
 - name: split
   friendly_name: split
-  aliases: []
+  aliases: 
+  - break
+  - divide
   sizes:
     - 32
 - name: split--discard
@@ -9433,6 +9551,9 @@ e- name: notebook
   friendly_name: Sprout
   aliases:
     - sprout
+    - farming
+    - agriculture
+    - grow
   sizes:
     - 32
 - name: SQL
@@ -9478,6 +9599,8 @@ e- name: notebook
   friendly_name: Stamp
   aliases:
     - stamp
+    - mark
+    - approve
   sizes:
     - 32
 - name: star
@@ -9518,17 +9641,26 @@ e- name: notebook
     - starred
 - name: star--review
   friendly_name: star--review
-  aliases: []
+  aliases: 
+  - rating
+  - rate
+  - comment
   sizes:
     - 32
 - name: stem-leaf-plot
   friendly_name: stem-leaf-plot
-  aliases: []
+  aliases:
+  - chart
+  - data
+  - data analytics
   sizes:
     - 32
 - name: stethoscope
   friendly_name: stethoscope
-  aliases: []
+  aliases: 
+  - healthcare
+  - medical
+  - instruments
   sizes:
     - 32
 - name: stop
@@ -9613,6 +9745,8 @@ e- name: notebook
   friendly_name: Strawberry
   aliases:
     - strawberry
+    - fruit
+    - food
   sizes:
     - 32
 - name: stress-breath-editor
@@ -9627,12 +9761,14 @@ e- name: notebook
     - 32
 - name: string-integer
   friendly_name: string-integer
-  aliases: []
+  aliases:
+  - data
   sizes:
     - 32
 - name: string-text
   friendly_name: string-text
-  aliases: []
+  aliases: 
+  - data
   sizes:
     - 32
 - name: study--next
@@ -9728,18 +9864,22 @@ e- name: notebook
     - 32
 - name: swim
   friendly_name: swim
-  aliases: []
+  aliases: 
+  - travel
+  - sports
   sizes:
     - 32
 - name: switcher
   friendly_name: Switcher
   aliases:
     - switcher
+    - selector
   sizes:
     - 32
 - name: sys-provision
   friendly_name: sys-provision
-  aliases: []
+  aliases:
+  - data
   sizes:
     - 32
 - name: T
@@ -9854,7 +9994,12 @@ e- name: notebook
     - 32
 - name: task--view
   friendly_name: task--view
-  aliases: []
+  aliases: 
+  - insights
+  - review
+  - study
+  - analyze
+  - analytics
   sizes:
     - 32
 - name: taste
@@ -9923,12 +10068,14 @@ e- name: notebook
   friendly_name: Tennis
   aliases:
     - tennis
+    - sports
   sizes:
     - 32
 - name: tennis-ball
   friendly_name: Tennis ball
   aliases:
     - tennis-ball
+    - sports
   sizes:
     - 32
 - name: term
@@ -10225,12 +10372,16 @@ e- name: notebook
     - text-mining
 - name: theater
   friendly_name: theater
-  aliases: []
+  aliases: 
+  - destination
   sizes:
     - 32
 - name: threshold
   friendly_name: threshold
-  aliases: []
+  aliases: 
+  - chart
+  - plot
+  - analytics
   sizes:
     - 32
 - name: thumbnail--1
@@ -10279,6 +10430,7 @@ e- name: notebook
   friendly_name: Thunderstorm
   aliases:
     - thunderstorm
+    - precipitation
   sizes:
     - 32
 - name: thunderstorm--scattered
@@ -10287,29 +10439,34 @@ e- name: notebook
     - 32
   aliases:
     - thunderstorm
+    - precipitation
 - name: thunderstorm--scattered--night
   friendly_name: Thunderstorm scattered night
   sizes:
     - 32
   aliases:
     - thunderstorm
+    - precipitation
 - name: thunderstorm--severe
   friendly_name: Thunderstorm severe
   sizes:
     - 32
   aliases:
     - thunderstorm
+    - precipitation
 - name: thunderstorm--strong
   friendly_name: Thunderstorm strong
   sizes:
     - 32
   aliases:
     - thunderstorm
+    - precipitation
 - name: ticket
   friendly_name: Ticket
   aliases:
     - stub
     - admission
+    - destination
   sizes:
     - 32
 - name: TIF
@@ -10373,6 +10530,8 @@ e- name: notebook
     - tap
     - press
     - click
+    - mobile
+    - device
 - name: touch--2
   friendly_name: Touch 2
   sizes:
@@ -10382,9 +10541,13 @@ e- name: notebook
     - tap
     - press
     - click
+    - mobile
+    - device
 - name: touch--interaction
   friendly_name: touch--interaction
-  aliases: []
+  aliases: 
+  - mobile
+  - device
   sizes:
     - 32
 - name: train
@@ -10393,12 +10556,16 @@ e- name: notebook
     - subway
     - metro
     - underground
+    - transportation
+    - travel
   sizes:
     - 32
 - name: tram
   friendly_name: Tram
   aliases:
     - tram
+    - transportation
+    - travel
   sizes:
     - 32
 - name: transgender
@@ -10410,6 +10577,8 @@ e- name: notebook
   friendly_name: Translate
   aliases:
     - language
+    - localization
+    - interpret
   sizes:
     - 32
 - name: trash-can
@@ -10429,12 +10598,16 @@ e- name: notebook
   friendly_name: Tree
   aliases:
     - tree
+    - grow
+    - agriculture
   sizes:
     - 32
 - name: tree-view
   friendly_name: Tree view
   aliases:
     - flow chart
+    - data analytics
+    - chart
   sizes:
     - 32
 - name: tree-view--alt
@@ -10443,10 +10616,16 @@ e- name: notebook
     - 32
   aliases:
     - flow chart
+    - data analytics
+    - chart
 - name: trophy
   friendly_name: Trophy
   aliases:
     - trophy
+    - award
+    - sports
+    - champion
+    - winner
   sizes:
     - 32
 - name: trophy--filled
@@ -10455,10 +10634,16 @@ e- name: notebook
     - 32
   aliases:
     - trophy
+    - award
+    - sports
+    - champion
+    - winner
 - name: tropical-storm
   friendly_name: Tropical storm
   aliases:
     - tropical-storm
+    - precipitation
+    
   sizes:
     - 32
 - name: TSV
@@ -10515,7 +10700,9 @@ e- name: notebook
     - 32
 - name: umbrella
   friendly_name: umbrella
-  aliases: []
+  aliases:
+  - protection
+  - precipitation
   sizes:
     - 32
 - name: undefined
@@ -10582,7 +10769,9 @@ e- name: notebook
     - 32
 - name: upgrade
   friendly_name: upgrade
-  aliases: []
+  aliases: 
+  - up
+  - improve
   sizes:
     - 32
 - name: upload
@@ -10794,7 +10983,9 @@ e- name: notebook
     - my account
 - name: user--multiple
   friendly_name: user--multiple
-  aliases: []
+  aliases: 
+  - users
+  - people
   sizes:
     - 32
 - name: user--online
@@ -10851,7 +11042,8 @@ e- name: notebook
     - my account
 - name: user--speaker
   friendly_name: user--speaker
-  aliases: []
+  aliases: 
+  - presenter
   sizes:
     - 32
 - name: user--x-ray
@@ -10876,12 +11068,14 @@ e- name: notebook
     - account
 - name: uv-index
   friendly_name: uv-index
-  aliases: []
+  aliases: 
+  - sun exposure
   sizes:
     - 32
 - name: uv-index--filled
   friendly_name: uv-index--filled
-  aliases: []
+  aliases: 
+  - sun exposure
   sizes:
     - 32
 - name: van
@@ -11231,12 +11425,16 @@ e- name: notebook
   friendly_name: Wheat
   aliases:
     - wheat
+    - food
+    - crop
+    - agriculture
   sizes:
     - 32
 - name: wifi
   friendly_name: WiFi
   aliases:
     - wifi
+    - internet
   sizes:
     - 32
 - name: wifi--off
@@ -11245,6 +11443,7 @@ e- name: notebook
     - 32
   aliases:
     - wifi
+    - internet
 - name: wikis
   friendly_name: Wikis
   aliases:
@@ -11302,6 +11501,7 @@ e- name: notebook
     - 32
   aliases:
     - windy
+    - precipitation
 - name: windy--strong
   friendly_name: Windy strong
   sizes:
@@ -11312,6 +11512,7 @@ e- name: notebook
   friendly_name: Wintry mix
   aliases:
     - wintry-mix
+    - precipitation
   sizes:
     - 32
 - name: wireless-checkout
@@ -11334,7 +11535,10 @@ e- name: notebook
     - 32
 - name: word-cloud
   friendly_name: word-cloud
-  aliases: []
+  aliases: 
+  - chart
+  - plot
+  - data analytics
   sizes:
     - 32
 - name: workspace
@@ -11352,22 +11556,30 @@ e- name: notebook
     - 32
 - name: worship
   friendly_name: worship
-  aliases: []
+  aliases: 
+  - religion
+  - faith
   sizes:
     - 32
 - name: worship--christian
   friendly_name: worship--christian
-  aliases: []
+  aliases:
+  - religion
+  - faith
   sizes:
     - 32
 - name: worship--jewish
   friendly_name: worship--jewish
-  aliases: []
+  aliases: 
+  - religion
+  - faith
   sizes:
     - 32
 - name: worship--muslim
   friendly_name: worship--muslim
-  aliases: []
+  aliases: 
+  - religion
+  - faith
   sizes:
     - 32
 - name: X
