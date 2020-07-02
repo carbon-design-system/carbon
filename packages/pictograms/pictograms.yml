@@ -629,8 +629,8 @@
   friendly_name: Flower 01
 - name: flower--02
   friendly_name: Flower 02
-- name: focus
-  friendly_name: Focus
+- name: feedback--02
+  friendly_name: Feedback 02
   aliases:
     - converge
     - feedback
