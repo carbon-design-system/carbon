@@ -15818,16 +15818,6 @@ Data table core styles
   }
 
   // Overflow Menu Overrides
-  .#{$prefix}--data-table td button.#{$prefix}--overflow-menu {
-    margin: rem(-7px) 0 rem(-8px);
-  }
-
-  .#{$prefix}--data-table.#{$prefix}--data-table--compact
-    td
-    .#{$prefix}--overflow-menu {
-    margin: 0;
-  }
-
   .#{$prefix}--data-table
     td.#{$prefix}--table-column-menu
     .#{$prefix}--overflow-menu[aria-expanded='false']:focus {
@@ -15901,6 +15891,25 @@ Data table core styles
     &:hover {
       background-color: $hover-field;
     }
+  }
+
+  .#{$prefix}--data-table--compact td.#{$prefix}--table-column-menu,
+  .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .#{$prefix}--data-table--compact td.#{$prefix}--table-column-menu,
+  .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu {
+    height: rem(24px);
+  }
+
+  .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--data-table--tall .#{$prefix}--table-column-menu {
+    padding-top: $spacing-03;
   }
 
   //----------------------------------------------------------------------------
@@ -16061,7 +16070,7 @@ Data table core styles
 
   .#{$prefix}--data-table--compact .#{$prefix}--overflow-menu {
     width: rem(32px);
-    height: rem(23px); //24px row - 1px border
+    height: 100%;
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--compact
@@ -16097,14 +16106,14 @@ Data table core styles
     padding-bottom: rem(6px);
   }
 
-  .#{$prefix}--data-table--short .#{$prefix}--overflow-menu {
-    height: rem(31px); //32px row - 1px border
-  }
-
   .#{$prefix}--data-table.#{$prefix}--data-table--short
     .#{$prefix}--table-column-checkbox {
     padding-top: rem(3px);
     padding-bottom: rem(3px);
+  }
+
+  .#{$prefix}--data-table--short .#{$prefix}--overflow-menu {
+    height: 100%;
   }
 
   //----------------------------------------------------------------------------
@@ -16224,6 +16233,20 @@ Data table core styles
   }
 
   @include sticky-header($max-width: 100%);
+
+  // -------------------
+  // with boolean column
+  // -------------------
+  .#{$prefix}--data-table .bx--form-item.bx--checkbox-wrapper:last-of-type {
+    margin: 0;
+  }
+
+  .#{$prefix}--data-table--short
+    .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type,
+  .#{$prefix}--data-table--compact
+    .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
+    margin: rem(-3px) 0;
+  }
 }
 ```
 
@@ -16662,12 +16685,6 @@ Data table sort styles
   // -------------------------------------
   // Sortable table
   // -------------------------------------
-  .#{$prefix}--data-table--sort th,
-  .#{$prefix}--data-table--sort
-    th:first-of-type:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-expand) {
-    padding: 0;
-  }
-
   .#{$prefix}--data-table--sort th {
     height: $layout-04;
     border-top: none;
@@ -16679,14 +16696,13 @@ Data table sort styles
   // -------------------------------------
   .#{$prefix}--table-sort {
     @include button-reset(false);
-    position: relative;
     font: inherit;
+    line-height: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     color: $text-01;
-    padding-right: $spacing-05;
     min-height: 100%;
     background-color: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive),
@@ -16708,6 +16724,15 @@ Data table sort styles
   }
 
   // -------------------------------------
+  // Th > Button > Span (span required for flex bugs in Safari)
+  // -------------------------------------
+  .#{$prefix}--data-table--sort th .#{$prefix}--table-sort__flex {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  // -------------------------------------
   //Th > Button > Svg (Sort Icons)
   // -------------------------------------
   // inactive icons
@@ -16720,10 +16745,8 @@ Data table sort styles
   }
 
   .#{$prefix}--table-sort__icon-unsorted {
-    position: relative;
-    left: rem(2px);
     margin-left: $spacing-03;
-    margin-right: 0;
+    margin-right: $spacing-05;
     opacity: 0;
     fill: $ui-05;
     width: auto;
@@ -16747,13 +16770,11 @@ Data table sort styles
   }
 
   .#{$prefix}--table-sort__icon {
-    position: relative;
-    left: rem(2px);
     margin-left: $spacing-03;
-    margin-right: 0;
+    margin-right: $spacing-05;
     transition: transform $transition--base $carbon--standard-easing;
     transform: rotate(0);
-    opacity: 0;
+    opacity: 1;
     fill: $ui-05;
     width: auto;
     min-width: $layout-01;
@@ -16767,23 +16788,9 @@ Data table sort styles
     height: rem(24px);
   }
 
-  .#{$prefix}--data-table--compact.#{$prefix}--data-table--sort
-    th
-    .#{$prefix}--table-sort {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
   // Sortable Short
   .#{$prefix}--data-table--short.#{$prefix}--data-table--sort th {
     height: rem(32px);
-  }
-
-  .#{$prefix}--data-table--short.#{$prefix}--data-table--sort
-    th
-    .#{$prefix}--table-sort {
-    padding-top: 0;
-    padding-bottom: 0;
   }
 
   // Sortable Tall
@@ -16794,29 +16801,19 @@ Data table sort styles
   .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
     th
     .#{$prefix}--table-sort {
-    padding-top: 0;
-    padding-bottom: 0;
+    display: inline-block;
+    height: rem(64px);
   }
 
   .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
     th
-    .#{$prefix}--table-sort
-    svg {
-    align-self: flex-start;
-    top: $spacing-03;
+    .#{$prefix}--table-sort__flex {
+    align-items: flex-start;
   }
 
-  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
-    th
-    .#{$prefix}--table-sort
-    .#{$prefix}--table-header-label {
-    align-self: flex-start;
-    position: relative;
-    top: rem(-8px);
-    max-height: 3rem;
-    display: -webkit-box; // weird text truncation style used
-    -webkit-line-clamp: 2; // because we need text to wrap
-    -webkit-box-orient: vertical; // can't use white-space: nowrap
+  .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon-unsorted,
+  .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon {
+    margin-top: rem(13px);
   }
 }
 ```
@@ -16828,9 +16825,9 @@ Data table sort styles
   - [prefix [variable]](#prefix-variable)
   - [layout-04 [variable]](#layout-04-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [spacing-05 [variable]](#spacing-05-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [layout-01 [variable]](#layout-01-variable)
 
@@ -18501,6 +18498,15 @@ List box styles
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
     height: 100%;
+  }
+
+  .#{$prefix}--dropdown--inline .#{$prefix}--list-box__field {
+    max-width: rem(480px);
+  }
+
+  .#{$prefix}--dropdown--inline .bx--list-box__menu {
+    min-width: rem(288px);
+    max-width: rem(480px);
   }
 
   // The field we use for input, showing selection, etc.
