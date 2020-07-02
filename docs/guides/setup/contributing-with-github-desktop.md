@@ -16,13 +16,13 @@
    [Carbon Design System](https://github.com/carbon-design-system/carbon)
 8. In the top right of the page click the button labeled 'Fork'. This will
    create a copy of the repository and add it to your account. This is where
-   you'll make changes and later request the repository you just forked pull
-   those changes from (more on that later).
+   you'll make changes and later request the repository you forked pull those
+   changes from (more on that later).
 9. Back in the Github Desktop application click the button labeled 'Clone a
    repository from the internet...'
-10. In the modal that pops up you can search your account for the fork you just
-    made. Once you've selected the right repository click the blue button
-    labeled 'Clone...' in the bottom right corner of the modal.
+10. In the modal that pops up you can search your account for the fork you made.
+    Once you've selected the right repository click the blue button labeled
+    'Clone...' in the bottom right corner of the modal.
 11. The _next_ modal is a confirmation screen where you can double check the URL
     of your fork and select where on your computer you'd like to clone the
     repository.
