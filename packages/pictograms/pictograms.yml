@@ -147,7 +147,7 @@
     - residence
     - condo
 - name: api
-  friendly_name: Api
+  friendly_name: API
   aliases:
     - api
     - application programming interface
@@ -283,7 +283,7 @@
   - city
   - cities
 - name: berlin--brandenburg--gate
-  friendly_name: Berlin Brandenburg gate
+  friendly_name: Berlin Brandenburg Gate
   aliases:
   - Berlin Brandenburg gate
   - Berlin
@@ -1689,7 +1689,7 @@
   - money
   - finance
 - name: global--finance--euro
-  friendly_name: Global finance euro
+  friendly_name: Global finance Euro
   aliases:
   - global finance euro
   - global
@@ -1705,7 +1705,7 @@
   - finance
   - network
 - name: global--finance--sterling
-  friendly_name: Global finance sterling
+  friendly_name: Global finance Sterling
   aliases:
   - global finance sterling
   - global
@@ -2074,29 +2074,34 @@
   - watson
   - AI
 - name: language
-  friendly_name: Language
+  friendly_name: Language 01
   aliases:
+    - language 01
     - language
     - watson
 - name: language--01
-  friendly_name: Language 01
-  aliases:
-  - language 01
-  - watson
-- name: language--02
   friendly_name: Language 02
   aliases:
   - language 02
+  - language
   - watson
-- name: language--03
+- name: language--02
   friendly_name: Language 03
   aliases:
   - language 03
+  - language
   - watson
-- name: language--04
+- name: language--03
   friendly_name: Language 04
   aliases:
   - language 04
+  - language
+  - watson
+- name: language--04
+  friendly_name: Language 05
+  aliases:
+  - language 05
+  - language
   - watson
 - name: language--translation
   friendly_name: Language translation
@@ -2142,25 +2147,29 @@
   aliases:
     - location
 - name: lock
-  friendly_name: Lock
+  friendly_name: Lock 01
   aliases:
+    - lock 01
     - lock
     - security
 - name: lock--alt
-  friendly_name: Lock alt
+  friendly_name: Lock 02
   aliases:
-    - lock alt
+    - lock 02
+    - lock
     - security
 - name: locked--network
-  friendly_name: Locked network
+  friendly_name: Locked Network 01
   aliases:
+    - locked network 01
     - locked network
     - network
     - security
 - name: locked--network--alt
-  friendly_name: Locked network alt
+  friendly_name: Locked Network 02
   aliases:
-    - locked network alt
+    - locked network 02
+    - locked network
     - network
     - security
 - name: london
@@ -2170,7 +2179,7 @@
     - city
     - cities
 - name: london--big--ben
-  friendly_name: London big ben
+  friendly_name: London Big Ben
   aliases:
   - london big ben
   - london
@@ -2549,17 +2558,19 @@
   - city
   - cities
 - name: nyc--manhattan
-  friendly_name: Nyc Manhattan
+  friendly_name: NYC Manhattan 01
   aliases:
+  - NYC Manhattan 01
   - NYC Manhattan
   - NYC
   - Manhattan
   - city
   - cities
 - name: nyc--manhattan--alt
-  friendly_name: NYC Manhattan alt
+  friendly_name: NYC Manhattan 02
   aliases:
   - NYC Manhattan alt
+  - NYC Manhattan
   - NYC
   - Manhattan
   - city
@@ -3782,14 +3793,16 @@
     - education
     - college
 - name: unlock
-  friendly_name: Unlock
+  friendly_name: Unlock 01
   aliases:
-    - unlock
+    - unlock 01
+    - unlock 
     - security
 - name: unlock--alt
-  friendly_name: Unlock alt
+  friendly_name: Unlock 02
   aliases:
-    - unlock alt
+    - unlock 02
+    - unlock
     - security
 - name: upload
   friendly_name: Upload 01
