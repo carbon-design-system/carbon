@@ -3,6 +3,7 @@
 exports[`TreeView should render 1`] = `
 <TreeView
   label="Tree view"
+  onSelect={[MockFunction]}
   selected={
     Array [
       "1",
@@ -26,6 +27,7 @@ exports[`TreeView should render 1`] = `
   >
     <TreeNode
       depth={0}
+      id="1"
       key=".0"
       label="1"
       onTreeSelect={[Function]}
@@ -40,6 +42,7 @@ exports[`TreeView should render 1`] = `
       <li
         aria-selected={true}
         className="bx--tree-node bx--tree-node--selected bx--tree-leaf-node"
+        id="1"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="treeitem"
@@ -87,8 +90,10 @@ exports[`TreeView should render 1`] = `
     </TreeNode>
     <TreeNode
       depth={0}
+      id="2"
       key=".1"
       label="2"
+      onSelect={[MockFunction]}
       onTreeSelect={[Function]}
       selected={
         Array [
@@ -101,6 +106,7 @@ exports[`TreeView should render 1`] = `
       <li
         aria-selected={null}
         className="bx--tree-node bx--tree-leaf-node"
+        id="2"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="treeitem"
@@ -119,6 +125,7 @@ exports[`TreeView should render 1`] = `
     </TreeNode>
     <TreeNode
       depth={0}
+      id="5"
       isExpanded={true}
       key=".2"
       label="5"
@@ -135,6 +142,7 @@ exports[`TreeView should render 1`] = `
         aria-expanded={true}
         aria-selected={null}
         className="bx--tree-node bx--tree-parent-node"
+        id="5"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="treeitem"
@@ -194,6 +202,7 @@ exports[`TreeView should render 1`] = `
         >
           <TreeNode
             depth={1}
+            id="5-1"
             key=".0"
             label="5-1"
             onTreeSelect={[Function]}
@@ -208,6 +217,7 @@ exports[`TreeView should render 1`] = `
             <li
               aria-selected={null}
               className="bx--tree-node bx--tree-leaf-node"
+              id="5-1"
               onClick={[Function]}
               onKeyDown={[Function]}
               role="treeitem"
@@ -226,6 +236,7 @@ exports[`TreeView should render 1`] = `
           </TreeNode>
           <TreeNode
             depth={1}
+            id="5-2"
             key=".1"
             label="5-2"
             onTreeSelect={[Function]}
@@ -240,6 +251,7 @@ exports[`TreeView should render 1`] = `
             <li
               aria-selected={null}
               className="bx--tree-node bx--tree-leaf-node"
+              id="5-2"
               onClick={[Function]}
               onKeyDown={[Function]}
               role="treeitem"
@@ -258,6 +270,7 @@ exports[`TreeView should render 1`] = `
           </TreeNode>
           <TreeNode
             depth={1}
+            id="5-3"
             isExpanded={true}
             key=".2"
             label="5-3"
@@ -274,6 +287,7 @@ exports[`TreeView should render 1`] = `
               aria-expanded={true}
               aria-selected={null}
               className="bx--tree-node bx--tree-parent-node"
+              id="5-3"
               onClick={[Function]}
               onKeyDown={[Function]}
               role="treeitem"
@@ -333,6 +347,7 @@ exports[`TreeView should render 1`] = `
               >
                 <TreeNode
                   depth={2}
+                  id="5-4"
                   key=".0"
                   label="5-4"
                   onTreeSelect={[Function]}
@@ -347,6 +362,7 @@ exports[`TreeView should render 1`] = `
                   <li
                     aria-selected={null}
                     className="bx--tree-node bx--tree-leaf-node"
+                    id="5-4"
                     onClick={[Function]}
                     onKeyDown={[Function]}
                     role="treeitem"
@@ -399,6 +415,7 @@ exports[`TreeView should render with icons 1`] = `
   >
     <TreeNode
       depth={0}
+      id="1"
       key=".0"
       label="1"
       onTreeSelect={[Function]}
@@ -419,6 +436,7 @@ exports[`TreeView should render with icons 1`] = `
       <li
         aria-selected={true}
         className="bx--tree-node bx--tree-node--selected bx--tree-node--with-icon bx--tree-leaf-node"
+        id="1"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="treeitem"
@@ -498,6 +516,7 @@ exports[`TreeView should render with icons 1`] = `
     </TreeNode>
     <TreeNode
       depth={0}
+      id="2"
       key=".1"
       label="2"
       onTreeSelect={[Function]}
@@ -518,6 +537,7 @@ exports[`TreeView should render with icons 1`] = `
       <li
         aria-selected={null}
         className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
+        id="2"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="treeitem"
@@ -568,6 +588,7 @@ exports[`TreeView should render with icons 1`] = `
     </TreeNode>
     <TreeNode
       depth={0}
+      id="5"
       isExpanded={true}
       key=".2"
       label="5"
@@ -590,6 +611,7 @@ exports[`TreeView should render with icons 1`] = `
         aria-expanded={true}
         aria-selected={null}
         className="bx--tree-node bx--tree-node--with-icon bx--tree-parent-node"
+        id="5"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="treeitem"
@@ -678,6 +700,7 @@ exports[`TreeView should render with icons 1`] = `
         >
           <TreeNode
             depth={1}
+            id="5-1"
             key=".0"
             label="5-1"
             onTreeSelect={[Function]}
@@ -698,6 +721,7 @@ exports[`TreeView should render with icons 1`] = `
             <li
               aria-selected={null}
               className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
+              id="5-1"
               onClick={[Function]}
               onKeyDown={[Function]}
               role="treeitem"
@@ -748,6 +772,7 @@ exports[`TreeView should render with icons 1`] = `
           </TreeNode>
           <TreeNode
             depth={1}
+            id="5-2"
             key=".1"
             label="5-2"
             onTreeSelect={[Function]}
@@ -768,6 +793,7 @@ exports[`TreeView should render with icons 1`] = `
             <li
               aria-selected={null}
               className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
+              id="5-2"
               onClick={[Function]}
               onKeyDown={[Function]}
               role="treeitem"
@@ -818,6 +844,7 @@ exports[`TreeView should render with icons 1`] = `
           </TreeNode>
           <TreeNode
             depth={1}
+            id="5-3"
             isExpanded={true}
             key=".2"
             label="5-3"
@@ -840,6 +867,7 @@ exports[`TreeView should render with icons 1`] = `
               aria-expanded={true}
               aria-selected={null}
               className="bx--tree-node bx--tree-node--with-icon bx--tree-parent-node"
+              id="5-3"
               onClick={[Function]}
               onKeyDown={[Function]}
               role="treeitem"
@@ -928,6 +956,7 @@ exports[`TreeView should render with icons 1`] = `
               >
                 <TreeNode
                   depth={2}
+                  id="5-4"
                   key=".0"
                   label="5-4"
                   onTreeSelect={[Function]}
@@ -948,6 +977,7 @@ exports[`TreeView should render with icons 1`] = `
                   <li
                     aria-selected={null}
                     className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
+                    id="5-4"
                     onClick={[Function]}
                     onKeyDown={[Function]}
                     role="treeitem"
