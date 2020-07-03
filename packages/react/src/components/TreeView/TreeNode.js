@@ -117,7 +117,8 @@ export default function TreeNode({
         setExpanded(true);
       }
     }
-    if (match(event, keys.Enter)) {
+    if (matches(event, [keys.Enter, keys.Space])) {
+      event.preventDefault();
       handleClick(event);
     }
     if (rest.onKeyDown) {
