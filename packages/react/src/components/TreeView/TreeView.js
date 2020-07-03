@@ -36,7 +36,7 @@ export default function TreeView({
   const [active, setActive] = useState(prespecifiedActive);
   const handleTreeSelect = (event, node = {}) => {
     const { id: nodeId } = node;
-    if (multiselect && event.metaKey) {
+    if (multiselect && (event.metaKey || event.ctrlKey)) {
       if (!selected.includes(nodeId)) {
         setSelected(selected.concat(nodeId));
       } else {
