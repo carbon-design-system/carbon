@@ -51,6 +51,8 @@ const BreadcrumbItem = ({
 };
 
 BreadcrumbItem.propTypes = {
+  'aria-current': PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+
   /**
    * Pass in content that will be inside of the BreadcrumbItem
    */
