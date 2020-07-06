@@ -10,6 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
+import debounce from 'lodash.debounce';
 import { keys, match, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
@@ -100,6 +101,52 @@ export default class Tabs extends React.Component {
           selected,
           prevSelected: selected,
         };
+  }
+
+  /**
+   * `scroll` event handler to save tablist clientWidth, scrollWidth, and
+   * scrollLeft
+   */
+  handleScroll = () => {
+    const {
+      clientWidth: tablistClientWidth,
+      scrollLeft: tablistScrollLeft,
+      scrollWidth: tablistScrollWidth,
+    } = this.tablist.current;
+    this.setState({
+      tablistClientWidth,
+      horizontalOverflow: tablistScrollWidth > tablistClientWidth,
+      tablistScrollWidth,
+      tablistScrollLeft,
+    });
+  };
+
+  /**
+   * The debounced version of the `resize` event handler.
+   * @type {Function}
+   * @private
+   */
+  _debouncedHandleWindowResize = null;
+
+  _handleWindowResize = this.handleScroll;
+
+  componentDidMount() {
+    if (!this._debouncedHandleWindowResize) {
+      this._debouncedHandleWindowResize = debounce(
+        this._handleWindowResize,
+        200
+      );
+    }
+
+    this._handleWindowResize();
+    window.addEventListener('resize', this._debouncedHandleWindowResize);
+  }
+
+  componentWillUnmount() {
+    if (this._debouncedHandleWindowResize) {
+      this._debouncedHandleWindowResize.cancel();
+    }
+    window.removeEventListener('resize', this._debouncedHandleWindowResize);
   }
 
   getTabs() {
@@ -266,7 +313,11 @@ export default class Tabs extends React.Component {
 
     return (
       <>
-        <div {...other} className={classes.tabs} role={role}>
+        <div
+          {...other}
+          className={classes.tabs}
+          role={role}
+          onScroll={this.handleScroll}>
           <button className={classes.leftOverflowButtonClasses}>
             <ChevronLeft16 />
           </button>
