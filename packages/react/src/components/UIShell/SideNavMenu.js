@@ -17,6 +17,13 @@ const { prefix } = settings;
 
 export class SideNavMenu extends React.Component {
   static propTypes = {
+    buttonRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({
+        current: PropTypes.any,
+      }),
+    ]),
+
     /**
      * Provide an optional class to be applied to the containing node
      */

@@ -130,6 +130,21 @@ export default class DataTable extends React.Component {
      * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
      */
     overflowMenuOnHover: PropTypes.bool,
+
+    /**
+     * `true` to add useZebraStyles striping.
+     */
+    useZebraStyles: PropTypes.bool,
+
+    /**
+     * `false` If true, will use a width of 'auto' instead of 100%
+     */
+    useStaticWidth: PropTypes.bool,
+
+    /**
+     * `false` If true, will remove the table border
+     */
+    shouldShowBorder: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -152,25 +167,29 @@ export default class DataTable extends React.Component {
     this.instanceId = getInstanceId();
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
+    if (prevProps === this.props) {
+      return;
+    }
+
+    const prevRowIds = prevProps.rows.map((row) => row.id);
     const rowIds = this.props.rows.map((row) => row.id);
-    const nextRowIds = nextProps.rows.map((row) => row.id);
 
-    if (!isEqual(rowIds, nextRowIds)) {
-      this.setState((state) => getDerivedStateFromProps(nextProps, state));
+    if (!isEqual(prevRowIds, rowIds)) {
+      this.setState((state) => getDerivedStateFromProps(this.props, state));
       return;
     }
 
+    const prevHeaders = prevProps.headers.map((header) => header.key);
     const headers = this.props.headers.map((header) => header.key);
-    const nextHeaders = nextProps.headers.map((header) => header.key);
 
-    if (!isEqual(headers, nextHeaders)) {
-      this.setState((state) => getDerivedStateFromProps(nextProps, state));
+    if (!isEqual(prevHeaders, headers)) {
+      this.setState((state) => getDerivedStateFromProps(this.props, state));
       return;
     }
 
-    if (!isEqual(this.props.rows, nextProps.rows)) {
-      this.setState((state) => getDerivedStateFromProps(nextProps, state));
+    if (!isEqual(prevProps.rows, this.props.rows)) {
+      this.setState((state) => getDerivedStateFromProps(this.props, state));
       return;
     }
   }
@@ -235,7 +254,9 @@ export default class DataTable extends React.Component {
       onExpand: composeEventHandlers([
         this.handleOnExpandAll,
         onClick
-          ? this.handleOnExpandHeaderClick(onClick, { isExpanded })
+          ? this.handleOnExpandHeaderClick(onClick, {
+              isExpanded,
+            })
           : null,
       ]),
     };
@@ -331,6 +352,7 @@ export default class DataTable extends React.Component {
       checked || indeterminate
         ? translationKeys.unselectAll
         : translationKeys.selectAll;
+
     return {
       ...rest,
       ariaLabel: t(translationKey),
@@ -614,6 +636,7 @@ export default class DataTable extends React.Component {
   };
 
   render() {
+    // eslint-disable-next-line react/prop-types
     const { children, filterRows, headers, render } = this.props;
     const { filterInputValue, rowIds, rowsById, cellsById } = this.state;
     const filteredRowIds =

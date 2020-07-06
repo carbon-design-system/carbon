@@ -49,6 +49,7 @@ const props = {
       'Primary focus element selector (selectorPrimaryFocus)',
       ''
     ),
+    // eslint-disable-next-line react/display-name
     renderIcon: React.forwardRef((props, ref) => (
       <div ref={ref}>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">

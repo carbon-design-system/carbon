@@ -98,6 +98,7 @@ class RadioButton extends React.Component {
       className,
       labelText,
       labelPosition,
+      // eslint-disable-next-line react/prop-types
       innerRef: ref,
       hideLabel,
       ...other

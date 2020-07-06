@@ -1954,7 +1954,7 @@ Carbon condensed gutter size in rem
 <summary>Source code</summary>
 
 ```scss
-$carbon--grid-gutter--condensed: carbon--rem(2px);
+$carbon--grid-gutter--condensed: carbon--rem(1px);
 ```
 
 </details>
@@ -3557,6 +3557,7 @@ $carbon--spacing-09: 3rem;
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [pagination [mixin]](#pagination-mixin)
   - [tile [mixin]](#tile-mixin)
 
 ### ✅carbon--spacing-10 [variable]
@@ -6649,7 +6650,6 @@ $ui-02: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
-  - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [tile [mixin]](#tile-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -7526,6 +7526,7 @@ $overlay-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [loading [mixin]](#loading-mixin)
   - [modal [mixin]](#modal-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
@@ -13921,6 +13922,10 @@ Button styles
     }
   }
 
+  .#{$prefix}--btn path[data-icon-path='inner-path'] {
+    fill: none;
+  }
+
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost
     .#{$prefix}--btn__icon,
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover
@@ -15813,16 +15818,6 @@ Data table core styles
   }
 
   // Overflow Menu Overrides
-  .#{$prefix}--data-table td button.#{$prefix}--overflow-menu {
-    margin: rem(-7px) 0 rem(-8px);
-  }
-
-  .#{$prefix}--data-table.#{$prefix}--data-table--compact
-    td
-    .#{$prefix}--overflow-menu {
-    margin: 0;
-  }
-
   .#{$prefix}--data-table
     td.#{$prefix}--table-column-menu
     .#{$prefix}--overflow-menu[aria-expanded='false']:focus {
@@ -15896,6 +15891,25 @@ Data table core styles
     &:hover {
       background-color: $hover-field;
     }
+  }
+
+  .#{$prefix}--data-table--compact td.#{$prefix}--table-column-menu,
+  .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .#{$prefix}--data-table--compact td.#{$prefix}--table-column-menu,
+  .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu {
+    height: rem(24px);
+  }
+
+  .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--data-table--tall .#{$prefix}--table-column-menu {
+    padding-top: $spacing-03;
   }
 
   //----------------------------------------------------------------------------
@@ -16056,7 +16070,7 @@ Data table core styles
 
   .#{$prefix}--data-table--compact .#{$prefix}--overflow-menu {
     width: rem(32px);
-    height: rem(23px); //24px row - 1px border
+    height: 100%;
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--compact
@@ -16092,14 +16106,14 @@ Data table core styles
     padding-bottom: rem(6px);
   }
 
-  .#{$prefix}--data-table--short .#{$prefix}--overflow-menu {
-    height: rem(31px); //32px row - 1px border
-  }
-
   .#{$prefix}--data-table.#{$prefix}--data-table--short
     .#{$prefix}--table-column-checkbox {
     padding-top: rem(3px);
     padding-bottom: rem(3px);
+  }
+
+  .#{$prefix}--data-table--short .#{$prefix}--overflow-menu {
+    height: 100%;
   }
 
   //----------------------------------------------------------------------------
@@ -16219,6 +16233,20 @@ Data table core styles
   }
 
   @include sticky-header($max-width: 100%);
+
+  // -------------------
+  // with boolean column
+  // -------------------
+  .#{$prefix}--data-table .bx--form-item.bx--checkbox-wrapper:last-of-type {
+    margin: 0;
+  }
+
+  .#{$prefix}--data-table--short
+    .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type,
+  .#{$prefix}--data-table--compact
+    .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
+    margin: rem(-3px) 0;
+  }
 }
 ```
 
@@ -16657,12 +16685,6 @@ Data table sort styles
   // -------------------------------------
   // Sortable table
   // -------------------------------------
-  .#{$prefix}--data-table--sort th,
-  .#{$prefix}--data-table--sort
-    th:first-of-type:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-expand) {
-    padding: 0;
-  }
-
   .#{$prefix}--data-table--sort th {
     height: $layout-04;
     border-top: none;
@@ -16674,14 +16696,13 @@ Data table sort styles
   // -------------------------------------
   .#{$prefix}--table-sort {
     @include button-reset(false);
-    position: relative;
     font: inherit;
+    line-height: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     color: $text-01;
-    padding-right: $spacing-05;
     min-height: 100%;
     background-color: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive),
@@ -16703,6 +16724,15 @@ Data table sort styles
   }
 
   // -------------------------------------
+  // Th > Button > Span (span required for flex bugs in Safari)
+  // -------------------------------------
+  .#{$prefix}--data-table--sort th .#{$prefix}--table-sort__flex {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  // -------------------------------------
   //Th > Button > Svg (Sort Icons)
   // -------------------------------------
   // inactive icons
@@ -16715,10 +16745,8 @@ Data table sort styles
   }
 
   .#{$prefix}--table-sort__icon-unsorted {
-    position: relative;
-    left: rem(2px);
     margin-left: $spacing-03;
-    margin-right: 0;
+    margin-right: $spacing-05;
     opacity: 0;
     fill: $ui-05;
     width: auto;
@@ -16742,13 +16770,11 @@ Data table sort styles
   }
 
   .#{$prefix}--table-sort__icon {
-    position: relative;
-    left: rem(2px);
     margin-left: $spacing-03;
-    margin-right: 0;
+    margin-right: $spacing-05;
     transition: transform $transition--base $carbon--standard-easing;
     transform: rotate(0);
-    opacity: 0;
+    opacity: 1;
     fill: $ui-05;
     width: auto;
     min-width: $layout-01;
@@ -16762,23 +16788,9 @@ Data table sort styles
     height: rem(24px);
   }
 
-  .#{$prefix}--data-table--compact.#{$prefix}--data-table--sort
-    th
-    .#{$prefix}--table-sort {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
   // Sortable Short
   .#{$prefix}--data-table--short.#{$prefix}--data-table--sort th {
     height: rem(32px);
-  }
-
-  .#{$prefix}--data-table--short.#{$prefix}--data-table--sort
-    th
-    .#{$prefix}--table-sort {
-    padding-top: 0;
-    padding-bottom: 0;
   }
 
   // Sortable Tall
@@ -16789,29 +16801,19 @@ Data table sort styles
   .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
     th
     .#{$prefix}--table-sort {
-    padding-top: 0;
-    padding-bottom: 0;
+    display: inline-block;
+    height: rem(64px);
   }
 
   .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
     th
-    .#{$prefix}--table-sort
-    svg {
-    align-self: flex-start;
-    top: $spacing-03;
+    .#{$prefix}--table-sort__flex {
+    align-items: flex-start;
   }
 
-  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
-    th
-    .#{$prefix}--table-sort
-    .#{$prefix}--table-header-label {
-    align-self: flex-start;
-    position: relative;
-    top: rem(-8px);
-    max-height: 3rem;
-    display: -webkit-box; // weird text truncation style used
-    -webkit-line-clamp: 2; // because we need text to wrap
-    -webkit-box-orient: vertical; // can't use white-space: nowrap
+  .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon-unsorted,
+  .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon {
+    margin-top: rem(13px);
   }
 }
 ```
@@ -16823,9 +16825,9 @@ Data table sort styles
   - [prefix [variable]](#prefix-variable)
   - [layout-04 [variable]](#layout-04-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [spacing-05 [variable]](#spacing-05-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [layout-01 [variable]](#layout-01-variable)
 
@@ -16973,7 +16975,7 @@ Date picker styles
 
   .#{$prefix}--date-picker--range
     > .#{$prefix}--date-picker-container:first-child {
-    margin-right: rem(1px);
+    margin-right: rem(2px);
   }
 
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker-container,
@@ -18082,13 +18084,6 @@ Link styles
       @include focus-outline;
     }
 
-    &:not([href]):not(button) {
-      color: $disabled-02;
-      cursor: not-allowed;
-      pointer-events: none;
-      touch-action: none;
-    }
-
     &:visited {
       color: $link-01;
     }
@@ -18098,13 +18093,15 @@ Link styles
     }
   }
 
-  .#{$prefix}--link--disabled {
+  .#{$prefix}--link--disabled,
+  .#{$prefix}--link--disabled:hover {
     @include reset;
     @include type-style('body-short-01');
     display: inline;
     color: $disabled-02;
     font-weight: 400;
     cursor: not-allowed;
+    text-decoration: none;
   }
 
   .#{$prefix}--link.#{$prefix}--link--visited:visited {
@@ -18122,10 +18119,7 @@ Link styles
       color: $hover-primary-text;
     }
 
-    &:focus {
-      text-decoration: none;
-    }
-
+    &:focus,
     &:visited {
       text-decoration: none;
     }
@@ -18504,6 +18498,15 @@ List box styles
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
     height: 100%;
+  }
+
+  .#{$prefix}--dropdown--inline .#{$prefix}--list-box__field {
+    max-width: rem(480px);
+  }
+
+  .#{$prefix}--dropdown--inline .bx--list-box__menu {
+    min-width: rem(288px);
+    max-width: rem(480px);
   }
 
   // The field we use for input, showing selection, etc.
@@ -19051,7 +19054,7 @@ Loading styles
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba($ui-02, 0.6);
+    background-color: $overlay-01;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19077,7 +19080,7 @@ Loading styles
   - [loading\_\_gap [variable]](#loading__gap-variable)
   - [loading--small\_\_gap [variable]](#loading--small__gap-variable)
   - [ui-03 [variable]](#ui-03-variable)
-  - [ui-02 [variable]](#ui-02-variable)
+  - [overlay-01 [variable]](#overlay-01-variable)
 
 ### ❌animation\_\_loading--spin [mixin]
 
@@ -20846,19 +20849,22 @@ Pagination styles
     @include reset;
     @include type-style('body-short-01');
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
     background-color: $ui-01;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid $ui-03;
-    height: rem(48px);
+    min-height: rem(48px);
+
+    @include carbon--breakpoint('md') {
+      overflow: initial;
+    }
   }
 
   .#{$prefix}--pagination .#{$prefix}--select {
     height: 100%;
     align-items: center;
-    grid-template-columns: auto 0;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
@@ -20870,7 +20876,7 @@ Pagination styles
     @include type-style('body-short-01');
     width: auto;
     min-width: auto;
-    height: 100%;
+    height: rem(48px);
     padding: 0 2.25rem 0 $spacing-05;
   }
 
@@ -20898,7 +20904,7 @@ Pagination styles
   .#{$prefix}--pagination__left,
   .#{$prefix}--pagination__right {
     display: flex;
-    height: 100%;
+    height: rem(48px);
     align-items: center;
   }
 
@@ -20943,15 +20949,15 @@ Pagination styles
     background: none;
     cursor: pointer;
     height: 100%;
+    width: $carbon--spacing-09;
     margin: 0;
-    padding: 0 rem(14px);
     border-left: 1px solid $ui-03;
     display: flex;
     justify-content: center;
     align-items: center;
     fill: $ui-05;
-    transition: outline $duration--fast-02 motion(standard, productive);
-    transition: background-color $duration--fast-02 motion(standard, productive);
+    transition: outline $duration--fast-02 motion(standard, productive), background-color
+        $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--pagination__button:focus,
@@ -20981,37 +20987,6 @@ Pagination styles
     border-color: $ui-03;
   }
 
-  .#{$prefix}--pagination--inline {
-    height: rem(42px);
-    margin-top: -0.5rem;
-    margin-bottom: -0.5rem;
-    margin-right: -1rem;
-  }
-
-  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button,
-  .#{$prefix}--pagination--inline
-    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
-    height: rem(40px);
-    border-left: 1px solid $ui-03;
-    border-right: 1px solid $ui-03;
-    margin: 0;
-  }
-
-  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--forward,
-  .#{$prefix}--pagination--inline
-    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button--forward {
-    border-right: 0;
-    padding: 0 $carbon--spacing-05;
-    margin-left: $carbon--spacing-05;
-  }
-
-  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--backward,
-  .#{$prefix}--pagination--inline
-    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button--backward {
-    margin: 0 $carbon--spacing-05;
-    padding: 0 $carbon--spacing-05;
-  }
-
   // Skeleton state
   .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
     margin-right: 1rem;
@@ -21032,6 +21007,7 @@ Pagination styles
   - [hover-ui [variable]](#hover-ui-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-02 [variable]](#text-02-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
@@ -22913,7 +22889,7 @@ Tabs styles
     @include carbon--breakpoint(md) {
       display: flex;
       transition: inherit;
-      overflow-x: scroll;
+      overflow-x: auto;
       max-width: 100%;
       max-height: none;
     }

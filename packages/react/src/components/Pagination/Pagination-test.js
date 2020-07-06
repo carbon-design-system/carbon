@@ -313,11 +313,7 @@ describe('Pagination', () => {
 
         it('should hide text input if disabled', () => {
           const noTextInput = shallow(
-            <Pagination
-              pageSizes={[100]}
-              pagesUnknown={true}
-              pageInputDisabled={true}
-            />
+            <Pagination pageSizes={[100]} pagesUnknown={true} disabled={true} />
           );
           const right = noTextInput.find(
             `.${prefix}--pagination__right .${prefix}--text__input`
@@ -325,13 +321,13 @@ describe('Pagination', () => {
           expect(right.length).toEqual(0);
         });
 
-        it('should not append `pagination__button--no-index` class if input is disabled', () => {
+        it('should append `pagination__button--no-index` class if input is disabled', () => {
           const pagination = shallow(
             <Pagination
               page={2}
               pageSizes={[100]}
               pagesUnknown={true}
-              pageInputDisabled={true}
+              disabled={true}
             />
           );
           const forwardButton = pagination.find(
@@ -342,10 +338,10 @@ describe('Pagination', () => {
           );
           expect(
             backwardButton.hasClass(`${prefix}--pagination__button--no-index`)
-          ).toEqual(false);
+          ).toEqual(true);
           expect(
             forwardButton.hasClass(`${prefix}--pagination__button--no-index`)
-          ).toEqual(false);
+          ).toEqual(true);
         });
       });
 

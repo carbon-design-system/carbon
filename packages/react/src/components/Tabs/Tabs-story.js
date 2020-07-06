@@ -67,7 +67,9 @@ const props = {
   }),
 };
 
-const CustomLabel = ({ text }) => <>{text}</>;
+const CustomLabel = ({ text }) => {
+  text;
+};
 
 const CodeSnippetExample = () => (
   <CodeSnippet type="multi">
