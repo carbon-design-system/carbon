@@ -110,6 +110,7 @@ function MultiSelect({
   );
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--visually-hidden`]: !titleText,
   });
   const helperId = !helperText
     ? undefined
@@ -170,11 +171,9 @@ function MultiSelect({
 
   return (
     <div className={wrapperClasses}>
-      {titleText && (
-        <label className={titleClasses} {...getLabelProps()}>
-          {titleText}
-        </label>
-      )}
+      <label className={titleClasses} {...getLabelProps()}>
+        {titleText || label}
+      </label>
       <ListBox
         type={type}
         size={size}
