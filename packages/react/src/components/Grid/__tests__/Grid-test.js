@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { Grid } from '../';
 
 describe('Grid', () => {
-  afterEach(cleanup);
-
   it('should support a custom element as the root node', () => {
     const { container } = render(<Grid as="section" />);
     expect(container.firstChild.tagName).toBe('SECTION');
@@ -23,22 +21,21 @@ describe('Grid', () => {
   });
 
   it('should pass un-used props to the top-level node that is rendered', () => {
-    const { container } = render(<Grid id="test" />);
-    expect(container.firstChild.getAttribute('id')).toBe('test');
+    const { getByTestId } = render(<Grid data-testid="test" />);
+    expect(getByTestId('test')).toBeInTheDocument();
   });
 
   it('should render `children` that are given', () => {
-    const { container } = render(
+    const { getByTestId } = render(
       <Grid>
-        <span id="test">Test</span>
+        <span data-testid="test">Test</span>
       </Grid>
     );
-    const testNode = container.querySelector('#test');
-    expect(testNode).toBeInstanceOf(HTMLElement);
+    expect(getByTestId('test')).toBeInTheDocument();
   });
 
   it('should support setting the condensed class through the `condensed` prop', () => {
-    const { container } = render(<Grid condensed />);
+    const { container } = render(<Grid data-testid="test" condensed />);
     expect(container.firstChild.className).toEqual(
       expect.stringContaining('grid--condensed')
     );

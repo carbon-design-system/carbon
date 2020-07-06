@@ -438,6 +438,33 @@ function unstable_MyComponent() {
 </td></tr>
 </tbody></table>
 
+### Testing
+
+Tests for React components should include:
+
+- Automated accessibility checks with axe and `accessibility-checker`
+- Behavior end-to-end testing based on how a user will interact with the
+  component
+- Component API testing based on how a developer will use the component
+
+This creates the following test file structure:
+
+```js
+describe('<ComponentName>', () => {
+  it('should do this thing...', () => {
+    // ...
+  });
+
+  describe('Component API', () => {
+    //
+  });
+
+  describe('automated accessibility checks', () => {
+    //
+  });
+});
+```
+
 ## Sass
 
 ### Guidelines

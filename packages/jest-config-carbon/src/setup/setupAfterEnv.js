@@ -5,6 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+const {
+  toBeInTheDocument,
+  toHaveClass,
+} = require('@testing-library/jest-dom/matchers');
 const chalk = require('chalk');
 const util = require('util');
 const toHaveNoAxeViolations = require('../matchers/toHaveNoAxeViolations');
@@ -21,7 +25,12 @@ const toHaveNoDAPViolations = require('../matchers/toHaveNoDAPViolations');
 //
 // For more information, check out the docs here:
 // https://jestjs.io/docs/en/configuration.html#setupfilesafterenv-array
-expect.extend({ toHaveNoAxeViolations, toHaveNoDAPViolations });
+expect.extend({
+  toHaveNoAxeViolations,
+  toHaveNoDAPViolations,
+  toBeInTheDocument,
+  toHaveClass,
+});
 
 // Have our test suite throw an error if one of the below console methods are
 // called when we are not expecting them. This is often helpful for React
@@ -40,7 +49,7 @@ const consoleMethods = ['error', 'warn', process.env.CI && 'log'].filter(
 
 for (const methodName of consoleMethods) {
   const unexpectedConsoleCallStacks = [];
-  const newMethod = function (format, ...args) {
+  const newMethod = function(format, ...args) {
     const stack = new Error().stack;
     unexpectedConsoleCallStacks.push([
       stack.substr(stack.indexOf('\n') + 1),
@@ -65,7 +74,7 @@ for (const methodName of consoleMethods) {
           `${message}\n` +
           `${stack
             .split('\n')
-            .map((line) => chalk.gray(line))
+            .map(line => chalk.gray(line))
             .join('\n')}`
       );
       const message = `Expected test not to call ${chalk.bold(

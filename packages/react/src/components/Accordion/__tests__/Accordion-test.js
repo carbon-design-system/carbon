@@ -5,47 +5,64 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
+import { render } from '@testing-library/react';
 import { mount } from 'enzyme';
 import React from 'react';
 import { default as Accordion, AccordionItem } from '../';
 
 describe('Accordion', () => {
-  afterEach(cleanup);
+  describe('automated accessibility tests', () => {
+    it('should have no axe violations', async () => {
+      render(
+        <Accordion className="extra-class">
+          <AccordionItem className="child" title="Heading A">
+            Panel A
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading B">
+            Panel B
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading C">
+            Panel C
+          </AccordionItem>
+        </Accordion>
+      );
 
-  it('should render', () => {
-    const wrapper = mount(
-      <Accordion className="extra-class">
-        <AccordionItem className="child" title="Heading A">
-          Panel A
-        </AccordionItem>
-        <AccordionItem className="child" title="Heading B">
-          Panel B
-        </AccordionItem>
-        <AccordionItem className="child" title="Heading C">
-          Panel C
-        </AccordionItem>
-      </Accordion>
-    );
-
-    expect(wrapper).toMatchSnapshot();
+      await expect(document).toHaveNoAxeViolations();
+    });
   });
 
-  it('should have no AVT1 violations', async () => {
-    render(
-      <Accordion className="extra-class">
-        <AccordionItem className="child" title="Heading A">
-          Panel A
-        </AccordionItem>
-        <AccordionItem className="child" title="Heading B">
-          Panel B
-        </AccordionItem>
-        <AccordionItem className="child" title="Heading C">
-          Panel C
-        </AccordionItem>
-      </Accordion>
-    );
+  describe('Component API', () => {
+    it('should support a custom class name on the root node', () => {
+      const { container } = render(<Accordion className="test" />);
+      expect(container.firstChild).toHaveClass('test');
+    });
 
-    await expect(document).toHaveNoAxeViolations();
+    it('should spread extra props on the root node', () => {
+      const { getByTestId } = render(<Accordion data-testid="test" />);
+      expect(getByTestId('test')).toBeInTheDocument();
+    });
+
+    it('should support accordion title and chevron alignment with `align`', () => {
+      const { container: start } = render(<Accordion align="start" />);
+      expect(start.firstChild.className).toEqual(
+        expect.stringContaining('--accordion--start')
+      );
+
+      const { container: end } = render(<Accordion align="end" />);
+      expect(end.firstChild.className).toEqual(
+        expect.stringContaining('--accordion--end')
+      );
+
+      // By default it should use `end`
+      const { container } = render(<Accordion />);
+      expect(container.firstChild.className).toEqual(
+        expect.stringContaining('--accordion--end')
+      );
+    });
+
+    it.todo('align');
+    it.todo('children');
+    it.todo('object spread');
+    it.todo('ref?');
   });
 });

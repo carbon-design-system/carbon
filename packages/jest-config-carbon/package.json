@@ -15,6 +15,8 @@
   ],
   "dependencies": {
     "@ibma/aat": "https://able.ibm.com/tools/dist/ibma-aat-2.0.6.tgz",
+    "@testing-library/jest-dom": "^5.11.0",
+    "@testing-library/react": "^10.4.4",
     "axe-core": "^3.3.2",
     "chalk": "^2.4.2",
     "enzyme": "^3.10.0",

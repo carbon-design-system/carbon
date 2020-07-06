@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
+import { render } from '@testing-library/react';
 import { settings } from 'carbon-components';
 import React from 'react';
 import { Column } from '../';
@@ -13,8 +13,6 @@ import { Column } from '../';
 const { prefix } = settings;
 
 describe('Column', () => {
-  afterEach(cleanup);
-
   it('should support a custom element as the root node', () => {
     const { container } = render(<Column as="section" />);
     expect(container.firstChild.tagName).toBe('SECTION');
@@ -88,7 +86,7 @@ describe('Column', () => {
 
   it.each(['sm', 'md', 'lg', 'xlg', 'max'])(
     'should support specifying column span and offset as an object for breakpoint %s',
-    (breakpoint) => {
+    breakpoint => {
       const { container } = render(
         React.createElement(Column, {
           [breakpoint]: {
