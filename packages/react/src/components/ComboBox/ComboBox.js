@@ -180,6 +180,9 @@ export default class ComboBox extends React.Component {
      * Specify the direction of the combobox dropdown. Can be either top or bottom.
      */
     direction: PropTypes.oneOf(['top', 'bottom']),
+
+    titleText: PropTypes.string,
+    helperText: PropTypes.string,
   };
 
   static defaultProps = {

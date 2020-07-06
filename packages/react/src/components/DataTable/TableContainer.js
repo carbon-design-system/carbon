@@ -55,6 +55,11 @@ TableContainer.propTypes = {
    * Optional description text for the Table
    */
   description: PropTypes.node,
+
+  /**
+   * Specify whether the table should have a sticky header
+   */
+  stickyHeader: PropTypes.bool,
 };
 
 export default TableContainer;

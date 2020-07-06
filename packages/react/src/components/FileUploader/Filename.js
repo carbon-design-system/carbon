@@ -65,6 +65,11 @@ Filename.propTypes = {
    * Provide a custom tabIndex value for the <Filename>
    */
   tabIndex: PropTypes.string,
+
+  /**
+   * Specify if the file is invalid
+   */
+  invalid: PropTypes.bool,
 };
 
 Filename.defaultProps = {
