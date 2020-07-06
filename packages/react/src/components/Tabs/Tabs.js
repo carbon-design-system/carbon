@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
 import { keys, match, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
@@ -86,8 +87,10 @@ export default class Tabs extends React.Component {
   };
 
   state = {
-    dropdownHidden: true,
+    horizontalOverflow: false,
   };
+
+  tablist = React.createRef();
 
   static getDerivedStateFromProps({ selected }, state) {
     const { prevSelected } = state;
@@ -157,18 +160,15 @@ export default class Tabs extends React.Component {
       if (matches(evt, [keys.Enter, keys.Space])) {
         this.selectTabAt(index, onSelectionChange);
       }
-
-      if (window.matchMedia('(min-width: 42rem)').matches) {
-        const nextIndex = this.getNextIndex(index, this.getDirection(evt));
-        const tab = this.getTabAt(nextIndex);
-        if (tab && matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
-          evt.preventDefault();
-          if (this.props.selectionMode !== 'manual') {
-            this.selectTabAt(nextIndex, onSelectionChange);
-          }
-          if (tab.tabAnchor) {
-            tab.tabAnchor.focus();
-          }
+      const nextIndex = this.getNextIndex(index, this.getDirection(evt));
+      const tab = this.getTabAt(nextIndex);
+      if (tab && matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
+        evt.preventDefault();
+        if (this.props.selectionMode !== 'manual') {
+          this.selectTabAt(nextIndex, onSelectionChange);
+        }
+        if (tab.tabAnchor) {
+          tab.tabAnchor.focus();
         }
       }
     };
@@ -250,14 +250,32 @@ export default class Tabs extends React.Component {
         [`${prefix}--tabs--container`]: type === 'container',
       }),
       tablist: classNames(`${prefix}--tabs__nav`),
+      leftOverflowButtonClasses: classNames({
+        [`${prefix}--tab--overflow-nav-button`]: this.state.horizontalOverflow,
+        [`${prefix}--tab--overflow-nav-button--hidden`]:
+          !this.state.horizontalOverflow || !this.state.tablistScrollLeft,
+      }),
+      rightOverflowButtonClasses: classNames({
+        [`${prefix}--tab--overflow-nav-button`]: this.state.horizontalOverflow,
+        [`${prefix}--tab--overflow-nav-button--hidden`]:
+          !this.state.horizontalOverflow ||
+          this.state.tablistScrollLeft + this.state.tablistClientWidth ===
+            this.state.tablistScrollWidth,
+      }),
     };
 
     return (
       <>
         <div {...other} className={classes.tabs} role={role}>
-          <ul role="tablist" className={classes.tablist}>
+          <button className={classes.leftOverflowButtonClasses}>
+            <ChevronLeft16 />
+          </button>
+          <ul role="tablist" className={classes.tablist} ref={this.tablist}>
             {tabsWithProps}
           </ul>
+          <button className={classes.rightOverflowButtonClasses}>
+            <ChevronRight16 />
+          </button>
         </div>
         {tabContentWithProps}
       </>

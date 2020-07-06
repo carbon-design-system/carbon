@@ -21,7 +21,7 @@
   .#{$prefix}--tabs {
     @include reset;
     @include type-style('body-short-01');
-
+    display: flex;
     color: $text-01;
     height: auto;
     width: 100%;
@@ -43,6 +43,30 @@
     transition: max-height $duration--fast-01 motion(standard, productive);
     overflow: hidden;
     overflow-x: auto;
+  }
+
+  //-----------------------------
+  // Overflow Buttons
+  //-----------------------------
+  .#{$prefix}--tab--overflow-nav-button {
+    @include button-reset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $carbon--spacing-08;
+    flex-shrink: 0;
+
+    &:first-of-type {
+      margin-right: $carbon--spacing-03;
+    }
+
+    &:last-of-type {
+      margin-left: $carbon--spacing-03;
+    }
+  }
+
+  .#{$prefix}--tab--overflow-nav-button--hidden {
+    display: none;
   }
 
   //-----------------------------
