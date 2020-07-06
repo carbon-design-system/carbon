@@ -16,7 +16,6 @@ import DataTable, {
   TableHeader,
   TableRow,
 } from '../../DataTable';
-import './with-boolean-column-story.scss';
 
 const initialRows = [
   {

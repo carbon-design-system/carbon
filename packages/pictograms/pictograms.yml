@@ -373,6 +373,11 @@
     - construct
 - name: consumer--engagement--food--journey
   friendly_name: Consumer engagement food journey
+- name: contract
+  friendly_name: Contract
+  aliases:
+    - contract
+    - agreement
 - name: conversation
   friendly_name: Conversation
   aliases:
