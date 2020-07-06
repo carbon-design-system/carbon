@@ -4,6 +4,13 @@
   friendly_name: Add device
   aliases:
     - add device
+- name: add--document
+  friendly_name: Add document
+  aliases:
+    - document
+    - new
+    - additional
+    - add
 - name: advocate
   friendly_name: Advocate
   aliases:
@@ -748,6 +755,13 @@
   aliases: []
 - name: high--five
   friendly_name: High five
+- name: hills
+  friendly_name: Hills
+  aliases:
+    - hill
+    - summit
+    - mountain
+    - goal
 - name: home--front
   friendly_name: Home front
 - name: home--garage
@@ -1187,6 +1201,14 @@
     - question
 - name: question--and--answer
   friendly_name: Question and answer
+- name: racetrack
+  friendly_name: Racetrack
+  aliases:
+    - race
+    - run
+    - sprint
+    - win
+    - speed
 - name: rainy
   friendly_name: Rainy
   aliases:

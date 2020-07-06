@@ -4,6 +4,7 @@ exports[`@carbon/pictograms should not update exports without a semver change 1`
 Array [
   "ActiveServer",
   "AddDevice",
+  "AddDocument",
   "Advocate",
   "Agriculture",
   "AirConditioner",
@@ -262,6 +263,7 @@ Array [
   "HeatMap",
   "HeatMap_02",
   "HighFive",
+  "Hills",
   "HomeFront",
   "HomeGarage",
   "HomeProfile",
@@ -410,6 +412,7 @@ Array [
   "QrCode",
   "Question",
   "QuestionAndAnswer",
+  "Racetrack",
   "Rainy",
   "RainyHeavy",
   "Rank",
