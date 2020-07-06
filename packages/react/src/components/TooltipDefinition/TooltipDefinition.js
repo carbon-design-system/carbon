@@ -97,6 +97,11 @@ TooltipDefinition.propTypes = {
   children: PropTypes.string.isRequired,
 
   /**
+   * Specify an optional className to be applied to the container node
+   */
+  className: PropTypes.string,
+
+  /**
    * The CSS class name of the trigger element
    */
   triggerClassName: PropTypes.string,
@@ -123,6 +128,21 @@ TooltipDefinition.propTypes = {
    * TODO: rename this prop (will be a breaking change)
    */
   tooltipText: PropTypes.node.isRequired,
+
+  /**
+   * The event handler for the `focus` event.
+   */
+  onFocus: PropTypes.func,
+
+  /**
+   * The event handler for the `mouseenter` event.
+   */
+  onMouseEnter: PropTypes.func,
+
+  /**
+   * The event handler for the `mouseleave` event.
+   */
+  onMouseLeave: PropTypes.func,
 };
 
 TooltipDefinition.defaultProps = {

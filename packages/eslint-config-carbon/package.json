@@ -1,11 +1,17 @@
 {
   "name": "eslint-config-carbon",
   "private": true,
-  "version": "10.7.0",
+  "version": "2.0.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/eslint-config-carbon",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "files": [
+    "plugins",
+    "index.js",
+    "react.js",
+    "vanilla.js"
+  ],
   "keywords": [
     "ibm",
     "carbon",
@@ -29,7 +35,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.18.0",
-    "eslint-plugin-react-hooks": "^2.3.0",
+    "eslint-plugin-react-hooks": "^4.0.4",
     "eslint-restricted-globals": "^0.2.0"
   }
 }
