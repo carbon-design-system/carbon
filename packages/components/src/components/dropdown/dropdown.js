@@ -233,7 +233,9 @@ class Dropdown extends mixin(
         if (triggerNode) {
           triggerNode.setAttribute('aria-expanded', 'true');
         }
-        (listNode || this.element).focus();
+
+        this.element.focus();
+
         if (listNode) {
           const selectedNode = listNode.querySelector(
             this.options.selectorLinkSelected
