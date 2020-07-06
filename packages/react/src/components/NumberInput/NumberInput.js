@@ -282,6 +282,7 @@ class NumberInput extends Component {
       ariaLabel,
       light,
       allowEmpty,
+      // eslint-disable-next-line react/prop-types
       innerRef: ref,
       translateWithId: t,
       isMobile,

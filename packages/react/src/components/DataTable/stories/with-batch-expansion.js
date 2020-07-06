@@ -21,7 +21,7 @@ import DataTable, {
 import { initialRows, headers } from './shared';
 import './with-expansion-story.scss';
 
-export default (props) => (
+const BatchExpansionStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}
@@ -46,8 +46,8 @@ export default (props) => (
                 enableExpando={true}
                 {...getExpandHeaderProps()}
               />
-              {headers.map((header) => (
-                <TableHeader {...getHeaderProps({ header })}>
+              {headers.map((header, i) => (
+                <TableHeader key={i} {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
@@ -75,3 +75,5 @@ export default (props) => (
     )}
   />
 );
+
+export default BatchExpansionStory;
