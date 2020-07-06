@@ -232,6 +232,42 @@ export default class Tabs extends React.Component {
     }
   };
 
+  handleOverflowNavButtonClick = (event, { direction }) => {
+    const nextIndex = this.getNextIndex(this.state.selected, direction);
+    const { tabAnchor } = this.getTabAt(nextIndex);
+    const {
+      offsetLeft: selectedTabLeftBound,
+      clientWidth: selectedTabClientWidth,
+    } = tabAnchor;
+    const {
+      clientWidth: tablistClientWidth,
+      scrollLeft: tablistLeftBound,
+    } = this.tablist.current;
+    const tablistRightBound = tablistLeftBound + tablistClientWidth;
+    const selectedTabRightBound = selectedTabLeftBound + selectedTabClientWidth;
+    const OVERFLOW_BUTTON_OFFSET = 48;
+    this.selectTabAt(nextIndex, this.props.onSelectionChange);
+    if (selectedTabLeftBound < tablistLeftBound) {
+      this.tablist.current.scrollLeft =
+        selectedTabLeftBound - OVERFLOW_BUTTON_OFFSET;
+      if (!this.tablist.current.scrollLeft) {
+        tabAnchor.focus();
+      }
+    }
+    if (selectedTabRightBound > tablistRightBound) {
+      this.tablist.current.scrollLeft =
+        selectedTabRightBound - tablistClientWidth + OVERFLOW_BUTTON_OFFSET;
+      if (
+        this.tablist.current.scrollLeft >=
+        this.state.tablistScrollWidth - tablistClientWidth
+      ) {
+        tabAnchor.focus();
+      }
+    }
+
+    this.handleTabKeyDown(nextIndex, event);
+  };
+
   render() {
     const {
       className,
@@ -318,13 +354,21 @@ export default class Tabs extends React.Component {
           className={classes.tabs}
           role={role}
           onScroll={this.handleScroll}>
-          <button className={classes.leftOverflowButtonClasses}>
+          <button
+            className={classes.leftOverflowButtonClasses}
+            onClick={(event) =>
+              this.handleOverflowNavButtonClick(event, { direction: -1 })
+            }>
             <ChevronLeft16 />
           </button>
           <ul role="tablist" className={classes.tablist} ref={this.tablist}>
             {tabsWithProps}
           </ul>
-          <button className={classes.rightOverflowButtonClasses}>
+          <button
+            className={classes.rightOverflowButtonClasses}
+            onClick={(event) =>
+              this.handleOverflowNavButtonClick(event, { direction: 1 })
+            }>
             <ChevronRight16 />
           </button>
         </div>
