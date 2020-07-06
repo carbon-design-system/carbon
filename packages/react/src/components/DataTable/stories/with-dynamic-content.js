@@ -36,7 +36,7 @@ import DataTable, {
 import { batchActionClick, initialRows, headers } from './shared';
 import './with-dynamic-content-story.scss';
 
-export default (props) => {
+const DynamicContentStory = (props) => {
   const insertInRandomPosition = (array, element) => {
     const index = Math.floor(Math.random() * (array.length + 1));
     return [...array.slice(0, index), element, ...array.slice(index)];
@@ -160,8 +160,8 @@ export default (props) => {
                   <TableRow>
                     <TableExpandHeader />
                     <TableSelectAll {...getSelectionProps()} />
-                    {headers.map((header) => (
-                      <TableHeader {...getHeaderProps({ header })}>
+                    {headers.map((header, i) => (
+                      <TableHeader key={i} {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
@@ -194,3 +194,5 @@ export default (props) => {
   }
   return <DynamicRows {...props} />;
 };
+
+export default DynamicContentStory;

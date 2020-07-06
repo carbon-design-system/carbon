@@ -186,7 +186,7 @@ storiesOf('TextInput', module)
         aria-label="loading text input"
         aria-live="assertive"
         role="status"
-        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+        tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
       >
         <TextInputSkeleton />
         <br />

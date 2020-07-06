@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 
 export default class WithState extends React.PureComponent {
   static propTypes = {
+    children: PropTypes.func.isRequired,
     initialState: PropTypes.object,
   };
 

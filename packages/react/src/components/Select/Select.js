@@ -97,16 +97,14 @@ const Select = React.forwardRef(function Select(
           </label>
         )}
         {inline && (
-          <>
-            <div className={`${prefix}--select-input--inline__wrapper`}>
-              <div
-                className={`${prefix}--select-input__wrapper`}
-                data-invalid={invalid || null}>
-                {input}
-              </div>
-              {error}
+          <div className={`${prefix}--select-input--inline__wrapper`}>
+            <div
+              className={`${prefix}--select-input__wrapper`}
+              data-invalid={invalid || null}>
+              {input}
             </div>
-          </>
+            {error}
+          </div>
         )}
         {!inline && (
           <div

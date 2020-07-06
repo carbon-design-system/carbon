@@ -22,7 +22,7 @@ import DataTable, {
 } from '../../DataTable';
 import { initialRows, headers } from './shared';
 
-export default (props) => (
+const ExpansionStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}
@@ -43,8 +43,8 @@ export default (props) => (
           <TableHead>
             <TableRow>
               <TableExpandHeader />
-              {headers.map((header) => (
-                <TableHeader {...getHeaderProps({ header })}>
+              {headers.map((header, i) => (
+                <TableHeader key={i} {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
@@ -72,3 +72,5 @@ export default (props) => (
     )}
   />
 );
+
+export default ExpansionStory;

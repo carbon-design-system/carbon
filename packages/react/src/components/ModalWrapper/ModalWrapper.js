@@ -36,6 +36,8 @@ export default class ModalWrapper extends React.Component {
     triggerButtonIconDescription: PropTypes.string,
     triggerButtonKind: PropTypes.oneOf(ButtonKinds),
     shouldCloseAfterSubmit: PropTypes.bool,
+    onKeyDown: PropTypes.func,
+    selectorPrimaryFocus: PropTypes.string,
   };
 
   static defaultProps = {
