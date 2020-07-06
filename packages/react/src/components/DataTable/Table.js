@@ -86,6 +86,11 @@ Table.propTypes = {
    * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
    */
   overflowMenuOnHover: PropTypes.bool,
+
+  /**
+   * Pass in the children that will be rendered within the Table
+   */
+  children: PropTypes.node,
 };
 
 Table.defaultProps = {

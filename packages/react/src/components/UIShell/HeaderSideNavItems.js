@@ -39,6 +39,11 @@ HeaderSideNavItems.propTypes = {
    * between original sidenav items and header menu items. False by default.
    */
   hasDivider: PropTypes.bool,
+
+  /**
+   * The child nodes to be rendered
+   */
+  children: PropTypes.node,
 };
 
 HeaderSideNavItems.defaultProps = {

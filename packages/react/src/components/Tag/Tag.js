@@ -120,6 +120,11 @@ Tag.propTypes = {
    * Click handler for filter tag close button.
    */
   onClose: PropTypes.func,
+
+  /**
+   * Specify the id for the tag.
+   */
+  id: PropTypes.string,
 };
 
 export const types = Object.keys(TYPES);

@@ -130,6 +130,21 @@ export default class DataTable extends React.Component {
      * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
      */
     overflowMenuOnHover: PropTypes.bool,
+
+    /**
+     * `true` to add useZebraStyles striping.
+     */
+    useZebraStyles: PropTypes.bool,
+
+    /**
+     * `false` If true, will use a width of 'auto' instead of 100%
+     */
+    useStaticWidth: PropTypes.bool,
+
+    /**
+     * `false` If true, will remove the table border
+     */
+    shouldShowBorder: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -239,7 +254,9 @@ export default class DataTable extends React.Component {
       onExpand: composeEventHandlers([
         this.handleOnExpandAll,
         onClick
-          ? this.handleOnExpandHeaderClick(onClick, { isExpanded })
+          ? this.handleOnExpandHeaderClick(onClick, {
+              isExpanded,
+            })
           : null,
       ]),
     };
@@ -619,6 +636,7 @@ export default class DataTable extends React.Component {
   };
 
   render() {
+    // eslint-disable-next-line react/prop-types
     const { children, filterRows, headers, render } = this.props;
     const { filterInputValue, rowIds, rowsById, cellsById } = this.state;
     const filteredRowIds =
