@@ -323,6 +323,8 @@ categories:
       - pill--bottle--01
       - pills
       - stethoscope
+      - x-ray--01
+      - x-ray--02
   - name: Home
     members:
       - door--handle

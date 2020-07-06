@@ -1736,6 +1736,20 @@
   aliases: []
 - name: wrecking--ball
   friendly_name: Wrecking ball
+- name: x-ray--01
+  friendly_name: X-ray 01
+  aliases:
+    - x-ray
+    - imaging
+    - radiograph
+    - scan
+- name: x-ray--02
+  friendly_name: X-ray 02
+  aliases:
+    - x-ray
+    - imaging
+    - radiograph
+    - scan
 - name: yoga--01
   friendly_name: Yoga 01
 - name: yoga--02
