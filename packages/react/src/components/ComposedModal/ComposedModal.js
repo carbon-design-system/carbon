@@ -66,6 +66,22 @@ export default class ComposedModal extends Component {
     selectorPrimaryFocus: PropTypes.string,
 
     /**
+     * Specify the CSS selectors that match the floating menus
+     */
+    selectorsFloatingMenus: PropTypes.string,
+
+    /**
+     * Specify the content to be placed in the ComposedModal
+     */
+    children: PropTypes.node,
+
+    /**
+     * Specify whether the primary button should be replaced with danger button.
+     * Note that this prop is not applied if you render primary/danger button by yourself
+     */
+    danger: PropTypes.bool,
+
+    /**
      * Specify the size variant.
      */
     size: PropTypes.oneOf(['xs', 'sm', 'lg']),
@@ -423,6 +439,11 @@ ModalBody.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify the content to be placed in the ModalBody
+   */
+  children: PropTypes.node,
+
+  /**
    * Provide whether the modal content has a form element.
    * If `true` is used here, non-form child content should have `bx--modal-content__regular-content` class.
    */
@@ -501,6 +522,16 @@ export class ModalFooter extends Component {
      * Pass in content that will be rendered in the Modal Footer
      */
     children: PropTypes.node,
+
+    /**
+     * The `ref` callback for the primary button.
+     */
+    inputref: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({
+        current: PropTypes.any,
+      }),
+    ]),
   };
 
   static defaultProps = {
@@ -526,6 +557,7 @@ export class ModalFooter extends Component {
       onRequestSubmit, // eslint-disable-line
       children,
       danger,
+      inputref,
       ...other
     } = this.props;
 
@@ -559,7 +591,7 @@ export class ModalFooter extends Component {
             className={primaryClass}
             disabled={primaryButtonDisabled}
             kind={danger ? 'danger' : 'primary'}
-            ref={this.props.inputref}>
+            ref={inputref}>
             {primaryButtonText}
           </Button>
         )}

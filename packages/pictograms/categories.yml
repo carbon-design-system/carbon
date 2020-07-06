@@ -227,6 +227,7 @@ categories:
       - design--and--development--01
       - design--and--development--02
       - feedback
+      - hills
       - idea
       - ideate
       - path
@@ -284,6 +285,7 @@ categories:
       - police
   - name: File
     members:
+      - add--document
       - contract
       - document--security
       - duplicate--file
@@ -325,6 +327,8 @@ categories:
       - pill--bottle--01
       - pills
       - stethoscope
+      - x-ray--01
+      - x-ray--02
   - name: Home
     members:
       - door--handle
@@ -418,6 +422,7 @@ categories:
       - flower--01
       - flower--02
       - perfume
+      - racetrack
       - scale
       - soft--ice--cream
       - sports

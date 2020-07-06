@@ -64,6 +64,7 @@ function RadioTile({
         onChange={handleOnChange}
         id={inputId}
       />
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <label
         htmlFor={inputId}
         className={classes}
@@ -83,6 +84,11 @@ RadioTile.propTypes = {
    * `true` if this tile should be selected.
    */
   checked: PropTypes.bool,
+
+  /**
+   * The tile content.
+   */
+  children: PropTypes.node,
 
   /**
    * The CSS class names.

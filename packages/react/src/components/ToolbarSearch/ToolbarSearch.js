@@ -53,6 +53,16 @@ export default class ToolbarSearch extends Component {
      * The ID of the `<input>`.
      */
     id: PropTypes.string,
+
+    /**
+     * Optional prop to specify the role of the ToolbarSearch
+     */
+    role: PropTypes.string,
+
+    /**
+     * The ID of the `<label>`.
+     */
+    labelId: PropTypes.string,
   };
 
   static defaultProps = {

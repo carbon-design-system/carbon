@@ -105,6 +105,11 @@ ToggleSmall.propTypes = {
   onToggle: PropTypes.func,
 
   /**
+   * Provide an optional hook that is called when the control is changed
+   */
+  onChange: PropTypes.func,
+
+  /**
    * The `id` attribute for the toggle
    */
   id: PropTypes.string.isRequired,

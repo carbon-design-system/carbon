@@ -47,6 +47,11 @@ SideNavHeader.propTypes = {
    * keep local state and styling in step with the SideNav expansion state.
    */
   isSideNavExpanded: PropTypes.bool,
+
+  /**
+   * The child nodes to be rendered
+   */
+  children: PropTypes.node,
 };
 
 export default SideNavHeader;
