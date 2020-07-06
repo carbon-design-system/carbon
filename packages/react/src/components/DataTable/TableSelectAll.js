@@ -72,6 +72,11 @@ TableSelectAll.propTypes = {
    * The CSS class names of the cell that wraps the underlying input control
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the checkbox input should be disabled
+   */
+  disabled: PropTypes.bool,
 };
 
 TableSelectAll.defaultProps = {

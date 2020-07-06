@@ -97,6 +97,7 @@ function FileUploaderDropContainer({
         setActive(false);
         handleChange(evt);
       }}>
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <label
         className={labelClasses}
         htmlFor={uid}
