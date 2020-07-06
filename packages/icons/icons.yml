@@ -5140,14 +5140,9 @@
 - name: home
   friendly_name: Home
   aliases:
-    - detecting
-    - ear
-    - headphones
-    - headset
-    - listen
-    - auditory
-    - perception
-    - senses
+  - home
+  - start
+  - main
   sizes:
     - 32
 - name: hospital
@@ -5269,38 +5264,47 @@
     - cloud
     - hybrid
     - service
-    - offerring
+    - offering
     - online
     - internet
     - brand
+    - smart rays
+    - IBM Cloud
   sizes:
     - 32
 - name: ibm-security
-  friendly_name: IBM Security
+  friendly_name: IBM Security™
   aliases:
     - safe
     - cyber security
     - hacking
     - data security
-    - offerring
+    - offering
     - product
     - protection
     - cyber crime
     - cyber
     - secure
+    - IBM Security
   sizes:
     - 32
 - name: iCA-2D
-  friendly_name: iCA 2D
+  friendly_name: ICA 2D
   aliases:
-    - iCA-2D
+    - ICA 2D
+    - component
+    - analysis
+    - independent
   sizes:
     - 32
 - name: iD
-  friendly_name: iD
+  friendly_name: ID
   aliases:
     - identification
     - identity
+    - user ID
+    - name tag
+    - badge
   sizes:
     - 32
 - name: idea
@@ -5315,6 +5319,7 @@
     - opinion
     - intention
     - design
+    - idea
   sizes:
     - 32
 - name: identification
@@ -5327,6 +5332,8 @@
     - badge
     - papers
     - avatar
+    - user
+    - name
   sizes:
     - 32
 - name: image
@@ -5340,6 +5347,9 @@
     - portrait
     - likeness
     - avatar
+    - photograph
+    - photo
+    - image
   sizes:
     - 32
 - name: image--medical
@@ -5355,14 +5365,28 @@
     - portrait
     - likeness
     - avatar
+    - xray
+    - MRI
+    - CT scan
+    - image
+    - medical
 - name: image--reference
   friendly_name: image--reference
   aliases: []
   sizes:
     - 32
 - name: image--search
-  friendly_name: image--search
-  aliases: []
+  friendly_name: Image search
+  aliases:
+  - review
+  - find
+  - study
+  - detail
+  - search
+  - image
+  - photograph
+  - photo
+  - picture
   sizes:
     - 32
 - name: improve-relevance
@@ -5370,11 +5394,21 @@
   aliases:
     - target
     - bullseye
+    - relevant
+    - improve
+    - relevance
   sizes:
     - 32
 - name: in-progress
-  friendly_name: in-progress
-  aliases: []
+  friendly_name: In progress
+  aliases:
+  - processing
+  - searching
+  - wait
+  - timer
+  - timing
+  - time
+  - in progress
   sizes:
     - 32
 - name: in-progress--error
@@ -5410,7 +5444,9 @@
 - name: increase-level
   friendly_name: Increase level
   aliases:
-    - increase-level
+    - increase level
+    - rise
+    - rising
   sizes:
     - 32
 - name: industry
@@ -5424,6 +5460,9 @@
     - line of work
     - job
     - career
+    - factory
+    - manufacturing
+    - industry
   sizes:
     - 32
 - name: information
@@ -5434,6 +5473,7 @@
     - more
     - tip
     - help
+    - information
   sizes:
     - 16
     - 32
@@ -5447,14 +5487,33 @@
     - more
     - tip
     - help
+    - information filled
+    - filled
 - name: information--square
-  friendly_name: information--square
-  aliases: []
+  friendly_name: Information square
+  aliases:
+    - info
+    - learn
+    - more
+    - tip
+    - help
+    - information square
+    - information
+    - square
   sizes:
     - 32
 - name: information--square--filled
-  friendly_name: information--square--filled
-  aliases: []
+  friendly_name: Information square filled
+  aliases:
+    - info
+    - learn
+    - more
+    - tip
+    - help
+    - information square filled
+    - information
+    - square
+    - filled
   sizes:
     - 32
 - name: insert
@@ -5467,11 +5526,17 @@
     - inject
     - include
     - infuse
+    - insert
   sizes:
     - 32
 - name: insert--page
-  friendly_name: insert--page
-  aliases: []
+  friendly_name: Insert page
+  aliases:
+  - add page
+  - include
+  - insert page
+  - page
+  - insert
   sizes:
     - 32
 - name: integration
@@ -5484,19 +5549,26 @@
     - combination
     - combine
     - union
+    - join
+    - integration
   sizes:
     - 32
 - name: interactions
   friendly_name: Interactions
   aliases:
-    - statistics interaction
+    - statistics interactions
+    - statistic
+    - interactions
   sizes:
     - 16
     - 32
 - name: interactive-segmentation-cursor
   friendly_name: Interactive segmentation cursor
   aliases:
-    - interactive-segmentation-cursor
+    - interactive segmentation cursor
+    - healthcare
+    - segmentation
+    - cursor
   sizes:
     - 32
 - name: inventory-management
@@ -5510,6 +5582,7 @@
     - analytics
     - administration
     - oversight
+    - count
   sizes:
     - 32
 - name: iot--connect
@@ -5530,6 +5603,7 @@
     - smart devices
     - connect
     - platform
+    - ML
 - name: iot--platform
   friendly_name: IoT platform
   sizes:
@@ -5548,6 +5622,7 @@
     - smart devices
     - connect
     - platform
+    - ML
 - name: ISO
   friendly_name: ISO
   aliases:
@@ -5555,6 +5630,10 @@
     - sensitivity
     - light
     - camera
+    - archive
+    - backup
+    - file set
+    - ISO
   sizes:
     - 32
 - name: ISO--filled
@@ -5566,6 +5645,11 @@
     - sensitivity
     - light
     - camera
+    - archive
+    - backup
+    - file set
+    - ISO
+    - filled
 - name: ISO--outline
   friendly_name: ISO outline
   sizes:
@@ -5575,24 +5659,37 @@
     - sensitivity
     - light
     - camera
+    - archive
+    - backup
+    - file set
+    - ISO
+    - outline
 - name: join--inner
-  friendly_name: join--inner
-  aliases: []
+  friendly_name: Join inner
+  aliases:
+  - join
+  - inner
   sizes:
     - 32
 - name: join--left
-  friendly_name: join--left
-  aliases: []
+  friendly_name: Join left
+  aliases:
+  - join
+  - left
   sizes:
     - 32
 - name: join--outer
-  friendly_name: join--outer
-  aliases: []
+  friendly_name: Join outer
+  aliases:
+  - join
+  - outer
   sizes:
     - 32
 - name: join--right
-  friendly_name: join--right
-  aliases: []
+  friendly_name: Join right
+  aliases:
+  - join
+  - right
   sizes:
     - 32
 - name: JPG
@@ -5606,6 +5703,9 @@
     - photo
     - image
     - compress
+    - JPG
+    - photograph
+    - compression
   sizes:
     - 32
 - name: JSON
@@ -5618,6 +5718,7 @@
     - type
     - format
     - data
+    - JSON
   sizes:
     - 32
 - name: JSON--reference
@@ -5628,7 +5729,11 @@
 - name: jump-link
   friendly_name: Jump link
   aliases:
-    - jump-link
+    - jump link
+    - link
+    - go
+    - open
+
   sizes:
     - 32
 - name: keyboard
@@ -5653,6 +5758,8 @@
   friendly_name: Laptop
   aliases:
     - laptop
+    - notebook
+    - computer
   sizes:
     - 32
 - name: lasso
@@ -5701,6 +5808,9 @@
   friendly_name: Legend
   aliases:
     - legend
+    - map
+    - markings
+    - interpret
   sizes:
     - 32
 - name: letter--Aa
@@ -5936,10 +6046,14 @@
     - glow
     - luminous
     - lamp
+    - filled
 - name: lightning
   friendly_name: Lightning
   aliases:
     - lightning
+    - flash
+    - electricity
+    - power
   sizes:
     - 32
 - name: link
@@ -6043,6 +6157,7 @@
     - pin
     - site
     - area
+    - legend
   sizes:
     - 32
 - name: locked
@@ -6146,8 +6261,14 @@
     - tag
     - identification
 - name: logo--jupyter
-  friendly_name: logo--jupyter
-  aliases: []
+  friendly_name: Logo Jupyter
+  aliases:
+  - open source
+  - interactive
+  - programming
+  - application
+  - web
+  - development
   sizes:
     - 32
 - name: logo--linkedin
@@ -6216,8 +6337,12 @@
     - tag
     - identification
 - name: logo--python
-  friendly_name: logo--python
-  aliases: []
+  friendly_name: Logo Python
+  aliases:
+  - python
+  - programming
+  - language
+  - logotype
   sizes:
     - 32
 - name: logo--quora
@@ -6234,8 +6359,16 @@
     - tag
     - identification
 - name: logo--r-script
-  friendly_name: logo--r-script
-  aliases: []
+  friendly_name: Logo R script
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
   sizes:
     - 32
 - name: logo--skype
@@ -6415,6 +6548,7 @@
   friendly_name: Machine learning
   aliases:
     - machine-learning
+    - ML
   sizes:
     - 32
 - name: magic-wand
@@ -6429,6 +6563,7 @@
     - 32
   aliases:
     - magic-wand
+    - filled
 - name: magnify
   friendly_name: Magnify
   aliases:
@@ -6450,26 +6585,36 @@
     - envelope
     - letter
 - name: mail--reply
-  friendly_name: mail--reply
-  aliases: []
+  friendly_name: Mail reply
+  aliases:
+  - mail
+  - email
+  - reply
+  - response
   sizes:
     - 32
 - name: mammogram
   friendly_name: Mammogram
   aliases:
     - mammogram
+    - healthcare
+    - health
+    - medical
   sizes:
     - 32
 - name: manage-protection
   friendly_name: Manage protection
   aliases:
     - manage-protection
+    - security
   sizes:
     - 32
 - name: managed-solutions
   friendly_name: Managed solutions
   aliases:
     - managed-solutions
+    - SaaS
+    - cloud
   sizes:
     - 32
 - name: map
@@ -6483,11 +6628,16 @@
     - directions
     - diagram
     - plan
+    - legend
   sizes:
     - 32
 - name: math-curve
-  friendly_name: math-curve
-  aliases: []
+  friendly_name: Math curve
+  aliases:
+  - math
+  - curve
+  - plot
+  - chart
   sizes:
     - 32
 - name: matrix
@@ -6524,6 +6674,8 @@
     - placebo
     - pill
     - antidote
+    - rx
+    - prescription
   sizes:
     - 32
 - name: medication--alert
@@ -6540,6 +6692,8 @@
     - placebo
     - pill
     - antidote
+    - rx
+    - prescription
 - name: medication--reminder
   friendly_name: Medication reminder
   sizes:
@@ -6554,6 +6708,8 @@
     - placebo
     - pill
     - antidote
+    - rx
+    - prescription
 - name: menu
   friendly_name: Menu
   aliases:
@@ -6571,17 +6727,21 @@
   friendly_name: Meter
   aliases:
     - meter
+    - gauge
   sizes:
     - 32
 - name: meter--alt
-  friendly_name: meter--alt
-  aliases: []
+  friendly_name: Meter alt
+  aliases:
+  - meter
+  - gauge
   sizes:
     - 32
 - name: microphone
   friendly_name: Microphone
   aliases:
     - mic
+    - mike
     - speaker
     - wire
     - speaker
@@ -6596,18 +6756,21 @@
     - 32
   aliases:
     - mic
+    - mike
     - speaker
     - wire
     - speaker
     - MC
     - presenter
     - present
+    - filled
 - name: microphone--off
   friendly_name: Microphone off
   sizes:
     - 32
   aliases:
     - mic
+    - mike
     - speaker
     - wire
     - speaker
@@ -6620,16 +6783,22 @@
     - 32
   aliases:
     - mic
+    - mike
     - speaker
     - wire
     - speaker
     - MC
     - presenter
     - present
+    - filled
 - name: microscope
   friendly_name: Microscope
   aliases:
     - microscope
+    - study
+    - research
+    - laboratory
+    - lab
   sizes:
     - 32
 - name: migrate
@@ -6659,8 +6828,11 @@
     - transfer
     - move
 - name: milestone
-  friendly_name: milestone
-  aliases: []
+  friendly_name: Milestone
+  aliases:
+  - marker
+  - map
+  - legend
   sizes:
     - 32
 - name: minimize
@@ -6708,6 +6880,8 @@
   friendly_name: Mixed rain hail
   aliases:
     - mixed-rain-hail
+    - precipitation
+    - weather
   sizes:
     - 32
 - name: mobile
@@ -6721,6 +6895,7 @@
     - roaming
     - ux
     - portable
+    - device
   sizes:
     - 32
 - name: mobile--add
@@ -6736,6 +6911,7 @@
     - roaming
     - ux
     - portable
+    - device
 - name: mobile--audio
   friendly_name: Mobile audio
   sizes:
@@ -6749,10 +6925,12 @@
     - roaming
     - ux
     - portable
+    - device
 - name: mobile--check
   friendly_name: Mobile check
   sizes:
-    - 32
+
+- 32
   aliases:
     - phone
     - iphone
@@ -6762,6 +6940,7 @@
     - roaming
     - ux
     - portable
+    - device
 - name: mobile--download
   friendly_name: Mobile download
   sizes:
@@ -6775,6 +6954,7 @@
     - roaming
     - ux
     - portable
+    - device
 - name: mobile--landscape
   friendly_name: Mobile landscape
   sizes:
@@ -6788,6 +6968,7 @@
     - roaming
     - ux
     - portable
+    - device
 - name: model
   friendly_name: Model
   aliases:
@@ -6817,8 +6998,11 @@
     - manufacture
     - construct
 - name: model-builder
-  friendly_name: model-builder
-  aliases: []
+  friendly_name: Model builder
+  aliases:
+  - model builder
+  - analytics
+  - analysis
   sizes:
     - 32
 - name: model-builder--reference
@@ -6830,23 +7014,31 @@
   friendly_name: Money
   aliases:
     - money
+    - currency
+    - cash
   sizes:
     - 32
 - name: monument
-  friendly_name: monument
-  aliases: []
+  friendly_name: Monument
+  aliases:
+  - marker
+  - legend
+  - memorial
   sizes:
     - 32
 - name: moon
   friendly_name: Moon
   aliases:
     - moon
+    - cresent
   sizes:
     - 32
 - name: mostly-cloudy
   friendly_name: Mostly cloudy
   aliases:
     - mostly-cloudy
+    - sky
+    - weather
   sizes:
     - 32
 - name: mostly-cloudy--night
@@ -6855,9 +7047,16 @@
     - 32
   aliases:
     - mostly-cloudy
+    - night
+    - sky
+    - weather
 - name: mountain
-  friendly_name: mountain
-  aliases: []
+  friendly_name: Mountain
+  aliases:
+  - mountain
+  - topography
+  - peak
+  - summit
   sizes:
     - 32
 - name: MOV
@@ -6902,6 +7101,7 @@
     - compress
     - file
     - type
+    - compression
   sizes:
     - 32
 - name: MP4
@@ -6913,18 +7113,33 @@
     - type
     - film
     - format
+    - compression
   sizes:
     - 32
 - name: MPEG
   friendly_name: MPEG
   aliases:
     - MPEG
+    - movie
+    - video
+    - file
+    - type
+    - film
+    - format
+    - compression
   sizes:
     - 32
 - name: MPG2
   friendly_name: MPG2
   aliases:
     - MPG2
+    - movie
+    - video
+    - file
+    - type
+    - film
+    - format
+    - compression
   sizes:
     - 32
 - name: music
@@ -7065,6 +7280,7 @@
     - send
     - email
     - operations
+    - filled
 e- name: notebook
   friendly_name: Notebook
   aliases:
@@ -7117,6 +7333,7 @@ e- name: notebook
     - noise
     - toggle
     - notify
+    - filled
 - name: notification--new
   friendly_name: Notification new
   sizes:
@@ -7157,6 +7374,7 @@ e- name: notebook
     - noise
     - toggle
     - notify
+    - filled
 - name: number--0
   friendly_name: Number 0
   sizes:
@@ -7529,15 +7747,15 @@ e- name: notebook
     - bracket
     - research
 - name: operations--field
-  friendly_name: operations--field
-  aliases: 
+  friendly_name: Operations field
+  aliases:
     - field
     - operations
   sizes:
     - 32
 - name: operations--record
-  friendly_name: operations--record
-  aliases: 
+  friendly_name: Operations record
+  aliases:
     - operations
     - record
     - data
@@ -7926,8 +8144,8 @@ e- name: notebook
   sizes:
     - 32
 - name: picnic-area
-  friendly_name: picnic-area
-  aliases: 
+  friendly_name: Picnic area
+  aliases:
     - rest area
     - table
     - travel
@@ -8059,8 +8277,8 @@ e- name: notebook
   sizes:
     - 32
 - name: plug
-  friendly_name: plug
-  aliases: 
+  friendly_name: Plug
+  aliases:
   - technology
   - electric
   - power
@@ -8069,8 +8287,8 @@ e- name: notebook
   sizes:
     - 32
 - name: plug--filled
-  friendly_name: plug--filled
-  aliases: 
+  friendly_name: Plug filled
+  aliases:
   - technology
   - electric
   - power
@@ -8089,6 +8307,7 @@ e- name: notebook
     - photo
     - image
     - compress
+    - compression
   sizes:
     - 32
 - name: pointer-text
@@ -8100,8 +8319,8 @@ e- name: notebook
   sizes:
     - 32
 - name: police
-  friendly_name: police
-  aliases: 
+  friendly_name: Police
+  aliases:
   - travel
   - traffic
   - enforcement
@@ -8166,16 +8385,18 @@ e- name: notebook
   sizes:
     - 32
 - name: pressure
-  friendly_name: pressure
-  aliases: 
+  friendly_name: Pressure
+  aliases:
   - weather
   - atmosphere
+  - barometric
+  - air
   sizes:
     - 32
 - name: pressure--filled
-  friendly_name: pressure--filled
-  aliases: 
-  - weather 
+  friendly_name: Pressure filled
+  aliases:
+  - weather
   - atmosphere
   sizes:
     - 32
@@ -8215,7 +8436,7 @@ e- name: notebook
     - 32
 - name: qq-plot
   friendly_name: qq-plot
-  aliases: 
+  aliases:
   - chart
   - data
   - analytics
@@ -8591,8 +8812,8 @@ e- name: notebook
     - past
     - reverse
 - name: roadmap
-  friendly_name: roadmap
-  aliases: 
+  friendly_name: Roadmap
+  aliases:
   - gantt chart
   - project
   - timeline
@@ -8732,16 +8953,16 @@ e- name: notebook
   sizes:
     - 32
 - name: row--collapse
-  friendly_name: row--collapse
-  aliases: 
+  friendly_name: Row collapse
+  aliases:
   - spreadsheet
   - table
   - data analytics
   sizes:
     - 32
 - name: row--expand
-  friendly_name: row--expand
-  aliases: 
+  friendly_name: Row expand
+  aliases:
   - spreadsheet
   - table
   - data analytics
@@ -8855,8 +9076,8 @@ e- name: notebook
     - intact
     - preserve
 - name: save--model
-  friendly_name: save--model
-  aliases: 
+  friendly_name: Save model
+  aliases:
   - save
   - model
   - operations
@@ -8961,8 +9182,8 @@ e- name: notebook
   sizes:
     - 32
 - name: scatter-matrix
-  friendly_name: scatter-matrix
-  aliases: 
+  friendly_name: Scatter matrix
+  aliases:
   - chart
   - data
   - data analytics
@@ -9019,7 +9240,7 @@ e- name: notebook
     - mac
 - name: script
   friendly_name: Script
-  aliases: 
+  aliases:
   - code
   - development
   sizes:
@@ -9034,6 +9255,8 @@ e- name: notebook
   aliases:
     - SDK
     - software
+    - development
+    - kit
   sizes:
     - 32
 - name: search
@@ -9275,22 +9498,22 @@ e- name: notebook
   sizes:
     - 32
 - name: skill-level--advanced
-  friendly_name: skill-level--advanced
-  aliases: 
+  friendly_name: Skill level advanced
+  aliases:
   - skill-level
   - scale
   sizes:
     - 32
 - name: skill-level--basic
-  friendly_name: skill-level--basic
-  aliases: 
+  friendly_name: Skill level basic
+  aliases:
   - skill level
   - scale
   sizes:
     - 32
 - name: skill-level--intermediate
-  friendly_name: skill-level--intermediate
-  aliases: 
+  friendly_name: Skill level intermediate
+  aliases:
   - skill level
   - scale
   sizes:
@@ -9418,14 +9641,14 @@ e- name: notebook
   sizes:
     - 32
 - name: smoothing
-  friendly_name: smoothing
-  aliases: 
+  friendly_name: Smoothing
+  aliases:
   - even
   sizes:
     - 32
 - name: smoothing--cursor
-  friendly_name: smoothing--cursor
-  aliases: 
+  friendly_name: Smoothing cursor
+  aliases:
   - even
   sizes:
     - 32
@@ -9511,8 +9734,8 @@ e- name: notebook
   sizes:
     - 32
 - name: split
-  friendly_name: split
-  aliases: 
+  friendly_name: Split
+  aliases:
   - break
   - divide
   sizes:
@@ -9640,15 +9863,15 @@ e- name: notebook
     - saved
     - starred
 - name: star--review
-  friendly_name: star--review
-  aliases: 
+  friendly_name: Star review
+  aliases:
   - rating
   - rate
   - comment
   sizes:
     - 32
 - name: stem-leaf-plot
-  friendly_name: stem-leaf-plot
+  friendly_name: Stem leaf plot
   aliases:
   - chart
   - data
@@ -9656,8 +9879,8 @@ e- name: notebook
   sizes:
     - 32
 - name: stethoscope
-  friendly_name: stethoscope
-  aliases: 
+  friendly_name: Stethoscope
+  aliases:
   - healthcare
   - medical
   - instruments
@@ -9760,14 +9983,14 @@ e- name: notebook
   sizes:
     - 32
 - name: string-integer
-  friendly_name: string-integer
+  friendly_name: String integer
   aliases:
   - data
   sizes:
     - 32
 - name: string-text
-  friendly_name: string-text
-  aliases: 
+  friendly_name: String text
+  aliases:
   - data
   sizes:
     - 32
@@ -9863,8 +10086,8 @@ e- name: notebook
   sizes:
     - 32
 - name: swim
-  friendly_name: swim
-  aliases: 
+  friendly_name: Swim
+  aliases:
   - travel
   - sports
   sizes:
@@ -9877,7 +10100,7 @@ e- name: notebook
   sizes:
     - 32
 - name: sys-provision
-  friendly_name: sys-provision
+  friendly_name: Sys provision
   aliases:
   - data
   sizes:
@@ -9993,8 +10216,8 @@ e- name: notebook
   sizes:
     - 32
 - name: task--view
-  friendly_name: task--view
-  aliases: 
+  friendly_name: Task view
+  aliases:
   - insights
   - review
   - study
@@ -10327,7 +10550,7 @@ e- name: notebook
     - alphabet
     - editor
 - name: text--vertical-alignment
-  friendly_name: text--vertical-alignment
+  friendly_name: Text vertical alignment
   aliases: []
   sizes:
     - 32
@@ -10371,14 +10594,14 @@ e- name: notebook
   aliases:
     - text-mining
 - name: theater
-  friendly_name: theater
-  aliases: 
+  friendly_name: Theater
+  aliases:
   - destination
   sizes:
     - 32
 - name: threshold
-  friendly_name: threshold
-  aliases: 
+  friendly_name: Threshold
+  aliases:
   - chart
   - plot
   - analytics
@@ -10544,8 +10767,8 @@ e- name: notebook
     - mobile
     - device
 - name: touch--interaction
-  friendly_name: touch--interaction
-  aliases: 
+  friendly_name: Touch interaction
+  aliases:
   - mobile
   - device
   sizes:
@@ -10643,7 +10866,7 @@ e- name: notebook
   aliases:
     - tropical-storm
     - precipitation
-    
+
   sizes:
     - 32
 - name: TSV
@@ -10699,7 +10922,7 @@ e- name: notebook
   sizes:
     - 32
 - name: umbrella
-  friendly_name: umbrella
+  friendly_name: Umbrella
   aliases:
   - protection
   - precipitation
@@ -10768,8 +10991,8 @@ e- name: notebook
   sizes:
     - 32
 - name: upgrade
-  friendly_name: upgrade
-  aliases: 
+  friendly_name: Upgrade
+  aliases:
   - up
   - improve
   sizes:
@@ -10982,8 +11205,8 @@ e- name: notebook
     - account
     - my account
 - name: user--multiple
-  friendly_name: user--multiple
-  aliases: 
+  friendly_name: User multiple
+  aliases:
   - users
   - people
   sizes:
@@ -11041,8 +11264,8 @@ e- name: notebook
     - account
     - my account
 - name: user--speaker
-  friendly_name: user--speaker
-  aliases: 
+  friendly_name: User speaker
+  aliases:
   - presenter
   sizes:
     - 32
@@ -11067,14 +11290,14 @@ e- name: notebook
     - person
     - account
 - name: uv-index
-  friendly_name: uv-index
-  aliases: 
+  friendly_name: UV index
+  aliases:
   - sun exposure
   sizes:
     - 32
 - name: uv-index--filled
-  friendly_name: uv-index--filled
-  aliases: 
+  friendly_name: UV index filled
+  aliases:
   - sun exposure
   sizes:
     - 32
@@ -11084,6 +11307,8 @@ e- name: notebook
     - vehicle
     - car
     - delivery
+    - truck
+    - cargo
   sizes:
     - 32
 - name: video
@@ -11534,8 +11759,8 @@ e- name: notebook
   sizes:
     - 32
 - name: word-cloud
-  friendly_name: word-cloud
-  aliases: 
+  friendly_name: Word cloud
+  aliases:
   - chart
   - plot
   - data analytics
@@ -11555,29 +11780,29 @@ e- name: notebook
   sizes:
     - 32
 - name: worship
-  friendly_name: worship
-  aliases: 
+  friendly_name: Worship
+  aliases:
   - religion
   - faith
   sizes:
     - 32
 - name: worship--christian
-  friendly_name: worship--christian
+  friendly_name: Worship Christian
   aliases:
   - religion
   - faith
   sizes:
     - 32
 - name: worship--jewish
-  friendly_name: worship--jewish
-  aliases: 
+  friendly_name: Worship Jewish
+  aliases:
   - religion
   - faith
   sizes:
     - 32
 - name: worship--muslim
-  friendly_name: worship--muslim
-  aliases: 
+  friendly_name: Worship Muslim
+  aliases:
   - religion
   - faith
   sizes:
