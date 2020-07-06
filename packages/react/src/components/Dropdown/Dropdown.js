@@ -83,6 +83,7 @@ function Dropdown({
 
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--visually-hidden`]: !titleText,
   });
 
   const helperClasses = cx(`${prefix}--form__helper-text`, {
@@ -115,11 +116,9 @@ function Dropdown({
 
   return (
     <div className={wrapperClasses}>
-      {titleText && (
-        <label className={titleClasses} {...getLabelProps()}>
-          {titleText}
-        </label>
-      )}
+      <label className={titleClasses} {...getLabelProps()}>
+        {titleText || label}
+      </label>
       <ListBox
         aria-label={ariaLabel}
         size={size}
