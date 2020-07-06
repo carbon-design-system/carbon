@@ -2963,7 +2963,10 @@
     - 32
 - name: data-table
   friendly_name: data-table
-  aliases: []
+  aliases:
+  - data table
+  - data
+  - table
   sizes:
     - 32
 - name: data-vis--1
@@ -3019,9 +3022,11 @@
     - stats
     - web
 - name: datastore
-  friendly_name: Datastore
+  friendly_name: Data store
   aliases:
     - datastore
+    - data store
+    - repository
   sizes:
     - 32
 - name: debug
@@ -3059,6 +3064,7 @@
   friendly_name: Denominate
   aliases:
     - denominate
+    - health
   sizes:
     - 32
 - name: departure
@@ -3076,6 +3082,8 @@
   friendly_name: Deploy
   aliases:
     - deploy
+    - launch
+    - utilize
   sizes:
     - 32
 - name: deploy-rules
@@ -3111,13 +3119,21 @@
   sizes:
     - 32
 - name: dew-point
-  friendly_name: dew-point
-  aliases: []
+  friendly_name: Dew point
+  aliases:
+    - dew point
+    - temperature
+    - water
+    - water droplet
   sizes:
     - 32
 - name: dew-point--filled
-  friendly_name: dew-point--filled
-  aliases: []
+  friendly_name: Dew point--filled
+  aliases:
+    - dew point filled
+    - temperature
+    - water
+    - water droplet
   sizes:
     - 32
 - name: diagram
@@ -3138,6 +3154,7 @@
     - digital
     - imaging
     - communication
+    - DICOM 6000
 - name: dicom--overlay
   friendly_name: DICOM overlay
   sizes:
@@ -3147,133 +3164,217 @@
     - imaging
     - communication
 - name: direction--bear-right--01
-  friendly_name: direction--bear-right--01
-  aliases: []
+  friendly_name: Direction bear right 01
+  aliases:
+    - bear right
+    - direction bear right 01
+    - bear
   sizes:
     - 32
 - name: direction--bear-right--01--filled
-  friendly_name: direction--bear-right--01--filled
-  aliases: []
+  friendly_name: Direction bear right 01 filled
+  aliases:
+    - bear right
+    - direction bear right 01 filled
+    - bear
   sizes:
     - 32
 - name: direction--bear-right--02
-  friendly_name: direction--bear-right--02
-  aliases: []
+  friendly_name: Direction bear right 02
+  aliases:
+    - bear right
+    - direction bear right 02
+    - bear
   sizes:
     - 32
 - name: direction--bear-right--02--filled
-  friendly_name: direction--bear-right--02--filled
-  aliases: []
+  friendly_name: Direction bear right 02 filled
+  aliases: 
+    - bear right
+    - direction bear right 02 filled
+    - bear
   sizes:
     - 32
 - name: direction--curve
-  friendly_name: direction--curve
-  aliases: []
+  friendly_name: Direction curve
+  aliases:
+    - direction
+    - direction curve
   sizes:
     - 32
 - name: direction--curve--filled
-  friendly_name: direction--curve--filled
-  aliases: []
+  friendly_name: Direction curve filled
+  aliases:
+    - direction
+    - direction curve filled
   sizes:
     - 32
 - name: direction--merge
-  friendly_name: direction--merge
-  aliases: []
+  friendly_name: Direction merge
+  aliases:
+    - direction
+    - direction merge
   sizes:
     - 32
 - name: direction--merge--filled
-  friendly_name: direction--merge--filled
-  aliases: []
+  friendly_name: Direction merge filled
+  aliases: 
+    - direction
+    - directin merge
+    - direction merge filled
   sizes:
     - 32
 - name: direction--right--01
-  friendly_name: direction--right--01
-  aliases: []
+  friendly_name: Direction right 01
+  aliases:
+    - direction
+    - direction right 01
+    - direction right
   sizes:
     - 32
 - name: direction--right--01--filled
-  friendly_name: direction--right--01--filled
-  aliases: []
+  friendly_name: Direction right 01 filled
+  aliases:
+    - direction
+    - direction right 01 filled
+    - direction right filled
   sizes:
     - 32
 - name: direction--right--02
-  friendly_name: direction--right--02
-  aliases: []
+  friendly_name: Direction right 02
+  aliases:
+    - direction
+    - direction right 02
+    - direction right
   sizes:
     - 32
 - name: direction--right--02--filled
-  friendly_name: direction--right--02--filled
-  aliases: []
+  friendly_name: Direction right 02 filled
+  aliases:
+    - direction
+    - direction right 02 filled
+    - direction right filled
   sizes:
     - 32
 - name: direction--rotary--first-right
-  friendly_name: direction--rotary--first-right
-  aliases: []
+  friendly_name: Direction rotary first right
+  aliases:
+    - rotary
+    - direction
+    - direction rotary first right
+    - rotary first right
   sizes:
     - 32
 - name: direction--rotary--first-right--filled
-  friendly_name: direction--rotary--first-right--filled
-  aliases: []
+  friendly_name: Direction rotary first right filled
+  aliases:
+    - rotary
+    - direction
+    - direction rotary first right filled
+    - rotary first right filled
   sizes:
     - 32
 - name: direction--rotary--right
-  friendly_name: direction--rotary--right
-  aliases: []
+  friendly_name: Direction rotary right
+  aliases:
+    - rotary
+    - direction
+    - direction rotary right
+    - rotary right
   sizes:
     - 32
 - name: direction--rotary--right--filled
-  friendly_name: direction--rotary--right--filled
-  aliases: []
+  friendly_name: Direction rotary right filled
+  aliases:
+    - rotary
+    - direction
+    - direction rotary right filled
+    - rotary right filled
   sizes:
     - 32
 - name: direction--rotary--straight
-  friendly_name: direction--rotary--straight
-  aliases: []
+  friendly_name: Direction rotary straight
+  aliases:
+    - rotary
+    - direction
+    - direction rotary straight
+    - rotary straight
   sizes:
     - 32
 - name: direction--rotary--straight--filled
-  friendly_name: direction--rotary--straight--filled
-  aliases: []
+  friendly_name: Direction rotary straight filled
+  aliases:
+    - rotary
+    - direction
+    - direction rotary straight filled
+    - rotary straight filled
   sizes:
     - 32
 - name: direction--sharp-turn
-  friendly_name: direction--sharp-turn
-  aliases: []
+  friendly_name: Direction sharp turn
+  aliases:
+    - rotary
+    - direction
+    - direction rotary straight filled
+    - rotary straight filled
   sizes:
     - 32
 - name: direction--sharp-turn--filled
-  friendly_name: direction--sharp-turn--filled
-  aliases: []
+  friendly_name: Direction sharp turn filled
+  aliases:
+    - direction
+    - direction sharp turn filled
+    - sharp turn filled
   sizes:
     - 32
 - name: direction--straight
-  friendly_name: direction--straight
-  aliases: []
+  friendly_name: Direction straight
+  aliases:
+    - direction straight
+    - direction
+    - straight
   sizes:
     - 32
 - name: direction--straight--filled
-  friendly_name: direction--straight--filled
-  aliases: []
+  friendly_name: Direction straight filled
+  aliases:
+    - direction straight filled
+    - direction straight
+    - direction
+    - straight
   sizes:
     - 32
 - name: direction--straight--right
-  friendly_name: direction--straight--right
-  aliases: []
+  friendly_name: Direction straight right
+  aliases:
+    - direction straight right
+    - direction right
+    - direction
+    - straight right
   sizes:
     - 32
 - name: direction--straight--right--filled
-  friendly_name: direction--straight--right--filled
-  aliases: []
+  friendly_name: Direction straight right filled
+  aliases:
+    - direction straight right filled
+    - direction straight right
+    - direction right
+    - straight right
   sizes:
     - 32
 - name: direction--u-turn
-  friendly_name: direction--u-turn
-  aliases: []
+  friendly_name: Direction U-turn
+  aliases:
+    - direction U-turn
+    - U-turn
   sizes:
     - 32
 - name: direction--u-turn--filled
-  friendly_name: direction--u-turn--filled
-  aliases: []
+  friendly_name: Direction U-turn filled
+  aliases:
+    - direction U-turn filled
+    - U-turn filled
+    - U-turn
   sizes:
     - 32
 - name: distribute--horizontal-center
@@ -3282,40 +3383,54 @@
     - 32
   aliases:
     - distribute
+    - distrubute horizontal center
+    - distrubute horizontal
 - name: distribute--horizontal-left
   friendly_name: Distribute horizontal left
   sizes:
     - 32
   aliases:
     - distribute
+    - distribute horizontal left
+    - horizontal left
 - name: distribute--horizontal-right
   friendly_name: Distribute horizontal right
   sizes:
     - 32
   aliases:
     - distribute
+    - distribute horizontal right
+    - horizontal right
 - name: distribute--vertical-bottom
   friendly_name: Distribute vertical bottom
   sizes:
     - 32
   aliases:
     - distribute
+    - distribute vertical bottom
+    - vertical bottom
 - name: distribute--vertical-center
   friendly_name: Distribute vertical center
   sizes:
     - 32
   aliases:
     - distribute
+    - distribute vertical center
+    - vertical center
 - name: distribute--vertical-top
   friendly_name: Distribute vertical top
   sizes:
     - 32
   aliases:
     - distribute
+    - distribute vertical top
+    - vertical top
 - name: dna
   friendly_name: DNA
   aliases:
-    - dna
+    - DNA
+    - health
+    - DNA chain
   sizes:
     - 32
 - name: DOC
@@ -3349,8 +3464,14 @@
     - doc
     - paper
 - name: document--download
-  friendly_name: document--download
-  aliases: []
+  friendly_name: Document download
+  aliases:
+    - document download
+    - download
+    - document
+    - file
+    - doc
+    - paper
   sizes:
     - 32
 - name: document--export
@@ -3361,6 +3482,7 @@
     - file
     - doc
     - paper
+    - document export
 - name: document--import
   friendly_name: Document import
   sizes:
@@ -3369,9 +3491,14 @@
     - file
     - doc
     - paper
+    - document import
 - name: document--pdf
-  friendly_name: document--pdf
-  aliases: []
+  friendly_name: Document pdf
+  aliases:
+    - document pdf
+    - pdf
+    - document format
+    - portable document format
   sizes:
     - 32
 - name: document--subtract
@@ -3382,6 +3509,7 @@
     - file
     - doc
     - paper
+    - document subtract
 - name: document--tasks
   friendly_name: Document tasks
   sizes:
@@ -3390,9 +3518,12 @@
     - file
     - doc
     - paper
+    - document tasks
 - name: document--view
-  friendly_name: document--view
-  aliases: []
+  friendly_name: Document view
+  aliases:
+    - document view
+    - document
   sizes:
     - 32
 - name: document-sentiment
@@ -3401,17 +3532,24 @@
     - emotion
     - meaning
     - understanding
+    - document sentiment
+    - document
   sizes:
     - 32
 - name: dot-mark
   friendly_name: Dot mark
   aliases:
-    - dot-mark
+    - dot mark
+    - dot
+    - format
   sizes:
     - 32
 - name: double-integer
-  friendly_name: double-integer
-  aliases: []
+  friendly_name: Double integer
+  aliases:
+    - integer
+    - double integer
+    - hashtag
   sizes:
     - 32
 - name: down-to-bottom
@@ -3426,12 +3564,16 @@
   friendly_name: Download
   aliases:
     - install
+    - download
   sizes:
     - 16
     - 32
 - name: download-study
-  friendly_name: download-study
-  aliases: []
+  friendly_name: Download study
+  aliases:
+  - download study
+  - download
+  - learn
   sizes:
     - 32
 - name: drag--horizontal
@@ -3476,7 +3618,10 @@
 - name: drop-photo
   friendly_name: Drop photo
   aliases:
-    - drop-photo
+    - drop photo
+    - photo dropping
+    - photo sharing
+    - camera
   sizes:
     - 32
 - name: drop-photo--filled
@@ -3484,7 +3629,10 @@
   sizes:
     - 32
   aliases:
-    - drop-photo
+    - drop photo filled
+    - photo dropping filled
+    - photo sharing
+    - camera
 - name: DVR
   friendly_name: DVR
   aliases:
@@ -3500,6 +3648,8 @@
   friendly_name: Earth
   aliases:
     - earth
+    - world
+    - globe
   sizes:
     - 32
 - name: earth--americas
@@ -3508,6 +3658,8 @@
     - 32
   aliases:
     - earth
+    - earth Americas
+    - Americas
 - name: earth--americas--filled
   friendly_name: Earth Americas filled
   sizes:
