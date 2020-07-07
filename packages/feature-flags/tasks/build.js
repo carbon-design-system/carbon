@@ -52,7 +52,7 @@ function buildSassModule(featureFlags) {
     t.Assignment({
       id: t.Identifier('generated-feature-flags'),
       init: t.SassMap(
-        featureFlags.map(featureFlag => {
+        featureFlags.map((featureFlag) => {
           return t.SassMapProperty(
             t.Identifier(featureFlag.name),
             t.SassBoolean(featureFlag.enabled),
@@ -84,7 +84,7 @@ function buildJavaScriptModule(featureFlags) {
           t.variableDeclarator(
             t.identifier('featureFlagInfo'),
             t.arrayExpression(
-              featureFlags.map(featureFlag => {
+              featureFlags.map((featureFlag) => {
                 return t.objectExpression([
                   t.objectProperty(
                     t.identifier('name'),
@@ -111,7 +111,7 @@ function buildJavaScriptModule(featureFlags) {
   return `${javascriptBanner}${code}`;
 }
 
-main().catch(error => {
+main().catch((error) => {
   console.log(error);
   process.exit(1);
 });
