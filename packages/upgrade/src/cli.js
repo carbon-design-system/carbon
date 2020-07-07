@@ -39,7 +39,7 @@ async function main({ argv, cwd }) {
 
   cli
     .usage('Usage: $0 [options]')
-    .command('$0', 'run to upgrade your project', {}, async args => {
+    .command('$0', 'run to upgrade your project', {}, async (args) => {
       const { dry, ignore, verbose } = args;
       const options = {
         cwd: cwd(),
@@ -55,7 +55,7 @@ async function main({ argv, cwd }) {
     'migrate <package> <from> <to>',
     'run a specific migration for a package',
     {},
-    async args => {
+    async (args) => {
       const { dry, from, ignore, package: packageName, to, verbose } = args;
       const options = {
         cwd: cwd(),
@@ -68,11 +68,7 @@ async function main({ argv, cwd }) {
     }
   );
 
-  cli
-    .demandCommand()
-    .recommendCommands()
-    .strict()
-    .parse(argv.slice(2)).argv;
+  cli.demandCommand().recommendCommands().strict().parse(argv.slice(2)).argv;
 }
 
 async function runCommand(makePromise, options) {

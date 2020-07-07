@@ -28,17 +28,19 @@ export default function Copy({
     [`${prefix}--copy-btn--animating`]: animation,
     [`${prefix}--copy-btn--${animation}`]: animation,
   });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleFadeOut = useCallback(
     debounce(() => {
       setAnimation('fade-out');
     }, feedbackTimeout),
     [feedbackTimeout]
   );
+
   const handleClick = useCallback(() => {
     setAnimation('fade-in');
     handleFadeOut();
   }, [handleFadeOut]);
-  const handleAnimationEnd = event => {
+  const handleAnimationEnd = (event) => {
     if (event.animationName === 'hide-feedback') {
       setAnimation('');
     }
@@ -60,7 +62,9 @@ export default function Copy({
         onAnimationEnd,
         handleAnimationEnd,
       ])}
-      {...other}>
+      {...other}
+      aria-live="polite"
+      aria-label={animation ? feedback : other['aria-label']}>
       {children}
       <span
         className={`${prefix}--assistive-text ${prefix}--copy-btn__feedback`}>
@@ -97,6 +101,12 @@ Copy.propTypes = {
    * <button> is clicked
    */
   onClick: PropTypes.func,
+
+  /**
+   * Specify an optional `onAnimationEnd` handler that is called when the underlying
+   * animation ends
+   */
+  onAnimationEnd: PropTypes.func,
 };
 
 Copy.defaultProps = {

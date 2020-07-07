@@ -10,9 +10,9 @@ const HTML = `
 </button>
 `;
 
-describe('Test Copy Button', function() {
-  describe('Constructor', function() {
-    it('Should throw if root element is not given', function() {
+describe('Test Copy Button', function () {
+  describe('Constructor', function () {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         new CopyButton();
       }).toThrowError(
@@ -21,7 +21,7 @@ describe('Test Copy Button', function() {
       );
     });
 
-    it('Should throw if root element is not a DOM element', function() {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         new CopyButton(document.createTextNode(''));
       }).toThrowError(
@@ -31,14 +31,14 @@ describe('Test Copy Button', function() {
     });
   });
 
-  describe('Showing and hiding feedback tooltip', function() {
+  describe('Showing and hiding feedback tooltip', function () {
     let container;
     let element;
     let feedbackTooltip;
     let copyBtn;
     let feedbackTooltipInitialState;
 
-    beforeAll(function() {
+    beforeAll(function () {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
@@ -50,22 +50,22 @@ describe('Test Copy Button', function() {
       copyBtn = new CopyButton(element);
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
       jasmine.clock().install();
     });
 
-    it('Should not show the feedback tooltip before click', function() {
+    it('Should not show the feedback tooltip before click', function () {
       expect(feedbackTooltipInitialState).toBe(false);
     });
 
-    it('Should show the feedback tooltip on click', function() {
+    it('Should show the feedback tooltip on click', function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(
         feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')
       ).toBe(true);
     });
 
-    it('Should hide the feedback tooltip after specified timeout value', function() {
+    it('Should hide the feedback tooltip after specified timeout value', function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(
         feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')
@@ -76,12 +76,12 @@ describe('Test Copy Button', function() {
       ).toBe(false);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       feedbackTooltip.classList.remove('bx--btn--copy__feedback--displayed');
       jasmine.clock().uninstall();
     });
 
-    afterAll(function() {
+    afterAll(function () {
       document.body.removeChild(container);
       copyBtn.release();
     });

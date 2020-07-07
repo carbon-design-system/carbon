@@ -15,9 +15,11 @@
 
 <div>
   {{#if filter}}
-  <button class="{{@root.prefix}}--tag {{@root.prefix}}--tag--filter" title="Clear filter">
+  <div class="{{@root.prefix}}--tag {{@root.prefix}}--tag--filter" title="Clear filter">
     <span class="{{@root.prefix}}--tag__label">filter</span>
-    {{ carbon-icon 'Close16' }}
-  </button>
+    <button class="{{@root.prefix}}--tag__close-icon">
+      {{ carbon-icon 'Close16' }}
+    </button>
+  </div>
   {{/if}}
 </div>

@@ -107,6 +107,7 @@ export const activeTertiary = gray30;
 export const hoverUI = '#353535';
 export const activeUI = gray70;
 export const selectedUI = gray80;
+export const selectedLightUI = gray70;
 export const inverseHoverUI = '#e5e5e5';
 
 export const hoverSelectedUI = '#4c4c4c';
@@ -120,9 +121,11 @@ export const visitedLink = purple40;
 
 export const disabled01 = gray90;
 export const disabled02 = gray70;
-export const disabled03 = gray60;
+export const disabled03 = gray50;
 
 export const highlight = blue80;
+
+export const decorative01 = gray70;
 
 export const skeleton01 = '#353535';
 export const skeleton02 = gray80;

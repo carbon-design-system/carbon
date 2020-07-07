@@ -1,0 +1,78 @@
+//
+// Copyright IBM Corp. 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import 'vars';
+@import 'theme';
+@import 'feature-flags';
+
+$enable-css-custom-properties: feature-flag-enabled(
+  'enable-css-custom-properties'
+);
+
+/// Get a component token value.
+/// @access private
+/// @param {Map} $tokens - Map of component tokens
+/// @param {String} $name - Token name
+/// @example get-token-value($component-tokens, 'tag-background-red');
+/// @returns {String} Token value
+/// @group component-tokens
+@function get-token-value($tokens, $name) {
+  @if map-has-key($tokens, $name) {
+    $config: map-get($tokens, $name);
+    $fallback: map-get($config, 'fallback');
+    $options: map-get($config, 'values');
+
+    @each $option in $options {
+      $theme: map-get($option, 'theme');
+
+      @if is-subset-of-theme($carbon--theme, $theme) == true {
+        $value: map-get($option, 'value');
+
+        @return if(
+          feature-flag-enabled('enable-css-custom-properties'),
+          var(--#{$custom-property-prefix}-#{$name}, #{$value}),
+          $value
+        );
+      }
+    }
+
+    @return if(
+      feature-flag-enabled('enable-css-custom-properties'),
+      var(--#{$custom-property-prefix}-#{$name}, #{$fallback}),
+      $fallback
+    );
+  } @else {
+    @error 'Unable to find the token #{$name} in the given map';
+    @return null;
+  }
+}
+
+/// Check to see if $b is a subset of $a, meaning that all properties of the
+/// $b are defined in $a and have the same value.
+/// @access private
+/// @param {Map} $a The potential superset of $b
+/// @param {Map} $b The potential subset of $a
+/// @returns {Boolean}
+@function is-subset-of-theme($a, $b) {
+  @each $key, $expected in $b {
+    $actual: map-get($a, $key);
+    @if $expected != $actual {
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
+/// @access private
+/// @param {Map} $tokens - Map of component tokens
+/// @example @include emit-component-tokens($component-tokens);
+@mixin emit-component-tokens($tokens) {
+  @each $key, $options in $tokens {
+    @include custom-property($key, get-token-value($tokens, $key));
+  }
+}

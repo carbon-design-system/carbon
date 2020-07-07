@@ -103,17 +103,17 @@ function App() {
           <Table>
             <TableHead>
               <TableRow>
-                {headers.map(header => (
-                  <TableHeader {...getHeaderProps({ header })}>
+                {headers.map((header) => (
+                  <TableHeader key={header.key} {...getHeaderProps({ header })}>
                     {header.header}
                   </TableHeader>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map(row => (
+              {rows.map((row) => (
                 <TableRow key={row.id}>
-                  {row.cells.map(cell => (
+                  {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
                 </TableRow>
@@ -289,17 +289,17 @@ const renderProp = ({ rows, headers, getHeaderProps }) => (
     <Table>
       <TableHead>
         <TableRow>
-          {headers.map(header => (
-            <TableHeader {...getHeaderProps({ header })}>
+          {headers.map((header) => (
+            <TableHeader key={header.key} {...getHeaderProps({ header })}>
               {header.header}
             </TableHeader>
           ))}
         </TableRow>
       </TableHead>
       <TableBody>
-        {rows.map(row => (
+        {rows.map((row) => (
           <TableRow key={row.id}>
-            {row.cells.map(cell => (
+            {row.cells.map((cell) => (
               <TableCell key={cell.id}>{cell.value}</TableCell>
             ))}
           </TableRow>
@@ -396,17 +396,17 @@ following:
       <Table>
         <TableHead>
           <TableRow>
-            {headers.map(header => (
-              <TableHeader {...getHeaderProps({ header })}>
+            {headers.map((header) => (
+              <TableHeader key={header.key} {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
+          {rows.map((row) => (
             <TableRow key={row.id}>
-              {row.cells.map(cell => (
+              {row.cells.map((cell) => (
                 <TableCell key={cell.id}>{cell.value}</TableCell>
               ))}
             </TableRow>
@@ -478,7 +478,7 @@ In practice, the combination of these components looks like the following:
             {/* add the expand header before all other headers */}
             <TableExpandHeader />
             {headers.map(header => (
-              <TableHeader {...getHeaderProps({ header })}>
+              <TableHeader key={header.key} {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
             ))}
@@ -550,7 +550,7 @@ In practice, it looks like the following in a `DataTable`:
           <TableRow>
             <TableSelectAll {...getSelectionProps()} />
             {headers.map(header => (
-              <TableHeader {...getHeaderProps({ header })}>
+              <TableHeader key={header.key} {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
             ))}
@@ -608,24 +608,26 @@ In practice, this looks like the following:
   render={({ rows, headers, getHeaderProps, onInputChange }) => (
     <TableContainer title="DataTable with toolbar">
       <TableToolbar>
-        {/* pass in `onInputChange` change here to make filtering work */}
-        <TableToolbarSearch onChange={onInputChange} />
         <TableToolbarContent>
-          <TableToolbarAction
-            icon={iconDownload}
-            iconDescription="Download"
-            onClick={action('TableToolbarAction - Download')}
-          />
-          <TableToolbarAction
-            icon={iconEdit}
-            iconDescription="Edit"
-            onClick={action('TableToolbarAction - Edit')}
-          />
-          <TableToolbarAction
-            icon={iconSettings}
-            iconDescription="Settings"
-            onClick={action('TableToolbarAction - Settings')}
-          />
+          {/* pass in `onInputChange` change here to make filtering work */}
+          <TableToolbarSearch onChange={onInputChange} />
+          <TableToolbarMenu>
+            <TableToolbarAction
+              icon={iconDownload}
+              iconDescription="Download"
+              onClick={action('TableToolbarAction - Download')}
+            />
+            <TableToolbarAction
+              icon={iconEdit}
+              iconDescription="Edit"
+              onClick={action('TableToolbarAction - Edit')}
+            />
+            <TableToolbarAction
+              icon={iconSettings}
+              iconDescription="Settings"
+              onClick={action('TableToolbarAction - Settings')}
+            />
+          </TableToolbarMenu>
           <Button onClick={action('Add new row')} small kind="primary">
             Add new
           </Button>
@@ -634,17 +636,17 @@ In practice, this looks like the following:
       <Table>
         <TableHead>
           <TableRow>
-            {headers.map(header => (
-              <TableHeader {...getHeaderProps({ header })}>
+            {headers.map((header) => (
+              <TableHeader key={header.key} {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
+          {rows.map((row) => (
             <TableRow key={row.id}>
-              {row.cells.map(cell => (
+              {row.cells.map((cell) => (
                 <TableCell key={cell.id}>{cell.value}</TableCell>
               ))}
             </TableRow>
@@ -669,6 +671,7 @@ Table components for selection and for batch actions, which include:
 
 - `TableToolbar`
 - `TableToolbarAction`
+- `TableToolbarSearch`
 - `TableBatchActions`
 - `TableBatchAction`
 - `TableSelectAll`
@@ -694,7 +697,7 @@ In practice, this looks like the following:
       <TableToolbar>
         {/* make sure to apply getBatchActionProps so that the bar renders */}
         <TableBatchActions {...getBatchActionProps()}>
-          {/* inside of you batch actinos, you can include selectedRows */}
+          {/* inside of your batch actions, you can include selectedRows */}
           <TableBatchAction primaryFocus onClick={batchActionClick(selectedRows)}>
             Ghost
           </TableBatchAction>
@@ -705,23 +708,25 @@ In practice, this looks like the following:
             Ghost
           </TableBatchAction>
         </TableBatchActions>
-        <TableToolbarSearch onChange={onInputChange} />
         <TableToolbarContent>
-          <TableToolbarAction
-            icon={iconDownload}
-            iconDescription="Download"
-            onClick={action('TableToolbarAction - Download')}
-          />
-          <TableToolbarAction
-            icon={iconEdit}
-            iconDescription="Edit"
-            onClick={action('TableToolbarAction - Edit')}
-          />
-          <TableToolbarAction
-            icon={iconSettings}
-            iconDescription="Settings"
-            onClick={action('TableToolbarAction - Settings')}
-          />
+          <TableToolbarSearch onChange={onInputChange} />
+            <TableToolbarMenu>
+              <TableToolbarAction
+                icon={iconDownload}
+                iconDescription="Download"
+                onClick={action('TableToolbarAction - Download')}
+              />
+              <TableToolbarAction
+                icon={iconEdit}
+                iconDescription="Edit"
+               onClick={action('TableToolbarAction - Edit')}
+              />
+              <TableToolbarAction
+                icon={iconSettings}
+                iconDescription="Settings"
+                onClick={action('TableToolbarAction - Settings')}
+              />
+            </TableToolbarMenu>
           <Button onClick={action('Add new row')} small kind="primary">
             Add new
           </Button>
@@ -732,7 +737,7 @@ In practice, this looks like the following:
           <TableRow>
             <TableSelectAll {...getSelectionProps()} />
             {headers.map(header => (
-              <TableHeader {...getHeaderProps({ header })}>
+              <TableHeader key={header.key} {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
             ))}

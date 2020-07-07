@@ -24,19 +24,23 @@ const ListBoxSelection = ({
   selectionCount,
   translateWithId: t,
   disabled,
+  onClearSelection,
 }) => {
   const className = cx(`${prefix}--list-box__selection`, {
     [`${prefix}--tag--filter`]: selectionCount,
     [`${prefix}--list-box__selection--multi`]: selectionCount,
   });
-  const handleOnClick = event => {
+  const handleOnClick = (event) => {
     event.stopPropagation();
     if (disabled) {
       return;
     }
     clearSelection(event);
+    if (onClearSelection) {
+      onClearSelection(event);
+    }
   };
-  const handleOnKeyDown = event => {
+  const handleOnKeyDown = (event) => {
     event.stopPropagation();
     if (disabled) {
       return;
@@ -45,6 +49,9 @@ const ListBoxSelection = ({
     // When a user hits ENTER, we'll clear the selection
     if (match(event, keys.Enter)) {
       clearSelection(event);
+      if (onClearSelection) {
+        onClearSelection(event);
+      }
     }
   };
   const description = selectionCount ? t('clear.all') : t('clear.selection');
@@ -75,6 +82,11 @@ const defaultTranslations = {
 
 ListBoxSelection.propTypes = {
   /**
+   * Specify whether or not the clear selection element should be disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
    * Specify a function to be invoked when a user interacts with the clear
    * selection element.
    */
@@ -92,10 +104,28 @@ ListBoxSelection.propTypes = {
    * return a string message for that given message id.
    */
   translateWithId: PropTypes.func.isRequired,
+
+  /**
+   * Specify an optional `onClick` handler that is called when the underlying
+   * clear selection element is clicked
+   */
+  onClick: PropTypes.func,
+
+  /**
+   * Specify an optional `onKeyDown` handler that is called when the underlying
+   * clear selection element fires a keydown event
+   */
+  onKeyDown: PropTypes.func,
+
+  /**
+   * Specify an optional `onClearSelection` handler that is called when the underlying
+   * element is cleared
+   */
+  onClearSelection: PropTypes.func,
 };
 
 ListBoxSelection.defaultProps = {
-  translateWithId: id => defaultTranslations[id],
+  translateWithId: (id) => defaultTranslations[id],
 };
 
 export default ListBoxSelection;

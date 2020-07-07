@@ -35,7 +35,7 @@ import DataTable, {
 
 import { batchActionClick, initialRows, headers } from './shared';
 
-export default props => (
+const TableBatchActionsStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}
@@ -46,6 +46,7 @@ export default props => (
       getHeaderProps,
       getRowProps,
       getSelectionProps,
+      getToolbarProps,
       getBatchActionProps,
       onInputChange,
       selectedRows,
@@ -56,7 +57,7 @@ export default props => (
         title="DataTable"
         description="With batch actions"
         {...getTableContainerProps()}>
-        <TableToolbar>
+        <TableToolbar {...getToolbarProps()}>
           <TableBatchActions {...getBatchActionProps()}>
             <TableBatchAction
               tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
@@ -79,6 +80,7 @@ export default props => (
           </TableBatchActions>
           <TableToolbarContent>
             <TableToolbarSearch
+              defaultExpanded
               tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}
               onChange={onInputChange}
             />
@@ -107,18 +109,18 @@ export default props => (
           <TableHead>
             <TableRow>
               <TableSelectAll {...getSelectionProps()} />
-              {headers.map(header => (
-                <TableHeader {...getHeaderProps({ header })}>
+              {headers.map((header, i) => (
+                <TableHeader key={i} {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
-              <TableRow {...getRowProps({ row })}>
+            {rows.map((row, i) => (
+              <TableRow key={i} {...getRowProps({ row })}>
                 <TableSelectRow {...getSelectionProps({ row })} />
-                {row.cells.map(cell => (
+                {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
               </TableRow>
@@ -129,3 +131,5 @@ export default props => (
     )}
   />
 );
+
+export default TableBatchActionsStory;

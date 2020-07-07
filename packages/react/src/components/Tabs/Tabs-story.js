@@ -8,14 +8,26 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  number,
+  select,
+  text,
+} from '@storybook/addon-knobs';
 import { settings } from 'carbon-components';
 import classNames from 'classnames';
 import './Tabs-story.scss';
 import CodeSnippet from '../CodeSnippet';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
+import TextInput from '../TextInput';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
+
+const selectionModes = {
+  'Change selection automatically upon focus (automatic)': 'automatic',
+  'Change selection on explicit gesture (manual)': 'manual',
+};
 
 const { prefix } = settings;
 const props = {
@@ -39,6 +51,11 @@ const props = {
       'The className for the child `<TabContent>` components',
       'tab-content'
     ),
+    selectionMode: select(
+      'Selection mode (selectionMode)',
+      selectionModes,
+      'automatic'
+    ),
   }),
   tab: () => ({
     disabled: boolean('Disabled (disabled in <Tab>)', false),
@@ -50,7 +67,9 @@ const props = {
   }),
 };
 
-const CustomLabel = ({ text }) => <>{text}</>;
+const CustomLabel = ({ text }) => {
+  text;
+};
 
 const CodeSnippetExample = () => (
   <CodeSnippet type="multi">
@@ -117,7 +136,8 @@ storiesOf('Tabs', module)
         <Tab
           id="tab-4"
           {...props.tab()}
-          label="Tab label 4"
+          label="Tab label 4 shows truncation"
+          title="Tab label 4 shows truncation"
           renderContent={TabContentRenderedOnlyWhenSelected}>
           <div className="some-content">
             <p>Content for fourth tab goes here.</p>
@@ -165,7 +185,8 @@ storiesOf('Tabs', module)
         <Tab
           id="tab-3"
           {...props.tab()}
-          label="Tab label 3"
+          label="Tab label 3 renders content only when selected"
+          title="Tab label 3 renders content only when selected"
           renderContent={TabContentRenderedOnlyWhenSelected}>
           <div className="some-content">
             <p>Content for third tab goes here.</p>
@@ -183,6 +204,7 @@ storiesOf('Tabs', module)
           label={<CustomLabel text="Custom Label" />}>
           <div className="some-content">
             <p>Content for fourth tab goes here.</p>
+            <TextInput light id="sample-input" labelText="Text Input Label" />
           </div>
         </Tab>
       </Tabs>

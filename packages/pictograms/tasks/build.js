@@ -7,29 +7,32 @@
 
 'use strict';
 
-const { builders, buildMetadata } = require('@carbon/icon-build-helpers');
+const { builders, Metadata } = require('@carbon/icon-build-helpers');
 const path = require('path');
 
-const SVG_DIR = path.resolve(__dirname, '../svg');
-const CATEGORIES_PATH = path.resolve(__dirname, '../categories.yml');
-const METADATA_PATH = path.resolve(__dirname, '../metadata.yml');
-
 async function build() {
-  const cwd = process.cwd();
-  await builders.vanilla.run(SVG_DIR, {
-    cwd,
-  });
-  await buildMetadata(
-    {
-      categoriesPath: CATEGORIES_PATH,
-      metadataPath: METADATA_PATH,
+  const metadata = await Metadata.build({
+    input: {
+      svg: path.resolve(__dirname, '../src/svg'),
+      extensions: path.resolve(__dirname, '../'),
     },
-    {
-      cwd,
-    }
-  );
+    extensions: [
+      Metadata.extensions.pictograms,
+      Metadata.extensions.assets,
+      Metadata.extensions.deprecated,
+      [Metadata.extensions.output, { target: 'pictograms' }],
+      Metadata.extensions.categories,
+    ],
+  });
+
+  const output = path.resolve(__dirname, '../');
+  await Promise.all([
+    builders.svg.run(metadata, { output }),
+    builders.vanilla.run(metadata, { output }),
+  ]);
 }
 
-build().catch(error => {
-  console.error(error);
+build().catch((error) => {
+  console.log(error);
+  process.exit(1);
 });

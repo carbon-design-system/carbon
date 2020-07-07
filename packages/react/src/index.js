@@ -58,6 +58,7 @@ export FileUploader, {
   FileUploaderItem,
 } from './components/FileUploader';
 export Form from './components/Form';
+export FluidForm from './components/FluidForm';
 export FormGroup from './components/FormGroup';
 export FormItem from './components/FormItem';
 export FormLabel from './components/FormLabel';
@@ -148,6 +149,7 @@ export CodeSnippetSkeleton from './components/CodeSnippet/CodeSnippet.Skeleton';
 export DropdownSkeleton from './components/Dropdown/Dropdown.Skeleton';
 export FileUploaderSkeleton from './components/FileUploader/FileUploader.Skeleton';
 export NumberInputSkeleton from './components/NumberInput/NumberInput.Skeleton';
+export PaginationSkeleton from './components/Pagination/Pagination.Skeleton';
 export ProgressIndicatorSkeleton from './components/ProgressIndicator/ProgressIndicator.Skeleton';
 export RadioButtonSkeleton from './components/RadioButton/RadioButton.Skeleton';
 export SearchSkeleton from './components/Search/Search.Skeleton';
@@ -163,3 +165,9 @@ export ToggleSmallSkeleton from './components/ToggleSmall/ToggleSmall.Skeleton';
 export IconSkeleton from './components/Icon/Icon.Skeleton';
 export DatePickerSkeleton from './components/DatePicker/DatePicker.Skeleton';
 export * from './components/UIShell';
+
+// experimental
+export {
+  PageSelector,
+  Unstable_Pagination,
+} from './components/Pagination/Unstable_Pagination';

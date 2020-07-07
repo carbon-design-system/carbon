@@ -31,10 +31,14 @@ const icons = {
 const iconMap = {
   iconAddSolid,
   iconSearch,
-  AddFilled16: props => (
+  // eslint-disable-next-line react/display-name
+  AddFilled16: (props) => (
     <AddFilled16 className={`${prefix}--btn__icon`} {...props} />
   ),
-  Search16: props => <Search16 className={`${prefix}--btn__icon`} {...props} />,
+  // eslint-disable-next-line react/display-name
+  Search16: (props) => (
+    <Search16 className={`${prefix}--btn__icon`} {...props} />
+  ),
 };
 
 const props = () => {

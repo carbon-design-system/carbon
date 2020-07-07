@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
@@ -41,12 +41,29 @@ const props = () => ({
 
 storiesOf('Slider', module)
   .addDecorator(withKnobs)
-  .add('default', () => <Slider id="slider" {...props()} />, {
+  .add('default', () => <Slider required id="slider" {...props()} />, {
     info: {
       text: `
             Sliders provide a visual indication of adjustable content, where the user can move the handle along a horizontal track to increase or decrease the value.
           `,
     },
+  })
+  .add('controlled slider', () => {
+    const [val, setVal] = useState(87);
+    return (
+      <>
+        <button onClick={() => setVal(Math.round(Math.random() * 100))}>
+          randomize value
+        </button>
+        <Slider
+          max={100}
+          min={0}
+          value={val}
+          onChange={({ value }) => setVal(value)}
+        />
+        <h1>{val}</h1>
+      </>
+    );
   })
   .add(
     'skeleton',
@@ -56,7 +73,7 @@ storiesOf('Slider', module)
         aria-label="loading slider"
         aria-live="assertive"
         role="status"
-        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+        tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
       >
         <SliderSkeleton />
       </div>

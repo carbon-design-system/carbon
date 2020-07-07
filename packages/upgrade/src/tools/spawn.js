@@ -19,18 +19,18 @@ function spawnAsync(command, args, options) {
     let stderr = '';
 
     if (child.stdout) {
-      child.stdout.on('data', data => {
+      child.stdout.on('data', (data) => {
         stdout += `${data}`;
       });
     }
 
     if (child.stderr) {
-      child.stderr.on('data', data => {
+      child.stderr.on('data', (data) => {
         stderr += `${data}`;
       });
     }
 
-    child.on('close', code => {
+    child.on('close', (code) => {
       if (code !== 0) {
         reject(stderr || defaultStderr);
         return;
@@ -38,7 +38,7 @@ function spawnAsync(command, args, options) {
       resolve(stdout);
     });
 
-    child.on('error', error => {
+    child.on('error', (error) => {
       reject(error);
       return;
     });

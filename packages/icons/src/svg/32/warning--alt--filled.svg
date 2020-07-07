@@ -1,0 +1,13 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <title>warning--alt--filled</title>
+  <path d="M29.879,27.5212l-13-25.0363a1.04,1.04,0,0,0-1.7583,0l-13,25.0363A1.0015,1.0015,0,0,0,3,29H29a1.001,1.001,0,0,0,.8789-1.4788ZM14.8751,10.0086h2.25V20h-2.25ZM16,26a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,16,26Z"/>
+  <path id="inner-path" class="cls-1" d="M14.8751,10.0086h2.25V20h-2.25ZM16,26a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,16,26Z"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>

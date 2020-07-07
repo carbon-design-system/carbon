@@ -17,7 +17,7 @@ import DataTable, {
 } from '../../DataTable';
 import { initialRows, headers } from './shared';
 
-export default props => (
+const SortingStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}
@@ -38,17 +38,19 @@ export default props => (
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              {headers.map(header => (
-                <TableHeader {...getHeaderProps({ header, isSortable: true })}>
+              {headers.map((header, i) => (
+                <TableHeader
+                  key={i}
+                  {...getHeaderProps({ header, isSortable: true })}>
                   {header.header}
                 </TableHeader>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
-              <TableRow {...getRowProps({ row })}>
-                {row.cells.map(cell => (
+            {rows.map((row, i) => (
+              <TableRow key={i} {...getRowProps({ row })}>
+                {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
               </TableRow>
@@ -59,3 +61,5 @@ export default props => (
     )}
   />
 );
+
+export default SortingStory;

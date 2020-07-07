@@ -44,8 +44,8 @@ module.exports = (file, api) => {
   //   import IconName from '@carbon/icons-react/<bundle>/<name>/<size>';
   root
     .find(j.ImportDeclaration)
-    .filter(path => path.value.source.value.includes('@carbon/icons-react'))
-    .forEach(path => {
+    .filter((path) => path.value.source.value.includes('@carbon/icons-react'))
+    .forEach((path) => {
       // For each node that we encounter that has `@carbon/icons-react` in the
       // import source, we need to slice off the first chunks from the value and
       // then capture all the icon-specific data. Depending on the length of
@@ -142,7 +142,7 @@ module.exports = (file, api) => {
 
   // Finally, go through our program and insert our icon import declaration into
   // the index specified by `importIndex`
-  root.find(j.Program).forEach(path => {
+  root.find(j.Program).forEach((path) => {
     const { node } = path;
     node.body = [
       ...node.body.slice(0, importIndex),
@@ -163,7 +163,7 @@ module.exports = (file, api) => {
 
 function getModuleName(name, size, prefixParts) {
   const prefix = prefixParts
-    .filter(size => isNaN(size))
+    .filter((size) => isNaN(size))
     .map(pascalCase)
     .join('');
 

@@ -16,6 +16,7 @@ import {
   CARBON_TYPE_TOKEN,
 } from './addon-carbon-theme/shared';
 import Container from './Container';
+import PackageInfo from './../package.json';
 
 const customPropertyPrefix = 'cds';
 
@@ -35,7 +36,7 @@ addParameters({
     // display in alphabetic order
     storySort: (a, b) => a[1].id.localeCompare(b[1].id),
     theme: {
-      brandTitle: 'carbon components react',
+      brandTitle: `Carbon Components React v${PackageInfo.version}`,
       brandUrl:
         'https://github.com/carbon-design-system/carbon/tree/master/packages/react',
     },
@@ -47,19 +48,20 @@ configureActions({
   limit: 10,
 });
 
-addDecorator(story => <Container story={story} />);
+addDecorator((story) => <Container story={story} />);
 // addDecorator(checkA11y);
 
-addons.getChannel().on(CARBON_CURRENT_THEME, theme => {
+addons.getChannel().on(CARBON_CURRENT_THEME, (theme) => {
   document.documentElement.setAttribute('storybook-carbon-theme', theme);
 });
 
 addons.getChannel().on(CARBON_TYPE_TOKEN, ({ tokenName, tokenValue }) => {
   const root = document.documentElement;
   const [fontSize, lineHeight] = tokenValue.split('-');
-  const rem = px =>
-    `${px /
-      parseFloat(getComputedStyle(document.documentElement).fontSize)}rem`;
+  const rem = (px) =>
+    `${
+      px / parseFloat(getComputedStyle(document.documentElement).fontSize)
+    }rem`;
   root.style.setProperty(
     `--${customPropertyPrefix}-${tokenName}-font-size`,
     rem(fontSize)

@@ -8,4 +8,4 @@
 import PropTypes from 'prop-types';
 
 export const ListBoxType = PropTypes.oneOf(['default', 'inline']);
-export const ListBoxSize = PropTypes.oneOf(['sm', 'lg', 'xl']);
+export const ListBoxSize = PropTypes.oneOf(['sm', 'xl']);

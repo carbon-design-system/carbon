@@ -81,7 +81,6 @@ const classic = [
 
   // Modal
   'modal-border-top',
-  'modal-footer-background-color',
 
   // Progress Indicator
   'progress-indicator-bar-width',
@@ -176,7 +175,7 @@ describe('_theme.scss', () => {
     expect(convert(calls[3][0])).toBe(testColor);
   });
 
-  it.each(classic)('$%s should be exported', async name => {
+  it.each(classic)('$%s should be exported', async (name) => {
     const { calls } = await render(`
       @import '../theme';
       $c: test(global-variable-exists(${name}));

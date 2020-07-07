@@ -59,12 +59,14 @@
     }
 
     .#{$prefix}--copy-btn__feedback {
+      box-sizing: content-box;
       @include tooltip--content('icon');
       clip: auto;
       margin: auto;
       overflow: visible;
       display: none;
     }
+
     @include tooltip--placement('icon', 'bottom', 'center');
   }
 
@@ -160,7 +162,8 @@
 
   // closed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
-    overflow: hidden;
+    overflow-x: scroll;
+    padding-right: $carbon--spacing-08;
     padding-bottom: rem(24px);
   }
 
@@ -321,7 +324,8 @@
   .#{$prefix}--snippet.#{$prefix}--snippet--light,
   .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--snippet-button,
   .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-btn--expand {
+    .#{$prefix}--snippet-btn--expand,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn {
     background-color: $ui-02;
   }
 
@@ -329,7 +333,8 @@
   .#{$prefix}--snippet.#{$prefix}--snippet--light
     .#{$prefix}--snippet-button:hover,
   .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-btn--expand:hover {
+    .#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
     background-color: $hover-ui-light;
   }
 

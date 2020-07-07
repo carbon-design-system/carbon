@@ -89,6 +89,11 @@ export default class Tabs extends React.Component {
      * Provide a className that is applied to the <TabContent> components
      */
     tabContentClassName: PropTypes.string,
+
+    /**
+     * Choose whether or not to automatically change selection on focus
+     */
+    selectionMode: PropTypes.oneOf(['automatic', 'manual']),
   };
 
   static defaultProps = {
@@ -98,6 +103,7 @@ export default class Tabs extends React.Component {
     triggerHref: '#',
     selected: 0,
     ariaLabel: 'listbox',
+    selectionMode: 'automatic',
   };
 
   state = {
@@ -115,7 +121,7 @@ export default class Tabs extends React.Component {
   }
 
   getTabs() {
-    return React.Children.map(this.props.children, tab => tab);
+    return React.Children.map(this.props.children, (tab) => tab);
   }
 
   getEnabledTabs = () =>
@@ -136,7 +142,7 @@ export default class Tabs extends React.Component {
   };
 
   // following functions (handle*) are Props on Tab.js, see Tab.js for parameters
-  handleTabClick = onSelectionChange => {
+  handleTabClick = (onSelectionChange) => {
     return (index, evt) => {
       evt.preventDefault();
 
@@ -147,7 +153,7 @@ export default class Tabs extends React.Component {
     };
   };
 
-  getDirection = evt => {
+  getDirection = (evt) => {
     if (match(evt, keys.ArrowLeft)) {
       return -1;
     }
@@ -170,7 +176,7 @@ export default class Tabs extends React.Component {
     return enabledTabs[nextIndexLooped];
   };
 
-  handleTabKeyDown = onSelectionChange => {
+  handleTabKeyDown = (onSelectionChange) => {
     return (index, evt) => {
       if (matches(evt, [keys.Enter, keys.Space])) {
         this.selectTabAt(index, onSelectionChange);
@@ -184,7 +190,9 @@ export default class Tabs extends React.Component {
         const tab = this.getTabAt(nextIndex);
         if (tab && matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
           evt.preventDefault();
-          this.selectTabAt(nextIndex, onSelectionChange);
+          if (this.props.selectionMode !== 'manual') {
+            this.selectTabAt(nextIndex, onSelectionChange);
+          }
           if (tab.tabAnchor) {
             tab.tabAnchor.focus();
           }
@@ -219,6 +227,7 @@ export default class Tabs extends React.Component {
       role,
       type,
       onSelectionChange,
+      selectionMode, // eslint-disable-line no-unused-vars
       tabContentClassName,
       ...other
     } = this.props;
@@ -243,7 +252,7 @@ export default class Tabs extends React.Component {
         selected: index === this.state.selected,
         handleTabClick: this.handleTabClick(onSelectionChange),
         tabIndex,
-        ref: e => {
+        ref: (e) => {
           this.setTabAt(index, e);
         },
         handleTabKeyDown: this.handleTabKeyDown(onSelectionChange),
@@ -252,7 +261,7 @@ export default class Tabs extends React.Component {
       return newTab;
     });
 
-    const tabContentWithProps = React.Children.map(tabsWithProps, tab => {
+    const tabContentWithProps = React.Children.map(tabsWithProps, (tab) => {
       const {
         id: tabId,
         children,

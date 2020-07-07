@@ -8,6 +8,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/css--helpers';
 @import '../../globals/scss/tooltip';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import 'mixins';
@@ -31,7 +32,7 @@
     + .#{$prefix}--btn--primary.#{$prefix}--btn--disabled,
   .#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled
     + .#{$prefix}--btn--danger.#{$prefix}--btn--disabled {
-    border-left: rem(1px) solid $disabled-03;
+    box-shadow: rem(-1px) 0 0 0 $disabled-03;
   }
 
   .#{$prefix}--btn {
@@ -82,8 +83,7 @@
       $interactive-03,
       $hover-tertiary,
       currentColor,
-      $active-tertiary,
-      1px
+      $active-tertiary
     );
 
     &:hover {
@@ -108,19 +108,6 @@
       background: transparent;
       color: $disabled;
       outline: none;
-    }
-  }
-
-  .#{$prefix}--btn--tertiary,
-  .#{$prefix}--btn--tertiary.#{$prefix}--btn--field,
-  .#{$prefix}--btn--tertiary.#{$prefix}--btn--sm {
-    padding-right: rem(62px);
-    padding-left: rem(14px);
-
-    &:focus {
-      border-width: rem(3px);
-      padding-right: rem(60px);
-      padding-left: rem(12px);
     }
   }
 
@@ -172,11 +159,24 @@
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
     @include tooltip--trigger('icon', 'bottom');
+
+    svg,
+    &:hover svg,
+    &:focus svg {
+      fill: currentColor;
+    }
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:focus svg {
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover svg {
+    fill: $icon-01;
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
-    box-shadow: inset 0 0 0 $button-outline-width $ui-02;
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
@@ -194,8 +194,8 @@
   }
 
   .#{$prefix}--btn--icon-only {
-    padding-left: rem(13px);
-    padding-right: rem(13px);
+    padding-left: rem(15px);
+    padding-right: rem(15px);
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -204,6 +204,17 @@
     &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon {
       margin: 0;
     }
+  }
+
+  .#{$prefix}--btn path[data-icon-path='inner-path'] {
+    fill: none;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost
+    .#{$prefix}--btn__icon,
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover
+    .#{$prefix}--btn__icon {
+    fill: $icon-01;
   }
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
@@ -217,6 +228,8 @@
     .#{$prefix}--btn__icon
     path,
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
+    .#{$prefix}--btn__icon,
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost[disabled]:hover
     .#{$prefix}--btn__icon {
     fill: $disabled-02;
   }
@@ -225,56 +238,20 @@
     cursor: not-allowed;
   }
 
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
-    .#{$prefix}--assistive-text,
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]::before {
-    display: none;
-  }
-
-  .#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
-    padding-left: rem(15px);
-    padding-right: rem(15px);
-
-    &:focus {
-      padding-left: rem(13px);
-      padding-right: rem(13px);
-    }
-  }
-
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
-    padding-left: rem(9px);
-    padding-right: rem(9px);
-  }
-
-  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
     padding-left: rem(11px);
     padding-right: rem(11px);
-
-    &:focus {
-      padding-left: rem(9px);
-      padding-right: rem(9px);
-    }
   }
 
   .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
-    padding-left: rem(5px);
-    padding-right: rem(5px);
-  }
-
-  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only.#{$prefix}--btn--tertiary {
     padding-left: rem(7px);
     padding-right: rem(7px);
-
-    &:focus {
-      padding-left: rem(5px);
-      padding-right: rem(5px);
-    }
   }
 
   .#{$prefix}--btn--danger {
     @include button-theme(
       $danger,
-      $danger,
+      transparent,
       $text-04,
       $hover-danger,
       currentColor,
@@ -283,7 +260,6 @@
 
     &:hover {
       color: $text-04;
-      border: $button-border-width solid transparent;
     }
   }
 

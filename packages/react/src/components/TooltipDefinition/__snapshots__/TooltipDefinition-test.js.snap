@@ -10,6 +10,7 @@ exports[`TooltipDefinition should allow the user to specify the direction 1`] = 
   <div
     className="bx--tooltip--definition bx--tooltip--a11y custom-class"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <button
       aria-describedby="definition-tooltip-3"
@@ -39,6 +40,7 @@ exports[`TooltipDefinition should render 1`] = `
   <div
     className="bx--tooltip--definition bx--tooltip--a11y custom-class"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <button
       aria-describedby="definition-tooltip-1"
@@ -69,6 +71,7 @@ exports[`TooltipDefinition should support a custom trigger element class 1`] = `
   <div
     className="bx--tooltip--definition bx--tooltip--a11y custom-class"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <button
       aria-describedby="definition-tooltip-2"

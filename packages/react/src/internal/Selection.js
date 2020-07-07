@@ -5,13 +5,81 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash.isequal';
 
+export function useSelection({
+  disabled,
+  onChange,
+  initialSelectedItems = [],
+}) {
+  const isMounted = useRef(false);
+  const savedOnChange = useRef(onChange);
+  const [selectedItems, setSelectedItems] = useState(initialSelectedItems);
+  const onItemChange = useCallback(
+    (item) => {
+      if (disabled) {
+        return;
+      }
+
+      let selectedIndex;
+      selectedItems.forEach((selectedItem, index) => {
+        if (isEqual(selectedItem, item)) {
+          selectedIndex = index;
+        }
+      });
+
+      if (selectedIndex === undefined) {
+        setSelectedItems((selectedItems) => selectedItems.concat(item));
+        return;
+      }
+
+      setSelectedItems((selectedItems) =>
+        removeAtIndex(selectedItems, selectedIndex)
+      );
+    },
+    [disabled, selectedItems]
+  );
+
+  const clearSelection = useCallback(() => {
+    if (disabled) {
+      return;
+    }
+    setSelectedItems([]);
+  }, [disabled]);
+
+  useEffect(() => {
+    savedOnChange.current = onChange;
+  }, [onChange]);
+
+  useEffect(() => {
+    if (isMounted.current === true && savedOnChange.current) {
+      savedOnChange.current({ selectedItems });
+    }
+  }, [selectedItems]);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  return {
+    selectedItems,
+    onItemChange,
+    clearSelection,
+  };
+}
+
 export default class Selection extends React.Component {
   static propTypes = {
+    children: PropTypes.func,
+    disabled: PropTypes.bool,
     initialSelectedItems: PropTypes.array.isRequired,
+    onChange: PropTypes.func,
+    render: PropTypes.func,
   };
 
   static defaultProps = {
@@ -44,18 +112,19 @@ export default class Selection extends React.Component {
     });
   };
 
-  handleSelectItem = item => {
-    this.internalSetState(state => ({
+  handleSelectItem = (item) => {
+    this.internalSetState((state) => ({
       selectedItems: state.selectedItems.concat(item),
     }));
   };
 
-  handleRemoveItem = index => {
-    this.internalSetState(state => ({
+  handleRemoveItem = (index) => {
+    this.internalSetState((state) => ({
       selectedItems: removeAtIndex(state.selectedItems, index),
     }));
   };
-  handleOnItemChange = item => {
+
+  handleOnItemChange = (item) => {
     if (this.props.disabled) {
       return;
     }

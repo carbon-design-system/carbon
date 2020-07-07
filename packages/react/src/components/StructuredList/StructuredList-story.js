@@ -68,7 +68,7 @@ storiesOf('StructuredList', module)
   .add(
     'Selection',
     () => {
-      const structuredListBodyRowGenerator = numRows => {
+      const structuredListBodyRowGenerator = (numRows) => {
         return Array.apply(null, Array(numRows)).map((n, i) => (
           <StructuredListRow label key={`row-${i}`}>
             <StructuredListCell>Row {i}</StructuredListCell>
@@ -97,7 +97,7 @@ storiesOf('StructuredList', module)
         ));
       };
       return (
-        <StructuredListWrapper selection border>
+        <StructuredListWrapper selection>
           <StructuredListHead>
             <StructuredListRow head>
               <StructuredListCell head>ColumnA</StructuredListCell>
@@ -125,7 +125,7 @@ storiesOf('StructuredList', module)
     () => (
       <div style={{ width: '800px' }}>
         <StructuredListSkeleton />
-        <StructuredListSkeleton border />
+        <StructuredListSkeleton />
       </div>
     ),
     {

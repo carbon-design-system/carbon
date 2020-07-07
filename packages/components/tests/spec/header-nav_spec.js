@@ -1,6 +1,6 @@
 import HeaderNav from '../../src/components/ui-shell/header-nav';
 
-describe('HeaderNav', function() {
+describe('HeaderNav', function () {
   let headerNav;
   let nav;
   let ul;
@@ -9,7 +9,7 @@ describe('HeaderNav', function() {
   let a1;
   let a2;
 
-  beforeAll(function() {
+  beforeAll(function () {
     nav = document.createElement('nav');
     nav.className = 'bx--header__nav';
     ul = document.createElement('ul');
@@ -30,13 +30,13 @@ describe('HeaderNav', function() {
     document.body.appendChild(nav);
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     // TODO: investigate
     a1.setAttribute('tabindex', 0);
     a1.focus();
   });
 
-  describe('Left/Right arrow keys', function() {
+  describe('Left/Right arrow keys', function () {
     const leftArrowKeydown = new KeyboardEvent('keydown', { bubbles: true });
     Object.defineProperty(leftArrowKeydown, 'which', {
       value: 37,
@@ -48,14 +48,14 @@ describe('HeaderNav', function() {
       writable: true,
     });
 
-    describe('right arrow keydown', function() {
-      it('should move to next submenu with right arrow key', function() {
+    describe('right arrow keydown', function () {
+      it('should move to next submenu with right arrow key', function () {
         spyOn(a2, 'focus');
         a1.dispatchEvent(rightArrowKeydown);
         expect(a2.focus).toHaveBeenCalled();
       });
 
-      it('should wrap to first submenu when navigating from end of list', function() {
+      it('should wrap to first submenu when navigating from end of list', function () {
         // TODO: investigate
         a2.setAttribute('tabindex', 0);
         a2.focus();
@@ -65,8 +65,8 @@ describe('HeaderNav', function() {
       });
     });
 
-    describe('left arrow keydown', function() {
-      it('should move to previous submenu with left arrow key', function() {
+    describe('left arrow keydown', function () {
+      it('should move to previous submenu with left arrow key', function () {
         // TODO: investigate
         a2.setAttribute('tabindex', 0);
         a2.focus();
@@ -75,7 +75,7 @@ describe('HeaderNav', function() {
         expect(a1.focus).toHaveBeenCalled();
       });
 
-      it('should wrap to last submenu when navigating from start of list', function() {
+      it('should wrap to last submenu when navigating from start of list', function () {
         spyOn(a2, 'focus');
         a1.dispatchEvent(rightArrowKeydown);
         expect(a2.focus).toHaveBeenCalled();
@@ -83,7 +83,7 @@ describe('HeaderNav', function() {
     });
   });
 
-  afterAll(function() {
+  afterAll(function () {
     headerNav.release();
     document.body.removeChild(nav);
   });

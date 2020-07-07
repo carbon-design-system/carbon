@@ -45,10 +45,16 @@ export default class ContentSwitcher extends React.Component {
      * Specify a selected index for the initially selected content
      */
     selectedIndex: PropTypes.number,
+
+    /**
+     * Choose whether or not to automatically change selection on focus
+     */
+    selectionMode: PropTypes.oneOf(['automatic', 'manual']),
   };
 
   static defaultProps = {
     selectedIndex: 0,
+    selectionMode: 'automatic',
   };
 
   static getDerivedStateFromProps({ selectedIndex }, state) {
@@ -61,11 +67,12 @@ export default class ContentSwitcher extends React.Component {
         };
   }
 
-  handleItemRef = index => ref => {
+  handleItemRef = (index) => (ref) => {
     this._switchRefs[index] = ref;
   };
 
-  handleChildChange = data => {
+  handleChildChange = (data) => {
+    const { selectionMode } = this.props;
     // the currently selected child index
     const { selectedIndex } = this.state;
     // the newly selected child index
@@ -73,21 +80,22 @@ export default class ContentSwitcher extends React.Component {
     const { key } = data;
 
     if (matches(data, [keys.ArrowRight, keys.ArrowLeft])) {
-      const nextIndex = getNextIndex(
-        key,
-        selectedIndex,
-        this.props.children.length
-      );
-      this.setState(
-        {
-          selectedIndex: nextIndex,
-        },
-        () => {
-          const switchRef = this._switchRefs[nextIndex];
-          switchRef && switchRef.focus();
-          this.props.onChange(data);
-        }
-      );
+      const nextIndex = getNextIndex(key, index, this.props.children.length);
+      if (selectionMode === 'manual') {
+        const switchRef = this._switchRefs[nextIndex];
+        switchRef && switchRef.focus();
+      } else {
+        this.setState(
+          {
+            selectedIndex: nextIndex,
+          },
+          () => {
+            const switchRef = this._switchRefs[nextIndex];
+            switchRef && switchRef.focus();
+            this.props.onChange(data);
+          }
+        );
+      }
     } else {
       if (selectedIndex !== index) {
         this.setState({ selectedIndex: index }, () => {
@@ -104,6 +112,7 @@ export default class ContentSwitcher extends React.Component {
       children,
       className,
       selectedIndex, // eslint-disable-line no-unused-vars
+      selectionMode, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
 

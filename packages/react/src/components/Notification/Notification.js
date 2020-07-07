@@ -14,7 +14,9 @@ import {
   ErrorFilled20,
   CheckmarkFilled20,
   WarningFilled20,
+  WarningAltFilled20,
   InformationFilled20,
+  InformationSquareFilled20,
 } from '@carbon/icons-react';
 
 import Button from '../Button';
@@ -72,15 +74,10 @@ export function NotificationButton({
   ...rest
 }) {
   const buttonClassName = cx(className, {
-    [`${prefix}--toast-notification__close-button`]:
-      notificationType === 'toast',
-    [`${prefix}--inline-notification__close-button`]:
-      notificationType === 'inline',
+    [`${prefix}--${notificationType}-notification__close-button`]: notificationType,
   });
   const iconClassName = cx({
-    [`${prefix}--toast-notification__close-icon`]: notificationType === 'toast',
-    [`${prefix}--inline-notification__close-icon`]:
-      notificationType === 'inline',
+    [`${prefix}--${notificationType}-notification__close-icon`]: notificationType,
   });
 
   return (
@@ -213,7 +210,9 @@ const iconTypes = {
   error: ErrorFilled20,
   success: CheckmarkFilled20,
   warning: WarningFilled20,
+  ['warning-alt']: WarningAltFilled20,
   info: InformationFilled20,
+  ['info-square']: InformationSquareFilled20,
 };
 
 function NotificationIcon({ iconDescription, kind, notificationType }) {
@@ -231,7 +230,14 @@ function NotificationIcon({ iconDescription, kind, notificationType }) {
 
 NotificationIcon.propTypes = {
   notificationType: PropTypes.oneOf(['inline', 'toast']).isRequired,
-  kind: PropTypes.oneOf(['error', 'success', 'warning', 'info']).isRequired,
+  kind: PropTypes.oneOf([
+    'error',
+    'success',
+    'warning',
+    'warning-alt',
+    'info',
+    'info-square',
+  ]).isRequired,
   iconDescription: PropTypes.string.isRequired,
 };
 
@@ -322,7 +328,14 @@ ToastNotification.propTypes = {
   /**
    * Specify what state the notification represents
    */
-  kind: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
+  kind: PropTypes.oneOf([
+    'error',
+    'info',
+    'info-square',
+    'success',
+    'warning',
+    'warning-alt',
+  ]).isRequired,
 
   /**
    * Specify whether you are using the low contrast variant of the ToastNotification.
@@ -358,12 +371,12 @@ ToastNotification.propTypes = {
   /**
    * Provide a description for "close" icon that can be read by screen readers
    */
-  iconDescription: PropTypes.string.isRequired,
+  iconDescription: PropTypes.string,
 
   /**
    * Provide a description for "status" icon that can be read by screen readers
    */
-  statusIconDescription: PropTypes.string.isRequired,
+  statusIconDescription: PropTypes.string,
 
   /**
    * By default, this value is "toast". You can also provide an alternate type
@@ -473,7 +486,14 @@ InlineNotification.propTypes = {
   /**
    * Specify what state the notification represents
    */
-  kind: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
+  kind: PropTypes.oneOf([
+    'error',
+    'info',
+    'info-square',
+    'success',
+    'warning',
+    'warning-alt',
+  ]).isRequired,
 
   /**
    * Specify whether you are using the low contrast variant of the InlineNotification.
@@ -504,12 +524,12 @@ InlineNotification.propTypes = {
   /**
    * Provide a description for "close" icon that can be read by screen readers
    */
-  iconDescription: PropTypes.string.isRequired,
+  iconDescription: PropTypes.string,
 
   /**
    * Provide a description for "status" icon that can be read by screen readers
    */
-  statusIconDescription: PropTypes.string.isRequired,
+  statusIconDescription: PropTypes.string,
 
   /**
    * By default, this value is "inline". You can also provide an alternate type

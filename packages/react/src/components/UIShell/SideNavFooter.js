@@ -31,7 +31,7 @@ const SideNavFooter = ({
       <button
         className={`${prefix}--side-nav__toggle`}
         type="button"
-        onClick={evt => onToggle(evt)}
+        onClick={(evt) => onToggle(evt)}
         title={assistiveText}>
         <div className={`${prefix}--side-nav__icon`}>
           {expanded ? <Close20 /> : <ChevronRight20 />}
@@ -65,6 +65,7 @@ SideNavFooter.propTypes = {
    * keep local state and styling in step with the SideNav expansion state.
    */
   isSideNavExpanded: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 SideNavFooter.defaultProps = {

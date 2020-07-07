@@ -21,15 +21,20 @@ const props = {
           ...acc,
           [`${type} (${type})`]: type,
         }),
-        {}
-      ),
-      'red'
+        {
+          Default: undefined,
+        }
+      )
     ),
     disabled: boolean('Disabled (disabled)', false),
-    title: 'Clear Filter',
+    title: text('Title (title)', 'Clear Filter'),
   }),
   filter() {
-    return { ...this.regular(), onClick: action('onClick') };
+    return {
+      ...this.regular(),
+      onClick: action('onClick'),
+      onClose: action('onClose'),
+    };
   },
 };
 
@@ -39,7 +44,7 @@ storiesOf('Tag', module)
     'Default',
     () => (
       <Tag className="some-class" {...props.regular()}>
-        {text('Content (children)', 'This is not a tag')}
+        {text('Content (children)', 'This is a tag')}
       </Tag>
     ),
     {
@@ -56,7 +61,7 @@ storiesOf('Tag', module)
     'Filter',
     () => (
       <Tag className="some-class" {...props.filter()} filter>
-        {text('Content (children)', 'This is not a tag')}
+        {text('Content (children)', 'This is a tag')}
       </Tag>
     ),
     {

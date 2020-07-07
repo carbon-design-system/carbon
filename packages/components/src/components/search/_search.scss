@@ -119,6 +119,7 @@
     @include button-reset(false);
     @include focus-outline('reset');
     position: absolute;
+    top: 0;
     right: 0;
 
     &::before {
@@ -160,7 +161,7 @@
       outline $duration--fast-02 motion(standard, productive),
       border $duration--fast-02 motion(standard, productive);
     cursor: pointer;
-    visibility: visible;
+    visibility: inherit;
     opacity: 1;
     height: rem(40px);
     width: rem(40px);

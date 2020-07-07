@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
-import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
+import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus from '../../internal/wrapFocus';
 
 const { prefix } = settings;
@@ -66,6 +66,22 @@ export default class ComposedModal extends Component {
     selectorPrimaryFocus: PropTypes.string,
 
     /**
+     * Specify the CSS selectors that match the floating menus
+     */
+    selectorsFloatingMenus: PropTypes.string,
+
+    /**
+     * Specify the content to be placed in the ComposedModal
+     */
+    children: PropTypes.node,
+
+    /**
+     * Specify whether the primary button should be replaced with danger button.
+     * Note that this prop is not applied if you render primary/danger button by yourself
+     */
+    danger: PropTypes.bool,
+
+    /**
      * Specify the size variant.
      */
     size: PropTypes.oneOf(['xs', 'sm', 'lg']),
@@ -81,7 +97,7 @@ export default class ComposedModal extends Component {
         };
   }
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     // Esc key
     if (evt.which === 27) {
       this.closeModal(evt);
@@ -90,7 +106,7 @@ export default class ComposedModal extends Component {
     this.props.onKeyDown(evt);
   };
 
-  handleClick = evt => {
+  handleClick = (evt) => {
     if (
       this.innerModal.current &&
       !this.innerModal.current.contains(evt.target)
@@ -132,16 +148,18 @@ export default class ComposedModal extends Component {
     );
   }
 
-  focusButton = focusContainerElement => {
-    const primaryFocusElement = focusContainerElement.querySelector(
-      this.props.selectorPrimaryFocus
-    );
-    if (primaryFocusElement) {
-      primaryFocusElement.focus();
-      return;
-    }
-    if (this.button.current) {
-      this.button.current.focus();
+  focusButton = (focusContainerElement) => {
+    if (focusContainerElement) {
+      const primaryFocusElement = focusContainerElement.querySelector(
+        this.props.selectorPrimaryFocus
+      );
+      if (primaryFocusElement) {
+        primaryFocusElement.focus();
+        return;
+      }
+      if (this.button.current) {
+        this.button.current.focus();
+      }
     }
   };
 
@@ -158,10 +176,12 @@ export default class ComposedModal extends Component {
     if (!this.props.open) {
       return;
     }
-    this.focusButton(this.innerModal.current);
+    if (this.innerModal.current) {
+      this.focusButton(this.innerModal.current);
+    }
   }
 
-  handleTransitionEnd = evt => {
+  handleTransitionEnd = (evt) => {
     if (
       this.outerModal.current.offsetWidth &&
       this.outerModal.current.offsetHeight &&
@@ -172,7 +192,7 @@ export default class ComposedModal extends Component {
     }
   };
 
-  closeModal = evt => {
+  closeModal = (evt) => {
     const { onClose } = this.props;
     if (!onClose || onClose(evt) !== false) {
       this.setState({
@@ -206,13 +226,13 @@ export default class ComposedModal extends Component {
       [containerClassName]: containerClassName,
     });
 
-    const childrenWithProps = React.Children.toArray(children).map(child => {
+    const childrenWithProps = React.Children.toArray(children).map((child) => {
       switch (child.type) {
-        case ModalHeader:
+        case React.createElement(ModalHeader).type:
           return React.cloneElement(child, {
             closeModal: this.closeModal,
           });
-        case ModalFooter:
+        case React.createElement(ModalFooter).type:
           return React.cloneElement(child, {
             closeModal: this.closeModal,
             inputref: this.button,
@@ -240,7 +260,7 @@ export default class ComposedModal extends Component {
           className={`${prefix}--visually-hidden`}>
           Focus sentinel
         </span>
-        <div ref={this.innerModal} className={containerClass} tabIndex={-1}>
+        <div ref={this.innerModal} className={containerClass} role="dialog">
           {childrenWithProps}
         </div>
         {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
@@ -321,7 +341,7 @@ export class ModalHeader extends Component {
     buttonOnClick: () => {},
   };
 
-  handleCloseButtonClick = evt => {
+  handleCloseButtonClick = (evt) => {
     this.props.closeModal(evt);
     this.props.buttonOnClick();
   };
@@ -419,6 +439,11 @@ ModalBody.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify the content to be placed in the ModalBody
+   */
+  children: PropTypes.node,
+
+  /**
    * Provide whether the modal content has a form element.
    * If `true` is used here, non-form child content should have `bx--modal-content__regular-content` class.
    */
@@ -432,7 +457,7 @@ ModalBody.propTypes = {
   /**
    * Required props for the accessibility label of the header
    */
-  ['aria-label']: requiredIfGivenPropExists(
+  ['aria-label']: requiredIfGivenPropIsTruthy(
     'hasScrollingContent',
     PropTypes.string
   ),
@@ -471,6 +496,12 @@ export class ModalFooter extends Component {
     secondaryButtonText: PropTypes.string,
 
     /**
+     * Specify whether the primary button should be replaced with danger button.
+     * Note that this prop is not applied if you render primary/danger button by yourself
+     */
+    danger: PropTypes.bool,
+
+    /**
      * Specify an optional function for when the modal is requesting to be
      * closed
      */
@@ -491,6 +522,16 @@ export class ModalFooter extends Component {
      * Pass in content that will be rendered in the Modal Footer
      */
     children: PropTypes.node,
+
+    /**
+     * The `ref` callback for the primary button.
+     */
+    inputref: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({
+        current: PropTypes.any,
+      }),
+    ]),
   };
 
   static defaultProps = {
@@ -498,7 +539,7 @@ export class ModalFooter extends Component {
     onRequestSubmit: () => {},
   };
 
-  handleRequestClose = evt => {
+  handleRequestClose = (evt) => {
     this.props.closeModal(evt);
     this.props.onRequestClose(evt);
   };
@@ -516,6 +557,7 @@ export class ModalFooter extends Component {
       onRequestSubmit, // eslint-disable-line
       children,
       danger,
+      inputref,
       ...other
     } = this.props;
 
@@ -549,7 +591,7 @@ export class ModalFooter extends Component {
             className={primaryClass}
             disabled={primaryButtonDisabled}
             kind={danger ? 'danger' : 'primary'}
-            ref={this.props.inputref}>
+            ref={inputref}>
             {primaryButtonText}
           </Button>
         )}

@@ -19,7 +19,7 @@ const translationKeys = {
   'carbon.table.toolbar.search.label': 'Filter table',
   'carbon.table.toolbar.search.placeholder': 'Filter table',
 };
-const translateWithId = id => {
+const translateWithId = (id) => {
   return translationKeys[id];
 };
 const TableToolbarSearch = ({
@@ -80,18 +80,20 @@ const TableToolbarSearch = ({
   const handleExpand = (event, value = !expanded) => {
     if (!controlled && (!persistent || (!persistent && !persistant))) {
       setExpandedState(value);
+      if (value && !expanded) {
+        setFocusTarget(searchRef);
+      }
     }
     if (onExpand) {
       onExpand(event, value);
     }
   };
 
-  const onClick = e => {
-    setFocusTarget(searchRef);
+  const onClick = (e) => {
     handleExpand(e, true);
   };
 
-  const onChange = e => {
+  const onChange = (e) => {
     setValue(e.target.value);
     if (onChangeProp) {
       onChangeProp(e);
@@ -99,12 +101,14 @@ const TableToolbarSearch = ({
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       tabIndex={expandedState ? '-1' : tabIndex}
       ref={searchRef}
-      onClick={event => onClick(event)}
-      onFocus={event => handleExpand(event, true)}
-      onBlur={event => !value && handleExpand(event, false)}
+      onKeyDown={(event) => onClick(event)}
+      onClick={(event) => onClick(event)}
+      onFocus={(event) => handleExpand(event, true)}
+      onBlur={(event) => !value && handleExpand(event, false)}
       className={searchContainerClasses}>
       <Search
         size="sm"
@@ -140,7 +144,22 @@ TableToolbarSearch.propTypes = {
   /**
    * Provide an optional className for the overal container of the Search
    */
-  searchContainerClasses: PropTypes.string,
+  searchContainerClass: PropTypes.string,
+
+  /**
+   * Specifies if the search should expand
+   */
+  expanded: PropTypes.bool,
+
+  /**
+   * Specifies if the search should initially render in an expanded state
+   */
+  defaultExpanded: PropTypes.bool,
+
+  /**
+   * Provide an optional hook that is called each time the input is expanded
+   */
+  onExpand: PropTypes.func,
 
   /**
    * Provide an optional hook that is called each time the input is updated

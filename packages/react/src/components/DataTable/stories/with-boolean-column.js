@@ -16,7 +16,6 @@ import DataTable, {
   TableHeader,
   TableRow,
 } from '../../DataTable';
-// import { initialRows, headers } from './shared';
 
 const initialRows = [
   {
@@ -25,7 +24,7 @@ const initialRows = [
     protocol: 'HTTP',
     port: 3000,
     rule: 'Round robin',
-    attached_groups: 'Kevins VM Groups',
+    attached_groups: 'Kevin’s VM Groups',
     status: 'Disabled',
     enabled: true,
   },
@@ -35,7 +34,7 @@ const initialRows = [
     protocol: 'HTTP',
     port: 443,
     rule: 'Round robin',
-    attached_groups: 'Maureens VM Groups',
+    attached_groups: 'Maureen’s VM Groups',
     status: 'Starting',
     enabled: true,
   },
@@ -45,7 +44,7 @@ const initialRows = [
     protocol: 'HTTP',
     port: 80,
     rule: 'DNS delegation',
-    attached_groups: 'Andrews VM Groups',
+    attached_groups: 'Andrew’s VM Groups',
     status: 'Active',
     enabled: false,
   },
@@ -82,7 +81,7 @@ export const headers = [
   },
 ];
 
-export default props => (
+const BooleanColumnStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}
@@ -102,17 +101,17 @@ export default props => (
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              {headers.map(header => (
-                <TableHeader {...getHeaderProps({ header })}>
+              {headers.map((header, i) => (
+                <TableHeader key={i} {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
-              <TableRow {...getRowProps({ row })}>
-                {row.cells.map(cell => {
+            {rows.map((row, i) => (
+              <TableRow key={i} {...getRowProps({ row })}>
+                {row.cells.map((cell) => {
                   if (cell.info.header === 'enabled') {
                     return (
                       <TableCell
@@ -122,7 +121,8 @@ export default props => (
                         <Checkbox
                           id={'check-' + cell.id}
                           checked={cell.value}
-                          labelText=""
+                          hideLabel
+                          labelText="checkbox"
                         />
                       </TableCell>
                     );
@@ -138,3 +138,5 @@ export default props => (
     )}
   />
 );
+
+export default BooleanColumnStory;

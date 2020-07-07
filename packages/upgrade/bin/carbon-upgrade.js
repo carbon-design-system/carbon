@@ -17,7 +17,7 @@
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
-process.on('unhandledRejection', error => {
+process.on('unhandledRejection', (error) => {
   console.error(error);
 });
 
@@ -40,7 +40,7 @@ if (major < 8) {
 
 var main = require('../src/cli');
 
-main(process).catch(error => {
+main(process).catch((error) => {
   console.error(error);
   process.exit(1);
 });

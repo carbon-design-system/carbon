@@ -6,6 +6,9 @@
 //
 
 @import 'helper-mixins';
+@import 'css--helpers';
+@import 'layout';
+@import 'typography';
 
 // Tooltip
 // Tooltip caret visual styles
@@ -28,6 +31,7 @@
 @mixin tooltip--content($tooltip-type: 'icon') {
   @include box-shadow;
   width: max-content;
+  min-width: rem(24px);
   max-width: rem(208px);
   height: auto;
   padding: if(
@@ -40,7 +44,6 @@
   font-weight: 400;
   text-align: left;
   transform: translateX(-50%);
-  pointer-events: none;
   background-color: $inverse-02;
   @include type-style('body-short-01');
 
@@ -150,6 +153,7 @@
     content: none;
   }
 
+  &.#{$prefix}--tooltip--visible,
   &:hover,
   &:focus {
     &::before,

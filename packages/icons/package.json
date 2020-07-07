@@ -1,7 +1,7 @@
 {
   "name": "@carbon/icons",
   "description": "Icons for digital and software products using the Carbon Design System",
-  "version": "10.8.0",
+  "version": "10.13.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -12,8 +12,8 @@
     "lib",
     "scss",
     "svg",
-    "metadata.json",
-    "build-info.json"
+    "build-info.json",
+    "metadata.json"
   ],
   "keywords": [
     "ibm",
@@ -30,10 +30,11 @@
   "scripts": {
     "build": "yarn clean && node tasks/build.js && bundler sassdoc \"scss/*.scss\"",
     "ci-check": "node tasks/ci-check.js",
-    "clean": "rimraf es lib build-info.json metadata.json",
+    "clean": "rimraf es lib metadata.json svg",
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "@carbon/icon-build-helpers": "^0.3.0"
-  }
+    "@carbon/icon-build-helpers": "^0.8.0"
+  },
+  "gitHead": "bb04f2f061de0bda6e457a07a67cf624db375808"
 }

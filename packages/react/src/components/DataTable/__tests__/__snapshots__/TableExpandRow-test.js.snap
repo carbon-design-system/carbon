@@ -3,6 +3,7 @@
 exports[`DataTable.TableExpandRow should render 1`] = `
 <Table
   isSortable={false}
+  overflowMenuOnHover={true}
 >
   <table
     className="bx--data-table bx--data-table--no-border"
@@ -42,6 +43,7 @@ exports[`DataTable.TableExpandRow should render 1`] = `
                   >
                     <Icon
                       className="bx--table-expand__svg"
+                      fill="currentColor"
                       height={16}
                       preserveAspectRatio="xMidYMid meet"
                       viewBox="0 0 16 16"
@@ -51,14 +53,10 @@ exports[`DataTable.TableExpandRow should render 1`] = `
                       <svg
                         aria-hidden={true}
                         className="bx--table-expand__svg"
+                        fill="currentColor"
                         focusable="false"
                         height={16}
                         preserveAspectRatio="xMidYMid meet"
-                        style={
-                          Object {
-                            "willChange": "transform",
-                          }
-                        }
                         viewBox="0 0 16 16"
                         width={16}
                         xmlns="http://www.w3.org/2000/svg"

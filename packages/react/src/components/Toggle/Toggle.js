@@ -33,6 +33,11 @@ class Toggle extends React.Component {
     onToggle: PropTypes.func,
 
     /**
+     * Provide an optional hook that is called when the control is changed
+     */
+    onChange: PropTypes.func,
+
+    /**
      * Provide an id that unique represents the underlying <input>
      */
     id: PropTypes.string.isRequired,
@@ -107,14 +112,14 @@ class Toggle extends React.Component {
           type="checkbox"
           id={id}
           className={`${prefix}--toggle-input`}
-          onChange={evt => {
+          onChange={(evt) => {
             onChange && onChange(evt);
             onToggle(input.checked, id, evt);
           }}
-          ref={el => {
+          ref={(el) => {
             input = el;
           }}
-          onKeyUp={evt => {
+          onKeyUp={(evt) => {
             if (match(evt, keys.Enter)) {
               input.checked = !input.checked;
               onChange && onChange(evt);

@@ -48,17 +48,17 @@ const ToggleSmall = ({
         type="checkbox"
         id={id}
         className={`${prefix}--toggle-input ${prefix}--toggle-input--small`}
-        onChange={evt => {
+        onChange={(evt) => {
           onChange && onChange(evt);
           onToggle(input.checked, id, evt);
         }}
-        ref={el => {
+        ref={(el) => {
           input = el;
         }}
-        onKeyUp={evt => {
+        onKeyUp={(evt) => {
           if (match(evt, keys.Enter)) {
             input.checked = !input.checked;
-            onChange(evt);
+            onChange && onChange(evt);
             onToggle(input.checked, id, evt);
           }
         }}
@@ -103,6 +103,11 @@ ToggleSmall.propTypes = {
    * The event handler for the `onChange` event.
    */
   onToggle: PropTypes.func,
+
+  /**
+   * Provide an optional hook that is called when the control is changed
+   */
+  onChange: PropTypes.func,
 
   /**
    * The `id` attribute for the toggle

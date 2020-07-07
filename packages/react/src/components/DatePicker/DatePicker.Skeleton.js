@@ -68,6 +68,11 @@ DatePickerSkeleton.propTypes = {
    * Specify an optional className to add.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify the id to add.
+   */
+  id: PropTypes.string,
 };
 
 export default DatePickerSkeleton;

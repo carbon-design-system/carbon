@@ -41,7 +41,7 @@ class InlineLoading extends mixin(
    */
   setState(state) {
     const { states } = this.constructor;
-    const values = Object.keys(states).map(key => states[key]);
+    const values = Object.keys(states).map((key) => states[key]);
     if (values.indexOf(state) < 0) {
       throw new Error(
         `One of the following value should be given as the state: ${values.join(

@@ -89,7 +89,7 @@ class RadioButton extends React.Component {
 
   uid = this.props.id || uid();
 
-  handleChange = evt => {
+  handleChange = (evt) => {
     this.props.onChange(this.props.value, this.props.name, evt);
   };
 
@@ -98,6 +98,7 @@ class RadioButton extends React.Component {
       className,
       labelText,
       labelPosition,
+      // eslint-disable-next-line react/prop-types
       innerRef: ref,
       hideLabel,
       ...other

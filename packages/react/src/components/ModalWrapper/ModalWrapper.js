@@ -36,6 +36,8 @@ export default class ModalWrapper extends React.Component {
     triggerButtonIconDescription: PropTypes.string,
     triggerButtonKind: PropTypes.oneOf(ButtonKinds),
     shouldCloseAfterSubmit: PropTypes.bool,
+    onKeyDown: PropTypes.func,
+    selectorPrimaryFocus: PropTypes.string,
   };
 
   static defaultProps = {
@@ -100,7 +102,7 @@ export default class ModalWrapper extends React.Component {
     return (
       <div
         role="presentation"
-        onKeyDown={evt => {
+        onKeyDown={(evt) => {
           if (evt.which === 27) {
             this.handleClose();
             onKeyDown(evt);

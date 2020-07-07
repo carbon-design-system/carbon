@@ -51,7 +51,7 @@ function createImporter(cwd) {
         },
         pathFilter(pkg, path, relativePath) {
           // Transforms `scss/filename` to `scss/_filename.scss`
-          return relativePath.replace(/^(scss\/)([a-z-]+)/, '$1_$2.scss');
+          return relativePath.replace(/^(scss[\\/])([a-z-]+)/, '$1_$2.scss');
         },
       });
       done({ file });
@@ -92,7 +92,7 @@ function createImporter(cwd) {
  */
 function createSassRenderer(cwd, initialData = '') {
   const importer = createImporter(cwd);
-  return async data => {
+  return async (data) => {
     const calls = [];
     const warn = jest.fn(() => types.Null());
     const mockError = jest.fn(() => types.Null());
@@ -127,6 +127,9 @@ function createSassRenderer(cwd, initialData = '') {
       if (
         !error.message.includes('Function breakpoint finished without @return')
       ) {
+        if (error.formatted) {
+          throw new Error(error.formatted);
+        }
         throw error;
       }
       renderError = error;
@@ -139,7 +142,7 @@ function createSassRenderer(cwd, initialData = '') {
       output,
       getOutput(level = 'debug') {
         return output[level].mock.calls
-          .map(call => convert(call[0]))
+          .map((call) => convert(call[0]))
           .join('\n');
       },
     };

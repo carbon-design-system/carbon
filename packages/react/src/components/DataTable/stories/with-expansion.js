@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './datatable-story.scss';
+import './with-expansion-story.scss';
 
 import React from 'react';
 import DataTable, {
@@ -22,7 +22,7 @@ import DataTable, {
 } from '../../DataTable';
 import { initialRows, headers } from './shared';
 
-export default props => (
+const ExpansionStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}
@@ -43,30 +43,26 @@ export default props => (
           <TableHead>
             <TableRow>
               <TableExpandHeader />
-              {headers.map(header => (
-                <TableHeader {...getHeaderProps({ header })}>
+              {headers.map((header, i) => (
+                <TableHeader key={i} {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
+            {rows.map((row) => (
               <React.Fragment key={row.id}>
                 <TableExpandRow {...getRowProps({ row })}>
-                  {row.cells.map(cell => (
+                  {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
                 </TableExpandRow>
                 <TableExpandedRow
                   colSpan={headers.length + 1}
                   className="demo-expanded-td">
-                  <h1 className="demo-inner-container-header">
-                    Expandable row content
-                  </h1>
-                  <p className="demo-inner-container-content">
-                    Description here
-                  </p>
+                  <h6>Expandable row content</h6>
+                  <div>Description here</div>
                 </TableExpandedRow>
               </React.Fragment>
             ))}
@@ -76,3 +72,5 @@ export default props => (
     )}
   />
 );
+
+export default ExpansionStory;

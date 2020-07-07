@@ -41,7 +41,7 @@ const TooltipIcon = ({
   const handleFocus = () => setAllowTooltipVisibility(true);
   const handleMouseEnter = () => setAllowTooltipVisibility(true);
   useEffect(() => {
-    const handleEscKeyDown = event => {
+    const handleEscKeyDown = (event) => {
       if (matches(event, [keys.Escape])) {
         setAllowTooltipVisibility(false);
       }
@@ -73,6 +73,11 @@ TooltipIcon.propTypes = {
   children: PropTypes.node.isRequired,
 
   /**
+   * Specify an optional className to be applied to the trigger node
+   */
+  className: PropTypes.string,
+
+  /**
    * Specify the direction of the tooltip. Can be either top or bottom.
    */
   direction: PropTypes.oneOf(['top', 'right', 'left', 'bottom']),
@@ -94,6 +99,16 @@ TooltipIcon.propTypes = {
    * TODO: rename this prop (will be a breaking change)
    */
   tooltipText: PropTypes.string.isRequired,
+
+  /**
+   * The event handler for the `focus` event.
+   */
+  onFocus: PropTypes.func,
+
+  /**
+   * The event handler for the `mouseenter` event.
+   */
+  onMouseEnter: PropTypes.func,
 };
 
 TooltipIcon.defaultProps = {

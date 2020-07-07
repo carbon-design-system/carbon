@@ -95,10 +95,6 @@ describe('Button', () => {
     it('renders as an <a> element with an href', () => {
       expect(wrapper.is('a')).toBe(true);
     });
-
-    it('should always render with [role="button"] by default', () => {
-      expect(wrapper.props().role).toEqual('button');
-    });
   });
 
   describe('Renders arbitrary component with correct props', () => {

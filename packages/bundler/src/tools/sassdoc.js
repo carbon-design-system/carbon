@@ -25,7 +25,7 @@ const prettierOptions = {
  * Custom slugify for markdown-toc to not include escaped emoji characters
  * @param {string} title - the anchor link
  */
-const slugify = title => {
+const slugify = (title) => {
   return [...toc.slugify(title)].reduce((acc, ch) => {
     if (ch.charCodeAt(0) > 255) {
       return acc;
@@ -45,10 +45,10 @@ async function createJson(sourceDir, config) {
   config = config || {};
 
   return sassdoc.parse(sourceDir, config).then(
-    data => {
+    (data) => {
       return data;
     },
-    err => {
+    (err) => {
       console.error(err);
     }
   );
@@ -161,7 +161,7 @@ $${item.context.name}: ${item.context.value};
     let paramStr = '';
 
     if (item.parameter) {
-      item.parameter.forEach(param => {
+      item.parameter.forEach((param) => {
         if (paramStr) paramStr += `, `;
         paramStr += `$${param.name}`;
         if (param.default) paramStr += `: ${param.default}`;
@@ -188,14 +188,15 @@ $${item.context.name}: ${item.context.value};
 | Name | Description | Type | Default value |
 | --- | --- | --- | --- |`;
 
-    item.parameter.forEach(param => {
+    item.parameter.forEach((param) => {
       const paramType = param.type
         ? `\`${param.type.replace(/\|/g, `\\|`)}\``
         : '—';
       const paramDefault = param.default ? `\`${param.default}\`` : '—';
 
-      const row = `\n| \`$${param.name}\` | ${param.description ||
-        '—'} | ${paramType} | ${paramDefault} |`;
+      const row = `\n| \`$${param.name}\` | ${
+        param.description || '—'
+      } | ${paramType} | ${paramDefault} |`;
 
       str += row;
     });
@@ -254,7 +255,7 @@ ${item.example[0].code}
   if (item.aliased) {
     let subbullets = '';
 
-    item.aliased.forEach(aliased => {
+    item.aliased.forEach((aliased) => {
       subbullets += `\n  - \`${aliased}\``;
     });
 
@@ -274,7 +275,7 @@ ${item.example[0].code}
   if (item.require && item.require.length) {
     let subbullets = '';
 
-    dedupeArray(item.require).forEach(requires => {
+    dedupeArray(item.require).forEach((requires) => {
       subbullets += `\n   - ${createAnchorLink(
         `${requires.name} [${requires.type}]`,
         createUniqueName(requires.name, requires.type)
@@ -290,7 +291,7 @@ ${item.example[0].code}
   if (item.usedBy && item.usedBy.length) {
     let subbullets = '';
 
-    dedupeArray(item.usedBy).forEach(usedBy => {
+    dedupeArray(item.usedBy).forEach((usedBy) => {
       subbullets += `\n   - ${createAnchorLink(
         `${usedBy.context.name} [${usedBy.context.type}]`,
         createUniqueName(usedBy.context.name, usedBy.context.type)
@@ -313,7 +314,7 @@ ${item.example[0].code}
   if (item.link && item.link.length) {
     let subbullets = '';
 
-    item.link.forEach(link => {
+    item.link.forEach((link) => {
       subbullets += `\n   - [${link.caption || 'Link'}](${link.url})`;
     });
 
@@ -333,7 +334,7 @@ ${item.example[0].code}
   if (metadata.length) {
     str += '\n';
 
-    metadata.forEach(meta => {
+    metadata.forEach((meta) => {
       str += `\n- **${meta.key}**: ${meta.value}`;
     });
   }
@@ -352,11 +353,11 @@ async function createMarkdown(sourceDir, config) {
   config = config || {};
 
   return sassdoc.parse(sourceDir, config).then(
-    data => {
+    (data) => {
       let markdownFile = '';
 
       const documentedItems = data.filter(
-        item => item.access === 'public' || item.access === 'private'
+        (item) => item.access === 'public' || item.access === 'private'
       );
 
       markdownFile += `# Sass API
@@ -372,7 +373,7 @@ async function createMarkdown(sourceDir, config) {
 
       let currentGroup = '';
 
-      documentedItems.forEach(item => {
+      documentedItems.forEach((item) => {
         const itemGroup = createGroupName(item.group);
 
         if (itemGroup !== currentGroup) {
@@ -388,7 +389,7 @@ async function createMarkdown(sourceDir, config) {
         prettierOptions
       );
     },
-    err => {
+    (err) => {
       console.error(err);
     }
   );

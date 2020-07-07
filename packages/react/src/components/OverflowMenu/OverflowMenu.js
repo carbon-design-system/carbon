@@ -15,7 +15,6 @@ import FloatingMenu, {
   DIRECTION_TOP,
   DIRECTION_BOTTOM,
 } from '../../internal/FloatingMenu';
-import OptimizedResize from '../../internal/OptimizedResize';
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
 import mergeRefs from '../../tools/mergeRefs';
@@ -209,6 +208,12 @@ class OverflowMenu extends Component {
      * Don't use this to make OverflowMenu background color same as container background color.
      */
     light: PropTypes.bool,
+
+    /**
+     * Specify a CSS selector that matches the DOM element that should
+     * be focused when the OverflowMenu opens
+     */
+    selectorPrimaryFocus: PropTypes.string,
   };
 
   static defaultProps = {
@@ -226,6 +231,7 @@ class OverflowMenu extends Component {
     menuOffset: getMenuOffset,
     menuOffsetFlip: getMenuOffset,
     light: false,
+    selectorPrimaryFocus: '[data-overflow-menu-primary-focus]',
   };
 
   /**
@@ -240,48 +246,16 @@ class OverflowMenu extends Component {
    */
   _hBlurTimeout;
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.open && !this.state.open) {
-      requestAnimationFrame(() => {
-        this.getMenuPosition();
-      });
-      return false; // Let `.getMenuPosition()` cause render
-    }
+  /**
+   * The element ref of the tooltip's trigger button.
+   * @type {React.RefObject<Element>}
+   * @private
+   */
+  _triggerRef = React.createRef();
 
-    return true;
-  }
-
-  componentDidMount() {
-    requestAnimationFrame(() => {
-      this.getMenuPosition();
-    });
-    this.hResize = OptimizedResize.add(() => {
-      this.getMenuPosition();
-    });
-  }
-
-  getPrimaryFocusableElement = () => {
-    if (this.menuEl) {
-      const primaryFocusPropEl = this.menuEl.querySelector(
-        '[data-floating-menu-primary-focus]'
-      );
-      if (primaryFocusPropEl) {
-        return primaryFocusPropEl;
-      }
-    }
-    const firstItem = this.overflowMenuItem0;
-    if (
-      firstItem &&
-      firstItem.overflowMenuItem &&
-      firstItem.overflowMenuItem.current
-    ) {
-      return firstItem.overflowMenuItem.current;
-    }
-  };
-
-  componentDidUpdate() {
+  componentDidUpdate(_, prevState) {
     const { onClose } = this.props;
-    if (!this.state.open) {
+    if (!this.state.open && prevState.isOpen) {
       onClose();
     }
   }
@@ -301,31 +275,23 @@ class OverflowMenu extends Component {
       clearTimeout(this._hBlurTimeout);
       this._hBlurTimeout = undefined;
     }
-    this.hResize.release();
   }
 
-  getMenuPosition = () => {
-    if (this.menuEl) {
-      const menuPosition = this.menuEl.getBoundingClientRect();
-      this.setState({ menuPosition });
-    }
-  };
-
-  handleClick = evt => {
+  handleClick = (evt) => {
     if (!this._menuBody || !this._menuBody.contains(evt.target)) {
       this.setState({ open: !this.state.open });
       this.props.onClick(evt);
     }
   };
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     if (keyCodeMatches(evt, [keys.ArrowDown])) {
       this.setState({ open: !this.state.open });
       this.props.onClick(evt);
     }
   };
 
-  handleKeyPress = evt => {
+  handleKeyPress = (evt) => {
     if (
       this.state.open &&
       keyCodeMatches(evt, [
@@ -346,7 +312,7 @@ class OverflowMenu extends Component {
     }
   };
 
-  handleClickOutside = evt => {
+  handleClickOutside = (evt) => {
     if (
       this.state.open &&
       (!this._menuBody || !this._menuBody.contains(evt.target))
@@ -365,33 +331,47 @@ class OverflowMenu extends Component {
     });
   };
 
-  bindMenuEl = menuEl => {
-    this.menuEl = menuEl;
-  };
-
   focusMenuEl = () => {
-    if (this.menuEl) {
-      this.menuEl.focus();
+    const { current: triggerEl } = this._triggerRef;
+    if (triggerEl) {
+      triggerEl.focus();
     }
   };
 
-  handleOverflowMenuItemFocus = index => {
-    const i = (() => {
-      switch (index) {
+  /**
+   * Focuses the next enabled overflow menu item given the currently focused
+   * item index and direction to move
+   * @param {object} params
+   * @param {number} params.currentIndex - the index of the currently focused
+   * overflow menu item in the list of overflow menu items
+   * @param {number} params.direction - number denoting the direction to move
+   * focus (1 for forwards, -1 for backwards)
+   */
+  handleOverflowMenuItemFocus = ({ currentIndex, direction }) => {
+    const enabledIndices = React.Children.toArray(this.props.children).reduce(
+      (acc, curr, i) => {
+        if (!curr.props.disabled) {
+          acc.push(i);
+        }
+        return acc;
+      },
+      []
+    );
+    const nextValidIndex = (() => {
+      const nextIndex = enabledIndices.indexOf(currentIndex) + direction;
+      switch (enabledIndices.indexOf(currentIndex) + direction) {
         case -1:
-          return React.Children.count(this.props.children) - 1;
-        case React.Children.count(this.props.children):
+          return enabledIndices.length - 1;
+        case enabledIndices.length:
           return 0;
         default:
-          return index;
+          return nextIndex;
       }
     })();
-    const { overflowMenuItem } =
-      this[`overflowMenuItem${i}`] ||
-      React.Children.toArray(this.props.children)[i];
-    if (overflowMenuItem && overflowMenuItem.current) {
-      overflowMenuItem.current.focus();
-    }
+    const { overflowMenuItem } = this[
+      `overflowMenuItem${enabledIndices[nextValidIndex]}`
+    ];
+    overflowMenuItem?.current?.focus();
   };
 
   /**
@@ -400,7 +380,7 @@ class OverflowMenu extends Component {
    * @param {Element} menuBody The DOM element of the menu body.
    * @private
    */
-  _bindMenuBody = menuBody => {
+  _bindMenuBody = (menuBody) => {
     if (!menuBody) {
       this._menuBody = menuBody;
     }
@@ -414,23 +394,20 @@ class OverflowMenu extends Component {
    * @param {Element} menuBody The DOM element of the menu body.
    * @private
    */
-  _handlePlace = menuBody => {
+  _handlePlace = (menuBody) => {
     if (menuBody) {
       this._menuBody = menuBody;
-      const primaryFocus =
-        menuBody.querySelector('[data-floating-menu-primary-focus]') ||
-        menuBody;
-      primaryFocus.focus();
       const hasFocusin = 'onfocusin' in window;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
       this._hFocusIn = on(
         menuBody.ownerDocument,
         focusinEventName,
-        event => {
+        (event) => {
           const { target } = event;
+          const { current: triggerEl } = this._triggerRef;
           if (
             !menuBody.contains(target) &&
-            this.menuEl &&
+            triggerEl &&
             !target.matches(
               `.${prefix}--overflow-menu,.${prefix}--overflow-menu-options`
             )
@@ -448,8 +425,9 @@ class OverflowMenu extends Component {
    * @returns {Element} The DOM element where the floating menu is placed in.
    */
   _getTarget = () => {
+    const { current: triggerEl } = this._triggerRef;
     return (
-      (this.menuEl && this.menuEl.closest('[data-floating-menu-container]')) ||
+      (triggerEl && triggerEl.closest('[data-floating-menu-container]')) ||
       document.body
     );
   };
@@ -468,7 +446,9 @@ class OverflowMenu extends Component {
       iconClass,
       onClick, // eslint-disable-line
       onOpen, // eslint-disable-line
+      selectorPrimaryFocus = '[data-floating-menu-primary-focus]', // eslint-disable-line
       renderIcon: IconElement,
+      // eslint-disable-next-line react/prop-types
       innerRef: ref,
       menuOptionsClass,
       light,
@@ -506,7 +486,7 @@ class OverflowMenu extends Component {
         React.cloneElement(child, {
           closeMenu: this.closeMenu,
           handleOverflowMenuItemFocus: this.handleOverflowMenuItemFocus,
-          ref: e => {
+          ref: (e) => {
             this[`overflowMenuItem${index}`] = e;
           },
           index,
@@ -525,14 +505,14 @@ class OverflowMenu extends Component {
 
     const wrappedMenuBody = (
       <FloatingMenu
-        menuPosition={this.state.menuPosition}
+        triggerRef={this._triggerRef}
         menuDirection={direction}
         menuOffset={flipped ? menuOffsetFlip : menuOffset}
         menuRef={this._bindMenuBody}
-        menuEl={this.menuEl}
         flipped={this.props.flipped}
         target={this._getTarget}
-        onPlace={this._handlePlace}>
+        onPlace={this._handlePlace}
+        selectorPrimaryFocus={this.props.selectorPrimaryFocus}>
         {React.cloneElement(menuBody, {
           'data-floating-menu-direction': direction,
         })}
@@ -559,7 +539,7 @@ class OverflowMenu extends Component {
           aria-label={ariaLabel}
           id={id}
           tabIndex={tabIndex}
-          ref={mergeRefs(ref, this.bindMenuEl)}>
+          ref={mergeRefs(this._triggerRef, ref)}>
           <IconElement {...iconProps}>
             {iconDescription && <title>{iconDescription}</title>}
           </IconElement>

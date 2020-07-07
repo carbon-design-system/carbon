@@ -55,10 +55,7 @@ const props = () => ({
     '[data-modal-primary-focus]'
   ),
   size: select('Size (size)', sizes),
-  iconDescription: text(
-    'Close icon description (iconDescription)',
-    'Close the modal'
-  ),
+  iconDescription: text('Close icon description (iconDescription)', 'Close'),
   onBlur: action('onBlur'),
   onClick: action('onClick'),
   onFocus: action('onFocus'),
@@ -93,10 +90,7 @@ const titleOnlyProps = () => {
       'Secondary Button'
     ),
     size: select('Size (size)', sizes, 'sm'),
-    iconDescription: text(
-      'Close icon description (iconDescription)',
-      'Close the modal'
-    ),
+    iconDescription: text('Close icon description (iconDescription)', 'Close'),
     onBlur: action('onBlur'),
     onClick: action('onClick'),
     onFocus: action('onFocus'),
@@ -193,11 +187,7 @@ storiesOf('Modal', module)
     'Title only',
     () => {
       const { size, ...rest } = titleOnlyProps();
-      return (
-        <>
-          <Modal {...rest} size={size || undefined}></Modal>
-        </>
-      );
+      return <Modal {...rest} size={size || undefined}></Modal>;
     },
     {
       info: {
@@ -213,25 +203,23 @@ storiesOf('Modal', module)
     () => {
       const { size, ...rest } = props();
       return (
-        <>
-          <Modal
-            {...rest}
-            hasForm
-            size={size || undefined}
-            selectorPrimaryFocus="#text-input-2">
-            <TextInput
-              id="text-input-1"
-              labelText="Text Input 1"
-              placeholder="Enter text..."
-              style={{ marginBottom: '1rem' }}
-            />
-            <TextInput
-              id="text-input-2"
-              labelText="Text Input 2"
-              placeholder="Enter text..."
-            />
-          </Modal>
-        </>
+        <Modal
+          {...rest}
+          hasForm
+          size={size || undefined}
+          selectorPrimaryFocus="#text-input-2">
+          <TextInput
+            id="text-input-1"
+            labelText="Text Input 1"
+            placeholder="Enter text..."
+            style={{ marginBottom: '1rem' }}
+          />
+          <TextInput
+            id="text-input-2"
+            labelText="Text Input 2"
+            placeholder="Enter text..."
+          />
+        </Modal>
       );
     },
     {

@@ -18,12 +18,18 @@ import WithState from '../../tools/withState';
 // Datepickers last argument contains an instance of flatpickr
 // and will cause action logger to enter an infinite loop. Just don't log that argument
 const datePickerOnChangeActions = decorateAction([
-  args => args.slice(0, args.length - 2),
+  (args) => args.slice(0, args.length - 2),
 ]);
 
 const patterns = {
-  'Short (d{1,2}/d{4})': 'd{1,2}/d{4}',
-  'Regular (d{1,2}/d{1,2}/d{4})': 'd{1,2}/d{1,2}/d{4}',
+  'Short (d{1,2}/d{4})': '\\d{1,2}/\\d{4}',
+  'Regular (d{1,2}/d{1,2}/d{4})': '\\d{1,2}/\\d{1,2}/\\d{4}',
+};
+
+const sizes = {
+  'Extra large size (xl)': 'xl',
+  'Default size': undefined,
+  'Small size (sm)': 'sm',
 };
 
 const props = {
@@ -36,6 +42,7 @@ const props = {
   datePickerInput: () => ({
     id: 'date-picker-input-id',
     className: 'some-class',
+    size: select('Field size (size)', sizes, undefined) || undefined,
     labelText: text(
       'Label text (labelText in <DatePickerInput>)',
       'Date Picker label'
@@ -96,7 +103,10 @@ storiesOf('DatePicker', module)
           'The date format (dateFormat in <DatePicker>)',
           'm/d/Y'
         )}>
-        <DatePickerInput {...props.datePickerInput()} />
+        <DatePickerInput
+          openCalendar={() => console.log('click')}
+          {...props.datePickerInput()}
+        />
       </DatePicker>
     ),
     {
@@ -178,7 +188,7 @@ storiesOf('DatePicker', module)
               datePickerType="single"
               dateFormat="m/d/Y"
               value={state.date}
-              onChange={eventOrDates => {
+              onChange={(eventOrDates) => {
                 const value = eventOrDates.target
                   ? eventOrDates.target.value
                   : eventOrDates[0];

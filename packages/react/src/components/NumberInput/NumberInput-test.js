@@ -49,7 +49,7 @@ describe('NumberInput', () => {
       numberInput = wrapper.find('input');
       container = wrapper.find(`.${prefix}--number`);
       formItem = wrapper.find(`.${prefix}--form-item`);
-      icons = wrapper.findWhere(n => iconTypes.includes(n.type()));
+      icons = wrapper.findWhere((n) => iconTypes.includes(n.type()));
       helper = wrapper.find(`.${prefix}--form__helper-text`);
     });
 
@@ -153,7 +153,7 @@ describe('NumberInput', () => {
               className="extra-class"
             />
           );
-        const getNumberInput = wrapper => wrapper.find('input');
+        const getNumberInput = (wrapper) => wrapper.find('input');
 
         it('should set value as expected when value > min', () => {
           const wrapper = getWrapper(-1, 100, 0);
@@ -181,10 +181,7 @@ describe('NumberInput', () => {
 
         it('should set invalidText when value is empty string', () => {
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper
-            .find('NumberInput')
-            .instance()
-            .setState({ value: '' });
+          wrapper.find('NumberInput').instance().setState({ value: '' });
           wrapper.update();
           const invalidText = wrapper.find(`.${prefix}--form-requirement`);
           expect(invalidText.length).toEqual(1);
@@ -194,10 +191,7 @@ describe('NumberInput', () => {
 
         it('allow empty string value', () => {
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper
-            .find('NumberInput')
-            .instance()
-            .setState({ value: '' });
+          wrapper.find('NumberInput').instance().setState({ value: '' });
 
           wrapper.update();
           wrapper.setProps({ allowEmpty: true });
@@ -207,10 +201,7 @@ describe('NumberInput', () => {
 
         it('should allow updating the value with empty string and not be invalid', () => {
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper
-            .find('NumberInput')
-            .instance()
-            .setState({ value: 50 });
+          wrapper.find('NumberInput').instance().setState({ value: 50 });
 
           wrapper.update();
           wrapper.setProps({ value: '', allowEmpty: true });
@@ -222,10 +213,7 @@ describe('NumberInput', () => {
         it('should change the value upon change in props', () => {
           wrapper.setProps({ value: 1 });
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper
-            .find('NumberInput')
-            .instance()
-            .setState({ value: 1 });
+          wrapper.find('NumberInput').instance().setState({ value: 1 });
           wrapper.update();
           wrapper.setProps({ value: 2 });
           // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
@@ -234,10 +222,7 @@ describe('NumberInput', () => {
 
         it('should cap the number given to value prop', () => {
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper
-            .find('NumberInput')
-            .instance()
-            .setState({ value: 0 });
+          wrapper.find('NumberInput').instance().setState({ value: 0 });
           wrapper.update();
           wrapper.setProps({ value: 5, min: 10, max: 20 });
           // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
@@ -254,10 +239,7 @@ describe('NumberInput', () => {
         // NumberInput propTypes do not allow a string to be passed
         it.skip('should avoid capping when non-number prop is given to value prop', () => {
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper
-            .find('NumberInput')
-            .instance()
-            .setState({ value: 2 });
+          wrapper.find('NumberInput').instance().setState({ value: 2 });
           wrapper.update();
           wrapper.setProps({ value: '', min: 1, max: 3 });
           // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
@@ -269,10 +251,7 @@ describe('NumberInput', () => {
         it('should avoid change the value upon setting props, unless there the value actually changes', () => {
           wrapper.setProps({ value: 1 });
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper
-            .find('NumberInput')
-            .instance()
-            .setState({ value: 2 });
+          wrapper.find('NumberInput').instance().setState({ value: 2 });
           wrapper.update();
           wrapper.setProps({ value: 1 });
           // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
@@ -332,17 +311,11 @@ describe('NumberInput', () => {
 
       it('renders children as expected', () => {
         wrapper.setProps({
-          helperText: (
-            <span>
-              This helper text has <a href="#">a link</a>.
-            </span>
-          ),
+          helperText: <span>This is helper text.</span>,
         });
         const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.props().children).toEqual(
-          <span>
-            This helper text has <a href="#">a link</a>.
-          </span>
+          <span>This is helper text.</span>
         );
       });
 

@@ -16,10 +16,10 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@master
-      - name: Use Node.js 10.x
+      - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: '12.x'
       - name: Install dependencies
         run: yarn install --offline
       - name: Build project
@@ -39,6 +39,7 @@ jobs:
           -r 'us-south'
       - name: Install IBM Cloud plugins
         run: |
+          ibmcloud cf install
           ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
           ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
       - name: Deploy vanilla devenv

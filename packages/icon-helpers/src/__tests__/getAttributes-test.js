@@ -96,7 +96,7 @@ describe('getAttributes', () => {
 
   test.each(['aria-label', 'aria-labelledby', 'title'])(
     'should set role and remove aria-hidden if `%s` is set',
-    attr => {
+    (attr) => {
       const attrs = getAttributes({
         [attr]: 'attribute',
       });

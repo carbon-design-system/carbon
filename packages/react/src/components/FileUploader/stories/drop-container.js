@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { settings } from 'carbon-components';
 import FileUploaderItem from '../FileUploaderItem';
 import FileUploaderDropContainer from '../FileUploaderDropContainer';
@@ -14,11 +14,25 @@ import uid from '../../../tools/uniqueId';
 
 const { prefix } = settings;
 
-function ExampleDropContainerApp(props) {
+const ExampleDropContainerApp = (props) => {
   const [files, setFiles] = useState([]);
-  const uploadFile = async fileToUpload => {
+  const handleDrop = (e) => {
+    e.preventDefault();
+  };
+  const handleDragover = (e) => {
+    e.preventDefault();
+  };
+  useEffect(() => {
+    document.addEventListener('drop', handleDrop);
+    document.addEventListener('dragover', handleDragover);
+    return () => {
+      document.removeEventListener('drop', handleDrop);
+      document.removeEventListener('dragover', handleDragover);
+    };
+  }, []);
+  const uploadFile = async (fileToUpload) => {
     // file size validation
-    if (fileToUpload.size > 512000) {
+    if (fileToUpload.filesize > 512000) {
       const updatedFile = {
         ...fileToUpload,
         status: 'edit',
@@ -27,8 +41,8 @@ function ExampleDropContainerApp(props) {
         errorSubject: 'File size exceeds limit',
         errorBody: '500kb max file size. Select a new file and try again.',
       };
-      setFiles(files =>
-        files.map(file =>
+      setFiles((files) =>
+        files.map((file) =>
           file.uuid === fileToUpload.uuid ? updatedFile : file
         )
       );
@@ -43,8 +57,8 @@ function ExampleDropContainerApp(props) {
         status: 'complete',
         iconDescription: 'Upload complete',
       };
-      setFiles(files =>
-        files.map(file =>
+      setFiles((files) =>
+        files.map((file) =>
           file.uuid === fileToUpload.uuid ? updatedFile : file
         )
       );
@@ -57,8 +71,8 @@ function ExampleDropContainerApp(props) {
         status: 'edit',
         iconDescription: 'Delete file',
       };
-      setFiles(files =>
-        files.map(file =>
+      setFiles((files) =>
+        files.map((file) =>
           file.uuid === fileToUpload.uuid ? updatedFile : file
         )
       );
@@ -67,18 +81,23 @@ function ExampleDropContainerApp(props) {
   const onAddFiles = useCallback(
     (evt, { addedFiles }) => {
       evt.stopPropagation();
-      const newFiles = addedFiles.map(file => ({
+      const newFiles = addedFiles.map((file) => ({
         uuid: uid(),
         name: file.name,
-        size: file.size,
+        filesize: file.size,
         status: 'uploading',
         iconDescription: 'Uploading',
       }));
-      props.multiple
-        ? setFiles([...files, ...newFiles])
-        : setFiles([...files, newFiles[0]]);
-      newFiles.forEach(uploadFile);
+      // eslint-disable-next-line react/prop-types
+      if (props.multiple) {
+        setFiles([...files, ...newFiles]);
+        newFiles.forEach(uploadFile);
+      } else if (newFiles[0]) {
+        setFiles([newFiles[0]]);
+        uploadFile(newFiles[0]);
+      }
     },
+    // eslint-disable-next-line react/prop-types
     [files, props.multiple]
   );
   const handleFileUploaderItemClick = useCallback(
@@ -93,14 +112,24 @@ function ExampleDropContainerApp(props) {
         Only .jpg and .png files. 500kb max file size
       </p>
       <FileUploaderDropContainer {...props} onAddFiles={onAddFiles} />
-      <div className={`${prefix}--file-container`}>
+      <div className={`${prefix}--file-container`} style={{ width: '100%' }}>
         {files.map(
-          ({ uuid, name, size, status, iconDescription, invalid, ...rest }) => (
+          ({
+            uuid,
+            name,
+            filesize,
+            status,
+            iconDescription,
+            invalid,
+            ...rest
+          }) => (
             <FileUploaderItem
               key={uid()}
               uuid={uuid}
               name={name}
-              size={size}
+              filesize={filesize}
+              // eslint-disable-next-line react/prop-types
+              size={props.size}
               status={status}
               iconDescription={iconDescription}
               invalid={invalid}
@@ -112,6 +141,6 @@ function ExampleDropContainerApp(props) {
       </div>
     </FormItem>
   );
-}
+};
 
-export default props => <ExampleDropContainerApp {...props} />;
+export default ExampleDropContainerApp;

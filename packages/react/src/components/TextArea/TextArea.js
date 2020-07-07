@@ -31,12 +31,12 @@ const TextArea = React.forwardRef(function TextArea(
 ) {
   const textareaProps = {
     id,
-    onChange: evt => {
+    onChange: (evt) => {
       if (!other.disabled) {
         onChange(evt);
       }
     },
-    onClick: evt => {
+    onClick: (evt) => {
       if (!other.disabled) {
         onClick(evt);
       }
@@ -90,7 +90,6 @@ const TextArea = React.forwardRef(function TextArea(
   return (
     <div className={`${prefix}--form-item`}>
       {label}
-      {helper}
       <div
         className={`${prefix}--text-area__wrapper`}
         data-invalid={invalid || null}>
@@ -99,7 +98,7 @@ const TextArea = React.forwardRef(function TextArea(
         )}
         {input}
       </div>
-      {error}
+      {invalid ? error : helper}
     </div>
   );
 });

@@ -153,6 +153,8 @@ describe('<ModalFooter />', () => {
 });
 
 describe('<ComposedModal />', () => {
+  let container;
+
   it('renders', () => {
     const wrapper = mount(<ComposedModal open />);
     expect(wrapper).toMatchSnapshot();
@@ -214,10 +216,14 @@ describe('<ComposedModal />', () => {
   });
 
   it('should focus on the primary actionable button in ModalFooter by default', () => {
+    container = document.createElement('div');
+    container.id = 'container';
+    document.body.appendChild(container);
     mount(
       <ComposedModal open>
         <ModalFooter primaryButtonText="Save" />
-      </ComposedModal>
+      </ComposedModal>,
+      { attachTo: document.querySelector('#container') }
     );
     expect(
       document.activeElement.classList.contains(`${prefix}--btn--primary`)
@@ -225,14 +231,25 @@ describe('<ComposedModal />', () => {
   });
 
   it('should focus on the element that matches selectorPrimaryFocus', () => {
+    container = document.createElement('div');
+    container.id = 'container';
+    document.body.appendChild(container);
     mount(
       <ComposedModal open selectorPrimaryFocus={`.${prefix}--modal-close`}>
         <ModalHeader label="Optional Label" title="Example" />
         <ModalFooter primaryButtonText="Save" />
-      </ComposedModal>
+      </ComposedModal>,
+      { attachTo: document.querySelector('#container') }
     );
     expect(
       document.activeElement.classList.contains(`${prefix}--modal-close`)
     ).toEqual(true);
+  });
+
+  afterEach(() => {
+    if (container && container.parentNode) {
+      container.parentNode.removeChild(container);
+    }
+    container = null;
   });
 });

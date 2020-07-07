@@ -167,7 +167,7 @@ function formatStep(name, index) {
   return `${name}-${step}`;
 }
 
-build().catch(error => {
+build().catch((error) => {
   console.log(error);
   process.exit(1);
 });

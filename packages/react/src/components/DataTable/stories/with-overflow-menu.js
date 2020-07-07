@@ -20,7 +20,7 @@ import DataTable, {
 } from '../../DataTable';
 import { initialRows, headers } from './shared';
 
-export default props => (
+const OverflowMenuStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}
@@ -38,8 +38,8 @@ export default props => (
           <TableHead>
             <TableRow>
               <TableSelectAll {...getSelectionProps()} />
-              {headers.map(header => (
-                <TableHeader {...getHeaderProps({ header })}>
+              {headers.map((header, i) => (
+                <TableHeader key={i} {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
@@ -47,15 +47,15 @@ export default props => (
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
-              <TableRow {...getRowProps({ row })}>
+            {rows.map((row, i) => (
+              <TableRow key={i} {...getRowProps({ row })}>
                 <TableSelectRow {...getSelectionProps({ row })} />
-                {row.cells.map(cell => (
+                {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
-                <TableCell>
+                <TableCell className="bx--table-column-menu">
                   <OverflowMenu flipped>
-                    <OverflowMenuItem primaryFocus>Action 1</OverflowMenuItem>
+                    <OverflowMenuItem>Action 1</OverflowMenuItem>
                     <OverflowMenuItem>Action 2</OverflowMenuItem>
                     <OverflowMenuItem>Action 3</OverflowMenuItem>
                   </OverflowMenu>
@@ -68,3 +68,5 @@ export default props => (
     )}
   />
 );
+
+export default OverflowMenuStory;

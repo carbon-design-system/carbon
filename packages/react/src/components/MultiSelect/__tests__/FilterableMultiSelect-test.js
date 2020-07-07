@@ -9,8 +9,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import MultiSelect from '../../MultiSelect';
 import {
-  assertMenuClosed,
   assertMenuOpen,
+  assertMenuClosed,
   findMenuIconNode,
   openMenu,
   generateItems,
@@ -46,7 +46,15 @@ describe('MultiSelect.Filterable', () => {
 
   it('should initially have the menu open when open prop is provided', () => {
     const wrapper = mount(<MultiSelect.Filterable {...mockProps} open />);
-    expect(wrapper.state('isOpen')).toBe(true);
+    assertMenuOpen(wrapper, mockProps);
+  });
+
+  it('should open the menu with a down arrow', () => {
+    const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
+    const menuIconNode = findMenuIconNode(wrapper);
+
+    menuIconNode.simulate('keyDown', { key: 'ArrowDown' });
+    assertMenuOpen(wrapper, mockProps);
   });
 
   it('should let the user toggle the menu by the menu icon', () => {
@@ -60,10 +68,10 @@ describe('MultiSelect.Filterable', () => {
   it('should not close the menu after a user makes a selection', () => {
     const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
     openMenu(wrapper);
-    wrapper
-      .find(listItemName)
-      .at(0)
-      .simulate('click');
+
+    const firstListItem = wrapper.find(listItemName).at(0);
+
+    firstListItem.simulate('click');
     assertMenuOpen(wrapper, mockProps);
   });
 
@@ -71,7 +79,12 @@ describe('MultiSelect.Filterable', () => {
     const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
     openMenu(wrapper);
     expect(wrapper.find(listItemName).length).toBe(mockProps.items.length);
-    wrapper.setState({ inputValue: '3' });
+
+    wrapper
+      .find('[placeholder="Placeholder..."]')
+      .at(1)
+      .simulate('change', { target: { value: '3' } });
+
     expect(wrapper.find(listItemName).length).toBe(1);
   });
 
@@ -82,20 +95,14 @@ describe('MultiSelect.Filterable', () => {
     openMenu(wrapper);
 
     // Select the first two items
-    wrapper
-      .find(listItemName)
-      .at(0)
-      .simulate('click');
+    wrapper.find(listItemName).at(0).simulate('click');
 
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItems: [mockProps.items[0]],
     });
 
-    wrapper
-      .find(listItemName)
-      .at(1)
-      .simulate('click');
+    wrapper.find(listItemName).at(1).simulate('click');
 
     expect(mockProps.onChange).toHaveBeenCalledTimes(2);
     expect(mockProps.onChange).toHaveBeenCalledWith({
@@ -103,19 +110,13 @@ describe('MultiSelect.Filterable', () => {
     });
 
     // Un-select the next two items
-    wrapper
-      .find(listItemName)
-      .at(0)
-      .simulate('click');
+    wrapper.find(listItemName).at(0).simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(3);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItems: [mockProps.items[0]],
     });
 
-    wrapper
-      .find(listItemName)
-      .at(0)
-      .simulate('click');
+    wrapper.find(listItemName).at(0).simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(4);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItems: [],
@@ -129,20 +130,14 @@ describe('MultiSelect.Filterable', () => {
     openMenu(wrapper);
 
     // Select the first two items
-    wrapper
-      .find(listItemName)
-      .at(1)
-      .simulate('click');
+    wrapper.find(listItemName).at(1).simulate('click');
 
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItems: [mockProps.items[1]],
     });
 
-    wrapper
-      .find(listItemName)
-      .at(1)
-      .simulate('click');
+    wrapper.find(listItemName).at(1).simulate('click');
 
     expect(mockProps.onChange).toHaveBeenCalledTimes(2);
     expect(mockProps.onChange).toHaveBeenCalledWith({
@@ -152,14 +147,17 @@ describe('MultiSelect.Filterable', () => {
 
   it('should not clear input value after a user makes a selection', () => {
     const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
-    const inputValue = 'Item';
     openMenu(wrapper);
-    wrapper.setState({ inputValue });
-    wrapper
-      .find(listItemName)
-      .at(0)
-      .simulate('click');
 
-    expect(wrapper.state('inputValue')).toEqual(inputValue);
+    wrapper
+      .find('[placeholder="Placeholder..."]')
+      .at(1)
+      .simulate('change', { target: { value: '3' } });
+
+    wrapper.find(listItemName).at(0).simulate('click');
+
+    expect(
+      wrapper.find('[placeholder="Placeholder..."]').at(1).props().value
+    ).toEqual('3');
   });
 });

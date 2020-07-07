@@ -38,7 +38,7 @@ const SwitcherItem = React.forwardRef(function SwitcherItem(props, ref) {
   });
 
   return (
-    <li className={className} role="menuitem">
+    <li className={className}>
       <Link
         {...rest}
         ref={ref}

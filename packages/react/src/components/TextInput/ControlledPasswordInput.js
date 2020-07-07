@@ -21,7 +21,9 @@ const ControlledPasswordInput = React.forwardRef(
       invalidText,
       helperText,
       light,
+      // eslint-disable-next-line react/prop-types
       type = 'password',
+      // eslint-disable-next-line react/prop-types
       togglePasswordVisibility,
       tooltipPosition = 'bottom',
       tooltipAlignment = 'center',
@@ -43,12 +45,12 @@ const ControlledPasswordInput = React.forwardRef(
     );
     const sharedTextInputProps = {
       id,
-      onChange: evt => {
+      onChange: (evt) => {
         if (!other.disabled) {
           onChange(evt);
         }
       },
-      onClick: evt => {
+      onClick: (evt) => {
         if (!other.disabled) {
           onClick(evt);
         }
@@ -117,7 +119,6 @@ const ControlledPasswordInput = React.forwardRef(
       <div
         className={`${prefix}--form-item ${prefix}--text-input-wrapper ${prefix}--password-input-wrapper`}>
         {label}
-        {helper}
         <div
           className={`${prefix}--text-input__field-wrapper`}
           data-invalid={invalid || null}>
@@ -128,7 +129,7 @@ const ControlledPasswordInput = React.forwardRef(
           )}
           {input}
         </div>
-        {error}
+        {error ? error : helper}
       </div>
     );
   }

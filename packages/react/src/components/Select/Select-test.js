@@ -111,17 +111,11 @@ describe('Select', () => {
 
       it('renders children as expected', () => {
         wrapper.setProps({
-          helperText: (
-            <span>
-              This helper text has <a href="#">a link</a>.
-            </span>
-          ),
+          helperText: <span>This is helper text.</span>,
         });
         const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.props().children).toEqual(
-          <span>
-            This helper text has <a href="#">a link</a>.
-          </span>
+          <span>This is helper text.</span>
         );
       });
 
@@ -150,6 +144,8 @@ describe('Select', () => {
 });
 
 describe('refs', () => {
+  let container;
+
   it('should accept refs', () => {
     class MyComponent extends React.Component {
       constructor(props) {
@@ -164,10 +160,22 @@ describe('refs', () => {
         return <Select id="test" labelText="testlabel" ref={this.myRef} />;
       }
     }
-    const wrapper = mount(<MyComponent />);
+    container = document.createElement('div');
+    container.id = 'container';
+    document.body.appendChild(container);
+    const wrapper = mount(<MyComponent />, {
+      attachTo: document.querySelector('#container'),
+    });
     expect(document.activeElement.type).toBeUndefined();
     wrapper.instance().focus();
     expect(document.activeElement.type).toEqual('select-one');
+  });
+
+  afterEach(() => {
+    if (container && container.parentNode) {
+      container.parentNode.removeChild(container);
+    }
+    container = null;
   });
 });
 

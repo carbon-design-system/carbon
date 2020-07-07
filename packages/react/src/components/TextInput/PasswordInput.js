@@ -7,25 +7,28 @@ import { textInputProps } from './util';
 
 const { prefix } = settings;
 
-export default function PasswordInput({
-  labelText,
-  className,
-  id,
-  placeholder,
-  onChange,
-  onClick,
-  hideLabel,
-  invalid,
-  invalidText,
-  helperText,
-  light,
-  tooltipPosition = 'bottom',
-  tooltipAlignment = 'center',
-  hidePasswordLabel = 'Hide password',
-  showPasswordLabel = 'Show password',
-  size,
-  ...other
-}) {
+const PasswordInput = React.forwardRef(function PasswordInput(
+  {
+    labelText,
+    className,
+    id,
+    placeholder,
+    onChange,
+    onClick,
+    hideLabel,
+    invalid,
+    invalidText,
+    helperText,
+    light,
+    tooltipPosition = 'bottom',
+    tooltipAlignment = 'center',
+    hidePasswordLabel = 'Hide password',
+    showPasswordLabel = 'Show password',
+    size,
+    ...other
+  },
+  ref
+) {
   const [inputType, setInputType] = useState('password');
   const togglePasswordVisibility = () =>
     setInputType(inputType === 'password' ? 'text' : 'password');
@@ -42,12 +45,12 @@ export default function PasswordInput({
   );
   const sharedTextInputProps = {
     id,
-    onChange: evt => {
+    onChange: (evt) => {
       if (!other.disabled) {
         onChange(evt);
       }
     },
-    onClick: evt => {
+    onClick: (evt) => {
       if (!other.disabled) {
         onClick(evt);
       }
@@ -55,6 +58,7 @@ export default function PasswordInput({
     placeholder,
     type: inputType,
     className: textInputClasses,
+    ref,
     ...other,
   };
   const labelClasses = classNames(`${prefix}--label`, {
@@ -115,7 +119,6 @@ export default function PasswordInput({
     <div
       className={`${prefix}--form-item ${prefix}--text-input-wrapper ${prefix}--password-input-wrapper`}>
       {label}
-      {helper}
       <div
         className={`${prefix}--text-input__field-wrapper`}
         data-invalid={invalid || null}>
@@ -124,10 +127,10 @@ export default function PasswordInput({
         )}
         {input}
       </div>
-      {error}
+      {error ? error : helper}
     </div>
   );
-}
+});
 
 PasswordInput.propTypes = {
   /**
@@ -243,3 +246,5 @@ PasswordInput.defaultProps = {
   light: false,
   size: '',
 };
+
+export default PasswordInput;

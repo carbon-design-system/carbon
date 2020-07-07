@@ -1,8 +1,10 @@
 {
   "name": "@carbon/pictograms",
   "description": "Pictograms for digital and software products using the Carbon Design System",
-  "version": "10.8.0",
+  "version": "10.14.0",
   "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/pictograms",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
@@ -25,7 +27,7 @@
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "@carbon/icon-build-helpers": "^0.3.0",
+    "@carbon/icon-build-helpers": "^0.8.0",
     "rimraf": "^3.0.0"
   }
 }

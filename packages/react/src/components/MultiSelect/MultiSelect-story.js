@@ -41,6 +41,10 @@ const items = [
     text:
       'An example option that is really long to show what should be done to handle long text',
   },
+  {
+    id: 'downshift-1-item-5',
+    text: 'Option 5',
+  },
 ];
 
 const defaultLabel = 'MultiSelect Label';
@@ -53,19 +57,25 @@ const types = {
 
 const sizes = {
   'Extra large size (xl)': 'xl',
-  'Regular size (lg)': '',
+  'Default size': undefined,
   'Small size (sm)': 'sm',
+};
+
+const directions = {
+  'Bottom (default)': 'bottom',
+  'Top ': 'top',
 };
 
 const props = () => ({
   id: text('MultiSelect ID (id)', 'carbon-multiselect-example'),
   titleText: text('Title (titleText)', 'Multiselect title'),
-  helperText: text('Helper text (helperText)', 'This is not helper text'),
+  helperText: text('Helper text (helperText)', 'This is helper text'),
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
   useTitleInItem: boolean('Show tooltip on hover', false),
   type: select('UI type (Only for `<MultiSelect>`) (type)', types, 'default'),
-  size: select('Field size (size)', sizes, '') || undefined,
+  size: select('Field size (size)', sizes, undefined) || undefined,
+  direction: select('Dropdown direction (direction)', directions, 'bottom'),
   label: text('Label (label)', defaultLabel),
   invalid: boolean('Show form validation UI (invalid)', false),
   invalidText: text(
@@ -104,8 +114,8 @@ storiesOf('MultiSelect', module)
           <MultiSelect
             {...multiSelectProps}
             items={items}
-            itemToString={item => (item ? item.text : '')}
-            translateWithId={id => listBoxMenuIconTranslationIds[id]}
+            itemToString={(item) => (item ? item.text : '')}
+            translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
             selectionFeedback={selectionFeedback}
           />
         </div>
@@ -133,9 +143,9 @@ storiesOf('MultiSelect', module)
           <MultiSelect
             {...multiSelectProps}
             items={items}
-            itemToString={item => (item ? item.text : '')}
+            itemToString={(item) => (item ? item.text : '')}
             initialSelectedItems={[items[0], items[1]]}
-            translateWithId={id => listBoxMenuIconTranslationIds[id]}
+            translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
             selectionFeedback={selectionFeedback}
           />
         </div>
@@ -163,9 +173,9 @@ storiesOf('MultiSelect', module)
           <MultiSelect.Filterable
             {...multiSelectProps}
             items={items}
-            itemToString={item => (item ? item.text : '')}
+            itemToString={(item) => (item ? item.text : '')}
             placeholder={defaultPlaceholder}
-            translateWithId={id => listBoxMenuIconTranslationIds[id]}
+            translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
             selectionFeedback={selectionFeedback}
           />
         </div>
