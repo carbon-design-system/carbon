@@ -66,7 +66,7 @@
     - 3D manual curve
     - spline
 - name: 3D-iCa
-  friendly_name: 3D iCA
+  friendly_name: 3D ICA
   aliases:
     - iCA
     - 3D iCA
