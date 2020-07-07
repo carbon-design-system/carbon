@@ -41,6 +41,11 @@ export default class Tabs extends React.Component {
     iconDescription: PropTypes.string.isRequired,
 
     /**
+     * Specify whether or not to use the light component variant
+     */
+    light: PropTypes.bool,
+
+    /**
      * Optionally provide an `onClick` handler that is invoked when a <Tab> is
      * clicked
      */
@@ -273,6 +278,7 @@ export default class Tabs extends React.Component {
       className,
       role,
       type,
+      light,
       onSelectionChange,
       selectionMode, // eslint-disable-line no-unused-vars
       tabContentClassName,
@@ -337,6 +343,7 @@ export default class Tabs extends React.Component {
     const classes = {
       tabs: classNames(`${prefix}--tabs`, className, {
         [`${prefix}--tabs--container`]: type === 'container',
+        [`${prefix}--tabs--light`]: light,
       }),
       tablist: classNames(`${prefix}--tabs__nav`),
       leftOverflowButtonClasses: classNames({
