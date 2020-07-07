@@ -79,6 +79,10 @@
     background-color: $ui-03;
   }
 
+  .#{$prefix}--tab--overflow-nav-button svg {
+    fill: $icon-01;
+  }
+
   //-----------------------------
   // Item
   //-----------------------------
