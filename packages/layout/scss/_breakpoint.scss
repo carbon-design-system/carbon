@@ -125,7 +125,7 @@ $carbon--grid-breakpoints: (
   @return '-#{$name}';
 }
 
-/// Generate a media query up to the width of the given breakpoint name
+/// Generate a media query from the width of the given breakpoint to infinity
 /// @param {String | Number} $name
 /// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
 /// @content
