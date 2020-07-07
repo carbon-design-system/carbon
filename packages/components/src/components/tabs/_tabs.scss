@@ -46,7 +46,7 @@
   }
 
   //-----------------------------
-  // Overflow Buttons
+  // Overflow Nav Buttons
   //-----------------------------
   .#{$prefix}--tab--overflow-nav-button {
     @include button-reset;
@@ -71,6 +71,12 @@
 
   .#{$prefix}--tab--overflow-nav-button--hidden {
     display: none;
+  }
+
+  .#{$prefix}--tabs--container .#{$prefix}--tab--overflow-nav-button {
+    width: $carbon--spacing-09;
+    margin: 0;
+    background-color: $ui-03;
   }
 
   //-----------------------------
