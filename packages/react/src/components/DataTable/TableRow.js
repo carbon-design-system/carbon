@@ -31,6 +31,11 @@ TableRow.propTypes = {
    * Specify an optional className to be applied to the container node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify if the row is selected
+   */
+  isSelected: PropTypes.bool,
 };
 
 export default TableRow;

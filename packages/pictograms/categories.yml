@@ -43,6 +43,7 @@ categories:
       - escalator--up
       - fire--alarm
       - fire--extinguisher
+      - id--badge
       - office
       - stairs--plan--view
   - name: Cities
@@ -189,6 +190,7 @@ categories:
       - circle-packing
       - code--syntax
       - data--set
+      - employee--insights
       - flow--chart
       - flow--chart--detail
       - heat--map
@@ -225,6 +227,7 @@ categories:
       - design--and--development--01
       - design--and--development--02
       - feedback
+      - hills
       - idea
       - ideate
       - path
@@ -252,6 +255,10 @@ categories:
     members:
       - college
       - education
+      - feedback--02
+      - goals
+      - growth
+      - insights
       - university
   - name: Electronics
     members:
@@ -278,6 +285,9 @@ categories:
       - police
   - name: File
     members:
+      - add--document
+      - contract
+      - document--security
       - duplicate--file
       - envelope
       - file--backup
@@ -317,6 +327,8 @@ categories:
       - pill--bottle--01
       - pills
       - stethoscope
+      - x-ray--01
+      - x-ray--02
   - name: Home
     members:
       - door--handle
@@ -395,11 +407,13 @@ categories:
       - microscope
       - mortar--and--pestle
       - petri--culture
+      - research
       - test--tubes
       - virus
   - name: Lifestyle
     members:
       - apple
+      - backpack
       - blender
       - cafe
       - cherries
@@ -408,8 +422,10 @@ categories:
       - flower--01
       - flower--02
       - perfume
+      - racetrack
       - scale
       - soft--ice--cream
+      - sports
       - stationary--bicycle
       - tennis
       - yoga--01
@@ -435,6 +451,7 @@ categories:
   - name: Networking
     members:
       - automation--decision
+      - distribution--ledger
       - global--network
       - integration
       - inspect--data
@@ -454,6 +471,8 @@ categories:
       - reset--hybrid--cloud
       - reset--settings
       - support--services
+      - transactional--blockchain
+      - transactional--trust
       - transform
   - name: People
     members:
@@ -497,6 +516,7 @@ categories:
       - customer--service
       - gift
       - price
+      - qr-code
       - receipt
       - shirt
       - shop
@@ -612,6 +632,7 @@ categories:
       - language--translation
       - language--translation--alphabet--a--expanded
       - natural--language--classifier
+      - natural--language--understanding
       - personality--insights
       - question--and--answer
       - relationship--extraction

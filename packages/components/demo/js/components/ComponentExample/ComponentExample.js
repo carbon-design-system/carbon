@@ -66,6 +66,7 @@ class ComponentExample extends Component {
     this._instantiateComponents();
   }
 
+  // eslint-disable-next-line react/no-deprecated
   componentWillUpdate({ component, htmlFile }) {
     const { component: prevComponent, htmlFile: prevHtmlFile } = this.props;
     if (prevComponent !== component || prevHtmlFile !== htmlFile) {

@@ -101,9 +101,11 @@ const TableToolbarSearch = ({
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       tabIndex={expandedState ? '-1' : tabIndex}
       ref={searchRef}
+      onKeyDown={(event) => onClick(event)}
       onClick={(event) => onClick(event)}
       onFocus={(event) => handleExpand(event, true)}
       onBlur={(event) => !value && handleExpand(event, false)}
@@ -142,7 +144,22 @@ TableToolbarSearch.propTypes = {
   /**
    * Provide an optional className for the overal container of the Search
    */
-  searchContainerClasses: PropTypes.string,
+  searchContainerClass: PropTypes.string,
+
+  /**
+   * Specifies if the search should expand
+   */
+  expanded: PropTypes.bool,
+
+  /**
+   * Specifies if the search should initially render in an expanded state
+   */
+  defaultExpanded: PropTypes.bool,
+
+  /**
+   * Provide an optional hook that is called each time the input is expanded
+   */
+  onExpand: PropTypes.func,
 
   /**
    * Provide an optional hook that is called each time the input is updated

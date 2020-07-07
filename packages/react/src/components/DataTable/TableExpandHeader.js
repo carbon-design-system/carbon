@@ -55,6 +55,11 @@ TableExpandHeader.propTypes = {
   children: PropTypes.node,
 
   /**
+   * Specify whether an expand all button should be displayed
+   */
+  enableExpando: PropTypes.bool,
+
+  /**
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */

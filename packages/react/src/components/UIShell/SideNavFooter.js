@@ -65,6 +65,7 @@ SideNavFooter.propTypes = {
    * keep local state and styling in step with the SideNav expansion state.
    */
   isSideNavExpanded: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 SideNavFooter.defaultProps = {

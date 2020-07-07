@@ -23,7 +23,7 @@ import DataTable, {
 import { headers, initialRows } from './shared';
 import './with-expansion-story.scss';
 
-export default (props) => (
+const OptionsStory = (props) => (
   <DataTable
     rows={[
       { ...initialRows[0], disabled: true },
@@ -50,8 +50,8 @@ export default (props) => (
             <TableRow>
               <TableExpandHeader />
               <TableSelectAll {...getSelectionProps()} />
-              {headers.map((header) => (
-                <TableHeader {...getHeaderProps({ header })}>
+              {headers.map((header, i) => (
+                <TableHeader key={i} {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
@@ -80,3 +80,5 @@ export default (props) => (
     )}
   />
 );
+
+export default OptionsStory;

@@ -252,6 +252,15 @@ $list-box-menu-width: rem(300px);
     height: 100%;
   }
 
+  .#{$prefix}--dropdown--inline .#{$prefix}--list-box__field {
+    max-width: rem(480px);
+  }
+
+  .#{$prefix}--dropdown--inline .bx--list-box__menu {
+    min-width: rem(288px);
+    max-width: rem(480px);
+  }
+
   // The field we use for input, showing selection, etc.
   .#{$prefix}--list-box__field {
     @include button-reset;

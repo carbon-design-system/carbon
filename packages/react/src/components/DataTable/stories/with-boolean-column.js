@@ -16,7 +16,6 @@ import DataTable, {
   TableHeader,
   TableRow,
 } from '../../DataTable';
-import './with-boolean-column-story.scss';
 
 const initialRows = [
   {
@@ -82,7 +81,7 @@ export const headers = [
   },
 ];
 
-export default (props) => (
+const BooleanColumnStory = (props) => (
   <DataTable
     rows={initialRows}
     headers={headers}
@@ -102,16 +101,16 @@ export default (props) => (
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              {headers.map((header) => (
-                <TableHeader {...getHeaderProps({ header })}>
+              {headers.map((header, i) => (
+                <TableHeader key={i} {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow {...getRowProps({ row })}>
+            {rows.map((row, i) => (
+              <TableRow key={i} {...getRowProps({ row })}>
                 {row.cells.map((cell) => {
                   if (cell.info.header === 'enabled') {
                     return (
@@ -123,6 +122,7 @@ export default (props) => (
                           id={'check-' + cell.id}
                           checked={cell.value}
                           hideLabel
+                          labelText="checkbox"
                         />
                       </TableCell>
                     );
@@ -138,3 +138,5 @@ export default (props) => (
     )}
   />
 );
+
+export default BooleanColumnStory;
