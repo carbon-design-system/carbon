@@ -58,6 +58,7 @@
   .#{$prefix}--product-switcher__subheader,
   .#{$prefix}--product-switcher__all-btn {
     @include type-style('body-short-01');
+
     padding: mini-units(1);
     color: $shell-panel-text-01;
   }
@@ -96,6 +97,7 @@
     display: flex;
     align-items: center;
     @include type-style('body-short-01');
+
     padding: mini-units(1) mini-units(2);
   }
 
@@ -138,6 +140,7 @@
 
   .#{$prefix}--product-link__name {
     @include type-style('body-short-01');
+
     margin-left: 0.25rem;
     font-weight: 400;
     color: $shell-header-text-02;
