@@ -11869,7 +11869,7 @@ e- name: notebook
   sizes:
     - 32
 - name: z-axis
-  friendly_name: Z axis
+  friendly_name: Z axis 
   aliases:
     - depth
     - 3D
