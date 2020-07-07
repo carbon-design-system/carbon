@@ -183,6 +183,12 @@ FileUploaderDropContainer.propTypes = {
    * The event handler signature looks like `onAddFiles(evt, { addedFiles })`
    */
   onAddFiles: PropTypes.func,
+
+  /**
+   * Specify the size of the uploaded items, from a list of available
+   * sizes. For `default` size, this prop can remain unspecified.
+   */
+  size: PropTypes.oneOf(['default', 'field', 'small']),
 };
 
 FileUploaderDropContainer.defaultProps = {
