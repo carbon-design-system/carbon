@@ -81,7 +81,7 @@ export function svgShapes(svgData) {
             key: `circle${index}`,
           };
 
-          return <circle {...circleProps} />;
+          return <circle key={index} {...circleProps} />;
         });
       } else if (svgProp === 'paths') {
         return data.map((path, index) => (
@@ -157,6 +157,11 @@ Icon.propTypes = {
    * The CSS class name.
    */
   className: PropTypes.string,
+
+  /**
+   * The name of the icon.
+   */
+  name: PropTypes.string,
 
   /**
    * The icon title.
