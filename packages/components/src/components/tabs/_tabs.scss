@@ -277,9 +277,7 @@
       .#{$prefix}--tabs__nav-link {
         // height - vertical padding
         // Draws the border without affecting the inner-content
-        /* stylelint-disable declaration-property-unit-whitelist */
         line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
-        /* stylelint-enable declaration-property-unit-whitelist */
         box-shadow: inset 0 2px 0 0 $interactive-04;
         border-bottom: none;
         padding: $spacing-03 $spacing-05;
@@ -342,9 +340,7 @@
     @include carbon--breakpoint(md) {
       height: rem(48px);
       // Height - vertical padding
-      /* stylelint-disable declaration-property-unit-whitelist */
       line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
-      /* stylelint-enable declaration-property-unit-whitelist */
       border-bottom: none;
       padding: $spacing-03 $spacing-05;
     }
