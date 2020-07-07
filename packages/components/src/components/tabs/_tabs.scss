@@ -48,6 +48,63 @@
   //-----------------------------
   // Overflow Nav Buttons
   //-----------------------------
+  .#{$prefix}--tabs__overflow-indicator--left,
+  .#{$prefix}--tabs__overflow-indicator--right {
+    z-index: 1;
+    flex: 1 0 auto;
+    width: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--tabs__overflow-indicator--left {
+    background-image: linear-gradient(to left, transparent, $ui-background);
+    margin-right: -$carbon--spacing-05;
+  }
+
+  .#{$prefix}--tabs__overflow-indicator--right {
+    background-image: linear-gradient(to right, transparent, $ui-background);
+    margin-left: -$carbon--spacing-05;
+  }
+
+  .#{$prefix}--tabs--container .#{$prefix}--tabs__overflow-indicator--left {
+    background-image: linear-gradient(to left, transparent, $ui-03);
+  }
+  .#{$prefix}--tabs--container .#{$prefix}--tabs__overflow-indicator--right {
+    background-image: linear-gradient(to right, transparent, $ui-03);
+  }
+
+  // Safari-only media query
+  // won't appear correctly with CSS custom properties
+  // see: code snippet and modal overflow indicators
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+      .#{$prefix}--tabs__overflow-indicator--left {
+        background-image: linear-gradient(
+          to left,
+          rgba($ui-background, 0),
+          $ui-background
+        );
+        margin-right: -$carbon--spacing-05;
+      }
+
+      .#{$prefix}--tabs__overflow-indicator--right {
+        background-image: linear-gradient(
+          to right,
+          rgba($ui-background, 0),
+          $ui-background
+        );
+        margin-left: -$carbon--spacing-05;
+      }
+
+      .#{$prefix}--tabs--container .#{$prefix}--tabs__overflow-indicator--left {
+        background-image: linear-gradient(to left, rgba($ui-03, 0), $ui-03);
+      }
+      .#{$prefix}--tabs--container
+        .#{$prefix}--tabs__overflow-indicator--right {
+        background-image: linear-gradient(to right, rgba($ui-03, 0), $ui-03);
+      }
+    }
+  }
+
   .#{$prefix}--tab--overflow-nav-button {
     @include button-reset;
     display: flex;
@@ -58,14 +115,6 @@
 
     &:focus {
       @include focus-outline('outline');
-    }
-
-    &:first-of-type {
-      margin-right: $carbon--spacing-03;
-    }
-
-    &:last-of-type {
-      margin-left: $carbon--spacing-03;
     }
   }
 

@@ -245,7 +245,7 @@ export default class Tabs extends React.Component {
     } = this.tablist.current;
     const tablistRightBound = tablistLeftBound + tablistClientWidth;
     const selectedTabRightBound = selectedTabLeftBound + selectedTabClientWidth;
-    const OVERFLOW_BUTTON_OFFSET = 48;
+    const OVERFLOW_BUTTON_OFFSET = 40;
     this.selectTabAt(nextIndex, this.props.onSelectionChange);
     if (selectedTabLeftBound < tablistLeftBound) {
       this.tablist.current.scrollLeft =
@@ -328,6 +328,12 @@ export default class Tabs extends React.Component {
       );
     });
 
+    const leftOverflowNavButtonHidden =
+      !this.state.horizontalOverflow || !this.state.tablistScrollLeft;
+    const rightOverflowNavButtonHidden =
+      !this.state.horizontalOverflow ||
+      this.state.tablistScrollLeft + this.state.tablistClientWidth ===
+        this.state.tablistScrollWidth;
     const classes = {
       tabs: classNames(`${prefix}--tabs`, className, {
         [`${prefix}--tabs--container`]: type === 'container',
@@ -335,15 +341,11 @@ export default class Tabs extends React.Component {
       tablist: classNames(`${prefix}--tabs__nav`),
       leftOverflowButtonClasses: classNames({
         [`${prefix}--tab--overflow-nav-button`]: this.state.horizontalOverflow,
-        [`${prefix}--tab--overflow-nav-button--hidden`]:
-          !this.state.horizontalOverflow || !this.state.tablistScrollLeft,
+        [`${prefix}--tab--overflow-nav-button--hidden`]: leftOverflowNavButtonHidden,
       }),
       rightOverflowButtonClasses: classNames({
         [`${prefix}--tab--overflow-nav-button`]: this.state.horizontalOverflow,
-        [`${prefix}--tab--overflow-nav-button--hidden`]:
-          !this.state.horizontalOverflow ||
-          this.state.tablistScrollLeft + this.state.tablistClientWidth ===
-            this.state.tablistScrollWidth,
+        [`${prefix}--tab--overflow-nav-button--hidden`]: rightOverflowNavButtonHidden,
       }),
     };
 
@@ -361,9 +363,15 @@ export default class Tabs extends React.Component {
             }>
             <ChevronLeft16 />
           </button>
+          {!leftOverflowNavButtonHidden && (
+            <div className={`${prefix}--tabs__overflow-indicator--left`} />
+          )}
           <ul role="tablist" className={classes.tablist} ref={this.tablist}>
             {tabsWithProps}
           </ul>
+          {!rightOverflowNavButtonHidden && (
+            <div className={`${prefix}--tabs__overflow-indicator--right`} />
+          )}
           <button
             className={classes.rightOverflowButtonClasses}
             onClick={(event) =>
