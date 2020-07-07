@@ -218,10 +218,6 @@
   .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu {
     padding-top: 0;
     padding-bottom: 0;
-  }
-
-  .#{$prefix}--data-table--compact td.#{$prefix}--table-column-menu,
-  .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu {
     height: rem(24px);
   }
 

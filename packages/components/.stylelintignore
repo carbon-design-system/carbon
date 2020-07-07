@@ -1,14 +1,3 @@
-**/build/**
-**/dist/**
-**/examples/**
-**/vendor/**
-**/_inlined/**
-
-# Generated SCSS directories and files
-**/packages/colors/**/*.scss
-**/packages/elements/scss/**/*.scss
-**/packages/themes/**/*.scss
-
 # packages/components
 demo/**
 tests/**
@@ -16,5 +5,3 @@ css/**
 scss/**
 src/components/date-picker/_flatpickr.scss
 
-# packages/react
-packages/react/storybook-static/**
