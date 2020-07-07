@@ -1,7 +1,7 @@
 {
   "name": "@carbon/actions-add-review-labels",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.0.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/actions/add-review-labels",
