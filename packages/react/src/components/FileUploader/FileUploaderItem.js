@@ -88,8 +88,8 @@ FileUploaderItem.propTypes = {
   status: PropTypes.oneOf(['uploading', 'edit', 'complete']),
 
   /**
-   * Specify the size of the button, from a list of available sizes.
-   * For `default` buttons, this prop can remain unspecified.
+   * Specify the size of the uploaded items, from a list of available
+   * sizes. For `default` size, this prop can remain unspecified.
    */
   size: PropTypes.oneOf(['default', 'field', 'small']),
 
