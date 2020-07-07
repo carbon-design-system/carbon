@@ -143,6 +143,7 @@ storiesOf('OverflowMenu', module)
           ...props.menu(),
           ariaLabel: null,
           style: { width: 'auto' },
+          // eslint-disable-next-line react/display-name
           renderIcon: () => <div style={{ padding: '0 1rem' }}>Menu</div>,
         }}>
         <OverflowMenuItem {...props.menuItem()} itemText="Option 1" />

@@ -92,7 +92,6 @@ describe('Icon', () => {
         width={16}
         height={16}
         viewBox="0 0 16 16"
-        tabIndex="0"
         aria-label="Mock icon"
         tabIndex="0">
         <circle cx={8} cy={8} r={8} />
