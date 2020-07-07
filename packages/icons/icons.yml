@@ -314,7 +314,7 @@
     - alarm subtract
     - alarm minus
 - name: align--horizontal-center
-  friendly_name: Align horizontal center
+  friendly_name: Align horizontal center 
   sizes:
     - 32
   aliases:
