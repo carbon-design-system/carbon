@@ -24698,6 +24698,7 @@ Toolbar styles
 ```scss
 @mixin tooltip--icon() {
   @include reset;
+
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -24708,6 +24709,7 @@ Toolbar styles
   &::before,
   &::after {
     @include type-style('body-short-01');
+
     position: absolute;
     display: flex;
     align-items: center;
@@ -24732,6 +24734,7 @@ Toolbar styles
 
   &::after {
     @include box-shadow;
+
     min-width: rem(24px);
     max-width: rem(208px);
     height: rem(24px);
@@ -24839,10 +24842,12 @@ Toolbar styles
 @mixin tooltip--definition--legacy() {
   .#{$prefix}--tooltip--definition {
     @include reset;
+
     position: relative;
 
     .#{$prefix}--tooltip__trigger {
       @include type-style('label-01');
+
       display: inline-flex;
       position: relative;
       border-bottom: 1px dotted $interactive-01;
@@ -24871,6 +24876,7 @@ Toolbar styles
   .#{$prefix}--tooltip--definition__bottom,
   .#{$prefix}--tooltip--definition__top {
     @include box-shadow;
+
     position: absolute;
     z-index: 1;
     display: none;
@@ -24884,6 +24890,7 @@ Toolbar styles
 
     p {
       @include type-style('body-short-01');
+
       color: $inverse-01;
     }
 
@@ -25056,6 +25063,7 @@ Tooltip styles
 
   .#{$prefix}--tooltip__label {
     @include type-style('label-01');
+
     display: inline-flex;
     align-items: center;
     color: $text-02;
@@ -25071,6 +25079,7 @@ Tooltip styles
 
   .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only) {
     @include button-reset($width: false);
+
     display: inline-flex;
     align-items: center;
     cursor: pointer;
@@ -25078,6 +25087,7 @@ Tooltip styles
 
     &:focus {
       @include focus-outline('border');
+
       fill: $hover-primary;
     }
   }
@@ -25094,6 +25104,7 @@ Tooltip styles
   .#{$prefix}--tooltip {
     @include box-shadow;
     @include reset;
+
     position: absolute;
     display: none;
     min-width: rem(208px);
@@ -25201,6 +25212,7 @@ Tooltip styles
 
   .#{$prefix}--tooltip__heading {
     @include carbon--type-style('productive-heading-01');
+
     margin-bottom: $spacing-03;
   }
 
@@ -25227,6 +25239,7 @@ Tooltip styles
   // Definition CSS only tooltip
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition {
     @include type-style('label-01');
+
     border-bottom: rem(1px) dotted $interactive-01;
   }
 
@@ -25459,6 +25472,7 @@ UI shell side nav
   //----------------------------------------------------------------------------
   .#{$prefix}--header-panel {
     @include carbon--motion(exit, productive);
+
     position: fixed;
     top: carbon--mini-units(6);
     bottom: 0;
@@ -25516,6 +25530,7 @@ UI shell header
 
   .#{$prefix}--header__action {
     @include button-reset();
+
     width: mini-units(6);
     height: mini-units(6);
     border: rem(2px) solid transparent;
@@ -25593,6 +25608,7 @@ UI shell header
   //--------------------------------------------------------------------------
   a.#{$prefix}--header__name {
     @include type-style('body-short-01');
+
     display: flex;
     align-items: center;
     height: 100%;
@@ -26125,6 +26141,7 @@ UI shell product switcher
   .#{$prefix}--product-switcher__subheader,
   .#{$prefix}--product-switcher__all-btn {
     @include type-style('body-short-01');
+
     padding: mini-units(1);
     color: $shell-panel-text-01;
   }
@@ -26163,6 +26180,7 @@ UI shell product switcher
     display: flex;
     align-items: center;
     @include type-style('body-short-01');
+
     padding: mini-units(1) mini-units(2);
   }
 
@@ -26205,6 +26223,7 @@ UI shell product switcher
 
   .#{$prefix}--product-link__name {
     @include type-style('body-short-01');
+
     margin-left: 0.25rem;
     font-weight: 400;
     color: $shell-header-text-02;
@@ -26535,11 +26554,11 @@ UI shell side nav
 
   .#{$prefix}--side-nav__select {
     @include focus-outline('reset');
+
     appearance: none;
     flex: 1 1 0%;
     background-color: $shell-header-bg-01;
     color: $shell-header-text-01;
-    height: 100%;
     border: none;
     border-radius: 0;
     cursor: pointer;
@@ -26569,6 +26588,7 @@ UI shell side nav
   .#{$prefix}--side-nav__toggle {
     @include focus-outline('reset');
     @include button-reset($width: true);
+
     height: 100%;
     text-align: left;
     transition: outline $duration--fast-02;
@@ -26653,6 +26673,7 @@ UI shell side nav
     @include button-reset($width: true);
     @include type-style('productive-heading-01');
     @include focus-outline('reset');
+
     padding: 0 mini-units(2);
     display: flex;
     align-items: center;
@@ -26674,6 +26695,7 @@ UI shell side nav
 
   .#{$prefix}--side-nav__submenu-title {
     @include text-overflow();
+
     text-align: left;
   }
 
@@ -26771,6 +26793,7 @@ UI shell side nav
     + .#{$prefix}--header__menu {
     @include focus-outline('reset');
     @include type-style('productive-heading-01');
+
     position: relative;
     display: flex;
     align-items: center;
@@ -26792,6 +26815,7 @@ UI shell side nav
     a.#{$prefix}--header__menu-item
     .#{$prefix}--text-truncate-end {
     @include text-overflow();
+
     color: $shell-side-nav-text-01;
     font-size: rem(14px);
     letter-spacing: 0.1px;
@@ -26931,7 +26955,7 @@ UI shell side nav
     background-color: transparent;
     padding: 0;
 
-    & li {
+    li {
       width: 100%;
     }
 
@@ -27024,6 +27048,7 @@ UI shell side nav
 
   .#{$prefix}--switcher__item-link {
     @include carbon--type-style('productive-heading-01');
+
     display: block;
     height: $spacing-07;
     text-decoration: none;

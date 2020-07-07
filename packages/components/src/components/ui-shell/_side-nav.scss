@@ -241,11 +241,11 @@
 
   .#{$prefix}--side-nav__select {
     @include focus-outline('reset');
+
     appearance: none;
     flex: 1 1 0%;
     background-color: $shell-header-bg-01;
     color: $shell-header-text-01;
-    height: 100%;
     border: none;
     border-radius: 0;
     cursor: pointer;
@@ -275,6 +275,7 @@
   .#{$prefix}--side-nav__toggle {
     @include focus-outline('reset');
     @include button-reset($width: true);
+
     height: 100%;
     text-align: left;
     transition: outline $duration--fast-02;
@@ -359,6 +360,7 @@
     @include button-reset($width: true);
     @include type-style('productive-heading-01');
     @include focus-outline('reset');
+
     padding: 0 mini-units(2);
     display: flex;
     align-items: center;
@@ -380,6 +382,7 @@
 
   .#{$prefix}--side-nav__submenu-title {
     @include text-overflow();
+
     text-align: left;
   }
 
@@ -477,6 +480,7 @@
     + .#{$prefix}--header__menu {
     @include focus-outline('reset');
     @include type-style('productive-heading-01');
+
     position: relative;
     display: flex;
     align-items: center;
@@ -498,6 +502,7 @@
     a.#{$prefix}--header__menu-item
     .#{$prefix}--text-truncate-end {
     @include text-overflow();
+
     color: $shell-side-nav-text-01;
     font-size: rem(14px);
     letter-spacing: 0.1px;
@@ -637,7 +642,7 @@
     background-color: transparent;
     padding: 0;
 
-    & li {
+    li {
       width: 100%;
     }
 

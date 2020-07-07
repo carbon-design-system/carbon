@@ -1,0 +1,34 @@
+{
+  "name": "stylelint-config-carbon",
+  "private": true,
+  "description": "Stylelint configuration for the Carbon Design System",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/stylelint-config-carbon",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "stylelint": "^13.6.0"
+  },
+  "dependencies": {
+    "stylelint-config-prettier": "^8.0.1",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-prettier": "^1.1.2",
+    "stylelint-scss": "^3.13.0"
+  },
+  "devDependencies": {
+    "stylelint": "^13.6.0"
+  }
+}
