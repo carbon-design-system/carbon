@@ -50,19 +50,14 @@ function buildSassModule(featureFlags) {
     t.Comment(sassBanner),
     t.Newline(),
     t.Assignment({
-      id: t.Identifier('feature-flag-info'),
-      init: t.SassList(
+      id: t.Identifier('generated-feature-flags'),
+      init: t.SassMap(
         featureFlags.map(featureFlag => {
-          return t.SassMap([
-            t.SassMapProperty(
-              t.Identifier('name'),
-              t.SassString(featureFlag.name)
-            ),
-            t.SassMapProperty(
-              t.Identifier('enabled'),
-              t.SassBoolean(featureFlag.enabled)
-            ),
-          ]);
+          return t.SassMapProperty(
+            t.Identifier(featureFlag.name),
+            t.SassBoolean(featureFlag.enabled),
+            true
+          );
         })
       ),
     }),
@@ -109,8 +104,7 @@ function buildJavaScriptModule(featureFlags) {
           ),
         ])
       ),
-    ]),
-    ['hello there']
+    ])
   );
   const { code } = babelGenerate(file);
 

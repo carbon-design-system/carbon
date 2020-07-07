@@ -7,38 +7,58 @@
 
 import { featureFlagInfo } from './generated/feature-flags';
 
-const featureFlagState = new Map();
+const featureFlags = new Map();
 
 for (let i = 0; i < featureFlagInfo.length; i++) {
   const featureFlag = featureFlagInfo[i];
-  featureFlagState.set(featureFlag.name, featureFlag.enabled);
+  featureFlags.set(featureFlag.name, featureFlag.enabled);
 }
 
+/**
+ * Check to see if a flag exists
+ * @param {string} name
+ */
 function checkForFlag(name) {
-  if (!featureFlagState.has(name)) {
+  if (!featureFlags.has(name)) {
     throw new Error(`Unable to find a feature flag with the name \`${name}\``);
   }
 }
 
+/**
+ * Add a feature flag
+ * @param {string} name
+ * @param {boolean} enabled
+ */
 export function addFeatureFlag(name, enabled) {
-  featureFlagState.set(name, enabled);
+  featureFlags.set(name, enabled);
 }
 
+/**
+ * Enable a feature flag
+ * @param {string} name
+ */
 export function enableFeatureFlag(name) {
   checkForFlag(name);
-  featureFlagState.set(name, true);
+  featureFlags.set(name, true);
 }
 
+/**
+ * Disable a feature flag
+ * @param {string} name
+ */
 export function disableFeatureFlag(name) {
   checkForFlag(name);
-  featureFlagState.set(name, false);
+  featureFlags.set(name, false);
 }
 
+/**
+ * Check if a feature flag is enabled
+ * @param {string} name
+ * @returns {boolean}
+ */
 export function featureFlagEnabled(name) {
   checkForFlag(name);
-  return featureFlagState.get(name);
+  return featureFlags.get(name);
 }
 
 export { featureFlagInfo as unstable_featureFlagInfo };
-
-export const featureFlags = featureFlagInfo.map(flag => flag.name);

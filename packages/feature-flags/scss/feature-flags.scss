@@ -7,43 +7,22 @@
 
 @import 'generated/feature-flags';
 
-// $feature-flags: map-keys($generated-feature-flags);
-// $feature-flag-state: map-merge((), $generated-feature-flags);
+$feature-flags: () !default;
+$feature-flags: map-merge($generated-feature-flags, $feature-flags);
 
-@function add-feature-flag($name, $enabled: false) {
-  $feature-flag-state: map-merge(
-    $feature-flag-state,
-    (
-      $name: $enabled,
-    )
-  );
-}
-
-@function enable-feature-flag($name) {
-  $feature-flag-state: map-merge(
-    $feature-flag-state,
-    (
-      $name: true,
-    )
-  );
-}
-
-@function disable-feature-flag($name) {
-  $feature-flag-state: map-merge(
-    $feature-flag-state,
-    (
-      $name: false,
-    )
-  );
-}
-
+/// Check if a feature flag is enabled
+/// @param {String} $name
+/// @returns {Boolean}
 @function feature-flag-enabled($name) {
-  @if (map-has-key($feature-flag-state, $name)) {
-    @return map-get($feature-flag-state, $name);
+  @if (map-has-key($feature-flags, $name)) {
+    @return map-get($feature-flags, $name);
   }
   @error 'Unable to find feature flag named #{$name}';
 }
 
+/// Emit the content of the mixin if the feature flag is enabled
+/// @param {String} $name
+/// @content
 @mixin feature-flag-enabled($name) {
   @if feature-flag-enabled($name) {
     @content;
