@@ -1948,7 +1948,7 @@ generate the size part in a selector, for example: `.prefix--col-sm-2`.
 
 ### ✅carbon--breakpoint-up [mixin]
 
-Generate a media query up to the width of the given breakpoint name
+Generate a media query from the width of the given breakpoint to infinity
 
 <details>
 <summary>Source code</summary>
