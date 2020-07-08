@@ -160,7 +160,7 @@ function PaginationOverflow({
     );
   }
 
-  return <></>;
+  return null;
 }
 
 export default function PaginationNav({
@@ -268,7 +268,7 @@ export default function PaginationNav({
           // 4 items can be displayed and the current page is either 0 or 1
           (itemsThatFit >= 5 || (itemsThatFit <= 4 && currentPage <= 1)) && (
             <PaginationItem
-              page="1"
+              page={1}
               translateWithId={t}
               isActive={currentPage === 0}
               onClick={() => {
@@ -335,6 +335,74 @@ export default function PaginationNav({
   );
 }
 
+DirectionButton.propTypes = {
+  /**
+   * The direction this button represents ("forward" or "backward").
+   */
+  direction: PropTypes.oneOf(['forward', 'backward']),
+
+  /**
+   * The label shown in the button's tooltip.
+   */
+  label: PropTypes.string,
+
+  /**
+   * Whether or not the button should be disabled.
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * The callback function called when the button is clicked.
+   */
+  onClick: PropTypes.func,
+};
+
+PaginationItem.propTypes = {
+  /**
+   * The page number this item represents.
+   */
+  page: PropTypes.number,
+
+  /**
+   * Whether or not this is the currently active page.
+   */
+  isActive: PropTypes.bool,
+
+  /**
+   * The callback function called when the item is clicked.
+   */
+  onClick: PropTypes.func,
+
+  /**
+   * Specify a custom translation function that takes in a message identifier
+   * and returns the localized string for the message
+   */
+  translateWithId: PropTypes.func,
+};
+
+PaginationOverflow.propTypes = {
+  /**
+   * From which index on this overflow should start displaying pages.
+   */
+  fromIndex: PropTypes.number,
+
+  /**
+   * How many items to display in this overflow.
+   */
+  count: PropTypes.number,
+
+  /**
+   * The callback function called when the user selects a page from the overflow.
+   */
+  onSelect: PropTypes.func,
+
+  /**
+   * Specify a custom translation function that takes in a message identifier
+   * and returns the localized string for the message
+   */
+  translateWithId: PropTypes.func,
+};
+
 PaginationNav.propTypes = {
   /**
    * Additional CSS class names.
@@ -365,4 +433,10 @@ PaginationNav.propTypes = {
    * Whether user should be able to loop through the items when reaching first / last.
    */
   loop: PropTypes.bool,
+
+  /**
+   * Specify a custom translation function that takes in a message identifier
+   * and returns the localized string for the message
+   */
+  translateWithId: PropTypes.func,
 };
