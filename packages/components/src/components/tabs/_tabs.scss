@@ -243,6 +243,13 @@
     line-height: $container-tab-line-height;
   }
 
+  .#{$prefix}--tabs--light.#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item--selected,
+  .#{$prefix}--tabs--light.#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item--selected:hover {
+    background-color: $ui-background;
+  }
+
   //-----------------------------
   // Link
   //-----------------------------
