@@ -22,6 +22,7 @@ const translationIds = {
   'carbon.pagination-nav.next': 'Next',
   'carbon.pagination-nav.previous': 'Previous',
   'carbon.pagination-nav.item': 'Page',
+  'carbon.pagination-nav.active': 'Active',
 };
 
 function translateWithId(messageId) {
@@ -93,6 +94,8 @@ function PaginationItem({
   onClick,
   translateWithId: t = translateWithId,
 }) {
+  const itemLabel = t('carbon.pagination-nav.item');
+
   return (
     <li className={`${prefix}--pagination-nav__list-item`}>
       <button
@@ -102,7 +105,11 @@ function PaginationItem({
         onClick={onClick}
         aria-current={isActive ? 'page' : null}>
         <span className={`${prefix}--pagination-nav__accessibility-label`}>
-          {t('carbon.pagination-nav.item')}
+          {
+            isActive
+              ? `${t('carbon.pagination-nav.active')}, ${itemLabel}`
+              : itemLabel
+          }
         </span>
         {page}
       </button>
