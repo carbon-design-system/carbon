@@ -182,6 +182,11 @@ Dropdown.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Provide a custom className to be applied on the bx--dropdown node
+   */
+  className: PropTypes.string,
+
+  /**
    * We try to stay as generic as possible here to allow individuals to pass
    * in a collection of whatever kind of data structure they prefer
    */

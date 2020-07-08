@@ -85,6 +85,8 @@ export default class OverflowMenuItem extends React.Component {
      * `true` if this menu item has long text and requires a browser tooltip
      */
     requireTitle: PropTypes.bool,
+    index: PropTypes.number,
+    handleOverflowMenuItemFocus: PropTypes.func,
   };
 
   static defaultProps = {
@@ -130,8 +132,10 @@ export default class OverflowMenuItem extends React.Component {
       isDelete,
       disabled,
       closeMenu,
-      onClick, // eslint-disable-line
-      handleOverflowMenuItemFocus, // eslint-disable-line
+      // eslint-disable-next-line no-unused-vars
+      onClick,
+      // eslint-disable-next-line no-unused-vars
+      handleOverflowMenuItemFocus,
       onKeyDown,
       primaryFocus,
       wrapperClassName,
@@ -177,7 +181,9 @@ export default class OverflowMenuItem extends React.Component {
       <li className={overflowMenuItemClasses} role="menuitem">
         <TagToUse
           {...other}
-          {...{ 'data-floating-menu-primary-focus': primaryFocus || null }}
+          {...{
+            'data-floating-menu-primary-focus': primaryFocus || null,
+          }}
           href={href}
           className={overflowMenuBtnClasses}
           disabled={disabled}

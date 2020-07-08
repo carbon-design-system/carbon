@@ -141,7 +141,7 @@ storiesOf('ComposedModal', module)
       const { size, ...rest } = props.composedModal();
       const { hasScrollingContent, ...bodyProps } = props.modalBody();
       return (
-        <ComposedModal {...rest} size={size || undefined}>
+        <ComposedModal {...rest} danger={true} size={size || undefined}>
           <ModalHeader {...props.modalHeader()} />
           <ModalBody
             {...bodyProps}

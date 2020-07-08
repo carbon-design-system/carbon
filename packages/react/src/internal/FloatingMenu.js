@@ -196,6 +196,21 @@ class FloatingMenu extends React.Component {
      * The callback called when the menu body has been mounted and positioned.
      */
     onPlace: PropTypes.func,
+
+    /**
+     * `true` if the menu alignment should be flipped.
+     */
+    flipped: PropTypes.bool,
+
+    /**
+     * The element ref of the tooltip's trigger button.
+     */
+    triggerRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({
+        current: PropTypes.any,
+      }),
+    ]),
   };
 
   static defaultProps = {
