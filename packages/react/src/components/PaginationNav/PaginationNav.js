@@ -220,8 +220,11 @@ export default function PaginationNav({
   }
 
   function pageWouldBeHidden(page) {
-    const wouldBeHiddenInFront = page <= cuts.front;
-    const wouldBeHiddenInBack = page >= totalItems - cuts.back - 1;
+    const startOffset = itemsThatFit <= 4 && page > 1 ? 0 : 1;
+
+    const wouldBeHiddenInFront = page >= startOffset && page <= cuts.front;
+    const wouldBeHiddenInBack =
+      page >= totalItems - cuts.back - 1 && page <= totalItems - 2;
 
     return wouldBeHiddenInFront || wouldBeHiddenInBack;
   }
