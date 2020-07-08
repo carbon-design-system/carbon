@@ -21,6 +21,7 @@
   .#{$prefix}--tabs {
     @include reset;
     @include type-style('body-short-01');
+
     display: flex;
     color: $text-01;
     height: auto;
@@ -116,6 +117,7 @@
 
   .#{$prefix}--tab--overflow-nav-button {
     @include button-reset;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -146,6 +148,7 @@
   //-----------------------------
   .#{$prefix}--tabs__nav-item {
     @include reset;
+
     display: flex;
     padding: 0;
     cursor: pointer;
@@ -206,12 +209,6 @@
     background-color: $disabled-02;
   }
 
-  .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item--disabled
-    .#{$prefix}--tabs__nav-link {
-    color: $disabled-03;
-  }
-
   //-----------------------------
   // Item Selected
   //-----------------------------
@@ -223,6 +220,7 @@
   .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link:focus,
   .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link:active {
     @include type-style('productive-heading-01');
+
     color: $text-01;
     border-bottom: 2px solid $interactive-04;
   }
@@ -250,6 +248,7 @@
   //-----------------------------
   .#{$prefix}--tabs__nav-link {
     @include focus-outline('reset');
+
     color: $text-02;
     text-decoration: none;
     font-weight: 400;
@@ -302,7 +301,7 @@
     cursor: not-allowed;
     color: $tab-text-disabled;
     border-bottom: $tab-underline-disabled;
-    cursor: no-drop;
+    pointer-events: none;
   }
 
   .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:focus,
@@ -316,6 +315,7 @@
     .#{$prefix}--tabs__nav-item--disabled
     .#{$prefix}--tabs__nav-link {
     border-bottom: none;
+    color: $disabled-03;
   }
 
   //-----------------------------
