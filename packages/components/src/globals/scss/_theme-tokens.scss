@@ -189,19 +189,21 @@ $checkbox-border-width: 2px !default;
 /// @type Color
 /// @access public
 /// @group code-snippet
-$snippet-background-color: $ui-01 !default; // TODO: Define for experimental
+/// TODO: Define for experimental
+$snippet-background-color: $ui-01 !default;
 
 /// @type Color
 /// @access public
 /// @group code-snippet
-$snippet-border-color: $ui-03 !default; // TODO: Define for experimental
+/// TODO: Define for experimental
+$snippet-border-color: $ui-03 !default;
 
 // Content Switcher
 
 /// @type Number
 /// @access public
 /// @group content-switcher
-$content-switcher-border-radius: 0px !default;
+$content-switcher-border-radius: 0 !default;
 
 /// @type Number
 /// @access public
@@ -362,7 +364,8 @@ $tab-underline-disabled: 2px solid $disabled-01 !default;
 /// @type Color
 /// @access public
 /// @group skeleton
-$skeleton: $skeleton-01 !default; // TODO: Remove this in next major release
+/// TODO: Remove this in next major release
+$skeleton: $skeleton-01 !default;
 
 // Light UI
 
