@@ -23,6 +23,7 @@ const translationIds = {
   'carbon.pagination-nav.previous': 'Previous',
   'carbon.pagination-nav.item': 'Page',
   'carbon.pagination-nav.active': 'Active',
+  'carbon.pagination-nav.of': 'of',
 };
 
 function translateWithId(messageId) {
@@ -336,6 +337,13 @@ export default function PaginationNav({
           onClick={jumpToNext}
         />
       </ul>
+      <div
+        aria-live="polite"
+        className={`${prefix}--pagination-nav__accessibility-label`}>
+        {`${t('carbon.pagination-nav.item')} ${currentPage + 1} ${t(
+          'carbon.pagination-nav.of'
+        )} ${totalItems}`}
+      </div>
     </nav>
   );
 }
