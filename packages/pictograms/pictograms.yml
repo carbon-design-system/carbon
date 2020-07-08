@@ -4,6 +4,13 @@
   friendly_name: Add device
   aliases:
     - add device
+- name: add--document
+  friendly_name: Add document
+  aliases:
+    - document
+    - new
+    - additional
+    - add
 - name: advocate
   friendly_name: Advocate
   aliases:
@@ -86,6 +93,10 @@
   friendly_name: Automobile
   aliases:
     - automobile
+- name: backpack
+  friendly_name: Backpack
+  aliases:
+    - backpack
 - name: bag
   friendly_name: Bag
   aliases:
@@ -369,6 +380,11 @@
     - construct
 - name: consumer--engagement--food--journey
   friendly_name: Consumer engagement food journey
+- name: contract
+  friendly_name: Contract
+  aliases:
+    - contract
+    - agreement
 - name: conversation
   friendly_name: Conversation
   aliases:
@@ -439,6 +455,10 @@
   friendly_name: Dining
   aliases:
     - dining
+- name: distribution--ledger
+  friendly_name: Distribution ledger
+  aliases:
+    - distibution ledger
 - name: dna
   friendly_name: Dna
   aliases:
@@ -455,6 +475,10 @@
     - doctor
 - name: document--conversion
   friendly_name: Document conversion
+- name: document--security
+  friendly_name: Document security
+  aliases:
+    - document security
 - name: door--handle
   friendly_name: Door handle
 - name: download
@@ -493,6 +517,10 @@
   friendly_name: Embed
   aliases:
     - embed
+- name: employee--insights
+  friendly_name: Employee insights
+  aliases:
+    - employee insights
 - name: engine
   friendly_name: Engine
   aliases:
@@ -608,6 +636,12 @@
   friendly_name: Flower 01
 - name: flower--02
   friendly_name: Flower 02
+- name: feedback--02
+  friendly_name: Feedback 02
+  aliases:
+    - converge
+    - feedback
+    - focus
 - name: fog
   friendly_name: Fog
   aliases:
@@ -682,10 +716,21 @@
     - globe
 - name: globe--locations
   friendly_name: Globe locations
+- name: goals
+  friendly_name: Goals
+  aliases:
+    - target
+    - goals
+    - checkpoint
 - name: group
   friendly_name: Group
   aliases:
     - group
+- name: growth
+  friendly_name: Growth
+  aliases:
+    - growth
+    - personal growth
 - name: hail
   friendly_name: Hail
   aliases:
@@ -727,6 +772,13 @@
   aliases: []
 - name: high--five
   friendly_name: High five
+- name: hills
+  friendly_name: Hills
+  aliases:
+    - hill
+    - summit
+    - mountain
+    - goal
 - name: home--front
   friendly_name: Home front
 - name: home--garage
@@ -753,6 +805,10 @@
   friendly_name: Ibm ix
 - name: ibm--z
   friendly_name: Ibm z
+- name: id--badge
+  friendly_name: ID badge
+  aliases:
+    - id badge
 - name: idea
   friendly_name: Idea
   aliases:
@@ -765,6 +821,12 @@
   friendly_name: Innovate
   aliases:
     - innovate
+- name: insights
+  friendly_name: Insights
+  aliases:
+    - insights
+    - assessment
+    - self-awareness
 - name: inspect--data
   friendly_name: Inspect data
 - name: integration
@@ -992,6 +1054,10 @@
     - munich
 - name: natural--language--classifier
   friendly_name: Natural language classifier
+- name: natural--language--understanding
+  friendly_name: Natural language understanding
+  aliases:
+    - natural language understanding
 - name: network
   friendly_name: Network
   aliases:
@@ -1148,12 +1214,24 @@
 - name: q-q-plot
   friendly_name: q-q-plot
   aliases: []
+- name: qr-code
+  friendly_name: QR code
+  aliases:
+    - qr code
 - name: question
   friendly_name: Question
   aliases:
     - question
 - name: question--and--answer
   friendly_name: Question and answer
+- name: racetrack
+  friendly_name: Racetrack
+  aliases:
+    - race
+    - run
+    - sprint
+    - win
+    - speed
 - name: rainy
   friendly_name: Rainy
   aliases:
@@ -1199,6 +1277,10 @@
   friendly_name: Report
   aliases:
     - report
+- name: research
+  friendly_name: Research
+  aliases:
+    - research
 - name: reset
   friendly_name: Reset
   aliases:
@@ -1334,6 +1416,10 @@
   friendly_name: Speedometer
   aliases:
     - speedometer
+- name: sports
+  friendly_name: Sports
+  aliases:
+    - sports
 - name: stairs--plan--view
   friendly_name: Stairs plan view
 - name: stationary--bicycle
@@ -1528,6 +1614,14 @@
   friendly_name: Train
   aliases:
     - train
+- name: transactional--blockchain
+  friendly_name: Transactional blockchain
+  aliases:
+    - transactional blockchain
+- name: transactional--trust
+  friendly_name: Transactional trust
+  aliases:
+    - transactional trust
 - name: transform
   friendly_name: Transform
   aliases:
@@ -1665,6 +1759,20 @@
   aliases: []
 - name: wrecking--ball
   friendly_name: Wrecking ball
+- name: x-ray--01
+  friendly_name: X-ray 01
+  aliases:
+    - x-ray
+    - imaging
+    - radiograph
+    - scan
+- name: x-ray--02
+  friendly_name: X-ray 02
+  aliases:
+    - x-ray
+    - imaging
+    - radiograph
+    - scan
 - name: yoga--01
   friendly_name: Yoga 01
 - name: yoga--02

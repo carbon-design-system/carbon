@@ -2164,7 +2164,7 @@ generate the size part in a selector, for example: `.prefix--col-sm-2`.
 
 ### ✅carbon--breakpoint-up [mixin]
 
-Generate a media query up to the width of the given breakpoint name
+Generate a media query from the width of the given breakpoint to infinity
 
 <details>
 <summary>Source code</summary>
@@ -15818,16 +15818,6 @@ Data table core styles
   }
 
   // Overflow Menu Overrides
-  .#{$prefix}--data-table td button.#{$prefix}--overflow-menu {
-    margin: rem(-7px) 0 rem(-8px);
-  }
-
-  .#{$prefix}--data-table.#{$prefix}--data-table--compact
-    td
-    .#{$prefix}--overflow-menu {
-    margin: 0;
-  }
-
   .#{$prefix}--data-table
     td.#{$prefix}--table-column-menu
     .#{$prefix}--overflow-menu[aria-expanded='false']:focus {
@@ -15901,6 +15891,25 @@ Data table core styles
     &:hover {
       background-color: $hover-field;
     }
+  }
+
+  .#{$prefix}--data-table--compact td.#{$prefix}--table-column-menu,
+  .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .#{$prefix}--data-table--compact td.#{$prefix}--table-column-menu,
+  .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu {
+    height: rem(24px);
+  }
+
+  .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--data-table--tall .#{$prefix}--table-column-menu {
+    padding-top: $spacing-03;
   }
 
   //----------------------------------------------------------------------------
@@ -16061,7 +16070,7 @@ Data table core styles
 
   .#{$prefix}--data-table--compact .#{$prefix}--overflow-menu {
     width: rem(32px);
-    height: rem(23px); //24px row - 1px border
+    height: 100%;
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--compact
@@ -16097,14 +16106,14 @@ Data table core styles
     padding-bottom: rem(6px);
   }
 
-  .#{$prefix}--data-table--short .#{$prefix}--overflow-menu {
-    height: rem(31px); //32px row - 1px border
-  }
-
   .#{$prefix}--data-table.#{$prefix}--data-table--short
     .#{$prefix}--table-column-checkbox {
     padding-top: rem(3px);
     padding-bottom: rem(3px);
+  }
+
+  .#{$prefix}--data-table--short .#{$prefix}--overflow-menu {
+    height: 100%;
   }
 
   //----------------------------------------------------------------------------
@@ -16224,6 +16233,20 @@ Data table core styles
   }
 
   @include sticky-header($max-width: 100%);
+
+  // -------------------
+  // with boolean column
+  // -------------------
+  .#{$prefix}--data-table .bx--form-item.bx--checkbox-wrapper:last-of-type {
+    margin: 0;
+  }
+
+  .#{$prefix}--data-table--short
+    .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type,
+  .#{$prefix}--data-table--compact
+    .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
+    margin: rem(-3px) 0;
+  }
 }
 ```
 
@@ -16662,12 +16685,6 @@ Data table sort styles
   // -------------------------------------
   // Sortable table
   // -------------------------------------
-  .#{$prefix}--data-table--sort th,
-  .#{$prefix}--data-table--sort
-    th:first-of-type:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-expand) {
-    padding: 0;
-  }
-
   .#{$prefix}--data-table--sort th {
     height: $layout-04;
     border-top: none;
@@ -16679,14 +16696,13 @@ Data table sort styles
   // -------------------------------------
   .#{$prefix}--table-sort {
     @include button-reset(false);
-    position: relative;
     font: inherit;
+    line-height: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     color: $text-01;
-    padding-right: $spacing-05;
     min-height: 100%;
     background-color: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive),
@@ -16708,6 +16724,15 @@ Data table sort styles
   }
 
   // -------------------------------------
+  // Th > Button > Span (span required for flex bugs in Safari)
+  // -------------------------------------
+  .#{$prefix}--data-table--sort th .#{$prefix}--table-sort__flex {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  // -------------------------------------
   //Th > Button > Svg (Sort Icons)
   // -------------------------------------
   // inactive icons
@@ -16720,10 +16745,8 @@ Data table sort styles
   }
 
   .#{$prefix}--table-sort__icon-unsorted {
-    position: relative;
-    left: rem(2px);
     margin-left: $spacing-03;
-    margin-right: 0;
+    margin-right: $spacing-05;
     opacity: 0;
     fill: $ui-05;
     width: auto;
@@ -16747,13 +16770,11 @@ Data table sort styles
   }
 
   .#{$prefix}--table-sort__icon {
-    position: relative;
-    left: rem(2px);
     margin-left: $spacing-03;
-    margin-right: 0;
+    margin-right: $spacing-05;
     transition: transform $transition--base $carbon--standard-easing;
     transform: rotate(0);
-    opacity: 0;
+    opacity: 1;
     fill: $ui-05;
     width: auto;
     min-width: $layout-01;
@@ -16767,23 +16788,9 @@ Data table sort styles
     height: rem(24px);
   }
 
-  .#{$prefix}--data-table--compact.#{$prefix}--data-table--sort
-    th
-    .#{$prefix}--table-sort {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
   // Sortable Short
   .#{$prefix}--data-table--short.#{$prefix}--data-table--sort th {
     height: rem(32px);
-  }
-
-  .#{$prefix}--data-table--short.#{$prefix}--data-table--sort
-    th
-    .#{$prefix}--table-sort {
-    padding-top: 0;
-    padding-bottom: 0;
   }
 
   // Sortable Tall
@@ -16794,29 +16801,19 @@ Data table sort styles
   .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
     th
     .#{$prefix}--table-sort {
-    padding-top: 0;
-    padding-bottom: 0;
+    display: inline-block;
+    height: rem(64px);
   }
 
   .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
     th
-    .#{$prefix}--table-sort
-    svg {
-    align-self: flex-start;
-    top: $spacing-03;
+    .#{$prefix}--table-sort__flex {
+    align-items: flex-start;
   }
 
-  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
-    th
-    .#{$prefix}--table-sort
-    .#{$prefix}--table-header-label {
-    align-self: flex-start;
-    position: relative;
-    top: rem(-8px);
-    max-height: 3rem;
-    display: -webkit-box; // weird text truncation style used
-    -webkit-line-clamp: 2; // because we need text to wrap
-    -webkit-box-orient: vertical; // can't use white-space: nowrap
+  .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon-unsorted,
+  .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon {
+    margin-top: rem(13px);
   }
 }
 ```
@@ -16828,9 +16825,9 @@ Data table sort styles
   - [prefix [variable]](#prefix-variable)
   - [layout-04 [variable]](#layout-04-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [spacing-05 [variable]](#spacing-05-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [layout-01 [variable]](#layout-01-variable)
 
@@ -18501,6 +18498,15 @@ List box styles
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
     height: 100%;
+  }
+
+  .#{$prefix}--dropdown--inline .#{$prefix}--list-box__field {
+    max-width: rem(480px);
+  }
+
+  .#{$prefix}--dropdown--inline .bx--list-box__menu {
+    min-width: rem(288px);
+    max-width: rem(480px);
   }
 
   // The field we use for input, showing selection, etc.
@@ -24692,6 +24698,7 @@ Toolbar styles
 ```scss
 @mixin tooltip--icon() {
   @include reset;
+
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -24702,6 +24709,7 @@ Toolbar styles
   &::before,
   &::after {
     @include type-style('body-short-01');
+
     position: absolute;
     display: flex;
     align-items: center;
@@ -24726,6 +24734,7 @@ Toolbar styles
 
   &::after {
     @include box-shadow;
+
     min-width: rem(24px);
     max-width: rem(208px);
     height: rem(24px);
@@ -24833,10 +24842,12 @@ Toolbar styles
 @mixin tooltip--definition--legacy() {
   .#{$prefix}--tooltip--definition {
     @include reset;
+
     position: relative;
 
     .#{$prefix}--tooltip__trigger {
       @include type-style('label-01');
+
       display: inline-flex;
       position: relative;
       border-bottom: 1px dotted $interactive-01;
@@ -24865,6 +24876,7 @@ Toolbar styles
   .#{$prefix}--tooltip--definition__bottom,
   .#{$prefix}--tooltip--definition__top {
     @include box-shadow;
+
     position: absolute;
     z-index: 1;
     display: none;
@@ -24878,6 +24890,7 @@ Toolbar styles
 
     p {
       @include type-style('body-short-01');
+
       color: $inverse-01;
     }
 
@@ -25050,6 +25063,7 @@ Tooltip styles
 
   .#{$prefix}--tooltip__label {
     @include type-style('label-01');
+
     display: inline-flex;
     align-items: center;
     color: $text-02;
@@ -25065,6 +25079,7 @@ Tooltip styles
 
   .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only) {
     @include button-reset($width: false);
+
     display: inline-flex;
     align-items: center;
     cursor: pointer;
@@ -25072,6 +25087,7 @@ Tooltip styles
 
     &:focus {
       @include focus-outline('border');
+
       fill: $hover-primary;
     }
   }
@@ -25088,6 +25104,7 @@ Tooltip styles
   .#{$prefix}--tooltip {
     @include box-shadow;
     @include reset;
+
     position: absolute;
     display: none;
     min-width: rem(208px);
@@ -25195,6 +25212,7 @@ Tooltip styles
 
   .#{$prefix}--tooltip__heading {
     @include carbon--type-style('productive-heading-01');
+
     margin-bottom: $spacing-03;
   }
 
@@ -25221,6 +25239,7 @@ Tooltip styles
   // Definition CSS only tooltip
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition {
     @include type-style('label-01');
+
     border-bottom: rem(1px) dotted $interactive-01;
   }
 
@@ -25453,6 +25472,7 @@ UI shell side nav
   //----------------------------------------------------------------------------
   .#{$prefix}--header-panel {
     @include carbon--motion(exit, productive);
+
     position: fixed;
     top: carbon--mini-units(6);
     bottom: 0;
@@ -25510,6 +25530,7 @@ UI shell header
 
   .#{$prefix}--header__action {
     @include button-reset();
+
     width: mini-units(6);
     height: mini-units(6);
     border: rem(2px) solid transparent;
@@ -25587,6 +25608,7 @@ UI shell header
   //--------------------------------------------------------------------------
   a.#{$prefix}--header__name {
     @include type-style('body-short-01');
+
     display: flex;
     align-items: center;
     height: 100%;
@@ -26119,6 +26141,7 @@ UI shell product switcher
   .#{$prefix}--product-switcher__subheader,
   .#{$prefix}--product-switcher__all-btn {
     @include type-style('body-short-01');
+
     padding: mini-units(1);
     color: $shell-panel-text-01;
   }
@@ -26157,6 +26180,7 @@ UI shell product switcher
     display: flex;
     align-items: center;
     @include type-style('body-short-01');
+
     padding: mini-units(1) mini-units(2);
   }
 
@@ -26199,6 +26223,7 @@ UI shell product switcher
 
   .#{$prefix}--product-link__name {
     @include type-style('body-short-01');
+
     margin-left: 0.25rem;
     font-weight: 400;
     color: $shell-header-text-02;
@@ -26529,11 +26554,11 @@ UI shell side nav
 
   .#{$prefix}--side-nav__select {
     @include focus-outline('reset');
+
     appearance: none;
     flex: 1 1 0%;
     background-color: $shell-header-bg-01;
     color: $shell-header-text-01;
-    height: 100%;
     border: none;
     border-radius: 0;
     cursor: pointer;
@@ -26563,6 +26588,7 @@ UI shell side nav
   .#{$prefix}--side-nav__toggle {
     @include focus-outline('reset');
     @include button-reset($width: true);
+
     height: 100%;
     text-align: left;
     transition: outline $duration--fast-02;
@@ -26647,6 +26673,7 @@ UI shell side nav
     @include button-reset($width: true);
     @include type-style('productive-heading-01');
     @include focus-outline('reset');
+
     padding: 0 mini-units(2);
     display: flex;
     align-items: center;
@@ -26668,6 +26695,7 @@ UI shell side nav
 
   .#{$prefix}--side-nav__submenu-title {
     @include text-overflow();
+
     text-align: left;
   }
 
@@ -26765,6 +26793,7 @@ UI shell side nav
     + .#{$prefix}--header__menu {
     @include focus-outline('reset');
     @include type-style('productive-heading-01');
+
     position: relative;
     display: flex;
     align-items: center;
@@ -26786,6 +26815,7 @@ UI shell side nav
     a.#{$prefix}--header__menu-item
     .#{$prefix}--text-truncate-end {
     @include text-overflow();
+
     color: $shell-side-nav-text-01;
     font-size: rem(14px);
     letter-spacing: 0.1px;
@@ -26925,7 +26955,7 @@ UI shell side nav
     background-color: transparent;
     padding: 0;
 
-    & li {
+    li {
       width: 100%;
     }
 
@@ -27018,6 +27048,7 @@ UI shell side nav
 
   .#{$prefix}--switcher__item-link {
     @include carbon--type-style('productive-heading-01');
+
     display: block;
     height: $spacing-07;
     text-decoration: none;
