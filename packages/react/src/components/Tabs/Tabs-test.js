@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import { shallow, mount } from 'enzyme';
 import Tabs from '../Tabs';
@@ -79,36 +78,6 @@ describe('Tabs', () => {
       });
     });
 
-    describe('Trigger (<div>)', () => {
-      const wrapper = shallow(
-        <Tabs className="extra-class">
-          <Tab label="firstTab">content1</Tab>
-          <Tab label="lastTab">content2</Tab>
-        </Tabs>
-      );
-
-      const trigger = wrapper.find(`div.${prefix}--tabs-trigger`);
-      const tablist = wrapper.find('ul');
-
-      it('renders default className for trigger', () => {
-        expect(trigger.hasClass(`${prefix}--tabs-trigger`)).toBe(true);
-      });
-
-      it('renders hidden className by default', () => {
-        expect(tablist.hasClass(`${prefix}--tabs__nav--hidden`)).toBe(true);
-      });
-
-      it('renders default className for triggerText', () => {
-        expect(trigger.find('a').hasClass(`${prefix}--tabs-trigger-text`)).toBe(
-          true
-        );
-      });
-
-      it('renders <Icon>', () => {
-        expect(trigger.find(ChevronDown16).length).toBe(1);
-      });
-    });
-
     describe('Children (<Tab>)', () => {
       const wrapper = shallow(
         <Tabs>
@@ -172,39 +141,6 @@ describe('Tabs', () => {
   });
 
   describe('events', () => {
-    describe('click', () => {
-      const wrapper = mount(
-        <Tabs>
-          <Tab label="firstTab" className="firstTab">
-            content1
-          </Tab>
-          <Tab label="lastTab" className="lastTab">
-            content2
-          </Tab>
-        </Tabs>
-      );
-
-      describe('state: dropdownHidden', () => {
-        it('toggles dropdownHidden state after trigger is clicked', () => {
-          const trigger = wrapper.find(`.${prefix}--tabs-trigger`);
-
-          trigger.simulate('click');
-          expect(wrapper.state().dropdownHidden).toEqual(false);
-          trigger.simulate('click');
-          expect(wrapper.state().dropdownHidden).toEqual(true);
-        });
-
-        it('toggles hidden state after trigger-text is clicked', () => {
-          const triggerText = wrapper.find(`.${prefix}--tabs-trigger-text`);
-
-          triggerText.simulate('click');
-          expect(wrapper.state().dropdownHidden).toEqual(false);
-          triggerText.simulate('click');
-          expect(wrapper.state().dropdownHidden).toEqual(true);
-        });
-      });
-    });
-
     describe('keydown', () => {
       const leftKey = 37;
       const rightKey = 39;
@@ -340,12 +276,6 @@ describe('Tabs', () => {
         </Tab>
       </Tabs>
     );
-
-    describe('dropdownHidden', () => {
-      it('should be true', () => {
-        expect(wrapper.state().dropdownHidden).toEqual(true);
-      });
-    });
 
     describe('selected', () => {
       it('should be 0', () => {
