@@ -113,6 +113,9 @@ export default class Tabs extends React.Component {
    * scrollLeft
    */
   handleScroll = () => {
+    if (!this.tablist?.current) {
+      return;
+    }
     const {
       clientWidth: tablistClientWidth,
       scrollLeft: tablistScrollLeft,
