@@ -30,6 +30,7 @@
 /// @group tooltip
 @mixin tooltip--content($tooltip-type: 'icon') {
   @include box-shadow;
+
   width: max-content;
   min-width: rem(24px);
   max-width: rem(208px);
@@ -210,11 +211,9 @@
   $align: 'center'
 ) {
   // position and alignment
-  $caret-spacing: if(
-    $tooltip-type == 'definition',
-    rem(4px),
-    rem(8px)
-  ); // space between caret and trigger button
+  $caret-spacing: if($tooltip-type == 'definition', rem(4px), rem(8px));
+
+  // space between caret and trigger button
   $caret-height: rem(5px);
   $caret-width: rem(8px);
   $body-spacing: $caret-spacing + $caret-height;
@@ -317,9 +316,8 @@
   @if $tooltip-type == 'definition' {
     &.#{$prefix}--tooltip--a11y + .#{$prefix}--assistive-text {
       @if ($position == 'bottom') {
-        bottom: -(
-            $body-spacing - rem(1px)
-          ); // carryover from https://github.com/carbon-design-system/carbon/pull/3151/files#diff-93734be0784e9530b6d14a7b03b0d352R261-R265
+        // carryover from https://github.com/carbon-design-system/carbon/pull/3151/files#diff-93734be0784e9530b6d14a7b03b0d352R261-R265
+        bottom: -($body-spacing - rem(1px));
         @if ($align == 'start' or $align == 'end') {
           transform: translate(0, 100%);
         } @else {

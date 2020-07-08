@@ -33,6 +33,7 @@
 
   .#{$prefix}--header__action {
     @include button-reset();
+
     width: mini-units(6);
     height: mini-units(6);
     border: rem(2px) solid transparent;
@@ -110,6 +111,7 @@
   //--------------------------------------------------------------------------
   a.#{$prefix}--header__name {
     @include type-style('body-short-01');
+
     display: flex;
     align-items: center;
     height: 100%;
