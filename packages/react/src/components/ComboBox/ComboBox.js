@@ -14,6 +14,7 @@ import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { mapDownshiftProps } from '../../tools/createPropAdapter';
 
 const { prefix } = settings;
 
@@ -333,7 +334,7 @@ export default class ComboBox extends React.Component {
     const ItemToElement = itemToElement;
     return (
       <Downshift
-        {...downshiftProps}
+        {...mapDownshiftProps(downshiftProps)}
         onChange={this.handleOnChange}
         onInputValueChange={this.handleOnInputValueChange}
         onStateChange={this.handleOnStateChange}

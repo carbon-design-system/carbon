@@ -10,8 +10,9 @@ import { useSelect } from 'downshift';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
+import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import { mapDownshiftProps } from '../../tools/createPropAdapter';
 
 const { prefix } = settings;
 
@@ -46,13 +47,13 @@ function Dropdown({
   selectedItem: controlledSelectedItem,
   downshiftProps,
 }) {
-  const selectProps = {
+  const selectProps = mapDownshiftProps({
     ...downshiftProps,
     items,
     itemToString,
     initialSelectedItem,
     onSelectedItemChange,
-  };
+  });
 
   // only set selectedItem if the prop is defined. Setting if it is undefined
   // will overwrite default selected items from useSelect
