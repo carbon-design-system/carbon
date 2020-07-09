@@ -353,6 +353,8 @@ Array [
   "MovementOfGoods_03",
   "MovementOfItems",
   "Mqa",
+  "Mri",
+  "MriPatient",
   "Multitask",
   "Munich",
   "NaturalLanguageClassifier",
