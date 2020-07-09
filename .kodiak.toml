@@ -4,3 +4,6 @@ version = 1
 
 # Kodiak will only act on PRs that have this label.
 automerge_label = "status: ready to merge 🎉"
+
+# Choose merge method for Kodiak to use.
+method = "squash"
