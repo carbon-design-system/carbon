@@ -2457,6 +2457,21 @@
   friendly_name: MQA
   aliases:
     - mqa
+- name: mri
+  friendly_name: MRI
+  aliases:
+    - mri
+    - ct scan
+    - imaging
+    - radiology
+- name: mri--patient
+  friendly_name: MRI patient
+  aliases:
+    - mri
+    - mri patient
+    - ct scan
+    - imaging
+    - radiology
 - name: multitask
   friendly_name: Multitask
   aliases:
