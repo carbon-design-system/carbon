@@ -7335,6 +7335,7 @@ $support-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-loading [mixin]](#inline-loading-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -17983,7 +17984,7 @@ Inline loading styles
   }
 
   .#{$prefix}--inline-loading__checkmark-container {
-    fill: $interactive-04;
+    fill: $support-02;
 
     // For deprecated older markup
     &.#{$prefix}--inline-loading__svg {
@@ -18046,6 +18047,7 @@ Inline loading styles
   - [prefix [variable]](#prefix-variable)
   - [loading--small\_\_gap [variable]](#loading--small__gap-variable)
   - [text-02 [variable]](#text-02-variable)
+  - [support-02 [variable]](#support-02-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
   - [support-01 [variable]](#support-01-variable)
 
@@ -23776,6 +23778,55 @@ Text input styles
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--light {
     background: $field-02;
+  }
+
+  //-----------------------------
+  // Inline Text Input
+  //-----------------------------
+
+  .#{$prefix}--text-input-wrapper--inline {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .#{$prefix}--label--inline {
+    flex: 1;
+    margin: rem(13px) 0 0 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .#{$prefix}--label--inline--sm {
+    margin-top: rem(9px);
+  }
+
+  .#{$prefix}--label--inline--xl {
+    margin-top: rem(17px);
+  }
+
+  .#{$prefix}--text-input__label-helper-wrapper {
+    flex: 2;
+    flex-direction: column;
+    margin-right: rem(24px);
+    max-width: rem(128px);
+    overflow-wrap: break-word;
+  }
+
+  .#{$prefix}--form__helper-text--inline {
+    margin-top: rem(2px);
+  }
+
+  .#{$prefix}--text-input__field-outer-wrapper {
+    align-items: flex-start;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .#{$prefix}--text-input__field-outer-wrapper--inline {
+    flex: 8;
+    flex-direction: column;
   }
 }
 ```
