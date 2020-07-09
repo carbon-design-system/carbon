@@ -342,6 +342,7 @@ export default function PaginationNav({
       </ul>
       <div
         aria-live="polite"
+        aria-atomic="true"
         className={`${prefix}--pagination-nav__accessibility-label`}>
         {`${t('carbon.pagination-nav.item')} ${currentPage + 1} ${t(
           'carbon.pagination-nav.of'
