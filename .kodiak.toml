@@ -1,0 +1,6 @@
+# .kodiak.toml
+# Minimal config. version is the only required field.
+version = 1
+
+# Kodiak will only act on PRs that have this label.
+automerge_label = "status: ready to merge 🎉"

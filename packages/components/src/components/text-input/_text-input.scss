@@ -224,6 +224,55 @@
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--light {
     background: $field-02;
   }
+
+  //-----------------------------
+  // Inline Text Input
+  //-----------------------------
+
+  .#{$prefix}--text-input-wrapper--inline {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .#{$prefix}--label--inline {
+    flex: 1;
+    margin: rem(13px) 0 0 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .#{$prefix}--label--inline--sm {
+    margin-top: rem(9px);
+  }
+
+  .#{$prefix}--label--inline--xl {
+    margin-top: rem(17px);
+  }
+
+  .#{$prefix}--text-input__label-helper-wrapper {
+    flex: 2;
+    flex-direction: column;
+    margin-right: rem(24px);
+    max-width: rem(128px);
+    overflow-wrap: break-word;
+  }
+
+  .#{$prefix}--form__helper-text--inline {
+    margin-top: rem(2px);
+  }
+
+  .#{$prefix}--text-input__field-outer-wrapper {
+    align-items: flex-start;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .#{$prefix}--text-input__field-outer-wrapper--inline {
+    flex: 8;
+    flex-direction: column;
+  }
 }
 
 @include exports('text-input') {

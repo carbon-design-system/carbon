@@ -56,7 +56,7 @@ const props = {
       'This is not a default value'
     ),
     size: select('Field size (size)', sizes, undefined) || undefined,
-    labelText: text('Label text (labelText)', 'Text Input label'),
+    labelText: text('Label text (labelText)', 'Text input label'),
     placeholder: text('Placeholder text (placeholder)', 'Placeholder text'),
     light: boolean('Light variant (light)', false),
     disabled: boolean('Disabled (disabled)', false),
@@ -66,7 +66,8 @@ const props = {
       'Form validation UI content (invalidText)',
       'A valid value is required'
     ),
-    helperText: text('Helper text (helperText)', 'Optional helper text.'),
+    helperText: text('Helper text (helperText)', 'Optional help text'),
+    inline: boolean('Inline variant (inline)', false),
     onClick: action('onClick'),
     onChange: action('onChange'),
   }),
