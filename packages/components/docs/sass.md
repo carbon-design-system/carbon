@@ -7335,6 +7335,7 @@ $support-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-loading [mixin]](#inline-loading-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -17983,7 +17984,7 @@ Inline loading styles
   }
 
   .#{$prefix}--inline-loading__checkmark-container {
-    fill: $interactive-04;
+    fill: $support-02;
 
     // For deprecated older markup
     &.#{$prefix}--inline-loading__svg {
@@ -18046,6 +18047,7 @@ Inline loading styles
   - [prefix [variable]](#prefix-variable)
   - [loading--small\_\_gap [variable]](#loading--small__gap-variable)
   - [text-02 [variable]](#text-02-variable)
+  - [support-02 [variable]](#support-02-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
   - [support-01 [variable]](#support-01-variable)
 
