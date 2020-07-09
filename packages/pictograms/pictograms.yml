@@ -2807,6 +2807,11 @@
     - industry
     - electricity
     - tower
+- name: pregnant
+  friendly_name: Pregnant
+  aliases:
+    - pregnant
+    - pregnancy
 - name: presentation
   friendly_name: Presentation
   aliases:
