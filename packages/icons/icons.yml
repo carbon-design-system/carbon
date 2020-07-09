@@ -6929,8 +6929,7 @@
 - name: mobile--check
   friendly_name: Mobile check
   sizes:
-
-- 32
+    - 32
   aliases:
     - phone
     - iphone
@@ -7281,7 +7280,7 @@
     - email
     - operations
     - filled
-e- name: notebook
+- name: notebook
   friendly_name: Notebook
   aliases:
     - book
@@ -11869,7 +11868,7 @@ e- name: notebook
   sizes:
     - 32
 - name: z-axis
-  friendly_name: Z axis 
+  friendly_name: Z axis
   aliases:
     - depth
     - 3D
