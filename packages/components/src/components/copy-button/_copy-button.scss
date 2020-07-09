@@ -75,6 +75,10 @@
   }
 
   // TODO: deprecate above styles
+  .#{$prefix}--copy {
+    font-size: 0;
+  }
+
   .#{$prefix}--copy-btn {
     @include reset;
 
