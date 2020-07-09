@@ -340,7 +340,7 @@ export default class ComboBox extends React.Component {
         onStateChange={this.handleOnStateChange}
         inputValue={this.state.inputValue || ''}
         itemToString={itemToString}
-        defaultSelectedItem={initialSelectedItem}
+        initialSelectedItem={initialSelectedItem}
         inputId={id}
         selectedItem={selectedItem}>
         {({
