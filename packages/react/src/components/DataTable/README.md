@@ -38,8 +38,6 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-<!--alex ignore hooks hook-->
-
 ## Installation
 
 This component comes with any installation of the `carbon-components-react`
