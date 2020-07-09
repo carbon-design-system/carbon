@@ -7335,6 +7335,7 @@ $support-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-loading [mixin]](#inline-loading-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -17810,11 +17811,13 @@ Form styles
 @mixin form() {
   .#{$prefix}--fieldset {
     @include reset;
+
     margin-bottom: $carbon--spacing-07;
   }
 
   .#{$prefix}--form-item {
     @include type-style('body-short-01');
+
     display: flex;
     flex-direction: column;
     // We specify `auto` as the default value so that the form item does
@@ -17845,6 +17848,7 @@ Form styles
   // Skeleton State
   .#{$prefix}--label.#{$prefix}--skeleton {
     @include skeleton;
+
     width: rem(75px);
     height: rem(14px);
   }
@@ -17903,6 +17907,7 @@ Form styles
   .#{$prefix}--form-requirement {
     @include reset;
     @include type-style('caption-01');
+
     margin: $carbon--spacing-02 0 0;
     max-height: 0;
     overflow: hidden;
@@ -17915,10 +17920,13 @@ Form styles
 
   .#{$prefix}--form__helper-text {
     @include type-style('helper-text-01');
+
     color: $text-02;
     z-index: 0;
     opacity: 1;
     margin-top: $carbon--spacing-02;
+    // Added to prevent error text from displaying under helper text in Safari (#6392)
+    width: 100%;
   }
 
   .#{$prefix}--label--disabled,
@@ -17983,7 +17991,7 @@ Inline loading styles
   }
 
   .#{$prefix}--inline-loading__checkmark-container {
-    fill: $interactive-04;
+    fill: $support-02;
 
     // For deprecated older markup
     &.#{$prefix}--inline-loading__svg {
@@ -18046,6 +18054,7 @@ Inline loading styles
   - [prefix [variable]](#prefix-variable)
   - [loading--small\_\_gap [variable]](#loading--small__gap-variable)
   - [text-02 [variable]](#text-02-variable)
+  - [support-02 [variable]](#support-02-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
   - [support-01 [variable]](#support-01-variable)
 
@@ -23776,6 +23785,55 @@ Text input styles
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--light {
     background: $field-02;
+  }
+
+  //-----------------------------
+  // Inline Text Input
+  //-----------------------------
+
+  .#{$prefix}--text-input-wrapper--inline {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .#{$prefix}--label--inline {
+    flex: 1;
+    margin: rem(13px) 0 0 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .#{$prefix}--label--inline--sm {
+    margin-top: rem(9px);
+  }
+
+  .#{$prefix}--label--inline--xl {
+    margin-top: rem(17px);
+  }
+
+  .#{$prefix}--text-input__label-helper-wrapper {
+    flex: 2;
+    flex-direction: column;
+    margin-right: rem(24px);
+    max-width: rem(128px);
+    overflow-wrap: break-word;
+  }
+
+  .#{$prefix}--form__helper-text--inline {
+    margin-top: rem(2px);
+  }
+
+  .#{$prefix}--text-input__field-outer-wrapper {
+    align-items: flex-start;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .#{$prefix}--text-input__field-outer-wrapper--inline {
+    flex: 8;
+    flex-direction: column;
   }
 }
 ```
