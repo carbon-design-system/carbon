@@ -320,6 +320,27 @@
     outline: none;
   }
 
+  .#{$prefix}--tabs--light
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link {
+    border-bottom-color: $ui-03;
+  }
+
+  .#{$prefix}--tabs--light
+    .#{$prefix}--tabs__nav-item--disabled:hover
+    .#{$prefix}--tabs__nav-link {
+    border-bottom-color: $ui-03;
+  }
+
+  .#{$prefix}--tabs--light
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs--light
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link:active {
+    border-bottom-color: $ui-03;
+  }
+
   .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--disabled
     .#{$prefix}--tabs__nav-link {
