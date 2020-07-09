@@ -20,6 +20,7 @@
 /// @group tooltip
 @mixin tooltip--icon {
   @include reset;
+
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -30,6 +31,7 @@
   &::before,
   &::after {
     @include type-style('body-short-01');
+
     position: absolute;
     display: flex;
     align-items: center;
@@ -54,6 +56,7 @@
 
   &::after {
     @include box-shadow;
+
     min-width: rem(24px);
     max-width: rem(208px);
     height: rem(24px);
@@ -133,10 +136,12 @@
 @mixin tooltip--definition--legacy {
   .#{$prefix}--tooltip--definition {
     @include reset;
+
     position: relative;
 
     .#{$prefix}--tooltip__trigger {
       @include type-style('label-01');
+
       display: inline-flex;
       position: relative;
       border-bottom: 1px dotted $interactive-01;
@@ -165,6 +170,7 @@
   .#{$prefix}--tooltip--definition__bottom,
   .#{$prefix}--tooltip--definition__top {
     @include box-shadow;
+
     position: absolute;
     z-index: 1;
     display: none;
@@ -178,6 +184,7 @@
 
     p {
       @include type-style('body-short-01');
+
       color: $inverse-01;
     }
 
@@ -313,6 +320,7 @@
 
   .#{$prefix}--tooltip__label {
     @include type-style('label-01');
+
     display: inline-flex;
     align-items: center;
     color: $text-02;
@@ -328,6 +336,7 @@
 
   .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only) {
     @include button-reset($width: false);
+
     display: inline-flex;
     align-items: center;
     cursor: pointer;
@@ -335,6 +344,7 @@
 
     &:focus {
       @include focus-outline('border');
+
       fill: $hover-primary;
     }
   }
@@ -351,6 +361,7 @@
   .#{$prefix}--tooltip {
     @include box-shadow;
     @include reset;
+
     position: absolute;
     display: none;
     min-width: rem(208px);
@@ -458,6 +469,7 @@
 
   .#{$prefix}--tooltip__heading {
     @include carbon--type-style('productive-heading-01');
+
     margin-bottom: $spacing-03;
   }
 
@@ -484,6 +496,7 @@
   // Definition CSS only tooltip
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition {
     @include type-style('label-01');
+
     border-bottom: rem(1px) dotted $interactive-01;
   }
 
