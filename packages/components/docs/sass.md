@@ -17811,11 +17811,13 @@ Form styles
 @mixin form() {
   .#{$prefix}--fieldset {
     @include reset;
+
     margin-bottom: $carbon--spacing-07;
   }
 
   .#{$prefix}--form-item {
     @include type-style('body-short-01');
+
     display: flex;
     flex-direction: column;
     // We specify `auto` as the default value so that the form item does
@@ -17846,6 +17848,7 @@ Form styles
   // Skeleton State
   .#{$prefix}--label.#{$prefix}--skeleton {
     @include skeleton;
+
     width: rem(75px);
     height: rem(14px);
   }
@@ -17904,6 +17907,7 @@ Form styles
   .#{$prefix}--form-requirement {
     @include reset;
     @include type-style('caption-01');
+
     margin: $carbon--spacing-02 0 0;
     max-height: 0;
     overflow: hidden;
@@ -17916,10 +17920,13 @@ Form styles
 
   .#{$prefix}--form__helper-text {
     @include type-style('helper-text-01');
+
     color: $text-02;
     z-index: 0;
     opacity: 1;
     margin-top: $carbon--spacing-02;
+    // Added to prevent error text from displaying under helper text in Safari (#6392)
+    width: 100%;
   }
 
   .#{$prefix}--label--disabled,
