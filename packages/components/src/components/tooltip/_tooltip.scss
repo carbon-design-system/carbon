@@ -98,6 +98,8 @@
   $rotate-caret: if($position == 'top', 180deg, 0);
 
   &::before {
+    transform: translate($translate-x, $translate-y-caret) rotate($rotate-caret);
+
     @if ($position == 'top') {
       top: 1px;
     } @else {
@@ -110,10 +112,11 @@
       left: auto;
       right: 0;
     }
-    transform: translate($translate-x, $translate-y-caret) rotate($rotate-caret);
   }
 
   &::after {
+    transform: translate($translate-x, $translate-y-body);
+
     @if ($position == 'top') {
       top: 0;
     } @else {
@@ -125,7 +128,6 @@
     @if ($align == 'end') {
       right: 0;
     }
-    transform: translate($translate-x, $translate-y-body);
   }
 }
 
@@ -424,7 +426,7 @@
       border-bottom: $caret-size solid $inverse-02;
       position: absolute;
       left: 0;
-      top: calc(#{$caret-size * -1} + 1px);
+      top: calc(#{$caret-size * (-1)} + 1px);
       right: 0;
       width: 0;
       height: 0;
@@ -444,7 +446,7 @@
         left: auto;
         top: 50%;
         // left position has an additional space between caret and tooltip
-        right: calc(#{$caret-size * -1} + 1px);
+        right: calc(#{$caret-size * (-1)} + 1px);
         transform: rotate(90deg) translate(50%, -50%);
       }
     }
@@ -452,14 +454,14 @@
     &[data-floating-menu-direction='top'] {
       .#{$prefix}--tooltip__caret {
         top: auto;
-        bottom: calc(#{$caret-size * -1} + 1px);
+        bottom: calc(#{$caret-size * (-1)} + 1px);
         transform: rotate(180deg);
       }
     }
 
     &[data-floating-menu-direction='right'] {
       .#{$prefix}--tooltip__caret {
-        left: calc(#{$caret-size * -1} + 1px);
+        left: calc(#{$caret-size * (-1)} + 1px);
         top: 50%;
         right: auto;
         transform: rotate(270deg) translate(50%, -50%);

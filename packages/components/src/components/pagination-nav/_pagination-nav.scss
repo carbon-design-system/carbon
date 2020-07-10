@@ -38,7 +38,7 @@
 
   .#{$prefix}--pagination-nav__page--active + &::after,
   &.#{$prefix}--pagination-nav__page--active::after {
-    left: calc(50% - #{$carbon--spacing-05/2});
+    left: calc(50% - #{$carbon--spacing-05 / 2});
     opacity: 1;
     width: $carbon--spacing-05;
   }
@@ -74,6 +74,7 @@
   .#{$prefix}--pagination-nav {
     @include reset;
     @include type-style('body-short-01');
+
     line-height: 0;
   }
 
@@ -98,6 +99,7 @@
   .#{$prefix}--pagination-nav__page {
     @include type-style('body-short-01');
     @include button-reset($width: false);
+
     border-radius: 0;
     color: $text-color;
     display: block;
@@ -109,8 +111,8 @@
     position: relative;
     text-align: center;
     text-decoration: none;
-    transition: background-color, color;
-    transition: $duration--fast-02 motion(standard, productive);
+    transition: background-color $duration--fast-02 motion(standard, productive),
+      color $duration--fast-02 motion(standard, productive);
     user-select: none;
 
     &:hover {
@@ -184,10 +186,10 @@
   }
 
   .#{$prefix}--pagination-nav__select-icon {
-    left: calc(50% - #{$select-icon-top-position/2});
+    left: calc(50% - #{$select-icon-top-position / 2});
     pointer-events: none;
     position: absolute;
-    top: calc(50% - #{$select-icon-top-position/2});
+    top: calc(50% - #{$select-icon-top-position / 2});
   }
 
   .#{$prefix}--pagination-nav__accessibility-label {

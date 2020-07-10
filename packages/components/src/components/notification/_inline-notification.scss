@@ -100,7 +100,7 @@
       $notification-error-background-color
     );
 
-    &:before {
+    &::before {
       border-color: $support-01;
     }
   }
@@ -115,7 +115,7 @@
       $notification-success-background-color
     );
 
-    &:before {
+    &::before {
       border-color: $support-02;
     }
   }
@@ -132,7 +132,7 @@
       $notification-info-background-color
     );
 
-    &:before {
+    &::before {
       border-color: $support-04;
     }
   }
@@ -149,7 +149,7 @@
       $notification-warning-background-color
     );
 
-    &:before {
+    &::before {
       border-color: $support-03;
     }
   }
@@ -185,11 +185,13 @@
 
   .#{$prefix}--inline-notification__title {
     @include type-style('productive-heading-01');
+
     margin: 0 $carbon--spacing-02 0 0;
   }
 
   .#{$prefix}--inline-notification__subtitle {
     @include type-style('body-short-01');
+
     word-break: break-word;
   }
 
@@ -240,6 +242,7 @@
 
   .#{$prefix}--inline-notification__close-button {
     @include focus-outline('reset');
+
     position: absolute;
     top: 0;
     right: 0;
@@ -277,23 +280,22 @@
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--inline-notification--low-contrast {
+  .#{$prefix}--inline-notification--low-contrast
     .#{$prefix}--inline-notification__close-button
-      .#{$prefix}--inline-notification__close-icon {
-      fill: map-get($carbon--theme--white, 'text-01');
+    .#{$prefix}--inline-notification__close-icon {
+    fill: map-get($carbon--theme--white, 'text-01');
+  }
+
+  .#{$prefix}--inline-notification__action-button {
+    color: $interactive-01;
+
+    &:active {
+      color: $interactive-01;
     }
 
-    .#{$prefix}--inline-notification__action-button {
-      color: $interactive-01;
-
-      &:active {
-        color: $interactive-01;
-      }
-
-      &:active,
-      &:hover {
-        background-color: $carbon--white-0;
-      }
+    &:active,
+    &:hover {
+      background-color: $carbon--white-0;
     }
   }
 }

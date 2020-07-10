@@ -14,6 +14,8 @@ packages/components/demo/**
 packages/components/tests/**
 packages/components/css/**
 packages/components/scss/**
+packages/components/src/components/date-picker/_flatpickr.scss
 
 # packages/react
 packages/react/storybook-static/**
+packages/react/src/components/**
