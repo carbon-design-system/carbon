@@ -19,7 +19,9 @@
   .#{$prefix}--breadcrumb {
     @include reset;
     @include type-style('body-short-01');
+
     display: inline;
+
     @include carbon--breakpoint(md) {
       display: flex;
       flex-wrap: wrap;
@@ -71,6 +73,7 @@
   // Skeleton State
   .#{$prefix}--breadcrumb.#{$prefix}--skeleton .#{$prefix}--link {
     @include skeleton;
+
     width: rem(100px);
     height: 1rem;
   }

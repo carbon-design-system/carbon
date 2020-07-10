@@ -114,6 +114,7 @@ $css--helpers: true;
 
   .#{$prefix}--toolbar-menu__title {
     @include type-style('caption-01');
+
     font-weight: 600;
     padding: 0.5rem 1.25rem;
   }

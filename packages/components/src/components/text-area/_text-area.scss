@@ -47,6 +47,7 @@
   .#{$prefix}--text-area::placeholder {
     @include placeholder-colors;
     @include type-style('body-long-01');
+
     opacity: 1;
   }
 
@@ -92,6 +93,7 @@
   // Skeleton State
   #{$prefix}--text-area.#{$prefix}--skeleton {
     @include skeleton;
+
     height: rem(100px);
 
     &::placeholder {
