@@ -24,6 +24,7 @@
     @include reset;
     @include type-style('body-short-01');
     @include focus-outline('reset');
+
     background-color: $field-01;
     width: 100%;
     height: rem(40px);
@@ -142,6 +143,7 @@
   //-----------------------------
   .#{$prefix}--text-input:disabled {
     @include focus-outline('reset');
+
     cursor: not-allowed;
     background-color: $disabled-01;
     border-bottom: 1px solid transparent;
@@ -162,6 +164,7 @@
   //-----------------------------
   .#{$prefix}--text-input--invalid {
     @include focus-outline('invalid');
+
     box-shadow: none;
 
     .#{$prefix}--text-input--password__visibility,
@@ -223,6 +226,54 @@
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--light {
     background: $field-02;
+  }
+
+  //-----------------------------
+  // Inline Text Input
+  //-----------------------------
+
+  .#{$prefix}--text-input-wrapper--inline {
+    flex-flow: row wrap;
+  }
+
+  .#{$prefix}--label--inline {
+    flex: 1;
+    margin: rem(13px) 0 0 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .#{$prefix}--label--inline--sm {
+    margin-top: rem(9px);
+  }
+
+  .#{$prefix}--label--inline--xl {
+    margin-top: rem(17px);
+  }
+
+  .#{$prefix}--text-input__label-helper-wrapper {
+    flex: 2;
+    flex-direction: column;
+    margin-right: rem(24px);
+    max-width: rem(128px);
+    overflow-wrap: break-word;
+  }
+
+  .#{$prefix}--form__helper-text--inline {
+    margin-top: rem(2px);
+  }
+
+  .#{$prefix}--text-input__field-outer-wrapper {
+    align-items: flex-start;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .#{$prefix}--text-input__field-outer-wrapper--inline {
+    flex: 8;
+    flex-direction: column;
   }
 }
 

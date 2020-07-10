@@ -20,6 +20,7 @@ import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { mapDownshiftProps } from '../../tools/createPropAdapter';
 
 const { prefix } = settings;
 
@@ -321,7 +322,7 @@ export default class FilterableMultiSelect extends React.Component {
         initialSelectedItems={initialSelectedItems}
         render={({ selectedItems, onItemChange, clearSelection }) => (
           <Downshift
-            {...downshiftProps}
+            {...mapDownshiftProps(downshiftProps)}
             highlightedIndex={highlightedIndex}
             id={id}
             isOpen={isOpen}
