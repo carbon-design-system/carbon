@@ -24,6 +24,7 @@
 
   .#{$prefix}--structured-list {
     @include reset;
+
     display: table;
     overflow-x: auto;
     overflow-y: hidden;
@@ -88,6 +89,8 @@
     @include reset;
     @include padding-th;
     @include type-style('productive-heading-01');
+
+    color: $text-01;
     display: table-cell;
     font-weight: 600;
     height: rem(40px);
@@ -105,18 +108,12 @@
     @include reset;
     @include type-style('body-long-01');
     @include padding-td;
-    line-height: carbon--rem(21px);
+
+    color: $text-02;
     position: relative;
     display: table-cell;
     max-width: 36rem;
     transition: color $duration--fast-02 motion(standard, productive);
-  }
-
-  .#{$prefix}--structured-list-th {
-    color: $text-01;
-  }
-  .#{$prefix}--structured-list-td {
-    color: $text-02;
   }
 
   .#{$prefix}--structured-list-content--nowrap {
@@ -159,21 +156,13 @@
       }
     }
 
-    .#{$prefix}--structured-list-th span {
+    span {
       @include skeleton;
+
       width: 75%;
       height: 1rem;
       display: block;
     }
-  }
-
-  .#{$prefix}--structured-list.#{$prefix}--skeleton
-    .#{$prefix}--structured-list-th
-    span {
-    @include skeleton;
-    width: 75%;
-    height: 1rem;
-    display: block;
   }
 
   .#{$prefix}--structured-list.#{$prefix}--structured-list--selection.#{$prefix}--skeleton
