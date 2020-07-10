@@ -106,6 +106,7 @@
     .#{$prefix}--copy-btn__feedback {
       @include tooltip--content('icon');
 
+      box-sizing: content-box;
       clip: auto;
       margin: auto;
       overflow: visible;
@@ -129,16 +130,13 @@
     &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out
       .#{$prefix}--copy-btn__feedback {
       // https://github.com/stylelint/stylelint/issues/2363
-      /* stylelint-disable no-unknown-animations */
       animation: $duration--fast-02 motion(standard, productive) hide-feedback;
-      /* stylelint-enable no-unknown-animations */
     }
 
     &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in::before,
     &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in
       .#{$prefix}--copy-btn__feedback {
-      /* stylelint-disable no-unknown-animations */
-      animation: $duration--fast-02 motion(standard, productive) show-feedback; /* stylelint-enable no-unknown-animations */
+      animation: $duration--fast-02 motion(standard, productive) show-feedback;
     }
   }
 }
