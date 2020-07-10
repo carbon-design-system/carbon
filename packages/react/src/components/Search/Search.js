@@ -51,7 +51,7 @@ export default class Search extends Component {
     placeHolderText: PropTypes.string,
 
     /**
-     * Provide an optional label text for the Search icon
+     * Provide the label text for the Search icon
      */
     labelText: PropTypes.node.isRequired,
 
