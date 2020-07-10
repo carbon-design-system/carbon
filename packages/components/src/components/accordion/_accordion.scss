@@ -19,14 +19,14 @@
   .#{$prefix}--accordion {
     @include reset;
 
-    list-style: none;
     width: 100%;
+    list-style: none;
   }
 
   .#{$prefix}--accordion__item {
-    transition: all $duration--fast-02 motion(standard, productive);
-    border-top: 1px solid $ui-03;
     overflow: visible;
+    border-top: 1px solid $ui-03;
+    transition: all $duration--fast-02 motion(standard, productive);
 
     &:last-child {
       border-bottom: 1px solid $ui-03;
@@ -36,27 +36,27 @@
   .#{$prefix}--accordion__heading {
     @include button-reset;
 
-    color: $text-01;
+    position: relative;
     display: flex;
+    flex-direction: $accordion-flex-direction;
     align-items: flex-start;
     justify-content: $accordion-justify-content;
-    cursor: pointer;
-    padding: rem(10px) 0;
-    flex-direction: $accordion-flex-direction;
-    position: relative;
-    min-height: rem(40px);
     width: 100%;
+    min-height: rem(40px);
     margin: 0;
+    padding: rem(10px) 0;
+    color: $text-01;
+    cursor: pointer;
     transition: background-color motion(standard, productive) $duration--fast-02;
 
     &:hover::before,
     &:focus::before {
-      content: '';
       position: absolute;
       top: -1px;
       left: 0;
       width: 100%;
       height: calc(100% + 2px);
+      content: '';
     }
 
     &:hover::before {
@@ -80,27 +80,27 @@
     width: 1rem;
     height: 1rem;
     margin: $accordion-arrow-margin;
-    fill: $ui-05;
     // TODO: RTL rotate(180deg);
     transform: rotate(90deg);
     transition: all $duration--fast-02 motion(standard, productive);
+    fill: $ui-05;
   }
 
   .#{$prefix}--accordion__title {
     @include type-style('body-long-01');
 
-    margin: $accordion-title-margin;
-    width: 100%;
-    text-align: left;
     z-index: 1;
+    width: 100%;
+    margin: $accordion-title-margin;
+    text-align: left;
   }
 
   .#{$prefix}--accordion__content {
     display: none;
+    padding-right: $carbon--spacing-05;
+    padding-left: $carbon--spacing-05;
     // Transition property for when the accordion closes
     transition: padding motion(standard, productive) $duration--fast-02;
-    padding-left: $carbon--spacing-05;
-    padding-right: $carbon--spacing-05;
 
     // Custom breakpoints based on issue #4993
     @include carbon--breakpoint-up(480px) {
@@ -149,8 +149,8 @@
 
     .#{$prefix}--accordion__content {
       display: block;
-      padding-bottom: $carbon--spacing-06;
       padding-top: $spacing-03;
+      padding-bottom: $carbon--spacing-06;
       // Transition property for when the accordion opens
       transition: padding-top motion(entrance, productive) $duration--fast-02,
         padding-bottom motion(entrance, productive) $duration--fast-02;
@@ -170,9 +170,9 @@
   }
 
   .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
+    cursor: default;
     pointer-events: none;
     fill: $ui-05;
-    cursor: default;
 
     &:hover,
     &:focus,
