@@ -97,7 +97,8 @@
       }
 
       .#{$prefix}--modal-content--with-form {
-        padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
+        // Override for `.#{$prefix}--modal-content`
+        padding-right: $spacing-05;
       }
     }
 
@@ -181,7 +182,8 @@
       }
 
       .#{$prefix}--modal-content--with-form {
-        padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
+        // Override for `.#{$prefix}--modal-content`
+        padding-right: $spacing-05;
       }
     }
   }
@@ -207,7 +209,8 @@
       }
 
       .#{$prefix}--modal-content--with-form {
-        padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
+        // Override for `.#{$prefix}--modal-content`
+        padding-right: $spacing-05;
       }
     }
 
@@ -260,17 +263,15 @@
     &:focus {
       @include focus-outline('outline');
     }
+
+    > * {
+      @include type-style('body-long-01');
+    }
   }
 
   // Required so overflow-indicator disappears at end of content
   .#{$prefix}--modal-scroll-content > *:last-child {
     padding-bottom: $spacing-07;
-  }
-
-  .#{$prefix}--modal-content {
-    > * {
-      @include type-style('body-long-01');
-    }
   }
 
   .#{$prefix}--modal-content--overflow-indicator {
@@ -290,7 +291,7 @@
   .#{$prefix}--modal-content:focus
     ~ .#{$prefix}--modal-content--overflow-indicator {
     width: calc(100% - 4px);
-    margin: 0 2px 2px 2px;
+    margin: 0 2px 2px;
   }
 
   .#{$prefix}--modal-footer {

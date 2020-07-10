@@ -12,6 +12,7 @@
 @include exports('skeleton-placeholder') {
   .#{$prefix}--skeleton__placeholder {
     @include skeleton;
+
     height: rem(100px);
     width: rem(100px);
   }

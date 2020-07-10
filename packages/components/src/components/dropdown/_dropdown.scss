@@ -45,6 +45,7 @@
   .#{$prefix}--dropdown {
     @include reset;
     @include focus-outline('reset');
+
     position: relative;
     list-style: none;
     display: block;
@@ -66,6 +67,7 @@
   // Menu's triggering element updated to button with Downshift v5 upgrade
   .#{$prefix}--dropdown .#{$prefix}--list-box__field {
     @include button-reset;
+
     text-align: left;
     padding: 0 rem(48px) 0 rem(16px);
   }
@@ -96,7 +98,7 @@
     @include focus-outline('invalid');
 
     .#{$prefix}--dropdown-text {
-      padding-right: rem(56px); // TODO: spacing token
+      padding-right: rem(56px);
     }
 
     + .#{$prefix}--form-requirement {
@@ -109,7 +111,7 @@
   .#{$prefix}--dropdown__invalid-icon {
     position: absolute;
     top: 50%;
-    right: rem(40px); // TODO: spacing token
+    right: $spacing-08;
     fill: $support-01;
     transform: translateY(-50%);
   }
@@ -124,6 +126,10 @@
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
     @include box-shadow;
+
+    // 40px item height * 5.5 items shown
+    max-height: rem(220px);
+    transition: max-height $duration--fast-02 motion(entrance, productive);
   }
 
   .#{$prefix}--dropdown--light {
@@ -159,10 +165,13 @@
 
   .#{$prefix}--dropdown-text {
     @include type-style('body-short-01');
+
     display: block;
-    height: calc(100% + 1px); // Account for the border in `.bx--dropdown`
+    // Account for the border in `.bx--dropdown`
+    height: calc(100% + 1px);
     padding-left: $carbon--spacing-05;
-    padding-right: rem(42px); // 2rem + SVG width
+    // 2rem + SVG width
+    padding-right: rem(42px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -173,6 +182,7 @@
     @include focus-outline('reset');
     @include box-shadow;
     @include type-style('body-short-01');
+
     background-color: $ui-01;
     display: flex;
     flex-direction: column;
@@ -227,12 +237,13 @@
 
   .#{$prefix}--dropdown-link {
     @include focus-outline('reset');
+
     display: block;
     height: rem(40px);
     color: $text-02;
     text-decoration: none;
     font-weight: normal;
-    line-height: rem(16px);
+    line-height: 1rem;
     padding: rem(11px) 0;
     margin: 0 $carbon--spacing-05;
     border: 1px solid transparent;
@@ -266,6 +277,7 @@
   .#{$prefix}--dropdown--focused,
   .#{$prefix}--dropdown-link:focus {
     @include focus-outline('outline');
+
     margin: 0;
     padding: rem(11px) rem(16px);
   }
@@ -284,6 +296,7 @@
     .#{$prefix}--dropdown--focused:focus {
     // copied from default focus styles
     @include focus-outline('outline');
+
     margin: 0;
     padding: rem(11px) rem(16px);
   }
@@ -311,19 +324,16 @@
     transform: rotate(-180deg);
   }
 
-  .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
-    max-height: rem(220px); // 40px item height * 5.5 items shown
-    transition: max-height $duration--fast-02 motion(entrance, productive);
-  }
-
   .#{$prefix}--dropdown--open.#{$prefix}--dropdown--xl
     .#{$prefix}--dropdown-list {
-    max-height: rem(264px); // 48px item height * 5.5 items shown
+    // 48px item height * 5.5 items shown
+    max-height: rem(264px);
   }
 
   .#{$prefix}--dropdown--open.#{$prefix}--dropdown--sm
     .#{$prefix}--dropdown-list {
-    max-height: rem(176px); // 32px item height * 5.5 items shown
+    // 32px item height * 5.5 items shown
+    max-height: rem(176px);
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-item {
@@ -392,7 +402,7 @@
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-text {
     display: inline-block;
-    padding: rem(7px) rem(32px) rem(7px) $carbon--spacing-04; // TODO: spacing token
+    padding: rem(7px) $carbon--spacing-07 rem(7px) $carbon--spacing-04;
     height: rem(32px);
     overflow: visible;
     color: $text-01;

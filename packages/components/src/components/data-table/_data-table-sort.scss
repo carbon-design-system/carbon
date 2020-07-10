@@ -27,6 +27,7 @@
   // -------------------------------------
   .#{$prefix}--table-sort {
     @include button-reset(false);
+
     font: inherit;
     line-height: 1;
     display: flex;
@@ -93,7 +94,7 @@
   .#{$prefix}--table-sort.#{$prefix}--table-sort--active
     .#{$prefix}--table-sort__icon {
     display: block;
-    opacity: 1; //changes opacity when th is active (see line 125)
+    opacity: 1;
   }
 
   .#{$prefix}--table-sort--ascending .#{$prefix}--table-sort__icon {

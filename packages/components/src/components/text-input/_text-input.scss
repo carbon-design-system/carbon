@@ -24,6 +24,7 @@
     @include reset;
     @include type-style('body-short-01');
     @include focus-outline('reset');
+
     background-color: $field-01;
     width: 100%;
     height: rem(40px);
@@ -142,6 +143,7 @@
   //-----------------------------
   .#{$prefix}--text-input:disabled {
     @include focus-outline('reset');
+
     cursor: not-allowed;
     background-color: $disabled-01;
     border-bottom: 1px solid transparent;
@@ -162,6 +164,7 @@
   //-----------------------------
   .#{$prefix}--text-input--invalid {
     @include focus-outline('invalid');
+
     box-shadow: none;
 
     .#{$prefix}--text-input--password__visibility,
@@ -230,8 +233,7 @@
   //-----------------------------
 
   .#{$prefix}--text-input-wrapper--inline {
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
   }
 
   .#{$prefix}--label--inline {

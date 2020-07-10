@@ -272,8 +272,6 @@
   // @todo Simplify CSS selectors on next major release
   &::after,
   .#{$prefix}--assistive-text,
-  .#{$prefix}--assistive-text,
-  + .#{$prefix}--assistive-text,
   + .#{$prefix}--assistive-text {
     @if ($position == 'top') {
       top: -$body-spacing;
