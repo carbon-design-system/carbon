@@ -24,7 +24,8 @@
   }
 
   .#{$prefix}--btn-set > .#{$prefix}--btn {
-    max-width: rem(196px); // 196px from design kit
+    // 196px from design kit
+    max-width: rem(196px);
     width: 100%;
   }
 
@@ -120,6 +121,7 @@
       currentColor,
       $active-ui
     );
+
     padding: $button-padding-ghost;
 
     .#{$prefix}--btn__icon {
@@ -276,6 +278,7 @@
   // Skeleton State
   .#{$prefix}--btn.#{$prefix}--skeleton {
     @include skeleton;
+
     width: rem(150px);
   }
 }

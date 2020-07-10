@@ -34,10 +34,8 @@
 /// @group structured-list
 /// @param {Number} $padding [$structured-list-padding]
 @mixin padding-th($padding: $structured-list-padding) {
-  padding-left: $carbon--spacing-05;
-  padding-right: $carbon--spacing-05;
-  padding-top: $carbon--spacing-05;
-  padding-bottom: $carbon--spacing-03;
+  padding: $carbon--spacing-05 $carbon--spacing-05 $carbon--spacing-03
+    $carbon--spacing-05;
 }
 
 /// Used only for normal structured-list
@@ -45,8 +43,6 @@
 /// @group structured-list
 /// @param {Number} $padding [$structured-list-padding]
 @mixin padding-td($padding: $structured-list-padding) {
-  padding-top: $carbon--spacing-05;
-  padding-right: $carbon--spacing-05;
-  padding-bottom: $carbon--spacing-06;
-  padding-left: $carbon--spacing-05;
+  padding: $carbon--spacing-05 $carbon--spacing-05 $carbon--spacing-06
+    $carbon--spacing-05;
 }

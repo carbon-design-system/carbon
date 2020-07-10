@@ -33,6 +33,7 @@
 
   .#{$prefix}--inline-loading__text {
     @include type-style('label-01');
+
     color: $text-02;
   }
 
@@ -68,7 +69,7 @@
     stroke-dasharray: 12;
     stroke-dashoffset: 12;
     animation-name: stroke;
-    animation-duration: 0.25s;
+    animation-duration: 250ms;
     animation-fill-mode: forwards;
   }
 
