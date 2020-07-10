@@ -21332,7 +21332,6 @@ Pagination nav base styles
       background-color: $background-color-active;
       color: $text-color-active;
       font-weight: 600;
-      outline: none;
     }
 
     .#{$prefix}--pagination-nav__icon {
