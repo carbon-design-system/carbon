@@ -30,13 +30,10 @@
     top: 1.2rem;
     left: 50%;
 
-    &:focus {
-      border: 2px solid red;
-    }
-
-    &:before {
+    &::before {
       @include box-shadow;
       @include type-style('body-short-01');
+
       top: 1.1rem;
       padding: $spacing-02;
       color: $inverse-01;
@@ -49,7 +46,7 @@
       z-index: 2;
     }
 
-    &:after {
+    &::after {
       top: 0.85rem;
       width: 0.6rem;
       height: 0.6rem;
@@ -61,8 +58,8 @@
       z-index: 1;
     }
 
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       position: absolute;
       display: block;
       background: $inverse-02;
@@ -76,6 +73,7 @@
   // TODO: deprecate above styles
   .#{$prefix}--copy-btn {
     @include reset;
+
     position: relative;
     display: flex;
     justify-content: center;
@@ -93,12 +91,14 @@
 
     &::before {
       @include tooltip--caret;
+
       display: none;
     }
 
     .#{$prefix}--copy-btn__feedback {
-      box-sizing: content-box;
       @include tooltip--content('icon');
+
+      box-sizing: content-box;
       clip: auto;
       margin: auto;
       overflow: visible;
@@ -109,6 +109,7 @@
 
     &:focus {
       @include focus-outline('outline');
+
       outline-color: $focus;
     }
 

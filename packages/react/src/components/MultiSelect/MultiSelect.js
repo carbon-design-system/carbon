@@ -18,6 +18,7 @@ import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { mapDownshiftProps } from '../../tools/createPropAdapter';
 
 const { prefix } = settings;
 const noop = () => {};
@@ -79,15 +80,17 @@ function MultiSelect({
     getMenuProps,
     getItemProps,
     selectedItem: selectedItems,
-  } = useSelect({
-    ...downshiftProps,
-    highlightedIndex,
-    isOpen,
-    itemToString,
-    onStateChange,
-    selectedItem: controlledSelectedItems,
-    items,
-  });
+  } = useSelect(
+    mapDownshiftProps({
+      ...downshiftProps,
+      highlightedIndex,
+      isOpen,
+      itemToString,
+      onStateChange,
+      selectedItem: controlledSelectedItems,
+      items,
+    })
+  );
 
   /**
    * programmatically control this `open` prop

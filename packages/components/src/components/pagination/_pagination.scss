@@ -28,6 +28,7 @@ $css--helpers: true;
   .#{$prefix}--pagination {
     @include reset;
     @include type-style('body-short-01');
+
     width: 100%;
     overflow-x: auto;
     background-color: $ui-01;
@@ -54,6 +55,7 @@ $css--helpers: true;
 
   .#{$prefix}--pagination .#{$prefix}--select-input {
     @include type-style('body-short-01');
+
     width: auto;
     min-width: auto;
     height: rem(48px);
@@ -125,6 +127,7 @@ $css--helpers: true;
   .#{$prefix}--pagination__button,
   .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
     @include reset;
+
     border: none;
     background: none;
     cursor: pointer;
@@ -143,6 +146,7 @@ $css--helpers: true;
   .#{$prefix}--pagination__button:focus,
   .#{$prefix}--btn--ghost:focus.#{$prefix}--pagination__button {
     @include focus-outline('outline');
+
     border-left: 0;
   }
 

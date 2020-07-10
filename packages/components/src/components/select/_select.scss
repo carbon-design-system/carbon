@@ -22,6 +22,7 @@
 @mixin select {
   .#{$prefix}--select {
     @include reset;
+
     position: relative;
     display: flex;
     flex-direction: column;
@@ -37,6 +38,7 @@
   .#{$prefix}--select-input {
     @include type-style('body-short-01');
     @include focus-outline('reset');
+
     height: rem(40px);
     appearance: none;
     display: block;
@@ -69,13 +71,14 @@
       &:-moz-focusring,
       &::-moz-focus-inner {
         color: transparent;
-        text-shadow: 0 0 0 #000;
+        text-shadow: 0 0 0 #000000;
         background-image: none;
       }
     }
 
     &:focus {
       @include focus-outline('outline');
+
       color: $text-01;
     }
 
@@ -153,17 +156,13 @@
     ~ .#{$prefix}--select__invalid-icon {
     position: absolute;
     right: $spacing-09;
-  }
-
-  .#{$prefix}--select-input__wrapper[data-invalid]
-    .#{$prefix}--select-input
-    ~ .#{$prefix}--select__invalid-icon {
     fill: $support-01;
   }
 
   .#{$prefix}--select-optgroup,
   .#{$prefix}--select-option {
-    color: $text-01; // For the options to show in IE11
+    // For the options to show in IE11
+    color: $text-01;
   }
 
   .#{$prefix}--select-option[disabled] {
@@ -192,7 +191,8 @@
   .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--label,
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--form__helper-text {
-    margin-top: rem(13px); // offset label text margin
+    // Offset label text margin
+    margin-top: rem(13px);
     align-self: flex-start;
   }
 
@@ -225,7 +225,7 @@
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--select-input {
-    padding-right: $spacing-09 + $spacing-03; // 3.5rem
+    padding-right: rem(56px);
   }
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
@@ -243,13 +243,10 @@
     }
   }
 
-  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
-    cursor: not-allowed;
-  }
-
   //Skeleton State
   .#{$prefix}--select.#{$prefix}--skeleton {
     @include skeleton;
+
     width: 100%;
     height: 2.5rem;
   }
