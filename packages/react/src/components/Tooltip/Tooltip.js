@@ -233,6 +233,12 @@ class Tooltip extends Component {
   _tooltipId =
     this.props.id || `__carbon-tooltip_${Math.random().toString(36).substr(2)}`;
 
+  /**
+   * Internal flag for tracking whether or not focusing on the tooltip trigger
+   * should automatically display the tooltip body
+   */
+  _tooltipDismissed = false;
+
   componentDidMount() {
     if (!this._debouncedHandleFocus) {
       this._debouncedHandleFocus = debounce(this._handleFocus, 200);
@@ -264,9 +270,15 @@ class Tooltip extends Component {
   }
 
   _handleUserInputOpenClose = (event, { open }) => {
+    // capture tooltip body element before it is removed from the DOM
+    const tooltipBody = this._tooltipEl;
     this.setState({ open }, () => {
       if (this.props.onChange) {
         this.props.onChange(event, { open });
+      }
+      if (!open && tooltipBody && tooltipBody.id === this._tooltipId) {
+        this._tooltipDismissed = true;
+        this._triggerRef?.current.focus();
       }
     });
   };
@@ -279,7 +291,10 @@ class Tooltip extends Component {
   _handleFocus = (state, evt) => {
     const { relatedTarget } = evt;
     if (state === 'over') {
-      this._handleUserInputOpenClose(evt, { open: true });
+      if (!this._tooltipDismissed) {
+        this._handleUserInputOpenClose(evt, { open: true });
+      }
+      this._tooltipDismissed = false;
     } else {
       // Note: SVGElement in IE11 does not have `.contains()`
       const { current: triggerEl } = this._triggerRef;
@@ -460,6 +475,7 @@ class Tooltip extends Component {
         </ClickListener>
         {open && (
           <FloatingMenu
+            focusTrap
             selectorPrimaryFocus={this.props.selectorPrimaryFocus}
             target={this._getTarget}
             triggerRef={this._triggerRef}
