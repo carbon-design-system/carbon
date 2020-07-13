@@ -435,8 +435,11 @@ class Tooltip extends Component {
           {showIcon ? (
             <div id={triggerId} className={triggerClasses}>
               {triggerText}
-              <div className={`${prefix}--tooltip__trigger`} {...properties}>
-                <IconCustomElement ref={refProp} {...iconProperties} />
+              <div
+                className={`${prefix}--tooltip__trigger`}
+                {...properties}
+                ref={refProp}>
+                <IconCustomElement {...iconProperties} />
               </div>
             </div>
           ) : (
