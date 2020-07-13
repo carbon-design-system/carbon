@@ -549,9 +549,8 @@
       min-height: rem(48px);
     }
 
-    &:not(.bx--data-table--compact) td,
-    &:not(.bx--data-table--short) td,
-    &:not(.bx--data-table--tall) td {
+    &:not(.#{$prefix}--data-table--compact):not(.#{$prefix}--data-table--tall):not(.#{$prefix}--data-table--short)
+      td {
       padding-top: rem(14px);
     }
 
