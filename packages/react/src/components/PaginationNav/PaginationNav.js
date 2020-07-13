@@ -104,6 +104,7 @@ function PaginationItem({
           [`${prefix}--pagination-nav__page--active`]: isActive,
         })}
         onClick={onClick}
+        data-page={page}
         aria-current={isActive ? 'page' : null}>
         <span className={`${prefix}--pagination-nav__accessibility-label`}>
           {isActive
@@ -139,6 +140,7 @@ function PaginationOverflow({
             {[...Array(count)].map((e, i) => (
               <option
                 value={(fromIndex + i).toString()}
+                data-page={fromIndex + i + 1}
                 key={`overflow-${fromIndex + i}`}>
                 {fromIndex + i + 1}
               </option>
