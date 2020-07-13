@@ -549,6 +549,12 @@
       min-height: rem(48px);
     }
 
+    &:not(.bx--data-table--compact) td,
+    &:not(.bx--data-table--short) td,
+    &:not(.bx--data-table--tall) td {
+      padding-top: rem(14px);
+    }
+
     tr.#{$prefix}--data-table--selected:first-of-type td {
       border-top: none;
     }
@@ -578,8 +584,11 @@
     }
 
     .#{$prefix}--table-header-label {
-      max-width: calc(100% - 10px);
       @include text-overflow;
+
+      max-width: calc(100% - 10px);
+      padding-top: rem(14px);
+      padding-bottom: rem(14px);
     }
   }
 
