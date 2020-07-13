@@ -2327,7 +2327,7 @@
     - chevron sort down
     - chevron down
     - sort down chevron
-    -navigation
+    - navigation
 - name: chevron--sort--up
   friendly_name: Chevron sort up
   sizes:
