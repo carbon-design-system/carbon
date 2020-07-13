@@ -224,6 +224,15 @@ class Tooltip extends Component {
    */
   _triggerRef = React.createRef();
 
+  /**
+   * Unique tooltip ID that is user-provided or auto-generated
+   * Referenced in aria-labelledby attribute
+   * @type {string}
+   * @private
+   */
+  _tooltipId =
+    this.props.id || `__carbon-tooltip_${Math.random().toString(36).substr(2)}`;
+
   componentDidMount() {
     if (!this._debouncedHandleFocus) {
       this._debouncedHandleFocus = debounce(this._handleFocus, 200);
@@ -368,9 +377,6 @@ class Tooltip extends Component {
       triggerId = (this.triggerId =
         this.triggerId ||
         `__carbon-tooltip-trigger_${Math.random().toString(36).substr(2)}`),
-      tooltipId = (this.tooltipId =
-        this.tooltipId ||
-        `__carbon-tooltip_${Math.random().toString(36).substr(2)}`),
       tooltipBodyId,
       children,
       className,
@@ -413,9 +419,9 @@ class Tooltip extends Component {
       onMouseOut: this.handleMouse,
       onFocus: this.handleMouse,
       onBlur: this.handleMouse,
-      'aria-controls': !open ? undefined : tooltipId,
+      'aria-controls': !open ? undefined : this._tooltipId,
       'aria-expanded': open,
-      'aria-describedby': open ? tooltipId : null,
+      'aria-describedby': open ? this._tooltipId : null,
       // if the user provides property `triggerText`,
       // then the button should use aria-labelledby to point to its id,
       // if the user doesn't provide property `triggerText`,
@@ -463,7 +469,7 @@ class Tooltip extends Component {
               this._tooltipEl = node;
             }}>
             <div
-              id={tooltipId}
+              id={this._tooltipId}
               className={tooltipClasses}
               {...other}
               data-floating-menu-direction={direction}
