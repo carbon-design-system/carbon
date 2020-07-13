@@ -40,7 +40,7 @@
   "dependencies": {
     "@carbon/icons-react": "^10.13.0",
     "classnames": "2.2.6",
-    "downshift": "5.0.5",
+    "downshift": "5.2.1",
     "flatpickr": "4.6.1",
     "invariant": "^2.2.3",
     "lodash.debounce": "^4.0.8",
