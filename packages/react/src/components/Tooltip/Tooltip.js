@@ -300,9 +300,7 @@ class Tooltip extends Component {
       const { current: triggerEl } = this._triggerRef;
       const shouldPreventClose =
         relatedTarget &&
-        ((triggerEl &&
-          triggerEl.contains &&
-          triggerEl.contains(relatedTarget)) ||
+        ((triggerEl && triggerEl?.contains(relatedTarget)) ||
           (this._tooltipEl && this._tooltipEl.contains(relatedTarget)));
       if (!shouldPreventClose) {
         this._handleUserInputOpenClose(evt, { open: false });
