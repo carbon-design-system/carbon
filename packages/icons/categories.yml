@@ -100,6 +100,7 @@ categories:
           - image
           - image--reference
           - language
+          - lasso
           - link
           - list--boxes
           - list--bulleted
@@ -126,6 +127,8 @@ categories:
           - rotate--counterclockwise--alt--filled
           - rotate--counterclockwise--filled
           - save
+          - select--01
+          - select--02
           - spell-check
           - spray-paint
           - text--align--center

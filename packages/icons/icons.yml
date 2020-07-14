@@ -5655,6 +5655,11 @@
     - laptop
   sizes:
     - 32
+- name: lasso
+  friendly_name: lasso
+  aliases: []
+  sizes:
+    - 32
 - name: launch
   friendly_name: Launch
   aliases:
@@ -8830,6 +8835,16 @@
     - 32
 - name: security
   friendly_name: security
+  aliases: []
+  sizes:
+    - 32
+- name: select--01
+  friendly_name: select--01
+  aliases: []
+  sizes:
+    - 32
+- name: select--02
+  friendly_name: select--02
   aliases: []
   sizes:
     - 32
