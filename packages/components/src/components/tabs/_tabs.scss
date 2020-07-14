@@ -44,6 +44,13 @@
     transition: max-height $duration--fast-01 motion(standard, productive);
     overflow: hidden;
     overflow-x: auto;
+
+    // hide scrollbars
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   //-----------------------------
