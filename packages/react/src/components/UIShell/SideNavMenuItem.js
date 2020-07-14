@@ -23,8 +23,8 @@ const SideNavMenuItem = React.forwardRef(function SideNavMenuItem(props, ref) {
   });
 
   return (
-    <li className={className} role="none">
-      <Link {...rest} className={linkClassName} role="menuitem" ref={ref}>
+    <li className={className}>
+      <Link {...rest} className={linkClassName} ref={ref}>
         <SideNavLinkText>{children}</SideNavLinkText>
       </Link>
     </li>
