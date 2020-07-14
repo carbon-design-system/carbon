@@ -116,9 +116,9 @@
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
-    top: rem(-3px);
+    top: rem(-3.2px);
     left: 0;
-    width: rem(32px);
+    width: rem(64px);
     height: rem(3px);
   }
 
