@@ -6469,7 +6469,6 @@ $interactive-01: if(
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
-  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅interactive-02 [variable]
 
@@ -6558,6 +6557,7 @@ $interactive-04: if(
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅ui-background [variable]
 
@@ -25372,7 +25372,13 @@ Tooltip styles
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition {
     @include type-style('label-01');
 
-    border-bottom: rem(1px) dotted $interactive-01;
+    border-bottom: rem(1px) dotted $text-02;
+    transition: border-color $duration--fast-02;
+  }
+
+  .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition:hover,
+  .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition:focus {
+    border-bottom-color: $interactive-04;
   }
 
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition.#{$prefix}--tooltip--top {
@@ -25516,7 +25522,7 @@ Tooltip styles
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [inverse-link [variable]](#inverse-link-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
-  - [interactive-01 [variable]](#interactive-01-variable)
+  - [interactive-04 [variable]](#interactive-04-variable)
 
 ## ui-shell
 
