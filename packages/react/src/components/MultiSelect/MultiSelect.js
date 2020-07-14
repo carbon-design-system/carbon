@@ -221,7 +221,6 @@ function MultiSelect({
                   .length > 0;
               return (
                 <ListBox.MenuItem
-                  aria-selected={isChecked}
                   key={itemProps.id}
                   isActive={isChecked}
                   isHighlighted={highlightedIndex === index}
