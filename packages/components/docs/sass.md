@@ -26792,7 +26792,7 @@ UI shell side nav
   //----------------------------------------------------------------------------
   // Side-nav > Navigation > {Menu,Submenu}
   //----------------------------------------------------------------------------
-  .#{$prefix}--side-nav__submenu[aria-haspopup='true'] {
+  .#{$prefix}--side-nav__submenu {
     @include button-reset($width: true);
     @include type-style('productive-heading-01');
     @include focus-outline('reset');
@@ -27012,8 +27012,7 @@ UI shell side nav
   // Variants - Fixed
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav--fixed a.#{$prefix}--side-nav__link,
-  .#{$prefix}--side-nav--fixed
-    .#{$prefix}--side-nav__submenu[aria-haspopup='true'] {
+  .#{$prefix}--side-nav--fixed .#{$prefix}--side-nav__submenu {
     padding-left: mini-units(2);
   }
 
