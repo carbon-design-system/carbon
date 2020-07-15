@@ -159,34 +159,25 @@ export default class Tabs extends React.Component {
     window.removeEventListener('resize', this._debouncedHandleWindowResize);
   }
 
-  getTabs() {
-    return React.Children.map(this.props.children, (tab) => tab);
-  }
-
   getEnabledTabs = () =>
     React.Children.toArray(this.props.children).reduce(
-      (acc, tab, index) => (!tab.props.disabled ? acc.concat(index) : acc),
+      (enabledTabs, tab, index) =>
+        !tab.props.disabled ? enabledTabs.concat(index) : enabledTabs,
       []
     );
 
-  getTabAt = (index, useFresh) => {
-    return (
-      (!useFresh && this[`tab${index}`]) ||
-      React.Children.toArray(this.props.children)[index]
+  getNextIndex = (index, direction) => {
+    const enabledTabs = this.getEnabledTabs();
+    const nextIndex = Math.max(
+      enabledTabs.indexOf(index) + direction,
+      // For `tab` not found in `enabledTabs`
+      -1
     );
-  };
-
-  setTabAt = (index, tabRef) => {
-    this[`tab${index}`] = tabRef;
-  };
-
-  // following functions (handle*) are Props on Tab.js, see Tab.js for parameters
-  handleTabClick = (onSelectionChange) => {
-    return (index, evt) => {
-      evt.preventDefault();
-
-      this.selectTabAt(evt, { index, onSelectionChange });
-    };
+    const nextIndexLooped =
+      nextIndex >= 0 && nextIndex < enabledTabs.length
+        ? nextIndex
+        : nextIndex - Math.sign(nextIndex) * enabledTabs.length;
+    return enabledTabs[nextIndexLooped];
   };
 
   getDirection = (evt) => {
@@ -199,18 +190,9 @@ export default class Tabs extends React.Component {
     return 0;
   };
 
-  getNextIndex = (index, direction) => {
-    const enabledTabs = this.getEnabledTabs();
-    const nextIndex = Math.max(
-      enabledTabs.indexOf(index) + direction,
-      -1 /* For `tab` not found in `enabledTabs` */
-    );
-    const nextIndexLooped =
-      nextIndex >= 0 && nextIndex < enabledTabs.length
-        ? nextIndex
-        : nextIndex - Math.sign(nextIndex) * enabledTabs.length;
-    return enabledTabs[nextIndexLooped];
-  };
+  getTabAt = (index, useFresh) =>
+    (!useFresh && this[`tab${index}`]) ||
+    React.Children.toArray(this.props.children)[index];
 
   scrollTabIntoView = (event, { index }) => {
     const tab = this.getTabAt(index);
@@ -223,6 +205,18 @@ export default class Tabs extends React.Component {
       const newScrollLeft = this.tablist.current.scrollLeft;
       if (newScrollLeft > currentScrollLeft) {
         this.tablist.current.scrollLeft += this.OVERFLOW_BUTTON_OFFSET;
+      }
+    }
+  };
+
+  selectTabAt = (event, { index, onSelectionChange }) => {
+    this.scrollTabIntoView(event, { index });
+    if (this.state.selected !== index) {
+      this.setState({
+        selected: index,
+      });
+      if (typeof onSelectionChange === 'function') {
+        onSelectionChange(index);
       }
     }
   };
@@ -244,18 +238,6 @@ export default class Tabs extends React.Component {
         tab?.tabAnchor?.focus();
       }
     };
-  };
-
-  selectTabAt = (event, { index, onSelectionChange }) => {
-    this.scrollTabIntoView(event, { index });
-    if (this.state.selected !== index) {
-      this.setState({
-        selected: index,
-      });
-      if (typeof onSelectionChange === 'function') {
-        onSelectionChange(index);
-      }
-    }
   };
 
   handleOverflowNavButtonClick = (event, { direction }) => {
@@ -296,6 +278,18 @@ export default class Tabs extends React.Component {
     }
 
     this.handleTabKeyDown(nextIndex, event);
+  };
+
+  getTabs = () => React.Children.map(this.props.children, (tab) => tab);
+
+  // following functions (handle*) are Props on Tab.js, see Tab.js for parameters
+  handleTabClick = (onSelectionChange) => (index, evt) => {
+    evt.preventDefault();
+    this.selectTabAt(evt, { index, onSelectionChange });
+  };
+
+  setTabAt = (index, tabRef) => {
+    this[`tab${index}`] = tabRef;
   };
 
   render() {
