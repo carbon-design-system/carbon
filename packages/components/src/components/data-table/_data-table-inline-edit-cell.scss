@@ -124,6 +124,7 @@
 
   .#{$prefix}--data-table-cell__edit {
     @include button-reset(false);
+
     opacity: 0;
   }
 
@@ -273,20 +274,19 @@
   // Status - Error ------------------------------------------------------------
 
   .#{$prefix}--data-table__status--error {
+    position: relative;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     fill: $support-01;
     width: 100%;
     height: 100%;
+    // Specify outline on child SVG node instead
+    outline: none;
   }
 
   .#{$prefix}--data-table__edit-field--error {
     border-bottom: 2px solid $support-01;
-  }
-
-  .#{$prefix}--data-table__status--error {
-    position: relative;
   }
 
   .#{$prefix}--data-table__error-text {
@@ -296,7 +296,6 @@
     top: rem(-1px);
     right: -1rem;
     color: $text-error;
-    // TODO: sync with caption sizes
     font-size: rem(12px);
     background-color: $inverse-01;
     padding: 1rem;
@@ -327,11 +326,6 @@
 
   .#{$prefix}--data-table__icon--error {
     z-index: 1000;
-  }
-
-  .#{$prefix}--data-table__status--error {
-    // Specify outline on child SVG node instead
-    outline: none;
   }
 
   .#{$prefix}--data-table__status--error:focus

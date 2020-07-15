@@ -69,6 +69,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box {
     @include reset;
+
     position: relative;
     width: $list-box-width;
     height: rem(40px);
@@ -264,11 +265,13 @@ $list-box-menu-width: rem(300px);
   // The field we use for input, showing selection, etc.
   .#{$prefix}--list-box__field {
     @include button-reset;
+
     position: relative;
     display: inline-flex;
     align-items: center;
     vertical-align: top;
-    height: calc(100% + 1px); // Account for the border in `.bx--list-box`
+    // Account for the border in `.bx--list-box`
+    height: calc(100% + 1px);
     padding: 0 $carbon--spacing-09 0 $carbon--spacing-05;
     cursor: pointer;
     outline: none;
@@ -295,14 +298,16 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input {
-    padding-right: rem(98px); // to account for clear input button outline
+    // to account for clear input button outline
+    padding-right: rem(98px);
   }
 
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon {
-    right: rem(66px); // to account for clear input button outline
+    // to account for clear input button outline
+    right: rem(66px);
   }
 
   // empty input field
@@ -321,12 +326,14 @@ $list-box-menu-width: rem(300px);
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input--empty
     + .#{$prefix}--list-box__invalid-icon {
-    right: rem(40px); // to account for clear input button outline
+    // to account for clear input button outline
+    right: rem(40px);
   }
 
   // Label for a `list-box__field`
   .#{$prefix}--list-box__label {
     @include type-style('body-short-01');
+
     color: $text-01;
     user-select: none;
     text-overflow: ellipsis;
@@ -358,8 +365,8 @@ $list-box-menu-width: rem(300px);
   // Selection indicator for a `list-box__field`
   .#{$prefix}--list-box__selection {
     position: absolute;
-    right: rem(33px); // to preserve .5rem space between icons according to spec
-    // top/transform used to center the combobox clear selection icon in IE11
+    /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
+    right: rem(33px);
     top: 50%;
     transform: translateY(-50%);
     display: flex;
@@ -376,12 +383,6 @@ $list-box-menu-width: rem(300px);
     }
   }
 
-  // reset multiselect selection counter positioning
-  .#{$prefix}--list-box__selection--multi {
-    top: auto;
-    transform: none;
-  }
-
   .#{$prefix}--list-box__selection > svg {
     fill: $icon-02;
   }
@@ -393,20 +394,23 @@ $list-box-menu-width: rem(300px);
   // Modifier for a selection to show that multiple selections have been made
   .#{$prefix}--list-box__selection--multi {
     @include type-style('label-01');
+
     position: static;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0;
     background-color: $inverse-02;
     height: rem(24px);
     width: auto;
     color: $inverse-01;
     line-height: 0;
     padding: rem(8px);
-    padding-right: rem(2px); // Align with hover circle of X button
+    // Align with hover circle of X button
+    padding-right: rem(2px);
     margin-right: rem(10px);
     border-radius: rem(12px);
+    top: auto;
+    transform: none;
   }
 
   .#{$prefix}--list-box__selection--multi > svg {
@@ -428,7 +432,7 @@ $list-box-menu-width: rem(300px);
     fill: $disabled-02;
 
     &:hover {
-      background-color: unset;
+      background-color: initial;
     }
   }
 
@@ -440,6 +444,7 @@ $list-box-menu-width: rem(300px);
   // Descendant of a `list-box` that displays a list of options to select
   .#{$prefix}--list-box__menu {
     @include box-shadow();
+
     position: absolute;
     left: 0;
     right: 0;
@@ -462,22 +467,26 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
-    max-height: rem(220px); // 40px item height * 5.5 items shown
+    // 40px item height * 5.5 items shown
+    max-height: rem(220px);
   }
 
   .#{$prefix}--list-box--expanded.#{$prefix}--list-box--xl
     .#{$prefix}--list-box__menu {
-    max-height: rem(264px); // 48px item height * 5.5 items shown
+    // 48px item height * 5.5 items shown
+    max-height: rem(264px);
   }
 
   .#{$prefix}--list-box--expanded.#{$prefix}--list-box--sm
     .#{$prefix}--list-box__menu {
-    max-height: rem(176px); // 32px item height * 5.5 items shown
+    // 32px item height * 5.5 items shown
+    max-height: rem(176px);
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control
   .#{$prefix}--list-box__menu-item {
     @include type-style('body-short-01');
+
     height: rem(40px);
     color: $text-02;
     cursor: pointer;
@@ -540,12 +549,13 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item__option {
     @include focus-outline('reset');
+
     display: block;
     height: rem(40px);
     color: $text-02;
     text-decoration: none;
     font-weight: normal;
-    line-height: rem(16px);
+    line-height: 1rem;
     padding: rem(11px) 0;
     margin: 0 $carbon--spacing-05;
     padding-right: $carbon--spacing-06;
@@ -560,6 +570,7 @@ $list-box-menu-width: rem(300px);
 
     &:focus {
       @include focus-outline('outline');
+
       margin: 0;
       padding: rem(11px) rem(16px);
       border-color: transparent;

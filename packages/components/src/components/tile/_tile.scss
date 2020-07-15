@@ -50,18 +50,15 @@
 
   .#{$prefix}--tile--clickable,
   .#{$prefix}--tile--expandable {
+    &:focus {
+      @include focus-outline('outline');
+    }
+
     &:hover,
     &:focus {
       .#{$prefix}--tile__checkmark {
         opacity: 1;
       }
-    }
-  }
-
-  .#{$prefix}--tile--clickable,
-  .#{$prefix}--tile--expandable {
-    &:focus {
-      @include focus-outline('outline');
     }
   }
 
@@ -73,6 +70,7 @@
   .#{$prefix}--tile--clickable {
     @include reset;
     @include type-style('body-short-01');
+
     color: $text-01;
     text-decoration: none;
   }
@@ -132,9 +130,6 @@
     font-size: inherit;
     text-align: left;
     border: 0;
-  }
-
-  .#{$prefix}--tile--expandable {
     overflow: hidden;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }

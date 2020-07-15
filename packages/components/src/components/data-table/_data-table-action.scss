@@ -21,7 +21,9 @@
     display: flex;
     height: $layout-04;
     overflow: hidden;
-    position: relative; //need for batch actions
+
+    // Need for batch actions
+    position: relative;
     width: 100%;
   }
 
@@ -40,7 +42,8 @@
   }
 
   .#{$prefix}--toolbar-content .#{$prefix}--search .#{$prefix}--search-input {
-    background-color: transparent; // For tool bar animation with (esp.) persistent search box
+    // For toolbar animation with (esp.) persistent search box
+    background-color: transparent;
   }
 
   //-------------------------------------------------
@@ -116,7 +119,7 @@
     height: $layout-04;
     width: $layout-04;
 
-    &:before {
+    &::before {
       top: 2px;
       height: calc(100% - 4px);
       background-color: $hover-ui;
@@ -155,6 +158,7 @@
     .#{$prefix}--search
     .#{$prefix}--search-input:focus {
     @include focus-outline('outline');
+
     box-shadow: inset 0 0 0 2px $focus;
   }
 
@@ -200,7 +204,7 @@
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
     .#{$prefix}--search-close:hover {
-    border: none; //to-do: is there a spec for close button on hover?
+    border: none;
     background-color: transparent;
   }
 
@@ -214,6 +218,7 @@
   //-------------------------------------------------
   .#{$prefix}--overflow-menu.#{$prefix}--toolbar-action {
     @include button-reset;
+
     display: flex;
     cursor: pointer;
     height: $layout-04;
@@ -225,6 +230,7 @@
   // DEPRECATED prefer .#{$prefix}--overflow-menu.#{$prefix}--toolbar-action instead
   .#{$prefix}--toolbar-action {
     @include button-reset;
+
     display: flex;
     cursor: pointer;
     height: $layout-04;
@@ -391,6 +397,7 @@
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn {
+    min-width: 0;
     color: $text-04;
     padding: $button-padding-ghost;
   }
@@ -406,17 +413,14 @@
   }
 
   .#{$prefix}--batch-download {
-    padding: rem(1px); //makes it smaller to match other icons
+    //makes it smaller to match other icons
+    padding: rem(1px);
   }
 
-  //override btn styles
-  .#{$prefix}--action-list .#{$prefix}--btn--primary:focus::before,
+  // Override btn styles
   .#{$prefix}--action-list .#{$prefix}--btn--primary:focus::before,
   .#{$prefix}--action-list .#{$prefix}--btn--primary::before,
-  .#{$prefix}--action-list .#{$prefix}--btn--primary::before,
   .#{$prefix}--action-list .#{$prefix}--btn--primary:focus::after,
-  .#{$prefix}--action-list .#{$prefix}--btn--primary:focus::after,
-  .#{$prefix}--action-list .#{$prefix}--btn--primary::after,
   .#{$prefix}--action-list .#{$prefix}--btn--primary::after {
     display: none;
   }
@@ -424,10 +428,6 @@
   .#{$prefix}--action-list .#{$prefix}--btn--primary:focus {
     outline: 2px solid $ui-01;
     outline-offset: rem(-2px);
-  }
-
-  .#{$prefix}--action-list .#{$prefix}--btn {
-    min-width: 0;
   }
 
   // cancel btn pseudo element
@@ -444,7 +444,8 @@
     display: block;
     position: absolute;
     opacity: 1;
-    top: rem(15px); //visually 16px spacing is 1px too low
+    //visually 16px spacing is 1px too low
+    top: rem(15px);
     left: 0;
     height: $layout-01;
     width: rem(1px);
@@ -547,6 +548,7 @@
       .#{$prefix}--search
       .#{$prefix}--search-input:focus {
       @include focus-outline('outline');
+
       background: $hover-field;
     }
 
@@ -569,6 +571,7 @@
       .#{$prefix}--search
       .#{$prefix}--search-magnifier:hover {
       @include focus-outline('reset');
+
       background: transparent;
     }
   }

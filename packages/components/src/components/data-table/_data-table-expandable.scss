@@ -63,6 +63,7 @@
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
+    transition: all $duration--fast-02 motion(standard, productive);
     border-bottom: 1px solid $ui-03;
   }
 
@@ -87,7 +88,8 @@
   }
 
   .#{$prefix}--parent-row.#{$prefix}--expandable-row > td:first-of-type {
-    box-shadow: none; // first td doesn't have a visible border
+    // First td doesn't have a visible border
+    box-shadow: none;
   }
 
   //----------------------------------------------------------------------------
@@ -98,10 +100,6 @@
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row {
     transition: height $duration--moderate-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
-  }
-
-  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
-    transition: all $duration--fast-02 motion(standard, productive);
   }
 
   // hovering on collapsed parent
@@ -120,10 +118,11 @@
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
-    border-bottom: 1px solid $hover-ui; // first td doesn't have a visible border
+    // First td doesn't have a visible border
+    border-bottom: 1px solid $hover-ui;
   }
 
-  // child row when hovering on expanded parent
+  // Child row when hovering on expanded parent
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
     + tr[data-child-row]
     td {
@@ -151,7 +150,8 @@
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td:first-of-type {
-    border-bottom: 1px solid transparent; // first parent td doesnt have visible bottom border
+    // First parent td doesnt have visible bottom border
+    border-bottom: 1px solid transparent;
   }
 
   //----------------------------------------------------------------------------
@@ -187,6 +187,7 @@
 
   .#{$prefix}--table-expand__button {
     @include button-reset('false');
+
     height: rem(16px);
     vertical-align: inherit;
   }
@@ -196,7 +197,7 @@
   }
 
   .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
-    box-shadow: inset 0px 0px 0px 1px $focus;
+    box-shadow: inset 0 0 0 1px $focus;
   }
 
   .#{$prefix}--table-expand__svg {
@@ -281,7 +282,7 @@
   //----------------------------------------------------------------------------
   // Selected
   //----------------------------------------------------------------------------
-  // parent collapsed
+  // Parent collapsed
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:first-of-type td {
     background: $selected-ui;
     border-top: 1px solid $active-ui;
@@ -302,7 +303,7 @@
     box-shadow: 0 1px $ui-03;
   }
 
-  // parent collapsed hover
+  // Parent collapsed hover
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(.#{$prefix}--expandable-row):hover
     td {
     background: $hover-selected-ui;
@@ -311,16 +312,17 @@
     box-shadow: 0 1px $hover-selected-ui;
   }
 
-  // parent expanded
+  // Parent expanded
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
     td,
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
     td:first-of-type {
     border-bottom: 1px solid transparent;
-    box-shadow: 0 1px $selected-ui; //no visible border when expanded
+    // No visible border when expanded
+    box-shadow: 0 1px $selected-ui;
   }
 
-  // parent expanded hover
+  // Parent expanded hover
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
     td,
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
@@ -335,7 +337,7 @@
     box-shadow: 0 1px $hover-selected-ui;
   }
 
-  // child row expanded
+  // Child row expanded
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
     + tr[data-child-row]
     td {
@@ -353,7 +355,7 @@
     padding-bottom: rem(24px);
   }
 
-  // child row expanded hover
+  // Child row expanded hover
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
     + tr[data-child-row]
     td,

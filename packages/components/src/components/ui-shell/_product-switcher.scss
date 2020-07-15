@@ -94,10 +94,10 @@
   }
 
   .#{$prefix}--product-switcher__back-btn {
-    display: flex;
-    align-items: center;
     @include type-style('body-short-01');
 
+    display: flex;
+    align-items: center;
     padding: mini-units(1) mini-units(2);
   }
 

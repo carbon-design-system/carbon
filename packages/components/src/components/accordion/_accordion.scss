@@ -35,6 +35,7 @@
 
   .#{$prefix}--accordion__heading {
     @include button-reset;
+
     color: $text-01;
     display: flex;
     align-items: flex-start;
@@ -66,7 +67,7 @@
       outline: none;
     }
 
-    &:focus:before {
+    &:focus::before {
       @include focus-outline('outline-compat');
     }
   }
@@ -156,7 +157,7 @@
     }
 
     .#{$prefix}--accordion__arrow {
-      /*rtl:ignore*/
+      /* rtl:ignore */
       transform: rotate(-90deg);
       fill: $ui-05;
     }
