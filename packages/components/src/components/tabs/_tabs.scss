@@ -60,17 +60,17 @@
   .#{$prefix}--tabs__overflow-indicator--right {
     z-index: 1;
     flex: 1 0 auto;
-    width: $carbon--spacing-05;
+    width: $carbon--spacing-03;
   }
 
   .#{$prefix}--tabs__overflow-indicator--left {
     background-image: linear-gradient(to left, transparent, $ui-background);
-    margin-right: -$carbon--spacing-05;
+    margin-right: -$carbon--spacing-03;
   }
 
   .#{$prefix}--tabs__overflow-indicator--right {
     background-image: linear-gradient(to right, transparent, $ui-background);
-    margin-left: -$carbon--spacing-05;
+    margin-left: -$carbon--spacing-03;
   }
 
   .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--left {
