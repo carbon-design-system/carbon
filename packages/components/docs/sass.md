@@ -14056,7 +14056,7 @@ Button base styles
   justify-content: space-between;
   vertical-align: top;
   flex-shrink: 0;
-  min-height: rem($button-height);
+  min-height: $button-height;
   padding: $button-padding;
   border-radius: $button-border-radius;
   text-align: left;
