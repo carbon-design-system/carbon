@@ -274,6 +274,7 @@ export default class Tabs extends React.Component {
         (direction === -1 && !scrollLeft)
       ) {
         clearInterval(this.overflowNavInterval);
+        this.getTabAt(this.state.selected)?.tabAnchor.focus();
       }
 
       // account for overflow button appearing and causing tablist width change
@@ -281,7 +282,10 @@ export default class Tabs extends React.Component {
     });
   };
 
-  handleOverflowNavMouseUp = () => clearInterval(this.overflowNavInterval);
+  handleOverflowNavMouseUp = () => {
+    clearInterval(this.overflowNavInterval);
+    this.getTabAt(this.state.selected)?.tabAnchor.focus();
+  };
 
   render() {
     const {
