@@ -107,8 +107,20 @@
     background-color: $decorative-01;
   }
 
-  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::before,
-  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn:focus::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn:focus
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn:hover::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn:hover
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher--selected::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher--selected
     + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher-btn:focus::before,
   .#{$prefix}--content-switcher-btn:focus
