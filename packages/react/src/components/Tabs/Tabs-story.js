@@ -34,18 +34,10 @@ const props = {
     className: 'some-class',
     light: boolean('Light variant (light)', false),
     selected: number('The index of the selected tab (selected in <Tabs>)', 1),
-    triggerHref: text(
-      'The href of trigger button for narrow mode (triggerHref in <Tabs>)',
-      '#'
-    ),
     role: text('ARIA role (role in <Tabs>)', 'navigation'),
-    iconDescription: text(
-      'The description of the trigger icon for narrow mode (iconDescription in <Tabs>)',
-      'show menu options'
-    ),
-    // Disabling action logger for `<Tabs onClick>` for now given it seems to be significantly slowing down Storybook
+    // Disabling action logger for `<Tabs onClick onKeyDown>` for now given it seems to be significantly slowing down Storybook
     // onClick: action('onClick'),
-    onKeyDown: action('onKeyDown'),
+    // onKeyDown: action('onKeyDown'),
     onSelectionChange: action('onSelectionChange'),
     tabContentClassName: text(
       'The className for the child `<TabContent>` components',
