@@ -201,7 +201,7 @@ export default class Tabs extends React.Component {
       event.type === 'click'
     ) {
       const currentScrollLeft = this.state.tablistScrollLeft;
-      tab?.tabAnchor.scrollIntoView({ inline: 'nearest' });
+      tab?.tabAnchor?.scrollIntoView({ inline: 'nearest' });
       const newScrollLeft = this.tablist.current.scrollLeft;
       if (newScrollLeft > currentScrollLeft) {
         this.tablist.current.scrollLeft += this.OVERFLOW_BUTTON_OFFSET;
@@ -254,6 +254,16 @@ export default class Tabs extends React.Component {
 
   overflowNavInterval = null;
 
+  handleOverflowNavClick = (_, { direction, multiplier = 5 }) => {
+    // account for overflow button appearing and causing tablist width change
+    const { scrollLeft } = this.tablist?.current;
+    if (direction === 1 && !scrollLeft) {
+      this.tablist.current.scrollLeft += this.OVERFLOW_BUTTON_OFFSET;
+    }
+
+    this.tablist.current.scrollLeft += direction * multiplier;
+  };
+
   handleOverflowNavMouseDown = (_, { direction }) => {
     this.overflowNavInterval = setInterval(() => {
       const { clientWidth, scrollLeft, scrollWidth } = this.tablist?.current;
@@ -267,11 +277,7 @@ export default class Tabs extends React.Component {
       }
 
       // account for overflow button appearing and causing tablist width change
-      if (direction === 1 && !scrollLeft) {
-        this.tablist.current.scrollLeft += this.OVERFLOW_BUTTON_OFFSET;
-      }
-
-      this.tablist.current.scrollLeft += direction;
+      this.handleOverflowNavClick(_, { direction, multiplier: 1 });
     });
   };
 
@@ -369,6 +375,7 @@ export default class Tabs extends React.Component {
           onScroll={this.handleScroll}>
           <button
             className={classes.leftOverflowButtonClasses}
+            onClick={(_) => this.handleOverflowNavClick(_, { direction: -1 })}
             onMouseDown={(_) =>
               this.handleOverflowNavMouseDown(_, { direction: -1 })
             }
@@ -386,6 +393,7 @@ export default class Tabs extends React.Component {
           )}
           <button
             className={classes.rightOverflowButtonClasses}
+            onClick={(_) => this.handleOverflowNavClick(_, { direction: 1 })}
             onMouseDown={(_) =>
               this.handleOverflowNavMouseDown(_, { direction: 1 })
             }
