@@ -4,10 +4,13 @@ categories:
       - name: Controls
         members:
           - dashboard
+          - dashboard--reference
           - fit-to-screen
           - forward--10
           - forward--30
           - forward--5
+          - next--filled
+          - next--outline
           - open-panel--bottom
           - open-panel--filled--bottom
           - open-panel--filled--left
@@ -26,6 +29,8 @@ categories:
           - play--outline
           - play--outline--filled
           - power
+          - previous--filled
+          - previous--outline
           - recording
           - recording--filled
           - recording--filled--alt
@@ -38,8 +43,16 @@ categories:
           - shrink-screen--filled
           - skip--back
           - skip--back--filled
+          - skip--back--outline
+          - skip--back--outline--filled
+          - skip--back--outline--solid
+          - skip--back--solid--filled
           - skip--forward
           - skip--forward--filled
+          - skip--forward--outline
+          - skip--forward--outline--filled
+          - skip--forward--outline--solid
+          - skip--forward--solid--filled
           - stop
           - stop--filled
           - stop--filled--alt
@@ -85,6 +98,7 @@ categories:
           - eyedropper
           - gradient
           - image
+          - image--reference
           - language
           - link
           - list--boxes
@@ -101,6 +115,8 @@ categories:
           - percentage
           - percentage--filled
           - quotes
+          - reflect--horizontal
+          - reflect--vertical
           - rotate--clockwise
           - rotate--clockwise--alt
           - rotate--clockwise--alt--filled
@@ -191,6 +207,7 @@ categories:
           - arrows
           - arrows--horizontal
           - arrows--vertical
+          - automatic
           - bookmark
           - branch
           - caret--sort
@@ -223,6 +240,8 @@ categories:
           - fade
           - filter
           - filter--edit
+          - filter--remove
+          - filter--reset
           - flag
           - fork
           - image--search
@@ -278,6 +297,7 @@ categories:
           - translate
           - undo
           - upgrade
+          - workspace--import
           - x-axis
           - y-axis
           - z-axis
@@ -421,8 +441,21 @@ categories:
           - 3D-curve--manual
           - 3D-iCa
           - 3D-MPR-Toggle
+          - 3D-print-mesh
           - 3rd-party-connected
           - 3D-software
+          - ai-results
+          - ai-results--high
+          - ai-results--low
+          - ai-results--medium
+          - ai-results--urgent
+          - ai-results--very-high
+          - ai-status
+          - ai-status--complete
+          - ai-status--failed
+          - ai-status--in-progress
+          - ai-status--queued
+          - ai-status--rejected
           - angle
           - annotation-visibility
           - arrow--annotation
@@ -431,8 +464,10 @@ categories:
           - cd--create-archive
           - cd--create-exchange
           - chemistry
+          - chemistry--reference
           - circle-measurement
           - cobb-angle
+          - coronavirus
           - cross-reference
           - cut-in-half
           - denominate
@@ -441,6 +476,9 @@ categories:
           - dna
           - download-study
           - edge-enhancement
+          - edge-enhancement--01
+          - edge-enhancement--02
+          - edge-enhancement--03
           - erase--3D
           - exam-mode
           - fusion-blender
@@ -481,6 +519,7 @@ categories:
           - smoothing
           - smoothing--cursor
           - spine-label
+          - split--discard
           - stacked-move
           - stacked-scrolling--1
           - stacked-scrolling--2
@@ -488,12 +527,14 @@ categories:
           - study--next
           - study--previous
           - study--skip
+          - sub-volume
           - threshold
           - thumbnail-preview
           - text-annotation-toggle
           - window--auto
           - window--base
           - window--overlay
+          - window--preset
           - zoom-pan
       - name: Research
         members:
@@ -582,6 +623,7 @@ categories:
         members:
           - activity
           - analytics
+          - analytics--reference
           - app-connectivity
           - archive
           - blockchain
@@ -602,6 +644,7 @@ categories:
           - chart--line
           - chart--line--data
           - chart--multi-line
+          - chart--multitype
           - chart--network
           - chart--parallel
           - chart--pie
@@ -613,12 +656,15 @@ categories:
           - chart--rose
           - chart--scatter
           - chart--stacked
+          - chart--stepper
           - chart--treemap
           - chart--t-sne
           - chart--venn-diagram
           - circle-packing
           - circle--filled
           - classifier--language
+          - cloud--data-ops
+          - cloud-satellite
           - concept
           - container-software
           - covariate
@@ -635,14 +681,17 @@ categories:
           - data--unstructured
           - data-class
           - data-refinery
+          - data-refinery--reference
           - data-share
           - data-table
+          - data-table--reference
           - data-vis--1
           - data-vis--2
           - data-vis--3
           - data-vis--4
           - datastore
           - diagram
+          - diagram--reference
           - document-sentiment
           - double-integer
           - factor
@@ -650,6 +699,7 @@ categories:
           - flow--connection
           - flow--data
           - flow--stream
+          - flow--stream--reference
           - graphical-data-flow
           - hashtag
           - heat-map
@@ -657,7 +707,6 @@ categories:
           - heat-map--03
           - hybrid-networking
           - improve-relevance
-          - in-progress
           - interactions
           - increase-level
           - join--inner
@@ -667,11 +716,14 @@ categories:
           - managed-solutions
           - math-curve
           - model-builder
+          - model-builder--reference
           - network--1
           - network--2
           - network--3
+          - network--3--reference
           - network--4
           - nominal
+          - object-storage
           - ordinal
           - parent-child
           - phrase-sentiment
@@ -700,6 +752,7 @@ categories:
           - text-link--analysis
           - text-mining
           - text-mining--applier
+          - time-plot
           - tree-view
           - tree-view--alt
           - type-pattern
@@ -752,13 +805,17 @@ categories:
           - document--pdf
           - document--subtract
           - document--tasks
+          - document--unknown
           - document--view
+          - document--word-processor
+          - document--word-processor--reference
           - download
           - DVR
           - export
           - folder
           - folder--add
           - folder--details
+          - folder--details--reference
           - folder--off
           - folder--shared
           - folders
@@ -768,12 +825,15 @@ categories:
           - HD
           - HD--filled
           - HDR
+          - HTML
+          - HTML--reference
           - HTTP
           - ISO
           - ISO--filled
           - ISO--outline
           - JPG
           - JSON
+          - JSON--reference
           - legend
           - list--dropdown
           - model
@@ -790,6 +850,7 @@ categories:
           - panel-expansion
           - paste
           - PDF
+          - PDF--reference
           - playlist
           - PNG
           - policy
@@ -801,7 +862,9 @@ categories:
           - rule
           - scale
           - script
+          - script--reference
           - SDK
+          - security
           - SQL
           - star--review
           - SVG
@@ -813,22 +876,35 @@ categories:
           - TIF
           - TSV
           - TXT
+          - TXT--reference
           - upload
           - WMV
           - workspace
           - XLS
           - XML
           - ZIP
+          - ZIP--reference
       - name: Status
         members:
           - checkmark
           - checkmark--filled
+          - checkmark--filled--error
+          - checkmark--filled--warning
           - checkmark--outline
+          - checkmark--outline--error
+          - checkmark--outline--warning
           - error
           - error--filled
           - error--outline
           - help
           - help--filled
+          - in-progress
+          - in-progress--error
+          - in-progress--warning
+          - incomplete
+          - incomplete--cancel
+          - incomplete--error
+          - incomplete--warning
           - information
           - information--filled
           - information--square
@@ -836,6 +912,9 @@ categories:
           - misuse
           - misuse--alt
           - misuse--outline
+          - pending
+          - pending--filled
+          - queued
           - undefined
           - undefined--filled
           - unknown
@@ -881,6 +960,7 @@ categories:
           - face--dissatisfied--filled
           - face--dizzy
           - face--dizzy--filled
+          - face--mask
           - face--neutral
           - face--neutral--filled
           - face--pending
@@ -889,11 +969,14 @@ categories:
           - face--satisfied--filled
           - face--wink
           - face--wink--filled
+          - gender--female
+          - gender--male
           - group
           - identification
           - partnership
           - person
           - person--favorite
+          - transgender
           - user
           - user--activity
           - user--admin
@@ -1111,6 +1194,7 @@ categories:
           - cloud--download
           - cloud--upload
           - code
+          - code--reference
           - connection-signal
           - debug
           - development

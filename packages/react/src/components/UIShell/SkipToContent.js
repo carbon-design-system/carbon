@@ -28,6 +28,8 @@ const SkipToContent = ({
 };
 
 SkipToContent.propTypes = {
+  className: PropTypes.string,
+
   /**
    * Provide text to display in the SkipToContent `a` tag
    */

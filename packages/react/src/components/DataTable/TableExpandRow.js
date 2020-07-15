@@ -72,6 +72,11 @@ TableExpandRow.propTypes = {
   isExpanded: PropTypes.bool.isRequired,
 
   /**
+   * Specify if the row is selected
+   */
+  isSelected: PropTypes.bool,
+
+  /**
    * Hook for when a listener initiates a request to expand the given row
    */
   onExpand: PropTypes.func.isRequired,

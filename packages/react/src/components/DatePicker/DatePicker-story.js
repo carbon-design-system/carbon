@@ -103,7 +103,10 @@ storiesOf('DatePicker', module)
           'The date format (dateFormat in <DatePicker>)',
           'm/d/Y'
         )}>
-        <DatePickerInput {...props.datePickerInput()} />
+        <DatePickerInput
+          openCalendar={() => console.log('click')}
+          {...props.datePickerInput()}
+        />
       </DatePicker>
     ),
     {

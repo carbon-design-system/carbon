@@ -33,6 +33,11 @@ class Toggle extends React.Component {
     onToggle: PropTypes.func,
 
     /**
+     * Provide an optional hook that is called when the control is changed
+     */
+    onChange: PropTypes.func,
+
+    /**
      * Provide an id that unique represents the underlying <input>
      */
     id: PropTypes.string.isRequired,

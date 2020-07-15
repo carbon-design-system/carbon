@@ -19,7 +19,7 @@ $carbon--grid-gutter: carbon--rem(32px);
 /// @type Number
 /// @access public
 /// @group @carbon/layout
-$carbon--grid-gutter--condensed: carbon--rem(2px);
+$carbon--grid-gutter--condensed: carbon--rem(1px);
 
 // Initial map of our breakpoints and their values
 /// @type Map
@@ -125,7 +125,7 @@ $carbon--grid-breakpoints: (
   @return '-#{$name}';
 }
 
-/// Generate a media query up to the width of the given breakpoint name
+/// Generate a media query from the width of the given breakpoint to infinity
 /// @param {String | Number} $name
 /// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
 /// @content

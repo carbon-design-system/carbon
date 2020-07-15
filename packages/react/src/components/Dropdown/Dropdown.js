@@ -44,8 +44,10 @@ function Dropdown({
   invalidText,
   initialSelectedItem,
   selectedItem: controlledSelectedItem,
+  downshiftProps,
 }) {
   const selectProps = {
+    ...downshiftProps,
     items,
     itemToString,
     initialSelectedItem,
@@ -125,12 +127,12 @@ function Dropdown({
         invalid={invalid}
         invalidText={invalidText}
         light={light}
-        isOpen={isOpen}>
+        isOpen={isOpen}
+        id={id}>
         {invalid && (
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
         )}
         <button
-          id={id}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
@@ -178,6 +180,11 @@ Dropdown.propTypes = {
    * Disable the control
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Provide a custom className to be applied on the bx--dropdown node
+   */
+  className: PropTypes.string,
 
   /**
    * We try to stay as generic as possible here to allow individuals to pass
@@ -285,6 +292,11 @@ Dropdown.propTypes = {
    * Specify the direction of the dropdown. Can be either top or bottom.
    */
   direction: PropTypes.oneOf(['top', 'bottom']),
+
+  /**
+   * Additional props passed to Downshift
+   */
+  downshiftProps: PropTypes.object,
 };
 
 Dropdown.defaultProps = {

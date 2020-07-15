@@ -33,6 +33,7 @@ const TextInput = React.forwardRef(function TextInput(
     helperText,
     light,
     size,
+    inline,
     ...other
   },
   ref
@@ -69,15 +70,25 @@ const TextInput = React.forwardRef(function TextInput(
     `${prefix}--text-input-wrapper`,
     {
       [`${prefix}--text-input-wrapper--light`]: light,
+      [`${prefix}--text-input-wrapper--inline`]: inline,
     }
   );
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: other.disabled,
+    [`${prefix}--label--inline`]: inline,
+    [`${prefix}--label--inline--${size}`]: inline && !!size,
   });
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
+    [`${prefix}--form__helper-text--inline`]: inline,
   });
+  const fieldOuterWrapperClasses = classNames(
+    `${prefix}--text-input__field-outer-wrapper`,
+    {
+      [`${prefix}--text-input__field-outer-wrapper--inline`]: inline,
+    }
+  );
   const label = labelText ? (
     <label htmlFor={id} className={labelClasses}>
       {labelText}
@@ -116,26 +127,37 @@ const TextInput = React.forwardRef(function TextInput(
 
   return (
     <div className={inputWrapperClasses}>
-      {label}
-      <div
-        className={`${prefix}--text-input__field-wrapper`}
-        data-invalid={invalid || null}
-        data-warn={warn || null}>
-        {invalid && (
-          <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
-        )}
-        {!invalid && warn && (
-          <WarningFilled16
-            className={`${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`}
-          />
-        )}
-        {input}
-        {isFluid && <hr className={`${prefix}--text-input__divider`} />}
-        {/* <hr className={`${prefix}--text-input__divider`} /> */}
-        {isFluid ? error : null}
+      {!inline ? (
+        label
+      ) : (
+        <div className={`${prefix}--text-input__label-helper-wrapper`}>
+          {label}
+          {!isFluid && helper}
+        </div>
+      )}
+      <div className={fieldOuterWrapperClasses}>
+        <div
+          className={`${prefix}--text-input__field-wrapper`}
+          data-invalid={invalid || null}
+          data-warn={warn || null}>
+          {invalid && (
+            <WarningFilled16
+              className={`${prefix}--text-input__invalid-icon`}
+            />
+          )}
+          {!invalid && warn && (
+            <WarningFilled16
+              className={`${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`}
+            />
+          )}
+          {input}
+          {isFluid && <hr className={`${prefix}--text-input__divider`} />}
+          {/* <hr className={`${prefix}--text-input__divider`} /> */}
+          {isFluid && !inline && error}
+        </div>
+        {!isFluid && error}
+        {!invalid && !warn && !isFluid && !inline && helper}
       </div>
-      {isFluid ? null : error}
-      {!invalid && !warn && !isFluid && helper}
     </div>
   );
 });
@@ -235,6 +257,10 @@ TextInput.propTypes = {
    * `true` to use the light version.
    */
   light: PropTypes.bool,
+  /**
+   * `true` to use the inline version.
+   */
+  inline: PropTypes.bool,
 };
 
 TextInput.defaultProps = {
@@ -248,6 +274,7 @@ TextInput.defaultProps = {
   warnText: '',
   helperText: '',
   light: false,
+  inline: false,
 };
 
 export default TextInput;
