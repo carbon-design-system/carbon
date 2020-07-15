@@ -222,9 +222,13 @@ export default class Tabs extends React.Component {
         if (this.props.selectionMode !== 'manual') {
           this.selectTabAt(nextIndex, onSelectionChange);
         }
-        if (tab.tabAnchor) {
-          tab.tabAnchor.focus();
-        }
+        tab.tabAnchor?.focus();
+      }
+      if (tab && match(evt, keys.ArrowLeft)) {
+        tab.tabAnchor.scrollIntoView({ inline: 'start' });
+      }
+      if (tab && match(evt, keys.ArrowRight)) {
+        tab.tabAnchor.scrollIntoView({ inline: 'start' });
       }
     };
   };
