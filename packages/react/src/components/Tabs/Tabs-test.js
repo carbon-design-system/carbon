@@ -14,16 +14,7 @@ import TabsSkeleton from '../Tabs/Tabs.Skeleton';
 
 const { prefix } = settings;
 
-window.matchMedia = jest.fn().mockImplementation((query) => ({
-  matches: true,
-  media: query,
-  onchange: null,
-  addListener: jest.fn(), // deprecated
-  removeListener: jest.fn(), // deprecated
-  addEventListener: jest.fn(),
-  removeEventListener: jest.fn(),
-  dispatchEvent: jest.fn(),
-}));
+Element.prototype.scrollIntoView = jest.fn();
 
 describe('Tabs', () => {
   describe('renders as expected', () => {
