@@ -97,6 +97,8 @@ export default class Tabs extends React.Component {
   };
 
   tablist = React.createRef();
+  // width of the overflow buttons
+  OVERFLOW_BUTTON_OFFSET = 40;
 
   static getDerivedStateFromProps({ selected }, state) {
     const { prevSelected } = state;
@@ -183,7 +185,7 @@ export default class Tabs extends React.Component {
     return (index, evt) => {
       evt.preventDefault();
 
-      this.selectTabAt(index, onSelectionChange);
+      this.selectTabAt(evt, { index, onSelectionChange });
     };
   };
 
@@ -213,27 +215,33 @@ export default class Tabs extends React.Component {
   handleTabKeyDown = (onSelectionChange) => {
     return (index, evt) => {
       if (matches(evt, [keys.Enter, keys.Space])) {
-        this.selectTabAt(index, onSelectionChange);
+        this.selectTabAt(evt, { index, onSelectionChange });
       }
       const nextIndex = this.getNextIndex(index, this.getDirection(evt));
       const tab = this.getTabAt(nextIndex);
       if (tab && matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
         evt.preventDefault();
         if (this.props.selectionMode !== 'manual') {
-          this.selectTabAt(nextIndex, onSelectionChange);
+          this.selectTabAt(evt, { index: nextIndex, onSelectionChange });
         }
         tab.tabAnchor?.focus();
-      }
-      if (tab && match(evt, keys.ArrowLeft)) {
-        tab.tabAnchor.scrollIntoView({ inline: 'start' });
-      }
-      if (tab && match(evt, keys.ArrowRight)) {
-        tab.tabAnchor.scrollIntoView({ inline: 'start' });
       }
     };
   };
 
-  selectTabAt = (index, onSelectionChange) => {
+  selectTabAt = (event, { index, onSelectionChange }) => {
+    const tab = this.getTabAt(index);
+    if (
+      matches(event, [keys.ArrowLeft, keys.ArrowRight]) ||
+      event.type === 'click'
+    ) {
+      const currentScrollLeft = this.state.tablistScrollLeft;
+      tab?.tabAnchor.scrollIntoView({ inline: 'nearest' });
+      const newScrollLeft = this.tablist.current.scrollLeft;
+      if (newScrollLeft > currentScrollLeft) {
+        this.tablist.current.scrollLeft += this.OVERFLOW_BUTTON_OFFSET;
+      }
+    }
     if (this.state.selected !== index) {
       this.setState({
         selected: index,
@@ -257,18 +265,22 @@ export default class Tabs extends React.Component {
     } = this.tablist.current;
     const tablistRightBound = tablistLeftBound + tablistClientWidth;
     const selectedTabRightBound = selectedTabLeftBound + selectedTabClientWidth;
-    const OVERFLOW_BUTTON_OFFSET = 40;
-    this.selectTabAt(nextIndex, this.props.onSelectionChange);
+    this.selectTabAt(event, {
+      index: nextIndex,
+      onSelectionChange: this.props.onSelectionChange,
+    });
     if (selectedTabLeftBound < tablistLeftBound) {
       this.tablist.current.scrollLeft =
-        selectedTabLeftBound - OVERFLOW_BUTTON_OFFSET;
+        selectedTabLeftBound - this.OVERFLOW_BUTTON_OFFSET;
       if (!this.tablist.current.scrollLeft) {
         tabAnchor.focus();
       }
     }
     if (selectedTabRightBound > tablistRightBound) {
       this.tablist.current.scrollLeft =
-        selectedTabRightBound - tablistClientWidth + OVERFLOW_BUTTON_OFFSET;
+        selectedTabRightBound -
+        tablistClientWidth +
+        this.OVERFLOW_BUTTON_OFFSET;
       if (
         this.tablist.current.scrollLeft >=
         this.state.tablistScrollWidth - tablistClientWidth
