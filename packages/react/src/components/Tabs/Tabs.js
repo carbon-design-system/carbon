@@ -240,46 +240,6 @@ export default class Tabs extends React.Component {
     };
   };
 
-  handleOverflowNavButtonClick = (event, { direction }) => {
-    const nextIndex = this.getNextIndex(this.state.selected, direction);
-    const { tabAnchor } = this.getTabAt(nextIndex);
-    const {
-      offsetLeft: selectedTabLeftBound,
-      clientWidth: selectedTabClientWidth,
-    } = tabAnchor;
-    const {
-      clientWidth: tablistClientWidth,
-      scrollLeft: tablistLeftBound,
-    } = this.tablist.current;
-    const tablistRightBound = tablistLeftBound + tablistClientWidth;
-    const selectedTabRightBound = selectedTabLeftBound + selectedTabClientWidth;
-    this.selectTabAt(event, {
-      index: nextIndex,
-      onSelectionChange: this.props.onSelectionChange,
-    });
-    if (selectedTabLeftBound < tablistLeftBound) {
-      this.tablist.current.scrollLeft =
-        selectedTabLeftBound - this.OVERFLOW_BUTTON_OFFSET;
-      if (!this.tablist.current.scrollLeft) {
-        tabAnchor.focus();
-      }
-    }
-    if (selectedTabRightBound > tablistRightBound) {
-      this.tablist.current.scrollLeft =
-        selectedTabRightBound -
-        tablistClientWidth +
-        this.OVERFLOW_BUTTON_OFFSET;
-      if (
-        this.tablist.current.scrollLeft >=
-        this.state.tablistScrollWidth - tablistClientWidth
-      ) {
-        tabAnchor.focus();
-      }
-    }
-
-    this.handleTabKeyDown(nextIndex, event);
-  };
-
   getTabs = () => React.Children.map(this.props.children, (tab) => tab);
 
   // following functions (handle*) are Props on Tab.js, see Tab.js for parameters
@@ -291,6 +251,31 @@ export default class Tabs extends React.Component {
   setTabAt = (index, tabRef) => {
     this[`tab${index}`] = tabRef;
   };
+
+  overflowNavInterval = null;
+
+  handleOverflowNavMouseDown = (_, { direction }) => {
+    this.overflowNavInterval = setInterval(() => {
+      const { clientWidth, scrollLeft, scrollWidth } = this.tablist?.current;
+
+      // clear interval if scroll reaches left or right edge
+      if (
+        (direction === 1 && scrollLeft + clientWidth >= scrollWidth) ||
+        (direction === -1 && !scrollLeft)
+      ) {
+        clearInterval(this.overflowNavInterval);
+      }
+
+      // account for overflow button appearing and causing tablist width change
+      if (direction === 1 && !scrollLeft) {
+        this.tablist.current.scrollLeft += this.OVERFLOW_BUTTON_OFFSET;
+      }
+
+      this.tablist.current.scrollLeft += direction;
+    });
+  };
+
+  handleOverflowNavMouseUp = () => clearInterval(this.overflowNavInterval);
 
   render() {
     const {
@@ -384,9 +369,10 @@ export default class Tabs extends React.Component {
           onScroll={this.handleScroll}>
           <button
             className={classes.leftOverflowButtonClasses}
-            onClick={(event) =>
-              this.handleOverflowNavButtonClick(event, { direction: -1 })
-            }>
+            onMouseDown={(_) =>
+              this.handleOverflowNavMouseDown(_, { direction: -1 })
+            }
+            onMouseUp={this.handleOverflowNavMouseUp}>
             <ChevronLeft16 />
           </button>
           {!leftOverflowNavButtonHidden && (
@@ -400,9 +386,10 @@ export default class Tabs extends React.Component {
           )}
           <button
             className={classes.rightOverflowButtonClasses}
-            onClick={(event) =>
-              this.handleOverflowNavButtonClick(event, { direction: 1 })
-            }>
+            onMouseDown={(_) =>
+              this.handleOverflowNavMouseDown(_, { direction: 1 })
+            }
+            onMouseUp={this.handleOverflowNavMouseUp}>
             <ChevronRight16 />
           </button>
         </div>
