@@ -212,24 +212,7 @@ export default class Tabs extends React.Component {
     return enabledTabs[nextIndexLooped];
   };
 
-  handleTabKeyDown = (onSelectionChange) => {
-    return (index, evt) => {
-      if (matches(evt, [keys.Enter, keys.Space])) {
-        this.selectTabAt(evt, { index, onSelectionChange });
-      }
-      const nextIndex = this.getNextIndex(index, this.getDirection(evt));
-      const tab = this.getTabAt(nextIndex);
-      if (tab && matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
-        evt.preventDefault();
-        if (this.props.selectionMode !== 'manual') {
-          this.selectTabAt(evt, { index: nextIndex, onSelectionChange });
-        }
-        tab.tabAnchor?.focus();
-      }
-    };
-  };
-
-  selectTabAt = (event, { index, onSelectionChange }) => {
+  scrollTabIntoView = (event, { index }) => {
     const tab = this.getTabAt(index);
     if (
       matches(event, [keys.ArrowLeft, keys.ArrowRight]) ||
@@ -242,6 +225,29 @@ export default class Tabs extends React.Component {
         this.tablist.current.scrollLeft += this.OVERFLOW_BUTTON_OFFSET;
       }
     }
+  };
+
+  handleTabKeyDown = (onSelectionChange) => {
+    return (index, evt) => {
+      if (matches(evt, [keys.Enter, keys.Space])) {
+        this.selectTabAt(evt, { index, onSelectionChange });
+      }
+      const nextIndex = this.getNextIndex(index, this.getDirection(evt));
+      const tab = this.getTabAt(nextIndex);
+      if (matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
+        evt.preventDefault();
+        if (this.props.selectionMode !== 'manual') {
+          this.selectTabAt(evt, { index: nextIndex, onSelectionChange });
+        } else {
+          this.scrollTabIntoView(evt, { index: nextIndex });
+        }
+        tab?.tabAnchor?.focus();
+      }
+    };
+  };
+
+  selectTabAt = (event, { index, onSelectionChange }) => {
+    this.scrollTabIntoView(event, { index });
     if (this.state.selected !== index) {
       this.setState({
         selected: index,
