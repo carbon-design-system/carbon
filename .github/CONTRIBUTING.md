@@ -20,9 +20,8 @@ contributing environment. Please take a look at our
 Before contributing to Carbon, you should make sure you have the following tools
 installed:
 
-- [Node.js](https://nodejs.org/en/download/) v10 or above here or follow their
-  installation through a package manager
-  [here](https://nodejs.org/en/download/package-manager/))
+- [Node.js](https://nodejs.org/en/download/) Download the version defined in `package.json` in the `engines` property. You can also install Node.js through a package manager
+  [here](https://nodejs.org/en/download/package-manager/)).
   - If you're on macOS, we recommend using
     [`nvm`](https://github.com/nvm-sh/nvm) to help manage different versions of
     Node.js [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md) as your
