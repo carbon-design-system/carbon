@@ -15034,7 +15034,7 @@ Content switcher styles
     border-bottom-right-radius: rem(4px);
   }
 
-  .#{$prefix}--content-switcher-btn:not(:first-of-type)::before {
+  .#{$prefix}--content-switcher-btn::before {
     content: '';
     display: block;
     height: rem(16px);
@@ -15045,19 +15045,38 @@ Content switcher styles
     left: 0;
   }
 
+  .#{$prefix}--content-switcher-btn:first-of-type::before {
+    display: none;
+  }
+
   .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher-btn:not(:first-of-type)::before {
+    .#{$prefix}--content-switcher-btn::before {
     background-color: $decorative-01;
   }
 
-  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::before,
-  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn:focus::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn:focus
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn:hover::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn:hover
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher--selected::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher--selected
     + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher-btn:focus::before,
   .#{$prefix}--content-switcher-btn:focus
     + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher-btn:hover::before,
   .#{$prefix}--content-switcher-btn:hover
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--selected::before,
+  .#{$prefix}--content-switcher--selected
     + .#{$prefix}--content-switcher-btn::before {
     background-color: transparent;
   }
