@@ -70,7 +70,9 @@ const TableHeader = React.forwardRef(function TableHeader(
         scope={scope}
         colSpan={colSpan}
         ref={ref}>
-        <div className={`${prefix}--table-header-label`}>{children}</div>
+        {children ? (
+          <div className={`${prefix}--table-header-label`}>{children}</div>
+        ) : null}
       </th>
     );
   }

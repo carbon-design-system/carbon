@@ -575,7 +575,7 @@
     }
 
     &:not(.#{$prefix}--data-table--compact):not(.#{$prefix}--data-table--tall):not(.#{$prefix}--data-table--short)
-      td {
+      td:not(.#{$prefix}--table-column-menu) {
       padding-top: rem(14px);
     }
 
@@ -587,8 +587,33 @@
       border-top: 1px solid $hover-ui;
     }
 
+    tr.#{$prefix}--expandable-row:last-of-type {
+      overflow: hidden;
+    }
+
     tr.#{$prefix}--data-table--selected:first-of-type td {
       border-top: none;
+    }
+
+    // Selectable fix
+    th.#{$prefix}--table-column-checkbox {
+      align-items: center;
+      width: rem(48px);
+    }
+
+    // Overflow fix
+    /* When using sticky header, with a selection element in the first column, we need to set the last item to a fixed width to match the table body. We only want this to happen when the last table header does not have any text */
+    th.#{$prefix}--table-column-checkbox ~ th:last-of-type:empty {
+      max-width: rem(64px);
+    }
+
+    th:empty {
+      max-width: rem(48px);
+    }
+
+    td.#{$prefix}--table-column-menu {
+      padding-top: 0;
+      align-items: center;
     }
 
     //hides webkit scrollbar
