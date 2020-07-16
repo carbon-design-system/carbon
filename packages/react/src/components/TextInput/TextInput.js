@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { WarningFilled16 } from '@carbon/icons-react';
+import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-react';
 import PasswordInput from './PasswordInput';
 import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';
@@ -146,7 +146,7 @@ const TextInput = React.forwardRef(function TextInput(
             />
           )}
           {!invalid && warn && (
-            <WarningFilled16
+            <WarningAltFilled16
               className={`${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`}
             />
           )}
