@@ -155,7 +155,6 @@ export class SideNavMenu extends React.Component {
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
       <li className={className} onKeyDown={this.handleKeyDown}>
         <button
-          aria-haspopup="true"
           aria-expanded={isExpanded}
           className={`${prefix}--side-nav__submenu`}
           onClick={this.handleToggleExpand}
