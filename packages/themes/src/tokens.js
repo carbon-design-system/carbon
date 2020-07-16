@@ -97,6 +97,8 @@ const colors = [
 
   'decorative01',
 
+  'hoverLightUI',
+
   'skeleton01',
   'skeleton02',
 
@@ -230,6 +232,7 @@ export const unstable__meta = {
         'active01',
         'hoverField',
         'decorative01',
+        'hoverLightUI',
       ],
     },
   ],
