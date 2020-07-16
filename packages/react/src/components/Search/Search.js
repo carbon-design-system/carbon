@@ -51,7 +51,7 @@ export default class Search extends Component {
     placeHolderText: PropTypes.string,
 
     /**
-     * Provide an optional label text for the Search icon
+     * Provide the label text for the Search icon
      */
     labelText: PropTypes.node.isRequired,
 
@@ -79,6 +79,11 @@ export default class Search extends Component {
      * Optionally provide the default value of the <input>
      */
     defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+    /**
+     * Optional callback called when the search value changes.
+     */
+    onChange: PropTypes.func,
   };
 
   static defaultProps = {

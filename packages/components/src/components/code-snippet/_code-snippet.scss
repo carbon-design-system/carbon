@@ -55,12 +55,14 @@
 
     &::before {
       @include tooltip--caret;
+
       display: none;
     }
 
     .#{$prefix}--copy-btn__feedback {
-      box-sizing: content-box;
       @include tooltip--content('icon');
+
+      box-sizing: content-box;
       clip: auto;
       margin: auto;
       overflow: visible;
@@ -95,6 +97,7 @@
   // Single Line Snippet
   .#{$prefix}--snippet--single {
     @include bx--snippet;
+
     border: none;
     max-width: rem(760px);
     min-width: rem(320px);
@@ -117,8 +120,9 @@
   }
 
   .#{$prefix}--snippet--single pre {
-    white-space: nowrap;
     @include type-style('code-01');
+
+    white-space: nowrap;
     padding-right: $spacing-03;
   }
 
@@ -137,6 +141,7 @@
   // Multi Line Snippet
   .#{$prefix}--snippet--multi {
     @include bx--snippet;
+
     border: none;
     padding: $carbon--spacing-05;
     min-width: rem(320px);
@@ -200,6 +205,7 @@
 
   .#{$prefix}--snippet-button {
     @include reset;
+
     cursor: pointer;
     position: absolute;
     top: 0;
@@ -217,6 +223,7 @@
 
     &:focus {
       @include focus-outline('outline');
+
       outline-color: $focus;
     }
   }
@@ -238,7 +245,9 @@
 
   .#{$prefix}--btn--copy__feedback {
     @include type-style('body-short-01');
-    @include carbon--font-family('sans'); // Override one in code snippet
+    // Override one in code snippet
+    @include carbon--font-family('sans');
+
     z-index: z('overlay');
     font-weight: 400;
     left: inherit;
@@ -260,15 +269,16 @@
     position: absolute;
     top: 0;
     right: 0;
-    @include carbon--font-family(
-      'sans'
-    ); // Override inherited rule in code snippet
+
+    // Override inherited rule in code snippet
+    @include carbon--font-family('sans');
   }
 
   // Show more / less button
   button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
     @include type-style('body-short-01');
     @include carbon--font-family('sans');
+
     border: 0;
     display: inline-flex;
     align-items: center;
@@ -310,6 +320,7 @@
 
   .#{$prefix}--snippet-btn--expand:focus {
     @include focus-outline('outline');
+
     border-color: transparent;
   }
 
@@ -361,15 +372,15 @@
 
   .#{$prefix}--snippet.#{$prefix}--skeleton code {
     @include skeleton;
+
     width: 100%;
     height: 1rem;
     display: block;
   }
 
   .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
-    top: rem(
-      50.8px
-    ); // (The height of button) + (The height of the tooltip's triangle) + 4px
+    // (The height of button) + (The height of the tooltip's triangle) + 4px
+    top: rem(50.8px);
     left: 50%;
     right: auto;
 
@@ -377,7 +388,7 @@
       top: 0;
     }
 
-    &:after {
+    &::after {
       top: rem(-4px);
     }
   }
@@ -385,9 +396,8 @@
   .#{$prefix}--snippet--multi
     .#{$prefix}--snippet-button
     .#{$prefix}--btn--copy__feedback {
-    top: rem(
-      42.8px
-    ); // (The height of button) + (The height of the tooltip's triangle) + 4px
+    // (The height of button) + (The height of the tooltip's triangle) + 4px
+    top: rem(42.8px);
   }
 
   .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
@@ -406,12 +416,9 @@
     height: rem(56px);
   }
 
-  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
-    height: 100%;
-  }
-
   .#{$prefix}--snippet.#{$prefix}--skeleton span {
     @include skeleton;
+
     width: 100%;
     height: 1rem;
     display: block;
@@ -433,30 +440,6 @@
   .#{$prefix}--snippet--single.#{$prefix}--skeleton
     .#{$prefix}--snippet-container {
     padding-bottom: 0;
-  }
-
-  .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
-    right: auto;
-  }
-
-  // Skeleton State
-  .#{$prefix}--snippet--code.#{$prefix}--skeleton {
-    height: rem(98px);
-  }
-
-  .#{$prefix}--snippet--terminal.#{$prefix}--skeleton {
-    height: rem(56px);
-  }
-
-  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
-    height: 100%;
-  }
-
-  .#{$prefix}--snippet.#{$prefix}--skeleton code {
-    @include skeleton;
-    width: 100%;
-    height: 1rem;
-    display: block;
   }
 }
 

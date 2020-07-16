@@ -35,6 +35,7 @@
 
     &:focus {
       @include focus-outline;
+
       padding: $spacing-01;
 
       .#{$prefix}--inline-edit-label__icon {

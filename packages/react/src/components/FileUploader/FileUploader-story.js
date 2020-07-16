@@ -116,6 +116,7 @@ const props = {
       'Error body (errorBody)',
       '500kb max file size. Select a new file and try again.'
     ),
+    size: select('FileUploaderItem height (size)', sizes, 'default'),
   }),
   fileUploaderDropContainer: () => ({
     size: select('Filename height (size)', sizes, 'default'),

@@ -22,6 +22,7 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--header-panel {
     @include carbon--motion(exit, productive);
+
     position: fixed;
     top: carbon--mini-units(6);
     bottom: 0;

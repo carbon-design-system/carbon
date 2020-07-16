@@ -2261,6 +2261,7 @@ exports[`DataTable should render 1`] = `
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
+                  onKeyDown={[Function]}
                   tabIndex="0"
                 >
                   <Search
@@ -3250,6 +3251,7 @@ exports[`DataTable sticky header should render 1`] = `
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
+                  onKeyDown={[Function]}
                   tabIndex="0"
                 >
                   <Search

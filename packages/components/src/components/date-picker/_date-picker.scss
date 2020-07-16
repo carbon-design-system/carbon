@@ -162,6 +162,7 @@
   .#{$prefix}--date-picker.#{$prefix}--skeleton input,
   .#{$prefix}--date-picker__input.#{$prefix}--skeleton {
     @include skeleton;
+
     width: 100%;
 
     &::placeholder {
@@ -171,6 +172,7 @@
 
   .#{$prefix}--date-picker.#{$prefix}--skeleton .#{$prefix}--label {
     @include skeleton;
+
     width: rem(75px);
     height: rem(14px);
   }

@@ -49,6 +49,7 @@
   .#{$prefix}--checkbox-label {
     @include reset;
     @include type-style('body-short-01');
+
     line-height: 1.5rem;
     position: relative;
     display: flex;
@@ -59,7 +60,8 @@
   }
 
   .#{$prefix}--checkbox-label-text {
-    padding-left: rem(6px); // Add extra spacing when label is present
+    // Add extra spacing when label is present
+    padding-left: rem(6px);
   }
 
   // Required because `$css--reset: true` cannot currently apply to this `::before` and `::after`
@@ -161,11 +163,6 @@
   // Disabled
   // ---------------------------------------------
 
-  // Workaround for: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11295231
-  [disabled] ~ _ {
-    font-size: inherit;
-  }
-
   .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
   .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true'] {
     cursor: not-allowed;
@@ -191,9 +188,12 @@
 
   .#{$prefix}--checkbox-label-text.#{$prefix}--skeleton {
     @include skeleton;
+
     width: rem(100px);
     height: $spacing-05;
-    margin: auto 0 auto rem(6px); // Add extra spacing when label is present
+
+    // Add extra spacing when label is present
+    margin: auto 0 auto rem(6px);
   }
 }
 

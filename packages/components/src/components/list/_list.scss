@@ -62,14 +62,17 @@
     &::before {
       position: absolute;
       left: -$carbon--spacing-05;
-      content: '\002013'; // – en dash
+      // – en dash
+      content: '\002013';
     }
   }
 
   .#{$prefix}--list--unordered.#{$prefix}--list--nested
     > .#{$prefix}--list__item::before {
-    left: -$carbon--spacing-04; // offset to account for smaller ▪ vs –
-    content: '\0025AA'; // ▪ square
+    // offset to account for smaller ▪ vs –
+    left: -$carbon--spacing-04;
+    // ▪ square
+    content: '\0025AA';
   }
 }
 

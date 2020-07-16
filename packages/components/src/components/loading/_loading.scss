@@ -19,6 +19,7 @@
   .#{$prefix}--loading {
     @include reset;
     @include animation__loading--spin;
+
     width: $loading__size;
     height: $loading__size;
   }

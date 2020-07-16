@@ -75,7 +75,11 @@ export function useSelection({
 
 export default class Selection extends React.Component {
   static propTypes = {
+    children: PropTypes.func,
+    disabled: PropTypes.bool,
     initialSelectedItems: PropTypes.array.isRequired,
+    onChange: PropTypes.func,
+    render: PropTypes.func,
   };
 
   static defaultProps = {

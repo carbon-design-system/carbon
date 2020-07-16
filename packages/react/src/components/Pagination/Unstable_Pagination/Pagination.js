@@ -80,61 +80,55 @@ function Unstable_Pagination({
           </>
         )}
         <span className={`${namespace}__text`}>
-          <>
-            {totalItems &&
-              !pagesUnknown &&
-              itemRangeText(
-                Math.min(currentPageSize * (currentPage - 1) + 1, totalItems),
-                Math.min(currentPage * currentPageSize, totalItems),
-                totalItems
-              )}
+          {totalItems &&
+            !pagesUnknown &&
+            itemRangeText(
+              Math.min(currentPageSize * (currentPage - 1) + 1, totalItems),
+              Math.min(currentPage * currentPageSize, totalItems),
+              totalItems
+            )}
 
-            {totalItems &&
-              pagesUnknown &&
-              itemText(
-                currentPageSize * (currentPage - 1) + 1,
-                currentPage * currentPageSize
-              )}
+          {totalItems &&
+            pagesUnknown &&
+            itemText(
+              currentPageSize * (currentPage - 1) + 1,
+              currentPage * currentPageSize
+            )}
 
-            {!totalItems &&
-              itemText(
-                currentPageSize * (currentPage - 1) + 1,
-                currentPage * currentPageSize
-              )}
-          </>
+          {!totalItems &&
+            itemText(
+              currentPageSize * (currentPage - 1) + 1,
+              currentPage * currentPageSize
+            )}
         </span>
       </div>
       <div className={`${namespace}__right`}>
-        <>
-          {children &&
-            totalItems &&
-            children({
-              currentPage,
-              currentPageSize,
-              onSetPage,
-              totalPages,
-            })}
+        {children &&
+          totalItems &&
+          children({
+            currentPage,
+            currentPageSize,
+            onSetPage,
+            totalPages,
+          })}
 
-          {children && totalItems && !pagesUnknown && (
-            <span className={`${namespace}__text`}>
-              {pageRangeText('', totalPages)}
-            </span>
-          )}
+        {children && totalItems && !pagesUnknown && (
+          <span className={`${namespace}__text`}>
+            {pageRangeText('', totalPages)}
+          </span>
+        )}
 
-          {children && !totalItems && (
-            <span className={`${namespace}__text`}>
-              {pageText(currentPage)}
-            </span>
-          )}
+        {children && !totalItems && (
+          <span className={`${namespace}__text`}>{pageText(currentPage)}</span>
+        )}
 
-          {!children && (
-            <span className={`${namespace}__text`}>
-              {!totalItems
-                ? pageText(currentPage)
-                : pageRangeText(currentPage, totalPages)}
-            </span>
-          )}
-        </>
+        {!children && (
+          <span className={`${namespace}__text`}>
+            {!totalItems
+              ? pageText(currentPage)
+              : pageRangeText(currentPage, totalPages)}
+          </span>
+        )}
         <Button
           className={classnames(
             `${namespace}__button`,

@@ -21,7 +21,9 @@ const ControlledPasswordInput = React.forwardRef(
       invalidText,
       helperText,
       light,
+      // eslint-disable-next-line react/prop-types
       type = 'password',
+      // eslint-disable-next-line react/prop-types
       togglePasswordVisibility,
       tooltipPosition = 'bottom',
       tooltipAlignment = 'center',
