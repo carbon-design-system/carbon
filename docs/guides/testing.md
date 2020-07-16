@@ -86,6 +86,8 @@ describe('ComponentName', () => {
 
 #### The component calls a function passed in as a prop
 
+#### The component has translation ids for globalization
+
 ### Common tasks
 
 | Task                      | Command         |
