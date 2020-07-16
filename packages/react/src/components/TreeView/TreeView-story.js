@@ -34,7 +34,6 @@ const props = () => ({
   selected: object('Array of selected node IDs (selected)', ['5']),
   size: select('Tree size (sizes)', sizes, 'default'),
 });
-
 const nodes = [
   {
     id: '1',
@@ -233,12 +232,16 @@ const nodes = [
     ],
   },
 ];
+
 function renderTree({ nodes, withIcons = false }) {
   if (!nodes) {
     return;
   }
   return nodes.map(({ children, renderIcon, ...nodeProps }) => (
-    <TreeNode renderIcon={withIcons ? renderIcon : null} {...nodeProps}>
+    <TreeNode
+      key={nodeProps.id}
+      renderIcon={withIcons ? renderIcon : null}
+      {...nodeProps}>
       {renderTree({ nodes: children, withIcons })}
     </TreeNode>
   ));
