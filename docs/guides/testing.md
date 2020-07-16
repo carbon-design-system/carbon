@@ -5,6 +5,7 @@
 
 ## Table of Contents
 
+- [Common test-related tasks](#common-test-related-tasks)
 - [React](#react)
   - [Common tests for components](#common-tests-for-components)
     - [The component accepts a `ref`](#the-component-accepts-a-ref)
@@ -12,7 +13,7 @@
     - [The component accepts an `id`](#the-component-accepts-an-id)
     - [The component forwards props](#the-component-forwards-props)
     - [The component calls a function passed in as a prop](#the-component-calls-a-function-passed-in-as-a-prop)
-  - [Common tasks](#common-tasks)
+    - [The component has translation ids for globalization](#the-component-has-translation-ids-for-globalization)
 - [Sass](#sass)
   - [Common tests for styles](#common-tests-for-styles)
     - [Checking that a mixin exists](#checking-that-a-mixin-exists)
@@ -20,6 +21,14 @@
     - [Checking for the value of a variable](#checking-for-the-value-of-a-variable)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Common test-related tasks
+
+| Task                      | Command         |
+| ------------------------- | --------------- |
+| Run the test suite        | `yarn test`     |
+| Update a failing snapshot | `yarn test -u`  |
+| Run end-to-end tests      | `yarn test:e2e` |
 
 ## React
 
@@ -39,7 +48,7 @@ format:
 ```js
 describe('ComponentName', () => {
   // Write tests from the user's perspective at the top-level block. This could
-  // related to selecting items from a dropdown, sorting a table, expanding an
+  // be related to selecting items from a dropdown, sorting a table, expanding an
   // accordion, etc.
   //
   // These tests verify that the component operates as intended for an end-user
@@ -87,14 +96,6 @@ describe('ComponentName', () => {
 #### The component calls a function passed in as a prop
 
 #### The component has translation ids for globalization
-
-### Common tasks
-
-| Task                      | Command         |
-| ------------------------- | --------------- |
-| Run the test suite        | `yarn test`     |
-| Update a failing snapshot | `yarn test -u`  |
-| Run end-to-end tests      | `yarn test:e2e` |
 
 ## Sass
 
