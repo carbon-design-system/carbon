@@ -258,6 +258,11 @@ TreeNode.propTypes = {
   onToggle: PropTypes.func,
 
   /**
+   * Callback function for when any node in the tree is selected
+   */
+  onTreeSelect: PropTypes.func,
+
+  /**
    * Optional prop to allow each node to have an associated icon.
    * Can be a React component class
    */
