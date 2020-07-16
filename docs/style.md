@@ -438,61 +438,6 @@ function unstable_MyComponent() {
 </td></tr>
 </tbody></table>
 
-### Testing
-
-When testing a component in React, we want to focus on several aspects of the
-component including:
-
-- Any automated accessibility checks we can make with tools like `axe` or
-  `accessibility-checker`
-- How we anticipate a user interacting with the component to perform certain
-  actions
-- How we anticipate a developer working with the component to build their UI
-- How we anticipate this component working with other components in the system
-
-As a result, each test for a component should loosely adhere to the following
-format:
-
-```js
-describe('ComponentName', () => {
-  // Write tests from the user's perspective at the top-level block. This could
-  // related to selecting items from a dropdown, sorting a table, expanding an
-  // accordion, etc.
-  //
-  // These tests verify that the component operates as intended for an end-user
-  it('should do X when user does Y', () => {
-    // ...
-  });
-
-  // This block contains tools that we use to run AVT level 1 testing and can
-  // assist in catching common errors when writing markup for components
-  describe('automated accessibility checks', () => {
-    it('should have no axe violations', async () => {
-      // ...
-    });
-
-    it('should have no accessibility-checker violations', async () => {
-      // ...
-    });
-  });
-
-  // This block tests how developers will interact with the component through
-  // its API (typically props). These tests will verify that any changes to the
-  // API of the component adhere to semantic versioning.
-  //
-  // As a result, failling tests here should indicate that we have made a
-  // semver-incompatible change in a component and it would require a major
-  // release to ship the changes
-  describe('Component API', () => {
-    it('should support a custom `className` on the top-level node', () => {
-      // ...
-    });
-  });
-});
-```
-
-#### Common tests for Components
-
 ## Sass
 
 ### Guidelines
