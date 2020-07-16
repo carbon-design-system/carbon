@@ -25,6 +25,7 @@
     @include button-reset;
     @include reset;
     @include focus-outline('reset');
+
     position: relative;
     width: rem(32px);
     height: rem(32px);
@@ -57,6 +58,7 @@
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open
     .#{$prefix}--overflow-menu__trigger {
     @include box-shadow;
+
     background-color: $field-01;
     transition: none;
   }
@@ -76,6 +78,7 @@
   .#{$prefix}--overflow-menu-options {
     @include reset;
     @include box-shadow;
+
     display: none;
     flex-direction: column;
     align-items: flex-start;
@@ -162,6 +165,7 @@
 
   .#{$prefix}--overflow-menu-options__option {
     @include reset;
+
     display: flex;
     background-color: transparent;
     align-items: center;
@@ -189,6 +193,7 @@
   .#{$prefix}--overflow-menu-options__btn {
     @include type-style('body-short-01');
     @include focus-outline('reset');
+
     font-weight: 400;
     width: 100%;
     height: 100%;
@@ -271,6 +276,7 @@
     &:active,
     &:focus {
       @include focus-outline('reset');
+
       background-color: $ui-01;
     }
   }
@@ -284,7 +290,7 @@
   .#{$prefix}--overflow-menu--flip {
     left: -140px;
 
-    &:before {
+    &::before {
       left: 145px;
     }
   }

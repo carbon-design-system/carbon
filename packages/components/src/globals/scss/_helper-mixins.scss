@@ -129,6 +129,7 @@
 /// @group global-helpers
 @mixin button-reset($width: true) {
   @include reset;
+
   display: inline-block;
   background: none;
   appearance: none;
@@ -165,7 +166,7 @@
     cursor: default;
   }
 
-  &:before {
+  &::before {
     content: '';
     width: 0%;
     height: 100%;

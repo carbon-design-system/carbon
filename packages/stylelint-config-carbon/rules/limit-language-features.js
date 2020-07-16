@@ -35,7 +35,7 @@ module.exports = {
 
     // Time
     // Specify the minimum number of milliseconds for time values.
-    'time-min-milliseconds': 100,
+    'time-min-milliseconds': OFF,
 
     // Unit
     // Specify a blacklist of disallowed units.
@@ -49,7 +49,7 @@ module.exports = {
 
     // Value
     // Disallow vendor prefixes for values.
-    'value-no-vendor-prefix': true,
+    'value-no-vendor-prefix': OFF,
 
     // Custom property
     // Specify a pattern for custom properties.
@@ -59,7 +59,7 @@ module.exports = {
     // Specify a blacklist of disallowed properties.
     'property-blacklist': OFF,
     // Disallow vendor prefixes for properties.
-    'property-no-vendor-prefix': true,
+    'property-no-vendor-prefix': OFF,
     // Specify a whitelist of allowed properties.
     'property-whitelist': OFF,
 
@@ -127,7 +127,7 @@ module.exports = {
     // Disallow qualifying a selector by type.
     'selector-no-qualifying-type': OFF,
     // Disallow vendor prefixes for selectors.
-    'selector-no-vendor-prefix': true,
+    'selector-no-vendor-prefix': OFF,
     // Specify a blacklist of disallowed pseudo-class selectors.
     'selector-pseudo-class-blacklist': OFF,
     // Specify a whitelist of allowed pseudo-class selectors.
@@ -170,6 +170,6 @@ module.exports = {
       },
     ],
     // Disallow unknown animations.
-    'no-unknown-animations': true,
+    'no-unknown-animations': OFF,
   },
 };

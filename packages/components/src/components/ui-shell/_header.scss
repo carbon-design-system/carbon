@@ -53,18 +53,6 @@
     display: inline;
   }
 
-  .#{$prefix}--header__action
-    > svg.#{$prefix}--navigation-menu-panel-collapse-icon,
-  .#{$prefix}--header__action--active
-    > svg.#{$prefix}--navigation-menu-panel-expand-icon {
-    display: none;
-  }
-
-  .#{$prefix}--header__action--active
-    > svg.#{$prefix}--navigation-menu-panel-collapse-icon {
-    display: inline;
-  }
-
   .#{$prefix}--header__action:hover {
     background-color: $shell-header-bg-04;
   }
@@ -119,7 +107,7 @@
     text-decoration: none;
     font-weight: 600;
     letter-spacing: 0.1px;
-    line-height: 20px;
+    line-height: 1.25rem;
     user-select: none;
     border: rem(2px) solid transparent;
     transition: border-color $duration--fast-02;
@@ -185,7 +173,7 @@
     font-size: rem(14px);
     font-weight: 400;
     letter-spacing: 0;
-    line-height: rem(18px);
+    line-height: 1.125rem;
     // Reset link styles and make sure the text isn't selectable
     text-decoration: none;
     user-select: none;

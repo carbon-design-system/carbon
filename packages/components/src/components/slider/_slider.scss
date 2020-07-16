@@ -36,6 +36,7 @@
 
   .#{$prefix}--slider__range-label {
     @include type-style('code-02');
+
     color: $text-01;
 
     &:last-of-type {
@@ -92,19 +93,19 @@
     z-index: 3;
 
     &:hover {
-      // 20px / 14px = 1.4285714286
-      transform: translate(-50%, -50%) scale(1.4285714286);
+      // 20px / 14px = 1.4286
+      transform: translate(-50%, -50%) scale(1.4286);
     }
 
     &:focus {
-      // 20px / 14px = 1.4285714286
-      transform: translate(-50%, -50%) scale(1.4285714286);
+      // 20px / 14px = 1.4286
+      transform: translate(-50%, -50%) scale(1.4286);
       box-shadow: inset 0 0 0 2px $interactive-04, inset 0 0 0 3px $ui-01;
       background-color: $interactive-04;
     }
 
     &:active {
-      transform: translate(-50%, -50%) scale(1.4285714286);
+      transform: translate(-50%, -50%) scale(1.4286);
       box-shadow: inset 0 0 0 2px $interactive-04;
     }
   }
@@ -189,6 +190,7 @@
   .#{$prefix}--slider-container.#{$prefix}--skeleton
     .#{$prefix}--slider__range-label {
     @include skeleton;
+
     width: rem(20px);
     height: rem(12px);
   }
