@@ -80,7 +80,7 @@ exports[`TreeView should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M13 21.2L5.4 13.6 4 15 13 24 28 9 26.6 7.5 13 21.2z"
+                  d="M13 24L4 15 5.414 13.586 13 21.171 26.586 7.586 28 9 13 24z"
                 />
               </svg>
             </Icon>
@@ -506,7 +506,7 @@ exports[`TreeView should render with icons 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M13 21.2L5.4 13.6 4 15 13 24 28 9 26.6 7.5 13 21.2z"
+                  d="M13 24L4 15 5.414 13.586 13 21.171 26.586 7.586 28 9 13 24z"
                 />
               </svg>
             </Icon>
