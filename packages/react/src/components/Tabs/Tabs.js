@@ -254,7 +254,7 @@ export default class Tabs extends React.Component {
 
   overflowNavInterval = null;
 
-  handleOverflowNavClick = (_, { direction, multiplier = 5 }) => {
+  handleOverflowNavClick = (_, { direction, multiplier = 25 }) => {
     // account for overflow button appearing and causing tablist width change
     const { scrollLeft } = this.tablist?.current;
     if (direction === 1 && !scrollLeft) {
@@ -278,7 +278,7 @@ export default class Tabs extends React.Component {
       }
 
       // account for overflow button appearing and causing tablist width change
-      this.handleOverflowNavClick(_, { direction, multiplier: 1 });
+      this.handleOverflowNavClick(_, { direction });
     });
   };
 
