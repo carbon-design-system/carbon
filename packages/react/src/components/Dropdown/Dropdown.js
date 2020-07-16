@@ -24,29 +24,32 @@ const defaultItemToString = (item) => {
   return item ? item.label : '';
 };
 
-function Dropdown({
-  className: containerClassName,
-  disabled,
-  direction,
-  items,
-  label,
-  ariaLabel,
-  itemToString,
-  itemToElement,
-  type,
-  size,
-  onChange,
-  id,
-  titleText,
-  helperText,
-  translateWithId,
-  light,
-  invalid,
-  invalidText,
-  initialSelectedItem,
-  selectedItem: controlledSelectedItem,
-  downshiftProps,
-}) {
+const Dropdown = React.forwardRef(function Dropdown(
+  {
+    className: containerClassName,
+    disabled,
+    direction,
+    items,
+    label,
+    ariaLabel,
+    itemToString,
+    itemToElement,
+    type,
+    size,
+    onChange,
+    id,
+    titleText,
+    helperText,
+    translateWithId,
+    light,
+    invalid,
+    invalidText,
+    initialSelectedItem,
+    selectedItem: controlledSelectedItem,
+    downshiftProps,
+  },
+  ref
+) {
   const selectProps = mapDownshiftProps({
     ...downshiftProps,
     items,
@@ -134,6 +137,7 @@ function Dropdown({
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
         )}
         <button
+          ref={ref}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
@@ -174,8 +178,9 @@ function Dropdown({
       {!inline && !invalid && helper}
     </div>
   );
-}
+});
 
+Dropdown.displayName = 'Dropdown';
 Dropdown.propTypes = {
   /**
    * Disable the control
