@@ -10,7 +10,8 @@
   "workspaces": {
     "packages": [
       "packages/*",
-      "actions/*"
+      "actions/*",
+      "config/*"
     ],
     "nohoist": []
   },
