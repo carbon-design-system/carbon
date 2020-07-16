@@ -19,6 +19,10 @@
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
     margin-bottom: $carbon--spacing-02;
+
+    // Spacing to accommodate box-shadow on focus state:
+    padding-top: $carbon--spacing-01;
+    padding-left: $carbon--spacing-01;
   }
 
   // Spacing above collection of checkboxes
