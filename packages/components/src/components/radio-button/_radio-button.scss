@@ -52,11 +52,13 @@
 
   .#{$prefix}--radio-button {
     @include hidden;
+
     visibility: inherit;
   }
 
   .#{$prefix}--radio-button__label {
     @include type-style('body-short-01');
+
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -65,6 +67,7 @@
 
   .#{$prefix}--radio-button__appearance {
     @include reset;
+
     background-color: transparent;
     border-radius: 50%;
     border: $radio-border-width solid $icon-01;
@@ -82,7 +85,7 @@
     justify-content: center;
     border-color: $icon-01;
 
-    &:before {
+    &::before {
       content: '';
       display: inline-block;
       position: relative;
@@ -98,11 +101,6 @@
         background-color: windowText;
       }
     }
-  }
-
-  // Workaround for: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11295231
-  [disabled] ~ _ {
-    font-size: inherit;
   }
 
   .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label {
@@ -135,6 +133,7 @@
   // Skeleton State
   .#{$prefix}--radio-button__label.#{$prefix}--skeleton {
     @include skeleton;
+
     width: rem(100px);
     height: rem(18px);
   }

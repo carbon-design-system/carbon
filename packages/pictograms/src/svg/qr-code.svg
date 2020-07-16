@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+<g id="qr-code">
+	<g id="qr-code_1_">
+		
+			<rect x="12" y="12" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" width="10" height="10"/>
+		<rect x="15" y="15" width="4" height="4"/>
+		
+			<rect x="12" y="26" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" width="10" height="10"/>
+		<rect x="15" y="29" width="4" height="4"/>
+		<rect x="32" y="34" width="2" height="2"/>
+		<rect x="34" y="26" width="2" height="2"/>
+		<rect x="34" y="30" width="2" height="4"/>
+		<rect x="26" y="26" width="4" height="2"/>
+		<rect x="26" y="30" width="2" height="2"/>
+		<rect x="26" y="34" width="2" height="2"/>
+		<polygon points="34,28 30,28 30,32 28,32 28,34 32,34 32,30 34,30 		"/>
+		
+			<rect x="26" y="12" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" width="10" height="10"/>
+		<rect x="29" y="15" width="4" height="4"/>
+	</g>
+</g>
+<g id="Layer_1">
+</g>
+</svg>

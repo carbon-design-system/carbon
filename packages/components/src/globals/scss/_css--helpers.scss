@@ -31,6 +31,7 @@
   .#{$prefix}--body {
     @include reset;
     @include type-style('body-short-01');
+
     color: $text-01;
     background-color: $ui-background;
     line-height: 1;

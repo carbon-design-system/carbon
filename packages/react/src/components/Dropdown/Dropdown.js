@@ -10,8 +10,9 @@ import { useSelect } from 'downshift';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
+import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import { mapDownshiftProps } from '../../tools/createPropAdapter';
 
 const { prefix } = settings;
 
@@ -23,34 +24,39 @@ const defaultItemToString = (item) => {
   return item ? item.label : '';
 };
 
-function Dropdown({
-  className: containerClassName,
-  disabled,
-  direction,
-  items,
-  label,
-  ariaLabel,
-  itemToString,
-  itemToElement,
-  type,
-  size,
-  onChange,
-  id,
-  titleText,
-  helperText,
-  translateWithId,
-  light,
-  invalid,
-  invalidText,
-  initialSelectedItem,
-  selectedItem: controlledSelectedItem,
-}) {
-  const selectProps = {
+const Dropdown = React.forwardRef(function Dropdown(
+  {
+    className: containerClassName,
+    disabled,
+    direction,
+    items,
+    label,
+    ariaLabel,
+    itemToString,
+    itemToElement,
+    type,
+    size,
+    onChange,
+    id,
+    titleText,
+    helperText,
+    translateWithId,
+    light,
+    invalid,
+    invalidText,
+    initialSelectedItem,
+    selectedItem: controlledSelectedItem,
+    downshiftProps,
+  },
+  ref
+) {
+  const selectProps = mapDownshiftProps({
+    ...downshiftProps,
     items,
     itemToString,
     initialSelectedItem,
     onSelectedItemChange,
-  };
+  });
 
   // only set selectedItem if the prop is defined. Setting if it is undefined
   // will overwrite default selected items from useSelect
@@ -125,12 +131,13 @@ function Dropdown({
         invalid={invalid}
         invalidText={invalidText}
         light={light}
-        isOpen={isOpen}>
+        isOpen={isOpen}
+        id={id}>
         {invalid && (
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
         )}
         <button
-          id={id}
+          ref={ref}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
@@ -171,13 +178,19 @@ function Dropdown({
       {!inline && !invalid && helper}
     </div>
   );
-}
+});
 
+Dropdown.displayName = 'Dropdown';
 Dropdown.propTypes = {
   /**
    * Disable the control
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Provide a custom className to be applied on the bx--dropdown node
+   */
+  className: PropTypes.string,
 
   /**
    * We try to stay as generic as possible here to allow individuals to pass
@@ -285,6 +298,11 @@ Dropdown.propTypes = {
    * Specify the direction of the dropdown. Can be either top or bottom.
    */
   direction: PropTypes.oneOf(['top', 'bottom']),
+
+  /**
+   * Additional props passed to Downshift
+   */
+  downshiftProps: PropTypes.object,
 };
 
 Dropdown.defaultProps = {

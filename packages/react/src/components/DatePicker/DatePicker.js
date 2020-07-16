@@ -307,19 +307,6 @@ export default class DatePicker extends Component {
     locale: 'en',
   };
 
-  UNSAFE_componentWillUpdate(nextProps) {
-    if (nextProps.value !== this.props.value) {
-      if (this.cal) {
-        this.cal.setDate(nextProps.value);
-        this.updateClassNames(this.cal);
-      } else {
-        if (this.inputField) {
-          this.inputField.value = nextProps.value;
-        }
-      }
-    }
-  }
-
   componentDidMount() {
     const {
       appendTo,
@@ -392,8 +379,9 @@ export default class DatePicker extends Component {
     dateFormat: prevDateFormat,
     minDate: prevMinDate,
     maxDate: prevMaxDate,
+    value: prevValue,
   }) {
-    const { dateFormat, minDate, maxDate } = this.props;
+    const { dateFormat, minDate, maxDate, value } = this.props;
     if (this.cal) {
       if (prevDateFormat !== dateFormat) {
         this.cal.set({ dateFormat });
@@ -403,6 +391,17 @@ export default class DatePicker extends Component {
       }
       if (prevMaxDate !== maxDate) {
         this.cal.set('maxDate', maxDate);
+      }
+    }
+
+    // Coordinate when the given `value` prop changes. When this happens, we
+    // should update the calendar to the new value.
+    if (prevValue !== value) {
+      if (this.cal) {
+        this.cal.setDate(this.props.value);
+        this.updateClassNames(this.cal);
+      } else if (this.inputField) {
+        this.inputField.value = this.props.value;
       }
     }
   }

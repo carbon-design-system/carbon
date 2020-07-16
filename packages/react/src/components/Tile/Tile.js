@@ -87,6 +87,16 @@ export class ClickableTile extends Component {
      * Don't use this to make tile background color same as container background color.
      */
     light: PropTypes.bool,
+
+    /**
+     * Specify the function to run when the ClickableTile is clicked
+     */
+    handleClick: PropTypes.func,
+
+    /**
+     * Specify the function to run when the ClickableTile is interacted with via a keyboard
+     */
+    handleKeyDown: PropTypes.func,
   };
 
   static defaultProps = {
@@ -124,6 +134,7 @@ export class ClickableTile extends Component {
     }
   };
 
+  // eslint-disable-next-line react/prop-types
   static getDerivedStateFromProps({ clicked }, state) {
     const { prevClicked } = state;
     return prevClicked === clicked
@@ -234,6 +245,16 @@ export class SelectableTile extends Component {
      * Don't use this to make tile background color same as container background color.
      */
     light: PropTypes.bool,
+
+    /**
+     * Specify the function to run when the SelectableTile is clicked
+     */
+    handleClick: PropTypes.func,
+
+    /**
+     * Specify the function to run when the SelectableTile is interacted with via a keyboard
+     */
+    handleKeyDown: PropTypes.func,
   };
 
   static defaultProps = {
@@ -339,6 +360,7 @@ export class SelectableTile extends Component {
           title={title}
           checked={this.state.selected}
         />
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
         <label
           htmlFor={id}
           className={classes}
@@ -405,6 +427,11 @@ export class ExpandableTile extends Component {
      * Don't use this to make tile background color same as container background color.
      */
     light: PropTypes.bool,
+
+    /**
+     * Specify the function to run when the ExpandableTile is clicked
+     */
+    handleClick: PropTypes.func,
   };
 
   static defaultProps = {
@@ -420,6 +447,7 @@ export class ExpandableTile extends Component {
   };
 
   static getDerivedStateFromProps(
+    // eslint-disable-next-line react/prop-types
     { expanded, tileMaxHeight, tilePadding },
     state
   ) {

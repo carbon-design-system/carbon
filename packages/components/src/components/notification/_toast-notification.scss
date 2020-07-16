@@ -136,6 +136,7 @@
 
   .#{$prefix}--toast-notification__close-button {
     @include focus-outline('reset');
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -174,6 +175,7 @@
 
   .#{$prefix}--toast-notification__title {
     @include type-style('productive-heading-01');
+
     font-weight: 600;
     margin-top: $carbon--spacing-05;
     word-break: break-word;

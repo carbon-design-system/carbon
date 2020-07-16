@@ -1,0 +1,15 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <polygon points="4 20 4 22 8.586 22 2 28.586 3.414 30 10 23.414 10 28 12 28 12 20 4 20"/>
+  <polygon points="28 14 28 6 26 6 26 16 32 16 32 14 28 14"/>
+  <polygon points="24 6 22 6 20.5 10 19 6 17 6 17 16 19 16 19 9 20.5 13 22 9 22 16 24 16 24 6"/>
+  <polygon points="9 8 11 8 11 16 13 16 13 8 15 8 15 6 9 6 9 8"/>
+  <polygon points="5 6 5 10 2 10 2 6 0 6 0 16 2 16 2 12 5 12 5 16 7 16 7 6 5 6"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>

@@ -31,8 +31,10 @@
     justify-content: center;
     padding: $carbon--spacing-02 $carbon--spacing-03;
     min-height: 1.5rem;
-    max-width: 100%; // restricts size of contained elements
-    min-width: rem(32px); // ensures tag stays pill shaped;
+    // restricts size of contained elements
+    max-width: 100%;
+    // ensures tag stays pill shaped;
+    min-width: rem(32px);
     margin: $carbon--spacing-02;
     border-radius: rem(15px);
     word-break: break-word;
@@ -40,10 +42,6 @@
 
     &:not(:first-child) {
       margin-left: 0;
-    }
-
-    &.#{$prefix}--skeleton {
-      @include tag-theme($bg-color: $ui-03, $text-color: $text-01);
     }
   }
 
@@ -197,6 +195,7 @@
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
     @include skeleton;
+    @include tag-theme($bg-color: $ui-03, $text-color: $text-01);
 
     width: rem(60px);
     overflow: hidden;

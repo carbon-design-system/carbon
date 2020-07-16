@@ -34,6 +34,7 @@
     @include reset;
     @include type-style('body-short-02');
     @include focus-outline('reset');
+
     appearance: none;
     border: none;
     background-color: $field-01;
@@ -82,16 +83,19 @@
 
   .#{$prefix}--search--sm .#{$prefix}--search-input {
     @include type-style('body-short-01');
+
     height: rem(32px);
   }
 
   .#{$prefix}--search--lg .#{$prefix}--search-input {
     @include type-style('body-short-02');
+
     height: rem(40px);
   }
 
   .#{$prefix}--search--xl .#{$prefix}--search-input {
     @include type-style('body-short-02');
+
     height: rem(48px);
     padding: 0 rem(64px) 0 rem(48px);
   }
@@ -118,6 +122,7 @@
   .#{$prefix}--search-close {
     @include button-reset(false);
     @include focus-outline('reset');
+
     position: absolute;
     top: 0;
     right: 0;
@@ -137,6 +142,10 @@
 
     &:hover {
       border-bottom: 1px solid $ui-04;
+
+      &::before {
+        background-color: $hover-field;
+      }
     }
   }
 
@@ -180,13 +189,8 @@
 
     &:active {
       @include focus-outline('outline');
-      background-color: $selected-ui;
-    }
-  }
 
-  .#{$prefix}--search-close:hover {
-    &::before {
-      background-color: $hover-field;
+      background-color: $selected-ui;
     }
   }
 
@@ -234,6 +238,7 @@
   .#{$prefix}--search--lg.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input {
     @include skeleton;
+
     width: 100%;
 
     &::placeholder {

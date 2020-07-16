@@ -116,6 +116,12 @@ ListBoxSelection.propTypes = {
    * clear selection element fires a keydown event
    */
   onKeyDown: PropTypes.func,
+
+  /**
+   * Specify an optional `onClearSelection` handler that is called when the underlying
+   * element is cleared
+   */
+  onClearSelection: PropTypes.func,
 };
 
 ListBoxSelection.defaultProps = {

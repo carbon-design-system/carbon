@@ -90,20 +90,4 @@ describe('ClickListener', () => {
     expect(handleRefSpy).toHaveBeenCalledTimes(1);
     expect(mockRef).toHaveBeenCalledTimes(1);
   });
-
-  it('should not call any string refs on children', () => {
-    class Child extends React.Component {
-      render() {
-        return <div />;
-      }
-    }
-    expect(() => {
-      mount(
-        <ClickListener onClickOutside={onClickOutside}>
-          <Child ref="hi" />
-        </ClickListener>
-      );
-      expect(handleRefSpy).toHaveBeenCalledTimes(1);
-    }).not.toThrow();
-  });
 });
