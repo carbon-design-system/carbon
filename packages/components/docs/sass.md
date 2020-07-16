@@ -24168,7 +24168,6 @@ Time picker styles
   }
 
   .#{$prefix}--time-picker__input-field {
-    @include reset;
     @include focus-outline('reset');
     @include type-style('code-02');
 
