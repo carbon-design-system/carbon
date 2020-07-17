@@ -48,7 +48,7 @@ export default function TreeNode({
     }
   });
   const isActive = active === id;
-  const isSelected = selected.includes(id) || null;
+  const isSelected = selected.includes(id);
   const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
     [`${prefix}--tree-node--active`]: isActive,
     [`${prefix}--tree-node--disabled`]: disabled,
@@ -161,7 +161,7 @@ export default function TreeNode({
 
   const treeNodeProps = {
     ...rest,
-    ['aria-selected']: isSelected,
+    ['aria-selected']: disabled ? null : isSelected,
     ['aria-disabled']: disabled,
     className: treeNodeClasses,
     id,
