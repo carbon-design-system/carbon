@@ -94,16 +94,16 @@ em {
   margin-right: auto;
   margin-left: auto;
   max-width: 99rem;
-  padding-left: 1rem;
-  padding-right: 1rem; }
+  padding-right: 1rem;
+  padding-left: 1rem; }
   @media (min-width: 42rem) {
     .bx--grid {
-      padding-left: 2rem;
-      padding-right: 2rem; } }
+      padding-right: 2rem;
+      padding-left: 2rem; } }
   @media (min-width: 99rem) {
     .bx--grid {
-      padding-left: 2.5rem;
-      padding-right: 2.5rem; } }
+      padding-right: 2.5rem;
+      padding-left: 2.5rem; } }
 
 @media (min-width: 99rem) {
   .bx--grid--full-width {
@@ -1044,8 +1044,8 @@ em {
 
 .bx--no-gutter,
 .bx--row.bx--no-gutter [class*='bx--col'] {
-  padding-left: 0;
-  padding-right: 0; }
+  padding-right: 0;
+  padding-left: 0; }
 
 .bx--no-gutter--left,
 .bx--row.bx--no-gutter--left [class*='bx--col'] {
@@ -1065,16 +1065,16 @@ em {
   position: relative; }
 
 .bx--aspect-ratio::before {
-  content: '';
-  width: 1px;
-  margin-left: -1px;
   float: left;
-  height: 0; }
+  width: 1px;
+  height: 0;
+  margin-left: -1px;
+  content: ''; }
 
 .bx--aspect-ratio::after {
-  content: '';
   display: table;
-  clear: both; }
+  clear: both;
+  content: ''; }
 
 .bx--aspect-ratio--16x9::before {
   padding-top: 56.25%; }

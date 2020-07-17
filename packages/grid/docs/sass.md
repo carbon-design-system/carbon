@@ -307,8 +307,8 @@ classes are useful for dropping the gutter in fluid situations.
 @mixin carbon--no-gutter() {
   .#{$prefix}--no-gutter,
   .#{$prefix}--row.#{$prefix}--no-gutter [class*='#{$prefix}--col'] {
-    padding-left: 0;
     padding-right: 0;
+    padding-left: 0;
   }
 
   .#{$prefix}--no-gutter--left,
@@ -410,17 +410,17 @@ https://keithjgrant.com/posts/2017/03/aspect-ratios/
   }
 
   .#{$prefix}--aspect-ratio::before {
-    content: '';
-    width: 1px;
-    margin-left: -1px;
     float: left;
+    width: 1px;
     height: 0;
+    margin-left: -1px;
+    content: '';
   }
 
   .#{$prefix}--aspect-ratio::after {
-    content: '';
     display: table;
     clear: both;
+    content: '';
   }
 
   @each $aspect-ratio in $aspect-ratios {
@@ -481,14 +481,14 @@ max-width properties are added with `make-container-max-widths`
       $prev-margin: map-get($prev-breakpoint, margin);
       @if $prev-margin != $margin {
         @include carbon--breakpoint($name) {
-          padding-left: #{($carbon--grid-gutter / 2) + $margin};
           padding-right: #{($carbon--grid-gutter / 2) + $margin};
+          padding-left: #{($carbon--grid-gutter / 2) + $margin};
         }
       }
     } @else {
       @include carbon--breakpoint($name) {
-        padding-left: #{($carbon--grid-gutter / 2) + $margin};
         padding-right: #{($carbon--grid-gutter / 2) + $margin};
+        padding-left: #{($carbon--grid-gutter / 2) + $margin};
       }
     }
   }
