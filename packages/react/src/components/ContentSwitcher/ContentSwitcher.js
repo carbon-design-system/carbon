@@ -36,6 +36,11 @@ export default class ContentSwitcher extends React.Component {
     className: PropTypes.string,
 
     /**
+     * `true` to use the light variant.
+     */
+    light: PropTypes.bool,
+
+    /**
      * Specify an `onChange` handler that is called whenever the ContentSwitcher
      * changes which item is selected
      */
@@ -96,14 +101,12 @@ export default class ContentSwitcher extends React.Component {
           }
         );
       }
-    } else {
-      if (selectedIndex !== index) {
-        this.setState({ selectedIndex: index }, () => {
-          const switchRef = this._switchRefs[index];
-          switchRef && switchRef.focus();
-          this.props.onChange(data);
-        });
-      }
+    } else if (selectedIndex !== index) {
+      this.setState({ selectedIndex: index }, () => {
+        const switchRef = this._switchRefs[index];
+        switchRef && switchRef.focus();
+        this.props.onChange(data);
+      });
     }
   };
 
@@ -111,12 +114,15 @@ export default class ContentSwitcher extends React.Component {
     const {
       children,
       className,
+      light,
       selectedIndex, // eslint-disable-line no-unused-vars
       selectionMode, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
 
-    const classes = classNames(`${prefix}--content-switcher`, className);
+    const classes = classNames(`${prefix}--content-switcher`, className, {
+      [`${prefix}--content-switcher--light`]: light,
+    });
 
     return (
       <div {...other} className={classes} role="tablist">

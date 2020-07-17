@@ -730,6 +730,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "light": Object {
+        "type": "bool",
+      },
       "onChange": Object {
         "isRequired": true,
         "type": "func",
