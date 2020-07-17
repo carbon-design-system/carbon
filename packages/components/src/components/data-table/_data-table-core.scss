@@ -295,6 +295,10 @@
     width: 48px;
   }
 
+  .#{$prefix}--table-column-radio .#{$prefix}--radio-button__appearance {
+    margin-right: -$spacing-01;
+  }
+
   // default selected row + zebra select - even child
   .#{$prefix}--data-table--zebra
     tbody
