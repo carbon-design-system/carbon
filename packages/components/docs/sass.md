@@ -16064,7 +16064,7 @@ Data table core styles
   }
 
   .#{$prefix}--table-column-radio .#{$prefix}--radio-button__appearance {
-    margin-right: -$spacing-01;
+    margin-right: rem(-2px);
   }
 
   // default selected row + zebra select - even child
