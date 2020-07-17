@@ -13491,14 +13491,14 @@ Accordion styles
   .#{$prefix}--accordion {
     @include reset;
 
-    list-style: none;
     width: 100%;
+    list-style: none;
   }
 
   .#{$prefix}--accordion__item {
-    transition: all $duration--fast-02 motion(standard, productive);
-    border-top: 1px solid $ui-03;
     overflow: visible;
+    border-top: 1px solid $ui-03;
+    transition: all $duration--fast-02 motion(standard, productive);
 
     &:last-child {
       border-bottom: 1px solid $ui-03;
@@ -13508,27 +13508,27 @@ Accordion styles
   .#{$prefix}--accordion__heading {
     @include button-reset;
 
-    color: $text-01;
+    position: relative;
     display: flex;
+    flex-direction: $accordion-flex-direction;
     align-items: flex-start;
     justify-content: $accordion-justify-content;
-    cursor: pointer;
-    padding: rem(10px) 0;
-    flex-direction: $accordion-flex-direction;
-    position: relative;
-    min-height: rem(40px);
     width: 100%;
+    min-height: rem(40px);
     margin: 0;
+    padding: rem(10px) 0;
+    color: $text-01;
+    cursor: pointer;
     transition: background-color motion(standard, productive) $duration--fast-02;
 
     &:hover::before,
     &:focus::before {
-      content: '';
       position: absolute;
       top: -1px;
       left: 0;
       width: 100%;
       height: calc(100% + 2px);
+      content: '';
     }
 
     &:hover::before {
@@ -13552,27 +13552,27 @@ Accordion styles
     width: 1rem;
     height: 1rem;
     margin: $accordion-arrow-margin;
-    fill: $ui-05;
     // TODO: RTL rotate(180deg);
     transform: rotate(90deg);
     transition: all $duration--fast-02 motion(standard, productive);
+    fill: $ui-05;
   }
 
   .#{$prefix}--accordion__title {
     @include type-style('body-long-01');
 
-    margin: $accordion-title-margin;
-    width: 100%;
-    text-align: left;
     z-index: 1;
+    width: 100%;
+    margin: $accordion-title-margin;
+    text-align: left;
   }
 
   .#{$prefix}--accordion__content {
     display: none;
+    padding-right: $carbon--spacing-05;
+    padding-left: $carbon--spacing-05;
     // Transition property for when the accordion closes
     transition: padding motion(standard, productive) $duration--fast-02;
-    padding-left: $carbon--spacing-05;
-    padding-right: $carbon--spacing-05;
 
     // Custom breakpoints based on issue #4993
     @include carbon--breakpoint-up(480px) {
@@ -13620,8 +13620,8 @@ Accordion styles
 
     .#{$prefix}--accordion__content {
       display: block;
-      padding-bottom: $carbon--spacing-06;
       padding-top: $spacing-03;
+      padding-bottom: $carbon--spacing-06;
       // Transition property for when the accordion opens
       transition: padding-top motion(entrance, productive) $duration--fast-02, padding-bottom
           motion(entrance, productive) $duration--fast-02;
@@ -13641,9 +13641,9 @@ Accordion styles
   }
 
   .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
+    cursor: default;
     pointer-events: none;
     fill: $ui-05;
-    cursor: default;
 
     &:hover,
     &:focus,
@@ -13730,9 +13730,9 @@ Breadcrumb styles
   }
 
   .#{$prefix}--breadcrumb-item::after {
-    content: '/';
-    color: $text-01;
     margin-left: $carbon--spacing-03;
+    color: $text-01;
+    content: '/';
   }
 
   .#{$prefix}--breadcrumb--no-trailing-slash
@@ -13797,9 +13797,9 @@ Button styles
   }
 
   .#{$prefix}--btn-set > .#{$prefix}--btn {
+    width: 100%;
     // 196px from design kit
     max-width: rem(196px);
-    width: 100%;
   }
 
   .#{$prefix}--btn--secondary.#{$prefix}--btn--disabled
@@ -13879,8 +13879,8 @@ Button styles
     &.#{$prefix}--btn--disabled,
     &.#{$prefix}--btn--disabled:hover,
     &.#{$prefix}--btn--disabled:focus {
-      background: transparent;
       color: $disabled;
+      background: transparent;
       outline: none;
     }
   }
@@ -13969,8 +13969,8 @@ Button styles
   }
 
   .#{$prefix}--btn--icon-only {
-    padding-left: rem(15px);
     padding-right: rem(15px);
+    padding-left: rem(15px);
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -14014,13 +14014,13 @@ Button styles
   }
 
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
-    padding-left: rem(11px);
     padding-right: rem(11px);
+    padding-left: rem(11px);
   }
 
   .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
-    padding-left: rem(7px);
     padding-right: rem(7px);
+    padding-left: rem(7px);
   }
 
   .#{$prefix}--btn--danger {
@@ -14100,23 +14100,23 @@ Button base styles
   @include reset;
   @include type-style('body-short-01');
 
-  cursor: pointer;
+  position: relative;
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: space-between;
-  vertical-align: top;
-  flex-shrink: 0;
-  min-height: $button-height;
-  padding: $button-padding;
-  border-radius: $button-border-radius;
-  text-align: left;
-  text-decoration: none;
-  transition: all $duration--fast-01 motion(entrance, productive);
-  outline: none;
-  position: relative;
   max-width: rem(320px);
+  min-height: $button-height;
   // Fix to remove added margins on buttons in safari (see #5155)
   margin: 0;
+  padding: $button-padding;
+  text-align: left;
+  text-decoration: none;
+  vertical-align: top;
+  border-radius: $button-border-radius;
+  outline: none;
+  cursor: pointer;
+  transition: all $duration--fast-01 motion(entrance, productive);
 
   &:disabled,
   &:hover:disabled,
@@ -14124,11 +14124,11 @@ Button base styles
   &.#{$prefix}--btn--disabled,
   &.#{$prefix}--btn--disabled:hover,
   &.#{$prefix}--btn--disabled:focus {
-    cursor: not-allowed;
     color: $disabled-03;
     background: $disabled-02;
     border-color: $disabled-02;
     box-shadow: none;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--btn__icon {
@@ -14160,11 +14160,11 @@ Button variant styles
 
 ```scss
 @mixin button-theme() {
-  background-color: $bg-color;
-  border-width: $button-outline-width;
-  border-style: solid;
-  border-color: $border-color;
   color: $font-color;
+  background-color: $bg-color;
+  border-color: $border-color;
+  border-style: solid;
+  border-width: $button-outline-width;
 
   &:hover {
     background-color: $hover-bg-color;
@@ -14181,9 +14181,9 @@ Button variant styles
   &:hover.#{$prefix}--btn--disabled,
   &:focus.#{$prefix}--btn--disabled {
     color: $ui-04;
+    text-decoration: none;
     background-color: $disabled-02;
     border-color: $disabled-02;
-    text-decoration: none;
     box-shadow: none;
   }
 
@@ -14255,13 +14255,13 @@ Checkbox styles
     @include reset;
     @include type-style('body-short-01');
 
-    line-height: 1.5rem;
     position: relative;
     display: flex;
-    cursor: pointer;
     min-height: rem(24px);
-    user-select: none;
     padding-left: rem(20px);
+    line-height: 1.5rem;
+    cursor: pointer;
+    user-select: none;
   }
 
   .#{$prefix}--checkbox-label-text {
@@ -14277,7 +14277,13 @@ Checkbox styles
 
   // Spacing for presentational checkbox
   .#{$prefix}--checkbox-label::before {
-    content: '';
+    // We need to position the pseudo-element absolutely in the space that we've
+    // created with the padding from the label itself. We position only with
+    // `top` since we don't want the checkbox to be centered vertically with the
+    // text overflows.
+    position: absolute;
+    top: rem(2px);
+    left: 0;
 
     // According to the spec, we'll want the bounding box for our checkbox to
     // be 16px. The border size will be what will be updated during the
@@ -14286,35 +14292,27 @@ Checkbox styles
     height: rem(16px);
     margin: rem(2px);
 
-    // We need to position the pseudo-element absolutely in the space that we've
-    // created with the padding from the label itself. We position only with
-    // `top` since we don't want the checkbox to be centered vertically with the
-    // text overflows.
-    position: absolute;
-    left: 0;
-    top: rem(2px);
-
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
     border: 1px solid $ui-05;
     border-radius: 1px;
+    content: '';
   }
 
   // Create the appearance of the check in the `after` pseudo-element
   .#{$prefix}--checkbox-label::after {
-    content: '';
-
     position: absolute;
-    left: rem(6px);
     top: rem(8px);
+    left: rem(6px);
     width: rem(9px);
     height: rem(5px);
+    margin-top: rem(-3px);
     background: none;
-    border-left: 2px solid $inverse-01;
     border-bottom: 2px solid $inverse-01;
+    border-left: 2px solid $inverse-01;
     transform: scale(0) rotate(-45deg);
     transform-origin: bottom right;
-    margin-top: rem(-3px);
+    content: '';
   }
 
   //----------------------------------------------
@@ -14340,11 +14338,11 @@ Checkbox styles
   // Indeterminate symbol
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
-    transform: scale(1) rotate(0deg);
-    border-left: 0 solid $inverse-01;
-    border-bottom: 2px solid $inverse-01;
-    width: rem(8px);
     top: rem(11px);
+    width: rem(8px);
+    border-bottom: 2px solid $inverse-01;
+    border-left: 0 solid $inverse-01;
+    transform: scale(1) rotate(0deg);
   }
 
   //----------------------------------------------
@@ -14370,8 +14368,8 @@ Checkbox styles
 
   .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
   .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true'] {
-    cursor: not-allowed;
     color: $disabled-02;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label::before,
@@ -14442,10 +14440,10 @@ Code snippet styles
     position: relative;
     display: inline;
     padding: 0;
+    color: $text-01;
+    background-color: $ui-01;
     border: 2px solid transparent;
     border-radius: 4px;
-    background-color: $ui-01;
-    color: $text-01;
     cursor: pointer;
 
     &:hover {
@@ -14457,8 +14455,8 @@ Code snippet styles
     }
 
     &:focus {
-      outline: none;
       border: 2px solid $focus;
+      outline: none;
     }
 
     &::before {
@@ -14470,11 +14468,11 @@ Code snippet styles
     .#{$prefix}--copy-btn__feedback {
       @include tooltip--content('icon');
 
+      display: none;
       box-sizing: content-box;
-      clip: auto;
       margin: auto;
       overflow: visible;
-      display: none;
+      clip: auto;
     }
 
     @include tooltip--placement('icon', 'bottom', 'center');
@@ -14506,11 +14504,11 @@ Code snippet styles
   .#{$prefix}--snippet--single {
     @include bx--snippet;
 
-    border: none;
-    max-width: rem(760px);
     min-width: rem(320px);
+    max-width: rem(760px);
     height: $carbon--spacing-08;
     padding: 0 $carbon--spacing-08 0 0;
+    border: none;
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
@@ -14519,8 +14517,8 @@ Code snippet styles
     align-items: center;
     height: 100%;
     padding-left: $carbon--spacing-05;
-    border-right: solid $carbon--spacing-05 transparent;
     overflow-x: auto;
+    border-right: solid $carbon--spacing-05 transparent;
 
     &:focus {
       @include focus-outline('outline');
@@ -14530,38 +14528,37 @@ Code snippet styles
   .#{$prefix}--snippet--single pre {
     @include type-style('code-01');
 
-    white-space: nowrap;
     padding-right: $spacing-03;
+    white-space: nowrap;
   }
 
   .#{$prefix}--snippet--single::after {
-    width: rem(16px);
-    height: 100%;
-    content: '';
     position: absolute;
     top: 0;
     right: rem(56px);
-
+    width: rem(16px);
+    height: 100%;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
+    content: '';
   }
 
   // Multi Line Snippet
   .#{$prefix}--snippet--multi {
     @include bx--snippet;
 
-    border: none;
-    padding: $carbon--spacing-05;
     min-width: rem(320px);
     max-width: 100%;
+    padding: $carbon--spacing-05;
+    border: none;
   }
 
   //closed snippet container
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
-    overflow: hidden;
     position: relative;
-    max-height: rem(238px);
     min-height: rem(56px);
+    max-height: rem(238px);
+    overflow: hidden;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
@@ -14569,15 +14566,15 @@ Code snippet styles
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
     .#{$prefix}--snippet-container {
     max-height: 100%;
-    transition: max-height $duration--moderate-01 motion(standard, productive);
     padding-bottom: $spacing-05;
+    transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
   // closed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
-    overflow-x: scroll;
     padding-right: $carbon--spacing-08;
     padding-bottom: rem(24px);
+    overflow-x: scroll;
   }
 
   // expanded pre
@@ -14588,15 +14585,14 @@ Code snippet styles
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
-    width: rem(16px);
-    height: 100%;
-    content: '';
     position: absolute;
     top: 0;
     right: 0;
-
+    width: rem(16px);
+    height: 100%;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
+    content: '';
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre code {
@@ -14859,8 +14855,8 @@ Code snippet styles
   - [bx--snippet [mixin]](#bx--snippet-mixin)
   - [carbon--font-family [mixin]](#carbon--font-family-mixin)
   - [prefix [variable]](#prefix-variable)
-  - [ui-01 [variable]](#ui-01-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [ui-01 [variable]](#ui-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [focus [variable]](#focus-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
