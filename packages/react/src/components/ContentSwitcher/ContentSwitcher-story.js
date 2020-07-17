@@ -19,6 +19,7 @@ const selectionModes = {
 
 const props = {
   contentSwitcher: () => ({
+    light: boolean('Light variant (light)', false),
     selectionMode: select(
       'Selection mode (selectionMode)',
       selectionModes,
