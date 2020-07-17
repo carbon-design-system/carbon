@@ -31,18 +31,18 @@
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    content: '';
     background-color: transparent;
-    opacity: 0;
     visibility: hidden;
+    opacity: 0;
     transition: background-color $duration--slow-02 motion(exit, expressive),
       opacity $duration--moderate-02 motion(exit, expressive),
       visibility 0ms linear $duration--moderate-02;
+    content: '';
 
     &.is-visible {
+      background-color: $overlay-01;
       visibility: inherit;
       opacity: 1;
-      background-color: $overlay-01;
       transition: background-color $duration--slow-02
           motion(entrance, expressive),
         opacity $duration--moderate-02 motion(entrance, expressive),
@@ -62,8 +62,8 @@
   }
 
   .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
-    transition: transform $duration--moderate-02 motion(entrance, expressive);
     transform: translate3d(0, 0, 0);
+    transition: transform $duration--moderate-02 motion(entrance, expressive);
   }
 
   .#{$prefix}--modal-container {
@@ -72,23 +72,23 @@
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: auto;
-    background-color: $ui-01;
     width: 100%;
     height: 100%;
     max-height: 100%;
+    overflow: hidden;
+    background-color: $ui-01;
     // make modal edge visible on high contrast themes (#3880)
     outline: 3px solid transparent;
     outline-offset: -3px;
-    overflow: hidden;
-    transform-origin: top center;
     transform: translate3d(0, -24px, 0);
+    transform-origin: top center;
     transition: transform $duration--moderate-02 motion(exit, expressive);
 
     @include carbon--breakpoint(md) {
       position: static;
       width: 84%;
-      max-height: 90%;
       height: auto;
+      max-height: 90%;
 
       .#{$prefix}--modal-header,
       .#{$prefix}--modal-content,
@@ -225,19 +225,18 @@
   }
 
   .#{$prefix}--modal-header {
-    padding-top: $spacing-05;
-    padding-right: $spacing-09;
-    margin-bottom: $spacing-03;
-
     grid-row: 1/1;
     grid-column: 1/-1;
+    margin-bottom: $spacing-03;
+    padding-top: $spacing-05;
+    padding-right: $spacing-09;
   }
 
   .#{$prefix}--modal-header__label {
     @include type-style('label-01');
 
-    color: $text-02;
     margin-bottom: $spacing-02;
+    color: $text-02;
   }
 
   .#{$prefix}--modal-header__heading {
@@ -251,14 +250,14 @@
 
     grid-row: 2/-2;
     grid-column: 1/-1;
-
-    overflow-y: auto;
     margin-bottom: $spacing-09;
-    color: $text-01;
-    font-weight: 400;
 
     // Required to accommodate focus outline's negative offset:
     padding-top: $spacing-03;
+
+    overflow-y: auto;
+    color: $text-01;
+    font-weight: 400;
 
     &:focus {
       @include focus-outline('outline');
@@ -275,16 +274,16 @@
   }
 
   .#{$prefix}--modal-content--overflow-indicator {
+    position: absolute;
+    bottom: $spacing-09;
+    left: 0;
     grid-row: 2/-2;
     grid-column: 1/-1;
     width: 100%;
     height: rem(32px);
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: $spacing-09;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to bottom, rgba($ui-01, 0), $ui-01);
+    content: '';
     pointer-events: none;
   }
 
@@ -296,16 +295,16 @@
 
   .#{$prefix}--modal-footer {
     display: flex;
-    justify-content: flex-end;
-    margin-top: auto;
-    height: 4rem;
 
     grid-row: -1/-1;
     grid-column: 1/-1;
+    justify-content: flex-end;
+    height: 4rem;
+    margin-top: auto;
 
     button.#{$prefix}--btn {
-      max-width: none;
       flex: 0 1 50%;
+      max-width: none;
       height: 4rem;
       margin: 0;
       padding-top: $spacing-05;
@@ -317,13 +316,13 @@
     position: absolute;
     top: 0;
     right: 0;
-    height: 3rem;
     width: 3rem;
+    height: 3rem;
     padding: rem(12px);
-    border: 2px solid transparent;
     overflow: hidden;
-    cursor: pointer;
     background-color: transparent;
+    border: 2px solid transparent;
+    cursor: pointer;
     transition: background-color $duration--fast-02 motion(standard, productive);
 
     &:hover {
@@ -331,8 +330,8 @@
     }
 
     &:focus {
-      outline: none;
       border-color: $focus;
+      outline: none;
     }
   }
 
@@ -341,9 +340,9 @@
   }
 
   .#{$prefix}--modal-close__icon {
-    fill: $icon-01;
-    height: rem(20px);
     width: rem(20px);
+    height: rem(20px);
+    fill: $icon-01;
   }
 
   .#{$prefix}--body--with-modal-open {

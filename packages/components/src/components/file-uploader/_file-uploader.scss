@@ -32,8 +32,8 @@
     @include reset;
     @include type-style('productive-heading-01');
 
-    color: $text-01;
     margin-bottom: $carbon--spacing-03;
+    color: $text-01;
   }
 
   .#{$prefix}--file-input {
@@ -50,15 +50,15 @@
   }
 
   .#{$prefix}--file-browse-btn {
-    margin-bottom: $carbon--spacing-03;
     display: inline-block;
     width: 100%;
     max-width: rem(320px);
+    margin-bottom: $carbon--spacing-03;
     color: $link-01;
-    transition: $duration--fast-02 motion(standard, productive);
-    cursor: pointer;
     outline: 2px solid transparent;
     outline-offset: -2px;
+    cursor: pointer;
+    transition: $duration--fast-02 motion(standard, productive);
 
     &:focus,
     &:hover {
@@ -78,15 +78,15 @@
   }
 
   .#{$prefix}--file-browse-btn--disabled {
-    cursor: no-drop;
-    text-decoration: none;
     color: $disabled-02;
+    text-decoration: none;
+    cursor: no-drop;
 
     &:hover,
     &:focus {
-      outline: none;
-      text-decoration: none;
       color: $disabled-02;
+      text-decoration: none;
+      outline: none;
     }
   }
 
@@ -98,8 +98,8 @@
     @include reset;
     @include type-style('body-short-01');
 
-    color: $text-02;
     margin-bottom: $carbon--spacing-05;
+    color: $text-02;
   }
 
   // For backwards compatibility
@@ -118,15 +118,15 @@
 
   .#{$prefix}--file__selected-file {
     display: grid;
+    grid-auto-rows: auto;
     grid-gap: $carbon--spacing-05;
     grid-template-columns: 1fr auto;
-    grid-auto-rows: auto;
     align-items: center;
-    min-height: $carbon--spacing-09;
     max-width: rem(320px);
+    min-height: $carbon--spacing-09;
     margin-bottom: $carbon--spacing-03;
-    background-color: $field-01;
     word-break: break-word;
+    background-color: $field-01;
 
     &:last-child {
       margin-bottom: 0;
@@ -153,9 +153,9 @@
       @include type-style('body-short-01');
 
       margin-left: $carbon--spacing-05;
+      overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      overflow: hidden;
     }
   }
 
@@ -171,10 +171,11 @@
   .#{$prefix}--file__selected-file--invalid__wrapper {
     @include focus-outline('invalid');
 
-    outline-width: 1px;
-    background-color: $field-01;
     max-width: rem(320px);
     margin-bottom: $carbon--spacing-03;
+    background-color: $field-01;
+
+    outline-width: 1px;
   }
 
   .#{$prefix}--file__selected-file--invalid {
@@ -184,8 +185,8 @@
   }
 
   .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
-    border-top: 1px solid $ui-03;
     padding-top: $carbon--spacing-05;
+    border-top: 1px solid $ui-03;
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -208,10 +209,10 @@
 
     display: block;
     max-height: rem(200px);
-    color: $text-error;
-    font-weight: 400;
     padding: $carbon--spacing-03 $carbon--spacing-05;
     overflow: visible;
+    color: $text-error;
+    font-weight: 400;
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -233,8 +234,8 @@
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-complete {
-    fill: $interactive-04;
     cursor: pointer;
+    fill: $interactive-04;
 
     &:focus {
       @include focus-outline('border');
@@ -248,20 +249,20 @@
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-invalid {
-    height: $carbon--spacing-05;
     width: $carbon--spacing-05;
-    fill: $support-01;
+    height: $carbon--spacing-05;
     margin-right: $carbon--spacing-03;
+    fill: $support-01;
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close {
     display: flex;
-    height: $carbon--spacing-05;
     width: $carbon--spacing-05;
+    height: $carbon--spacing-05;
+    padding: 0;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    padding: 0;
     fill: $icon-01;
 
     &:focus {

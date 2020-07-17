@@ -23,21 +23,21 @@
   .#{$prefix}--inline-notification {
     @include reset;
 
+    position: relative;
     display: flex;
     flex-wrap: wrap;
-    position: relative;
-    height: auto;
-    min-height: rem(48px);
+    width: 100%;
     min-width: rem(288px);
     max-width: rem(288px);
-    width: 100%;
-    color: $inverse-01;
+    height: auto;
+    min-height: rem(48px);
     margin-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-05;
+    color: $inverse-01;
 
     @include carbon--breakpoint(md) {
-      max-width: rem(608px);
       flex-wrap: nowrap;
+      max-width: rem(608px);
     }
 
     @include carbon--breakpoint(lg) {
@@ -76,17 +76,17 @@
     color: map-get($carbon--theme--white, 'text-01');
 
     &::before {
-      content: '';
-      pointer-events: none;
       position: absolute;
       top: 0;
       left: 0;
+      box-sizing: border-box;
       width: 100%;
       height: 100%;
-      box-sizing: border-box;
-      filter: opacity(0.4);
       border-style: solid;
       border-width: 1px 1px 1px 0;
+      filter: opacity(0.4);
+      content: '';
+      pointer-events: none;
     }
   }
 
@@ -157,8 +157,8 @@
   .#{$prefix}--inline-notification--warning
     .#{$prefix}--inline-notification__icon
     path[opacity='0'] {
-    fill: $carbon__black-100;
     opacity: 1;
+    fill: $carbon__black-100;
   }
 
   .#{$prefix}--inline-notification__details {
@@ -173,8 +173,8 @@
 
   .#{$prefix}--inline-notification__icon {
     flex-shrink: 0;
-    margin-right: $carbon--spacing-05;
     margin-top: rem(14px);
+    margin-right: $carbon--spacing-05;
   }
 
   .#{$prefix}--inline-notification__text-wrapper {
@@ -196,10 +196,10 @@
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
-    color: $inverse-link;
     height: rem(32px);
     margin-bottom: $carbon--spacing-03;
     margin-left: $carbon--spacing-08;
+    color: $inverse-link;
 
     @include carbon--breakpoint(md) {
       margin: $carbon--spacing-03 0;
@@ -225,9 +225,9 @@
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
     border-color: transparent;
-    box-shadow: none;
     outline: 2px solid $inverse-focus-ui;
     outline-offset: -2px;
+    box-shadow: none;
   }
 
   .#{$prefix}--inline-notification--low-contrast
@@ -248,16 +248,16 @@
     right: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    height: rem(48px);
+    justify-content: center;
     width: rem(48px);
     min-width: rem(48px);
     max-width: rem(48px);
+    height: rem(48px);
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
     transition: outline $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
 
