@@ -46,6 +46,7 @@ exports[`Dropdown should render 1`] = `
 >
   <div
     className="bx--dropdown__wrapper bx--list-box__wrapper"
+    placeholder="Filter..."
   >
     <ListBox
       className="bx--dropdown"
@@ -194,6 +195,7 @@ exports[`Dropdown should render custom item components 1`] = `
 >
   <div
     className="bx--dropdown__wrapper bx--list-box__wrapper"
+    placeholder="Filter..."
   >
     <ListBox
       className="bx--dropdown bx--dropdown--open"
@@ -500,6 +502,7 @@ exports[`Dropdown should render with strings as items 1`] = `
 >
   <div
     className="bx--dropdown__wrapper bx--list-box__wrapper"
+    placeholder="Filter..."
   >
     <ListBox
       className="bx--dropdown bx--dropdown--open"
