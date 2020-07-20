@@ -75,6 +75,7 @@
 
   input[data-invalid],
   .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-input--warn,
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--time-picker[data-invalid],
@@ -82,13 +83,23 @@
     ~ .#{$prefix}--form-requirement {
       max-height: rem(200px);
       display: block;
+    }
+  }
+
+  input[data-invalid],
+  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-area__wrapper[data-invalid],
+  .#{$prefix}--select-input__wrapper[data-invalid],
+  .#{$prefix}--time-picker[data-invalid],
+  .#{$prefix}--list-box[data-invalid] {
+    ~ .#{$prefix}--form-requirement {
       color: $text-error;
     }
   }
 
   //Fluid Form
-  .#{$prefix}--form--fluid
-    .#{$prefix}--text-input__field-wrapper[data-invalid] {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-warn] {
     display: block;
   }
 

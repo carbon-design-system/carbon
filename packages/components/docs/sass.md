@@ -7003,7 +7003,6 @@ $text-error: if(
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [number-input [mixin]](#number-input-mixin)
-  - [select [mixin]](#select-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -7393,6 +7392,7 @@ $support-03: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [text-input [mixin]](#text-input-mixin)
 
 ### ✅support-04 [variable]
 
@@ -17979,6 +17979,7 @@ Form styles
 
   input[data-invalid],
   .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-input--warn,
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--time-picker[data-invalid],
@@ -17986,13 +17987,23 @@ Form styles
     ~ .#{$prefix}--form-requirement {
       max-height: rem(200px);
       display: block;
+    }
+  }
+
+  input[data-invalid],
+  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-area__wrapper[data-invalid],
+  .#{$prefix}--select-input__wrapper[data-invalid],
+  .#{$prefix}--time-picker[data-invalid],
+  .#{$prefix}--list-box[data-invalid] {
+    ~ .#{$prefix}--form-requirement {
       color: $text-error;
     }
   }
 
   //Fluid Form
-  .#{$prefix}--form--fluid
-    .#{$prefix}--text-input__field-wrapper[data-invalid] {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-warn] {
     display: block;
   }
 
@@ -18017,7 +18028,6 @@ Form styles
   .#{$prefix}--form-requirement {
     @include reset;
     @include type-style('caption-01');
-
     margin: $carbon--spacing-02 0 0;
     max-height: 0;
     overflow: hidden;
@@ -22448,7 +22458,6 @@ Select styles
 
   .#{$prefix}--form-requirement {
     display: block;
-    color: $text-error;
     font-weight: 400;
     overflow: visible;
   }
@@ -22600,7 +22609,6 @@ Select styles
   - [ui-04 [variable]](#ui-04-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
-  - [text-error [variable]](#text-error-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -23806,6 +23814,15 @@ Text input styles
       fill: $support-01;
     }
 
+    .#{$prefix}--text-input__invalid-icon--warning {
+      fill: $support-03;
+
+      path[data-icon-path='inner-path'] {
+        opacity: 1;
+        fill: $carbon__black-100;
+      }
+    }
+
     // TODO: deprecate this style block
     .#{$prefix}--text-input--password__visibility {
       @include tooltip--trigger('icon', 'bottom');
@@ -23929,12 +23946,16 @@ Text input styles
     display: none;
   }
 
-  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid,
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--warn {
     border-bottom: none;
   }
 
   .#{$prefix}--form--fluid
     .#{$prefix}--text-input--invalid
+    + .#{$prefix}--text-input__divider,
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input--warn
     + .#{$prefix}--text-input__divider {
     display: block;
     margin: 0 1rem;
@@ -24013,6 +24034,7 @@ Text input styles
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [field-02 [variable]](#field-02-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [support-03 [variable]](#support-03-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
