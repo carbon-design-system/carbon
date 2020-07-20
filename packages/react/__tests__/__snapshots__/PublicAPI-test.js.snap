@@ -730,6 +730,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "light": Object {
+        "type": "bool",
+      },
       "onChange": Object {
         "isRequired": true,
         "type": "func",
@@ -2146,6 +2149,7 @@ Map {
     },
   },
   "Dropdown" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "direction": "bottom",
       "disabled": false,
@@ -2156,6 +2160,7 @@ Map {
       "titleText": "",
       "type": "default",
     },
+    "displayName": "Dropdown",
     "propTypes": Object {
       "ariaLabel": Object {
         "type": "string",
@@ -2285,6 +2290,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "ErrorBoundary" => Object {
     "contextType": Object {
@@ -3251,6 +3257,7 @@ Map {
     },
   },
   "MultiSelect" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "Filterable": Object {
       "defaultProps": Object {
         "ariaLabel": "Choose an item",
@@ -3481,6 +3488,7 @@ Map {
       "title": false,
       "type": "default",
     },
+    "displayName": "MultiSelect",
     "propTypes": Object {
       "compareItems": Object {
         "isRequired": true,
@@ -3696,6 +3704,7 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "ToastNotification" => Object {
     "defaultProps": Object {
@@ -5267,12 +5276,15 @@ Map {
     "defaultProps": Object {
       "disabled": false,
       "helperText": "",
+      "inline": false,
       "invalid": false,
       "invalidText": "",
       "light": false,
       "onChange": [Function],
       "onClick": [Function],
       "type": "text",
+      "warn": false,
+      "warnText": "",
     },
     "propTypes": Object {
       "className": Object {
@@ -5303,6 +5315,9 @@ Map {
       "id": Object {
         "isRequired": true,
         "type": "string",
+      },
+      "inline": Object {
+        "type": "bool",
       },
       "invalid": Object {
         "type": "bool",
@@ -5350,6 +5365,12 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "string",
       },
     },
     "render": [Function],

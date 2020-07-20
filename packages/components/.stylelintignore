@@ -1,0 +1,7 @@
+# packages/components
+demo/**
+tests/**
+css/**
+scss/**
+src/components/date-picker/_flatpickr.scss
+

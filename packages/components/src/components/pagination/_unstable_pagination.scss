@@ -22,6 +22,7 @@ $css--helpers: true;
   .#{$prefix}--unstable-pagination {
     @include reset;
     @include carbon--type-style('body-short-01');
+
     width: 100%;
     background-color: $ui-01;
     display: flex;
@@ -70,6 +71,7 @@ $css--helpers: true;
 
   .#{$prefix}--unstable-pagination__button {
     @include reset;
+
     border: none;
     border-left: 1px solid $ui-03;
     background: none;
@@ -80,16 +82,16 @@ $css--helpers: true;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: $ui-05; // for currentColor
+    color: $ui-05;
     fill: $ui-05;
-    transition: outline $duration--fast-02 motion(standard, productive);
-    transition: background-color $duration--fast-02 motion(standard, productive);
+    transition: outline $duration--fast-02 motion(standard, productive),
+      background-color $duration--fast-02 motion(standard, productive);
   }
 
   // Unset height/width set by icon-only button:
   .#{$prefix}--unstable-pagination__button .#{$prefix}--btn__icon {
-    height: unset;
-    width: unset;
+    height: initial;
+    width: initial;
   }
 
   .#{$prefix}--unstable-pagination__button.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
@@ -135,6 +137,7 @@ $css--helpers: true;
   .#{$prefix}--unstable-pagination__page-selector .#{$prefix}--select-input,
   .#{$prefix}--unstable-pagination__page-sizer .#{$prefix}--select-input {
     @include carbon--type-style('body-short-01');
+
     width: auto;
     min-width: auto;
     height: 100%;

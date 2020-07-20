@@ -52,7 +52,7 @@ Carbon is built using a collection of packages all built in the same Git
 repository. You might have heard this setup described as a
 [monorepo](https://en.wikipedia.org/wiki/Monorepo).
 
-As a result, we use two pieces of tooling to help us managing installing
+As a result, we use two pieces of tooling to help us manage installing
 dependencies and publishing our packages. These include:
 
 - [Yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/) for handling

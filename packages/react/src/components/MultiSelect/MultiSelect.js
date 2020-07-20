@@ -18,6 +18,7 @@ import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { mapDownshiftProps } from '../../tools/createPropAdapter';
 
 const { prefix } = settings;
 const noop = () => {};
@@ -33,31 +34,34 @@ const {
   ToggleButtonClick,
 } = useSelect.stateChangeTypes;
 
-function MultiSelect({
-  className: containerClassName,
-  id,
-  items,
-  itemToString,
-  titleText,
-  helperText,
-  label,
-  type,
-  size,
-  disabled,
-  initialSelectedItems,
-  sortItems,
-  compareItems,
-  light,
-  invalid,
-  invalidText,
-  useTitleInItem,
-  translateWithId,
-  downshiftProps,
-  open,
-  selectionFeedback,
-  onChange,
-  direction,
-}) {
+const MultiSelect = React.forwardRef(function MultiSelect(
+  {
+    className: containerClassName,
+    id,
+    items,
+    itemToString,
+    titleText,
+    helperText,
+    label,
+    type,
+    size,
+    disabled,
+    initialSelectedItems,
+    sortItems,
+    compareItems,
+    light,
+    invalid,
+    invalidText,
+    useTitleInItem,
+    translateWithId,
+    downshiftProps,
+    open,
+    selectionFeedback,
+    onChange,
+    direction,
+  },
+  ref
+) {
   const { current: multiSelectInstanceId } = useRef(getInstanceId());
   const [highlightedIndex, setHighlightedIndex] = useState(null);
   const [isOpen, setIsOpen] = useState(open);
@@ -79,15 +83,17 @@ function MultiSelect({
     getMenuProps,
     getItemProps,
     selectedItem: selectedItems,
-  } = useSelect({
-    ...downshiftProps,
-    highlightedIndex,
-    isOpen,
-    itemToString,
-    onStateChange,
-    selectedItem: controlledSelectedItems,
-    items,
-  });
+  } = useSelect(
+    mapDownshiftProps({
+      ...downshiftProps,
+      highlightedIndex,
+      isOpen,
+      itemToString,
+      onStateChange,
+      selectedItem: controlledSelectedItems,
+      items,
+    })
+  );
 
   /**
    * programmatically control this `open` prop
@@ -189,6 +195,7 @@ function MultiSelect({
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
         )}
         <button
+          ref={ref}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
@@ -218,7 +225,6 @@ function MultiSelect({
                   .length > 0;
               return (
                 <ListBox.MenuItem
-                  aria-selected={isChecked}
                   key={itemProps.id}
                   isActive={isChecked}
                   isHighlighted={highlightedIndex === index}
@@ -245,8 +251,9 @@ function MultiSelect({
       )}
     </div>
   );
-}
+});
 
+MultiSelect.displayName = 'MultiSelect';
 MultiSelect.propTypes = {
   ...sortingPropTypes,
 
