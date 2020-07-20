@@ -66,6 +66,11 @@ const props = {
       'Form validation UI content (invalidText)',
       'A valid value is required'
     ),
+    warn: boolean('Show warning state (warn)', false),
+    warnText: text(
+      'Warning state text (warnText)',
+      'This will overwrite your current settings'
+    ),
     helperText: text('Helper text (helperText)', 'Optional help text'),
     inline: boolean('Inline variant (inline)', false),
     onClick: action('onClick'),

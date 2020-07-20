@@ -730,6 +730,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "light": Object {
+        "type": "bool",
+      },
       "onChange": Object {
         "isRequired": true,
         "type": "func",
@@ -5280,6 +5283,8 @@ Map {
       "onChange": [Function],
       "onClick": [Function],
       "type": "text",
+      "warn": false,
+      "warnText": "",
     },
     "propTypes": Object {
       "className": Object {
@@ -5360,6 +5365,12 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "string",
       },
     },
     "render": [Function],

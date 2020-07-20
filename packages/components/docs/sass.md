@@ -195,6 +195,7 @@
   - [✅disabled-03 [variable]](#disabled-03-variable)
   - [✅highlight [variable]](#highlight-variable)
   - [✅decorative-01 [variable]](#decorative-01-variable)
+  - [✅hover-light-ui [variable]](#hover-light-ui-variable)
   - [✅skeleton-01 [variable]](#skeleton-01-variable)
   - [✅skeleton-02 [variable]](#skeleton-02-variable)
   - [✅⚠️brand-01 [variable]](#brand-01-variable)
@@ -4196,6 +4197,7 @@ Define theme variables from a map of tokens
   $disabled-03: map-get($theme, 'disabled-03') !global;
   $highlight: map-get($theme, 'highlight') !global;
   $decorative-01: map-get($theme, 'decorative-01') !global;
+  $hover-light-ui: map-get($theme, 'hover-light-ui') !global;
   $skeleton-01: map-get($theme, 'skeleton-01') !global;
   $skeleton-02: map-get($theme, 'skeleton-02') !global;
   $brand-01: map-get($theme, 'brand-01') !global;
@@ -4503,6 +4505,10 @@ Define theme variables from a map of tokens
     $decorative-01: var(
       --#{$custom-property-prefix}-decorative-01,
       map-get($theme, 'decorative-01')
+    ) !global;
+    $hover-light-ui: var(
+      --#{$custom-property-prefix}-hover-light-ui,
+      map-get($theme, 'hover-light-ui')
     ) !global;
     $skeleton-01: var(
       --#{$custom-property-prefix}-skeleton-01,
@@ -5181,6 +5187,19 @@ Define theme variables from a map of tokens
       @include custom-property(
         'decorative-01',
         map-get($theme, 'decorative-01')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'hover-light-ui',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'hover-light-ui',
+        map-get($theme, 'hover-light-ui')
       );
     }
 
@@ -5966,6 +5985,7 @@ Define theme variables from a map of tokens
   - [disabled-03 [variable]](#disabled-03-variable)
   - [highlight [variable]](#highlight-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
+  - [hover-light-ui [variable]](#hover-light-ui-variable)
   - [skeleton-01 [variable]](#skeleton-01-variable)
   - [skeleton-02 [variable]](#skeleton-02-variable)
   - [brand-01 [variable]](#brand-01-variable)
@@ -6121,6 +6141,7 @@ $carbon--theme--g90: map-merge(
     disabled-03: #a8a8a8,
     highlight: #0043ce,
     decorative-01: #6f6f6f,
+    hover-light-ui: #6f6f6f,
     skeleton-01: #353535,
     skeleton-02: #525252,
     brand-02: #6f6f6f,
@@ -6195,6 +6216,7 @@ $carbon--theme--g100: map-merge(
     disabled-02: #525252,
     highlight: #002d9c,
     decorative-01: #525252,
+    hover-light-ui: #525252,
     skeleton-01: #353535,
     skeleton-02: #393939,
     brand-02: #6f6f6f,
@@ -6275,6 +6297,7 @@ $carbon--theme--v9: map-merge(
     disabled-03: #cdd1d4,
     highlight: #f4f7fb,
     decorative-01: #eef4fc,
+    hover-light-ui: #eef4fc,
     skeleton-01: rgba(61, 112, 178, 0.1),
     skeleton-02: rgba(61, 112, 178, 0.1),
     brand-01: #3d70b2,
@@ -6359,6 +6382,7 @@ $carbon--theme: (
   disabled-03: if(global-variable-exists('disabled-03'), $disabled-03, map-get($carbon--theme--white, 'disabled-03')),
   highlight: if(global-variable-exists('highlight'), $highlight, map-get($carbon--theme--white, 'highlight')),
   decorative-01: if(global-variable-exists('decorative-01'), $decorative-01, map-get($carbon--theme--white, 'decorative-01')),
+  hover-light-ui: if(global-variable-exists('hover-light-ui'), $hover-light-ui, map-get($carbon--theme--white, 'hover-light-ui')),
   skeleton-01: if(global-variable-exists('skeleton-01'), $skeleton-01, map-get($carbon--theme--white, 'skeleton-01')),
   skeleton-02: if(global-variable-exists('skeleton-02'), $skeleton-02, map-get($carbon--theme--white, 'skeleton-02')),
   brand-01: if(global-variable-exists('brand-01'), $brand-01, map-get($carbon--theme--white, 'brand-01')),
@@ -6652,6 +6676,7 @@ $ui-02: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [tile [mixin]](#tile-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -6978,7 +7003,6 @@ $text-error: if(
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [number-input [mixin]](#number-input-mixin)
-  - [select [mixin]](#select-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -7368,6 +7392,7 @@ $support-03: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [text-input [mixin]](#text-input-mixin)
 
 ### ✅support-04 [variable]
 
@@ -8246,9 +8271,34 @@ $decorative-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+
+### ✅hover-light-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$hover-light-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-light-ui'
+    ),
+  map-get($carbon--theme, 'hover-light-ui'),
+  #e5e5e5
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
 
 ### ✅skeleton-01 [variable]
 
@@ -14966,6 +15016,14 @@ Content switcher styles
     }
   }
 
+  .#{$prefix}--content-switcher--light .#{$prefix}--content-switcher-btn {
+    background-color: $ui-02;
+
+    &:hover {
+      background-color: $hover-light-ui;
+    }
+  }
+
   .#{$prefix}--content-switcher-btn:first-child {
     border-top-left-radius: rem(4px);
     border-bottom-left-radius: rem(4px);
@@ -14976,7 +15034,7 @@ Content switcher styles
     border-bottom-right-radius: rem(4px);
   }
 
-  .#{$prefix}--content-switcher-btn:not(:first-of-type)::before {
+  .#{$prefix}--content-switcher-btn::before {
     content: '';
     display: block;
     height: rem(16px);
@@ -14987,14 +15045,38 @@ Content switcher styles
     left: 0;
   }
 
-  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::before,
-  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
+  .#{$prefix}--content-switcher-btn:first-of-type::before {
+    display: none;
+  }
+
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn::before {
+    background-color: $decorative-01;
+  }
+
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn:focus::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn:focus
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn:hover::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn:hover
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher--selected::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher--selected
     + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher-btn:focus::before,
   .#{$prefix}--content-switcher-btn:focus
     + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher-btn:hover::before,
   .#{$prefix}--content-switcher-btn:hover
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--selected::before,
+  .#{$prefix}--content-switcher--selected
     + .#{$prefix}--content-switcher-btn::before {
     background-color: transparent;
   }
@@ -15020,6 +15102,8 @@ Content switcher styles
     fill: $text-01;
   }
 
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
     background-color: $ui-05;
     color: $inverse-01;
@@ -15052,6 +15136,9 @@ Content switcher styles
   - [text-01 [variable]](#text-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
+  - [ui-02 [variable]](#ui-02-variable)
+  - [hover-light-ui [variable]](#hover-light-ui-variable)
+  - [decorative-01 [variable]](#decorative-01-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
@@ -17892,6 +17979,7 @@ Form styles
 
   input[data-invalid],
   .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-input--warn,
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--time-picker[data-invalid],
@@ -17899,13 +17987,23 @@ Form styles
     ~ .#{$prefix}--form-requirement {
       max-height: rem(200px);
       display: block;
+    }
+  }
+
+  input[data-invalid],
+  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-area__wrapper[data-invalid],
+  .#{$prefix}--select-input__wrapper[data-invalid],
+  .#{$prefix}--time-picker[data-invalid],
+  .#{$prefix}--list-box[data-invalid] {
+    ~ .#{$prefix}--form-requirement {
       color: $text-error;
     }
   }
 
   //Fluid Form
-  .#{$prefix}--form--fluid
-    .#{$prefix}--text-input__field-wrapper[data-invalid] {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-warn] {
     display: block;
   }
 
@@ -17930,7 +18028,6 @@ Form styles
   .#{$prefix}--form-requirement {
     @include reset;
     @include type-style('caption-01');
-
     margin: $carbon--spacing-02 0 0;
     max-height: 0;
     overflow: hidden;
@@ -22361,7 +22458,6 @@ Select styles
 
   .#{$prefix}--form-requirement {
     display: block;
-    color: $text-error;
     font-weight: 400;
     overflow: visible;
   }
@@ -22513,7 +22609,6 @@ Select styles
   - [ui-04 [variable]](#ui-04-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
-  - [text-error [variable]](#text-error-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -23606,6 +23701,7 @@ Text area styles
     outline: none;
     background-color: $disabled-background-color;
     border-bottom: 1px solid transparent;
+    color: $disabled-02;
   }
 
   .#{$prefix}--text-area:disabled::placeholder {
@@ -23716,6 +23812,15 @@ Text input styles
       top: 50%;
       transform: translateY(-50%);
       fill: $support-01;
+    }
+
+    .#{$prefix}--text-input__invalid-icon--warning {
+      fill: $support-03;
+
+      path[data-icon-path='inner-path'] {
+        opacity: 1;
+        fill: $carbon__black-100;
+      }
     }
 
     // TODO: deprecate this style block
@@ -23841,12 +23946,16 @@ Text input styles
     display: none;
   }
 
-  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid,
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--warn {
     border-bottom: none;
   }
 
   .#{$prefix}--form--fluid
     .#{$prefix}--text-input--invalid
+    + .#{$prefix}--text-input__divider,
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input--warn
     + .#{$prefix}--text-input__divider {
     display: block;
     margin: 0 1rem;
@@ -23925,6 +24034,7 @@ Text input styles
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [field-02 [variable]](#field-02-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [support-03 [variable]](#support-03-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
@@ -24168,7 +24278,6 @@ Time picker styles
   }
 
   .#{$prefix}--time-picker__input-field {
-    @include reset;
     @include focus-outline('reset');
     @include type-style('code-02');
 

@@ -47,6 +47,7 @@ const Dropdown = React.forwardRef(function Dropdown(
     initialSelectedItem,
     selectedItem: controlledSelectedItem,
     downshiftProps,
+    ...other
   },
   ref
 ) {
@@ -118,7 +119,7 @@ const Dropdown = React.forwardRef(function Dropdown(
   }
 
   return (
-    <div className={wrapperClasses}>
+    <div className={wrapperClasses} {...other}>
       {titleText && (
         <label className={titleClasses} {...getLabelProps()}>
           {titleText}
