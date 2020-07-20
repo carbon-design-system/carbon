@@ -18028,6 +18028,7 @@ Form styles
   .#{$prefix}--form-requirement {
     @include reset;
     @include type-style('caption-01');
+
     margin: $carbon--spacing-02 0 0;
     max-height: 0;
     overflow: hidden;
