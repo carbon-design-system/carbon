@@ -30,6 +30,10 @@
     top: 1.2rem;
     left: 50%;
 
+    &:focus {
+      border: 2px solid $support-01;
+    }
+
     &::before {
       @include box-shadow;
       @include type-style('body-short-01');
@@ -71,6 +75,10 @@
   }
 
   // TODO: deprecate above styles
+  .#{$prefix}--copy {
+    font-size: 0;
+  }
+
   .#{$prefix}--copy-btn {
     @include reset;
 
@@ -121,6 +129,7 @@
     &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out::before,
     &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out
       .#{$prefix}--copy-btn__feedback {
+      // https://github.com/stylelint/stylelint/issues/2363
       animation: $duration--fast-02 motion(standard, productive) hide-feedback;
     }
 
