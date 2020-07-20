@@ -26,7 +26,7 @@ jobs:
             yarn lerna run ci-check
       - run:
           name: Update Visual Snapshots
-          command: yarn --cwd "./packages/react/" snapshot
+          command: yarn workspace carbon-components-react run snapshot
 
 workflows:
   version: 2
