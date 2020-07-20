@@ -23693,6 +23693,7 @@ Text area styles
     outline: none;
     background-color: $disabled-background-color;
     border-bottom: 1px solid transparent;
+    color: $disabled-02;
   }
 
   .#{$prefix}--text-area:disabled::placeholder {

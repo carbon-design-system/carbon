@@ -1,0 +1,30 @@
+//
+// Copyright IBM Corp. 2015, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import 'generated/feature-flags';
+
+$feature-flags: () !default;
+$feature-flags: map-merge($generated-feature-flags, $feature-flags);
+
+/// Check if a feature flag is enabled
+/// @param {String} $name
+/// @returns {Boolean}
+@function feature-flag-enabled($name) {
+  @if (map-has-key($feature-flags, $name)) {
+    @return map-get($feature-flags, $name);
+  }
+  @error 'Unable to find feature flag named #{$name}';
+}
+
+/// Emit the content of the mixin if the feature flag is enabled
+/// @param {String} $name
+/// @content
+@mixin feature-flag-enabled($name) {
+  @if feature-flag-enabled($name) {
+    @content;
+  }
+}
