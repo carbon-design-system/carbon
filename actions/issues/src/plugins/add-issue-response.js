@@ -7,41 +7,38 @@
 
 'use strict';
 
-const { events, states } = require('../github');
-const { needsTriageLabel } = require('../labels');
+const { events, states } = require('../conditions');
+const labels = require('../labels');
+
+const { needsTriage, waitingForAuthor, waitingForMaintainer } = labels.status;
 
 const plugin = {
   name: 'Add triage response',
-  conditions: [events.comments.created, states.issues.open],
+  conditions: [
+    events.comments.created,
+    states.issues.open,
+    states.issues.has(needsTriage),
+  ],
   async run(context, octokit) {
     const { comment, issue, repository } = context.payload;
-    const hasTriageLabel = issue.labels.find((label) => {
-      return label.name === needsTriageLabel;
-    });
-    if (!hasTriageLabel) {
-      return;
-    }
-
-    const author = `waiting on author's response`;
-    const maintainer = `waiting on maintainer response`;
     const roles = new Set(['OWNER', 'COLLABORATOR']);
 
     // waiting for author's response
     if (roles.has(comment.author_association)) {
       const hasMaintainerLabel = issue.labels.find((label) => {
-        return label.name === maintainer;
+        return label.name === waitingForMaintainer;
       });
       if (hasMaintainerLabel) {
         await octokit.issues.removeLabel({
           owner: repository.owner.login,
           repo: repository.name,
           issue_number: issue.number,
-          name: maintainer,
+          name: waitingForMaintainer,
         });
       }
 
       const hasAuthorLabel = issue.labels.find((label) => {
-        return label.name === author;
+        return label.name === waitingForAuthor;
       });
 
       if (hasAuthorLabel) {
@@ -52,23 +49,23 @@ const plugin = {
         owner: repository.owner.login,
         repo: repository.name,
         issue_number: issue.number,
-        labels: [author],
+        labels: [waitingForAuthor],
       });
     } else {
       const hasAuthorLabel = issue.labels.find((label) => {
-        return label.name === author;
+        return label.name === waitingForAuthor;
       });
       if (hasAuthorLabel) {
         await octokit.issues.removeLabel({
           owner: repository.owner.login,
           repo: repository.name,
           issue_number: issue.number,
-          name: author,
+          name: waitingForAuthor,
         });
       }
 
       const hasMaintainerLabel = issue.labels.find((label) => {
-        return label.name === maintainer;
+        return label.name === waitingForMaintainer;
       });
       if (hasMaintainerLabel) {
         return;
@@ -78,7 +75,7 @@ const plugin = {
         owner: repository.owner.login,
         repo: repository.name,
         issue_number: issue.number,
-        labels: [maintainer],
+        labels: [waitingForMaintainer],
       });
     }
   },

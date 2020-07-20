@@ -8,8 +8,8 @@
 'use strict';
 
 const core = require('@actions/core');
-const { events } = require('../github');
-const { needsTriageLabel } = require('../labels');
+const { events } = require('../conditions');
+const labels = require('../labels');
 
 const plugin = {
   name: 'Add triage label',
@@ -25,7 +25,7 @@ const plugin = {
     }
 
     const hasTriageLabel = issue.labels.find((label) => {
-      return label.name === needsTriageLabel;
+      return label.name === labels.status.needsTriage;
     });
 
     if (!hasTriageLabel) {
@@ -33,7 +33,7 @@ const plugin = {
         owner: repository.owner.login,
         repo: repository.name,
         issue_number: issue.number,
-        labels: [needsTriageLabel],
+        labels: [labels.status.needsTriage],
       });
     }
   },

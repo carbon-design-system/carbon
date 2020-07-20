@@ -7,8 +7,16 @@
 
 'use strict';
 
-const needsTriageLabel = 'status: needs triage 🕵️‍♀️';
-
 module.exports = {
-  needsTriageLabel,
+  status: {
+    // Reviews
+    oneMoreReview: 'status: one more review 👀',
+    readyForReview: 'status: ready for review 👀',
+    readyToMerge: 'status: ready to merge 🎉',
+
+    // Triage
+    needsTriage: 'status: needs triage 🕵️‍♀️',
+    waitingForAuthor: `status: waiting for author's response 💬`,
+    waitingForMaintainer: 'status: waiting for maintainer response 💬',
+  },
 };

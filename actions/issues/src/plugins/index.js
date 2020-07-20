@@ -7,8 +7,6 @@
 
 'use strict';
 
-const triage = require('./add-triage-label');
-
 module.exports = {
-  plugins: [triage],
+  plugins: [require('./add-triage-label'), require('./add-issue-response')],
 };

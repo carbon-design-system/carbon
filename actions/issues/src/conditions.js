@@ -42,6 +42,19 @@ const states = {
         return !!context.issue.closed_at;
       },
     },
+    has(label) {
+      return {
+        key: `has_issue_label_${label}`,
+        run(context) {
+          if (!context.payload.issue) {
+            return;
+          }
+          return context.payload.issue.labels.find(({ name }) => {
+            return name === label;
+          });
+        },
+      };
+    },
   },
 };
 

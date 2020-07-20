@@ -2,8 +2,8 @@ name: Issue Triage
 on:
   issues:
     types: [opened]
-  # issue_comment:
-  # types: [created]
+  issue_comment:
+    types: [created]
 jobs:
   comment:
     runs-on: ubuntu-latest
