@@ -544,11 +544,6 @@
       will-change: transform;
     }
 
-    tr:not(.#{$prefix}--expandable-row) {
-      height: auto;
-      min-height: rem(48px);
-    }
-
     tr.#{$prefix}--parent-row.#{$prefix}--expandable-row {
       height: auto;
       min-height: 3rem;
@@ -575,7 +570,7 @@
     }
 
     &:not(.#{$prefix}--data-table--compact):not(.#{$prefix}--data-table--tall):not(.#{$prefix}--data-table--short)
-      td:not(.#{$prefix}--table-column-menu) {
+      td:not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-checkbox) {
       padding-top: rem(14px);
     }
 
@@ -596,9 +591,16 @@
     }
 
     // Selectable fix
-    th.#{$prefix}--table-column-checkbox {
+    thead th.#{$prefix}--table-column-checkbox,
+    tbody tr td.#{$prefix}--table-column-checkbox {
       align-items: center;
-      width: rem(48px);
+      width: rem(36px);
+      min-width: rem(36px);
+    }
+
+    &.#{$prefix}--data-table--tall thead th.#{$prefix}--table-column-checkbox,
+    &.#{$prefix}--data-table--tall td.#{$prefix}--table-column-checkbox {
+      align-items: flex-start;
     }
 
     // Overflow fix
@@ -612,8 +614,9 @@
     }
 
     td.#{$prefix}--table-column-menu {
-      padding-top: 0;
       align-items: center;
+      height: auto;
+      padding-top: 0;
     }
 
     //hides webkit scrollbar
@@ -640,12 +643,43 @@
       min-width: 0;
     }
 
+    &.#{$prefix}--data-table--compact tr:not(.#{$prefix}--expandable-row),
+    &.#{$prefix}--data-table--short tr:not(.#{$prefix}--expandable-row),
+    &.#{$prefix}--data-table--tall tr:not(.#{$prefix}--expandable-row) {
+      height: auto;
+    }
+
+    // Compact
+    &.#{$prefix}--data-table--compact tr:not(.#{$prefix}--expandable-row) {
+      min-height: rem(24px);
+    }
+
+    // Short
+    &.#{$prefix}--data-table--short tr:not(.#{$prefix}--expandable-row) {
+      min-height: rem(32px);
+    }
+
+    // Tall
+    &.#{$prefix}--data-table--tall tr:not(.#{$prefix}--expandable-row) {
+      min-height: rem(64px);
+    }
+
     .#{$prefix}--table-header-label {
       @include text-overflow;
 
       max-width: calc(100% - 10px);
-      padding-top: rem(14px);
-      padding-bottom: rem(14px);
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    &.#{$prefix}--data-table--compact th .#{$prefix}--table-header-label {
+      padding-top: rem(3px);
+      padding-bottom: 0;
+    }
+
+    &.#{$prefix}--data-table--short th .#{$prefix}--table-header-label {
+      padding-top: rem(8px);
+      padding-bottom: 0;
     }
   }
 
