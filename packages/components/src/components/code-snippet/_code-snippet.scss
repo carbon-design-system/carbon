@@ -94,9 +94,13 @@
     padding: 0 $spacing-03;
   }
 
-  .#{$prefix}--snippet--inline.#{$prefix}--snippet--no-copy:hover {
-    background-color: $ui-01;
-    cursor: auto;
+  .#{$prefix}--snippet--inline.#{$prefix}--snippet--no-copy {
+    display: inline-block;
+
+    &:hover {
+      background-color: $ui-01;
+      cursor: auto;
+    }
   }
 
   // Single Line Snippet
