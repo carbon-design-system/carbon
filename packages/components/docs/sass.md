@@ -16037,11 +16037,30 @@ Data table core styles
     // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
     position: static;
     background: $ui-03;
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
-    // 16px padding left + 8px padding right + 20px checkbox width
-    width: rem(44px);
     transition: background-color $duration--fast-01 motion(entrance, productive);
+  }
+
+  .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
+    min-width: 0;
+    padding-left: $spacing-05;
+    // spacing between checkbox / chevron and next cell should be 16px / 1rem
+    // adjacent cell has 16px / 1rem padding-left though, hence the removal of padding-right here
+    padding-right: 0;
+  }
+
+  .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox {
+    // 16px padding left + 20px checkbox width
+    width: rem(36px);
+  }
+
+  .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
+    // 16px padding left + 16px checkbox width
+    width: rem(32px);
   }
 
   .#{$prefix}--data-table--tall .#{$prefix}--table-column-checkbox {
