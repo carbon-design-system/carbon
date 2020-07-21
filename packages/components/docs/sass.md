@@ -16063,6 +16063,10 @@ Data table core styles
     width: 48px;
   }
 
+  .#{$prefix}--table-column-radio .#{$prefix}--radio-button__appearance {
+    margin-right: rem(-2px);
+  }
+
   // default selected row + zebra select - even child
   .#{$prefix}--data-table--zebra
     tbody
