@@ -276,7 +276,7 @@
   .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox,
   .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
-    min-width: unset;
+    min-width: 0;
     padding-left: $spacing-05;
     // spacing between checkbox / chevron and next cell should be 16px / 1rem
     // adjacent cell has 16px / 1rem padding-left though, hence the removal of padding-right here
