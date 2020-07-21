@@ -11,6 +11,7 @@ import {
   Save16 as Save,
   Download16 as Download,
 } from '@carbon/icons-react';
+import { select } from '@storybook/addon-knobs';
 
 import DataTable, {
   Table,
@@ -142,7 +143,20 @@ const DynamicContentStory = (props) => {
                   </TableBatchAction>
                 </TableBatchActions>
                 <TableToolbarContent>
-                  <TableToolbarSearch onChange={onInputChange} />
+                  <TableToolbarSearch
+                    onChange={onInputChange}
+                    defaultValue={select(
+                      'Default search value (defaultValue)',
+                      {
+                        andrew: 'andrew',
+                        marc: 'marc',
+                        mel: 'mel',
+                        empty: '',
+                        null: null,
+                      },
+                      null
+                    )}
+                  />
                   <TableToolbarMenu>
                     <TableToolbarAction
                       primaryFocus

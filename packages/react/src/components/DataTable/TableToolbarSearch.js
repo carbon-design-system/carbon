@@ -57,15 +57,12 @@ const TableToolbarSearch = ({
     }
   }, [focusTarget]);
 
-  useEffect(
-    () => {
-      if (defaultValue) {
-        onChangeProp('', defaultValue);
-      }
-    },
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
+  useEffect(() => {
+    if (defaultValue) {
+      onChangeProp('', defaultValue);
+      setValue(defaultValue);
+    }
+  }, [defaultValue]); //eslint-disable-line react-hooks/exhaustive-deps
 
   const searchContainerClasses = cx({
     [searchContainerClass]: searchContainerClass,
@@ -115,6 +112,7 @@ const TableToolbarSearch = ({
         tabIndex={expandedState ? tabIndex : '-1'}
         className={className}
         value={value}
+        f
         id={typeof id !== 'undefined' ? id : uniqueId.toString()}
         aria-hidden={!expanded}
         labelText={labelText || t('carbon.table.toolbar.search.label')}
