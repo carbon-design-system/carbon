@@ -104,7 +104,7 @@ exports[`TreeView should render 1`] = `
       value="2"
     >
       <li
-        aria-selected={null}
+        aria-selected={false}
         className="bx--tree-node bx--tree-leaf-node"
         id="2"
         onClick={[Function]}
@@ -140,7 +140,7 @@ exports[`TreeView should render 1`] = `
     >
       <li
         aria-expanded={true}
-        aria-selected={null}
+        aria-selected={false}
         className="bx--tree-node bx--tree-parent-node"
         id="5"
         onClick={[Function]}
@@ -215,7 +215,7 @@ exports[`TreeView should render 1`] = `
             value="5-1"
           >
             <li
-              aria-selected={null}
+              aria-selected={false}
               className="bx--tree-node bx--tree-leaf-node"
               id="5-1"
               onClick={[Function]}
@@ -249,7 +249,7 @@ exports[`TreeView should render 1`] = `
             value="5-2"
           >
             <li
-              aria-selected={null}
+              aria-selected={false}
               className="bx--tree-node bx--tree-leaf-node"
               id="5-2"
               onClick={[Function]}
@@ -285,7 +285,7 @@ exports[`TreeView should render 1`] = `
           >
             <li
               aria-expanded={true}
-              aria-selected={null}
+              aria-selected={false}
               className="bx--tree-node bx--tree-parent-node"
               id="5-3"
               onClick={[Function]}
@@ -360,7 +360,7 @@ exports[`TreeView should render 1`] = `
                   value="5-4"
                 >
                   <li
-                    aria-selected={null}
+                    aria-selected={false}
                     className="bx--tree-node bx--tree-leaf-node"
                     id="5-4"
                     onClick={[Function]}
@@ -535,7 +535,7 @@ exports[`TreeView should render with icons 1`] = `
       value="2"
     >
       <li
-        aria-selected={null}
+        aria-selected={false}
         className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
         id="2"
         onClick={[Function]}
@@ -609,7 +609,7 @@ exports[`TreeView should render with icons 1`] = `
     >
       <li
         aria-expanded={true}
-        aria-selected={null}
+        aria-selected={false}
         className="bx--tree-node bx--tree-node--with-icon bx--tree-parent-node"
         id="5"
         onClick={[Function]}
@@ -719,7 +719,7 @@ exports[`TreeView should render with icons 1`] = `
             value="5-1"
           >
             <li
-              aria-selected={null}
+              aria-selected={false}
               className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
               id="5-1"
               onClick={[Function]}
@@ -791,7 +791,7 @@ exports[`TreeView should render with icons 1`] = `
             value="5-2"
           >
             <li
-              aria-selected={null}
+              aria-selected={false}
               className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
               id="5-2"
               onClick={[Function]}
@@ -865,7 +865,7 @@ exports[`TreeView should render with icons 1`] = `
           >
             <li
               aria-expanded={true}
-              aria-selected={null}
+              aria-selected={false}
               className="bx--tree-node bx--tree-node--with-icon bx--tree-parent-node"
               id="5-3"
               onClick={[Function]}
@@ -975,7 +975,7 @@ exports[`TreeView should render with icons 1`] = `
                   value="5-4"
                 >
                   <li
-                    aria-selected={null}
+                    aria-selected={false}
                     className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
                     id="5-4"
                     onClick={[Function]}
