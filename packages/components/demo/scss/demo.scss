@@ -1,0 +1,366 @@
+// Manual theme tests for development environment
+// 1) v9 and v10 - customize individual variables
+// $interactive-01: pink;
+// $brand-01: pink;
+
+// 2) new in v10 - customize many variables via alternate theme
+// @import '../../src/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';
+// $carbon--theme: $carbon--theme--g90;
+
+// 3a) possible in v10 - customize individual variables of an alternate theme
+// @import '../../src/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';
+// $carbon--theme: $carbon--theme--g90;
+// $interactive-01: pink;
+
+// 3b) possible in v10 - customize individual variables of an alternate theme
+// @import '../../src/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';
+// $carbon--theme: map-merge(
+//   $carbon--theme--g90,
+//   (
+//     interactive-01: pink,
+//   )
+// );
+$feature-flags: (
+  enable-css-custom-properties: true,
+);
+
+@import '../../src/globals/scss/vendor/@carbon/themes/scss/mixins';
+@import '../../src/globals/scss/styles';
+
+$deprecations--entry: true;
+// Collect all deprecation reasons into this list throughout the import cycle.
+$deprecations--reasons: ();
+// This message will be prepended to any deprecation notice
+$deprecations--message: 'Deprecated code was found, this code will be removed before the next release of Carbon.';
+
+@import '../../src/globals/scss/functions';
+@import './_vars.scss';
+@import './_mixins.scss';
+@import './_layout.scss';
+@import './_markdown-page.scss';
+@import './_page.scss';
+@import './_prism.scss';
+@import '../js/components/CodeExample/code-example.scss';
+@import '../js/components/CodePage/code-page.scss';
+@import '../js/components/ComponentExample/component-example.scss';
+@import '../js/components/ComponentExample/component-overrides.scss';
+@import '../js/components/PageHeader/page-header.scss';
+
+// Cycle through all the deprecation reasons, if any exist, that have been
+// accumulated through the @import process.
+@if (length($deprecations--reasons) > 0) {
+  $deprecations--message: '';
+  @each $reason in $deprecations--reasons {
+    $deprecations--message: '#{$deprecations--message} REASON: #{$reason}';
+  }
+
+  @warn $deprecations--message;
+}
+
+[data-renderroot] {
+  display: block;
+
+  .component-example__live--with-iframe {
+    height: 25rem;
+
+    iframe {
+      height: 100%;
+    }
+  }
+}
+
+.demo--container {
+  display: block;
+  box-sizing: border-box;
+  padding-top: 1em;
+  transition: 0.2s;
+  background-color: $ui-background;
+  padding-left: 0;
+}
+
+:root {
+  @include carbon--theme(
+    $theme: $carbon--theme--white,
+    $emit-custom-properties: true
+  );
+}
+
+.demo--container,
+:root.demo--theme--white .demo--container,
+.component-example__live,
+:root.demo--theme--white .component-example__live,
+.bx--tooltip,
+:root.demo--theme--white .bx--tooltip,
+.bx--overflow-menu-options,
+:root.demo--theme--white .bx--overflow-menu-options {
+  @include carbon--theme(
+    $theme: $carbon--theme--white,
+    $emit-custom-properties: true
+  );
+}
+
+:root.demo--theme--g10 .demo--container,
+:root.demo--theme--g10 .component-example__live,
+:root.demo--theme--g10 .bx--date-picker__calendar.open,
+:root.demo--theme--g10 .bx--tooltip,
+:root.demo--theme--g10 .bx--overflow-menu-options {
+  @include carbon--theme(
+    $theme: $carbon--theme--g10,
+    $emit-custom-properties: true
+  );
+}
+
+:root.demo--theme--g90 .demo--container,
+:root.demo--theme--g90 .component-example__live,
+:root.demo--theme--g90 .bx--date-picker__calendar.open,
+:root.demo--theme--g90 .bx--tooltip,
+:root.demo--theme--g90 .bx--overflow-menu-options {
+  @include carbon--theme(
+    $theme: $carbon--theme--g90,
+    $emit-custom-properties: true
+  );
+}
+
+:root.demo--theme--g100 .demo--container,
+:root.demo--theme--g100 .component-example__live,
+:root.demo--theme--g100 .bx--date-picker__calendar.open,
+:root.demo--theme--g100 .bx--tooltip,
+:root.demo--theme--g100 .bx--overflow-menu-options {
+  @include carbon--theme(
+    $theme: $carbon--theme--g100,
+    $emit-custom-properties: true
+  );
+}
+
+.demo--container.demo--container--list-box > .demo--container__panel,
+.demo--container.demo--container--multi-select > .demo--container__panel,
+.component-example__live--rendered.list-box > div,
+.component-example__live--rendered.multi-select > div {
+  width: 300px;
+  padding: 0;
+}
+
+.demo--container__panel.demo--container--listbox {
+  margin: 5%;
+}
+
+.demo--theme-switcher {
+  position: absolute;
+  top: rem(16px);
+  right: rem(16px);
+  display: none; // Temporarily hide theme switcher
+}
+
+.demo--theme-switcher--dropdown {
+  position: absolute;
+  top: rem(32px);
+  right: rem(32px);
+  display: block;
+}
+
+.bx--tile-container {
+  width: 100%;
+
+  .bx--tile {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+
+  .bx--col {
+    background: none;
+    margin-bottom: 1rem;
+  }
+}
+
+.demo--container__panel {
+  width: 100%;
+  max-width: 960px;
+  height: 100%;
+  padding: 1em;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .demo--container.flex-col & {
+    flex-direction: column;
+    margin: 0 auto;
+
+    & > * {
+      margin: 1rem 0;
+    }
+  }
+
+  .demo--container.flex-row & {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto;
+
+    & > * {
+      margin: 1rem;
+    }
+  }
+
+  &.mobile {
+    max-width: 600px;
+  }
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.bx--global-header--demo {
+  top: 0;
+  height: 5.375em;
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  z-index: 0;
+}
+
+.demo-switcher {
+  &__container {
+    display: flex;
+    align-items: center;
+
+    label {
+      color: #fff;
+      margin-right: 1rem;
+    }
+  }
+}
+
+.test-header {
+  position: fixed;
+  background-color: $ui-05;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 86px;
+  z-index: 8000;
+}
+
+.test-nav {
+  position: fixed;
+  background-color: $ui-04;
+  width: 200px;
+  height: calc(100vh - 86px);
+  bottom: 0;
+  left: 0;
+  z-index: 8000;
+}
+
+//--------------------------------------------------------------------------
+// Grid
+//--------------------------------------------------------------------------
+// Custom styling for the grid demo
+@if feature-flag-enabled('grid') {
+  .demo--container--grid {
+    .outside {
+      background-color: #dbeaff;
+      outline: 1px solid #97c1ff;
+      height: 80px;
+    }
+
+    .inside {
+      background-color: #edf4ff;
+      height: 100%;
+    }
+
+    [class*='col'] {
+      outline: 1px dashed #97c1ff;
+    }
+
+    display: block;
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .#{$prefix}--grid {
+    outline: 1px dashed #97c1ff;
+  }
+} @else {
+  .bx--row {
+    min-height: 50px;
+  }
+
+  [class*='bx--col'] {
+    background-color: #dfe3e6; // Old gray-1
+
+    p {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
+
+  .col-example {
+    background-color: rgba(blue, 0.2);
+    height: 100%;
+  }
+
+  .red {
+    background-color: rgba(red, 0.2);
+  }
+
+  .green {
+    background-color: rgba(green, 0.2);
+  }
+
+  .indigo {
+    background-color: rgba(indigo, 0.2);
+  }
+}
+
+.bx--side-nav__icon--small {
+  display: none;
+}
+
+a.bx--side-nav__link {
+  padding-left: 2rem;
+}
+
+.component-example__live .bx--form-item,
+.demo--container__panel .bx--form-item {
+  margin-bottom: 2rem;
+}
+
+.component-example__live .bx--form-item.bx--checkbox-wrapper,
+.demo--container__panel .bx--form-item.bx--checkbox-wrapper {
+  margin-bottom: 0;
+}
+
+.component-variation__name {
+  @include type-style('heading-02');
+}
+
+//--------------------------------------------------------------------------
+// Button
+//--------------------------------------------------------------------------
+// Custom styling for the button demo
+
+.example-input-button-pairing {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+
+  .example-button-wrapper {
+    margin-top: 1.5rem;
+    margin-left: 4px;
+  }
+}
+
+@media screen and (max-width: 29rem) {
+  .example-input-button-pairing {
+    .bx--form-item {
+      min-width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .example-button-wrapper {
+      margin-top: 0;
+      margin-left: 0;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "layout-basic-example",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "parcel build -d build --public-url \"/layout/examples/preview\" index.html",
+    "develop": "parcel index.html --no-cache"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}

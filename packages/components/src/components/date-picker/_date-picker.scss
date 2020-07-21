@@ -1,0 +1,183 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../form/form';
+@import 'flatpickr.scss';
+
+/// Date picker styles
+/// @access private
+/// @group date-picker
+@mixin date-picker {
+  .#{$prefix}--date-picker {
+    display: flex;
+  }
+
+  .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
+    background: $field-02;
+  }
+
+  .#{$prefix}--date-picker ~ .#{$prefix}--label {
+    order: 1;
+  }
+
+  .#{$prefix}--date-picker-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .#{$prefix}--date-picker-input__wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    ~ .#{$prefix}--form-requirement {
+      max-height: rem(200px);
+      display: block;
+      color: $text-error;
+      font-weight: 400;
+      margin-top: $carbon--spacing-02;
+      overflow: visible;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
+    .#{$prefix}--date-picker__input {
+      width: rem(120px);
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple.#{$prefix}--date-picker--short {
+    .#{$prefix}--date-picker__input {
+      width: 5.7rem;
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--single
+    .#{$prefix}--date-picker__input {
+    width: rem(288px);
+  }
+
+  .#{$prefix}--date-picker__input {
+    @include reset;
+    @include type-style('code-02');
+    @include focus-outline('reset');
+
+    display: block;
+    position: relative;
+    height: rem(40px);
+    min-width: rem(144px);
+    padding: 0 $carbon--spacing-05;
+    background-color: $field-01;
+    border: none;
+    color: $text-01;
+    border-bottom: 1px solid $ui-04;
+    transition: $duration--fast-01 motion(standard, productive) all;
+
+    &:focus,
+    &.#{$prefix}--focused {
+      @include focus-outline('outline');
+    }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      @include focus-outline('invalid');
+    }
+
+    &:disabled {
+      color: $disabled-02;
+      background-color: $disabled-background-color;
+      border-bottom: 1px solid transparent;
+      cursor: not-allowed;
+    }
+
+    &:disabled::placeholder {
+      color: $disabled-02;
+    }
+
+    &:disabled:hover {
+      border-bottom: 1px solid transparent;
+    }
+
+    &::placeholder {
+      color: $text-05;
+      opacity: 1;
+    }
+  }
+
+  // Size variant styles
+  .#{$prefix}--date-picker__input--xl {
+    height: rem(48px);
+  }
+
+  .#{$prefix}--date-picker__input--sm {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--date-picker__icon {
+    position: absolute;
+    right: 1rem;
+    fill: $icon-01;
+    cursor: pointer;
+    z-index: 1;
+    // vertically center icon within parent container on IE11
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
+    padding-right: $carbon--spacing-09;
+  }
+
+  .#{$prefix}--date-picker__input:disabled ~ .#{$prefix}--date-picker__icon {
+    fill: $disabled-02;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--date-picker--range
+    > .#{$prefix}--date-picker-container:first-child {
+    margin-right: rem(2px);
+  }
+
+  .#{$prefix}--date-picker--range .#{$prefix}--date-picker-container,
+  .#{$prefix}--date-picker--range .#{$prefix}--date-picker__input {
+    width: rem(143.5px);
+  }
+
+  // Skeleton State
+  .#{$prefix}--date-picker.#{$prefix}--skeleton input,
+  .#{$prefix}--date-picker__input.#{$prefix}--skeleton {
+    @include skeleton;
+
+    width: 100%;
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--skeleton .#{$prefix}--label {
+    @include skeleton;
+
+    width: rem(75px);
+    height: rem(14px);
+  }
+}
+
+@include exports('date-picker') {
+  @include date-picker;
+}

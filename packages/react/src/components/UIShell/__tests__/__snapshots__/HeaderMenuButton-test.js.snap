@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderMenuButton should render 1`] = `
+<HeaderMenuButton
+  aria-label="Accessibility label"
+  className="custom-class"
+  isActive={false}
+  onClick={[MockFunction]}
+>
+  <button
+    aria-label="Accessibility label"
+    className="custom-class bx--header__action bx--header__menu-trigger bx--header__menu-toggle bx--header__menu-toggle__hidden"
+    onClick={[MockFunction]}
+    title="Accessibility label"
+    type="button"
+  >
+    <ForwardRef(Menu20)>
+      <Icon
+        fill="currentColor"
+        height={20}
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 20 20"
+        width={20}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <svg
+          aria-hidden={true}
+          fill="currentColor"
+          focusable="false"
+          height={20}
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 20 20"
+          width={20}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z"
+          />
+        </svg>
+      </Icon>
+    </ForwardRef(Menu20)>
+  </button>
+</HeaderMenuButton>
+`;

@@ -1,0 +1,33 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div data-tabs class="{{@root.prefix}}--tabs{{#if container}} {{@root.prefix}}--tabs--container{{/if}}">
+  <div class="{{@root.prefix}}--tabs-trigger" tabindex="0">
+    <a href="javascript:void(0)" class="{{@root.prefix}}--tabs-trigger-text" tabindex="-1"></a>
+    {{ carbon-icon 'ChevronDown16' }}
+  </div>
+  <ul class="{{@root.prefix}}--tabs__nav {{@root.prefix}}--tabs__nav--hidden" role="tablist">
+    {{#each items}}
+    <li
+      class="{{@root.prefix}}--tabs__nav-item{{#if selected}} {{@root.prefix}}--tabs__nav-item--selected{{/if}} {{#if disabled}} {{@root.prefix}}--tabs__nav-item--disabled {{/if}}"
+      data-target=".{{panelClass}}" role="tab" {{#if selected}} aria-selected="true" {{/if}} {{#if disabled}}
+      aria-disabled="true" {{/if}}>
+      <a tabindex="0" id="{{linkId}}" class="{{@root.prefix}}--tabs__nav-link" href="javascript:void(0)" role="tab"
+        aria-controls="{{panelId}}">{{label}}</a>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+<!-- The markup below is for demonstration purposes only -->
+<div class="{{@root.prefix}}--tab-content">
+  {{#each items}}
+  <div id="{{panelId}}" class="{{panelClass}}" role="tabpanel" aria-labelledby="{{linkId}}"
+    aria-hidden="{{not selected}}" {{#if (not selected)}} hidden{{/if}}>
+    <div>{{panelContent}}</div>
+  </div>
+  {{/each}}
+</div>

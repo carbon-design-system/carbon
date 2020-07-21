@@ -1,0 +1,174 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-------------------------
+// 🌍 Global
+//-------------------------
+
+/// If true, includes font face mixins in `_css--font-face.scss` depending on the `css--plex` feature flag
+/// @access public
+/// @type Bool
+/// @group feature-flags
+$css--font-face: true !default;
+
+/// If true, includes the `css-helpers()` mixin
+/// @access public
+/// @type Bool
+/// @group feature-flags
+$css--helpers: true !default;
+
+/// If true, includes the `css-body()` mixin
+/// @access public
+/// @type Bool
+/// @group feature-flags
+$css--body: true !default;
+
+/// If true, include reset CSS
+/// @access public
+/// @type Bool
+/// @group feature-flags
+$css--reset: true !default;
+
+/// If true, include default type
+/// @access public
+/// @type Bool
+/// @group feature-flags
+$css--default-type: true !default;
+
+/// Used with `css--font-face` feature flag, if true, uses Plex font families instead of Helvetica
+/// @access public
+/// @type Bool
+/// @group feature-flags
+$css--plex: true !default;
+
+/// This feature flag was used during development of the v10 experimental grid.
+/// TODO: remove in next major release. Synced in `feature-flags` as an adapter in the interim
+/// @deprecated (For v10) v10 always uses `@carbon/grid`
+/// @access public
+/// @type Bool
+/// @group feature-flags
+$css--use-experimental-grid: false !default;
+
+/// This feature flag was used during development of the v10 experimental grid.
+/// TODO: remove in next major release. Synced in `feature-flags` as an adapter in the interim.
+/// @access public
+/// @type Bool
+/// @group feature-flags
+/// @deprecated (For v10) v10 always uses `@carbon/grid`
+$css--use-experimental-grid-fallback: false !default;
+
+@import 'feature-flags';
+@import 'vars';
+@import 'colors';
+@import 'theme';
+@import 'mixins';
+@import 'layout';
+@import 'layer';
+@import 'spacing';
+@import 'typography';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
+@import 'css--reset';
+@import 'css--font-face';
+@import 'css--helpers';
+@import 'css--body';
+@import '../grid/grid';
+
+//-------------------------
+// ⚠️ Manage deprecations
+//-------------------------
+
+/// We flag this variable as true if someone uses the globals/scss/styles.scss
+/// entry-point. This allows us to collect all the messages and display them at
+/// the end of the file instead of bringing it up per-component.
+///
+/// If a consumer instead gets the components by importing the partial directly,
+/// this variable _will not_ be set to true, so the deprecation message will be
+/// displayed after the @import.
+/// @access private
+/// @type Bool
+/// @group global-deprecate
+$deprecations--entry: true;
+
+/// Collect all deprecation reasons into this list throughout the import cycle.
+/// @access private
+/// @type Map
+/// @group global-deprecate
+$deprecations--reasons: ();
+
+/// This message will be prepended to any deprecation notice.
+/// @access private
+/// @type String
+/// @group global-deprecate
+$deprecations--message: 'Deprecated code was found, this code will be removed before the next release of Carbon.';
+
+//-------------------------
+// 🍕 Components
+//-------------------------
+
+@import '../../components/button/button';
+@import '../../components/copy-button/copy-button';
+@import '../../components/file-uploader/file-uploader';
+@import '../../components/checkbox/checkbox';
+@import '../../components/combo-box/combo-box';
+@import '../../components/radio-button/radio-button';
+@import '../../components/toggle/toggle';
+@import '../../components/search/search';
+@import '../../components/select/select';
+@import '../../components/text-input/text-input';
+@import '../../components/text-area/text-area';
+@import '../../components/number-input/number-input';
+@import '../../components/form/form';
+@import '../../components/link/link';
+@import '../../components/list-box/list-box';
+@import '../../components/list/list';
+@import '../../components/data-table/data-table';
+@import '../../components/structured-list/structured-list';
+@import '../../components/code-snippet/code-snippet';
+@import '../../components/overflow-menu/overflow-menu';
+@import '../../components/content-switcher/content-switcher';
+@import '../../components/date-picker/date-picker';
+@import '../../components/dropdown/dropdown';
+@import '../../components/loading/loading';
+@import '../../components/modal/modal';
+@import '../../components/multi-select/multi-select';
+@import '../../components/notification/inline-notification';
+@import '../../components/notification/toast-notification';
+@import '../../components/tooltip/tooltip';
+@import '../../components/tabs/tabs';
+@import '../../components/tag/tag';
+@import '../../components/pagination/pagination';
+@import '../../components/accordion/accordion';
+@import '../../components/progress-indicator/progress-indicator';
+@import '../../components/breadcrumb/breadcrumb';
+@import '../../components/toolbar/toolbar';
+@import '../../components/time-picker/time-picker';
+@import '../../components/slider/slider';
+@import '../../components/tile/tile';
+@import '../../components/skeleton/skeleton';
+@import '../../components/inline-loading/inline-loading';
+@import '../../components/pagination-nav/pagination-nav';
+
+//-------------------------------------
+// 🔬 Experimental
+//-------------------------------------
+@import '../../components/pagination/unstable_pagination';
+@import '../../components/ui-shell/ui-shell';
+
+//-------------------------------------
+// 🙈 Hidden (Not exposed on website)
+//-------------------------------------
+
+// Cycle through all the deprecation reasons, if any exist, that have been
+// accumulated through the @import process.
+@if (length($deprecations--reasons) > 0) {
+  $deprecations--message: '';
+  @each $reason in $deprecations--reasons {
+    $deprecations--message: '#{$deprecations--message} REASON: #{$reason}';
+  }
+
+  @warn $deprecations--message;
+}

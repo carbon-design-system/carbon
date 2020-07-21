@@ -1,0 +1,29 @@
+@mixin content-visible {
+  height: 100%;
+  visibility: inherit;
+  opacity: 1;
+}
+
+@mixin content-hidden {
+  height: 0;
+  visibility: hidden;
+  opacity: 0;
+}
+
+@keyframes collapse-accordion {
+  0% {
+    @include content-visible;
+  }
+  100% {
+    @include content-hidden;
+  }
+}
+
+@keyframes expand-accordion {
+  0% {
+    @include content-hidden;
+  }
+  100% {
+    @include content-visible;
+  }
+}

@@ -1,0 +1,86 @@
+@import '../../scss/layout';
+
+body {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+//------------------------------------------------------------------------------
+// Conversion
+//------------------------------------------------------------------------------
+.convert-box {
+  width: carbon--rem(48px);
+  height: carbon--em(48px);
+  background-color: black;
+}
+
+//------------------------------------------------------------------------------
+// Mini unit
+//------------------------------------------------------------------------------
+.mini-unit-box {
+  width: carbon--mini-units(6);
+  height: carbon--mini-units(6);
+  background-color: black;
+}
+
+//------------------------------------------------------------------------------
+// Spacing scale
+//------------------------------------------------------------------------------
+.spacing-scale {
+  display: flex;
+  align-items: flex-end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@each $spacer in $carbon--spacing {
+  $index: index($carbon--spacing, $spacer);
+
+  .fixed-spacing-scale-#{$index} {
+    width: $spacer;
+    height: $spacer;
+    background-color: black;
+    margin-right: carbon--mini-units(3);
+    margin-bottom: carbon--mini-units(3);
+  }
+}
+
+@each $spacer in $carbon--fluid-spacing {
+  $index: index($carbon--fluid-spacing, $spacer);
+
+  .fluid-spacing-scale-#{$index} {
+    width: $spacer;
+    height: $spacer;
+    background-color: black;
+    margin-right: carbon--mini-units(3);
+    margin-bottom: carbon--mini-units(3);
+  }
+}
+
+//------------------------------------------------------------------------------
+// Key heights
+//------------------------------------------------------------------------------
+.key-heights {
+  display: flex;
+  align-items: flex-end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+@each $breakpoint, $scale in $carbon--key-height-scales {
+  @include carbon--breakpoint($breakpoint) {
+    @each $value in $scale {
+      $index: index($scale, $value);
+
+      .key-height-#{$index} {
+        width: $value;
+        height: $value;
+        background-color: black;
+        margin-right: carbon--mini-units(3);
+        margin-bottom: carbon--mini-units(3);
+      }
+    }
+  }
+}

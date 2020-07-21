@@ -1,0 +1,23 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div class="{{@root.prefix}}--form-item">
+  <label class="{{@root.prefix}}--label {{#if disabled}}{{@root.prefix}}--label--disabled{{/if}}">
+    Slider label
+  </label>
+  <div class="{{@root.prefix}}--slider-container">
+    <label id="{{inputId}}_bottom-range-label" class="{{@root.prefix}}--slider__range-label">0</label>
+    <div class="{{@root.prefix}}--slider {{#if disabled}} {{@root.prefix}}--slider--disabled{{/if}}" data-slider data-slider-input-box="#{{inputId}}">
+      <div class="{{@root.prefix}}--slider__thumb" tabindex="0"></div>
+      <div class="{{@root.prefix}}--slider__track"></div>
+      <div class="{{@root.prefix}}--slider__filled-track"></div>
+      <input aria-label="slider" id="slider" class="{{@root.prefix}}--slider__input" type="range" step="1" min="0" max="100" value="{{ value }}">
+    </div>
+    <label id="{{inputId}}_top-range-label" class="{{@root.prefix}}--slider__range-label">100</label>
+    <input id="{{inputId}}" aria-labelledby="{{inputId}}_bottom-range-label {{inputId}}_top-range-label" type="number" class="{{@root.prefix}}--text-input {{@root.prefix}}--slider-text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}" placeholder="0" value="{{ value }}">
+  </div>
+</div>

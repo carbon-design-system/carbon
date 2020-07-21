@@ -1,0 +1,20 @@
+<!-- 
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div data-tile="expandable" class="{{@root.prefix}}--tile {{@root.prefix}}--tile--expandable" tabindex="0">
+  <button aria-label="expand menu" class="{{@root.prefix}}--tile__chevron">
+    {{ carbon-icon 'ChevronDown16' }}
+  </button>
+  <div class="{{@root.prefix}}--tile-content">
+    <span data-tile-atf class="{{@root.prefix}}--tile-content__above-the-fold">
+      <!-- Above the fold content here -->
+    </span>
+    <span class="{{@root.prefix}}--tile-content__below-the-fold">
+      <!-- Rest of the content here -->
+    </span>
+  </div>
+</div>

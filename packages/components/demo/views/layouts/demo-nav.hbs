@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Carbon Components</title>
+    <style>
+      .offleft {
+        position: absolute;
+        top: 0;
+        left: -10000px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+    </style>
+    <link rel="stylesheet" type="text/css" href="/demo.css">
+  </head>
+  <body>
+    <div data-renderroot data-floating-menu-container></div>
+    <input aria-label="inpute-text-offleft" type="text" class="offleft" />
+    {{{yield}}}
+    <script src="/demo{{#if minify}}.min{{/if}}.js"></script>
+  </body>
+</html>

@@ -1,0 +1,299 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../button/button';
+@import '../form/form';
+@import '../loading/loading';
+@import '../../globals/scss/vendor/@carbon/elements/scss/type/styles';
+
+/// File uploader styles
+/// @access private
+/// @group file-uploader
+@mixin file-uploader {
+  .#{$prefix}--file {
+    width: 100%;
+  }
+
+  .#{$prefix}--file--invalid {
+    margin-right: $carbon--spacing-03;
+    fill: $support-01;
+  }
+
+  // TODO: sync with type
+  .#{$prefix}--file--label {
+    @include reset;
+    @include type-style('productive-heading-01');
+
+    color: $text-01;
+    margin-bottom: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--file-input {
+    @include hidden;
+  }
+
+  // This class is of old markup with "select file" button
+  // New code should use link-style "select file" UI (`.bx--file-browse-btn`)
+  // TODO: deprecate this block
+  .#{$prefix}--file-btn {
+    display: inline-flex;
+    margin: 0;
+    padding-right: rem(64px);
+  }
+
+  .#{$prefix}--file-browse-btn {
+    margin-bottom: $carbon--spacing-03;
+    display: inline-block;
+    width: 100%;
+    max-width: rem(320px);
+    color: $link-01;
+    transition: $duration--fast-02 motion(standard, productive);
+    cursor: pointer;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+
+    &:focus,
+    &:hover {
+      outline: 2px solid $interactive-03;
+    }
+
+    &:hover,
+    &:focus,
+    &:active,
+    &:active:visited {
+      text-decoration: underline;
+    }
+
+    &:active {
+      color: $text-01;
+    }
+  }
+
+  .#{$prefix}--file-browse-btn--disabled {
+    cursor: no-drop;
+    text-decoration: none;
+    color: $disabled-02;
+
+    &:hover,
+    &:focus {
+      outline: none;
+      text-decoration: none;
+      color: $disabled-02;
+    }
+  }
+
+  .#{$prefix}--file-browse-btn--disabled .#{$prefix}--file__drop-container {
+    border: 1px dashed $disabled-01;
+  }
+
+  .#{$prefix}--label-description {
+    @include reset;
+    @include type-style('body-short-01');
+
+    color: $text-02;
+    margin-bottom: $carbon--spacing-05;
+  }
+
+  // For backwards compatibility
+  .#{$prefix}--file-btn ~ .#{$prefix}--file-container {
+    margin-top: $carbon--spacing-06;
+  }
+
+  .#{$prefix}--btn ~ .#{$prefix}--file-container {
+    margin-top: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--file .#{$prefix}--file-container,
+  .#{$prefix}--file ~ .#{$prefix}--file-container {
+    margin-top: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--file__selected-file {
+    display: grid;
+    grid-gap: $carbon--spacing-05;
+    grid-template-columns: 1fr auto;
+    grid-auto-rows: auto;
+    align-items: center;
+    min-height: $carbon--spacing-09;
+    max-width: rem(320px);
+    margin-bottom: $carbon--spacing-03;
+    background-color: $field-01;
+    word-break: break-word;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .#{$prefix}--form-requirement {
+      grid-column: 1 / -1;
+      max-height: none;
+      margin: 0;
+    }
+
+    .#{$prefix}--loading {
+      width: rem(32px);
+      height: rem(32px);
+      margin-right: -$carbon--spacing-03;
+    }
+
+    .#{$prefix}--inline-loading__animation .#{$prefix}--loading {
+      // Vanilla markup has `.bx--inline-loading__animation` which is used for `margin-right` adjustment
+      margin-right: 0;
+    }
+
+    .#{$prefix}--file-filename {
+      @include type-style('body-short-01');
+
+      margin-left: $carbon--spacing-05;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+
+  .#{$prefix}--file__selected-file--field {
+    min-height: rem(40px);
+  }
+
+  .#{$prefix}--file__selected-file--sm {
+    min-height: rem(32px);
+  }
+
+  // TODO: deprecate this block
+  .#{$prefix}--file__selected-file--invalid__wrapper {
+    @include focus-outline('invalid');
+
+    outline-width: 1px;
+    background-color: $field-01;
+    max-width: rem(320px);
+    margin-bottom: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--file__selected-file--invalid {
+    @include focus-outline('invalid');
+
+    padding: $carbon--spacing-05 0;
+  }
+
+  .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
+    border-top: 1px solid $ui-03;
+    padding-top: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__title,
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__supplement {
+    @include type-style('label-01');
+
+    padding: 0 $carbon--spacing-05;
+  }
+
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__supplement {
+    color: $text-01;
+  }
+
+  // TODO: deprecate
+  .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
+    @include type-style('caption-01');
+
+    display: block;
+    max-height: rem(200px);
+    color: $text-error;
+    font-weight: 400;
+    padding: $carbon--spacing-03 $carbon--spacing-05;
+    overflow: visible;
+  }
+
+  .#{$prefix}--file__selected-file--invalid
+    + .#{$prefix}--form-requirement
+    .#{$prefix}--form-requirement__supplement {
+    padding-bottom: $carbon--spacing-03;
+    color: $text-01;
+  }
+
+  .#{$prefix}--file__state-container {
+    display: flex;
+    justify-content: center;
+    min-width: 1.5rem;
+    padding-right: $carbon--spacing-05;
+
+    .#{$prefix}--loading__svg {
+      stroke: $ui-05;
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-complete {
+    fill: $interactive-04;
+    cursor: pointer;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+
+    // for checkmark contrast
+    [data-icon-path='inner-path'] {
+      opacity: 1;
+      fill: $icon-03;
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-invalid {
+    height: $carbon--spacing-05;
+    width: $carbon--spacing-05;
+    fill: $support-01;
+    margin-right: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-close {
+    display: flex;
+    height: $carbon--spacing-05;
+    width: $carbon--spacing-05;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    fill: $icon-01;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
+    margin-right: -$carbon--spacing-03;
+  }
+
+  .#{$prefix}--file__drop-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: rem(96px);
+    padding: $carbon--spacing-05;
+    overflow: hidden;
+    border: 1px dashed $ui-04;
+  }
+
+  .#{$prefix}--file__drop-container--drag-over {
+    background: none;
+    outline: 2px solid $interactive-03;
+    outline-offset: -2px;
+  }
+}
+
+@include exports('file-uploader') {
+  @include file-uploader;
+}

@@ -1,0 +1,142 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+@import '../button/button';
+@import '../../globals/scss/tooltip';
+@import '../../globals/scss/keyframes';
+
+@include exports('copy-button') {
+  .#{$prefix}--btn--copy {
+    position: relative;
+    overflow: visible;
+
+    .#{$prefix}--btn__icon {
+      margin-left: rem(5px);
+    }
+  }
+
+  .#{$prefix}--btn--copy__feedback {
+    position: absolute;
+    display: none;
+    top: 1.2rem;
+    left: 50%;
+
+    &:focus {
+      border: 2px solid $support-01;
+    }
+
+    &::before {
+      @include box-shadow;
+      @include type-style('body-short-01');
+
+      top: 1.1rem;
+      padding: $spacing-02;
+      color: $inverse-01;
+      content: attr(data-feedback);
+      transform: translateX(-50%);
+      white-space: nowrap;
+      pointer-events: none;
+      border-radius: 4px;
+      font-weight: 400;
+      z-index: 2;
+    }
+
+    &::after {
+      top: 0.85rem;
+      width: 0.6rem;
+      height: 0.6rem;
+      left: -0.3rem;
+      border-right: 1px solid $inverse-02;
+      border-bottom: 1px solid $inverse-02;
+      content: '';
+      transform: rotate(-135deg);
+      z-index: 1;
+    }
+
+    &::before,
+    &::after {
+      position: absolute;
+      display: block;
+      background: $inverse-02;
+    }
+
+    &--displayed {
+      display: inline-flex;
+    }
+  }
+
+  // TODO: deprecate above styles
+  .#{$prefix}--copy {
+    font-size: 0;
+  }
+
+  .#{$prefix}--copy-btn {
+    @include reset;
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border: none;
+    height: $carbon--spacing-08;
+    width: $carbon--spacing-08;
+    background-color: $ui-01;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+
+    &::before {
+      @include tooltip--caret;
+
+      display: none;
+    }
+
+    .#{$prefix}--copy-btn__feedback {
+      @include tooltip--content('icon');
+
+      box-sizing: content-box;
+      clip: auto;
+      margin: auto;
+      overflow: visible;
+      display: none;
+    }
+
+    @include tooltip--placement('icon', 'bottom', 'center');
+
+    &:focus {
+      @include focus-outline('outline');
+
+      outline-color: $focus;
+    }
+
+    &.#{$prefix}--copy-btn--animating::before,
+    &.#{$prefix}--copy-btn--animating .#{$prefix}--copy-btn__feedback {
+      display: block;
+    }
+
+    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out::before,
+    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out
+      .#{$prefix}--copy-btn__feedback {
+      // https://github.com/stylelint/stylelint/issues/2363
+      animation: $duration--fast-02 motion(standard, productive) hide-feedback;
+    }
+
+    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in::before,
+    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in
+      .#{$prefix}--copy-btn__feedback {
+      animation: $duration--fast-02 motion(standard, productive) show-feedback;
+    }
+  }
+}

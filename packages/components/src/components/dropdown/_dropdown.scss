@@ -1,0 +1,471 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Dropdown
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/layout';
+
+@import '../list-box/list-box';
+
+/// Dropdown styles
+/// @access private
+/// @group dropdown
+@mixin dropdown {
+  .#{$prefix}--dropdown__wrapper--inline {
+    display: inline-grid;
+    align-items: center;
+    grid-template: auto auto / auto min-content;
+    grid-gap: rem(4px);
+
+    .#{$prefix}--label {
+      @include type-style('body-short-01');
+    }
+
+    .#{$prefix}--label,
+    .#{$prefix}--form__helper-text,
+    .#{$prefix}--form-requirement {
+      margin: 0;
+    }
+
+    .#{$prefix}--form-requirement {
+      grid-column: 2;
+    }
+  }
+
+  .#{$prefix}--dropdown {
+    @include reset;
+    @include focus-outline('reset');
+
+    position: relative;
+    list-style: none;
+    display: block;
+    background-color: $field-01;
+    border: none;
+    border-bottom: 1px solid $ui-04;
+    width: 100%;
+    height: rem(40px);
+    cursor: pointer;
+    color: $text-01;
+    outline: 2px solid transparent;
+    transition: background-color $duration--fast-01 motion(standard, productive);
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+
+  // Menu's triggering element updated to button with Downshift v5 upgrade
+  .#{$prefix}--dropdown .#{$prefix}--list-box__field {
+    @include button-reset;
+
+    text-align: left;
+    padding: 0 rem(48px) 0 rem(16px);
+  }
+
+  .#{$prefix}--dropdown--xl {
+    height: rem(48px);
+    max-height: rem(48px);
+  }
+
+  .#{$prefix}--dropdown--xl .#{$prefix}--dropdown__arrow {
+    top: rem(16px);
+  }
+
+  .#{$prefix}--dropdown--sm {
+    height: rem(32px);
+    max-height: rem(32px);
+  }
+
+  .#{$prefix}--dropdown--sm .#{$prefix}--dropdown__arrow {
+    top: rem(8px);
+  }
+
+  .#{$prefix}--dropdown--open {
+    border-bottom-color: $ui-03;
+  }
+
+  .#{$prefix}--dropdown--invalid {
+    @include focus-outline('invalid');
+
+    .#{$prefix}--dropdown-text {
+      padding-right: rem(56px);
+    }
+
+    + .#{$prefix}--form-requirement {
+      display: inline-block;
+      max-height: rem(200px);
+      color: $text-error;
+    }
+  }
+
+  .#{$prefix}--dropdown__invalid-icon {
+    position: absolute;
+    top: 50%;
+    right: $spacing-08;
+    fill: $support-01;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--dropdown--open:hover {
+    background-color: $field-01;
+  }
+
+  .#{$prefix}--dropdown--open:focus {
+    outline: 1px solid transparent;
+  }
+
+  .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
+    @include box-shadow;
+
+    // 40px item height * 5.5 items shown
+    max-height: rem(220px);
+    transition: max-height $duration--fast-02 motion(entrance, productive);
+  }
+
+  .#{$prefix}--dropdown--light {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--dropdown--up .#{$prefix}--dropdown-list {
+    bottom: 2rem;
+  }
+
+  .#{$prefix}--dropdown__arrow {
+    fill: $ui-05;
+    position: absolute;
+    right: 1rem;
+    top: rem(13px);
+    pointer-events: none;
+    transition: transform $duration--fast-02 motion(standard, productive);
+    transform-origin: 50% 45%;
+  }
+
+  button.#{$prefix}--dropdown-text {
+    color: $text-01;
+    // button-reset mixin contradicts with bx--dropdown-text styles
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--dropdown-text {
+    @include type-style('body-short-01');
+
+    display: block;
+    // Account for the border in `.bx--dropdown`
+    height: calc(100% + 1px);
+    padding-left: $carbon--spacing-05;
+    // 2rem + SVG width
+    padding-right: rem(42px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .#{$prefix}--dropdown-list {
+    @include reset;
+    @include focus-outline('reset');
+    @include box-shadow;
+    @include type-style('body-short-01');
+
+    background-color: $ui-01;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    list-style: none;
+    position: absolute;
+    z-index: z('dropdown');
+    max-height: 0;
+    transition: max-height $duration--fast-02 motion(standard, productive);
+    // NOTE: IE, Edge, and Safari do not support two value `overflow` shorthand.
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--dropdown:not(.#{$prefix}--dropdown--open)
+    .#{$prefix}--dropdown-item {
+    visibility: hidden;
+  }
+
+  .#{$prefix}--dropdown-item {
+    transition: visibility $duration--fast-01 motion(standard, productive),
+      opacity $duration--fast-01 motion(standard, productive),
+      background-color $duration--fast-01 motion(standard, productive);
+    opacity: 0;
+    visibility: inherit;
+    position: relative;
+
+    &:hover {
+      background-color: $hover-ui;
+
+      + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
+        border-color: transparent;
+      }
+    }
+
+    &:active {
+      background-color: $selected-ui;
+    }
+
+    &:first-of-type .#{$prefix}--dropdown-link {
+      border-top-color: transparent;
+    }
+  }
+
+  .#{$prefix}--dropdown-item:last-of-type .#{$prefix}--dropdown-link {
+    border-bottom: none;
+  }
+
+  .#{$prefix}--dropdown-link {
+    @include focus-outline('reset');
+
+    display: block;
+    height: rem(40px);
+    color: $text-02;
+    text-decoration: none;
+    font-weight: normal;
+    line-height: 1rem;
+    padding: rem(11px) 0;
+    margin: 0 $carbon--spacing-05;
+    border: 1px solid transparent;
+    border-top-color: $ui-03;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &:hover {
+      color: $text-01;
+      border-color: transparent;
+    }
+  }
+
+  .#{$prefix}--dropdown--light .#{$prefix}--dropdown-link {
+    border-top-color: $decorative-01;
+  }
+
+  .#{$prefix}--dropdown--sm .#{$prefix}--dropdown-link {
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--dropdown--xl .#{$prefix}--dropdown-link {
+    padding-top: rem(15px);
+    padding-bottom: rem(15px);
+    height: rem(48px);
+  }
+
+  .#{$prefix}--dropdown--focused,
+  .#{$prefix}--dropdown-link:focus {
+    @include focus-outline('outline');
+
+    margin: 0;
+    padding: rem(11px) rem(16px);
+  }
+
+  // We don't want to apply focus styles via focus selector when using the aria-activedescendant structure
+  .#{$prefix}--dropdown-list[aria-activedescendant]
+    .#{$prefix}--dropdown-link:focus {
+    outline: none;
+    // Copied from .bx--dropdown-link styles
+    margin: 0 $carbon--spacing-05;
+    padding: rem(11px) 0;
+  }
+
+  // Need added weight for item that is :focused and .bx--dropdown--focused
+  .#{$prefix}--dropdown-list[aria-activedescendant]
+    .#{$prefix}--dropdown--focused:focus {
+    // copied from default focus styles
+    @include focus-outline('outline');
+
+    margin: 0;
+    padding: rem(11px) rem(16px);
+  }
+
+  // Don't want to allow multiple elements have a "selected" style. Not sure why active
+  // had unique styles initially but creating an overwrite for the latest HTML markup for
+  // backwards compatibility. For the next major release it would be possible to clean up
+  // the HTML structure to prevent the user of :active and :focus styles which is creating
+  // these duplicated styles in the list. The Carbon 10 version of dropdown is already
+  // supporting 2 very different HTML structures.
+  .#{$prefix}--dropdown-list[aria-activedescendant]
+    .#{$prefix}--dropdown-item:active {
+    background-color: inherit;
+  }
+
+  .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
+    border-bottom-color: $hover-ui;
+  }
+
+  .#{$prefix}--dropdown--selected {
+    display: none;
+  }
+
+  .#{$prefix}--dropdown--open .#{$prefix}--dropdown__arrow {
+    transform: rotate(-180deg);
+  }
+
+  .#{$prefix}--dropdown--open.#{$prefix}--dropdown--xl
+    .#{$prefix}--dropdown-list {
+    // 48px item height * 5.5 items shown
+    max-height: rem(264px);
+  }
+
+  .#{$prefix}--dropdown--open.#{$prefix}--dropdown--sm
+    .#{$prefix}--dropdown-list {
+    // 32px item height * 5.5 items shown
+    max-height: rem(176px);
+  }
+
+  .#{$prefix}--dropdown--open .#{$prefix}--dropdown-item {
+    opacity: 1;
+  }
+
+  .#{$prefix}--dropdown--disabled {
+    border-bottom-color: transparent;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: $field-01;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    // TODO: remove in v11
+    .#{$prefix}--dropdown-text,
+    .#{$prefix}--list-box__label {
+      color: $disabled-02;
+    }
+
+    // TODO: remove in v11
+    .#{$prefix}--dropdown__arrow,
+    .#{$prefix}--list-box__menu-icon svg {
+      fill: $disabled-02;
+    }
+
+    &.#{$prefix}--dropdown--light:hover {
+      background-color: $field-02;
+    }
+  }
+
+  .#{$prefix}--dropdown--auto-width {
+    width: auto;
+    max-width: rem(400px);
+  }
+
+  .#{$prefix}--dropdown--inline {
+    justify-self: start;
+    display: inline-block;
+    border-bottom-color: transparent;
+    width: auto;
+    background-color: transparent;
+    transition: background $duration--fast-01 motion(entrance, productive);
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+
+    &.#{$prefix}--dropdown--disabled {
+      background-color: transparent;
+    }
+
+    .#{$prefix}--dropdown__arrow {
+      top: rem(8px);
+      right: rem(8px);
+    }
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-text {
+    display: inline-block;
+    padding: rem(7px) $carbon--spacing-07 rem(7px) $carbon--spacing-04;
+    height: rem(32px);
+    overflow: visible;
+    color: $text-01;
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled
+    .#{$prefix}--dropdown-text {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled:focus
+    .#{$prefix}--dropdown-text {
+    outline: 0;
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid
+    .#{$prefix}--dropdown__invalid-icon {
+    right: rem(32px);
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid
+    .#{$prefix}--dropdown-text {
+    padding-right: rem(56px);
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus
+    .#{$prefix}--dropdown-list {
+    @include box-shadow;
+  }
+
+  .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
+    font-weight: normal;
+  }
+
+  .#{$prefix}--dropdown--show-selected .#{$prefix}--dropdown--selected {
+    background-color: $hover-ui;
+    color: $text-01;
+    display: block;
+
+    &:hover {
+      background-color: $selected-ui;
+    }
+
+    .#{$prefix}--dropdown-link {
+      border-top-color: transparent;
+    }
+
+    + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
+      border-top-color: transparent;
+    }
+
+    .#{$prefix}--list-box__menu-item__selected-icon {
+      display: block;
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--dropdown-v2.#{$prefix}--skeleton,
+  .#{$prefix}--dropdown.#{$prefix}--skeleton {
+    @include skeleton;
+  }
+}
+
+@include exports('dropdown') {
+  @include dropdown;
+}

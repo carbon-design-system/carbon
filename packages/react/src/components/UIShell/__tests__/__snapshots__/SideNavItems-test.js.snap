@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideNavItems should render 1`] = `
+<SideNavItems
+  className="custom-classname"
+>
+  <ul
+    className="bx--side-nav__items custom-classname"
+  >
+    <SideNavItem
+      key=".0"
+    >
+      <li
+        className="bx--side-nav__item"
+      >
+        test
+      </li>
+    </SideNavItem>
+  </ul>
+</SideNavItems>
+`;

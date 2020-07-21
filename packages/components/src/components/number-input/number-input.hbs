@@ -1,0 +1,257 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+{{#unless mobile}}
+<div class="{{prefix}}--form-item">
+  <div data-numberinput class="
+    {{prefix}}--number
+    {{#if light}} {{prefix}}--number--light {{/if}}
+  ">
+    <label for="number-input0" class="{{prefix}}--label">Number input label</label>
+    <div class="{{prefix}}--number__input-wrapper">
+      <input id="number-input0" type="number" min="0" max="100" value="1">
+      <div class="{{prefix}}--number__controls">
+        <button aria-label="increase number input" class="{{prefix}}--number__control-btn up-icon" type="button"
+          aria-live="polite" aria-atomic="true">
+          {{ carbon-icon 'CaretUpGlyph' }}
+        </button>
+        <button aria-label="decrease number input" class="{{prefix}}--number__control-btn down-icon" type="button"
+          aria-live="polite" aria-atomic="true">
+          {{ carbon-icon 'CaretDownGlyph' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="{{prefix}}--form-item">
+  <div data-invalid data-numberinput class="
+    {{prefix}}--number
+    {{#if light}} {{prefix}}--number--light {{/if}}
+  ">
+    <label for="number-input1" class="{{prefix}}--label">Number input label</label>
+    <div class="{{prefix}}--number__input-wrapper">
+      <input id="number-input1" type="number" min="0" max="100" value="1" role="alert" aria-atomic="true">
+      {{ carbon-icon 'WarningFilled16' class=(add prefix '--number__invalid')}}
+      <div class="{{prefix}}--number__controls">
+        <button aria-label="increase number input" class="{{prefix}}--number__control-btn up-icon" type="button"
+          aria-live="polite" aria-atomic="true">
+          {{ carbon-icon 'CaretUpGlyph' }}
+        </button>
+        <button aria-label="decrease number input" class="{{prefix}}--number__control-btn down-icon" type="button"
+          aria-live="polite" aria-atomic="true">
+          {{ carbon-icon 'CaretDownGlyph' }}
+        </button>
+      </div>
+    </div>
+    <div class="{{prefix}}--form-requirement">
+      Invalid number
+    </div>
+  </div>
+</div>
+
+<div class="{{prefix}}--form-item">
+  <div data-invalid data-numberinput class="
+    {{prefix}}--number
+    {{#if light}} {{prefix}}--number--light{{/if}}
+    {{prefix}}--number--nolabel
+  ">
+    <div class="{{prefix}}--number__input-wrapper">
+      <input id="number-input2" type="number" min="0" max="100" value="1" role="alert" aria-atomic="true">
+      {{ carbon-icon 'WarningFilled16' class=(add prefix '--number__invalid')}}
+      <div class="{{prefix}}--number__controls">
+        <button aria-label="increase number input" class="{{prefix}}--number__control-btn up-icon" type="button"
+          aria-live="polite" aria-atomic="true">
+          {{ carbon-icon 'CaretUpGlyph' }}
+        </button>
+        <button aria-label="decrease number input" class="{{prefix}}--number__control-btn down-icon" type="button"
+          aria-live="polite" aria-atomic="true">
+          {{ carbon-icon 'CaretDownGlyph' }}
+        </button>
+      </div>
+    </div>
+    <div class="{{prefix}}--form-requirement">
+      Invalid number
+    </div>
+  </div>
+</div>
+
+<div class="{{prefix}}--form-item">
+  <div data-numberinput class="
+    {{prefix}}--number
+    {{#if light}} {{prefix}}--number--light {{/if}}
+    {{prefix}}--number--helpertext
+  ">
+    <label for="number-input3" class="{{prefix}}--label">Number input label</label>
+    <div class="{{prefix}}--number__input-wrapper">
+      <input id="number-input3" type="number" min="0" max="100" value="1">
+      <div class="{{prefix}}--number__controls">
+        <button aria-label="increase number input" class="{{prefix}}--number__control-btn up-icon" type="button"
+          aria-live="polite" aria-atomic="true">
+          {{ carbon-icon 'CaretUpGlyph' }}
+        </button>
+        <button aria-label="decrease number input" class="{{prefix}}--number__control-btn down-icon" type="button"
+          aria-live="polite" aria-atomic="true">
+          {{ carbon-icon 'CaretDownGlyph' }}
+        </button>
+      </div>
+    </div>
+    <div class="{{prefix}}--form__helper-text">
+      Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
+    </div>
+  </div>
+</div>
+
+<div class="{{prefix}}--form-item">
+  <div data-invalid data-numberinput class="
+    {{prefix}}--number
+    {{#if light}} {{prefix}}--number--light {{/if}}
+    {{prefix}}--number--helpertext
+  ">
+    <label for="number-input4" class="{{prefix}}--label">Number input label</label>
+    <div class="{{prefix}}--number__input-wrapper">
+      <input id="number-input4" type="number" min="0" max="100" value="1" role="alert" aria-atomic="true">
+      {{ carbon-icon 'WarningFilled16' class=(add prefix '--number__invalid')}}
+      <div class="{{prefix}}--number__controls">
+        <button aria-label="increase number input" class="{{prefix}}--number__control-btn up-icon" type="button"
+          aria-live="polite" aria-atomic="true">
+          {{ carbon-icon 'CaretUpGlyph' }}
+        </button>
+        <button aria-label="decrease number input" class="{{prefix}}--number__control-btn down-icon" type="button"
+          aria-live="polite" aria-atomic="true">
+          {{ carbon-icon 'CaretDownGlyph' }}
+        </button>
+      </div>
+    </div>
+    <div class="{{prefix}}--form-requirement">
+      Invalid number
+    </div>
+  </div>
+</div>
+{{else}}
+<div class="{{prefix}}--form-item">
+  <div data-numberinput class="
+    {{prefix}}--number
+    {{#if light}} {{prefix}}--number--light {{/if}}
+    {{#if mobile}} {{prefix}}--number--mobile {{/if}}
+    ">
+    <label for="mobile-number-input0" class="{{prefix}}--label">Number input label</label>
+    <div class="{{prefix}}--number__input-wrapper">
+      <button aria-label="decrease number input" class="{{prefix}}--number__control-btn down-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        {{ carbon-icon 'CaretDownGlyph' }}
+      </button>
+      <input id="mobile-number-input0" type="number" pattern="\d*" min="0" max="100" value="1">
+      <button aria-label="increase number input" class="{{prefix}}--number__control-btn up-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        {{ carbon-icon 'CaretUpGlyph' }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="{{prefix}}--form-item">
+  <div data-invalid data-numberinput class="
+    {{prefix}}--number
+    {{#if light}} {{prefix}}--number--light {{/if}}
+    {{#if mobile}} {{prefix}}--number--mobile {{/if}}
+  ">
+    <label for="mobile-number-input1" class="{{prefix}}--label">Number input label</label>
+    <div class="{{prefix}}--number__input-wrapper">
+      <button aria-label="decrease number input" class="{{prefix}}--number__control-btn down-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        {{ carbon-icon 'CaretDownGlyph' }}
+      </button>
+      <input id="mobile-number-input1" type="number" pattern="\d*" min="0" max="100" value="1" role="alert"
+        aria-atomic="true">
+      <button aria-label="increase number input" class="{{prefix}}--number__control-btn up-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        {{ carbon-icon 'CaretUpGlyph' }}
+      </button>
+    </div>
+    <div class="{{prefix}}--form-requirement">
+      Invalid number
+    </div>
+  </div>
+</div>
+
+<div class="{{prefix}}--form-item">
+  <div data-invalid data-numberinput class="
+      {{prefix}}--number
+      {{#if light}} {{prefix}}--number--light {{/if}}
+      {{#if mobile}} {{prefix}}--number--mobile {{/if}}
+      {{prefix}}--number--nolabel
+    ">
+    <div class="{{prefix}}--number__input-wrapper">
+      <button aria-label="decrease number input" class="{{prefix}}--number__control-btn down-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        {{ carbon-icon 'CaretDownGlyph' }}
+      </button>
+      <input id="mobile-number-input2" type="number" pattern="\d*" min="0" max="100" value="1" role="alert"
+        aria-atomic="true">
+      <button aria-label="increase number input" class="{{prefix}}--number__control-btn up-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        {{ carbon-icon 'CaretUpGlyph' }}
+      </button>
+    </div>
+    <div class="{{prefix}}--form-requirement">
+      Invalid number
+    </div>
+  </div>
+</div>
+
+<div class="{{prefix}}--form-item">
+  <div data-numberinput class="
+    {{prefix}}--number
+    {{#if light}} {{prefix}}--number--light{{/if}}
+    {{#if mobile}} {{prefix}}--number--mobile {{/if}}
+    {{prefix}}--number--helpertext
+  ">
+    <label for="mobile-number-input3" class="{{prefix}}--label">Number input label</label>
+    <div class="{{prefix}}--number__input-wrapper">
+      <button aria-label="decrease number input" class="{{prefix}}--number__control-btn down-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        {{ carbon-icon 'CaretDownGlyph' }}
+      </button>
+      <input id="mobile-number-input3" type="number" pattern="\d*" min="0" max="100" value="1">
+      <button aria-label="increase number input" class="{{prefix}}--number__control-btn up-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        {{ carbon-icon 'CaretUpGlyph' }}
+      </button>
+    </div>
+    <div class="{{prefix}}--form__helper-text">
+      Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
+    </div>
+  </div>
+</div>
+
+<div class="{{prefix}}--form-item">
+  <div data-invalid data-numberinput class="
+    {{prefix}}--number
+    {{#if light}} {{prefix}}--number--light {{/if}}
+    {{#if mobile}} {{prefix}}--number--mobile {{/if}}
+    {{prefix}}--number--helpertext
+  ">
+    <label for="mobile-number-input4" class="{{prefix}}--label">Number input label</label>
+    <div class="{{prefix}}--number__input-wrapper">
+      <button aria-label="decrease number input" class="{{prefix}}--number__control-btn down-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        {{ carbon-icon 'CaretDownGlyph' }}
+      </button>
+      <input id="mobile-number-input4" type="number" pattern="\d*" min="0" max="100" value="1" role="alert"
+        aria-atomic="true">
+      <button aria-label="increase number input" class="{{prefix}}--number__control-btn up-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        {{ carbon-icon 'CaretUpGlyph' }}
+      </button>
+    </div>
+    <div class="{{prefix}}--form-requirement">
+      Invalid number
+    </div>
+  </div>
+</div>
+{{/unless}}

@@ -1,0 +1,18 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<a href="#"
+  class="{{@root.prefix}}--link{{#if inline}} {{@root.prefix}}--link--inline{{/if}}{{#if visited}} {{@root.prefix}}--link--inline{{/if}}">Link</a>
+<a href="http://www.google.com"
+  class="{{@root.prefix}}--link {{@root.prefix}}--link--visited {{#if inline}} {{@root.prefix}}--link--inline{{/if}}">Link</a>
+<a class="{{@root.prefix}}--link{{#if inline}} {{@root.prefix}}--link--inline{{/if}}" aria-disabled="true">Placeholder
+  link</a>
+<p class="{{@root.prefix}}--link--disabled{{#if inline}} {{@root.prefix}}--link--inline{{/if}}">Disabled Link</p>
+<div style="width:200px">
+  <a href="#" class="{{@root.prefix}}--link{{#if inline}} {{@root.prefix}}--link--inline{{/if}}">Text wrap example for
+    hover, focus, and active state testing.</a>
+</div>

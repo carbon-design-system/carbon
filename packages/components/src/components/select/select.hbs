@@ -1,0 +1,96 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div class="{{@root.prefix}}--form-item">
+  <div
+    class="{{@root.prefix}}--select{{#if inline}} {{@root.prefix}}--select--inline{{/if}}{{#if light}} {{@root.prefix}}--select--light{{/if}}{{#if invalid}} {{@root.prefix}}--select--invalid{{/if}}">
+    <label for="select-id" class="{{@root.prefix}}--label">Select label</label>
+    {{#if inline}}
+    <div class="{{@root.prefix}}--select-input--inline__wrapper">
+      {{/if}}
+      <div class="{{@root.prefix}}--select-input__wrapper" {{#if invalid}}data-invalid{{/if}}>
+        <select id="select-id" class="{{@root.prefix}}--select-input">
+          {{#each items}}
+          {{#if items}}
+          <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
+            {{#each items}}
+            <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
+            selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>
+              {{label}}
+            </option>
+            {{/each}}
+          </optgroup>
+          {{else}}
+          <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
+            selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>
+            {{label}}
+          </option>
+          {{/if}}
+          {{/each}}
+        </select>
+        {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow') }}
+        {{#if invalid}}
+        {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--select__invalid-icon')}}
+        {{/if}}
+      </div>
+      {{#if invalid}}
+      <div class="{{@root.prefix}}--form-requirement">
+        Validation message here
+      </div>
+      {{/if}}
+      {{#unless inline}}
+      {{#if helperText}}
+      <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
+      {{/if}}
+      {{/unless}}
+    </div>
+    {{#if inline}}
+    {{#if helperText}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
+    {{/if}}
+    {{/if}}
+  </div>
+</div>
+
+<div class="{{@root.prefix}}--form-item">
+  <div
+    class="{{@root.prefix}}--select{{#if inline}} {{@root.prefix}}--select--inline{{/if}}{{#if light}} {{@root.prefix}}--select--light{{/if}}{{#if invalid}} {{@root.prefix}}--select--invalid{{/if}} {{@root.prefix}}--select--disabled">
+    <label for="select-id-disabled" class="{{@root.prefix}}--label {{@root.prefix}}--label--disabled">Select
+      label</label>
+    {{#if inline}}
+    <div class="{{@root.prefix}}--select-input--inline__wrapper">
+      {{/if}}
+      <div class="{{@root.prefix}}--select-input__wrapper" {{#if invalid}}data-invalid{{/if}}>
+        <select id="select-id-disabled" class="{{@root.prefix}}--select-input" disabled>
+          {{#each items}}
+          {{#if items}}
+          <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
+            {{#each items}}
+            <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
+            selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/each}} </optgroup> {{else}}
+          <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
+            selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/if}} {{/each}} </select>
+        {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow') }}
+      </div>
+      {{#if invalid}}
+      <div class="{{@root.prefix}}--form-requirement">
+        Validation message here
+      </div>
+      {{/if}}
+      {{#unless inline}}
+      {{#if helperText}}
+      <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
+      {{/if}}
+      {{/unless}}
+    </div>
+    {{#if inline}}
+    {{#if helperText}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
+    {{/if}}
+    {{/if}}
+  </div>
+</div>

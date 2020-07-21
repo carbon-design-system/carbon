@@ -1,0 +1,155 @@
+<!-- 
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div class="bx--data-table-v2-container" data-table-v2>
+  <h4 class="bx--data-table-v2-header">Table title</h4>
+  <section class="bx--table-toolbar">
+
+    <div class="bx--toolbar-search-container">
+      <div data-search class="bx--search bx--search--sm bx--search--light" role="search">
+        <svg class="bx--search-magnifier" width="16" height="16" viewBox="0 0 16 16">
+          <path d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z"
+            fill-rule="nonzero" />
+        </svg>
+        <label id="search-input-label-1" class="bx--label" for="search__input-2">Search</label>
+        <input class="bx--search-input" type="text" id="search__input-2" role="search" placeholder="Search" aria-labelledby="search-input-label-1">
+        <button class="bx--search-close bx--search-close--hidden" title="Clear search input" aria-label="Clear search input">
+          <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
+              fill-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+<table class="bx--data-table-v2">
+  <thead>
+    <tr>
+        <th>
+              <span class="bx--table-header-label"></span>
+                              </th>
+        <th>
+              <button class="bx--table-sort-v2" data-event="sort">
+                <span class="bx--table-header-label">Name</span>
+                <svg class="bx--table-sort-v2__icon" width="10" height="5" viewBox="0 0 10 5" aria-label="" alt="">
+                  <title></title>
+                  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+                </svg>
+              </button>
+                  </th>
+        <th>
+              <button class="bx--table-sort-v2" data-event="sort">
+                <span class="bx--table-header-label">Protocol</span>
+                <svg class="bx--table-sort-v2__icon" width="10" height="5" viewBox="0 0 10 5" aria-label="" alt="">
+                  <title></title>
+                  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+                </svg>
+              </button>
+                  </th>
+        <th>
+              <button class="bx--table-sort-v2" data-event="sort">
+                <span class="bx--table-header-label">Ports</span>
+                <svg class="bx--table-sort-v2__icon" width="10" height="5" viewBox="0 0 10 5" aria-label="" alt="">
+                  <title></title>
+                  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+                </svg>
+              </button>
+                  </th>
+        <th>
+              <button class="bx--table-sort-v2" data-event="sort">
+                <span class="bx--table-header-label">Rule</span>
+                <svg class="bx--table-sort-v2__icon" width="10" height="5" viewBox="0 0 10 5" aria-label="" alt="">
+                  <title></title>
+                  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+                </svg>
+              </button>
+                  </th>
+        <th>
+              <button class="bx--table-sort-v2" data-event="sort">
+                <span class="bx--table-header-label">Attached Groups</span>
+                <svg class="bx--table-sort-v2__icon" width="10" height="5" viewBox="0 0 10 5" aria-label="" alt="">
+                  <title></title>
+                  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+                </svg>
+              </button>
+                  </th>
+        <th>
+              <button class="bx--table-sort-v2" data-event="sort">
+                <span class="bx--table-header-label">Status</span>
+                <svg class="bx--table-sort-v2__icon" width="10" height="5" viewBox="0 0 10 5" aria-label="" alt="">
+                  <title></title>
+                  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+                </svg>
+              </button>
+                  </th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr class="bx--parent-row-v2" data-parent-row>
+              <td class="bx--table-expand-v2" data-event="expand">
+                <button class="bx--table-expand-v2__button">
+                  <svg class="bx--table-expand-v2__svg" width="7" height="12" viewBox="0 0 7 12">
+                    <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z" />
+                  </svg>
+                </button>
+              </td>
+              <td>Load Balancer 1</td>
+                          <td>HTTP</td>
+                          <td>80</td>
+                          <td>Round Robin</td>
+                          <td>Maureen&#x27;s VM Groups</td>
+                          <td>Active</td>
+                  </tr>
+        <tr class="bx--expandable-row-v2 bx--expandable-row--hidden-v2" data-child-row>
+          <td colspan="7">
+            
+      <h4>
+        <strong>Harry Potter</strong>
+      </h4>
+      <p>Harry James Potter (b. 31 July, 1980) was a half-blood wizard, the only child and son of the late James and Lily
+        Potter (née Evans), and one of the most famous and powerful wizards of modern times. In what proved to be a vain
+        attempt to circumvent a prophecy that stated that a boy born at the end of July of 1980 could be able to defeat
+        him, Lord Voldemort tried to murder him when he was a year and three months old. Voldemort murdered Harry's parents
+        as they tried to protect him, shortly before attacking Harry.</p>
+    
+          </td>
+        </tr>
+      <tr class="bx--parent-row-v2" data-parent-row>
+              <td class="bx--table-expand-v2" data-event="expand">
+                <button class="bx--table-expand-v2__button">
+                  <svg class="bx--table-expand-v2__svg" width="7" height="12" viewBox="0 0 7 12">
+                    <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z" />
+                  </svg>
+                </button>
+              </td>
+              <td>Load Balancer 1</td>
+                          <td>HTTP</td>
+                          <td>80</td>
+                          <td>Round Robin</td>
+                          <td>Maureen&#x27;s VM Groups</td>
+                          <td>Active</td>
+                  </tr>
+        <tr class="bx--expandable-row-v2 bx--expandable-row--hidden-v2" data-child-row>
+          <td colspan="7">
+            
+      <h4>
+        <strong>Harry Potter</strong>
+      </h4>
+      <p>Harry James Potter (b. 31 July, 1980) was a half-blood wizard, the only child and son of the late James and Lily
+        Potter (née Evans), and one of the most famous and powerful wizards of modern times. In what proved to be a vain
+        attempt to circumvent a prophecy that stated that a boy born at the end of July of 1980 could be able to defeat
+        him, Lord Voldemort tried to murder him when he was a year and three months old. Voldemort murdered Harry's parents
+        as they tried to protect him, shortly before attacking Harry.</p>
+    
+          </td>
+        </tr>
+  </tbody>
+</table>
+
+</div>

@@ -1,0 +1,356 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Modals
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+
+@import '../button/button';
+
+/// Modal styles
+/// @access private
+/// @group modal
+@mixin modal {
+  .#{$prefix}--modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: z('modal');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    content: '';
+    background-color: transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: background-color $duration--slow-02 motion(exit, expressive),
+      opacity $duration--moderate-02 motion(exit, expressive),
+      visibility 0ms linear $duration--moderate-02;
+
+    &.is-visible {
+      visibility: inherit;
+      opacity: 1;
+      background-color: $overlay-01;
+      transition: background-color $duration--slow-02
+          motion(entrance, expressive),
+        opacity $duration--moderate-02 motion(entrance, expressive),
+        visibility 0ms linear;
+    }
+
+    .#{$prefix}--text-input,
+    .#{$prefix}--text-area,
+    .#{$prefix}--search-input,
+    .#{$prefix}--select-input,
+    .#{$prefix}--dropdown,
+    .#{$prefix}--dropdown-list,
+    .#{$prefix}--number input[type='number'],
+    .#{$prefix}--date-picker__input {
+      background-color: $field-02;
+    }
+  }
+
+  .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
+    transition: transform $duration--moderate-02 motion(entrance, expressive);
+    transform: translate3d(0, 0, 0);
+  }
+
+  .#{$prefix}--modal-container {
+    position: fixed;
+    top: 0;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: auto;
+    background-color: $ui-01;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    // make modal edge visible on high contrast themes (#3880)
+    outline: 3px solid transparent;
+    outline-offset: -3px;
+    overflow: hidden;
+    transform-origin: top center;
+    transform: translate3d(0, -24px, 0);
+    transition: transform $duration--moderate-02 motion(exit, expressive);
+
+    @include carbon--breakpoint(md) {
+      position: static;
+      width: 84%;
+      max-height: 90%;
+      height: auto;
+
+      .#{$prefix}--modal-header,
+      .#{$prefix}--modal-content,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
+
+      .#{$prefix}--modal-content--with-form {
+        // Override for `.#{$prefix}--modal-content`
+        padding-right: $spacing-05;
+      }
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: 60%;
+      max-height: 84%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 48%;
+    }
+  }
+
+  .#{$prefix}--modal-header,
+  .#{$prefix}--modal-content {
+    padding-left: $spacing-05;
+  }
+
+  .#{$prefix}--modal-header,
+  .#{$prefix}--modal-content,
+  .#{$prefix}--modal-content__regular-content {
+    padding-right: $spacing-05;
+  }
+
+  .#{$prefix}--modal-content--with-form {
+    padding-right: $spacing-05;
+  }
+
+  .#{$prefix}--modal-container--xs {
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
+    .#{$prefix}--modal-content,
+    .#{$prefix}--modal-content__regular-content,
+    .#{$prefix}--modal-content--with-form {
+      padding-right: $spacing-05;
+    }
+
+    @include carbon--breakpoint(md) {
+      width: 48%;
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: 32%;
+      max-height: 48%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 24%;
+    }
+  }
+
+  .#{$prefix}--modal-container--sm {
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
+    .#{$prefix}--modal-content,
+    .#{$prefix}--modal-content__regular-content,
+    .#{$prefix}--modal-content--with-form {
+      padding-right: $spacing-05;
+    }
+
+    @include carbon--breakpoint(md) {
+      width: 60%;
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: 42%;
+      max-height: 72%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 36%;
+
+      .#{$prefix}--modal-header,
+      .#{$prefix}--modal-content,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
+
+      .#{$prefix}--modal-content--with-form {
+        // Override for `.#{$prefix}--modal-content`
+        padding-right: $spacing-05;
+      }
+    }
+  }
+
+  .#{$prefix}--modal-container--lg {
+    .#{$prefix}--modal-header {
+      padding-right: $carbon--spacing-09;
+    }
+
+    .#{$prefix}--modal-content,
+    .#{$prefix}--modal-content__regular-content,
+    .#{$prefix}--modal-content--with-form {
+      padding-right: $spacing-05;
+    }
+
+    @include carbon--breakpoint(md) {
+      width: 96%;
+
+      .#{$prefix}--modal-header,
+      .#{$prefix}--modal-content,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
+
+      .#{$prefix}--modal-content--with-form {
+        // Override for `.#{$prefix}--modal-content`
+        padding-right: $spacing-05;
+      }
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: 84%;
+      max-height: 96%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 72%;
+    }
+  }
+
+  .#{$prefix}--modal-header {
+    padding-top: $spacing-05;
+    padding-right: $spacing-09;
+    margin-bottom: $spacing-03;
+
+    grid-row: 1/1;
+    grid-column: 1/-1;
+  }
+
+  .#{$prefix}--modal-header__label {
+    @include type-style('label-01');
+
+    color: $text-02;
+    margin-bottom: $spacing-02;
+  }
+
+  .#{$prefix}--modal-header__heading {
+    @include type-style('productive-heading-03');
+
+    color: $text-01;
+  }
+
+  .#{$prefix}--modal-content {
+    @include type-style('body-long-01');
+
+    grid-row: 2/-2;
+    grid-column: 1/-1;
+
+    overflow-y: auto;
+    margin-bottom: $spacing-09;
+    color: $text-01;
+    font-weight: 400;
+
+    // Required to accommodate focus outline's negative offset:
+    padding-top: $spacing-03;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    > * {
+      @include type-style('body-long-01');
+    }
+  }
+
+  // Required so overflow-indicator disappears at end of content
+  .#{$prefix}--modal-scroll-content > *:last-child {
+    padding-bottom: $spacing-07;
+  }
+
+  .#{$prefix}--modal-content--overflow-indicator {
+    grid-row: 2/-2;
+    grid-column: 1/-1;
+    width: 100%;
+    height: rem(32px);
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: $spacing-09;
+    // Safari interprets `transparent` differently, so make color token value transparent instead:
+    background-image: linear-gradient(to bottom, rgba($ui-01, 0), $ui-01);
+    pointer-events: none;
+  }
+
+  .#{$prefix}--modal-content:focus
+    ~ .#{$prefix}--modal-content--overflow-indicator {
+    width: calc(100% - 4px);
+    margin: 0 2px 2px;
+  }
+
+  .#{$prefix}--modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    height: 4rem;
+
+    grid-row: -1/-1;
+    grid-column: 1/-1;
+
+    button.#{$prefix}--btn {
+      max-width: none;
+      flex: 0 1 50%;
+      height: 4rem;
+      margin: 0;
+      padding-top: $spacing-05;
+      padding-bottom: $spacing-07;
+    }
+  }
+
+  .#{$prefix}--modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 3rem;
+    width: 3rem;
+    padding: rem(12px);
+    border: 2px solid transparent;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color $duration--fast-02 motion(standard, productive);
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $focus;
+    }
+  }
+
+  .#{$prefix}--modal-close::-moz-focus-inner {
+    border: 0;
+  }
+
+  .#{$prefix}--modal-close__icon {
+    fill: $icon-01;
+    height: rem(20px);
+    width: rem(20px);
+  }
+
+  .#{$prefix}--body--with-modal-open {
+    overflow: hidden;
+  }
+}
+
+@include exports('modal') {
+  @include modal;
+}

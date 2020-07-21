@@ -1,0 +1,128 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div {{#if password}} data-text-input {{/if}}
+  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}">
+  <label for="text-input-3" class="{{prefix}}--label">Text Input label</label>
+  <div class="{{prefix}}--text-input__field-wrapper">
+    {{#unless password}}
+    <input id="text-input-3" type="text"
+      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text">
+    {{else}}
+    <input id="text-input-3" type="password"
+      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
+      placeholder="Placeholder text" data-toggle-password-visibility>
+    <button type="button"
+      class="{{prefix}}--text-input--password__visibility__toggle {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip--bottom {{@root.prefix}}--tooltip--align-center">
+      <span class="{{@root.prefix}}--assistive-text">Show password</span>
+      {{ carbon-icon 'ViewOff16' class=(add prefix '--icon--visibility-off') hidden="true" }}
+      {{ carbon-icon 'View16' class=(add prefix '--icon--visibility-on') }}
+    </button>
+    {{/unless}}
+  </div>
+</div>
+
+<div {{#if password}} data-text-input {{/if}}
+  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}">
+  <label for="text-input-4" class="{{prefix}}--label">Text Input label</label>
+  <div class="{{prefix}}--text-input__field-wrapper" data-invalid>
+    {{ carbon-icon 'WarningFilled16' class=(add prefix '--text-input__invalid-icon')}}
+    {{#unless password}}
+    <input id="text-input-4" type="text"
+      class="{{prefix}}--text-input {{prefix}}--text-input--invalid {{#if light}} {{prefix}}--text-input--light{{/if}}"
+      placeholder="Placeholder text">
+    {{else}}
+    <input data-invalid id="text-input-4" type="password"
+      class="{{prefix}}--text-input {{prefix}}--text-input--invalid{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
+      placeholder="Placeholder text" data-toggle-password-visibility>
+    <button type="button"
+      class="{{prefix}}--text-input--password__visibility__toggle {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip--bottom {{@root.prefix}}--tooltip--align-center">
+      <span class="{{@root.prefix}}--assistive-text">Show password</span>
+      {{ carbon-icon 'ViewOff16' class=(add prefix '--icon--visibility-off') hidden="true" }}
+      {{ carbon-icon 'View16' class=(add prefix '--icon--visibility-on') }}
+    </button>
+    {{/unless}}
+  </div>
+  <div class="{{prefix}}--form-requirement">
+    Validation message here
+  </div>
+</div>
+
+<div {{#if password}} data-text-input {{/if}}
+  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}">
+  <label for="text-input-5" class="{{prefix}}--label">Text Input label</label>
+  <div class="{{prefix}}--text-input__field-wrapper">
+    {{#unless password}}
+    <input id="text-input-5" type="text"
+      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text">
+    {{else}}
+    <input id="text-input-5" type="password"
+      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
+      placeholder="Placeholder text" data-toggle-password-visibility>
+    <button type="button"
+      class="{{prefix}}--text-input--password__visibility__toggle {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip--bottom {{@root.prefix}}--tooltip--align-center">
+      <span class="{{@root.prefix}}--assistive-text">Show password</span>
+      {{ carbon-icon 'ViewOff16' class=(add prefix '--icon--visibility-off') hidden="true" }}
+      {{ carbon-icon 'View16' class=(add prefix '--icon--visibility-on') }}
+    </button>
+    {{/unless}}
+  </div>
+  <div class="{{prefix}}--form__helper-text">
+    Optional helper text goes here
+  </div>
+</div>
+
+<div {{#if password}} data-text-input {{/if}}
+  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}"
+  style="width: 320px">
+  <label for="text-input-6" class="{{prefix}}--label">Text Input label</label>
+  <div class="{{prefix}}--text-input__field-wrapper">
+    {{#unless password}}
+    <input id="text-input-6" type="text"
+      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text">
+    {{else}}
+    <input id="text-input-6" type="password"
+      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
+      placeholder="Placeholder text" data-toggle-password-visibility>
+    <button type="button"
+      class="{{prefix}}--text-input--password__visibility__toggle {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip--bottom {{@root.prefix}}--tooltip--align-center">
+      <span class="{{@root.prefix}}--assistive-text">Show password</span>
+      {{ carbon-icon 'ViewOff16' class=(add prefix '--icon--visibility-off') hidden="true" }}
+      {{ carbon-icon 'View16' class=(add prefix '--icon--visibility-on') }}
+    </button>
+    {{/unless}}
+  </div>
+  <div class="{{prefix}}--form__helper-text">
+    Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
+  </div>
+</div>
+
+<div {{#if password}} data-text-input {{/if}}
+  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}">
+  <label for="text-input-7" class="{{prefix}}--label {{prefix}}--label--disabled">Text Input label</label>
+  <div class="{{prefix}}--text-input__field-wrapper">
+    {{#unless password}}
+    <input id="text-input-7" type="text"
+      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
+      disabled>
+    {{else}}
+    <input id="text-input-7" type="password"
+      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
+      placeholder="Placeholder text" data-toggle-password-visibility disabled>
+    <button type="button"
+      class="{{prefix}}--text-input--password__visibility__toggle {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip--bottom {{@root.prefix}}--tooltip--align-center">
+      <span class="{{@root.prefix}}--assistive-text">Show password</span>
+      {{ carbon-icon 'ViewOff16' class=(add prefix '--icon--visibility-off') hidden="true" }}
+      {{ carbon-icon 'View16' class=(add prefix '--icon--visibility-on') }}
+    </button>
+    </button>
+    {{/unless}}
+  </div>
+  <div class="{{prefix}}--form__helper-text {{prefix}}--form__helper-text--disabled">
+    Optional helper text goes here
+  </div>
+</div>

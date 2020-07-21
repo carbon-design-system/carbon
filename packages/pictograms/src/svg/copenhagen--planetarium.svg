@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+<g id="copenhagan_planetarium">
+	<rect style="fill:#FFFFFF;" width="48" height="48"/>
+	<g id="copenhagen_planetarium">
+		
+			<line style="fill:none;stroke:#000000;stroke-width:0.6956;stroke-linecap:square;stroke-miterlimit:10;" x1="34" y1="26" x2="36" y2="26"/>
+		<polyline style="fill:none;stroke:#000000;stroke-width:0.6956;stroke-linecap:square;stroke-miterlimit:10;" points="18,28 
+			16,28 14,30 12,30 		"/>
+		<polyline style="fill:none;stroke:#000000;stroke-width:0.6956;stroke-miterlimit:10;" points="22,30 20,30 18,32 16,32 14,34 
+			12,34 		"/>
+		
+			<line style="fill:none;stroke:#000000;stroke-width:0.6956;stroke-linecap:square;stroke-miterlimit:10;" x1="14" y1="26" x2="12" y2="26"/>
+		<polyline style="fill:none;stroke:#000000;stroke-width:0.6956;stroke-miterlimit:10;" points="22,34 20,34 18,36 16,36 14,38 
+			12,38 12,18 		"/>
+		<polyline style="fill:none;stroke:#000000;stroke-width:0.6956;stroke-miterlimit:10;" points="26,34 28,34 30,36 32,36 34,38 
+			36,38 36,18 		"/>
+		<polyline style="fill:none;stroke:#000000;stroke-width:0.6956;stroke-miterlimit:10;" points="26,30 28,30 30,32 32,32 34,34 
+			36,34 		"/>
+		<polyline style="fill:none;stroke:#000000;stroke-width:0.6956;stroke-linecap:square;stroke-miterlimit:10;" points="30,28 
+			32,28 34,30 36,30 		"/>
+		
+			<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+			12,18 24,26 36,18 		"/>
+		<g>
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+				M13.068,14.712c0.601-0.886,1.428-1.69,2.446-2.369"/>
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+				M13.068,14.712C12.388,15.716,12,16.827,12,18c0,4.418,5.373,8,12,8s12-3.582,12-8c0-1.173-0.388-2.284-1.068-3.288"/>
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+				M34.932,14.712c-0.601-0.886-1.428-1.69-2.446-2.369"/>
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+				M32.485,12.343c-1.018-0.679-2.224-1.23-3.554-1.631"/>
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+				M19.069,10.712C20.574,10.259,22.24,10,24,10s3.426,0.259,4.931,0.712"/>
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+				M19.069,10.712c-1.33,0.401-2.535,0.952-3.554,1.631"/>
+			
+				<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+				34.932,14.712 24,22 13.068,14.712 			"/>
+			
+				<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+				32.485,12.343 24,18 15.515,12.343 			"/>
+			
+				<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+				19.069,10.712 24,14 28.931,10.712 			"/>
+		</g>
+		
+			<line style="fill:none;stroke:#000000;stroke-width:0.6956;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="24" y1="10" x2="24" y2="38"/>
+	</g>
+</g>
+<g id="Layer_1">
+</g>
+</svg>

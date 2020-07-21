@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccordionItem should render 1`] = `
+<AccordionItem
+  className="extra-class"
+  title="A heading"
+>
+  <li
+    className="bx--accordion__item extra-class"
+    onAnimationEnd={[Function]}
+  >
+    <defaultRenderExpando
+      aria-controls="accordion-item-1"
+      aria-expanded={false}
+      className="bx--accordion__heading"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      type="button"
+    >
+      <button
+        aria-controls="accordion-item-1"
+        aria-expanded={false}
+        className="bx--accordion__heading"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        type="button"
+      >
+        <ForwardRef(ChevronRight16)
+          className="bx--accordion__arrow"
+        >
+          <Icon
+            className="bx--accordion__arrow"
+            fill="currentColor"
+            height={16}
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 16 16"
+            width={16}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <svg
+              aria-hidden={true}
+              className="bx--accordion__arrow"
+              fill="currentColor"
+              focusable="false"
+              height={16}
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 16 16"
+              width={16}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+              />
+            </svg>
+          </Icon>
+        </ForwardRef(ChevronRight16)>
+        <div
+          className="bx--accordion__title"
+        >
+          A heading
+        </div>
+      </button>
+    </defaultRenderExpando>
+    <div
+      className="bx--accordion__content"
+      id="accordion-item-1"
+    >
+      Lorem ipsum.
+    </div>
+  </li>
+</AccordionItem>
+`;

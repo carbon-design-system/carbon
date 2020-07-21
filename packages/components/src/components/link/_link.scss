@@ -1,0 +1,98 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Link
+//-----------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+
+/// Link styles
+/// @access private
+/// @group link
+@mixin link {
+  .#{$prefix}--link {
+    @include reset;
+    @include type-style('body-short-01');
+
+    color: $link-01;
+    text-decoration: none;
+    outline: none;
+    transition: color $duration--fast-01 motion(standard, productive);
+
+    &:hover {
+      color: $hover-primary-text;
+      text-decoration: underline;
+    }
+
+    &:active,
+    &:active:visited,
+    &:active:visited:hover {
+      color: $text-01;
+      text-decoration: underline;
+    }
+
+    &:focus {
+      @include focus-outline;
+    }
+
+    &:visited {
+      color: $link-01;
+    }
+
+    &:visited:hover {
+      color: $hover-primary-text;
+    }
+  }
+
+  .#{$prefix}--link--disabled,
+  .#{$prefix}--link--disabled:hover {
+    @include reset;
+    @include type-style('body-short-01');
+
+    display: inline;
+    color: $disabled-02;
+    font-weight: 400;
+    cursor: not-allowed;
+    text-decoration: none;
+  }
+
+  .#{$prefix}--link.#{$prefix}--link--visited:visited {
+    color: $visited-link;
+  }
+
+  .#{$prefix}--link.#{$prefix}--link--visited:visited:hover {
+    color: $hover-primary-text;
+  }
+
+  .#{$prefix}--link.#{$prefix}--link--inline {
+    text-decoration: underline;
+
+    &:hover {
+      color: $hover-primary-text;
+    }
+
+    &:focus,
+    &:visited {
+      text-decoration: none;
+    }
+  }
+
+  .#{$prefix}--link--disabled.#{$prefix}--link--inline {
+    text-decoration: underline;
+  }
+}
+
+@include exports('link') {
+  @include link;
+}

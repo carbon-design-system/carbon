@@ -1,0 +1,195 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MultiSelect.Filterable should render 1`] = `
+<MultiSelect.Filterable
+  ariaLabel="Choose an item"
+  compareItems={[Function]}
+  disabled={false}
+  filterItems={[Function]}
+  id="test-filterable-multiselect"
+  initialSelectedItems={Array []}
+  itemToString={[Function]}
+  items={
+    Array [
+      Object {
+        "id": "id-0",
+        "label": "Item 0",
+        "value": 0,
+      },
+      Object {
+        "id": "id-1",
+        "label": "Item 1",
+        "value": 1,
+      },
+      Object {
+        "id": "id-2",
+        "label": "Item 2",
+        "value": 2,
+      },
+      Object {
+        "id": "id-3",
+        "label": "Item 3",
+        "value": 3,
+      },
+      Object {
+        "id": "id-4",
+        "label": "Item 4",
+        "value": 4,
+      },
+    ]
+  }
+  light={false}
+  locale="en"
+  onChange={[MockFunction]}
+  open={false}
+  placeholder="Placeholder..."
+  selectionFeedback="top-after-reopen"
+  sortItems={[Function]}
+>
+  <div
+    className="bx--multi-select__wrapper bx--list-box__wrapper"
+  >
+    <Selection
+      disabled={false}
+      initialSelectedItems={Array []}
+      onChange={[Function]}
+      render={[Function]}
+    >
+      <Downshift
+        defaultHighlightedIndex={null}
+        defaultIsOpen={false}
+        environment={[Window]}
+        getA11yStatusMessage={[Function]}
+        id="test-filterable-multiselect"
+        inputValue=""
+        isOpen={false}
+        itemToString={[Function]}
+        onChange={[Function]}
+        onInputValueChange={[Function]}
+        onOuterClick={[Function]}
+        onSelect={[Function]}
+        onStateChange={[Function]}
+        onUserAction={[Function]}
+        scrollIntoView={[Function]}
+        selectedItem={Array []}
+        selectedItemChanged={[Function]}
+        stateReducer={[Function]}
+        suppressRefError={false}
+      >
+        <ListBox
+          aria-expanded={false}
+          aria-haspopup="listbox"
+          aria-labelledby="test-filterable-multiselect-label"
+          aria-owns={null}
+          className="bx--multi-select bx--combo-box bx--multi-select--filterable"
+          disabled={false}
+          isOpen={false}
+          light={false}
+          role="combobox"
+          type="default"
+        >
+          <div
+            aria-expanded={false}
+            aria-haspopup="listbox"
+            aria-labelledby="test-filterable-multiselect-label"
+            aria-owns={null}
+            className="bx--multi-select bx--combo-box bx--multi-select--filterable bx--list-box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="combobox"
+          >
+            <ListBoxField
+              aria-haspopup={true}
+              aria-labelledby="test-filterable-multiselect-label"
+              data-toggle={true}
+              disabled={false}
+              id="test-filterable-multiselect"
+              onBlur={[Function]}
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              role="button"
+              type="button"
+            >
+              <div
+                aria-haspopup={true}
+                aria-labelledby="test-filterable-multiselect-label"
+                className="bx--list-box__field"
+                data-toggle={true}
+                id="test-filterable-multiselect"
+                onBlur={[Function]}
+                onClick={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                role="button"
+                tabIndex={-1}
+                type="button"
+              >
+                <input
+                  aria-activedescendant={null}
+                  aria-autocomplete="list"
+                  aria-controls={null}
+                  aria-labelledby="test-filterable-multiselect-label"
+                  autoComplete="off"
+                  className="bx--text-input bx--text-input--empty"
+                  disabled={false}
+                  id="test-filterable-multiselect"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onKeyDown={[Function]}
+                  placeholder="Placeholder..."
+                  value=""
+                />
+                <ListBoxMenuIcon
+                  isOpen={false}
+                  translateWithId={[Function]}
+                >
+                  <div
+                    className="bx--list-box__menu-icon"
+                  >
+                    <ForwardRef(ChevronDown16)
+                      aria-label="Open menu"
+                      name="chevron--down"
+                    >
+                      <Icon
+                        aria-label="Open menu"
+                        fill="currentColor"
+                        height={16}
+                        name="chevron--down"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 16 16"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <svg
+                          aria-label="Open menu"
+                          fill="currentColor"
+                          focusable="false"
+                          height={16}
+                          name="chevron--down"
+                          preserveAspectRatio="xMidYMid meet"
+                          role="img"
+                          viewBox="0 0 16 16"
+                          width={16}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
+                          />
+                          <title>
+                            Open menu
+                          </title>
+                        </svg>
+                      </Icon>
+                    </ForwardRef(ChevronDown16)>
+                  </div>
+                </ListBoxMenuIcon>
+              </div>
+            </ListBoxField>
+          </div>
+        </ListBox>
+      </Downshift>
+    </Selection>
+  </div>
+</MultiSelect.Filterable>
+`;

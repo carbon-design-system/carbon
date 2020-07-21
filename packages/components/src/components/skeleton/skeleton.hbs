@@ -1,0 +1,175 @@
+<!-- 
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+
+<p>Skeleton Text</p>
+<div class="{{@root.prefix}}--skeleton__text"></div>
+<div class="{{@root.prefix}}--skeleton__text {{@root.prefix}}--skeleton__heading"></div>
+
+<p>Button</p>
+<button class="{{@root.prefix}}--skeleton {{@root.prefix}}--btn" type="button"></button>
+&nbsp;<a class="{{@root.prefix}}--skeleton {{@root.prefix}}--btn" href="#" role="button"></a>
+&nbsp;<button class="{{@root.prefix}}--skeleton {{@root.prefix}}--btn {{@root.prefix}}--btn--sm" type="button"></button>
+
+<p>Code Snippet</p>
+<div class="{{@root.prefix}}--snippet {{@root.prefix}}--skeleton {{@root.prefix}}--snippet--single">
+  <div class="{{@root.prefix}}--snippet-container"><span></span></div>
+</div>
+<div class="{{@root.prefix}}--snippet {{@root.prefix}}--skeleton {{@root.prefix}}--snippet--multi">
+  <div class="{{@root.prefix}}--snippet-container"><span></span><span></span><span></span></div>
+</div>
+
+<p>Label</p>
+<label class="{{@root.prefix}}--label {{@root.prefix}}--skeleton"></label>
+
+<p>Breadcrumb</p>
+<div class="{{@root.prefix}}--breadcrumb {{@root.prefix}}--skeleton">
+  {{#each breadCrumbItems}}
+    <div class="{{@root.prefix}}--breadcrumb-item">
+      <a href="/#" class="{{@root.prefix}}--link">&nbsp;</a>
+    </div>
+  {{/each}}
+</div>
+
+<p>Dropdown</p>
+<div class="{{@root.prefix}}--skeleton {{@root.prefix}}--dropdown-v2 {{@root.prefix}}--list-box {{@root.prefix}}--form-item">
+  <div role="button" class="{{@root.prefix}}--list-box__field">
+    <span class="{{@root.prefix}}--list-box__label"></span>
+  </div>
+</div>
+
+<p>Progress Indicator</p>
+<ul class="{{@root.prefix}}--progress {{@root.prefix}}--skeleton">
+  {{#each progressIndicatorItems}}
+    <li class="{{@root.prefix}}--progress-step {{@root.prefix}}--progress-step--incomplete">
+      <svg>
+        <g>
+          <circle cx="12" cy="12" r="12"></circle>
+        </g>
+      </svg>
+      <p class="{{@root.prefix}}--progress-label"></p>
+      <span class="{{@root.prefix}}--progress-line"></span>
+    </li>
+  {{/each}}
+</ul>
+
+<p>Toggle</p>
+<div class="{{@root.prefix}}--form-item">
+  <input type="checkbox" class="{{@root.prefix}}--toggle {{@root.prefix}}--skeleton" value="on">
+  <label class="{{@root.prefix}}--toggle__label {{@root.prefix}}--skeleton">
+    <span class="{{@root.prefix}}--toggle__text--left"></span><span class="{{@root.prefix}}--toggle__appearance"></span><span class="{{@root.prefix}}--toggle__text--right"></span>
+  </label>
+</div>
+
+<p>Small Toggle</p>
+<div class="{{@root.prefix}}--form-item">
+  <input type="checkbox" class="{{@root.prefix}}--toggle {{@root.prefix}}--toggle--small {{@root.prefix}}--skeleton" value="on">
+  <label class="{{@root.prefix}}--toggle__label {{@root.prefix}}--skeleton"><span class="{{@root.prefix}}--toggle__appearance"><svg class="{{@root.prefix}}--toggle__check" width="6px" height="5px" viewBox="0 0 6 5"><path d="M2.2403 2.7299L4.9245 0 6 1.1117 2.2384 5 0 2.6863 1.0612 1.511z"></path></svg></span>
+  </label>
+</div>
+
+<p>Slider</p>
+<div class="{{@root.prefix}}--form-item">
+  <label class="{{@root.prefix}}--label {{@root.prefix}}--skeleton"></label>
+  <div class="{{@root.prefix}}--slider-container {{@root.prefix}}--skeleton"><span class="{{@root.prefix}}--slider__range-label"></span>
+    <div class="{{@root.prefix}}--slider">
+      <div class="{{@root.prefix}}--slider__track"></div>
+      <div class="{{@root.prefix}}--slider__filled-track"></div>
+      <div class="{{@root.prefix}}--slider__thumb"></div>
+    </div><span class="{{@root.prefix}}--slider__range-label"></span>
+  </div>
+</div>
+
+<p>Tag</p>
+<span class="{{@root.prefix}}--tag {{@root.prefix}}--skeleton"></span>
+
+<p>Tabs</p>
+<nav class="{{@root.prefix}}--tabs {{@root.prefix}}--skeleton">
+  <div class="{{@root.prefix}}--tabs-trigger"><a href="javascript:void(0)" class="{{@root.prefix}}--tabs-trigger-text">&nbsp;</a>
+    <svg width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+      <path d="M10 0L5 5 0 0z"></path>
+    </svg>
+  </div>
+  <ul class="{{@root.prefix}}--tabs__nav {{@root.prefix}}--tabs__nav--hidden">
+    {{#each tabItems}}
+      <li class="{{@root.prefix}}--tabs__nav-item{{#if selected}} {{@root.prefix}}--tabs__nav-item--selected{{/if}}"><a class="{{@root.prefix}}--tabs__nav-link" href="javascript:void(0)">&nbsp;</a>
+      </li>
+    {{/each}}
+  </ul>
+</nav>
+
+<p>Icon</p>
+<div class="{{@root.prefix}}--icon--skeleton"></div>
+
+<p>Select</p>
+<div class="{{@root.prefix}}--form-item">
+  <label class="{{@root.prefix}}--label {{@root.prefix}}--skeleton"></label>
+  <div class="{{@root.prefix}}--select {{@root.prefix}}--skeleton">
+    <select class="{{@root.prefix}}--select-input"></select>
+  </div>
+</div>
+
+<p>Data Table</p>
+<div class="{{@root.prefix}}--skeleton {{@root.prefix}}--data-table-container">
+  <div class="{{@root.prefix}}--data-table-header">
+    <h4 class="{{@root.prefix}}--data-table-header__title"></h4>
+    <p class="{{@root.prefix}}--data-table-header__description"></p>
+  </div>
+  <section aria-label="data table toolbar" class="{{@root.prefix}}--table-toolbar">
+    <div class="{{@root.prefix}}--toolbar-content">
+      <button class="{{@root.prefix}}--skeleton {{@root.prefix}}--btn {{@root.prefix}}--btn--sm" type="button"></button>
+    </div>
+  </section>
+  <table class="{{@root.prefix}}--skeleton {{@root.prefix}}--data-table">
+    <thead>
+      <tr>
+        <th><span></span></th>
+        <th><span></span></th>
+        <th><span></span></th>
+        <th><span></span></th>
+        <th><span></span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span></span></td>
+        <td><span></span></td>
+        <td><span></span></td>
+        <td><span></span></td>
+        <td><span></span></td>
+      </tr>
+      <tr>
+        <td><span></span></td>
+        <td><span></span></td>
+        <td><span></span></td>
+        <td><span></span></td>
+        <td><span></span></td>
+      </tr>
+      <tr>
+        <td><span></span></td>
+        <td><span></span></td>
+        <td><span></span></td>
+        <td><span></span></td>
+        <td><span></span></td>
+      </tr>
+      <tr>
+        <td><span></span></td>
+        <td><span></span></td>
+        <td><span></span></td>
+        <td><span></span></td>
+        <td><span></span></td>
+      </tr>
+      <tr>
+        <td><span></span></td>
+        <td><span></span></td>
+        <td><span></span></td>
+        <td><span></span></td>
+        <td><span></span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

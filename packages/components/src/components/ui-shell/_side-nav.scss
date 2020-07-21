@@ -1,0 +1,673 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/css--helpers';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/vars';
+@import 'functions';
+@import 'theme';
+
+/// Helper to add in text overflow styles to a particular node. Useful if we
+/// don't want to have display-inline: block from the text helper classes
+/// @access private
+/// @group ui-shell
+/// @example
+///   .my-custom-selector {
+///     @include text-overflow();
+///   }
+@mixin text-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/// Helper for handling selectors for the expansion state of the side-nav.
+/// This helper makes it easier to write code for children that need to respond
+/// to whether the side-nav is open, or closed. For convenience, we also
+/// optionally set properties for opacity and visibility to help with the
+/// transition animation.
+/// @access private
+/// @group ui-shell
+/// @param {Bool} $opacity [false]
+/// @param {Bool} $visibility [false]
+/// @content
+@mixin expanded($opacity: false, $visibility: false) {
+  @if $opacity == true {
+    opacity: 0;
+  }
+
+  @if $visibility == true {
+    visibility: hidden;
+  }
+
+  .#{$prefix}--side-nav:hover &,
+  // Include the fixed variant here so components can render in both expandable
+  // and fixed side navs
+  .#{$prefix}--side-nav--fixed &,
+  .#{$prefix}--side-nav--expanded & {
+    @if $visibility == true {
+      visibility: inherit;
+    }
+    @if $opacity == true {
+      opacity: 1;
+    }
+    @content;
+  }
+}
+
+/// UI shell side nav
+/// @access private
+/// @group ui-shell
+@mixin carbon-side-nav {
+  //----------------------------------------------------------------------------
+  // Side-nav > Panel
+  //----------------------------------------------------------------------------.
+  .#{$prefix}--side-nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: mini-units(6);
+    max-width: mini-units(32);
+    color: $shell-side-nav-text-01;
+    background-color: $shell-side-nav-bg-01;
+    will-change: width;
+    // TODO: sync with motion work
+    transition: width 0.11s cubic-bezier(0.2, 0, 1, 0.9);
+    // Useful to toggle this property to see what's going on when not expanded
+    overflow: hidden;
+    z-index: z('header');
+  }
+
+  .#{$prefix}--side-nav--ux {
+    top: $spacing-09;
+    width: mini-units(32);
+
+    @include carbon--breakpoint-down('lg') {
+      width: 0;
+    }
+  }
+
+  //----------------------------------------------------------------------------
+  // Rail
+  //---------------------------------------------------------------------------
+  // Used for rendering the actual side rail. There are two states that we have
+  // to style for, namely for when the rail is collapsed and expanded. When
+  // collapsed, the rail is intended to expand on mouse over. When expanded, it
+  // should have the same dimensions as when expanded on mouse over
+
+  .#{$prefix}--side-nav--rail {
+    width: mini-units(6);
+  }
+
+  .#{$prefix}--side-nav--hidden {
+    width: 0;
+  }
+
+  .#{$prefix}--side-nav.bx--side-nav--rail:not(.#{$prefix}--side-nav--fixed):hover,
+  .#{$prefix}--side-nav--expanded {
+    width: mini-units(32);
+  }
+
+  .#{$prefix}--side-nav__overlay {
+    position: absolute;
+    top: rem(48px);
+    height: 0;
+    width: 0;
+    background-color: transparent;
+    opacity: 0;
+    transition: opacity $transition--expansion $carbon--standard-easing,
+      background-color $transition--expansion $carbon--standard-easing;
+  }
+
+  .#{$prefix}--side-nav__overlay-active {
+    @include carbon--breakpoint-down('lg') {
+      height: 100vh;
+      width: 100%;
+      background-color: $overlay-01;
+      opacity: 1;
+      transition: opacity $transition--expansion $carbon--standard-easing,
+        background-color $transition--expansion $carbon--standard-easing;
+    }
+  }
+
+  // When used alongside the header, we update the `top` positioning so that we
+  // can fit both widgets on the same page without overlapping.
+  .#{$prefix}--header ~ .#{$prefix}--side-nav {
+    top: mini-units(6);
+    height: calc(100% - 48px);
+  }
+
+  .#{$prefix}--side-nav--fixed {
+    width: mini-units(32);
+  }
+
+  .#{$prefix}--side-nav--collapsed {
+    width: mini-units(32);
+    transform: translateX(mini-units(-32));
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__navigation {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Header
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__header {
+    display: flex;
+    border-bottom: 1px solid $shell-side-nav-bg-02;
+    width: 100%;
+    height: mini-units(6);
+    max-width: 100%;
+
+    @include expanded() {
+      height: auto;
+    }
+  }
+
+  .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__header {
+    height: auto;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Header > Details
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__details {
+    display: flex;
+    flex-direction: column;
+    padding-right: mini-units(2);
+    // Necessary for text truncation in title
+    // https://css-tricks.com/flexbox-truncated-text/#article-header-id-3
+    flex: 1;
+    min-width: 0;
+
+    @include expanded($opacity: true, $visibility: true);
+  }
+
+  .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__details {
+    opacity: 1;
+    visibility: inherit;
+  }
+
+  .#{$prefix}--side-nav__title {
+    @include text-overflow();
+
+    // TODO: sync with type styles
+    font-size: rem(14px);
+    font-weight: 600;
+    letter-spacing: 0.1px;
+    margin-top: mini-units(2);
+    user-select: none;
+  }
+
+  // Sync up between our title and select field to get position logic for
+  // text
+  .#{$prefix}--side-nav__title,
+  .#{$prefix}--side-nav__select {
+    padding-left: mini-units(1);
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Header > Switcher
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__switcher {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .#{$prefix}--side-nav__switcher-chevron {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: mini-units(1);
+    bottom: 0;
+    fill: $shell-side-nav-icon-01;
+  }
+
+  .#{$prefix}--side-nav__select {
+    @include focus-outline('reset');
+
+    appearance: none;
+    flex: 1 1 0%;
+    background-color: $shell-header-bg-01;
+    color: $shell-header-text-01;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: rem(12px);
+    height: mini-units(4);
+    // Flex bug, used to have the select node respect the width if a child has a
+    // value that is longer than the width of the select
+    min-width: 0;
+    // Buffer the right hand side of select so text doesn't overlay the chevron
+    padding-right: mini-units(4);
+    transition: outline $duration--fast-02;
+  }
+
+  .#{$prefix}--side-nav__select:focus {
+    @include focus-outline('outline');
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Footer
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__footer {
+    flex: 0 0 rem(48px);
+    width: 100%;
+    background-color: $shell-side-nav-bg-01;
+  }
+
+  .#{$prefix}--side-nav__toggle {
+    @include focus-outline('reset');
+    @include button-reset($width: true);
+
+    height: 100%;
+    text-align: left;
+    transition: outline $duration--fast-02;
+    padding-left: mini-units(2);
+  }
+
+  .#{$prefix}--side-nav__toggle:focus {
+    @include focus-outline('outline');
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Item(s)
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__items {
+    flex: 1 1 0%;
+    overflow: hidden;
+    padding: 1rem 0 0;
+
+    @include expanded() {
+      overflow-y: auto;
+    }
+  }
+
+  .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__items {
+    overflow-y: auto;
+  }
+
+  // Force all of our side navigation items to be the same dimensions. When our
+  // menu expands, we can undo the forced dimensions.
+  .#{$prefix}--side-nav__item {
+    width: mini-units(6);
+    height: mini-units(6);
+    overflow: hidden;
+
+    @include expanded() {
+      width: auto;
+      height: auto;
+    }
+  }
+
+  .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__item {
+    width: auto;
+    height: auto;
+  }
+
+  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active):hover
+    .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+    > .#{$prefix}--side-nav__submenu:hover,
+  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+    > .#{$prefix}--side-nav__link:hover,
+  .#{$prefix}--side-nav__menu
+    a.#{$prefix}--side-nav__link:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
+  .#{$prefix}--side-nav
+    .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
+    // TODO: sync color
+    background-color: $shell-side-nav-bg-04;
+    color: $ibm-color__gray-100;
+  }
+
+  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+    > .#{$prefix}--side-nav__link:hover
+    > span,
+  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+    .#{$prefix}--side-nav__menu-item
+    > .#{$prefix}--side-nav__link:hover
+    > span {
+    color: $ibm-color__gray-100;
+  }
+
+  .#{$prefix}--side-nav__item--large {
+    height: mini-units(6);
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > {Menu,Submenu}
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__submenu {
+    @include button-reset($width: true);
+    @include type-style('productive-heading-01');
+    @include focus-outline('reset');
+
+    padding: 0 mini-units(2);
+    display: flex;
+    align-items: center;
+    color: $shell-side-nav-text-01;
+    height: mini-units(4);
+    user-select: none;
+    transition: color $duration--fast-02, background-color $duration--fast-02,
+      outline $duration--fast-02;
+  }
+
+  .#{$prefix}--side-nav__submenu:hover {
+    background-color: $shell-side-nav-bg-04;
+    color: $ibm-color__gray-100;
+  }
+
+  .#{$prefix}--side-nav__submenu:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--side-nav__submenu-title {
+    @include text-overflow();
+
+    text-align: left;
+  }
+
+  .#{$prefix}--side-nav__icon.#{$prefix}--side-nav__submenu-chevron {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .#{$prefix}--side-nav__submenu-chevron > svg {
+    transition: transform $duration--fast-02;
+    height: rem(16px);
+    width: rem(16px);
+  }
+
+  .#{$prefix}--side-nav__submenu[aria-expanded='true']
+    .#{$prefix}--side-nav__submenu-chevron
+    > svg {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--side-nav__item--large .#{$prefix}--side-nav__submenu {
+    height: mini-units(6);
+  }
+
+  .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
+    background-color: $shell-side-nav-bg-04;
+    color: $ibm-color__gray-100;
+  }
+
+  .#{$prefix}--side-nav__item--active
+    .#{$prefix}--side-nav__submenu[aria-expanded='false'] {
+    background-color: $shell-side-nav-bg-04;
+    color: $ibm-color__gray-100;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 4px;
+      background-color: $shell-side-nav-accent-01;
+    }
+  }
+
+  .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu-title {
+    font-weight: 600;
+    color: $ibm-color__gray-100;
+  }
+
+  .#{$prefix}--side-nav__menu {
+    display: block;
+    visibility: hidden;
+    max-height: 0;
+  }
+
+  .#{$prefix}--side-nav__submenu[aria-expanded='true']
+    + .#{$prefix}--side-nav__menu {
+    max-height: rem(1500px);
+    visibility: inherit;
+  }
+
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link {
+    height: mini-units(4);
+    min-height: mini-units(4);
+    padding-left: mini-units(4);
+    font-weight: 400;
+  }
+
+  .#{$prefix}--side-nav__item.#{$prefix}--side-nav__item--icon
+    a.#{$prefix}--side-nav__link {
+    padding-left: mini-units(9);
+  }
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link--current,
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link[aria-current='page'],
+  a.#{$prefix}--side-nav__link--current {
+    background-color: $ibm-color__gray-20;
+
+    > span {
+      color: $ibm-color__gray-100;
+      font-weight: 600;
+    }
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Link
+  //----------------------------------------------------------------------------
+  a.#{$prefix}--side-nav__link,
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item,
+  .#{$prefix}--side-nav
+    .#{$prefix}--header__menu-title[aria-expanded='true']
+    + .#{$prefix}--header__menu {
+    @include focus-outline('reset');
+    @include type-style('productive-heading-01');
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    min-height: mini-units(4);
+    padding: 0 mini-units(2);
+    transition: color $duration--fast-02, background-color $duration--fast-02,
+      outline $duration--fast-02;
+  }
+
+  .#{$prefix}--side-nav__item--large a.#{$prefix}--side-nav__link {
+    height: mini-units(6);
+  }
+
+  a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text,
+  .#{$prefix}--side-nav
+    a.#{$prefix}--header__menu-item
+    .#{$prefix}--text-truncate-end {
+    @include text-overflow();
+
+    color: $shell-side-nav-text-01;
+    font-size: rem(14px);
+    letter-spacing: 0.1px;
+    line-height: 1.25rem;
+    user-select: none;
+  }
+
+  a.#{$prefix}--side-nav__link:focus,
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:focus {
+    @include focus-outline('outline');
+  }
+
+  a.#{$prefix}--side-nav__link[aria-current='page'],
+  a.#{$prefix}--side-nav__link--current {
+    background-color: $shell-side-nav-bg-04;
+    font-weight: 600;
+  }
+
+  a.#{$prefix}--side-nav__link[aria-current='page']
+    .#{$prefix}--side-nav__link-text,
+  a.#{$prefix}--side-nav__link--current .#{$prefix}--side-nav__link-text {
+    color: $ibm-color__gray-100;
+  }
+
+  a.#{$prefix}--side-nav__link[aria-current='page']::before,
+  a.#{$prefix}--side-nav__link--current::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background-color: $shell-side-nav-accent-01;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Icons
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // Helpful in flex containers so the icon does not have less than the
+    // expected width
+    flex: 0 0 mini-units(2);
+  }
+
+  .#{$prefix}--side-nav__icon:not(.#{$prefix}--side-nav__submenu-chevron) {
+    margin-right: mini-units(3);
+  }
+
+  .#{$prefix}--side-nav__icon > svg {
+    fill: $shell-side-nav-icon-01;
+    width: mini-units(2);
+    height: mini-units(2);
+  }
+
+  .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-collapse-icon {
+    display: none;
+  }
+
+  .#{$prefix}--side-nav--expanded
+    .#{$prefix}--side-nav__icon
+    > svg.#{$prefix}--side-nav-expand-icon {
+    display: none;
+  }
+
+  .#{$prefix}--side-nav--expanded
+    .#{$prefix}--side-nav__icon
+    > svg.#{$prefix}--side-nav-collapse-icon {
+    display: block;
+  }
+
+  //----------------------------------------------------------------------------
+  // Variants - Fixed
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav--fixed a.#{$prefix}--side-nav__link,
+  .#{$prefix}--side-nav--fixed .#{$prefix}--side-nav__submenu {
+    padding-left: mini-units(2);
+  }
+
+  .#{$prefix}--side-nav--fixed
+    .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--icon)
+    .#{$prefix}--side-nav__menu
+    a.#{$prefix}--side-nav__link {
+    padding-left: mini-units(4);
+  }
+
+  //----------------------------------------------------------------------------
+  // Variants - Header Nav Links in Side Nav
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav .#{$prefix}--header__nav {
+    @include carbon--breakpoint-down('lg') {
+      display: block;
+    }
+  }
+
+  .#{$prefix}--side-nav__header-navigation {
+    display: none;
+
+    @include carbon--breakpoint-down('lg') {
+      display: block;
+      position: relative;
+      margin-bottom: rem(32px);
+    }
+  }
+
+  .#{$prefix}--side-nav__header-divider::after {
+    content: '';
+    position: absolute;
+    height: rem(1px);
+    bottom: rem(-16px);
+    left: rem(16px);
+    width: calc(100% - 32px);
+    background: $ibm-color__gray-20;
+  }
+
+  //header menu items overrides
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item {
+    color: $shell-side-nav-text-01;
+    white-space: nowrap;
+    justify-content: space-between;
+
+    &[aria-expanded='true'] {
+      background-color: transparent;
+    }
+  }
+
+  .#{$prefix}--side-nav
+    .#{$prefix}--header__menu-title[aria-expanded='true']
+    + .#{$prefix}--header__menu {
+    bottom: inherit;
+    width: 100%;
+    box-shadow: none;
+    transform: none;
+    background-color: transparent;
+    padding: 0;
+
+    li {
+      width: 100%;
+    }
+
+    a.#{$prefix}--header__menu-item {
+      padding-left: 4.25rem;
+      font-weight: 400;
+    }
+
+    a.#{$prefix}--header__menu-item:hover {
+      background-color: $shell-side-nav-bg-04;
+      color: $ibm-color__gray-100;
+    }
+  }
+
+  .#{$prefix}--side-nav
+    .#{$prefix}--header__menu
+    a.#{$prefix}--header__menu-item {
+    height: inherit;
+  }
+
+  .#{$prefix}--side-nav
+    a.#{$prefix}--header__menu-item:hover
+    .#{$prefix}--header__menu-arrow,
+  .#{$prefix}--side-nav
+    a.#{$prefix}--header__menu-item:focus
+    .#{$prefix}--header__menu-arrow,
+  .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
+    fill: $shell-side-nav-text-01;
+  }
+}
+
+@include exports('carbon-side-nav') {
+  @if feature-flag-enabled('ui-shell') {
+    @include carbon-side-nav;
+  }
+}

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.TableContainer should render 1`] = `
+<TableContainer
+  className="custom-class"
+>
+  <div
+    className="custom-class bx--data-table-container"
+  />
+</TableContainer>
+`;
+
+exports[`DataTable.TableContainer should support enable sticky header 1`] = `
+<TableContainer
+  stickyHeader={true}
+>
+  <div
+    className="bx--data-table-container bx--data-table--max-width"
+  />
+</TableContainer>
+`;

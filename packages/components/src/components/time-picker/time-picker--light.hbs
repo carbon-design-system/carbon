@@ -1,0 +1,125 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div class="{{prefix}}--form-item">
+  <label for="time-picker-5" class="{{prefix}}--label">Select a time</label>
+  <div class="{{prefix}}--time-picker{{#if light}} {{prefix}}--time-picker--light{{/if}}">
+    <div class="{{prefix}}--time-picker__input">
+      <input id="time-picker-5" type="text"
+        class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}} {{prefix}}--time-picker__input-field"
+        pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?" placeholder="hh:mm" maxlength="5" />
+    </div>
+    <div class="{{prefix}}--time-picker__select {{prefix}}--select{{#if light}} {{prefix}}--select--light{{/if}}">
+      <label for="select-id-9" class="{{prefix}}--label {{prefix}}--visually-hidden">Select AM/PM</label>
+      <select id="select-id-9" class="{{prefix}}--select-input">
+        <option class="{{prefix}}--select-option" value="AM">AM</option>
+        <option class="{{prefix}}--select-option" value="PM">PM</option>
+      </select>
+      {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow') }}
+    </div>
+    <div class="{{prefix}}--time-picker__select {{prefix}}--select{{#if light}} {{prefix}}--select--light{{/if}}">
+      <label for="select-id-10" class="{{prefix}}--label {{prefix}}--visually-hidden">Select time
+        zone</label>
+      <select id="select-id-10" class="{{prefix}}--select-input">
+        <option class="{{prefix}}--select-option" value="option-1">Time zone 1</option>
+        <option class="{{prefix}}--select-option" value="option-2">Time zone 2</option>
+        <option class="{{prefix}}--select-option" value="option-3">Time zone 3</option>
+      </select>
+      {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow') }}
+    </div>
+  </div>
+</div>
+<div class="{{prefix}}--form-item">
+  <div class="{{prefix}}--time-picker{{#if light}} {{prefix}}--time-picker--light{{/if}}" data-invalid>
+    <div class="{{prefix}}--time-picker__input">
+      <label for="time-picker-6" class="{{prefix}}--label">Select a time</label>
+      <input id="time-picker-6" type="text"
+        class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}} {{prefix}}--time-picker__input-field"
+        pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?" placeholder="hh:mm" maxlength="5" />
+    </div>
+    <div class="{{prefix}}--time-picker__select {{prefix}}--select{{#if light}} {{prefix}}--select--light{{/if}}">
+      <label for="select-id-11" class="{{prefix}}--label {{prefix}}--visually-hidden">Select AM/PM</label>
+      <select id="select-id-11" class="{{prefix}}--select-input">
+        <option class="{{prefix}}--select-option" value="AM">AM</option>
+        <option class="{{prefix}}--select-option" value="PM">PM</option>
+      </select>
+      {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow') }}
+    </div>
+    <div class="{{prefix}}--time-picker__select {{prefix}}--select{{#if light}} {{prefix}}--select--light{{/if}}">
+      <label for="select-id-12" class="{{prefix}}--label {{prefix}}--visually-hidden">Select time
+        zone</label>
+      <select id="select-id-12" class="{{prefix}}--select-input">
+        <option class="{{prefix}}--select-option" value="option-1">Time zone 1</option>
+        <option class="{{prefix}}--select-option" value="option-2">Time zone 2</option>
+        <option class="{{prefix}}--select-option" value="option-3">Time zone 3</option>
+      </select>
+      {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow') }}
+    </div>
+  </div>
+  <div class="{{prefix}}--form-requirement">
+    Invalid time.
+  </div>
+</div>
+<div class="{{prefix}}--form-item">
+  <div class="{{prefix}}--time-picker{{#if light}} {{prefix}}--time-picker--light{{/if}}">
+    <div class="{{prefix}}--time-picker__input">
+      <label for="time-picker-7" class="{{prefix}}--label {{prefix}}--label--disabled">Select a time</label>
+      <input id="time-picker-7" type="text"
+        class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}} {{prefix}}--time-picker__input-field"
+        pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?" placeholder="hh:mm" maxlength="5" disabled />
+    </div>
+    <div class="{{prefix}}--time-picker__select {{prefix}}--select{{#if light}} {{prefix}}--select--light{{/if}}">
+      <label for="select-id-13" class="{{prefix}}--label {{prefix}}--visually-hidden">Select AM/PM</label>
+      <select id="select-id-13" class="{{prefix}}--select-input" disabled>
+        <option class="{{prefix}}--select-option" value="AM">AM</option>
+        <option class="{{prefix}}--select-option" value="PM">PM</option>
+      </select>
+      {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow') }}
+    </div>
+    <div class="{{prefix}}--time-picker__select {{prefix}}--select{{#if light}} {{prefix}}--select--light{{/if}}">
+      <label for="select-id-14" class="{{prefix}}--label {{prefix}}--visually-hidden">Select time
+        zone</label>
+      <select id="select-id-14" class="{{prefix}}--select-input" disabled>
+        <option class="{{prefix}}--select-option" value="option-1">Time zone 1</option>
+        <option class="{{prefix}}--select-option" value="option-2">Time zone 2</option>
+        <option class="{{prefix}}--select-option" value="option-3">Time zone 3</option>
+      </select>
+      {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow') }}
+    </div>
+  </div>
+</div>
+<div class="{{prefix}}--form-item">
+  <div class="{{prefix}}--time-picker{{#if light}} {{prefix}}--time-picker--light{{/if}}" data-invalid>
+    <div class="{{prefix}}--time-picker__input">
+      <label for="time-picker-8" class="{{prefix}}--label {{prefix}}--label--disabled">Select a time</label>
+      <input id="time-picker-8" type="text"
+        class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}} {{prefix}}--time-picker__input-field"
+        pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?" placeholder="hh:mm" maxlength="5" disabled />
+    </div>
+    <div class="{{prefix}}--time-picker__select {{prefix}}--select{{#if light}} {{prefix}}--select--light{{/if}}">
+      <label for="select-id-15" class="{{prefix}}--label {{prefix}}--visually-hidden">Select AM/PM</label>
+      <select id="select-id-15" class="{{prefix}}--select-input" disabled>
+        <option class="{{prefix}}--select-option" value="AM">AM</option>
+        <option class="{{prefix}}--select-option" value="PM">PM</option>
+      </select>
+      {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow') }}
+    </div>
+    <div class="{{prefix}}--time-picker__select {{prefix}}--select{{#if light}} {{prefix}}--select--light{{/if}}">
+      <label for="select-id-16" class="{{prefix}}--label {{prefix}}--visually-hidden">Select time
+        zone</label>
+      <select id="select-id-16" class="{{prefix}}--select-input" disabled>
+        <option class="{{prefix}}--select-option" value="option-1">Time zone 1</option>
+        <option class="{{prefix}}--select-option" value="option-2">Time zone 2</option>
+        <option class="{{prefix}}--select-option" value="option-3">Time zone 3</option>
+      </select>
+      {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow') }}
+    </div>
+  </div>
+  <div class="{{prefix}}--form-requirement">
+    Invalid time.
+  </div>
+</div>

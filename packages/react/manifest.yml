@@ -1,0 +1,8 @@
+---
+applications:
+- name: carbon-storybook
+  memory: 64M
+  buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+  routes:
+  - route: react.carbondesignsystem.com
+  - route: carbon-react-storybook.mybluemix.net

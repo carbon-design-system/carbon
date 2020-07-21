@@ -1,0 +1,406 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import './vendor/@carbon/elements/scss/import-once/import-once';
+@import 'colors';
+@import 'feature-flags';
+@import 'spacing';
+@import './vendor/@carbon/elements/scss/themes/themes';
+
+// The load order of tokens versus themes matter, so we use `carbon--theme` here
+// to make sure that they're in sync if one has diverged from the other.
+@include carbon--theme();
+
+/// Theme variables
+
+/// @type Value
+/// @access public
+/// @group global-themes
+$input-border: 1px solid transparent !default;
+
+/// @type Number
+/// @access public
+/// @group global-themes
+$input-label-weight: 400 !default;
+
+/// @type Color
+/// @access public
+/// @group global-themes
+$disabled: $disabled-02 !default;
+
+/// @type Color
+/// @access public
+/// @group global-themes
+$disabled-background-color: $disabled-01 !default;
+
+/// @type Color
+/// @access public
+/// @group global-themes
+$focus: $ibm-color__blue-60 !default;
+
+/// @type Color
+/// @access public
+/// @group global-themes
+$inverse-focus-ui: $ibm-color__white-0 !default;
+
+// Link
+
+/// @type Color
+/// @access public
+/// @group link
+/// @deprecated
+$link-visited: $visited-link !default;
+
+/// @type Color
+/// @access public
+/// @deprecated Use theme token `$inverse-link` instead.
+/// @group link
+$link-inverse-color: #6ea6ff !default;
+
+// Tooltip
+
+/// @type Color
+/// @access public
+/// @group tooltip
+$tooltip-background-color: $inverse-02 !default;
+
+// Button
+
+/// @type Number
+/// @access public
+/// @group button
+$button-font-weight: 400 !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$button-font-size: 0.875rem !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$button-border-radius: 0 !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$button-height: 3rem !default;
+
+/// @type Value
+/// @access public
+/// @group button
+$button-padding: calc(0.875rem - 3px) 63px calc(0.875rem - 3px) 15px !default;
+
+/// @type Value
+/// @access public
+/// @group button
+$button-padding-field: calc(0.675rem - 3px) 60px calc(0.675rem - 3px) 12px !default;
+
+/// @type Value
+/// @access public
+/// @group button
+$button-padding-sm: calc(0.375rem - 3px) 60px calc(0.375rem - 3px) 12px !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$button-padding-lg: $carbon--spacing-04 !default;
+
+/// @type Number
+/// @access public
+/// @group button
+/// Uses the same padding-y as normal buttons, but removes extra padding-right
+$button-padding-ghost: calc(0.875rem - 3px) 12px !default;
+
+/// @type Number
+/// @access public
+/// @group button
+/// Uses the same padding-y as field buttons, but removes extra padding-right
+$button-padding-ghost-field: calc(0.675rem - 3px) 12px !default;
+
+/// @type Number
+/// @access public
+/// @group button
+/// Uses the same padding-y as small buttons, but removes extra padding-right
+$button-padding-ghost-sm: calc(0.375rem - 3px) 12px !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$button-border-width: 2px !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$button-outline-width: 1px !default;
+
+/// @type Number
+/// @access public
+/// @group button
+/// @deprecated
+$button-outline-offset: -5px !default;
+
+/// @type Value
+/// @access public
+/// @group button
+/// @deprecated
+$button-outline: 1px solid $ibm-color__white-0 !default;
+
+// Accordion
+
+/// @type Value
+/// @access public
+/// @group accordion
+$accordion-flex-direction: row-reverse !default;
+
+/// @type Value
+/// @access public
+/// @group accordion
+$accordion-justify-content: flex-start !default;
+
+/// @type Value
+/// @access public
+/// @group accordion
+$accordion-arrow-margin: 2px $carbon--spacing-05 0 0 !default;
+
+/// @type Value
+/// @access public
+/// @group accordion
+$accordion-title-margin: 0 0 0 $carbon--spacing-05 !default;
+
+/// @type Value
+/// @access public
+/// @group accordion
+$accordion-content-padding: 0 0 0 $carbon--spacing-05 !default;
+
+// Checkbox
+
+/// @type Number
+/// @access public
+/// @group checkbox
+$checkbox-border-width: 2px !default;
+
+// Code Snippet
+
+/// @type Color
+/// @access public
+/// @group code-snippet
+/// TODO: Define for experimental
+$snippet-background-color: $ui-01 !default;
+
+/// @type Color
+/// @access public
+/// @group code-snippet
+/// TODO: Define for experimental
+$snippet-border-color: $ui-03 !default;
+
+// Content Switcher
+
+/// @type Number
+/// @access public
+/// @group content-switcher
+$content-switcher-border-radius: 0 !default;
+
+/// @type Number
+/// @access public
+/// @group content-switcher
+$content-switcher-option-border: 1px solid $brand-01 !default;
+
+/// @type Color
+/// @access public
+/// @group content-switcher
+$content-switcher-divider: $ui-03 !default;
+
+// Data Table
+
+/// @type Value
+/// @access public
+/// @group data-table
+$data-table-heading-transform: uppercase !default;
+
+/// @type Value
+/// @access public
+/// @group data-table
+$data-table-heading-border-bottom: 1px solid $brand-01 !default;
+
+/// @type Number
+/// @access public
+/// @group data-table
+$data-table-row-height: 2rem !default;
+
+/// @type Color
+/// @access public
+/// @group data-table
+$data-table-zebra-color: $ui-02 !default;
+
+/// @type Color
+/// @access public
+/// @group data-table
+$data-table-column-hover: $hover-selected-ui !default;
+
+// Date Picker
+
+/// @type Color
+/// @access public
+/// @group date-picker
+/// @deprecated
+$date-picker-in-range-background-color: $ibm-color__blue-20 !default;
+
+// Modal
+
+/// @type Color
+/// @access public
+/// @group modal
+$modal-border-top: $brand-01 4px solid !default;
+
+/// @type Color
+/// @access public
+/// @group modal
+/// @deprecated
+$modal-footer-background-color: $ui-03 !default;
+
+// Notification
+
+/// @type Color
+/// @access public
+/// @group notification
+$notification-info-background-color: $ibm-color__blue-10 !default;
+
+/// @type Color
+/// @access public
+/// @group notification
+$notification-error-background-color: $ibm-color__red-10 !default;
+
+/// @type Color
+/// @access public
+/// @group notification
+$notification-warning-background-color: mix(
+  $ibm-color__yellow-30,
+  $ibm-color__white-0,
+  15%
+) !default;
+
+/// @type Color
+/// @access public
+/// @group notification
+$notification-success-background-color: $ibm-color__green-10 !default;
+
+// Progress Indicator
+
+/// @type Value
+/// @access public
+/// @group progress-indicator
+$progress-indicator-bar-width: 1px inset transparent !default;
+
+/// @type Number
+/// @access public
+/// @group progress-indicator
+$progress-indicator-stroke-width: 5 !default;
+
+/// @type Number
+/// @access public
+/// @group progress-indicator
+$progress-indicator-line-offset: 0.625rem !default;
+
+// Copy Button
+
+/// @type Color
+/// @access public
+/// @group copy-button
+$copy-active: $active-ui !default;
+
+/// @type Color
+/// @access public
+/// @group copy-button
+$copy-btn-feedback: $inverse-02 !default;
+
+// Radio Button
+
+/// @type Number
+/// @access public
+/// @group radio-button
+$radio-border-width: 1px !default;
+
+// Structured List
+
+/// @type Number
+/// @access public
+/// @group structured-list
+$structured-list-padding: 2rem !default;
+
+/// @type Value
+/// @access public
+/// @group structured-list
+$structured-list-text-transform: none !default;
+
+// Tabs
+
+/// @type Value
+/// @access public
+/// @group tabs
+$tab-underline-color: 2px solid $ui-03 !default;
+
+/// @type Value
+/// @access public
+/// @group tabs
+$tab-underline-color-hover: 2px solid $ui-04 !default;
+
+/// @type Color
+/// @access public
+/// @group tabs
+$tab-text-disabled: $disabled-02 !default;
+
+/// @type Value
+/// @access public
+/// @group tabs
+$tab-underline-disabled: 2px solid $disabled-01 !default;
+
+// Skeleton Loading
+
+/// @type Color
+/// @access public
+/// @group skeleton
+/// TODO: Remove this in next major release
+$skeleton: $skeleton-01 !default;
+
+// Light UI
+
+// Determine the "light" color for a given token.
+/// @param {String} $token The theme token.
+/// @return {String} The new color value as a hex code or a custom property.
+/// @access public
+/// @group light-ui
+@function get-light-value($token) {
+  $value: map-get($carbon--theme, $token);
+
+  @if $carbon--theme ==
+    $carbon--theme--white or
+    $carbon--theme ==
+    $carbon--theme--g10
+  {
+    $value: darken($value, 8%);
+  }
+
+  @if $carbon--theme ==
+    $carbon--theme--g90 or
+    $carbon--theme ==
+    $carbon--theme--g100
+  {
+    $value: lighten($value, 8%);
+  }
+
+  @if feature-flags-enabled('enable-css-custom-properties') {
+    @return var(--#{$custom-property-prefix}-#{$token}-light, $value);
+  }
+
+  @return $value;
+}
+
+/// @type Color
+/// @access public
+/// @group light-ui
+$hover-ui-light: get-light-value('ui-01');

@@ -1,0 +1,207 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/component-tokens';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import 'mixins';
+@import 'tokens';
+
+/// Tag styles
+/// @access private
+/// @group tag
+@mixin tags {
+  .#{$prefix}--tag {
+    @include button-reset($width: false);
+    @include type-style('label-01');
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-gray'),
+      get-token-value($tag-colors, 'tag-color-gray'),
+      get-token-value($tag-colors, 'tag-hover-gray')
+    );
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: $carbon--spacing-02 $carbon--spacing-03;
+    min-height: 1.5rem;
+    // restricts size of contained elements
+    max-width: 100%;
+    // ensures tag stays pill shaped;
+    min-width: rem(32px);
+    margin: $carbon--spacing-02;
+    border-radius: rem(15px);
+    word-break: break-word;
+    cursor: default;
+
+    &:not(:first-child) {
+      margin-left: 0;
+    }
+  }
+
+  .#{$prefix}--tag--red {
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-red'),
+      get-token-value($tag-colors, 'tag-color-red'),
+      get-token-value($tag-colors, 'tag-hover-red')
+    );
+  }
+
+  .#{$prefix}--tag--magenta {
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-magenta'),
+      get-token-value($tag-colors, 'tag-color-magenta'),
+      get-token-value($tag-colors, 'tag-hover-magenta')
+    );
+  }
+
+  .#{$prefix}--tag--purple {
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-purple'),
+      get-token-value($tag-colors, 'tag-color-purple'),
+      get-token-value($tag-colors, 'tag-hover-purple')
+    );
+  }
+
+  .#{$prefix}--tag--blue {
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-blue'),
+      get-token-value($tag-colors, 'tag-color-blue'),
+      get-token-value($tag-colors, 'tag-hover-blue')
+    );
+  }
+
+  .#{$prefix}--tag--cyan {
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-cyan'),
+      get-token-value($tag-colors, 'tag-color-cyan'),
+      get-token-value($tag-colors, 'tag-hover-cyan')
+    );
+  }
+
+  .#{$prefix}--tag--teal {
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-teal'),
+      get-token-value($tag-colors, 'tag-color-teal'),
+      get-token-value($tag-colors, 'tag-hover-teal')
+    );
+  }
+
+  .#{$prefix}--tag--green {
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-green'),
+      get-token-value($tag-colors, 'tag-color-green'),
+      get-token-value($tag-colors, 'tag-hover-green')
+    );
+  }
+
+  .#{$prefix}--tag--gray {
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-gray'),
+      get-token-value($tag-colors, 'tag-color-gray'),
+      get-token-value($tag-colors, 'tag-hover-gray')
+    );
+  }
+
+  .#{$prefix}--tag--cool-gray {
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-cool-gray'),
+      get-token-value($tag-colors, 'tag-color-cool-gray'),
+      get-token-value($tag-colors, 'tag-hover-cool-gray')
+    );
+  }
+
+  .#{$prefix}--tag--warm-gray {
+    @include tag-theme(
+      get-token-value($tag-colors, 'tag-background-warm-gray'),
+      get-token-value($tag-colors, 'tag-color-warm-gray'),
+      get-token-value($tag-colors, 'tag-hover-warm-gray')
+    );
+  }
+
+  .#{$prefix}--tag--high-contrast {
+    @include tag-theme($inverse-02, $inverse-01, $inverse-hover-ui);
+  }
+
+  .#{$prefix}--tag--disabled,
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled {
+    @include tag-theme($disabled-01, $disabled-02);
+
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+
+  .#{$prefix}--tag__label {
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  // tags used for filtering
+  .#{$prefix}--tag--filter {
+    cursor: pointer;
+    padding-right: rem(2px);
+
+    &:focus,
+    &:hover {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--tag__close-icon {
+    flex-shrink: 0;
+    width: rem(20px);
+    height: rem(20px);
+    margin: 0 0 0 rem(4px);
+    padding: rem(2px);
+    border: 0;
+    background-color: transparent;
+    border-radius: 50%;
+    color: currentColor;
+    cursor: pointer;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  .#{$prefix}--tag--disabled .#{$prefix}--tag__close-icon {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--tag__close-icon:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 2px $focus;
+    border-radius: 50%;
+  }
+
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
+    .#{$prefix}--tag__close-icon:hover {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg {
+    fill: $disabled-02;
+  }
+
+  // Skeleton state
+  .#{$prefix}--tag.#{$prefix}--skeleton {
+    @include skeleton;
+    @include tag-theme($bg-color: $ui-03, $text-color: $text-01);
+
+    width: rem(60px);
+    overflow: hidden;
+  }
+}
+
+@include exports('tags') {
+  @include tags;
+}

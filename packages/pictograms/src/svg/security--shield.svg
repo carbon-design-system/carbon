@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+<g id="security_shield">
+	<g id="security_shield_1_">
+		<g>
+			<defs>
+				<path id="SVGID_1_" d="M24,39c6,0,11-5,11-11c0-7,0-13,0-13L24,9V39z"/>
+			</defs>
+			<clipPath id="SVGID_2_">
+				<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+			</clipPath>
+			
+				<line style="clip-path:url(#SVGID_2_);fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" x1="23" y1="14.457" x2="35" y2="21"/>
+			
+				<line style="clip-path:url(#SVGID_2_);fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" x1="23" y1="20.414" x2="35" y2="26.957"/>
+			
+				<line style="clip-path:url(#SVGID_2_);fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" x1="23" y1="26.457" x2="34" y2="32.455"/>
+			
+				<line style="clip-path:url(#SVGID_2_);fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" x1="23" y1="32.5" x2="30.611" y2="36.649"/>
+		</g>
+		<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" d="M24,9l-11,6c0,0,0,8,0,13c0,6,5,11,11,11
+			s11-5,11-11c0-7,0-13,0-13L24,9z"/>
+	</g>
+</g>
+<g id="Layer_1">
+</g>
+</svg>

@@ -1,0 +1,680 @@
+categories:
+  - name: Action
+    members:
+      - cloud--download
+      - cloud--upload
+      - crop
+      - delete
+      - do--not
+      - download
+      - download--alt
+      - embed
+      - export
+      - export--alt
+      - heart
+      - launch
+      - maximize
+      - minimize
+      - paper--clip
+      - player--flow
+      - refresh
+      - renew
+      - repeat
+      - reset
+      - trash
+      - upload
+      - upload--alt
+  - name: Blockchain
+    members:
+      - connected--ecosystem
+      - consumer--engagement--food--journey
+      - supply--chain--optimization--01
+      - supply--chain--optimization--02
+      - transparency--01
+      - transparency--02
+      - trust
+  - name: Building Structure
+    members:
+      - alarm
+      - apartment
+      - building
+      - elevator
+      - escalator--down
+      - escalator--up
+      - fire--alarm
+      - fire--extinguisher
+      - id--badge
+      - office
+      - stairs--plan--view
+  - name: Cities
+    members:
+      - amsterdam--canal
+      - amsterdam--farm
+      - amsterdam--windmill
+      - austin
+      - bangalore
+      #    - basel
+      - beijing--municipal
+      - beijing--tower
+      - berlin--brandenburg--gate
+      - berlin--brandenburg #DEPRECATED: use berlin--brandenburg--gate instead
+      - berlin--cathedral
+      - berlin--tower
+      - copenhagen--planetarium
+      - copenhagen--snekkja
+      - dubai--palm--islands
+      - dubai--skyscraper
+      - dublin--brewery
+      - dublin--castle
+      - london
+      - london--big--ben
+      - london--expanded--base
+      - madrid--cathedral
+      - madrid--skyscrapers
+      - madrid--statue
+      - melbourne
+      - mexico-city--angel--of--independence
+      - mexico-city--museo--soumaya
+      - milan--duomo--di--milano
+      - milan--skyscrapers
+      - moscow
+      - munich
+      - nice
+      - nyc--brooklyn
+      - nyc--manhattan
+      - nyc--manhattan--alt
+      #    - portland
+      - rome
+      - san-francisco
+      - san-francisco--fog
+      - sao-paulo
+      - sao-paulo--expanded--base
+      - seattle
+      #    - shanghai
+      - singapore
+      #    - stockholm
+      - tel--aviv
+      - tokyo--cherry--blossom
+      - tokyo--gates
+      - tokyo--temple
+      - tokyo--volcano
+      - toronto
+      - vancouver
+      - washington-dc
+      - washington-dc--capitol
+      - washington-dc--monument
+  - name: Cloud
+    members:
+      - active--server
+      - api
+      - automate--modular--management
+      - cloud--analytics
+      - cloud--assets
+      - cloud--builder--professional--services
+      - cloud--computing
+      - cloud--data--services
+      - cloud--ecosystem
+      - cloud--guidelines
+      - cloud--managed--services
+      - cloud--oracle
+      - cloud--partners
+      - cloud--planning
+      - cloud--sap
+      - cloud--services
+      - cloud--services--pricing
+      - cloud--storage
+      - cloud--strategy
+      - cloud--tutorials
+      - cloud--vmware
+      - cognos--analytics
+      - construct
+      - devops
+      - digital
+      - docker
+      - expand--horz
+      - expand--vert
+      - free--trial
+      - global--business--services
+      - global--technology--services
+      - hybrid--cloud
+      - hybrid--cloud--services
+      - java
+      - javascript
+      - list--bullet
+      - list--checkbox
+      - marketplace
+      - mas
+      - mqa
+      - planning--analytics
+      - saas--enablement
+      - single--sign-on
+      - softlayer--enablement
+  - name: Controls
+    members:
+      - gear
+      - podcast
+      - slider
+      - toggle
+      - video
+      - video--alt
+      - video--chat
+      - video--play
+      - webcast
+  - name: Data Analytics
+    members:
+      - analyze
+      - blockchain
+      - box-plot
+      - chart--3D
+      - chart--area
+      - chart--bar
+      - chart--bubble
+      - chart--bubble--line
+      - chart--candlestick
+      - chart--custom
+      - chart--error-bar
+      - chart--evaluation
+      - chart--high-low
+      - chart--histogram
+      - chart--line
+      - chart--multi-line
+      - chart--multi-type
+      - chart--parallel
+      - chart--pie
+      - chart--radar
+      - chart--river
+      - chart--scatterplot
+      - chart--stepper
+      - chart--sunburst
+      - chart--t-SNE
+      - circle-packing
+      - code--syntax
+      - data--set
+      - employee--insights
+      - flow--chart
+      - flow--chart--detail
+      - heat--map
+      - heat-map--02
+      - math-curve
+      - population-diagram
+      - q-q-plot
+      - rank
+      - relationship-diagram
+      - report
+      - sample--file
+      - scatter-matrix
+      - secure--data
+      - stem--leaf--plot
+      - time--plot
+      - tree--diagram
+      - tree--map
+      - user--analytics
+      - word-cloud
+  - name: Data Storage
+    members:
+      - archive
+      - data--backup
+      - data--processing
+      - data--storage
+      - hard--drive
+      - hard--drive--network
+      - server--rack
+      - servers
+  - name: Design and Development
+    members:
+      - app--developer
+      - application
+      - design--and--development--01
+      - design--and--development--02
+      - feedback
+      - hills
+      - idea
+      - ideate
+      - path
+      - pattern
+      - user--insights
+      - user--interface
+      - web--developer
+      - windows
+  - name: Device Interaction
+    members:
+      - add--device
+      - augmented--reality
+      - mobile--add
+      - mobile--chat
+      - mobile--devices
+      - mobile--phone
+      - swipe--left
+      - swipe--right
+      - touch
+      - touch--gesture
+      - touch--id
+      - touch--screen
+      - touch--swipe
+  - name: Education
+    members:
+      - college
+      - education
+      - feedback--02
+      - goals
+      - growth
+      - insights
+      - university
+  - name: Electronics
+    members:
+      - air--conditioner
+      - camera
+      - chip--circuit
+      - chip--credit
+      - chip--debit
+      - console
+      - console--wireless
+      - desktop
+      - electric
+      - headphones
+      - printer
+      - telephone
+      - television
+      - washer
+      - wifi
+  - name: Enforcement
+    members:
+      - capitol
+      - justice
+      - parliament
+      - police
+  - name: File
+    members:
+      - add--document
+      - contract
+      - document--security
+      - duplicate--file
+      - envelope
+      - file--backup
+      - file--transfer
+      - folder
+      - rich--text--format
+  - name: Finance
+    members:
+      - client--financing--01
+      - client--financing--02
+      - commercial--financing--01
+      - commercial--financing--02
+      - finance--strategy
+      - financial--networks
+      - global--analytics
+      - global--assets-and-recovery--01
+      - global--assets-and-recovery--02
+      - global--currency
+      - global--exchange
+      - global--finance--network
+      - global--markets--bar
+      - global--markets
+      - global--security
+      - global--strategy
+      - optimize--cash-flow--01
+      - optimize--cash-flow--02
+  - name: Healthcare
+    members:
+      - care
+      - doctor
+      - first--aid
+      - heart--health
+      - hospital
+      - medical
+      - medical--charts
+      - medical--staff
+      - mri
+      - mri--patient
+      - pill--bottle--01
+      - pills
+      - pregnant
+      - stethoscope
+      - x-ray--01
+      - x-ray--02
+  - name: Home
+    members:
+      - door--handle
+      - faucet
+      - home--front
+      - home--garage
+      - home--profile
+      - intercom
+      - shower
+      - wireless--modem
+      - wireless--home
+  - name: IBM
+    members:
+      - bee
+      - enterprise--design--thinking
+      - enterprise--design--thinking--alt
+      - eye
+      - ibm--ix
+      - ibm--z
+      - progress
+  - name: Industry
+    members:
+      - agriculture
+      - bulldozer
+      - cargo--crane
+      - cargo--ship
+      - cheese
+      - farm
+      - farm--01
+      - farm--02
+      - farmer--01
+      - farmer--02
+      - oil--pump
+      - oil--rig
+      - power
+      - recycle
+      - refinery
+      - satellite
+      - satellite--dish
+      - solar--field
+      - solar--panel
+      - steel
+      - telecom
+      - tractor
+      - weather
+      - wheat
+      - wind--power
+      - wine
+      - wrecking--ball
+  - name: Internet of Things
+    members:
+      - build
+      - connect
+      - iot--munich
+      - solve
+      - transform
+  - name: Learning
+    members:
+      - intelligence
+      - machine--learning--01
+      - machine--learning--02
+      - machine--learning--03
+      - machine--learning--04
+      - machine--learning--05
+      - machine--learning--06
+  - name: Life Science
+    members:
+      - cell
+      - coronavirus
+      - dna
+      - erlenmeyer--flask
+      - heart
+      - lungs
+      - magnify
+      - microorganisms
+      - microscope
+      - mortar--and--pestle
+      - petri--culture
+      - research
+      - test--tubes
+      - virus
+  - name: Lifestyle
+    members:
+      - apple
+      - backpack
+      - blender
+      - cafe
+      - cherries
+      - dining
+      - hard--ice--cream
+      - flower--01
+      - flower--02
+      - perfume
+      - racetrack
+      - scale
+      - soft--ice--cream
+      - sports
+      - stationary--bicycle
+      - tennis
+      - yoga--01
+      - yoga--02
+      - yoga--03
+      - yoga--04
+  - name: Location
+    members:
+      - americas
+      - asia--australia
+      - europe-africa
+      - globe
+      - globe--locations
+      - location
+  - name: Manufacturing
+    members:
+      - delivery--truck
+      - factory
+      - forklift
+      - robot
+      - robotics
+      - tools
+  - name: Networking
+    members:
+      - automation--decision
+      - distribution--ledger
+      - global--network
+      - integration
+      - inspect--data
+      - global--partner
+      - network
+      - network--services
+      - networking--01
+      - networking--02
+      - networking--03
+      - networking--04
+      - networking--05
+      - networking--06
+      - private--network
+      - private--network--01
+      - private--network--alt
+      - private--network--alt--01
+      - reset--hybrid--cloud
+      - reset--settings
+      - support--services
+      - transactional--blockchain
+      - transactional--trust
+      - transform
+  - name: People
+    members:
+      - advocate
+      - design-thinking-team
+      - expand--user
+      - face--dissatisfied
+      - face--neutral
+      - face--satisfied
+      - face--very--dissatisfied
+      - face--very--satisfied
+      - group
+      - handicap
+      - handicap--active
+      - high--five
+      - key--users
+      - multitask
+      - partner--relationship
+      - person--01
+      - person--02
+      - person--03
+      - person--04
+      - person--05
+      - person--06
+      - person--07
+      - person--08
+      - person--09
+      - renew--team
+      - team--alignment
+      - teammates
+      - user
+      - user--profile
+      - user--search
+  - name: Retail
+    members:
+      - bag
+      - clothes--rack--01
+      - clothes--rack--02
+      - coat--hanger
+      - credit--card
+      - customer--service
+      - gift
+      - price
+      - qr-code
+      - receipt
+      - shirt
+      - shop
+      - shopping--cart
+      - sneaker
+      - socks
+      - tags
+      - t-shirt
+      - trousers
+  - name: Security
+    members:
+      - firewall
+      - lock
+      - lock--alt
+      - locked--network
+      - locked--network--alt
+      - secure--profile
+      - security
+      - security--shield
+      - unlock
+      - unlock--alt
+  - name: Status
+    members:
+      - question
+      - warning
+      - warning--alt
+  - name: Strategy
+    members:
+      - financial--consultant
+      - financial--gain
+      - financial--news
+      - global--finance--euro
+      - global--finance--sterling
+      - innovate
+      - presentation
+      - presenter
+      - puzzle
+      - strategy
+      - strategy--direct
+      - strategy--move
+      - strategy--play
+      - streamline
+      - summit
+      - target
+      - target--area
+  - name: Supply Chain
+    members:
+      - connected--nodes--to--the--cloud
+      - managing--contractual--flow
+      - managing--items
+      - monitored--item--on--conveyor
+      - movement--in--overlapping--networks
+      - movement--of--goods--01
+      - movement--of--goods--02
+      - movement--of--goods--03
+      - movement--of--items
+      - process
+  - name: Systems DevOps
+    members:
+      - developer-z-os
+      - systems-devops--analyze
+      - systems-devops--build
+      - systems-devops--cicd-pipeline
+      - systems-devops--code
+      - systems-devops--deploy
+      - systems-devops--monitor
+      - systems-devops--plan
+      - systems-devops--provision
+      - systems-devops--release
+      - systems-devops--test
+  - name: Time
+    members:
+      - calendar
+      - calendar--date
+      - calendar--event
+      - meter
+      - speedometer
+      - time
+      - time-lapse
+  - name: Transportation
+    members:
+      - airplane
+      - automobile
+      - bicycle
+      - bus
+      - electric--car
+      - electric--charge
+      - engine
+      - fuel
+      - spaceship
+      - steering--wheel
+      - train
+  - name: Watson
+    members:
+      - alchemy--language--alphabet--a--expanded
+      - alchemy--data--news
+      - alchemy--language
+      - alchemy--vision
+      - analyzes--data
+      - concept--expansion
+      - concept--insights
+      - conversation
+      - data--insights
+      - deliver--insights
+      - dialogue
+      - document--conversion
+      - knows--dark--data
+      - language
+      - language--01
+      - language--02
+      - language--03
+      - language--04
+      - language--translation
+      - language--translation--alphabet--a--expanded
+      - natural--language--classifier
+      - natural--language--understanding
+      - personality--insights
+      - question--and--answer
+      - relationship--extraction
+      - retrieve--and--rank
+      - speech
+      - speech--alphabet--a--expanded
+      - speech--to--text
+      - text--to--speech
+      - tone--analyzer
+      - tradeoff--analytics
+      - vision
+      - visual--insights
+      - visual--recognition
+      - watson--avatar
+  - name: Weather
+    members:
+      - cloudy
+      - cloudy--dewy
+      - cloudy--hazy
+      - cloudy--humid
+      - cloudy--partial
+      - cloudy--windy
+      - fog
+      - hail
+      - hail--heavy
+      - hail--mixed
+      - hazy
+      - humid
+      - hurricane
+      - lightning
+      - night--clear
+      - overcast
+      - rainy
+      - rainy--heavy
+      - snow
+      - sunny
+      - sunny--hazy
+      - temperature--high
+      - temperature--low
+      - tornado
+      - weather
+      - windy

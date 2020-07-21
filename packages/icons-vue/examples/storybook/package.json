@@ -1,0 +1,26 @@
+{
+  "name": "@carbon/icons-vue-examples-storybook",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "build-storybook -o build",
+    "develop": "start-storybook -p 3000 -c .storybook"
+  },
+  "dependencies": {
+    "@babel/core": "^7.1.5",
+    "@carbon/icon-helpers": "^0.0.1-alpha.20",
+    "@storybook/vue": "^4.0.4",
+    "babel-loader": "^8.0.4",
+    "babel-preset-vue": "^2.0.2",
+    "css-loader": "^1.0.1",
+    "vue": "^2.5.17",
+    "vue-loader": "^15.4.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.25.1"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^4.0.9",
+    "@storybook/addon-options": "^4.0.8"
+  }
+}

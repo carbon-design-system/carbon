@@ -1,275 +1,205 @@
 {
-  "name": "carbon-components",
-  "description": "Carbon Components is a component library for IBM Cloud",
-  "homepage": "http://carbondesignsystem.com/",
-  "version": "7.2.1",
-  "module": "es/index.js",
-  "main": "umd/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/IBM/carbon-components.git"
-  },
-  "bugs": {
-    "url": "https://github.com/IBM/carbon-components/issues"
-  },
-  "keywords": [
-    "carbon",
-    "component",
-    "components",
-    "css",
-    "html",
-    "ibm",
-    "javascript",
-    "js",
-    "library",
-    "pattern",
-    "patterns",
-    "sass",
-    "scss",
-    "style guide",
-    "eyeglass-module"
-  ],
+  "name": "carbon",
+  "private": true,
+  "version": "0.0.0",
+  "repository": "git@github.com:carbon-design-system/carbon.git",
+  "license": "Apache-2.0",
   "engines": {
-    "node": ">=6.x"
+    "node": "12.x"
   },
-  "dependencies": {
-    "carbon-icons": "^7.0.7",
-    "flatpickr": "4.5.2",
-    "lodash.debounce": "^4.0.8",
-    "warning": "^3.0.0"
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "actions/*",
+      "config/*"
+    ],
+    "nohoist": []
   },
-  "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/plugin-transform-modules-umd": "^7.0.0",
-    "@babel/plugin-transform-runtime": "^7.2.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/runtime": "^7.0.0",
-    "@carbon/elements": "^0.0.1-alpha.32",
-    "@carbon/icons-handlebars": "^0.0.1-alpha.32",
-    "@commitlint/cli": "^7.0.0",
-    "@commitlint/config-conventional": "^7.0.1",
-    "@frctl/fractal": "^1.1.0",
-    "adaro": "1.0.4",
-    "autoprefixer": "^8.2.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^7.0.0",
-    "babel-jest": "^23.6.0",
-    "babel-loader": "^8.0.0",
-    "babel-plugin-dev-expression": "^0.2.1",
-    "babel-plugin-istanbul": "^3.0.0",
-    "babel-plugin-rewire": "^1.1.0",
-    "bluebird": "~3.1.1",
-    "browser-sync": "^2.26.3",
-    "carbon-addons-cloud": "^1.8.0",
-    "carbon-components-react": "^5.8.0",
-    "chokidar": "^2.0.0",
-    "classnames": "^2.2.0",
-    "commander": "^2.13.0",
-    "core-js": "^2.4.0",
-    "cross-env": "^5.2.0",
-    "css-loader": "^0.28.0",
-    "custom-event": "^1.0.0",
-    "del": "~2.0.2",
-    "diff": "^3.4.0",
-    "eslint": "^5.0.0",
-    "eslint-config-airbnb": "^17.0.0",
-    "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-config-carbon": "^1.0.0",
-    "eslint-config-carbon-base": "^1.0.1",
-    "eslint-config-prettier": "^3.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsdoc": "^3.3.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-prettier": "^2.3.1",
-    "eslint-plugin-react": "^7.11.0",
-    "eslint-restricted-globals": "^0.1.0",
-    "express-handlebars": "^3.0.0",
-    "glob": "^7.1.2",
-    "globby": "4.0.0",
-    "gulp": "~3.9.0",
-    "gulp-autoprefixer": "~3.0.1",
-    "gulp-axe-webdriver": "^1.4.0",
-    "gulp-babel": "^8.0.0",
-    "gulp-header": "^2.0.0",
-    "gulp-jsdoc3": "^0.2.1",
-    "gulp-nodemon": "^2.4.2",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "2.3.1",
-    "gulp-sass-lint": "~1.1.1",
-    "gulp-sourcemaps": "~1.6.0",
-    "gulp-terser": "^1.0.0",
-    "gulp-util": "~3.0.7",
-    "handlebars": "^4.0.12",
-    "handlebars-helpers": "^0.10.0",
-    "html-loader": "^0.5.0",
-    "husky": "^0.14.3",
-    "jasmine-core": "^3.0.0",
-    "jest": "^23.5.0",
-    "karma": "^3.0.0",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-coverage": "^1.1.0",
-    "karma-firefox-launcher": "^1.0.0",
-    "karma-html2js-preprocessor": "^1.1.0",
-    "karma-ie-launcher": "^1.0.0",
-    "karma-jasmine": "^2.0.1",
-    "karma-safari-launcher": "^1.0.0",
-    "karma-sourcemap-loader": "~0.3.7",
-    "karma-spec-reporter": "0.0.32",
-    "karma-webpack": "^2.0.0",
-    "lint-staged": "^7.1.3",
-    "lolex": "1.4.0",
-    "markdown-it": "^8.4.0",
-    "merge-stream": "^1.0.0",
-    "minimatch": "^3.0.0",
-    "mkdirp": "^0.5.0",
-    "mock-raf": "^1.0.0",
-    "node-sass": "^4.11.0",
-    "nodemon": "^1.18.7",
-    "path-to-regexp": "^2.2.0",
-    "portscanner": "^2.2.0",
-    "postcss-loader": "^2.1.0",
-    "prettier": "^1.15.0",
-    "promise": "^8.0.1",
-    "prop-types": "^15.6.0",
-    "pump": "^1.0.2",
-    "react": "^16.2.0",
-    "react-copy-to-clipboard": "^5.0.0",
-    "react-dom": "^16.2.0",
-    "react-ga": "^2.4.0",
-    "rollup": "^1.0.0",
-    "rollup-plugin-babel": "^4.0.0",
-    "rollup-plugin-commonjs": "^9.0.0",
-    "rollup-plugin-filesize": "^6.0.0",
-    "rollup-plugin-node-resolve": "^4.0.0",
-    "rollup-plugin-replace": "^2.0.0",
-    "rollup-plugin-terser": "^4.0.0",
-    "rollup-plugin-virtual": "^1.0.0",
-    "sass-loader": "^6.0.0",
-    "scss-to-json": "1.1.0",
-    "semantic-release": "^15.5.0",
-    "serve-static": "^1.13.0",
-    "style-loader": "^0.20.0",
-    "terser": "^3.14.0",
-    "through2": "^3.0.0",
-    "vinyl-named": "^1.1.0",
-    "webpack": "^4.23.1",
-    "webpack-dev-middleware": "^2.0.0",
-    "webpack-hot-middleware": "^2.21.0",
-    "whatwg-fetch": "^2.0.4"
+  "scripts": {
+    "build": "lerna run build --stream --prefix --npm-client yarn",
+    "ci-check": "carbon-cli ci-check",
+    "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
+    "doctoc": "doctoc --title '## Table of Contents'",
+    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
+    "lint": "eslint packages actions",
+    "lint:docs": "alex 'docs/**/*.md' -q",
+    "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
+    "sync": "carbon-cli sync",
+    "test": "cross-env BABEL_ENV=test jest",
+    "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
   },
   "resolutions": {
-    "babel-core": "7.0.0-bridge.0",
-    "freshy": ">= 1.0.3"
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
+    "react-is": "~16.9.0",
+    "react-test-renderer": "~16.9.0"
   },
-  "files": [
-    "css/**/*",
-    "es/**/*",
-    "html/**/*",
-    "scripts/**/*",
-    "scss/**/*",
-    "src/**/*",
-    "umd/**/*"
-  ],
-  "scripts": {
-    "build": "gulp build",
-    "build-dev": "gulp build:dev",
-    "build-dev-rollup": "gulp build:dev --rollup",
-    "build-dev-rollup-experimental": "gulp build:dev --rollup -e",
-    "ci-check": "sh ./tools/ci-check.sh",
-    "commitmsg": "commitlint -e $GIT_PARAMS",
-    "dev": "gulp serve",
-    "lint": "eslint .",
-    "lint:staged": "eslint",
-    "prebuild": "gulp clean",
-    "precommit": "lint-staged",
-    "prepublishOnly": "npm run build",
-    "format": "prettier --write \"**/*.{css,js,md,scss}\"",
-    "format:staged": "prettier --write",
-    "start": "node server.js",
-    "test": "gulp test",
-    "test:build": "cross-env BABEL_ENV=test jest",
-    "test:unit": "gulp test:unit",
-    "test:a11y": "gulp test:a11y",
-    "semantic-release": "semantic-release"
+  "devDependencies": {
+    "@babel/core": "^7.10.0",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-export-default-from": "^7.7.4",
+    "@babel/plugin-proposal-export-namespace-from": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.10.0",
+    "@babel/preset-env": "^7.10.0",
+    "@babel/preset-react": "^7.10.0",
+    "@babel/runtime": "^7.10.0",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@ibma/aat": "https://able.ibm.com/tools/dist/ibma-aat-2.0.6.tgz",
+    "alex": "^8.0.0",
+    "axe-core": "^3.3.2",
+    "babel-jest": "^26.0.1",
+    "cross-env": "^5.2.0",
+    "cross-spawn": "^6.0.5",
+    "doctoc": "^1.4.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.3.5",
+    "eslint": "^6.8.0",
+    "fs-extra": "^8.1.0",
+    "glob": "^7.1.4",
+    "husky": "^4.0.10",
+    "jest": "^26.0.1",
+    "jest-circus": "^26.0.1",
+    "jest-junit": "^10.0.0",
+    "lerna": "^3.20.2",
+    "lint-staged": "^9.5.0",
+    "prettier": "^2.0.5",
+    "prettier-config-carbon": "^0.2.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "rimraf": "^3.0.0",
+    "stylelint": "^13.6.0"
   },
-  "license": "Apache-2.0",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
-    ]
-  },
-  "prettier": {
-    "jsxBracketSameLine": true,
-    "printWidth": 130,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
-  "babel": {
-    "presets": [
-      "./tools/env"
     ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-object-rest-spread",
-      "dev-expression"
-    ]
+    "rules": {
+      "header-max-length": [
+        2,
+        "always",
+        72
+      ],
+      "body-max-line-length": [
+        2,
+        "always",
+        80
+      ],
+      "scope-case": [
+        0,
+        "always",
+        "lower-case"
+      ],
+      "type-enum": [
+        2,
+        "always",
+        [
+          "build",
+          "ci",
+          "chore",
+          "docs",
+          "feat",
+          "fix",
+          "perf",
+          "refactor",
+          "revert",
+          "test"
+        ]
+      ]
+    }
   },
   "lint-staged": {
-    "*.js": [
-      "yarn format:staged",
-      "yarn lint:staged",
+    "**/*.js": [
+      "prettier --write",
+      "eslint",
       "git add"
     ],
-    "*.{css,md,scss}": [
-      "yarn format:staged",
+    "**/*.scss": [
+      "prettier --write",
+      "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input",
+      "git add"
+    ],
+    "!(*sass).md": [
+      "alex",
+      "prettier --write",
       "git add"
     ]
   },
-  "maintainers": [
-    {
-      "name": "Mari Johannessen",
-      "email": "mjohannessen@us.ibm.com"
-    },
-    {
-      "name": "TJ Egan",
-      "email": "twegan@us.ibm.com"
-    },
-    {
-      "name": "Akira Sudoh",
-      "email": "asudoh@jp.ibm.com"
-    },
-    {
-      "name": "Alison Joseph",
-      "email": "alison.joseph@us.ibm.com"
-    },
-    {
-      "name": "Alessandra Davila",
-      "email": "aledavila@us.ibm.com"
-    }
-  ],
-  "eyeglass": {
-    "sassDir": "scss",
-    "exports": false,
-    "name": "carbon-components",
-    "needs": "^1.2.1"
+  "eslintConfig": {
+    "extends": [
+      "eslint-config-carbon"
+    ]
+  },
+  "stylelint": {
+    "extends": [
+      "./config/stylelint-config-carbon"
+    ]
   },
   "jest": {
+    "collectCoverageFrom": [
+      "packages/**/src/**/*.js",
+      "!packages/{bundler,cli,components,sketch}/**",
+      "!packages/**/{examples,stories}/**",
+      "!**/*-story.js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "node"
+    ],
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
+    "setupFiles": [
+      "./tasks/jest/setup.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./tasks/jest/setupAfterEnv.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
     "testMatch": [
       "<rootDir>/**/__tests__/**/*.js?(x)",
-      "<rootDir>/**/?(*-)(spec|test).js?(x)"
+      "<rootDir>/**/*.(spec|test).js?(x)",
+      "<rootDir>/**/*-(spec|test).js?(x)"
     ],
+    "transform": {
+      "^.+\\.(js|jsx)$": "./tasks/jest/jsTransform.js",
+      "^.+\\.css$": "./tasks/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "./tasks/jest/fileTransform.js"
+    },
+    "testRunner": "jest-circus/runner",
     "testPathIgnorePatterns": [
       "/cjs/",
       "/dist/",
       "/es/",
       "/lib/",
+      "/build/",
+      "e2e",
+      "examples",
       "/umd/"
     ],
-    "transform": {
-      "^.+\\.(js|jsx)$": "./tools/jest/jsTransform.js"
-    }
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "watchPathIgnorePatterns": [
+      "/cjs/",
+      "/dist/",
+      "/es/",
+      "/examples/",
+      "/lib/",
+      "/storybook/",
+      "/results/"
+    ]
   }
 }

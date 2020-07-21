@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListBox should render 1`] = `
+<ListBox
+  className="bx--list-box__container"
+  disabled={false}
+  id="test-listbox"
+  type="default"
+>
+  <div
+    className="bx--list-box__container bx--list-box"
+    id="test-listbox"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+  >
+    <ListBoxField
+      id="test-listbox"
+    >
+      <div
+        className="bx--list-box__field"
+        id="test-listbox"
+        tabIndex={-1}
+      />
+    </ListBoxField>
+  </div>
+</ListBox>
+`;

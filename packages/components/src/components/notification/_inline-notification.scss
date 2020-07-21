@@ -1,0 +1,305 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Notifications
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+@import 'mixins';
+
+/// Inline notification styles
+/// @access private
+/// @group notification
+@mixin inline-notifications {
+  .#{$prefix}--inline-notification {
+    @include reset;
+
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    height: auto;
+    min-height: rem(48px);
+    min-width: rem(288px);
+    max-width: rem(288px);
+    width: 100%;
+    color: $inverse-01;
+    margin-top: $carbon--spacing-05;
+    margin-bottom: $carbon--spacing-05;
+
+    @include carbon--breakpoint(md) {
+      max-width: rem(608px);
+      flex-wrap: nowrap;
+    }
+
+    @include carbon--breakpoint(lg) {
+      max-width: rem(736px);
+    }
+
+    @include carbon--breakpoint(max) {
+      max-width: rem(832px);
+    }
+  }
+
+  .#{$prefix}--inline-notification:not(.#{$prefix}--inline-notification--low-contrast)
+    a {
+    color: $inverse-link;
+  }
+
+  .#{$prefix}--inline-notification a {
+    text-decoration: none;
+  }
+
+  .#{$prefix}--inline-notification a:hover {
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--inline-notification a:focus {
+    outline: 1px solid $inverse-link;
+  }
+
+  .#{$prefix}--inline-notification.#{$prefix}--inline-notification--low-contrast
+    a:focus {
+    @include focus-outline;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast {
+    // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
+    color: map-get($carbon--theme--white, 'text-01');
+
+    &::before {
+      content: '';
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      filter: opacity(0.4);
+      border-style: solid;
+      border-width: 1px 1px 1px 0;
+    }
+  }
+
+  .#{$prefix}--inline-notification--error {
+    @include notification--experimental($inverse-support-01, $inverse-02);
+  }
+
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--error {
+    @include notification--experimental(
+      $support-01,
+      $notification-error-background-color
+    );
+
+    &::before {
+      border-color: $support-01;
+    }
+  }
+
+  .#{$prefix}--inline-notification--success {
+    @include notification--experimental($inverse-support-02, $inverse-02);
+  }
+
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--success {
+    @include notification--experimental(
+      $support-02,
+      $notification-success-background-color
+    );
+
+    &::before {
+      border-color: $support-02;
+    }
+  }
+
+  .#{$prefix}--inline-notification--info,
+  .#{$prefix}--inline-notification--info-square {
+    @include notification--experimental($inverse-support-04, $inverse-02);
+  }
+
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info,
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info-square {
+    @include notification--experimental(
+      $support-04,
+      $notification-info-background-color
+    );
+
+    &::before {
+      border-color: $support-04;
+    }
+  }
+
+  .#{$prefix}--inline-notification--warning,
+  .#{$prefix}--inline-notification--warning-alt {
+    @include notification--experimental($inverse-support-03, $inverse-02);
+  }
+
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning,
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning-alt {
+    @include notification--experimental(
+      $support-03,
+      $notification-warning-background-color
+    );
+
+    &::before {
+      border-color: $support-03;
+    }
+  }
+
+  .#{$prefix}--inline-notification--warning
+    .#{$prefix}--inline-notification__icon
+    path[opacity='0'] {
+    fill: $carbon__black-100;
+    opacity: 1;
+  }
+
+  .#{$prefix}--inline-notification__details {
+    display: flex;
+    flex-grow: 1;
+    margin: 0 $carbon--spacing-09 0 $carbon--spacing-05;
+
+    @include carbon--breakpoint(md) {
+      margin: 0 $carbon--spacing-05;
+    }
+  }
+
+  .#{$prefix}--inline-notification__icon {
+    flex-shrink: 0;
+    margin-right: $carbon--spacing-05;
+    margin-top: rem(14px);
+  }
+
+  .#{$prefix}--inline-notification__text-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    padding: rem(15px) 0;
+  }
+
+  .#{$prefix}--inline-notification__title {
+    @include type-style('productive-heading-01');
+
+    margin: 0 $carbon--spacing-02 0 0;
+  }
+
+  .#{$prefix}--inline-notification__subtitle {
+    @include type-style('body-short-01');
+
+    word-break: break-word;
+  }
+
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    color: $inverse-link;
+    height: rem(32px);
+    margin-bottom: $carbon--spacing-03;
+    margin-left: $carbon--spacing-08;
+
+    @include carbon--breakpoint(md) {
+      margin: $carbon--spacing-03 0;
+    }
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    color: $link-01;
+  }
+
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $inverse-hover-ui;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $carbon--white-0;
+  }
+
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
+    border-color: transparent;
+    box-shadow: none;
+    outline: 2px solid $inverse-focus-ui;
+    outline-offset: -2px;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
+    outline-color: $focus;
+  }
+
+  .#{$prefix}--inline-notification--hide-close-button
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    margin-right: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--inline-notification__close-button {
+    @include focus-outline('reset');
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    height: rem(48px);
+    width: rem(48px);
+    min-width: rem(48px);
+    max-width: rem(48px);
+    transition: outline $duration--fast-02 motion(standard, productive),
+      background-color $duration--fast-02 motion(standard, productive);
+
+    &:focus {
+      outline: 2px solid $inverse-focus-ui;
+      outline-offset: -2px;
+    }
+
+    .#{$prefix}--inline-notification__close-icon {
+      fill: $inverse-01;
+    }
+
+    @include carbon--breakpoint(md) {
+      position: static;
+    }
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__close-button:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__close-button
+    .#{$prefix}--inline-notification__close-icon {
+    fill: map-get($carbon--theme--white, 'text-01');
+  }
+
+  .#{$prefix}--inline-notification__action-button {
+    color: $interactive-01;
+
+    &:active {
+      color: $interactive-01;
+    }
+
+    &:active,
+    &:hover {
+      background-color: $carbon--white-0;
+    }
+  }
+}
+
+@include exports('inline-notifications') {
+  @include inline-notifications;
+}

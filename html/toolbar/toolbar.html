@@ -1,0 +1,101 @@
+<!-- 
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div class="bx--toolbar" data-toolbar>
+  <div class="bx--search bx--search--sm bx--toolbar-search" role="search" data-search data-toolbar-search>
+    <label for="search__input" class="bx--label">Search</label>
+    <input type="text" class="bx--search-input" id="search__input" placeholder="Search">
+    <button class="bx--toolbar-search__btn" aria-label="Toolbar search">
+        <svg class="bx--search-magnifier" width="16" height="16" viewBox="0 0 16 16">
+          <path d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z"
+            fill-rule="nonzero" />
+        </svg>
+    </button>
+    <button class="bx--search-close bx--search-close--hidden" title="Clear search
+        input" aria-label="Clear search input">
+        <svg width="16" height="16" viewBox="0 0 16 16">
+          <path d="M8 7.293L5.525 4.818l-.707.707L7.293 8l-2.475 2.475.707.707L8 8.707l2.475 2.475.707-.707L8.707 8l2.475-2.475-.707-.707L8 7.293zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
+            fill-rule="evenodd" />
+        </svg>
+    </button>
+  </div>
+  <div data-overflow-menu class="bx--overflow-menu" tabindex="0" aria-label="List of options">
+      <svg class="bx--overflow-menu__icon bx--toolbar-filter-icon" width="16" height="12" viewBox="0 0 16 12">
+        <g fill-rule="nonzero">
+          <path d="M8.05 2a2.5 2.5 0 0 1 4.9 0H16v1h-3.05a2.5 2.5 0 0 1-4.9 0H0V2h8.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM3.05 9a2.5 2.5 0 0 1 4.9 0H16v1H7.95a2.5 2.5 0 0 1-4.9 0H0V9h3.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+          />
+        </g>
+      </svg>
+    <ul class="bx--overflow-menu-options">
+      <li class="bx--toolbar-menu__title">FILTER BY</li>
+        <li class="bx--toolbar-menu__option">
+          <input id="filter-option-1" class="bx--checkbox" type="checkbox" value="filter-option-1" name="checkbox">
+          <label for="filter-option-1" class="bx--checkbox-label">
+            <span class="bx--checkbox-appearance">
+              <svg class="bx--checkbox-checkmark" width="12" height="9" viewBox="0 0 12 9" fill-rule="evenodd">
+                <path d="M4.1 6.1L1.4 3.4 0 4.9 4.1 9l7.6-7.6L10.3 0z"></path>
+              </svg>
+            </span>
+            Filter option 1
+          </label>
+        </li>
+        <li class="bx--toolbar-menu__option">
+          <input id="filter-option-2" class="bx--checkbox" type="checkbox" value="filter-option-2" name="checkbox">
+          <label for="filter-option-2" class="bx--checkbox-label">
+            <span class="bx--checkbox-appearance">
+              <svg class="bx--checkbox-checkmark" width="12" height="9" viewBox="0 0 12 9" fill-rule="evenodd">
+                <path d="M4.1 6.1L1.4 3.4 0 4.9 4.1 9l7.6-7.6L10.3 0z"></path>
+              </svg>
+            </span>
+            Filter option 2
+          </label>
+        </li>
+        <li class="bx--toolbar-menu__option">
+          <input id="filter-option-3" class="bx--checkbox" type="checkbox" value="filter-option-3" name="checkbox">
+          <label for="filter-option-3" class="bx--checkbox-label">
+            <span class="bx--checkbox-appearance">
+              <svg class="bx--checkbox-checkmark" width="12" height="9" viewBox="0 0 12 9" fill-rule="evenodd">
+                <path d="M4.1 6.1L1.4 3.4 0 4.9 4.1 9l7.6-7.6L10.3 0z"></path>
+              </svg>
+            </span>
+            Filter option 3
+          </label>
+        </li>
+    </ul>
+  </div>
+  <div data-overflow-menu class="bx--overflow-menu" tabindex="0" aria-label="List of options">
+      <svg class="bx--overflow-menu__icon" width="4" height="20" viewBox="0 0 4 20" fill-rule="evenodd">
+        <circle cx="2" cy="2" r="2"></circle>
+        <circle cx="2" cy="10" r="2"></circle>
+        <circle cx="2" cy="18" r="2"></circle>
+      </svg>
+    <ul class="bx--overflow-menu-options">
+      <li class="bx--overflow-menu-options__option">
+        <button type="button" class="bx--overflow-menu-options__btn">Refresh table</button>
+      </li>
+      <hr class="bx--toolbar-menu__divider" />
+      <li class="bx--toolbar-menu__title">ROW HEIGHT</li>
+      <fieldset data-row-height class="bx--radio-button-group">
+        <legend class="bx--visually-hidden">Select table row height</legend>
+          <li class="bx--toolbar-menu__option">
+            <input id="short-rows" class="bx--radio-button" type="radio" value="short" name="radio" checked>
+            <label for="short-rows" class="bx--radio-button__label">
+              <span class="bx--radio-button__appearance"></span>
+              Short
+            </label>
+          </li>
+          <li class="bx--toolbar-menu__option">
+            <input id="tall-rows" class="bx--radio-button" type="radio" value="tall" name="radio">
+            <label for="tall-rows" class="bx--radio-button__label">
+              <span class="bx--radio-button__appearance"></span>
+              Tall
+            </label>
+          </li>
+      </fieldset>
+    </ul>
+  </div>
+</div>

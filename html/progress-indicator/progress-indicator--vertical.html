@@ -1,0 +1,53 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<ul data-progress data-progress-current class="bx--progress bx--progress--vertical">
+    <li class="bx--progress-step bx--progress-step--complete "  >
+        <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"></path><path d="M7 10.8L4.5 8.3l.8-.8L7 9.2l3.7-3.7.8.8z"></path></svg>
+      <p tabindex="0" class="bx--progress-label" >
+          First step
+      </p>
+      <span class="bx--progress-line"></span>
+    </li>
+    <li class="bx--progress-step bx--progress-step--current "  >
+        <svg>
+            <circle cx="12" cy="12" r="12"></circle>
+            <circle cx="12" cy="12" r="6"></circle>
+        </svg>
+      <p tabindex="0" class="bx--progress-label" >
+          Second Step
+      </p>
+      <span class="bx--progress-line"></span>
+    </li>
+    <li class="bx--progress-step bx--progress-step--incomplete "  >
+          <svg>
+            <circle cx="12" cy="12" r="12"></circle>
+          </svg>
+      <p tabindex="0" class="bx--progress-label" >
+          Third Step
+      </p>
+      <span class="bx--progress-line"></span>
+    </li>
+    <li class="bx--progress-step bx--progress-step--incomplete "  data-invalid  >
+          <svg>
+            <circle cx="12" cy="12" r="12"></circle>
+          </svg>
+      <p tabindex="0" class="bx--progress-label" >
+          Fourth step
+      </p>
+      <span class="bx--progress-line"></span>
+    </li>
+    <li class="bx--progress-step bx--progress-step--incomplete  bx--progress-step--disabled "   aria-disabled="true" >
+          <svg>
+            <circle cx="12" cy="12" r="12"></circle>
+          </svg>
+      <p tabindex="0" class="bx--progress-label" >
+          Fifth step
+      </p>
+      <span class="bx--progress-line"></span>
+    </li>
+</ul>

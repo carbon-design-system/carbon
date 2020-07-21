@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`normalize should return a normalized map of cells by id 1`] = `
+Object {
+  "a:fieldA": Object {
+    "errors": null,
+    "id": "a:fieldA",
+    "info": Object {
+      "header": "fieldA",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldA",
+  },
+  "a:fieldB": Object {
+    "errors": null,
+    "id": "a:fieldB",
+    "info": Object {
+      "header": "fieldB",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldB",
+  },
+  "a:fieldC": Object {
+    "errors": null,
+    "id": "a:fieldC",
+    "info": Object {
+      "header": "fieldC",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldC",
+  },
+  "b:fieldA": Object {
+    "errors": null,
+    "id": "b:fieldA",
+    "info": Object {
+      "header": "fieldA",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldA",
+  },
+  "b:fieldB": Object {
+    "errors": null,
+    "id": "b:fieldB",
+    "info": Object {
+      "header": "fieldB",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldB",
+  },
+  "b:fieldC": Object {
+    "errors": null,
+    "id": "b:fieldC",
+    "info": Object {
+      "header": "fieldC",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldC",
+  },
+  "c:fieldA": Object {
+    "errors": null,
+    "id": "c:fieldA",
+    "info": Object {
+      "header": "fieldA",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldA",
+  },
+  "c:fieldB": Object {
+    "errors": null,
+    "id": "c:fieldB",
+    "info": Object {
+      "header": "fieldB",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldB",
+  },
+  "c:fieldC": Object {
+    "errors": null,
+    "id": "c:fieldC",
+    "info": Object {
+      "header": "fieldC",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldC",
+  },
+}
+`;
+
+exports[`normalize should return a normalized map of rows by id 1`] = `
+Object {
+  "a": Object {
+    "cells": Array [
+      "a:fieldA",
+      "a:fieldB",
+      "a:fieldC",
+    ],
+    "disabled": false,
+    "id": "a",
+    "isExpanded": false,
+    "isSelected": false,
+  },
+  "b": Object {
+    "cells": Array [
+      "b:fieldA",
+      "b:fieldB",
+      "b:fieldC",
+    ],
+    "disabled": false,
+    "id": "b",
+    "isExpanded": false,
+    "isSelected": false,
+  },
+  "c": Object {
+    "cells": Array [
+      "c:fieldA",
+      "c:fieldB",
+      "c:fieldC",
+    ],
+    "disabled": false,
+    "id": "c",
+    "isExpanded": false,
+    "isSelected": false,
+  },
+}
+`;
+
+exports[`normalize should return an array of the row ids 1`] = `
+Array [
+  "a",
+  "b",
+  "c",
+]
+`;

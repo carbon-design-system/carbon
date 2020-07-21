@@ -1,0 +1,372 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Helpers for defining columns, rows, and containers are heavily inspired by,
+// and often derived from, bootstrap:
+// https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
+
+@import '@carbon/layout/scss/breakpoint';
+@import 'prefix';
+
+// -----------------------------------------------------------------------------
+// Columns
+// -----------------------------------------------------------------------------
+
+/// Used to initialize the default properties for a column class, most notably
+/// for setting width and default gutters when a column's breakpoint has not been
+/// hit yet.
+/// @param {Number} $gutter [$carbon--grid-gutter] - The gutter for the grid system
+/// @param {Number} $collapsed-gutter [$carbon--grid-gutter--condensed] - The condensed mode gutter
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--make-col-ready(
+  $gutter: $carbon--grid-gutter,
+  $condensed-gutter: $carbon--grid-gutter--condensed
+) {
+  // Prevent columns from becoming too narrow when at smaller grid tiers by
+  // always setting `width: 100%;`. This works because we use `flex` values
+  // later on to override this initial width.
+  width: 100%;
+  padding-right: ($gutter / 2);
+  padding-left: ($gutter / 2);
+
+  // For our condensed use-case, our gutters collapse to 2px solid, 1px on each
+  // side.
+  .#{$prefix}--row--condensed &,
+  .#{$prefix}--grid--condensed & {
+    padding-right: ($condensed-gutter / 2);
+    padding-left: ($condensed-gutter / 2);
+  }
+}
+
+/// Define the width of the column for a given span and column count.
+/// A width of 0 will hide the column entirely.
+/// @param {Number} $span - The number of columns covered
+/// @param {Number} $columns - The total number of columns available
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--make-col($span, $columns) {
+  @if $span == 0 {
+    display: none;
+  } @else {
+    // Explicitly include `display: block` to override
+    display: block;
+    flex: 0 0 percentage($span / $columns);
+    // Add a `max-width` to ensure content within each column does not blow out
+    // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
+    // do not appear to require this.
+    max-width: percentage($span / $columns);
+  }
+}
+
+/// Create a column offset for a given span and column count.
+/// @param {Number} $span - The number of columns the offset should cover
+/// @param {Number} $columns - The total number of columns available
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--make-col-offset($span, $columns) {
+  $offset: $span / $columns;
+  @if $offset == 0 {
+    margin-left: 0;
+  } @else {
+    margin-left: percentage($offset);
+  }
+}
+
+/// Output the CSS required for all the columns in a given grid system.
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - The breakpoints in the grid system
+/// @param {Number} $gutter [$carbon--grid-gutter] - The gutter for the grid system
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--make-grid-columns(
+  $breakpoints: $carbon--grid-breakpoints,
+  $gutter: $carbon--grid-gutter
+) {
+  .#{$prefix}--col {
+    @include carbon--make-col-ready($gutter);
+  }
+
+  @each $breakpoint in map-keys($breakpoints) {
+    $infix: carbon--breakpoint-infix($breakpoint);
+    $columns: map-get(map-get($breakpoints, $breakpoint), columns);
+
+    // Allow columns to stretch full width below their breakpoints
+    @for $i from 0 through $columns {
+      .#{$prefix}--col#{$infix}-#{$i} {
+        @include carbon--make-col-ready($gutter);
+      }
+    }
+
+    .#{$prefix}--col#{$infix},
+    .#{$prefix}--col#{$infix}--auto {
+      @include carbon--make-col-ready($gutter);
+    }
+
+    @include carbon--breakpoint($breakpoint, $breakpoints) {
+      // Provide basic `.col-{bp}` classes for equal-width flexbox columns
+      .#{$prefix}--col,
+      .#{$prefix}--col#{$infix} {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
+      }
+
+      .#{$prefix}--col--auto,
+      .#{$prefix}--col#{$infix}--auto {
+        flex: 1 0 0%;
+        width: auto;
+        // Reset earlier grid tiers
+        max-width: 100%;
+      }
+
+      @for $i from 0 through $columns {
+        .#{$prefix}--col#{$infix}-#{$i} {
+          @include carbon--make-col($i, $columns);
+        }
+      }
+
+      @for $i from 0 through ($columns - 1) {
+        @if not($infix == '') {
+          .#{$prefix}--offset#{$infix}-#{$i} {
+            @include carbon--make-col-offset($i, $columns);
+          }
+        }
+      }
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Rows
+// -----------------------------------------------------------------------------
+
+/// Define the properties for a selector assigned to a row in the grid system.
+/// @param {Number} $gutter [$carbon--grid-gutter] - The gutter in the grid system
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--make-row($gutter: $carbon--grid-gutter) {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -1 * $gutter / 2;
+  margin-left: -1 * $gutter / 2;
+}
+
+// -----------------------------------------------------------------------------
+// No gutter
+// -----------------------------------------------------------------------------
+
+/// Add `no-gutter` and `no-gutter--{left,right}` classes to the output CSS. These
+/// classes are useful for dropping the gutter in fluid situations.
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--no-gutter {
+  .#{$prefix}--no-gutter,
+  .#{$prefix}--row.#{$prefix}--no-gutter [class*='#{$prefix}--col'] {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .#{$prefix}--no-gutter--left,
+  .#{$prefix}--row.#{$prefix}--no-gutter--left [class*='#{$prefix}--col'] {
+    padding-left: 0;
+  }
+
+  .#{$prefix}--no-gutter--right,
+  .#{$prefix}--row.#{$prefix}--no-gutter--right [class*='#{$prefix}--col'] {
+    padding-right: 0;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Hang
+// -----------------------------------------------------------------------------
+
+/// Add `hang--left` and `hang--right` classes for a given gutter. These classes are
+/// used alongside `no-gutter--left` and `no-gutter--right` to "hang" type.
+/// @param {Number} $gutter [$carbon--grid-gutter] - The gutter in the grid system
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--hang($gutter: $carbon--grid-gutter) {
+  .#{$prefix}--hang--left {
+    padding-left: ($gutter / 2);
+  }
+
+  .#{$prefix}--hang--right {
+    padding-right: ($gutter / 2);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Aspect ratio
+// -----------------------------------------------------------------------------
+
+/// The aspect ratios that are used to generate corresponding aspect ratio
+/// classes in code
+/// @type List
+/// @access public
+/// @group @carbon/grid
+$carbon--aspect-ratios: (
+  (16, 9),
+  (9, 16),
+  (2, 1),
+  (1, 2),
+  (4, 3),
+  (3, 4),
+  (1, 1)
+);
+
+/// Generates the CSS classname utilities for the aspect ratios
+///
+/// CSS Tricks article on aspect ratios and all the different ways it can be done.
+/// https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
+///
+/// That article references an earlier article on the topic.
+/// https://keithjgrant.com/posts/2017/03/aspect-ratios/
+///
+/// @param {Number} $width width from an aspect ratio
+/// @param {Number} $height height from an aspect ratio
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--aspect-ratio($aspect-ratios: $carbon--aspect-ratios) {
+  .#{$prefix}--aspect-ratio {
+    position: relative;
+  }
+
+  .#{$prefix}--aspect-ratio::before {
+    content: '';
+    width: 1px;
+    margin-left: -1px;
+    float: left;
+    height: 0;
+  }
+
+  .#{$prefix}--aspect-ratio::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  @each $aspect-ratio in $aspect-ratios {
+    $width: nth($aspect-ratio, 1);
+    $height: nth($aspect-ratio, 2);
+
+    .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
+      padding-top: percentage($height / $width);
+    }
+  }
+
+  // leaving here for legacy support
+  .#{$prefix}--aspect-ratio--object {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Grid
+// -----------------------------------------------------------------------------
+
+/// Create the container for a grid. Will cause full-bleed for the grid unless
+/// max-width properties are added with `make-container-max-widths`
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--make-container($breakpoints: $carbon--grid-breakpoints) {
+  margin-right: auto;
+  margin-left: auto;
+
+  @include carbon--set-largest-breakpoint();
+
+  @each $name, $value in $breakpoints {
+    $prev-breakpoint: map-get($breakpoints, carbon--breakpoint-prev($name));
+    $margin: map-get($value, margin);
+
+    @if $prev-breakpoint {
+      $prev-margin: map-get($prev-breakpoint, margin);
+      @if $prev-margin != $margin {
+        @include carbon--breakpoint($name) {
+          padding-left: #{($carbon--grid-gutter / 2) + $margin};
+          padding-right: #{($carbon--grid-gutter / 2) + $margin};
+        }
+      }
+    } @else {
+      @include carbon--breakpoint($name) {
+        padding-left: #{($carbon--grid-gutter / 2) + $margin};
+        padding-right: #{($carbon--grid-gutter / 2) + $margin};
+      }
+    }
+  }
+}
+
+/// Get the last breakpoint width and set max-width to its value
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--set-largest-breakpoint($breakpoints: $carbon--grid-breakpoints) {
+  $largest-breakpoint: last-map-item($breakpoints);
+
+  max-width: map-get($largest-breakpoint, 'width');
+}
+
+/// Add in the max-widths for each breakpoint to the container
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--make-container-max-widths(
+  $breakpoints: $carbon--grid-breakpoints
+) {
+  @each $name, $value in $breakpoints {
+    @include carbon--breakpoint($name) {
+      max-width: map-get($value, width);
+    }
+  }
+}
+
+/// Generate the CSS for a grid for the given breakpoints and gutters
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - The default breakpoints
+/// @param {Number} $grid-gutter [$carbon--grid-gutter] - The default gutters
+/// @param {Number} $condensed-gutter [$carbon--grid-gutter--condensed] - The condensed mode gutter
+/// @access public
+/// @group @carbon/grid
+@mixin carbon--grid(
+  $breakpoints: $carbon--grid-breakpoints,
+  $grid-gutter: $carbon--grid-gutter,
+  $condensed-gutter: $carbon--grid-gutter--condensed
+) {
+  .#{$prefix}--grid {
+    @include carbon--make-container($breakpoints);
+  }
+
+  @include carbon--largest-breakpoint($breakpoints) {
+    .#{$prefix}--grid--full-width {
+      max-width: 100%;
+    }
+  }
+
+  .#{$prefix}--row {
+    @include carbon--make-row();
+  }
+
+  .#{$prefix}--row-padding [class*='#{$prefix}--col'],
+  .#{$prefix}--col-padding {
+    padding-top: $grid-gutter / 2;
+    padding-bottom: $grid-gutter / 2;
+  }
+
+  .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
+    padding-top: $condensed-gutter / 2;
+    padding-bottom: $condensed-gutter / 2;
+  }
+
+  @include carbon--make-grid-columns($breakpoints, $grid-gutter);
+  @include carbon--no-gutter();
+  @include carbon--hang($grid-gutter);
+  @include carbon--aspect-ratio();
+}

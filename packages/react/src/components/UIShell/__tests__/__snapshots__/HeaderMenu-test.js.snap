@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderMenu should render 1`] = `
+<HeaderMenu>
+  <HeaderMenu
+    focusRef={null}
+    renderMenuContent={[Function]}
+  >
+    <li
+      className="bx--header__submenu"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      <a
+        aria-expanded={false}
+        aria-haspopup="menu"
+        className="bx--header__menu-item bx--header__menu-title"
+        href="#"
+        onKeyDown={[Function]}
+        tabIndex={0}
+      >
+        <defaultRenderMenuContent>
+          <ForwardRef(ChevronDown16)
+            className="bx--header__menu-arrow"
+          >
+            <Icon
+              className="bx--header__menu-arrow"
+              fill="currentColor"
+              height={16}
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 16 16"
+              width={16}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <svg
+                aria-hidden={true}
+                className="bx--header__menu-arrow"
+                fill="currentColor"
+                focusable="false"
+                height={16}
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
+                />
+              </svg>
+            </Icon>
+          </ForwardRef(ChevronDown16)>
+        </defaultRenderMenuContent>
+      </a>
+      <ul
+        className="bx--header__menu"
+      >
+        <ForwardRef(HeaderMenuItem)
+          href="/a"
+          key=".0"
+        >
+          <li>
+            <Link
+              className="bx--header__menu-item"
+              element="a"
+              href="/a"
+              tabIndex={0}
+            >
+              <a
+                className="bx--header__menu-item"
+                href="/a"
+                tabIndex={0}
+              >
+                <span
+                  className="bx--text-truncate--end"
+                >
+                  A
+                </span>
+              </a>
+            </Link>
+          </li>
+        </ForwardRef(HeaderMenuItem)>
+        <ForwardRef(HeaderMenuItem)
+          href="/b"
+          key=".1"
+        >
+          <li>
+            <Link
+              className="bx--header__menu-item"
+              element="a"
+              href="/b"
+              tabIndex={0}
+            >
+              <a
+                className="bx--header__menu-item"
+                href="/b"
+                tabIndex={0}
+              >
+                <span
+                  className="bx--text-truncate--end"
+                >
+                  B
+                </span>
+              </a>
+            </Link>
+          </li>
+        </ForwardRef(HeaderMenuItem)>
+        <ForwardRef(HeaderMenuItem)
+          href="/c"
+          key=".2"
+        >
+          <li>
+            <Link
+              className="bx--header__menu-item"
+              element="a"
+              href="/c"
+              tabIndex={0}
+            >
+              <a
+                className="bx--header__menu-item"
+                href="/c"
+                tabIndex={0}
+              >
+                <span
+                  className="bx--text-truncate--end"
+                >
+                  C
+                </span>
+              </a>
+            </Link>
+          </li>
+        </ForwardRef(HeaderMenuItem)>
+      </ul>
+    </li>
+  </HeaderMenu>
+</HeaderMenu>
+`;

@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideNavMenu should render 1`] = `
+<SideNavMenu
+  buttonRef={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          <button
+            aria-expanded="false"
+            class="bx--side-nav__submenu"
+            type="button"
+          >
+            <div
+              class="bx--side-nav__icon"
+            >
+              <div>
+                icon
+              </div>
+            </div>
+            <span
+              class="bx--side-nav__submenu-title"
+            >
+              title
+            </span>
+            <div
+              class="bx--side-nav__icon bx--side-nav__icon--small bx--side-nav__submenu-chevron"
+            >
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                focusable="false"
+                height="20"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 32 32"
+                width="20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 22L6 12 7.4 10.6 16 19.2 24.6 10.6 26 12z"
+                />
+              </svg>
+            </div>
+          </button>,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  className="custom-classname"
+  defaultExpanded={false}
+  isActive={false}
+  large={false}
+  renderIcon={[Function]}
+  title="title"
+>
+  <li
+    className="bx--side-nav__item bx--side-nav__item--icon custom-classname"
+    onKeyDown={[Function]}
+  >
+    <button
+      aria-expanded={false}
+      className="bx--side-nav__submenu"
+      onClick={[Function]}
+      type="button"
+    >
+      <SideNavIcon
+        small={false}
+      >
+        <div
+          className="bx--side-nav__icon"
+        >
+          <renderIcon>
+            <div>
+              icon
+            </div>
+          </renderIcon>
+        </div>
+      </SideNavIcon>
+      <span
+        className="bx--side-nav__submenu-title"
+      >
+        title
+      </span>
+      <SideNavIcon
+        className="bx--side-nav__submenu-chevron"
+        small={true}
+      >
+        <div
+          className="bx--side-nav__icon bx--side-nav__icon--small bx--side-nav__submenu-chevron"
+        >
+          <ForwardRef(ChevronDown20)>
+            <Icon
+              fill="currentColor"
+              height={20}
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 32 32"
+              width={20}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <svg
+                aria-hidden={true}
+                fill="currentColor"
+                focusable="false"
+                height={20}
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 32 32"
+                width={20}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 22L6 12 7.4 10.6 16 19.2 24.6 10.6 26 12z"
+                />
+              </svg>
+            </Icon>
+          </ForwardRef(ChevronDown20)>
+        </div>
+      </SideNavIcon>
+    </button>
+    <ul
+      className="bx--side-nav__menu"
+    >
+      text
+    </ul>
+  </li>
+</SideNavMenu>
+`;

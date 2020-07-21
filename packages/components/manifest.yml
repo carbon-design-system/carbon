@@ -1,0 +1,7 @@
+---
+applications:
+- name: carbon-dev-environment
+  memory: 64M
+  buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+routes:
+  - route: vanilla.carbondesignsystem.com

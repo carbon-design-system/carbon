@@ -1,0 +1,51 @@
+<!-- 
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+
+<div class="bx--snippet bx--snippet--multi" 
+  data-code-snippet> <div class="bx--snippet-container" aria-label="Code Snippet Text">
+  <pre>
+<code>@mixin grid-container {
+    width: 100%;
+    padding-right: padding(mobile);
+    padding-left: padding(mobile);
+
+    @include breakpoint(bp--xs--major) {
+      padding-right: padding(xs);
+      padding-left: padding(xs);
+    }
+  }
+
+  $z-indexes: (
+    modal : 9000,
+    overlay : 8000,
+    dropdown : 7000,
+    header : 6000,
+    footer : 5000,
+    hidden : - 1,
+    overflowHidden: - 1,
+    floating: 10000
+  );</code>
+    </pre>
+</div>
+<button data-copy-btn class="bx--snippet-button" aria-label="Copy code" tabindex="0">
+  <svg class="bx--snippet__icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+    <path d="M1 10H0V2C0 .9.9 0 2 0h8v1H2c-.6 0-1 .5-1 1v8z" />
+    <path d="M11 4.2V8h3.8L11 4.2zM15 9h-4c-.6 0-1-.4-1-1V4H4.5c-.3 0-.5.2-.5.5v10c0 .3.2.5.5.5h10c.3 0 .5-.2.5-.5V9zm-4-6c.1 0 .3.1.4.1l4.5 4.5c0 .1.1.3.1.4v6.5c0 .8-.7 1.5-1.5 1.5h-10c-.8 0-1.5-.7-1.5-1.5v-10C3 3.7 3.7 3 4.5 3H11z" />
+  </svg>
+  <div class="bx--btn--copy__feedback" data-feedback="Copied!"></div>
+</button>
+<button class="bx--btn bx--btn--ghost bx--btn--sm bx--snippet-btn--expand"
+  type="button">
+  <span class="bx--snippet-btn--text" data-show-more-text="Show more" data-show-less-text="Show less">Show
+    more</span>
+  <svg class="bx--icon-chevron--down" width="12" height="7" viewBox="0 0 12 7" aria-label="Show more icon">
+    <title>Show more icon</title>
+    <path fill-rule="nonzero" d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z" />
+  </svg>
+</button>
+</div>

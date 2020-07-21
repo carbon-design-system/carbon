@@ -1,0 +1,515 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable */
+
+@import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
+
+.flatpickr-calendar {
+  background: transparent;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  text-align: center;
+  padding: 0;
+  animation: none;
+  direction: ltr;
+  border: 0;
+  font-size: 14px;
+  line-height: 24px;
+  border-radius: 5px;
+  position: absolute;
+  width: 315px;
+  box-sizing: border-box;
+  touch-action: manipulation;
+  background: #fff;
+  box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6,
+    0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
+}
+
+.flatpickr-calendar.open,
+.flatpickr-calendar.inline {
+  opacity: 1;
+  visibility: inherit;
+  overflow: visible;
+  max-height: 640px;
+}
+
+.flatpickr-calendar.open {
+  @include box-shadow;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: rem(288px);
+  height: rem(336px);
+  padding: $carbon--spacing-02 $carbon--spacing-02 $carbon--spacing-03
+    $carbon--spacing-02;
+  border: none;
+  margin-top: -2px;
+  overflow: hidden;
+  background-color: $ui-01;
+
+  &:focus {
+    @include focus-outline('border');
+  }
+}
+
+.flatpickr-calendar.animate.open {
+  animation: fpFadeInDown $duration--fast-02 motion(entrance, productive);
+}
+
+.flatpickr-calendar.inline {
+  display: block;
+  position: relative;
+  top: 2px;
+}
+
+.flatpickr-calendar.static {
+  position: absolute;
+  top: calc(100% + 2px);
+}
+
+.flatpickr-calendar.static.open {
+  z-index: 999;
+  display: block;
+}
+
+.flatpickr-calendar.hasWeeks {
+  width: auto;
+}
+
+.flatpickr-calendar .hasWeeks .dayContainer,
+.flatpickr-calendar .hasTime .dayContainer {
+  border-bottom: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.flatpickr-calendar .hasWeeks .dayContainer {
+  border-left: 0;
+}
+.flatpickr-calendar.showTimeInput.hasTime .flatpickr-time {
+  height: 40px;
+  border-top: 1px solid #e6e6e6;
+}
+.flatpickr-calendar.noCalendar.hasTime .flatpickr-time {
+  height: auto;
+}
+
+.flatpickr-calendar:focus {
+  outline: 0;
+}
+
+.flatpickr-months {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.flatpickr-month {
+  @include type-style('productive-heading-01');
+  height: rem(40px);
+  display: flex;
+  align-items: center;
+  margin-bottom: $carbon--spacing-02;
+  background-color: transparent;
+  color: $text-01;
+  line-height: 1;
+  text-align: center;
+}
+
+.flatpickr-prev-month,
+.flatpickr-next-month {
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 16px;
+  height: 28px;
+  padding: 10px calc(3.57% - 1.5px);
+  z-index: 3;
+}
+
+.flatpickr-prev-month,
+.flatpickr-next-month {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: rem(40px);
+  width: rem(40px);
+  padding: 0;
+  fill: $text-01;
+  transition: background-color $duration--fast-01 motion(standard, productive);
+
+  &:hover {
+    background-color: $hover-ui;
+  }
+}
+
+.flatpickr-prev-month:hover svg,
+.flatpickr-next-month:hover svg {
+  fill: $text-01;
+}
+
+.flatpickr-next-month.disabled,
+.flatpickr-prev-month.disabled {
+  svg {
+    fill: $ui-05;
+    cursor: not-allowed;
+  }
+
+  &:hover svg {
+    fill: $ui-05;
+  }
+}
+
+.flatpickr-current-month {
+  @include type-style('productive-heading-01');
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: rem(28px);
+  text-align: center;
+}
+
+.flatpickr-current-month .cur-month {
+  margin-left: $carbon--spacing-02;
+  margin-right: $carbon--spacing-02;
+
+  &:hover {
+    background-color: $hover-ui;
+  }
+}
+
+.numInputWrapper {
+  position: relative;
+  width: rem(60px);
+
+  &:hover {
+    background-color: $hover-ui;
+  }
+}
+
+.numInputWrapper:hover .arrowUp,
+.numInputWrapper:hover .arrowDown {
+  opacity: 1;
+}
+
+.numInputWrapper:hover .numInput[disabled] ~ .arrowUp,
+.numInputWrapper:hover .numInput[disabled] ~ .arrowDown {
+  opacity: 0;
+}
+
+.numInputWrapper .numInput {
+  display: inline-block;
+  width: 100%;
+  padding: $carbon--spacing-02;
+  margin: 0;
+  border: none;
+  color: $text-01;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: 600;
+  background-color: $field-01;
+  cursor: default;
+  // Added in when upgraded to Flatpickr 4.5.5 (#1977)
+  -moz-appearance: textfield; /* Firefox */
+
+  &:focus {
+    @include focus-outline('border');
+  }
+
+  &[disabled],
+  &[disabled]:hover {
+    color: $disabled-02;
+    background-color: $ui-01;
+    pointer-events: none;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    // Added in when upgraded to Flatpickr 4.5.5 (#1977)
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+}
+
+.numInput[disabled] ~ .arrowUp::after {
+  border-bottom-color: $disabled-02;
+}
+
+.numInput[disabled] ~ .arrowDown::after {
+  border-top-color: $disabled-02;
+}
+
+.numInputWrapper .arrowUp,
+.numInputWrapper .arrowDown {
+  position: absolute;
+  left: 2.6rem;
+  width: rem(12px);
+  height: 50%;
+  border: none;
+  padding: 0 rem(4px) 0 rem(2px);
+  line-height: 50%;
+  opacity: 0;
+  cursor: pointer;
+
+  &::after {
+    position: absolute;
+    top: 33%;
+    display: block;
+    content: '';
+    border-left: rem(4px) solid transparent;
+    border-right: rem(4px) solid transparent;
+  }
+
+  &:hover::after {
+    border-bottom-color: $interactive-01;
+    border-top-color: $interactive-01;
+  }
+}
+
+.numInputWrapper .arrowUp {
+  top: rem(4px);
+  border-bottom: 0;
+
+  &::after {
+    border-bottom: rem(4px) solid $icon-01;
+  }
+}
+
+.numInputWrapper .arrowDown {
+  top: rem(11px);
+
+  &::after {
+    border-top: rem(4px) solid $icon-01;
+  }
+}
+
+.flatpickr-weekdays {
+  display: flex;
+  align-items: center;
+  height: rem(40px);
+}
+
+.flatpickr-weekdaycontainer {
+  display: flex;
+  width: 100%;
+}
+
+.flatpickr-weekday {
+  @include type-style('body-short-01');
+  cursor: default;
+  color: $text-01;
+  flex: 1;
+}
+
+.flatpickr-days:focus {
+  outline: 0;
+}
+
+.dayContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: rem(246px);
+  padding: 0;
+  outline: 0;
+}
+
+.flatpickr-calendar.animate .dayContainer.slideLeft {
+  animation: fpFadeOut 400ms cubic-bezier(0.23, 1, 0.32, 1),
+    fpSlideLeft 400ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.flatpickr-calendar.animate .dayContainer.slideLeft,
+.flatpickr-calendar.animate .dayContainer.slideLeftNew {
+  transform: translate3d(-100%, 0px, 0px);
+}
+
+.flatpickr-calendar.animate .dayContainer.slideLeftNew {
+  animation: fpFadeIn 400ms cubic-bezier(0.23, 1, 0.32, 1),
+    fpSlideLeft 400ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.flatpickr-calendar.animate .dayContainer.slideRight {
+  animation: fpFadeOut 400ms cubic-bezier(0.23, 1, 0.32, 1),
+    fpSlideRight 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  transform: translate3d(100%, 0px, 0px);
+}
+
+.flatpickr-calendar.animate .dayContainer.slideRightNew {
+  animation: fpFadeIn 400ms cubic-bezier(0.23, 1, 0.32, 1),
+    fpSlideRightNew 400ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.flatpickr-day {
+  @include type-style('body-short-01');
+  height: rem(40px);
+  width: rem(40px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $text-01;
+  cursor: pointer;
+  transition: all $duration--fast-01 motion(standard, productive);
+
+  &:hover {
+    background: $hover-ui;
+  }
+
+  &:focus {
+    @include focus-outline('outline');
+    outline-color: $interactive-01;
+  }
+}
+
+.nextMonthDay,
+.prevMonthDay {
+  color: $text-05;
+}
+
+.flatpickr-day.today {
+  position: relative;
+  color: $link-01;
+  font-weight: 600;
+
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+    bottom: rem(7px);
+    left: 50%;
+    transform: translateX(-50%);
+    height: rem(4px);
+    width: rem(4px);
+    background-color: $link-01;
+  }
+}
+
+.flatpickr-day.today.no-border {
+  border: none;
+}
+
+.flatpickr-day.today.selected {
+  @include focus-outline('outline');
+  &::after {
+    display: none;
+  }
+}
+
+.flatpickr-day.inRange {
+  background-color: $highlight;
+  color: $text-01;
+}
+
+.flatpickr-day.selected {
+  color: $text-04;
+  background-color: $interactive-01;
+
+  &:focus {
+    outline: rem(1px) solid $ui-02;
+    outline-offset: rem(-3px);
+  }
+}
+
+.flatpickr-day.startRange.selected {
+  box-shadow: none;
+  z-index: 2;
+}
+
+.flatpickr-day.startRange.inRange:not(.selected),
+.flatpickr-day.endRange.inRange {
+  @include focus-outline('outline');
+  background: $ui-01;
+  z-index: 3;
+}
+
+.flatpickr-day.endRange:hover {
+  @include focus-outline('outline');
+  background: $ui-01;
+  color: $text-01;
+}
+
+.flatpickr-day.endRange.inRange.selected {
+  color: $text-04;
+  background: $interactive-01;
+}
+
+.flatpickr-day.flatpickr-disabled {
+  cursor: not-allowed;
+  color: $disabled-02;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.flatpickr-input[readonly] {
+  cursor: pointer;
+}
+
+@keyframes fpFadeInDown {
+  from {
+    opacity: 0;
+
+    transform: translate3d(0, -20px, 0);
+  }
+  to {
+    opacity: 1;
+
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes fpSlideLeft {
+  from {
+    transform: translate3d(0px, 0px, 0px);
+  }
+  to {
+    transform: translate3d(-100%, 0px, 0px);
+  }
+}
+@keyframes fpSlideLeftNew {
+  from {
+    transform: translate3d(100%, 0px, 0px);
+  }
+  to {
+    transform: translate3d(0px, 0px, 0px);
+  }
+}
+@keyframes fpSlideRight {
+  from {
+    transform: translate3d(0, 0, 0px);
+  }
+  to {
+    transform: translate3d(100%, 0px, 0px);
+  }
+}
+@keyframes fpSlideRightNew {
+  from {
+    transform: translate3d(-100%, 0, 0px);
+  }
+  to {
+    transform: translate3d(0, 0, 0px);
+  }
+}
+@keyframes fpFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fpFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

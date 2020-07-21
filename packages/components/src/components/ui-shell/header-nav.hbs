@@ -1,0 +1,52 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<!--
+  We're designating the header navigation as a menubar. As a result, we
+  have each link designated as a menuitem. Links have a tabindex of "0" since
+  Safari does not provide links focus by default.
+
+  For sub-menus, we are following the guidance specified here:
+  https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html#rps_label
+
+  Most noticeably, the first menuitem in a submenu should receive a tabindex of
+  "0", while the rest should get "-1"
+-->
+<nav class="{{@root.prefix}}--header__nav" aria-label="Platform Name" data-header-nav>
+  <ul class="{{@root.prefix}}--header__menu-bar" aria-label="Platform Name">
+    {{#each header.navLinks}}
+    {{#if href}}
+    <li>
+      <a class="{{@root.prefix}}--header__menu-item" href="javascript:void(0)" tabindex="0">
+        {{this.title}}
+      </a>
+    </li>
+    {{else}}
+    <li class="{{@root.prefix}}--header__submenu" data-header-submenu>
+      <a class="{{@root.prefix}}--header__menu-item {{@root.prefix}}--header__menu-title" aria-haspopup="true"
+        aria-expanded="{{this.state.expanded}}" href="javascript:void(0)" tabindex="0">
+        {{this.title}}
+        <svg class="{{@root.prefix}}--header__menu-arrow" width="12" height="7" aria-hidden="true">
+          <path d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z" />
+        </svg>
+      </a>
+      <ul class="{{@root.prefix}}--header__menu" aria-label="{{this.title}}">
+        {{#each this.items}}
+        <li role="none">
+          <a class="{{@root.prefix}}--header__menu-item" href="{{this.href}}" tabindex="-1">
+            <span class="{{@root.prefix}}--text-truncate--end">
+              {{this.title}}
+            </span>
+          </a>
+        </li>
+        {{/each}}
+      </ul>
+    </li>
+    {{/if}}
+    {{/each}}
+  </ul>
+</nav>

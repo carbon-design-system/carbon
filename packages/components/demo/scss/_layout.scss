@@ -1,0 +1,78 @@
+//--------------------
+// GLOBAL LAYOUT
+// Includes styles for body, link, wrapper and container.
+//--------------------
+@import 'typography';
+@import '../../src/globals/scss/functions';
+
+body {
+  @include type-style('body-short-01');
+  background-color: $carbon--white-0;
+
+  hr {
+    display: none;
+  }
+}
+
+* {
+  &::selection {
+    background: #b4d8fb; /* WebKit/Blink Browsers */
+  }
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+#maincontent {
+  padding-bottom: 23rem;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  margin-left: 0;
+  transition: $transition--base ease;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @include breakpoint('bp--md--major') {
+    margin-left: $width--side-nav;
+    width: calc(100% - 200px);
+  }
+
+  .bx--side-nav ~ & {
+    margin-left: 3rem;
+    width: calc(100% - 3rem);
+  }
+
+  .bx--side-nav.bx--side-nav--expanded ~ & {
+    @include breakpoint('bp--md--major') {
+      margin-left: 16rem;
+      width: calc(100% - 16rem);
+    }
+  }
+
+  &--expanded {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  main {
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+a {
+  font-weight: 600;
+}
+
+svg {
+  transition: fill 250ms;
+}

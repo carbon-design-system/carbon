@@ -1,0 +1,34 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@mixin content-visible {
+  visibility: inherit;
+  opacity: 1;
+}
+
+@mixin content-hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+@keyframes hide-feedback {
+  0% {
+    @include content-visible;
+  }
+  100% {
+    @include content-hidden;
+  }
+}
+
+@keyframes show-feedback {
+  0% {
+    @include content-hidden;
+  }
+  100% {
+    @include content-visible;
+  }
+}

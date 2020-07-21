@@ -1,0 +1,288 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/css--helpers';
+@import '../../globals/scss/tooltip';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import 'mixins';
+@import '../../globals/scss/css--reset';
+
+/// Button styles
+/// @access private
+/// @group button
+@mixin button {
+  // button set styles
+  .#{$prefix}--btn-set {
+    display: flex;
+  }
+
+  .#{$prefix}--btn-set > .#{$prefix}--btn {
+    // 196px from design kit
+    max-width: rem(196px);
+    width: 100%;
+  }
+
+  .#{$prefix}--btn--secondary.#{$prefix}--btn--disabled
+    + .#{$prefix}--btn--primary.#{$prefix}--btn--disabled,
+  .#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled
+    + .#{$prefix}--btn--danger.#{$prefix}--btn--disabled {
+    box-shadow: rem(-1px) 0 0 0 $disabled-03;
+  }
+
+  .#{$prefix}--btn {
+    @include button-base;
+  }
+
+  // Reset intrisic padding in Firefox (see #731)
+  .#{$prefix}--btn::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+  }
+
+  .#{$prefix}--btn--primary {
+    @include button-theme(
+      $interactive-01,
+      transparent,
+      $text-04,
+      $hover-primary,
+      currentColor,
+      $active-primary
+    );
+
+    &:hover {
+      color: $text-04;
+    }
+  }
+
+  .#{$prefix}--btn--secondary {
+    @include button-theme(
+      $interactive-02,
+      transparent,
+      $text-04,
+      $hover-secondary,
+      currentColor,
+      $active-secondary
+    );
+
+    &:hover,
+    &:focus {
+      color: $text-04;
+    }
+  }
+
+  .#{$prefix}--btn--tertiary {
+    @include button-theme(
+      transparent,
+      $interactive-03,
+      $interactive-03,
+      $hover-tertiary,
+      currentColor,
+      $active-tertiary
+    );
+
+    &:hover {
+      color: $inverse-01;
+    }
+
+    &:focus {
+      color: $inverse-01;
+      background-color: $interactive-03;
+    }
+
+    &:active {
+      border-color: transparent;
+    }
+
+    &:disabled,
+    &:hover:disabled,
+    &:focus:disabled,
+    &.#{$prefix}--btn--disabled,
+    &.#{$prefix}--btn--disabled:hover,
+    &.#{$prefix}--btn--disabled:focus {
+      background: transparent;
+      color: $disabled;
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--btn--ghost {
+    @include button-theme(
+      transparent,
+      transparent,
+      $link-01,
+      $hover-ui,
+      currentColor,
+      $active-ui
+    );
+
+    padding: $button-padding-ghost;
+
+    .#{$prefix}--btn__icon {
+      position: static;
+      margin-left: $carbon--spacing-03;
+    }
+
+    &:hover,
+    &:active {
+      color: $hover-primary-text;
+    }
+
+    &:active {
+      background-color: $active-ui;
+    }
+
+    &:disabled,
+    &:hover:disabled,
+    &:focus:disabled,
+    &.#{$prefix}--btn--disabled,
+    &.#{$prefix}--btn--disabled:hover,
+    &.#{$prefix}--btn--disabled:focus {
+      color: $disabled;
+      background: transparent;
+      border-color: transparent;
+      outline: none;
+    }
+
+    &.#{$prefix}--btn--sm {
+      padding: $button-padding-ghost-sm;
+    }
+
+    &.#{$prefix}--btn--field {
+      padding: $button-padding-ghost-field;
+    }
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
+    @include tooltip--trigger('icon', 'bottom');
+
+    svg,
+    &:hover svg,
+    &:focus svg {
+      fill: currentColor;
+    }
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:focus svg {
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover svg {
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
+    border-color: $focus;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
+    svg {
+    outline-color: transparent;
+  }
+
+  .#{$prefix}--btn--icon-only--top {
+    @include tooltip--trigger('icon', 'top');
+    @include tooltip--placement('icon', 'top', 'center');
+  }
+
+  .#{$prefix}--btn--icon-only--bottom {
+    @include tooltip--placement('icon', 'bottom', 'center');
+  }
+
+  .#{$prefix}--btn--icon-only {
+    padding-left: rem(15px);
+    padding-right: rem(15px);
+
+    .#{$prefix}--btn__icon {
+      position: static;
+    }
+
+    &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon {
+      margin: 0;
+    }
+  }
+
+  .#{$prefix}--btn path[data-icon-path='inner-path'] {
+    fill: none;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost
+    .#{$prefix}--btn__icon,
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover
+    .#{$prefix}--btn__icon {
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
+    .#{$prefix}--btn__icon
+    path,
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
+    .#{$prefix}--btn__icon
+    path,
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
+    .#{$prefix}--btn__icon,
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost[disabled]:hover
+    .#{$prefix}--btn__icon {
+    fill: $disabled-02;
+  }
+
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled] {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
+    padding-left: rem(11px);
+    padding-right: rem(11px);
+  }
+
+  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
+    padding-left: rem(7px);
+    padding-right: rem(7px);
+  }
+
+  .#{$prefix}--btn--danger {
+    @include button-theme(
+      $danger,
+      transparent,
+      $text-04,
+      $hover-danger,
+      currentColor,
+      $active-danger
+    );
+
+    &:hover {
+      color: $text-04;
+    }
+  }
+
+  .#{$prefix}--btn--sm {
+    min-height: rem(32px);
+    padding: $button-padding-sm;
+  }
+
+  .#{$prefix}--btn--field {
+    min-height: rem(40px);
+    padding: $button-padding-field;
+  }
+
+  // Skeleton State
+  .#{$prefix}--btn.#{$prefix}--skeleton {
+    @include skeleton;
+
+    width: rem(150px);
+  }
+}
+
+@include exports('button') {
+  @include button;
+}

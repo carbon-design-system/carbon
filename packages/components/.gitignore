@@ -1,0 +1,28 @@
+# Ignore built files and static folder
+demo/*.css
+demo/*.map
+demo/*.js
+demo/*.html
+demo/code
+demo/component
+demo/hot
+!demo/index.js
+!demo/components.js
+dist
+docs/js
+
+# Test reports
+tests/a11y-results
+tests/coverage
+tests/axe/allHtml
+
+# Built files
+/scripts
+/html
+/scss
+
+# a11y testing
+.aat.yml
+
+# Generated Sass files
+src/globals/scss/vendor

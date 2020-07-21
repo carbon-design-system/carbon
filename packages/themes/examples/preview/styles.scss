@@ -1,0 +1,122 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../../grid/scss/grid';
+@import '../../scss/themes';
+
+table {
+  text-align: left;
+  vertical-align: middle;
+  width: 100%;
+}
+
+table,
+tr,
+td,
+th {
+  border: 1px solid black;
+}
+
+td,
+th {
+  padding: 1rem;
+}
+
+section {
+  background-color: white;
+  margin-bottom: 4rem;
+  padding-bottom: 2rem;
+}
+
+.theming-example-preview {
+  margin: 2rem 0 3rem;
+}
+
+// Theming examples
+
+//-------------------------------------------------------------------------------
+// Basic theming
+//-------------------------------------------------------------------------------
+@mixin my-component() {
+  .my-component {
+    color: $interactive-02;
+  }
+}
+
+// Include default `$interactive-02` styling
+@include my-component();
+
+// Include themed `$interactive-02` styling from g100 theme
+@include carbon--theme($carbon--theme--g100) {
+  .theme {
+    @include my-component();
+  }
+}
+
+//-------------------------------------------------------------------------------
+// Custom theming
+//-------------------------------------------------------------------------------
+$default-custom-theme: map-merge(
+  $carbon--theme--white,
+  (
+    custom-token-01: #171717,
+  )
+);
+$custom-token-01: map-get(
+  $default-custom-theme,
+  custom-token-01
+) !default !global;
+
+@mixin my-custom-token-component() {
+  .my-custom-token-component {
+    color: $interactive-01;
+  }
+
+  .my-custom-token-component .custom-token {
+    color: $custom-token-01;
+  }
+}
+
+@include my-custom-token-component();
+
+@mixin custom-theme($theme: $default-custom-theme) {
+  @include carbon--theme($theme) {
+    $custom-token-01: map-get($theme, custom-token-01) !global;
+    @content;
+  }
+
+  @if $theme != $default-custom-theme {
+    @include custom-theme($default-custom-theme);
+  }
+}
+
+$custom-theme: map-merge(
+  $default-custom-theme,
+  (
+    interactive-01: #ee538b,
+    custom-token-01: #8a3ffc,
+  )
+);
+
+.theme {
+  @include custom-theme($custom-theme) {
+    @include my-custom-token-component();
+  }
+}
+
+.theme--white {
+  @include carbon--theme($carbon--theme--white, true);
+}
+.theme--g10 {
+  @include carbon--theme($carbon--theme--g10, true);
+}
+.theme--g90 {
+  @include carbon--theme($carbon--theme--g90, true);
+}
+.theme--g100 {
+  @include carbon--theme($carbon--theme--g100, true);
+}

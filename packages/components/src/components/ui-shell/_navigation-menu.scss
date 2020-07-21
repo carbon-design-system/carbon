@@ -1,0 +1,220 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/css--helpers';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vars';
+@import 'functions';
+
+/// UI shell navigation
+/// @access private
+/// @group ui-shell
+@mixin carbon-navigation {
+  //----------------------------------------------------------------------------
+  // Navigation
+  //----------------------------------------------------------------------------
+  .#{$prefix}--navigation {
+    position: fixed;
+    top: mini-units(6);
+    bottom: 0;
+    left: 0;
+    background-color: $ibm-color__gray-90;
+    width: mini-units(32);
+    z-index: z('dropdown');
+    box-shadow: 0 mini-units(1) mini-units(2) 0 rgba(0, 0, 0, 0.25);
+    color: $ibm-color__gray-10;
+  }
+
+  .#{$prefix}--navigation--right {
+    left: auto;
+    right: 0;
+  }
+
+  .#{$prefix}--navigation svg {
+    fill: $ibm-color__gray-10;
+  }
+
+  //----------------------------------------------------------------------------
+  // Nav Section
+  //----------------------------------------------------------------------------
+  .#{$prefix}--navigation-section:not(:last-child)::after {
+    display: block;
+    content: '';
+    height: 1px;
+    background-color: $ibm-color__gray-80;
+    margin: 0 mini-units(2);
+  }
+
+  //----------------------------------------------------------------------------
+  // Nav Item
+  //----------------------------------------------------------------------------
+  .#{$prefix}--navigation-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--navigation-item--active > a.#{$prefix}--navigation-link {
+    color: $ibm-color__white-0;
+    font-weight: 600;
+  }
+
+  .#{$prefix}--navigation-item--active::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background-color: $ibm-color__blue-60;
+  }
+
+  //----------------------------------------------------------------------------
+  // Nav Link
+  //----------------------------------------------------------------------------
+  a.#{$prefix}--navigation-link {
+    display: flex;
+    align-items: center;
+    color: $ibm-color__gray-10;
+    text-decoration: none;
+    font-size: rem(14px);
+    font-weight: 400;
+    width: 100%;
+    min-height: mini-units(5);
+    padding-left: mini-units(2);
+  }
+
+  a.#{$prefix}--navigation-link:hover {
+    background-color: #333333;
+    color: $ibm-color__white-0;
+  }
+
+  a.#{$prefix}--navigation-link:focus {
+    outline: rem(3px) solid $ibm-color__blue-60;
+    outline-offset: rem(-3px);
+  }
+
+  .#{$prefix}--navigation-item--icon > a.#{$prefix}--navigation-link {
+    padding-left: 0;
+  }
+
+  //----------------------------------------------------------------------------
+  // Nav Category
+  //----------------------------------------------------------------------------
+  .#{$prefix}--navigation__category {
+    width: 100%;
+  }
+
+  .#{$prefix}--navigation__category-toggle {
+    @include button-reset($width: true);
+
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--navigation__category-toggle:hover {
+    background-color: #333333;
+  }
+
+  .#{$prefix}--navigation__category-toggle:focus {
+    outline: rem(3px) solid $ibm-color__blue-60;
+    outline-offset: rem(-3px);
+  }
+
+  .#{$prefix}--navigation__category-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: mini-units(2);
+    width: 100%;
+    color: $ibm-color__gray-10;
+    font-size: rem(14px);
+    font-weight: 400;
+    min-height: mini-units(5);
+    padding-left: mini-units(2);
+  }
+
+  .#{$prefix}--navigation-item--icon .#{$prefix}--navigation__category-title {
+    padding-left: 0;
+  }
+
+  .#{$prefix}--navigation__category-items {
+    display: none;
+    visibility: hidden;
+  }
+
+  .#{$prefix}--navigation__category-item > a.#{$prefix}--navigation-link {
+    display: flex;
+    align-items: center;
+    min-height: mini-units(4);
+    padding-left: mini-units(4);
+  }
+
+  .#{$prefix}--navigation__category-item {
+    position: relative;
+  }
+
+  .#{$prefix}--navigation-item--icon
+    .#{$prefix}--navigation__category-item
+    > a.#{$prefix}--navigation-link {
+    padding-left: mini-units(7);
+  }
+
+  .#{$prefix}--navigation__category-item--active::after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background-color: $ibm-color__blue-60;
+  }
+
+  .#{$prefix}--navigation__category-item--active
+    > a.#{$prefix}--navigation-link {
+    font-weight: 600;
+    color: $ibm-color__white-0;
+  }
+
+  .#{$prefix}--navigation__category--expanded
+    .#{$prefix}--navigation__category-title {
+    font-weight: 600;
+  }
+
+  .#{$prefix}--navigation__category--expanded
+    .#{$prefix}--navigation__category-title
+    > svg {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--navigation__category--expanded
+    .#{$prefix}--navigation__category-items {
+    display: block;
+    visibility: inherit;
+  }
+
+  //----------------------------------------------------------------------------
+  // Nav Icon
+  //----------------------------------------------------------------------------
+  .#{$prefix}--navigation-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: mini-units(6);
+    min-width: mini-units(6);
+    height: mini-units(5);
+    margin-right: mini-units(1);
+  }
+}
+
+@include exports('carbon-navigation') {
+  @if feature-flag-enabled('ui-shell') {
+    @include carbon-navigation;
+  }
+}

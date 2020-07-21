@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListBoxMenuItem should render 1`] = `
+<ListBoxMenuItem
+  isActive={false}
+  isHighlighted={false}
+>
+  <div
+    className="bx--list-box__menu-item"
+  >
+    <div
+      className="bx--list-box__menu-item__option"
+    >
+      <span>
+        ListBox.MenuItem
+      </span>
+    </div>
+  </div>
+</ListBoxMenuItem>
+`;
+
+exports[`ListBoxMenuItem should render 2`] = `
+<ListBoxMenuItem
+  isActive={true}
+  isHighlighted={false}
+>
+  <div
+    className="bx--list-box__menu-item bx--list-box__menu-item--active"
+  >
+    <div
+      className="bx--list-box__menu-item__option"
+    >
+      <span>
+        ListBox.MenuItem
+      </span>
+    </div>
+  </div>
+</ListBoxMenuItem>
+`;
+
+exports[`ListBoxMenuItem should render 3`] = `
+<ListBoxMenuItem
+  isActive={false}
+  isHighlighted={true}
+>
+  <div
+    className="bx--list-box__menu-item bx--list-box__menu-item--highlighted"
+  >
+    <div
+      className="bx--list-box__menu-item__option"
+    >
+      <span>
+        ListBox.MenuItem
+      </span>
+    </div>
+  </div>
+</ListBoxMenuItem>
+`;

@@ -1,0 +1,13 @@
+*
+!Staticfile
+!demo/
+demo/*
+!demo/index.html
+!demo/demo.js
+!demo/demo.min.js
+!demo/demo.min.js.map
+!demo/demo.css
+!demo/code/
+!demo/code/**
+!demo/component/
+!demo/component/**

@@ -1,0 +1,287 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccordionSkeleton should render 1`] = `
+<AccordionSkeleton
+  align="end"
+  count={4}
+  open={true}
+>
+  <ul
+    className="bx--accordion bx--skeleton bx--accordion--end"
+  >
+    <li
+      className="bx--accordion__item bx--accordion__item--active"
+    >
+      <span
+        className="bx--accordion__heading"
+      >
+        <ForwardRef(ChevronRight16)
+          className="bx--accordion__arrow"
+        >
+          <Icon
+            className="bx--accordion__arrow"
+            fill="currentColor"
+            height={16}
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 16 16"
+            width={16}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <svg
+              aria-hidden={true}
+              className="bx--accordion__arrow"
+              fill="currentColor"
+              focusable="false"
+              height={16}
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 16 16"
+              width={16}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+              />
+            </svg>
+          </Icon>
+        </ForwardRef(ChevronRight16)>
+        <SkeletonText
+          className="bx--accordion__title"
+          heading={false}
+          lineCount={3}
+          paragraph={false}
+          width="100%"
+        >
+          <p
+            className="bx--skeleton__text bx--accordion__title"
+            style={
+              Object {
+                "width": "100%",
+              }
+            }
+          />
+        </SkeletonText>
+      </span>
+      <div
+        className="bx--accordion__content"
+      >
+        <SkeletonText
+          heading={false}
+          lineCount={3}
+          paragraph={false}
+          width="90%"
+        >
+          <p
+            className="bx--skeleton__text"
+            style={
+              Object {
+                "width": "90%",
+              }
+            }
+          />
+        </SkeletonText>
+        <SkeletonText
+          heading={false}
+          lineCount={3}
+          paragraph={false}
+          width="80%"
+        >
+          <p
+            className="bx--skeleton__text"
+            style={
+              Object {
+                "width": "80%",
+              }
+            }
+          />
+        </SkeletonText>
+        <SkeletonText
+          heading={false}
+          lineCount={3}
+          paragraph={false}
+          width="95%"
+        >
+          <p
+            className="bx--skeleton__text"
+            style={
+              Object {
+                "width": "95%",
+              }
+            }
+          />
+        </SkeletonText>
+      </div>
+    </li>
+    <AccordionSkeletonItem
+      key="0"
+    >
+      <li
+        className="bx--accordion__item"
+      >
+        <span
+          className="bx--accordion__heading"
+        >
+          <ForwardRef(ChevronRight16)
+            className="bx--accordion__arrow"
+          >
+            <Icon
+              className="bx--accordion__arrow"
+              fill="currentColor"
+              height={16}
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 16 16"
+              width={16}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <svg
+                aria-hidden={true}
+                className="bx--accordion__arrow"
+                fill="currentColor"
+                focusable="false"
+                height={16}
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                />
+              </svg>
+            </Icon>
+          </ForwardRef(ChevronRight16)>
+          <SkeletonText
+            className="bx--accordion__title"
+            heading={false}
+            lineCount={3}
+            paragraph={false}
+            width="100%"
+          >
+            <p
+              className="bx--skeleton__text bx--accordion__title"
+              style={
+                Object {
+                  "width": "100%",
+                }
+              }
+            />
+          </SkeletonText>
+        </span>
+      </li>
+    </AccordionSkeletonItem>
+    <AccordionSkeletonItem
+      key="1"
+    >
+      <li
+        className="bx--accordion__item"
+      >
+        <span
+          className="bx--accordion__heading"
+        >
+          <ForwardRef(ChevronRight16)
+            className="bx--accordion__arrow"
+          >
+            <Icon
+              className="bx--accordion__arrow"
+              fill="currentColor"
+              height={16}
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 16 16"
+              width={16}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <svg
+                aria-hidden={true}
+                className="bx--accordion__arrow"
+                fill="currentColor"
+                focusable="false"
+                height={16}
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                />
+              </svg>
+            </Icon>
+          </ForwardRef(ChevronRight16)>
+          <SkeletonText
+            className="bx--accordion__title"
+            heading={false}
+            lineCount={3}
+            paragraph={false}
+            width="100%"
+          >
+            <p
+              className="bx--skeleton__text bx--accordion__title"
+              style={
+                Object {
+                  "width": "100%",
+                }
+              }
+            />
+          </SkeletonText>
+        </span>
+      </li>
+    </AccordionSkeletonItem>
+    <AccordionSkeletonItem
+      key="2"
+    >
+      <li
+        className="bx--accordion__item"
+      >
+        <span
+          className="bx--accordion__heading"
+        >
+          <ForwardRef(ChevronRight16)
+            className="bx--accordion__arrow"
+          >
+            <Icon
+              className="bx--accordion__arrow"
+              fill="currentColor"
+              height={16}
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 16 16"
+              width={16}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <svg
+                aria-hidden={true}
+                className="bx--accordion__arrow"
+                fill="currentColor"
+                focusable="false"
+                height={16}
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                />
+              </svg>
+            </Icon>
+          </ForwardRef(ChevronRight16)>
+          <SkeletonText
+            className="bx--accordion__title"
+            heading={false}
+            lineCount={3}
+            paragraph={false}
+            width="100%"
+          >
+            <p
+              className="bx--skeleton__text bx--accordion__title"
+              style={
+                Object {
+                  "width": "100%",
+                }
+              }
+            />
+          </SkeletonText>
+        </span>
+      </li>
+    </AccordionSkeletonItem>
+  </ul>
+</AccordionSkeleton>
+`;

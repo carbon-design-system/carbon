@@ -1,0 +1,505 @@
+.page_md {
+  > p + #contribution-model-process {
+    margin-top: 2rem;
+  }
+
+  video {
+    margin: 1rem 0;
+    max-width: 38rem;
+    width: 100%;
+  }
+
+  [data-page='components-usage-loading'] & blockquote {
+    margin: 1rem 0 2rem;
+
+    & > p {
+      color: $text-02;
+    }
+  }
+
+  h3#css-modifiers {
+    padding-top: 0;
+  }
+
+  > p:not(:empty) {
+    max-width: 38rem;
+    line-height: 1.5;
+    padding: 0 0 1rem;
+
+    + h2,
+    + h4 {
+      padding-top: 1rem;
+    }
+
+    + h3 {
+      padding-top: 2rem;
+    }
+
+    + ul {
+      padding-top: 0;
+    }
+
+    + h2 {
+      margin-top: 4rem;
+    }
+  }
+
+  h2 {
+    & + table {
+      margin-top: 0;
+    }
+  }
+
+  > p:not(:empty):first-child {
+    margin-bottom: 4rem;
+
+    strong {
+      font-size: 1.125rem;
+      line-height: 1.5;
+      font-weight: 600;
+      word-wrap: break-word;
+    }
+  }
+
+  h4 {
+    color: $text-01;
+    padding: 4rem 0 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.25;
+
+    & + table {
+      margin-top: 0;
+    }
+  }
+
+  h3 + h4 {
+    margin-top: 2rem;
+  }
+
+  p strong {
+    -webkit-font-smoothing: auto;
+  }
+
+  p em {
+    @include type-style('body-short-01');
+    color: $text-02;
+    font-style: normal;
+  }
+
+  > em {
+    color: $text-01;
+  }
+
+  p strong em {
+    font-size: 1.125rem;
+    color: $brand-01;
+    font-style: normal;
+  }
+
+  img {
+    width: 100%;
+    margin: 1rem 0 0;
+  }
+
+  a.bx--btn {
+    margin-top: 1rem;
+  }
+
+  a.bx--btn--secondary {
+    border-color: $brand-01;
+
+    &:hover {
+      background: $brand-01;
+    }
+  }
+
+  p code,
+  li code {
+    font-size: 0.875rem;
+    padding: 0.25rem;
+    background-color: $field-01;
+    color: $text-02;
+    font-family: 'ibm-plex-mono', Courier, monospace;
+    -webkit-font-smoothing: auto;
+  }
+
+  pre {
+    margin: 0 0 1rem;
+    width: 100%;
+    max-width: 38rem;
+    border: 2px solid $ui-02;
+
+    code {
+      font-size: 0.875rem;
+      word-break: break-all;
+      line-height: 1.5;
+    }
+
+    & + h4 {
+      padding-top: 1rem;
+    }
+  }
+
+  table {
+    width: 100%;
+    max-width: 38rem;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.25;
+
+    & + p {
+      margin-top: 3rem;
+    }
+
+    & + h2 {
+      margin-top: 2rem;
+    }
+
+    & + hr + hr + blockquote {
+      margin-top: 2rem;
+    }
+
+    thead {
+      th {
+        @include type-style('body-short-01');
+        font-weight: 600;
+        text-align: left;
+        line-height: 1.25;
+        padding: 1rem 3rem 1rem 0;
+        border-bottom: 2px solid $brand-01;
+        white-space: nowrap;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid $ui-04;
+
+        td {
+          @include type-style('body-short-01');
+          padding: 1rem 3rem 1rem 0;
+          line-height: 1.25;
+
+          &:first-child {
+            font-weight: 600;
+            white-space: nowrap;
+
+            @media all and (max-width: 550px) {
+              white-space: normal;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  main[data-page='style-overview-typography'] & hr + hr + table tbody tr {
+    @media all and (max-width: 600px) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  main[data-page='style-overview-typography'] & hr + hr + table tbody tr td {
+    @media all and (max-width: 600px) {
+      width: 100%;
+    }
+  }
+
+  main[data-page='style-overview-typography']
+    &
+    hr
+    + hr
+    + table
+    tbody
+    tr
+    td:nth-child(2) {
+    @media all and (max-width: 600px) {
+      text-align: left;
+      font-size: 3rem;
+    }
+  }
+
+  main[data-page='add-ons-overview'] & {
+    @media all and (max-width: 600px) {
+      overflow: scroll;
+    }
+  }
+
+  ul,
+  ol {
+    @include type-style('productive-heading-01');
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.75;
+    max-width: 38rem;
+
+    li {
+      font-weight: 400;
+      padding-left: 0.25rem;
+    }
+
+    & + h3 {
+      padding-top: 2rem;
+    }
+  }
+
+  ul li {
+    list-style-type: disc;
+  }
+
+  ol li {
+    list-style-type: decimal;
+  }
+
+  .image-set {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    img {
+      width: 100%;
+    }
+
+    img:first-child:nth-last-child(2),
+    img:first-child:nth-last-child(2) ~ img {
+      @include breakpoint('900px') {
+        width: 50%;
+      }
+    }
+
+    img:first-child:nth-last-child(3),
+    img:first-child:nth-last-child(3) ~ img {
+      @include breakpoint('900px') {
+        width: 33.3333%;
+      }
+    }
+  }
+
+  .image-overlay {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    margin-top: 1rem;
+
+    img {
+      width: 100%;
+      z-index: 1;
+      margin: 0 !important;
+    }
+
+    p {
+      margin-top: 1rem;
+    }
+
+    &__overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 98.5%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background-color: rgba($brand-01, 0.8);
+      color: $inverse-01;
+      font-size: rem(12px);
+      font-style: normal;
+      cursor: pointer;
+      transition: $transition--base ease;
+      opacity: 0;
+      z-index: 2;
+      text-decoration: none;
+
+      img {
+        width: auto;
+      }
+
+      &:hover,
+      &:focus {
+        opacity: 1;
+      }
+    }
+  }
+
+  blockquote p img {
+    width: 3.2rem;
+    float: left;
+    margin: 0 2rem 0.75rem 0;
+  }
+
+  blockquote + p strong {
+    @include type-style('productive-heading-01');
+    color: $brand-01;
+  }
+
+  blockquote {
+    margin: 1.75rem 0 0;
+    line-height: 1.75;
+    width: 100%;
+    max-width: 38rem;
+  }
+
+  hr + hr {
+    & + table {
+      max-width: 45rem;
+    }
+
+    & + table thead {
+      display: none;
+    }
+
+    & + table tbody tr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    & + table tbody tr td {
+      font-size: 1rem;
+      line-height: 1.5;
+
+      em {
+        font-style: normal;
+        font-weight: 400;
+      }
+
+      &:nth-child(1) {
+        white-space: initial;
+        float: left;
+      }
+
+      &:nth-child(2) {
+        white-space: nowrap;
+        font-size: 4rem;
+        text-align: right;
+        line-height: 1;
+      }
+    }
+
+    & + table tbody tr {
+      border-bottom: 0;
+
+      &:nth-child(1) {
+        td:nth-child(2) {
+          font-weight: 300;
+        }
+      }
+
+      &:nth-child(2) {
+        td:nth-child(2) {
+          font-weight: 400;
+        }
+      }
+
+      &:nth-child(3) {
+        td:nth-child(2) {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  // Do's and Dont's list
+  hr + hr {
+    & + p {
+      display: flex;
+      align-items: center;
+      padding-bottom: 0 !important;
+      font-size: 0.875rem;
+
+      img {
+        width: auto !important;
+        padding-right: 0.5rem;
+      }
+
+      & + p {
+        border-left: 10px solid #8cd211;
+        display: flex;
+        align-items: center;
+        padding: 1rem !important;
+        font-size: 1.25rem;
+        font-weight: 300;
+      }
+
+      & + blockquote {
+        margin: 0 !important;
+      }
+
+      & + blockquote p {
+        border-left: 10px solid #ff5050;
+        display: flex;
+        align-items: center;
+        padding: 1rem !important;
+        font-size: 1.25rem;
+        font-weight: 300;
+      }
+    }
+  }
+
+  hr + hr {
+    + h3 {
+      position: relative;
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+
+      strong {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        color: $carbon--white-0;
+        font-size: 1.625rem;
+        top: 2.2rem;
+        left: 1.625rem;
+      }
+
+      > img {
+        width: auto !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+    }
+  }
+
+  blockquote + hr + p {
+    margin-top: 1rem;
+  }
+
+  hr + p img {
+    width: 100%;
+    display: block;
+
+    @include breakpoint('600px') {
+      width: auto;
+    }
+  }
+
+  hr + hr + blockquote {
+    margin-top: 1rem;
+  }
+
+  hr + hr + blockquote p {
+    margin-bottom: 1.5rem;
+  }
+
+  hr + hr + blockquote p img {
+    width: 100%;
+    position: static;
+    margin: 0;
+    float: none;
+    display: block;
+
+    @include breakpoint('600px') {
+      width: 50%;
+    }
+  }
+
+  hr + table {
+    max-width: 45rem;
+  }
+}

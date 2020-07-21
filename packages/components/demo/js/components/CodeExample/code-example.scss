@@ -1,0 +1,90 @@
+$temp-bg: #fff;
+
+.code-example {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 100%;
+
+  code[class*='language-'],
+  pre[class*='language-'] {
+    background-color: #fff;
+  }
+
+  pre[class*='language-'] {
+    padding-top: 0;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+.code-example__copy-btn {
+  height: 2.5rem;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  color: transparent;
+  background-color: #fff;
+  cursor: pointer;
+  z-index: 20;
+
+  &:focus {
+    @include focus-outline;
+  }
+
+  &:hover svg {
+    fill: $brand-02;
+  }
+
+  svg {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+}
+
+.code-example__raw-html {
+  background-color: #fff;
+  border: 2px solid #f5f7fa;
+  padding: 1rem 0;
+  max-height: 12rem;
+  min-height: 7rem;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: hidden;
+  transition: $transition--base;
+
+  &--expanded {
+    max-height: 100rem;
+    overflow: auto;
+  }
+}
+
+.code-example__expand {
+  position: absolute;
+  bottom: rem(2px);
+  right: rem(2px);
+  background-color: $temp-bg;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+
+  span {
+    font-size: rem(12px);
+  }
+
+  &--icon {
+    margin-left: 0.5rem;
+    transition: $transition--base;
+
+    &--rotated {
+      transform: rotate(180deg);
+    }
+  }
+
+  &--hidden {
+    display: none;
+  }
+}

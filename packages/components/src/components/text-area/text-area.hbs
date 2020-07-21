@@ -1,0 +1,51 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div class="{{@root.prefix}}--form-item">
+  <label for="text-area-2" class="{{@root.prefix}}--label">Text Area label</label>
+  <div class="{{@root.prefix}}--text-area__wrapper">
+    <textarea id="text-area-2"
+      class="{{@root.prefix}}--text-area {{@root.prefix}}--text-area--v2{{#if light}} {{@root.prefix}}--text-area--light{{/if}}"
+      rows="4" cols="50" placeholder="Placeholder text."></textarea>
+  </div>
+</div>
+
+<div class="{{@root.prefix}}--form-item">
+  <label for="text-area-3" class="{{@root.prefix}}--label">Text Area label</label>
+  <div class="{{@root.prefix}}--text-area__wrapper" data-invalid>
+    {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--text-area__invalid-icon')}}
+    <textarea id="text-area-3"
+      class="{{@root.prefix}}--text-area {{@root.prefix}}--text-area--invalid {{@root.prefix}}--text-area--v2{{#if light}} {{@root.prefix}}--text-area--light{{/if}}"
+      rows="4" cols="50" placeholder="Placeholder text."></textarea>
+  </div>
+  <div class="{{@root.prefix}}--form-requirement">
+    Validation message here
+  </div>
+</div>
+
+<div class="{{@root.prefix}}--form-item">
+  <label for="text-area-4" class="{{@root.prefix}}--label">Text Area label</label>
+  <div class="{{@root.prefix}}--text-area__wrapper">
+    <textarea id="text-area-4"
+      class="{{@root.prefix}}--text-area {{@root.prefix}}--text-area--v2{{#if light}} {{@root.prefix}}--text-area--light{{/if}}"
+      rows="4" cols="50" placeholder="Placeholder text."></textarea>
+  </div>
+  <div class="{{@root.prefix}}--form__helper-text">
+    Optional helper text goes here
+  </div>
+</div>
+
+<div class="bx--form-item">
+  <label for="text-area-5" class="bx--label bx--label--disabled">Text Area label</label>
+  <div class="{{@root.prefix}}--text-area__wrapper">
+    <textarea id="text-area-5" class="bx--text-area bx--text-area--v2{{#if light}} bx--text-area--light{{/if}}" rows="4"
+      cols="50" placeholder="Placeholder text." disabled></textarea>
+  </div>
+  <div class="{{@root.prefix}}--form__helper-text {{@root.prefix}}--form__helper-text--disabled">
+    Optional helper text goes here
+  </div>
+</div>

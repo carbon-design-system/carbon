@@ -4,7 +4,9 @@
 
 ### SCSS
 
-The `_breadcrumb.scss` file is now located at **src/components/breadcrumb/\_breadcrumb.scss**. You will need to update any `@import` statements for this file to reflect this change.
+The `_breadcrumb.scss` file is now located at
+**src/components/breadcrumb/\_breadcrumb.scss**. You will need to update any
+`@import` statements for this file to reflect this change.
 
 ```scss
 @import 'path_to_node_modules/carbon-components/src/components/breadcrumb/breadcrumb';

@@ -1,0 +1,19 @@
+.page-content {
+  padding: 2rem 4rem;
+  h1 {
+    text-align: center;
+  }
+  section {
+    margin-bottom: 2.5rem;
+    h2 {
+      margin-bottom: 0.5rem;
+    }
+    + section {
+      border-top: 1px solid #cdd1d4;
+      padding-top: 1rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+}

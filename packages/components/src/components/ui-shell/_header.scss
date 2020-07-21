@@ -1,0 +1,349 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/functions';
+@import '../../globals/scss/helper-classes';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
+@import 'theme';
+@import 'functions';
+
+/// UI shell header
+/// @access private
+/// @group ui-shell
+@mixin carbon-header {
+  .#{$prefix}--header {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: mini-units(6);
+    background-color: $shell-header-bg-01;
+    border-bottom: 1px solid $shell-header-border-01;
+    z-index: z('header');
+  }
+
+  .#{$prefix}--header__action {
+    @include button-reset();
+
+    width: mini-units(6);
+    height: mini-units(6);
+    border: rem(2px) solid transparent;
+    transition: background-color $duration--fast-02,
+      border-color $duration--fast-02;
+  }
+
+  .#{$prefix}--header__action
+    > svg.#{$prefix}--navigation-menu-panel-collapse-icon,
+  .#{$prefix}--header__action--active
+    > svg.#{$prefix}--navigation-menu-panel-expand-icon {
+    display: none;
+  }
+
+  .#{$prefix}--header__action--active
+    > svg.#{$prefix}--navigation-menu-panel-collapse-icon {
+    display: inline;
+  }
+
+  .#{$prefix}--header__action:hover {
+    background-color: $shell-header-bg-04;
+  }
+
+  .#{$prefix}--header__action--active {
+    border-left: 1px solid $shell-header-border-01;
+    border-right: 1px solid $shell-header-border-01;
+    border-bottom: 1px solid $shell-header-bg-01;
+  }
+
+  .#{$prefix}--header__action:focus {
+    border-color: $shell-header-focus;
+    outline: none;
+  }
+
+  .#{$prefix}--header__action:active {
+    background-color: $shell-header-bg-03;
+  }
+
+  .#{$prefix}--header__action > svg {
+    fill: $shell-header-icon-02;
+  }
+
+  .#{$prefix}--header__menu-trigger > svg {
+    fill: $shell-header-icon-01;
+  }
+
+  .#{$prefix}--header__menu-trigger:hover {
+    fill: $shell-header-bg-02;
+  }
+
+  .#{$prefix}--header__menu-toggle {
+    display: block;
+  }
+
+  .#{$prefix}--header__menu-toggle__hidden {
+    @include carbon--breakpoint('lg') {
+      display: none;
+    }
+  }
+
+  //--------------------------------------------------------------------------
+  // Header - Name
+  //--------------------------------------------------------------------------
+  a.#{$prefix}--header__name {
+    @include type-style('body-short-01');
+
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 mini-units(4) 0 mini-units(2);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.1px;
+    line-height: 1.25rem;
+    user-select: none;
+    border: rem(2px) solid transparent;
+    transition: border-color $duration--fast-02;
+    outline: none;
+  }
+
+  a.#{$prefix}--header__name:focus {
+    border-color: $shell-header-focus;
+  }
+
+  .#{$prefix}--header__name--prefix {
+    font-weight: 400;
+  }
+
+  a.#{$prefix}--header__name,
+  a.#{$prefix}--header__name:hover {
+    color: $shell-header-text-01;
+  }
+
+  //--------------------------------------------------------------------------
+  // Header - Navigation
+  //--------------------------------------------------------------------------
+  .#{$prefix}--header__nav {
+    height: 100%;
+    padding-left: mini-units(2);
+    position: relative;
+    display: none;
+
+    @include carbon--breakpoint('lg') {
+      display: block;
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: rem(24px);
+      width: rem(1px);
+      background-color: $shell-header-border-01;
+    }
+  }
+
+  .#{$prefix}--header__menu-bar {
+    display: flex;
+    height: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  a.#{$prefix}--header__menu-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: $shell-header-text-02;
+    padding: 0 mini-units(2);
+    // Used for links that are directly in the menubar to span the full height
+    height: 100%;
+    // Text styles
+    font-size: rem(14px);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.125rem;
+    // Reset link styles and make sure the text isn't selectable
+    text-decoration: none;
+    user-select: none;
+    // Used for focus styles
+    border: 2px solid transparent;
+    transition: background-color $duration--fast-02,
+      border-color $duration--fast-02, color $duration--fast-02;
+  }
+
+  a.#{$prefix}--header__menu-item:hover {
+    background-color: $shell-header-bg-02;
+    color: $shell-header-text-01;
+  }
+
+  .#{$prefix}--header__action:active,
+  a.#{$prefix}--header__menu-item:active {
+    background-color: $shell-header-bg-03;
+    color: $shell-header-text-01;
+  }
+
+  a.#{$prefix}--header__menu-item:focus {
+    border-color: $shell-header-focus;
+    color: $shell-header-text-01;
+    outline: none;
+  }
+
+  a.#{$prefix}--header__menu-item:hover > svg,
+  a.#{$prefix}--header__menu-item:active > svg,
+  a.#{$prefix}--header__menu-item:focus > svg {
+    fill: $shell-header-icon-01;
+  }
+
+  // Styles for selected state
+
+  a.#{$prefix}--header__menu-item[aria-current='page']::after,
+  .#{$prefix}--header__menu-item--current::after {
+    content: '';
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    border-bottom: 3px solid $inverse-support-04;
+  }
+
+  a.#{$prefix}--header__menu-item[aria-current='page']:focus::after,
+  .#{$prefix}--header__menu-item--current:focus::after {
+    border: 0;
+  }
+
+  a.#{$prefix}--header__menu-item[aria-current='page']:focus,
+  a.#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current:focus {
+    border: 2px solid $shell-header-focus;
+  }
+
+  .#{$prefix}--header__submenu {
+    position: relative;
+  }
+
+  .#{$prefix}--header__menu-title[aria-haspopup='true'] {
+    position: relative;
+  }
+
+  .#{$prefix}--header__menu-title[aria-expanded='true'] {
+    background-color: $shell-header-bg-06;
+    color: $shell-header-focus;
+    // Note: needs to be higher than menu. Adding 1 here instead of moving to
+    // the next level.
+    z-index: #{z('header') + 1};
+  }
+
+  .#{$prefix}--header__menu-title[aria-expanded='true']
+    > .#{$prefix}--header__menu-arrow {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--header__menu {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .#{$prefix}--header__menu-title[aria-expanded='true']
+    + .#{$prefix}--header__menu {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    width: mini-units(25);
+    flex-direction: column;
+    transform: translateY(100%);
+    background-color: $shell-header-bg-06;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    z-index: z('header');
+  }
+
+  .#{$prefix}--header__menu-title[aria-expanded='true']
+    + .#{$prefix}--header__menu
+    .#{$prefix}--header__menu-item:hover {
+    background-color: $shell-header-bg-04;
+  }
+
+  .#{$prefix}--header__menu-title[aria-expanded='true']
+    + .#{$prefix}--header__menu
+    .#{$prefix}--header__menu-item:active {
+    background-color: $shell-header-bg-03;
+  }
+
+  .#{$prefix}--header__menu .#{$prefix}--header__menu-item {
+    height: mini-units(6);
+  }
+
+  .#{$prefix}--header__menu .#{$prefix}--header__menu-item:hover {
+    background-color: $shell-header-bg-06;
+    color: $shell-header-text-01;
+  }
+
+  .#{$prefix}--header__menu-arrow {
+    fill: $shell-header-icon-03;
+    margin-left: mini-units(1);
+    transition: transform $duration--fast-02, fill $duration--fast-02;
+  }
+
+  //--------------------------------------------------------------------------
+  // Header - Global
+  //--------------------------------------------------------------------------
+  .#{$prefix}--header__global {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1 1 0%;
+    height: 100%;
+  }
+
+  //--------------------------------------------------------------------------
+  // Header - Skip to content
+  //--------------------------------------------------------------------------
+  .#{$prefix}--skip-to-content {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    visibility: inherit;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--skip-to-content:focus {
+    display: flex;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 3rem;
+    clip: auto;
+    border: 4px solid $ibm-color__blue-60;
+    z-index: 9999;
+    background-color: $shell-header-bg-01;
+    color: $shell-header-text-01;
+    outline: none;
+    padding: 0 1rem;
+  }
+}
+
+@include exports('carbon-header') {
+  @if feature-flag-enabled('ui-shell') {
+    @include carbon-header;
+  }
+}

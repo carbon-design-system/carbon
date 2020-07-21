@@ -1,0 +1,200 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalWrapper should render 1`] = `
+<ModalWrapper
+  aria-label="test modal"
+  buttonTriggerClassName="btn-trigger"
+  buttonTriggerText="Test Modal"
+  disabled={false}
+  handleSubmit={[MockFunction]}
+  id="modal"
+  modalHeading="Transactional Modal"
+  modalLabel="Test Modal Label"
+  onKeyDown={[Function]}
+  primaryButtonText="Save"
+  secondaryButtonText="Cancel"
+  selectorPrimaryFocus="[data-modal-primary-focus]"
+  shouldCloseAfterSubmit={true}
+  triggerButtonIconDescription="Provide icon description if icon is used"
+  triggerButtonKind="primary"
+>
+  <div
+    onKeyDown={[Function]}
+    role="presentation"
+  >
+    <ForwardRef(Button)
+      className="btn-trigger"
+      disabled={false}
+      iconDescription="Provide icon description if icon is used"
+      kind="primary"
+      onClick={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <button
+        className="btn-trigger bx--btn bx--btn--primary"
+        disabled={false}
+        onClick={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        Test Modal
+      </button>
+    </ForwardRef(Button)>
+    <Modal
+      aria-label="test modal"
+      hasScrollingContent={false}
+      iconDescription="Close"
+      id="modal"
+      modalHeading="Transactional Modal"
+      modalLabel="Test Modal Label"
+      onKeyDown={[Function]}
+      onRequestClose={[Function]}
+      onRequestSubmit={[Function]}
+      open={false}
+      passiveModal={false}
+      primaryButtonDisabled={false}
+      primaryButtonText="Save"
+      secondaryButtonText="Cancel"
+      selectorPrimaryFocus="[data-modal-primary-focus]"
+    >
+      <div
+        aria-label="test modal"
+        className="bx--modal bx--modal-tall"
+        id="modal"
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onMouseDown={[Function]}
+        role="presentation"
+      >
+        <span
+          className="bx--visually-hidden"
+          role="link"
+          tabIndex="0"
+        >
+          Focus sentinel
+        </span>
+        <div
+          aria-label="Test Modal Label"
+          aria-modal="true"
+          className="bx--modal-container"
+          role="dialog"
+          tabIndex="-1"
+        >
+          <div
+            className="bx--modal-header"
+          >
+            <h2
+              className="bx--modal-header__label"
+              id="bx--modal-header__label--modal-1"
+            >
+              Test Modal Label
+            </h2>
+            <h3
+              className="bx--modal-header__heading"
+              id="bx--modal-header__heading--modal-1"
+            >
+              Transactional Modal
+            </h3>
+            <button
+              aria-label="Close"
+              className="bx--modal-close"
+              onClick={[Function]}
+              title="Close"
+              type="button"
+            >
+              <ForwardRef(Close20)
+                aria-label="Close"
+                className="bx--modal-close__icon"
+              >
+                <Icon
+                  aria-label="Close"
+                  className="bx--modal-close__icon"
+                  fill="currentColor"
+                  height={20}
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 32 32"
+                  width={20}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <svg
+                    aria-label="Close"
+                    className="bx--modal-close__icon"
+                    fill="currentColor"
+                    focusable="false"
+                    height={20}
+                    preserveAspectRatio="xMidYMid meet"
+                    role="img"
+                    viewBox="0 0 32 32"
+                    width={20}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                    />
+                  </svg>
+                </Icon>
+              </ForwardRef(Close20)>
+            </button>
+          </div>
+          <div
+            aria-labelledby="bx--modal-header__label--modal-1"
+            className="bx--modal-content"
+          >
+            <p
+              className="bx--modal-content__text"
+            >
+              Text
+            </p>
+          </div>
+          <div
+            className="bx--modal-footer"
+          >
+            <ForwardRef(Button)
+              disabled={false}
+              kind="secondary"
+              onClick={[Function]}
+              tabIndex={0}
+              type="button"
+            >
+              <button
+                className="bx--btn bx--btn--secondary"
+                disabled={false}
+                onClick={[Function]}
+                tabIndex={0}
+                type="button"
+              >
+                Cancel
+              </button>
+            </ForwardRef(Button)>
+            <ForwardRef(Button)
+              disabled={false}
+              kind="primary"
+              onClick={[Function]}
+              tabIndex={0}
+              type="button"
+            >
+              <button
+                className="bx--btn bx--btn--primary"
+                disabled={false}
+                onClick={[Function]}
+                tabIndex={0}
+                type="button"
+              >
+                Save
+              </button>
+            </ForwardRef(Button)>
+          </div>
+        </div>
+        <span
+          className="bx--visually-hidden"
+          role="link"
+          tabIndex="0"
+        >
+          Focus sentinel
+        </span>
+      </div>
+    </Modal>
+  </div>
+</ModalWrapper>
+`;

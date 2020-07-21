@@ -1,0 +1,67 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div class="{{@root.prefix}}--pagination" data-pagination>
+  <div class="{{@root.prefix}}--pagination__left">
+    <label id="select-id-pagination-count-label{{#if disabledPaginationButton}}--disabled-example{{/if}}"
+      class="{{@root.prefix}}--pagination__text"
+      for="select-id-pagination-count{{#if disabledPaginationButton}}--disabled-example{{/if}}">
+      Items per page:
+    </label>
+    <div class="{{@root.prefix}}--select {{@root.prefix}}--select--inline {{@root.prefix}}--select__item-count">
+      <select class="{{@root.prefix}}--select-input"
+        id="select-id-pagination-count{{#if disabledPaginationButton}}--disabled-example{{/if}}"
+        aria-label="Items per page" tabindex="0" data-items-per-page>
+        {{#each itemsPerPageChoices}}
+        <option class="{{@root.prefix}}--select-option" value="{{value}}">
+          {{label}}
+        </option>
+        {{/each}}
+      </select>
+      {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow') }}
+    </div>
+    <span class="{{@root.prefix}}--pagination__text">
+      <span data-displayed-item-range>1 – 10</span> of
+      <span data-total-items>
+        {{#if disabledPaginationButton}}
+        10
+        {{else}}
+        40
+        {{/if}}
+      </span> items
+    </span>
+  </div>
+  <div class="{{@root.prefix}}--pagination__right">
+    <div class="{{@root.prefix}}--select {{@root.prefix}}--select--inline {{@root.prefix}}--select__page-number">
+      <select class="{{@root.prefix}}--select-input"
+        id="select-id-pagination-page{{#if disabledPaginationButton}}--disabled-example{{/if}}"
+        aria-label="page number, of {{totalPages}} pages" tabindex="0" data-page-number-input>
+        {{#each pageNumberChoices}}
+        <option class="{{@root.prefix}}--select-option" value="{{value}}">
+          {{label}}
+        </option>
+        {{/each}}
+      </select>
+      {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow')}}
+    </div>
+    <label id="select-id-pagination-page-label{{#if disabledPaginationButton}}--disabled-example{{/if}}"
+      class="{{@root.prefix}}--pagination__text"
+      for="select-id-pagination-page{{#if disabledPaginationButton}}--disabled-example{{/if}}">
+      of {{totalPages}} pages
+    </label>
+    <button
+      class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--backward {{#if disabledPaginationButton}}{{@root.prefix}}--pagination__button--no-index{{/if}}"
+      tabindex="0" data-page-backward aria-label="previous page">
+      {{ carbon-icon 'CaretLeft20' class=(add @root.prefix '--pagination__nav-arrow')}}
+    </button>
+    <button
+      class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--forward {{#if disabledPaginationButton}}{{@root.prefix}}--pagination__button--no-index{{/if}}"
+      tabindex="0" data-page-forward aria-label="next page">
+      {{ carbon-icon 'CaretRight20' class=(add @root.prefix '--pagination__nav-arrow')}}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,154 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/vars';
+
+/// Data table sort styles
+/// @access private
+/// @group data-table
+@mixin data-table-sort {
+  // -------------------------------------
+  // Sortable table
+  // -------------------------------------
+  .#{$prefix}--data-table--sort th {
+    height: $layout-04;
+    border-top: none;
+    border-bottom: none;
+  }
+
+  // -------------------------------------
+  // Th > Button
+  // -------------------------------------
+  .#{$prefix}--table-sort {
+    @include button-reset(false);
+
+    font: inherit;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    color: $text-01;
+    min-height: 100%;
+    background-color: $ui-03;
+    transition: background-color $duration--fast-01 motion(entrance, productive),
+      outline $duration--fast-01 motion(entrance, productive);
+  }
+
+  .#{$prefix}--table-sort:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--table-sort:hover {
+    background: $data-table-column-hover;
+  }
+
+  // changes opacity when th is inactive (see line 161)
+  .#{$prefix}--table-sort:focus svg,
+  .#{$prefix}--table-sort:hover svg {
+    opacity: 1;
+  }
+
+  // -------------------------------------
+  // Th > Button > Span (span required for flex bugs in Safari)
+  // -------------------------------------
+  .#{$prefix}--data-table--sort th .#{$prefix}--table-sort__flex {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  // -------------------------------------
+  //Th > Button > Svg (Sort Icons)
+  // -------------------------------------
+  // inactive icons
+  .#{$prefix}--table-sort .#{$prefix}--table-sort__icon-inactive {
+    display: block;
+  }
+
+  .#{$prefix}--table-sort .#{$prefix}--table-sort__icon {
+    display: none;
+  }
+
+  .#{$prefix}--table-sort__icon-unsorted {
+    margin-left: $spacing-03;
+    margin-right: $spacing-05;
+    opacity: 0;
+    fill: $ui-05;
+    width: auto;
+    min-width: $layout-01;
+  }
+
+  // active icons
+  .#{$prefix}--table-sort.#{$prefix}--table-sort--active
+    .#{$prefix}--table-sort__icon-unsorted {
+    display: none;
+  }
+
+  .#{$prefix}--table-sort.#{$prefix}--table-sort--active
+    .#{$prefix}--table-sort__icon {
+    display: block;
+    opacity: 1;
+  }
+
+  .#{$prefix}--table-sort--ascending .#{$prefix}--table-sort__icon {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--table-sort__icon {
+    margin-left: $spacing-03;
+    margin-right: $spacing-05;
+    transition: transform $transition--base $carbon--standard-easing;
+    transform: rotate(0);
+    opacity: 1;
+    fill: $ui-05;
+    width: auto;
+    min-width: $layout-01;
+  }
+
+  //----------------------------------------------------------------------------
+  // Compact, Short, Tall Sortable
+  //----------------------------------------------------------------------------
+  // Sortable compact
+  .#{$prefix}--data-table--compact.#{$prefix}--data-table--sort th {
+    height: rem(24px);
+  }
+
+  // Sortable Short
+  .#{$prefix}--data-table--short.#{$prefix}--data-table--sort th {
+    height: rem(32px);
+  }
+
+  // Sortable Tall
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort th {
+    height: rem(64px);
+  }
+
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort {
+    display: inline-block;
+    height: rem(64px);
+  }
+
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    align-items: flex-start;
+  }
+
+  .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon-unsorted,
+  .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon {
+    margin-top: rem(13px);
+  }
+}
+
+@include exports('data-table-sort') {
+  @include data-table-sort;
+}
