@@ -10,7 +10,8 @@
   "workspaces": {
     "packages": [
       "packages/*",
-      "actions/*"
+      "actions/*",
+      "config/*"
     ],
     "nohoist": []
   },
@@ -139,7 +140,7 @@
   },
   "stylelint": {
     "extends": [
-      "./packages/stylelint-config-carbon"
+      "./config/stylelint-config-carbon"
     ]
   },
   "jest": {
