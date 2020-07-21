@@ -269,11 +269,17 @@
     // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
     position: static;
     background: $ui-03;
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
-    // 16px padding left + 8px padding right + 20px checkbox width
-    width: rem(44px);
     transition: background-color $duration--fast-01 motion(entrance, productive);
+  }
+
+  .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table td.#{$prefix}--table-column-checkbox {
+    // 16px padding left + 20px checkbox width
+    width: rem(36px);
+    padding-left: $spacing-05;
+    // spacing between checkbox and next cell should be 16px / 1rem
+    // adjacent cell has 16px / 1rem padding-left though, hence the removal of padding-right here
+    padding-right: 0;
   }
 
   .#{$prefix}--data-table--tall .#{$prefix}--table-column-checkbox {
