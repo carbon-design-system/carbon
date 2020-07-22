@@ -28,6 +28,10 @@
     @include focus-outline('invalid');
   }
 
+  .#{$prefix}--time-picker--invalid + .#{$prefix}--form-requirement {
+    color: $text-error;
+  }
+
   .#{$prefix}--time-picker__select {
     justify-content: center;
 
