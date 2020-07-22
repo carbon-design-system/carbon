@@ -374,12 +374,14 @@ export default class Modal extends Component {
         }
       : {};
 
-    const alertDialogProps = alert
-      ? {
-          role: 'alertdialog',
-          'aria-describedby': this.modalBodyId,
-        }
-      : {};
+    const alertDialogProps = {};
+    if (alert && passiveModal) {
+      alertDialogProps.role = 'alert';
+    }
+    if (alert && !passiveModal) {
+      alertDialogProps.role = 'alertdialog';
+      alertDialogProps['aria-describedby'] = this.modalBodyId;
+    }
 
     const modalBody = (
       <div
