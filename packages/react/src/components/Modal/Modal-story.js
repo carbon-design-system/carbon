@@ -28,6 +28,7 @@ const props = () => ({
   open: boolean('Open (open)', true),
   passiveModal: boolean('Without footer (passiveModal)', false),
   danger: boolean('Danger mode (danger)', false),
+  alert: boolean('Alert mode (alert)', false),
   shouldSubmitOnEnter: boolean(
     'Enter key to submit (shouldSubmitOnEnter)',
     false
@@ -71,6 +72,7 @@ const titleOnlyProps = () => {
     open: boolean('Open (open)', true),
     passiveModal,
     danger: !passiveModal && boolean('Danger mode (danger)', false),
+    alert: !passiveModal && boolean('Alert mode (alert)', false),
     modalHeading: text(
       'Modal heading (modalHeading)',
       `
