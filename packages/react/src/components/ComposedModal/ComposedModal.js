@@ -121,11 +121,11 @@ export default class ComposedModal extends Component {
   }) => {
     const { open, selectorsFloatingMenus } = this.props;
     if (open && currentActiveNode && oldActiveNode) {
-      const { current: modalNode } = this.innerModal;
+      const { current: bodyNode } = this.innerModal;
       const { current: startSentinelNode } = this.startSentinel;
       const { current: endSentinelNode } = this.endSentinel;
       wrapFocus({
-        modalNode,
+        bodyNode,
         startSentinelNode,
         endSentinelNode,
         currentActiveNode,
