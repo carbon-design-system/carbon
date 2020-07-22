@@ -118,6 +118,7 @@
 
     .#{$prefix}--tree-node--selected > .#{$prefix}--tree-node__label {
       background-color: $selected-ui;
+      color: $text-01;
 
       &:hover {
         background-color: $hover-selected-ui;
