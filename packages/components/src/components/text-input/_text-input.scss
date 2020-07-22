@@ -176,6 +176,10 @@
 
     box-shadow: none;
 
+    &:focus {
+      @include focus-outline('invalid');
+    }
+
     .#{$prefix}--text-input--password__visibility,
     // TODO: remove selector above
     .#{$prefix}--text-input--password__visibility__toggle {
