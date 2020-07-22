@@ -38,6 +38,7 @@
     .#{$prefix}--tree-node--disabled {
       background-color: $disabled-01;
       color: $disabled-02;
+      pointer-events: none;
     }
 
     .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__label:hover {
