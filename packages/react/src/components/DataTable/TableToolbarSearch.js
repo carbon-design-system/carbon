@@ -112,7 +112,6 @@ const TableToolbarSearch = ({
         tabIndex={expandedState ? tabIndex : '-1'}
         className={className}
         value={value}
-        f
         id={typeof id !== 'undefined' ? id : uniqueId.toString()}
         aria-hidden={!expanded}
         labelText={labelText || t('carbon.table.toolbar.search.label')}
