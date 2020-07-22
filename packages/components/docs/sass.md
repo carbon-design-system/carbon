@@ -20075,7 +20075,8 @@ Inline notification styles
     fill: map-get($carbon--theme--white, 'text-01');
   }
 
-  .#{$prefix}--inline-notification__action-button {
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button {
     color: $interactive-01;
 
     &:active {
