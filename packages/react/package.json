@@ -29,7 +29,8 @@
     "clean": "rimraf es lib umd storybook-static build react-docgen.json",
     "prepublish": "yarn build",
     "start": "yarn storybook",
-    "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000"
+    "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000",
+    "snapshot": "build-storybook && percy-storybook --widths=320,1280"
   },
   "peerDependencies": {
     "carbon-components": "^10.9.0",
@@ -66,6 +67,7 @@
     "@babel/preset-env": "^7.10.0",
     "@babel/preset-react": "^7.10.0",
     "@carbon/test-utils": "^10.10.0",
+    "@percy/storybook": "^3.3.0",
     "@storybook/addon-a11y": "^5.3.19",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-info": "^5.3.19",
