@@ -4123,6 +4123,31 @@ Map {
       },
     },
   },
+  "PaginationNav" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "itemsShown": Object {
+        "type": "number",
+      },
+      "loop": Object {
+        "type": "bool",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "page": Object {
+        "type": "number",
+      },
+      "totalItems": Object {
+        "type": "number",
+      },
+      "translateWithId": Object {
+        "type": "func",
+      },
+    },
+  },
   "PrimaryButton" => Object {},
   "ProgressIndicator" => Object {
     "defaultProps": Object {
