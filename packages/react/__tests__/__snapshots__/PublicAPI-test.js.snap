@@ -5283,6 +5283,8 @@ Map {
       "onChange": [Function],
       "onClick": [Function],
       "type": "text",
+      "warn": false,
+      "warnText": "",
     },
     "propTypes": Object {
       "className": Object {
@@ -5363,6 +5365,12 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "string",
       },
     },
     "render": [Function],

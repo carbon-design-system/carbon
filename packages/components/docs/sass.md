@@ -7003,7 +7003,6 @@ $text-error: if(
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [number-input [mixin]](#number-input-mixin)
-  - [select [mixin]](#select-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -7393,6 +7392,7 @@ $support-03: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [text-input [mixin]](#text-input-mixin)
 
 ### ✅support-04 [variable]
 
@@ -16037,11 +16037,30 @@ Data table core styles
     // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
     position: static;
     background: $ui-03;
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
-    // 16px padding left + 8px padding right + 20px checkbox width
-    width: rem(44px);
     transition: background-color $duration--fast-01 motion(entrance, productive);
+  }
+
+  .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
+    min-width: 0;
+    padding-left: $spacing-05;
+    // spacing between checkbox / chevron and next cell should be 16px / 1rem
+    // adjacent cell has 16px / 1rem padding-left though, hence the removal of padding-right here
+    padding-right: 0;
+  }
+
+  .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox {
+    // 16px padding left + 20px checkbox width
+    width: rem(36px);
+  }
+
+  .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
+    // 16px padding left + 16px checkbox width
+    width: rem(32px);
   }
 
   .#{$prefix}--data-table--tall .#{$prefix}--table-column-checkbox {
@@ -16061,6 +16080,10 @@ Data table core styles
   //----------------------------------------------------------------------------
   .#{$prefix}--table-column-radio {
     width: 48px;
+  }
+
+  .#{$prefix}--table-column-radio .#{$prefix}--radio-button__appearance {
+    margin-right: rem(-2px);
   }
 
   // default selected row + zebra select - even child
@@ -17979,6 +18002,7 @@ Form styles
 
   input[data-invalid],
   .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-input--warn,
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--time-picker[data-invalid],
@@ -17986,13 +18010,23 @@ Form styles
     ~ .#{$prefix}--form-requirement {
       max-height: rem(200px);
       display: block;
+    }
+  }
+
+  input[data-invalid],
+  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-area__wrapper[data-invalid],
+  .#{$prefix}--select-input__wrapper[data-invalid],
+  .#{$prefix}--time-picker[data-invalid],
+  .#{$prefix}--list-box[data-invalid] {
+    ~ .#{$prefix}--form-requirement {
       color: $text-error;
     }
   }
 
   //Fluid Form
-  .#{$prefix}--form--fluid
-    .#{$prefix}--text-input__field-wrapper[data-invalid] {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-warn] {
     display: block;
   }
 
@@ -22448,7 +22482,6 @@ Select styles
 
   .#{$prefix}--form-requirement {
     display: block;
-    color: $text-error;
     font-weight: 400;
     overflow: visible;
   }
@@ -22600,7 +22633,6 @@ Select styles
   - [ui-04 [variable]](#ui-04-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
-  - [text-error [variable]](#text-error-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -23806,6 +23838,15 @@ Text input styles
       fill: $support-01;
     }
 
+    .#{$prefix}--text-input__invalid-icon--warning {
+      fill: $support-03;
+
+      path[data-icon-path='inner-path'] {
+        opacity: 1;
+        fill: $carbon__black-100;
+      }
+    }
+
     // TODO: deprecate this style block
     .#{$prefix}--text-input--password__visibility {
       @include tooltip--trigger('icon', 'bottom');
@@ -23929,12 +23970,16 @@ Text input styles
     display: none;
   }
 
-  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid,
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--warn {
     border-bottom: none;
   }
 
   .#{$prefix}--form--fluid
     .#{$prefix}--text-input--invalid
+    + .#{$prefix}--text-input__divider,
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input--warn
     + .#{$prefix}--text-input__divider {
     display: block;
     margin: 0 1rem;
@@ -24013,6 +24058,7 @@ Text input styles
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [field-02 [variable]](#field-02-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [support-03 [variable]](#support-03-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
