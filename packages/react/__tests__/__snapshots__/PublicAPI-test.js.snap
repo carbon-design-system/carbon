@@ -3072,6 +3072,9 @@ Map {
       "selectorPrimaryFocus": "[data-modal-primary-focus]",
     },
     "propTypes": Object {
+      "alert": Object {
+        "type": "bool",
+      },
       "aria-label": [Function],
       "children": Object {
         "type": "node",

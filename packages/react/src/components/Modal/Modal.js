@@ -119,6 +119,12 @@ export default class Modal extends Component {
     danger: PropTypes.bool,
 
     /**
+     * Specify whether the Modal is displaying an alert, error or warning
+     * Should go hand in hand with the danger prop.
+     */
+    alert: PropTypes.bool,
+
+    /**
      * Specify if Enter key should be used as "submit" action
      */
     shouldSubmitOnEnter: PropTypes.bool,
@@ -184,6 +190,7 @@ export default class Modal extends Component {
   modalInstanceId = `modal-${getInstanceId()}`;
   modalLabelId = `${prefix}--modal-header__label--${this.modalInstanceId}`;
   modalHeadingId = `${prefix}--modal-header__heading--${this.modalInstanceId}`;
+  modalBodyId = `${prefix}--modal-body--${this.modalInstanceId}`;
 
   handleKeyDown = (evt) => {
     if (this.props.open) {
@@ -307,6 +314,7 @@ export default class Modal extends Component {
       iconDescription,
       primaryButtonDisabled,
       danger,
+      alert,
       selectorPrimaryFocus, // eslint-disable-line
       selectorsFloatingMenus, // eslint-disable-line
       shouldSubmitOnEnter, // eslint-disable-line
@@ -366,10 +374,20 @@ export default class Modal extends Component {
         }
       : {};
 
+    const alertDialogProps = {};
+    if (alert && passiveModal) {
+      alertDialogProps.role = 'alert';
+    }
+    if (alert && !passiveModal) {
+      alertDialogProps.role = 'alertdialog';
+      alertDialogProps['aria-describedby'] = this.modalBodyId;
+    }
+
     const modalBody = (
       <div
         ref={this.innerModal}
         role="dialog"
+        {...alertDialogProps}
         className={containerClasses}
         aria-label={ariaLabel}
         aria-modal="true"
@@ -391,6 +409,7 @@ export default class Modal extends Component {
           {!passiveModal && modalButton}
         </div>
         <div
+          id={this.modalBodyId}
           className={contentClasses}
           {...hasScrollingContentProps}
           aria-labelledby={getAriaLabelledBy}>
