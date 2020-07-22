@@ -224,6 +224,21 @@ class Tooltip extends Component {
    */
   _triggerRef = React.createRef();
 
+  /**
+   * Unique tooltip ID that is user-provided or auto-generated
+   * Referenced in aria-labelledby attribute
+   * @type {string}
+   * @private
+   */
+  _tooltipId =
+    this.props.id || `__carbon-tooltip_${Math.random().toString(36).substr(2)}`;
+
+  /**
+   * Internal flag for tracking whether or not focusing on the tooltip trigger
+   * should automatically display the tooltip body
+   */
+  _tooltipDismissed = false;
+
   componentDidMount() {
     if (!this._debouncedHandleFocus) {
       this._debouncedHandleFocus = debounce(this._handleFocus, 200);
@@ -255,9 +270,15 @@ class Tooltip extends Component {
   }
 
   _handleUserInputOpenClose = (event, { open }) => {
+    // capture tooltip body element before it is removed from the DOM
+    const tooltipBody = this._tooltipEl;
     this.setState({ open }, () => {
       if (this.props.onChange) {
         this.props.onChange(event, { open });
+      }
+      if (!open && tooltipBody && tooltipBody.id === this._tooltipId) {
+        this._tooltipDismissed = true;
+        this._triggerRef?.current.focus();
       }
     });
   };
@@ -270,15 +291,16 @@ class Tooltip extends Component {
   _handleFocus = (state, evt) => {
     const { relatedTarget } = evt;
     if (state === 'over') {
-      this._handleUserInputOpenClose(evt, { open: true });
+      if (!this._tooltipDismissed) {
+        this._handleUserInputOpenClose(evt, { open: true });
+      }
+      this._tooltipDismissed = false;
     } else {
       // Note: SVGElement in IE11 does not have `.contains()`
       const { current: triggerEl } = this._triggerRef;
       const shouldPreventClose =
         relatedTarget &&
-        ((triggerEl &&
-          triggerEl.contains &&
-          triggerEl.contains(relatedTarget)) ||
+        ((triggerEl && triggerEl?.contains(relatedTarget)) ||
           (this._tooltipEl && this._tooltipEl.contains(relatedTarget)));
       if (!shouldPreventClose) {
         this._handleUserInputOpenClose(evt, { open: false });
@@ -368,9 +390,6 @@ class Tooltip extends Component {
       triggerId = (this.triggerId =
         this.triggerId ||
         `__carbon-tooltip-trigger_${Math.random().toString(36).substr(2)}`),
-      tooltipId = (this.tooltipId =
-        this.tooltipId ||
-        `__carbon-tooltip_${Math.random().toString(36).substr(2)}`),
       tooltipBodyId,
       children,
       className,
@@ -413,9 +432,9 @@ class Tooltip extends Component {
       onMouseOut: this.handleMouse,
       onFocus: this.handleMouse,
       onBlur: this.handleMouse,
-      'aria-controls': !open ? undefined : tooltipId,
+      'aria-controls': !open ? undefined : this._tooltipId,
       'aria-expanded': open,
-      'aria-describedby': open ? tooltipId : null,
+      'aria-describedby': open ? this._tooltipId : null,
       // if the user provides property `triggerText`,
       // then the button should use aria-labelledby to point to its id,
       // if the user doesn't provide property `triggerText`,
@@ -435,8 +454,11 @@ class Tooltip extends Component {
           {showIcon ? (
             <div id={triggerId} className={triggerClasses}>
               {triggerText}
-              <div className={`${prefix}--tooltip__trigger`} {...properties}>
-                <IconCustomElement ref={refProp} {...iconProperties} />
+              <div
+                className={`${prefix}--tooltip__trigger`}
+                {...properties}
+                ref={refProp}>
+                <IconCustomElement {...iconProperties} />
               </div>
             </div>
           ) : (
@@ -451,6 +473,7 @@ class Tooltip extends Component {
         </ClickListener>
         {open && (
           <FloatingMenu
+            focusTrap
             selectorPrimaryFocus={this.props.selectorPrimaryFocus}
             target={this._getTarget}
             triggerRef={this._triggerRef}
@@ -460,7 +483,7 @@ class Tooltip extends Component {
               this._tooltipEl = node;
             }}>
             <div
-              id={tooltipId}
+              id={this._tooltipId}
               className={tooltipClasses}
               {...other}
               data-floating-menu-direction={direction}
