@@ -46,7 +46,7 @@ describe('wrapFocus', () => {
 
   it('runs forward focus-wrap when following outer node is focused on', () => {
     wrapFocus({
-      modalNode: node.querySelector('#inner-modal'),
+      bodyNode: node.querySelector('#inner-modal'),
       startSentinelNode: node.querySelector('#start-sentinel'),
       endSentinelNode: node.querySelector('#end-sentinel'),
       currentActiveNode: node.querySelector('#outer-following'),
@@ -57,7 +57,7 @@ describe('wrapFocus', () => {
 
   it('runs forward focus-wrap when following focus sentinel is focused on', () => {
     wrapFocus({
-      modalNode: node.querySelector('#inner-modal'),
+      bodyNode: node.querySelector('#inner-modal'),
       startSentinelNode: node.querySelector('#start-sentinel'),
       endSentinelNode: node.querySelector('#end-sentinel'),
       currentActiveNode: node.querySelector('#end-sentinel'),
@@ -68,7 +68,7 @@ describe('wrapFocus', () => {
 
   it('runs reverse focus-wrap when preceding outer node is focused on', () => {
     wrapFocus({
-      modalNode: node.querySelector('#inner-modal'),
+      bodyNode: node.querySelector('#inner-modal'),
       startSentinelNode: node.querySelector('#start-sentinel'),
       endSentinelNode: node.querySelector('#end-sentinel'),
       currentActiveNode: node.querySelector('#outer-preceding'),
@@ -79,7 +79,7 @@ describe('wrapFocus', () => {
 
   it('runs reverse focus-wrap when preceding focus sentinel is focused on', () => {
     wrapFocus({
-      modalNode: node.querySelector('#inner-modal'),
+      bodyNode: node.querySelector('#inner-modal'),
       startSentinelNode: node.querySelector('#start-sentinel'),
       endSentinelNode: node.querySelector('#end-sentinel'),
       currentActiveNode: node.querySelector('#start-sentinel'),
@@ -90,7 +90,7 @@ describe('wrapFocus', () => {
 
   it('does not run focus-wrap when a floating menu is focused on', () => {
     wrapFocus({
-      modalNode: node.querySelector('#inner-modal'),
+      bodyNode: node.querySelector('#inner-modal'),
       startSentinelNode: node.querySelector('#start-sentinel'),
       endSentinelNode: node.querySelector('#end-sentinel'),
       currentActiveNode: node.querySelector('.bx--tooltip'),
@@ -106,7 +106,7 @@ describe('wrapFocus', () => {
       '#inner-modal'
     ).innerHTML = `<div id="dummy-old-active-node"></div>`;
     wrapFocus({
-      modalNode: node.querySelector('#inner-modal'),
+      bodyNode: node.querySelector('#inner-modal'),
       startSentinelNode: node.querySelector('#start-sentinel'),
       endSentinelNode: node.querySelector('#end-sentinel'),
       currentActiveNode: node.querySelector('#outer-following'),
@@ -120,7 +120,7 @@ describe('wrapFocus', () => {
       '#inner-modal'
     ).innerHTML = `<div id="dummy-old-active-node"></div>`;
     wrapFocus({
-      modalNode: node.querySelector('#inner-modal'),
+      bodyNode: node.querySelector('#inner-modal'),
       startSentinelNode: node.querySelector('#start-sentinel'),
       endSentinelNode: node.querySelector('#end-sentinel'),
       currentActiveNode: node.querySelector('#outer-preceding'),
