@@ -215,11 +215,11 @@ export default class Modal extends Component {
   }) => {
     const { open, selectorsFloatingMenus } = this.props;
     if (open && currentActiveNode && oldActiveNode) {
-      const { current: modalNode } = this.innerModal;
+      const { current: bodyNode } = this.innerModal;
       const { current: startTrapNode } = this.startTrap;
       const { current: endTrapNode } = this.endTrap;
       wrapFocus({
-        modalNode,
+        bodyNode,
         startTrapNode,
         endTrapNode,
         currentActiveNode,
