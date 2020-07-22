@@ -87,6 +87,17 @@ article {
   background: none;
 }
 
+// Narrow
+.bx--grid--narrow [class*='col'],
+.bx--row--narrow [class*='col'] {
+ background: #9ef0f0;
+}
+
+.bx--grid--narrow .inside,
+.bx--row--narrow .inside {
+ background: #d9fbfb;
+}
+
 // Bleed
 .bleed {
   background-color: #171717;
