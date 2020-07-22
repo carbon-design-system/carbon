@@ -2717,6 +2717,9 @@ Map {
       "fullWidth": Object {
         "type": "bool",
       },
+      "narrow": Object {
+        "type": "bool",
+      },
     },
   },
   "Row" => Object {
@@ -2741,6 +2744,9 @@ Map {
         "type": "string",
       },
       "condensed": Object {
+        "type": "bool",
+      },
+      "narrow": Object {
         "type": "bool",
       },
     },
