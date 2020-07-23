@@ -16044,10 +16044,10 @@ Data table core styles
   .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
     min-width: 0;
-    padding-left: $spacing-05;
     // spacing between checkbox / chevron and next cell should be 16px / 1rem
     // adjacent cell has 16px / 1rem padding-left though, hence the removal of padding-right here
     padding-right: 0;
+    padding-left: $spacing-05;
   }
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
