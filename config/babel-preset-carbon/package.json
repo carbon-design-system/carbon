@@ -1,0 +1,28 @@
+{
+  "name": "babel-preset-carbon",
+  "private": true,
+  "description": "Babel preset for building with Carbon",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/config/babel-preset-carbon",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "dependencies": {
+    "@babel/core": "^7.10.5",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-export-default-from": "^7.10.4",
+    "@babel/plugin-proposal-export-namespace-from": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "babel-plugin-dev-expression": "^0.2.2",
+    "browserslist-config-carbon": "^10.4.0"
+  }
+}
