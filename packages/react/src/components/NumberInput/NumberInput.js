@@ -467,13 +467,8 @@ class NumberInput extends Component {
   }
 }
 
-const NumberInputForwardRef = React.forwardRef(function NumberInputForwardRef(
-  props,
-  ref
-) {
-  return <NumberInput {...props} innerRef={ref} />;
-});
-
-NumberInputForwardRef.displayName = 'NumberInput';
-
-export default NumberInputForwardRef;
+export default (() => {
+  const forwardRef = (props, ref) => <NumberInput {...props} innerRef={ref} />;
+  forwardRef.displayName = 'NumberInput';
+  return React.forwardRef(forwardRef);
+})();
