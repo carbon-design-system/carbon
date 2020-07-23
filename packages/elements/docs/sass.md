@@ -1267,7 +1267,7 @@ Define the properties for a selector assigned to a row in the grid system.
 
 ### ❌carbon--no-gutter [mixin]
 
-Add `no-gutter` and `no-gutter--{left,right}` classes to the output CSS. These
+Add `no-gutter` and `no-gutter--{start,end}` classes to the output CSS. These
 classes are useful for dropping the gutter in fluid situations.
 
 <details>
@@ -1281,6 +1281,17 @@ classes are useful for dropping the gutter in fluid situations.
     padding-left: 0;
   }
 
+  .#{$prefix}--no-gutter--start,
+  .#{$prefix}--row.#{$prefix}--no-gutter--start [class*='#{$prefix}--col'] {
+    padding-left: 0;
+  }
+
+  .#{$prefix}--no-gutter--end,
+  .#{$prefix}--row.#{$prefix}--no-gutter--end [class*='#{$prefix}--col'] {
+    padding-right: 0;
+  }
+
+  // Deprecated ☠️
   .#{$prefix}--no-gutter--left,
   .#{$prefix}--row.#{$prefix}--no-gutter--left [class*='#{$prefix}--col'] {
     padding-left: 0;
@@ -1303,14 +1314,23 @@ classes are useful for dropping the gutter in fluid situations.
 
 ### ❌carbon--hang [mixin]
 
-Add `hang--left` and `hang--right` classes for a given gutter. These classes are
-used alongside `no-gutter--left` and `no-gutter--right` to "hang" type.
+Add `hang--start` and `hang--end` classes for a given gutter. These classes are
+used alongside `no-gutter--start` and `no-gutter--end` to "hang" type.
 
 <details>
 <summary>Source code</summary>
 
 ```scss
 @mixin carbon--hang($gutter: $carbon--grid-gutter) {
+  .#{$prefix}--hang--start {
+    padding-left: ($gutter / 2);
+  }
+
+  .#{$prefix}--hang--end {
+    padding-right: ($gutter / 2);
+  }
+
+  // Deprecated ☠️
   .#{$prefix}--hang--left {
     padding-left: ($gutter / 2);
   }

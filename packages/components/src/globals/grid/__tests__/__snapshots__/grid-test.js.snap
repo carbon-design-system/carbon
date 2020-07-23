@@ -1047,6 +1047,14 @@ em {
   padding-right: 0;
   padding-left: 0; }
 
+.bx--no-gutter--start,
+.bx--row.bx--no-gutter--start [class*='bx--col'] {
+  padding-left: 0; }
+
+.bx--no-gutter--end,
+.bx--row.bx--no-gutter--end [class*='bx--col'] {
+  padding-right: 0; }
+
 .bx--no-gutter--left,
 .bx--row.bx--no-gutter--left [class*='bx--col'] {
   padding-left: 0; }
@@ -1054,6 +1062,12 @@ em {
 .bx--no-gutter--right,
 .bx--row.bx--no-gutter--right [class*='bx--col'] {
   padding-right: 0; }
+
+.bx--hang--start {
+  padding-left: 1rem; }
+
+.bx--hang--end {
+  padding-right: 1rem; }
 
 .bx--hang--left {
   padding-left: 1rem; }
