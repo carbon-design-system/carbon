@@ -28,14 +28,15 @@
   .#{$prefix}--table-sort {
     @include button-reset(false);
 
-    font: inherit;
-    line-height: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    color: $text-01;
     min-height: 100%;
+    color: $text-01;
+
+    font: inherit;
+    line-height: 1;
     background-color: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive),
       outline $duration--fast-01 motion(entrance, productive);
@@ -77,12 +78,12 @@
   }
 
   .#{$prefix}--table-sort__icon-unsorted {
-    margin-left: $spacing-03;
-    margin-right: $spacing-05;
-    opacity: 0;
-    fill: $ui-05;
     width: auto;
     min-width: $layout-01;
+    margin-right: $spacing-05;
+    margin-left: $spacing-03;
+    opacity: 0;
+    fill: $ui-05;
   }
 
   // active icons
@@ -102,14 +103,14 @@
   }
 
   .#{$prefix}--table-sort__icon {
-    margin-left: $spacing-03;
-    margin-right: $spacing-05;
-    transition: transform $transition--base $carbon--standard-easing;
-    transform: rotate(0);
-    opacity: 1;
-    fill: $ui-05;
     width: auto;
     min-width: $layout-01;
+    margin-right: $spacing-05;
+    margin-left: $spacing-03;
+    transform: rotate(0);
+    opacity: 1;
+    transition: transform $transition--base $carbon--standard-easing;
+    fill: $ui-05;
   }
 
   //----------------------------------------------------------------------------
