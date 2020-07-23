@@ -17,10 +17,10 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    border: 0;
     font-size: 100%;
     font-family: inherit;
     vertical-align: baseline;
+    border: 0;
 
     *,
     *::before,
@@ -116,10 +116,10 @@
     video {
       margin: 0;
       padding: 0;
-      border: 0;
       font: inherit;
       font-size: 100%;
       vertical-align: baseline;
+      border: 0;
     }
 
     // Chrome 62 fix
@@ -127,8 +127,8 @@
     select,
     input,
     textarea {
-      border-radius: 0;
       font-family: inherit;
+      border-radius: 0;
     }
 
     input[type='text']::-ms-clear {

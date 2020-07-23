@@ -51,59 +51,59 @@ em {
 
 @keyframes skeleton {
   0% {
-    width: 0%;
-    left: 0;
     right: auto;
+    left: 0;
+    width: 0%;
     opacity: 0.3; }
   20% {
-    width: 100%;
-    left: 0;
     right: auto;
+    left: 0;
+    width: 100%;
     opacity: 1; }
   28% {
-    width: 100%;
+    right: 0;
     left: auto;
-    right: 0; }
+    width: 100%; }
   51% {
-    width: 0%;
+    right: 0;
     left: auto;
-    right: 0; }
+    width: 0%; }
   58% {
-    width: 0%;
+    right: 0;
     left: auto;
-    right: 0; }
+    width: 0%; }
   82% {
-    width: 100%;
+    right: 0;
     left: auto;
-    right: 0; }
+    width: 100%; }
   83% {
-    width: 100%;
-    left: 0;
-    right: auto; }
-  96% {
-    width: 0%;
-    left: 0;
-    right: auto; }
-  100% {
-    width: 0%;
-    left: 0;
     right: auto;
+    left: 0;
+    width: 100%; }
+  96% {
+    right: auto;
+    left: 0;
+    width: 0%; }
+  100% {
+    right: auto;
+    left: 0;
+    width: 0%;
     opacity: 0.3; } }
 
 .bx--grid {
   margin-right: auto;
   margin-left: auto;
   max-width: 99rem;
-  padding-left: 1rem;
-  padding-right: 1rem; }
+  padding-right: 1rem;
+  padding-left: 1rem; }
   @media (min-width: 42rem) {
     .bx--grid {
-      padding-left: 2rem;
-      padding-right: 2rem; } }
+      padding-right: 2rem;
+      padding-left: 2rem; } }
   @media (min-width: 99rem) {
     .bx--grid {
-      padding-left: 2.5rem;
-      padding-right: 2.5rem; } }
+      padding-right: 2.5rem;
+      padding-left: 2.5rem; } }
 
 @media (min-width: 99rem) {
   .bx--grid--full-width {
@@ -1044,8 +1044,8 @@ em {
 
 .bx--no-gutter,
 .bx--row.bx--no-gutter [class*='bx--col'] {
-  padding-left: 0;
-  padding-right: 0; }
+  padding-right: 0;
+  padding-left: 0; }
 
 .bx--no-gutter--left,
 .bx--row.bx--no-gutter--left [class*='bx--col'] {
@@ -1065,16 +1065,16 @@ em {
   position: relative; }
 
 .bx--aspect-ratio::before {
-  content: '';
-  width: 1px;
-  margin-left: -1px;
   float: left;
-  height: 0; }
+  width: 1px;
+  height: 0;
+  margin-left: -1px;
+  content: ''; }
 
 .bx--aspect-ratio::after {
-  content: '';
   display: table;
-  clear: both; }
+  clear: both;
+  content: ''; }
 
 .bx--aspect-ratio--16x9::before {
   padding-top: 56.25%; }

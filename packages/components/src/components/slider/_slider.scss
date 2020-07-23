@@ -29,9 +29,9 @@
   .#{$prefix}--slider {
     position: relative;
     width: 100%;
-    margin: 0 $carbon--spacing-05;
-    max-width: rem(640px);
     min-width: rem(200px);
+    max-width: rem(640px);
+    margin: 0 $carbon--spacing-05;
   }
 
   .#{$prefix}--slider__range-label {
@@ -49,20 +49,20 @@
     width: 100%;
     height: rem(2px);
     background: $ui-03;
-    cursor: pointer;
     transform: translate(0%, -50%);
+    cursor: pointer;
   }
 
   .#{$prefix}--slider__track:before {
-    content: '';
     position: absolute;
-    display: inline-block;
-    height: rem(4px);
-    width: rem(2px);
-    left: 50%;
-    transform: translate(-50%, 0);
     top: rem(-5px);
+    left: 50%;
+    display: inline-block;
+    width: rem(2px);
+    height: rem(4px);
     background: $ui-03;
+    transform: translate(-50%, 0);
+    content: '';
   }
 
   .#{$prefix}--slider__filled-track {
@@ -70,27 +70,27 @@
     width: 100%;
     height: rem(2px);
     background: $ui-05;
-    transform-origin: left;
-    pointer-events: none;
     transform: translate(0%, -50%);
+    transform-origin: left;
     transition: background $duration--fast-02 motion(standard, productive);
+    pointer-events: none;
   }
 
   .#{$prefix}--slider__thumb {
     position: absolute;
-    height: rem(14px);
+    top: 0;
+    z-index: 3;
     width: rem(14px);
+    height: rem(14px);
     background: $ui-05;
     border-radius: 50%;
+    outline: none;
     box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
-    top: 0;
     transform: translate(-50%, -50%);
+    cursor: pointer;
     transition: transform $duration--fast-02 motion(standard, productive),
       background $duration--fast-02 motion(standard, productive),
       box-shadow $duration--fast-02 motion(standard, productive);
-    cursor: pointer;
-    outline: none;
-    z-index: 3;
 
     &:hover {
       // 20px / 14px = 1.4286
@@ -98,15 +98,15 @@
     }
 
     &:focus {
+      background-color: $interactive-04;
+      box-shadow: inset 0 0 0 2px $interactive-04, inset 0 0 0 3px $ui-01;
       // 20px / 14px = 1.4286
       transform: translate(-50%, -50%) scale(1.4286);
-      box-shadow: inset 0 0 0 2px $interactive-04, inset 0 0 0 3px $ui-01;
-      background-color: $interactive-04;
     }
 
     &:active {
-      transform: translate(-50%, -50%) scale(1.4286);
       box-shadow: inset 0 0 0 2px $interactive-04;
+      transform: translate(-50%, -50%) scale(1.4286);
     }
   }
 
@@ -147,9 +147,9 @@
     }
 
     &:focus {
-      box-shadow: none;
-      outline: none;
       background-color: $ui-03;
+      outline: none;
+      box-shadow: none;
       transform: translate(-50%, -50%);
     }
 
@@ -172,17 +172,17 @@
     ~ .#{$prefix}--form-item
     .#{$prefix}--slider-text-input,
   .#{$prefix}--slider--disabled ~ .#{$prefix}--slider-text-input {
-    background-color: $disabled-01;
     color: $disabled-02;
-    transition: none;
-    cursor: not-allowed;
+    background-color: $disabled-01;
     border: none;
+    cursor: not-allowed;
+    transition: none;
 
     &:active,
     &:focus,
     &:hover {
-      outline: none;
       color: $disabled-02;
+      outline: none;
     }
   }
 

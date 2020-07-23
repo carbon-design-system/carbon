@@ -25,11 +25,11 @@
     @include type-style('body-short-01');
     @include focus-outline('reset');
 
-    background-color: $field-01;
     width: 100%;
     height: rem(40px);
     padding: 0 $carbon--spacing-05;
     color: $text-01;
+    background-color: $field-01;
     border: none;
     border-bottom: 1px solid $ui-04;
     transition: background-color $duration--fast-01 motion(standard, productive),
@@ -76,9 +76,9 @@
 
     .#{$prefix}--text-input__invalid-icon {
       position: absolute;
-      right: $carbon--spacing-05;
       // top/transform used to center invalid icon in IE11
       top: 50%;
+      right: $carbon--spacing-05;
       transform: translateY(-50%);
       fill: $support-01;
     }
@@ -102,12 +102,12 @@
     // TODO: remove selector above
     .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
       position: absolute;
-      height: rem(16px);
-      width: rem(16px);
       right: $carbon--spacing-05;
+      width: rem(16px);
+      height: rem(16px);
       padding: 0;
-      border: 0;
       background: none;
+      border: 0;
       cursor: pointer;
 
       svg {
@@ -143,8 +143,8 @@
   .#{$prefix}--text-input:disabled
     + .#{$prefix}--text-input--password__visibility__toggle
     svg {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 
   //-----------------------------
@@ -153,10 +153,11 @@
   .#{$prefix}--text-input:disabled {
     @include focus-outline('reset');
 
-    cursor: not-allowed;
+    color: $disabled-02;
     background-color: $disabled-01;
     border-bottom: 1px solid transparent;
-    color: $disabled-02;
+
+    cursor: not-allowed;
   }
 
   .#{$prefix}--text-input--light:disabled {
@@ -164,8 +165,8 @@
   }
 
   .#{$prefix}--text-input:disabled::placeholder {
-    opacity: 1;
     color: $disabled-02;
+    opacity: 1;
   }
 
   //-----------------------------
@@ -228,9 +229,9 @@
     + .#{$prefix}--text-input__divider {
     display: block;
     margin: 0 1rem;
+    border-color: $ui-03;
     border-style: solid;
     border-bottom: none;
-    border-color: $ui-03;
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input__invalid-icon {
@@ -252,8 +253,8 @@
   .#{$prefix}--label--inline {
     flex: 1;
     margin: rem(13px) 0 0 0;
-    overflow-wrap: break-word;
     word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   .#{$prefix}--label--inline--sm {
@@ -267,8 +268,8 @@
   .#{$prefix}--text-input__label-helper-wrapper {
     flex: 2;
     flex-direction: column;
-    margin-right: rem(24px);
     max-width: rem(128px);
+    margin-right: rem(24px);
     overflow-wrap: break-word;
   }
 
@@ -277,10 +278,10 @@
   }
 
   .#{$prefix}--text-input__field-outer-wrapper {
-    align-items: flex-start;
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
+    align-items: flex-start;
     width: 100%;
   }
 
