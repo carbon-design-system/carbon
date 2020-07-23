@@ -138,6 +138,7 @@ categories:
       - global--technology--services
       - hybrid--cloud
       - hybrid--cloud--services
+      - ibm--cloud
       - java
       - javascript
       - list--bullet
@@ -626,6 +627,7 @@ categories:
       - deliver--insights
       - dialogue
       - document--conversion
+      - ibm--watson
       - knows--dark--data
       - language
       - language--01
