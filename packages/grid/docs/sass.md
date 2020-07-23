@@ -96,6 +96,13 @@ yet.
     padding-right: ($condensed-gutter / 2);
     padding-left: ($condensed-gutter / 2);
   }
+
+  // For our narrow use-case, our container hangs 16px into the gutter
+  .#{$prefix}--row--narrow &,
+  .#{$prefix}--grid--narrow & {
+    padding-right: ($gutter / 2);
+    padding-left: 0;
+  }
 }
 ```
 
