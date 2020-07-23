@@ -13,8 +13,10 @@ module.exports = {
     '@storybook/addon-knobs',
     '@storybook/addon-actions',
     '@storybook/addon-links',
+    '@storybook/addon-docs',
+    '@storybook/addon-notes/register',
     'storybook-readme/register',
     require.resolve('./addon-carbon-theme/register'),
   ],
-  stories: ['../src/**/*-story.js'],
+  stories: ['../src/**/*-story.js', '../src/**/*.stories.mdx'],
 };
