@@ -8,5 +8,13 @@
 'use strict';
 
 module.exports = {
+  addons: [
+    '@storybook/addon-storysource',
+    '@storybook/addon-knobs',
+    '@storybook/addon-actions',
+    '@storybook/addon-links',
+    'storybook-readme/register',
+    require.resolve('./addon-carbon-theme/register'),
+  ],
   stories: ['../src/**/*-story.js'],
 };
