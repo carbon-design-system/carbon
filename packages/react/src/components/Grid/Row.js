@@ -15,6 +15,7 @@ const { prefix } = settings;
 function Row({
   as: BaseComponent = 'div',
   condensed = false,
+  narrow = false,
   className: containerClassName,
   children,
   ...rest
@@ -22,6 +23,7 @@ function Row({
   const className = cx(containerClassName, {
     [`${prefix}--row`]: true,
     [`${prefix}--row--condensed`]: condensed,
+    [`${prefix}--row--narrow`]: narrow,
   });
 
   return (
@@ -42,6 +44,12 @@ Row.propTypes = {
    * and are condensed will have 2px of margin between them to match gutter.
    */
   condensed: PropTypes.bool,
+
+  /**
+   * Specify a single row as narrow. The container will hang
+   * 16px into the gutter.
+   */
+  narrow: PropTypes.bool,
 
   /**
    * Specify a custom className to be applied to the `Row`

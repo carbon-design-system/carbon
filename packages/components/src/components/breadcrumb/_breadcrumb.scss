@@ -40,9 +40,9 @@
   }
 
   .#{$prefix}--breadcrumb-item::after {
-    content: '/';
-    color: $text-01;
     margin-left: $carbon--spacing-03;
+    color: $text-01;
+    content: '/';
   }
 
   .#{$prefix}--breadcrumb--no-trailing-slash

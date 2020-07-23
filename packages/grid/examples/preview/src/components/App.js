@@ -405,6 +405,141 @@ const sections = [
       },
     ],
   },
+  ,
+  {
+    id: 'narrow-grid',
+    name: 'Narrow grid',
+    description:
+      'A narrow grid allows the container to hang 16px into the gutter on one side',
+    examples: [
+      {
+        name: 'Default usage',
+        content: () => (
+          <div className="bx--grid bx--grid--narrow">
+            <div className="bx--row">
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+            </div>
+            <div className="bx--row">
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ),
+      },
+      {
+        name: 'Mixed row content',
+        description:
+          'Use a helper class to specify a single row as narrow.',
+        content: () => (
+          <div className="bx--grid">
+            <div className="bx--row">
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+            </div>
+            <div className="bx--row bx--row--narrow">
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+            </div>
+            <div className="bx--row bx--row--narrow">
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ),
+      },
+    ],
+  },
   {
     id: 'no-gutters',
     name: 'No gutters',

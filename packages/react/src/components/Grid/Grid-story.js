@@ -138,6 +138,72 @@ export const condensedColumns = () => (
   </Grid>
 );
 
+export const narrow = () => (
+  <Grid narrow>
+    <Row>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+    </Row>
+  </Grid>
+);
+
+export const narrowColumns = () => (
+  <Grid>
+    <Row>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+    </Row>
+    <Row narrow>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+    </Row>
+    <Row>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+    </Row>
+  </Grid>
+);
+
 export const fullWidth = () => (
   <Grid fullWidth>
     <Row>

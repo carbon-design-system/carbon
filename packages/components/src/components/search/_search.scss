@@ -20,9 +20,9 @@
 /// @group search
 @mixin search {
   .#{$prefix}--search {
+    position: relative;
     display: flex;
     align-items: center;
-    position: relative;
     width: 100%;
   }
 
@@ -35,17 +35,17 @@
     @include type-style('body-short-02');
     @include focus-outline('reset');
 
-    appearance: none;
-    border: none;
-    background-color: $field-01;
-    color: $text-01;
-    padding: 0 $carbon--spacing-08;
-    text-overflow: ellipsis;
-    width: 100%;
     order: 1;
+    width: 100%;
+    padding: 0 $carbon--spacing-08;
+    color: $text-01;
+    text-overflow: ellipsis;
+    background-color: $field-01;
+    border: none;
+    border-bottom: 1px solid $ui-04;
     transition: background-color $duration--fast-02 motion(standard, productive),
       outline $duration--fast-02 motion(standard, productive);
-    border-bottom: 1px solid $ui-04;
+    appearance: none;
 
     &:focus {
       @include focus-outline('outline');
@@ -101,21 +101,21 @@
   }
 
   .#{$prefix}--search-magnifier {
+    position: absolute;
+    top: 50%;
     left: 0.75rem;
     z-index: 2;
-    position: absolute;
-    height: rem(16px);
     width: rem(16px);
-    top: 50%;
+    height: rem(16px);
     transform: translateY(-50%);
-    fill: $icon-02;
     pointer-events: none;
+    fill: $icon-02;
   }
 
   .#{$prefix}--search--xl .#{$prefix}--search-magnifier {
-    height: rem(20px);
-    width: rem(20px);
     left: rem(24px);
+    width: rem(20px);
+    height: rem(20px);
     transform: translate(-50%, -50%);
   }
 
@@ -128,16 +128,16 @@
     right: 0;
 
     &::before {
-      content: '';
-      display: block;
       position: absolute;
-      left: 0;
       top: rem(1px);
-      height: calc(100% - 2px);
+      left: 0;
+      display: block;
       width: 2px;
+      height: calc(100% - 2px);
       background-color: $field-01;
       transition: background-color $duration--fast-02
         motion(standard, productive);
+      content: '';
     }
 
     &:hover {
@@ -165,19 +165,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: rem(40px);
+    height: rem(40px);
+    border-color: transparent;
+    border-style: solid;
+    border-width: 1px 0;
+    visibility: inherit;
+    cursor: pointer;
+    opacity: 1;
     transition: opacity $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive),
       outline $duration--fast-02 motion(standard, productive),
       border $duration--fast-02 motion(standard, productive);
-    cursor: pointer;
-    visibility: inherit;
-    opacity: 1;
-    height: rem(40px);
-    width: rem(40px);
     fill: $icon-01;
-    border-style: solid;
-    border-color: transparent;
-    border-width: 1px 0;
 
     &:hover {
       background-color: $hover-field;
@@ -208,24 +208,24 @@
   .#{$prefix}--search--sm {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button {
-      height: rem(32px);
       width: rem(32px);
+      height: rem(32px);
     }
   }
 
   .#{$prefix}--search--lg {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button {
-      height: rem(40px);
       width: rem(40px);
+      height: rem(40px);
     }
   }
 
   .#{$prefix}--search--xl {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button {
-      height: rem(48px);
       width: rem(48px);
+      height: rem(48px);
     }
   }
 

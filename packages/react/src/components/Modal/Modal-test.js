@@ -17,6 +17,7 @@ const { prefix } = settings;
 
 // The modal is the 0th child inside the wrapper on account of focus-trap-react
 const getModal = (wrapper) => wrapper.find('.bx--modal');
+const getModalBody = (wrapper) => wrapper.find('.bx--modal-container');
 
 describe('Modal', () => {
   describe('Renders as expected', () => {
@@ -284,6 +285,29 @@ describe('Danger Modal', () => {
         .children;
       expect(modalButtons[0].props.kind).toEqual('secondary');
       expect(modalButtons[1].props.kind).toEqual('danger');
+    });
+  });
+});
+describe('Alert Modal', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<Modal aria-label="test" alert />);
+
+    it('has the expected attributes', () => {
+      expect(getModalBody(wrapper).props()).toEqual(
+        expect.objectContaining({
+          role: 'alertdialog',
+          'aria-describedby': expect.any(String),
+        })
+      );
+    });
+
+    it('should be a passive modal when passiveModal is passed', () => {
+      wrapper.setProps({ passiveModal: true });
+      expect(getModalBody(wrapper).props()).toEqual(
+        expect.objectContaining({
+          role: 'alert',
+        })
+      );
     });
   });
 });
