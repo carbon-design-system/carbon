@@ -16896,6 +16896,10 @@ Data table sort styles
     fill: $ui-05;
   }
 
+  .#{$prefix}--table-sort.#{$prefix}--table-sort--active {
+    background: $data-table-column-hover;
+  }
+
   // active icons
   .#{$prefix}--table-sort.#{$prefix}--table-sort--active
     .#{$prefix}--table-sort__icon-unsorted {
