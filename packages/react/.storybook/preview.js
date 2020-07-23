@@ -27,6 +27,13 @@ addParameters({
      * "playground" and "unstable" stories.
      */
     storySort: (storyA, storyB) => {
+      // By default, sort by the story "kind". The "kind" refers to the
+      // top-level title of the story, either through Component Story Format
+      // with the default export, or the `storiesOf('kind', module)` format
+      if (storyA[1].kind !== storyB[1].kind) {
+        return storyA[1].kind.localeCompare(storyB[1].kind);
+      }
+
       const idA = storyA[0];
       const idB = storyB[0];
 
