@@ -46,7 +46,7 @@ Row.propTypes = {
   condensed: PropTypes.bool,
 
   /**
-   * Specify a single row as narrow. The ontainer will hang
+   * Specify a single row as narrow. The container will hang
    * 16px into the gutter.
    */
   narrow: PropTypes.bool,
