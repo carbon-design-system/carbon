@@ -92,6 +92,7 @@ describe('Carbon Components React', () => {
         "OverflowMenuItem",
         "PageSelector",
         "Pagination",
+        "PaginationNav",
         "PaginationSkeleton",
         "PrimaryButton",
         "ProgressIndicator",

@@ -69,14 +69,14 @@
     position: fixed;
     top: 0;
     left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: $overlay-01;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color $duration--slow-02 motion(standard, expressive);
     z-index: z('overlay');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: $overlay-01;
+    transition: background-color $duration--slow-02 motion(standard, expressive);
   }
 
   .#{$prefix}--loading-overlay--stop {

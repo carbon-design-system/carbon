@@ -2717,6 +2717,9 @@ Map {
       "fullWidth": Object {
         "type": "bool",
       },
+      "narrow": Object {
+        "type": "bool",
+      },
     },
   },
   "Row" => Object {
@@ -2741,6 +2744,9 @@ Map {
         "type": "string",
       },
       "condensed": Object {
+        "type": "bool",
+      },
+      "narrow": Object {
         "type": "bool",
       },
     },
@@ -4120,6 +4126,31 @@ Map {
       },
       "totalItems": Object {
         "type": "number",
+      },
+    },
+  },
+  "PaginationNav" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "itemsShown": Object {
+        "type": "number",
+      },
+      "loop": Object {
+        "type": "bool",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "page": Object {
+        "type": "number",
+      },
+      "totalItems": Object {
+        "type": "number",
+      },
+      "translateWithId": Object {
+        "type": "func",
       },
     },
   },

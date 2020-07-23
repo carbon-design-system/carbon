@@ -1,3 +1,6 @@
 deprecated:
   - name: farm
     reason: The farm pictogram has been deprecated in favor of farm--01
+  - name: watson--avatar
+    reason:
+      The watson--avatar pictogram has been deprecated in favor of ibm--watson

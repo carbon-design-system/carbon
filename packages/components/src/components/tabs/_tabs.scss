@@ -22,13 +22,13 @@
     @include reset;
     @include type-style('body-short-01');
 
-    color: $text-01;
-    height: auto;
-    width: 100%;
     position: relative;
+    width: 100%;
+    height: auto;
+    color: $text-01;
     @include carbon--breakpoint(md) {
-      background: none;
       min-height: rem(40px);
+      background: none;
     }
   }
 
@@ -42,13 +42,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 $spacing-09 0 $spacing-05;
     height: rem(40px);
-    cursor: pointer;
+    padding: 0 $spacing-09 0 $spacing-05;
     color: $text-01;
-    outline: 2px solid transparent;
-    border-bottom: 1px solid $ui-04;
     background-color: $field-01;
+    border-bottom: 1px solid $ui-04;
+    outline: 2px solid transparent;
+    cursor: pointer;
     @include carbon--breakpoint(md) {
       display: none;
     }
@@ -62,8 +62,8 @@
   .#{$prefix}--tabs-trigger svg {
     position: absolute;
     right: $spacing-05;
-    fill: $ui-05;
     transition: transform $duration--fast-01 motion(standard, productive);
+    fill: $ui-05;
   }
 
   .#{$prefix}--tabs-trigger--open:focus,
@@ -87,12 +87,12 @@
   }
 
   .#{$prefix}--tabs-trigger-text {
-    text-decoration: none;
     padding-top: 2px;
+    overflow: hidden;
     color: $text-01;
     font-weight: 400;
     white-space: nowrap;
-    overflow: hidden;
+    text-decoration: none;
     text-overflow: ellipsis;
   }
 
@@ -107,39 +107,40 @@
   .#{$prefix}--tabs__nav {
     @include box-shadow;
 
-    margin: 0;
-    padding: 0;
     position: absolute;
-    list-style: none;
+    z-index: z('dropdown');
     display: flex;
     flex-direction: column;
-    z-index: z('dropdown');
+    width: 100%;
+    max-height: 600px;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
     background: $ui-01;
     transition: max-height $duration--fast-01 motion(standard, productive);
-    max-height: 600px;
-    width: 100%;
 
     @include carbon--breakpoint(md) {
+      z-index: auto;
       flex-direction: row;
+      width: auto;
       background: none;
       box-shadow: none;
-      z-index: auto;
       transition: inherit;
-      width: auto;
     }
   }
 
   .#{$prefix}--tabs__nav--hidden {
-    transition: max-height $duration--fast-01 motion(standard, productive);
-    overflow: hidden;
     max-height: 0;
+    overflow: hidden;
+    transition: max-height $duration--fast-01 motion(standard, productive);
 
     @include carbon--breakpoint(md) {
       display: flex;
-      transition: inherit;
-      overflow-x: auto;
       max-width: 100%;
       max-height: none;
+      overflow-x: auto;
+      transition: inherit;
     }
   }
 
@@ -149,17 +150,17 @@
   .#{$prefix}--tabs__nav-item {
     @include reset;
 
-    background-color: $ui-01;
     display: flex;
-    padding: 0;
-    cursor: pointer;
     width: 100%;
     height: rem(40px);
+    padding: 0;
+    background-color: $ui-01;
+    cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive);
 
     @include carbon--breakpoint(md) {
-      background: transparent;
       height: auto;
+      background: transparent;
 
       + .#{$prefix}--tabs__nav-item {
         margin-left: rem(1px);
@@ -224,8 +225,8 @@
   //---------------------------------------------
   .#{$prefix}--tabs__nav-item--disabled,
   .#{$prefix}--tabs__nav-item--disabled:hover {
-    cursor: not-allowed;
     outline: none;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--tabs--container
@@ -250,8 +251,8 @@
   // Item Selected
   //-----------------------------
   .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled) {
-    border: none;
     display: none;
+    border: none;
     transition: color $duration--fast-01 motion(standard, productive);
 
     @include carbon--breakpoint(md) {
@@ -275,12 +276,12 @@
       background-color: $ui-01;
 
       .#{$prefix}--tabs__nav-link {
+        padding: $spacing-03 $spacing-05;
         // height - vertical padding
         // Draws the border without affecting the inner-content
         line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
-        box-shadow: inset 0 2px 0 0 $interactive-04;
         border-bottom: none;
-        padding: $spacing-03 $spacing-05;
+        box-shadow: inset 0 2px 0 0 $interactive-04;
       }
 
       .#{$prefix}--tabs__nav-link:focus,
@@ -297,18 +298,18 @@
     @include focus-outline('reset');
 
     display: inline-block;
-    color: $text-02;
-    text-decoration: none;
-    font-weight: 400;
-    padding: $spacing-04 0;
     width: calc(100% - 32px);
     height: rem(40px);
-    white-space: nowrap;
-    text-overflow: ellipsis;
     margin: 0 $spacing-05;
-    line-height: 1rem;
-    border-bottom: 1px solid $ui-03;
+    padding: $spacing-04 0;
     overflow: hidden;
+    color: $text-02;
+    font-weight: 400;
+    line-height: 1rem;
+    white-space: nowrap;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    border-bottom: 1px solid $ui-03;
     transition: border $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
 
@@ -322,11 +323,11 @@
     }
 
     @include carbon--breakpoint(md) {
-      border-bottom: $tab-underline-color;
-      padding: $spacing-04 $spacing-05 $spacing-03;
       width: rem(160px);
       margin: 0;
+      padding: $spacing-04 $spacing-05 $spacing-03;
       line-height: inherit;
+      border-bottom: $tab-underline-color;
 
       &:focus,
       &:active {
@@ -339,10 +340,10 @@
   .#{$prefix}--tabs--container a.#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
       height: rem(48px);
+      padding: $spacing-03 $spacing-05;
       // Height - vertical padding
       line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
       border-bottom: none;
-      padding: $spacing-03 $spacing-05;
     }
   }
 
@@ -376,14 +377,14 @@
   }
 
   .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
-    cursor: no-drop;
     border-bottom: $tab-underline-disabled;
+    cursor: no-drop;
   }
 
   .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:focus,
   .#{$prefix}--tabs__nav-item--disabled a.#{$prefix}--tabs__nav-link:active {
-    outline: none;
     border-bottom: $tab-underline-disabled;
+    outline: none;
   }
 
   //-----------------------------
@@ -407,8 +408,8 @@
   // Skeleton state
   //-----------------------------
   .#{$prefix}--tabs.#{$prefix}--skeleton {
-    pointer-events: none;
     cursor: default;
+    pointer-events: none;
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {

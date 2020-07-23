@@ -24,9 +24,9 @@
   }
 
   .#{$prefix}--btn-set > .#{$prefix}--btn {
+    width: 100%;
     // 196px from design kit
     max-width: rem(196px);
-    width: 100%;
   }
 
   .#{$prefix}--btn--secondary.#{$prefix}--btn--disabled
@@ -106,8 +106,8 @@
     &.#{$prefix}--btn--disabled,
     &.#{$prefix}--btn--disabled:hover,
     &.#{$prefix}--btn--disabled:focus {
-      background: transparent;
       color: $disabled;
+      background: transparent;
       outline: none;
     }
   }
@@ -196,8 +196,8 @@
   }
 
   .#{$prefix}--btn--icon-only {
-    padding-left: rem(15px);
     padding-right: rem(15px);
+    padding-left: rem(15px);
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -241,13 +241,13 @@
   }
 
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
-    padding-left: rem(11px);
     padding-right: rem(11px);
+    padding-left: rem(11px);
   }
 
   .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
-    padding-left: rem(7px);
     padding-right: rem(7px);
+    padding-left: rem(7px);
   }
 
   .#{$prefix}--btn--danger {

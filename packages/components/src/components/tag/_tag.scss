@@ -29,15 +29,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: $carbon--spacing-02 $carbon--spacing-03;
-    min-height: 1.5rem;
-    // restricts size of contained elements
-    max-width: 100%;
     // ensures tag stays pill shaped;
     min-width: rem(32px);
+    // restricts size of contained elements
+    max-width: 100%;
+    min-height: 1.5rem;
     margin: $carbon--spacing-02;
-    border-radius: rem(15px);
+    padding: $carbon--spacing-02 $carbon--spacing-03;
     word-break: break-word;
+    border-radius: rem(15px);
     cursor: default;
 
     &:not(:first-child) {
@@ -147,8 +147,8 @@
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    cursor: pointer;
     padding-right: rem(2px);
+    cursor: pointer;
 
     &:focus,
     &:hover {
@@ -162,10 +162,10 @@
     height: rem(20px);
     margin: 0 0 0 rem(4px);
     padding: rem(2px);
-    border: 0;
-    background-color: transparent;
-    border-radius: 50%;
     color: currentColor;
+    background-color: transparent;
+    border: 0;
+    border-radius: 50%;
     cursor: pointer;
 
     svg {
@@ -178,9 +178,9 @@
   }
 
   .#{$prefix}--tag__close-icon:focus {
+    border-radius: 50%;
     outline: none;
     box-shadow: inset 0 0 0 2px $focus;
-    border-radius: 50%;
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
