@@ -19,13 +19,13 @@
 /// @group structured-list
 /// @param {Number} $padding [$structured-list-padding]
 @mixin padding--data-structured-list($padding: $structured-list-padding) {
-  padding-left: $padding / 2;
   padding-right: $padding / 2;
+  padding-left: $padding / 2;
 
   // Controls gutter sizes for check
   &:first-child {
-    padding-left: $padding / 2;
     padding-right: $padding / 2;
+    padding-left: $padding / 2;
   }
 }
 

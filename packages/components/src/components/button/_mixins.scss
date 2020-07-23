@@ -14,23 +14,23 @@
   @include reset;
   @include type-style('body-short-01');
 
-  cursor: pointer;
+  position: relative;
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: space-between;
-  vertical-align: top;
-  flex-shrink: 0;
-  min-height: $button-height;
-  padding: $button-padding;
-  border-radius: $button-border-radius;
-  text-align: left;
-  text-decoration: none;
-  transition: all $duration--fast-01 motion(entrance, productive);
-  outline: none;
-  position: relative;
   max-width: rem(320px);
+  min-height: $button-height;
   // Fix to remove added margins on buttons in safari (see #5155)
   margin: 0;
+  padding: $button-padding;
+  text-align: left;
+  text-decoration: none;
+  vertical-align: top;
+  border-radius: $button-border-radius;
+  outline: none;
+  cursor: pointer;
+  transition: all $duration--fast-01 motion(entrance, productive);
 
   &:disabled,
   &:hover:disabled,
@@ -38,11 +38,11 @@
   &.#{$prefix}--btn--disabled,
   &.#{$prefix}--btn--disabled:hover,
   &.#{$prefix}--btn--disabled:focus {
-    cursor: not-allowed;
     color: $disabled-03;
     background: $disabled-02;
     border-color: $disabled-02;
     box-shadow: none;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--btn__icon {
@@ -65,11 +65,11 @@
   $icon-color,
   $active-color
 ) {
-  background-color: $bg-color;
-  border-width: $button-outline-width;
-  border-style: solid;
-  border-color: $border-color;
   color: $font-color;
+  background-color: $bg-color;
+  border-color: $border-color;
+  border-style: solid;
+  border-width: $button-outline-width;
 
   &:hover {
     background-color: $hover-bg-color;
@@ -86,9 +86,9 @@
   &:hover.#{$prefix}--btn--disabled,
   &:focus.#{$prefix}--btn--disabled {
     color: $ui-04;
+    text-decoration: none;
     background-color: $disabled-02;
     border-color: $disabled-02;
-    text-decoration: none;
     box-shadow: none;
   }
 

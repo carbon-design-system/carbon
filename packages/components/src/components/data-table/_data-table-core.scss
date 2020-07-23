@@ -19,17 +19,17 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-container {
     min-width: rem(500px);
-    overflow-x: auto;
     // Allow space for focus styles
     padding-top: $spacing-01;
+    overflow-x: auto;
   }
 
   //----------------------------------------------------------------------------
   // Table title text
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-header {
-    background: $ui-01;
     padding: $spacing-05 0 $spacing-06 $spacing-05;
+    background: $ui-01;
   }
 
   .#{$prefix}--data-table-header__title {
@@ -48,9 +48,9 @@
   // Data table
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table {
+    width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
-    width: 100%;
   }
 
   .#{$prefix}--data-table thead {
@@ -62,14 +62,14 @@
   .#{$prefix}--data-table tbody {
     @include type-style('body-short-01');
 
-    background-color: $ui-01;
     width: 100%;
+    background-color: $ui-01;
   }
 
   .#{$prefix}--data-table tr {
-    border: none;
-    height: $layout-04;
     width: 100%;
+    height: $layout-04;
+    border: none;
   }
 
   .#{$prefix}--data-table tbody tr,
@@ -86,19 +86,19 @@
   .#{$prefix}--data-table tbody tr:hover th {
     color: $text-01;
     background: $hover-field;
-    border-bottom: 1px solid $hover-field;
     border-top: 1px solid $hover-field;
+    border-bottom: 1px solid $hover-field;
   }
 
   .#{$prefix}--data-table th,
   .#{$prefix}--data-table td {
-    vertical-align: middle;
     text-align: left;
+    vertical-align: middle;
   }
 
   .#{$prefix}--data-table td {
-    padding-left: $spacing-05;
     padding-right: $spacing-05;
+    padding-left: $spacing-05;
   }
 
   .#{$prefix}--data-table th {
@@ -113,19 +113,19 @@
   }
 
   .#{$prefix}--data-table .#{$prefix}--table-header-label {
-    padding-left: $spacing-05;
     padding-right: $spacing-05;
+    padding-left: $spacing-05;
     text-align: left;
   }
 
   .#{$prefix}--data-table td,
   .#{$prefix}--data-table tbody th {
-    background: $ui-01;
+    padding-right: $spacing-05;
+    padding-left: $spacing-05;
     color: $text-02;
+    background: $ui-01;
     border-top: 1px solid $ui-01;
     border-bottom: 1px solid $ui-03;
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
 
     + td:first-of-type {
       padding-left: $spacing-04;
@@ -194,10 +194,10 @@
     .#{$prefix}--overflow-menu-options__btn
     .#{$prefix}--overflow-menu-options__option-content
     svg {
-    margin-right: $spacing-03;
     position: relative;
     // Used to center svg without setting display flex //display block needed for overflow text truncation
     top: rem(3px);
+    margin-right: $spacing-03;
   }
 
   .#{$prefix}--data-table .#{$prefix}--overflow-menu,
@@ -216,9 +216,9 @@
 
   .#{$prefix}--data-table--compact td.#{$prefix}--table-column-menu,
   .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu {
+    height: rem(24px);
     padding-top: 0;
     padding-bottom: 0;
-    height: rem(24px);
   }
 
   .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu {
@@ -245,8 +245,8 @@
     tr:not(.#{$prefix}--parent-row):nth-child(odd)
     td {
     background-color: $data-table-zebra-color;
-    border-bottom: 1px solid $data-table-zebra-color;
     border-top: 1px solid $data-table-zebra-color;
+    border-bottom: 1px solid $data-table-zebra-color;
   }
 
   .#{$prefix}--data-table--zebra
@@ -254,8 +254,8 @@
     tr:not(.#{$prefix}--parent-row):hover
     td {
     background-color: $hover-field;
-    border-bottom: 1px solid $hover-field;
     border-top: 1px solid $hover-field;
+    border-bottom: 1px solid $hover-field;
   }
 
   //----------------------------------------------------------------------------
@@ -268,6 +268,10 @@
   .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
     // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
     position: static;
+    // 16px padding left + 8px padding right + 20px checkbox width
+    width: rem(44px);
+    padding-right: $spacing-05;
+    padding-left: $spacing-05;
     background: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive);
   }
@@ -277,10 +281,10 @@
   .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
     min-width: 0;
-    padding-left: $spacing-05;
     // spacing between checkbox / chevron and next cell should be 16px / 1rem
     // adjacent cell has 16px / 1rem padding-left though, hence the removal of padding-right here
     padding-right: 0;
+    padding-left: $spacing-05;
   }
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
@@ -424,9 +428,9 @@
   .#{$prefix}--data-table.#{$prefix}--data-table--compact
     .#{$prefix}--table-column-checkbox
     .#{$prefix}--checkbox-label {
+    height: rem(23px);
     // 24px row - 1px border
     min-height: rem(23px);
-    height: rem(23px);
   }
 
   //----------------------------------------------------------------------------
@@ -517,13 +521,13 @@
 
     thead {
       position: sticky;
-      z-index: 1;
       top: 0;
+      z-index: 1;
       width: 100%;
       overflow: scroll;
+      will-change: transform;
       // Hides ie scrollbar
       -ms-overflow-style: none;
-      will-change: transform;
     }
 
     thead tr th {
@@ -539,8 +543,8 @@
     }
 
     tr {
-      min-height: rem(48px);
       height: auto;
+      min-height: rem(48px);
     }
 
     tr.#{$prefix}--data-table--selected:first-of-type td {

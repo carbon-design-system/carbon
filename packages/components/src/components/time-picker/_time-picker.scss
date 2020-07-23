@@ -42,9 +42,9 @@
   }
 
   .#{$prefix}--time-picker .#{$prefix}--select-input {
-    margin: 0;
-    min-width: auto;
     width: auto;
+    min-width: auto;
+    margin: 0;
     padding-right: rem(48px);
     line-height: 1;
   }
@@ -74,10 +74,10 @@
 
     &:disabled,
     &:hover:disabled {
-      cursor: not-allowed;
+      color: $disabled-02;
       background-color: transparent;
       border-bottom: 1px solid transparent;
-      color: $disabled-02;
+      cursor: not-allowed;
     }
   }
 }
