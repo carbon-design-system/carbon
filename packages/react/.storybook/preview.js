@@ -8,7 +8,7 @@
 import React from 'react';
 import { addDecorator, addParameters } from '@storybook/react';
 import addons from '@storybook/addons';
-import { withInfo } from '@storybook/addon-info';
+import { themes } from '@storybook/theming';
 import { configureActions } from '@storybook/addon-actions';
 import {
   CARBON_CURRENT_THEME,
@@ -19,22 +19,66 @@ import PackageInfo from './../package.json';
 
 const customPropertyPrefix = 'cds';
 
-addDecorator(
-  withInfo({
-    styles: {
-      children: {
-        width: '100%',
-      },
-    },
-    maxPropStringLength: 200, // Displays the first 200 characters in the default prop string
-  })
-);
-
 addParameters({
   options: {
-    // display in alphabetic order
-    storySort: (a, b) => a[1].id.localeCompare(b[1].id),
+    /**
+     * We sort our stories by default alphabetically, however there are specific
+     * keywords that will be sorted further down the sidebar, including
+     * "playground" and "unstable" stories.
+     */
+    storySort: (storyA, storyB) => {
+      const idA = storyA[0];
+      const idB = storyB[0];
+
+      // To story the stories, we first build up a list of matches based on
+      // keywords. Each keyword has a specific weight that will be used to
+      // determine order later on.
+      const UNKNOWN_KEYWORD = 0;
+      const keywords = new Map([
+        ['playground', 1],
+        ['unstable', 2],
+      ]);
+      const matches = new Map();
+
+      // We use this list of keywords to determine a collection of matches. By
+      // default, we will look for the greatest valued matched
+      for (const [keyword, weight] of keywords) {
+        // If we already have a match for a given id that is greater than the
+        // specific keyword we're looking for, break early
+        if (matches.get(idA) > weight || matches.get(idB) > weight) {
+          break;
+        }
+
+        // If we don't have a match already for either id, we check to see if
+        // the id includes the keyword and assigns the relevant weight, if so
+        if (idA.includes(keyword)) {
+          matches.set(idA, weight);
+        }
+
+        if (idB.includes(keyword)) {
+          matches.set(idB, weight);
+        }
+      }
+
+      // If we have matches for either id, then we will compare the ids based on
+      // the weight assigned to the matching keyword
+      if (matches.size > 0) {
+        const weightA = matches.get(idA) ?? UNKNOWN_KEYWORD;
+        const weightB = matches.get(idB) ?? UNKNOWN_KEYWORD;
+        // If we have the same weight for the ids, then we should compare them
+        // using locale compare instead of by weight
+        if (weightA === weightB) {
+          return idA.localeCompare(idB);
+        }
+        return weightA - weightB;
+      }
+
+      // By default, if we have no matches we'll do a locale compare between the
+      // two ids
+      return idA.localeCompare(idB);
+    },
     theme: {
+      ...themes.light,
       brandTitle: `Carbon Components React v${PackageInfo.version}`,
       brandUrl:
         'https://github.com/carbon-design-system/carbon/tree/master/packages/react',
