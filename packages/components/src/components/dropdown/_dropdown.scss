@@ -23,9 +23,9 @@
 @mixin dropdown {
   .#{$prefix}--dropdown__wrapper--inline {
     display: inline-grid;
-    align-items: center;
-    grid-template: auto auto / auto min-content;
     grid-gap: rem(4px);
+    grid-template: auto auto / auto min-content;
+    align-items: center;
 
     .#{$prefix}--label {
       @include type-style('body-short-01');
@@ -47,16 +47,16 @@
     @include focus-outline('reset');
 
     position: relative;
-    list-style: none;
     display: block;
+    width: 100%;
+    height: rem(40px);
+    color: $text-01;
+    list-style: none;
     background-color: $field-01;
     border: none;
     border-bottom: 1px solid $ui-04;
-    width: 100%;
-    height: rem(40px);
-    cursor: pointer;
-    color: $text-01;
     outline: 2px solid transparent;
+    cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive);
 
     &:hover {
@@ -68,8 +68,8 @@
   .#{$prefix}--dropdown .#{$prefix}--list-box__field {
     @include button-reset;
 
-    text-align: left;
     padding: 0 rem(48px) 0 rem(16px);
+    text-align: left;
   }
 
   .#{$prefix}--dropdown--xl {
@@ -112,8 +112,8 @@
     position: absolute;
     top: 50%;
     right: $spacing-08;
-    fill: $support-01;
     transform: translateY(-50%);
+    fill: $support-01;
   }
 
   .#{$prefix}--dropdown--open:hover {
@@ -141,22 +141,22 @@
   }
 
   .#{$prefix}--dropdown__arrow {
-    fill: $ui-05;
     position: absolute;
-    right: 1rem;
     top: rem(13px);
-    pointer-events: none;
-    transition: transform $duration--fast-02 motion(standard, productive);
+    right: 1rem;
     transform-origin: 50% 45%;
+    transition: transform $duration--fast-02 motion(standard, productive);
+    pointer-events: none;
+    fill: $ui-05;
   }
 
   button.#{$prefix}--dropdown-text {
+    width: 100%;
     color: $text-01;
+    text-align: left;
     // button-reset mixin contradicts with bx--dropdown-text styles
     background: none;
     border: none;
-    width: 100%;
-    text-align: left;
 
     &:focus {
       @include focus-outline('outline');
@@ -169,11 +169,11 @@
     display: block;
     // Account for the border in `.bx--dropdown`
     height: calc(100% + 1px);
-    padding-left: $carbon--spacing-05;
     // 2rem + SVG width
     padding-right: rem(42px);
-    white-space: nowrap;
+    padding-left: $carbon--spacing-05;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
   }
 
@@ -183,18 +183,19 @@
     @include box-shadow;
     @include type-style('body-short-01');
 
-    background-color: $ui-01;
+    position: absolute;
+    z-index: z('dropdown');
     display: flex;
     flex-direction: column;
     width: 100%;
-    list-style: none;
-    position: absolute;
-    z-index: z('dropdown');
     max-height: 0;
-    transition: max-height $duration--fast-02 motion(standard, productive);
     // NOTE: IE, Edge, and Safari do not support two value `overflow` shorthand.
     overflow-x: hidden;
     overflow-y: auto;
+    list-style: none;
+
+    background-color: $ui-01;
+    transition: max-height $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list {
@@ -207,12 +208,12 @@
   }
 
   .#{$prefix}--dropdown-item {
+    position: relative;
+    visibility: inherit;
+    opacity: 0;
     transition: visibility $duration--fast-01 motion(standard, productive),
       opacity $duration--fast-01 motion(standard, productive),
       background-color $duration--fast-01 motion(standard, productive);
-    opacity: 0;
-    visibility: inherit;
-    position: relative;
 
     &:hover {
       background-color: $hover-ui;
@@ -240,17 +241,17 @@
 
     display: block;
     height: rem(40px);
+    margin: 0 $carbon--spacing-05;
+    padding: rem(11px) 0;
+    overflow: hidden;
     color: $text-02;
-    text-decoration: none;
     font-weight: normal;
     line-height: 1rem;
-    padding: rem(11px) 0;
-    margin: 0 $carbon--spacing-05;
+    white-space: nowrap;
+    text-decoration: none;
+    text-overflow: ellipsis;
     border: 1px solid transparent;
     border-top-color: $ui-03;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
 
     &:hover {
       color: $text-01;
@@ -263,15 +264,15 @@
   }
 
   .#{$prefix}--dropdown--sm .#{$prefix}--dropdown-link {
+    height: rem(32px);
     padding-top: rem(7px);
     padding-bottom: rem(7px);
-    height: rem(32px);
   }
 
   .#{$prefix}--dropdown--xl .#{$prefix}--dropdown-link {
+    height: rem(48px);
     padding-top: rem(15px);
     padding-bottom: rem(15px);
-    height: rem(48px);
   }
 
   .#{$prefix}--dropdown--focused,
@@ -285,10 +286,10 @@
   // We don't want to apply focus styles via focus selector when using the aria-activedescendant structure
   .#{$prefix}--dropdown-list[aria-activedescendant]
     .#{$prefix}--dropdown-link:focus {
-    outline: none;
     // Copied from .bx--dropdown-link styles
     margin: 0 $carbon--spacing-05;
     padding: rem(11px) 0;
+    outline: none;
   }
 
   // Need added weight for item that is :focused and .bx--dropdown--focused
@@ -375,11 +376,11 @@
   }
 
   .#{$prefix}--dropdown--inline {
-    justify-self: start;
     display: inline-block;
-    border-bottom-color: transparent;
+    justify-self: start;
     width: auto;
     background-color: transparent;
+    border-bottom-color: transparent;
     transition: background $duration--fast-01 motion(entrance, productive);
 
     &:hover {
@@ -402,8 +403,8 @@
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-text {
     display: inline-block;
-    padding: rem(7px) $carbon--spacing-07 rem(7px) $carbon--spacing-04;
     height: rem(32px);
+    padding: rem(7px) $carbon--spacing-07 rem(7px) $carbon--spacing-04;
     overflow: visible;
     color: $text-01;
   }
@@ -438,9 +439,9 @@
   }
 
   .#{$prefix}--dropdown--show-selected .#{$prefix}--dropdown--selected {
-    background-color: $hover-ui;
-    color: $text-01;
     display: block;
+    color: $text-01;
+    background-color: $hover-ui;
 
     &:hover {
       background-color: $selected-ui;

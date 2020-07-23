@@ -83,6 +83,7 @@ export OrderedList from './components/OrderedList';
 export OverflowMenu from './components/OverflowMenu';
 export OverflowMenuItem from './components/OverflowMenuItem';
 export Pagination from './components/Pagination';
+export PaginationNav from './components/PaginationNav';
 export PrimaryButton from './components/PrimaryButton';
 export {
   ProgressIndicator,

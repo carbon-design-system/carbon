@@ -39,12 +39,12 @@
     @include type-style('body-short-01');
     @include focus-outline('reset');
 
-    height: rem(40px);
-    appearance: none;
     display: block;
     width: rem(224px);
     min-width: rem(128px);
     max-width: rem(448px);
+
+    height: rem(40px);
     padding: 0 $spacing-09 0 $spacing-05;
     color: $text-01;
     background-color: $field-01;
@@ -55,6 +55,7 @@
 
     // Do not transition on background-color (see: https://github.com/carbon-design-system/carbon/issues/4464)
     transition: outline $duration--fast-01 motion(standard, productive);
+    appearance: none;
 
     &:hover {
       background-color: $hover-ui;
@@ -84,10 +85,10 @@
 
     &:disabled,
     &:hover:disabled {
-      cursor: not-allowed;
-      background-color: $disabled-background-color;
       color: $disabled-02;
+      background-color: $disabled-background-color;
       border-bottom-color: $disabled-background-color;
+      cursor: not-allowed;
     }
   }
 
@@ -118,8 +119,8 @@
 
   .#{$prefix}--form-requirement {
     display: block;
-    font-weight: 400;
     overflow: visible;
+    font-weight: 400;
   }
 
   .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
@@ -135,9 +136,9 @@
 
     &:disabled,
     &:hover:disabled {
-      cursor: not-allowed;
-      background-color: $disabled-background-color;
       color: $disabled-02;
+      background-color: $disabled-background-color;
+      cursor: not-allowed;
     }
   }
 
@@ -146,8 +147,8 @@
     top: 0;
     right: $spacing-05;
     height: 100%;
-    fill: $ui-05;
     pointer-events: none;
+    fill: $ui-05;
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid]
@@ -165,15 +166,15 @@
   }
 
   .#{$prefix}--select-option[disabled] {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 
   // Override some Firefox user-agent styles
   @-moz-document url-prefix() {
     .#{$prefix}--select-option {
-      background-color: $ui-01;
       color: $text-01;
+      background-color: $ui-01;
     }
 
     .#{$prefix}--select-optgroup {
@@ -190,9 +191,9 @@
   .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--label,
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--form__helper-text {
+    align-self: flex-start;
     // Offset label text margin
     margin-top: rem(13px);
-    align-self: flex-start;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
@@ -201,16 +202,16 @@
   }
 
   .#{$prefix}--select--inline .#{$prefix}--label {
-    white-space: nowrap;
     margin: 0 $carbon--spacing-03 0 0;
+    white-space: nowrap;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input {
-    background-color: transparent;
-    color: $text-01;
-    border-bottom: none;
-    padding-left: $carbon--spacing-03;
     padding-right: $spacing-07;
+    padding-left: $carbon--spacing-03;
+    color: $text-01;
+    background-color: transparent;
+    border-bottom: none;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
