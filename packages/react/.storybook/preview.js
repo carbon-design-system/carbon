@@ -6,11 +6,10 @@
  */
 
 import React from 'react';
-import { configure, addDecorator, addParameters } from '@storybook/react';
+import { addDecorator, addParameters } from '@storybook/react';
 import addons from '@storybook/addons';
 import { withInfo } from '@storybook/addon-info';
 import { configureActions } from '@storybook/addon-actions';
-// import { checkA11y } from 'storybook-addon-a11y';
 import {
   CARBON_CURRENT_THEME,
   CARBON_TYPE_TOKEN,
@@ -71,5 +70,3 @@ addons.getChannel().on(CARBON_TYPE_TOKEN, ({ tokenName, tokenValue }) => {
     rem(lineHeight)
   );
 });
-
-configure(require.context('../src/components', true, /\-story\.js$/), module);
