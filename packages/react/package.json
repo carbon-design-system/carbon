@@ -57,15 +57,6 @@
   "devDependencies": {
     "@babel/cli": "^7.10.0",
     "@babel/core": "^7.10.0",
-    "@babel/plugin-external-helpers": "^7.7.4",
-    "@babel/plugin-proposal-class-properties": "^7.7.4",
-    "@babel/plugin-proposal-export-default-from": "^7.7.4",
-    "@babel/plugin-proposal-export-namespace-from": "^7.7.4",
-    "@babel/plugin-syntax-dynamic-import": "^7.7.4",
-    "@babel/plugin-syntax-import-meta": "^7.7.4",
-    "@babel/plugin-transform-object-assign": "^7.7.4",
-    "@babel/preset-env": "^7.10.0",
-    "@babel/preset-react": "^7.10.0",
     "@carbon/test-utils": "^10.10.0",
     "@percy/storybook": "^3.3.0",
     "@storybook/addon-a11y": "^5.3.19",
@@ -77,11 +68,9 @@
     "@storybook/addons": "^5.3.19",
     "@storybook/react": "^5.3.19",
     "@storybook/source-loader": "^5.3.19",
-    "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.1.0",
-    "babel-plugin-dev-expression": "^0.2.2",
     "babel-plugin-react-docgen": "^4.0.0",
-    "babel-plugin-transform-inline-environment-variables": "^0.4.0",
+    "babel-preset-carbon": "^0.0.0",
     "browserslist-config-carbon": "^10.4.0",
     "carbon-components": "^10.16.0",
     "carbon-icons": "^7.0.5",
@@ -122,20 +111,6 @@
     "whatwg-fetch": "^2.0.3"
   },
   "sideEffects": false,
-  "babel": {
-    "presets": [
-      "./scripts/env",
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      "dev-expression",
-      "@babel/plugin-syntax-dynamic-import",
-      "@babel/plugin-syntax-import-meta",
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-export-namespace-from",
-      "@babel/plugin-proposal-export-default-from"
-    ]
-  },
   "contributors": [
     {
       "name": "Brian Han",

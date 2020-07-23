@@ -110,22 +110,10 @@ module.exports = function (config) {
             exclude: [/node_modules/, /settings\.js$/],
             loader: 'babel-loader',
             query: {
-              presets: [
-                [
-                  '@babel/preset-env',
-                  {
-                    modules: false,
-                    targets: {
-                      browsers: ['last 1 version', 'ie >= 11'],
-                    },
-                  },
-                ],
-              ],
+              presets: ['babel-preset-carbon/test'],
               plugins: [
-                '@babel/plugin-proposal-class-properties',
                 '@babel/plugin-proposal-object-rest-spread',
                 '@babel/plugin-transform-runtime',
-                'dev-expression',
               ]
                 .concat(
                   cloptions.debug
@@ -146,19 +134,8 @@ module.exports = function (config) {
             test: /settings\.js?$/,
             loader: 'babel-loader',
             query: {
-              presets: [
-                [
-                  '@babel/preset-env',
-                  {
-                    modules: false,
-                    targets: {
-                      browsers: ['last 1 version', 'ie >= 11'],
-                    },
-                  },
-                ],
-              ],
+              presets: ['babel-preset-carbon/test'],
               plugins: [
-                '@babel/plugin-proposal-class-properties',
                 '@babel/plugin-proposal-object-rest-spread',
                 '@babel/plugin-transform-runtime',
               ].concat(

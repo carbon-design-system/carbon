@@ -72,9 +72,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.10.0",
-    "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.10.0",
-    "@babel/plugin-transform-modules-umd": "^7.9.0",
     "@babel/plugin-transform-runtime": "^7.10.0",
     "@babel/preset-env": "^7.10.0",
     "@babel/preset-react": "^7.10.0",
@@ -88,9 +86,9 @@
     "autoprefixer": "^9.7.4",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.1.0",
-    "babel-plugin-dev-expression": "^0.2.2",
     "babel-plugin-istanbul": "^6.0.0",
     "babel-plugin-rewire": "^1.1.0",
+    "babel-preset-carbon": "^0.0.0",
     "bluebird": "~3.1.1",
     "browser-sync": "^2.26.3",
     "browserslist-config-carbon": "^10.4.0",
@@ -189,15 +187,5 @@
     "exports": false,
     "name": "carbon-components",
     "needs": "^1.2.1"
-  },
-  "babel": {
-    "presets": [
-      "./tools/env"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-object-rest-spread",
-      "dev-expression"
-    ]
   }
 }

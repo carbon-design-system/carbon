@@ -264,17 +264,13 @@ gulp.task('scripts:umd', () => {
   const babelOpts = {
     presets: [
       [
-        '@babel/preset-env',
+        'babel-preset-carbon',
         {
-          targets: {
-            browsers: ['last 1 version', 'ie >= 11'],
+          '@babel/preset-env': {
+            modules: 'umd',
           },
         },
       ],
-    ],
-    plugins: [
-      '@babel/plugin-transform-modules-umd',
-      ['@babel/plugin-proposal-class-properties', { loose: true }],
     ],
   };
 
@@ -294,18 +290,7 @@ gulp.task('scripts:umd', () => {
 gulp.task('scripts:es', () => {
   const srcFiles = ['./src/**/*.js'];
   const babelOpts = {
-    presets: [
-      [
-        '@babel/preset-env',
-        {
-          modules: false,
-          targets: {
-            browsers: ['last 1 version', 'ie >= 11'],
-          },
-        },
-      ],
-    ],
-    plugins: [['@babel/plugin-proposal-class-properties', { loose: true }]],
+    presets: ['babel-preset-carbon'],
   };
   return gulp
     .src(srcFiles)
@@ -592,10 +577,8 @@ gulp.task('jsdoc', (cb) => {
     .src('./src/**/*.js')
     .pipe(
       babel({
-        plugins: [
-          '@babel/plugin-proposal-class-properties',
-          '@babel/plugin-proposal-object-rest-spread',
-        ],
+        presets: ['babel-preset-carbon'],
+        plugins: ['@babel/plugin-proposal-object-rest-spread'],
         babelrc: false,
       })
     )

@@ -9,7 +9,6 @@ const mapValues = require('lodash/mapValues');
 if (inInstall()) {
   process.exit(0);
 }
-
 const babelPath = path
   .resolve(__dirname, '../node_modules/.bin/babel')
   .replace(/ /g, '\\ ');

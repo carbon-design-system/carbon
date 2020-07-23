@@ -22,17 +22,7 @@ const baseConfig = {
     }),
     babel({
       babelrc: false,
-      presets: [
-        [
-          '@babel/preset-env',
-          {
-            targets: {
-              browsers: ['extends browserslist-config-carbon'],
-            },
-          },
-        ],
-        '@babel/preset-react',
-      ],
+      presets: ['babel-preset-carbon'],
     }),
   ],
 };

@@ -40,28 +40,7 @@ const baseConfig = {
       },
     }),
     babel({
-      babelrc: false,
       exclude: ['node_modules/**'],
-      presets: [
-        [
-          '@babel/preset-env',
-          {
-            modules: false,
-            targets: {
-              browsers: ['extends browserslist-config-carbon'],
-            },
-          },
-        ],
-        '@babel/preset-react',
-      ],
-      plugins: [
-        'dev-expression',
-        '@babel/plugin-syntax-dynamic-import',
-        '@babel/plugin-syntax-import-meta',
-        '@babel/plugin-proposal-class-properties',
-        '@babel/plugin-proposal-export-namespace-from',
-        '@babel/plugin-proposal-export-default-from',
-      ],
     }),
     stripBanner(),
   ],
