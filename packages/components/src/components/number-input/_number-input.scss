@@ -85,17 +85,6 @@
     position: relative;
     display: flex;
     align-items: center;
-
-    ~ .#{$prefix}--form-requirement {
-      margin-top: $carbon--spacing-02;
-      overflow: visible;
-      color: $text-error;
-      font-weight: 400;
-
-      &::before {
-        display: none;
-      }
-    }
   }
 
   .#{$prefix}--number__controls {
@@ -156,17 +145,6 @@
 
   .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
     display: none;
-  }
-
-  .#{$prefix}--number[data-invalid] {
-    .#{$prefix}--form-requirement {
-      display: inline-block;
-      max-height: rem(200px);
-    }
-
-    input[type='number'] {
-      @include focus-outline('invalid');
-    }
   }
 
   .#{$prefix}--number__invalid {
