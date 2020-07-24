@@ -147,6 +147,16 @@ export default class Slider extends PureComponent {
      * `true` to use the light version.
      */
     light: PropTypes.bool,
+
+    /**
+     * `true` to specify if the control is required.
+     */
+    required: PropTypes.bool,
+
+    /**
+     * `true` to specify if the control is invalid.
+     */
+    invalid: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -172,7 +182,9 @@ export default class Slider extends PureComponent {
    */
   componentDidMount() {
     if (this.element) {
-      const { value, left } = this.calcValue({ useRawValue: true });
+      const { value, left } = this.calcValue({
+        useRawValue: true,
+      });
       this.setState({ value, left });
     }
   }
@@ -214,7 +226,10 @@ export default class Slider extends PureComponent {
       return;
     }
     this.setState(
-      this.calcValue({ value: this.props.value, useRawValue: true })
+      this.calcValue({
+        value: this.props.value,
+        useRawValue: true,
+      })
     );
   }
 
@@ -442,7 +457,10 @@ export default class Slider extends PureComponent {
 
     if (useRawValue) {
       // Adjusts only for min/max of thumb position
-      return { value, left: Math.min(1, Math.max(0, leftPercent)) * 100 };
+      return {
+        value,
+        left: Math.min(1, Math.max(0, leftPercent)) * 100,
+      };
     }
 
     let steppedValue = Math.round(leftPercent * totalSteps) * this.props.step;

@@ -10,7 +10,8 @@
   "workspaces": {
     "packages": [
       "packages/*",
-      "actions/*"
+      "actions/*",
+      "config/*"
     ],
     "nohoist": []
   },
@@ -23,7 +24,7 @@
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
     "lint": "eslint packages actions",
     "lint:docs": "alex 'docs/**/*.md' -q",
-    "lint:styles": "stylelint '**/*.{css,scss}' --config ./packages/stylelint-config-elements",
+    "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
     "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
@@ -43,7 +44,6 @@
     "@babel/preset-env": "^7.10.0",
     "@babel/preset-react": "^7.10.0",
     "@babel/runtime": "^7.10.0",
-    "@carbon/cli": "10.11.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@ibma/aat": "https://able.ibm.com/tools/dist/ibma-aat-2.0.6.tgz",
@@ -57,7 +57,6 @@
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.3.5",
     "eslint": "^6.8.0",
-    "eslint-config-carbon": "10.7.0",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.4",
     "husky": "^4.0.10",
@@ -71,7 +70,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "rimraf": "^3.0.0",
-    "stylelint": "^13.0.0"
+    "stylelint": "^13.6.0"
   },
   "husky": {
     "hooks": {
@@ -123,8 +122,9 @@
       "eslint",
       "git add"
     ],
-    "packages/components/**/*.scss": [
+    "**/*.scss": [
       "prettier --write",
+      "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input",
       "git add"
     ],
     "!(*sass).md": [
@@ -140,7 +140,7 @@
   },
   "stylelint": {
     "extends": [
-      "./packages/stylelint-config-elements"
+      "./config/stylelint-config-carbon"
     ]
   },
   "jest": {

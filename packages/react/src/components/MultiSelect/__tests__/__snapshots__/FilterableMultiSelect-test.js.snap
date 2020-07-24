@@ -112,12 +112,11 @@ exports[`MultiSelect.Filterable should render 1`] = `
               type="button"
             >
               <div
-                aria-controls={null}
                 aria-haspopup={true}
                 aria-labelledby="test-filterable-multiselect-label"
-                aria-owns={null}
                 className="bx--list-box__field"
                 data-toggle={true}
+                id="test-filterable-multiselect"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onKeyDown={[Function]}

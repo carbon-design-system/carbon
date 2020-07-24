@@ -121,8 +121,8 @@ describe('DataTable', () => {
             <Table {...getTableProps()}>
               <TableHead>
                 <TableRow>
-                  {headers.map((header) => (
-                    <TableHeader {...getHeaderProps({ header })}>
+                  {headers.map((header, i) => (
+                    <TableHeader key={i} {...getHeaderProps({ header })}>
                       {header.header}
                     </TableHeader>
                   ))}
@@ -254,8 +254,8 @@ describe('DataTable', () => {
                 <TableHead>
                   <TableRow>
                     <TableSelectAll {...getSelectionProps()} />
-                    {headers.map((header) => (
-                      <TableHeader {...getHeaderProps({ header })}>
+                    {headers.map((header, i) => (
+                      <TableHeader key={i} {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
@@ -409,8 +409,8 @@ describe('DataTable', () => {
                 <TableHead>
                   <TableRow>
                     <TableSelectAll {...getSelectionProps()} />
-                    {headers.map((header) => (
-                      <TableHeader {...getHeaderProps({ header })}>
+                    {headers.map((header, i) => (
+                      <TableHeader key={i} {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
@@ -555,8 +555,8 @@ describe('DataTable', () => {
               <Table>
                 <TableHead>
                   <TableRow>
-                    {headers.map((header) => (
-                      <TableHeader {...getHeaderProps({ header })}>
+                    {headers.map((header, i) => (
+                      <TableHeader key={i} {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
@@ -707,8 +707,8 @@ describe('DataTable', () => {
                   <TableRow>
                     <TableExpandHeader {...getExpandHeaderProps()} />
                     <TableSelectAll {...getSelectionProps()} />
-                    {headers.map((header) => (
-                      <TableHeader {...getHeaderProps({ header })}>
+                    {headers.map((header, i) => (
+                      <TableHeader key={i} {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}

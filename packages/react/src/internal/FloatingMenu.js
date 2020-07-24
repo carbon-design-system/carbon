@@ -13,6 +13,7 @@ import window from 'window-or-global';
 import { settings } from 'carbon-components';
 import OptimizedResize from './OptimizedResize';
 import { selectorFocusable, selectorTabbable } from './keyboard/navigation';
+import wrapFocus from './wrapFocus';
 
 const { prefix } = settings;
 
@@ -196,6 +197,26 @@ class FloatingMenu extends React.Component {
      * The callback called when the menu body has been mounted and positioned.
      */
     onPlace: PropTypes.func,
+
+    /**
+     * `true` if the menu alignment should be flipped.
+     */
+    flipped: PropTypes.bool,
+
+    /**
+     * The element ref of the tooltip's trigger button.
+     */
+    triggerRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({
+        current: PropTypes.any,
+      }),
+    ]),
+
+    /**
+     * Enable or disable focus trap behavior
+     */
+    focusTrap: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -231,6 +252,12 @@ class FloatingMenu extends React.Component {
    * @private
    */
   _menuBody = null;
+
+  /**
+   * Focus sentinel refs for focus trap behavior
+   */
+  startSentinel = React.createRef();
+  endSentinel = React.createRef();
 
   /**
    * Calculates the position in the viewport of floating menu,
@@ -384,11 +411,34 @@ class FloatingMenu extends React.Component {
     });
   };
 
+  /**
+   * Blur handler for when focus wrap behavior is enabled
+   * @param {Event} event
+   * @param {Element} event.target previously focused node
+   * @param {Element} event.relatedTarget current focused node
+   */
+  handleBlur = ({
+    target: oldActiveNode,
+    relatedTarget: currentActiveNode,
+  }) => {
+    if (currentActiveNode && oldActiveNode) {
+      const { current: startSentinelNode } = this.startSentinel;
+      const { current: endSentinelNode } = this.endSentinel;
+      wrapFocus({
+        bodyNode: this._menuBody,
+        startSentinelNode,
+        endSentinelNode,
+        currentActiveNode,
+        oldActiveNode,
+      });
+    }
+  };
+
   render() {
     if (typeof document !== 'undefined') {
-      const { target } = this.props;
+      const { focusTrap, target } = this.props;
       return ReactDOM.createPortal(
-        <>
+        <div onBlur={focusTrap ? this.handleBlur : null}>
           {/* Non-translatable: Focus management code makes this `<span>` not actually read by screen readers */}
           <span
             ref={this.startSentinel}
@@ -406,7 +456,7 @@ class FloatingMenu extends React.Component {
             className={`${prefix}--visually-hidden`}>
             Focus sentinel
           </span>
-        </>,
+        </div>,
         !target ? document.body : target()
       );
     }

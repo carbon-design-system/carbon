@@ -96,6 +96,13 @@ yet.
     padding-right: ($condensed-gutter / 2);
     padding-left: ($condensed-gutter / 2);
   }
+
+  // For our narrow use-case, our container hangs 16px into the gutter
+  .#{$prefix}--row--narrow &,
+  .#{$prefix}--grid--narrow & {
+    padding-right: ($gutter / 2);
+    padding-left: 0;
+  }
 }
 ```
 
@@ -297,7 +304,7 @@ Define the properties for a selector assigned to a row in the grid system.
 
 ### ❌carbon--no-gutter [mixin]
 
-Add `no-gutter` and `no-gutter--{left,right}` classes to the output CSS. These
+Add `no-gutter` and `no-gutter--{start,end}` classes to the output CSS. These
 classes are useful for dropping the gutter in fluid situations.
 
 <details>
@@ -307,10 +314,21 @@ classes are useful for dropping the gutter in fluid situations.
 @mixin carbon--no-gutter() {
   .#{$prefix}--no-gutter,
   .#{$prefix}--row.#{$prefix}--no-gutter [class*='#{$prefix}--col'] {
+    padding-right: 0;
     padding-left: 0;
+  }
+
+  .#{$prefix}--no-gutter--start,
+  .#{$prefix}--row.#{$prefix}--no-gutter--start [class*='#{$prefix}--col'] {
+    padding-left: 0;
+  }
+
+  .#{$prefix}--no-gutter--end,
+  .#{$prefix}--row.#{$prefix}--no-gutter--end [class*='#{$prefix}--col'] {
     padding-right: 0;
   }
 
+  // Deprecated ☠️
   .#{$prefix}--no-gutter--left,
   .#{$prefix}--row.#{$prefix}--no-gutter--left [class*='#{$prefix}--col'] {
     padding-left: 0;
@@ -333,14 +351,23 @@ classes are useful for dropping the gutter in fluid situations.
 
 ### ❌carbon--hang [mixin]
 
-Add `hang--left` and `hang--right` classes for a given gutter. These classes are
-used alongside `no-gutter--left` and `no-gutter--right` to "hang" type.
+Add `hang--start` and `hang--end` classes for a given gutter. These classes are
+used alongside `no-gutter--start` and `no-gutter--end` to "hang" type.
 
 <details>
 <summary>Source code</summary>
 
 ```scss
 @mixin carbon--hang($gutter: $carbon--grid-gutter) {
+  .#{$prefix}--hang--start {
+    padding-left: ($gutter / 2);
+  }
+
+  .#{$prefix}--hang--end {
+    padding-right: ($gutter / 2);
+  }
+
+  // Deprecated ☠️
   .#{$prefix}--hang--left {
     padding-left: ($gutter / 2);
   }
@@ -410,17 +437,17 @@ https://keithjgrant.com/posts/2017/03/aspect-ratios/
   }
 
   .#{$prefix}--aspect-ratio::before {
-    content: '';
-    width: 1px;
-    margin-left: -1px;
     float: left;
+    width: 1px;
     height: 0;
+    margin-left: -1px;
+    content: '';
   }
 
   .#{$prefix}--aspect-ratio::after {
-    content: '';
     display: table;
     clear: both;
+    content: '';
   }
 
   @each $aspect-ratio in $aspect-ratios {
@@ -481,14 +508,14 @@ max-width properties are added with `make-container-max-widths`
       $prev-margin: map-get($prev-breakpoint, margin);
       @if $prev-margin != $margin {
         @include carbon--breakpoint($name) {
-          padding-left: #{($carbon--grid-gutter / 2) + $margin};
           padding-right: #{($carbon--grid-gutter / 2) + $margin};
+          padding-left: #{($carbon--grid-gutter / 2) + $margin};
         }
       }
     } @else {
       @include carbon--breakpoint($name) {
-        padding-left: #{($carbon--grid-gutter / 2) + $margin};
         padding-right: #{($carbon--grid-gutter / 2) + $margin};
+        padding-left: #{($carbon--grid-gutter / 2) + $margin};
       }
     }
   }

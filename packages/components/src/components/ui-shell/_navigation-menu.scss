@@ -22,16 +22,16 @@
     top: mini-units(6);
     bottom: 0;
     left: 0;
-    background-color: $ibm-color__gray-90;
-    width: mini-units(32);
     z-index: z('dropdown');
-    box-shadow: 0 mini-units(1) mini-units(2) 0 rgba(0, 0, 0, 0.25);
+    width: mini-units(32);
     color: $ibm-color__gray-10;
+    background-color: $ibm-color__gray-90;
+    box-shadow: 0 mini-units(1) mini-units(2) 0 rgba(0, 0, 0, 0.25);
   }
 
   .#{$prefix}--navigation--right {
-    left: auto;
     right: 0;
+    left: auto;
   }
 
   .#{$prefix}--navigation svg {
@@ -43,10 +43,10 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--navigation-section:not(:last-child)::after {
     display: block;
-    content: '';
     height: 1px;
-    background-color: $ibm-color__gray-80;
     margin: 0 mini-units(2);
+    background-color: $ibm-color__gray-80;
+    content: '';
   }
 
   //----------------------------------------------------------------------------
@@ -64,14 +64,14 @@
   }
 
   .#{$prefix}--navigation-item--active::after {
-    content: '';
-    display: block;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
+    display: block;
     width: 4px;
     background-color: $ibm-color__blue-60;
+    content: '';
   }
 
   //----------------------------------------------------------------------------
@@ -80,18 +80,18 @@
   a.#{$prefix}--navigation-link {
     display: flex;
     align-items: center;
-    color: $ibm-color__gray-10;
-    text-decoration: none;
-    font-size: rem(14px);
-    font-weight: 400;
     width: 100%;
     min-height: mini-units(5);
     padding-left: mini-units(2);
+    color: $ibm-color__gray-10;
+    font-weight: 400;
+    font-size: rem(14px);
+    text-decoration: none;
   }
 
   a.#{$prefix}--navigation-link:hover {
-    background-color: #333333;
     color: $ibm-color__white-0;
+    background-color: #333333;
   }
 
   a.#{$prefix}--navigation-link:focus {
@@ -130,13 +130,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-right: mini-units(2);
     width: 100%;
-    color: $ibm-color__gray-10;
-    font-size: rem(14px);
-    font-weight: 400;
     min-height: mini-units(5);
+    padding-right: mini-units(2);
     padding-left: mini-units(2);
+    color: $ibm-color__gray-10;
+    font-weight: 400;
+    font-size: rem(14px);
   }
 
   .#{$prefix}--navigation-item--icon .#{$prefix}--navigation__category-title {
@@ -166,20 +166,20 @@
   }
 
   .#{$prefix}--navigation__category-item--active::after {
-    content: '';
     position: absolute;
-    display: block;
     top: 0;
     bottom: 0;
     left: 0;
+    display: block;
     width: 4px;
     background-color: $ibm-color__blue-60;
+    content: '';
   }
 
   .#{$prefix}--navigation__category-item--active
     > a.#{$prefix}--navigation-link {
-    font-weight: 600;
     color: $ibm-color__white-0;
+    font-weight: 600;
   }
 
   .#{$prefix}--navigation__category--expanded

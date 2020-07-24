@@ -23,16 +23,16 @@
     top: mini-units(6);
     right: 0;
     bottom: 0;
-    width: mini-units(32);
-    will-change: transform;
-    transform: translate3d(100%, 0, 0);
-    padding: 1rem 0;
-    overflow-y: auto;
     z-index: 1000;
-    background-color: $shell-panel-bg-01;
+    width: mini-units(32);
     height: 100%;
+    padding: 1rem 0;
     overflow-x: hidden;
+    overflow-y: auto;
+    background-color: $shell-panel-bg-01;
+    transform: translate3d(100%, 0, 0);
     transition: transform 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
+    will-change: transform;
   }
 
   .#{$prefix}--panel--expanded {
@@ -44,8 +44,8 @@
   // Switcher - Search
   //--------------------------------------------------------------------------
   .#{$prefix}--product-switcher__search {
-    padding: 0 mini-units(2);
     margin-bottom: mini-units(3);
+    padding: 0 mini-units(2);
   }
 
   .#{$prefix}--search--shell input {
@@ -58,6 +58,7 @@
   .#{$prefix}--product-switcher__subheader,
   .#{$prefix}--product-switcher__all-btn {
     @include type-style('body-short-01');
+
     padding: mini-units(1);
     color: $shell-panel-text-01;
   }
@@ -73,12 +74,12 @@
   .#{$prefix}--product-switcher__all-btn,
   .#{$prefix}--product-switcher__back-btn {
     display: inline-block;
-    background: transparent;
     width: 100%;
-    border: none;
     color: $shell-header-link;
-    cursor: pointer;
     text-align: left;
+    background: transparent;
+    border: none;
+    cursor: pointer;
   }
 
   .#{$prefix}--product-switcher__all-btn:hover,
@@ -93,25 +94,26 @@
   }
 
   .#{$prefix}--product-switcher__back-btn {
+    @include type-style('body-short-01');
+
     display: flex;
     align-items: center;
-    @include type-style('body-short-01');
     padding: mini-units(1) mini-units(2);
   }
 
   .#{$prefix}--product-switcher__back-arrow {
-    fill: $shell-header-link;
     margin-right: mini-units(2);
+    fill: $shell-header-link;
   }
 
   //--------------------------------------------------------------------------
   // Switcher - Product List
   //--------------------------------------------------------------------------
   .#{$prefix}--product-list__item {
-    cursor: pointer;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
   }
 
   .#{$prefix}--product-list__item:hover {
@@ -138,15 +140,16 @@
 
   .#{$prefix}--product-link__name {
     @include type-style('body-short-01');
+
     margin-left: 0.25rem;
-    font-weight: 400;
     color: $shell-header-text-02;
+    font-weight: 400;
   }
 
   .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu {
     display: none;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     width: mini-units(5);
 
     &.#{$prefix}--overflow-menu--open {

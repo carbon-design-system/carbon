@@ -103,6 +103,7 @@ class InlineCheckbox extends React.Component {
       onClick,
       onKeyDown,
       title = undefined,
+      // eslint-disable-next-line react/prop-types
       innerRef: ref,
     } = this.props;
     const inputProps = {

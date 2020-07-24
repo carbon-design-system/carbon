@@ -24,8 +24,9 @@
   }
 
   .#{$prefix}--btn-set > .#{$prefix}--btn {
-    max-width: rem(196px); // 196px from design kit
     width: 100%;
+    // 196px from design kit
+    max-width: rem(196px);
   }
 
   .#{$prefix}--btn--secondary.#{$prefix}--btn--disabled
@@ -105,8 +106,8 @@
     &.#{$prefix}--btn--disabled,
     &.#{$prefix}--btn--disabled:hover,
     &.#{$prefix}--btn--disabled:focus {
-      background: transparent;
       color: $disabled;
+      background: transparent;
       outline: none;
     }
   }
@@ -120,6 +121,7 @@
       currentColor,
       $active-ui
     );
+
     padding: $button-padding-ghost;
 
     .#{$prefix}--btn__icon {
@@ -194,8 +196,8 @@
   }
 
   .#{$prefix}--btn--icon-only {
-    padding-left: rem(15px);
     padding-right: rem(15px);
+    padding-left: rem(15px);
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -239,13 +241,13 @@
   }
 
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
-    padding-left: rem(11px);
     padding-right: rem(11px);
+    padding-left: rem(11px);
   }
 
   .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
-    padding-left: rem(7px);
     padding-right: rem(7px);
+    padding-left: rem(7px);
   }
 
   .#{$prefix}--btn--danger {
@@ -276,6 +278,7 @@
   // Skeleton State
   .#{$prefix}--btn.#{$prefix}--skeleton {
     @include skeleton;
+
     width: rem(150px);
   }
 }

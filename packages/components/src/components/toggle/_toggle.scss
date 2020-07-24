@@ -33,8 +33,8 @@
     position: relative;
     display: flex;
     align-items: center;
-    cursor: pointer;
     margin: $carbon--spacing-03 0;
+    cursor: pointer;
   }
 
   .#{$prefix}--toggle__appearance {
@@ -43,56 +43,57 @@
     height: carbon--rem(24px);
 
     // Toggle background oval
-    &:before {
+    &::before {
       position: absolute;
-      display: block;
-      content: '';
-      background-color: $ui-04;
-      cursor: pointer;
-      box-sizing: border-box;
-      height: carbon--rem(24px);
-      width: carbon--rem(48px);
-      border-radius: carbon--rem(15px);
       top: 0;
-      will-change: box-shadow;
+      display: block;
+      box-sizing: border-box;
+      width: carbon--rem(48px);
+      height: carbon--rem(24px);
+      background-color: $ui-04;
+      border-radius: carbon--rem(15px);
       // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
       box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
+      cursor: pointer;
       transition: box-shadow $duration--fast-01 motion(exit, productive),
         background-color $duration--fast-01 motion(exit, productive);
+      content: '';
+      will-change: box-shadow;
     }
 
     // Toggle circle
-    &:after {
-      box-sizing: border-box;
+    &::after {
       position: absolute;
-      display: block;
-      cursor: pointer;
-      left: carbon--rem(3px);
       top: carbon--rem(3px);
+      left: carbon--rem(3px);
+      display: block;
+      box-sizing: border-box;
       width: carbon--rem(18px);
       height: carbon--rem(18px);
       background-color: $icon-03;
       border-radius: 50%;
-      content: '';
+      cursor: pointer;
       transition: transform $duration--fast-01 motion(exit, productive);
+      content: '';
     }
   }
 
   .#{$prefix}--toggle__check {
-    fill: $icon-03;
     position: absolute;
-    left: carbon--rem(6px);
     top: carbon--rem(6px);
+    left: carbon--rem(6px);
+    z-index: 1;
     width: carbon--rem(6px);
     height: carbon--rem(5px);
-    z-index: 1;
-    transition: $duration--fast-01 motion(exit, productive);
     transform: scale(0.2);
+    transition: $duration--fast-01 motion(exit, productive);
+    fill: $icon-03;
   }
 
   .#{$prefix}--toggle__text--left,
   .#{$prefix}--toggle__text--right {
     @include type-style('body-short-01');
+
     position: relative;
     margin-left: $carbon--spacing-03;
   }
@@ -123,11 +124,11 @@
   .#{$prefix}--toggle:checked
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__appearance {
-    &:before {
+    &::before {
       background-color: $support-02;
     }
 
-    &:after {
+    &::after {
       background-color: $icon-03;
       transform: translateX(carbon--rem(24px));
     }
@@ -136,18 +137,18 @@
   //----------------------------------------------
   // Focus
   // ---------------------------------------------
-  .#{$prefix}--toggle + .#{$prefix}--toggle__label,
-  .#{$prefix}--toggle + .#{$prefix}--toggle__label {
-    .#{$prefix}--toggle__appearance:before {
-      // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
-      box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
-    }
+  .#{$prefix}--toggle
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance::before {
+    // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
+    box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
   }
+
   .#{$prefix}--toggle:focus + .#{$prefix}--toggle__label,
-  .#{$prefix}--toggle:active + .#{$prefix}--toggle__label {
-    .#{$prefix}--toggle__appearance:before {
-      box-shadow: 0 0 0 1px $ui-02, 0 0 0 3px $focus;
-    }
+  .#{$prefix}--toggle:active
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance::before {
+    box-shadow: 0 0 0 1px $ui-02, 0 0 0 3px $focus;
   }
 
   //----------------------------------------------
@@ -160,16 +161,16 @@
   .#{$prefix}--toggle:disabled
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__appearance {
-    &:before {
+    &::before {
       background-color: $disabled-01;
     }
 
-    &:after {
+    &::after {
       background-color: $disabled-02;
     }
 
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       cursor: not-allowed;
       transition: $duration--fast-01 motion(exit, productive);
     }
@@ -206,27 +207,27 @@
     width: carbon--rem(32px);
     height: carbon--rem(16px);
 
-    &:before {
-      box-sizing: border-box;
-      height: carbon--rem(16px);
-      width: carbon--rem(32px);
-      border-radius: 0.9375rem;
+    &::before {
       top: 0;
+      box-sizing: border-box;
+      width: carbon--rem(32px);
+      height: carbon--rem(16px);
+      border-radius: 0.9375rem;
     }
 
-    &:after {
-      width: carbon--rem(10px);
-      height: carbon--rem(10px);
+    &::after {
       top: carbon--rem(3px);
       left: carbon--rem(3px);
+      width: carbon--rem(10px);
+      height: carbon--rem(10px);
     }
   }
 
   .#{$prefix}--toggle--small:checked
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__check {
-    fill: $support-02;
     transform: scale(1) translateX(carbon--rem(16px));
+    fill: $support-02;
   }
 
   .#{$prefix}--toggle--small
@@ -238,9 +239,9 @@
   .#{$prefix}--toggle--small:checked
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__appearance {
-    &:after {
-      margin-left: 0px;
-      transform: translateX(carbon--rem(17px));
+    &::after {
+      margin-left: 0;
+      transform: translateX(rem(17px));
     }
   }
 
@@ -259,10 +260,11 @@
 
   .#{$prefix}--toggle-input__label {
     @include type-style('label-01');
-    color: $text-02;
+
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    color: $text-02;
     cursor: pointer;
   }
 
@@ -276,35 +278,35 @@
 
     // Toggle background oval
     &::before {
-      box-sizing: border-box;
       position: absolute;
       top: 0;
       display: block;
+      box-sizing: border-box;
       width: carbon--rem(48px);
       height: carbon--rem(24px);
-      border-radius: carbon--rem(15px);
-      content: '';
       background-color: $ui-04;
-      will-change: box-shadow;
+      border-radius: carbon--rem(15px);
       // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
       box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
       transition: box-shadow $duration--fast-01 motion(exit, productive),
         background-color $duration--fast-01 motion(exit, productive);
+      content: '';
+      will-change: box-shadow;
     }
 
     // Toggle circle
     &::after {
-      box-sizing: border-box;
       position: absolute;
       top: carbon--rem(3px);
       left: carbon--rem(3px);
       display: block;
+      box-sizing: border-box;
       width: carbon--rem(18px);
       height: carbon--rem(18px);
-      border-radius: 50%;
       background-color: $icon-03;
-      content: '';
+      border-radius: 50%;
       transition: transform $duration--fast-01 motion(exit, productive);
+      content: '';
     }
 
     .#{$prefix}--toggle-input__label & {
@@ -314,14 +316,15 @@
 
   .#{$prefix}--toggle__text--off,
   .#{$prefix}--toggle__text--on {
-    position: absolute;
-    margin-left: carbon--rem(56px);
     @include type-style('body-short-01');
-    user-select: none;
-    white-space: nowrap;
+
+    position: absolute;
     // top offset needed to vertically center absolutely positioned flex child in IE11
     top: 50%;
+    margin-left: rem(56px);
+    white-space: nowrap;
     transform: translateY(-50%);
+    user-select: none;
   }
 
   //----------------------------------------------
@@ -367,6 +370,7 @@
   // Disabled
   // ---------------------------------------------
   .#{$prefix}--toggle-input:disabled + .#{$prefix}--toggle-input__label {
+    color: $disabled;
     cursor: not-allowed;
   }
 
@@ -388,10 +392,6 @@
       cursor: not-allowed;
       transition: $duration--fast-01 motion(exit, productive);
     }
-  }
-
-  .#{$prefix}--toggle-input:disabled + .#{$prefix}--toggle-input__label {
-    color: $disabled;
   }
 
   .#{$prefix}--toggle-input:disabled:active
@@ -432,8 +432,8 @@
     }
 
     .#{$prefix}--toggle__check {
-      fill: $support-02;
       transform: scale(1) translateX(carbon--rem(16px));
+      fill: $support-02;
     }
   }
 

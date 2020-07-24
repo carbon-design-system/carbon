@@ -19,21 +19,22 @@
     position: absolute;
     width: 1px;
     height: 1px;
-    padding: 0;
     margin: -1px;
+    padding: 0;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
     border: 0;
     visibility: inherit;
-    white-space: nowrap;
+    clip: rect(0, 0, 0, 0);
   }
 
   .#{$prefix}--body {
     @include reset;
     @include type-style('body-short-01');
+
     color: $text-01;
-    background-color: $ui-background;
     line-height: 1;
+    background-color: $ui-background;
   }
 }
 

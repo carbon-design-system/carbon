@@ -20,22 +20,24 @@
 /// @group tooltip
 @mixin tooltip--icon {
   @include reset;
+
   position: relative;
   display: inline-flex;
   align-items: center;
-  cursor: pointer;
   overflow: visible;
+  cursor: pointer;
 
   // Tooltip - renders as a combo of ::before and ::after elements
   &::before,
   &::after {
     @include type-style('body-short-01');
+
     position: absolute;
     display: flex;
     align-items: center;
     opacity: 0;
-    pointer-events: none;
     transition: opacity $duration--fast-01 motion(standard, productive);
+    pointer-events: none;
   }
 
   &::before {
@@ -43,30 +45,31 @@
     left: 0;
     width: 0;
     height: 0;
-    border-width: 0 rem(4px) rem(5px) rem(4px);
-    border-style: solid;
-    border-color: transparent transparent $inverse-02 transparent;
     margin: 0 auto;
-    content: '';
     margin-top: 1px;
     margin-left: 50%;
+    border-color: transparent transparent $inverse-02 transparent;
+    border-style: solid;
+    border-width: 0 rem(4px) rem(5px) rem(4px);
+    content: '';
   }
 
   &::after {
     @include box-shadow;
+
     min-width: rem(24px);
     max-width: rem(208px);
     height: rem(24px);
     margin-left: 50%;
     padding: 0 1rem;
-    border-radius: rem(2px);
     color: $inverse-01;
     font-weight: 400;
-    content: attr(aria-label);
-    transform: translateX(-50%);
     white-space: nowrap;
-    pointer-events: none;
     background-color: $inverse-02;
+    border-radius: rem(2px);
+    transform: translateX(-50%);
+    content: attr(aria-label);
+    pointer-events: none;
   }
 
   &:hover,
@@ -95,6 +98,8 @@
   $rotate-caret: if($position == 'top', 180deg, 0);
 
   &::before {
+    transform: translate($translate-x, $translate-y-caret) rotate($rotate-caret);
+
     @if ($position == 'top') {
       top: 1px;
     } @else {
@@ -103,14 +108,15 @@
     @if ($align == 'start') {
       margin-left: 4px;
     } @else if ($align == 'end') {
-      margin-right: 4px;
-      left: auto;
       right: 0;
+      left: auto;
+      margin-right: 4px;
     }
-    transform: translate($translate-x, $translate-y-caret) rotate($rotate-caret);
   }
 
   &::after {
+    transform: translate($translate-x, $translate-y-body);
+
     @if ($position == 'top') {
       top: 0;
     } @else {
@@ -122,7 +128,6 @@
     @if ($align == 'end') {
       right: 0;
     }
-    transform: translate($translate-x, $translate-y-body);
   }
 }
 
@@ -133,14 +138,16 @@
 @mixin tooltip--definition--legacy {
   .#{$prefix}--tooltip--definition {
     @include reset;
+
     position: relative;
 
     .#{$prefix}--tooltip__trigger {
       @include type-style('label-01');
-      display: inline-flex;
+
       position: relative;
-      border-bottom: 1px dotted $interactive-01;
+      display: inline-flex;
       color: $text-01;
+      border-bottom: 1px dotted $interactive-01;
 
       &:hover {
         cursor: pointer;
@@ -165,19 +172,21 @@
   .#{$prefix}--tooltip--definition__bottom,
   .#{$prefix}--tooltip--definition__top {
     @include box-shadow;
+
     position: absolute;
     z-index: 1;
     display: none;
-    background: $inverse-02;
     width: rem(208px);
     margin-top: $carbon--spacing-04;
     padding: $carbon--spacing-03 $carbon--spacing-05;
+    background: $inverse-02;
     border-radius: rem(2px);
-    pointer-events: none;
     cursor: pointer;
+    pointer-events: none;
 
     p {
       @include type-style('body-short-01');
+
       color: $inverse-01;
     }
 
@@ -187,8 +196,8 @@
       left: 0;
       width: 0.6rem;
       height: 0.6rem;
-      background: $inverse-02;
       margin-left: $carbon--spacing-05;
+      background: $inverse-02;
     }
   }
 
@@ -200,8 +209,8 @@
 
   // Tooltip Definition caret - top position
   .#{$prefix}--tooltip--definition__top {
-    transform: translateY(-100%);
     margin-top: rem(-32px);
+    transform: translateY(-100%);
 
     .#{$prefix}--tooltip__caret {
       bottom: -0.2rem;
@@ -225,15 +234,15 @@
 
   .#{$prefix}--tooltip--definition__align-center .#{$prefix}--tooltip__caret {
     left: auto;
-    margin-left: auto;
     // Adjust by the half of the diagonal of the caret, which sizes 0.6rem
     margin-right: calc(50% - 6px);
+    margin-left: auto;
   }
 
   .#{$prefix}--tooltip--definition__align-end .#{$prefix}--tooltip__caret {
     left: auto;
-    margin-left: auto;
     margin-right: rem(16px);
+    margin-left: auto;
   }
 }
 
@@ -313,6 +322,7 @@
 
   .#{$prefix}--tooltip__label {
     @include type-style('label-01');
+
     display: inline-flex;
     align-items: center;
     color: $text-02;
@@ -328,13 +338,15 @@
 
   .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only) {
     @include button-reset($width: false);
+
     display: inline-flex;
     align-items: center;
-    cursor: pointer;
     font-size: 1rem;
+    cursor: pointer;
 
     &:focus {
       @include focus-outline('border');
+
       fill: $hover-primary;
     }
   }
@@ -351,22 +363,23 @@
   .#{$prefix}--tooltip {
     @include box-shadow;
     @include reset;
+
     position: absolute;
+    z-index: z('floating');
     display: none;
     min-width: rem(208px);
     max-width: rem(288px);
-    background: $inverse-02;
     margin-top: $carbon--spacing-02;
     padding: $carbon--spacing-05;
-    border-radius: rem(2px);
-    z-index: z('floating');
-    word-wrap: break-word;
     color: $inverse-01;
+    word-wrap: break-word;
+    background: $inverse-02;
+    border-radius: rem(2px);
 
     // @todo this can be deprecated in v11 since focus should always be on the content container not the tooltip
     &:focus {
-      box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px $ui-background;
       outline: 0;
+      box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px $ui-background;
     }
 
     p {
@@ -408,16 +421,16 @@
     }
 
     .#{$prefix}--tooltip__caret {
-      border-left: $caret-size solid transparent;
-      border-right: $caret-size solid transparent;
-      border-bottom: $caret-size solid $inverse-02;
       position: absolute;
-      left: 0;
-      top: calc(#{$caret-size * -1} + 1px);
+      top: calc(#{$caret-size * (-1)} + 1px);
       right: 0;
+      left: 0;
       width: 0;
       height: 0;
       margin: 0 auto;
+      border-right: $caret-size solid transparent;
+      border-bottom: $caret-size solid $inverse-02;
+      border-left: $caret-size solid transparent;
       content: '';
     }
 
@@ -430,10 +443,10 @@
 
     &[data-floating-menu-direction='left'] {
       .#{$prefix}--tooltip__caret {
-        left: auto;
         top: 50%;
         // left position has an additional space between caret and tooltip
-        right: calc(#{$caret-size * -1} + 1px);
+        right: calc(#{$caret-size * (-1)} + 1px);
+        left: auto;
         transform: rotate(90deg) translate(50%, -50%);
       }
     }
@@ -441,16 +454,16 @@
     &[data-floating-menu-direction='top'] {
       .#{$prefix}--tooltip__caret {
         top: auto;
-        bottom: calc(#{$caret-size * -1} + 1px);
+        bottom: calc(#{$caret-size * (-1)} + 1px);
         transform: rotate(180deg);
       }
     }
 
     &[data-floating-menu-direction='right'] {
       .#{$prefix}--tooltip__caret {
-        left: calc(#{$caret-size * -1} + 1px);
         top: 50%;
         right: auto;
+        left: calc(#{$caret-size * (-1)} + 1px);
         transform: rotate(270deg) translate(50%, -50%);
       }
     }
@@ -458,6 +471,7 @@
 
   .#{$prefix}--tooltip__heading {
     @include carbon--type-style('productive-heading-01');
+
     margin-bottom: $spacing-03;
   }
 
@@ -484,7 +498,14 @@
   // Definition CSS only tooltip
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition {
     @include type-style('label-01');
-    border-bottom: rem(1px) dotted $interactive-01;
+
+    border-bottom: rem(1px) dotted $text-02;
+    transition: border-color $duration--fast-02;
+  }
+
+  .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition:hover,
+  .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition:focus {
+    border-bottom-color: $interactive-04;
   }
 
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition.#{$prefix}--tooltip--top {

@@ -92,25 +92,27 @@ const TableHeader = React.forwardRef(function TableHeader(
       ref={ref}
       scope={scope}>
       <button className={className} onClick={onClick} {...rest}>
-        <div className={`${prefix}--table-header-label`}>{children}</div>
-        <Arrow
-          className={`${prefix}--table-sort__icon`}
-          aria-label={t('carbon.table.header.icon.description', {
-            header: children,
-            sortDirection,
-            isSortHeader,
-            sortStates,
-          })}
-        />
-        <Arrows
-          className={`${prefix}--table-sort__icon-unsorted`}
-          aria-label={t('carbon.table.header.icon.description', {
-            header: children,
-            sortDirection,
-            isSortHeader,
-            sortStates,
-          })}
-        />
+        <span className={`${prefix}--table-sort__flex`}>
+          <div className={`${prefix}--table-header-label`}>{children}</div>
+          <Arrow
+            className={`${prefix}--table-sort__icon`}
+            aria-label={t('carbon.table.header.icon.description', {
+              header: children,
+              sortDirection,
+              isSortHeader,
+              sortStates,
+            })}
+          />
+          <Arrows
+            className={`${prefix}--table-sort__icon-unsorted`}
+            aria-label={t('carbon.table.header.icon.description', {
+              header: children,
+              sortDirection,
+              isSortHeader,
+              sortStates,
+            })}
+          />
+        </span>
       </button>
     </th>
   );

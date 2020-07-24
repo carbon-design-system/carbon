@@ -31,24 +31,24 @@
     @include type-style('body-short-01');
     @include focus-outline('reset');
 
-    background-color: $ui-01;
+    position: relative;
     display: inline-flex;
     align-items: center;
     width: 100%;
-    padding: $carbon--spacing-03 $carbon--spacing-05;
     margin: 0;
-    white-space: nowrap;
+    padding: $carbon--spacing-03 $carbon--spacing-05;
     overflow: hidden;
+    color: $text-02;
+    white-space: nowrap;
     text-align: left;
     text-decoration: none;
+    background-color: $ui-01;
     border: none;
-    color: $text-02;
     transition: all $duration--fast-01 motion(standard, productive);
-    position: relative;
 
     &:focus {
-      box-shadow: inset 0 0 0 2px $focus;
       z-index: 3;
+      box-shadow: inset 0 0 0 2px $focus;
     }
 
     &:hover {
@@ -57,9 +57,9 @@
 
     &:hover,
     &:active {
-      background-color: $hover-ui;
-      color: $text-01;
       z-index: 3;
+      color: $text-01;
+      background-color: $hover-ui;
     }
 
     &:disabled {
@@ -73,6 +73,14 @@
     }
   }
 
+  .#{$prefix}--content-switcher--light .#{$prefix}--content-switcher-btn {
+    background-color: $ui-02;
+
+    &:hover {
+      background-color: $hover-light-ui;
+    }
+  }
+
   .#{$prefix}--content-switcher-btn:first-child {
     border-top-left-radius: rem(4px);
     border-bottom-left-radius: rem(4px);
@@ -83,32 +91,56 @@
     border-bottom-right-radius: rem(4px);
   }
 
-  .#{$prefix}--content-switcher-btn:not(:first-of-type)::before {
-    content: '';
-    display: block;
-    height: rem(16px);
-    width: rem(1px);
-    background-color: $content-switcher-divider;
+  .#{$prefix}--content-switcher-btn::before {
     position: absolute;
-    z-index: 2;
     left: 0;
+    z-index: 2;
+    display: block;
+    width: rem(1px);
+    height: rem(16px);
+    background-color: $content-switcher-divider;
+    content: '';
   }
 
-  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::before,
-  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
+  .#{$prefix}--content-switcher-btn:first-of-type::before {
+    display: none;
+  }
+
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn::before {
+    background-color: $decorative-01;
+  }
+
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn:focus::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn:focus
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn:hover::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn:hover
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher--selected::before,
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher--selected
     + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher-btn:focus::before,
   .#{$prefix}--content-switcher-btn:focus
     + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher-btn:hover::before,
   .#{$prefix}--content-switcher-btn:hover
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--selected::before,
+  .#{$prefix}--content-switcher--selected
     + .#{$prefix}--content-switcher-btn::before {
     background-color: transparent;
   }
 
   .#{$prefix}--content-switcher__icon {
-    fill: $text-02;
     transition: fill $duration--fast-01 motion(standard, productive);
+    fill: $text-02;
   }
 
   .#{$prefix}--content-switcher__icon + span {
@@ -116,10 +148,10 @@
   }
 
   .#{$prefix}--content-switcher__label {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .#{$prefix}--content-switcher-btn:hover .#{$prefix}--content-switcher__icon,
@@ -127,14 +159,16 @@
     fill: $text-01;
   }
 
+  .#{$prefix}--content-switcher--light
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
-    background-color: $ui-05;
-    color: $inverse-01;
     z-index: 3;
+    color: $inverse-01;
+    background-color: $ui-05;
 
     &:disabled {
-      background-color: $disabled-03;
       color: $disabled-02;
+      background-color: $disabled-03;
     }
   }
 

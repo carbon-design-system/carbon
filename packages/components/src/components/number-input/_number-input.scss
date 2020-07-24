@@ -18,30 +18,36 @@
 @mixin number-input {
   .#{$prefix}--number {
     @include reset;
+
+    position: relative;
     display: flex;
     flex-direction: column;
-    position: relative;
   }
 
   .#{$prefix}--number input[type='number'] {
     @include type-style('body-short-01');
     @include focus-outline('reset');
-    font-family: carbon--font-family('mono');
-    box-sizing: border-box;
+
     display: inline-flex;
+    box-sizing: border-box;
     width: 100%;
     min-width: 9.375rem;
-    padding-left: $carbon--spacing-05;
-    padding-right: $carbon--spacing-07;
-    font-weight: 300;
     height: rem(40px);
+    padding-right: $carbon--spacing-07;
+    padding-left: $carbon--spacing-05;
     color: $text-01;
+    font-weight: 300;
+
+    font-family: carbon--font-family('mono');
     background-color: $field-01;
     border: none;
-    border-radius: 0;
     border-bottom: 1px solid $ui-04;
+    border-radius: 0;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
+
+    // Firefox: Hide spinner (up and down buttons)
+    -moz-appearance: textfield;
 
     &:focus {
       @include focus-outline('outline');
@@ -56,35 +62,35 @@
       fill: $disabled;
     }
 
-    -moz-appearance: textfield; // Firefox: Hide spinner (up and down buttons)
-
+    // IE: Hide "clear-field" `x` button on input field
     &::-ms-clear {
-      display: none; // IE: Hide "clear-field" `x` button on input field
+      display: none;
     }
 
+    // Safari: Hide number spinner
     &::-webkit-inner-spin-button {
-      appearance: none; // Safari: Hide number spinner
+      appearance: none;
     }
   }
 
   .#{$prefix}--number input[type='number']:disabled,
   .#{$prefix}--number--readonly input[type='number'] {
-    cursor: not-allowed;
-    background-color: $disabled-background-color;
     color: $disabled;
+    background-color: $disabled-background-color;
     border-bottom-color: transparent;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--number__input-wrapper {
+    position: relative;
     display: flex;
     align-items: center;
-    position: relative;
 
     ~ .#{$prefix}--form-requirement {
-      color: $text-error;
-      font-weight: 400;
       margin-top: $carbon--spacing-02;
       overflow: visible;
+      color: $text-error;
+      font-weight: 400;
 
       &::before {
         display: none;
@@ -94,29 +100,31 @@
 
   .#{$prefix}--number__controls {
     @include reset;
+
     position: absolute;
+    // vertically center controls within parent container on IE11
+    top: 50%;
     right: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    // vertically center controls within parent container on IE11
-    top: 50%;
+    justify-content: center;
     transform: translateY(-50%);
   }
 
   .#{$prefix}--number__control-btn {
     @include button-reset;
+
     display: inline-flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     width: rem(32px);
     height: rem(20px);
     color: $icon-01;
 
     svg {
-      fill: currentColor;
       position: relative;
+      fill: currentColor;
     }
 
     &.up-icon svg {
@@ -129,22 +137,20 @@
 
     &:focus {
       @include focus-outline;
+
       color: $icon-01;
       outline-width: 2px;
       outline-offset: -2px;
     }
 
     &:hover {
+      color: $icon-01;
       cursor: pointer;
     }
 
-    &:hover {
-      color: $icon-01;
-    }
-
     &:disabled {
-      cursor: not-allowed;
       color: $disabled;
+      cursor: not-allowed;
     }
   }
 
@@ -174,8 +180,8 @@
   }
 
   .#{$prefix}--number--mobile {
-    min-width: rem(144px);
     width: auto;
+    min-width: rem(144px);
 
     .#{$prefix}--number__control-btn,
     &.#{$prefix}--number--light .#{$prefix}--number__control-btn {
@@ -200,14 +206,14 @@
     }
 
     input[type='number'] {
-      min-width: rem(64px);
       width: auto;
+      min-width: rem(64px);
       margin: 0;
-      border-right: 1px solid $ui-03;
-      border-left: 1px solid $ui-03;
       padding: 0;
       text-align: center;
       background-color: $field-01;
+      border-right: 1px solid $ui-03;
+      border-left: 1px solid $ui-03;
     }
 
     &.#{$prefix}--number--light {
@@ -232,16 +238,18 @@
 
   .#{$prefix}--number--xl.#{$prefix}--number--mobile
     .#{$prefix}--number__control-btn {
-    height: rem(48px);
     width: rem(48px);
+    height: rem(48px);
   }
 
   .#{$prefix}--number--xl .#{$prefix}--number__control-btn.up-icon svg {
-    top: rem(6.6px); // Needed to maintain arrow spacing between input sizes.
+    // Needed to maintain arrow spacing between input sizes.
+    top: rem(6.6px);
   }
 
   .#{$prefix}--number--xl .#{$prefix}--number__control-btn.down-icon svg {
-    top: rem(-6.6px); // Needed to maintain arrow spacing between input sizes.
+    // Needed to maintain arrow spacing between input sizes.
+    top: rem(-6.6px);
   }
 
   .#{$prefix}--number--sm input[type='number'] {
@@ -254,16 +262,18 @@
 
   .#{$prefix}--number--sm.#{$prefix}--number--mobile
     .#{$prefix}--number__control-btn {
-    height: rem(32px);
     width: rem(32px);
+    height: rem(32px);
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__control-btn.up-icon svg {
-    top: rem(3.4px); // Needed to maintain arrow spacing between input sizes.
+    // Needed to maintain arrow spacing between input sizes.
+    top: rem(3.4px);
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__control-btn.down-icon svg {
-    top: rem(-3.4px); // Needed to maintain arrow spacing between input sizes.
+    // Needed to maintain arrow spacing between input sizes.
+    top: rem(-3.4px);
   }
 
   //No label positioning adjustment
@@ -274,6 +284,7 @@
   // Skeleton State
   .#{$prefix}--number.#{$prefix}--skeleton {
     @include skeleton;
+
     width: 100%;
     height: 2.5rem;
 

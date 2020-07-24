@@ -24,14 +24,15 @@
 
   .#{$prefix}--structured-list {
     @include reset;
+
     display: table;
+    width: 100%;
+    margin-bottom: 5rem;
     overflow-x: auto;
     overflow-y: hidden;
-    width: 100%;
+    background-color: transparent;
     border-collapse: collapse;
     border-spacing: 0;
-    margin-bottom: 5rem;
-    background-color: transparent;
 
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
@@ -48,8 +49,8 @@
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
     background-color: $hover-row;
-    cursor: pointer;
     border-bottom: 1px solid $hover-row;
+    cursor: pointer;
   }
 
   .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected {
@@ -88,9 +89,11 @@
     @include reset;
     @include padding-th;
     @include type-style('productive-heading-01');
+
     display: table-cell;
-    font-weight: 600;
     height: rem(40px);
+    color: $text-01;
+    font-weight: 600;
     text-align: left;
     text-transform: $structured-list-text-transform;
     vertical-align: bottom;
@@ -105,18 +108,12 @@
     @include reset;
     @include type-style('body-long-01');
     @include padding-td;
-    line-height: carbon--rem(21px);
+
     position: relative;
     display: table-cell;
     max-width: 36rem;
-    transition: color $duration--fast-02 motion(standard, productive);
-  }
-
-  .#{$prefix}--structured-list-th {
-    color: $text-01;
-  }
-  .#{$prefix}--structured-list-td {
     color: $text-02;
+    transition: color $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--structured-list-content--nowrap {
@@ -125,9 +122,9 @@
 
   .#{$prefix}--structured-list-svg {
     display: inline-block;
-    fill: transparent;
     vertical-align: middle;
     transition: all $duration--fast-02 motion(standard, productive);
+    fill: transparent;
   }
 
   .#{$prefix}--structured-list-row:hover .#{$prefix}--structured-list-svg {
@@ -159,21 +156,14 @@
       }
     }
 
-    .#{$prefix}--structured-list-th span {
+    span {
       @include skeleton;
+
+      display: block;
+
       width: 75%;
       height: 1rem;
-      display: block;
     }
-  }
-
-  .#{$prefix}--structured-list.#{$prefix}--skeleton
-    .#{$prefix}--structured-list-th
-    span {
-    @include skeleton;
-    width: 75%;
-    height: 1rem;
-    display: block;
   }
 
   .#{$prefix}--structured-list.#{$prefix}--structured-list--selection.#{$prefix}--skeleton

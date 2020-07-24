@@ -24,16 +24,18 @@ export default function Copy({
   ...other
 }) {
   const [animation, setAnimation] = useState('');
-  const classNames = classnames(className, {
+  const classNames = classnames(className, `${prefix}--copy`, {
     [`${prefix}--copy-btn--animating`]: animation,
     [`${prefix}--copy-btn--${animation}`]: animation,
   });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleFadeOut = useCallback(
     debounce(() => {
       setAnimation('fade-out');
     }, feedbackTimeout),
     [feedbackTimeout]
   );
+
   const handleClick = useCallback(() => {
     setAnimation('fade-in');
     handleFadeOut();
@@ -62,9 +64,13 @@ export default function Copy({
       ])}
       {...other}
       aria-live="polite"
-      aria-label={animation ? feedback : other['aria-label']}>
+      aria-label={
+        (!children && (animation ? feedback : other['aria-label'])) || null
+      }>
       {children}
+      {animation ? feedback : other['aria-label']}
       <span
+        aria-hidden="true"
         className={`${prefix}--assistive-text ${prefix}--copy-btn__feedback`}>
         {feedback}
       </span>
@@ -99,6 +105,12 @@ Copy.propTypes = {
    * <button> is clicked
    */
   onClick: PropTypes.func,
+
+  /**
+   * Specify an optional `onAnimationEnd` handler that is called when the underlying
+   * animation ends
+   */
+  onAnimationEnd: PropTypes.func,
 };
 
 Copy.defaultProps = {

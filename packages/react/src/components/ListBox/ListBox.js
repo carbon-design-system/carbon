@@ -54,6 +54,7 @@ const ListBox = React.forwardRef(function ListBox(
   });
   return (
     <>
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
       <div
         {...rest}
         className={className}
@@ -97,6 +98,26 @@ ListBox.propTypes = {
    * Specify the size of the ListBox. Currently supports either `sm` or `xl` as an option.
    */
   size: ListBoxSize,
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * Specify the text to be displayed when the control is invalid
+   */
+  invalidText: PropTypes.string,
+
+  /**
+   * Specify if the control should use the light variant
+   */
+  light: PropTypes.bool,
+
+  /**
+   * Specify if the control should render open
+   */
+  isOpen: PropTypes.bool,
 };
 
 ListBox.defaultProps = {

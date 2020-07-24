@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { WarningFilled16 } from '@carbon/icons-react';
+import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-react';
 import PasswordInput from './PasswordInput';
 import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';
@@ -28,17 +28,22 @@ const TextInput = React.forwardRef(function TextInput(
     hideLabel,
     invalid,
     invalidText,
+    warn,
+    warnText,
     helperText,
     light,
     size,
+    inline,
     ...other
   },
   ref
 ) {
   const errorId = id + '-error-msg';
+  const warnId = id + '-warn-msg';
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,
     [`${prefix}--text-input--invalid`]: invalid,
+    [`${prefix}--text-input--warn`]: warn,
     [`${prefix}--text-input--${size}`]: size,
   });
   const sharedTextInputProps = {
@@ -65,27 +70,54 @@ const TextInput = React.forwardRef(function TextInput(
     `${prefix}--text-input-wrapper`,
     {
       [`${prefix}--text-input-wrapper--light`]: light,
+      [`${prefix}--text-input-wrapper--inline`]: inline,
     }
   );
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: other.disabled,
+    [`${prefix}--label--inline`]: inline,
+    [`${prefix}--label--inline--${size}`]: inline && !!size,
   });
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
+    [`${prefix}--form__helper-text--inline`]: inline,
   });
+  const fieldOuterWrapperClasses = classNames(
+    `${prefix}--text-input__field-outer-wrapper`,
+    {
+      [`${prefix}--text-input__field-outer-wrapper--inline`]: inline,
+    }
+  );
   const label = labelText ? (
     <label htmlFor={id} className={labelClasses}>
       {labelText}
     </label>
   ) : null;
-  const error = invalid ? (
-    <div className={`${prefix}--form-requirement`} id={errorId}>
-      {invalidText}
-    </div>
-  ) : null;
+  let error = null;
+  if (invalid) {
+    error = (
+      <div className={`${prefix}--form-requirement`} id={errorId}>
+        {invalidText}
+      </div>
+    );
+  } else if (warn) {
+    error = (
+      <div className={`${prefix}--form-requirement`} id={warnId}>
+        {warnText}
+      </div>
+    );
+  }
   const input = (
-    <input {...textInputProps({ invalid, sharedTextInputProps, errorId })} />
+    <input
+      {...textInputProps({
+        invalid,
+        sharedTextInputProps,
+        errorId,
+        warn,
+        warnId,
+      })}
+    />
   );
   const helper = helperText ? (
     <div className={helperTextClasses}>{helperText}</div>
@@ -95,20 +127,37 @@ const TextInput = React.forwardRef(function TextInput(
 
   return (
     <div className={inputWrapperClasses}>
-      {label}
-      <div
-        className={`${prefix}--text-input__field-wrapper`}
-        data-invalid={invalid || null}>
-        {invalid && (
-          <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
-        )}
-        {input}
-        {isFluid && <hr className={`${prefix}--text-input__divider`} />}
-        {/* <hr className={`${prefix}--text-input__divider`} /> */}
-        {isFluid ? error : null}
+      {!inline ? (
+        label
+      ) : (
+        <div className={`${prefix}--text-input__label-helper-wrapper`}>
+          {label}
+          {!isFluid && helper}
+        </div>
+      )}
+      <div className={fieldOuterWrapperClasses}>
+        <div
+          className={`${prefix}--text-input__field-wrapper`}
+          data-invalid={invalid || null}
+          data-warn={warn || null}>
+          {invalid && (
+            <WarningFilled16
+              className={`${prefix}--text-input__invalid-icon`}
+            />
+          )}
+          {!invalid && warn && (
+            <WarningAltFilled16
+              className={`${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`}
+            />
+          )}
+          {input}
+          {isFluid && <hr className={`${prefix}--text-input__divider`} />}
+          {/* <hr className={`${prefix}--text-input__divider`} /> */}
+          {isFluid && !inline && error}
+        </div>
+        {!isFluid && error}
+        {!invalid && !warn && !isFluid && !inline && helper}
       </div>
-      {isFluid ? null : error}
-      {!invalid && !isFluid && helper}
     </div>
   );
 });
@@ -190,6 +239,16 @@ TextInput.propTypes = {
   invalidText: PropTypes.string,
 
   /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.string,
+
+  /**
    * Provide text that is used alongside the control label for additional help
    */
   helperText: PropTypes.node,
@@ -198,6 +257,10 @@ TextInput.propTypes = {
    * `true` to use the light version.
    */
   light: PropTypes.bool,
+  /**
+   * `true` to use the inline version.
+   */
+  inline: PropTypes.bool,
 };
 
 TextInput.defaultProps = {
@@ -207,8 +270,11 @@ TextInput.defaultProps = {
   onClick: () => {},
   invalid: false,
   invalidText: '',
+  warn: false,
+  warnText: '',
   helperText: '',
   light: false,
+  inline: false,
 };
 
 export default TextInput;

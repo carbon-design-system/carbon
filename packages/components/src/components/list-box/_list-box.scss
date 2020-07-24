@@ -44,9 +44,9 @@ $list-box-menu-width: rem(300px);
   // `disabled` and `inline`.
   .#{$prefix}--list-box__wrapper--inline {
     display: inline-grid;
-    align-items: center;
-    grid-template: auto auto / auto auto;
     grid-gap: rem(4px);
+    grid-template: auto auto / auto auto;
+    align-items: center;
 
     .#{$prefix}--label {
       @include type-style('body-short-01');
@@ -69,15 +69,16 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box {
     @include reset;
+
     position: relative;
     width: $list-box-width;
     height: rem(40px);
     max-height: rem(40px);
+    color: $text-01;
     background-color: $field-01;
     border: none;
     border-bottom: 1px solid $ui-04;
     cursor: pointer;
-    color: $text-01;
     transition: all $duration--fast-01 motion(standard, productive);
 
     &:hover {
@@ -116,13 +117,13 @@ $list-box-menu-width: rem(300px);
     position: absolute;
     top: 50%;
     right: $carbon--spacing-08;
-    fill: $support-01;
     transform: translateY(-50%);
+    fill: $support-01;
   }
 
   .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
-    border-bottom: 0;
     padding-right: carbon--mini-units(8);
+    border-bottom: 0;
   }
 
   .#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline
@@ -252,20 +253,31 @@ $list-box-menu-width: rem(300px);
     height: 100%;
   }
 
+  .#{$prefix}--dropdown--inline .#{$prefix}--list-box__field {
+    max-width: rem(480px);
+  }
+
+  .#{$prefix}--dropdown--inline .bx--list-box__menu {
+    min-width: rem(288px);
+    max-width: rem(480px);
+  }
+
   // The field we use for input, showing selection, etc.
   .#{$prefix}--list-box__field {
     @include button-reset;
+
     position: relative;
     display: inline-flex;
     align-items: center;
-    vertical-align: top;
-    height: calc(100% + 1px); // Account for the border in `.bx--list-box`
+    // Account for the border in `.bx--list-box`
+    height: calc(100% + 1px);
     padding: 0 $carbon--spacing-09 0 $carbon--spacing-05;
-    cursor: pointer;
-    outline: none;
-    white-space: nowrap;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
+    vertical-align: top;
+    outline: none;
+    cursor: pointer;
   }
 
   .#{$prefix}--list-box__field:focus {
@@ -273,8 +285,8 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__field[disabled] {
-    outline: none;
     color: $disabled-02;
+    outline: none;
   }
 
   // populated input field
@@ -286,14 +298,16 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input {
-    padding-right: rem(98px); // to account for clear input button outline
+    // to account for clear input button outline
+    padding-right: rem(98px);
   }
 
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon {
-    right: rem(66px); // to account for clear input button outline
+    // to account for clear input button outline
+    right: rem(66px);
   }
 
   // empty input field
@@ -312,17 +326,19 @@ $list-box-menu-width: rem(300px);
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input--empty
     + .#{$prefix}--list-box__invalid-icon {
-    right: rem(40px); // to account for clear input button outline
+    // to account for clear input button outline
+    right: rem(40px);
   }
 
   // Label for a `list-box__field`
   .#{$prefix}--list-box__label {
     @include type-style('body-short-01');
-    color: $text-01;
-    user-select: none;
-    text-overflow: ellipsis;
+
     overflow: hidden;
+    color: $text-01;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    user-select: none;
   }
 
   // Menu status inside of a `list-box__field`
@@ -330,16 +346,16 @@ $list-box-menu-width: rem(300px);
     position: absolute;
     top: 0;
     right: $carbon--spacing-05;
-    height: 100%;
     display: flex;
     align-items: center;
-    transition: transform $duration--fast-01 motion(standard, productive);
+    height: 100%;
     cursor: pointer;
+    transition: transform $duration--fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--list-box__menu-icon > svg {
-    fill: $icon-01;
     height: 100%;
+    fill: $icon-01;
   }
 
   .#{$prefix}--list-box__menu-icon--open {
@@ -349,28 +365,22 @@ $list-box-menu-width: rem(300px);
   // Selection indicator for a `list-box__field`
   .#{$prefix}--list-box__selection {
     position: absolute;
-    right: rem(33px); // to preserve .5rem space between icons according to spec
-    // top/transform used to center the combobox clear selection icon in IE11
     top: 50%;
-    transform: translateY(-50%);
+    /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
+    right: rem(33px);
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: rem(30px);
+    justify-content: center;
     width: rem(30px);
+    height: rem(30px);
+    transform: translateY(-50%);
     cursor: pointer;
-    user-select: none;
     transition: background-color $duration--fast-01 motion(standard, productive);
+    user-select: none;
 
     &:focus {
       @include focus-outline('outline');
     }
-  }
-
-  // reset multiselect selection counter positioning
-  .#{$prefix}--list-box__selection--multi {
-    top: auto;
-    transform: none;
   }
 
   .#{$prefix}--list-box__selection > svg {
@@ -384,32 +394,35 @@ $list-box-menu-width: rem(300px);
   // Modifier for a selection to show that multiple selections have been made
   .#{$prefix}--list-box__selection--multi {
     @include type-style('label-01');
+
     position: static;
+    top: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0;
-    background-color: $inverse-02;
-    height: rem(24px);
     width: auto;
+    height: rem(24px);
+    margin-right: rem(10px);
+    padding: rem(8px);
+    // Align with hover circle of X button
+    padding-right: rem(2px);
     color: $inverse-01;
     line-height: 0;
-    padding: rem(8px);
-    padding-right: rem(2px); // Align with hover circle of X button
-    margin-right: rem(10px);
+    background-color: $inverse-02;
     border-radius: rem(12px);
+    transform: none;
   }
 
   .#{$prefix}--list-box__selection--multi > svg {
-    fill: $inverse-01;
-    margin-left: rem(4px);
     width: rem(20px);
     height: rem(20px);
+    margin-left: rem(4px);
     padding: rem(2px);
+    fill: $inverse-01;
 
     &:hover {
-      border-radius: 50%;
       background-color: $hover-secondary;
+      border-radius: 50%;
     }
   }
 
@@ -419,7 +432,7 @@ $list-box-menu-width: rem(300px);
     fill: $disabled-02;
 
     &:hover {
-      background-color: unset;
+      background-color: initial;
     }
   }
 
@@ -431,14 +444,15 @@ $list-box-menu-width: rem(300px);
   // Descendant of a `list-box` that displays a list of options to select
   .#{$prefix}--list-box__menu {
     @include box-shadow();
+
     position: absolute;
-    left: 0;
     right: 0;
+    left: 0;
+    z-index: z('dropdown');
     width: $list-box-width;
+    overflow-y: auto;
     background-color: $ui-01;
     transition: max-height $duration--fast-02 motion(standard, productive);
-    overflow-y: auto;
-    z-index: z('dropdown');
 
     &:focus {
       // remove default browser focus in firefox
@@ -453,28 +467,32 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
-    max-height: rem(220px); // 40px item height * 5.5 items shown
+    // 40px item height * 5.5 items shown
+    max-height: rem(220px);
   }
 
   .#{$prefix}--list-box--expanded.#{$prefix}--list-box--xl
     .#{$prefix}--list-box__menu {
-    max-height: rem(264px); // 48px item height * 5.5 items shown
+    // 48px item height * 5.5 items shown
+    max-height: rem(264px);
   }
 
   .#{$prefix}--list-box--expanded.#{$prefix}--list-box--sm
     .#{$prefix}--list-box__menu {
-    max-height: rem(176px); // 32px item height * 5.5 items shown
+    // 32px item height * 5.5 items shown
+    max-height: rem(176px);
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control
   .#{$prefix}--list-box__menu-item {
     @include type-style('body-short-01');
+
+    position: relative;
     height: rem(40px);
     color: $text-02;
     cursor: pointer;
-    user-select: none;
-    position: relative;
     transition: background $duration--fast-01 motion(standard, productive);
+    user-select: none;
 
     &:hover {
       background-color: $hover-ui;
@@ -531,26 +549,28 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item__option {
     @include focus-outline('reset');
+
     display: block;
     height: rem(40px);
-    color: $text-02;
-    text-decoration: none;
-    font-weight: normal;
-    line-height: rem(16px);
-    padding: rem(11px) 0;
     margin: 0 $carbon--spacing-05;
+    padding: rem(11px) 0;
     padding-right: $carbon--spacing-06;
-    border-top: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    border-top-color: $ui-03;
-    text-overflow: ellipsis;
     overflow: hidden;
+    color: $text-02;
+    font-weight: normal;
+    line-height: 1rem;
     white-space: nowrap;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    border-top: 1px solid transparent;
+    border-top-color: $ui-03;
+    border-bottom: 1px solid transparent;
     transition: border-color $duration--fast-01 motion(standard, productive),
       color $duration--fast-01 motion(standard, productive);
 
     &:focus {
       @include focus-outline('outline');
+
       margin: 0;
       padding: rem(11px) rem(16px);
       border-color: transparent;
@@ -563,15 +583,15 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item__option {
+    height: rem(32px);
     padding-top: rem(7px);
     padding-bottom: rem(7px);
-    height: rem(32px);
   }
 
   .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item__option {
+    height: rem(48px);
     padding-top: rem(15px);
     padding-bottom: rem(15px);
-    height: rem(48px);
   }
 
   .#{$prefix}--list-box--disabled
@@ -587,14 +607,14 @@ $list-box-menu-width: rem(300px);
 
     &:focus {
       margin: 0;
-      padding-left: $carbon--spacing-03;
       padding-right: $carbon--spacing-03;
+      padding-left: $carbon--spacing-03;
     }
   }
 
   .#{$prefix}--list-box__menu-item--highlighted {
-    background-color: $hover-ui;
     color: $text-01;
+    background-color: $hover-ui;
     border-color: transparent;
   }
 
@@ -640,10 +660,10 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__menu-item__selected-icon {
-    display: none;
     position: absolute;
     top: 50%;
     right: rem(16px);
+    display: none;
     transform: translateY(-50%);
     fill: $icon-01;
   }
@@ -663,9 +683,9 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label-text {
+    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    overflow: hidden;
   }
 
   // Dropdown top orientation modifiers
@@ -694,8 +714,8 @@ $list-box-menu-width: rem(300px);
   // TODO: remove [role='combobox'] in v11
   .#{$prefix}--list-box input[role='combobox'],
   .#{$prefix}--list-box input[type='text'] {
-    background-color: inherit;
     min-width: 0;
+    background-color: inherit;
   }
 }
 

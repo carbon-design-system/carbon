@@ -12,8 +12,8 @@
 @include exports('data-table-inline-edit') {
   .#{$prefix}--inline-edit-label {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 
     &:hover {
       .#{$prefix}--inline-edit-label__icon {
@@ -35,6 +35,7 @@
 
     &:focus {
       @include focus-outline;
+
       padding: $spacing-01;
 
       .#{$prefix}--inline-edit-label__icon {
@@ -45,8 +46,8 @@
   }
 
   .#{$prefix}--inline-edit-label__icon {
-    fill: $ui-05;
     opacity: 0;
+    fill: $ui-05;
   }
 
   .#{$prefix}--inline-edit-input {

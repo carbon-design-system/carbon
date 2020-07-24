@@ -195,6 +195,7 @@
   - [✅disabled-03 [variable]](#disabled-03-variable)
   - [✅highlight [variable]](#highlight-variable)
   - [✅decorative-01 [variable]](#decorative-01-variable)
+  - [✅hover-light-ui [variable]](#hover-light-ui-variable)
   - [✅skeleton-01 [variable]](#skeleton-01-variable)
   - [✅skeleton-02 [variable]](#skeleton-02-variable)
   - [✅⚠️brand-01 [variable]](#brand-01-variable)
@@ -1063,6 +1064,13 @@ yet.
     padding-right: ($condensed-gutter / 2);
     padding-left: ($condensed-gutter / 2);
   }
+
+  // For our narrow use-case, our container hangs 16px into the gutter
+  .#{$prefix}--row--narrow &,
+  .#{$prefix}--grid--narrow & {
+    padding-right: ($gutter / 2);
+    padding-left: 0;
+  }
 }
 ```
 
@@ -1266,7 +1274,7 @@ Define the properties for a selector assigned to a row in the grid system.
 
 ### ❌carbon--no-gutter [mixin]
 
-Add `no-gutter` and `no-gutter--{left,right}` classes to the output CSS. These
+Add `no-gutter` and `no-gutter--{start,end}` classes to the output CSS. These
 classes are useful for dropping the gutter in fluid situations.
 
 <details>
@@ -1276,10 +1284,21 @@ classes are useful for dropping the gutter in fluid situations.
 @mixin carbon--no-gutter() {
   .#{$prefix}--no-gutter,
   .#{$prefix}--row.#{$prefix}--no-gutter [class*='#{$prefix}--col'] {
+    padding-right: 0;
     padding-left: 0;
+  }
+
+  .#{$prefix}--no-gutter--start,
+  .#{$prefix}--row.#{$prefix}--no-gutter--start [class*='#{$prefix}--col'] {
+    padding-left: 0;
+  }
+
+  .#{$prefix}--no-gutter--end,
+  .#{$prefix}--row.#{$prefix}--no-gutter--end [class*='#{$prefix}--col'] {
     padding-right: 0;
   }
 
+  // Deprecated ☠️
   .#{$prefix}--no-gutter--left,
   .#{$prefix}--row.#{$prefix}--no-gutter--left [class*='#{$prefix}--col'] {
     padding-left: 0;
@@ -1302,14 +1321,23 @@ classes are useful for dropping the gutter in fluid situations.
 
 ### ❌carbon--hang [mixin]
 
-Add `hang--left` and `hang--right` classes for a given gutter. These classes are
-used alongside `no-gutter--left` and `no-gutter--right` to "hang" type.
+Add `hang--start` and `hang--end` classes for a given gutter. These classes are
+used alongside `no-gutter--start` and `no-gutter--end` to "hang" type.
 
 <details>
 <summary>Source code</summary>
 
 ```scss
 @mixin carbon--hang($gutter: $carbon--grid-gutter) {
+  .#{$prefix}--hang--start {
+    padding-left: ($gutter / 2);
+  }
+
+  .#{$prefix}--hang--end {
+    padding-right: ($gutter / 2);
+  }
+
+  // Deprecated ☠️
   .#{$prefix}--hang--left {
     padding-left: ($gutter / 2);
   }
@@ -1379,17 +1407,17 @@ https://keithjgrant.com/posts/2017/03/aspect-ratios/
   }
 
   .#{$prefix}--aspect-ratio::before {
-    content: '';
-    width: 1px;
-    margin-left: -1px;
     float: left;
+    width: 1px;
     height: 0;
+    margin-left: -1px;
+    content: '';
   }
 
   .#{$prefix}--aspect-ratio::after {
-    content: '';
     display: table;
     clear: both;
+    content: '';
   }
 
   @each $aspect-ratio in $aspect-ratios {
@@ -1450,14 +1478,14 @@ max-width properties are added with `make-container-max-widths`
       $prev-margin: map-get($prev-breakpoint, margin);
       @if $prev-margin != $margin {
         @include carbon--breakpoint($name) {
-          padding-left: #{($carbon--grid-gutter / 2) + $margin};
           padding-right: #{($carbon--grid-gutter / 2) + $margin};
+          padding-left: #{($carbon--grid-gutter / 2) + $margin};
         }
       }
     } @else {
       @include carbon--breakpoint($name) {
-        padding-left: #{($carbon--grid-gutter / 2) + $margin};
         padding-right: #{($carbon--grid-gutter / 2) + $margin};
+        padding-left: #{($carbon--grid-gutter / 2) + $margin};
       }
     }
   }
@@ -1948,7 +1976,7 @@ generate the size part in a selector, for example: `.prefix--col-sm-2`.
 
 ### ✅carbon--breakpoint-up [mixin]
 
-Generate a media query up to the width of the given breakpoint name
+Generate a media query from the width of the given breakpoint to infinity
 
 <details>
 <summary>Source code</summary>
@@ -3819,6 +3847,7 @@ Define theme variables from a map of tokens
   $disabled-03: map-get($theme, 'disabled-03') !global;
   $highlight: map-get($theme, 'highlight') !global;
   $decorative-01: map-get($theme, 'decorative-01') !global;
+  $hover-light-ui: map-get($theme, 'hover-light-ui') !global;
   $skeleton-01: map-get($theme, 'skeleton-01') !global;
   $skeleton-02: map-get($theme, 'skeleton-02') !global;
   $brand-01: map-get($theme, 'brand-01') !global;
@@ -4126,6 +4155,10 @@ Define theme variables from a map of tokens
     $decorative-01: var(
       --#{$custom-property-prefix}-decorative-01,
       map-get($theme, 'decorative-01')
+    ) !global;
+    $hover-light-ui: var(
+      --#{$custom-property-prefix}-hover-light-ui,
+      map-get($theme, 'hover-light-ui')
     ) !global;
     $skeleton-01: var(
       --#{$custom-property-prefix}-skeleton-01,
@@ -4804,6 +4837,19 @@ Define theme variables from a map of tokens
       @include custom-property(
         'decorative-01',
         map-get($theme, 'decorative-01')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'hover-light-ui',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'hover-light-ui',
+        map-get($theme, 'hover-light-ui')
       );
     }
 
@@ -5589,6 +5635,7 @@ Define theme variables from a map of tokens
   - [disabled-03 [variable]](#disabled-03-variable)
   - [highlight [variable]](#highlight-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
+  - [hover-light-ui [variable]](#hover-light-ui-variable)
   - [skeleton-01 [variable]](#skeleton-01-variable)
   - [skeleton-02 [variable]](#skeleton-02-variable)
   - [brand-01 [variable]](#brand-01-variable)
@@ -5744,6 +5791,7 @@ $carbon--theme--g90: map-merge(
     disabled-03: #a8a8a8,
     highlight: #0043ce,
     decorative-01: #6f6f6f,
+    hover-light-ui: #6f6f6f,
     skeleton-01: #353535,
     skeleton-02: #525252,
     brand-02: #6f6f6f,
@@ -5818,6 +5866,7 @@ $carbon--theme--g100: map-merge(
     disabled-02: #525252,
     highlight: #002d9c,
     decorative-01: #525252,
+    hover-light-ui: #525252,
     skeleton-01: #353535,
     skeleton-02: #393939,
     brand-02: #6f6f6f,
@@ -5898,6 +5947,7 @@ $carbon--theme--v9: map-merge(
     disabled-03: #cdd1d4,
     highlight: #f4f7fb,
     decorative-01: #eef4fc,
+    hover-light-ui: #eef4fc,
     skeleton-01: rgba(61, 112, 178, 0.1),
     skeleton-02: rgba(61, 112, 178, 0.1),
     brand-01: #3d70b2,
@@ -5982,6 +6032,7 @@ $carbon--theme: (
   disabled-03: if(global-variable-exists('disabled-03'), $disabled-03, map-get($carbon--theme--white, 'disabled-03')),
   highlight: if(global-variable-exists('highlight'), $highlight, map-get($carbon--theme--white, 'highlight')),
   decorative-01: if(global-variable-exists('decorative-01'), $decorative-01, map-get($carbon--theme--white, 'decorative-01')),
+  hover-light-ui: if(global-variable-exists('hover-light-ui'), $hover-light-ui, map-get($carbon--theme--white, 'hover-light-ui')),
   skeleton-01: if(global-variable-exists('skeleton-01'), $skeleton-01, map-get($carbon--theme--white, 'skeleton-01')),
   skeleton-02: if(global-variable-exists('skeleton-02'), $skeleton-02, map-get($carbon--theme--white, 'skeleton-02')),
   brand-01: if(global-variable-exists('brand-01'), $brand-01, map-get($carbon--theme--white, 'brand-01')),
@@ -7520,6 +7571,29 @@ $decorative-01: if(
     ),
   map-get($carbon--theme, 'decorative-01'),
   #e0e0e0
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅hover-light-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$hover-light-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-light-ui'
+    ),
+  map-get($carbon--theme, 'hover-light-ui'),
+  #e5e5e5
 );
 ```
 
@@ -9614,422 +9688,422 @@ Mono `@font-face`'s
 @mixin carbon--font-face-mono() {
   // .woff support for IE11
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1gMoW.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa1Xdm.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold Italic'), local(
         'IBMPlexMono-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1gMoW.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwlBFhA.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono'), local('IBMPlexMono'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1i8q0Q.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlBFhA.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
 
   /* cyrillic-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1jcoQPttoz6Pz.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1hMoQPttoz6Pz.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1j8oQPttoz6Pz.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1jsoQPttoz6Pz.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1gMoQPttozw.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa2HdgregdFOFh.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa0XdgregdFOFh.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa2ndgregdFOFh.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa23dgregdFOFh.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa1XdgregdFA.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold Italic'), local(
         'IBMPlexMono-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1jcoQPttoz6Pz.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold Italic'), local(
         'IBMPlexMono-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1hMoQPttoz6Pz.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold Italic'), local(
         'IBMPlexMono-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1j8oQPttoz6Pz.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold Italic'), local(
         'IBMPlexMono-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1jsoQPttoz6Pz.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold Italic'), local(
         'IBMPlexMono-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1gMoQPttozw.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwl1FgsAXHNlYzg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwlRFgsAXHNlYzg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwl9FgsAXHNlYzg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwl5FgsAXHNlYzg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwlBFgsAXHNk.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono'), local('IBMPlexMono'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1iIq131nj-otFQ.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono'), local('IBMPlexMono'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1isq131nj-otFQ.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono'), local('IBMPlexMono'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1iAq131nj-otFQ.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono'), local('IBMPlexMono'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1iEq131nj-otFQ.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono'), local('IBMPlexMono'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1i8q131nj-o.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwl1FgsAXHNlYzg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlRFgsAXHNlYzg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwl9FgsAXHNlYzg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwl5FgsAXHNlYzg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlBFgsAXHNk.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
@@ -10169,9 +10243,9 @@ Sans `@font-face`'s
 @mixin carbon--font-face-sans-condensed() {
   // .woff support for IE11
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 300;
     src: local('IBM Plex Sans Condensed Light Italic'), local(
         'IBMPlexSansCond-LightItalic'
       ),
@@ -10179,9 +10253,9 @@ Sans `@font-face`'s
         format('woff');
   }
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 400;
     src: local('IBM Plex Sans Condensed Italic'), local(
         'IBMPlexSansCond-Italic'
       ),
@@ -10189,9 +10263,9 @@ Sans `@font-face`'s
         format('woff');
   }
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 600;
     src: local('IBM Plex Sans Condensed SemiBold Italic'), local(
         'IBMPlexSansCond-SemiBoldItalic'
       ),
@@ -10199,25 +10273,25 @@ Sans `@font-face`'s
         format('woff');
   }
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 300;
     src: local('IBM Plex Sans Condensed Light'), local('IBMPlexSansCond-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4C6ovo.woff)
         format('woff');
   }
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 400;
     src: local('IBM Plex Sans Condensed'), local('IBMPlexSansCond'),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8lN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHbat.woff)
         format('woff');
   }
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 600;
     src: local('IBM Plex Sans Condensed SemiBold'), local(
         'IBMPlexSansCond-SemiBold'
       ),
@@ -10227,246 +10301,246 @@ Sans `@font-face`'s
 
   /* vietnamese */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 300;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Light Italic'), local(
         'IBMPlexSansCond-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8AfplYstEzi6D11GTg.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
       U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 300;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Light Italic'), local(
         'IBMPlexSansCond-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8AfplYotEzi6D11GTg.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 300;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Light Italic'), local(
         'IBMPlexSansCond-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8AfplYQtEzi6D10.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 400;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Italic'), local(
         'IBMPlexSansCond-Italic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8nN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas-KPLgKkPHhKABg.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
       U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 400;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Italic'), local(
         'IBMPlexSansCond-Italic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8nN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas-KLLgKkPHhKABg.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 400;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Italic'), local(
         'IBMPlexSansCond-Italic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8nN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas-KzLgKkPHhI.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 600;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed SemiBold Italic'), local(
         'IBMPlexSansCond-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8HPvlYstEzi6D11GTg.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
       U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 600;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed SemiBold Italic'), local(
         'IBMPlexSansCond-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8HPvlYotEzi6D11GTg.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 600;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed SemiBold Italic'), local(
         'IBMPlexSansCond-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8HPvlYQtEzi6D10.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 300;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Light'), local('IBMPlexSansCond-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4C6rvjpYYnFBq4P1w.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
       U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 300;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Light'), local('IBMPlexSansCond-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4C6rvipYYnFBq4P1w.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 300;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Light'), local('IBMPlexSansCond-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4C6rvspYYnFBq4.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 400;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed'), local('IBMPlexSansCond'),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8lN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYamyK7Bh4sNLhM.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
       U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 400;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed'), local('IBMPlexSansCond'),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8lN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYanyK7Bh4sNLhM.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 400;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed'), local('IBMPlexSansCond'),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8lN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYapyK7Bh4sN.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 600;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed SemiBold'), local(
         'IBMPlexSansCond-SemiBold'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY527LvjpYYnFBq4P1w.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
       U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 600;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed SemiBold'), local(
         'IBMPlexSansCond-SemiBold'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY527LvipYYnFBq4P1w.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 600;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed SemiBold'), local(
         'IBMPlexSansCond-SemiBold'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY527LvspYYnFBq4.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
@@ -10489,490 +10563,490 @@ Sans `@font-face`'s
 @mixin carbon--font-face-sans() {
   // .woff support for IE11
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRcdvfo.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuF6ZP.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'), local(
         'IBMPlexSans-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJcdvfo.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIFscg.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdHeEw.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIFscg.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
 
   /* cyrillic-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRce_fuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRccvfuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* greek */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRcdffuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0370-03FF;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRceffuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRcePfuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRcdvfuJGl18Q.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuGqZJW9XjDlN8.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuE6ZJW9XjDlN8.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* greek */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuFKZJW9XjDlN8.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0370-03FF;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuGKZJW9XjDlN8.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuGaZJW9XjDlN8.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuF6ZJW9XjDg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'), local(
         'IBMPlexSans-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJce_fuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'), local(
         'IBMPlexSans-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJccvfuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* greek */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'), local(
         'IBMPlexSans-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJcdffuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0370-03FF;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'), local(
         'IBMPlexSans-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJceffuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'), local(
         'IBMPlexSans-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJcePfuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'), local(
         'IBMPlexSans-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJcdvfuJGl18Q.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIxsdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIVsdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* greek */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIJsdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0370-03FF;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AI5sdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AI9sdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIFsdP3pBms.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdzeFaxOedfTDw.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdXeFaxOedfTDw.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* greek */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdLeFaxOedfTDw.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0370-03FF;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhd7eFaxOedfTDw.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhd_eFaxOedfTDw.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdHeFaxOedc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIxsdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIVsdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* greek */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIJsdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0370-03FF;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AI5sdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AI9sdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIFsdP3pBms.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
@@ -11126,434 +11200,434 @@ Serif `@font-face`'s
 @mixin carbon--font-face-serif() {
   // .woff support for IE11
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light Italic'), local(
         'IBMPlexSerif-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa454xm1npiw.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Italic'), local('IBMPlexSerif-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizBREVNn1dOx-zrZ2X3pZvkTiUa6zUTiA.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold Italic'), local(
         'IBMPlexSerif-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa4-o3m1npiw.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light'), local('IBMPlexSerif-Light'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi20-SI0q10.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif'), local('IBMPlexSerif'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizDREVNn1dOx-zrZ2X3pZvkTiUf2zE.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold'), local('IBMPlexSerif-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi3A_yI0q10.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
 
   /* cyrillic-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light Italic'), local(
         'IBMPlexSerif-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa454xm1TpjfGj7oaMBg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light Italic'), local(
         'IBMPlexSerif-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa454xm13pjfGj7oaMBg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light Italic'), local(
         'IBMPlexSerif-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa454xm1bpjfGj7oaMBg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light Italic'), local(
         'IBMPlexSerif-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa454xm1fpjfGj7oaMBg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light Italic'), local(
         'IBMPlexSerif-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa454xm1npjfGj7oY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Italic'), local('IBMPlexSerif-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizBREVNn1dOx-zrZ2X3pZvkTiUa6zgTjnTLgNuZ5w.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Italic'), local('IBMPlexSerif-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizBREVNn1dOx-zrZ2X3pZvkTiUa6zETjnTLgNuZ5w.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Italic'), local('IBMPlexSerif-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizBREVNn1dOx-zrZ2X3pZvkTiUa6zoTjnTLgNuZ5w.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Italic'), local('IBMPlexSerif-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizBREVNn1dOx-zrZ2X3pZvkTiUa6zsTjnTLgNuZ5w.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Italic'), local('IBMPlexSerif-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizBREVNn1dOx-zrZ2X3pZvkTiUa6zUTjnTLgNs.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold Italic'), local(
         'IBMPlexSerif-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa4-o3m1TpjfGj7oaMBg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold Italic'), local(
         'IBMPlexSerif-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa4-o3m13pjfGj7oaMBg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold Italic'), local(
         'IBMPlexSerif-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa4-o3m1bpjfGj7oaMBg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold Italic'), local(
         'IBMPlexSerif-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa4-o3m1fpjfGj7oaMBg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold Italic'), local(
         'IBMPlexSerif-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa4-o3m1npjfGj7oY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light'), local('IBMPlexSerif-Light'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi20-SI5q1vjitOh3oc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light'), local('IBMPlexSerif-Light'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi20-SIwq1vjitOh3oc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light'), local('IBMPlexSerif-Light'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi20-SI7q1vjitOh3oc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light'), local('IBMPlexSerif-Light'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi20-SI6q1vjitOh3oc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light'), local('IBMPlexSerif-Light'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi20-SI0q1vjitOh.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif'), local('IBMPlexSerif'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizDREVNn1dOx-zrZ2X3pZvkTiUS2zcZiVbJsNo.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif'), local('IBMPlexSerif'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizDREVNn1dOx-zrZ2X3pZvkTiUb2zcZiVbJsNo.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif'), local('IBMPlexSerif'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizDREVNn1dOx-zrZ2X3pZvkTiUQ2zcZiVbJsNo.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif'), local('IBMPlexSerif'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizDREVNn1dOx-zrZ2X3pZvkTiUR2zcZiVbJsNo.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif'), local('IBMPlexSerif'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizDREVNn1dOx-zrZ2X3pZvkTiUf2zcZiVbJ.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold'), local('IBMPlexSerif-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi3A_yI5q1vjitOh3oc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold'), local('IBMPlexSerif-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi3A_yIwq1vjitOh3oc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold'), local('IBMPlexSerif-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi3A_yI7q1vjitOh3oc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold'), local('IBMPlexSerif-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi3A_yI6q1vjitOh3oc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold'), local('IBMPlexSerif-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi3A_yI0q1vjitOh.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;

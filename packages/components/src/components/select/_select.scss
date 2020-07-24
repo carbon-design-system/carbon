@@ -22,6 +22,7 @@
 @mixin select {
   .#{$prefix}--select {
     @include reset;
+
     position: relative;
     display: flex;
     flex-direction: column;
@@ -37,12 +38,13 @@
   .#{$prefix}--select-input {
     @include type-style('body-short-01');
     @include focus-outline('reset');
-    height: rem(40px);
-    appearance: none;
+
     display: block;
     width: rem(224px);
     min-width: rem(128px);
     max-width: rem(448px);
+
+    height: rem(40px);
     padding: 0 $spacing-09 0 $spacing-05;
     color: $text-01;
     background-color: $field-01;
@@ -53,6 +55,7 @@
 
     // Do not transition on background-color (see: https://github.com/carbon-design-system/carbon/issues/4464)
     transition: outline $duration--fast-01 motion(standard, productive);
+    appearance: none;
 
     &:hover {
       background-color: $hover-ui;
@@ -69,22 +72,23 @@
       &:-moz-focusring,
       &::-moz-focus-inner {
         color: transparent;
-        text-shadow: 0 0 0 #000;
+        text-shadow: 0 0 0 #000000;
         background-image: none;
       }
     }
 
     &:focus {
       @include focus-outline('outline');
+
       color: $text-01;
     }
 
     &:disabled,
     &:hover:disabled {
-      cursor: not-allowed;
-      background-color: $disabled-background-color;
       color: $disabled-02;
+      background-color: $disabled-background-color;
       border-bottom-color: $disabled-background-color;
+      cursor: not-allowed;
     }
   }
 
@@ -115,9 +119,8 @@
 
   .#{$prefix}--form-requirement {
     display: block;
-    color: $text-error;
-    font-weight: 400;
     overflow: visible;
+    font-weight: 400;
   }
 
   .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
@@ -133,9 +136,9 @@
 
     &:disabled,
     &:hover:disabled {
-      cursor: not-allowed;
-      background-color: $disabled-background-color;
       color: $disabled-02;
+      background-color: $disabled-background-color;
+      cursor: not-allowed;
     }
   }
 
@@ -144,8 +147,8 @@
     top: 0;
     right: $spacing-05;
     height: 100%;
-    fill: $ui-05;
     pointer-events: none;
+    fill: $ui-05;
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid]
@@ -153,29 +156,25 @@
     ~ .#{$prefix}--select__invalid-icon {
     position: absolute;
     right: $spacing-09;
-  }
-
-  .#{$prefix}--select-input__wrapper[data-invalid]
-    .#{$prefix}--select-input
-    ~ .#{$prefix}--select__invalid-icon {
     fill: $support-01;
   }
 
   .#{$prefix}--select-optgroup,
   .#{$prefix}--select-option {
-    color: $text-01; // For the options to show in IE11
+    // For the options to show in IE11
+    color: $text-01;
   }
 
   .#{$prefix}--select-option[disabled] {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 
   // Override some Firefox user-agent styles
   @-moz-document url-prefix() {
     .#{$prefix}--select-option {
-      background-color: $ui-01;
       color: $text-01;
+      background-color: $ui-01;
     }
 
     .#{$prefix}--select-optgroup {
@@ -192,8 +191,9 @@
   .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--label,
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--form__helper-text {
-    margin-top: rem(13px); // offset label text margin
     align-self: flex-start;
+    // Offset label text margin
+    margin-top: rem(13px);
   }
 
   .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
@@ -202,16 +202,16 @@
   }
 
   .#{$prefix}--select--inline .#{$prefix}--label {
-    white-space: nowrap;
     margin: 0 $carbon--spacing-03 0 0;
+    white-space: nowrap;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input {
-    background-color: transparent;
-    color: $text-01;
-    border-bottom: none;
-    padding-left: $carbon--spacing-03;
     padding-right: $spacing-07;
+    padding-left: $carbon--spacing-03;
+    color: $text-01;
+    background-color: transparent;
+    border-bottom: none;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
@@ -225,7 +225,7 @@
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--select-input {
-    padding-right: $spacing-09 + $spacing-03; // 3.5rem
+    padding-right: rem(56px);
   }
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
@@ -243,13 +243,10 @@
     }
   }
 
-  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
-    cursor: not-allowed;
-  }
-
   //Skeleton State
   .#{$prefix}--select.#{$prefix}--skeleton {
     @include skeleton;
+
     width: 100%;
     height: 2.5rem;
   }

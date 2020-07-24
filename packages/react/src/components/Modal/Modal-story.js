@@ -28,6 +28,7 @@ const props = () => ({
   open: boolean('Open (open)', true),
   passiveModal: boolean('Without footer (passiveModal)', false),
   danger: boolean('Danger mode (danger)', false),
+  alert: boolean('Alert mode (alert)', false),
   shouldSubmitOnEnter: boolean(
     'Enter key to submit (shouldSubmitOnEnter)',
     false
@@ -71,6 +72,7 @@ const titleOnlyProps = () => {
     open: boolean('Open (open)', true),
     passiveModal,
     danger: !passiveModal && boolean('Danger mode (danger)', false),
+    alert: !passiveModal && boolean('Alert mode (alert)', false),
     modalHeading: text(
       'Modal heading (modalHeading)',
       `
@@ -187,11 +189,7 @@ storiesOf('Modal', module)
     'Title only',
     () => {
       const { size, ...rest } = titleOnlyProps();
-      return (
-        <>
-          <Modal {...rest} size={size || undefined}></Modal>
-        </>
-      );
+      return <Modal {...rest} size={size || undefined}></Modal>;
     },
     {
       info: {
@@ -207,25 +205,23 @@ storiesOf('Modal', module)
     () => {
       const { size, ...rest } = props();
       return (
-        <>
-          <Modal
-            {...rest}
-            hasForm
-            size={size || undefined}
-            selectorPrimaryFocus="#text-input-2">
-            <TextInput
-              id="text-input-1"
-              labelText="Text Input 1"
-              placeholder="Enter text..."
-              style={{ marginBottom: '1rem' }}
-            />
-            <TextInput
-              id="text-input-2"
-              labelText="Text Input 2"
-              placeholder="Enter text..."
-            />
-          </Modal>
-        </>
+        <Modal
+          {...rest}
+          hasForm
+          size={size || undefined}
+          selectorPrimaryFocus="#text-input-2">
+          <TextInput
+            id="text-input-1"
+            labelText="Text Input 1"
+            placeholder="Enter text..."
+            style={{ marginBottom: '1rem' }}
+          />
+          <TextInput
+            id="text-input-2"
+            labelText="Text Input 2"
+            placeholder="Enter text..."
+          />
+        </Modal>
       );
     },
     {

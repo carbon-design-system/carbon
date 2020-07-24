@@ -58,3 +58,14 @@
 #templates .bx--row--condensed .inside {
   background: none;
 }
+
+#templates .bx--grid--narrow .inside,
+#templates .bx--row--narrow .inside {
+  background-color: $teal-10;
+}
+
+#templates .bx--grid--narrow [class*='col'],
+#templates .bx--row--narrow [class*='col'] {
+  background-color: $teal-20;
+  outline: 1px dashed $teal-40;
+}

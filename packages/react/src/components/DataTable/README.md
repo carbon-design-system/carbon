@@ -1,11 +1,11 @@
 # `DataTable` component
 
-> A set of table primitives to help teams build simple, flexible, and WAI-ARIA
+> A set of table primitives to help teams build clear, flexible, and WAI-ARIA
 > compliant Tables in React
 
 ## Table of Contents
 
-<!-- To run doctoc, just do `npx doctoc README.md` in this directory! -->
+<!-- To run doctoc, type `npx doctoc README.md` in this directory! -->
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -68,7 +68,7 @@ import { DataTable } from 'carbon-components-react';
 // De-structure `DataTable` directly to get local references
 const { Table, TableHead, TableHeader, TableBody, TableCell } = DataTable;
 
-// Or, just use them in your React projects by doing
+// Or use them in your React projects by doing
 <DataTable.Table />
 <DataTable.TableHead />
 <DataTable.TableHeader />
@@ -127,8 +127,8 @@ function App() {
 }
 ```
 
-In the example above, we can see that the `render` prop is just a function that
-has the following arguments:
+In the example above, we can see that the `render` prop is a function that has
+the following arguments:
 
 - `rows` which are the rows to be rendered inside of `TableBody`
 - `headers` which are the headers to be rendered inside of `TableHead`
@@ -277,7 +277,7 @@ default comparison methods better sort numeric inputs.
 
 The `render` prop is a function that you give to the `DataTable` component that
 takes in a variety of arguments and should ultimately return a valid React
-element, or component. This could be as simple or complex as the following
+element, or component. This could be as basic or complex as the following
 example:
 
 ```jsx
@@ -608,25 +608,21 @@ In practice, this looks like the following:
   render={({ rows, headers, getHeaderProps, onInputChange }) => (
     <TableContainer title="DataTable with toolbar">
       <TableToolbar>
-        {/* pass in `onInputChange` change here to make filtering work */}
-        <TableToolbarSearch onChange={onInputChange} />
         <TableToolbarContent>
+          {/* pass in `onInputChange` change here to make filtering work */}
+          <TableToolbarSearch onChange={onInputChange} />
           <TableToolbarMenu>
             <TableToolbarAction
-              icon={iconDownload}
-              iconDescription="Download"
-              onClick={action('TableToolbarAction - Download')}
-            />
-            <TableToolbarAction
-              icon={iconEdit}
-              iconDescription="Edit"
-              onClick={action('TableToolbarAction - Edit')}
-            />
-            <TableToolbarAction
-              icon={iconSettings}
-              iconDescription="Settings"
-              onClick={action('TableToolbarAction - Settings')}
-            />
+                onClick={action('TableToolbarAction - Download')}
+                primaryFocus>
+              <iconDownload> Download
+            </TableToolbarAction>
+            <TableToolbarAction onClick={action('TableToolbarAction - Edit')}>
+              <iconEdit> Edit
+            </TableToolbarAction>
+            <TableToolbarAction  onClick={action('TableToolbarAction - Settings')}>
+              <iconSettings> Settings
+            </TableToolbarAction>
           </TableToolbarMenu>
           <Button onClick={action('Add new row')} small kind="primary">
             Add new
@@ -671,6 +667,7 @@ Table components for selection and for batch actions, which include:
 
 - `TableToolbar`
 - `TableToolbarAction`
+- `TableToolbarSearch`
 - `TableBatchActions`
 - `TableBatchAction`
 - `TableSelectAll`
@@ -696,7 +693,7 @@ In practice, this looks like the following:
       <TableToolbar>
         {/* make sure to apply getBatchActionProps so that the bar renders */}
         <TableBatchActions {...getBatchActionProps()}>
-          {/* inside of you batch actinos, you can include selectedRows */}
+          {/* inside of your batch actions, you can include selectedRows */}
           <TableBatchAction primaryFocus onClick={batchActionClick(selectedRows)}>
             Ghost
           </TableBatchAction>
@@ -707,25 +704,21 @@ In practice, this looks like the following:
             Ghost
           </TableBatchAction>
         </TableBatchActions>
-        <TableToolbarSearch onChange={onInputChange} />
         <TableToolbarContent>
-          <TableToolbarMenu>
-            <TableToolbarAction
-              icon={iconDownload}
-              iconDescription="Download"
-              onClick={action('TableToolbarAction - Download')}
-            />
-            <TableToolbarAction
-              icon={iconEdit}
-              iconDescription="Edit"
-              onClick={action('TableToolbarAction - Edit')}
-            />
-            <TableToolbarAction
-              icon={iconSettings}
-              iconDescription="Settings"
-              onClick={action('TableToolbarAction - Settings')}
-            />
-          </TableToolbarMenu>
+          <TableToolbarSearch onChange={onInputChange} />
+            <TableToolbarMenu>
+              <TableToolbarAction
+                onClick={action('TableToolbarAction - Download')}
+                primaryFocus>
+                <iconDownload> Download
+              </TableToolbarAction>
+              <TableToolbarAction onClick={action('TableToolbarAction - Edit')}>
+                <iconEdit> Edit
+              </TableToolbarAction>
+              <TableToolbarAction  onClick={action('TableToolbarAction - Settings')}>
+                <iconSettings> Settings
+              </TableToolbarAction>
+            </TableToolbarMenu>
           <Button onClick={action('Add new row')} small kind="primary">
             Add new
           </Button>

@@ -195,6 +195,7 @@ class RootPage extends Component {
     currentTheme: themeSwitcherItems[0].id,
   };
 
+  // eslint-disable-next-line react/prop-types
   static getDerivedStateFromProps({ componentItems, isComponentsX }, state) {
     const {
       prevComponentItems,
@@ -517,6 +518,7 @@ class RootPage extends Component {
             value={currentTheme}
             onChange={this._handleChangeThemeSwitcherDropdown}>
             {themeSwitcherItems.map(({ id, text }) => (
+              // eslint-disable-next-line react/jsx-key
               <DropdownItem itemText={text} value={id} />
             ))}
           </Dropdown>
