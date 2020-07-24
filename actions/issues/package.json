@@ -1,10 +1,9 @@
 {
-  "name": "@carbon/actions-add-review-labels",
+  "name": "@carbon/actions-issues",
   "private": true,
   "version": "0.0.0",
   "license": "Apache-2.0",
-  "main": "index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/actions/add-review-labels",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/actions/issues",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "ibm",
