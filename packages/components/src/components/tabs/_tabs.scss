@@ -23,10 +23,10 @@
     @include type-style('body-short-01');
 
     display: flex;
-    color: $text-01;
-    height: auto;
     width: 100%;
+    height: auto;
     min-height: rem(40px);
+    color: $text-01;
   }
 
   .#{$prefix}--tabs--container {
@@ -40,10 +40,9 @@
     max-width: 100%;
     margin: 0;
     padding: 0;
+    overflow: auto hidden;
     list-style: none;
     transition: max-height $duration--fast-01 motion(standard, productive);
-    overflow: hidden;
-    overflow-x: auto;
 
     // hide scrollbars
     scrollbar-width: none;
@@ -64,13 +63,13 @@
   }
 
   .#{$prefix}--tabs__overflow-indicator--left {
-    background-image: linear-gradient(to left, transparent, $ui-background);
     margin-right: -$carbon--spacing-03;
+    background-image: linear-gradient(to left, transparent, $ui-background);
   }
 
   .#{$prefix}--tabs__overflow-indicator--right {
-    background-image: linear-gradient(to right, transparent, $ui-background);
     margin-left: -$carbon--spacing-03;
+    background-image: linear-gradient(to right, transparent, $ui-background);
   }
 
   .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--left {
@@ -95,21 +94,21 @@
   @media not all and (min-resolution: 0.001dpcm) {
     @supports (-webkit-appearance: none) and (stroke-color: transparent) {
       .#{$prefix}--tabs__overflow-indicator--left {
+        margin-right: -$carbon--spacing-05;
         background-image: linear-gradient(
           to left,
           rgba($ui-background, 0),
           $ui-background
         );
-        margin-right: -$carbon--spacing-05;
       }
 
       .#{$prefix}--tabs__overflow-indicator--right {
+        margin-left: -$carbon--spacing-05;
         background-image: linear-gradient(
           to right,
           rgba($ui-background, 0),
           $ui-background
         );
-        margin-left: -$carbon--spacing-05;
       }
 
       .#{$prefix}--tabs--container .#{$prefix}--tabs__overflow-indicator--left {
@@ -126,10 +125,10 @@
     @include button-reset;
 
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: $carbon--spacing-08;
     flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: $carbon--spacing-08;
 
     &:focus {
       @include focus-outline('outline');
@@ -205,9 +204,9 @@
   //---------------------------------------------
   .#{$prefix}--tabs__nav-item--disabled,
   .#{$prefix}--tabs__nav-item--disabled:hover {
-    cursor: not-allowed;
-    outline: none;
     background-color: transparent;
+    outline: none;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--tabs--container
@@ -246,10 +245,10 @@
   .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--selected
     .#{$prefix}--tabs__nav-link {
-    // Draws the border without affecting the inner-content
-    box-shadow: inset 0 2px 0 0 $interactive-04;
     // height - vertical padding
     line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+    // Draws the border without affecting the inner-content
+    box-shadow: inset 0 2px 0 0 $interactive-04;
   }
 
   .#{$prefix}--tabs--light.#{$prefix}--tabs--container
@@ -265,15 +264,14 @@
   .#{$prefix}--tabs__nav-link {
     @include focus-outline('reset');
 
-    color: $text-02;
-    text-decoration: none;
-    font-weight: 400;
-    padding: $spacing-04 $spacing-05 $spacing-03;
     width: rem(160px);
+    padding: $spacing-04 $spacing-05 $spacing-03;
+    overflow: hidden;
+    color: $text-02;
     white-space: nowrap;
+    text-decoration: none;
     text-overflow: ellipsis;
     border-bottom: $tab-underline-color;
-    overflow: hidden;
     transition: border $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
 
@@ -286,9 +284,9 @@
   .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-link {
     height: rem(48px);
     padding: $spacing-03 $spacing-05;
-    border-bottom: 0;
     // height - vertical padding
     line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+    border-bottom: 0;
   }
 
   //-----------------------------
@@ -314,16 +312,16 @@
   }
 
   .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
-    cursor: not-allowed;
     color: $tab-text-disabled;
     border-bottom: $tab-underline-disabled;
+    cursor: not-allowed;
     pointer-events: none;
   }
 
   .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:focus,
   .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:active {
-    outline: none;
     border-bottom: $tab-underline-disabled;
+    outline: none;
   }
 
   .#{$prefix}--tabs--light
@@ -350,8 +348,8 @@
   .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--disabled
     .#{$prefix}--tabs__nav-link {
-    border-bottom: none;
     color: $disabled-03;
+    border-bottom: none;
   }
 
   //-----------------------------
@@ -365,8 +363,8 @@
   // Skeleton state
   //-----------------------------
   .#{$prefix}--tabs.#{$prefix}--skeleton {
-    pointer-events: none;
     cursor: default;
+    pointer-events: none;
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
