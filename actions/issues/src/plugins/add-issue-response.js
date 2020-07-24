@@ -21,7 +21,7 @@ const plugin = {
   ],
   async run(context, octokit) {
     const { comment, issue, repository } = context.payload;
-    const roles = new Set(['OWNER', 'COLLABORATOR']);
+    const roles = new Set(['OWNER', 'COLLABORATOR', 'MEMBER']);
 
     // waiting for author's response
     if (roles.has(comment.author_association)) {
