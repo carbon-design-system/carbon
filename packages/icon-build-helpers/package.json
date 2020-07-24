@@ -20,6 +20,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.10.0",
     "@babel/preset-react": "^7.10.0",
+    "@babel/plugin-transform-react-constant-elements": "^7.10.4",
     "@carbon/cli-reporter": "^10.3.0",
     "@carbon/icon-helpers": "^10.9.0",
     "browserslist-config-carbon": "^10.4.0",
