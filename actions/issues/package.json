@@ -1,0 +1,9 @@
+{
+  "name": "@carbon/actions-issues",
+  "private": true,
+  "version": "0.0.0",
+  "dependencies": {
+    "@actions/core": "^1.2.3",
+    "@actions/github": "^2.1.1"
+  }
+}
