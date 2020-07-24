@@ -156,8 +156,12 @@
 
     svg {
       vertical-align: middle;
-      fill: inherit;
+      fill: currentColor;
     }
+  }
+
+  .#{$prefix}--search-close svg {
+    fill: currentColor;
   }
 
   .#{$prefix}--search-close,
