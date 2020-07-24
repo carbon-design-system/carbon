@@ -205,6 +205,7 @@
   //---------------------------------------------
   .#{$prefix}--tabs__nav-item--disabled,
   .#{$prefix}--tabs__nav-item--disabled:hover {
+    cursor: not-allowed;
     outline: none;
     background-color: transparent;
   }
@@ -323,7 +324,6 @@
   .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:active {
     outline: none;
     border-bottom: $tab-underline-disabled;
-    outline: none;
   }
 
   .#{$prefix}--tabs--light
@@ -365,8 +365,8 @@
   // Skeleton state
   //-----------------------------
   .#{$prefix}--tabs.#{$prefix}--skeleton {
-    cursor: default;
     pointer-events: none;
+    cursor: default;
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
