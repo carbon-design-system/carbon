@@ -3269,7 +3269,6 @@
     - soft ice cream
     - ice cream
     - food
-    - null
     - name: softlayer--enablement
       friendly_name: Softlayer enablement
       aliases:
