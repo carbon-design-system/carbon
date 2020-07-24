@@ -63,8 +63,8 @@
     display: inline;
     color: $disabled-02;
     font-weight: 400;
-    cursor: not-allowed;
     text-decoration: none;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--link.#{$prefix}--link--visited:visited {
