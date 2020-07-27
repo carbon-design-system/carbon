@@ -161,7 +161,7 @@
   }
 
   .#{$prefix}--search-close svg {
-    fill: currentColor;
+    fill: inherit;
   }
 
   .#{$prefix}--search-close,
