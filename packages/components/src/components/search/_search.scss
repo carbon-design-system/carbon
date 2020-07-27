@@ -160,6 +160,10 @@
     }
   }
 
+  .#{$prefix}--search-close svg {
+    fill: inherit;
+  }
+
   .#{$prefix}--search-close,
   .#{$prefix}--search-button {
     display: flex;
