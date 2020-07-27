@@ -40,6 +40,12 @@ const props = () => ({
 });
 
 storiesOf('Slider', module)
+  .addParameters({
+    component: Slider,
+    subcomponents: {
+      SliderSkeleton,
+    },
+  })
   .addDecorator(withKnobs)
   .add('default', () => <Slider required id="slider" {...props()} />, {
     info: {

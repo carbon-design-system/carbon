@@ -123,7 +123,13 @@ const CustomLink = ({ children, href, ...other }) => (
   </a>
 );
 
-storiesOf('Buttons', module)
+storiesOf('Button', module)
+  .addParameters({
+    component: Button,
+    subcomponents: {
+      ButtonSkeleton,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',

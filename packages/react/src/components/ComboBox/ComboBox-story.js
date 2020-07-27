@@ -66,6 +66,9 @@ const props = () => ({
 });
 
 storiesOf('ComboBox', module)
+  .addParameters({
+    component: ComboBox,
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',

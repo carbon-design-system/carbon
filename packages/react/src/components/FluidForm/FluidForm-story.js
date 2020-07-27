@@ -38,6 +38,9 @@ const InvalidPasswordProps = {
 };
 
 storiesOf('FluidForm', module)
+  .addParameters({
+    component: FluidForm,
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',

@@ -26,6 +26,9 @@ const props = () => ({
 });
 
 storiesOf('Link', module)
+  .addParameters({
+    component: Link,
+  })
   .addDecorator(withKnobs)
   .add('Default', () => <Link {...props()}>Link</Link>, {
     info: {
